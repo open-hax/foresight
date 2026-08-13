@@ -1,0 +1,22 @@
+{
+  "reporters": ["console", "json"],
+  "output": "reports/jscpd",
+  "gitignore": true,
+  "noSymlinks": true,
+  "ignore": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/dist-dev/**",
+    "**/target/**",
+    "**/coverage/**",
+    "**/reports/**",
+    "**/.shadow-cljs/**",
+    "**/.clj-kondo/.cache/**",
+    "**/.lsp/**",
+    "**/.cpcache/**",
+    "**/vendor/**",
+    "**/*.d.ts",
+    "**/*.timestamp-*.mjs"
+  ]
+}

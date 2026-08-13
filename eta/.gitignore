@@ -1,0 +1,10 @@
+# Clojure
+.cpcache/
+.nrepl-port
+target/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*~

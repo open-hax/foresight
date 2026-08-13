@@ -1,0 +1,6 @@
+/reports/
+/.nbb/
+/.clj-kondo/.cache/
+/.lsp/
+
+eta/.clj-kondo/.cache/

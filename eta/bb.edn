@@ -1,0 +1,9 @@
+{:tasks
+ {run  {:doc "Run the TUI agent"
+        :task (shell "clojure -M:run")}
+
+  dev  {:doc "Start dev REPL"
+        :task (shell "clojure -A:dev")}
+
+  test {:doc "Run tests"
+        :task (shell "clojure -M:test")}}}

@@ -1,0 +1,3 @@
+{:linters
+ {:unresolved-namespace {:exclude [js]}
+  :unresolved-var {:exclude [cljs.core/clj->js cljs.core/js->clj]}}}

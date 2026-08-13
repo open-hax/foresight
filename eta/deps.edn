@@ -1,0 +1,14 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure       {:mvn/version "1.12.0"}
+        http-kit/http-kit          {:mvn/version "2.8.0"}
+        cheshire/cheshire          {:mvn/version "5.13.0"}
+        clj-http/clj-http          {:mvn/version "3.12.3"}
+        nrepl/nrepl                {:mvn/version "1.3.1"}
+        org.clojure/tools.logging  {:mvn/version "1.3.1"}
+        ;; TUI readline
+        org.jline/jline            {:mvn/version "3.27.1"}}
+
+ :aliases
+ {:run  {:main-opts ["-m" "eta.core"]}
+  :dev {:extra-paths ["dev"]
+        :extra-deps  {org.clojure/tools.namespace {:mvn/version "1.5.0"}}}}}
