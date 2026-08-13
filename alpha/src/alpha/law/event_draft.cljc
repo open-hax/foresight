@@ -3,7 +3,7 @@
             [malli.core :as m]))
 
 (def EventDraft
-  [:map {:closed false}
+  [:map {:closed true}
    [:event/type :keyword]
    [:event/source {:optional true} artifact/Ref]
    [:event/subject {:optional true} artifact/Ref]
