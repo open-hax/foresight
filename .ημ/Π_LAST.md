@@ -1,45 +1,36 @@
-# Fork Tax Last Commit
+# Fork Tax Handoff
 
-**Timestamp:** 2026-08-13T13:15:00Z  
-**Branch:** main  
-**Previous HEAD:** dab96f624c1e3625acd6d8effeffed96bc76da95  
-**Status:** In Progress
+**Timestamp:** 2026-08-13T16:24:16Z
+**Branch:** `main`
+**Implementation head:** `85a1adffccf069665464b06e8953ee0378420508`
 
-## Changes Being Committed
+## Signal
 
-### Primary Changes
-- **`.gitmodules`**: Added opencode submodule (`git@github.com:open-hax/opencode.git`) with shallow clone
-- **`opencode`**: New submodule reference
-
-### Workspace Configuration (Staged for First Time)
-- `.agents/` - Skill catalog (106 skills)
-- `.clj-kondo/` - Clojure linting config
-- `.gitignore` - Git ignore rules
-- `.jscpd.json` - Copy-paste detection config
-- `AGENTS.md` - Agent behavior instructions
-- `README.md` - Workspace documentation
-- `docs/` - Documentation directory
-- `eta/` - Clojure harness
-- `nbb.edn` - NBB configuration
-- `openhax.kanban.edn` - Kanban board config
-- `openhax.kanban.json` - Kanban board JSON
-- `scripts/` - Workspace scripts
-- `test/` - Workspace tests
-
-### Provenance
-- `.ημ/receipts.edn` - Rheos execution receipts
-- `.ημ/Π_STATE.sexp` - Fork tax state
-- `.ημ/Π_LAST.md` - This file
+- Consolidated 12 direct repositories plus `.agents` and `eta` under one truthful inventory.
+- Registered `.agents@00a05c8` as an exact-URL Git-managed consolidation input while preserving inventory-only execution policy.
+- Added and pinned the `open-hax/opencode` fork at `cc4b456`.
+- Pinned Muse’s pushed Rheos board migration at `b4bdb0a`.
+- Hardened process boundaries against path escape, symlink traversal, protected descendants, forged classifications, stale inode identity, and direct `.agents` execution.
 
 ## Verification
-- Workspace inventory: 12 direct submodules + 2 consolidation inputs
-- Tests: Expected failures only (error-handling probes)
-- Lint: Clean (0 errors, 0 warnings)
 
-## Concurrent Dirt
-None - all changes are owned by root workspace.
+- PASS: `nbb -cp scripts:test test/workspace_test.cljs` - 22 tests, 93 assertions, 0 failures.
+- PASS: `clj-kondo --lint scripts test` - 0 errors, 0 warnings.
+- PASS: `nbb scripts/workspace.clj report` - 14 declared sources.
+- PASS: `git diff --check`.
+- PASS: independent code review - no findings.
 
-## Next Steps
-- Commit changes
-- Create deterministic Π tag
-- Push to remote
+## Submodule Truth
+
+- `.agents`: `00a05c8f6ba68ff30a98266879310464e966748b`, already pushed to `riatzukiza/.agents`.
+- `muse`: `b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde`, pushed with tag `Π/muse-board/20260813T161940Z`.
+- `opencode`: `cc4b45612974f735ddec46009ede07729511fba4`, forked under `open-hax`.
+
+## Excluded Concurrent Dirt
+
+- `.agents/skills/webhook-fullstack` generated `.clj-kondo`, `.cpcache`, `.lsp`, and `.shadow-cljs` caches.
+- Katamorph generated `.clj-kondo/imports` and `.lsp` caches.
+
+## Blocker In A Child Repository
+
+Muse fork-tax verification found a pre-existing watcher test failure under host inotify instance exhaustion. Muse’s own handoff tag records the failure and rejected source experiment. The root orchestration gate is green.
