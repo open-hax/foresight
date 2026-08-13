@@ -1,0 +1,9 @@
+flowchart LR
+  A[Markdown document] --> B[Declared profile]
+  B --> C[Artifact projection]
+  C --> D[Facet validation]
+  A --> D
+  K[Katamorph registry] --> D
+  D --> E[Validated artifact]
+  D --> F[Structured findings]
+  E --> G[Artifact event]
