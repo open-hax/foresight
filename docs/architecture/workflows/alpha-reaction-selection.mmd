@@ -1,0 +1,7 @@
+flowchart LR
+  E[Validated Event] --> S[Alpha reaction selection]
+  A[Optional subject Artifact] --> S
+  R[Reaction registry] --> S
+  S --> K[Katamorph condition match]
+  K -->|match| O[Typed Operation reference]
+  K -->|no match| N[No work]
