@@ -30,6 +30,10 @@
                    :ratings {:enjoyment 4 :weirdness 5}
                    :labels [:salvage/good-intro]}})
 
+(def operation-registry
+  {:verification/open-case {:operation/category :evaluation}
+   :artifact/archive {:operation/category :store}})
+
 (deftest unrelated-artifact-kinds-share-the-base-law
   (testing "Epiphany, Rheos, and Calliope specimens do not need one giant schema"
     (is (law/artifact? epiphany-finding))
@@ -78,16 +82,54 @@
                                     :condition/path [:event :data :draft?]
                                     :condition/value true}]}
                   :reaction/do {:operation/id :verification/open-case
-                                :operation/with {:profile :publication}}}]
+                                :operation/with {:profile :publication}
+                                :operation/in {:subject [:event :subject]}}}]
     (is (law/event? event))
-    (is (law/reaction? reaction))))
+    (is (law/reaction? operation-registry reaction))))
 
 (deftest reactions-require-typed-operation-refs
   (is (false?
-       (law/reaction?
+       (law/reaction-shape?
         {:reaction/id :invalid
          :reaction/on {:event/type :artifact/accepted}
          :reaction/do "untyped executable value"}))))
+
+(deftest reactions-require-registered-operations
+  (let [reaction {:reaction/id :invalid-operation
+                  :reaction/on {:event/type :artifact/accepted}
+                  :reaction/do {:operation/id :operation/not-registered}}
+        result (law/validate-reaction operation-registry reaction)]
+    (is (false? (:valid? result)))
+    (is (= :alpha/reaction-operation-registered
+           (-> result :law-errors first :law/id)))
+    (is (= :operation/not-registered
+           (-> result :law-errors first :actual)))))
+
+(deftest operation-refs-reject-embedded-runtime-values
+  (testing "implementation fields cannot ride along on an open operation map"
+    (is (false?
+         (law/reaction-shape?
+          {:reaction/id :embedded-implementation
+           :reaction/on {:event/type :artifact/accepted}
+           :reaction/do {:operation/id :artifact/archive
+                         :operation/implementation (fn [] :runtime)}}))))
+  (testing "configuration and inputs must remain recursively portable data"
+    (is (false?
+         (law/reaction-shape?
+          {:reaction/id :runtime-argument
+           :reaction/on {:event/type :artifact/accepted}
+           :reaction/do {:operation/id :artifact/archive
+                         :operation/with {:callback (fn [] :runtime)}}}))))
+  (testing "nested EDN-like values remain lawful"
+    (is (law/reaction?
+         operation-registry
+         {:reaction/id :portable-arguments
+          :reaction/on {:event/type :artifact/accepted}
+          :reaction/do {:operation/id :artifact/archive
+                        :operation/with {:policy {:mode :append
+                                                 :retries 2
+                                                 :labels #{:durable :portable}}}
+                        :operation/in {:artifact [:step :load :artifact]}}}))))
 
 (deftest diagram-source-is-first-class-code-data
   (is (law/valid-shape?
