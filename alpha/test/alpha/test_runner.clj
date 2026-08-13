@@ -1,9 +1,13 @@
 (ns alpha.test-runner
   (:require [alpha.law.artifact-test]
+            [alpha.law.markdown.facet-test]
+            [alpha.law.markdown.profile-test]
             [clojure.test :as test]))
 
 (defn -main
   [& _]
-  (let [{:keys [fail error]} (test/run-tests 'alpha.law.artifact-test)]
-    (when (pos? (+ fail error))
-      (System/exit 1))))
+  (let [result (test/run-tests 'alpha.law.artifact-test
+                               'alpha.law.markdown.profile-test
+                               'alpha.law.markdown.facet-test)]
+    (when (pos? (+ (:fail result) (:error result)))
+      (throw (ex-info "Alpha tests failed" result)))))
