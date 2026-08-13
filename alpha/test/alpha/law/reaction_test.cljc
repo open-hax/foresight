@@ -48,6 +48,21 @@
                           event
                           (assoc subject :artifact/status :accepted))))))
 
+(deftest artifact-context-must-be-lawful-and-bound-to-event
+  (testing "an unrelated valid artifact cannot influence an event"
+    (is (empty?
+         (reaction/select operations
+                          [matching-reaction]
+                          event
+                          (assoc subject :artifact/id :translation/other)))))
+  (testing "a malformed artifact cannot provide trigger or condition context"
+    (is (empty?
+         (reaction/select operations
+                          [matching-reaction]
+                          event
+                          {:artifact/id :translation/42
+                           :artifact/status :review})))))
+
 (deftest disabled-and-unregistered-reactions-fail-closed
   (is (empty?
        (reaction/select operations
