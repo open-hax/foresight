@@ -13,3 +13,5 @@ Current diagrams:
 - `artifact-reactive-flow.mmd` — generalized document/event/reaction workflow.
 - `epiphany-document-flow.mmd` — Epiphany methodology as a document graph rather
   than a mandatory linear pipeline.
+- `markdown-profile-facets.mmd` — arbitrary Markdown/frontmatter projected through
+  a declared profile and checked against composed Katamorph facets.
