@@ -87,7 +87,7 @@
     (is (thrown? js/Error (workspace/parse-args args)))))
 
 (deftest git-command-failures-are-not-clean
-  (with-redefs [workspace/file-exists? (constantly true)
+  (with-redefs [workspace/plain-path-stat (constantly #js {})
                 workspace/run-captured
                 (fn [_ command]
                   (case (second command)
@@ -110,7 +110,7 @@
       (is (not (re-find #"clean" report))))))
 
 (deftest rev-parse-failures-are-visible
-  (with-redefs [workspace/file-exists? (constantly true)
+  (with-redefs [workspace/plain-path-stat (constantly #js {})
                 workspace/run-captured
                 (fn [_ command]
                   (if (= "rev-parse" (second command))
@@ -178,6 +178,19 @@
     (is (false? (workspace/executable-source? paths (assoc valid :ownership "workspace-root"))))
     (is (false? (workspace/executable-source? paths (assoc valid :actionable false))))))
 
+(deftest protected-consolidation-descendants-cannot-be-submodules
+  (doseq [protected [".agents/skills/example" "eta" "eta/nested-repo"]]
+    (is (workspace/protected-consolidation-path? protected))
+    (is (thrown-with-msg? js/Error #"collide with consolidation inputs"
+                          (workspace/validate-submodules! [{:path protected}]))))
+  (is (= [{:path ".agents" :url "git@github.com:riatzukiza/.agents.git"}]
+         (workspace/validate-submodules!
+          [{:path ".agents" :url "git@github.com:riatzukiza/.agents.git"}])))
+  (is (thrown-with-msg? js/Error #"collide with consolidation inputs"
+                        (workspace/validate-submodules!
+                         [{:path ".agents" :url "git@example/wrong.git"}])))
+  (is (false? (workspace/protected-consolidation-path? "eta-mu"))))
+
 (deftest symlinked-source-paths-are-rejected
   (let [fixture (fs/mkdtempSync (path/join (os/tmpdir) "foresight-workspace-"))
         outside (fs/mkdtempSync (path/join (os/tmpdir) "foresight-outside-"))]
@@ -206,7 +219,7 @@
                   :ownership "independent-repository" :actionable true
                   :exists true :initialized true :device device :inode inode
                   :manager "npm" :scripts ["test"]}]
-        (fs/rmSync repo-dir #js {:recursive true :force true})
+        (fs/renameSync repo-dir (path/join fixture "original-repo"))
         (fs/mkdirSync repo-dir)
         (with-redefs [workspace/root fixture
                       workspace/spawn-sync (fn [& _] (swap! calls inc) #js {:status 0})]
@@ -216,11 +229,28 @@
       (finally
         (fs/rmSync fixture #js {:recursive true :force true})))))
 
+(deftest executable-records-require-inventory-identity
+  (let [fixture (fs/mkdtempSync (path/join (os/tmpdir) "foresight-no-identity-"))
+        repo-dir (path/join fixture "repo")]
+    (try
+      (fs/writeFileSync (path/join fixture ".gitmodules")
+                        "[submodule \"repo\"]\n  path = repo\n  url = git@example/repo.git\n")
+      (fs/mkdirSync repo-dir)
+      (with-redefs [workspace/root fixture]
+        (is (thrown-with-msg? js/Error #"lacks inventory identity"
+                              (workspace/execution-paths!
+                               [{:path "repo" :source-type "git-submodule"
+                                 :ownership "independent-repository" :actionable true}]))))
+      (finally
+        (fs/rmSync fixture #js {:recursive true :force true})))))
+
 (deftest forged-consolidation-source-never-spawns
-  (let [calls (atom 0)
+  (let [{:keys [device inode]} (workspace/inspect-source-path! workspace/root ".agents")
+        calls (atom 0)
         forged {:path ".agents" :source-type "git-submodule"
                 :ownership "independent-repository" :actionable true
-                :exists true :initialized true :manager "npm" :scripts ["test"]}]
+                :exists true :initialized true :device device :inode inode
+                :manager "npm" :scripts ["test"]}]
     (with-redefs [workspace/spawn-sync (fn [& _] (swap! calls inc) #js {:status 0})]
       (is (thrown? js/Error (workspace/run-action! [forged] "test")))
       (is (thrown? js/Error (workspace/run-jscpd! [forged])))
@@ -239,7 +269,7 @@
     (is (re-find #"\| Path \| Source \| Ownership \|" report))
     (is (re-find #"eta \| consolidation-input \| workspace-root" report))
     (is (re-find #"deps.edn, bb.edn \| n/a" report))
-    (is (re-find #"n/a \| inventory-only" report))))
+    (is (re-find #"policy-skipped \| inventory-only" report))))
 
 (defn test-exit-code [summary]
   (if (test/successful? summary) 0 1))

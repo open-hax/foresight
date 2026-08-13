@@ -20,6 +20,7 @@
 (def consolidation-inputs
   [{:name ".agents"
     :path ".agents"
+    :expected-url "git@github.com:riatzukiza/.agents.git"
     :source-type "consolidation-input"
     :ownership "nested-git-canonical"
     :role "skill-catalog"
@@ -33,6 +34,11 @@
 
 (def protected-consolidation-paths
   (into #{} (map :path) consolidation-inputs))
+
+(def git-managed-consolidation-inputs
+  (into {} (keep (fn [{:keys [path expected-url] :as source}]
+                   (when expected-url [path source])))
+        consolidation-inputs))
 
 (defn parse-gitmodules [content]
   (let [finish #(if (:name %2) (conj %1 %2) %1)]
@@ -202,22 +208,41 @@
             (when actionable (git-state repo-dir)))))
 
 (defn repo-inventory [source]
-  (source-inventory
-   (merge {:source-type "git-submodule"
-           :ownership "independent-repository"
-           :role "repository"
-           :actionable true}
-          source)))
+  (if-let [consolidation (git-managed-consolidation-inputs (:path source))]
+    (source-inventory (merge consolidation source {:git-managed true}))
+    (source-inventory
+     (merge {:source-type "git-submodule"
+             :ownership "independent-repository"
+             :role "repository"
+             :actionable true}
+            source))))
+
+(defn protected-consolidation-path? [declared-path]
+  (let [candidate (:absolute (lexical-source-path root declared-path))]
+    (boolean
+     (some
+      (fn [protected]
+        (let [relative (path/relative (path/resolve root protected) candidate)]
+          (or (str/blank? relative)
+              (and (not (path/isAbsolute relative))
+                   (not= ".." relative)
+                   (not (str/starts-with? relative (str ".." path/sep)))))))
+      protected-consolidation-paths))))
+
+(defn allowed-consolidation-submodule? [{:keys [path url]}]
+  (when-let [{:keys [expected-url]} (git-managed-consolidation-inputs path)]
+    (= expected-url url)))
 
 (defn validate-submodules! [submodules]
   (let [paths (mapv :path submodules)
         duplicates (->> paths frequencies (keep (fn [[path count]] (when (> count 1) path))) seq)
-        protected (seq (filter protected-consolidation-paths paths))]
+        protected (seq (remove allowed-consolidation-submodule?
+                               (filter #(protected-consolidation-path? (:path %)) submodules)))]
     (when duplicates
       (throw (js/Error. (str "Duplicate submodule paths: " (str/join ", " duplicates)))))
     (when protected
       (throw (js/Error. (str "Submodule paths collide with consolidation inputs: "
-                            (str/join ", " protected)))))
+                            (str/join ", " (map :path protected))))))
     (doseq [{:keys [path]} submodules]
       (inspect-source-path! root path))
     submodules))
@@ -228,8 +253,11 @@
       validate-submodules!))
 
 (defn inventory []
-  (let [submodules (mapv repo-inventory (current-submodules))]
-    (into submodules (map source-inventory) consolidation-inputs)))
+  (let [submodules (mapv repo-inventory (current-submodules))
+        managed-paths (into #{} (map :path) submodules)]
+    (into submodules
+          (comp (remove #(managed-paths (:path %))) (map source-inventory))
+          consolidation-inputs)))
 
 (defn markdown-report [repos]
   (str "# Foresight Workspace Report\n\n"
@@ -247,7 +275,7 @@
                      (or (not-empty (str/join ", " lockfiles)) "-") " | "
                      (or (not-empty (str/join ", " scripts)) "-") " | "
                      (if-not actionable
-                       "n/a"
+                       "policy-skipped"
                        (cond
                          (seq git-errors) (str "error (" (str/join ", " (map name (keys git-errors))) ")")
                          initialized (if dirty "dirty" "clean")
@@ -304,11 +332,16 @@
        (contains? submodule-paths (:path repo))))
 
 (defn execution-paths! [repos]
-  (let [submodule-paths (into #{} (map :path) (current-submodules))]
+  (let [submodule-paths (into #{}
+                              (comp (remove #(git-managed-consolidation-inputs (:path %)))
+                                    (map :path))
+                              (current-submodules))]
     (mapv
      (fn [{:keys [path device inode] :as repo}]
        (when-not (executable-source? submodule-paths repo)
          (throw (js/Error. (str "Source is not an executable direct submodule: " path))))
+       (when-not (and (number? device) (number? inode))
+         (throw (js/Error. (str "Executable source lacks inventory identity: " path))))
        (let [{current-path :absolute current-exists :exists
               current-device :device current-inode :inode}
              (inspect-source-path! root path)]

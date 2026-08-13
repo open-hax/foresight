@@ -35,3 +35,6 @@
 	path = opencode
 	url = git@github.com:open-hax/opencode.git
 	shallow = true
+[submodule ".agents"]
+	path = .agents
+	url = git@github.com:riatzukiza/.agents.git
