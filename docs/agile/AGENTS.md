@@ -1,5 +1,10 @@
 # Foresight Kanban
 
+Inherit the architecture rules in [`../../AGENTS.md`](../../AGENTS.md). In
+particular, consolidation cards should extract portable `.cljc` shapes, laws,
+contracts, ledger semantics, and pure functions before runtime-specific adapters
+whenever that separation is practical.
+
 The board source lives in `docs/agile/kanban`. Run `eta-mu kanban` from
 the repository root. `openhax.kanban.edn` is canonical and selects the
 Promethean FSM; `openhax.kanban.json` supports the published JSON-only CLI.
