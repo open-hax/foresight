@@ -93,11 +93,31 @@
    [:event/data {:optional true} :map]
    [:event/causes {:optional true} [:vector Ref]]])
 
+(def PortableData
+  "Recursive EDN-like data allowed to cross the Alpha operation boundary.
+   Runtime values such as functions, host objects, and implementation handles
+   are deliberately excluded."
+  [:schema
+   {:registry
+    {::portable-data
+     [:or nil?
+      boolean?
+      number?
+      string?
+      keyword?
+      uuid?
+      [:vector [:ref ::portable-data]]
+      [:set [:ref ::portable-data]]
+      [:map-of [:or keyword? string?] [:ref ::portable-data]]]}}
+   [:ref ::portable-data]])
+
 (def OperationRef
-  [:map {:closed false}
+  [:map {:closed true}
    [:operation/id Id]
-   [:operation/with {:optional true} :map]
-   [:operation/in {:optional true} :map]])
+   [:operation/with {:optional true}
+    [:map-of [:or keyword? string?] PortableData]]
+   [:operation/in {:optional true}
+    [:map-of [:or keyword? string?] PortableData]]])
 
 (def ReactionTrigger
   [:map {:closed false}
@@ -122,6 +142,7 @@
    :alpha/artifact Artifact
    :alpha/condition Condition
    :alpha/event Event
+   :alpha/portable-data PortableData
    :alpha/operation-ref OperationRef
    :alpha/reaction Reaction})
 
@@ -168,7 +189,26 @@
           {:valid? false :schema/id :alpha/artifact :law-errors law-errors}
           shape)))))
 
+(defn validate-reaction
+  "Validate a reaction against both its portable shape and the operation ids
+   registered by the caller. The registry may be a map or set keyed by operation id."
+  [operation-registry reaction]
+  (let [shape (validate-shape :alpha/reaction reaction)]
+    (if-not (:valid? shape)
+      shape
+      (let [operation-id (get-in reaction [:reaction/do :operation/id])]
+        (if (contains? operation-registry operation-id)
+          shape
+          {:valid? false
+           :schema/id :alpha/reaction
+           :law-errors
+           [{:law/id :alpha/reaction-operation-registered
+             :path [:reaction/do :operation/id]
+             :actual operation-id}]})))))
+
 (defn artifact? [value] (:valid? (validate-artifact value)))
 (defn relation? [value] (valid-shape? :alpha/relation value))
 (defn event? [value] (valid-shape? :alpha/event value))
-(defn reaction? [value] (valid-shape? :alpha/reaction value))
+(defn reaction-shape? [value] (valid-shape? :alpha/reaction value))
+(defn reaction? [operation-registry value]
+  (:valid? (validate-reaction operation-registry value)))
