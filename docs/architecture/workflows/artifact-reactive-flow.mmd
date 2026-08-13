@@ -1,0 +1,33 @@
+flowchart TD
+  Markdown["Markdown + arbitrary frontmatter"]
+  OtherArtifact["Media / code / EDN / diagram / other artifact"]
+  External["GitHub / clock / tool / person / external event"]
+
+  Adapter["Adapter parses source into Clojure data"]
+  Alpha["α Alpha validates asserted contracts"]
+  Artifact["Normalized Artifact + typed Relations"]
+  Event["Normalized Event"]
+  Clio["Clio append-only facts / causal history"]
+  Match["Rheos matches declarative Reaction"]
+  Condition{"Condition holds?"}
+  Invoke["Invoke typed Operation / Workflow"]
+  Outcome["Artifacts + contributions + receipts"]
+  Projection["Π projections / views / products"]
+  Finding["Structural finding; no silent pass"]
+
+  Markdown --> Adapter
+  OtherArtifact --> Adapter
+  Adapter --> Alpha
+  Alpha -->|valid| Artifact
+  Alpha -->|invalid| Finding
+
+  Artifact --> Event
+  External --> Event
+  Event --> Clio
+  Event --> Match --> Condition
+  Condition -->|no| Clio
+  Condition -->|yes| Invoke
+  Invoke --> Outcome
+  Outcome --> Clio
+  Outcome --> Projection
+  Outcome --> Event
