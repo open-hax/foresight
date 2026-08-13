@@ -4,3 +4,5 @@
 /.lsp/
 
 eta/.clj-kondo/.cache/
+
+alpha/.cpcache/

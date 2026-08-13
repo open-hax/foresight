@@ -80,7 +80,7 @@
            [:condition/clauses [:vector {:min 1} [:ref ::condition]]]]]
       [:not [:map {:closed true}
             [:condition/op [:= :not]]
-            [:condition/clause [:ref ::condition]]]]]]}}
+            [:condition/clause [:ref ::condition]]]]]}}
    ::condition])
 
 (def Event

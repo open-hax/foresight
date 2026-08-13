@@ -1,29 +1,29 @@
 ;; Π_STATE.sexp - deterministic Foresight handoff
-;; Generated: 2026-08-13T16:24:16Z
+;; Generated: 2026-08-13T23:09:55Z
 
 (pi-state
   (version 1)
-  (timestamp "2026-08-13T16:24:16Z")
-  (branch "main")
-  (implementation-head "85a1adffccf069665464b06e8953ee0378420508")
+  (timestamp "2026-08-13T23:09:55Z")
+  (branch "chore/conversation-notes")
+  (implementation-head "a9d972c2e18a6fd9ce295b4fbb26473a7fd4cb2b")
   (status "ready-to-push")
   (verification
     (pass "nbb tests: 22 tests, 93 assertions, 0 failures")
-    (pass "clj-kondo: 0 errors, 0 warnings")
-    (pass "workspace report: 14 declared sources")
-    (pass "git diff --check")
-    (pass "independent code review: no findings"))
+    (pass "clj-kondo: 0 errors, 0 warnings"))
   (submodules
     (agents "00a05c8f6ba68ff30a98266879310464e966748b")
+    (Truth "8ade66a3553bdd89696aebf4fc4628a6fe66e5ae")
+    (bitch-tracker "2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90")
+    (calliope "2655ae6eddbd20ac400a8e1ff99914c56d81b835")
+    (epiphany "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66")
+    (eta-mu "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90")
+    (katamorph "ebeb13657a18cef1094feef43dad6685b9b7d138")
+    (knoxx "5249e5303c7b5ee694b8ae5f01b23f30d0a67c31")
     (muse "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde")
     (opencode "cc4b45612974f735ddec46009ede07729511fba4"))
   (manifest
-    (hash-receipts "sha256:2c671a134ae70c59bd5b27e198d202711df3b42b5c2d02c0fac48a22a813061a")
-    (hash-kanban-ledger "sha256:41130e02d5c42c40c5cafa529b1ebd1678579d8ed6321a25042e9b241a54b706")
-    (hash-workspace-runner "sha256:5f9e96827e2372cc30c088b7f36ea123c2172ff8cc645b4edf209f6ecba0e467")
-    (hash-workspace-tests "sha256:6ba6351ce5d926799a42107ab4596e5fa5210dadaa4effdcea8c9b661d0ebca1"))
+    (hash-workspace-runner "5f9e96827e2372cc30c088b7f36ea123c2172ff8cc645b4edf209f6ecba0e467")
+    (hash-workspace-tests "6ba6351ce5d926799a42107ab4596e5fa5210dadaa4effdcea8c9b661d0ebca1"))
   (concurrent-dirt
-    (excluded ".agents/skills/webhook-fullstack tool caches")
-    (excluded "katamorph/.clj-kondo and .lsp caches"))
-  (blockers
-    (muse-watcher "Recorded in Muse tag Π/muse-board/20260813T161940Z; independent from root green gate")))
+    (excluded "11 untracked kanban cards in docs/agile/kanban/"))
+  (blockers none))
