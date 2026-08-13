@@ -1,0 +1,31 @@
+flowchart TD
+  Request["Request / question"]
+  Brief["Research brief"]
+  Source["Source record"]
+  Finding["Finding"]
+  Design["Design"]
+  Decision["Decision"]
+  Story["Bounded work item"]
+  Implementation["Implementation / action"]
+  Verification["Verification record"]
+  Review["Review record"]
+  Acceptance["Accepted outcome"]
+  Reflection["Reflection / process change"]
+
+  Request --> Brief
+  Brief --> Source
+  Source -->|supports| Finding
+  Finding -->|informs| Design
+  Design -->|proposes| Decision
+  Decision -->|authorizes / constrains| Story
+  Story -->|produces| Implementation
+  Implementation -->|checked by| Verification
+  Implementation -->|evaluated by| Review
+  Verification --> Acceptance
+  Review --> Acceptance
+  Acceptance --> Reflection
+
+  Finding -. new uncertainty .-> Brief
+  Review -. requested change .-> Story
+  Verification -. failure evidence .-> Story
+  Reflection -. changes policy / method .-> Brief

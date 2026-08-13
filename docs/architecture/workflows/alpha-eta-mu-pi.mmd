@@ -1,0 +1,22 @@
+flowchart LR
+  Alpha["α Alpha<br/>structural integrity"]
+  K1["Katamorph<br/>contract boundary"]
+  Eta["η Eta<br/>transduction"]
+  K2["Katamorph<br/>contract boundary"]
+  Mu["μ Mu<br/>attention / evaluation / work"]
+  K3["Katamorph<br/>contract boundary"]
+  Pi["Π Big Pi<br/>product / representation / projection"]
+  Clio["Clio<br/>immutable facts + causal history"]
+
+  Alpha -->|lawful artifact| K1 --> Eta
+  Eta -->|derived artifact| K2 --> Mu
+  Mu -->|judgments / contributions| K3 --> Pi
+
+  Alpha -. facts .-> Clio
+  Eta -. receipts .-> Clio
+  Mu -. judgments .-> Clio
+  Pi -. publication receipts .-> Clio
+
+  Alpha -. direct lawful representation .-> Pi
+  Eta -. no evaluation required .-> Pi
+  Mu -. request another transformation .-> Eta
