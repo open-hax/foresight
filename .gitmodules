@@ -1,0 +1,33 @@
+[submodule "Truth"]
+	path = Truth
+	url = git@github.com:octave-commons/Truth.git
+[submodule "bitch-tracker"]
+	path = bitch-tracker
+	url = git@github.com:octave-commons/bitch-tracker.git
+[submodule "calliope"]
+	path = calliope
+	url = git@github.com:octave-commons/calliope.git
+[submodule "epiphany"]
+	path = epiphany
+	url = git@github.com:octave-commons/epiphany.git
+[submodule "eta-mu"]
+	path = eta-mu
+	url = git@github.com:open-hax/eta-mu.git
+[submodule "katamorph"]
+	path = katamorph
+	url = git@github.com:open-hax/katamorph.git
+[submodule "knoxx"]
+	path = knoxx
+	url = git@github.com:open-hax/knoxx.git
+[submodule "muse"]
+	path = muse
+	url = git@github.com:octave-commons/muse.git
+[submodule "proxx"]
+	path = proxx
+	url = git@github.com:open-hax/proxx.git
+[submodule "services"]
+	path = services
+	url = git@github.com:open-hax/services.git
+[submodule "uxx"]
+	path = uxx
+	url = git@github.com:open-hax/uxx.git
