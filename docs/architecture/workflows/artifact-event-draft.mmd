@@ -1,0 +1,8 @@
+flowchart LR
+  A[Lawful Artifact] --> O[Observation or Change Law]
+  O --> D[EventDraft without id or time]
+  D --> R[Runtime or Clio boundary]
+  I[Caller supplied event identity] --> R
+  T[Caller supplied observation time] --> R
+  R --> E[Durable Event]
+  E --> C[Clio causal history]
