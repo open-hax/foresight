@@ -4,6 +4,7 @@
             [alpha.law.markdown.facet-test]
             [alpha.law.markdown.profile-registry-test]
             [alpha.law.markdown.profile-test]
+            [alpha.law.markdown.resolver-test]
             [alpha.law.markdown.selection-test]
             [alpha.law.reaction-test]
             [clojure.test :as test]))
@@ -15,6 +16,7 @@
                                'alpha.law.markdown.facet-test
                                'alpha.law.markdown.selection-test
                                'alpha.law.markdown.profile-registry-test
+                               'alpha.law.markdown.resolver-test
                                'alpha.law.reaction-test)]
     (when (pos? (+ (:fail result) (:error result)))
       (throw (ex-info "Alpha tests failed" result)))))
