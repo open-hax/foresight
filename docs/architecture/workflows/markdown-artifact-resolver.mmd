@@ -1,0 +1,9 @@
+flowchart LR
+  Document[Lossless or legacy Markdown] --> Select[Select one profile]
+  Registry[Profile registry] --> Select
+  Select -->|one match| Project[Project Artifact]
+  Select -->|zero or many| Finding[Structural finding]
+  Project --> Facets[Validate declared facets]
+  Schemas[Facet schema registry] --> Facets
+  Facets -->|valid| Artifact[Validated Artifact]
+  Facets -->|invalid| Finding
