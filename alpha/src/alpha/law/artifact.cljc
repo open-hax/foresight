@@ -35,6 +35,15 @@
    [:document/body :string]
    [:document/structure {:optional true} [:vector :any]]])
 
+(def FrontmatterDecodeStatus
+  [:enum :partial :complete :failed])
+
+(def FrontmatterDecoding
+  [:map {:closed false}
+   [:decoder/id :keyword]
+   [:decode/status FrontmatterDecodeStatus]
+   [:decode/capabilities [:set :keyword]]])
+
 (def LosslessMarkdownDocument
   [:map {:closed false}
    [:document/format [:= :markdown]]
@@ -42,6 +51,7 @@
    [:document/frontmatter-present? :boolean]
    [:document/frontmatter/raw [:maybe :string]]
    [:document/frontmatter/data :map]
+   [:document/frontmatter/decoding {:optional true} FrontmatterDecoding]
    [:document/body :string]
    [:document/structure {:optional true} [:vector :any]]])
 
@@ -106,6 +116,7 @@
    :alpha/artifact-ref ArtifactRef
    :alpha/relation Relation
    :alpha/markdown-document MarkdownDocument
+   :alpha/frontmatter-decoding FrontmatterDecoding
    :alpha/diagram-source DiagramSource
    :alpha/artifact Artifact
    :alpha/condition Condition
