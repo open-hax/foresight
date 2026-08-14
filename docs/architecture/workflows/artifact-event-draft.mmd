@@ -1,8 +1,9 @@
 flowchart LR
   A[Lawful Artifact] --> O[Observation or Change Law]
   O --> D[EventDraft without id or time]
-  D --> R[Runtime or Clio boundary]
+  D --> R[Runtime or Clio materialization boundary]
   I[Caller supplied event identity] --> R
-  T[Caller supplied observation time] --> R
-  R --> E[Durable Event]
+  T[Caller supplied nonblank event time] --> R
+  R -->|lawful runtime facts| E[Durable Event]
+  R -->|invalid draft / id / time| F[Structural finding]
   E --> C[Clio causal history]
