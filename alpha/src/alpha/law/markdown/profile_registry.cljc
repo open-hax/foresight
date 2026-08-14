@@ -6,28 +6,22 @@
   (->> registries
        (mapcat keys)
        frequencies
-       (keep (fn [[profile-id n]]
-               (when (> n 1) profile-id)))
+       (keep (fn [[id n]] (when (> n 1) id)))
        (sort-by str)
        vec))
 
 (defn compose [& registries]
-  (let [invalid-errors (mapcat #(-> % validation/validate :errors) registries)
+  (let [errors (vec (mapcat #(-> % validation/validate :errors) registries))
         duplicate-ids (conflicts registries)]
     (cond
-      (seq invalid-errors)
-      {:ok false :reason :invalid-registry :errors (vec invalid-errors)}
-
-      (seq duplicate-ids)
-      {:ok false :reason :profile-id-conflict :conflicts duplicate-ids}
-
-      :else
-      {:ok true :registry (apply merge registries) :conflicts []})))
+      (seq errors) {:ok false :reason :invalid-registry :errors errors}
+      (seq duplicate-ids) {:ok false :reason :profile-id-conflict :conflicts duplicate-ids}
+      :else {:ok true :registry (apply merge {} registries) :conflicts []})))
 
 (defn select
   ([registry document] (select registry document nil))
-  ([registry document caller-context]
+  ([registry document context]
    (let [checked (validation/validate registry)]
-     (if-not (:ok checked)
-       {:ok false :reason :invalid-registry :errors (:errors checked)}
-       (selection/select (vec (vals registry)) document caller-context)))))
+     (if (:ok checked)
+       (selection/select (vec (vals registry)) document context)
+       {:ok false :reason :invalid-registry :errors (:errors checked)}))))
