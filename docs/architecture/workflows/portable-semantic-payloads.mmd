@@ -1,0 +1,9 @@
+flowchart LR
+  Katamorph[Katamorph PortableValue] --> Map[Alpha PortableMap]
+  Map --> Frontmatter[Markdown frontmatter data]
+  Map --> Artifact[Artifact data]
+  Map --> Event[Event data]
+  Map --> Operation[Operation config / inputs]
+  Runtime[Function / host object] -->|rejected| Finding[Structural finding]
+  Runtime -. cannot enter .-> Map
+  Structure[Document structure / AST] -. separate contract .-> Future[Typed representation law]
