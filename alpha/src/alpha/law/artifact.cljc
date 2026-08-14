@@ -12,75 +12,88 @@
 (def PortableMap
   [:map-of [:or keyword? string?] PortableData])
 
+(defn portable-record
+  "Keep a semantic map extensible while requiring every known and extension value to remain portable."
+  [map-schema]
+  [:and PortableMap map-schema])
+
 (def Ref
-  [:map {:closed false}
-   [:ref/type :keyword]
-   [:ref/id Id]
-   [:ref/revision {:optional true} Id]])
+  (portable-record
+   [:map {:closed false}
+    [:ref/type :keyword]
+    [:ref/id Id]
+    [:ref/revision {:optional true} Id]]))
 
 (def ArtifactRef
-  [:map {:closed false}
-   [:ref/type [:= :artifact]]
-   [:ref/id Id]
-   [:artifact/kind {:optional true} :keyword]
-   [:ref/revision {:optional true} Id]])
+  (portable-record
+   [:map {:closed false}
+    [:ref/type [:= :artifact]]
+    [:ref/id Id]
+    [:artifact/kind {:optional true} :keyword]
+    [:ref/revision {:optional true} Id]]))
 
 (def Relation
-  [:map {:closed false}
-   [:relation/type :keyword]
-   [:relation/source Ref]
-   [:relation/target Ref]
-   [:relation/epistemic-tier {:optional true} EpistemicTier]
-   [:relation/basis {:optional true} [:vector Ref]]])
+  (portable-record
+   [:map {:closed false}
+    [:relation/type :keyword]
+    [:relation/source Ref]
+    [:relation/target Ref]
+    [:relation/epistemic-tier {:optional true} EpistemicTier]
+    [:relation/basis {:optional true} [:vector Ref]]]))
 
 (def LegacyMarkdownDocument
-  [:map {:closed false}
-   [:document/path :string]
-   [:document/frontmatter PortableMap]
-   [:document/body :string]
-   [:document/structure {:optional true} [:vector :any]]])
+  (portable-record
+   [:map {:closed false}
+    [:document/path :string]
+    [:document/frontmatter PortableMap]
+    [:document/body :string]
+    [:document/structure {:optional true} [:vector :any]]]))
 
 (def LosslessMarkdownDocument
-  [:map {:closed false}
-   [:document/format [:= :markdown]]
-   [:document/source-path {:optional true} :string]
-   [:document/frontmatter-present? :boolean]
-   [:document/frontmatter/raw [:maybe :string]]
-   [:document/frontmatter/data PortableMap]
-   [:document/body :string]
-   [:document/structure {:optional true} [:vector :any]]])
+  (portable-record
+   [:map {:closed false}
+    [:document/format [:= :markdown]]
+    [:document/source-path {:optional true} :string]
+    [:document/frontmatter-present? :boolean]
+    [:document/frontmatter/raw [:maybe :string]]
+    [:document/frontmatter/data PortableMap]
+    [:document/body :string]
+    [:document/structure {:optional true} [:vector :any]]]))
 
 (def MarkdownDocument
   [:or LosslessMarkdownDocument LegacyMarkdownDocument])
 
 (def DiagramSource
-  [:map {:closed false}
-   [:diagram/id Id]
-   [:diagram/language [:= :mermaid]]
-   [:diagram/source :string]])
+  (portable-record
+   [:map {:closed false}
+    [:diagram/id Id]
+    [:diagram/language [:= :mermaid]]
+    [:diagram/source :string]]))
 
 (def Artifact
-  [:map {:closed false}
-   [:artifact/id Id]
-   [:artifact/kind :keyword]
-   [:artifact/form {:optional true} :keyword]
-   [:artifact/status {:optional true} :keyword]
-   [:artifact/epistemic-tier {:optional true} EpistemicTier]
-   [:artifact/data {:optional true} PortableMap]
-   [:artifact/source {:optional true} Ref]
-   [:artifact/relations {:optional true} [:vector Relation]]])
+  (portable-record
+   [:map {:closed false}
+    [:artifact/id Id]
+    [:artifact/kind :keyword]
+    [:artifact/form {:optional true} :keyword]
+    [:artifact/status {:optional true} :keyword]
+    [:artifact/epistemic-tier {:optional true} EpistemicTier]
+    [:artifact/data {:optional true} PortableMap]
+    [:artifact/source {:optional true} Ref]
+    [:artifact/relations {:optional true} [:vector Relation]]]))
 
 (def Condition condition-schema/Condition)
 
 (def Event
-  [:map {:closed false}
-   [:event/id Id]
-   [:event/type :keyword]
-   [:event/at {:optional true} :string]
-   [:event/source {:optional true} Ref]
-   [:event/subject {:optional true} Ref]
-   [:event/data {:optional true} PortableMap]
-   [:event/causes {:optional true} [:vector Ref]]])
+  (portable-record
+   [:map {:closed false}
+    [:event/id Id]
+    [:event/type :keyword]
+    [:event/at {:optional true} :string]
+    [:event/source {:optional true} Ref]
+    [:event/subject {:optional true} Ref]
+    [:event/data {:optional true} PortableMap]
+    [:event/causes {:optional true} [:vector Ref]]]))
 
 (def OperationRef
   [:map {:closed true}
@@ -89,18 +102,20 @@
    [:operation/in {:optional true} PortableMap]])
 
 (def ReactionTrigger
-  [:map {:closed false}
-   [:event/type :keyword]
-   [:artifact/kind {:optional true} :keyword]
-   [:subject/type {:optional true} :keyword]])
+  (portable-record
+   [:map {:closed false}
+    [:event/type :keyword]
+    [:artifact/kind {:optional true} :keyword]
+    [:subject/type {:optional true} :keyword]]))
 
 (def Reaction
-  [:map {:closed false}
-   [:reaction/id Id]
-   [:reaction/on ReactionTrigger]
-   [:reaction/when {:optional true} Condition]
-   [:reaction/do OperationRef]
-   [:reaction/enabled? {:optional true} :boolean]])
+  (portable-record
+   [:map {:closed false}
+    [:reaction/id Id]
+    [:reaction/on ReactionTrigger]
+    [:reaction/when {:optional true} Condition]
+    [:reaction/do OperationRef]
+    [:reaction/enabled? {:optional true} :boolean]]))
 
 (def schemas
   {:alpha/id Id
