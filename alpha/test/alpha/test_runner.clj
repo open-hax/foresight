@@ -3,6 +3,7 @@
             [alpha.law.markdown-document-test]
             [alpha.law.markdown.facet-test]
             [alpha.law.markdown.profile-test]
+            [alpha.law.portable-extension-test]
             [alpha.law.portable-identity-test]
             [alpha.law.portable-payload-test]
             [alpha.law.reaction-test]
@@ -15,6 +16,7 @@
                                'alpha.law.markdown.facet-test
                                'alpha.law.portable-payload-test
                                'alpha.law.portable-identity-test
+                               'alpha.law.portable-extension-test
                                'alpha.law.reaction-test)]
     (when (pos? (+ (:fail result) (:error result)))
       (throw (ex-info "Alpha tests failed" result)))))
