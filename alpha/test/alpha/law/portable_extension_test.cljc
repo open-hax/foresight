@@ -5,18 +5,18 @@
 
 (deftest portable-project-extensions-remain-lawful
   (is (law/artifact?
-       {:artifact/id :finding/1
+       {:artifact/id :finding/id-1
         :artifact/kind :finding
         :project/custom {:confidence 0.84
                          :labels #{:research :portable}}}))
   (is (law/event?
-       {:event/id :event/1
+       {:event/id :event/id-1
         :event/type :artifact/changed
         :project/context {:actor :agent/reviewer}}))
   (is (law/valid-shape?
        :alpha/ref
        {:ref/type :artifact
-        :ref/id :finding/1
+        :ref/id :finding/id-1
         :project/provenance {:source "research.md"}})))
 
 (deftest runtime-values-cannot-hide-in-open-artifact-fields
@@ -36,7 +36,7 @@
        (law/valid-shape?
         :alpha/ref
         {:ref/type :artifact
-         :ref/id :finding/1
+         :ref/id :finding/id-1
          :runtime/handle (fn [] :runtime)}))))
 
 (deftest runtime-values-cannot-hide-in-open-reaction-fields
