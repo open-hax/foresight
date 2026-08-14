@@ -1,0 +1,92 @@
+;; Probe data for card 32b122a8-bbd3-4e14-85bd-7c3c6369f733.
+;;
+;; The Repository -> Transduction -> Evaluation -> Representation flow written
+;; as Katamorph actions and steps. Port shapes are transcribed from the real
+;; contracts in the tree, not invented:
+;;
+;;   Repository      knoxx/backend/src/cljs/knoxx/backend/law/publication.cljs
+;;   Transduction    knoxx/backend/src/cljs/knoxx/backend/law/openplanner_translation.cljs
+;;   Evaluation      knoxx/frontend/src/components/review/review-types.ts
+;;   Representation  knoxx/shared/src/cljs/open_hax/uxx/markup.cljs
+;;
+;; Vocabulary: katamorph.schema.action / katamorph.schema.step, as merged by
+;; katamorph#6. NOTE that #6 merged into refactor/schema-core-cljc-v2, which
+;; has no open PR to main, so main does not carry this vocabulary. See the
+;; findings note.
+;;
+;; All four actions validate against ActionSemantics and all four steps against
+;; ActionStep. The decomposition holds structurally; what it cannot say is the
+;; subject of docs/notes/probe-four-capabilities-as-typed-steps.md.
+
+{:actions
+ [{:contract/kind :action
+   :contract/id :repository/resolve-document
+   :action/category :repository
+   :action/requires {:document-ref :qualified-keyword}
+   :action/provides {:document :knoxx.law.publication/Document
+                     :garden :knoxx.law.publication/Garden}
+   :action/traits #{:pure :provider-backed}}
+
+  {:contract/kind :action
+   :contract/id :transduction/translate
+   :action/category :transduction
+   :action/requires {:source :knoxx.law.publication/Document
+                     :target-locale :keyword}
+   :action/provides {:candidate :knoxx.law.translation/Segment
+                     :provenance :transduction/Provenance}
+   :action/traits #{:effectful :provider-backed}}
+
+  {:contract/kind :action
+   :contract/id :evaluation/review
+   :action/category :evaluation
+   :action/requires {:source :knoxx.law.publication/Document
+                     :candidate :knoxx.law.translation/Segment}
+   :action/provides {:judgment :knoxx.review/ReviewItem
+                     :receipt :evaluation/Receipt}
+   :action/traits #{:human-in-the-loop :produces-receipt}}
+
+  {:contract/kind :action
+   :contract/id :representation/react-ssr
+   :action/category :representation
+   :action/requires {:view :representation/View}
+   :action/provides {:html :string
+                     :markup :open-hax.uxx.markup/Node}
+   :action/traits #{:pure}}]
+
+ :steps
+ [{:step/id :resolve
+   :step/action :repository/resolve-document
+   :step/with {:namespace :knoxx.docs}}
+
+  {:step/id :translate
+   :step/action :transduction/translate
+   :step/with {:target-locale :es}
+   :step/in {:source [:step :resolve :document]}}
+
+  {:step/id :review
+   :step/action :evaluation/review
+   :step/in {:source [:step :resolve :document]
+             :candidate [:step :translate :candidate]}}
+
+  {:step/id :represent
+   :step/action :representation/react-ssr
+   :step/in {:view [:step :review :judgment]}}]
+
+ ;; Edges the vocabulary cannot express. Each was attempted mechanically; see
+ ;; the findings note for the verdict and the reasoning.
+ :unexpressible-edges
+ [{:edge [:review :represent]
+   :needs :conditional-execution
+   :because "Representation must not run on a rejected or deferred review."}
+
+  {:edge :any
+   :needs :provider-substitution
+   :because "A step names a concrete action id; swapping EDN for Optimizely edits every step."}
+
+  {:edge [:* :review]
+   :needs :variadic-role-inputs
+   :because "A review case takes N artifacts of role :evidence; :step/in allows one ref per key."}
+
+  {:edge [:review :*]
+   :needs :durable-fact-marking
+   :because ":receipt and :judgment are indistinguishable ports; the trait is decoration."}]}
