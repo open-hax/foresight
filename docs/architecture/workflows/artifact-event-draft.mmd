@@ -1,6 +1,9 @@
 flowchart LR
   A[Lawful Artifact] --> O[Observation or Change Law]
   O --> D[EventDraft without id or time]
+  P[Portable event data only] --> D
+  RuntimeValue[Function / host object] -->|rejected| F[Structural finding]
+  RuntimeValue -. cannot enter .-> D
   D --> R[Runtime or Clio boundary]
   I[Caller supplied event identity] --> R
   T[Caller supplied observation time] --> R
