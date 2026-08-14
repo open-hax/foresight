@@ -1,7 +1,7 @@
 (ns alpha.law.reaction-registry
-  (:require [alpha.law.artifact :as artifact]
-            [alpha.law.reaction :as reaction]
-            [alpha.law.reaction-registry-shape :as shape]))
+  (:require [alpha.law.reaction :as reaction]
+            [alpha.law.reaction-registry-shape :as shape]
+            [katamorph.action.registry :as action-registry]))
 
 (defn conflicts [registries]
   (->> registries (mapcat keys) frequencies
@@ -18,17 +18,29 @@
 (defn binding-errors [operations registry]
   (->> registry
        (keep (fn [[id value]]
-               (when-not (artifact/reaction? operations value)
-                 {:law/id :reaction/operation-unregistered
-                  :reaction/id id
-                  :operation/id (get-in value [:reaction/do :operation/id])})))
+               (let [operation-id (get-in value [:reaction/do :operation/id])]
+                 (when-not (action-registry/resolve-action operations operation-id)
+                   {:law/id :reaction/operation-unregistered
+                    :reaction/id id
+                    :operation/id operation-id}))))
        (sort-by #(str (:reaction/id %))) vec))
 
 (defn select [operations registry event subject-artifact]
   (let [checked (shape/validate registry)
-        bindings (when (:ok checked) (binding-errors operations registry))
+        actions (action-registry/validate operations)
+        bindings (when (and (:ok checked) (:ok actions))
+                   (binding-errors operations registry))
         reactions (->> registry vals (sort-by #(str (:reaction/id %))) vec)]
     (cond
-      (not (:ok checked)) {:ok false :reason :invalid-registry :errors (:errors checked)}
-      (seq bindings) {:ok false :reason :unbound-reaction-registry :errors bindings}
-      :else {:ok true :reactions (reaction/select operations reactions event subject-artifact)})))
+      (not (:ok checked))
+      {:ok false :reason :invalid-registry :errors (:errors checked)}
+
+      (not (:ok actions))
+      {:ok false :reason :invalid-action-registry :errors (:errors actions)}
+
+      (seq bindings)
+      {:ok false :reason :unbound-reaction-registry :errors bindings}
+
+      :else
+      {:ok true
+       :reactions (reaction/select operations reactions event subject-artifact)})))

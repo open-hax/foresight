@@ -2,7 +2,9 @@ flowchart LR
   A[Reaction registry A] --> C[Fail closed composition]
   B[Reaction registry B] --> C
   C --> R[Composed reaction registry]
-  O[Operation registry] --> Bind[Operation binding]
+  K[Katamorph ActionSemantics registry] --> V[Validate action registry]
+  V --> Bind[Resolve reaction action refs]
   R --> Bind
   Bind -->|bound| S[Deterministic reaction selection]
-  Bind -->|missing operation| F[Structural finding]
+  Bind -->|missing action| F[Structural finding]
+  V -->|invalid registry| F
