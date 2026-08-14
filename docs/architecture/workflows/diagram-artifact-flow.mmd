@@ -1,0 +1,6 @@
+flowchart LR
+  Source[Mermaid source] --> Parser[Alpha Mermaid shape adapter]
+  Parser --> Graph[Validated diagram graph]
+  Source --> Artifact[Diagram Artifact]
+  Graph --> Artifact
+  Artifact --> Work[Observation reaction and evaluation]
