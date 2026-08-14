@@ -4,6 +4,7 @@
             [alpha.law.markdown.facet-test]
             [alpha.law.markdown.profile-test]
             [alpha.law.reaction-test]
+            [alpha.law.shared-invocation-test]
             [clojure.test :as test]))
 
 (defn -main [& _]
@@ -11,6 +12,7 @@
                                'alpha.law.markdown-document-test
                                'alpha.law.markdown.profile-test
                                'alpha.law.markdown.facet-test
-                               'alpha.law.reaction-test)]
+                               'alpha.law.reaction-test
+                               'alpha.law.shared-invocation-test)]
     (when (pos? (+ (:fail result) (:error result)))
       (throw (ex-info "Alpha tests failed" result)))))
