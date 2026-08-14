@@ -1,0 +1,71 @@
+name: Alpha JVM laws
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "alpha/**"
+      - "katamorph"
+      - "docs/architecture/workflows/**"
+      - ".github/workflows/alpha-jvm-test.yml"
+  push:
+    branches:
+      - "**"
+    paths:
+      - "alpha/**"
+      - "katamorph"
+      - "docs/architecture/workflows/**"
+      - ".github/workflows/alpha-jvm-test.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alpha-jvm-laws-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  laws:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CLOJURE_TOOLS_VERSION: "1.12.5.1654"
+
+    steps:
+      - name: Check out Foresight
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Check out Katamorph dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config --global url."https://github.com/".insteadOf "git@github.com:"
+          git submodule update --init katamorph
+          git submodule status katamorph
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install Clojure CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          installer="linux-install-${CLOJURE_TOOLS_VERSION}.sh"
+          curl -fsSLO "https://download.clojure.org/install/$installer"
+          chmod +x "$installer"
+          sudo "./$installer"
+          rm "$installer"
+          clojure -Sdescribe
+
+      - name: Run Alpha portable laws
+        working-directory: alpha
+        shell: bash
+        run: |
+          set -euo pipefail
+          clojure -M:test
