@@ -1,0 +1,8 @@
+flowchart LR
+  Document[Markdown document] --> Context[Selection context]
+  Registry[Profile registry] --> Match[Katamorph profile conditions]
+  Context --> Match
+  Match -->|one match| Profile[Selected profile]
+  Match -->|zero matches| None[No profile match]
+  Match -->|multiple matches| Ambiguous[Ambiguous profile finding]
+  Profile --> Projection[Artifact projection]
