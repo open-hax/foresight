@@ -33,7 +33,7 @@
 
 (deftest relation-revisions-use-portable-identities-too
   (let [safe {:ref/type :artifact
-              :ref/id :doc/1
+              :ref/id :doc/id-1
               :ref/revision condition/max-safe-integer}
         unsafe (assoc safe :ref/revision (inc condition/max-safe-integer))]
     (is (law/valid-shape? :alpha/ref safe))
