@@ -4,7 +4,8 @@
             [malli.core :as m]
             [malli.error :as me]))
 
-(def Id [:or :uuid :keyword :string :int])
+(def Id
+  [:or :uuid :keyword :string condition-schema/PortableInteger])
 (def EpistemicTier [:enum :observed :derived :provisional :accepted])
 
 (def PortableData condition-schema/PortableValue)
@@ -102,7 +103,8 @@
    [:reaction/enabled? {:optional true} :boolean]])
 
 (def schemas
-  {:alpha/ref Ref
+  {:alpha/id Id
+   :alpha/ref Ref
    :alpha/artifact-ref ArtifactRef
    :alpha/relation Relation
    :alpha/markdown-document MarkdownDocument
