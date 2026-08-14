@@ -1,9 +1,15 @@
 flowchart LR
-  Document[Lossless or legacy Markdown] --> Select[Select one profile]
+  Document[Lossless or legacy Markdown] --> Validate[Validate document contract]
+  Validate -->|invalid| Finding[Structural finding]
+  Validate --> Decode{Frontmatter decode failed?}
+  Decode -->|yes| Finding
+  Decode -->|no / partial / complete| Select[Select one profile]
   Registry[Profile registry] --> Select
   Select -->|one match| Project[Project Artifact]
-  Select -->|zero or many| Finding[Structural finding]
+  Select -->|zero or many| Finding
   Project --> Facets[Validate declared facets]
   Schemas[Facet schema registry] --> Facets
   Facets -->|valid| Artifact[Validated Artifact]
   Facets -->|invalid| Finding
+  Decode -. evidence carried .-> Finding
+  Decode -. evidence carried .-> Artifact
