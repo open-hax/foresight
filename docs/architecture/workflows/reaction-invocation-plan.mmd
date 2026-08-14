@@ -1,0 +1,8 @@
+flowchart LR
+  Event[Lawful Event] --> Select[Select reactions]
+  Artifact[Optional subject Artifact] --> Select
+  Reactions[Reaction registry] --> Select
+  Actions[Katamorph Action registry] --> Select
+  Select -->|matches| Plan[Reaction invocation plan]
+  Select -->|none| Empty[Successful no-work]
+  Plan --> Runtime[Provider binding / runtime later]
