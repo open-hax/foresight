@@ -18,9 +18,6 @@
 
 (defn consume [state line-number source]
   (cond
-    (declaration/node source)
-    (add-node state line-number (declaration/node source))
-
     (edge/dotted source)
     (update state :edges conj (edge/dotted source))
 
@@ -29,6 +26,9 @@
       (-> state
           (add-nodes line-number nodes)
           (update :edges into edges)))
+
+    (declaration/node source)
+    (add-node state line-number (declaration/node source))
 
     :else
     (update state :errors conj
