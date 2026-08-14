@@ -1,14 +1,17 @@
 # Fork Tax Handoff
 
-**Timestamp:** 2026-08-13T23:09:55Z
+**Timestamp:** 2026-08-14T00:40:52Z
 **Branch:** `chore/conversation-notes`
-**Implementation head:** `a9d972c2e18a6fd9ce295b4fbb26473a7fd4cb2b`
+**Implementation head:** `ab1dd0b1c6b111c4a015bc1b1f794f10c3e19bec`
 
 ## Signal
 
-- Added `alpha/.cpcache/` to `.gitignore`
-- Fixed malformed bracket in `alpha/src/alpha/law/artifact.cljc` (extra `]` removed)
-- 11 untracked kanban cards present in `docs/agile/kanban/` — left unstaged as concurrent dirt
+- Staged 11 kanban cards documenting architecture work-items:
+  - Artifact/Event/Reaction kernel proof (Alpha)
+  - Eta-mu turn processor purification (Eta)
+  - Artifact/Event/Reaction kernel proof on three unlike documents
+  - Mu evaluation contract separation
+  - Other architecture/consolidation cards
 
 ## Verification
 
@@ -17,8 +20,8 @@
 
 ## Submodule Truth
 
-All 10 submodules unchanged from prior Π. No submodule pointer updates this cycle.
+12 submodules recorded. eta-mu and katamorph have local pointer changes (noted but not updated in this cycle — kanban work only).
 
-## Excluded Concurrent Dirt
+## Absorbed Concurrent Dirt
 
-- 11 untracked kanban card files in `docs/agile/kanban/` — not owned by this cycle, left unstaged.
+- 11 previously-untracked kanban card files in `docs/agile/kanban/` — now staged and included in this commit.
