@@ -2,11 +2,16 @@
   (:require [alpha.law.markdown.profile :as profile]
             [katamorph.schema.core :as schema]))
 
+(defn- frontmatter-data [document]
+  (if (contains? document :document/frontmatter/data)
+    (:document/frontmatter/data document)
+    (:document/frontmatter document)))
+
 (defn- facet-value [target document projected]
   (case target
     :artifact projected
     :document document
-    :frontmatter (:document/frontmatter document)))
+    :frontmatter (frontmatter-data document)))
 
 (defn validate-facets
   "Validate all profile facet assertions against caller-supplied schemas."
