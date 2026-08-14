@@ -1,0 +1,9 @@
+flowchart LR
+  Forms[String / keyword / UUID] --> Id[Alpha Id]
+  Integer[Katamorph PortableInteger] --> Id
+  Id --> Artifact[Artifact id]
+  Id --> Event[Event id]
+  Id --> Ref[Ref id / revision]
+  Unsafe[Integer outside safe range] -->|rejected| Finding[Structural finding]
+  Double[Noninteger / double number] -->|rejected| Finding
+  Id --> Runtime[Exact CLJ / CLJS identity]
