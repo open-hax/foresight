@@ -1,17 +1,29 @@
 (ns alpha.shape.mermaid-test
   (:require [alpha.shape.mermaid :as mermaid]
-            [clojure.test :refer [deftest is]]))
+            [clojure.java.io :as io]
+            [clojure.string :as str]
+            [clojure.test :refer [deftest is testing]]))
 
-(def files
-  ["alpha-eta-mu-pi.mmd"
-   "artifact-reactive-flow.mmd"
-   "epiphany-document-flow.mmd"
-   "markdown-profile-facets.mmd"])
+(defn- repo-root []
+  (let [cwd (io/file (System/getProperty "user.dir"))]
+    (if (= "alpha" (.getName cwd))
+      (.getParentFile cwd)
+      cwd)))
 
-(deftest canonical-diagrams-parse
-  (doseq [filename files]
-    (let [source (slurp (str "../docs/architecture/workflows/" filename))
-          result (mermaid/parse (keyword filename) source)]
-      (is (:ok result))
-      (is (seq (get-in result [:graph :graph/nodes])))
-      (is (seq (get-in result [:graph :graph/edges]))))))
+(defn- workflow-files []
+  (let [dir (io/file (repo-root) "docs" "architecture" "workflows")]
+    (->> (.listFiles dir)
+         (filter #(.isFile %))
+         (filter #(str/ends-with? (.getName %) ".mmd"))
+         (sort-by #(.getName %)))))
+
+(deftest every-canonical-diagram-is-readable-code
+  (let [files (workflow-files)]
+    (is (seq files))
+    (doseq [file files]
+      (testing (.getName file)
+        (let [result (mermaid/parse (keyword "workflow" (.getName file))
+                                    (slurp file))]
+          (is (:ok result))
+          (is (seq (get-in result [:graph :graph/nodes])))
+          (is (seq (get-in result [:graph :graph/edges]))))))))
