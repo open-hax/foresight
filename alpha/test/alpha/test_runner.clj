@@ -3,6 +3,7 @@
             [alpha.law.markdown-document-test]
             [alpha.law.markdown.facet-test]
             [alpha.law.markdown.profile-test]
+            [alpha.law.reaction-plan-test]
             [alpha.law.reaction-registry-binding-test]
             [alpha.law.reaction-registry-composition-test]
             [alpha.law.reaction-test]
@@ -15,6 +16,7 @@
                                'alpha.law.markdown.facet-test
                                'alpha.law.reaction-test
                                'alpha.law.reaction-registry-composition-test
-                               'alpha.law.reaction-registry-binding-test)]
+                               'alpha.law.reaction-registry-binding-test
+                               'alpha.law.reaction-plan-test)]
     (when (pos? (+ (:fail result) (:error result)))
       (throw (ex-info "Alpha tests failed" result)))))
