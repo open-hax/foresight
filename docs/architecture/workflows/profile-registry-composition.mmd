@@ -1,0 +1,6 @@
+flowchart LR
+  A[Profile registry A] --> C[Registry composition]
+  B[Profile registry B] --> C
+  C -->|unique ids| R[Composed registry]
+  C -->|duplicate id| F[Conflict finding]
+  R --> S[Profile selection]
