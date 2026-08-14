@@ -5,7 +5,7 @@
             [clojure.test :refer [deftest is]]))
 
 (def before
-  {:artifact/id :document/1
+  {:artifact/id :document/id-1
    :artifact/kind :document
    :artifact/status :draft})
 
@@ -25,4 +25,4 @@
          (change/derive before before)))
   (is (= :identity-mismatch
          (:reason (change/derive before
-                                 (assoc after :artifact/id :document/2))))))
+                                 (assoc after :artifact/id :document/id-2))))))
