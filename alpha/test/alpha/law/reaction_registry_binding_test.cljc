@@ -12,6 +12,14 @@
 (def subject
   {:artifact/id :doc/1 :artifact/kind :document :artifact/status :review})
 
+(def operations
+  {:evaluation/open-case {:contract/kind :action
+                          :contract/id :evaluation/open-case
+                          :action/category :evaluation}
+   :publication/reconcile {:contract/kind :action
+                           :contract/id :publication/reconcile
+                           :action/category :orchestration}})
+
 (def review
   {:reaction/id :review/open
    :reaction/on {:event/type :artifact/changed :artifact/kind :document}
@@ -30,9 +38,15 @@
    :reaction/on {:event/type :clock/tick}
    :reaction/do {:operation/id :operation/missing}})
 
+(deftest legacy-key-only-operation-maps-are-not-action-registries
+  (let [result (registry/select {:evaluation/open-case {}}
+                                {:review/open review}
+                                event subject)]
+    (is (false? (:ok result)))
+    (is (= :invalid-action-registry (:reason result)))))
+
 (deftest any-unresolved-operation-blocks-registry-use
-  (let [result (registry/select {:evaluation/open-case {}
-                                 :publication/reconcile {}}
+  (let [result (registry/select operations
                                 {:review/open review
                                  :clock/orphan orphan}
                                 event subject)]
@@ -40,8 +54,7 @@
     (is (= :operation/missing (-> result :errors first :operation/id)))))
 
 (deftest bound-selection-is-deterministically-ordered
-  (let [result (registry/select {:evaluation/open-case {}
-                                 :publication/reconcile {}}
+  (let [result (registry/select operations
                                 {:review/open review
                                  :publish/reconcile publish}
                                 event subject)]
