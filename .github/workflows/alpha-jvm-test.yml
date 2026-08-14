@@ -68,4 +68,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          clojure -M:test
+          clojure -M:test 2>&1 | tee "$RUNNER_TEMP/alpha-test.log"
+
+      - name: Upload failing Alpha test log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: alpha-jvm-test-${{ github.sha }}
+          path: ${{ runner.temp }}/alpha-test.log
+          if-no-files-found: error
+          retention-days: 7
