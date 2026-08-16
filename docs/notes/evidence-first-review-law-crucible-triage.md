@@ -10,10 +10,11 @@ labels: [foresight, mu, review, muse, eta-mu, knoxx, crucible, promotion-candida
 sources:
   - "https://github.com/octave-commons/muse/commit/f26538bd6c5ec3ef6084be9d2424d5b1daef648c"
   - "https://github.com/octave-commons/muse/commit/a9d31f3560c2b5a9c6157a6c981560450046e22e"
+  - "https://github.com/octave-commons/muse/commit/1105e6194ca45f9394ee32c09d41bbda9f0fc092"
   - "https://github.com/octave-commons/muse/commit/3510440a01bac8c8ecbe8d5b8d08eb4a5cd46cac"
   - "https://github.com/open-hax/eta-mu/commit/2cde056e6d0b97d2a5cb37d41b7901ffeacad76a"
-  - "https://github.com/open-hax/knoxx/pull/244"
-  - "https://github.com/open-hax/foresight/pull/28"
+  - "https://github.com/open-hax/knoxx/commit/af773f02bec120c28231d232b6a311762d0aec0d"
+  - "https://github.com/open-hax/foresight/commit/841d7e5ad36add0740ad1201921a2e516b80ddfb"
 ---
 
 # Signal
@@ -50,9 +51,9 @@ This is consistent with the existing center split: Muse projects host configurat
 
 ## Knoxx and Foresight are independent consumers
 
-Knoxx PR #244 merged a caller pinned to eta-mu `2cde056e` with explicit least-privilege review secrets.
+[Knoxx PR #244](https://github.com/open-hax/knoxx/pull/244) merged as `af773f02` with a caller pinned to eta-mu `2cde056e` and explicit least-privilege review secrets.
 
-Foresight PR #28 proposes the same pinned reusable workflow. This is important crucible evidence: the review protocol is no longer justified only by its implementation repository.
+[Foresight PR #28](https://github.com/open-hax/foresight/pull/28) remains open at evidence revision `841d7e5a` and proposes the same pinned reusable workflow. This is independent adoption evidence, but not yet evidence that Foresight has accepted or successfully exercised the protocol on `main`.
 
 ## Foresight main's submodule snapshot is older than the consumed review revisions
 
@@ -79,8 +80,8 @@ The current namespace name `eta-mu.domain.review` inside the Muse-hosted impleme
 
 # Counterevidence / limits
 
-- Only a small number of consuming repositories have exercised the workflow so far.
-- Foresight PR #28 is still open; Foresight has not accepted this review protocol as a workspace-wide law.
+- The cited consumer evidence covers two repositories: Knoxx PR #244 is merged, while Foresight PR #28 remains open at `841d7e5a`.
+- Foresight has not accepted this review protocol as a workspace-wide law.
 - The present pure state machine is specialized to pull-request review and unified-diff locations. Generalizing prematurely could erase useful constraints.
 - Muse and eta-mu are still actively fixing boundary failures, which means the shape is surviving fire but has not necessarily cooled into its final portable form.
 
