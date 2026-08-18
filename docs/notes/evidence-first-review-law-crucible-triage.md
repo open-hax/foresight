@@ -6,7 +6,7 @@ kind: note
 status: draft
 description: "Revision-scoped triage of the Muse/eta-mu/Knoxx/Foresight evidence-first review stack as a Foresight Mu-law lift candidate."
 created: "2026-08-15"
-labels: [foresight, mu, review, muse, eta-mu, knoxx, crucible, promotion-candidate]
+labels: [foresight, mu, review, muse, eta-mu, knoxx, services, crucible, promotion-candidate]
 sources:
   - "https://github.com/octave-commons/muse/commit/f26538bd6c5ec3ef6084be9d2424d5b1daef648c"
   - "https://github.com/octave-commons/muse/commit/a9d31f3560c2b5a9c6157a6c981560450046e22e"
@@ -17,8 +17,9 @@ sources:
   - "https://github.com/open-hax/eta-mu/commit/2b918cdab2ebd30e745bb8fa86d077d7a3af0030"
   - "https://github.com/open-hax/knoxx/commit/af773f02bec120c28231d232b6a311762d0aec0d"
   - "https://github.com/open-hax/knoxx/pull/245"
-  - "https://github.com/open-hax/foresight/commit/841d7e5ad36add0740ad1201921a2e516b80ddfb"
+  - "https://github.com/open-hax/foresight/pull/28"
   - "https://github.com/open-hax/foresight/pull/31"
+  - "https://github.com/open-hax/services/pull/48"
 ---
 
 # Signal
@@ -57,15 +58,15 @@ The Foresight rollout then exposed a distinct reproducibility gap: callers pinne
 
 This is consistent with the existing center split: Muse projects host configuration and review machinery; eta-mu coordinates reusable CLJS/runtime execution. The new evidence adds another boundary rule: orchestration provenance must include the executable dependency closure beneath the reusable entry point.
 
-## Knoxx and Foresight are independent consumers
+## Foresight, Knoxx, and services are independent consumers
 
-[Knoxx PR #244](https://github.com/open-hax/knoxx/pull/244) merged as `af773f02` with a caller pinned to eta-mu `2cde056e` and explicit least-privilege review secrets.
+[Knoxx PR #244](https://github.com/open-hax/knoxx/pull/244) merged as `af773f02` with a caller pinned to eta-mu `2cde056e` and explicit least-privilege review secrets. After eta-mu #292 landed, [Knoxx PR #245](https://github.com/open-hax/knoxx/pull/245) repinned that caller to the hardened provider merge `2b918cda` and merged without changing permissions, evidence gates, or secret forwarding.
 
-After eta-mu #292 landed, [Knoxx PR #245](https://github.com/open-hax/knoxx/pull/245) repinned that caller to the hardened provider merge `2b918cda` and merged without changing permissions, evidence gates, or secret forwarding.
+[Foresight PR #28](https://github.com/open-hax/foresight/pull/28) merged the same reusable review caller on August 17, 2026. [Foresight PR #31](https://github.com/open-hax/foresight/pull/31) then repinned it to eta-mu `2b918cda` after the crucible exposed the transitive mutable-action gap.
 
-[Foresight PR #28](https://github.com/open-hax/foresight/pull/28) remains open as the original caller adoption branch, but [Foresight PR #31](https://github.com/open-hax/foresight/pull/31) separately merged the provider repin to `2b918cda` for the active review workflow on `main`.
+[services PR #48](https://github.com/open-hax/services/pull/48) also merged on August 17 with the hardened provider revision, the same read-only caller permissions, the deterministic `diff_stat` evidence gate, and explicit least-privilege secret forwarding.
 
-The consumer evidence is therefore stronger than the earlier snapshot: Foresight and Knoxx both moved to the transitively pinned provider after the crucible exposed the gap.
+The consumer evidence is therefore stronger than the earlier snapshot: three independently owned repositories now consume the review boundary, and the Foresight/Knoxx/services rollout converged on the same hardened provider after the crucible exposed the gap.
 
 ## Foresight main's submodule snapshot is older than some consumed review revisions
 
@@ -105,4 +106,4 @@ Status: **Foresight lift candidate**.
 
 Do not copy the current implementation wholesale into `alpha/` or another portable package. First separate evaluation semantics from GitHub/diff-specific shape and identify which laws remain true for other Mu workflows such as translation review, publication review, research finding adjudication, or artifact acceptance.
 
-Treat revision closure as a separate process/law candidate: preserve the concrete #292/#245/#31 provenance and do not promote "all executable dependencies must be immutable" into policy until its intended trust boundary and exceptions are explicitly accepted.
+Treat revision closure as a separate process/law candidate: preserve the concrete #292/#245/#31/#48 provenance and do not promote "all executable dependencies must be immutable" into policy until its intended trust boundary and exceptions are explicitly accepted.
