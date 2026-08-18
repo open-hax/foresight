@@ -45,6 +45,29 @@ reported as unavailable rather than guessed.
 is baseline reporting rather than a duplication gate; broken tooling still
 returns a failure.
 
+## Project law
+
+`src/foresight/project.cljc` is the portable Lisp/EDN declaration of the
+Foresight constellation. It lists every direct repository and root-owned
+consolidation input, records ownership and actionability, and names invariants
+with the repository evidence from which each law was recovered.
+
+`src/foresight/law/project.cljc` validates the portable declaration. Runtime
+checkout facts such as symlink confinement and device/inode identity remain in
+the NBB workspace adapter; the pure project law validates identity, ownership,
+actionability, invariant references, and agreement with `.gitmodules`.
+
+```sh
+nbb scripts/project.clj repos
+nbb scripts/project.clj show
+nbb scripts/project.clj validate
+nbb test/project_test.cljs
+```
+
+`.gitmodules` remains Git's checkout manifest. The project declaration is the
+semantic inventory and contract: changing one without the other is visible
+drift, not an implicit change in ownership or authority.
+
 ## Board
 
 The root board uses canonical `openhax.kanban.edn`; `openhax.kanban.json` is a
