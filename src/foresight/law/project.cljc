@@ -159,13 +159,13 @@
                        "Declared project submodule is missing from .gitmodules"
                        (get expected-by-path %)
                        nil)
-           (sort (clojure.set/difference expected-paths actual-paths)))
+           (sort (remove actual-paths expected-paths)))
       (map #(law-error :foresight/gitmodule-source-declared
                        [:gitmodules %]
                        ".gitmodules contains an undeclared direct submodule"
                        nil
                        (get actual-by-path %))
-           (sort (clojure.set/difference actual-paths expected-paths)))
+           (sort (remove expected-paths actual-paths)))
       (keep
        (fn [path]
          (let [expected-source (get expected-by-path path)
