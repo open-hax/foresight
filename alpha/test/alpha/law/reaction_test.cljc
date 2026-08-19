@@ -10,11 +10,11 @@
 (def event
   {:event/id :event/review-requested
    :event/type :artifact/changed
-   :event/subject {:ref/type :artifact :ref/id :translation/42}
+   :event/subject {:ref/type :artifact :ref/id :translation/id-42}
    :event/data {:actor :agent/reviewer}})
 
 (def subject
-  {:artifact/id :translation/42
+  {:artifact/id :translation/id-42
    :artifact/kind :translation
    :artifact/status :review})
 
@@ -60,7 +60,7 @@
          (reaction/select operations
                           [matching-reaction]
                           event
-                          {:artifact/id :translation/42
+                          {:artifact/id :translation/id-42
                            :artifact/status :review})))))
 
 (deftest disabled-and-unregistered-reactions-fail-closed
