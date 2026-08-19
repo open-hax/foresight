@@ -13,6 +13,39 @@ Inventory them without following nested Git repositories, skills, symlinks, or
 package manifests. Their presence in inventory does not grant execution
 authority; compatibility originals may remain in their existing locations.
 
+## Repository map: where to look
+
+`src/foresight/project.cljc` (`sources`) is the source of truth for this
+table — every row's `:source/role` and repository. Consult it, not memory,
+when this table and the checkout disagree. Use this table to route a topic to
+a child repository before searching root-owned code; each submodule keeps its
+own `AGENTS.md`/`README.md` with the authoritative detail once you are there.
+
+| Path | Repository | Role | Look here for |
+| --- | --- | --- | --- |
+| `Truth` | octave-commons/Truth | simulation-research | ECS simulation substrate, pure domain systems/phases, single-writer components |
+| `bitch-tracker` | octave-commons/bitch-tracker | betterdiscord-plugin | BetterDiscord client plugin behavior |
+| `calliope` | octave-commons/calliope | corpus | Append-only ingestion truth, Receipt River accountability, corpus documents |
+| `epiphany` | octave-commons/epiphany | knowledge-archaeology | Observed→derived→provisional→accepted promotion, git-history-derived knowledge |
+| `eta-mu` | open-hax/eta-mu | agent-runtime-and-workflow | Kanban board (work source of truth), Rheos FSM board transitions, agent runtime |
+| `katamorph` | open-hax/katamorph | contract-language | Portable shape/contract declarations and cross-host translation |
+| `knoxx` | open-hax/knoxx | agent-product-runtime | CLJS-first agent product backend; raw JS interop confined to externs |
+| `muse` | octave-commons/muse | compatibility-compiler | Compiler/compatibility tooling — not canonical actor/session/policy semantics |
+| `opencode` | open-hax/opencode | coding-agent-host | Coding-agent hosting/integration (shallow submodule) |
+| `proxx` | open-hax/proxx | model-proxy | LLM/model proxying, EDN pricing policy; provider credentials stay local |
+| `services` | open-hax/services | deployment-orchestration | Deployment topology and environment schemas — never application source or secrets |
+| `uxx` | open-hax/uxx | ui-kit | Canonical React components; Reagent/Helix are parity wrappers, shared design tokens |
+| `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
+| `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
+| `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |
+
+When a new direct repository is added, update `.gitmodules`,
+`src/foresight/project.cljc` (`sources`, plus any new invariants), and this
+table together — `nbb scripts/project.clj validate` and the
+`:foresight/gitmodules-match-project` invariant enforce that the three stay
+in agreement. A row here with no matching source is drift, not a new grant of
+authority.
+
 ## Divine mandate: purify before you port
 
 Foresight is consolidating surviving systems by extracting their durable
