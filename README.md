@@ -11,6 +11,10 @@ root-owned Clojure agent harness. Their working originals may remain elsewhere
 while this repository converges on a higher-quality source. Compatibility
 copies are not removed implicitly.
 
+See [`AGENTS.md`](AGENTS.md#repository-map-where-to-look) for the repository
+map: what each child submodule owns and where to look for a given topic
+before searching root-owned code.
+
 ## Setup
 
 ```sh
