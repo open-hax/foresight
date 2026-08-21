@@ -3,14 +3,16 @@ flowchart TD
   OtherArtifact["Media / code / EDN / diagram / other artifact"]
   External["GitHub / clock / tool / person / external event"]
 
-  Adapter["Adapter parses source into Clojure data"]
+  Adapter["Adapter preserves source as Clojure data"]
   Alpha["α Alpha validates asserted contracts"]
   Artifact["Validated Artifact + typed Relations"]
-  Event["Normalized Event"]
+  Draft["EventDraft without runtime identity or time"]
+  Materialize["Runtime / Clio materializes Event"]
+  Event["Durable Event"]
   Clio["Clio append-only facts / causal history"]
-  Match["Rheos matches declarative Reaction"]
-  Condition{"Condition holds?"}
-  Invoke["Invoke typed Operation / Workflow"]
+  Select["Alpha selects declarative Reactions"]
+  Condition{"Katamorph Condition holds?"}
+  Invoke["Typed Operation / Workflow"]
   Outcome["Artifacts + contributions + receipts"]
   Projection["Π projections / views / products"]
   Finding["Structural finding; no silent pass"]
@@ -21,13 +23,15 @@ flowchart TD
   Alpha -->|valid| Artifact
   Alpha -->|invalid| Finding
 
-  Artifact --> Event
+  Artifact --> Draft
+  Draft --> Materialize --> Event
   External --> Event
   Event --> Clio
-  Event --> Match --> Condition
+  Artifact --> Select
+  Event --> Select --> Condition
   Condition -->|no| Clio
   Condition -->|yes| Invoke
   Invoke --> Outcome
   Outcome --> Clio
   Outcome --> Projection
-  Outcome --> Event
+  Outcome --> Draft
