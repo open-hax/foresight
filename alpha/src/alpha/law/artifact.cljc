@@ -7,6 +7,10 @@
 (def Id [:or :uuid :keyword :string :int])
 (def EpistemicTier [:enum :observed :derived :provisional :accepted])
 
+(def PortableData condition-schema/PortableValue)
+(def PortableMap
+  [:map-of [:or keyword? string?] PortableData])
+
 (def Ref
   [:map {:closed false}
    [:ref/type :keyword]
@@ -31,7 +35,7 @@
 (def LegacyMarkdownDocument
   [:map {:closed false}
    [:document/path :string]
-   [:document/frontmatter :map]
+   [:document/frontmatter PortableMap]
    [:document/body :string]
    [:document/structure {:optional true} [:vector :any]]])
 
@@ -41,7 +45,7 @@
    [:document/source-path {:optional true} :string]
    [:document/frontmatter-present? :boolean]
    [:document/frontmatter/raw [:maybe :string]]
-   [:document/frontmatter/data :map]
+   [:document/frontmatter/data PortableMap]
    [:document/body :string]
    [:document/structure {:optional true} [:vector :any]]])
 
@@ -61,7 +65,7 @@
    [:artifact/form {:optional true} :keyword]
    [:artifact/status {:optional true} :keyword]
    [:artifact/epistemic-tier {:optional true} EpistemicTier]
-   [:artifact/data {:optional true} :map]
+   [:artifact/data {:optional true} PortableMap]
    [:artifact/source {:optional true} Ref]
    [:artifact/relations {:optional true} [:vector Relation]]])
 
@@ -74,18 +78,14 @@
    [:event/at {:optional true} :string]
    [:event/source {:optional true} Ref]
    [:event/subject {:optional true} Ref]
-   [:event/data {:optional true} :map]
+   [:event/data {:optional true} PortableMap]
    [:event/causes {:optional true} [:vector Ref]]])
-
-(def PortableData condition-schema/PortableValue)
 
 (def OperationRef
   [:map {:closed true}
    [:operation/id Id]
-   [:operation/with {:optional true}
-    [:map-of [:or keyword? string?] PortableData]]
-   [:operation/in {:optional true}
-    [:map-of [:or keyword? string?] PortableData]]])
+   [:operation/with {:optional true} PortableMap]
+   [:operation/in {:optional true} PortableMap]])
 
 (def ReactionTrigger
   [:map {:closed false}
@@ -111,6 +111,7 @@
    :alpha/condition Condition
    :alpha/event Event
    :alpha/portable-data PortableData
+   :alpha/portable-map PortableMap
    :alpha/operation-ref OperationRef
    :alpha/reaction Reaction})
 
