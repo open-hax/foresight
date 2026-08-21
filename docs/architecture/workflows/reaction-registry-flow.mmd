@@ -1,0 +1,8 @@
+flowchart LR
+  A[Reaction registry A] --> C[Fail closed composition]
+  B[Reaction registry B] --> C
+  C --> R[Composed reaction registry]
+  O[Operation registry] --> Bind[Operation binding]
+  R --> Bind
+  Bind -->|bound| S[Deterministic reaction selection]
+  Bind -->|missing operation| F[Structural finding]
