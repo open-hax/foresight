@@ -15,11 +15,20 @@ authority; compatibility originals may remain in their existing locations.
 
 ## Repository map: where to look
 
-`src/foresight/project.cljc` (`sources`) is the source of truth for this
-table — every row's `:source/role` and repository. Consult it, not memory,
-when this table and the checkout disagree. Use this table to route a topic to
-a child repository before searching root-owned code; each submodule keeps its
-own `AGENTS.md`/`README.md` with the authoritative detail once you are there.
+`src/foresight/project.cljc` (`sources`) is the source of truth for the current
+declared inventory metadata behind this table: source identity, path,
+repository, and recorded `:source/role`. It is **not** by itself promotion or
+ownership authority for common Foresight law. Repository roles and the "Look
+here for" column are routing hints for where to inspect evidence first, not a
+grant that the child owns every similarly named concept across the constellation.
+
+When this table and the checkout disagree, treat that as project-model drift.
+When a routing hint and a child repository's own `AGENTS.md`, `README.md`,
+architecture records, or current code disagree, the child evidence controls the
+local fact and the Foresight declaration should be reconciled explicitly.
+Cross-repository promotion remains subject to the distinction recorded in the
+merged [project-law promotion-status triage](https://github.com/open-hax/foresight/blob/main/docs/notes/project-law-promotion-status-triage.md): recovered claims, lift
+candidates, and accepted lifts are not interchangeable.
 
 | Path | Repository | Role | Look here for |
 | --- | --- | --- | --- |
