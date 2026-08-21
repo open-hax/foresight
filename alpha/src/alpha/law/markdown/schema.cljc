@@ -1,9 +1,10 @@
 (ns alpha.law.markdown.schema
   (:require [alpha.law.artifact :as artifact]
+            [katamorph.schema.condition :as condition]
             [katamorph.schema.core :as schema]))
 
 (def FrontmatterPath
-  [:vector artifact/PathSegment])
+  [:vector condition/PathSegment])
 
 (def FacetTarget
   [:enum :artifact :document :frontmatter])
