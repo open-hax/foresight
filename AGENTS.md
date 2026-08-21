@@ -44,6 +44,7 @@ candidates, and accepted lifts are not interchangeable.
 | `proxx` | open-hax/proxx | model-proxy | LLM/model proxying, EDN pricing policy; provider credentials stay local |
 | `services` | open-hax/services | deployment-orchestration | Deployment topology and environment schemas — never application source or secrets |
 | `uxx` | open-hax/uxx | ui-kit | Canonical React components; Reagent/Helix are parity wrappers, shared design tokens |
+| `website` | open-hax/website | published-website | The public OpenHax site: per-locale copy dictionaries, static per-locale builds, published artifact |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
 | `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |

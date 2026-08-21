@@ -298,7 +298,32 @@
     :invariant/statement "Model-pricing overrides are EDN policy contracts, not one-off JSON blobs or hard-coded TypeScript tables."
     :invariant/basis [{:basis/repository "open-hax/proxx"
                        :basis/path "README.md"
-                       :basis/revision "abbbc8b1ad80738233593e17e751203db785c9e2"}]}])
+                       :basis/revision "abbbc8b1ad80738233593e17e751203db785c9e2"}]}
+   {:invariant/id :website/copy-resolves-from-locale-dictionaries
+    :invariant/scope :website
+    :invariant/enforcement :declarative
+    :invariant/statement "User-visible website copy resolves from portable per-locale .cljc dictionaries keyed by a single message-key set; view namespaces never embed translatable literals."
+    :invariant/basis [{:basis/repository "open-hax/website"
+                       :basis/path "AGENTS.md"}
+                      {:basis/repository "open-hax/foresight"
+                       :basis/path "AGENTS.md"
+                       :basis/symbol "Divine mandate: purify before you port"}]}
+   {:invariant/id :website/published-artifact-is-static
+    :invariant/scope :website
+    :invariant/enforcement :declarative
+    :invariant/statement "The published website is a static build artifact: it holds no secrets, carries no runtime application authority, and needs no application backend to serve a locale."
+    :invariant/basis [{:basis/repository "open-hax/website"
+                       :basis/path "AGENTS.md"}
+                      {:basis/repository "open-hax/services"
+                       :basis/path "digitalocean/services/website/README.md"}]}
+   {:invariant/id :website/translations-are-reviewed-upstream
+    :invariant/scope :website
+    :invariant/enforcement :declarative
+    :invariant/statement "Translated copy enters the website as reviewed data exported from the Knoxx translation pipeline; the build never machine-translates and the site never fetches copy at runtime."
+    :invariant/basis [{:basis/repository "open-hax/website"
+                       :basis/path "AGENTS.md"}
+                      {:basis/repository "open-hax/knoxx"
+                       :basis/path "kanban/epics/knowledge-ops-translation-review-epic.md"}]}])
 
 (def sources
   [{:source/id :agents
@@ -442,6 +467,18 @@
     :source/role :ui-kit
     :source/actionable? true
     :source/invariants [:uxx/react-canonical-bindings-wrap]}
+   {:source/id :website
+    :source/name "website"
+    :source/path "website"
+    :source/type :git-submodule
+    :source/repository "open-hax/website"
+    :source/url "git@github.com:open-hax/website.git"
+    :source/ownership :independent-repository
+    :source/role :published-website
+    :source/actionable? true
+    :source/invariants [:website/copy-resolves-from-locale-dictionaries
+                        :website/published-artifact-is-static
+                        :website/translations-are-reviewed-upstream]}
    {:source/id :eta
     :source/name "eta"
     :source/path "eta"

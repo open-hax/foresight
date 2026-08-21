@@ -38,3 +38,6 @@
 [submodule ".agents"]
 	path = .agents
 	url = git@github.com:riatzukiza/.agents.git
+[submodule "website"]
+	path = website
+	url = git@github.com:open-hax/website.git
