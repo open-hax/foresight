@@ -1,6 +1,7 @@
 (ns alpha.law.artifact
   "Portable laws for things that can participate in Foresight workflows."
-  (:require [katamorph.schema.condition :as condition-schema]
+  (:require [katamorph.action.invocation :as invocation]
+            [katamorph.schema.condition :as condition-schema]
             [malli.core :as m]
             [malli.error :as me]))
 
@@ -79,13 +80,7 @@
 
 (def PortableData condition-schema/PortableValue)
 
-(def OperationRef
-  [:map {:closed true}
-   [:operation/id Id]
-   [:operation/with {:optional true}
-    [:map-of [:or keyword? string?] PortableData]]
-   [:operation/in {:optional true}
-    [:map-of [:or keyword? string?] PortableData]]])
+(def OperationRef invocation/InvocationRequest)
 
 (def ReactionTrigger
   [:map {:closed false}
