@@ -26,8 +26,8 @@ When this table and the checkout disagree, treat that as project-model drift.
 When a routing hint and a child repository's own `AGENTS.md`, `README.md`,
 architecture records, or current code disagree, the child evidence controls the
 local fact and the Foresight declaration should be reconciled explicitly.
-Cross-repository promotion remains subject to the distinction recorded in
-`docs/notes/project-law-promotion-status-triage.md`: recovered claims, lift
+Cross-repository promotion remains subject to the distinction recorded in the
+merged [project-law promotion-status triage](https://github.com/open-hax/foresight/blob/main/docs/notes/project-law-promotion-status-triage.md): recovered claims, lift
 candidates, and accepted lifts are not interchangeable.
 
 | Path | Repository | Role | Look here for |
