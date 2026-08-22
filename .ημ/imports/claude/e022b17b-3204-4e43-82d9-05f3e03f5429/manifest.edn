@@ -1,0 +1,76 @@
+{:ημ/kind :ultra/claude-import-manifest
+ :imported-at "2026-08-21T00:00:00Z"
+ :session/id "e022b17b-3204-4e43-82d9-05f3e03f5429"
+ :session/host :claude-code
+ :session/cwd "/home/err/spaces/foresight"
+
+ ;; Source artifacts, sha256-pinned. These are the evidence of original intent;
+ ;; the EDN projections under :translations are the executable form.
+ :sources
+ [{:kind :transcript
+   :path "/home/err/.claude/projects/-home-err-spaces-foresight/e022b17b-3204-4e43-82d9-05f3e03f5429.jsonl"
+   :sha256 "7a952b606bb644502d186ac70783891c4d30a674154ca2a3bad199a090ea857e"
+   :bytes 2213258}
+
+  {:kind :workflow/run-state
+   :workflow/id :wf_d25fa11b-36d
+   :workflow/name "website-publish-translate-recon"
+   :path "/home/err/.claude/projects/-home-err-spaces-foresight/e022b17b-3204-4e43-82d9-05f3e03f5429/workflows/wf_d25fa11b-36d.json"
+   :sha256 "81160dbb4f4b797c3aa8cb6834624940a0b3d22b5dfc0721cccd1f217a07a4c2"
+   :status :completed
+   :agents {:total 4 :done 4 :error 0}}
+
+  {:kind :workflow/script
+   :workflow/id :wf_d25fa11b-36d
+   :path "/home/err/.claude/projects/-home-err-spaces-foresight/e022b17b-3204-4e43-82d9-05f3e03f5429/workflows/scripts/website-publish-translate-recon-wf_d25fa11b-36d.js"
+   :sha256 "ac676d08d21ed0a01dc07cf863dd4e94e13536e03839c7430b8d61b43c40ea8a"}
+
+  {:kind :workflow/journal
+   :workflow/id :wf_d25fa11b-36d
+   :path "/home/err/.claude/projects/-home-err-spaces-foresight/e022b17b-3204-4e43-82d9-05f3e03f5429/subagents/workflows/wf_d25fa11b-36d/journal.jsonl"
+   :sha256 "d6b58a48a6e60b9ada41b8db77efb4e4a9c856842b166633bba207a691f2662f"
+   :events {:started 4 :result 4 :error 0}}
+
+  {:kind :workflow/run-state
+   :workflow/id :wf_4fb70869-405
+   :workflow/name "translated-publication-implementation"
+   :path "/home/err/.claude/projects/-home-err-spaces-foresight/e022b17b-3204-4e43-82d9-05f3e03f5429/workflows/wf_4fb70869-405.json"
+   :sha256 "96ad7a0fd4da4e64a0b55ce4ec9122ccdd9c43e0889f585911a0a77c1615b988"
+   :status :completed ;; Claude-side status; semantically incomplete (one job errored)
+   :agents {:total 6 :done 5 :error 1}
+   :error/detail {:agent "verify:website"
+                  :cause "org monthly spend limit"
+                  :agentId "a85eccf3b040b21bc"}}
+
+  {:kind :workflow/script
+   :workflow/id :wf_4fb70869-405
+   :path "/home/err/.claude/projects/-home-err-spaces-foresight-knoxx/e022b17b-3204-4e43-82d9-05f3e03f5429/workflows/scripts/translated-publication-implementation-wf_4fb70869-405.js"
+   :sha256 "e3247184f60259c918a5d689ddbe1a61abd176319940877001e9aec5c0d6a8ba"
+   :note "script stored under the -knoxx project tree; run state under the foresight tree"}
+
+  {:kind :workflow/journal
+   :workflow/id :wf_4fb70869-405
+   :path "/home/err/.claude/projects/-home-err-spaces-foresight/e022b17b-3204-4e43-82d9-05f3e03f5429/subagents/workflows/wf_4fb70869-405/journal.jsonl"
+   :sha256 "86c554ec7d725e9299a990fa9e76219e015fe8c3d72fe1a93527c12ddef05c2d"
+   :events {:started 6 :result 5 :error 0}
+   :note "one 'started' has no matching result: v2:2b76192d83e06284a836d8e9e2334823a0951ca646ad20b38c292e850de38d82 (verify:website)"}]
+
+ ;; Translation table from Claude artifacts into ημ artifacts.
+ ;; Resume is semantic: re-dispatch un-cached jobs, never attach Claude's runtime.
+ :translations
+ [{:source/run :wf_d25fa11b-36d
+   :ημ/projection nil
+   :reason "all 4 recon jobs completed and journaled; nothing to resume. The run-state JSON above is the durable record."}
+
+  {:source/run :wf_4fb70869-405
+   :ημ/projection ".ημ/workflows/verify-website-resume.edn"
+   :reason "5/6 jobs completed; only verify:website has no journal result. Projection contains exactly that one job, seeded with the impl:website report extracted from the Claude run-state."
+   :jobs/cached ["impl:website" "impl:services" "impl:knoxx" "verify:knoxx" "verify:services"]
+   :jobs/resumed ["verify:website"]}]
+
+ ;; What we explicitly did NOT do.
+ :non-claims
+ ["No attempt to attach Claude Code's runtime, tool loop, or spend limit."
+  "The 5 completed implementation/verification jobs are not re-executed; their results are taken from the Claude run-state as evidence, not re-derived."
+  "The recon workflow is not projected into EDN; projecting it would be a no-op since every job is cached."
+  "The verifier agent is the ημ ultra-reviewer constitution (read-only), not Claude's ad-hoc verifier persona; the prompt text is preserved verbatim from the Claude script's verify template."]}

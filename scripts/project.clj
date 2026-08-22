@@ -1,5 +1,5 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
-(ns foresight-project
+(ns project
   (:require [foresight.law.project :as law]
             [foresight.project :as project]
             [nbb.core :as nbb]

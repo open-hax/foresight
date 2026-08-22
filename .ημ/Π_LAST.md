@@ -1,17 +1,14 @@
 # Fork Tax Handoff
 
-**Timestamp:** 2026-08-14T00:40:52Z
-**Branch:** `chore/conversation-notes`
-**Implementation head:** `ab1dd0b1c6b111c4a015bc1b1f794f10c3e19bec`
+**Timestamp:** 2026-08-22T12:08:25Z
+**Branch:** `feat/website-publish-and-translate`
+**Implementation head:** `433492546c20975ae79d58deebdfd09dbab10868`
 
 ## Signal
 
-- Staged 11 kanban cards documenting architecture work-items:
-  - Artifact/Event/Reaction kernel proof (Alpha)
-  - Eta-mu turn processor purification (Eta)
-  - Artifact/Event/Reaction kernel proof on three unlike documents
-  - Mu evaluation contract separation
-  - Other architecture/consolidation cards
+- Fixed workspace test: bumped declared source count from 14 to 15 (website registered in prior commit `4334925`)
+- Fixed clj-kondo lint error: renamed `foresight-project` namespace to `project` in `scripts/project.clj` to match filename convention
+- Updated Π state handoff artifacts for current branch/head
 
 ## Verification
 
@@ -20,8 +17,10 @@
 
 ## Submodule Truth
 
-12 submodules recorded. eta-mu and katamorph have local pointer changes (noted but not updated in this cycle — kanban work only).
+14 submodules recorded. knoxx, services, website have local pointer changes (noted but not updated in this cycle — root fixes only).
 
 ## Absorbed Concurrent Dirt
 
-- 11 previously-untracked kanban card files in `docs/agile/kanban/` — now staged and included in this commit.
+- `scripts/project.clj` namespace rename (clj-kondo compliance)
+- `test/workspace_test.cljs` count assertion bump (14 → 15)
+- `.ημ/` runtime artifacts (imports, runs, workflows) staged

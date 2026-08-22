@@ -1,0 +1,10 @@
+{:workflow/id :verify-website-resume,
+ :ημ/kind :ultra/run-result,
+ :finished-at "2026-08-22T01:00:09.630837143Z",
+ :raw-findings 1,
+ :confirmed [],
+ :all
+ [{:job
+   {:item
+    {:key "website", :repo-path "/home/err/spaces/foresight/website"}},
+   :result nil}]}
