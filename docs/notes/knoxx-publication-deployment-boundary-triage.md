@@ -1,6 +1,6 @@
 ---
 title: "Knoxx publication and deployment boundary triage"
-summary: "Records the current split between Knoxx-owned publication semantics and services-owned production deployment, including the still-active legacy Knoxx deploy trigger that targets the old Promethean host path."
+summary: "Records the current split between Knoxx-owned publication semantics and services-owned production deployment, then records the operator adjudication that the DigitalOcean stack is the only forward production path."
 category: "architecture"
 created: "2026-08-22"
 status: "triage"
@@ -33,19 +33,19 @@ This note is revision-scoped synthesis. It records current implementation and de
 
 4. The deployment split was explicitly noticed in merged `open-hax/knoxx#247`: its PR evidence states that the Knoxx push-triggered production workflow targets the legacy Promethean path while the public Knoxx host is served from the DigitalOcean stack.
 
-## Interpretation
+## Interpretation at observation time
 
-The publication domain boundary is becoming clearer while the deployment authority boundary remains duplicated.
+The publication domain boundary was becoming clearer while the deployment authority boundary remained duplicated.
 
-Current evidence supports:
+The evidence supported:
 
 - Knoxx owns publication intent, artifact, locale, reconciliation, receipt, and target-selection semantics that live inside the application boundary.
 - Services owns production host composition, image deployment, ordering, ingress, and post-deploy verification for the DigitalOcean stack.
-- Knoxx's direct production workflow is therefore not evidence of a second accepted deployment owner; it is an unresolved operational path that can independently act on merges.
+- Knoxx's direct production workflow was therefore not evidence of a second accepted deployment owner; it was an unresolved operational path that could independently act on merges.
 
-## Contradiction
+## Contradiction observed before adjudication
 
-Two executable production paths currently exist for Knoxx:
+Two executable production paths existed for Knoxx:
 
 ```text
 Knoxx main push
@@ -60,7 +60,24 @@ Services production stack
   -> DigitalOcean Knoxx service + Caddy
 ```
 
-This is actionable drift because application merges can trigger a deployment path that is not the stack contract currently used to serve Knoxx.
+This was actionable drift because application merges could trigger a deployment path that was not the stack contract currently used to serve Knoxx.
+
+## Operator adjudication — 2026-08-22
+
+The operator explicitly resolved the deployment-authority ambiguity:
+
+> Only the DigitalOcean path is moving forward.
+
+This is an accepted ownership/direction decision for the deployment seam, not an inference from merge status or implementation shape.
+
+Consequences for current triage:
+
+- `open-hax/services` DigitalOcean stack deployment is the accepted forward production path for Knoxx.
+- `open-hax/knoxx/.github/workflows/deploy-production.yml` and the `services/deploy-promethean.yml` Knoxx path are legacy operational surfaces unless they are retained only as bounded migration/compatibility machinery.
+- Future synthesis should not describe the two paths as unresolved peers.
+- Remaining work is migration/retirement verification: identify any still-required behavior on the legacy path, move it into the DigitalOcean path where necessary, then disable/remove the legacy trigger without losing required deploy evidence or recovery behavior.
+
+The earlier observation and interpretation remain above as historical provenance showing what was known before operator adjudication.
 
 ## Foresight lift candidates
 
@@ -78,9 +95,10 @@ This note does **not**:
 
 - make Knoxx's static-site manifest format a common Foresight contract;
 - make the current filesystem locking/idempotency mechanism portable law;
-- declare which deployment workflow should be deleted or retained;
-- infer service or deployment ownership from merge status alone;
+- infer broader service or deployment ownership from merge status alone;
 - change the accepted Clio/event-ledger ownership decision.
+
+The DigitalOcean-only forward deployment direction is recorded because it was explicitly accepted by the operator.
 
 ## Sources
 
@@ -96,4 +114,4 @@ This note does **not**:
 
 ## Next evidence pass
 
-Resolve which production deployment entry point is authoritative for Knoxx, then either retire or deliberately constrain the other path. After that, compare Knoxx's newly merged publication target/artifact laws with other survivor repositories before considering a Foresight lift.
+Trace behavior unique to the legacy Promethean deployment path, if any. Classify each dependency as required migration behavior, compatibility-only behavior, or obsolete machinery; then prepare the smallest reversible change that leaves the DigitalOcean stack as the sole active production deployment path.
