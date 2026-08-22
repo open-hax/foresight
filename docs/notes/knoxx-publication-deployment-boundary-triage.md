@@ -1,6 +1,6 @@
 ---
 title: "Knoxx publication and deployment boundary triage"
-summary: "Records the current split between Knoxx-owned publication semantics and services-owned production deployment, then records the operator adjudication that the DigitalOcean stack is the only forward production path."
+summary: "Records the current split between Knoxx-owned publication semantics and services-owned production deployment, then records the operator adjudication that the DigitalOcean stack is the only forward production path and classifies the remaining legacy Promethean behavior for retirement."
 category: "architecture"
 created: "2026-08-22"
 status: "triage"
@@ -21,12 +21,12 @@ This note is revision-scoped synthesis. It records current implementation and de
    - `open-hax/knoxx#251` merged publication target declarations as portable law data, with runtime adapter factories remaining in infra.
    - `open-hax/knoxx#252` merged a static-site publication target whose manifest contract is `.cljc` while filesystem locking, rename, and idempotency-store mechanics remain runtime-specific.
 
-2. `open-hax/services` still owns the current DigitalOcean production stack contract.
+2. `open-hax/services` owns the current DigitalOcean production stack contract.
    - `.github/workflows/deploy-stack-chain.yml` builds and deploys `proxx -> knoxx -> caddy` through `deploy-digitalocean.yml`.
    - Its Knoxx step explicitly treats hosted OpenPlanner REST as absent from the stack, retaining only the Gardens sentinel dependency.
    - `services/ROADMAP.md` describes the repository slice as host contract, image build, deploy order, and health gates rather than application behavior.
 
-3. Knoxx also still ships `.github/workflows/deploy-production.yml` on `main`.
+3. Knoxx still ships `.github/workflows/deploy-production.yml` on `main`.
    - A push to Knoxx `main` runs application preflight and then calls `open-hax/services/.github/workflows/deploy-promethean.yml@main` with `service: knoxx` and `environment: production`.
    - In the current services workflow, the Knoxx deployment step resolves `PROMETHEAN_SSH_HOST` from the repository/environment variable or falls back to `proxx.promethean.rest`.
    - This is a different production mechanism from the DigitalOcean image/stack chain.
@@ -73,11 +73,42 @@ This is an accepted ownership/direction decision for the deployment seam, not an
 Consequences for current triage:
 
 - `open-hax/services` DigitalOcean stack deployment is the accepted forward production path for Knoxx.
-- `open-hax/knoxx/.github/workflows/deploy-production.yml` and the `services/deploy-promethean.yml` Knoxx path are legacy operational surfaces unless they are retained only as bounded migration/compatibility machinery.
+- `open-hax/knoxx/.github/workflows/deploy-production.yml` and the `services/deploy-promethean.yml` Knoxx path are legacy operational surfaces unless retained only as bounded migration/compatibility machinery.
 - Future synthesis should not describe the two paths as unresolved peers.
 - Remaining work is migration/retirement verification: identify any still-required behavior on the legacy path, move it into the DigitalOcean path where necessary, then disable/remove the legacy trigger without losing required deploy evidence or recovery behavior.
 
 The earlier observation and interpretation remain above as historical provenance showing what was known before operator adjudication.
+
+## Legacy behavior trace — 2026-08-22
+
+The Promethean Knoxx deploy path was compared directly with the current DigitalOcean service and stack contracts.
+
+### Behavior already superseded by the DigitalOcean path
+
+- **Source transfer and host-side builds.** The legacy script rsyncs the Knoxx source tree to the host, installs backend dependencies there, runs `shadow-cljs compile server`, and builds containers on the host. DigitalOcean instead builds revision-bound images in CI and deploys explicit GHCR image references. The legacy behavior is not a migration requirement.
+- **Services-owned contract delivery.** Both paths ship the services-owned Knoxx contract tree read-only. The DigitalOcean deploy additionally tracks contract changes as service-definition changes so the container is recreated when a contract is added, changed, or withdrawn. No legacy-only behavior needs preservation here.
+- **Sandbox Docker capability.** The legacy path mounts `/var/run/docker.sock` into Knoxx, granting host-equivalent Docker authority. DigitalOcean replaces it with a project-private rootless nested Docker daemon and deliberately withholds the host socket. The legacy mechanism is obsolete rather than a capability to migrate.
+- **SSH trust.** The legacy workflow uses `StrictHostKeyChecking accept-new` plus `ssh-keyscan`; DigitalOcean requires a committed pinned host key and `StrictHostKeyChecking yes`. The legacy behavior is weaker and should not be preserved.
+- **Runtime credentials.** The legacy script reads the running Proxx container to recover `PROXY_AUTH_TOKEN`, mutates an OpenPlanner-owned environment file, and creates a Knoxx API key if none exists. DigitalOcean renders a declared service environment from provisioned secrets/variables and refuses blank required credentials. Dynamic credential invention and cross-service env mutation are obsolete mechanisms, not migration requirements.
+- **OpenPlanner host coupling.** The legacy Knoxx compose override is driven from the OpenPlanner service directory and its env file. DigitalOcean models Knoxx directly and explicitly treats OpenPlanner REST as absent except for the known Gardens compatibility seam. The legacy coupling is migration archaeology.
+- **Production health.** The legacy script waits only for the backend container health check. DigitalOcean composes Proxx before Knoxx, deploys backend/frontend/devtools together, preserves the service contract and runtime/state roots, and runs a service-owned post-deploy verification gate. The forward path already has the stronger production verification surface.
+
+### Legacy-only capability that is not a forward production requirement
+
+The legacy reusable workflow also supports a distinct `staging` environment and host layout. That capability is real implementation evidence, but the operator decision here is specifically that only the DigitalOcean path moves forward. If a staging environment is still desired, it should be expressed as a DigitalOcean host/environment contract rather than keeping the Promethean deployment mechanism alive.
+
+### Retirement classification
+
+No unique **production** behavior was found that requires preserving the legacy Knoxx Promethean deploy path as an active executable route.
+
+The remaining surfaces classify as:
+
+- `knoxx/.github/workflows/deploy-production.yml` — **obsolete active trigger**; retirement candidate because every main push can still invoke the rejected production path.
+- `services/.github/workflows/deploy-promethean.yml` Knoxx branch — **compatibility/legacy implementation**; retain only if another evidenced caller still requires it during migration, otherwise remove or narrow it separately.
+- `services/promethean/scripts/deploy-knoxx.sh` — **legacy implementation evidence**; contains no forward production capability that should be copied as-is into DigitalOcean.
+- Promethean staging support — **unmigrated environment capability**, not justification for retaining the legacy production path.
+
+This classification is about the Knoxx deployment seam only; it does not establish that every other service branch in `deploy-promethean.yml` is unused.
 
 ## Foresight lift candidates
 
@@ -85,7 +116,8 @@ The following are candidates for further comparison, not accepted lifts:
 
 - semantic target declarations should remain portable data while runtime adapter construction stays at the effect boundary;
 - publication artifacts should be validated at the effect boundary before a target can materialize them;
-- desired state and deployment/runtime ownership should remain separately modeled, so an application-owned semantic target does not imply ownership of the production host lifecycle.
+- desired state and deployment/runtime ownership should remain separately modeled, so an application-owned semantic target does not imply ownership of the production host lifecycle;
+- environment capability should be modeled independently from a particular deployment mechanism, so retiring a deployment implementation does not silently erase the concept of staging/review/production environments.
 
 Independent evidence from other surviving repositories is still required before generalizing these as common Foresight law.
 
@@ -96,6 +128,7 @@ This note does **not**:
 - make Knoxx's static-site manifest format a common Foresight contract;
 - make the current filesystem locking/idempotency mechanism portable law;
 - infer broader service or deployment ownership from merge status alone;
+- claim every non-Knoxx branch of `deploy-promethean.yml` is obsolete;
 - change the accepted Clio/event-ledger ownership decision.
 
 The DigitalOcean-only forward deployment direction is recorded because it was explicitly accepted by the operator.
@@ -109,9 +142,12 @@ The DigitalOcean-only forward deployment direction is recorded because it was ex
 - https://github.com/open-hax/knoxx/pull/252
 - https://github.com/open-hax/knoxx/blob/main/.github/workflows/deploy-production.yml
 - https://github.com/open-hax/services/blob/main/.github/workflows/deploy-promethean.yml
+- https://github.com/open-hax/services/blob/main/promethean/scripts/deploy-knoxx.sh
 - https://github.com/open-hax/services/blob/main/.github/workflows/deploy-stack-chain.yml
+- https://github.com/open-hax/services/blob/main/.github/workflows/deploy-digitalocean.yml
+- https://github.com/open-hax/services/blob/main/digitalocean/services/knoxx/compose.yaml
 - https://github.com/open-hax/services/blob/main/ROADMAP.md
 
 ## Next evidence pass
 
-Trace behavior unique to the legacy Promethean deployment path, if any. Classify each dependency as required migration behavior, compatibility-only behavior, or obsolete machinery; then prepare the smallest reversible change that leaves the DigitalOcean stack as the sole active production deployment path.
+Prepare the smallest reversible retirement change that prevents Knoxx `main` from invoking the legacy Promethean production deployment. Keep the broader `deploy-promethean.yml` cleanup separate until its other service callers are inventoried.
