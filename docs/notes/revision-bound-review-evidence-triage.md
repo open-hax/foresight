@@ -1,6 +1,6 @@
 ---
 title: "Revision-bound review evidence triage"
-summary: "Records Knoxx's open translation dispatch/review work as revision-scoped evidence for a broader Mu candidate: judgments should bind to the exact immutable inputs and outputs reviewed, and currentness should be derived by joining evidence rather than mutating historical receipts."
+summary: "Records Knoxx's open translation dispatch/review work as revision-scoped evidence for a broader Mu candidate: judgments should bind to scope-qualified immutable inputs and outputs reviewed, and currentness should be derived by joining evidence rather than mutating historical receipts."
 category: "architecture"
 created: "2026-08-23"
 status: "triage"
@@ -16,7 +16,7 @@ The relevant implementation evidence is:
 
 - `open-hax/knoxx#253` at `b63b6ea4c87539e6d12578eef3edea7472c5a17b`;
 - `open-hax/knoxx#254` at `149e6a0fa38a9a45d73afe5a4da8418ce2cae774`;
-- Foresight's existing `docs/notes/four-independent-capabilities-repository-translation-review-rendering.md` on `main`.
+- Foresight `docs/notes/four-independent-capabilities-repository-translation-review-rendering.md` at `df95723be66f228c69e4c276dbdc0cc183ba7a08`.
 
 Both Knoxx pull requests are open at the time of this note. #254 is stacked on #253.
 
@@ -38,30 +38,30 @@ That note was architectural synthesis, not executable common law.
 
 ### Translation completion is an observed fact, not desired state
 
-Knoxx #253 introduces portable `.cljc` translation evidence and dispatch laws.
+Knoxx PR #253 introduces portable `.cljc` translation evidence and dispatch laws.
 
 `CompletedTranslationReceipt` names both:
 
-- `:translation/source-revision` — the immutable input revision the translation was produced from;
-- `:translation/revision` — the immutable produced output revision.
+- `:translation/source-revision` — the immutable Knoxx-side source revision bound to the dispatch; the worker's actual input bytes are not independently proven by this receipt;
+- `:translation/revision` — the immutable produced-output identity minted by Knoxx for the completed worker batch.
 
 The law explicitly treats the receipt as an observed execution fact. Publication resources do not carry it as desired state.
 
-That distinction matters because a second translation of the same source revision may produce different bytes. A downstream judgment bound only to the source revision would silently remain valid for an output nobody reviewed.
+That distinction matters because a second translation of the same Knoxx-side source revision may produce a different output identity. A downstream judgment bound only to the source revision would silently remain valid for an output nobody reviewed.
 
 ### Attempt facts are separate from product facts
 
-#253 keeps dispatch attempts in `DispatchRecord` and completed translations in `CompletedTranslationReceipt`.
+Knoxx PR #253 keeps dispatch attempts in `DispatchRecord` and completed translations in `CompletedTranslationReceipt`.
 
-A dispatch can be accepted, duplicate, rejected, failed, completed, or unreachable. Those states describe an attempt. Only a completed translation receipt says a translation exists.
+A dispatch can be accepted, duplicate, rejected, failed, completed, or unreachable. Those states describe an attempt. Only a completed translation receipt says Knoxx has recorded a completed translation product.
 
 The publication gate therefore does not need to infer completion by filtering operational attempts. It reads translation evidence directly.
 
 ### Consumer-specific revision binding stays at the consumer boundary
 
-The ingestion worker's existing batch request has no source-revision or idempotency field. Rather than widen the foreign worker contract, #253 records a local Knoxx `DispatchRecord` that binds the concrete revision and dispatch identity to the worker's returned batch id.
+The ingestion worker's existing batch request has no source-revision or idempotency field. Rather than widen the foreign worker contract, #253 records a local Knoxx `DispatchRecord` that binds the concrete Knoxx-side revision and dispatch identity to the worker's returned batch id.
 
-When the worker later reports completion, Knoxx joins that answer back to the local binding before minting translation evidence.
+When the worker later reports completion, Knoxx joins that answer back to the local binding before minting Knoxx-side translation evidence. This establishes the requested/observed revision relationship inside Knoxx; it does not independently prove which exact source bytes the worker fetched.
 
 This preserves the worker's contract while keeping Knoxx-specific publication/revision semantics visible to the code that owns them.
 
@@ -87,15 +87,16 @@ The following are Foresight Mu candidates, not accepted lifts.
 
 ### 1. A judgment should bind to the exact immutable work product it evaluated
 
-Where an output can be regenerated independently of its input, evidence should preserve both identities:
+Where an output can be regenerated independently of its input, evidence should preserve scope and both identities:
 
 ```text
-input identity
-output identity
+scope
+scope-qualified input identity
+scope-qualified output identity
 judgment
 ```
 
-Binding only the input permits a later output to inherit a judgment it never received.
+Binding only the input permits a later output to inherit a judgment it never received. Omitting scope permits otherwise-correct revision evidence to cross tenant/project boundaries.
 
 Translation is one instance. The same shape plausibly applies to agent task outputs, generated documents, code-review revisions, render artifacts, model-produced labels, and other reviewed work products.
 
@@ -129,8 +130,9 @@ The prior Foresight review hypothesis becomes more concrete under this evidence:
 
 ```text
 Review Case
-  -> subject/input artifact identity
-  -> candidate/output artifact identity
+  -> scope
+  -> scope-qualified subject/input artifact identity
+  -> scope-qualified candidate/output artifact identity
   -> evidence/context
   -> rubric
   -> judgment
@@ -151,15 +153,24 @@ This note does **not**:
 - require every worker/consumer seam to use a local correlation store;
 - promote the Mongo persistence representation, dispatch outcome vocabulary, one-document-per-batch constraint, HTTP statuses, or approval permission names;
 - infer review-domain ownership from implementation location;
-- alter the accepted Clio event-ledger ownership decision.
+- alter the accepted Clio event-ledger ownership decision, which is an explicit operator adjudication recorded separately in Epiphany's Clio triage at `0370d6ce6d4e1e9f90d17b252884fe8ee4970f76`.
 
 ## Sources
 
-- https://github.com/open-hax/knoxx/pull/253
+Revision-bound evidence:
+
+- https://github.com/open-hax/knoxx/commit/b63b6ea4c87539e6d12578eef3edea7472c5a17b
 - https://github.com/open-hax/knoxx/blob/b63b6ea4c87539e6d12578eef3edea7472c5a17b/backend/src/cljs/knoxx/backend/law/translation_evidence.cljc
 - https://github.com/open-hax/knoxx/blob/b63b6ea4c87539e6d12578eef3edea7472c5a17b/backend/src/cljs/knoxx/backend/law/translation_dispatch.cljc
+- https://github.com/open-hax/knoxx/commit/149e6a0fa38a9a45d73afe5a4da8418ce2cae774
+- https://github.com/open-hax/foresight/blob/df95723be66f228c69e4c276dbdc0cc183ba7a08/docs/notes/four-independent-capabilities-repository-translation-review-rendering.md
+- https://github.com/octave-commons/epiphany/commit/0370d6ce6d4e1e9f90d17b252884fe8ee4970f76
+
+Supplemental navigation:
+
+- https://github.com/open-hax/knoxx/pull/253
 - https://github.com/open-hax/knoxx/pull/254
-- https://github.com/open-hax/foresight/blob/main/docs/notes/four-independent-capabilities-repository-translation-review-rendering.md
+- https://github.com/octave-commons/epiphany/pull/12
 
 ## Next evidence pass
 
