@@ -1,5 +1,6 @@
 (ns foresight.river-city.domain
   (:require [clio.domain.canonicalize :as canonicalize]
+            [foresight.river-city.law :as law]
             [foresight.river-city.shape :as shape]
             [river-city.domain.portwatch :as portwatch]))
 
@@ -23,7 +24,7 @@
 (defn validate-local-ledgers!
   [resource role->events]
   (doseq [[role events] role->events]
-    (when-not (foresight.river-city.law/ledger-role-valid? role events)
+    (when-not (law/ledger-role-valid? role events)
       (throw (ex-info "River City ledger contains an event of the wrong role"
                       {:river-city/error :ledger-role-mismatch
                        :role role
