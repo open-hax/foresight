@@ -149,6 +149,17 @@
                       {:basis/repository "open-hax/foresight"
                        :basis/path "archaeology/src/foresight/archaeology/domain.cljc"
                        :basis/symbol "compose-run"}]}
+   {:invariant/id :river-city/shared-clio-katamorph-host
+    :invariant/scope :river-city
+    :invariant/enforcement :declarative
+    :invariant/statement "River City owns external-signal semantics while Foresight persists those observations only through shared Clio ledgers referenced by Katamorph resources; projections remain rebuildable derived state."
+    :invariant/basis [{:basis/repository "open-hax/foresight"
+                       :basis/path "river-city-runtime/src/foresight/river_city/domain.cljc"
+                       :basis/symbol "canonical-history"}
+                      {:basis/repository "open-hax/foresight"
+                       :basis/path ".ημ/river-city/README.md"}
+                      {:basis/repository "octave-commons/River-City"
+                       :basis/path "docs/ledger.md"}]}
    {:invariant/id :alpha/artifact-owns-embedded-relation-source
     :invariant/scope :alpha
     :invariant/enforcement :declarative
@@ -431,6 +442,16 @@
     :source/actionable? true
     :source/invariants [:proxx/secrets-stay-local
                         :proxx/pricing-overrides-are-edn-policy]}
+   {:source/id :river-city
+    :source/name "river-city"
+    :source/path "river-city"
+    :source/type :git-submodule
+    :source/repository "octave-commons/River-City"
+    :source/url "git@github.com:octave-commons/River-City.git"
+    :source/ownership :independent-repository
+    :source/role :external-signal-observatory
+    :source/actionable? true
+    :source/invariants [:river-city/shared-clio-katamorph-host]}
    {:source/id :services
     :source/name "services"
     :source/path "services"
@@ -474,6 +495,13 @@
     :component/path "archaeology"
     :component/role :causal-architecture-archaeology
     :component/invariants [:archaeology/normalized-ledgers-derived-projections
+                           :foresight/immutable-ledgers
+                           :foresight/derived-state-not-authority
+                           :foresight/provenance-under-eta-mu-root]}
+   {:component/id :river-city-runtime
+    :component/path "river-city-runtime"
+    :component/role :external-signal-ledger-host
+    :component/invariants [:river-city/shared-clio-katamorph-host
                            :foresight/immutable-ledgers
                            :foresight/derived-state-not-authority
                            :foresight/provenance-under-eta-mu-root]}
