@@ -30,6 +30,15 @@
   (= required-ledger-roles
      (set (keys (:archaeology/ledgers (resource-entry resource-file))))))
 
+(defn declared-ledger-event-types-valid?
+  "Each semantic ledger role declares the same event type its physical lines
+   are required to contain. A manifest may not relabel one partition as another."
+  [resource-file]
+  (every? (fn [[role ledger]]
+            (= (get ledger-event-types role)
+               (:ledger/event-type ledger)))
+          (:archaeology/ledgers (resource-entry resource-file))))
+
 (defn unique-ledger-paths?
   "One resource may not alias two semantic ledger roles to the same file."
   [resource-file]
@@ -59,6 +68,7 @@
   [resource-file]
   (and (= 1 (count (:resources resource-file)))
        (resource-ledger-roles-valid? resource-file)
+       (declared-ledger-event-types-valid? resource-file)
        (unique-ledger-paths? resource-file)
        (reference-only-resource? resource-file)))
 
