@@ -34,7 +34,7 @@
   [read-ledger resource-file]
   (let [role->events (read-resource-ledgers read-ledger resource-file)]
     (domain/validate-local-ledgers! resource-file role->events)
-    (mapv identity (vals role->events))))
+    (vec (vals role->events))))
 
 (defn project-resources
   "Compose any number of Katamorph run resource files into one Clio history,
