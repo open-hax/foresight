@@ -1,0 +1,39 @@
+name: Chat work runtime
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/chat-work-runtime.yml"
+      - "tools/chat-work-runtime/**"
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build archive
+        run: tools/chat-work-runtime/build.sh
+      - name: Smoke test relocated tools
+        shell: bash
+        run: |
+          tmp_dir="$(mktemp -d)"
+          tar --no-same-owner -xzf dist/foresight-chat-work-linux-x64.tar.gz -C "$tmp_dir"
+          runtime="$tmp_dir/foresight-chat-work-linux-x64"
+          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:/usr/bin:/bin" nbb --version
+          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:/usr/bin:/bin" bb --version
+          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:/usr/bin:/bin" clj-kondo --version
+          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:/usr/bin:/bin" jscpd --version
+          (cd "$runtime" && sha256sum --check SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: foresight-chat-work-linux-x64
+          path: |
+            dist/foresight-chat-work-linux-x64.tar.gz
+            dist/foresight-chat-work-linux-x64.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 30
