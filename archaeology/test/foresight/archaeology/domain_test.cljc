@@ -2,9 +2,13 @@
 (ns foresight.archaeology.domain-test
   (:require [clojure.test :refer [deftest is]]
             [foresight.archaeology.domain :as domain]
-            [foresight.archaeology.infra :as infra]))
+            [foresight.archaeology.infra :as infra]
+            [foresight.archaeology.law :as law]
+            [foresight.archaeology.shape :as shape]
+            [malli.core :as m]))
 
 (def run-id "00000000-0000-0000-0000-000000000001")
+(def parent-run-id "00000000-0000-0000-0000-000000000099")
 (def subject (str "archaeology:" run-id))
 
 (defn event [id type data]
@@ -76,10 +80,74 @@
 (deftest unknown-run-fails-before-projection-work
   (let [error (try
                 (domain/compose-run (assoc state :findings nil)
-                                    "00000000-0000-0000-0000-000000000099")
+                                    "00000000-0000-0000-0000-000000000098")
                 nil
                 (catch #?(:clj Exception :cljs :default) error error))]
     (is (= :unknown-run (:archaeology/error (ex-data error))))))
+
+(deftest relation-shapes-are-kind-specific
+  (let [valid-consume {:relation/id :relation/consume
+                       :relation/kind :run/consumes
+                       :relation/from-kind :run
+                       :relation/from-id run-id
+                       :relation/to-kind :run
+                       :relation/to-id parent-run-id
+                       :relation/action-id :parent/action
+                       :relation/status :continues}
+        missing-status (dissoc valid-consume :relation/status)
+        string-finding-link {:relation/id :relation/bad-finding-link
+                             :relation/kind :finding/evidence
+                             :relation/from-kind :finding
+                             :relation/from-id "finding/one"
+                             :relation/to-kind :evidence
+                             :relation/to-id :evidence/one}]
+    (is (m/validate shape/relation-data (:event/data relation-event)))
+    (is (m/validate shape/relation-data valid-consume))
+    (is (false? (m/validate shape/relation-data missing-status)))
+    (is (false? (m/validate shape/relation-data string-finding-link)))))
+
+(deftest resource-declarations-cannot-relabel-ledger-roles
+  (let [mislabeled (assoc-in resource
+                             [:resources 0 :archaeology/ledgers :run :ledger/event-type]
+                             :archaeology/evidence-recorded)]
+    (is (law/declared-ledger-event-types-valid? resource))
+    (is (false? (law/declared-ledger-event-types-valid? mislabeled)))
+    (is (law/resource-valid? resource))
+    (is (false? (law/resource-valid? mislabeled)))
+    (is (shape/valid-resource? resource))
+    (is (false? (shape/valid-resource? mislabeled)))))
+
+(deftest parent-continuity-is-derived-from-run-consumes-relations
+  (let [child-run (assoc run-event :event/causes [parent-run-id])
+        consume-event
+        (event "00000000-0000-0000-0000-000000000006"
+               :archaeology/relation-recorded
+               {:relation/id :relation/consume
+                :relation/kind :run/consumes
+                :relation/from-kind :run
+                :relation/from-id run-id
+                :relation/to-kind :run
+                :relation/to-id parent-run-id
+                :relation/action-id :parent/action
+                :relation/status :continues})
+        with-parent (assoc-in state [:run-events run-id] child-run)
+        without-continuity-error
+        (try
+          (domain/compose-run with-parent run-id)
+          nil
+          (catch #?(:clj Exception :cljs :default) error error))
+        with-continuity
+        (assoc-in with-parent [:relations (:event/id consume-event)] consume-event)
+        projection (domain/compose-run with-continuity run-id)]
+    (is (= :invalid-projection
+           (:archaeology/error (ex-data without-continuity-error))))
+    (is (= [parent-run-id] (:event/parents projection)))
+    (is (= [{:event/id parent-run-id
+             :action/id :parent/action
+             :relation :continues}]
+           (:archaeology/consumes projection)))
+    (is (law/parent-continuity-valid? projection))
+    (is (shape/valid-run-projection? projection))))
 
 (deftest resource-events-preserves-independent-ledger-partitions
   (let [path->events {"run.edn" [run-event]
