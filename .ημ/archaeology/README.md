@@ -109,6 +109,12 @@ law.cljc -> shape.cljc -> domain.cljc -> infra.cljc
 
 The infra namespace remains CLJC by taking `read-ledger` and revision data as dependencies rather than importing Node or JVM APIs.
 
+Run its focused laws and projection tests with:
+
+```sh
+cd archaeology && clojure -M:test
+```
+
 ## Causal archaeology
 
 The **logical history** is the union of ledger files referenced by archaeology run resources. Files and PRs have no semantic ordering authority.
