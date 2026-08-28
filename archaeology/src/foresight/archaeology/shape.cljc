@@ -39,17 +39,30 @@
    [:evidence/blob nonblank-string]
    [:evidence/url nonblank-string]])
 
-(def relation-data
+(def finding-evidence-relation-data
   [:map {:closed true}
    [:relation/id :keyword]
-   [:relation/kind [:enum :finding/evidence :run/consumes]]
-   [:relation/from-kind :keyword]
-   [:relation/from-id [:or :keyword :string]]
-   [:relation/to-kind :keyword]
-   [:relation/to-id [:or :keyword :string]]
-   [:relation/action-id {:optional true} :keyword]
-   [:relation/status {:optional true}
+   [:relation/kind [:= :finding/evidence]]
+   [:relation/from-kind [:= :finding]]
+   [:relation/from-id :keyword]
+   [:relation/to-kind [:= :evidence]]
+   [:relation/to-id :keyword]])
+
+(def run-consumes-relation-data
+  [:map {:closed true}
+   [:relation/id :keyword]
+   [:relation/kind [:= :run/consumes]]
+   [:relation/from-kind [:= :run]]
+   [:relation/from-id uuid-string]
+   [:relation/to-kind [:= :run]]
+   [:relation/to-id uuid-string]
+   [:relation/action-id :keyword]
+   [:relation/status
     [:enum :continues :consumes :supersedes :rejects :acknowledges]]])
+
+(def relation-data
+  [:or finding-evidence-relation-data
+       run-consumes-relation-data])
 
 (def catalog
   {:archaeology/run-recorded
