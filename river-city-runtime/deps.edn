@@ -1,6 +1,7 @@
 {:paths ["src"]
  :deps
  {org.clojure/clojure {:mvn/version "1.12.0"}
+  org.clojure/data.json {:mvn/version "2.5.1"}
   metosin/malli {:mvn/version "0.20.1"}
   io.github.octave-commons/river-city {:local/root "../river-city"}
   io.github.open-hax/clio {:local/root "../eta-mu/packages/clio"}
@@ -8,4 +9,6 @@
  :aliases
  {:test
   {:extra-paths ["test"]
-   :main-opts ["-m" "foresight.river-city.test-runner"]}}}
+   :main-opts ["-m" "foresight.river-city.test-runner"]}
+  :collect-portwatch
+  {:main-opts ["-m" "foresight.river-city.collector"]}}}
