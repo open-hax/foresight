@@ -1,6 +1,6 @@
 # Foresight Archaeology
 
-Architecture archaeology is persisted as **Clio newline-delimited EDN ledgers** and composed through Katamorph resource references.
+Architecture archaeology is persisted as **Clio newline-delimited EDN ledgers** and composed through Katamorph namespace-resource references.
 
 The convenient aggregate run shape is a projection. It is never a ledger file.
 
@@ -26,34 +26,38 @@ Each archaeology run owns independent physical ledgers:
 
 Every `*.edn` under `ledgers/` is a Clio ledger: zero or more EDN event forms, **one complete event per line**. No ledger is represented by an EDN vector and no file persists several logical vectors inside one aggregate event.
 
-A run resource is a Katamorph-style reference object. It contains no findings, actions, evidence collections, or materialized projection:
+## Katamorph resource
+
+A run resource is a real Katamorph namespace manifest. It contains exactly one registered `:document` entry whose archaeology facet contains only references and projection identity:
 
 ```clojure
-{:resource/kind :archaeology/run
- :resource/id :archaeology.run/<uuid>
- :archaeology/run-id "<uuid>"
- :archaeology/schema
- {:catalog/path ".ημ/archaeology/catalog.edn"
-  :history/path ".ημ/archaeology/schemas"}
- :archaeology/ledgers
- {:run       {:ledger/path ".../run.edn"
-              :ledger/event-type :archaeology/run-recorded}
-  :findings  {:ledger/path ".../findings.edn"
-              :ledger/event-type :archaeology/finding-recorded}
-  :actions   {:ledger/path ".../actions.edn"
-              :ledger/event-type :archaeology/action-recorded}
-  :evidence  {:ledger/path ".../evidence.edn"
-              :ledger/event-type :archaeology/evidence-recorded}
-  :relations {:ledger/path ".../relations.edn"
-              :ledger/event-type :archaeology/relation-recorded}}
- :archaeology/projection :foresight.archaeology/run}
+{:namespace :foresight.archaeology
+ :resources
+ [{:document/id :run-<uuid>
+   :document/type :foresight.archaeology/run
+   :archaeology/run-id "<uuid>"
+   :archaeology/schema
+   {:catalog/path ".ημ/archaeology/catalog.edn"
+    :history/path ".ημ/archaeology/schemas"}
+   :archaeology/ledgers
+   {:run       {:ledger/path ".../run.edn"
+                :ledger/event-type :archaeology/run-recorded}
+    :findings  {:ledger/path ".../findings.edn"
+                :ledger/event-type :archaeology/finding-recorded}
+    :actions   {:ledger/path ".../actions.edn"
+                :ledger/event-type :archaeology/action-recorded}
+    :evidence  {:ledger/path ".../evidence.edn"
+                :ledger/event-type :archaeology/evidence-recorded}
+    :relations {:ledger/path ".../relations.edn"
+                :ledger/event-type :archaeology/relation-recorded}}
+   :archaeology/projection :foresight.archaeology/run}]}
 ```
 
-The five values under `:archaeology/ledgers` are references, not embedded ledgers.
+Katamorph requires the outer `:resources` sequential form. Archaeology constrains these files to one entry so that manifest syntax never becomes an accumulating store. The growing data lives only in Clio ledgers.
 
 ## Why normalized ledgers
 
-The old seed shape persisted several independently growing collections inside one event:
+The discarded seed shape persisted independently growing collections inside one event:
 
 ```clojure
 {:archaeology/findings [...]
@@ -62,7 +66,7 @@ The old seed shape persisted several independently growing collections inside on
  :archaeology/consumes [...]}
 ```
 
-That makes unrelated append domains contend on one document and eventually turns an append-only history into repeated whole-file rewrites.
+That makes unrelated append domains contend on one document and eventually turns append-only history into repeated whole-file rewrites.
 
 The normalized model records one fact per Clio event:
 
@@ -99,7 +103,7 @@ law.cljc -> shape.cljc -> domain.cljc -> infra.cljc
 ```
 
 - `law.cljc` — archaeology invariants layered on Clio event laws.
-- `shape.cljc` — Malli data schemas, Clio event catalog, resource shape, derived projection shape.
+- `shape.cljc` — Malli event-data schemas, Clio event catalog, Katamorph resource-file shape, and derived projection shape.
 - `domain.cljc` — Clio canonicalization plus the pure run projection.
 - `infra.cljc` — host-neutral orchestration with file operations injected; callers supply Clio's runtime adapters.
 
@@ -111,7 +115,7 @@ The **logical history** is the union of ledger files referenced by archaeology r
 
 A run event's `:event/causes` names its parent run event(s). A focused investigation may therefore fork from any prior run, and a later run may join multiple parent runs.
 
-A non-root run must also record one `:run/consumes` relation for each parent. That relation names the parent run and the parent action being continued, consumed, superseded, rejected, or acknowledged. Parentage therefore means causal work continuity, not merely "this happened later."
+A non-root run must also record one `:run/consumes` relation for each parent. That relation names the parent run and the parent action being continued, consumed, superseded, rejected, or acknowledged. Parentage therefore means causal work continuity, not merely “this happened later.”
 
 ## Projection
 
@@ -134,15 +138,15 @@ Those vectors are disposable derived state. Delete the projection and reconstruc
 
 Each archaeology execution:
 
-1. discovers `:archaeology/run` resource files;
+1. discovers one-entry Katamorph manifests under `.ημ/archaeology/resources/`;
 2. loads their referenced ledgers with Clio;
 3. loads historical schema revisions;
 4. canonicalizes the union and reconstructs the causal DAG;
 5. chooses or joins current run heads;
 6. reads parent action projections;
 7. mines a fresh concrete code cluster;
-8. appends new run/finding/action/evidence/relation events to fresh per-run ledgers;
-9. writes one new Katamorph resource referencing those ledgers;
+8. creates fresh per-run ND-EDN ledgers and appends run/finding/action/evidence/relation events;
+9. writes one Katamorph manifest referencing those ledgers;
 10. opens a Foresight PR and does not merge it.
 
 Corrections are new events. Existing ledger lines are never rewritten after they become causal history.

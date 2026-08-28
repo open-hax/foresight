@@ -18,23 +18,31 @@
     :archaeology/actions
     :evidence/refs})
 
+(defn resource-entry
+  "Archaeology resource files deliberately contain exactly one Katamorph
+   resource entry, so the manifest's required :resources vector never becomes
+   another accumulating ledger."
+  [resource-file]
+  (first (:resources resource-file)))
+
 (defn resource-ledger-roles-valid?
-  "A run resource names exactly the logical ledgers that compose its projection."
-  [resource]
+  [resource-file]
   (= required-ledger-roles
-     (set (keys (:archaeology/ledgers resource)))))
+     (set (keys (:archaeology/ledgers (resource-entry resource-file))))))
 
 (defn unique-ledger-paths?
   "One resource may not alias two semantic ledger roles to the same file."
-  [resource]
-  (let [paths (map :ledger/path (vals (:archaeology/ledgers resource)))]
+  [resource-file]
+  (let [paths (map :ledger/path
+                   (vals (:archaeology/ledgers (resource-entry resource-file))))]
     (= (count paths) (count (set paths)))))
 
 (defn reference-only-resource?
-  "Persisted Katamorph resources contain references and projection identity,
-   never materialized ledger collections."
-  [resource]
-  (not-any? #(contains? resource %) derived-collection-keys))
+  "Persisted Katamorph resource entries contain references and projection
+   identity, never materialized archaeology collections."
+  [resource-file]
+  (let [entry (resource-entry resource-file)]
+    (not-any? #(contains? entry %) derived-collection-keys)))
 
 (defn event-belongs-to-role?
   [role event]
@@ -48,10 +56,11 @@
   (every? #(event-belongs-to-role? role %) events))
 
 (defn resource-valid?
-  [resource]
-  (and (resource-ledger-roles-valid? resource)
-       (unique-ledger-paths? resource)
-       (reference-only-resource? resource)))
+  [resource-file]
+  (and (= 1 (count (:resources resource-file)))
+       (resource-ledger-roles-valid? resource-file)
+       (unique-ledger-paths? resource-file)
+       (reference-only-resource? resource-file)))
 
 (defn parent-continuity-valid?
   "Every parent run must be addressed by at least one semantic continuity

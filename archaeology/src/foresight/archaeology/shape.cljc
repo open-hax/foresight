@@ -72,10 +72,13 @@
    [:ledger/path nonblank-string]
    [:ledger/event-type :keyword]])
 
-(def resource
+(def run-resource-entry
+  "A single registered :document resource carrying archaeology reference
+   facets. :document/id makes this consumable by Katamorph's existing manifest
+   grammar without adding a Foresight-specific resource kind to Katamorph."
   [:map {:closed true}
-   [:resource/kind [:= :archaeology/run]]
-   [:resource/id :keyword]
+   [:document/id :keyword]
+   [:document/type [:= :foresight.archaeology/run]]
    [:archaeology/run-id uuid-string]
    [:archaeology/schema
     [:map {:closed true}
@@ -89,6 +92,13 @@
      [:evidence ledger-ref]
      [:relations ledger-ref]]]
    [:archaeology/projection [:= :foresight.archaeology/run]]])
+
+(def resource-file
+  "One-entry Katamorph namespace manifest. The required :resources vector is
+   structural manifest syntax, not a ledger: growing records remain ND-EDN."
+  [:map {:closed true}
+   [:namespace [:= :foresight.archaeology]]
+   [:resources [:tuple run-resource-entry]]])
 
 (def consume-projection
   [:map {:closed true}
@@ -119,7 +129,7 @@
 
 (defn valid-resource?
   [value]
-  (and (m/validate resource value)
+  (and (m/validate resource-file value)
        (law/resource-valid? value)))
 
 (defn valid-run-projection?
