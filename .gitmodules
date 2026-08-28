@@ -25,6 +25,9 @@
 [submodule "proxx"]
 	path = proxx
 	url = git@github.com:open-hax/proxx.git
+[submodule "river-city"]
+	path = river-city
+	url = git@github.com:octave-commons/River-City.git
 [submodule "services"]
 	path = services
 	url = git@github.com:open-hax/services.git
