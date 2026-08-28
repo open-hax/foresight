@@ -1,0 +1,77 @@
+name: river-city-ledger
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: river-city-ledger
+  cancel-in-progress: false
+
+jobs:
+  collect-portwatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Foresight
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          submodules: false
+
+      - name: Checkout required sibling sources
+        shell: bash
+        run: |
+          git config --global url."https://github.com/".insteadOf git@github.com:
+          git submodule update --init eta-mu katamorph river-city
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+
+      - name: Set up Clojure
+        uses: DeLaGuardo/setup-clojure@3fe9b3ae632c6758d0b7757b0838606ef4287b08 # 13.4
+        with:
+          cli: "1.12.0.1530"
+
+      - name: Install Clio runtime dependencies
+        shell: bash
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.14.0 --activate
+          pnpm --dir eta-mu install --frozen-lockfile --filter @eta-mu/clio
+
+      - name: Verify River City domain contract
+        working-directory: river-city
+        run: clojure -M:test
+
+      - name: Verify Foresight host contract
+        working-directory: river-city-runtime
+        run: clojure -M:test
+
+      - name: Collect PortWatch through Clio
+        working-directory: river-city-runtime
+        env:
+          FORESIGHT_ROOT: ".."
+        run: clojure -M:collect-portwatch
+
+      - name: Commit generated River City state
+        shell: bash
+        run: |
+          git add \
+            .ημ/river-city/ledgers \
+            .ημ/river-city/schemas \
+            .ημ/river-city/projections
+          if git diff --cached --quiet; then
+            echo "No new River City state."
+            exit 0
+          fi
+          git config user.name "river-city-bot"
+          git config user.email "river-city-bot@users.noreply.github.com"
+          git commit -m "ledger: update River City observations"
+          git pull --rebase origin main
+          git push origin HEAD:main
