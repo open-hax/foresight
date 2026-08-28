@@ -1,0 +1,11 @@
+{:paths ["src"]
+ :deps
+ {org.clojure/clojure {:mvn/version "1.12.0"}
+  metosin/malli {:mvn/version "0.20.1"}
+  io.github.octave-commons/river-city {:local/root "../river-city"}
+  io.github.open-hax/clio {:local/root "../eta-mu/packages/clio"}
+  io.github.open-hax/katamorph {:local/root "../katamorph"}}
+ :aliases
+ {:test
+  {:extra-paths ["test"]
+   :main-opts ["-m" "foresight.river-city.test-runner"]}}}
