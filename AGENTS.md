@@ -42,12 +42,14 @@ candidates, and accepted lifts are not interchangeable.
 | `muse` | octave-commons/muse | compatibility-compiler | Compiler/compatibility tooling — not canonical actor/session/policy semantics |
 | `opencode` | open-hax/opencode | coding-agent-host | Coding-agent hosting/integration (shallow submodule) |
 | `proxx` | open-hax/proxx | model-proxy | LLM/model proxying, EDN pricing policy; provider credentials stay local |
+| `river-city` | octave-commons/River-City | external-signal-observatory | Portable source normalization and domain projections for maritime, energy, defense, infrastructure, and AI-economic observations; event transport belongs to shared Clio |
 | `services` | open-hax/services | deployment-orchestration | Deployment topology and environment schemas — never application source or secrets |
 | `uxx` | open-hax/uxx | ui-kit | Canonical React components; Reagent/Helix are parity wrappers, shared design tokens |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
 | `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |
 | `archaeology` | (root-owned native component) | causal-architecture-archaeology | Normalized Clio archaeology events, causal run composition, and disposable projections |
+| `river-city-runtime` | (root-owned native component) | external-signal-ledger-host | Katamorph resource composition, Clio-hosted external-signal ledgers, deterministic collection jobs, and River City disposable projections |
 
 When a new direct repository is added, update `.gitmodules`,
 `src/foresight/project.cljc` (`sources`, plus any new invariants), and this
@@ -134,3 +136,5 @@ must remain visible. Never convert an unavailable action into a pass.
 
 Cards live under `docs/agile/kanban`. Rheos events and receipts belong under
 `.ημ/`; no provenance ledger may be created elsewhere.
+
+`.ημ/archaeology` and `.ημ/river-city` are parallel Clio-backed provenance domains. They may share substrate contracts and host tooling, but neither domain's source-specific event semantics or projections become authority for the other.
