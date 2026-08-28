@@ -96,45 +96,45 @@
    Every collection in the result is derived. Historical facts from other runs
    remain in the canonical history but are excluded by :event/subject."
   [state run-id]
-  (let [run-event (get-in state [:run-events run-id])
-        run-data (:event/data run-event)
-        evidence-by-finding (finding-evidence state run-id)
-        findings (->> (events-for-run state :findings run-id)
-                      (map :event/data)
-                      (map (fn [finding]
-                             (assoc finding
-                                    :evidence
-                                    (->> (get evidence-by-finding (:finding/id finding) #{})
-                                         (sort-by str)
-                                         vec))))
-                      (sort-by (comp str :finding/id))
-                      vec)
-        actions (->> (events-for-run state :actions run-id)
-                     (map :event/data)
-                     (sort-by (comp str :action/id))
-                     vec)
-        evidence (->> (events-for-run state :evidence run-id)
-                      (map :event/data)
-                      (sort-by (comp str :evidence/id))
-                      vec)
-        result {:event/id run-id
-                :event/parents (vec (:event/causes run-event))
-                :archaeology/topic (:run/topic run-data)
-                :archaeology/summary (:run/summary run-data)
-                :archaeology/consumes (consumes-from-relations state run-id)
-                :archaeology/findings findings
-                :archaeology/actions actions
-                :evidence/refs evidence}]
+  (let [run-event (get-in state [:run-events run-id])]
     (when-not run-event
       (throw (ex-info "Unknown archaeology run"
                       {:archaeology/error :unknown-run
                        :run/id run-id})))
-    (when-not (shape/valid-run-projection? result)
-      (throw (ex-info "Derived archaeology projection violates its shape or laws"
-                      {:archaeology/error :invalid-projection
-                       :run/id run-id
-                       :projection result})))
-    result))
+    (let [run-data (:event/data run-event)
+          evidence-by-finding (finding-evidence state run-id)
+          findings (->> (events-for-run state :findings run-id)
+                        (map :event/data)
+                        (map (fn [finding]
+                               (assoc finding
+                                      :evidence
+                                      (->> (get evidence-by-finding (:finding/id finding) #{})
+                                           (sort-by str)
+                                           vec))))
+                        (sort-by (comp str :finding/id))
+                        vec)
+          actions (->> (events-for-run state :actions run-id)
+                       (map :event/data)
+                       (sort-by (comp str :action/id))
+                       vec)
+          evidence (->> (events-for-run state :evidence run-id)
+                        (map :event/data)
+                        (sort-by (comp str :evidence/id))
+                        vec)
+          result {:event/id run-id
+                  :event/parents (vec (:event/causes run-event))
+                  :archaeology/topic (:run/topic run-data)
+                  :archaeology/summary (:run/summary run-data)
+                  :archaeology/consumes (consumes-from-relations state run-id)
+                  :archaeology/findings findings
+                  :archaeology/actions actions
+                  :evidence/refs evidence}]
+      (when-not (shape/valid-run-projection? result)
+        (throw (ex-info "Derived archaeology projection violates its shape or laws"
+                        {:archaeology/error :invalid-projection
+                         :run/id run-id
+                         :projection result})))
+      result)))
 
 (defn project-run
   [revisions ledgers run-id]
