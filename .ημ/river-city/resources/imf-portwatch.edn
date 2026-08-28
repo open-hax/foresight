@@ -1,0 +1,13 @@
+{:namespace :foresight.river-city
+ :resources
+ [{:document/id :source-imf-portwatch
+   :document/type :foresight.river-city/source
+   :river-city/source :source/imf-portwatch
+   :river-city/schema
+   {:catalog/path ".ημ/river-city/catalog.edn"
+    :history/path ".ημ/river-city/schemas"}
+   :river-city/ledgers
+   {:observations
+    {:ledger/path ".ημ/river-city/ledgers/imf-portwatch.edn"
+     :ledger/event-type :river-city/portwatch-observed}}
+   :river-city/projection :river-city/maritime-portwatch}]}
