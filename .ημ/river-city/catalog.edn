@@ -1,0 +1,40 @@
+{:river-city/portwatch-observed
+ [:map {:closed true}
+  [:event/id [:string {:min 36 :max 36}]]
+  [:event/schema
+   [:map {:closed true}
+    [:schema/root [:string {:min 64 :max 64}]]
+    [:schema/id :keyword]
+    [:schema/hash [:string {:min 64 :max 64}]]]]
+  [:event/type [:= :river-city/portwatch-observed]]
+  [:event/stream [:string {:min 1}]]
+  [:event/seq [:int {:min 1}]]
+  [:event/causes [:vector [:string {:min 36 :max 36}]]]
+  [:event/actor [:string {:min 1}]]
+  [:event/subject [:string {:min 1}]]
+  [:event/at [:string {:min 1}]]
+  [:event/data
+   [:map {:closed true}
+    [:source/id [:= :source/imf-portwatch]]
+    [:source/record-id [:or :int :string]]
+    [:source/date [:or :int :string]]
+    [:port/id [:or :int :string]]
+    [:port/name [:string {:min 1}]]
+    [:vessels
+     [:map {:closed true}
+      [:container {:optional true} [:or :int :double]]
+      [:dry-bulk {:optional true} [:or :int :double]]
+      [:general-cargo {:optional true} [:or :int :double]]
+      [:roro {:optional true} [:or :int :double]]
+      [:tanker {:optional true} [:or :int :double]]
+      [:cargo {:optional true} [:or :int :double]]
+      [:total {:optional true} [:or :int :double]]]]
+    [:capacity
+     [:map {:closed true}
+      [:container {:optional true} [:or :int :double]]
+      [:dry-bulk {:optional true} [:or :int :double]]
+      [:general-cargo {:optional true} [:or :int :double]]
+      [:roro {:optional true} [:or :int :double]]
+      [:tanker {:optional true} [:or :int :double]]
+      [:cargo {:optional true} [:or :int :double]]
+      [:total {:optional true} [:or :int :double]]]]]]]}
