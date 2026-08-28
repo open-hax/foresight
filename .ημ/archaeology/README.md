@@ -1,92 +1,168 @@
-# Foresight Archaeology Ledger
+# Foresight Archaeology
 
-This directory is the durable history for recurring architecture archaeology across the Foresight superproject, with Knoxx as the primary pressure test.
+Architecture archaeology is persisted as **Clio newline-delimited EDN ledgers** and composed through Katamorph resource references.
 
-The authority is a **causal event DAG**, not a mutable report. Each archaeology run appends one immutable event under `events/`. Events name the event(s) they build on, the prior actions they consume or acknowledge, the new findings and actions produced, and exact source evidence.
+The convenient aggregate run shape is a projection. It is never a ledger file.
 
-## Why a DAG
+## Physical layout
 
-Recurring archaeology and dedicated conversations can proceed concurrently. A run can continue the main line, a focused conversation can branch from any prior event, and a later run can join multiple branches by naming multiple parents. No physical file order is authoritative.
+Each archaeology run owns independent physical ledgers:
 
-PRs are physical ledger partitions. The logical archaeology history is the union of archaeology event files, reconstructed from `:event/parents`. A PR may therefore reference a parent event that is still present only in another open archaeology PR; that is a temporarily unmerged partition, not a new history.
-
-## Event shape
-
-```clojure
-{:event/id "uuid"
- :event/type :archaeology/observation
- :event/at "RFC-3339 timestamp"
- :event/parents ["parent-event-uuid" ...]
-
- :archaeology/topic "short topic"
- :archaeology/summary "what this run established"
-
- :archaeology/consumes
- [{:event/id "parent-event-uuid"
-   :action/id :parent/action-id
-   :relation :continues}]
-
- :archaeology/findings
- [{:finding/id :stable-id
-   :shape :registry
-   :current/name "domain-specific-name"
-   :candidate/name "common-name"
-   :claim "grounded architectural claim"
-   :evidence [0 1]}]
-
- :archaeology/actions
- [{:action/id :this-run/action-id
-   :action/type :document
-   :status :done
-   :description "durable action produced by this event"}]
-
- :evidence/refs
- [{:repo "open-hax/knoxx"
-   :path "path/in/repo.cljs"
-   :commit "git-sha-or-blob-sha"
-   :url "https://github.com/..."}]}
+```text
+.ημ/archaeology/
+├── catalog.edn
+├── schemas/
+│   └── <clio-schema-root>.edn
+├── resources/
+│   └── <run-uuid>.edn
+└── ledgers/
+    └── <run-uuid>/
+        ├── run.edn
+        ├── findings.edn
+        ├── actions.edn
+        ├── evidence.edn
+        └── relations.edn
 ```
 
-## Laws
+Every `*.edn` under `ledgers/` is a Clio ledger: zero or more EDN event forms, **one complete event per line**. No ledger is represented by an EDN vector and no file persists several logical vectors inside one aggregate event.
 
-1. **Append only.** Once an event is merged or cited by another event, do not rewrite it. Corrections are new events that cite the event being corrected.
-2. **Explicit causality.** Every non-root event names one or more `:event/parents`.
-3. **Action continuity.** Every non-root event must consume, continue, supersede, reject, or explicitly acknowledge at least one action from each parent. Parentage must mean more than chronology.
-4. **Branching is normal.** Dedicated investigations may branch from any existing event. They do not need to wait for the recurring main line.
-5. **Joining is explicit.** A synthesis event names every branch it joins as a parent and records which actions/findings it carries forward.
-6. **Evidence before abstraction.** Findings cite exact repository paths and immutable revisions when available. A common shape is inferred only after inspecting concrete implementations.
-7. **Generic shape != protocol.** Pure persistent data and algorithms remain data/functions. Protocols describe capability or implementation boundaries; multimethods describe intentional open-world semantic dispatch.
-8. **PR per run.** Each recurring archaeology run creates a fresh branch and PR containing its new event plus any derived documentation/projection updates. It must not merge its own PR.
-9. **Knoxx stays runnable.** Archaeology PRs are documentation/ontology-first unless a separately scoped implementation task explicitly authorizes code extraction.
+A run resource is a Katamorph-style reference object. It contains no findings, actions, evidence collections, or materialized projection:
 
-## Recurring run algorithm
+```clojure
+{:resource/kind :archaeology/run
+ :resource/id :archaeology.run/<uuid>
+ :archaeology/run-id "<uuid>"
+ :archaeology/schema
+ {:catalog/path ".ημ/archaeology/catalog.edn"
+  :history/path ".ημ/archaeology/schemas"}
+ :archaeology/ledgers
+ {:run       {:ledger/path ".../run.edn"
+              :ledger/event-type :archaeology/run-recorded}
+  :findings  {:ledger/path ".../findings.edn"
+              :ledger/event-type :archaeology/finding-recorded}
+  :actions   {:ledger/path ".../actions.edn"
+              :ledger/event-type :archaeology/action-recorded}
+  :evidence  {:ledger/path ".../evidence.edn"
+              :ledger/event-type :archaeology/evidence-recorded}
+  :relations {:ledger/path ".../relations.edn"
+              :ledger/event-type :archaeology/relation-recorded}}
+ :archaeology/projection :foresight.archaeology/run}
+```
 
-1. Inspect recent archaeology events and open archaeology PRs; reconstruct the current DAG heads.
-2. Pick a head (normally the latest main-line event) or explicitly join heads.
-3. Read every parent event and its `:archaeology/actions`.
-4. Mine a fresh cluster of Foresight/Knoxx code for repeated or misleadingly domain-specific structures.
-5. Classify each candidate as one of: `law`, `shape`, `domain-algorithm`, `protocol`, `multimethod/dispatch`, or `infra`.
-6. Compare against already named common shapes before inventing another term.
-7. Create exactly one new immutable event file with parent/action continuity and source citations.
-8. Update derived archaeology documentation only when the new event changes the vocabulary or decomposition map.
-9. Open a PR. The PR body must list the new event id, parent event ids, consumed parent actions, findings, and evidence links.
+The five values under `:archaeology/ledgers` are references, not embedded ledgers.
 
-## Initial common vocabulary
+## Why normalized ledgers
 
-The vocabulary is provisional and evolves through ledger events rather than edits to history.
+The old seed shape persisted several independently growing collections inside one event:
 
-- `Cell<T>` / `Slot<T>` — one replaceable runtime binding.
-- `Registry<K,V>` — keyed registration and lookup.
-- `BoundedCache<K,V>` — keyed values with capacity/expiration policy.
-- `SeenSet<Id>` — idempotence/deduplication memory.
-- `BoundedLog<T>` / `RingBuffer<T>` — recent finite history.
-- `DAG<N>` — nodes plus directed acyclic parent/child relation.
-- `CausalEventDAG<Event>` — events whose explicit causal references form a DAG.
-- `LedgerPartition<Event>` — one physical subset of the logical event set.
-- `Projection<S,E>` — reconstructable state derived by folding canonical history.
-- `Registry<K,Descriptor>` + `Dispatch` — named executable behavior with metadata.
-- `Reconciler<Desired,Observed,Plan>` — compare states and produce convergence work.
-- `Driver` / `Adapter` — boundary implementation connecting an external system to a stable capability.
-- `Resource` + `Facet` — one declarative entry interpreted through multiple orthogonal kind-specific views.
+```clojure
+{:archaeology/findings [...]
+ :archaeology/actions [...]
+ :evidence/refs [...]
+ :archaeology/consumes [...]}
+```
 
-The purpose of this ledger is semantic compression: make Knoxx increasingly describable as composition of a small stable vocabulary instead of an accumulation of domain-named mini-frameworks.
+That makes unrelated append domains contend on one document and eventually turns an append-only history into repeated whole-file rewrites.
+
+The normalized model records one fact per Clio event:
+
+- `:archaeology/run-recorded` — run identity, topic, summary, and causal parent run events through Clio `:event/causes`.
+- `:archaeology/finding-recorded` — one finding.
+- `:archaeology/action-recorded` — one durable action.
+- `:archaeology/evidence-recorded` — one immutable source reference.
+- `:archaeology/relation-recorded` — one semantic edge, currently finding→evidence or run→parent-action continuity.
+
+Finding evidence vectors, action vectors, evidence vectors, parent vectors, and continuity vectors exist only in the derived projection.
+
+## Clio authority
+
+Clio owns the event-sourcing mechanics:
+
+- newline-delimited EDN physical ledgers;
+- immutable event identity;
+- stream revision conflicts;
+- causal `:event/causes`;
+- missing-cause and cycle checks;
+- arbitrary physical partition invariance;
+- content-derived Malli schema revisions;
+- deterministic canonicalization;
+- pure projection folds.
+
+The archaeology package does **not** implement another filesystem ledger. NBB/Node callers use `clio.infra.ledger/read-ledger` and `clio.infra.ledger/append-event!`; schema history uses Clio's schema store.
+
+## Portable package
+
+`archaeology/src/foresight/archaeology/` follows the same construction discipline as Clio:
+
+```text
+law.cljc -> shape.cljc -> domain.cljc -> infra.cljc
+```
+
+- `law.cljc` — archaeology invariants layered on Clio event laws.
+- `shape.cljc` — Malli data schemas, Clio event catalog, resource shape, derived projection shape.
+- `domain.cljc` — Clio canonicalization plus the pure run projection.
+- `infra.cljc` — host-neutral orchestration with file operations injected; callers supply Clio's runtime adapters.
+
+The infra namespace remains CLJC by taking `read-ledger` and revision data as dependencies rather than importing Node or JVM APIs.
+
+## Causal archaeology
+
+The **logical history** is the union of ledger files referenced by archaeology run resources. Files and PRs have no semantic ordering authority.
+
+A run event's `:event/causes` names its parent run event(s). A focused investigation may therefore fork from any prior run, and a later run may join multiple parent runs.
+
+A non-root run must also record one `:run/consumes` relation for each parent. That relation names the parent run and the parent action being continued, consumed, superseded, rejected, or acknowledged. Parentage therefore means causal work continuity, not merely "this happened later."
+
+## Projection
+
+The familiar aggregate is reconstructed from canonical history:
+
+```clojure
+{:event/id "<run uuid>"
+ :event/parents ["<parent run event>" ...]
+ :archaeology/topic "..."
+ :archaeology/summary "..."
+ :archaeology/consumes [...]
+ :archaeology/findings [...]
+ :archaeology/actions [...]
+ :evidence/refs [...]}
+```
+
+Those vectors are disposable derived state. Delete the projection and reconstruct it from the ledgers.
+
+## Recurring run
+
+Each archaeology execution:
+
+1. discovers `:archaeology/run` resource files;
+2. loads their referenced ledgers with Clio;
+3. loads historical schema revisions;
+4. canonicalizes the union and reconstructs the causal DAG;
+5. chooses or joins current run heads;
+6. reads parent action projections;
+7. mines a fresh concrete code cluster;
+8. appends new run/finding/action/evidence/relation events to fresh per-run ledgers;
+9. writes one new Katamorph resource referencing those ledgers;
+10. opens a Foresight PR and does not merge it.
+
+Corrections are new events. Existing ledger lines are never rewritten after they become causal history.
+
+## Initial vocabulary
+
+The seed run establishes provisional names only; future runs evolve them through events.
+
+- `Cell<T>` / `Slot<T>`
+- `Registry<K,V>`
+- `BoundedCache<K,V>`
+- `SeenSet<Id>`
+- `BoundedLog<T>` / `RingBuffer<T>`
+- `DAG<N>`
+- `CausalEventDAG<Event>`
+- `LedgerPartition<Event>`
+- `Projection<S,E>`
+- `Dispatch`
+- `Reconciler<Desired,Observed,Plan>`
+- `Driver` / `Adapter`
+- `Resource` + `Facet`
+
+The objective is semantic compression of Knoxx without making the production runtime carry archaeology machinery.
