@@ -682,28 +682,33 @@
   (when-let [stats (lstat-if-present! target-path "Receipt River file")]
     (require-regular-stats! stats "Receipt River file")))
 
-(defn open-append-target! [parent target-path]
-  (require-parent-identity! parent)
-  (require-safe-existing-target! target-path)
-  (let [flags (bit-or (fs-constant! "O_RDWR")
-                      (fs-constant! "O_APPEND")
-                      (fs-constant! "O_CREAT")
-                      (fs-constant! "O_NOFOLLOW")
-                      (fs-constant! "O_NONBLOCK"))
-        fd (try
-             (fs/openSync target-path flags 384)
-             (catch :default error
-               (append-error! (str "Receipt River file could not be securely opened: "
-                                   (.-message error)))))]
-    (try
-      (let [stats (fs/fstatSync fd bigint-stat-options)]
-        (require-regular-stats! stats "Receipt River file descriptor")
-        (require-path-identity! target-path stats "Receipt River file"
-                                require-regular-stats!)
-        (fs/fsyncSync (:fd parent))
-        {:fd fd :path target-path :stats stats})
-      (catch :default error
-        (close-after-open-error! fd error)))))
+(defn open-append-target!
+  ([parent target-path]
+   (open-append-target! parent target-path true))
+  ([parent target-path create?]
+   (require-parent-identity! parent)
+   (require-safe-existing-target! target-path)
+   (let [base-flags (bit-or (fs-constant! "O_RDWR")
+                            (fs-constant! "O_APPEND")
+                            (fs-constant! "O_NOFOLLOW")
+                            (fs-constant! "O_NONBLOCK"))
+         flags (if create?
+                 (bit-or base-flags (fs-constant! "O_CREAT"))
+                 base-flags)
+         fd (try
+              (fs/openSync target-path flags 384)
+              (catch :default error
+                (append-error! (str "Receipt River file could not be securely opened: "
+                                    (.-message error)))))]
+     (try
+       (let [stats (fs/fstatSync fd bigint-stat-options)]
+         (require-regular-stats! stats "Receipt River file descriptor")
+         (require-path-identity! target-path stats "Receipt River file"
+                                 require-regular-stats!)
+         (fs/fsyncSync (:fd parent))
+         {:fd fd :path target-path :stats stats})
+       (catch :default error
+         (close-after-open-error! fd error))))))
 
 (defn require-target-identity! [target]
   (let [fd-stats (fs/fstatSync (:fd target) bigint-stat-options)]
@@ -797,7 +802,10 @@
          (try
            (require-append-lock-identity! lock)
            (let [target-path (path/join (:proc-path parent) basename)
-                 target (open-append-target! parent target-path)]
+                 ;; Semantic evidence must extend an initialized ledger. Generic
+                 ;; append callers retain the explicit initialization path.
+                 target (open-append-target! parent target-path
+                                             (not validate-ledger?))]
              (try
                {:requested-file absolute-file
                 :directory directory

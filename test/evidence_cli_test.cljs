@@ -293,6 +293,15 @@
                (:refs receipt)))
         (is (re-find #"[.]ημ/receipts[.]edn$" (:file @captured)))))))
 
+(deftest evidence-append-refuses-to-recreate-a-missing-ledger
+  (with-receipt-fixture
+    (fn [{:keys [file]}]
+      (with-redefs [cli/receipt-file file]
+        (is (thrown-with-msg?
+             js/Error #"could not be securely opened"
+             (cli/append-evidence-receipt! passed-result)))
+        (is (not (fs/existsSync file)))))))
+
 (deftest gate-runs-preflight-durable-receipt-support
   (let [calls (atom [])
         catalog {:catalog/repositories
@@ -325,6 +334,8 @@
             catalog {:catalog/repositories
                      {"repo" {:repository/path "repo"
                               :repository/gates [local-gate]}}}]
+        ;; Semantic evidence appends require an explicitly initialized ledger.
+        (fs/writeFileSync file "" "utf8")
         (with-redefs [cli/receipt-file file
                       cli/require-repositories!
                       (fn [& _]
@@ -377,6 +388,33 @@
           (is (= "stale-or-held\n"
                  (fs/readFileSync lock-file "utf8"))))))))
 
+(deftest selected-gates-refuse-to-recreate-a-missing-ledger
+  (with-receipt-fixture
+    (fn [{:keys [directory file]}]
+      (let [gate-ran? (atom false)
+            lock-file (path/join directory ".receipts.edn.append.lock")
+            catalog {:catalog/repositories
+                     {"repo" {:repository/path "repo"
+                              :repository/gates [local-gate]}}}]
+        (with-redefs [cli/receipt-file file
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (reset! gate-ran? true)
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"could not be securely opened"
+               (cli/run-selected-gates!
+                catalog test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (false? @gate-ran?))
+          (is (not (fs/existsSync file)))
+          (is (not (fs/existsSync lock-file))))))))
+
 (deftest selected-gates-reject-an-invalid-held-ledger-before-execution
   (with-receipt-fixture
     (fn [{:keys [directory file]}]
@@ -415,6 +453,7 @@
             catalog {:catalog/repositories
                      {"repo" {:repository/path "repo"
                               :repository/gates [local-gate]}}}]
+        (fs/writeFileSync file "" "utf8")
         (with-redefs [cli/receipt-file file
                       cli/require-repositories!
                       (fn [& _]
