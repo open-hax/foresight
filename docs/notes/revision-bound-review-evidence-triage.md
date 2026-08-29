@@ -105,7 +105,7 @@ This reinforces the separation between desired state, provider evidence, runtime
 
 This is actionable runtime/persistence drift now that reconciliation has a production caller. It does **not** make the receipt law provisional: the semantic distinction is sound, while durable storage remains an infra/store decision.
 
-Until a durable sink is configured, the current runtime can prove that one reconciliation invocation emitted one lawful receipt during process lifetime, but it cannot treat the default journal as durable historical audit evidence across restart or retention rollover.
+Until a durable sink is configured, the current runtime can prove that one reconciliation invocation emitted one lawful receipt while that receipt remains retained, but it cannot treat the default journal as durable historical audit evidence across restart or retention rollover.
 
 ## Mu lift candidates
 
@@ -209,6 +209,9 @@ Current merged implementation evidence:
 - https://github.com/open-hax/knoxx/blob/0520b2677121f97b796a8309307c61ce418eaa6e/backend/src/cljs/knoxx/backend/law/translation_dispatch.cljc
 - https://github.com/open-hax/knoxx/blob/0a8f7f8961b336dd47ee77401df8d48ffe981b0d/backend/src/cljs/knoxx/backend/law/publication_reconciler.cljc
 - https://github.com/open-hax/knoxx/blob/0a8f7f8961b336dd47ee77401df8d48ffe981b0d/backend/src/cljs/knoxx/backend/infra/publication_reconciler.cljs
+
+Context and adjacent decisions:
+
 - https://github.com/open-hax/foresight/blob/df95723be66f228c69e4c276dbdc0cc183ba7a08/docs/notes/four-independent-capabilities-repository-translation-review-rendering.md
 - https://github.com/octave-commons/epiphany/commit/0370d6ce6d4e1e9f90d17b252884fe8ee4970f76
 
