@@ -47,6 +47,7 @@ candidates, and accepted lifts are not interchangeable.
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
 | `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |
+| `archaeology` | (root-owned native component) | causal-architecture-archaeology | Normalized Clio archaeology events, causal run composition, and disposable projections |
 
 When a new direct repository is added, update `.gitmodules`,
 `src/foresight/project.cljc` (`sources`, plus any new invariants), and this

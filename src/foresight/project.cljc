@@ -139,6 +139,16 @@
                        :basis/path "README.md"}
                       {:basis/repository "open-hax/foresight"
                        :basis/path "AGENTS.md"}]}
+   {:invariant/id :archaeology/normalized-ledgers-derived-projections
+    :invariant/scope :archaeology
+    :invariant/enforcement :declarative
+    :invariant/statement "Archaeology persists one fact per normalized Clio event; collection-shaped run views are disposable projections reconstructed from referenced ledger partitions."
+    :invariant/basis [{:basis/repository "open-hax/foresight"
+                       :basis/path "archaeology/src/foresight/archaeology/law.cljc"
+                       :basis/symbol "derived-collection-keys"}
+                      {:basis/repository "open-hax/foresight"
+                       :basis/path "archaeology/src/foresight/archaeology/domain.cljc"
+                       :basis/symbol "compose-run"}]}
    {:invariant/id :alpha/artifact-owns-embedded-relation-source
     :invariant/scope :alpha
     :invariant/enforcement :declarative
@@ -460,6 +470,13 @@
     :component/role :structural-integrity
     :component/invariants [:alpha/artifact-owns-embedded-relation-source
                            :alpha/reaction-operation-registered]}
+   {:component/id :archaeology
+    :component/path "archaeology"
+    :component/role :causal-architecture-archaeology
+    :component/invariants [:archaeology/normalized-ledgers-derived-projections
+                           :foresight/immutable-ledgers
+                           :foresight/derived-state-not-authority
+                           :foresight/provenance-under-eta-mu-root]}
    {:component/id :eta
     :component/path "eta"
     :component/role :transduction-harness
