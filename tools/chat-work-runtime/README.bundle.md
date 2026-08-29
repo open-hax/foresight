@@ -38,5 +38,6 @@ included under `lib/chat-work-tools/`.
 
 The Foresight runtime packaging is GPL-3.0-or-later, and reusable Foresight
 library code is LGPL-3.0-or-later. Complete license texts are under
-`share/licenses/`; bundled third-party components retain their upstream
-licenses.
+`share/licenses/`, including version-bound third-party notices and terms for
+Babashka, clj-kondo, rewrite-clj, and jscpd. Publisher-retained licenses remain
+inside the Node.js, npm, NBB, jscpd, and import-meta-resolve component trees.

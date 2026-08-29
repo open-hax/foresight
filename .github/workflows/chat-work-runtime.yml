@@ -50,6 +50,21 @@ jobs:
             "$runtime/share/licenses/foresight-LGPL-3.0-or-later.txt"
           cmp tools/chat-work-runtime/LICENSE \
             "$runtime/share/licenses/foresight-chat-work-runtime-GPL-3.0-or-later.txt"
+          cmp tools/chat-work-runtime/THIRD_PARTY_NOTICES.md \
+            "$runtime/share/licenses/THIRD_PARTY_NOTICES.md"
+          cmp tools/chat-work-runtime/licenses/EPL-1.0.txt \
+            "$runtime/share/licenses/EPL-1.0.txt"
+          cmp tools/chat-work-runtime/licenses/EPL-1.0.txt \
+            "$runtime/lib/chat-work-tools/node_modules/nbb/LICENSE"
+          cmp tools/chat-work-runtime/licenses/jscpd-MIT.txt \
+            "$runtime/share/licenses/jscpd-MIT.txt"
+          cmp tools/chat-work-runtime/licenses/jscpd-MIT.txt \
+            "$runtime/lib/chat-work-tools/node_modules/jscpd-linux-x64-gnu/LICENSE"
+          cmp tools/chat-work-runtime/licenses/rewrite-clj-MIT.txt \
+            "$runtime/share/licenses/rewrite-clj-MIT.txt"
+          test -s "$runtime/lib/node/LICENSE"
+          test -s "$runtime/lib/node/lib/node_modules/npm/LICENSE"
+          test -s "$runtime/lib/chat-work-tools/node_modules/import-meta-resolve/license"
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/node" --version
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/npm" --version
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/npx" --version

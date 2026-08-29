@@ -7,6 +7,40 @@ repo_dir="$(cd -- "$script_dir/../.." && pwd)"
 # shellcheck source=versions.env
 source "$script_dir/versions.env"
 
+package_version() {
+  local package_name="$1"
+  awk -v key="\"$package_name\":" '
+    $1 == key {
+      version = $2
+      gsub(/[\",]/, "", version)
+      print version
+      exit
+    }
+  ' "$script_dir/package.json"
+}
+
+locked_package_version() {
+  local package_name="$1"
+  awk -v key="\"node_modules/$package_name\":" '
+    $1 == key { in_package = 1; next }
+    in_package && $1 == "\"version\":" {
+      version = $2
+      gsub(/[\",]/, "", version)
+      print version
+      exit
+    }
+  ' "$script_dir/package-lock.json"
+}
+
+nbb_version="$(package_version nbb)"
+jscpd_version="$(package_version jscpd)"
+import_meta_resolve_version="$(locked_package_version import-meta-resolve)"
+if [[ -z "$nbb_version" || -z "$jscpd_version" ||
+      -z "$import_meta_resolve_version" ]]; then
+  echo "cannot derive third-party versions from the committed npm manifests" >&2
+  exit 2
+fi
+
 require_complete_license() {
   local license_file="$1"
   local license_name="$2"
@@ -26,6 +60,29 @@ require_complete_license "$repo_dir/LICENSE" "LGPL-3.0" \
 require_complete_license "$script_dir/LICENSE" "GPL-3.0" \
   "GNU GENERAL PUBLIC LICENSE" \
   "END OF TERMS AND CONDITIONS"
+require_complete_license "$script_dir/licenses/EPL-1.0.txt" "EPL-1.0" \
+  "Eclipse Public License - v 1.0" \
+  "any resulting litigation."
+require_complete_license "$script_dir/licenses/jscpd-MIT.txt" "jscpd MIT" \
+  "Copyright (c) 2013-2024 Andrey Kucherenko" \
+  "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE" \
+  "SOFTWARE."
+require_complete_license "$script_dir/licenses/rewrite-clj-MIT.txt" "rewrite-clj MIT" \
+  "Copyright (c) 2013-2018 Yannick Scherer" \
+  "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE" \
+  "SOFTWARE."
+for notice_marker in \
+  "Node.js $NODE_VERSION" \
+  "NBB $nbb_version" \
+  "Babashka $BABASHKA_VERSION" \
+  "clj-kondo $CLJ_KONDO_VERSION" \
+  "jscpd $jscpd_version" \
+  "import-meta-resolve $import_meta_resolve_version"; do
+  if ! grep -Fq -- "$notice_marker" "$script_dir/THIRD_PARTY_NOTICES.md"; then
+    echo "incomplete third-party notices: missing $notice_marker" >&2
+    exit 2
+  fi
+done
 
 arch="${ARCH:-x64}"
 output_dir="${OUTPUT_DIR:-$repo_dir/dist}"
@@ -75,6 +132,19 @@ grep "  $(basename -- "$node_archive")$" "$download_dir/node-shasums.txt" |
   (cd "$download_dir" && sha256sum --check --status -)
 mkdir -p "$bundle_dir/lib/node"
 tar --no-same-owner -xJf "$node_archive" --strip-components=1 -C "$bundle_dir/lib/node"
+npm_version="$(awk '
+  $1 == "\"version\":" {
+    version = $2
+    gsub(/[\",]/, "", version)
+    print version
+    exit
+  }
+' "$bundle_dir/lib/node/lib/node_modules/npm/package.json")"
+if [[ -z "$npm_version" ]] ||
+   ! grep -Fq -- "npm $npm_version" "$script_dir/THIRD_PARTY_NOTICES.md"; then
+  echo "incomplete third-party notices: missing npm $npm_version" >&2
+  exit 2
+fi
 
 # npm's CLI is JavaScript, but it still needs a Node executable matching the
 # build host. During a cross-build the staged target Node cannot execute here,
@@ -148,6 +218,10 @@ done
 
 cp "$repo_dir/LICENSE" "$bundle_dir/share/licenses/foresight-LGPL-3.0-or-later.txt"
 cp "$script_dir/LICENSE" "$bundle_dir/share/licenses/foresight-chat-work-runtime-GPL-3.0-or-later.txt"
+cp "$script_dir/THIRD_PARTY_NOTICES.md" "$bundle_dir/share/licenses/THIRD_PARTY_NOTICES.md"
+cp "$script_dir/licenses/EPL-1.0.txt" "$bundle_dir/share/licenses/EPL-1.0.txt"
+cp "$script_dir/licenses/jscpd-MIT.txt" "$bundle_dir/share/licenses/jscpd-MIT.txt"
+cp "$script_dir/licenses/rewrite-clj-MIT.txt" "$bundle_dir/share/licenses/rewrite-clj-MIT.txt"
 cp "$script_dir/README.bundle.md" "$bundle_dir/README.md"
 cp "$script_dir/versions.env" "$bundle_dir/versions.env"
 
