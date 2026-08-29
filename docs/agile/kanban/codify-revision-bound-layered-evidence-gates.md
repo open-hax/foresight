@@ -6,7 +6,7 @@ priority: "P1"
 labels: ["quality", "testing", "evidence"]
 created_at: "2026-08-29T15:09:34.997Z"
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-write-id: "1788016465568-0.1k2txrwznam1m3eha83"
+write-id: "1788017683088-0.zfo6wsuamlsc8nukjc5"
 ---
 
 # Codify revision-bound layered evidence gates
@@ -32,5 +32,7 @@ mapping card rather than guessing child commands.
 
 ---
 Portable evidence laws, exact-command runner, gate catalog, program specification, and positive/negative probes are implemented. Awaiting revision-bound PR review.
+
+Review findings addressed locally: promotion now requires one explicit target revision across every required gate; dirty, unverifiable, or moving child checkouts cannot emit passing revision evidence; list --only rejects unmapped repositories; spawn-error and approved-not-applicable exit paths have regression tests. Root suites pass 46 tests/178 assertions, and Katamorph static passes at 708f1bb6 with the controlled tool PATH. Awaiting exact-head CI and rereview.
 
 ---

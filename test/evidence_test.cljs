@@ -94,13 +94,38 @@
     (is (= :result/outcome (get-in summary [:result/errors 0 :error])))))
 
 (deftest promotion-is-closed-over-required-gates
-  (let [passed [{:gate/id :repo/unit :result/outcome :passed}
-                {:gate/id :repo/integration :result/outcome :passed}]]
-    (is (evidence/promotion-ready? #{:repo/unit :repo/integration} passed))
-    (is (false? (evidence/promotion-ready? #{:repo/unit :repo/e2e} passed)))
+  (let [revision "abc123"
+        passed [{:gate/id :repo/unit
+                 :result/outcome :passed
+                 :result/revision revision}
+                {:gate/id :repo/integration
+                 :result/outcome :passed
+                 :result/revision revision}]]
+    (is (evidence/promotion-ready?
+         revision #{:repo/unit :repo/integration} passed))
     (is (false? (evidence/promotion-ready?
+                 revision #{:repo/unit :repo/e2e} passed)))
+    (is (false? (evidence/promotion-ready?
+                 revision
                  #{:repo/unit}
-                 [{:gate/id :repo/unit :result/outcome :unavailable}])))))
+                 [{:gate/id :repo/unit
+                   :result/outcome :unavailable
+                   :result/revision revision}])))))
+
+(deftest promotion-requires-one-unambiguous-target-revision
+  (let [unit {:gate/id :repo/unit
+              :result/outcome :passed
+              :result/revision "revision-a"}
+        integration {:gate/id :repo/integration
+                     :result/outcome :passed
+                     :result/revision "revision-b"}]
+    (is (false? (evidence/promotion-ready?
+                 "revision-a" #{:repo/unit :repo/integration}
+                 [unit integration])))
+    (is (false? (evidence/promotion-ready?
+                 "" #{:repo/unit} [unit])))
+    (is (false? (evidence/promotion-ready?
+                 "revision-a" #{:repo/unit} [unit unit])))))
 
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))

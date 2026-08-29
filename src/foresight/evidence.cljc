@@ -146,7 +146,18 @@
          :result/counts (into (sorted-map) counts)
          :result/satisfied? (and (seq results) (every? satisfied? results))}))))
 
-(defn promotion-ready? [required-gate-ids results]
-  (let [by-id (into {} (map (juxt :gate/id identity)) results)]
-    (and (seq required-gate-ids)
-         (every? #(some-> (get by-id %) satisfied?) required-gate-ids))))
+(defn promotion-ready? [target-revision required-gate-ids results]
+  (let [required-gate-ids (set required-gate-ids)
+        required-results (filterv #(contains? required-gate-ids (:gate/id %))
+                                  results)
+        gate-id-counts (frequencies (map :gate/id required-results))
+        by-id (into {} (map (juxt :gate/id identity)) required-results)]
+    (and (nonblank-string? target-revision)
+         (seq required-gate-ids)
+         (every? #(= 1 (get gate-id-counts % 0)) required-gate-ids)
+         (every? (fn [gate-id]
+                   (when-let [result (get by-id gate-id)]
+                     (and (valid-result? result)
+                          (satisfied? result)
+                          (= target-revision (:result/revision result)))))
+                 required-gate-ids))))

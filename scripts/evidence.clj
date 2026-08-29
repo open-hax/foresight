@@ -55,29 +55,40 @@
         (throw (js/Error. (str "Unknown argument: " arg))))
       options)))
 
+(defn require-mapped-repositories! [catalog repository-paths]
+  (let [known (set (keys (:catalog/repositories catalog)))
+        unknown (seq (remove known repository-paths))]
+    (when unknown
+      (throw (js/Error. (str "Repositories have no mapped gates: "
+                             (str/join ", " unknown)))))
+    repository-paths))
+
 (defn require-repositories! [catalog only]
   (when-not (seq only)
     (throw (js/Error. "Choose repositories with --only <paths>")))
-  (let [known (set (keys (:catalog/repositories catalog)))
-        unknown (seq (remove known only))]
-    (when unknown
-      (throw (js/Error. (str "Repositories have no mapped gates: "
-                             (str/join ", " unknown))))))
+  (require-mapped-repositories! catalog only)
   (let [inventory (workspace/inventory)
         selected (workspace/select-repos inventory {:only only :all? false})
-        available (filterv #(and (:exists %) (:initialized %)) selected)
+        available (filterv #(and (:exists %)
+                                 (:initialized %)
+                                 (false? (:dirty %))
+                                 (empty? (:git-errors %)))
+                           selected)
         execution-paths (into {}
                               (map (fn [{:keys [repo absolute]}]
                                      [(:path repo) absolute]))
                               (workspace/execution-paths! available))]
     (into {}
-          (map (fn [{:keys [path exists initialized head]}]
+          (map (fn [{:keys [path exists initialized dirty git-errors head]}]
                  [path (if-let [absolute (get execution-paths path)]
                          {:absolute absolute :revision head}
                          {:unavailable-reason
                           (cond
                             (not exists) "Repository checkout is missing"
                             (not initialized) "Repository checkout is not initialized"
+                            (seq git-errors) "Repository Git state could not be verified"
+                            (true? dirty) "Repository checkout is dirty"
+                            (nil? dirty) "Repository checkout cleanliness is unavailable"
                             :else "Repository checkout is unavailable")
                           :revision head})]))
           selected)))
@@ -108,12 +119,27 @@
              :result/outcome :failed
              :result/exit status})))
 
-(defn run-gate! [{:keys [absolute unavailable-reason revision]} gate]
+(defn local-unavailable-reason [{:keys [absolute revision]}]
+  (let [{:keys [initialized head dirty git-errors]}
+        (workspace/git-state absolute)]
+    (cond
+      (not initialized) "Repository checkout became uninitialized"
+      (seq git-errors) "Repository Git state could not be reverified"
+      (true? dirty) "Repository checkout became dirty"
+      (nil? dirty) "Repository checkout cleanliness could not be reverified"
+      (not= revision head) "Repository revision changed after inventory"
+      :else nil)))
+
+(defn run-gate! [{:keys [absolute unavailable-reason revision] :as repository} gate]
   (println "START" (str (:gate/id gate)) (name (:gate/kind gate)))
   (let [result
         (case (:gate/execution gate)
           :local (if absolute
-                   (local-result absolute gate)
+                   (if-let [reason (local-unavailable-reason repository)]
+                     {:gate/id (:gate/id gate)
+                      :result/outcome :unavailable
+                      :result/reason reason}
+                     (local-result absolute gate))
                    {:gate/id (:gate/id gate)
                     :result/outcome :unavailable
                     :result/reason unavailable-reason})
@@ -142,7 +168,9 @@
     2))
 
 (defn list-gates! [catalog {:keys [only kinds]}]
-  (let [paths (or only (set (keys (:catalog/repositories catalog))))
+  (let [paths (if only
+                (require-mapped-repositories! catalog only)
+                (set (keys (:catalog/repositories catalog))))
         gates (law/select-gates catalog (sort paths) kinds)]
     (doseq [gate gates]
       (println (str (:gate/id gate))
