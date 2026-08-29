@@ -248,7 +248,7 @@ cp "$script_dir/versions.env" "$bundle_dir/versions.env"
       exit 1
     fi
     printf '%s\t%s\n' "$link" "$target"
-  done < <(find . -type l -print0 | sort -z)
+  done < <(find . -type l -print0 | LC_ALL=C sort -z)
 ) > "$bundle_dir/SYMLINKS.tsv"
 
 cat > "$bundle_dir/bin/verify-integrity" <<'EOF'
@@ -338,7 +338,7 @@ chmod 0755 "$bundle_dir/bin/verify-integrity"
       exit 1
     fi
     printf '%s\t%s\n' "$(stat -c '%a' -- "$executable")" "$executable"
-  done < <(find . -type f -perm /111 -print0 | sort -z)
+  done < <(find . -type f -perm /111 -print0 | LC_ALL=C sort -z)
 ) > "$bundle_dir/EXECUTABLES.tsv"
 
 # Record every payload entry and its filesystem type with NUL delimiters. This
@@ -355,7 +355,7 @@ chmod 0755 "$bundle_dir/bin/verify-integrity"
 
 (
   cd "$bundle_dir"
-  find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
+  find . -type f ! -name SHA256SUMS -print0 | LC_ALL=C sort -z | xargs -0 sha256sum > SHA256SUMS
 )
 
 archive_path="$output_dir/$bundle_name.tar.gz"
