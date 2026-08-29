@@ -1,8 +1,8 @@
 (ns alpha.law.markdown.profile-test
   (:require [alpha.law.markdown.profile :as profile]
             [alpha.law.markdown.schema :as markdown]
-            #?(:clj [clojure.test :refer [deftest is testing]]
-               :cljs [cljs.test :refer-macros [deftest is testing]])))
+            #?(:clj [clojure.test :refer [deftest is]]
+               :cljs [cljs.test :refer-macros [deftest is]])))
 
 (def epiphany-profile
   {:profile/id :epiphany/governed-document

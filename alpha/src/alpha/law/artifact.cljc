@@ -40,8 +40,8 @@
    [:document/format [:= :markdown]]
    [:document/source-path {:optional true} :string]
    [:document/frontmatter-present? :boolean]
-   [:document/frontmatter/raw [:maybe :string]]
-   [:document/frontmatter/data :map]
+   [:document/frontmatter-raw [:maybe :string]]
+   [:document/frontmatter-data :map]
    [:document/body :string]
    [:document/structure {:optional true} [:vector :any]]])
 
