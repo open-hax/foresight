@@ -61,3 +61,12 @@
   spore: none
   receipt-refs: 2026-08-29T22:48:30Z
   note: A secure descriptor can still preserve the wrong history if the canonical ledger is silently recreated; semantic evidence now requires prior initialization while the generic primitive retains an explicit creation path.
+- ts: 2026-08-29T23:08:08Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind semantic reservation to committed Receipt River history
+  p-efficiency: 0.83
+  p-friction: 0.64
+  p-skill-candidate: 0.52
+  spore: none
+  receipt-refs: 2026-08-29T23:08:08Z
+  note: Existence and shape validity do not preserve history after truncation; a semantic reservation must join the held filesystem snapshot to the immutable ledger bytes at the exact current Git HEAD.

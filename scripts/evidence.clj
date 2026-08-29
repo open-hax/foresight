@@ -162,6 +162,10 @@
                  ["status" "--porcelain=v1" "--untracked-files=no"
                   "--ignore-submodules=none"])})
 
+(defn current-committed-receipt-bytes! []
+  (let [revision (str/trim (git-capture! ["rev-parse" "HEAD"]))]
+    (:ledger/bytes (read-immutable-receipt-ledger! revision))))
+
 (defn require-current-clean-root! [expected-revision state]
   (when-not (= expected-revision (:root/revision state))
     (throw (js/Error. "Reviewed root revision is not the current HEAD")))
@@ -775,10 +779,17 @@
       (append-error! "Receipt River file changed during held content validation"))
     second-read))
 
-(defn validate-held-receipt-ledger! [target]
+(defn buffer-prefix? [prefix value]
+  (and (<= (.-length prefix) (.-length value))
+       (.equals prefix (.subarray value 0 (.-length prefix)))))
+
+(defn validate-held-receipt-ledger! [target committed-bytes]
   (let [bytes (stable-held-target-bytes! target)
         records (read-receipt-records!
                  (decode-utf8! bytes "held Receipt River ledger"))]
+    (when-not (buffer-prefix? committed-bytes bytes)
+      (append-error!
+       "Receipt River does not preserve the committed ledger as a prefix"))
     (require-valid-receipt-records! records)
     bytes))
 
@@ -805,7 +816,10 @@
                  ;; Semantic evidence must extend an initialized ledger. Generic
                  ;; append callers retain the explicit initialization path.
                  target (open-append-target! parent target-path
-                                             (not validate-ledger?))]
+                                             (not validate-ledger?))
+                 committed-ledger-bytes
+                 (when validate-ledger?
+                   (current-committed-receipt-bytes!))]
              (try
                {:requested-file absolute-file
                 :directory directory
@@ -815,7 +829,8 @@
                 :target-path target-path
                 :held-ledger-bytes
                 (if validate-ledger?
-                  (validate-held-receipt-ledger! target)
+                  (validate-held-receipt-ledger!
+                   target committed-ledger-bytes)
                   (stable-held-target-bytes! target))
                 :target-open? (atom true)
                 :write-started? (atom false)
@@ -995,10 +1010,6 @@
           summary (law/summarize-results results)]
       (println "SUMMARY" (pr-str summary))
       (reduce max 0 (map result-exit results)))))
-
-(defn buffer-prefix? [prefix value]
-  (and (<= (.-length prefix) (.-length value))
-       (.equals prefix (.subarray value 0 (.-length prefix)))))
 
 (defn appended-receipt-records! [base-bytes head-bytes]
   (when-not (buffer-prefix? base-bytes head-bytes)

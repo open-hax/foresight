@@ -337,6 +337,14 @@
         ;; Semantic evidence appends require an explicitly initialized ledger.
         (fs/writeFileSync file "" "utf8")
         (with-redefs [cli/receipt-file file
+                      cli/git-capture!
+                      (fn [args]
+                        (is (= ["rev-parse" "HEAD"] args))
+                        reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger!
+                      (fn [revision]
+                        (is (= reviewed-root-revision revision))
+                        {:ledger/bytes (js/Buffer.alloc 0)})
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -415,6 +423,63 @@
           (is (not (fs/existsSync file)))
           (is (not (fs/existsSync lock-file))))))))
 
+(deftest selected-gates-reject-a-valid-truncated-committed-ledger
+  (let [first-record {:ts "2026-08-29T22:58:48Z"
+                      :kind :decision
+                      :repo "."
+                      :origin "test"
+                      :owner "test"
+                      :dod "preserve first"
+                      :pi "eta-mu"
+                      :host "test"
+                      :manifest ["test"]
+                      :refs ["first"]}
+        second-record (assoc first-record
+                             :ts "2026-08-29T22:58:49Z"
+                             :dod "preserve second"
+                             :refs ["second"])
+        first-line (str (pr-str first-record) "\n")
+        committed-text (str first-line (pr-str second-record) "\n")
+        committed-bytes (js/Buffer.from committed-text "utf8")
+        catalog {:catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}]
+    (is (law/receipt-envelope? first-record))
+    (is (law/receipt-envelope? second-record))
+    (doseq [held-text ["" first-line]]
+      (with-receipt-fixture
+        (fn [{:keys [directory file]}]
+          (let [gate-ran? (atom false)
+                lock-file (path/join directory
+                                     ".receipts.edn.append.lock")]
+            (fs/writeFileSync file held-text "utf8")
+            (with-redefs [cli/receipt-file file
+                          cli/git-capture!
+                          (fn [args]
+                            (is (= ["rev-parse" "HEAD"] args))
+                            reviewed-root-revision)
+                          cli/read-immutable-receipt-ledger!
+                          (fn [revision]
+                            (is (= reviewed-root-revision revision))
+                            {:ledger/bytes committed-bytes})
+                          cli/require-repositories!
+                          (fn [& _]
+                            {"repo" {:path "repo"
+                                     :absolute "/repo"
+                                     :revision child-revision}})
+                          cli/run-gate!
+                          (fn [& _]
+                            (reset! gate-ran? true)
+                            passed-result)]
+              (is (thrown-with-msg?
+                   js/Error #"does not preserve the committed ledger"
+                   (cli/run-selected-gates!
+                    catalog test-catalog-identity
+                    {:only #{"repo"} :kinds #{:unit}})))
+              (is (false? @gate-ran?))
+              (is (= held-text (fs/readFileSync file "utf8")))
+              (is (not (fs/existsSync lock-file))))))))))
+
 (deftest selected-gates-reject-an-invalid-held-ledger-before-execution
   (with-receipt-fixture
     (fn [{:keys [directory file]}]
@@ -426,6 +491,11 @@
                               :repository/gates [local-gate]}}}]
         (fs/writeFileSync file invalid-ledger "utf8")
         (with-redefs [cli/receipt-file file
+                      cli/git-capture!
+                      (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger!
+                      (fn [_]
+                        {:ledger/bytes (js/Buffer.alloc 0)})
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -455,6 +525,11 @@
                               :repository/gates [local-gate]}}}]
         (fs/writeFileSync file "" "utf8")
         (with-redefs [cli/receipt-file file
+                      cli/git-capture!
+                      (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger!
+                      (fn [_]
+                        {:ledger/bytes (js/Buffer.alloc 0)})
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
