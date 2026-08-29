@@ -267,6 +267,12 @@ cd "$bundle_root"
 tree_snapshot=$(mktemp "/tmp/foresight-runtime-tree.XXXXXX")
 trap 'rm -f -- "$tree_snapshot"' EXIT
 trap 'exit 130' HUP INT TERM
+for bootstrap_manifest in TREE.types0 SHA256SUMS; do
+  if [ ! -f "$bootstrap_manifest" ] || [ -L "$bootstrap_manifest" ]; then
+    echo "bootstrap manifest must be a regular file: $bootstrap_manifest" >&2
+    exit 1
+  fi
+done
 find . -mindepth 1 \
   ! -path './TREE.types0' \
   ! -path './SHA256SUMS' \
@@ -353,6 +359,7 @@ chmod 0755 "$bundle_dir/bin/verify-integrity"
 )
 
 archive_path="$output_dir/$bundle_name.tar.gz"
-tar --owner=0 --group=0 -C "$work_dir" -czf "$archive_path" "$bundle_name"
+LC_ALL=C tar --sort=name --mtime='@0' --owner=0 --group=0 --numeric-owner \
+  -C "$work_dir" -cf - "$bundle_name" | gzip -n > "$archive_path"
 (cd "$output_dir" && sha256sum "$bundle_name.tar.gz" > "$bundle_name.tar.gz.sha256")
 printf '%s\n' "$archive_path"

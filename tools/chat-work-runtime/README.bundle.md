@@ -37,6 +37,10 @@ NBB, jscpd, and
 their transitive npm packages were installed from the committed lockfile
 included under `lib/chat-work-tools/`.
 
+Archive order, ownership, timestamps, and gzip metadata are normalized, so the
+same inputs produce the same archive and adjacent checksum bytes. The root
+Foresight duplication task calls the bundled `jscpd` entry point directly.
+
 The Foresight runtime packaging is GPL-3.0-or-later, and reusable Foresight
 library code is LGPL-3.0-or-later. Complete license texts are under
 `share/licenses/`, including version-bound third-party notices and terms for

@@ -25,6 +25,11 @@ the bundled Node directly, so they do not depend on a host Node executable,
 first changing `PATH`, or the extraction path omitting the POSIX `PATH`
 separator (`:`).
 
+Archive entries have normalized order, ownership, and timestamps, and gzip omits
+host metadata, so identical inputs produce identical archive and checksum bytes.
+The root `scripts/workspace.clj jscpd` task invokes the bundled `jscpd` entry
+point directly rather than resolving another package through a registry.
+
 The archive covers root Foresight NBB tasks and its standard lint/duplication
 tools. It does not cover `eta` or `alpha` JVM tasks.
 

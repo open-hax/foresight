@@ -35,6 +35,16 @@ jobs:
         run: |
           set -euo pipefail
           tools/chat-work-runtime/build.sh
+      - name: Prove reproducible archive bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          second_output="$RUNNER_TEMP/reproducible-runtime"
+          OUTPUT_DIR="$second_output" tools/chat-work-runtime/build.sh
+          cmp dist/foresight-chat-work-linux-x64.tar.gz \
+            "$second_output/foresight-chat-work-linux-x64.tar.gz"
+          cmp dist/foresight-chat-work-linux-x64.tar.gz.sha256 \
+            "$second_output/foresight-chat-work-linux-x64.tar.gz.sha256"
       - name: Smoke test relocated tools
         shell: bash
         run: |
@@ -115,6 +125,22 @@ jobs:
             cp "$external_copy" "$regular_file"
             chmod "$original_file_mode" "$regular_file"
             bin/verify-integrity
+
+            # TREE.types0 and SHA256SUMS cannot describe their own types, so
+            # prove the verifier's explicit bootstrap-type checks fail closed.
+            for bootstrap_manifest in TREE.types0 SHA256SUMS; do
+              external_manifest="$tmp_dir/$bootstrap_manifest.external"
+              cp "$bootstrap_manifest" "$external_manifest"
+              rm -- "$bootstrap_manifest"
+              ln -s "$external_manifest" "$bootstrap_manifest"
+              if bin/verify-integrity; then
+                echo "$bootstrap_manifest symlink substitution passed integrity verification" >&2
+                exit 1
+              fi
+              rm -- "$bootstrap_manifest"
+              cp "$external_manifest" "$bootstrap_manifest"
+              bin/verify-integrity
+            done
 
             executable="./bin/node"
             expected_mode="$(awk -F '\t' -v path="$executable" \
