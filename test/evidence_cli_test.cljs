@@ -310,6 +310,66 @@
             {:only #{"repo"} :kinds #{:unit}})))
       (is (= [:preflight] @calls)))))
 
+(deftest selected-gates-hold-the-receipt-reservation-before-execution
+  (with-receipt-fixture
+    (fn [{:keys [directory file]}]
+      (let [gate-ran? (atom false)
+            lock-file (path/join directory ".receipts.edn.append.lock")
+            catalog {:catalog/repositories
+                     {"repo" {:repository/path "repo"
+                              :repository/gates [local-gate]}}}]
+        (with-redefs [cli/receipt-file file
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (reset! gate-ran? true)
+                        (is (fs/existsSync lock-file))
+                        (is (fs/existsSync file))
+                        passed-result)]
+          (is (zero? (cli/run-selected-gates!
+                      catalog test-catalog-identity
+                      {:only #{"repo"} :kinds #{:unit}})))
+          (is @gate-ran?)
+          (is (not (fs/existsSync lock-file)))
+          (let [records (cli/read-receipt-records!
+                         (fs/readFileSync file "utf8"))]
+            (is (= 1 (count records)))
+            (is (= passed-result (:evidence/result (first records))))))))))
+
+(deftest selected-gates-reject-an-unsafe-receipt-target-before-execution
+  (with-receipt-fixture
+    (fn [{:keys [directory file]}]
+      (let [gate-ran? (atom false)
+            lock-file (path/join directory ".receipts.edn.append.lock")
+            catalog {:catalog/repositories
+                     {"repo" {:repository/path "repo"
+                              :repository/gates [local-gate]}}}]
+        (fs/writeFileSync lock-file "stale-or-held\n"
+                          #js {:encoding "utf8" :flag "wx"})
+        (with-redefs [cli/receipt-file file
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (reset! gate-ran? true)
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"another writer holds the append lock"
+               (cli/run-selected-gates!
+                catalog test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (false? @gate-ran?))
+          (is (not (fs/existsSync file)))
+          (is (= "stale-or-held\n"
+                 (fs/readFileSync lock-file "utf8"))))))))
+
 (deftest receipt-lines-require-one-complete-edn-form
   (is (= [{:a 1}] (cli/read-receipt-records! "{:a 1}\n")))
   (is (thrown-with-msg?

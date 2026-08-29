@@ -747,75 +747,114 @@
                             " UTF-8 bytes")))
       line)))
 
-(defn append-edn-line! [file record]
+(defn open-append-reservation! [file]
   (require-secure-append-support!)
   (let [absolute-file (path/resolve file)
         directory (path/dirname absolute-file)
         basename (path/basename absolute-file)
-        line (encode-edn-line! record)
         parent (open-parent-directory! directory)]
     (try
-      (let [lock (acquire-append-lock! parent basename)
-            write-started? (atom false)
-            write-verified? (atom false)]
-          (try
-            (require-append-lock-identity! lock)
-            (let [target-path (path/join (:proc-path parent) basename)
-                  target (open-append-target! parent target-path)
-                  result
-                  (try
-                    (*secure-append-phase-hook*
-                     :before-write
-                     {:requested-file absolute-file
-                      :directory directory
-                      :target-path target-path})
-                    (require-parent-identity! parent)
-                    (require-append-lock-identity! lock)
-                    (let [before (require-target-identity! target)
-                          before-size (safe-file-size! before)
-                          separator (if (terminal-newline? (:fd target) before-size)
-                                      ""
-                                      "\n")
-                          payload (.encode (js/TextEncoder.)
-                                           (str separator line "\n"))]
-                      (when-not (= before-size
-                                   (safe-file-size!
-                                    (require-target-identity! target)))
-                        (append-error!
-                         "Receipt River file changed while the append lock was held"))
-                      (reset! write-started? true)
-                      (write-all! (:fd target) payload)
-                      (fs/fsyncSync (:fd target))
-                      (require-append-lock-identity! lock)
-                      (let [after (require-target-identity! target)
-                            expected-size (+ before-size (.-byteLength payload))]
-                        (when-not (= expected-size (safe-file-size! after))
-                          (append-error! "Receipt River append size verification failed")))
-                      (require-parent-identity! parent)
-                      (*secure-append-phase-hook*
-                       :after-write
-                       {:requested-file absolute-file
-                        :directory directory
-                        :target-path target-path})
-                      (require-parent-identity! parent)
-                      (require-append-lock-identity! lock)
-                      (require-target-identity! target)
-                      record)
-                    (finally
-                      (fs/closeSync (:fd target))))]
-              (reset! write-verified? true)
-              result)
-            (finally
-              (if (and @write-started? (not @write-verified?))
-                ;; A short write, fsync failure, or post-write identity change may
-                ;; have left a partial ledger line. Retain the lock as a durable
-                ;; quarantine marker so a later writer cannot normalize the damage.
-                (fs/closeSync (:fd lock))
-                (release-append-lock! parent lock)))))
-      (finally
-        (fs/closeSync (:fd parent))))))
+      (let [lock (acquire-append-lock! parent basename)]
+        (try
+          (require-append-lock-identity! lock)
+          (let [target-path (path/join (:proc-path parent) basename)
+                target (open-append-target! parent target-path)]
+            {:requested-file absolute-file
+             :directory directory
+             :parent parent
+             :lock lock
+             :target target
+             :target-path target-path
+             :target-open? (atom true)
+             :write-started? (atom false)
+             :write-verified? (atom false)})
+          (catch :default error
+            (release-append-lock! parent lock)
+            (throw error))))
+      (catch :default error
+        (fs/closeSync (:fd parent))
+        (throw error)))))
 
-(defn append-evidence-receipt! [result]
+(defn close-append-reservation!
+  [{:keys [parent lock target target-open? write-started? write-verified?]}]
+  (try
+    (when @target-open?
+      (fs/closeSync (:fd target))
+      (reset! target-open? false))
+    (finally
+      (try
+        (if (and @write-started? (not @write-verified?))
+          ;; A short write, fsync/close failure, or post-write identity change may
+          ;; have left a partial ledger line. Retain the lock as a durable
+          ;; quarantine marker so a later writer cannot normalize the damage.
+          (fs/closeSync (:fd lock))
+          (release-append-lock! parent lock))
+        (finally
+          (fs/closeSync (:fd parent)))))))
+
+(defn with-append-reservation! [file run!]
+  (let [reservation (open-append-reservation! file)]
+    (try
+      (run! reservation)
+      (finally
+        (close-append-reservation! reservation)))))
+
+(defn append-reserved-edn-line!
+  [{:keys [requested-file directory parent lock target target-path
+           target-open? write-started? write-verified?]}
+   record
+   line]
+  (*secure-append-phase-hook*
+   :before-write
+   {:requested-file requested-file
+    :directory directory
+    :target-path target-path})
+  (require-parent-identity! parent)
+  (require-append-lock-identity! lock)
+  (let [before (require-target-identity! target)
+        before-size (safe-file-size! before)
+        separator (if (terminal-newline? (:fd target) before-size)
+                    ""
+                    "\n")
+        payload (.encode (js/TextEncoder.)
+                         (str separator line "\n"))]
+    (when-not (= before-size
+                 (safe-file-size!
+                  (require-target-identity! target)))
+      (append-error!
+       "Receipt River file changed while the append lock was held"))
+    (reset! write-started? true)
+    (write-all! (:fd target) payload)
+    (fs/fsyncSync (:fd target))
+    (require-append-lock-identity! lock)
+    (let [after (require-target-identity! target)
+          expected-size (+ before-size (.-byteLength payload))]
+      (when-not (= expected-size (safe-file-size! after))
+        (append-error! "Receipt River append size verification failed")))
+    (require-parent-identity! parent)
+    (*secure-append-phase-hook*
+     :after-write
+     {:requested-file requested-file
+      :directory directory
+      :target-path target-path})
+    (require-parent-identity! parent)
+    (require-append-lock-identity! lock)
+    (require-target-identity! target)
+    ;; Closing is part of the verified write boundary. If it fails, the outer
+    ;; reservation cleanup retains the lock as a quarantine marker.
+    (fs/closeSync (:fd target))
+    (reset! target-open? false)
+    (reset! write-verified? true)
+    record))
+
+(defn append-edn-line! [file record]
+  ;; Reject malformed or oversized records before opening or creating anything.
+  (let [line (encode-edn-line! record)]
+    (with-append-reservation!
+      file
+      #(append-reserved-edn-line! % record line))))
+
+(defn validated-evidence-receipt! [result]
   (let [receipt (evidence-receipt result
                                   (.toISOString (js/Date.))
                                   (os/hostname)
@@ -824,7 +863,15 @@
       (throw (js/Error.
               (str "Gate result cannot be recorded as an evidence receipt: "
                    (pr-str (law/result-errors result))))))
-    (append-edn-line! receipt-file receipt)))
+    receipt))
+
+(defn append-evidence-receipt!
+  ([result]
+   (append-edn-line! receipt-file (validated-evidence-receipt! result)))
+  ([reservation result]
+   (let [receipt (validated-evidence-receipt! result)]
+     (append-reserved-edn-line! reservation receipt
+                                (encode-edn-line! receipt)))))
 
 (defn result-exit [{:result/keys [outcome]}]
   (case outcome
@@ -870,11 +917,18 @@
                               (throw (js/Error.
                                       (str "Gate repository is not in the catalog: "
                                            (:gate/id gate)))))
-                            (let [result (run-gate! (get paths repository-path)
-                                                    gate
-                                                    catalog-identity)]
-                              (append-evidence-receipt! result)
-                              result)))
+                            ;; Hold the exact parent, writer lock, and target
+                            ;; descriptor before the gate starts. The same
+                            ;; reservation retains the resulting receipt.
+                            (with-append-reservation!
+                              receipt-file
+                              (fn [reservation]
+                                (let [result (run-gate!
+                                              (get paths repository-path)
+                                              gate
+                                              catalog-identity)]
+                                  (append-evidence-receipt! reservation result)
+                                  result)))))
                         gates)
           summary (law/summarize-results results)]
       (println "SUMMARY" (pr-str summary))
