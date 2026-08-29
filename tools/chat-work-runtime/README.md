@@ -9,7 +9,9 @@ tools/chat-work-runtime/build.sh
 The default output is `dist/foresight-chat-work-linux-x64.tar.gz` plus its
 SHA-256 file. Cross-build ARM64 with `ARCH=arm64`; all downloaded native
 executables match the requested architecture, so the build host need not run
-them. The final smoke test must run on the target architecture.
+them. When host and target differ, the builder uses a separately
+publisher-verified host Node only to materialize the locked target npm graph.
+The final executable smoke test must still run on the target architecture.
 
 Native version pins live in `versions.env`; the NBB/jscpd direct and transitive
 npm graph is committed in `package-lock.json` and installed with `npm ci`.

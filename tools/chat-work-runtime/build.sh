@@ -56,6 +56,28 @@ grep "  $(basename -- "$node_archive")$" "$download_dir/node-shasums.txt" |
 mkdir -p "$bundle_dir/lib/node"
 tar --no-same-owner -xJf "$node_archive" --strip-components=1 -C "$bundle_dir/lib/node"
 
+# npm's CLI is JavaScript, but it still needs a Node executable matching the
+# build host. During a cross-build the staged target Node cannot execute here,
+# so download the same publisher-verified Node release for the host and use it
+# only to materialize the locked target dependency graph.
+case "$(uname -m)" in
+  x86_64) host_node_arch="x64" ;;
+  aarch64 | arm64) host_node_arch="arm64" ;;
+  *) echo "unsupported build-host architecture: $(uname -m)" >&2; exit 2 ;;
+esac
+npm_node="$bundle_dir/lib/node/bin/node"
+if [[ "$host_node_arch" != "$node_arch" ]]; then
+  host_node_archive="$download_dir/node-v$NODE_VERSION-linux-$host_node_arch.tar.xz"
+  download "https://nodejs.org/dist/v$NODE_VERSION/$(basename -- "$host_node_archive")" \
+    "$host_node_archive"
+  grep "  $(basename -- "$host_node_archive")$" "$download_dir/node-shasums.txt" |
+    (cd "$download_dir" && sha256sum --check --status -)
+  host_node_dir="$work_dir/host-node"
+  mkdir -p "$host_node_dir"
+  tar --no-same-owner -xJf "$host_node_archive" --strip-components=1 -C "$host_node_dir"
+  npm_node="$host_node_dir/bin/node"
+fi
+
 bb_archive="$download_dir/babashka-$BABASHKA_VERSION-linux-$native_arch-static.tar.gz"
 bb_url="https://github.com/babashka/babashka/releases/download/v$BABASHKA_VERSION/$(basename -- "$bb_archive")"
 download "$bb_url" "$bb_archive"
@@ -74,7 +96,7 @@ unzip -q "$kondo_archive" -d "$bundle_dir/bin"
 tools_prefix="$bundle_dir/lib/chat-work-tools"
 mkdir -p "$tools_prefix"
 cp "$script_dir/package.json" "$script_dir/package-lock.json" "$tools_prefix/"
-"$bundle_dir/lib/node/bin/node" \
+"$npm_node" \
   "$bundle_dir/lib/node/lib/node_modules/npm/bin/npm-cli.js" \
   ci --prefix "$tools_prefix" --omit=dev --ignore-scripts --no-audit --no-fund \
   --cpu="$node_arch" --os=linux --libc=glibc
