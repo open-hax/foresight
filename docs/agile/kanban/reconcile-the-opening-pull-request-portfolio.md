@@ -6,7 +6,7 @@ priority: "P1"
 labels: ["portfolio", "github", "evidence"]
 created_at: "2026-08-29T15:09:34.069Z"
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-write-id: "1788016338074-0.0uxawdbisxbe0vk8nfq"
+write-id: "1788017025804-0.5f2dza0sjgmjowqo4yk"
 ---
 
 # Reconcile the opening pull-request portfolio
@@ -30,5 +30,7 @@ item one terminal disposition from the program spec.
 
 ---
 Active parallel reconciliation tranches cover Foresight, eta-mu, Knoxx, services, and the residual child inventory.
+
+Residual audit recorded from live GitHub evidence: 91 PRs classified, Proxx #315/#321/#325 closed as exact duplicates, Proxx #317 closed as zero-diff, and Foresight #48 plus Epiphany #7/#8 merged. The remaining 84 have explicit repair, split, supersession, or external-blocker dispositions in docs/notes/portfolio-terminal-state-audit-2026-08-29.md. Foresight #38 and #41-#47 have since merged; #37 is evidence-blocked and #40 remains under final verification.
 
 ---
