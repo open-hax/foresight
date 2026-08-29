@@ -53,6 +53,9 @@ jobs:
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/bb" --version
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/clj-kondo" --version
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/jscpd" --version
+          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:$empty_path" node --version
+          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:$empty_path" nbb --version
+          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:$empty_path" jscpd --version
           "$runtime/bin/verify-integrity"
 
           # Prove the integrity verifier rejects a retargeted dependency link.

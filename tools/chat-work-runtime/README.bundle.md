@@ -30,7 +30,9 @@ regular files and symbolic-link targets with:
 
 The verifier uses the host's `sha256sum` and `readlink` commands. Node-based
 entry points themselves always resolve the bundled Node executable, including
-when invoked directly without adding the bundle to `PATH`.
+when invoked directly without adding the bundle to `PATH`. NBB, jscpd, and
+their transitive npm packages were installed from the committed lockfile
+included under `lib/chat-work-tools/`.
 
 The Foresight runtime packaging is GPL-3.0-or-later, and reusable Foresight
 library code is LGPL-3.0-or-later. License notices are under `share/licenses/`;
