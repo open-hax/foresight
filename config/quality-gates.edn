@@ -91,49 +91,49 @@
    :repository/gates
    [{:gate/id :knoxx/backend-static
      :gate/kind :static
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "backend" "run" "typecheck"]
-     :gate/source "knoxx/.github/workflows/ci.yml"}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/.github/workflows/ci.yml"
+     :gate/reason "The owning Knoxx workflow installs and typechecks the backend package; Foresight does not encode or enter child package roots."}
     {:gate/id :knoxx/frontend-static
      :gate/kind :static
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "frontend" "run" "typecheck"]
-     :gate/source "knoxx/.github/workflows/ci.yml"}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/.github/workflows/ci.yml"
+     :gate/reason "The owning Knoxx workflow installs and typechecks the frontend package; Foresight does not encode or enter child package roots."}
     {:gate/id :knoxx/backend-unit
      :gate/kind :unit
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "backend" "run" "test"]
-     :gate/source "knoxx/backend/package.json"}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/.github/workflows/ci.yml"
+     :gate/reason "The owning Knoxx workflow runs backend tests with coverage after its repository-specific setup; no child-owned root command exposes that gate."}
     {:gate/id :knoxx/frontend-cljs-unit
      :gate/kind :unit
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "frontend" "run" "test:cljs"]
-     :gate/source "knoxx/.github/workflows/ci.yml"}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/.github/workflows/ci.yml"
+     :gate/reason "The owning Knoxx workflow runs the frontend CLJS tests; no child-owned root command exposes that gate."}
     {:gate/id :knoxx/frontend-unit
      :gate/kind :unit
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "frontend" "run" "test"]
-     :gate/source "knoxx/frontend/package.json"}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/.github/workflows/ci.yml"
+     :gate/reason "The owning Knoxx workflow runs frontend tests with coverage; no child-owned root command exposes that gate."}
     {:gate/id :knoxx/backend-integration
      :gate/kind :integration
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "backend" "run" "test:e2e"]
-     :gate/source "knoxx/backend/package.json"}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/.github/workflows/ci.yml"
+     :gate/reason "The owning Knoxx workflow boots the real backend and exercises its MCP surface with required Docker; Foresight does not reproduce that setup."}
     {:gate/id :knoxx/frontend-e2e
      :gate/kind :e2e
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "frontend" "run" "test:e2e"]
-     :gate/source "knoxx/README.md"}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/README.md"
+     :gate/reason "Knoxx documents only a nested frontend command and its current CI does not expose this gate; Knoxx must add a child-owned root gate before Foresight can invoke it."}
     {:gate/id :knoxx/backend-coverage
      :gate/kind :coverage
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "backend" "run" "test:coverage"]
-     :gate/source "knoxx/.github/workflows/ci.yml"}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/.github/workflows/ci.yml"
+     :gate/reason "The owning Knoxx workflow emits and uploads backend coverage after repository-specific setup; no child-owned root command exposes that gate."}
     {:gate/id :knoxx/frontend-coverage
      :gate/kind :coverage
-     :gate/execution :local
-     :gate/command ["pnpm" "-C" "frontend" "run" "test:coverage"]
-     :gate/source "knoxx/.github/workflows/ci.yml"}]}
+     :gate/execution :workflow-only
+     :gate/source "knoxx/.github/workflows/ci.yml"
+     :gate/reason "The owning Knoxx workflow emits and uploads frontend coverage; no child-owned root command exposes that gate."}]}
 
   "muse"
   {:repository/path "muse"

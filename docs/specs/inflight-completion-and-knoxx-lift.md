@@ -110,6 +110,13 @@ initialized, clean, error-free, and at the captured HEAD immediately before
 and after the spawn. Any post-spawn movement, dirty state, or unverifiable Git
 state rejects the attempted result and cannot emit a revision-bound pass.
 
+Catalog validation rejects keys that are not actionable direct submodules in
+the portable project inventory. Root execution never encodes a child's nested
+package layout: a child without an owning root command remains workflow-only or
+external. Promotion receives the trusted catalog snapshot and its identity and
+requires every result's repository, execution mode, source, command, and
+revision to match the selected gate exactly.
+
 ### Gate kinds
 
 | Gate | What it proves | Minimum evidence |

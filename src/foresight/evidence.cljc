@@ -111,6 +111,16 @@
 (defn valid-catalog? [catalog]
   (empty? (catalog-errors catalog)))
 
+(defn catalog-inventory-errors [catalog actionable-submodule-paths]
+  (let [actionable-submodule-paths (set actionable-submodule-paths)]
+    (->> (:catalog/repositories catalog)
+         keys
+         (remove actionable-submodule-paths)
+         sort
+         (mapv (fn [repository-path]
+                 {:error :catalog/repository-not-actionable-submodule
+                  :repository repository-path})))))
+
 (defn select-gates
   ([catalog repository-paths]
    (select-gates catalog repository-paths gate-kinds))
@@ -169,6 +179,27 @@
   (or (= :passed (:result/outcome result))
       (explicit-not-applicable? result)))
 
+(defn gate-index [catalog]
+  (into {}
+        (mapcat (fn [[repository-path repository]]
+                  (map (fn [gate]
+                         [(:gate/id gate)
+                          {:repository/path repository-path
+                           :gate gate}])
+                       (:repository/gates repository))))
+        (:catalog/repositories catalog)))
+
+(defn result-matches-gate?
+  [catalog-identity target-revision result
+   {:keys [repository/path gate]}]
+  (and (= catalog-identity (:result/catalog result))
+       (= (:gate/execution gate) (:result/execution result))
+       (= (:gate/command gate) (:result/command result))
+       (= {:source/path (:gate/source gate)
+           :source/repository path
+           :source/revision target-revision}
+          (:result/source result))))
+
 (defn summarize-results [results]
   (let [errors (vec (mapcat result-errors results))]
     (if (seq errors)
@@ -186,18 +217,28 @@
          :result/counts (into (sorted-map) counts)
          :result/satisfied? (and (seq results) (every? satisfied? results))}))))
 
-(defn promotion-ready? [target-revision required-gate-ids results]
+(defn promotion-ready?
+  [catalog catalog-identity target-revision required-gate-ids results]
   (let [required-gate-ids (set required-gate-ids)
         required-results (filterv #(contains? required-gate-ids (:gate/id %))
                                   results)
         gate-id-counts (frequencies (map :gate/id required-results))
-        by-id (into {} (map (juxt :gate/id identity)) required-results)]
-    (and (nonblank-string? target-revision)
+        by-id (into {} (map (juxt :gate/id identity)) required-results)
+        trusted-gates (gate-index catalog)]
+    (and (valid-catalog? catalog)
+         (catalog-identity? catalog-identity)
+         (nonblank-string? target-revision)
          (seq required-gate-ids)
+         (every? #(contains? trusted-gates %) required-gate-ids)
          (every? #(= 1 (get gate-id-counts % 0)) required-gate-ids)
          (every? (fn [gate-id]
                    (when-let [result (get by-id gate-id)]
                      (and (valid-result? result)
                           (satisfied? result)
-                          (= target-revision (:result/revision result)))))
+                          (= target-revision (:result/revision result))
+                          (result-matches-gate?
+                           catalog-identity
+                           target-revision
+                           result
+                           (get trusted-gates gate-id)))))
                  required-gate-ids))))

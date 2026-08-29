@@ -59,7 +59,10 @@ owning gates are not represented by an exact root `package.json` script. Every
 entry cites the owning manifest or workflow and classifies the gate as static,
 unit, integration, E2E, coverage, security, build, live smoke, or independent
 review. The catalog also distinguishes locally runnable commands from
-workflow-only and externally hosted gates.
+workflow-only and externally hosted gates. Catalog repository keys must be a
+subset of the project model's actionable direct submodules. Foresight never
+enters a child's nested package root; when the child exposes no root command,
+the owning workflow stays explicit and unavailable to local root execution.
 
 `scripts/evidence.clj` validates and runs only mapped commands for explicitly
 selected direct submodules. It repeats workspace path and checkout-identity
@@ -69,9 +72,11 @@ every required gate. Every `START` and `RESULT` retains the exact argument
 vector, a SHA-256 identity for the raw gate catalog, and the owning source path
 plus repository revision. A checkout that moves or becomes dirty during a gate
 produces unavailable evidence with the observed revision, never a
-revision-bound pass. Failed, blocked, unavailable, and not-applicable are
-separate outcomes; a missing checkout, tool, credential, or host never becomes
-a pass. See
+revision-bound pass. Promotion compares every retained result's catalog
+identity, repository, execution mode, source, and exact command against the
+trusted catalog snapshot; shape-valid but synthesized evidence cannot satisfy
+a gate. Failed, blocked, unavailable, and not-applicable are separate outcomes;
+a missing checkout, tool, credential, or host never becomes a pass. See
 [`docs/specs/inflight-completion-and-knoxx-lift.md`](docs/specs/inflight-completion-and-knoxx-lift.md)
 for the revision-bound promotion and test-tier contract.
 

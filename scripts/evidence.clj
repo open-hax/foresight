@@ -4,6 +4,7 @@
             [cljs.reader :as reader]
             [clojure.string :as str]
             [foresight.evidence :as law]
+            [foresight.project :as project-model]
             [nbb.core :as nbb]
             [workspace :as workspace]
             ["child_process" :as child-process]
@@ -33,10 +34,22 @@
 (defn read-catalog []
   (:catalog (read-catalog-bundle)))
 
-(defn validate-catalog! [catalog]
-  (when-let [errors (seq (law/catalog-errors catalog))]
+(defn actionable-submodule-paths []
+  (into #{}
+        (comp (filter :source/actionable?)
+              (map :source/path))
+        (project-model/submodule-sources)))
+
+(defn validate-catalog!
+  ([catalog]
+   (validate-catalog! catalog (actionable-submodule-paths)))
+  ([catalog actionable-paths]
+   (when-let [errors (seq (into (law/catalog-errors catalog)
+                                (law/catalog-inventory-errors
+                                 catalog
+                                 actionable-paths)))]
     (throw (js/Error. (str "Invalid quality gate catalog: " (pr-str errors)))))
-  catalog)
+   catalog))
 
 (defn parse-csv [value flag]
   (let [values (into #{} (remove str/blank?)

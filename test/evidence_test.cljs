@@ -14,6 +14,11 @@
        :gate/execution :local
        :gate/command ["tool" "test"]
        :gate/source "repo/README.md"}
+      {:gate/id :repo/integration
+       :gate/kind :integration
+       :gate/execution :local
+       :gate/command ["tool" "integration"]
+       :gate/source "repo/README.md"}
       {:gate/id :repo/live
        :gate/kind :live-smoke
        :gate/execution :external
@@ -25,15 +30,23 @@
    :catalog/sha256 (apply str (repeat 64 "a"))})
 
 (defn recorded-result [gate-id outcome revision]
-  {:gate/id gate-id
-   :result/outcome outcome
-   :result/execution :local
-   :result/command ["tool" "test"]
-   :result/catalog test-catalog-identity
-   :result/source {:source/path "repo/package.json"
-                   :source/repository "repo"
-                   :source/revision revision}
-   :result/revision revision})
+  (let [gate (or (some #(when (= gate-id (:gate/id %)) %)
+                       (get-in valid-catalog
+                               [:catalog/repositories "repo"
+                                :repository/gates]))
+                 {:gate/execution :local
+                  :gate/command ["tool" "test"]
+                  :gate/source "repo/README.md"})]
+    (cond-> {:gate/id gate-id
+             :result/outcome outcome
+             :result/execution (:gate/execution gate)
+             :result/catalog test-catalog-identity
+             :result/source {:source/path (:gate/source gate)
+                             :source/repository "repo"
+                             :source/revision revision}
+             :result/revision revision}
+      (:gate/command gate)
+      (assoc :result/command (:gate/command gate)))))
 
 (deftest validates-gate-catalogs
   (is (evidence/valid-catalog? valid-catalog))
@@ -49,7 +62,7 @@
           (first
            (evidence/catalog-errors
             (update-in valid-catalog
-                       [:catalog/repositories "repo" :repository/gates 1]
+                       [:catalog/repositories "repo" :repository/gates 2]
                        dissoc :gate/reason)))))))
 
 (deftest rejects-duplicate-gate-identities
@@ -62,6 +75,12 @@
                                        :repository/gates 0])]})]
     (is (= {:error :gate/id-duplicates :gate/ids [:repo/unit]}
            (last (evidence/catalog-errors duplicate))))))
+
+(deftest catalog-repositories-must-be-actionable-direct-submodules
+  (is (empty? (evidence/catalog-inventory-errors valid-catalog #{"repo"})))
+  (is (= [{:error :catalog/repository-not-actionable-submodule
+           :repository "repo"}]
+         (evidence/catalog-inventory-errors valid-catalog #{"other"}))))
 
 (deftest selects-repositories-and-kinds
   (is (= [:repo/unit]
@@ -127,11 +146,13 @@
         passed [(recorded-result :repo/unit :passed revision)
                 (recorded-result :repo/integration :passed revision)]]
     (is (evidence/promotion-ready?
-         revision #{:repo/unit :repo/integration} passed))
+         valid-catalog test-catalog-identity revision
+         #{:repo/unit :repo/integration} passed))
     (is (false? (evidence/promotion-ready?
-                 revision #{:repo/unit :repo/e2e} passed)))
+                 valid-catalog test-catalog-identity revision
+                 #{:repo/unit :repo/e2e} passed)))
     (is (false? (evidence/promotion-ready?
-                 revision
+                 valid-catalog test-catalog-identity revision
                  #{:repo/unit}
                  [(recorded-result :repo/unit :unavailable revision)])))))
 
@@ -139,12 +160,36 @@
   (let [unit (recorded-result :repo/unit :passed "revision-a")
         integration (recorded-result :repo/integration :passed "revision-b")]
     (is (false? (evidence/promotion-ready?
-                 "revision-a" #{:repo/unit :repo/integration}
+                 valid-catalog test-catalog-identity "revision-a"
+                 #{:repo/unit :repo/integration}
                  [unit integration])))
     (is (false? (evidence/promotion-ready?
+                 valid-catalog test-catalog-identity
                  "" #{:repo/unit} [unit])))
     (is (false? (evidence/promotion-ready?
+                 valid-catalog test-catalog-identity
                  "revision-a" #{:repo/unit} [unit unit])))))
+
+(deftest promotion-results-must-match-the-trusted-catalog-snapshot
+  (let [revision "revision-a"
+        result (recorded-result :repo/unit :passed revision)
+        ready? #(evidence/promotion-ready?
+                 valid-catalog test-catalog-identity revision
+                 #{:repo/unit} [%])]
+    (is (ready? result))
+    (is (false? (ready? (assoc result :result/command ["true"]))))
+    (is (false? (ready? (assoc result :result/execution :external))))
+    (is (false? (ready? (assoc result
+                               :result/catalog
+                               (assoc test-catalog-identity
+                                      :catalog/sha256
+                                      (apply str (repeat 64 "b")))))))
+    (is (false? (ready? (assoc-in result
+                                  [:result/source :source/path]
+                                  "repo/forged.edn"))))
+    (is (false? (ready? (assoc-in result
+                                  [:result/source :source/repository]
+                                  "other"))))))
 
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))

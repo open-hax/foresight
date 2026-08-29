@@ -28,12 +28,28 @@
   (let [{:keys [catalog catalog-identity]} (cli/read-catalog-bundle)]
     (is (law/valid-catalog? catalog))
     (is (identical? catalog (cli/validate-catalog! catalog)))
+    (is (contains? (cli/actionable-submodule-paths) "knoxx"))
+    (is (not (contains? (cli/actionable-submodule-paths) ".agents")))
     (is (= "config/quality-gates.edn" (:catalog/path catalog-identity)))
     (is (re-matches #"[0-9a-f]{64}" (:catalog/sha256 catalog-identity)))
+    (is (thrown-with-msg?
+         js/Error
+         #"catalog/repository-not-actionable-submodule"
+         (cli/validate-catalog!
+          (assoc-in catalog
+                    [:catalog/repositories "typo"]
+                    {:repository/path "typo" :repository/gates []}))))
     (is (thrown-with-msg? js/Error #"Repositories have no mapped gates"
                           (cli/list-gates! catalog
                                            {:only #{"missing"}
                                             :kinds law/gate-kinds})))))
+
+(deftest knoxx-gates-remain-under-knoxx-ownership
+  (let [gates (get-in (cli/read-catalog)
+                      [:catalog/repositories "knoxx" :repository/gates])]
+    (is (seq gates))
+    (is (every? #(= :workflow-only (:gate/execution %)) gates))
+    (is (every? #(not (contains? % :gate/command)) gates))))
 
 (deftest local-process-results-do-not-hide-failures
   (with-redefs [cli/spawn-result (fn [& _] #js {:status 0})]
