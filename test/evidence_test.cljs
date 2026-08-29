@@ -20,6 +20,21 @@
        :gate/source "repo/.github/workflows/deploy.yml"
        :gate/reason "Requires the target host"}]}}})
 
+(def test-catalog-identity
+  {:catalog/path "config/quality-gates.edn"
+   :catalog/sha256 (apply str (repeat 64 "a"))})
+
+(defn recorded-result [gate-id outcome revision]
+  {:gate/id gate-id
+   :result/outcome outcome
+   :result/execution :local
+   :result/command ["tool" "test"]
+   :result/catalog test-catalog-identity
+   :result/source {:source/path "repo/package.json"
+                   :source/repository "repo"
+                   :source/revision revision}
+   :result/revision revision})
+
 (deftest validates-gate-catalogs
   (is (evidence/valid-catalog? valid-catalog))
   (is (= :gate/command
@@ -64,43 +79,53 @@
                             :result/approved-by "review/42"})))
 
 (deftest validates-result-outcomes-and-not-applicable-approval
-  (is (evidence/valid-result? {:gate/id :repo/unit
-                               :result/outcome :passed}))
+  (let [passed (recorded-result :repo/unit :passed "revision-a")]
+    (is (evidence/valid-result? passed))
+    (is (= :result/command
+           (:error (first (evidence/result-errors
+                           (dissoc passed :result/command))))))
+    (is (= :result/catalog
+           (:error (first (evidence/result-errors
+                           (assoc-in passed
+                                     [:result/catalog :catalog/sha256]
+                                     "not-a-digest"))))))
+    (is (= :result/source-revision
+           (:error (first (evidence/result-errors
+                           (assoc-in passed
+                                     [:result/source :source/revision]
+                                     "revision-b")))))))
   (is (= :result/outcome
          (:error (first (evidence/result-errors
-                         {:gate/id :repo/unit
-                          :result/outcome :greenish})))))
+                         (recorded-result :repo/unit :greenish
+                                          "revision-a"))))))
   (is (= :result/not-applicable-approval
          (:error (first (evidence/result-errors
-                         {:gate/id :repo/e2e
-                          :result/outcome :not-applicable
-                          :result/reason "No user surface"}))))))
+                         (assoc (recorded-result :repo/e2e
+                                                :not-applicable
+                                                "revision-a")
+                                :result/reason "No user surface")))))))
 
 (deftest summary-keeps-the-strongest-non-pass-visible
   (is (= {:result/outcome :blocked
           :result/counts {:blocked 1 :passed 1 :unavailable 1}
           :result/satisfied? false}
          (evidence/summarize-results
-          [{:gate/id :repo/unit :result/outcome :passed}
-           {:gate/id :repo/e2e :result/outcome :unavailable}
-           {:gate/id :repo/live :result/outcome :blocked}])))
+          [(recorded-result :repo/unit :passed "revision-a")
+           (recorded-result :repo/e2e :unavailable "revision-a")
+           (recorded-result :repo/live :blocked "revision-a")])))
   (is (= :unavailable (:result/outcome (evidence/summarize-results [])))))
 
 (deftest invalid-result-data-fails-the-summary
   (let [summary (evidence/summarize-results
-                 [{:gate/id :repo/unit :result/outcome :unknown}])]
+                 [(recorded-result :repo/unit :unknown "revision-a")])]
     (is (= :failed (:result/outcome summary)))
     (is (false? (:result/satisfied? summary)))
     (is (= :result/outcome (get-in summary [:result/errors 0 :error])))))
 
 (deftest promotion-is-closed-over-required-gates
   (let [revision "abc123"
-        passed [{:gate/id :repo/unit
-                 :result/outcome :passed
-                 :result/revision revision}
-                {:gate/id :repo/integration
-                 :result/outcome :passed
-                 :result/revision revision}]]
+        passed [(recorded-result :repo/unit :passed revision)
+                (recorded-result :repo/integration :passed revision)]]
     (is (evidence/promotion-ready?
          revision #{:repo/unit :repo/integration} passed))
     (is (false? (evidence/promotion-ready?
@@ -108,17 +133,11 @@
     (is (false? (evidence/promotion-ready?
                  revision
                  #{:repo/unit}
-                 [{:gate/id :repo/unit
-                   :result/outcome :unavailable
-                   :result/revision revision}])))))
+                 [(recorded-result :repo/unit :unavailable revision)])))))
 
 (deftest promotion-requires-one-unambiguous-target-revision
-  (let [unit {:gate/id :repo/unit
-              :result/outcome :passed
-              :result/revision "revision-a"}
-        integration {:gate/id :repo/integration
-                     :result/outcome :passed
-                     :result/revision "revision-b"}]
+  (let [unit (recorded-result :repo/unit :passed "revision-a")
+        integration (recorded-result :repo/integration :passed "revision-b")]
     (is (false? (evidence/promotion-ready?
                  "revision-a" #{:repo/unit :repo/integration}
                  [unit integration])))

@@ -103,6 +103,13 @@ host suites, switch one consumer, and only then retire duplicated logic.
 Evidence is bound to the exact revision under decision. A rerun on a different
 head is new evidence, not an update to the old result.
 
+For locally spawned gates, the runner captures one raw catalog snapshot and
+retains its SHA-256 identity, the exact argument vector, and the gate source
+path plus repository revision in every result. The selected checkout must be
+initialized, clean, error-free, and at the captured HEAD immediately before
+and after the spawn. Any post-spawn movement, dirty state, or unverifiable Git
+state rejects the attempted result and cannot emit a revision-bound pass.
+
 ### Gate kinds
 
 | Gate | What it proves | Minimum evidence |

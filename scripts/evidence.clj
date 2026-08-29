@@ -7,6 +7,7 @@
             [nbb.core :as nbb]
             [workspace :as workspace]
             ["child_process" :as child-process]
+            ["crypto" :as crypto]
             ["fs" :as fs]
             ["path" :as path]))
 
@@ -16,8 +17,21 @@
 (def catalog-file
   (path/join root "config" "quality-gates.edn"))
 
+(def catalog-relative-path "config/quality-gates.edn")
+
+(defn sha256 [value]
+  (-> (crypto/createHash "sha256")
+      (.update value "utf8")
+      (.digest "hex")))
+
+(defn read-catalog-bundle []
+  (let [contents (fs/readFileSync catalog-file "utf8")]
+    {:catalog (reader/read-string contents)
+     :catalog-identity {:catalog/path catalog-relative-path
+                        :catalog/sha256 (sha256 contents)}}))
+
 (defn read-catalog []
-  (reader/read-string (fs/readFileSync catalog-file "utf8")))
+  (:catalog (read-catalog-bundle)))
 
 (defn validate-catalog! [catalog]
   (when-let [errors (seq (law/catalog-errors catalog))]
@@ -81,8 +95,9 @@
     (into {}
           (map (fn [{:keys [path exists initialized dirty git-errors head]}]
                  [path (if-let [absolute (get execution-paths path)]
-                         {:absolute absolute :revision head}
-                         {:unavailable-reason
+                         {:path path :absolute absolute :revision head}
+                         {:path path
+                          :unavailable-reason
                           (cond
                             (not exists) "Repository checkout is missing"
                             (not initialized) "Repository checkout is not initialized"
@@ -119,9 +134,10 @@
              :result/outcome :failed
              :result/exit status})))
 
-(defn local-unavailable-reason [{:keys [absolute revision]}]
-  (let [{:keys [initialized head dirty git-errors]}
-        (workspace/git-state absolute)]
+(defn local-unavailable-reason
+  ([{:keys [absolute] :as repository}]
+   (local-unavailable-reason repository (workspace/git-state absolute)))
+  ([{:keys [revision]} {:keys [initialized head dirty git-errors]}]
     (cond
       (not initialized) "Repository checkout became uninitialized"
       (seq git-errors) "Repository Git state could not be reverified"
@@ -130,33 +146,67 @@
       (not= revision head) "Repository revision changed after inventory"
       :else nil)))
 
-(defn run-gate! [{:keys [absolute unavailable-reason revision] :as repository} gate]
-  (println "START" (str (:gate/id gate)) (name (:gate/kind gate)))
-  (let [result
+(defn result-provenance
+  [{:keys [path revision]} gate catalog-identity]
+  (cond-> {:result/execution (:gate/execution gate)
+           :result/catalog catalog-identity
+           :result/source {:source/path (:gate/source gate)
+                           :source/repository path
+                           :source/revision revision}}
+    (seq (:gate/command gate))
+    (assoc :result/command (vec (:gate/command gate)))))
+
+(defn run-local-gate!
+  [{:keys [absolute unavailable-reason revision] :as repository} gate]
+  (if-not absolute
+    {:gate/id (:gate/id gate)
+     :result/outcome :unavailable
+     :result/reason unavailable-reason}
+    (if-let [reason (local-unavailable-reason repository)]
+      {:gate/id (:gate/id gate)
+       :result/outcome :unavailable
+       :result/reason reason}
+      (let [attempt (local-result absolute gate)
+            post-state (workspace/git-state absolute)]
+        (if-let [reason (local-unavailable-reason repository post-state)]
+          (cond-> {:gate/id (:gate/id gate)
+                   :result/outcome :unavailable
+                   :result/reason (str "Evidence rejected after gate execution: " reason)
+                   :result/attempt-outcome (:result/outcome attempt)}
+            (contains? attempt :result/exit)
+            (assoc :result/attempt-exit (:result/exit attempt))
+
+            (law/nonblank-string? (:head post-state))
+            (assoc :result/observed-revision (:head post-state)))
+          (cond-> attempt
+            (law/nonblank-string? revision)
+            (assoc :result/revision revision)))))))
+
+(defn run-gate! [{:keys [revision] :as repository} gate catalog-identity]
+  (let [provenance (result-provenance repository gate catalog-identity)]
+    (println "START"
+             (pr-str (merge {:gate/id (:gate/id gate)
+                             :gate/kind (:gate/kind gate)}
+                            provenance)))
+    (let [result
         (case (:gate/execution gate)
-          :local (if absolute
-                   (if-let [reason (local-unavailable-reason repository)]
-                     {:gate/id (:gate/id gate)
-                      :result/outcome :unavailable
-                      :result/reason reason}
-                     (local-result absolute gate))
-                   {:gate/id (:gate/id gate)
-                    :result/outcome :unavailable
-                    :result/reason unavailable-reason})
-          :workflow-only {:gate/id (:gate/id gate)
-                          :result/outcome :unavailable
-                          :result/reason (:gate/reason gate)}
-          :external {:gate/id (:gate/id gate)
-                     :result/outcome :blocked
-                     :result/reason (:gate/reason gate)})
-        result (cond-> result
-                 (law/nonblank-string? revision)
-                 (assoc :result/revision revision))]
-    (println (str/upper-case (name (:result/outcome result)))
-             (str (:gate/id gate))
-             (or (:result/reason result) ""))
-    (println "RESULT" (pr-str result))
-    result))
+          :local (run-local-gate! repository gate)
+          :workflow-only (cond-> {:gate/id (:gate/id gate)
+                                  :result/outcome :unavailable
+                                  :result/reason (:gate/reason gate)}
+                           (law/nonblank-string? revision)
+                           (assoc :result/revision revision))
+          :external (cond-> {:gate/id (:gate/id gate)
+                             :result/outcome :blocked
+                             :result/reason (:gate/reason gate)}
+                      (law/nonblank-string? revision)
+                      (assoc :result/revision revision)))
+          result (merge result provenance)]
+      (println (str/upper-case (name (:result/outcome result)))
+               (str (:gate/id gate))
+               (or (:result/reason result) ""))
+      (println "RESULT" (pr-str result))
+      result)))
 
 (defn result-exit [{:result/keys [outcome]}]
   (case outcome
@@ -187,7 +237,7 @@
             repository-path))
         (:catalog/repositories catalog)))
 
-(defn run-selected-gates! [catalog {:keys [only kinds]}]
+(defn run-selected-gates! [catalog catalog-identity {:keys [only kinds]}]
   (let [paths (require-repositories! catalog only)
         gates (law/select-gates catalog (sort only) kinds)]
     (when (empty? gates)
@@ -198,7 +248,9 @@
                               (throw (js/Error.
                                       (str "Gate repository is not in the catalog: "
                                            (:gate/id gate)))))
-                            (run-gate! (get paths repository-path) gate)))
+                            (run-gate! (get paths repository-path)
+                                       gate
+                                       catalog-identity)))
                         gates)
           summary (law/summarize-results results)]
       (println "SUMMARY" (pr-str summary))
@@ -207,12 +259,13 @@
 (defn -main [& args]
   (try
     (let [[command & option-args] args
-          catalog (validate-catalog! (read-catalog))
+          {:keys [catalog catalog-identity]} (read-catalog-bundle)
+          catalog (validate-catalog! catalog)
           options (parse-args option-args)]
       (case command
         "validate" (do (println "PASS quality gate catalog") 0)
         "list" (list-gates! catalog options)
-        "run" (run-selected-gates! catalog options)
+        "run" (run-selected-gates! catalog catalog-identity options)
         (throw (js/Error. (str "Unknown command: " (or command "<missing>"))))))
     (catch :default error
       (binding [*out* *err*] (println (.-message error)))

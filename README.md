@@ -63,10 +63,15 @@ workflow-only and externally hosted gates.
 
 `scripts/evidence.clj` validates and runs only mapped commands for explicitly
 selected direct submodules. It repeats workspace path and checkout-identity
-checks before spawning a process, rejects dirty or moving checkouts, and binds
-promotion to one explicit target revision across every required gate. Failed,
-blocked, unavailable, and not-applicable are separate outcomes; a missing
-checkout, tool, credential, or host never becomes a pass. See
+checks immediately before and after every spawned process, rejects dirty or
+moving checkouts, and binds promotion to one explicit target revision across
+every required gate. Every `START` and `RESULT` retains the exact argument
+vector, a SHA-256 identity for the raw gate catalog, and the owning source path
+plus repository revision. A checkout that moves or becomes dirty during a gate
+produces unavailable evidence with the observed revision, never a
+revision-bound pass. Failed, blocked, unavailable, and not-applicable are
+separate outcomes; a missing checkout, tool, credential, or host never becomes
+a pass. See
 [`docs/specs/inflight-completion-and-knoxx-lift.md`](docs/specs/inflight-completion-and-knoxx-lift.md)
 for the revision-bound promotion and test-tier contract.
 

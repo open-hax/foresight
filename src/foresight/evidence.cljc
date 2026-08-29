@@ -23,6 +23,22 @@
 (defn command? [value]
   (and (vector? value) (seq value) (every? nonblank-string? value)))
 
+(defn sha256? [value]
+  (and (nonblank-string? value)
+       (boolean (re-matches #"[0-9a-f]{64}" value))))
+
+(defn catalog-identity? [value]
+  (and (map? value)
+       (nonblank-string? (:catalog/path value))
+       (sha256? (:catalog/sha256 value))))
+
+(defn source-identity? [value]
+  (and (map? value)
+       (nonblank-string? (:source/path value))
+       (nonblank-string? (:source/repository value))
+       (or (nil? (:source/revision value))
+           (nonblank-string? (:source/revision value)))))
+
 (defn gate-errors
   [repository-path gate]
   (cond-> []
@@ -111,7 +127,10 @@
        (nonblank-string? (:result/approved-by result))))
 
 (defn result-errors [result]
-  (cond-> []
+  (let [execution (:result/execution result)
+        source (:result/source result)
+        revision (:result/revision result)]
+    (cond-> []
     (not (keyword? (:gate/id result)))
     (conj {:error :result/gate-id :result result})
 
@@ -120,7 +139,28 @@
 
     (and (= :not-applicable (:result/outcome result))
          (not (explicit-not-applicable? result)))
-    (conj {:error :result/not-applicable-approval :result result})))
+    (conj {:error :result/not-applicable-approval :result result})
+
+    (not (contains? executions execution))
+    (conj {:error :result/execution :result result})
+
+    (and (= :local execution)
+         (not (command? (:result/command result))))
+    (conj {:error :result/command :result result})
+
+    (not (catalog-identity? (:result/catalog result)))
+    (conj {:error :result/catalog :result result})
+
+    (not (source-identity? source))
+    (conj {:error :result/source :result result})
+
+    (and (= :passed (:result/outcome result))
+         (not (nonblank-string? revision)))
+    (conj {:error :result/passed-revision :result result})
+
+    (and (nonblank-string? revision)
+         (not= revision (:source/revision source)))
+    (conj {:error :result/source-revision :result result}))))
 
 (defn valid-result? [result]
   (empty? (result-errors result)))
