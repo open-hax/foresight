@@ -1,3 +1,10 @@
+---
+title: "Workstream: Knoxx publication, evaluation, and reconciliation"
+summary: "Tracks the cross-repository dependency thread connecting Knoxx publication semantics, revision-bound evaluation, desired-vs-observed reconciliation, durable receipts, and deployment authority."
+category: "tracking"
+created: "2026-08-29"
+---
+
 # Workstream: Knoxx publication, evaluation, and reconciliation
 
 Inventory date: 2026-08-29.
