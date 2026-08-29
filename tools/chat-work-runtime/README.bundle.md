@@ -30,9 +30,10 @@ required executable modes with:
 ```
 
 The verifier uses the host's `cmp`, `find`, `mktemp`, `readlink`, `sha256sum`,
-`sort`, and `stat` commands. Node-based entry points always resolve the bundled
-Node executable, including when invoked directly without adding the bundle to
-`PATH`. NBB, jscpd, and
+`sort`, and `stat` commands. Node-based entry points invoke the bundled Node
+executable directly, including when invoked without adding the bundle to
+`PATH` or when the extraction path contains the POSIX `PATH` separator (`:`).
+NBB, jscpd, and
 their transitive npm packages were installed from the committed lockfile
 included under `lib/chat-work-tools/`.
 

@@ -39,11 +39,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          tmp_dir="$(mktemp -d)"
-          trap 'rm -rf -- "$tmp_dir"' EXIT
+          # A colon is valid in a POSIX path but is also PATH's separator.
+          # Keep the smoke suite beneath one to prove wrappers invoke the
+          # bundled Node directly instead of rediscovering it through PATH.
+          tmp_dir="$(mktemp -d "$RUNNER_TEMP/foresight-runtime:smoke.XXXXXX")"
+          path_root="$(mktemp -d "$RUNNER_TEMP/foresight-runtime-path.XXXXXX")"
+          path_bin="$path_root/bin"
+          trap 'rm -rf -- "$tmp_dir" "$path_root"' EXIT
           mkdir -p "$tmp_dir/home"
           tar --no-same-owner -xzf dist/foresight-chat-work-linux-x64.tar.gz -C "$tmp_dir"
           runtime="$tmp_dir/foresight-chat-work-linux-x64"
+          ln -s -- "$runtime/bin" "$path_bin"
           empty_path="$tmp_dir/no-host-tools"
           mkdir -p "$empty_path"
           cmp LICENSE \
@@ -72,9 +78,9 @@ jobs:
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/bb" --version
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/clj-kondo" --version
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/jscpd" --version
-          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:$empty_path" node --version
-          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:$empty_path" nbb --version
-          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:$empty_path" jscpd --version
+          env -i HOME="$tmp_dir/home" PATH="$path_bin:$empty_path" node --version
+          env -i HOME="$tmp_dir/home" PATH="$path_bin:$empty_path" nbb --version
+          env -i HOME="$tmp_dir/home" PATH="$path_bin:$empty_path" jscpd --version
           "$runtime/bin/verify-integrity"
 
           # Prove the integrity verifier rejects a retargeted dependency link.

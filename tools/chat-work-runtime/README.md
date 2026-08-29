@@ -20,9 +20,10 @@ before use. npm's target OS, CPU, and libc selectors follow `ARCH`, and the
 builder requires the matching locked jscpd native package. The archive contains
 a regular-file checksum manifest, a complete entry-type manifest, an explicit
 symbolic-link target manifest, an exact executable-mode manifest, and a verifier
-for all four. Node-based entry points are bundle-relative wrappers, so direct
-invocation does not depend on a host Node executable or on first changing
-`PATH`.
+for all four. Node-based entry points are bundle-relative wrappers that invoke
+the bundled Node directly, so they do not depend on a host Node executable,
+first changing `PATH`, or the extraction path omitting the POSIX `PATH`
+separator (`:`).
 
 The archive covers root Foresight NBB tasks and its standard lint/duplication
 tools. It does not cover `eta` or `alpha` JVM tasks.

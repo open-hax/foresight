@@ -197,8 +197,11 @@ fi
 
 for command in node npm npx nbb jscpd; do
   case "$command" in
-    nbb | jscpd) command_target="../lib/chat-work-tools/node_modules/.bin/$command" ;;
-    *) command_target="../lib/node/bin/$command" ;;
+    node) command_script="" ;;
+    npm) command_script="../lib/node/lib/node_modules/npm/bin/npm-cli.js" ;;
+    npx) command_script="../lib/node/lib/node_modules/npm/bin/npx-cli.js" ;;
+    nbb) command_script="../lib/chat-work-tools/node_modules/nbb/cli.js" ;;
+    jscpd) command_script="../lib/chat-work-tools/node_modules/jscpd/run-jscpd.js" ;;
   esac
   cat > "$bundle_dir/bin/$command" <<EOF
 #!/bin/sh
@@ -209,10 +212,16 @@ case "\$script_path" in
   *) echo "cannot resolve bundle path from: \$script_path" >&2; exit 127 ;;
 esac
 runtime_bin=\$(CDPATH= cd -- "\${script_path%/*}" && pwd -P)
-PATH="\$runtime_bin\${PATH:+:\$PATH}"
-export PATH
-exec "\$runtime_bin/$command_target" "\$@"
 EOF
+  if [[ -n "$command_script" ]]; then
+    cat >> "$bundle_dir/bin/$command" <<EOF
+exec "\$runtime_bin/../lib/node/bin/node" "\$runtime_bin/$command_script" "\$@"
+EOF
+  else
+    cat >> "$bundle_dir/bin/$command" <<'EOF'
+exec "$runtime_bin/../lib/node/bin/node" "$@"
+EOF
+  fi
   chmod 0755 "$bundle_dir/bin/$command"
 done
 
