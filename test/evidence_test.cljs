@@ -86,7 +86,11 @@
                             42)]
     (is (= :repository/gates
            (:error (first (evidence/catalog-errors malformed)))))
-    (is (false? (evidence/valid-catalog? malformed)))))
+    (is (false? (evidence/valid-catalog? malformed)))
+    (is (false? (evidence/promotion-ready?
+                 malformed test-catalog-identity "revision-a"
+                 #{:repo/unit}
+                 [(recorded-result :repo/unit :passed "revision-a")])))))
 
 (deftest catalog-repositories-must-be-actionable-direct-submodules
   (is (empty? (evidence/catalog-inventory-errors valid-catalog #{"repo"})))

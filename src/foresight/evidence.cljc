@@ -203,14 +203,19 @@
       (explicit-not-applicable? result)))
 
 (defn gate-index [catalog]
-  (into {}
-        (mapcat (fn [[repository-path repository]]
-                  (map (fn [gate]
-                         [(:gate/id gate)
-                          {:repository/path repository-path
-                           :gate gate}])
-                       (:repository/gates repository))))
-        (:catalog/repositories catalog)))
+  (let [repositories (:catalog/repositories catalog)]
+    (if-not (map? repositories)
+      {}
+      (into {}
+            (mapcat
+             (fn [[repository-path repository]]
+               (let [gates (:repository/gates repository)]
+                 (map (fn [gate]
+                        [(:gate/id gate)
+                         {:repository/path repository-path
+                          :gate gate}])
+                      (if (vector? gates) gates [])))))
+            repositories))))
 
 (defn result-matches-gate?
   [catalog-identity target-revision result

@@ -91,7 +91,8 @@
               :revision "abc123"}
              (get (cli/require-repositories! catalog #{"repo"}) "repo")))))
   (let [spawned? (atom false)]
-    (with-redefs [workspace/git-state
+    (with-redefs [cli/execution-path-unavailable-reason (constantly nil)
+                  workspace/git-state
                   (fn [_] {:initialized true
                            :head "revision-b"
                            :dirty false
@@ -108,6 +109,66 @@
                              local-gate
                              test-catalog-identity))))
       (is (false? @spawned?)))))
+
+(deftest execution-path-identity-is-rechecked
+  (let [inventory {:path "repo"
+                   :actionable true
+                   :source-type "git-submodule"
+                   :ownership "independent-repository"
+                   :device 7
+                   :inode 11}
+        repository {:absolute "/repo" :inventory inventory}]
+    (with-redefs [workspace/execution-paths!
+                  (fn [repositories]
+                    (is (= [inventory] repositories))
+                    [{:repo inventory :absolute "/repo"}])]
+      (is (nil? (cli/execution-path-unavailable-reason repository))))
+    (with-redefs [workspace/execution-paths!
+                  (fn [_] [{:repo inventory :absolute "/replacement"}])]
+      (is (= "Repository execution path changed after inventory"
+             (cli/execution-path-unavailable-reason repository))))
+    (with-redefs [workspace/execution-paths!
+                  (fn [_]
+                    (throw (js/Error. "Executable source identity changed")))]
+      (is (= (str "Repository execution path could not be reverified: "
+                  "Executable source identity changed")
+             (cli/execution-path-unavailable-reason repository))))))
+
+(deftest local-gates-recheck-execution-path-around-every-spawn
+  (let [path-results (atom [nil "Repository execution path changed after inventory"])
+        git-rechecks (atom 0)
+        spawn-count (atom 0)]
+    (with-redefs [cli/execution-path-unavailable-reason
+                  (fn [_]
+                    (let [result (first @path-results)]
+                      (swap! path-results subvec 1)
+                      result))
+                  workspace/git-state
+                  (fn [_]
+                    (swap! git-rechecks inc)
+                    {:initialized true
+                     :head "revision-a"
+                     :dirty false
+                     :git-errors {}})
+                  cli/spawn-result
+                  (fn [& _]
+                    (swap! spawn-count inc)
+                    #js {:status 0})]
+      (let [result (cli/run-gate! {:path "repo"
+                                   :absolute "/repo"
+                                   :revision "revision-a"}
+                                  local-gate
+                                  test-catalog-identity)]
+        (is (empty? @path-results))
+        (is (= 1 @git-rechecks))
+        (is (= 1 @spawn-count))
+        (is (= :unavailable (:result/outcome result)))
+        (is (= :passed (:result/attempt-outcome result)))
+        (is (= 0 (:result/attempt-exit result)))
+        (is (= (str "Evidence rejected after gate execution: "
+                    "Repository execution path changed after inventory")
+               (:result/reason result)))
+        (is (nil? (:result/revision result)))))))
 
 (deftest classifies-every-local-checkout-recheck-branch
   (let [repository {:revision "revision-a"}]
@@ -146,7 +207,8 @@
                        :dirty false
                        :git-errors {}}])
         spawn-count (atom 0)]
-    (with-redefs [workspace/git-state
+    (with-redefs [cli/execution-path-unavailable-reason (constantly nil)
+                  workspace/git-state
                   (fn [_]
                     (let [state (first @states)]
                       (swap! states subvec 1)
@@ -175,7 +237,8 @@
                (:result/source result)))))))
 
 (deftest stable-local-gates-bind-the-verified-revision
-  (with-redefs [workspace/git-state
+  (with-redefs [cli/execution-path-unavailable-reason (constantly nil)
+                workspace/git-state
                 (fn [_] {:initialized true
                          :head "revision-a"
                          :dirty false

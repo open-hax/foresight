@@ -106,9 +106,13 @@
                                      [(:path repo) absolute]))
                               (workspace/execution-paths! available))]
     (into {}
-          (map (fn [{:keys [path exists initialized dirty git-errors head]}]
+          (map (fn [{:keys [path exists initialized dirty git-errors head]
+                     :as repository}]
                  [path (if-let [absolute (get execution-paths path)]
-                         {:path path :absolute absolute :revision head}
+                         {:path path
+                          :absolute absolute
+                          :revision head
+                          :inventory repository}
                          {:path path
                           :unavailable-reason
                           (cond
@@ -147,9 +151,23 @@
              :result/outcome :failed
              :result/exit status})))
 
+(defn execution-path-unavailable-reason
+  [{:keys [absolute inventory]}]
+  (if-not (map? inventory)
+    "Repository inventory identity is unavailable"
+    (try
+      (let [{current-absolute :absolute}
+            (first (workspace/execution-paths! [inventory]))]
+        (when-not (= absolute current-absolute)
+          "Repository execution path changed after inventory"))
+      (catch :default error
+        (str "Repository execution path could not be reverified: "
+             (.-message error))))))
+
 (defn local-unavailable-reason
   ([{:keys [absolute] :as repository}]
-   (local-unavailable-reason repository (workspace/git-state absolute)))
+   (or (execution-path-unavailable-reason repository)
+       (local-unavailable-reason repository (workspace/git-state absolute))))
   ([{:keys [revision]} {:keys [initialized head dirty git-errors]}]
     (cond
       (not initialized) "Repository checkout became uninitialized"
@@ -180,8 +198,11 @@
        :result/outcome :unavailable
        :result/reason reason}
       (let [attempt (local-result absolute gate)
-            post-state (workspace/git-state absolute)]
-        (if-let [reason (local-unavailable-reason repository post-state)]
+            path-reason (execution-path-unavailable-reason repository)
+            post-state (when-not path-reason (workspace/git-state absolute))
+            reason (or path-reason
+                       (local-unavailable-reason repository post-state))]
+        (if reason
           (cond-> {:gate/id (:gate/id gate)
                    :result/outcome :unavailable
                    :result/reason (str "Evidence rejected after gate execution: " reason)
