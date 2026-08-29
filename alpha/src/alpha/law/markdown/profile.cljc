@@ -5,8 +5,13 @@
 
 (def ^:private missing ::missing)
 
+(defn- frontmatter-data [document]
+  (or (:document/frontmatter/data document)
+      (:document/frontmatter document)
+      {}))
+
 (defn- frontmatter-value [document path]
-  (get-in (:document/frontmatter document) path missing))
+  (get-in (frontmatter-data document) path missing))
 
 (defn- normalize-keyword [value]
   (cond
@@ -51,7 +56,7 @@
                            {:artifact/id artifact-id
                             :artifact/kind artifact-kind
                             :artifact/form :markdown
-                            :artifact/data (:document/frontmatter document)}
+                            :artifact/data (frontmatter-data document)}
                             (and status-path (not= missing artifact-status))
                             (assoc :artifact/status artifact-status))
                 validation (artifact/validate-artifact projected)]
