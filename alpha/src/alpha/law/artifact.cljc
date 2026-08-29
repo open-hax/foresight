@@ -1,10 +1,10 @@
 (ns alpha.law.artifact
   "Portable laws for things that can participate in Foresight workflows."
-  (:require [malli.core :as m]
+  (:require [katamorph.schema.condition :as condition-schema]
+            [malli.core :as m]
             [malli.error :as me]))
 
 (def Id [:or :uuid :keyword :string :int])
-(def PathSegment [:or :keyword :string :int])
 (def EpistemicTier [:enum :observed :derived :provisional :accepted])
 
 (def Ref
@@ -28,12 +28,25 @@
    [:relation/epistemic-tier {:optional true} EpistemicTier]
    [:relation/basis {:optional true} [:vector Ref]]])
 
-(def MarkdownDocument
+(def LegacyMarkdownDocument
   [:map {:closed false}
    [:document/path :string]
    [:document/frontmatter :map]
    [:document/body :string]
    [:document/structure {:optional true} [:vector :any]]])
+
+(def LosslessMarkdownDocument
+  [:map {:closed false}
+   [:document/format [:= :markdown]]
+   [:document/source-path {:optional true} :string]
+   [:document/frontmatter-present? :boolean]
+   [:document/frontmatter/raw [:maybe :string]]
+   [:document/frontmatter/data :map]
+   [:document/body :string]
+   [:document/structure {:optional true} [:vector :any]]])
+
+(def MarkdownDocument
+  [:or LosslessMarkdownDocument LegacyMarkdownDocument])
 
 (def DiagramSource
   [:map {:closed false}
@@ -52,36 +65,7 @@
    [:artifact/source {:optional true} Ref]
    [:artifact/relations {:optional true} [:vector Relation]]])
 
-(def Condition
-  [:schema
-   {:registry
-    {::condition
-     [:multi {:dispatch :condition/op}
-      [:eq [:map {:closed true}
-            [:condition/op [:= :eq]]
-            [:condition/path [:vector PathSegment]]
-            [:condition/value :any]]]
-      [:not-eq [:map {:closed true}
-                [:condition/op [:= :not-eq]]
-                [:condition/path [:vector PathSegment]]
-                [:condition/value :any]]]
-      [:exists [:map {:closed true}
-               [:condition/op [:= :exists]]
-               [:condition/path [:vector PathSegment]]]]
-      [:in [:map {:closed true}
-           [:condition/op [:= :in]]
-           [:condition/path [:vector PathSegment]]
-           [:condition/values [:vector :any]]]]
-      [:and [:map {:closed true}
-            [:condition/op [:= :and]]
-            [:condition/clauses [:vector {:min 1} [:ref ::condition]]]]]
-      [:or [:map {:closed true}
-           [:condition/op [:= :or]]
-           [:condition/clauses [:vector {:min 1} [:ref ::condition]]]]]
-      [:not [:map {:closed true}
-            [:condition/op [:= :not]]
-            [:condition/clause [:ref ::condition]]]]]]}}
-   ::condition])
+(def Condition condition-schema/Condition)
 
 (def Event
   [:map {:closed false}
@@ -93,23 +77,7 @@
    [:event/data {:optional true} :map]
    [:event/causes {:optional true} [:vector Ref]]])
 
-(def PortableData
-  "Recursive EDN-like data allowed to cross the Alpha operation boundary.
-   Runtime values such as functions, host objects, and implementation handles
-   are deliberately excluded."
-  [:schema
-   {:registry
-    {::portable-data
-     [:or nil?
-      boolean?
-      number?
-      string?
-      keyword?
-      uuid?
-      [:vector [:ref ::portable-data]]
-      [:set [:ref ::portable-data]]
-      [:map-of [:or keyword? string?] [:ref ::portable-data]]]}}
-   [:ref ::portable-data]])
+(def PortableData condition-schema/PortableValue)
 
 (def OperationRef
   [:map {:closed true}
