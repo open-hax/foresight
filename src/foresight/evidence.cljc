@@ -114,14 +114,17 @@
   (empty? (catalog-errors catalog)))
 
 (defn catalog-inventory-errors [catalog actionable-submodule-paths]
-  (let [actionable-submodule-paths (set actionable-submodule-paths)]
-    (->> (:catalog/repositories catalog)
-         keys
-         (remove actionable-submodule-paths)
-         sort
-         (mapv (fn [repository-path]
-                 {:error :catalog/repository-not-actionable-submodule
-                  :repository repository-path})))))
+  (let [actionable-submodule-paths (set actionable-submodule-paths)
+        repositories (:catalog/repositories catalog)]
+    (if-not (map? repositories)
+      []
+      (->> repositories
+           keys
+           (remove actionable-submodule-paths)
+           sort
+           (mapv (fn [repository-path]
+                   {:error :catalog/repository-not-actionable-submodule
+                    :repository repository-path}))))))
 
 (defn select-gates
   ([catalog repository-paths]
@@ -142,58 +145,60 @@
   (and (integer? value) (not (neg? value))))
 
 (defn result-errors [result]
-  (let [execution (:result/execution result)
-        source (:result/source result)
-        revision (:result/revision result)]
-    (cond-> []
-    (not (keyword? (:gate/id result)))
-    (conj {:error :result/gate-id :result result})
+  (if-not (map? result)
+    [{:error :result/type :result result}]
+    (let [execution (:result/execution result)
+          source (:result/source result)
+          revision (:result/revision result)]
+      (cond-> []
+        (not (keyword? (:gate/id result)))
+        (conj {:error :result/gate-id :result result})
 
-    (not (contains? outcomes (:result/outcome result)))
-    (conj {:error :result/outcome :result result})
+        (not (contains? outcomes (:result/outcome result)))
+        (conj {:error :result/outcome :result result})
 
-    (and (= :not-applicable (:result/outcome result))
-         (not (explicit-not-applicable? result)))
-    (conj {:error :result/not-applicable-approval :result result})
+        (and (= :not-applicable (:result/outcome result))
+             (not (explicit-not-applicable? result)))
+        (conj {:error :result/not-applicable-approval :result result})
 
-    (not (contains? executions execution))
-    (conj {:error :result/execution :result result})
+        (not (contains? executions execution))
+        (conj {:error :result/execution :result result})
 
-    (and (= :local execution)
-         (not (command? (:result/command result))))
-    (conj {:error :result/command :result result})
+        (and (= :local execution)
+             (not (command? (:result/command result))))
+        (conj {:error :result/command :result result})
 
-    (and (contains? result :result/exit)
-         (not (exit-code? (:result/exit result))))
-    (conj {:error :result/exit :result result})
+        (and (contains? result :result/exit)
+             (not (exit-code? (:result/exit result))))
+        (conj {:error :result/exit :result result})
 
-    (and (= :local execution)
-         (= :passed (:result/outcome result))
-         (not= 0 (:result/exit result)))
-    (conj {:error :result/local-passed-exit :result result})
+        (and (= :local execution)
+             (= :passed (:result/outcome result))
+             (not= 0 (:result/exit result)))
+        (conj {:error :result/local-passed-exit :result result})
 
-    (and (= :local execution)
-         (not= :passed (:result/outcome result))
-         (= 0 (:result/exit result)))
-    (conj {:error :result/local-nonpass-exit :result result})
+        (and (= :local execution)
+             (not= :passed (:result/outcome result))
+             (= 0 (:result/exit result)))
+        (conj {:error :result/local-nonpass-exit :result result})
 
-    (and (not= :local execution)
-         (contains? result :result/exit))
-    (conj {:error :result/nonlocal-exit :result result})
+        (and (not= :local execution)
+             (contains? result :result/exit))
+        (conj {:error :result/nonlocal-exit :result result})
 
-    (not (catalog-identity? (:result/catalog result)))
-    (conj {:error :result/catalog :result result})
+        (not (catalog-identity? (:result/catalog result)))
+        (conj {:error :result/catalog :result result})
 
-    (not (source-identity? source))
-    (conj {:error :result/source :result result})
+        (not (source-identity? source))
+        (conj {:error :result/source :result result})
 
-    (and (= :passed (:result/outcome result))
-         (not (nonblank-string? revision)))
-    (conj {:error :result/passed-revision :result result})
+        (and (= :passed (:result/outcome result))
+             (not (nonblank-string? revision)))
+        (conj {:error :result/passed-revision :result result})
 
-    (and (nonblank-string? revision)
-         (not= revision (:source/revision source)))
-    (conj {:error :result/source-revision :result result}))))
+        (and (nonblank-string? revision)
+             (not= revision (:source/revision source)))
+        (conj {:error :result/source-revision :result result})))))
 
 (defn valid-result? [result]
   (empty? (result-errors result)))
@@ -253,20 +258,21 @@
         gate-id-counts (frequencies (map :gate/id required-results))
         by-id (into {} (map (juxt :gate/id identity)) required-results)
         trusted-gates (gate-index catalog)]
-    (and (valid-catalog? catalog)
-         (catalog-identity? catalog-identity)
-         (nonblank-string? target-revision)
-         (seq required-gate-ids)
-         (every? #(contains? trusted-gates %) required-gate-ids)
-         (every? #(= 1 (get gate-id-counts % 0)) required-gate-ids)
-         (every? (fn [gate-id]
-                   (when-let [result (get by-id gate-id)]
-                     (and (valid-result? result)
-                          (satisfied? result)
-                          (= target-revision (:result/revision result))
-                          (result-matches-gate?
-                           catalog-identity
-                           target-revision
-                           result
-                           (get trusted-gates gate-id)))))
-                 required-gate-ids))))
+    (boolean
+     (and (valid-catalog? catalog)
+          (catalog-identity? catalog-identity)
+          (nonblank-string? target-revision)
+          (seq required-gate-ids)
+          (every? #(contains? trusted-gates %) required-gate-ids)
+          (every? #(= 1 (get gate-id-counts % 0)) required-gate-ids)
+          (every? (fn [gate-id]
+                    (when-let [result (get by-id gate-id)]
+                      (and (valid-result? result)
+                           (satisfied? result)
+                           (= target-revision (:result/revision result))
+                           (result-matches-gate?
+                            catalog-identity
+                            target-revision
+                            result
+                            (get trusted-gates gate-id)))))
+                  required-gate-ids)))))

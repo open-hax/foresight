@@ -39,10 +39,19 @@
           (assoc-in catalog
                     [:catalog/repositories "typo"]
                     {:repository/path "typo" :repository/gates []}))))
+    (is (thrown-with-msg?
+         js/Error
+         #"catalog/repositories"
+         (cli/validate-catalog!
+          (assoc catalog :catalog/repositories 42))))
     (is (thrown-with-msg? js/Error #"Repositories have no mapped gates"
                           (cli/list-gates! catalog
                                            {:only #{"missing"}
-                                            :kinds law/gate-kinds})))))
+                                            :kinds law/gate-kinds})))
+    (is (thrown-with-msg? js/Error #"No mapped gates match"
+                          (cli/list-gates! catalog
+                                           {:only #{"katamorph"}
+                                            :kinds #{:security}})))))
 
 (deftest knoxx-gates-remain-under-knoxx-ownership
   (let [gates (get-in (cli/read-catalog)

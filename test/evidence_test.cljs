@@ -166,6 +166,14 @@
     (is (false? (:result/satisfied? summary)))
     (is (= :result/outcome (get-in summary [:result/errors 0 :error])))))
 
+(deftest malformed-result-values-return-structured-errors
+  (is (= [{:error :result/type :result 42}]
+         (evidence/result-errors 42)))
+  (is (false? (evidence/valid-result? 42)))
+  (let [summary (evidence/summarize-results [42])]
+    (is (= :failed (:result/outcome summary)))
+    (is (= :result/type (get-in summary [:result/errors 0 :error])))))
+
 (deftest promotion-is-closed-over-required-gates
   (let [revision "abc123"
         passed [(recorded-result :repo/unit :passed revision)
@@ -179,7 +187,9 @@
     (is (false? (evidence/promotion-ready?
                  valid-catalog test-catalog-identity revision
                  #{:repo/unit}
-                 [(recorded-result :repo/unit :unavailable revision)])))))
+                 [(recorded-result :repo/unit :unavailable revision)])))
+    (is (false? (evidence/promotion-ready?
+                 valid-catalog test-catalog-identity revision #{} [])))))
 
 (deftest promotion-requires-one-unambiguous-target-revision
   (let [unit (recorded-result :repo/unit :passed "revision-a")

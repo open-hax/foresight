@@ -256,6 +256,8 @@
                 (require-mapped-repositories! catalog only)
                 (set (keys (:catalog/repositories catalog))))
         gates (law/select-gates catalog (sort paths) kinds)]
+    (when (empty? gates)
+      (throw (js/Error. "No mapped gates match the requested repositories and kinds")))
     (doseq [gate gates]
       (println (str (:gate/id gate))
                (name (:gate/kind gate))
