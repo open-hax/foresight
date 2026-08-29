@@ -1,3 +1,10 @@
+---
+title: "Workstream: Alpha + Katamorph portable workflow law stack"
+summary: "Tracks the stacked dependency graph connecting Foresight Alpha laws, Katamorph portable workflow contracts, and eta-mu Rheos consumers."
+category: "tracking"
+created: "2026-08-29"
+---
+
 # Workstream: Alpha + Katamorph portable workflow law stack
 
 Inventory date: 2026-08-29.
