@@ -17,6 +17,34 @@ jobs:
     with:
       setup_eta_mu_toolchain: false
       evidence_gates_script: |
+        initialize_agents_input() {
+          local entry mode type expected repository_path actual
+          entry="$(git --no-replace-objects ls-tree "${PR_HEAD_SHA}" -- .agents)"
+          read -r mode type expected repository_path <<< "${entry}"
+          [[ "${mode}" == "160000" && "${type}" == "commit" ]] || return 1
+          [[ "${expected}" =~ ^[0-9a-f]{40}$|^[0-9a-f]{64}$ ]] || return 1
+          [[ "${repository_path}" == ".agents" ]] || return 1
+          [[ ! -e .agents ]] || return 1
+          git init --quiet .agents || return 1
+          git -C .agents remote add origin https://github.com/riatzukiza/.agents.git || return 1
+          git -C .agents fetch --quiet --depth 1 origin "${expected}" || return 1
+          git -C .agents -c advice.detachedHead=false checkout --quiet --detach "${expected}" || return 1
+          actual="$(git -C .agents rev-parse HEAD)"
+          [[ "${actual}" == "${expected}" ]]
+        }
+
+        verify_agents_input() {
+          local entry mode type expected repository_path actual
+          entry="$(git --no-replace-objects ls-tree "${PR_HEAD_SHA}" -- .agents)"
+          read -r mode type expected repository_path <<< "${entry}"
+          [[ "${mode}" == "160000" && "${type}" == "commit" ]] || return 1
+          [[ "${repository_path}" == ".agents" ]] || return 1
+          actual="$(git -C .agents rev-parse HEAD)"
+          [[ "${actual}" == "${expected}" ]]
+        }
+
+        run_gate agents_input initialize_agents_input
+        run_gate agents_input_revision verify_agents_input
         run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
         run_gate workspace_laws npx --yes nbb@1.4.207 -cp scripts:test test/workspace_test.cljs
         run_gate project_laws npx --yes nbb@1.4.207 -cp src:scripts:test test/project_test.cljs
@@ -24,6 +52,7 @@ jobs:
         run_gate evidence_adapter npx --yes nbb@1.4.207 -cp src:scripts:test test/evidence_cli_test.cljs
         run_gate project_contract npx --yes nbb@1.4.207 -cp src:scripts scripts/project.clj validate
         run_gate catalog_contract npx --yes nbb@1.4.207 -cp src:scripts scripts/evidence.clj validate
+        run_gate receipt_history npx --yes nbb@1.4.207 -cp src:scripts scripts/evidence.clj verify-receipts --base "${PR_BASE_SHA}" --at "${PR_HEAD_SHA}"
         run_gate diff_hygiene git diff --check "${PR_BASE_SHA}...HEAD"
     # Least privilege: forward only the secrets the review job consumes.
     secrets:

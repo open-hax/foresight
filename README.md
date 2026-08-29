@@ -34,7 +34,8 @@ nbb scripts/workspace.clj jscpd --only muse
 nbb scripts/evidence.clj validate
 nbb scripts/evidence.clj list --only katamorph --kind unit,static
 nbb scripts/evidence.clj run --only katamorph --kind static
-nbb scripts/evidence.clj verify-receipts --at <full-root-commit>
+nbb scripts/evidence.clj verify-receipts \
+  --base <full-trusted-base-commit> --at <full-reviewed-head-commit>
 ```
 
 `inventory` is read-only; `report` writes only root-generated artifacts.
@@ -73,19 +74,52 @@ every required gate. Every `START` and `RESULT` retains the exact argument
 vector, a SHA-256 identity for the raw gate catalog, and the owning source path
 plus repository revision. A checkout that moves or becomes dirty during a gate
 produces unavailable evidence with the observed revision, never a
-revision-bound pass. Promotion compares every retained result's catalog
-identity, repository, execution mode, source, and exact command against the
-trusted catalog snapshot. The runner also appends each complete result to
-`.ημ/receipts.edn`. A result becomes eligible for promotion only after that
-ledger is committed and an exact record is loaded from the named Git object;
-the adapter verifies the full commit ID and SHA-256 of the raw ledger before
-the portable law accepts exact receipt/result equality. Editing a failed result
-into a shape-valid pass therefore cannot reuse its immutable receipt. Mutable
-working-tree receipts and result-only public hashes are not authentication.
+revision-bound pass. The pure law checks consistency only; it is not promotion
+authority. The effectful adapter requires the named reviewed root commit to be
+the clean current `HEAD`, loads both the catalog and Receipt River from that
+same Git object, and requires every result revision to equal the corresponding
+gitlink in its tree. It rechecks the root boundary after all reads.
+
+The runner appends each complete result to `.ημ/receipts.edn`. Schema-v2
+receipts retain the actual host and `nbb`/Node adapter identity; older receipts
+remain parseable append-only history but cannot attest a promotion. The adapter
+currently requires Linux `/proc/self/fd` semantics. It holds a no-follow parent
+directory descriptor, rejects symbolic or multiply linked ledger files, and
+serializes cooperating writers with an exclusive sibling lock. A complete line
+is bounded to 1 MiB, written through the held descriptor, size-checked, and
+followed by file and directory `fsync`. Pre-write rejection releases the lock;
+uncertainty after writing starts retains the lock as a quarantine marker for
+manual adjudication. This protects the adapter boundary from pathname swaps,
+partial writes, and cooperating races; it does not exclude an unrelated writer
+that ignores the lock.
+
+For immutable review, the adapter disables Git replacement objects, requires
+regular non-executable blobs, hashes
+their raw bytes, decodes strict UTF-8, and proves the reviewed ledger preserves
+the trusted base ledger byte-for-byte before accepting whole appended lines.
+The portable consistency law then requires exact receipt/result equality.
+Editing a failed result or prior receipt into a shape-valid pass therefore
+cannot reuse the reviewed history. Git supplies content-addressed integrity and
+a review-authorized immutable snapshot, not producer authentication. A trusted
+GitHub Check or DSSE/signing identity is a future strengthening if producer
+authentication becomes a requirement; its acceptance contract is tracked in
+[Foresight #57](https://github.com/open-hax/foresight/issues/57).
+
+The local adapter's before/after checkout snapshots detect ordinary drift; they
+do not prove safety against an adversary that swaps a pathname out and restores
+it between those observations. Adversarial execution requires a trusted CI
+attestation or an isolated exact-commit checkout/immutable source mount, tracked
+in [Foresight #58](https://github.com/open-hax/foresight/issues/58).
 Failed, blocked, unavailable, and not-applicable are separate outcomes; a
 missing checkout, tool, credential, or host never becomes a pass. See
 [`docs/specs/inflight-completion-and-knoxx-lift.md`](docs/specs/inflight-completion-and-knoxx-lift.md)
 for the revision-bound promotion and test-tier contract.
+
+Coverage results are reportable but cannot yet authorize automatic promotion.
+A zero exit does not retain the machine-readable report, its digest, measured
+values, or the repository-owned threshold and baseline. The versioned artifact
+attestation needed to remove this fail-closed guard is tracked in
+[Foresight #59](https://github.com/open-hax/foresight/issues/59).
 
 ## Project law
 

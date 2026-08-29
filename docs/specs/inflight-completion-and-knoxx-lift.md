@@ -119,14 +119,52 @@ revision to match the selected gate exactly.
 
 Catalog agreement is integrity evidence, not producer authentication. Every
 gate attempt is appended as a complete `:test-run` record in Receipt River.
-Promotion additionally requires an exact matching record from
-`.ημ/receipts.edn` loaded at an explicit full root Git commit. The adapter reads
-the ledger through the Git object database, hashes the raw bytes, and passes
-the immutable commit/path/SHA-256 identity with the parsed records to the
-portable law. A mutable working tree, a copied catalog digest, or a hash stored
-only beside the result cannot authorize promotion. The reviewed Git commit is
-the authority boundary; provisioning a separate signing key is an optional
-future strengthening, not an implicit dependency.
+Schema-v2 receipts retain the actual host and `nbb`/Node adapter identity;
+legacy records remain append-only history but cannot attest a promotion.
+
+The local append adapter is Linux-specific and fails closed without
+`/proc/self/fd`, `O_NOFOLLOW`, and exclusive-create support. It holds and
+revalidates the parent, ledger, and sibling-lock identities; accepts only a
+regular single-link ledger; bounds one physical EDN line to 1 MiB; completes
+the descriptor write; verifies the resulting size; and synchronizes both the
+file and parent directory. A failure before the write releases the lock. Any
+uncertain result after writing begins deliberately retains the lock as a
+quarantine marker so a later cooperating writer cannot make a partial record
+look normal. The lock serializes this adapter's writers; processes that ignore
+the protocol remain outside its trust boundary.
+
+The pure portable predicate proves record consistency only and is never an
+authority decision. The effectful promotion adapter requires an explicit full
+reviewed root commit that is also the clean current `HEAD`. With Git replacement
+objects disabled, it requires regular non-executable blobs, reads the catalog
+and `.ημ/receipts.edn` from that same Git object, hashes both raw byte streams,
+and decodes strict UTF-8. It also proves that the head ledger preserves the
+trusted base ledger as an exact byte prefix and contains only whole appended
+receipt lines. Every result revision must equal its repository gitlink in the
+reviewed tree, and the adapter rechecks root state after the reads. A mutable
+working tree, a caller-supplied catalog, an unrelated or replacement commit, a
+copied digest, or a hash stored only beside the result cannot authorize
+promotion.
+
+The reviewed Git commit supplies content-addressed integrity and
+review-authorized immutable evidence; it does not authenticate the process or
+principal that produced a result. A trusted GitHub Check, DSSE envelope, or
+separate signing identity is a future strengthening if producer authentication
+becomes a requirement, not a property claimed by this boundary. Its executable
+acceptance contract is tracked by
+[Foresight #57](https://github.com/open-hax/foresight/issues/57).
+
+An approved `:not-applicable` outcome may satisfy reporting but cannot
+automatically authorize promotion. That requires a separate immutable decision
+bound to the gate and target revision from an independently authenticated,
+authorized reviewer identity.
+
+Local pre/post checkout observations detect accidental drift, not an
+adversarial pathname swap that is restored between observations. Claims against
+that threat require a trusted CI attestation or execution from an isolated
+exact-commit checkout or immutable source mount. The stronger local-execution
+boundary is tracked by
+[Foresight #58](https://github.com/open-hax/foresight/issues/58).
 
 ### Gate kinds
 
@@ -171,6 +209,10 @@ command, or convert `blocked`, `unavailable`, or `skipped` into `passed`.
   missing law cases.
 - Security and durable-write code uses mutation or fault-injection evidence
   where practical, with an explicit follow-up when the tool is unavailable.
+- Until the versioned artifact-attestation contract in
+  [Foresight #59](https://github.com/open-hax/foresight/issues/59) is complete,
+  coverage results remain reportable but are rejected as automatic promotion
+  evidence even when the command exits zero.
 
 ## Program phases
 

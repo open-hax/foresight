@@ -33,7 +33,7 @@
 
 (defn git-commit-id? [value]
   (and (nonblank-string? value)
-       (boolean (re-matches #"(?:[0-9a-f]{40}|[0-9a-f]{64})" value))))
+       (boolean (re-matches #"(?:[0-9a-f]{64}|[0-9a-f]{40})" value))))
 
 (defn catalog-identity? [value]
   (and (map? value)
@@ -45,7 +45,7 @@
        (nonblank-string? (:source/path value))
        (nonblank-string? (:source/repository value))
        (or (nil? (:source/revision value))
-           (nonblank-string? (:source/revision value)))))
+           (git-commit-id? (:source/revision value)))))
 
 (defn gate-errors
   [repository-path gate]
@@ -203,7 +203,7 @@
         (conj {:error :result/source :result result})
 
         (and (= :passed (:result/outcome result))
-             (not (nonblank-string? revision)))
+             (not (git-commit-id? revision)))
         (conj {:error :result/passed-revision :result result})
 
         (and (nonblank-string? revision)
@@ -219,17 +219,25 @@
        (git-commit-id? (:ledger/revision value))
        (sha256? (:ledger/sha256 value))))
 
-(defn evidence-receipt? [receipt]
+(defn receipt-envelope? [receipt]
   (and (map? receipt)
-       (= :test-run (:kind receipt))
-       (= evidence-receipt-origin (:origin receipt))
+       (keyword? (:kind receipt))
        (every? nonblank-string?
-               ((juxt :ts :owner :dod :pi :host) receipt))
+               ((juxt :ts :origin :owner :dod :pi :host) receipt))
        (vector? (:manifest receipt))
        (every? nonblank-string? (:manifest receipt))
        (vector? (:refs receipt))
-       (every? nonblank-string? (:refs receipt))
-       (valid-result? (:evidence/result receipt))))
+       (every? nonblank-string? (:refs receipt))))
+
+(defn evidence-receipt? [receipt]
+  (let [schema (:evidence/schema receipt)]
+    (and (receipt-envelope? receipt)
+         (= :test-run (:kind receipt))
+         (= evidence-receipt-origin (:origin receipt))
+         (or (nil? schema)
+             (and (= 2 schema)
+                  (nonblank-string? (:evidence/adapter receipt))))
+         (valid-result? (:evidence/result receipt)))))
 
 (defn immutable-receipt-ledger? [ledger]
   (and (map? ledger)
@@ -243,6 +251,8 @@
                           (:result/revision result))]
     (boolean
      (and (evidence-receipt? receipt)
+          (= 2 (:evidence/schema receipt))
+          (nonblank-string? (:evidence/adapter receipt))
           (= result (:evidence/result receipt))
           (some #{(:catalog/path (:result/catalog result))}
                 (:manifest receipt))
@@ -253,6 +263,14 @@
 (defn satisfied? [result]
   (or (= :passed (:result/outcome result))
       (explicit-not-applicable? result)))
+
+(defn promotion-satisfied? [result]
+  (= :passed (:result/outcome result)))
+
+(defn automatic-promotion-supported? [gate]
+  ;; Coverage needs a retained report, threshold, and baseline attestation.
+  ;; Until that versioned contract lands, a zero exit must fail closed here.
+  (not= :coverage (:gate/kind gate)))
 
 (defn gate-index [catalog]
   (let [repositories (:catalog/repositories catalog)]
@@ -308,7 +326,9 @@
                                (and (seq results)
                                     (every? satisfied? results)))})))))
 
-(defn promotion-ready?
+(defn promotion-evidence-consistent?
+  "Pure consistency over records authenticated by an effectful boundary.
+  This predicate is not promotion authority."
   [catalog catalog-identity target-revision required-gate-ids results
    immutable-receipt-ledger]
   (if-not (and (coll? required-gate-ids)
@@ -325,14 +345,16 @@
       (boolean
        (and (valid-catalog? catalog)
             (catalog-identity? catalog-identity)
-            (nonblank-string? target-revision)
+            (git-commit-id? target-revision)
             (seq required-gate-ids)
             (every? #(contains? trusted-gates %) required-gate-ids)
             (every? #(= 1 (get gate-id-counts % 0)) required-gate-ids)
             (every? (fn [gate-id]
                       (when-let [result (get by-id gate-id)]
                         (and (valid-result? result)
-                             (satisfied? result)
+                             (promotion-satisfied? result)
+                             (automatic-promotion-supported?
+                              (:gate (get trusted-gates gate-id)))
                              (= target-revision (:result/revision result))
                              (some #(receipt-attests-result? % result)
                                    receipts)
