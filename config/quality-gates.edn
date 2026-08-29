@@ -1,0 +1,159 @@
+{:catalog/version 1
+ :catalog/repositories
+ {"Truth"
+  {:repository/path "Truth"
+   :repository/gates
+   [{:gate/id :truth/static
+     :gate/kind :static
+     :gate/execution :local
+     :gate/command ["./bin/analyze" "--strict"]
+     :gate/source "Truth/.github/workflows/static-analysis.yml"}
+    {:gate/id :truth/unit
+     :gate/kind :unit
+     :gate/execution :local
+     :gate/command ["./bin/test" "unit"]
+     :gate/source "Truth/.github/workflows/test.yml"}
+    {:gate/id :truth/integration
+     :gate/kind :integration
+     :gate/execution :local
+     :gate/command ["./bin/test" "integration"]
+     :gate/source "Truth/.github/workflows/test.yml"}
+    {:gate/id :truth/coverage
+     :gate/kind :coverage
+     :gate/execution :local
+     :gate/command ["./bin/coverage" "--text"]
+     :gate/source "Truth/.github/workflows/coverage.yml"}]}
+
+  "calliope"
+  {:repository/path "calliope"
+   :repository/gates
+   [{:gate/id :calliope/unit
+     :gate/kind :unit
+     :gate/execution :local
+     :gate/command ["clojure" "-M:test"]
+     :gate/source "calliope/.github/workflows/classifier-dsl.yml"}
+    {:gate/id :calliope/coverage
+     :gate/kind :coverage
+     :gate/execution :local
+     :gate/command ["clojure" "-M:cloverage"]
+     :gate/source "calliope/deps.edn"}]}
+
+  "eta-mu"
+  {:repository/path "eta-mu"
+   :repository/gates
+   [{:gate/id :eta-mu/static
+     :gate/kind :static
+     :gate/execution :local
+     :gate/command ["bb" "scripts/lint.bb"]
+     :gate/source "eta-mu/package.json"}
+    {:gate/id :eta-mu/unit
+     :gate/kind :unit
+     :gate/execution :local
+     :gate/command ["bb" "scripts/test.bb"]
+     :gate/source "eta-mu/package.json"}
+    {:gate/id :eta-mu/build
+     :gate/kind :build
+     :gate/execution :local
+     :gate/command ["pnpm" "-r" "--no-bail" "build"]
+     :gate/source "eta-mu/package.json"}]}
+
+  "katamorph"
+  {:repository/path "katamorph"
+   :repository/gates
+   [{:gate/id :katamorph/static
+     :gate/kind :static
+     :gate/execution :local
+     :gate/command ["pnpm" "lint:kondo"]
+     :gate/source "katamorph/package.json"}
+    {:gate/id :katamorph/unit-jvm
+     :gate/kind :unit
+     :gate/execution :local
+     :gate/command ["clojure" "-M:test-jvm"]
+     :gate/source "katamorph/deps.edn"}
+    {:gate/id :katamorph/unit-cljs
+     :gate/kind :unit
+     :gate/execution :local
+     :gate/command ["pnpm" "test"]
+     :gate/source "katamorph/package.json"}
+    {:gate/id :katamorph/examples
+     :gate/kind :build
+     :gate/execution :local
+     :gate/command ["pnpm" "examples"]
+     :gate/source "katamorph/package.json"}
+    {:gate/id :katamorph/build
+     :gate/kind :build
+     :gate/execution :local
+     :gate/command ["pnpm" "build"]
+     :gate/source "katamorph/package.json"}]}
+
+  "knoxx"
+  {:repository/path "knoxx"
+   :repository/gates
+   [{:gate/id :knoxx/backend-static
+     :gate/kind :static
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "backend" "run" "typecheck"]
+     :gate/source "knoxx/.github/workflows/ci.yml"}
+    {:gate/id :knoxx/frontend-static
+     :gate/kind :static
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "frontend" "run" "typecheck"]
+     :gate/source "knoxx/.github/workflows/ci.yml"}
+    {:gate/id :knoxx/backend-unit
+     :gate/kind :unit
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "backend" "run" "test"]
+     :gate/source "knoxx/backend/package.json"}
+    {:gate/id :knoxx/frontend-cljs-unit
+     :gate/kind :unit
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "frontend" "run" "test:cljs"]
+     :gate/source "knoxx/.github/workflows/ci.yml"}
+    {:gate/id :knoxx/frontend-unit
+     :gate/kind :unit
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "frontend" "run" "test"]
+     :gate/source "knoxx/frontend/package.json"}
+    {:gate/id :knoxx/backend-integration
+     :gate/kind :integration
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "backend" "run" "test:e2e"]
+     :gate/source "knoxx/backend/package.json"}
+    {:gate/id :knoxx/frontend-e2e
+     :gate/kind :e2e
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "frontend" "run" "test:e2e"]
+     :gate/source "knoxx/README.md"}
+    {:gate/id :knoxx/backend-coverage
+     :gate/kind :coverage
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "backend" "run" "test:coverage"]
+     :gate/source "knoxx/.github/workflows/ci.yml"}
+    {:gate/id :knoxx/frontend-coverage
+     :gate/kind :coverage
+     :gate/execution :local
+     :gate/command ["pnpm" "-C" "frontend" "run" "test:coverage"]
+     :gate/source "knoxx/.github/workflows/ci.yml"}]}
+
+  "muse"
+  {:repository/path "muse"
+   :repository/gates
+   [{:gate/id :muse/unit
+     :gate/kind :unit
+     :gate/execution :workflow-only
+     :gate/source "muse/.github/workflows/ci.yml"
+     :gate/reason "The owning CI compiles tests and separately asserts the cljs.test success sentinel; no equivalent one-command local gate is declared."}]}
+
+  "services"
+  {:repository/path "services"
+   :repository/gates
+   [{:gate/id :services/static
+     :gate/kind :static
+     :gate/execution :workflow-only
+     :gate/source "services/.github/workflows/code-quality.yml"
+     :gate/reason "The owning workflow validates YAML, shell and JavaScript plus repository-specific remote-script invariants as one multi-step gate."}
+    {:gate/id :services/live-smoke
+     :gate/kind :live-smoke
+     :gate/execution :external
+     :gate/source "services/.github/workflows/digitalocean-host.yml"
+     :gate/reason "Requires the configured DigitalOcean host, GitHub environment, and deployment credentials."}]}}}

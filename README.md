@@ -31,6 +31,9 @@ nbb scripts/workspace.clj build --only eta-mu
 nbb scripts/workspace.clj test --only muse
 nbb scripts/workspace.clj lint --all
 nbb scripts/workspace.clj jscpd --only muse
+nbb scripts/evidence.clj validate
+nbb scripts/evidence.clj list --only katamorph --kind unit,static
+nbb scripts/evidence.clj run --only katamorph --kind static
 ```
 
 `inventory` is read-only; `report` writes only root-generated artifacts.
@@ -48,6 +51,23 @@ reported as unavailable rather than guessed.
 `report` writes `reports/workspace.json` and `reports/workspace.md`. `jscpd`
 is baseline reporting rather than a duplication gate; broken tooling still
 returns a failure.
+
+## Evidence gates
+
+`config/quality-gates.edn` is the explicit map for child repositories whose
+owning gates are not represented by an exact root `package.json` script. Every
+entry cites the owning manifest or workflow and classifies the gate as static,
+unit, integration, E2E, coverage, security, build, live smoke, or independent
+review. The catalog also distinguishes locally runnable commands from
+workflow-only and externally hosted gates.
+
+`scripts/evidence.clj` validates and runs only mapped commands for explicitly
+selected direct submodules. It repeats workspace path and checkout-identity
+checks before spawning a process. Failed, blocked, unavailable, and
+not-applicable are separate outcomes; a missing checkout, tool, credential, or
+host never becomes a pass. See
+[`docs/specs/inflight-completion-and-knoxx-lift.md`](docs/specs/inflight-completion-and-knoxx-lift.md)
+for the revision-bound promotion and test-tier contract.
 
 ## Project law
 

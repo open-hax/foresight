@@ -1,7 +1,7 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
-(ns foresight-project
+(ns project
   (:require [foresight.law.project :as law]
-            [foresight.project :as project]
+            [foresight.project :as project-model]
             [nbb.core :as nbb]
             [workspace :as workspace]
             ["fs" :as fs]
@@ -23,17 +23,17 @@
                             :source/ownership
                             :source/role
                             :source/actionable?])
-             (:project/sources project/project)))
+             (:project/sources project-model/project)))
   0)
 
 (defn validate! []
-  (let [result (law/validate-project project/project (current-gitmodules))]
+  (let [result (law/validate-project project-model/project (current-gitmodules))]
     (if (:valid? result)
       (do
         (println "PASS" (name (:project/id result))
-                 (count (:project/sources project/project)) "sources"
-                 (count (project/submodule-sources)) "submodules"
-                 (count (:project/invariants project/project)) "invariants")
+                 (count (:project/sources project-model/project)) "sources"
+                 (count (project-model/submodule-sources)) "submodules"
+                 (count (:project/invariants project-model/project)) "invariants")
         0)
       (do
         (binding [*out* *err*]
@@ -45,7 +45,7 @@
 (defn -main [& args]
   (try
     (case (first args)
-      "show" (do (prn project/project) 0)
+      "show" (do (prn project-model/project) 0)
       "repos" (print-repos!)
       "validate" (validate!)
       (throw (js/Error.
