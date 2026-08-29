@@ -4,7 +4,7 @@ Captured from live GitHub PR metadata, Actions runs, commit statuses, and review
 
 This is an immutable point-in-time classification, not the live board. By the
 first reconciliation pass at 15:23 UTC, Foresight #38, #41–#48 and Epiphany
-#7/#8 had merged; Foresight #37 had an explicit operator-evidence blocker;
+PRs #7 and #8 had merged; Foresight #37 had an explicit operator-evidence blocker;
 Foresight #40 and the eta-mu, Knoxx, and Services tranches were still under
 revision-bound verification.
 
@@ -18,7 +18,7 @@ revision-bound verification.
 
 ## Terminal-state matrix
 
-| PR | Head SHA | Base | Terminal state | Live evidence | Recommended action |
+| PR | Head SHA | Base | Disposition | Live evidence | Recommended action |
 | --- | --- | --- | --- | --- | --- |
 | [octave-commons/bitch-tracker#1](https://github.com/octave-commons/bitch-tracker/pull/1) | `693f1388e61bd268814f85d1a40ef15a4485e6a3` | `main` | split | CONFLICT; no Actions run; threads 7 current + 2 outdated | Separate snapshot/generated artifacts, pure domain, adapters, and integration tests. |
 | [octave-commons/bitch-tracker#2](https://github.com/octave-commons/bitch-tracker/pull/2) | `c48c8e45366e592b30cdbbcf54f016d585b0e646` | `main` | split | CONFLICT; no Actions run; 0 unresolved threads | Separate snapshot/generated artifacts, pure domain, adapters, and integration tests. |

@@ -43,3 +43,12 @@
   spore: none
   receipt-refs: 2026-08-29T22:07:50Z
   note: Descriptor safety does not imply semantic ledger validity; a RED-test mock that crossed the real append boundary was caught by working-tree diff, cleaned before publication, and converted into an explicit no-ledger-mutation regression.
+- ts: 2026-08-29T22:32:30Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Correct portfolio audit Markdown and terminal-state terminology
+  p-efficiency: 0.91
+  p-friction: 0.38
+  p-skill-candidate: 0.20
+  spore: none
+  receipt-refs: 2026-08-29T22:32:30Z
+  note: Full review after a rate-limit window caught both a parser-visible issue-number continuation and a semantic column-label mismatch; targeted prose fixes keep the immutable audit facts unchanged.
