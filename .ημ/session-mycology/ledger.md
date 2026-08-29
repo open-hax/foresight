@@ -70,3 +70,12 @@
   spore: none
   receipt-refs: 2026-08-29T23:08:08Z
   note: Existence and shape validity do not preserve history after truncation; a semantic reservation must join the held filesystem snapshot to the immutable ledger bytes at the exact current Git HEAD.
+- ts: 2026-08-29T23:36:14Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Reverify full Receipt River bytes after append
+  p-efficiency: 0.90
+  p-friction: 0.46
+  p-skill-candidate: 0.39
+  spore: none
+  receipt-refs: 2026-08-29T23:36:14Z
+  note: File identity and length are insufficient after a write; exact expected-byte verification at the final held-descriptor boundary turns otherwise invisible in-place corruption into a quarantined failure.

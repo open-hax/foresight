@@ -245,6 +245,36 @@
              js/Error #"another writer holds the append lock"
              (cli/append-edn-line! file {:blocked :until-adjudicated})))))))
 
+(deftest secure-append-quarantines-a-post-write-in-place-overwrite
+  (with-receipt-fixture
+    (fn [{:keys [directory file]}]
+      (let [record {:append :durable-but-prefix-overwritten}
+            original "{:original true}\n"
+            replacement "{:forgedxx true}\n"
+            lock-file (path/join directory ".receipts.edn.append.lock")]
+        (is (= (.-byteLength (js/Buffer.from original "utf8"))
+               (.-byteLength (js/Buffer.from replacement "utf8"))))
+        (fs/writeFileSync file original "utf8")
+        (binding [cli/*secure-append-phase-hook*
+                  (fn [phase _context]
+                    (when (= :after-write phase)
+                      (let [fd (fs/openSync file "r+")
+                            bytes (js/Buffer.from replacement "utf8")]
+                        (try
+                          (fs/writeSync fd bytes 0 (.-byteLength bytes) 0)
+                          (fs/fsyncSync fd)
+                          (finally
+                            (fs/closeSync fd))))))]
+          (is (thrown-with-msg?
+               js/Error #"changed after append"
+               (cli/append-edn-line! file record))))
+        (is (= (str replacement (pr-str record) "\n")
+               (fs/readFileSync file "utf8")))
+        (is (fs/existsSync lock-file))
+        (is (thrown-with-msg?
+             js/Error #"another writer holds the append lock"
+             (cli/append-edn-line! file {:blocked :until-adjudicated})))))))
+
 (deftest secure-append-rejects-oversized-receipt-lines-before-opening
   (with-receipt-fixture
     (fn [{:keys [file]}]

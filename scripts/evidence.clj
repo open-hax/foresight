@@ -890,7 +890,9 @@
                     ""
                     "\n")
         payload (.encode (js/TextEncoder.)
-                         (str separator line "\n"))]
+                         (str separator line "\n"))
+        expected-bytes (js/Buffer.concat
+                        #js [held-ledger-bytes payload])]
     (when-not (= before-size
                  (safe-file-size!
                   (require-target-identity! target)))
@@ -913,6 +915,8 @@
     (require-parent-identity! parent)
     (require-append-lock-identity! lock)
     (require-target-identity! target)
+    (when-not (.equals expected-bytes (stable-held-target-bytes! target))
+      (append-error! "Receipt River bytes changed after append"))
     ;; Closing is part of the verified write boundary. If it fails, the outer
     ;; reservation cleanup retains the lock as a quarantine marker.
     (fs/closeSync (:fd target))
