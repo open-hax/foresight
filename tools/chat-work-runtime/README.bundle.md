@@ -23,3 +23,7 @@ clj-kondo executable are statically linked.
 
 Verify the download with the adjacent `.sha256` file. After extraction, verify
 the payload from inside the bundle with `sha256sum -c SHA256SUMS`.
+
+The Foresight runtime packaging is GPL-3.0-or-later, and reusable Foresight
+library code is LGPL-3.0-or-later. License notices are under `share/licenses/`;
+bundled third-party components retain their upstream licenses.

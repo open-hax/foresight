@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
@@ -78,7 +79,8 @@ for command in node npm npx nbb jscpd; do
   ln -s "../lib/node/bin/$command" "$bundle_dir/bin/$command"
 done
 
-cp "$repo_dir/LICENSE" "$bundle_dir/share/licenses/foresight-GPL-3.0-or-later.txt"
+cp "$repo_dir/LICENSE" "$bundle_dir/share/licenses/foresight-LGPL-3.0-or-later.txt"
+cp "$script_dir/LICENSE" "$bundle_dir/share/licenses/foresight-chat-work-runtime-GPL-3.0-or-later.txt"
 cp "$script_dir/README.bundle.md" "$bundle_dir/README.md"
 cp "$script_dir/versions.env" "$bundle_dir/versions.env"
 (
@@ -88,5 +90,5 @@ cp "$script_dir/versions.env" "$bundle_dir/versions.env"
 
 archive_path="$output_dir/$bundle_name.tar.gz"
 tar --owner=0 --group=0 -C "$work_dir" -czf "$archive_path" "$bundle_name"
-sha256sum "$archive_path" > "$archive_path.sha256"
+(cd "$output_dir" && sha256sum "$bundle_name.tar.gz" > "$bundle_name.tar.gz.sha256")
 printf '%s\n' "$archive_path"
