@@ -1,0 +1,99 @@
+# Open PR portfolio — Foresight constellation
+
+Inventory date: 2026-08-29.
+
+## Boundary
+
+The inventory follows Foresight's direct `.gitmodules` boundary: Truth, bitch-tracker, calliope, epiphany, eta-mu, katamorph, knoxx, muse, proxx, services, uxx, opencode, and `.agents`, plus the root Foresight repository itself.
+
+At inventory time there are **105 open pull requests** across that boundary. The purpose of this note is to keep every open PR visible while distinguishing real cross-repository workstreams from repository-local backlog.
+
+## Cross-repository tracking PRs created from this inventory
+
+1. **Knoxx publication, evaluation, and reconciliation** — publication/review semantics, desired-vs-observed convergence, durable receipts, and the forward deployment seam.
+2. **Knoxx MCP authentication, dev ingress, and deployment lifecycle** — trust boundaries, MCP end-to-end verification, dev access, staging, and production promotion.
+3. **Alpha + Katamorph portable workflow law stack** — the large Foresight Alpha stack, Katamorph action/workflow contracts, and eta-mu Rheos consumers.
+4. **Portable sandbox bundles and evidence-first review infrastructure** — reconstructable chat/sandbox artifacts and pinned reusable review workflows.
+
+These are coordination surfaces only. They do not turn a child repository's current implementation into accepted Foresight law.
+
+## Complete open-PR inventory
+
+- **open-hax/foresight** (23): [#6](https://github.com/open-hax/foresight/pull/6), [#7](https://github.com/open-hax/foresight/pull/7), [#8](https://github.com/open-hax/foresight/pull/8), [#9](https://github.com/open-hax/foresight/pull/9), [#10](https://github.com/open-hax/foresight/pull/10), [#11](https://github.com/open-hax/foresight/pull/11), [#12](https://github.com/open-hax/foresight/pull/12), [#13](https://github.com/open-hax/foresight/pull/13), [#14](https://github.com/open-hax/foresight/pull/14), [#15](https://github.com/open-hax/foresight/pull/15), [#16](https://github.com/open-hax/foresight/pull/16), [#17](https://github.com/open-hax/foresight/pull/17), [#18](https://github.com/open-hax/foresight/pull/18), [#19](https://github.com/open-hax/foresight/pull/19), [#20](https://github.com/open-hax/foresight/pull/20), [#21](https://github.com/open-hax/foresight/pull/21), [#22](https://github.com/open-hax/foresight/pull/22), [#24](https://github.com/open-hax/foresight/pull/24), [#26](https://github.com/open-hax/foresight/pull/26), [#37](https://github.com/open-hax/foresight/pull/37), [#38](https://github.com/open-hax/foresight/pull/38), [#40](https://github.com/open-hax/foresight/pull/40), [#41](https://github.com/open-hax/foresight/pull/41)
+- **open-hax/knoxx** (6): [#265](https://github.com/open-hax/knoxx/pull/265), [#238](https://github.com/open-hax/knoxx/pull/238), [#224](https://github.com/open-hax/knoxx/pull/224), [#231](https://github.com/open-hax/knoxx/pull/231), [#208](https://github.com/open-hax/knoxx/pull/208), [#42](https://github.com/open-hax/knoxx/pull/42)
+- **open-hax/services** (2): [#58](https://github.com/open-hax/services/pull/58), [#44](https://github.com/open-hax/services/pull/44)
+- **open-hax/eta-mu** (4): [#287](https://github.com/open-hax/eta-mu/pull/287), [#284](https://github.com/open-hax/eta-mu/pull/284), [#285](https://github.com/open-hax/eta-mu/pull/285), [#281](https://github.com/open-hax/eta-mu/pull/281)
+- **open-hax/katamorph** (12): [#22](https://github.com/open-hax/katamorph/pull/22), [#19](https://github.com/open-hax/katamorph/pull/19), [#18](https://github.com/open-hax/katamorph/pull/18), [#17](https://github.com/open-hax/katamorph/pull/17), [#16](https://github.com/open-hax/katamorph/pull/16), [#15](https://github.com/open-hax/katamorph/pull/15), [#14](https://github.com/open-hax/katamorph/pull/14), [#13](https://github.com/open-hax/katamorph/pull/13), [#11](https://github.com/open-hax/katamorph/pull/11), [#8](https://github.com/open-hax/katamorph/pull/8), [#10](https://github.com/open-hax/katamorph/pull/10), [#4](https://github.com/open-hax/katamorph/pull/4)
+- **open-hax/proxx** (41): [#345](https://github.com/open-hax/proxx/pull/345), [#344](https://github.com/open-hax/proxx/pull/344), [#346](https://github.com/open-hax/proxx/pull/346), [#341](https://github.com/open-hax/proxx/pull/341), [#340](https://github.com/open-hax/proxx/pull/340), [#339](https://github.com/open-hax/proxx/pull/339), [#337](https://github.com/open-hax/proxx/pull/337), [#338](https://github.com/open-hax/proxx/pull/338), [#336](https://github.com/open-hax/proxx/pull/336), [#333](https://github.com/open-hax/proxx/pull/333), [#334](https://github.com/open-hax/proxx/pull/334), [#335](https://github.com/open-hax/proxx/pull/335), [#332](https://github.com/open-hax/proxx/pull/332), [#331](https://github.com/open-hax/proxx/pull/331), [#330](https://github.com/open-hax/proxx/pull/330), [#326](https://github.com/open-hax/proxx/pull/326), [#323](https://github.com/open-hax/proxx/pull/323), [#328](https://github.com/open-hax/proxx/pull/328), [#327](https://github.com/open-hax/proxx/pull/327), [#329](https://github.com/open-hax/proxx/pull/329), [#325](https://github.com/open-hax/proxx/pull/325), [#324](https://github.com/open-hax/proxx/pull/324), [#320](https://github.com/open-hax/proxx/pull/320), [#317](https://github.com/open-hax/proxx/pull/317), [#343](https://github.com/open-hax/proxx/pull/343), [#342](https://github.com/open-hax/proxx/pull/342), [#319](https://github.com/open-hax/proxx/pull/319), [#318](https://github.com/open-hax/proxx/pull/318), [#315](https://github.com/open-hax/proxx/pull/315), [#316](https://github.com/open-hax/proxx/pull/316), [#322](https://github.com/open-hax/proxx/pull/322), [#321](https://github.com/open-hax/proxx/pull/321), [#314](https://github.com/open-hax/proxx/pull/314), [#313](https://github.com/open-hax/proxx/pull/313), [#312](https://github.com/open-hax/proxx/pull/312), [#311](https://github.com/open-hax/proxx/pull/311), [#310](https://github.com/open-hax/proxx/pull/310), [#307](https://github.com/open-hax/proxx/pull/307), [#306](https://github.com/open-hax/proxx/pull/306), [#305](https://github.com/open-hax/proxx/pull/305), [#277](https://github.com/open-hax/proxx/pull/277)
+- **open-hax/uxx** (1): [#6](https://github.com/open-hax/uxx/pull/6)
+- **octave-commons/Truth** (2): [#5](https://github.com/octave-commons/Truth/pull/5), [#4](https://github.com/octave-commons/Truth/pull/4)
+- **octave-commons/bitch-tracker** (3): [#3](https://github.com/octave-commons/bitch-tracker/pull/3), [#1](https://github.com/octave-commons/bitch-tracker/pull/1), [#2](https://github.com/octave-commons/bitch-tracker/pull/2)
+- **octave-commons/calliope** (1): [#7](https://github.com/octave-commons/calliope/pull/7)
+- **octave-commons/epiphany** (8): [#14](https://github.com/octave-commons/epiphany/pull/14), [#13](https://github.com/octave-commons/epiphany/pull/13), [#12](https://github.com/octave-commons/epiphany/pull/12), [#9](https://github.com/octave-commons/epiphany/pull/9), [#8](https://github.com/octave-commons/epiphany/pull/8), [#7](https://github.com/octave-commons/epiphany/pull/7), [#6](https://github.com/octave-commons/epiphany/pull/6), [#5](https://github.com/octave-commons/epiphany/pull/5)
+- **octave-commons/muse** (2): [#7](https://github.com/octave-commons/muse/pull/7), [#5](https://github.com/octave-commons/muse/pull/5)
+- **open-hax/opencode** (0): none
+- **riatzukiza/.agents** (0): none
+
+## Primary clustering
+
+### A. Knoxx publication / evaluation / reconciliation
+
+Primary: Knoxx #238, #265; Foresight #38; Foresight #37; Services #44.
+
+Reason: these decide the capability split, revision-bound review evidence, desired-vs-observed publication convergence, receipt durability, and the deployment authority used by publication.
+
+### B. Knoxx MCP auth / dev ingress / environment promotion
+
+Primary: Knoxx #224, #231; Services #58, #44; Epiphany #9, #14; Foresight #37.
+
+Reason: these define authentication methods, credential classes, tool-surface conformance, authenticated dev access, staging policy, and production promotion.
+
+### C. Alpha / Katamorph workflow law stack
+
+Primary: Foresight #6–#22, #24, #26, #41; Katamorph #8, #10, #11, #13–#19, #22; eta-mu #284, #285, #287. Eta-mu #281 is adjacent architecture guidance.
+
+Reason: this is one stacked dependency graph around portable conditions, actions, invocation requests, workflow composition, Artifact/Event/Reaction laws, and executable portability gates.
+
+### D. Portable sandbox + evidence-first review rollout
+
+Primary: Foresight #40; Knoxx #208; Katamorph #19; Proxx #306, #307; Uxx #6; Truth #4, #5; Epiphany #6, #13; Muse #5, #7; bitch-tracker #3. Foresight #41 is adjacent gate work.
+
+Reason: these are the same operational pattern repeated across repositories: revision-bound reconstruction plus evidence-bounded automated review.
+
+## Repository-local or currently isolated work
+
+These remain visible here but do not yet justify their own cross-repository Foresight tracker.
+
+### Proxx stabilization backlog
+
+Excluding the sandbox/review rollout (#306/#307), Proxx has 39 open PRs. Most are eta-mu-generated local remediation around provider credential/fallback behavior, UI state, test determinism, federation/telemetry/event-store edges, deployment packaging, and a few larger feature branches (#310 data layer, #311 embeddings strategies, #305 Anthropic OAuth, #312 umbrella work, #277 staging).
+
+This is a real backlog, but grouping it into a Foresight architectural workstream would currently manufacture cross-repository meaning that the PRs themselves do not establish. If a provider-contract or data-layer slice starts being consumed by Knoxx/Katamorph/Foresight, promote that slice then.
+
+### Bitch-tracker domain work
+
+- [#1](https://github.com/octave-commons/bitch-tracker/pull/1) is OpenPlanner ingest/backfill parity work.
+- [#2](https://github.com/octave-commons/bitch-tracker/pull/2) is the eta-mu-sol pure-layer restructuring.
+
+They are related inside bitch-tracker but are not currently a cross-repository dependency chain. #3 is already tracked under review infrastructure.
+
+### Calliope media workbench
+
+- [#7](https://github.com/octave-commons/calliope/pull/7) is the active media-workbench/studio-law/Suno metadata thread.
+
+It is architecturally relevant to Foresight's Mu/studio archaeology, but it is currently one child PR rather than a group of live cross-repository PRs, so this inventory records it without inventing a separate tracker.
+
+### Epiphany historical/evidence synthesis
+
+Epiphany #5, #7, #8, and #12 are cross-repository evidence records, but the implementation PRs they summarize are largely merged or otherwise not part of the current Knoxx/Services execution threads. They remain provenance inputs, not present-tense dependency gates.
+
+### Knoxx isolated legacy fix
+
+- [open-hax/knoxx#42](https://github.com/open-hax/knoxx/pull/42) is an old frontend ES2022-lib fix and does not connect to the current publication/auth/deployment stacks surfaced by the newer Knoxx PRs.
+
+## Portfolio rules
+
+- A child PR may appear in more than one workstream when it is a genuine seam; Services #44 and Foresight #37 are examples.
+- A tracking PR must not be treated as merge-order authority by itself. Dependency claims should point back to child PR evidence.
+- Closed/merged child PRs should be removed from the live section on the next inventory pass but may remain in historical context when they explain a dependency.
+- Do not create a top-level tracker merely to make an isolated PR look strategic. The tracker exists to reduce navigation cost across a real thread of work.
