@@ -8,8 +8,8 @@
   {:document/format :markdown
    :document/source-path "docs/finding.md"
    :document/frontmatter-present? true
-   :document/frontmatter/raw "uuid: finding/lossless\nkind: finding\nstatus: provisional"
-   :document/frontmatter/data {:uuid "finding/lossless"
+   :document/frontmatter-raw "uuid: finding/lossless\nkind: finding\nstatus: provisional"
+   :document/frontmatter-data {:uuid "finding/lossless"
                                :kind "finding"
                                :status "provisional"}
    :document/body "# Finding"})
@@ -27,7 +27,7 @@
     (is (= "finding/lossless" (get-in result [:artifact :artifact/id])))
     (is (= :finding (get-in result [:artifact :artifact/kind])))
     (is (= :provisional (get-in result [:artifact :artifact/status])))
-    (is (= (:document/frontmatter/data lossless-document)
+    (is (= (:document/frontmatter-data lossless-document)
            (get-in result [:artifact :artifact/data])))))
 
 (deftest legacy-markdown-shape-remains-compatible
