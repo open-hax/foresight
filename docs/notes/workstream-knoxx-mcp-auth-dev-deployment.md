@@ -1,3 +1,10 @@
+---
+title: "Workstream: Knoxx MCP authentication, dev ingress, and deployment lifecycle"
+summary: "Tracks the operational trust boundary spanning Knoxx MCP authentication, bootstrap credentials, Services ingress, staging policy, and DigitalOcean production promotion."
+category: "tracking"
+created: "2026-08-29"
+---
+
 # Workstream: Knoxx MCP authentication, dev ingress, and deployment lifecycle
 
 Inventory date: 2026-08-29.
