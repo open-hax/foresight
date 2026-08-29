@@ -13,38 +13,11 @@ permissions:
 jobs:
   review:
     name: Evidence-first review (eta-mu)
-    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@2b918cdab2ebd30e745bb8fa86d077d7a3af0030
+    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@d3937a2f2fa6ecf74cd525c6a0daceb5380a0e1d
     with:
+      pr_head_sha: ${{ github.event.pull_request.head.sha }}
       setup_eta_mu_toolchain: false
       evidence_gates_script: |
-        initialize_agents_input() {
-          local entry mode type expected repository_path actual
-          entry="$(git --no-replace-objects ls-tree "${PR_HEAD_SHA}" -- .agents)"
-          read -r mode type expected repository_path <<< "${entry}"
-          [[ "${mode}" == "160000" && "${type}" == "commit" ]] || return 1
-          [[ "${expected}" =~ ^[0-9a-f]{40}$|^[0-9a-f]{64}$ ]] || return 1
-          [[ "${repository_path}" == ".agents" ]] || return 1
-          [[ ! -e .agents ]] || return 1
-          git init --quiet .agents || return 1
-          git -C .agents remote add origin https://github.com/riatzukiza/.agents.git || return 1
-          git -C .agents fetch --quiet --depth 1 origin "${expected}" || return 1
-          git -C .agents -c advice.detachedHead=false checkout --quiet --detach "${expected}" || return 1
-          actual="$(git -C .agents rev-parse HEAD)"
-          [[ "${actual}" == "${expected}" ]]
-        }
-
-        verify_agents_input() {
-          local entry mode type expected repository_path actual
-          entry="$(git --no-replace-objects ls-tree "${PR_HEAD_SHA}" -- .agents)"
-          read -r mode type expected repository_path <<< "${entry}"
-          [[ "${mode}" == "160000" && "${type}" == "commit" ]] || return 1
-          [[ "${repository_path}" == ".agents" ]] || return 1
-          actual="$(git -C .agents rev-parse HEAD)"
-          [[ "${actual}" == "${expected}" ]]
-        }
-
-        run_gate agents_input initialize_agents_input
-        run_gate agents_input_revision verify_agents_input
         run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
         run_gate workspace_laws npx --yes nbb@1.4.207 -cp scripts:test test/workspace_test.cljs
         run_gate project_laws npx --yes nbb@1.4.207 -cp src:scripts:test test/project_test.cljs

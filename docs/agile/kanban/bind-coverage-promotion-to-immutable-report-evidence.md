@@ -6,9 +6,11 @@ priority: "P1"
 labels: [""]
 created_at: "2026-08-29T18:22:39.638Z"
 parent: "4f263499-a765-4b0f-bac0-7f8175672d60"
-write-id: "1788027780844-0.gts2flm37zdnu6cpr0u"
+write-id: "1788036237839-0.o17qadwn6xptjiv6vu"
 ---
 
 ---
 GitHub issue https://github.com/open-hax/foresight/issues/59 owns the versioned coverage-attestation contract: immutable report digest and format, measured metrics, repository-owned thresholds and baseline identity, exact gate/child/catalog binding, producer trust, negative tamper tests, and hosted E2E proof. PR #49 must fail closed for automatic :coverage promotion until that contract lands.
+
+Administrative lifecycle repair: the card file was already todo but had no status-change event. The enforced CLI round-trip recorded the intended todo state; this does not claim issue #59 implementation.
 ---

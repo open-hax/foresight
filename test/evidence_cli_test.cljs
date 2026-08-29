@@ -286,6 +286,30 @@
                (:refs receipt)))
         (is (re-find #"[.]ημ/receipts[.]edn$" (:file @captured)))))))
 
+(deftest gate-runs-preflight-durable-receipt-support
+  (let [calls (atom [])
+        catalog {:catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}]
+    (with-redefs [cli/require-secure-append-support!
+                  (fn []
+                    (swap! calls conj :preflight)
+                    (throw (js/Error. "unsupported receipt host")))
+                  cli/require-repositories!
+                  (fn [& _]
+                    (swap! calls conj :repositories)
+                    {})
+                  cli/run-gate!
+                  (fn [& _]
+                    (swap! calls conj :gate)
+                    passed-result)]
+      (is (thrown-with-msg?
+           js/Error #"unsupported receipt host"
+           (cli/run-selected-gates!
+            catalog test-catalog-identity
+            {:only #{"repo"} :kinds #{:unit}})))
+      (is (= [:preflight] @calls)))))
+
 (deftest receipt-lines-require-one-complete-edn-form
   (is (= [{:a 1}] (cli/read-receipt-records! "{:a 1}\n")))
   (is (thrown-with-msg?

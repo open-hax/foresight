@@ -858,6 +858,8 @@
         (:catalog/repositories catalog)))
 
 (defn run-selected-gates! [catalog catalog-identity {:keys [only kinds]}]
+  ;; Fail before a gate executes when this host cannot durably retain its result.
+  (require-secure-append-support!)
   (let [paths (require-repositories! catalog only)
         gates (law/select-gates catalog (sort only) kinds)]
     (when (empty? gates)

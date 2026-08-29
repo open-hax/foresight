@@ -168,44 +168,35 @@
        :dirty (when (zero? (:exit status)) (not (str/blank? (:stdout status))))
        :git-errors git-errors})))
 
-(defn skill-catalog-summary [repo-dir role]
-  (when (= "skill-catalog" role)
-    (let [skills-dir (path/join repo-dir "skills")
-          skill-count (if (plain-directory? skills-dir)
-                        (->> (fs/readdirSync skills-dir #js {:withFileTypes true})
-                             seq
-                             (filter #(and (.isDirectory %) (not (.isSymbolicLink %))))
-                             (filter #(plain-file? (path/join skills-dir (.-name %) "SKILL.md")))
-                             count)
-                        0)
-          provenance-lock "skills/.skill-lock.json"]
-      {:skill-count skill-count
-       :provenance-lock (when (plain-file? (path/join repo-dir provenance-lock))
-                          provenance-lock)})))
-
-(defn source-inventory [{:keys [path role actionable] :as source}]
+(defn source-inventory [{:keys [path actionable] :as source}]
   (let [{:keys [absolute exists device inode]} (inspect-source-path! root path)
-        repo-dir absolute
-        package-file (path/join repo-dir "package.json")
-        package-json (read-json package-file)
-        lockfiles (->> (keys lock-managers)
-                       (filter #(plain-file? (path/join repo-dir %)))
-                       sort vec)
-        package-manager (:packageManager package-json)]
-    (merge source
-           {:exists exists
-            :device device
-            :inode inode
-             :manifests (cond-> []
-                          (plain-file? package-file) (conj "package.json")
-                          (plain-file? (path/join repo-dir "deps.edn")) (conj "deps.edn")
-                          (plain-file? (path/join repo-dir "bb.edn")) (conj "bb.edn"))
-            :lockfiles lockfiles
-             :package-manager package-manager
-             :manager (select-manager package-manager lockfiles)
-             :scripts (->> package-json :scripts keys (map name) sort vec)}
-           (skill-catalog-summary repo-dir role)
-            (when actionable (git-state repo-dir)))))
+        root-facts {:exists exists :device device :inode inode}]
+    (if-not actionable
+      ;; Consolidation inputs are classified from root-owned declarations only.
+      ;; Looking below their root would turn inventory into execution authority.
+      (merge source root-facts
+             {:manifests []
+              :lockfiles []
+              :package-manager nil
+              :manager nil
+              :scripts []})
+      (let [repo-dir absolute
+            package-file (path/join repo-dir "package.json")
+            package-json (read-json package-file)
+            lockfiles (->> (keys lock-managers)
+                           (filter #(plain-file? (path/join repo-dir %)))
+                           sort vec)
+            package-manager (:packageManager package-json)]
+        (merge source root-facts
+               {:manifests (cond-> []
+                             (plain-file? package-file) (conj "package.json")
+                             (plain-file? (path/join repo-dir "deps.edn")) (conj "deps.edn")
+                             (plain-file? (path/join repo-dir "bb.edn")) (conj "bb.edn"))
+                :lockfiles lockfiles
+                :package-manager package-manager
+                :manager (select-manager package-manager lockfiles)
+                :scripts (->> package-json :scripts keys (map name) sort vec)}
+               (git-state repo-dir))))))
 
 (defn repo-inventory [source]
   (if-let [consolidation (git-managed-consolidation-inputs (:path source))]

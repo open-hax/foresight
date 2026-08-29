@@ -28,8 +28,8 @@ NBB has no task registry, so commands name the script directly:
 nbb scripts/workspace.clj report
 nbb scripts/workspace.clj install --only eta-mu,uxx
 nbb scripts/workspace.clj build --only eta-mu
-nbb scripts/workspace.clj test --only muse
-nbb scripts/workspace.clj lint --all
+nbb scripts/workspace.clj test --only eta-mu
+nbb scripts/workspace.clj lint --only eta-mu
 nbb scripts/workspace.clj jscpd --only muse
 nbb scripts/evidence.clj validate
 nbb scripts/evidence.clj list --only katamorph --kind unit,static

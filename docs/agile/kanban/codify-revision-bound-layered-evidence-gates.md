@@ -6,7 +6,7 @@ priority: "P1"
 labels: ["quality", "testing", "evidence"]
 created_at: "2026-08-29T15:09:34.997Z"
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-write-id: "1788020646669-0.j6kuv22xlxjjk4shtnk"
+write-id: "1788038338844-0.l1pwkxe6n99jcvq5gr"
 ---
 
 # Codify revision-bound layered evidence gates
@@ -37,4 +37,5 @@ Review findings addressed locally: promotion now requires one explicit target re
 
 Exact-head rereview exposed and local repair now closes three further evidence-boundary gaps: promotion matches results against the trusted catalog snapshot; catalog keys must be actionable direct submodules; and root orchestration cannot enter Knoxx nested packages. Full local matrix passes 52 tests/216 assertions, project/catalog validation, lint, Markdown, Rheos drift, diff hygiene, and Katamorph static at 708f1bb6 with catalog digest 0c904b66. Awaiting publication and fresh exact-head review.
 
+Truthful reusable review authority merged as open-hax/eta-mu@d3937a2f2fa6ecf74cd525c6a0daceb5380a0e1d. Foresight PR #49 is repinned to that immutable merge and supplies the event pull-request head; local law/adapter/contract gates are green. Awaiting fresh exact-head hosted review.
 ---
