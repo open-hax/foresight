@@ -427,7 +427,7 @@
       (throw (js/Error. (str "jscpd requires initialized repositories: "
                             (str/join ", " (map :path uninitialized))))))
     (let [validated-paths (mapv :absolute (execution-paths! repos))
-          command (into ["npx" "--yes" "jscpd@4.2.3" "--config" ".jscpd.json"]
+          command (into ["jscpd" "--config" ".jscpd.json"]
                         validated-paths)]
       (println "START" (str/join " " command))
       (let [result (spawn-sync

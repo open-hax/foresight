@@ -1,0 +1,9 @@
+{
+  "name": "foresight-chat-work-runtime-tools",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "jscpd": "5.0.16",
+    "nbb": "1.5.212"
+  }
+}

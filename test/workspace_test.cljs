@@ -141,6 +141,26 @@
                                      :exists true
                                      :initialized true}])))))
 
+(deftest duplication-task-invokes-the-bundled-jscpd-entrypoint
+  (let [spawned (atom nil)
+        repo {:path "opencode"
+              :source-type "git-submodule"
+              :ownership "independent-repository"
+              :actionable true
+              :exists true
+              :initialized true}]
+    (with-redefs [workspace/execution-paths!
+                  (fn [_] [{:repo repo :absolute "/workspace/opencode"}])
+                  workspace/spawn-sync
+                  (fn [command args _options]
+                    (reset! spawned [command (js->clj args)])
+                    #js {:status 0})]
+      (is (zero? (workspace/run-jscpd! [repo])))
+      (is (= "jscpd" (first @spawned)))
+      (is (= ["--config" ".jscpd.json" "/workspace/opencode"]
+             (second @spawned)))
+      (is (not-any? #{"npx" "jscpd@4.2.3"} (flatten @spawned))))))
+
 (deftest refuses-uninitialized-repositories
   (let [repo {:path "uninitialized"
               :source-type "git-submodule"

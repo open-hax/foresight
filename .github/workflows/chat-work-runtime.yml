@@ -1,0 +1,182 @@
+name: Chat work runtime
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/chat-work-runtime.yml"
+      - "LICENSE"
+      - "tools/chat-work-runtime/**"
+  push:
+    paths:
+      - ".github/workflows/chat-work-runtime.yml"
+      - "LICENSE"
+      - "tools/chat-work-runtime/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: chat-work-runtime-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out Foresight
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Build archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          tools/chat-work-runtime/build.sh
+      - name: Prove reproducible archive bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          second_output="$RUNNER_TEMP/reproducible-runtime"
+          OUTPUT_DIR="$second_output" tools/chat-work-runtime/build.sh
+          cmp dist/foresight-chat-work-linux-x64.tar.gz \
+            "$second_output/foresight-chat-work-linux-x64.tar.gz"
+          cmp dist/foresight-chat-work-linux-x64.tar.gz.sha256 \
+            "$second_output/foresight-chat-work-linux-x64.tar.gz.sha256"
+      - name: Smoke test relocated tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          # A colon is valid in a POSIX path but is also PATH's separator.
+          # Keep the smoke suite beneath one to prove wrappers invoke the
+          # bundled Node directly instead of rediscovering it through PATH.
+          tmp_dir="$(mktemp -d "$RUNNER_TEMP/foresight-runtime:smoke.XXXXXX")"
+          path_root="$(mktemp -d "$RUNNER_TEMP/foresight-runtime-path.XXXXXX")"
+          path_bin="$path_root/bin"
+          trap 'rm -rf -- "$tmp_dir" "$path_root"' EXIT
+          mkdir -p "$tmp_dir/home"
+          tar --no-same-owner -xzf dist/foresight-chat-work-linux-x64.tar.gz -C "$tmp_dir"
+          runtime="$tmp_dir/foresight-chat-work-linux-x64"
+          ln -s -- "$runtime/bin" "$path_bin"
+          empty_path="$tmp_dir/no-host-tools"
+          mkdir -p "$empty_path"
+          cmp LICENSE \
+            "$runtime/share/licenses/foresight-LGPL-3.0-or-later.txt"
+          cmp tools/chat-work-runtime/LICENSE \
+            "$runtime/share/licenses/foresight-chat-work-runtime-GPL-3.0-or-later.txt"
+          cmp tools/chat-work-runtime/THIRD_PARTY_NOTICES.md \
+            "$runtime/share/licenses/THIRD_PARTY_NOTICES.md"
+          cmp tools/chat-work-runtime/licenses/EPL-1.0.txt \
+            "$runtime/share/licenses/EPL-1.0.txt"
+          cmp tools/chat-work-runtime/licenses/EPL-1.0.txt \
+            "$runtime/lib/chat-work-tools/node_modules/nbb/LICENSE"
+          cmp tools/chat-work-runtime/licenses/jscpd-MIT.txt \
+            "$runtime/share/licenses/jscpd-MIT.txt"
+          cmp tools/chat-work-runtime/licenses/jscpd-MIT.txt \
+            "$runtime/lib/chat-work-tools/node_modules/jscpd-linux-x64-gnu/LICENSE"
+          cmp tools/chat-work-runtime/licenses/rewrite-clj-MIT.txt \
+            "$runtime/share/licenses/rewrite-clj-MIT.txt"
+          test -s "$runtime/lib/node/LICENSE"
+          test -s "$runtime/lib/node/lib/node_modules/npm/LICENSE"
+          test -s "$runtime/lib/chat-work-tools/node_modules/import-meta-resolve/license"
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/node" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/npm" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/npx" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/nbb" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/bb" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/clj-kondo" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/jscpd" --version
+          env -i HOME="$tmp_dir/home" PATH="$path_bin:$empty_path" node --version
+          env -i HOME="$tmp_dir/home" PATH="$path_bin:$empty_path" nbb --version
+          env -i HOME="$tmp_dir/home" PATH="$path_bin:$empty_path" jscpd --version
+          "$runtime/bin/verify-integrity"
+
+          # Prove the integrity verifier rejects a retargeted dependency link.
+          (
+            cd "$runtime"
+            link="$(awk -F '\t' 'NR == 1 { print $1 }' SYMLINKS.tsv)"
+            test -n "$link"
+            original_target="$(readlink -- "$link")"
+            ln -sfn /tampered-target "$link"
+            if bin/verify-integrity; then
+              echo "retargeted symbolic link passed integrity verification" >&2
+              exit 1
+            fi
+            ln -sfn "$original_target" "$link"
+            bin/verify-integrity
+
+            # Prove an equal-content external link cannot replace a regular
+            # non-executable module while continuing to pass its byte hash.
+            regular_file="$(find ./lib/chat-work-tools/node_modules \
+              -type f -name '*.js' ! -perm /111 -print -quit)"
+            test -n "$regular_file"
+            original_file_mode="$(stat -c '%a' "$regular_file")"
+            external_copy="$tmp_dir/equal-content-module.js"
+            cp "$regular_file" "$external_copy"
+            rm -- "$regular_file"
+            ln -s "$external_copy" "$regular_file"
+            if bin/verify-integrity; then
+              echo "regular-file-to-symlink substitution passed integrity verification" >&2
+              exit 1
+            fi
+            rm -- "$regular_file"
+            cp "$external_copy" "$regular_file"
+            chmod "$original_file_mode" "$regular_file"
+            bin/verify-integrity
+
+            # TREE.types0 and SHA256SUMS cannot describe their own types, so
+            # prove the verifier's explicit bootstrap-type checks fail closed.
+            for bootstrap_manifest in TREE.types0 SHA256SUMS; do
+              external_manifest="$tmp_dir/$bootstrap_manifest.external"
+              cp "$bootstrap_manifest" "$external_manifest"
+              rm -- "$bootstrap_manifest"
+              ln -s "$external_manifest" "$bootstrap_manifest"
+              if bin/verify-integrity; then
+                echo "$bootstrap_manifest symlink substitution passed integrity verification" >&2
+                exit 1
+              fi
+              rm -- "$bootstrap_manifest"
+              cp "$external_manifest" "$bootstrap_manifest"
+              bin/verify-integrity
+            done
+
+            executable="./bin/node"
+            expected_mode="$(awk -F '\t' -v path="$executable" \
+              '$2 == path { print $1 }' EXECUTABLES.tsv)"
+            test -n "$expected_mode"
+            original_mode="$(stat -c '%a' "$executable")"
+            test "$original_mode" = "$expected_mode"
+            for tampered_mode in 0111 0644; do
+              chmod "$tampered_mode" "$executable"
+              if bin/verify-integrity; then
+                echo "mode $tampered_mode passed integrity verification" >&2
+                exit 1
+              fi
+              chmod "$original_mode" "$executable"
+              bin/verify-integrity
+            done
+          )
+      - name: Cross-build ARM64 archive on x64
+        shell: bash
+        run: |
+          set -euo pipefail
+          arm_output="$RUNNER_TEMP/arm64-runtime"
+          ARCH=arm64 OUTPUT_DIR="$arm_output" tools/chat-work-runtime/build.sh
+          (
+            cd "$arm_output"
+            sha256sum --check foresight-chat-work-linux-arm64.tar.gz.sha256
+          )
+          tar --list --gzip --file \
+            "$arm_output/foresight-chat-work-linux-arm64.tar.gz" \
+            foresight-chat-work-linux-arm64/lib/chat-work-tools/node_modules/jscpd-linux-arm64-gnu/package.json
+      - name: Upload runtime archive
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: foresight-chat-work-linux-x64
+          path: |
+            dist/foresight-chat-work-linux-x64.tar.gz
+            dist/foresight-chat-work-linux-x64.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 30
