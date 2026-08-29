@@ -6,7 +6,7 @@
 (def ^:private missing ::missing)
 
 (defn- frontmatter-data [document]
-  (or (:document/frontmatter/data document)
+  (or (:document/frontmatter-data document)
       (:document/frontmatter document)
       {}))
 
