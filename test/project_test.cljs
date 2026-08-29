@@ -11,7 +11,7 @@
     (is (= 13 (count (project/submodule-sources))))
     (is (= 2 (count (project/consolidation-inputs))))
     (is (= 12 (count (filter :source/actionable? sources))))
-    (is (= #{:alpha :eta}
+    (is (= #{:alpha :archaeology :eta}
            (set (map :component/id (:project/native-components project/project)))))
     (is (= #{:agents :truth :bitch-tracker :calliope :epiphany :eta-mu
              :katamorph :knoxx :muse :opencode :proxx :services :uxx :eta}

@@ -44,11 +44,31 @@ jobs:
           mkdir -p "$tmp_dir/home"
           tar --no-same-owner -xzf dist/foresight-chat-work-linux-x64.tar.gz -C "$tmp_dir"
           runtime="$tmp_dir/foresight-chat-work-linux-x64"
-          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:/usr/bin:/bin" nbb --version
-          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:/usr/bin:/bin" bb --version
-          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:/usr/bin:/bin" clj-kondo --version
-          env -i HOME="$tmp_dir/home" PATH="$runtime/bin:/usr/bin:/bin" jscpd --version
-          (cd "$runtime" && sha256sum --check SHA256SUMS)
+          empty_path="$tmp_dir/no-host-tools"
+          mkdir -p "$empty_path"
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/node" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/npm" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/npx" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/nbb" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/bb" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/clj-kondo" --version
+          env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/jscpd" --version
+          "$runtime/bin/verify-integrity"
+
+          # Prove the integrity verifier rejects a retargeted dependency link.
+          (
+            cd "$runtime"
+            link="$(awk -F '\t' 'NR == 1 { print $1 }' SYMLINKS.tsv)"
+            test -n "$link"
+            original_target="$(readlink -- "$link")"
+            ln -sfn /tampered-target "$link"
+            if bin/verify-integrity; then
+              echo "retargeted symbolic link passed integrity verification" >&2
+              exit 1
+            fi
+            ln -sfn "$original_target" "$link"
+            bin/verify-integrity
+          )
       - name: Upload runtime archive
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
