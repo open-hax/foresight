@@ -81,7 +81,9 @@
 (defn duplicate-gate-ids [repositories]
   (->> repositories
        vals
-       (mapcat :repository/gates)
+       (mapcat (fn [repository]
+                 (let [gates (:repository/gates repository)]
+                   (if (vector? gates) gates []))))
        (keep :gate/id)
        frequencies
        (keep (fn [[gate-id count]] (when (> count 1) gate-id)))
@@ -136,6 +138,9 @@
        (nonblank-string? (:result/reason result))
        (nonblank-string? (:result/approved-by result))))
 
+(defn exit-code? [value]
+  (and (integer? value) (not (neg? value))))
+
 (defn result-errors [result]
   (let [execution (:result/execution result)
         source (:result/source result)
@@ -157,6 +162,24 @@
     (and (= :local execution)
          (not (command? (:result/command result))))
     (conj {:error :result/command :result result})
+
+    (and (contains? result :result/exit)
+         (not (exit-code? (:result/exit result))))
+    (conj {:error :result/exit :result result})
+
+    (and (= :local execution)
+         (= :passed (:result/outcome result))
+         (not= 0 (:result/exit result)))
+    (conj {:error :result/local-passed-exit :result result})
+
+    (and (= :local execution)
+         (not= :passed (:result/outcome result))
+         (= 0 (:result/exit result)))
+    (conj {:error :result/local-nonpass-exit :result result})
+
+    (and (not= :local execution)
+         (contains? result :result/exit))
+    (conj {:error :result/nonlocal-exit :result result})
 
     (not (catalog-identity? (:result/catalog result)))
     (conj {:error :result/catalog :result result})

@@ -46,7 +46,11 @@
                              :source/revision revision}
              :result/revision revision}
       (:gate/command gate)
-      (assoc :result/command (:gate/command gate)))))
+      (assoc :result/command (:gate/command gate))
+
+      (and (= :local (:gate/execution gate))
+           (= :passed outcome))
+      (assoc :result/exit 0))))
 
 (deftest validates-gate-catalogs
   (is (evidence/valid-catalog? valid-catalog))
@@ -75,6 +79,14 @@
                                        :repository/gates 0])]})]
     (is (= {:error :gate/id-duplicates :gate/ids [:repo/unit]}
            (last (evidence/catalog-errors duplicate))))))
+
+(deftest malformed-gate-collections-return-structured-errors
+  (let [malformed (assoc-in valid-catalog
+                            [:catalog/repositories "repo" :repository/gates]
+                            42)]
+    (is (= :repository/gates
+           (:error (first (evidence/catalog-errors malformed)))))
+    (is (false? (evidence/valid-catalog? malformed)))))
 
 (deftest catalog-repositories-must-be-actionable-direct-submodules
   (is (empty? (evidence/catalog-inventory-errors valid-catalog #{"repo"})))
@@ -112,7 +124,16 @@
            (:error (first (evidence/result-errors
                            (assoc-in passed
                                      [:result/source :source/revision]
-                                     "revision-b")))))))
+                                     "revision-b"))))))
+    (is (= :result/local-passed-exit
+           (:error (first (filter #(= :result/local-passed-exit (:error %))
+                                  (evidence/result-errors
+                                   (assoc passed :result/exit 7)))))))
+    (is (= :result/local-nonpass-exit
+           (:error (first (filter #(= :result/local-nonpass-exit (:error %))
+                                  (evidence/result-errors
+                                   (assoc passed
+                                          :result/outcome :failed))))))))
   (is (= :result/outcome
          (:error (first (evidence/result-errors
                          (recorded-result :repo/unit :greenish
@@ -178,6 +199,7 @@
                  #{:repo/unit} [%])]
     (is (ready? result))
     (is (false? (ready? (assoc result :result/command ["true"]))))
+    (is (false? (ready? (assoc result :result/exit 7))))
     (is (false? (ready? (assoc result :result/execution :external))))
     (is (false? (ready? (assoc result
                                :result/catalog
