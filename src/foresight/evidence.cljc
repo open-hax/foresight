@@ -234,45 +234,54 @@
           (:result/source result))))
 
 (defn summarize-results [results]
-  (let [errors (vec (mapcat result-errors results))]
-    (if (seq errors)
-      {:result/outcome :failed
-       :result/counts (frequencies (map :result/outcome results))
-       :result/satisfied? false
-       :result/errors errors}
-      (let [counts (frequencies (map :result/outcome results))
-            overall (if (seq results)
-                      (->> results
-                           (map :result/outcome)
-                           (apply max-key outcome-precedence))
-                      :unavailable)]
-        {:result/outcome overall
-         :result/counts (into (sorted-map) counts)
-         :result/satisfied? (and (seq results) (every? satisfied? results))}))))
+  (if-not (coll? results)
+    {:result/outcome :failed
+     :result/counts {}
+     :result/satisfied? false
+     :result/errors [{:error :results/type :results results}]}
+    (let [errors (vec (mapcat result-errors results))]
+      (if (seq errors)
+        {:result/outcome :failed
+         :result/counts (frequencies (map :result/outcome results))
+         :result/satisfied? false
+         :result/errors errors}
+        (let [counts (frequencies (map :result/outcome results))
+              overall (if (seq results)
+                        (->> results
+                             (map :result/outcome)
+                             (apply max-key outcome-precedence))
+                        :unavailable)]
+          {:result/outcome overall
+           :result/counts (into (sorted-map) counts)
+           :result/satisfied? (boolean
+                               (and (seq results)
+                                    (every? satisfied? results)))})))))
 
 (defn promotion-ready?
   [catalog catalog-identity target-revision required-gate-ids results]
-  (let [required-gate-ids (set required-gate-ids)
-        required-results (filterv #(contains? required-gate-ids (:gate/id %))
-                                  results)
-        gate-id-counts (frequencies (map :gate/id required-results))
-        by-id (into {} (map (juxt :gate/id identity)) required-results)
-        trusted-gates (gate-index catalog)]
-    (boolean
-     (and (valid-catalog? catalog)
-          (catalog-identity? catalog-identity)
-          (nonblank-string? target-revision)
-          (seq required-gate-ids)
-          (every? #(contains? trusted-gates %) required-gate-ids)
-          (every? #(= 1 (get gate-id-counts % 0)) required-gate-ids)
-          (every? (fn [gate-id]
-                    (when-let [result (get by-id gate-id)]
-                      (and (valid-result? result)
-                           (satisfied? result)
-                           (= target-revision (:result/revision result))
-                           (result-matches-gate?
-                            catalog-identity
-                            target-revision
-                            result
-                            (get trusted-gates gate-id)))))
-                  required-gate-ids)))))
+  (if-not (and (coll? required-gate-ids) (coll? results))
+    false
+    (let [required-gate-ids (set required-gate-ids)
+          required-results (filterv #(contains? required-gate-ids (:gate/id %))
+                                    results)
+          gate-id-counts (frequencies (map :gate/id required-results))
+          by-id (into {} (map (juxt :gate/id identity)) required-results)
+          trusted-gates (gate-index catalog)]
+      (boolean
+       (and (valid-catalog? catalog)
+            (catalog-identity? catalog-identity)
+            (nonblank-string? target-revision)
+            (seq required-gate-ids)
+            (every? #(contains? trusted-gates %) required-gate-ids)
+            (every? #(= 1 (get gate-id-counts % 0)) required-gate-ids)
+            (every? (fn [gate-id]
+                      (when-let [result (get by-id gate-id)]
+                        (and (valid-result? result)
+                             (satisfied? result)
+                             (= target-revision (:result/revision result))
+                             (result-matches-gate?
+                              catalog-identity
+                              target-revision
+                              result
+                              (get trusted-gates gate-id)))))
+                    required-gate-ids))))))

@@ -157,7 +157,15 @@
           [(recorded-result :repo/unit :passed "revision-a")
            (recorded-result :repo/e2e :unavailable "revision-a")
            (recorded-result :repo/live :blocked "revision-a")])))
-  (is (= :unavailable (:result/outcome (evidence/summarize-results [])))))
+  (is (= {:result/outcome :unavailable
+          :result/counts {}
+          :result/satisfied? false}
+         (evidence/summarize-results [])))
+  (is (= {:result/outcome :failed
+          :result/counts {}
+          :result/satisfied? false
+          :result/errors [{:error :results/type :results 42}]}
+         (evidence/summarize-results 42))))
 
 (deftest invalid-result-data-fails-the-summary
   (let [summary (evidence/summarize-results
@@ -189,7 +197,11 @@
                  #{:repo/unit}
                  [(recorded-result :repo/unit :unavailable revision)])))
     (is (false? (evidence/promotion-ready?
-                 valid-catalog test-catalog-identity revision #{} [])))))
+                 valid-catalog test-catalog-identity revision #{} [])))
+    (is (false? (evidence/promotion-ready?
+                 valid-catalog test-catalog-identity revision 42 [])))
+    (is (false? (evidence/promotion-ready?
+                 valid-catalog test-catalog-identity revision #{} 42)))))
 
 (deftest promotion-requires-one-unambiguous-target-revision
   (let [unit (recorded-result :repo/unit :passed "revision-a")
