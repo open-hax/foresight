@@ -68,12 +68,12 @@ The operator explicitly resolved the deployment-authority ambiguity:
 
 > Only the DigitalOcean path is moving forward.
 
-This is an accepted ownership/direction decision for the deployment seam, not an inference from merge status or implementation shape.
+This is an accepted ownership/direction decision for the deployment seam, not an inference from merge status or implementation shape. The adjudication is preserved in the repository as [decision `foresight/knoxx-deployment-authority/2026-08-22`](./knoxx-deployment-authority-decision-2026-08-22.md).
 
 Consequences for current triage:
 
 - `open-hax/services` DigitalOcean stack deployment is the accepted forward production path for Knoxx.
-- `open-hax/knoxx/.github/workflows/deploy-production.yml` and the `services/deploy-promethean.yml` Knoxx path are legacy operational surfaces unless retained only as bounded migration/compatibility machinery.
+- `open-hax/knoxx/.github/workflows/deploy-production.yml` and the `open-hax/services/.github/workflows/deploy-promethean.yml` Knoxx path are legacy operational surfaces unless retained only as bounded migration/compatibility machinery.
 - Future synthesis should not describe the two paths as unresolved peers.
 - Remaining work is migration/retirement verification: identify any still-required behavior on the legacy path, move it into the DigitalOcean path where necessary, then disable/remove the legacy trigger without losing required deploy evidence or recovery behavior.
 
@@ -135,18 +135,24 @@ The DigitalOcean-only forward deployment direction is recorded because it was ex
 
 ## Sources
 
+Surveyed repository revisions:
+
+- Knoxx: `5249e5303c7b5ee694b8ae5f01b23f30d0a67c31`
+- Services: `74e2a8af1bc2e223d75549b17a5e7ee06dc2e091`
+- Operator decision: [`foresight/knoxx-deployment-authority/2026-08-22`](./knoxx-deployment-authority-decision-2026-08-22.md)
+
 - https://github.com/open-hax/knoxx/pull/247
 - https://github.com/open-hax/knoxx/pull/248
 - https://github.com/open-hax/knoxx/pull/250
 - https://github.com/open-hax/knoxx/pull/251
 - https://github.com/open-hax/knoxx/pull/252
-- https://github.com/open-hax/knoxx/blob/main/.github/workflows/deploy-production.yml
-- https://github.com/open-hax/services/blob/main/.github/workflows/deploy-promethean.yml
-- https://github.com/open-hax/services/blob/main/promethean/scripts/deploy-knoxx.sh
-- https://github.com/open-hax/services/blob/main/.github/workflows/deploy-stack-chain.yml
-- https://github.com/open-hax/services/blob/main/.github/workflows/deploy-digitalocean.yml
-- https://github.com/open-hax/services/blob/main/digitalocean/services/knoxx/compose.yaml
-- https://github.com/open-hax/services/blob/main/ROADMAP.md
+- https://github.com/open-hax/knoxx/blob/5249e5303c7b5ee694b8ae5f01b23f30d0a67c31/.github/workflows/deploy-production.yml
+- https://github.com/open-hax/services/blob/74e2a8af1bc2e223d75549b17a5e7ee06dc2e091/.github/workflows/deploy-promethean.yml
+- https://github.com/open-hax/services/blob/74e2a8af1bc2e223d75549b17a5e7ee06dc2e091/promethean/scripts/deploy-knoxx.sh
+- https://github.com/open-hax/services/blob/74e2a8af1bc2e223d75549b17a5e7ee06dc2e091/.github/workflows/deploy-stack-chain.yml
+- https://github.com/open-hax/services/blob/74e2a8af1bc2e223d75549b17a5e7ee06dc2e091/.github/workflows/deploy-digitalocean.yml
+- https://github.com/open-hax/services/blob/74e2a8af1bc2e223d75549b17a5e7ee06dc2e091/digitalocean/services/knoxx/compose.yaml
+- https://github.com/open-hax/services/blob/74e2a8af1bc2e223d75549b17a5e7ee06dc2e091/ROADMAP.md
 
 ## Next evidence pass
 
