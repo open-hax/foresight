@@ -22,7 +22,7 @@ glibc compatible with the bundled Node.js release. Babashka and the x64
 clj-kondo executable are statically linked.
 
 Verify the download with the adjacent `.sha256` file. After extraction, verify
-regular files and symbolic-link targets with:
+regular files, symbolic-link targets, and required executable modes with:
 
 ```sh
 ./foresight-chat-work-linux-x64/bin/verify-integrity

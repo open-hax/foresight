@@ -181,9 +181,25 @@ while IFS="$tab" read -r link expected_target; do
     exit 1
   fi
 done < SYMLINKS.tsv
-echo "integrity verification passed: regular files and symbolic links"
+while IFS= read -r executable; do
+  [ -n "$executable" ] || continue
+  case "$executable" in
+    ./*) ;;
+    *) echo "invalid executable path in EXECUTABLES: $executable" >&2; exit 1 ;;
+  esac
+  if [ ! -f "$executable" ] || [ ! -x "$executable" ]; then
+    echo "missing executable mode: $executable" >&2
+    exit 1
+  fi
+done < EXECUTABLES
+echo "integrity verification passed: regular files, symbolic links, and executable modes"
 EOF
 chmod 0755 "$bundle_dir/bin/verify-integrity"
+
+(
+  cd "$bundle_dir"
+  find . -type f -perm /111 -print | sort > EXECUTABLES
+)
 
 (
   cd "$bundle_dir"

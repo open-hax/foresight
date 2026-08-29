@@ -71,6 +71,17 @@ jobs:
             fi
             ln -sfn "$original_target" "$link"
             bin/verify-integrity
+
+            executable="$(head -n 1 EXECUTABLES)"
+            test -n "$executable"
+            original_mode="$(stat -c '%a' "$executable")"
+            chmod a-x "$executable"
+            if bin/verify-integrity; then
+              echo "non-executable command passed integrity verification" >&2
+              exit 1
+            fi
+            chmod "$original_mode" "$executable"
+            bin/verify-integrity
           )
       - name: Cross-build ARM64 archive on x64
         shell: bash
