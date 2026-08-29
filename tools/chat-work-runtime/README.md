@@ -19,7 +19,7 @@ Every upstream archive is verified against its publisher's SHA-256 checksum
 before use. npm's target OS, CPU, and libc selectors follow `ARCH`, and the
 builder requires the matching locked jscpd native package. The archive contains
 a regular-file checksum manifest, an explicit symbolic-link target manifest,
-an executable-path manifest, and a verifier for all three. Node-based entry
+an exact executable-mode manifest, and a verifier for all three. Node-based entry
 points are bundle-relative wrappers, so direct invocation does not depend on a
 host Node executable or on first changing `PATH`.
 

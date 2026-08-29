@@ -181,7 +181,6 @@ esac
 bundle_root=$(CDPATH= cd -- "${script_path%/*}/.." && pwd -P)
 cd "$bundle_root"
 
-sha256sum --check --quiet SHA256SUMS
 tab=$(printf '\t')
 while IFS="$tab" read -r link expected_target; do
   [ -n "$link" ] || continue
@@ -201,25 +200,45 @@ while IFS="$tab" read -r link expected_target; do
     exit 1
   fi
 done < SYMLINKS.tsv
-while IFS= read -r executable; do
-  [ -n "$executable" ] || continue
+while IFS="$tab" read -r expected_mode executable; do
+  [ -n "$expected_mode" ] || continue
+  case "$expected_mode" in
+    [0-7][0-7][0-7] | [0-7][0-7][0-7][0-7]) ;;
+    *) echo "invalid mode in EXECUTABLES.tsv: $expected_mode" >&2; exit 1 ;;
+  esac
   case "$executable" in
     ./*) ;;
-    *) echo "invalid executable path in EXECUTABLES: $executable" >&2; exit 1 ;;
+    *) echo "invalid executable path in EXECUTABLES.tsv: $executable" >&2; exit 1 ;;
   esac
-  if [ ! -f "$executable" ] || [ ! -x "$executable" ]; then
-    echo "missing executable mode: $executable" >&2
+  if [ ! -f "$executable" ] || [ -L "$executable" ]; then
+    echo "missing regular executable: $executable" >&2
     exit 1
   fi
-done < EXECUTABLES
+  actual_mode=$(stat -c '%a' -- "$executable")
+  if [ "$actual_mode" != "$expected_mode" ]; then
+    echo "executable mode mismatch: $executable" >&2
+    echo "expected: $expected_mode" >&2
+    echo "actual:   $actual_mode" >&2
+    exit 1
+  fi
+done < EXECUTABLES.tsv
+sha256sum --check --quiet SHA256SUMS
 echo "integrity verification passed: regular files, symbolic links, and executable modes"
 EOF
 chmod 0755 "$bundle_dir/bin/verify-integrity"
 
+# Record the exact mode of every executable regular file. The staged paths are
+# controlled by pinned archives/packages and do not contain tabs or newlines.
 (
   cd "$bundle_dir"
-  find . -type f -perm /111 -print | sort > EXECUTABLES
-)
+  while IFS= read -r -d '' executable; do
+    if [[ "$executable" == *$'\t'* || "$executable" == *$'\n'* ]]; then
+      echo "unsupported tab or newline in executable manifest: $executable" >&2
+      exit 1
+    fi
+    printf '%s\t%s\n' "$(stat -c '%a' -- "$executable")" "$executable"
+  done < <(find . -type f -perm /111 -print0 | sort -z)
+) > "$bundle_dir/EXECUTABLES.tsv"
 
 (
   cd "$bundle_dir"

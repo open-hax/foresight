@@ -28,8 +28,8 @@ regular files, symbolic-link targets, and required executable modes with:
 ./foresight-chat-work-linux-x64/bin/verify-integrity
 ```
 
-The verifier uses the host's `sha256sum` and `readlink` commands. Node-based
-entry points themselves always resolve the bundled Node executable, including
+The verifier uses the host's `sha256sum`, `readlink`, and `stat` commands.
+Node-based entry points always resolve the bundled Node executable, including
 when invoked directly without adding the bundle to `PATH`. NBB, jscpd, and
 their transitive npm packages were installed from the committed lockfile
 included under `lib/chat-work-tools/`.
