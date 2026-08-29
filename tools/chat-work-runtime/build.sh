@@ -7,6 +7,26 @@ repo_dir="$(cd -- "$script_dir/../.." && pwd)"
 # shellcheck source=versions.env
 source "$script_dir/versions.env"
 
+require_complete_license() {
+  local license_file="$1"
+  local license_name="$2"
+  shift 2
+  local marker
+  for marker in "$@"; do
+    if ! grep -Fq -- "$marker" "$license_file"; then
+      echo "incomplete $license_name text: $license_file" >&2
+      exit 2
+    fi
+  done
+}
+
+require_complete_license "$repo_dir/LICENSE" "LGPL-3.0" \
+  "GNU LESSER GENERAL PUBLIC LICENSE" \
+  "6. Revised Versions of the GNU Lesser General Public License."
+require_complete_license "$script_dir/LICENSE" "GPL-3.0" \
+  "GNU GENERAL PUBLIC LICENSE" \
+  "END OF TERMS AND CONDITIONS"
+
 arch="${ARCH:-x64}"
 output_dir="${OUTPUT_DIR:-$repo_dir/dist}"
 case "$arch" in

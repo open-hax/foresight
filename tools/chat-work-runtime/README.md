@@ -27,5 +27,6 @@ The archive covers root Foresight NBB tasks and its standard lint/duplication
 tools. It does not cover `eta` or `alpha` JVM tasks.
 
 The runtime packaging in this directory is GPL-3.0-or-later. Reusable Foresight
-library code remains LGPL-3.0-or-later. Bundled third-party components retain
-their upstream licenses.
+library code remains LGPL-3.0-or-later. The archive carries the complete GPLv3
+and LGPLv3 license texts; bundled third-party components retain their upstream
+licenses.

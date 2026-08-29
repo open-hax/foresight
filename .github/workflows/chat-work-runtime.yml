@@ -46,6 +46,10 @@ jobs:
           runtime="$tmp_dir/foresight-chat-work-linux-x64"
           empty_path="$tmp_dir/no-host-tools"
           mkdir -p "$empty_path"
+          cmp LICENSE \
+            "$runtime/share/licenses/foresight-LGPL-3.0-or-later.txt"
+          cmp tools/chat-work-runtime/LICENSE \
+            "$runtime/share/licenses/foresight-chat-work-runtime-GPL-3.0-or-later.txt"
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/node" --version
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/npm" --version
           env -i HOME="$tmp_dir/home" PATH="$empty_path" "$runtime/bin/npx" --version
