@@ -6,7 +6,7 @@ priority: "P1"
 labels: ["translation", "transduction", "evaluation"]
 created_at: "2026-08-29T15:09:34.361Z"
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-write-id: "1788016339370-0.0ugdotzhsc9xkh3y02"
+write-id: "1788020874514-0.e9n7ziinhpa6bgm3kfg"
 ---
 
 # Prove translation generation and SME review independently
@@ -38,3 +38,8 @@ source segment + locale + terminology + policy
 - Coverage is emitted for the affected packages and no unavailable gate is
   reported as passed.
 - The resulting API contains no layout or publication requirement.
+
+---
+This is the deliberate post-inflight successor lane for translation generation plus SME judgment. It remains todo until the opening PR portfolio is terminal. Entry evidence must identify the Knoxx behavior and revision being characterized; layout, publishing, and product/content review remain outside this card.
+
+---

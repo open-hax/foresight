@@ -6,7 +6,7 @@ priority: "P1"
 labels: ["content", "representation", "publishing", "evaluation"]
 created_at: "2026-08-29T15:09:34.658Z"
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-write-id: "1788016340668-0.4mqs7kpn09evz4zd3lm"
+write-id: "1788020875018-0.d8zsk9zc8rhbqfrv9d"
 ---
 
 # Prove content generation, layout, publishing, and review independently
@@ -40,3 +40,8 @@ brief + source artifacts + content policy
   SME translation review are not stages owned by this workstream.
 - Product/content review may instantiate shared Mu concepts only after the
   cross-domain laws are proven rather than assumed.
+
+---
+This is the deliberate post-inflight successor lane for content generation, layout, publication effects, and product/content judgment. It remains todo until the opening PR portfolio is terminal. Entry evidence must identify the Knoxx behavior and revision being characterized; translation generation and SME translation review remain outside this card.
+
+---

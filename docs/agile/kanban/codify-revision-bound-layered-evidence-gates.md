@@ -36,4 +36,5 @@ Portable evidence laws, exact-command runner, gate catalog, program specificatio
 Review findings addressed locally: promotion now requires one explicit target revision across every required gate; dirty, unverifiable, or moving child checkouts cannot emit passing revision evidence; list --only rejects unmapped repositories; spawn-error and approved-not-applicable exit paths have regression tests. Root suites pass 46 tests/178 assertions, and Katamorph static passes at 708f1bb6 with the controlled tool PATH. Awaiting exact-head CI and rereview.
 
 Exact-head rereview exposed and local repair now closes three further evidence-boundary gaps: promotion matches results against the trusted catalog snapshot; catalog keys must be actionable direct submodules; and root orchestration cannot enter Knoxx nested packages. Full local matrix passes 52 tests/216 assertions, project/catalog validation, lint, Markdown, Rheos drift, diff hygiene, and Katamorph static at 708f1bb6 with catalog digest 0c904b66. Awaiting publication and fresh exact-head review.
+
 ---

@@ -201,20 +201,20 @@
              (pr-str (merge {:gate/id (:gate/id gate)
                              :gate/kind (:gate/kind gate)}
                             provenance)))
-    (let [result
-        (case (:gate/execution gate)
-          :local (run-local-gate! repository gate)
-          :workflow-only (cond-> {:gate/id (:gate/id gate)
-                                  :result/outcome :unavailable
-                                  :result/reason (:gate/reason gate)}
-                           (law/nonblank-string? revision)
-                           (assoc :result/revision revision))
-          :external (cond-> {:gate/id (:gate/id gate)
-                             :result/outcome :blocked
-                             :result/reason (:gate/reason gate)}
-                      (law/nonblank-string? revision)
-                      (assoc :result/revision revision)))
-          result (merge result provenance)]
+    (let [outcome-result
+          (case (:gate/execution gate)
+            :local (run-local-gate! repository gate)
+            :workflow-only (cond-> {:gate/id (:gate/id gate)
+                                    :result/outcome :unavailable
+                                    :result/reason (:gate/reason gate)}
+                             (law/nonblank-string? revision)
+                             (assoc :result/revision revision))
+            :external (cond-> {:gate/id (:gate/id gate)
+                               :result/outcome :blocked
+                               :result/reason (:gate/reason gate)}
+                        (law/nonblank-string? revision)
+                        (assoc :result/revision revision)))
+          result (merge outcome-result provenance)]
       (println (str/upper-case (name (:result/outcome result)))
                (str (:gate/id gate))
                (or (:result/reason result) ""))
