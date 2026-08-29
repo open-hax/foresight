@@ -76,7 +76,12 @@ mkdir -p "$tools_prefix"
 cp "$script_dir/package.json" "$script_dir/package-lock.json" "$tools_prefix/"
 "$bundle_dir/lib/node/bin/node" \
   "$bundle_dir/lib/node/lib/node_modules/npm/bin/npm-cli.js" \
-  ci --prefix "$tools_prefix" --omit=dev --ignore-scripts --no-audit --no-fund
+  ci --prefix "$tools_prefix" --omit=dev --ignore-scripts --no-audit --no-fund \
+  --cpu="$node_arch" --os=linux --libc=glibc
+if [[ ! -d "$tools_prefix/node_modules/jscpd-linux-$node_arch-gnu" ]]; then
+  echo "locked jscpd native package does not match target: linux-$node_arch-gnu" >&2
+  exit 1
+fi
 
 for command in node npm npx nbb jscpd; do
   case "$command" in

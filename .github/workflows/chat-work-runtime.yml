@@ -58,6 +58,18 @@ jobs:
           env -i HOME="$tmp_dir/home" PATH="$runtime/bin:$empty_path" jscpd --version
           "$runtime/bin/verify-integrity"
 
+          # Prove the same lock selects the ARM64 native jscpd package when
+          # cross-building instead of silently retaining the x64 host package.
+          arm_tools="$tmp_dir/arm-tools"
+          mkdir -p "$arm_tools"
+          cp "$runtime/lib/chat-work-tools/package.json" \
+             "$runtime/lib/chat-work-tools/package-lock.json" "$arm_tools/"
+          "$runtime/bin/node" "$runtime/lib/node/lib/node_modules/npm/bin/npm-cli.js" \
+            ci --prefix "$arm_tools" --omit=dev --ignore-scripts --no-audit --no-fund \
+            --cpu=arm64 --os=linux --libc=glibc
+          test -d "$arm_tools/node_modules/jscpd-linux-arm64-gnu"
+          test ! -e "$arm_tools/node_modules/jscpd-linux-x64-gnu"
+
           # Prove the integrity verifier rejects a retargeted dependency link.
           (
             cd "$runtime"
