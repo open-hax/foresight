@@ -1,3 +1,10 @@
+---
+title: "Workstream: portable sandbox bundles and evidence-first review infrastructure"
+summary: "Tracks the cross-repository rollout of revision-bound sandbox bundles and immutable evidence-first automated-review workflows."
+category: "tracking"
+created: "2026-08-29"
+---
+
 # Workstream: portable sandbox bundles and evidence-first review infrastructure
 
 Inventory date: 2026-08-29.
