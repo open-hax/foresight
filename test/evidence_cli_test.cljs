@@ -16,13 +16,89 @@
    :gate/command ["test" "--exact"]
    :gate/source "repo/package.json"})
 
+(def passed-result
+  {:gate/id :repo/unit
+   :result/outcome :passed
+   :result/exit 0
+   :result/revision "revision-a"
+   :result/execution :local
+   :result/command ["test" "--exact"]
+   :result/catalog test-catalog-identity
+   :result/source {:source/path "repo/package.json"
+                   :source/repository "repo"
+                   :source/revision "revision-a"}})
+
 (deftest parses-explicit-repository-and-kind-selection
   (is (= {:only #{"katamorph"}
-          :kinds #{:unit :static}}
+          :kinds #{:unit :static}
+          :at nil}
          (cli/parse-args ["--only" "katamorph"
                           "--kind" "unit,static"])))
+  (is (= (apply str (repeat 40 "a"))
+         (:at (cli/parse-args
+               ["--at" (apply str (repeat 40 "a"))]))))
   (is (thrown-with-msg? js/Error #"Unknown gate kinds"
                         (cli/parse-args ["--kind" "pretend-e2e"]))))
+
+(deftest appends-complete-receipt-river-evidence
+  (let [captured (atom nil)]
+    (with-redefs [cli/append-edn-line!
+                  (fn [file receipt]
+                    (reset! captured {:file file :receipt receipt})
+                    receipt)]
+      (let [receipt (cli/append-evidence-receipt! passed-result)]
+        (is (= receipt (:receipt @captured)))
+        (is (law/evidence-receipt? receipt))
+        (is (= passed-result (:evidence/result receipt)))
+        (is (= ["repo@revision-a" ":repo/unit"] (:refs receipt)))
+        (is (re-find #"[.]ημ/receipts[.]edn$" (:file @captured)))))))
+
+(deftest reads-receipts-only-from-an-immutable-git-object
+  (let [revision (apply str (repeat 40 "c"))
+        receipt (cli/evidence-receipt
+                 passed-result "2026-08-29T17:22:40Z" "test")
+        contents (str (pr-str receipt) "\n")
+        calls (atom [])]
+    (with-redefs [cli/git-capture!
+                  (fn [args]
+                    (swap! calls conj args)
+                    (if (= "cat-file" (first args)) "commit\n" contents))]
+      (let [ledger (cli/read-immutable-receipt-ledger! revision)]
+        (is (= [["cat-file" "-t" revision]
+                ["show" (str revision ":" law/receipt-ledger-path)]]
+               @calls))
+        (is (= {:ledger/path law/receipt-ledger-path
+                :ledger/revision revision
+                :ledger/sha256 (cli/sha256 contents)}
+               (:ledger/identity ledger)))
+        (is (= [receipt] (:ledger/records ledger)))
+        (is (law/immutable-receipt-ledger? ledger))))
+    (is (thrown-with-msg?
+         js/Error #"full lowercase Git commit ID"
+         (cli/read-immutable-receipt-ledger! "main")))))
+
+(deftest promotion-adapter-always-reads-the-named-git-object
+  (let [revision (apply str (repeat 40 "c"))
+        ledger {:ledger/identity
+                {:ledger/path law/receipt-ledger-path
+                 :ledger/revision revision
+                 :ledger/sha256 (apply str (repeat 64 "d"))}
+                :ledger/records
+                [(cli/evidence-receipt
+                  passed-result "2026-08-29T17:22:40Z" "test")]}
+        reads (atom [])
+        catalog {:catalog/version 1
+                 :catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}]
+    (with-redefs [cli/read-immutable-receipt-ledger!
+                  (fn [at]
+                    (swap! reads conj at)
+                    ledger)]
+      (is (cli/promotion-ready-at!
+           catalog test-catalog-identity "revision-a"
+           #{:repo/unit} [passed-result] revision))
+      (is (= [revision] @reads)))))
 
 (deftest validates-the-checked-in-catalog
   (let [{:keys [catalog catalog-identity]} (cli/read-catalog-bundle)]

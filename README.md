@@ -34,6 +34,7 @@ nbb scripts/workspace.clj jscpd --only muse
 nbb scripts/evidence.clj validate
 nbb scripts/evidence.clj list --only katamorph --kind unit,static
 nbb scripts/evidence.clj run --only katamorph --kind static
+nbb scripts/evidence.clj verify-receipts --at <full-root-commit>
 ```
 
 `inventory` is read-only; `report` writes only root-generated artifacts.
@@ -74,9 +75,15 @@ plus repository revision. A checkout that moves or becomes dirty during a gate
 produces unavailable evidence with the observed revision, never a
 revision-bound pass. Promotion compares every retained result's catalog
 identity, repository, execution mode, source, and exact command against the
-trusted catalog snapshot; shape-valid but synthesized evidence cannot satisfy
-a gate. Failed, blocked, unavailable, and not-applicable are separate outcomes;
-a missing checkout, tool, credential, or host never becomes a pass. See
+trusted catalog snapshot. The runner also appends each complete result to
+`.ημ/receipts.edn`. A result becomes eligible for promotion only after that
+ledger is committed and an exact record is loaded from the named Git object;
+the adapter verifies the full commit ID and SHA-256 of the raw ledger before
+the portable law accepts exact receipt/result equality. Editing a failed result
+into a shape-valid pass therefore cannot reuse its immutable receipt. Mutable
+working-tree receipts and result-only public hashes are not authentication.
+Failed, blocked, unavailable, and not-applicable are separate outcomes; a
+missing checkout, tool, credential, or host never becomes a pass. See
 [`docs/specs/inflight-completion-and-knoxx-lift.md`](docs/specs/inflight-completion-and-knoxx-lift.md)
 for the revision-bound promotion and test-tier contract.
 

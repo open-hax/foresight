@@ -20,6 +20,9 @@
 
 (def catalog-relative-path "config/quality-gates.edn")
 
+(def receipt-file
+  (path/join root ".ημ" "receipts.edn"))
+
 (defn sha256 [value]
   (-> (crypto/createHash "sha256")
       (.update value "utf8")
@@ -33,6 +36,58 @@
 
 (defn read-catalog []
   (:catalog (read-catalog-bundle)))
+
+(defn git-capture! [args]
+  (let [result (child-process/spawnSync
+                "git"
+                (clj->js args)
+                #js {:cwd root :encoding "utf8" :shell false})
+        error (.-error result)
+        status (.-status result)]
+    (when error
+      (throw (js/Error. (str "Git invocation failed: " (.-message error)))))
+    (when (nil? status)
+      (throw (js/Error. "Git invocation ended without an exit status")))
+    (when-not (zero? status)
+      (throw (js/Error.
+              (str "Git invocation failed with exit " status ": "
+                   (str/trim (or (.-stderr result) ""))))))
+    (or (.-stdout result) "")))
+
+(defn read-receipt-records! [contents]
+  (->> (str/split-lines contents)
+       (remove str/blank?)
+       (map-indexed
+        (fn [index line]
+          (try
+            (reader/read-string line)
+            (catch :default error
+              (throw (js/Error.
+                      (str "Invalid Receipt River EDN at line " (inc index)
+                           ": " (.-message error))))))))
+       vec))
+
+(defn read-immutable-receipt-ledger! [revision]
+  (when-not (law/git-commit-id? revision)
+    (throw (js/Error. "--at requires a full lowercase Git commit ID")))
+  (when-not (= "commit" (str/trim (git-capture! ["cat-file" "-t" revision])))
+    (throw (js/Error. "--at must identify a Git commit object")))
+  (let [contents (git-capture!
+                  ["show" (str revision ":" law/receipt-ledger-path)])]
+    {:ledger/identity {:ledger/path law/receipt-ledger-path
+                       :ledger/revision revision
+                       :ledger/sha256 (sha256 contents)}
+     :ledger/records (read-receipt-records! contents)}))
+
+(defn promotion-ready-at!
+  [catalog catalog-identity target-revision required-gate-ids results
+   receipt-revision]
+  (law/promotion-ready? catalog
+                        catalog-identity
+                        target-revision
+                        required-gate-ids
+                        results
+                        (read-immutable-receipt-ledger! receipt-revision)))
 
 (defn actionable-submodule-paths []
   (into #{}
@@ -60,7 +115,7 @@
 
 (defn parse-args [args]
   (loop [remaining (vec args)
-         options {:only nil :kinds law/gate-kinds}]
+         options {:only nil :kinds law/gate-kinds :at nil}]
     (if-let [arg (first remaining)]
       (case arg
         "--only"
@@ -78,6 +133,11 @@
                                      (str/join ", " (map name unknown))))))
             (recur (subvec remaining 2) (assoc options :kinds kinds)))
           (throw (js/Error. "--kind requires a comma-separated value")))
+
+        "--at"
+        (if-let [value (second remaining)]
+          (recur (subvec remaining 2) (assoc options :at value))
+          (throw (js/Error. "--at requires a full Git commit ID")))
 
         (throw (js/Error. (str "Unknown argument: " arg))))
       options)))
@@ -242,6 +302,48 @@
       (println "RESULT" (pr-str result))
       result)))
 
+(defn evidence-receipt [result timestamp hostname]
+  (let [source (:result/source result)]
+    {:ts timestamp
+     :kind :test-run
+     :repo "."
+     :origin law/evidence-receipt-origin
+     :owner "foresight-evidence-runner"
+     :dod "Retain one exact gate result for immutable promotion review"
+     :pi "eta-mu"
+     :host hostname
+     :manifest (->> [(:catalog/path (:result/catalog result))
+                     (:source/path source)]
+                    (filter law/nonblank-string?)
+                    distinct
+                    vec)
+     :refs [(str (:source/repository source)
+                 "@"
+                 (or (:result/revision result) "unbound"))
+            (str (:gate/id result))]
+     :evidence/result result}))
+
+(defn append-edn-line! [file record]
+  (let [contents (if (fs/existsSync file)
+                   (fs/readFileSync file "utf8")
+                   "")
+        separator (if (or (str/blank? contents)
+                          (str/ends-with? contents "\n"))
+                    ""
+                    "\n")]
+    (fs/appendFileSync file (str separator (pr-str record) "\n") "utf8")
+    record))
+
+(defn append-evidence-receipt! [result]
+  (let [receipt (evidence-receipt result
+                                  (.toISOString (js/Date.))
+                                  "local")]
+    (when-not (law/evidence-receipt? receipt)
+      (throw (js/Error.
+              (str "Gate result cannot be recorded as an evidence receipt: "
+                   (pr-str (law/result-errors result))))))
+    (append-edn-line! receipt-file receipt)))
+
 (defn result-exit [{:result/keys [outcome]}]
   (case outcome
     :passed 0
@@ -284,13 +386,32 @@
                               (throw (js/Error.
                                       (str "Gate repository is not in the catalog: "
                                            (:gate/id gate)))))
-                            (run-gate! (get paths repository-path)
-                                       gate
-                                       catalog-identity)))
+                            (let [result (run-gate! (get paths repository-path)
+                                                    gate
+                                                    catalog-identity)]
+                              (append-evidence-receipt! result)
+                              result)))
                         gates)
           summary (law/summarize-results results)]
       (println "SUMMARY" (pr-str summary))
       (reduce max 0 (map result-exit results)))))
+
+(defn verify-receipts! [{:keys [at]}]
+  (let [ledger (read-immutable-receipt-ledger! at)
+        candidates (filter #(and (map? %)
+                                 (= law/evidence-receipt-origin (:origin %)))
+                           (:ledger/records ledger))
+        invalid (remove law/evidence-receipt? candidates)
+        evidence-count (count candidates)]
+    (when (seq invalid)
+      (throw (js/Error.
+              (str "Immutable ledger contains invalid evidence receipts: "
+                   (pr-str (mapv #(law/result-errors (:evidence/result %))
+                                 invalid))))))
+    (println "PASS"
+             (pr-str (assoc (:ledger/identity ledger)
+                            :ledger/evidence-receipts evidence-count)))
+    0))
 
 (defn -main [& args]
   (try
@@ -302,6 +423,7 @@
         "validate" (do (println "PASS quality gate catalog") 0)
         "list" (list-gates! catalog options)
         "run" (run-selected-gates! catalog catalog-identity options)
+        "verify-receipts" (verify-receipts! options)
         (throw (js/Error. (str "Unknown command: " (or command "<missing>"))))))
     (catch :default error
       (binding [*out* *err*] (println (.-message error)))

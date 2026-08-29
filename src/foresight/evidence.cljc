@@ -10,6 +10,10 @@
 
 (def outcomes #{:passed :failed :blocked :unavailable :not-applicable})
 
+(def receipt-ledger-path ".ημ/receipts.edn")
+
+(def evidence-receipt-origin "revision-bound-evidence")
+
 (def outcome-precedence
   {:failed 5
    :blocked 4
@@ -26,6 +30,10 @@
 (defn sha256? [value]
   (and (nonblank-string? value)
        (boolean (re-matches #"[0-9a-f]{64}" value))))
+
+(defn git-commit-id? [value]
+  (and (nonblank-string? value)
+       (boolean (re-matches #"(?:[0-9a-f]{40}|[0-9a-f]{64})" value))))
 
 (defn catalog-identity? [value]
   (and (map? value)
@@ -84,7 +92,9 @@
        (mapcat (fn [repository]
                  (let [gates (:repository/gates repository)]
                    (if (vector? gates) gates []))))
-       (keep :gate/id)
+       (keep (fn [gate]
+               (let [gate-id (:gate/id gate)]
+                 (when (keyword? gate-id) gate-id))))
        frequencies
        (keep (fn [[gate-id count]] (when (> count 1) gate-id)))
        sort
@@ -121,7 +131,7 @@
       (->> repositories
            keys
            (remove actionable-submodule-paths)
-           sort
+           (sort-by pr-str)
            (mapv (fn [repository-path]
                    {:error :catalog/repository-not-actionable-submodule
                     :repository repository-path}))))))
@@ -203,6 +213,43 @@
 (defn valid-result? [result]
   (empty? (result-errors result)))
 
+(defn receipt-ledger-identity? [value]
+  (and (map? value)
+       (= receipt-ledger-path (:ledger/path value))
+       (git-commit-id? (:ledger/revision value))
+       (sha256? (:ledger/sha256 value))))
+
+(defn evidence-receipt? [receipt]
+  (and (map? receipt)
+       (= :test-run (:kind receipt))
+       (= evidence-receipt-origin (:origin receipt))
+       (every? nonblank-string?
+               ((juxt :ts :owner :dod :pi :host) receipt))
+       (vector? (:manifest receipt))
+       (every? nonblank-string? (:manifest receipt))
+       (vector? (:refs receipt))
+       (every? nonblank-string? (:refs receipt))
+       (valid-result? (:evidence/result receipt))))
+
+(defn immutable-receipt-ledger? [ledger]
+  (and (map? ledger)
+       (receipt-ledger-identity? (:ledger/identity ledger))
+       (vector? (:ledger/records ledger))))
+
+(defn receipt-attests-result? [receipt result]
+  (let [source (:result/source result)
+        expected-ref (str (:source/repository source)
+                          "@"
+                          (:result/revision result))]
+    (boolean
+     (and (evidence-receipt? receipt)
+          (= result (:evidence/result receipt))
+          (some #{(:catalog/path (:result/catalog result))}
+                (:manifest receipt))
+          (some #{(:source/path source)} (:manifest receipt))
+          (some #{expected-ref} (:refs receipt))
+          (some #{(str (:gate/id result))} (:refs receipt))))))
+
 (defn satisfied? [result]
   (or (= :passed (:result/outcome result))
       (explicit-not-applicable? result)))
@@ -242,7 +289,11 @@
     (let [errors (vec (mapcat result-errors results))]
       (if (seq errors)
         {:result/outcome :failed
-         :result/counts (frequencies (map :result/outcome results))
+         :result/counts (->> results
+                             (map :result/outcome)
+                             (filter outcomes)
+                             frequencies
+                             (into (sorted-map)))
          :result/satisfied? false
          :result/errors errors}
         (let [counts (frequencies (map :result/outcome results))
@@ -258,15 +309,19 @@
                                     (every? satisfied? results)))})))))
 
 (defn promotion-ready?
-  [catalog catalog-identity target-revision required-gate-ids results]
-  (if-not (and (coll? required-gate-ids) (coll? results))
+  [catalog catalog-identity target-revision required-gate-ids results
+   immutable-receipt-ledger]
+  (if-not (and (coll? required-gate-ids)
+               (coll? results)
+               (immutable-receipt-ledger? immutable-receipt-ledger))
     false
     (let [required-gate-ids (set required-gate-ids)
           required-results (filterv #(contains? required-gate-ids (:gate/id %))
                                     results)
           gate-id-counts (frequencies (map :gate/id required-results))
           by-id (into {} (map (juxt :gate/id identity)) required-results)
-          trusted-gates (gate-index catalog)]
+          trusted-gates (gate-index catalog)
+          receipts (:ledger/records immutable-receipt-ledger)]
       (boolean
        (and (valid-catalog? catalog)
             (catalog-identity? catalog-identity)
@@ -279,6 +334,8 @@
                         (and (valid-result? result)
                              (satisfied? result)
                              (= target-revision (:result/revision result))
+                             (some #(receipt-attests-result? % result)
+                                   receipts)
                              (result-matches-gate?
                               catalog-identity
                               target-revision

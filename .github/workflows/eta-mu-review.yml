@@ -18,6 +18,13 @@ jobs:
       setup_eta_mu_toolchain: false
       evidence_gates_script: |
         run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
+        run_gate workspace_laws npx --yes nbb@1.4.207 -cp scripts:test test/workspace_test.cljs
+        run_gate project_laws npx --yes nbb@1.4.207 -cp src:scripts:test test/project_test.cljs
+        run_gate evidence_laws npx --yes nbb@1.4.207 -cp src:test test/evidence_test.cljs
+        run_gate evidence_adapter npx --yes nbb@1.4.207 -cp src:scripts:test test/evidence_cli_test.cljs
+        run_gate project_contract npx --yes nbb@1.4.207 -cp src:scripts scripts/project.clj validate
+        run_gate catalog_contract npx --yes nbb@1.4.207 -cp src:scripts scripts/evidence.clj validate
+        run_gate diff_hygiene git diff --check "${PR_BASE_SHA}...HEAD"
     # Least privilege: forward only the secrets the review job consumes.
     secrets:
       ETA_MU_APP_ID: ${{ secrets.ETA_MU_APP_ID }}

@@ -117,6 +117,17 @@ external. Promotion receives the trusted catalog snapshot and its identity and
 requires every result's repository, execution mode, source, command, and
 revision to match the selected gate exactly.
 
+Catalog agreement is integrity evidence, not producer authentication. Every
+gate attempt is appended as a complete `:test-run` record in Receipt River.
+Promotion additionally requires an exact matching record from
+`.ημ/receipts.edn` loaded at an explicit full root Git commit. The adapter reads
+the ledger through the Git object database, hashes the raw bytes, and passes
+the immutable commit/path/SHA-256 identity with the parsed records to the
+portable law. A mutable working tree, a copied catalog digest, or a hash stored
+only beside the result cannot authorize promotion. The reviewed Git commit is
+the authority boundary; provisioning a separate signing key is an optional
+future strengthening, not an implicit dependency.
+
 ### Gate kinds
 
 | Gate | What it proves | Minimum evidence |

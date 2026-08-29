@@ -52,6 +52,29 @@
            (= :passed outcome))
       (assoc :result/exit 0))))
 
+(defn receipt-for [result]
+  (let [source (:result/source result)]
+    {:ts "2026-08-29T17:22:40Z"
+     :kind :test-run
+     :repo "."
+     :origin evidence/evidence-receipt-origin
+     :owner "foresight-evidence-runner"
+     :dod "Retain one exact gate result for immutable promotion review"
+     :pi "eta-mu"
+     :host "test"
+     :manifest [(:catalog/path (:result/catalog result))
+                (:source/path source)]
+     :refs [(str (:source/repository source) "@" (:result/revision result))
+            (str (:gate/id result))]
+     :evidence/result result}))
+
+(defn immutable-ledger [results]
+  {:ledger/identity
+   {:ledger/path evidence/receipt-ledger-path
+    :ledger/revision (apply str (repeat 40 "c"))
+    :ledger/sha256 (apply str (repeat 64 "d"))}
+   :ledger/records (mapv receipt-for results)})
+
 (deftest validates-gate-catalogs
   (is (evidence/valid-catalog? valid-catalog))
   (is (= :gate/command
@@ -90,7 +113,26 @@
     (is (false? (evidence/promotion-ready?
                  malformed test-catalog-identity "revision-a"
                  #{:repo/unit}
-                 [(recorded-result :repo/unit :passed "revision-a")])))))
+                 [(recorded-result :repo/unit :passed "revision-a")]
+                 (immutable-ledger
+                  [(recorded-result :repo/unit :passed "revision-a")]))))))
+
+(deftest malformed-mixed-identities-remain-total
+  (let [unit (get-in valid-catalog
+                     [:catalog/repositories "repo" :repository/gates 0])
+        malformed (assoc-in valid-catalog
+                            [:catalog/repositories "repo" :repository/gates]
+                            [unit unit
+                             (assoc unit :gate/id 42)
+                             (assoc unit :gate/id 42)])]
+    (is (= {:error :gate/id-duplicates :gate/ids [:repo/unit]}
+           (last (evidence/catalog-errors malformed))))
+    (is (false? (evidence/valid-catalog? malformed))))
+  (let [errors (evidence/catalog-inventory-errors
+                {:catalog/repositories {"repo" {} 42 {}}}
+                #{})]
+    (is (= 2 (count errors)))
+    (is (= #{"repo" 42} (set (map :repository errors))))))
 
 (deftest catalog-repositories-must-be-actionable-direct-submodules
   (is (empty? (evidence/catalog-inventory-errors valid-catalog #{"repo"})))
@@ -180,6 +222,7 @@
   (is (false? (evidence/valid-result? 42)))
   (let [summary (evidence/summarize-results [42])]
     (is (= :failed (:result/outcome summary)))
+    (is (= {} (:result/counts summary)))
     (is (= :result/type (get-in summary [:result/errors 0 :error])))))
 
 (deftest promotion-is-closed-over-required-gates
@@ -188,20 +231,30 @@
                 (recorded-result :repo/integration :passed revision)]]
     (is (evidence/promotion-ready?
          valid-catalog test-catalog-identity revision
-         #{:repo/unit :repo/integration} passed))
+         #{:repo/unit :repo/integration} passed
+         (immutable-ledger passed)))
     (is (false? (evidence/promotion-ready?
                  valid-catalog test-catalog-identity revision
-                 #{:repo/unit :repo/e2e} passed)))
+                 #{:repo/unit :repo/e2e} passed
+                 (immutable-ledger passed))))
     (is (false? (evidence/promotion-ready?
                  valid-catalog test-catalog-identity revision
                  #{:repo/unit}
-                 [(recorded-result :repo/unit :unavailable revision)])))
+                 [(recorded-result :repo/unit :unavailable revision)]
+                 (immutable-ledger
+                  [(recorded-result :repo/unit :unavailable revision)]))))
     (is (false? (evidence/promotion-ready?
-                 valid-catalog test-catalog-identity revision #{} [])))
+                 valid-catalog test-catalog-identity revision #{} []
+                 (immutable-ledger []))))
     (is (false? (evidence/promotion-ready?
-                 valid-catalog test-catalog-identity revision 42 [])))
+                 valid-catalog test-catalog-identity revision 42 []
+                 (immutable-ledger []))))
     (is (false? (evidence/promotion-ready?
-                 valid-catalog test-catalog-identity revision #{} 42)))))
+                 valid-catalog test-catalog-identity revision #{} 42
+                 (immutable-ledger []))))
+    (is (false? (evidence/promotion-ready?
+                 valid-catalog test-catalog-identity revision
+                 #{:repo/unit} [(first passed)] nil)))))
 
 (deftest promotion-requires-one-unambiguous-target-revision
   (let [unit (recorded-result :repo/unit :passed "revision-a")
@@ -209,20 +262,24 @@
     (is (false? (evidence/promotion-ready?
                  valid-catalog test-catalog-identity "revision-a"
                  #{:repo/unit :repo/integration}
-                 [unit integration])))
+                 [unit integration]
+                 (immutable-ledger [unit integration]))))
     (is (false? (evidence/promotion-ready?
                  valid-catalog test-catalog-identity
-                 "" #{:repo/unit} [unit])))
+                 "" #{:repo/unit} [unit]
+                 (immutable-ledger [unit]))))
     (is (false? (evidence/promotion-ready?
                  valid-catalog test-catalog-identity
-                 "revision-a" #{:repo/unit} [unit unit])))))
+                 "revision-a" #{:repo/unit} [unit unit]
+                 (immutable-ledger [unit unit]))))))
 
 (deftest promotion-results-must-match-the-trusted-catalog-snapshot
   (let [revision "revision-a"
         result (recorded-result :repo/unit :passed revision)
         ready? #(evidence/promotion-ready?
                  valid-catalog test-catalog-identity revision
-                 #{:repo/unit} [%])]
+                 #{:repo/unit} [%]
+                 (immutable-ledger [result]))]
     (is (ready? result))
     (is (false? (ready? (assoc result :result/command ["true"]))))
     (is (false? (ready? (assoc result :result/exit 7))))
@@ -237,7 +294,34 @@
                                   "repo/forged.edn"))))
     (is (false? (ready? (assoc-in result
                                   [:result/source :source/repository]
-                                  "other"))))))
+                                  "other"))))
+    (let [failed (assoc (recorded-result :repo/unit :failed revision)
+                        :result/exit 7)
+          edited-pass (assoc failed :result/outcome :passed :result/exit 0)]
+      (is (evidence/valid-result? edited-pass))
+      (is (false? (evidence/promotion-ready?
+                   valid-catalog test-catalog-identity revision
+                   #{:repo/unit} [edited-pass]
+                   (immutable-ledger [failed])))))))
+
+(deftest promotion-requires-an-exact-immutable-receipt
+  (let [result (recorded-result :repo/unit :passed "revision-a")
+        ledger (immutable-ledger [result])]
+    (is (evidence/evidence-receipt? (first (:ledger/records ledger))))
+    (is (evidence/immutable-receipt-ledger? ledger))
+    (is (evidence/promotion-ready?
+         valid-catalog test-catalog-identity "revision-a"
+         #{:repo/unit} [result]
+         (update ledger :ledger/records
+                 #(conj % (first %)))))
+    (is (false? (evidence/promotion-ready?
+                 valid-catalog test-catalog-identity "revision-a"
+                 #{:repo/unit} [result]
+                 (assoc-in ledger [:ledger/identity :ledger/sha256] "forged"))))
+    (is (false? (evidence/promotion-ready?
+                 valid-catalog test-catalog-identity "revision-a"
+                 #{:repo/unit} [result]
+                 (update ledger :ledger/records empty))))))
 
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
