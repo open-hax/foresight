@@ -22,15 +22,17 @@ glibc compatible with the bundled Node.js release. Babashka and the x64
 clj-kondo executable are statically linked.
 
 Verify the download with the adjacent `.sha256` file. After extraction, verify
-regular files, symbolic-link targets, and required executable modes with:
+regular-file contents, the complete entry/type set, symbolic-link targets, and
+required executable modes with:
 
 ```sh
 ./foresight-chat-work-linux-x64/bin/verify-integrity
 ```
 
-The verifier uses the host's `sha256sum`, `readlink`, and `stat` commands.
-Node-based entry points always resolve the bundled Node executable, including
-when invoked directly without adding the bundle to `PATH`. NBB, jscpd, and
+The verifier uses the host's `cmp`, `find`, `mktemp`, `readlink`, `sha256sum`,
+`sort`, and `stat` commands. Node-based entry points always resolve the bundled
+Node executable, including when invoked directly without adding the bundle to
+`PATH`. NBB, jscpd, and
 their transitive npm packages were installed from the committed lockfile
 included under `lib/chat-work-tools/`.
 

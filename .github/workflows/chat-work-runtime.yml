@@ -76,6 +76,25 @@ jobs:
             ln -sfn "$original_target" "$link"
             bin/verify-integrity
 
+            # Prove an equal-content external link cannot replace a regular
+            # non-executable module while continuing to pass its byte hash.
+            regular_file="$(find ./lib/chat-work-tools/node_modules \
+              -type f -name '*.js' ! -perm /111 -print -quit)"
+            test -n "$regular_file"
+            original_file_mode="$(stat -c '%a' "$regular_file")"
+            external_copy="$tmp_dir/equal-content-module.js"
+            cp "$regular_file" "$external_copy"
+            rm -- "$regular_file"
+            ln -s "$external_copy" "$regular_file"
+            if bin/verify-integrity; then
+              echo "regular-file-to-symlink substitution passed integrity verification" >&2
+              exit 1
+            fi
+            rm -- "$regular_file"
+            cp "$external_copy" "$regular_file"
+            chmod "$original_file_mode" "$regular_file"
+            bin/verify-integrity
+
             executable="./bin/node"
             expected_mode="$(awk -F '\t' -v path="$executable" \
               '$2 == path { print $1 }' EXECUTABLES.tsv)"

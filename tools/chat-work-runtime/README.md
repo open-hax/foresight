@@ -18,10 +18,11 @@ npm graph is committed in `package-lock.json` and installed with `npm ci`.
 Every upstream archive is verified against its publisher's SHA-256 checksum
 before use. npm's target OS, CPU, and libc selectors follow `ARCH`, and the
 builder requires the matching locked jscpd native package. The archive contains
-a regular-file checksum manifest, an explicit symbolic-link target manifest,
-an exact executable-mode manifest, and a verifier for all three. Node-based entry
-points are bundle-relative wrappers, so direct invocation does not depend on a
-host Node executable or on first changing `PATH`.
+a regular-file checksum manifest, a complete entry-type manifest, an explicit
+symbolic-link target manifest, an exact executable-mode manifest, and a verifier
+for all four. Node-based entry points are bundle-relative wrappers, so direct
+invocation does not depend on a host Node executable or on first changing
+`PATH`.
 
 The archive covers root Foresight NBB tasks and its standard lint/duplication
 tools. It does not cover `eta` or `alpha` JVM tasks.

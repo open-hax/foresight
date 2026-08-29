@@ -181,6 +181,18 @@ esac
 bundle_root=$(CDPATH= cd -- "${script_path%/*}/.." && pwd -P)
 cd "$bundle_root"
 
+tree_snapshot=$(mktemp "/tmp/foresight-runtime-tree.XXXXXX")
+trap 'rm -f -- "$tree_snapshot"' EXIT
+trap 'exit 130' HUP INT TERM
+find . -mindepth 1 \
+  ! -path './TREE.types0' \
+  ! -path './SHA256SUMS' \
+  -printf '%y\t%p\0' | LC_ALL=C sort -z > "$tree_snapshot"
+if ! cmp -s TREE.types0 "$tree_snapshot"; then
+  echo "payload entry set or type mismatch" >&2
+  exit 1
+fi
+
 tab=$(printf '\t')
 while IFS="$tab" read -r link expected_target; do
   [ -n "$link" ] || continue
@@ -239,6 +251,18 @@ chmod 0755 "$bundle_dir/bin/verify-integrity"
     printf '%s\t%s\n' "$(stat -c '%a' -- "$executable")" "$executable"
   done < <(find . -type f -perm /111 -print0 | sort -z)
 ) > "$bundle_dir/EXECUTABLES.tsv"
+
+# Record every payload entry and its filesystem type with NUL delimiters. This
+# rejects added entries and regular-file/symbolic-link substitution. TREE.types0
+# and SHA256SUMS are excluded to avoid self-reference; both manifests are still
+# covered by the adjacent archive digest, and TREE.types0 is covered by SHA256SUMS.
+(
+  cd "$bundle_dir"
+  find . -mindepth 1 \
+    ! -path './TREE.types0' \
+    ! -path './SHA256SUMS' \
+    -printf '%y\t%p\0' | LC_ALL=C sort -z
+) > "$bundle_dir/TREE.types0"
 
 (
   cd "$bundle_dir"
