@@ -747,33 +747,79 @@
                             " UTF-8 bytes")))
       line)))
 
-(defn open-append-reservation! [file]
-  (require-secure-append-support!)
-  (let [absolute-file (path/resolve file)
-        directory (path/dirname absolute-file)
-        basename (path/basename absolute-file)
-        parent (open-parent-directory! directory)]
-    (try
-      (let [lock (acquire-append-lock! parent basename)]
-        (try
-          (require-append-lock-identity! lock)
-          (let [target-path (path/join (:proc-path parent) basename)
-                target (open-append-target! parent target-path)]
-            {:requested-file absolute-file
-             :directory directory
-             :parent parent
-             :lock lock
-             :target target
-             :target-path target-path
-             :target-open? (atom true)
-             :write-started? (atom false)
-             :write-verified? (atom false)})
-          (catch :default error
-            (release-append-lock! parent lock)
-            (throw error))))
-      (catch :default error
-        (fs/closeSync (:fd parent))
-        (throw error)))))
+(defn read-held-target-bytes! [target]
+  (let [before (require-target-identity! target)
+        size (safe-file-size! before)
+        bytes (js/Buffer.alloc size)]
+    (loop [offset 0]
+      (when (< offset size)
+        (let [read-count (fs/readSync (:fd target) bytes offset
+                                      (- size offset) offset)]
+          (when-not (and (integer? read-count) (pos? read-count))
+            (append-error! "Receipt River held content read made no progress"))
+          (recur (+ offset read-count)))))
+    (let [after-size (safe-file-size! (require-target-identity! target))]
+      (when-not (= size after-size (.-byteLength bytes))
+        (append-error! "Receipt River file changed during held content read")))
+    bytes))
+
+(defn stable-held-target-bytes! [target]
+  (let [first-read (read-held-target-bytes! target)
+        second-read (read-held-target-bytes! target)]
+    (when-not (.equals first-read second-read)
+      (append-error! "Receipt River file changed during held content validation"))
+    second-read))
+
+(defn validate-held-receipt-ledger! [target]
+  (let [bytes (stable-held-target-bytes! target)
+        records (read-receipt-records!
+                 (decode-utf8! bytes "held Receipt River ledger"))]
+    (require-valid-receipt-records! records)
+    bytes))
+
+(defn require-held-ledger-unchanged! [target validated-bytes]
+  (let [current-bytes (stable-held-target-bytes! target)]
+    (when-not (.equals validated-bytes current-bytes)
+      (append-error! "Receipt River file changed after held ledger validation"))
+    current-bytes))
+
+(defn open-append-reservation!
+  ([file]
+   (open-append-reservation! file false))
+  ([file validate-ledger?]
+   (require-secure-append-support!)
+   (let [absolute-file (path/resolve file)
+         directory (path/dirname absolute-file)
+         basename (path/basename absolute-file)
+         parent (open-parent-directory! directory)]
+     (try
+       (let [lock (acquire-append-lock! parent basename)]
+         (try
+           (require-append-lock-identity! lock)
+           (let [target-path (path/join (:proc-path parent) basename)
+                 target (open-append-target! parent target-path)]
+             (try
+               {:requested-file absolute-file
+                :directory directory
+                :parent parent
+                :lock lock
+                :target target
+                :target-path target-path
+                :held-ledger-bytes
+                (if validate-ledger?
+                  (validate-held-receipt-ledger! target)
+                  (stable-held-target-bytes! target))
+                :target-open? (atom true)
+                :write-started? (atom false)
+                :write-verified? (atom false)}
+               (catch :default error
+                 (close-after-open-error! (:fd target) error))))
+           (catch :default error
+             (release-append-lock! parent lock)
+             (throw error))))
+       (catch :default error
+         (fs/closeSync (:fd parent))
+         (throw error))))))
 
 (defn close-append-reservation!
   [{:keys [parent lock target target-open? write-started? write-verified?]}]
@@ -792,16 +838,19 @@
         (finally
           (fs/closeSync (:fd parent)))))))
 
-(defn with-append-reservation! [file run!]
-  (let [reservation (open-append-reservation! file)]
-    (try
-      (run! reservation)
-      (finally
-        (close-append-reservation! reservation)))))
+(defn with-append-reservation!
+  ([file run!]
+   (with-append-reservation! file false run!))
+  ([file validate-ledger? run!]
+   (let [reservation (open-append-reservation! file validate-ledger?)]
+     (try
+       (run! reservation)
+       (finally
+         (close-append-reservation! reservation))))))
 
 (defn append-reserved-edn-line!
   [{:keys [requested-file directory parent lock target target-path
-           target-open? write-started? write-verified?]}
+           held-ledger-bytes target-open? write-started? write-verified?]}
    record
    line]
   (*secure-append-phase-hook*
@@ -811,6 +860,7 @@
     :target-path target-path})
   (require-parent-identity! parent)
   (require-append-lock-identity! lock)
+  (require-held-ledger-unchanged! target held-ledger-bytes)
   (let [before (require-target-identity! target)
         before-size (safe-file-size! before)
         separator (if (terminal-newline? (:fd target) before-size)
@@ -867,7 +917,11 @@
 
 (defn append-evidence-receipt!
   ([result]
-   (append-edn-line! receipt-file (validated-evidence-receipt! result)))
+   (let [receipt (validated-evidence-receipt! result)
+         line (encode-edn-line! receipt)]
+     (with-append-reservation!
+       receipt-file true
+       #(append-reserved-edn-line! % receipt line))))
   ([reservation result]
    (let [receipt (validated-evidence-receipt! result)]
      (append-reserved-edn-line! reservation receipt
@@ -921,7 +975,7 @@
                             ;; descriptor before the gate starts. The same
                             ;; reservation retains the resulting receipt.
                             (with-append-reservation!
-                              receipt-file
+                              receipt-file true
                               (fn [reservation]
                                 (let [result (run-gate!
                                               (get paths repository-path)

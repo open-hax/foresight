@@ -271,12 +271,19 @@
 
 (deftest appends-complete-receipt-river-evidence
   (let [captured (atom nil)]
-    (with-redefs [cli/append-edn-line!
-                  (fn [file receipt]
-                    (reset! captured {:file file :receipt receipt})
+    (with-redefs [cli/with-append-reservation!
+                  (fn [file validate-ledger? append!]
+                    (is validate-ledger?)
+                    (append! {:file file}))
+                  cli/append-reserved-edn-line!
+                  (fn [reservation receipt line]
+                    (reset! captured {:file (:file reservation)
+                                      :receipt receipt
+                                      :line line})
                     receipt)]
       (let [receipt (cli/append-evidence-receipt! passed-result)]
         (is (= receipt (:receipt @captured)))
+        (is (= (pr-str receipt) (:line @captured)))
         (is (law/evidence-receipt? receipt))
         (is (= 2 (:evidence/schema receipt)))
         (is (re-find #"^nbb/node@v" (:evidence/adapter receipt)))
@@ -369,6 +376,65 @@
           (is (not (fs/existsSync file)))
           (is (= "stale-or-held\n"
                  (fs/readFileSync lock-file "utf8"))))))))
+
+(deftest selected-gates-reject-an-invalid-held-ledger-before-execution
+  (with-receipt-fixture
+    (fn [{:keys [directory file]}]
+      (let [gate-ran? (atom false)
+            invalid-ledger "{:kind :observation}\n"
+            lock-file (path/join directory ".receipts.edn.append.lock")
+            catalog {:catalog/repositories
+                     {"repo" {:repository/path "repo"
+                              :repository/gates [local-gate]}}}]
+        (fs/writeFileSync file invalid-ledger "utf8")
+        (with-redefs [cli/receipt-file file
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (reset! gate-ran? true)
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"invalid receipt envelopes"
+               (cli/run-selected-gates!
+                catalog test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (false? @gate-ran?))
+          (is (= invalid-ledger (fs/readFileSync file "utf8")))
+          (is (not (fs/existsSync lock-file))))))))
+
+(deftest selected-gates-reject-held-ledger-mutation-after-execution
+  (with-receipt-fixture
+    (fn [{:keys [directory file]}]
+      (let [gate-ran? (atom false)
+            changed-ledger "{:kind :observation}\n"
+            lock-file (path/join directory ".receipts.edn.append.lock")
+            catalog {:catalog/repositories
+                     {"repo" {:repository/path "repo"
+                              :repository/gates [local-gate]}}}]
+        (with-redefs [cli/receipt-file file
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (reset! gate-ran? true)
+                        ;; Model a non-cooperating writer that ignores the held lock.
+                        (fs/writeFileSync file changed-ledger "utf8")
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"changed after held ledger validation"
+               (cli/run-selected-gates!
+                catalog test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is @gate-ran?)
+          (is (= changed-ledger (fs/readFileSync file "utf8")))
+          (is (not (fs/existsSync lock-file))))))))
 
 (deftest receipt-lines-require-one-complete-edn-form
   (is (= [{:a 1}] (cli/read-receipt-records! "{:a 1}\n")))

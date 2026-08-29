@@ -34,3 +34,12 @@
   spore: none
   receipt-refs: 2026-08-29T21:50:16Z
   note: Host capability preflight and concrete resource reservation are distinct laws; late review plus transient scratch replacement required exact-head rehydration and a full rerun before publication.
+- ts: 2026-08-29T22:07:50Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Validate held ledger semantics before running evidence gates
+  p-efficiency: 0.70
+  p-friction: 0.78
+  p-skill-candidate: 0.58
+  spore: none
+  receipt-refs: 2026-08-29T22:07:50Z
+  note: Descriptor safety does not imply semantic ledger validity; a RED-test mock that crossed the real append boundary was caught by working-tree diff, cleaned before publication, and converted into an explicit no-ledger-mutation regression.
