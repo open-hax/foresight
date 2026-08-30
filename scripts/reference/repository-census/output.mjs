@@ -3,6 +3,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { edn } from './edn.mjs';
+import { LOCATOR_NORMALIZER } from './gitmodules.mjs';
 
 const compareText = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 
@@ -13,7 +14,19 @@ export function canonicalSummary(result) {
     rateReset: _rateReset,
     ...stats
   } = result.stats;
-  return { roots: result.roots, stats };
+  return {
+    roots: result.roots,
+    provenance: {
+      locatorNormalizer: {
+        name: LOCATOR_NORMALIZER.name,
+        version: LOCATOR_NORMALIZER.version,
+        configuration: LOCATOR_NORMALIZER.configuration,
+        configurationSha256: LOCATOR_NORMALIZER.configurationSha256,
+        epistemicTier: LOCATOR_NORMALIZER.epistemicTier,
+      },
+    },
+    stats,
+  };
 }
 
 const VOLATILE_FRONTIER_FIELDS = new Set(['gap/id', 'gap/detail', 'gap/frontier?']);

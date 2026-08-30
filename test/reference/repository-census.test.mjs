@@ -5,18 +5,25 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { parseArgs, parseRoot } from '../../scripts/reference/repository-census/args.mjs';
 import { census } from '../../scripts/reference/repository-census/census.mjs';
 import { edn } from '../../scripts/reference/repository-census/edn.mjs';
 import { GitHubClient } from '../../scripts/reference/repository-census/github.mjs';
-import { normalizeGitHubUrl, parseGitmodules } from '../../scripts/reference/repository-census/gitmodules.mjs';
 import {
-  canonicalFrontier, canonicalSummary, frontierBaselineMatches,
+  LOCATOR_NORMALIZER, normalizeGitHubUrl, parseGitmodules,
+} from '../../scripts/reference/repository-census/gitmodules.mjs';
+import {
+  canonicalFrontier, canonicalSummary, frontierBaselineMatches, writeResults,
 } from '../../scripts/reference/repository-census/output.mjs';
 
-const sha = (character) => character.repeat(40);
-const gitBlobSha = (text) => createHash('sha1')
+const oid = (character, width = 40) => character.repeat(width);
+const sha = (character) => oid(character);
+const gitBlobOid = (text, width = 40) => createHash(width === 64 ? 'sha256' : 'sha1')
   .update(`blob ${Buffer.byteLength(text)}\0`).update(text).digest('hex');
+const gitBlobSha = (text) => gitBlobOid(text);
 
 const modules = parseGitmodules(`
 [submodule "a"]
@@ -87,6 +94,116 @@ assert.equal(normalizeGitHubUrl('../sibling.git', 'open-hax/root').fullName, 'op
 assert.equal(normalizeGitHubUrl('../../other/sibling.git', 'open-hax/root').fullName, 'other/sibling');
 assert.equal(normalizeGitHubUrl('./nested.git', 'open-hax/root').kind, 'unsupported');
 assert.equal(normalizeGitHubUrl('../sibling.git').kind, 'unsupported');
+
+assert.equal(
+  createHash('sha256').update(JSON.stringify(LOCATOR_NORMALIZER.configuration)).digest('hex'),
+  LOCATOR_NORMALIZER.configurationSha256,
+);
+assert.equal(LOCATOR_NORMALIZER.name, 'foresight/github-submodule-locator');
+assert.equal(LOCATOR_NORMALIZER.version, 1);
+assert.equal(LOCATOR_NORMALIZER.epistemicTier, 'derived-locator');
+assert.notEqual(
+  createHash('sha256').update(JSON.stringify([
+    ...LOCATOR_NORMALIZER.configuration, 'new-policy=requires-new-fingerprint',
+  ])).digest('hex'),
+  LOCATOR_NORMALIZER.configurationSha256,
+);
+
+for (const acceptedUserinfoUrl of [
+  'https://user@github.com/open-hax/foresight.git',
+  'http://user@github.com/open-hax/foresight.git',
+  'git://token@github.com/open-hax/foresight.git',
+  'ssh://git@github.com/open-hax/foresight.git',
+  'git@github.com:open-hax/foresight.git',
+]) {
+  const normalized = normalizeGitHubUrl(acceptedUserinfoUrl);
+  assert.equal(normalized.kind, 'github');
+  assert.equal(normalized.fullName, 'open-hax/foresight');
+  assert.equal(normalized.canonicalUrl, 'https://github.com/open-hax/foresight');
+  assert.notEqual(normalized.raw, acceptedUserinfoUrl);
+  assert.equal(normalized.raw.includes('[userinfo-redacted]@github.com'), true);
+  assert.equal(
+    normalized.rawSha256,
+    createHash('sha256').update(acceptedUserinfoUrl).digest('hex'),
+  );
+}
+
+const credentialUrl = 'https://user:dummy-secret@github.com/open-hax/foresight.git';
+const credentialLocator = normalizeGitHubUrl(credentialUrl);
+assert.equal(credentialLocator.kind, 'github');
+assert.equal(credentialLocator.fullName, 'open-hax/foresight');
+assert.equal(credentialLocator.raw.includes('dummy-secret'), false);
+assert.equal(credentialLocator.raw, 'https://[userinfo-redacted]@github.com/open-hax/foresight.git');
+
+const queryCredentialUrl = [
+  'https://user:dummy-secret@github.com/open-hax/foresight.git',
+  '?access_token=query-secret#fragment-secret',
+].join('');
+const queryCredentialLocator = normalizeGitHubUrl(queryCredentialUrl);
+assert.equal(queryCredentialLocator.kind, 'github');
+assert.equal(queryCredentialLocator.fullName, 'open-hax/foresight');
+assert.equal(queryCredentialLocator.raw.includes('dummy-secret'), false);
+assert.equal(queryCredentialLocator.raw.includes('query-secret'), false);
+assert.equal(queryCredentialLocator.raw.includes('fragment-secret'), false);
+assert.equal(
+  queryCredentialLocator.raw,
+  'https://[userinfo-redacted]@github.com/open-hax/foresight.git[query-or-fragment-redacted]',
+);
+assert.equal(
+  queryCredentialLocator.rawSha256,
+  createHash('sha256').update(queryCredentialUrl).digest('hex'),
+);
+assert.equal(
+  normalizeGitHubUrl('user@@github.com:open-hax/foresight.git').raw,
+  '[userinfo-redacted]@github.com:open-hax/foresight.git',
+);
+const scpQueryAtCredentialUrl = [
+  'user:dummy-secret@github.com:open-hax/foresight.git',
+  '?callback=a@callback-secret',
+].join('');
+const scpQueryAtCredentialLocator = normalizeGitHubUrl(scpQueryAtCredentialUrl);
+assert.equal(scpQueryAtCredentialLocator.kind, 'github');
+assert.equal(scpQueryAtCredentialLocator.fullName, 'open-hax/foresight');
+assert.equal(scpQueryAtCredentialLocator.raw.includes('dummy-secret'), false);
+assert.equal(scpQueryAtCredentialLocator.raw.includes('callback-secret'), false);
+assert.equal(
+  scpQueryAtCredentialLocator.raw,
+  '[userinfo-redacted]@github.com:open-hax/foresight.git[query-or-fragment-redacted]',
+);
+assert.equal(
+  scpQueryAtCredentialLocator.rawSha256,
+  createHash('sha256').update(scpQueryAtCredentialUrl).digest('hex'),
+);
+
+for (const relativeSuffix of [
+  '?access_token=relative-query-secret',
+  '#relative-fragment-secret',
+  '?access_token=relative-query-secret#relative-fragment-secret',
+]) {
+  const relativeUrl = `../sibling.git${relativeSuffix}`;
+  const relativeLocator = normalizeGitHubUrl(relativeUrl, 'open-hax/foresight');
+  assert.equal(relativeLocator.kind, 'github');
+  assert.equal(relativeLocator.fullName, 'open-hax/sibling');
+  assert.equal(relativeLocator.canonicalUrl, 'https://github.com/open-hax/sibling');
+  assert.equal(relativeLocator.raw.includes('relative-query-secret'), false);
+  assert.equal(relativeLocator.raw.includes('relative-fragment-secret'), false);
+  assert.equal(relativeLocator.raw, '../sibling.git[query-or-fragment-redacted]');
+  assert.equal(
+    relativeLocator.rawSha256,
+    createHash('sha256').update(relativeUrl).digest('hex'),
+  );
+}
+
+for (const rejectedAuthorityUrl of [
+  'https://user@github.example/open-hax/foresight.git',
+  'https://user@github.com:443/open-hax/foresight.git',
+  'https://user@@github.com/open-hax/foresight.git',
+  'https://user @github.com/open-hax/foresight.git',
+  'https://user@github.com\u0000/open-hax/foresight.git',
+  'https://user@github.com./open-hax/foresight.git',
+]) {
+  assert.equal(normalizeGitHubUrl(rejectedAuthorityUrl).kind, 'unsupported');
+}
 
 const quotedModules = parseGitmodules(`
 [submodule "quoted"]
@@ -320,6 +437,8 @@ function response(status, body, responseHeaders = {}) {
   };
 }
 
+const treeResponse = (treeSha, body = {}) => response(200, { sha: treeSha, ...body });
+
 const manifestText = '[submodule "child"]\n  path = child\n  url = git@github.com:open-hax/child.git\n';
 const fetchCalls = [];
 const apiClient = new GitHubClient('token', {
@@ -330,7 +449,7 @@ const apiClient = new GitHubClient('token', {
       return response(200, { sha: sha('a'), tree: { sha: sha('d') } });
     }
     if (url.endsWith(`/git/trees/${sha('d')}?recursive=1`)) {
-      return response(200, {
+      return treeResponse(sha('d'), {
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(manifestText) }],
       });
     }
@@ -398,6 +517,373 @@ await assert.rejects(
 );
 assert.equal(wrongCommitRaw404TreeRequests, 0);
 
+for (const invalidObjectId of [
+  undefined, null, 7, '', oid('a', 39), oid('a', 41), oid('a', 63), oid('a', 65), sha('A'),
+]) {
+  for (const operation of [
+    (client) => client.commit('open-hax/input-id', invalidObjectId),
+    (client) => client.tree('open-hax/input-id', invalidObjectId),
+    (client) => client.recursiveTree('open-hax/input-id', invalidObjectId),
+    (client) => client.manifest('open-hax/input-id', invalidObjectId),
+  ]) {
+    let calls = 0;
+    const client = new GitHubClient(null, {
+      fetchImpl: async () => {
+        calls += 1;
+        return response(500, { message: 'must not request' });
+      },
+    });
+    await assert.rejects(operation(client), /full lowercase Git object ID/);
+    assert.equal(calls, 0);
+    assert.equal(client.requests, 0);
+  }
+}
+
+for (const width of [40, 64]) {
+  const revision = oid('a', width);
+  const treeSha = oid('d', width);
+  const client = new GitHubClient(null, {
+    fetchImpl: async (url) => {
+      if (url.includes('/git/commits/')) {
+        return response(200, { sha: revision, tree: { sha: treeSha } });
+      }
+      return treeResponse(treeSha, { truncated: false, tree: [] });
+    },
+  });
+  assert.deepEqual(await client.commit('open-hax/valid-input-id', revision), {
+    sha: revision, tree: { sha: treeSha },
+  });
+  assert.deepEqual(await client.tree('open-hax/valid-input-id', treeSha), {
+    sha: treeSha, truncated: false, tree: [],
+  });
+  assert.deepEqual(await client.recursiveTree('open-hax/valid-input-id', treeSha), {
+    sha: treeSha, truncated: false, tree: [],
+  });
+}
+
+const malformedCommitResponses = [
+  null,
+  [],
+  {},
+  { sha: sha('a') },
+  { sha: sha('a'), tree: null },
+  { sha: sha('a'), tree: {} },
+  { sha: sha('a'), tree: { sha: null } },
+  { sha: sha('a'), tree: { sha: oid('d', 39) } },
+  { sha: sha('a'), tree: { sha: sha('D') } },
+  { sha: sha('a'), tree: { sha: oid('d', 64) } },
+  { sha: sha('b'), tree: { sha: sha('d') } },
+];
+for (const commitBody of malformedCommitResponses) {
+  let calls = 0;
+  const client = new GitHubClient(null, {
+    fetchImpl: async () => {
+      calls += 1;
+      return response(200, commitBody);
+    },
+  });
+  const results = await Promise.allSettled([
+    client.commit('open-hax/commit-envelope', sha('a')),
+    client.commit('open-hax/commit-envelope', sha('a')),
+  ]);
+  assert.deepEqual(results.map(({ status }) => status), ['rejected', 'rejected']);
+  assert.equal(results[0].reason.message, results[1].reason.message);
+  assert.equal(calls, 1);
+  await assert.rejects(client.commit('open-hax/commit-envelope', sha('a')));
+  assert.equal(calls, 1);
+}
+
+for (const rawStatus of [200, 404]) {
+  let commitCalls = 0;
+  let treeCalls = 0;
+  const client = new GitHubClient(null, {
+    fetchImpl: async (url) => {
+      if (url.startsWith('https://raw.githubusercontent.com')) {
+        return response(rawStatus, rawStatus === 200 ? manifestText : 'Not Found');
+      }
+      if (url.includes('/git/commits/')) {
+        commitCalls += 1;
+        return response(200, { sha: sha('a'), tree: { sha: null } });
+      }
+      treeCalls += 1;
+      return treeResponse(sha('d'), { truncated: false, tree: [] });
+    },
+  });
+  await assert.rejects(client.manifest('open-hax/commit-envelope-raw', sha('a')));
+  assert.equal(commitCalls, 1);
+  assert.equal(treeCalls, 0);
+}
+
+for (const method of ['tree', 'recursiveTree']) {
+  for (const treeBody of [
+    null,
+    {},
+    { sha: sha('b'), tree: [] },
+    { sha: sha('d') },
+    { sha: sha('d'), tree: null },
+    { sha: sha('d'), tree: {} },
+  ]) {
+    let calls = 0;
+    const client = new GitHubClient(null, {
+      fetchImpl: async () => {
+        calls += 1;
+        return response(200, treeBody);
+      },
+    });
+    const results = await Promise.allSettled([
+      client[method]('open-hax/tree-envelope', sha('d')),
+      client[method]('open-hax/tree-envelope', sha('d')),
+    ]);
+    assert.deepEqual(results.map(({ status }) => status), ['rejected', 'rejected']);
+    assert.equal(results[0].reason.message, results[1].reason.message);
+    assert.equal(calls, 1);
+    await assert.rejects(client[method]('open-hax/tree-envelope', sha('d')));
+    assert.equal(calls, 1);
+  }
+}
+
+let wrongRecursiveFallbackCalls = 0;
+const wrongRecursiveIdentityClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (!url.endsWith('?recursive=1')) wrongRecursiveFallbackCalls += 1;
+    return treeResponse(sha('e'), { truncated: true, tree: [] });
+  },
+});
+await assert.rejects(
+  wrongRecursiveIdentityClient.lookupTreePath('open-hax/root', sha('d'), 'nested/child'),
+  /returned Git tree/,
+);
+assert.equal(wrongRecursiveFallbackCalls, 0);
+
+let wrongFallbackChildCalls = 0;
+const wrongFallbackIdentityClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.endsWith('?recursive=1')) {
+      return treeResponse(sha('d'), { truncated: true, tree: [] });
+    }
+    if (url.endsWith(`/git/trees/${sha('e')}`)) wrongFallbackChildCalls += 1;
+    return treeResponse(sha('e'), {
+      truncated: false,
+      tree: [{ path: 'nested', type: 'tree', mode: '040000', sha: sha('e') }],
+    });
+  },
+});
+await assert.rejects(
+  wrongFallbackIdentityClient.lookupTreePath('open-hax/root', sha('d'), 'nested/child'),
+  /returned Git tree/,
+);
+assert.equal(wrongFallbackChildCalls, 0);
+
+for (const malformedEntry of [
+  null,
+  {},
+  { path: '', type: 'blob', mode: '100644', sha: sha('e') },
+  { path: 'bad\0path', type: 'blob', mode: '100644', sha: sha('e') },
+  { path: 7, type: 'blob', mode: '100644', sha: sha('e') },
+]) {
+  const client = new GitHubClient(null, {
+    fetchImpl: async () => treeResponse(sha('d'), {
+      truncated: false, tree: [malformedEntry],
+    }),
+  });
+  await assert.rejects(
+    client.lookupTreePath('open-hax/root', sha('d'), '.gitmodules'),
+    /malformed Git tree entry path/,
+  );
+}
+
+const duplicateTreePathClient = new GitHubClient(null, {
+  fetchImpl: async () => treeResponse(sha('d'), {
+    truncated: false,
+    tree: [
+      { path: 'other', type: 'blob', mode: '100644', sha: sha('e') },
+      { path: 'other', type: 'blob', mode: '100644', sha: sha('f') },
+    ],
+  }),
+});
+await assert.rejects(
+  duplicateTreePathClient.lookupTreePath('open-hax/root', sha('d'), '.gitmodules'),
+  /duplicate Git tree path/,
+);
+
+for (const malformedRecursiveEntries of [
+  [{ path: '.gitmodules/child', type: 'blob', mode: '100644', sha: sha('e') }],
+  [
+    { path: 'dir', type: 'blob', mode: '100644', sha: sha('e') },
+    { path: 'dir/child', type: 'blob', mode: '100644', sha: sha('f') },
+  ],
+  [{ path: 'dir//child', type: 'blob', mode: '100644', sha: sha('e') }],
+]) {
+  const client = new GitHubClient(null, {
+    fetchImpl: async () => treeResponse(sha('d'), {
+      truncated: false, tree: malformedRecursiveEntries,
+    }),
+  });
+  await assert.rejects(
+    client.lookupTreePath('open-hax/root', sha('d'), '.gitmodules/missing'),
+    /malformed Git tree entry path|incoherent recursive hierarchy/,
+  );
+}
+
+const coherentNestedNegativeClient = new GitHubClient(null, {
+  fetchImpl: async () => treeResponse(sha('d'), {
+    truncated: false,
+    tree: [
+      { path: 'dir', type: 'tree', mode: '040000', sha: sha('e') },
+      { path: 'dir/present', type: 'blob', mode: '100644', sha: sha('f') },
+    ],
+  }),
+});
+assert.equal(
+  (await coherentNestedNegativeClient.lookupTreePath(
+    'open-hax/root', sha('d'), 'dir/missing',
+  )).status,
+  'missing',
+);
+
+for (const malformedNegativeEntry of [
+  { path: 'other', type: undefined, mode: '100644', sha: sha('e') },
+  { path: 'other', type: 'tag', mode: '100644', sha: sha('e') },
+  { path: 'other', type: 'blob', mode: undefined, sha: sha('e') },
+  { path: 'other', type: 'blob', mode: '040000', sha: sha('e') },
+  { path: 'other', type: 'tree', mode: '100644', sha: sha('e') },
+  { path: 'other', type: 'commit', mode: '100644', sha: sha('e') },
+  { path: 'other', type: 'blob', mode: '100644', sha: undefined },
+  { path: 'other', type: 'blob', mode: '100644', sha: sha('E') },
+  { path: 'other', type: 'blob', mode: '100644', sha: oid('e', 39) },
+  { path: 'other', type: 'blob', mode: '100644', sha: oid('e', 64) },
+]) {
+  const client = new GitHubClient(null, {
+    fetchImpl: async () => treeResponse(sha('d'), {
+      truncated: false, tree: [malformedNegativeEntry],
+    }),
+  });
+  await assert.rejects(
+    client.lookupTreePath('open-hax/root', sha('d'), '.gitmodules'),
+    /Git tree.*entry|incoherent Git tree entry/,
+  );
+}
+
+for (const invalidParentEntry of [
+  { path: 'nested', type: 'tree', mode: undefined, sha: sha('e') },
+  { path: 'nested', type: 'tree', mode: '100644', sha: sha('e') },
+  { path: 'nested', type: 'tree', mode: '040000', sha: undefined },
+  { path: 'nested', type: 'tree', mode: '040000', sha: sha('E') },
+  { path: 'nested', type: 'tree', mode: '040000', sha: oid('e', 64) },
+]) {
+  let childCalls = 0;
+  const client = new GitHubClient(null, {
+    fetchImpl: async (url) => {
+      if (url.endsWith('?recursive=1')) {
+        return treeResponse(sha('d'), { truncated: true, tree: [] });
+      }
+      if (url.endsWith(`/git/trees/${sha('e')}`)) childCalls += 1;
+      return treeResponse(sha('d'), { truncated: false, tree: [invalidParentEntry] });
+    },
+  });
+  await assert.rejects(
+    client.lookupTreePath('open-hax/root', sha('d'), 'nested/.gitmodules'),
+  );
+  assert.equal(childCalls, 0);
+}
+
+let validNestedChildCalls = 0;
+const validNestedTreeClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.endsWith('?recursive=1')) {
+      return treeResponse(sha('d'), { truncated: true, tree: [] });
+    }
+    if (url.endsWith(`/git/trees/${sha('d')}`)) {
+      return treeResponse(sha('d'), {
+        truncated: false,
+        tree: [{ path: 'nested', type: 'tree', mode: '040000', sha: sha('e') }],
+      });
+    }
+    validNestedChildCalls += 1;
+    return treeResponse(sha('e'), {
+      truncated: false,
+      tree: [{ path: '.gitmodules', type: 'blob', mode: '100644', sha: sha('f') }],
+    });
+  },
+});
+assert.equal((await validNestedTreeClient.lookupTreePath(
+  'open-hax/root', sha('d'), 'nested/.gitmodules',
+)).status, 'found');
+assert.equal(validNestedChildCalls, 1);
+
+const slashBearingFallbackClient = new GitHubClient(null, {
+  fetchImpl: async (url) => treeResponse(sha('d'), url.endsWith('?recursive=1')
+    ? { truncated: true, tree: [] }
+    : {
+      truncated: false,
+      tree: [{ path: 'other/nested', type: 'blob', mode: '100644', sha: sha('e') }],
+    }),
+});
+await assert.rejects(
+  slashBearingFallbackClient.lookupTreePath('open-hax/root', sha('d'), '.gitmodules'),
+  /malformed Git tree entry path/,
+);
+
+const malformedExactEntry = {
+  path: 'child', type: 'commit', mode: '100644',
+};
+const malformedExactEntryClient = new GitHubClient(null, {
+  fetchImpl: async () => treeResponse(sha('d'), {
+    truncated: null, tree: [malformedExactEntry],
+  }),
+});
+assert.deepEqual(
+  await malformedExactEntryClient.lookupTreePath('open-hax/root', sha('d'), 'child'),
+  {
+    status: 'found', entry: malformedExactEntry, resolvedPath: 'child',
+    entryPathScope: 'root-relative',
+  },
+);
+
+for (const width of [40, 64]) {
+  const revision = oid('a', width);
+  const treeSha = oid('d', width);
+  const bytes = Buffer.from(manifestText);
+  const blobOid = gitBlobOid(bytes, width);
+  const client = new GitHubClient(null, {
+    fetchImpl: async (url) => {
+      if (url.startsWith('https://raw.githubusercontent.com')) return response(200, bytes);
+      if (url.includes('/git/commits/')) {
+        return response(200, { sha: revision, tree: { sha: treeSha } });
+      }
+      return treeResponse(treeSha, {
+        truncated: false,
+        tree: [{ path: '.gitmodules', type: 'blob', mode: '100644', sha: blobOid }],
+      });
+    },
+  });
+  assert.equal(
+    (await client.manifest('open-hax/object-format', revision)).sourceManifestBlobOid,
+    blobOid,
+  );
+}
+
+for (const invalidBlobOid of [sha('A'), oid('e', 64)]) {
+  const client = new GitHubClient(null, {
+    fetchImpl: async (url) => {
+      if (url.startsWith('https://raw.githubusercontent.com')) return response(200, manifestText);
+      if (url.includes('/git/commits/')) {
+        return response(200, { sha: sha('a'), tree: { sha: sha('d') } });
+      }
+      return treeResponse(sha('d'), {
+        truncated: false,
+        tree: [{
+          path: '.gitmodules', type: 'blob', mode: '100644', sha: invalidBlobOid,
+        }],
+      });
+    },
+  });
+  await assert.rejects(
+    client.manifest('open-hax/manifest-blob-id', sha('a')),
+    /Git manifest blob.*full lowercase Git object ID/,
+  );
+}
+
 const bomManifestBytes = Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), Buffer.from(manifestText)]);
 const bomClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
@@ -406,7 +892,7 @@ const bomClient = new GitHubClient(null, {
       return response(200, { sha: sha('b'), tree: { sha: sha('e') } });
     }
     if (url.endsWith(`/git/trees/${sha('e')}?recursive=1`)) {
-      return response(200, {
+      return treeResponse(sha('e'), {
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(bomManifestBytes) }],
       });
     }
@@ -426,10 +912,10 @@ const absentClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(404, 'Not Found');
     if (url.includes('/git/commits/')) {
-      return response(200, { sha: sha('a'), tree: { sha: 'empty-tree' } });
+      return response(200, { sha: sha('a'), tree: { sha: sha('0') } });
     }
-    if (url.endsWith('/git/trees/empty-tree?recursive=1')) {
-      return response(200, { truncated: false, tree: [] });
+    if (url.endsWith(`/git/trees/${sha('0')}?recursive=1`)) {
+      return treeResponse(sha('0'), { truncated: false, tree: [] });
     }
     return response(500, { message: `unexpected ${url}` });
   },
@@ -440,10 +926,10 @@ const misleadingRaw404Client = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(404, 'Not Found');
     if (url.includes('/git/commits/')) {
-      return response(200, { sha: sha('a'), tree: { sha: 'manifest-present-tree' } });
+      return response(200, { sha: sha('a'), tree: { sha: sha('1') } });
     }
-    if (url.endsWith('/git/trees/manifest-present-tree?recursive=1')) {
-      return response(200, {
+    if (url.endsWith(`/git/trees/${sha('1')}?recursive=1`)) {
+      return treeResponse(sha('1'), {
         truncated: false,
         tree: [{
           path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(manifestText),
@@ -459,20 +945,23 @@ await assert.rejects(
 );
 
 const exactPathClient = new GitHubClient(null, {
-  fetchImpl: async () => response(200, {
+  fetchImpl: async () => treeResponse(sha('d'), {
     truncated: false, tree: [{ path: 'child', mode: '160000', type: 'commit', sha: sha('c') }],
   }),
 });
-assert.equal((await exactPathClient.lookupTreePath('open-hax/root', 'tree', '/child')).status, 'missing');
+await assert.rejects(
+  exactPathClient.lookupTreePath('open-hax/root', sha('d'), '/child'),
+  /canonical relative Git path/,
+);
 
 for (const incomplete of [undefined, null, 0, 'false']) {
   const incompleteRecursiveTreeClient = new GitHubClient(null, {
-    fetchImpl: async () => response(200, {
+    fetchImpl: async () => treeResponse(sha('d'), {
       ...(incomplete === undefined ? {} : { truncated: incomplete }), tree: [],
     }),
   });
   await assert.rejects(
-    incompleteRecursiveTreeClient.lookupTreePath('open-hax/root', 'tree', '.gitmodules'),
+    incompleteRecursiveTreeClient.lookupTreePath('open-hax/root', sha('d'), '.gitmodules'),
     /through incomplete Git tree/,
   );
 }
@@ -481,14 +970,16 @@ for (const incomplete of [undefined, null, true, 0, 'false']) {
   const completeness = incomplete === undefined ? {} : { truncated: incomplete };
   const incompleteButFoundTreeClient = new GitHubClient(null, {
     fetchImpl: async (url) => {
-      if (url.endsWith('?recursive=1')) return response(200, { ...completeness, tree: [] });
+      if (url.endsWith('?recursive=1')) {
+        return treeResponse(sha('d'), { ...completeness, tree: [] });
+      }
       if (url.endsWith(`/git/trees/${sha('d')}`)) {
-        return response(200, {
+        return treeResponse(sha('d'), {
           ...completeness,
           tree: [{ path: 'nested', mode: '040000', type: 'tree', sha: sha('e') }],
         });
       }
-      return response(200, {
+      return treeResponse(sha('e'), {
         ...completeness,
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: sha('f') }],
       });
@@ -502,12 +993,12 @@ for (const incomplete of [undefined, null, true, 0, 'false']) {
   );
 
   const incompleteButBlockedTreeClient = new GitHubClient(null, {
-    fetchImpl: async (url) => response(200, url.endsWith('?recursive=1')
-      ? { ...completeness, tree: [] }
-      : {
+    fetchImpl: async (url) => (url.endsWith('?recursive=1')
+      ? treeResponse(sha('d'), { ...completeness, tree: [] })
+      : treeResponse(sha('d'), {
         ...completeness,
         tree: [{ path: 'nested', mode: '100644', type: 'blob', sha: sha('e') }],
-      }),
+      })),
   });
   assert.equal(
     (await incompleteButBlockedTreeClient.lookupTreePath(
@@ -519,21 +1010,21 @@ for (const incomplete of [undefined, null, true, 0, 'false']) {
 
 for (const incomplete of [undefined, null, true, 0, 'false']) {
   const incompleteFallbackTreeClient = new GitHubClient(null, {
-    fetchImpl: async (url) => response(200, url.endsWith('?recursive=1')
+    fetchImpl: async (url) => treeResponse(sha('d'), url.endsWith('?recursive=1')
       ? { truncated: true, tree: [] }
       : { ...(incomplete === undefined ? {} : { truncated: incomplete }), tree: [] }),
   });
   await assert.rejects(
-    incompleteFallbackTreeClient.lookupTreePath('open-hax/root', 'tree', '.gitmodules'),
+    incompleteFallbackTreeClient.lookupTreePath('open-hax/root', sha('d'), '.gitmodules'),
     /through incomplete Git tree/,
   );
 }
 
 const truncatedTreeClient = new GitHubClient(null, {
-  fetchImpl: async () => response(200, { truncated: true, tree: [] }),
+  fetchImpl: async () => treeResponse(sha('d'), { truncated: true, tree: [] }),
 });
 await assert.rejects(
-  truncatedTreeClient.lookupTreePath('open-hax/root', 'tree', '.gitmodules'),
+  truncatedTreeClient.lookupTreePath('open-hax/root', sha('d'), '.gitmodules'),
   /incomplete Git tree/,
 );
 
@@ -569,7 +1060,7 @@ const bodyRateRetryClient = new GitHubClient(null, {
   fetchImpl: async () => {
     bodyRateRetryAttempts += 1;
     if (bodyRateRetryAttempts > 1) {
-      return response(200, { sha: sha('a'), tree: { sha: 'after-body-rate-retry' } });
+      return response(200, { sha: sha('a'), tree: { sha: sha('d') } });
     }
     const candidate = response(429, { message: 'slow down' }, { 'retry-after': '60' });
     candidate.arrayBuffer = async () => { throw new Error('simulated rate-limit body failure'); };
@@ -579,7 +1070,7 @@ const bodyRateRetryClient = new GitHubClient(null, {
 });
 assert.deepEqual(await bodyRateRetryClient.commit('open-hax/body-rate-retry', sha('a')), {
   sha: sha('a'),
-  tree: { sha: 'after-body-rate-retry' },
+  tree: { sha: sha('d') },
 });
 assert.equal(bodyRateRetryAttempts, 2);
 assert.deepEqual(bodyRateRetryDelays, [60000]);
@@ -627,11 +1118,11 @@ const symlinkManifestClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(200, 'target');
     if (url.includes('/git/commits/')) {
-      return response(200, { sha: sha('a'), tree: { sha: 'symlink-tree' } });
+      return response(200, { sha: sha('a'), tree: { sha: sha('d') } });
     }
-    if (url.endsWith('/git/trees/symlink-tree?recursive=1')) {
-      return response(200, {
-        tree: [{ path: '.gitmodules', mode: '120000', type: 'blob', sha: 'symlink-blob' }],
+    if (url.endsWith(`/git/trees/${sha('d')}?recursive=1`)) {
+      return treeResponse(sha('d'), {
+        tree: [{ path: '.gitmodules', mode: '120000', type: 'blob', sha: sha('e') }],
       });
     }
     return response(200, {
@@ -648,7 +1139,7 @@ const mismatchedManifestClient = new GitHubClient(null, {
       return response(200, { sha: sha('a'), tree: { sha: sha('f') } });
     }
     if (url.endsWith(`/git/trees/${sha('f')}?recursive=1`)) {
-      return response(200, {
+      return treeResponse(sha('f'), {
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: sha('0') }],
       });
     }
@@ -679,13 +1170,13 @@ const retryingClient = new GitHubClient(null, {
     retryAttempt += 1;
     return retryAttempt === 1
       ? response(500, { message: 'temporary' })
-      : response(200, { sha: sha('a'), tree: { sha: 'after-retry' } });
+      : response(200, { sha: sha('a'), tree: { sha: sha('d') } });
   },
   sleepImpl: async (milliseconds) => retryDelays.push(milliseconds),
 });
 assert.deepEqual(await retryingClient.commit('open-hax/retry', sha('a')), {
   sha: sha('a'),
-  tree: { sha: 'after-retry' },
+  tree: { sha: sha('d') },
 });
 assert.equal(retryingClient.requests, 2);
 assert.deepEqual(retryDelays, [200]);
@@ -714,13 +1205,13 @@ const rateRetryClient = new GitHubClient(null, {
         'retry-after': '60',
         'x-ratelimit-remaining': '4',
       })
-      : response(200, { sha: sha('c'), tree: { sha: 'after-rate-retry' } });
+      : response(200, { sha: sha('c'), tree: { sha: sha('d') } });
   },
   sleepImpl: async (milliseconds) => rateRetryDelays.push(milliseconds),
 });
 assert.deepEqual(await rateRetryClient.commit('open-hax/rate-retry', sha('c')), {
   sha: sha('c'),
-  tree: { sha: 'after-rate-retry' },
+  tree: { sha: sha('d') },
 });
 assert.equal(rateRetryClient.requests, 2);
 assert.deepEqual(rateRetryDelays, [60000]);
@@ -737,13 +1228,13 @@ const untimedRateRetryClient = new GitHubClient(null, {
       ? response(403, { message: 'secondary rate limit' }, {
         'x-ratelimit-remaining': '4',
       })
-      : response(200, { sha: sha('c'), tree: { sha: 'after-untimed-rate-retry' } });
+      : response(200, { sha: sha('c'), tree: { sha: sha('d') } });
   },
   sleepImpl: async (milliseconds) => untimedRateRetryDelays.push(milliseconds),
 });
 assert.deepEqual(await untimedRateRetryClient.commit('open-hax/untimed-rate-retry', sha('c')), {
   sha: sha('c'),
-  tree: { sha: 'after-untimed-rate-retry' },
+  tree: { sha: sha('d') },
 });
 assert.equal(untimedRateRetryClient.requests, 3);
 assert.deepEqual(untimedRateRetryDelays, [60000, 120000]);
@@ -847,14 +1338,118 @@ function traversalClient(manifests) {
         }
         : value;
     },
-    commit: async () => ({ tree: { sha: sha('d') } }),
+    commit: async (fullName, revision) => ({
+      sha: revision,
+      tree: {
+        sha: manifests.get(`${fullName}@${revision}`)?.parentTreeOid ?? sha('d'),
+      },
+    }),
     lookupTreePath: async (_fullName, _tree, repositoryPath) => ({
       status: 'found',
+      resolvedPath: repositoryPath,
+      entryPathScope: 'root-relative',
       entry: {
         type: 'commit', mode: '160000', path: repositoryPath, sha: sha('c'),
       },
     }),
   };
+}
+
+const credentialManifest = [
+  '[submodule "child"]',
+  '  path = child',
+  '  url = https://user:dummy-secret@github.com/open-hax/child.git',
+  '',
+].join('\n');
+const credentialTraversal = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(new Map([
+  [`open-hax/root@${sha('a')}`, credentialManifest],
+  [`open-hax/child@${sha('c')}`, ''],
+])) });
+assert.equal(credentialTraversal.repositories.length, 2);
+assert.equal(credentialTraversal.occurrences.length, 1);
+assert.equal(credentialTraversal.occurrences[0]['occurrence/status'], 'resolved');
+assert.equal(credentialTraversal.occurrences[0]['occurrence/target-full-name'], 'open-hax/child');
+assert.equal(credentialTraversal.occurrences[0]['occurrence/raw-url'].includes('dummy-secret'), false);
+assert.equal(
+  credentialTraversal.occurrences[0]['occurrence/raw-url'],
+  'https://[userinfo-redacted]@github.com/open-hax/child.git',
+);
+assert.equal(
+  credentialTraversal.occurrences[0]['occurrence/raw-url-sha256'],
+  createHash('sha256')
+    .update('https://user:dummy-secret@github.com/open-hax/child.git').digest('hex'),
+);
+assert.equal(
+  credentialTraversal.gaps.some((gap) => gap['gap/type'] === 'submodule/unsupported-url'),
+  false,
+);
+assert.equal(credentialTraversal.stats.frontierRemaining, 0);
+
+const locatorOutcomeManifest = [
+  '[submodule "github"]', '  path = github',
+  '  url = user:dummy-secret@github.com:open-hax/child.git?callback=a@callback-secret',
+  '[submodule "local"]', '  path = local', '  url = file:///tmp/local',
+  '[submodule "unsupported"]', '  path = unsupported',
+  '  url = https://user:outcome-secret@github.com:443/open-hax/child.git?token=query-secret',
+  '[submodule "relative"]', '  path = relative',
+  '  url = "../child.git?access_token=relative-query-secret#relative-fragment-secret"',
+  '',
+].join('\n');
+const locatorOutcomes = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 1, maxDepth: 0, concurrency: 1,
+}, { client: traversalClient(new Map([[
+  `open-hax/root@${sha('a')}`, locatorOutcomeManifest,
+]])) });
+assert.deepEqual(
+  [...new Set(locatorOutcomes.occurrences.map((row) => row['occurrence/locator-kind']))].sort(),
+  ['github', 'local', 'unsupported'],
+);
+for (const occurrence of locatorOutcomes.occurrences) {
+  assert.equal(occurrence['occurrence/locator-normalizer'], LOCATOR_NORMALIZER.name);
+  assert.equal(
+    occurrence['occurrence/locator-normalizer-version'],
+    LOCATOR_NORMALIZER.version,
+  );
+  assert.equal(
+    occurrence['occurrence/locator-configuration-sha256'],
+    LOCATOR_NORMALIZER.configurationSha256,
+  );
+  assert.equal(
+    occurrence['occurrence/locator-epistemic-tier'],
+    LOCATOR_NORMALIZER.epistemicTier,
+  );
+}
+
+const credentialArtifactDir = await mkdtemp(path.join(tmpdir(), 'foresight-census-credential-'));
+try {
+  const acceptedDir = path.join(credentialArtifactDir, 'accepted');
+  const rejectedDir = path.join(credentialArtifactDir, 'rejected');
+  await Promise.all([
+    writeResults(acceptedDir, credentialTraversal),
+    writeResults(rejectedDir, locatorOutcomes),
+  ]);
+  const artifactNames = [
+    'repositories.edn', 'occurrences.edn', 'gaps.edn',
+    'index.md', 'summary.json', 'frontier.json',
+  ];
+  const artifactText = (await Promise.all([acceptedDir, rejectedDir].flatMap(
+    (directory) => artifactNames.map((name) => readFile(path.join(directory, name), 'utf8')),
+  ))).join('\n');
+  assert.equal(artifactText.includes('dummy-secret'), false);
+  assert.equal(artifactText.includes('user:dummy-secret'), false);
+  assert.equal(artifactText.includes('outcome-secret'), false);
+  assert.equal(artifactText.includes('query-secret'), false);
+  assert.equal(artifactText.includes('callback-secret'), false);
+  assert.equal(artifactText.includes('relative-query-secret'), false);
+  assert.equal(artifactText.includes('relative-fragment-secret'), false);
+  assert.equal(artifactText.includes('[userinfo-redacted]@github.com'), true);
+  assert.equal(artifactText.includes('[query-or-fragment-redacted]'), true);
+  assert.equal(artifactText.includes(LOCATOR_NORMALIZER.configurationSha256), true);
+  assert.equal(artifactText.includes(LOCATOR_NORMALIZER.name), true);
+} finally {
+  await rm(credentialArtifactDir, { recursive: true, force: true });
 }
 
 const bomTraversal = await census({
@@ -880,6 +1475,45 @@ await assert.rejects(
   }]])) }),
   /Manifest observation is invalid/,
 );
+for (const mismatchedManifestIdentity of [{
+  text: manifestText,
+  sha256: createHash('sha256').update(manifestText).digest('hex'),
+  sourceManifestBlobOid: oid('e', 64),
+  parentTreeOid: sha('d'),
+}, {
+  text: manifestText,
+  sha256: createHash('sha256').update(manifestText).digest('hex'),
+  sourceManifestBlobOid: sha('e'),
+  parentTreeOid: oid('d', 64),
+}]) {
+  await assert.rejects(
+    census({
+      roots: [`open-hax/root@${sha('b')}`], maxNodes: 10, maxDepth: 0, concurrency: 1,
+    }, { client: traversalClient(new Map([[
+      `open-hax/root@${sha('b')}`, mismatchedManifestIdentity,
+    ]])) }),
+    /Manifest observation is invalid/,
+  );
+}
+
+for (const mismatchedObservedCommitValue of [
+  { sha: sha('b'), tree: { sha: sha('d') } },
+  { sha: sha('a'), tree: { sha: sha('e') } },
+  { sha: sha('A'), tree: { sha: sha('d') } },
+  { sha: oid('a', 64), tree: { sha: sha('d') } },
+]) {
+  const mismatchedObservedCommitClient = traversalClient(new Map([[
+    `open-hax/root@${sha('a')}`, manifestText,
+  ]]));
+  mismatchedObservedCommitClient.commit = async () => mismatchedObservedCommitValue;
+  const mismatchedObservedCommit = await census({
+    roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+  }, { client: mismatchedObservedCommitClient });
+  assert.equal(mismatchedObservedCommit.occurrences.length, 0);
+  assert.equal(mismatchedObservedCommit.gaps[0]['gap/type'], 'commit/unavailable');
+  assert.equal(mismatchedObservedCommit.gaps[0]['gap/frontier?'], true);
+  assert.match(mismatchedObservedCommit.gaps[0]['gap/detail'], /Commit tree observation is invalid/);
+}
 
 const malformedDeclaration = await census({
   roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
@@ -921,8 +1555,74 @@ const malformedGitlinkManifest = new Map([[
   `open-hax/root@${sha('a')}`,
   '[submodule "child"]\n  path = child\n  url = ../child.git\n',
 ]]);
+for (const coherentNonGitlinkEntry of [
+  { path: 'child', type: 'blob', mode: '100644', sha: sha('c') },
+  { path: 'child', type: 'tree', mode: '040000', sha: sha('c') },
+]) {
+  const client = traversalClient(malformedGitlinkManifest);
+  client.lookupTreePath = async (_fullName, _tree, repositoryPath) => ({
+    status: 'found', entry: coherentNonGitlinkEntry, resolvedPath: repositoryPath,
+    entryPathScope: 'root-relative',
+  });
+  const result = await census({
+    roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+  }, { client });
+  assert.equal(result.repositories.length, 1);
+  assert.equal(result.occurrences[0]['occurrence/status'], 'path-not-gitlink');
+  assert.equal(result.occurrences[0]['occurrence/target-revision'], null);
+  assert.equal(result.gaps[0]['gap/type'], 'submodule/path-not-gitlink');
+  assert.equal(result.gaps[0]['gap/frontier?'], undefined);
+  assert.equal(result.stats.frontierRemaining, 0);
+}
+
+const nestedFallbackManifest = new Map([
+  [`open-hax/root@${sha('a')}`, [
+    '[submodule "child"]',
+    '  path = nested/child',
+    '  url = ../child.git',
+    '',
+  ].join('\n')],
+  [`open-hax/child@${sha('c')}`, ''],
+]);
+const nestedFallbackTraversalClient = traversalClient(nestedFallbackManifest);
+nestedFallbackTraversalClient.lookupTreePath = async (
+  _fullName, _tree, repositoryPath,
+) => ({
+  status: 'found',
+  resolvedPath: repositoryPath,
+  entryPathScope: 'containing-tree-relative',
+  entry: { path: 'child', type: 'commit', mode: '160000', sha: sha('c') },
+});
+const nestedFallbackTraversal = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: nestedFallbackTraversalClient });
+assert.equal(nestedFallbackTraversal.occurrences[0]['occurrence/status'], 'resolved');
+assert.equal(nestedFallbackTraversal.occurrences[0]['occurrence/path'], 'nested/child');
+assert.equal(nestedFallbackTraversal.stats.frontierRemaining, 0);
+
+for (const resolvedPath of [undefined, 'different/child']) {
+  const client = traversalClient(malformedGitlinkManifest);
+  client.lookupTreePath = async () => ({
+    status: 'found',
+    resolvedPath,
+    entryPathScope: 'root-relative',
+    entry: { path: 'child', type: 'commit', mode: '160000', sha: sha('c') },
+  });
+  const result = await census({
+    roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+  }, { client });
+  assert.equal(result.occurrences[0]['occurrence/status'], 'invalid-gitlink');
+  assert.equal(result.gaps[0]['gap/frontier?'], true);
+  assert.equal(result.stats.frontierRemaining, 1);
+}
+
 for (const malformedGitlinkEntry of [
   undefined,
+  { path: 'different', type: 'commit', mode: '160000', sha: sha('c') },
+  { path: 'child', type: 'tag', mode: '160000', sha: sha('c') },
+  { path: 'child', type: 'blob', mode: '040000', sha: sha('c') },
+  { path: 'child', type: 'blob', mode: '100644', sha: oid('c', 64) },
+  { path: 'child', type: 'tree', mode: '100644', sha: sha('c') },
   { type: 'commit', mode: undefined, path: 'child', sha: sha('c') },
   { type: 'commit', mode: null, path: 'child', sha: sha('c') },
   { type: 'commit', mode: '100644', path: 'child', sha: sha('c') },
@@ -933,10 +1633,12 @@ for (const malformedGitlinkEntry of [
   { type: 'commit', mode: '160000', path: 'child', sha: undefined },
   { type: 'commit', mode: '160000', path: 'child', sha: 'main' },
   { type: 'commit', mode: '160000', path: 'child', sha: sha('A') },
+  { type: 'commit', mode: '160000', path: 'child', sha: oid('a', 64) },
 ]) {
   const client = traversalClient(malformedGitlinkManifest);
-  client.lookupTreePath = async () => ({
-    status: 'found', entry: malformedGitlinkEntry,
+  client.lookupTreePath = async (_fullName, _tree, repositoryPath) => ({
+    status: 'found', entry: malformedGitlinkEntry, resolvedPath: repositoryPath,
+    entryPathScope: 'root-relative',
   });
   const result = await census({
     roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
@@ -1138,6 +1840,8 @@ const reverseDiscoveredManifests = new Map([
 const reverseDiscoveryClient = traversalClient(reverseDiscoveredManifests);
 reverseDiscoveryClient.lookupTreePath = async (_fullName, _tree, repositoryPath) => ({
   status: 'found',
+  resolvedPath: repositoryPath,
+  entryPathScope: 'root-relative',
   entry: {
     type: 'commit', mode: '160000', path: repositoryPath,
     sha: repositoryPath === 'later' ? sha('b') : sha('a'),

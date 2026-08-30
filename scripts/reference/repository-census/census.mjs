@@ -2,8 +2,12 @@
 
 import { parseRoot } from './args.mjs';
 import { stableId } from './edn.mjs';
-import { GitHubClient, isRateLimitError } from './github.mjs';
-import { normalizeGitHubUrl, parseGitmodules } from './gitmodules.mjs';
+import {
+  GitHubClient, isCoherentGitTreeEntry, isRateLimitError,
+} from './github.mjs';
+import {
+  LOCATOR_NORMALIZER, normalizeGitHubUrl, parseGitmodules,
+} from './gitmodules.mjs';
 
 const compareText = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 
@@ -101,7 +105,9 @@ export async function census(options, dependencies = {}) {
     if (typeof manifest?.text !== 'string'
         || !/^[0-9a-f]{64}$/.test(manifest?.sha256)
         || !fullObjectId.test(manifest?.sourceManifestBlobOid)
-        || !fullObjectId.test(manifest?.parentTreeOid)) {
+        || !fullObjectId.test(manifest?.parentTreeOid)
+        || manifest.sourceManifestBlobOid.length !== manifest.parentTreeOid.length
+        || manifest.parentTreeOid.length !== item.revision.length) {
       throw new Error(`Manifest observation is invalid for ${item.fullName}@${item.revision}`);
     }
     const manifestText = manifest.text;
@@ -111,6 +117,14 @@ export async function census(options, dependencies = {}) {
     let commit;
     try {
       commit = await client.commit(item.fullName, item.revision);
+      if (!fullObjectId.test(commit?.sha)
+          || commit.sha.length !== item.revision.length
+          || commit.sha !== item.revision
+          || !fullObjectId.test(commit?.tree?.sha)
+          || commit.tree.sha.length !== item.revision.length
+          || commit.tree.sha !== manifest.parentTreeOid) {
+        throw new Error(`Commit tree observation is invalid for ${item.fullName}@${item.revision}`);
+      }
     } catch (error) {
       if (isRateLimitError(error)) throw error;
       inspected.delete(visitKey);
@@ -141,14 +155,22 @@ export async function census(options, dependencies = {}) {
     });
 
     for (const { module, normalized, lookup } of resolved) {
+      const evidenceRawUrl = module.url === undefined ? null : normalized.raw;
+      const rawUrlSha256 = module.url === undefined ? null : normalized.rawSha256;
       const targetFullName = normalized.kind === 'github'
         ? normalized.fullName.toLowerCase()
         : normalized.fullName ?? null;
       const targetId = normalized.kind === 'github' ? `github:${targetFullName}` : null;
-      const hasGitlinkEntry = lookup?.status === 'found'
-        && lookup.entry?.type === 'commit' && lookup.entry?.mode === '160000';
-      const gitlink = hasGitlinkEntry && typeof lookup.entry.sha === 'string'
-        && fullObjectId.test(lookup.entry.sha) ? lookup.entry.sha : null;
+      const entryPathMatches = lookup?.entryPathScope === 'root-relative'
+        ? lookup.entry?.path === module.path
+        : lookup?.entryPathScope === 'containing-tree-relative'
+          && lookup.entry?.path === module.path?.split('/').at(-1);
+      const coherentEntry = lookup?.status === 'found'
+        && lookup.resolvedPath === module.path
+        && entryPathMatches
+        && isCoherentGitTreeEntry(lookup.entry, manifest.parentTreeOid);
+      const hasGitlinkEntry = coherentEntry && lookup.entry.type === 'commit';
+      const gitlink = hasGitlinkEntry ? lookup.entry.sha : null;
 
       let status;
       if (module.parseStatus !== 'valid') status = 'invalid-declaration';
@@ -156,10 +178,8 @@ export async function census(options, dependencies = {}) {
       else if (normalized.kind !== 'github') status = 'unsupported-url';
       else if (lookup?.status === 'error') status = 'lookup-error';
       else if (lookup?.status !== 'found') status = 'path-unresolved';
-      else if (!lookup.entry || !['blob', 'tree', 'commit'].includes(lookup.entry.type)) {
-        status = 'invalid-gitlink';
-      }
-      else if (lookup.entry?.type !== 'commit') status = 'path-not-gitlink';
+      else if (!coherentEntry) status = 'invalid-gitlink';
+      else if (lookup.entry.type !== 'commit') status = 'path-not-gitlink';
       else if (!gitlink) status = 'invalid-gitlink';
       else status = 'resolved';
 
@@ -175,11 +195,17 @@ export async function census(options, dependencies = {}) {
         'occurrence/source-manifest-blob-oid': manifest.sourceManifestBlobOid,
         'occurrence/source-manifest-sha256': manifest.sha256,
         'occurrence/depth': item.depth + 1, 'occurrence/name': module.name,
-        'occurrence/path': module.path ?? null, 'occurrence/raw-url': module.url ?? null,
+        'occurrence/path': module.path ?? null, 'occurrence/raw-url': evidenceRawUrl,
+        'occurrence/raw-url-sha256': rawUrlSha256,
         'occurrence/declared-branch': module.branch ?? null,
         'occurrence/declaration-line': module.line, 'occurrence/target': targetId,
         'occurrence/target-full-name': targetFullName,
         'occurrence/target-revision': gitlink,
+        'occurrence/locator-kind': normalized.kind,
+        'occurrence/locator-normalizer': LOCATOR_NORMALIZER.name,
+        'occurrence/locator-normalizer-version': LOCATOR_NORMALIZER.version,
+        'occurrence/locator-configuration-sha256': LOCATOR_NORMALIZER.configurationSha256,
+        'occurrence/locator-epistemic-tier': LOCATOR_NORMALIZER.epistemicTier,
       };
       occurrences.push(occurrence);
 
@@ -187,7 +213,8 @@ export async function census(options, dependencies = {}) {
         addGap({
           'gap/type': `submodule/${status}`, 'gap/occurrence': occurrence['occurrence/id'],
           'gap/parent': repoId, 'gap/parent-revision': item.revision,
-          'gap/path': module.path ?? null, 'gap/raw-url': module.url ?? null,
+          'gap/path': module.path ?? null, 'gap/raw-url': evidenceRawUrl,
+          'gap/raw-url-sha256': rawUrlSha256,
           'gap/detail': lookup?.error?.message ?? lookup?.status ?? module.parseStatus,
         }, {
           frontier: status === 'lookup-error' || status === 'invalid-declaration'

@@ -9,6 +9,89 @@ const USER_AGENT = 'foresight-repository-census/0.1';
 const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
 const MAX_RETRY_SLEEP_MS = 120000;
 const REQUEST_TIMEOUT_MS = 30000;
+const OBJECT_ID_PATTERN = /^(?:[0-9a-f]{40}|[0-9a-f]{64})$/;
+const TREE_ENTRY_MODES = new Map([
+  ['blob', new Set(['100644', '100755', '120000'])],
+  ['tree', new Set(['040000'])],
+  ['commit', new Set(['160000'])],
+]);
+
+function requireObjectId(value, description, width = null) {
+  if (!OBJECT_ID_PATTERN.test(value)
+      || (width !== null && value.length !== width)) {
+    throw new Error(`${description} must be a full lowercase Git object ID${
+      width === null ? '' : ` with ${width} hexadecimal characters`
+    }`);
+  }
+  return value;
+}
+
+function pathSegments(value) {
+  if (typeof value !== 'string' || value.length === 0 || value.includes('\0')) return null;
+  const segments = value.split('/');
+  return segments.every((segment) => segment.length > 0 && segment !== '.' && segment !== '..')
+    ? segments : null;
+}
+
+function indexTreeEntries(tree, description, { recursive }) {
+  const entries = new Map();
+  for (const entry of tree.tree) {
+    const segments = pathSegments(entry?.path);
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)
+        || !segments || (!recursive && segments.length !== 1)) {
+      throw new Error(`${description} contains a malformed Git tree entry path`);
+    }
+    if (entries.has(entry.path)) {
+      throw new Error(`${description} contains duplicate Git tree path ${entry.path}`);
+    }
+    entries.set(entry.path, entry);
+  }
+  return entries;
+}
+
+export function isCoherentGitTreeEntry(entry, treeSha, expectedPath = null) {
+  const modes = entry && typeof entry === 'object' && !Array.isArray(entry)
+    ? TREE_ENTRY_MODES.get(entry.type) : null;
+  return OBJECT_ID_PATTERN.test(treeSha)
+    && pathSegments(entry?.path) !== null
+    && (expectedPath === null || entry.path === expectedPath)
+    && Boolean(modes?.has(entry.mode))
+    && OBJECT_ID_PATTERN.test(entry.sha)
+    && entry.sha.length === treeSha.length;
+}
+
+function requireCoherentTreeEntry(entry, treeSha, description) {
+  if (!isCoherentGitTreeEntry(entry, treeSha)) {
+    throw new Error(`${description} contains an incoherent Git tree entry at ${entry.path}`);
+  }
+  return entry;
+}
+
+function requireCompleteRecursiveHierarchy(entries, treeSha, description) {
+  for (const entry of entries.values()) {
+    requireCoherentTreeEntry(entry, treeSha, description);
+  }
+  for (const entry of entries.values()) {
+    const segments = pathSegments(entry.path);
+    for (let index = 1; index < segments.length; index += 1) {
+      const ancestorPath = segments.slice(0, index).join('/');
+      const ancestor = entries.get(ancestorPath);
+      if (!ancestor || ancestor.type !== 'tree') {
+        throw new Error(`${description} contains an incoherent recursive hierarchy at ${entry.path}`);
+      }
+    }
+  }
+}
+
+function requireTreeEnvelope(tree, treeSha, description) {
+  if (tree?.sha !== treeSha) {
+    throw new Error(`${description} returned Git tree ${String(tree?.sha)} for requested tree ${treeSha}`);
+  }
+  if (!Array.isArray(tree?.tree)) {
+    throw new Error(`${description} returned a malformed Git tree entry collection`);
+  }
+  return tree;
+}
 
 function responseIsRateLimited(url, response, bodyText = '') {
   if (!response || (!url.startsWith(API) && !url.startsWith(RAW))) return false;
@@ -158,6 +241,7 @@ export class GitHubClient {
   }
 
   async commit(fullName, revision) {
+    requireObjectId(revision, `Requested revision ${fullName}@${String(revision)}`);
     const key = `${fullName}@${revision}`.toLowerCase();
     if (!this.commitCache.has(key)) {
       const request = this.request(`${API}/repos/${fullName}/git/commits/${revision}`)
@@ -165,6 +249,11 @@ export class GitHubClient {
           if (commit?.sha !== revision) {
             throw new Error(`Git returned commit ${String(commit?.sha)} for requested revision ${fullName}@${revision}`);
           }
+          requireObjectId(
+            commit?.tree?.sha,
+            `Git commit tree for ${fullName}@${revision}`,
+            revision.length,
+          );
           return commit;
         });
       this.commitCache.set(key, request);
@@ -173,25 +262,37 @@ export class GitHubClient {
   }
 
   async tree(fullName, treeSha) {
+    requireObjectId(treeSha, `Requested tree for ${fullName}`);
     const key = `${fullName}:${treeSha}`.toLowerCase();
     if (!this.treeCache.has(key)) {
-      this.treeCache.set(key, this.request(`${API}/repos/${fullName}/git/trees/${treeSha}`));
+      const request = this.request(`${API}/repos/${fullName}/git/trees/${treeSha}`)
+        .then((tree) => requireTreeEnvelope(
+          tree,
+          treeSha,
+          `Git tree response for ${fullName}`,
+        ));
+      this.treeCache.set(key, request);
     }
     return this.treeCache.get(key);
   }
 
   async recursiveTree(fullName, treeSha) {
+    requireObjectId(treeSha, `Requested recursive tree for ${fullName}`);
     const key = `${fullName}:${treeSha}`.toLowerCase();
     if (!this.recursiveTreeCache.has(key)) {
-      this.recursiveTreeCache.set(
-        key,
-        this.request(`${API}/repos/${fullName}/git/trees/${treeSha}?recursive=1`),
-      );
+      const request = this.request(`${API}/repos/${fullName}/git/trees/${treeSha}?recursive=1`)
+        .then((tree) => requireTreeEnvelope(
+          tree,
+          treeSha,
+          `Recursive Git tree response for ${fullName}`,
+        ));
+      this.recursiveTreeCache.set(key, request);
     }
     return this.recursiveTreeCache.get(key);
   }
 
   async manifest(fullName, revision) {
+    requireObjectId(revision, `Requested manifest revision ${fullName}@${String(revision)}`);
     const key = `${fullName}@${revision}`.toLowerCase();
     if (!this.manifestCache.has(key)) {
       const request = (async () => {
@@ -219,12 +320,12 @@ export class GitHubClient {
         if (lookup.entry.type !== 'blob' || !['100644', '100755'].includes(lookup.entry.mode)) {
           throw new Error(`.gitmodules is not a regular blob in ${fullName}@${revision}`);
         }
-        const parentTreeOid = commit.tree.sha.toLowerCase();
-        const sourceManifestBlobOid = lookup.entry.sha.toLowerCase();
-        if (!/^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(parentTreeOid)
-            || !/^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(sourceManifestBlobOid)) {
-          throw new Error(`Git returned an invalid source object ID for ${fullName}@${revision}`);
-        }
+        const parentTreeOid = commit.tree.sha;
+        const sourceManifestBlobOid = requireObjectId(
+          lookup.entry.sha,
+          `Git manifest blob for ${fullName}@${revision}`,
+          parentTreeOid.length,
+        );
         const algorithm = lookup.entry.sha.length === 64 ? 'sha256' : 'sha1';
         const objectHeader = Buffer.from(`blob ${manifestBytes.length}\0`);
         const observedBlob = createHash(algorithm)
@@ -245,15 +346,40 @@ export class GitHubClient {
   }
 
   async lookupTreePath(fullName, rootTreeSha, repositoryPath) {
+    if (!pathSegments(repositoryPath)) {
+      throw new Error(`Requested repository path must be a canonical relative Git path`);
+    }
     const recursive = await this.recursiveTree(fullName, rootTreeSha);
-    const exact = recursive.tree.find((candidate) => candidate.path === repositoryPath);
-    if (exact) return { status: 'found', entry: exact };
+    const recursiveEntries = indexTreeEntries(
+      recursive,
+      `Recursive Git tree response for ${fullName}@${rootTreeSha}`,
+      { recursive: true },
+    );
+    const exact = recursiveEntries.get(repositoryPath);
+    if (exact) {
+      return {
+        status: 'found', entry: exact, resolvedPath: repositoryPath,
+        entryPathScope: 'root-relative',
+      };
+    }
 
     const segments = repositoryPath.split('/');
     if (recursive.truncated === false) {
+      requireCompleteRecursiveHierarchy(
+        recursiveEntries,
+        rootTreeSha,
+        `Recursive Git tree response for ${fullName}@${rootTreeSha}`,
+      );
       for (let index = 0; index < segments.length - 1; index += 1) {
         const prefix = segments.slice(0, index + 1).join('/');
-        const entry = recursive.tree.find((candidate) => candidate.path === prefix);
+        const entry = recursiveEntries.get(prefix);
+        if (entry) {
+          requireCoherentTreeEntry(
+            entry,
+            rootTreeSha,
+            `Recursive Git tree response for ${fullName}@${rootTreeSha}`,
+          );
+        }
         if (entry && entry.type !== 'tree') {
           return { status: 'blocked', segment: segments[index], index, entry };
         }
@@ -263,13 +389,39 @@ export class GitHubClient {
     let currentTree = rootTreeSha;
     for (let i = 0; i < segments.length; i += 1) {
       const tree = await this.tree(fullName, currentTree);
-      const entry = tree.tree.find((candidate) => candidate.path === segments[i]);
+      const entries = indexTreeEntries(
+        tree,
+        `Git tree response for ${fullName}@${currentTree}`,
+        { recursive: false },
+      );
+      const entry = entries.get(segments[i]);
       if (!entry && tree.truncated !== false) {
         throw new Error(`Cannot resolve ${repositoryPath} through incomplete Git tree ${currentTree}`);
       }
-      if (!entry) return { status: 'missing', segment: segments[i], index: i };
-      if (i === segments.length - 1) return { status: 'found', entry };
-      if (entry.type !== 'tree') return { status: 'blocked', segment: segments[i], index: i, entry };
+      if (!entry) {
+        for (const candidate of entries.values()) {
+          requireCoherentTreeEntry(
+            candidate,
+            currentTree,
+            `Git tree response for ${fullName}@${currentTree}`,
+          );
+        }
+        return { status: 'missing', segment: segments[i], index: i };
+      }
+      if (i === segments.length - 1) {
+        return {
+          status: 'found', entry, resolvedPath: repositoryPath,
+          entryPathScope: 'containing-tree-relative',
+        };
+      }
+      requireCoherentTreeEntry(
+        entry,
+        currentTree,
+        `Git tree response for ${fullName}@${currentTree}`,
+      );
+      if (entry.type !== 'tree') {
+        return { status: 'blocked', segment: segments[i], index: i, entry };
+      }
       currentTree = entry.sha;
     }
     return { status: 'missing' };

@@ -56,7 +56,8 @@ Becomes one census-run observation containing:
 - run and request IDs;
 - pinned roots;
 - producer and adapter version;
-- configuration and schema versions;
+- configuration and schema versions, including the emitted locator-normalizer
+  descriptor and its canonical configuration hash;
 - packet digest;
 - counts and frontier state;
 - start/completion timestamps;
@@ -83,14 +84,15 @@ It decomposes into:
    - parent tree OID;
    - declaration line;
    - exact declared path;
-   - exact raw URL;
+   - a userinfo/query/fragment-redacted declared URL for diagnostics;
+   - the SHA-256 of the exact decoded URL;
    - optional declared branch.
 2. **Observed Gitlink** when the declared path resolves to a Gitlink
    - parent commit and tree OIDs;
    - exact path;
    - target commit OID.
 3. **Derived locator normalization**
-   - raw URL;
+   - userinfo/query/fragment-redacted declared URL and exact decoded-URL SHA-256;
    - normalized provider and owner/repository locator;
    - normalizer name, version, and configuration hash;
    - derived epistemic tier.
@@ -100,6 +102,43 @@ It decomposes into:
 
 The declared branch is context only. The pinned Gitlink commit is the observed
 revision followed by recursive traversal.
+
+An exact-path result is authoritative only when its path is exact, its
+type/mode pair is a coherent Git tree entry, and its lowercase object ID is the
+same object-format width as the parent tree. Foresight classifies a coherent
+blob or tree as `path-not-gitlink`; malformed provider evidence instead remains
+an `invalid-gitlink` frontier. Likewise, a negative path result is authoritative
+only from an explicitly complete (`truncated: false`) tree response whose
+entries are coherent and unique. Recursive paths must have nonempty canonical
+components and every nested entry must have a coherent tree ancestor;
+non-recursive tree responses may contain only one-component entry names.
+Malformed or structurally impossible tree evidence cannot prove absence.
+The commit observation is subject to the same provider boundary: its canonical
+top-level OID must equal the requested revision, and its canonical tree OID
+must equal the manifest's parent-tree OID before any occurrence is attributed
+to that revision.
+
+Foresight emits one immutable descriptor for that third layer on every
+occurrence and in `summary.json`. Its name is
+`foresight/github-submodule-locator`, its version is `1`, and its epistemic tier
+is `derived-locator`. The configuration SHA-256 is calculated over the UTF-8
+JSON encoding of the ordered policy strings exported as
+`LOCATOR_NORMALIZER.configuration`; that configuration fixes the accepted
+host, transports, no-port rule, parent-relative base, suffix/query policy, and
+userinfo policy. An importer commits these exact descriptor fields with the
+derived locator, rejects a same-record replay carrying a different descriptor,
+and never upgrades the result to observed repository-family identity.
+
+Userinfo is transport context, never locator identity or census
+authentication. HTTP, HTTPS, Git, SSH, and SCP spellings may carry it, but the
+normalizer requires an exact `github.com` authority with no port, strips
+userinfo before deriving the canonical locator, and redacts it from emitted
+diagnostic URLs. Query and fragment text is likewise excluded from locator
+identity and replaced wholesale in diagnostics rather than guessing which
+parameter names carry credentials. The exact decoded URL SHA-256 plus the
+source `.gitmodules` blob OID and raw-byte SHA-256 retain evidence binding
+without copying a token, username, password, query, or fragment into
+`occurrences.edn`, `gaps.edn`, or projections.
 
 ### `repositories.edn`
 
@@ -114,7 +153,8 @@ rebuild it.
 ### `gaps.edn`
 
 Each row becomes an append-only gap observation. Resolution gaps retain
-`gap/occurrence` and their raw evidence. Pre-occurrence gaps such as
+`gap/occurrence`, a userinfo/query/fragment-redacted diagnostic URL, its exact decoded-value
+SHA-256, and their source evidence. Pre-occurrence gaps such as
 `manifest/unavailable`, `commit/unavailable`, or a queued `recursion/max-nodes`
 have no source occurrence; they instead retain their repository, revision,
 depth, gap type, limit, and HTTP/detail evidence whenever those fields apply.
@@ -266,7 +306,7 @@ Useful observation indexes include:
 - parent reference plus parent commit OID;
 - target reference plus target commit OID;
 - exact declared path;
-- raw URL and normalized locator;
+- exact decoded-URL SHA-256, redacted diagnostic URL, and normalized locator;
 - source `.gitmodules` blob OID;
 - occurrence status and gap type.
 
@@ -306,13 +346,14 @@ calling registered durable write operations.
    complete child set, while pending evidence remains invisible.
 9. Every adapter strategy's conformance tests pre-seed an in-flight import with
    a deterministic child observation ID, then replay the packet with a different
-   canonical payload, schema identity, or versioned collection/type. Each
-   mismatch must report a conflict without overwriting the child or publishing
-   the run, and it must remain invisible to readers and projections. A
-   byte-identical record replay must be an insert-if-absent no-op and still
-   converge to one complete child set. The suite runs these cases against both a
-   spanning-transaction implementation and a durable `pending` implementation
-   when both strategies exist.
+   canonical payload, schema identity, versioned collection/type, or locator
+   normalizer name/version/configuration hash/tier. Each mismatch must report a
+   conflict without overwriting the child or publishing the run, and it must
+   remain invisible to readers and projections. A byte-identical record replay
+   with the exact same locator descriptor must be an insert-if-absent no-op and
+   still converge to one complete child set. The suite runs these cases against
+   both a spanning-transaction implementation and a durable `pending`
+   implementation when both strategies exist.
 
 ## Non-decisions
 

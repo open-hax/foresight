@@ -358,3 +358,12 @@
   spore: none
   receipt-refs: 2026-08-30T09:19:23Z
   note: A checked-in artifact citation must follow the executable commit it proves. Run the repaired bytes first, verify the resulting archive and payload identity, then publish a provenance-only successor that leaves those executable bytes unchanged.
+- ts: 2026-08-30T10:22:19Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Close provider identity and credential evidence seams
+  p-efficiency: 0.84
+  p-friction: 0.63
+  p-skill-candidate: 0.39
+  spore: none
+  receipt-refs: 2026-08-30T10:22:19Z
+  note: Immutable API endpoints do not make response bodies trustworthy. Commit, tree, path-scope, mode, object-width, and recursive-hierarchy claims each need independent validation; locator provenance must also describe one uniform identity policy while diagnostics redact every credential-bearing suffix and userinfo form.

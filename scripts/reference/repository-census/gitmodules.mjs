@@ -1,7 +1,87 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import { createHash } from 'node:crypto';
 import { posix as path } from 'node:path';
 import { isGitHubFullName } from './args.mjs';
+
+const LOCATOR_NORMALIZER_CONFIGURATION = Object.freeze([
+  'host=github.com',
+  'ports=none',
+  'protocols=git,http,https,scp,ssh',
+  'relative-base=parent-full-name',
+  'userinfo=ignored-for-identity-and-redacted-in-evidence',
+  'query-and-fragment=ignored-for-identity-and-redacted-in-evidence',
+  'repository-dot-git-suffix=case-insensitive',
+]);
+
+export const LOCATOR_NORMALIZER = Object.freeze({
+  name: 'foresight/github-submodule-locator',
+  version: 1,
+  configuration: LOCATOR_NORMALIZER_CONFIGURATION,
+  configurationSha256: createHash('sha256')
+    .update(JSON.stringify(LOCATOR_NORMALIZER_CONFIGURATION)).digest('hex'),
+  epistemicTier: 'derived-locator',
+});
+
+function redactUrlForEvidence(raw) {
+  const suffix = raw.search(/[?#]/);
+  const identityPart = suffix < 0 ? raw : raw.slice(0, suffix);
+  let redacted = identityPart;
+  const protocol = identityPart.match(/^([A-Za-z][A-Za-z0-9+.-]*:\/\/)([^/]*)([\s\S]*)$/);
+  if (protocol) {
+    const at = protocol[2].lastIndexOf('@');
+    if (at >= 0) {
+      redacted = `${protocol[1]}[userinfo-redacted]@${
+        protocol[2].slice(at + 1)
+      }${protocol[3]}`;
+    }
+  } else {
+    // Query/fragment text has already been removed, so the last @ cannot lure
+    // this scan past an SCP authority. Redact conservatively: SCP userinfo may
+    // itself contain colons, and malformed multi-@ authorities must not expose
+    // any prefix in unsupported-locator evidence.
+    const at = identityPart.lastIndexOf('@');
+    if (at >= 0) {
+      redacted = `[userinfo-redacted]@${identityPart.slice(at + 1)}`;
+    }
+  }
+  return suffix < 0
+    ? redacted
+    : `${redacted}[query-or-fragment-redacted]`;
+}
+
+function evidenceUrl(raw) {
+  return {
+    raw: redactUrlForEvidence(raw),
+    rawSha256: createHash('sha256').update(raw).digest('hex'),
+  };
+}
+
+function parsedGitHubProtocolUrl(raw) {
+  if (/[\u0000-\u0020\u007f]/.test(raw)) return null;
+  const match = raw.match(/^(https?|git|ssh):\/\/([^/]+)\/(.+)$/i);
+  if (!match) return null;
+  const authority = match[2];
+  const atCount = [...authority].filter((character) => character === '@').length;
+  if (atCount > 1) return null;
+  if (atCount === 1) {
+    const userinfo = authority.slice(0, authority.indexOf('@'));
+    if (!userinfo || !/^[A-Za-z0-9._~!$&'()*+,;=:%-]+$/.test(userinfo)
+        || /%(?![0-9A-Fa-f]{2})/.test(userinfo)) return null;
+  }
+  const hostAuthority = authority.slice(authority.lastIndexOf('@') + 1);
+  if (hostAuthority.toLowerCase() !== 'github.com') return null;
+  let parsed;
+  try {
+    parsed = new URL(raw);
+  } catch {
+    return null;
+  }
+  if (parsed.hostname.toLowerCase() !== 'github.com' || parsed.port !== '') return null;
+  const segments = parsed.pathname.replace(/^\/+/, '').replace(/\/$/, '').split('/');
+  if (segments.length !== 2) return null;
+  return { owner: segments[0], repository: segments[1] };
+}
 
 function decodeConfigValue(raw, continuationBoundaries = []) {
   const characters = [];
@@ -246,40 +326,43 @@ export function parseGitmodules(text) {
 }
 
 export function normalizeGitHubUrl(rawUrl, parentFullName = null) {
-  const raw = rawUrl;
-  if (/^(file:|\/)/.test(raw)) return { kind: 'local', raw };
+  const exactRaw = rawUrl;
+  const provenance = evidenceUrl(exactRaw);
+  const identityRaw = exactRaw.replace(/[?#][\s\S]*$/, '');
+  if (/^(file:|\/)/.test(identityRaw)) return { kind: 'local', ...provenance };
 
-  if (/^(?:\.\/|\.\.\/)/.test(raw)) {
-    if (!isGitHubFullName(parentFullName)) return { kind: 'unsupported', raw };
-    const resolved = path.normalize(`/${parentFullName}/${raw}`)
+  if (/^(?:\.\/|\.\.\/)/.test(identityRaw)) {
+    if (!isGitHubFullName(parentFullName)) return { kind: 'unsupported', ...provenance };
+    const resolved = path.normalize(`/${parentFullName}/${identityRaw}`)
       .replace(/^\/+/, '').replace(/\/$/, '').replace(/\.git$/i, '');
-    if (!isGitHubFullName(resolved)) return { kind: 'unsupported', raw };
+    if (!isGitHubFullName(resolved)) return { kind: 'unsupported', ...provenance };
     return {
       kind: 'github',
-      raw,
+      ...provenance,
       fullName: resolved,
       canonicalUrl: `https://github.com/${resolved}`,
     };
   }
 
-  let candidate = raw;
-  const scp = candidate.match(/^(?:[^@/]+@)?github\.com:([^/]+)\/(.+)$/i);
-  if (scp) candidate = `https://github.com/${scp[1]}/${scp[2]}`;
+  let locator = null;
+  if (!/[\u0000-\u0020\u007f]/.test(identityRaw)) {
+    const scp = identityRaw.match(
+      /^(?:[A-Za-z0-9._~!$&'()*+,;=:%-]+@)?github\.com:([^/]+)\/(.+)$/i,
+    );
+    if (scp) locator = { owner: scp[1], repository: scp[2] };
+  }
+  locator ||= parsedGitHubProtocolUrl(identityRaw);
+  if (!locator) return { kind: 'unsupported', ...provenance };
 
-  const ssh = candidate.match(/^ssh:\/\/(?:[^@/]+@)?github\.com\/([^/]+)\/(.+)$/i);
-  if (ssh) candidate = `https://github.com/${ssh[1]}/${ssh[2]}`;
-
-  const protocol = candidate.match(/^(?:https?|git):\/\/github\.com\/([^/]+)\/(.+)$/i);
-  if (!protocol) return { kind: 'unsupported', raw };
-
-  const owner = protocol[1];
-  const repo = protocol[2].replace(/[?#].*$/, '').replace(/\/$/, '').replace(/\.git$/i, '');
+  const owner = locator.owner;
+  const repo = locator.repository
+    .replace(/[?#].*$/, '').replace(/\/$/, '').replace(/\.git$/i, '');
   const fullName = `${owner}/${repo}`;
-  if (!isGitHubFullName(fullName)) return { kind: 'unsupported', raw };
+  if (!isGitHubFullName(fullName)) return { kind: 'unsupported', ...provenance };
 
   return {
     kind: 'github',
-    raw,
+    ...provenance,
     fullName,
     canonicalUrl: `https://github.com/${owner}/${repo}`,
   };
