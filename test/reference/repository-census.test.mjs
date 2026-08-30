@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { parseRoot } from '../../scripts/reference/repository-census/args.mjs';
 import { census } from '../../scripts/reference/repository-census/census.mjs';
@@ -11,6 +12,8 @@ import { normalizeGitHubUrl, parseGitmodules } from '../../scripts/reference/rep
 import { canonicalSummary } from '../../scripts/reference/repository-census/output.mjs';
 
 const sha = (character) => character.repeat(40);
+const gitBlobSha = (text) => createHash('sha1')
+  .update(`blob ${Buffer.byteLength(text)}\0`).update(text).digest('hex');
 
 const modules = parseGitmodules(`
 [submodule "a"]
@@ -71,6 +74,7 @@ function response(status, body) {
     ok: status >= 200 && status < 300,
     status,
     headers: { get: () => null },
+    arrayBuffer: async () => Buffer.from(text),
     json: async () => JSON.parse(text),
     text: async () => text,
   };
@@ -81,28 +85,24 @@ const fetchCalls = [];
 const apiClient = new GitHubClient('token', {
   fetchImpl: async (url) => {
     fetchCalls.push(url);
+    if (url.startsWith('https://raw.githubusercontent.com')) return response(200, manifestText);
     if (url.endsWith(`/git/commits/${sha('a')}`)) return response(200, { tree: { sha: 'root-tree' } });
-    if (url.endsWith('/git/trees/root-tree')) {
+    if (url.endsWith('/git/trees/root-tree?recursive=1')) {
       return response(200, {
-        tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: 'manifest-blob' }],
-      });
-    }
-    if (url.endsWith('/git/blobs/manifest-blob')) {
-      return response(200, {
-        encoding: 'base64', size: Buffer.byteLength(manifestText),
-        content: Buffer.from(manifestText).toString('base64'),
+        tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(manifestText) }],
       });
     }
     return response(500, { message: `unexpected ${url}` });
   },
 });
 assert.equal(await apiClient.manifest('open-hax/root', sha('a')), manifestText);
-assert.equal(fetchCalls.some((url) => url.startsWith('https://raw.githubusercontent.com')), false);
+assert.equal(fetchCalls.some((url) => url.startsWith('https://raw.githubusercontent.com')), true);
+assert.equal(fetchCalls.filter((url) => url.startsWith('https://api.github.com')).length, 2);
 
 const absentClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
+    if (url.startsWith('https://raw.githubusercontent.com')) return response(404, 'Not Found');
     if (url.includes('/git/commits/')) return response(200, { tree: { sha: 'empty-tree' } });
-    if (url.endsWith('/git/trees/empty-tree')) return response(200, { tree: [] });
     return response(500, { message: `unexpected ${url}` });
   },
 });
@@ -125,8 +125,9 @@ await assert.rejects(
 
 const symlinkManifestClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
+    if (url.startsWith('https://raw.githubusercontent.com')) return response(200, 'target');
     if (url.includes('/git/commits/')) return response(200, { tree: { sha: 'symlink-tree' } });
-    if (url.endsWith('/git/trees/symlink-tree')) {
+    if (url.endsWith('/git/trees/symlink-tree?recursive=1')) {
       return response(200, {
         tree: [{ path: '.gitmodules', mode: '120000', type: 'blob', sha: 'symlink-blob' }],
       });
@@ -138,10 +139,33 @@ const symlinkManifestClient = new GitHubClient(null, {
 });
 await assert.rejects(symlinkManifestClient.manifest('open-hax/root', sha('a')), /regular blob/);
 
+const mismatchedManifestClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.startsWith('https://raw.githubusercontent.com')) return response(200, manifestText);
+    if (url.includes('/git/commits/')) return response(200, { tree: { sha: 'manifest-tree' } });
+    if (url.endsWith('/git/trees/manifest-tree?recursive=1')) {
+      return response(200, {
+        tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: sha('0') }],
+      });
+    }
+    return response(500, { message: `unexpected ${url}` });
+  },
+});
+await assert.rejects(
+  mismatchedManifestClient.manifest('open-hax/root', sha('a')),
+  /do not match Git blob identity/,
+);
+
 const unavailableClient = new GitHubClient(null, {
   fetchImpl: async () => response(404, { message: 'Not Found' }),
 });
 await assert.rejects(unavailableClient.manifest('open-hax/private', sha('a')), /HTTP 404/);
+const unavailableTraversal = await census({
+  roots: [`open-hax/private@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: unavailableClient });
+assert.equal(unavailableTraversal.stats.frontierRemaining, 1);
+assert.equal(unavailableTraversal.stats.repositoryRevisions, 0);
+assert.equal(unavailableTraversal.gaps[0]['gap/type'], 'manifest/unavailable');
 
 function traversalClient(manifests) {
   return {

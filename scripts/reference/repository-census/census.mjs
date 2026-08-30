@@ -28,10 +28,11 @@ export async function census(options, dependencies = {}) {
   const queue = roots.map((root) => ({ ...root, depth: 0, root: true }));
   const scheduled = new Set(queue.map((item) => `${item.fullName.toLowerCase()}@${item.revision}`));
   const visited = new Set();
+  const inspected = new Set();
   const repositories = new Map();
   const occurrences = [];
   const gaps = [];
-  let refusedFrontier = 0;
+  let unprocessedFrontier = 0;
 
   const addGap = (gap) => gaps.push({
     'gap/id': stableId('gap', gap['gap/type'], JSON.stringify(gap)),
@@ -65,6 +66,7 @@ export async function census(options, dependencies = {}) {
       manifestText = await client.manifest(item.fullName, item.revision);
     } catch (error) {
       repo['repository/manifest-statuses'].add('unavailable');
+      unprocessedFrontier += 1;
       addGap({
         'gap/type': 'manifest/unavailable', 'gap/repository': repoId,
         'gap/revision': item.revision, 'gap/depth': item.depth,
@@ -72,6 +74,7 @@ export async function census(options, dependencies = {}) {
       });
       continue;
     }
+    inspected.add(visitKey);
 
     if (manifestText === null) {
       repo['repository/manifest-statuses'].add('absent');
@@ -85,6 +88,8 @@ export async function census(options, dependencies = {}) {
     try {
       commit = await client.commit(item.fullName, item.revision);
     } catch (error) {
+      inspected.delete(visitKey);
+      unprocessedFrontier += 1;
       addGap({
         'gap/type': 'commit/unavailable', 'gap/repository': repoId,
         'gap/revision': item.revision, 'gap/depth': item.depth,
@@ -141,6 +146,7 @@ export async function census(options, dependencies = {}) {
       occurrences.push(occurrence);
 
       if (status !== 'resolved') {
+        if (status === 'lookup-error') unprocessedFrontier += 1;
         addGap({
           'gap/type': `submodule/${status}`, 'gap/occurrence': occurrence['occurrence/id'],
           'gap/parent': repoId, 'gap/parent-revision': item.revision,
@@ -154,7 +160,7 @@ export async function census(options, dependencies = {}) {
       if (scheduled.has(childKey)) continue;
 
       if (item.depth + 1 > options.maxDepth) {
-        refusedFrontier += 1;
+        unprocessedFrontier += 1;
         addGap({
           'gap/type': 'recursion/max-depth', 'gap/occurrence': occurrence['occurrence/id'],
           'gap/target': targetId, 'gap/target-revision': gitlink, 'gap/limit': options.maxDepth,
@@ -163,7 +169,7 @@ export async function census(options, dependencies = {}) {
       }
 
       if (visited.size + queue.length >= options.maxNodes) {
-        refusedFrontier += 1;
+        unprocessedFrontier += 1;
         addGap({
           'gap/type': 'recursion/max-nodes', 'gap/occurrence': occurrence['occurrence/id'],
           'gap/target': targetId, 'gap/target-revision': gitlink, 'gap/limit': options.maxNodes,
@@ -197,12 +203,12 @@ export async function census(options, dependencies = {}) {
   return {
     roots, repositories: repoRows, occurrences, gaps,
     stats: {
-      repositories: repoRows.length, repositoryRevisions: visited.size,
+      repositories: repoRows.length, repositoryRevisions: inspected.size,
       occurrences: occurrences.length,
       resolvedOccurrences: occurrences.filter((row) => row['occurrence/status'] === 'resolved').length,
       gaps: gaps.length, githubRequests: client.requests,
       rateRemaining: client.rate.remaining, rateReset: client.rate.reset,
-      frontierRemaining: queue.length + refusedFrontier,
+      frontierRemaining: queue.length + unprocessedFrontier,
       maxNodes: options.maxNodes, maxDepth: options.maxDepth,
     },
   };
