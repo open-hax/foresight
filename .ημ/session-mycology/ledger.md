@@ -16,3 +16,12 @@
   spore: none
   receipt-refs: 2026-08-13T16:00:00.000Z
   note: Declarative inventory must remain separate from executable authority; filesystem identity and current ownership metadata are revalidated at process boundaries.
+- ts: 2026-08-30T01:17:36Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Separate durable census frontier from transient transport failure
+  p-efficiency: 0.90
+  p-friction: 0.46
+  p-skill-candidate: 0.39
+  spore: none
+  receipt-refs: 2026-08-30T01:17:36Z
+  note: A count of inaccessible repositories is not a safe baseline; bounded retry must first remove transport noise, after which the complete root-and-gap identity projection can be checked exactly and tracked as explicit blocked work.
