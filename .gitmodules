@@ -41,3 +41,6 @@
 [submodule "website"]
 	path = website
 	url = git@github.com:open-hax/website.git
+[submodule "River-City"]
+	path = River-City
+	url = git@github.com:octave-commons/River-City.git

@@ -6,3 +6,5 @@
 eta/.clj-kondo/.cache/
 
 alpha/.cpcache/
+
+scripts/.clj-kondo/.cache/

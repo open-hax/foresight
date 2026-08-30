@@ -34,6 +34,7 @@ candidates, and accepted lifts are not interchangeable.
 | --- | --- | --- | --- |
 | `Truth` | octave-commons/Truth | simulation-research | ECS simulation substrate, pure domain systems/phases, single-writer components |
 | `bitch-tracker` | octave-commons/bitch-tracker | betterdiscord-plugin | BetterDiscord client plugin behavior |
+| `River-City` | octave-commons/River-City | observability-and-inference | EDN-first source-backed observations, normalization, pressure modeling, latent inference, reports and charts |
 | `calliope` | octave-commons/calliope | corpus | Append-only ingestion truth, Receipt River accountability, corpus documents |
 | `epiphany` | octave-commons/epiphany | knowledge-archaeology | Observed→derived→provisional→accepted promotion, git-history-derived knowledge |
 | `eta-mu` | open-hax/eta-mu | agent-runtime-and-workflow | Kanban board (work source of truth), Rheos FSM board transitions, agent runtime |

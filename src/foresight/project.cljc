@@ -357,8 +357,18 @@
     :source/url "git@github.com:octave-commons/bitch-tracker.git"
     :source/ownership :independent-repository
     :source/role :betterdiscord-plugin
+   :source/actionable? true
+   :source/invariants [:bitch-tracker/commonjs-meta-factory]}
+   {:source/id :river-city
+    :source/name "River-City"
+    :source/path "River-City"
+    :source/type :git-submodule
+    :source/repository "octave-commons/River-City"
+    :source/url "git@github.com:octave-commons/River-City.git"
+    :source/ownership :independent-repository
+    :source/role :observability-and-inference
     :source/actionable? true
-    :source/invariants [:bitch-tracker/commonjs-meta-factory]}
+    :source/invariants []}
    {:source/id :calliope
     :source/name "calliope"
     :source/path "calliope"
