@@ -67,19 +67,27 @@ function requireCoherentTreeEntry(entry, treeSha, description) {
   return entry;
 }
 
+function requireRecursiveAncestors(
+  entries, treeSha, description, entryPath, { allowMissing = false } = {},
+) {
+  const segments = pathSegments(entryPath);
+  for (let index = 1; index < segments.length; index += 1) {
+    const ancestorPath = segments.slice(0, index).join('/');
+    const ancestor = entries.get(ancestorPath);
+    if (!ancestor && allowMissing) continue;
+    if (!ancestor || ancestor.type !== 'tree') {
+      throw new Error(`${description} contains an incoherent recursive hierarchy at ${entryPath}`);
+    }
+    requireCoherentTreeEntry(ancestor, treeSha, description);
+  }
+}
+
 function requireCompleteRecursiveHierarchy(entries, treeSha, description) {
   for (const entry of entries.values()) {
     requireCoherentTreeEntry(entry, treeSha, description);
   }
   for (const entry of entries.values()) {
-    const segments = pathSegments(entry.path);
-    for (let index = 1; index < segments.length; index += 1) {
-      const ancestorPath = segments.slice(0, index).join('/');
-      const ancestor = entries.get(ancestorPath);
-      if (!ancestor || ancestor.type !== 'tree') {
-        throw new Error(`${description} contains an incoherent recursive hierarchy at ${entry.path}`);
-      }
-    }
+    requireRecursiveAncestors(entries, treeSha, description, entry.path);
   }
 }
 
@@ -357,6 +365,13 @@ export class GitHubClient {
     );
     const exact = recursiveEntries.get(repositoryPath);
     if (exact) {
+      requireRecursiveAncestors(
+        recursiveEntries,
+        rootTreeSha,
+        `Recursive Git tree response for ${fullName}@${rootTreeSha}`,
+        repositoryPath,
+        { allowMissing: recursive.truncated !== false },
+      );
       return {
         status: 'found', entry: exact, resolvedPath: repositoryPath,
         entryPathScope: 'root-relative',

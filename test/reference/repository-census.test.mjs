@@ -725,6 +725,62 @@ for (const malformedRecursiveEntries of [
   );
 }
 
+for (const [truncated, impossibleAncestor] of [
+  [false, null],
+  [false, { path: 'nested', type: 'blob', mode: '100644', sha: sha('e') }],
+  [true, { path: 'nested', type: 'blob', mode: '100644', sha: sha('e') }],
+  [true, { path: 'nested', type: 'tree', mode: '100644', sha: sha('e') }],
+  [true, { path: 'nested', type: 'tree', mode: '040000', sha: undefined }],
+]) {
+  const entries = [
+    ...(impossibleAncestor ? [impossibleAncestor] : []),
+    { path: 'nested/child', type: 'commit', mode: '160000', sha: sha('f') },
+  ];
+  const client = new GitHubClient(null, {
+    fetchImpl: async () => treeResponse(sha('d'), {
+      truncated,
+      tree: entries,
+    }),
+  });
+  await assert.rejects(
+    client.lookupTreePath('open-hax/root', sha('d'), 'nested/child'),
+    /incoherent recursive hierarchy|incoherent Git tree entry/,
+  );
+}
+
+const truncatedNestedExactClient = new GitHubClient(null, {
+  fetchImpl: async () => treeResponse(sha('d'), {
+    truncated: true,
+    tree: [
+      { path: 'nested/child', type: 'commit', mode: '160000', sha: sha('f') },
+    ],
+  }),
+});
+assert.equal(
+  (await truncatedNestedExactClient.lookupTreePath(
+    'open-hax/root', sha('d'), 'nested/child',
+  )).status,
+  'found',
+);
+
+for (const truncated of [false, true]) {
+  const coherentNestedExactClient = new GitHubClient(null, {
+    fetchImpl: async () => treeResponse(sha('d'), {
+      truncated,
+      tree: [
+        { path: 'nested', type: 'tree', mode: '040000', sha: sha('e') },
+        { path: 'nested/child', type: 'commit', mode: '160000', sha: sha('f') },
+      ],
+    }),
+  });
+  assert.equal(
+    (await coherentNestedExactClient.lookupTreePath(
+      'open-hax/root', sha('d'), 'nested/child',
+    )).status,
+    'found',
+  );
+}
+
 const coherentNestedNegativeClient = new GitHubClient(null, {
   fetchImpl: async () => treeResponse(sha('d'), {
     truncated: false,
