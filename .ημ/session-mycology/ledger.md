@@ -223,3 +223,12 @@
   spore: none
   receipt-refs: 2026-08-30T04:01:02Z
   note: Evidence parsers must preserve zero-width quote and continuation boundaries, reject state-dependent NUL input, and avoid turning bare carriage returns into records; differential testing against the authority plus bounded-traversal permutations catches false children that ordinary fixtures miss.
+- ts: 2026-08-30T04:18:57Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Honor retry authority and separate packet subjects from observations
+  p-efficiency: 0.91
+  p-friction: 0.47
+  p-skill-candidate: 0.31
+  spore: none
+  receipt-refs: 2026-08-30T04:18:57Z
+  note: An operational wait cap must never become permission to retry before a server boundary; fail typed with the full delay instead. Future durable observations also need run-bound identity distinct from stable packet subject keys, while pre-occurrence gaps must remain importable without fabricated occurrences.

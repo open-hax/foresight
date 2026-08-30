@@ -400,7 +400,7 @@ assert.equal(rateRetryClient.requests, 2);
 assert.deepEqual(rateRetryDelays, [60000]);
 assert.equal(rateRetryClient.retryDelay(response(403, {}, {
   'retry-after': '3600',
-}), 1), 120000);
+}), 1), 3600000);
 
 const untimedRateRetryDelays = [];
 let untimedRateRetryAttempt = 0;
@@ -431,7 +431,7 @@ assert.equal(primaryResetClient.retryDelay(response(403, {}, {
 assert.equal(primaryResetClient.retryDelay(response(403, {}, {
   'x-ratelimit-remaining': '0',
   'x-ratelimit-reset': '1788058291',
-}), 1), 120000);
+}), 1), 3603000);
 
 const persistentResetDelays = [];
 const persistentResetClient = new GitHubClient(null, {
@@ -444,10 +444,28 @@ const persistentResetClient = new GitHubClient(null, {
 });
 await assert.rejects(
   persistentResetClient.commit('open-hax/reset-bound', sha('c')),
-  (error) => error.code === 'github/rate-limit-exhausted',
+  (error) => error.code === 'github/rate-limit-exhausted'
+    && error.retryDelayMs === 3603000
+    && /refusing to retry early/.test(error.message),
 );
-assert.equal(persistentResetClient.requests, 3);
-assert.deepEqual(persistentResetDelays, [120000, 120000]);
+assert.equal(persistentResetClient.requests, 1);
+assert.deepEqual(persistentResetDelays, []);
+
+const overlongRetryAfterDelays = [];
+const overlongRetryAfterClient = new GitHubClient(null, {
+  fetchImpl: async () => response(429, { message: 'slow down' }, {
+    'retry-after': '3600',
+  }),
+  sleepImpl: async (milliseconds) => overlongRetryAfterDelays.push(milliseconds),
+});
+await assert.rejects(
+  overlongRetryAfterClient.commit('open-hax/retry-after-bound', sha('c')),
+  (error) => error.code === 'github/rate-limit-exhausted'
+    && error.retryDelayMs === 3600000
+    && /refusing to retry early/.test(error.message),
+);
+assert.equal(overlongRetryAfterClient.requests, 1);
+assert.deepEqual(overlongRetryAfterDelays, []);
 
 const ordinaryForbiddenClient = new GitHubClient(null, {
   fetchImpl: async () => response(403, { message: 'Forbidden' }, {
@@ -627,6 +645,7 @@ assert.deepEqual(orderedBoundedRoots.roots, [
 ]);
 assert.equal(orderedBoundedRoots.repositories[0]['repository/full-name'], 'open-hax/alpha');
 assert.equal(orderedBoundedRoots.gaps[0]['gap/repository'], 'github:open-hax/beta');
+assert.equal(orderedBoundedRoots.gaps[0]['gap/depth'], 0);
 
 const caseVariantChildManifests = new Map([
   [`open-hax/alpha@${sha('a')}`, [

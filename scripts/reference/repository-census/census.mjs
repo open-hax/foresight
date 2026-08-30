@@ -208,7 +208,7 @@ export async function census(options, dependencies = {}) {
   for (const item of queue) {
     addGap({
       'gap/type': 'recursion/max-nodes', 'gap/repository': `github:${item.fullName.toLowerCase()}`,
-      'gap/revision': item.revision, 'gap/limit': options.maxNodes,
+      'gap/revision': item.revision, 'gap/depth': item.depth, 'gap/limit': options.maxNodes,
     }, { frontier: true });
   }
 

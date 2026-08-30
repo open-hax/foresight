@@ -106,8 +106,13 @@ rebuild it.
 
 ### `gaps.edn`
 
-Each row becomes an append-only gap observation with its source occurrence and
-raw evidence. A gap is not a nullable field on a repository document.
+Each row becomes an append-only gap observation. Resolution gaps retain
+`gap/occurrence` and their raw evidence. Pre-occurrence gaps such as
+`manifest/unavailable`, `commit/unavailable`, or a queued `recursion/max-nodes`
+have no source occurrence; they instead retain their repository, revision,
+depth, gap type, limit, and HTTP/detail evidence whenever those fields apply.
+The importer must accept that typed shape without dropping it or inventing an
+occurrence. A gap is not a nullable field on a repository document.
 
 Examples include:
 
@@ -148,6 +153,12 @@ Every record should carry Epiphany's versioned observation envelope:
  :observation/schema-version ...
  :observation/request-id ...}
 ```
+
+The Epiphany importer assigns a distinct `:observation/id` to every stored
+record in a census run. Packet `occurrence/id` and `gap/id` values remain stable
+evidence-subject keys and may participate in request/idempotency checks; neither
+is reused as `:observation/id`. A repeated run may therefore observe the same
+packet occurrence again without collapsing two run-bound observations into one.
 
 Repository-bound records additionally carry `:resource-id`. Pre-registration
 external-reference observations require a distinct typed subject/reference;

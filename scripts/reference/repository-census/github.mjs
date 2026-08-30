@@ -7,7 +7,7 @@ const API = 'https://api.github.com';
 const RAW = 'https://raw.githubusercontent.com';
 const USER_AGENT = 'foresight-repository-census/0.1';
 const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
-const MAX_RETRY_DELAY_MS = 120000;
+const MAX_RETRY_SLEEP_MS = 120000;
 
 export function isRateLimitError(error) {
   return error?.code === 'github/rate-limit-exhausted';
@@ -59,13 +59,13 @@ export class GitHubClient {
   retryDelay(response, attempt, { rateLimited = false } = {}) {
     const retryAfter = response?.headers.get('retry-after');
     if (retryAfter !== null && /^\d+(?:[.]\d+)?$/.test(retryAfter)) {
-      return Math.min(Number(retryAfter) * 1000, MAX_RETRY_DELAY_MS);
+      return Number(retryAfter) * 1000;
     }
     const remaining = response?.headers.get('x-ratelimit-remaining');
     const reset = response?.headers.get('x-ratelimit-reset');
     if (remaining === '0' && reset !== null && /^\d+$/.test(reset)) {
       const wait = Math.max(0, (Number(reset) * 1000) - this.nowImpl() + 1000);
-      return Math.min(wait, MAX_RETRY_DELAY_MS);
+      return wait;
     }
     if (rateLimited) return 60000 * (2 ** (attempt - 1));
     return 200 * (2 ** (attempt - 1));
@@ -108,7 +108,13 @@ export class GitHubClient {
       lastError = error;
       const retryable = RETRYABLE_STATUSES.has(response.status) || isRateLimitError(error);
       if (!retryable || attempt === this.maxAttempts) throw error;
-      await this.sleepImpl(this.retryDelay(response, attempt, { rateLimited }));
+      const retryDelay = this.retryDelay(response, attempt, { rateLimited });
+      if (retryDelay > MAX_RETRY_SLEEP_MS) {
+        error.retryDelayMs = retryDelay;
+        error.message = `GitHub retry boundary ${retryDelay} ms exceeds the ${MAX_RETRY_SLEEP_MS} ms operational wait cap; refusing to retry early: ${error.message}`;
+        throw error;
+      }
+      await this.sleepImpl(retryDelay);
     }
     throw lastError;
   }
