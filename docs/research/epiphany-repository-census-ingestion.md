@@ -9,7 +9,8 @@ accepted laws or MongoDB collections by itself.
 ## Decision boundary
 
 The Foresight repository-census crawler is an **evidence acquisition provider**.
-Its generated EDN files are a lossless, revision-pinned evidence packet and
+Its generated EDN files are a revision-pinned evidence packet that preserves
+the observed declaration fields and their source Git object identities, plus
 human-readable projections. They are not the durable semantic authority for
 repository identity, continuity, or lineage.
 
@@ -71,7 +72,8 @@ It decomposes into:
 1. **Observed submodule declaration**
    - parent repository reference;
    - parent commit OID;
-   - exact `.gitmodules` path and blob OID;
+   - exact `.gitmodules` path, source blob OID, and raw-byte SHA-256;
+   - parent tree OID;
    - declaration line;
    - exact declared path;
    - exact raw URL;
@@ -209,8 +211,9 @@ calling registered durable write operations.
 2. Epiphany ports and operation registry expose the durable write/read boundary.
 3. The in-memory adapter establishes reference semantics and replay tests.
 4. The MongoDB adapter implements the same contract and indexes.
-5. Foresight emits the additional source evidence required by the accepted
-   contract, especially `.gitmodules` blob identity and packet provenance.
+5. Foresight maintains the emitted source evidence required by the accepted
+   contract, including `.gitmodules` blob identity, parent tree identity, and
+   packet provenance.
 6. A Katamorph mapping or shared event envelope connects the provider packet to
    Epiphany without making either runtime own the other's infrastructure.
 7. Repository projections are rebuilt and compared against the current census

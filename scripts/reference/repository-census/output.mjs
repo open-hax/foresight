@@ -32,7 +32,9 @@ function normalizeFrontier(value) {
     throw new Error('Frontier baseline must contain exactly roots and frontier arrays');
   }
   return {
-    roots: value.roots.map((root) => canonicalRecord(root)),
+    roots: value.roots
+      .map((root) => canonicalRecord(root))
+      .sort((left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right))),
     frontier: value.frontier
       .map((gap) => canonicalRecord(gap, VOLATILE_FRONTIER_FIELDS))
       .sort((left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right))),

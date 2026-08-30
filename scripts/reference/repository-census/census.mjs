@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { createHash } from 'node:crypto';
 import { parseRoot } from './args.mjs';
 import { stableId } from './edn.mjs';
 import { GitHubClient, isRateLimitError } from './github.mjs';
@@ -61,9 +60,9 @@ export async function census(options, dependencies = {}) {
     repo['repository/min-depth'] = Math.min(repo['repository/min-depth'], item.depth);
     repositories.set(repoId, repo);
 
-    let manifestText;
+    let manifest;
     try {
-      manifestText = await client.manifest(item.fullName, item.revision);
+      manifest = await client.manifest(item.fullName, item.revision);
     } catch (error) {
       if (isRateLimitError(error)) throw error;
       repo['repository/manifest-statuses'].add('unavailable');
@@ -76,13 +75,20 @@ export async function census(options, dependencies = {}) {
     }
     inspected.add(visitKey);
 
-    if (manifestText === null) {
+    if (manifest === null) {
       repo['repository/manifest-statuses'].add('absent');
       continue;
     }
+    const fullObjectId = /^(?:[0-9a-f]{40}|[0-9a-f]{64})$/;
+    if (typeof manifest?.text !== 'string'
+        || !/^[0-9a-f]{64}$/.test(manifest?.sha256)
+        || !fullObjectId.test(manifest?.sourceManifestBlobOid)
+        || !fullObjectId.test(manifest?.parentTreeOid)) {
+      throw new Error(`Manifest observation is invalid for ${item.fullName}@${item.revision}`);
+    }
+    const manifestText = manifest.text;
     repo['repository/manifest-statuses'].add('present');
-    repo['repository/manifest-sha256-at-revisions'][item.revision]
-      = createHash('sha256').update(manifestText).digest('hex');
+    repo['repository/manifest-sha256-at-revisions'][item.revision] = manifest.sha256;
 
     let commit;
     try {
@@ -137,6 +143,10 @@ export async function census(options, dependencies = {}) {
         ),
         'occurrence/kind': 'git-submodule', 'occurrence/status': status,
         'occurrence/parent': repoId, 'occurrence/parent-revision': item.revision,
+        'occurrence/parent-tree-oid': manifest.parentTreeOid,
+        'occurrence/source-manifest-path': '.gitmodules',
+        'occurrence/source-manifest-blob-oid': manifest.sourceManifestBlobOid,
+        'occurrence/source-manifest-sha256': manifest.sha256,
         'occurrence/depth': item.depth + 1, 'occurrence/name': module.name,
         'occurrence/path': module.path ?? null, 'occurrence/raw-url': module.url ?? null,
         'occurrence/declared-branch': module.branch ?? null,

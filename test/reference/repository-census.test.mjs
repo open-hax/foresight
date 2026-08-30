@@ -83,6 +83,11 @@ assert.deepEqual(parseGitmodules([
 assert.deepEqual(parseGitmodules('[submodule "terminal"]\n  url = ../child.git\n  path = child\\'), [{
   name: 'terminal', line: 1, path: 'child', url: '../child.git', parseStatus: 'valid',
 }]);
+assert.deepEqual(parseGitmodules(
+  '[submodule "inline"] path = docs\n  url = ../docs.git\n',
+), [{
+  name: 'inline', line: 1, path: 'docs', url: '../docs.git', parseStatus: 'valid',
+}]);
 assert.equal(parseGitmodules('[core\npath = child\n')[0].parseStatus, 'invalid-syntax');
 assert.equal(parseGitmodules([
   '[submodule "child"]', '  path = child', '  url = ../child.git', '  this is not config', '',
@@ -94,7 +99,12 @@ assert.deepEqual(parseRoot(`open-hax/foresight@${sha('a')}`), {
   fullName: 'open-hax/foresight', revision: sha('a'),
 });
 assert.equal(parseArgs(['--frontier-baseline', 'known.json']).frontierBaseline, 'known.json');
-assert.throws(() => parseArgs(['--frontier-baseline']), /requires a path/);
+for (const flag of [
+  '--root', '--out', '--max-nodes', '--max-depth', '--concurrency', '--frontier-baseline',
+]) {
+  assert.throws(() => parseArgs([flag]), new RegExp(`${flag} requires`));
+  assert.throws(() => parseArgs([flag, '--help']), new RegExp(`${flag} requires`));
+}
 assert.throws(() => parseRoot('open-hax/foresight@fcb30c0'), /full lowercase Git commit ID/);
 assert.throws(() => parseRoot(`open-hax/foresight@${sha('A')}`), /full lowercase Git commit ID/);
 assert.throws(() => parseRoot(`../foresight@${sha('a')}`), /Invalid GitHub repository name/);
@@ -110,14 +120,17 @@ assert.equal(edn({
 }), `{:repository/submodule-count-at-revisions {"${sha('0')}" 1 "${sha('a')}" 2 "${'b'.repeat(64)}" 3}}`);
 
 function response(status, body, responseHeaders = {}) {
-  const text = typeof body === 'string' ? body : JSON.stringify(body);
+  const bytes = Buffer.isBuffer(body)
+    ? body
+    : Buffer.from(typeof body === 'string' ? body : JSON.stringify(body));
+  const text = bytes.toString('utf8');
   const normalizedHeaders = new Map(Object.entries(responseHeaders)
     .map(([name, value]) => [name.toLowerCase(), String(value)]));
   return {
     ok: status >= 200 && status < 300,
     status,
     headers: { get: (name) => normalizedHeaders.get(name.toLowerCase()) ?? null },
-    arrayBuffer: async () => Buffer.from(text),
+    arrayBuffer: async () => bytes,
     json: async () => JSON.parse(text),
     text: async () => text,
   };
@@ -129,8 +142,8 @@ const apiClient = new GitHubClient('token', {
   fetchImpl: async (url) => {
     fetchCalls.push(url);
     if (url.startsWith('https://raw.githubusercontent.com')) return response(200, manifestText);
-    if (url.endsWith(`/git/commits/${sha('a')}`)) return response(200, { tree: { sha: 'root-tree' } });
-    if (url.endsWith('/git/trees/root-tree?recursive=1')) {
+    if (url.endsWith(`/git/commits/${sha('a')}`)) return response(200, { tree: { sha: sha('d') } });
+    if (url.endsWith(`/git/trees/${sha('d')}?recursive=1`)) {
       return response(200, {
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(manifestText) }],
       });
@@ -138,9 +151,36 @@ const apiClient = new GitHubClient('token', {
     return response(500, { message: `unexpected ${url}` });
   },
 });
-assert.equal(await apiClient.manifest('open-hax/root', sha('a')), manifestText);
+assert.deepEqual(await apiClient.manifest('open-hax/root', sha('a')), {
+  text: manifestText,
+  sha256: createHash('sha256').update(manifestText).digest('hex'),
+  sourceManifestBlobOid: gitBlobSha(manifestText),
+  parentTreeOid: sha('d'),
+});
 assert.equal(fetchCalls.some((url) => url.startsWith('https://raw.githubusercontent.com')), true);
 assert.equal(fetchCalls.filter((url) => url.startsWith('https://api.github.com')).length, 2);
+
+const bomManifestBytes = Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), Buffer.from(manifestText)]);
+const bomClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.startsWith('https://raw.githubusercontent.com')) return response(200, bomManifestBytes);
+    if (url.endsWith(`/git/commits/${sha('b')}`)) return response(200, { tree: { sha: sha('e') } });
+    if (url.endsWith(`/git/trees/${sha('e')}?recursive=1`)) {
+      return response(200, {
+        tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(bomManifestBytes) }],
+      });
+    }
+    return response(500, { message: `unexpected ${url}` });
+  },
+});
+const bomManifest = await bomClient.manifest('open-hax/root', sha('b'));
+assert.deepEqual(bomManifest, {
+  text: manifestText,
+  sha256: createHash('sha256').update(bomManifestBytes).digest('hex'),
+  sourceManifestBlobOid: gitBlobSha(bomManifestBytes),
+  parentTreeOid: sha('e'),
+});
+assert.equal(parseGitmodules(`\uFEFF${manifestText}`)[0].parseStatus, 'valid');
 
 const absentClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
@@ -210,8 +250,8 @@ await assert.rejects(symlinkManifestClient.manifest('open-hax/root', sha('a')), 
 const mismatchedManifestClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(200, manifestText);
-    if (url.includes('/git/commits/')) return response(200, { tree: { sha: 'manifest-tree' } });
-    if (url.endsWith('/git/trees/manifest-tree?recursive=1')) {
+    if (url.includes('/git/commits/')) return response(200, { tree: { sha: sha('f') } });
+    if (url.endsWith(`/git/trees/${sha('f')}?recursive=1`)) {
       return response(200, {
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: sha('0') }],
       });
@@ -286,6 +326,9 @@ assert.deepEqual(await rateRetryClient.commit('open-hax/rate-retry', sha('c')), 
 });
 assert.equal(rateRetryClient.requests, 2);
 assert.deepEqual(rateRetryDelays, [60000]);
+assert.equal(rateRetryClient.retryDelay(response(403, {}, {
+  'retry-after': '3600',
+}), 1), 120000);
 
 const untimedRateRetryDelays = [];
 let untimedRateRetryAttempt = 0;
@@ -313,6 +356,26 @@ assert.equal(primaryResetClient.retryDelay(response(403, {}, {
   'x-ratelimit-remaining': '0',
   'x-ratelimit-reset': '1788054691',
 }), 1), 3000);
+assert.equal(primaryResetClient.retryDelay(response(403, {}, {
+  'x-ratelimit-remaining': '0',
+  'x-ratelimit-reset': '1788058291',
+}), 1), 120000);
+
+const persistentResetDelays = [];
+const persistentResetClient = new GitHubClient(null, {
+  fetchImpl: async () => response(403, { message: 'API rate limit exceeded' }, {
+    'x-ratelimit-remaining': '0',
+    'x-ratelimit-reset': '1788058291',
+  }),
+  nowImpl: () => 1788054689000,
+  sleepImpl: async (milliseconds) => persistentResetDelays.push(milliseconds),
+});
+await assert.rejects(
+  persistentResetClient.commit('open-hax/reset-bound', sha('c')),
+  (error) => error.code === 'github/rate-limit-exhausted',
+);
+assert.equal(persistentResetClient.requests, 3);
+assert.deepEqual(persistentResetDelays, [120000, 120000]);
 
 const ordinaryForbiddenClient = new GitHubClient(null, {
   fetchImpl: async () => response(403, { message: 'Forbidden' }, {
@@ -354,13 +417,49 @@ function traversalClient(manifests) {
   return {
     requests: 0,
     rate: { remaining: null, reset: null },
-    manifest: async (fullName, revision) => manifests.get(`${fullName}@${revision}`) ?? null,
-    commit: async (_fullName, revision) => ({ tree: { sha: `tree-${revision}` } }),
+    manifest: async (fullName, revision) => {
+      const key = `${fullName}@${revision}`;
+      if (!manifests.has(key)) return null;
+      const value = manifests.get(key);
+      return typeof value === 'string'
+        ? {
+          text: value,
+          sha256: createHash('sha256').update(value).digest('hex'),
+          sourceManifestBlobOid: gitBlobSha(value),
+          parentTreeOid: sha('d'),
+        }
+        : value;
+    },
+    commit: async () => ({ tree: { sha: sha('d') } }),
     lookupTreePath: async (_fullName, _tree, repositoryPath) => ({
       status: 'found', entry: { type: 'commit', path: repositoryPath, sha: sha('c') },
     }),
   };
 }
+
+const bomTraversal = await census({
+  roots: [`open-hax/root@${sha('b')}`], maxNodes: 10, maxDepth: 0, concurrency: 1,
+}, { client: traversalClient(new Map([[`open-hax/root@${sha('b')}`, bomManifest]])) });
+assert.equal(
+  bomTraversal.repositories[0]['repository/manifest-sha256-at-revisions'][sha('b')],
+  createHash('sha256').update(bomManifestBytes).digest('hex'),
+);
+assert.equal(bomTraversal.occurrences[0]['occurrence/source-manifest-blob-oid'], gitBlobSha(bomManifestBytes));
+assert.equal(bomTraversal.occurrences[0]['occurrence/parent-tree-oid'], sha('e'));
+assert.equal(bomTraversal.occurrences[0]['occurrence/source-manifest-path'], '.gitmodules');
+assert.equal(
+  bomTraversal.occurrences[0]['occurrence/source-manifest-sha256'],
+  createHash('sha256').update(bomManifestBytes).digest('hex'),
+);
+await assert.rejects(
+  census({
+    roots: [`open-hax/root@${sha('b')}`], maxNodes: 10, maxDepth: 0, concurrency: 1,
+  }, { client: traversalClient(new Map([[`open-hax/root@${sha('b')}`, {
+    text: manifestText,
+    sha256: createHash('sha256').update(manifestText).digest('hex'),
+  }]])) }),
+  /Manifest observation is invalid/,
+);
 
 const malformedDeclaration = await census({
   roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
@@ -466,6 +565,18 @@ for (const status of [500, 504, null]) {
   assert.equal(frontierBaselineMatches(retryableResult, canonicalFrontier(retryableResult)), false);
 }
 assert.equal(frontierBaselineMatches(frontierResult, { ...expectedFrontier, extra: true }), false);
+const reorderedRoots = {
+  ...frontierResult,
+  roots: [
+    { fullName: 'open-hax/zeta', revision: sha('c') },
+    ...frontierResult.roots,
+  ],
+};
+const reorderedBaseline = canonicalFrontier(reorderedRoots);
+assert.equal(frontierBaselineMatches({
+  ...reorderedRoots,
+  roots: [...reorderedRoots.roots].reverse(),
+}, reorderedBaseline), true);
 
 const workflow = readFileSync('.github/workflows/repository-census.yml', 'utf8');
 assert.match(workflow, /pull_request:/);

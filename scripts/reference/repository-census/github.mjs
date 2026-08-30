@@ -7,6 +7,7 @@ const API = 'https://api.github.com';
 const RAW = 'https://raw.githubusercontent.com';
 const USER_AGENT = 'foresight-repository-census/0.1';
 const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
+const MAX_RETRY_DELAY_MS = 120000;
 
 export function isRateLimitError(error) {
   return error?.code === 'github/rate-limit-exhausted';
@@ -58,12 +59,13 @@ export class GitHubClient {
   retryDelay(response, attempt, { rateLimited = false } = {}) {
     const retryAfter = response?.headers.get('retry-after');
     if (retryAfter !== null && /^\d+(?:[.]\d+)?$/.test(retryAfter)) {
-      return Number(retryAfter) * 1000;
+      return Math.min(Number(retryAfter) * 1000, MAX_RETRY_DELAY_MS);
     }
     const remaining = response?.headers.get('x-ratelimit-remaining');
     const reset = response?.headers.get('x-ratelimit-reset');
     if (remaining === '0' && reset !== null && /^\d+$/.test(reset)) {
-      return Math.max(0, (Number(reset) * 1000) - this.nowImpl() + 1000);
+      const wait = Math.max(0, (Number(reset) * 1000) - this.nowImpl() + 1000);
+      return Math.min(wait, MAX_RETRY_DELAY_MS);
     }
     if (rateLimited) return 60000 * (2 ** (attempt - 1));
     return 200 * (2 ** (attempt - 1));
@@ -176,14 +178,25 @@ export class GitHubClient {
         if (lookup.entry.type !== 'blob' || !['100644', '100755'].includes(lookup.entry.mode)) {
           throw new Error(`.gitmodules is not a regular blob in ${fullName}@${revision}`);
         }
+        const parentTreeOid = commit.tree.sha.toLowerCase();
+        const sourceManifestBlobOid = lookup.entry.sha.toLowerCase();
+        if (!/^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(parentTreeOid)
+            || !/^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(sourceManifestBlobOid)) {
+          throw new Error(`Git returned an invalid source object ID for ${fullName}@${revision}`);
+        }
         const algorithm = lookup.entry.sha.length === 64 ? 'sha256' : 'sha1';
         const objectHeader = Buffer.from(`blob ${manifestBytes.length}\0`);
         const observedBlob = createHash(algorithm)
           .update(objectHeader).update(manifestBytes).digest('hex');
-        if (observedBlob !== lookup.entry.sha.toLowerCase()) {
+        if (observedBlob !== sourceManifestBlobOid) {
           throw new Error(`Raw .gitmodules bytes do not match Git blob identity in ${fullName}@${revision}`);
         }
-        return new TextDecoder('utf-8', { fatal: true }).decode(manifestBytes);
+        return {
+          text: new TextDecoder('utf-8', { fatal: true }).decode(manifestBytes),
+          sha256: createHash('sha256').update(manifestBytes).digest('hex'),
+          sourceManifestBlobOid,
+          parentTreeOid,
+        };
       })();
       this.manifestCache.set(key, request);
     }

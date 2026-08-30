@@ -9,15 +9,23 @@ export function parseArgs(argv) {
     concurrency: 8,
     frontierBaseline: null,
   };
+  const valueAfter = (index, flag) => {
+    const value = argv[index + 1];
+    if (typeof value !== 'string' || value.length === 0
+        || value.startsWith('--') || value === '-h') {
+      throw new Error(`${flag} requires a value`);
+    }
+    return value;
+  };
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
-    if (arg === '--root') options.roots.push(argv[++i]);
-    else if (arg === '--out') options.outDir = argv[++i];
-    else if (arg === '--max-nodes') options.maxNodes = Number(argv[++i]);
-    else if (arg === '--max-depth') options.maxDepth = Number(argv[++i]);
-    else if (arg === '--concurrency') options.concurrency = Number(argv[++i]);
-    else if (arg === '--frontier-baseline') options.frontierBaseline = argv[++i];
+    if (arg === '--root') options.roots.push(valueAfter(i++, arg));
+    else if (arg === '--out') options.outDir = valueAfter(i++, arg);
+    else if (arg === '--max-nodes') options.maxNodes = Number(valueAfter(i++, arg));
+    else if (arg === '--max-depth') options.maxDepth = Number(valueAfter(i++, arg));
+    else if (arg === '--concurrency') options.concurrency = Number(valueAfter(i++, arg));
+    else if (arg === '--frontier-baseline') options.frontierBaseline = valueAfter(i++, arg);
     else if (arg === '--help' || arg === '-h') options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -30,6 +38,9 @@ export function parseArgs(argv) {
   }
   if (!Number.isInteger(options.concurrency) || options.concurrency < 1 || options.concurrency > 32) {
     throw new Error('--concurrency must be an integer from 1 to 32');
+  }
+  if (typeof options.outDir !== 'string' || options.outDir.length === 0) {
+    throw new Error('--out requires a path');
   }
   if (options.frontierBaseline !== null
       && (typeof options.frontierBaseline !== 'string' || options.frontierBaseline.length === 0)) {

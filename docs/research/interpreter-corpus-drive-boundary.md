@@ -298,6 +298,13 @@ A proposal packet should carry:
  :proposal/created-at "..."}
 ```
 
+The bridge must derive the submitting principal from an authenticated channel,
+session, or credential and authorize that principal for the requested corpus,
+base, operations, and attachments before interpreter validation or promotion.
+`:proposal/actor` is claimed packet metadata, not proof of identity: it must
+match the authenticated principal (or an explicitly authorized delegation), or
+the bridge rejects the proposal without writing Clio events or Git commits.
+
 ## LFS-to-Drive migration
 
 ### Phase 1 — inventory and freeze

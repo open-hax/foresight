@@ -169,3 +169,12 @@
   spore: none
   receipt-refs: 2026-08-30T02:33:04Z
   note: A structurally stable census can still become false evidence through serializer types, permissive config parsing, mutable workflow code, or an overbroad exception baseline; adversarial differential probes should cover all four before exact-head publication.
+- ts: 2026-08-30T02:58:30Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind census observations to exact provenance and bounded authority
+  p-efficiency: 0.90
+  p-friction: 0.48
+  p-skill-candidate: 0.30
+  spore: none
+  receipt-refs: 2026-08-30T02:58:30Z
+  note: Evidence integrity requires hashing raw bytes before text normalization, carrying source Git identities on each occurrence, treating packet actors as claims rather than credentials, and bounding server-directed waits within the workflow's fail-closed execution budget.

@@ -50,8 +50,8 @@ function decodeSubmoduleName(raw) {
 export function parseGitmodules(text) {
   const modules = [];
   let current = null;
-  const quotedSection = /^\s*\[\s*([A-Za-z0-9][A-Za-z0-9-]*)\s+"((?:[^"\\]|\\.)*)"\s*\]\s*(?:[#;].*)?$/;
-  const simpleSection = /^\s*\[\s*([A-Za-z0-9][A-Za-z0-9-]*)(?:\.([A-Za-z0-9.-]*))?\s*\]\s*(?:[#;].*)?$/;
+  const quotedSection = /^\s*\[\s*([A-Za-z0-9][A-Za-z0-9-]*)\s+"((?:[^"\\]|\\.)*)"\s*\](.*)$/;
+  const simpleSection = /^\s*\[\s*([A-Za-z0-9][A-Za-z0-9-]*)(?:\.([A-Za-z0-9.-]*))?\s*\](.*)$/;
   const property = /^\s*([A-Za-z][A-Za-z0-9-]*)\s*=\s*(.*?)\s*$/;
   const bareProperty = /^\s*([A-Za-z][A-Za-z0-9-]*)\s*$/;
 
@@ -60,7 +60,7 @@ export function parseGitmodules(text) {
     current = null;
   };
 
-  const physicalLines = text.replace(/\r\n?/g, '\n').split('\n');
+  const physicalLines = text.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').split('\n');
   const logicalLines = [];
   for (let index = 0; index < physicalLines.length; index += 1) {
     let line = physicalLines[index];
@@ -93,7 +93,9 @@ export function parseGitmodules(text) {
     syntaxValid: false,
   });
 
-  for (const { line, number } of logicalLines) {
+  for (const logicalLine of logicalLines) {
+    let { line } = logicalLine;
+    const { number } = logicalLine;
     if (!line.trim() || /^\s*[#;]/.test(line)) continue;
 
     const quotedMatch = line.match(quotedSection);
@@ -105,25 +107,25 @@ export function parseGitmodules(text) {
       } else if (!name.valid) {
         modules.push(invalid(line, number));
       }
-      continue;
-    }
-
-    const simpleMatch = line.match(simpleSection);
-    if (simpleMatch) {
-      flush();
-      if (simpleMatch[1].toLowerCase() === 'submodule') {
-        current = simpleMatch[2] === undefined
-          ? { name: line.trim(), line: number, syntaxValid: false }
-          : { name: simpleMatch[2], line: number, syntaxValid: true };
+      line = quotedMatch[3];
+    } else {
+      const simpleMatch = line.match(simpleSection);
+      if (simpleMatch) {
+        flush();
+        if (simpleMatch[1].toLowerCase() === 'submodule') {
+          current = simpleMatch[2] === undefined
+            ? { name: line.trim(), line: number, syntaxValid: false }
+            : { name: simpleMatch[2], line: number, syntaxValid: true };
+        }
+        line = simpleMatch[3];
+      } else if (/^\s*\[/.test(line)) {
+        flush();
+        modules.push(invalid(line, number));
+        continue;
       }
-      continue;
     }
 
-    if (/^\s*\[/.test(line)) {
-      flush();
-      modules.push(invalid(line, number));
-      continue;
-    }
+    if (!line.trim() || /^\s*[#;]/.test(line)) continue;
 
     const propertyMatch = line.match(property);
     if (propertyMatch) {
