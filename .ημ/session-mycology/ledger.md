@@ -349,3 +349,12 @@
   spore: none
   receipt-refs: 2026-08-30T09:04:02Z
   note: A successful immutable-object lookup is not identity evidence unless its returned object ID equals the requested revision. Validate that equality before exposing the tree, and retain identity failure across cached replays and both raw-success and raw-absence paths.
+- ts: 2026-08-30T09:19:23Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind hosted proof after executable publication
+  p-efficiency: 0.97
+  p-friction: 0.16
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: 2026-08-30T09:19:23Z
+  note: A checked-in artifact citation must follow the executable commit it proves. Run the repaired bytes first, verify the resulting archive and payload identity, then publish a provenance-only successor that leaves those executable bytes unchanged.

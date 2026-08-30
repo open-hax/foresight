@@ -96,15 +96,15 @@ the preceding run were retried and are absent from the successful baseline.
 
 ## Artifact
 
-GitHub Actions run `33300223190`, job `99226842026`, completed successfully
-at exact head `62f7d94fdf53be4fd1c22396f5b30b122dd5f9b4` and tree
-`efc87712996bb2fff29cbcafb98873c232bbd576`. It produced artifact
-`repository-census-current` (`9728785117`, 153,835 bytes).
+GitHub Actions run `33303456720`, job `99235704076`, completed successfully
+at exact head `e0a0dc9b797c2e09e41ab65917c23e1fec2dc807` and tree
+`4056e37f8ac908a4844d407e4b971e74856445a0`. It produced artifact
+`repository-census-current` (`9729762533`, 153,835 bytes).
 
 Artifact digest:
 
 ```text
-sha256:051cfb3aafe372cc49f5e2c79ffde98c84846569da4851da1c0a53eb54e62fd2
+sha256:0d4ffaa311bf8545619510790bf6e65cbb42ccf7f45d0dc723c036c74adce66e
 ```
 
 The artifact contains:
@@ -120,8 +120,9 @@ The downloaded ZIP passed integrity verification and contained exactly those
 six files. Its evidence rows reverified the 951 repositories, 1,312
 occurrences, and 99 gaps above; `summary.json` retained the four exact roots,
 and `frontier.json` matched the reviewed 47-identity baseline semantically.
-Each extracted file was byte-identical to the preceding successful exact
-census artifact `9728230721`; only the rebuilt ZIP container digest changed.
+Each extracted file was byte-identical to the preceding successful exact-head
+census artifact `9729389230` and repaired-adapter artifact `9728785117`; only
+the rebuilt ZIP container digest changed.
 
 ## Known exclusions
 
