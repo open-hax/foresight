@@ -69,6 +69,7 @@ export function parseGitmodules(text) {
   }
 
   const modules = [];
+  const modulesByName = new Map();
   let current = null;
   const quotedSection = /^[ \t]*\[([A-Za-z0-9][A-Za-z0-9-]*)[ \t]+"((?:[^"\\]|\\.)*)"\](.*)$/;
   const simpleSection = /^[ \t]*\[([A-Za-z0-9][A-Za-z0-9-]*)(?:\.([A-Za-z0-9.-]*))?\](.*)$/;
@@ -76,7 +77,22 @@ export function parseGitmodules(text) {
   const bareProperty = /^[ \t]*([A-Za-z][A-Za-z0-9-]*)[ \t]*$/;
 
   const flush = () => {
-    if (current) modules.push(current);
+    if (current) {
+      const previous = modulesByName.get(current.name);
+      if (!previous) {
+        modules.push(current);
+        modulesByName.set(current.name, current);
+      } else {
+        // Git exposes repeated subsections as one keyspace. Preserve the first
+        // declaration position, but apply only properties touched by this
+        // later section so omitted values survive and assigned values win.
+        previous.syntaxValid &&= current.syntaxValid;
+        for (const key of current.assignedProperties) {
+          if (Object.hasOwn(current, key)) previous[key] = current[key];
+          else delete previous[key];
+        }
+      }
+    }
     current = null;
   };
 
@@ -126,7 +142,12 @@ export function parseGitmodules(text) {
       flush();
       const name = decodeSubmoduleName(quotedMatch[2]);
       if (quotedMatch[1].toLowerCase() === 'submodule') {
-        current = { name: name.value, line: number, syntaxValid: name.valid };
+        current = {
+          name: name.value,
+          line: number,
+          syntaxValid: name.valid,
+          assignedProperties: new Set(),
+        };
       } else if (!name.valid) {
         modules.push(invalid(line, number));
       }
@@ -138,8 +159,18 @@ export function parseGitmodules(text) {
         flush();
         if (simpleMatch[1].toLowerCase() === 'submodule') {
           current = simpleMatch[2] === undefined
-            ? { name: line.replace(/^[ \t]+|[ \t]+$/g, ''), line: number, syntaxValid: false }
-            : { name: simpleMatch[2], line: number, syntaxValid: true };
+            ? {
+              name: line.replace(/^[ \t]+|[ \t]+$/g, ''),
+              line: number,
+              syntaxValid: false,
+              assignedProperties: new Set(),
+            }
+            : {
+              name: simpleMatch[2],
+              line: number,
+              syntaxValid: true,
+              assignedProperties: new Set(),
+            };
         }
         lineOffset += line.length - simpleMatch[3].length;
         line = simpleMatch[3];
@@ -163,6 +194,7 @@ export function parseGitmodules(text) {
       if (current) {
         current.syntaxValid &&= value.valid;
         if (value.valid && (key === 'path' || key === 'url' || key === 'branch')) {
+          current.assignedProperties.add(key);
           current[key] = value.value;
         }
       } else if (!value.valid) {
@@ -174,7 +206,10 @@ export function parseGitmodules(text) {
     const bareMatch = line.match(bareProperty);
     if (bareMatch) {
       const key = bareMatch[1].toLowerCase();
-      if (current && (key === 'path' || key === 'url' || key === 'branch')) delete current[key];
+      if (current && (key === 'path' || key === 'url' || key === 'branch')) {
+        current.assignedProperties.add(key);
+        delete current[key];
+      }
       continue;
     }
 
@@ -184,7 +219,7 @@ export function parseGitmodules(text) {
   flush();
 
   return modules.map((entry) => {
-    const { syntaxValid, ...module } = entry;
+    const { syntaxValid, assignedProperties, ...module } = entry;
     const parseStatus = !syntaxValid ? 'invalid-syntax'
       : module.path && module.url ? 'valid' : 'incomplete';
     return { ...module, parseStatus };

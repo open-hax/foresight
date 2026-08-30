@@ -107,6 +107,57 @@ assert.deepEqual(quotedModules, [
     url: 'https://github.com/open-hax/after-core.git', parseStatus: 'valid',
   },
 ]);
+assert.deepEqual(parseGitmodules([
+  '[submodule "repeated"]',
+  '  path = old-path',
+  '  url = ../old.git',
+  '  branch = retained-when-not-reassigned',
+  '[submodule "other"]',
+  '  path = other',
+  '  url = ../other.git',
+  '[submodule "repeated"]',
+  '  path = current-path',
+  '  url = ../current.git',
+  '[submodule "Repeated"]',
+  '  path = case-distinct',
+  '  url = ../case-distinct.git',
+  '',
+].join('\n')), [
+  {
+    name: 'repeated', line: 1, path: 'current-path', url: '../current.git',
+    branch: 'retained-when-not-reassigned', parseStatus: 'valid',
+  },
+  {
+    name: 'other', line: 5, path: 'other', url: '../other.git', parseStatus: 'valid',
+  },
+  {
+    name: 'Repeated', line: 11, path: 'case-distinct',
+    url: '../case-distinct.git', parseStatus: 'valid',
+  },
+]);
+assert.deepEqual(parseGitmodules([
+  '[submodule "bare-override"]',
+  '  path = old-path',
+  '  url = ../retained.git',
+  '[submodule "bare-override"]',
+  '  path',
+  '',
+].join('\n')), [{
+  name: 'bare-override', line: 1, url: '../retained.git', parseStatus: 'incomplete',
+}]);
+assert.deepEqual(parseGitmodules([
+  '[submodule "repeated-invalid"]',
+  '  path = old-path',
+  '  url = ../old.git',
+  '[submodule "repeated-invalid"]',
+  '  path = current-path',
+  '  url = ../current.git',
+  '  not valid config syntax',
+  '',
+].join('\n')), [{
+  name: 'repeated-invalid', line: 1, path: 'current-path', url: '../current.git',
+  parseStatus: 'invalid-syntax',
+}]);
 assert.deepEqual(parseGitmodules('[submodule "child]\n  path = child\n  url = ../child.git\n'), [{
   name: '[submodule "child]', line: 1, parseStatus: 'invalid-syntax',
 }]);
@@ -697,6 +748,26 @@ const duplicateDeclarations = await census({
 }, { client: traversalClient(new Map([[`open-hax/root@${sha('a')}`, duplicateManifest]])) });
 assert.equal(duplicateDeclarations.occurrences.length, 2);
 assert.equal(new Set(duplicateDeclarations.occurrences.map((row) => row['occurrence/id'])).size, 2);
+
+const repeatedSectionManifest = [
+  '[submodule "same"]', '  path = old-path', '  url = ../old.git',
+  '[submodule "same"]', '  path = current-path', '  url = ../current.git', '',
+].join('\n');
+const repeatedSections = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 2,
+}, { client: traversalClient(new Map([[
+  `open-hax/root@${sha('a')}`, repeatedSectionManifest,
+]])) });
+assert.equal(repeatedSections.occurrences.length, 1);
+assert.equal(repeatedSections.occurrences[0]['occurrence/path'], 'current-path');
+assert.equal(repeatedSections.occurrences[0]['occurrence/raw-url'], '../current.git');
+assert.equal(repeatedSections.occurrences[0]['occurrence/target'], 'github:open-hax/current');
+assert.equal(repeatedSections.repositories.some(
+  (row) => row['repository/id'] === 'github:open-hax/old',
+), false);
+assert.equal(repeatedSections.repositories.some(
+  (row) => row['repository/id'] === 'github:open-hax/current',
+), true);
 
 const revisionManifests = new Map([
   [`open-hax/root@${sha('a')}`, ''],

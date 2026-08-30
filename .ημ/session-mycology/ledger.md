@@ -232,3 +232,12 @@
   spore: none
   receipt-refs: 2026-08-30T04:18:57Z
   note: An operational wait cap must never become permission to retry before a server boundary; fail typed with the full delay instead. Future durable observations also need run-bound identity distinct from stable packet subject keys, while pre-occurrence gaps must remain importable without fabricated occurrences.
+- ts: 2026-08-30T04:41:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Consolidate repeated Git config subsections
+  p-efficiency: 0.94
+  p-friction: 0.35
+  p-skill-candidate: 0.27
+  spore: none
+  receipt-refs: 2026-08-30T04:41:00Z
+  note: A repeated config header is not a second semantic object when the authority treats both headers as one keyspace; effective evidence must merge property assignments in order while retaining malformed syntax and a stable declaration position.
