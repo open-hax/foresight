@@ -186,23 +186,43 @@ different bytes, digest, schema, or expected child set is a conflict. Every
 child copies the request ID for traceability, but child collections
 intentionally do not make that shared value unique.
 
-Accepting a packet is one atomic domain operation. An adapter may implement it
-as one transaction spanning the run and child collections. An adapter without
-that transaction must implement a durable `pending` to `complete` protocol:
+Accepting a packet is one atomic domain operation. Every adapter strategy must
+enforce the run verification, insert-if-absent child commitment/equality,
+complete commitment-set verification, and complete-only visibility laws below.
+An adapter with one transaction spanning the run and child collections performs
+all of those checks and writes inside that transaction, including readback and
+validation of every preexisting same-ID child; it may not use an updating
+upsert. An adapter without that transaction performs the same protocol with a
+durable `pending` to `complete` state:
 
 1. Atomically create or load the unique run record and verify all immutable
    packet and expected-child metadata.
-2. Idempotently upsert children by their deterministic observation IDs. A
-   same-digest replay resumes a pending run and writes only missing children; it
-   never returns that run as accepted merely because the request row exists.
-3. Verify the exact child-ID set, count, and digest, then compare-and-swap the
-   run from `pending` to `complete`.
-4. Expose only `complete` runs and their children to readers and projections.
+2. For every expected child, derive an immutable canonical commitment after
+   schema validation. The commitment covers its deterministic observation ID,
+   versioned collection and observation type, accepted schema-contract identity
+   and version, and complete immutable canonical payload; storage metadata is
+   excluded. Atomically insert the validated record and commitment only if the
+   ID is absent. If that ID already exists, including after losing an insert
+   race, re-read it and require the same collection/type and schema identity plus
+   byte-identical canonical payload. Never overwrite the winner; reject any
+   mismatch as an import conflict and leave the run `pending`. A matching replay
+   writes only missing children and never treats an existing request row or
+   child ID alone as acceptance.
+3. Re-read every expected child commitment and the complete run-bound child set.
+   Reject any missing or extra child and any payload, schema, collection, or type
+   mismatch. Compute the child-set digest over the canonical ID-sorted
+   commitments and require the exact expected set, count, and digest.
+4. Only after step 3 succeeds, make the run `complete`: commit that state with
+   the children in the spanning transaction, or compare-and-swap the durable
+   run from `pending` to `complete` in a non-transactional adapter.
+5. Expose only `complete` runs and their children to readers and projections.
 
-Concurrent importers may race on deterministic upserts, but only one can create
-the run or finalize its state. A crash before or after any child collection, or
-immediately around finalization, is recovered by replaying the same operation.
-No pending or extra child can become accepted evidence.
+Concurrent importers may race on deterministic inserts, but only one can create
+the run or finalize its state. An insert loser validates the winner's immutable
+record and never updates it; a mismatch blocks finalization. A crash before or
+after any child collection, or immediately around finalization, is recovered by
+replaying the same operation. No pending or extra child can become accepted
+evidence.
 
 Child-record identity is separate. The importer derives each
 `:observation/id` from the run ID, versioned observation type, and canonical
@@ -284,6 +304,15 @@ calling registered durable write operations.
 8. Failure injection before and after every child-collection write and on both
    sides of finalization proves that same-digest replay converges to one exact
    complete child set, while pending evidence remains invisible.
+9. Every adapter strategy's conformance tests pre-seed an in-flight import with
+   a deterministic child observation ID, then replay the packet with a different
+   canonical payload, schema identity, or versioned collection/type. Each
+   mismatch must report a conflict without overwriting the child or publishing
+   the run, and it must remain invisible to readers and projections. A
+   byte-identical record replay must be an insert-if-absent no-op and still
+   converge to one complete child set. The suite runs these cases against both a
+   spanning-transaction implementation and a durable `pending` implementation
+   when both strategies exist.
 
 ## Non-decisions
 

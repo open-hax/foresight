@@ -322,3 +322,21 @@
   spore: none
   receipt-refs: 2026-08-30T08:03:00Z
   note: Executable provenance cannot cite an artifact that exists only after the executable commit runs. A subsequent provenance-only commit can cite the completed run truthfully while leaving every adapter byte unchanged.
+- ts: 2026-08-30T08:32:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Validate deterministic child-ID replay equality
+  p-efficiency: 0.96
+  p-friction: 0.24
+  p-skill-candidate: 0.20
+  spore: none
+  receipt-refs: 2026-08-30T08:32:00Z
+  note: Insert-if-absent establishes uniqueness, not equality. A replay loser must read back the stored child and compare both canonical payload bytes and versioned schema identity before that child can contribute to a completed evidence run.
+- ts: 2026-08-30T08:40:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Keep importer equality laws strategy-independent
+  p-efficiency: 0.91
+  p-friction: 0.42
+  p-skill-candidate: 0.27
+  spore: none
+  receipt-refs: 2026-08-30T08:40:00Z
+  note: A database transaction can make several writes atomic without proving that an existing record equals the proposed record. Replay equality, immutable insert semantics, and complete-set validation must constrain transactional and recovery-oriented adapters alike.
