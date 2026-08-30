@@ -226,11 +226,22 @@ export async function census(options, dependencies = {}) {
     }, { frontier: true });
   }
 
+  const sortedByKey = (value) => Object.fromEntries(
+    Object.entries(value).sort(([left], [right]) => compareText(left, right)),
+  );
   const repoRows = [...repositories.values()]
     .map((row) => ({
       ...row,
       'repository/revisions': [...row['repository/revisions']].sort(),
       'repository/manifest-statuses': new Set(row['repository/manifest-statuses']),
+      'repository/manifest-sha256-at-revisions': sortedByKey(
+        row['repository/manifest-sha256-at-revisions'],
+      ),
+      ...(row['repository/submodule-count-at-revisions'] ? {
+        'repository/submodule-count-at-revisions': sortedByKey(
+          row['repository/submodule-count-at-revisions'],
+        ),
+      } : {}),
     }))
     .sort((a, b) => compareText(a['repository/full-name'], b['repository/full-name']));
   occurrences.sort((a, b) => compareText(a['occurrence/parent'], b['occurrence/parent'])

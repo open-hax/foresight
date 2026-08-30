@@ -407,13 +407,162 @@ const exactPathClient = new GitHubClient(null, {
 });
 assert.equal((await exactPathClient.lookupTreePath('open-hax/root', 'tree', '/child')).status, 'missing');
 
+for (const incomplete of [undefined, null, 0, 'false']) {
+  const incompleteRecursiveTreeClient = new GitHubClient(null, {
+    fetchImpl: async () => response(200, {
+      ...(incomplete === undefined ? {} : { truncated: incomplete }), tree: [],
+    }),
+  });
+  await assert.rejects(
+    incompleteRecursiveTreeClient.lookupTreePath('open-hax/root', 'tree', '.gitmodules'),
+    /through incomplete Git tree/,
+  );
+}
+
+for (const incomplete of [undefined, null, true, 0, 'false']) {
+  const completeness = incomplete === undefined ? {} : { truncated: incomplete };
+  const incompleteButFoundTreeClient = new GitHubClient(null, {
+    fetchImpl: async (url) => {
+      if (url.endsWith('?recursive=1')) return response(200, { ...completeness, tree: [] });
+      if (url.endsWith(`/git/trees/${sha('d')}`)) {
+        return response(200, {
+          ...completeness,
+          tree: [{ path: 'nested', mode: '040000', type: 'tree', sha: sha('e') }],
+        });
+      }
+      return response(200, {
+        ...completeness,
+        tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: sha('f') }],
+      });
+    },
+  });
+  assert.equal(
+    (await incompleteButFoundTreeClient.lookupTreePath(
+      'open-hax/root', sha('d'), 'nested/.gitmodules',
+    )).status,
+    'found',
+  );
+
+  const incompleteButBlockedTreeClient = new GitHubClient(null, {
+    fetchImpl: async (url) => response(200, url.endsWith('?recursive=1')
+      ? { ...completeness, tree: [] }
+      : {
+        ...completeness,
+        tree: [{ path: 'nested', mode: '100644', type: 'blob', sha: sha('e') }],
+      }),
+  });
+  assert.equal(
+    (await incompleteButBlockedTreeClient.lookupTreePath(
+      'open-hax/root', sha('d'), 'nested/.gitmodules',
+    )).status,
+    'blocked',
+  );
+}
+
+for (const incomplete of [undefined, null, true, 0, 'false']) {
+  const incompleteFallbackTreeClient = new GitHubClient(null, {
+    fetchImpl: async (url) => response(200, url.endsWith('?recursive=1')
+      ? { truncated: true, tree: [] }
+      : { ...(incomplete === undefined ? {} : { truncated: incomplete }), tree: [] }),
+  });
+  await assert.rejects(
+    incompleteFallbackTreeClient.lookupTreePath('open-hax/root', 'tree', '.gitmodules'),
+    /through incomplete Git tree/,
+  );
+}
+
 const truncatedTreeClient = new GitHubClient(null, {
   fetchImpl: async () => response(200, { truncated: true, tree: [] }),
 });
 await assert.rejects(
   truncatedTreeClient.lookupTreePath('open-hax/root', 'tree', '.gitmodules'),
-  /truncated Git tree/,
+  /incomplete Git tree/,
 );
+
+const observedRequestSignals = [];
+let requestBodyAttempts = 0;
+const boundedRequestClient = new GitHubClient(null, {
+  fetchImpl: async (_url, options) => {
+    observedRequestSignals.push(options.signal);
+    const candidate = response(200, { tree: { sha: sha('a') } });
+    const readBody = candidate.arrayBuffer;
+    candidate.arrayBuffer = async () => {
+      requestBodyAttempts += 1;
+      if (requestBodyAttempts === 1) throw new Error('simulated body stream failure');
+      return readBody();
+    };
+    return candidate;
+  },
+  sleepImpl: async () => {},
+});
+assert.deepEqual(
+  await boundedRequestClient.commit('open-hax/request-timeout', sha('a')),
+  { tree: { sha: sha('a') } },
+);
+assert.equal(requestBodyAttempts, 2);
+assert.equal(observedRequestSignals.length, 2);
+assert.equal(observedRequestSignals.every((signal) => signal instanceof AbortSignal), true);
+assert.equal(observedRequestSignals.every((signal) => !signal.aborted), true);
+assert.notEqual(observedRequestSignals[0], observedRequestSignals[1]);
+
+const bodyRateRetryDelays = [];
+let bodyRateRetryAttempts = 0;
+const bodyRateRetryClient = new GitHubClient(null, {
+  fetchImpl: async () => {
+    bodyRateRetryAttempts += 1;
+    if (bodyRateRetryAttempts > 1) {
+      return response(200, { tree: { sha: 'after-body-rate-retry' } });
+    }
+    const candidate = response(429, { message: 'slow down' }, { 'retry-after': '60' });
+    candidate.arrayBuffer = async () => { throw new Error('simulated rate-limit body failure'); };
+    return candidate;
+  },
+  sleepImpl: async (milliseconds) => bodyRateRetryDelays.push(milliseconds),
+});
+assert.deepEqual(await bodyRateRetryClient.commit('open-hax/body-rate-retry', sha('a')), {
+  tree: { sha: 'after-body-rate-retry' },
+});
+assert.equal(bodyRateRetryAttempts, 2);
+assert.deepEqual(bodyRateRetryDelays, [60000]);
+
+let overlongBodyRateAttempts = 0;
+const overlongBodyRateDelays = [];
+const overlongBodyRateClient = new GitHubClient(null, {
+  fetchImpl: async () => {
+    overlongBodyRateAttempts += 1;
+    const candidate = response(429, { message: 'slow down' }, { 'retry-after': '3600' });
+    candidate.arrayBuffer = async () => { throw new Error('simulated rate-limit body failure'); };
+    return candidate;
+  },
+  sleepImpl: async (milliseconds) => overlongBodyRateDelays.push(milliseconds),
+});
+await assert.rejects(
+  overlongBodyRateClient.commit('open-hax/body-rate-bound', sha('a')),
+  (error) => error.code === 'github/rate-limit-exhausted'
+    && error.status === 429
+    && error.retryDelayMs === 3600000
+    && /refusing to retry early/.test(error.message),
+);
+assert.equal(overlongBodyRateAttempts, 1);
+assert.deepEqual(overlongBodyRateDelays, []);
+
+const persistentBodyRateDelays = [];
+const persistentBodyRateClient = new GitHubClient(null, {
+  fetchImpl: async () => {
+    const candidate = response(429, { message: 'slow down' }, { 'retry-after': '1' });
+    candidate.arrayBuffer = async () => { throw new Error('persistent rate-limit body failure'); };
+    return candidate;
+  },
+  sleepImpl: async (milliseconds) => persistentBodyRateDelays.push(milliseconds),
+});
+await assert.rejects(
+  persistentBodyRateClient.commit('open-hax/body-rate-terminal', sha('a')),
+  (error) => error.code === 'github/rate-limit-exhausted'
+    && error.status === 429
+    && /body read failed/.test(error.message),
+);
+assert.equal(persistentBodyRateClient.requests, 3);
+assert.deepEqual(persistentBodyRateDelays, [1000, 1000]);
 
 const symlinkManifestClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
@@ -905,8 +1054,51 @@ const multiRevision = await census({
   maxNodes: 10, maxDepth: 1, concurrency: 1,
 }, { client: traversalClient(revisionManifests) });
 const digests = multiRevision.repositories[0]['repository/manifest-sha256-at-revisions'];
-assert.deepEqual(Object.keys(digests).sort(), [sha('a'), sha('b')]);
+assert.deepEqual(Object.keys(digests), [sha('a'), sha('b')]);
 assert.notEqual(digests[sha('a')], digests[sha('b')]);
+assert.deepEqual(
+  Object.keys(multiRevision.repositories[0]['repository/submodule-count-at-revisions']),
+  [sha('a'), sha('b')],
+);
+
+const reverseDiscoveredManifests = new Map([
+  [`open-hax/root@${sha('f')}`, [
+    '[submodule "later"]', '  path = later', '  url = ../child.git',
+    '[submodule "earlier"]', '  path = earlier', '  url = ../child.git', '',
+  ].join('\n')],
+  [`open-hax/child@${sha('b')}`, '# later revision\n'],
+  [`open-hax/child@${sha('a')}`, '# earlier revision\n'],
+]);
+const reverseDiscoveryClient = traversalClient(reverseDiscoveredManifests);
+reverseDiscoveryClient.lookupTreePath = async (_fullName, _tree, repositoryPath) => ({
+  status: 'found',
+  entry: {
+    type: 'commit', mode: '160000', path: repositoryPath,
+    sha: repositoryPath === 'later' ? sha('b') : sha('a'),
+  },
+});
+const reverseDiscoveredRevisions = await census({
+  roots: [`open-hax/root@${sha('f')}`], maxNodes: 3, maxDepth: 1, concurrency: 1,
+}, { client: reverseDiscoveryClient });
+const reverseDiscoveredChild = reverseDiscoveredRevisions.repositories.find(
+  (row) => row['repository/id'] === 'github:open-hax/child',
+);
+const reverseDiscoveredDigests = reverseDiscoveredChild[
+  'repository/manifest-sha256-at-revisions'
+];
+assert.deepEqual(Object.keys(reverseDiscoveredDigests), [sha('a'), sha('b')]);
+assert.equal(
+  reverseDiscoveredDigests[sha('a')],
+  createHash('sha256').update('# earlier revision\n').digest('hex'),
+);
+assert.equal(
+  reverseDiscoveredDigests[sha('b')],
+  createHash('sha256').update('# later revision\n').digest('hex'),
+);
+assert.deepEqual(
+  Object.entries(reverseDiscoveredChild['repository/submodule-count-at-revisions']),
+  [[sha('a'), 0], [sha('b'), 0]],
+);
 
 const stableStats = {
   repositories: 1, repositoryRevisions: 1, occurrences: 0,

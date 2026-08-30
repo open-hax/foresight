@@ -286,3 +286,30 @@
   spore: none
   receipt-refs: 2026-08-30T07:01:00Z
   note: A canonical commit decision remains committed after the ref advances again. Recovery must verify exact identity through monotonic first-parent ancestry, not confuse a newer tip with proof that an earlier compare-and-swap failed.
+- ts: 2026-08-30T07:30:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Fail closed on tree completeness and transport stalls
+  p-efficiency: 0.92
+  p-friction: 0.44
+  p-skill-candidate: 0.28
+  spore: none
+  receipt-refs: 2026-08-30T07:30:00Z
+  note: An absent boolean is not a false completeness claim, a canonical map needs canonical key order, and a workflow-wide timeout does not bound one stalled request. Artifact provenance is necessarily two-stage: run the repaired adapter first, then cite that exact artifact without changing the adapter again.
+- ts: 2026-08-30T07:42:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Repair response-body retry and positive tree evidence
+  p-efficiency: 0.88
+  p-friction: 0.55
+  p-skill-candidate: 0.31
+  spore: none
+  receipt-refs: 2026-08-30T07:42:00Z
+  note: A timeout signal on fetch is not enough when body consumption escapes the retry attempt. Indeterminate completeness prevents a negative claim but does not erase a path or blocker that a bounded per-level walk positively observes. Canonicalization tests must force noncanonical insertion order.
+- ts: 2026-08-30T07:49:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Preserve response authority across body failures
+  p-efficiency: 0.91
+  p-friction: 0.48
+  p-skill-candidate: 0.30
+  spore: none
+  receipt-refs: 2026-08-30T07:49:00Z
+  note: Once response headers arrive, a later body failure is still governed by that response's rate-limit authority. Falling back to transport-only timing can violate Retry-After and turn a required traversal abort into ordinary frontier evidence.

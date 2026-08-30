@@ -8,6 +8,27 @@ const RAW = 'https://raw.githubusercontent.com';
 const USER_AGENT = 'foresight-repository-census/0.1';
 const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
 const MAX_RETRY_SLEEP_MS = 120000;
+const REQUEST_TIMEOUT_MS = 30000;
+
+function responseIsRateLimited(url, response, bodyText = '') {
+  if (!response || (!url.startsWith(API) && !url.startsWith(RAW))) return false;
+  const rateRemaining = response.headers.get('x-ratelimit-remaining');
+  const retryAfter = response.headers.get('retry-after');
+  return response.status === 429
+    || (response.status === 403
+      && (rateRemaining === '0' || retryAfter !== null || /rate limit/i.test(bodyText)));
+}
+
+function annotateResponseError(error, url, response, { rateLimited }) {
+  error.status = response.status;
+  error.url = url;
+  if (rateLimited) {
+    error.code = 'github/rate-limit-exhausted';
+    error.rateReset = response.headers.get('x-ratelimit-reset');
+    error.message = `GitHub API rate limit exhausted${error.rateReset ? ` until ${error.rateReset}` : ''}: ${error.message}`;
+  }
+  return error;
+}
 
 export function isRateLimitError(error) {
   return error?.code === 'github/rate-limit-exhausted';
@@ -75,36 +96,44 @@ export class GitHubClient {
     let lastError;
     for (let attempt = 1; attempt <= this.maxAttempts; attempt += 1) {
       let response;
+      let body;
       try {
         this.requests += 1;
-        response = await this.fetchImpl(url, { headers: this.headers(accept) });
+        response = await this.fetchImpl(url, {
+          headers: this.headers(accept),
+          signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        });
+        this.observeRate(url, response);
+        body = Buffer.from(await response.arrayBuffer());
       } catch (error) {
-        lastError = error;
-        if (attempt === this.maxAttempts) throw error;
-        await this.sleepImpl(this.retryDelay(null, attempt));
+        const rateLimited = responseIsRateLimited(url, response);
+        lastError = response
+          ? annotateResponseError(
+            new Error(`HTTP ${response.status} body read failed for ${url}: ${error.message}`, {
+              cause: error,
+            }),
+            url,
+            response,
+            { rateLimited },
+          )
+          : error;
+        if (attempt === this.maxAttempts) throw lastError;
+        const retryDelay = this.retryDelay(response, attempt, { rateLimited });
+        if (retryDelay > MAX_RETRY_SLEEP_MS) {
+          lastError.retryDelayMs = retryDelay;
+          lastError.message = `GitHub retry boundary ${retryDelay} ms exceeds the ${MAX_RETRY_SLEEP_MS} ms operational wait cap; refusing to retry early: ${lastError.message}`;
+          throw lastError;
+        }
+        await this.sleepImpl(retryDelay);
         continue;
       }
-      this.observeRate(url, response);
 
-      if (response.ok) return response;
+      if (response.ok) return body;
 
-      const body = await response.text();
-      const error = new Error(`HTTP ${response.status} for ${url}: ${body.slice(0, 300)}`);
-      error.status = response.status;
-      error.url = url;
-      const rateRemaining = response.headers.get('x-ratelimit-remaining');
-      const retryAfter = response.headers.get('retry-after');
-      const rateLimited = (url.startsWith(API) || url.startsWith(RAW))
-        && (response.status === 429
-          || (response.status === 403
-            && (rateRemaining === '0'
-              || retryAfter !== null
-              || /rate limit/i.test(body))));
-      if (rateLimited) {
-        error.code = 'github/rate-limit-exhausted';
-        error.rateReset = response.headers.get('x-ratelimit-reset');
-        error.message = `GitHub API rate limit exhausted${error.rateReset ? ` until ${error.rateReset}` : ''}: ${error.message}`;
-      }
+      const bodyText = body.toString('utf8');
+      const error = new Error(`HTTP ${response.status} for ${url}: ${bodyText.slice(0, 300)}`);
+      const rateLimited = responseIsRateLimited(url, response, bodyText);
+      annotateResponseError(error, url, response, { rateLimited });
       lastError = error;
       const retryable = RETRYABLE_STATUSES.has(response.status) || isRateLimitError(error);
       if (!retryable || attempt === this.maxAttempts) throw error;
@@ -120,13 +149,12 @@ export class GitHubClient {
   }
 
   async request(url, { accept } = {}) {
-    const response = await this.fetchResponse(url, { accept });
-    return response.json();
+    const body = await this.fetchResponse(url, { accept });
+    return JSON.parse(new TextDecoder().decode(body));
   }
 
   async requestRaw(url) {
-    const response = await this.fetchResponse(url, { accept: 'text/plain' });
-    return Buffer.from(await response.arrayBuffer());
+    return this.fetchResponse(url, { accept: 'text/plain' });
   }
 
   async commit(fullName, revision) {
@@ -215,7 +243,7 @@ export class GitHubClient {
     if (exact) return { status: 'found', entry: exact };
 
     const segments = repositoryPath.split('/');
-    if (!recursive.truncated) {
+    if (recursive.truncated === false) {
       for (let index = 0; index < segments.length - 1; index += 1) {
         const prefix = segments.slice(0, index + 1).join('/');
         const entry = recursive.tree.find((candidate) => candidate.path === prefix);
@@ -225,13 +253,12 @@ export class GitHubClient {
       }
       return { status: 'missing', segment: segments.at(-1), index: segments.length - 1 };
     }
-
     let currentTree = rootTreeSha;
     for (let i = 0; i < segments.length; i += 1) {
       const tree = await this.tree(fullName, currentTree);
       const entry = tree.tree.find((candidate) => candidate.path === segments[i]);
-      if (!entry && tree.truncated) {
-        throw new Error(`Cannot resolve ${repositoryPath} through truncated Git tree ${currentTree}`);
+      if (!entry && tree.truncated !== false) {
+        throw new Error(`Cannot resolve ${repositoryPath} through incomplete Git tree ${currentTree}`);
       }
       if (!entry) return { status: 'missing', segment: segments[i], index: i };
       if (i === segments.length - 1) return { status: 'found', entry };
