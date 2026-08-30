@@ -205,6 +205,44 @@ await assert.rejects(
 );
 assert.equal(persistentAttempts, 3);
 
+const rateRetryDelays = [];
+let rateRetryAttempt = 0;
+const rateRetryClient = new GitHubClient(null, {
+  fetchImpl: async () => {
+    rateRetryAttempt += 1;
+    return rateRetryAttempt === 1
+      ? response(403, { message: 'secondary rate limit' }, {
+        'retry-after': '60',
+        'x-ratelimit-remaining': '4',
+      })
+      : response(200, { tree: { sha: 'after-rate-retry' } });
+  },
+  sleepImpl: async (milliseconds) => rateRetryDelays.push(milliseconds),
+});
+assert.deepEqual(await rateRetryClient.commit('open-hax/rate-retry', sha('c')), {
+  tree: { sha: 'after-rate-retry' },
+});
+assert.equal(rateRetryClient.requests, 2);
+assert.deepEqual(rateRetryDelays, [60000]);
+const primaryResetClient = new GitHubClient(null, {
+  nowImpl: () => 1788054689000,
+});
+assert.equal(primaryResetClient.retryDelay(response(403, {}, {
+  'x-ratelimit-remaining': '0',
+  'x-ratelimit-reset': '1788054691',
+}), 1), 3000);
+
+const ordinaryForbiddenClient = new GitHubClient(null, {
+  fetchImpl: async () => response(403, { message: 'Forbidden' }, {
+    'x-ratelimit-remaining': '4',
+  }),
+});
+await assert.rejects(
+  ordinaryForbiddenClient.commit('open-hax/forbidden', sha('c')),
+  (error) => error.status === 403 && error.code === undefined,
+);
+assert.equal(ordinaryForbiddenClient.requests, 1);
+
 const rateLimitedClient = new GitHubClient(null, {
   fetchImpl: async (url) => (url.startsWith('https://raw.githubusercontent.com')
     ? response(404, { message: 'Not Found' })
@@ -212,6 +250,7 @@ const rateLimitedClient = new GitHubClient(null, {
       'x-ratelimit-remaining': '0',
       'x-ratelimit-reset': '1788054691',
     })),
+  maxAttempts: 1,
 });
 await assert.rejects(
   rateLimitedClient.manifest('open-hax/rate-limited', sha('c')),

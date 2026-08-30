@@ -142,3 +142,12 @@
   spore: none
   receipt-refs: 2026-08-30T01:35:22Z
   note: Exact frontier comparison can prevent a false green while still producing misleading diagnostic shape; rate-limit headers must terminate traversal at the HTTP authority boundary before partial 403 observations become repository evidence.
+- ts: 2026-08-30T01:46:13Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Retry throttling without laundering exhausted authority into evidence
+  p-efficiency: 0.88
+  p-friction: 0.45
+  p-skill-candidate: 0.29
+  spore: none
+  receipt-refs: 2026-08-30T01:46:13Z
+  note: Rate-limit handling has two ordered responsibilities: honor the server's full retry boundary for identified throttles, then propagate terminal exhaustion as an operational failure; either retrying ordinary permission denial or classifying exhausted 403s as repository gaps corrupts the evidence boundary.

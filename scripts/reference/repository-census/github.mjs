@@ -16,11 +16,13 @@ export class GitHubClient {
   constructor(token, {
     fetchImpl = globalThis.fetch,
     sleepImpl = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
+    nowImpl = Date.now,
     maxAttempts = 3,
   } = {}) {
     this.token = token || null;
     this.fetchImpl = fetchImpl;
     this.sleepImpl = sleepImpl;
+    this.nowImpl = nowImpl;
     this.maxAttempts = maxAttempts;
     this.treeCache = new Map();
     this.recursiveTreeCache = new Map();
@@ -56,7 +58,12 @@ export class GitHubClient {
   retryDelay(response, attempt) {
     const retryAfter = response?.headers.get('retry-after');
     if (retryAfter !== null && /^\d+(?:[.]\d+)?$/.test(retryAfter)) {
-      return Math.min(Number(retryAfter) * 1000, 10000);
+      return Number(retryAfter) * 1000;
+    }
+    const remaining = response?.headers.get('x-ratelimit-remaining');
+    const reset = response?.headers.get('x-ratelimit-reset');
+    if (remaining === '0' && reset !== null && /^\d+$/.test(reset)) {
+      return Math.max(0, (Number(reset) * 1000) - this.nowImpl() + 1000);
     }
     return 200 * (2 ** (attempt - 1));
   }
@@ -96,8 +103,8 @@ export class GitHubClient {
         error.message = `GitHub API rate limit exhausted${error.rateReset ? ` until ${error.rateReset}` : ''}: ${error.message}`;
       }
       lastError = error;
-      if (isRateLimitError(error) && response.status === 403) throw error;
-      if (!RETRYABLE_STATUSES.has(response.status) || attempt === this.maxAttempts) throw error;
+      const retryable = RETRYABLE_STATUSES.has(response.status) || isRateLimitError(error);
+      if (!retryable || attempt === this.maxAttempts) throw error;
       await this.sleepImpl(this.retryDelay(response, attempt));
     }
     throw lastError;
