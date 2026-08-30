@@ -115,3 +115,12 @@
   spore: none
   receipt-refs: 2026-08-30T00:55:23Z
   note: Settled acceptance text can retain obsolete vocabulary when a later reviewed specification strengthens it; append the superseding decision and its executable mapping rather than editing history or inventing a pass-like skipped state.
+- ts: 2026-08-30T01:17:37Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Project the known inaccessible census frontier
+  p-efficiency: 0.91
+  p-friction: 0.34
+  p-skill-candidate: 0.24
+  spore: none
+  receipt-refs: 2026-08-30T01:17:37Z
+  note: A stable nonzero frontier can be planning-ready without being falsely closed when every inaccessible identity is exact, transient failures are retried separately, and missing recovery authority is represented as a blocked canonical card.
