@@ -98,18 +98,21 @@ the preceding run were retried and are absent from the successful baseline.
 
 ## Artifact
 
-GitHub Actions run `33306500265`, job `99243880827`, completed successfully
-at exact head `9586295af035f3cf4d12eb3c5857b97a993747f8` and tree
-`173f03a38db3130d0f16a0428d462dce978fbb16`. It produced artifact
-`repository-census-current` (`9730732409`, 210,100 bytes). Eta-mu workflow run
-`33306500471` completed successfully only as an ineligible draft-event gate;
+GitHub Actions run `33308382914`, retry job `99250458405`, completed
+successfully at exact head `9633bd6aba36c4376f1a2934010f1601913814f5`
+and tree `a17b454e304030bcfa415c8a57f6e53e63b0685e`. Initial job
+`99248886404` passed the adapter tests, then correctly failed closed when the
+installation API quota required a wait above the 120-second operational cap;
+it produced no artifact. The retry produced artifact
+`repository-census-current` (`9731506382`, 210,100 bytes). Eta-mu workflow run
+`33308383193` completed successfully only as an ineligible draft-event gate;
 its deterministic evidence and review jobs were skipped, so it is not review
 evidence.
 
 Artifact digest:
 
 ```text
-sha256:570aa461962dec698ac38f5082d3f21c9b536e805fd284415a092bcb5cdf7947
+sha256:ae44c7fee4f98ebb0bedd0fe838b1373db45043bd4278bce69e85cf82c4b3d5d
 ```
 
 The artifact contains:
@@ -121,8 +124,11 @@ The artifact contains:
 - `index.md`
 - `summary.json`
 
-The downloaded ZIP passed integrity verification and contained exactly those
-six files. Its evidence rows reverified the 951 repositories, 1,312
+The downloaded ZIP digest matched the workflow artifact metadata, passed
+integrity verification, and contained exactly those six files. Every extracted
+payload was byte-identical to current-head confirmation artifact `9730993743`
+and provider-boundary artifact `9730732409`. Its evidence rows reverified the
+951 repositories, 1,312
 occurrences, and 99 gaps above; `summary.json` retained the four exact roots,
 and `frontier.json` matched the reviewed 47-identity baseline semantically.
 `summary.json` also records locator normalizer

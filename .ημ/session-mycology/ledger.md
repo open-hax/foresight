@@ -376,3 +376,12 @@
   spore: none
   receipt-refs: 2026-08-30T10:37:26Z
   note: Evidence-field hardening legitimately changes artifact bytes even when graph counts and frontier remain stable. Publish the executable first, verify its hosted descriptor and redaction output, then cite that run in a provenance-only successor without moving the implementation boundary again.
+- ts: 2026-08-30T11:39:50Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Validate exact hits through recursive hierarchy
+  p-efficiency: 0.93
+  p-friction: 0.41
+  p-skill-candidate: 0.27
+  spore: none
+  receipt-refs: 2026-08-30T11:39:50Z
+  note: Positive exact-path evidence is not compositional: a nested object remains untrusted until every present ancestor is a tree. In an explicitly complete response, a missing or non-tree ancestor invalidates the hit; in a truncated response, a missing ancestor is unknown rather than false. That distinction blocks fabricated descendants without erasing safe positive fallback evidence.
