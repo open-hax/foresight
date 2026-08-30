@@ -394,3 +394,12 @@
   spore: none
   receipt-refs: 2026-08-30T12:19:16Z
   note: Query and fragment removal must not run before userinfo discovery when a later @ makes the boundary ambiguous. Treat the sensitive ranges as a union, retain only a supported protocol prefix, and exercise unsupported schemes, path separators, and malformed authorities so attacker-controlled syntax cannot reopen the diagnostic leak.
+- ts: 2026-08-30T12:45:47Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind the credential-safe census artifact
+  p-efficiency: 0.93
+  p-friction: 0.39
+  p-skill-candidate: 0.18
+  spore: none
+  receipt-refs: 2026-08-30T12:45:47Z
+  note: Exact-head hosted evidence completed only after two independent redaction passes: suffix-before-userinfo ambiguity and attacker-controlled unsupported schemes both fail closed. All six census payloads remain byte-identical, so the repair narrows diagnostic disclosure without changing repository identity, traversal, or frontier semantics.

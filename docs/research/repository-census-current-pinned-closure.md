@@ -98,21 +98,20 @@ the preceding run were retried and are absent from the successful baseline.
 
 ## Artifact
 
-GitHub Actions run `33308382914`, retry job `99250458405`, completed
-successfully at exact head `9633bd6aba36c4376f1a2934010f1601913814f5`
-and tree `a17b454e304030bcfa415c8a57f6e53e63b0685e`. Initial job
-`99248886404` passed the adapter tests, then correctly failed closed when the
-installation API quota required a wait above the 120-second operational cap;
-it produced no artifact. The retry produced artifact
-`repository-census-current` (`9731506382`, 210,100 bytes). Eta-mu workflow run
-`33308383193` completed successfully only as an ineligible draft-event gate;
-its deterministic evidence and review jobs were skipped, so it is not review
-evidence.
+GitHub Actions run `33311769579`, job `99258012726`, completed successfully at
+exact head `3646502f38e61fe8d90f72ebac6cb6ce331329c1` and tree
+`7b1a15b700059578307d2ce57b6c830e4e71547e`. The run passed the adapter
+tests, traversed the pinned closure with 2,830 GitHub requests and 3,115
+remaining, matched the exact reviewed frontier, and produced artifact
+`repository-census-current` (`9732323041`, 210,100 bytes). Eta-mu workflow run
+`33311769866` completed successfully only as an ineligible draft-event gate;
+its deterministic evidence, tool-staging, and review jobs were skipped, so it
+is not review evidence.
 
 Artifact digest:
 
 ```text
-sha256:ae44c7fee4f98ebb0bedd0fe838b1373db45043bd4278bce69e85cf82c4b3d5d
+sha256:9729087eeb182773f05f34db64d2f7b34348758d05f1dd8e5e6a3de2b50a44c8
 ```
 
 The artifact contains:
@@ -126,8 +125,9 @@ The artifact contains:
 
 The downloaded ZIP digest matched the workflow artifact metadata, passed
 integrity verification, and contained exactly those six files. Every extracted
-payload was byte-identical to current-head confirmation artifact `9730993743`
-and provider-boundary artifact `9730732409`. Its evidence rows reverified the
+payload was byte-identical to recursive-hierarchy artifact `9731506382`,
+current-head confirmation artifact `9731830387`, and provider-boundary artifact
+`9730732409`. Its evidence rows reverified the
 951 repositories, 1,312
 occurrences, and 99 gaps above; `summary.json` retained the four exact roots,
 and `frontier.json` matched the reviewed 47-identity baseline semantically.
@@ -136,7 +136,9 @@ and `frontier.json` matched the reviewed 47-identity baseline semantically.
 `342bb168615111b14bcbb32337608ee4f6787cc293104af8982ab4cd6fbb564f`,
 and epistemic tier `derived-locator`. All 1,312 occurrence rows carry that exact
 descriptor plus the SHA-256 of the decoded declaration URL. Diagnostic URL
-fields contain no unredacted protocol/SCP userinfo or query/fragment text.
+fields contain no unredacted protocol/SCP userinfo or query/fragment text,
+including ambiguous delimiters before later `@` characters and unsupported
+attacker-controlled schemes.
 
 The structural counts and canonical frontier remain identical to the preceding
 verified artifacts. The current occurrence, gap, and summary payload bytes
