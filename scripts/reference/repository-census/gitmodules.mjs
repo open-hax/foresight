@@ -50,8 +50,8 @@ function decodeSubmoduleName(raw) {
 export function parseGitmodules(text) {
   const modules = [];
   let current = null;
-  const quotedSection = /^\s*\[\s*([A-Za-z0-9][A-Za-z0-9-]*)\s+"((?:[^"\\]|\\.)*)"\s*\](.*)$/;
-  const simpleSection = /^\s*\[\s*([A-Za-z0-9][A-Za-z0-9-]*)(?:\.([A-Za-z0-9.-]*))?\s*\](.*)$/;
+  const quotedSection = /^\s*\[([A-Za-z0-9][A-Za-z0-9-]*)\s+"((?:[^"\\]|\\.)*)"\](.*)$/;
+  const simpleSection = /^\s*\[([A-Za-z0-9][A-Za-z0-9-]*)(?:\.([A-Za-z0-9.-]*))?\](.*)$/;
   const property = /^\s*([A-Za-z][A-Za-z0-9-]*)\s*=\s*(.*?)\s*$/;
   const bareProperty = /^\s*([A-Za-z][A-Za-z0-9-]*)\s*$/;
 

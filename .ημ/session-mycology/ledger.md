@@ -178,3 +178,12 @@
   spore: none
   receipt-refs: 2026-08-30T02:58:30Z
   note: Evidence integrity requires hashing raw bytes before text normalization, carrying source Git identities on each occurrence, treating packet actors as claims rather than credentials, and bounding server-directed waits within the workflow's fail-closed execution budget.
+- ts: 2026-08-30T03:11:59Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Deduplicate census roots and match Git section whitespace
+  p-efficiency: 0.94
+  p-friction: 0.30
+  p-skill-candidate: 0.24
+  spore: none
+  receipt-refs: 2026-08-30T03:11:59Z
+  note: Input normalization must happen before bounded traversal accounting, and parser permissiveness must be checked against the authoritative Git grammar; otherwise duplicate or malformed inputs can turn an incomplete traversal into apparently closed evidence.

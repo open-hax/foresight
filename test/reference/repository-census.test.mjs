@@ -88,6 +88,14 @@ assert.deepEqual(parseGitmodules(
 ), [{
   name: 'inline', line: 1, path: 'docs', url: '../docs.git', parseStatus: 'valid',
 }]);
+for (const malformedHeader of [
+  '[ submodule "child"]',
+  '[submodule "child" ]',
+]) {
+  assert.equal(parseGitmodules(
+    `${malformedHeader}\n  path = child\n  url = ../child.git\n`,
+  )[0].parseStatus, 'invalid-syntax');
+}
 assert.equal(parseGitmodules('[core\npath = child\n')[0].parseStatus, 'invalid-syntax');
 assert.equal(parseGitmodules([
   '[submodule "child"]', '  path = child', '  url = ../child.git', '  this is not config', '',
@@ -485,6 +493,14 @@ const depthBounded = await census({
 }, { client: traversalClient(rootManifest) });
 assert.equal(depthBounded.stats.frontierRemaining, 1);
 assert.equal(depthBounded.gaps.some((gap) => gap['gap/type'] === 'recursion/max-depth'), true);
+
+const duplicateRoots = await census({
+  roots: [`open-hax/root@${sha('a')}`, `OPEN-HAX/root@${sha('a')}`],
+  maxNodes: 2, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(rootManifest) });
+assert.equal(duplicateRoots.roots.length, 1);
+assert.equal(duplicateRoots.stats.repositories, 2);
+assert.equal(duplicateRoots.gaps.some((gap) => gap['gap/type'] === 'recursion/max-nodes'), false);
 
 const cycleManifest = '[submodule "self"]\n  path = self\n  url = git@github.com:open-hax/root.git\n';
 const cycle = await census({

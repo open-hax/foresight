@@ -20,7 +20,15 @@ async function mapLimit(items, limit, task) {
 }
 
 export async function census(options, dependencies = {}) {
-  const roots = options.roots.map(parseRoot);
+  const roots = [];
+  const rootKeys = new Set();
+  for (const spec of options.roots) {
+    const root = parseRoot(spec);
+    const key = `${root.fullName.toLowerCase()}@${root.revision}`;
+    if (rootKeys.has(key)) continue;
+    rootKeys.add(key);
+    roots.push(root);
+  }
   if (!roots.length) throw new Error('At least one --root is required');
 
   const client = dependencies.client || new GitHubClient(process.env.GITHUB_TOKEN);
