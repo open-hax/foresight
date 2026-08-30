@@ -313,3 +313,12 @@
   spore: none
   receipt-refs: 2026-08-30T07:49:00Z
   note: Once response headers arrive, a later body failure is still governed by that response's rate-limit authority. Falling back to transport-only timing can violate Retry-After and turn a required traversal abort into ordinary frontier evidence.
+- ts: 2026-08-30T08:03:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind current artifact provenance without self-reference
+  p-efficiency: 0.95
+  p-friction: 0.22
+  p-skill-candidate: 0.17
+  spore: none
+  receipt-refs: 2026-08-30T08:03:00Z
+  note: Executable provenance cannot cite an artifact that exists only after the executable commit runs. A subsequent provenance-only commit can cite the completed run truthfully while leaving every adapter byte unchanged.
