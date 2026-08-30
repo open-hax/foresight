@@ -45,11 +45,16 @@ export async function census(options, dependencies = {}) {
   const occurrences = [];
   const gaps = [];
 
-  const addGap = (gap, { frontier = false } = {}) => gaps.push({
-    'gap/id': stableId('gap', gap['gap/type'], JSON.stringify(gap)),
-    ...gap,
-    ...(frontier ? { 'gap/frontier?': true } : {}),
-  });
+  const addGap = (gap, { frontier = false } = {}) => {
+    const stableSubject = Object.fromEntries(Object.entries(gap)
+      .filter(([key]) => key !== 'gap/detail')
+      .sort(([left], [right]) => compareText(left, right)));
+    gaps.push({
+      'gap/id': stableId('gap', gap['gap/type'], JSON.stringify(stableSubject)),
+      ...gap,
+      ...(frontier ? { 'gap/frontier?': true } : {}),
+    });
+  };
 
   while (queue.length && visited.size < options.maxNodes) {
     const item = queue.shift();
@@ -140,8 +145,9 @@ export async function census(options, dependencies = {}) {
         ? normalized.fullName.toLowerCase()
         : normalized.fullName ?? null;
       const targetId = normalized.kind === 'github' ? `github:${targetFullName}` : null;
-      const gitlink = lookup?.status === 'found' && lookup.entry.type === 'commit'
-        ? lookup.entry.sha.toLowerCase() : null;
+      const hasGitlinkEntry = lookup?.status === 'found' && lookup.entry?.type === 'commit';
+      const gitlink = hasGitlinkEntry && typeof lookup.entry.sha === 'string'
+        && fullObjectId.test(lookup.entry.sha) ? lookup.entry.sha : null;
 
       let status;
       if (module.parseStatus !== 'valid') status = 'invalid-declaration';
@@ -149,7 +155,11 @@ export async function census(options, dependencies = {}) {
       else if (normalized.kind !== 'github') status = 'unsupported-url';
       else if (lookup?.status === 'error') status = 'lookup-error';
       else if (lookup?.status !== 'found') status = 'path-unresolved';
-      else if (lookup.entry.type !== 'commit') status = 'path-not-gitlink';
+      else if (!lookup.entry || !['blob', 'tree', 'commit'].includes(lookup.entry.type)) {
+        status = 'invalid-gitlink';
+      }
+      else if (lookup.entry?.type !== 'commit') status = 'path-not-gitlink';
+      else if (!gitlink) status = 'invalid-gitlink';
       else status = 'resolved';
 
       const occurrence = {
@@ -178,7 +188,10 @@ export async function census(options, dependencies = {}) {
           'gap/parent': repoId, 'gap/parent-revision': item.revision,
           'gap/path': module.path ?? null, 'gap/raw-url': module.url ?? null,
           'gap/detail': lookup?.error?.message ?? lookup?.status ?? module.parseStatus,
-        }, { frontier: status === 'lookup-error' || status === 'invalid-declaration' });
+        }, {
+          frontier: status === 'lookup-error' || status === 'invalid-declaration'
+            || status === 'invalid-gitlink',
+        });
         continue;
       }
 

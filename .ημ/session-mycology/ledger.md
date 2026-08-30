@@ -250,3 +250,12 @@
   spore: none
   receipt-refs: 2026-08-30T04:53:08Z
   note: Namespace consolidation must follow the authority's syntax-specific identity rules: deprecated dot-form subsections lowercase their names while quoted subsections preserve case, so normalization must precede repeated-section merging.
+- ts: 2026-08-30T05:40:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Close census identity and promotion-authority boundaries
+  p-efficiency: 0.93
+  p-friction: 0.42
+  p-skill-candidate: 0.29
+  spore: none
+  receipt-refs: 2026-08-30T05:40:00Z
+  note: Hosted closure proves an output projection, not every future evidence contract; observation provenance, stable subject keys, strict Gitlink identities, Git-compatible record continuation, and commit-bound promotion authority all require explicit fail-closed laws before the projection can be trusted downstream.

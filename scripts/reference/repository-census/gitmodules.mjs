@@ -76,6 +76,19 @@ export function parseGitmodules(text) {
   const property = /^[ \t]*([A-Za-z][A-Za-z0-9-]*)[ \t]*=[ \t]*(.*)$/;
   const bareProperty = /^[ \t]*([A-Za-z][A-Za-z0-9-]*)[ \t]*$/;
 
+  const startsValueAssignment = (candidate) => {
+    let remainder = candidate;
+    const quotedMatch = candidate.match(quotedSection);
+    if (quotedMatch) {
+      remainder = quotedMatch[3];
+    } else {
+      const simpleMatch = candidate.match(simpleSection);
+      if (simpleMatch) remainder = simpleMatch[3];
+      else if (/^[ \t]*\[/.test(candidate)) return false;
+    }
+    return property.test(remainder);
+  };
+
   const flush = () => {
     if (current) {
       const previous = modulesByName.get(current.name);
@@ -102,6 +115,10 @@ export function parseGitmodules(text) {
     let line = physicalLines[index];
     const continuationBoundaries = [];
     const firstLine = index + 1;
+    // Git permits physical-line continuation only after a value assignment.
+    // Section headers, variable names, and bare keys ending in a backslash are
+    // malformed records rather than prefixes for the following physical line.
+    const valueMayContinue = startsValueAssignment(line);
     while (true) {
       let quoted = false;
       let escaped = false;
@@ -116,7 +133,7 @@ export function parseGitmodules(text) {
           break;
         }
       }
-      if (!escaped) break;
+      if (!escaped || !valueMayContinue) break;
       line = line.slice(0, -1);
       continuationBoundaries.push(line.length);
       if (index + 1 >= physicalLines.length) break;

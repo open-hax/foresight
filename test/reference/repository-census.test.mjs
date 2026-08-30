@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { parseArgs, parseRoot } from '../../scripts/reference/repository-census/args.mjs';
@@ -217,6 +218,35 @@ assert.deepEqual(parseGitmodules(
 ), [{
   name: 'inline', line: 1, path: 'docs', url: '../docs.git', parseStatus: 'valid',
 }]);
+const rejectedNonValueContinuations = [
+  '[submodule "synthetic"]\\\npath = child\nurl = ../child.git\n',
+  '[submodule "synthetic"]\npa\\\nth = child\nurl = ../child.git\n',
+  '[submodule "synthetic"]\npath\\\n = child\nurl = ../child.git\n',
+  '[submod\\\nule "synthetic"]\npath = child\nurl = ../child.git\n',
+  '[submodule "syn\\\nthetic"]\npath = child\nurl = ../child.git\n',
+];
+for (const rejectedManifest of rejectedNonValueContinuations) {
+  const git = spawnSync('git', ['config', '-z', '-f', '-', '--get', 'submodule.synthetic.path'], {
+    input: rejectedManifest, encoding: 'utf8',
+  });
+  assert.equal(git.status, 128);
+  assert.equal(parseGitmodules(rejectedManifest).some(
+    (module) => module.name === 'synthetic' && module.parseStatus === 'valid'
+      && module.path === 'child' && module.url === '../child.git',
+  ), false);
+}
+for (const acceptedManifest of [
+  '[submodule "continued"]\npath = chil\\\nd\nurl = ../child.git\n',
+  '[submodule "continued"] path = chil\\\nd\nurl = ../child.git\n',
+]) {
+  const git = spawnSync('git', ['config', '-z', '-f', '-', '--get', 'submodule.continued.path'], {
+    input: acceptedManifest, encoding: 'utf8',
+  });
+  assert.equal(git.status, 0);
+  assert.equal(git.stdout, 'child\0');
+  assert.equal(parseGitmodules(acceptedManifest)[0].path, 'child');
+  assert.equal(parseGitmodules(acceptedManifest)[0].parseStatus, 'valid');
+}
 for (const malformedHeader of [
   '[ submodule "child"]',
   '[submodule "child" ]',
@@ -654,6 +684,62 @@ assert.equal(nonGitWhitespaceDeclaration.occurrences[0]['occurrence/status'], 'i
 assert.equal(nonGitWhitespaceDeclaration.gaps[0]['gap/type'], 'submodule/invalid-declaration');
 assert.equal(nonGitWhitespaceDeclaration.gaps[0]['gap/frontier?'], true);
 assert.equal(nonGitWhitespaceDeclaration.stats.frontierRemaining, 1);
+
+const continuedHeaderDeclaration = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(new Map([[
+  `open-hax/root@${sha('a')}`,
+  '[submodule "synthetic"]\\\npath = child\nurl = ../child.git\n',
+]])) });
+assert.equal(continuedHeaderDeclaration.repositories.length, 1);
+assert.equal(continuedHeaderDeclaration.occurrences.some(
+  (row) => row['occurrence/status'] === 'resolved',
+), false);
+assert.equal(continuedHeaderDeclaration.gaps.some(
+  (gap) => gap['gap/type'] === 'submodule/invalid-declaration' && gap['gap/frontier?'] === true,
+), true);
+
+const malformedGitlinkManifest = new Map([[
+  `open-hax/root@${sha('a')}`,
+  '[submodule "child"]\n  path = child\n  url = ../child.git\n',
+]]);
+for (const malformedGitlinkEntry of [
+  undefined,
+  { type: 'commit', path: 'child', sha: undefined },
+  { type: 'commit', path: 'child', sha: 'main' },
+  { type: 'commit', path: 'child', sha: sha('A') },
+]) {
+  const client = traversalClient(malformedGitlinkManifest);
+  client.lookupTreePath = async () => ({
+    status: 'found', entry: malformedGitlinkEntry,
+  });
+  const result = await census({
+    roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+  }, { client });
+  assert.equal(result.repositories.length, 1);
+  assert.equal(result.occurrences[0]['occurrence/status'], 'invalid-gitlink');
+  assert.equal(result.occurrences[0]['occurrence/target-revision'], null);
+  assert.equal(result.gaps[0]['gap/type'], 'submodule/invalid-gitlink');
+  assert.equal(result.gaps[0]['gap/frontier?'], true);
+  assert.equal(result.stats.frontierRemaining, 1);
+}
+
+const unavailableWithDetail = async (message) => census({
+  roots: [`open-hax/private@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: {
+  requests: 1,
+  rate: { remaining: 0, reset: null },
+  manifest: async () => {
+    const error = new Error(message);
+    error.status = 404;
+    throw error;
+  },
+} });
+const firstUnavailable = await unavailableWithDetail('Not Found');
+const secondUnavailable = await unavailableWithDetail('Repository not found');
+assert.notEqual(firstUnavailable.gaps[0]['gap/detail'], secondUnavailable.gaps[0]['gap/detail']);
+assert.equal(firstUnavailable.gaps[0]['gap/id'], secondUnavailable.gaps[0]['gap/id']);
+assert.equal(firstUnavailable.gaps[0]['gap/frontier?'], true);
 
 for (const invalidManifest of [
   '[submodule "child"]\0ignored\n  path = child\n  url = ../child.git\n',

@@ -64,12 +64,19 @@ Becomes one census-run observation containing:
 
 ### `occurrences.edn`
 
-Each row contains several epistemically different facts and must not be stored
-as one ambiguous repository edge.
+Each row is an effective decoded submodule-configuration namespace, not one
+physical section header. Repeated headers with the same decoded name are folded
+using Git's ordered property-assignment semantics: the row retains the first
+header line and the final effective values. The exact source blob and digest
+remain the authority for reconstructing every physical declaration. An importer
+must not claim that one occurrence row proves one raw header.
+
+Each effective row still contains several epistemically different facts and
+must not be stored as one ambiguous repository edge.
 
 It decomposes into:
 
-1. **Observed submodule declaration**
+1. **Observed effective submodule configuration**
    - parent repository reference;
    - parent commit OID;
    - exact `.gitmodules` path, source blob OID, and raw-byte SHA-256;
@@ -132,7 +139,7 @@ Names are provisional until accepted in Epiphany law:
 
 ```clojure
 :census/run-completed
-:git/submodule-declaration-observed
+:git/effective-submodule-config-observed
 :git/gitlink-observed
 :repository/reference-normalized
 :census/gap-observed
@@ -151,14 +158,20 @@ Every record should carry Epiphany's versioned observation envelope:
  :observation/observed-at ...
  :observation/adapter-version ...
  :observation/schema-version ...
+ :census/run-id ...
  :observation/request-id ...}
 ```
 
-The Epiphany importer assigns a distinct `:observation/id` to every stored
-record in a census run. Packet `occurrence/id` and `gap/id` values remain stable
-evidence-subject keys and may participate in request/idempotency checks; neither
-is reused as `:observation/id`. A repeated run may therefore observe the same
-packet occurrence again without collapsing two run-bound observations into one.
+The Epiphany importer assigns one immutable `:census/run-id` when it accepts a
+packet and persists that ID on the run observation and every child observation.
+It assigns a distinct `:observation/id` to every stored record in that census
+run. `:observation/request-id` remains the acquisition/idempotency request key;
+it is not a substitute for run membership. Packet `occurrence/id` and `gap/id`
+values remain stable evidence-subject keys and may participate in
+request/idempotency checks; neither is reused as `:observation/id`. `gap/id`
+excludes volatile human-readable `gap/detail` from its subject digest. A
+repeated run may therefore observe the same packet occurrence or gap again
+without collapsing two run-bound observations into one.
 
 Repository-bound records additionally carry `:resource-id`. Pre-registration
 external-reference observations require a distinct typed subject/reference;

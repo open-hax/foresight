@@ -6,10 +6,10 @@ This is an orientation-grade structural census over four pinned repository roots
 
 The reachable graph is structurally stable but not fully inspectable with the
 workflow's current authority. The current frontier contains 47 exact
-repository/revision observations that still return HTTP 404 after bounded
-retry. Those identities are checked in and compared exactly; they are not
-treated as absent manifests or a count-only exception. The larger historical
-and documentary census also remains open.
+repository/revision observations that return non-retryable HTTP 404 responses
+on each census run. Those identities are checked in and compared exactly; they
+are not treated as absent manifests or a count-only exception. The larger
+historical and documentary census also remains open.
 
 ## Pinned roots
 
@@ -23,7 +23,11 @@ and documentary census also remains open.
 ## Method
 
 1. Read each root's `.gitmodules` at the pinned revision.
-2. Preserve every declaration as an occurrence with its parent repository, parent revision, path, raw URL, declared branch, and declaration line.
+2. Preserve every effective decoded submodule namespace as one occurrence with
+   its parent repository, parent revision, effective path, effective raw URL,
+   declared branch, and first header line. Repeated headers are consolidated
+   with Git's ordered property-assignment semantics; the exact source blob
+   remains the authority for every physical declaration.
 3. Resolve the path through the pinned Git tree and record the exact Gitlink commit when present.
 4. Normalize supported GitHub remotes into repository names without treating the mount path as identity.
 5. Recurse only through exact Gitlink commits.

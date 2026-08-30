@@ -305,6 +305,17 @@ base, operations, and attachments before interpreter validation or promotion.
 match the authenticated principal (or an explicitly authorized delegation), or
 the bridge rejects the proposal without writing Clio events or Git commits.
 
+Authorization alone does not bind the bytes being reviewed. Before interpreter
+validation, the bridge must resolve `:proposal/base :corpus/commit` to the exact
+source tree, load the canonical catalog from that commit, recompute and match
+`:catalog/digest`, and resolve every operated source and attachment through that
+verified catalog. A missing object, digest mismatch, unauthorized base, or base
+that is stale relative to the canonical promotion head is rejected before any
+Clio/Git write. Validation output and the eventual promotion parent remain
+bound to that same immutable commit and catalog digest; the bridge rechecks the
+canonical head immediately before promotion rather than applying reviewed
+operations to newer bytes.
+
 ## LFS-to-Drive migration
 
 ### Phase 1 — inventory and freeze
