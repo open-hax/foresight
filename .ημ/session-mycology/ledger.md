@@ -367,3 +367,12 @@
   spore: none
   receipt-refs: 2026-08-30T10:22:19Z
   note: Immutable API endpoints do not make response bodies trustworthy. Commit, tree, path-scope, mode, object-width, and recursive-hierarchy claims each need independent validation; locator provenance must also describe one uniform identity policy while diagnostics redact every credential-bearing suffix and userinfo form.
+- ts: 2026-08-30T10:37:26Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind hosted locator provenance chronologically
+  p-efficiency: 0.95
+  p-friction: 0.22
+  p-skill-candidate: 0.16
+  spore: none
+  receipt-refs: 2026-08-30T10:37:26Z
+  note: Evidence-field hardening legitimately changes artifact bytes even when graph counts and frontier remain stable. Publish the executable first, verify its hosted descriptor and redaction output, then cite that run in a provenance-only successor without moving the implementation boundary again.

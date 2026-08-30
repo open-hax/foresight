@@ -24,12 +24,14 @@ historical and documentary census also remains open.
 
 1. Read each root's `.gitmodules` at the pinned revision.
 2. Preserve every effective decoded submodule namespace as one occurrence with
-   its parent repository, parent revision, effective path, effective raw URL,
-   declared branch, and first header line. Repeated headers are consolidated
-   with Git's ordered property-assignment semantics; the exact source blob
-   remains the authority for every physical declaration.
+   its parent repository, parent revision, effective path, redacted diagnostic
+   URL, exact decoded-URL SHA-256, declared branch, and first header line.
+   Repeated headers are consolidated with Git's ordered property-assignment
+   semantics; the exact source blob remains the authority for every physical
+   declaration.
 3. Resolve the path through the pinned Git tree and record the exact Gitlink commit when present.
-4. Normalize supported GitHub remotes into repository names without treating the mount path as identity.
+4. Normalize supported GitHub remotes under one emitted versioned descriptor
+   without treating the mount path, userinfo, query, or fragment as identity.
 5. Recurse only through exact Gitlink commits.
 6. Deduplicate traversal by `(repository name, commit SHA)`.
 7. Retain local-only, unsupported, missing, and non-Gitlink declarations as explicit gaps.
@@ -96,15 +98,18 @@ the preceding run were retried and are absent from the successful baseline.
 
 ## Artifact
 
-GitHub Actions run `33303456720`, job `99235704076`, completed successfully
-at exact head `e0a0dc9b797c2e09e41ab65917c23e1fec2dc807` and tree
-`4056e37f8ac908a4844d407e4b971e74856445a0`. It produced artifact
-`repository-census-current` (`9729762533`, 153,835 bytes).
+GitHub Actions run `33306500265`, job `99243880827`, completed successfully
+at exact head `9586295af035f3cf4d12eb3c5857b97a993747f8` and tree
+`173f03a38db3130d0f16a0428d462dce978fbb16`. It produced artifact
+`repository-census-current` (`9730732409`, 210,100 bytes). Eta-mu workflow run
+`33306500471` completed successfully only as an ineligible draft-event gate;
+its deterministic evidence and review jobs were skipped, so it is not review
+evidence.
 
 Artifact digest:
 
 ```text
-sha256:0d4ffaa311bf8545619510790bf6e65cbb42ccf7f45d0dc723c036c74adce66e
+sha256:570aa461962dec698ac38f5082d3f21c9b536e805fd284415a092bcb5cdf7947
 ```
 
 The artifact contains:
@@ -120,9 +125,20 @@ The downloaded ZIP passed integrity verification and contained exactly those
 six files. Its evidence rows reverified the 951 repositories, 1,312
 occurrences, and 99 gaps above; `summary.json` retained the four exact roots,
 and `frontier.json` matched the reviewed 47-identity baseline semantically.
-Each extracted file was byte-identical to the preceding successful exact-head
-census artifact `9729389230` and repaired-adapter artifact `9728785117`; only
-the rebuilt ZIP container digest changed.
+`summary.json` also records locator normalizer
+`foresight/github-submodule-locator` version `1`, configuration SHA-256
+`342bb168615111b14bcbb32337608ee4f6787cc293104af8982ab4cd6fbb564f`,
+and epistemic tier `derived-locator`. All 1,312 occurrence rows carry that exact
+descriptor plus the SHA-256 of the decoded declaration URL. Diagnostic URL
+fields contain no unredacted protocol/SCP userinfo or query/fragment text.
+
+The structural counts and canonical frontier remain identical to the preceding
+verified artifacts. The current occurrence, gap, and summary payload bytes
+intentionally differ because the audited adapter adds locator provenance,
+exact-URL evidence hashes, and credential-safe diagnostic rendering;
+`repositories.edn`, `frontier.json`, and `index.md` remain byte-identical. This
+run, rather than a whole-artifact byte comparison with the pre-provenance
+artifacts, is the hosted authority for the new fields.
 
 ## Known exclusions
 
