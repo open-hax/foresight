@@ -26,6 +26,14 @@ export const LOCATOR_NORMALIZER = Object.freeze({
 function redactUrlForEvidence(raw) {
   const suffix = raw.search(/[?#]/);
   const identityPart = suffix < 0 ? raw : raw.slice(0, suffix);
+  if (suffix >= 0 && raw.indexOf('@', suffix + 1) >= 0) {
+    const protocolPrefix = raw.match(/^(?:https?|git|ssh):\/\//i)?.[0] ?? '';
+    // A query/fragment delimiter before @ makes the boundary ambiguous in
+    // untrusted locator evidence. The two redaction ranges overlap, so retain
+    // only a supported, non-secret protocol prefix rather than guessing which
+    // attacker-controlled text is safe.
+    return `${protocolPrefix}[userinfo-redacted][query-or-fragment-redacted]`;
+  }
   let redacted = identityPart;
   const protocol = identityPart.match(/^([A-Za-z][A-Za-z0-9+.-]*:\/\/)([^/]*)([\s\S]*)$/);
   if (protocol) {

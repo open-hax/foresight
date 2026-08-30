@@ -385,3 +385,12 @@
   spore: none
   receipt-refs: 2026-08-30T11:39:50Z
   note: Positive exact-path evidence is not compositional: a nested object remains untrusted until every present ancestor is a tree. In an explicitly complete response, a missing or non-tree ancestor invalidates the hit; in a truncated response, a missing ancestor is unknown rather than false. That distinction blocks fabricated descendants without erasing safe positive fallback evidence.
+- ts: 2026-08-30T12:19:16Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Redact overlapping locator ambiguity ranges
+  p-efficiency: 0.94
+  p-friction: 0.34
+  p-skill-candidate: 0.21
+  spore: none
+  receipt-refs: 2026-08-30T12:19:16Z
+  note: Query and fragment removal must not run before userinfo discovery when a later @ makes the boundary ambiguous. Treat the sensitive ranges as a union, retain only a supported protocol prefix, and exercise unsupported schemes, path separators, and malformed authorities so attacker-controlled syntax cannot reopen the diagnostic leak.

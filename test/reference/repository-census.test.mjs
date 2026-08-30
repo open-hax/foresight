@@ -153,6 +153,80 @@ assert.equal(
   queryCredentialLocator.rawSha256,
   createHash('sha256').update(queryCredentialUrl).digest('hex'),
 );
+
+const pathyProtocolDiagnosticUrl = [
+  'https://user:pathy-protocol-sentinel/segment.git',
+  '?next@evil.example/open-hax/repo.git',
+].join('');
+const pathyRelativeDiagnosticUrl = [
+  '../user:pathy-relative-sentinel',
+  '?next@github.com/open-hax/repo.git',
+].join('');
+const adversarialDiagnosticUrls = [
+  {
+    raw: 'https://user:query-before-at-sentinel?x@github.com/open-hax/repo.git',
+    expected: 'https://[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['query-before-at-sentinel'],
+  },
+  {
+    raw: 'ssh://user:protocol-fragment-sentinel#next@github.com/open-hax/repo.git',
+    expected: 'ssh://[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['protocol-fragment-sentinel'],
+  },
+  {
+    raw: 'user:scp-query-sentinel?next=/oauth@github.com:open-hax/repo.git',
+    expected: '[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['scp-query-sentinel'],
+  },
+  {
+    raw: 'user:scp-fragment-sentinel#next@github.com:open-hax/repo.git',
+    expected: '[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['scp-fragment-sentinel'],
+  },
+  {
+    raw: 'https://decoy@user:malformed-protocol-sentinel?next@@github.com/open-hax/repo.git',
+    expected: 'https://[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['decoy', 'malformed-protocol-sentinel'],
+  },
+  {
+    raw: 'not-a-locator:user:malformed-scp-sentinel#next@@github.com:open-hax/repo.git',
+    expected: '[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['malformed-scp-sentinel'],
+  },
+  {
+    raw: 'https:/user:malformed-scheme-sentinel/repo.git?next@github.com/open-hax/repo.git',
+    expected: '[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['malformed-scheme-sentinel'],
+  },
+  {
+    raw: 'secret-token://user?next@github.com/open-hax/repo.git',
+    expected: '[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['secret-token'],
+  },
+  {
+    raw: 'SeCrEt123+leak://user#next@github.com/open-hax/repo.git',
+    expected: '[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['SeCrEt123', 'leak'],
+  },
+  {
+    raw: pathyProtocolDiagnosticUrl,
+    expected: 'https://[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['pathy-protocol-sentinel'],
+  },
+  {
+    raw: pathyRelativeDiagnosticUrl,
+    expected: '[userinfo-redacted][query-or-fragment-redacted]',
+    sentinels: ['pathy-relative-sentinel'],
+  },
+];
+for (const { raw, expected, sentinels } of adversarialDiagnosticUrls) {
+  const normalized = normalizeGitHubUrl(raw);
+  assert.equal(normalized.kind, 'unsupported');
+  assert.equal(normalized.raw, expected);
+  for (const sentinel of sentinels) assert.equal(normalized.raw.includes(sentinel), false);
+  assert.equal(normalized.rawSha256, createHash('sha256').update(raw).digest('hex'));
+}
+
 assert.equal(
   normalizeGitHubUrl('user@@github.com:open-hax/foresight.git').raw,
   '[userinfo-redacted]@github.com:open-hax/foresight.git',
@@ -168,7 +242,7 @@ assert.equal(scpQueryAtCredentialLocator.raw.includes('dummy-secret'), false);
 assert.equal(scpQueryAtCredentialLocator.raw.includes('callback-secret'), false);
 assert.equal(
   scpQueryAtCredentialLocator.raw,
-  '[userinfo-redacted]@github.com:open-hax/foresight.git[query-or-fragment-redacted]',
+  '[userinfo-redacted][query-or-fragment-redacted]',
 );
 assert.equal(
   scpQueryAtCredentialLocator.rawSha256,
@@ -1449,6 +1523,12 @@ const locatorOutcomeManifest = [
   '[submodule "local"]', '  path = local', '  url = file:///tmp/local',
   '[submodule "unsupported"]', '  path = unsupported',
   '  url = https://user:outcome-secret@github.com:443/open-hax/child.git?token=query-secret',
+  '[submodule "ambiguous-userinfo"]', '  path = ambiguous-userinfo',
+  `  url = "${adversarialDiagnosticUrls[0].raw}"`,
+  '[submodule "pathy-protocol-userinfo"]', '  path = pathy-protocol-userinfo',
+  `  url = "${pathyProtocolDiagnosticUrl}"`,
+  '[submodule "pathy-relative-userinfo"]', '  path = pathy-relative-userinfo',
+  `  url = "${pathyRelativeDiagnosticUrl}"`,
   '[submodule "relative"]', '  path = relative',
   '  url = "../child.git?access_token=relative-query-secret#relative-fragment-secret"',
   '',
@@ -1500,6 +1580,9 @@ try {
   assert.equal(artifactText.includes('callback-secret'), false);
   assert.equal(artifactText.includes('relative-query-secret'), false);
   assert.equal(artifactText.includes('relative-fragment-secret'), false);
+  assert.equal(artifactText.includes('query-before-at-sentinel'), false);
+  assert.equal(artifactText.includes('pathy-protocol-sentinel'), false);
+  assert.equal(artifactText.includes('pathy-relative-sentinel'), false);
   assert.equal(artifactText.includes('[userinfo-redacted]@github.com'), true);
   assert.equal(artifactText.includes('[query-or-fragment-redacted]'), true);
   assert.equal(artifactText.includes(LOCATOR_NORMALIZER.configurationSha256), true);
