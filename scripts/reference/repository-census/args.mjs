@@ -7,6 +7,7 @@ export function parseArgs(argv) {
     maxNodes: 10000,
     maxDepth: 32,
     concurrency: 8,
+    frontierBaseline: null,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -16,6 +17,7 @@ export function parseArgs(argv) {
     else if (arg === '--max-nodes') options.maxNodes = Number(argv[++i]);
     else if (arg === '--max-depth') options.maxDepth = Number(argv[++i]);
     else if (arg === '--concurrency') options.concurrency = Number(argv[++i]);
+    else if (arg === '--frontier-baseline') options.frontierBaseline = argv[++i];
     else if (arg === '--help' || arg === '-h') options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -29,13 +31,18 @@ export function parseArgs(argv) {
   if (!Number.isInteger(options.concurrency) || options.concurrency < 1 || options.concurrency > 32) {
     throw new Error('--concurrency must be an integer from 1 to 32');
   }
+  if (options.frontierBaseline !== null
+      && (typeof options.frontierBaseline !== 'string' || options.frontierBaseline.length === 0)) {
+    throw new Error('--frontier-baseline requires a path');
+  }
   return options;
 }
 
 export function usage() {
   return `Usage: node scripts/reference/repository-census/main.mjs \\
   --root owner/repo@COMMIT [--root owner/repo@COMMIT ...] \\
-  [--out PATH] [--max-nodes N] [--max-depth N] [--concurrency N]\n`;
+  [--out PATH] [--max-nodes N] [--max-depth N] [--concurrency N] \\
+  [--frontier-baseline PATH]\n`;
 }
 
 export function isGitHubFullName(value) {

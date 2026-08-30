@@ -14,6 +14,46 @@ export function canonicalSummary(result) {
   return { roots: result.roots, stats };
 }
 
+const VOLATILE_FRONTIER_FIELDS = new Set(['gap/id', 'gap/detail', 'gap/frontier?']);
+
+function canonicalRecord(record, omitted = new Set()) {
+  if (record === null || typeof record !== 'object' || Array.isArray(record)) {
+    throw new Error('Frontier baseline records must be objects');
+  }
+  return Object.fromEntries(Object.entries(record)
+    .filter(([key]) => !omitted.has(key))
+    .sort(([left], [right]) => left.localeCompare(right)));
+}
+
+function normalizeFrontier(value) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)
+      || !Array.isArray(value.roots) || !Array.isArray(value.frontier)
+      || Object.keys(value).sort().join(',') !== 'frontier,roots') {
+    throw new Error('Frontier baseline must contain exactly roots and frontier arrays');
+  }
+  return {
+    roots: value.roots.map((root) => canonicalRecord(root)),
+    frontier: value.frontier
+      .map((gap) => canonicalRecord(gap, VOLATILE_FRONTIER_FIELDS))
+      .sort((left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right))),
+  };
+}
+
+export function canonicalFrontier(result) {
+  return normalizeFrontier({
+    roots: result.roots,
+    frontier: result.gaps.filter((gap) => gap['gap/frontier?'] === true),
+  });
+}
+
+export function frontierBaselineMatches(result, expected) {
+  try {
+    return JSON.stringify(canonicalFrontier(result)) === JSON.stringify(normalizeFrontier(expected));
+  } catch {
+    return false;
+  }
+}
+
 function markdown(result) {
   const lines = [
     '# Repository Census — Current Pinned Closure', '',
@@ -60,5 +100,6 @@ export async function writeResults(outDir, result) {
     writeNdEdn('gaps.edn', result.gaps),
     writeFile(path.join(outDir, 'index.md'), markdown(result), 'utf8'),
     writeFile(path.join(outDir, 'summary.json'), `${JSON.stringify(canonicalSummary(result), null, 2)}\n`, 'utf8'),
+    writeFile(path.join(outDir, 'frontier.json'), `${JSON.stringify(canonicalFrontier(result), null, 2)}\n`, 'utf8'),
   ]);
 }

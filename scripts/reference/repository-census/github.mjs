@@ -6,11 +6,18 @@ import { createHash } from 'node:crypto';
 const API = 'https://api.github.com';
 const RAW = 'https://raw.githubusercontent.com';
 const USER_AGENT = 'foresight-repository-census/0.1';
+const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
 
 export class GitHubClient {
-  constructor(token, { fetchImpl = globalThis.fetch } = {}) {
+  constructor(token, {
+    fetchImpl = globalThis.fetch,
+    sleepImpl = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
+    maxAttempts = 3,
+  } = {}) {
     this.token = token || null;
     this.fetchImpl = fetchImpl;
+    this.sleepImpl = sleepImpl;
+    this.maxAttempts = maxAttempts;
     this.treeCache = new Map();
     this.recursiveTreeCache = new Map();
     this.commitCache = new Map();
@@ -29,9 +36,7 @@ export class GitHubClient {
     return headers;
   }
 
-  async request(url, { accept } = {}) {
-    this.requests += 1;
-    const response = await this.fetchImpl(url, { headers: this.headers(accept) });
+  observeRate(url, response) {
     if (url.startsWith(API)) {
       const remaining = response.headers.get('x-ratelimit-remaining');
       const reset = response.headers.get('x-ratelimit-reset');
@@ -42,27 +47,51 @@ export class GitHubClient {
       }
       if (reset !== null) this.rate.reset = Number(reset);
     }
+  }
 
-    if (!response.ok) {
+  retryDelay(response, attempt) {
+    const retryAfter = response?.headers.get('retry-after');
+    if (retryAfter !== null && /^\d+(?:[.]\d+)?$/.test(retryAfter)) {
+      return Math.min(Number(retryAfter) * 1000, 10000);
+    }
+    return 200 * (2 ** (attempt - 1));
+  }
+
+  async fetchResponse(url, { accept } = {}) {
+    let lastError;
+    for (let attempt = 1; attempt <= this.maxAttempts; attempt += 1) {
+      let response;
+      try {
+        this.requests += 1;
+        response = await this.fetchImpl(url, { headers: this.headers(accept) });
+      } catch (error) {
+        lastError = error;
+        if (attempt === this.maxAttempts) throw error;
+        await this.sleepImpl(this.retryDelay(null, attempt));
+        continue;
+      }
+      this.observeRate(url, response);
+
+      if (response.ok) return response;
+
       const body = await response.text();
       const error = new Error(`HTTP ${response.status} for ${url}: ${body.slice(0, 300)}`);
       error.status = response.status;
       error.url = url;
-      throw error;
+      lastError = error;
+      if (!RETRYABLE_STATUSES.has(response.status) || attempt === this.maxAttempts) throw error;
+      await this.sleepImpl(this.retryDelay(response, attempt));
     }
+    throw lastError;
+  }
+
+  async request(url, { accept } = {}) {
+    const response = await this.fetchResponse(url, { accept });
     return response.json();
   }
 
   async requestRaw(url) {
-    this.requests += 1;
-    const response = await this.fetchImpl(url, { headers: this.headers('text/plain') });
-    if (!response.ok) {
-      const body = await response.text();
-      const error = new Error(`HTTP ${response.status} for ${url}: ${body.slice(0, 300)}`);
-      error.status = response.status;
-      error.url = url;
-      throw error;
-    }
+    const response = await this.fetchResponse(url, { accept: 'text/plain' });
     return Buffer.from(await response.arrayBuffer());
   }
 

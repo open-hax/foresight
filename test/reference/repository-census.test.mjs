@@ -4,12 +4,14 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { parseRoot } from '../../scripts/reference/repository-census/args.mjs';
+import { parseArgs, parseRoot } from '../../scripts/reference/repository-census/args.mjs';
 import { census } from '../../scripts/reference/repository-census/census.mjs';
 import { edn } from '../../scripts/reference/repository-census/edn.mjs';
 import { GitHubClient } from '../../scripts/reference/repository-census/github.mjs';
 import { normalizeGitHubUrl, parseGitmodules } from '../../scripts/reference/repository-census/gitmodules.mjs';
-import { canonicalSummary } from '../../scripts/reference/repository-census/output.mjs';
+import {
+  canonicalFrontier, canonicalSummary, frontierBaselineMatches,
+} from '../../scripts/reference/repository-census/output.mjs';
 
 const sha = (character) => character.repeat(40);
 const gitBlobSha = (text) => createHash('sha1')
@@ -61,6 +63,8 @@ assert.deepEqual(quotedModules, [
 assert.deepEqual(parseRoot(`open-hax/foresight@${sha('a')}`), {
   fullName: 'open-hax/foresight', revision: sha('a'),
 });
+assert.equal(parseArgs(['--frontier-baseline', 'known.json']).frontierBaseline, 'known.json');
+assert.throws(() => parseArgs(['--frontier-baseline']), /requires a path/);
 assert.throws(() => parseRoot('open-hax/foresight@fcb30c0'), /full lowercase Git commit ID/);
 assert.throws(() => parseRoot(`open-hax/foresight@${sha('A')}`), /full lowercase Git commit ID/);
 assert.throws(() => parseRoot(`../foresight@${sha('a')}`), /Invalid GitHub repository name/);
@@ -166,6 +170,38 @@ const unavailableTraversal = await census({
 assert.equal(unavailableTraversal.stats.frontierRemaining, 1);
 assert.equal(unavailableTraversal.stats.repositoryRevisions, 0);
 assert.equal(unavailableTraversal.gaps[0]['gap/type'], 'manifest/unavailable');
+assert.equal(unavailableTraversal.gaps[0]['gap/frontier?'], true);
+
+const retryDelays = [];
+let retryAttempt = 0;
+const retryingClient = new GitHubClient(null, {
+  fetchImpl: async () => {
+    retryAttempt += 1;
+    return retryAttempt === 1
+      ? response(500, { message: 'temporary' })
+      : response(200, { tree: { sha: 'after-retry' } });
+  },
+  sleepImpl: async (milliseconds) => retryDelays.push(milliseconds),
+});
+assert.deepEqual(await retryingClient.commit('open-hax/retry', sha('a')), {
+  tree: { sha: 'after-retry' },
+});
+assert.equal(retryingClient.requests, 2);
+assert.deepEqual(retryDelays, [200]);
+
+let persistentAttempts = 0;
+const persistentFailureClient = new GitHubClient(null, {
+  fetchImpl: async () => {
+    persistentAttempts += 1;
+    return response(504, { message: 'still unavailable' });
+  },
+  sleepImpl: async () => {},
+});
+await assert.rejects(
+  persistentFailureClient.commit('open-hax/retry', sha('b')),
+  /HTTP 504/,
+);
+assert.equal(persistentAttempts, 3);
 
 function traversalClient(manifests) {
   return {
@@ -185,6 +221,7 @@ const bounded = await census({
 }, { client: traversalClient(rootManifest) });
 assert.equal(bounded.stats.frontierRemaining, 1);
 assert.equal(bounded.gaps.some((gap) => gap['gap/type'] === 'recursion/max-nodes'), true);
+assert.equal(bounded.gaps.find((gap) => gap['gap/type'] === 'recursion/max-nodes')['gap/frontier?'], true);
 
 const depthBounded = await census({
   roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 0, concurrency: 1,
@@ -231,7 +268,42 @@ assert.deepEqual(
   canonicalSummary({ roots: [], stats: { ...stableStats, githubRequests: 9, rateRemaining: 2, rateReset: 99 } }),
 );
 
+const frontierResult = {
+  roots: [{ revision: sha('a'), fullName: 'open-hax/root' }],
+  gaps: [{
+    'gap/id': 'volatile-id',
+    'gap/type': 'manifest/unavailable',
+    'gap/repository': 'github:open-hax/private',
+    'gap/revision': sha('b'),
+    'gap/depth': 1,
+    'gap/http-status': 404,
+    'gap/detail': 'volatile response detail',
+    'gap/frontier?': true,
+  }, {
+    'gap/type': 'submodule/local-only',
+    'gap/detail': 'not traversal-blocking',
+  }],
+};
+const expectedFrontier = {
+  frontier: [{
+    'gap/revision': sha('b'),
+    'gap/http-status': 404,
+    'gap/repository': 'github:open-hax/private',
+    'gap/type': 'manifest/unavailable',
+    'gap/depth': 1,
+  }],
+  roots: [{ fullName: 'open-hax/root', revision: sha('a') }],
+};
+assert.deepEqual(canonicalFrontier(frontierResult), expectedFrontier);
+assert.equal(frontierBaselineMatches(frontierResult, expectedFrontier), true);
+assert.equal(frontierBaselineMatches(frontierResult, {
+  ...expectedFrontier,
+  frontier: [{ ...expectedFrontier.frontier[0], 'gap/http-status': 500 }],
+}), false);
+assert.equal(frontierBaselineMatches(frontierResult, { ...expectedFrontier, extra: true }), false);
+
 const workflow = readFileSync('.github/workflows/repository-census.yml', 'utf8');
 assert.match(workflow, /pull_request:/);
 assert.match(workflow, /docs\/research\/repository-census-current-pinned-closure[.]md/);
+assert.match(workflow, /--frontier-baseline docs\/research\/repository-census-known-frontier[.]json/);
 console.log('repository-census tests passed');

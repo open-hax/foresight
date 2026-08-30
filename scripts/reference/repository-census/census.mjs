@@ -32,11 +32,11 @@ export async function census(options, dependencies = {}) {
   const repositories = new Map();
   const occurrences = [];
   const gaps = [];
-  let unprocessedFrontier = 0;
 
-  const addGap = (gap) => gaps.push({
+  const addGap = (gap, { frontier = false } = {}) => gaps.push({
     'gap/id': stableId('gap', gap['gap/type'], JSON.stringify(gap)),
     ...gap,
+    ...(frontier ? { 'gap/frontier?': true } : {}),
   });
 
   while (queue.length && visited.size < options.maxNodes) {
@@ -66,12 +66,11 @@ export async function census(options, dependencies = {}) {
       manifestText = await client.manifest(item.fullName, item.revision);
     } catch (error) {
       repo['repository/manifest-statuses'].add('unavailable');
-      unprocessedFrontier += 1;
       addGap({
         'gap/type': 'manifest/unavailable', 'gap/repository': repoId,
         'gap/revision': item.revision, 'gap/depth': item.depth,
         'gap/http-status': error.status ?? null, 'gap/detail': error.message,
-      });
+      }, { frontier: true });
       continue;
     }
     inspected.add(visitKey);
@@ -89,12 +88,11 @@ export async function census(options, dependencies = {}) {
       commit = await client.commit(item.fullName, item.revision);
     } catch (error) {
       inspected.delete(visitKey);
-      unprocessedFrontier += 1;
       addGap({
         'gap/type': 'commit/unavailable', 'gap/repository': repoId,
         'gap/revision': item.revision, 'gap/depth': item.depth,
         'gap/http-status': error.status ?? null, 'gap/detail': error.message,
-      });
+      }, { frontier: true });
       continue;
     }
 
@@ -146,13 +144,12 @@ export async function census(options, dependencies = {}) {
       occurrences.push(occurrence);
 
       if (status !== 'resolved') {
-        if (status === 'lookup-error') unprocessedFrontier += 1;
         addGap({
           'gap/type': `submodule/${status}`, 'gap/occurrence': occurrence['occurrence/id'],
           'gap/parent': repoId, 'gap/parent-revision': item.revision,
           'gap/path': module.path ?? null, 'gap/raw-url': module.url ?? null,
           'gap/detail': lookup?.error?.message ?? lookup?.status ?? module.parseStatus,
-        });
+        }, { frontier: status === 'lookup-error' });
         continue;
       }
 
@@ -160,20 +157,18 @@ export async function census(options, dependencies = {}) {
       if (scheduled.has(childKey)) continue;
 
       if (item.depth + 1 > options.maxDepth) {
-        unprocessedFrontier += 1;
         addGap({
           'gap/type': 'recursion/max-depth', 'gap/occurrence': occurrence['occurrence/id'],
           'gap/target': targetId, 'gap/target-revision': gitlink, 'gap/limit': options.maxDepth,
-        });
+        }, { frontier: true });
         continue;
       }
 
       if (visited.size + queue.length >= options.maxNodes) {
-        unprocessedFrontier += 1;
         addGap({
           'gap/type': 'recursion/max-nodes', 'gap/occurrence': occurrence['occurrence/id'],
           'gap/target': targetId, 'gap/target-revision': gitlink, 'gap/limit': options.maxNodes,
-        });
+        }, { frontier: true });
         continue;
       }
       scheduled.add(childKey);
@@ -185,7 +180,7 @@ export async function census(options, dependencies = {}) {
     addGap({
       'gap/type': 'recursion/max-nodes', 'gap/repository': `github:${item.fullName.toLowerCase()}`,
       'gap/revision': item.revision, 'gap/limit': options.maxNodes,
-    });
+    }, { frontier: true });
   }
 
   const repoRows = [...repositories.values()]
@@ -208,7 +203,7 @@ export async function census(options, dependencies = {}) {
       resolvedOccurrences: occurrences.filter((row) => row['occurrence/status'] === 'resolved').length,
       gaps: gaps.length, githubRequests: client.requests,
       rateRemaining: client.rate.remaining, rateReset: client.rate.reset,
-      frontierRemaining: queue.length + unprocessedFrontier,
+      frontierRemaining: gaps.filter((gap) => gap['gap/frontier?'] === true).length,
       maxNodes: options.maxNodes, maxDepth: options.maxDepth,
     },
   };

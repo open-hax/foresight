@@ -9,12 +9,16 @@ on:
       - test/reference/repository-census.test.mjs
       - .github/workflows/repository-census.yml
       - docs/research/repository-census-current-pinned-closure.md
+      - docs/research/repository-census-known-frontier.json
+      - docs/research/epiphany-repository-census-ingestion.md
   pull_request:
     paths:
       - scripts/reference/repository-census/**
       - test/reference/repository-census.test.mjs
       - .github/workflows/repository-census.yml
       - docs/research/repository-census-current-pinned-closure.md
+      - docs/research/repository-census-known-frontier.json
+      - docs/research/epiphany-repository-census-ingestion.md
   workflow_dispatch:
 
 permissions:
@@ -46,7 +50,8 @@ jobs:
             --out reports/repository-census/current \
             --max-nodes 10000 \
             --max-depth 32 \
-            --concurrency 8
+            --concurrency 8 \
+            --frontier-baseline docs/research/repository-census-known-frontier.json
 
       - name: Upload current census projection
         if: always()
