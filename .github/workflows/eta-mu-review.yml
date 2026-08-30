@@ -21,6 +21,7 @@ jobs:
         run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
         run_gate workspace_laws npx --yes nbb@1.4.207 -cp scripts:test test/workspace_test.cljs
         run_gate project_laws npx --yes nbb@1.4.207 -cp src:scripts:test test/project_test.cljs
+        run_gate lineage_laws npx --yes nbb@1.4.207 -cp src:test test/lineage_test.cljs
         run_gate evidence_laws npx --yes nbb@1.4.207 -cp src:test test/evidence_test.cljs
         run_gate evidence_adapter npx --yes nbb@1.4.207 -cp src:scripts:test test/evidence_cli_test.cljs
         run_gate project_contract npx --yes nbb@1.4.207 -cp src:scripts scripts/project.clj validate
