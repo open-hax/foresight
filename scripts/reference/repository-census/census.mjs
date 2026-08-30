@@ -5,6 +5,8 @@ import { stableId } from './edn.mjs';
 import { GitHubClient, isRateLimitError } from './github.mjs';
 import { normalizeGitHubUrl, parseGitmodules } from './gitmodules.mjs';
 
+const compareText = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
+
 async function mapLimit(items, limit, task) {
   const results = new Array(items.length);
   let cursor = 0;
@@ -31,6 +33,8 @@ export async function census(options, dependencies = {}) {
     roots.push(root);
   }
   if (!roots.length) throw new Error('At least one --root is required');
+  roots.sort((left, right) => compareText(left.fullName, right.fullName)
+    || compareText(left.revision, right.revision));
 
   const client = dependencies.client || new GitHubClient(process.env.GITHUB_TOKEN);
   const queue = roots.map((root) => ({ ...root, depth: 0, root: true }));
@@ -132,7 +136,10 @@ export async function census(options, dependencies = {}) {
     });
 
     for (const { module, normalized, lookup } of resolved) {
-      const targetId = normalized.kind === 'github' ? `github:${normalized.fullName.toLowerCase()}` : null;
+      const targetFullName = normalized.kind === 'github'
+        ? normalized.fullName.toLowerCase()
+        : normalized.fullName ?? null;
+      const targetId = normalized.kind === 'github' ? `github:${targetFullName}` : null;
       const gitlink = lookup?.status === 'found' && lookup.entry.type === 'commit'
         ? lookup.entry.sha.toLowerCase() : null;
 
@@ -160,7 +167,7 @@ export async function census(options, dependencies = {}) {
         'occurrence/path': module.path ?? null, 'occurrence/raw-url': module.url ?? null,
         'occurrence/declared-branch': module.branch ?? null,
         'occurrence/declaration-line': module.line, 'occurrence/target': targetId,
-        'occurrence/target-full-name': normalized.fullName ?? null,
+        'occurrence/target-full-name': targetFullName,
         'occurrence/target-revision': gitlink,
       };
       occurrences.push(occurrence);
@@ -175,7 +182,7 @@ export async function census(options, dependencies = {}) {
         continue;
       }
 
-      const childKey = `${normalized.fullName.toLowerCase()}@${gitlink}`;
+      const childKey = `${targetFullName}@${gitlink}`;
       if (scheduled.has(childKey)) continue;
 
       if (item.depth + 1 > options.maxDepth) {
@@ -194,7 +201,7 @@ export async function census(options, dependencies = {}) {
         continue;
       }
       scheduled.add(childKey);
-      queue.push({ fullName: normalized.fullName, revision: gitlink, depth: item.depth + 1, root: false });
+      queue.push({ fullName: targetFullName, revision: gitlink, depth: item.depth + 1, root: false });
     }
   }
 
@@ -211,11 +218,12 @@ export async function census(options, dependencies = {}) {
       'repository/revisions': [...row['repository/revisions']].sort(),
       'repository/manifest-statuses': new Set(row['repository/manifest-statuses']),
     }))
-    .sort((a, b) => a['repository/full-name'].localeCompare(b['repository/full-name']));
-  occurrences.sort((a, b) => a['occurrence/parent'].localeCompare(b['occurrence/parent'])
-    || String(a['occurrence/path'] ?? '').localeCompare(String(b['occurrence/path'] ?? ''))
-    || a['occurrence/parent-revision'].localeCompare(b['occurrence/parent-revision']));
-  gaps.sort((a, b) => a['gap/type'].localeCompare(b['gap/type']) || a['gap/id'].localeCompare(b['gap/id']));
+    .sort((a, b) => compareText(a['repository/full-name'], b['repository/full-name']));
+  occurrences.sort((a, b) => compareText(a['occurrence/parent'], b['occurrence/parent'])
+    || compareText(String(a['occurrence/path'] ?? ''), String(b['occurrence/path'] ?? ''))
+    || compareText(a['occurrence/parent-revision'], b['occurrence/parent-revision']));
+  gaps.sort((a, b) => compareText(a['gap/type'], b['gap/type'])
+    || compareText(a['gap/id'], b['gap/id']));
 
   return {
     roots, repositories: repoRows, occurrences, gaps,

@@ -31,6 +31,53 @@ assert.deepEqual(modules[0], {
   name: 'a', line: 2, path: 'orgs/open-hax/proxx',
   url: 'git@github.com:open-hax/proxx.git', branch: 'main', parseStatus: 'valid',
 });
+const quotedUrlWhitespace = parseGitmodules([
+  '[submodule "quoted-url"]', '  path = child',
+  '  url = " https://github.com/open-hax/child.git "', '',
+].join('\n'))[0];
+assert.equal(quotedUrlWhitespace.parseStatus, 'valid');
+assert.equal(quotedUrlWhitespace.url, ' https://github.com/open-hax/child.git ');
+assert.equal(normalizeGitHubUrl(quotedUrlWhitespace.url).kind, 'unsupported');
+const nulTerminatedUrl = parseGitmodules([
+  '[submodule "nul-url"]', '  path = child',
+  '  url = https://github.com/open-hax/child.git\0ignored', '',
+].join('\n'))[0];
+assert.deepEqual(nulTerminatedUrl, {
+  name: 'NUL byte in .gitmodules', line: 3, parseStatus: 'invalid-syntax',
+});
+assert.deepEqual(parseGitmodules([
+  '[submodule "nul-header"]\0ignored', '  path = child',
+  '  url = https://github.com/open-hax/child.git', '',
+].join('\n')), [{
+  name: 'NUL byte in .gitmodules', line: 1, parseStatus: 'invalid-syntax',
+}]);
+const emptyQuoteBoundaryUrl = parseGitmodules([
+  '[submodule "quoted-boundary"]', '  path = child',
+  '  url = https://github.com/open-hax/child.git ""', '',
+].join('\n'))[0];
+assert.equal(emptyQuoteBoundaryUrl.url, 'https://github.com/open-hax/child.git ');
+assert.equal(normalizeGitHubUrl(emptyQuoteBoundaryUrl.url).kind, 'unsupported');
+const escapedWhitespaceUrl = parseGitmodules([
+  '[submodule "escaped-whitespace"]', '  path = child',
+  '  url = https://github.com/open-hax/child.git\\t', '',
+].join('\n'))[0];
+assert.equal(escapedWhitespaceUrl.url, 'https://github.com/open-hax/child.git\t');
+assert.equal(normalizeGitHubUrl(escapedWhitespaceUrl.url).kind, 'unsupported');
+for (const continuedUrl of [
+  '  url = https://github.com/open-hax/child.git \\',
+  '  url = https://github.com/open-hax/child.git \\\n# comment',
+  '  url = https://github.com/open-hax/child.git \\\n""',
+]) {
+  const module = parseGitmodules(`[submodule "continued"]\n  path = child\n${continuedUrl}`)[0];
+  assert.equal(module.url, 'https://github.com/open-hax/child.git ');
+  assert.equal(normalizeGitHubUrl(module.url).kind, 'unsupported');
+}
+const bareCarriageReturn = parseGitmodules(
+  '[core]\nx=ignored\r[submodule "child"]\rpath=p\rurl=https://github.com/open-hax/child.git\n',
+);
+assert.equal(bareCarriageReturn.length, 1);
+assert.equal(bareCarriageReturn[0].parseStatus, 'invalid-syntax');
+assert.equal(bareCarriageReturn.some((module) => module.url), false);
 assert.equal(normalizeGitHubUrl(modules[0].url).fullName, 'open-hax/proxx');
 assert.equal(normalizeGitHubUrl(modules[1].url).kind, 'local');
 assert.equal(normalizeGitHubUrl('org-14957082@github.com:openai/codex.git').fullName, 'openai/codex');
@@ -95,6 +142,23 @@ for (const malformedHeader of [
   assert.equal(parseGitmodules(
     `${malformedHeader}\n  path = child\n  url = ../child.git\n`,
   )[0].parseStatus, 'invalid-syntax');
+}
+for (const nonGitWhitespace of ['\v', '\f', '\u00a0', '\u0085', '\u2003']) {
+  assert.equal(parseGitmodules(
+    `${nonGitWhitespace}[submodule "child"]\n  path = child\n  url = ../child.git\n`,
+  )[0].parseStatus, 'invalid-syntax');
+  assert.equal(parseGitmodules(
+    `[submodule "child"]\n  path${nonGitWhitespace}= child\n  url = ../child.git\n`,
+  )[0].parseStatus, 'invalid-syntax');
+  assert.equal(parseGitmodules(
+    `${nonGitWhitespace}# comment\n[submodule "child"]\n  path = child\n  url = ../child.git\n`,
+  )[0].parseStatus, 'invalid-syntax');
+  const valueWhitespace = parseGitmodules(
+    `[submodule "child"]\n  path = child\n  url =${nonGitWhitespace}https://github.com/open-hax/child.git\n`,
+  );
+  assert.equal(valueWhitespace[0].parseStatus, 'valid');
+  assert.equal(valueWhitespace[0].url.startsWith(nonGitWhitespace), true);
+  assert.equal(normalizeGitHubUrl(valueWhitespace[0].url).kind, 'unsupported');
 }
 assert.equal(parseGitmodules('[core\npath = child\n')[0].parseStatus, 'invalid-syntax');
 assert.equal(parseGitmodules([
@@ -480,6 +544,41 @@ assert.equal(malformedDeclaration.gaps[0]['gap/type'], 'submodule/invalid-declar
 assert.equal(malformedDeclaration.gaps[0]['gap/frontier?'], true);
 assert.equal(malformedDeclaration.stats.frontierRemaining, 1);
 
+const nonGitWhitespaceDeclaration = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(new Map([[
+  `open-hax/root@${sha('a')}`,
+  '\u00a0[submodule "child"]\n  path = child\n  url = ../child.git\n',
+]])) });
+assert.equal(nonGitWhitespaceDeclaration.occurrences[0]['occurrence/status'], 'invalid-declaration');
+assert.equal(nonGitWhitespaceDeclaration.gaps[0]['gap/type'], 'submodule/invalid-declaration');
+assert.equal(nonGitWhitespaceDeclaration.gaps[0]['gap/frontier?'], true);
+assert.equal(nonGitWhitespaceDeclaration.stats.frontierRemaining, 1);
+
+for (const invalidManifest of [
+  '[submodule "child"]\0ignored\n  path = child\n  url = ../child.git\n',
+  '[core]\nx=ignored\r[submodule "child"]\rpath=child\rurl=../child.git\n',
+]) {
+  const invalidTraversal = await census({
+    roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+  }, { client: traversalClient(new Map([[`open-hax/root@${sha('a')}`, invalidManifest]])) });
+  assert.equal(invalidTraversal.repositories.length, 1);
+  assert.equal(invalidTraversal.occurrences.length, 1);
+  assert.equal(invalidTraversal.occurrences[0]['occurrence/status'], 'invalid-declaration');
+  assert.equal(invalidTraversal.gaps[0]['gap/type'], 'submodule/invalid-declaration');
+  assert.equal(invalidTraversal.stats.frontierRemaining, 1);
+}
+
+const boundaryProtectedUrlTraversal = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(new Map([[
+  `open-hax/root@${sha('a')}`,
+  '[submodule "child"]\n  path = child\n  url = https://github.com/open-hax/child.git ""\n',
+]])) });
+assert.equal(boundaryProtectedUrlTraversal.repositories.length, 1);
+assert.equal(boundaryProtectedUrlTraversal.occurrences[0]['occurrence/status'], 'unsupported-url');
+assert.equal(boundaryProtectedUrlTraversal.occurrences[0]['occurrence/raw-url'].endsWith(' '), true);
+
 const rootManifest = new Map([[`open-hax/root@${sha('a')}`, manifestText]]);
 const bounded = await census({
   roots: [`open-hax/root@${sha('a')}`], maxNodes: 1, maxDepth: 32, concurrency: 1,
@@ -508,6 +607,60 @@ assert.deepEqual(reversedDuplicateRoots.roots, duplicateRoots.roots);
 assert.equal(duplicateRoots.stats.repositories, 2);
 assert.deepEqual(reversedDuplicateRoots.stats, duplicateRoots.stats);
 assert.equal(duplicateRoots.gaps.some((gap) => gap['gap/type'] === 'recursion/max-nodes'), false);
+
+const boundedRootManifests = new Map([
+  [`open-hax/alpha@${sha('a')}`, ''],
+  [`open-hax/beta@${sha('b')}`, ''],
+]);
+const orderedBoundedRoots = await census({
+  roots: [`open-hax/alpha@${sha('a')}`, `open-hax/beta@${sha('b')}`],
+  maxNodes: 1, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(boundedRootManifests) });
+const reversedBoundedRoots = await census({
+  roots: [`open-hax/beta@${sha('b')}`, `open-hax/alpha@${sha('a')}`],
+  maxNodes: 1, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(boundedRootManifests) });
+assert.deepEqual(reversedBoundedRoots, orderedBoundedRoots);
+assert.deepEqual(orderedBoundedRoots.roots, [
+  { fullName: 'open-hax/alpha', revision: sha('a') },
+  { fullName: 'open-hax/beta', revision: sha('b') },
+]);
+assert.equal(orderedBoundedRoots.repositories[0]['repository/full-name'], 'open-hax/alpha');
+assert.equal(orderedBoundedRoots.gaps[0]['gap/repository'], 'github:open-hax/beta');
+
+const caseVariantChildManifests = new Map([
+  [`open-hax/alpha@${sha('a')}`, [
+    '[submodule "child"]', '  path = child',
+    '  url = https://github.com/OPEN-HAX/child.git', '',
+  ].join('\n')],
+  [`open-hax/beta@${sha('b')}`, [
+    '[submodule "child"]', '  path = child',
+    '  url = https://github.com/open-hax/child.git', '',
+  ].join('\n')],
+  [`OPEN-HAX/child@${sha('c')}`, ''],
+  [`open-hax/child@${sha('c')}`, ''],
+]);
+const caseVariantChildren = await census({
+  roots: [`open-hax/alpha@${sha('a')}`, `open-hax/beta@${sha('b')}`],
+  maxNodes: 3, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(caseVariantChildManifests) });
+const reversedCaseVariantChildren = await census({
+  roots: [`open-hax/beta@${sha('b')}`, `open-hax/alpha@${sha('a')}`],
+  maxNodes: 3, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(caseVariantChildManifests) });
+assert.deepEqual(reversedCaseVariantChildren.repositories, caseVariantChildren.repositories);
+assert.deepEqual(reversedCaseVariantChildren.occurrences, caseVariantChildren.occurrences);
+assert.deepEqual(reversedCaseVariantChildren.stats, caseVariantChildren.stats);
+assert.equal(
+  caseVariantChildren.repositories.find((row) => row['repository/id'] === 'github:open-hax/child')[
+    'repository/full-name'
+  ],
+  'open-hax/child',
+);
+assert.deepEqual(
+  caseVariantChildren.occurrences.map((row) => row['occurrence/target-full-name']),
+  ['open-hax/child', 'open-hax/child'],
+);
 
 const cycleManifest = '[submodule "self"]\n  path = self\n  url = git@github.com:open-hax/root.git\n';
 const cycle = await census({

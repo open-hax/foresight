@@ -196,3 +196,30 @@
   spore: none
   receipt-refs: 2026-08-30T03:24:00Z
   note: Deduplicating by a canonical key is insufficient when the retained value remains order-dependent; canonicalize the value itself before any evidence-producing traversal.
+- ts: 2026-08-30T03:34:30Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Canonicalize discovered child repository identity
+  p-efficiency: 0.96
+  p-friction: 0.22
+  p-skill-candidate: 0.23
+  spore: none
+  receipt-refs: 2026-08-30T03:34:30Z
+  note: Canonical input identity must be preserved recursively: normalizing only roots leaves first-discovered descendant spelling able to perturb an otherwise equivalent evidence projection.
+- ts: 2026-08-30T03:39:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Align config whitespace with Git
+  p-efficiency: 0.95
+  p-friction: 0.26
+  p-skill-candidate: 0.25
+  spore: none
+  receipt-refs: 2026-08-30T03:39:00Z
+  note: Host-language convenience classes are unsafe at evidence parsers: JavaScript Unicode whitespace both accepts syntax Git rejects and strips value code points Git preserves, so the boundary must name Git's space/tab rules explicitly.
+- ts: 2026-08-30T04:01:02Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Preserve config record boundaries under bounded traversal
+  p-efficiency: 0.93
+  p-friction: 0.44
+  p-skill-candidate: 0.32
+  spore: none
+  receipt-refs: 2026-08-30T04:01:02Z
+  note: Evidence parsers must preserve zero-width quote and continuation boundaries, reject state-dependent NUL input, and avoid turning bare carriage returns into records; differential testing against the authority plus bounded-traversal permutations catches false children that ordinary fixtures miss.

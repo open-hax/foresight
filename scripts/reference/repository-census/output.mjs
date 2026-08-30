@@ -4,6 +4,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { edn } from './edn.mjs';
 
+const compareText = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
+
 export function canonicalSummary(result) {
   const {
     githubRequests: _githubRequests,
@@ -22,7 +24,7 @@ function canonicalRecord(record, omitted = new Set()) {
   }
   return Object.fromEntries(Object.entries(record)
     .filter(([key]) => !omitted.has(key))
-    .sort(([left], [right]) => left.localeCompare(right)));
+    .sort(([left], [right]) => compareText(left, right)));
 }
 
 function normalizeFrontier(value) {
@@ -34,10 +36,10 @@ function normalizeFrontier(value) {
   return {
     roots: value.roots
       .map((root) => canonicalRecord(root))
-      .sort((left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right))),
+      .sort((left, right) => compareText(JSON.stringify(left), JSON.stringify(right))),
     frontier: value.frontier
       .map((gap) => canonicalRecord(gap, VOLATILE_FRONTIER_FIELDS))
-      .sort((left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right))),
+      .sort((left, right) => compareText(JSON.stringify(left), JSON.stringify(right))),
   };
 }
 
