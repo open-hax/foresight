@@ -16,3 +16,66 @@
   spore: none
   receipt-refs: 2026-08-13T16:00:00.000Z
   note: Declarative inventory must remain separate from executable authority; filesystem identity and current ownership metadata are revalidated at process boundaries.
+- ts: 2026-08-29T21:19:14Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Repair and repin Foresight PR 49 after truthful reusable review landed
+  p-efficiency: 0.84
+  p-friction: 0.66
+  p-skill-candidate: 0.42
+  spore: none
+  receipt-refs: 2026-08-29T21:19:14Z
+  note: Exact-head hosted truth belongs in the reusable gate, while the root caller supplies only immutable event identity and repository-owned deterministic gates; existing review-closeout and consolidation-authority spores already cover the reusable pattern.
+- ts: 2026-08-29T21:50:16Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind gate execution to a concrete Receipt River reservation
+  p-efficiency: 0.73
+  p-friction: 0.81
+  p-skill-candidate: 0.63
+  spore: none
+  receipt-refs: 2026-08-29T21:50:16Z
+  note: Host capability preflight and concrete resource reservation are distinct laws; late review plus transient scratch replacement required exact-head rehydration and a full rerun before publication.
+- ts: 2026-08-29T22:07:50Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Validate held ledger semantics before running evidence gates
+  p-efficiency: 0.70
+  p-friction: 0.78
+  p-skill-candidate: 0.58
+  spore: none
+  receipt-refs: 2026-08-29T22:07:50Z
+  note: Descriptor safety does not imply semantic ledger validity; a RED-test mock that crossed the real append boundary was caught by working-tree diff, cleaned before publication, and converted into an explicit no-ledger-mutation regression.
+- ts: 2026-08-29T22:32:30Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Correct portfolio audit Markdown and terminal-state terminology
+  p-efficiency: 0.91
+  p-friction: 0.38
+  p-skill-candidate: 0.20
+  spore: none
+  receipt-refs: 2026-08-29T22:32:30Z
+  note: Full review after a rate-limit window caught both a parser-visible issue-number continuation and a semantic column-label mismatch; targeted prose fixes keep the immutable audit facts unchanged.
+- ts: 2026-08-29T22:48:30Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Require an initialized semantic Receipt River
+  p-efficiency: 0.87
+  p-friction: 0.61
+  p-skill-candidate: 0.48
+  spore: none
+  receipt-refs: 2026-08-29T22:48:30Z
+  note: A secure descriptor can still preserve the wrong history if the canonical ledger is silently recreated; semantic evidence now requires prior initialization while the generic primitive retains an explicit creation path.
+- ts: 2026-08-29T23:08:08Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind semantic reservation to committed Receipt River history
+  p-efficiency: 0.83
+  p-friction: 0.64
+  p-skill-candidate: 0.52
+  spore: none
+  receipt-refs: 2026-08-29T23:08:08Z
+  note: Existence and shape validity do not preserve history after truncation; a semantic reservation must join the held filesystem snapshot to the immutable ledger bytes at the exact current Git HEAD.
+- ts: 2026-08-29T23:36:14Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Reverify full Receipt River bytes after append
+  p-efficiency: 0.90
+  p-friction: 0.46
+  p-skill-candidate: 0.39
+  spore: none
+  receipt-refs: 2026-08-29T23:36:14Z
+  note: File identity and length are insufficient after a write; exact expected-byte verification at the final held-descriptor boundary turns otherwise invisible in-place corruption into a quarantined failure.
