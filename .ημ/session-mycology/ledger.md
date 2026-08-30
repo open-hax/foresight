@@ -115,15 +115,6 @@
   spore: none
   receipt-refs: 2026-08-30T00:55:23Z
   note: Settled acceptance text can retain obsolete vocabulary when a later reviewed specification strengthens it; append the superseding decision and its executable mapping rather than editing history or inventing a pass-like skipped state.
-- ts: 2026-08-30T01:17:36Z
-  session: constellation-zero-inbox-2026-08-29
-  task: Separate durable census frontier from transient transport failure
-  p-efficiency: 0.90
-  p-friction: 0.46
-  p-skill-candidate: 0.39
-  spore: none
-  receipt-refs: 2026-08-30T01:17:36Z
-  note: A count of inaccessible repositories is not a safe baseline; bounded retry must first remove transport noise, after which the complete root-and-gap identity projection can be checked exactly and tracked as explicit blocked work.
 - ts: 2026-08-30T01:17:37Z
   session: constellation-zero-inbox-2026-08-29
   task: Project the known inaccessible census frontier
@@ -133,6 +124,15 @@
   spore: none
   receipt-refs: 2026-08-30T01:17:37Z
   note: A stable nonzero frontier can be planning-ready without being falsely closed when every inaccessible identity is exact, transient failures are retried separately, and missing recovery authority is represented as a blocked canonical card.
+- ts: 2026-08-30T01:17:36Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Separate durable census frontier from transient transport failure
+  p-efficiency: 0.90
+  p-friction: 0.46
+  p-skill-candidate: 0.39
+  spore: none
+  receipt-refs: 2026-08-30T01:17:36Z
+  note: A count of inaccessible repositories is not a safe baseline; bounded retry must first remove transport noise, after which the complete root-and-gap identity projection can be checked exactly and tracked as explicit blocked work.
 - ts: 2026-08-30T01:35:22Z
   session: constellation-zero-inbox-2026-08-29
   task: Separate GitHub rate authority from repository accessibility
@@ -151,3 +151,12 @@
   spore: none
   receipt-refs: 2026-08-30T01:46:13Z
   note: Rate-limit handling has two ordered responsibilities: honor the server's full retry boundary for identified throttles, then propagate terminal exhaustion as an operational failure; either retrying ordinary permission denial or classifying exhausted 403s as repository gaps corrupts the evidence boundary.
+- ts: 2026-08-30T02:01:51Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Verify absence and untimed throttle boundaries
+  p-efficiency: 0.90
+  p-friction: 0.41
+  p-skill-candidate: 0.27
+  spore: none
+  receipt-refs: 2026-08-30T02:01:51Z
+  note: Commit existence does not prove a manifest absent, and throttle identity does not imply a usable retry time; exact tree inspection plus a documented one-minute exponential fallback keep both evidence and transport authority fail-closed.

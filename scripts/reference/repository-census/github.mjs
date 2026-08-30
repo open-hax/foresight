@@ -55,7 +55,7 @@ export class GitHubClient {
     }
   }
 
-  retryDelay(response, attempt) {
+  retryDelay(response, attempt, { rateLimited = false } = {}) {
     const retryAfter = response?.headers.get('retry-after');
     if (retryAfter !== null && /^\d+(?:[.]\d+)?$/.test(retryAfter)) {
       return Number(retryAfter) * 1000;
@@ -65,6 +65,7 @@ export class GitHubClient {
     if (remaining === '0' && reset !== null && /^\d+$/.test(reset)) {
       return Math.max(0, (Number(reset) * 1000) - this.nowImpl() + 1000);
     }
+    if (rateLimited) return 60000 * (2 ** (attempt - 1));
     return 200 * (2 ** (attempt - 1));
   }
 
@@ -105,7 +106,7 @@ export class GitHubClient {
       lastError = error;
       const retryable = RETRYABLE_STATUSES.has(response.status) || isRateLimitError(error);
       if (!retryable || attempt === this.maxAttempts) throw error;
-      await this.sleepImpl(this.retryDelay(response, attempt));
+      await this.sleepImpl(this.retryDelay(response, attempt, { rateLimited }));
     }
     throw lastError;
   }
@@ -156,8 +157,16 @@ export class GitHubClient {
           manifestBytes = await this.requestRaw(`${RAW}/${fullName}/${revision}/.gitmodules`);
         } catch (error) {
           if (error.status !== 404) throw error;
-          await this.commit(fullName, revision);
-          return null;
+          const commit = await this.commit(fullName, revision);
+          const lookup = await this.lookupTreePath(fullName, commit.tree.sha, '.gitmodules');
+          if (lookup.status === 'missing') return null;
+          if (lookup.status !== 'found') {
+            throw new Error(`Cannot prove .gitmodules absent from ${fullName}@${revision}`);
+          }
+          if (lookup.entry.type !== 'blob' || !['100644', '100755'].includes(lookup.entry.mode)) {
+            throw new Error(`.gitmodules is not a regular blob in ${fullName}@${revision}`);
+          }
+          throw new Error(`Raw .gitmodules returned HTTP 404 despite an exact Git tree entry in ${fullName}@${revision}`);
         }
         const commit = await this.commit(fullName, revision);
         const lookup = await this.lookupTreePath(fullName, commit.tree.sha, '.gitmodules');

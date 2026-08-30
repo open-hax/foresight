@@ -1,8 +1,8 @@
 # Interpreter / Corpus / Drive Boundary
 
-**Status:** working architecture note  
-**Scope:** Calliope, Clio, Katamorph, NBB, Git corpus repositories, Google Drive media, Foresight, and Epiphany  
-**Decision level:** design constraint, not yet an accepted ADR or migration receipt
+- **Status:** working architecture note
+- **Scope:** Calliope, Clio, Katamorph, NBB, Git corpus repositories, Google Drive media, Foresight, and Epiphany
+- **Decision level:** design constraint, not yet an accepted ADR or migration receipt
 
 ## Signal
 

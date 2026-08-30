@@ -109,10 +109,35 @@ const absentClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(404, 'Not Found');
     if (url.includes('/git/commits/')) return response(200, { tree: { sha: 'empty-tree' } });
+    if (url.endsWith('/git/trees/empty-tree?recursive=1')) {
+      return response(200, { truncated: false, tree: [] });
+    }
     return response(500, { message: `unexpected ${url}` });
   },
 });
 assert.equal(await absentClient.manifest('open-hax/root', sha('a')), null);
+
+const misleadingRaw404Client = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.startsWith('https://raw.githubusercontent.com')) return response(404, 'Not Found');
+    if (url.includes('/git/commits/')) {
+      return response(200, { tree: { sha: 'manifest-present-tree' } });
+    }
+    if (url.endsWith('/git/trees/manifest-present-tree?recursive=1')) {
+      return response(200, {
+        truncated: false,
+        tree: [{
+          path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(manifestText),
+        }],
+      });
+    }
+    return response(500, { message: `unexpected ${url}` });
+  },
+});
+await assert.rejects(
+  misleadingRaw404Client.manifest('open-hax/root', sha('a')),
+  /HTTP 404 despite an exact Git tree entry/,
+);
 
 const exactPathClient = new GitHubClient(null, {
   fetchImpl: async () => response(200, {
@@ -224,6 +249,26 @@ assert.deepEqual(await rateRetryClient.commit('open-hax/rate-retry', sha('c')), 
 });
 assert.equal(rateRetryClient.requests, 2);
 assert.deepEqual(rateRetryDelays, [60000]);
+
+const untimedRateRetryDelays = [];
+let untimedRateRetryAttempt = 0;
+const untimedRateRetryClient = new GitHubClient(null, {
+  fetchImpl: async () => {
+    untimedRateRetryAttempt += 1;
+    return untimedRateRetryAttempt < 3
+      ? response(403, { message: 'secondary rate limit' }, {
+        'x-ratelimit-remaining': '4',
+      })
+      : response(200, { tree: { sha: 'after-untimed-rate-retry' } });
+  },
+  sleepImpl: async (milliseconds) => untimedRateRetryDelays.push(milliseconds),
+});
+assert.deepEqual(await untimedRateRetryClient.commit('open-hax/untimed-rate-retry', sha('c')), {
+  tree: { sha: 'after-untimed-rate-retry' },
+});
+assert.equal(untimedRateRetryClient.requests, 3);
+assert.deepEqual(untimedRateRetryDelays, [60000, 120000]);
+
 const primaryResetClient = new GitHubClient(null, {
   nowImpl: () => 1788054689000,
 });
