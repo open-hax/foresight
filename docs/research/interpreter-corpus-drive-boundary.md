@@ -328,8 +328,14 @@ expected-parent/compare-and-swap operation. A serialization lease may reduce
 contention among cooperating writers, but it never replaces the compare-and-
 swap and is not an atomicity boundary across stores.
 
-Git's canonical corpus ref is the sole commit authority for this bridge. Every
-promotion receives a durable promotion ID and prepare record binding the
+Git's canonical corpus ref is the sole commit authority for this bridge. The
+Git host that serves that ref must enforce the same boundary independently of
+bridge code: a no-bypass ref rule denies force updates and ref deletion to
+every principal, grants ordinary ref-update permission only to the
+authenticated bridge identity, and gives the bridge credential no ruleset or
+branch-protection bypass. These host permissions supplement rather than
+replace the expected-parent compare-and-swap and monotonic-parent checks.
+Every promotion receives a durable promotion ID and prepare record binding the
 validated parent, catalog digest, interpreter identity, proposed Git commit
 OID, and exact Clio event-batch digest. The content-addressed prepared commit
 itself binds the promotion ID and event-batch digest in verified commit metadata

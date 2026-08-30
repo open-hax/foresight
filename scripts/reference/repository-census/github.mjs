@@ -67,19 +67,28 @@ function requireCoherentTreeEntry(entry, treeSha, description) {
   return entry;
 }
 
+function sameTreeEntryIdentity(left, right) {
+  return left.type === right.type && left.mode === right.mode && left.sha === right.sha;
+}
+
 function requireRecursiveAncestors(
   entries, treeSha, description, entryPath, { allowMissing = false } = {},
 ) {
   const segments = pathSegments(entryPath);
+  let complete = true;
   for (let index = 1; index < segments.length; index += 1) {
     const ancestorPath = segments.slice(0, index).join('/');
     const ancestor = entries.get(ancestorPath);
-    if (!ancestor && allowMissing) continue;
+    if (!ancestor && allowMissing) {
+      complete = false;
+      continue;
+    }
     if (!ancestor || ancestor.type !== 'tree') {
       throw new Error(`${description} contains an incoherent recursive hierarchy at ${entryPath}`);
     }
     requireCoherentTreeEntry(ancestor, treeSha, description);
   }
+  return complete;
 }
 
 function requireCompleteRecursiveHierarchy(entries, treeSha, description) {
@@ -365,17 +374,19 @@ export class GitHubClient {
     );
     const exact = recursiveEntries.get(repositoryPath);
     if (exact) {
-      requireRecursiveAncestors(
+      const ancestorsComplete = requireRecursiveAncestors(
         recursiveEntries,
         rootTreeSha,
         `Recursive Git tree response for ${fullName}@${rootTreeSha}`,
         repositoryPath,
         { allowMissing: recursive.truncated !== false },
       );
-      return {
-        status: 'found', entry: exact, resolvedPath: repositoryPath,
-        entryPathScope: 'root-relative',
-      };
+      if (ancestorsComplete) {
+        return {
+          status: 'found', entry: exact, resolvedPath: repositoryPath,
+          entryPathScope: 'root-relative',
+        };
+      }
     }
 
     const segments = repositoryPath.split('/');
@@ -421,7 +432,15 @@ export class GitHubClient {
             `Git tree response for ${fullName}@${currentTree}`,
           );
         }
+        if (exact) {
+          throw new Error(`Cannot validate orphan recursive path ${repositoryPath} through Git tree ${currentTree}`);
+        }
         return { status: 'missing', segment: segments[i], index: i };
+      }
+      const recursivePath = segments.slice(0, i + 1).join('/');
+      const recursiveEntry = recursiveEntries.get(recursivePath);
+      if (recursiveEntry && !sameTreeEntryIdentity(recursiveEntry, entry)) {
+        throw new Error(`Recursive and non-recursive Git tree entries disagree at ${recursivePath}`);
       }
       if (i === segments.length - 1) {
         return {
@@ -435,6 +454,9 @@ export class GitHubClient {
         `Git tree response for ${fullName}@${currentTree}`,
       );
       if (entry.type !== 'tree') {
+        if (exact) {
+          throw new Error(`Cannot validate orphan recursive path ${repositoryPath} through non-tree ancestor ${segments[i]}`);
+        }
         return { status: 'blocked', segment: segments[i], index: i, entry };
       }
       currentTree = entry.sha;

@@ -493,6 +493,22 @@ assert.equal(edn({
     ['b'.repeat(64)]: 3,
   },
 }), `{:repository/submodule-count-at-revisions {"${sha('0')}" 1 "${sha('a')}" 2 "${'b'.repeat(64)}" 3}}`);
+const dynamicRevisionEntries = [
+  [sha('f'), 3],
+  [sha('0'), 1],
+  [sha('a'), 2],
+];
+const dynamicRevisionMap = (entries) => ({
+  'repository/submodule-count-at-revisions': Object.fromEntries(entries),
+});
+assert.equal(
+  edn(dynamicRevisionMap(dynamicRevisionEntries)),
+  edn(dynamicRevisionMap([...dynamicRevisionEntries].reverse())),
+);
+assert.equal(
+  edn({ '\u{10000}': 'astral', '\uE000': 'bmp-private-use' }),
+  '{:\uE000 "bmp-private-use" :\u{10000} "astral"}',
+);
 
 function response(status, body, responseHeaders = {}) {
   const bytes = Buffer.isBuffer(body)
@@ -822,19 +838,132 @@ for (const [truncated, impossibleAncestor] of [
   );
 }
 
-const truncatedNestedExactClient = new GitHubClient(null, {
-  fetchImpl: async () => treeResponse(sha('d'), {
-    truncated: true,
-    tree: [
-      { path: 'nested/child', type: 'commit', mode: '160000', sha: sha('f') },
-    ],
-  }),
+let orphanNestedFallbackCalls = 0;
+const orphanNestedExactClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.endsWith('?recursive=1')) {
+      return treeResponse(sha('d'), {
+        truncated: true,
+        tree: [
+          { path: 'nested/child', type: 'commit', mode: '160000', sha: sha('f') },
+        ],
+      });
+    }
+    orphanNestedFallbackCalls += 1;
+    return treeResponse(sha('d'), { truncated: false, tree: [] });
+  },
 });
-assert.equal(
-  (await truncatedNestedExactClient.lookupTreePath(
+await assert.rejects(
+  orphanNestedExactClient.lookupTreePath('open-hax/root', sha('d'), 'nested/child'),
+  /Cannot validate orphan recursive path/,
+);
+assert.equal(orphanNestedFallbackCalls, 1);
+
+let validatedOrphanFallbackCalls = 0;
+const validatedOrphanExactClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.endsWith('?recursive=1')) {
+      return treeResponse(sha('d'), {
+        truncated: true,
+        tree: [
+          { path: 'nested/child', type: 'commit', mode: '160000', sha: sha('f') },
+        ],
+      });
+    }
+    validatedOrphanFallbackCalls += 1;
+    if (url.endsWith(`/git/trees/${sha('d')}`)) {
+      return treeResponse(sha('d'), {
+        truncated: false,
+        tree: [{ path: 'nested', type: 'tree', mode: '040000', sha: sha('e') }],
+      });
+    }
+    return treeResponse(sha('e'), {
+      truncated: false,
+      tree: [{ path: 'child', type: 'commit', mode: '160000', sha: sha('f') }],
+    });
+  },
+});
+assert.deepEqual(
+  await validatedOrphanExactClient.lookupTreePath(
     'open-hax/root', sha('d'), 'nested/child',
-  )).status,
-  'found',
+  ),
+  {
+    status: 'found',
+    entry: { path: 'child', type: 'commit', mode: '160000', sha: sha('f') },
+    resolvedPath: 'nested/child',
+    entryPathScope: 'containing-tree-relative',
+  },
+);
+assert.equal(validatedOrphanFallbackCalls, 2);
+
+const nonTreeOrphanFallbackClient = new GitHubClient(null, {
+  fetchImpl: async (url) => (url.endsWith('?recursive=1')
+    ? treeResponse(sha('d'), {
+      truncated: true,
+      tree: [{ path: 'nested/child', type: 'commit', mode: '160000', sha: sha('f') }],
+    })
+    : treeResponse(sha('d'), {
+      truncated: false,
+      tree: [{ path: 'nested', type: 'blob', mode: '100644', sha: sha('e') }],
+    })),
+});
+await assert.rejects(
+  nonTreeOrphanFallbackClient.lookupTreePath('open-hax/root', sha('d'), 'nested/child'),
+  /non-tree ancestor nested/,
+);
+
+const mismatchedOrphanFallbackClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.endsWith('?recursive=1')) {
+      return treeResponse(sha('d'), {
+        truncated: true,
+        tree: [{ path: 'nested/child', type: 'commit', mode: '160000', sha: sha('f') }],
+      });
+    }
+    return url.endsWith(`/git/trees/${sha('d')}`)
+      ? treeResponse(sha('d'), {
+        truncated: false,
+        tree: [{ path: 'nested', type: 'tree', mode: '040000', sha: sha('e') }],
+      })
+      : treeResponse(sha('e'), {
+        truncated: false,
+        tree: [{ path: 'child', type: 'commit', mode: '160000', sha: sha('c') }],
+      });
+  },
+});
+await assert.rejects(
+  mismatchedOrphanFallbackClient.lookupTreePath('open-hax/root', sha('d'), 'nested/child'),
+  /Recursive and non-recursive Git tree entries disagree/,
+);
+
+const mismatchedPartialAncestorClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.endsWith('?recursive=1')) {
+      return treeResponse(sha('d'), {
+        truncated: true,
+        tree: [
+          { path: 'outer/nested', type: 'tree', mode: '040000', sha: sha('b') },
+          { path: 'outer/nested/child', type: 'commit', mode: '160000', sha: sha('f') },
+        ],
+      });
+    }
+    if (url.endsWith(`/git/trees/${sha('d')}`)) {
+      return treeResponse(sha('d'), {
+        truncated: false,
+        tree: [{ path: 'outer', type: 'tree', mode: '040000', sha: sha('e') }],
+      });
+    }
+    return treeResponse(sha('e'), {
+      truncated: false,
+      tree: [{ path: 'nested', type: 'tree', mode: '040000', sha: sha('c') }],
+    });
+  },
+});
+await assert.rejects(
+  mismatchedPartialAncestorClient.lookupTreePath(
+    'open-hax/root', sha('d'), 'outer/nested/child',
+  ),
+  /Recursive and non-recursive Git tree entries disagree at outer\/nested/,
 );
 
 for (const truncated of [false, true]) {
@@ -1738,6 +1867,27 @@ const nestedFallbackTraversal = await census({
 assert.equal(nestedFallbackTraversal.occurrences[0]['occurrence/status'], 'resolved');
 assert.equal(nestedFallbackTraversal.occurrences[0]['occurrence/path'], 'nested/child');
 assert.equal(nestedFallbackTraversal.stats.frontierRemaining, 0);
+
+const orphanLookupTraversalClient = traversalClient(nestedFallbackManifest);
+const orphanLookupProviderClient = new GitHubClient(null, {
+  fetchImpl: async (url) => (url.endsWith('?recursive=1')
+    ? treeResponse(sha('d'), {
+      truncated: true,
+      tree: [{ path: 'nested/child', type: 'commit', mode: '160000', sha: sha('c') }],
+    })
+    : treeResponse(sha('d'), { truncated: false, tree: [] })),
+});
+orphanLookupTraversalClient.lookupTreePath = (...args) => (
+  orphanLookupProviderClient.lookupTreePath(...args)
+);
+const orphanLookupTraversal = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: orphanLookupTraversalClient });
+assert.equal(orphanLookupTraversal.occurrences[0]['occurrence/status'], 'lookup-error');
+assert.equal(orphanLookupTraversal.stats.resolvedOccurrences, 0);
+assert.equal(orphanLookupTraversal.stats.frontierRemaining, 1);
+assert.equal(orphanLookupTraversal.gaps[0]['gap/type'], 'submodule/lookup-error');
+assert.equal(orphanLookupTraversal.gaps[0]['gap/frontier?'], true);
 
 for (const resolvedPath of [undefined, 'different/child']) {
   const client = traversalClient(malformedGitlinkManifest);

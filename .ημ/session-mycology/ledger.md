@@ -403,3 +403,12 @@
   spore: none
   receipt-refs: 2026-08-30T12:45:47Z
   note: Exact-head hosted evidence completed only after two independent redaction passes: suffix-before-userinfo ambiguity and attacker-controlled unsupported schemes both fail closed. All six census payloads remain byte-identical, so the repair narrows diagnostic disclosure without changing repository identity, traversal, or frontier semantics.
+- ts: 2026-08-30T13:17:29Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Prove canonical refs, EDN bytes, and recursive ancestry independently
+  p-efficiency: 0.94
+  p-friction: 0.38
+  p-skill-candidate: 0.24
+  spore: none
+  receipt-refs: 2026-08-30T13:17:29Z
+  note: Bridge-side compare-and-swap cannot constrain other credentials, object-map insertion order is not canonical evidence order, and an orphan nested entry does not prove its path. Enforce the ref boundary at the host, sort keys by Unicode code point, and require bounded per-tree ancestry proof before resolving truncated recursive evidence.
