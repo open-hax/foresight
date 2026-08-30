@@ -1,12 +1,12 @@
 ---
 uuid: "4f263499-a765-4b0f-bac0-7f8175672d60"
 title: "Codify revision-bound layered evidence gates"
-status: "review"
+status: "done"
 priority: "P1"
 labels: ["quality", "testing", "evidence"]
 created_at: "2026-08-29T15:09:34.997Z"
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-write-id: "1788038338844-0.l1pwkxe6n99jcvq5gr"
+write-id: "1788050834009-0.qv1p3snwhz6ue5pc1j"
 ---
 
 # Codify revision-bound layered evidence gates
@@ -39,4 +39,5 @@ Exact-head rereview exposed and local repair now closes three further evidence-b
 
 Truthful reusable review authority merged as open-hax/eta-mu@d3937a2f2fa6ecf74cd525c6a0daceb5380a0e1d. Foresight PR #49 is repinned to that immutable merge and supplies the event pull-request head; local law/adapter/contract gates are green. Awaiting fresh exact-head hosted review.
 
+Foresight PR #49 merged from exact reviewed head d8098e9f60c63d1d18fa17b6ad2d06087340854c as 366d1ff427c690602ad67b0ac3df2a806af939f5. Merge tree ad13f1b10bd9ed330c39ec6301e35ad2d6fb6204 equals the reviewed head tree; hosted eta-mu evidence review passed and all 38 review threads are resolved.
 ---
