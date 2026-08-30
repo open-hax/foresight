@@ -72,12 +72,14 @@ assert.equal(normalizeGitHubUrl('https://github.com/../foresight').kind, 'unsupp
 assert.equal(edn({ 'event/type': 'repository/observed', ok: true, xs: ['a', 1] }),
   '{:event/type "repository/observed" :ok true :xs ["a" 1]}');
 
-function response(status, body) {
+function response(status, body, responseHeaders = {}) {
   const text = typeof body === 'string' ? body : JSON.stringify(body);
+  const normalizedHeaders = new Map(Object.entries(responseHeaders)
+    .map(([name, value]) => [name.toLowerCase(), String(value)]));
   return {
     ok: status >= 200 && status < 300,
     status,
-    headers: { get: () => null },
+    headers: { get: (name) => normalizedHeaders.get(name.toLowerCase()) ?? null },
     arrayBuffer: async () => Buffer.from(text),
     json: async () => JSON.parse(text),
     text: async () => text,
@@ -202,6 +204,30 @@ await assert.rejects(
   /HTTP 504/,
 );
 assert.equal(persistentAttempts, 3);
+
+const rateLimitedClient = new GitHubClient(null, {
+  fetchImpl: async (url) => (url.startsWith('https://raw.githubusercontent.com')
+    ? response(404, { message: 'Not Found' })
+    : response(403, { message: 'API rate limit exceeded' }, {
+      'x-ratelimit-remaining': '0',
+      'x-ratelimit-reset': '1788054691',
+    })),
+});
+await assert.rejects(
+  rateLimitedClient.manifest('open-hax/rate-limited', sha('c')),
+  (error) => error.code === 'github/rate-limit-exhausted'
+    && error.rateReset === '1788054691'
+    && /rate limit exhausted/.test(error.message),
+);
+await assert.rejects(
+  census({
+    roots: [`open-hax/rate-limited@${sha('c')}`],
+    maxNodes: 10,
+    maxDepth: 1,
+    concurrency: 1,
+  }, { client: rateLimitedClient }),
+  /rate limit exhausted/,
+);
 
 function traversalClient(manifests) {
   return {

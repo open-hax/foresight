@@ -8,6 +8,10 @@ const RAW = 'https://raw.githubusercontent.com';
 const USER_AGENT = 'foresight-repository-census/0.1';
 const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
 
+export function isRateLimitError(error) {
+  return error?.code === 'github/rate-limit-exhausted';
+}
+
 export class GitHubClient {
   constructor(token, {
     fetchImpl = globalThis.fetch,
@@ -78,7 +82,21 @@ export class GitHubClient {
       const error = new Error(`HTTP ${response.status} for ${url}: ${body.slice(0, 300)}`);
       error.status = response.status;
       error.url = url;
+      const rateRemaining = response.headers.get('x-ratelimit-remaining');
+      const retryAfter = response.headers.get('retry-after');
+      const rateLimited = (url.startsWith(API) || url.startsWith(RAW))
+        && (response.status === 429
+          || (response.status === 403
+            && (rateRemaining === '0'
+              || retryAfter !== null
+              || /rate limit/i.test(body))));
+      if (rateLimited) {
+        error.code = 'github/rate-limit-exhausted';
+        error.rateReset = response.headers.get('x-ratelimit-reset');
+        error.message = `GitHub API rate limit exhausted${error.rateReset ? ` until ${error.rateReset}` : ''}: ${error.message}`;
+      }
       lastError = error;
+      if (isRateLimitError(error) && response.status === 403) throw error;
       if (!RETRYABLE_STATUSES.has(response.status) || attempt === this.maxAttempts) throw error;
       await this.sleepImpl(this.retryDelay(response, attempt));
     }

@@ -67,7 +67,7 @@
   (doseq [path [nil "" " " "." ".." "../repo" "repo/../other"
                 "/absolute" "\\absolute" "C:\\absolute" "nested//repo"
                 "nested/./repo" "nested/repo/"]]
-    (is (false? (boolean (law/confined-relative-path? path))) (pr-str path))))
+    (is (not (law/confined-relative-path? path)) (pr-str path))))
 
 (deftest every-executable-invariant-has-an-implemented-check
   (doseq [invariant (:project/invariants project/project)

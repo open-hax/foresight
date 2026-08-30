@@ -3,7 +3,7 @@
 import { createHash } from 'node:crypto';
 import { parseRoot } from './args.mjs';
 import { stableId } from './edn.mjs';
-import { GitHubClient } from './github.mjs';
+import { GitHubClient, isRateLimitError } from './github.mjs';
 import { normalizeGitHubUrl, parseGitmodules } from './gitmodules.mjs';
 
 async function mapLimit(items, limit, task) {
@@ -65,6 +65,7 @@ export async function census(options, dependencies = {}) {
     try {
       manifestText = await client.manifest(item.fullName, item.revision);
     } catch (error) {
+      if (isRateLimitError(error)) throw error;
       repo['repository/manifest-statuses'].add('unavailable');
       addGap({
         'gap/type': 'manifest/unavailable', 'gap/repository': repoId,
@@ -87,6 +88,7 @@ export async function census(options, dependencies = {}) {
     try {
       commit = await client.commit(item.fullName, item.revision);
     } catch (error) {
+      if (isRateLimitError(error)) throw error;
       inspected.delete(visitKey);
       addGap({
         'gap/type': 'commit/unavailable', 'gap/repository': repoId,
@@ -107,6 +109,7 @@ export async function census(options, dependencies = {}) {
         try {
           lookup = await client.lookupTreePath(item.fullName, commit.tree.sha, module.path);
         } catch (error) {
+          if (isRateLimitError(error)) throw error;
           lookup = { status: 'error', error };
         }
       }

@@ -15,6 +15,10 @@ The inventory follows Foresight's direct `.gitmodules` boundary: Truth, bitch-tr
 
 At inventory time there are **105 open pull requests** across that boundary. The purpose of this note is to keep every open PR visible while distinguishing real cross-repository workstreams from repository-local backlog.
 
+The later [terminal-state audit](portfolio-terminal-state-audit-2026-08-29.md)
+adds head SHAs, live gate and review-thread evidence, merge or closure outcomes,
+and an explicit disposition for every residual PR.
+
 ## Cross-repository tracking PRs created from this inventory
 
 1. **Knoxx publication, evaluation, and reconciliation** — publication/review semantics, desired-vs-observed convergence, durable receipts, and the forward deployment seam.

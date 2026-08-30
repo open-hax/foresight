@@ -57,11 +57,19 @@
             :actionable false}
            (select-keys (by-path ".agents")
                         [:source-type :ownership :role :actionable])))
-    (is (pos? (:skill-count (by-path ".agents"))))
-    (is (= "skills/.skill-lock.json" (:provenance-lock (by-path ".agents"))))
-    (is (= ["deps.edn" "bb.edn"] (:manifests (by-path "eta"))))
+    (is (not (contains? (by-path ".agents") :skill-count)))
+    (is (not (contains? (by-path ".agents") :provenance-lock)))
+    (is (empty? (:manifests (by-path ".agents"))))
+    (is (empty? (:manifests (by-path "eta"))))
     (is (nil? (:initialized (by-path "eta"))))
     (is (nil? (:manager (by-path ".agents"))))))
+
+(deftest review-workflow-never-initializes-inventory-only-sources
+  (let [workflow (fs/readFileSync
+                  (path/join workspace/root ".github/workflows/eta-mu-review.yml")
+                  "utf8")]
+    (is (nil? (re-find #"[.]agents" workflow)))
+    (is (re-find #"run_gate workspace_laws" workflow))))
 
 (deftest selects-explicit-repositories
   (let [repos [{:path "one" :actionable true}

@@ -1,0 +1,393 @@
+;; SPDX-License-Identifier: LGPL-3.0-or-later
+(ns evidence-test
+  (:require [cljs.test :as test :refer [deftest is]]
+            [foresight.evidence :as evidence]))
+
+(def valid-catalog
+  {:catalog/version 1
+   :catalog/repositories
+   {"repo"
+    {:repository/path "repo"
+     :repository/gates
+     [{:gate/id :repo/unit
+       :gate/kind :unit
+       :gate/execution :local
+       :gate/command ["tool" "test"]
+       :gate/source "repo/README.md"}
+      {:gate/id :repo/integration
+       :gate/kind :integration
+       :gate/execution :local
+       :gate/command ["tool" "integration"]
+       :gate/source "repo/README.md"}
+      {:gate/id :repo/live
+       :gate/kind :live-smoke
+       :gate/execution :external
+       :gate/source "repo/.github/workflows/deploy.yml"
+       :gate/reason "Requires the target host"}]}}})
+
+(def test-catalog-identity
+  {:catalog/path "config/quality-gates.edn"
+   :catalog/sha256 (apply str (repeat 64 "a"))})
+
+(def revision-a (apply str (repeat 40 "1")))
+
+(def revision-b (apply str (repeat 40 "2")))
+
+(defn recorded-result [gate-id outcome revision]
+  (let [gate (or (some #(when (= gate-id (:gate/id %)) %)
+                       (get-in valid-catalog
+                               [:catalog/repositories "repo"
+                                :repository/gates]))
+                 {:gate/execution :local
+                  :gate/command ["tool" "test"]
+                  :gate/source "repo/README.md"})]
+    (cond-> {:gate/id gate-id
+             :result/outcome outcome
+             :result/execution (:gate/execution gate)
+             :result/catalog test-catalog-identity
+             :result/source {:source/path (:gate/source gate)
+                             :source/repository "repo"
+                             :source/revision revision}
+             :result/revision revision}
+      (:gate/command gate)
+      (assoc :result/command (:gate/command gate))
+
+      (and (= :local (:gate/execution gate))
+           (= :passed outcome))
+      (assoc :result/exit 0))))
+
+(defn receipt-for [result]
+  (let [source (:result/source result)]
+    {:ts "2026-08-29T17:22:40Z"
+     :kind :test-run
+     :repo "."
+     :origin evidence/evidence-receipt-origin
+     :evidence/schema 2
+     :evidence/adapter "nbb/node@test"
+     :owner "foresight-evidence-runner"
+     :dod "Retain one exact gate result for immutable promotion review"
+     :pi "eta-mu"
+     :host "test"
+     :manifest [(:catalog/path (:result/catalog result))
+                (:source/path source)]
+     :refs [(str (:source/repository source) "@" (:result/revision result))
+            (str (:gate/id result))]
+     :evidence/result result}))
+
+(defn immutable-ledger [results]
+  {:ledger/identity
+   {:ledger/path evidence/receipt-ledger-path
+    :ledger/revision (apply str (repeat 40 "c"))
+    :ledger/sha256 (apply str (repeat 64 "d"))}
+   :ledger/records (mapv receipt-for results)})
+
+(deftest canonical-receipt-envelope-matches-the-v2-contract
+  (let [receipt (dissoc (receipt-for
+                         (recorded-result :repo/unit :passed revision-a))
+                        :repo)]
+    (is (evidence/receipt-envelope? receipt))
+    (is (false? (evidence/receipt-envelope? (dissoc receipt :origin))))
+    (is (false? (evidence/receipt-envelope? 42)))))
+
+(deftest validates-gate-catalogs
+  (is (evidence/valid-catalog? valid-catalog))
+  (is (= :gate/command
+         (:error
+          (first
+           (evidence/catalog-errors
+            (assoc-in valid-catalog
+                      [:catalog/repositories "repo" :repository/gates 0 :gate/command]
+                      ["tool" ""]))))))
+  (is (= :gate/reason
+         (:error
+          (first
+           (evidence/catalog-errors
+            (update-in valid-catalog
+                       [:catalog/repositories "repo" :repository/gates 2]
+                       dissoc :gate/reason)))))))
+
+(deftest rejects-duplicate-gate-identities
+  (let [duplicate (assoc-in valid-catalog
+                            [:catalog/repositories "other"]
+                            {:repository/path "other"
+                             :repository/gates
+                             [(get-in valid-catalog
+                                      [:catalog/repositories "repo"
+                                       :repository/gates 0])]})]
+    (is (= {:error :gate/id-duplicates :gate/ids [:repo/unit]}
+           (last (evidence/catalog-errors duplicate))))))
+
+(deftest malformed-gate-collections-return-structured-errors
+  (let [malformed (assoc-in valid-catalog
+                            [:catalog/repositories "repo" :repository/gates]
+                            42)]
+    (is (= :repository/gates
+           (:error (first (evidence/catalog-errors malformed)))))
+    (is (false? (evidence/valid-catalog? malformed)))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 malformed test-catalog-identity revision-a
+                 #{:repo/unit}
+                 [(recorded-result :repo/unit :passed revision-a)]
+                 (immutable-ledger
+                  [(recorded-result :repo/unit :passed revision-a)]))))))
+
+(deftest malformed-mixed-identities-remain-total
+  (let [unit (get-in valid-catalog
+                     [:catalog/repositories "repo" :repository/gates 0])
+        malformed (assoc-in valid-catalog
+                            [:catalog/repositories "repo" :repository/gates]
+                            [unit unit
+                             (assoc unit :gate/id 42)
+                             (assoc unit :gate/id 42)])]
+    (is (= {:error :gate/id-duplicates :gate/ids [:repo/unit]}
+           (last (evidence/catalog-errors malformed))))
+    (is (false? (evidence/valid-catalog? malformed))))
+  (let [errors (evidence/catalog-inventory-errors
+                {:catalog/repositories {"repo" {} 42 {}}}
+                #{})]
+    (is (= 2 (count errors)))
+    (is (= #{"repo" 42} (set (map :repository errors))))))
+
+(deftest catalog-repositories-must-be-actionable-direct-submodules
+  (is (empty? (evidence/catalog-inventory-errors valid-catalog #{"repo"})))
+  (is (= [{:error :catalog/repository-not-actionable-submodule
+           :repository "repo"}]
+         (evidence/catalog-inventory-errors valid-catalog #{"other"}))))
+
+(deftest selects-repositories-and-kinds
+  (is (= [:repo/unit]
+         (mapv :gate/id
+               (evidence/select-gates valid-catalog ["repo"] #{:unit}))))
+  (is (= [] (evidence/select-gates valid-catalog ["missing"] #{:unit}))))
+
+(deftest unavailable-and-blocked-never-pass
+  (doseq [outcome [:failed :blocked :unavailable]]
+    (is (false? (evidence/satisfied? {:result/outcome outcome}))))
+  (is (false? (evidence/satisfied? {:result/outcome :not-applicable
+                                    :result/reason "No browser surface"})))
+  (is (evidence/satisfied? {:result/outcome :not-applicable
+                            :result/reason "No browser surface"
+                            :result/approved-by "review/42"}))
+  (is (false? (evidence/promotion-satisfied?
+               {:result/outcome :not-applicable
+                :result/reason "No browser surface"
+                :result/approved-by "review/42"})))
+  (is (evidence/promotion-satisfied? {:result/outcome :passed})))
+
+(deftest validates-result-outcomes-and-not-applicable-approval
+  (let [passed (recorded-result :repo/unit :passed revision-a)]
+    (is (evidence/valid-result? passed))
+    (is (= :result/command
+           (:error (first (evidence/result-errors
+                           (dissoc passed :result/command))))))
+    (is (= :result/catalog
+           (:error (first (evidence/result-errors
+                           (assoc-in passed
+                                     [:result/catalog :catalog/sha256]
+                                     "not-a-digest"))))))
+    (is (= :result/source-revision
+           (:error (first (evidence/result-errors
+                           (assoc-in passed
+                                     [:result/source :source/revision]
+                                     revision-b))))))
+    (is (= :result/local-passed-exit
+           (:error (first (filter #(= :result/local-passed-exit (:error %))
+                                  (evidence/result-errors
+                                   (assoc passed :result/exit 7)))))))
+    (is (= :result/local-nonpass-exit
+           (:error (first (filter #(= :result/local-nonpass-exit (:error %))
+                                  (evidence/result-errors
+                                   (assoc passed
+                                          :result/outcome :failed))))))))
+  (is (= :result/outcome
+         (:error (first (evidence/result-errors
+                         (recorded-result :repo/unit :greenish
+                                          revision-a))))))
+  (is (= :result/not-applicable-approval
+         (:error (first (evidence/result-errors
+                         (assoc (recorded-result :repo/e2e
+                                                :not-applicable
+                                                revision-a)
+                                :result/reason "No user surface"))))))
+  (doseq [symbolic-revision ["main" "v1.0.0" "abc123"
+                             (apply str (repeat 40 "A"))]]
+    (let [symbolic (recorded-result :repo/unit :passed symbolic-revision)
+          errors (set (map :error (evidence/result-errors symbolic)))]
+      (is (false? (evidence/valid-result? symbolic)))
+      (is (contains? errors :result/source))
+      (is (contains? errors :result/passed-revision))))
+  (is (evidence/valid-result?
+       (recorded-result :repo/unit :passed (apply str (repeat 64 "3"))))))
+
+(deftest summary-keeps-the-strongest-non-pass-visible
+  (is (= {:result/outcome :blocked
+          :result/counts {:blocked 1 :passed 1 :unavailable 1}
+          :result/satisfied? false}
+         (evidence/summarize-results
+          [(recorded-result :repo/unit :passed revision-a)
+           (recorded-result :repo/e2e :unavailable revision-a)
+           (recorded-result :repo/live :blocked revision-a)])))
+  (is (= {:result/outcome :unavailable
+          :result/counts {}
+          :result/satisfied? false}
+         (evidence/summarize-results [])))
+  (is (= {:result/outcome :failed
+          :result/counts {}
+          :result/satisfied? false
+          :result/errors [{:error :results/type :results 42}]}
+         (evidence/summarize-results 42))))
+
+(deftest invalid-result-data-fails-the-summary
+  (let [summary (evidence/summarize-results
+                 [(recorded-result :repo/unit :unknown revision-a)])]
+    (is (= :failed (:result/outcome summary)))
+    (is (false? (:result/satisfied? summary)))
+    (is (= :result/outcome (get-in summary [:result/errors 0 :error])))))
+
+(deftest malformed-result-values-return-structured-errors
+  (is (= [{:error :result/type :result 42}]
+         (evidence/result-errors 42)))
+  (is (false? (evidence/valid-result? 42)))
+  (let [summary (evidence/summarize-results [42])]
+    (is (= :failed (:result/outcome summary)))
+    (is (= {} (:result/counts summary)))
+    (is (= :result/type (get-in summary [:result/errors 0 :error])))))
+
+(deftest promotion-is-closed-over-required-gates
+  (let [revision revision-a
+        passed [(recorded-result :repo/unit :passed revision)
+                (recorded-result :repo/integration :passed revision)]]
+    (is (evidence/promotion-evidence-consistent?
+         valid-catalog test-catalog-identity revision
+         #{:repo/unit :repo/integration} passed
+         (immutable-ledger passed)))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision
+                 #{:repo/unit :repo/e2e} passed
+                 (immutable-ledger passed))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision
+                 #{:repo/unit}
+                 [(recorded-result :repo/unit :unavailable revision)]
+                 (immutable-ledger
+                  [(recorded-result :repo/unit :unavailable revision)]))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision #{} []
+                 (immutable-ledger []))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision 42 []
+                 (immutable-ledger []))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision #{} 42
+                 (immutable-ledger []))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision
+                 #{:repo/unit} [(first passed)] nil)))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity "not-a-git-commit"
+                 #{:repo/unit} [(first passed)]
+                 (immutable-ledger [(first passed)]))))))
+
+(deftest promotion-requires-one-unambiguous-target-revision
+  (let [unit (recorded-result :repo/unit :passed revision-a)
+        integration (recorded-result :repo/integration :passed revision-b)]
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision-a
+                 #{:repo/unit :repo/integration}
+                 [unit integration]
+                 (immutable-ledger [unit integration]))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity
+                 "" #{:repo/unit} [unit]
+                 (immutable-ledger [unit]))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity
+                 revision-a #{:repo/unit} [unit unit]
+                 (immutable-ledger [unit unit]))))))
+
+(deftest coverage-cannot-promote-without-immutable-report-evidence
+  (let [coverage-gate (assoc (get-in valid-catalog
+                                     [:catalog/repositories "repo"
+                                      :repository/gates 0])
+                             :gate/id :repo/coverage
+                             :gate/kind :coverage)
+        catalog (assoc-in valid-catalog
+                          [:catalog/repositories "repo" :repository/gates]
+                          [coverage-gate])
+        result (recorded-result :repo/coverage :passed revision-a)]
+    (is (evidence/valid-result? result))
+    (is (false? (evidence/automatic-promotion-supported? coverage-gate)))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 catalog test-catalog-identity revision-a
+                 #{:repo/coverage} [result]
+                 (immutable-ledger [result]))))))
+
+(deftest promotion-results-must-match-the-trusted-catalog-snapshot
+  (let [revision revision-a
+        result (recorded-result :repo/unit :passed revision)
+        consistent? #(evidence/promotion-evidence-consistent?
+                      valid-catalog test-catalog-identity revision
+                      #{:repo/unit} [%]
+                      (immutable-ledger [result]))]
+    (is (consistent? result))
+    (is (false? (consistent? (assoc result :result/command ["true"]))))
+    (is (false? (consistent? (assoc result :result/exit 7))))
+    (is (false? (consistent? (assoc result :result/execution :external))))
+    (is (false? (consistent? (assoc result
+                                    :result/catalog
+                                    (assoc test-catalog-identity
+                                           :catalog/sha256
+                                           (apply str (repeat 64 "b")))))))
+    (is (false? (consistent? (assoc-in result
+                                       [:result/source :source/path]
+                                       "repo/forged.edn"))))
+    (is (false? (consistent? (assoc-in result
+                                       [:result/source :source/repository]
+                                       "other"))))
+    (let [failed (assoc (recorded-result :repo/unit :failed revision)
+                        :result/exit 7)
+          edited-pass (assoc failed :result/outcome :passed :result/exit 0)]
+      (is (evidence/valid-result? edited-pass))
+      (is (false? (evidence/promotion-evidence-consistent?
+                   valid-catalog test-catalog-identity revision
+                   #{:repo/unit} [edited-pass]
+                   (immutable-ledger [failed])))))))
+
+(deftest promotion-requires-an-exact-immutable-receipt
+  (let [result (recorded-result :repo/unit :passed revision-a)
+        ledger (immutable-ledger [result])
+        receipt (first (:ledger/records ledger))
+        legacy-receipt (dissoc receipt :evidence/schema :evidence/adapter)
+        not-applicable (-> result
+                           (assoc :result/outcome :not-applicable
+                                  :result/reason "No user surface"
+                                  :result/approved-by "review/42")
+                           (dissoc :result/exit))]
+    (is (evidence/evidence-receipt? (first (:ledger/records ledger))))
+    (is (evidence/evidence-receipt? legacy-receipt))
+    (is (false? (evidence/receipt-attests-result? legacy-receipt result)))
+    (is (false? (evidence/evidence-receipt?
+                 (assoc receipt :evidence/adapter ""))))
+    (is (evidence/immutable-receipt-ledger? ledger))
+    (is (evidence/promotion-evidence-consistent?
+         valid-catalog test-catalog-identity revision-a
+         #{:repo/unit} [result]
+         (update ledger :ledger/records
+                 #(conj % (first %)))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision-a
+                 #{:repo/unit} [result]
+                 (assoc-in ledger [:ledger/identity :ledger/sha256] "forged"))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision-a
+                 #{:repo/unit} [result]
+                 (update ledger :ledger/records empty))))
+    (is (false? (evidence/promotion-evidence-consistent?
+                 valid-catalog test-catalog-identity revision-a
+                 #{:repo/unit} [not-applicable]
+                 (immutable-ledger [not-applicable]))))))
+
+(defmethod test/report [::test/default :end-run-tests] [summary]
+  (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
+
+(test/run-tests 'evidence-test)
