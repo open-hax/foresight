@@ -106,3 +106,12 @@
   spore: none
   receipt-refs: 2026-08-30T00:47:35Z
   note: Full-review findings require task-identity and layer-boundary checks before mutation; exact-tree verification then lets completed implementation cards move to done without turning reviewer output into unexamined authority.
+- ts: 2026-08-30T00:55:23Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Reconcile historical skipped terminology with explicit outcomes
+  p-efficiency: 0.94
+  p-friction: 0.26
+  p-skill-candidate: 0.25
+  spore: none
+  receipt-refs: 2026-08-30T00:55:23Z
+  note: Settled acceptance text can retain obsolete vocabulary when a later reviewed specification strengthens it; append the superseding decision and its executable mapping rather than editing history or inventing a pass-like skipped state.
