@@ -340,3 +340,12 @@
   spore: none
   receipt-refs: 2026-08-30T08:40:00Z
   note: A database transaction can make several writes atomic without proving that an existing record equals the proposed record. Replay equality, immutable insert semantics, and complete-set validation must constrain transactional and recovery-oriented adapters alike.
+- ts: 2026-08-30T09:04:02Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind commit responses to requested revisions
+  p-efficiency: 0.96
+  p-friction: 0.24
+  p-skill-candidate: 0.18
+  spore: none
+  receipt-refs: 2026-08-30T09:04:02Z
+  note: A successful immutable-object lookup is not identity evidence unless its returned object ID equals the requested revision. Validate that equality before exposing the tree, and retain identity failure across cached replays and both raw-success and raw-absence paths.

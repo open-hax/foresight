@@ -326,7 +326,9 @@ const apiClient = new GitHubClient('token', {
   fetchImpl: async (url) => {
     fetchCalls.push(url);
     if (url.startsWith('https://raw.githubusercontent.com')) return response(200, manifestText);
-    if (url.endsWith(`/git/commits/${sha('a')}`)) return response(200, { tree: { sha: sha('d') } });
+    if (url.endsWith(`/git/commits/${sha('a')}`)) {
+      return response(200, { sha: sha('a'), tree: { sha: sha('d') } });
+    }
     if (url.endsWith(`/git/trees/${sha('d')}?recursive=1`)) {
       return response(200, {
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(manifestText) }],
@@ -344,11 +346,65 @@ assert.deepEqual(await apiClient.manifest('open-hax/root', sha('a')), {
 assert.equal(fetchCalls.some((url) => url.startsWith('https://raw.githubusercontent.com')), true);
 assert.equal(fetchCalls.filter((url) => url.startsWith('https://api.github.com')).length, 2);
 
+let mismatchedCommitRequests = 0;
+let mismatchedCommitTreeRequests = 0;
+const mismatchedCommitIdentityClient = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.startsWith('https://raw.githubusercontent.com')) return response(200, manifestText);
+    if (url.endsWith(`/git/commits/${sha('a')}`)) {
+      mismatchedCommitRequests += 1;
+      return response(200, { sha: sha('b'), tree: { sha: sha('d') } });
+    }
+    if (url.includes('/git/trees/')) {
+      mismatchedCommitTreeRequests += 1;
+      return response(200, {
+        truncated: false,
+        tree: [{
+          path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(manifestText),
+        }],
+      });
+    }
+    return response(500, { message: `unexpected ${url}` });
+  },
+});
+await assert.rejects(
+  mismatchedCommitIdentityClient.manifest('open-hax/root', sha('a')),
+  new RegExp(`Git returned commit ${sha('b')} for requested revision open-hax/root@${sha('a')}`),
+);
+await assert.rejects(
+  mismatchedCommitIdentityClient.commit('open-hax/root', sha('a')),
+  /Git returned commit/,
+);
+assert.equal(mismatchedCommitRequests, 1);
+assert.equal(mismatchedCommitTreeRequests, 0);
+
+let wrongCommitRaw404TreeRequests = 0;
+const wrongCommitRaw404Client = new GitHubClient(null, {
+  fetchImpl: async (url) => {
+    if (url.startsWith('https://raw.githubusercontent.com')) return response(404, 'Not Found');
+    if (url.endsWith(`/git/commits/${sha('a')}`)) {
+      return response(200, { sha: sha('b'), tree: { sha: sha('d') } });
+    }
+    if (url.includes('/git/trees/')) {
+      wrongCommitRaw404TreeRequests += 1;
+      return response(200, { truncated: false, tree: [] });
+    }
+    return response(500, { message: `unexpected ${url}` });
+  },
+});
+await assert.rejects(
+  wrongCommitRaw404Client.manifest('open-hax/root', sha('a')),
+  /Git returned commit/,
+);
+assert.equal(wrongCommitRaw404TreeRequests, 0);
+
 const bomManifestBytes = Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), Buffer.from(manifestText)]);
 const bomClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(200, bomManifestBytes);
-    if (url.endsWith(`/git/commits/${sha('b')}`)) return response(200, { tree: { sha: sha('e') } });
+    if (url.endsWith(`/git/commits/${sha('b')}`)) {
+      return response(200, { sha: sha('b'), tree: { sha: sha('e') } });
+    }
     if (url.endsWith(`/git/trees/${sha('e')}?recursive=1`)) {
       return response(200, {
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: gitBlobSha(bomManifestBytes) }],
@@ -369,7 +425,9 @@ assert.equal(parseGitmodules(`\uFEFF${manifestText}`)[0].parseStatus, 'valid');
 const absentClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(404, 'Not Found');
-    if (url.includes('/git/commits/')) return response(200, { tree: { sha: 'empty-tree' } });
+    if (url.includes('/git/commits/')) {
+      return response(200, { sha: sha('a'), tree: { sha: 'empty-tree' } });
+    }
     if (url.endsWith('/git/trees/empty-tree?recursive=1')) {
       return response(200, { truncated: false, tree: [] });
     }
@@ -382,7 +440,7 @@ const misleadingRaw404Client = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(404, 'Not Found');
     if (url.includes('/git/commits/')) {
-      return response(200, { tree: { sha: 'manifest-present-tree' } });
+      return response(200, { sha: sha('a'), tree: { sha: 'manifest-present-tree' } });
     }
     if (url.endsWith('/git/trees/manifest-present-tree?recursive=1')) {
       return response(200, {
@@ -484,7 +542,7 @@ let requestBodyAttempts = 0;
 const boundedRequestClient = new GitHubClient(null, {
   fetchImpl: async (_url, options) => {
     observedRequestSignals.push(options.signal);
-    const candidate = response(200, { tree: { sha: sha('a') } });
+    const candidate = response(200, { sha: sha('a'), tree: { sha: sha('a') } });
     const readBody = candidate.arrayBuffer;
     candidate.arrayBuffer = async () => {
       requestBodyAttempts += 1;
@@ -497,7 +555,7 @@ const boundedRequestClient = new GitHubClient(null, {
 });
 assert.deepEqual(
   await boundedRequestClient.commit('open-hax/request-timeout', sha('a')),
-  { tree: { sha: sha('a') } },
+  { sha: sha('a'), tree: { sha: sha('a') } },
 );
 assert.equal(requestBodyAttempts, 2);
 assert.equal(observedRequestSignals.length, 2);
@@ -511,7 +569,7 @@ const bodyRateRetryClient = new GitHubClient(null, {
   fetchImpl: async () => {
     bodyRateRetryAttempts += 1;
     if (bodyRateRetryAttempts > 1) {
-      return response(200, { tree: { sha: 'after-body-rate-retry' } });
+      return response(200, { sha: sha('a'), tree: { sha: 'after-body-rate-retry' } });
     }
     const candidate = response(429, { message: 'slow down' }, { 'retry-after': '60' });
     candidate.arrayBuffer = async () => { throw new Error('simulated rate-limit body failure'); };
@@ -520,6 +578,7 @@ const bodyRateRetryClient = new GitHubClient(null, {
   sleepImpl: async (milliseconds) => bodyRateRetryDelays.push(milliseconds),
 });
 assert.deepEqual(await bodyRateRetryClient.commit('open-hax/body-rate-retry', sha('a')), {
+  sha: sha('a'),
   tree: { sha: 'after-body-rate-retry' },
 });
 assert.equal(bodyRateRetryAttempts, 2);
@@ -567,7 +626,9 @@ assert.deepEqual(persistentBodyRateDelays, [1000, 1000]);
 const symlinkManifestClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(200, 'target');
-    if (url.includes('/git/commits/')) return response(200, { tree: { sha: 'symlink-tree' } });
+    if (url.includes('/git/commits/')) {
+      return response(200, { sha: sha('a'), tree: { sha: 'symlink-tree' } });
+    }
     if (url.endsWith('/git/trees/symlink-tree?recursive=1')) {
       return response(200, {
         tree: [{ path: '.gitmodules', mode: '120000', type: 'blob', sha: 'symlink-blob' }],
@@ -583,7 +644,9 @@ await assert.rejects(symlinkManifestClient.manifest('open-hax/root', sha('a')), 
 const mismatchedManifestClient = new GitHubClient(null, {
   fetchImpl: async (url) => {
     if (url.startsWith('https://raw.githubusercontent.com')) return response(200, manifestText);
-    if (url.includes('/git/commits/')) return response(200, { tree: { sha: sha('f') } });
+    if (url.includes('/git/commits/')) {
+      return response(200, { sha: sha('a'), tree: { sha: sha('f') } });
+    }
     if (url.endsWith(`/git/trees/${sha('f')}?recursive=1`)) {
       return response(200, {
         tree: [{ path: '.gitmodules', mode: '100644', type: 'blob', sha: sha('0') }],
@@ -616,11 +679,12 @@ const retryingClient = new GitHubClient(null, {
     retryAttempt += 1;
     return retryAttempt === 1
       ? response(500, { message: 'temporary' })
-      : response(200, { tree: { sha: 'after-retry' } });
+      : response(200, { sha: sha('a'), tree: { sha: 'after-retry' } });
   },
   sleepImpl: async (milliseconds) => retryDelays.push(milliseconds),
 });
 assert.deepEqual(await retryingClient.commit('open-hax/retry', sha('a')), {
+  sha: sha('a'),
   tree: { sha: 'after-retry' },
 });
 assert.equal(retryingClient.requests, 2);
@@ -650,11 +714,12 @@ const rateRetryClient = new GitHubClient(null, {
         'retry-after': '60',
         'x-ratelimit-remaining': '4',
       })
-      : response(200, { tree: { sha: 'after-rate-retry' } });
+      : response(200, { sha: sha('c'), tree: { sha: 'after-rate-retry' } });
   },
   sleepImpl: async (milliseconds) => rateRetryDelays.push(milliseconds),
 });
 assert.deepEqual(await rateRetryClient.commit('open-hax/rate-retry', sha('c')), {
+  sha: sha('c'),
   tree: { sha: 'after-rate-retry' },
 });
 assert.equal(rateRetryClient.requests, 2);
@@ -672,11 +737,12 @@ const untimedRateRetryClient = new GitHubClient(null, {
       ? response(403, { message: 'secondary rate limit' }, {
         'x-ratelimit-remaining': '4',
       })
-      : response(200, { tree: { sha: 'after-untimed-rate-retry' } });
+      : response(200, { sha: sha('c'), tree: { sha: 'after-untimed-rate-retry' } });
   },
   sleepImpl: async (milliseconds) => untimedRateRetryDelays.push(milliseconds),
 });
 assert.deepEqual(await untimedRateRetryClient.commit('open-hax/untimed-rate-retry', sha('c')), {
+  sha: sha('c'),
   tree: { sha: 'after-untimed-rate-retry' },
 });
 assert.equal(untimedRateRetryClient.requests, 3);

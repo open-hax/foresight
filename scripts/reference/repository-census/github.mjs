@@ -160,7 +160,14 @@ export class GitHubClient {
   async commit(fullName, revision) {
     const key = `${fullName}@${revision}`.toLowerCase();
     if (!this.commitCache.has(key)) {
-      this.commitCache.set(key, this.request(`${API}/repos/${fullName}/git/commits/${revision}`));
+      const request = this.request(`${API}/repos/${fullName}/git/commits/${revision}`)
+        .then((commit) => {
+          if (commit?.sha !== revision) {
+            throw new Error(`Git returned commit ${String(commit?.sha)} for requested revision ${fullName}@${revision}`);
+          }
+          return commit;
+        });
+      this.commitCache.set(key, request);
     }
     return this.commitCache.get(key);
   }
