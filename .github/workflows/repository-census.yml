@@ -24,6 +24,11 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: >-
+    census-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
   current-pinned-closure:
     runs-on: ubuntu-latest
@@ -32,6 +37,7 @@ jobs:
       - name: Check out Foresight
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 

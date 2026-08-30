@@ -259,3 +259,30 @@
   spore: none
   receipt-refs: 2026-08-30T05:40:00Z
   note: Hosted closure proves an output projection, not every future evidence contract; observation provenance, stable subject keys, strict Gitlink identities, Git-compatible record continuation, and commit-bound promotion authority all require explicit fail-closed laws before the projection can be trusted downstream.
+- ts: 2026-08-30T06:33:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind Gitlink mode and atomic replay/promotion authority
+  p-efficiency: 0.91
+  p-friction: 0.46
+  p-skill-candidate: 0.31
+  spore: none
+  receipt-refs: 2026-08-30T06:33:00Z
+  note: An object type and hash do not prove Gitlink mode, and a last-second read does not make promotion atomic. Exact mode, packet-versus-record identity scope, immutable executable pins, compare-and-swap writes, and cross-trigger workflow concurrency must each be explicit at the authority boundary.
+- ts: 2026-08-30T06:52:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Make replay and cross-store promotion crash-safe
+  p-efficiency: 0.90
+  p-friction: 0.53
+  p-skill-candidate: 0.37
+  spore: none
+  receipt-refs: 2026-08-30T06:52:00Z
+  note: Idempotency is not completeness, serialization is not cross-store atomicity, and cancellation is safe only when competing executions consume equivalent bytes. Pending-to-complete recovery, one commit authority, and explicit PR-head checkout turn those distinctions into enforceable boundaries.
+- ts: 2026-08-30T07:01:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Preserve committed promotion ancestry during recovery
+  p-efficiency: 0.94
+  p-friction: 0.38
+  p-skill-candidate: 0.24
+  spore: none
+  receipt-refs: 2026-08-30T07:01:00Z
+  note: A canonical commit decision remains committed after the ref advances again. Recovery must verify exact identity through monotonic first-parent ancestry, not confuse a newer tip with proof that an earlier compare-and-swap failed.

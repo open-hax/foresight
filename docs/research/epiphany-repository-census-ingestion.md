@@ -159,6 +159,7 @@ Every record should carry Epiphany's versioned observation envelope:
  :observation/adapter-version ...
  :observation/schema-version ...
  :census/run-id ...
+ :observation/source-provider-id ...
  :observation/request-id ...}
 ```
 
@@ -172,6 +173,43 @@ request/idempotency checks; neither is reused as `:observation/id`. `gap/id`
 excludes volatile human-readable `gap/detail` from its subject digest. A
 repeated run may therefore observe the same packet occurrence or gap again
 without collapsing two run-bound observations into one.
+
+The request ID has packet-level scope. The acquisition provider supplies one
+opaque request ID, and the importer binds it to the authenticated/configured
+provider identity and the canonical packet digest after schema validation. The
+packet cannot select its provider identity. In `census-run-v1`, MongoDB enforces
+a unique compound index on
+`[:observation/source-provider-id :observation/request-id]`. The run record also
+persists the canonical packet digest, schema identity, expected canonical child
+IDs, child-set digest and count, and an acceptance state. Reusing the pair with
+different bytes, digest, schema, or expected child set is a conflict. Every
+child copies the request ID for traceability, but child collections
+intentionally do not make that shared value unique.
+
+Accepting a packet is one atomic domain operation. An adapter may implement it
+as one transaction spanning the run and child collections. An adapter without
+that transaction must implement a durable `pending` to `complete` protocol:
+
+1. Atomically create or load the unique run record and verify all immutable
+   packet and expected-child metadata.
+2. Idempotently upsert children by their deterministic observation IDs. A
+   same-digest replay resumes a pending run and writes only missing children; it
+   never returns that run as accepted merely because the request row exists.
+3. Verify the exact child-ID set, count, and digest, then compare-and-swap the
+   run from `pending` to `complete`.
+4. Expose only `complete` runs and their children to readers and projections.
+
+Concurrent importers may race on deterministic upserts, but only one can create
+the run or finalize its state. A crash before or after any child collection, or
+immediately around finalization, is recovered by replaying the same operation.
+No pending or extra child can become accepted evidence.
+
+Child-record identity is separate. The importer derives each
+`:observation/id` from the run ID, versioned observation type, and canonical
+packet-record identity, and every versioned collection enforces a unique index
+on that observation ID. This prevents duplicate children within one accepted
+packet without collapsing the same stable occurrence or gap observed by a
+later run.
 
 Repository-bound records additionally carry `:resource-id`. Pre-registration
 external-reference observations require a distinct typed subject/reference;
@@ -201,8 +239,9 @@ census-coverage-v1
 
 Useful observation indexes include:
 
-- unique observation ID;
-- unique request/idempotency ID where commands are replayable;
+- unique observation ID in every versioned collection;
+- unique source-provider plus request/idempotency ID on `census-run-v1` only;
+- non-unique request ID on child collections for packet tracing;
 - census run ID;
 - parent reference plus parent commit OID;
 - target reference plus target commit OID;
@@ -242,6 +281,9 @@ calling registered durable write operations.
    Epiphany without making either runtime own the other's infrastructure.
 7. Repository projections are rebuilt and compared against the current census
    artifact as an equivalence test.
+8. Failure injection before and after every child-collection write and on both
+   sides of finalization proves that same-digest replay converges to one exact
+   complete child set, while pending evidence remains invisible.
 
 ## Non-decisions
 

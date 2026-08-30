@@ -298,6 +298,15 @@ A proposal packet should carry:
  :proposal/created-at "..."}
 ```
 
+The bridge owns an allowlist that maps each accepted
+`[:proposal/interpreter :id :version]` pair to one immutable interpreter commit
+or content-addressed artifact digest. Packet-selected branches, tags, URLs,
+mutable release names, and unlisted versions are rejected. The bridge loads
+only the allowlisted immutable object, verifies the resolved commit or artifact
+digest before execution, and records that resolved identity in validation and
+acceptance evidence; the packet's version string never becomes an executable
+locator by itself.
+
 The bridge must derive the submitting principal from an authenticated channel,
 session, or credential and authorize that principal for the requested corpus,
 base, operations, and attachments before interpreter validation or promotion.
@@ -314,7 +323,43 @@ that is stale relative to the canonical promotion head is rejected before any
 Clio/Git write. Validation output and the eventual promotion parent remain
 bound to that same immutable commit and catalog digest; the bridge rechecks the
 canonical head immediately before promotion rather than applying reviewed
-operations to newer bytes.
+operations to newer bytes. That final check and the promotion write are one
+expected-parent/compare-and-swap operation. A serialization lease may reduce
+contention among cooperating writers, but it never replaces the compare-and-
+swap and is not an atomicity boundary across stores.
+
+Git's canonical corpus ref is the sole commit authority for this bridge. Every
+promotion receives a durable promotion ID and prepare record binding the
+validated parent, catalog digest, interpreter identity, proposed Git commit
+OID, and exact Clio event-batch digest. The content-addressed prepared commit
+itself binds the promotion ID and event-batch digest in verified commit metadata
+or a tree manifest; recovery rejects any mismatch with the prepare record. The
+bridge may stage immutable Git objects and Clio rows tagged `prepared`, but
+neither is accepted or visible to canonical readers before the Git ref
+compare-and-swap. Advancing that ref from the validated parent to the prepared
+commit is the one commit decision. The bridge permits only monotonic
+expected-parent advances of this canonical ref; force updates cannot erase a
+commit decision.
+
+After a successful ref advance, the bridge idempotently marks the promotion
+committed and materializes its Clio projection. A crash between those steps is
+projection lag, not a second authority. Recovery walks the canonical ref's
+first-parent history and verifies the exact prepared commit OID, promotion ID,
+and event-batch digest. If that commit is the current tip or any canonical
+first-parent ancestor, the promotion is committed even when later promotions
+have advanced the ref, and recovery idempotently completes its exact Clio batch.
+
+For a lost or ambiguous compare-and-swap response, recovery retries only while
+the ref still names the validated parent. It marks the prepare aborted only
+after an authoritative compare-and-swap failure or after the monotonic
+canonical history proves that the prepared commit is absent; its staged rows
+then remain invisible. It never advances Clio independently or substitutes a
+newer parent. Failure injection before and after prepare, Git-object staging,
+Clio staging, ref compare-and-swap, and projection finalization must converge to
+either one committed promotion with the exact batch or no visible promotion,
+including after repeated recovery, a lost compare-and-swap response, and a
+second successful promotion advancing `C1` to `C2` before `C1` projection
+finalization.
 
 ## LFS-to-Drive migration
 

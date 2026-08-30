@@ -634,7 +634,10 @@ function traversalClient(manifests) {
     },
     commit: async () => ({ tree: { sha: sha('d') } }),
     lookupTreePath: async (_fullName, _tree, repositoryPath) => ({
-      status: 'found', entry: { type: 'commit', path: repositoryPath, sha: sha('c') },
+      status: 'found',
+      entry: {
+        type: 'commit', mode: '160000', path: repositoryPath, sha: sha('c'),
+      },
     }),
   };
 }
@@ -705,9 +708,16 @@ const malformedGitlinkManifest = new Map([[
 ]]);
 for (const malformedGitlinkEntry of [
   undefined,
-  { type: 'commit', path: 'child', sha: undefined },
-  { type: 'commit', path: 'child', sha: 'main' },
-  { type: 'commit', path: 'child', sha: sha('A') },
+  { type: 'commit', mode: undefined, path: 'child', sha: sha('c') },
+  { type: 'commit', mode: null, path: 'child', sha: sha('c') },
+  { type: 'commit', mode: '100644', path: 'child', sha: sha('c') },
+  { type: 'commit', mode: '0160000', path: 'child', sha: sha('c') },
+  { type: 'commit', mode: 160000, path: 'child', sha: sha('c') },
+  { type: 'commit', mode: '16000', path: 'child', sha: sha('c') },
+  { type: 'commit', mode: '160000 ', path: 'child', sha: sha('c') },
+  { type: 'commit', mode: '160000', path: 'child', sha: undefined },
+  { type: 'commit', mode: '160000', path: 'child', sha: 'main' },
+  { type: 'commit', mode: '160000', path: 'child', sha: sha('A') },
 ]) {
   const client = traversalClient(malformedGitlinkManifest);
   client.lookupTreePath = async () => ({
@@ -965,6 +975,45 @@ const workflow = readFileSync('.github/workflows/repository-census.yml', 'utf8')
 assert.match(workflow, /pull_request:/);
 assert.match(workflow, /docs\/research\/repository-census-current-pinned-closure[.]md/);
 assert.match(workflow, /--frontier-baseline docs\/research\/repository-census-known-frontier[.]json/);
+assert.match(
+  workflow,
+  /census-\$\{\{ github[.]event[.]pull_request[.]head[.]repo[.]full_name \|\| github[.]repository \}\}-\$\{\{ github[.]head_ref \|\| github[.]ref_name \}\}/,
+);
+assert.match(workflow, /concurrency:\s+[\s\S]*cancel-in-progress: true/);
+assert.match(
+  workflow,
+  /ref: \$\{\{ github[.]event[.]pull_request[.]head[.]sha \|\| github[.]sha \}\}/,
+);
+
+const censusWorkflowIdentity = ({
+  repository, pullRequestHeadRepository = null, headRef = '', refName,
+  pullRequestHeadSha = null, sha: eventSha,
+}) => ({
+  group: `census-${pullRequestHeadRepository || repository}-${headRef || refName}`,
+  checkout: pullRequestHeadSha || eventSha,
+});
+const sameHeadPush = censusWorkflowIdentity({
+  repository: 'open-hax/foresight', refName: 'research/repository-census', sha: sha('a'),
+});
+const sameHeadPullRequest = censusWorkflowIdentity({
+  repository: 'open-hax/foresight',
+  pullRequestHeadRepository: 'open-hax/foresight',
+  headRef: 'research/repository-census', refName: '60/merge',
+  pullRequestHeadSha: sha('a'), sha: sha('b'),
+});
+assert.deepEqual(sameHeadPullRequest, sameHeadPush);
+const supersedingPush = censusWorkflowIdentity({
+  repository: 'open-hax/foresight', refName: 'research/repository-census', sha: sha('c'),
+});
+assert.equal(supersedingPush.group, sameHeadPush.group);
+assert.notEqual(supersedingPush.checkout, sameHeadPush.checkout);
+const forkPullRequest = censusWorkflowIdentity({
+  repository: 'open-hax/foresight', pullRequestHeadRepository: 'contributor/foresight',
+  headRef: 'research/repository-census', refName: '60/merge',
+  pullRequestHeadSha: sha('a'), sha: sha('b'),
+});
+assert.notEqual(forkPullRequest.group, sameHeadPullRequest.group);
+assert.equal(forkPullRequest.checkout, sameHeadPullRequest.checkout);
 assert.doesNotMatch(workflow, /uses: actions\/(?:checkout|setup-node|upload-artifact)@v\d/);
 assert.match(workflow, /actions\/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09/);
 assert.match(workflow, /actions\/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020/);

@@ -145,7 +145,8 @@ export async function census(options, dependencies = {}) {
         ? normalized.fullName.toLowerCase()
         : normalized.fullName ?? null;
       const targetId = normalized.kind === 'github' ? `github:${targetFullName}` : null;
-      const hasGitlinkEntry = lookup?.status === 'found' && lookup.entry?.type === 'commit';
+      const hasGitlinkEntry = lookup?.status === 'found'
+        && lookup.entry?.type === 'commit' && lookup.entry?.mode === '160000';
       const gitlink = hasGitlinkEntry && typeof lookup.entry.sha === 'string'
         && fullObjectId.test(lookup.entry.sha) ? lookup.entry.sha : null;
 
