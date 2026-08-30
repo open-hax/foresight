@@ -152,7 +152,7 @@ export async function census(options, dependencies = {}) {
           'gap/parent': repoId, 'gap/parent-revision': item.revision,
           'gap/path': module.path ?? null, 'gap/raw-url': module.url ?? null,
           'gap/detail': lookup?.error?.message ?? lookup?.status ?? module.parseStatus,
-        }, { frontier: status === 'lookup-error' });
+        }, { frontier: status === 'lookup-error' || status === 'invalid-declaration' });
         continue;
       }
 

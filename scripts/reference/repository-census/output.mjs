@@ -39,6 +39,15 @@ function normalizeFrontier(value) {
   };
 }
 
+function baselineGapEligible(gap) {
+  return gap['gap/type'] === 'manifest/unavailable'
+    && gap['gap/http-status'] === 404
+    && Number.isInteger(gap['gap/depth'])
+    && gap['gap/depth'] >= 0
+    && /^github:[A-Za-z0-9][A-Za-z0-9-]{0,38}\/[A-Za-z0-9._-]{1,100}$/.test(gap['gap/repository'])
+    && /^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(gap['gap/revision']);
+}
+
 export function canonicalFrontier(result) {
   return normalizeFrontier({
     roots: result.roots,
@@ -48,7 +57,9 @@ export function canonicalFrontier(result) {
 
 export function frontierBaselineMatches(result, expected) {
   try {
-    return JSON.stringify(canonicalFrontier(result)) === JSON.stringify(normalizeFrontier(expected));
+    const baseline = normalizeFrontier(expected);
+    if (!baseline.frontier.every(baselineGapEligible)) return false;
+    return JSON.stringify(canonicalFrontier(result)) === JSON.stringify(baseline);
   } catch {
     return false;
   }

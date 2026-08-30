@@ -41,7 +41,7 @@ function decodeSubmoduleName(raw) {
       continue;
     }
     const escaped = raw[++index];
-    if (escaped !== '\\' && escaped !== '"') return { valid: false, value: raw };
+    if (escaped === undefined) return { valid: false, value: raw };
     value += escaped;
   }
   return { valid: true, value };
@@ -50,44 +50,105 @@ function decodeSubmoduleName(raw) {
 export function parseGitmodules(text) {
   const modules = [];
   let current = null;
-  const section = /^\s*\[\s*submodule\s+"((?:[^"\\]|\\.)*)"\s*\]\s*(?:[#;].*)?$/i;
-  const property = /^\s*([A-Za-z0-9._-]+)\s*=\s*(.*?)\s*$/;
+  const quotedSection = /^\s*\[\s*([A-Za-z0-9][A-Za-z0-9-]*)\s+"((?:[^"\\]|\\.)*)"\s*\]\s*(?:[#;].*)?$/;
+  const simpleSection = /^\s*\[\s*([A-Za-z0-9][A-Za-z0-9-]*)(?:\.([A-Za-z0-9.-]*))?\s*\]\s*(?:[#;].*)?$/;
+  const property = /^\s*([A-Za-z][A-Za-z0-9-]*)\s*=\s*(.*?)\s*$/;
+  const bareProperty = /^\s*([A-Za-z][A-Za-z0-9-]*)\s*$/;
 
   const flush = () => {
     if (current) modules.push(current);
     current = null;
   };
 
-  for (const [index, rawLine] of text.replace(/\r\n?/g, '\n').split('\n').entries()) {
-    const line = rawLine.trimEnd();
+  const physicalLines = text.replace(/\r\n?/g, '\n').split('\n');
+  const logicalLines = [];
+  for (let index = 0; index < physicalLines.length; index += 1) {
+    let line = physicalLines[index];
+    const firstLine = index + 1;
+    while (true) {
+      let quoted = false;
+      let escaped = false;
+      for (const character of line) {
+        if (escaped) {
+          escaped = false;
+        } else if (character === '\\') {
+          escaped = true;
+        } else if (character === '"') {
+          quoted = !quoted;
+        } else if (!quoted && (character === '#' || character === ';')) {
+          break;
+        }
+      }
+      if (!escaped) break;
+      line = line.slice(0, -1);
+      if (index + 1 >= physicalLines.length) break;
+      line += physicalLines[++index];
+    }
+    logicalLines.push({ line: line.trimEnd(), number: firstLine });
+  }
+
+  const invalid = (line, number) => ({
+    name: line.trim(),
+    line: number,
+    syntaxValid: false,
+  });
+
+  for (const { line, number } of logicalLines) {
     if (!line.trim() || /^\s*[#;]/.test(line)) continue;
 
-    const sectionMatch = line.match(section);
-    if (sectionMatch) {
+    const quotedMatch = line.match(quotedSection);
+    if (quotedMatch) {
       flush();
-      const name = decodeSubmoduleName(sectionMatch[1]);
-      current = {
-        name: name.value,
-        line: index + 1,
-        syntaxValid: name.valid,
-      };
+      const name = decodeSubmoduleName(quotedMatch[2]);
+      if (quotedMatch[1].toLowerCase() === 'submodule') {
+        current = { name: name.value, line: number, syntaxValid: name.valid };
+      } else if (!name.valid) {
+        modules.push(invalid(line, number));
+      }
+      continue;
+    }
+
+    const simpleMatch = line.match(simpleSection);
+    if (simpleMatch) {
+      flush();
+      if (simpleMatch[1].toLowerCase() === 'submodule') {
+        current = simpleMatch[2] === undefined
+          ? { name: line.trim(), line: number, syntaxValid: false }
+          : { name: simpleMatch[2], line: number, syntaxValid: true };
+      }
       continue;
     }
 
     if (/^\s*\[/.test(line)) {
       flush();
+      modules.push(invalid(line, number));
       continue;
     }
 
     const propertyMatch = line.match(property);
-    if (propertyMatch && current) {
+    if (propertyMatch) {
       const key = propertyMatch[1].toLowerCase();
-      if (key === 'path' || key === 'url' || key === 'branch') {
-        const value = decodeConfigValue(propertyMatch[2]);
+      const value = decodeConfigValue(propertyMatch[2]);
+      if (current) {
         current.syntaxValid &&= value.valid;
-        if (value.valid) current[key] = value.value;
+        if (value.valid && (key === 'path' || key === 'url' || key === 'branch')) {
+          current[key] = value.value;
+        }
+      } else if (!value.valid) {
+        modules.push(invalid(line, number));
       }
+      continue;
     }
+
+    const bareMatch = line.match(bareProperty);
+    if (bareMatch) {
+      const key = bareMatch[1].toLowerCase();
+      if (current && (key === 'path' || key === 'url' || key === 'branch')) delete current[key];
+      continue;
+    }
+
+    if (current) current.syntaxValid = false;
+    else modules.push(invalid(line, number));
   }
   flush();
 

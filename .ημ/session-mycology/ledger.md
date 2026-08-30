@@ -160,3 +160,12 @@
   spore: none
   receipt-refs: 2026-08-30T02:01:51Z
   note: Commit existence does not prove a manifest absent, and throttle identity does not imply a usable retry time; exact tree inspection plus a documented one-minute exponential fallback keep both evidence and transport authority fail-closed.
+- ts: 2026-08-30T02:33:04Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Close census serialization, parser, baseline, and workflow trust gaps
+  p-efficiency: 0.88
+  p-friction: 0.53
+  p-skill-candidate: 0.31
+  spore: none
+  receipt-refs: 2026-08-30T02:33:04Z
+  note: A structurally stable census can still become false evidence through serializer types, permissive config parsing, mutable workflow code, or an overbroad exception baseline; adversarial differential probes should cover all four before exact-head publication.

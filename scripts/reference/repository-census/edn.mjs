@@ -16,7 +16,12 @@ export function edn(value) {
   if (value instanceof Set) return `#{${[...value].sort().map(edn).join(' ')}}`;
   if (typeof value === 'object') {
     const entries = Object.entries(value).filter(([, item]) => item !== undefined);
-    return `{${entries.map(([key, item]) => `:${key} ${edn(item)}`).join(' ')}}`;
+    return `{${entries.map(([key, item]) => {
+      const encodedKey = /^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(key)
+        ? JSON.stringify(key)
+        : `:${key}`;
+      return `${encodedKey} ${edn(item)}`;
+    }).join(' ')}}`;
   }
   throw new Error(`Cannot encode EDN value of type ${typeof value}`);
 }

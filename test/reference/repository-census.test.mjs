@@ -60,6 +60,36 @@ assert.deepEqual(quotedModules, [
     url: 'https://github.com/open-hax/after-core.git', parseStatus: 'valid',
   },
 ]);
+assert.deepEqual(parseGitmodules('[submodule "child]\n  path = child\n  url = ../child.git\n'), [{
+  name: '[submodule "child]', line: 1, parseStatus: 'invalid-syntax',
+}]);
+assert.deepEqual(parseGitmodules('[submodule.legacy]\n  path = child\n  url = ../child.git\n'), [{
+  name: 'legacy', line: 1, path: 'child', url: '../child.git', parseStatus: 'valid',
+}]);
+assert.deepEqual(parseGitmodules('[submodule]\n  path = child\n  url = ../child.git\n'), [{
+  name: '[submodule]', line: 1, path: 'child', url: '../child.git',
+  parseStatus: 'invalid-syntax',
+}]);
+assert.deepEqual(parseGitmodules('[submodule "a\\nb"]\n  path = child\n  url = ../child.git\n'), [{
+  name: 'anb', line: 1, path: 'child', url: '../child.git', parseStatus: 'valid',
+}]);
+assert.deepEqual(parseGitmodules([
+  '[core]', '  bare', '  key = value', '[submodule "child"]',
+  '  path = child', '  url = https://github.com/open-hax/\\', 'child.git', '  shallow', '',
+].join('\n')), [{
+  name: 'child', line: 4, path: 'child',
+  url: 'https://github.com/open-hax/child.git', parseStatus: 'valid',
+}]);
+assert.deepEqual(parseGitmodules('[submodule "terminal"]\n  url = ../child.git\n  path = child\\'), [{
+  name: 'terminal', line: 1, path: 'child', url: '../child.git', parseStatus: 'valid',
+}]);
+assert.equal(parseGitmodules('[core\npath = child\n')[0].parseStatus, 'invalid-syntax');
+assert.equal(parseGitmodules([
+  '[submodule "child"]', '  path = child', '  url = ../child.git', '  this is not config', '',
+].join('\n'))[0].parseStatus, 'invalid-syntax');
+assert.equal(parseGitmodules([
+  '[submodule "child"]', '  path = child', '  url = ../child.git', '  invalid.key = value', '',
+].join('\n'))[0].parseStatus, 'invalid-syntax');
 assert.deepEqual(parseRoot(`open-hax/foresight@${sha('a')}`), {
   fullName: 'open-hax/foresight', revision: sha('a'),
 });
@@ -71,6 +101,13 @@ assert.throws(() => parseRoot(`../foresight@${sha('a')}`), /Invalid GitHub repos
 assert.equal(normalizeGitHubUrl('https://github.com/../foresight').kind, 'unsupported');
 assert.equal(edn({ 'event/type': 'repository/observed', ok: true, xs: ['a', 1] }),
   '{:event/type "repository/observed" :ok true :xs ["a" 1]}');
+assert.equal(edn({
+  'repository/submodule-count-at-revisions': {
+    [sha('0')]: 1,
+    [sha('a')]: 2,
+    ['b'.repeat(64)]: 3,
+  },
+}), `{:repository/submodule-count-at-revisions {"${sha('0')}" 1 "${sha('a')}" 2 "${'b'.repeat(64)}" 3}}`);
 
 function response(status, body, responseHeaders = {}) {
   const text = typeof body === 'string' ? body : JSON.stringify(body);
@@ -325,6 +362,17 @@ function traversalClient(manifests) {
   };
 }
 
+const malformedDeclaration = await census({
+  roots: [`open-hax/root@${sha('a')}`], maxNodes: 10, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(new Map([[
+  `open-hax/root@${sha('a')}`,
+  '[submodule "child]\n  path = child\n  url = ../child.git\n',
+]])) });
+assert.equal(malformedDeclaration.occurrences[0]['occurrence/status'], 'invalid-declaration');
+assert.equal(malformedDeclaration.gaps[0]['gap/type'], 'submodule/invalid-declaration');
+assert.equal(malformedDeclaration.gaps[0]['gap/frontier?'], true);
+assert.equal(malformedDeclaration.stats.frontierRemaining, 1);
+
 const rootManifest = new Map([[`open-hax/root@${sha('a')}`, manifestText]]);
 const bounded = await census({
   roots: [`open-hax/root@${sha('a')}`], maxNodes: 1, maxDepth: 32, concurrency: 1,
@@ -410,10 +458,21 @@ assert.equal(frontierBaselineMatches(frontierResult, {
   ...expectedFrontier,
   frontier: [{ ...expectedFrontier.frontier[0], 'gap/http-status': 500 }],
 }), false);
+for (const status of [500, 504, null]) {
+  const retryableResult = {
+    ...frontierResult,
+    gaps: [{ ...frontierResult.gaps[0], 'gap/http-status': status }],
+  };
+  assert.equal(frontierBaselineMatches(retryableResult, canonicalFrontier(retryableResult)), false);
+}
 assert.equal(frontierBaselineMatches(frontierResult, { ...expectedFrontier, extra: true }), false);
 
 const workflow = readFileSync('.github/workflows/repository-census.yml', 'utf8');
 assert.match(workflow, /pull_request:/);
 assert.match(workflow, /docs\/research\/repository-census-current-pinned-closure[.]md/);
 assert.match(workflow, /--frontier-baseline docs\/research\/repository-census-known-frontier[.]json/);
+assert.doesNotMatch(workflow, /uses: actions\/(?:checkout|setup-node|upload-artifact)@v\d/);
+assert.match(workflow, /actions\/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09/);
+assert.match(workflow, /actions\/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020/);
+assert.match(workflow, /actions\/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02/);
 console.log('repository-census tests passed');
