@@ -23,8 +23,9 @@ export async function census(options, dependencies = {}) {
   const roots = [];
   const rootKeys = new Set();
   for (const spec of options.roots) {
-    const root = parseRoot(spec);
-    const key = `${root.fullName.toLowerCase()}@${root.revision}`;
+    const parsedRoot = parseRoot(spec);
+    const root = { ...parsedRoot, fullName: parsedRoot.fullName.toLowerCase() };
+    const key = `${root.fullName}@${root.revision}`;
     if (rootKeys.has(key)) continue;
     rootKeys.add(key);
     roots.push(root);

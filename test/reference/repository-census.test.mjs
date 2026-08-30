@@ -498,8 +498,15 @@ const duplicateRoots = await census({
   roots: [`open-hax/root@${sha('a')}`, `OPEN-HAX/root@${sha('a')}`],
   maxNodes: 2, maxDepth: 1, concurrency: 1,
 }, { client: traversalClient(rootManifest) });
+const reversedDuplicateRoots = await census({
+  roots: [`OPEN-HAX/root@${sha('a')}`, `open-hax/root@${sha('a')}`],
+  maxNodes: 2, maxDepth: 1, concurrency: 1,
+}, { client: traversalClient(rootManifest) });
 assert.equal(duplicateRoots.roots.length, 1);
+assert.deepEqual(duplicateRoots.roots, [{ fullName: 'open-hax/root', revision: sha('a') }]);
+assert.deepEqual(reversedDuplicateRoots.roots, duplicateRoots.roots);
 assert.equal(duplicateRoots.stats.repositories, 2);
+assert.deepEqual(reversedDuplicateRoots.stats, duplicateRoots.stats);
 assert.equal(duplicateRoots.gaps.some((gap) => gap['gap/type'] === 'recursion/max-nodes'), false);
 
 const cycleManifest = '[submodule "self"]\n  path = self\n  url = git@github.com:open-hax/root.git\n';

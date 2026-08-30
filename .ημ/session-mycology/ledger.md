@@ -187,3 +187,12 @@
   spore: none
   receipt-refs: 2026-08-30T03:11:59Z
   note: Input normalization must happen before bounded traversal accounting, and parser permissiveness must be checked against the authoritative Git grammar; otherwise duplicate or malformed inputs can turn an incomplete traversal into apparently closed evidence.
+- ts: 2026-08-30T03:24:00Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Canonicalize case-insensitive census root identity
+  p-efficiency: 0.97
+  p-friction: 0.18
+  p-skill-candidate: 0.20
+  spore: none
+  receipt-refs: 2026-08-30T03:24:00Z
+  note: Deduplicating by a canonical key is insufficient when the retained value remains order-dependent; canonicalize the value itself before any evidence-producing traversal.
