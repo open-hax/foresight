@@ -166,7 +166,9 @@ export function parseGitmodules(text) {
               assignedProperties: new Set(),
             }
             : {
-              name: simpleMatch[2],
+              // Git's deprecated [section.subsection] syntax lowercases the
+              // subsection; quoted subsection names remain case-sensitive.
+              name: simpleMatch[2].toLowerCase(),
               line: number,
               syntaxValid: true,
               assignedProperties: new Set(),

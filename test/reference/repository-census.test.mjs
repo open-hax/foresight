@@ -164,6 +164,37 @@ assert.deepEqual(parseGitmodules('[submodule "child]\n  path = child\n  url = ..
 assert.deepEqual(parseGitmodules('[submodule.legacy]\n  path = child\n  url = ../child.git\n'), [{
   name: 'legacy', line: 1, path: 'child', url: '../child.git', parseStatus: 'valid',
 }]);
+assert.deepEqual(parseGitmodules([
+  '[submodule.LegacyName]',
+  '  path = old-path',
+  '  url = ../old.git',
+  '  branch = retained',
+  '[submodule "legacyname"]',
+  '  path = current-path',
+  '  url = ../current.git',
+  '',
+].join('\n')), [{
+  name: 'legacyname', line: 1, path: 'current-path', url: '../current.git',
+  branch: 'retained', parseStatus: 'valid',
+}]);
+assert.deepEqual(parseGitmodules([
+  '[submodule.LegacyName]',
+  '  path = legacy-lowercase',
+  '  url = ../legacy.git',
+  '[submodule "LegacyName"]',
+  '  path = quoted-case-sensitive',
+  '  url = ../quoted.git',
+  '',
+].join('\n')), [
+  {
+    name: 'legacyname', line: 1, path: 'legacy-lowercase',
+    url: '../legacy.git', parseStatus: 'valid',
+  },
+  {
+    name: 'LegacyName', line: 4, path: 'quoted-case-sensitive',
+    url: '../quoted.git', parseStatus: 'valid',
+  },
+]);
 assert.deepEqual(parseGitmodules('[submodule]\n  path = child\n  url = ../child.git\n'), [{
   name: '[submodule]', line: 1, path: 'child', url: '../child.git',
   parseStatus: 'invalid-syntax',
@@ -750,7 +781,7 @@ assert.equal(duplicateDeclarations.occurrences.length, 2);
 assert.equal(new Set(duplicateDeclarations.occurrences.map((row) => row['occurrence/id'])).size, 2);
 
 const repeatedSectionManifest = [
-  '[submodule "same"]', '  path = old-path', '  url = ../old.git',
+  '[submodule.SAME]', '  path = old-path', '  url = ../old.git',
   '[submodule "same"]', '  path = current-path', '  url = ../current.git', '',
 ].join('\n');
 const repeatedSections = await census({

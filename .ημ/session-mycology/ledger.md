@@ -241,3 +241,12 @@
   spore: none
   receipt-refs: 2026-08-30T04:41:00Z
   note: A repeated config header is not a second semantic object when the authority treats both headers as one keyspace; effective evidence must merge property assignments in order while retaining malformed syntax and a stable declaration position.
+- ts: 2026-08-30T04:53:08Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Normalize deprecated Git subsection identity
+  p-efficiency: 0.97
+  p-friction: 0.20
+  p-skill-candidate: 0.21
+  spore: none
+  receipt-refs: 2026-08-30T04:53:08Z
+  note: Namespace consolidation must follow the authority's syntax-specific identity rules: deprecated dot-form subsections lowercase their names while quoted subsections preserve case, so normalization must precede repeated-section merging.
