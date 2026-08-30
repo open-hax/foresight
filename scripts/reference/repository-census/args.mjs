@@ -38,18 +38,32 @@ export function usage() {
   [--out PATH] [--max-nodes N] [--max-depth N] [--concurrency N]\n`;
 }
 
+export function isGitHubFullName(value) {
+  if (typeof value !== 'string') return false;
+  const parts = value.split('/');
+  if (parts.length !== 2) return false;
+
+  const [owner, repository] = parts;
+  const validOwner = /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/.test(owner);
+  const validRepository = /^(?!\.{1,2}$)[A-Za-z0-9._-]{1,100}$/.test(repository);
+  return validOwner && validRepository;
+}
+
 export function parseRoot(spec) {
+  if (typeof spec !== 'string') {
+    throw new Error('Root must be owner/repo@revision');
+  }
   const at = spec.lastIndexOf('@');
   if (at <= 0 || at === spec.length - 1) {
     throw new Error(`Root must be owner/repo@revision: ${spec}`);
   }
   const fullName = spec.slice(0, at);
   const revision = spec.slice(at + 1);
-  if (!/^[^/\s]+\/[^/\s]+$/.test(fullName)) {
+  if (!isGitHubFullName(fullName)) {
     throw new Error(`Invalid GitHub repository name in root: ${spec}`);
   }
-  if (!/^[0-9a-fA-F]{7,40}$/.test(revision)) {
-    throw new Error(`Root revision must be a commit SHA: ${spec}`);
+  if (!/^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(revision)) {
+    throw new Error(`Root revision must be a full lowercase Git commit ID: ${spec}`);
   }
-  return { fullName, revision: revision.toLowerCase() };
+  return { fullName, revision };
 }

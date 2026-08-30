@@ -4,6 +4,16 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { edn } from './edn.mjs';
 
+export function canonicalSummary(result) {
+  const {
+    githubRequests: _githubRequests,
+    rateRemaining: _rateRemaining,
+    rateReset: _rateReset,
+    ...stats
+  } = result.stats;
+  return { roots: result.roots, stats };
+}
+
 function markdown(result) {
   const lines = [
     '# Repository Census — Current Pinned Closure', '',
@@ -49,6 +59,6 @@ export async function writeResults(outDir, result) {
     writeNdEdn('occurrences.edn', result.occurrences),
     writeNdEdn('gaps.edn', result.gaps),
     writeFile(path.join(outDir, 'index.md'), markdown(result), 'utf8'),
-    writeFile(path.join(outDir, 'summary.json'), JSON.stringify({ roots: result.roots, stats: result.stats }, null, 2) + '\n', 'utf8'),
+    writeFile(path.join(outDir, 'summary.json'), `${JSON.stringify(canonicalSummary(result), null, 2)}\n`, 'utf8'),
   ]);
 }

@@ -8,6 +8,13 @@ on:
       - scripts/reference/repository-census/**
       - test/reference/repository-census.test.mjs
       - .github/workflows/repository-census.yml
+      - docs/research/repository-census-current-pinned-closure.md
+  pull_request:
+    paths:
+      - scripts/reference/repository-census/**
+      - test/reference/repository-census.test.mjs
+      - .github/workflows/repository-census.yml
+      - docs/research/repository-census-current-pinned-closure.md
   workflow_dispatch:
 
 permissions:

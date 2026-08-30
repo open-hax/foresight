@@ -20,17 +20,18 @@ async function mapLimit(items, limit, task) {
   return results;
 }
 
-export async function census(options) {
+export async function census(options, dependencies = {}) {
   const roots = options.roots.map(parseRoot);
   if (!roots.length) throw new Error('At least one --root is required');
 
-  const client = new GitHubClient(process.env.GITHUB_TOKEN);
+  const client = dependencies.client || new GitHubClient(process.env.GITHUB_TOKEN);
   const queue = roots.map((root) => ({ ...root, depth: 0, root: true }));
   const scheduled = new Set(queue.map((item) => `${item.fullName.toLowerCase()}@${item.revision}`));
   const visited = new Set();
   const repositories = new Map();
   const occurrences = [];
   const gaps = [];
+  let refusedFrontier = 0;
 
   const addGap = (gap) => gaps.push({
     'gap/id': stableId('gap', gap['gap/type'], JSON.stringify(gap)),
@@ -52,6 +53,7 @@ export async function census(options) {
       'repository/root?': false,
       'repository/min-depth': item.depth,
       'repository/manifest-statuses': new Set(),
+      'repository/manifest-sha256-at-revisions': {},
     };
     repo['repository/revisions'].add(item.revision);
     repo['repository/root?'] ||= item.root;
@@ -76,7 +78,8 @@ export async function census(options) {
       continue;
     }
     repo['repository/manifest-statuses'].add('present');
-    repo['repository/manifest-sha256'] = createHash('sha256').update(manifestText).digest('hex');
+    repo['repository/manifest-sha256-at-revisions'][item.revision]
+      = createHash('sha256').update(manifestText).digest('hex');
 
     let commit;
     try {
@@ -95,7 +98,7 @@ export async function census(options) {
     repo['repository/submodule-count-at-revisions'][item.revision] = modules.length;
 
     const resolved = await mapLimit(modules, options.concurrency, async (module) => {
-      const normalized = normalizeGitHubUrl(module.url || '');
+      const normalized = normalizeGitHubUrl(module.url || '', item.fullName);
       let lookup = null;
       if (module.path) {
         try {
@@ -122,7 +125,10 @@ export async function census(options) {
       else status = 'resolved';
 
       const occurrence = {
-        'occurrence/id': stableId('occurrence', repoId, item.revision, module.path || '', module.url || '', gitlink || ''),
+        'occurrence/id': stableId(
+          'occurrence', repoId, item.revision, module.name, module.line,
+          module.path || '', module.url || '', gitlink || '',
+        ),
         'occurrence/kind': 'git-submodule', 'occurrence/status': status,
         'occurrence/parent': repoId, 'occurrence/parent-revision': item.revision,
         'occurrence/depth': item.depth + 1, 'occurrence/name': module.name,
@@ -144,7 +150,11 @@ export async function census(options) {
         continue;
       }
 
+      const childKey = `${normalized.fullName.toLowerCase()}@${gitlink}`;
+      if (scheduled.has(childKey)) continue;
+
       if (item.depth + 1 > options.maxDepth) {
+        refusedFrontier += 1;
         addGap({
           'gap/type': 'recursion/max-depth', 'gap/occurrence': occurrence['occurrence/id'],
           'gap/target': targetId, 'gap/target-revision': gitlink, 'gap/limit': options.maxDepth,
@@ -152,9 +162,8 @@ export async function census(options) {
         continue;
       }
 
-      const childKey = `${normalized.fullName.toLowerCase()}@${gitlink}`;
-      if (scheduled.has(childKey)) continue;
       if (visited.size + queue.length >= options.maxNodes) {
+        refusedFrontier += 1;
         addGap({
           'gap/type': 'recursion/max-nodes', 'gap/occurrence': occurrence['occurrence/id'],
           'gap/target': targetId, 'gap/target-revision': gitlink, 'gap/limit': options.maxNodes,
@@ -193,7 +202,8 @@ export async function census(options) {
       resolvedOccurrences: occurrences.filter((row) => row['occurrence/status'] === 'resolved').length,
       gaps: gaps.length, githubRequests: client.requests,
       rateRemaining: client.rate.remaining, rateReset: client.rate.reset,
-      frontierRemaining: queue.length, maxNodes: options.maxNodes, maxDepth: options.maxDepth,
+      frontierRemaining: queue.length + refusedFrontier,
+      maxNodes: options.maxNodes, maxDepth: options.maxDepth,
     },
   };
 }
