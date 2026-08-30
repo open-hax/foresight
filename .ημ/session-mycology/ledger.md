@@ -79,3 +79,39 @@
   spore: none
   receipt-refs: 2026-08-29T23:36:14Z
   note: File identity and length are insufficient after a write; exact expected-byte verification at the final held-descriptor boundary turns otherwise invisible in-place corruption into a quarantined failure.
+- ts: 2026-08-29T23:50:59Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Project root GitHub issues into canonical Rheos state
+  p-efficiency: 0.88
+  p-friction: 0.31
+  p-skill-candidate: 0.22
+  spore: none
+  receipt-refs: 2026-08-29T23:50:59Z
+  note: Issue cleanup becomes planning-ready only when detailed GitHub acceptance is projected into lawful canonical cards; deployment authority remains an explicit blocked state rather than an inference from broad repository authorization.
+- ts: 2026-08-30T00:41:23Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Bind the repository census to canonical lifecycle state
+  p-efficiency: 0.89
+  p-friction: 0.37
+  p-skill-candidate: 0.24
+  spore: none
+  receipt-refs: 2026-08-30T00:41:23Z
+  note: Research projections need a separate acceptance record and lawful card before their implementation PR can become planning authority; incomplete hosted evidence remains an explicit frontier rather than a green-by-omission result.
+- ts: 2026-08-30T00:47:35Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Adjudicate final Foresight evidence review and close board lanes
+  p-efficiency: 0.92
+  p-friction: 0.34
+  p-skill-candidate: 0.28
+  spore: none
+  receipt-refs: 2026-08-30T00:47:35Z
+  note: Full-review findings require task-identity and layer-boundary checks before mutation; exact-tree verification then lets completed implementation cards move to done without turning reviewer output into unexamined authority.
+- ts: 2026-08-30T00:55:23Z
+  session: constellation-zero-inbox-2026-08-29
+  task: Reconcile historical skipped terminology with explicit outcomes
+  p-efficiency: 0.94
+  p-friction: 0.26
+  p-skill-candidate: 0.25
+  spore: none
+  receipt-refs: 2026-08-30T00:55:23Z
+  note: Settled acceptance text can retain obsolete vocabulary when a later reviewed specification strengthens it; append the superseding decision and its executable mapping rather than editing history or inventing a pass-like skipped state.
