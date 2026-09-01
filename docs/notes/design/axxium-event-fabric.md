@@ -12,8 +12,10 @@ and policy databases.
 
 The authorities remain distinct:
 
-1. **Provider adapters** verify signatures, hydrate provider objects, reconcile
-   missed changes, and perform provider commands.
+1. **Provider extern adapters** verify signatures, hydrate provider objects,
+   reconcile missed changes, and perform provider commands. Eta-mu owns the
+   GitHub extern adapter; provider-specific hosts own their corresponding Drive
+   and Discord extern adapters.
 2. **Axxium** assigns durable identities and versioned bindings to principals,
    provider accounts, installations, authorization grants, external objects,
    streams, protection domains, and execution episodes.
@@ -22,10 +24,13 @@ The authorities remain distinct:
    compaction receipts.
 4. **Katamorph** declares portable actor, role, capability, source, store,
    action, workflow, and policy resources.
-5. **Eta-mu** classifies GitHub events, coordinates workflows, validates and
-   aggregates evidence, and owns deterministic provider-publication policy.
-6. **Knoxx** builds rebuildable document, tag, search, graph, and evidence
-   projections and hosts the context-rich GitHub bot.
+5. **Eta-mu** owns the GitHub extern adapter, classifies GitHub events,
+   coordinates workflows, validates and aggregates evidence, and owns
+   deterministic provider-publication policy.
+6. **Knoxx** owns the code-level GitHub source driver, builds rebuildable
+   document, tag, search, graph, and evidence projections, and hosts the
+   context-rich GitHub bot. Its source driver consumes admitted normalized
+   events; it does not verify GitHub signatures or hold installation tokens.
 7. **Sol** executes explicitly authorized exact-input jobs under bounded
    capabilities and resource budgets.
 8. **Proxx** evaluates versioned OpenAI-compatible routing policy. Its external
@@ -47,8 +52,10 @@ permission to widen disclosure.
 | Principal, account, installation, grant, object, stream, and episode bindings | Axxium | Usernames, filenames, content hashes, JWT claims |
 | Record admission, order, replay, checkpoint, and retention | event-ledger | Webhook queues, Drive folders, Knoxx indexes |
 | Content-addressed schema and canonical record dialect | Clio | Raw provider payloads |
-| Signatures, hydration, reconciliation, and provider commands | Provider adapters | Model prompts or portable schemas |
+| GitHub signatures, hydration, reconciliation, installation-token commands, and publication transport | Eta-mu GitHub extern adapter | Knoxx source driver, model prompts, or portable schemas |
+| Drive and Discord signatures, hydration, reconciliation, and commands | Provider-specific extern adapters | Model prompts or portable schemas |
 | Workflow coordination, evidence fold, and publication policy | Eta-mu | An individual reviewer model |
+| GitHub normalized-event selection and projection intake | Knoxx GitHub source driver | Signature authority or provider secret custody |
 | Search, document, tag, graph, and evidence projections | Knoxx | Source ledgers |
 | Bounded exact-input execution | Sol | Ambient shell or provider authority |
 | OpenAI-compatible route selection | Proxx policy kernel | TypeScript route handlers |
@@ -59,13 +66,16 @@ permission to widen disclosure.
 
 ```mermaid
 flowchart LR
-  P[GitHub Drive Discord] --> PA[provider adapters]
-  PA --> AX[Axxium identities grants and bindings]
-  PA --> EL[(Clio event-ledger)]
+  P[GitHub Drive Discord] --> PA[provider extern adapters]
+  GHX[eta-mu GitHub extern adapter] --> AX[Axxium identities grants and bindings]
+  GHX --> EL[(Clio event-ledger)]
+  PA --> AX
+  PA --> EL
   AX --> EL
 
   EL --> EM[eta-mu workflow and evidence]
-  EL --> KX[Knoxx projections]
+  EL --> KXD[Knoxx GitHub source driver]
+  KXD --> KX[Knoxx projections]
   KX --> KB[Knoxx GitHub bot]
   EM --> KB
   EM --> SO[Sol bounded jobs]
@@ -74,9 +84,10 @@ flowchart LR
   KB --> EV[(typed evidence records)]
   SO --> EV
   EV --> EM
-  EM --> GP[deterministic GitHub publisher]
-  GP --> P
-  GP --> EL
+  EM --> GP[deterministic GitHub publication policy]
+  GP --> GHX
+  GHX --> P
+  GHX --> EL
 
   EL --> MIR[ACL-equivalent encrypted or redacted mirror]
   AX --> MIR
@@ -161,7 +172,7 @@ Semantic idempotency and physical-record identity are separate laws.
               :resource/revision "content-hash-or-commit"}]
 
  :payload/hash "sha256:..."
- :payload {...}
+ :payload {:pull-request/head "full-head-sha"}
  :privacy/classification :workspace
  :privacy/source-policy "policy:sha256:..."
  :retention/policy :source-history}
@@ -296,24 +307,26 @@ Human login and installation authority are separate Axxium bindings.
 
 ```text
 signed delivery
-  -> signature and delivery verification
+  -> eta-mu GitHub extern signature and delivery verification
   -> queued check at the exact head
   -> raw delivery record
   -> fast acknowledgement
   -> eta-mu classification
-  -> provider hydration and reconciliation
+  -> eta-mu GitHub extern hydration and reconciliation
   -> Axxium principal, installation, grant, object, stream bindings
   -> normalized observation record
+  -> Knoxx GitHub source-driver intake
   -> Knoxx graph, document, search, and evidence projections
   -> deterministic input and dependency-closure manifests
   -> bounded Knoxx and Sol evidence jobs
   -> deterministic evidence fold
-  -> check/review publication attempt and receipt
+  -> eta-mu publication policy
+  -> eta-mu GitHub extern check/review attempt and receipt
 ```
 
 Required laws:
 
-- verify the signature before trusted admission;
+- eta-mu's GitHub extern adapter verifies the signature before trusted admission;
 - retain `X-GitHub-Delivery`, event/action identity, installation ID, immutable
   repository ID, pull-request object ID, and exact head;
 - create or update an exact-head queued check before slow work, so loss of later
@@ -321,7 +334,8 @@ Required laws:
 - deduplicate delivery retries without erasing separate physical records;
 - reconcile missed deliveries, permission gaps, and rate limits;
 - discover `.ημ` and `.eta-mu` without treating path as identity;
-- publish through an installation token kept outside model context;
+- keep GitHub installation credentials inside eta-mu's extern boundary and out
+  of Knoxx drivers, agents, portable resources, and model context;
 - record incomplete provider coverage as partial, blocked, or unavailable rather
   than empty success.
 
@@ -393,12 +407,16 @@ stateDiagram-v2
 ```
 
 `PublicationRetry` and `PublicationBlocked` are open reconciliation obligations,
-not published terminal states. Each failed attempt appends a receipt containing
-the provider request identity, exact head, outcome intended for publication,
-HTTP/error class, response digest, retry count, next reconciliation time, and
-current grant identity. A permanent 403, invalid installation, exhausted rate
-limit, or unrecoverable transport error therefore cannot be misreported as
-`Published`.
+not published terminal states. Every publication attempt uses an idempotency key
+bound to immutable repository ID, pull-request object ID, exact head,
+evidence-episode ID, check resource revision, and intended conclusion. Each
+failed attempt appends a receipt containing that idempotency key, provider
+request identity, exact head, outcome intended for publication, HTTP/error
+class, response digest, retry count, next reconciliation time, and current grant
+identity. A permanent 403, invalid installation, exhausted rate limit,
+ambiguous timeout, or unrecoverable transport error therefore cannot be
+misreported as `Published`. `Published` requires provider acceptance and
+admission of the successful publication receipt.
 
 The early queued required check remains non-success while publication is blocked.
 If even queued-check creation fails, the required check is absent and branch
@@ -462,9 +480,13 @@ A terminal result contains an executable dependency closure, not a prose list:
                     :platform "linux-x64"}
  :test/outcome :passed
  :test/counts {:tests 52 :assertions 216 :failures 0 :errors 0}
- :test/artifacts [{:kind :junit :hash "sha256:..." :locator {...}}]
- :test/stdout {:hash "sha256:..." :locator {...}}
- :test/stderr {:hash "sha256:..." :locator {...}}}
+ :test/artifacts [{:kind :junit
+                   :hash "sha256:..."
+                   :locator {:artifact/id "junit.xml"}}]
+ :test/stdout {:hash "sha256:..."
+               :locator {:artifact/id "stdout.txt"}}
+ :test/stderr {:hash "sha256:..."
+               :locator {:artifact/id "stderr.txt"}}}
 ```
 
 The closure is generated from executable build and workflow configuration,
@@ -475,6 +497,23 @@ match exactly.
 
 `passed`, `cached`, `failed`, `blocked`, `unavailable`, and approved
 `not-applicable` remain distinct. A failed result never suppresses a rerun.
+
+### Retention and replay floor
+
+Evidence deletion is correctness-neutral only after an immutable archive or
+content-addressed compaction snapshot preserves every admitted test/result
+record, dependency closure, publication receipt, and artifact required to
+revalidate a trusted result and rebuild the evidence graph. Compaction appends a
+receipt that identifies the replaced stream range, archive digest, artifact
+manifest, retention policy revision, and verified restore procedure.
+
+The minimum retention floor is the longest applicable branch-protection,
+release, audit, incident-response, and source-data policy window. Evidence under
+an open review, unresolved finding, publication reconciliation obligation,
+active release, legal hold, or retained cache claim may not be deleted. When an
+artifact cannot be retained, the corresponding evidence becomes unavailable and
+may no longer satisfy a gate. Only duplicate working copies and projections may
+be deleted without affecting correctness.
 
 ## Parallel expert evidence lanes
 
@@ -511,7 +550,7 @@ coverage status, and typed findings. Lanes never publish directly.
    :finding/severity :high
    :finding/path "src/example.cljs"
    :finding/line 73
-   :finding/failure-trace "..."
+   :finding/failure-trace "validator rejected unresolved store schema"
    :finding/evidence [{:kind :validator-output
                        :artifact/hash "sha256:..."}]}]}
 ```
