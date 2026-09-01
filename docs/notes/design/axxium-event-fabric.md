@@ -105,7 +105,7 @@ The system must not collapse:
 - an append-only observation stream;
 - one admitted physical record;
 - one normalized semantic occurrence;
-- a review snapshot;
+- a review snapshot, including base and head revisions;
 - a runtime, test, or reviewer episode;
 - an evidence artifact, finding, verdict, check, review, or publication receipt;
 - a content-equivalence identity shared by byte-equivalent documents.
@@ -308,7 +308,8 @@ Human login and installation authority are separate Axxium bindings.
 ```text
 signed delivery
   -> eta-mu GitHub extern signature and delivery verification
-  -> queued check at the exact head
+  -> exact base/head snapshot identity
+  -> queued required-check creation or open reconciliation obligation
   -> raw delivery record
   -> fast acknowledgement
   -> eta-mu classification
@@ -328,9 +329,11 @@ Required laws:
 
 - eta-mu's GitHub extern adapter verifies the signature before trusted admission;
 - retain `X-GitHub-Delivery`, event/action identity, installation ID, immutable
-  repository ID, pull-request object ID, and exact head;
-- create or update an exact-head queued check before slow work, so loss of later
-  publication cannot create a false green;
+  repository ID, pull-request object ID, base ref/SHA, head SHA, and review
+  snapshot hash;
+- attempt an exact-snapshot queued required check before slow work; a failed or
+  ambiguous creation attempt becomes a retry/repair obligation and never a
+  successful `CheckQueued` transition;
 - deduplicate delivery retries without erasing separate physical records;
 - reconcile missed deliveries, permission gaps, and rate limits;
 - discover `.ημ` and `.eta-mu` without treating path as identity;
@@ -339,43 +342,61 @@ Required laws:
 - record incomplete provider coverage as partial, blocked, or unavailable rather
   than empty success.
 
-## Total review workflow
+## Exact snapshot and total check lifecycle
 
-A head-change guard runs before every post-snapshot transition and immediately
-before every provider mutation. The guard compares immutable repository ID,
-pull-request object ID, and current head SHA with the episode snapshot. A
-mismatch appends `:review/episode-superseded`, cancels outstanding jobs, and
-starts a new episode. Results and publications already attached to the old SHA
-remain valid only for that old SHA.
+A review snapshot binds immutable repository ID, pull-request object ID, base
+ref identity, base SHA, head SHA, merge-tree or equivalent review-input hash,
+and provider object revision. A guard rehydrates the pull request and recomputes
+that tuple before every post-snapshot transition and immediately before every
+provider mutation. A changed base with an unchanged head is therefore stale in
+the same way as a changed head. The old episode is superseded and a new episode
+starts from the new exact snapshot.
+
+Queued-check creation, final publication, and superseded-check cancellation are
+all acknowledged provider effects. A request attempt alone never advances to a
+successful state.
 
 ```mermaid
 stateDiagram-v2
   [*] --> DeliveryObserved
   DeliveryObserved --> Rejected: invalid signature or unknown installation
-  DeliveryObserved --> Admitted: trusted delivery
-  Admitted --> CheckQueued
-  CheckQueued --> Hydrating
+  DeliveryObserved --> Admitted: trusted delivery and exact snapshot candidate
 
+  Admitted --> QueueingCheck
+  QueueingCheck --> CheckQueued: provider accepts queued check and receipt is admitted
+  QueueingCheck --> QueueCheckRetry: retryable or ambiguous response
+  QueueingCheck --> QueueCheckBlocked: permanent auth scope or validation error
+  QueueingCheck --> SupersededWithoutCheck: snapshot guard fails before check exists
+
+  QueueCheckRetry --> QueueingCheck: retry due
+  QueueCheckRetry --> QueueCheckBlocked: retry budget exhausted
+  QueueCheckRetry --> SupersededWithoutCheck: snapshot guard fails
+  QueueCheckBlocked --> QueueingCheck: grant or configuration repaired
+  QueueCheckBlocked --> SupersededWithoutCheck: snapshot guard fails
+
+  CheckQueued --> Hydrating
   Hydrating --> Reconciling: provider coverage partial
-  Hydrating --> SnapshotReady: exact object and head resolved
+  Hydrating --> SnapshotReady: exact object and snapshot resolved
+  Hydrating --> CancellingSupersededCheck: snapshot guard fails
   Reconciling --> SnapshotReady: gap recovered
   Reconciling --> EvidenceBlocked: retry budget exhausted
+  Reconciling --> CancellingSupersededCheck: snapshot guard fails
 
-  SnapshotReady --> Superseded: head guard fails
-  SnapshotReady --> DeterministicGates: head guard passes
-  DeterministicGates --> Superseded: head guard fails
+  SnapshotReady --> DeterministicGates: snapshot guard passes
+  SnapshotReady --> CancellingSupersededCheck: snapshot guard fails
   DeterministicGates --> EvidenceBlocked: required gate failed or blocked
   DeterministicGates --> EvidenceUnavailable: required gate unavailable
   DeterministicGates --> ExpertLanes: manifests complete
+  DeterministicGates --> CancellingSupersededCheck: snapshot guard fails
 
-  ExpertLanes --> Superseded: head guard fails
   ExpertLanes --> Aggregating: all required lanes terminal
-  Aggregating --> Superseded: head guard fails
+  ExpertLanes --> CancellingSupersededCheck: snapshot guard fails
   Aggregating --> EvidenceBlocked: confirmed blocker
   Aggregating --> EvidenceConflicted: unresolved trusted contradiction
   Aggregating --> EvidenceUnavailable: required lane incomplete stale timed-out or unavailable
   Aggregating --> Advisory: complete with advisories only
   Aggregating --> Approved: complete and clean
+  Aggregating --> CancellingSupersededCheck: snapshot guard fails
 
   EvidenceBlocked --> PublishingFailure
   EvidenceConflicted --> PublishingFailure
@@ -383,58 +404,74 @@ stateDiagram-v2
   Advisory --> PublishingReview
   Approved --> PublishingReview
 
-  PublishingFailure --> Superseded: pre-mutation head guard fails
-  PublishingReview --> Superseded: pre-mutation head guard fails
-  PublishingFailure --> Published: provider acknowledges failing required check
-  PublishingReview --> Published: provider acknowledges check and optional review
-  PublishingFailure --> PublicationRetry: retryable provider error
-  PublishingReview --> PublicationRetry: retryable provider error
+  PublishingFailure --> Published: provider accepts failing required check and receipt is admitted
+  PublishingReview --> Published: provider accepts check and optional review and receipts are admitted
+  PublishingFailure --> PublicationRetry: retryable or ambiguous response
+  PublishingReview --> PublicationRetry: retryable or ambiguous response
   PublishingFailure --> PublicationBlocked: permanent auth scope or validation error
   PublishingReview --> PublicationBlocked: permanent auth scope or validation error
+  PublishingFailure --> CancellingSupersededCheck: pre-mutation snapshot guard fails
+  PublishingReview --> CancellingSupersededCheck: pre-mutation snapshot guard fails
 
-  PublicationRetry --> Superseded: head guard fails
   PublicationRetry --> PublishingFailure: retry failure outcome
   PublicationRetry --> PublishingReview: retry review outcome
   PublicationRetry --> PublicationBlocked: retry budget exhausted
+  PublicationRetry --> CancellingSupersededCheck: snapshot guard fails
+  PublicationBlocked --> PublishingFailure: grant repaired for failure outcome
+  PublicationBlocked --> PublishingReview: grant repaired for review outcome
+  PublicationBlocked --> CancellingSupersededCheck: snapshot guard fails
 
-  PublicationBlocked --> Superseded: head guard fails
-  PublicationBlocked --> PublishingFailure: grant or configuration repaired for failure outcome
-  PublicationBlocked --> PublishingReview: grant or configuration repaired for review outcome
+  CancellingSupersededCheck --> Superseded: provider accepts cancelled conclusion and receipt is admitted
+  CancellingSupersededCheck --> CancellationRetry: retryable or ambiguous response
+  CancellingSupersededCheck --> CancellationBlocked: permanent auth scope or validation error
+  CancellationRetry --> CancellingSupersededCheck: retry due
+  CancellationRetry --> CancellationBlocked: retry budget exhausted
+  CancellationBlocked --> CancellingSupersededCheck: grant or configuration repaired
 
   Published --> [*]
   Rejected --> [*]
   Superseded --> [*]
+  SupersededWithoutCheck --> [*]
 ```
 
-`PublicationRetry` and `PublicationBlocked` are open reconciliation obligations,
-not published terminal states. Every publication attempt uses an idempotency key
-bound to immutable repository ID, pull-request object ID, exact head,
-evidence-episode ID, check resource revision, and intended conclusion. Each
-failed attempt appends a receipt containing that idempotency key, provider
-request identity, exact head, outcome intended for publication, HTTP/error
-class, response digest, retry count, next reconciliation time, and current grant
-identity. A permanent 403, invalid installation, exhausted rate limit,
-ambiguous timeout, or unrecoverable transport error therefore cannot be
-misreported as `Published`. `Published` requires provider acceptance and
-admission of the successful publication receipt.
+A supersession observation starts the replacement episode immediately. The old
+episode remains in its cancellation reconciliation lane until GitHub acknowledges
+the old queued check as cancelled. Only an episode for which no provider check
+was ever accepted may end as `SupersededWithoutCheck`.
 
-The early queued required check remains non-success while publication is blocked.
-If even queued-check creation fails, the required check is absent and branch
-protection remains fail-closed; the failure receipt and reconciliation obligation
-remain visible through the ledger, Knoxx, and an operator alert channel.
+`QueueCheckRetry`, `QueueCheckBlocked`, `PublicationRetry`,
+`PublicationBlocked`, `CancellationRetry`, and `CancellationBlocked` are open
+reconciliation obligations, not published terminal states. Every provider
+mutation uses an idempotency key bound to immutable repository ID,
+pull-request object ID, base SHA, head SHA, review-snapshot hash,
+evidence-episode ID, check resource revision, mutation kind, and intended
+conclusion.
+
+Each attempt appends a receipt containing that key, provider request identity,
+exact snapshot, intended outcome, HTTP/error class, response digest, retry count,
+next reconciliation time, and current grant identity. A permanent 403, invalid
+installation, exhausted rate limit, ambiguous timeout, or transport failure
+therefore cannot be misreported as accepted.
+
+The earliest successfully queued required check remains non-success while review
+or publication is blocked. If queued-check creation has not been acknowledged,
+branch protection remains fail-closed because the required success is absent;
+the retry/repair obligation remains visible through the ledger, Knoxx, and an
+operator alert channel.
 
 ### Required-check conclusions
 
 A check resource declares `:check/required?` at a pinned revision.
 
-- A required check may publish `success`, `failure`, `cancelled`,
-  `timed_out`, or `action_required` according to the provider contract.
+- A required check may publish `success`, `failure`, `cancelled`, `timed_out`, or
+  `action_required` according to the provider contract.
 - Failed, blocked, unavailable, conflicted, stale, or incomplete evidence may
   never publish `success` or `neutral` for a required check.
 - `neutral` is permitted only for a separately named check whose resource proves
   `:check/required? false`; it cannot satisfy the required evidence check.
-- A superseded old-head episode publishes `cancelled` when a queued check exists.
-  The new head receives a distinct episode and check.
+- A superseded episode with an accepted queued check remains nonterminal until
+  GitHub acknowledges its cancelled conclusion. The replacement snapshot gets a
+  distinct episode and check identity.
 
 ## Test and gate evidence
 
@@ -455,7 +492,8 @@ A terminal result contains an executable dependency closure, not a prose list:
 
  :test/revision {:repository/id "123456"
                  :repository/name "open-hax/proxx"
-                 :commit "full-commit-sha"
+                 :base "full-base-sha"
+                 :commit "full-head-sha"
                  :tree "full-tree-sha"
                  :dirty? false
                  :inputs/hash "sha256:..."}
@@ -467,7 +505,7 @@ A terminal result contains an executable dependency closure, not a prose list:
   :closure/entries
   [{:kind :repository
     :repository/id "123456"
-    :revision "full-commit-sha"
+    :revision "full-head-sha"
     :tree "full-tree-sha"}
    {:kind :workflow
     :identity "open-hax/eta-mu/.github/workflows/opencode-code-review.yml"
@@ -492,8 +530,8 @@ A terminal result contains an executable dependency closure, not a prose list:
 The closure is generated from executable build and workflow configuration,
 validated before use, retained by digest, and replayable. Any changed entry
 changes its hash. Prior evidence is reusable only when trusted producer,
-contracts, target inputs, dependency closure, and required environment facts
-match exactly.
+contracts, exact base/head snapshot, target inputs, dependency closure, and
+required environment facts match exactly.
 
 `passed`, `cached`, `failed`, `blocked`, `unavailable`, and approved
 `not-applicable` remain distinct. A failed result never suppresses a rerun.
@@ -539,7 +577,8 @@ coverage status, and typed findings. Lanes never publish directly.
  :evidence/lane-revision "resource-hash"
  :review/repository-id "654321"
  :review/pull-request-object-id "PR_kwDO..."
- :review/head "full-sha"
+ :review/base "full-base-sha"
+ :review/head "full-head-sha"
  :review/snapshot-hash "sha256:..."
  :review/episode "axxium:episode:..."
  :coverage/status :complete
@@ -557,8 +596,8 @@ coverage status, and typed findings. Lanes never publish directly.
 
 Deterministic aggregation must:
 
-- verify producer, head, snapshot, lane revision, dependency closure, and artifact
-  identity;
+- verify producer, exact base/head snapshot, lane revision, dependency closure,
+  and artifact identity;
 - reject mutated or unsupported evidence;
 - reject a blocking claim without a concrete failure trace and retained artifact;
 - deduplicate by semantic claim, location, and evidence identity;
@@ -582,7 +621,7 @@ attempts, and receipts.
 
 The bot can answer:
 
-- what triggered this episode and which exact head it covers;
+- what triggered this episode and which exact base/head snapshot it covers;
 - which contracts, files, tests, prior findings, and dependency revisions matter;
 - what evidence exists, is stale, conflicts, or remains unavailable;
 - which workflow node is running, blocked, or awaiting publication repair;
@@ -598,7 +637,7 @@ replayable.
 Sol issue `octave-commons/eta-mu-sol#2` owns bounded execution. A job requires:
 
 - Axxium actor, episode, target, and grant identities;
-- immutable repository ID, commit, tree, and review snapshot;
+- immutable repository ID, base, head, tree, and review snapshot;
 - an executable dependency closure;
 - digest-verified inputs;
 - declared capability, wall-time, process, output, filesystem, and network
@@ -683,14 +722,15 @@ admitted history must reproduce the same identities and relations.
 
 1. **Review-clean contracts:** land Katamorph #27, Knoxx #294, and this design.
 2. **Signed GitHub admission:** re-scope eta-mu #206; verify one signed fixture;
-   bind identities and grants; admit delivery, object, coverage, and queued-check
-   records; prove redelivery safety.
+   bind identities and grants; admit delivery, exact snapshot, queued-check,
+   object, and coverage records; prove redelivery and queue-retry safety.
 3. **Knoxx bot path:** project the object and `.ημ` discovery; build a
    deterministic grant-filtered context manifest; trigger the GitHub actor;
    project returned evidence; prove replay equivalence.
 4. **Strong evidence checks:** implement closed result schemas, deterministic
-   aggregation, the contract/test/CI lanes, progressive exact-head checks,
-   stale-head supersession, contradiction handling, and publication repair.
+   aggregation, the contract/test/CI lanes, progressive exact-snapshot checks,
+   base/head supersession, acknowledged cancellation, contradiction handling,
+   and publication repair.
 5. **Sol execution:** isolate exact-input jobs, enforce budgets, and admit every
    terminal outcome before publication.
 6. **Provider breadth:** add protected Drive mirrors, Discord REST plus Gateway
@@ -701,6 +741,7 @@ admitted history must reproduce the same identities and relations.
 - Foresight issue #71 and PR #69;
 - Katamorph PR #27;
 - eta-mu issues #159, #206, #233, #240, #248, #270, #323, and #324;
+- eta-mu PR #327 for typed evidence contracts and the first fail-closed fold;
 - Knoxx PR #294 and issue #295;
 - Sol issue `octave-commons/eta-mu-sol#2`;
 - Axxium Knoxx/Proxx identity migrations and Discord OAuth card;
@@ -712,15 +753,16 @@ admitted history must reproduce the same identities and relations.
 
 The first slice is complete only when one signed GitHub fixture can be delivered
 twice without duplicate semantic effects, hydrated into an Axxium-bound object,
-written to an ND-EDN ledger, replayed into the same grant-filtered Knoxx graph
-and context manifest, dispatched to one bounded evidence job, accompanied by a
-revision-and-closure-bound test result, and published as an exact-head required
-check whose receipt survives replay.
+bound to an exact base/head review snapshot, written to an ND-EDN ledger,
+replayed into the same grant-filtered Knoxx graph and context manifest,
+dispatched to one bounded evidence job, accompanied by a revision-and-closure-
+bound test result, and published as an exact-snapshot required check whose
+receipt survives replay.
 
-A failed, unavailable, conflicted, or incomplete gate must leave the required
-check non-success. A provider-publication failure must leave a failed-attempt
-receipt and an open reconciliation obligation; it may not masquerade as
-`Published`.
+A failed, unavailable, conflicted, incomplete, or stale-base gate must leave the
+required check non-success. A queued-check, final-publication, or cancellation
+failure must leave an attempt receipt and an open reconciliation obligation; an
+unacknowledged provider request may not masquerade as accepted.
 
 ## Non-goals
 
@@ -739,6 +781,8 @@ receipt and an open reconciliation obligation; it may not masquerade as
 - allowing a model or evidence lane to publish directly or adjudicate its own
   sufficiency;
 - publishing neutral for a required evidence check;
-- treating a provider mutation attempt as successful publication;
+- treating a provider mutation attempt as acknowledged publication;
+- ending an old queued-check episode before cancellation is acknowledged;
+- reusing a clean result after the base revision or merge snapshot changed;
 - same-model vote counting as confidence;
 - replacing Proxx, Knoxx, or every test runner in one pull request.
