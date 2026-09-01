@@ -9,42 +9,42 @@
 
 Build one identity-bound event fabric rather than separate GitHub, Drive, Discord, test, Knoxx, and Proxx databases.
 
-The fabric has these authorities:
+The authorities are distinct:
 
 1. **Provider interaction adapters** verify, observe, hydrate, reconcile, and act through provider-specific APIs.
-2. **Axxium** assigns durable identities and bindings to principals, provider accounts, installations, external objects, streams, and execution episodes.
+2. **Axxium** assigns durable identities and bindings to principals, provider accounts, installations, external objects, streams, grants, and execution episodes.
 3. **Clio-compatible records plus event-ledger** admit, order, replay, checkpoint, retain, and compact append-only histories.
 4. **Katamorph** declares portable actor, source, store, action, workflow, capability, and policy resources.
 5. **Eta-mu** classifies provider events, interprets workflow/runtime contracts, validates and aggregates evidence, and publishes deterministic GitHub outcomes.
 6. **Knoxx** builds disposable document, tag, search, graph, and evidence projections and hosts the context-rich GitHub bot.
 7. **Sol** executes explicitly authorized, exact-input jobs under bounded capabilities.
 8. **Proxx** evaluates versioned OpenAI-compatible routing policy while its external service retains provider credentials and live execution state.
-9. **Foresight** pins the composed revisions and proves cross-repository conformance without taking semantic authority from child repositories.
+9. **Foresight** pins composed revisions and proves cross-repository conformance without taking semantic authority from child repositories.
 
-A webhook delivery is a signal, not provider-object truth. A graph node is a projection, not event authority. A model response is a candidate record, not a GitHub verdict.
+A webhook delivery is a signal, not provider-object truth. A graph node is a projection, not event authority. A model response is a candidate record, not a GitHub verdict. A mirror is another protected storage location, not permission to widen disclosure.
 
 ## Authority table
 
 | Concern | Authority | Must not become authority |
 | --- | --- | --- |
 | Portable resource grammar and references | Katamorph | Provider SDK objects |
-| Principal, provider-account, installation, object, stream, and episode bindings | Axxium | usernames, filenames, content hashes, JWT claims |
-| Record admission, ordering, replay, checkpoint, and retention | event-ledger | webhook queues, Drive folders, Knoxx indexes |
-| Content-addressed schema and event canonicalization | Clio | raw provider payloads |
-| Provider signatures, hydration, reconciliation, and commands | provider adapters | Katamorph schemas or model prompts |
-| Workflow coordination and evidence verdict/publication | eta-mu | an individual review model |
-| Search, document, tag, graph, and evidence projections | Knoxx | source ledgers |
-| Bounded exact-input execution | Sol | ambient shell or provider authority |
+| Principal, account, installation, object, stream, grant, and episode bindings | Axxium | Usernames, filenames, content hashes, JWT claims |
+| Record admission, ordering, replay, checkpoint, and retention | event-ledger | Webhook queues, Drive folders, Knoxx indexes |
+| Content-addressed schema and event canonicalization | Clio | Raw provider payloads |
+| Provider signatures, hydration, reconciliation, and commands | Provider adapters | Katamorph schemas or model prompts |
+| Workflow coordination and evidence verdict/publication | eta-mu | An individual review model |
+| Search, document, tag, graph, and evidence projections | Knoxx | Source ledgers |
+| Bounded exact-input execution | Sol | Ambient shell or provider authority |
 | OpenAI-compatible route selection | Proxx policy kernel | TypeScript route handlers |
-| Provider credentials, quotas, live account state, and streaming | Proxx service adapters | portable EDN resources |
-| Cross-repository revision composition and proof | Foresight | child domain implementations |
+| Provider credentials, quotas, live account state, and streaming | Proxx service adapters | Portable EDN resources |
+| Cross-repository revision composition and proof | Foresight | Child domain implementations |
 
 ## System view
 
 ```mermaid
 flowchart LR
   GH[GitHub Drive Discord] --> ADAPTER[provider adapters]
-  ADAPTER --> AXX[Axxium bindings]
+  ADAPTER --> AXX[Axxium identities grants and bindings]
   ADAPTER --> LEDGER[(Clio event-ledger)]
   AXX --> LEDGER
 
@@ -60,17 +60,21 @@ flowchart LR
   ETA --> PUB[deterministic provider publication]
   PUB --> GH
   PUB --> LEDGER
+
+  LEDGER --> MIRROR[ACL-equivalent encrypted or redacted mirror]
+  AXX --> MIRROR
 ```
 
 ## Identity law
 
-The system must not collapse these identities:
+The system must not collapse:
 
 - a human or service principal;
 - a provider account;
 - a GitHub App, Discord bot, or Google authorization installation;
 - a provider repository, pull request, Drive file, guild, channel, or message;
-- an append-only stream containing observations about that object;
+- an authorization grant and its validity interval;
+- an append-only stream containing observations about an object;
 - one admitted physical record;
 - one normalized semantic event occurrence;
 - a content-equivalence identity shared by byte-equivalent documents;
@@ -107,7 +111,7 @@ Axxium bindings are additive, versioned facts. Provider identities remain visibl
  :stream/domain :github}
 ```
 
-Immutable provider IDs participate in identity and scope. Mutable names, paths, numbers, and URLs remain locators. Renaming a repository must not create a new Axxium object or stream.
+Immutable provider IDs participate in identity and scope. Mutable names, paths, numbers, and URLs remain locators. Renaming or transferring a repository must not create a new Axxium object or stream.
 
 ### Record identity versus event identity
 
@@ -116,7 +120,7 @@ New records distinguish:
 - `:record/id`: one admitted physical record;
 - `:stream/id`: the Axxium-bound ordered history;
 - `:stream/position`: append position or backend sequence;
-- `:event/id`: normalized source occurrence used by the declared idempotency profile;
+- `:event/id`: normalized source occurrence used by a declared idempotency profile;
 - `:source/delivery-id`: webhook or Gateway delivery identity;
 - `:source/object-id`: immutable provider object identity;
 - `:source/revision`: hydrated provider revision;
@@ -150,6 +154,7 @@ No fold may discard records merely because a historical `:event/id` collides. Ne
  :identity/principal-binding "axxium:binding:..."
  :identity/object-binding "axxium:binding:..."
  :identity/installation-binding "axxium:binding:..."
+ :identity/grant-binding "axxium:grant:..."
 
  :causal/root "urn:uuid:..."
  :causal/parent "urn:uuid:..."
@@ -161,10 +166,11 @@ No fold may discard records merely because a historical `:event/id` collides. Ne
  :payload/hash "sha256:..."
  :payload {...}
  :privacy/classification :workspace
+ :privacy/source-policy "policy:sha256:..."
  :retention/policy :source-history}
 ```
 
-A profile may omit inapplicable fields. It may not invent a principal, installation, tenant, causal parent, revision, coverage state, or successful outcome.
+A profile may omit inapplicable fields. It may not invent a principal, installation, tenant, causal parent, revision, coverage state, authorization grant, or successful outcome.
 
 ## Ledger families and file layout
 
@@ -196,30 +202,44 @@ Repository-local authority remains under `.ημ/`; `.eta-mu` is a compatibility 
 
 A sealed segment is immutable. A manifest references segment hashes and positions. Appending or sealing advances the manifest through expected-position comparison. Compaction appends a receipt and never silently rewrites history.
 
-## Google Drive mirror
+## Google Drive mirror and confidentiality
 
-Drive is the universal off-device mirror and discovery surface, not an atomic multi-writer append database.
+Drive is a universal off-device discovery and mirror surface only for material whose source confidentiality can be preserved. It is not an atomic multi-writer append database and not one globally shared folder of raw payloads.
+
+Before copying bytes, the mirror adapter derives an Axxium-bound protection domain from the source object, source authorization grant, privacy classification, and effective source principals. A segment may be mirrored only when one of these modes is proven:
+
+1. **ACL-equivalent partition:** the Drive object and every ancestor folder grant access to no principal broader than the effective source grant;
+2. **Envelope-encrypted segment:** ciphertext is stored in Drive and the data key is available only through Axxium-bound principals whose source grant is currently valid;
+3. **Redacted or metadata-only mirror:** restricted payload fields are omitted while hashes, source identity, positions, and coverage remain useful for discovery.
+
+If none can be proven, the adapter appends `:ledger/mirror-blocked` with reason `:confidentiality-not-preserved` and copies no raw payload.
 
 For every discovered `.ημ/` or `.eta-mu/` source:
 
 1. identify the GitHub repository, Drive object, or Discord message/attachment that exposed it;
-2. bind source, object, and stream through Axxium;
-3. verify each immutable segment hash;
-4. copy missing segments to the Drive mirror;
-5. append `:ledger/mirror-observed`, `:ledger/segment-mirrored`, or `:ledger/mirror-diverged`;
-6. project a catalog mapping source locators to Drive object IDs;
-7. never infer sameness from filename alone.
+2. bind source, object, stream, grant, and protection domain through Axxium;
+3. evaluate source privacy and retention policy before reading or copying payload bytes;
+4. verify each immutable segment hash;
+5. select and prove ACL-equivalent, encrypted, or redacted mirror mode;
+6. copy only the permitted representation;
+7. append `:ledger/mirror-observed`, `:ledger/segment-mirrored`, `:ledger/mirror-blocked`, or `:ledger/mirror-diverged`;
+8. project a catalog mapping source locators to Drive object IDs and protection domains;
+9. never infer sameness or authorization from filename alone.
 
-Suggested mirror layout:
+Suggested partitioned layout:
 
 ```text
 Axxium Event Fabric/
-  ledgers/<stream-id>/<segment-hash>.edn
-  manifests/<stream-id>.edn
-  indexes/document-index.edn
-  indexes/ledger-catalog.edn
-  receipts/<yyyy>/<mm>/...
+  protection-domains/<domain-id>/
+    ledgers/<stream-id>/<segment-hash>.edn-or-age
+    manifests/<stream-id>.edn
+    indexes/ledger-catalog.edn
+    receipts/<yyyy>/<mm>/...
+  public-indexes/
+    redacted-document-catalog.edn
 ```
+
+Source access revocation triggers reconciliation. The adapter must remove Drive ACL grants, revoke or rotate envelope keys, stop downstream projection for the revoked principal, and append a revocation receipt. Immutable segment content is not rewritten, but access to its mirrored representation must be withdrawn. If effective revocation cannot be proven, the mirror is quarantined and its coverage becomes blocked. Copies already exported beyond controlled storage are an explicit non-recoverable coverage limitation, never silently treated as revoked.
 
 Drive push notifications wake the reconciler. The reconciler consumes the changes feed from a stored page token and hydrates changed objects. Notification headers are raw signal evidence, not the changed object itself.
 
@@ -239,7 +259,7 @@ Drive push notifications wake the reconciler. The reconciler consumes the change
             :revision "sha256:..."}}
 ```
 
-Retraction is another record. The current tag set is a projection.
+Retraction is another record. The current tag set is a projection. Tag, search, and graph queries enforce the same Axxium grant and privacy policy as the source record; a projection may not disclose a restricted title, snippet, relation, or existence merely because its raw segment is mirrored.
 
 The document index is keyed by Axxium object identity and immutable provider ID, not title or path. Byte-equivalent documents may share a content-equivalence node while retaining separate provider object identities, locations, permissions, revisions, and histories.
 
@@ -279,8 +299,8 @@ Katamorph composes existing resource kinds:
 - `:actor` for declared service and agent actors;
 - `:source` for watch, discover, hydrate, and emitted event profiles;
 - `:action` for provider commands;
-- `:store` for ledger, checkpoint, and projection capabilities;
-- `:workflow` for backfill, reconcile, evidence, renewal, and mirror jobs;
+- `:store` for ledger, checkpoint, mirror, and projection capabilities;
+- `:workflow` for backfill, reconcile, evidence, renewal, mirror, and revocation jobs;
 - `:capability` and `:role` for bounded authority;
 - `:policy` for permission, routing, privacy, and retention decisions.
 
@@ -296,7 +316,7 @@ verified webhook
   -> acknowledge quickly
   -> classify event
   -> hydrate repository/object state
-  -> bind principal, installation, object, and stream through Axxium
+  -> bind principal, installation, object, stream, and grant through Axxium
   -> normalized observation record
   -> Knoxx tag/document/graph projections
   -> eta-mu workflow dispatch
@@ -314,7 +334,7 @@ Required laws:
 - deduplicate redelivery without erasing distinct physical or normalized records;
 - enqueue hydration before slow processing;
 - reconcile failed, missed, permission-limited, and rate-limited coverage;
-- bind every repository and object to its GitHub App installation;
+- bind every repository and object to its GitHub App installation and current grant;
 - discover `.ημ` and `.eta-mu` paths without treating path or copied filename as identity;
 - record incomplete coverage as partial, blocked, or unavailable rather than empty.
 
@@ -325,11 +345,13 @@ Discord observable history combines:
 1. REST discovery/backfill for objects the bot may read;
 2. Gateway dispatch events for changes observed after connection.
 
-Outbound Discord webhooks publish notifications; they do not provide complete inbound history. Persist Gateway sequence, session/resume identity, intents, guild/install binding, and coverage. Hydrate partial dispatch payloads through REST when allowed and reconcile after disconnects or permission changes.
+Outbound Discord webhooks publish notifications; they do not provide complete inbound history. Persist Gateway sequence, session/resume identity, intents, guild/install binding, source permissions, and coverage. Hydrate partial dispatch payloads through REST when allowed and reconcile after disconnects or permission changes.
 
-The truthful scope is every object observable under granted guilds, channel permissions, API endpoints, retained history, and Gateway intents. It is not all Discord. Missing Message Content intent and deletion before first observation remain explicit coverage gaps.
+The truthful scope is every object observable under granted guilds, channel permissions, API endpoints, retained history, and Gateway intents. It is not all Discord. Missing Message Content intent and deletion before first observation remain explicit coverage gaps. Restricted guild/channel payloads may enter only matching protection domains or encrypted mirrors.
 
 ## Workflow graph
+
+Every trusted episode reaches a deterministic, published terminal GitHub check. “Blocked” and “unavailable” are non-success conclusions, not silent termination.
 
 ```mermaid
 stateDiagram-v2
@@ -341,26 +363,36 @@ stateDiagram-v2
   Hydrating --> SnapshotReady: exact object and head resolved
   CoveragePartial --> Reconciling
   Reconciling --> SnapshotReady: gap recovered
-  Reconciling --> Blocked: retry budget exhausted
+  Reconciling --> EvidenceBlocked: retry budget exhausted
 
   SnapshotReady --> DeterministicGates
-  DeterministicGates --> Blocked: required proof failed or unavailable
+  DeterministicGates --> EvidenceBlocked: required gate failed
+  DeterministicGates --> EvidenceUnavailable: required gate unavailable
   DeterministicGates --> ExpertLanes: manifests complete
+
   ExpertLanes --> Aggregating: required lanes terminal
   ExpertLanes --> Superseded: head changed
   Aggregating --> ChangesRequested: confirmed blocker
-  Aggregating --> Advisory: no blocker, advisory findings
+  Aggregating --> Advisory: complete with advisories only
   Aggregating --> Approved: complete and clean
-  ChangesRequested --> Published
-  Advisory --> Published
-  Approved --> Published
+  Aggregating --> EvidenceUnavailable: required lane partial timed-out unavailable or stale
+
+  EvidenceBlocked --> PublishingFailure
+  EvidenceUnavailable --> PublishingFailure
+  ChangesRequested --> PublishingReview
+  Advisory --> PublishingReview
+  Approved --> PublishingReview
+
+  PublishingFailure --> Published: check conclusion failure or neutral by policy
+  PublishingReview --> Published: check and validated review
   Published --> [*]
   Rejected --> [*]
-  Blocked --> [*]
   Superseded --> [*]
 ```
 
-Katamorph owns the portable graph vocabulary. Eta-mu owns runtime adjudication, retries, cancellation, result admission, and publication. Event-ledger owns the accepted/rejected records. Knoxx projects the graph for query and explanation.
+A trusted PR episode may terminate without publication only when it is superseded before publication; the superseding episode must publish. Invalid unauthenticated deliveries are rejected before they can create a trusted PR episode.
+
+Katamorph owns the portable graph vocabulary. Eta-mu owns runtime adjudication, retries, cancellation, result admission, and publication. Event-ledger owns accepted/rejected records. Knoxx projects the graph for query and explanation.
 
 ## Test and gate evidence
 
@@ -403,13 +435,13 @@ A terminal record contains an executable dependency closure, not a prose depende
     :revision "full-provider-commit-sha"}
    {:kind :toolchain
     :identity "node"
-    :revision "22.19.0"}
+    :revision "22.23.2"}
    {:kind :lockfile
     :path "pnpm-lock.yaml"
     :hash "sha256:..."}]}
 
  :test/environment {:runner/id "axxium:principal:..."
-                    :runtime {:node "22.19.0" :nbb "1.3.201"}
+                    :runtime {:node "22.23.2" :nbb "1.4.208"}
                     :platform "linux-x64"}
  :test/outcome :passed
  :test/counts {:tests 52 :assertions 216 :failures 0 :errors 0}
@@ -424,11 +456,11 @@ A terminal record contains an executable dependency closure, not a prose depende
 
 The closure is generated from executable build/workflow configuration, validated before use, retained by digest, and replayable. A changed entry changes the closure hash. A prior pass satisfies a later gate only when trusted producer identity, contracts, target input hash, closure, and required environment facts all match.
 
-Outcomes remain distinct: `passed`, `cached`, `failed`, `blocked`, `unavailable`, and approved `not-applicable`. A failure never suppresses a rerun. Deleting test ledgers loses history and speed, not correctness.
+Outcomes remain distinct: `passed`, `cached`, `failed`, `blocked`, `unavailable`, and approved `not-applicable`. A failure never suppresses a rerun. Every non-success terminal outcome produces a visible check conclusion and publication receipt. Deleting test ledgers loses history and speed, not correctness.
 
 ## Parallel expert evidence lanes
 
-Eta-mu's current broad evidence review becomes a fan-out of narrow lanes, tracked by eta-mu issue #324:
+Eta-mu's broad evidence review becomes a fan-out of narrow lanes, tracked by eta-mu issue #324:
 
 - diff and ownership;
 - contract and schema execution;
@@ -450,6 +482,7 @@ Deterministic aggregation must:
 - reject blocking findings without concrete failure traces;
 - preserve contradictions rather than voting them away;
 - treat incomplete, timed-out, unavailable, or stale lanes as not proven;
+- route required-lane incompleteness to `EvidenceUnavailable` and publish a non-success check;
 - publish success only when every required deterministic gate and lane is complete and no confirmed blocker exists.
 
 Parallelism narrows expertise and reduces time-to-evidence. Repeated same-model agreement is not proof.
@@ -526,6 +559,8 @@ Knoxx projects at least these node kinds:
 AxxiumPrincipal
 ProviderAccount
 ProviderInstallation
+AuthorizationGrant
+ProtectionDomain
 Repository
 Commit
 Issue
@@ -560,6 +595,8 @@ And these edge kinds:
 
 ```text
 BOUND_TO
+AUTHORIZED_BY
+PROTECTED_BY
 INSTALLED_IN
 OBSERVED_AS
 REVISION_OF
@@ -581,11 +618,11 @@ CONTRADICTS
 PUBLISHED_AS
 ```
 
-Every node and edge carries the admitted record IDs and stream positions from which it was derived. Deleting and rebuilding the projection from the same history must reproduce the same identities and relations.
+Every node and edge carries the admitted record IDs and stream positions from which it was derived. Projection queries enforce Axxium grants. Deleting and rebuilding the projection from the same admitted history must reproduce the same identities and relations.
 
 ## Execution sequence
 
-### Slice 1: contracts and review-clean foundations
+### Slice 1: review-clean contracts
 
 - land the Katamorph GitHub source/action/store resource pack;
 - land the Knoxx registered driver, admissible source, resolvable role/capability, ledger, and projection contracts;
@@ -595,24 +632,25 @@ Every node and edge carries the admitted record IDs and stream positions from wh
 
 - re-scope eta-mu issue #206 into the normalized classifier;
 - verify one signed fixture and reject malformed signatures;
-- bind installation, repository, sender, object, and stream through Axxium fixtures;
+- bind installation, repository, sender, object, stream, and grant through Axxium fixtures;
 - append raw delivery, hydrated object, and coverage records;
 - prove idempotent redelivery and historical event-ID compatibility.
 
 ### Slice 3: Knoxx bot path
 
 - project the GitHub object and its `.ημ` discovery into Knoxx;
-- build a deterministic context manifest;
+- build a deterministic, grant-filtered context manifest;
 - trigger the `github_automation` actor;
 - emit an eta-mu workflow request and project returned evidence;
-- prove replay equivalence.
+- prove replay equivalence and authorization isolation.
 
 ### Slice 4: expert evidence and strong checks
 
 - define closed result schemas and a deterministic verdict fold;
 - implement contract/schema, tests/failures, and CI provenance lanes first;
 - retain diff, test, coverage, closure, workflow, and finding artifacts by digest;
-- publish progressive exact-head Check Runs and a validated Pull Request Review;
+- publish progressive exact-head Check Runs for success, failure, blocked, and unavailable outcomes;
+- publish a validated Pull Request Review only when its evidence envelope is complete;
 - cancel or supersede stale-head episodes.
 
 ### Slice 5: Sol bounded execution
@@ -622,27 +660,29 @@ Every node and edge carries the admitted record IDs and stream positions from wh
 - append started and terminal records for every outcome;
 - admit result evidence through eta-mu before publication.
 
-### Slice 6: Drive, Discord, Proxx, and Electron breadth
+### Slice 6: protected Drive, Discord, Proxx, and Electron breadth
 
-- mirror immutable ledger segments to Drive and event-source document tags;
-- build observable Discord history through REST plus Gateway with explicit gaps;
+- mirror immutable ledger segments only through proven protection domains and event-source document tags;
+- build observable Discord history through REST plus Gateway with explicit gaps and source-equivalent confidentiality;
 - extract Proxx's pure kernel, eta-mu plugin, and first NBB backend slice;
-- add the Electron operator client using the same Knoxx evidence graph.
+- add the Electron operator client using the same grant-filtered Knoxx evidence graph.
 
 ## First completion gate
 
-The first implementation is complete only when a signed GitHub fixture can be delivered twice without duplicate semantic effects, hydrated into an Axxium-bound object observation, written to an ND-EDN ledger, projected into the same Knoxx graph and context manifest after rebuild, dispatched to one bounded evidence job, accompanied by a revision/closure-bound test result, and published as a GitHub check whose receipt survives replay.
+The first implementation is complete only when a signed GitHub fixture can be delivered twice without duplicate semantic effects, hydrated into an Axxium-bound object observation, written to an ND-EDN ledger, projected into the same grant-filtered Knoxx graph and context manifest after rebuild, dispatched to one bounded evidence job, accompanied by a revision/closure-bound test result, and published as a GitHub check whose receipt survives replay. A failed or unavailable gate must publish a non-success conclusion rather than disappear.
 
 ## Non-goals
 
 - one universal payload vocabulary for every domain;
 - treating webhook delivery as provider truth;
-- treating Drive as a mutable multi-writer append database;
+- treating Drive as a mutable multi-writer append database or permission-widening archive;
+- copying restricted raw payloads without proven ACL equivalence, encryption, or redaction;
 - rewriting historical ledgers to fit a new envelope;
 - deriving identity from email, username, repository name, path, filename, title, or content hash alone;
 - claiming access outside recorded provider scopes and retained history;
 - moving provider secrets into Katamorph, Axxium records, eta-mu plugins, Knoxx projections, prompts, or Drive;
 - allowing a model or evidence lane to publish directly or adjudicate its own sufficiency;
+- terminating a trusted exact-head episode without a visible success or non-success check, except when superseded;
 - replacing Proxx, Knoxx, or every test runner in one pull request;
 - same-model vote counting as confidence.
 
