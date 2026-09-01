@@ -1,0 +1,74 @@
+name: Repository census
+
+on:
+  push:
+    branches:
+      - research/repository-census
+    paths:
+      - scripts/reference/repository-census/**
+      - test/reference/repository-census.test.mjs
+      - .github/workflows/repository-census.yml
+      - docs/research/repository-census-current-pinned-closure.md
+      - docs/research/repository-census-known-frontier.json
+      - docs/research/epiphany-repository-census-ingestion.md
+  pull_request:
+    paths:
+      - scripts/reference/repository-census/**
+      - test/reference/repository-census.test.mjs
+      - .github/workflows/repository-census.yml
+      - docs/research/repository-census-current-pinned-closure.md
+      - docs/research/repository-census-known-frontier.json
+      - docs/research/epiphany-repository-census-ingestion.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: >-
+    census-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  current-pinned-closure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out Foresight
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+
+      - name: Test repository census adapter
+        run: node test/reference/repository-census.test.mjs
+
+      - name: Traverse pinned submodule closure
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/reference/repository-census/main.mjs \
+            --root riatzukiza/devel@80a95e5638f4ee95e182ebf0a22f4735ab55964f \
+            --root octave-commons/promethean@06a8b83312ea70dcde6d2e423369b410e6d0d3f2 \
+            --root open-hax/openplanner@8b425c1690ada78f3f1bc5dfa28c3151e3a4fede \
+            --root open-hax/foresight@fcb30c0bbbf1b7558d465e479c0b1b34f3d275a5 \
+            --out reports/repository-census/current \
+            --max-nodes 10000 \
+            --max-depth 32 \
+            --concurrency 8 \
+            --frontier-baseline docs/research/repository-census-known-frontier.json
+
+      - name: Upload current census projection
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: repository-census-current
+          path: reports/repository-census/current
+          if-no-files-found: error
+          retention-days: 30
