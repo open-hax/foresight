@@ -1,118 +1,128 @@
 # Axxium Event Fabric
 
-**Status:** proposed execution architecture  
-**Date:** 2026-08-31  
-**Scope:** GitHub, Google Drive, Discord, test evidence, Proxx policy, Knoxx graph projections, Axxium identity, Katamorph resources, Clio/event-ledger records, and an Electron operator client.
+**Status:** proposed execution architecture
+**Date:** 2026-09-01
+**Tracking:** Foresight issue #71
+**Scope:** GitHub, Google Drive, Discord, test and review evidence, Proxx policy, Knoxx projections, Axxium identity, Katamorph resources, Clio/event-ledger records, Sol execution, and an Electron operator client.
 
 ## Decision
 
-Build one identity-bound event fabric rather than separate GitHub, Drive, Discord,
-test, Knoxx, and Proxx databases.
+Build one identity-bound event fabric rather than separate GitHub, Drive, Discord, test, Knoxx, and Proxx databases.
 
-The fabric has five distinct layers:
+The fabric has these authorities:
 
-1. **External interaction adapters** observe and act on GitHub, Google Drive, and
-   Discord through provider-specific APIs.
-2. **Axxium** assigns durable identities and bindings to principals, provider
-   accounts, installations, external objects, and streams.
-3. **Clio plus event-ledger** normalize, admit, order, replay, checkpoint, and
-   retain append-only records. A domain owns its vocabulary; the ledger owns
-   append and replay law.
-4. **Knoxx** builds disposable document, search, and graph projections from those
-   records. A projection may be rebuilt and is never promoted into source truth.
-5. **Katamorph** declares the portable source, action, store, workflow, identity,
-   and policy resources that each host interprets. Proxx evaluates routing policy
-   as one such portable interpreter; an external Proxx service remains an
-   execution and secret-custody adapter.
+1. **Provider interaction adapters** verify, observe, hydrate, reconcile, and act through provider-specific APIs.
+2. **Axxium** assigns durable identities and bindings to principals, provider accounts, installations, external objects, streams, and execution episodes.
+3. **Clio-compatible records plus event-ledger** admit, order, replay, checkpoint, retain, and compact append-only histories.
+4. **Katamorph** declares portable actor, source, store, action, workflow, capability, and policy resources.
+5. **Eta-mu** classifies provider events, interprets workflow/runtime contracts, validates and aggregates evidence, and publishes deterministic GitHub outcomes.
+6. **Knoxx** builds disposable document, tag, search, graph, and evidence projections and hosts the context-rich GitHub bot.
+7. **Sol** executes explicitly authorized, exact-input jobs under bounded capabilities.
+8. **Proxx** evaluates versioned OpenAI-compatible routing policy while its external service retains provider credentials and live execution state.
+9. **Foresight** pins the composed revisions and proves cross-repository conformance without taking semantic authority from child repositories.
 
-Foresight owns conformance and cross-repository proof. It does not silently take
-local semantic authority away from the child repositories.
-
-## Why this shape
-
-The desired system has several different kinds of identity that must not be
-collapsed:
-
-- a human or service principal;
-- a GitHub App installation, Discord bot installation, or Google authorization;
-- a provider object such as a repository, pull request, file, guild, channel, or
-  message;
-- an append-only stream containing observations about that object;
-- an admitted ledger record;
-- a content identity shared by byte-equivalent documents;
-- a runtime episode or test execution.
-
-Axxium supplies the durable bindings between these things. It does not become an
-event store, policy engine, graph database, or provider-token vault.
-
-Similarly, a webhook delivery is not the authoritative state of a provider
-object. It is a signal that causes hydration or reconciliation. The durable fact
-is the admitted observation produced after the provider object or change feed is
-read and normalized.
+A webhook delivery is a signal, not provider-object truth. A graph node is a projection, not event authority. A model response is a candidate record, not a GitHub verdict.
 
 ## Authority table
 
 | Concern | Authority | Must not become authority |
 | --- | --- | --- |
-| Portable resource shapes and compatibility | Katamorph | Provider SDK objects |
-| Principal, entity, provider-account, installation, and stream bindings | Axxium | Proxx, Knoxx, JWT payloads, filenames |
-| Record admission, ordering, idempotency, replay, checkpoints, retention | event-ledger | Drive folders, webhook queues, Knoxx indexes |
-| Event/receipt normalization and portable record dialect | Clio-compatible shapes | Raw provider payloads |
-| GitHub/Drive/Discord API behavior | provider interaction adapters | Katamorph schemas |
-| Search, document index, tag index, and graph projections | Knoxx | Event ledgers |
-| OpenAI-compatible model-routing decisions | Proxx policy kernel and EDN policy resources | TypeScript route handlers |
-| Provider credentials, quotas, live account state, and request execution | Proxx service adapters | Portable policy resources |
-| Cross-repository composition and revision-bound proof | Foresight | Child domain implementations |
+| Portable resource grammar and references | Katamorph | Provider SDK objects |
+| Principal, provider-account, installation, object, stream, and episode bindings | Axxium | usernames, filenames, content hashes, JWT claims |
+| Record admission, ordering, replay, checkpoint, and retention | event-ledger | webhook queues, Drive folders, Knoxx indexes |
+| Content-addressed schema and event canonicalization | Clio | raw provider payloads |
+| Provider signatures, hydration, reconciliation, and commands | provider adapters | Katamorph schemas or model prompts |
+| Workflow coordination and evidence verdict/publication | eta-mu | an individual review model |
+| Search, document, tag, graph, and evidence projections | Knoxx | source ledgers |
+| Bounded exact-input execution | Sol | ambient shell or provider authority |
+| OpenAI-compatible route selection | Proxx policy kernel | TypeScript route handlers |
+| Provider credentials, quotas, live account state, and streaming | Proxx service adapters | portable EDN resources |
+| Cross-repository revision composition and proof | Foresight | child domain implementations |
+
+## System view
+
+```mermaid
+flowchart LR
+  GH[GitHub Drive Discord] --> ADAPTER[provider adapters]
+  ADAPTER --> AXX[Axxium bindings]
+  ADAPTER --> LEDGER[(Clio event-ledger)]
+  AXX --> LEDGER
+
+  LEDGER --> ETA[eta-mu workflow and evidence]
+  LEDGER --> KNOXX[Knoxx projections]
+  KNOXX --> BOT[Knoxx GitHub bot]
+  ETA --> BOT
+  ETA --> SOL[Sol bounded jobs]
+  ETA --> PROXX[Proxx policy]
+  SOL --> EVID[(evidence records)]
+  BOT --> EVID
+  EVID --> ETA
+  ETA --> PUB[deterministic provider publication]
+  PUB --> GH
+  PUB --> LEDGER
+```
 
 ## Identity law
 
-### Axxium bindings
+The system must not collapse these identities:
 
-Axxium should expose additive, versioned bindings for at least:
+- a human or service principal;
+- a provider account;
+- a GitHub App, Discord bot, or Google authorization installation;
+- a provider repository, pull request, Drive file, guild, channel, or message;
+- an append-only stream containing observations about that object;
+- one admitted physical record;
+- one normalized semantic event occurrence;
+- a content-equivalence identity shared by byte-equivalent documents;
+- a review snapshot;
+- a runtime or test episode;
+- an evidence artifact, finding, verdict, or publication receipt.
+
+Axxium bindings are additive, versioned facts. Provider identities remain visible.
 
 ```clojure
-{:binding/id "axxium:binding:..."
+{:binding/id "axxium:binding:principal-github-123456"
  :binding/kind :principal/provider-account
  :principal/id "axxium:principal:..."
  :provider :github
  :provider/subject-id "123456"
- :valid/from "2026-08-31T00:00:00Z"
+ :valid/from "2026-09-01T00:00:00Z"
  :valid/to nil}
 
-{:binding/id "axxium:binding:..."
+{:binding/id "axxium:binding:github-pr-object"
  :binding/kind :provider-object
  :provider :github
- :provider/scope "installation:987/repository:open-hax/foresight"
+ :provider/scope {:installation/id "987"
+                  :repository/id "654321"}
+ :provider/locator {:repository/name "open-hax/foresight"
+                    :pull-request/number 69}
  :provider/object-kind :pull-request
- :provider/object-id "MDExOlB1bGxSZXF1ZXN0..."
+ :provider/object-id "PR_kwDO..."
  :object/id "axxium:object:..."}
 
-{:binding/id "axxium:binding:..."
+{:binding/id "axxium:binding:github-pr-stream"
  :binding/kind :event-stream
  :object/id "axxium:object:..."
  :stream/id "axxium:stream:..."
  :stream/domain :github}
 ```
 
-Provider IDs remain visible. Axxium identity does not erase source identity; it
-binds it to a durable local identity with a history.
+Immutable provider IDs participate in identity and scope. Mutable names, paths, numbers, and URLs remain locators. Renaming a repository must not create a new Axxium object or stream.
 
 ### Record identity versus event identity
 
-New records must distinguish these identities:
+New records distinguish:
 
-- `:record/id` uniquely identifies one admitted physical record;
-- `:stream/id` identifies the ordered Axxium-bound stream;
-- `:stream/position` identifies the append position or backend sequence;
-- `:event/id` identifies the normalized source occurrence for idempotency;
-- `:source/delivery-id` identifies a webhook or Gateway delivery when supplied;
-- `:source/object-id` and `:source/revision` identify hydrated object state;
-- `:payload/hash` identifies normalized content.
+- `:record/id`: one admitted physical record;
+- `:stream/id`: the Axxium-bound ordered history;
+- `:stream/position`: append position or backend sequence;
+- `:event/id`: normalized source occurrence used by the declared idempotency profile;
+- `:source/delivery-id`: webhook or Gateway delivery identity;
+- `:source/object-id`: immutable provider object identity;
+- `:source/revision`: hydrated provider revision;
+- `:payload/hash`: normalized payload content identity.
 
-No fold may discard records merely because a historical `:event/id` collides.
-Historical event forms remain readable. New admissions require a unique
-`:record/id`; idempotency is a declared key appropriate to the event profile,
-not an assumption that every old `:event/id` is globally unique.
+No fold may discard records merely because a historical `:event/id` collides. New admissions require a unique `:record/id`; semantic idempotency is an explicit event-profile law.
 
 ### Normalized record profile
 
@@ -125,16 +135,17 @@ not an assumption that every old `:event/id` is globally unique.
  :event/id "github:delivery:...:pull_request:synchronize"
  :event/kind :github/pull-request-observed
  :event/role :observation
- :event/occurred-at "2026-08-31T15:01:00Z"
- :event/observed-at "2026-08-31T15:01:02Z"
+ :event/occurred-at "2026-09-01T15:01:00Z"
+ :event/observed-at "2026-09-01T15:01:02Z"
 
  :source/provider :github
  :source/delivery-id "..."
- :source/object-id "..."
- :source/revision "head-sha-or-provider-version"
- :source/locator {:installation/id "..."
-                  :repository/id "..."
-                  :repository/name "open-hax/foresight"}
+ :source/object-id "PR_kwDO..."
+ :source/revision "full-head-sha"
+ :source/locator {:installation/id "987"
+                  :repository/id "654321"
+                  :repository/name "open-hax/foresight"
+                  :pull-request/number 69}
 
  :identity/principal-binding "axxium:binding:..."
  :identity/object-binding "axxium:binding:..."
@@ -144,8 +155,8 @@ not an assumption that every old `:event/id` is globally unique.
  :causal/parent "urn:uuid:..."
  :correlation/id "..."
 
- :contracts [{:resource/id :open-hax/github-interaction
-              :resource/revision "git-sha"}]
+ :contracts [{:resource/id :open-hax.github/interaction
+              :resource/revision "git-sha-or-content-hash"}]
 
  :payload/hash "sha256:..."
  :payload {...}
@@ -153,17 +164,13 @@ not an assumption that every old `:event/id` is globally unique.
  :retention/policy :source-history}
 ```
 
-A record profile may omit fields that do not apply, but it may not silently
-invent a principal, tenant, causal parent, revision, or successful outcome.
+A profile may omit inapplicable fields. It may not invent a principal, installation, tenant, causal parent, revision, coverage state, or successful outcome.
 
 ## Ledger families and file layout
 
-Use newline-delimited EDN: one complete EDN map per nonblank line. Keep ledgers
-small enough to inspect and mirror. Do not build one ever-growing shared Drive
-file.
+Use newline-delimited EDN: one complete EDN map per nonblank line. Keep ledgers inspectable and independently mirrorable. Do not build one ever-growing mutable Drive file.
 
-Each repository-local ledger remains under `.ημ/`; `.eta-mu` is a compatibility
-locator, not a second authority.
+Repository-local authority remains under `.ημ/`; `.eta-mu` is a compatibility locator, not a second ledger authority.
 
 ```text
 .ημ/
@@ -172,9 +179,9 @@ locator, not a second authority.
     google-drive/<drive-or-root-stream>/segments/<first>-<last>-<sha256>.edn
     discord/<guild-or-dm-stream>/segments/<first>-<last>-<sha256>.edn
     tests/<repository-or-target-stream>/segments/<first>-<last>-<sha256>.edn
+    evidence/<review-stream>/segments/<first>-<last>-<sha256>.edn
     tags/<workspace-stream>/segments/<first>-<last>-<sha256>.edn
-  manifests/
-    <stream-id>.edn
+  manifests/<stream-id>.edn
   checkpoints/
     github/<installation-id>.edn
     google-drive/<authorization-id>.edn
@@ -184,31 +191,26 @@ locator, not a second authority.
     object-index.edn
     tag-index.edn
     graph-index.edn
+    evidence-index.edn
 ```
 
-Segment files are immutable after publication. A manifest references segment
-hashes and positions. Appending creates or seals a new segment and advances the
-manifest through an expected-position comparison. Compaction appends a receipt;
-it never rewrites history without evidence.
+A sealed segment is immutable. A manifest references segment hashes and positions. Appending or sealing advances the manifest through expected-position comparison. Compaction appends a receipt and never silently rewrites history.
 
-## Google Drive mirroring
+## Google Drive mirror
 
-Google Drive is the universal off-device mirror and discovery surface, not the
-place where multiple writers append to the same mutable text file.
+Drive is the universal off-device mirror and discovery surface, not an atomic multi-writer append database.
 
 For every discovered `.ημ/` or `.eta-mu/` source:
 
-1. identify the repository, Drive object, or Discord attachment/message that
-   exposed it;
-2. bind the source and stream through Axxium;
-3. verify every immutable segment hash;
+1. identify the GitHub repository, Drive object, or Discord message/attachment that exposed it;
+2. bind source, object, and stream through Axxium;
+3. verify each immutable segment hash;
 4. copy missing segments to the Drive mirror;
-5. append a `:ledger/mirror-observed`, `:ledger/segment-mirrored`, or
-   `:ledger/mirror-diverged` record;
-6. project a catalog that maps every source locator to every Drive object ID;
+5. append `:ledger/mirror-observed`, `:ledger/segment-mirrored`, or `:ledger/mirror-diverged`;
+6. project a catalog mapping source locators to Drive object IDs;
 7. never infer sameness from filename alone.
 
-Suggested Drive layout:
+Suggested mirror layout:
 
 ```text
 Axxium Event Fabric/
@@ -219,17 +221,11 @@ Axxium Event Fabric/
   receipts/<yyyy>/<mm>/...
 ```
 
-The Drive change feed wakes the reconciler. The reconciler then reads the change
-feed and hydrates changed files. Notification headers are retained as raw signal
-evidence, but they are not treated as the changed object itself.
+Drive push notifications wake the reconciler. The reconciler consumes the changes feed from a stored page token and hydrates changed objects. Notification headers are raw signal evidence, not the changed object itself.
 
 ## Document tagging and duplicate handling
 
-“Tag every document” means event-source the classification. It does not mean
-rename every Drive file or inject mutable frontmatter into provider-owned
-objects.
-
-A tag assertion is a record:
+“Tag every document” means event-source classification assertions. It does not mean rename provider-owned files or inject mutable frontmatter.
 
 ```clojure
 {:event/kind :tag/asserted
@@ -245,34 +241,11 @@ A tag assertion is a record:
 
 Retraction is another record. The current tag set is a projection.
 
-The document index is keyed by provider object binding, not title or path. It
-should retain:
-
-```clojure
-{:object/id "axxium:object:..."
- :provider :google-drive
- :provider/object-id "drive-file-id"
- :provider/parents ["drive-folder-id"]
- :title "README.md"
- :mime/type "text/markdown"
- :content/hash "sha256:..."
- :content/equivalence-class "sha256:..."
- :revision/id "provider-revision"
- :tags #{:system/eta-mu :artifact/document}
- :first-observed-at "..."
- :last-observed-at "..."
- :tombstoned? false}
-```
-
-Byte-equivalent documents may share a content-equivalence node while retaining
-separate provider object identities, locations, permissions, revisions, and
-histories. Similar-but-not-identical documents remain separate and may receive a
-`:content/related-to` graph edge rather than a deduplication rewrite.
+The document index is keyed by Axxium object identity and immutable provider ID, not title or path. Byte-equivalent documents may share a content-equivalence node while retaining separate provider object identities, locations, permissions, revisions, and histories.
 
 ## Portable interaction layer
 
-Do not start with one giant provider API. Define the smallest shared operations
-that at least two adapters actually implement:
+Do not begin with one giant universal provider API. Define the smallest operations implemented by at least two adapters:
 
 ```clojure
 (defprotocol InteractionAdapter
@@ -285,163 +258,115 @@ that at least two adapters actually implement:
   (apply-command! [adapter command]))
 ```
 
-All calls receive and return Clojure-shaped maps. SDK objects are decoded in the
-provider extern adapter. A result must say whether it is complete:
+Calls receive and return Clojure-shaped maps. SDK objects are decoded inside provider extern adapters. Every result states coverage:
 
 ```clojure
-{:interaction/status :ok        ; :ok :partial :blocked :unavailable
+{:interaction/status :ok
  :interaction/provider :github
  :interaction/capabilities #{:discover :hydrate :watch :reconcile}
  :interaction/objects [...]
  :interaction/signals [...]
  :interaction/next-cursor "..."
- :interaction/coverage {:scope "installation:987"
+ :interaction/coverage {:scope {:installation/id "987"
+                                :repository/id "654321"}
                         :complete? false
                         :reason :permission-limited}
  :interaction/evidence [...]}
 ```
 
-Katamorph can express the first version by composing existing resource kinds:
+Katamorph composes existing resource kinds:
 
+- `:actor` for declared service and agent actors;
 - `:source` for watch, discover, hydrate, and emitted event profiles;
 - `:action` for provider commands;
-- `:store` for ledger/checkpoint capabilities;
-- `:workflow` for backfill, reconcile, renew, and mirror jobs;
-- `:actor` for the declared service actor;
-- `:policy` for permission and retention decisions.
+- `:store` for ledger, checkpoint, and projection capabilities;
+- `:workflow` for backfill, reconcile, evidence, renewal, and mirror jobs;
+- `:capability` and `:role` for bounded authority;
+- `:policy` for permission, routing, privacy, and retention decisions.
 
-Do not add a universal `:interaction` kind until the GitHub and Drive adapters
-show a stable shared shape. The current `:provider` contract is model-provider
-specific and must not be overloaded to mean GitHub, Drive, or Discord.
+Do not overload Katamorph's model-provider contract to mean GitHub, Drive, or Discord.
 
-## GitHub profile — first vertical slice
+## GitHub profile: first vertical slice
 
-Use a GitHub App rather than repository-by-repository personal OAuth hooks.
-Separate user login from installation authority:
-
-- a user access token represents an authorized human acting through the app;
-- an installation token represents the app acting within granted repositories;
-- Axxium binds both to durable principals and installation identities;
-- the app requests only the permissions needed by the selected repositories and
-  webhook events.
-
-Acquisition flow:
+Use a GitHub App rather than repository-by-repository personal OAuth hooks. Separate user login from installation authority.
 
 ```text
 verified webhook
   -> raw delivery signal record
   -> acknowledge quickly
   -> classify event
-  -> hydrate repository/object state through REST or GraphQL
+  -> hydrate repository/object state
+  -> bind principal, installation, object, and stream through Axxium
   -> normalized observation record
-  -> tag/document/graph projections
-  -> periodic delivery and repository reconciliation
+  -> Knoxx tag/document/graph projections
+  -> eta-mu workflow dispatch
+  -> bounded Knoxx or Sol agent run
+  -> deterministic evidence verdict
+  -> GitHub check/review publication
+  -> publication receipt
+  -> periodic delivery and API reconciliation
 ```
 
 Required laws:
 
-- validate the webhook signature before admission;
-- retain `X-GitHub-Delivery` and event/action identity;
-- deduplicate redelivery without erasing separate normalized observations;
+- validate the webhook signature before trusted admission;
+- retain `X-GitHub-Delivery`, event/action identity, installation ID, immutable repository ID, and exact head;
+- deduplicate redelivery without erasing distinct physical or normalized records;
 - enqueue hydration before slow processing;
-- reconcile failed or missed deliveries on a schedule;
+- reconcile failed, missed, permission-limited, and rate-limited coverage;
 - bind every repository and object to its GitHub App installation;
-- discover `.ημ` and `.eta-mu` paths, manifests, and segment files without
-  treating a symlink or copied filename as identity;
-- record permission-denied and rate-limited coverage as partial, not empty.
-
-The first Katamorph/Knoxx resource pack should declare:
-
-```clojure
-{:namespace :open-hax.github
- :resources
- [{:actor/id :event-indexer
-   :actor/kind :agent
-   :actor/contract :open-hax/github-event-indexer}
-
-  {:source/id :app-events
-   :source/type :event
-   :source/driver :github/app
-   :source/actor :open-hax.github/event-indexer
-   :source/listens [{:event/type :github/webhook}]
-   :source/emits [{:event/type :github/delivery-received}
-                  {:event/type :github/object-observed}]
-   :source/protocol {:delivery :at-least-once
-                     :checkpoint :github/delivery-id
-                     :reconcile :github/deliveries-and-api}}
-
-  {:store/id :event-ledger
-   :store/schema :clio/event-record-v1}
-
-  {:action/id :hydrate-object
-   :action/kind :github/hydrate-object}
-
-  {:action/id :reconcile-installation
-   :action/kind :github/reconcile-installation}
-
-  {:workflow/id :github-index-and-mirror
-   :workflow/triggers [{:on/event :github/webhook}
-                       {:on/cron "17 */3 * * *"}]
-   :workflow/jobs
-   [{:job/id :observe
-     :job/steps [{:step/id :hydrate
-                  :step/action :open-hax.github/hydrate-object}]}
-    {:job/id :reconcile
-     :job/steps [{:step/action :open-hax.github/reconcile-installation}]}]}]}
-```
-
-Knoxx interprets the source as an ingestion/indexing profile and projects the
-GitHub object graph. Eta-mu owns the GitHub event classifier and workflow
-coordination. Katamorph owns only the portable declaration.
-
-## Google Drive profile
-
-Use Google OAuth linked through Axxium for user-owned Drive access. Service
-accounts remain an explicit deployment profile, not the default identity model.
-
-A Drive notification is a wake-up signal. The adapter retains the notification
-channel identity and message number, then consumes `changes.list` from its saved
-page token. Channel renewal is a workflow because Drive notification channels
-expire.
-
-The Drive index should preserve file ID, drive ID, parent IDs, MIME type,
-revision/version, permissions coverage, exported content hash, and tombstone
-state. Google-native Docs, Sheets, and Slides are exported through declared
-formats for content hashing; the original provider object remains authoritative.
+- discover `.ημ` and `.eta-mu` paths without treating path or copied filename as identity;
+- record incomplete coverage as partial, blocked, or unavailable rather than empty.
 
 ## Discord profile
 
-Discord history is built from two complementary sources:
+Discord observable history combines:
 
-1. REST discovery/backfill for objects the bot is authorized to read;
-2. Gateway dispatch events for changes observed after the bot is connected.
+1. REST discovery/backfill for objects the bot may read;
+2. Gateway dispatch events for changes observed after connection.
 
-Discord outbound webhooks are useful for publishing notifications, but they are
-not the source for a complete Discord history. The inbound observation path is a
-bot using the Gateway and REST API.
+Outbound Discord webhooks publish notifications; they do not provide complete inbound history. Persist Gateway sequence, session/resume identity, intents, guild/install binding, and coverage. Hydrate partial dispatch payloads through REST when allowed and reconcile after disconnects or permission changes.
 
-Persist the Gateway sequence, session identity, intents, guild/install binding,
-and resume state. Hydrate partial dispatch payloads through REST when allowed.
-Run periodic reconciliation because disconnects, permission changes, deletions,
-and intent limits can leave gaps.
+The truthful scope is every object observable under granted guilds, channel permissions, API endpoints, retained history, and Gateway intents. It is not all Discord. Missing Message Content intent and deletion before first observation remain explicit coverage gaps.
 
-The truthful scope is **every Discord object observable under the bot's granted
-guilds, channel permissions, API endpoints, and Gateway intents**. It is not all
-of Discord. Message bodies, embeds, attachments, components, and polls may be
-unavailable without the Message Content privileged intent. Objects deleted
-before first observation may be unrecoverable; the coverage record must say so.
+## Workflow graph
 
-## Test results as ledger facts
+```mermaid
+stateDiagram-v2
+  [*] --> DeliveryObserved
+  DeliveryObserved --> Rejected: invalid signature or unknown installation
+  DeliveryObserved --> Admitted: signature and delivery identity valid
+  Admitted --> Hydrating
+  Hydrating --> CoveragePartial: provider gap
+  Hydrating --> SnapshotReady: exact object and head resolved
+  CoveragePartial --> Reconciling
+  Reconciling --> SnapshotReady: gap recovered
+  Reconciling --> Blocked: retry budget exhausted
 
-Lift the Foresight revision-bound evidence runner into a reusable event-producing
-runner. Every invocation writes at least two records even when the command fails:
-
-```text
-:test/run-started
-:test/run-finished
+  SnapshotReady --> DeterministicGates
+  DeterministicGates --> Blocked: required proof failed or unavailable
+  DeterministicGates --> ExpertLanes: manifests complete
+  ExpertLanes --> Aggregating: required lanes terminal
+  ExpertLanes --> Superseded: head changed
+  Aggregating --> ChangesRequested: confirmed blocker
+  Aggregating --> Advisory: no blocker, advisory findings
+  Aggregating --> Approved: complete and clean
+  ChangesRequested --> Published
+  Advisory --> Published
+  Approved --> Published
+  Published --> [*]
+  Rejected --> [*]
+  Blocked --> [*]
+  Superseded --> [*]
 ```
 
-A finished record includes:
+Katamorph owns the portable graph vocabulary. Eta-mu owns runtime adjudication, retries, cancellation, result admission, and publication. Event-ledger owns the accepted/rejected records. Knoxx projects the graph for query and explanation.
+
+## Test and gate evidence
+
+Lift Foresight's revision-bound runner into a reusable event-producing runner. Every invocation writes `:test/run-started` before process spawn and a terminal record on normal exit, spawn error, timeout, cancellation, or signal.
+
+A terminal record contains an executable dependency closure, not a prose dependency list:
 
 ```clojure
 {:event/kind :test/run-finished
@@ -450,113 +375,165 @@ A finished record includes:
  :test/target :open-hax/proxx
  :test/gate-kind :integration
  :test/command ["pnpm" "test"]
- :test/revision {:repository "open-hax/proxx"
-                 :commit "..."
-                 :tree "..."
+
+ :test/revision {:repository/id "123456"
+                 :repository/name "open-hax/proxx"
+                 :commit "full-commit-sha"
+                 :tree "full-tree-sha"
                  :dirty? false
                  :inputs/hash "sha256:..."}
+
+ :test/dependency-closure
+ {:closure/id "closure:sha256:..."
+  :closure/hash "sha256:..."
+  :closure/algorithm :git-tree-and-runtime-inputs-v1
+  :closure/entries
+  [{:kind :repository
+    :repository/id "123456"
+    :repository/name "open-hax/proxx"
+    :revision "full-commit-sha"
+    :tree "full-tree-sha"}
+   {:kind :repository
+    :repository/id "987654"
+    :repository/name "open-hax/katamorph"
+    :revision "full-commit-sha"
+    :tree "full-tree-sha"}
+   {:kind :workflow
+    :identity "open-hax/eta-mu/.github/workflows/opencode-code-review.yml"
+    :revision "full-provider-commit-sha"}
+   {:kind :toolchain
+    :identity "node"
+    :revision "22.19.0"}
+   {:kind :lockfile
+    :path "pnpm-lock.yaml"
+    :hash "sha256:..."}]}
+
  :test/environment {:runner/id "axxium:principal:..."
-                    :runtime {:node "..." :nbb "..."}
+                    :runtime {:node "22.19.0" :nbb "1.3.201"}
                     :platform "linux-x64"}
- :test/outcome :passed       ; passed failed blocked unavailable not-applicable
+ :test/outcome :passed
  :test/counts {:tests 52 :assertions 216 :failures 0 :errors 0}
- :test/artifacts [{:kind :junit :hash "sha256:..." :locator {...}}]
+ :test/artifacts [{:kind :junit
+                   :hash "sha256:..."
+                   :locator {...}}]
  :test/stdout {:hash "sha256:..." :locator {...}}
  :test/stderr {:hash "sha256:..." :locator {...}}
  :contracts [{:resource/id :foresight/revision-bound-gate
               :resource/revision "..."}]}
 ```
 
-A process wrapper must append the started record before spawn and attempt to
-append a terminal result from normal exit, spawn error, timeout, cancellation,
-and signal handling. `passed`, `cached`, `failed`, `blocked`, `unavailable`, and
-approved `not-applicable` remain distinguishable.
+The closure is generated from executable build/workflow configuration, validated before use, retained by digest, and replayable. A changed entry changes the closure hash. A prior pass satisfies a later gate only when trusted producer identity, contracts, target input hash, closure, and required environment facts all match.
 
-A previous pass may satisfy a later gate only when the trusted catalog,
-contracts, target input hash, dependency closure, and required environment facts
-match. A recorded failure never suppresses a rerun. Deleting test ledgers loses
-speed and history, not correctness.
+Outcomes remain distinct: `passed`, `cached`, `failed`, `blocked`, `unavailable`, and approved `not-applicable`. A failure never suppresses a rerun. Deleting test ledgers loses history and speed, not correctness.
+
+## Parallel expert evidence lanes
+
+Eta-mu's current broad evidence review becomes a fan-out of narrow lanes, tracked by eta-mu issue #324:
+
+- diff and ownership;
+- contract and schema execution;
+- tests and failure traces;
+- coverage and mutation evidence;
+- executable dependency closure;
+- CI and producer provenance;
+- security and secret boundaries;
+- replay and idempotency;
+- Knoxx graph/projection consistency;
+- documentation, diagrams, and user experience.
+
+Each lane writes a typed result with exact head, snapshot hash, Axxium episode, lane revision, inspected artifact identities, coverage status, and findings. Lanes never publish directly.
+
+Deterministic aggregation must:
+
+- verify producer, head, snapshot, lane, closure, and artifact identities;
+- reject unsupported or mutated evidence;
+- reject blocking findings without concrete failure traces;
+- preserve contradictions rather than voting them away;
+- treat incomplete, timed-out, unavailable, or stale lanes as not proven;
+- publish success only when every required deterministic gate and lane is complete and no confirmed blocker exists.
+
+Parallelism narrows expertise and reduces time-to-evidence. Repeated same-model agreement is not proof.
+
+## Knoxx GitHub bot
+
+Knoxx issue #295 owns the runtime bot surface. The bot consumes admitted GitHub and evidence records, then projects:
+
+- provider installations, repositories, commits, pull requests, issues, reviews, threads, checks, workflows, files, and comments;
+- Axxium identities and grants;
+- ledger streams, segments, causal links, test runs, artifacts, findings, verdicts, and publication receipts;
+- Katamorph resource revisions, Proxx decisions, Knoxx agent runs, and Sol jobs.
+
+The bot may answer what is blocking, what changed, which artifact supports a claim, which lanes are incomplete, whether an exact tree already passed, and which workflow node owns the next action. It emits typed plans/evidence; deterministic eta-mu code owns GitHub publication.
+
+## Sol execution boundary
+
+Sol issue `octave-commons/eta-mu-sol#2` owns bounded execution. A Sol job requires:
+
+- an Axxium actor, episode, target, and grant;
+- immutable repository ID, commit, tree, and review snapshot;
+- executable dependency closure;
+- declared capabilities and wall/process/output/network/filesystem budgets;
+- digest-verified inputs;
+- started and exactly one terminal result record.
+
+Sol receives no GitHub App private key or publication token. Eta-mu validates and admits the result before provider publication.
 
 ## Proxx as service plus embeddable eta-mu plugin
 
-Proxx already has the correct semantic center: ordered EDN policy resources and
-a CLJS interpreter. Finish the migration by separating the policy kernel from
-the live proxy service.
+Separate Proxx's pure policy kernel from its live proxy service:
 
 ```text
-proxx.policy.kernel       pure CLJS/CLJC policy loading, validation, compilation,
+proxx.policy.kernel       pure CLJS/CLJC loading, validation, compilation,
                           preview, provider/model/account selection
 proxx.policy.resources    versioned EDN policy programs using Katamorph shapes
-eta-mu.proxx.plugin       in-process adapter that loads and invokes the kernel
+eta-mu.proxx.plugin       in-process adapter that invokes the pure kernel
 proxx.runtime.nbb         NBB HTTP/CLI/worker host for Node-adjacent effects
-proxx.service             secret custody, provider OAuth, account state, quotas,
-                          streaming request execution and compatibility endpoints
+proxx.service             secret custody, OAuth, account state, quotas,
+                          streaming execution, compatibility endpoints
 ```
 
 Rules:
 
-- eta-mu may evaluate a Proxx policy without a network call;
-- eta-mu may not gain access to provider secrets merely by loading the plugin;
-- Proxx receives an Axxium principal/actor binding and returns a policy decision
-  that cites policy resource revisions;
-- Knoxx passes the same Axxium identities, so authorization and routing policy
-  can be shared without sharing application-local sessions;
-- provider credentials stay in the Proxx execution adapter;
-- TypeScript remains only as shrinking compatibility edges during migration;
-- new backend policy, routing, queue, model-family, or provider-selection logic
-  stays in EDN and CLJS;
+- eta-mu may evaluate Proxx policy without a network call;
+- loading the plugin grants no provider secrets;
+- Proxx receives Axxium actor/capability bindings and returns a decision citing policy revisions;
+- Knoxx uses the same Axxium identities so authorization and routing policy can be shared without sharing application-local sessions;
+- new routing semantics stay in EDN and CLJS;
 - NBB is the first backend host where its SCI/Node surface is sufficient;
-- compiled shadow-cljs remains legitimate for browser artifacts and any backend
-  slice that cannot yet run lawfully under NBB. Runtime migration must not fork
-  the policy semantics.
+- compiled shadow-cljs remains valid for browser artifacts and backend slices not yet lawful under NBB;
+- runtime migration may not fork policy semantics.
 
-Cleanup order:
-
-1. freeze module ownership and delete no compatibility edge yet;
-2. extract and publish the pure policy kernel with fixtures;
-3. add the eta-mu plugin and conformance tests;
-4. add an NBB host around existing CLJS boundaries;
-5. replace TypeScript HTTP/database/auth edges one bounded slice at a time;
-6. remove an old edge only after its live and test behavior is reproduced;
-7. keep the external service for execution, secrets, quotas, and streaming even
-   when policy evaluation can happen in-process.
-
-The existing AT Protocol federation draft remains useful lineage: owner-scoped
-append-only diffs, resumable cursors, DID references, and lazy projections fit
-this event fabric. Axxium should absorb the durable identity and binding law;
-Proxx should not invent a second principal system for federation.
+The older AT Protocol/DID federation draft remains useful lineage: owner-scoped append-only diffs, resumable cursors, DID references, and lazy projections. Axxium absorbs durable identity and binding law; Proxx does not invent a second principal system.
 
 ## OAuth and Electron boundary
 
-The Electron client is an operator surface over Axxium, not a new identity
-provider.
+The Electron client is an Axxium operator surface, not another identity provider.
 
-- Login choices: GitHub, Google, Discord.
-- Authorization callback: system browser plus Authorization Code with PKCE.
-- Axxium links the provider subject to an existing or new principal through an
-  explicit identity-link event.
-- GitHub App installation, Google Drive consent, and Discord bot/guild install
-  are separate grants from human login.
-- Long-lived refresh tokens and provider secrets live in the main process or OS
-  credential store, never renderer storage.
-- The renderer has no Node integration for remote content, uses context
-  isolation and sandboxing, and receives a narrow validated IPC API.
-- OAuth success does not imply permission to every repository, Drive object,
-  guild, channel, or message. Interaction coverage is recorded per grant.
+- login choices: GitHub, Google, Discord;
+- system-browser Authorization Code flow with PKCE;
+- explicit identity-link events bind provider subjects to Axxium principals;
+- human login, GitHub App installation, Google consent, and Discord bot/guild installation are separate grants;
+- long-lived tokens and provider secrets stay in the main process or OS credential store;
+- renderer Node integration is disabled for remote content; context isolation and sandboxing are enabled;
+- IPC is narrow, validated, and capability-scoped;
+- OAuth success never implies access to every repository, Drive object, guild, channel, or message.
 
 ## Projection graph
 
-Knoxx should project at least these node kinds:
+Knoxx projects at least these node kinds:
 
 ```text
 AxxiumPrincipal
 ProviderAccount
 ProviderInstallation
 Repository
-GitObject
+Commit
 Issue
 PullRequest
 Review
+ReviewThread
+CheckRun
+WorkflowRun
 Drive
 DriveFile
 DriveRevision
@@ -568,9 +545,15 @@ DiscordAttachment
 LedgerStream
 LedgerSegment
 TestRun
+EvidenceArtifact
+Finding
+Verdict
+PublicationReceipt
 PolicyResource
 Tag
 ContentIdentity
+AgentRun
+SolJob
 ```
 
 And these edge kinds:
@@ -592,112 +575,85 @@ PROVED
 EVALUATED_BY
 TAGGED_WITH
 CONTENT_EQUIVALENT_TO
+DISPATCHED_TO
+SUPPORTED_BY
+CONTRADICTS
+PUBLISHED_AS
 ```
 
-Every projected node and edge carries the record IDs and stream positions from
-which it was derived. Deleting and rebuilding the graph must reproduce the same
-identity and relations for the same admitted history.
+Every node and edge carries the admitted record IDs and stream positions from which it was derived. Deleting and rebuilding the projection from the same history must reproduce the same identities and relations.
 
 ## Execution sequence
 
-### Slice 1 — GitHub contract and fixture
+### Slice 1: contracts and review-clean foundations
 
-- Land Katamorph GitHub source/action/store/workflow resources.
-- Add an eta-mu classifier fixture for one signed webhook.
-- Bind app installation, repository, sender, and object through Axxium fixtures.
-- Append raw delivery plus hydrated object observation to an in-memory and EDN
-  reference ledger.
-- Project the object and its `.ημ` discovery into Knoxx.
-- Emit revision-bound test results for the slice.
+- land the Katamorph GitHub source/action/store resource pack;
+- land the Knoxx registered driver, admissible source, resolvable role/capability, ledger, and projection contracts;
+- make this design and Foresight issue #71 the canonical cross-repository map.
 
-### Slice 2 — immutable Drive ledger mirror and document tags
+### Slice 2: signed GitHub admission
 
-- Create the Drive mirror root and stream catalog.
-- Scan selected Drive roots and GitHub repositories for `.ημ` / `.eta-mu`.
-- Hash and mirror immutable segments.
-- Build the Axxium-keyed document and tag projections.
-- Renew Drive watch channels and reconcile through change-feed page tokens.
+- re-scope eta-mu issue #206 into the normalized classifier;
+- verify one signed fixture and reject malformed signatures;
+- bind installation, repository, sender, object, and stream through Axxium fixtures;
+- append raw delivery, hydrated object, and coverage records;
+- prove idempotent redelivery and historical event-ID compatibility.
 
-### Slice 3 — Discord observable-history index
+### Slice 3: Knoxx bot path
 
-- Add bot installation and guild bindings.
-- Backfill guild/channel/thread/message objects within granted permissions.
-- Append Gateway dispatches with sequence/resume evidence.
-- Reconcile partial payloads and gaps.
-- Project Discord objects into the same Knoxx graph/query contract.
+- project the GitHub object and its `.ημ` discovery into Knoxx;
+- build a deterministic context manifest;
+- trigger the `github_automation` actor;
+- emit an eta-mu workflow request and project returned evidence;
+- prove replay equivalence.
 
-### Slice 4 — test-evidence runner
+### Slice 4: expert evidence and strong checks
 
-- Generalize Foresight's exact-revision evidence runner.
-- Append started/terminal records for local, CI, and agent-triggered tests.
-- Project current proof state without treating projection as authority.
-- Mirror immutable test segments to Drive.
+- define closed result schemas and a deterministic verdict fold;
+- implement contract/schema, tests/failures, and CI provenance lanes first;
+- retain diff, test, coverage, closure, workflow, and finding artifacts by digest;
+- publish progressive exact-head Check Runs and a validated Pull Request Review;
+- cancel or supersede stale-head episodes.
 
-### Slice 5 — Proxx kernel, eta-mu plugin, and NBB host
+### Slice 5: Sol bounded execution
 
-- Extract policy evaluation behind a pure API.
-- Validate Proxx EDN through Katamorph.
-- Pass Axxium actor/capability facts into policy context.
-- Add the in-process eta-mu adapter.
-- Move one backend route through NBB with parity and live evidence.
+- implement exact-input job/result contracts;
+- isolate workspaces and enforce capability/resource budgets;
+- append started and terminal records for every outcome;
+- admit result evidence through eta-mu before publication.
 
-### Slice 6 — Electron operator client
+### Slice 6: Drive, Discord, Proxx, and Electron breadth
 
-- Add Axxium OAuth login and provider grant management.
-- Show coverage, sync checkpoints, gaps, ledger mirror state, and test evidence.
-- Reuse Knoxx graph/query surfaces rather than creating a second graph UI.
-
-## Non-goals
-
-- One universal payload vocabulary for every domain.
-- Treating webhook delivery as provider truth.
-- Treating Drive as an atomic multi-writer append database.
-- Rewriting historical ledgers to fit a new envelope.
-- Deducing identity from email, username, filename, title, or content hash alone.
-- Claiming access to Discord objects outside granted scopes or retained history.
-- Moving provider secret custody into Katamorph resources, Axxium event records,
-  eta-mu plugins, or Drive.
-- Replacing all Proxx edges, all Knoxx graph code, or all test runners in one PR.
-
-## Existing evidence and work to reconcile
-
-- Foresight `AGENTS.md`: child authority, pure laws first, NBB runtime ladder, and
-  `.ημ` provenance location.
-- Foresight revision-bound evidence gate and exact-head runner.
-- eta-mu #147: actor-runtime seam across Katamorph, Axxium, Sol, and event-ledger.
-- eta-mu #159: portable event-ledger taxonomy and backend law.
-- eta-mu #206: GitHub webhook/event classifier CLJS rewrite.
-- eta-mu #233: ledger-recorded content-hash test results.
-- eta-mu #248: historical event-ID collision hazard.
-- Axxium Knoxx and Proxx identity-migration cards.
-- Axxium Discord OAuth card.
-- Knoxx Google Drive ingestion issue #73.
-- Knoxx graph query contract and source-lake/graph work.
-- Proxx AT-DID federation draft and current CLJS/EDN policy boundary.
-- Katamorph source, action, store, workflow, actor, policy, model, and provider
-  resource schemas.
-
-## Provider protocol anchors
-
-- GitHub Apps and permissions:
-  https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps
-- GitHub webhook delivery recovery:
-  https://docs.github.com/en/webhooks/using-webhooks/handling-failed-webhook-deliveries
-- Google Drive change feed:
-  https://developers.google.com/workspace/drive/api/guides/manage-changes
-- Google Drive push channels:
-  https://developers.google.com/workspace/drive/api/guides/push
-- Discord Gateway and intents:
-  https://docs.discord.com/developers/events/gateway
-- Discord Gateway events:
-  https://docs.discord.com/developers/events/gateway-events
-- Electron security checklist:
-  https://www.electronjs.org/docs/latest/tutorial/security
+- mirror immutable ledger segments to Drive and event-source document tags;
+- build observable Discord history through REST plus Gateway with explicit gaps;
+- extract Proxx's pure kernel, eta-mu plugin, and first NBB backend slice;
+- add the Electron operator client using the same Knoxx evidence graph.
 
 ## First completion gate
 
-The first implementation is complete only when a signed GitHub fixture can be
-admitted twice without duplicate semantic effects, hydrated into an Axxium-bound
-object observation, written to an EDN ledger, mirrored as an immutable Drive
-segment, projected into the Knoxx graph, and accompanied by a revision-bound test
-result whose own record survives replay.
+The first implementation is complete only when a signed GitHub fixture can be delivered twice without duplicate semantic effects, hydrated into an Axxium-bound object observation, written to an ND-EDN ledger, projected into the same Knoxx graph and context manifest after rebuild, dispatched to one bounded evidence job, accompanied by a revision/closure-bound test result, and published as a GitHub check whose receipt survives replay.
+
+## Non-goals
+
+- one universal payload vocabulary for every domain;
+- treating webhook delivery as provider truth;
+- treating Drive as a mutable multi-writer append database;
+- rewriting historical ledgers to fit a new envelope;
+- deriving identity from email, username, repository name, path, filename, title, or content hash alone;
+- claiming access outside recorded provider scopes and retained history;
+- moving provider secrets into Katamorph, Axxium records, eta-mu plugins, Knoxx projections, prompts, or Drive;
+- allowing a model or evidence lane to publish directly or adjudicate its own sufficiency;
+- replacing Proxx, Knoxx, or every test runner in one pull request;
+- same-model vote counting as confidence.
+
+## Existing work to reconcile
+
+- Foresight issue #71 and PR #69;
+- Katamorph PR #27;
+- eta-mu issues #159, #206, #233, #240, #248, #270, #323, and #324;
+- Knoxx PR #294 and issue #295;
+- Sol issue `octave-commons/eta-mu-sol#2`;
+- Axxium Knoxx/Proxx identity migrations and Discord OAuth card;
+- Knoxx Drive ingestion, source-lake, graph-query, and evidence-projection work;
+- Proxx AT-DID federation lineage and current CLJS/EDN policy boundary;
+- Foresight revision-bound evidence gates and exact-head runner.
