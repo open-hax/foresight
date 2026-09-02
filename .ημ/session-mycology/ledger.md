@@ -124,6 +124,24 @@
   spore: none
   receipt-refs: 2026-08-30T01:17:37Z
   note: A stable nonzero frontier can be planning-ready without being falsely closed when every inaccessible identity is exact, transient failures are retried separately, and missing recovery authority is represented as a blocked canonical card.
+- ts: 2026-08-31T18:21:31.327405762Z
+  session: /home/err/spaces/foresight
+  task: Connect Knoxx to local workspace, MongoDB, Proxx, and Ollama
+  p-efficiency: 0.72
+  p-friction: 0.78
+  p-skill-candidate: 0.82
+  spore: 20260831-132131-local-service-secret-safe-bootstrap.md
+  receipt-refs: 2026-08-31T18:21:05.990226214Z,2026-08-31T18:21:06.070445901Z
+  note: The reusable lesson is to make local-service bootstrap secret-safe and freshness-aware before the first live launch.
+- ts: 2026-08-31T23:43:32.033725183Z
+  session: /home/err/spaces/foresight
+  task: Connect Knoxx local and production resources; enforce browser and MCP contracts; shape Rheos document events
+  p-efficiency: 0.71
+  p-friction: 0.86
+  p-skill-candidate: 0.84
+  spore: 20260831-132131-local-service-secret-safe-bootstrap.md
+  receipt-refs: 2026-08-31T23:43:11.260425743Z,2026-08-31T23:43:11.458535043Z,2026-08-31T23:43:11.650130301Z,2026-08-31T23:43:11.846208028Z
+  note: Runner-only Mongo transaction topology and stale MCP authorization projection were surfaced by required hosted gates; fail-closed verification converted both into durable contracts. Sol remains truthfully blocked on a private dependency.
 - ts: 2026-08-30T01:17:36Z
   session: constellation-zero-inbox-2026-08-29
   task: Separate durable census frontier from transient transport failure
