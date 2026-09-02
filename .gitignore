@@ -17,3 +17,7 @@ website/node_modules/
 website/.lsp/
 
 website/target/
+
+alpha/.cpcache/
+
+scripts/.clj-kondo/.cache/
