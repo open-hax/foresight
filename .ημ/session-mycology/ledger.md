@@ -430,3 +430,21 @@
   spore: none
   receipt-refs: 2026-08-30T13:17:29Z
   note: Bridge-side compare-and-swap cannot constrain other credentials, object-map insertion order is not canonical evidence order, and an orphan nested entry does not prove its path. Enforce the ref boundary at the host, sort keys by Unicode code point, and require bounded per-tree ancestry proof before resolving truncated recursive evidence.
+- ts: 2026-09-02T15:28:04.000957403Z
+  session: /home/err/spaces/foresight
+  task: Stand up and verify local Knoxx translation workflow with Ollama embeddings and gemma4:e2b
+  p-efficiency: 0.62
+  p-friction: 0.88
+  p-skill-candidate: 0.72
+  spore: none
+  receipt-refs: 2026-09-02T15:27:51.565862126Z
+  note: Reusable lesson: split-backed model tools should require model-owned identity fields while binding authoritative source bytes server-side; deployment model overlays should resolve exact contracts and fail closed. No spore created because this pattern needs another independent occurrence before promotion.
+- ts: 2026-09-03T00:17:49.293972342Z
+  session: /home/err/spaces/foresight
+  task: Make deployment admission produce durable translations, review-gated dictionaries, and translated post drafts
+  p-efficiency: 0.68
+  p-friction: 0.91
+  p-skill-candidate: 0.74
+  spore: none
+  receipt-refs: 2026-09-03T00:17:49.293972342Z
+  note: Reusable lessons: deployment hooks should distinguish durable acceptance from asynchronous completion; model output remains untrusted until a required-first server-bound tool validates and persists it; CLJS native await can accidentally await a Promise-valued argument before a timeout wrapper exists, so lifecycle races belong behind a non-async Promise boundary. No spore was created because the cross-repository pattern should stabilize through another deployment before promotion.
