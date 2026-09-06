@@ -5,6 +5,32 @@ and root-declared consolidation inputs. The root coordinates visibility and
 explicit cross-repository operations; it does not replace each submodule's
 package manager or quality gates.
 
+## New actor: start here
+
+A capable actor should be able to route work from the checkout without prior
+chat or operator memory. Start by asking Foresight for its current semantic
+view rather than searching every child repository by hand:
+
+```sh
+git submodule update --init
+nbb scripts/project.clj validate
+nbb scripts/project.clj guide
+nbb scripts/workspace.clj inventory
+```
+
+`guide` is generated from `src/foresight/project.cljc`. It covers direct
+repositories and root-native components, shows the default work/verification
+loop, and points at revision-bound examples of practices Foresight has learned
+from Git history. After routing, enter the likely owning repository and read its
+local `AGENTS.md` when present, then `README.md`, `ROADMAP.md`, process/ADR
+records, and the code/tests that own the behavior. Local evidence controls local
+facts; a Foresight routing role is not a grant of cross-repository authority.
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the short contribution contract and
+[`docs/architecture/self-documentation.md`](docs/architecture/self-documentation.md)
+for how successful local practice is recovered, classified, and explicitly
+promoted instead of copied into root law by accident.
+
 `.agents/` and `eta/` are intentional consolidation inputs. `.agents/` carries
 the canonical skill catalog in its own nested Git repository; `eta/` is a
 root-owned Clojure agent harness. Their working originals may remain elsewhere
@@ -15,7 +41,7 @@ See [`AGENTS.md`](AGENTS.md#repository-map-where-to-look) for the repository
 map: what each child submodule owns and where to look for a given topic
 before searching root-owned code.
 
-## Setup
+## Workspace setup
 
 ```sh
 git submodule update --init
@@ -81,28 +107,36 @@ same Git object, and requires every result revision to equal the corresponding
 gitlink in its tree. It rechecks the root boundary after all reads.
 
 The runner appends each complete result to `.ημ/receipts.edn`. Schema-v2
-receipts retain the actual host and `nbb`/Node adapter identity; older receipts
-remain parseable append-only history but cannot attest a promotion. The adapter
-currently requires Linux `/proc/self/fd` semantics. It holds a no-follow parent
-directory descriptor, rejects symbolic or multiply linked ledger files, and
-serializes cooperating writers with an exclusive sibling lock. A complete line
-is bounded to 1 MiB, written through the held descriptor, size-checked, and
-followed by file and directory `fsync`. Pre-write rejection releases the lock;
-uncertainty after writing starts retains the lock as a quarantine marker for
-manual adjudication. This protects the adapter boundary from pathname swaps,
-partial writes, and cooperating races; it does not exclude an unrelated writer
-that ignores the lock.
+receipts retain the actual host and `nbb`/Node adapter identity. The intended
+compatibility contract is that older receipts remain immutable historical
+records and cannot attest a current promotion. As of
+`main@78befe3daed9a27d79aa511848de3985602decbc`, however,
+`verify-receipts` retroactively applies the current envelope shape to older
+loose records and therefore fails the root `receipt_history` gate. Do **not**
+rewrite the append-only ledger to make that green; the trusted-prefix
+compatibility repair is tracked in
+[Foresight #80](https://github.com/open-hax/foresight/issues/80).
+
+The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
+no-follow parent directory descriptor, rejects symbolic or multiply linked
+ledger files, and serializes cooperating writers with an exclusive sibling
+lock. A complete line is bounded to 1 MiB, written through the held descriptor,
+size-checked, and followed by file and directory `fsync`. Pre-write rejection
+releases the lock; uncertainty after writing starts retains the lock as a
+quarantine marker for manual adjudication. This protects the adapter boundary
+from pathname swaps, partial writes, and cooperating races; it does not exclude
+an unrelated writer that ignores the lock.
 
 For immutable review, the adapter disables Git replacement objects, requires
-regular non-executable blobs, hashes
-their raw bytes, decodes strict UTF-8, and proves the reviewed ledger preserves
-the trusted base ledger byte-for-byte before accepting whole appended lines.
-The portable consistency law then requires exact receipt/result equality.
-Editing a failed result or prior receipt into a shape-valid pass therefore
-cannot reuse the reviewed history. Git supplies content-addressed integrity and
-a review-authorized immutable snapshot, not producer authentication. A trusted
-GitHub Check or DSSE/signing identity is a future strengthening if producer
-authentication becomes a requirement; its acceptance contract is tracked in
+regular non-executable blobs, hashes their raw bytes, decodes strict UTF-8, and
+proves the reviewed ledger preserves the trusted base ledger byte-for-byte
+before accepting whole appended lines. The portable consistency law then
+requires exact receipt/result equality. Editing a failed result or prior
+receipt into a shape-valid pass therefore cannot reuse the reviewed history.
+Git supplies content-addressed integrity and a review-authorized immutable
+snapshot, not producer authentication. A trusted GitHub Check or DSSE/signing
+identity is a future strengthening if producer authentication becomes a
+requirement; its acceptance contract is tracked in
 [Foresight #57](https://github.com/open-hax/foresight/issues/57).
 
 The local adapter's before/after checkout snapshots detect ordinary drift; they
@@ -136,6 +170,7 @@ actionability, invariant references, and agreement with `.gitmodules`.
 ```sh
 nbb scripts/project.clj repos
 nbb scripts/project.clj show
+nbb scripts/project.clj guide
 nbb scripts/project.clj validate
 nbb test/project_test.cljs
 ```
