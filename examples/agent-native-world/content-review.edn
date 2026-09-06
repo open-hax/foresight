@@ -1,0 +1,407 @@
+;; Content-review example for the proposed agent-native world language.
+;;
+;; This is executable-looking design data, not an interpreter fixture yet.
+;; The purpose is to force the language to describe a useful world before
+;; implementation choices harden around it.
+
+{:example/id [:example "content-review"]
+ :example/version 1
+ :example/status :design-fixture
+
+ ;; ---------------------------------------------------------------------------
+ ;; Schemas: data describing every shape used by the example.
+ ;; ---------------------------------------------------------------------------
+ :schemas
+ {[:schema "content"]
+  [:map
+   [:content/id [:ref :ref]]
+   [:content/kind [:enum :code :documentation :prompt :policy :prose :other]]
+   [:content/body :string]
+   [:content/version :int]
+   [:content/visibility [:enum :private :review :published]]]
+
+  [:schema "review-criterion"]
+  [:map
+   [:criterion/id [:ref :ref]]
+   [:criterion/name :string]
+   [:criterion/question :string]
+   [:criterion/required? :bool]]
+
+  [:schema "review-request"]
+  [:map
+   [:review-request/id [:ref :ref]]
+   [:review-request/content [:ref :ref]]
+   [:review-request/requested-by [:ref :ref]]
+   [:review-request/criteria [:vector [:ref :ref]]]
+   [:review-request/status [:enum :requested :reviewing :reviewed :accepted :rejected]]]
+
+  [:schema "finding"]
+  [:map
+   [:finding/id [:ref :ref]]
+   [:finding/reviewer [:ref :ref]]
+   [:finding/content [:ref :ref]]
+   [:finding/criterion [:ref :ref]]
+   [:finding/severity [:enum :info :warning :error]]
+   [:finding/claim :string]
+   [:finding/evidence [:vector [:ref :ref]]]
+   [:finding/confidence [:pred :probability]]]
+
+  [:schema "specialist-review"]
+  [:map
+   [:specialist-review/id [:ref :ref]]
+   [:specialist-review/reviewer [:ref :ref]]
+   [:specialist-review/request [:ref :ref]]
+   [:specialist-review/findings [:vector [:ref :ref]]]
+   [:specialist-review/recommendation [:enum :accept :revise :reject]]
+   [:specialist-review/summary :string]]
+
+  [:schema "review-report"]
+  [:map
+   [:review-report/id [:ref :ref]]
+   [:review-report/request [:ref :ref]]
+   [:review-report/reviews [:vector [:ref :ref]]]
+   [:review-report/findings [:vector [:ref :ref]]]
+   [:review-report/disposition [:enum :accept :revise :reject]]
+   [:review-report/summary :string]
+   [:review-report/provenance [:vector [:ref :ref]]]]
+
+  [:schema "world-content-review"]
+  [:map
+   [:world/actors [:map-of [:ref :ref] [:ref :ref]]]
+   [:world/resources [:map-of [:ref :ref] [:ref :ref]]]
+   [:world/content [:map-of [:ref :ref] [:ref :ref]]]
+   [:world/review-requests [:map-of [:ref :ref] [:ref :ref]]]
+   [:world/reviews [:map-of [:ref :ref] [:ref :ref]]]
+   [:world/artifacts [:map-of [:ref :ref] [:ref :ref]]]
+   [:world/sessions [:map-of [:ref :ref] [:ref :ref]]]]}
+
+ ;; ---------------------------------------------------------------------------
+ ;; Actors and roles: same interaction machinery, different authority/context.
+ ;; ---------------------------------------------------------------------------
+ :actors
+ {[:actor "author"]
+  {:actor/id [:actor "author"]
+   :actor/kind :human
+   :actor/roles [[:role "author"]]}
+
+  [:actor "review-coordinator"]
+  {:actor/id [:actor "review-coordinator"]
+   :actor/kind :agent
+   :actor/roles [[:role "review-coordinator"]]}
+
+  [:actor "clarity-reviewer"]
+  {:actor/id [:actor "clarity-reviewer"]
+   :actor/kind :agent
+   :actor/roles [[:role "clarity-reviewer"]]}
+
+  [:actor "correctness-reviewer"]
+  {:actor/id [:actor "correctness-reviewer"]
+   :actor/kind :agent
+   :actor/roles [[:role "correctness-reviewer"]]}}
+
+ :roles
+ {[:role "author"]
+  {:role/id [:role "author"]
+   :role/mission "Create and submit content for review."
+   :role/instructions []
+   :role/output-contract [:schema "content"]}
+
+  [:role "review-coordinator"]
+  {:role/id [:role "review-coordinator"]
+   :role/mission "Coordinate independent content review and synthesize a review report."
+   :role/instructions
+   ["Inspect only the world slice and resources supplied to this session."
+    "Delegate criteria that benefit from independent judgment."
+    "Preserve disagreement between reviewers instead of averaging it away."
+    "Support findings with evidence references."
+    "Emit one review report satisfying the requested review contract."]
+   :role/output-contract [:schema "review-report"]}
+
+  [:role "clarity-reviewer"]
+  {:role/id [:role "clarity-reviewer"]
+   :role/mission "Review content for clarity, ambiguity, audience fit, and internal coherence."
+   :role/instructions
+   ["Return findings, evidence references, confidence, and a recommendation."]
+   :role/output-contract [:schema "specialist-review"]}
+
+  [:role "correctness-reviewer"]
+  {:role/id [:role "correctness-reviewer"]
+   :role/mission "Review content for factual or logical correctness relative to supplied evidence."
+   :role/instructions
+   ["Do not infer unsupported facts."
+    "Return findings, evidence references, confidence, and a recommendation."]
+   :role/output-contract [:schema "specialist-review"]}}
+
+ ;; ---------------------------------------------------------------------------
+ ;; Domain resources.
+ ;; ---------------------------------------------------------------------------
+ :resources
+ {[:resource "content-draft"]
+  {:resource/id [:resource "content-draft"]
+   :resource/kind :content
+   :resource/schema [:schema "content"]
+   :resource/value
+   {:content/id [:content "draft-1"]
+    :content/kind :documentation
+    :content/body
+    "The system reconstructs current world state from immutable events, compares it with a desired state, plans lawful transitions, delegates bounded review work, and records receipts for externally meaningful effects."
+    :content/version 1
+    :content/visibility :review}}
+
+  [:resource "criterion-clarity"]
+  {:resource/id [:resource "criterion-clarity"]
+   :resource/kind :review-criterion
+   :resource/schema [:schema "review-criterion"]
+   :resource/value
+   {:criterion/id [:criterion "clarity"]
+    :criterion/name "Clarity"
+    :criterion/question "Can the intended audience understand the claim without hidden context?"
+    :criterion/required? true}}
+
+  [:resource "criterion-correctness"]
+  {:resource/id [:resource "criterion-correctness"]
+   :resource/kind :review-criterion
+   :resource/schema [:schema "review-criterion"]
+   :resource/value
+   {:criterion/id [:criterion "correctness"]
+    :criterion/name "Correctness"
+    :criterion/question "Are the claims supported by the supplied world model and evidence?"
+    :criterion/required? true}}
+
+  [:resource "review-request"]
+  {:resource/id [:resource "review-request"]
+   :resource/kind :review-request
+   :resource/schema [:schema "review-request"]
+   :resource/value
+   {:review-request/id [:review-request "draft-1"]
+    :review-request/content [:content "draft-1"]
+    :review-request/requested-by [:actor "author"]
+    :review-request/criteria [[:criterion "clarity"] [:criterion "correctness"]]
+    :review-request/status :requested}}}
+
+ ;; ---------------------------------------------------------------------------
+ ;; Capabilities and policy are also data in the world.
+ ;; ---------------------------------------------------------------------------
+ :capabilities
+ {[:capability "content/review"]
+  {:capability/id [:capability "content/review"]
+   :capability/input [:schema "review-request"]
+   :capability/output [:schema "review-report"]
+   :capability/effects #{:resource/read :session/create :agent/call
+                         :artifact/create :event/append :receipt/append}}
+
+  [:capability "content/review-specialist"]
+  {:capability/id [:capability "content/review-specialist"]
+   :capability/input [:schema "review-request"]
+   :capability/output [:schema "specialist-review"]
+   :capability/effects #{:resource/read :event/append :receipt/append}}}
+
+ :policies
+ {[:policy "coordinator-may-review"]
+  {:policy/id [:policy "coordinator-may-review"]
+   :policy/effect :allow
+   :policy/when
+   [:and
+    [:= [:context :actor/id] [:actor "review-coordinator"]]
+    [:contains? [:context :capabilities] [:capability "content/review"]]]}
+
+  [:policy "specialists-may-only-review"]
+  {:policy/id [:policy "specialists-may-only-review"]
+   :policy/effect :allow
+   :policy/when
+   [:and
+    [:contains? #{[:actor "clarity-reviewer"] [:actor "correctness-reviewer"]}
+                [:context :actor/id]]
+    [:contains? [:context :capabilities]
+                [:capability "content/review-specialist"]]]}}
+
+ ;; ---------------------------------------------------------------------------
+ ;; State 0: the smallest useful current world.
+ ;; Nothing has been reviewed yet.  The request and reviewable content exist.
+ ;; ---------------------------------------------------------------------------
+ :world/current
+ {:projection/id [:projection "content-review:before"]
+  :projection/schema [:schema "world-content-review"]
+  :projection/as-of []
+  :projection/value
+  {:world/actors
+   {[:actor "author"] [:actor "author"]
+    [:actor "review-coordinator"] [:actor "review-coordinator"]
+    [:actor "clarity-reviewer"] [:actor "clarity-reviewer"]
+    [:actor "correctness-reviewer"] [:actor "correctness-reviewer"]}
+   :world/resources
+   {[:resource "content-draft"] [:resource "content-draft"]
+    [:resource "criterion-clarity"] [:resource "criterion-clarity"]
+    [:resource "criterion-correctness"] [:resource "criterion-correctness"]
+    [:resource "review-request"] [:resource "review-request"]}
+   :world/content {[:content "draft-1"] [:resource "content-draft"]}
+   :world/review-requests
+   {[:review-request "draft-1"] [:resource "review-request"]}
+   :world/reviews {}
+   :world/artifacts {}
+   :world/sessions {}}}
+
+ ;; ---------------------------------------------------------------------------
+ ;; Desired state: describe conditions, not procedure.
+ ;; A lawful execution may choose a different plan and still satisfy this state.
+ ;; ---------------------------------------------------------------------------
+ :world/desired
+ {:desired-state/id [:desired-state "content-review:complete"]
+  :desired-state/conditions
+  [[:exists? [:artifact "review-report:draft-1"]]
+   [:= [:get [:review-request "draft-1"] :review-request/status] :reviewed]
+   [:= [:count [:get [:artifact "review-report:draft-1"] :review-report/reviews]] 2]
+   [:every?
+    [:fn [finding]
+     [:and
+      [:present? [:get finding :finding/evidence]]
+      [:present? [:get finding :finding/confidence]]]]
+    [:get [:artifact "review-report:draft-1"] :review-report/findings]]
+   [:causally-descends?
+    [:artifact "review-report:draft-1"]
+    [:event "review-session-started"]]]}
+
+ ;; ---------------------------------------------------------------------------
+ ;; One possible plan/program.  This is Hiccup-shaped/effectful tree data.
+ ;; Child invocations are expressions whose values are pending session refs;
+ ;; awaiting them resolves those nodes to structured session results.
+ ;; ---------------------------------------------------------------------------
+ :program
+ [:session
+  {:session/id [:session "review:draft-1"]
+   :actor/id [:actor "review-coordinator"]
+   :role/id [:role "review-coordinator"]
+   :goal [:desired-state "content-review:complete"]
+   :world/current [:projection "content-review:before"]
+   :capabilities #{[:capability "content/review"]}
+   :policies [[:policy "coordinator-may-review"]]}
+
+  [:let
+   [content
+    [:resource/read
+     {:resource/id [:resource "content-draft"]
+      :purpose "Read the exact content under review."}]
+
+    request
+    [:resource/read
+     {:resource/id [:resource "review-request"]
+      :purpose "Read the requested criteria and review identity."}]
+
+    clarity
+    [:agent/invoke
+     {:actor/id [:actor "clarity-reviewer"]
+      :role/id [:role "clarity-reviewer"]
+      :task
+      {:capability [:capability "content/review-specialist"]
+       :request request
+       :focus [:criterion "clarity"]}
+      :resources [content [:resource "criterion-clarity"] request]
+      :output/schema [:schema "specialist-review"]}]
+
+    correctness
+    [:agent/invoke
+     {:actor/id [:actor "correctness-reviewer"]
+      :role/id [:role "correctness-reviewer"]
+      :task
+      {:capability [:capability "content/review-specialist"]
+       :request request
+       :focus [:criterion "correctness"]}
+      :resources [content [:resource "criterion-correctness"] request]
+      :output/schema [:schema "specialist-review"]}]
+
+    reviews
+    [:session/await
+     {:sessions [clarity correctness]
+      :join :all}]
+
+    report
+    [:artifact/emit
+     {:artifact/id [:artifact "review-report:draft-1"]
+      :artifact/kind :review-report
+      :artifact/schema [:schema "review-report"]
+      :inputs [request clarity correctness]
+      :content
+      [:synthesize
+       {:request request
+        :content content
+        :reviews reviews
+        :preserve-disagreement? true}]}]]
+
+   [:session/complete
+    {:status :completed
+     :result report}]]]
+
+ ;; ---------------------------------------------------------------------------
+ ;; Expected semantic effects.  IDs/order are illustrative; the important
+ ;; contract is the causal relationship and resulting projection.
+ ;; ---------------------------------------------------------------------------
+ :expected/events
+ [{:event/id [:event "review-session-started"]
+   :event/type :session/started
+   :event/actor [:actor "review-coordinator"]
+   :event/session [:session "review:draft-1"]
+   :event/causes []}
+
+  {:event/id [:event "content-read"]
+   :event/type :resource/read
+   :event/actor [:actor "review-coordinator"]
+   :event/session [:session "review:draft-1"]
+   :event/causes [[:event "review-session-started"]]}
+
+  {:event/id [:event "clarity-session-started"]
+   :event/type :session/started
+   :event/actor [:actor "clarity-reviewer"]
+   :event/session [:session "review:draft-1:clarity"]
+   :event/causes [[:event "content-read"]]}
+
+  {:event/id [:event "correctness-session-started"]
+   :event/type :session/started
+   :event/actor [:actor "correctness-reviewer"]
+   :event/session [:session "review:draft-1:correctness"]
+   :event/causes [[:event "content-read"]]}
+
+  {:event/id [:event "review-report-emitted"]
+   :event/type :artifact/emitted
+   :event/actor [:actor "review-coordinator"]
+   :event/session [:session "review:draft-1"]
+   :event/causes
+   [[:event "clarity-session-completed"]
+    [:event "correctness-session-completed"]]}
+
+  {:event/id [:event "review-session-completed"]
+   :event/type :session/completed
+   :event/actor [:actor "review-coordinator"]
+   :event/session [:session "review:draft-1"]
+   :event/causes [[:event "review-report-emitted"]]}]
+
+ :world/expected
+ {:projection/id [:projection "content-review:after"]
+  :projection/schema [:schema "world-content-review"]
+  :projection/value
+  {:world/review-requests
+   {[:review-request "draft-1"]
+    {:review-request/id [:review-request "draft-1"]
+     :review-request/content [:content "draft-1"]
+     :review-request/requested-by [:actor "author"]
+     :review-request/criteria [[:criterion "clarity"] [:criterion "correctness"]]
+     :review-request/status :reviewed}}
+   :world/reviews
+   {[:review "clarity:draft-1"] [:session "review:draft-1:clarity"]
+    [:review "correctness:draft-1"] [:session "review:draft-1:correctness"]}
+   :world/artifacts
+   {[:artifact "review-report:draft-1"] [:artifact "review-report:draft-1"]}
+   :world/sessions
+   {[:session "review:draft-1"] :completed
+    [:session "review:draft-1:clarity"] :completed
+    [:session "review:draft-1:correctness"] :completed}}}
+
+ ;; Questions deliberately left for the language design to answer before
+ ;; implementation begins.
+ :example/open-questions
+ ["Should resource values be embedded, content-addressed, or always referenced?"
+  "Does :session/await accept pending expression values directly, or only stable session refs?"
+  "What is the smallest pure expression vocabulary required for desired-state predicates and :synthesize?"
+  "Should :let be a core pure form or sugar expanded before evaluation?"
+  "How are child-session event causes represented without imposing one total event order?"
+  "Does a reviewed request become :reviewed by projection law, or require an explicit domain event?"
+  "Where do finding/evidence objects live: resources, artifacts, events, or a combination with distinct identities?"]}
