@@ -87,17 +87,30 @@
     (testing (str (:invariant/id invariant))
       (is (contains? law/executable-checks (:invariant/check invariant))))))
 
-(deftest onboarding-routes-are-a-project-projection
+(deftest onboarding-routes-cover-sources-and-native-components
   (let [routes (onboarding/route-rows project/project)
-        rendered (onboarding/markdown project/project)]
-    (is (= (mapv :source/path (:project/sources project/project))
-           (mapv :route/path routes)))
-    (is (= (count (:project/sources project/project))
-           (count routes)))
+        rendered (onboarding/markdown project/project)
+        source-paths (set (map :source/path (:project/sources project/project)))
+        component-paths (set (map :component/path
+                                  (:project/native-components project/project)))
+        expected-paths (into source-paths component-paths)
+        by-path (into {} (map (juxt :route/path identity)) routes)]
+    (is (= expected-paths (set (map :route/path routes))))
+    (is (= (count expected-paths) (count routes)))
     (doseq [{:source/keys [path repository]} (:project/sources project/project)]
       (is (str/includes? rendered (str "`" path "`")) path)
       (when repository
-        (is (str/includes? rendered repository) repository)))))
+        (is (str/includes? rendered repository) repository)))
+    (doseq [{:component/keys [path role]} (:project/native-components project/project)]
+      (is (str/includes? rendered (str "`" path "`")) path)
+      (is (= role (:route/native-role (get by-path path))) path))
+    (is (= "open-hax/foresight" (:route/repository (get by-path "alpha"))))
+    (is (= "open-hax/foresight" (:route/repository (get by-path "archaeology"))))
+    (is (= "open-hax/foresight" (:route/repository (get by-path "eta"))))
+    (is (= :clojure-harness (:route/source-role (get by-path "eta"))))
+    (is (= :transduction-harness (:route/native-role (get by-path "eta"))))
+    (is (false? (:route/execution-root? (get by-path "eta"))))
+    (is (nil? (:route/execution-root? (get by-path "alpha"))))))
 
 (deftest onboarding-history-is-revision-bound
   (is (seq onboarding/precedents))

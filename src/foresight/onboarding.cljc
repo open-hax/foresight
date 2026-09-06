@@ -17,7 +17,7 @@
    {:step/id :route
     :step/title "Route the work"
     :step/instruction
-    "Use the project-model route below to choose the likely owning repository. Roles are evidence-routing hints, not grants of cross-repository ownership."}
+    "Use the project-model route below to choose the likely owning repository or root-native component. Roles are evidence-routing hints, not grants of cross-repository ownership."}
    {:step/id :ground
     :step/title "Ground in the owner"
     :step/instruction
@@ -108,23 +108,53 @@
     "Census the wider repository lineage at immutable revisions while preserving gaps and uncertainty instead of guessing."}])
 
 (defn- keyword-label [value]
-  (if (keyword? value)
+  (cond
+    (nil? value) "—"
+    (keyword? value)
     (if-let [ns-name (namespace value)]
       (str ns-name "/" (name value))
       (name value))
-    (str value)))
+    :else (str value)))
+
+(defn- native-components-by-path [project]
+  (into {} (map (juxt :component/path identity))
+        (:project/native-components project)))
+
+(defn- source-route-row [project component-by-path source]
+  (let [component (get component-by-path (:source/path source))]
+    {:route/id (:source/id source)
+     :route/kind (if component :source+native-component :source)
+     :route/path (:source/path source)
+     :route/repository (or (:source/repository source)
+                           (:project/repository project))
+     :route/source-role (:source/role source)
+     :route/native-role (:component/role component)
+     :route/ownership (:source/ownership source)
+     :route/execution-root? (boolean (:source/actionable? source))}))
+
+(defn- component-route-row [project component]
+  {:route/id (:component/id component)
+   :route/kind :native-component
+   :route/path (:component/path component)
+   :route/repository (:project/repository project)
+   :route/source-role nil
+   :route/native-role (:component/role component)
+   :route/ownership :workspace-root
+   :route/execution-root? nil})
 
 (defn route-rows
-  "Project the current source inventory into the fields a new actor needs for routing."
+  "Project sources and root-native components into new-actor routing rows.
+
+   A native component sharing a source path (currently eta) is folded into that
+   source row so one workspace path never appears as two competing routes."
   [project]
-  (mapv (fn [source]
-          {:route/id (:source/id source)
-           :route/path (:source/path source)
-           :route/repository (or (:source/repository source) "(root-owned)")
-           :route/role (:source/role source)
-           :route/ownership (:source/ownership source)
-           :route/actionable? (boolean (:source/actionable? source))})
-        (:project/sources project)))
+  (let [component-by-path (native-components-by-path project)
+        source-rows (mapv #(source-route-row project component-by-path %)
+                          (:project/sources project))
+        source-paths (set (map :source/path (:project/sources project)))
+        native-only (remove #(contains? source-paths (:component/path %))
+                            (:project/native-components project))]
+    (into source-rows (map #(component-route-row project %) native-only))))
 
 (defn guide
   "Return the complete data projection used by human-facing onboarding surfaces."
@@ -148,13 +178,21 @@
               (str/join "\n" commands)
               "\n```"))))
 
+(defn- execution-root-label [value]
+  (cond
+    (true? value) "yes"
+    (false? value) "no"
+    :else "n/a"))
+
 (defn- render-route
-  [{:route/keys [path repository role ownership actionable?]}]
+  [{:route/keys [path repository source-role native-role ownership
+                 execution-root?]}]
   (str "| `" (markdown-cell path) "`"
        " | " (markdown-cell repository)
-       " | `" (markdown-cell role) "`"
+       " | `" (markdown-cell source-role) "`"
+       " | `" (markdown-cell native-role) "`"
        " | `" (markdown-cell ownership) "`"
-       " | " (if actionable? "yes" "no")
+       " | " (execution-root-label execution-root?)
        " |"))
 
 (defn- render-precedent
@@ -181,8 +219,10 @@
          "## Work loop\n\n"
          (str/join "\n\n" (map-indexed render-step steps))
          "\n\n## Current repository routes\n\n"
-         "| Path | Repository | Role | Ownership | Actionable here? |\n"
-         "| --- | --- | --- | --- | --- |\n"
+         "`Workspace execution root?` is the project model's gate-execution authority, "
+         "not a statement that root-owned components are uneditable.\n\n"
+         "| Path | Owner repository | Source role | Native role | Ownership | Workspace execution root? |\n"
+         "| --- | --- | --- | --- | --- | --- |\n"
          (str/join "\n" (map render-route routes))
          "\n\n## Working-history precedents\n\n"
          "These merged Foresight changes are examples of the learning loop succeeding. "
