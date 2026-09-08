@@ -97,6 +97,13 @@ For immutable review, the adapter disables Git replacement objects, requires
 regular non-executable blobs, hashes
 their raw bytes, decodes strict UTF-8, and proves the reviewed ledger preserves
 the trusted base ledger byte-for-byte before accepting whole appended lines.
+The current receipt-envelope and evidence-result laws apply only to that
+appended suffix. The exact trusted prefix remains historical evidence even
+when its envelopes predate the current schema. Secure append applies the same
+boundary against the committed `HEAD` ledger: it validates the uncommitted
+suffix before running a gate or writing its receipt. Rewrites, truncation, and
+malformed new records still fail closed. Summary totals describe the entire
+ledger; appended counts describe the records subject to current validation.
 The portable consistency law then requires exact receipt/result equality.
 Editing a failed result or prior receipt into a shape-valid pass therefore
 cannot reuse the reviewed history. Git supplies content-addressed integrity and

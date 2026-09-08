@@ -1,6 +1,7 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 (ns evidence-cli-test
   (:require [cljs.test :as test :refer [deftest is]]
+            [clojure.string :as str]
             [evidence :as cli]
             [foresight.evidence :as law]
             [workspace :as workspace]
@@ -718,7 +719,7 @@
             (js/Buffer.from "{:a 1}" "utf8")
             (js/Buffer.from "{:a 1}\n{:b 2}\n" "utf8"))))))
 
-(deftest receipt-verification-rejects-every-invalid-ledger-envelope
+(deftest receipt-verification-rejects-invalid-appended-envelopes
   (let [base-record {:ts "2026-08-29T17:22:40Z"
                      :kind :decision
                      :repo "."
@@ -753,6 +754,158 @@
   (let [base (js/Buffer.from "" "utf8")
         head (js/Buffer.from "42\n" "utf8")]
     (is (= [42] (cli/appended-receipt-records! base head)))))
+
+(defn with-historical-ledger-fixture [terminal-newline? run!]
+  (with-receipt-fixture
+    (fn [{:keys [fixture file] :as context}]
+      (with-redefs [cli/root fixture
+                    cli/receipt-file file]
+        (cli/git-capture! ["init" "--quiet"])
+        (let [current (cli/evidence-receipt
+                       passed-result "2026-08-29T17:22:40Z" "test"
+                       "nbb/node@test")
+              historical (-> current
+                             (dissoc :evidence/schema :evidence/adapter)
+                             (assoc :manifest "historical" :refs "none"))
+              base-text (str (pr-str historical)
+                             (when terminal-newline? "\n"))
+              commit! (fn [contents]
+                        (fs/writeFileSync file contents)
+                        (cli/git-capture! ["add" "--" law/receipt-ledger-path])
+                        (cli/git-capture!
+                         ["-c" "user.name=Receipt Test"
+                          "-c" "user.email=receipt-test@example.invalid"
+                          "-c" "commit.gpgsign=false"
+                          "commit" "--quiet" "--allow-empty" "-m" "fixture"])
+                        (str/trim
+                         (cli/git-capture! ["rev-parse" "HEAD"])))
+              base (commit! base-text)]
+          (run! (assoc context
+                       :current current :historical historical
+                       :base-text base-text :base base :commit! commit!)))))))
+
+(deftest receipt-verification-trusts-exact-historical-prefix-only
+  (doseq [terminal-newline? [true false]]
+    (with-historical-ledger-fixture terminal-newline?
+      (fn [{:keys [base base-text historical current commit!]}]
+        (is (not (law/receipt-envelope? historical)))
+        (is (zero? (cli/verify-receipts! {:base base :at base})))
+        (let [head-text (str base-text (when-not terminal-newline? "\n")
+                             (pr-str current) "\n")
+              head (commit! head-text)
+              output (with-out-str
+                       (is (zero? (cli/verify-receipts!
+                                   {:base base :at head}))))]
+          (is (str/includes? output ":total-receipts 2"))
+          (is (str/includes? output ":appended-receipts 1"))
+          (is (str/includes? output ":appended-evidence-receipts 1"))
+          (is (str/includes? output ":legacy-evidence-receipts 1"))
+          (is (.equals (js/Buffer.from base-text "utf8")
+                       (:ledger/bytes
+                        (cli/read-immutable-receipt-ledger! base)))))))))
+
+(deftest receipt-verification-rejects-invalid-suffixes-after-history
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base base-text historical current commit!]}]
+      (doseq [[suffix message]
+              [[(str (pr-str historical) "\n") #"invalid receipt envelopes"]
+               ["42\n" #"invalid receipt envelopes"]
+               [(str (pr-str (dissoc current :origin)) "\n")
+                #"invalid receipt envelopes"]
+               [(str (pr-str (assoc-in current [:evidence/result :result/exit] 1))
+                     "\n") #"invalid evidence receipts"]
+               ["{:kind\n" #"Invalid Receipt River EDN"]
+               [(str (pr-str current) " 42\n") #"exactly one EDN form"]
+               [(pr-str current) #"must end with a newline"]]]
+        (let [head (commit! (str base-text suffix))]
+          (is (thrown-with-msg?
+               js/Error message
+               (cli/verify-receipts! {:base base :at head}))))))))
+
+(deftest receipt-verification-rejects-historical-rewrite-and-truncation
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base base-text historical commit!]}]
+      (doseq [head-text [""
+                        (subs base-text 0 (dec (count base-text)))
+                        (str (pr-str (assoc historical :owner "rewrite")) "\n")]]
+        (let [head (commit! head-text)]
+          (is (thrown-with-msg?
+               js/Error #"does not preserve the base bytes as a prefix"
+               (cli/verify-receipts! {:base base :at head}))))))))
+
+(deftest evidence-append-preserves-history-and-validates-uncommitted-suffix
+  (doseq [terminal-newline? [true false]]
+    (with-historical-ledger-fixture terminal-newline?
+      (fn [{:keys [base base-text file]}]
+        ;; A second writer must accept the first writer's canonical suffix.
+        (let [first-receipt (cli/append-evidence-receipt! passed-result)
+              second-receipt (cli/append-evidence-receipt! passed-result)
+              bytes (fs/readFileSync file)]
+          (is (cli/buffer-prefix? (js/Buffer.from base-text "utf8") bytes))
+          (is (= [first-receipt second-receipt]
+                 (cli/appended-receipt-records!
+                  (:ledger/bytes (cli/read-immutable-receipt-ledger! base))
+                  bytes))))))))
+
+(deftest selected-gates-reject-invalid-extensions-of-historical-ledger
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base-text historical current file directory]}]
+      (doseq [[held-text message]
+              [["" #"does not preserve the committed ledger"]
+               [(str (pr-str (assoc historical :owner "rewrite")) "\n")
+                #"does not preserve the committed ledger"]
+               [(str base-text (pr-str historical) "\n")
+                #"invalid receipt envelopes"]
+               [(str base-text
+                     (pr-str (assoc-in current [:evidence/result :result/exit] 1))
+                     "\n") #"invalid evidence receipts"]
+               [(str base-text (pr-str current)) #"must end with a newline"]
+               [(str base-text "{:kind\n") #"Invalid Receipt River EDN"]]]
+        (fs/writeFileSync file held-text "utf8")
+        (let [gate-ran? (atom false)
+              catalog {:catalog/repositories
+                       {"repo" {:repository/path "repo"
+                                :repository/gates [local-gate]}}}]
+          (with-redefs [cli/require-repositories! (fn [& _] {"repo" {}})
+                        cli/run-gate! (fn [& _]
+                                        (reset! gate-ran? true)
+                                        passed-result)]
+            (is (thrown-with-msg?
+                 js/Error message
+                 (cli/run-selected-gates!
+                  catalog test-catalog-identity
+                  {:only #{"repo"} :kinds #{:unit}}))))
+          (is (false? @gate-ran?))
+          (is (= held-text (fs/readFileSync file "utf8")))
+          (is (not (fs/existsSync
+                    (path/join directory ".receipts.edn.append.lock")))))))))
+
+(deftest promotion-preserves-history-without-promoting-legacy-evidence
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base base-text current commit!]}]
+      (let [catalog {:catalog/version 1
+                     :catalog/repositories
+                     {"repo" {:repository/path "repo"
+                              :repository/gates [local-gate]}}}]
+        (with-redefs [cli/read-immutable-catalog-bundle!
+                      (fn [_] {:catalog catalog
+                               :catalog-identity test-catalog-identity})
+                      cli/validate-catalog! identity
+                      cli/gitlink-target! (fn [& _] child-revision)]
+          (is (false? (cli/promotion-ready-at!
+                       child-revision #{:repo/unit} [passed-result] base base)))
+          (let [head (commit! (str base-text (pr-str current) "\n"))]
+            (is (cli/promotion-ready-at!
+                 child-revision #{:repo/unit} [passed-result] base head)))
+          (let [head (commit!
+                      (str base-text (pr-str current) "\n"
+                           (pr-str (assoc-in current
+                                             [:evidence/result :result/exit] 1))
+                           "\n"))]
+            (is (thrown-with-msg?
+                 js/Error #"invalid evidence receipts"
+                 (cli/promotion-ready-at!
+                  child-revision #{:repo/unit} [passed-result] base head)))))))))
 
 (deftest promotion-authority-binds-current-head-catalog-ledger-and-gitlink
   (let [revision reviewed-root-revision
