@@ -1,10 +1,11 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 (ns evidence
   (:require [cljs.core :refer [clj->js]]
-            [cljs.reader :as reader]
+            [clojure.edn :as reader]
             [clojure.string :as str]
             [foresight.evidence :as law]
             [foresight.project :as project-model]
+            [foresight.receipt-history :as history]
             [nbb.core :as nbb]
             [workspace :as workspace]
             ["child_process" :as child-process]
@@ -242,7 +243,7 @@
      :receipt/legacy-evidence
      (count (filter #(nil? (:evidence/schema %)) evidence-records))}))
 
-(declare appended-receipt-records!)
+(declare appended-receipt-records! require-valid-receipt-bytes!)
 
 (defn promotion-ready-at!
   [target-revision required-gate-ids results trusted-base-revision
@@ -261,7 +262,8 @@
         ledger (read-immutable-receipt-ledger! reviewed-root-revision)]
     (appended-receipt-records! (:ledger/bytes base-ledger)
                                (:ledger/bytes ledger))
-    (require-valid-receipt-records! (:ledger/records ledger))
+    (require-valid-receipt-bytes! (:ledger/bytes base-ledger))
+    (require-valid-receipt-bytes! (:ledger/bytes ledger))
     (if-not (law/promotion-evidence-consistent?
              catalog catalog-identity target-revision
              required-gate-ids results ledger)
@@ -783,14 +785,59 @@
   (and (<= (.-length prefix) (.-length value))
        (.equals prefix (.subarray value 0 (.-length prefix)))))
 
+(defn historical-prefix? [bytes]
+  (let [length (:ledger/bytes history/historical-prefix)]
+    (and (<= length (.-length bytes))
+         (= (:ledger/sha256 history/historical-prefix)
+            (sha256 (.subarray bytes 0 length))))))
+
+(defn archived-record-indices! [bytes records]
+  (if-not (historical-prefix? bytes)
+    #{}
+    (let [lines (str/split (decode-utf8! bytes "Receipt River ledger") #"\n")]
+      (into #{}
+            (map (fn [[line _digest]]
+                   (let [index (dec line)]
+                     (when-not (history/unverified-row?
+                                line (sha256 (nth lines index))
+                                (nth records index nil))
+                       (throw (js/Error.
+                               "Historical receipt policy cannot exempt evidence or changed rows")))
+                     index)))
+            history/unverified-rows))))
+
+(defn require-valid-archive-registrations! [bytes records]
+  (let [registrations (filter history/archive-registration-candidate? records)]
+    (when (or (> (count registrations) 1)
+              (and (seq registrations) (not (historical-prefix? bytes)))
+              (not-every? history/valid-archive-registration? registrations))
+      (throw (js/Error. "Invalid or duplicate Receipt River archive registration")))))
+
+(defn require-valid-receipt-bytes! [bytes]
+  (when (historical-prefix? bytes)
+    (appended-receipt-records!
+     (.subarray bytes 0 (:ledger/bytes history/historical-prefix)) bytes))
+  (let [records (read-receipt-records!
+                 (decode-utf8! bytes "Receipt River ledger"))
+        archived (archived-record-indices! bytes records)
+        current-records (into []
+                              (keep-indexed (fn [index record]
+                                              (when-not (contains? archived index)
+                                                record)))
+                              records)
+        counts (require-valid-receipt-records! current-records)]
+    (require-valid-archive-registrations! bytes records)
+    (assoc counts :receipt/total (count records)
+                  :receipt/unverified-archive (count archived))))
+
 (defn validate-held-receipt-ledger! [target committed-bytes]
-  (let [bytes (stable-held-target-bytes! target)
-        records (read-receipt-records!
-                 (decode-utf8! bytes "held Receipt River ledger"))]
+  (let [bytes (stable-held-target-bytes! target)]
     (when-not (buffer-prefix? committed-bytes bytes)
       (append-error!
        "Receipt River does not preserve the committed ledger as a prefix"))
-    (require-valid-receipt-records! records)
+    (appended-receipt-records! committed-bytes bytes)
+    (require-valid-receipt-bytes! committed-bytes)
+    (require-valid-receipt-bytes! bytes)
     bytes))
 
 (defn require-held-ledger-unchanged! [target validated-bytes]
@@ -1047,16 +1094,36 @@
                           (:ledger/bytes ledger))
         candidates (filter #(= law/evidence-receipt-origin (:origin %)) records)
         evidence-count (count candidates)
-        counts (require-valid-receipt-records! records)]
+        _base-counts (require-valid-receipt-bytes! (:ledger/bytes base-ledger))
+        counts (require-valid-receipt-bytes! (:ledger/bytes ledger))]
     (println "PASS"
              (pr-str (assoc (:ledger/identity ledger)
                             :ledger/base-revision base
                             :ledger/total-receipts (count records)
                             :ledger/appended-receipts (count appended-records)
+                            :ledger/unverified-archival-receipts
+                            (:receipt/unverified-archive counts)
                             :ledger/legacy-evidence-receipts
                             (:receipt/legacy-evidence counts)
                             :ledger/evidence-receipts evidence-count)))
     0))
+
+(defn register-history! []
+  (with-append-reservation!
+    receipt-file true
+    (fn [reservation]
+      (let [bytes (:held-ledger-bytes reservation)
+            records (read-receipt-records! (decode-utf8! bytes "Receipt River ledger"))
+            receipt (history/archive-registration (.toISOString (js/Date.)) (os/hostname))]
+        (when-not (historical-prefix? bytes)
+          (throw (js/Error. "Archive registration requires the exact historical prefix")))
+        (when (some history/archive-registration-candidate? records)
+          (throw (js/Error. "Receipt River archive is already registered")))
+        (when-not (history/valid-archive-registration? receipt)
+          (throw (js/Error. "Invalid archive registration envelope")))
+        (append-reserved-edn-line! reservation receipt (encode-edn-line! receipt))
+        (println "PASS registered unverified Receipt River history")
+        0))))
 
 (defn -main [& args]
   (try
@@ -1069,6 +1136,9 @@
         "list" (list-gates! catalog options)
         "run" (run-selected-gates! catalog catalog-identity options)
         "verify-receipts" (verify-receipts! options)
+        "register-history" (if (seq option-args)
+                             (throw (js/Error. "register-history takes no options"))
+                             (register-history!))
         (throw (js/Error. (str "Unknown command: " (or command "<missing>"))))))
     (catch :default error
       (binding [*out* *err*] (println (.-message error)))

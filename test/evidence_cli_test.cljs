@@ -3,6 +3,7 @@
   (:require [cljs.test :as test :refer [deftest is]]
             [evidence :as cli]
             [foresight.evidence :as law]
+            [receipt-history-test]
             [workspace :as workspace]
             ["child_process" :as child-process]
             ["fs" :as fs]
@@ -25,6 +26,14 @@
 
 (defn regular-blob-entry [repository-path]
   (str "100644 blob " blob-revision "\t" repository-path "\u0000"))
+
+(defn with-ledger-bytes [ledger]
+  (let [bytes (js/Buffer.from
+               (apply str (map #(str (pr-str %) "\n") (:ledger/records ledger)))
+               "utf8")]
+    (-> ledger
+        (assoc :ledger/bytes bytes)
+        (assoc-in [:ledger/identity :ledger/sha256] (cli/sha256 bytes)))))
 
 (def local-gate
   {:gate/id :repo/unit
@@ -782,7 +791,7 @@
                   cli/read-immutable-receipt-ledger!
                   (fn [at]
                     (swap! reads conj [:ledger at])
-                    ledger)
+                    (with-ledger-bytes ledger))
                   cli/appended-receipt-records!
                   (fn [& _]
                     (swap! reads conj :append-history)
@@ -850,7 +859,7 @@
                   (fn [_] {:catalog catalog
                            :catalog-identity test-catalog-identity})
                   cli/validate-catalog! identity
-                  cli/read-immutable-receipt-ledger! (fn [_] ledger)
+                  cli/read-immutable-receipt-ledger! (fn [_] (with-ledger-bytes ledger))
                   cli/appended-receipt-records! (fn [& _] [])
                   cli/require-result-gitlinks! (fn [& _] true)]
       (is (thrown-with-msg?
@@ -1176,4 +1185,4 @@
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
 
-(test/run-tests 'evidence-cli-test)
+(test/run-tests 'evidence-cli-test 'receipt-history-test)

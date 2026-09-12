@@ -1,0 +1,42 @@
+{
+  "devDependencies": {
+    "@aws-sdk/client-s3": "3.888.0",
+    "@huggingface/transformers": "3.8.1",
+    "ajv": "8.17.1",
+    "fs-ext-extra-prebuilt": "2.2.9",
+    "mongodb": "6.21.0",
+    "nbb": "1.5.212",
+    "oxlint": "1.60.0",
+    "playwright-core": "1.62.1",
+    "s3rver": "3.7.1",
+    "shadow-cljs": "3.4.11",
+    "source-map-support": "0.5.21"
+  },
+  "name": "@open-hax/foresight-workspace",
+  "packageManager": "pnpm@10.14.0",
+  "private": true,
+  "scripts": {
+    "build": "pnpm manifests:check && shadow-cljs release local",
+    "gates:list": "nbb scripts/evidence.clj list",
+    "gates:run": "nbb scripts/evidence.clj run",
+    "gates:validate": "nbb scripts/evidence.clj validate",
+    "inventory": "nbb scripts/workspace.clj inventory",
+    "lint": "pnpm manifests:check && clj-kondo --lint src scripts test && oxlint --deny-warnings devtools",
+    "manifests": "nbb scripts/manifests.cljs --write",
+    "manifests:check": "nbb scripts/manifests.cljs --check",
+    "model:embedding": "pnpm --filter @foresight/devtools model:embedding",
+    "model:generation": "pnpm --filter @foresight/devtools model:generation",
+    "model:warm": "pnpm --filter @foresight/devtools model:warm",
+    "modules:build": "nbb scripts/workspace.clj build",
+    "modules:install": "nbb scripts/workspace.clj install",
+    "modules:lint": "nbb scripts/workspace.clj lint",
+    "modules:test": "nbb scripts/workspace.clj test",
+    "report": "nbb scripts/workspace.clj report",
+    "test": "pnpm manifests:check && nbb test/project_test.cljs && nbb test/workspace_test.cljs && nbb test/manifests_test.cljs && nbb test/evidence_test.cljs && nbb test/evidence_cli_test.cljs && nbb test/lineage_test.cljs && node --test test/reference/repository-census.test.mjs devtools/node-test-transport.test.cjs devtools/epiphany-inputs.test.mjs && shadow-cljs compile test && node dist/local-test.cjs",
+    "test:embeddings": "pnpm --filter @foresight/devtools test:embeddings",
+    "test:generation": "pnpm --filter @foresight/devtools test:generation",
+    "test:model-http": "pnpm --filter @foresight/devtools test:model-http",
+    "test:s3": "pnpm --filter @foresight/devtools test:s3"
+  },
+  "version": "0.0.0"
+}

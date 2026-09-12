@@ -1,0 +1,25 @@
+{
+  "name": "@foresight/devtools",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:s3": "node s3-smoke.mjs",
+    "model:embedding": "node embedding-server.mjs",
+    "test:embeddings": "node embedding-smoke.mjs",
+    "model:generation": "node generation-server.mjs",
+    "test:generation": "node generation-smoke.mjs",
+    "test:model-http": "node --test model-http.test.mjs generation-tools.test.mjs",
+    "test:generation-agent": "node generation-agent-smoke.mjs",
+    "test:epiphany-integration": "node epiphany-integration.mjs",
+    "model:warm": "node warm-generation-model.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.17.1",
+    "@aws-sdk/client-s3": "3.888.0",
+    "s3rver": "3.7.1",
+    "@huggingface/transformers": "3.8.1",
+    "playwright-core": "1.62.1",
+    "mongodb": "6.21.0"
+  }
+}
