@@ -7,6 +7,7 @@ import { env, pipeline, InterruptableStoppingCriteria, TextStreamer } from '@hug
 import { readModelRequestBody } from './model-request-body.mjs';
 import { checkedMessages, checkedTools, decodeGeneratedTools } from './generation-tools.mjs';
 import { completionStream } from './generation-stream.mjs';
+import { generationObservation, ObservedStoppingCriteria } from './generation-observer.mjs';
 
 export const LOCAL_GENERATION_MODEL = 'HuggingFaceTB/SmolLM2-135M-Instruct';
 export const LOCAL_GENERATION_REVISION = '12fd25f77366fa6b3b4b768ec3050bf629380bac';
@@ -58,7 +59,7 @@ function checkedRequest(body, model, maxNewTokens) {
 }
 
 /** Decode actual local model tokens while preserving EOS versus token-limit completion. */
-async function generate(generator, input, stoppingCriteria, onText) {
+async function generate(generator, input, stoppingCriteria, onText, observation) {
   const templated = generator.tokenizer.apply_chat_template(input.messages, {
     tokenize: false, add_generation_prompt: true, tools: input.selection.tools.length ? input.selection.tools : null,
   });
@@ -66,6 +67,7 @@ async function generate(generator, input, stoppingCriteria, onText) {
   const promptTokens = encoded.input_ids.dims.at(-1);
   if (promptTokens + input.maxTokens > 8192) throw new RangeError('context_window_exceeded');
   const streamer = onText ? new TextStreamer(generator.tokenizer, { skip_prompt: true, callback_function: onText }) : undefined;
+  observation?.prefill(promptTokens);
   const output = await generator.model.generate({ ...encoded, max_new_tokens: input.maxTokens, do_sample: false,
     stopping_criteria: stoppingCriteria, ...(streamer ? { streamer } : {}) });
   const tokens = output.tolist()[0].slice(promptTokens);
@@ -85,12 +87,14 @@ export async function startGenerationServer({
   maxNewTokens = 512,
   timeoutMs = 180000,
   requestTimeoutMs = 10000,
+  observer,
 } = {}) {
   const descriptor = Object.hasOwn(LOCAL_GENERATION_MODELS, model) && LOCAL_GENERATION_MODELS[model];
   if (!descriptor) throw new RangeError('Only pinned local generation models are supported');
   if (!Number.isInteger(maxNewTokens) || maxNewTokens < 1 || maxNewTokens > 1024) throw new RangeError('maxNewTokens must be 1..1024');
   if (!Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 180000) throw new RangeError('timeoutMs must be 1..180000');
   if (!Number.isInteger(requestTimeoutMs) || requestTimeoutMs < 1 || requestTimeoutMs > 30000) throw new RangeError('requestTimeoutMs must be 1..30000');
+  if (observer !== undefined && typeof observer !== 'function') throw new TypeError('observer must be a function');
   env.cacheDir = cacheDir;
   env.allowLocalModels = true;
   env.allowRemoteModels = false;
@@ -99,7 +103,7 @@ export async function startGenerationServer({
     session_options: { intraOpNumThreads: 2, interOpNumThreads: 1 },
   });
   let active = false;
-  let activeInference, activeStoppingCriteria, closing;
+  let activeInference, activeStoppingCriteria, activeObservation, closing;
   let shuttingDown = false;
   const server = http.createServer(async (request, response) => {
     const reply = (status, body) => {
@@ -113,6 +117,7 @@ export async function startGenerationServer({
     let settleInference;
     let timedOut = false;
     let wire;
+    let observation;
     try {
       if (request.method === 'GET' && request.url === '/health') return reply(200, { status: 'ok', model, provider: 'transformers-js', offline: true, busy: active });
       if (request.method === 'GET' && request.url === '/v1/models') return reply(200, { object: 'list', data: [{ id: model, object: 'model', owned_by: 'local' }] });
@@ -123,12 +128,25 @@ export async function startGenerationServer({
       const input = checkedRequest(JSON.parse(bytes.toString('utf8')), model, maxNewTokens);
       if (active) return reply(429, { error: 'generation_busy' });
       active = ownsInference = true;
-      stoppingCriteria = new InterruptableStoppingCriteria();
+      const requestId = randomUUID();
+      observation = generationObservation(observer, {requestId, model, maxTokens: input.maxTokens});
+      stoppingCriteria = observation ? new ObservedStoppingCriteria(observation) : new InterruptableStoppingCriteria();
       activeStoppingCriteria = stoppingCriteria;
+      activeObservation = observation;
       activeInference = new Promise(resolve => { settleInference = resolve; });
-      timer = setTimeout(() => { timedOut = true; stoppingCriteria.interrupt(); }, timeoutMs);
-      response.once('close', () => { if (!response.writableEnded) stoppingCriteria.interrupt(); });
-      const metadata = { id: `chatcmpl-${randomUUID()}`, created: Math.floor(Date.now() / 1000), model };
+      timer = setTimeout(() => {
+        timedOut = true;
+        stoppingCriteria.interrupt();
+        observation?.interrupt('generation_timeout');
+      }, timeoutMs);
+      response.once('close', () => {
+        if (!response.writableEnded) {
+          stoppingCriteria.interrupt();
+          observation?.interrupt('client_disconnected');
+        }
+      });
+      observation?.admitted();
+      const metadata = { id: `chatcmpl-${requestId}`, created: Math.floor(Date.now() / 1000), model };
       wire = input.stream ? completionStream(response, metadata) : null;
       let streamed = '';
       let openedText = false;
@@ -141,7 +159,7 @@ export async function startGenerationServer({
         streamed += text;
         wire.delta({ content: input.wrapped ? JSON.stringify(text).slice(1, -1) : text });
       } : undefined;
-      const generated = await generate(generator, input, stoppingCriteria, onText);
+      const generated = await generate(generator, input, stoppingCriteria, onText, observation);
       if (timedOut) return response.headersSent ? wire.fail('generation_timeout') : reply(504, { error: 'generation_timeout' });
       if (onText && streamed !== generated.content) throw new Error('generation_stream_decode_mismatch');
       const parsed = input.selection.tools.length ? decodeGeneratedTools(generated.content, generated.finishReason, input.selection)
@@ -153,6 +171,7 @@ export async function startGenerationServer({
       const provenance = { provider: 'transformers-js', ...descriptor, device: 'cpu', offline: true, max_new_tokens: input.maxTokens,
         structured_output: input.wrapped ? 'transport_wrapped_generated_text' : parsed.tool_calls ? 'validated_generated_tool_calls' : 'none',
         ...(parsed.tool_calls ? { raw_tool_output: generated.content } : {}) };
+      observation?.complete(usage, parsed.finishReason);
       if (wire) {
         if (openedText && input.wrapped) wire.delta({ content: '"}' });
         if (!openedText) wire.delta({ role: 'assistant', content: message.content || '' });
@@ -165,6 +184,8 @@ export async function startGenerationServer({
         usage, local_generation: provenance,
       });
     } catch (error) {
+      observation?.fail(error instanceof RangeError && error.message === 'context_window_exceeded'
+        ? 'context_window_exceeded' : 'generation_failed');
       if (response.headersSent) { wire?.fail(timedOut ? 'generation_timeout' : 'generation_failed'); return; }
       if (timedOut) return reply(504, { error: 'generation_timeout' });
       return reply(error instanceof SyntaxError || error instanceof RangeError ? 400 : 500, {
@@ -174,8 +195,9 @@ export async function startGenerationServer({
       clearTimeout(timer);
       if (ownsInference) {
         active = false;
-        activeStoppingCriteria = activeInference = null;
+        activeStoppingCriteria = activeInference = activeObservation = null;
         settleInference?.();
+        observation?.settle();
       }
     }
   });
@@ -199,6 +221,7 @@ export async function startGenerationServer({
         await Promise.all([networkClosed, inferenceSettled]);
         await generator.dispose();
       })();
+      activeObservation?.interrupt('generation_closing');
       return closing;
     },
   };

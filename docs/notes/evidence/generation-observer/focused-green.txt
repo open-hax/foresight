@@ -1,0 +1,13 @@
+✔ real native inference exposes metadata progress and usage without request or generated content (4334.289436ms)
+✔ an observer cannot change deterministic native completion, even when its sink fails (7386.233157ms)
+✔ actual native timeout records interruption separately from settlement (4334.456421ms)
+✔ close joins real token generation and exposes one interrupted settlement (4355.844958ms)
+✔ a failure after actual streamed model bytes exposes only a stable failure code (1465.217837ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22564.438182
