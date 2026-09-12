@@ -1,0 +1,13 @@
+{:namespace :foresight.archaeology/run-f49b2fa0-2e8f-42c7-9147-9ea36456da8a
+ :resources
+ [{:document/id "f49b2fa0-2e8f-42c7-9147-9ea36456da8a"
+    :document/type :foresight.archaeology/run
+    :archaeology/catalog {:schema/catalog ".ημ/archaeology/catalog.edn"
+                           :schema/history-dir ".ημ/archaeology/schemas"}
+    :archaeology/ledgers
+    {:run {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/run.edn"}
+     :findings {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/findings.edn"}
+     :actions {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/actions.edn"}
+     :evidence {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/evidence.edn"}
+     :relations {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/relations.edn"}}
+    :archaeology/projection :foresight.archaeology/run}]}
