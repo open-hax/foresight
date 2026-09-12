@@ -45,9 +45,20 @@ lint is clean, S3 put/get works, real 384-dimensional embeddings pass the HTTP
 smoke, and a frozen offline pnpm install succeeds. Model weights remain an
 explicit cached capability and are not downloaded by normal root tests.
 
+The separate warmed-cache HTTP suite passes 14 tests. Malformed tool fields
+previously started real inference; a failure-first run reproduced five such
+cases. They now receive a deterministic client refusal, while an empty tools
+array remains accepted. Schema errors, inference deadlines and oversized upload
+draining retain their real HTTP regressions. The selected eta-mu source is now
+the published `a7b19825fb5d7c624c38f1d41043c42e92d7f0c3` identity checkpoint;
+generation, frozen offline install and all root source/build/lint gates passed
+again after that explicit gitlink promotion.
+
 The recovery evidence also records unchanged child builds/tests and their
 failures. A zero exit or a green subset is not a whole-stack acceptance signal.
-Known current findings include a Katamorph namespace/var compiler warning.
+The Katamorph namespace/var compiler warning and Calliope unused binding were
+subsequently fixed in their child branches; their full declared gates now pass
+with zero warnings. Exact child revisions still need deliberate root promotion.
 The current-main Uxx branch passes all 466 tests. Review then exposed adapter
 runtime peer and publication gaps: React/DOM are now exclusively runtime peers,
 both adapters build before packing, compiler caches are excluded, and extracted
@@ -75,6 +86,10 @@ warm builds passing. Moving the existing generation recipe into `prebuild` fixes
 the cold path; all four targets then built in 51.960 seconds. The post-release
 Claude emitter now refreshes active hooks for the actual checkout. Its stale Sol
 application targets were retired against the accepted ownership boundary.
+Review then found that direct host commands bypassed the root prebuild. The
+actual configured OpenCode, MCP and Claude commands now run the shared generator
+and pass in three isolated cold source checkouts (85.774 seconds, zero warnings).
+The final full build, 198-test native-Mongo suite and compiled hook proof also pass.
 
 Epiphany's
 shallow-history test failures were resolved by fetching the history of the same
@@ -96,6 +111,10 @@ a `diff_stat` deterministic gate; that is distinct from the full local test and
 artifact evidence above. The repository's native auto-merge action reports that
 auto-merge is not enabled. Normal protected merge remains available after the
 current head has clean checks and reviews; repository protection is not bypassed.
+Later source reviews found no confirmed Uxx issues beyond the corrected parity
+documentation, but the reviewer's dependency install was skipped with exit 125.
+Root eta-mu source review also approves, while its CI deterministic commands
+cannot find `bb` (exit 127). Those unavailable gates are not reported as passes.
 
 See [workspace-obstacles.md](workspace-obstacles.md) for the recovery decisions,
 remaining module limits, and what each recorded result actually proves.

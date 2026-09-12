@@ -62,7 +62,7 @@
    :version "0.5.21"}
   {:name "oxlint", :path "workspace.edn", :version "1.60.0"}),
  :source-revisions
- [{:git/sha "388c462b3f1a5b0c51bc93486ab954a7f89cedbe",
+ [{:git/sha "a7b19825fb5d7c624c38f1d41043c42e92d7f0c3",
    :packages ["eta-mu/packages/axxium" "eta-mu/packages/clio"],
    :source/path "eta-mu"}],
  :workspace/version 1}

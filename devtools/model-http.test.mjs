@@ -39,8 +39,16 @@ for (const [description, response_format] of [['null response format', null], ['
   });
 }
 
-test('an interrupted real local inference reports the expired deadline', async () => {
-  assert.deepEqual(await completion({ max_tokens: 128 }), {
+for (const tools of [{}, null, '', 'function', false, 0, [{ type: 'function' }]]) {
+  test(`unsupported tools ${JSON.stringify(tools)} are refused before inference`, async () => {
+    assert.deepEqual(await completion({ tools }), {
+      status: 400, body: { error: 'unsupported_tools_or_stream' },
+    });
+  });
+}
+
+test('an interrupted real local inference accepts an empty tools array and reports the expired deadline', async () => {
+  assert.deepEqual(await completion({ max_tokens: 128, tools: [] }), {
     status: 504, body: { error: 'generation_timeout' },
   });
   const health = await (await fetch(generation.baseUrl.replace('/v1', '/health'))).json();

@@ -33,7 +33,10 @@ function translationWrapper(format) {
 function checkedRequest(body, model, maxNewTokens) {
   if (!body || typeof body !== 'object' || Array.isArray(body)) throw new RangeError('invalid_input');
   if (body.model !== model) throw new RangeError('unknown_model');
-  if (body.stream === true || body.tools?.length || body.tool_choice) throw new RangeError('unsupported_tools_or_stream');
+  if (body.stream === true || body.tool_choice
+      || (Object.hasOwn(body, 'tools') && (!Array.isArray(body.tools) || body.tools.length !== 0))) {
+    throw new RangeError('unsupported_tools_or_stream');
+  }
   if (!Array.isArray(body.messages) || body.messages.length < 1 || body.messages.length > 8
       || body.messages.some(message => !['system', 'user', 'assistant'].includes(message?.role)
         || typeof message.content !== 'string' || message.content.length > 200000

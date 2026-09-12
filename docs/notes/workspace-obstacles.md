@@ -52,11 +52,11 @@ well as subsequent successful repairs.
 |---|---|
 | Truth | 822 tests / 12,019 assertions passed; owning strict analysis passed with its pinned kondo. |
 | shx | 19 tests / 46 assertions passed; owning strict analysis passed with its pinned kondo. |
-| Calliope | 61 tests / 219 assertions passed. One existing unused-binding lint warning remains; media hydration is partial. |
+| Calliope | 61 tests / 219 assertions, dry-run and lint now pass after removing the unused binding; lint reports 0 errors/warnings. Media hydration is partial. |
 | Epiphany | A shallow clone caused 21 failures. Fetching history for the same pinned source fixed them: 763 tests / 2,102 assertions passed. Its lint alias returns zero despite 66 warnings, and tests report an SLF4J-provider notice. These are still open findings. |
-| Katamorph | CLJS 155 tests / 371 assertions and JVM 27 / 70 passed; examples/release/static checks passed. One namespace/var compiler warning remains. |
+| Katamorph | CLJS 155 tests / 371 assertions and JVM 27 / 70 passed; examples/release/static checks passed. The namespace/var clash was repaired and the full gate rerun with zero compiler/lint warnings. |
 | Bitch-tracker | 2 tests / 7 assertions passed, lint 0/0, plugin release without compiler warnings. The repository has no committed package lock; no fabricated frozen-install claim is made. |
-| Muse | Current-main 197 tests / 506 assertions, lint 0/0, all four host builds without compiler warnings. Warm build success originally concealed a cold generated-namespace failure; a fresh source proof now passes with the prebuild generator. Claude post-release hooks are verified against the actual checkout. |
+| Muse | Latest successor passes 198 tests / 517 assertions with real Mongo, lint 0/0, all four host builds without compiler warnings. Warm build success originally concealed a cold generated-namespace failure. All three actual configured host commands now pass isolated cold-checkout builds through shared prebuild generation. Claude post-release hooks are verified against the actual checkout. |
 | Uxx | Current-main 466 tests, root/token and adapter production builds, TypeScript, lint and frozen install passed. Actual packed Helix/Reagent archives expose 63 runtime exports each and share a consumer React. Tarballs exclude compiler caches and runtime build dependencies. |
 | Proxx | Current-staging production build and 124 CLJS tests / 324 assertions passed before follow-up extern hints. Lint has 0 errors and 238 existing calibrated warnings. Full Node suite is blocked by automatic approval review; no later success or termination is asserted. |
 | services | Deployment-boundary self-test, immutable-pin checks and 370 EDN/documentation inputs passed. This is not a live-host deployment or complete production CI claim. |

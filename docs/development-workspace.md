@@ -176,7 +176,7 @@ pnpm model:generation
 Import `startGenerationServer` from `devtools/generation-server.mjs` when composing an integration supervisor. It serves real model output in an OpenAI-compatible chat-completion envelope. Only the declared translation response wrapper is supported; it wraps generated text rather than claiming model-enforced JSON. Tool calling and streaming are explicitly unsupported. Missing weights fail startup, and remote model fetching is disabled. These small-model checks establish runtime/protocol behavior; content and translation quality still require review.
 
 The model HTTP regression command uses the warmed offline cache. It checks
-malformed schema refusals, deadline classification even when inference throws,
+malformed schema and tool-field refusals, deadline classification even when inference throws,
 and oversized-body draining with a subsequent request on the same connection.
 These tests are explicit because loading model weights is unnecessary for the
 ordinary root source/build gates.
