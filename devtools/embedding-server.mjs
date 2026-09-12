@@ -36,7 +36,7 @@ export async function startEmbeddingServer({ port = 0, cacheDir = process.env.FO
       const body = JSON.parse(Buffer.concat(chunks).toString('utf8'));
       if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400, { error: 'invalid_input' });
       const inputs = typeof body.input === 'string' ? [body.input] : body.input;
-      if (body.model && body.model !== model) return reply(400, { error: 'unknown_model' });
+      if (Object.hasOwn(body, 'model') && body.model !== model) return reply(400, { error: 'unknown_model' });
       if (!Array.isArray(inputs) || inputs.length < 1 || inputs.length > 32 || inputs.some(value => typeof value !== 'string' || value.length > 16384)) return reply(400, { error: 'invalid_input' });
       if (body.dimensions !== undefined && body.dimensions !== 384) return reply(400, { error: 'invalid_dimensions' });
       if (body.encoding_format !== undefined && !['float', 'base64'].includes(body.encoding_format)) return reply(400, { error: 'invalid_encoding_format' });

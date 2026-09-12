@@ -33,7 +33,7 @@ function translationWrapper(format) {
 function checkedRequest(body, model, maxNewTokens) {
   if (!body || typeof body !== 'object' || Array.isArray(body)) throw new RangeError('invalid_input');
   if (body.model !== model) throw new RangeError('unknown_model');
-  if ((Object.hasOwn(body, 'stream') && body.stream !== false) || body.tool_choice
+  if ((Object.hasOwn(body, 'stream') && body.stream !== false) || Object.hasOwn(body, 'tool_choice')
       || (Object.hasOwn(body, 'tools') && (!Array.isArray(body.tools) || body.tools.length !== 0))) {
     throw new RangeError('unsupported_tools_or_stream');
   }

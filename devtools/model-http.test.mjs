@@ -63,6 +63,42 @@ test('an interrupted real local inference accepts stream false and empty tools a
   assert.equal(health.busy, false);
 });
 
+for (const tool_choice of [false, 0, '', null, 'none', {}, []]) {
+  test(`present tool_choice ${JSON.stringify(tool_choice)} is refused before inference`, async () => {
+    assert.deepEqual(await completion({ tool_choice }), {
+      status: 400, body: { error: 'unsupported_tools_or_stream' },
+    });
+  });
+}
+
+for (const model of [false, 0, '', null, 'unknown', {}, []]) {
+  test(`present invalid embedding model ${JSON.stringify(model)} is refused`, async () => {
+    const response = await fetch(`${embedding.baseUrl}/embeddings`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ model, input: 'Hello.' }),
+    });
+    assert.deepEqual({ status: response.status, body: await response.json() }, {
+      status: 400, body: { error: 'unknown_model' },
+    });
+  });
+}
+
+test('embedding model omission and exact model name select the same real vector', async () => {
+  const vector = async body => {
+    const response = await fetch(`${embedding.baseUrl}/embeddings`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ input: 'Same sentence.', ...body }),
+    });
+    assert.equal(response.status, 200);
+    const result = await response.json();
+    assert.equal(result.model, embedding.model);
+    assert.equal(result.data[0].embedding.length, 384);
+    assert(result.data[0].embedding.every(Number.isFinite));
+    return result.data[0].embedding;
+  };
+  assert.deepEqual(await vector({}), await vector({ model: embedding.model }));
+});
+
 for (const [description, decode] of [
   ['decoder exceptions', () => { throw new Error('Injected decoder failure'); }],
   ['empty output', () => ''],
