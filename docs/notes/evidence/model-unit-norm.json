@@ -1,0 +1,53 @@
+{
+  "finding": 3996571633,
+  "norm_absolute_tolerance": 0.0001,
+  "red": {
+    "tests": 2,
+    "failed": 2,
+    "exit_code": 1
+  },
+  "green": {
+    "tests": 73,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "smoke": "passed",
+  "lint": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "source_sha256": {
+    "devtools/embedding-server.mjs": "4fdcbaad68d082a80c3efd0bad385ff658d39d8477da24af48f446303548c850",
+    "devtools/model-http.test.mjs": "854c1bb70b32f73674e51024c624a58c8861c6bb62ff9fb3d532d3df41cf2859"
+  },
+  "log_sha256": {
+    "model-unit-norm-red.log": "da0ff5eed4bed0f19185237a0a2e39f9e69b78fb865ecbef2f55acadcd487a85",
+    "model-unit-norm-green.log": "a7975b3f178077cc1a1d6f99ac04bf1bf7fd9a80988ceab842fc3284d362c325",
+    "model-unit-norm-smoke.log": "f6c39a69efcc5abadf8e0ef4e1ea8203ed4f1195a8026252580616e54441b837",
+    "model-unit-norm-lint.log": "cb535361e87b65631266be9116fff9b3f9b0ddc4c507c2e45f6319d2fa2ce3e8"
+  },
+  "float32_followup": {
+    "red": {
+      "tests": 1,
+      "failed": 1,
+      "exit_code": 1
+    },
+    "green": {
+      "tests": 74,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "source_sha256": {
+      "devtools/embedding-server.mjs": "1452c52755b42614c48087f4962b60d41357e53a78d74076d6cd97b94586b2ab",
+      "devtools/model-http.test.mjs": "baf912340b0a2206ee8e3adf3da88a9b5885aa50d3f5304608b4d7894fa8dac6"
+    },
+    "log_sha256": {
+      "model-unit-norm-float32-red.log": "b89dc4c62008a38b6daffafe5fb7c847824f038eee661abb99a39ab44a1fc540",
+      "model-unit-norm-float32-green.log": "1aa436a83207f0ee465f28b23b9482ea7a36a11f4bbdf521b57375711b93dd0c",
+      "model-unit-norm-float32-smoke.log": "f6c39a69efcc5abadf8e0ef4e1ea8203ed4f1195a8026252580616e54441b837",
+      "model-unit-norm-float32-lint.log": "fcf1edaf966d4f4229a3a19622a19cd3eaa7c0c02b5e5ef09ee2bf0e49c84485"
+    }
+  }
+}

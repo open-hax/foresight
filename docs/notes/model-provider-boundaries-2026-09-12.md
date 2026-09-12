@@ -47,3 +47,27 @@ eta-mu revision consumed by the manifest generator.
 
 These are scoped provider and installation checks. Final root child promotion,
 aggregate build/browser gates and external review remain separate steps.
+
+## Follow-up: normalized output is part of the provider contract
+
+Codex finding3996571633 correctly identified that finite384-component vectors
+could still be zero or scaled. Two additional regressions corrupt the actual
+pooled MiniLM tensor into a zero vector and a doubled vector; both reproduced
+HTTP200 instead of the required500. The shared validation now requires the
+Euclidean norm to differ from1 by less than0.0001, the same tolerance as the
+existing real-model smoke. It rejects malformed output without silently
+renormalizing it, before either JSON or Float32/base64 serialization.
+
+The full successor HTTP gate passes73 tests with zero skips, and the actual
+MiniLM smoke still passes normalized vectors, semantic ordering and base64.
+Scoped Oxlint reports zero errors/warnings. This follow-up changes no model pin,
+manifest or integration-service dependency. Its exact source and log hashes are
+recorded in `evidence/model-unit-norm.json`.
+
+Peer review found a conversion boundary case before publication: the vector
+whose first component is0.9999000000001 and whose other383 components are zero
+meets the original-number tolerance, but Float32 rounding puts it outside that
+tolerance. A real final-tensor/base64 test reproduced HTTP200 once. Validation
+now checks both the original row and its Float32 representation. The complete
+successor passes74 tests with no skips, the real semantic/base64 smoke, and
+Oxlint0/0. The rounded representation is refused rather than repaired silently.

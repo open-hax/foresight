@@ -15,6 +15,10 @@ function validateEmbeddingRows(rows, inputCount) {
         throw new RangeError('Embedding components must be finite Float32 numbers');
       }
     }
+    if (Math.abs(Math.hypot(...row) - 1) >= 0.0001
+        || Math.abs(Math.hypot(...new Float32Array(row)) - 1) >= 0.0001) {
+      throw new RangeError('Embedding vectors must have unit norm');
+    }
   }
 }
 

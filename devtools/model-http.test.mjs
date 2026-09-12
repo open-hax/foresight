@@ -122,6 +122,9 @@ for (const [description, route, encoding, corrupt] of [
   ['nonnumeric component', '/api/embed', 'float', rows => { rows[0][0] = '0'; return rows; }],
   ['sparse vector', '/embeddings', 'base64', rows => { delete rows[0][0]; return rows; }],
   ['Float32 overflow', '/v1/embeddings', 'base64', rows => { rows[0][0] = Number.MAX_VALUE; return rows; }],
+  ['zero vector', '/api/embed', 'float', rows => [rows[0].map(() => 0), rows[1]]],
+  ['scaled vector', '/embeddings', 'base64', rows => [rows[0], rows[1].map(value => value * 2)]],
+  ['Float32 norm drift', '/v1/embeddings', 'base64', rows => [[0.9999000000001, ...rows[0].slice(1).map(() => 0)], rows[1]]],
 ]) {
   test(`embedding refuses a real model tensor with ${description}`, async () => {
     const original = Tensor.prototype.tolist;
