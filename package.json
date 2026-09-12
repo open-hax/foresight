@@ -3,6 +3,7 @@
     "@aws-sdk/client-s3": "3.888.0",
     "@huggingface/transformers": "3.8.1",
     "fs-ext-extra-prebuilt": "2.2.9",
+    "mongodb": "6.21.0",
     "nbb": "1.5.212",
     "oxlint": "1.60.0",
     "playwright-core": "1.62.1",

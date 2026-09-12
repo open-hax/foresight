@@ -37,3 +37,25 @@ Correction to the preceding closeout comment after inspecting the full Epiphany 
 2026-09-12 08:25 UTC checkpoint: root generator regression reproduced three failures plus missing-child failure before fix; final root114tests511assertions, source-bound build31.84s, lint0/0 and frozen install pass. Model HTTP successor671d95c and mapped root test:model-http pass7 actual offline HTTP regressions; original server copies reproduce6failures; null schemas400, timeouts504, oversized request draining/socket reuse, Qwen and MiniLM smokes, JSDoc5/5 verified. Root published PR91 currently018d04e4. Primary eta-mu promoted to exact published Axxium a7b19825fb5d7c624c38f1d41043c42e92d7f0c3; package66tests632assertions, both118-file releases/lint/realTCPpass, strict inherited boundary56violations remains red. Complete Knoxx backend1835tests8278assertions plus26JS pass; actual EDN no-Mongo browserfirstwholeEnglish/Spanish publication passes but secondcyclefailed rawcandidate repair selecting reviewedreceipts. Regression failure-first4fail then9tests78assertionsgreen; awaitingfullrerun. Knoxx golden959f179 decomposed sixisolated cumulativePRstages, noKnoxxPRpublishedyet. Actual reviewers continue actionablefindings; no merges. Report and annotated evidence saved with historical failures intact.
 
 ---
+Current bounded successor: full backend09 passes1857/8422 with guarded exit0;
+frontend production06 passes532/2306 and advanced188 inputs/zero warnings.
+Fresh pinned Proxx passes650/651 with one pre-existing absent external-script
+skip, no refused transports, build green and ESLint0errors/236warnings; current
+remote-main integration is separate. Root1d83089 closes the reviewed prepended
+exit-hook gap with authenticRED2 then nine native tests green. Root46c2e8b owns
+Mongo6.21.0 directly in devtools and validates real embedding tensor row count,
+384dimensions and finite Float32 components; ten actual bad-output regressions
+fail before the repair, all71 model HTTP tests pass after it. The isolated
+manifest checkout matches declared eta a7b19825 exactly; generated manifests and
+frozen installation pass without bypass. Real Mongo/S3rver/MiniLM JVM integration
+passes22/108 with Knoxx absent. Details and exact receipts are in
+`docs/notes/model-provider-boundaries-2026-09-12.md` and its evidence JSON.
+
+Browser13–15 failures and annotated screenshots are retained. Browser16 now
+passes actual Contracts validation/save/clone, refusal of invalid saving with
+unchanged persisted EDN and preserved draft, and responsive controls; Wiki
+translation/publication is still in progress. Automatic translator agent setup
+also exposed a missing eta-mu provider mapping, separately from the working Wiki
+text-provider mapping. This is an unresolved integration gate, not model success.
+Final reviewed dependency pins, regenerated manifests, whole-stack browser
+completion and actual reviewer convergence remain required before merge.

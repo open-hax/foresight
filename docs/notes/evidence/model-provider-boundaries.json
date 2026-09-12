@@ -1,0 +1,114 @@
+{
+  "recordedAt": "2026-09-12T14:42:33.880Z",
+  "rootBase": "ca73b15a1da6fbea8d8a458e5b68cca6d3ccc6b6",
+  "declaredEtaRevision": "a7b19825fb5d7c624c38f1d41043c42e92d7f0c3",
+  "sourceSha256": {
+    "devtools/embedding-server.mjs": "7437eee3221648a70d8d2e03ac0e045700fd5e6b6044cb55507ba837c9d6d185",
+    "devtools/epiphany-integration.mjs": "a46d2feae1a605da5b7e445268f9abaf4b9b9868c8b8d468a1b3e41686133abe",
+    "devtools/model-http.test.mjs": "644b5baaab82d29f9b5734569e473e4ec52b12b6e2c0228cb95e61f7fd30c698",
+    "devtools/package.json": "56ea1a3e8bdeced275b807d8a758c9f32efe48078a67e89f19273bbafa3d575b",
+    "package.json": "b792145fc2374c0cb48f95e0551e1b9b7fd7d25a3a2035a4712178898bf2c752",
+    "pnpm-lock.yaml": "1344b0828f15710a33d6a76e8ea6b2a34bcfaaf20c77d7c6fe522ac2cac51c8f",
+    "workspace-manifests.edn": "98904129ddec5e148fdc59f4503e5b797b217c2b116625949d2653d9a8df6775"
+  },
+  "dependency": {
+    "owner": "devtools/package.json",
+    "name": "mongodb",
+    "version": "6.21.0",
+    "existingLockedVersionsUnchanged": true,
+    "selectedProjects": [
+      "devtools",
+      "eta-mu/packages/clio"
+    ],
+    "knoxxDependenciesPresent": false,
+    "offlineAttempt": {
+      "exit": 1,
+      "missing": "@mongodb-js/saslprep@1.5.4",
+      "reused": 284
+    },
+    "frozenInstall": {
+      "exit": 0,
+      "reused": 284,
+      "downloaded": 1,
+      "packages": 285,
+      "seconds": 9.8,
+      "ignoredBuildScriptWarning": [
+        "fs-ext-extra-prebuilt",
+        "onnxruntime-node",
+        "protobufjs",
+        "sharp"
+      ]
+    }
+  },
+  "commands": {
+    "red": "FORESIGHT_MODEL_CACHE=<model-cache> node --test --test-name-pattern=\"embedding refuses a real model tensor\" devtools/model-http.test.mjs",
+    "green": "FORESIGHT_MODEL_CACHE=<model-cache> node --test devtools/model-http.test.mjs",
+    "smoke": "FORESIGHT_MODEL_CACHE=<model-cache> node devtools/embedding-smoke.mjs",
+    "manifests": "nbb scripts/manifests.cljs --write && nbb scripts/manifests.cljs --check",
+    "manifestTests": "pnpm exec nbb test/manifests_test.cljs",
+    "lint": "pnpm exec oxlint --deny-warnings devtools/epiphany-integration.mjs devtools/model-http.test.mjs devtools/embedding-server.mjs",
+    "services": "EPIPHANY_CLIO_SOURCE=<verified-clio> FORESIGHT_MODEL_CACHE=<model-cache> FORESIGHT_VERIFICATION_OUTPUT=<owned-output> node devtools/epiphany-integration.mjs"
+  },
+  "behavioralRed": {
+    "failures": "Each real corrupted model output incorrectly returned HTTP 200 instead of 500.",
+    "summary": [
+      "ℹ tests 10",
+      "ℹ pass 0",
+      "ℹ fail 10",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 3253.588034"
+    ]
+  },
+  "fullModelHttp": [
+    "ℹ tests 71",
+    "ℹ pass 71",
+    "ℹ fail 0",
+    "ℹ cancelled 0",
+    "ℹ skipped 0",
+    "ℹ todo 0",
+    "ℹ duration_ms 4732.584039"
+  ],
+  "embeddingSmoke": "PASS pinned offline MiniLM: 384 finite normalized dimensions, semantic ordering, base64, invalid-request refusal",
+  "manifestCheck": "PASS generated manifests",
+  "manifestTests": "Testing manifests-test\n\nRan 7 tests containing 19 assertions.\n0 failures, 0 errors.",
+  "scopedLint": "Found 0 warnings and 0 errors.\nFinished in 23ms on 3 files with 93 rules using 8 threads.",
+  "integration": {
+    "started": "2026-09-12T14:39:35.665Z",
+    "finished": "2026-09-12T14:39:58.757Z",
+    "source": {
+      "head": "02d81135c7e273d5da01757e8b4603cc449fd069",
+      "tree": "4a5d25da32f28a08cb6a1c27392aeb032bb34600",
+      "dirty": false,
+      "files": 458,
+      "sha256": "8174ed2526ecac00dff6bcb2765fbd5cd072d442b0910af0543d831f3ae0750d"
+    },
+    "clio": "6c5af6077d069620583b29a180eb925a0805e94b",
+    "embedding": {
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "dimensions": 384,
+      "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+      "artifact": "sha256:afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1"
+    },
+    "mongoPing": true,
+    "s3ObjectRoundtrip": true,
+    "integration": {
+      "command": [
+        "clojure",
+        "-Sdeps",
+        "{:aliases {:verified-clio {:override-deps {eta-mu/clio {:local/root \"<verified-clio>/packages/clio\"}}}}}",
+        "-M:verified-clio:integration-test"
+      ],
+      "code": 0,
+      "signal": null,
+      "summary": "22 tests, 108 assertions, 0 failures."
+    },
+    "skipped": false
+  },
+  "limits": [
+    "This is scoped provider verification, not the final aggregate root gate.",
+    "Service proof uses frozen Clio 6c5 separately from the declared eta revision used by generation.",
+    "Dependency build-script warning remains visible; package-manager policy was not changed."
+  ]
+}

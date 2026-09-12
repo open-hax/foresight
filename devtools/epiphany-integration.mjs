@@ -5,20 +5,19 @@ import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 import { spawn, execFileSync } from 'node:child_process';
-import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { stripVTControlCharacters } from 'node:util';
 import { setTimeout as delay } from 'node:timers/promises';
 import S3rver from 's3rver';
 import { S3Client, CreateBucketCommand, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { MongoClient } from 'mongodb';
 import { startEmbeddingServer } from './embedding-server.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const repo = path.join(root, 'epiphany');
 const clio = path.resolve(process.env.EPIPHANY_CLIO_SOURCE || path.join(root, 'eta-mu'));
 const output = path.resolve(process.env.FORESIGHT_VERIFICATION_OUTPUT || path.join(root, '.cache/verification/epiphany-integration'));
-const mongoRequire = createRequire(path.join(root, 'knoxx/backend/package.json'));
-const { MongoClient } = mongoRequire('mongodb');
 const owned = await fs.mkdtemp(path.join(os.tmpdir(), 'foresight-epiphany-services-'));
 const children = new Set();
 let mongoClient, s3, s3Client, embeddings, cleaning;
@@ -96,7 +95,7 @@ async function integration(env) {
     await fs.writeFile(path.join(output, 'integration.log'), transcript);
   }
   assert.equal(exit.code, 0, `Integration failed (${exit.code ?? exit.signal}); inspect ${path.join(output, 'integration.log')}`);
-  const plain = transcript.replace(/\x1b\[[0-9;]*m/g, '');
+  const plain = stripVTControlCharacters(transcript);
   assert(!/\bSKIP\b|[1-9]\d*\s+(?:failures|errors|skipped)/i.test(plain), 'Integration output contains skipped or failing tests');
   const summary = plain.match(/\d+ tests, \d+ assertions, 0 failures\./)?.[0];
   assert(summary, 'Missing successful Kaocha result');

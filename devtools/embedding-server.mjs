@@ -5,6 +5,19 @@ import {fileURLToPath} from 'node:url';
 import { pipeline, env } from '@huggingface/transformers';
 import { readModelRequestBody } from './model-request-body.mjs';
 
+/** Validate the native tensor boundary before JSON or Float32 serialization. */
+function validateEmbeddingRows(rows, inputCount) {
+  if (!Array.isArray(rows) || rows.length !== inputCount) throw new RangeError('Unexpected embedding row count');
+  for (const row of rows) {
+    if (!Array.isArray(row) || row.length !== 384) throw new RangeError('Unexpected embedding dimensions');
+    for (const value of row) {
+      if (typeof value !== 'number' || !Number.isFinite(value) || !Number.isFinite(Math.fround(value))) {
+        throw new RangeError('Embedding components must be finite Float32 numbers');
+      }
+    }
+  }
+}
+
 /** Start an offline loopback service producing normalized 384-dimensional MiniLM embeddings. */
 export async function startEmbeddingServer({ port = 0, cacheDir = process.env.FORESIGHT_MODEL_CACHE || fileURLToPath(new URL('../.cache/models/', import.meta.url)), model = 'Xenova/all-MiniLM-L6-v2', requestTimeoutMs = 10000 } = {}) {
   if (model !== 'Xenova/all-MiniLM-L6-v2') throw new RangeError('This provider supports only the pinned MiniLM model');
@@ -37,6 +50,7 @@ export async function startEmbeddingServer({ port = 0, cacheDir = process.env.FO
       if (body.encoding_format !== undefined && !['float', 'base64'].includes(body.encoding_format)) return reply(400, { error: 'invalid_encoding_format' });
       const output = await extractor(inputs, { pooling: 'mean', normalize: true });
       const embeddings = output.tolist();
+      validateEmbeddingRows(embeddings, inputs.length);
       if (request.url === '/api/embed') return reply(200, { model, embeddings });
       const encode = vector => body.encoding_format === 'base64' ? Buffer.from(new Float32Array(vector).buffer).toString('base64') : vector;
       return reply(200, { object: 'list', model, data: embeddings.map((vector, index) => ({ object: 'embedding', index, embedding: encode(vector) })) });

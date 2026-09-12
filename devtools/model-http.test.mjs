@@ -4,7 +4,7 @@ import http from 'node:http';
 import net from 'node:net';
 import { setTimeout as delay } from 'node:timers/promises';
 import { after, before, mock, test } from 'node:test';
-import { PreTrainedTokenizer } from '@huggingface/transformers';
+import { PreTrainedTokenizer, Tensor } from '@huggingface/transformers';
 import { startEmbeddingServer } from './embedding-server.mjs';
 import { LOCAL_GENERATION_MODEL, startGenerationServer } from './generation-server.mjs';
 import { readModelRequestBody } from './model-request-body.mjs';
@@ -110,6 +110,40 @@ test('embedding model omission and exact model name select the same real vector'
   };
   assert.deepEqual(await vector({}), await vector({ model: embedding.model }));
 });
+
+for (const [description, route, encoding, corrupt] of [
+  ['missing row', '/v1/embeddings', 'float', rows => rows.slice(1)],
+  ['extra row', '/embeddings', 'float', rows => [...rows, rows[0]]],
+  ['short vector', '/api/embed', 'float', rows => [rows[0].slice(1), rows[1]]],
+  ['long vector', '/v1/embeddings', 'base64', rows => [[...rows[0], 0], rows[1]]],
+  ['NaN component', '/api/embed', 'float', rows => { rows[0][0] = NaN; return rows; }],
+  ['infinite component', '/embeddings', 'float', rows => { rows[0][0] = Infinity; return rows; }],
+  ['negative infinite component', '/v1/embeddings', 'base64', rows => { rows[0][0] = -Infinity; return rows; }],
+  ['nonnumeric component', '/api/embed', 'float', rows => { rows[0][0] = '0'; return rows; }],
+  ['sparse vector', '/embeddings', 'base64', rows => { delete rows[0][0]; return rows; }],
+  ['Float32 overflow', '/v1/embeddings', 'base64', rows => { rows[0][0] = Number.MAX_VALUE; return rows; }],
+]) {
+  test(`embedding refuses a real model tensor with ${description}`, async () => {
+    const original = Tensor.prototype.tolist;
+    let corrupted = 0;
+    // Keep tokenization and inference real; alter only the final pooled tensor conversion.
+    const injected = mock.method(Tensor.prototype, 'tolist', function () {
+      const rows = original.call(this);
+      if (this.dims.length !== 2 || this.dims[0] !== 2 || this.dims[1] !== 384) return rows;
+      corrupted++;
+      return corrupt(rows);
+    });
+    try {
+      const response = await fetch(new URL(route, embedding.baseUrl), {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ input: ['A small red bird.', 'The database stores documents.'], encoding_format: encoding }),
+      });
+      assert.equal(corrupted, 1, 'The actual final MiniLM tensor conversion was exercised once');
+      assert.equal(response.status, 500, 'Malformed model output must be an internal provider refusal');
+      assert.deepEqual(await response.json(), { error: 'embedding_failed' });
+    } finally { injected.mock.restore(); }
+  });
+}
 
 for (const [description, decode] of [
   ['decoder exceptions', () => { throw new Error('Injected decoder failure'); }],
