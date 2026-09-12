@@ -148,3 +148,11 @@ Hosted results are separate from sandbox execution and do not replace the reques
 - Foresight 30b1 has successful Muse compilation, deterministic evidence and MiMo review jobs, but the [OpenCode evidence job](https://github.com/open-hax/foresight/actions/runs/34687855041/job/103538471117) failed. The current head is not merge-ready.
 - Knoxx 377 has failures in the [backend/frontend workflow](https://github.com/open-hax/knoxx/actions/runs/34688477820/job/103539519694), the [bundle job](https://github.com/open-hax/knoxx/actions/runs/34688477841/job/103539519837), and review resolution. Ingestion and deployment-boundary jobs passed. Draft evidence jobs were skipped; a green wrapper does not mean reviews ran.
 - The final no-issues review and merge requirement is not satisfied for either PR. Do not treat old-head approvals, skipped checks, review quotas or unavailable execution as clearance.
+
+## Final run-provider rescue and connection check
+
+The complete 26-path run-provider reconstruction is now durable at [ae5799aa](https://github.com/open-hax/knoxx/commit/ae5799aaf39ff5453926f611977847fe936f6ac7), branch rescue/run-event-providers-unverified-20260912, tree bf9c02c9b5b1010210669a066326d9755d88228d. The additional docs/verification/run-event-recovery-manifest.json records every path and its reconstruction provenance. No path is omitted, but all 26 remain reconstructed and unverified because the original 8550 hash manifest was lost. Historical 19/131 and native Mongo 1/13 results do not verify these new bytes. Shared turn/run_state assembly remains separate and must be recovered/reconciled before integration.
+
+A final connection check after remote rescues again ran only pwd from / with /bin/bash and login disabled. It returned 409 environment_offline before starting any process. The executor has not reconnected. No further runtime or browser success is claimed.
+
+Author self-review / hold comments are posted on [Foresight PR91](https://github.com/open-hax/foresight/pull/91#issuecomment-5645415999) and [Knoxx PR305](https://github.com/open-hax/knoxx/pull/305#issuecomment-5645417807). This recovery documentation is isolated from those PR heads and does not make them merge-ready.
