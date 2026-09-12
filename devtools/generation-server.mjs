@@ -99,6 +99,8 @@ export async function startGenerationServer({
     session_options: { intraOpNumThreads: 2, interOpNumThreads: 1 },
   });
   let active = false;
+  let activeInference, activeStoppingCriteria, closing;
+  let shuttingDown = false;
   const server = http.createServer(async (request, response) => {
     const reply = (status, body) => {
       if (response.destroyed || response.writableEnded) return;
@@ -108,6 +110,7 @@ export async function startGenerationServer({
     let timer;
     let stoppingCriteria;
     let ownsInference = false;
+    let settleInference;
     let timedOut = false;
     let wire;
     try {
@@ -116,10 +119,13 @@ export async function startGenerationServer({
       if (request.method !== 'POST' || !['/v1/chat/completions', '/chat/completions'].includes(request.url)) return reply(404, { error: 'route_not_found' });
       const bytes = await readModelRequestBody(request, response, requestTimeoutMs);
       if (bytes === null) return;
+      if (shuttingDown) return reply(503, { error: 'generation_closing' });
       const input = checkedRequest(JSON.parse(bytes.toString('utf8')), model, maxNewTokens);
       if (active) return reply(429, { error: 'generation_busy' });
       active = ownsInference = true;
       stoppingCriteria = new InterruptableStoppingCriteria();
+      activeStoppingCriteria = stoppingCriteria;
+      activeInference = new Promise(resolve => { settleInference = resolve; });
       timer = setTimeout(() => { timedOut = true; stoppingCriteria.interrupt(); }, timeoutMs);
       response.once('close', () => { if (!response.writableEnded) stoppingCriteria.interrupt(); });
       const metadata = { id: `chatcmpl-${randomUUID()}`, created: Math.floor(Date.now() / 1000), model };
@@ -166,7 +172,11 @@ export async function startGenerationServer({
       });
     } finally {
       clearTimeout(timer);
-      if (ownsInference) active = false;
+      if (ownsInference) {
+        active = false;
+        activeStoppingCriteria = activeInference = null;
+        settleInference?.();
+      }
     }
   });
   try {
@@ -177,7 +187,20 @@ export async function startGenerationServer({
   }
   return {
     server, model, baseUrl: `http://127.0.0.1:${server.address().port}/v1`,
-    async close() { await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve())); await generator.dispose(); },
+    close() {
+      if (closing) return closing;
+      shuttingDown = true;
+      activeStoppingCriteria?.interrupt();
+      const inferenceSettled = activeInference;
+      closing = (async () => {
+        const networkClosed = new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+        // A disconnected socket can close before its request's native model
+        // work settles. Both boundaries must finish before disposing ONNX.
+        await Promise.all([networkClosed, inferenceSettled]);
+        await generator.dispose();
+      })();
+      return closing;
+    },
   };
 }
 
