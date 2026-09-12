@@ -16,7 +16,7 @@
   "inventory" "nbb scripts/workspace.clj inventory"
   "report" "nbb scripts/workspace.clj report"
   "build" "pnpm manifests:check && shadow-cljs release local"
-  "test" "pnpm manifests:check && nbb test/project_test.cljs && nbb test/workspace_test.cljs && nbb test/manifests_test.cljs && nbb test/evidence_test.cljs && nbb test/evidence_cli_test.cljs && nbb test/lineage_test.cljs && node --test test/reference/repository-census.test.mjs && shadow-cljs compile test && node dist/local-test.cjs"
+  "test" "pnpm manifests:check && nbb test/project_test.cljs && nbb test/workspace_test.cljs && nbb test/manifests_test.cljs && nbb test/evidence_test.cljs && nbb test/evidence_cli_test.cljs && nbb test/lineage_test.cljs && node --test test/reference/repository-census.test.mjs devtools/node-test-transport.test.cjs devtools/epiphany-inputs.test.mjs && shadow-cljs compile test && node dist/local-test.cjs"
   "lint" "pnpm manifests:check && clj-kondo --lint src scripts test && oxlint --deny-warnings devtools"
   "modules:install" "nbb scripts/workspace.clj install"
   "modules:build" "nbb scripts/workspace.clj build"

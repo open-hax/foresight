@@ -105,6 +105,7 @@ async function integration(env) {
 try {
   await fs.mkdir(output, { recursive: true });
   const before = await sourceSnapshot();
+  assert.equal(before.dirty, false, 'Selected Epiphany checkout must be immutable and clean');
   const clioRevision = git(clio, 'rev-parse', 'HEAD');
   assert.equal(git(clio, 'status', '--porcelain'), '', 'Selected Clio checkout must be immutable and clean');
   const port = await freePort();

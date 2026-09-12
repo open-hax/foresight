@@ -18,8 +18,11 @@ Redirects therefore cannot escape through an unmatched fetch fallback. Only the
 blocked host and port are logged for fixture diagnosis; no request body,
 credential, header or response body is logged by the adapter.
 
-A refused attempt makes the process fail even if application code catches it.
-Nine native regression tests prove owned HTTP/fetch operation, refusal through
+A refused attempt immediately terminates the worker with status 1. The preload
+captures Node's native `process.reallyExit` boundary before running test code;
+mutable exit listeners and catch blocks cannot erase the refusal. Diagnostic
+formatting and writing also occur inside the termination-protected block.
+Thirteen native regression tests prove owned HTTP/fetch operation, refusal through
 TCP/TLS/DNS/UDP and redirects, immediate closure revocation, IPv4/IPv6 separation,
 and propagation into real Node test child processes. An early peer review found
 the address-family, resolver-instance and exported UDP-constructor gaps; those
@@ -41,14 +44,29 @@ must not be converted to skipped tests or silently mocked success.
 
 Codex's subsequent review found that assigning `process.exitCode` from the early
 exit listener could be undone by a later listener. Two real child-process
-regressions reproduced a successful exit after a caught refusal. The preload now
-captures native `process.exit` and ends the exit event with status 1 before later
+regressions reproduced a successful exit after a caught refusal. That successor
+captured native `process.exit` and ended the exit event with status 1 before later
 listeners execute. A subsequent Codex review found that a prepended listener
 could call `process.exit(0)` before that listener ran. Three additional real child
-cases reproduced two failures, including the named ESM `exit` export. The preload
-now also protects explicit exits and synchronizes the builtin exports. The
-nine-test proof covers both listener orders, both reset forms, explicit success
-exit, and inherited Node test children; it exits zero with no skips.
+cases reproduced two failures, including the named ESM `exit` export. The next
+successor also protected explicit exits and synchronized the builtin exports. The
+then-nine-test proof covered both listener orders, both reset forms, explicit
+success exit, and inherited Node test children. That was a historical checkpoint.
+
+Current Codex review found that removing all exit listeners still permitted
+success. Three actual child regressions reproduced that defect. Immediate native
+termination repairs it. Independent peer review then reproduced a fourth failure:
+an endpoint containing a BigInt made diagnostic serialization throw before the
+termination block. All diagnostic work is now protected by `finally`; the refusal
+code is synchronously written before optional endpoint formatting. The complete
+proof passes 13 tests, zero failures and zero skips on pinned Node 24.20.0.
+
+Immediate termination bypasses worker `finally` and exit handlers. Before running
+a guarded suite, its parent must create and pass a dedicated `TMPDIR`, wait for
+the worker's confirmed exit, then remove that exact directory. Worker-owned
+teardown alone is insufficient. This also means buffered worker output can be
+lost; the refusal diagnostic is written synchronously. The standalone transport
+proof owns its child fixtures in the unguarded parent and removes them there.
 
 A fresh guarded Proxx suite ran 651 tests: 647 passed, two test files failed, and
 two existing cases skipped. Fourteen refused attempts exposed a LAN Ollama

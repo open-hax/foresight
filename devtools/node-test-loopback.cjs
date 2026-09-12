@@ -1,18 +1,16 @@
-/** Preload for audited Node test files; a caught unexpected attempt still fails the process. */
+/** Preload for audited Node test files; an unexpected attempt immediately fails the process. */
 'use strict';
 
 const {install} = require('./node-test-transport.cjs');
-const exit = process.exit.bind(process);
-let blocked = 0;
-// A prepended exit listener can execute before ours; protect explicit exits too.
-// install synchronizes this replacement into Node's named ESM builtin exports.
-process.exit = code => exit(blocked ? 1 : code);
+const {writeSync} = require('node:fs');
+// Node's native termination boundary bypasses mutable exit listeners entirely.
+// This skips worker cleanup: callers must own and clean up worker temp directories.
+const terminate = process.reallyExit.bind(process);
 install({onBlocked(error) {
-  blocked++;
-  const endpoint = error.endpoint ? ` ${JSON.stringify(error.endpoint)}` : '';
-  process.stderr.write(`${error.code}: ${error.message}${endpoint}\n`);
+  try {
+    writeSync(2, `${error.code}: ${error.message}\n`);
+    if (error.endpoint) writeSync(2, `Endpoint: ${JSON.stringify(error.endpoint)}\n`);
+  } finally {
+    terminate(1);
+  }
 }});
-process.on('exit', () => {
-  // Native exit ends this event immediately, before later listeners can reset it.
-  if (blocked) exit(1);
-});

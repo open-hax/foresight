@@ -22,7 +22,7 @@
   "src/foresight/project.cljc"
   "d23cb51ebec03c8ae1b75f8dd02208cd13544b19479ea78a9d2cc1f9319a17c5",
   "workspace.edn"
-  "2430a21fa4f243770343484c68241e465ab8d22cd3678f3045c1f6971948c1cd"},
+  "cbb3878c00fa9e0875ab9c68fad6cca8d4530a85aaec22e855288e096ebe34c9"},
  :local-libraries
  {io.github.open-hax/axxium "eta-mu/packages/axxium",
   io.github.open-hax/clio "eta-mu/packages/clio"},

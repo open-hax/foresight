@@ -82,6 +82,8 @@ for (const finish of [
   'process.prependListener("exit", () => { process.exit(0); });',
   'process.prependListener("exit", () => { process.exitCode = 0; });',
   'import("node:process").then(({exit}) => { process.prependListener("exit", () => exit(0)); });',
+  'process.removeAllListeners("exit");',
+  'process.removeAllListeners("exit"); process.exitCode = 0;',
 ]) {
   test(`caught refusal stays fatal with later success exit: ${finish}`, () => {
     const code = 'try { require("node:net").connect({host:"external.fixture.invalid",port:443}); } catch {} ' + finish;
@@ -92,6 +94,26 @@ for (const finish of [
     assert.match(result.stderr, /ERR_TEST_TRANSPORT_NOT_OWNED/);
   });
 }
+
+test('preloaded refusal terminates before caught-error cleanup can erase the audit outcome', () => {
+  const code = 'process.removeAllListeners("exit"); try { require("node:net").connect({host:"external.fixture.invalid",port:443}); } catch {} require("node:fs").writeSync(1,"CONTINUED_AFTER_REFUSAL");';
+  const result = spawnSync(process.execPath, ['--require', path.join(__dirname, 'node-test-loopback.cjs'), '-e', code],
+    {encoding:'utf8', env:{PATH:process.env.PATH}});
+  assert.equal(result.status, 1);
+  assert.equal(result.signal, null);
+  assert.match(result.stderr, /ERR_TEST_TRANSPORT_NOT_OWNED/);
+  assert.doesNotMatch(result.stdout, /CONTINUED_AFTER_REFUSAL/);
+});
+
+test('unserializable endpoint diagnostics cannot bypass native refusal termination', () => {
+  const code = 'try { require("node:net").connect({host:"external.fixture.invalid",port:443n}); } catch {} require("node:fs").writeSync(1,"CONTINUED_AFTER_REFUSAL");';
+  const result = spawnSync(process.execPath, ['--require', path.join(__dirname, 'node-test-loopback.cjs'), '-e', code],
+    {encoding:'utf8', env:{PATH:process.env.PATH}});
+  assert.equal(result.status, 1);
+  assert.equal(result.signal, null);
+  assert.match(result.stderr, /ERR_TEST_TRANSPORT_NOT_OWNED/);
+  assert.doesNotMatch(result.stdout, /CONTINUED_AFTER_REFUSAL/);
+});
 
 test('Node test children inherit the preload and cannot swallow an unmatched fallback', async () => {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'foresight-transport-proof-'));

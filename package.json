@@ -31,7 +31,7 @@
     "modules:lint": "nbb scripts/workspace.clj lint",
     "modules:test": "nbb scripts/workspace.clj test",
     "report": "nbb scripts/workspace.clj report",
-    "test": "pnpm manifests:check && nbb test/project_test.cljs && nbb test/workspace_test.cljs && nbb test/manifests_test.cljs && nbb test/evidence_test.cljs && nbb test/evidence_cli_test.cljs && nbb test/lineage_test.cljs && node --test test/reference/repository-census.test.mjs && shadow-cljs compile test && node dist/local-test.cjs",
+    "test": "pnpm manifests:check && nbb test/project_test.cljs && nbb test/workspace_test.cljs && nbb test/manifests_test.cljs && nbb test/evidence_test.cljs && nbb test/evidence_cli_test.cljs && nbb test/lineage_test.cljs && node --test test/reference/repository-census.test.mjs devtools/node-test-transport.test.cjs devtools/epiphany-inputs.test.mjs && shadow-cljs compile test && node dist/local-test.cjs",
     "test:embeddings": "pnpm --filter @foresight/devtools test:embeddings",
     "test:generation": "pnpm --filter @foresight/devtools test:generation",
     "test:model-http": "pnpm --filter @foresight/devtools test:model-http",
