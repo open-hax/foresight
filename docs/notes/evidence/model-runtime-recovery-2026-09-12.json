@@ -1,0 +1,286 @@
+{
+  "date": "2026-09-12T11:27:14.554Z",
+  "source": "30b1d321a0184862eaf5f1e41cb25aee8c7ba18a",
+  "host": "same Linux sandbox; Node 24.20.0 CPU",
+  "transformers": "3.8.1",
+  "files": [
+    {
+      "path": "HuggingFaceTB/SmolLM2-135M-Instruct/12fd25f77366fa6b3b4b768ec3050bf629380bac/config.json",
+      "bytes": 861,
+      "sha256": "8eb740e8bbe4cff95ea7b4588d17a2432deb16e8075bc5828ff7ba9be94d982a"
+    },
+    {
+      "path": "HuggingFaceTB/SmolLM2-135M-Instruct/12fd25f77366fa6b3b4b768ec3050bf629380bac/generation_config.json",
+      "bytes": 132,
+      "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+    },
+    {
+      "path": "HuggingFaceTB/SmolLM2-135M-Instruct/12fd25f77366fa6b3b4b768ec3050bf629380bac/onnx/model_q4.onnx",
+      "bytes": 182068553,
+      "sha256": "933577110303a2964096d19b6f15d3b4639bef7f99481ac0b61d9f3ad72f392a"
+    },
+    {
+      "path": "HuggingFaceTB/SmolLM2-135M-Instruct/12fd25f77366fa6b3b4b768ec3050bf629380bac/tokenizer.json",
+      "bytes": 2104556,
+      "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+    },
+    {
+      "path": "HuggingFaceTB/SmolLM2-135M-Instruct/12fd25f77366fa6b3b4b768ec3050bf629380bac/tokenizer_config.json",
+      "bytes": 3764,
+      "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+    },
+    {
+      "path": "Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/config.json",
+      "bytes": 650,
+      "sha256": "7135149f7cffa1a573466c6e4d8423ed73b62fd2332c575bf738a0d033f70df7"
+    },
+    {
+      "path": "Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/onnx/model_quantized.onnx",
+      "bytes": 22972370,
+      "sha256": "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1"
+    },
+    {
+      "path": "Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer.json",
+      "bytes": 711661,
+      "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0"
+    },
+    {
+      "path": "Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer_config.json",
+      "bytes": 366,
+      "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3"
+    },
+    {
+      "path": "onnx-community/Qwen2.5-0.5B-Instruct/cc5cc01a65cc3ff17bdb73a7de33d879f62599b0/config.json",
+      "bytes": 678,
+      "sha256": "777e01f0fbb3346eb229cb6fb278ed6533c1e4dcb9ebf4bed0f6e94ef17fa1b5"
+    },
+    {
+      "path": "onnx-community/Qwen2.5-0.5B-Instruct/cc5cc01a65cc3ff17bdb73a7de33d879f62599b0/generation_config.json",
+      "bytes": 242,
+      "sha256": "f7e7ce458658b2d40d9eb213b91b77a8bf698845ab89360976722d7ac46928a3"
+    },
+    {
+      "path": "onnx-community/Qwen2.5-0.5B-Instruct/cc5cc01a65cc3ff17bdb73a7de33d879f62599b0/onnx/model_q4.onnx",
+      "bytes": 786156820,
+      "sha256": "09235a3b1c135cd04ef570e5053b5c079e028078a2cc5f76ba6a251e91bf3296"
+    },
+    {
+      "path": "onnx-community/Qwen2.5-0.5B-Instruct/cc5cc01a65cc3ff17bdb73a7de33d879f62599b0/tokenizer.json",
+      "bytes": 7031673,
+      "sha256": "a8506e7111b80c6d8635951a02eab0f4e1a8e4e5772da83846579e97b16f61bf"
+    },
+    {
+      "path": "onnx-community/Qwen2.5-0.5B-Instruct/cc5cc01a65cc3ff17bdb73a7de33d879f62599b0/tokenizer_config.json",
+      "bytes": 7306,
+      "sha256": "7e88129d9769a0b14b1587a7d5e829fe93ac0e1511636471fdfc0811951418e6"
+    }
+  ],
+  "results": {
+    "http": {
+      "tests": 61,
+      "passed": 61,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 4.972566943
+    },
+    "qwen": {
+      "status": "pass",
+      "writing": {
+        "id": "chatcmpl-a87ed583-6140-4a4b-be9d-124bf6dff3d1",
+        "object": "chat.completion",
+        "created": 1789212358,
+        "model": "onnx-community/Qwen2.5-0.5B-Instruct",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "A wiki is a platform that allows users to create and edit articles on various topics, including news, information, and knowledge, all organized in a hierarchical structure for easy access and search."
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 39,
+          "completion_tokens": 38,
+          "total_tokens": 77
+        },
+        "local_generation": {
+          "provider": "transformers-js",
+          "revision": "cc5cc01a65cc3ff17bdb73a7de33d879f62599b0",
+          "dtype": "q4",
+          "device": "cpu",
+          "offline": true,
+          "max_new_tokens": 128,
+          "structured_output": "none"
+        }
+      },
+      "translation": {
+        "id": "chatcmpl-af608b3e-b6ef-485e-aa89-d3b5b4e9321f",
+        "object": "chat.completion",
+        "created": 1789212361,
+        "model": "onnx-community/Qwen2.5-0.5B-Instruct",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"translated_text\":\"Hola, mundo.\"}"
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 45,
+          "completion_tokens": 5,
+          "total_tokens": 50
+        },
+        "local_generation": {
+          "provider": "transformers-js",
+          "revision": "cc5cc01a65cc3ff17bdb73a7de33d879f62599b0",
+          "dtype": "q4",
+          "device": "cpu",
+          "offline": true,
+          "max_new_tokens": 128,
+          "structured_output": "transport_wrapped_generated_text"
+        }
+      },
+      "truncated": {
+        "id": "chatcmpl-b29c9e9d-9db3-4b5e-89f1-840f1510177b",
+        "object": "chat.completion",
+        "created": 1789212362,
+        "model": "onnx-community/Qwen2.5-0.5B-Instruct",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "**"
+            },
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 40,
+          "completion_tokens": 1,
+          "total_tokens": 41
+        },
+        "local_generation": {
+          "provider": "transformers-js",
+          "revision": "cc5cc01a65cc3ff17bdb73a7de33d879f62599b0",
+          "dtype": "q4",
+          "device": "cpu",
+          "offline": true,
+          "max_new_tokens": 1,
+          "structured_output": "none"
+        }
+      },
+      "rejected_tools": {
+        "error": "unsupported_tools_or_stream"
+      },
+      "rejected_model": {
+        "error": "unknown_model"
+      }
+    },
+    "smol": {
+      "status": "pass",
+      "writing": {
+        "id": "chatcmpl-ace99f3b-d636-4ca5-ae50-470fbcef727f",
+        "object": "chat.completion",
+        "created": 1789212108,
+        "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "A wiki is a collaborative, open-source resource that allows users to share, edit, and organize information in a structured and concise manner."
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 40,
+          "completion_tokens": 29,
+          "total_tokens": 69
+        },
+        "local_generation": {
+          "provider": "transformers-js",
+          "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+          "dtype": "q4",
+          "device": "cpu",
+          "offline": true,
+          "max_new_tokens": 128,
+          "structured_output": "none"
+        }
+      },
+      "translation": {
+        "id": "chatcmpl-c06f7975-09dc-4f88-aadd-55c6e27ada31",
+        "object": "chat.completion",
+        "created": 1789212109,
+        "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"translated_text\":\"Hola, español.\"}"
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 49,
+          "completion_tokens": 9,
+          "total_tokens": 58
+        },
+        "local_generation": {
+          "provider": "transformers-js",
+          "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+          "dtype": "q4",
+          "device": "cpu",
+          "offline": true,
+          "max_new_tokens": 128,
+          "structured_output": "transport_wrapped_generated_text"
+        }
+      },
+      "truncated": {
+        "id": "chatcmpl-9ba17dfe-9646-445c-b416-e9bdb6d19d0b",
+        "object": "chat.completion",
+        "created": 1789212109,
+        "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "The"
+            },
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 42,
+          "completion_tokens": 1,
+          "total_tokens": 43
+        },
+        "local_generation": {
+          "provider": "transformers-js",
+          "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+          "dtype": "q4",
+          "device": "cpu",
+          "offline": true,
+          "max_new_tokens": 1,
+          "structured_output": "none"
+        }
+      },
+      "rejected_tools": {
+        "error": "unsupported_tools_or_stream"
+      },
+      "rejected_model": {
+        "error": "unknown_model"
+      }
+    },
+    "embeddings": "PASS pinned offline MiniLM: 384 finite normalized dimensions, semantic ordering, base64, invalid-request refusal"
+  }
+}
