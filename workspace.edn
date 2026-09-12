@@ -7,6 +7,9 @@
  {"nbb" {:version "1.5.212"
           :reason "Root orchestration uses the recovered Node 24-compatible NBB; child commands retain their own declared version."}}
  :clio "eta-mu/packages/clio"
+ :local-libraries
+ {io.github.open-hax/clio "eta-mu/packages/clio"
+  io.github.open-hax/axxium "eta-mu/packages/axxium"}
  :root-scripts
  {"manifests" "nbb scripts/manifests.cljs --write"
   "manifests:check" "nbb scripts/manifests.cljs --check"

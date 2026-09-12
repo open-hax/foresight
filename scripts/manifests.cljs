@@ -22,10 +22,15 @@
     (vector? value) (mapv stable value)
     (sequential? value) (map stable value)
     :else value))
-(defn edn-text [value] (with-out-str (pprint/pprint (stable value))))
+(defn edn-text [value]
+  (str/replace (with-out-str (pprint/pprint (stable value))) #"[\t ]+\n" "\n"))
 (defn json-text [value] (str (js/JSON.stringify (clj->js (stable value)) nil 2) "\n"))
 
-(defn tracked-manifests [source]
+(defn source-owner [sources directory]
+  (first (filter #(or (= directory (:source/path %))
+                      (str/starts-with? directory (str (:source/path %) "/"))) sources)))
+
+(defn verify-consumed-source! [source directories]
   (let [relative (:source/path source)
         cwd (:absolute (workspace/inspect-source-path! root relative))
         _ (when-not (workspace/plain-path-stat (path/join cwd ".git"))
@@ -33,15 +38,18 @@
         ownership (workspace/run-captured cwd ["git" "rev-parse" "--show-toplevel"])
         _ (when-not (and (zero? (:exit ownership)) (= cwd (:stdout ownership)))
             (throw (ex-info "Child Git ownership does not match its declared path" {:path relative :result ownership})))
-        result (workspace/run-captured cwd ["git" "ls-files" "--" "package.json" "**/package.json"])]
-    (when-not (zero? (:exit result))
-      (throw (ex-info "Cannot inventory child manifests" {:path relative :result result})))
-    (->> (str/split-lines (:stdout result))
-         (remove str/blank?)
-         (map #(str relative "/" %))
-         ;; Git lists symlinks as files; do not follow one across ownership boundaries.
-         (filter #(workspace/plain-file? (path/join root %)))
-         sort vec)))
+        recorded (workspace/run-captured root ["git" "ls-files" "--stage" "--" relative])
+        pin (second (re-matches #"160000 ([0-9a-f]{40}) 0\t[^\n]+" (:stdout recorded)))
+        current (workspace/run-captured cwd ["git" "rev-parse" "HEAD"])
+        _ (when-not (and (zero? (:exit recorded)) pin (zero? (:exit current)) (= pin (:stdout current)))
+            (throw (ex-info "Consumed child revision differs from the root gitlink"
+                            {:path relative :recorded pin :actual (:stdout current)})))
+        package-paths (mapv #(path/relative cwd (path/join root %)) directories)
+        status (workspace/run-captured cwd (into ["git" "status" "--porcelain=v1" "--untracked-files=all" "--"] package-paths))]
+    (when-not (and (zero? (:exit status)) (str/blank? (:stdout status)))
+      (throw (ex-info "Consumed child package has uncommitted source changes"
+                      {:path relative :packages directories :status (:stdout status)})))
+    {:source/path relative :git/sha pin :packages (vec (sort directories))}))
 
 (defn package-input [relative]
   {:path relative :sha256 (digest (read-text relative))
@@ -68,7 +76,7 @@
        (assoc result dependency (or (:version override) (first versions)))))
    (sorted-map) (group-by :name declarations)))
 
-(defn outputs [policy packages inputs clio-deps clio-nbb]
+(defn outputs [policy packages inputs clio-deps clio-nbb revisions]
   (let [selected-paths (set (map #(str % "/package.json") (:node-projects policy)))
         selected (filter #(contains? selected-paths (:path %)) packages)
         _ (when-not (= selected-paths (set (map :path selected)))
@@ -83,22 +91,18 @@
                         {:name dependency :version version :path "workspace.edn"}))
         resolved (resolve-dependencies declarations (:dependency-overrides policy))
         clio (:clio policy)
+        local-libraries (into {} (map (fn [[lib directory]] [lib {:local/root directory}]))
+                              (:local-libraries policy))
         source-paths ["src" (str clio "/src")]
-        deps-aliases (into {}
-                           (keep (fn [source]
-                                   (let [p (:source/path source)]
-                                     (when (and (:source/actionable? source)
-                                                (workspace/plain-file? (path/join root p "deps.edn")))
-                                       [(keyword "module" p)
-                                        {:extra-deps {(symbol "foresight.module" p) {:local/root p}}}]))))
-                           (project/submodule-sources))
         metadata {:workspace/version 1 :node-projects (:node-projects policy)
                   :inputs inputs
+                  :source-revisions revisions
                   :packages (mapv (fn [p] (merge (select-keys p [:path :sha256])
                                                 {:name (get-in p [:manifest "name"])
                                                  :package-manager (get-in p [:manifest "packageManager"])})) packages)
                   :duplicate-package-names (duplicate-names packages)
                   :selected-dependency-declarations declarations
+                  :local-libraries (:local-libraries policy)
                   :dependency-overrides (:dependency-overrides policy)}]
     {"package.json" (json-text {"name" "@open-hax/foresight-workspace" "version" "0.0.0"
                                 "private" true "packageManager" (:package-manager policy)
@@ -106,7 +110,8 @@
      "pnpm-workspace.yaml" (str "# Generated by scripts/manifests.cljs; edit workspace.edn.\npackages:\n"
                                 (apply str (map #(str "  - " (pr-str %) "\n") (:node-projects policy))))
      "deps.edn" (edn-text {:paths ["src"] :deps (:deps clio-deps)
-                            :aliases (assoc deps-aliases :local {:extra-deps {'foresight/clio {:local/root clio}}})})
+                            :aliases {:local {:extra-deps local-libraries
+                                              :override-deps local-libraries}}})
      "nbb.edn" (edn-text {:paths (into ["scripts" "test"] source-paths) :deps (:deps clio-nbb)})
      "shadow-cljs.edn" (edn-text {:source-paths (conj source-paths "test")
                                   :dependencies (mapv (fn [[lib coordinate]] [lib (:mvn/version coordinate)])
@@ -120,17 +125,38 @@
 (defn generate []
   (let [policy (read-edn "workspace.edn")
         sources (filter :source/actionable? (project/submodule-sources))
-        paths (vec (sort (conj (vec (mapcat tracked-manifests sources)) "devtools/package.json")))
-        child-deps (keep (fn [source]
-                          (let [p (str (:source/path source) "/deps.edn")]
-                            (when (workspace/plain-file? (path/join root p)) p))) sources)
+        directories (sort (set (concat (:node-projects policy) (vals (:local-libraries policy)) [(:clio policy)])))
+        _ (doseq [directory directories]
+            (workspace/inspect-source-path! root directory)
+            (when-not (or (= directory "devtools") (source-owner sources directory))
+              (throw (ex-info "Composition input is not an actionable child package or root devtools" {:path directory}))))
+        revisions (->> directories
+                       (group-by #(source-owner sources %))
+                       (keep (fn [[source selected]] (when source (verify-consumed-source! source selected))))
+                       (sort-by :source/path) vec)
+        paths (mapv (fn [directory]
+                      (let [file (str directory "/package.json")]
+                        (when-not (workspace/plain-file? (path/join root file))
+                          (throw (ex-info "Selected Node package requires package.json" {:path directory})))
+                        file))
+                    (sort (:node-projects policy)))
+        local-deps (mapv (fn [[lib directory]]
+                          (when-not (and (symbol? lib) (source-owner sources directory))
+                            (throw (ex-info "Local library must belong to an actionable child" {:library lib :path directory})))
+                          (workspace/inspect-source-path! root directory)
+                          (let [file (str directory "/deps.edn")]
+                            (when-not (workspace/plain-file? (path/join root file))
+                              (throw (ex-info "Local library requires deps.edn" {:library lib :path directory})))
+                            file))
+                        (:local-libraries policy))
         input-paths (concat [".gitmodules" "workspace.edn" "scripts/manifests.cljs" "src/foresight/project.cljc"]
-                            paths child-deps
+                            paths
+                            local-deps
                             [(str (:clio policy) "/deps.edn") (str (:clio policy) "/nbb.edn")])
         inputs (into (sorted-map) (map (fn [p] [p (digest (read-text p))])) input-paths)]
     (outputs policy (mapv package-input paths) inputs
              (read-edn (str (:clio policy) "/deps.edn"))
-             (read-edn (str (:clio policy) "/nbb.edn")))))
+             (read-edn (str (:clio policy) "/nbb.edn")) revisions)))
 
 (defn drift [generated]
   (->> generated

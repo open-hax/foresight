@@ -1,22 +1,13 @@
 {:aliases
  {:local
-  {:extra-deps {foresight/clio {:local/root "eta-mu/packages/clio"}}},
-  :module/Truth
-  {:extra-deps {foresight.module/Truth {:local/root "Truth"}}},
-  :module/calliope
-  {:extra-deps {foresight.module/calliope {:local/root "calliope"}}},
-  :module/epiphany
-  {:extra-deps {foresight.module/epiphany {:local/root "epiphany"}}},
-  :module/eta-mu
-  {:extra-deps {foresight.module/eta-mu {:local/root "eta-mu"}}},
-  :module/katamorph
-  {:extra-deps {foresight.module/katamorph {:local/root "katamorph"}}},
-  :module/muse
-  {:extra-deps {foresight.module/muse {:local/root "muse"}}},
-  :module/shx
-  {:extra-deps {foresight.module/shx {:local/root "shx"}}}},
+  {:extra-deps
+   {io.github.open-hax/axxium {:local/root "eta-mu/packages/axxium"},
+    io.github.open-hax/clio {:local/root "eta-mu/packages/clio"}},
+   :override-deps
+   {io.github.open-hax/axxium {:local/root "eta-mu/packages/axxium"},
+    io.github.open-hax/clio {:local/root "eta-mu/packages/clio"}}}},
  :deps
  {borkdude/edamame {:mvn/version "1.6.42"},
   funcool/promesa {:mvn/version "11.0.678"},
-  metosin/malli {:mvn/version "0.16.4"}}, 
+  metosin/malli {:mvn/version "0.16.4"}},
  :paths ["src"]}

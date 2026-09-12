@@ -12,12 +12,17 @@ have separate review and browser evidence.
 - Only root tooling, `devtools`, and canonical Clio join the pnpm group. Tracked
   package inventory does not grant execution authority. Consolidation inputs
   remain excluded from manifest traversal and execution.
-- Generation reads policy, source metadata, tracked child package manifests, and
+- Generation reads policy, source metadata, explicitly selected package manifests, and
   Clojure dependency inputs. Input digests and duplicate identities remain
   inspectable. Conflicting selected versions require an explicit explanation.
 - A missing child Git boundary cannot silently inherit the parent's Git inventory.
   Existing workspace selection/ownership tests remain in the root test command.
-- Child library aliases do not copy build/test aliases into a different working
+- Selected child HEADs must match the root gitlinks, and selected source paths
+  must be clean. Actual Git fixture tests rejected tracked source edits, untracked
+  source files, and a clean unpromoted child commit. Promoting its gitlink restored
+  generation. Uninitialized unrelated children and unselected example changes
+  no longer affect composition; the earlier broad inventory was a review finding.
+- Selected library aliases do not copy build/test aliases into a different working
   directory. The reviewed quality gate catalog is unchanged.
 - Shared-cache installation is observable: the same Shadow package file has the
   same filesystem device/inode in root, Katamorph, and Bitch-tracker, with nine
@@ -34,7 +39,7 @@ have separate review and browser evidence.
 
 ## Verification
 
-The root command runs 111 Clojure tests / 501 assertions plus the Node repository
+The root command runs 114 Clojure tests / 511 assertions plus the Node repository
 census assertion program, with no failures. The compiled consumer builds, root
 lint is clean, S3 put/get works, real 384-dimensional embeddings pass the HTTP
 smoke, and a frozen offline pnpm install succeeds. Model weights remain an
@@ -54,12 +59,18 @@ both entrypoints and dependency metadata, beyond workspace-only imports.
 Proxx lint excludes generated compiler externs while retaining application rules
 (0 errors, 238 existing calibrated warnings on current staging). Its full Node
 suite was blocked by automatic approval review after HTTPS traffic targeted an
-unverified private host. That execution was not retried or accessed indirectly;
-there is no full-suite success claim. Fixture provider isolation is still needed.
+unverified private host. That execution was not retried. An early process-list
+diagnostic failed, and a log tail was read before the parent clarified the
+source-only boundary; no subsequent session access or stop was attempted.
+There is no full-suite success claim. Fixture provider isolation is still needed.
 
 Muse's current-main branch builds its four owned host targets with 0 compiler
 warnings, executes 197 tests / 506 assertions successfully, and passes canonical
-lint. A fresh source checkout reproduced a missing generated namespace despite
+lint. Its latest hook/identity successor passes 198 tests / 517 assertions with
+real Mongo. Actual emitted hooks execute in paths containing spaces, apostrophes,
+command substitutions, and backticks; canonical Rheos records a UUIDv4 replacement
+card while preserving the old archived projection and historical ledger bytes.
+A fresh source checkout reproduced a missing generated namespace despite
 warm builds passing. Moving the existing generation recipe into `prebuild` fixes
 the cold path; all four targets then built in 51.960 seconds. The post-release
 Claude emitter now refreshes active hooks for the actual checkout. Its stale Sol

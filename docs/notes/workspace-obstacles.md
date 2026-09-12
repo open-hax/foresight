@@ -17,7 +17,7 @@ locks; the root commands expose their ownership boundaries.
 | Calliope Git LFS checkout consumed about 7.6 GB including cache and hydrated tracks | Completed the source checkout with LFS smudging disabled after the large transfer. Media hydration is partial. Normal source tests run; complete media availability is not claimed. |
 | A single flat dependency tree would collide with child identities and versions | The generated pnpm group includes root tooling, devtools and canonical Clio. The inventory records conflicting and duplicate package identities; independent child commands still run in their own roots. |
 | Uxx's directory named `react` collided with pnpm's hoisted workspace identity | Isolated linking plus public dependency visibility produced one actual React identity. Packed adapter consumers now verify that identity outside the workspace package layout. |
-| Child manifests and root manifests could drift | The generator reads tracked child manifests and hashes its inputs. `manifests:check` rejects drift. Root dependency aliases compose libraries without relocating child build/test commands. |
+| Child manifests and root manifests could drift | The generator reads only explicit composition inputs, hashes their manifests, and verifies selected child HEADs against root gitlinks. It rejects uncommitted selected source and permits unrelated uninitialized children. Root dependency aliases compose libraries without relocating child build/test commands. |
 | Unix-domain sockets were denied | Native Mongo uses a TCP-only transitional fixture. Chromium works through Playwright's pipe transport. The agent-browser daemon could not start in this sandbox; no browser redownload or environment replacement was needed. |
 
 ## Providers and models

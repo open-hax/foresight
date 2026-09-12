@@ -32,32 +32,46 @@ that requires a build remains an explicit setup failure until its needed build
 is performed and verified.
 
 `workspace.edn` is the manual composition policy. `scripts/manifests.cljs` reads
-tracked child manifests and emits:
+the explicitly selected package manifests and emits:
 
 - `package.json` and `pnpm-workspace.yaml` for the selected development group;
-- `deps.edn` with a canonical Clio alias and separate child library aliases;
+- `deps.edn` with explicit local Clio/Axxium library overrides;
 - `nbb.edn` using Clio's declared NBB dependencies;
 - `shadow-cljs.edn` for the actual compiled Clio consumer and its tests;
 - `workspace-manifests.edn` with input digests, package identities, selected
   dependency declarations, overrides, and duplicate package names.
 
 Do not hand-edit these six outputs. Regenerate after changing the policy,
-generator, project model, or a child manifest. `--check` compares exact generated
+generator, project model, or a selected child manifest. `--check` compares exact generated
 content and fails on drift. A selected dependency version conflict fails unless
 `workspace.edn` supplies an explicit version and explanation. The generator
-rejects a child whose Git ownership is missing or inherited from its parent.
+rejects a consumed child whose Git ownership is missing or inherited from its
+parent, whose HEAD differs from the root index gitlink, or whose selected package
+has tracked or untracked source changes. Ignored build artifacts remain permitted.
+Promote the reviewed child gitlink in the root index before regenerating; the
+resulting root commit records that same source revision.
 
-The current inventory includes 88 package manifests, including `devtools`.
-Duplicate `opencode` and `@open-hax/uxx` names are reported; they are not silently
-collapsed. Bun catalogs, React peer relationships, native build requirements,
-and compiler version differences remain owned by the children. This is not an
-87-package dependency-policy migration.
+Only `devtools/package.json` and `eta-mu/packages/clio/package.json` supply the
+Node composition inputs. Clio and Axxium supply the selected Clojure dependency
+inputs. Uninitialized unrelated children and changes to unselected examples do
+not affect root generation or its gates. `pnpm inventory` remains the explicit
+whole-workspace discovery command. Bun catalogs, React peer relationships,
+native build requirements, and compiler versions remain owned by the children.
 
 The pnpm store is shared and `.npmrc` requests hardlinks. There is no second
 Maven repository or separate per-project copy of shared Node package contents.
 A project still needs its own dependency links and build artifacts. The generated
-Clojure aliases compose a child's library root; they do not reinterpret its test
-or build aliases. Run those commands in the owning child.
+Clojure aliases compose the selected library roots; they do not reinterpret a
+child's test or build aliases. Run those commands in the owning child.
+
+The root `:local` alias uses the actual `io.github.open-hax/clio` and
+`io.github.open-hax/axxium` dependency symbols in both `:extra-deps` and
+`:override-deps`. `clojure -M:local` therefore composes the checked-out libraries,
+including transitive references to Clio. The source paths come from each library's
+own `deps.edn`. This alias is explicit development policy and is not inherited by
+commands launched from a child directory. Standalone Knoxx retains its immutable
+Git coordinates; a local child launcher must pass these overrides with paths
+rebased to its working directory through Clojure CLI `-Sdeps`.
 
 ## Child actions and evidence
 
