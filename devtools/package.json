@@ -1,0 +1,16 @@
+{
+  "name": "@foresight/devtools",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:s3": "node s3-smoke.mjs",
+    "model:embedding": "node embedding-server.mjs",
+    "test:embeddings": "node embedding-smoke.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.888.0",
+    "s3rver": "3.7.1",
+    "@huggingface/transformers": "3.8.1"
+  }
+}

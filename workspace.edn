@@ -1,0 +1,27 @@
+;; Root composition policy. Child package-manager and quality policies remain owned by each child.
+{:workspace/version 1
+ :package-manager "pnpm@10.14.0"
+ :node-projects ["devtools" "eta-mu/packages/clio"]
+ :tools {"nbb" "1.5.212" "shadow-cljs" "3.4.11" "source-map-support" "0.5.21" "oxlint" "1.60.0"}
+ :dependency-overrides
+ {"nbb" {:version "1.5.212"
+          :reason "Root orchestration uses the recovered Node 24-compatible NBB; child commands retain their own declared version."}}
+ :clio "eta-mu/packages/clio"
+ :root-scripts
+ {"manifests" "nbb scripts/manifests.cljs --write"
+  "manifests:check" "nbb scripts/manifests.cljs --check"
+  "inventory" "nbb scripts/workspace.clj inventory"
+  "report" "nbb scripts/workspace.clj report"
+  "build" "pnpm manifests:check && shadow-cljs release local"
+  "test" "pnpm manifests:check && nbb test/project_test.cljs && nbb test/workspace_test.cljs && nbb test/manifests_test.cljs && nbb test/evidence_test.cljs && nbb test/evidence_cli_test.cljs && nbb test/lineage_test.cljs && node --test test/reference/repository-census.test.mjs && shadow-cljs compile test && node dist/local-test.cjs"
+  "lint" "pnpm manifests:check && clj-kondo --lint src scripts test && oxlint --deny-warnings devtools"
+  "modules:install" "nbb scripts/workspace.clj install"
+  "modules:build" "nbb scripts/workspace.clj build"
+  "modules:test" "nbb scripts/workspace.clj test"
+  "modules:lint" "nbb scripts/workspace.clj lint"
+  "gates:list" "nbb scripts/evidence.clj list"
+  "gates:run" "nbb scripts/evidence.clj run"
+  "gates:validate" "nbb scripts/evidence.clj validate"
+  "model:embedding" "pnpm --filter @foresight/devtools model:embedding"
+  "test:embeddings" "pnpm --filter @foresight/devtools test:embeddings"
+  "test:s3" "pnpm --filter @foresight/devtools test:s3"}}

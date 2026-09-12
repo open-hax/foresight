@@ -155,3 +155,10 @@ eta-mu kanban list
 ```
 
 All provenance ledgers are physically stored beneath `.ημ/`.
+
+## Shared local development
+
+The root development group and Clojure/NBB/Shadow manifests are generated from
+`workspace.edn` and child manifests. See [the local workspace guide](docs/development-workspace.md)
+for shared-cache installation, build/test/lint commands, canonical Clio and S3
+checks, independent child gates, and recovery limitations.

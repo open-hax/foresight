@@ -1,7 +1,7 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 (ns evidence
   (:require [cljs.core :refer [clj->js]]
-            [cljs.reader :as reader]
+            [clojure.edn :as reader]
             [clojure.string :as str]
             [foresight.evidence :as law]
             [foresight.project :as project-model]
