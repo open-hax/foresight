@@ -21,9 +21,9 @@ function install({onBlocked = () => {}} = {}) {
   const listeners = new Map();
   const restores = [];
   const loopback = host => host === '127.0.0.1' || host === '::1';
-  function block(kind) {
+  function block(kind, endpoint) {
     const error = Object.assign(new Error(`Test transport refused ${kind}; use an owned literal loopback listener`),
-      {code:'ERR_TEST_TRANSPORT_NOT_OWNED'});
+      {code:'ERR_TEST_TRANSPORT_NOT_OWNED', endpoint});
     onBlocked(error);
     throw error;
   }
@@ -33,7 +33,7 @@ function install({onBlocked = () => {}} = {}) {
     if (!options || options.path || !loopback(options.host || options.hostname)
         || ![...listeners.entries()].some(([server, address]) => server.listening
           && address.address === host && address.port === Number(options.port))) {
-      block('a connection');
+      block('a connection', {host:host || null, port:options?.port || null});
     }
   }
   function patch(owner, name, replacement) {

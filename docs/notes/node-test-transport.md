@@ -14,11 +14,12 @@ literal loopback address/port pairs owned by a currently listening server in the
 same test process. Wildcard listeners and hostname aliases are not evidence of
 ownership. Native TCP and TLS connections are checked before delegation;
 module-level and resolver-instance DNS operations and datagrams are refused.
-Redirects therefore cannot escape through an unmatched fetch fallback. No model
-request, credential, header or response body is logged by the adapter.
+Redirects therefore cannot escape through an unmatched fetch fallback. Only the
+blocked host and port are logged for fixture diagnosis; no request body,
+credential, header or response body is logged by the adapter.
 
 A refused attempt makes the process fail even if application code catches it.
-Three native regression tests prove owned HTTP/fetch operation, refusal through
+Six native regression tests prove owned HTTP/fetch operation, refusal through
 TCP/TLS/DNS/UDP and redirects, immediate closure revocation, IPv4/IPv6 separation,
 and propagation into real Node test child processes. An early peer review found
 the address-family, resolver-instance and exported UDP-constructor gaps; those
@@ -38,5 +39,16 @@ boundary before execution. Full-suite failures caused by an unmatched fallback
 remain failures and identify fixtures that need owned local endpoints; they
 must not be converted to skipped tests or silently mocked success.
 
-At this checkpoint the three adapter tests pass. Proxx's new full suite has not
-yet run; its result must be recorded separately from this transport proof.
+Codex's subsequent review found that assigning `process.exitCode` from the early
+exit listener could be undone by a later listener. Two real child-process
+regressions reproduced a successful exit after a caught refusal. The preload now
+captures native `process.exit` and ends the exit event with status 1 before later
+listeners execute. The six-test proof covers both later reset forms, explicit
+success exit, and inherited Node test children; it exits zero with no skips.
+
+A fresh guarded Proxx suite ran 651 tests: 647 passed, two test files failed, and
+two existing cases skipped. Fourteen refused attempts exposed a LAN Ollama
+default, the quota monitor's remote usage endpoint, an undeclared Chroma service,
+and request pools reconnecting after fixture listeners closed. No rejected old
+process was resumed. Corrected local fixtures pass 187 tests with one existing
+skip and no refused transports; the complete successor gate remains pending.

@@ -75,6 +75,21 @@ test('preloaded audit fails even when application code catches the refusal', () 
   assert.match(result.stderr, /ERR_TEST_TRANSPORT_NOT_OWNED/);
 });
 
+for (const finish of [
+  'process.on("exit", () => { process.exitCode = 0; });',
+  'process.on("exit", () => { process.exit(0); });',
+  'process.exit(0);',
+]) {
+  test(`caught refusal stays fatal with later success exit: ${finish}`, () => {
+    const code = 'try { require("node:net").connect({host:"external.fixture.invalid",port:443}); } catch {} ' + finish;
+    const result = spawnSync(process.execPath, ['--require', path.join(__dirname, 'node-test-loopback.cjs'), '-e', code],
+      {encoding:'utf8', env:{PATH:process.env.PATH}});
+    assert.equal(result.status, 1);
+    assert.equal(result.signal, null);
+    assert.match(result.stderr, /ERR_TEST_TRANSPORT_NOT_OWNED/);
+  });
+}
+
 test('Node test children inherit the preload and cannot swallow an unmatched fallback', async () => {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'foresight-transport-proof-'));
   try {
