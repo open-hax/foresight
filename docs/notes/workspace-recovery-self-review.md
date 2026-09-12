@@ -42,8 +42,30 @@ explicit cached capability and are not downloaded by normal root tests.
 
 The recovery evidence also records unchanged child builds/tests and their
 failures. A zero exit or a green subset is not a whole-stack acceptance signal.
-Known current findings include a Katamorph namespace/var compiler warning,
-Uxx peer identity and mention behavior have been repaired: all 465 tests now pass. Proxx lint excludes generated compiler externs while retaining application rules (0 errors, 236 existing calibrated warnings). Muse now builds its four owned host targets with 0 warnings, runs 184 tests / 470 assertions successfully, and passes its canonical lint. Its stale Sol application targets were retired against the accepted ownership boundary. Epiphany's
+Known current findings include a Katamorph namespace/var compiler warning.
+The current-main Uxx branch passes all 466 tests. Review then exposed adapter
+runtime peer and publication gaps: React/DOM are now exclusively runtime peers,
+both adapters build before packing, compiler caches are excluded, and extracted
+tarballs import together with the consumer's React. The unrelated npm package
+named `reagent` was removed; the actual CLJS Maven Reagent dependency is retained.
+This eliminated 106 unused Node packages. The committed tarball verifier checks
+both entrypoints and dependency metadata, beyond workspace-only imports.
+
+Proxx lint excludes generated compiler externs while retaining application rules
+(0 errors, 238 existing calibrated warnings on current staging). Its full Node
+suite was blocked by automatic approval review after HTTPS traffic targeted an
+unverified private host. That execution was not retried or accessed indirectly;
+there is no full-suite success claim. Fixture provider isolation is still needed.
+
+Muse's current-main branch builds its four owned host targets with 0 compiler
+warnings, executes 197 tests / 506 assertions successfully, and passes canonical
+lint. A fresh source checkout reproduced a missing generated namespace despite
+warm builds passing. Moving the existing generation recipe into `prebuild` fixes
+the cold path; all four targets then built in 51.960 seconds. The post-release
+Claude emitter now refreshes active hooks for the actual checkout. Its stale Sol
+application targets were retired against the accepted ownership boundary.
+
+Epiphany's
 shallow-history test failures were resolved by fetching the history of the same
 pinned checkout; its tests still emit the pre-existing SLF4J provider warning, and its lint alias
 returns zero despite 66 warnings. Those warnings remain blocking findings.
@@ -56,3 +78,13 @@ promoted; then run `pnpm manifests:check` and a frozen install. The workspace ca
 must remain open until the whole-stack/browser/review obligations are supported
 by their own evidence. Calliope's required append-only test and lint receipts are separate
 child-owned changes for the parent integrator to publish.
+
+Actual Codex, CodeRabbit, and eta-mu reviews are running on the Muse and Uxx
+successors. The earlier Uxx eta-mu review approved its reviewed head but ran only
+a `diff_stat` deterministic gate; that is distinct from the full local test and
+artifact evidence above. The repository's native auto-merge action reports that
+auto-merge is not enabled. Normal protected merge remains available after the
+current head has clean checks and reviews; repository protection is not bypassed.
+
+See [workspace-obstacles.md](workspace-obstacles.md) for the recovery decisions,
+remaining module limits, and what each recorded result actually proves.

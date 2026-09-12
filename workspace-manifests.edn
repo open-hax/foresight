@@ -39,7 +39,7 @@
   "eta-mu/packages/clio/nbb.edn"
   "2cfd16d185aad629366315bacaae14c8be860c4285b4cc8b394ec8160dd39b45",
   "eta-mu/packages/clio/package.json"
-  "e2134b156a0b0097fa964f3b28e793622441b838939baf657697b66add993e0d",
+  "a909b31b081111740cde7f5521d207c4b72794f3b39afd4c6116a911a12ec5be",
   "eta-mu/packages/contracts/output/package.json"
   "91f38ce17dde7f6395fa309711f29d395badc5831973af905c78afe37bd9edc8",
   "eta-mu/packages/e2e/package.json"
@@ -111,7 +111,7 @@
   "muse/deps.edn"
   "ebfda1fbeabef93fdb89863ea5c4b5e812b9103f308560ef9a3d7c7174945f97",
   "muse/package.json"
-  "ab2f21afba4cd8279c26a46fa764e126a0e84ed687b8281f39944d3540d9a15f",
+  "863f3448ba3078ce79e49681fe63fbbbf9f482b3a1fb98bae0e4a152c0e38644",
   "opencode/artifacts/glm52-rise-video/package.json"
   "8336c5fb3e38926c494ad33db9e1501c33b31446c1ec68625f7abecbe0d6bace",
   "opencode/github/package.json"
@@ -201,13 +201,13 @@
   "src/foresight/project.cljc"
   "d23cb51ebec03c8ae1b75f8dd02208cd13544b19479ea78a9d2cc1f9319a17c5",
   "uxx/helix/package.json"
-  "1bdd68e9595ea0d9a22f6f4a6241f8e246ded1598005ab7b79375df0719d6975",
+  "f97691140bff114e0dd0430de2b6dc377bb729537b6e88ebe3190c27ce3a8246",
   "uxx/package.json"
-  "dad487b08b1a19acb2dc3b9b45cb3a4a2d7184f47468bf65a9f046d20b5f8411",
+  "2a447ba66637fa1ae1248ce23943d68bf8e60ca0f77dce749ea3f0738b5dd674",
   "uxx/react/package.json"
-  "32b67ee876602673fca9019bfd1f7d3813947f2b4aff2c2471093d1ae9444dd9",
+  "ec0ae497ba92deb713818d557f7eae17745439ca1eabfe4f5cc12939c5ac69b1",
   "uxx/reagent/package.json"
-  "396148a7c0fcb0998ff48e64c596ba88fe4dedfe076ecc19729059553254db4e",
+  "1ea60ff2c5421ac820955052c0e45771ff732188c14c246d191d04be658a5027",
   "uxx/tokens/package.json"
   "f7572588d556972217861c5d0d2ab38da31544bfd2e3ea045666716fa7350a02",
   "uxx/vendor/@open-hax/uxx/package.json"
@@ -250,7 +250,7 @@
    :package-manager nil,
    :path "eta-mu/packages/clio/package.json",
    :sha256
-   "e2134b156a0b0097fa964f3b28e793622441b838939baf657697b66add993e0d"}
+   "a909b31b081111740cde7f5521d207c4b72794f3b39afd4c6116a911a12ec5be"}
   {:name "@eta-mu/contracts-output",
    :package-manager nil,
    :path "eta-mu/packages/contracts/output/package.json",
@@ -425,7 +425,7 @@
    :package-manager nil,
    :path "muse/package.json",
    :sha256
-   "ab2f21afba4cd8279c26a46fa764e126a0e84ed687b8281f39944d3540d9a15f"}
+   "863f3448ba3078ce79e49681fe63fbbbf9f482b3a1fb98bae0e4a152c0e38644"}
   {:name "glm52-rise-video",
    :package-manager nil,
    :path "opencode/artifacts/glm52-rise-video/package.json",
@@ -635,22 +635,22 @@
    :package-manager nil,
    :path "uxx/helix/package.json",
    :sha256
-   "1bdd68e9595ea0d9a22f6f4a6241f8e246ded1598005ab7b79375df0719d6975"}
+   "f97691140bff114e0dd0430de2b6dc377bb729537b6e88ebe3190c27ce3a8246"}
   {:name "@open-hax/uxx",
    :package-manager nil,
    :path "uxx/package.json",
    :sha256
-   "dad487b08b1a19acb2dc3b9b45cb3a4a2d7184f47468bf65a9f046d20b5f8411"}
+   "2a447ba66637fa1ae1248ce23943d68bf8e60ca0f77dce749ea3f0738b5dd674"}
   {:name "@open-hax/uxx-react-internal",
    :package-manager nil,
    :path "uxx/react/package.json",
    :sha256
-   "32b67ee876602673fca9019bfd1f7d3813947f2b4aff2c2471093d1ae9444dd9"}
+   "ec0ae497ba92deb713818d557f7eae17745439ca1eabfe4f5cc12939c5ac69b1"}
   {:name "@open-hax/uxx-reagent",
    :package-manager nil,
    :path "uxx/reagent/package.json",
    :sha256
-   "396148a7c0fcb0998ff48e64c596ba88fe4dedfe076ecc19729059553254db4e"}
+   "1ea60ff2c5421ac820955052c0e45771ff732188c14c246d191d04be658a5027"}
   {:name "@open-hax/uxx-tokens-internal",
    :package-manager nil,
    :path "uxx/tokens/package.json",
@@ -677,7 +677,7 @@
    :version "2.2.9"}
   {:name "nbb",
    :path "eta-mu/packages/clio/package.json",
-   :version "1.3.201"}
+   :version "1.5.212"}
   {:name "nbb", :path "workspace.edn", :version "1.5.212"}
   {:name "shadow-cljs", :path "workspace.edn", :version "3.4.11"}
   {:name "source-map-support",
