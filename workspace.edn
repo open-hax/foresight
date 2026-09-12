@@ -24,4 +24,7 @@
   "gates:validate" "nbb scripts/evidence.clj validate"
   "model:embedding" "pnpm --filter @foresight/devtools model:embedding"
   "test:embeddings" "pnpm --filter @foresight/devtools test:embeddings"
+  "model:warm" "pnpm --filter @foresight/devtools model:warm"
+  "model:generation" "pnpm --filter @foresight/devtools model:generation"
+  "test:generation" "pnpm --filter @foresight/devtools test:generation"
   "test:s3" "pnpm --filter @foresight/devtools test:s3"}}

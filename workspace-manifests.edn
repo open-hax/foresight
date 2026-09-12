@@ -23,7 +23,7 @@
   "calliope/deps.edn"
   "de266cfed5ef90618deb26b2082c6b2b2476790bee54337705823afbce7fd524",
   "devtools/package.json"
-  "4e400ddff6468c7dafcf21776c041cfb5ec97afb9ff1303b9097b9d93016e0cc",
+  "a276ecfd5cabe4011407e673e90386916ccaa1c860a8c12c2c81ae872e0016a7",
   "epiphany/deps.edn"
   "1072eaa4fdbaa9c58a852619f9dcfa638773eac90dd59a92cdd64c8529bb4ff3",
   "eta-mu/deps.edn"
@@ -111,7 +111,7 @@
   "muse/deps.edn"
   "ebfda1fbeabef93fdb89863ea5c4b5e812b9103f308560ef9a3d7c7174945f97",
   "muse/package.json"
-  "6ae2e3e028a600ccff4318884266365b799bbc6538e1ab73b01fd07ecda37d52",
+  "ab2f21afba4cd8279c26a46fa764e126a0e84ed687b8281f39944d3540d9a15f",
   "opencode/artifacts/glm52-rise-video/package.json"
   "8336c5fb3e38926c494ad33db9e1501c33b31446c1ec68625f7abecbe0d6bace",
   "opencode/github/package.json"
@@ -201,19 +201,19 @@
   "src/foresight/project.cljc"
   "d23cb51ebec03c8ae1b75f8dd02208cd13544b19479ea78a9d2cc1f9319a17c5",
   "uxx/helix/package.json"
-  "9531fe81a9488a5768b7557e4001c696c47c9061e0f9e7860f169d7f4a974b9a",
+  "1bdd68e9595ea0d9a22f6f4a6241f8e246ded1598005ab7b79375df0719d6975",
   "uxx/package.json"
-  "8253816d10c99845dd4b35bbf6c6c2431b024437d301522cff5d072e64d78477",
+  "dad487b08b1a19acb2dc3b9b45cb3a4a2d7184f47468bf65a9f046d20b5f8411",
   "uxx/react/package.json"
-  "c5074968f71a3ec1ef6a0411ff2f1d7fbbe344eff5699256dcbcaba2df4beb85",
+  "32b67ee876602673fca9019bfd1f7d3813947f2b4aff2c2471093d1ae9444dd9",
   "uxx/reagent/package.json"
-  "fffdd7746e666945b611daad39c03650c062d52c88a3d4b596491f55476ad12c",
+  "396148a7c0fcb0998ff48e64c596ba88fe4dedfe076ecc19729059553254db4e",
   "uxx/tokens/package.json"
   "f7572588d556972217861c5d0d2ab38da31544bfd2e3ea045666716fa7350a02",
   "uxx/vendor/@open-hax/uxx/package.json"
   "718629584a07cd8300d148d8cbcdb2eda6db75f39baac481e3d5f1c444856208",
   "workspace.edn"
-  "8bba37cfec377f4992ca96304d76a2f9184191c91ec5b91b9ed7b94482cd91e3"},
+  "254476508e3da4c1a2ef01daef6d607cc7b952a4a240f7d1b82bd76b58d5e192"},
  :node-projects ["devtools" "eta-mu/packages/clio"],
  :packages
  [{:name "claude-memory-bridge",
@@ -230,7 +230,7 @@
    :package-manager nil,
    :path "devtools/package.json",
    :sha256
-   "4e400ddff6468c7dafcf21776c041cfb5ec97afb9ff1303b9097b9d93016e0cc"}
+   "a276ecfd5cabe4011407e673e90386916ccaa1c860a8c12c2c81ae872e0016a7"}
   {:name "@open-hax/eta-mu-monorepo",
    :package-manager "pnpm@10.14.0",
    :path "eta-mu/package.json",
@@ -425,7 +425,7 @@
    :package-manager nil,
    :path "muse/package.json",
    :sha256
-   "6ae2e3e028a600ccff4318884266365b799bbc6538e1ab73b01fd07ecda37d52"}
+   "ab2f21afba4cd8279c26a46fa764e126a0e84ed687b8281f39944d3540d9a15f"}
   {:name "glm52-rise-video",
    :package-manager nil,
    :path "opencode/artifacts/glm52-rise-video/package.json",
@@ -635,22 +635,22 @@
    :package-manager nil,
    :path "uxx/helix/package.json",
    :sha256
-   "9531fe81a9488a5768b7557e4001c696c47c9061e0f9e7860f169d7f4a974b9a"}
+   "1bdd68e9595ea0d9a22f6f4a6241f8e246ded1598005ab7b79375df0719d6975"}
   {:name "@open-hax/uxx",
    :package-manager nil,
    :path "uxx/package.json",
    :sha256
-   "8253816d10c99845dd4b35bbf6c6c2431b024437d301522cff5d072e64d78477"}
+   "dad487b08b1a19acb2dc3b9b45cb3a4a2d7184f47468bf65a9f046d20b5f8411"}
   {:name "@open-hax/uxx-react-internal",
    :package-manager nil,
    :path "uxx/react/package.json",
    :sha256
-   "c5074968f71a3ec1ef6a0411ff2f1d7fbbe344eff5699256dcbcaba2df4beb85"}
+   "32b67ee876602673fca9019bfd1f7d3813947f2b4aff2c2471093d1ae9444dd9"}
   {:name "@open-hax/uxx-reagent",
    :package-manager nil,
    :path "uxx/reagent/package.json",
    :sha256
-   "fffdd7746e666945b611daad39c03650c062d52c88a3d4b596491f55476ad12c"}
+   "396148a7c0fcb0998ff48e64c596ba88fe4dedfe076ecc19729059553254db4e"}
   {:name "@open-hax/uxx-tokens-internal",
    :package-manager nil,
    :path "uxx/tokens/package.json",
@@ -669,6 +669,9 @@
   {:name "@huggingface/transformers",
    :path "devtools/package.json",
    :version "3.8.1"}
+  {:name "playwright-core",
+   :path "devtools/package.json",
+   :version "1.62.1"}
   {:name "fs-ext-extra-prebuilt",
    :path "eta-mu/packages/clio/package.json",
    :version "2.2.9"}

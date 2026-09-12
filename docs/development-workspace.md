@@ -145,3 +145,19 @@ requests. These observations establish protocol/runtime readiness, not quality
 on the project's full research or writing workload. The browser supervisor may
 import `startEmbeddingServer` from `devtools/embedding-server.mjs`; it returns a
 local `baseUrl`, the HTTP server, model metadata, and an asynchronous `close`.
+
+## Browser and small local generation
+
+The shared development package pins playwright-core 1.62.1. It launches the one existing Chromium executable named by `FORESIGHT_BROWSER_EXECUTABLE`; installing the Node dependency does not download another browser. The sandbox uses the headless shell with pipe transport because Chromium singleton sockets and the agent-browser daemon's Unix socket are denied. Browser verification must start its server and browser in the same supervisor process namespace.
+
+The explicit generation fixture runs HuggingFaceTB/SmolLM2-135M-Instruct at revision `12fd25f77366fa6b3b4b768ec3050bf629380bac`, with q4 weights on the CPU and the same model cache as embeddings.
+
+```sh
+export FORESIGHT_MODEL_CACHE=/workspace/scratch/3655842e43cf/model-cache
+pnpm test:generation
+pnpm model:generation
+```
+
+Import `startGenerationServer` from `devtools/generation-server.mjs` when composing an integration supervisor. It serves real model output in an OpenAI-compatible chat-completion envelope. Only the declared translation response wrapper is supported; it wraps generated text rather than claiming model-enforced JSON. Tool calling and streaming are explicitly unsupported. Missing weights fail startup, and remote model fetching is disabled. These small-model checks establish runtime/protocol behavior; content and translation quality still require review.
+
+A second explicit local option is onnx-community/Qwen2.5-0.5B-Instruct at revision cc5cc01a65cc3ff17bdb73a7de33d879f62599b0. Set FORESIGHT_GENERATION_MODEL to that identity when running the generation server or smoke. The shared cached artifact footprint is about 1.1 GB. Run pnpm model:warm with the selected model name to download its pinned public artifacts before offline use; this warm-up sends no prompts or repository content. The larger model completed the production translation protocol probe, but candidate quality still requires human revision.

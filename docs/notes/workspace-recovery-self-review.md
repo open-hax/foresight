@@ -43,8 +43,7 @@ explicit cached capability and are not downloaded by normal root tests.
 The recovery evidence also records unchanged child builds/tests and their
 failures. A zero exit or a green subset is not a whole-stack acceptance signal.
 Known current findings include a Katamorph namespace/var compiler warning,
-Uxx React resolution/identity failures, Proxx lint walking generated Shadow
-externs, and Muse exporting an unavailable application namespace. Epiphany's
+Uxx peer identity and mention behavior have been repaired: all 465 tests now pass. Proxx lint excludes generated compiler externs while retaining application rules (0 errors, 236 existing calibrated warnings). Muse now builds its four owned host targets with 0 warnings, runs 184 tests / 470 assertions successfully, and passes its canonical lint. Its stale Sol application targets were retired against the accepted ownership boundary. Epiphany's
 shallow-history test failures were resolved by fetching the history of the same
 pinned checkout; its tests still emit the pre-existing SLF4J provider warning, and its lint alias
 returns zero despite 66 warnings. Those warnings remain blocking findings.
