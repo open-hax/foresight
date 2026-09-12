@@ -13,10 +13,10 @@ permissions:
 jobs:
   review:
     name: Evidence-first review (eta-mu)
-    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@d3937a2f2fa6ecf74cd525c6a0daceb5380a0e1d
+    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@0be6ae6c6b90fe2209ae0b1a7afccbb8318fc860
     with:
       pr_head_sha: ${{ github.event.pull_request.head.sha }}
-      setup_eta_mu_toolchain: false
+      setup_eta_mu_toolchain: true
       evidence_gates_script: |
         run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
         run_gate workspace_laws npx --yes nbb@1.4.207 -cp scripts:test test/workspace_test.cljs
