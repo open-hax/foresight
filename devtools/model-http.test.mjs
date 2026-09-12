@@ -1,17 +1,19 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 import assert from 'node:assert/strict';
 import http from 'node:http';
+import net from 'node:net';
 import { setTimeout as delay } from 'node:timers/promises';
 import { after, before, mock, test } from 'node:test';
 import { PreTrainedTokenizer } from '@huggingface/transformers';
 import { startEmbeddingServer } from './embedding-server.mjs';
 import { LOCAL_GENERATION_MODEL, startGenerationServer } from './generation-server.mjs';
+import { readModelRequestBody } from './model-request-body.mjs';
 
 let generation;
 let embedding;
 before(async () => {
-  generation = await startGenerationServer({ model: LOCAL_GENERATION_MODEL, timeoutMs: 1 });
-  embedding = await startEmbeddingServer();
+  generation = await startGenerationServer({ model: LOCAL_GENERATION_MODEL, timeoutMs: 1, requestTimeoutMs: 200 });
+  embedding = await startEmbeddingServer({ requestTimeoutMs: 200 });
 });
 after(async () => {
   await Promise.all([generation?.close(), embedding?.close()]);
@@ -69,6 +71,16 @@ for (const tool_choice of [false, 0, '', null, 'none', {}, []]) {
       status: 400, body: { error: 'unsupported_tools_or_stream' },
     });
   });
+}
+
+for (const field of ['tool_calls', 'function_call']) {
+  for (const value of [false, 0, '', null, {}, [], 'unsupported']) {
+    test(`present message ${field} ${JSON.stringify(value)} is refused before inference`, async () => {
+      assert.deepEqual(await completion({ messages: [{ role: 'user', content: 'Hello.', [field]: value }] }), {
+        status: 400, body: { error: 'invalid_messages' },
+      });
+    });
+  }
 }
 
 for (const model of [false, 0, '', null, 'unknown', {}, []]) {
@@ -162,4 +174,95 @@ test('generation drains oversized uploads and preserves the connection', async (
 
 test('embedding drains oversized uploads and preserves the connection', async () => {
   await oversizedUpload(`${embedding.baseUrl}/embeddings`);
+});
+
+/** Keep a real upload unfinished and require both a complete refusal and socket closure. */
+async function stalledUpload(url, oversized, trickle) {
+  return new Promise((resolve, reject) => {
+    let request, interval, result, closed = false;
+    const finish = error => {
+      if (!error && (!result || !closed)) return;
+      clearTimeout(deadline); clearInterval(interval);
+      request.destroy();
+      if (error) reject(error); else resolve(result);
+    };
+    const deadline = setTimeout(() => finish(new Error('Stalled upload was not refused and closed within 1500ms')), 1500);
+    request = http.request(url, { method: 'POST', headers: { 'content-type': 'application/json' } });
+    request.on('error', finish);
+    request.on('socket', socket => socket.on('close', () => { closed = true; finish(); }));
+    request.on('response', response => {
+      const chunks = [];
+      response.on('data', chunk => chunks.push(chunk));
+      response.on('error', finish);
+      response.on('end', () => {
+        try {
+          result = { status: response.statusCode, body: JSON.parse(Buffer.concat(chunks).toString()),
+            connection: response.headers.connection, uploadFinished: request.writableFinished };
+          finish();
+        } catch (error) { finish(error); }
+      });
+    });
+    request.write(oversized ? Buffer.alloc(1024 * 1024 + 1, 32) : '{');
+    if (trickle) interval = setInterval(() => request.write(' '), 20);
+    // Intentionally never call end(): the server must bound ingestion itself.
+  });
+}
+
+for (const provider of ['generation', 'embedding']) {
+  for (const [description, oversized, trickle] of [['stalled', false, false], ['stalled oversized', true, false], ['trickling', false, true]]) {
+    test(`${provider} bounds ${description} request ingestion and closes its socket`, async () => {
+      const service = provider === 'generation' ? generation : embedding;
+      const endpoint = provider === 'generation' ? '/chat/completions' : '/embeddings';
+      assert.deepEqual(await stalledUpload(service.baseUrl + endpoint, oversized, trickle), {
+        status: oversized ? 413 : 408, body: { error: oversized ? 'input_too_large' : 'request_timeout' },
+        connection: 'close', uploadFinished: false,
+      });
+      const response = await fetch(service.baseUrl.replace('/v1', '/health'));
+      assert.equal(response.status, 200);
+      if (provider === 'generation') assert.equal((await response.json()).busy, false);
+    });
+  }
+  test(`${provider} releases ingestion listeners after a client disconnect`, async () => {
+    const service = provider === 'generation' ? generation : embedding;
+    const endpoint = provider === 'generation' ? '/chat/completions' : '/embeddings';
+    const received = new Promise(resolve => service.server.once('request', resolve));
+    const request = http.request(service.baseUrl + endpoint, { method: 'POST' });
+    request.on('error', () => {});
+    request.write('{');
+    const incoming = await received;
+    const closed = new Promise(resolve => incoming.once('close', resolve));
+    request.destroy();
+    await closed;
+    for (const event of ['data', 'end', 'aborted', 'error']) assert.equal(incoming.listenerCount(event), 0, `${event} listener must be released`);
+    const response = await fetch(service.baseUrl.replace('/v1', '/health'));
+    assert.equal(response.status, 200);
+  });
+}
+
+test('ingestion timeout closes a pipelined socket even when its refusal cannot flush', async () => {
+  let admitted;
+  const secondRequest = new Promise(resolve => { admitted = resolve; });
+  const server = http.createServer((request, response) => {
+    if (request.url === '/held') {
+      response.writeHead(200); response.write('This preceding response intentionally never ends.');
+    } else {
+      admitted(readModelRequestBody(request, response, 20));
+    }
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const socket = net.connect(server.address().port, '127.0.0.1');
+  try {
+    const closed = new Promise((resolve, reject) => {
+      const deadline = setTimeout(() => reject(new Error('A blocked timeout response retained its pipelined socket')), 1800);
+      socket.on('error', reject);
+      socket.once('close', () => { clearTimeout(deadline); resolve(); });
+    });
+    socket.resume();
+    socket.write('GET /held HTTP/1.1\r\nHost: localhost\r\n\r\nPOST /model HTTP/1.1\r\nHost: localhost\r\nContent-Length: 100\r\n\r\n{');
+    const [body] = await Promise.all([secondRequest, closed]);
+    assert.equal(body, null, 'The incomplete second request must be refused before input is admitted');
+  } finally {
+    socket.destroy();
+    await new Promise(resolve => server.close(resolve));
+  }
 });

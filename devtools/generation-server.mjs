@@ -4,6 +4,7 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { env, pipeline, InterruptableStoppingCriteria } from '@huggingface/transformers';
+import { readModelRequestBody } from './model-request-body.mjs';
 
 export const LOCAL_GENERATION_MODEL = 'HuggingFaceTB/SmolLM2-135M-Instruct';
 export const LOCAL_GENERATION_REVISION = '12fd25f77366fa6b3b4b768ec3050bf629380bac';
@@ -40,7 +41,7 @@ function checkedRequest(body, model, maxNewTokens) {
   if (!Array.isArray(body.messages) || body.messages.length < 1 || body.messages.length > 8
       || body.messages.some(message => !['system', 'user', 'assistant'].includes(message?.role)
         || typeof message.content !== 'string' || message.content.length > 200000
-        || message.tool_calls || message.function_call)) throw new RangeError('invalid_messages');
+        || Object.hasOwn(message, 'tool_calls') || Object.hasOwn(message, 'function_call'))) throw new RangeError('invalid_messages');
   const requestedTokens = body.max_tokens ?? maxNewTokens;
   if (!Number.isInteger(requestedTokens) || requestedTokens < 1 || requestedTokens > 4096) throw new RangeError('invalid_max_tokens');
   return { messages: body.messages, maxTokens: Math.min(requestedTokens, maxNewTokens), wrapped: translationWrapper(body.response_format) };
@@ -69,11 +70,13 @@ export async function startGenerationServer({
   model = process.env.FORESIGHT_GENERATION_MODEL || LOCAL_GENERATION_MODEL,
   maxNewTokens = 512,
   timeoutMs = 180000,
+  requestTimeoutMs = 10000,
 } = {}) {
   const descriptor = Object.hasOwn(LOCAL_GENERATION_MODELS, model) && LOCAL_GENERATION_MODELS[model];
   if (!descriptor) throw new RangeError('Only pinned local generation models are supported');
   if (!Number.isInteger(maxNewTokens) || maxNewTokens < 1 || maxNewTokens > 1024) throw new RangeError('maxNewTokens must be 1..1024');
   if (!Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 180000) throw new RangeError('timeoutMs must be 1..180000');
+  if (!Number.isInteger(requestTimeoutMs) || requestTimeoutMs < 1 || requestTimeoutMs > 30000) throw new RangeError('requestTimeoutMs must be 1..30000');
   env.cacheDir = cacheDir;
   env.allowLocalModels = true;
   env.allowRemoteModels = false;
@@ -96,16 +99,9 @@ export async function startGenerationServer({
       if (request.method === 'GET' && request.url === '/health') return reply(200, { status: 'ok', model, provider: 'transformers-js', offline: true, busy: active });
       if (request.method === 'GET' && request.url === '/v1/models') return reply(200, { object: 'list', data: [{ id: model, object: 'model', owned_by: 'local' }] });
       if (request.method !== 'POST' || !['/v1/chat/completions', '/chat/completions'].includes(request.url)) return reply(404, { error: 'route_not_found' });
-      const chunks = [];
-      let size = 0;
-      // Consume the full request: returning inside this iterator destroys the upload stream.
-      for await (const chunk of request) {
-        size += chunk.length;
-        if (size > 1024 * 1024) chunks.length = 0;
-        else chunks.push(chunk);
-      }
-      if (size > 1024 * 1024) return reply(413, { error: 'input_too_large' });
-      const input = checkedRequest(JSON.parse(Buffer.concat(chunks).toString('utf8')), model, maxNewTokens);
+      const bytes = await readModelRequestBody(request, response, requestTimeoutMs);
+      if (bytes === null) return;
+      const input = checkedRequest(JSON.parse(bytes.toString('utf8')), model, maxNewTokens);
       if (active) return reply(429, { error: 'generation_busy' });
       active = ownsInference = true;
       stoppingCriteria = new InterruptableStoppingCriteria();
