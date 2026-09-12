@@ -19,7 +19,7 @@ blocked host and port are logged for fixture diagnosis; no request body,
 credential, header or response body is logged by the adapter.
 
 A refused attempt makes the process fail even if application code catches it.
-Six native regression tests prove owned HTTP/fetch operation, refusal through
+Nine native regression tests prove owned HTTP/fetch operation, refusal through
 TCP/TLS/DNS/UDP and redirects, immediate closure revocation, IPv4/IPv6 separation,
 and propagation into real Node test child processes. An early peer review found
 the address-family, resolver-instance and exported UDP-constructor gaps; those
@@ -43,12 +43,21 @@ Codex's subsequent review found that assigning `process.exitCode` from the early
 exit listener could be undone by a later listener. Two real child-process
 regressions reproduced a successful exit after a caught refusal. The preload now
 captures native `process.exit` and ends the exit event with status 1 before later
-listeners execute. The six-test proof covers both later reset forms, explicit
-success exit, and inherited Node test children; it exits zero with no skips.
+listeners execute. A subsequent Codex review found that a prepended listener
+could call `process.exit(0)` before that listener ran. Three additional real child
+cases reproduced two failures, including the named ESM `exit` export. The preload
+now also protects explicit exits and synchronizes the builtin exports. The
+nine-test proof covers both listener orders, both reset forms, explicit success
+exit, and inherited Node test children; it exits zero with no skips.
 
 A fresh guarded Proxx suite ran 651 tests: 647 passed, two test files failed, and
 two existing cases skipped. Fourteen refused attempts exposed a LAN Ollama
 default, the quota monitor's remote usage endpoint, an undeclared Chroma service,
 and request pools reconnecting after fixture listeners closed. No rejected old
-process was resumed. Corrected local fixtures pass 187 tests with one existing
-skip and no refused transports; the complete successor gate remains pending.
+process was resumed. Corrected local fixtures first passed 187 tests with one
+existing skip and no refused transports. The complete successor run passed 650
+of 651 tests with no failures or refused transports; one pre-existing external
+bootstrap-script contract remains skipped because its sibling script is absent.
+The previously skipped cloud reasoning case now runs and asserts the upstream
+request's maximum reasoning setting. Both production builds and full ESLint
+complete successfully; ESLint still reports 236 existing complexity warnings.

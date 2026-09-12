@@ -79,6 +79,9 @@ for (const finish of [
   'process.on("exit", () => { process.exitCode = 0; });',
   'process.on("exit", () => { process.exit(0); });',
   'process.exit(0);',
+  'process.prependListener("exit", () => { process.exit(0); });',
+  'process.prependListener("exit", () => { process.exitCode = 0; });',
+  'import("node:process").then(({exit}) => { process.prependListener("exit", () => exit(0)); });',
 ]) {
   test(`caught refusal stays fatal with later success exit: ${finish}`, () => {
     const code = 'try { require("node:net").connect({host:"external.fixture.invalid",port:443}); } catch {} ' + finish;
