@@ -1,43 +1,57 @@
 [submodule "Truth"]
 	path = Truth
 	url = git@github.com:octave-commons/Truth.git
+	branch = device/stealth
 [submodule "bitch-tracker"]
 	path = bitch-tracker
 	url = git@github.com:octave-commons/bitch-tracker.git
+	branch = device/stealth
 [submodule "calliope"]
 	path = calliope
 	url = git@github.com:octave-commons/calliope.git
+	branch = device/stealth
 [submodule "epiphany"]
 	path = epiphany
 	url = git@github.com:octave-commons/epiphany.git
+	branch = device/stealth
 [submodule "eta-mu"]
 	path = eta-mu
 	url = git@github.com:open-hax/eta-mu.git
+	branch = device/stealth
 [submodule "katamorph"]
 	path = katamorph
 	url = git@github.com:open-hax/katamorph.git
+	branch = device/stealth
 [submodule "knoxx"]
 	path = knoxx
 	url = git@github.com:open-hax/knoxx.git
+	branch = device/stealth
 [submodule "muse"]
 	path = muse
 	url = git@github.com:octave-commons/muse.git
+	branch = device/stealth
 [submodule "proxx"]
 	path = proxx
 	url = git@github.com:open-hax/proxx.git
+	branch = device/stealth
 [submodule "services"]
 	path = services
 	url = git@github.com:open-hax/services.git
+	branch = device/stealth
 [submodule "uxx"]
 	path = uxx
 	url = git@github.com:open-hax/uxx.git
+	branch = device/stealth
 [submodule "opencode"]
 	path = opencode
 	url = git@github.com:open-hax/opencode.git
 	shallow = true
+	branch = device/stealth
 [submodule ".agents"]
 	path = .agents
 	url = git@github.com:riatzukiza/.agents.git
+	branch = device/stealth
 [submodule "shx"]
 	path = shx
 	url = git@github.com:octave-commons/shx.git
+	branch = device/stealth
