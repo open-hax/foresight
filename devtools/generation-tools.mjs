@@ -25,6 +25,7 @@ export function checkedTools(body, supported) {
     let validate;
     try { validate = ajv.compile(fn.parameters); }
     catch { throw new RangeError('unsupported_tool_schema'); }
+    if (validate.$async) throw new RangeError('unsupported_tool_schema');
     offered.set(fn.name, validate);
   }
   const choice = body.tool_choice === undefined ? 'auto' : body.tool_choice;

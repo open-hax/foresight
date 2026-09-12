@@ -52,6 +52,7 @@ export async function startEmbeddingServer({ port = 0, cacheDir = process.env.FO
       if (!Array.isArray(inputs) || inputs.length < 1 || inputs.length > 32 || inputs.some(value => typeof value !== 'string' || value.length > 16384)) return reply(400, { error: 'invalid_input' });
       if (body.dimensions !== undefined && body.dimensions !== 384) return reply(400, { error: 'invalid_dimensions' });
       if (body.encoding_format !== undefined && !['float', 'base64'].includes(body.encoding_format)) return reply(400, { error: 'invalid_encoding_format' });
+      if (request.url === '/api/embed' && body.encoding_format === 'base64') return reply(400, { error: 'invalid_encoding_format' });
       const output = await extractor(inputs, { pooling: 'mean', normalize: true });
       const embeddings = output.tolist();
       validateEmbeddingRows(embeddings, inputs.length);

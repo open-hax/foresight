@@ -164,6 +164,24 @@ for (const model of [false, 0, '', null, 'unknown', {}, []]) {
   });
 }
 
+test('the Ollama embedding route refuses base64 and preserves its numeric vector contract', async () => {
+  const request = body => fetch(new URL('/api/embed', embedding.baseUrl), {
+    method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ input: ['A small red bird.'], ...body }),
+  });
+  const refused = await request({ encoding_format: 'base64' });
+  assert.equal(refused.status, 400);
+  assert.deepEqual(await refused.json(), { error: 'invalid_encoding_format' });
+  const omitted = await request({});
+  const explicit = await request({ encoding_format: 'float' });
+  assert.equal(omitted.status, 200);
+  assert.equal(explicit.status, 200);
+  const actual = await explicit.json();
+  assert.deepEqual(actual, await omitted.json());
+  assert.equal(actual.embeddings[0].length, 384);
+  assert(actual.embeddings[0].every(Number.isFinite));
+});
+
 test('embedding model omission and exact model name select the same real vector', async () => {
   const vector = async body => {
     const response = await fetch(`${embedding.baseUrl}/embeddings`, {

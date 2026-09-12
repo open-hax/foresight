@@ -1,0 +1,44 @@
+{
+  "started": "2026-09-12T18:47:42.353Z",
+  "finished": "2026-09-12T18:48:12.610Z",
+  "source": {
+    "head": "c72b41eee96d22915a79487148df453c34627e48",
+    "tree": "143ae8e49d2d4897ac8a076097059417ee672c6e",
+    "dirty": false,
+    "files": 485,
+    "sha256": "8986bd958c61acc460a4b411f3939de214b74724f846d9a19e82ed55cfc7b309"
+  },
+  "clio": "2b7bfbefa580d512262ca18f9163ecba43e54cc5",
+  "embedding": {
+    "model": "Xenova/all-MiniLM-L6-v2",
+    "dimensions": 384,
+    "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+    "artifact": "sha256:afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1"
+  },
+  "mongoPing": true,
+  "s3ObjectRoundtrip": true,
+  "integration": {
+    "command": [
+      "clojure",
+      "-Sdeps",
+      "{:aliases {:verified-clio {:override-deps {eta-mu/clio {:local/root \"<verified-clio-source>/packages/clio\"}}}}}",
+      "-M:verified-clio:integration-test"
+    ],
+    "code": 0,
+    "signal": null,
+    "summary": "22 tests, 108 assertions, 0 failures."
+  },
+  "skipped": false,
+  "run_id": "ab8e3cf5-c709-4b18-b7ff-c877cba4d69d",
+  "cleanup_completed": true,
+  "schema_version": 2,
+  "supervisor_sha256": "3555b6d5d899381844641f2a18675743b058c1c87aab7ac903614f94986320ee",
+  "supervisor_exit_code": 0,
+  "supervisor_signal": null,
+  "supervisor_command": [
+    "/workspace/scratch/3655842e43cf/runtime-restored/foresight-chat-work-linux-x64/lib/node/bin/node",
+    "/workspace/scratch/3655842e43cf/foresight-restored/devtools/epiphany-integration.mjs",
+    "--worker"
+  ],
+  "supervisor_observed": "child-close"
+}

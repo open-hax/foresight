@@ -6,7 +6,7 @@ The existing Foresight Transformers.js providers run in the restored **same Linu
 
 | Capability | Pinned model | Revision | Quantization |
 | --- | --- | --- | --- |
-| Wiki generation | onnx-community/Qwen2.5-0.5B-Instruct | cc5cc01a65cc3ff17bdb73a7de33d879f62599b0 | q4 |
+| Historical Wiki generation trial | onnx-community/Qwen2.5-0.5B-Instruct | cc5cc01a65cc3ff17bdb73a7de33d879f62599b0 | q4 |
 | Small generation baseline | HuggingFaceTB/SmolLM2-135M-Instruct | 12fd25f77366fa6b3b4b768ec3050bf629380bac | q4 |
 | Embeddings | Xenova/all-MiniLM-L6-v2 | 751bff37182d3f1213fa05d7196b954e230abad9 | q8 |
 
@@ -39,4 +39,8 @@ The optional JSON translation envelope is produced by the transport around actua
 
 ## Next
 
-Run the Wiki's two publishing cycles against these same local providers and inspect the accepted correction memory in the second translation cycle.
+Run the Wiki's two publishing cycles with the current pinned Qwen 1.5B fixture
+described in [local model agent transport](local-model-agent-transport.md), and
+inspect accepted correction memory in the second translation cycle. The 0.5B
+measurements above are historical transport evidence; that model later repeated
+source text in the larger Wiki task. MiniLM remains the local embedding provider.

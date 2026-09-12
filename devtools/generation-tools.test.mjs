@@ -62,3 +62,13 @@ test('the caller can prohibit multiple generated calls without changing its prom
   assert.equal(decodeGeneratedTools(`${raw}\n${raw}`, 'stop', parallel).tool_calls.length, 2);
   assert.throws(() => checkedTools({ ...body, parallel_tool_calls: 'false' }, true), /unsupported_parallel_tool_calls/);
 });
+
+test('asynchronous tool schemas are refused before generated arguments can be validated', () => {
+  const asynchronous = { ...tool, function: { ...tool.function,
+    parameters: { ...tool.function.parameters, $async: true } } };
+  for (const tool_choice of ['auto', 'required', 'none']) {
+    assert.throws(() => checkedTools({ tools: [asynchronous], tool_choice }, true), /unsupported_tool_schema/);
+  }
+  const synchronous = checkedTools(body, true);
+  assert.throws(() => decodeGeneratedTools(tagged({ segment_index: -1 }), 'stop', synchronous), /invalid_generated_tool_call/);
+});

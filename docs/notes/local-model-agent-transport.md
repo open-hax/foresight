@@ -17,6 +17,10 @@ inter-operation thread), and the installed Knoxx eta-mu-ai SDK 0.70.7.
 
 ## Exact model inputs
 
+The current Wiki tour selects the [Qwen 1.5B contract](../../knoxx/backend/test/fixtures/translation-local-model-contracts/models/qwen_15.edn)
+and the same pinned model in its local service supervisor. The earlier Qwen 0.5B
+run is retained as historical evidence, not the publishing-cycle configuration.
+
 | Model | Immutable Hub revision | Quantization |
 | --- | --- | --- |
 | `HuggingFaceTB/SmolLM2-135M-Instruct` | `12fd25f77366fa6b3b4b768ec3050bf629380bac` | q4 |
@@ -42,7 +46,9 @@ AJV 8.17.1 validates the JSON Schemas actually offered by the caller. This avoid
 implementing an incomplete home-grown subset of JSON Schema at the Node
 transport boundary. Compilation is strict; unknown validation keywords and
 unsupported formats are refused. Validation does not coerce values, add defaults,
-or remove fields. Unoffered names, malformed JSON, schema-invalid arguments,
+or accept asynchronous validators: generated-call admission requires a synchronous
+boolean result, and AJV schemas compiled with `$async` are refused before use.
+Validation does not remove fields. Unoffered names, malformed JSON, schema-invalid arguments,
 unclosed tags, and calls ending at the token limit cannot become executable
 calls. Required or forced tool choices fail if the model does not comply.
 An explicit `parallel_tool_calls: false` also refuses a generated completion
