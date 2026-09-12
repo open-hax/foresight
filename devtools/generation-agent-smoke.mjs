@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 import assert from 'node:assert/strict';
 import { findPackageJSON } from 'node:module';
-import { readFile, realpath } from 'node:fs/promises';
-import { pathToFileURL } from 'node:url';
+import { readFile } from 'node:fs/promises';
+import { streamOpenAICompletions } from '@open-hax/eta-mu-ai/openai-completions';
 import { startGenerationServer } from './generation-server.mjs';
 
-// Exercise the exact SDK installed by Knoxx, respecting its published export path.
-const cliPackage = pathToFileURL(await realpath(new URL('../knoxx/backend/node_modules/@open-hax/eta-mu-cli/package.json', import.meta.url)));
-const aiPackage = pathToFileURL(findPackageJSON('@open-hax/eta-mu-ai', cliPackage));
+// Resolve the SDK from this package's declared dependency, independently of children.
+const aiPackage = findPackageJSON('@open-hax/eta-mu-ai', import.meta.url);
 const manifest = JSON.parse(await readFile(aiPackage, 'utf8'));
-const { streamOpenAICompletions } = await import(new URL(manifest.exports['./openai-completions'].import, aiPackage));
 const service = await startGenerationServer({ model: 'onnx-community/Qwen2.5-1.5B-Instruct', maxNewTokens: 1024 });
 try {
   const model = { id: service.model, name: service.model, api: 'openai-completions', provider: 'transformers-js',

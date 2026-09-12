@@ -15,6 +15,7 @@
     "model:warm": "node warm-generation-model.mjs"
   },
   "dependencies": {
+    "@open-hax/eta-mu-ai": "0.70.7",
     "ajv": "8.17.1",
     "@aws-sdk/client-s3": "3.888.0",
     "s3rver": "3.7.1",

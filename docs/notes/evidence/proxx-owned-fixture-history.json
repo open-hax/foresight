@@ -1,0 +1,26 @@
+{
+  "evidence_kind": "historical_child_execution_report",
+  "repository": "open-hax/proxx",
+  "application_test_commit": "092d8307a1abc9d04ed2633c781fde41b77a9dd2",
+  "integration_base": "88471efd7f8cd27f64fc733a1c31369f00a6d432",
+  "repair_source": "be923300e8d1d76edc5e38e9676e3dbd76351a4b",
+  "published_report_commit": "809895c131d8dfe42a56a58ae6d7f1c5f441b3cd",
+  "published_report_url": "https://github.com/open-hax/proxx/blob/809895c131d8dfe42a56a58ae6d7f1c5f441b3cd/docs/notes/sandbox-owned-fixtures.md",
+  "command": "node --test --test-concurrency=1 'dist/tests/**/*.test.js'",
+  "guard_source_commit": "1d830897ff44f1fc4d4f036ad682f74e5353dd5d",
+  "counts": {"tests": 673, "passed": 672, "failed": 0, "skipped": 1, "refused_transports": 0},
+  "exit_code": 0,
+  "elapsed_seconds": 107.7,
+  "lint": {"errors": 0, "warnings": 238},
+  "sha256": {
+    "node-test-loopback.cjs": "4576b31455f2ee79f2dc90473d0d62d98f621dfbd84f3f4fad8b3146d8aa49f3",
+    "node-test-transport.cjs": "c8eb41c8ea7eb51576e08355bcf6bf889e31d39f39c592ddc7736c46e627a40e",
+    "dist/cljs/proxx-runtime.js": "15f0c7d40476c1bfa82d465e9644ff3c644ee59d8a8bde337dc134e85b9361ce"
+  },
+  "limitations": [
+    "This records the child report; no new application execution was performed while adding this root evidence file.",
+    "The existing Services bootstrap-script contract remains skipped because its external script is absent.",
+    "The original automatically rejected process was not resumed, polled or stopped.",
+    "No warning-free lint, live external provider or current workflow-successor application-suite result is claimed."
+  ]
+}

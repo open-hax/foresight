@@ -63,3 +63,53 @@ were also exercised.
 The complete browser publishing cycle, successor child repairs, all-child strict
 gates, final dependency promotion and actual reviewer convergence remain pending.
 None of the eight open PRs is declared merge-ready by this bounded root result.
+
+## Subsequent model and transport review
+
+Actual CodeRabbit finding 3996948898 reproduced a refusal when an owned `::1`
+listener was addressed by the equivalent literal `0:0:0:0:0:0:0:1`. Native IPv6
+literals are now canonicalized before both loopback and live-listener equality
+checks. The regression also refuses wildcard, mapped IPv4 and hostname forms;
+listener ownership, port matching and fatal refusal behavior remain intact.
+All 14 transport tests pass after the real one-test RED.
+
+Codex finding 3997008937 reproduced HTTP 400 for empty decoded text following
+valid real inference. Empty provider output now throws the provider error type,
+yielding HTTP 500 / `generation_failed`; invalid requests remain HTTP 400 and
+expired inference remains HTTP 504. The actual decoder-boundary regression
+failed before the change and passes after it. No success output was injected.
+
+Codex finding 3997008933 correctly identified an installation dependency on
+Knoxx in the root agent smoke. Devtools now declares `@open-hax/eta-mu-ai` 0.70.7
+and imports its public completions entry directly. The generator incorporates
+that exact dependency in root manifests. An initial offline install could not
+resolve missing registry metadata; the normal online install reused 336 packages
+and downloaded 33. The subsequent frozen offline install passes. pnpm still
+reports its intentionally unapproved `@google/genai` build script and four
+deprecated transitive packages on resolution; no build-policy exception was
+enabled. The actual SDK smoke passed without those scripts.
+
+Codex finding 3997008938 is fixed in the main workspace guide: native SSE,
+validated Qwen tools, model identities and request limits are now described
+consistently. CodeRabbit finding 3996948902 is addressed by replacing the
+ambiguous Proxx total with explicit revision-bound historical evidence and
+synchronizing all three recovery notes. That history does not claim a fresh
+application run or any interaction with the old rejected process.
+
+CodeRabbit's separate `tools:null` observation was checked against the published
+guard, which already validates the original field. The new actual Qwen case
+proves HTTP 400 with zero tokenizer-template calls, while an empty array reaches
+the real template. This is additional coverage without a fabricated RED.
+
+Fresh complete root gates pass: 125 Clojure/CLJS tests / 607 assertions and 18
+Node tests, zero failures; test compilation 96 inputs and release 86 inputs,
+zero compiler warnings; clj-kondo and Oxlint zero errors/warnings. The expanded
+model HTTP/codec suite passes 83 tests with zero skips. Actual Qwen through the
+devtools SDK produced a 46-token `save_translation` call, the local tool executed
+its real arguments, and the next request consumed its result and produced a
+31-token streamed confirmation. Independent peer inspection found no introduced
+issue in the changed transport, classification, dependency or regression paths.
+
+The final browser publishing cycle, all-child warning-free gates, dependency
+promotion and current-source external reviewer convergence remain separate
+unfinished obligations.

@@ -7,6 +7,13 @@ const dns = require('node:dns');
 const dgram = require('node:dgram');
 const {syncBuiltinESMExports} = require('node:module');
 
+function normalizedHost(host) {
+  if (typeof host === 'string' && net.isIP(host) === 6 && !host.includes('%')) {
+    return new URL(`http://[${host}]/`).hostname.slice(1, -1);
+  }
+  return host;
+}
+
 function connectOptions(args) {
   const [first, second] = args;
   if (Array.isArray(first)) return first[0];
@@ -20,7 +27,7 @@ function connectOptions(args) {
 function install({onBlocked = () => {}} = {}) {
   const listeners = new Map();
   const restores = [];
-  const loopback = host => host === '127.0.0.1' || host === '::1';
+  const loopback = host => ['127.0.0.1', '::1'].includes(normalizedHost(host));
   function block(kind, endpoint) {
     const error = Object.assign(new Error(`Test transport refused ${kind}; use an owned literal loopback listener`),
       {code:'ERR_TEST_TRANSPORT_NOT_OWNED', endpoint});
@@ -29,10 +36,10 @@ function install({onBlocked = () => {}} = {}) {
   }
   function ownConnection(args) {
     const options = connectOptions(args);
-    const host = options?.host || options?.hostname;
+    const host = normalizedHost(options?.host || options?.hostname);
     if (!options || options.path || !loopback(options.host || options.hostname)
         || ![...listeners.entries()].some(([server, address]) => server.listening
-          && address.address === host && address.port === Number(options.port))) {
+          && normalizedHost(address.address) === host && address.port === Number(options.port))) {
       block('a connection', {host:host || null, port:options?.port || null});
     }
   }

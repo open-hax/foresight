@@ -173,7 +173,7 @@ pnpm test:model-http
 pnpm model:generation
 ```
 
-Import `startGenerationServer` from `devtools/generation-server.mjs` when composing an integration supervisor. It serves real model output in an OpenAI-compatible chat-completion envelope. Only the declared translation response wrapper is supported; it wraps generated text rather than claiming model-enforced JSON. Tool calling and streaming are explicitly unsupported. Missing weights fail startup, and remote model fetching is disabled. These small-model checks establish runtime/protocol behavior; content and translation quality still require review.
+Import `startGenerationServer` from `devtools/generation-server.mjs` when composing an integration supervisor. It serves real model output in an OpenAI-compatible chat-completion envelope, including native SSE streaming. Pinned Qwen models support generated tool calls validated against the offered JSON Schemas; Smol rejects tool requests. `parallel_tool_calls:false` is enforced. Only the declared translation response wrapper is supported; it wraps generated text and rejects unsupported schema constraints rather than claiming model-enforced JSON. Missing weights fail startup, and remote model fetching is disabled. These small-model checks establish runtime/protocol behavior; content and translation quality still require review.
 
 The model HTTP regression command uses the warmed offline cache. It checks
 malformed schema and tool-field refusals, deadline classification even when inference throws,
@@ -182,3 +182,12 @@ These tests are explicit because loading model weights is unnecessary for the
 ordinary root source/build gates.
 
 A second explicit local option is onnx-community/Qwen2.5-0.5B-Instruct at revision cc5cc01a65cc3ff17bdb73a7de33d879f62599b0. Set FORESIGHT_GENERATION_MODEL to that identity when running the generation server or smoke. The shared cached artifact footprint is about 1.1 GB. Run pnpm model:warm with the selected model name to download its pinned public artifacts before offline use; this warm-up sends no prompts or repository content. The larger model completed the production translation protocol probe, but candidate quality still requires human revision.
+
+The Wiki agent fixture selects `onnx-community/Qwen2.5-1.5B-Instruct` at revision
+`6287331f475a3e20e8c879be8fd4bf3551ad9d34`, also q4 on CPU. The service admits at
+most 8,192 prompt-plus-output tokens and a configured maximum of 1,024 new tokens.
+`pnpm --filter @foresight/devtools test:generation-agent` exercises an actual
+generated tool call, its local effect, and the model's streamed follow-up through
+the devtools-owned pinned eta-mu AI SDK. See
+[the model transport evidence](notes/local-model-agent-transport.md) for measured
+outputs and limitations.

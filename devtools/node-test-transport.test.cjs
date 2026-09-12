@@ -15,6 +15,29 @@ const dgram = require('node:dgram');
 const test = require('node:test');
 const {install} = require('./node-test-transport.cjs');
 
+test('equivalent IPv6 loopback literals reach the same owned listener', async () => {
+  const boundary = install();
+  const server = net.createServer(socket => socket.end('owned IPv6 fixture'));
+  try {
+    server.listen(0, '::1');
+    await once(server, 'listening');
+    for (const host of ['::1', '0:0:0:0:0:0:0:1', '0:0::1']) {
+      const socket = net.connect({host, port:server.address().port});
+      let content = '';
+      socket.setEncoding('utf8');
+      socket.on('data', chunk => { content += chunk; });
+      await once(socket, 'close');
+      assert.equal(content, 'owned IPv6 fixture');
+    }
+    for (const host of ['::', '::2', '::ffff:127.0.0.1', 'localhost']) {
+      assert.throws(() => net.connect({host, port:server.address().port}), {code:'ERR_TEST_TRANSPORT_NOT_OWNED'});
+    }
+  } finally {
+    if (server.listening) await new Promise(resolve => server.close(resolve));
+    boundary.close();
+  }
+});
+
 test('owned native HTTP and fetch work; every non-owned path is refused before transport', async () => {
   const blocked = [];
   const boundary = install({onBlocked:error => blocked.push(error.code)});

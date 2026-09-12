@@ -73,7 +73,7 @@ async function generate(generator, input, stoppingCriteria, onText) {
   const configuredEos = generator.model.generation_config?.eos_token_id ?? generator.model.config.eos_token_id;
   const eosIds = (Array.isArray(configuredEos) ? configuredEos : [configuredEos]).map(Number);
   const stopped = eosIds.includes(Number(tokens.at(-1)));
-  if (!content.trim()) throw new RangeError('empty_generation');
+  if (!content.trim()) throw new Error('empty_generation');
   return { content, finishReason: stopped ? 'stop' : 'length', promptTokens, completionTokens: tokens.length };
 }
 

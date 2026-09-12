@@ -58,7 +58,7 @@ well as subsequent successful repairs.
 | Bitch-tracker | 2 tests / 7 assertions passed, lint 0/0, plugin release without compiler warnings. The repository has no committed package lock; no fabricated frozen-install claim is made. |
 | Muse | Latest successor passes 198 tests / 517 assertions with real Mongo, lint 0/0, all four host builds without compiler warnings. Warm build success originally concealed a cold generated-namespace failure. All three actual configured host commands now pass isolated cold-checkout builds through shared prebuild generation. Claude post-release hooks are verified against the actual checkout. |
 | Uxx | Current-main 466 tests, root/token and adapter production builds, TypeScript, lint and frozen install passed. Actual packed Helix/Reagent archives expose 63 runtime exports each and share a consumer React. Tarballs exclude compiler caches and runtime build dependencies. |
-| Proxx | Current-staging production build and 124 CLJS tests / 324 assertions passed before follow-up extern hints. Lint has 0 errors and 238 existing calibrated warnings. Full Node suite is blocked by automatic approval review; no later success or termination is asserted. |
+| Proxx | Historical current-main repair `092d8307` built and ran 673 Node tests: 672 passed, zero failures, one existing absent-bootstrap skip; lint had 0 errors and 238 warnings. The separate original rejected execution remains untouched. [Revision-bound evidence](evidence/proxx-owned-fixture-history.json) distinguishes these runs; the current workflow successor is not a fresh application-suite result. |
 | services | Deployment-boundary self-test, immutable-pin checks and 370 EDN/documentation inputs passed. This is not a live-host deployment or complete production CI claim. |
 | eta-mu | Clio host gates and service-protocol tests execute real file persistence and restart. The protocol review fixes add typed ESM consumers, same-history authentication admission, JavaScript defaults and explicit subscription failure handling. Current child PR checks remain authoritative for their exact heads. |
 | Knoxx | Application agents own the backend/frontend/wiki/identity/browser proofs and their exact commits. Root workspace tests do not substitute for those checks. |
@@ -91,12 +91,12 @@ caused HTTPS traffic to an unverified private host whose ownership and payload
 were unknown. The rejected execution was not retried. A subsequent process-list
 diagnostic itself failed before any stop, and an early log inspection identified
 the nonlocal fixture routes. Once the restriction on indirect access was made
-explicit, investigation continued through source inspection only; no later
-process state or successful termination is claimed. Source inspection points to
-test provider registries retaining nonlocal fallback URLs. A bounded next fix is
-to make those integration fixtures select only explicitly owned local endpoints
-and prove the transport boundary before requesting a new execution. All work
-stays in the current sandbox and existing implementation stack.
+explicit, investigation of that rejected execution continued through source
+inspection only; no later state or successful termination of it is claimed.
+Subsequently, separately owned fixture repairs and a fresh guarded test process
+produced the revision-bound result above. These later runs do not resume or
+reauthorize the rejected session. All work stays in the current sandbox and
+existing implementation stack.
 
 Outstanding lint/compiler warnings above, hosted exact-head checks, provider
 cutover completeness, browser acceptance and unresolved reviewer findings remain

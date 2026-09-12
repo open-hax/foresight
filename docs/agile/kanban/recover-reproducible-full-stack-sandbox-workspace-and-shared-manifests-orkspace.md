@@ -2,7 +2,7 @@
 category: "kanban"
 dependency: []
 type: "task"
-write-id: "1789232991926-0.tg6x7gyn8ux3f70rhw"
+write-id: "1789237293224-0.eqpmvwxi6jo4zugs4pj"
 title: "Recover reproducible full-stack sandbox workspace and shared manifests"
 priority: "P0"
 status: "in_progress"
@@ -63,5 +63,7 @@ completion and actual reviewer convergence remain required before merge.
 
 ---
 Recovery checkpoint: workspace maintenance removed the prior active checkout/tools/builds/models. All14 declared child repositories restored, root published07440a348964736d149b639092052ba8c68999a8 exactly matches tested tree968c61893a28b4c6b18c17ff9522132d4ee4c7b9. Actual root full test125 Clojure/CLJS tests607assertions plus17Node tests; build/test compiler0warnings and lint0/0. Codex transport/source-input findings reproduced before fixes;13native transport and3actual Git/supervisor admission cases now included in generated pnpm test. Same pinned runtime, real Mongo TCP insert/read and Chromium interaction restored. Later unpublished Knoxx checkpoints remain lost and require new proof. Reportv16 and runtime recovery archive are saved; complete browser publishing/reviewed child promotion remains pending. AJV8.17.1 added to devtools and generated root manifests with frozen lock because real generated tool arguments must be checked against the offered full JSON Schema without coercion/defaulting; model streaming implementation is separate ongoing work. No old rejected process resumed; no broad merge release.
+
+Current root review successor: actual IPv6 literal and empty-generation REDs repaired; all 14 native transport tests and 83 real model HTTP/codec tests pass with zero skips. Devtools now owns pinned eta-mu-ai 0.70.7, and its actual two-turn Qwen smoke produced a 46-token save_translation call, executed the local tool, and streamed a 31-token follow-up. Full root test 125 Clojure/CLJS tests / 607 assertions plus 18 Node tests, build/test compilers and both linters all warning-free. Frozen offline install passes after fetching missing registry metadata; pnpm's ignored google/genai build script and deprecated transitive dependency warnings remain explicit installation limits. Historical Proxx results now have revision-bound evidence and consistent notes; no old rejected process was accessed. Root peer review found no introduced defect. Published Clio e2e440c5 fixes false/null membership, NaN ranges and controlled first-watch event loss; published Rheos 7fb29118 preserves inline labels and combined ledger prefixes. Browser 18 completed identity, live Mail/Contracts and source review but failed model registration at translation; Knoxx 07c25dec repairs that real SDK registry failure with 9 tests / 40 assertions. Backend decomposition, new Axxium/Epiphany reviews, final browser publishing/two-cycle proof and all-child merge gates remain in progress. Saved report version 17 and browser 17/18 evidence retain the failed attempts and annotated screenshots.
 
 ---

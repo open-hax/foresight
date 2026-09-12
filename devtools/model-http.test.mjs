@@ -59,6 +59,27 @@ for (const tools of [{}, null, '', 'function', false, 0, [{ type: 'function' }]]
   });
 }
 
+test('a Qwen route refuses present null tools before templating and admits an empty array', async () => {
+  const service = await startGenerationServer({ model: 'onnx-community/Qwen2.5-1.5B-Instruct', timeoutMs: 1 });
+  const templating = mock.method(PreTrainedTokenizer.prototype, 'apply_chat_template');
+  const request = async tools => {
+    const response = await fetch(`${service.baseUrl}/chat/completions`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ model: service.model, messages: [{ role: 'user', content: 'Hello.' }], tools }),
+    });
+    return { status: response.status, body: await response.json() };
+  };
+  try {
+    assert.deepEqual(await request(null), { status: 400, body: { error: 'unsupported_tools_or_stream' } });
+    assert.equal(templating.mock.callCount(), 0, 'Malformed tool metadata must not reach generation');
+    assert.deepEqual(await request([]), { status: 504, body: { error: 'generation_timeout' } });
+    assert.equal(templating.mock.callCount(), 1, 'Empty tools must reach the actual Qwen template');
+  } finally {
+    templating.mock.restore();
+    await service.close();
+  }
+});
+
 for (const stream of [null, '', 'false', 'true', 0, 1, {}, []]) {
   test(`unsupported stream ${JSON.stringify(stream)} is refused before inference`, async () => {
     assert.deepEqual(await completion({ stream }), {
@@ -211,6 +232,28 @@ for (const [description, decode] of [
     } finally { injected.mock.restore(); }
   });
 }
+
+test('empty completed model output is a provider failure, while malformed input remains a client refusal', async () => {
+  const service = await startGenerationServer({ model: LOCAL_GENERATION_MODEL, maxNewTokens: 1 });
+  const injected = mock.method(PreTrainedTokenizer.prototype, 'decode', () => '  ');
+  const request = async messages => {
+    const response = await fetch(`${service.baseUrl}/chat/completions`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ model: service.model, messages, max_tokens: 1 }),
+    });
+    return { status: response.status, body: await response.json() };
+  };
+  try {
+    assert.deepEqual(await request([{ role: 'user', content: 'Hello.' }]), {
+      status: 500, body: { error: 'generation_failed' },
+    });
+    assert.ok(injected.mock.callCount() > 0, 'Actual inference reached the altered decoding boundary');
+    assert.deepEqual(await request([]), { status: 400, body: { error: 'invalid_messages' } });
+  } finally {
+    injected.mock.restore();
+    await service.close();
+  }
+});
 
 /** Stream an oversized upload slowly enough to detect premature response/connection closure. */
 async function oversizedUpload(url) {

@@ -73,7 +73,12 @@ suite was blocked by automatic approval review after HTTPS traffic targeted an
 unverified private host. That execution was not retried. An early process-list
 diagnostic failed, and a log tail was read before the parent clarified the
 source-only boundary; no subsequent session access or stop was attempted.
-There is no full-suite success claim. Fixture provider isolation is still needed.
+That rejected execution has no full-suite success or termination claim.
+Subsequent independent fixture isolation and a fresh guarded current-main run
+are recorded in [the revision-bound Proxx history](evidence/proxx-owned-fixture-history.json):
+672 of 673 tests passed, with one existing absent-bootstrap skip and 238 lint
+warnings. This historical run does not establish a warning-free stack or a new
+application-suite result for the later workflow successor.
 
 Muse's current-main branch builds its four owned host targets with 0 compiler
 warnings, executes 197 tests / 506 assertions successfully, and passes canonical

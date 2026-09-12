@@ -85,9 +85,15 @@ node devtools/generation-agent-smoke.mjs
 pnpm exec oxlint --deny-warnings devtools
 ```
 
-The agent smoke requires Knoxx's installed `@open-hax/eta-mu-cli` dependency and
-resolves its actual published `@open-hax/eta-mu-ai/openai-completions` export.
-It does not install a second SDK or mock its HTTP client.
+The agent smoke uses devtools' declared `@open-hax/eta-mu-ai` 0.70.7 dependency
+and its public `openai-completions` export. Root `pnpm install` supplies it
+independently of Knoxx's installation; the shared pnpm store can reuse identical
+package bytes. The SDK HTTP client remains real. The measurements below came
+from the earlier SDK lookup through Knoxx. The successor smoke also passed
+through the devtools-owned dependency: 46 generated tool-call tokens in 49.28
+seconds, then 31 streamed confirmation tokens in 21.73 seconds while other
+verification jobs were running. Original prompts, IDs and the local tool result
+were preserved. These timings are observations, not a performance guarantee.
 
 Observed evidence:
 
@@ -111,3 +117,9 @@ Observed evidence:
 These checks establish the model/SDK transport boundary. The browser publication
 run independently establishes whether the application's real prompts, review
 rules, tools, and UI complete the requested workflow.
+
+The subsequent review regression suite passes **83 tests, zero failures or
+skips**. It adds an actual Qwen `tools:null` refusal before templating, admission
+of `tools:[]`, and provider-error classification for deliberately empty decoded
+output after real inference. The null-tools production guard already existed;
+this was added coverage for a disputed review observation, not a repaired bug.

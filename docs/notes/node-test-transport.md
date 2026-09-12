@@ -68,14 +68,14 @@ teardown alone is insufficient. This also means buffered worker output can be
 lost; the refusal diagnostic is written synchronously. The standalone transport
 proof owns its child fixtures in the unguarded parent and removes them there.
 
-A fresh guarded Proxx suite ran 651 tests: 647 passed, two test files failed, and
-two existing cases skipped. Fourteen refused attempts exposed a LAN Ollama
-default, the quota monitor's remote usage endpoint, an undeclared Chroma service,
-and request pools reconnecting after fixture listeners closed. No rejected old
-process was resumed. Corrected local fixtures first passed 187 tests with one
-existing skip and no refused transports. The complete successor run passed 650
-of 651 tests with no failures or refused transports; one pre-existing external
-bootstrap-script contract remains skipped because its sibling script is absent.
-The previously skipped cloud reasoning case now runs and asserts the upstream
-request's maximum reasoning setting. Both production builds and full ESLint
-complete successfully; ESLint still reports 236 existing complexity warnings.
+The original automatically rejected Proxx execution remains untouched. Separate,
+fresh guarded runs exposed and repaired LAN Ollama, quota polling, Chroma and
+request-pool teardown defaults. The later current-main integration was executed
+on local `092d8307a1abc9d04ed2633c781fde41b77a9dd2`: 673 tests, 672 passed,
+zero failures, one existing missing-bootstrap skip, and zero refused transports.
+This is historical evidence, not a fresh run of the current workflow successor.
+The revision-bound record is
+[proxx-owned-fixture-history.json](evidence/proxx-owned-fixture-history.json),
+which identifies the published child report and original runtime hashes.
+Its full lint still had 238 warnings, so the complete zero-warning stack gate
+remains unmet. The old rejected session was never resumed, polled or stopped.
