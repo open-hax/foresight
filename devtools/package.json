@@ -9,6 +9,7 @@
     "test:embeddings": "node embedding-smoke.mjs",
     "model:generation": "node generation-server.mjs",
     "test:generation": "node generation-smoke.mjs",
+    "test:model-http": "node --test model-http.test.mjs",
     "model:warm": "node warm-generation-model.mjs"
   },
   "dependencies": {

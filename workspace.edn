@@ -30,4 +30,5 @@
   "model:warm" "pnpm --filter @foresight/devtools model:warm"
   "model:generation" "pnpm --filter @foresight/devtools model:generation"
   "test:generation" "pnpm --filter @foresight/devtools test:generation"
+  "test:model-http" "pnpm --filter @foresight/devtools test:model-http"
   "test:s3" "pnpm --filter @foresight/devtools test:s3"}}

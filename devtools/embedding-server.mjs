@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import { pipeline, env } from '@huggingface/transformers';
 
+/** Start an offline loopback service producing normalized 384-dimensional MiniLM embeddings. */
 export async function startEmbeddingServer({ port = 0, cacheDir = process.env.FORESIGHT_MODEL_CACHE || fileURLToPath(new URL('../.cache/models/', import.meta.url)), model = 'Xenova/all-MiniLM-L6-v2' } = {}) {
   if (model !== 'Xenova/all-MiniLM-L6-v2') throw new RangeError('This provider supports only the pinned MiniLM model');
   env.cacheDir = cacheDir;
@@ -14,18 +15,24 @@ export async function startEmbeddingServer({ port = 0, cacheDir = process.env.FO
     session_options: { intraOpNumThreads: 2, interOpNumThreads: 1 },
   });
   const server = http.createServer(async (request, response) => {
-    const reply = (status, body) => { response.writeHead(status, { 'content-type': 'application/json' }); response.end(JSON.stringify(body)); };
+    const reply = (status, body) => {
+      if (response.destroyed || response.writableEnded) return;
+      response.writeHead(status, { 'content-type': 'application/json' });
+      response.end(JSON.stringify(body));
+    };
     try {
       if (request.method === 'GET' && request.url === '/health') return reply(200, { status: 'ok', model, dimensions: 384, offline: true });
       if (request.method === 'GET' && request.url === '/v1/models') return reply(200, { object: 'list', data: [{ id: model, object: 'model', owned_by: 'local' }] });
       if (request.method !== 'POST' || !['/v1/embeddings', '/embeddings', '/api/embed'].includes(request.url)) return reply(404, { error: 'route_not_found' });
       const chunks = [];
       let size = 0;
+      // Consume the full request: returning inside this iterator destroys the upload stream.
       for await (const chunk of request) {
         size += chunk.length;
-        if (size > 1024 * 1024) return reply(413, { error: 'input_too_large' });
-        chunks.push(chunk);
+        if (size > 1024 * 1024) chunks.length = 0;
+        else chunks.push(chunk);
       }
+      if (size > 1024 * 1024) return reply(413, { error: 'input_too_large' });
       const body = JSON.parse(Buffer.concat(chunks).toString('utf8'));
       if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400, { error: 'invalid_input' });
       const inputs = typeof body.input === 'string' ? [body.input] : body.input;

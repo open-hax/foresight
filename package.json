@@ -33,6 +33,7 @@
     "test": "pnpm manifests:check && nbb test/project_test.cljs && nbb test/workspace_test.cljs && nbb test/manifests_test.cljs && nbb test/evidence_test.cljs && nbb test/evidence_cli_test.cljs && nbb test/lineage_test.cljs && node --test test/reference/repository-census.test.mjs && shadow-cljs compile test && node dist/local-test.cjs",
     "test:embeddings": "pnpm --filter @foresight/devtools test:embeddings",
     "test:generation": "pnpm --filter @foresight/devtools test:generation",
+    "test:model-http": "pnpm --filter @foresight/devtools test:model-http",
     "test:s3": "pnpm --filter @foresight/devtools test:s3"
   },
   "version": "0.0.0"
