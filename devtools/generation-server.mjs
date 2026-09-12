@@ -3,26 +3,31 @@ import http from 'node:http';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { env, pipeline, InterruptableStoppingCriteria } from '@huggingface/transformers';
+import { env, pipeline, InterruptableStoppingCriteria, TextStreamer } from '@huggingface/transformers';
 import { readModelRequestBody } from './model-request-body.mjs';
+import { checkedMessages, checkedTools, decodeGeneratedTools } from './generation-tools.mjs';
+import { completionStream } from './generation-stream.mjs';
 
 export const LOCAL_GENERATION_MODEL = 'HuggingFaceTB/SmolLM2-135M-Instruct';
 export const LOCAL_GENERATION_REVISION = '12fd25f77366fa6b3b4b768ec3050bf629380bac';
 export const LOCAL_GENERATION_MODELS = Object.freeze({
   [LOCAL_GENERATION_MODEL]: { revision: LOCAL_GENERATION_REVISION, dtype: 'q4' },
   'onnx-community/Qwen2.5-0.5B-Instruct': { revision: 'cc5cc01a65cc3ff17bdb73a7de33d879f62599b0', dtype: 'q4' },
+  'onnx-community/Qwen2.5-1.5B-Instruct': { revision: '6287331f475a3e20e8c879be8fd4bf3551ad9d34', dtype: 'q4' },
 });
 
-/** Accept the single translation envelope supported by this text-only transport. */
+/** Accept the single translation envelope supported by the local text transport. */
 function translationWrapper(format) {
   if (format === undefined) return false;
   const schema = format?.json_schema?.schema;
   if (!format || typeof format !== 'object' || Array.isArray(format)
       || format.type !== 'json_schema' || schema?.type !== 'object'
+      || Object.keys(schema).some(key => !['type', 'additionalProperties', 'required', 'properties'].includes(key))
       || schema.additionalProperties !== false
       || JSON.stringify(schema.required) !== '["translated_text"]'
       || JSON.stringify(Object.keys(schema.properties || {})) !== '["translated_text"]'
       || schema.properties.translated_text?.type !== 'string'
+      || Object.keys(schema.properties.translated_text).some(key => !['type', 'minLength'].includes(key))
       || schema.properties.translated_text?.minLength !== 1) {
     throw new RangeError('unsupported_response_format');
   }
@@ -34,26 +39,35 @@ function translationWrapper(format) {
 function checkedRequest(body, model, maxNewTokens) {
   if (!body || typeof body !== 'object' || Array.isArray(body)) throw new RangeError('invalid_input');
   if (body.model !== model) throw new RangeError('unknown_model');
-  if ((Object.hasOwn(body, 'stream') && body.stream !== false) || Object.hasOwn(body, 'tool_choice')
-      || (Object.hasOwn(body, 'tools') && (!Array.isArray(body.tools) || body.tools.length !== 0))) {
+  if (Object.hasOwn(body, 'stream') && typeof body.stream !== 'boolean') {
     throw new RangeError('unsupported_tools_or_stream');
   }
-  if (!Array.isArray(body.messages) || body.messages.length < 1 || body.messages.length > 8
-      || body.messages.some(message => !['system', 'user', 'assistant'].includes(message?.role)
-        || typeof message.content !== 'string' || message.content.length > 200000
-        || Object.hasOwn(message, 'tool_calls') || Object.hasOwn(message, 'function_call'))) throw new RangeError('invalid_messages');
-  const requestedTokens = body.max_tokens ?? maxNewTokens;
+  const selection = checkedTools(body, model.startsWith('onnx-community/Qwen2.5-'));
+  const messages = checkedMessages(body.messages);
+  if (body.max_tokens !== undefined && body.max_completion_tokens !== undefined
+      && body.max_tokens !== body.max_completion_tokens) throw new RangeError('invalid_max_tokens');
+  const requestedTokens = body.max_completion_tokens ?? body.max_tokens ?? maxNewTokens;
   if (!Number.isInteger(requestedTokens) || requestedTokens < 1 || requestedTokens > 4096) throw new RangeError('invalid_max_tokens');
-  return { messages: body.messages, maxTokens: Math.min(requestedTokens, maxNewTokens), wrapped: translationWrapper(body.response_format) };
+  if (body.stream_options !== undefined && (!body.stream_options || typeof body.stream_options !== 'object'
+      || Array.isArray(body.stream_options) || Object.keys(body.stream_options).some(key => key !== 'include_usage')
+      || typeof body.stream_options.include_usage !== 'boolean')) throw new RangeError('unsupported_stream_options');
+  const wrapped = translationWrapper(body.response_format);
+  if (wrapped && selection.tools.length) throw new RangeError('unsupported_response_format');
+  return { messages, selection, maxTokens: Math.min(requestedTokens, maxNewTokens), wrapped,
+    stream: body.stream === true, includeUsage: body.stream_options?.include_usage === true };
 }
 
 /** Decode actual local model tokens while preserving EOS versus token-limit completion. */
-async function generate(generator, input, stoppingCriteria) {
-  const templated = generator.tokenizer.apply_chat_template(input.messages, { tokenize: false, add_generation_prompt: true });
+async function generate(generator, input, stoppingCriteria, onText) {
+  const templated = generator.tokenizer.apply_chat_template(input.messages, {
+    tokenize: false, add_generation_prompt: true, tools: input.selection.tools.length ? input.selection.tools : null,
+  });
   const encoded = generator.tokenizer(templated, { add_special_tokens: false, padding: false, truncation: false });
   const promptTokens = encoded.input_ids.dims.at(-1);
   if (promptTokens + input.maxTokens > 8192) throw new RangeError('context_window_exceeded');
-  const output = await generator.model.generate({ ...encoded, max_new_tokens: input.maxTokens, do_sample: false, stopping_criteria: stoppingCriteria });
+  const streamer = onText ? new TextStreamer(generator.tokenizer, { skip_prompt: true, callback_function: onText }) : undefined;
+  const output = await generator.model.generate({ ...encoded, max_new_tokens: input.maxTokens, do_sample: false,
+    stopping_criteria: stoppingCriteria, ...(streamer ? { streamer } : {}) });
   const tokens = output.tolist()[0].slice(promptTokens);
   const content = generator.tokenizer.decode(tokens, { skip_special_tokens: true });
   const configuredEos = generator.model.generation_config?.eos_token_id ?? generator.model.config.eos_token_id;
@@ -63,7 +77,7 @@ async function generate(generator, input, stoppingCriteria) {
   return { content, finishReason: stopped ? 'stop' : 'length', promptTokens, completionTokens: tokens.length };
 }
 
-/** Start a loopback-only, offline, single-inference OpenAI-compatible text service. */
+/** Start an offline loopback service with native text streaming and validated generated tool calls. */
 export async function startGenerationServer({
   port = 0,
   cacheDir = process.env.FORESIGHT_MODEL_CACHE || fileURLToPath(new URL('../.cache/models/', import.meta.url)),
@@ -95,6 +109,7 @@ export async function startGenerationServer({
     let stoppingCriteria;
     let ownsInference = false;
     let timedOut = false;
+    let wire;
     try {
       if (request.method === 'GET' && request.url === '/health') return reply(200, { status: 'ok', model, provider: 'transformers-js', offline: true, busy: active });
       if (request.method === 'GET' && request.url === '/v1/models') return reply(200, { object: 'list', data: [{ id: model, object: 'model', owned_by: 'local' }] });
@@ -107,15 +122,44 @@ export async function startGenerationServer({
       stoppingCriteria = new InterruptableStoppingCriteria();
       timer = setTimeout(() => { timedOut = true; stoppingCriteria.interrupt(); }, timeoutMs);
       response.once('close', () => { if (!response.writableEnded) stoppingCriteria.interrupt(); });
-      const generated = await generate(generator, input, stoppingCriteria);
-      if (timedOut) return reply(504, { error: 'generation_timeout' });
+      const metadata = { id: `chatcmpl-${randomUUID()}`, created: Math.floor(Date.now() / 1000), model };
+      wire = input.stream ? completionStream(response, metadata) : null;
+      let streamed = '';
+      let openedText = false;
+      const onText = input.stream && !input.selection.tools.length ? text => {
+        if (timedOut || response.destroyed) return;
+        if (!openedText) {
+          wire.delta({ role: 'assistant', content: input.wrapped ? '{"translated_text":"' : '' });
+          openedText = true;
+        }
+        streamed += text;
+        wire.delta({ content: input.wrapped ? JSON.stringify(text).slice(1, -1) : text });
+      } : undefined;
+      const generated = await generate(generator, input, stoppingCriteria, onText);
+      if (timedOut) return response.headersSent ? wire.fail('generation_timeout') : reply(504, { error: 'generation_timeout' });
+      if (onText && streamed !== generated.content) throw new Error('generation_stream_decode_mismatch');
+      const parsed = input.selection.tools.length ? decodeGeneratedTools(generated.content, generated.finishReason, input.selection)
+        : { content: generated.content, finishReason: generated.finishReason };
+      const message = { role: 'assistant', content: input.wrapped ? JSON.stringify({ translated_text: generated.content }) : parsed.content,
+        ...(parsed.tool_calls ? { tool_calls: parsed.tool_calls } : {}) };
+      const usage = { prompt_tokens: generated.promptTokens, completion_tokens: generated.completionTokens,
+        total_tokens: generated.promptTokens + generated.completionTokens };
+      const provenance = { provider: 'transformers-js', ...descriptor, device: 'cpu', offline: true, max_new_tokens: input.maxTokens,
+        structured_output: input.wrapped ? 'transport_wrapped_generated_text' : parsed.tool_calls ? 'validated_generated_tool_calls' : 'none',
+        ...(parsed.tool_calls ? { raw_tool_output: generated.content } : {}) };
+      if (wire) {
+        if (openedText && input.wrapped) wire.delta({ content: '"}' });
+        if (!openedText) wire.delta({ role: 'assistant', content: message.content || '' });
+        for (const [index, call] of (parsed.tool_calls || []).entries()) wire.delta({ tool_calls: [{ index, ...call }] });
+        wire.finish(parsed.finishReason, usage, provenance, input.includeUsage);
+        return;
+      }
       return reply(200, {
-        id: `chatcmpl-${randomUUID()}`, object: 'chat.completion', created: Math.floor(Date.now() / 1000), model,
-        choices: [{ index: 0, message: { role: 'assistant', content: input.wrapped ? JSON.stringify({ translated_text: generated.content }) : generated.content }, finish_reason: generated.finishReason }],
-        usage: { prompt_tokens: generated.promptTokens, completion_tokens: generated.completionTokens, total_tokens: generated.promptTokens + generated.completionTokens },
-        local_generation: { provider: 'transformers-js', ...descriptor, device: 'cpu', offline: true, max_new_tokens: input.maxTokens, structured_output: input.wrapped ? 'transport_wrapped_generated_text' : 'none' },
+        ...metadata, object: 'chat.completion', choices: [{ index: 0, message, finish_reason: parsed.finishReason }],
+        usage, local_generation: provenance,
       });
     } catch (error) {
+      if (response.headersSent) { wire?.fail(timedOut ? 'generation_timeout' : 'generation_failed'); return; }
       if (timedOut) return reply(504, { error: 'generation_timeout' });
       return reply(error instanceof SyntaxError || error instanceof RangeError ? 400 : 500, {
         error: error instanceof SyntaxError ? 'invalid_json' : error instanceof RangeError ? error.message : 'generation_failed',

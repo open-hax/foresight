@@ -2,7 +2,7 @@
 category: "kanban"
 dependency: []
 type: "task"
-write-id: "1789201515370-0.pjst9q8gbelvj8ks25"
+write-id: "1789232991926-0.tg6x7gyn8ux3f70rhw"
 title: "Recover reproducible full-stack sandbox workspace and shared manifests"
 priority: "P0"
 status: "in_progress"
@@ -37,6 +37,7 @@ Correction to the preceding closeout comment after inspecting the full Epiphany 
 2026-09-12 08:25 UTC checkpoint: root generator regression reproduced three failures plus missing-child failure before fix; final root114tests511assertions, source-bound build31.84s, lint0/0 and frozen install pass. Model HTTP successor671d95c and mapped root test:model-http pass7 actual offline HTTP regressions; original server copies reproduce6failures; null schemas400, timeouts504, oversized request draining/socket reuse, Qwen and MiniLM smokes, JSDoc5/5 verified. Root published PR91 currently018d04e4. Primary eta-mu promoted to exact published Axxium a7b19825fb5d7c624c38f1d41043c42e92d7f0c3; package66tests632assertions, both118-file releases/lint/realTCPpass, strict inherited boundary56violations remains red. Complete Knoxx backend1835tests8278assertions plus26JS pass; actual EDN no-Mongo browserfirstwholeEnglish/Spanish publication passes but secondcyclefailed rawcandidate repair selecting reviewedreceipts. Regression failure-first4fail then9tests78assertionsgreen; awaitingfullrerun. Knoxx golden959f179 decomposed sixisolated cumulativePRstages, noKnoxxPRpublishedyet. Actual reviewers continue actionablefindings; no merges. Report and annotated evidence saved with historical failures intact.
 
 ---
+
 Current bounded successor: full backend09 passes1857/8422 with guarded exit0;
 frontend production06 passes532/2306 and advanced188 inputs/zero warnings.
 Fresh pinned Proxx passes650/651 with one pre-existing absent external-script
@@ -59,3 +60,8 @@ also exposed a missing eta-mu provider mapping, separately from the working Wiki
 text-provider mapping. This is an unresolved integration gate, not model success.
 Final reviewed dependency pins, regenerated manifests, whole-stack browser
 completion and actual reviewer convergence remain required before merge.
+
+---
+Recovery checkpoint: workspace maintenance removed the prior active checkout/tools/builds/models. All14 declared child repositories restored, root published07440a348964736d149b639092052ba8c68999a8 exactly matches tested tree968c61893a28b4c6b18c17ff9522132d4ee4c7b9. Actual root full test125 Clojure/CLJS tests607assertions plus17Node tests; build/test compiler0warnings and lint0/0. Codex transport/source-input findings reproduced before fixes;13native transport and3actual Git/supervisor admission cases now included in generated pnpm test. Same pinned runtime, real Mongo TCP insert/read and Chromium interaction restored. Later unpublished Knoxx checkpoints remain lost and require new proof. Reportv16 and runtime recovery archive are saved; complete browser publishing/reviewed child promotion remains pending. AJV8.17.1 added to devtools and generated root manifests with frozen lock because real generated tool arguments must be checked against the offered full JSON Schema without coercion/defaulting; model streaming implementation is separate ongoing work. No old rejected process resumed; no broad merge release.
+
+---

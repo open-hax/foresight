@@ -8,7 +8,7 @@
  {".gitmodules"
   "7c30d4ba005cfc70d1072b5ee8b80d8f6aa4636e1593f0d441f82b080bb3ac5a",
   "devtools/package.json"
-  "56ea1a3e8bdeced275b807d8a758c9f32efe48078a67e89f19273bbafa3d575b",
+  "2f108576d7ea3742df1a4f9cf1b7626e3d6249b79f0436682bc24a2260b46997",
   "eta-mu/packages/axxium/deps.edn"
   "7742fa542eb3a1e400d6b1dc54424ee7e7e487bd47ac46d060027041a59ef46b",
   "eta-mu/packages/clio/deps.edn"
@@ -32,14 +32,15 @@
    :package-manager nil,
    :path "devtools/package.json",
    :sha256
-   "56ea1a3e8bdeced275b807d8a758c9f32efe48078a67e89f19273bbafa3d575b"}
+   "2f108576d7ea3742df1a4f9cf1b7626e3d6249b79f0436682bc24a2260b46997"}
   {:name "@eta-mu/clio",
    :package-manager nil,
    :path "eta-mu/packages/clio/package.json",
    :sha256
    "a909b31b081111740cde7f5521d207c4b72794f3b39afd4c6116a911a12ec5be"}],
  :selected-dependency-declarations
- ({:name "@aws-sdk/client-s3",
+ ({:name "ajv", :path "devtools/package.json", :version "8.17.1"}
+  {:name "@aws-sdk/client-s3",
    :path "devtools/package.json",
    :version "3.888.0"}
   {:name "s3rver", :path "devtools/package.json", :version "3.7.1"}

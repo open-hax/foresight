@@ -4,7 +4,7 @@ import http from 'node:http';
 import net from 'node:net';
 import { setTimeout as delay } from 'node:timers/promises';
 import { after, before, mock, test } from 'node:test';
-import { PreTrainedTokenizer, Tensor } from '@huggingface/transformers';
+import { PreTrainedTokenizer, Tensor, TextStreamer } from '@huggingface/transformers';
 import { startEmbeddingServer } from './embedding-server.mjs';
 import { LOCAL_GENERATION_MODEL, startGenerationServer } from './generation-server.mjs';
 import { readModelRequestBody } from './model-request-body.mjs';
@@ -41,6 +41,16 @@ for (const [description, response_format] of [['null response format', null], ['
   });
 }
 
+for (const [description, constraint] of [['maxLength', { maxLength: 0 }], ['pattern', { pattern: '^never$' }]]) {
+  test(`the translation envelope refuses unsupported ${description} obligations before inference`, async () => {
+    const response_format = { type: 'json_schema', json_schema: { schema: {
+      type: 'object', additionalProperties: false, required: ['translated_text'],
+      properties: { translated_text: { type: 'string', minLength: 1, ...constraint } },
+    } } };
+    assert.deepEqual(await completion({ response_format }), { status: 400, body: { error: 'unsupported_response_format' } });
+  });
+}
+
 for (const tools of [{}, null, '', 'function', false, 0, [{ type: 'function' }]]) {
   test(`unsupported tools ${JSON.stringify(tools)} are refused before inference`, async () => {
     assert.deepEqual(await completion({ tools }), {
@@ -49,7 +59,7 @@ for (const tools of [{}, null, '', 'function', false, 0, [{ type: 'function' }]]
   });
 }
 
-for (const stream of [null, '', 'false', 'true', 0, 1, {}, [], true]) {
+for (const stream of [null, '', 'false', 'true', 0, 1, {}, []]) {
   test(`unsupported stream ${JSON.stringify(stream)} is refused before inference`, async () => {
     assert.deepEqual(await completion({ stream }), {
       status: 400, body: { error: 'unsupported_tools_or_stream' },
@@ -65,7 +75,45 @@ test('an interrupted real local inference accepts stream false and empty tools a
   assert.equal(health.busy, false);
 });
 
-for (const tool_choice of [false, 0, '', null, 'none', {}, []]) {
+for (const admitted of [{ stream: true }, { tool_choice: 'none' }]) {
+  test(`an interrupted real inference admits ${JSON.stringify(admitted)} and preserves its deadline refusal`, async () => {
+    assert.deepEqual(await completion({ ...admitted, max_completion_tokens: 128 }), {
+      status: 504, body: { error: 'generation_timeout' },
+    });
+  });
+}
+
+test('a failure after real streamed tokens terminates with an SSE error and releases inference', async () => {
+  const service = await startGenerationServer({ model: LOCAL_GENERATION_MODEL });
+  const original = TextStreamer.prototype.on_finalized_text;
+  const injected = mock.method(TextStreamer.prototype, 'on_finalized_text', function (text, streamEnd) {
+    original.call(this, text, streamEnd);
+    if (text.trim()) throw new Error('Injected failure after the native model text callback');
+  });
+  try {
+    const response = await fetch(`${service.baseUrl}/chat/completions`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ model: service.model, stream: true, max_tokens: 32,
+        messages: [{ role: 'user', content: 'Write a sentence about wikis.' }] }),
+    });
+    assert.equal(response.status, 200);
+    const wire = await response.text();
+    const events = wire.split('\n\n').filter(Boolean).map(line => line.slice(6));
+    assert.equal(events.pop(), '[DONE]');
+    const chunks = events.map(event => JSON.parse(event));
+    assert.ok(chunks.some(chunk => chunk.choices?.some(choice => choice.delta.content?.trim())));
+    assert.equal(chunks.at(-1).error.code, 'generation_failed');
+    assert.ok(chunks.every(chunk => chunk.choices?.every(choice => !choice.finish_reason) ?? true));
+    assert.ok(injected.mock.callCount() > 0);
+    const health = await (await fetch(service.baseUrl.replace('/v1', '/health'))).json();
+    assert.equal(health.busy, false);
+  } finally {
+    injected.mock.restore();
+    await service.close();
+  }
+});
+
+for (const tool_choice of [false, 0, '', null, {}, []]) {
   test(`present tool_choice ${JSON.stringify(tool_choice)} is refused before inference`, async () => {
     assert.deepEqual(await completion({ tool_choice }), {
       status: 400, body: { error: 'unsupported_tools_or_stream' },
