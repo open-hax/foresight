@@ -1,21 +1,27 @@
 ;; SPDX-License-Identifier: LGPL-3.0-or-later
 (ns project-test
   (:require [cljs.test :as test :refer [deftest is testing]]
+            [clojure.string :as str]
             [foresight.law.project :as law]
+            [foresight.onboarding :as onboarding]
             [foresight.project :as project]
             [workspace :as workspace]))
 
 (deftest declares-the-source-constellation
-  (let [sources (:project/sources project/project)]
-    (is (= 14 (count sources)))
-    (is (= 13 (count (project/submodule-sources))))
-    (is (= 2 (count (project/consolidation-inputs))))
-    (is (= 12 (count (filter :source/actionable? sources))))
+  (let [sources (:project/sources project/project)
+        actual-submodules (workspace/current-submodules)
+        declared-submodules (project/submodule-sources)]
+    (is (= (set (map :path actual-submodules))
+           (set (map :source/path declared-submodules))))
+    (is (= (set (map :url actual-submodules))
+           (set (map :source/url declared-submodules))))
+    (is (= #{".agents" "eta"}
+           (set (map :source/path (project/consolidation-inputs)))))
     (is (= #{:alpha :archaeology :eta}
            (set (map :component/id (:project/native-components project/project)))))
-    (is (= #{:agents :truth :bitch-tracker :calliope :epiphany :eta-mu
-             :katamorph :knoxx :muse :opencode :proxx :services :uxx :eta}
-           (set (map :source/id sources))))))
+    (is (= (count sources)
+           (+ (count declared-submodules)
+              (count (remove #(= :git-submodule (:source/type %)) sources)))))))
 
 (deftest declared-project-is-structurally-lawful
   (let [result (law/validate-project project/project)]
@@ -52,9 +58,15 @@
               (:errors result)))))
 
 (deftest actionable-authority-is-declarative-and-narrow
-  (let [changed (-> project/project
-                    (assoc-in [:project/sources 13 :source/actionable?] true)
-                    (assoc-in [:project/sources 13 :source/consolidation?] false))
+  (let [changed (update project/project :project/sources
+                        (fn [sources]
+                          (mapv (fn [source]
+                                  (if (= :eta (:source/id source))
+                                    (-> source
+                                        (assoc :source/actionable? true)
+                                        (assoc :source/consolidation? false))
+                                    source))
+                                sources)))
         result (law/validate-project changed)]
     (is (false? (:valid? result)))
     (is (some #(= :foresight/actionable-source-is-independent-submodule
@@ -74,6 +86,40 @@
           :when (= :executable (:invariant/enforcement invariant))]
     (testing (str (:invariant/id invariant))
       (is (contains? law/executable-checks (:invariant/check invariant))))))
+
+(deftest onboarding-routes-cover-sources-and-native-components
+  (let [routes (onboarding/route-rows project/project)
+        rendered (onboarding/markdown project/project)
+        source-paths (set (map :source/path (:project/sources project/project)))
+        component-paths (set (map :component/path
+                                  (:project/native-components project/project)))
+        expected-paths (into source-paths component-paths)
+        by-path (into {} (map (juxt :route/path identity)) routes)]
+    (is (= expected-paths (set (map :route/path routes))))
+    (is (= (count expected-paths) (count routes)))
+    (doseq [{:source/keys [path repository]} (:project/sources project/project)]
+      (is (str/includes? rendered (str "`" path "`")) path)
+      (when repository
+        (is (str/includes? rendered repository) repository)))
+    (doseq [{:component/keys [path role]} (:project/native-components project/project)]
+      (is (str/includes? rendered (str "`" path "`")) path)
+      (is (= role (:route/native-role (get by-path path))) path))
+    (is (= "open-hax/foresight" (:route/repository (get by-path "alpha"))))
+    (is (= "open-hax/foresight" (:route/repository (get by-path "archaeology"))))
+    (is (= "open-hax/foresight" (:route/repository (get by-path "eta"))))
+    (is (= :clojure-harness (:route/source-role (get by-path "eta"))))
+    (is (= :transduction-harness (:route/native-role (get by-path "eta"))))
+    (is (false? (:route/execution-root? (get by-path "eta"))))
+    (is (nil? (:route/execution-root? (get by-path "alpha"))))))
+
+(deftest onboarding-history-is-revision-bound
+  (is (seq onboarding/precedents))
+  (doseq [{:precedent/keys [repository pr revision lesson]}
+          onboarding/precedents]
+    (is (= "open-hax/foresight" repository))
+    (is (and (integer? pr) (pos? pr)))
+    (is (some? (re-matches #"[0-9a-f]{40}" revision)) revision)
+    (is (and (string? lesson) (not (str/blank? lesson))))))
 
 (defn test-exit-code [summary]
   (if (test/successful? summary) 0 1))

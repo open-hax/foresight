@@ -1,0 +1,292 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+import { parseRoot } from './args.mjs';
+import { stableId } from './edn.mjs';
+import {
+  GitHubClient, isCoherentGitTreeEntry, isRateLimitError,
+} from './github.mjs';
+import {
+  LOCATOR_NORMALIZER, normalizeGitHubUrl, parseGitmodules,
+} from './gitmodules.mjs';
+
+const compareText = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
+
+async function mapLimit(items, limit, task) {
+  const results = new Array(items.length);
+  let cursor = 0;
+  async function worker() {
+    while (true) {
+      const index = cursor++;
+      if (index >= items.length) return;
+      results[index] = await task(items[index], index);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, () => worker()));
+  return results;
+}
+
+export async function census(options, dependencies = {}) {
+  const roots = [];
+  const rootKeys = new Set();
+  for (const spec of options.roots) {
+    const parsedRoot = parseRoot(spec);
+    const root = { ...parsedRoot, fullName: parsedRoot.fullName.toLowerCase() };
+    const key = `${root.fullName}@${root.revision}`;
+    if (rootKeys.has(key)) continue;
+    rootKeys.add(key);
+    roots.push(root);
+  }
+  if (!roots.length) throw new Error('At least one --root is required');
+  roots.sort((left, right) => compareText(left.fullName, right.fullName)
+    || compareText(left.revision, right.revision));
+
+  const client = dependencies.client || new GitHubClient(process.env.GITHUB_TOKEN);
+  const queue = roots.map((root) => ({ ...root, depth: 0, root: true }));
+  const scheduled = new Set(queue.map((item) => `${item.fullName.toLowerCase()}@${item.revision}`));
+  const visited = new Set();
+  const inspected = new Set();
+  const repositories = new Map();
+  const occurrences = [];
+  const gaps = [];
+
+  const addGap = (gap, { frontier = false } = {}) => {
+    const stableSubject = Object.fromEntries(Object.entries(gap)
+      .filter(([key]) => key !== 'gap/detail')
+      .sort(([left], [right]) => compareText(left, right)));
+    gaps.push({
+      'gap/id': stableId('gap', gap['gap/type'], JSON.stringify(stableSubject)),
+      ...gap,
+      ...(frontier ? { 'gap/frontier?': true } : {}),
+    });
+  };
+
+  while (queue.length && visited.size < options.maxNodes) {
+    const item = queue.shift();
+    const visitKey = `${item.fullName.toLowerCase()}@${item.revision}`;
+    if (visited.has(visitKey)) continue;
+    visited.add(visitKey);
+
+    const repoId = `github:${item.fullName.toLowerCase()}`;
+    const repo = repositories.get(repoId) || {
+      'repository/id': repoId,
+      'repository/full-name': item.fullName,
+      'repository/url': `https://github.com/${item.fullName}`,
+      'repository/revisions': new Set(),
+      'repository/root?': false,
+      'repository/min-depth': item.depth,
+      'repository/manifest-statuses': new Set(),
+      'repository/manifest-sha256-at-revisions': {},
+    };
+    repo['repository/revisions'].add(item.revision);
+    repo['repository/root?'] ||= item.root;
+    repo['repository/min-depth'] = Math.min(repo['repository/min-depth'], item.depth);
+    repositories.set(repoId, repo);
+
+    let manifest;
+    try {
+      manifest = await client.manifest(item.fullName, item.revision);
+    } catch (error) {
+      if (isRateLimitError(error)) throw error;
+      repo['repository/manifest-statuses'].add('unavailable');
+      addGap({
+        'gap/type': 'manifest/unavailable', 'gap/repository': repoId,
+        'gap/revision': item.revision, 'gap/depth': item.depth,
+        'gap/http-status': error.status ?? null, 'gap/detail': error.message,
+      }, { frontier: true });
+      continue;
+    }
+    inspected.add(visitKey);
+
+    if (manifest === null) {
+      repo['repository/manifest-statuses'].add('absent');
+      continue;
+    }
+    const fullObjectId = /^(?:[0-9a-f]{40}|[0-9a-f]{64})$/;
+    if (typeof manifest?.text !== 'string'
+        || !/^[0-9a-f]{64}$/.test(manifest?.sha256)
+        || !fullObjectId.test(manifest?.sourceManifestBlobOid)
+        || !fullObjectId.test(manifest?.parentTreeOid)
+        || manifest.sourceManifestBlobOid.length !== manifest.parentTreeOid.length
+        || manifest.parentTreeOid.length !== item.revision.length) {
+      throw new Error(`Manifest observation is invalid for ${item.fullName}@${item.revision}`);
+    }
+    const manifestText = manifest.text;
+    repo['repository/manifest-statuses'].add('present');
+    repo['repository/manifest-sha256-at-revisions'][item.revision] = manifest.sha256;
+
+    let commit;
+    try {
+      commit = await client.commit(item.fullName, item.revision);
+      if (!fullObjectId.test(commit?.sha)
+          || commit.sha.length !== item.revision.length
+          || commit.sha !== item.revision
+          || !fullObjectId.test(commit?.tree?.sha)
+          || commit.tree.sha.length !== item.revision.length
+          || commit.tree.sha !== manifest.parentTreeOid) {
+        throw new Error(`Commit tree observation is invalid for ${item.fullName}@${item.revision}`);
+      }
+    } catch (error) {
+      if (isRateLimitError(error)) throw error;
+      inspected.delete(visitKey);
+      addGap({
+        'gap/type': 'commit/unavailable', 'gap/repository': repoId,
+        'gap/revision': item.revision, 'gap/depth': item.depth,
+        'gap/http-status': error.status ?? null, 'gap/detail': error.message,
+      }, { frontier: true });
+      continue;
+    }
+
+    const modules = parseGitmodules(manifestText);
+    repo['repository/submodule-count-at-revisions'] ||= {};
+    repo['repository/submodule-count-at-revisions'][item.revision] = modules.length;
+
+    const resolved = await mapLimit(modules, options.concurrency, async (module) => {
+      const normalized = normalizeGitHubUrl(module.url || '', item.fullName);
+      let lookup = null;
+      if (module.path) {
+        try {
+          lookup = await client.lookupTreePath(item.fullName, commit.tree.sha, module.path);
+        } catch (error) {
+          if (isRateLimitError(error)) throw error;
+          lookup = { status: 'error', error };
+        }
+      }
+      return { module, normalized, lookup };
+    });
+
+    for (const { module, normalized, lookup } of resolved) {
+      const evidenceRawUrl = module.url === undefined ? null : normalized.raw;
+      const rawUrlSha256 = module.url === undefined ? null : normalized.rawSha256;
+      const targetFullName = normalized.kind === 'github'
+        ? normalized.fullName.toLowerCase()
+        : normalized.fullName ?? null;
+      const targetId = normalized.kind === 'github' ? `github:${targetFullName}` : null;
+      const entryPathMatches = lookup?.entryPathScope === 'root-relative'
+        ? lookup.entry?.path === module.path
+        : lookup?.entryPathScope === 'containing-tree-relative'
+          && lookup.entry?.path === module.path?.split('/').at(-1);
+      const coherentEntry = lookup?.status === 'found'
+        && lookup.resolvedPath === module.path
+        && entryPathMatches
+        && isCoherentGitTreeEntry(lookup.entry, manifest.parentTreeOid);
+      const hasGitlinkEntry = coherentEntry && lookup.entry.type === 'commit';
+      const gitlink = hasGitlinkEntry ? lookup.entry.sha : null;
+
+      let status;
+      if (module.parseStatus !== 'valid') status = 'invalid-declaration';
+      else if (normalized.kind === 'local') status = 'local-only';
+      else if (normalized.kind !== 'github') status = 'unsupported-url';
+      else if (lookup?.status === 'error') status = 'lookup-error';
+      else if (lookup?.status !== 'found') status = 'path-unresolved';
+      else if (!coherentEntry) status = 'invalid-gitlink';
+      else if (lookup.entry.type !== 'commit') status = 'path-not-gitlink';
+      else if (!gitlink) status = 'invalid-gitlink';
+      else status = 'resolved';
+
+      const occurrence = {
+        'occurrence/id': stableId(
+          'occurrence', repoId, item.revision, module.name, module.line,
+          module.path || '', module.url || '', gitlink || '',
+        ),
+        'occurrence/kind': 'git-submodule', 'occurrence/status': status,
+        'occurrence/parent': repoId, 'occurrence/parent-revision': item.revision,
+        'occurrence/parent-tree-oid': manifest.parentTreeOid,
+        'occurrence/source-manifest-path': '.gitmodules',
+        'occurrence/source-manifest-blob-oid': manifest.sourceManifestBlobOid,
+        'occurrence/source-manifest-sha256': manifest.sha256,
+        'occurrence/depth': item.depth + 1, 'occurrence/name': module.name,
+        'occurrence/path': module.path ?? null, 'occurrence/raw-url': evidenceRawUrl,
+        'occurrence/raw-url-sha256': rawUrlSha256,
+        'occurrence/declared-branch': module.branch ?? null,
+        'occurrence/declaration-line': module.line, 'occurrence/target': targetId,
+        'occurrence/target-full-name': targetFullName,
+        'occurrence/target-revision': gitlink,
+        'occurrence/locator-kind': normalized.kind,
+        'occurrence/locator-normalizer': LOCATOR_NORMALIZER.name,
+        'occurrence/locator-normalizer-version': LOCATOR_NORMALIZER.version,
+        'occurrence/locator-configuration-sha256': LOCATOR_NORMALIZER.configurationSha256,
+        'occurrence/locator-epistemic-tier': LOCATOR_NORMALIZER.epistemicTier,
+      };
+      occurrences.push(occurrence);
+
+      if (status !== 'resolved') {
+        addGap({
+          'gap/type': `submodule/${status}`, 'gap/occurrence': occurrence['occurrence/id'],
+          'gap/parent': repoId, 'gap/parent-revision': item.revision,
+          'gap/path': module.path ?? null, 'gap/raw-url': evidenceRawUrl,
+          'gap/raw-url-sha256': rawUrlSha256,
+          'gap/detail': lookup?.error?.message ?? lookup?.status ?? module.parseStatus,
+        }, {
+          frontier: status === 'lookup-error' || status === 'invalid-declaration'
+            || status === 'invalid-gitlink',
+        });
+        continue;
+      }
+
+      const childKey = `${targetFullName}@${gitlink}`;
+      if (scheduled.has(childKey)) continue;
+
+      if (item.depth + 1 > options.maxDepth) {
+        addGap({
+          'gap/type': 'recursion/max-depth', 'gap/occurrence': occurrence['occurrence/id'],
+          'gap/target': targetId, 'gap/target-revision': gitlink, 'gap/limit': options.maxDepth,
+        }, { frontier: true });
+        continue;
+      }
+
+      if (visited.size + queue.length >= options.maxNodes) {
+        addGap({
+          'gap/type': 'recursion/max-nodes', 'gap/occurrence': occurrence['occurrence/id'],
+          'gap/target': targetId, 'gap/target-revision': gitlink, 'gap/limit': options.maxNodes,
+        }, { frontier: true });
+        continue;
+      }
+      scheduled.add(childKey);
+      queue.push({ fullName: targetFullName, revision: gitlink, depth: item.depth + 1, root: false });
+    }
+  }
+
+  for (const item of queue) {
+    addGap({
+      'gap/type': 'recursion/max-nodes', 'gap/repository': `github:${item.fullName.toLowerCase()}`,
+      'gap/revision': item.revision, 'gap/depth': item.depth, 'gap/limit': options.maxNodes,
+    }, { frontier: true });
+  }
+
+  const sortedByKey = (value) => Object.fromEntries(
+    Object.entries(value).sort(([left], [right]) => compareText(left, right)),
+  );
+  const repoRows = [...repositories.values()]
+    .map((row) => ({
+      ...row,
+      'repository/revisions': [...row['repository/revisions']].sort(),
+      'repository/manifest-statuses': new Set(row['repository/manifest-statuses']),
+      'repository/manifest-sha256-at-revisions': sortedByKey(
+        row['repository/manifest-sha256-at-revisions'],
+      ),
+      ...(row['repository/submodule-count-at-revisions'] ? {
+        'repository/submodule-count-at-revisions': sortedByKey(
+          row['repository/submodule-count-at-revisions'],
+        ),
+      } : {}),
+    }))
+    .sort((a, b) => compareText(a['repository/full-name'], b['repository/full-name']));
+  occurrences.sort((a, b) => compareText(a['occurrence/parent'], b['occurrence/parent'])
+    || compareText(String(a['occurrence/path'] ?? ''), String(b['occurrence/path'] ?? ''))
+    || compareText(a['occurrence/parent-revision'], b['occurrence/parent-revision']));
+  gaps.sort((a, b) => compareText(a['gap/type'], b['gap/type'])
+    || compareText(a['gap/id'], b['gap/id']));
+
+  return {
+    roots, repositories: repoRows, occurrences, gaps,
+    stats: {
+      repositories: repoRows.length, repositoryRevisions: inspected.size,
+      occurrences: occurrences.length,
+      resolvedOccurrences: occurrences.filter((row) => row['occurrence/status'] === 'resolved').length,
+      gaps: gaps.length, githubRequests: client.requests,
+      rateRemaining: client.rate.remaining, rateReset: client.rate.reset,
+      frontierRemaining: gaps.filter((gap) => gap['gap/frontier?'] === true).length,
+      maxNodes: options.maxNodes, maxDepth: options.maxDepth,
+    },
+  };
+}

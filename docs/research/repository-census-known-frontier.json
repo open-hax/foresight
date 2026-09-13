@@ -1,0 +1,351 @@
+{
+  "roots": [
+    {
+      "fullName": "riatzukiza/devel",
+      "revision": "80a95e5638f4ee95e182ebf0a22f4735ab55964f"
+    },
+    {
+      "fullName": "octave-commons/promethean",
+      "revision": "06a8b83312ea70dcde6d2e423369b410e6d0d3f2"
+    },
+    {
+      "fullName": "open-hax/openplanner",
+      "revision": "8b425c1690ada78f3f1bc5dfa28c3151e3a4fede"
+    },
+    {
+      "fullName": "open-hax/foresight",
+      "revision": "fcb30c0bbbf1b7558d465e479c0b1b34f3d275a5"
+    }
+  ],
+  "frontier": [
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:agustif/codex-linux",
+      "gap/revision": "b9a3682c8d475b36016e139cd3f7cfd67cf3c1e0",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/benchmark",
+      "gap/revision": "a51d7f2d4ccf59d2f78c92a11a1de3e85b462fa9",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/boardrev",
+      "gap/revision": "092f05dcade18490dfb4dcbb800f398bf9585f20",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/buildfix",
+      "gap/revision": "aff444e06f0ec0653bd63e240a2fceaf745a33db",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/codemods",
+      "gap/revision": "562c75ae14ce52e44127217012a8ebbd155351aa",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/codepack",
+      "gap/revision": "025ff1d004db39c5877049858098c415f89f3ef5",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/compiler",
+      "gap/revision": "e2afde519a99d69141fbaa8311a0aa03b4a6b46e",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/cookbookflow",
+      "gap/revision": "600f63d57385339e6e9a773eb7d9ce5dd677d367",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/core",
+      "gap/revision": "2cde4ded85d1af4f23e11f172a96c21cb3a913b8",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/discord",
+      "gap/revision": "cd01d38cb9399a418622c9bd8791ce3c070d488d",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/docops",
+      "gap/revision": "5022c33ab8e77cca67fe61e51f6a80d1eecf8bd0",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/effects",
+      "gap/revision": "31480e4ce58b904bda5dee7f4978a91531710db8",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/embedding",
+      "gap/revision": "e5845ff0c1f6a25d05d22630d0d2ce6c8e6fb322",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/eta-mu-sol",
+      "gap/revision": "5517febddc42e2f8e2f991c82ff31c73a328d789",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/file-indexer-service",
+      "gap/revision": "e335f673968314b5de7153d730ae7bae7d1bc131",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/file-indexer",
+      "gap/revision": "b12a9b8600fd0fe03054c06becb9bfb5de459627",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/frontend-service",
+      "gap/revision": "0a2a7f8e2e7817b5eb4fcd681de0b056ff22a9a7",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/frontend",
+      "gap/revision": "970f374cf383ca4a0837d17a8ce7cb06a4cda305",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/fs",
+      "gap/revision": "c230c37ddea080916a969d917fa542224350331e",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/fsm",
+      "gap/revision": "f1f77eddba150b8a77ae29a263eb724ad6b2f8d2",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/github-sync",
+      "gap/revision": "4889fb4399a0c8b77c4d025ab6c10b8f9390d657",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/knowledge-graph",
+      "gap/revision": "098292dd46c4dc8233052f6a55a9630f83c3189d",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/level-cache",
+      "gap/revision": "48c174052a26cbce85c83edbd7055da9c57cbf2b",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/lint-taskgen",
+      "gap/revision": "c20d7f6936a35487f8264a639dfc8724242ee568",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/lmdb-cache",
+      "gap/revision": "5b6bc05ddf9b7cb040432f23fe4949d388ac8a5b",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/markdown",
+      "gap/revision": "5bb6b05126a2d76b13a8d70b10e81aaafb162fa0",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/mcp-express-server",
+      "gap/revision": "25fc8a2b25e44b2cc13a2664ba4e80b6b5a132e7",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/mcp-kanban-bridge",
+      "gap/revision": "3fb708a1c3d41b1b918f4840fdf75f4ccfe6a09a",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/messaging",
+      "gap/revision": "83b0a0f487dfe280064c158d76ffa2bc85b04847",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/openai-server",
+      "gap/revision": "732f861a06a9d5fe323f025bd31a85426002bd42",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/piper",
+      "gap/revision": "eafc524fa05761c4c8a822081172fc777f0ec95e",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/providers",
+      "gap/revision": "790002e0843fa975edcc1b5fa708852c009974c4",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/readmeflow",
+      "gap/revision": "59e0418c794e74ccd57e5687ed4b3fa6c4bc23ee",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/semverguard",
+      "gap/revision": "bc181733e56237a3af678570afa2f9c3cf37ab3d",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/simtask",
+      "gap/revision": "a0b035191368d24a9dacfe9a8889f8df0e7332e4",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/sonarflow",
+      "gap/revision": "bdf4081badf26e134e0997105a6bdd3821a45385",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/testgap",
+      "gap/revision": "c2f848165b4f8e992d7be3cc547d858bef1bd881",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/tools",
+      "gap/revision": "59423d4fa83868717b45178b7f306506cb7c14fc",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:octave-commons/trello",
+      "gap/revision": "f2c776a01513b1c2e0c1dd2dd8ce3b80bb827c6d",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:open-hax/mcp-fs-oauth",
+      "gap/revision": "7037fbad845cc288bdfda91e1fe045d9be2a92dd",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:riatzukiza/mcporter",
+      "gap/revision": "ffe80b5628c9edef381978beacee3061be03aad7",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:riatzukiza/shuvgeist",
+      "gap/revision": "30af20c1a55ed391b1a25567eeda531055a0a356",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 1,
+      "gap/http-status": 404,
+      "gap/repository": "github:riatzukiza/tanf-app",
+      "gap/revision": "3439c33d18ce0563e211dd443dab1188c50553da",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 2,
+      "gap/http-status": 404,
+      "gap/repository": "github:alb-o/eg.affinity-extractor",
+      "gap/revision": "78c6c57153ff64a2d73f158e1e4c2ed7e252f081",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 2,
+      "gap/http-status": 404,
+      "gap/repository": "github:alb-o/eg.doc-style",
+      "gap/revision": "8c352abf23f5d1277de767aba0a6d6d75d45c0f3",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 2,
+      "gap/http-status": 404,
+      "gap/repository": "github:alb-o/eg.example-module",
+      "gap/revision": "85045307ee9356249f87f8849bff772ed50311ef",
+      "gap/type": "manifest/unavailable"
+    },
+    {
+      "gap/depth": 2,
+      "gap/http-status": 404,
+      "gap/repository": "github:mojomast/mcpussy",
+      "gap/revision": "1ef6e44f6052594bb79ca628f8e9f46170b227cc",
+      "gap/type": "manifest/unavailable"
+    }
+  ]
+}

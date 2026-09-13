@@ -442,17 +442,27 @@
     :source/actionable? true
     :source/invariants [:services/deployment-vs-application-ownership
                         :services/no-secrets-in-repository]}
-   {:source/id :uxx
-    :source/name "uxx"
-    :source/path "uxx"
-    :source/type :git-submodule
-    :source/repository "open-hax/uxx"
-    :source/url "git@github.com:open-hax/uxx.git"
-    :source/ownership :independent-repository
-    :source/role :ui-kit
-    :source/actionable? true
-    :source/invariants [:uxx/react-canonical-bindings-wrap]}
-   {:source/id :eta
+    {:source/id :uxx
+     :source/name "uxx"
+     :source/path "uxx"
+     :source/type :git-submodule
+     :source/repository "open-hax/uxx"
+     :source/url "git@github.com:open-hax/uxx.git"
+     :source/ownership :independent-repository
+     :source/role :ui-kit
+     :source/actionable? true
+     :source/invariants [:uxx/react-canonical-bindings-wrap]}
+    {:source/id :shx
+     :source/name "shx"
+     :source/path "shx"
+     :source/type :git-submodule
+     :source/repository "octave-commons/shx"
+     :source/url "git@github.com:octave-commons/shx.git"
+     :source/ownership :independent-repository
+     :source/role :shell-ir
+     :source/actionable? true
+     :source/invariants []}
+    {:source/id :eta
     :source/name "eta"
     :source/path "eta"
     :source/type :workspace-root
