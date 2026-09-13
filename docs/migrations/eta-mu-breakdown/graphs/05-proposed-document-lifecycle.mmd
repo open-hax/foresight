@@ -1,0 +1,15 @@
+flowchart LR
+  observed["Observed source revision"] --> indexed["Indexed with provenance"]
+  indexed --> proposed["Provisional labels or change candidates"]
+  proposed --> review["Scope, evidence and currentness review"]
+  review --> retained["Retain / accept metadata"]
+  review --> relocated["Relocate to accountable owner"]
+  review --> consolidated["Consolidate with preservation map"]
+  review --> retired["Retire outdated active guidance"]
+  review --> unresolved["Unresolved or rejected; no silent mutation"]
+  retired --> history["Historical source remains retrievable"]
+  retired -.-> replacement["Optional later replacement story"]
+  relocated --> reindex["Verify links and reindex changed revisions"]
+  consolidated --> reindex
+  retained --> reindex
+  %% Workflow state and epistemic evidence status are separate dimensions.

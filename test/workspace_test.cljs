@@ -47,8 +47,8 @@
 (deftest inventories-declared-consolidation-inputs
   (let [repos (workspace/inventory)
         by-path (into {} (map (juxt :path identity)) repos)]
-    (is (= 15 (count repos)))
-    (is (= 15 (count (set (map :path repos)))))
+    (is (= 22 (count repos)))
+    (is (= 22 (count (set (map :path repos)))))
     (is (= #{"git-submodule" "consolidation-input"}
            (set (map :source-type repos))))
     (is (= {:source-type "consolidation-input"
