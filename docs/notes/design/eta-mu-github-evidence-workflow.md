@@ -1,9 +1,9 @@
 # Eta-mu GitHub Evidence Workflow
 
-**Status:** proposed executable architecture  
-**Parent:** `open-hax/foresight#69`  
-**Related contract slices:** `open-hax/katamorph#27`, `open-hax/knoxx#294`  
-**Primary outcome:** eta-mu responds to GitHub App events through bounded Sol evidence workers and Knoxx evidence queries, then publishes an exact-head check and review whose claims can be traced to append-only records.
+- **Status:** proposed executable architecture
+- **Parent:** `open-hax/foresight#69`
+- **Related contract slices:** `open-hax/katamorph#27`, `open-hax/knoxx#294`
+- **Primary outcome:** eta-mu responds to GitHub App events through bounded Sol evidence workers and Knoxx evidence queries, then publishes an exact-head check and review whose claims can be traced to append-only records.
 
 ## Decision
 
