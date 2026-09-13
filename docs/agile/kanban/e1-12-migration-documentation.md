@@ -1,7 +1,7 @@
 ---
 uuid: "e1-12-migration-documentation"
 title: "E1.12 — Contributors can find the products and their migration documentation"
-status: incoming
+status: todo
 priority: P2
 labels: ["eta-mu-breakdown", "migration", "documentation", "3sp"]
 created_at: "2026-09-13T00:00:00Z"

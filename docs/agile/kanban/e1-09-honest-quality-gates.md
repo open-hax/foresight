@@ -1,7 +1,7 @@
 ---
 uuid: "e1-09-honest-quality-gates"
 title: "E1.09 — Every child has honest quality gates and self-contained agent guidance"
-status: incoming
+status: done
 priority: P1
 labels: ["eta-mu-breakdown", "migration", "quality-gates", "ci", "8sp"]
 created_at: "2026-09-13T00:00:00Z"

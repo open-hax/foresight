@@ -1,7 +1,7 @@
 ---
 uuid: "e1-08-osmos-ingestion-service"
 title: "E1.08 — Osmos preserves ingestion behavior as an independent JVM service"
-status: todo
+status: done
 priority: P1
 labels: ["eta-mu-breakdown", "migration", "ingestion", "jvm", "8sp"]
 created_at: "2026-09-13T00:00:00Z"

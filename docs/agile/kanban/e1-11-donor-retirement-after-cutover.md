@@ -1,7 +1,7 @@
 ---
 uuid: "e1-11-donor-retirement-after-cutover"
 title: "E1.11 — Donor packages and obsolete workflow paths are retired only after the cutover proof"
-status: incoming
+status: todo
 priority: P1
 labels: ["eta-mu-breakdown", "migration", "donor-retirement", "5sp"]
 created_at: "2026-09-13T00:00:00Z"
