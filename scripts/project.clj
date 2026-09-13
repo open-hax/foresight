@@ -3,6 +3,7 @@
   (:require [foresight.law.lineage :as lineage-law]
             [foresight.law.project :as law]
             [foresight.lineage :as lineage]
+            [foresight.onboarding :as onboarding]
             [foresight.project :as project-model]
             [nbb.core :as nbb]
             [workspace :as workspace]
@@ -30,6 +31,10 @@
 
 (defn print-lineage! []
   (prn lineage/sources)
+  0)
+
+(defn print-guide! []
+  (print (onboarding/markdown project-model/project))
   0)
 
 (defn validate! []
@@ -63,10 +68,11 @@
       "show" (do (prn project-model/project) 0)
       "repos" (print-repos!)
       "lineage" (print-lineage!)
+      "guide" (print-guide!)
       "validate" (validate!)
       (throw (js/Error.
               (str "Unknown command: " (or (first args) "<missing>")
-                   ". Expected show, repos, lineage, or validate."))))
+                   ". Expected show, repos, lineage, guide, or validate."))))
     (catch :default error
       (binding [*out* *err*]
         (println (.-message error)))
