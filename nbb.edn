@@ -1,1 +1,2 @@
-{:paths ["src" "scripts" "test"]}
+{:deps {metosin/malli {:mvn/version "0.16.4"}},
+ :paths ["scripts" "test" "src" "eta-mu/packages/clio/src"]}

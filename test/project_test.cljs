@@ -7,14 +7,14 @@
 
 (deftest declares-the-source-constellation
   (let [sources (:project/sources project/project)]
-    (is (= 14 (count sources)))
-    (is (= 13 (count (project/submodule-sources))))
+    (is (= 15 (count sources)))
+    (is (= 14 (count (project/submodule-sources))))
     (is (= 2 (count (project/consolidation-inputs))))
-    (is (= 12 (count (filter :source/actionable? sources))))
+    (is (= 13 (count (filter :source/actionable? sources))))
     (is (= #{:alpha :archaeology :eta}
            (set (map :component/id (:project/native-components project/project)))))
     (is (= #{:agents :truth :bitch-tracker :calliope :epiphany :eta-mu
-             :katamorph :knoxx :muse :opencode :proxx :services :uxx :eta}
+             :katamorph :knoxx :muse :opencode :proxx :services :shx :uxx :eta}
            (set (map :source/id sources))))))
 
 (deftest declared-project-is-structurally-lawful
@@ -52,9 +52,12 @@
               (:errors result)))))
 
 (deftest actionable-authority-is-declarative-and-narrow
-  (let [changed (-> project/project
-                    (assoc-in [:project/sources 13 :source/actionable?] true)
-                    (assoc-in [:project/sources 13 :source/consolidation?] false))
+  (let [eta-index (first (keep-indexed (fn [index source]
+                                        (when (= :eta (:source/id source)) index))
+                                      (:project/sources project/project)))
+        changed (-> project/project
+                    (assoc-in [:project/sources eta-index :source/actionable?] true)
+                    (assoc-in [:project/sources eta-index :source/consolidation?] false))
         result (law/validate-project changed)]
     (is (false? (:valid? result)))
     (is (some #(= :foresight/actionable-source-is-independent-submodule

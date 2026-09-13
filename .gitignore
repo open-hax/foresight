@@ -21,3 +21,10 @@ website/target/
 alpha/.cpcache/
 
 scripts/.clj-kondo/.cache/
+
+# Root workspace dependency/build caches; child repositories own their policies.
+/node_modules/
+/devtools/node_modules/
+/.shadow-cljs/
+/.cpcache/
+/.cache/models/

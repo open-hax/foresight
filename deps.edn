@@ -1,0 +1,13 @@
+{:aliases
+ {:local
+  {:extra-deps
+   {io.github.open-hax/axxium {:local/root "eta-mu/packages/axxium"},
+    io.github.open-hax/clio {:local/root "eta-mu/packages/clio"}},
+   :override-deps
+   {io.github.open-hax/axxium {:local/root "eta-mu/packages/axxium"},
+    io.github.open-hax/clio {:local/root "eta-mu/packages/clio"}}}},
+ :deps
+ {borkdude/edamame {:mvn/version "1.6.42"},
+  funcool/promesa {:mvn/version "11.0.678"},
+  metosin/malli {:mvn/version "0.16.4"}},
+ :paths ["src"]}

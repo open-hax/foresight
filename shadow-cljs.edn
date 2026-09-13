@@ -1,0 +1,15 @@
+{:builds
+ {:local
+  {:exports {:ledgerSummary foresight.infra.local/ledger-summary},
+   :output-to "dist/local.cjs",
+   :target :node-library},
+  :test
+  {:autorun false,
+   :ns-regexp "foresight.infra.local-test$",
+   :output-to "dist/local-test.cjs",
+   :target :node-test}},
+ :dependencies
+ [[borkdude/edamame "1.6.42"]
+  [funcool/promesa "11.0.678"]
+  [metosin/malli "0.16.4"]],
+ :source-paths ["src" "eta-mu/packages/clio/src" "test"]}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "base": "9f9bcccea85dc18822df5bb3cf41c092142e1c64",
+  "generationRuntime": "Transformers.js 3.8.1 / native CPU ONNX",
+  "observerNativeModel": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "initialRed": {
+    "tests": 1,
+    "pass": 0,
+    "fail": 1,
+    "skipped": 0
+  },
+  "peerTerminalWriteRed": {
+    "tests": 1,
+    "pass": 0,
+    "fail": 1,
+    "skipped": 0
+  },
+  "final": {
+    "tests": 94,
+    "pass": 94,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "durationMs": 30627.411737
+  },
+  "lint": {
+    "files": 3,
+    "warnings": 0,
+    "errors": 0
+  },
+  "source": [
+    {
+      "path": "devtools/generation-server.mjs",
+      "sha256": "66a1e7247eadb326c554b775115657870b025e4ea0f3b78e3d83f46b22e2d644"
+    },
+    {
+      "path": "devtools/generation-observer.mjs",
+      "sha256": "49f1040946a94593ffd874bfd4fe88ff9c303f2184782b446a8bb70e0e4fe36f"
+    },
+    {
+      "path": "devtools/generation-observer.test.mjs",
+      "sha256": "13384b9371410615159628375531dd5af2cdbaf0fe9eaa804e317178bb3bfa77"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "docs/notes/evidence/generation-observer/red.txt",
+      "sha256": "7e364bd12967fab1faa70e525ade724cf00a408a285c179b0456d68bbe204a02"
+    },
+    {
+      "path": "docs/notes/evidence/generation-observer/green-initial.txt",
+      "sha256": "f4beefbd86ce8c61769315a15a3693db79e23d00155c4c0ddcd7b95578c7bc51"
+    },
+    {
+      "path": "docs/notes/evidence/generation-observer/focused-green.txt",
+      "sha256": "e1f5fa7f98d433811f56121dade3b015764be5f0fc07bc9bc7d6a9c00e54406b"
+    },
+    {
+      "path": "docs/notes/evidence/generation-observer/existing88.txt",
+      "sha256": "3ca2d0297d38a8e86d6b5b8d2adc7de1a2bb8796ae9fd9da5641c806069562fb"
+    },
+    {
+      "path": "docs/notes/evidence/generation-observer/peer-red.txt",
+      "sha256": "268513dc264d5cfdceb9062ee098d00cabc89853a6ec1173f1c92056947b9931"
+    },
+    {
+      "path": "docs/notes/evidence/generation-observer/final94.txt",
+      "sha256": "4125594b29518f7999f6d88e388fc1d038fcd5e871ffb30dc9aad2b2b382dbd6"
+    },
+    {
+      "path": "docs/notes/evidence/generation-observer/final-lint.txt",
+      "sha256": "cc436861de4755c3d32147f146b3606b7de43a9bef09f6699ae87d2ad648f3c4"
+    }
+  ]
+}
