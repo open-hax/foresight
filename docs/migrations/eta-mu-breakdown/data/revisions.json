@@ -1,0 +1,22 @@
+{
+  "inspection_date": "2026-09-12",
+  "mainline_snapshots": {
+    "open-hax/eta-mu": "476b07bd66efb84566a4159556deacb1e9407e6f",
+    "open-hax/knoxx": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a",
+    "open-hax/foresight": "78befe3daed9a27d79aa511848de3985602decbc",
+    "open-hax/axxium": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+    "octave-commons/epiphany": "643be698ea0d841dd19385506b272872306e456e"
+  },
+  "foresight_gitlinks": {
+    "eta-mu": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+    "knoxx": "fb08a10a8aa32a594cc97ae11b820113de4cf386",
+    "epiphany": "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66"
+  },
+  "scope": "Mainline file inspection. These are not a survey of open branches, the yoga host, uncommitted work, or all constellation repositories.",
+  "donor_changes_performed": false,
+  "repository_builds_executed": false,
+  "repository_tests_executed": false,
+  "repository_creation_performed": false,
+  "remote_persistence_performed": false,
+  "source_content_hashes": "Git revisions and source paths identify observations. No uncomputed input SHA-256 values are claimed."
+}

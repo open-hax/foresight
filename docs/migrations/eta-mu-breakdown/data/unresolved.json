@@ -1,0 +1,14 @@
+{
+  "items": [
+    "Exhaustive source import, namespace, relative script, resource, CI, and deployment scan is still required at implementation head.",
+    "Destination existence/history checks remain unperformed except open-hax/axxium. Osmos is a proposed ingestion name, not reserved.",
+    "Protocol source distribution cannot be assumed from its dist-only npm files list; packages/protocols/deps.edn fetch returned 404.",
+    "Other target shared .clj-kondo and root scripts may add tooling edges beyond Sol/Mycology observations.",
+    "Exact CI runner, secrets, environment, Docker and resource contracts must be read before moving workflows.",
+    "Open branches, recent review threads, and yoga worktrees were not inspected.",
+    "No package installs, builds, test suites, coverage runs, browser runs, repo creation, or branch settings changes were executed.",
+    "The full Markdown constellation was not indexed, classified, counted or deduplicated in this planning run.",
+    "No code-volume percentage has been computed.",
+    "No Clio schema admission or external persistence was performed; ND-EDN here is a static observation dataset."
+  ]
+}

@@ -55,3 +55,31 @@
 	path = shx
 	url = git@github.com:octave-commons/shx.git
 	branch = device/yoga
+[submodule "kanban-orchestrator"]
+	path = kanban-orchestrator
+	url = git@github.com:open-hax/kanban-orchestrator.git
+	branch = device/yoga
+[submodule "clio"]
+	path = clio
+	url = git@github.com:open-hax/clio.git
+	branch = device/yoga
+[submodule "chat-ui"]
+	path = chat-ui
+	url = git@github.com:open-hax/chat-ui.git
+	branch = device/yoga
+[submodule "rheos"]
+	path = rheos
+	url = git@github.com:open-hax/rheos.git
+	branch = device/yoga
+[submodule "session-mycology"]
+	path = session-mycology
+	url = git@github.com:open-hax/session-mycology.git
+	branch = device/yoga
+[submodule "sol"]
+	path = sol
+	url = git@github.com:open-hax/sol.git
+	branch = device/yoga
+[submodule "osmos"]
+	path = osmos
+	url = git@github.com:open-hax/osmos.git
+	branch = device/yoga

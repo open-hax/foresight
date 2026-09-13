@@ -1,0 +1,9 @@
+{
+  "scope": "Planning-pack checks only; not source repository tests or model quality evaluation",
+  "tests_run": 21,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "edn_validation": "Record framing checked; no EDN parser or Clio admission executed.",
+  "mermaid_validation": "Generated diagram text retained; rendered previews use Graphviz, not a Mermaid renderer."
+}

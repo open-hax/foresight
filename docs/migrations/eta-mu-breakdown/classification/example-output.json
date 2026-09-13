@@ -1,0 +1,92 @@
+{
+  "schema_version": "document-labels/v1",
+  "kind": {
+    "value": "design-proposal",
+    "confidence": 0.97,
+    "evidence": [
+      {
+        "start_line": 6,
+        "end_line": 6,
+        "quote": "This is a design proposal, not a report of implemented behavior."
+      }
+    ]
+  },
+  "audiences": [
+    "developer"
+  ],
+  "topics": [
+    {
+      "id": "document-graph",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "start_line": 3,
+          "end_line": 3,
+          "quote": "Rheos manages Markdown document changes."
+        },
+        {
+          "start_line": 4,
+          "end_line": 4,
+          "quote": "Epiphany proposes evidence-backed relationships."
+        }
+      ]
+    },
+    {
+      "id": "event-history",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "start_line": 5,
+          "end_line": 5,
+          "quote": "Clio records accepted change events."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "project_id": "rheos",
+      "role": "primary",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "start_line": 3,
+          "end_line": 3,
+          "quote": "Rheos manages Markdown document changes."
+        }
+      ]
+    },
+    {
+      "project_id": "epiphany",
+      "role": "related",
+      "confidence": 0.92,
+      "evidence": [
+        {
+          "start_line": 4,
+          "end_line": 4,
+          "quote": "Epiphany proposes evidence-backed relationships."
+        }
+      ]
+    },
+    {
+      "project_id": "clio",
+      "role": "related",
+      "confidence": 0.92,
+      "evidence": [
+        {
+          "start_line": 5,
+          "end_line": 5,
+          "quote": "Clio records accepted change events."
+        }
+      ]
+    }
+  ],
+  "proposed_topics": [],
+  "unresolved_project_mentions": [],
+  "review_flags": [
+    "cross-project-scope",
+    "contains-unresolved-reference"
+  ],
+  "abstained": false,
+  "abstention_reason": null
+}
