@@ -124,6 +124,24 @@
   spore: none
   receipt-refs: 2026-08-30T01:17:37Z
   note: A stable nonzero frontier can be planning-ready without being falsely closed when every inaccessible identity is exact, transient failures are retried separately, and missing recovery authority is represented as a blocked canonical card.
+- ts: 2026-08-31T18:21:31.327405762Z
+  session: /home/err/spaces/foresight
+  task: Connect Knoxx to local workspace, MongoDB, Proxx, and Ollama
+  p-efficiency: 0.72
+  p-friction: 0.78
+  p-skill-candidate: 0.82
+  spore: 20260831-132131-local-service-secret-safe-bootstrap.md
+  receipt-refs: 2026-08-31T18:21:05.990226214Z,2026-08-31T18:21:06.070445901Z
+  note: The reusable lesson is to make local-service bootstrap secret-safe and freshness-aware before the first live launch.
+- ts: 2026-08-31T23:43:32.033725183Z
+  session: /home/err/spaces/foresight
+  task: Connect Knoxx local and production resources; enforce browser and MCP contracts; shape Rheos document events
+  p-efficiency: 0.71
+  p-friction: 0.86
+  p-skill-candidate: 0.84
+  spore: 20260831-132131-local-service-secret-safe-bootstrap.md
+  receipt-refs: 2026-08-31T23:43:11.260425743Z,2026-08-31T23:43:11.458535043Z,2026-08-31T23:43:11.650130301Z,2026-08-31T23:43:11.846208028Z
+  note: Runner-only Mongo transaction topology and stale MCP authorization projection were surfaced by required hosted gates; fail-closed verification converted both into durable contracts. Sol remains truthfully blocked on a private dependency.
 - ts: 2026-08-30T01:17:36Z
   session: constellation-zero-inbox-2026-08-29
   task: Separate durable census frontier from transient transport failure
@@ -412,3 +430,21 @@
   spore: none
   receipt-refs: 2026-08-30T13:17:29Z
   note: Bridge-side compare-and-swap cannot constrain other credentials, object-map insertion order is not canonical evidence order, and an orphan nested entry does not prove its path. Enforce the ref boundary at the host, sort keys by Unicode code point, and require bounded per-tree ancestry proof before resolving truncated recursive evidence.
+- ts: 2026-09-02T15:28:04.000957403Z
+  session: /home/err/spaces/foresight
+  task: Stand up and verify local Knoxx translation workflow with Ollama embeddings and gemma4:e2b
+  p-efficiency: 0.62
+  p-friction: 0.88
+  p-skill-candidate: 0.72
+  spore: none
+  receipt-refs: 2026-09-02T15:27:51.565862126Z
+  note: Reusable lesson: split-backed model tools should require model-owned identity fields while binding authoritative source bytes server-side; deployment model overlays should resolve exact contracts and fail closed. No spore created because this pattern needs another independent occurrence before promotion.
+- ts: 2026-09-03T00:17:49.293972342Z
+  session: /home/err/spaces/foresight
+  task: Make deployment admission produce durable translations, review-gated dictionaries, and translated post drafts
+  p-efficiency: 0.68
+  p-friction: 0.91
+  p-skill-candidate: 0.74
+  spore: none
+  receipt-refs: 2026-09-03T00:17:49.293972342Z
+  note: Reusable lessons: deployment hooks should distinguish durable acceptance from asynchronous completion; model output remains untrusted until a required-first server-bound tool validates and persists it; CLJS native await can accidentally await a Promise-valued argument before a timeout wrapper exists, so lifecycle races belong behind a non-async Promise boundary. No spore was created because the cross-repository pattern should stabilize through another deployment before promotion.
