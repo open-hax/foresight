@@ -1,13 +1,1 @@
-{:namespace :foresight.archaeology/run-f49b2fa0-2e8f-42c7-9147-9ea36456da8a
- :resources
- [{:document/id "f49b2fa0-2e8f-42c7-9147-9ea36456da8a"
-    :document/type :foresight.archaeology/run
-    :archaeology/catalog {:schema/catalog ".ημ/archaeology/catalog.edn"
-                           :schema/history-dir ".ημ/archaeology/schemas"}
-    :archaeology/ledgers
-    {:run {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/run.edn"}
-     :findings {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/findings.edn"}
-     :actions {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/actions.edn"}
-     :evidence {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/evidence.edn"}
-     :relations {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/relations.edn"}}
-    :archaeology/projection :foresight.archaeology/run}]}
+{:namespace :foresight.archaeology :resources [{:document/id :run-f49b2fa0-2e8f-42c7-9147-9ea36456da8a :document/type :foresight.archaeology/run :archaeology/run-id "f49b2fa0-2e8f-42c7-9147-9ea36456da8a" :archaeology/schema {:catalog/path ".ημ/archaeology/catalog.edn" :history/path ".ημ/archaeology/schemas"} :archaeology/ledgers {:run {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/run.edn" :ledger/event-type :archaeology/run-recorded} :findings {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/findings.edn" :ledger/event-type :archaeology/finding-recorded} :actions {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/actions.edn" :ledger/event-type :archaeology/action-recorded} :evidence {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/evidence.edn" :ledger/event-type :archaeology/evidence-recorded} :relations {:ledger/path ".ημ/archaeology/ledgers/f49b2fa0-2e8f-42c7-9147-9ea36456da8a/relations.edn" :ledger/event-type :archaeology/relation-recorded}} :archaeology/projection :foresight.archaeology/run}]}
