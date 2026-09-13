@@ -1,0 +1,123 @@
+{:ts "2026-09-13T00:00:00Z"
+ :kind :observation
+ :origin "eta-mu-breakdown-setup"
+ :owner "agent"
+ :dod "Planning pack moved to docs/migrations/eta-mu-breakdown/; 12 kanban cards created for E1.01-E1.12"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["docs/migrations/eta-mu-breakdown/README.md"
+            "docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md"
+            "docs/migrations/eta-mu-breakdown/epic-02-rheos-document-corpus.md"
+            "docs/migrations/eta-mu-breakdown/dependency-analysis.md"
+            "docs/migrations/eta-mu-breakdown/data/revisions.json"
+            "docs/migrations/eta-mu-breakdown/data/sources.json"
+            "docs/migrations/eta-mu-breakdown/data/relationships.json"
+            "docs/migrations/eta-mu-breakdown/data/unresolved.json"
+            "docs/agile/kanban/e1-01-migration-surface-manifest.md"
+            "docs/agile/kanban/e1-02-faithful-clean-copies.md"
+            "docs/agile/kanban/e1-03-bootstrap-dependency-resolution.md"
+            "docs/agile/kanban/e1-04-independent-git-history.md"
+            "docs/agile/kanban/e1-05-foresight-discovers-children.md"
+            "docs/agile/kanban/e1-06-transplant-edges-one-at-a-time.md"
+            "docs/agile/kanban/e1-07-remaining-eta-mu-consumers.md"
+            "docs/agile/kanban/e1-08-osmos-ingestion-service.md"
+            "docs/agile/kanban/e1-09-honest-quality-gates.md"
+            "docs/agile/kanban/e1-10-reviewer-start-window-protection.md"
+            "docs/agile/kanban/e1-11-donor-retirement-after-cutover.md"
+            "docs/agile/kanban/e1-12-migration-documentation.md"]
+ :refs ["inbox/eta-mu-breakdown planning pack, inspected 2026-09-12"]
+ :note "Moved planning pack from inbox/ to docs/migrations/. Created 12 kanban cards with dependency chain. E1.01 set to todo, rest blocked/incoming. Starting E1.01 exhaustive closure proof."}
+{:ts "2026-09-13T01:00:00Z"
+ :kind :build
+ :origin "e1-01-closure-proof"
+ :owner "agent"
+ :dod "E1.01 acceptance: exhaustive closure manifest with source-evidenced edge register for all 8 extraction targets"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["docs/migrations/eta-mu-breakdown/closure-manifest.md"]
+ :refs ["eta-mu 0ed56aa7", "knoxx fb08a10a"]
+ :note "E1.01 complete. All 8 targets scanned: package.json, deps.edn, shadow-cljs.edn, all source requires/imports, Docker, contracts. 6 new repos needed (only axxium exists). Critical path: chat-ui→clio→protocols→rheos. Sol↔eta-mu cross-mechanism cycle preserved. 14 new edges discovered beyond planning pack's 46."}
+{:ts "2026-09-13T02:00:00Z"
+ :kind :build
+ :origin "e1-02-faithful-copies"
+ :owner "agent"
+ :dod "E1.02 acceptance: all 8 receiver trees copied from donor revisions, donors byte-for-byte unchanged, no .git metadata/credentials/build artifacts staged"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["/tmp/opencode/eta-mu-extraction/manifest.json"
+            "/tmp/opencode/eta-mu-extraction/*.sha256"]
+ :refs ["eta-mu 0ed56aa7", "knoxx fb08a10a"]
+ :note "E1.02 complete. 490 files across 10 packages (8 targets + eta-mu-cli ref + kondo-config). Removed tracked 23MB kms-ingestion.jar from osmos extraction. Donors verified clean. Exports staged in /tmp/opencode/eta-mu-extraction/."}
+{:ts "2026-09-13T03:00:00Z"
+ :kind :build
+ :origin "e1-03-bootstrap-deps"
+ :owner "agent"
+ :dod "E1.03 acceptance: all receivers resolve bootstrap dependencies from immutable donor revisions; no workspace:*, no local/root, shared scripts bundled locally"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["/tmp/opencode/eta-mu-extraction/sol/deps.edn"
+            "/tmp/opencode/eta-mu-extraction/rheos/package.json"
+            "/tmp/opencode/eta-mu-extraction/rheos/shadow-cljs.edn"
+            "/tmp/opencode/eta-mu-extraction/rheos/scripts/bootstrap-source-deps.sh"
+            "/tmp/opencode/eta-mu-extraction/eta-mu-cli/package.json"
+            "/tmp/opencode/eta-mu-extraction/sol/scripts/contract-guard.mjs"
+            "/tmp/opencode/eta-mu-extraction/session-mycology/scripts/check-ledger-extern-boundaries.mjs"]
+ :refs ["eta-mu 0ed56aa7"]
+ :note "E1.03 complete. Sol: :local/root→:git/url+sha+deps/root. Rheos: workspace:*→Git path selector, source-paths→deps/. Eta-mu CLI: all workspace:*→Git path selectors. Kondo-config bundled into each package. Guard scripts copied locally. All pinned to donor SHA 0ed56aa7."}
+{:ts "2026-09-13T04:00:00Z"
+ :kind :push-truth
+ :origin "e1-04-git-history"
+ :owner "agent"
+ :dod "E1.04 acceptance: all7 new repos created with verified open-hax remote, public visibility, main branch, device/yoga branch, donor provenance commits"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["https://github.com/open-hax/kanban-orchestrator"
+            "https://github.com/open-hax/clio"
+            "https://github.com/open-hax/chat-ui"
+            "https://github.com/open-hax/rheos"
+            "https://github.com/open-hax/session-mycology"
+            "https://github.com/open-hax/sol"
+            "https://github.com/open-hax/osmos"]
+ :refs ["eta-mu 0ed56aa7", "knoxx fb08a10a"]
+ :note "E1.04 complete.7 new public repos created with main + device/yoga branches. Axxium needs manual reconciliation (existing repo not overwritten). All commits include donor provenance in message body."}
+{:ts "2026-09-13T05:00:00Z"
+ :kind :build
+ :origin "e1-05-foresight-discovers"
+ :owner "agent"
+ :dod "E1.05 acceptance: .gitmodules and index contain matching path/URL/gitlink entries for all7 new products; project.cljc updated with source entries"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest [".gitmodules"
+            "kanban-orchestrator"
+            "clio"
+            "chat-ui"
+            "rheos"
+            "session-mycology"
+            "sol"
+            "osmos"
+            "src/foresight/project.cljc"]
+ :refs ["kanban-orchestrator 8e16609", "clio 788cdd3", "chat-ui 8638553", "rheos fbf6aa0", "session-mycology 30339f9", "sol 1276955", "osmos 0c33018"]
+ :note "E1.05 complete. All7 new repos registered as Git submodules with device/yoga branch. project.cljc updated with source/id, source/role, source/repository entries. project.cljc parses cleanly."}
+{:ts "2026-09-13T06:00:00Z"
+ :kind :decision
+ :origin "e1-06-transplant-edges"
+ :owner "agent"
+ :dod "E1.06 acceptance: each changed dependency points to tested SHA; consumer still passes; edge disposition documented"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["docs/migrations/eta-mu-breakdown/edge-disposition.md"
+            "rheos/scripts/bootstrap-source-deps.sh"]
+ :refs ["chat-ui 8638553", "eta-mu 0ed56aa7"]
+ :note "E1.06 complete. Rheos→Chat UI switched to new repo via bootstrap adapter. Protocols stays in eta-mu (not extracted). Sol/eta-mu/tur-processor edges retained at donor SHA. Self-contained packages (clio, chat-ui, session-mycology, kanban-orchestrator, osmos) need no edge changes. Eta-mu CLI edges deferred to E1.07."}
+{:ts "2026-09-13T07:00:00Z"
+ :kind :build
+ :origin "e1-07-remaining-consumers"
+ :owner "agent"
+ :dod "E1.07 acceptance: eta-mu CLI's extracted deps point to new repos; remaining deps use donor Git subdirectory selectors; shadow-cljs source-paths updated"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["eta-mu/packages/eta-mu/package.json"
+            "eta-mu/packages/eta-mu/shadow-cljs.edn"
+            "eta-mu/packages/eta-mu/scripts/bootstrap-source-deps.sh"]
+ :refs ["rheos fbf6aa0", "sol 1276955", "session-mycology 30339f9", "eta-mu 0ed56aa7"]
+ :note "E1.07 complete. Eta-mu CLI: rheos→open-hax/rheos, sol→open-hax/sol, session-mycology→open-hax/session-mycology. Remaining (fork-tax, receipt-river, turn-processor, terminal-ui, contracts-output) stay as Git subdirectory deps from donor eta-mu. Session-mycology source fetched via bootstrap adapter."}

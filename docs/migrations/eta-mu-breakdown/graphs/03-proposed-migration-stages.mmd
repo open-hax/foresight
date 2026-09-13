@@ -1,0 +1,19 @@
+flowchart TD
+  preflight["E1.01 Pin sources, map closure, reconcile existing remotes"]
+  copies["E1.02 Copy all eight; donor files unchanged"]
+  bootstrap["E1.03 Receiver-only donor-SHA adapters and cold checks"]
+  remotes["E1.04 Verified remotes and device/yoga branches"]
+  modules["E1.05 Foresight gitlinks and project/gate registries"]
+  switches["E1.06 One transplant dependency edge per verified change"]
+  consumers["E1.07 Remaining eta-mu consumers switch to new repos"]
+  ingestion["E1.08 Independent ingestion service and client compatibility"]
+  gates["E1.09-E1.10 CI, AGENTS, exact-head review and main protection"]
+  retire["E1.11 Zero live inbound edges before each donor deletion"]
+  docs["E1.12 Docs transfer and ownership map"]
+  preflight --> copies --> bootstrap --> remotes --> modules --> switches --> consumers
+  copies --> ingestion
+  remotes --> gates
+  consumers --> retire
+  ingestion --> retire
+  gates --> retire
+  retire --> docs
