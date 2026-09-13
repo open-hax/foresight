@@ -43,6 +43,7 @@ candidates, and accepted lifts are not interchangeable.
 | `opencode` | open-hax/opencode | coding-agent-host | Coding-agent hosting/integration (shallow submodule) |
 | `proxx` | open-hax/proxx | model-proxy | LLM/model proxying, EDN pricing policy; provider credentials stay local |
 | `services` | open-hax/services | deployment-orchestration | Deployment topology and environment schemas — never application source or secrets |
+| `shx` | octave-commons/shx | shell-ir | Common IR for shell intent (bash <-> Clojure), envm EDN-driven shell config |
 | `uxx` | open-hax/uxx | ui-kit | Canonical React components; Reagent/Helix are parity wrappers, shared design tokens |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |

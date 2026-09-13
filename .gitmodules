@@ -38,3 +38,6 @@
 [submodule ".agents"]
 	path = .agents
 	url = git@github.com:riatzukiza/.agents.git
+[submodule "shx"]
+	path = shx
+	url = git@github.com:octave-commons/shx.git

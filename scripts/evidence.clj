@@ -259,9 +259,9 @@
         catalog (validate-catalog! catalog)
         base-ledger (read-immutable-receipt-ledger! trusted-base-revision)
         ledger (read-immutable-receipt-ledger! reviewed-root-revision)]
-    (appended-receipt-records! (:ledger/bytes base-ledger)
-                               (:ledger/bytes ledger))
-    (require-valid-receipt-records! (:ledger/records ledger))
+    (require-valid-receipt-records!
+     (appended-receipt-records! (:ledger/bytes base-ledger)
+                                (:ledger/bytes ledger)))
     (if-not (law/promotion-evidence-consistent?
              catalog catalog-identity target-revision
              required-gate-ids results ledger)
@@ -784,13 +784,12 @@
        (.equals prefix (.subarray value 0 (.-length prefix)))))
 
 (defn validate-held-receipt-ledger! [target committed-bytes]
-  (let [bytes (stable-held-target-bytes! target)
-        records (read-receipt-records!
-                 (decode-utf8! bytes "held Receipt River ledger"))]
+  (let [bytes (stable-held-target-bytes! target)]
     (when-not (buffer-prefix? committed-bytes bytes)
       (append-error!
        "Receipt River does not preserve the committed ledger as a prefix"))
-    (require-valid-receipt-records! records)
+    (require-valid-receipt-records!
+     (appended-receipt-records! committed-bytes bytes))
     bytes))
 
 (defn require-held-ledger-unchanged! [target validated-bytes]
@@ -1016,6 +1015,8 @@
       (reduce max 0 (map result-exit results)))))
 
 (defn appended-receipt-records! [base-bytes head-bytes]
+  ;; Only an exact immutable prefix receives historical compatibility. Keep
+  ;; current envelope/semantic validation at callers on the returned suffix.
   (when-not (buffer-prefix? base-bytes head-bytes)
     (throw (js/Error.
             "Receipt River head does not preserve the base bytes as a prefix")))
@@ -1047,14 +1048,16 @@
                           (:ledger/bytes ledger))
         candidates (filter #(= law/evidence-receipt-origin (:origin %)) records)
         evidence-count (count candidates)
-        counts (require-valid-receipt-records! records)]
+        counts (require-valid-receipt-records! appended-records)]
     (println "PASS"
              (pr-str (assoc (:ledger/identity ledger)
                             :ledger/base-revision base
                             :ledger/total-receipts (count records)
                             :ledger/appended-receipts (count appended-records)
+                            :ledger/appended-evidence-receipts
+                            (:receipt/evidence counts)
                             :ledger/legacy-evidence-receipts
-                            (:receipt/legacy-evidence counts)
+                            (count (filter #(nil? (:evidence/schema %)) candidates))
                             :ledger/evidence-receipts evidence-count)))
     0))
 

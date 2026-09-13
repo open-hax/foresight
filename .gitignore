@@ -5,3 +5,19 @@
 /dist/
 
 eta/.clj-kondo/.cache/
+
+website/.clj-kondo/
+
+website/.shadow-cljs/
+
+website/dist/
+
+website/node_modules/
+
+website/.lsp/
+
+website/target/
+
+alpha/.cpcache/
+
+scripts/.clj-kondo/.cache/
