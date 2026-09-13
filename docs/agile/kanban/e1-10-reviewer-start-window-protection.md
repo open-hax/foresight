@@ -1,7 +1,7 @@
 ---
 uuid: "e1-10-reviewer-start-window-protection"
 title: "E1.10 — Unreviewed changes cannot merge during the reviewer-start window"
-status: todo
+status: done
 priority: P1
 labels: ["eta-mu-breakdown", "migration", "branch-protection", "coderabbit", "5sp"]
 created_at: "2026-09-13T00:00:00Z"

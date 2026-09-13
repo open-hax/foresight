@@ -121,3 +121,48 @@
             "eta-mu/packages/eta-mu/scripts/bootstrap-source-deps.sh"]
  :refs ["rheos fbf6aa0", "sol 1276955", "session-mycology 30339f9", "eta-mu 0ed56aa7"]
  :note "E1.07 complete. Eta-mu CLI: rheos→open-hax/rheos, sol→open-hax/sol, session-mycology→open-hax/session-mycology. Remaining (fork-tax, receipt-river, turn-processor, terminal-ui, contracts-output) stay as Git subdirectory deps from donor eta-mu. Session-mycology source fetched via bootstrap adapter."}
+{:ts "2026-09-13T07:50:07Z"
+ :kind :push-truth
+ :origin "fork-tax"
+ :owner "agent"
+ :dod "Π commit + tag + push: E1.01-E1.07 extraction work preserved"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest [".gitmodules"
+            "src/foresight/project.cljc"
+            "docs/agile/kanban/e1-*.md"
+            "docs/migrations/eta-mu-breakdown/"
+            "receipts.edn"
+            ".ημ/receipts.edn"]
+ :refs ["7ef9b8af", "Π-20260913T075007Z-eta-mu-breakdown-E1.01-E1.07"]
+ :note "Fork tax paid. Branch device/yoga pushed to origin. Tag created.7 new repos live on GitHub. Axxium reconciliation deferred."}
+{:ts "2026-09-13T08:00:00Z"
+ :kind :build
+ :origin "e1-08-osmos-standalone"
+ :owner "agent"
+ :dod "E1.08 acceptance: Osmos runs from its own root; Dockerfile fixed; contract discovery explicit; README created"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["osmos/Dockerfile" "osmos/src/kms_ingestion/contracts/loader.clj" "osmos/README.md" "osmos/.gitignore"]
+ :refs ["osmos 9637669"]
+ :note "E1.08 complete. Removed COPY resources (missing dir), removed parent-directory contract fallback, created README with 47 env vars documented, expanded .gitignore. Osmos pushed to open-hax/osmos."}
+{:ts "2026-09-13T08:30:00Z"
+ :kind :build
+ :origin "e1-09-quality-gates"
+ :owner "agent"
+ :dod "E1.09 acceptance: every child has AGENTS.md with build/test/lint commands and architecture docs"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest ["clio/AGENTS.md" "chat-ui/AGENTS.md" "rheos/AGENTS.md" "session-mycology/AGENTS.md" "sol/AGENTS.md" "kanban-orchestrator/AGENTS.md" "osmos/AGENTS.md"]
+ :refs ["clio a0e97bf" "chat-ui f6d6e66" "rheos 886e808" "session-mycology 736f6a6" "sol 4ecd325" "kanban-orchestrator c5571e2" "osmos 961d420"]
+ :note "E1.09 complete. AGENTS.md pushed to all7 child repos with quick commands, architecture docs, dependency lists, and license info."}
+{:ts "2026-09-13T09:00:00Z"
+ :kind :build
+ :origin "e1-10-branch-protection"
+ :owner "agent"
+ :dod "E1.10 acceptance: main requires PRs, dismiss stale reviews, no force pushes, no deletions on all7 repos"
+ :pi "operation-eta-mu-breakdown"
+ :host "yoga"
+ :manifest []
+ :refs ["kanban-orchestrator" "clio" "chat-ui" "rheos" "session-mycology" "sol" "osmos"]
+ :note "E1.10 complete. Branch protection set on all7 repos: required PRs, dismiss stale reviews, no force pushes, no deletions. required_approving_review_count=0 for solo maintainer workflow."}
