@@ -532,6 +532,26 @@
      :source/role :ingestion-service
      :source/actionable? true
      :source/invariants []}
+    {:source/id :receipt-river
+     :source/name "receipt-river"
+     :source/path "receipt-river"
+     :source/type :git-submodule
+     :source/repository "open-hax/receipt-river"
+     :source/url "git@github.com:open-hax/receipt-river.git"
+     :source/ownership :independent-repository
+     :source/role :receipt-ledger
+     :source/actionable? true
+     :source/invariants []}
+    {:source/id :axxium
+     :source/name "axxium"
+     :source/path "axxium"
+     :source/type :git-submodule
+     :source/repository "open-hax/axxium"
+     :source/url "git@github.com:open-hax/axxium.git"
+     :source/ownership :independent-repository
+     :source/role :identity-auth-kernel
+     :source/actionable? true
+     :source/invariants []}
     {:source/id :eta
     :source/name "eta"
     :source/path "eta"

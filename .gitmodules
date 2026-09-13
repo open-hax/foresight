@@ -83,3 +83,11 @@
 	path = osmos
 	url = git@github.com:open-hax/osmos.git
 	branch = device/yoga
+[submodule "receipt-river"]
+	path = receipt-river
+	url = git@github.com:open-hax/receipt-river.git
+	branch = device/yoga
+[submodule "axxium"]
+	path = axxium
+	url = git@github.com:open-hax/axxium.git
+	branch = device/yoga
