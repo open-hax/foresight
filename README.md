@@ -107,15 +107,10 @@ same Git object, and requires every result revision to equal the corresponding
 gitlink in its tree. It rechecks the root boundary after all reads.
 
 The runner appends each complete result to `.ημ/receipts.edn`. Schema-v2
-receipts retain the actual host and `nbb`/Node adapter identity. The intended
-compatibility contract is that older receipts remain immutable historical
-records and cannot attest a current promotion. As of
-`main@78befe3daed9a27d79aa511848de3985602decbc`, however,
-`verify-receipts` retroactively applies the current envelope shape to older
-loose records and therefore fails the root `receipt_history` gate. Do **not**
-rewrite the append-only ledger to make that green; the trusted-prefix
-compatibility repair is tracked in
-[Foresight #80](https://github.com/open-hax/foresight/issues/80).
+receipts retain the actual host and `nbb`/Node adapter identity. Older
+receipts remain immutable historical records and cannot attest a current
+promotion; `verify-receipts` applies the current envelope law only to the
+suffix appended after the reviewed base.
 
 The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
 no-follow parent directory descriptor, rejects symbolic or multiply linked
@@ -128,15 +123,22 @@ from pathname swaps, partial writes, and cooperating races; it does not exclude
 an unrelated writer that ignores the lock.
 
 For immutable review, the adapter disables Git replacement objects, requires
-regular non-executable blobs, hashes their raw bytes, decodes strict UTF-8, and
-proves the reviewed ledger preserves the trusted base ledger byte-for-byte
-before accepting whole appended lines. The portable consistency law then
-requires exact receipt/result equality. Editing a failed result or prior
-receipt into a shape-valid pass therefore cannot reuse the reviewed history.
-Git supplies content-addressed integrity and a review-authorized immutable
-snapshot, not producer authentication. A trusted GitHub Check or DSSE/signing
-identity is a future strengthening if producer authentication becomes a
-requirement; its acceptance contract is tracked in
+regular non-executable blobs, hashes
+their raw bytes, decodes strict UTF-8, and proves the reviewed ledger preserves
+the trusted base ledger byte-for-byte before accepting whole appended lines.
+The current receipt-envelope and evidence-result laws apply only to that
+appended suffix. The exact trusted prefix remains historical evidence even
+when its envelopes predate the current schema. Secure append applies the same
+boundary against the committed `HEAD` ledger: it validates the uncommitted
+suffix before running a gate or writing its receipt. Rewrites, truncation, and
+malformed new records still fail closed. Summary totals describe the entire
+ledger; appended counts describe the records subject to current validation.
+The portable consistency law then requires exact receipt/result equality.
+Editing a failed result or prior receipt into a shape-valid pass therefore
+cannot reuse the reviewed history. Git supplies content-addressed integrity and
+a review-authorized immutable snapshot, not producer authentication. A trusted
+GitHub Check or DSSE/signing identity is a future strengthening if producer
+authentication becomes a requirement; its acceptance contract is tracked in
 [Foresight #57](https://github.com/open-hax/foresight/issues/57).
 
 The local adapter's before/after checkout snapshots detect ordinary drift; they
