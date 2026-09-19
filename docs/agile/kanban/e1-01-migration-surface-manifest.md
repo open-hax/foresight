@@ -2,11 +2,11 @@
 category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "closure-proof", "8sp"]
 story_id: "E1.01"
-write-id: "1789282834743-0.wrcxojtsxmal156pnmq"
+write-id: "1789857168040-0.20aikbh9rg3i7r14spk"
 points: "8"
 title: "E1.01 — Maintainer can inspect the exact migration surface before any write"
 priority: "P0"
-status: "done"
+status: "in_progress"
 epic: "operation-eta-mu-breakdown"
 uuid: "e1-01-migration-surface-manifest"
 created_at: "2026-09-13T00:00:00Z"
@@ -42,4 +42,6 @@ See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1
 
 ---
 Closure manifest written to docs/migrations/eta-mu-breakdown/closure-manifest.md. All 8 extraction targets scanned. 6 new repos needed (only axxium exists). Critical path: chat-ui → clio → protocols → rheos. Sol↔eta-mu cross-mechanism cycle preserved via immutable donor snapshots.
+
+PR #96 reconciliation: The September 13 card said done but the canonical status stream stops at in_progress. Reopening the observed card state through lawful CLI transitions now, not backfilling historical completion. The planning snapshot is bounded, not an exhaustive donor closure proof. Seven new repositories (eight targets minus existing Axxium) corrects the earlier six-repository claim; Receipt River was added later as a ninth registration.
 ---

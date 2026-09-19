@@ -109,7 +109,7 @@ The later numbered diagrams are explicitly **proposed** workflow/architecture vi
 | R001 | Rheos | Protocols | npm-dev / observed | devDependencies @open-hax/protocols = workspace:* | rheos.package |
 | R002 | Rheos | Protocols | cljs-source-path / observed | ../protocols/src | rheos.deps |
 | R003 | Rheos | Chat UI | cljs-source-path / observed | ../chat-ui/src | rheos.deps |
-| R004 | Rheos | Katamorph | clojure-git / observed | Git SHA be7cc332d865cfedc57b55b10cab3c9f2bd41fc4 | rheos.deps |
+| R004 | Rheos | Katamorph | clojure-git / observed at mainline 476b07bd66efb84566a4159556deacb1e9407e6f only | Git SHA be7cc332d865cfedc57b55b10cab3c9f2bd41fc4; donor 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90 lacks this deps.edn | rheos.deps |
 | R005 | Rheos | uxx-helix | npm-dev / observed | @open-hax/uxx-helix ^0.1.0; package/repository relationship needs a package export audit | rheos.package |
 | R006 | Sol | eta-mu CLI/source | clojure-local / observed | open-hax/eta-mu :local/root ../eta-mu; source library, not necessarily execution of the full CLI | sol.deps |
 | R007 | Sol | Turn Processor | clojure-local / observed | open-hax/turn-processor :local/root ../turn-processor | sol.deps |

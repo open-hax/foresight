@@ -1,26 +1,32 @@
+test_accept_narrow_request_containing_output_topics (__main__.PackChecks.test_accept_narrow_request_containing_output_topics) ... ok
 test_all_eight_targets_present (__main__.PackChecks.test_all_eight_targets_present) ... ok
+test_edge_coordinates_are_full_and_revision_scoped (__main__.PackChecks.test_edge_coordinates_are_full_and_revision_scoped) ... ok
 test_edges_resolve (__main__.PackChecks.test_edges_resolve) ... ok
 test_epic_stories_and_requested_steps (__main__.PackChecks.test_epic_stories_and_requested_steps) ... ok
+test_historical_receipt_bytes_are_preserved (__main__.PackChecks.test_historical_receipt_bytes_are_preserved) ... ok
 test_mixed_package_cycle_recorded (__main__.PackChecks.test_mixed_package_cycle_recorded) ... ok
 test_nd_edn_has_one_record_per_edge (__main__.PackChecks.test_nd_edn_has_one_record_per_edge) ... ok
+test_registration_is_explicitly_pending_acceptance (__main__.PackChecks.test_registration_is_explicitly_pending_acceptance) ... ok
 test_reject_claimed_authority (__main__.PackChecks.test_reject_claimed_authority) ... ok
 test_reject_duplicate_labels (__main__.PackChecks.test_reject_duplicate_labels) ... ok
 test_reject_empty_abstention (__main__.PackChecks.test_reject_empty_abstention) ... ok
 test_reject_extra_action (__main__.PackChecks.test_reject_extra_action) ... ok
 test_reject_fabricated_quote (__main__.PackChecks.test_reject_fabricated_quote) ... ok
 test_reject_invalid_span (__main__.PackChecks.test_reject_invalid_span) ... ok
+test_reject_schema_valid_topic_excluded_by_request (__main__.PackChecks.test_reject_schema_valid_topic_excluded_by_request) ... ok
 test_reject_unknown_project (__main__.PackChecks.test_reject_unknown_project) ... ok
 test_reject_unknown_topic (__main__.PackChecks.test_reject_unknown_topic) ... ok
 test_rendered_graphs_are_svg (__main__.PackChecks.test_rendered_graphs_are_svg) ... ok
 test_revision_shapes (__main__.PackChecks.test_revision_shapes) ... ok
 test_runtime_edges_not_package_edges (__main__.PackChecks.test_runtime_edges_not_package_edges) ... ok
 test_schema_and_positive_fixture (__main__.PackChecks.test_schema_and_positive_fixture) ... ok
+test_stage_graph_preserves_card_prerequisites (__main__.PackChecks.test_stage_graph_preserves_card_prerequisites) ... ok
 test_strict_json_rejects_duplicate_keys (__main__.PackChecks.test_strict_json_rejects_duplicate_keys) ... ok
 test_strict_json_rejects_extensions (__main__.PackChecks.test_strict_json_rejects_extensions) ... ok
 test_strict_json_rejects_oversize (__main__.PackChecks.test_strict_json_rejects_oversize) ... ok
 test_synthetic_source_digest (__main__.PackChecks.test_synthetic_source_digest) ... ok
 
 ----------------------------------------------------------------------
-Ran 21 tests in 0.019s
+Ran 27 tests in 0.029s
 
 OK

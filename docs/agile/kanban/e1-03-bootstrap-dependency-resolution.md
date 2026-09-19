@@ -1,15 +1,16 @@
 ---
-uuid: "e1-03-bootstrap-dependency-resolution"
-title: "E1.03 — Each receiver can resolve its bootstrap dependencies from immutable donor revisions"
-status: done
-priority: P1
+category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "dependencies", "8sp"]
-created_at: "2026-09-13T00:00:00Z"
-category: eta-mu-breakdown
-points: 8
-epic: "operation-eta-mu-breakdown"
 story_id: "E1.03"
+write-id: "1789857172556-0.0xe49l87irshnd5qzfja"
+points: "8"
+title: "E1.03 — Each receiver can resolve its bootstrap dependencies from immutable donor revisions"
 blocked_by: ["e1-02-faithful-clean-copies"]
+priority: "P1"
+status: "blocked"
+epic: "operation-eta-mu-breakdown"
+uuid: "e1-03-bootstrap-dependency-resolution"
+created_at: "2026-09-13T00:00:00Z"
 ---
 
 # E1.03 — Bootstrap dependency resolution
@@ -39,3 +40,7 @@ Per-package cold install, resolved dependency basis/lock, packed file inventory,
 ## Planning reference
 
 See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1.03).
+
+---
+PR #96 reconciliation: Pinned dependency declarations exist, but isolated install/build/packaged-consumer evidence is missing. Source inspection is not cold-build acceptance; donor-free checks remain required.
+---

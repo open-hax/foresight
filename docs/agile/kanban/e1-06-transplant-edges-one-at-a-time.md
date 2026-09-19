@@ -1,15 +1,16 @@
 ---
-uuid: "e1-06-transplant-edges-one-at-a-time"
-title: "E1.06 — Receivers switch transplant-to-transplant edges one at a time"
-status: done
-priority: P1
+category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "dependency-edges", "8sp"]
-created_at: "2026-09-13T00:00:00Z"
-category: eta-mu-breakdown
-points: 8
-epic: "operation-eta-mu-breakdown"
 story_id: "E1.06"
+write-id: "1789857177772-0.ck5s83mp799fx0rbs4q"
+points: "8"
+title: "E1.06 — Receivers switch transplant-to-transplant edges one at a time"
 blocked_by: ["e1-05-foresight-discovers-children"]
+priority: "P1"
+status: "blocked"
+epic: "operation-eta-mu-breakdown"
+uuid: "e1-06-transplant-edges-one-at-a-time"
+created_at: "2026-09-13T00:00:00Z"
 ---
 
 # E1.06 — Switch edges one at a time
@@ -36,3 +37,7 @@ Before/after typed graph, locked resolver output, changed source paths, fresh co
 ## Planning reference
 
 See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1.06).
+
+---
+PR #96 reconciliation: Dependency documentation is being corrected to full source-observed SHAs. Consumer clean build/test/packaging evidence remains required before E1.06 can complete.
+---

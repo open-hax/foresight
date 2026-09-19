@@ -11,8 +11,9 @@ flowchart TD
   retire["E1.11 Zero live inbound edges before each donor deletion"]
   docs["E1.12 Docs transfer and ownership map"]
   preflight --> copies --> bootstrap --> remotes --> modules --> switches --> consumers
-  copies --> ingestion
+  bootstrap --> ingestion
   remotes --> gates
+  switches --> gates
   consumers --> retire
   ingestion --> retire
   gates --> retire

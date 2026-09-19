@@ -1,15 +1,16 @@
 ---
-uuid: "e1-04-independent-git-history"
-title: "E1.04 — Each product has an independently addressable Git history and development branch"
-status: done
-priority: P1
+category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "git", "3sp"]
-created_at: "2026-09-13T00:00:00Z"
-category: eta-mu-breakdown
-points: 3
-epic: "operation-eta-mu-breakdown"
 story_id: "E1.04"
+write-id: "1789857174630-0.y0oa1srtuce48cu2jii"
+points: "3"
+title: "E1.04 — Each product has an independently addressable Git history and development branch"
 blocked_by: ["e1-03-bootstrap-dependency-resolution"]
+priority: "P1"
+status: "blocked"
+epic: "operation-eta-mu-breakdown"
+uuid: "e1-04-independent-git-history"
+created_at: "2026-09-13T00:00:00Z"
 ---
 
 # E1.04 — Independent Git history
@@ -35,3 +36,7 @@ Remote read-back of repository identity, visibility, branch tips, published comm
 ## Planning reference
 
 See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1.04).
+
+---
+PR #96 reconciliation: Independent remotes are cloneable. Full preflight/history/policy acceptance, including Axxium reconciliation and prerequisite E1.03, remains incomplete.
+---

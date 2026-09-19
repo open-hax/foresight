@@ -1,13 +1,13 @@
-# E1.01 — Exhaustive Closure Proof
+# E1.01 — Donor closure inventory (acceptance pending)
 
-**Produced:** 2026-09-13. **Status:** complete — source-level closure for all 8 extraction targets.
-**Inspected revisions:** eta-mu `0ed56aa7`, knoxx `fb08a10a` (Foresight gitlinks; mainline drift documented).
+**Produced:** 2026-09-13. **Status:** historical inventory with reported scan claims; exhaustive closure acceptance remains unverified. See [current acceptance](acceptance.md).
+**Reported donor revisions:** eta-mu `0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90`, Knoxx `fb08a10a8aa32a594cc97ae11b820113de4cf386`. The planning mainline evidence has different revisions; R004 below explicitly separates them.
 
-## Methodology
+## Reported methodology (original execution logs not retained here)
 
-Read every `package.json`, `deps.edn`, `shadow-cljs.edn`, `nbb.edn`, `.clj-kondo/config.edn`, `bb.edn`, `Dockerfile`, script, and test file across all 8 extraction targets. Grepped all `.clj`, `.cljs`, `.cljc`, `.js`, `.ts` source files for `require`/`import` statements. Cross-referenced npm workspace declarations, Clojure `:local/root` entries, Git dependency SHAs, and shadow-cljs `:source-paths`. Verified proposed remote existence via `gh repo view`.
+The original author reported: Read every `package.json`, `deps.edn`, `shadow-cljs.edn`, `nbb.edn`, `.clj-kondo/config.edn`, `bb.edn`, `Dockerfile`, script, and test file across all 8 extraction targets. Grepped all `.clj`, `.cljs`, `.cljc`, `.js`, `.ts` source files for `require`/`import` statements. Cross-referenced npm workspace declarations, Clojure `:local/root` entries, Git dependency SHAs, and shadow-cljs `:source-paths`. Verified proposed remote existence via `gh repo view`.
 
-## Repository preflight
+## Historical repository preflight (2026-09-13; superseded by registration)
 
 | Proposed repo | Exists? | Notes |
 |---|---|---|
@@ -59,7 +59,7 @@ Read every `package.json`, `deps.edn`, `shadow-cljs.edn`, `nbb.edn`, `.clj-kondo
 
 | ID | Consumer | Target | SHA | Evidence |
 |---|---|---|---|---|
-| R004 | rheos | katamorph | `be7cc332d865cfedc57b55b10cab3c9f2bd41fc4` | `packages/rheos/deps.edn` (not found — no deps.edn in rheos) |
+| R004 | rheos | katamorph | `be7cc332d865cfedc57b55b10cab3c9f2bd41fc4` | Observed only at planning mainline `476b07bd66efb84566a4159556deacb1e9407e6f`, `packages/rheos/deps.edn` (`rheos.deps`). Donor `0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90` tree has no file at this path; not a donor dependency claim. |
 | R008 | sol | katamorph | `305a5e49d834aca27566f739e8510f6b409fda78` | `packages/sol/deps.edn` `io.github.open-hax/katamorph {:git/tag "v0.2.0" ...}` |
 | R009 | sol | event-ledger | `ada7374b7f4e1c3b0ab4e6bbe996f10f06e9b93a` | `packages/sol/deps.edn` `io.github.open-hax/event-ledger {...}` |
 

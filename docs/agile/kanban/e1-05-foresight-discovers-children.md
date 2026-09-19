@@ -1,15 +1,16 @@
 ---
-uuid: "e1-05-foresight-discovers-children"
-title: "E1.05 — Foresight discovers each new product as a pinned, actionable child"
-status: done
-priority: P1
+category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "foresight", "submodule", "5sp"]
-created_at: "2026-09-13T00:00:00Z"
-category: eta-mu-breakdown
-points: 5
-epic: "operation-eta-mu-breakdown"
 story_id: "E1.05"
+write-id: "1789857175855-0.lni0g4ri9ci88vict6o"
+points: "5"
+title: "E1.05 — Foresight discovers each new product as a pinned, actionable child"
 blocked_by: ["e1-04-independent-git-history"]
+priority: "P1"
+status: "in_progress"
+epic: "operation-eta-mu-breakdown"
+uuid: "e1-05-foresight-discovers-children"
+created_at: "2026-09-13T00:00:00Z"
 ---
 
 # E1.05 — Foresight discovers new children
@@ -36,3 +37,7 @@ Clean submodule clone, identity checks, project-law validation, direct-child inv
 ## Planning reference
 
 See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1.05).
+
+---
+PR #96 reconciliation: PR 96 registers nine children. This pass corrects routing, all nine gate entries, and fixed 24-entry inventory expectations. Registration and locally passing root tests do not prove standalone module acceptance; exact child evidence remains pending.
+---

@@ -1,15 +1,16 @@
 ---
-uuid: "e1-10-reviewer-start-window-protection"
-title: "E1.10 — Unreviewed changes cannot merge during the reviewer-start window"
-status: done
-priority: P1
+category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "branch-protection", "coderabbit", "5sp"]
-created_at: "2026-09-13T00:00:00Z"
-category: eta-mu-breakdown
-points: 5
-epic: "operation-eta-mu-breakdown"
 story_id: "E1.10"
+write-id: "1789857185730-0.z6l668h7suztn7m1na"
+points: "5"
+title: "E1.10 — Unreviewed changes cannot merge during the reviewer-start window"
 blocked_by: ["e1-04-independent-git-history"]
+priority: "P1"
+status: "blocked"
+epic: "operation-eta-mu-breakdown"
+uuid: "e1-10-reviewer-start-window-protection"
+created_at: "2026-09-13T00:00:00Z"
 ---
 
 # E1.10 — Reviewer-start window protection
@@ -42,3 +43,7 @@ Policy JSON/read-back, app/check identity, negative and positive merge-eligibili
 ## Planning reference
 
 See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1.10).
+
+---
+PR #96 reconciliation: Unsupported done claim reopened through CLI. Trusted exact-head review-completion rollout remains tracked in https://github.com/open-hax/foresight/issues/111. Policy read 403 is unavailable evidence, not proof that policy is absent. No policy is weakened and no completion is manufactured.
+---

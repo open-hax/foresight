@@ -1,7 +1,13 @@
 # Operation Eta Mu Breakdown — planning and evidence pack
 
-**Prepared:** 2026-09-12. **Status:** proposed epics and observed source/configuration relationships; no migration executed.  
-**Proposed project destination:** `foresight/docs/migrations/eta-mu-breakdown/` (not written there in this run).
+**Planning snapshot:** 2026-09-12. **Current status:** nine extracted/existing
+children registered by PR #96; migration acceptance remains incomplete.
+**Project destination:** `foresight/docs/migrations/eta-mu-breakdown/` (this directory).
+
+Start with the [module acceptance register](acceptance.md) for current pins,
+remaining proof, lifecycle corrections and the documentation update procedure
+that applies when each module is officially accepted. The original planning
+snapshot and reported execution claims are retained as historical evidence.
 
 ## Start here
 
@@ -37,16 +43,16 @@ The arrow direction in the observed graphs is consumer to dependency/related ser
 
 Inspection used pinned mainline manifests, build descriptors, selected source/configuration files, and README-reported relationships. Source IDs in the prose and relation register resolve in `data/sources.json`; they are not newly created GitHub issues. This is not an exhaustive source-namespace/import/CI/deployment closure or a claim that any target builds independently today. E1.01 requires the full closure proof before migration decisions that depend on it, especially donor deletion.
 
-No repository package install, build, test suite, coverage run, live integration, browser run, repository creation, push, submodule change, branch-policy change, document classification or corpus deletion was executed. The source graph includes declarations and configuration, not dynamic runtime proof. No source-volume percentage was computed. Local generated artifacts have SHA-256 checksums; there was no Clio schema admission or remote persistence.
+During the original September 12 planning run, no repository package install, build, test suite, coverage run, live integration, browser run, repository creation, push, submodule change, branch-policy change, document classification or corpus deletion was executed. The source graph includes declarations and configuration, not dynamic runtime proof. No source-volume percentage was computed. Local generated artifacts have SHA-256 checksums; there was no Clio schema admission or remote persistence.
 
 ## Local verification
 
-`python checks/check_pack.py` runs the pack's own checks. It requires jsonschema and networkx, does not install anything, and performs no network or repository operations. The current report records 21 passing checks covering graph/source references, the expected mixed dependency cycle, scope separation, JSON structure/context and negative model-output fixtures, source fixture digest, epic story IDs, request-step coverage, SVG structure and ND-EDN line framing. Passing these checks does not prove the correctness of the architectural inferences or the future migration.
+`python checks/check_pack.py` runs the pack's own checks. It requires jsonschema and networkx, does not install anything, and performs no network or repository operations. The current report records the check count and outcomes, covering graph/source references, the expected mixed dependency cycle, scope separation, JSON structure/context and negative model-output fixtures, source fixture digest, epic story IDs, request-step coverage, SVG structure and ND-EDN line framing. Passing these checks does not prove the correctness of the architectural inferences or the future migration.
 
 `build_data.py` rebuilds **static recorded observations** and Graphviz previews; it is not a repository scanner. `classification/build_contract.py` rebuilds the proposed schema and synthetic fixtures; it does not invoke a model. `checks/initial-check.log` records the initial missing-fixture check, not a failing product test.
 
 ## Proposed naming and decisions
 
-**Osmos** is a working name for the extracted Knoxx ingestion service. Repository availability and canonical naming remain unresolved. Preserve its current `kms-ingestion` namespace/API/configuration identity in the initial transplant. Existing `open-hax/axxium` requires reconciliation, not recreation or overwrite. Other destination histories must still be checked at execution time.
+**Osmos** is registered as `open-hax/osmos` for the extracted Knoxx ingestion service. Standalone acceptance remains pending. Preserve its current `kms-ingestion` namespace/API/configuration identity in the initial transplant. Existing `open-hax/axxium` requires reconciliation, not recreation or overwrite. All nine candidate pins were cloned during PR reconciliation; their remaining acceptance evidence is listed in the register.
 
 The epics intentionally leave product feature refactors, Sol's event-ledger-to-Clio cutover, broad authentication changes, and full Obsidian-style feature parity outside this mechanical migration. They preserve room for Rheos's document-centered evolution without making it a prerequisite for separating the current products.

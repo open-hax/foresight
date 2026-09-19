@@ -80,7 +80,7 @@
       "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/rheos/deps.edn",
       "kind": "file",
       "chat_citation": "turn13file0",
-      "notes": null
+      "notes": "Planning mainline 476b07bd66efb84566a4159556deacb1e9407e6f only. Donor 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90 tree has no packages/rheos/deps.edn; do not apply this observation to that donor."
     },
     "sol.deps": {
       "repository": "open-hax/eta-mu",

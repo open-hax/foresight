@@ -54,6 +54,7 @@ public_sources={
 def save(path,value): (P/path).write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n')
 for sid,span in {'clio.readme':[1,140], 'axxium.readme':[1,100], 'ingestion.server':[1,180], 'ingestion.contracts':[1,140], 'foresight.readme':[1,140]}.items():
     sources[sid]['read_source_line_range']=span
+sources['rheos.deps']['notes']='Planning mainline 476b07bd66efb84566a4159556deacb1e9407e6f only. Donor 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90 tree has no packages/rheos/deps.edn; do not apply this observation to that donor.'
 save('data/sources.json',{'inspection_date':'2026-09-12','sources':sources,'official_documentation':public_sources})
 revisions={'inspection_date':'2026-09-12','mainline_snapshots':refs,'foresight_gitlinks':{'eta-mu':'0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90','knoxx':'fb08a10a8aa32a594cc97ae11b820113de4cf386','epiphany':'ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66'},'scope':'Mainline file inspection. These are not a survey of open branches, the yoga host, uncommitted work, or all constellation repositories.','donor_changes_performed':False,'repository_builds_executed':False,'repository_tests_executed':False,'repository_creation_performed':False,'remote_persistence_performed':False,'source_content_hashes':'Git revisions and source paths identify observations. No uncomputed input SHA-256 values are claimed.'}
 save('data/revisions.json',revisions)

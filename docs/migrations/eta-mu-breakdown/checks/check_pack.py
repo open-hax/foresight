@@ -44,8 +44,11 @@ def validate_context(output, request):
     schema = read_json('classification/document-labels.schema.json')
     jsonschema.Draft202012Validator(schema).validate(output)
     allowed_projects = {p['id'] for p in request['allowed_projects']}
+    allowed_topics = set(request['taxonomy']['allowed_topics'])
     if any(p['project_id'] not in allowed_projects for p in output['projects']):
         raise ValueError('Unknown project identifier')
+    if any(t['id'] not in allowed_topics for t in output['topics']):
+        raise ValueError('Unknown topic identifier')
     for field,key in [('projects','project_id'),('topics','id')]:
         values=[v[key] for v in output[field]]
         if len(values) != len(set(values)):
@@ -142,6 +145,69 @@ class PackChecks(unittest.TestCase):
         out=read_json('classification/example-output.json');out['topics'][0]['id']='invented-topic'
         with self.assertRaises(jsonschema.ValidationError):
             validate_context(out,read_json('classification/example-input.json'))
+
+    def test_reject_schema_valid_topic_excluded_by_request(self):
+        request=read_json('classification/example-input.json')
+        out=read_json('classification/example-output.json')
+        request['taxonomy']['allowed_topics'].remove(out['topics'][0]['id'])
+        with self.assertRaisesRegex(ValueError, 'Unknown topic identifier'):
+            validate_context(out,request)
+
+    def test_accept_narrow_request_containing_output_topics(self):
+        request=read_json('classification/example-input.json')
+        out=read_json('classification/example-output.json')
+        request['taxonomy']['allowed_topics']=[topic['id'] for topic in out['topics']]
+        self.assertTrue(validate_context(out,request))
+
+    def test_stage_graph_preserves_card_prerequisites(self):
+        graph=(ROOT/'graphs/03-proposed-migration-stages.mmd').read_text()
+        stages={}
+        for node,label in re.findall(r'^\s*(\w+)\["([^"]+)"\]',graph,re.M):
+            for story in re.findall(r'E1\.\d{2}',label):
+                stages[story]=node
+        edges=set()
+        for line in graph.splitlines():
+            if '-->' in line:
+                chain=[x.strip() for x in line.split('-->')]
+                edges.update(zip(chain,chain[1:]))
+        cards=ROOT.parents[1]/'agile/kanban'
+        for card in cards.glob('e1-*.md'):
+            text=card.read_text()
+            story=re.search(r'story_id: "(E1\.\d{2})"',text)[1]
+            blockers=re.search(r'^blocked_by: (.+)$',text,re.M)
+            for number in re.findall(r'e1-(\d{2})-',blockers[1] if blockers else ''):
+                source=stages[f'E1.{number}'];target=stages[story]
+                if source != target:
+                    self.assertIn((source,target),edges,card.name)
+
+    def test_edge_coordinates_are_full_and_revision_scoped(self):
+        text=(ROOT/'edge-disposition.md').read_text()
+        commits=re.findall(r'(?:@|#)([0-9a-f]{7,40})\b',text)
+        self.assertGreater(len(commits),5)
+        self.assertTrue(all(len(sha)==40 for sha in commits))
+        sources=read_json('data/sources.json')['sources']
+        self.assertEqual(sources['rheos.deps']['revision'],
+                         '476b07bd66efb84566a4159556deacb1e9407e6f')
+        self.assertIn('0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90',
+                      sources['rheos.deps']['notes'])
+
+    def test_registration_is_explicitly_pending_acceptance(self):
+        modules=read_json('data/registration.json')['modules']
+        self.assertEqual({m['path'] for m in modules},
+                         {'kanban-orchestrator','clio','chat-ui','rheos',
+                          'session-mycology','sol','osmos','receipt-river','axxium'})
+        for module in modules:
+            self.assertRegex(module['revision'],r'^[0-9a-f]{40}$')
+            self.assertEqual(module['acceptance'],'pending')
+
+    def test_historical_receipt_bytes_are_preserved(self):
+        workspace=ROOT.parents[2]
+        archive=workspace/'.ημ/archive/pr96-c551e986'
+        self.assertEqual(hashlib.sha256((archive/'root-receipts.edn').read_bytes()).hexdigest(),
+                         'a9a0f48df3aaf53cec1a0d34f7551e77850577cb9d6a8c38543363643b3fffed')
+        self.assertEqual(hashlib.sha256((archive/'planning-archive-receipt.edn').read_bytes()).hexdigest(),
+                         '40a811fcb1415bc28dd94391690fd270ce80b47eb2f125bdec74aae91c3ad033')
+        self.assertFalse((workspace/'receipts.edn').exists())
 
     def test_reject_invalid_span(self):
         out=read_json('classification/example-output.json');out['kind']['evidence'][0]['end_line']=999

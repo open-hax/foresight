@@ -1,15 +1,16 @@
 ---
-uuid: "e1-09-honest-quality-gates"
-title: "E1.09 — Every child has honest quality gates and self-contained agent guidance"
-status: done
-priority: P1
+category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "quality-gates", "ci", "8sp"]
-created_at: "2026-09-13T00:00:00Z"
-category: eta-mu-breakdown
-points: 8
-epic: "operation-eta-mu-breakdown"
 story_id: "E1.09"
+write-id: "1789857183557-0.ksgntnlpq8gu4yxsqne"
+points: "8"
+title: "E1.09 — Every child has honest quality gates and self-contained agent guidance"
 blocked_by: ["e1-06-transplant-edges-one-at-a-time"]
+priority: "P1"
+status: "blocked"
+epic: "operation-eta-mu-breakdown"
+uuid: "e1-09-honest-quality-gates"
+created_at: "2026-09-13T00:00:00Z"
 ---
 
 # E1.09 — Honest quality gates
@@ -37,3 +38,7 @@ Workflows, local commands, reports with digests, test counts, coverage policy, l
 ## Planning reference
 
 See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1.09).
+
+---
+PR #96 reconciliation: Most pinned children lack the later AGENTS/workflow work claimed by historical receipts. Root gate discovery is being fixed, while child build/test/lint/coverage/browser acceptance remains incomplete; no blind repin to untested branch tips.
+---

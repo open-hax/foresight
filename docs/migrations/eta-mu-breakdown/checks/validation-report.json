@@ -1,6 +1,6 @@
 {
   "scope": "Planning-pack checks only; not source repository tests or model quality evaluation",
-  "tests_run": 21,
+  "tests_run": 27,
   "failures": 0,
   "errors": 0,
   "success": true,

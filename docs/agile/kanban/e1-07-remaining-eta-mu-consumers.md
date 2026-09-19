@@ -1,15 +1,16 @@
 ---
-uuid: "e1-07-remaining-eta-mu-consumers"
-title: "E1.07 — Remaining eta-mu consumers use the new products without donor copies"
-status: done
-priority: P1
+category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "eta-mu-cli", "5sp"]
-created_at: "2026-09-13T00:00:00Z"
-category: eta-mu-breakdown
-points: 5
-epic: "operation-eta-mu-breakdown"
 story_id: "E1.07"
+write-id: "1789857179707-0.ephqu5z5fe87cm4b0qo"
+points: "5"
+title: "E1.07 — Remaining eta-mu consumers use the new products without donor copies"
 blocked_by: ["e1-06-transplant-edges-one-at-a-time"]
+priority: "P1"
+status: "blocked"
+epic: "operation-eta-mu-breakdown"
+uuid: "e1-07-remaining-eta-mu-consumers"
+created_at: "2026-09-13T00:00:00Z"
 ---
 
 # E1.07 — Remaining consumers cut over
@@ -38,3 +39,7 @@ Exhaustive inbound edge disposition, command smoke tests, standalone eta-mu chec
 ## Planning reference
 
 See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1.07).
+
+---
+PR #96 reconciliation: Pinned eta-mu c2bbf7547592cb9e0c82eee01c2b01555c6cee68 switches Rheos/Sol/Mycology references, but retains Receipt River and other donor source paths. No isolated consumer proof is available; this is partial cutover, not accepted completion.
+---

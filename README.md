@@ -1,9 +1,16 @@
 # Foresight
 
-Foresight is a source-level constellation of independently owned repositories
-and root-declared consolidation inputs. The root coordinates visibility and
-explicit cross-repository operations; it does not replace each submodule's
-package manager or quality gates.
+Foresight is a software suite of independently useful products and specialized
+views over shared data. The root owns common/core abstractions, portable `.cljc`,
+suite documentation, and cross-package integration. Child repositories retain
+local ownership, independent builds, package-manager policy, and quality gates.
+
+The extraction registrations and their exact pinned revisions are documented in
+[Operation Eta Mu Breakdown](docs/migrations/eta-mu-breakdown/README.md).
+Registration is distinct from standalone acceptance: the
+[acceptance register](docs/migrations/eta-mu-breakdown/acceptance.md) records
+outstanding build, consumer, review-policy, and documentation evidence. Update
+that register and the routing map when a module's acceptance lands.
 
 ## New actor: start here
 

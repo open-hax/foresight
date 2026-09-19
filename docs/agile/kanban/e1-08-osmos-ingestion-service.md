@@ -1,15 +1,16 @@
 ---
-uuid: "e1-08-osmos-ingestion-service"
-title: "E1.08 — Osmos preserves ingestion behavior as an independent JVM service"
-status: done
-priority: P1
+category: "eta-mu-breakdown"
 labels: ["eta-mu-breakdown", "migration", "ingestion", "jvm", "8sp"]
-created_at: "2026-09-13T00:00:00Z"
-category: eta-mu-breakdown
-points: 8
-epic: "operation-eta-mu-breakdown"
 story_id: "E1.08"
+write-id: "1789857181681-0.3i2isqhp9ygfaocrpks"
+points: "8"
+title: "E1.08 — Osmos preserves ingestion behavior as an independent JVM service"
 blocked_by: ["e1-03-bootstrap-dependency-resolution"]
+priority: "P1"
+status: "blocked"
+epic: "operation-eta-mu-breakdown"
+uuid: "e1-08-osmos-ingestion-service"
+created_at: "2026-09-13T00:00:00Z"
 ---
 
 # E1.08 — Osmos ingestion extraction
@@ -38,3 +39,7 @@ Unit/integration logs, image digest, health/API smoke, explicit service contract
 ## Planning reference
 
 See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1.08).
+
+---
+PR #96 reconciliation: Root Osmos pin 0c33018e27f861536822086afcdab666a60add44 predates claimed standalone corrections. Image, service smoke, and Knoxx compatibility evidence are missing. Keep incomplete until an independently reviewed/tested child revision is accepted.
+---
