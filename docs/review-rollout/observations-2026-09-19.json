@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "observed_on": "2026-09-19",
+  "scope": "Foresight issue 111 initial discovery; observations do not establish acceptance",
+  "foresight_head": "c95c72170675b5a873af4410d3bca436a6478bd9",
+  "scope_exclusions": [
+    {
+      "repository": "open-hax/receipt-river",
+      "reason": "Registered later in PR96. Issue111 declares eight original targets. Add through an explicit scope decision before a nine-module enforcement claim."
+    }
+  ],
+  "targets": [
+    {
+      "repository": "open-hax/kanban-orchestrator",
+      "branch": "main",
+      "observed_head": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+      "branch_summary": {
+        "protected": true,
+        "protection": {
+          "enabled": true,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        }
+      },
+      "rulesets": [],
+      "classic_protection": {
+        "status": "unavailable",
+        "http_status": 403,
+        "error": "Resource not accessible by integration"
+      },
+      "check_runs": {
+        "total_count": 0,
+        "items": []
+      },
+      "statuses": {
+        "total_count": 0,
+        "items": []
+      },
+      "workflow_paths": [],
+      "authority": {
+        "policy_read": "unavailable",
+        "policy_write": "not-established",
+        "producer_trust": "not-established"
+      },
+      "acceptance": "blocked",
+      "sources": [
+        "https://api.github.com/repos/open-hax/kanban-orchestrator/branches/main",
+        "https://api.github.com/repos/open-hax/kanban-orchestrator/branches/main/protection",
+        "https://api.github.com/repos/open-hax/kanban-orchestrator/rulesets",
+        "https://api.github.com/repos/open-hax/kanban-orchestrator/commits/8e16609dd191bdd2e9a3c0320ce4238b5cd83467/check-runs?per_page=100",
+        "https://api.github.com/repos/open-hax/kanban-orchestrator/commits/8e16609dd191bdd2e9a3c0320ce4238b5cd83467/status?per_page=100"
+      ],
+      "workflow_discovery": {
+        "method": "git ls-tree -r --name-only <observed_head> .github/workflows",
+        "revision": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467"
+      }
+    },
+    {
+      "repository": "open-hax/clio",
+      "branch": "main",
+      "observed_head": "788cdd3434615a7932b924e68520dbf7f88408c2",
+      "branch_summary": {
+        "protected": true,
+        "protection": {
+          "enabled": true,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        }
+      },
+      "rulesets": [],
+      "classic_protection": {
+        "status": "unavailable",
+        "http_status": 403,
+        "error": "Resource not accessible by integration"
+      },
+      "check_runs": {
+        "total_count": 0,
+        "items": []
+      },
+      "statuses": {
+        "total_count": 0,
+        "items": []
+      },
+      "workflow_paths": [],
+      "authority": {
+        "policy_read": "unavailable",
+        "policy_write": "not-established",
+        "producer_trust": "not-established"
+      },
+      "acceptance": "blocked",
+      "sources": [
+        "https://api.github.com/repos/open-hax/clio/branches/main",
+        "https://api.github.com/repos/open-hax/clio/branches/main/protection",
+        "https://api.github.com/repos/open-hax/clio/rulesets",
+        "https://api.github.com/repos/open-hax/clio/commits/788cdd3434615a7932b924e68520dbf7f88408c2/check-runs?per_page=100",
+        "https://api.github.com/repos/open-hax/clio/commits/788cdd3434615a7932b924e68520dbf7f88408c2/status?per_page=100"
+      ],
+      "workflow_discovery": {
+        "method": "git ls-tree -r --name-only <observed_head> .github/workflows",
+        "revision": "788cdd3434615a7932b924e68520dbf7f88408c2"
+      }
+    },
+    {
+      "repository": "open-hax/chat-ui",
+      "branch": "main",
+      "observed_head": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+      "branch_summary": {
+        "protected": true,
+        "protection": {
+          "enabled": true,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        }
+      },
+      "rulesets": [],
+      "classic_protection": {
+        "status": "unavailable",
+        "http_status": 403,
+        "error": "Resource not accessible by integration"
+      },
+      "check_runs": {
+        "total_count": 0,
+        "items": []
+      },
+      "statuses": {
+        "total_count": 0,
+        "items": []
+      },
+      "workflow_paths": [],
+      "authority": {
+        "policy_read": "unavailable",
+        "policy_write": "not-established",
+        "producer_trust": "not-established"
+      },
+      "acceptance": "blocked",
+      "sources": [
+        "https://api.github.com/repos/open-hax/chat-ui/branches/main",
+        "https://api.github.com/repos/open-hax/chat-ui/branches/main/protection",
+        "https://api.github.com/repos/open-hax/chat-ui/rulesets",
+        "https://api.github.com/repos/open-hax/chat-ui/commits/86385532b4f8606946555d0ada8e3fb22f35b4c3/check-runs?per_page=100",
+        "https://api.github.com/repos/open-hax/chat-ui/commits/86385532b4f8606946555d0ada8e3fb22f35b4c3/status?per_page=100"
+      ],
+      "workflow_discovery": {
+        "method": "git ls-tree -r --name-only <observed_head> .github/workflows",
+        "revision": "86385532b4f8606946555d0ada8e3fb22f35b4c3"
+      }
+    },
+    {
+      "repository": "open-hax/rheos",
+      "branch": "main",
+      "observed_head": "11811264a308d406cb612aefa1dad40818675e5e",
+      "branch_summary": {
+        "protected": true,
+        "protection": {
+          "enabled": true,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        }
+      },
+      "rulesets": [],
+      "classic_protection": {
+        "status": "unavailable",
+        "http_status": 403,
+        "error": "Resource not accessible by integration"
+      },
+      "check_runs": {
+        "total_count": 0,
+        "items": []
+      },
+      "statuses": {
+        "total_count": 0,
+        "items": []
+      },
+      "workflow_paths": [],
+      "authority": {
+        "policy_read": "unavailable",
+        "policy_write": "not-established",
+        "producer_trust": "not-established"
+      },
+      "acceptance": "blocked",
+      "sources": [
+        "https://api.github.com/repos/open-hax/rheos/branches/main",
+        "https://api.github.com/repos/open-hax/rheos/branches/main/protection",
+        "https://api.github.com/repos/open-hax/rheos/rulesets",
+        "https://api.github.com/repos/open-hax/rheos/commits/11811264a308d406cb612aefa1dad40818675e5e/check-runs?per_page=100",
+        "https://api.github.com/repos/open-hax/rheos/commits/11811264a308d406cb612aefa1dad40818675e5e/status?per_page=100"
+      ],
+      "workflow_discovery": {
+        "method": "git ls-tree -r --name-only <observed_head> .github/workflows",
+        "revision": "11811264a308d406cb612aefa1dad40818675e5e"
+      }
+    },
+    {
+      "repository": "open-hax/session-mycology",
+      "branch": "main",
+      "observed_head": "30339f9aa3df83ef8c335d4544307272abfbb131",
+      "branch_summary": {
+        "protected": true,
+        "protection": {
+          "enabled": true,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        }
+      },
+      "rulesets": [],
+      "classic_protection": {
+        "status": "unavailable",
+        "http_status": 403,
+        "error": "Resource not accessible by integration"
+      },
+      "check_runs": {
+        "total_count": 0,
+        "items": []
+      },
+      "statuses": {
+        "total_count": 0,
+        "items": []
+      },
+      "workflow_paths": [],
+      "authority": {
+        "policy_read": "unavailable",
+        "policy_write": "not-established",
+        "producer_trust": "not-established"
+      },
+      "acceptance": "blocked",
+      "sources": [
+        "https://api.github.com/repos/open-hax/session-mycology/branches/main",
+        "https://api.github.com/repos/open-hax/session-mycology/branches/main/protection",
+        "https://api.github.com/repos/open-hax/session-mycology/rulesets",
+        "https://api.github.com/repos/open-hax/session-mycology/commits/30339f9aa3df83ef8c335d4544307272abfbb131/check-runs?per_page=100",
+        "https://api.github.com/repos/open-hax/session-mycology/commits/30339f9aa3df83ef8c335d4544307272abfbb131/status?per_page=100"
+      ],
+      "workflow_discovery": {
+        "method": "git ls-tree -r --name-only <observed_head> .github/workflows",
+        "revision": "30339f9aa3df83ef8c335d4544307272abfbb131"
+      }
+    },
+    {
+      "repository": "open-hax/sol",
+      "branch": "main",
+      "observed_head": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+      "branch_summary": {
+        "protected": true,
+        "protection": {
+          "enabled": true,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        }
+      },
+      "rulesets": [],
+      "classic_protection": {
+        "status": "unavailable",
+        "http_status": 403,
+        "error": "Resource not accessible by integration"
+      },
+      "check_runs": {
+        "total_count": 0,
+        "items": []
+      },
+      "statuses": {
+        "total_count": 0,
+        "items": []
+      },
+      "workflow_paths": [],
+      "authority": {
+        "policy_read": "unavailable",
+        "policy_write": "not-established",
+        "producer_trust": "not-established"
+      },
+      "acceptance": "blocked",
+      "sources": [
+        "https://api.github.com/repos/open-hax/sol/branches/main",
+        "https://api.github.com/repos/open-hax/sol/branches/main/protection",
+        "https://api.github.com/repos/open-hax/sol/rulesets",
+        "https://api.github.com/repos/open-hax/sol/commits/1276955c86ff46936cd1ce7d81fbc790f7068e1e/check-runs?per_page=100",
+        "https://api.github.com/repos/open-hax/sol/commits/1276955c86ff46936cd1ce7d81fbc790f7068e1e/status?per_page=100"
+      ],
+      "workflow_discovery": {
+        "method": "git ls-tree -r --name-only <observed_head> .github/workflows",
+        "revision": "1276955c86ff46936cd1ce7d81fbc790f7068e1e"
+      }
+    },
+    {
+      "repository": "open-hax/osmos",
+      "branch": "main",
+      "observed_head": "0c33018e27f861536822086afcdab666a60add44",
+      "branch_summary": {
+        "protected": true,
+        "protection": {
+          "enabled": true,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        }
+      },
+      "rulesets": [],
+      "classic_protection": {
+        "status": "unavailable",
+        "http_status": 403,
+        "error": "Resource not accessible by integration"
+      },
+      "check_runs": {
+        "total_count": 0,
+        "items": []
+      },
+      "statuses": {
+        "total_count": 0,
+        "items": []
+      },
+      "workflow_paths": [],
+      "authority": {
+        "policy_read": "unavailable",
+        "policy_write": "not-established",
+        "producer_trust": "not-established"
+      },
+      "acceptance": "blocked",
+      "sources": [
+        "https://api.github.com/repos/open-hax/osmos/branches/main",
+        "https://api.github.com/repos/open-hax/osmos/branches/main/protection",
+        "https://api.github.com/repos/open-hax/osmos/rulesets",
+        "https://api.github.com/repos/open-hax/osmos/commits/0c33018e27f861536822086afcdab666a60add44/check-runs?per_page=100",
+        "https://api.github.com/repos/open-hax/osmos/commits/0c33018e27f861536822086afcdab666a60add44/status?per_page=100"
+      ],
+      "workflow_discovery": {
+        "method": "git ls-tree -r --name-only <observed_head> .github/workflows",
+        "revision": "0c33018e27f861536822086afcdab666a60add44"
+      }
+    },
+    {
+      "repository": "open-hax/axxium",
+      "branch": "main",
+      "observed_head": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+      "branch_summary": {
+        "protected": true,
+        "protection": {
+          "enabled": false,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        }
+      },
+      "rulesets": [
+        {
+          "id": 17172221,
+          "name": "main",
+          "target": "branch",
+          "source_type": "Repository",
+          "source": "open-hax/axxium",
+          "enforcement": "active",
+          "node_id": "RRS_lACqUmVwb3NpdG9yec5K1cGdzgEGBv0",
+          "_links": {
+            "self": {
+              "href": "https://api.github.com/repos/open-hax/axxium/rulesets/17172221"
+            },
+            "html": {
+              "href": "https://github.com/open-hax/axxium/rules/17172221"
+            }
+          },
+          "created_at": "2026-06-02T10:09:57.376-05:00",
+          "updated_at": "2026-06-02T10:09:57.421-05:00"
+        }
+      ],
+      "classic_protection": {
+        "status": "unavailable",
+        "http_status": 403,
+        "error": "Resource not accessible by integration"
+      },
+      "check_runs": {
+        "total_count": 2,
+        "items": [
+          {
+            "id": 99316860993,
+            "name": "deployment-boundary",
+            "head_sha": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+            "status": "completed",
+            "conclusion": "success",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "url": "https://github.com/open-hax/axxium/actions/runs/33333752162/job/99316860993"
+          },
+          {
+            "id": 99316860917,
+            "name": "build",
+            "head_sha": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+            "status": "completed",
+            "conclusion": "success",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "url": "https://github.com/open-hax/axxium/actions/runs/33333752162/job/99316860917"
+          }
+        ]
+      },
+      "statuses": {
+        "total_count": 0,
+        "items": []
+      },
+      "workflow_paths": [
+        {
+          "path": ".github/workflows/auto-merge.yml",
+          "blob_sha": "cc604230142e6fd979e48ed31af5e5dbb63506e1"
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "blob_sha": "e0fa4fe1776c529eef443b9bea978f1d9c402e04"
+        },
+        {
+          "path": ".github/workflows/kanban-sync.yml",
+          "blob_sha": "75b8b75a30442379797fb96528003911ad95891c"
+        },
+        {
+          "path": ".github/workflows/review-resolution-gate.yml",
+          "blob_sha": "f0a4400f148cd7c4bfabab2c5f14d2768343b1c5"
+        }
+      ],
+      "authority": {
+        "policy_read": "unavailable",
+        "policy_write": "not-established",
+        "producer_trust": "not-established"
+      },
+      "acceptance": "blocked",
+      "sources": [
+        "https://api.github.com/repos/open-hax/axxium/branches/main",
+        "https://api.github.com/repos/open-hax/axxium/branches/main/protection",
+        "https://api.github.com/repos/open-hax/axxium/rulesets",
+        "https://api.github.com/repos/open-hax/axxium/commits/2439d4d6b8e546cda276f09f5c96db59226ecad6/check-runs?per_page=100",
+        "https://api.github.com/repos/open-hax/axxium/commits/2439d4d6b8e546cda276f09f5c96db59226ecad6/status?per_page=100",
+        "https://api.github.com/repos/open-hax/axxium/rulesets/17172221",
+        "https://api.github.com/repos/open-hax/axxium/git/trees/f838c32b0580c435daf98f7e2983eae0c7ba3057?recursive=1"
+      ],
+      "workflow_discovery": {
+        "method": "GitHub recursive tree GET (truncated=false)",
+        "revision": "2439d4d6b8e546cda276f09f5c96db59226ecad6"
+      }
+    }
+  ],
+  "axxium_ruleset": {
+    "id": 17172221,
+    "name": "main",
+    "target": "branch",
+    "source_type": "Repository",
+    "source": "open-hax/axxium",
+    "enforcement": "active",
+    "conditions": {
+      "ref_name": {
+        "exclude": [],
+        "include": [
+          "~DEFAULT_BRANCH"
+        ]
+      }
+    },
+    "rules": [
+      {
+        "type": "deletion"
+      },
+      {
+        "type": "non_fast_forward"
+      },
+      {
+        "type": "code_scanning",
+        "parameters": {
+          "code_scanning_tools": [
+            {
+              "tool": "CodeQL",
+              "security_alerts_threshold": "high_or_higher",
+              "alerts_threshold": "errors"
+            }
+          ]
+        }
+      },
+      {
+        "type": "code_quality",
+        "parameters": {
+          "severity": "errors"
+        }
+      },
+      {
+        "type": "pull_request",
+        "parameters": {
+          "required_approving_review_count": 0,
+          "dismiss_stale_reviews_on_push": true,
+          "required_reviewers": [],
+          "require_code_owner_review": false,
+          "dismissal_restriction": {
+            "enabled": false,
+            "allowed_actors": []
+          },
+          "require_last_push_approval": false,
+          "required_review_thread_resolution": true,
+          "require_extra_approval_for_unattributed_changes": true,
+          "allowed_merge_methods": [
+            "merge"
+          ]
+        }
+      }
+    ],
+    "node_id": "RRS_lACqUmVwb3NpdG9yec5K1cGdzgEGBv0",
+    "created_at": "2026-06-02T10:09:57.376-05:00",
+    "updated_at": "2026-06-02T10:09:57.421-05:00",
+    "bypass_actors": [
+      {
+        "actor_id": 10676925,
+        "actor_type": "User",
+        "bypass_mode": "always"
+      }
+    ],
+    "current_user_can_bypass": "always",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/open-hax/axxium/rulesets/17172221"
+      },
+      "html": {
+        "href": "https://github.com/open-hax/axxium/rules/17172221"
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{:fixture/version 1
+ :fixture/status :proposed-not-executed
+ :fixture/owner "open-hax/eta-mu"
+ :fixture/issue "https://github.com/open-hax/foresight/issues/111"
+ :fixture/note "Illustrative adapter inputs. Bind to the owning contract before execution; IDs and revisions below are synthetic. Observed App IDs in the rollout snapshot confer no trust."
+ :positive
+ {:repository "fixture/review-caller"
+  :pr 42
+  :head "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  :base "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  :policy {:source :trusted-base
+           :revision "cccccccccccccccccccccccccccccccccccccccc"
+           :required-gates [:build :test :lint :conformance :coderabbit]
+           :renew-on-base-change true}
+  :evidence {:repository "fixture/review-caller"
+             :pr 42
+             :head "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+             :base "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+             :policy-revision "cccccccccccccccccccccccccccccccccccccccc"
+             :producer-authority :verified-against-trusted-policy
+             :workflow-authority :verified-outside-pr-control
+             :checks {:build :success :test :success :lint :success
+                      :conformance :success :coderabbit :success}
+             :underlying-required-gates {:unit-tests :success :consumer-tests :success}
+             :review {:state :completed :outcome :success
+                      :publication-id "fixture-review-publication-1"
+                      :publisher-identity :verified-against-trusted-policy
+                      :head "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+             :unresolved-conversations 0}}
+ :positive-expectation :allow
+ :negative-cases
+ [{:id :review-not-started :replace [{:at [:evidence :review] :value nil}] :expect :deny}
+  {:id :review-queued :replace [{:at [:evidence :review :state] :value :queued}] :expect :deny}
+  {:id :review-running :replace [{:at [:evidence :review :state] :value :running}] :expect :deny}
+  {:id :new-head-after-green :replace [{:at [:head] :value "dddddddddddddddddddddddddddddddddddddddd"}] :expect :deny}
+  {:id :unresolved-conversation :replace [{:at [:evidence :unresolved-conversations] :value 1}] :expect :deny}
+  {:id :missing-required-check :replace [{:at [:evidence :checks :test] :value nil}] :expect :deny}
+  {:id :failed-review :replace [{:at [:evidence :review :outcome] :value :failure}] :expect :deny}
+  {:id :timed-out-review :replace [{:at [:evidence :review :outcome] :value :timed-out}] :expect :deny}
+  {:id :rate-limited-review :replace [{:at [:evidence :review :outcome] :value :rate-limited}] :expect :deny}
+  {:id :skipped-review :replace [{:at [:evidence :review :outcome] :value :skipped}] :expect :deny}
+  {:id :spoofed-check-name :replace [{:at [:evidence :producer-authority] :value :untrusted-same-display-name}] :expect :deny}
+  {:id :spoofed-review-publisher :replace [{:at [:evidence :review :publisher-identity] :value :untrusted}] :expect :deny}
+  {:id :skipped-test-hidden-by-aggregate :replace [{:at [:evidence :underlying-required-gates :unit-tests] :value :skipped}] :expect :deny}
+  {:id :pr-changes-trusted-gate :replace [{:at [:evidence :workflow-authority] :value :pr-controlled}] :expect :deny}
+  {:id :pr-changes-required-set :replace [{:at [:policy :source] :value :pr-controlled}] :expect :deny}
+  {:id :changed-base :replace [{:at [:base] :value "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"}] :expect :deny}
+  {:id :wrong-repository :replace [{:at [:evidence :repository] :value "fixture/other-caller"}] :expect :deny}
+  {:id :wrong-pr :replace [{:at [:evidence :pr] :value 43}] :expect :deny}
+  {:id :policy-read-forbidden :replace [{:at [:evidence :producer-authority] :value :unverifiable-policy-403}] :expect :deny}
+  {:id :coderabbit-incomplete :replace [{:at [:evidence :checks :coderabbit] :value :pending}] :expect :deny}
+  {:id :reviewer-provider-refused :replace [{:at [:evidence :review] :value {:state :failed :outcome :provider-refused}}] :expect :deny}
+  {:id :retry-artifact-missing :replace [{:at [:evidence] :value nil}] :expect :deny}]}
