@@ -1,7 +1,7 @@
 # Epic E1 — Operation Eta Mu Breakdown
 
-**Planning status:** proposed, grounded in a pinned mainline inspection on 2026-09-12.  
-**Outcome owner:** Foresight suite migration. **Execution host:** yoga. **Development branch:** `device/yoga`.  
+**Planning status:** proposed, grounded in a pinned mainline inspection on 2026-09-12.
+**Outcome owner:** Foresight suite migration. **Execution host:** yoga. **Development branch:** `device/yoga`.
 **IDs:** E1 and E1.01–E1.12 are identifiers local to this planning pack, not already-created GitHub or Rheos records.
 
 ## Outcome
