@@ -1,7 +1,7 @@
 # Epic E2 — Rheos Document Ownership and Foresight Corpus Migration
 
-**Planning status:** proposed, informed by pinned source inspection on 2026-09-12.  
-**Outcome owner:** Foresight document/work system. **Implementation participants:** Rheos, extracted ingestion service (working name Osmos), Epiphany, and shared Foresight libraries where genuinely reusable.  
+**Planning status:** proposed, informed by pinned source inspection on 2026-09-12.
+**Outcome owner:** Foresight document/work system. **Implementation participants:** Rheos, extracted ingestion service (working name Osmos), Epiphany, and shared Foresight libraries where genuinely reusable.
 **Prerequisite:** E1 supplies usable independent packages and stable interfaces. Read-only corpus inventory and schema work can run before donor retirement. IDs in this file are local planning identifiers, not existing cards.
 
 ## Outcome
