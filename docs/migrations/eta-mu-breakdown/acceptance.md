@@ -18,7 +18,7 @@ they do not certify a child's build, behavior, policy, or production readiness.
 | [sol](https://github.com/open-hax/sol/tree/1276955c86ff46936cd1ce7d81fbc790f7068e1e) | `1276955c86ff46936cd1ce7d81fbc790f7068e1e` | Pending. Guide exists; clean dependency closure and test/build evidence missing. |
 | [osmos](https://github.com/open-hax/osmos/tree/0c33018e27f861536822086afcdab666a60add44) | `0c33018e27f861536822086afcdab666a60add44` | Pending. No README/AGENTS at pin; claimed Docker/config changes are later revisions; service/client/image proof missing. |
 | [receipt-river](https://github.com/open-hax/receipt-river/tree/7c7c62343fea0241ac545e37f14e57ab344bfa30) | `7c7c62343fea0241ac545e37f14e57ab344bfa30` | Pending. Guide exists; eta-mu consumer still references donor; standalone evidence missing. |
-| [axxium](https://github.com/open-hax/axxium/tree/ee5284a00eb5c034cd6ef0db281726f00ce77cca) | `ee5284a00eb5c034cd6ef0db281726f00ce77cca` | Pending. Existing history preserved on reconciliation revision; independent acceptance evidence missing. |
+| [axxium](https://github.com/open-hax/axxium/tree/2439d4d6b8e546cda276f09f5c96db59226ecad6) | `2439d4d6b8e546cda276f09f5c96db59226ecad6` | Existing baseline accepted via Axxium PR #12; migration upgrade pending. Build passed with 6 warnings; runner reported zero tests. |
 
 `data/registration.json` is the machine-readable companion. Gate entries in
 `config/quality-gates.edn` cite files at these pins. Missing commands are explicit
@@ -26,6 +26,29 @@ unavailable entries; no no-op is treated as a quality gate. E1.09 requires
 repository-owned counts, reports, coverage policy and complete guidance before
 acceptance. Registering Receipt River expanded the original eight-target plan
 to nine direct registrations; the original eight included existing Axxium.
+
+## Verified baseline and reachability
+
+Axxium now uses the officially merged [PR #12 baseline](https://github.com/open-hax/axxium/pull/12),
+not unaccepted reconciliation candidate `ee5284a00eb5c034cd6ef0db281726f00ce77cca`.
+Exact-baseline checks `99316860917` (build) and `99316860993`
+(deployment-boundary) passed. The build log reports six compiler warnings and
+zero tests/zero assertions; these limits remain visible and do not certify the
+extraction upgrade. The gate catalog now exposes the baseline's missing lint
+script as unavailable.
+
+Receipt River pin `7c7c62343fea0241ac545e37f14e57ab344bfa30` was verified by
+the GitHub commit API and a fresh empty repository fetching that full SHA from
+`https://github.com/open-hax/receipt-river.git` on September 19. This proves
+reachability, not standalone test or cutover acceptance.
+
+The Foresight review caller now consumes officially merged
+[eta-mu PR #304](https://github.com/open-hax/eta-mu/pull/304) at
+`e8eea02d31030215984375980b765803fc72d80d`, preserving prerequisite artifact
+names on failed-job reruns. Its 36 executable workflow tests passed locally.
+OpenCode is pinned to official release `1.18.31`; a direct free-model probe
+succeeded after `1.18.18` was rejected by the provider. The actual PR review
+still requires a successful exact-head hosted run; a probe is not that review.
 
 ## Lifecycle reconciliation
 

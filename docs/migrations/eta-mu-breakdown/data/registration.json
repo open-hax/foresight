@@ -117,7 +117,7 @@
     {
       "path": "axxium",
       "repository": "open-hax/axxium",
-      "revision": "ee5284a00eb5c034cd6ef0db281726f00ce77cca",
+      "revision": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
       "registration": "proposed-in-pr-96",
       "acceptance": "pending",
       "source_files": [
@@ -126,6 +126,12 @@
       "guidance_at_pin": {
         "AGENTS.md": true,
         "README.md": true
+      },
+      "accepted_baseline": {
+        "pull_request": "https://github.com/open-hax/axxium/pull/12",
+        "build_check": 99316860917,
+        "deployment_boundary_check": 99316860993,
+        "limits": "Build success included 6 warnings and test runner reported zero tests/zero assertions. This does not accept the extraction upgrade."
       }
     }
   ],

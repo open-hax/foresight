@@ -247,8 +247,9 @@
      :gate/command ["npm" "run" "build"] :gate/source "axxium/.github/workflows/ci.yml"}
     {:gate/id :axxium/unit :gate/kind :unit :gate/execution :local
      :gate/command ["npm" "test"] :gate/source "axxium/.github/workflows/ci.yml"}
-    {:gate/id :axxium/static :gate/kind :static :gate/execution :local
-     :gate/command ["npm" "run" "lint:kondo"] :gate/source "axxium/package.json"}
+    {:gate/id :axxium/static :gate/kind :static :gate/execution :workflow-only
+     :gate/source "axxium/package.json"
+     :gate/reason "Accepted baseline has no lint script; later reconciliation candidate is not accepted."}
     {:gate/id :axxium/deployment-boundary :gate/kind :static :gate/execution :workflow-only
      :gate/source "axxium/.github/workflows/ci.yml"
      :gate/reason "Owning CI runs the deployment-boundary self-test and check as a multi-step gate."}]}
