@@ -20,6 +20,12 @@ they do not certify a child's build, behavior, policy, or production readiness.
 | [receipt-river](https://github.com/open-hax/receipt-river/tree/7c7c62343fea0241ac545e37f14e57ab344bfa30) | `7c7c62343fea0241ac545e37f14e57ab344bfa30` | Pending. Guide exists; eta-mu consumer still references donor; standalone evidence missing. |
 | [axxium](https://github.com/open-hax/axxium/tree/2439d4d6b8e546cda276f09f5c96db59226ecad6) | `2439d4d6b8e546cda276f09f5c96db59226ecad6` | Existing baseline accepted via Axxium PR #12; migration upgrade pending. Build passed with 6 warnings; runner reported zero tests. |
 
+Every child's declared gates were executed once from a fresh clone outside any
+eta-mu workspace; the exit codes, the failures and the tool-unavailable rows are
+in [child-gate-evidence.md](child-gate-evidence.md). That execution is one
+observation on one host and accepts nothing: the rows above stay `Pending` until
+each owning repository merges its evidence under the procedure below.
+
 `data/registration.json` is the machine-readable companion. Gate entries in
 `config/quality-gates.edn` cite files at these pins. Missing commands are explicit
 unavailable entries; no no-op is treated as a quality gate. E1.09 requires
