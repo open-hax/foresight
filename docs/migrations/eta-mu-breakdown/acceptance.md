@@ -42,6 +42,15 @@ the GitHub commit API and a fresh empty repository fetching that full SHA from
 `https://github.com/open-hax/receipt-river.git` on September 19. This proves
 reachability, not standalone test or cutover acceptance.
 
+The root `eta-mu` gitlink stays at the donor baseline
+`0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90`. The candidate
+`c2bbf7547592cb9e0c82eee01c2b01555c6cee68` was withdrawn: its two commits are
+E1.11 donor retirement, and at that revision nine remaining packages hold
+references to directories the retirement deleted. The detail and its
+reproduction are in
+[donor-retirement-blockers.md](donor-retirement-blockers.md). Withdrawing the
+candidate changes no child registration.
+
 The Foresight review caller now consumes officially merged
 [eta-mu PR #304](https://github.com/open-hax/eta-mu/pull/304) at
 `e8eea02d31030215984375980b765803fc72d80d`, preserving prerequisite artifact
