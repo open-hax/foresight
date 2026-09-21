@@ -20,6 +20,12 @@ they do not certify a child's build, behavior, policy, or production readiness.
 | [receipt-river](https://github.com/open-hax/receipt-river/tree/7c7c62343fea0241ac545e37f14e57ab344bfa30) | `7c7c62343fea0241ac545e37f14e57ab344bfa30` | Pending. Guide exists; eta-mu consumer still references donor; standalone evidence missing. |
 | [axxium](https://github.com/open-hax/axxium/tree/2439d4d6b8e546cda276f09f5c96db59226ecad6) | `2439d4d6b8e546cda276f09f5c96db59226ecad6` | Existing baseline accepted via Axxium PR #12; migration upgrade pending. Build passed with 6 warnings; runner reported zero tests. |
 
+Every child's declared gates were executed once from a fresh clone outside any
+eta-mu workspace; the exit codes, the failures and the tool-unavailable rows are
+in [child-gate-evidence.md](child-gate-evidence.md). That execution is one
+observation on one host and accepts nothing: the rows above stay `Pending` until
+each owning repository merges its evidence under the procedure below.
+
 `data/registration.json` is the machine-readable companion. Gate entries in
 `config/quality-gates.edn` cite files at these pins. Missing commands are explicit
 unavailable entries; no no-op is treated as a quality gate. E1.09 requires
@@ -41,6 +47,15 @@ Receipt River pin `7c7c62343fea0241ac545e37f14e57ab344bfa30` was verified by
 the GitHub commit API and a fresh empty repository fetching that full SHA from
 `https://github.com/open-hax/receipt-river.git` on September 19. This proves
 reachability, not standalone test or cutover acceptance.
+
+The root `eta-mu` gitlink stays at the donor baseline
+`0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90`. The candidate
+`c2bbf7547592cb9e0c82eee01c2b01555c6cee68` was withdrawn: its two commits are
+E1.11 donor retirement, and at that revision nine remaining packages hold
+references to directories the retirement deleted. The detail and its
+reproduction are in
+[donor-retirement-blockers.md](donor-retirement-blockers.md). Withdrawing the
+candidate changes no child registration.
 
 The Foresight review caller now consumes officially merged
 [eta-mu PR #304](https://github.com/open-hax/eta-mu/pull/304) at
