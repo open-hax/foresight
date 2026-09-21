@@ -42,4 +42,5 @@ See `docs/migrations/eta-mu-breakdown/epic-01-operation-eta-mu-breakdown.md` (E1
 
 ---
 PR #96 reconciliation: eta-mu c2bbf7547592cb9e0c82eee01c2b01555c6cee68 switches Rheos/Sol/Mycology references, but retains Receipt River and other donor source paths. It is no longer pinned: the same two commits retire nine donor package directories, which is E1.11 work behind this card. The root gitlink stays at donor baseline 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90. No isolated consumer proof is available; this is partial cutover, not accepted completion. See docs/migrations/eta-mu-breakdown/donor-retirement-blockers.md.
+
 ---
