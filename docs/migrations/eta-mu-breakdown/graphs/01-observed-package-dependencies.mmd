@@ -1,0 +1,42 @@
+flowchart LR
+  %% Observed mainline package/source declarations; not a build result
+  %% Consumer points to dependency; edge IDs resolve in data/relationships.json.
+  orchestrator["Kanban Orchestrator"]
+  clio["Clio"]
+  chat["Chat UI"]
+  axxium["Axxium"]
+  rheos["Rheos"]
+  mycology["Session Mycology"]
+  sol["Sol"]
+  eta_cli["eta-mu CLI/source"]
+  protocols["Protocols"]
+  turn["Turn Processor"]
+  receipt["Receipt River"]
+  fork["Fork Tax"]
+  terminal["Terminal UI"]
+  contracts["Contracts Output"]
+  katamorph["Katamorph"]
+  event_ledger["event-ledger"]
+  uxx["uxx-helix"]
+  rheos -->|"R001 npm-dev"| protocols
+  rheos -->|"R002 cljs-source-path"| protocols
+  rheos -->|"R003 cljs-source-path"| chat
+  rheos -->|"R004 clojure-git"| katamorph
+  rheos -->|"R005 npm-dev"| uxx
+  sol -->|"R006 clojure-local"| eta_cli
+  sol -->|"R007 clojure-local"| turn
+  sol -->|"R008 clojure-git"| katamorph
+  sol -->|"R009 clojure-git"| event_ledger
+  eta_cli -->|"R010 npm-runtime"| rheos
+  eta_cli -->|"R011 npm-runtime"| sol
+  eta_cli -->|"R012 npm-runtime"| mycology
+  eta_cli -->|"R013 npm-runtime"| fork
+  eta_cli -->|"R014 npm-runtime"| receipt
+  eta_cli -->|"R015 npm-dev"| turn
+  eta_cli -->|"R016 npm-dev"| terminal
+  eta_cli -->|"R017 npm-dev"| contracts
+  eta_cli -->|"R018 cljs-source-path"| mycology
+  eta_cli -->|"R019 cljs-source-path"| fork
+  eta_cli -->|"R020 cljs-source-path"| receipt
+  eta_cli -->|"R021 cljs-source-path"| turn
+  eta_cli -->|"R022 cljs-source-path"| terminal

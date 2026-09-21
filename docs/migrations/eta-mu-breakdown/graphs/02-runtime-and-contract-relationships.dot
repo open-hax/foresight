@@ -1,0 +1,35 @@
+digraph dependencies {
+rankdir=LR;
+graph [pad=0.25, nodesep=0.3, ranksep=0.55, labelloc=t, fontsize=18, fontname="DejaVu Sans", label="Runtime / contract relationships | observations and reported host wiring"];
+node [shape=box, style=rounded, fontname="DejaVu Sans", fontsize=11];
+edge [fontname="DejaVu Sans", fontsize=8];
+orchestrator [label="Kanban Orchestrator\n(extraction target)"];
+chat [label="Chat UI\n(extraction target)"];
+rheos [label="Rheos\n(extraction target)"];
+sol [label="Sol\n(extraction target)"];
+ingestion [label="Knoxx ingestion\n(extraction target)"];
+mcp [label="MCP Contracts"];
+knoxx [label="Knoxx backend"];
+opencode [label="OpenCode"];
+openplanner [label="OpenPlanner"];
+proxx [label="Proxx"];
+knoxx_contracts [label="Knoxx contracts root"];
+postgres [label="PostgreSQL"];
+redis [label="Redis"];
+qdrant [label="Qdrant"];
+ragussy [label="Ragussy"];
+chat -> sol [style=dashed,label="R033 adapter-surface"];
+chat -> knoxx [style=dashed,label="R034 adapter-surface"];
+chat -> opencode [style=dashed,label="R035 adapter-surface"];
+orchestrator -> rheos [style=dashed,label="R036 mcp-service"];
+orchestrator -> mcp [style=dashed,label="R037 contract-loader"];
+orchestrator -> sol [style=dashed,label="R038 runtime-host"];
+ingestion -> knoxx_contracts [style=dashed,label="R039 configuration-path"];
+ingestion -> knoxx [style=dashed,label="R040 runtime-configuration"];
+ingestion -> openplanner [style=dashed,label="R041 runtime-configuration"];
+ingestion -> proxx [style=dashed,label="R042 runtime-configuration"];
+ingestion -> postgres [style=dashed,label="R043 runtime-configuration"];
+ingestion -> redis [style=dashed,label="R044 runtime-configuration"];
+ingestion -> qdrant [style=dashed,label="R045 runtime-configuration"];
+ingestion -> ragussy [style=dashed,label="R046 runtime-configuration"];
+}

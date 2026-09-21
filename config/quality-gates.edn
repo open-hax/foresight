@@ -144,6 +144,116 @@
      :gate/source "muse/.github/workflows/ci.yml"
      :gate/reason "The owning CI compiles tests and separately asserts the cljs.test success sentinel; no equivalent one-command local gate is declared."}]}
 
+  "kanban-orchestrator"
+  {:repository/path "kanban-orchestrator"
+   :repository/gates
+   [{:gate/id :kanban-orchestrator/conformance
+     :gate/kind :static
+     :gate/execution :workflow-only
+     :gate/source "kanban-orchestrator/package.json"
+     :gate/reason "The pinned contract-only package exposes no conformance command or workflow. E1.09 must add EDN/schema/reference checks in the owning repository; this is unavailable, not a passing no-op."}
+    {:gate/id :kanban-orchestrator/host-load
+     :gate/kind :integration
+     :gate/execution :external
+     :gate/source "kanban-orchestrator/README.md"
+     :gate/reason "Requires a configured host contract loader and the Rheos MCP service. E1.09 must retain host-load and tool-binding evidence."}]}
+
+  "clio"
+  {:repository/path "clio"
+   :repository/gates
+   [{:gate/id :clio/unit-bb :gate/kind :unit :gate/execution :local
+     :gate/command ["bb" "test/run.bb"] :gate/source "clio/package.json"}
+    {:gate/id :clio/unit-nbb :gate/kind :unit :gate/execution :local
+     :gate/command ["nbb" "-cp" "test:scripts" "test/run.nbb"] :gate/source "clio/package.json"}
+    {:gate/id :clio/unit-shadow :gate/kind :unit :gate/execution :local
+     :gate/command ["pnpm" "run" "test:shadow"] :gate/source "clio/package.json"}
+    {:gate/id :clio/static :gate/kind :static :gate/execution :local
+     :gate/command ["pnpm" "run" "lint:kondo"] :gate/source "clio/package.json"}
+    {:gate/id :clio/assembly :gate/kind :build :gate/execution :workflow-only
+     :gate/source "clio/package.json"
+     :gate/reason "Source package exposes no assembly/installed-consumer gate. E1.03/E1.09 must establish one; source presence is not packaging proof."}]}
+
+  "chat-ui"
+  {:repository/path "chat-ui"
+   :repository/gates
+   [{:gate/id :chat-ui/build :gate/kind :build :gate/execution :local
+     :gate/command ["pnpm" "run" "build"] :gate/source "chat-ui/package.json"}
+    {:gate/id :chat-ui/unit :gate/kind :unit :gate/execution :local
+     :gate/command ["pnpm" "run" "test"] :gate/source "chat-ui/package.json"}
+    {:gate/id :chat-ui/static :gate/kind :static :gate/execution :local
+     :gate/command ["pnpm" "run" "lint:kondo"] :gate/source "chat-ui/package.json"}]}
+
+  "rheos"
+  {:repository/path "rheos"
+   :repository/gates
+   [{:gate/id :rheos/build :gate/kind :build :gate/execution :local
+     :gate/command ["pnpm" "run" "build"] :gate/source "rheos/package.json"}
+    {:gate/id :rheos/unit :gate/kind :unit :gate/execution :local
+     :gate/command ["pnpm" "run" "test"] :gate/source "rheos/package.json"}
+    {:gate/id :rheos/static :gate/kind :static :gate/execution :local
+     :gate/command ["pnpm" "run" "lint:kondo"] :gate/source "rheos/package.json"}
+    {:gate/id :rheos/browser :gate/kind :e2e :gate/execution :workflow-only
+     :gate/source "rheos/package.json"
+     :gate/reason "No browser navigation gate is exposed at this pin. E1.09 requires an owning-repository gate and screenshots; a compiled app is not E2E evidence."}]}
+
+  "session-mycology"
+  {:repository/path "session-mycology"
+   :repository/gates
+   [{:gate/id :session-mycology/build :gate/kind :build :gate/execution :local
+     :gate/command ["pnpm" "run" "build"] :gate/source "session-mycology/package.json"}
+    {:gate/id :session-mycology/unit :gate/kind :unit :gate/execution :local
+     :gate/command ["pnpm" "run" "test"] :gate/source "session-mycology/package.json"}
+    {:gate/id :session-mycology/static :gate/kind :static :gate/execution :local
+     :gate/command ["pnpm" "run" "lint:kondo"] :gate/source "session-mycology/package.json"}]}
+
+  "sol"
+  {:repository/path "sol"
+   :repository/gates
+   [{:gate/id :sol/build :gate/kind :build :gate/execution :local
+     :gate/command ["pnpm" "run" "build"] :gate/source "sol/package.json"}
+    {:gate/id :sol/unit :gate/kind :unit :gate/execution :local
+     :gate/command ["pnpm" "run" "test"] :gate/source "sol/package.json"}
+    {:gate/id :sol/static :gate/kind :static :gate/execution :local
+     :gate/command ["pnpm" "run" "lint:kondo"] :gate/source "sol/package.json"}]}
+
+  "osmos"
+  {:repository/path "osmos"
+   :repository/gates
+   [{:gate/id :osmos/unit :gate/kind :unit :gate/execution :local
+     :gate/command ["clojure" "-M:test"] :gate/source "osmos/deps.edn"}
+    {:gate/id :osmos/build :gate/kind :build :gate/execution :local
+     :gate/command ["clojure" "-M:uberjar"] :gate/source "osmos/deps.edn"}
+    {:gate/id :osmos/integration :gate/kind :integration :gate/execution :external
+     :gate/source "osmos/deps.edn"
+     :gate/reason "The :integration alias requires live OpenPlanner and database configuration. E1.08 must retain service/client compatibility and image evidence."}
+    {:gate/id :osmos/static :gate/kind :static :gate/execution :workflow-only
+     :gate/source "osmos/deps.edn"
+     :gate/reason "No lint alias or workflow exists at the recorded pin. E1.09 must supply the repository-owned gate."}]}
+
+  "receipt-river"
+  {:repository/path "receipt-river"
+   :repository/gates
+   [{:gate/id :receipt-river/build :gate/kind :build :gate/execution :local
+     :gate/command ["pnpm" "run" "build"] :gate/source "receipt-river/package.json"}
+    {:gate/id :receipt-river/unit :gate/kind :unit :gate/execution :local
+     :gate/command ["pnpm" "run" "test"] :gate/source "receipt-river/package.json"}
+    {:gate/id :receipt-river/static :gate/kind :static :gate/execution :local
+     :gate/command ["pnpm" "run" "lint:kondo"] :gate/source "receipt-river/package.json"}]}
+
+  "axxium"
+  {:repository/path "axxium"
+   :repository/gates
+   [{:gate/id :axxium/build :gate/kind :build :gate/execution :local
+     :gate/command ["npm" "run" "build"] :gate/source "axxium/.github/workflows/ci.yml"}
+    {:gate/id :axxium/unit :gate/kind :unit :gate/execution :local
+     :gate/command ["npm" "test"] :gate/source "axxium/.github/workflows/ci.yml"}
+    {:gate/id :axxium/static :gate/kind :static :gate/execution :workflow-only
+     :gate/source "axxium/package.json"
+     :gate/reason "Accepted baseline has no lint script; later reconciliation candidate is not accepted."}
+    {:gate/id :axxium/deployment-boundary :gate/kind :static :gate/execution :workflow-only
+     :gate/source "axxium/.github/workflows/ci.yml"
+     :gate/reason "Owning CI runs the deployment-boundary self-test and check as a multi-step gate."}]}
+
   "services"
   {:repository/path "services"
    :repository/gates

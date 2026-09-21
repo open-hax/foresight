@@ -36,7 +36,7 @@ candidates, and accepted lifts are not interchangeable.
 | `bitch-tracker` | octave-commons/bitch-tracker | betterdiscord-plugin | BetterDiscord client plugin behavior |
 | `calliope` | octave-commons/calliope | corpus | Append-only ingestion truth, Receipt River accountability, corpus documents |
 | `epiphany` | octave-commons/epiphany | knowledge-archaeology | Observed→derived→provisional→accepted promotion, git-history-derived knowledge |
-| `eta-mu` | open-hax/eta-mu | agent-runtime-and-workflow | Kanban board (work source of truth), Rheos FSM board transitions, agent runtime |
+| `eta-mu` | open-hax/eta-mu | agent-runtime-and-workflow | CLI, shared workflow integration and remaining donor packages; follow the extracted child rows below |
 | `katamorph` | open-hax/katamorph | contract-language | Portable shape/contract declarations and cross-host translation |
 | `knoxx` | open-hax/knoxx | agent-product-runtime | CLJS-first agent product backend; raw JS interop confined to externs |
 | `muse` | octave-commons/muse | compatibility-compiler | Compiler/compatibility tooling — not canonical actor/session/policy semantics |
@@ -45,6 +45,15 @@ candidates, and accepted lifts are not interchangeable.
 | `services` | open-hax/services | deployment-orchestration | Deployment topology and environment schemas — never application source or secrets |
 | `shx` | octave-commons/shx | shell-ir | Common IR for shell intent (bash <-> Clojure), envm EDN-driven shell config |
 | `uxx` | open-hax/uxx | ui-kit | Canonical React components; Reagent/Helix are parity wrappers, shared design tokens |
+| `kanban-orchestrator` | open-hax/kanban-orchestrator | agent-contract-data | Contract data for the board-driving agent and Rheos MCP connection |
+| `clio` | open-hax/clio | event-sourcing-kernel | Event admission, immutable ledgers, replay, and portable event contracts |
+| `chat-ui` | open-hax/chat-ui | chat-ui-components | Shared chat panels and runtime protocol adapters consumed by Rheos |
+| `rheos` | open-hax/rheos | kanban-board-runtime | Board CLI, server, MCP, browser UI and lawful card transitions; document corpus evolution remains planned |
+| `session-mycology` | open-hax/session-mycology | session-reflection-events | Session reflection events and derived learning records |
+| `sol` | open-hax/sol | agent-runtime-backend | Agent runtime, provider adapters, sessions and runtime-owned gates |
+| `osmos` | open-hax/osmos | ingestion-service | Extracted JVM kms-ingestion service, configuration and consumer compatibility |
+| `receipt-river` | open-hax/receipt-river | receipt-ledger | Receipt-writing CLI and accountability records |
+| `axxium` | open-hax/axxium | identity-auth-kernel | Identity and authorization kernel; existing repository history is preserved |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
 | `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |
@@ -52,9 +61,8 @@ candidates, and accepted lifts are not interchangeable.
 
 When a new direct repository is added, update `.gitmodules`,
 `src/foresight/project.cljc` (`sources`, plus any new invariants), and this
-table together — `nbb scripts/project.clj validate` and the
-`:foresight/gitmodules-match-project` invariant enforce that the three stay
-in agreement. A row here with no matching source is drift, not a new grant of
+table together. `nbb scripts/project.clj validate` enforces manifest/project
+agreement; `nbb test/project_test.cljs` checks extraction routing and gate coverage. A row here with no matching source is drift, not a new grant of
 authority.
 
 ## Divine mandate: purify before you port
