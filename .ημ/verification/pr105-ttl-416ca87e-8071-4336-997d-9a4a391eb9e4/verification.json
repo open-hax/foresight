@@ -1,0 +1,23 @@
+{
+  "schema": "bounded-local-verification/v1",
+  "session": "bc060fe5-3912-44f3-bdb9-c4766d0fb0d1",
+  "parent": "f779efd0a25e3ef8f43a930c6527ee1a477932ec",
+  "principal": "github:riatzukiza",
+  "runtime": {
+    "babashka": "1.13.219",
+    "clio_source_commit": "a2f428afd7623dcd188d535512525ee521a5ba61",
+    "foresight_source_commit": "f779efd0a25e3ef8f43a930c6527ee1a477932ec",
+    "malli_source": "sourcesContent recovered from revision-bound eta-mu runtime source maps"
+  },
+  "results": {
+    "artifact_regression": {"tests": 6, "assertions": 151, "failures": 0, "errors": 0},
+    "initial_red": {"tests": 4, "assertions": 12, "failures": 2, "errors": 0, "note": "Initial smaller suite, not identical to the final suite."},
+    "native": {"validated_events": 36, "projected_runs": 2, "findings_each": 3, "schema_root": "8eb19ab0e4b70e205a84a627fd3e15c3ba79c0fd8c792d37e72f3c79511e0bf9"}
+  },
+  "limits": [
+    "No live MongoDB execution.",
+    "No complete historical canonicalization or admission: ancestor closure outside the two resources was not loaded.",
+    "Malformed original relations are preserved rejected input, not admitted history.",
+    "Hosted CI and independent exact-head review have not yet run on this candidate."
+  ]
+}

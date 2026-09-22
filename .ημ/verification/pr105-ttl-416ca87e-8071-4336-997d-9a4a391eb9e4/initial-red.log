@@ -1,0 +1,15 @@
+
+Testing user
+
+FAIL in (correction-narrows-only-the-expiry-interpretation) (/mnt/data/foresight-merge-session/foresight-pr105/archaeology/test/policy_ttl_correction_test.bb:77)
+A note alone cannot replace the corrective ledger
+expected: (successor-present?)
+  actual: (not (successor-present?))
+
+FAIL in (successor-is-a-causally-bound-separate-publication) (/mnt/data/foresight-merge-session/foresight-pr105/archaeology/test/policy_ttl_correction_test.bb:46)
+The corrective successor must actually exist
+expected: (successor-present?)
+  actual: (not (successor-present?))
+
+Ran 4 tests containing 12 assertions.
+2 failures, 0 errors.
