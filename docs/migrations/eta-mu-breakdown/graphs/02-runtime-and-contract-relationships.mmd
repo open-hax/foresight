@@ -1,0 +1,32 @@
+flowchart LR
+  %% Runtime/configuration surfaces; not install dependencies
+  %% Consumer points to dependency; edge IDs resolve in data/relationships.json.
+  orchestrator["Kanban Orchestrator"]
+  chat["Chat UI"]
+  rheos["Rheos"]
+  sol["Sol"]
+  ingestion["Knoxx ingestion"]
+  mcp["MCP Contracts"]
+  knoxx["Knoxx backend"]
+  opencode["OpenCode"]
+  openplanner["OpenPlanner"]
+  proxx["Proxx"]
+  knoxx_contracts["Knoxx contracts root"]
+  postgres["PostgreSQL"]
+  redis["Redis"]
+  qdrant["Qdrant"]
+  ragussy["Ragussy"]
+  chat -.->|"R033 adapter-surface"| sol
+  chat -.->|"R034 adapter-surface"| knoxx
+  chat -.->|"R035 adapter-surface"| opencode
+  orchestrator -.->|"R036 mcp-service"| rheos
+  orchestrator -.->|"R037 contract-loader"| mcp
+  orchestrator -.->|"R038 runtime-host"| sol
+  ingestion -.->|"R039 configuration-path"| knoxx_contracts
+  ingestion -.->|"R040 runtime-configuration"| knoxx
+  ingestion -.->|"R041 runtime-configuration"| openplanner
+  ingestion -.->|"R042 runtime-configuration"| proxx
+  ingestion -.->|"R043 runtime-configuration"| postgres
+  ingestion -.->|"R044 runtime-configuration"| redis
+  ingestion -.->|"R045 runtime-configuration"| qdrant
+  ingestion -.->|"R046 runtime-configuration"| ragussy

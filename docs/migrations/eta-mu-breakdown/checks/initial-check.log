@@ -1,0 +1,202 @@
+test_all_eight_targets_present (__main__.PackChecks.test_all_eight_targets_present) ... ok
+test_edges_resolve (__main__.PackChecks.test_edges_resolve) ... ok
+test_epic_stories_and_requested_steps (__main__.PackChecks.test_epic_stories_and_requested_steps) ... ok
+test_mixed_package_cycle_recorded (__main__.PackChecks.test_mixed_package_cycle_recorded) ... ok
+test_nd_edn_has_one_record_per_edge (__main__.PackChecks.test_nd_edn_has_one_record_per_edge) ... ok
+test_reject_claimed_authority (__main__.PackChecks.test_reject_claimed_authority) ... ERROR
+test_reject_duplicate_labels (__main__.PackChecks.test_reject_duplicate_labels) ... ERROR
+test_reject_empty_abstention (__main__.PackChecks.test_reject_empty_abstention) ... ERROR
+test_reject_extra_action (__main__.PackChecks.test_reject_extra_action) ... ERROR
+test_reject_fabricated_quote (__main__.PackChecks.test_reject_fabricated_quote) ... ERROR
+test_reject_invalid_span (__main__.PackChecks.test_reject_invalid_span) ... ERROR
+test_reject_unknown_project (__main__.PackChecks.test_reject_unknown_project) ... ERROR
+test_reject_unknown_topic (__main__.PackChecks.test_reject_unknown_topic) ... ERROR
+test_rendered_graphs_are_svg (__main__.PackChecks.test_rendered_graphs_are_svg) ... ok
+test_revision_shapes (__main__.PackChecks.test_revision_shapes) ... ok
+test_runtime_edges_not_package_edges (__main__.PackChecks.test_runtime_edges_not_package_edges) ... ok
+test_schema_and_positive_fixture (__main__.PackChecks.test_schema_and_positive_fixture) ... ERROR
+
+======================================================================
+ERROR: test_reject_claimed_authority (__main__.PackChecks.test_reject_claimed_authority)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 97, in test_reject_claimed_authority
+    out=read_json('classification/example-output.json');out['status']='accepted'
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/example-output.json'
+
+======================================================================
+ERROR: test_reject_duplicate_labels (__main__.PackChecks.test_reject_duplicate_labels)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 122, in test_reject_duplicate_labels
+    out=read_json('classification/example-output.json');out['projects'].append(copy.deepcopy(out['projects'][0]))
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/example-output.json'
+
+======================================================================
+ERROR: test_reject_empty_abstention (__main__.PackChecks.test_reject_empty_abstention)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 127, in test_reject_empty_abstention
+    out=read_json('classification/example-output.json');out['abstained']=True
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/example-output.json'
+
+======================================================================
+ERROR: test_reject_extra_action (__main__.PackChecks.test_reject_extra_action)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 92, in test_reject_extra_action
+    out=read_json('classification/example-output.json');out['delete_files']=['README.md']
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/example-output.json'
+
+======================================================================
+ERROR: test_reject_fabricated_quote (__main__.PackChecks.test_reject_fabricated_quote)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 117, in test_reject_fabricated_quote
+    out=read_json('classification/example-output.json');out['kind']['evidence'][0]['quote']='This source is fully implemented.'
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/example-output.json'
+
+======================================================================
+ERROR: test_reject_invalid_span (__main__.PackChecks.test_reject_invalid_span)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 112, in test_reject_invalid_span
+    out=read_json('classification/example-output.json');out['kind']['evidence'][0]['end_line']=999
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/example-output.json'
+
+======================================================================
+ERROR: test_reject_unknown_project (__main__.PackChecks.test_reject_unknown_project)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 102, in test_reject_unknown_project
+    out=read_json('classification/example-output.json');out['projects'][0]['project_id']='invented-project'
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/example-output.json'
+
+======================================================================
+ERROR: test_reject_unknown_topic (__main__.PackChecks.test_reject_unknown_topic)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 107, in test_reject_unknown_topic
+    out=read_json('classification/example-output.json');out['topics'][0]['id']='invented-topic'
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/example-output.json'
+
+======================================================================
+ERROR: test_schema_and_positive_fixture (__main__.PackChecks.test_schema_and_positive_fixture)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 87, in test_schema_and_positive_fixture
+    schema=read_json('classification/document-labels.schema.json')
+  File "/mnt/data/eta-mu-breakdown/checks/check_pack.py", line 20, in read_json
+    return json.loads((ROOT / path).read_text())
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 548, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 539, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/eta-mu-breakdown/classification/document-labels.schema.json'
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.009s
+
+FAILED (errors=9)

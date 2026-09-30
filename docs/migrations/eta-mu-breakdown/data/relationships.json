@@ -1,0 +1,822 @@
+{
+  "schema_version": "dependency-observation-snapshot/v1",
+  "as_of": "2026-09-12",
+  "edge_direction": "consumer -> dependency or related service",
+  "coverage": "Selected pinned manifests, build descriptors, scripts, README-reported contract relationships, and selected ingestion implementation. Not an exhaustive namespace/import/CI/deployment closure.",
+  "observed_vs_reported": "Configuration and declaration edges are observed; orchestrator integration details currently rely on README and are marked reported. Runtime edges are not package-manager edges.",
+  "nodes": [
+    {
+      "id": "orchestrator",
+      "label": "Kanban Orchestrator",
+      "category": "extraction",
+      "npm_name": "@open-hax/kanban-orchestrator",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/kanban-orchestrator"
+    },
+    {
+      "id": "clio",
+      "label": "Clio",
+      "category": "extraction",
+      "npm_name": "@eta-mu/clio",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/clio"
+    },
+    {
+      "id": "chat",
+      "label": "Chat UI",
+      "category": "extraction",
+      "npm_name": "@open-hax/chat-ui",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/chat-ui"
+    },
+    {
+      "id": "axxium",
+      "label": "Axxium",
+      "category": "extraction",
+      "npm_name": "@open-hax/axxium",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/axxium"
+    },
+    {
+      "id": "rheos",
+      "label": "Rheos",
+      "category": "extraction",
+      "npm_name": "@eta-mu/rheos",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/rheos"
+    },
+    {
+      "id": "mycology",
+      "label": "Session Mycology",
+      "category": "extraction",
+      "npm_name": "@eta-mu/session-mycology",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/session-mycology"
+    },
+    {
+      "id": "sol",
+      "label": "Sol",
+      "category": "extraction",
+      "npm_name": "@eta-mu/sol",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/sol"
+    },
+    {
+      "id": "ingestion",
+      "label": "Knoxx ingestion",
+      "category": "extraction",
+      "npm_name": null,
+      "repository": "open-hax/knoxx",
+      "path": "ingestion"
+    },
+    {
+      "id": "eta_cli",
+      "label": "eta-mu CLI/source",
+      "category": "remaining",
+      "npm_name": "eta-mu",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/eta-mu"
+    },
+    {
+      "id": "protocols",
+      "label": "Protocols",
+      "category": "remaining",
+      "npm_name": "@open-hax/protocols",
+      "repository": "open-hax/eta-mu",
+      "path": "packages/protocols"
+    },
+    {
+      "id": "turn",
+      "label": "Turn Processor",
+      "category": "remaining",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "packages/turn-processor"
+    },
+    {
+      "id": "receipt",
+      "label": "Receipt River",
+      "category": "remaining",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "packages/receipt-river"
+    },
+    {
+      "id": "fork",
+      "label": "Fork Tax",
+      "category": "remaining",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "packages/fork-tax"
+    },
+    {
+      "id": "terminal",
+      "label": "Terminal UI",
+      "category": "remaining",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "packages/terminal-ui"
+    },
+    {
+      "id": "contracts",
+      "label": "Contracts Output",
+      "category": "remaining",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "packages/contracts/output"
+    },
+    {
+      "id": "kondo",
+      "label": "Shared kondo-config",
+      "category": "tooling",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "packages/kondo-config"
+    },
+    {
+      "id": "mcp",
+      "label": "MCP Contracts",
+      "category": "remaining",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "packages/mcp-contracts"
+    },
+    {
+      "id": "eta_root",
+      "label": "eta-mu root scripts",
+      "category": "tooling",
+      "npm_name": "@open-hax/eta-mu-monorepo",
+      "repository": "open-hax/eta-mu",
+      "path": ""
+    },
+    {
+      "id": "guard",
+      "label": "contract-guard.mjs",
+      "category": "tooling",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "scripts/contract-guard.mjs"
+    },
+    {
+      "id": "ledger_guard",
+      "label": "ledger extern guard",
+      "category": "tooling",
+      "npm_name": null,
+      "repository": "open-hax/eta-mu",
+      "path": "scripts/check-ledger-extern-boundaries.mjs"
+    },
+    {
+      "id": "katamorph",
+      "label": "Katamorph",
+      "category": "external-project",
+      "npm_name": null,
+      "repository": "open-hax/katamorph",
+      "path": ""
+    },
+    {
+      "id": "event_ledger",
+      "label": "event-ledger",
+      "category": "external-project",
+      "npm_name": null,
+      "repository": "open-hax/event-ledger",
+      "path": ""
+    },
+    {
+      "id": "uxx",
+      "label": "uxx-helix",
+      "category": "external-project",
+      "npm_name": "@open-hax/uxx-helix",
+      "repository": "open-hax/uxx",
+      "path": "",
+      "repository_mapping_status": "provisional; npm manifest observed, uxx package export ownership not inspected"
+    },
+    {
+      "id": "knoxx",
+      "label": "Knoxx backend",
+      "category": "external-project",
+      "npm_name": null,
+      "repository": "open-hax/knoxx",
+      "path": ""
+    },
+    {
+      "id": "opencode",
+      "label": "OpenCode",
+      "category": "external-project",
+      "npm_name": null,
+      "repository": "open-hax/opencode",
+      "path": ""
+    },
+    {
+      "id": "openplanner",
+      "label": "OpenPlanner",
+      "category": "external-project",
+      "npm_name": null,
+      "repository": "open-hax/openplanner",
+      "path": ""
+    },
+    {
+      "id": "proxx",
+      "label": "Proxx",
+      "category": "external-project",
+      "npm_name": null,
+      "repository": "open-hax/proxx",
+      "path": ""
+    },
+    {
+      "id": "knoxx_contracts",
+      "label": "Knoxx contracts root",
+      "category": "configuration",
+      "npm_name": null,
+      "repository": "open-hax/knoxx",
+      "path": "contracts"
+    },
+    {
+      "id": "postgres",
+      "label": "PostgreSQL",
+      "category": "infrastructure",
+      "npm_name": null,
+      "repository": null,
+      "path": null
+    },
+    {
+      "id": "redis",
+      "label": "Redis",
+      "category": "infrastructure",
+      "npm_name": null,
+      "repository": null,
+      "path": null
+    },
+    {
+      "id": "qdrant",
+      "label": "Qdrant",
+      "category": "infrastructure",
+      "npm_name": null,
+      "repository": null,
+      "path": null
+    },
+    {
+      "id": "ragussy",
+      "label": "Ragussy",
+      "category": "runtime-service",
+      "npm_name": null,
+      "repository": null,
+      "path": null
+    }
+  ],
+  "edges": [
+    {
+      "id": "R001",
+      "from": "rheos",
+      "to": "protocols",
+      "kind": "npm-dev",
+      "evidence_status": "observed",
+      "source_ids": [
+        "rheos.package"
+      ],
+      "detail": "devDependencies @open-hax/protocols = workspace:*",
+      "view": "package"
+    },
+    {
+      "id": "R002",
+      "from": "rheos",
+      "to": "protocols",
+      "kind": "cljs-source-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "rheos.deps"
+      ],
+      "detail": "../protocols/src",
+      "view": "package"
+    },
+    {
+      "id": "R003",
+      "from": "rheos",
+      "to": "chat",
+      "kind": "cljs-source-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "rheos.deps"
+      ],
+      "detail": "../chat-ui/src",
+      "view": "package"
+    },
+    {
+      "id": "R004",
+      "from": "rheos",
+      "to": "katamorph",
+      "kind": "clojure-git",
+      "evidence_status": "observed",
+      "source_ids": [
+        "rheos.deps"
+      ],
+      "detail": "Git SHA be7cc332d865cfedc57b55b10cab3c9f2bd41fc4",
+      "view": "package"
+    },
+    {
+      "id": "R005",
+      "from": "rheos",
+      "to": "uxx",
+      "kind": "npm-dev",
+      "evidence_status": "observed",
+      "source_ids": [
+        "rheos.package"
+      ],
+      "detail": "@open-hax/uxx-helix ^0.1.0; package/repository relationship needs a package export audit",
+      "view": "package"
+    },
+    {
+      "id": "R006",
+      "from": "sol",
+      "to": "eta_cli",
+      "kind": "clojure-local",
+      "evidence_status": "observed",
+      "source_ids": [
+        "sol.deps"
+      ],
+      "detail": "open-hax/eta-mu :local/root ../eta-mu; source library, not necessarily execution of the full CLI",
+      "view": "package"
+    },
+    {
+      "id": "R007",
+      "from": "sol",
+      "to": "turn",
+      "kind": "clojure-local",
+      "evidence_status": "observed",
+      "source_ids": [
+        "sol.deps"
+      ],
+      "detail": "open-hax/turn-processor :local/root ../turn-processor",
+      "view": "package"
+    },
+    {
+      "id": "R008",
+      "from": "sol",
+      "to": "katamorph",
+      "kind": "clojure-git",
+      "evidence_status": "observed",
+      "source_ids": [
+        "sol.deps"
+      ],
+      "detail": "v0.2.0; Git SHA 305a5e49d834aca27566f739e8510f6b409fda78",
+      "view": "package"
+    },
+    {
+      "id": "R009",
+      "from": "sol",
+      "to": "event_ledger",
+      "kind": "clojure-git",
+      "evidence_status": "observed",
+      "source_ids": [
+        "sol.deps"
+      ],
+      "detail": "Git SHA ada7374b7f4e1c3b0ab4e6bbe996f10f06e9b93a; no observed Sol -> Clio replacement in this mainline manifest",
+      "view": "package"
+    },
+    {
+      "id": "R010",
+      "from": "eta_cli",
+      "to": "rheos",
+      "kind": "npm-runtime",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.package"
+      ],
+      "detail": "workspace:* dependency",
+      "view": "package"
+    },
+    {
+      "id": "R011",
+      "from": "eta_cli",
+      "to": "sol",
+      "kind": "npm-runtime",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.package"
+      ],
+      "detail": "workspace:* dependency",
+      "view": "package"
+    },
+    {
+      "id": "R012",
+      "from": "eta_cli",
+      "to": "mycology",
+      "kind": "npm-runtime",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.package"
+      ],
+      "detail": "workspace:* dependency",
+      "view": "package"
+    },
+    {
+      "id": "R013",
+      "from": "eta_cli",
+      "to": "fork",
+      "kind": "npm-runtime",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.package"
+      ],
+      "detail": "workspace:* dependency",
+      "view": "package"
+    },
+    {
+      "id": "R014",
+      "from": "eta_cli",
+      "to": "receipt",
+      "kind": "npm-runtime",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.package"
+      ],
+      "detail": "workspace:* dependency",
+      "view": "package"
+    },
+    {
+      "id": "R015",
+      "from": "eta_cli",
+      "to": "turn",
+      "kind": "npm-dev",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.package"
+      ],
+      "detail": "workspace:* devDependency",
+      "view": "package"
+    },
+    {
+      "id": "R016",
+      "from": "eta_cli",
+      "to": "terminal",
+      "kind": "npm-dev",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.package"
+      ],
+      "detail": "workspace:* devDependency",
+      "view": "package"
+    },
+    {
+      "id": "R017",
+      "from": "eta_cli",
+      "to": "contracts",
+      "kind": "npm-dev",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.package",
+        "contracts.locator"
+      ],
+      "detail": "workspace:* devDependency",
+      "view": "package"
+    },
+    {
+      "id": "R018",
+      "from": "eta_cli",
+      "to": "mycology",
+      "kind": "cljs-source-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.shadow"
+      ],
+      "detail": "Sibling src/cljs included in shadow source-paths",
+      "view": "package"
+    },
+    {
+      "id": "R019",
+      "from": "eta_cli",
+      "to": "fork",
+      "kind": "cljs-source-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.shadow"
+      ],
+      "detail": "Sibling src/cljs included in shadow source-paths",
+      "view": "package"
+    },
+    {
+      "id": "R020",
+      "from": "eta_cli",
+      "to": "receipt",
+      "kind": "cljs-source-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.shadow"
+      ],
+      "detail": "Sibling src/cljs included in shadow source-paths",
+      "view": "package"
+    },
+    {
+      "id": "R021",
+      "from": "eta_cli",
+      "to": "turn",
+      "kind": "cljs-source-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.shadow"
+      ],
+      "detail": "Sibling src/cljs included in shadow source-paths",
+      "view": "package"
+    },
+    {
+      "id": "R022",
+      "from": "eta_cli",
+      "to": "terminal",
+      "kind": "cljs-source-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta-cli.shadow"
+      ],
+      "detail": "Sibling src/cljs included in shadow source-paths",
+      "view": "package"
+    },
+    {
+      "id": "R023",
+      "from": "sol",
+      "to": "guard",
+      "kind": "tooling-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "sol.package"
+      ],
+      "detail": "../../scripts/contract-guard.mjs",
+      "view": "tooling"
+    },
+    {
+      "id": "R024",
+      "from": "sol",
+      "to": "kondo",
+      "kind": "tooling-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "sol.kondo"
+      ],
+      "detail": "../../kondo-config/clj-kondo.exports/open-hax/kondo-config relative to .clj-kondo",
+      "view": "tooling"
+    },
+    {
+      "id": "R025",
+      "from": "mycology",
+      "to": "ledger_guard",
+      "kind": "tooling-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "mycology.package"
+      ],
+      "detail": "../../scripts/check-ledger-extern-boundaries.mjs session-mycology",
+      "view": "tooling"
+    },
+    {
+      "id": "R026",
+      "from": "receipt",
+      "to": "ledger_guard",
+      "kind": "tooling-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "receipt.package"
+      ],
+      "detail": "Shared guard remains required by Receipt River after Mycology is extracted",
+      "view": "tooling"
+    },
+    {
+      "id": "R027",
+      "from": "eta_root",
+      "to": "clio",
+      "kind": "test-dispatch",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta.test"
+      ],
+      "detail": "Explicit pnpm filter in scripts/test.bb; rewrite only after new repo gate is installed",
+      "view": "tooling"
+    },
+    {
+      "id": "R028",
+      "from": "eta_root",
+      "to": "rheos",
+      "kind": "test-dispatch",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta.test"
+      ],
+      "detail": "Explicit pnpm filter in scripts/test.bb; rewrite only after new repo gate is installed",
+      "view": "tooling"
+    },
+    {
+      "id": "R029",
+      "from": "eta_root",
+      "to": "sol",
+      "kind": "test-dispatch",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta.test"
+      ],
+      "detail": "Explicit pnpm filter in scripts/test.bb; rewrite only after new repo gate is installed",
+      "view": "tooling"
+    },
+    {
+      "id": "R030",
+      "from": "eta_root",
+      "to": "chat",
+      "kind": "test-dispatch",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta.test"
+      ],
+      "detail": "Explicit pnpm filter in scripts/test.bb; rewrite only after new repo gate is installed",
+      "view": "tooling"
+    },
+    {
+      "id": "R031",
+      "from": "eta_root",
+      "to": "axxium",
+      "kind": "test-dispatch",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta.test"
+      ],
+      "detail": "Explicit pnpm filter in scripts/test.bb; rewrite only after new repo gate is installed",
+      "view": "tooling"
+    },
+    {
+      "id": "R032",
+      "from": "eta_root",
+      "to": "rheos",
+      "kind": "script-dispatch",
+      "evidence_status": "observed",
+      "source_ids": [
+        "eta.root"
+      ],
+      "detail": "Root dev and start dispatch to Rheos",
+      "view": "tooling"
+    },
+    {
+      "id": "R033",
+      "from": "chat",
+      "to": "sol",
+      "kind": "adapter-surface",
+      "evidence_status": "observed",
+      "source_ids": [
+        "chat.shadow"
+      ],
+      "detail": "Exported create session adapter; not an npm or Clojure dependency declaration",
+      "view": "runtime"
+    },
+    {
+      "id": "R034",
+      "from": "chat",
+      "to": "knoxx",
+      "kind": "adapter-surface",
+      "evidence_status": "observed",
+      "source_ids": [
+        "chat.shadow"
+      ],
+      "detail": "Exported create session adapter; not an npm or Clojure dependency declaration",
+      "view": "runtime"
+    },
+    {
+      "id": "R035",
+      "from": "chat",
+      "to": "opencode",
+      "kind": "adapter-surface",
+      "evidence_status": "observed",
+      "source_ids": [
+        "chat.shadow"
+      ],
+      "detail": "Exported create session adapter; not an npm or Clojure dependency declaration",
+      "view": "runtime"
+    },
+    {
+      "id": "R036",
+      "from": "orchestrator",
+      "to": "rheos",
+      "kind": "mcp-service",
+      "evidence_status": "reported",
+      "source_ids": [
+        "orchestrator.readme"
+      ],
+      "detail": "Documented rheos-kanban MCP endpoint; inspect contract bytes in implementation preflight",
+      "view": "runtime"
+    },
+    {
+      "id": "R037",
+      "from": "orchestrator",
+      "to": "mcp",
+      "kind": "contract-loader",
+      "evidence_status": "reported",
+      "source_ids": [
+        "orchestrator.readme"
+      ],
+      "detail": "Documented generic :mcp-server loader",
+      "view": "runtime"
+    },
+    {
+      "id": "R038",
+      "from": "orchestrator",
+      "to": "sol",
+      "kind": "runtime-host",
+      "evidence_status": "reported",
+      "source_ids": [
+        "orchestrator.readme"
+      ],
+      "detail": "Documented optional Sol-style host with additional contract roots",
+      "view": "runtime"
+    },
+    {
+      "id": "R039",
+      "from": "ingestion",
+      "to": "knoxx_contracts",
+      "kind": "configuration-path",
+      "evidence_status": "observed",
+      "source_ids": [
+        "ingestion.contracts"
+      ],
+      "detail": "CONTRACTS_DIR, cwd/contracts, then cwd/../contracts discovery",
+      "view": "runtime"
+    },
+    {
+      "id": "R040",
+      "from": "ingestion",
+      "to": "knoxx",
+      "kind": "runtime-configuration",
+      "evidence_status": "observed",
+      "source_ids": [
+        "ingestion.config"
+      ],
+      "detail": "Knoxx backend adapter; translation configuration remains Knoxx-owned",
+      "view": "runtime"
+    },
+    {
+      "id": "R041",
+      "from": "ingestion",
+      "to": "openplanner",
+      "kind": "runtime-configuration",
+      "evidence_status": "observed",
+      "source_ids": [
+        "ingestion.config",
+        "ingestion.deps"
+      ],
+      "detail": "Configurable sink; integration suite explicitly requires OpenPlanner and DB",
+      "view": "runtime"
+    },
+    {
+      "id": "R042",
+      "from": "ingestion",
+      "to": "proxx",
+      "kind": "runtime-configuration",
+      "evidence_status": "observed",
+      "source_ids": [
+        "ingestion.config"
+      ],
+      "detail": "Configured proxx endpoint; configuration presence does not establish mandatory use in every deployment",
+      "view": "runtime"
+    },
+    {
+      "id": "R043",
+      "from": "ingestion",
+      "to": "postgres",
+      "kind": "runtime-configuration",
+      "evidence_status": "observed",
+      "source_ids": [
+        "ingestion.config"
+      ],
+      "detail": "Configured postgres endpoint; configuration presence does not establish mandatory use in every deployment",
+      "view": "runtime"
+    },
+    {
+      "id": "R044",
+      "from": "ingestion",
+      "to": "redis",
+      "kind": "runtime-configuration",
+      "evidence_status": "observed",
+      "source_ids": [
+        "ingestion.config"
+      ],
+      "detail": "Configured redis endpoint; configuration presence does not establish mandatory use in every deployment",
+      "view": "runtime"
+    },
+    {
+      "id": "R045",
+      "from": "ingestion",
+      "to": "qdrant",
+      "kind": "runtime-configuration",
+      "evidence_status": "observed",
+      "source_ids": [
+        "ingestion.config"
+      ],
+      "detail": "Configured qdrant endpoint; configuration presence does not establish mandatory use in every deployment",
+      "view": "runtime"
+    },
+    {
+      "id": "R046",
+      "from": "ingestion",
+      "to": "ragussy",
+      "kind": "runtime-configuration",
+      "evidence_status": "observed",
+      "source_ids": [
+        "ingestion.config"
+      ],
+      "detail": "Configured ragussy endpoint; configuration presence does not establish mandatory use in every deployment",
+      "view": "runtime"
+    }
+  ]
+}

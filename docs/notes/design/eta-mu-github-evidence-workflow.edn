@@ -1,0 +1,323 @@
+{:workflow/id :eta-mu/github-evidence-review
+ :workflow/version 1
+ :workflow/status :proposed
+ :workflow/authority
+ {:admission :eta-mu
+  :identity :axxium
+  :execution :sol
+  :projection :knoxx
+  :records :event-ledger
+  :resources :katamorph
+  :model-routing :proxx
+  :integration-proof :foresight}
+
+ :workflow/input
+ {:manifest/profile :eta-mu/review-input-v1
+  :revision-binding :exact-head
+  :identity/supplier :axxium
+  :required-fields
+  [:repository/id
+   :pull-request/id
+   :base/sha
+   :head/sha
+   :changed-paths
+   :contract-revisions
+   :artifact-catalog/digest
+   :required-checks
+   :required-workers
+   :coverage]}
+
+ :workflow/triggers
+ [{:trigger/id :pull-request-observed
+   :trigger/kind :event
+   :trigger/event :github/pull-request-observed}
+  {:trigger/id :check-suite-observed
+   :trigger/kind :event
+   :trigger/event :github/check-suite-observed}
+  {:trigger/id :review-thread-observed
+   :trigger/kind :event
+   :trigger/event :github/review-thread-observed}
+  {:trigger/id :reconcile
+   :trigger/kind :cron
+   :trigger/cron "17 */3 * * *"}]
+
+ :workflow/nodes
+ [{:node/id :verify-delivery
+   :node/kind :action
+   :node/owner :eta-mu
+   :node/action :github/verify-webhook-signature
+   :node/emits [:github/delivery-received :github/delivery-rejected]}
+
+  {:node/id :classify-delivery
+   :node/kind :action
+   :node/owner :eta-mu
+   :node/action :eta-mu/classify-github-delivery
+   :node/emits [:github/delivery-classified]}
+
+  {:node/id :acknowledge-delivery
+   :node/kind :action
+   :node/owner :eta-mu
+   :node/action :github/acknowledge-delivery}
+
+  {:node/id :hydrate-review-state
+   :node/kind :action
+   :node/owner :eta-mu
+   :node/action :github/hydrate-review-state
+   :node/emits [:github/object-observed :github/coverage-observed]}
+
+  {:node/id :resolve-identities
+   :node/kind :action
+   :node/owner :axxium
+   :node/action :axxium/resolve-provider-bindings
+   :node/emits [:axxium/bindings-resolved]}
+
+  {:node/id :build-review-manifest
+   :node/kind :action
+   :node/owner :eta-mu
+   :node/action :eta-mu/build-review-input-manifest
+   :node/emits [:eta-mu/review-manifest-created]}
+
+  {:node/id :revision-provenance
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/revision-provenance
+   :node/required? true
+   :node/artifact-kinds [:git/commit :git/tree :git/submodule
+                         :evidence/manifest :artifact/hash]}
+
+  {:node/id :check-run
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/check-run
+   :node/required? true
+   :node/artifact-kinds [:github/check-suite :github/check-run
+                         :github/annotation :github/workflow-run
+                         :github/workflow-job]}
+
+  {:node/id :review-thread
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/review-thread
+   :node/required? true
+   :node/artifact-kinds [:github/review :github/review-thread
+                         :github/review-comment :git/diff]}
+
+  {:node/id :ledger-replay
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/ledger-replay
+   :node/required? true
+   :node/artifact-kinds [:event-ledger/record :event-ledger/segment
+                         :event-ledger/manifest :event-ledger/checkpoint]}
+
+  {:node/id :test-artifact
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/test-artifact
+   :node/required? false
+   :node/artifact-kinds [:test/junit :test/tap :test/coverage
+                         :build/artifact :runtime/log]}
+
+  {:node/id :contract-compatibility
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/contract-compatibility
+   :node/required? false
+   :node/artifact-kinds [:katamorph/resource :schema/malli
+                         :api/contract :git/diff]}
+
+  {:node/id :dependency-supply-chain
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/dependency-supply-chain
+   :node/required? false
+   :node/artifact-kinds [:dependency/lockfile :dependency/manifest
+                         :toolchain/pin :generated/file]}
+
+  {:node/id :security-permission
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/security-permission
+   :node/required? false
+   :node/artifact-kinds [:github/permission :oauth/scope
+                         :webhook/signature :secret/scan
+                         :trust-boundary/change]}
+
+  {:node/id :runtime-observability
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/runtime-observability
+   :node/required? false
+   :node/artifact-kinds [:runtime/process :runtime/log :runtime/trace
+                         :queue/attempt :service/health]}
+
+  {:node/id :documentation-ux
+   :node/kind :worker
+   :node/owner :sol
+   :node/worker :evidence/documentation-ux
+   :node/required? false
+   :node/artifact-kinds [:documentation/page :diagram/mermaid
+                         :ui/state :operator/error]}
+
+  {:node/id :project-evidence
+   :node/kind :action
+   :node/owner :knoxx
+   :node/action :knoxx/project-github-evidence-graph
+   :node/emits [:knoxx/projection-advanced]}
+
+  {:node/id :query-required-coverage
+   :node/kind :query
+   :node/owner :knoxx
+   :node/query :knoxx/evidence-required-coverage}
+
+  {:node/id :query-contradictions
+   :node/kind :query
+   :node/owner :knoxx
+   :node/query :knoxx/evidence-contradictions}
+
+  {:node/id :synthesize
+   :node/kind :law
+   :node/owner :eta-mu
+   :node/action :eta-mu/synthesize-exact-head-review
+   :node/emits [:eta-mu/review-decision]}
+
+  {:node/id :authorize-publication
+   :node/kind :law
+   :node/owner :eta-mu
+   :node/action :eta-mu/authorize-github-publication
+   :node/emits [:eta-mu/publication-authorized
+                :eta-mu/publication-rejected]}
+
+  {:node/id :publish-check
+   :node/kind :action
+   :node/owner :eta-mu
+   :node/action :github/publish-check-run
+   :node/emits [:github/check-published]}
+
+  {:node/id :publish-review
+   :node/kind :action
+   :node/owner :eta-mu
+   :node/action :github/publish-review-summary
+   :node/emits [:github/review-published]}
+
+  {:node/id :reconcile-publication
+   :node/kind :action
+   :node/owner :eta-mu
+   :node/action :github/reconcile-review-state
+   :node/emits [:github/reconciliation-observed]}]
+
+ :workflow/edges
+ [{:edge/from :verify-delivery :edge/to :classify-delivery
+   :edge/on :github/delivery-received}
+  {:edge/from :verify-delivery :edge/to :acknowledge-delivery
+   :edge/on :github/delivery-rejected}
+  {:edge/from :classify-delivery :edge/to :acknowledge-delivery}
+  {:edge/from :classify-delivery :edge/to :hydrate-review-state}
+  {:edge/from :hydrate-review-state :edge/to :resolve-identities}
+  {:edge/from :resolve-identities :edge/to :build-review-manifest}
+
+  {:edge/from :build-review-manifest :edge/to :revision-provenance
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :check-run
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :review-thread
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :ledger-replay
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :test-artifact
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :contract-compatibility
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :dependency-supply-chain
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :security-permission
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :runtime-observability
+   :edge/mode :parallel}
+  {:edge/from :build-review-manifest :edge/to :documentation-ux
+   :edge/mode :parallel}
+
+  {:edge/from :revision-provenance :edge/to :project-evidence}
+  {:edge/from :check-run :edge/to :project-evidence}
+  {:edge/from :review-thread :edge/to :project-evidence}
+  {:edge/from :ledger-replay :edge/to :project-evidence}
+  {:edge/from :test-artifact :edge/to :project-evidence}
+  {:edge/from :contract-compatibility :edge/to :project-evidence}
+  {:edge/from :dependency-supply-chain :edge/to :project-evidence}
+  {:edge/from :security-permission :edge/to :project-evidence}
+  {:edge/from :runtime-observability :edge/to :project-evidence}
+  {:edge/from :documentation-ux :edge/to :project-evidence}
+
+  {:edge/from :project-evidence :edge/to :query-required-coverage}
+  {:edge/from :project-evidence :edge/to :query-contradictions}
+  {:edge/from :query-required-coverage :edge/to :synthesize}
+  {:edge/from :query-contradictions :edge/to :synthesize}
+  {:edge/from :synthesize :edge/to :authorize-publication}
+  {:edge/from :authorize-publication :edge/to :publish-check
+   :edge/on :eta-mu/publication-authorized}
+  {:edge/from :authorize-publication :edge/to :publish-review
+   :edge/on :eta-mu/publication-authorized}
+  {:edge/from :publish-check :edge/to :reconcile-publication}
+  {:edge/from :publish-review :edge/to :reconcile-publication}]
+
+ :workflow/worker-policy
+ {:concurrency {:global 24
+                :model-backed 6
+                :provider-api 8
+                :process 8}
+  :default-budget {:wall-ms 20000
+                   :max-artifacts 200
+                   :max-bytes 5000000}
+  :terminal-record-required? true
+  :cancel-on-head-change? true
+  :direct-publication-allowed? false
+  :retry {:max-attempts 2
+          :requires-retryable-reason? true}}
+
+ :workflow/conclusion-policy
+ {:required-check "eta-mu / evidence-review"
+  :passing-worker-outcomes [:completed :passed]
+  :passing-check-outcomes [:success]
+  :non-passing-states [:queued :requested :pending :in-progress
+                       :skipped :cancelled :neutral :timed-out
+                       :failure :blocked :partial :unavailable
+                       :missing :stale]
+  :outcomes [:pass :action-required :pending :stale
+             :blocked :unavailable :partial]
+  :exact-head-required? true
+  :unresolved-actionable-thread-blocks? true
+  :missing-required-artifact-blocks? true
+  :publication-idempotency-key
+  [:repository/id :pull-request/id :head/sha
+   :review/run-id :publication/kind]}
+
+ :workflow/record-profiles
+ [:github/delivery-received
+  :github/delivery-rejected
+  :github/object-observed
+  :github/coverage-observed
+  :eta-mu/review-manifest-created
+  :sol/worker-started
+  :sol/evidence-finding
+  :sol/worker-finished
+  :knoxx/projection-advanced
+  :eta-mu/review-decision
+  :eta-mu/publication-authorized
+  :eta-mu/publication-rejected
+  :github/check-published
+  :github/review-published
+  :github/reconciliation-observed
+  :test/run-started
+  :test/run-finished]
+
+ :workflow/completion-gates
+ [:signature-verification
+  :duplicate-delivery-idempotency
+  :exact-head-input-binding
+  :required-worker-terminal-records
+  :stale-head-publication-rejection
+  :missing-evidence-non-pass
+  :unresolved-thread-non-pass
+  :publication-idempotency
+  :projection-replay-equivalence
+  :revision-bound-test-evidence]}

@@ -1,0 +1,26 @@
+flowchart TD
+  source["Git-backed Markdown and source code"]
+  acquisition["Osmos: acquire, watch, extract, deliver bounded jobs"]
+  history["Epiphany: history, sections, provenance, retrieval"]
+  references["Deterministic reference and dependency observations"]
+  model["Small model: schema-constrained label proposals, no tools"]
+  candidates["Provisional labels and relationship candidates"]
+  review["Rheos: inspect evidence and review proposed changes"]
+  admission["Authorized, revision-checked document commands"]
+  events["Clio: admitted change and decision records"]
+  views["Rheos documents, graph, board, search and chat views"]
+  core["Foresight: shared .cljc contracts, laws and conformance tests"]
+  source --> acquisition --> history
+  history --> references
+  history --> model
+  references --> candidates
+  model --> candidates
+  candidates --> review --> admission
+  admission --> source
+  admission --> events
+  events --> views
+  history --> views
+  core -.-> acquisition
+  core -.-> history
+  core -.-> admission
+  %% Proposed ownership, not an assertion of implemented integration.

@@ -1,0 +1,54 @@
+{
+  "schema_version": "document-label-request/v1",
+  "request_id": "synthetic-fixture-001",
+  "source_ref": {
+    "kind": "synthetic-test-fixture",
+    "id": "synthetic-review-corpus",
+    "content_sha256": "301ae9f1da8eeb3e2684831634ff64717d8ce57a5b69090421a134be88ab514d",
+    "note": "Not a retrieved repository document; this fixture describes a proposal."
+  },
+  "document": {
+    "text": "# Review corpus\n\nRheos manages Markdown document changes.\nEpiphany proposes evidence-backed relationships.\nClio records accepted change events.\nThis is a design proposal, not a report of implemented behavior.\nSee `src/rheos/backend/domain/task_edit.cljs` for the current write boundary.\nA document label does not authorize deleting the document.\n",
+    "complete": true,
+    "line_numbering": "1-based, source text including blank lines"
+  },
+  "taxonomy": {
+    "id": "foresight-doc-topics/v1-proposal",
+    "allowed_topics": [
+      "document-graph",
+      "source-provenance",
+      "event-history",
+      "migration",
+      "dependency-management",
+      "identity-auth",
+      "ingestion",
+      "translation",
+      "testing",
+      "build-tooling",
+      "operations",
+      "architecture",
+      "knowledge-management"
+    ]
+  },
+  "allowed_projects": [
+    {
+      "id": "rheos",
+      "names": [
+        "Rheos"
+      ]
+    },
+    {
+      "id": "epiphany",
+      "names": [
+        "Epiphany"
+      ]
+    },
+    {
+      "id": "clio",
+      "names": [
+        "Clio"
+      ]
+    }
+  ],
+  "resolved_references": []
+}

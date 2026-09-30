@@ -1,0 +1,457 @@
+{
+  "inspection_date": "2026-09-12",
+  "sources": {
+    "eta.root": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/package.json",
+      "kind": "file",
+      "chat_citation": "turn2file0",
+      "notes": null
+    },
+    "clio.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/clio/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/clio/package.json",
+      "kind": "file",
+      "chat_citation": "turn3file0",
+      "notes": null
+    },
+    "axxium.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/axxium/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/axxium/package.json",
+      "kind": "file",
+      "chat_citation": "turn4file0",
+      "notes": null
+    },
+    "rheos.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/rheos/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/rheos/package.json",
+      "kind": "file",
+      "chat_citation": "turn5file0",
+      "notes": null
+    },
+    "sol.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/sol/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/sol/package.json",
+      "kind": "file",
+      "chat_citation": "turn6file0",
+      "notes": null
+    },
+    "chat.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/chat-ui/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/chat-ui/package.json",
+      "kind": "file",
+      "chat_citation": "turn7file0",
+      "notes": null
+    },
+    "mycology.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/session-mycology/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/session-mycology/package.json",
+      "kind": "file",
+      "chat_citation": "turn8file0",
+      "notes": null
+    },
+    "orchestrator.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/kanban-orchestrator/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/kanban-orchestrator/package.json",
+      "kind": "file",
+      "chat_citation": "turn9file0",
+      "notes": null
+    },
+    "rheos.deps": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/rheos/deps.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/rheos/deps.edn",
+      "kind": "file",
+      "chat_citation": "turn13file0",
+      "notes": "Planning mainline 476b07bd66efb84566a4159556deacb1e9407e6f only. Donor 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90 tree has no packages/rheos/deps.edn; do not apply this observation to that donor."
+    },
+    "sol.deps": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/sol/deps.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/sol/deps.edn",
+      "kind": "file",
+      "chat_citation": "turn14file0",
+      "notes": null
+    },
+    "mycology.shadow": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/session-mycology/shadow-cljs.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/session-mycology/shadow-cljs.edn",
+      "kind": "file",
+      "chat_citation": "turn15file0",
+      "notes": null
+    },
+    "chat.shadow": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/chat-ui/shadow-cljs.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/chat-ui/shadow-cljs.edn",
+      "kind": "file",
+      "chat_citation": "turn16file0",
+      "notes": null
+    },
+    "axxium.shadow": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/axxium/shadow-cljs.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/axxium/shadow-cljs.edn",
+      "kind": "file",
+      "chat_citation": "turn17file0",
+      "notes": null
+    },
+    "clio.deps": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/clio/deps.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/clio/deps.edn",
+      "kind": "file",
+      "chat_citation": "turn18file0",
+      "notes": null
+    },
+    "eta-cli.deps": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/eta-mu/deps.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/eta-mu/deps.edn",
+      "kind": "file",
+      "chat_citation": "turn21file0",
+      "notes": null
+    },
+    "eta-cli.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/eta-mu/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/eta-mu/package.json",
+      "kind": "file",
+      "chat_citation": "turn22file0",
+      "notes": null
+    },
+    "eta-cli.shadow": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/eta-mu/shadow-cljs.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/eta-mu/shadow-cljs.edn",
+      "kind": "file",
+      "chat_citation": "turn23file0",
+      "notes": null
+    },
+    "rheos.readme": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/rheos/README.md",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/rheos/README.md",
+      "kind": "file",
+      "chat_citation": "turn35file0",
+      "notes": null
+    },
+    "sol.shadow": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/sol/shadow-cljs.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/sol/shadow-cljs.edn",
+      "kind": "file",
+      "chat_citation": "turn43file0",
+      "notes": null
+    },
+    "receipt.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/receipt-river/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/receipt-river/package.json",
+      "kind": "file",
+      "chat_citation": "turn44file0",
+      "notes": null
+    },
+    "turn.deps": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/turn-processor/deps.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/turn-processor/deps.edn",
+      "kind": "file",
+      "chat_citation": "turn45file0",
+      "notes": null
+    },
+    "protocols.package": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/protocols/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/protocols/package.json",
+      "kind": "file",
+      "chat_citation": "turn46file0",
+      "notes": null
+    },
+    "orchestrator.readme": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/kanban-orchestrator/README.md",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/kanban-orchestrator/README.md",
+      "kind": "file",
+      "chat_citation": "turn47file0",
+      "notes": null
+    },
+    "sol.kondo": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/sol/.clj-kondo/config.edn",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/sol/.clj-kondo/config.edn",
+      "kind": "file",
+      "chat_citation": "turn51file0",
+      "notes": null
+    },
+    "clio.readme": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/clio/README.md",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/clio/README.md",
+      "kind": "file",
+      "chat_citation": "turn54file0",
+      "notes": null,
+      "read_source_line_range": [
+        1,
+        140
+      ]
+    },
+    "mycology.readme": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/session-mycology/README.md",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/session-mycology/README.md",
+      "kind": "file",
+      "chat_citation": "turn55file0",
+      "notes": null
+    },
+    "axxium.readme": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/axxium/README.md",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/axxium/README.md",
+      "kind": "file",
+      "chat_citation": "turn56file0",
+      "notes": null,
+      "read_source_line_range": [
+        1,
+        100
+      ]
+    },
+    "eta.ignore": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": ".gitignore",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/.gitignore",
+      "kind": "file",
+      "chat_citation": "turn58file0",
+      "notes": null
+    },
+    "eta.test": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "scripts/test.bb",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/scripts/test.bb",
+      "kind": "file",
+      "chat_citation": "turn59file0",
+      "notes": null
+    },
+    "ingestion.deps": {
+      "repository": "open-hax/knoxx",
+      "revision": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a",
+      "path": "ingestion/deps.edn",
+      "url": "https://github.com/open-hax/knoxx/blob/d49242b22cd8b303a2ac9807c70a3acb42a47a1a/ingestion/deps.edn",
+      "kind": "file",
+      "chat_citation": "turn24file0",
+      "notes": null
+    },
+    "ingestion.server": {
+      "repository": "open-hax/knoxx",
+      "revision": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a",
+      "path": "ingestion/src/kms_ingestion/server.clj",
+      "url": "https://github.com/open-hax/knoxx/blob/d49242b22cd8b303a2ac9807c70a3acb42a47a1a/ingestion/src/kms_ingestion/server.clj",
+      "kind": "file",
+      "chat_citation": "turn36file0",
+      "notes": null,
+      "read_source_line_range": [
+        1,
+        180
+      ]
+    },
+    "ingestion.config": {
+      "repository": "open-hax/knoxx",
+      "revision": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a",
+      "path": "ingestion/src/kms_ingestion/config.clj",
+      "url": "https://github.com/open-hax/knoxx/blob/d49242b22cd8b303a2ac9807c70a3acb42a47a1a/ingestion/src/kms_ingestion/config.clj",
+      "kind": "file",
+      "chat_citation": "turn37file0",
+      "notes": null
+    },
+    "ingestion.docker": {
+      "repository": "open-hax/knoxx",
+      "revision": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a",
+      "path": "ingestion/Dockerfile",
+      "url": "https://github.com/open-hax/knoxx/blob/d49242b22cd8b303a2ac9807c70a3acb42a47a1a/ingestion/Dockerfile",
+      "kind": "file",
+      "chat_citation": "turn38file0",
+      "notes": null
+    },
+    "ingestion.contracts": {
+      "repository": "open-hax/knoxx",
+      "revision": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a",
+      "path": "ingestion/src/kms_ingestion/contracts/loader.clj",
+      "url": "https://github.com/open-hax/knoxx/blob/d49242b22cd8b303a2ac9807c70a3acb42a47a1a/ingestion/src/kms_ingestion/contracts/loader.clj",
+      "kind": "file",
+      "chat_citation": "turn53file0",
+      "notes": null,
+      "read_source_line_range": [
+        1,
+        140
+      ]
+    },
+    "contracts.locator": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/contracts/output/package.json",
+      "url": "https://github.com/open-hax/eta-mu/blob/476b07bd66efb84566a4159556deacb1e9407e6f/packages/contracts/output/package.json",
+      "kind": "file",
+      "chat_citation": "turn60file0",
+      "notes": "Exact file path and revision located by GitHub code search; content not read in full."
+    },
+    "ingestion.tree": {
+      "repository": "open-hax/knoxx",
+      "revision": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a",
+      "path": "ingestion",
+      "url": "https://github.com/open-hax/knoxx/tree/d49242b22cd8b303a2ac9807c70a3acb42a47a1a/ingestion",
+      "kind": "tree",
+      "chat_citation": "turn27file0",
+      "notes": null
+    },
+    "eta.packages": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages",
+      "url": "https://github.com/open-hax/eta-mu/tree/476b07bd66efb84566a4159556deacb1e9407e6f/packages",
+      "kind": "tree",
+      "chat_citation": "turn29file0",
+      "notes": null
+    },
+    "axxium.tree": {
+      "repository": "open-hax/eta-mu",
+      "revision": "476b07bd66efb84566a4159556deacb1e9407e6f",
+      "path": "packages/axxium",
+      "url": "https://github.com/open-hax/eta-mu/tree/476b07bd66efb84566a4159556deacb1e9407e6f/packages/axxium",
+      "kind": "tree",
+      "chat_citation": "turn57file0",
+      "notes": null
+    },
+    "axxium.existing": {
+      "repository": "open-hax/axxium",
+      "revision": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+      "path": "package.json",
+      "url": "https://github.com/open-hax/axxium/blob/2439d4d6b8e546cda276f09f5c96db59226ecad6/package.json",
+      "kind": "file",
+      "chat_citation": "turn32file0",
+      "notes": null
+    },
+    "foresight.modules": {
+      "repository": "open-hax/foresight",
+      "revision": "78befe3daed9a27d79aa511848de3985602decbc",
+      "path": ".gitmodules",
+      "url": "https://github.com/open-hax/foresight/blob/78befe3daed9a27d79aa511848de3985602decbc/.gitmodules",
+      "kind": "file",
+      "chat_citation": "turn1file0",
+      "notes": "Initial contents read; root tree at pinned revision reports the same gitmodules blob b7ef0772f5ca001f77c0bb854586c920e3cb03f4."
+    },
+    "foresight.tree": {
+      "repository": "open-hax/foresight",
+      "revision": "78befe3daed9a27d79aa511848de3985602decbc",
+      "path": "",
+      "url": "https://github.com/open-hax/foresight/tree/78befe3daed9a27d79aa511848de3985602decbc/",
+      "kind": "tree",
+      "chat_citation": "turn42file0",
+      "notes": null
+    },
+    "foresight.readme": {
+      "repository": "open-hax/foresight",
+      "revision": "78befe3daed9a27d79aa511848de3985602decbc",
+      "path": "README.md",
+      "url": "https://github.com/open-hax/foresight/blob/78befe3daed9a27d79aa511848de3985602decbc/README.md",
+      "kind": "file",
+      "chat_citation": "turn52file0",
+      "notes": "Read first 140 source lines.",
+      "read_source_line_range": [
+        1,
+        140
+      ]
+    },
+    "epiphany.readme": {
+      "repository": "octave-commons/epiphany",
+      "revision": "643be698ea0d841dd19385506b272872306e456e",
+      "path": "README.md",
+      "url": "https://github.com/octave-commons/epiphany/blob/643be698ea0d841dd19385506b272872306e456e/README.md",
+      "kind": "file",
+      "chat_citation": "turn34file0",
+      "notes": null
+    },
+    "epiphany.redundancy": {
+      "repository": "octave-commons/epiphany",
+      "revision": "643be698ea0d841dd19385506b272872306e456e",
+      "path": "src/epiphany/domain/redundancy.clj",
+      "url": "https://github.com/octave-commons/epiphany/blob/643be698ea0d841dd19385506b272872306e456e/src/epiphany/domain/redundancy.clj",
+      "kind": "file",
+      "chat_citation": "turn40file0",
+      "notes": null
+    },
+    "epiphany.tree": {
+      "repository": "octave-commons/epiphany",
+      "revision": "643be698ea0d841dd19385506b272872306e456e",
+      "path": "src",
+      "url": "https://github.com/octave-commons/epiphany/tree/643be698ea0d841dd19385506b272872306e456e/src",
+      "kind": "tree",
+      "chat_citation": "turn39file0",
+      "notes": "Large tree response was partially displayed; not an exhaustive source read."
+    }
+  },
+  "official_documentation": {
+    "pnpm.git": {
+      "url": "https://pnpm.io/10.x/package-sources",
+      "checked_on": "2026-09-12",
+      "purpose": "Git SHA, path selector, combined Git parameters; canary on pnpm 10.14.0 still required."
+    },
+    "clojure.git": {
+      "url": "https://clojure.org/reference/deps_edn",
+      "checked_on": "2026-09-12",
+      "purpose": "Git SHA, deps/root, manifest resolution; does not replace npm dependency installation."
+    },
+    "git.submodules": {
+      "url": "https://git-scm.com/docs/gitmodules",
+      "checked_on": "2026-09-12",
+      "purpose": "Submodule branch configuration versus recorded gitlink."
+    },
+    "github.protection": {
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+      "checked_on": "2026-09-12",
+      "purpose": "Required checks, PRs, conversation resolution, expected check source."
+    },
+    "coderabbit.config": {
+      "url": "https://docs.coderabbit.ai/reference/configuration",
+      "checked_on": "2026-09-12",
+      "purpose": "review_progress, fail_commit_status, request_changes_workflow."
+    }
+  }
+}

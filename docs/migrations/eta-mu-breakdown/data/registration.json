@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "source_pr": 96,
+  "modules": [
+    {
+      "path": "kanban-orchestrator",
+      "repository": "open-hax/kanban-orchestrator",
+      "revision": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "package.json"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": false,
+        "README.md": true
+      }
+    },
+    {
+      "path": "clio",
+      "repository": "open-hax/clio",
+      "revision": "788cdd3434615a7932b924e68520dbf7f88408c2",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "package.json"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": false,
+        "README.md": true
+      }
+    },
+    {
+      "path": "chat-ui",
+      "repository": "open-hax/chat-ui",
+      "revision": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "package.json"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": false,
+        "README.md": true
+      }
+    },
+    {
+      "path": "rheos",
+      "repository": "open-hax/rheos",
+      "revision": "11811264a308d406cb612aefa1dad40818675e5e",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "package.json"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": false,
+        "README.md": true
+      }
+    },
+    {
+      "path": "session-mycology",
+      "repository": "open-hax/session-mycology",
+      "revision": "30339f9aa3df83ef8c335d4544307272abfbb131",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "package.json"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": false,
+        "README.md": true
+      }
+    },
+    {
+      "path": "sol",
+      "repository": "open-hax/sol",
+      "revision": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "package.json"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": true,
+        "README.md": true
+      }
+    },
+    {
+      "path": "osmos",
+      "repository": "open-hax/osmos",
+      "revision": "0c33018e27f861536822086afcdab666a60add44",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "deps.edn"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": false,
+        "README.md": false
+      }
+    },
+    {
+      "path": "receipt-river",
+      "repository": "open-hax/receipt-river",
+      "revision": "7c7c62343fea0241ac545e37f14e57ab344bfa30",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "package.json"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": true,
+        "README.md": true
+      }
+    },
+    {
+      "path": "axxium",
+      "repository": "open-hax/axxium",
+      "revision": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+      "registration": "proposed-in-pr-96",
+      "acceptance": "pending",
+      "source_files": [
+        "package.json"
+      ],
+      "guidance_at_pin": {
+        "AGENTS.md": true,
+        "README.md": true
+      },
+      "accepted_baseline": {
+        "pull_request": "https://github.com/open-hax/axxium/pull/12",
+        "build_check": 99316860917,
+        "deployment_boundary_check": 99316860993,
+        "limits": "Build success included 6 warnings and test runner reported zero tests/zero assertions. This does not accept the extraction upgrade."
+      }
+    }
+  ],
+  "scope": "Registration and source inspection only; independent execution and acceptance remain pending."
+}

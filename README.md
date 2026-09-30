@@ -1,9 +1,42 @@
 # Foresight
 
-Foresight is a source-level constellation of independently owned repositories
-and root-declared consolidation inputs. The root coordinates visibility and
-explicit cross-repository operations; it does not replace each submodule's
-package manager or quality gates.
+Foresight is a software suite of independently useful products and specialized
+views over shared data. The root owns common/core abstractions, portable `.cljc`,
+suite documentation, and cross-package integration. Child repositories retain
+local ownership, independent builds, package-manager policy, and quality gates.
+
+The extraction registrations and their exact pinned revisions are documented in
+[Operation Eta Mu Breakdown](docs/migrations/eta-mu-breakdown/README.md).
+Registration is distinct from standalone acceptance: the
+[acceptance register](docs/migrations/eta-mu-breakdown/acceptance.md) records
+outstanding build, consumer, review-policy, and documentation evidence. Update
+that register and the routing map when a module's acceptance lands.
+
+## New actor: start here
+
+A capable actor should be able to route work from the checkout without prior
+chat or operator memory. Start by asking Foresight for its current semantic
+view rather than searching every child repository by hand:
+
+```sh
+git submodule update --init
+nbb scripts/project.clj validate
+nbb scripts/project.clj guide
+nbb scripts/workspace.clj inventory
+```
+
+`guide` is generated from `src/foresight/project.cljc`. It covers direct
+repositories and root-native components, shows the default work/verification
+loop, and points at revision-bound examples of practices Foresight has learned
+from Git history. After routing, enter the likely owning repository and read its
+local `AGENTS.md` when present, then `README.md`, `ROADMAP.md`, process/ADR
+records, and the code/tests that own the behavior. Local evidence controls local
+facts; a Foresight routing role is not a grant of cross-repository authority.
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the short contribution contract and
+[`docs/architecture/self-documentation.md`](docs/architecture/self-documentation.md)
+for how successful local practice is recovered, classified, and explicitly
+promoted instead of copied into root law by accident.
 
 `.agents/` and `eta/` are intentional consolidation inputs. `.agents/` carries
 the canonical skill catalog in its own nested Git repository; `eta/` is a
@@ -15,7 +48,7 @@ See [`AGENTS.md`](AGENTS.md#repository-map-where-to-look) for the repository
 map: what each child submodule owns and where to look for a given topic
 before searching root-owned code.
 
-## Setup
+## Workspace setup
 
 ```sh
 git submodule update --init
@@ -81,22 +114,32 @@ same Git object, and requires every result revision to equal the corresponding
 gitlink in its tree. It rechecks the root boundary after all reads.
 
 The runner appends each complete result to `.ημ/receipts.edn`. Schema-v2
-receipts retain the actual host and `nbb`/Node adapter identity; older receipts
-remain parseable append-only history but cannot attest a promotion. The adapter
-currently requires Linux `/proc/self/fd` semantics. It holds a no-follow parent
-directory descriptor, rejects symbolic or multiply linked ledger files, and
-serializes cooperating writers with an exclusive sibling lock. A complete line
-is bounded to 1 MiB, written through the held descriptor, size-checked, and
-followed by file and directory `fsync`. Pre-write rejection releases the lock;
-uncertainty after writing starts retains the lock as a quarantine marker for
-manual adjudication. This protects the adapter boundary from pathname swaps,
-partial writes, and cooperating races; it does not exclude an unrelated writer
-that ignores the lock.
+receipts retain the actual host and `nbb`/Node adapter identity. Older
+receipts remain immutable historical records and cannot attest a current
+promotion; `verify-receipts` applies the current envelope law only to the
+suffix appended after the reviewed base.
+
+The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
+no-follow parent directory descriptor, rejects symbolic or multiply linked
+ledger files, and serializes cooperating writers with an exclusive sibling
+lock. A complete line is bounded to 1 MiB, written through the held descriptor,
+size-checked, and followed by file and directory `fsync`. Pre-write rejection
+releases the lock; uncertainty after writing starts retains the lock as a
+quarantine marker for manual adjudication. This protects the adapter boundary
+from pathname swaps, partial writes, and cooperating races; it does not exclude
+an unrelated writer that ignores the lock.
 
 For immutable review, the adapter disables Git replacement objects, requires
 regular non-executable blobs, hashes
 their raw bytes, decodes strict UTF-8, and proves the reviewed ledger preserves
 the trusted base ledger byte-for-byte before accepting whole appended lines.
+The current receipt-envelope and evidence-result laws apply only to that
+appended suffix. The exact trusted prefix remains historical evidence even
+when its envelopes predate the current schema. Secure append applies the same
+boundary against the committed `HEAD` ledger: it validates the uncommitted
+suffix before running a gate or writing its receipt. Rewrites, truncation, and
+malformed new records still fail closed. Summary totals describe the entire
+ledger; appended counts describe the records subject to current validation.
 The portable consistency law then requires exact receipt/result equality.
 Editing a failed result or prior receipt into a shape-valid pass therefore
 cannot reuse the reviewed history. Git supplies content-addressed integrity and
@@ -136,6 +179,7 @@ actionability, invariant references, and agreement with `.gitmodules`.
 ```sh
 nbb scripts/project.clj repos
 nbb scripts/project.clj show
+nbb scripts/project.clj guide
 nbb scripts/project.clj validate
 nbb test/project_test.cljs
 ```

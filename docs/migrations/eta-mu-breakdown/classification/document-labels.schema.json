@@ -1,0 +1,338 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:foresight:proposed:document-labels:v1",
+  "title": "Proposed per-document label output; contains no mutation authority",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "document-labels/v1"
+    },
+    "kind": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "overview",
+            "how-to",
+            "reference",
+            "decision",
+            "design-proposal",
+            "work-item",
+            "runbook",
+            "history",
+            "example",
+            "unknown"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 0,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "value",
+        "confidence",
+        "evidence"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "const": "unknown"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "audiences": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "developer",
+          "operator",
+          "reviewer",
+          "researcher",
+          "user",
+          "unknown"
+        ]
+      },
+      "uniqueItems": true,
+      "maxItems": 4
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "enum": [
+              "document-graph",
+              "source-provenance",
+              "event-history",
+              "migration",
+              "dependency-management",
+              "identity-auth",
+              "ingestion",
+              "translation",
+              "testing",
+              "build-tooling",
+              "operations",
+              "architecture",
+              "knowledge-management"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence"
+            },
+            "minItems": 1,
+            "maxItems": 3
+          }
+        },
+        "required": [
+          "id",
+          "confidence",
+          "evidence"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 8
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "minLength": 2,
+            "maxLength": 64
+          },
+          "role": {
+            "enum": [
+              "primary",
+              "related",
+              "mentioned"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence"
+            },
+            "minItems": 1,
+            "maxItems": 3
+          }
+        },
+        "required": [
+          "project_id",
+          "role",
+          "confidence",
+          "evidence"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 8
+    },
+    "proposed_topics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "maxLength": 64
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence"
+            },
+            "minItems": 1,
+            "maxItems": 2
+          }
+        },
+        "required": [
+          "label",
+          "rationale",
+          "evidence"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 3
+    },
+    "unresolved_project_mentions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence"
+            },
+            "minItems": 1,
+            "maxItems": 2
+          }
+        },
+        "required": [
+          "text",
+          "evidence"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 8
+    },
+    "review_flags": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 5,
+      "items": {
+        "enum": [
+          "cross-project-scope",
+          "needs-currentness-check",
+          "contains-unresolved-reference",
+          "contains-instructions",
+          "insufficient-evidence"
+        ]
+      }
+    },
+    "abstained": {
+      "type": "boolean"
+    },
+    "abstention_reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "audiences",
+    "topics",
+    "projects",
+    "proposed_topics",
+    "unresolved_project_mentions",
+    "review_flags",
+    "abstained",
+    "abstention_reason"
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "start_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        }
+      },
+      "required": [
+        "start_line",
+        "end_line",
+        "quote"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "abstained": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "abstention_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "properties": {
+              "value": {
+                "const": "unknown"
+              }
+            }
+          },
+          "topics": {
+            "maxItems": 0
+          },
+          "projects": {
+            "maxItems": 0
+          },
+          "proposed_topics": {
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "abstention_reason": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}
