@@ -53,7 +53,7 @@
             :results-count 4
             :responded-in-channel "123456789"}
  :run-id   #uuid "f47ac10b-58cc-4372-a567-0e02b2c3d479"
- :causedby #uuid "obs/discord-msg-001"
+ :causedby "obs/discord-msg-001"
  :p        0.95}
 
 ;; ─── JUDGMENT ────────────────────────────────────────────────────────────────
