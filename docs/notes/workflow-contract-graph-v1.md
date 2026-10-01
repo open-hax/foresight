@@ -2,7 +2,7 @@
 
 # Workflow Contract Graph v1
 
-Status: draft canonical spec
+Status: **lift candidate, not accepted Foresight law.** This is a recovered Knoxx draft (originally labelled "draft canonical spec"). Its "authoritative" FSM rules describe the proposal, not current workflow authority: board law is owned by Rheos, and promotion follows [project-law promotion-status triage](project-law-promotion-status-triage.md).
 Scope: deterministic agent-work workflow kernel and cross-DSL contract vocabulary
 Non-goal: resurrecting `skill-graph-aco` as an authoritative workflow engine
 
