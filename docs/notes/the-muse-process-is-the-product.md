@@ -47,7 +47,7 @@ Tiers follow Epiphany's ladder (`epiphany/PROCESS.md`). Nothing below is
 
 | Tier | Connection | Basis |
 | --- | --- | --- |
-| observed | The same session recovered `clobber` from `riatzukiza/devel@01d0f7200^` by git archaeology, then filed it as a consolidation input (open-hax/foresight#120) and a supervisor-IR epic (octave-commons/shx#2). | session 576342b7; `clobber/PROVENANCE.md` |
+| observed | The same session recovered `clobber` from `riatzukiza/devel@01d0f7200^` by git archaeology, then filed it as a consolidation input (open-hax/foresight#120) and a supervisor-IR epic (octave-commons/shx#2). | open-hax/foresight#120: [`clobber/PROVENANCE.md` at `e495838`](https://github.com/open-hax/foresight/blob/e4958386e2617ebbe07222e85d72ade8f928edb4/clobber/PROVENANCE.md) (origin commit, tree hash, verified defects); octave-commons/shx#2 |
 | observed | Epiphany already defines the promotion ladder observed → derived → provisional → accepted, an append-only inbox journal, and review decisions as events. | `epiphany/PROCESS.md`, `epiphany/docs/process/inbox.md`, `epiphany/src/epiphany/domain/review.clj` |
 | observed | Calliope holds append-only ingestion truth and separates facts, proposals and decisions ("viewing a proposal must not count as accepting it"). | `docs/notes/mu-studio-archaeology-calliope-knoxx-epiphany.md` |
 | observed | Foresight's working vocabulary already names the stages: α integrity, η transduction, μ evaluation, Π representation, with Katamorph between them and Clio remembering. | `AGENTS.md` "Working vocabulary"; `docs/architecture/workflows/alpha-eta-mu-pi.mmd` |
