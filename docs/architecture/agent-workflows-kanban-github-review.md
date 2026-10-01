@@ -2,7 +2,17 @@
 
 # Agent Workflows: Kanban → GitHub → Kimi → Review Gates
 
-This repository participates in the shared OpenHax / Octave Commons automation stack. Agents working here should understand the following workflow before opening or reviewing PRs.
+> **Scope (2026-09-30):** this describes the shared automation stack as it was set up in
+> `open-hax/knoxx`. The workflow files named below (`github-events-discord.yml`,
+> `opencode-issue-agent.yml`, `opencode-code-review.yml`, `code-review-comments-discord.yml`)
+> exist in Knoxx's `.github/workflows/`, **not in Foresight's**, so the bots, Discord mirroring
+> and gates are not configured for this repository. Foresight's own workflows are
+> `alpha-jvm-test.yml`, `chat-work-runtime.yml`, `eta-mu-review.yml` and `repository-census.yml`.
+> Board state everywhere is owned by Rheos; where this text describes `eta-mu kanban sync github`
+> or label/status mapping, treat it as Knoxx-era practice to reconcile with Rheos rather than as
+> current instructions.
+
+Each participating repository (Knoxx is the reference) joins the shared OpenHax / Octave Commons automation stack. Agents working in one of those repositories should understand the following workflow before opening or reviewing PRs.
 
 ## GitHub event visibility
 

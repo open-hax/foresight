@@ -18,7 +18,7 @@
  :claim {:principal :agent/discord-patrol
          :status    :active
          :contract  :contract/discord-patrol}
- :src   :actor-provision/2026-04-18
+ :src   "actor-provision/2026-04-18"
  :p     1.0
  :time  #inst "2026-04-18"}
 
