@@ -47,8 +47,8 @@
 (deftest inventories-declared-consolidation-inputs
   (let [repos (workspace/inventory)
         by-path (into {} (map (juxt :path identity)) repos)]
-    (is (= 24 (count repos)))
-    (is (= 24 (count (set (map :path repos)))))
+    (is (= 25 (count repos)))
+    (is (= 25 (count (set (map :path repos)))))
     (doseq [child ["kanban-orchestrator" "clio" "chat-ui" "rheos"
                    "session-mycology" "sol" "osmos" "receipt-river" "axxium"]]
       (is (= "git-submodule" (:source-type (by-path child))) child)
@@ -66,6 +66,13 @@
     (is (empty? (:manifests (by-path ".agents"))))
     (is (empty? (:manifests (by-path "eta"))))
     (is (nil? (:initialized (by-path "eta"))))
+    (is (= {:source-type "consolidation-input"
+            :ownership "workspace-root"
+            :role "process-supervisor-dsl"
+            :actionable false}
+           (select-keys (by-path "clobber")
+                        [:source-type :ownership :role :actionable])))
+    (is (empty? (:manifests (by-path "clobber"))))
     (is (nil? (:manager (by-path ".agents"))))))
 
 (deftest review-workflow-never-initializes-inventory-only-sources
