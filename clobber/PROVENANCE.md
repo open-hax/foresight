@@ -65,6 +65,7 @@ against the recovered source on 2026-10-01 (open-hax/foresight#120 review).
 - `eval-with-imports!` collects imported files' values in `:import-results`,
   but `eval-file-any` returns only `:result`, so an imported file's value is
   unreachable through the API.
+- `eval-with-imports!` pushes each import onto `*import-stack*` but never checks whether the path is already on it, so an import cycle (A imports B, B imports A) recurses until the stack overflows, re-reading each file through `include-code` on every step. A later port should refuse a path already on the stack.
 - `pm2-clj.eval` shells out to nbb and writes temporary `.cjs` files.
 
 ### Merge and removal
