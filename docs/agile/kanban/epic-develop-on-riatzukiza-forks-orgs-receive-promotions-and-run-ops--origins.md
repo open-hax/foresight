@@ -2,7 +2,7 @@
 category: "kanban"
 labels: "workspace, ci, review"
 type: "epic"
-write-id: "1790903269819-0.w6lawgo2m77c7mm2b9v"
+write-id: "1790907951424-0.mjykn2ekloivpcgrzt"
 points: "17"
 title: "EPIC: develop on riatzukiza forks; orgs receive promotions and run ops"
 priority: "P1"
@@ -53,10 +53,14 @@ A feature PR on a `riatzukiza` fork is reviewed by CodeRabbit under the personal
 
 ```bash
 nbb scripts/project.clj validate
-nbb -cp ~/.agents/skills/pr-flow/scripts ~/.agents/skills/pr-flow/scripts/pr.cljs flow promote
+nbb -cp ~/.agents/skills/pr-flow/scripts ~/.agents/skills/pr-flow/scripts/pr.cljs promote riatzukiza/<fixture-dev-repo>
 ```
 
 ## Out of scope
 
 - Moving or archiving the org repositories, which stay canonical for ops.
 - Paid CodeRabbit subscriptions for the orgs.
+
+---
+Planning review on open-hax/foresight#122: acceptance criteria clarified for protected-main PRs, always-emitted required checks, exact-head review, account/network preflight, shallow ancestry and CLI verification; the card body is the current incoming contract.
+---

@@ -1,14 +1,14 @@
 ---
-uuid: "create-dev-forks"
-title: "Create the riatzukiza dev forks"
-status: "incoming"
-type: "task"
-priority: "P1"
-points: "2"
+category: "kanban"
 labels: "workspace, ci"
 parent: "fork-dev-origins"
-category: "kanban"
-write-id: "1790900466030-0.7dn0nocmvyh5vulugkt"
+type: "task"
+write-id: "1790907950961-0.e1xmd7zhxlmdvgc59e1"
+points: "2"
+title: "Create the riatzukiza dev forks"
+priority: "P1"
+status: "incoming"
+uuid: "create-dev-forks"
 created_at: "2026-10-02T00:21:06.030Z"
 ---
 
@@ -20,10 +20,10 @@ Every entry in `config/dev-origins.edn` exists on GitHub as a fork of its org up
 
 ## Acceptance criteria
 
-- [ ] GIVEN the map WHEN the script runs THEN each missing fork is created with `gh repo fork <org>/<name> --fork-name <dev name> --clone=false` and existing ones are left unchanged.
+- [ ] GIVEN the map WHEN the script runs THEN it first checks `gh api user` and refuses unless the authenticated login is `riatzukiza`; then each missing fork is created with `gh repo fork <org>/<name> --fork-name <dev name> --clone=false`. Existing forks are preserved; their Actions setting may be enabled.
 - [ ] GIVEN a created fork THEN its Actions are enabled and its `main` matches the org `main` SHA at creation time.
 - [ ] GIVEN a pre-existing fork in the map (`riatzukiza/mojomast-opencode`, and any other) THEN its Actions are enabled too, checked through `gh api repos/<fork>/actions/permissions`.
-- [ ] GIVEN the map's `:network/root` for an entry WHEN the preflight runs THEN it lists `riatzukiza`'s existing forks of that root (`gh api repos/<root>/forks`), and refuses to create one if a fork outside the map already occupies the network.
+- [ ] GIVEN the map's `:network/root` for an entry WHEN the preflight runs THEN it paginates the fork network (`gh api --paginate repos/<root>/forks`) and refuses to create one if a `riatzukiza` fork outside the map already occupies the network. An incomplete or failed listing blocks creation rather than being treated as empty.
 - [ ] VERIFY: `--dry-run` after the run reports zero actions.
 
 ## Verification
@@ -36,3 +36,7 @@ nbb scripts/dev_origins.clj check
 
 - Never delete or rename an existing `riatzukiza` repository; report collisions instead.
 - No secrets are copied to the forks; deploy credentials stay in the orgs.
+
+---
+Planning review on open-hax/foresight#122: acceptance criteria clarified for protected-main PRs, always-emitted required checks, exact-head review, account/network preflight, shallow ancestry and CLI verification; the card body is the current incoming contract.
+---
