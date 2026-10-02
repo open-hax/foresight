@@ -457,3 +457,11 @@
   spore: none
   receipt-refs: none
   note: Reusable workflow callers require explicit immutable PR head and reviewed pin.
+
+- ts: 2026-10-02T22:48:00Z
+  task: Prevent deterministic test bytecode artifacts
+  p-efficiency: 0.9
+  p-friction: 0.3
+  p-skill-candidate: 0.2
+  spore: none
+  note: Python unittest discovery generated __pycache__ and correctly failed clean checkout binding; prevent artifact creation while preserving the gate.
