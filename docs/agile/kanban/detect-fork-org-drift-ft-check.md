@@ -20,6 +20,7 @@ A check reports any repository where the org's `main` is not an ancestor of the 
 
 ## Acceptance criteria
 
+- [ ] GIVEN a promotion PR merged on the org with a merge commit M WHEN the post-promotion sync runs (`pr-flow-promotion`) THEN the fork's `main` merges `upstream/main` and M becomes an ancestor of the fork's `main`, so the next check passes without anyone landing an out-of-band hotfix.
 - [ ] GIVEN the org `main` equal to or behind the fork `main` THEN the check passes.
 - [ ] GIVEN a commit on the org `main` that is missing from the fork THEN the check fails, names the repository and the SHAs, and suggests merging `upstream/main` into the fork.
 - [ ] VERIFY: the ancestry decision is a pure function over SHAs and parent lists, tested without network access.

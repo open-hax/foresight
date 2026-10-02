@@ -22,6 +22,8 @@ Every entry in `config/dev-origins.edn` exists on GitHub as a fork of its org up
 
 - [ ] GIVEN the map WHEN the script runs THEN each missing fork is created with `gh repo fork <org>/<name> --fork-name <dev name> --clone=false` and existing ones are left unchanged.
 - [ ] GIVEN a created fork THEN its Actions are enabled and its `main` matches the org `main` SHA at creation time.
+- [ ] GIVEN a pre-existing fork in the map (`riatzukiza/mojomast-opencode`, and any other) THEN its Actions are enabled too, checked through `gh api repos/<fork>/actions/permissions`.
+- [ ] GIVEN the map's `:network/root` for an entry WHEN the preflight runs THEN it lists `riatzukiza`'s existing forks of that root (`gh api repos/<root>/forks`), and refuses to create one if a fork outside the map already occupies the network.
 - [ ] VERIFY: `--dry-run` after the run reports zero actions.
 
 ## Verification

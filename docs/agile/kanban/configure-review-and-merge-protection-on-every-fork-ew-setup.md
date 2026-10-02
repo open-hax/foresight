@@ -22,7 +22,8 @@ Every fork has the CodeRabbit and Codex apps installed. Its `main` is protected 
 
 - [ ] GIVEN a fork WHEN a probe PR is opened THEN CodeRabbit reviews it, and its footer reports the personal plan (Essentials, 5 per hour).
 - [ ] GIVEN each fork THEN `gh api repos/riatzukiza/<name>/branches/main/protection` shows required checks plus `required_conversation_resolution: true`, and `allow_auto_merge` is true.
-- [ ] VERIFY: no required check depends on a secret the fork does not have, since a required check that can never pass blocks every merge.
+- [ ] VERIFY: every required check comes from a workflow with no `paths`/`paths-ignore` filter on `pull_request`, so it reports on every PR. In Foresight, `alpha-jvm-test`, `chat-work-runtime` and `repository-census` are path-filtered and must not be required; a skipped required check stays pending forever.
+- [ ] VERIFY: no required check reads `secrets.*`. GitHub withholds a target repository's secrets from PRs opened from other forks, even when the secret exists on the `riatzukiza` fork, so a secret-dependent required check would block outside contributors. Checked statically over each fork's workflows.
 
 ## Verification
 

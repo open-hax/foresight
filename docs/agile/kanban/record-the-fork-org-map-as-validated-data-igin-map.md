@@ -29,6 +29,7 @@ Every other story reads this map. Known exceptions (observed 2026-10-01):
 - [ ] GIVEN `.gitmodules` and `config/dev-origins.edn` WHEN validated THEN every `open-hax`/`octave-commons` submodule has exactly one entry with `:dev/origin` and `:org/upstream`.
 - [ ] GIVEN an entry whose `:org/upstream` is not a declared submodule WHEN validated THEN it fails, naming the entry.
 - [ ] GIVEN two entries with the same `:dev/origin` WHEN validated THEN it fails.
+- [ ] GIVEN each entry WHEN validated THEN it carries `:network/root`, the root of its upstream's fork network (`anomalyco/opencode` for `open-hax/opencode`; the repository itself for non-forks), and two entries sharing a root with different `:dev/origin` values fail, encoding GitHub's one-fork-per-network rule. Network membership outside the map is checked remotely by `create-dev-forks`.
 - [ ] VERIFY: the law lives in `src/foresight/*.cljc`, with no I/O.
 
 ## Verification

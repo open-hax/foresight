@@ -1,13 +1,13 @@
 ---
-uuid: "fork-dev-origins"
-title: "EPIC: develop on riatzukiza forks; orgs receive promotions and run ops"
-status: "incoming"
-type: "epic"
-priority: "P1"
-points: "13"
-labels: "workspace, ci, review"
 category: "kanban"
-write-id: "1790900465598-0.2czmco9mqytq0wisg31"
+labels: "workspace, ci, review"
+type: "epic"
+write-id: "1790903269819-0.w6lawgo2m77c7mm2b9v"
+points: "17"
+title: "EPIC: develop on riatzukiza forks; orgs receive promotions and run ops"
+priority: "P1"
+status: "incoming"
+uuid: "fork-dev-origins"
 created_at: "2026-10-02T00:21:05.598Z"
 ---
 
@@ -41,9 +41,9 @@ The fork is where work is reviewed; the org is where reviewed work becomes opera
 - `create-dev-forks` — create the forks and enable Actions — needs `dev-origin-map`
 - `fork-review-setup` — CodeRabbit, Codex, branch protection and auto-merge on every fork — needs `create-dev-forks`
 - `foresight-submodules-to-forks` — `.gitmodules`, project model and local remotes point at the forks — needs `create-dev-forks`
-- `pr-flow-promotion` — a `promote` stage and command in pr-flow — needs `dev-origin-map`
+- `pr-flow-promotion` — a `promote` stage and command in pr-flow, including the post-merge sync back into the fork — needs `dev-origin-map` and `fork-org-drift-check`
 - `org-ops-only` — org `main` accepts only promotion branches; documented in services — needs `pr-flow-promotion`
-- `fork-org-drift-check` — org `main` must always be an ancestor of fork `main` — needs `dev-origin-map`
+- `fork-org-drift-check` — org `main` must always be an ancestor of fork `main` — needs `dev-origin-map`; predecessor of `pr-flow-promotion`
 
 ## Definition of done
 
