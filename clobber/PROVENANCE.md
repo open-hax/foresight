@@ -99,6 +99,30 @@ against the recovered source on 2026-10-01 (open-hax/foresight#120 review).
 
 ### CLI and environment
 
+- `clobber.cli/run-pm2!` uses `spawnSync` with `:shell true` when forwarding
+  arguments. A later adapter must pass the argument vector directly so shell
+  metacharacters remain literal PM2 arguments.
+- `package.json` names `test/run_macro_tests.clj` and
+  `test/integration_test.clj`, but neither file is present in the recovered
+  tree. The archived package's test command cannot pass as written.
+- `pm2-clj.cli/apply-profile` substitutes `{}` for a missing mode; an unknown
+  deployment profile silently renders the base ecosystem instead of refusing
+  the selection.
+- `pm2-clj.eval/eval-via-nbb!` and `eval-code-via-nbb!` remove the `ns` form
+  before running code under nbb. A source file that requires other namespaces
+  therefore loses those imports at evaluation time.
+- `pm2-clj.dsl/fragment` accepts a generic map before checking `proto?`.
+  Prototype records with map behavior can bypass materialization during
+  composition; a later port must classify prototypes first.
+- `pm2-clj.dsl/group` calls `services`, which returns a map of app prototypes
+  keyed by service ID and lacks the `:stack` promised in
+  `docs/notes/infrastructure/pm2-clj-dsl-sugar.md`. Passing that map to
+  `compose` treats it as an ecosystem fragment.
+- `pm2-clj.runtime/export!` calls `(materialize v opts)` even when `opts` is
+  nil. The two-argument `materialize` then skips the one-argument path that
+  reads `PM2_CLJ_ENTRY` and `PM2_CLJ_MODE`, so the default export ignores those
+  selection variables.
+
 - `pm2-clj.cli/set-in-eco` uses only `(first ks)` for `apps.<name>.…` keypaths,
   so `apps.api.env.PORT` is truncated to `:env`, and `apps.api=x` creates a
   stray `:value` key. Nested app keypaths are unsupported.
