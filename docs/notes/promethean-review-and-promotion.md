@@ -31,7 +31,11 @@ five-round review budget remains a deliberate stopping boundary, not a loop
 that retries until a model agrees. Historical requests above that budget need
 an explicit disposition before another round.
 
-Feature branches use `{feat,chore,docs,fix,...}/*` in their mapped personal fork.
+The target process uses `{feat,chore,docs,fix,...}/*` in the mapped personal fork.
+It activates per repository only after mapping, protection, trusted admission
+and staging orchestration are implemented and verified. The existing authorized
+PR path remains in force until that activation; this planning PR does not
+change remotes or enable a controller.
 Open a draft while preparing artifacts; when an installed reviewer cannot read
 drafts, make it ready with auto-merge off. Planning review settles scope,
 acceptance, estimates and dependencies before Rheos moves the stories to ready.
@@ -55,10 +59,10 @@ flowchart LR
   E --> I[Affected Foresight integration PR]
   O --> C[Org checks and current-head review]
   C --> U[Org merge and protected fork sync PR]
-  U --> M
+  U --> X[Terminal sync receipt and reflection]
 ```
 
-A successful **fork** merge requests DigitalOcean staging through the trusted
+A qualified **feature** merge in an activated fork requests DigitalOcean staging through the trusted
 Services controller. PR code builds in an ephemeral sandbox with no deployment
 or signing credentials. The staging controller receives immutable artifacts,
 source SHA and verified review/check evidence, rechecks admission, and emits a
@@ -66,14 +70,46 @@ separate deployment receipt. This replaces the earlier plan's implication that
 only an org merge starts staging. Each application keeps its existing branch
 and production policy until its reviewed migration is activated.
 
-After staging succeeds, open or reuse `promote/<sha>` **inside the org**. This
-preserves the org's normal secret boundary instead of running privileged fork
-code through `pull_request_target`. Upstream merge commits change the head:
-review evidence must be recomputed where a new PR head is introduced. Sync org
-main back into the protected fork with a PR; never force-push either main.
+After staging succeeds, open or reuse `promote/<full-40-hex-sha>` **inside the
+org** for the receipt-bound fork merge X. Existing branches/PRs must match X;
+a collision or conflicting binding is rejected, never overwritten. An in-org
+PR does not isolate secrets. Its candidate workflows, builds and dependency
+hooks also run with read-only tokens and without deployment or signing secrets.
+Privileged operations use a trusted external App or base-pinned workflow that
+never checks out or executes candidate code; protected-environment approval may
+add an operator gate. Neither `pull_request_target` nor a familiar check name
+grants trust to candidate code. GitHub documents this
+[same-repository PR risk](https://docs.github.com/en/actions/concepts/security/compromised-runners).
+
+The required admission context is bound to an expected App identity and an
+independently pinned gate implementation/configuration. It validates source
+repository, PR head, qualified fork merge X, artifact digest, staging receipt
+ID/hash and trusted issuer. A manually opened `promote/*` PR must satisfy the
+same proof; branch naming or reachability alone is insufficient. Both fork and
+org main forbid direct writes and bypass, force pushes and deletion. Read back
+classic protection and active applicable repository/inherited rulesets.
+
+Require strict up-to-date checks or a merge queue. Qualification records the
+base SHA and tested merge candidate; a later base change invalidates that
+combination and requires fresh merge-candidate checks. New PR heads require
+fresh review evidence. This follows GitHub's
+[protected-branch contract](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches).
+Sync org main back into the protected fork with a `sync/<full-org-sha>` PR;
+never force-push either main.
+
+The controller validates an admitted origin/purpose record: `feature` may
+request staging, `upstream-sync` is terminal after its qualified merge and
+reflection, and unknown purposes are rejected. Sync merges request no staging,
+promotion or Foresight integration. The trusted App's reconciliation record
+binds purpose, repositories, PR and exact SHAs; a branch prefix or editable
+label cannot supply this authority. Duplicate-event keys alone cannot prevent
+a loop whose successive sync merges have new SHAs.
 
 The Foresight PR updates only mapped, affected gitlinks after the child commit
-is reachable from its approved destination. It records the staging receipt and
+is reachable from its approved destination and the successful staging receipt
+covers that exact gitlink X. If an org merge creates Y, it proves X reachable
+from Y; it cannot silently substitute Y for staged X. A desired Y gitlink needs
+its own exact staging proof. The PR records the receipt ID/hash, issuer and
 upstream PR rather than claiming that every submodule was redeployed. A GitHub
 App reconciliation loop opens missing PRs idempotently; duplicate merge events
 must not create duplicate deployments or promotion PRs.
@@ -96,6 +132,12 @@ API contracts, Clio admits immutable event records, Katamorph declares their
 shapes, and Services owns hosting. Mongo protocol records may index/project
 these resources; database rows do not replace admitted Clio records. EDN is the
 portable default artifact for Sol, with transport/storage adapters at the edge.
+
+Knoxx mutating job endpoints require Axxium principal, installation, repository
+and actor bindings or an explicit operator scope. Authentication alone does not
+authorize another repository's job. Status/read, cancel and retry have separate
+permissions; cancellation is idempotent and retries receive a new immutable
+attempt identity. Cross-principal/repository denial is an activation fixture.
 
 Reuse `knoxx.promethean.rest` as the declared public ingress and preserve its
 existing routes. The repository's GitHub namespace scaffolding is currently
@@ -126,6 +168,8 @@ Checked against current official documentation on October 3:
 - Public repositories below ten stars require manual review requests. Request
   once per head after the actual cooldown; an unacknowledged request remains a
   pending observation, not proof of acceptance or a reason to flood comments.
+- OSS allowance is scoped per repository as well as per developer; another
+  repository's footer does not establish this PR's reset time.
 - Personal subscriptions do not grant org-repository subscriptions. Native PR
   review and CLI review are distinct channels with distinct evidence.
 - Agentic API keys authenticate the headless CLI and select their billing
