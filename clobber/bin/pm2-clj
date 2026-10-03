@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * pm2-clj wrapper
- * 
+ *
  * Simple pass-through wrapper that:
  * - Parses --mode and --entry flags
  * - Sets PM2_CLJ_MODE and PM2_CLJ_ENTRY environment variables

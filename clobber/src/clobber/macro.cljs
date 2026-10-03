@@ -27,9 +27,9 @@
 
 (defn defapp
   "Define a PM2 application.
-   
+
    (defapp \"my-app\" {:script \"dist/index.js\" :instances 1})
-   
+
    Args:
      name: String name of the app
      opts: Map of PM2 configuration options"
@@ -41,10 +41,10 @@
 
 (defn defprofile
   "Define a named profile with app overrides.
-   
+
    (defprofile :dev
      (defapp \"dev-app\" {:env {:NODE_ENV \"development\"}}))
-   
+
    The profile can override base apps or add new ones."
   [name & body]
   ;; Ensure registry is fresh for profile
@@ -70,9 +70,9 @@
 
 (defn ecosystem
   "Compose all defined apps into an ecosystem configuration.
-   
+
    (ecosystem) returns {:apps [...]} with all defapp definitions.
-   
+
    Options:
      :profile - keyword, apply profile overrides"
   [& {:keys [profile] :or {profile nil}}]
@@ -83,15 +83,15 @@
 
 (defn ecosystem-output
   "Generate and print ecosystem configuration as EDN to stdout.
-   
+
    Used by nbb subprocess execution to pass macro-expanded data
    back to pm2-clj/clobber.
-   
+
    Usage:
      (clobber.macro/ecosystem-output)
      ;; or
      (clobber.macro/ecosystem-output :dev)
-   
+
    Prints EDN to stdout for capture by parent process."
   [& [profile-kw]]
   (let [eco (if profile-kw
@@ -102,10 +102,10 @@
 ;; Environment variable helper
 (defn env-var
   "Get environment variable with fallback.
-   
+
    (env-var :VAR_NAME :fallback)
    (env-var :VAR_NAME)  ; no fallback
-   
+
    Returns the env var value or fallback."
   ([var-sym]
    (get-in js/process.env [(name var-sym) ""]))

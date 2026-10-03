@@ -163,10 +163,10 @@
 
 (defn eval-file-any
   "Evaluate any .cljs file, supporting imports.
-   
+
    This function is used for imported files in ecosystem configurations.
    It resets registries before evaluation to ensure isolation.
-   
+
    (eval-file-any \"libs/shared-config.cljs\")"
   [path]
   (let [ext (u/ext path)]
@@ -190,10 +190,10 @@
 
 (defn eval-file
   "Evaluate root ecosystem file.
-   
+
    This function is used for the main ecosystem.cljs file.
    It sets up: evaluation context and returns: ecosystem config.
-   
+
    (eval-file \"ecosystem.cljs\")"
   [path]
   (let [ext (u/ext path)]

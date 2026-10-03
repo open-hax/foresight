@@ -89,11 +89,11 @@
 
 (defn materialize
   "Turn a library/ecosystem/proto/fn into a final PM2 config map.
-   
+
    Options:
      entry: keyword from PM2_CLJ_ENTRY env (or passed directly)
      mode:  keyword from PM2_CLJ_MODE  env (or passed directly)
-   
+
    Selection order:
      1. If value is a library, pick entry from exports
      2. Apply mode profile if present"
@@ -113,14 +113,14 @@
 
 (defn export!
   "Compute and set module.exports for PM2.
-   
+
    This is the critical line that makes the compiled CLJS behave like
    a real CommonJS module that PM2 can require().
-   
+
    Usage:
      (rt/export! my-config)
      (rt/export! my-config {:entry :dev :mode :prod})
-   
+
    After this runs, `require('./ecosystem.config.cjs')` returns the config."
   ([v]
    (export! v nil))

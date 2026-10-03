@@ -14,7 +14,8 @@ it gains no execution authority from being here
 | Recovered from | commit `01d0f7200^` (parent of the 2026-04-17 snapshot "stale file cleanup + .gitmodules prune") |
 | Tree | `90e0b2a170099547b73c0df2c3b9c78c17336dc2` |
 | Recovered on | 2026-10-01, via `git archive 01d0f7200^ pm2-clj-project` |
-| Copy mode | whole, byte-for-byte (user decision: "port it whole, then refactor") |
+| Recovery mode | whole, byte-for-byte (user decision: "port it whole, then refactor") |
+| Subsequent transformation | trailing whitespace normalization in five paths; see below |
 
 The surviving traces in `~/devel` are a broken symlink `bin/clobber ->
 ../pm2-clj-project/bin/clobber` and a compiled bundle in `~/devel/.clobber/`.
@@ -29,7 +30,16 @@ and a CLI that renders to ecosystem JSON/CJS and delegates to `pm2`.
 
 ## Known defects at recovery (not fixed in this copy)
 
-The copy stays byte-for-byte; these are recorded, not fixed. Each was checked
+The initial recovered payload remains inspectable byte-for-byte at Foresight
+commit `fcf53352345ddb64a0a5dd49eab6390ce7f19e81` and the original source tree
+above. October 3's evidence review found that its trailing whitespace failed
+the required diff-hygiene gate. The checked-in copy subsequently removes
+trailing spaces/blank whitespace only in `AGENTS.md`, `bin/pm2-clj`,
+`src/clobber/macro.cljs`, `src/pm2_clj/eval.cljs` and
+`src/pm2_clj/runtime.cljs`. Ignoring those whitespace changes yields an empty
+diff for all five paths; no behavior was repaired and no gate was waived.
+
+The recovered implementation defects remain recorded, not fixed. Each was checked
 against the recovered source on 2026-10-01 (open-hax/foresight#120 review).
 
 ### Entry points and builds
