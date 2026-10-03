@@ -18,6 +18,8 @@ created_at: "2026-10-03T10:47:23.956Z"
 
 The user directed Sol to consume Clio. The merged Node22 prerequisite at riatzukiza/sol#2 supplies the baseline. Exact Clio788cdd3434615a7932b924e68520dbf7f88408c2 was tested through an anonymous immutable Gitlibs install and real filesystem operations in both CommonJS and ESM. This three-point slice replaces episode event admission, not the still-unmigrated session store.
 
+Proposed dependency, not engine-admitted: this card depends on canonical Node22 prerequisite `146f1b47-c6a7-5a37-996b-a381dd91f6b6`, whose code baseline is Sol #2 merge `72fdecca292859d92cba48b686ec6fe9c43a9133`. Before readiness, admit and read back that relationship through Rheos. The PR URL and this body text do not substitute for a validated engine edge. Canonical relationship authoring is tracked in open-hax/rheos#3.
+
 ## Outcome
 
 Sol's episode event shape/catalog and appender consume Clio's complete event/stream/schema law and actual ledger I/O. A configured legacy Mongo capability cannot silently become a successful no-op.
@@ -32,8 +34,9 @@ Sol's episode event shape/catalog and appender consume Clio's complete event/str
 
 ## Acceptance criteria
 
-- Invalid UUID, stream, schema, causal facts and predecessor envelopes fail at Clio's canonical boundary.
-- Real Sol-adapter tests perform on-disk append/readback/exact retry/reopen and demonstrate UUID collision, stream-slot conflict, missing partition, stream-gap and failed-append causality behavior. Callback-only mocks do not qualify.
+- Append-admission fixtures demonstrate UUID/schema/basic event-identity validation, exact duplicate retry, ID/stream-slot conflict and missing partition errors through Clio.
+- Complete-history canonicalization fixtures demonstrate missing parents, stream gaps and predecessor-causality failures. Missing causes may belong to another physical partition; append alone does not establish complete-history validity. Reopen/continuation consumes validated canonical history without copying upstream laws into Sol.
+- Real Sol-adapter tests perform on-disk append/readback/exact retry/reopen and failed-append causality checks. Callback-only mocks do not qualify.
 - All actual Node22 runtime tests/builds/native production import/health/SIGTERM checks pass locally and on CI with zero compiler warnings.
 - No production episode import uses event-ledger, while the intermediate session dependency is accurately disclosed.
 - Historical ledger/receipt bytes stay preserved; current pin/source catalog claims match actual dependency metadata.
