@@ -6,9 +6,9 @@ Treat direct `.gitmodules` entries as independently owned repositories. Do not
 rewrite a submodule's package-manager policy, recurse into nested packages, or
 modify unrelated submodule dirt while changing root orchestration.
 
-`.agents/` and `eta/` are declared consolidation inputs curated by this root;
-`.agents/` retains its independent nested Git ownership while `eta/` is
-root-owned.
+`.agents/`, `eta/` and `clobber/` are declared consolidation inputs curated by this root;
+`.agents/` retains its independent nested Git ownership while `eta/` and
+`clobber/` are root-owned.
 Inventory them without following nested Git repositories, skills, symlinks, or
 package manifests. Their presence in inventory does not grant execution
 authority; compatibility originals may remain in their existing locations.
@@ -56,6 +56,7 @@ candidates, and accepted lifts are not interchangeable.
 | `axxium` | open-hax/axxium | identity-auth-kernel | Identity and authorization kernel; existing repository history is preserved |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
+| `clobber` | (root-owned, recovered from riatzukiza/devel) | process-supervisor-dsl | Recovered pm2-clj/clobber PM2 DSL: merge law, prototypes, profiles (consolidation input; destined for the shx/Hexis supervisor IR; see `clobber/PROVENANCE.md`) |
 | `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |
 | `archaeology` | (root-owned native component) | causal-architecture-archaeology | Normalized Clio archaeology events, causal run composition, and disposable projections |
 
