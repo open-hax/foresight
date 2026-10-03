@@ -136,8 +136,12 @@ Checked against current official documentation on October 3:
 The local Agentic-key probe authenticated CLI **0.8.2** in an isolated auth
 home and reported **5 of 5** included reviews available. The release archive was
 verified against its published SHA256SUMS before extraction. Keys remain outside
-Git. This proves headless access and reported allowance; it does not prove a
-hosted worker, remote org access, or a native GitHub review publication.
+Git. A real committed deep CLI review of this PR at `b6b75f8` then completed with
+exit0, full17-file coverage and one minor shell-placeholder finding, corrected
+in the follow-up. Its artifact digest and base/head binding are recorded in the
+review-operation receipt and PR comment. This proves a usable local CLI review
+channel; it does not prove a hosted worker, remote org access, or native GitHub
+review publication.
 
 Sources: [plans](https://docs.coderabbit.ai/management/plans),
 [headless authentication](https://docs.coderabbit.ai/cli/headless-cli-integration),

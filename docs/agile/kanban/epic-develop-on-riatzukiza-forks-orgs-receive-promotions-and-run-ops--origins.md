@@ -53,7 +53,8 @@ A feature PR on a `riatzukiza` fork invites CodeRabbit, Codex, MiMo and Kimi and
 
 ```bash
 nbb scripts/project.clj validate
-nbb -cp ~/.agents/skills/pr-flow/scripts ~/.agents/skills/pr-flow/scripts/pr.cljs promote riatzukiza/<fixture-dev-repo>
+PR_DEV_REPO=riatzukiza/foresight
+nbb -cp ~/.agents/skills/pr-flow/scripts ~/.agents/skills/pr-flow/scripts/pr.cljs promote "$PR_DEV_REPO"
 ```
 
 ## Out of scope
