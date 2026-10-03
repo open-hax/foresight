@@ -13,7 +13,11 @@ use cases and ownership; they do not make every implementation interchangeable.
 
 The October 3 request changes reviewer admission: invite **CodeRabbit, Codex,
 MiMo and Kimi**, but require **one eligible approving review on the exact current
-head**. All required deterministic checks and findings settlement still apply.
+head**. A formal GitHub `APPROVED` review or an explicit completed passing /
+“no issues” verdict can satisfy this rule. Verify the eligible reviewer identity
+and the current commit coverage from the actual provider record; a generic green
+status or a comment that merely acknowledges the request cannot qualify.
+All required deterministic checks and findings settlement still apply.
 A stale approval, acknowledgement, skipped review, quota error, timeout or
 partial result cannot satisfy the approval requirement. A review that later
 requests changes supersedes its earlier approval. An optional worker failing

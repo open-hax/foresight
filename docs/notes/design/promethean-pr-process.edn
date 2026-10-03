@@ -8,7 +8,10 @@
  :review/policy {:invited #{:coderabbit :codex :mimo :kimi}
                  :minimum-approvals 1
                  :approval-binding :exact-current-head
-                 :approval-state :approved
+                 :approval-evidence #{:github-approved :explicit-passing-verdict}
+                 :verdict-requires #{:trusted-reviewer-identity :completed-review
+                                     :verified-current-commit-coverage}
+                 :non-verdicts #{:acknowledged :skipped :rate-limited :partial}
                  :required-checks :repository-policy
                  :findings-settlement :all-observed
                  :blocking-severities #{:p0 :p1}
