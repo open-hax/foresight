@@ -3,11 +3,11 @@ category: "kanban"
 labels: "sol, review, runtime, ci"
 parent: "330aa63f-f697-5bd6-9fc0-3f19fbea2be4"
 type: "task"
-write-id: "1791018881342-0.rmh5rq7cipobiq5nfrr"
+write-id: "1791020160586-0.a0b4ktud1g6o7mny9y9"
 points: "3"
 title: "Restore reproducible Sol Node 22 runtime prerequisites"
 priority: "P1"
-status: "ready"
+status: "in_progress"
 uuid: "146f1b47-c6a7-5a37-996b-a381dd91f6b6"
 created_at: "2026-10-03T09:08:18.822Z"
 ---
@@ -49,4 +49,6 @@ No hosted review-worker implementation, Git-pin migration, service activation, d
 
 ---
 Scope admitted as 3 points from merged Sol#1 reviewed 17c568f005792f601cd949a2f9c79f774effc62b and Foresight#122 merged 4aa6baf780c5d85caa5c73fe908d19832f9e9f3a. Node22 red evidence is recorded in the Sol worker handoff. Readiness covers standalone dependency closure and truthful test-result gating; worker hosting, activation, deployment and immutable Git-pin changes remain outside this card. If restored tests expose further application defects, report and split scope instead of counting unavailable or partial output as a pass.
+
+Implementation is under review in riatzukiza/sol#2 at11f19fa1d4519c770d05f833f7b1a1994fd37992. Worker reports repeated frozen install165packages,125CLJS tests467assertions, zero-warning server compile, production-only152package install, real localhost health200 and SIGTERMexit0, thirteen guard fixtures and unchanged Git pins. These are local observations; hosted runtime CI currently fails and exact-head review is pending, so qualification and completion remain blocked.
 ---
