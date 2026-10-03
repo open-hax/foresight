@@ -1,14 +1,15 @@
 ---
-uuid: "e6aa52eb-681d-4d79-8605-87aa1fc8b4ca"
-title: "Admit portable source-bearing document observations in Alpha"
-type: "story"
 category: "content"
-status: "incoming"
-priority: "P1"
-points: 3
 labels: "alpha, content, portability, contracts"
-epic: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
 parent: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
+type: "story"
+write-id: "1791011469813-0.ygkkpuj5ppara9agql"
+points: "3"
+title: "Admit portable source-bearing document observations in Alpha"
+priority: "P1"
+status: "ready"
+epic: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
+uuid: "e6aa52eb-681d-4d79-8605-87aa1fc8b4ca"
 ---
 
 # Admit portable source-bearing document observations in Alpha

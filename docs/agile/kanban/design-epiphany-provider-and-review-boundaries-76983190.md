@@ -1,14 +1,15 @@
 ---
-uuid: "76983190-be58-47ac-849c-c8a9f37fe573"
-title: "Design Epiphany source-provider and review boundaries"
-type: "story"
 category: "content"
-status: "incoming"
-priority: "P1"
-points: 3
 labels: "epiphany, content, providers, review, design"
-epic: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
 parent: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
+type: "story"
+write-id: "1791011471191-0.kwevbs2ln8s3u690jo8"
+points: "3"
+title: "Design Epiphany source-provider and review boundaries"
+priority: "P1"
+status: "ready"
+epic: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
+uuid: "76983190-be58-47ac-849c-c8a9f37fe573"
 ---
 
 # Design Epiphany source-provider and review boundaries

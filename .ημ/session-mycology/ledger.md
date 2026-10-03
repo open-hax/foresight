@@ -457,3 +457,12 @@
   spore: none
   receipt-refs: rheos-content-provider-prs
   note: Late skill selection requires truthful candidate/planning separation rather than invented ready or red history. Focused real file write/read evidence is stronger than helper-only success but does not qualify transports or ledger durability. Accepted volatile claims need retained sufficient evidence even when live content is ephemeral. Existing review/account and boundary lessons cover this turn; no new spore.
+- ts: 2026-10-03T07:23:28.027132808Z
+  session: /home/err/.codex/worktrees/rheos-content-contracts/foresight
+  task: Publish and qualify content-review preparation through pr-flow
+  p-efficiency: 0.82
+  p-friction: 0.62
+  p-skill-candidate: 0.48
+  spore: none
+  receipt-refs: rheos-content-provider-prs
+  note: Independent tag probes caught native warnings that error-only validation missed; red-before-green examples qualify invalid replacement refusal at real disk boundary. Existing pinned dependency bootstrap resolved initially unqualified full tests. Qualify prospective readiness without manufacturing chronology. Exact-head zero-comment CodeRabbit walkthrough is distinct from current strict gate's formal review-body requirement. Existing boundary/review/tool-preflight lessons cover this turn; no new spore.

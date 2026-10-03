@@ -1,14 +1,15 @@
 ---
-uuid: "819717c4-735b-4dd5-b5b7-ba860d3942f9"
-title: "Preserve unrelated Rheos metadata and body through real writes"
-type: "story"
 category: "content"
-status: "incoming"
-priority: "P1"
-points: 5
 labels: "rheos, markdown, preservation, write-boundary, regression"
-epic: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
 parent: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
+type: "story"
+write-id: "1791012105115-0.6hl8ydsba8hf01j3083"
+points: "5"
+title: "Preserve unrelated Rheos metadata and body through real writes"
+priority: "P1"
+status: "review"
+epic: "e7cdf5cf-423e-49fc-aca8-6ed6055f1cd5"
+uuid: "819717c4-735b-4dd5-b5b7-ba860d3942f9"
 ---
 
 # Preserve unrelated Rheos metadata and body through real writes
