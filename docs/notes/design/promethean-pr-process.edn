@@ -1,0 +1,97 @@
+;; SPDX-License-Identifier: GPL-3.0-or-later
+;; Proposed constellation composition; canonical execution law belongs to its owners.
+{:workflow/id :foresight/promethean-pr-process
+ :workflow/version 2
+ :workflow/status :proposed
+ :workflow/decision-source "User request 2026-10-03"
+ :workflow/skill-pack "riatzukiza/.agents/skills/pr-flow"
+ :review/policy {:invited #{:coderabbit :codex :mimo :kimi}
+                 :minimum-approvals 1
+                 :approval-binding :exact-current-head
+                 :approval-evidence #{:github-approved :explicit-passing-verdict}
+                 :verdict-requires #{:trusted-reviewer-identity :completed-review
+                                     :verified-current-commit-coverage}
+                 :non-verdicts #{:acknowledged :skipped :rate-limited :partial}
+                 :required-checks :repository-policy
+                 :findings-settlement :all-observed
+                 :blocking-severities #{:p0 :p1}
+                 :max-rounds 5
+                 :native-and-imported-evidence :distinct}
+ :admission/trust {:producer :expected-github-app
+                   :implementation :independently-pinned-external-or-base
+                   :candidate-control :forbidden
+                   :candidate-token :read-only
+                   :candidate-secrets :none
+                   :privileged-candidate-execution :forbidden
+                   :merge-binding #{:repository :pr-head :base-sha :tested-merge-sha}
+                   :base-protection :strict-checks-or-merge-queue
+                   :main-direct-writes :forbidden
+                   :main-bypass :forbidden}
+ :promotion/binding #{:repository :qualified-feature-merge-sha :artifact-digest
+                      :staging-receipt-id :staging-receipt-hash :trusted-issuer}
+ :promotion/branch-id :full-40-hex-sha
+ :integration/gitlink :exact-staged-sha-reachable-from-approved-destination
+ :dispatch/purposes {:feature :staging-eligible
+                     :upstream-sync :terminal-reflection-only
+                     :unknown :reject}
+ :dispatch/purpose-authority :trusted-app-admitted-repository-pr-sha-record
+ :api/authorization {:authority :axxium
+                     :bindings #{:principal :installation :repository :actor}
+                     :permissions #{:read-job :cancel-job :retry-job}
+                     :operator-scope :explicit
+                     :retry-identity :new-immutable-attempt}
+ :workflow/ownership {:admission :eta-mu :execution :sol :api :knoxx
+                      :records :clio :shapes :katamorph :hosting :services
+                      :integration :foresight :skills :agents}
+ :workflow/nodes
+ [{:node/id :muse :skill "pr-muse-connect" :produces [:muse/link-map]}
+  {:node/id :plan :skill "pr-sprint-planning" :produces [:card/epic :card/stories]}
+  {:node/id :planning-review :skill "pr-review-settlement" :produces [:review/settlements]}
+  {:node/id :ready :authority :rheos :produces [:card/ready-evidence]}
+  {:node/id :red :skill "pr-red-green" :produces [:test/red-evidence]}
+  {:node/id :green :skill "pr-red-green" :produces [:test/green-evidence]}
+  {:node/id :review :skill "pr-review-settlement" :produces [:review/exact-head-evidence]}
+  {:node/id :fork-merge :skill "pr-review-to-merge"
+   :requires [:dispatch/admitted-feature-purpose]
+   :produces [:git/merge-sha :git/tested-merge-evidence]}
+  {:node/id :staging :owner :services :implementation :pending
+   :consumes [:git/merge-sha :git/tested-merge-evidence :artifact/digest
+              :review/exact-head-evidence :dispatch/admitted-feature-purpose]
+   :produces [:deployment/staging-receipt]}
+  {:node/id :promotion-prs :owner :eta-mu :implementation :pending
+   :consumes [:deployment/staging-receipt]
+   :produces [:github/in-org-promotion-pr :github/foresight-integration-pr]}
+  {:node/id :upstream-merge :skill "pr-review-to-merge" :produces [:git/upstream-merge-sha]}
+  {:node/id :fork-sync-pr :owner :eta-mu :implementation :pending
+   :purpose :upstream-sync :after-qualified-merge :terminal
+   :produces [:github/protected-fork-sync-pr]}
+  {:node/id :reflection :skill "session-mycology" :uses ["receipt-river"]}]
+ :workflow/edges
+ [[:muse :plan] [:plan :planning-review] [:planning-review :ready]
+  [:ready :red] [:red :green] [:green :review] [:review :fork-merge]
+  [:fork-merge :staging] [:staging :promotion-prs]
+  [:promotion-prs :upstream-merge] [:upstream-merge :fork-sync-pr]
+  [:fork-sync-pr :reflection]]
+ :hosting/phases
+ [{:phase/id :persistent-workers :implementation :pending
+   :trigger :actions-dispatch :models #{:mimo :kimi}
+   :execution :isolated-server-jobs :state :durable
+   :publisher :trusted-eta-mu-ai
+   :credentials :publisher-only}
+  {:phase/id :interactive-app :implementation :pending
+   :trigger #{:github/signed-webhook :periodic-reconciliation}
+   :ingress "knoxx.promethean.rest"
+   :depends-on :persistent-workers}]
+ :verification/required
+ #{:current-head-approval :required-checks :finding-dispositions
+   :clean-revision-binding :durable-restart-replay :duplicate-job-idempotency
+   :stale-publication-rejection :publisher-secret-isolation
+   :staging-exact-merge-sha :promotion-deduplication :protected-fork-sync
+   :candidate-gate-tampering-rejection :foreign-check-issuer-rejection
+   :base-change-merge-requalification :exact-staging-receipt-admission
+   :sync-merge-terminal-replay :unknown-purpose-rejection
+   :cross-principal-job-mutation-denial :promotion-sha-prefix-collision}
+ :activation/prerequisites #{:verified-fork-map :verified-protection
+                            :trusted-required-gate :trusted-staging-controller}
+ :activation/unmigrated-path :existing-authorized-repository-process
+ :activation/status :not-activated}

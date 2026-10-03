@@ -143,3 +143,43 @@ must remain visible. Never convert an unavailable action into a pass.
 
 Cards live under `docs/agile/kanban`. Rheos events and receipts belong under
 `.ημ/`; no provenance ledger may be created elsewhere.
+
+
+## Pull requests: Promethean review and promotion
+
+Use the canonical `~/.agents/skills/pr-flow` skill pack for every PR interaction.
+The process and deployment handoff are specified in
+[`docs/notes/promethean-review-and-promotion.md`](docs/notes/promethean-review-and-promotion.md)
+and [`docs/notes/design/promethean-pr-process.edn`](docs/notes/design/promethean-pr-process.edn).
+
+- The target process develops on `{feat,chore,docs,fix,...}/*` branches in the
+  mapped `riatzukiza/*` fork. Activate it per repository only after the fork map,
+  required trusted gate, protection and staging controller are implemented and
+  verified. Until then, retain that repository's existing authorized PR path.
+  Invite CodeRabbit, Codex, MiMo and Kimi; admission requires one eligible
+  approving review bound to the current head, plus every required deterministic
+  check and the documented disposition of every finding.
+- Planning artifacts precede implementation; use Rheos for ready transitions,
+  then laws/tests in red and domain/adapters in green. Keep automatic merge off
+  until the current head is qualified. Use merge commits with a head guard.
+- After activation, only a qualified feature merge with trusted origin/purpose
+  evidence starts Services staging at its exact merge SHA. Protected upstream
+  sync merges are terminal; unknown purposes fail closed. Exact staging proof
+  admits an in-org promotion PR and the affected Foresight integration PR.
+  Required gates bind the current base and tested merge candidate as well as
+  the PR head. A proposed workflow or build is not live deployment evidence.
+  Production retains its separate qualification gate.
+- Optional reviewers being unavailable, skipped or rate-limited never become
+  approvals. Settle their actual findings; never impersonate their identities.
+  Keep native provider reviews distinct from imported CLI worker evidence.
+- Host model execution in isolated persistent workers; signing credentials stay
+  with the trusted publisher. Use the existing eta-mu/Sol/Knoxx/Clio/Katamorph
+  seams. Do not add a second board engine or event-ledger authority here.
+- Candidate workflows, builds and dependency hooks run without signing or
+  deployment secrets and with read-only tokens, including same-repository PRs.
+  Privileged admission/publication uses a trusted App or pinned base workflow
+  that never executes candidate code. Gate code/configuration and required App
+  identity must be outside candidate control before process activation.
+
+These are the user's October 3 policy decisions. The linked contract records
+which parts are implemented and which still require reviewed activation.
