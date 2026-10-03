@@ -448,3 +448,12 @@
   spore: none
   receipt-refs: 2026-09-03T00:17:49.293972342Z
   note: Reusable lessons: deployment hooks should distinguish durable acceptance from asynchronous completion; model output remains untrusted until a required-first server-bound tool validates and persists it; CLJS native await can accidentally await a Promise-valued argument before a timeout wrapper exists, so lifecycle races belong behind a non-async Promise boundary. No spore was created because the cross-repository pattern should stabilize through another deployment before promotion.
+- ts: 2026-10-03T06:56:27.245379331Z
+  session: /home/err/.codex/worktrees/rheos-content-contracts/foresight
+  task: Prepare Rheos document boundaries and source-preservation PRs on personal forks
+  p-efficiency: 0.84
+  p-friction: 0.52
+  p-skill-candidate: 0.42
+  spore: none
+  receipt-refs: rheos-content-provider-prs
+  note: Late skill selection requires truthful candidate/planning separation rather than invented ready or red history. Focused real file write/read evidence is stronger than helper-only success but does not qualify transports or ledger durability. Accepted volatile claims need retained sufficient evidence even when live content is ephemeral. Existing review/account and boundary lessons cover this turn; no new spore.
