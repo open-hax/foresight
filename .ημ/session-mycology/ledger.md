@@ -468,6 +468,30 @@
   spore: none
   note: Python unittest discovery generated __pycache__ and correctly failed clean checkout binding; prevent artifact creation while preserving the gate.
 
+- ts: "2026-10-04T12:34:39.347Z"
+  origin: Foresight126-qualified125-ancestry-integration
+  p-efficiency: 0.98
+  p-friction: 0.03
+  p-skill-candidate: 0.1
+  spore: none
+  note: Integrate the actual protected merge rather than an assumed review head. An identical semantic tree does not transfer exact-head approval; preserve every historical receipt/event byte and requalify the successor.
+
+- ts: "2026-10-04T14:03:19.664Z"
+  origin: Foresight126-runtime-first-use-trigger
+  p-efficiency: 0.98
+  p-friction: 0.03
+  p-skill-candidate: 0.1
+  spore: none
+  note: Keep the first-use trigger aligned with every comparison dimension; this prose fix neither activates a canary nor transfers old-head review approval.
+
+- ts: "2026-10-04T15:00:20.947Z"
+  origin: Foresight126 functional complete-input caller repair
+  p-efficiency: 0.9
+  p-friction: 0.25
+  p-skill-candidate: 0.3
+  spore: none
+  note: Separate whole raw payload from actual bounded reader delivery; distinguish recorded tail recovery from unaccounted input before review credit.
+
 - ts: 2026-10-04T07:16:23.407004+00:00
   session: /home/err/.codex/worktrees/c417/foresight
   task: Refine PR127 cloud epic dependencies and first executable story
@@ -477,3 +501,13 @@
   spore: none
   receipt-refs: foresight-pr127-plan-refinement
   note: Separate current-code pure contract, adapter fixtures, and actual provider acceptance. Root declaration checks pass with absent children, so readiness needs exact child observations. A malformed gh schema cache was isolated without changing review policy; native quota remains distinct from legacy environment support.
+
+- ts: 2026-10-04T16:17:00Z
+  session: /home/err/.codex/worktrees/c417/foresight
+  task: Reconcile current canonical review policy and actual main before PR127 merge
+  p-efficiency: 0.9
+  p-friction: 0.25
+  p-skill-candidate: 0.4
+  spore: none
+  receipt-refs: foresight-pr127-current-main-integration
+  note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
