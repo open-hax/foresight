@@ -467,3 +467,11 @@
   p-skill-candidate: 0.2
   spore: none
   note: Python unittest discovery generated __pycache__ and correctly failed clean checkout binding; prevent artifact creation while preserving the gate.
+
+- ts: "2026-10-04T12:34:39.347Z"
+  origin: Foresight126-qualified125-ancestry-integration
+  p-efficiency: 0.98
+  p-friction: 0.03
+  p-skill-candidate: 0.1
+  spore: none
+  note: Integrate the actual protected merge rather than an assumed review head. An identical semantic tree does not transfer exact-head approval; preserve every historical receipt/event byte and requalify the successor.
