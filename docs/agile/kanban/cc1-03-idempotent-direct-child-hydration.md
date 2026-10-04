@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "codex-cloud, workspace, submodule, 5sp"
-type: "story"
 story_id: "CC1.03"
+dependency: ["codex-cloud-submodule-transport", "codex-cloud-toolchain-validation"]
+parent: "codex-cloud-self-hydrating-foresight"
+type: "story"
+write-id: "1791131648244-0.a011ypdun3p422mbuv"
 points: "5"
 title: "CC1.03 — Add one idempotent command to hydrate exact direct children"
-dependency: ["codex-cloud-submodule-transport", "codex-cloud-toolchain-validation"]
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-self-hydrating-foresight"
-parent: "codex-cloud-self-hydrating-foresight"
 uuid: "codex-cloud-direct-child-hydration"
 ---
 

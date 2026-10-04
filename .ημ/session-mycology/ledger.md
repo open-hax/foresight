@@ -511,3 +511,13 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+
+- ts: 2026-10-04T16:37:08.421Z
+  session: /home/err/.codex/worktrees/c417/foresight
+  task: Finish qualified PR127 merge and native Rheos planning handoff
+  p-efficiency: 0.93
+  p-friction: 0.2
+  p-skill-candidate: 0.4
+  spore: none
+  receipt-refs: foresight-pr127-qualified-merge-and-rheos-handoff
+  note: Use the current canonical available-agent policy without modifying unrelated dirty skill work. Keep reviewed merge qualification distinct from subsequent lawful operational readiness; published native event history makes the next implementation branch explicit. No new spore warranted.

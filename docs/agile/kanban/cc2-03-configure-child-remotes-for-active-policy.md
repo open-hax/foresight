@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "codex-cloud, git, forks, 3sp"
-type: "story"
 story_id: "CC2.03"
+dependency: ["codex-cloud-fork-selection-projection", "codex-cloud-direct-child-hydration"]
+parent: "codex-cloud-repository-access"
+type: "story"
+write-id: "1791131653567-0.1df2ivep3d6jw67t6sxb"
 points: "3"
 title: "CC2.03 — Configure child remotes from the active fork policy without changing source law"
-dependency: ["codex-cloud-fork-selection-projection", "codex-cloud-direct-child-hydration"]
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-repository-access"
-parent: "codex-cloud-repository-access"
 uuid: "codex-cloud-child-remote-configuration"
 ---
 

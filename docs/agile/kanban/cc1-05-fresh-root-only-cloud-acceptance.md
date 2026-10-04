@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "codex-cloud, acceptance, workspace, 3sp"
-type: "story"
 story_id: "CC1.05"
+dependency: ["codex-cloud-direct-child-hydration"]
+parent: "codex-cloud-self-hydrating-foresight"
+type: "story"
+write-id: "1791131650345-0.qq7477p1t2nvu3u7wmf"
 points: "3"
 title: "CC1.05 — Prove a fresh root-only Codex Cloud environment end to end"
-dependency: ["codex-cloud-direct-child-hydration"]
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-self-hydrating-foresight"
-parent: "codex-cloud-self-hydrating-foresight"
 uuid: "codex-cloud-root-only-acceptance"
 ---
 

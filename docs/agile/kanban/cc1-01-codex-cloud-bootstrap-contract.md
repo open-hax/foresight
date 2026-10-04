@@ -1,14 +1,15 @@
 ---
 category: "kanban"
 labels: "codex-cloud, workspace, law, 3sp"
-type: "story"
 story_id: "CC1.01"
+parent: "codex-cloud-self-hydrating-foresight"
+type: "story"
+write-id: "1791131655007-0.tk7fq81cvidfpdvl1jk"
 points: "3"
 title: "CC1.01 — Implement and test the pinned direct-source bootstrap contract"
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-self-hydrating-foresight"
-parent: "codex-cloud-self-hydrating-foresight"
 uuid: "codex-cloud-bootstrap-contract"
 ---
 
@@ -124,3 +125,7 @@ making it a new prerequisite for these pure fixtures.
 - Do not encode the full constellation a second time in a Codex-only manifest.
 - Do not replace pinned gitlinks with `update --remote`.
 - Do not infer success from an empty submodule directory.
+
+---
+Planning handoff: PR127 merged as fcfc2d17f28640203066ddfe0a22f87db7372a32 after current-head CodeRabbit/MiMo approval and all12 hosted gates at e16dc4e. CC1.01 is the entry story and has no predecessor. Begin its embedded tasks with failing pure fixtures using the existing root project model, project laws and manifest parser; proposed bootstrap files are deliverables. This readiness transition records planning admission, not story implementation or acceptance completion. The other reviewed stories retain their explicit dependency graph. Installed Rheos0.1.0 does not enforce dependency relationships on this readiness path; no substitute board engine or dependency-validation claim is made. Published handoff branch codex/pr127-ready-handoff carries these native events for the next implementation branch.
+---

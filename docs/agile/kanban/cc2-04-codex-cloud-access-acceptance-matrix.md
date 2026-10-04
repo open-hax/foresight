@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "codex-cloud, acceptance, github, 4sp"
-type: "story"
 story_id: "CC2.04"
+dependency: ["codex-cloud-child-remote-configuration", "codex-cloud-root-only-acceptance"]
+parent: "codex-cloud-repository-access"
+type: "story"
+write-id: "1791131654656-0.n7ipmypbfpnc2oy0oso"
 points: "4"
 title: "CC2.04 — Prove the Codex Cloud repository-access matrix"
-dependency: ["codex-cloud-child-remote-configuration", "codex-cloud-root-only-acceptance"]
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-repository-access"
-parent: "codex-cloud-repository-access"
 uuid: "codex-cloud-access-acceptance-matrix"
 ---
 

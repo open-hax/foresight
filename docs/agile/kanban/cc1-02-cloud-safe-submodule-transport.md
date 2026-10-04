@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "codex-cloud, git, submodule, 3sp"
-type: "story"
 story_id: "CC1.02"
+dependency: ["codex-cloud-bootstrap-contract"]
+parent: "codex-cloud-self-hydrating-foresight"
+type: "story"
+write-id: "1791131647175-0.9zds3n0qkwuunfzfh5u"
 points: "3"
 title: "CC1.02 — Make direct submodule transport cloud-safe without rewriting identity"
-dependency: ["codex-cloud-bootstrap-contract"]
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-self-hydrating-foresight"
-parent: "codex-cloud-self-hydrating-foresight"
 uuid: "codex-cloud-submodule-transport"
 ---
 

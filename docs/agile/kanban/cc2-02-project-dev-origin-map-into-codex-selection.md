@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "codex-cloud, forks, project-model, 3sp"
-type: "story"
 story_id: "CC2.02"
+dependency: ["codex-cloud-access-tiers", "dev-origin-map"]
+parent: "codex-cloud-repository-access"
+type: "story"
+write-id: "1791131652438-0.oo6i917o83sw1pc7ts"
 points: "3"
 title: "CC2.02 — Project the validated dev-origin map into Codex repository selection"
-dependency: ["codex-cloud-access-tiers", "dev-origin-map"]
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-repository-access"
-parent: "codex-cloud-repository-access"
 uuid: "codex-cloud-fork-selection-projection"
 ---
 

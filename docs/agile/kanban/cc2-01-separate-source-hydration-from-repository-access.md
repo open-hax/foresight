@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "codex-cloud, github, authorization, 3sp"
-type: "story"
 story_id: "CC2.01"
+dependency: ["codex-cloud-bootstrap-contract"]
+parent: "codex-cloud-repository-access"
+type: "story"
+write-id: "1791131651391-0.mt2rwnsqh75qtjq7h9"
 points: "3"
 title: "CC2.01 — Separate source hydration from first-class repository access"
-dependency: ["codex-cloud-bootstrap-contract"]
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-repository-access"
-parent: "codex-cloud-repository-access"
 uuid: "codex-cloud-access-tiers"
 ---
 

@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "codex-cloud, tooling, validation, 3sp"
-type: "story"
 story_id: "CC1.04"
+dependency: ["codex-cloud-bootstrap-contract"]
+parent: "codex-cloud-self-hydrating-foresight"
+type: "story"
+write-id: "1791131649287-0.s8t01orycc8pwzzafzo"
 points: "3"
 title: "CC1.04 — Prepare the minimum bootstrap toolchain and validation launcher"
-dependency: ["codex-cloud-bootstrap-contract"]
 priority: "P1"
-status: "incoming"
+status: "ready"
 epic: "codex-cloud-self-hydrating-foresight"
-parent: "codex-cloud-self-hydrating-foresight"
 uuid: "codex-cloud-toolchain-validation"
 ---
 
