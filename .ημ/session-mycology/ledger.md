@@ -491,3 +491,23 @@
   p-skill-candidate: 0.3
   spore: none
   note: Separate whole raw payload from actual bounded reader delivery; distinguish recorded tail recovery from unaccounted input before review credit.
+
+- ts: 2026-10-04T07:16:23.407004+00:00
+  session: /home/err/.codex/worktrees/c417/foresight
+  task: Refine PR127 cloud epic dependencies and first executable story
+  p-efficiency: 0.82
+  p-friction: 0.36
+  p-skill-candidate: 0.35
+  spore: none
+  receipt-refs: foresight-pr127-plan-refinement
+  note: Separate current-code pure contract, adapter fixtures, and actual provider acceptance. Root declaration checks pass with absent children, so readiness needs exact child observations. A malformed gh schema cache was isolated without changing review policy; native quota remains distinct from legacy environment support.
+
+- ts: 2026-10-04T16:17:00Z
+  session: /home/err/.codex/worktrees/c417/foresight
+  task: Reconcile current canonical review policy and actual main before PR127 merge
+  p-efficiency: 0.9
+  p-friction: 0.25
+  p-skill-candidate: 0.4
+  spore: none
+  receipt-refs: foresight-pr127-current-main-integration
+  note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
