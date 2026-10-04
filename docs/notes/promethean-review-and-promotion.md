@@ -11,8 +11,8 @@ use cases and ownership; they do not make every implementation interchangeable.
 
 ## Current decisions
 
-The October 3 request changes reviewer admission: invite **CodeRabbit, Codex,
-MiMo and Kimi**, but require **one eligible approving review on the exact current
+The October 3 request changes reviewer admission: invite **all available agents**,
+with CodeRabbit, Codex, MiMo and Kimi as intended targets, but require **one eligible approving review on the exact current
 head**. A formal GitHub `APPROVED` review or an explicit completed passing /
 “no issues” verdict can satisfy this rule. Verify the eligible reviewer identity
 and the current commit coverage from the actual provider record; a generic green
@@ -26,10 +26,14 @@ must remain visible; it must not become a fabricated green provider check.
 The global skill pack remains `riatzukiza/.agents` PR #8: `pr-muse-connect`,
 `pr-sprint-planning`, `pr-red-green`, `pr-review-settlement`,
 `pr-review-to-merge`, and `pr-flow`. The graph belongs in that repository; this
-root records constellation policy and integration requirements. Its existing
-five-round review budget remains a deliberate stopping boundary, not a loop
-that retries until a model agrees. Historical requests above that budget need
-an explicit disposition before another round.
+root records constellation policy and integration requirements. The user's
+latest available-agent and cap correction retains all four invitation targets;
+unavailability does not remove an agent from that roster. Canonical
+`~/.agents/skills/pr-flow` owns availability evidence, current-head available-cohort
+convergence and mandatory reviewer overrides. This root imposes no local hard
+round cap. Required reviewers/checks and every findings-settlement obligation
+remain mandatory; historical counts and receipts keep their original context.
+This prospective clarification installs or activates no policy or service.
 
 The target process uses `{feat,chore,docs,fix,...}/*` in the mapped personal fork.
 It activates per repository only after mapping, protection, trusted admission
@@ -165,9 +169,13 @@ gets the App signing key or permission to decide its own green check.
 
 Checked against current official documentation on October 3:
 
-- Public repositories below ten stars require manual review requests. Request
-  once per head after the actual cooldown; an unacknowledged request remains a
-  pending observation, not proof of acceptance or a reason to flood comments.
+- Public repositories below ten stars require manual review requests. Following
+  the user's latest request-renewal correction, deduplicate pending exact-head
+  requests; an unacknowledged request remains pending. Renew only after the
+  actual attempt is terminal and any observed cooldown is known to have expired.
+  An unknown cooldown needs operator attention. Canonical pr-flow owns that
+  evidence and lifecycle; acknowledgements cannot supply completion or approval.
+  Never automatically activate paid/on-demand review credits.
 - OSS allowance is scoped per repository as well as per developer; another
   repository's footer does not establish this PR's reset time.
 - Personal subscriptions do not grant org-repository subscriptions. Native PR

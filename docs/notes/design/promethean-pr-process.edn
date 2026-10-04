@@ -3,9 +3,10 @@
 {:workflow/id :foresight/promethean-pr-process
  :workflow/version 2
  :workflow/status :proposed
- :workflow/decision-source "User request 2026-10-03"
+ :workflow/decision-source "User request 2026-10-03; direct available-agent/cap and request-renewal correction 2026-10-04"
  :workflow/skill-pack "riatzukiza/.agents/skills/pr-flow"
  :review/policy {:invited #{:coderabbit :codex :mimo :kimi}
+                 :availability-scope :configured-available-agents
                  :minimum-approvals 1
                  :approval-binding :exact-current-head
                  :approval-evidence #{:github-approved :explicit-passing-verdict}
@@ -15,7 +16,8 @@
                  :required-checks :repository-policy
                  :findings-settlement :all-observed
                  :blocking-severities #{:p0 :p1}
-                 :max-rounds 5
+                 :convergence :canonical-pr-flow
+                 :mandatory-reviewers :canonical-pr-flow
                  :native-and-imported-evidence :distinct}
  :admission/trust {:producer :expected-github-app
                    :implementation :independently-pinned-external-or-base
