@@ -467,3 +467,13 @@
   p-skill-candidate: 0.2
   spore: none
   note: Python unittest discovery generated __pycache__ and correctly failed clean checkout binding; prevent artifact creation while preserving the gate.
+
+- ts: 2026-10-04T07:16:23.407004+00:00
+  session: /home/err/.codex/worktrees/c417/foresight
+  task: Refine PR127 cloud epic dependencies and first executable story
+  p-efficiency: 0.82
+  p-friction: 0.36
+  p-skill-candidate: 0.35
+  spore: none
+  receipt-refs: foresight-pr127-plan-refinement
+  note: Separate current-code pure contract, adapter fixtures, and actual provider acceptance. Root declaration checks pass with absent children, so readiness needs exact child observations. A malformed gh schema cache was isolated without changing review policy; native quota remains distinct from legacy environment support.
