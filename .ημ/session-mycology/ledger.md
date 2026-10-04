@@ -483,3 +483,11 @@
   p-skill-candidate: 0.1
   spore: none
   note: Keep the first-use trigger aligned with every comparison dimension; this prose fix neither activates a canary nor transfers old-head review approval.
+
+- ts: "2026-10-04T15:00:20.947Z"
+  origin: Foresight126 functional complete-input caller repair
+  p-efficiency: 0.9
+  p-friction: 0.25
+  p-skill-candidate: 0.3
+  spore: none
+  note: Separate whole raw payload from actual bounded reader delivery; distinguish recorded tail recovery from unaccounted input before review credit.
