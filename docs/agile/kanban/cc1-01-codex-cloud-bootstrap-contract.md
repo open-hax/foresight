@@ -76,7 +76,7 @@ its checkout confers no permission to inspect skills, manifests, or nested Git.
 
 Executing Git, installing tools, fetching children, changing remotes, creating
 an environment, deciding provider permissions, or implementing a fork map.
-This planning PR changes cards only; the proposed code belongs to CC1.01's
+This planning PR changes planning and provenance only; the proposed code belongs to CC1.01's
 subsequent implementation PR.
 
 ## Acceptance criteria
