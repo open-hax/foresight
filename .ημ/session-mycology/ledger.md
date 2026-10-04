@@ -475,3 +475,11 @@
   p-skill-candidate: 0.1
   spore: none
   note: Integrate the actual protected merge rather than an assumed review head. An identical semantic tree does not transfer exact-head approval; preserve every historical receipt/event byte and requalify the successor.
+
+- ts: "2026-10-04T14:03:19.664Z"
+  origin: Foresight126-runtime-first-use-trigger
+  p-efficiency: 0.98
+  p-friction: 0.03
+  p-skill-candidate: 0.1
+  spore: none
+  note: Keep the first-use trigger aligned with every comparison dimension; this prose fix neither activates a canary nor transfers old-head review approval.
