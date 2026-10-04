@@ -16,7 +16,7 @@ created_at: "2026-10-03T10:44:12.404Z"
 
 ## Context
 
-The user corrected Sol's canonical event authority on 2026-10-03: use Clio, not open-hax/event-ledger. Qualified riatzukiza/sol#2 merged as72fdecca292859d92cba48b686ec6fe9c43a9133 restores the Node22 baseline; it intentionally keeps the predecessor pin. This separate five-point prerequisite corrects that dependency and its actual adapters. The parent worker's compatibility report and real immutable-pin probe establish feasibility, not implemented Sol migration.
+The user corrected Sol's canonical event authority on 2026-10-03: use Clio, not open-hax/event-ledger. Qualified riatzukiza/sol#2 merged as 72fdecca292859d92cba48b686ec6fe9c43a9133 restores the Node 22 baseline; it intentionally keeps the predecessor pin. This separate five-point prerequisite corrects that dependency and its actual adapters. The parent worker's compatibility report and real immutable-pin probe establish feasibility, not implemented Sol migration.
 
 ## Outcome
 
@@ -31,7 +31,7 @@ Break down into a three-point event-catalog/episode-adapter slice and a two-poin
 - Both children are reviewed and admitted through Rheos before their implementation.
 - Actual Sol adapters execute append/readback/exact retry/reopen. Clio append admission validates the event/schema and collisions; complete-history canonicalization establishes missing-parent, stream-gap and predecessor-causality guarantees. Sol advances causal state only after accepted append and consumes validated canonical history.
 - Legacy ledger bytes remain preserved and are never silently mixed with Clio records.
-- The final frozen Node22 graph includes the required native host dependency, passes actual nonempty tests, zero-warning builds, production health and clean SIGTERM on hosted CI.
+- The final frozen Node 22 graph includes the required native host dependency, passes actual nonempty tests, zero-warning builds, production health and clean SIGTERM on hosted CI.
 - Every observed finding is settled; review convergence follows the canonical PR skill pack. Records retain exact original and replacement pins and evidence.
 
 ## Non-goals
@@ -40,4 +40,4 @@ No hosted review-worker activation, deployment, service restart, Clio kernel cop
 
 ## Verification
 
-Use the existing Node22 runtime gates plus real filesystem-backed Sol-adapter tests. The standalone Clio probe uses exact Git788cdd3, npm ci with Node22.20.0/npm10.9.3, nativefs-ext-extra-prebuilt2.2.9, two compiled targets and1test/13assertions with zero warnings. Probe success does not replace the actual Sol integration suite.
+Use the existing Node 22 runtime gates plus real filesystem-backed Sol-adapter tests. The standalone Clio probe uses exact Git 788cdd3, npm ci with Node 22.20.0/npm 10.9.3, native fs-ext-extra-prebuilt 2.2.9, two compiled targets and 1 test/13 assertions with zero warnings. Probe success does not replace the actual Sol integration suite.
