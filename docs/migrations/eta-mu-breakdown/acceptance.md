@@ -57,13 +57,23 @@ reproduction are in
 [donor-retirement-blockers.md](donor-retirement-blockers.md). Withdrawing the
 candidate changes no child registration.
 
-The Foresight review caller now consumes officially merged
+At the earlier migration reconciliation, the Foresight review caller consumed officially merged
 [eta-mu PR #304](https://github.com/open-hax/eta-mu/pull/304) at
 `e8eea02d31030215984375980b765803fc72d80d`, preserving prerequisite artifact
 names on failed-job reruns. Its 36 executable workflow tests passed locally.
 OpenCode is pinned to official release `1.18.31`; a direct free-model probe
 succeeded after `1.18.18` was rejected by the provider. The actual PR review
 still requires a successful exact-head hosted run; a probe is not that review.
+
+The October 3 review restoration repins the caller to immutable
+`b5b28237c45323cdc1914317260192163d957735`, the executable workflow repair
+carried by merged [eta-mu PR #339](https://github.com/open-hax/eta-mu/pull/339).
+That pin is intentional across later provenance-only parent commits. The
+migration-pack gate disables Python bytecode emission to preserve the required
+clean checkout. Foresight [PR #121's run](https://github.com/open-hax/foresight/actions/runs/37106880496)
+passed all twelve deterministic gates and completed a real MiMo review on
+`12104524e9b96d432116ffddc72aa5f93503043b`; this is evidence for that revision,
+not advance approval of a later documentation head or standalone child acceptance.
 
 ## Lifecycle reconciliation
 
