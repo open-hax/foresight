@@ -15,56 +15,38 @@ authority; compatibility originals may remain in their existing locations.
 
 ## Repository map: where to look
 
-`src/foresight/project.cljc` (`sources`) is the source of truth for the current
-declared inventory metadata behind this table: source identity, path,
-repository, and recorded `:source/role`. It is **not** by itself promotion or
-ownership authority for common Foresight law. Repository roles and the "Look
-here for" column are routing hints for where to inspect evidence first, not a
-grant that the child owns every similarly named concept across the constellation.
+Print the current repository and root-native routing inventory from the semantic
+project model:
 
-When this table and the checkout disagree, treat that as project-model drift.
-When a routing hint and a child repository's own `AGENTS.md`, `README.md`,
-architecture records, or current code disagree, the child evidence controls the
-local fact and the Foresight declaration should be reconciled explicitly.
-Cross-repository promotion remains subject to the distinction recorded in the
-merged [project-law promotion-status triage](https://github.com/open-hax/foresight/blob/main/docs/notes/project-law-promotion-status-triage.md): recovered claims, lift
-candidates, and accepted lifts are not interchangeable.
+```sh
+nbb scripts/project.clj guide
+```
 
-| Path | Repository | Role | Look here for |
-| --- | --- | --- | --- |
-| `Truth` | octave-commons/Truth | simulation-research | ECS simulation substrate, pure domain systems/phases, single-writer components |
-| `bitch-tracker` | octave-commons/bitch-tracker | betterdiscord-plugin | BetterDiscord client plugin behavior |
-| `calliope` | octave-commons/calliope | corpus | Append-only ingestion truth, Receipt River accountability, corpus documents |
-| `epiphany` | octave-commons/epiphany | knowledge-archaeology | Observed→derived→provisional→accepted promotion, git-history-derived knowledge |
-| `eta-mu` | open-hax/eta-mu | agent-runtime-and-workflow | CLI, shared workflow integration and remaining donor packages; follow the extracted child rows below |
-| `katamorph` | open-hax/katamorph | contract-language | Portable shape/contract declarations and cross-host translation |
-| `knoxx` | open-hax/knoxx | agent-product-runtime | CLJS-first agent product backend; raw JS interop confined to externs |
-| `muse` | octave-commons/muse | compatibility-compiler | Compiler/compatibility tooling — not canonical actor/session/policy semantics |
-| `opencode` | open-hax/opencode | coding-agent-host | Coding-agent hosting/integration (shallow submodule) |
-| `proxx` | open-hax/proxx | model-proxy | LLM/model proxying, EDN pricing policy; provider credentials stay local |
-| `services` | open-hax/services | deployment-orchestration | Deployment topology and environment schemas — never application source or secrets |
-| `shx` | octave-commons/shx | shell-ir | Common IR for shell intent (bash <-> Clojure), envm EDN-driven shell config |
-| `uxx` | open-hax/uxx | ui-kit | Canonical React components; Reagent/Helix are parity wrappers, shared design tokens |
-| `kanban-orchestrator` | open-hax/kanban-orchestrator | agent-contract-data | Contract data for the board-driving agent and Rheos MCP connection |
-| `clio` | open-hax/clio | event-sourcing-kernel | Event admission, immutable ledgers, replay, and portable event contracts |
-| `chat-ui` | open-hax/chat-ui | chat-ui-components | Shared chat panels and runtime protocol adapters consumed by Rheos |
-| `rheos` | open-hax/rheos | kanban-board-runtime | Board CLI, server, MCP, browser UI and lawful card transitions; document corpus evolution remains planned |
-| `session-mycology` | open-hax/session-mycology | session-reflection-events | Session reflection events and derived learning records |
-| `sol` | open-hax/sol | agent-runtime-backend | Agent runtime, provider adapters, sessions and runtime-owned gates |
-| `osmos` | open-hax/osmos | ingestion-service | Extracted JVM kms-ingestion service, configuration and consumer compatibility |
-| `receipt-river` | open-hax/receipt-river | receipt-ledger | Receipt-writing CLI and accountability records |
-| `axxium` | open-hax/axxium | identity-auth-kernel | Identity and authorization kernel; existing repository history is preserved |
-| `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
-| `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
-| `clobber` | (root-owned, recovered from riatzukiza/devel) | process-supervisor-dsl | Recovered pm2-clj/clobber PM2 DSL: merge law, prototypes, profiles (consolidation input; destined for the shx/Hexis supervisor IR; see `clobber/PROVENANCE.md`) |
-| `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |
-| `archaeology` | (root-owned native component) | causal-architecture-archaeology | Normalized Clio archaeology events, causal run composition, and disposable projections |
+`src/foresight/project.cljc` declares both `sources` and `native-components`.
+The guide projects their identity, path, repository, roles, ownership, and
+workspace execution eligibility directly from those declarations. A native
+component sharing a source path appears once with both roles. When NBB is
+unavailable, inspect those declarations directly and report the unavailable
+command; do not maintain a second source inventory in this file.
 
-When a new direct repository is added, update `.gitmodules`,
-`src/foresight/project.cljc` (`sources`, plus any new invariants), and this
-table together. `nbb scripts/project.clj validate` enforces manifest/project
-agreement; `nbb test/project_test.cljs` checks extraction routing and gate coverage. A row here with no matching source is drift, not a new grant of
-authority.
+The project model and generated guide provide routing hints, not promotion or
+ownership authority for common Foresight law. When the declared model and the
+checkout disagree, treat that as project-model drift. When a routing hint and a
+child repository's own `AGENTS.md`, `README.md`, architecture records, or current
+code disagree, the child evidence controls the local fact and the Foresight
+declaration should be reconciled explicitly. Cross-repository promotion remains
+subject to the distinction recorded in the merged [project-law promotion-status
+triage](https://github.com/open-hax/foresight/blob/main/docs/notes/project-law-promotion-status-triage.md):
+recovered claims, lift candidates, and accepted lifts are not interchangeable.
+
+When a new direct repository is added, update `.gitmodules` and
+`src/foresight/project.cljc` (`sources`, plus any new invariants) together. Declare
+root-native components under `native-components` in the same model. The guide
+then reflects those changes without another inventory edit.
+`nbb scripts/project.clj validate` enforces manifest/project agreement;
+`nbb test/project_test.cljs` checks extraction routing and gate coverage. These
+checks validate the model and its projections, not an inventory parsed from
+AGENTS prose.
 
 ## Divine mandate: purify before you port
 
