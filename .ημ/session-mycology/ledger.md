@@ -551,3 +551,13 @@
   spore: none
   receipt-refs: cephalon-pr136-manifest-observation-hardening
   note: Empty collections can make evidence predicates pass vacuously. Reproduce against prior source with temporary process-boundary fixtures; stop at the integrity boundary before runtime queries. Native Rheos reads preserve authored scalar metadata without proving admission, and an unsupported setter is not permission to implement a second board writer. Keep ordinary successful ticks quiet and preserve current review heads until a real finding requires a change.
+
+- ts: 2026-10-06T21:16:34.454074Z
+  session: /home/err/.codex/worktrees/cephalon-planning/foresight
+  task: Settle a stale operational cycle count without routine-progress churn
+  p-efficiency: 0.94
+  p-friction: 0.12
+  p-skill-candidate: 0.11
+  spore: none
+  receipt-refs: cephalon-pr136-timestamped-cycle-count
+  note: Scope operational counts to their actual observation timestamp so later autonomous work does not silently contradict earlier report prose. Treat delayed older-head reviews as actionable findings without transferring approval. Provider rate limits can fail a required evidence wrapper while exact-head deterministic gates pass; preserve each result and retry only through its actual native surface.

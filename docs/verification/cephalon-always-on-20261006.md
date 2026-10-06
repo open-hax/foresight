@@ -149,9 +149,9 @@ saturation law unproven.
 4. The configured image provider returned403 `provider_not_allowed`. Original
    SVG creation and native Bluesky rasterization succeeded. This is a functional
    creative fallback, not a claim that provider image generation is working.
-5. The owning host can sleep. Three natural clock cycles have completed, with
-   an intentional idle backend recreation between the second and third. This
-   proves resumed scheduling after that recreation, not uninterrupted cadence,
+5. The owning host can sleep. As of20:10:50UTC, four natural clock cycles had
+   completed, with an intentional idle backend recreation between the second
+   and third. This proves resumed scheduling after that recreation, not uninterrupted cadence,
    in-flight job recovery, cloud placement or mesh ownership recovery.
 6. The first artwork post had empty alt text. The current maker prompt now requires
    `imageAlts`; accessibility enforcement remains part of publication work.
