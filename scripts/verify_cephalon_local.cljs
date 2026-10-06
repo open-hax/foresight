@@ -1,6 +1,7 @@
 (ns verify-cephalon-local
   "Read-only verification of the recovered, explicitly selected local cephalon."
   (:require [clojure.string :as str]
+            [nbb.core :as nbb]
             ["node:child_process" :as child]
             ["node:crypto" :as crypto]
             ["node:fs" :as fs]
@@ -53,14 +54,15 @@
       triggers:control.runtime.triggers.map(t=>({id:t.id,enabled:t.enabled,events:t.events})),
       headTools:head.tools.map(t=>t.id),makerTools:maker.tools.map(t=>t.id),
       active:active.runs.map(r=>({id:r.run_id,status:r.status,event:r.latest_event})),runs,
+      publicationReadOk:p.ok&&Array.isArray(feed.feed),
       publications:feed.feed?.map(x=>({uri:x.post.uri,createdAt:x.post.record.createdAt,images:x.post.embed?.images?.length||0})),
       synthesisScript:require('fs').existsSync('/app/scripts/synthesize-music.mjs')}));
   })().catch(e=>{console.error(e.name+': '+e.message);process.exitCode=1})")
 
 (defn verify!
   "Verify image/contract identity before inspecting runtime and artifacts."
-  []
-  (when-not (= ["--only" "knoxx"] (vec *command-line-args*))
+  [arguments]
+  (when-not (= ["--only" "knoxx"] arguments)
     (throw (ex-info "Usage: nbb scripts/verify_cephalon_local.cljs --only knoxx" {})))
   (let [manifest (js->clj (js/JSON.parse (.readFileSync fs (path/join deployment "contracts-manifest.json") "utf8"))
                          :keywordize-keys true)
@@ -101,7 +103,12 @@
       (check! (every? maker-tools ["bash" "write" "music.generate" "bluesky.publish" "discord.send"])
               "maker exposes native creation and publication tools")
       (check! (:synthesisScript observed) "the actual image contains the native music engine")
-      (check! (some #(pos? (:images %)) (:publications observed)) "public Bluesky API independently observes an image post")
+      (check! (and (:publicationReadOk observed) (vector? (:publications observed)))
+              "public Bluesky feed read succeeded with a valid feed")
+      (when (:publicationReadOk observed)
+        (println (if (some #(pos? (:images %)) (:publications observed))
+                   "OBSERVED public Bluesky API independently observes an image post"
+                   "WARN No image post observed in the sampled Bluesky feed; a bounded window cannot establish image frequency")))
       (println "OBSERVED active runs:" (pr-str (:active observed)))
       (println "OBSERVED configuration API running:" (:reportedRunning observed)
                "(constant in this build; not a liveness check)")
@@ -110,10 +117,17 @@
       (doseq [gap (:operationalGaps manifest)] (println "WARN" gap))
       (println "No agent invocation, publication, contract change or board transition was performed."))))
 
-(try
-  (verify!)
-  (catch :default error
-    (swap! failures inc)
-    (println "FAIL" (ex-message error))))
-(println "Failures:" @failures)
-(when (pos? @failures) (set! (.-exitCode js/process) 1))
+(defn -main
+  "Return the diagnostic exit status; importing the adapter performs no I/O."
+  [& arguments]
+  (reset! failures 0)
+  (try
+    (verify! (vec arguments))
+    (catch :default error
+      (swap! failures inc)
+      (println "FAIL" (ex-message error))))
+  (println "Failures:" @failures)
+  (if (pos? @failures) 1 0))
+
+(when (= nbb/*file* (nbb/invoked-file))
+  (set! (.-exitCode js/process) (apply -main *command-line-args*)))

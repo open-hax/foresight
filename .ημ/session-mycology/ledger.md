@@ -561,3 +561,23 @@
   spore: none
   receipt-refs: cephalon-pr136-timestamped-cycle-count
   note: Scope operational counts to their actual observation timestamp so later autonomous work does not silently contradict earlier report prose. Treat delayed older-head reviews as actionable findings without transferring approval. Provider rate limits can fail a required evidence wrapper while exact-head deterministic gates pass; preserve each result and retry only through its actual native surface.
+
+- ts: 2026-10-06T21:37:17.935751Z
+  session: /home/err/.codex/worktrees/cephalon-planning/foresight
+  task: Verify native review scope after a completed no-actionable verdict
+  p-efficiency: 0.88
+  p-friction: 0.28
+  p-skill-candidate: 0.36
+  spore: none
+  receipt-refs: cephalon-pr136-native-complete-input-gap
+  note: A provider can select a file and then explicitly skip its new content. Preserve the later authenticated clarification, source IDs and response-byte hashes; commit binding and completed checks do not repair omitted input. File the parser gap upstream instead of trusting its older positive verdict or adding a local override. Retain observation-only artifacts without repeatedly invalidating active review heads.
+
+- ts: 2026-10-06T21:49:40.762185Z
+  session: /home/err/.codex/worktrees/cephalon-planning/foresight
+  task: Separate bounded publication observations from runtime health and retain diagnostic regressions
+  p-efficiency: 0.92
+  p-friction: 0.18
+  p-skill-candidate: 0.21
+  spore: none
+  receipt-refs: cephalon-pr136-sampled-publication-diagnostic
+  note: A valid feed sample can omit a media type without proving a failed producer. Keep API/schema failure mandatory and missing sampled content explicit; use repeatable command-boundary fixtures for the previous vacuous manifest and false sampling failures. Commit the held native evidence bundle with substantive fixes instead of status-only head churn.

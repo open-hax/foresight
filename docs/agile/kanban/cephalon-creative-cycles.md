@@ -26,6 +26,12 @@ Executable agent/trigger resources, an explicit cadence and deadline, one
 outstanding cycle per maker, existing worker delegation, output validation and
 addressable result/receipt data at the existing persistence boundaries.
 
+This story implements the cycle deadline, attempt cap and backoff specified in
+the recovery story, together with the publication admission/reconciliation
+contracts specified in the publication story, before its cycles can pass AC3.
+Those later stories verify outlet adapters and restart/placement behavior; their
+ordering does not postpone the limits needed by this cycle runtime.
+
 ## Non-goals
 
 Invent a synthesis engine, require paid image generation, enforce a fixed artistic

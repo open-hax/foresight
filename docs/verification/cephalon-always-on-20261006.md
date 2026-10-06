@@ -40,6 +40,24 @@ files and a changed hash. Those fixtures replace the process boundary; they do
 not alter the deployment or invoke its APIs. The actual240-file manifest passes
 the updated diagnostic. This hardens evidence collection, not runtime behavior.
 
+MiMo review5434877321 identified a separate sampling error: the three most
+recent Bluesky posts can legitimately all be music announcements without an
+image. A bounded feed window cannot impose image frequency on the runtime.
+The diagnostic now checks a successful, structurally valid public feed read;
+an image in that sample is an observation, while its absence is a warning.
+An unavailable or malformed feed remains a failure. The12-check count is
+unchanged; an image-free sample adds one warning to the seven known gaps.
+
+Committed process-boundary fixtures in `test/verify_cephalon_local_test.cljs`
+use real temporary manifest/contract bytes and stub external commands. They
+cover explicit selection, wrong image, missing/empty/non-vector file lists,
+hash drift, a mixed feed, three text-only posts, an empty valid feed, and an
+unavailable or malformed feed. Importing the diagnostic performs no inspection.
+The former image-window behavior reproduced the failure before correction;
+the successor passes7tests/26assertions. The hosted deterministic workflow now
+runs these fixtures as `cephalon_diagnostic`; a local pass is preparation,
+not evidence that a newly pushed hosted job has completed.
+
 Rheos's native `content` read preserves the creative card's scalar dependency
 UUID, epic, parent and incoming metadata. That read does not validate dependency
 admission or move a card. The native `frontmatter points` command refuses the
@@ -237,6 +255,8 @@ and delegation tools. Conversation does not explicitly cancel or reset it.
 
 ## Review and continuation
 
+### Planning review snapshot at20:12UTC
+
 PR136 contains an incoming epic and four UUID-linked stories. All three initial
 CodeRabbit planning findings and all four findings from review5433964852 have
 verified specification/diagnostic fixes and explanatory settlements. All six
@@ -251,6 +271,40 @@ implemented guarantees. CodeRabbit's quota reply6024485582 at20:06:27UTC gives
 20:58:27UTC as the conservative earliest retry and refresh the native cooldown
 and pending-request evidence first. Codex reports account quota.
 Neither condition supplies approval. Cards have not been moved to ready.
+
+### Subsequent planning evidence and complete-input gap
+
+The timestamped cycle-count correction at33b8ff0 resolves MiMo's later P3
+finding from review5434397188, with native explanations4200530092 and6025642304.
+Seven finding threads are resolved; this does not establish readiness.
+On33b8ff0, hosted run37532731281 completed successfully and native
+[MiMo review5434877321](https://github.com/open-hax/foresight/pull/136#pullrequestreview-5434877321)
+approved at21:40:51UTC after assessing all11full-diff pages. That approval is
+historical once the diagnostic, tests and planning clarifications advance the head.
+Its sampling and committed-coverage observations are addressed above; the
+creative-cycle story now names where it implements limits specified by the
+publication/recovery stories. The current PR body already reports12checks.
+
+CodeRabbit's automatic33b8ff0 run completed at21:21:24UTC with a no-actionable
+verdict and an exact-head marker, but skipped `.ημ/receipts.edn` as similar.
+Authenticated native
+[clarification6025753621](https://github.com/open-hax/foresight/pull/136#issuecomment-6025753621)
+at21:26:04UTC explicitly confirms that the five new receipt records at
+lines200–204 were excluded from substantive review. That clarification does
+not retroactively assess them, request another review, or grant approval/round
+credit. The full native JSON response bytes and their SHA256 identities are
+retained under `.ημ/review-evidence/foresight-pr136/` and in the receipt ledger.
+
+A fresh canonical CLI still reports CodeRabbit eligible despite that admission.
+[Upstream issue24](https://github.com/riatzukiza/.agents/issues/24) tracks the
+decisive-scope parser gap; no local classifier or policy waiver is introduced.
+The planning PR remains unqualified. Included allowance was0remaining at
+one review/hour. Conservatively inspect after22:23UTC, refresh actual native
+cooldown and pending evidence, and request a full latest-head review of every
+changed input, explicitly including receipts and retained evidence, only when
+admissible. Another clarification or passing CI cannot repair omitted scope.
+The latest Codex invitation received account quota in6025648426; it grants
+neither approval nor round credit. Root has no configured native Kimi workflow.
 
 The active `cephalon-runtime-follow-up` heartbeat continues operational inspection,
 review settlement and the authorized implementation flow every30minutes, staying
