@@ -511,3 +511,12 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-06T13:12:30.799244045Z
+  session: /home/err/.codex/worktrees/foresight-pr123-20261006
+  task: Refresh PR123 reviewed workflow caller in isolated worktree
+  p-efficiency: 0.86
+  p-friction: 0.24
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: foresight-pr123-review-repair
+  note: Read the actual failing hosted step before fixing gates: remote reviewer UnknownError differs from deterministic evidence failure. Reuse reviewed current main contract, keep shared services stopped and Python dependencies isolated; no spore warranted.
