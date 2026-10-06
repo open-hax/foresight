@@ -16,9 +16,9 @@ uuid: "epiphany-cognitive-observatory"
 
 ## User story
 
-**As a** human trying to understand an evolving agent system,  
+**As a** human trying to understand an evolving agent system,\
 **I want** Epiphany evaluated as the layer that observes, synthesizes, projects,
-and explains knowledge/dynamics over provenance,  
+and explains knowledge/dynamics over provenance,\
 **so that** archaeology remains one powerful mode without shrinking the product
 to only archaeology.
 

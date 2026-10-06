@@ -16,9 +16,9 @@ uuid: "lazy-multiresolution-cognitive-projection"
 
 ## User story
 
-**As a** researcher,  
+**As a** researcher,\
 **I want** event-driven, lazy, multiresolution resolution over the full
-provenance graph,  
+provenance graph,\
 **so that** the cognitive substrate can respond at useful scale without
 continuously simulating every event while preserving global causal context and
 exact evidence lineage.

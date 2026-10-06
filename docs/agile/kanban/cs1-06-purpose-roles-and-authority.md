@@ -16,9 +16,9 @@ uuid: "purpose-roles-bounded-authority"
 
 ## User story
 
-**As a** human delegating software work to persistent agents,  
+**As a** human delegating software work to persistent agents,\
 **I want** goals/user stories, composable roles, capabilities, and authority
-represented explicitly in the shared substrate,  
+represented explicitly in the shared substrate,\
 **so that** agents can act like team members while their work remains anchored
 to a human-readable reason and bounded permission.
 

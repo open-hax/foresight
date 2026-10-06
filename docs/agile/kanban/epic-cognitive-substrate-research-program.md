@@ -12,9 +12,9 @@ uuid: "cognitive-substrate-research-program"
 
 ## Epic user story
 
-**As a** researcher/operator building Foresight,  
+**As a** researcher/operator building Foresight,\
 **I want** the persistent cognitive substrate expressed as an event-sourced,
-dynamically projected system with explicit human purpose,  
+dynamically projected system with explicit human purpose,\
 **so that** I can test whether it actually improves agent behavior, inspect why
 actions happened, and explain what I am building even if the hypothesis fails.
 

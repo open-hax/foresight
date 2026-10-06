@@ -16,9 +16,9 @@ uuid: "preserve-raw-causal-event-graph"
 
 ## User story
 
-**As a** human who must audit agent behavior,  
+**As a** human who must audit agent behavior,\
 **I want** every relevant human, agent, tool, and environment interaction
-represented as an immutable causal event with exact lineage,  
+represented as an immutable causal event with exact lineage,\
 **so that** later projections can be approximate without making the evidence
 for an action approximate.
 

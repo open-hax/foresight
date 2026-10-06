@@ -15,8 +15,8 @@ uuid: "stable-story-uuid"
 
 ## User story
 
-**As a** <person or actor with the need>  
-**I want** <observable capability or outcome>  
+**As a** <person or actor with the need>\
+**I want** <observable capability or outcome>\
 **so that** <human purpose / why this matters>.
 
 The `so that` clause is not decoration. If it cannot be stated clearly, the

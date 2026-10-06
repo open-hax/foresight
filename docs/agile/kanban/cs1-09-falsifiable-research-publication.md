@@ -16,9 +16,9 @@ uuid: "cognitive-substrate-falsifiable-publication"
 
 ## User story
 
-**As a** researcher/writer,  
+**As a** researcher/writer,\
 **I want** each major substrate claim expressed as a reproducible hypothesis,
-experiment, countermodel, and retained result,  
+experiment, countermodel, and retained result,\
 **so that** the work can produce an honest blog post or series whether the idea
 works, partially works, or turns out to be a beautiful but unhelpful model.
 

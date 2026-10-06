@@ -16,9 +16,9 @@ uuid: "cognitive-substrate-mind-devtools"
 
 ## User story
 
-**As a** human supervising an agent system,  
+**As a** human supervising an agent system,\
 **I want** timelines, causal traces, field/activation views, spatial projections,
-and drill-down from aggregates to exact events,  
+and drill-down from aggregates to exact events,\
 **so that** I can understand why observable behavior emerged without pretending
 that I can inspect private LLM chain-of-thought.
 

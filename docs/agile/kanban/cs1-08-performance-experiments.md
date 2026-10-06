@@ -16,9 +16,9 @@ uuid: "cognitive-substrate-performance-experiments"
 
 ## User story
 
-**As a** researcher,  
+**As a** researcher,\
 **I want** reproducible benchmarks of the particle/field/graph dynamics across
-dimensions and execution strategies,  
+dimensions and execution strategies,\
 **so that** CPU vectorization, GPU kernels, spatial partitioning, or distribution
 are chosen from evidence rather than from the visual appeal of an implementation.
 

@@ -15,9 +15,9 @@ uuid: "recover-cognitive-substrate-intent"
 
 ## User story
 
-**As a** researcher maintaining Foresight,  
+**As a** researcher maintaining Foresight,\
 **I want** the useful intent and behavior in Fork Tales, OpenPlanner, Truth, and
-Epiphany recovered as explicit hypotheses and stories,  
+Epiphany recovered as explicit hypotheses and stories,\
 **so that** the next implementation can learn from the prototypes without
 inheriting their accidental framing or technical debt.
 

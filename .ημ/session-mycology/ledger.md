@@ -511,3 +511,12 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-06T13:08:47.162522233Z
+  session: /home/err/.codex/worktrees/foresight-pr128-20261006
+  task: Repair PR128 Markdown diff hygiene in isolated worktree
+  p-efficiency: 0.9
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: foresight-pr128-review-repair
+  note: CommonMark backslash breaks preserve rendering while satisfying git diff hygiene; install absent verification dependencies only in a unique venv. No spore warranted.

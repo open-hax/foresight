@@ -16,9 +16,9 @@ uuid: "truth-causal-simulation-engine"
 
 ## User story
 
-**As a** simulation researcher,  
+**As a** simulation researcher,\
 **I want** Truth evaluated and described as a reusable engine for causal,
-event-sourced field/particle/graph dynamics rather than only one game,  
+event-sourced field/particle/graph dynamics rather than only one game,\
 **so that** the same substrate can run Foresight experiments and other causal
 world models without inheriting a game-specific product boundary.
 
