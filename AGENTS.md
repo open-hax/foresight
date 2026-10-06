@@ -6,9 +6,9 @@ Treat direct `.gitmodules` entries as independently owned repositories. Do not
 rewrite a submodule's package-manager policy, recurse into nested packages, or
 modify unrelated submodule dirt while changing root orchestration.
 
-`.agents/` and `eta/` are declared consolidation inputs curated by this root;
-`.agents/` retains its independent nested Git ownership while `eta/` is
-root-owned.
+`.agents/`, `eta/` and `clobber/` are declared consolidation inputs curated by this root;
+`.agents/` retains its independent nested Git ownership while `eta/` and
+`clobber/` are root-owned.
 Inventory them without following nested Git repositories, skills, symlinks, or
 package manifests. Their presence in inventory does not grant execution
 authority; compatibility originals may remain in their existing locations.
@@ -56,6 +56,7 @@ candidates, and accepted lifts are not interchangeable.
 | `axxium` | open-hax/axxium | identity-auth-kernel | Identity and authorization kernel; existing repository history is preserved |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
+| `clobber` | (root-owned, recovered from riatzukiza/devel) | process-supervisor-dsl | Recovered pm2-clj/clobber PM2 DSL: merge law, prototypes, profiles (consolidation input; destined for the shx/Hexis supervisor IR; see `clobber/PROVENANCE.md`) |
 | `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |
 | `archaeology` | (root-owned native component) | causal-architecture-archaeology | Normalized Clio archaeology events, causal run composition, and disposable projections |
 
@@ -143,3 +144,43 @@ must remain visible. Never convert an unavailable action into a pass.
 
 Cards live under `docs/agile/kanban`. Rheos events and receipts belong under
 `.ημ/`; no provenance ledger may be created elsewhere.
+
+
+## Pull requests: Promethean review and promotion
+
+Use the canonical `~/.agents/skills/pr-flow` skill pack for every PR interaction.
+The process and deployment handoff are specified in
+[`docs/notes/promethean-review-and-promotion.md`](docs/notes/promethean-review-and-promotion.md)
+and [`docs/notes/design/promethean-pr-process.edn`](docs/notes/design/promethean-pr-process.edn).
+
+- The target process develops on `{feat,chore,docs,fix,...}/*` branches in the
+  mapped `riatzukiza/*` fork. Activate it per repository only after the fork map,
+  required trusted gate, protection and staging controller are implemented and
+  verified. Until then, retain that repository's existing authorized PR path.
+  Invite CodeRabbit, Codex, MiMo and Kimi; admission requires one eligible
+  approving review bound to the current head, plus every required deterministic
+  check and the documented disposition of every finding.
+- Planning artifacts precede implementation; use Rheos for ready transitions,
+  then laws/tests in red and domain/adapters in green. Keep automatic merge off
+  until the current head is qualified. Use merge commits with a head guard.
+- After activation, only a qualified feature merge with trusted origin/purpose
+  evidence starts Services staging at its exact merge SHA. Protected upstream
+  sync merges are terminal; unknown purposes fail closed. Exact staging proof
+  admits an in-org promotion PR and the affected Foresight integration PR.
+  Required gates bind the current base and tested merge candidate as well as
+  the PR head. A proposed workflow or build is not live deployment evidence.
+  Production retains its separate qualification gate.
+- Optional reviewers being unavailable, skipped or rate-limited never become
+  approvals. Settle their actual findings; never impersonate their identities.
+  Keep native provider reviews distinct from imported CLI worker evidence.
+- Host model execution in isolated persistent workers; signing credentials stay
+  with the trusted publisher. Use the existing eta-mu/Sol/Knoxx/Clio/Katamorph
+  seams. Do not add a second board engine or event-ledger authority here.
+- Candidate workflows, builds and dependency hooks run without signing or
+  deployment secrets and with read-only tokens, including same-repository PRs.
+  Privileged admission/publication uses a trusted App or pinned base workflow
+  that never executes candidate code. Gate code/configuration and required App
+  identity must be outside candidate control before process activation.
+
+These are the user's October 3 policy decisions. The linked contract records
+which parts are implemented and which still require reviewed activation.

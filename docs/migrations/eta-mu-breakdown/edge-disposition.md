@@ -9,8 +9,14 @@ below are observed declarations, not proof of successful isolated consumer build
   `data/sources.json` binds the original 46 relationships to this snapshot.
 - Extraction donor: eta-mu `0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90`.
   Retained donor subdirectory dependencies use this commit.
-- Current root pin: eta-mu `c2bbf7547592cb9e0c82eee01c2b01555c6cee68`.
-  Its CLI manifest switches three npm dependencies and a Mycology source adapter.
+- Current root pin: eta-mu `0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90`, the
+  donor baseline. The root gitlink is unchanged by PR #96.
+- Withdrawn candidate pin: eta-mu `c2bbf7547592cb9e0c82eee01c2b01555c6cee68`.
+  Its CLI manifest switches three npm dependencies and a Mycology source adapter,
+  but the same two commits also delete nine donor package directories. Advancing
+  the gitlink to it would perform E1.11 while E1.11 stays blocked, and it leaves
+  nine unresolvable references. See
+  [donor-retirement-blockers.md](donor-retirement-blockers.md).
 
 ## Receiver declarations at the registered pins
 
@@ -34,10 +40,10 @@ workspace package edges; this bounded observation does not prove runtime closure
 Kanban Orchestrator is contract data with host-loader and Rheos MCP dependencies.
 See the [acceptance register](acceptance.md) for missing execution evidence.
 
-## Eta-mu CLI: partial current cutover
+## Eta-mu CLI: partial cutover observed on the withdrawn candidate
 
-At `c2bbf7547592cb9e0c82eee01c2b01555c6cee68`,
-`packages/eta-mu/package.json` declares:
+At `c2bbf7547592cb9e0c82eee01c2b01555c6cee68` — a revision the root does **not**
+pin — `packages/eta-mu/package.json` declares:
 
 | Dependency | Repository revision |
 |---|---|
@@ -51,6 +57,11 @@ Receipt River, Turn Processor, and Terminal UI. The Mycology bootstrap adapter
 fetches `30339f9aa3df83ef8c335d4544307272abfbb131`. Receipt River is now a
 registered child but its CLI consumer is still on the donor. The CLI also pins
 an older Rheos revision than Foresight. These are explicit remaining edges.
+
+At that same candidate revision the `packages/receipt-river` directory is
+deleted, so the retained `../receipt-river/src/cljs` source path does not
+resolve. The cutover and the retirement are not separable at these two commits,
+which is why the candidate cannot be adopted for E1.07 alone.
 
 E1.07 stays incomplete until all affected consumers pass isolated installation,
 launcher, build, and test checks with retired donor paths unavailable. Neither

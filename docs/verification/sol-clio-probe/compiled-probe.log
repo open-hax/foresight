@@ -1,0 +1,15 @@
+shadow-cljs - config: /home/err/spaces/review-repair/sol-server-workers/.ημ/node22-prerequisite/clio-probe/shadow-cljs.edn
+shadow-cljs - starting via "clojure"
+Cloning: https://github.com/open-hax/clio.git
+Checking out: https://github.com/open-hax/clio.git at 788cdd3434615a7932b924e68520dbf7f88408c2
+[:test] Compiling ...
+========= Running Tests =======================
+
+Testing probe-test
+
+Ran 1 tests containing 13 assertions.
+0 failures, 0 errors.
+===============================================
+[:test] Build completed. (91 files, 90 compiled, 0 warnings, 4.86s)
+[:esm] Compiling ...
+[:esm] Build completed. (89 files, 84 compiled, 0 warnings, 2.02s)

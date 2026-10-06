@@ -22,6 +22,8 @@ snapshot and reported execution claims are retained as historical evidence.
 | [Relationships](data/relationships.json) | 32 graph nodes and 46 typed edges with source IDs and observed/reported status |
 | [ND-EDN relationships](data/relationships.nd.edn) | One static relation record per line; not a Clio event ledger |
 | [Unresolved scope](data/unresolved.json) | Remaining verification and decision boundaries |
+| [Donor-retirement blockers](donor-retirement-blockers.md) | Exact-revision scan of the withdrawn eta-mu candidate pin: the live inbound references E1.11 must close before any donor directory is deleted |
+| [Child gate evidence](child-gate-evidence.md) | One clean-clone execution of every child's declared build, test and lint gates, with the failures, the bootstrap gap and the tool-unavailable rows recorded as observed |
 | [Validation report](checks/validation-report.json) | Results and exact scope of the local pack checks |
 
 ## Graphs
