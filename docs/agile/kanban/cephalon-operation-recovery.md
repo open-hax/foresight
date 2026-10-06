@@ -38,17 +38,27 @@ process, or make cloud worker availability depend on an operator laptop service.
    old owner persistently before enabling its successor.
 2. Recreate the backend with a pending job. Within 60 seconds, the recovered
    owner must inspect persisted job identity and previous ownership. Re-admit
-   pending work only after the previous owner is confirmed terminated or its
-   ten-minute execution deadline expired; do not cancel a live owner. Preserve
-   artifact identity. Reconcile any unknown publication outcome against the
+   pending work only after the previous owner and its delegated work are
+   confirmed terminated, or verified fencing prevents them from persisting
+   artifacts and publishing. Ten-minute deadline expiry alone is insufficient:
+   after expiry, test an old owner that still attempts both effects and prove
+   rejection before re-admission. Ambiguous termination or fencing keeps the
+   work quarantined with an explicit outcome. Do not cancel a live owner within
+   its valid execution deadline. Preserve artifact identity. Reconcile any
+   unknown publication outcome against the
    native outlet before retrying; if unresolved, mark the attempt ambiguous
    and require explicit retry rather than republishing. Observe three cycles.
 3. Each creative execution has a ten-minute deadline and at most three total
    attempts per cycle identity. Failed attempts wait one minute, then five
    minutes before the remaining attempts; no immediate retry loop. Exhaustion
    yields a persisted failed outcome and a meaningful alert, then waits for the
-   next scheduled cycle or an explicit operator retry. Inject unavailable
-   provider and disappearing maker cases and inspect those outcomes. The head
+   next scheduled cycle or an authorized explicit operator retry. That retry
+   creates a fresh cycle identity linked to the exhausted predecessor, with its
+   own three-attempt cap; the predecessor's failed outcome and attempt history
+   are immutable. A fresh identity does not bypass maker reservation, publication
+   deduplication or ambiguous-outlet quarantine. Test exhaustion followed by
+   operator retry and verify both identities, limits and retained history.
+   Inject unavailable provider and disappearing maker cases and inspect those outcomes. The head
    remains reachable throughout; healthy-provider response timing is measured
    separately from maker availability.
 4. Runtime health measures successful creative cycles and usable dependencies,

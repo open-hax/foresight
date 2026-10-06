@@ -33,8 +33,12 @@ lane policy, cancel makers, or promise zero network/model latency.
 
 ## Acceptance criteria
 
-1. Hold a maker unresolved; a head invocation starts before that maker resolves.
-2. Head completion leaves the maker active with the same run/session identity.
+1. Saturate the configured maker run capacity and its pending queue bound with
+   held, nonterminal fixtures. A head invocation is admitted and completes before
+   any held maker is released, proving reserved capacity rather than a free
+   shared slot.
+2. Head completion leaves every held maker active with its original run/session
+   identity.
 3. Each lane is bounded and FIFO internally; releasing an owner promotes only
    its lane's successor. Failure and rejected admission retain existing evidence.
 4. Lane choice comes from an admissible resource agreement, with invalid choices

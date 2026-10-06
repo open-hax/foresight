@@ -78,7 +78,7 @@
                            :keywordize-keys true)
           head-tools (set (:headTools observed))
           maker-tools (set (:makerTools observed))]
-      (check! (#{401 403} (:unauth observed)) "anonymous callers cannot control the event runtime")
+      (check! (#{401 403} (:unauth observed)) "anonymous GET access to /api/admin/config/events is rejected")
       (check! (:selfControlIdentity observed) "native self-control reaches this backend with a principal allowed to delegate chat")
       (check! (some #(let [age (- (.now js/Date) (.parse js/Date (:created_at %)))]
                       (and (= "completed" (:status %))

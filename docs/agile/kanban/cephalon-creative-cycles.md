@@ -42,6 +42,10 @@ style, or claim every generated piece must be published.
    delegated job nonterminal after dispatch returns; later ticks must be
    coalesced or refused with an observable result until that job terminates.
    A provider failure yields the retry/backoff limits in the recovery story.
+   After exhaustion, only an authorized operator retry or the next scheduled
+   cycle creates a fresh cycle identity; operator retries link the exhausted
+   predecessor and preserve its immutable attempts/outcome. The recovery story
+   defines the new identity's cap and retains publication/reconciliation gates.
 4. Delegated work has parent/job identities and a terminal outcome. The head
    does not await a maker before responding to conversation.
 5. Completion is derived from verified outputs, not the model's prose. Stored
