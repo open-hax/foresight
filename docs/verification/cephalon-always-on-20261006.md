@@ -219,10 +219,17 @@ and delegation tools. Conversation does not explicitly cancel or reset it.
 ## Review and continuation
 
 PR136 contains an incoming epic and four UUID-linked stories. All three initial
-CodeRabbit planning findings have verified fixes and explanatory settlements.
-The successor head still needs its own review qualification. CodeRabbit reported
-an hourly cooldown through19:30:28UTC on2026-10-06; Codex reported account review
-quota. Neither condition supplies approval. Cards have not been moved to ready.
+CodeRabbit planning findings and all four findings from review5433964852 have
+verified specification/diagnostic fixes and explanatory settlements. All six
+native finding threads are resolved; the outside-diff saturation item is settled
+in native comment6024516276. The successor still needs its own qualification.
+The second pass now requires fully saturated maker admission fixtures, proven
+termination/fencing before stale-owner re-admission, fresh linked operator-retry
+identities with immutable exhausted history, and an anonymous-auth statement
+limited to the actual GET observation. These are acceptance criteria, not
+implemented guarantees. CodeRabbit's quota reply6024485582 at20:06:27UTC gives
+51minutes until included review (20:57:27UTC); Codex reports account quota.
+Neither condition supplies approval. Cards have not been moved to ready.
 
 The active `cephalon-runtime-follow-up` heartbeat continues operational inspection,
 review settlement and the authorized implementation flow every30minutes, staying
@@ -253,6 +260,21 @@ instance is recorded on the existing upstream
 A different authenticated repository writer can independently verify and
 handle them under current policy. The canonical review-convergence gate remains
 unsatisfied independently of these conversations. No merge policy was waived.
+
+The source branch subsequently advanced to
+`e8c00838fb773c50aeba98dae623b8ca2c5e607d` with accurate verifier JSDoc and an
+append-only receipt. The documentation-only patch preserves prior executable
+bytes; syntax checks and the actual native-engine source proof pass3tests /
+18assertions. Native explanation6024452306 addresses the concrete missing
+documentation without claiming a newly measured hosted coverage percentage.
+Prior4fc1245 approvals and CI are historical after that push. The fresh hosted
+backend/frontend job112474821650 passed on e8c0083; MiMo remains pending.
+The edited CodeRabbit summary at
+20:03:52UTC says14minutes until included review, giving20:17:52UTC; refresh
+the native evidence before retrying. At20:18UTC, the canonical CLI requested a
+full review of that exact successor in native comment6024678217, after the
+known cooldown expired. A request is not a completed review or approval.
+Both PR auto-merge requests are null.
 
 ### Unattended-cycle observations
 
@@ -293,6 +315,30 @@ The native run is in `state/cephalon-delegation-and-cycle3-persisted-20261006.js
 the public read is `state/cephalon-cycle3-publication-observation-20261006.json`.
 This is the third completed natural cycle. The idle recreation deliberately
 interrupts the cadence series and does not establish pending-job recovery.
+
+After the head contract reload, the fourth natural clock run
+`trigger-ussyverse-social_creative-cron-creative-evt_1791317265366-1791317265373`
+was admitted at20:07:45.381UTC and completed at20:10:50.173UTC. It saved a
+2,112-byte composition specification with numeric duration16,258bytes of
+lyrics, a433-byte receipt and `Music/cephalon/20261006T200800Z/sketch.wav`.
+Independent ffprobe reads16.000seconds, stereo44.1kHz PCM,2,822,444bytes.
+ffmpeg measures mean-15.4dB and maximum0dB;1,464of1,411,200PCM samples are
+saturated (about0.104%). The length and attachment are verified, while
+quality admission remains advisory.
+
+It published the independently observed text announcement
+[Bluesky post3mxaaec6q7k2p](https://bsky.app/profile/open-hax.bsky.social/post/3mxaaec6q7k2p),
+with no audio/video embed. Native Discord message1557122767516598314 at
+20:09:57.718UTC carries one `sketch.wav` attachment. An independent authenticated
+Discord GET returned200 and verified the bot author, filename, `audio/wav`
+content type and matching2,822,444-byte size. The native run and independent
+outlet observations are retained as `state/cephalon-natural-cycle-4-persisted-20261006.json`,
+`state/cephalon-cycle4-discord-observation-20261006.json` and
+`state/cephalon-cycle4-publication-observation-20261006.json`.
+The run also retains a failed optional `jq` probe (binary absent) and an
+unauthenticated HTTP probe returning `AuthMissing`; native authenticated
+publication/delivery succeeded. No failed tool result is hidden or used as
+success evidence.
 
 Reloading a contract rearms the current native interval, so repeated prompt
 edits would postpone this proof. No manually dispatched cycle is counted as

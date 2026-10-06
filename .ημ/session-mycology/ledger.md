@@ -531,3 +531,13 @@
   spore: none
   receipt-refs: cephalon-delegation-and-three-clock-cycles
   note: A configured internal URL is not usable delegation until native header identity and permissions are verified. Model instructions can batch an acknowledgment with spawn and invent an unsupported child shape; only receipts and the actual admitted contract establish ordering and ownership. Preserve failed probes beside successful ones. Required author walkthroughs can collide with strict all-thread settlement; attach evidence to the existing canonical issue, never impersonate another writer or waive the gate.
+
+- ts: 2026-10-06T20:20:27.844988+00:00
+  session: /home/err/.codex/worktrees/cephalon-planning/foresight
+  task: Observe the fourth native creative cycle and eligible source review retry
+  p-efficiency: 0.9
+  p-friction: 0.12
+  p-skill-candidate: 0.08
+  spore: none
+  receipt-refs: cephalon-runtime-heartbeat-20261006T2012
+  note: Verify the actual attachment and outlet embed independently. A valid duration and delivered WAV improve the prior outcome without proving quality admission; keep clipping measurements and optional tool failures visible. Bind cooldown to the native comment update time and re-request only after it expires. Requests and historical approvals do not qualify a successor head.
