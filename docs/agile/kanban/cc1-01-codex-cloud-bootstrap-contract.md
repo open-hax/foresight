@@ -1,14 +1,15 @@
 ---
 category: "kanban"
 labels: "codex-cloud, workspace, law, 3sp"
-type: "story"
 story_id: "CC1.01"
+parent: "codex-cloud-self-hydrating-foresight"
+type: "story"
+write-id: "1791292569059-0.8kald3bdz0mxdkl1uin"
 points: "3"
 title: "CC1.01 — Implement and test the pinned direct-source bootstrap contract"
 priority: "P1"
-status: "incoming"
+status: "in_progress"
 epic: "codex-cloud-self-hydrating-foresight"
-parent: "codex-cloud-self-hydrating-foresight"
 uuid: "codex-cloud-bootstrap-contract"
 ---
 
