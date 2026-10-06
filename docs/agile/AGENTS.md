@@ -9,8 +9,12 @@ The board source lives in `docs/agile/kanban`. Run `eta-mu kanban` from
 the repository root. `openhax.kanban.edn` is canonical and selects the
 Promethean FSM; `openhax.kanban.json` supports the published JSON-only CLI.
 
-Use CLI status transitions and comments rather than editing card
-frontmatter directly. Walk lawful transitions through `todo`,
+Cards may be authored manually as Markdown with their UUID, relationships and
+initial incoming metadata. These are first-class inputs, not claims of admitted
+board state or replayable creation events. Do not invent event/write IDs or
+claim validation. Rheos owns operational admission, status changes and comments;
+use its CLI/API/MCP/UI for those operations rather than editing established
+state frontmatter directly. Walk lawful transitions through `todo`,
 `in_progress`, `testing`, `review`, `document`, and `done`.
 
 Rheos writes through `docs/agile/kanban/.events`, which is a symlink into
