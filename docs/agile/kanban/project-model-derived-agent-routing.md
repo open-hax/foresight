@@ -27,6 +27,8 @@ project model and still grounds local facts in the selected owner's evidence.
 - Keep authority-order, ownership, promotion, and manifest-drift guidance.
 - Correct the instructions for adding sources to describe the validator's
   actual manifest/model boundary.
+- Point extracted-child routing assertions at the existing generated guide,
+  retaining their repository-route and quality-gate checks.
 
 ## Non-goals
 

@@ -10,11 +10,11 @@
             [workspace :as workspace]))
 
 (deftest extracted-children-have-routing-and-gate-entries
-  (let [agents (fs/readFileSync "AGENTS.md" "utf8")
+  (let [routes (onboarding/markdown project/project)
         catalog (edn/read-string (fs/readFileSync "config/quality-gates.edn" "utf8"))]
     (doseq [path ["kanban-orchestrator" "clio" "chat-ui" "rheos"
                  "session-mycology" "sol" "osmos" "receipt-river" "axxium"]]
-      (is (str/includes? agents (str "| `" path "` | open-hax/" path " |")) path)
+      (is (str/includes? routes (str "| `" path "` | open-hax/" path " |")) path)
       (is (seq (get-in catalog [:catalog/repositories path :repository/gates])) path))))
 
 (deftest declares-the-source-constellation
