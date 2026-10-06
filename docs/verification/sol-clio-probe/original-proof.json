@@ -1,0 +1,40 @@
+{
+  "clio_git_sha": "788cdd3434615a7932b924e68520dbf7f88408c2",
+  "git_pin_checkout_verified": true,
+  "node": "22.20.0",
+  "npm": "10.9.3",
+  "fs_ext_extra_prebuilt": "2.2.9",
+  "shadow_wrapper": "3.4.11",
+  "npm_lock_sha256": "51ac6cab08de73cb0f4d80027aa159dce1051b38bdca2a9616e5b8a2f68b024f",
+  "frozen_install_packages": 15,
+  "source": "/home/err/spaces/review-repair/sol-server-workers/.\u03b7\u03bc/node22-prerequisite/clio-probe/test/probe_test.cljs",
+  "tests_commonjs": 1,
+  "assertions_commonjs": 13,
+  "tests_esm": 1,
+  "assertions_esm": 13,
+  "failures": 0,
+  "errors": 0,
+  "compiler_warnings": 0,
+  "sol_integration_implemented": false,
+  "hosted_worker_qualified": false,
+  "operations": [
+    "real_create",
+    "schema_snapshot",
+    "append",
+    "read",
+    "exact_retry_idempotence",
+    "reopen",
+    "partition_canonicalization",
+    "id_collision_rejection",
+    "stream_slot_collision_rejection",
+    "missing_ledger_rejection",
+    "old_sol_envelope_rejection",
+    "stream_gap_rejection"
+  ],
+  "logs": {
+    "lock-resolution.log": "b125771fda8addd462adfe7f7b03299feb35e28badbb2d16ae8589e371216f8f",
+    "frozen-install.log": "47c5a7b4f7f8fd053e4ab7d103d1d264f4764112cb48470be9ba49f83a3f02b2",
+    "compiled-probe.log": "bc94ed9984661ff17b69e8c85b2a659f3eaffc870d7a4612137a44610c2e8287",
+    "esm-runtime.log": "f79b36a0a40f234426b65e1c242e8ec63065d7a0cd7e761fadc9ea724157eb8a"
+  }
+}

@@ -30,6 +30,12 @@
     :source-type "consolidation-input"
     :ownership "workspace-root"
     :role "clojure-harness"
+    :actionable false}
+   {:name "clobber"
+    :path "clobber"
+    :source-type "consolidation-input"
+    :ownership "workspace-root"
+    :role "process-supervisor-dsl"
     :actionable false}])
 
 (def protected-consolidation-paths
