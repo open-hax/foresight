@@ -24,7 +24,25 @@
   (and (map? value)
        (keyword? (:project/id value))
        (every? #(records? (get value %))
-               [:project/sources :project/native-components :project/invariants])))
+               [:project/sources :project/native-components :project/invariants])
+       (every? (fn [source]
+                 (and (keyword? (:source/id source))
+                      (string? (:source/path source))
+                      (keyword? (:source/type source))
+                      (every? #(or (nil? (get source %)) (boolean? (get source %)))
+                              [:source/actionable? :source/consolidation?])
+                      (or (nil? (:source/invariants source))
+                          (sequential? (:source/invariants source)))
+                      (or (not= :git-submodule (:source/type source))
+                          (every? #(string? (get source %))
+                                  [:source/name :source/repository :source/url]))))
+               (:project/sources value))
+       (every? #(or (nil? (:component/invariants %))
+                    (sequential? (:component/invariants %)))
+               (:project/native-components value))))
+
+(defn manifest-record? [value]
+  (and (map? value) (every? #(string? (get value %)) [:name :path :url])))
 
 (defn required-gates? [value]
   (and (set? value) (seq value) (every? keyword? value)))
@@ -50,5 +68,8 @@
        (records? (:bootstrap/children value))
        (seq (:bootstrap/children value))
        (every? child? (:bootstrap/children value))
+       (every? #(= (count (:bootstrap/root-revision value))
+                   (count (:source/revision %)))
+               (:bootstrap/children value))
        (empty? (project-law/duplicates (map :source/path (:bootstrap/children value))))
        (empty? (project-law/duplicates (map :source/id (:bootstrap/children value))))))

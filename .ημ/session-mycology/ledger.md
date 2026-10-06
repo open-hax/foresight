@@ -511,3 +511,12 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-06T13:26:32.857928730Z
+  session: /home/err/.codex/worktrees/goal-01a11151-bootstrap/foresight
+  task: CC1.01-pinned-bootstrap
+  p-efficiency: 0.82
+  p-friction: 0.34
+  p-skill-candidate: 0.36
+  spore: none
+  receipt-refs: CC1.01-pinned-bootstrap
+  note: Assess derived plans against original committed facts, and verify runner exit status with a forced failure before adding hosted gates. Independent review caught both before publication; no spore warranted.

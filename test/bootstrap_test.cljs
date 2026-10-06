@@ -99,20 +99,26 @@
                   (assoc input :bootstrap/manifest nil)
                   (assoc input :bootstrap/gitlinks {})
                   (assoc input :bootstrap/gitlinks [nil])
-                  (assoc-in input [:bootstrap/project :project/sources] [nil])]]
+                  (assoc-in input [:bootstrap/project :project/sources] [nil])
+                  (assoc-in input [:bootstrap/project :project/sources 0 :source/path] 9)
+                  (assoc-in input [:bootstrap/project :project/sources 0 :source/repository] 9)
+                  (assoc-in input [:bootstrap/project :project/sources 0 :source/invariants] 9)
+                  (assoc-in input [:bootstrap/project :project/sources 0 :source/actionable?] "true")
+                  (assoc-in input [:bootstrap/manifest 0 :path] 9)
+                  (assoc-in input [:bootstrap/manifest 0 :name] nil)]]
     (is (rejected-plan? changed))))
 
 (deftest assessment-needs-exact-checkouts-and-nonempty-current-gates
   (let [planned reference-plan
         observed (observations planned)
-        result (bootstrap/assess planned observed required-gates)]
+        result (bootstrap/assess input planned observed required-gates)]
     (is (true? (:bootstrap/ready? result)))
     (is (empty? (:bootstrap/errors result)))
     (is (= root-sha (:bootstrap/root-revision result)))
     (doseq [gates [#{} nil [] #{"project-law"}]]
-      (is (false? (:bootstrap/ready? (bootstrap/assess planned observed gates)))))
-    (is (false? (:bootstrap/ready? (bootstrap/assess planned nil required-gates))))
-    (is (false? (:bootstrap/ready? (bootstrap/assess nil observed required-gates))))))
+      (is (false? (:bootstrap/ready? (bootstrap/assess input planned observed gates)))))
+    (is (false? (:bootstrap/ready? (bootstrap/assess input planned nil required-gates))))
+    (is (false? (:bootstrap/ready? (bootstrap/assess input nil observed required-gates))))))
 
 (deftest assessment-refuses-missing-duplicate-stale-or-failed-observations
   (let [planned reference-plan
@@ -135,7 +141,7 @@
              [:duplicate-gate (update observed :bootstrap/gates conj
                                       (first (:bootstrap/gates observed)))]]]
       (testing (name label)
-        (let [result (bootstrap/assess planned changed required-gates)]
+        (let [result (bootstrap/assess input planned changed required-gates)]
           (is (false? (:bootstrap/ready? result)))
           (is (seq (:bootstrap/errors result)))
           (is (every? #(and (= :assessment (:stage %)) (contains? % :path))
@@ -148,6 +154,69 @@
                     (update planned :bootstrap/children conj
                             (first (:bootstrap/children planned)))]]
       (is (false? (:bootstrap/ready?
-                   (bootstrap/assess changed (observations planned) required-gates)))))))
+                   (bootstrap/assess input changed (observations planned) required-gates)))))))
+
+(deftest full-sha256-object-identities-are-supported-without-mixing-formats
+  (let [sha256 (apply str (repeat 64 "d"))
+        changed (-> input
+                    (assoc :bootstrap/root-revision sha256)
+                    (update :bootstrap/gitlinks
+                            #(mapv (fn [row] (assoc row :revision sha256)) %)))]
+    (is (law/planned? (bootstrap/plan changed)))
+    (is (rejected-plan? (assoc-in changed [:bootstrap/gitlinks 0 :revision] child-sha)))
+    (is (false? (law/planned? (assoc reference-plan :bootstrap/root-revision sha256))))))
+
+(deftest a-missing-single-required-gate-and-nonpassing-outcomes-refuse-readiness
+  (let [observed (observations reference-plan)]
+    (is (false? (:bootstrap/ready?
+                 (bootstrap/assess input reference-plan
+                                   (update observed :bootstrap/gates subvec 1)
+                                   required-gates))))
+    (doseq [outcome [nil :blocked :unavailable :not-applicable :pending]]
+      (is (false? (:bootstrap/ready?
+                   (bootstrap/assess input reference-plan
+                                     (assoc-in observed [:bootstrap/gates 0 :gate/outcome] outcome)
+                                     required-gates)))))
+    (is (false? (:bootstrap/ready?
+                 (bootstrap/assess input reference-plan
+                                   (assoc-in observed [:bootstrap/checkouts 0 :checkout/initialized?] "true")
+                                   required-gates))))))
+
+(deftest independent-enumeration-rotations-retain-the-same-plan
+  (doseq [offset (range (count (:bootstrap/gitlinks input)))]
+    (let [rotate (fn [rows] (vec (concat (drop offset rows) (take offset rows))))]
+      (is (= reference-plan
+             (bootstrap/plan (-> input
+                                 (update :bootstrap/gitlinks rotate)
+                                 (update :bootstrap/manifest rotate))))))))
+
+(deftest supplied-facts-do-not-expand-the-enumerated-inventory
+  (let [observed (observations reference-plan)
+        extra-gate {:gate/id :optional-report :gate/outcome :failed
+                    :bootstrap/root-revision other-sha}]
+    (is (true? (:bootstrap/ready?
+                (bootstrap/assess input reference-plan
+                                  (update observed :bootstrap/gates conj extra-gate)
+                                  required-gates))))
+    (is (rejected-plan?
+         (update input :bootstrap/gitlinks conj
+                 {:path "rheos/nested-child" :mode "160000" :revision child-sha})))
+    (is (not (law/planned?
+              (assoc-in reference-plan [:bootstrap/children 0 :source/actionable?] true))))))
+
+(deftest assessment-cannot-qualify-a-truncated-or-retitled-plan
+  (doseq [changed [(assoc reference-plan :bootstrap/children
+                         [(first (:bootstrap/children reference-plan))])
+                  (assoc-in reference-plan [:bootstrap/children 0 :source/id] :replacement)
+                  (assoc-in reference-plan [:bootstrap/children 0 :source/repository] "other/repository")
+                  (-> reference-plan
+                      (assoc-in [:bootstrap/children 0 :source/consolidation?] false)
+                      (assoc-in [:bootstrap/children 0 :source/actionable?] true))]]
+    (is (false? (:bootstrap/ready?
+                 (bootstrap/assess input changed (observations changed) required-gates))))))
+
+(defmethod test/report [::test/default :end-run-tests] [summary]
+  (when-not (test/successful? summary)
+    (set! (.-exitCode js/process) 1)))
 
 (test/run-tests)
