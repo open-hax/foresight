@@ -20,6 +20,17 @@
 
 (def required-gates #{:project-law :workspace-law})
 
+(def reference-plan
+  {:bootstrap/status :planned
+   :bootstrap/root-revision root-sha
+   :bootstrap/children
+   (mapv (fn [source]
+           (assoc (select-keys source [:source/id :source/path :source/repository])
+                  :source/revision child-sha
+                  :source/actionable? (boolean (:source/actionable? source))
+                  :source/consolidation? (boolean (:source/consolidation? source))))
+         (sort-by :source/path (project/submodule-sources)))})
+
 (defn observations [planned]
   {:bootstrap/root-revision root-sha
    :bootstrap/checkouts
@@ -92,7 +103,7 @@
     (is (rejected-plan? changed))))
 
 (deftest assessment-needs-exact-checkouts-and-nonempty-current-gates
-  (let [planned (bootstrap/plan input)
+  (let [planned reference-plan
         observed (observations planned)
         result (bootstrap/assess planned observed required-gates)]
     (is (true? (:bootstrap/ready? result)))
@@ -104,7 +115,7 @@
     (is (false? (:bootstrap/ready? (bootstrap/assess nil observed required-gates))))))
 
 (deftest assessment-refuses-missing-duplicate-stale-or-failed-observations
-  (let [planned (bootstrap/plan input)
+  (let [planned reference-plan
         observed (observations planned)]
     (doseq [[label changed]
             [[:root (assoc observed :bootstrap/root-revision other-sha)]
@@ -131,7 +142,7 @@
                       (:bootstrap/errors result))))))))
 
 (deftest supplied-plan-must-retain-its-child-contract
-  (let [planned (bootstrap/plan input)]
+  (let [planned reference-plan]
     (doseq [changed [(assoc planned :bootstrap/children [])
                     (assoc-in planned [:bootstrap/children 0 :source/revision] "main")
                     (update planned :bootstrap/children conj

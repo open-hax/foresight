@@ -29,12 +29,16 @@
 (defn required-gates? [value]
   (and (set? value) (seq value) (every? keyword? value)))
 
+(defn revision? [value]
+  (and (evidence/git-commit-id? value)
+       (boolean (re-find #"[1-9a-f]" value))))
+
 (defn child? [value]
   (and (map? value)
        (keyword? (:source/id value))
        (project-law/confined-relative-path? (:source/path value))
        (evidence/nonblank-string? (:source/repository value))
-       (evidence/git-commit-id? (:source/revision value))
+       (revision? (:source/revision value))
        (boolean? (:source/actionable? value))
        (boolean? (:source/consolidation? value))
        (not (and (:source/consolidation? value) (:source/actionable? value)))))
@@ -42,7 +46,7 @@
 (defn planned? [value]
   (and (map? value)
        (= :planned (:bootstrap/status value))
-       (evidence/git-commit-id? (:bootstrap/root-revision value))
+       (revision? (:bootstrap/root-revision value))
        (records? (:bootstrap/children value))
        (seq (:bootstrap/children value))
        (every? child? (:bootstrap/children value))
