@@ -511,3 +511,13 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+
+- ts: 2026-10-06T13:49:07Z
+  session: /home/err/.codex/worktrees/pr112-review-rollout/foresight
+  task: pr112-planning-refresh
+  p-efficiency: 0.90
+  p-friction: 0.25
+  p-skill-candidate: 0.32
+  spore: none
+  receipt-refs: open-hax/foresight#112
+  note: Verify parent merge and current base before resurrecting a skipped draft. Preserve dated snapshots as observations; current caller restoration is separate from child policy acceptance. No spore warranted.
