@@ -511,3 +511,12 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-06T13:52:54.432088463Z
+  session: /home/err/.codex/worktrees/foresight-pr117-20261006
+  task: Refresh PR117 and verify canonical snapshot admission
+  p-efficiency: 0.9
+  p-friction: 0.1
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: foresight-pr117-canonical-review
+  note: Reused the canonical verification method with independent per-PR inputs and preserved all six immutable records. Shared fixture gap remains issue132; old-head approval must not carry across a caller refresh.

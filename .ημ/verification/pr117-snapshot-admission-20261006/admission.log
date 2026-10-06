@@ -1,0 +1,2 @@
+{:event/id 934c8daf-50c1-4dd9-bb10-47cc40209a62, :event/parents [93841148-b8a6-40b9-b2a8-2fa86c9dd86b], :archaeology/consumes [{:event/id 93841148-b8a6-40b9-b2a8-2fa86c9dd86b, :action/id :seed/continue-knoxx-shape-inventory, :relation :continues}]}
+:findings 3 :evidence 4
