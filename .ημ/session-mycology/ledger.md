@@ -541,3 +541,13 @@
   spore: none
   receipt-refs: cephalon-runtime-heartbeat-20261006T2012
   note: Verify the actual attachment and outlet embed independently. A valid duration and delivered WAV improve the prior outcome without proving quality admission; keep clipping measurements and optional tool failures visible. Bind cooldown to the native comment update time and re-request only after it expires. Requests and historical approvals do not qualify a successor head.
+
+- ts: 2026-10-06T20:47:27.696083Z
+  session: /home/err/.codex/worktrees/cephalon-planning/foresight
+  task: Harden contract-manifest diagnostic before runtime observation
+  p-efficiency: 0.86
+  p-friction: 0.24
+  p-skill-candidate: 0.18
+  spore: none
+  receipt-refs: cephalon-pr136-manifest-observation-hardening
+  note: Empty collections can make evidence predicates pass vacuously. Reproduce against prior source with temporary process-boundary fixtures; stop at the integrity boundary before runtime queries. Native Rheos reads preserve authored scalar metadata without proving admission, and an unsupported setter is not permission to implement a second board writer. Keep ordinary successful ticks quiet and preserve current review heads until a real finding requires a change.

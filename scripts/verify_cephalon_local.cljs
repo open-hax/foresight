@@ -68,12 +68,18 @@
     (check! (= image (:runtimeImageId manifest)) "served image digest matches the deployment manifest")
     (when (pos? @failures)
       (throw (ex-info "Wrong served image; stop before misleading runtime verification" {})))
+    (check! (and (vector? (:files manifest)) (seq (:files manifest)))
+            "contract snapshot manifest declares a non-empty file list")
+    (when (pos? @failures)
+      (throw (ex-info "Missing contract snapshot files; stop before runtime verification" {})))
     (doseq [{relative :path expected :sha256} (:files manifest)]
       (let [bytes (.readFileSync fs (path/join deployment "contracts" relative))
             actual (.digest (.update (.createHash crypto "sha256") bytes) "hex")]
         (when-not (= expected actual)
           (check! false (str "contract snapshot hash drift: " relative)))))
     (check! (zero? @failures) "contract snapshot hashes match; source revision and local overlays remain distinct")
+    (when (pos? @failures)
+      (throw (ex-info "Contract snapshot hash drift; stop before runtime verification" {})))
     (let [observed (js->clj (js/JSON.parse (command! "docker" ["exec" "-i" container "node"] observation-script))
                            :keywordize-keys true)
           head-tools (set (:headTools observed))

@@ -23,12 +23,31 @@ Run on the owning local host. The explicit selector is required. This command
 verifies the served image and contract hashes before inspecting authenticated
 configuration, recent completed clock-run records and public publication identities.
 It does not invoke an agent,
-publish, mutate contracts or transition cards. Its captured output is
+publish, mutate contracts or transition cards. Earlier captured output is
 `/home/err/.local/share/promethean/services/knoxx-social-local/verification-cephalon.txt`.
 An unavailable dependency or changed image remains a failure.
-The latest inspection has **11 passing checks, seven explicit operational
+The latest inspection has **12 passing checks, seven explicit operational
 warnings, and zero failures**. Warnings are preserved; this is an inspection
 result, not admission of the planned guarantees.
+
+MiMo reviews5434041449 and5434223876 identified a nonblocking manifest edge:
+an absent or empty `files` declaration could pass the prior hash check vacuously.
+The diagnostic now requires a non-empty vector before checking hashes, and stops
+before authenticated runtime inspection on either a missing file list or hash
+drift. Three isolated temporary fixtures reproduced the prior runtime-query path
+and verified that the successor exits1 before that path for missing files, empty
+files and a changed hash. Those fixtures replace the process boundary; they do
+not alter the deployment or invoke its APIs. The actual240-file manifest passes
+the updated diagnostic. This hardens evidence collection, not runtime behavior.
+
+Rheos's native `content` read preserves the creative card's scalar dependency
+UUID, epic, parent and incoming metadata. That read does not validate dependency
+admission or move a card. The native `frontmatter points` command refuses the
+unsupported key; no board state was changed. The3-point head estimate remains
+provisional: its7criteria exercise the existing admission/runner/tool boundaries,
+while the5-point cycle and recovery stories additionally cover durable terminal
+ownership and deployment/reconciliation. Criterion count alone is not a workload
+measure; no ready-state capacity or implementation duration is asserted.
 
 Observed preparation gates: root workspace tests passed (24 tests, 120 assertions),
 `clj-kondo --lint scripts test` passed with zero warnings or errors, and
