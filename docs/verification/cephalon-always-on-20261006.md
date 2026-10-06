@@ -228,7 +228,9 @@ termination/fencing before stale-owner re-admission, fresh linked operator-retry
 identities with immutable exhausted history, and an anonymous-auth statement
 limited to the actual GET observation. These are acceptance criteria, not
 implemented guarantees. CodeRabbit's quota reply6024485582 at20:06:27UTC gives
-51minutes until included review (20:57:27UTC); Codex reports account quota.
+51minutes until included review. Because the native minutes are rounded, use
+20:58:27UTC as the conservative earliest retry and refresh the native cooldown
+and pending-request evidence first. Codex reports account quota.
 Neither condition supplies approval. Cards have not been moved to ready.
 
 The active `cephalon-runtime-follow-up` heartbeat continues operational inspection,
@@ -244,8 +246,8 @@ commit followed by passing native and full functional suites (1,848tests /
 compiler warnings. Full lint and error-boundary checks retain confirmed
 unchanged baseline failures. The live older image was correctly refused by
 the source verifier. It has not been deployed. Native CodeRabbit completed an
-exact-head no-actionable review. Original hosted backend/frontend CI passed;
-the ready-triggered successor CI and MiMo review remain pending at this snapshot.
+exact-head no-actionable review. Original hosted backend/frontend CI passed.
+Those results are historical after the later documentation-only successor.
 Codex reports account quota and Kimi reports weekly quota; neither supplies
 approval or round credit. Knoxx's documented procedure was followed when
 marking ready: the legacy enabling job completed, its eager SQUASH auto-merge
@@ -267,14 +269,40 @@ append-only receipt. The documentation-only patch preserves prior executable
 bytes; syntax checks and the actual native-engine source proof pass3tests /
 18assertions. Native explanation6024452306 addresses the concrete missing
 documentation without claiming a newly measured hosted coverage percentage.
-Prior4fc1245 approvals and CI are historical after that push. The fresh hosted
-backend/frontend job112474821650 passed on e8c0083; MiMo remains pending.
-The edited CodeRabbit summary at
-20:03:52UTC says14minutes until included review, giving20:17:52UTC; refresh
-the native evidence before retrying. At20:18UTC, the canonical CLI requested a
-full review of that exact successor in native comment6024678217, after the
-known cooldown expired. A request is not a completed review or approval.
-Both PR auto-merge requests are null.
+Prior4fc1245 approvals and CI are historical after that push. Fresh hosted
+backend/frontend CI passed on e8c0083, including the later same-head
+[job112481722026](https://github.com/open-hax/knoxx/actions/runs/37525610814/job/112481722026).
+At20:18UTC, the canonical CLI requested the successor's full review in native
+comment6024678217 after the calculated cooldown. The native acknowledgment
+still reported3seconds remaining, showing that a rounded-minute estimate was
+slightly early. The review subsequently completed using the included allowance;
+no paid credits were activated.
+
+The [CodeRabbit summary6023699916](https://github.com/open-hax/knoxx/pull/386#issuecomment-6023699916),
+edited20:24:25UTC, reports no actionable comments, processes all10changed files,
+and records exact-head reviewed coverage for e8c0083. Its measured verifier
+docstring coverage is100.00% across5functions in2files. Native
+[MiMo review5434124920](https://github.com/open-hax/knoxx/pull/386#pullrequestreview-5434124920)
+also approves the exact same commit with no confirmed findings. Its diff-hygiene
+gate and source review do not imply that it ran the functional suites or verified
+the deployment.
+
+MiMo's nonblocking SDK metadata question is answered in native
+[comment6024880021](https://github.com/open-hax/knoxx/pull/386#issuecomment-6024880021).
+The installed, lock-matching MCP SDK1.29.0 uses a loose result schema; a read-only
+in-memory response passed through its actual server-result, JSON-RPC and
+client-result schemas without losing any music metadata in `details`.
+Knoxx's inspected registration forwards that shape without an output schema.
+This verifies that dependency path, not a deployed e8c0083 container. MiMo's
+separate nonblocking request-rejection and temporary-directory cleanup coverage
+observations remain acknowledged without an invented correction or test result.
+
+The canonical CLI now recognizes exact-head CodeRabbit and MiMo approvals.
+It still reports0of5completed code rounds because the configured cohort includes
+Codex, whose quota response grants no approval or round credit. The required
+review-resolution check still fails on the3unsettled author walkthrough notes.
+Both PR auto-merge requests remain null. No source merge, deployment, policy
+waiver or incoming-card readiness is claimed.
 
 ### Unattended-cycle observations
 
