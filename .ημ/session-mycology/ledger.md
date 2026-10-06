@@ -511,3 +511,12 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-06T13:13:16.706642076Z
+  session: /home/err/.codex/worktrees/goal-01a11151-board/foresight
+  task: parallel-backlog-triage
+  p-efficiency: 0.84
+  p-friction: 0.35
+  p-skill-candidate: 0.30
+  spore: none
+  receipt-refs: open-hax/rheos#4
+  note: Recover canonical transition capability before claiming blocked state; isolate branch board config and runtime as well as files. No spore warranted.
