@@ -33,6 +33,9 @@
     const get=async p=>{const r=await fetch('http://127.0.0.1:8000'+p,{headers:h,signal:AbortSignal.timeout(10000)});if(!r.ok)throw Error('HTTP '+r.status+' '+p);return r.json()};
     const unauth=await fetch('http://127.0.0.1:8000/api/admin/config/events',{signal:AbortSignal.timeout(10000)});
     const control=await get('/api/admin/config/events');
+    if(process.env.KNOXX_BASE_URL!=='http://127.0.0.1:8000')throw Error('Self-control URL is not the validated backend loopback');
+    const self=await fetch(process.env.KNOXX_BASE_URL+'/api/auth/context',{headers:{...h,'x-knoxx-user-email':'system-admin@open-hax.local'},signal:AbortSignal.timeout(10000)});
+    const identity=self.ok?await self.json():{};
     const head=await get('/api/tools/catalog?agent=ussyverse_social_replies&actor=discord_automation');
     const maker=await get('/api/tools/catalog?agent=ussyverse_social_creative&actor=discord_automation');
     const active=await get('/api/admin/agents/active');
@@ -44,7 +47,8 @@
     }finally{await db.close()}
     const p=await fetch('https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=open-hax.bsky.social&limit=3',{signal:AbortSignal.timeout(10000)});
     const feed=p.ok?await p.json():{};
-    console.log(JSON.stringify({unauth:unauth.status,running:control.runtime.running,
+    console.log(JSON.stringify({unauth:unauth.status,reportedRunning:control.runtime.running,
+      selfControlIdentity:self.ok&&identity.permissions?.includes('agent.chat.use'),
       schedules:control.control.resources.schedule.map(s=>({id:s.id,rule:s.resource.rule})),
       triggers:control.runtime.triggers.map(t=>({id:t.id,enabled:t.enabled,events:t.events})),
       headTools:head.tools.map(t=>t.id),makerTools:maker.tools.map(t=>t.id),
@@ -75,7 +79,14 @@
           head-tools (set (:headTools observed))
           maker-tools (set (:makerTools observed))]
       (check! (#{401 403} (:unauth observed)) "anonymous callers cannot control the event runtime")
-      (check! (:running observed) "Knoxx event runtime is running")
+      (check! (:selfControlIdentity observed) "native self-control reaches this backend with a principal allowed to delegate chat")
+      (check! (some #(let [age (- (.now js/Date) (.parse js/Date (:created_at %)))]
+                      (and (= "completed" (:status %))
+                           (= "schedule/ussyverse-social-creative" (get-in % [:settings :agentSpec :eventType]))
+                           (= "creative" (get-in % [:settings :agentSpec :scheduleId]))
+                           (<= 0 age 2400000)))
+                    (:runs observed))
+              "a persisted maker completed from the native schedule within the last40minutes")
       (check! (some #(= "*/15 * * * *" (:rule %)) (:schedules observed)) "native Knoxx schedule retains the 15-minute creative cadence")
       (check! (some #(and (:enabled %) (some #{"creative-request" "cephalon/creative-request"} (:events %)))
                     (:triggers observed)) "non-clock creative-request event is bound to an enabled trigger")
@@ -86,6 +97,8 @@
       (check! (:synthesisScript observed) "the actual image contains the native music engine")
       (check! (some #(pos? (:images %)) (:publications observed)) "public Bluesky API independently observes an image post")
       (println "OBSERVED active runs:" (pr-str (:active observed)))
+      (println "OBSERVED configuration API running:" (:reportedRunning observed)
+               "(constant in this build; not a liveness check)")
       (println "OBSERVED recent maker runs:" (pr-str (:runs observed)))
       (println "OBSERVED native publication identities:" (pr-str (:publications observed)))
       (doseq [gap (:operationalGaps manifest)] (println "WARN" gap))

@@ -21,10 +21,14 @@ nbb scripts/verify_cephalon_local.cljs --only knoxx
 
 Run on the owning local host. The explicit selector is required. This command
 verifies the served image and contract hashes before inspecting authenticated
-runtime state and public publication identities. It does not invoke an agent,
+configuration, recent completed clock-run records and public publication identities.
+It does not invoke an agent,
 publish, mutate contracts or transition cards. Its captured output is
 `/home/err/.local/share/promethean/services/knoxx-social-local/verification-cephalon.txt`.
 An unavailable dependency or changed image remains a failure.
+The latest inspection has **11 passing checks, seven explicit operational
+warnings, and zero failures**. Warnings are preserved; this is an inspection
+result, not admission of the planned guarantees.
 
 Observed preparation gates: root workspace tests passed (24 tests, 120 assertions),
 `clj-kondo --lint scripts test` passed with zero warnings or errors, and
@@ -46,6 +50,7 @@ establish unattended operation across host sleep.
 | Conversation agent | `ussyverse_social_replies` |
 | Creative cadence | native Knoxx schedule `*/15 * * * *` |
 | Additional trigger | `:cephalon/creative-request` |
+| Native internal control | backend loopback `http://127.0.0.1:8000`; separate `cephalon_control` knowledge-worker principal |
 
 The image is based on an older Knoxx build; the later contract snapshot is not a
 claim that that source revision was compiled. The deployment manifest retains
@@ -70,6 +75,7 @@ availability and mesh failover remain unverified.
 | Music project | `Music/cephalon/20261006184744Z/spec.json`, actual numeric12-second synthesis spec, lyrics and receipt |
 | Music artifact | `Music/cephalon/20261006184744Z/final.wav`,2,116,844bytes, stereo44.1kHz,12.000seconds |
 | Music delivery | [Discord message1557102511633076364](https://discord.com/channels/1444142672548986994/1494137016303095828/1557102511633076364), independently retrieved using the configured bot credential; one matching `audio/wav` attachment |
+| Native voice | completed run `b107ea78-3efb-45b5-b454-513637642832`; `Voice/openhax-own-voice-20261006.mp3`,32,300bytes, Kokoro `af_jessica`, delivered through native Discord |
 
 Artifact paths above are relative to the persistent deployment `state/workspace`.
 The final WAV was independently measured with ffprobe and ffmpeg: mean volume
@@ -124,10 +130,86 @@ saturation law unproven.
 4. The configured image provider returned403 `provider_not_allowed`. Original
    SVG creation and native Bluesky rasterization succeeded. This is a functional
    creative fallback, not a claim that provider image generation is working.
-5. The owning host can sleep. Three unattended clock cycles, supervised restart,
-   cloud placement and mesh ownership recovery have not yet been demonstrated.
-6. The artwork post had empty alt text. The current maker prompt now requires
+5. The owning host can sleep. Three natural clock cycles have completed, with
+   an intentional idle backend recreation between the second and third. This
+   proves resumed scheduling after that recreation, not uninterrupted cadence,
+   in-flight job recovery, cloud placement or mesh ownership recovery.
+6. The first artwork post had empty alt text. The current maker prompt now requires
    `imageAlts`; accessibility enforcement remains part of publication work.
+7. `domain.event.dispatch/status-snapshot` hardcodes `:running true`. The
+   configuration API therefore cannot establish runtime liveness. The diagnostic
+   instead checks a recent completed persisted schedule-origin run and explicitly
+   labels the API field as a constant. Cloud disabled banners, the absence of
+   creative schedules and the served flag guard were independently inspected;
+   the cloud API's `running` value is not proof of a second live consumer.
+8. Artifact quality and delivery remain advisory. The second natural music
+   cycle saved9.742seconds of real audio rather than the proposed12–20seconds,
+   with990saturated PCM samples out of859,240 (about0.115%). Its Discord send
+   was a notice with zero attachments. Retain that result; do not label it a
+   verified12-second delivered musical project. The earlier direct12-second
+   project remains the verified audio attachment proof.
+9. Acknowledgment order and child identity are still prompt guidance. The
+   acknowledge-first probe batched send and spawn, admitted a default-contract
+   child rather than the requested maker and retained no tool-backed artifact.
+   Native ordering and strict delegated-spec validation are explicit head-story
+   acceptance criteria; an accepted child is not evidence of completed work.
+
+## Internal delegation boundary repair
+
+The first direct head delegation probe, run
+`6a4df1d2-1636-47a2-aec7-291a2e33a85f`, failed four `agents.spawn` attempts
+with `fetch failed` and never sent its acknowledgment. The deployment had
+incorrectly set `KNOXX_BASE_URL` to the host's frontend loopback port18882.
+Inside the backend container that address is not its own API.
+
+The Compose declaration now sets `KNOXX_BASE_URL=http://127.0.0.1:8000`;
+public/frontend URLs retain their distinct purpose. The backend was recreated
+only after independently checking zero active runs and zero persisted running
+or queued jobs. Its image ID and persistent database/contracts/artifacts remain
+the recorded ones; Docker health returned healthy. This is an observed idle
+recreation, not a pending-job recovery proof. It rearms the creative clock.
+
+The native control client additionally supplies the fixed header identity
+`system-admin@open-hax.local`. The local instance had not provisioned it; a
+native-header context read returned401 while the configured operator key alone
+returned200. Through the existing Knoxx admin API, a separate internal control
+principal was created in the existing Open-Hax org, actor `cephalon_control`,
+with the existing **knowledge-worker** role. No human account or bot credential
+was reassigned. Its identity is `d2a25d4c-a82c-4fde-b9fe-f22ecceaec0c`.
+Native-header context now returns200 and grants `agent.chat.use`.
+The diagnostic verifies this exact internal origin and usable principal.
+
+A repeat head probe, `aeda4003-75a4-4c44-b025-dd90b64c4b85`, was admitted
+at19:34:58.907UTC. Native `agents.spawn` accepted maker
+`735a8ae4-ef5c-4123-9b1e-c3e584e5583c` at19:35:15.752UTC.
+The head delivered Discord acknowledgment1557114088843124748 with that actual
+run identity at19:35:28.561UTC, then completed at19:35:46.064UTC. The child
+continued independently until19:35:47.651UTC and wrote an original130-byte
+four-line poem at `Music/cephalon/delegation-proof/20261006T193524Z.txt`
+and a159-byte receipt at workspace-root `receipt.txt`. No publication was
+requested from this verification child. The retained parent/child snapshots are
+`state/cephalon-delegation-and-cycle3-persisted-20261006.json`.
+
+The acknowledgment took about30seconds because the probe dispatched first.
+The head contract was adjusted to acknowledge before spawning, exactly once,
+with no completion or acceptance claim before its receipt. Its live reload
+occurred at19:52UTC, without a process restart, and rearms the native clock.
+The next direct verification run, `fbd5ed6a-3bc3-4cb7-8153-a109c90fd155`,
+was admitted at19:53:19.460UTC. The model emitted both tools in one batch:
+spawn began at19:53:40.069UTC, send at19:53:40.081UTC, and Discord
+acknowledgment1557118669673209968 arrived at19:53:40.716UTC (about21.3seconds).
+It omitted the required maker contract/model from its specification. The
+accepted child `47b62c5f-373b-4644-ad50-7a9f31265d04` therefore resolved to
+`knoxx_default`, completed with no tool receipts and did not provide artifact
+proof. The snapshot is `state/cephalon-ack-first-persisted-20261006.json`.
+This failed the intended acknowledgment-before-admission and child-identity
+contracts. It was an authorized direct probe, not a fabricated operator event.
+Do not infer that the prompt update guarantees either property.
+
+Source work should enforce that ordering, reject unsupported delegated shapes,
+and replace the client's borrowed fixed header identity with explicit
+instance/actor authentication. The earlier correctly specified asynchronous
+maker proof remains valid; the later failed-shape probe is retained separately.
 
 The foreground contract has four allowed tools: Discord send/read/react and
 asynchronous `agents.spawn`. It disables thinking and passive-memory delays,
@@ -147,6 +229,31 @@ review settlement and the authorized implementation flow every30minutes, staying
 quiet when nothing actionable changes. **Knoxx's own clock creates the art**;
 the heartbeat is maintenance and continuation, not the creative scheduler.
 
+The narrow native music correctness/packaging fix is pushed as
+[Knoxx PR386](https://github.com/open-hax/knoxx/pull/386), ready at
+`4fc1245f6373f0994cbecb7533caff91301b37a2`. It has a real failing regression
+commit followed by passing native and full functional suites (1,848tests /
+9,107assertions),75smoke tests, and production compile/release with zero
+compiler warnings. Full lint and error-boundary checks retain confirmed
+unchanged baseline failures. The live older image was correctly refused by
+the source verifier. It has not been deployed. Native CodeRabbit completed an
+exact-head no-actionable review. Original hosted backend/frontend CI passed;
+the ready-triggered successor CI and MiMo review remain pending at this snapshot.
+Codex reports account quota and Kimi reports weekly quota; neither supplies
+approval or round credit. Knoxx's documented procedure was followed when
+marking ready: the legacy enabling job completed, its eager SQUASH auto-merge
+was disabled, and native `autoMergeRequest:null` was verified afterward.
+
+Three required author walkthrough notes explain the diff and request no
+correction. The hosted all-thread gate and canonical settlement classifier
+currently treat them as unsettled findings. They remain intact and unresolved;
+no author self-settlement or reviewer impersonation is used. This additional
+instance is recorded on the existing upstream
+[informational-thread contract issue22](https://github.com/riatzukiza/.agents/issues/22#issuecomment-6024302534).
+A different authenticated repository writer can independently verify and
+handle them under current policy. The canonical review-convergence gate remains
+unsatisfied independently of these conversations. No merge policy was waived.
+
 ### Unattended-cycle observations
 
 The last contract reload armed the900000ms interval at18:47:39.383UTC.
@@ -154,7 +261,39 @@ The first natural tick admitted run
 `trigger-ussyverse-social_creative-cron-creative-evt_1791313360070-1791313360119`
 at19:02:40.141UTC. Its persisted event type is
 `schedule/ussyverse-social-creative` and schedule ID is `creative`.
-This run is observed running; its completion and artifact remain pending.
+The run completed at19:04:36.231UTC. It wrote an original972-byte SVG,
+rendered a36,603-byte PNG at `Graphics/cephalon/20261006T190257Z/cover.png`,
+published [Bluesky post3mxa4nzbky52i](https://bsky.app/profile/open-hax.bsky.social/post/3mxa4nzbky52i),
+and delivered native Discord message1557106110517870624 with one attachment.
+Its retained `receipt.json` records the outcomes. The full native run observation
+is `state/cephalon-natural-cycle-1-persisted-20261006.json`.
+This publication occurred about24.5minutes after the preceding image post,
+again showing that the proposed30-minute guidance is not enforced.
+
+The second natural tick admitted
+`trigger-ussyverse-social_creative-cron-creative-evt_1791314259386-1791314259438`
+at19:17:39.457UTC and completed at19:19:51.753UTC. It wrote an original
+composition spec, lyrics,9.741950seconds of audible stereo44.1kHz WAV
+(1,718,524bytes) and a receipt at `Music/cephalon/20261006T191747Z/`.
+It published [Bluesky post3mxa5jl6uub2h](https://bsky.app/profile/open-hax.bsky.social/post/3mxa5jl6uub2h)
+and native Discord notice1557109977469026344 (zero attachments).
+The full native run is `state/cephalon-natural-cycle-2-persisted-20261006.json`.
+This is a second completed unattended cycle and a second media type.
+
+After the idle recreation, the clock armed at19:29:08.930UTC and naturally
+admitted `trigger-ussyverse-social_creative-cron-creative-evt_1791315849095-1791315849121`
+at19:44:09.132UTC. It completed at19:47:06.306UTC, saving an original1,287-byte
+SVG, a rendered PNG and a391-byte receipt under
+`Graphics/cephalon/20261006T194427Z/`. It published
+[Bluesky post3mxa6z2iyxf2y](https://bsky.app/profile/open-hax.bsky.social/post/3mxa6z2iyxf2y)
+at19:45:35.566UTC, with one image and descriptive alt text independently
+observed through the public API, then delivered native Discord
+message1557116763865481359 with one attachment at19:46:06.336UTC.
+The native run is in `state/cephalon-delegation-and-cycle3-persisted-20261006.json`;
+the public read is `state/cephalon-cycle3-publication-observation-20261006.json`.
+This is the third completed natural cycle. The idle recreation deliberately
+interrupts the cadence series and does not establish pending-job recovery.
+
 Reloading a contract rearms the current native interval, so repeated prompt
 edits would postpone this proof. No manually dispatched cycle is counted as
 unattended-clock evidence.

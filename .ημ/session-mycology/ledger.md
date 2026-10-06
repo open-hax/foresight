@@ -521,3 +521,13 @@
   spore: none
   receipt-refs: cephalon-always-on-local-activation
   note: Preserve deployed image, contract snapshot and local overlays as distinct identities. A successfully written WAV can coexist with a failed tool result; inspect the retained project and actual child-process return shape before retrying. Contract reload rearms the current clock, so stop editing prompts while observing unattended cadence. Shared concurrency and prompt-only publication guidance do not prove reserved lanes or rate admission.
+
+- ts: 2026-10-06T19:57:37.040392+00:00
+  session: /home/err/.codex/worktrees/cephalon-planning/foresight
+  task: Verify actual delegation and clock continuation, including failed prompt-order evidence
+  p-efficiency: 0.7
+  p-friction: 0.68
+  p-skill-candidate: 0.6
+  spore: none
+  receipt-refs: cephalon-delegation-and-three-clock-cycles
+  note: A configured internal URL is not usable delegation until native header identity and permissions are verified. Model instructions can batch an acknowledgment with spawn and invent an unsupported child shape; only receipts and the actual admitted contract establish ordering and ownership. Preserve failed probes beside successful ones. Required author walkthroughs can collide with strict all-thread settlement; attach evidence to the existing canonical issue, never impersonate another writer or waive the gate.

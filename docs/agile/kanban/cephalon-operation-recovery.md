@@ -52,7 +52,10 @@ process, or make cloud worker availability depend on an operator laptop service.
    remains reachable throughout; healthy-provider response timing is measured
    separately from maker availability.
 4. Runtime health measures successful creative cycles and usable dependencies,
-   not merely an HTTP process. Alerts are quiet while unchanged/non-actionable.
+   not merely an HTTP process. The current event configuration snapshot has a
+   hardcoded `running: true`; replace that claim with actual lifecycle state.
+   Verify disabled, stopped and enabled processes independently, including
+   native gateway/clock ownership. Alerts are quiet while unchanged/non-actionable.
 5. Cloud placement has independently available provider, memory/search and
    artifact dependencies; state the measured host availability and remaining
    mesh capabilities rather than claiming a mesh from network reachability.

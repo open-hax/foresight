@@ -23,6 +23,8 @@ its own queue and session. This mechanism is portable data at the decision layer
 
 Pure lane/queue laws, authorized trigger argument forwarding, runner admission,
 queue diagnostics, scoped operator conversation agreement and live verification.
+Validate delegated maker identity at the tool boundary and enforce acknowledgment
+before dispatch for creative requests; prompt order alone is insufficient.
 
 ## Non-goals
 
@@ -42,6 +44,11 @@ lane policy, cancel makers, or promise zero network/model latency.
 6. In the live test, admission completes within two seconds on the local host.
    Measure full reply latency separately; target 30 seconds for a warmed healthy
    provider, report failures honestly and do not enforce model latency in CI.
+7. For a creative request, the native acknowledgment receipt precedes child
+   admission, including a model response containing both calls in one batch.
+   Invalid or unsupported delegated agent specifications are refused explicitly;
+   they cannot silently fall back to a different contract. A successful child
+   admission identifies the intended maker, and is never labeled completion.
 
 ## Verification
 
