@@ -51,6 +51,10 @@ inclusion before claiming review enforcement across all nine registrations.
 
 ## Reuse and ownership
 
+The caller and provider observations in this section describe the September 19
+discovery checkout. They remain provenance for that snapshot, rather than a
+description of the current Foresight caller; see the October 6 refresh below.
+
 [Foresight #71](https://github.com/open-hax/foresight/issues/71) assigns reusable
 review execution, validation, aggregation and publication to eta-mu; Foresight
 owns caller integration and cross-repository conformance. Producer-authentication
@@ -106,6 +110,31 @@ workflow's 36 executable tests pass at the accepted provider revision. Hosted
 review publication and policy acceptance remain separate requirements.
 
 ## Next implementation slice
+
+### October 6 planning refresh
+
+[PR #96](https://github.com/open-hax/foresight/pull/96) merged on September 21
+at `a4d7ed83466bc11d8a05ec6348eaa41794830ecb`. This follow-up now integrates
+Foresight main `fcfc2d17f28640203066ddfe0a22f87db7372a32` and targets main.
+The original JSON snapshot and proposed EDN examples are preserved byte for
+byte. This refresh performs no new child-policy inventory or protection write;
+the September 19 HTTP 403 observations remain dated unavailable evidence.
+
+The integrated caller uses reviewed Eta-Mu revision
+`45ec644c2d15ed511e9bc1e797d1b4073b63dbfc`, Muse
+`0b9a91492c8355e6933dc2164d35668cb76d9e60`, and skills
+`7fd3252e7663ad5e68be5e90429d126aa66c38c8`. These pins restore the current
+review-input boundary; this planning PR's own hosted review must still complete
+on its published head before review qualification is claimed.
+
+The [October 3 process decisions](../notes/promethean-review-and-promotion.md)
+and canonical `pr-flow` skill govern current review admission. The original
+illustrative positive example explicitly requires CodeRabbit; it does not
+override the current common eligible-reviewer quorum or a target repository's
+stronger mandatory requirements. Bind examples to the reviewed upstream
+contract and actual trusted policy before using them as an executable suite.
+No completed conformance evaluation or accepted eight-repository rollout is
+claimed by this document.
 
 1. Reverify E1.04's independent-history prerequisite and the declared target set.
 2. Obtain full policy read-back through an authorized actor. Preserve HTTP 403
