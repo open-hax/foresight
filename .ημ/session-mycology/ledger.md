@@ -448,3 +448,12 @@
   spore: none
   receipt-refs: 2026-09-03T00:17:49.293972342Z
   note: Reusable lessons: deployment hooks should distinguish durable acceptance from asynchronous completion; model output remains untrusted until a required-first server-bound tool validates and persists it; CLJS native await can accidentally await a Promise-valued argument before a timeout wrapper exists, so lifecycle races belong behind a non-async Promise boundary. No spore was created because the cross-repository pattern should stabilize through another deployment before promotion.
+- ts: 2026-10-06T13:12:30.799244045Z
+  session: /home/err/.codex/worktrees/foresight-pr123-20261006
+  task: Refresh PR123 reviewed workflow caller in isolated worktree
+  p-efficiency: 0.86
+  p-friction: 0.24
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: foresight-pr123-review-repair
+  note: Read the actual failing hosted step before fixing gates: remote reviewer UnknownError differs from deterministic evidence failure. Reuse reviewed current main contract, keep shared services stopped and Python dependencies isolated; no spore warranted.
