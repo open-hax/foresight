@@ -36,10 +36,21 @@ process, or make cloud worker availability depend on an operator laptop service.
 
 1. Document and verify one active gateway/clock owner; relocation disables the
    old owner persistently before enabling its successor.
-2. Recreate the backend with a pending job; verify lawful recovery, retained
-   artifact identity and no duplicate publication. Observe at least three cycles.
-3. Kill/unavailable provider and maker cases remain visible and bounded. The
-   head remains reachable when a maker is unavailable.
+2. Recreate the backend with a pending job. Within 60 seconds, the recovered
+   owner must inspect persisted job identity and previous ownership. Re-admit
+   pending work only after the previous owner is confirmed terminated or its
+   ten-minute execution deadline expired; do not cancel a live owner. Preserve
+   artifact identity. Reconcile any unknown publication outcome against the
+   native outlet before retrying; if unresolved, mark the attempt ambiguous
+   and require explicit retry rather than republishing. Observe three cycles.
+3. Each creative execution has a ten-minute deadline and at most three total
+   attempts per cycle identity. Failed attempts wait one minute, then five
+   minutes before the remaining attempts; no immediate retry loop. Exhaustion
+   yields a persisted failed outcome and a meaningful alert, then waits for the
+   next scheduled cycle or an explicit operator retry. Inject unavailable
+   provider and disappearing maker cases and inspect those outcomes. The head
+   remains reachable throughout; healthy-provider response timing is measured
+   separately from maker availability.
 4. Runtime health measures successful creative cycles and usable dependencies,
    not merely an HTTP process. Alerts are quiet while unchanged/non-actionable.
 5. Cloud placement has independently available provider, memory/search and

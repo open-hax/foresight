@@ -37,8 +37,11 @@ style, or claim every generated piece must be published.
    explicit failed outcomes; successful cycles cover at least two media.
 2. Music has a playable non-empty audio file and its composition specification;
    visual work has a valid image/SVG; lyrics/MIDI have parseable inspectable data.
-3. Overlapping ticks are coalesced or refused by the runtime, never an unbounded
-   backlog; a provider failure yields bounded backoff rather than an immediate loop.
+3. The maker reservation lasts until its run and delegated work have terminal
+   outcomes, not merely until dispatch returns an acceptance receipt. Hold a
+   delegated job nonterminal after dispatch returns; later ticks must be
+   coalesced or refused with an observable result until that job terminates.
+   A provider failure yields the retry/backoff limits in the recovery story.
 4. Delegated work has parent/job identities and a terminal outcome. The head
    does not await a maker before responding to conversation.
 5. Completion is derived from verified outputs, not the model's prose. Stored

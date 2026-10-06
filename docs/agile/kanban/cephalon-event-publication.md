@@ -41,7 +41,11 @@ transport, or treat a localhost artifact URL as publicly accessible.
    Ambiguous external completion is reconciled before retrying.
 4. The configured initial policy permits at most one Bluesky creation post per
    30 minutes and one unsolicited Discord creative share per hour; operator
-   replies have separate limits. Policy is runtime-enforced, not only a prompt.
+   replies have a separate initial limit of ten newly admitted head turns per
+   60 seconds per operator actor/channel. Excess input receives an explicit
+   rate-limit outcome or is coalesced with an observable receipt; it cannot
+   silently disappear or interrupt a maker. These configurable policies are
+   runtime-enforced, not only prompts.
 5. Verify one real Bluesky post and Discord attachment independently, without
    exposing credentials. An unavailable outlet records a failure/backoff.
 
