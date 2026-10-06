@@ -32,7 +32,7 @@ curl -N https://YOUR-OLLAMA-ENDPOINT/api/generate \
 
 The endpoint path and core request structure come directly from the verified Ollama examples: `/api/generate` plus JSON containing `model`, `prompt`, and `stream`.  The only unverified part here is the exact multimodal fielding for your specific hosted setup, because the retrieved sources did not include a first-party multimodal cURL sample.[^1_3][^1_5][^1_1][^1_2]
 
-If your server is local-but-exposed, replace the host with something like `https://your-tunnel-domain` or `http://your-host:11434`, since the sources show both public exposure and tunnel-based access patterns.  For a non-streaming test, flip `"stream": false`, which is also shown in the examples.[^1_5][^1_2][^1_4]
+Use direct `http://your-host:11434` only inside a trusted private network. If untrusted clients can reach the endpoint, place it behind an authenticated gateway and HTTPS, such as `https://your-tunnel-domain`; an unauthenticated direct port is not a public deployment boundary.  For a non-streaming test, flip `"stream": false`, which is also shown in the examples.[^1_5][^1_2][^1_4]
 
 ## Stream consumption
 
@@ -81,4 +81,3 @@ Would you like a Bash snippet that base64-encodes an image file and feeds it int
 
 
 ---
-

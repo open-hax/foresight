@@ -20,7 +20,3 @@ We want these actions to be legible to any system
 I want a registry of actions seperate from the registry of tools
 
 A tool is functor that wraps an action in instructions and guards
-
-
-
-

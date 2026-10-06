@@ -24,6 +24,9 @@ The tools expose **named structural moves** that return a new cursor. The agent 
 
 ```clojure
 ;; READ
+;; Resolve :path and serialized Cursor :file beneath the configured workspace
+;; root. Reject absolute paths, .. traversal, and symlink escapes before reads
+;; or edits.
 read-file     {:path str}               -> {:cursor Cursor :text str}
 get-node      {:cursor Cursor}          -> {:node Node}
 children      {:cursor Cursor}          -> {:nodes [Node]}
@@ -65,7 +68,6 @@ Every edit tool returns the **updated text** too — so the agent can always see
 | nREPL bridge | shadow-cljs built-in nREPL + `nrepl` client lib on JVM | shadow-cljs already starts one on a configurable port |
 | Transport | Exposed as Knoxx MCP tools in `mcp_expose.cljs` | Same tool registration path everything else uses |
 
-The key insight: `rewrite-clj` zipper paths are just vectors of integers (child indices). A cursor is `{:file "path/to/foo.cljs" :path [0 2 1]}`. Totally serializable, totally stateless on the server side.
+The key insight: `rewrite-clj` zipper paths are just vectors of integers (child indices). A cursor is `{:file "path/to/foo.cljs" :path [0 2 1] :source-sha256 "<hash-of-exact-source-bytes>"}`. `read-file` binds that hash to the returned tree. Every cursor operation must recheck workspace confinement and source identity before using child indices. Every edit must atomically compare the current source hash with the cursor hash and reject a stale cursor without writing; a prior check followed by an unconditional write leaves a race. Successful edits return a cursor bound to the new source hash. This remains serializable and does not require server session state; filesystem adapters own canonical path checks and atomic writes.
 
 ***
-

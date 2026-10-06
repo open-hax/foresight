@@ -17,7 +17,7 @@
 ## Execution phases
 
 1. Inventory current source, runtime paths, deployment triggers, identity capabilities, and existing test harnesses.
-2. Implement code-owner testing-slot admission, main-to-staging delivery, immutable production qualification, and shared environment instructions.
+2. Target behavior, not verified active enforcement: implement code-owner testing-slot admission, main-to-staging delivery, immutable production qualification, and shared environment instructions.
 3. Implement/repair Axxium portable identity and the Knoxx authentication boundary; validate real integration and negative cases.
 4. Deploy isolated service stacks on Stealth then Yoga, with persistent data and HTTPS ingress.
 5. Run the browser acceptance flow, stop the original Axxium service, authenticate anew and complete content/review/translation workflows; capture evidence.
@@ -38,8 +38,11 @@ This file records acceptance criteria and progress, not a completion claim.
 
 ## Promotion and validation
 
-The pinned Services workflow owns code-owner testing admission and exact-main-
-merge staging. A newer main commit supersedes an older queued staging candidate.
+The target Services workflow is intended to own code-owner testing admission
+and exact-main-merge staging. This extracted plan does not prove those gates are
+active; activation requires the current repository policy and revision-bound
+workflow/deployment evidence. In the proposed behavior, a newer main commit
+supersedes an older queued staging candidate.
 CODEOWNERS initially names the three existing repository administrators. App
 callers activate when reviewed changes reach main. Production qualification
 requires a merged immutable commit, integration and real e2e checks, then four

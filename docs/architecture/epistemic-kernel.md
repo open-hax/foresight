@@ -2,9 +2,14 @@
 
 # Epistemic Kernel — Actor / Contract Integration
 
-> **Fit-in-your-head invariant:**  
-> The actor answers *who is allowed to act*.  
-> The contract answers *how this actor behaves when it acts*.  
+> **Status: historical design / lift candidate, not accepted Foresight law.**
+> The OpenPlanner store, actor/contract names, and invariants below describe the
+> recovered Knoxx proposal. They do not reassign Foresight or child authority.
+> Promotion requires the [project-law triage](../notes/project-law-promotion-status-triage.md).
+
+> **Fit-in-your-head invariant:**\
+> The actor answers *who is allowed to act*.\
+> The contract answers *how this actor behaves when it acts*.\
 > Everything they produce (inferences, attestations, judgments) lives in the epistemic store — the source of truth.
 
 ---
@@ -38,7 +43,9 @@
 Every other system (contracts, actors, events, receipts) emits one of these.
 
 ```clojure
-;; promptdb-core — all records are EDN, validated via Malli
+;; Proposed record shapes; declaration notation below is schematic, not a
+;; standalone Malli registry or proof of deployed schema validation.
+;; Inference :from contains references, not embedded fact/obs schema names.
 
 (fact
   {:ctx    keyword?       ;; asserting principal  (己 = self)
@@ -48,13 +55,16 @@ Every other system (contracts, actors, events, receipts) emits one of these.
    :time   inst?})
 
 (obs
-  {:ctx    keyword?       ;; who perceived it
+  {:id     uuid?          ;; stable observation identity
+   :ctx    keyword?       ;; who perceived it
    :about  any?           ;; what was sensed
    :signal any?           ;; raw signal shape
    :p      [:double {:min 0.0 :max 1.0}]})
 
 (inference
-  {:from  [:vector [:or :fact :obs]]   ;; evidence chain
+  {:from  [:vector [:map
+                    [:kind [:enum :fact :obs]]
+                    [:ref [:or string? uuid?]]]] ;; typed evidence references
    :rule  keyword?                     ;; contract-id that fired
    :actor keyword?                     ;; who executed the contract
    :claim any?                         ;; derived proposition
@@ -104,7 +114,7 @@ obs  (event arrives)
               → new obs  (world changed)
 ```
 
-This cycle **is a path in the Datalog + event graph**.  
+This cycle **is a path in the Datalog + event graph**.\
 Openplanner's job: store, index, and make that cycle queryable.
 
 ---
@@ -204,20 +214,20 @@ packages/openplanner-core/
   shadow-cljs.edn
 ```
 
-`.cljc` runs on both JVM (Knoxx backend) and Node (openplanner Fastify shell).  
+`.cljc` runs on both JVM (Knoxx backend) and Node (openplanner Fastify shell).\
 JS/TS only at framework edges — not in the epistemic core.
 
 ---
 
 ## Do not
 
-- **Collapse receipt river and EventBus into one log.**  
-  Receipts are the actor's subjective narrative.  
-  EventRecords are the platform's objective ledger.  
+- **Collapse receipt river and EventBus into one log.**\
+  Receipts are the actor's subjective narrative.\
+  EventRecords are the platform's objective ledger.\
   That distinction is what lets you compare what the agent claims against what the platform can prove.
 
-- **Let contracts mint authority.**  
+- **Let contracts mint authority.**\
   Actor role grants the ceiling; contract grants the subset. Always.
 
-- **Own truth in views.**  
+- **Own truth in views.**\
   Fastify routes, graph renderers, Discord adapters — they project and mutate. They never are the record.

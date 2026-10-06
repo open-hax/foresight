@@ -10,6 +10,12 @@ status: note
 
 ## #μ Driver-Agnostic Migration Protocol
 
+> **Historical design / lift candidate, not implemented migration authority.**
+> The retired PostgreSQL and atom drivers below are corrected illustrative
+> sketches. They do not establish tables, transactionality, sandbox safety, or
+> a production migration service. A real driver must validate specs before
+> evaluation and persist the exact affected IDs for restart-safe rollback.
+
 The core model: a **migration** is a named, versioned, pure transformation over the contract data graph. It is not a SQL `ALTER TABLE`. It is not tied to any storage format. It describes **what changed in the domain** and provides a `up` fn that transforms the old shape to the new shape — the driver then projects that transformation into whatever store it manages.
 
 ```
@@ -21,7 +27,8 @@ MigrationSpec (EDN)
   :migration/expr      — EDN form of the transform fn (portable, storable)
   :migration/predicate — optional: old-shape → bool (which records to migrate)
   :migration/reversible — bool
-  :migration/down-expr  — optional reverse transform
+  :migration/down-expr  — required reverse transform when reversible
+  :migration/down-predicate — required post-migration selector when reversible
 ```
 
 The driver receives a `MigrationSpec` and applies it to every matching record in its store. SQL gets `UPDATE`s. Atoms get `swap!`s. XTDB gets transactions. The migration is agnostic to all of them.
@@ -51,7 +58,8 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
   :any)
 
 (def MigrationSpec
-  [:map
+  [:and
+   [:map
    [:migration/id          MigrationId]
    [:migration/version     :int]
    [:migration/entity      EntityKind]
@@ -60,7 +68,12 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
    [:migration/predicate   {:optional true} MigrationExpr]  ;; filter: which records
    [:migration/reversible  {:optional true} :boolean]
    [:migration/down-expr   {:optional true} MigrationExpr]  ;; down transform
-   [:migration/created-at  {:optional true} :string]])
+   [:migration/down-predicate {:optional true} MigrationExpr]
+   [:migration/created-at  {:optional true} :string]]
+   [:fn (fn [spec]
+          (or (not (:migration/reversible spec))
+              (and (some? (:migration/down-expr spec))
+                   (some? (:migration/down-predicate spec)))))]])
 
 (def MigrationRecord
   "Stored in the driver's migration log to track applied migrations."
@@ -114,14 +127,19 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
                                                        record-migration!
                                                        rollback-migration!]]
             [knoxx.backend.contracts.loader :as loader]
+            [clojure.string :as str]
             [sci.core :as sci]
             [shadow.cljs.modern :refer [js-await]]))
 
 (defn- eval-expr
   "Safely evaluate a migration EDN expr via SCI. Returns the fn."
   [expr]
-  (sci/eval-form (sci/init {:namespaces {'clojure.string (sci/copy-ns clojure.string)}})
-                 expr))
+  (sci/eval-form
+   (sci/init {:namespaces {'clojure.string
+                           {'starts-with? str/starts-with?
+                            'replace-first str/replace-first
+                            'replace str/replace}}})
+   expr))
 
 (defn- matches-predicate?
   [pred-fn record]
@@ -172,12 +190,14 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
   (:require [knoxx.contracts.migration-driver :refer [MigrationDriver]]
             [knoxx.backend.db.pg :as pg]
             [knoxx.backend.db.pg-driver :as pd]
+            [clojure.string :as str]
             [sci.core :as sci]
             [shadow.cljs.modern :refer [js-await]]))
 
 (def ^:private entity->table
   {:org          :orgs
    :role         :roles
+   :capability   :capabilities
    :actor        :memberships
    :tool-policy  :role_tool_policies
    :permission   :role_permissions
@@ -185,7 +205,12 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
    :data-lake    :data_lakes})
 
 (defn- safe-eval [expr]
-  (sci/eval-form (sci/init {}) expr))
+  (sci/eval-form
+   (sci/init {:namespaces {'clojure.string
+                           {'starts-with? str/starts-with?
+                            'replace-first str/replace-first
+                            'replace str/replace}}})
+   expr))
 
 (defn- ensure-migration-log! [pool]
   (pg/query! pool
@@ -205,7 +230,15 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
     (-> (ensure-migration-log! pool)
         (.then (fn [_]
                  (pg/hq! pool {:select [:*] :from :contract_migrations
-                               :order-by [:version]})))))
+                               :order-by [:version]})))
+        (.then (fn [res]
+                 (mapv (fn [{:keys [id version applied_at status error]}]
+                         (cond-> {:migration/id id
+                                  :migration/version version
+                                  :migration/applied-at applied_at
+                                  :migration/status (keyword status)}
+                           error (assoc :migration/error error)))
+                       (:rows res))))))
 
   (apply-migration! [_ spec]
     (let [table     (entity->table (:migration/entity spec))
@@ -235,12 +268,13 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
              :skipped      (- (count rows) (count targets))})))))
 
   (rollback-migration! [_ spec]
-    (if-not (:migration/reversible spec)
+    (if-not (and (:migration/reversible spec)
+                 (:migration/down-expr spec)
+                 (:migration/down-predicate spec))
       (js/Promise.reject (js/Error. (str "Migration not reversible: " (:migration/id spec))))
       (let [table    (entity->table (:migration/entity spec))
             down-fn  (safe-eval (:migration/down-expr spec))
-            pred-fn  (when (:migration/predicate spec)
-                       (safe-eval (:migration/predicate spec)))]
+            pred-fn  (safe-eval (:migration/down-predicate spec))]
         (js-await [res (pg/hq! pool {:select [:*] :from table})]
           (let [targets (filter #(if pred-fn (pred-fn %) true) (:rows res))
                 xformed (mapv down-fn targets)]
@@ -272,9 +306,15 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
 ```clojure
 (ns knoxx.backend.db.mem-migration-driver
   (:require [knoxx.contracts.migration-driver :refer [MigrationDriver]]
+            [clojure.string :as str]
             [sci.core :as sci]))
 
-(defn- safe-eval [expr] (sci/eval-form (sci/init {}) expr))
+(defn- safe-eval [expr] (sci/eval-form
+   (sci/init {:namespaces {'clojure.string
+                           {'starts-with? str/starts-with?
+                            'replace-first str/replace-first
+                            'replace str/replace}}})
+   expr))
 
 (defrecord MemMigrationDriver [state* log*]
 
@@ -289,27 +329,27 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
           pred-fn  (when (:migration/predicate spec)
                      (safe-eval (:migration/predicate spec)))]
       (let [bucket  (get @state* kind {})
-            targets (filter #(if pred-fn (pred-fn %) true) (vals bucket))
-            xformed (mapv xform-fn targets)]
-        (doseq [row xformed]
-          (let [id (or (:id row) (:actor/id row) (:role/slug row) (:org/slug row))]
-            (swap! state* assoc-in [kind id] row)))
+            targets (filter (fn [[_ row]] (if pred-fn (pred-fn row) true)) bucket)
+            xformed (mapv (fn [[id row]] [id (xform-fn row)]) targets)]
+        (doseq [[id row] xformed]
+          (swap! state* assoc-in [kind id] row))
         (js/Promise.resolve {:migration/id (:migration/id spec)
                              :applied      (count xformed)
                              :skipped      (- (count (vals bucket)) (count targets))}))))
 
   (rollback-migration! [_ spec]
-    (if-not (:migration/reversible spec)
+    (if-not (and (:migration/reversible spec)
+                 (:migration/down-expr spec)
+                 (:migration/down-predicate spec))
       (js/Promise.reject (js/Error. "Not reversible"))
       (let [kind    (:migration/entity spec)
             down-fn (safe-eval (:migration/down-expr spec))
-            pred-fn (when (:migration/predicate spec) (safe-eval (:migration/predicate spec)))
+            pred-fn (safe-eval (:migration/down-predicate spec))
             bucket  (get @state* kind {})
-            targets (filter #(if pred-fn (pred-fn %) true) (vals bucket))
-            xformed (mapv down-fn targets)]
-        (doseq [row xformed]
-          (let [id (or (:id row) (:actor/id row))]
-            (swap! state* assoc-in [kind id] row)))
+            targets (filter (fn [[_ row]] (pred-fn row)) bucket)
+            xformed (mapv (fn [[id row]] [id (down-fn row)]) targets)]
+        (doseq [[id row] xformed]
+          (swap! state* assoc-in [kind id] row))
         (js/Promise.resolve {:migration/id (:migration/id spec) :rolled-back (count xformed)}))))
 
   (record-migration! [_ record]
@@ -334,8 +374,16 @@ The driver receives a `MigrationSpec` and applies it to every matching record in
  :migration/predicate   (fn [r] (= :agent (:actor/kind r)))
  :migration/expr        (fn [r] (assoc r :actor/kind :system))
  :migration/reversible  true
- :migration/down-expr   (fn [r] (assoc r :actor/kind :agent))}
+ :migration/down-expr   (fn [r] (assoc r :actor/kind :agent))
+ :migration/down-predicate (fn [r] (= :system (:actor/kind r)))}
 ```
+
+The rename sketch assumes no pre-existing `:system` actors in its migration
+scope. The down predicate addresses post-migration state, not the original
+`:agent` predicate. If that assumption cannot be proved, persist the selected
+stable IDs before the forward write and select only those IDs on rollback; a
+value-only predicate must not roll back unrelated records. Production drivers
+must also retain those IDs durably across restarts and handle partial writes.
 
 ### Add a default field to all roles
 

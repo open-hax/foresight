@@ -36,7 +36,7 @@ If you want a genuinely curried function, define it as nested unary functions so
 ;; => 6
 ```
 
-With a truly curried function, `(f x y)` and `((f x) y)` become equivalent in spirit, because supplying fewer arguments returns another function instead of throwing an arity error.[^1_9]
+Each call to `curried-add3` accepts one argument and returns the next unary function, so the nested call form is required. `(f x y)` passes two arguments in a single call and is not equivalent to `((f x) y)` in Clojure. See the [Clojure function guide](https://clojure.org/guides/learn/functions).
 
 ## Why Clojure works this way
 
@@ -91,7 +91,7 @@ If you want, I can show three versions side by side: plain function, `partial`, 
 :controller
 '(let [issuer (js/URL. (.toString base))]
 (.send reply
-\#js {:issuer (-> (.toString issuer) (.replace (js/RegExp. "/$") ""))
+#js {:issuer (-> (.toString issuer) (.replace (js/RegExp. "/$") ""))
                   :authorization_endpoint (.toString (js/URL. "/api/mcp/oauth/authorize" issuer))
                   :token_endpoint (.toString (js/URL. "/api/mcp/oauth/token" issuer))
                   :registration_endpoint (.toString (js/URL. "/api/mcp/oauth/register" issuer))
@@ -108,10 +108,10 @@ If you want, I can show three versions side by side: plain function, `partial`, 
 :authorization_endpoint (.toString (js/URL. "/api/mcp/oauth/authorize" issuer))
 :token_endpoint (.toString (js/URL. "/api/mcp/oauth/token" issuer))
 :registration_endpoint (.toString (js/URL. "/api/mcp/oauth/register" issuer))
-:response_types_supported \#js ["code"]
-:grant_types_supported \#js ["authorization_code"]
-:code_challenge_methods_supported \#js ["S256"]
-:token_endpoint_auth_methods_supported \#js ["none"]}))))
+:response_types_supported #js ["code"]
+:grant_types_supported #js ["authorization_code"]
+:code_challenge_methods_supported #js ["S256"]
+:token_endpoint_auth_methods_supported #js ["none"]}))))
 
 ```
 
@@ -211,7 +211,7 @@ That version is likely the least confusing for agents, because the map contains 
 
 ## Node and imports
 
-Your “agents end up writing `server.mjs`” problem is probably not really about macros; it is more about Node module format friction. A documented shadow-cljs pain point is that `:target :node-script` produces CommonJS-style loading, and Node will throw `ERR_REQUIRE_ESM` when that code tries to `require()` an ESM-only dependency.
+Your “agents end up writing `server.mjs`” problem is probably not really about macros; it is more about Node module format friction. A documented shadow-cljs pain point is that `:target :node-script` produces CommonJS-style loading, and older Node configurations can throw `ERR_REQUIRE_ESM` when that code tries to `require()` an ESM-only dependency. Node 20.19, 22.12, and newer releases can require synchronous ESM graphs without the former experimental flag. Graphs containing top-level `await` instead raise `ERR_REQUIRE_ASYNC_MODULE`; use dynamic `import()` for those graphs. See [Node module loading documentation](https://nodejs.org/api/modules.html#loading-ecmascript-modules-using-require).
 
 That means if your route code touches modern ESM-only npm packages, the agent often “escapes” into handwritten `.mjs` because Node’s module boundary is easier to satisfy there than from a CommonJS CLJS target. One documented route for real ESM output is `:target :esm` with `:js-options {:js-provider :import}`, which keeps imports as ESM rather than bundling them as CommonJS-style requires.[^2_6][^2_7]
 
@@ -315,4 +315,3 @@ Would you like a version that expands to Fastify `.get` directly, or one tailore
 
 
 ---
-

@@ -9,23 +9,24 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
 ```clojure
 (ns knoxx.backend.contract.bracket
   "EDN bracket balance checker, diagnoser, and autocorrector.
-   
+
    Designed for agent-authored EDN: produces structured diagnostics
    that agents can act on directly, rather than raw parse errors.
-   
+
    Autocorrect handles:
      - Missing closing delimiters (appended at end)
      - Mismatched closers (e.g. } where ] expected)
      - Extra closers (stripped)
      - Unclosed strings (closing \" appended)
      - Odd map entries (last key gets nil value appended)
-   
+
    Autocorrect does NOT handle:
      - Wrong key types (non-keyword map keys)
      - Wrong value types
      - Semantic errors
-   
-   These are left for the schema validator to explain.")
+
+   These are left for the schema validator to explain."
+  (:require [clojure.string :as str]))
 
 ;; ── Token scanner ─────────────────────────────────────────────────────────────
 
@@ -79,6 +80,21 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
                           n)]
               (recur end line col false false tokens))
 
+            ;; EDN character literal: consume its character or named token
+            ;; before interpreting delimiters, quotes, or comment markers.
+            (= ch \\)
+            (let [start (inc pos)
+                  end (cond
+                        (>= start n) n
+                        (re-matches #"[A-Za-z]" (str (nth chars start)))
+                        (or (some (fn [p]
+                                    (let [c (nth chars p)]
+                                      (when (or (#{\space \tab \newline \return \,} c)
+                                                (openers c) (closers c) (= c \;)) p)))
+                                  (range (inc start) n)) n)
+                        :else (inc start))]
+              (recur end line (+ col (- end pos)) false false tokens))
+
             ;; Start string
             (= ch \")
             (recur (inc pos) line (inc col) true false
@@ -106,7 +122,7 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
 
 (defn diagnose
   "Walk token stream and produce a structured diagnostic report.
-   
+
    Returns:
    {:ok true}   — balanced
    {:ok false
@@ -128,7 +144,7 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
         bracket-tokens (filter #(#{:open :close} (:kind %)) tokens)
         {:keys [errors stack]}
         (reduce
-         (fn [{:keys [stack errors]} {:keys [kind char line col]}]
+         (fn [{:keys [stack errors]} {:keys [kind char line col pos]}]
            (if (= :open kind)
              {:stack  (conj stack {:char char :line line :col col})
               :errors errors}
@@ -140,6 +156,7 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
                                :got     char
                                :line    line
                                :col     col
+                               :pos     pos
                                :message (str "Unexpected '" char "' at line " line
                                              " col " col " — no matching opener")})}
                (let [top (peek stack)
@@ -153,6 +170,7 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
                                    :got      char
                                    :line     line
                                    :col      col
+                                   :pos      pos
                                    :message  (str "Mismatched delimiter at line " line
                                                   " col " col ": expected '" expected
                                                   "' to close '" (:char top)
@@ -183,9 +201,10 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
 (defn repair
   "Attempt to autocorrect simple structural errors in EDN text.
    Returns {:text str :changes [{:kind kw :description str}]}.
-   
+
    Safe to apply before parse — result may still fail schema validation
-   but should at least be read-string parseable."
+   but is only a structural repair attempt. An EDN reader and the required
+   schema must still validate the result before admission."
   [text]
   (let [report (diagnose text)]
     (if (:ok report)
@@ -193,7 +212,9 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
       (let [;; Step 1: close unclosed strings
             {:keys [text changes]}
             (if (seq (:unclosed-strings report))
-              {:text    (str text "\"")
+              {:text    (str text
+                             (when (odd? (count (take-while #{\\} (reverse text)))) "\\")
+                             "\"")
                :changes [{:kind        :closed-string
                           :description "Appended missing closing double-quote"}]}
               {:text text :changes []})
@@ -271,7 +292,7 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
 ```clojure
 (ns knoxx.backend.contract.sci
   "sci evaluation context for agent contracts.
-   
+
    Whitelist philosophy:
      - Agents get a small, legible set of pure fns.
      - Nothing that touches IO, atoms, JS interop, or reflection.
@@ -472,7 +493,7 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
    3. Eval
 
    Returns {:ok true :value v} | {:ok false :error str :violations [...]}
-   
+
    Never throws — all failures are returned as data."
   [{:keys [expr fn-ref]} runtime-ctx {:keys [contract-id fn-registry]}]
   (try
@@ -503,4 +524,3 @@ This is the bracket-counting system. Three passes: **scan** to produce a token w
 ```
 
 ***
-

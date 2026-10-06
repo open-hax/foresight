@@ -2,9 +2,10 @@
 
 # Development VPS deployment
 
-This checkout has a source-based development instance alongside the existing
-containerized Knoxx deployment. The production containers are not restarted or
-modified by this setup.
+This is a historical Knoxx host note, not a statement about a Foresight checkout
+or a freshly verified deployment. The extracted setup described a source-based
+development instance alongside containerized Knoxx. Commands below belong to
+that host context and require its operator configuration.
 
 ## Installed host prerequisites
 
@@ -19,10 +20,14 @@ Java 21 was already installed on the VPS.
 ## Local development environment
 
 The ignored repository-root `.env` contains the development API key and public
-URL overrides. The same random credential protects `KNOXX_API_KEY`, the
-OpenAI-compatible `MODEL_LAB_OPENAI_API_KEY` boundary, and the repeatable local
-password login for the `pi@open-hax.local` bootstrap system administrator. It
-is intentionally not committed. Load the host's shared Knoxx configuration
+URL overrides. Generate three independent random secrets: one for
+`KNOXX_API_KEY`, one for the OpenAI-compatible `MODEL_LAB_OPENAI_API_KEY`
+boundary, and one for `KNOXX_BOOTSTRAP_SYSTEM_ADMIN_PASSWORD`, the password
+login for the `pi@open-hax.local` bootstrap system administrator. Keep API keys
+in backend/operator configuration, never browser-delivered environment or assets.
+The historical note described credential reuse; this correction is guidance,
+not evidence that any running host has rotated its credentials. None of these
+secrets belongs in source control. Load the host's shared Knoxx configuration
 first, then the development overrides:
 
 ```bash

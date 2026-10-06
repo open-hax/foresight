@@ -46,7 +46,7 @@ Ollama's native `/api/chat` multimodal format is:
     {
       "role": "user",
       "content": "Describe this image.",
-      "images": ["BASE64_OR_URL"]
+      "images": ["BASE64_IMAGE_DATA"]
     }
   ]
 }
@@ -86,8 +86,8 @@ function chatMessagesToOllamaMessages(messages: unknown): Array<{
     if (part.type === "text") textParts.push(part.text);
     if (part.type === "image_url") {
       const url = part.image_url?.url ?? part.url;
-      // strip data URI prefix if base64
-      images.push(stripDataUriPrefix(url));
+      // REST requires base64 data; reject raw URLs in this sketch.
+      images.push(stripBase64DataUriPrefix(url));
     }
   }
 
@@ -118,21 +118,28 @@ The `parseBase64DataUrl` utility already written in `messages-compat.ts` could b
 
 # we're getting 400's whenever we send images to gemma4:31b
 
-This is a clear picture. Here is the full diagnosis for the `gemma4:31b` 400s.
+The historical report associates image requests with HTTP 400 responses, but
+contains no exact error response tying that status to a particular conversion.
+The trace below establishes image loss; the reported status remains unverified.
 
 ***
 
 ## Root Cause: Two Different Code Paths, Both Broken for Images
 
-The 400s from `gemma4:31b` come from the **same underlying bug** identified in the previous review, but hitting it via the **local `OllamaProviderStrategy`** path rather than ollama-cloud.
+The historical sketch shows the same image-loss path in the local
+`OllamaProviderStrategy` and ollama-cloud adapters. It does not establish the
+cause of the reported `gemma4:31b` HTTP 400 responses.
 
 ### Path 1: `OllamaProviderStrategy` (explicit ollama, `context.explicitOllama = true`)
 
-`buildPayload` calls `chatRequestToOllamaRequest` → `chatMessagesToOllamaMessages` → `contentToText`.  This is **identical** to the ollama-cloud path — images are silently dropped to `""`, no `images` field is appended to the message. Ollama rejects the request with a 400 because it receives text content with no image data for a model that was sent a multipart content array.
+`buildPayload` calls `chatRequestToOllamaRequest` → `chatMessagesToOllamaMessages` → `contentToText`.  This is **identical** to the ollama-cloud path — images are silently dropped to `""`, no `images` field is appended to the message. The retained payload loses vision input. An optional `images` field is not, by
+itself, proof of an HTTP 400; retain the actual upstream error body, revision,
+and exact request before attributing that status to this path.
 
 ### Path 2: `LocalOllamaProviderStrategy` (`context.localOllama && !context.explicitOllama`)
 
-This path calls `buildRequestBodyForUpstream(context)` — which passes the **OpenAI-format body through mostly unchanged**.  Ollama's `/api/chat` endpoint does **not** accept OpenAI-style `content: [{type: "image_url", url: "..."}]` content parts. It 400s because it doesn't understand that schema.
+This path calls `buildRequestBodyForUpstream(context)` — which passes the **OpenAI-format body through mostly unchanged**.  Ollama's `/api/chat` endpoint does **not** accept OpenAI-style `content: [{type: "image_url", url: "..."}]` content parts. That payload is incompatible with the documented native message shape; the
+actual HTTP response must still be recorded to establish the reported failure.
 
 ### Path 3: `ollama-native.ts` — Correctly Passes Images (but only for native `/api/chat` → proxy direction)
 
@@ -167,8 +174,8 @@ Sent to Ollama:
     messages: [{ role: "user", content: "Describe this" }] }
                                            ↑ no images field
 
-Ollama: 400 Bad Request
-  (model received a text-only message; vision input expected but missing)
+Established result: request became text-only and lost its image input.
+HTTP result: not retained in this trace; the reported 400 cause is unresolved.
 ```
 
 
@@ -230,11 +237,16 @@ function extractTextAndImages(content: unknown, images: string[]): string {
 // Ollama wants raw base64, not the data URI wrapper
 function stripBase64DataUriPrefix(url: string): string {
   const parsed = parseBase64DataUrl(url); // reuse from messages-compat or inline
-  return parsed ? parsed.data : url;
+  if (!parsed) throw new Error("Expected a base64 image data URI; raw URLs are unsupported");
+  return parsed.data;
 }
 ```
 
-This single change fixes 400s for **both** `OllamaProviderStrategy` and `OllamaCloudProviderStrategy`, since both call `chatRequestToOllamaRequest`.  The `LocalOllamaProviderStrategy` path (`buildRequestBodyForUpstream`) is a separate concern — that path needs a similar conversion or it needs to be routed through `chatRequestToOllamaRequest` instead.
+This proposed change preserves image input for **both** `OllamaProviderStrategy`
+and `OllamaCloudProviderStrategy`, since both call `chatRequestToOllamaRequest`.
+It does not prove resolution of an HTTP status without a revision-bound
+reproduction. The [Ollama vision API](https://docs.ollama.com/capabilities/vision)
+distinguishes SDK URL support from the REST base64 requirement.  The `LocalOllamaProviderStrategy` path (`buildRequestBodyForUpstream`) is a separate concern — that path needs a similar conversion or it needs to be routed through `chatRequestToOllamaRequest` instead.
 
 ***
 
@@ -244,7 +256,7 @@ The existing `src/tests/ollama-compat.test.ts` is the right home for new specs. 
 
 1. `image_url` content part → `images` field on message with stripped data URI
 2. Mixed text + image content → correct `content` string + `images` array
-3. Raw URL (non-base64) image → passed through as-is in `images`
-4. `LocalOllamaProviderStrategy` with multipart content → no 400
+3. Raw URL (non-base64) image → explicit rejection before upstream request; never copied into REST `images`
+4. `LocalOllamaProviderStrategy` with multipart content → native schema conversion; retain actual upstream response to assess any reported 400
 
 ---

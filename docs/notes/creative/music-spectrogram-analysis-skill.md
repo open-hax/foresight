@@ -38,6 +38,8 @@ Suggested filenames:
 ### 1) Inspect (ffprobe)
 
 ```bash
+mkdir -p Music/renders
+
 ffprobe -hide_banner -v error \
   -show_format -show_streams \
   -print_format json \

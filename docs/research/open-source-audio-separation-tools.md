@@ -11,20 +11,20 @@ created: "2026-05-13"
 
 ## Best open-source choice
 
-The strongest open-source operational choice I found is `python-audio-separator`, which is MIT-licensed and supports multiple model families including MDX-Net, VR, Demucs, and MDXC, with the ability to output a single stem such as Piano. Its docs explicitly say the available models can separate Drums, Bass, Guitar, Piano, and other stems, and it provides CLI plus Python APIs for swapping models without rebuilding your own tooling. [latouchemusicale](https://latouchemusicale.com/en/tools/wav-to-midi-converter/)
+The strongest open-source operational choice I found is `python-audio-separator`, which is MIT-licensed and supports multiple model families including MDX-Net, VR, Demucs, and MDXC, with the ability to output a single stem such as Piano. Its docs explicitly say the available models can separate Drums, Bass, Guitar, Piano, and other stems, and it provides CLI plus Python APIs for swapping models without rebuilding your own tooling. [python-audio-separator upstream README](https://github.com/nomadkaraoke/python-audio-separator#readme)
 
-That matters because Demucs alone explicitly says its 6-stem piano source has “a lot of bleeding and artifacts,” and the maintained way to get better piano results in practice is usually to test several open models rather than trust a single separator architecture. `python-audio-separator` is basically the cleanest open-source harness for doing exactly that. [airapgen](https://www.airapgen.com/audio-to-midi/en)
+That matters because Demucs alone explicitly says its 6-stem piano source has “a lot of bleeding and artifacts,” and the maintained way to get better piano results in practice is usually to test several open models rather than trust a single separator architecture. `python-audio-separator` is basically the cleanest open-source harness for doing exactly that. [Demucs upstream README](https://github.com/facebookresearch/demucs#readme)
 
 ## What I’d use
 
 Facts:
-- Demucs is open source under MIT, but its own README warns that `htdemucs_6s` piano is weak. [airapgen](https://www.airapgen.com/audio-to-midi/en)
-- `python-audio-separator` is open source under MIT and supports multiple architectures plus single-stem output for Piano. [latouchemusicale](https://latouchemusicale.com/en/tools/wav-to-midi-converter/)
+- Demucs is open source under MIT, but its own README warns that `htdemucs_6s` piano is weak. [Demucs upstream README](https://github.com/facebookresearch/demucs#readme)
+- `python-audio-separator` is open source under MIT and supports multiple architectures plus single-stem output for Piano. [python-audio-separator upstream README](https://github.com/nomadkaraoke/python-audio-separator#readme)
 - Open-Unmix and Spleeter are also open-source, but their standard pretrained models are the usual 4-stem or 2-stem families, not piano-specialized end-user tools. [github](https://github.com/deezer/spleeter)
 
 Interpretation:
-- If you need an open-source **workflow**, use `python-audio-separator` first. [latouchemusicale](https://latouchemusicale.com/en/tools/wav-to-midi-converter/)
-- If you need an open-source **baseline model**, Demucs is still worth testing, but not as your only piano strategy. [airapgen](https://www.airapgen.com/audio-to-midi/en)
+- If you need an open-source **workflow**, use `python-audio-separator` first. [python-audio-separator upstream README](https://github.com/nomadkaraoke/python-audio-separator#readme)
+- If you need an open-source **baseline model**, Demucs is still worth testing, but not as your only piano strategy. [Demucs upstream README](https://github.com/facebookresearch/demucs#readme)
 - If you need research-grade piano-specific work and your material resembles concerto or classical piano/orchestra textures, the piano-concerto separation line of work is interesting, but it is niche and likely mismatched to Suno-style full productions. [github](https://github.com/yiitozer/pc-separation)
 
 ## Recommended stack
@@ -33,8 +33,8 @@ I’d rank the open-source options like this:
 
 | Use case | Best open-source choice | Why |
 |---|---|---|
-| Practical piano extraction from mixed songs | `python-audio-separator` | MIT-licensed, model-swapping, Piano single-stem support, UVR ecosystem access  [latouchemusicale](https://latouchemusicale.com/en/tools/wav-to-midi-converter/) |
-| Baseline direct test | Demucs `htdemucs_6s` | Open, easy to run, but piano quality explicitly weak  [airapgen](https://www.airapgen.com/audio-to-midi/en) |
+| Practical piano extraction from mixed songs | `python-audio-separator` | MIT-licensed, model-swapping, Piano single-stem support, UVR ecosystem access  [python-audio-separator upstream README](https://github.com/nomadkaraoke/python-audio-separator#readme) |
+| Baseline direct test | Demucs `htdemucs_6s` | Open, easy to run, but piano quality explicitly weak  [Demucs upstream README](https://github.com/facebookresearch/demucs#readme) |
 | General research-friendly separator | Open-Unmix | Open and solid, but not piano-targeted in standard release  [sigsep.github](https://sigsep.github.io/open-unmix/) |
 | Fast basic splitter | Spleeter | Open and easy, but not piano-specific in common pretrained use  [github](https://github.com/deezer/spleeter) |
 
@@ -42,16 +42,16 @@ I’d rank the open-source options like this:
 
 If I were setting this up on your machine, I would do:
 
-1. Install `python-audio-separator`. It is MIT-licensed and built for exactly this kind of model selection workflow. [latouchemusicale](https://latouchemusicale.com/en/tools/wav-to-midi-converter/)
-2. List available models and filter for piano-capable ones, then benchmark 2 to 4 candidates on the same Suno track excerpt. The CLI supports model listing and filtering by stem type. [latouchemusicale](https://latouchemusicale.com/en/tools/wav-to-midi-converter/)
-3. Output only the piano stem with `--single_stem Piano`, then score the result by bleed, transient integrity, and sustain smear. [latouchemusicale](https://latouchemusicale.com/en/tools/wav-to-midi-converter/)
-4. Keep Demucs `htdemucs_6s` only as one comparator, not the presumed winner. Demucs itself warns you off trusting its piano source too much. [airapgen](https://www.airapgen.com/audio-to-midi/en)
+1. Install `python-audio-separator`. It is MIT-licensed and built for exactly this kind of model selection workflow. [python-audio-separator upstream README](https://github.com/nomadkaraoke/python-audio-separator#readme)
+2. List available models and filter for piano-capable ones, then benchmark 2 to 4 candidates on the same Suno track excerpt. The CLI supports model listing and filtering by stem type. [python-audio-separator upstream README](https://github.com/nomadkaraoke/python-audio-separator#readme)
+3. Output only the piano stem with `--single_stem Piano`, then score the result by bleed, transient integrity, and sustain smear. [python-audio-separator upstream README](https://github.com/nomadkaraoke/python-audio-separator#readme)
+4. Keep Demucs `htdemucs_6s` only as one comparator, not the presumed winner. Demucs itself warns you off trusting its piano source too much. [Demucs upstream README](https://github.com/facebookresearch/demucs#readme)
 
 ## Honest constraint
 
-The hidden truth is: there may not be one universally best open-source piano model for your material. Piano extraction sits in a messy timbral overlap zone, so the winning strategy is often “ensemble by audition” — run a few open models and keep the least contaminated output — rather than betting on one canonical separator. [airapgen](https://www.airapgen.com/audio-to-midi/en)
+The hidden truth is: there may not be one universally best open-source piano model for your material. Piano extraction sits in a messy timbral overlap zone, so the winning strategy is often “ensemble by audition” — run a few open models and keep the least contaminated output — rather than betting on one canonical separator. [Demucs upstream README](https://github.com/facebookresearch/demucs#readme)
 
-So if it **must** be open source, my answer is: use `python-audio-separator` as the front door, and treat piano extraction as a model-selection problem inside that ecosystem. [latouchemusicale](https://latouchemusicale.com/en/tools/wav-to-midi-converter/)
+So if it **must** be open source, my answer is: use `python-audio-separator` as the front door, and treat piano extraction as a model-selection problem inside that ecosystem. [python-audio-separator upstream README](https://github.com/nomadkaraoke/python-audio-separator#readme)
 
 
 ---
@@ -85,6 +85,7 @@ pip install piano_transcription_inference
 **3. The Python Execution Script:**
 ```python
 import librosa
+import torch
 from piano_transcription_inference import PianoTranscription, sample_rate
 
 # 1. Load your separated piano stem
@@ -92,7 +93,8 @@ audio_path = 'output/separated_piano_stem.wav'
 audio, _ = librosa.load(path=audio_path, sr=sample_rate, mono=True)
 
 # 2. Initialize the Transcriptor (uses GPU if available, CPU if not)
-transcriptor = PianoTranscription(device='cuda') # change to 'cpu' if no nvidia GPU
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+transcriptor = PianoTranscription(device=device)
 
 # 3. Transcribe directly to a MIDI file
 transcribed_dict = transcriptor.transcribe(audio, 'output/suno_aggressive_piano.mid')

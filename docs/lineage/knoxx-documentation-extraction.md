@@ -59,6 +59,18 @@ what was extracted because of it.
 | **OpenPlanner, Myrmex, Graph-Weaver, our-gpus, Shibboleth** (not Foresight submodules) | Knoxx was historically *inside* the OpenPlanner monorepo. It is now a client. `knoxx/AGENTS.md` forbids coordinated OpenPlanner changes. | The epistemic kernel (OpenPlanner is its store of record) moved out. Cards are listed below. |
 | **Predecessor product line** (futuresight-kms, knowledge-lake TS package, Exposure Monitor, Ragussy) | None of this code exists in Knoxx, and it conflicts with the CLJS-first rule. | Cards are listed below as lineage. |
 
+## Review corrections after extraction
+
+PR #119 corrects inherited example defects, formatting, and unsupported current-
+authority claims while retaining the original extraction provenance. These are
+curated successor documents, not byte-identical archival copies or evidence of
+new runtime deployment. Historical implementation sketches remain proposals.
+
+Targeted regression evidence: run `nbb docs/verification/knoxx_extraction_snippets.cljs`
+from the Foresight root. The verifier evaluates the corrected document snippets;
+PostgreSQL query effects are stubbed, and no live service or child is invoked.
+It checks example mechanics, not production migration or authority admission.
+
 ## Moved whole
 
 Paths are relative to this repository. The source is the Knoxx path.
@@ -68,7 +80,7 @@ Paths are relative to this repository. The source is the Knoxx path.
 | [`docs/notes/workflow-contract-graph-v1.md`](../notes/workflow-contract-graph-v1.md) | `disabled-contracts/workflow-contract-graph-v1.md` | Rheos, katamorph, proxx. Agent-work workflow law across repositories; Knoxx contracts are one grounding input. Filed under notes as a lift candidate, not under specs, so it is not read as current authority. |
 | [`docs/notes/workflow-contract-kernel-three-graphs.md`](../notes/workflow-contract-kernel-three-graphs.md) | `docs/notes/contracts/workflow-contract-kernel-intent.md` | Rheos, proxx, eta-mu, katamorph. Knoxx is one of five dialects; the "advisory edges never authorize transitions" rule is Rheos law. It is the intent note for the spec above. |
 | [`docs/architecture/agent-workflows-kanban-github-review.md`](../architecture/agent-workflows-kanban-github-review.md) | `docs/agent-workflows.md` (pointer left) | Rheos, eta-mu, `.agents`. The shared Kanban → GitHub → review-gate stack that Knoxx "participates in". Its `eta-mu kanban sync github` references should be reconciled with Rheos. |
-| [`docs/architecture/epistemic-kernel.md`](../architecture/epistemic-kernel.md) + [`epistemic-examples.edn`](../architecture/epistemic-examples.edn) | `docs/epistemic-kernel.md` (pointer left), `docs/epistemic-examples.edn` | epiphany (observed→accepted), clio (immutable ledger), OpenPlanner. The model places truth in OpenPlanner and treats Knoxx as one controller. Knoxx's implementation `ingestion/src/kms_ingestion/epistemic.cljc` stays. |
+| [`docs/architecture/epistemic-kernel.md`](../architecture/epistemic-kernel.md) + [`epistemic-examples.edn`](../architecture/epistemic-examples.edn) | `docs/epistemic-kernel.md` (pointer left), `docs/epistemic-examples.edn` | epiphany (observed→accepted), clio (immutable ledger), OpenPlanner. Historical model / lift candidate, not accepted Foresight law. The proposal places truth in OpenPlanner and treats Knoxx as one controller; extraction does not promote it. Knoxx's implementation `ingestion/src/kms_ingestion/epistemic.cljc` stays. |
 | [`docs/architecture/data-oriented-patterns.md`](../architecture/data-oriented-patterns.md) | `docs/style/data-oriented-patterns.md` | alpha, Truth ECS, purify-before-port. Repository-agnostic doctrine; "Knoxx" appears twice. |
 | [`docs/notes/driver-agnostic-migration-protocol.md`](../notes/driver-agnostic-migration-protocol.md) | `docs/notes/architecture/driver-agnostic-migration-protocol.md` | alpha, katamorph, clio. Never implemented in Knoxx (no `MigrationDriver`, runner or migration log), and its Postgres target is retired. The surviving idea is a storage-agnostic, data-as-migration law, so it is a recovered claim and not an accepted lift. |
 | [`docs/notes/agent-action-tool-ontology.md`](../notes/agent-action-tool-ontology.md) | `docs/notes/thoughts/agent-emerges-from-context.md` | sol, katamorph. It defines agent, action and tool in general. Knoxx's `domain/action/` versus `domain/tools.cljs` split is one instance. It overlaps [operation-contracts-beneath-workflowstep](../notes/operation-contracts-beneath-workflowstep.md). |
