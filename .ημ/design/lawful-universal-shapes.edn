@@ -1,0 +1,112 @@
+{:proposal/id #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+ :proposal/type :foresight.plan/lawful-universal-shapes
+ :proposal/status :proposed
+ :proposal/recorded-at #inst "2026-10-07T21:16:00.000Z"
+ :proposal/layout-authority? false
+ :proposal/ledger-authority :clio
+ :proposal/invariants
+ [:semantic-shape-is-representation-independent
+  :edn-contract-records-live-under-eta-mu
+  :uuid-is-semantic-identity
+  :paths-are-organization-and-provenance
+  :causal-order-is-explicit-not-filesystem-derived
+  :unsupported-representation-fails-explicitly
+  :clio-remains-event-ledger-authority]
+ :proposal/events
+ [{:event/id #uuid "35b59d93-6bf7-5440-8be3-fa89ef15cba4"
+   :event/type :planning/epic-recorded
+   :event/causes []
+   :work/id #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/type :epic
+   :work/title "One semantic shape, many lawful representations"}
+
+  {:event/id #uuid "02a5dd2c-9524-5eea-a186-69dddbcfa539"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "35b59d93-6bf7-5440-8be3-fa89ef15cba4"]
+   :work/id #uuid "aa3ca1b5-791c-59f4-930b-ec94e5e27031"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/title "Define representation laws and semantic equivalence"}
+
+  {:event/id #uuid "b4bbb910-2d25-5adf-9fae-69f06704a657"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "35b59d93-6bf7-5440-8be3-fa89ef15cba4"]
+   :work/id #uuid "caf2cefb-1c67-56ec-bec1-62621f45b62c"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/title "Make .ημ a relocatable UUID and causal graph substrate"}
+
+  {:event/id #uuid "ae36e8af-dc8b-5eb7-83ce-783dcbaf6e81"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "02a5dd2c-9524-5eea-a186-69dddbcfa539"]
+   :work/id #uuid "7979e428-f9e4-5cbb-bf63-d205413b7053"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/depends-on [#uuid "aa3ca1b5-791c-59f4-930b-ec94e5e27031"]
+   :work/title "Define a self-describing portable value shape"}
+
+  {:event/id #uuid "c86417a2-4b11-58c2-9bf6-8a6405e52d58"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "ae36e8af-dc8b-5eb7-83ce-783dcbaf6e81"]
+   :work/id #uuid "6052f473-3fe5-51e3-9170-db6bab87159f"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/depends-on [#uuid "aa3ca1b5-791c-59f4-930b-ec94e5e27031"
+                     #uuid "7979e428-f9e4-5cbb-bf63-d205413b7053"]
+   :work/title "Define schema-directed YAML shapes"}
+
+  {:event/id #uuid "df16d255-9bb5-5256-b02a-ce644d32a3a5"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "ae36e8af-dc8b-5eb7-83ce-783dcbaf6e81"]
+   :work/id #uuid "ae946b40-ea77-59fc-88a9-9594bbff4f88"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/depends-on [#uuid "aa3ca1b5-791c-59f4-930b-ec94e5e27031"
+                     #uuid "7979e428-f9e4-5cbb-bf63-d205413b7053"]
+   :work/title "Define JSON BSON and document-store shapes"}
+
+  {:event/id #uuid "a4b1221b-b858-50b1-88e0-21c47ff8087c"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "02a5dd2c-9524-5eea-a186-69dddbcfa539"]
+   :work/id #uuid "7fd34592-e13c-5d50-b103-a282584a02dd"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/depends-on [#uuid "aa3ca1b5-791c-59f4-930b-ec94e5e27031"]
+   :work/title "Define relational row shapes"}
+
+  {:event/id #uuid "9d931ca1-058e-509c-99c0-50bde4ee903b"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "02a5dd2c-9524-5eea-a186-69dddbcfa539"
+                  #uuid "b4bbb910-2d25-5adf-9fae-69f06704a657"]
+   :work/id #uuid "e6e34d1a-49c7-5aba-9a3b-25af22af6834"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/depends-on [#uuid "aa3ca1b5-791c-59f4-930b-ec94e5e27031"
+                     #uuid "caf2cefb-1c67-56ec-bec1-62621f45b62c"]
+   :work/title "Define WorkItem Persona Participant and Readiness shapes once"}
+
+  {:event/id #uuid "268a89b4-306c-55e7-b9a0-06edb245800e"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "c86417a2-4b11-58c2-9bf6-8a6405e52d58"
+                  #uuid "9d931ca1-058e-509c-99c0-50bde4ee903b"]
+   :work/id #uuid "00e11377-098d-5522-8634-bff4f9a585d8"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/depends-on [#uuid "6052f473-3fe5-51e3-9170-db6bab87159f"
+                     #uuid "e6e34d1a-49c7-5aba-9a3b-25af22af6834"]
+   :work/title "Make Rheos frontmatter a full YAML representation"}
+
+  {:event/id #uuid "f046d59c-0d31-5ae5-aad2-f617fd8a204d"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "c86417a2-4b11-58c2-9bf6-8a6405e52d58"
+                  #uuid "df16d255-9bb5-5256-b02a-ce644d32a3a5"
+                  #uuid "a4b1221b-b858-50b1-88e0-21c47ff8087c"
+                  #uuid "268a89b4-306c-55e7-b9a0-06edb245800e"]
+   :work/id #uuid "2aae6edd-cb49-516f-96b6-61592342ad49"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/depends-on [#uuid "6052f473-3fe5-51e3-9170-db6bab87159f"
+                     #uuid "ae946b40-ea77-59fc-88a9-9594bbff4f88"
+                     #uuid "7fd34592-e13c-5d50-b103-a282584a02dd"
+                     #uuid "00e11377-098d-5522-8634-bff4f9a585d8"
+                     #uuid "e6e34d1a-49c7-5aba-9a3b-25af22af6834"]
+   :work/title "Build the cross-representation conformance suite"}
+
+  {:event/id #uuid "e84beb5d-81af-5ccb-84ed-435a33842af6"
+   :event/type :planning/story-recorded
+   :event/causes [#uuid "f046d59c-0d31-5ae5-aad2-f617fd8a204d"]
+   :work/id #uuid "6c462e73-97ff-5e58-b721-b4dfcbe02845"
+   :work/parent #uuid "7b0ad3c9-f579-56de-8052-8e79586bd5e2"
+   :work/depends-on [#uuid "2aae6edd-cb49-516f-96b6-61592342ad49"]
+   :work/title "Migrate duplicate parsers and serializers to shared shapes"}]}
