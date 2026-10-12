@@ -1,0 +1,50 @@
+;; SPDX-License-Identifier: GPL-3.0-or-later
+;; Reviewed org-to-personal development origins. Network membership is checked remotely.
+[
+ {:source/path "Truth" :org/upstream "octave-commons/Truth"
+  :dev/origin "riatzukiza/Truth" :network/root "octave-commons/Truth"}
+ {:source/path "bitch-tracker" :org/upstream "octave-commons/bitch-tracker"
+  :dev/origin "riatzukiza/bitch-tracker" :network/root "octave-commons/bitch-tracker"}
+ {:source/path "calliope" :org/upstream "octave-commons/calliope"
+  :dev/origin "riatzukiza/calliope" :network/root "octave-commons/calliope"}
+ {:source/path "epiphany" :org/upstream "octave-commons/epiphany"
+  :dev/origin "riatzukiza/epiphany" :network/root "octave-commons/epiphany"}
+ {:source/path "eta-mu" :org/upstream "open-hax/eta-mu"
+  :dev/origin "riatzukiza/eta-mu" :network/root "open-hax/eta-mu"}
+ {:source/path "katamorph" :org/upstream "open-hax/katamorph"
+  :dev/origin "riatzukiza/katamorph" :network/root "open-hax/katamorph"}
+ {:source/path "knoxx" :org/upstream "open-hax/knoxx"
+  :dev/origin "riatzukiza/knoxx" :network/root "open-hax/knoxx"}
+ {:source/path "muse" :org/upstream "octave-commons/muse"
+  :dev/origin "riatzukiza/muse" :network/root "octave-commons/muse"}
+ {:source/path "proxx" :org/upstream "open-hax/proxx"
+  :dev/origin "riatzukiza/proxx" :network/root "open-hax/proxx"}
+ {:source/path "services" :org/upstream "open-hax/services"
+  :dev/origin "riatzukiza/services" :network/root "open-hax/services"}
+ {:source/path "uxx" :org/upstream "open-hax/uxx"
+  :dev/origin "riatzukiza/open-hax-uxx" :network/root "open-hax/uxx"}
+ {:source/path "opencode" :org/upstream "open-hax/opencode"
+  :dev/origin "riatzukiza/mojomast-opencode" :network/root "anomalyco/opencode"}
+ {:source/path "shx" :org/upstream "octave-commons/shx"
+  :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
+ {:source/path "kanban-orchestrator" :org/upstream "open-hax/kanban-orchestrator"
+  :dev/origin "riatzukiza/kanban-orchestrator" :network/root "open-hax/kanban-orchestrator"}
+ {:source/path "clio" :org/upstream "open-hax/clio"
+  :dev/origin "riatzukiza/clio" :network/root "open-hax/clio"}
+ {:source/path "chat-ui" :org/upstream "open-hax/chat-ui"
+  :dev/origin "riatzukiza/chat-ui" :network/root "open-hax/chat-ui"}
+ {:source/path "rheos" :org/upstream "open-hax/rheos"
+  :dev/origin "riatzukiza/rheos" :network/root "open-hax/rheos"}
+ {:source/path "session-mycology" :org/upstream "open-hax/session-mycology"
+  :dev/origin "riatzukiza/session-mycology" :network/root "open-hax/session-mycology"}
+ {:source/path "sol" :org/upstream "open-hax/sol"
+  :dev/origin "riatzukiza/sol" :network/root "open-hax/sol"}
+ {:source/path "osmos" :org/upstream "open-hax/osmos"
+  :dev/origin "riatzukiza/osmos" :network/root "open-hax/osmos"}
+ {:source/path "receipt-river" :org/upstream "open-hax/receipt-river"
+  :dev/origin "riatzukiza/receipt-river" :network/root "open-hax/receipt-river"}
+ {:source/path "axxium" :org/upstream "open-hax/axxium"
+  :dev/origin "riatzukiza/axxium" :network/root "open-hax/axxium"}
+ {:source/path "openplanner" :org/upstream "open-hax/openplanner"
+  :dev/origin "riatzukiza/openplanner" :network/root "open-hax/openplanner"}
+]
