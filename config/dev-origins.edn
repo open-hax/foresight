@@ -45,4 +45,6 @@
   :dev/origin "riatzukiza/receipt-river" :network/root "open-hax/receipt-river"}
  {:source/path "axxium" :org/upstream "open-hax/axxium"
   :dev/origin "riatzukiza/axxium" :network/root "open-hax/axxium"}
+ {:source/path "openplanner" :org/upstream "open-hax/openplanner"
+  :dev/origin "riatzukiza/openplanner" :network/root "open-hax/openplanner"}
 ]

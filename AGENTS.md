@@ -54,6 +54,7 @@ candidates, and accepted lifts are not interchangeable.
 | `osmos` | open-hax/osmos | ingestion-service | Extracted JVM kms-ingestion service, configuration and consumer compatibility |
 | `receipt-river` | open-hax/receipt-river | receipt-ledger | Receipt-writing CLI and accountability records |
 | `axxium` | open-hax/axxium | identity-auth-kernel | Identity and authorization kernel; existing repository history is preserved |
+| `openplanner` | open-hax/openplanner | session-archive-data-lake | API-first data lake for LLM session archives; feeds the cephalon / graph-memory creative loop |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
 | `clobber` | (root-owned, recovered from riatzukiza/devel) | process-supervisor-dsl | Recovered pm2-clj/clobber PM2 DSL: merge law, prototypes, profiles (consolidation input; destined for the shx/Hexis supervisor IR; see `clobber/PROVENANCE.md`) |
