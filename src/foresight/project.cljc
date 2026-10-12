@@ -562,7 +562,16 @@
     :source/actionable? false
     :source/invariants [:eta/harness-not-domain-model
                         :foresight/consolidation-inputs-inventory-only
-                        :foresight/provider-output-untrusted]}])
+                        :foresight/provider-output-untrusted]}
+   {:source/id :clobber
+    :source/name "clobber"
+    :source/path "clobber"
+    :source/type :workspace-root
+    :source/ownership :workspace-root
+    :source/role :process-supervisor-dsl
+    :source/consolidation? true
+    :source/actionable? false
+    :source/invariants [:foresight/consolidation-inputs-inventory-only]}])
 
 (def native-components
   [{:component/id :alpha

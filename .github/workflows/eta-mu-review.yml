@@ -13,9 +13,12 @@ permissions:
 jobs:
   review:
     name: Evidence-first review (eta-mu)
-    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@e8eea02d31030215984375980b765803fc72d80d
+    # The reviewed paging contract avoids OpenCode Read's per-line truncation.
+    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@45ec644c2d15ed511e9bc1e797d1b4073b63dbfc
     with:
       pr_head_sha: ${{ github.event.pull_request.head.sha }}
+      muse_revision: 0b9a91492c8355e6933dc2164d35668cb76d9e60
+      agents_revision: 7fd3252e7663ad5e68be5e90429d126aa66c38c8
       opencode_version: 1.18.31
       setup_eta_mu_toolchain: false
       evidence_gates_script: |
@@ -28,7 +31,7 @@ jobs:
         run_gate project_contract npx --yes nbb@1.4.207 -cp src:scripts scripts/project.clj validate
         run_gate catalog_contract npx --yes nbb@1.4.207 -cp src:scripts scripts/evidence.clj validate
         run_gate migration_pack_dependencies python3 -m pip install jsonschema==4.26.0 networkx==3.6.1
-        run_gate migration_pack python3 -m unittest discover -s docs/migrations/eta-mu-breakdown/checks -p check_pack.py
+        run_gate migration_pack env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s docs/migrations/eta-mu-breakdown/checks -p check_pack.py
         run_gate receipt_history npx --yes nbb@1.4.207 -cp src:scripts scripts/evidence.clj verify-receipts --base "${PR_BASE_SHA}" --at "${PR_HEAD_SHA}"
         run_gate diff_hygiene git diff --check "${PR_BASE_SHA}...HEAD"
     # Least privilege: forward only the secrets the review job consumes.

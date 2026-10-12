@@ -138,3 +138,18 @@ This card remains in progress while any of the following is true:
 - the first signed-delivery fixture cannot survive duplicate admission and
   projection rebuild;
 - the bot can publish a conclusion against a head other than the reviewed head.
+
+
+## October 3 delivery refinement
+
+The [Promethean process](../../notes/promethean-review-and-promotion.md) sequences
+persistent server workers before direct interactive webhook handling. Keep the
+four required deterministic evidence roles above; model reviewer admission is
+one current-head approval from CodeRabbit, Codex, MiMo or Kimi. Optional model
+availability does not replace deterministic coverage or findings settlement.
+
+The new Markdown inputs cover persistent MiMo/Kimi workers, reviewer quorum,
+and fork-staging/promotion reconciliation. They refine this existing composition
+rather than introducing another runtime or ledger authority. Server ingress is
+`knoxx.promethean.rest`; the current disabled GitHub resources are scaffolding,
+not evidence of a live hosted App.

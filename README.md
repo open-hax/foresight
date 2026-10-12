@@ -38,9 +38,10 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the short contribution contract and
 for how successful local practice is recovered, classified, and explicitly
 promoted instead of copied into root law by accident.
 
-`.agents/` and `eta/` are intentional consolidation inputs. `.agents/` carries
-the canonical skill catalog in its own nested Git repository; `eta/` is a
-root-owned Clojure agent harness. Their working originals may remain elsewhere
+`.agents/`, `eta/` and `clobber/` are intentional consolidation inputs.
+`.agents/` carries the canonical skill catalog in its own nested Git repository;
+`eta/` is a root-owned Clojure agent harness; `clobber/` is the recovered
+pm2-clj/clobber PM2 DSL (see `clobber/PROVENANCE.md`). Their working originals may remain elsewhere
 while this repository converges on a higher-quality source. Compatibility
 copies are not removed implicitly.
 
@@ -73,7 +74,7 @@ nbb scripts/evidence.clj verify-receipts \
 
 `inventory` is read-only; `report` writes only root-generated artifacts.
 Inventory and reports include direct `.gitmodules` repositories plus the
-explicit `.agents` and `eta` consolidation roots. Inspection stays at each
+explicit `.agents`, `eta` and `clobber` consolidation roots. Inspection stays at each
 declared root; nested packages and Git repositories are not promoted into
 workspace projects.
 

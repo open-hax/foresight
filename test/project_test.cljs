@@ -26,7 +26,7 @@
            (set (map :source/path declared-submodules))))
     (is (= (set (map :url actual-submodules))
            (set (map :source/url declared-submodules))))
-    (is (= #{".agents" "eta"}
+    (is (= #{".agents" "clobber" "eta"}
            (set (map :source/path (project/consolidation-inputs)))))
     (is (= #{:alpha :archaeology :eta}
            (set (map :component/id (:project/native-components project/project)))))

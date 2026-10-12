@@ -1,0 +1,9 @@
+{:deps true
+ :builds
+ {:test {:target :node-test :output-to "target/test.cjs"
+         :ns-regexp "^probe-test$" :autorun true}
+  :esm {:target :esm :runtime :node :output-dir "dist"
+        :modules {:probe {:init-fn probe-test/main}}
+        :js-options {:js-provider :import
+                     :keep-as-import #{"node:fs" "node:crypto"
+                                       "fs-ext-extra-prebuilt"}}}}}

@@ -1,0 +1,1 @@
+{"name":"sol-clio-compatibility-probe","private":true,"type":"module","dependencies":{"fs-ext-extra-prebuilt":"2.2.9"},"devDependencies":{"shadow-cljs":"3.4.11"},"engines":{"node":"22.x"}}
