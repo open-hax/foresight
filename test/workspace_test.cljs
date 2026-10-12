@@ -47,10 +47,11 @@
 (deftest inventories-declared-consolidation-inputs
   (let [repos (workspace/inventory)
         by-path (into {} (map (juxt :path identity)) repos)]
-    (is (= 25 (count repos)))
-    (is (= 25 (count (set (map :path repos)))))
+    (is (= 26 (count repos)))
+    (is (= 26 (count (set (map :path repos)))))
     (doseq [child ["kanban-orchestrator" "clio" "chat-ui" "rheos"
-                   "session-mycology" "sol" "osmos" "receipt-river" "axxium"]]
+                   "session-mycology" "sol" "osmos" "receipt-river" "axxium"
+                   "openplanner"]]
       (is (= "git-submodule" (:source-type (by-path child))) child)
       (is (true? (:actionable (by-path child))) child))
     (is (= #{"git-submodule" "consolidation-input"}

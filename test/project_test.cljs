@@ -14,7 +14,8 @@
   (let [agents (fs/readFileSync "AGENTS.md" "utf8")
         catalog (edn/read-string (fs/readFileSync "config/quality-gates.edn" "utf8"))]
     (doseq [path ["kanban-orchestrator" "clio" "chat-ui" "rheos"
-                 "session-mycology" "sol" "osmos" "receipt-river" "axxium"]]
+                 "session-mycology" "sol" "osmos" "receipt-river" "axxium"
+                   "openplanner"]]
       (is (str/includes? agents (str "| `" path "` | open-hax/" path " |")) path)
       (is (seq (get-in catalog [:catalog/repositories path :repository/gates])) path))))
 
@@ -62,7 +63,7 @@
   (let [rows (edn/read-string (fs/readFileSync "config/dev-origins.edn" "utf8"))
         result (dev-origins/validate rows (workspace/current-submodules))]
     (is (:valid? result) (pr-str (:errors result)))
-    (is (= 22 (count rows)))
+    (is (= 23 (count rows)))
     (is (= "riatzukiza/mojomast-opencode"
            (:dev/origin (first (filter #(= "opencode" (:source/path %)) rows)))))))
 

@@ -91,3 +91,7 @@
 	path = axxium
 	url = git@github.com:open-hax/axxium.git
 	branch = device/yoga
+[submodule "openplanner"]
+	path = openplanner
+	url = git@github.com:open-hax/openplanner.git
+	branch = device/yoga

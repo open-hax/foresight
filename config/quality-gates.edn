@@ -254,6 +254,13 @@
      :gate/source "axxium/.github/workflows/ci.yml"
      :gate/reason "Owning CI runs the deployment-boundary self-test and check as a multi-step gate."}]}
 
+  "openplanner"
+  {:repository/path "openplanner"
+   :repository/gates
+   [{:gate/id :openplanner/build :gate/kind :build :gate/execution :local
+     :gate/command ["pnpm" "run" "build"] :gate/source "openplanner/package.json"}
+    {:gate/id :openplanner/static :gate/kind :static :gate/execution :local
+     :gate/command ["pnpm" "run" "lint"] :gate/source "openplanner/package.json"}]}
   "services"
   {:repository/path "services"
    :repository/gates

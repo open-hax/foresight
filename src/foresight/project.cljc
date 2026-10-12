@@ -552,6 +552,16 @@
      :source/role :identity-auth-kernel
      :source/actionable? true
      :source/invariants []}
+    {:source/id :openplanner
+     :source/name "openplanner"
+     :source/path "openplanner"
+     :source/type :git-submodule
+     :source/repository "open-hax/openplanner"
+     :source/url "git@github.com:open-hax/openplanner.git"
+     :source/ownership :independent-repository
+     :source/role :session-archive-data-lake
+     :source/actionable? true
+     :source/invariants []}
     {:source/id :eta
     :source/name "eta"
     :source/path "eta"
