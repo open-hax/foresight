@@ -161,9 +161,27 @@
 
 (def append-lock-name-pattern #"[.].+[.]append[.]lock")
 
+(defn receipt-segment-timestamp-valid?
+  "The name's timestamp must be a real UTC calendar date and clock time, not
+  only the right number of digits."
+  [value]
+  (when-let [[_ & fields]
+             (re-matches #"([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2})([0-9]{2})([0-9]{2}).*"
+                         value)]
+    (let [[year month day hour minute second] (map #(js/parseInt % 10) fields)
+          date (js/Date. (js/Date.UTC year (dec month) day hour minute second))]
+      (and (< hour 24) (< minute 60) (< second 60)
+           (= year (.getUTCFullYear date))
+           (= (dec month) (.getUTCMonth date))
+           (= day (.getUTCDate date))
+           (= hour (.getUTCHours date))
+           (= minute (.getUTCMinutes date))
+           (= second (.getUTCSeconds date))))))
+
 (defn receipt-segment-name? [value]
   (boolean (and (string? value)
-                (re-matches receipt-segment-name-pattern value))))
+                (re-matches receipt-segment-name-pattern value)
+                (receipt-segment-timestamp-valid? value))))
 
 (defn record-id
   "Stable content identity used to order and deduplicate merged records."
@@ -1027,7 +1045,29 @@
       (append-error! (str description " could not be securely opened: "
                           "it does not exist")))
     (require-regular-stats! stats description)
-    (fs/readFileSync file)))
+    ;; Validate and read the same inode: a pathname swapped after the lstat
+    ;; (for a symlink or another file) must not be followed.
+    (let [fd (try
+               (fs/openSync file (bit-or (fs-constant! "O_RDONLY")
+                                         (fs-constant! "O_NOFOLLOW")
+                                         (fs-constant! "O_NONBLOCK")))
+               (catch :default error
+                 (append-error! (str description " could not be securely opened: "
+                                     (.-message error)))))]
+      (try
+        (let [fd-stats (fs/fstatSync fd bigint-stat-options)]
+          (require-regular-stats! fd-stats (str description " descriptor"))
+          (when-not (same-file? fd-stats stats)
+            (append-error! (str description " identity changed")))
+          (let [bytes (fs/readFileSync fd)]
+            (when-not (= (.-length bytes)
+                         (safe-file-size! (fs/fstatSync fd bigint-stat-options)))
+              (append-error! (str description " changed during read")))
+            (require-path-identity! file fd-stats description
+                                    require-regular-stats!)
+            bytes))
+        (finally
+          (fs/closeSync fd))))))
 
 (defn read-working-receipt-segments!
   "Reads the working ledger. `own-basename` names the caller's reserved (still
@@ -1086,6 +1126,13 @@
          (str "Receipt River does not preserve the committed ledger: "
               (.-message error)))))))
 
+(defn same-working-ledger?
+  "True when two working-ledger reads name the same files with the same bytes."
+  [before after]
+  (and (= (mapv :segment/path before) (mapv :segment/path after))
+       (every? true? (map #(.equals (:segment/bytes %1) (:segment/bytes %2))
+                          before after))))
+
 (defn require-held-ledger-unchanged! [target validated-bytes]
   (let [current-bytes (stable-held-target-bytes! target)]
     (when-not (.equals validated-bytes current-bytes)
@@ -1104,7 +1151,8 @@
          basename (path/basename absolute-file)
          parent (open-parent-directory! directory)]
      (try
-       (let [lock (acquire-append-lock! parent basename)]
+       (let [lock (acquire-append-lock! parent basename)
+             retain-lock? (atom false)]
          (try
            (require-append-lock-identity! lock)
            (let [target-path (path/join (:proc-path parent) basename)
@@ -1112,8 +1160,8 @@
                  ;; append callers retain the explicit initialization path.
                  ;; Semantic evidence goes into a brand-new immutable segment,
                  ;; after the whole working ledger is checked against HEAD.
-                 _ (when validate-ledger?
-                     (validate-working-receipt-ledger! basename))
+                 validated-working (when validate-ledger?
+                                     (validate-working-receipt-ledger! basename))
                  target (open-append-target! parent target-path
                                              (if validate-ledger?
                                                :exclusive
@@ -1126,23 +1174,32 @@
                 :target target
                 :target-path target-path
                 :semantic-basename (when validate-ledger? basename)
+                ;; The working ledger as validated before the gate ran; at
+                ;; write time it must be unchanged apart from the reserved
+                ;; target, so gate output cannot add its own segments.
+                :validated-working validated-working
                 :held-ledger-bytes
                 (let [held (stable-held-target-bytes! target)]
                   (when (and validate-ledger? (pos? (.-length held)))
                     (append-error! "new Receipt River segment is not empty"))
                   held)
                 :target-open? (atom true)
+                :quarantined? (atom false)
                 :write-started? (atom false)
                 :write-verified? (atom false)}
                (catch :default error
-                 (when validate-ledger?
-                   (try
-                     (remove-unwritten-segment!
-                      {:parent parent :target target :target-path target-path})
-                     (catch :default _cleanup-error nil)))
+                 (when (and validate-ledger?
+                            (not (remove-unwritten-segment!
+                                  {:parent parent :target target
+                                   :target-path target-path})))
+                   ;; The reserved segment holds content this writer did not
+                   ;; write: keep the lock as a quarantine marker.
+                   (reset! retain-lock? true))
                  (close-after-open-error! (:fd target) error))))
            (catch :default error
-             (release-append-lock! parent lock)
+             (if @retain-lock?
+               (fs/closeSync (:fd lock))
+               (release-append-lock! parent lock))
              (throw error))))
        (catch :default error
          (fs/closeSync (:fd parent))
@@ -1152,16 +1209,25 @@
   "Removes a reserved segment that was never written, while the lock is still
   held, so an aborted gate cannot leave an empty file in the ledger."
   [{:keys [parent target target-path]}]
-  (let [stats (lstat-if-present! target-path "Receipt River file")]
-    (when (and stats
-               (same-file? stats (:stats target))
-               (zero? (safe-file-size! stats)))
-      (fs/unlinkSync target-path)
-      (fs/fsyncSync (:fd parent)))))
+  ;; Returns true only when no reserved segment is left behind: it was already
+  ;; gone, or it was still this writer's empty file and was removed. Anything
+  ;; else (content injected into it, a replaced file, a failed unlink) is false,
+  ;; and the caller retains the lock as a quarantine marker.
+  (try
+    (let [stats (lstat-if-present! target-path "Receipt River file")]
+      (cond
+        (nil? stats) true
+        (and (same-file? stats (:stats target))
+             (zero? (safe-file-size! stats)))
+        (do (fs/unlinkSync target-path)
+            (fs/fsyncSync (:fd parent))
+            true)
+        :else false))
+    (catch :default _error false)))
 
 (defn close-append-reservation!
   [{:keys [parent lock target target-open? write-started? write-verified?
-           semantic-basename]
+           quarantined? semantic-basename]
     :as reservation}]
   (try
     (when @target-open?
@@ -1169,14 +1235,18 @@
       (reset! target-open? false))
     (finally
       (try
-        (when (and semantic-basename (not @write-started?))
-          (remove-unwritten-segment! reservation))
-        (if (and @write-started? (not @write-verified?))
-          ;; A short write, fsync/close failure, or post-write identity change may
-          ;; have left a partial ledger line. Retain the lock as a durable
-          ;; quarantine marker so a later writer cannot normalize the damage.
-          (fs/closeSync (:fd lock))
-          (release-append-lock! parent lock))
+        (let [unwritten-removed? (if (and semantic-basename (not @write-started?))
+                                   (remove-unwritten-segment! reservation)
+                                   true)]
+          (if (or (and @write-started? (not @write-verified?))
+                  (not unwritten-removed?)
+                  (and quarantined? @quarantined?))
+            ;; A short write, fsync/close failure, post-write identity change,
+            ;; content injected into the reserved segment, or a segment added
+            ;; while the gate ran. Retain the lock as a durable quarantine
+            ;; marker so a later writer cannot normalize the damage.
+            (fs/closeSync (:fd lock))
+            (release-append-lock! parent lock)))
         (finally
           (fs/closeSync (:fd parent)))))))
 
@@ -1193,7 +1263,7 @@
 (defn append-reserved-edn-line!
   [{:keys [requested-file directory parent lock target target-path
            held-ledger-bytes target-open? write-started? write-verified?
-           semantic-basename]}
+           quarantined? semantic-basename validated-working]}
    record
    line]
   (*secure-append-phase-hook*
@@ -1208,6 +1278,10 @@
   ;; HEAD at the moment this receipt is written.
   (when semantic-basename
     (let [working (validate-working-receipt-ledger! semantic-basename)]
+      (when-not (same-working-ledger? validated-working working)
+        (reset! quarantined? true)
+        (append-error!
+         "Receipt River ledger changed while the gate ran: only the reserved segment may be added"))
       (when (contains? (into #{} (comp (mapcat :segment/records) (map record-id))
                              working)
                        (record-id record))

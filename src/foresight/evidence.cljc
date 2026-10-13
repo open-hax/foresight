@@ -408,4 +408,3 @@
        (sort-by (fn [{:keys [record id]}]
                   [(str (when (map? record) (:ts record))) id]))
        (mapv :record)))
-

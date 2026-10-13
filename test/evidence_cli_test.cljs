@@ -725,7 +725,74 @@
                 {:only #{"repo"} :kinds #{:unit}})))
           (is @gate-ran?)
           (is (= changed-ledger (fs/readFileSync segment "utf8")))
-          (is (= [] (lock-files segments))))))))
+          ;; The injected content cannot be safely removed, so the writer lock
+          ;; is retained as a quarantine marker instead of being released.
+          (is (= [(str "." (path/basename segment) ".append.lock")]
+                 (lock-files segments)))
+          (is (thrown-with-msg?
+               js/Error #"retained append lock quarantines"
+               (cli/read-working-receipt-segments! nil))))))))
+
+(deftest selected-gates-reject-segments-added-while-the-gate-runs
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        ;; Candidate gate code promotes its own schema-valid
+                        ;; output into a second, well-named segment.
+                        (fs/writeFileSync forged (str forged-line "\n") "utf8")
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"ledger changed while the gate ran"
+               (cli/run-selected-gates!
+                {:catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}
+                test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (= [(path/basename forged)] (segment-names segments))
+              "no receipt was written for the gate")
+          (is (= [(str "." (path/basename segment) ".append.lock")]
+                 (lock-files segments))
+              "the lock quarantines the ledger until the forged segment is adjudicated"))))))
+
+(deftest working-ledger-files-are-read-through-the-validated-descriptor
+  (with-receipt-fixture
+    (fn [{:keys [segments]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-a.edn")
+            copy (path/join segments "copy")
+            line "{:kind :observation}\n"
+            original-lstat cli/lstat-if-present!]
+        (fs/writeFileSync segment line "utf8")
+        (fs/writeFileSync copy line "utf8")
+        (with-redefs [cli/lstat-if-present!
+                      (fn [file description]
+                        (let [stats (original-lstat file description)]
+                          (when (= file segment)
+                            ;; Swap the validated file for a symlink to a
+                            ;; byte-identical copy before it is read.
+                            (fs/unlinkSync segment)
+                            (fs/symlinkSync copy segment))
+                          stats))]
+          (is (thrown-with-msg?
+               js/Error #"Receipt River segment"
+               (cli/read-working-regular-file! segment "Receipt River segment"))))))))
 
 (deftest receipt-lines-require-one-complete-edn-form
   (is (= [{:a 1}] (cli/read-receipt-records! "{:a 1}\n")))
@@ -1002,8 +1069,14 @@
     (is (cli/receipt-segment-name? name) name))
   (doseq [name ["receipt.edn" "a.edn" "2026-10-13-x.edn"
                 "2026-10-13T1645Z-x.edn" "2026-10-13T164500Z-X.edn"
-                "2026-10-13T164500Z-.edn" "2026-10-13T164500Z-x.txt"]]
+                "2026-10-13T164500Z-.edn" "2026-10-13T164500Z-x.txt"
+                ;; Well-shaped digits that are not a real UTC date or time.
+                "2026-99-99T999999Z-a.edn" "2026-02-30T120000Z-a.edn"
+                "2025-02-29T120000Z-a.edn" "2026-00-10T120000Z-a.edn"
+                "2026-10-13T240000Z-a.edn" "2026-10-13T126000Z-a.edn"
+                "2026-10-13T120060Z-a.edn"]]
     (is (not (cli/receipt-segment-name? name)) name))
+  (is (cli/receipt-segment-name? "2024-02-29T235959999Z-leap.edn"))
   (is (cli/receipt-segment-name?
        (path/basename (cli/new-receipt-segment-file)))))
 
