@@ -147,8 +147,8 @@ regular non-executable blobs, hashes
 their raw bytes, decodes strict UTF-8, and proves the reviewed ledger extends
 the trusted base ledger as an event ledger: every base segment file is still
 present byte-for-byte, every base record is still present somewhere in the
-merged ledger, the legacy file gains no new record, and no record appears
-twice. Records may move out of the legacy file into segments; that is how a
+merged ledger, the legacy file only ever loses whole lines (no new record, no
+rewrite or reordering), and no record appears twice. Records may move out of the legacy file into segments; that is how a
 fork and its org reconcile histories that split inside the legacy file. The
 current receipt-envelope and evidence-result laws apply only to the new
 records. Historical records remain evidence even when their envelopes predate

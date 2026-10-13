@@ -269,8 +269,18 @@
                     [(str (when (map? record) (:ts record))) id]))
          (mapv :record))))
 
+(defn merged-ledger-sha256
+  "Identity of the whole segmented ledger: every segment path and content hash."
+  [segments]
+  (sha256 (apply str (map (fn [{:segment/keys [path bytes]}]
+                            (str path "\t" (sha256 bytes) "\n"))
+                          segments))))
+
 (defn segmented-ledger [legacy-ledger segments]
   {:ledger/identity (assoc (:ledger/identity legacy-ledger)
+                           :ledger/sha256 (merged-ledger-sha256 segments)
+                           :ledger/legacy-sha256
+                           (get-in legacy-ledger [:ledger/identity :ledger/sha256])
                            :ledger/segments (count segments))
    :ledger/segments segments
    :ledger/records (merged-receipt-records! segments)})
@@ -284,12 +294,29 @@
                        (read-immutable-receipt-segments! revision))]
     (segmented-ledger legacy segments)))
 
+(defn line-subsequence?
+  "True when every line of `head` appears, byte-identical and in order, in
+  `base`."
+  [head base]
+  (if (.equals head base)
+    true
+    (let [lines (fn [bytes] (str/split (.toString bytes "utf8") #"\n" -1))]
+      (loop [wanted (seq (lines head))
+             available (seq (lines base))]
+        (cond
+          (empty? wanted) true
+          (empty? available) false
+          (= (first wanted) (first available)) (recur (rest wanted) (rest available))
+          :else (recur wanted (rest available)))))))
+
 (defn ledger-extension-records!
   "Checks that `head-segments` extend `base-segments` as an event ledger and
   returns the new records in merged order. Rules:
   - every base segment file still exists byte-for-byte (no edits, no deletes);
   - every base record is still present somewhere in the head ledger;
-  - the frozen legacy file gains no record that the base ledger lacked;
+  - the frozen legacy file is unchanged except that whole lines may be
+    removed (its lines stay an ordered, byte-identical subsequence of the
+    base file), and it gains no record that the base ledger lacked;
   - no record appears twice in the merged head ledger.
   Records may move out of the legacy file into segments, which is how a
   diverged fork and org reconcile their histories."
@@ -323,6 +350,13 @@
                 (str "The legacy Receipt River ledger " law/receipt-ledger-path
                      " is frozen; write new receipts as segments under "
                      law/receipt-segment-directory "/"))))
+      (doseq [{:segment/keys [bytes legacy?]} base-segments
+              :when legacy?
+              :let [head (first (filter :segment/legacy? head-segments))]]
+        (when-not (line-subsequence? (:segment/bytes head) bytes)
+          (throw (js/Error.
+                  (str "The legacy Receipt River ledger " law/receipt-ledger-path
+                       " may only lose whole lines; it was rewritten or reordered")))))
       (filterv #(not (contains? base-ids (record-id %))) merged-head))))
 
 (defn read-immutable-catalog-bundle! [revision]

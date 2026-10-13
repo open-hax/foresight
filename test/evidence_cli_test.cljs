@@ -1061,6 +1061,10 @@
         (is (zero? (cli/verify-receipts! {:base org-main :at reconciled})))
         (is (zero? (cli/verify-receipts! {:base fork-main :at reconciled})))
         (is (zero? (cli/verify-receipts! {:base reconciled :at synced})))
+        (is (not= (get-in (cli/read-immutable-merged-ledger! reconciled)
+                          [:ledger/identity :ledger/sha256])
+                  (get-in (cli/read-immutable-merged-ledger! synced)
+                          [:ledger/identity :ledger/sha256])))
         (let [records (:ledger/records
                        (cli/read-immutable-merged-ledger! synced))]
           (is (= ["2026-08-29T17:22:40Z" "2026-10-02T00:00:00Z"
@@ -1111,6 +1115,22 @@
           (is (thrown-with-msg?
                js/Error #"drops 1 base record"
                (cli/verify-receipts! {:base base :at head})))))
+      ;; Reordering or reserializing legacy lines is rejected even when every
+      ;; record survives.
+      (let [two (str base-text (pr-str (assoc historical :owner "second")) "\n")
+            with-two (commit! two)]
+        (is (thrown-with-msg?
+             js/Error #"may only lose whole lines"
+             (cli/verify-receipts!
+              {:base with-two
+               :at (commit! (str (pr-str (assoc historical :owner "second")) "\n"
+                                 base-text))})))
+        (is (thrown-with-msg?
+             js/Error #"may only lose whole lines"
+             (cli/verify-receipts!
+              {:base with-two
+               :at (commit! (str/replace two ", " " "))}))))
+      (commit! base-text)
       ;; The legacy file is frozen: appending to it is rejected.
       (let [head (commit! (str base-text (pr-str current) "\n"))]
         (is (thrown-with-msg?
@@ -1220,6 +1240,7 @@
                 {:ledger/path law/receipt-ledger-path
                  :ledger/revision revision
                  :ledger/sha256 (apply str (repeat 64 "d"))}
+                :ledger/bytes (js/Buffer.alloc 0)
                 :ledger/records
                 [(cli/evidence-receipt
                   passed-result "2026-08-29T17:22:40Z" "test"
@@ -1298,6 +1319,7 @@
                 {:ledger/path law/receipt-ledger-path
                  :ledger/revision reviewed-root-revision
                  :ledger/sha256 (apply str (repeat 64 "d"))}
+                :ledger/bytes (js/Buffer.alloc 0)
                 :ledger/records
                 [(cli/evidence-receipt
                   passed-result "2026-08-29T17:22:40Z" "test"
