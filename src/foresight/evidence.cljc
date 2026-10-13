@@ -368,3 +368,44 @@
                               result
                               (get trusted-gates gate-id)))))
                     required-gate-ids))))))
+
+;; ---------------------------------------------------------------------------
+;; Segmented Receipt River ledger law (pure). Adapters supply bytes and a
+;; content-hash function; ordering and duplicate rules live here.
+
+(defn canonical-form
+  "An order-independent representation of an EDN value: map entries and set
+  members are sorted, and vectors and lists stay distinct, so equal values
+  always print identically and unequal values never collide."
+  [value]
+  (cond
+    (map? value)
+    [:map (vec (sort-by pr-str
+                        (map (fn [[k v]] [(canonical-form k) (canonical-form v)])
+                             value)))]
+    (set? value) [:set (vec (sort-by pr-str (map canonical-form value)))]
+    (vector? value) [:vector (mapv canonical-form value)]
+    (sequential? value) [:list (mapv canonical-form value)]
+    :else value))
+
+(defn repeated-ledger-records
+  "Groups of segment paths that hold the same record ID."
+  [id-fn segments]
+  (->> (for [{:segment/keys [path records]} segments
+             record records]
+         {:path path :id (id-fn record)})
+       (group-by :id)
+       vals
+       (filter #(< 1 (count %)))
+       (mapv #(mapv :path %))))
+
+(defn merge-ledger-records
+  "Merges segment records into one ledger ordered by `:ts`, then record ID."
+  [id-fn segments]
+  (->> (for [{:segment/keys [records]} segments
+             record records]
+         {:record record :id (id-fn record)})
+       (sort-by (fn [{:keys [record id]}]
+                  [(str (when (map? record) (:ts record))) id]))
+       (mapv :record)))
+
