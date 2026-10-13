@@ -50,12 +50,33 @@
   (let [fixture (fs/mkdtempSync
                  (path/join (os/tmpdir) "foresight-receipt-append-"))
         directory (path/join fixture ".ημ")
+        segments (path/join directory "receipts")
         file (path/join directory "receipts.edn")]
     (fs/mkdirSync directory)
+    (fs/mkdirSync segments)
     (try
-      (run! {:fixture fixture :directory directory :file file})
+      (run! {:fixture fixture :directory directory :segments segments
+             :file file})
       (finally
         (fs/rmSync fixture #js {:recursive true :force true})))))
+
+(defn segment-names [segments]
+  (vec (sort (filter #(str/ends-with? % ".edn") (fs/readdirSync segments)))))
+
+(defn segment-records [segments]
+  (vec (mapcat #(cli/read-receipt-records!
+                 (fs/readFileSync (path/join segments %) "utf8"))
+               (segment-names segments))))
+
+(defn lock-files [segments]
+  (vec (filter #(str/ends-with? % ".append.lock") (fs/readdirSync segments))))
+
+(defn empty-committed-ledger [_revision]
+  {:ledger/identity {:ledger/path law/receipt-ledger-path
+                     :ledger/revision reviewed-root-revision
+                     :ledger/sha256 (cli/sha256 "")}
+   :ledger/bytes (js/Buffer.alloc 0)
+   :ledger/records []})
 
 (deftest secure-append-creates-and-serializes-regular-receipts
   (with-receipt-fixture
@@ -322,16 +343,31 @@
         (is (= passed-result (:evidence/result receipt)))
         (is (= [(str "repo@" child-revision) ":repo/unit"]
                (:refs receipt)))
-        (is (re-find #"[.]ημ/receipts[.]edn$" (:file @captured)))))))
+        ;; New evidence lands in a fresh immutable segment, never the legacy file.
+        (is (re-find #"[.]ημ/receipts/[0-9T-]+Z-[0-9a-f]{12}[.]edn$"
+                     (:file @captured)))))))
 
 (deftest evidence-append-refuses-to-recreate-a-missing-ledger
   (with-receipt-fixture
-    (fn [{:keys [file]}]
+    (fn [{:keys [file segments]}]
       (with-redefs [cli/receipt-file file]
         (is (thrown-with-msg?
              js/Error #"could not be securely opened"
              (cli/append-evidence-receipt! passed-result)))
-        (is (not (fs/existsSync file)))))))
+        (is (not (fs/existsSync file)))
+        (is (= [] (segment-names segments)))
+        (is (= [] (lock-files segments)))))))
+
+(deftest evidence-append-requires-the-segment-directory
+  (with-receipt-fixture
+    (fn [{:keys [file segments]}]
+      (fs/writeFileSync file "" "utf8")
+      (fs/rmdirSync segments)
+      (with-redefs [cli/receipt-file file]
+        (is (thrown-with-msg?
+             js/Error #"parent directory does not exist"
+             (cli/append-evidence-receipt! passed-result)))
+        (is (not (fs/existsSync segments)))))))
 
 (deftest gate-runs-preflight-durable-receipt-support
   (let [calls (atom [])
@@ -359,15 +395,17 @@
 
 (deftest selected-gates-hold-the-receipt-reservation-before-execution
   (with-receipt-fixture
-    (fn [{:keys [directory file]}]
+    (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
-            lock-file (path/join directory ".receipts.edn.append.lock")
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            lock-file (path/join segments ".2026-10-13T000000000Z-test.edn.append.lock")
             catalog {:catalog/repositories
                      {"repo" {:repository/path "repo"
                               :repository/gates [local-gate]}}}]
         ;; Semantic evidence appends require an explicitly initialized ledger.
         (fs/writeFileSync file "" "utf8")
         (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
                       cli/git-capture!
                       (fn [args]
                         (is (= ["rev-parse" "HEAD"] args))
@@ -375,7 +413,8 @@
                       cli/read-immutable-receipt-ledger!
                       (fn [revision]
                         (is (= reviewed-root-revision revision))
-                        {:ledger/bytes (js/Buffer.alloc 0)})
+                        (empty-committed-ledger revision))
+                      cli/read-immutable-receipt-segments! (fn [_] {})
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -385,29 +424,32 @@
                       (fn [& _]
                         (reset! gate-ran? true)
                         (is (fs/existsSync lock-file))
-                        (is (fs/existsSync file))
+                        (is (fs/existsSync segment))
                         passed-result)]
           (is (zero? (cli/run-selected-gates!
                       catalog test-catalog-identity
                       {:only #{"repo"} :kinds #{:unit}})))
           (is @gate-ran?)
           (is (not (fs/existsSync lock-file)))
-          (let [records (cli/read-receipt-records!
-                         (fs/readFileSync file "utf8"))]
+          (is (= "" (fs/readFileSync file "utf8")))
+          (let [records (segment-records segments)]
             (is (= 1 (count records)))
             (is (= passed-result (:evidence/result (first records))))))))))
 
 (deftest selected-gates-reject-an-unsafe-receipt-target-before-execution
   (with-receipt-fixture
-    (fn [{:keys [directory file]}]
+    (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
-            lock-file (path/join directory ".receipts.edn.append.lock")
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            lock-file (path/join segments ".2026-10-13T000000000Z-test.edn.append.lock")
             catalog {:catalog/repositories
                      {"repo" {:repository/path "repo"
                               :repository/gates [local-gate]}}}]
+        (fs/writeFileSync file "" "utf8")
         (fs/writeFileSync lock-file "stale-or-held\n"
                           #js {:encoding "utf8" :flag "wx"})
         (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -423,15 +465,43 @@
                 catalog test-catalog-identity
                 {:only #{"repo"} :kinds #{:unit}})))
           (is (false? @gate-ran?))
-          (is (not (fs/existsSync file)))
+          (is (not (fs/existsSync segment)))
           (is (= "stale-or-held\n"
                  (fs/readFileSync lock-file "utf8"))))))))
 
+(deftest selected-gates-refuse-to-overwrite-an-existing-segment
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [gate-ran? (atom false)
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            catalog {:catalog/repositories
+                     {"repo" {:repository/path "repo"
+                              :repository/gates [local-gate]}}}]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/validate-working-receipt-ledger! (fn [] nil)
+                      cli/require-repositories! (fn [& _] {"repo" {}})
+                      cli/run-gate! (fn [& _]
+                                      (reset! gate-ran? true)
+                                      passed-result)]
+          (fs/writeFileSync segment "" "utf8")
+          (is (thrown-with-msg?
+               js/Error #"could not be securely opened"
+               (cli/run-selected-gates!
+                catalog test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (false? @gate-ran?))
+          (is (= "" (fs/readFileSync segment "utf8")))
+          (is (= [] (lock-files segments))))))))
+
 (deftest selected-gates-refuse-to-recreate-a-missing-ledger
   (with-receipt-fixture
-    (fn [{:keys [directory file]}]
+    (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
-            lock-file (path/join directory ".receipts.edn.append.lock")
             catalog {:catalog/repositories
                      {"repo" {:repository/path "repo"
                               :repository/gates [local-gate]}}}]
@@ -452,7 +522,8 @@
                 {:only #{"repo"} :kinds #{:unit}})))
           (is (false? @gate-ran?))
           (is (not (fs/existsSync file)))
-          (is (not (fs/existsSync lock-file))))))))
+          (is (= [] (segment-names segments)))
+          (is (= [] (lock-files segments))))))))
 
 (deftest selected-gates-reject-a-valid-truncated-committed-ledger
   (let [first-record {:ts "2026-08-29T22:58:48Z"
@@ -470,20 +541,32 @@
                              :dod "preserve second"
                              :refs ["second"])
         first-line (str (pr-str first-record) "\n")
-        committed-text (str first-line (pr-str second-record) "\n")
+        second-line (str (pr-str second-record) "\n")
+        committed-text (str first-line second-line)
         committed-bytes (js/Buffer.from committed-text "utf8")
+        committed-segment ".ημ/receipts/2026-08-29T225849Z-second.edn"
         catalog {:catalog/repositories
                  {"repo" {:repository/path "repo"
                           :repository/gates [local-gate]}}}]
     (is (law/receipt-envelope? first-record))
     (is (law/receipt-envelope? second-record))
-    (doseq [held-text ["" first-line]]
+    ;; Dropping a committed legacy record, or deleting or editing a committed
+    ;; segment, must all be rejected before the gate runs.
+    (doseq [[legacy-text committed-segments held-segment]
+            [["" {} nil]
+             [first-line {} nil]
+             [first-line {committed-segment second-line} nil]
+             [first-line {committed-segment second-line} first-line]]]
       (with-receipt-fixture
-        (fn [{:keys [directory file]}]
+        (fn [{:keys [segments file]}]
           (let [gate-ran? (atom false)
-                lock-file (path/join directory
-                                     ".receipts.edn.append.lock")]
-            (fs/writeFileSync file held-text "utf8")
+                legacy-committed (if (seq committed-segments)
+                                   (js/Buffer.from first-line "utf8")
+                                   committed-bytes)]
+            (fs/writeFileSync file legacy-text "utf8")
+            (when held-segment
+              (fs/writeFileSync (path/join segments "2026-08-29T225849Z-second.edn")
+                                held-segment "utf8"))
             (with-redefs [cli/receipt-file file
                           cli/git-capture!
                           (fn [args]
@@ -492,7 +575,16 @@
                           cli/read-immutable-receipt-ledger!
                           (fn [revision]
                             (is (= reviewed-root-revision revision))
-                            {:ledger/bytes committed-bytes})
+                            (assoc (empty-committed-ledger revision)
+                                   :ledger/bytes legacy-committed
+                                   :ledger/records
+                                   (cli/read-receipt-records!
+                                    (.toString legacy-committed "utf8"))))
+                          cli/read-immutable-receipt-segments!
+                          (fn [_]
+                            (into (sorted-map)
+                                  (map (fn [[k v]] [k (js/Buffer.from v "utf8")]))
+                                  committed-segments))
                           cli/require-repositories!
                           (fn [& _]
                             {"repo" {:path "repo"
@@ -508,25 +600,25 @@
                     catalog test-catalog-identity
                     {:only #{"repo"} :kinds #{:unit}})))
               (is (false? @gate-ran?))
-              (is (= held-text (fs/readFileSync file "utf8")))
-              (is (not (fs/existsSync lock-file))))))))))
+              (is (= legacy-text (fs/readFileSync file "utf8")))
+              (is (= [] (lock-files segments))))))))))
 
 (deftest selected-gates-reject-an-invalid-held-ledger-before-execution
   (with-receipt-fixture
-    (fn [{:keys [directory file]}]
+    (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
-            invalid-ledger "{:kind :observation}\n"
-            lock-file (path/join directory ".receipts.edn.append.lock")
+            invalid-segment "{:kind :observation}\n"
+            invalid-file (path/join segments "2026-10-13T000000000Z-bad.edn")
             catalog {:catalog/repositories
                      {"repo" {:repository/path "repo"
                               :repository/gates [local-gate]}}}]
-        (fs/writeFileSync file invalid-ledger "utf8")
+        (fs/writeFileSync file "" "utf8")
+        (fs/writeFileSync invalid-file invalid-segment "utf8")
         (with-redefs [cli/receipt-file file
                       cli/git-capture!
                       (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger!
-                      (fn [_]
-                        {:ledger/bytes (js/Buffer.alloc 0)})
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -542,25 +634,65 @@
                 catalog test-catalog-identity
                 {:only #{"repo"} :kinds #{:unit}})))
           (is (false? @gate-ran?))
-          (is (= invalid-ledger (fs/readFileSync file "utf8")))
-          (is (not (fs/existsSync lock-file))))))))
+          (is (= invalid-segment (fs/readFileSync invalid-file "utf8")))
+          (is (= ["2026-10-13T000000000Z-bad.edn"] (segment-names segments)))
+          (is (= [] (lock-files segments))))))))
+
+(deftest selected-gates-reject-legacy-appends-and-stray-files
+  (doseq [[setup! message]
+          [[(fn [{:keys [file]}]
+              (fs/writeFileSync file (str (pr-str (cli/evidence-receipt
+                                                   passed-result
+                                                   "2026-08-29T17:22:40Z"
+                                                   "test" "nbb/node@test"))
+                                          "\n")
+                                "utf8"))
+            #"legacy Receipt River ledger .* is frozen"]
+           [(fn [{:keys [segments]}]
+              (fs/writeFileSync (path/join segments "notes.txt") "x" "utf8"))
+            #"unexpected file in the Receipt River segment directory"]
+           [(fn [{:keys [segments]}]
+              (fs/writeFileSync (path/join segments "empty.edn") "" "utf8"))
+            #"segment must not be empty"]]]
+    (with-receipt-fixture
+      (fn [{:keys [file] :as context}]
+        (fs/writeFileSync file "" "utf8")
+        (setup! context)
+        (let [gate-ran? (atom false)]
+          (with-redefs [cli/receipt-file file
+                        cli/git-capture! (fn [_] reviewed-root-revision)
+                        cli/read-immutable-receipt-ledger! empty-committed-ledger
+                        cli/read-immutable-receipt-segments! (fn [_] {})
+                        cli/require-repositories! (fn [& _] {"repo" {}})
+                        cli/run-gate! (fn [& _]
+                                        (reset! gate-ran? true)
+                                        passed-result)]
+            (is (thrown-with-msg?
+                 js/Error message
+                 (cli/run-selected-gates!
+                  {:catalog/repositories
+                   {"repo" {:repository/path "repo"
+                            :repository/gates [local-gate]}}}
+                  test-catalog-identity
+                  {:only #{"repo"} :kinds #{:unit}}))))
+          (is (false? @gate-ran?)))))))
 
 (deftest selected-gates-reject-held-ledger-mutation-after-execution
   (with-receipt-fixture
-    (fn [{:keys [directory file]}]
+    (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
             changed-ledger "{:kind :observation}\n"
-            lock-file (path/join directory ".receipts.edn.append.lock")
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")
             catalog {:catalog/repositories
                      {"repo" {:repository/path "repo"
                               :repository/gates [local-gate]}}}]
         (fs/writeFileSync file "" "utf8")
         (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
                       cli/git-capture!
                       (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger!
-                      (fn [_]
-                        {:ledger/bytes (js/Buffer.alloc 0)})
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -570,7 +702,7 @@
                       (fn [& _]
                         (reset! gate-ran? true)
                         ;; Model a non-cooperating writer that ignores the held lock.
-                        (fs/writeFileSync file changed-ledger "utf8")
+                        (fs/writeFileSync segment changed-ledger "utf8")
                         passed-result)]
           (is (thrown-with-msg?
                js/Error #"changed after held ledger validation"
@@ -578,8 +710,8 @@
                 catalog test-catalog-identity
                 {:only #{"repo"} :kinds #{:unit}})))
           (is @gate-ran?)
-          (is (= changed-ledger (fs/readFileSync file "utf8")))
-          (is (not (fs/existsSync lock-file))))))))
+          (is (= changed-ledger (fs/readFileSync segment "utf8")))
+          (is (= [] (lock-files segments))))))))
 
 (deftest receipt-lines-require-one-complete-edn-form
   (is (= [{:a 1}] (cli/read-receipt-records! "{:a 1}\n")))
@@ -732,7 +864,6 @@
                      :refs ["test"]}
         base-text (str (pr-str base-record) "\n")
         invalid-record (dissoc base-record :origin)
-        head-text (str base-text (pr-str invalid-record) "\n")
         ledger (fn [revision text records]
                  {:ledger/identity
                   {:ledger/path law/receipt-ledger-path
@@ -742,11 +873,14 @@
                   :ledger/bytes (js/Buffer.from text "utf8")
                   :ledger/records records})]
     (with-redefs [cli/read-immutable-receipt-ledger!
+                  (fn [revision] (ledger revision base-text [base-record]))
+                  cli/read-immutable-receipt-segments!
                   (fn [revision]
                     (if (= revision child-revision)
-                      (ledger revision base-text [base-record])
-                      (ledger revision head-text
-                              [base-record invalid-record])))]
+                      {}
+                      {".ημ/receipts/2026-08-29T172241Z-x.edn"
+                       (js/Buffer.from (str (pr-str invalid-record) "\n")
+                                       "utf8")}))]
       (is (thrown-with-msg?
            js/Error #"invalid receipt envelopes"
            (cli/verify-receipts!
@@ -757,7 +891,7 @@
 
 (defn with-historical-ledger-fixture [terminal-newline? run!]
   (with-receipt-fixture
-    (fn [{:keys [fixture file] :as context}]
+    (fn [{:keys [fixture file segments] :as context}]
       (with-redefs [cli/root fixture
                     cli/receipt-file file]
         (cli/git-capture! ["init" "--quiet"])
@@ -769,30 +903,40 @@
                              (assoc :manifest "historical" :refs "none"))
               base-text (str (pr-str historical)
                              (when terminal-newline? "\n"))
-              commit! (fn [contents]
-                        (fs/writeFileSync file contents)
-                        (cli/git-capture! ["add" "--" law/receipt-ledger-path])
-                        (cli/git-capture!
-                         ["-c" "user.name=Receipt Test"
-                          "-c" "user.email=receipt-test@example.invalid"
-                          "-c" "commit.gpgsign=false"
-                          "commit" "--quiet" "--allow-empty" "-m" "fixture"])
-                        (str/trim
-                         (cli/git-capture! ["rev-parse" "HEAD"])))
+              segment-path (fn [name] (path/join segments name))
+              ;; contents: legacy text, plus an optional map of segment
+              ;; basename -> text. The working tree is made to match exactly.
+              commit! (fn commit-fixture!
+                        ([contents] (commit-fixture! contents {}))
+                        ([contents segment-files]
+                         (fs/writeFileSync file contents)
+                         (doseq [name (segment-names segments)]
+                           (when-not (contains? segment-files name)
+                             (fs/unlinkSync (segment-path name))))
+                         (doseq [[name text] segment-files]
+                           (fs/writeFileSync (segment-path name) text))
+                         (cli/git-capture! ["add" "-A" "--" ".ημ"])
+                         (cli/git-capture!
+                          ["-c" "user.name=Receipt Test"
+                           "-c" "user.email=receipt-test@example.invalid"
+                           "-c" "commit.gpgsign=false"
+                           "commit" "--quiet" "--allow-empty" "-m" "fixture"])
+                         (str/trim
+                          (cli/git-capture! ["rev-parse" "HEAD"]))))
               base (commit! base-text)]
           (run! (assoc context
                        :current current :historical historical
                        :base-text base-text :base base :commit! commit!)))))))
 
-(deftest receipt-verification-trusts-exact-historical-prefix-only
+(deftest receipt-verification-accepts-new-segments-over-frozen-history
   (doseq [terminal-newline? [true false]]
     (with-historical-ledger-fixture terminal-newline?
       (fn [{:keys [base base-text historical current commit!]}]
         (is (not (law/receipt-envelope? historical)))
         (is (zero? (cli/verify-receipts! {:base base :at base})))
-        (let [head-text (str base-text (when-not terminal-newline? "\n")
-                             (pr-str current) "\n")
-              head (commit! head-text)
+        (let [head (commit! base-text
+                            {"2026-08-29T172240Z-a.edn"
+                             (str (pr-str current) "\n")})
               output (with-out-str
                        (is (zero? (cli/verify-receipts!
                                    {:base base :at head}))))]
@@ -800,15 +944,80 @@
           (is (str/includes? output ":appended-receipts 1"))
           (is (str/includes? output ":appended-evidence-receipts 1"))
           (is (str/includes? output ":legacy-evidence-receipts 1"))
+          (is (str/includes? output ":segments 2"))
           (is (.equals (js/Buffer.from base-text "utf8")
                        (:ledger/bytes
                         (cli/read-immutable-receipt-ledger! base)))))))))
 
-(deftest receipt-verification-rejects-invalid-suffixes-after-history
+(deftest merged-ledger-orders-by-timestamp-then-record-id
+  (let [a {:ts "2026-01-02T00:00:00Z" :n 1}
+        b {:ts "2026-01-01T00:00:00Z" :n 2}
+        c {:ts "2026-01-02T00:00:00Z" :n 3}
+        segments [{:segment/path "legacy" :segment/legacy? true
+                   :segment/records [a]}
+                  {:segment/path "s1" :segment/records [c]}
+                  {:segment/path "s2" :segment/records [b]}]
+        merged (cli/merged-receipt-records! segments)]
+    (is (= b (first merged)))
+    (is (= (sort-by cli/record-id [a c]) (rest merged)))
+    (is (= merged (cli/merged-receipt-records! (reverse segments))))
+    (is (thrown-with-msg?
+         js/Error #"repeats a record"
+         (cli/merged-receipt-records!
+          (conj segments {:segment/path "s3" :segment/records [a]}))))))
+
+(deftest receipt-verification-reconciles-a-diverged-fork-and-org
+  ;; The org and a fork share history H, then each records its own receipt.
+  ;; Before segmentation both sides appended to the same file, so no ordering
+  ;; could be a byte prefix of both. Here the fork moves its fork-only legacy
+  ;; row into a segment and the legacy file returns to the org bytes; the
+  ;; result verifies against BOTH bases, and later syncs merge cleanly.
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base base-text current commit!]}]
+      (let [org-row (assoc current :ts "2026-10-02T00:00:00Z" :host "org")
+            fork-row (assoc current :ts "2026-10-02T00:00:01Z" :host "fork")
+            org-text (str base-text (pr-str org-row) "\n")
+            ;; Legacy history from before the freeze; tolerated at base only.
+            org-main (commit! org-text)
+            fork-main (commit! (str base-text (pr-str fork-row) "\n"
+                                    (pr-str org-row) "\n"))
+            reconciled (commit! org-text
+                                {"2026-10-02T000001Z-fork.edn"
+                                 (str (pr-str fork-row) "\n")})
+            org-segment (str (pr-str (assoc current :ts "2026-10-14T00:00:00Z"
+                                            :host "org-later"))
+                             "\n")
+            synced (commit! org-text
+                            {"2026-10-02T000001Z-fork.edn"
+                             (str (pr-str fork-row) "\n")
+                             "2026-10-14T000000Z-org.edn" org-segment})]
+        (is (zero? (cli/verify-receipts! {:base org-main :at reconciled})))
+        (is (zero? (cli/verify-receipts! {:base fork-main :at reconciled})))
+        (is (zero? (cli/verify-receipts! {:base reconciled :at synced})))
+        (let [records (:ledger/records
+                       (cli/read-immutable-merged-ledger! synced))]
+          (is (= ["2026-08-29T17:22:40Z" "2026-10-02T00:00:00Z"
+                  "2026-10-02T00:00:01Z" "2026-10-14T00:00:00Z"]
+                 (mapv :ts records))))
+        ;; Dropping the fork row, or keeping it in both places, is rejected.
+        (is (thrown-with-msg?
+             js/Error #"drops 1 base record"
+             (cli/verify-receipts!
+              {:base fork-main :at (commit! org-text)})))
+        (is (thrown-with-msg?
+             js/Error #"repeats a record"
+             (cli/verify-receipts!
+              {:base fork-main
+               :at (commit! (str base-text (pr-str fork-row) "\n"
+                                 (pr-str org-row) "\n")
+                            {"2026-10-02T000001Z-fork.edn"
+                             (str (pr-str fork-row) "\n")})})))))))
+
+(deftest receipt-verification-rejects-invalid-segments-after-history
   (with-historical-ledger-fixture true
     (fn [{:keys [base base-text historical current commit!]}]
-      (doseq [[suffix message]
-              [[(str (pr-str historical) "\n") #"invalid receipt envelopes"]
+      (doseq [[segment message]
+              [[(str (pr-str historical) "\n") #"repeats a record"]
                ["42\n" #"invalid receipt envelopes"]
                [(str (pr-str (dissoc current :origin)) "\n")
                 #"invalid receipt envelopes"]
@@ -816,52 +1025,76 @@
                      "\n") #"invalid evidence receipts"]
                ["{:kind\n" #"Invalid Receipt River EDN"]
                [(str (pr-str current) " 42\n") #"exactly one EDN form"]
-               [(pr-str current) #"must end with a newline"]]]
-        (let [head (commit! (str base-text suffix))]
+               [(pr-str current) #"must end with a newline"]
+               ["" #"must not be empty"]]]
+        (let [head (commit! base-text {"2026-08-29T172240Z-a.edn" segment})]
           (is (thrown-with-msg?
                js/Error message
                (cli/verify-receipts! {:base base :at head}))))))))
 
 (deftest receipt-verification-rejects-historical-rewrite-and-truncation
   (with-historical-ledger-fixture true
-    (fn [{:keys [base base-text historical commit!]}]
+    (fn [{:keys [base base-text historical current commit!]}]
       (doseq [head-text [""
-                        (subs base-text 0 (dec (count base-text)))
                         (str (pr-str (assoc historical :owner "rewrite")) "\n")]]
         (let [head (commit! head-text)]
           (is (thrown-with-msg?
-               js/Error #"does not preserve the base bytes as a prefix"
-               (cli/verify-receipts! {:base base :at head}))))))))
+               js/Error #"drops 1 base record"
+               (cli/verify-receipts! {:base base :at head})))))
+      ;; The legacy file is frozen: appending to it is rejected.
+      (let [head (commit! (str base-text (pr-str current) "\n"))]
+        (is (thrown-with-msg?
+             js/Error #"is frozen"
+             (cli/verify-receipts! {:base base :at head}))))
+      ;; Committed segments are immutable: no edits, no deletes.
+      (let [segment (str (pr-str current) "\n")
+            with-segment (commit! base-text {"2026-08-29T172240Z-a.edn" segment})
+            edited (str (pr-str (assoc current :host "edited")) "\n")]
+        (is (thrown-with-msg?
+             js/Error #"segment was edited"
+             (cli/verify-receipts!
+              {:base with-segment
+               :at (commit! base-text {"2026-08-29T172240Z-a.edn" edited})})))
+        (is (thrown-with-msg?
+             js/Error #"segment was removed"
+             (cli/verify-receipts!
+              {:base with-segment
+               :at (commit! (str base-text segment))})))))))
 
 (deftest evidence-append-preserves-history-and-validates-uncommitted-suffix
   (doseq [terminal-newline? [true false]]
     (with-historical-ledger-fixture terminal-newline?
-      (fn [{:keys [base base-text file]}]
-        ;; A second writer must accept the first writer's canonical suffix.
+      (fn [{:keys [base base-text file segments]}]
+        ;; A second writer must accept the first writer's uncommitted segment.
         (let [first-receipt (cli/append-evidence-receipt! passed-result)
-              second-receipt (cli/append-evidence-receipt! passed-result)
-              bytes (fs/readFileSync file)]
-          (is (cli/buffer-prefix? (js/Buffer.from base-text "utf8") bytes))
-          (is (= [first-receipt second-receipt]
-                 (cli/appended-receipt-records!
-                  (:ledger/bytes (cli/read-immutable-receipt-ledger! base))
-                  bytes))))))))
+              second-receipt (cli/append-evidence-receipt!
+                              (assoc passed-result :result/command ["second"]))]
+          (is (= base-text (fs/readFileSync file "utf8")))
+          (is (= 2 (count (segment-names segments))))
+          (is (= #{first-receipt second-receipt}
+                 (set (segment-records segments))))
+          (is (= [] (lock-files segments))))))))
 
 (deftest selected-gates-reject-invalid-extensions-of-historical-ledger
   (with-historical-ledger-fixture true
-    (fn [{:keys [base-text historical current file directory]}]
-      (doseq [[held-text message]
-              [["" #"does not preserve the committed ledger"]
-               [(str (pr-str (assoc historical :owner "rewrite")) "\n")
+    (fn [{:keys [base-text historical current file segments]}]
+      (doseq [[held-text segment message]
+              [["" nil #"does not preserve the committed ledger"]
+               [(str (pr-str (assoc historical :owner "rewrite")) "\n") nil
                 #"does not preserve the committed ledger"]
-               [(str base-text (pr-str historical) "\n")
-                #"invalid receipt envelopes"]
-               [(str base-text
-                     (pr-str (assoc-in current [:evidence/result :result/exit] 1))
+               [(str base-text (pr-str current) "\n") nil #"is frozen"]
+               [base-text (str (pr-str historical) "\n") #"repeats a record"]
+               [base-text
+                (str (pr-str (assoc-in current [:evidence/result :result/exit] 1))
                      "\n") #"invalid evidence receipts"]
-               [(str base-text (pr-str current)) #"must end with a newline"]
-               [(str base-text "{:kind\n") #"Invalid Receipt River EDN"]]]
+               [base-text (pr-str current) #"must end with a newline"]
+               [base-text "{:kind\n" #"Invalid Receipt River EDN"]]]
         (fs/writeFileSync file held-text "utf8")
+        (doseq [name (segment-names segments)]
+          (fs/unlinkSync (path/join segments name)))
+        (when segment
+          (fs/writeFileSync (path/join segments "2026-08-29T172240Z-a.edn")
+                            segment "utf8"))
         (let [gate-ran? (atom false)
               catalog {:catalog/repositories
                        {"repo" {:repository/path "repo"
@@ -877,8 +1110,9 @@
                   {:only #{"repo"} :kinds #{:unit}}))))
           (is (false? @gate-ran?))
           (is (= held-text (fs/readFileSync file "utf8")))
-          (is (not (fs/existsSync
-                    (path/join directory ".receipts.edn.append.lock")))))))))
+          (is (= (if segment ["2026-08-29T172240Z-a.edn"] [])
+                 (segment-names segments)))
+          (is (= [] (lock-files segments))))))))
 
 (deftest promotion-preserves-history-without-promoting-legacy-evidence
   (with-historical-ledger-fixture true
@@ -894,14 +1128,17 @@
                       cli/gitlink-target! (fn [& _] child-revision)]
           (is (false? (cli/promotion-ready-at!
                        child-revision #{:repo/unit} [passed-result] base base)))
-          (let [head (commit! (str base-text (pr-str current) "\n"))]
+          (let [head (commit! base-text {"2026-08-29T172240Z-a.edn"
+                                         (str (pr-str current) "\n")})]
             (is (cli/promotion-ready-at!
                  child-revision #{:repo/unit} [passed-result] base head)))
           (let [head (commit!
-                      (str base-text (pr-str current) "\n"
-                           (pr-str (assoc-in current
-                                             [:evidence/result :result/exit] 1))
-                           "\n"))]
+                      base-text
+                      {"2026-08-29T172240Z-a.edn" (str (pr-str current) "\n")
+                       "2026-08-29T172241Z-b.edn"
+                       (str (pr-str (assoc-in current
+                                              [:evidence/result :result/exit] 1))
+                            "\n")})]
             (is (thrown-with-msg?
                  js/Error #"invalid evidence receipts"
                  (cli/promotion-ready-at!
@@ -936,7 +1173,8 @@
                   (fn [at]
                     (swap! reads conj [:ledger at])
                     ledger)
-                  cli/appended-receipt-records!
+                  cli/read-immutable-receipt-segments! (fn [_] {})
+                  cli/ledger-extension-records!
                   (fn [& _]
                     (swap! reads conj :append-history)
                     [])
@@ -1004,7 +1242,8 @@
                            :catalog-identity test-catalog-identity})
                   cli/validate-catalog! identity
                   cli/read-immutable-receipt-ledger! (fn [_] ledger)
-                  cli/appended-receipt-records! (fn [& _] [])
+                  cli/read-immutable-receipt-segments! (fn [_] {})
+                  cli/ledger-extension-records! (fn [& _] [])
                   cli/require-result-gitlinks! (fn [& _] true)]
       (is (thrown-with-msg?
            js/Error #"tracked or submodule changes"

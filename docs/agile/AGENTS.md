@@ -18,5 +18,9 @@ state frontmatter directly. Walk lawful transitions through `todo`,
 `in_progress`, `testing`, `review`, `document`, and `done`.
 
 Rheos writes through `docs/agile/kanban/.events`, which is a symlink into
-`.ημ/kanban-events`. Receipts belong in `.ημ/receipts.edn`. Do not create
+`.ημ/kanban-events`. Receipts belong in the
+segmented Receipt River: add each new receipt as its own file
+`.ημ/receipts/<UTC timestamp>-<id>.edn` (one EDN record per line, ending in a
+newline). `.ημ/receipts.edn` is frozen legacy history: never append to it,
+edit it, or edit an existing segment. Do not create
 provenance ledgers elsewhere.
