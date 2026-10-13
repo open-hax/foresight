@@ -165,23 +165,10 @@
   (boolean (and (string? value)
                 (re-matches receipt-segment-name-pattern value))))
 
-(defn canonical-form
-  "An order-independent representation of an EDN value: map entries and set
-  members are sorted, so equal values always print identically."
-  [value]
-  (cond
-    (map? value)
-    [:map (vec (sort-by pr-str
-                        (map (fn [[k v]] [(canonical-form k) (canonical-form v)])
-                             value)))]
-    (set? value) [:set (vec (sort-by pr-str (map canonical-form value)))]
-    (sequential? value) [:seq (mapv canonical-form value)]
-    :else value))
-
 (defn record-id
   "Stable content identity used to order and deduplicate merged records."
   [record]
-  (sha256 (pr-str (canonical-form record))))
+  (sha256 (pr-str (law/canonical-form record))))
 
 (defn read-segment-records! [segment-path bytes]
   (when (zero? (.-length bytes))
@@ -219,6 +206,16 @@
   "Returns repository-path -> bytes for every segment blob at `revision`."
   [revision]
   (let [directory (str law/receipt-segment-directory "/")
+        own (vec (remove str/blank?
+                         (str/split (git-capture! ["ls-tree" "-z" revision "--"
+                                                   law/receipt-segment-directory])
+                                    #"\u0000")))
+        _ (when (and (seq own)
+                     (not (and (= 1 (count own))
+                               (str/starts-with? (first own) "040000 tree "))))
+            (throw (js/Error.
+                    (str law/receipt-segment-directory
+                         " must be a Git tree (directory) at " revision))))
         output (git-capture! ["ls-tree" "-z" revision "--" directory])
         entries (remove str/blank? (str/split output #"\u0000"))]
     (reduce
@@ -246,28 +243,18 @@
            (throw (js/Error.
                    (str "Receipt River segment name must match "
                         "<UTC timestamp>-<id>.edn: " repository-path))))))
-     (sorted-map)
+     (with-meta (sorted-map) {:segment/directory? (boolean (seq own))})
      entries)))
 
 (defn merged-receipt-records!
   "Merges every segment into one ledger ordered by timestamp, then record ID.
   A record value may appear in only one place."
   [segments]
-  (let [entries (for [{:segment/keys [path records]} segments
-                      record records]
-                  {:path path :record record :id (record-id record)})
-        repeated (->> entries
-                      (group-by :id)
-                      vals
-                      (filter #(< 1 (count %))))]
-    (when (seq repeated)
-      (throw (js/Error.
-              (str "Receipt River ledger repeats a record: "
-                   (pr-str (mapv #(mapv :path %) repeated))))))
-    (->> entries
-         (sort-by (fn [{:keys [record id]}]
-                    [(str (when (map? record) (:ts record))) id]))
-         (mapv :record))))
+  (when-let [repeated (seq (law/repeated-ledger-records record-id segments))]
+    (throw (js/Error.
+            (str "Receipt River ledger repeats a record: "
+                 (pr-str (vec repeated))))))
+  (law/merge-ledger-records record-id segments))
 
 (defn merged-ledger-sha256
   "Identity of the whole segmented ledger: every segment path and content hash."
@@ -287,12 +274,22 @@
 
 (defn read-immutable-merged-ledger! [revision]
   (let [legacy (read-immutable-receipt-ledger! revision)
+        stored (read-immutable-receipt-segments! revision)
         segments (into [(legacy-segment-entry (:ledger/bytes legacy)
                                               (:ledger/records legacy))]
                        (map (fn [[segment-path bytes]]
                               (segment-entry segment-path bytes)))
-                       (read-immutable-receipt-segments! revision))]
-    (segmented-ledger legacy segments)))
+                       stored)]
+    (assoc (segmented-ledger legacy segments)
+           :ledger/segment-directory?
+           (boolean (:segment/directory? (meta stored))))))
+
+(defn require-segment-directory-kept! [base-ledger ledger]
+  (when (and (:ledger/segment-directory? base-ledger)
+             (not (:ledger/segment-directory? ledger)))
+    (throw (js/Error.
+            (str law/receipt-segment-directory
+                 " was removed; the segment directory must remain")))))
 
 (defn line-subsequence?
   "True when every line of `head` appears, byte-identical and in order, in
@@ -353,7 +350,12 @@
       (doseq [{:segment/keys [bytes legacy?]} base-segments
               :when legacy?
               :let [head (first (filter :segment/legacy? head-segments))]]
-        (when-not (line-subsequence? (:segment/bytes head) bytes)
+        (when-not (and (line-subsequence? (:segment/bytes head) bytes)
+                       (or (.equals (:segment/bytes head) bytes)
+                           (zero? (.-length bytes))
+                           (not= 10 (.at bytes -1))
+                           (zero? (.-length (:segment/bytes head)))
+                           (= 10 (.at (:segment/bytes head) -1))))
           (throw (js/Error.
                   (str "The legacy Receipt River ledger " law/receipt-ledger-path
                        " may only lose whole lines; it was rewritten or reordered")))))
@@ -471,6 +473,7 @@
         catalog (validate-catalog! catalog)
         base-ledger (read-immutable-merged-ledger! trusted-base-revision)
         ledger (read-immutable-merged-ledger! reviewed-root-revision)]
+    (require-segment-directory-kept! base-ledger ledger)
     (require-valid-receipt-records!
      (ledger-extension-records! (:ledger/segments base-ledger)
                                 (:ledger/segments ledger)))
@@ -926,6 +929,15 @@
          (fs/fsyncSync (:fd parent))
          {:fd fd :path target-path :stats stats})
        (catch :default error
+         (when (= :exclusive create?)
+           ;; We created this file; do not leave an empty segment behind.
+           (try
+             (let [stats (fs/fstatSync fd bigint-stat-options)
+                   path-stats (lstat-if-present! target-path "Receipt River file")]
+               (when (and path-stats (same-file? stats path-stats)
+                          (zero? (js/Number (.-size stats))))
+                 (fs/unlinkSync target-path)))
+             (catch :default _cleanup-error nil)))
          (close-after-open-error! fd error))))))
 
 (defn require-target-identity! [target]
@@ -1068,6 +1080,7 @@
     (try
       (require-valid-receipt-records!
        (ledger-extension-records! committed working))
+      working
       (catch :default error
         (append-error!
          (str "Receipt River does not preserve the committed ledger: "
@@ -1078,6 +1091,8 @@
     (when-not (.equals validated-bytes current-bytes)
       (append-error! "Receipt River file changed after held ledger validation"))
     current-bytes))
+
+(declare remove-unwritten-segment!)
 
 (defn open-append-reservation!
   ([file]
@@ -1120,6 +1135,11 @@
                 :write-started? (atom false)
                 :write-verified? (atom false)}
                (catch :default error
+                 (when validate-ledger?
+                   (try
+                     (remove-unwritten-segment!
+                      {:parent parent :target target :target-path target-path})
+                     (catch :default _cleanup-error nil)))
                  (close-after-open-error! (:fd target) error))))
            (catch :default error
              (release-append-lock! parent lock)
@@ -1187,7 +1207,11 @@
   ;; A gate can run for a long time; the rest of the ledger must still extend
   ;; HEAD at the moment this receipt is written.
   (when semantic-basename
-    (validate-working-receipt-ledger! semantic-basename))
+    (let [working (validate-working-receipt-ledger! semantic-basename)]
+      (when (contains? (into #{} (comp (mapcat :segment/records) (map record-id))
+                             working)
+                       (record-id record))
+        (append-error! "receipt repeats a record already in the ledger"))))
   (let [before (require-target-identity! target)
         before-size (safe-file-size! before)
         separator (if (terminal-newline? (:fd target) before-size)
@@ -1347,6 +1371,7 @@
     (throw (js/Error. "verify-receipts requires --base with a full Git commit ID")))
   (let [base-ledger (read-immutable-merged-ledger! base)
         ledger (read-immutable-merged-ledger! at)
+        _ (require-segment-directory-kept! base-ledger ledger)
         records (:ledger/records ledger)
         appended-records (ledger-extension-records!
                           (:ledger/segments base-ledger)

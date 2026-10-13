@@ -484,7 +484,7 @@
                       cli/git-capture! (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
                       cli/read-immutable-receipt-segments! (fn [_] {})
-                      cli/validate-working-receipt-ledger! (fn [] nil)
+                      cli/validate-working-receipt-ledger! (fn [_] nil)
                       cli/require-repositories! (fn [& _] {"repo" {}})
                       cli/run-gate! (fn [& _]
                                       (reset! gate-ran? true)
@@ -937,6 +937,7 @@
                            "commit" "--quiet" "--allow-empty" "-m" "fixture"])
                          (str/trim
                           (cli/git-capture! ["rev-parse" "HEAD"]))))
+              _ (fs/writeFileSync (path/join segments "README.md") "segments\n")
               base (commit! base-text)]
           (run! (assoc context
                        :current current :historical historical
@@ -986,6 +987,8 @@
     (is (= a b))
     (is (= (cli/record-id a) (cli/record-id b)))
     (is (not= (cli/record-id a) (cli/record-id (assoc a :a 9))))
+    (is (not= (cli/record-id {:manifest ["x"]})
+              (cli/record-id {:manifest '("x")})))
     (is (thrown-with-msg?
          js/Error #"repeats a record"
          (cli/merged-receipt-records!
@@ -1032,6 +1035,25 @@
                 {:only #{"repo"} :kinds #{:unit}})))
           (is (= [] (segment-names segments)))
           (is (= [] (lock-files segments))))))))
+
+(deftest receipt-verification-keeps-the-segment-directory
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base base-text segments commit!]}]
+      (fs/unlinkSync (path/join segments "README.md"))
+      (is (thrown-with-msg?
+           js/Error #"segment directory must remain"
+           (cli/verify-receipts! {:base base :at (commit! base-text)}))))))
+
+(deftest evidence-append-rejects-a-duplicate-candidate
+  (with-historical-ledger-fixture true
+    (fn [{:keys [current segments]}]
+      (with-redefs [cli/validated-evidence-receipt! (fn [_] current)]
+        (is (= current (cli/append-evidence-receipt! passed-result)))
+        (is (thrown-with-msg?
+             js/Error #"repeats a record already in the ledger"
+             (cli/append-evidence-receipt! passed-result)))
+        (is (= 1 (count (segment-names segments))))
+        (is (= [] (lock-files segments)))))))
 
 (deftest receipt-verification-reconciles-a-diverged-fork-and-org
   ;; The org and a fork share history H, then each records its own receipt.
@@ -1130,6 +1152,14 @@
              (cli/verify-receipts!
               {:base with-two
                :at (commit! (str/replace two ", " " "))}))))
+      (commit! base-text)
+      ;; Stripping the final newline is a rewrite, not a whole-line loss.
+      (let [with-newline (commit! base-text)]
+        (is (thrown-with-msg?
+             js/Error #"may only lose whole lines"
+             (cli/verify-receipts!
+              {:base with-newline
+               :at (commit! (subs base-text 0 (dec (count base-text))))}))))
       (commit! base-text)
       ;; The legacy file is frozen: appending to it is rejected.
       (let [head (commit! (str base-text (pr-str current) "\n"))]
