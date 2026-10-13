@@ -154,7 +154,10 @@
 
 (def receipt-segment-readme "README.md")
 
-(def receipt-segment-name-pattern #"[0-9A-Za-z][0-9A-Za-z._-]*[.]edn")
+;; <UTC timestamp, basic format with optional fraction>-<lowercase id>.edn,
+;; for example 2026-10-13T164500123Z-3f9a1c2b7d4e.edn.
+(def receipt-segment-name-pattern
+  #"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{6}[0-9]{0,9}Z-[0-9a-z][0-9a-z-]*[.]edn")
 
 (def append-lock-name-pattern #"[.].+[.]append[.]lock")
 
@@ -162,10 +165,23 @@
   (boolean (and (string? value)
                 (re-matches receipt-segment-name-pattern value))))
 
+(defn canonical-form
+  "An order-independent representation of an EDN value: map entries and set
+  members are sorted, so equal values always print identically."
+  [value]
+  (cond
+    (map? value)
+    [:map (vec (sort-by pr-str
+                        (map (fn [[k v]] [(canonical-form k) (canonical-form v)])
+                             value)))]
+    (set? value) [:set (vec (sort-by pr-str (map canonical-form value)))]
+    (sequential? value) [:seq (mapv canonical-form value)]
+    :else value))
+
 (defn record-id
   "Stable content identity used to order and deduplicate merged records."
   [record]
-  (sha256 (pr-str record)))
+  (sha256 (pr-str (canonical-form record))))
 
 (defn read-segment-records! [segment-path bytes]
   (when (zero? (.-length bytes))
@@ -177,10 +193,16 @@
                  segment-path))))
   (let [contents (decode-utf8! bytes (str "Receipt River segment "
                                           segment-path))]
-    (try
-      (read-receipt-records! contents)
-      (catch :default error
-        (throw (js/Error. (str (.-message error) " in " segment-path)))))))
+    (let [records (try
+                    (read-receipt-records! contents)
+                    (catch :default error
+                      (throw (js/Error. (str (.-message error) " in "
+                                             segment-path)))))]
+      (when-not (= 1 (count records))
+        (throw (js/Error.
+                (str "Receipt River segment must contain exactly one record: "
+                     segment-path))))
+      records)))
 
 (defn segment-entry [segment-path bytes]
   {:segment/path segment-path
@@ -223,7 +245,7 @@
            :else
            (throw (js/Error.
                    (str "Receipt River segment name must match "
-                        "<name>.edn: " repository-path))))))
+                        "<UTC timestamp>-<id>.edn: " repository-path))))))
      (sorted-map)
      entries)))
 
@@ -961,7 +983,11 @@
     (require-regular-stats! stats description)
     (fs/readFileSync file)))
 
-(defn read-working-receipt-segments! []
+(defn read-working-receipt-segments!
+  "Reads the working ledger. `own-basename` names the caller's reserved (still
+  empty) segment, which is skipped along with its own lock. Any other
+  retained append lock quarantines the whole ledger."
+  [own-basename]
   (let [legacy-bytes (read-working-regular-file!
                       receipt-file "Receipt River file")
         directory (receipt-segment-directory)
@@ -977,7 +1003,12 @@
           (keep (fn [basename]
                   (cond
                     (= receipt-segment-readme basename) nil
-                    (re-matches append-lock-name-pattern basename) nil
+                    (= own-basename basename) nil
+                    (= (str "." own-basename ".append.lock") basename) nil
+                    (re-matches append-lock-name-pattern basename)
+                    (append-error!
+                     (str "a retained append lock quarantines the Receipt River "
+                          "ledger until it is adjudicated: " basename))
                     (receipt-segment-name? basename)
                     (segment-entry
                      (str law/receipt-segment-directory "/" basename)
@@ -997,8 +1028,8 @@
 (defn validate-working-receipt-ledger!
   "The working ledger must extend the committed ledger, and every
   uncommitted record must satisfy the current receipt law."
-  []
-  (let [working (read-working-receipt-segments!)
+  [own-basename]
+  (let [working (read-working-receipt-segments! own-basename)
         committed (current-committed-receipt-segments!)]
     (try
       (require-valid-receipt-records!
@@ -1033,7 +1064,7 @@
                  ;; Semantic evidence goes into a brand-new immutable segment,
                  ;; after the whole working ledger is checked against HEAD.
                  _ (when validate-ledger?
-                     (validate-working-receipt-ledger!))
+                     (validate-working-receipt-ledger! basename))
                  target (open-append-target! parent target-path
                                              (if validate-ledger?
                                                :exclusive
@@ -1045,6 +1076,7 @@
                 :lock lock
                 :target target
                 :target-path target-path
+                :semantic-basename (when validate-ledger? basename)
                 :held-ledger-bytes
                 (let [held (stable-held-target-bytes! target)]
                   (when (and validate-ledger? (pos? (.-length held)))
@@ -1062,14 +1094,29 @@
          (fs/closeSync (:fd parent))
          (throw error))))))
 
+(defn remove-unwritten-segment!
+  "Removes a reserved segment that was never written, while the lock is still
+  held, so an aborted gate cannot leave an empty file in the ledger."
+  [{:keys [parent target target-path]}]
+  (let [stats (lstat-if-present! target-path "Receipt River file")]
+    (when (and stats
+               (same-file? stats (:stats target))
+               (zero? (safe-file-size! stats)))
+      (fs/unlinkSync target-path)
+      (fs/fsyncSync (:fd parent)))))
+
 (defn close-append-reservation!
-  [{:keys [parent lock target target-open? write-started? write-verified?]}]
+  [{:keys [parent lock target target-open? write-started? write-verified?
+           semantic-basename]
+    :as reservation}]
   (try
     (when @target-open?
       (fs/closeSync (:fd target))
       (reset! target-open? false))
     (finally
       (try
+        (when (and semantic-basename (not @write-started?))
+          (remove-unwritten-segment! reservation))
         (if (and @write-started? (not @write-verified?))
           ;; A short write, fsync/close failure, or post-write identity change may
           ;; have left a partial ledger line. Retain the lock as a durable
@@ -1091,7 +1138,8 @@
 
 (defn append-reserved-edn-line!
   [{:keys [requested-file directory parent lock target target-path
-           held-ledger-bytes target-open? write-started? write-verified?]}
+           held-ledger-bytes target-open? write-started? write-verified?
+           semantic-basename]}
    record
    line]
   (*secure-append-phase-hook*
@@ -1102,6 +1150,10 @@
   (require-parent-identity! parent)
   (require-append-lock-identity! lock)
   (require-held-ledger-unchanged! target held-ledger-bytes)
+  ;; A gate can run for a long time; the rest of the ledger must still extend
+  ;; HEAD at the moment this receipt is written.
+  (when semantic-basename
+    (validate-working-receipt-ledger! semantic-basename))
   (let [before (require-target-identity! target)
         before-size (safe-file-size! before)
         separator (if (terminal-newline? (:fd target) before-size)

@@ -128,8 +128,14 @@ relative to the reviewed base.
 
 The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
 no-follow parent directory descriptor, rejects symbolic or multiply linked
-ledger files, and serializes cooperating writers with an exclusive sibling
-lock. A complete line is bounded to 1 MiB, written through the held descriptor,
+ledger files, and takes an exclusive sibling lock for the segment it writes.
+Each semantic writer reserves its own new segment with `O_EXCL`, so writers
+always land on disjoint files. While a reservation is open, its lock and empty
+segment make any concurrent semantic writer fail closed instead of waiting; a
+reservation that ends before writing removes its empty segment. A retained
+lock (see below) quarantines the whole ledger. The rest of the working ledger
+is revalidated against `HEAD` immediately before the receipt is written. A
+complete line is bounded to 1 MiB, written through the held descriptor,
 size-checked, and followed by file and directory `fsync`. Pre-write rejection
 releases the lock; uncertainty after writing starts retains the lock as a
 quarantine marker for manual adjudication. This protects the adapter boundary
