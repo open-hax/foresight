@@ -1,6 +1,7 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 (ns evidence-cli-test
   (:require [cljs.test :as test :refer [deftest is]]
+            [cljs.reader]
             [clojure.string :as str]
             [evidence :as cli]
             [foresight.evidence :as law]
@@ -652,8 +653,21 @@
               (fs/writeFileSync (path/join segments "notes.txt") "x" "utf8"))
             #"unexpected file in the Receipt River segment directory"]
            [(fn [{:keys [segments]}]
-              (fs/writeFileSync (path/join segments "empty.edn") "" "utf8"))
-            #"segment must not be empty"]]]
+              (fs/writeFileSync (path/join segments "2026-10-13T000000Z-empty.edn")
+                                "" "utf8"))
+            #"segment must not be empty"]
+           [(fn [{:keys [segments]}]
+              (fs/writeFileSync (path/join segments "receipt.edn") "{}\n" "utf8"))
+            #"unexpected file in the Receipt River segment directory"]
+           [(fn [{:keys [segments]}]
+              (fs/writeFileSync (path/join segments "2026-10-13T000000Z-two.edn")
+                                "{:a 1}\n{:a 2}\n" "utf8"))
+            #"exactly one record"]
+           [(fn [{:keys [segments]}]
+              (fs/writeFileSync
+               (path/join segments ".2026-10-13T000000Z-old.edn.append.lock")
+               "pid=1\n" "utf8"))
+            #"retained append lock quarantines"]]]
     (with-receipt-fixture
       (fn [{:keys [file] :as context}]
         (fs/writeFileSync file "" "utf8")
@@ -966,6 +980,59 @@
          (cli/merged-receipt-records!
           (conj segments {:segment/path "s3" :segment/records [a]}))))))
 
+(deftest record-ids-ignore-map-and-set-iteration-order
+  (let [a (cljs.reader/read-string "{:ts \"t\" :b 2 :a 1 :m {:y 2 :x 1} :s #{3 1 2}}")
+        b (cljs.reader/read-string "{:s #{2 3 1} :m {:x 1 :y 2} :a 1 :b 2 :ts \"t\"}")]
+    (is (= a b))
+    (is (= (cli/record-id a) (cli/record-id b)))
+    (is (not= (cli/record-id a) (cli/record-id (assoc a :a 9))))
+    (is (thrown-with-msg?
+         js/Error #"repeats a record"
+         (cli/merged-receipt-records!
+          [{:segment/path "s1" :segment/records [a]}
+           {:segment/path "s2" :segment/records [b]}])))))
+
+(deftest receipt-segment-names-carry-a-timestamp-and-id
+  (doseq [name ["2026-10-13T164500123Z-3f9a1c2b7d4e.edn"
+                "2026-10-02T064007673951Z-dev-origin-map.edn"
+                "2026-08-29T172240Z-a.edn"]]
+    (is (cli/receipt-segment-name? name) name))
+  (doseq [name ["receipt.edn" "a.edn" "2026-10-13-x.edn"
+                "2026-10-13T1645Z-x.edn" "2026-10-13T164500Z-X.edn"
+                "2026-10-13T164500Z-.edn" "2026-10-13T164500Z-x.txt"]]
+    (is (not (cli/receipt-segment-name? name)) name))
+  (is (cli/receipt-segment-name?
+       (path/basename (cli/new-receipt-segment-file)))))
+
+(deftest aborted-or-overtaken-gates-leave-no-segment
+  ;; A gate that throws, or a ledger edited while the gate runs, must leave
+  ;; neither an empty reserved segment nor a lock behind.
+  (doseq [[run-gate message]
+          [[(fn [_] (throw (js/Error. "gate exploded"))) #"gate exploded"]
+           [(fn [{:keys [file]}]
+              (fs/writeFileSync file "{:kind :observation}\n" "utf8")
+              passed-result)
+            #"does not preserve the committed ledger"]]]
+    (with-receipt-fixture
+      (fn [{:keys [segments file] :as context}]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/receipt-file file
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/require-repositories! (fn [& _] {"repo" {}})
+                      cli/run-gate! (fn [& _] (run-gate context))]
+          (is (thrown-with-msg?
+               js/Error message
+               (cli/run-selected-gates!
+                {:catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}
+                test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (= [] (segment-names segments)))
+          (is (= [] (lock-files segments))))))))
+
 (deftest receipt-verification-reconciles-a-diverged-fork-and-org
   ;; The org and a fork share history H, then each records its own receipt.
   ;; Before segmentation both sides appended to the same file, so no ordering
@@ -994,6 +1061,10 @@
         (is (zero? (cli/verify-receipts! {:base org-main :at reconciled})))
         (is (zero? (cli/verify-receipts! {:base fork-main :at reconciled})))
         (is (zero? (cli/verify-receipts! {:base reconciled :at synced})))
+        (is (not= (get-in (cli/read-immutable-merged-ledger! reconciled)
+                          [:ledger/identity :ledger/sha256])
+                  (get-in (cli/read-immutable-merged-ledger! synced)
+                          [:ledger/identity :ledger/sha256])))
         (let [records (:ledger/records
                        (cli/read-immutable-merged-ledger! synced))]
           (is (= ["2026-08-29T17:22:40Z" "2026-10-02T00:00:00Z"
@@ -1026,7 +1097,10 @@
                ["{:kind\n" #"Invalid Receipt River EDN"]
                [(str (pr-str current) " 42\n") #"exactly one EDN form"]
                [(pr-str current) #"must end with a newline"]
-               ["" #"must not be empty"]]]
+               ["" #"must not be empty"]
+               [(str (pr-str current) "\n"
+                     (pr-str (assoc current :host "second")) "\n")
+                #"exactly one record"]]]
         (let [head (commit! base-text {"2026-08-29T172240Z-a.edn" segment})]
           (is (thrown-with-msg?
                js/Error message
@@ -1041,6 +1115,22 @@
           (is (thrown-with-msg?
                js/Error #"drops 1 base record"
                (cli/verify-receipts! {:base base :at head})))))
+      ;; Reordering or reserializing legacy lines is rejected even when every
+      ;; record survives.
+      (let [two (str base-text (pr-str (assoc historical :owner "second")) "\n")
+            with-two (commit! two)]
+        (is (thrown-with-msg?
+             js/Error #"may only lose whole lines"
+             (cli/verify-receipts!
+              {:base with-two
+               :at (commit! (str (pr-str (assoc historical :owner "second")) "\n"
+                                 base-text))})))
+        (is (thrown-with-msg?
+             js/Error #"may only lose whole lines"
+             (cli/verify-receipts!
+              {:base with-two
+               :at (commit! (str/replace two ", " " "))}))))
+      (commit! base-text)
       ;; The legacy file is frozen: appending to it is rejected.
       (let [head (commit! (str base-text (pr-str current) "\n"))]
         (is (thrown-with-msg?
@@ -1150,6 +1240,7 @@
                 {:ledger/path law/receipt-ledger-path
                  :ledger/revision revision
                  :ledger/sha256 (apply str (repeat 64 "d"))}
+                :ledger/bytes (js/Buffer.alloc 0)
                 :ledger/records
                 [(cli/evidence-receipt
                   passed-result "2026-08-29T17:22:40Z" "test"
@@ -1228,6 +1319,7 @@
                 {:ledger/path law/receipt-ledger-path
                  :ledger/revision reviewed-root-revision
                  :ledger/sha256 (apply str (repeat 64 "d"))}
+                :ledger/bytes (js/Buffer.alloc 0)
                 :ledger/records
                 [(cli/evidence-receipt
                   passed-result "2026-08-29T17:22:40Z" "test"
