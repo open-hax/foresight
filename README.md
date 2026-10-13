@@ -114,11 +114,17 @@ the clean current `HEAD`, loads both the catalog and Receipt River from that
 same Git object, and requires every result revision to equal the corresponding
 gitlink in its tree. It rechecks the root boundary after all reads.
 
-The runner appends each complete result to `.ημ/receipts.edn`. Schema-v2
-receipts retain the actual host and `nbb`/Node adapter identity. Older
-receipts remain immutable historical records and cannot attest a current
-promotion; `verify-receipts` applies the current envelope law only to the
-suffix appended after the reviewed base.
+The Receipt River ledger is segmented. `.ημ/receipts.edn` is the legacy,
+frozen first segment; every new receipt is its own immutable file under
+`.ημ/receipts/` (`<UTC timestamp>-<random id>.edn`, one record per line). The
+ledger is the merge of all segments, ordered by `:ts` and then by the SHA-256
+of the record's EDN, so parallel branches add disjoint files instead of
+editing the same lines, and a diverged fork and org merge without conflicts.
+The runner writes each complete result as a new segment. Schema-v2 receipts
+retain the actual host and `nbb`/Node adapter identity. Older receipts remain
+immutable historical records and cannot attest a current promotion;
+`verify-receipts` applies the current envelope law only to records that are new
+relative to the reviewed base.
 
 The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
 no-follow parent directory descriptor, rejects symbolic or multiply linked
@@ -132,13 +138,18 @@ an unrelated writer that ignores the lock.
 
 For immutable review, the adapter disables Git replacement objects, requires
 regular non-executable blobs, hashes
-their raw bytes, decodes strict UTF-8, and proves the reviewed ledger preserves
-the trusted base ledger byte-for-byte before accepting whole appended lines.
-The current receipt-envelope and evidence-result laws apply only to that
-appended suffix. The exact trusted prefix remains historical evidence even
-when its envelopes predate the current schema. Secure append applies the same
-boundary against the committed `HEAD` ledger: it validates the uncommitted
-suffix before running a gate or writing its receipt. Rewrites, truncation, and
+their raw bytes, decodes strict UTF-8, and proves the reviewed ledger extends
+the trusted base ledger as an event ledger: every base segment file is still
+present byte-for-byte, every base record is still present somewhere in the
+merged ledger, the legacy file gains no new record, and no record appears
+twice. Records may move out of the legacy file into segments; that is how a
+fork and its org reconcile histories that split inside the legacy file. The
+current receipt-envelope and evidence-result laws apply only to the new
+records. Historical records remain evidence even when their envelopes predate
+the current schema. Secure append applies the same boundary against the
+committed `HEAD` ledger: it validates the whole working ledger before running a
+gate, then writes the receipt into a newly created (`O_EXCL`) segment. Rewrites,
+deletions, legacy appends, and
 malformed new records still fail closed. Summary totals describe the entire
 ledger; appended counts describe the records subject to current validation.
 The portable consistency law then requires exact receipt/result equality.

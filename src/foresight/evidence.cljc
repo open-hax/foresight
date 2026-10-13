@@ -12,6 +12,10 @@
 
 (def receipt-ledger-path ".ημ/receipts.edn")
 
+;; New receipts are immutable segment files in this directory. The legacy
+;; `receipt-ledger-path` file is the first, frozen segment.
+(def receipt-segment-directory ".ημ/receipts")
+
 (def evidence-receipt-origin "revision-bound-evidence")
 
 (def outcome-precedence

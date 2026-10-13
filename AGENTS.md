@@ -144,7 +144,11 @@ must remain visible. Never convert an unavailable action into a pass.
 ## State
 
 Cards live under `docs/agile/kanban`. Rheos events and receipts belong under
-`.ημ/`; no provenance ledger may be created elsewhere.
+`.ημ/`; no provenance ledger may be created elsewhere. New receipts are
+one-record segment files under `.ημ/receipts/` (`<UTC timestamp>-<id>.edn`);
+`.ημ/receipts.edn` is frozen legacy history. Never append to it or edit an
+existing segment. `scripts/evidence.clj verify-receipts` checks the merged
+ledger as a whole.
 
 
 ## Pull requests: Promethean review and promotion
