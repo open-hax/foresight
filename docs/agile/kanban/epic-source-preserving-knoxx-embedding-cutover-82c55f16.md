@@ -75,8 +75,30 @@ repository change or copied chunking/graph algorithm is included.
 | [Materialize and verify retained sources](knoxx-retained-source-embedding-migration-11bc1411.md) | `11bc1411-154d-4db7-8c27-51506ab30508` | 8 | Runtime story |
 | [Consume proof and deploy the native CMS](services-controller-bound-embedding-admission-03a057e4.md) | `03a057e4-3098-4fe7-a5b8-95168f45ca96` | 8 | Migration story |
 
-The 21 points are the sum of the children, not an additional implementation
-estimate. Pinned SDK07085 has no standalone exported graph-input transform. Its complete
+The 21 points are the sum of the three currently authored children, not an
+additional implementation estimate. That total is provisional: planning review
+must add and estimate a prerequisite SDK-boundary design/prototype card before
+EC1.02 is ready, then update the epic's UUID links and aggregate estimate through
+the owning authoring/Rheos surfaces. The prerequisite proves the supported
+source families, complete emitted output closure, identity-conflict and transfer
+rules, and the separate authorized append-delta decision before choosing a route.
+It supplies a qualified interface and recoverable fixture proof, not production
+migration or a fabricated source-admission result.
+
+Keep the two existing product-proof owners distinct:
+[translation generation and SME review](prove-translation-generation-and-sme-review-independently.md)
+(`abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf`) and
+[content generation, layout, publication and review](prove-content-generation-layout-publishing-and-review-independently.md)
+(`3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e`). Their separate current-source vertical
+qualification is an application admission input; their independent final live
+receipts are epic closure obligations. EC1.03 owns orchestration and deployment
+receipts, not implementation or closure of those two product workstreams. If
+those existing cards cannot carry this bounded rollout proof under their current
+entry conditions, author separately estimated Knoxx proof substories and bind
+actual UUID dependencies before planning approval; do not silently expand the
+eight-point Services story or claim one combined journey closes both slices.
+
+Pinned SDK07085 has no standalone exported graph-input transform. Its complete
 owner `ingestEvents` operation appends base rows and emits additional derived
 events, graph edges and labels. An isolated staging database is an examined,
 unaccepted route to reuse that operation. Planning review must settle all staging
@@ -98,13 +120,18 @@ board transition.
   scope uses one validated model/route/dimension-bound generation runtime.
   Actual provider results account for every input and contain only finite
   1024-dimensional vectors; a partial batch cannot supply qualification.
+  Any generation failure refuses the qualification run, even if a later retry
+  produces complete input coverage.
 - [ ] A recoverable snapshot and exact rollback journal precede mutation.
-  Under a held deployment lock and complete stopped-writer proof, the owning
+  Under a held deployment lock, complete stopped-writer proof and an exercised
+  Mongo-enforced fence rejecting every other writer throughout the cutover, the owning
   CLI enumerates and preserves the full canonical source and causal history,
   materializes all proven hot and supported graph obligations, and verifies
   exact source-to-vector/chunk coverage. Any new canonical/derived source facts
-  have an explicit accepted append delta with source provenance, separate from
-  derived projection writes; whole-store counts reconcile originals plus that
+  have a separately authorized append decision bound to the exact delta hash,
+  identities, source/controller, run and attempt before production adoption;
+  discovery and apply cannot authorize their own output. This accepted delta has
+  source provenance separate from derived projection writes; whole-store counts reconcile originals plus that
   delta, rather than requiring count equality. They cannot be deleted in rollback.
   Unknown/colliding source identities and unsupported families refuse; content,
   title or model agreement cannot merge identities.
@@ -113,11 +140,18 @@ board transition.
   and attempt. Writer restart, drift, stale/borrowed proof or source change
   refuses. Existing unchanged-target/fresh-store behavior retains its gates.
 - [ ] Original application-owned production qualification, controller/caller
-  attestation and protected review remain required. Neither this plan nor the
-  Website-only exception supplies Knoxx qualification.
-- [ ] The actual native CMS completes the Spanish journey and public browser
-  proof; the Website, existing English/German publications, Proxx and SDK
-  settings are preserved unless separately reviewed changes are required.
+  attestation and protected review remain required. A separately named trusted
+  production-admission decision follows the applicable staging/promotion path,
+  consumes its exact receipt and binds the PR head, current base and tested merge
+  candidate alongside C/S/G. Unknown/stale staging proof, changed base/candidate
+  or missing authorized approval refuses production activation. Neither this plan
+  nor the Website-only exception supplies Knoxx qualification.
+- [ ] The separately owned translation and content-product slices each retain
+  their own current-source vertical qualification and actual live decision/effect
+  receipts. Epic closure joins their exact Spanish revision with the Services
+  deployment and public browser receipt; a combined journey is not independent
+  closure of either owner. The Website, existing English/German publications,
+  Proxx and SDK settings are preserved unless separately reviewed changes are required.
 
 ## Verification
 

@@ -511,3 +511,12 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-14T05:17:36.828654416Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Correct native cutover planning findings without inventing readiness
+  p-efficiency: 0.72
+  p-friction: 0.68
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: ce2baeb1ee35c314546eeb68b1d8253f35e5625f4915afa908d2a94166875c5a
+  note: Complete native review intake yields nine actual unresolved roots. Four body corrections remove the migration/controller cycle, separate exact-delta acceptance, require a database-enforced writer fence, bind tested source identities and order authorization before mutation and final proof before activation. A separate local review finds no new defect, while SDK prerequisite and actual product proof dependency/entry work remain pending. Actual canonical Rheos interprets absent literal status as incoming and no-ops the same target with unchanged ledger bytes. Preserve the discrepancy and all existing frontmatter; no hand-written state, native settlement, current-head approval or readiness credit. Website remains live; CMS rollout and Spanish journey remain incomplete. No spore.

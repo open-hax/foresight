@@ -17,8 +17,15 @@ labels: "knoxx, embeddings, migration, source-preservation, 8sp"
 ## Context
 
 Requires [EC1.01](knoxx-validated-shared-embedding-runtime-d3277a3c.md)'s exact
-validated runtime. `open-hax/knoxx` owns the implementation; Services consumes
-its application decision later. The [epic](epic-source-preserving-knoxx-embedding-cutover-82c55f16.md)
+validated runtime and a separately reviewed SDK-boundary design/prototype outcome.
+That prerequisite must select and prove the genuine owner operation, supported
+source families, isolated database identity, complete output closure, transfer/
+conflict rules and the independent append-admission phase on a recoverable
+fixture before this implementation is ready or its eight-point estimate is
+accepted. Root must author the prerequisite card and bind its actual UUID; this
+body does not invent a dependency identity or admit a route.
+
+`open-hax/knoxx` owns the implementation; Services consumes its application decision later. The [epic](epic-source-preserving-knoxx-embedding-cutover-82c55f16.md)
 binds the actual unlocked observations: 736 retained events, 312 hot-eligible
 and 424 `graph.node` records, with initially empty derived vector stores.
 Those counts are not a locked inventory or the number of required graph chunks.
@@ -39,8 +46,11 @@ label nodes. This is an actual source boundary, not a settled staging design.
 An application-owned CLJS CLI inspects, materializes and verifies every proven
 retained hot and supported graph obligation using the validated target runtime,
 while preserving every canonical event, source field and causal-history record.
-It emits a complete source/controller/database-bound cutover proof and an exact
-rollback journal; a zero-obligation-only profile cannot admit the observed case.
+It delivers a qualified CLI/interface, exact rollback journal and complete
+source-preserving fixture proof. The actual production cutover proof is emitted
+only when EC1.03's accepted controller/caller invokes that qualified CLI in its
+fresh locked production run/attempt; it is not a prerequisite produced before
+that caller exists. A zero-obligation-only profile cannot admit the observed case.
 Any newly generated canonical/derived source fact must be exposed and admitted
 through an explicit reviewed append obligation, preserving the original corpus.
 
@@ -58,7 +68,8 @@ codec. Preserve the original retained-snapshot count and full content commitment
 selected fields or count equality. Any additional canonical facts require an
 explicit accepted append delta with source provenance, separate from derived
 projection writes. Whole-store totals must equal preserved originals plus that
-accepted delta; unchanged total counts are not required when appends are allowed. Resolve retained source/hydration obligations; fail on
+accepted delta; unchanged total counts are not required when appends are allowed.
+Resolve retained source/hydration obligations; fail on
 unknown or inaccessible source rather than treating blank text as zero work.
 
 Materialization uses the existing pinned SDK owner operations and EC1.01 runtime,
@@ -68,6 +79,20 @@ operation. Planning review must bind its actual distinct database identity,
 immutable source copies, all emitted source/vector/edge/label outputs, existing-ID
 conflicts and explicit adoption manifest before approving that route. No fake
 admission result or selectively dropped projection can supply coverage.
+
+Discovery/isolated generation, independent admission, and production adoption are
+separate named phases. Discovery freezes the whole proposed append delta, source
+and output identities, counts, full commitments and hash. Before production
+adoption, an authorized decision-maker distinct from the generating/apply process
+must issue an inspectable acceptance bound to that exact delta, source snapshot,
+controller/caller/database, native run and attempt. The prerequisite design names
+the actual accepting authority and verified decision channel; neither this card,
+an SDK return value nor a self-authored manifest selects it. Missing authorization,
+changed delta/source/binding, partial output or a decision from the generator
+refuses adoption. A fresh controller phase verifies the accepted decision against
+the still-fenced snapshot before any production append; rejected/unknown deltas
+remain unadopted with their genuine staging evidence retained.
+
 Support the observed graph source families through their actual owner boundary,
 including graph work implied by ordinary eligible events. Prove exact expected
 source-to-node/chunk/model/dimension coverage, no missing/extra/orphan chunks,
@@ -126,7 +151,10 @@ certificate cannot complete the actual production case.
 - [ ] The immutable artifact binds compiled CLI/provider/SDK hashes, candidate
   image/application source, accepted controller and Services caller, database
   fingerprint, writer/lock evidence, native run/attempt, source commitments,
-  inventory/index definition and refreshed completion time. Credentials/raw
+  inventory/index definition and refreshed completion time. The qualified fixture
+  interface accepts these expected bindings; the actual accepted C/S/G and
+  production run/attempt are supplied and freshly verified by EC1.03, not selected
+  or minted in advance by this story. Credentials/raw
   source text are absent from public evidence; unknown inputs remain unknown.
 - [ ] A fresh final read immediately before activation invalidates evidence on
   source drift, writer restart, expired lock, populated unsupported store or
@@ -137,7 +165,9 @@ certificate cannot complete the actual production case.
 Write causal red controls for same-width wrong-model rows, omitted/duplicate
 chunks, content changes with equal counts, graph source omissions, unavailable
 hydration, legacy registries, wrong/pending index definitions, interrupted apply,
-partial generation, resumed attempts and exact rollback. Read-only spies require
+partial generation, resumed attempts and exact rollback. Exercise missing/wrong
+append authority, a same-length changed delta, decision-before-discovery and
+self-accepted generator output: all refuse production adoption. Read-only spies require
 zero constructor/index/write/cache/provider effects. Use the actual SDK export
 and whole generated batch rather than lookalikes or expected declarations.
 

@@ -81,6 +81,8 @@ by this card.
   or accept only its successful subset. Retain and account for genuine SDK
   source/structural writes and successful independent batches as partial
   progress; any generation failure refuses overall completion and qualification.
+  A later retry cannot qualify that failed run. Any separately authorized fresh
+  qualification retains the failed attempt and repeats its complete required evidence.
 - [ ] Coverage checks bind recorded model, dimensions, source and chunk identity;
   old gte/1024 rows cannot satisfy the qwen/1024 predicate.
 - [ ] Direct host requests carry no Proxx credential. Actual installed SDK and
