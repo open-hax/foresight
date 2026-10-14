@@ -851,7 +851,7 @@
                (cli/open-append-reservation!
                 (path/join segments "2026-10-13T000002000Z-next.edn") true))))))))
 
-(defn run-semantic-gate-with! [segments file segment gate!]
+(defn run-semantic-gate-with! [file segment gate!]
   (with-redefs [cli/receipt-file file
                 cli/new-receipt-segment-file (fn [] segment)
                 cli/git-capture! (fn [_] reviewed-root-revision)
@@ -901,7 +901,7 @@
         (is (thrown?
              js/Error
              (run-semantic-gate-with!
-              segments file segment
+              file segment
               (fn []
                 (fs/unlinkSync append-lock)
                 (fs/unlinkSync writer-lock)
@@ -929,7 +929,7 @@
         (is (thrown?
              js/Error
              (run-semantic-gate-with!
-              segments file segment
+              file segment
               (fn []
                 (fs/unlinkSync append-lock)
                 (fs/writeFileSync segment (str forged-line "\n") "utf8")))))
@@ -974,7 +974,7 @@
         (is (thrown-with-msg?
              js/Error #"must not be executable"
              (run-semantic-gate-with!
-              segments file segment #(fs/chmodSync existing 0755))))
+              file segment #(fs/chmodSync existing 0755))))
         (is (= [(path/basename existing)] (segment-names segments))
             "no receipt was written")
         (fs/chmodSync existing 0644)
@@ -982,7 +982,7 @@
         (is (thrown-with-msg?
              js/Error #"must not be executable"
              (run-semantic-gate-with!
-              segments file segment #(fs/chmodSync segment 0700))))
+              file segment #(fs/chmodSync segment 0700))))
         (is (= [(path/basename existing)] (segment-names segments))
             "the executable reservation was not written or kept")
         (is (= [] (lock-files segments)))))))
