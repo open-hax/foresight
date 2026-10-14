@@ -349,7 +349,8 @@
   "Base line slices that a terminator-preserving subsequence match against
   `head` does not consume. Each removed slice must reappear as an entire
   non-legacy segment body so emptying or rewriting legacy cannot invent
-  alternate serializations."
+  alternate serializations. A final unterminated slice reappears with one
+  added newline, the only form a segment can hold."
   [head base]
   (loop [wanted (seq (line-slices head))
          available (seq (line-slices base))
@@ -416,7 +417,13 @@
                                   (map :segment/bytes)
                                   vec)]
           (doseq [line removed]
-            (let [line-bytes (js/Buffer.from line "utf8")]
+            ;; Only the final row of an unterminated legacy file lacks a
+            ;; newline. Its sole preservation form is that row plus the one
+            ;; terminator every segment needs.
+            (let [line-bytes (js/Buffer.from (if (str/ends-with? line "\n")
+                                               line
+                                               (str line "\n"))
+                                             "utf8")]
               (when-not (some #(.equals % line-bytes) segment-bodies)
                 (throw (js/Error.
                         (str "The legacy Receipt River ledger "
