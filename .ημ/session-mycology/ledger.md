@@ -565,3 +565,12 @@
   spore: none
   receipt-refs: b4cdfa1e495fbb2739c9f83d2a920b0210bc8570f9a2e0dd869883e8065eb5f9
   note: Immutable event identity differs from operation correlation: multiple lawful emissions can share correlation and receipt bodies. Reuse the canonical admission authority and require selected actual writer/readback qualification. A failed bare loader probe from missing classpath is not proof that a CLJC writer is JVM-only, and source pinning is not runtime qualification. Correct the existing scope from actual CMS loss after rollover, preserving metadata and immutable history rather than creating another plan. No new spore or promotion.
+- ts: 2026-10-14T15:14:50.009709863Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: F140-version-admission-causal-repair
+  p-efficiency: 0.88
+  p-friction: 0.24
+  p-skill-candidate: 0.00
+  spore: none
+  receipt-refs: 39b703b1-085e-484f-8658-5b00943d5512,67bd38c06f0ce26c3b1f30120c2b1f3255c5b61f,7d3f3c81401b7be7a3e481ef1d3435133c63da1f
+  note: A declared external version-admission contract needs explicit consumer data and membership, rather than a nonblank version check. Use coherent invalid-version neighbors through pure admission, secure append and immutable suffix verification; preserve trusted history without revalidation and reserve historical event IDs independently. Commit actual RED before the smallest GREEN, keep every original assertion and retain inherited wrapper warnings. Exact final receipt verification follows provenance commit. No new spore or promotion; CMS deployment remains active.
