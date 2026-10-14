@@ -772,6 +772,229 @@
                  (lock-files segments))
               "the lock quarantines the ledger until the forged segment is adjudicated"))))))
 
+(defn run-gate-against-reserved-segment! [segments mutate!]
+  (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+        renamed (path/join segments "2026-10-13T000001000Z-forged.edn")
+        forged-line (cli/encode-edn-line!
+                     (cli/validated-evidence-receipt!
+                      (assoc passed-result :result/command ["forged"])))]
+    (with-redefs [cli/new-receipt-segment-file (fn [] segment)
+                  cli/git-capture! (fn [_] reviewed-root-revision)
+                  cli/read-immutable-receipt-ledger! empty-committed-ledger
+                  cli/read-immutable-receipt-segments! (fn [_] {})
+                  cli/require-repositories!
+                  (fn [& _]
+                    {"repo" {:path "repo"
+                             :absolute "/repo"
+                             :revision child-revision}})
+                  cli/run-gate!
+                  (fn [& _]
+                    (mutate! {:segment segment :renamed renamed
+                              :forged-line forged-line})
+                    passed-result)]
+      (is (thrown?
+           js/Error
+           (cli/run-selected-gates!
+            {:catalog/repositories
+             {"repo" {:repository/path "repo"
+                      :repository/gates [local-gate]}}}
+            test-catalog-identity
+            {:only #{"repo"} :kinds #{:unit}}))))
+    {:segment segment :renamed renamed}))
+
+(deftest selected-gates-retain-writer-lock-when-segment-lock-vanishes
+  ;; Candidate gate code can unlink the per-segment lock and add its own
+  ;; well-named segment. Pre-write lock-identity then aborts before ledger
+  ;; revalidation; cleanup must keep the writer lock so the forged segment
+  ;; cannot be accepted as an ordinary extension on the next run.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            append-lock (path/join segments
+                                   (str "." (path/basename segment) ".append.lock"))
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (fs/unlinkSync append-lock)
+                        (fs/writeFileSync forged (str forged-line "\n") "utf8")
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"append lock"
+               (cli/run-selected-gates!
+                {:catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}
+                test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (= [(path/basename forged)] (segment-names segments))
+              "no receipt was written for the gate")
+          (is (= [] (lock-files segments))
+              "the vanished segment lock leaves no per-segment quarantine")
+          (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+              "the writer lock is retained as the quarantine marker")
+          (is (thrown-with-msg?
+               js/Error #"active Receipt River reservation|writer lock"
+               (cli/open-append-reservation!
+                (path/join segments "2026-10-13T000002000Z-next.edn") true))))))))
+
+(deftest selected-gates-quarantine-a-renamed-reservation
+  ;; Path absence is not proof of removal: the reserved inode may live on
+  ;; under another well-named segment holding forged content.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file]
+        (let [{:keys [segment renamed]}
+              (run-gate-against-reserved-segment!
+               segments
+               (fn [{:keys [segment renamed forged-line]}]
+                 (fs/renameSync segment renamed)
+                 (fs/writeFileSync renamed (str forged-line "\n") "utf8")))]
+          (is (= [(path/basename renamed)] (segment-names segments)))
+          (is (= [(str "." (path/basename segment) ".append.lock")]
+                 (lock-files segments))
+              "the lock is retained because the held inode was not unlinked")
+          (is (thrown-with-msg?
+               js/Error #"retained append lock quarantines"
+               (cli/read-working-receipt-segments! nil))))))))
+
+(deftest selected-gates-release-an-unlinked-reservation
+  ;; When the held inode is provably gone (no links remain), nothing of the
+  ;; reservation survives and the lock is released.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file]
+        (run-gate-against-reserved-segment!
+         segments
+         (fn [{:keys [segment]}] (fs/unlinkSync segment)))
+        (is (= [] (segment-names segments)))
+        (is (= [] (lock-files segments)))))))
+
+(deftest selected-gates-quarantine-a-hard-linked-reservation
+  ;; Unlinking the reserved path is not proof either: a hard link made by gate
+  ;; code keeps the held inode alive under another well-named segment.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file]
+        (let [{:keys [segment renamed]}
+              (run-gate-against-reserved-segment!
+               segments
+               (fn [{:keys [segment renamed]}]
+                 (fs/linkSync segment renamed)))]
+          (is (not (fs/existsSync segment)))
+          (is (= [(str "." (path/basename segment) ".append.lock")]
+                 (lock-files segments))
+              "the lock is retained because the held inode still has a link")
+          ;; A detached gate process later writes through the surviving link.
+          (fs/writeFileSync renamed "{:kind :observation}\n" "utf8")
+          (is (thrown-with-msg?
+               js/Error #"retained append lock quarantines"
+               (cli/read-working-receipt-segments! nil))))))))
+
+(deftest writer-lock-release-failures-are-reported
+  ;; A replaced writer lock would block every later writer; the command that
+  ;; left it behind must fail instead of reporting success.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (let [writer-lock (path/join segments cli/receipt-writer-lock-name)
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")]
+        (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (fs/unlinkSync writer-lock)
+                        (fs/writeFileSync writer-lock "pid=0\n" "utf8")
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"writer lock could not be released"
+               (cli/run-selected-gates!
+                {:catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}
+                test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (= 1 (count (segment-records segments)))
+              "the verified receipt itself was written")
+          (is (= "pid=0\n" (fs/readFileSync writer-lock "utf8"))
+              "the replaced lock is left for adjudication")
+          (is (= [] (lock-files segments))))))))
+
+(deftest concurrent-writers-are-told-apart-from-quarantine
+  ;; Same-checkout writers serialize on one ledger-wide writer lock, so a
+  ;; second writer is refused as "active", never as a quarantine verdict, and
+  ;; any segment that appears while a gate runs cannot be a cooperating
+  ;; writer's receipt.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file
+                    cli/git-capture! (fn [_] reviewed-root-revision)
+                    cli/read-immutable-receipt-ledger! empty-committed-ledger
+                    cli/read-immutable-receipt-segments! (fn [_] {})]
+        (let [first-segment (path/join segments "2026-10-13T000000000Z-a.edn")
+              second-segment (path/join segments "2026-10-13T000001000Z-b.edn")
+              active (cli/open-append-reservation! first-segment true)]
+          (try
+            (is (thrown-with-msg?
+                 js/Error #"another writer holds an active Receipt River reservation"
+                 (cli/open-append-reservation! second-segment true)))
+            (is (not (fs/existsSync second-segment))
+                "the refused writer reserves nothing")
+            (finally
+              (cli/close-append-reservation! active)))
+          (is (= [] (lock-files segments)))
+          (is (= [] (segment-names segments)))
+          (is (not (fs/existsSync (path/join segments cli/receipt-writer-lock-name))))
+          (cli/close-append-reservation!
+           (cli/open-append-reservation! second-segment true))
+          (is (= [] (segment-names segments))))))))
+
+(deftest quarantine-outlives-the-writer-lock
+  ;; A quarantine is the retained per-segment lock; the writer lock itself is
+  ;; released, so the next writer reports the quarantine, not an active writer.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file]
+        (run-gate-against-reserved-segment!
+         segments
+         (fn [{:keys [segment renamed forged-line]}]
+           (fs/renameSync segment renamed)
+           (fs/writeFileSync renamed (str forged-line "\n") "utf8")))
+        (is (not (fs/existsSync (path/join segments cli/receipt-writer-lock-name))))
+        (with-redefs [cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})]
+          (is (thrown-with-msg?
+               js/Error #"retained append lock quarantines"
+               (cli/open-append-reservation!
+                (path/join segments "2026-10-13T000002000Z-c.edn") true))))))))
+
 (deftest working-ledger-files-are-read-through-the-validated-descriptor
   (with-receipt-fixture
     (fn [{:keys [segments]}]
@@ -1031,6 +1254,28 @@
                        (:ledger/bytes
                         (cli/read-immutable-receipt-ledger! base)))))))))
 
+(deftest receipt-verification-exempts-historical-timestamps
+  ;; The canonical-instant rule binds new records only; retained history with
+  ;; an earlier free-form :ts still verifies against itself and its extensions.
+  (with-historical-ledger-fixture true
+    (fn [{:keys [historical current commit!]}]
+      (let [legacy-text (str (pr-str (assoc historical :ts "yesterday")) "\n")
+            base (commit! legacy-text)
+            _ (is (zero? (cli/verify-receipts! {:base base :at base})))
+            head (commit! legacy-text
+                          {"2026-08-29T172240Z-a.edn"
+                           (str (pr-str current) "\n")})
+            _ (with-out-str
+                (is (zero? (cli/verify-receipts! {:base base :at head}))))
+            invalid (commit! legacy-text
+                             {"2026-08-29T172240Z-a.edn"
+                              (str (pr-str (assoc current :ts
+                                                  "2026-02-30T12:00:00Z"))
+                                   "\n")})]
+        (is (thrown-with-msg?
+             js/Error #"invalid receipt envelopes"
+             (cli/verify-receipts! {:base base :at invalid})))))))
+
 (deftest merged-ledger-orders-by-timestamp-then-record-id
   (let [a {:ts "2026-01-02T00:00:00Z" :n 1}
         b {:ts "2026-01-01T00:00:00Z" :n 2}
@@ -1077,6 +1322,10 @@
                 "2026-10-13T120060Z-a.edn"]]
     (is (not (cli/receipt-segment-name? name)) name))
   (is (cli/receipt-segment-name? "2024-02-29T235959999Z-leap.edn"))
+  ;; Two-digit years are real years, not 1900-based Date.UTC offsets.
+  (is (cli/receipt-segment-name? "0050-01-01T000000Z-a.edn"))
+  (is (cli/receipt-segment-name? "0099-12-31T235959Z-a.edn"))
+  (is (not (cli/receipt-segment-name? "0050-02-29T000000Z-a.edn")))
   (is (cli/receipt-segment-name?
        (path/basename (cli/new-receipt-segment-file)))))
 

@@ -125,8 +125,14 @@ legacy records remain append-only history but cannot attest a promotion.
 The Receipt River ledger is segmented. `.ημ/receipts.edn` is the frozen
 legacy first segment; every new receipt is an immutable one-record file under
 `.ημ/receipts/` (`<UTC timestamp>-<id>.edn`). The merged ledger is the union of
-all segments ordered by `:ts` then canonical record identity. Parallel writers
-add disjoint segment files instead of contending on one monolith.
+all segments ordered by the UTC instant named by `:ts` (offsets and fractional
+seconds normalized), then canonical record identity. New records need an RFC
+3339 `:ts` naming a real instant; historical records keep their original `:ts`
+and sort deterministically. Parallel branches (a fork and its org) add
+disjoint segment files instead of contending on one monolith. Writers in one
+checkout serialize on `.ημ/receipts/.receipt-river.writer.lock` for the whole
+reserve, gate and write sequence, so a segment that appears while a gate runs
+is never a cooperating writer's receipt.
 
 The local append adapter is Linux-specific and fails closed without
 `/proc/self/fd`, `O_NOFOLLOW`, and exclusive-create support. Each semantic
@@ -134,7 +140,9 @@ writer reserves its own new segment with `O_EXCL` and a sibling lock for that
 segment; it bounds one physical EDN line to 1 MiB, completes the descriptor
 write, verifies the resulting size, and synchronizes both the file and parent
 directory. A failure before the write releases the lock and removes an empty
-reserved segment. Any uncertain result after writing begins deliberately
+reserved segment. If the reserved path has vanished, the lock is released only
+when the still-held descriptor proves the inode unlinked; a renamed
+reservation keeps the lock. Any uncertain result after writing begins deliberately
 retains the lock as a quarantine marker for the whole ledger so a later
 cooperating writer cannot make a partial record look normal. Processes that
 ignore the protocol remain outside its trust boundary.

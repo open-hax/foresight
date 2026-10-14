@@ -161,22 +161,23 @@
 
 (def append-lock-name-pattern #"[.].+[.]append[.]lock")
 
+;; One ledger-wide lock serializes same-checkout semantic writers for the whole
+;; validate -> gate -> write section. Parallelism is across branches (a fork and
+;; its org add disjoint segments that verify-receipts merges), not concurrent
+;; processes in one working tree: a segment that appears while a gate runs can
+;; then never be a cooperating writer's receipt, so it stays quarantined.
+(def receipt-writer-lock-name ".receipt-river.writer.lock")
+
 (defn receipt-segment-timestamp-valid?
   "The name's timestamp must be a real UTC calendar date and clock time, not
-  only the right number of digits."
+  only the right number of digits. The receipt timestamp law decides, so any
+  four-digit year (including 0000-0099) is read literally."
   [value]
-  (when-let [[_ & fields]
+  (when-let [[_ year month day hour minute second]
              (re-matches #"([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2})([0-9]{2})([0-9]{2}).*"
                          value)]
-    (let [[year month day hour minute second] (map #(js/parseInt % 10) fields)
-          date (js/Date. (js/Date.UTC year (dec month) day hour minute second))]
-      (and (< hour 24) (< minute 60) (< second 60)
-           (= year (.getUTCFullYear date))
-           (= (dec month) (.getUTCMonth date))
-           (= day (.getUTCDate date))
-           (= hour (.getUTCHours date))
-           (= minute (.getUTCMinutes date))
-           (= second (.getUTCSeconds date))))))
+    (law/canonical-receipt-ts?
+     (str year "-" month "-" day "T" hour ":" minute ":" second "Z"))))
 
 (defn receipt-segment-name? [value]
   (boolean (and (string? value)
@@ -911,10 +912,9 @@
           (append-error! "descriptor write made no progress"))
         (recur (+ offset written))))))
 
-(defn acquire-append-lock! [parent basename]
+(defn acquire-lock-file! [parent lock-path busy-message]
   (require-parent-identity! parent)
-  (let [lock-path (append-lock-path parent basename)
-        flags (bit-or (fs-constant! "O_WRONLY")
+  (let [flags (bit-or (fs-constant! "O_WRONLY")
                       (fs-constant! "O_CREAT")
                       (fs-constant! "O_EXCL")
                       (fs-constant! "O_NOFOLLOW"))
@@ -922,8 +922,7 @@
              (fs/openSync lock-path flags 384)
              (catch :default error
                (if (= "EEXIST" (.-code error))
-                 (append-error!
-                  "another writer holds the append lock, or a stale/unsafe lock exists")
+                 (append-error! busy-message)
                  (append-error! (str "append lock could not be created: "
                                      (.-message error))))))]
     (try
@@ -940,6 +939,18 @@
         {:fd fd :path lock-path :stats stats})
       (catch :default error
         (close-after-open-error! fd error)))))
+
+(defn acquire-append-lock! [parent basename]
+  (acquire-lock-file!
+   parent (append-lock-path parent basename)
+   "another writer holds the append lock, or a stale/unsafe lock exists"))
+
+(defn acquire-receipt-writer-lock! [parent]
+  (acquire-lock-file!
+   parent (path/join (:proc-path parent) receipt-writer-lock-name)
+   (str "another writer holds an active Receipt River reservation; retry after "
+        "it finishes (a writer lock left by a crashed process must be "
+        "adjudicated and removed by hand)")))
 
 (defn require-append-lock-identity! [lock]
   (let [fd-stats (fs/fstatSync (:fd lock) bigint-stat-options)]
@@ -1115,8 +1126,9 @@
 
 (defn read-working-receipt-segments!
   "Reads the working ledger. `own-basename` names the caller's reserved (still
-  empty) segment, which is skipped along with its own lock. Any other
-  retained append lock quarantines the whole ledger."
+  empty) segment, which is skipped along with its own lock and the writer lock
+  the caller holds. Any other retained append lock quarantines the whole
+  ledger."
   [own-basename]
   (let [legacy-bytes (read-working-regular-file!
                       receipt-file "Receipt River file")
@@ -1135,6 +1147,9 @@
                     (= receipt-segment-readme basename) nil
                     (= own-basename basename) nil
                     (= (str "." own-basename ".append.lock") basename) nil
+                    ;; Only a reserving writer reads the working ledger, and it
+                    ;; holds this lock; no other writer can be active.
+                    (and own-basename (= receipt-writer-lock-name basename)) nil
                     (re-matches append-lock-name-pattern basename)
                     (append-error!
                      (str "a retained append lock quarantines the Receipt River "
@@ -1185,6 +1200,33 @@
 
 (declare remove-unwritten-segment!)
 
+(defn release-writer-lock!
+  "Releases the ledger-wide writer lock. A quarantine is normally carried by
+  the retained per-segment lock, so the writer lock does not outlive its
+  writer. When segment-lock cleanup itself fails, `close-append-reservation!`
+  retains the writer lock instead. If release fails (the lock was replaced,
+  or its unlink or directory fsync failed) every later writer would be
+  blocked, so the failure is reported."
+  [parent writer-lock]
+  (try
+    (release-append-lock! parent writer-lock)
+    (catch :default error
+      (append-error!
+       (str "the Receipt River writer lock could not be released and must be "
+            "adjudicated by hand: " (.-message error))))))
+
+(defn release-writer-lock-after-error!
+  "Releases the writer lock on a failed reservation, then rethrows `error`,
+  naming a release failure too rather than hiding either one."
+  [parent writer-lock error]
+  (when writer-lock
+    (try
+      (release-writer-lock! parent writer-lock)
+      (catch :default release-error
+        (throw (js/Error. (str (.-message error) "; "
+                               (.-message release-error)))))))
+  (throw error))
+
 (defn open-append-reservation!
   ([file]
    (open-append-reservation! file false))
@@ -1195,7 +1237,13 @@
          basename (path/basename absolute-file)
          parent (open-parent-directory! directory)]
      (try
-       (let [lock (acquire-append-lock! parent basename)
+       (let [writer-lock (when validate-ledger?
+                           (acquire-receipt-writer-lock! parent))
+             lock (try
+                    (acquire-append-lock! parent basename)
+                    (catch :default error
+                      (release-writer-lock-after-error!
+                       parent writer-lock error)))
              retain-lock? (atom false)]
          (try
            (require-append-lock-identity! lock)
@@ -1215,6 +1263,7 @@
                 :directory directory
                 :parent parent
                 :lock lock
+                :writer-lock writer-lock
                 :target target
                 :target-path target-path
                 :semantic-basename (when validate-ledger? basename)
@@ -1241,58 +1290,96 @@
                    (reset! retain-lock? true))
                  (close-after-open-error! (:fd target) error))))
            (catch :default error
-             (if @retain-lock?
-               (fs/closeSync (:fd lock))
-               (release-append-lock! parent lock))
-             (throw error))))
+             (release-writer-lock-after-error!
+              parent writer-lock
+              (try
+                (if @retain-lock?
+                  (fs/closeSync (:fd lock))
+                  (release-append-lock! parent lock))
+                error
+                (catch :default cleanup-error cleanup-error))))))
        (catch :default error
          (fs/closeSync (:fd parent))
          (throw error))))))
 
+(defn held-inode-unlinked?
+  "True only when the still-open reserved descriptor proves its inode has no
+  remaining directory entry. A closed descriptor proves nothing."
+  [{:keys [target target-open?]}]
+  (try
+    (and (or (nil? target-open?) @target-open?)
+         (let [stats (fs/fstatSync (:fd target) bigint-stat-options)]
+           (and (same-file? stats (:stats target))
+                (= "0" (str (.-nlink stats))))))
+    (catch :default _error false)))
+
 (defn remove-unwritten-segment!
   "Removes a reserved segment that was never written, while the lock is still
   held, so an aborted gate cannot leave an empty file in the ledger."
-  [{:keys [parent target target-path]}]
-  ;; Returns true only when no reserved segment is left behind: it was already
-  ;; gone, or it was still this writer's empty file and was removed. Anything
-  ;; else (content injected into it, a replaced file, a failed unlink) is false,
-  ;; and the caller retains the lock as a quarantine marker.
+  [{:keys [parent target target-path] :as reservation}]
+  ;; Returns true only when no reserved segment is left behind: the held
+  ;; descriptor proves the inode has no remaining link, either after removing
+  ;; this writer's still-empty file or because its path was already gone. Anything else (content injected
+  ;; into it, a renamed or replaced file, a failed unlink) is false, and the
+  ;; caller retains the lock as a quarantine marker. Path absence alone is not
+  ;; proof: the inode may live on under another well-named segment.
   (try
     (let [stats (lstat-if-present! target-path "Receipt River file")]
       (cond
-        (nil? stats) true
+        (nil? stats) (held-inode-unlinked? reservation)
         (and (same-file? stats (:stats target))
              (zero? (safe-file-size! stats)))
         (do (fs/unlinkSync target-path)
             (fs/fsyncSync (:fd parent))
-            true)
+            ;; A hard link made while the gate ran would keep the inode (and
+            ;; anything later written through it) alive under another name.
+            (held-inode-unlinked? reservation))
         :else false))
     (catch :default _error false)))
 
 (defn close-append-reservation!
-  [{:keys [parent lock target target-open? write-started? write-verified?
-           quarantined? semantic-basename]
+  [{:keys [parent lock writer-lock target target-open? write-started?
+           write-verified? quarantined? semantic-basename]
     :as reservation}]
-  (try
-    (when @target-open?
-      (fs/closeSync (:fd target))
-      (reset! target-open? false))
-    (finally
-      (try
-        (let [unwritten-removed? (if (and semantic-basename (not @write-started?))
-                                   (remove-unwritten-segment! reservation)
-                                   true)]
+  (let [unwritten-removed? (atom false)
+        retain-writer-lock? (atom false)]
+    (try
+      ;; Adjudicate the unwritten reservation while its descriptor is still
+      ;; held, so an unlinked inode can be told apart from a renamed one.
+      (reset! unwritten-removed?
+              (if (and semantic-basename (not @write-started?))
+                (remove-unwritten-segment! reservation)
+                true))
+      (when @target-open?
+        (fs/closeSync (:fd target))
+        (reset! target-open? false))
+      (finally
+        (try
           (if (or (and @write-started? (not @write-verified?))
-                  (not unwritten-removed?)
+                  (not @unwritten-removed?)
                   (and quarantined? @quarantined?))
             ;; A short write, fsync/close failure, post-write identity change,
-            ;; content injected into the reserved segment, or a segment added
-            ;; while the gate ran. Retain the lock as a durable quarantine
-            ;; marker so a later writer cannot normalize the damage.
+            ;; content injected into the reserved segment, a reservation moved
+            ;; out from under its path, or a segment added while the gate ran.
+            ;; Retain the lock as a durable quarantine marker so a later
+            ;; writer cannot normalize the damage.
             (fs/closeSync (:fd lock))
-            (release-append-lock! parent lock)))
-        (finally
-          (fs/closeSync (:fd parent)))))))
+            (release-append-lock! parent lock))
+          (catch :default error
+            ;; Segment-lock identity or cleanup failed (for example the lock
+            ;; was unlinked while a candidate added its own segment). Keep the
+            ;; writer lock as the quarantine marker so the next run cannot
+            ;; treat that segment as an ordinary extension.
+            (reset! retain-writer-lock? true)
+            (throw error))
+          (finally
+            (try
+              (when writer-lock
+                (if @retain-writer-lock?
+                  (fs/closeSync (:fd writer-lock))
+                  (release-writer-lock! parent writer-lock)))
+              (finally
+                (fs/closeSync (:fd parent))))))))))
 
 (defn with-append-reservation!
   ([file run!]

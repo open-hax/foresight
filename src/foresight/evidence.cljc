@@ -223,14 +223,73 @@
        (git-commit-id? (:ledger/revision value))
        (sha256? (:ledger/sha256 value))))
 
-(defn canonical-receipt-ts?
-  "True when `ts` is a UTC (or offset) instant string suitable as a merge key."
+(def ^:private receipt-ts-pattern
+  #"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(?:(Z)|([+-])(\d{2}):(\d{2}))")
+
+(defn- parse-decimal [digits]
+  #?(:clj (Long/parseLong digits)
+     :cljs (js/parseInt digits 10)))
+
+(defn leap-year? [year]
+  (or (and (zero? (mod year 4)) (pos? (mod year 100)))
+      (zero? (mod year 400))))
+
+(defn days-in-month [year month]
+  (case month
+    2 (if (leap-year? year) 29 28)
+    (4 6 9 11) 30
+    31))
+
+(defn- days-from-civil
+  "Days since 1970-01-01 for a proleptic Gregorian date (Hinnant's algorithm)."
+  [year month day]
+  (let [year (if (<= month 2) (dec year) year)
+        era (quot (if (neg? year) (- year 399) year) 400)
+        year-of-era (- year (* era 400))
+        shifted-month (mod (+ month 9) 12)
+        day-of-year (+ (quot (+ (* 153 shifted-month) 2) 5) (dec day))
+        day-of-era (+ (* 365 year-of-era)
+                      (quot year-of-era 4)
+                      (- (quot year-of-era 100))
+                      day-of-year)]
+    (+ (* era 146097) day-of-era -719468)))
+
+(defn receipt-ts-instant
+  "Parses an RFC 3339 timestamp into `[utc-epoch-seconds fraction-digits]`,
+  or nil unless it names a real calendar date, clock time, and known UTC
+  offset. Rejects `-00:00` (RFC 3339 unknown-offset). Fraction digits drop
+  trailing zeros, so equal instants compare equal and fractions of any
+  precision order correctly as strings."
   [ts]
-  (boolean
-   (and (string? ts)
-        (re-matches
-         #"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})"
-         ts))))
+  (when (string? ts)
+    (when-let [[_ year month day hour minute second fraction zulu sign
+                offset-hour offset-minute]
+               (re-matches receipt-ts-pattern ts)]
+      (let [[year month day hour minute second]
+            (map parse-decimal [year month day hour minute second])
+            offset-hour (if zulu 0 (parse-decimal offset-hour))
+            offset-minute (if zulu 0 (parse-decimal offset-minute))]
+        (when (and (<= 1 month 12)
+                   (<= 1 day (days-in-month year month))
+                   (< hour 24) (< minute 60) (< second 60)
+                   (< offset-hour 24) (< offset-minute 60)
+                   ;; RFC 3339: -00:00 means the local offset is unknown, so the
+                   ;; timestamp does not name a known UTC instant.
+                   (not (and (= "-" sign)
+                             (zero? offset-hour)
+                             (zero? offset-minute))))
+          (let [offset-seconds (* (if (= "-" sign) -1 1)
+                                  (+ (* 3600 offset-hour) (* 60 offset-minute)))]
+            [(- (+ (* 86400 (days-from-civil year month day))
+                   (* 3600 hour) (* 60 minute) second)
+                offset-seconds)
+             (str/replace (or fraction "") #"0+$" "")]))))))
+
+(defn canonical-receipt-ts?
+  "True when `ts` is an RFC 3339 string naming a real instant: a valid
+  calendar date, clock time, and UTC offset."
+  [ts]
+  (some? (receipt-ts-instant ts)))
 
 (defn receipt-envelope? [receipt]
   (and (map? receipt)
@@ -409,20 +468,25 @@
        (filter #(< 1 (count %)))
        (mapv #(mapv :path %))))
 
+(defn receipt-ts-sort-key
+  "Total sort key for a record timestamp. Real instants compare by UTC time;
+  anything else (historical free-form values, or no :ts) sorts first by its
+  canonical printed form. Every key has the same shape and element types."
+  [ts]
+  (if-let [[seconds fraction] (receipt-ts-instant ts)]
+    [1 seconds fraction ""]
+    [0 0 "" (pr-str (canonical-form ts))]))
+
 (defn merge-ledger-records
-  "Merges segment records into one ledger ordered by `:ts`, then record ID.
-  Map records must carry a canonical instant `:ts` before they may sort."
+  "Merges segment records into one ledger ordered by the instant named by
+  `:ts`, then record ID. Historical records whose `:ts` predates the
+  canonical-instant rule still merge; new records are held to that rule by
+  `receipt-envelope?` once the extension check identifies them."
   [id-fn segments]
-  (let [rows (for [{:segment/keys [records]} segments
-                   record records]
-               (do
-                 (when (and (map? record)
-                            (contains? record :ts)
-                            (not (canonical-receipt-ts? (:ts record))))
-                   (throw (ex-info "Receipt River record :ts is not a canonical instant"
-                                   {:ts (:ts record)})))
-                 {:record record :id (id-fn record)}))]
-    (->> rows
-         (sort-by (fn [{:keys [record id]}]
-                    [(str (when (map? record) (:ts record))) id]))
-         (mapv :record))))
+  (->> (for [{:segment/keys [records]} segments
+             record records]
+         {:record record :id (id-fn record)})
+       (sort-by (fn [{:keys [record id]}]
+                  (conj (receipt-ts-sort-key (when (map? record) (:ts record)))
+                        id)))
+       (mapv :record)))
