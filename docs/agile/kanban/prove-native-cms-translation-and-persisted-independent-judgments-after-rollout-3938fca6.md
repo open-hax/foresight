@@ -26,8 +26,10 @@ separate content/publication proof; a prior isolated bundle is not this result.
 ## Entry evidence and dependency
 
 Depends on completed EC1.03 (`03a057e4-3098-4fe7-a5b8-95168f45ca96`)
-only. Before that deployment is admitted, the existing application owner separately
-supplies exact-source translation law/integration/E2E qualification. Those staged
+only. Before that deployment is admitted, the separately estimated
+[predeployment translation qualification](qualify-selected-native-knoxx-translation-and-sme-decisions-before-deployment-5eae82d9.md)
+(`60e85d88-3960-449f-8376-10e75eae82d9`) supplies accepted exact-source translation
+law/integration/E2E qualification and owning storage/readback evidence. Those staged
 vertical receipts are Services admission inputs, not outputs that must await this
 postdeployment card. Completing this card is not a prerequisite for deployment.
 

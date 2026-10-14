@@ -1,12 +1,13 @@
 ---
 category: "kanban"
+labels: "deployment, knoxx, embeddings, cms, source-preservation"
+dependency: ["ada3bc51-1528-4ae3-aa46-095d217142ea"]
 type: "epic"
-uuid: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
+write-id: "1791972198458-0.fetkko7sbgiutloe3p3"
+points: "59"
 title: "EPIC: Preserve retained sources while admitting the native Knoxx CMS embedding cutover"
 priority: "P1"
-points: "39"
-labels: "deployment, knoxx, embeddings, cms, source-preservation"
-write-id: "1791961843782-0.2e33pc18waxcn6mr7xp"
+uuid: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
 ---
 
 # EPIC: Preserve retained sources while admitting the native Knoxx CMS embedding cutover
@@ -76,12 +77,20 @@ repository change or copied chunking/graph algorithm is included.
 | [Qualify the SDK staging/adoption boundary](select-and-qualify-the-genuine-sdk-staging-and-source-adoption-boundary-5a7ee0c0.md) | `6cc1e1ca-c8dd-4cf9-9cd1-24675a7ee0c0` | 5 | None; parallel to runtime |
 | [Materialize and verify retained sources](knoxx-retained-source-embedding-migration-11bc1411.md) | `11bc1411-154d-4db7-8c27-51506ab30508` | 8 | Runtime and SDK prerequisite |
 | [Qualify durable scoped publication receipts](knoxx-durable-scoped-publication-receipts-b450407b.md) | `afacb7b7-263a-48e6-a744-a9f4b450407b` | 5 | None; parallel to runtime and SDK |
-| [Consume proof and deploy the native CMS](services-controller-bound-embedding-admission-03a057e4.md) | `03a057e4-3098-4fe7-a5b8-95168f45ca96` | 8 | Migration and durable receipt qualification |
+| [Qualify native translation before deployment](qualify-selected-native-knoxx-translation-and-sme-decisions-before-deployment-5eae82d9.md) | `60e85d88-3960-449f-8376-10e75eae82d9` | 5 | Runtime; owning translation stores |
+| [Qualify native content/publication before deployment](qualify-selected-native-knoxx-content-and-publication-decisions-before-deployment-88af373d.md) | `a7402e9d-6538-4e38-9919-93fe88af373d` | 5 | Runtime, durable receipts and translation qualification |
+| [Qualify the database-enforced writer fence](qualify-a-database-enforced-cutover-writer-fence-before-deployment-2129f2bf.md) | `c002072c-2415-46a8-b533-6b502129f2bf` | 5 | None; fixture mechanism qualification |
+| [Qualify the isolated trusted production gate](qualify-an-isolated-trusted-production-admission-gate-before-deployment-3056b8dc.md) | `dee4ddbf-c00b-4f4a-9f28-a6183056b8dc` | 5 | Migration, both product qualifications and fence |
+| [Consume proof and deploy the native CMS](services-controller-bound-embedding-admission-03a057e4.md) | `03a057e4-3098-4fe7-a5b8-95168f45ca96` | 8 | Migration, durable receipts, both product qualifications, fence and gate |
 | [Prove live translation and its judgments](prove-native-cms-translation-and-persisted-independent-judgments-after-rollout-3938fca6.md) | `6890a3d4-f3d7-48f1-bd92-f6223938fca6` | 3 | Completed Services deployment |
 | [Prove content and public Spanish publication](prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md) | `4a9f303e-63d1-48d7-a396-b93c986502d1` | 5 | Deployment, translation proof and qualified durable receipts |
 
-The 39 points are the sum of the seven authored children, not an additional
-implementation estimate. Estimates remain subject to planning review. Rheos
+The 59 points are the sum of the eleven authored children, not an additional
+implementation estimate. Four additional five-point prerequisites were created
+through canonical Rheos, with actual incoming metadata and task-created events.
+They qualify the two native product paths, the database fence and the isolated
+trusted gate before Services consumes their accepted interfaces. None depends
+backward on Services or a later live proof. Estimates remain subject to planning review. Rheos
 created the three additional children and recorded the migration dependency
 vector and aggregate estimate through its actual canonical operations. The new
 durability child is an initial first-class Markdown card; no creation event or
@@ -100,10 +109,14 @@ Keep the two existing product-proof owners distinct:
 [translation generation and SME review](prove-translation-generation-and-sme-review-independently.md)
 (`abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf`) and
 [content generation, layout, publication and review](prove-content-generation-layout-publishing-and-review-independently.md)
-(`3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e`). Their separate current-source vertical
-qualification is an application admission input. Their broader entry conditions
+(`3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e`). The bounded predeployment qualification cards `60e85d88-3960-449f-8376-10e75eae82d9` and
+`a7402e9d-6538-4e38-9919-93fe88af373d` provide this deployment's separate accepted current-source
+vertical admission evidence. The broad extraction owners are not those entry
+prerequisites, and a cleaned-up fixture decision cannot authorize a new fixture. Their broader entry conditions
 and state remain unchanged. The two bounded rollout-proof children above own
 this deployment's independent final live receipts and epic closure join.
+The independent fence and trusted gate prerequisites supply accepted capabilities
+and hosted fixture evidence; EC1.03 records their actual production use.
 EC1.03 owns orchestration and deployment
 receipts and completes on its qualified/admitted deployment receipt, health and
 source readback without awaiting the later live proof cards. Those cards then
@@ -111,6 +124,19 @@ complete the live product/browser join required for epic closure. EC1.03 does no
 own implementation or closure of those two product workstreams. The bounded
 children retain separate tests and receipts; one combined journey cannot close
 both independent slices or expand the eight-point Services story.
+
+The separately estimated [Rheos metadata operations prerequisite](apply-adopted-rheos-metadata-repair-to-foresight-cutover-cards-217142ea.md)
+(`ada3bc51-1528-4ae3-aa46-095d217142ea`, three points, standalone outside the eleven children)
+consumes accepted owner source `775ab0be-90fe-469f-89e3-e6ac07b031ce` and its
+qualified recovery prerequisite. It then persists the four missing initial
+statuses and explicitly omits the SDK and independent-fence empty dependency
+headers through canonical operations. This local prerequisite precedes cutover
+planning closure; external owner source remains an explicit body reference,
+not an unsupported cross-board executable edge. Those real operational effects,
+readiness and the remaining initial-status finding are still pending. No fake
+lifecycle round trip, manually edited established metadata or creation history
+stands in for them. The 59-point child aggregate excludes this standalone
+three-point operational prerequisite.
 
 Pinned SDK07085 has no standalone exported graph-input transform. Its complete
 owner `ingestEvents` operation appends base rows and emits additional derived

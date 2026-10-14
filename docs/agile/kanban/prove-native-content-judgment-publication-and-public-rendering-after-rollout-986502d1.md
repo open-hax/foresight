@@ -36,8 +36,13 @@ judgment or one combined journey cannot substitute for them.
 
 Depends on completed EC1.03 (`03a057e4-3098-4fe7-a5b8-95168f45ca96`)
 and the translation rollout proof (`6890a3d4-f3d7-48f1-bd92-f6223938fca6`).
-Before production admission, the existing application owner separately supplies
-current-source content/product law/integration/E2E qualification. Those staged
+Before production admission, the separately estimated
+[predeployment content/publication qualification](qualify-selected-native-knoxx-content-and-publication-decisions-before-deployment-88af373d.md)
+(`a7402e9d-6538-4e38-9919-93fe88af373d`) supplies accepted current-source
+content/product law/integration/E2E qualification. It consumes qualified translation
+source/interface evidence, obtains a fresh fixture translation/current SME decision,
+and independently qualifies product/publication decisions; teardown receipts are
+not reused as current authorization. Those staged
 receipts do not depend on this postdeployment card. Services produces a deployment
 receipt before either rollout-proof card completes; the epic closes afterward.
 

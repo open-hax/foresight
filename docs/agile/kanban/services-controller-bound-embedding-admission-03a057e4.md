@@ -2,10 +2,10 @@
 category: "kanban"
 labels: "services, deployment, embeddings, cms, 8sp"
 story_id: "EC1.03"
-dependency: ["11bc1411-154d-4db7-8c27-51506ab30508", "afacb7b7-263a-48e6-a744-a9f4b450407b"]
+dependency: ["11bc1411-154d-4db7-8c27-51506ab30508", "afacb7b7-263a-48e6-a744-a9f4b450407b", "60e85d88-3960-449f-8376-10e75eae82d9", "a7402e9d-6538-4e38-9919-93fe88af373d", "c002072c-2415-46a8-b533-6b502129f2bf", "dee4ddbf-c00b-4f4a-9f28-a6183056b8dc"]
 parent: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
 type: "story"
-write-id: "1791961842945-0.ob0mhdo3fgb89sng0lm"
+write-id: "1791971867208-0.pzk37r3d841g6e2l39"
 points: "8"
 title: "EC1.03: Consume controller-bound embedding proof and deploy the native Knoxx CMS"
 priority: "P1"
@@ -35,6 +35,17 @@ adapter or wait for the later live Spanish receipt. Missing sink, changed storag
 or retention configuration, source/build mismatch or unqualified persistence
 refuses admission. Rheos records this parallel prerequisite alongside migration.
 
+Consume four other separately estimated prerequisites before production admission:
+[predeployment translation qualification](qualify-selected-native-knoxx-translation-and-sme-decisions-before-deployment-5eae82d9.md) (`60e85d88-3960-449f-8376-10e75eae82d9`),
+[predeployment content/publication qualification](qualify-selected-native-knoxx-content-and-publication-decisions-before-deployment-88af373d.md) (`a7402e9d-6538-4e38-9919-93fe88af373d`),
+[database-enforced writer-fence capability](qualify-a-database-enforced-cutover-writer-fence-before-deployment-2129f2bf.md) (`c002072c-2415-46a8-b533-6b502129f2bf`), and
+[isolated trusted production-admission gate](qualify-an-isolated-trusted-production-admission-gate-before-deployment-3056b8dc.md) (`dee4ddbf-c00b-4f4a-9f28-a6183056b8dc`).
+Their accepted source/interface and genuine hosted fixture qualification are inputs;
+the actual production window, authorization, cutover and activation receipts are
+outputs of this Services story. None of those prerequisites waits on EC1.03 or
+either later live proof. Services consumes their qualified interfaces instead of
+hiding independently deliverable implementation in its eight-point estimate.
+
 [The adopted a303 gate](https://github.com/open-hax/services/blob/a3034ccddbc43aecf34a70df444ebe0e5314f83c/.github/workflows/deploy-digitalocean.yml#L336-L494)
 refuses the old gte contract before inventory, even when stopped. Its recovery
 receipt records prior target approval and is not a migration certificate. A new
@@ -50,10 +61,9 @@ database fence and closed stopped-writer scope. The gate's final check consumes
 the fresh actual cutover proof before activating the accepted native CMS candidate. This story delivers exact orchestration/admission/deploy
 receipts while preserving current publications and dependencies. EC1.03 completes
 on the qualified/admitted deployment, its actual deployment receipt, health and
-source readback; completion does not await either later live proof card. The separate
-Knoxx translation and content-product owners deliver their independent vertical
-qualification and final live receipts; the epic joins them to public Website
-rendering. Services does not implement those product operations or claim their
+source readback; completion does not await either later live proof card. The named predeployment translation and content qualification cards deliver
+independent vertical admission evidence. Their separate rollout-proof cards
+deliver final live receipts; the epic joins those to public Website rendering. Services does not implement those product operations or claim their
 closure from one combined Spanish journey.
 
 ## Scope
@@ -80,9 +90,10 @@ verification, activation and admission readback. It does not by itself exclude
 external Mongo writers. In addition to enumerated actual stopped process/
 container identities, require a reviewed Mongo-enforced write fence that leaves
 only the bounded migration/admission authority able to mutate the affected stores
-throughout inventory, apply, final verification and activation. The implementation
-must name and exercise its actual database-side mechanism and recovery/release
-procedure; credentials and policy decisions stay local. Test an unregistered client
+throughout inventory, apply, final verification and activation. The accepted [c002072c-2415-46a8-b533-6b502129f2bf fence capability](qualify-a-database-enforced-cutover-writer-fence-before-deployment-2129f2bf.md) names and
+qualifies its database-side mechanism and acquisition/loss/recovery/release
+contract independently. This consumer invokes that exact interface and records
+the actual production window; credentials and policy decisions stay local. Test an unregistered client
 with otherwise valid write authority and require its write to be rejected during
 the entire window. A host lock, declared process list, repeated equal counts or
 an unenforced generation label is insufficient. Unknown closure, fence loss,
@@ -102,8 +113,15 @@ overlay `gemma4:e2b` with thinking off through direct host Ollama; portable
 existing Proxx source/settings, pinned in-process SDK, Website image/config and
 publication content root unless a separately reviewed change is necessary.
 
-A separately named trusted production-admission phase is required after the
-applicable staging and promotion steps and before production mutation/activation.
+Consume the independently qualified [trusted production-admission gate](qualify-an-isolated-trusted-production-admission-gate-before-deployment-3056b8dc.md)
+(`dee4ddbf-c00b-4f4a-9f28-a6183056b8dc`) after applicable staging/promotion and before production
+mutation or activation. Its actual trusted App or independently pinned protected-base
+workflow, gate code/configuration and required App identity remain outside candidate
+control. Candidate jobs/builds/hooks have read-only tokens and no deployment/signing
+secrets, including same-repository candidates. Privileged gate execution never
+checks out, imports, builds or executes candidate code or hooks; bounded artifacts
+are checked by the accepted verifier. Unknown custody or candidate control refuses
+both pre-mutation authorization and final activation.
 Its reviewed implementation names the actual gate and authorized approver,
 consumes the immutable staging/promotion receipt and intended production/database
 identity, and binds exact C/S/G plus PR head/base/tested merge candidate, image and
@@ -117,12 +135,13 @@ admission: fresh production cutover proof is generated by the authorized operati
 and checked before activation, not demanded before the operation can run.
 A host cutover success is not that decision.
 
-The application proof owners are
-[translation generation and SME review](prove-translation-generation-and-sme-review-independently.md)
-(`abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf`) and
-[content generation, layout, publication and review](prove-content-generation-layout-publishing-and-review-independently.md)
-(`3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e`). Before production admission, consume
-separate exact-source vertical qualification from both owners. After deployment,
+The precise predeployment qualification owners are
+[translation and SME decisions](qualify-selected-native-knoxx-translation-and-sme-decisions-before-deployment-5eae82d9.md) (`60e85d88-3960-449f-8376-10e75eae82d9`) and
+[content/publication decisions](qualify-selected-native-knoxx-content-and-publication-decisions-before-deployment-88af373d.md) (`a7402e9d-6538-4e38-9919-93fe88af373d`). Before production admission, consume their separate
+accepted exact-source vertical qualification. The broader extraction owners
+`abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and
+`3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` retain their post-inflight entry conditions,
+scope and state; their incomplete broad work is not relabeled as this qualification. After deployment,
 the bounded [translation rollout proof](prove-native-cms-translation-and-persisted-independent-judgments-after-rollout-3938fca6.md)
 (`6890a3d4-f3d7-48f1-bd92-f6223938fca6`) and
 [content/publication rollout proof](prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md)
@@ -168,7 +187,12 @@ old compatibility CMS completion, or unreviewed OpenPlanner changes.
   Proxx configuration and SDK settings survive with fresh health/public checks.
   Recovery uses the snapshot/journal and owning compatibility proof; environment
   rollback alone cannot be credited after partial migration.
-- [ ] A distinct trusted production-admission result names its authorized
+- [ ] The independently qualified trusted App or pinned-base gate has actual
+  hosted isolation evidence outside candidate control; candidate jobs/hooks have
+  read-only tokens and no deployment/signing secrets, and privileged gate execution
+  runs no candidate code. Unknown custody or candidate-controlled verifier,
+  configuration or App identity refuses both authorization and activation.
+  A distinct trusted production-admission result names its authorized
   approver/gate and binds the exact staging/promotion receipt, purpose, source,
   PR head/base/tested candidate and current run/attempt before rollout. Missing,
   stale, foreign or wrong-authority inputs refuse; proposed infrastructure is
@@ -211,5 +235,6 @@ Activation may populate new projections after an empty-source observation,
 invalidating a reused proof. Writer closure can be broader than Compose. Host
 model availability, provider dimension support, SDK binary drift, Atlas pending
 index definitions and application/controller stack admission must all be
-observed. Eight points covers this bounded consumer and qualified deployment receipt;
+observed. Eight points covers consuming the separately qualified product, fence and gate
+interfaces and producing the qualified deployment receipt;
 new platform or cross-repository changes require separate reviewed scope.
