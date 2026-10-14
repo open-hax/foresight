@@ -875,6 +875,55 @@
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
 
+(deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
+  ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
+  ;; durable forged segment. The held `.ημ` descriptor then names the moved
+  ;; directory, so the canonical replacement gets its own marker, and that
+  ;; marker's directory entry must be fsynced through the canonical
+  ;; replacement: a crash must not keep the forged ledger but lose the
+  ;; quarantine.
+  (with-receipt-fixture
+    (fn [{:keys [fixture directory segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            moved (path/join fixture ".ημ.moved")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            marker (path/join directory cli/receipt-quarantine-marker-name)
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            synced-parents (atom [])
+            create-marker! cli/create-quarantine-marker!]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/create-quarantine-marker!
+                      (fn [parent marker-path]
+                        ;; Record which directory this marker's entry is
+                        ;; fsynced through (nil means none).
+                        (swap! synced-parents conj
+                               (when parent
+                                 (let [stats (fs/fstatSync (:fd parent))]
+                                   [(.-dev stats) (.-ino stats)])))
+                        (create-marker! parent marker-path))]
+          (is (thrown?
+               js/Error
+               (run-semantic-gate-with!
+                file segment
+                (fn []
+                  (fs/renameSync directory moved)
+                  (fs/mkdirSync directory)
+                  (fs/mkdirSync segments)
+                  (fs/writeFileSync file "" "utf8")
+                  (fs/writeFileSync forged (str forged-line "\n") "utf8"))))))
+        (is (fs/existsSync marker)
+            "the canonical replacement `.ημ` carries a quarantine marker")
+        (let [canonical (fs/statSync directory)]
+          (is (some #{[(.-dev canonical) (.-ino canonical)]} @synced-parents)
+              "the canonical marker is fsynced through the canonical directory"))
+        (with-redefs [cli/receipt-file file]
+          (is (thrown-with-msg?
+               js/Error #"quarantine"
+               (cli/read-working-receipt-segments! nil))
+              "the replacement ledger is quarantined"))))))
+
 (deftest working-ledger-rejects-executable-files
   ;; The immutable reader accepts only 100644 blobs, so an executable working
   ;; file would yield evidence that cannot be verified once committed.
@@ -899,6 +948,8 @@
                (cli/read-working-receipt-segments! nil))))))))
 
 (deftest selected-gates-reject-mode-changes-while-the-gate-runs
+  ;; Each scenario gets a fresh fixture: a mode change during the gate fails
+  ;; revalidation and quarantines (retains the append lock).
   (with-receipt-fixture
     (fn [{:keys [segments file]}]
       (let [existing (path/join segments "2026-10-12T000000000Z-a.edn")
@@ -931,6 +982,9 @@
               file segment #(fs/chmodSync segment 0700))))
         (is (= [(path/basename existing)] (segment-names segments))
             "the executable reservation was not written or kept")
+        ;; Own reserved basename is skipped in working-ledger validation, so the
+        ;; executable-bit refusal on the target does not set quarantined?; cleanup
+        ;; removes the unwritten reservation and releases the lock.
         (is (= [] (lock-files segments)))))))
 
 (deftest selected-gates-quarantine-a-renamed-reservation
@@ -1397,7 +1451,9 @@
 
 (deftest aborted-or-overtaken-gates-leave-no-segment
   ;; A gate that only throws leaves no empty reserved segment and no lock.
-  ;; Editing the ledger (or forging a segment then throwing) quarantines.
+  ;; Editing the ledger, or forging a segment and then throwing or returning,
+  ;; quarantines (retains a lock) so a forged segment cannot become an
+  ;; ordinary extension after cleanup.
   (doseq [[run-gate message expect-lock?]
           [[(fn [_] (throw (js/Error. "gate exploded"))) #"gate exploded" false]
            [(fn [{:keys [file]}]
@@ -1410,7 +1466,16 @@
                                 "utf8")
               (fs/writeFileSync (path/join segments "notes.txt") "x\n" "utf8")
               (throw (js/Error. "gate exploded after forge")))
-            #"gate exploded after forge" true]]]
+            #"gate exploded after forge" true]
+           [(fn [{:keys [segments]}]
+              ;; Schema-valid forged segment plus a stray file: revalidation
+              ;; throws, and quarantine must retain the lock.
+              (fs/writeFileSync (path/join segments "2026-10-13T000001000Z-forged.edn")
+                                "{:kind :observation :origin :test :owner \"t\" :ts \"2026-10-13T00:00:01.000Z\" :dod \"d\" :pi \"p\" :host \"h\" :manifest {} :refs []}\n"
+                                "utf8")
+              (fs/writeFileSync (path/join segments "notes.txt") "x\n" "utf8")
+              passed-result)
+            #".*" true]]]
     (with-receipt-fixture
       (fn [{:keys [segments file] :as context}]
         (fs/writeFileSync file "" "utf8")
@@ -1552,6 +1617,26 @@
                             {"2026-08-29T172240Z-b.edn"
                              (str (str/replace (pr-str second) "{" "{ ")
                                   "\n")})})))))))
+
+(deftest receipt-verification-rejects-committed-operational-files
+  ;; `.ημ/.receipt-river.quarantine` and the writer lock are working-tree
+  ;; operational state. A reviewed revision that carries either one would
+  ;; close every checkout's working ledger, so immutable review rejects it.
+  (doseq [operational [".receipt-river.quarantine"
+                       ".receipt-river.writer.lock"]]
+    (with-historical-ledger-fixture true
+      (fn [{:keys [directory base base-text commit!]}]
+        (let [marker (path/join directory operational)]
+          (fs/writeFileSync marker "quarantine pid=1\n")
+          (let [head (commit! base-text)]
+            (is (thrown-with-msg?
+                 js/Error #"operational file must not be committed"
+                 (cli/verify-receipts! {:base base :at head}))
+                operational)
+            (is (thrown-with-msg?
+                 js/Error #"operational file must not be committed"
+                 (cli/read-immutable-merged-ledger! head))
+                operational)))))))
 
 (deftest receipt-verification-rejects-historical-rewrite-and-truncation
   (with-historical-ledger-fixture true

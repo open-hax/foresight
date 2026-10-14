@@ -228,9 +228,29 @@
    :segment/bytes bytes
    :segment/records records})
 
+(def receipt-operational-file-names
+  "Working-tree operational state beside the ledger. Each one closes the
+  working ledger to writers, so a reviewed revision must never carry it."
+  [receipt-quarantine-marker-name receipt-writer-lock-name])
+
+(defn require-no-committed-operational-files! [revision]
+  (let [ledger-directory (.dirname (.-posix path) law/receipt-ledger-path)]
+    (doseq [name receipt-operational-file-names]
+      (let [repository-path (.join (.-posix path) ledger-directory name)
+            entries (remove str/blank?
+                            (str/split (git-capture! ["ls-tree" "-z" revision
+                                                      "--" repository-path])
+                                       #"\u0000"))]
+        (when (seq entries)
+          (throw (js/Error.
+                  (str "Receipt River operational file must not be committed: "
+                       repository-path " at " revision))))))))
+
 (defn read-immutable-receipt-segments!
-  "Returns repository-path -> bytes for every segment blob at `revision`."
+  "Returns repository-path -> bytes for every segment blob at `revision`.
+  The reviewed tree must not carry working-tree operational files."
   [revision]
+  (require-no-committed-operational-files! revision)
   (let [directory (str law/receipt-segment-directory "/")
         own (vec (remove str/blank?
                          (str/split (git-capture! ["ls-tree" "-z" revision "--"
@@ -1061,9 +1081,30 @@
     (create-quarantine-marker!
      ancestor (path/join (:proc-path ancestor) receipt-quarantine-marker-name))
     (when-not intact?
+      ;; The held descriptor no longer names the canonical `.ημ`, so its
+      ;; directory fsync does not make the canonical marker's entry durable.
+      ;; Open the canonical replacement and fsync it after creating the
+      ;; marker; a crash then cannot keep a synced forged ledger but lose
+      ;; the quarantine.
       (try
-        (create-quarantine-marker!
-         nil (path/join (:directory ancestor) receipt-quarantine-marker-name))
+        (if-let [canonical (try
+                             (open-parent-directory!
+                              (:directory ancestor)
+                              "Receipt River canonical ledger directory")
+                             (catch :default _open-error nil))]
+          (try
+            (create-quarantine-marker!
+             canonical (path/join (:proc-path canonical)
+                                  receipt-quarantine-marker-name))
+            (finally
+              (try
+                (fs/closeSync (:fd canonical))
+                (catch :default _close-error nil))))
+          ;; The canonical path is not a plain directory that can be held;
+          ;; still try to leave a marker there for adjudication.
+          (create-quarantine-marker!
+           nil (path/join (:directory ancestor)
+                          receipt-quarantine-marker-name)))
         (catch :default _error nil))
       (append-error!
        (str "the Receipt River ledger directory was replaced while the gate "
