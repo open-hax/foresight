@@ -105,6 +105,32 @@
                      "2026-10-14T06:12:17+00:00"]]
     (is (false? (evidence/utc-receipt-timestamp? timestamp)))))
 
+(deftest canonical-observations-require-an-admitted-producer-version
+  (let [receipt {:event/id "a6d845a8-94da-4d83-b407-a73ee7b48aaf"
+                 :event/type :receipt-river/receipt-recorded
+                 :event/recorded-at "2026-10-14T06:12:17.427Z"
+                 :event/schema {:id :eta-mu.receipt-river/receipt-recorded
+                                :version 1}
+                 :event/producer {:package/name "@eta-mu/receipt-river"
+                                  :package/version "0.1.0"}
+                 :event/subject {:repo "open-hax/foresight"}
+                 :event/payload {:ts "2026-10-14T06:12:17.427Z"
+                                 :kind :observation
+                                 :repo "open-hax/foresight"
+                                 :origin "Canonical receipt consumer regression"
+                                 :owner "test"
+                                 :dod "Preserve immutable historical receipt bytes"
+                                 :pi "eta-mu"
+                                 :host "test"
+                                 :manifest "source-manifest.json sha256:retained"
+                                 :refs "retained source and test references"}}
+        unknown-version (assoc-in receipt [:event/producer :package/version]
+                                  "999.0.0")
+        legacy (receipt-for (recorded-result :repo/unit :passed revision-a))]
+    (is (evidence/canonical-observation-receipt? receipt))
+    (is (false? (evidence/canonical-observation-receipt? unknown-version)))
+    (is (evidence/receipt-record? legacy))))
+
 (deftest appended-event-identity-law-reserves-history-without-rewriting-it
   (let [event-a {:event/id "a" :event/payload {:note "original"}}
         changed-a (assoc-in event-a [:event/payload :note] "different")

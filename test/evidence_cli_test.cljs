@@ -925,6 +925,7 @@
                      (assoc event :event/producer [])
                      (assoc-in event [:event/producer :package/name] "other")
                      (assoc-in event [:event/producer :package/version] 1)
+                     (assoc-in event [:event/producer :package/version] "999.0.0")
                      (assoc event :event/subject "open-hax/foresight")
                      (assoc event :event/payload [])
                      (assoc-in event [:event/payload :ts] "2026-99-99T00:00:00Z")
@@ -943,6 +944,34 @@
              js/Error #"invalid receipt envelopes"
              (cli/require-valid-receipt-records!
               [(assoc-in event [:event/payload key] value)])))))))
+
+(deftest unadmitted-producer-versions-refuse-suffix-and-secure-append
+  (doseq [terminal-newline? [true false]]
+    (with-historical-ledger-fixture terminal-newline?
+      (fn [{:keys [base base-text file directory commit!]}]
+        (let [event (assoc-in (canonical-river-observation)
+                              [:event/producer :package/version] "999.0.0")
+              text (str base-text (when-not terminal-newline? "\n")
+                        (pr-str event) "\n")]
+          ;; The unsupported record is a new working-tree suffix, not trusted
+          ;; history, when the evidence writer checks admission before append.
+          (fs/writeFileSync file text "utf8")
+          (is (thrown-with-msg?
+               js/Error #"invalid receipt envelopes"
+               (cli/append-evidence-receipt! passed-result)))
+          (is (.equals (js/Buffer.from text "utf8")
+                       (fs/readFileSync file)))
+          (is (not (fs/existsSync
+                    (path/join directory ".receipts.edn.append.lock"))))
+          ;; Restore the exact neighbor after a RED writer may have appended,
+          ;; then independently exercise immutable base-relative admission.
+          (let [head (commit! text)]
+            (is (thrown-with-msg?
+                 js/Error #"invalid receipt envelopes"
+                 (cli/verify-receipts! {:base base :at head})))
+            (is (.equals (js/Buffer.from base-text "utf8")
+                         (:ledger/bytes
+                          (cli/read-immutable-receipt-ledger! base))))))))))
 
 (deftest canonical-envelope-cannot-smuggle-legacy-evidence-or-a-fallback
   (let [event (canonical-river-observation)
