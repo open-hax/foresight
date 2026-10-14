@@ -836,6 +836,65 @@
         (is (= [] (segment-names segments)))
         (is (= [] (lock-files segments)))))))
 
+(deftest selected-gates-quarantine-a-hard-linked-reservation
+  ;; Unlinking the reserved path is not proof either: a hard link made by gate
+  ;; code keeps the held inode alive under another well-named segment.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file]
+        (let [{:keys [segment renamed]}
+              (run-gate-against-reserved-segment!
+               segments
+               (fn [{:keys [segment renamed]}]
+                 (fs/linkSync segment renamed)))]
+          (is (not (fs/existsSync segment)))
+          (is (= [(str "." (path/basename segment) ".append.lock")]
+                 (lock-files segments))
+              "the lock is retained because the held inode still has a link")
+          ;; A detached gate process later writes through the surviving link.
+          (fs/writeFileSync renamed "{:kind :observation}\n" "utf8")
+          (is (thrown-with-msg?
+               js/Error #"retained append lock quarantines"
+               (cli/read-working-receipt-segments! nil))))))))
+
+(deftest writer-lock-release-failures-are-reported
+  ;; A replaced writer lock would block every later writer; the command that
+  ;; left it behind must fail instead of reporting success.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (let [writer-lock (path/join segments cli/receipt-writer-lock-name)
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")]
+        (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (fs/unlinkSync writer-lock)
+                        (fs/writeFileSync writer-lock "pid=0\n" "utf8")
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"writer lock could not be released"
+               (cli/run-selected-gates!
+                {:catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}
+                test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (= 1 (count (segment-records segments)))
+              "the verified receipt itself was written")
+          (is (= "pid=0\n" (fs/readFileSync writer-lock "utf8"))
+              "the replaced lock is left for adjudication")
+          (is (= [] (lock-files segments))))))))
+
 (deftest concurrent-writers-are-told-apart-from-quarantine
   ;; Same-checkout writers serialize on one ledger-wide writer lock, so a
   ;; second writer is refused as "active", never as a quarantine verdict, and

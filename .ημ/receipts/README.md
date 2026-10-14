@@ -2,8 +2,8 @@
 
 Each file here is one immutable segment of the Receipt River ledger. Name new
 files `<UTC timestamp>-<id>.edn`, for example
-`2026-10-13T164500123Z-3f9a1c2b7d4e.edn`, and put one EDN receipt per line,
-ending with a newline. Never edit or delete a committed segment.
+`2026-10-13T164500123Z-3f9a1c2b7d4e.edn`. Each file holds exactly one EDN
+receipt on one line, ending with a newline. Never edit or delete a committed segment.
 
 `../receipts.edn` is the frozen legacy first segment. Do not append to it.
 

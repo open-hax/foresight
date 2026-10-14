@@ -116,8 +116,9 @@ gitlink in its tree. It rechecks the root boundary after all reads.
 
 The Receipt River ledger is segmented. `.ημ/receipts.edn` is the legacy,
 frozen first segment; every new receipt is its own immutable file under
-`.ημ/receipts/` (`<UTC timestamp>-<random id>.edn`, one record per line). The
-ledger is the merge of all segments, ordered by `:ts` and then by the SHA-256
+`.ημ/receipts/` (`<UTC timestamp>-<random id>.edn`, exactly one
+newline-terminated record). The ledger is the merge of all segments, ordered
+by the UTC instant named by `:ts` and then by the SHA-256
 of the record's EDN, so parallel branches add disjoint files instead of
 editing the same lines, and a diverged fork and org merge without conflicts.
 The runner writes each complete result as a new segment. Schema-v2 receipts
@@ -128,10 +129,11 @@ relative to the reviewed base.
 
 The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
 no-follow parent directory descriptor, rejects symbolic or multiply linked
-ledger files, and takes an exclusive sibling lock for the segment it writes.
-Each semantic writer reserves its own new segment with `O_EXCL`, so writers
-always land on disjoint files. While a reservation is open, its lock and empty
-segment make any concurrent semantic writer fail closed instead of waiting; a
+ledger files, and serializes semantic writers in one checkout on
+`.ημ/receipts/.receipt-river.writer.lock` for the whole reserve, gate and
+write sequence. A concurrent writer fails closed instead of waiting. A writer
+lock left by a crashed process must be removed by hand. Each writer reserves
+its own new segment with `O_EXCL` and a sibling lock for that segment; a
 reservation that ends before writing removes its empty segment. A retained
 lock (see below) quarantines the whole ledger. The rest of the working ledger
 is revalidated against `HEAD` immediately before the receipt is written. A

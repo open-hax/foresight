@@ -1173,12 +1173,28 @@
 
 (defn release-writer-lock!
   "Releases the ledger-wide writer lock. A quarantine is carried by the
-  retained per-segment lock, so the writer lock never outlives its writer
-  unless its own identity check fails, which leaves it for adjudication."
+  retained per-segment lock, so the writer lock never outlives its writer.
+  If release fails (the lock was replaced, or its unlink or directory fsync
+  failed) every later writer would be blocked, so the failure is reported."
   [parent writer-lock]
   (try
     (release-append-lock! parent writer-lock)
-    (catch :default _error nil)))
+    (catch :default error
+      (append-error!
+       (str "the Receipt River writer lock could not be released and must be "
+            "adjudicated by hand: " (.-message error))))))
+
+(defn release-writer-lock-after-error!
+  "Releases the writer lock on a failed reservation, then rethrows `error`,
+  naming a release failure too rather than hiding either one."
+  [parent writer-lock error]
+  (when writer-lock
+    (try
+      (release-writer-lock! parent writer-lock)
+      (catch :default release-error
+        (throw (js/Error. (str (.-message error) "; "
+                               (.-message release-error)))))))
+  (throw error))
 
 (defn open-append-reservation!
   ([file]
@@ -1195,9 +1211,8 @@
              lock (try
                     (acquire-append-lock! parent basename)
                     (catch :default error
-                      (when writer-lock
-                        (release-writer-lock! parent writer-lock))
-                      (throw error)))
+                      (release-writer-lock-after-error!
+                       parent writer-lock error)))
              retain-lock? (atom false)]
          (try
            (require-append-lock-identity! lock)
@@ -1244,14 +1259,14 @@
                    (reset! retain-lock? true))
                  (close-after-open-error! (:fd target) error))))
            (catch :default error
-             (try
-               (if @retain-lock?
-                 (fs/closeSync (:fd lock))
-                 (release-append-lock! parent lock))
-               (finally
-                 (when writer-lock
-                   (release-writer-lock! parent writer-lock))))
-             (throw error))))
+             (release-writer-lock-after-error!
+              parent writer-lock
+              (try
+                (if @retain-lock?
+                  (fs/closeSync (:fd lock))
+                  (release-append-lock! parent lock))
+                error
+                (catch :default cleanup-error cleanup-error))))))
        (catch :default error
          (fs/closeSync (:fd parent))
          (throw error))))))
@@ -1271,9 +1286,9 @@
   "Removes a reserved segment that was never written, while the lock is still
   held, so an aborted gate cannot leave an empty file in the ledger."
   [{:keys [parent target target-path] :as reservation}]
-  ;; Returns true only when no reserved segment is left behind: it was still
-  ;; this writer's empty file and was removed, or its path is gone and the held
-  ;; descriptor proves the inode was unlinked. Anything else (content injected
+  ;; Returns true only when no reserved segment is left behind: the held
+  ;; descriptor proves the inode has no remaining link, either after removing
+  ;; this writer's still-empty file or because its path was already gone. Anything else (content injected
   ;; into it, a renamed or replaced file, a failed unlink) is false, and the
   ;; caller retains the lock as a quarantine marker. Path absence alone is not
   ;; proof: the inode may live on under another well-named segment.
@@ -1285,7 +1300,9 @@
              (zero? (safe-file-size! stats)))
         (do (fs/unlinkSync target-path)
             (fs/fsyncSync (:fd parent))
-            true)
+            ;; A hard link made while the gate ran would keep the inode (and
+            ;; anything later written through it) alive under another name.
+            (held-inode-unlinked? reservation))
         :else false))
     (catch :default _error false)))
 
