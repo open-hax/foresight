@@ -987,6 +987,41 @@
         (is (next-writer-refused? segments file)
             "the altered receipt cannot become ordinary evidence")))))
 
+(deftest selected-gates-quarantine-ledger-changes-after-writer-lock-release
+  ;; Gate-spawned work can wait for `.receipt-river.writer.lock` to be
+  ;; unlinked and then add or rewrite a segment. The post-release path must
+  ;; revalidate ledger contents and reserved bytes, not only directory
+  ;; identity, and establish a quarantine marker on any mismatch.
+  (doseq [[label mutate!]
+          [["added segment"
+            (fn [segments _segment forged-line]
+              (fs/writeFileSync
+               (path/join segments "2026-10-13T000001000Z-forged.edn")
+               (str forged-line "\n") "utf8"))]
+           ["rewritten reserved segment"
+            (fn [_segments segment forged-line]
+              (fs/writeFileSync segment (str forged-line "\n") "utf8"))]]]
+    (with-receipt-fixture
+      (fn [{:keys [segments file]}]
+        (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+              forged-line (cli/encode-edn-line!
+                           (cli/validated-evidence-receipt!
+                            (assoc passed-result :result/command ["forged"])))
+              release-writer-lock! cli/release-writer-lock!]
+          (fs/writeFileSync file "" "utf8")
+          (with-redefs [cli/release-writer-lock!
+                        (fn [parent writer-lock]
+                          (release-writer-lock! parent writer-lock)
+                          (mutate! segments segment forged-line))]
+            (is (thrown-with-msg?
+                 js/Error #"changed after writer-lock release"
+                 (run-semantic-gate-with! file segment (fn [])))
+                label))
+          (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+              (str label ": writer lock recreated as the quarantine marker"))
+          (is (next-writer-refused? segments file)
+              (str label ": forged content cannot become ordinary evidence")))))))
+
 (deftest lock-acquisition-failures-remove-the-new-lock
   ;; A lock this process created with O_EXCL is removed again when marker
   ;; setup fails before any gate ran, so later writers are not blocked by a
