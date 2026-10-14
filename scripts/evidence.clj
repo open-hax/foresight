@@ -186,6 +186,56 @@
               (str "Receipt River numbers must round-trip exactly; "
                    lexeme " does not"))))))
 
+(defn git-blobs-batch!
+  "Returns object-id -> Buffer for `object-ids` from one `git cat-file
+  --batch` process. Each answer must be the requested blob, in order, with
+  exactly its declared size and terminator."
+  [object-ids]
+  (if (empty? object-ids)
+    {}
+    (let [result (child-process/spawnSync
+                  "git"
+                  #js ["--no-replace-objects" "cat-file" "--batch"]
+                  #js {:cwd root
+                       :shell false
+                       :input (str (str/join "\n" object-ids) "\n")
+                       :maxBuffer (* 1024 1024 1024)})
+          error (.-error result)
+          status (.-status result)]
+      (when error
+        (throw (js/Error. (str "Git invocation failed: " (.-message error)))))
+      (when-not (= 0 status)
+        (throw (js/Error.
+                (str "Git invocation failed with exit " status ": "
+                     (str/trim (if-let [stderr (.-stderr result)]
+                                 (.toString stderr "utf8")
+                                 ""))))))
+      (loop [out (.-stdout result)
+             acc {}
+             ids (seq object-ids)]
+        (if-not ids
+          (do (when (pos? (.-length out))
+                (throw (js/Error. "git cat-file --batch returned extra output")))
+              acc)
+          (let [newline-at (.indexOf out 10)
+                _ (when (neg? newline-at)
+                    (throw (js/Error. "git cat-file --batch output is truncated")))
+                header (.toString (.subarray out 0 newline-at) "utf8")
+                [_ oid kind size] (re-matches #"([0-9a-f]+) ([a-z]+) ([0-9]+)" header)
+                size (when size (js/parseInt size 10))
+                start (inc newline-at)
+                end (when size (+ start size))]
+            (when-not (and (= oid (first ids)) (= "blob" kind)
+                           (js/Number.isSafeInteger size)
+                           (< end (.-length out))
+                           (= 10 (aget out end)))
+              (throw (js/Error.
+                      (str "Unexpected git cat-file --batch entry for "
+                           (first ids) ": " header))))
+            (recur (.subarray out (inc end))
+                   (assoc acc oid (js/Buffer.from (.subarray out start end)))
+                   (next ids))))))))
+
 (defn read-receipt-records! [contents]
   (->> (str/split-lines contents)
        (remove str/blank?)
@@ -336,7 +386,8 @@
 
 (defn read-immutable-receipt-segments!
   "Returns repository-path -> bytes for every segment blob at `revision`.
-  The reviewed tree must not carry working-tree operational files."
+  The reviewed tree must not carry working-tree operational files. Blob IDs
+  come from ls-tree and all segment bytes are read in one git process."
   [revision]
   (require-no-committed-operational-files! revision)
   (let [directory (str law/receipt-segment-directory "/")
@@ -351,34 +402,41 @@
                     (str law/receipt-segment-directory
                          " must be a Git tree (directory) at " revision))))
         output (git-capture! ["ls-tree" "-z" revision "--" directory])
-        entries (remove str/blank? (str/split output #"\u0000"))]
-    (reduce
-     (fn [segments entry]
-       (let [[_ mode kind _ repository-path]
-             (re-matches
-              #"([0-7]{6}) ([a-z]+) ([0-9a-f]{64}|[0-9a-f]{40})\t(.+)"
-              entry)
-             parent (when repository-path (.dirname (.-posix path) repository-path))
-             basename (when repository-path
-                        (.basename (.-posix path) repository-path))]
-         (when-not (= law/receipt-segment-directory parent)
-           (throw (js/Error.
-                   (str "Unexpected Receipt River segment entry: " entry))))
-         (when-not (and (= "100644" mode) (= "blob" kind))
-           (throw (js/Error.
-                   (str "Receipt River segment must be a non-executable regular Git blob: "
-                        repository-path))))
-         (cond
-           (= receipt-segment-readme basename) segments
-           (receipt-segment-name? basename)
-           (assoc segments repository-path
-                  (git-buffer! ["show" (str revision ":" repository-path)]))
-           :else
-           (throw (js/Error.
-                   (str "Receipt River segment name must match "
-                        "<UTC timestamp>-<id>.edn: " repository-path))))))
-     (with-meta (sorted-map) {:segment/directory? (boolean (seq own))})
-     entries)))
+        entries (remove str/blank? (str/split output #"\u0000"))
+        object-ids
+        (reduce
+         (fn [segments entry]
+           (let [[_ mode kind object-id repository-path]
+                 (re-matches
+                  #"([0-7]{6}) ([a-z]+) ([0-9a-f]{64}|[0-9a-f]{40})\t(.+)"
+                  entry)
+                 parent (when repository-path (.dirname (.-posix path) repository-path))
+                 basename (when repository-path
+                            (.basename (.-posix path) repository-path))]
+             (when-not (= law/receipt-segment-directory parent)
+               (throw (js/Error.
+                       (str "Unexpected Receipt River segment entry: " entry))))
+             (when-not (and (= "100644" mode) (= "blob" kind))
+               (throw (js/Error.
+                       (str "Receipt River segment must be a non-executable regular Git blob: "
+                            repository-path))))
+             (cond
+               (= receipt-segment-readme basename) segments
+               (receipt-segment-name? basename)
+               (assoc segments repository-path object-id)
+               :else
+               (throw (js/Error.
+                       (str "Receipt River segment name must match "
+                            "<UTC timestamp>-<id>.edn: " repository-path))))))
+         (sorted-map)
+         entries)
+        blobs (git-blobs-batch! (vec (distinct (vals object-ids))))]
+    (with-meta
+      (into (sorted-map)
+            (map (fn [[repository-path object-id]]
+                   [repository-path (get blobs object-id)]))
+            object-ids)
+      {:segment/directory? (boolean (seq own))})))
 
 (defn merged-receipt-records!
   "Merges every segment into one ledger ordered by timestamp, then record ID.
