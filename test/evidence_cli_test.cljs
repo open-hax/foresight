@@ -1234,6 +1234,21 @@
               {:base with-newline
                :at (commit! (subs base-text 0 (dec (count base-text))))}))))
       (commit! base-text)
+      ;; Moving a legacy line into a segment with a different serialization of
+      ;; the same EDN value is rejected: IDs match via canonical form, but the
+      ;; removed line's exact bytes must be the segment body.
+      (let [second (assoc historical :owner "second")
+            line (str (pr-str second) "\n")
+            with-two (commit! (str base-text line))
+            reserialized (str (str/replace (pr-str second) "{" "{ ") "\n")
+            moved (commit! base-text
+                           {"2026-08-29T172240Z-reserialize.edn" reserialized})]
+        (is (not= line reserialized))
+        (is (thrown-with-msg?
+             js/Error #"exact line is preserved as a segment"
+             (cli/verify-receipts!
+              {:base with-two :at moved}))))
+      (commit! base-text)
       ;; An unterminated base must still preserve terminators of retained lines.
       ;; Base "A\\nB" with head "A" and B moved into a segment deleted the
       ;; newline that ended retained record A — reject that as a rewrite.

@@ -344,6 +344,21 @@
         (= (first wanted) (first available)) (recur (rest wanted) (rest available))
         :else (recur wanted (rest available))))))
 
+(defn removed-line-slices
+  "Base line slices that a terminator-preserving subsequence match against
+  `head` does not consume. Each removed slice must reappear as an entire
+  non-legacy segment body so emptying or rewriting legacy cannot invent
+  alternate serializations."
+  [head base]
+  (loop [wanted (seq (line-slices head))
+         available (seq (line-slices base))
+         removed []]
+    (cond
+      (empty? available) removed
+      (and (seq wanted) (= (first wanted) (first available)))
+      (recur (rest wanted) (rest available) removed)
+      :else (recur wanted (rest available) (conj removed (first available))))))
+
 (defn ledger-extension-records!
   "Checks that `head-segments` extend `base-segments` as an event ledger and
   returns the new records in merged order. Rules:
@@ -387,11 +402,25 @@
                      law/receipt-segment-directory "/"))))
       (doseq [{:segment/keys [bytes legacy?]} base-segments
               :when legacy?
-              :let [head (first (filter :segment/legacy? head-segments))]]
-        (when-not (line-subsequence? (:segment/bytes head) bytes)
+              :let [head (or (first (filter :segment/legacy? head-segments))
+                             {:segment/bytes (js/Buffer.alloc 0)})
+                    head-bytes (:segment/bytes head)]]
+        (when-not (line-subsequence? head-bytes bytes)
           (throw (js/Error.
                   (str "The legacy Receipt River ledger " law/receipt-ledger-path
-                       " may only lose whole lines; it was rewritten or reordered")))))
+                       " may only lose whole lines; it was rewritten or reordered"))))
+        (let [removed (removed-line-slices head-bytes bytes)
+              segment-bodies (->> head-segments
+                                  (remove :segment/legacy?)
+                                  (map :segment/bytes)
+                                  vec)]
+          (doseq [line removed]
+            (let [line-bytes (js/Buffer.from line "utf8")]
+              (when-not (some #(.equals % line-bytes) segment-bodies)
+                (throw (js/Error.
+                        (str "The legacy Receipt River ledger "
+                             law/receipt-ledger-path
+                             " may only lose a line when that exact line is preserved as a segment"))))))))
       (filterv #(not (contains? base-ids (record-id %))) merged-head))))
 
 (defn read-immutable-catalog-bundle! [revision]
