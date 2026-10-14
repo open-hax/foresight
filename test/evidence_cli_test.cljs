@@ -1234,6 +1234,20 @@
               {:base with-newline
                :at (commit! (subs base-text 0 (dec (count base-text))))}))))
       (commit! base-text)
+      ;; An unterminated base must still preserve terminators of retained lines.
+      ;; Base "A\\nB" with head "A" and B moved into a segment deleted the
+      ;; newline that ended retained record A — reject that as a rewrite.
+      (let [second (assoc historical :owner "second")
+            unterminated (str (pr-str historical) "\n" (pr-str second))
+            with-two (commit! unterminated)
+            moved (commit! (pr-str historical)
+                           {"2026-08-29T172240Z-b.edn"
+                            (str (pr-str second) "\n")})]
+        (is (thrown-with-msg?
+             js/Error #"may only lose whole lines"
+             (cli/verify-receipts!
+              {:base with-two :at moved}))))
+      (commit! base-text)
       ;; The legacy file is frozen: appending to it is rejected.
       (let [head (commit! (str base-text (pr-str current) "\n"))]
         (is (thrown-with-msg?

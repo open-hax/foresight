@@ -309,20 +309,40 @@
             (str law/receipt-segment-directory
                  " was removed; the segment directory must remain")))))
 
+(defn line-slices
+  "Split `bytes` into complete line slices. Every newline-terminated line keeps
+  its trailing `\\n` byte; only a final unterminated remnant (if any) has none.
+  Comparing these slices rejects deleting a terminator from a retained line."
+  [bytes]
+  (if (zero? (.-length bytes))
+    []
+    (let [text (.toString bytes "utf8")
+          raw (str/split text #"\n" -1)
+          terminated? (str/ends-with? text "\n")
+          ;; A trailing empty field exists only because of a final newline; drop
+          ;; it so that terminator lives on the preceding slice instead.
+          parts (if terminated? (pop (vec raw)) (vec raw))]
+      (mapv (fn [i part]
+              (if (or terminated? (< i (dec (count parts))))
+                (str part "\n")
+                part))
+            (range (count parts))
+            parts))))
+
 (defn line-subsequence?
-  "True when every line of `head` appears, byte-identical and in order, in
-  `base`."
+  "True when every complete line slice of `head` appears, byte-identical and in
+  order, in `base`. Slices include their terminators, so stripping the newline
+  that ends a retained line is not a whole-line loss."
   [head base]
   (if (.equals head base)
     true
-    (let [lines (fn [bytes] (str/split (.toString bytes "utf8") #"\n" -1))]
-      (loop [wanted (seq (lines head))
-             available (seq (lines base))]
-        (cond
-          (empty? wanted) true
-          (empty? available) false
-          (= (first wanted) (first available)) (recur (rest wanted) (rest available))
-          :else (recur wanted (rest available)))))))
+    (loop [wanted (seq (line-slices head))
+           available (seq (line-slices base))]
+      (cond
+        (empty? wanted) true
+        (empty? available) false
+        (= (first wanted) (first available)) (recur (rest wanted) (rest available))
+        :else (recur wanted (rest available))))))
 
 (defn ledger-extension-records!
   "Checks that `head-segments` extend `base-segments` as an event ledger and
@@ -368,12 +388,7 @@
       (doseq [{:segment/keys [bytes legacy?]} base-segments
               :when legacy?
               :let [head (first (filter :segment/legacy? head-segments))]]
-        (when-not (and (line-subsequence? (:segment/bytes head) bytes)
-                       (or (.equals (:segment/bytes head) bytes)
-                           (zero? (.-length bytes))
-                           (not= 10 (.at bytes -1))
-                           (zero? (.-length (:segment/bytes head)))
-                           (= 10 (.at (:segment/bytes head) -1))))
+        (when-not (line-subsequence? (:segment/bytes head) bytes)
           (throw (js/Error.
                   (str "The legacy Receipt River ledger " law/receipt-ledger-path
                        " may only lose whole lines; it was rewritten or reordered")))))
