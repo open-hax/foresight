@@ -883,6 +883,29 @@
     (is (= {:receipt/total 2 :receipt/evidence 0 :receipt/legacy-evidence 0}
            (cli/require-valid-receipt-records! appended)))))
 
+(deftest canonical-observations-pass-immutable-suffix-and-secure-append-boundaries
+  (doseq [terminal-newline? [true false]]
+    (with-historical-ledger-fixture terminal-newline?
+      (fn [{:keys [base base-text file commit!]}]
+        (let [event (canonical-river-observation)
+              text (str base-text (when-not terminal-newline? "\n")
+                        (pr-str event) "\n")]
+          ;; Leave the canonical event uncommitted, so secure append must
+          ;; validate it as a new suffix rather than trust it as history.
+          (fs/writeFileSync file text "utf8")
+          (let [receipt (cli/append-evidence-receipt! passed-result)
+                bytes (fs/readFileSync file)
+                head (commit! (.toString bytes "utf8"))
+                output (with-out-str
+                         (is (zero? (cli/verify-receipts!
+                                     {:base base :at head}))))]
+            (is (str/includes? output ":appended-receipts 2"))
+            (is (str/includes? output ":appended-evidence-receipts 1"))
+            (is (cli/buffer-prefix? (js/Buffer.from text "utf8") bytes))
+            (is (= [receipt]
+                   (cli/appended-receipt-records!
+                    (js/Buffer.from text "utf8") bytes)))))))))
+
 (deftest canonical-river-events-reject-malformed-contract-boundaries
   (let [event (canonical-river-observation)]
     (doseq [key (keys event)]
@@ -907,7 +930,10 @@
                      (assoc-in event [:event/payload :ts] "2026-99-99T00:00:00Z")
                      (assoc-in event [:event/payload :kind] "observation")
                      (assoc-in event [:event/payload :kind] :unknown)
+                     (assoc-in event [:event/payload :kind] :test-run)
                      (assoc-in event [:event/payload :manifest] 42)
+                     (assoc-in event [:event/payload :manifest] ["source"])
+                     (assoc-in event [:event/payload :refs] ["source"])
                      (assoc-in event [:event/payload :refs] [42])]]
       (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
                            (cli/require-valid-receipt-records! [invalid]))))

@@ -89,6 +89,22 @@
     (is (false? (evidence/receipt-envelope? (dissoc receipt :origin))))
     (is (false? (evidence/receipt-envelope? 42)))))
 
+(deftest canonical-observation-timestamps-validate-without-coercion
+  (doseq [timestamp ["2024-02-29T00:00:00Z"
+                     "2000-02-29T23:59:59.123456789Z"
+                     "2026-10-14T06:12:17.427Z"]]
+    (is (evidence/utc-receipt-timestamp? timestamp)))
+  (doseq [timestamp [nil 42 #inst "2026-10-14T06:12:17.427Z"
+                     "1900-02-29T00:00:00Z"
+                     "2026-02-29T00:00:00Z"
+                     "2026-04-31T00:00:00Z"
+                     "2026-00-01T00:00:00Z"
+                     "2026-13-01T00:00:00Z"
+                     "2026-10-14T00:60:00Z"
+                     "2026-10-14T00:00:60Z"
+                     "2026-10-14T06:12:17+00:00"]]
+    (is (false? (evidence/utc-receipt-timestamp? timestamp)))))
+
 (deftest validates-gate-catalogs
   (is (evidence/valid-catalog? valid-catalog))
   (is (= :gate/command

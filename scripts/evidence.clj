@@ -224,7 +224,7 @@
    catalog))
 
 (defn require-valid-receipt-records! [records]
-  (let [invalid-envelopes (remove law/receipt-envelope? records)
+  (let [invalid-envelopes (remove law/receipt-record? records)
         evidence-records (filter #(= law/evidence-receipt-origin (:origin %))
                                  records)
         invalid-evidence (remove law/evidence-receipt? evidence-records)]
