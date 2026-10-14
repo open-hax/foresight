@@ -1371,6 +1371,41 @@
       "the writer refuses a receipt its readers would reject")
   (is (not= (cli/record-id {:n 1}) (cli/record-id {:n 2}))))
 
+(deftest receipt-tagged-instants-must-round-trip-exactly
+  ;; cljs.reader truncates #inst fractions to milliseconds, so .0001Z and
+  ;; .0002Z would share one record ID. Reject tagged instants that cannot
+  ;; round-trip before deriving IDs.
+  (doseq [text ["{:ts #inst \"2026-01-01T00:00:00.0001Z\"}\n"
+                "{:ts #inst \"2026-01-01T00:00:00.12345Z\"}\n"]]
+    (is (thrown-with-msg?
+         js/Error #"must round-trip exactly"
+         (cli/read-receipt-records! text))
+        (pr-str text)))
+  (is (= [{:ts (cli/read-single-edn!
+                "#inst \"2026-01-01T00:00:00.001Z\"" "inst")}]
+         (cli/read-receipt-records!
+          "{:ts #inst \"2026-01-01T00:00:00.001Z\"}\n"))
+      "millisecond precision remains accepted"))
+
+(deftest encode-edn-line-counts-the-segment-newline
+  ;; Immutable verification measures the complete segment blob (record +
+  ;; newline). The writer must use the same bound so a receipt it emits can
+  ;; still pass verify-receipts after commit.
+  (let [target cli/max-receipt-line-bytes
+        prefix "{:pad \""
+        suffix "\"}"
+        pad (- target (count prefix) (count suffix))
+        record {:pad (apply str (repeat pad "x"))}
+        line (pr-str record)]
+    (is (= target (.-length line)))
+    (is (thrown-with-msg?
+         js/Error #"exceeds"
+         (cli/encode-edn-line! record))
+        "exact max-length text leaves no room for the mandatory newline")
+    (let [ok {:pad (apply str (repeat (dec pad) "x"))}]
+      (is (string? (cli/encode-edn-line! ok))
+          "one byte under the bound still encodes"))))
+
 (deftest receipt-segments-hold-exactly-one-physical-line
   ;; The segment contract is one physical EDN line; blank lines before or
   ;; after the record are not discarded silently. Bare carriage returns are
