@@ -538,3 +538,12 @@
   spore: none
   receipt-refs: 6d7ed9d2164e177ad10b5dc1075b241cf791c911f0d963a50fb6090e6f399cf5
   note: Actual hosted receipt_history failure exposed a producer/consumer shape mismatch. Preserve original ledger bytes, admit the supported observation envelope explicitly, reject mixed fallback/evidence claims and retain legacy attestations. Causal RED is committed separately; exact hosted-equivalent local suites, full lint, real receipt history and pinned migration-pack suite pass with independent bounded review. CMS planning now binds tenant/project/current exact-output accepted translation and durable receipt readback. A named five-point Knoxx durability prerequisite feeds Services and content through actual Rheos edges; no later-proof dependency cycle. Remaining default-incoming metadata and empty-dependency engine gaps stay explicit. Native current-head reviews, shared complete-support adoption, implementation, qualification and actual CMS Spanish publication remain required. No production mutation or spore.
+- ts: 2026-10-14T07:48:51.796223822Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Close canonical receipt identity collisions exposed by fresh native review
+  p-efficiency: 0.64
+  p-friction: 0.63
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 3a2f2c8e034ed72ddcd7f4e8ed90168d8c12ea6a0a0fdf68af662685dd835baa
+  note: Per-record shape admission does not establish identity uniqueness across immutable history and a new suffix. Native Codex found the missing boundary on the actual published f09 source. Commit causal replay/conflict tests before the pure aggregate fix, reserve exact historical IDs without changing historical bytes and wire all verification/secure append/promotion callers to authoritative base records. Exact hosted suites and full lint pass; preserve runtime-specific assertion counts rather than conflating direct and hosted captures. Current review run is genuinely live; fresh source will need fresh qualification and native settlement. Source migration, durable adapter, CMS rollout and Spanish public proof remain unfinished; no production mutation or spore.
