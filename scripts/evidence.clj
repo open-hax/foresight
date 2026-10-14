@@ -1681,6 +1681,15 @@
         (when @directory-replaced?
           (establish-ledger-quarantine! ancestor))
         (finally
+          ;; A gate that threw never reached append-reserved-edn-line!, so
+          ;; compare the ledger with its pre-gate snapshot here as well; a
+          ;; segment it added keeps the lock as the quarantine marker.
+          (when (and semantic-basename
+                     quarantined?
+                     (not @write-started?)
+                     (not @quarantined?)
+                     (not (working-ledger-unchanged-after-write? reservation)))
+            (reset! quarantined? true))
           ;; Adjudicate the unwritten reservation while its descriptor is still
           ;; held, so an unlinked inode can be told apart from a renamed one.
           (reset! unwritten-removed?
@@ -1828,6 +1837,10 @@
     :target-path target-path})
   (require-reserved-parent-identity! reservation)
   (require-append-lock-identity! lock)
+  ;; Gate code may unlink only the ledger-wide writer lock; never write a
+  ;; receipt without it.
+  (when-let [writer-lock (:writer-lock reservation)]
+    (require-append-lock-identity! writer-lock))
   (require-held-ledger-unchanged! target held-ledger-bytes)
   ;; A gate can run for a long time; the rest of the ledger must still extend
   ;; HEAD at the moment this receipt is written.
@@ -1882,6 +1895,8 @@
       :target-path target-path})
     (require-reserved-parent-identity! reservation)
     (require-append-lock-identity! lock)
+    (when-let [writer-lock (:writer-lock reservation)]
+      (require-append-lock-identity! writer-lock))
     (let [final-stats (require-target-identity! target)]
       (when semantic-basename
         (require-non-executable-stats! final-stats "Receipt River segment")))

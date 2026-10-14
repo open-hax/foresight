@@ -701,8 +701,10 @@
 (deftest selected-gates-retain-writer-lock-when-segment-lock-vanishes
   ;; Candidate gate code can unlink the per-segment lock and add its own
   ;; well-named segment. Pre-write lock-identity then aborts before ledger
-  ;; revalidation; cleanup must keep the writer lock so the forged segment
-  ;; cannot be accepted as an ordinary extension on the next run.
+  ;; revalidation; cleanup compares the unwritten reservation's ledger with
+  ;; the pre-gate snapshot, so the vanished segment lock is recreated as a
+  ;; durable quarantine marker and the forged segment cannot be accepted as an
+  ;; ordinary extension on the next run.
   (with-receipt-fixture
     (fn [{:keys [segments file]}]
       (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
@@ -722,13 +724,11 @@
                 (fs/writeFileSync forged (str forged-line "\n") "utf8")))))
         (is (= [(path/basename forged)] (segment-names segments))
             "no receipt was written for the gate")
-        (is (= [] (lock-files segments))
-            "the vanished segment lock leaves no per-segment quarantine")
-        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
-            "the writer lock is retained as the quarantine marker")
+        (is (= [(path/basename append-lock)] (lock-files segments))
+            "the vanished segment lock is recreated as the quarantine marker")
         (with-redefs [cli/receipt-file file]
           (is (thrown-with-msg?
-               js/Error #"active Receipt River reservation|writer lock"
+               js/Error #"quarantines the Receipt River ledger"
                (cli/open-append-reservation!
                 (path/join segments "2026-10-13T000002000Z-next.edn") true))))))))
 
@@ -1022,6 +1022,62 @@
           (finally
             (fs/closeSync (:fd parent))))))))
 
+(deftest selected-gates-quarantine-when-only-the-writer-lock-vanishes
+  ;; Gate code can unlink the ledger-wide writer lock and leave the segment
+  ;; lock intact, before or after the receipt write. The writer lock is
+  ;; verified around the write, and a failed writer-lock release recreates a
+  ;; quarantine marker at its path, so the run's receipt can never become an
+  ;; ordinary extension.
+  (doseq [[label gate! hook]
+          [["unlinked by the gate"
+            (fn [segments]
+              (fs/unlinkSync (path/join segments cli/receipt-writer-lock-name)))
+            (fn [_segments _phase] nil)]
+           ["unlinked after the write"
+            (fn [_segments] nil)
+            (fn [segments phase]
+              (when (= :after-write phase)
+                (fs/unlinkSync
+                 (path/join segments cli/receipt-writer-lock-name))))]]]
+    (with-receipt-fixture
+      (fn [{:keys [segments file]}]
+        (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")]
+          (fs/writeFileSync file "" "utf8")
+          (binding [cli/*secure-append-phase-hook*
+                    (fn [phase _] (hook segments phase))]
+            (is (thrown? js/Error
+                         (run-semantic-gate-with!
+                          file segment #(gate! segments)))
+                label))
+          (is (next-writer-refused? segments file)
+              (str label ": the run cannot leave ordinary evidence")))))))
+
+
+(deftest selected-gates-quarantine-a-segment-added-before-a-gate-throws
+  ;; A gate can add a schema-valid segment and then throw, so
+  ;; append-reserved-edn-line! never runs. Cleanup of the unwritten
+  ;; reservation compares the ledger with the pre-gate snapshot too.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))]
+        (fs/writeFileSync file "" "utf8")
+        (is (thrown-with-msg?
+             js/Error #"gate exploded"
+             (run-semantic-gate-with!
+              file segment
+              (fn []
+                (fs/writeFileSync forged (str forged-line "\n") "utf8")
+                (throw (js/Error. "gate exploded"))))))
+        (is (not (fs/existsSync segment))
+            "the unwritten reservation is still removed")
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
+
 (deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
   ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
   ;; durable forged segment. The held `.ημ` descriptor then names the moved
@@ -1205,8 +1261,8 @@
               (fn []
                 (fs/unlinkSync writer-lock)
                 (fs/writeFileSync writer-lock "pid=0\n" "utf8")))))
-        (is (= 1 (count (segment-records segments)))
-            "the verified receipt itself was written")
+        (is (= [] (segment-records segments))
+            "no receipt is written once the writer lock was replaced")
         (is (= "pid=0\n" (fs/readFileSync writer-lock "utf8"))
             "the replaced lock is left for adjudication")
         (is (= [] (lock-files segments)))))))
