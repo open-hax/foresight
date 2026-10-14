@@ -54,12 +54,25 @@ publication trigger fields. Provide a separate owning storage lookup for an
 independent reader/process: `/api/publications/receipts` remains the journal route
 and cannot qualify a custom sink's durable records.
 
+Reuse pinned Clio `388c462b3f1a5b0c51bc93486ab954a7f89cedbe` event/schema
+contracts and `append-admission` for immutable event identity, exact replay and
+conflict refusal. Correlation and effect idempotency keys are provenance, not
+unique observation identity; retain distinct lawful emitted events even when
+their correlations or receipt bodies match. Qualify the selected existing owning
+writer's Node/CLJS callability, declared dependencies, native locking,
+acknowledged synced append and independent readback in the actual runtime and
+storage before relying on `append-event!` or `fsync`. Pinned source alone does
+not qualify that capability. Do not introduce a second ledger or admission
+protocol.
+
 Closure-record retention is append-only, without TTL or bounded eviction. A failed
 or unacknowledged write cannot report durable success. Publication may already
 have occurred when persistence fails: preserve the actual error and observed or
 unknown effect state. Do not imply that failed storage undoes publication or
-manufacture a replacement success. Recovery uses the existing owning correlation
-contract and preserves any committed record.
+manufacture a replacement success. Persistence retries retain the original event
+identity, immutable receipt payload and correlation, reuse Clio's exact-event
+replay admission, and preserve any committed record without repeating the
+publication effect.
 
 ## Non-goals
 
@@ -81,14 +94,22 @@ to run negative or retention controls.
   operation correlation agree. A response or journal GET alone cannot pass.
 - [ ] Restart the fixture publisher, connect a fresh reader and recover the original
   receipt unchanged. Emit more than 200 additional lawful fixture receipts and
-  recover the same original through durable lookup. Closure records have no TTL
-  or bounded eviction; restart/rollover neither rewrite nor discard them.
+  recover that same original through independent durable lookup. With no
+  superseding publication outcome, both registered CMS GETs recover its concrete
+  observed revision from the owning durable evidence instead of reverting to
+  `observed: null`; the public manifest and artifact remain unchanged. Closure
+  records have no TTL or bounded eviction; restart/rollover neither rewrite nor
+  discard them.
 - [ ] Missing configuration, unavailable storage, failed/unacknowledged commit,
   absent readback, changed payload/digest or foreign scope cannot yield successful
   durability evidence. Equal-looking cross-project/organization revisions cannot
-  supply foreign evidence. A duplicate correlation with conflicting immutable
-  payload refuses without replacing the original. Any retry preserves the owning
-  correlation and committed record without fabricating another publication effect.
+  supply foreign evidence. Clio admits an exact replay of the same immutable event
+  without another append and refuses the same event ID with different immutable
+  data without replacing the original; its stream-slot conflict law remains
+  enforced. Distinct lawful materialized, noop and other emitted events may share
+  correlation or an effect idempotency key. Persistence retry preserves the
+  committed event and its provenance without fabricating another publication
+  effect.
 - [ ] Accepted Knoxx source/build and genuine hosted qualification bind head,
   base/tested candidate where required, compiled adapter/runtime hashes, image
   digest, workflow/run/attempt and actual fixture/database/configuration identity.
