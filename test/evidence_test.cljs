@@ -95,8 +95,16 @@
               "2026-01-01T00:00:00+02:00"
               "2024-02-29T23:59:59.5-23:59"
               "2000-02-29T00:00:00Z"
-              "0050-01-01T00:00:00Z"]]
+              "0050-01-01T00:00:00Z"
+              ;; RFC 3339 permits lowercase t/z time markers.
+              "2026-10-13t16:45:00z"
+              "2026-10-13t16:45:00.5z"
+              "2026-01-01t00:00:00+02:00"]]
     (is (evidence/canonical-receipt-ts? ts) ts))
+  (let [receipt (receipt-for (recorded-result :repo/unit :passed revision-a))]
+    (is (evidence/receipt-envelope?
+         (assoc receipt :ts "2026-10-13t16:45:00z"))
+        "lowercase RFC 3339 markers remain a valid envelope timestamp"))
   (doseq [ts ["2026-02-30T12:00:00Z" "2025-02-29T00:00:00Z"
               "1900-02-29T00:00:00Z" "2026-04-31T00:00:00Z"
               "2026-13-01T00:00:00Z" "2026-00-01T00:00:00Z"

@@ -834,6 +834,47 @@
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
 
+(deftest selected-gates-quarantine-directory-replaced-during-lock-cleanup
+  ;; After a verified write, cleanup releases the per-segment lock. Background
+  ;; work that watches for that unlock can rename the segment directory away
+  ;; and install a fresh one before the writer lock is released. The one-time
+  ;; identity snapshot at the start of close then misses the replacement, so
+  ;; cleanup would follow the held descriptor into the renamed directory,
+  ;; release the writer lock there, and leave the canonical ledger without
+  ;; `.ημ/.receipt-river.quarantine`. Recheck after segment-lock cleanup.
+  (with-receipt-fixture
+    (fn [{:keys [directory segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            moved (path/join directory "receipts.moved")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            replaced-during-unlock? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        ;; release-writer-lock! also calls release-append-lock!;
+                        ;; rename only on the first (per-segment) unlock.
+                        (when (compare-and-set! replaced-during-unlock? false true)
+                          (fs/renameSync segments moved)
+                          (fs/mkdirSync segments)
+                          (fs/writeFileSync forged (str forged-line "\n") "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"replaced during lock cleanup|quarantine"
+               (run-semantic-gate-with! file segment (fn [])))))
+        (is (fs/existsSync (path/join directory cli/receipt-quarantine-marker-name))
+            "the quarantine marker lives in the stable `.ημ` ancestor")
+        (with-redefs [cli/receipt-file file]
+          (is (thrown-with-msg?
+               js/Error #"quarantine"
+               (cli/read-working-receipt-segments! nil))
+              "the replacement directory is quarantined"))
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
 (deftest working-ledger-rejects-executable-files
   ;; The immutable reader accepts only 100644 blobs, so an executable working
   ;; file would yield evidence that cannot be verified once committed.
