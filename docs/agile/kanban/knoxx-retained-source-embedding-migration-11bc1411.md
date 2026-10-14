@@ -1,15 +1,16 @@
 ---
 category: "kanban"
-type: "story"
+labels: "knoxx, embeddings, migration, source-preservation, 8sp"
 story_id: "EC1.02"
-uuid: "11bc1411-154d-4db7-8c27-51506ab30508"
-epic: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
+dependency: ["d3277a3c-6e30-42b1-8151-16c041612a6a", "6cc1e1ca-c8dd-4cf9-9cd1-24675a7ee0c0"]
 parent: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
-dependency: ["d3277a3c-6e30-42b1-8151-16c041612a6a"]
+type: "story"
+write-id: "1791956986109-0.quufze9r0rkkfnbfwnh"
+points: "8"
 title: "EC1.02: Materialize and verify retained Knoxx sources without rewriting history"
 priority: "P1"
-points: "8"
-labels: "knoxx, embeddings, migration, source-preservation, 8sp"
+epic: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
+uuid: "11bc1411-154d-4db7-8c27-51506ab30508"
 ---
 
 # EC1.02: Materialize and verify retained Knoxx sources without rewriting history
@@ -17,13 +18,15 @@ labels: "knoxx, embeddings, migration, source-preservation, 8sp"
 ## Context
 
 Requires [EC1.01](knoxx-validated-shared-embedding-runtime-d3277a3c.md)'s exact
-validated runtime and a separately reviewed SDK-boundary design/prototype outcome.
+validated runtime and the separately reviewed
+[SDK-boundary prerequisite](select-and-qualify-the-genuine-sdk-staging-and-source-adoption-boundary-5a7ee0c0.md)
+(`6cc1e1ca-c8dd-4cf9-9cd1-24675a7ee0c0`).
 That prerequisite must select and prove the genuine owner operation, supported
 source families, isolated database identity, complete output closure, transfer/
 conflict rules and the independent append-admission phase on a recoverable
 fixture before this implementation is ready or its eight-point estimate is
-accepted. Root must author the prerequisite card and bind its actual UUID; this
-body does not invent a dependency identity or admit a route.
+accepted. Rheos recorded both actual prerequisite UUIDs in this card's dependency
+vector. Their existence does not admit an implementation route or readiness.
 
 `open-hax/knoxx` owns the implementation; Services consumes its application decision later. The [epic](epic-source-preserving-knoxx-embedding-cutover-82c55f16.md)
 binds the actual unlocked observations: 736 retained events, 312 hot-eligible

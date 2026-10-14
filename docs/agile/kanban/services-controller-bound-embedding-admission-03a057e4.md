@@ -37,7 +37,9 @@ pre-mutation authorization from exact staging/promotion qualification, then
 invokes the qualified application cutover under a held host lock, exercised
 database fence and closed stopped-writer scope. The gate's final check consumes
 the fresh actual cutover proof before activating the accepted native CMS candidate. This story delivers exact orchestration/admission/deploy
-receipts while preserving current publications and dependencies. The separate
+receipts while preserving current publications and dependencies. EC1.03 completes
+on the qualified/admitted deployment, its actual deployment receipt, health and
+source readback; completion does not await either later live proof card. The separate
 Knoxx translation and content-product owners deliver their independent vertical
 qualification and final live receipts; the epic joins them to public Website
 rendering. Services does not implement those product operations or claim their
@@ -110,10 +112,13 @@ The application proof owners are
 [content generation, layout, publication and review](prove-content-generation-layout-publishing-and-review-independently.md)
 (`3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e`). Before production admission, consume
 separate exact-source vertical qualification from both owners. After deployment,
-retain their independent live receipts as epic closure inputs. Their existing
-entry conditions and Rheos state remain unchanged. Planning must bind actual
-UUID dependency edges, or author separately estimated bounded Knoxx rollout-proof
-substories if these broader successor cards cannot supply this evidence. Those
+the bounded [translation rollout proof](prove-native-cms-translation-and-persisted-independent-judgments-after-rollout-3938fca6.md)
+(`6890a3d4-f3d7-48f1-bd92-f6223938fca6`) and
+[content/publication rollout proof](prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md)
+(`4a9f303e-63d1-48d7-a396-b93c986502d1`) supply independent live receipts as epic
+closure inputs. Rheos recorded their dependencies on this completed deployment;
+this story does not await their completion. The broader owners' existing entry
+conditions and state remain unchanged. Those
 product scopes are excluded from EC1.03's eight-point implementation estimate.
 
 ## Non-goals
@@ -157,15 +162,18 @@ old compatibility CMS completion, or unreviewed OpenPlanner changes.
   PR head/base/tested candidate and current run/attempt before rollout. Missing,
   stale, foreign or wrong-authority inputs refuse; proposed infrastructure is
   never reported as activated deployment evidence.
-- [ ] Consume separate exact-source translation and content-product vertical
-  qualification for application admission. After rollout, the owning Knoxx cards
-  produce separate live revision-bound translation/SME and content/publication/
-  product-review receipts; Services records their IDs with its deployment receipt
-  for the epic's public browser join. No combined journey closes either owner or
-  adds its implementation scope to this Services story.
-- [ ] Effective provider evidence confirms e2b/thinking-off/direct-Ollama for
-  translation and drafting, and qwen/1024 for SDK ingest/search/repair. A host
-  catalog, local canary or prose setting alone cannot establish those paths.
+- [ ] Consume separate exact-source predeployment translation and content-product
+  vertical qualification as application admission inputs. Complete EC1.03 on the
+  qualified/admitted deployment and its own exact revision-bound deployment receipt,
+  health and source readback. Completion does not await later live translation/SME,
+  content/product judgment, publication or public-browser receipts. Those outputs
+  belong entirely to the rollout-proof cards and epic closure; no combined journey
+  closes either product owner or adds its implementation scope to this story.
+- [ ] Predeployment application/provider qualification and actual deployed runtime/
+  source custody bind e2b/thinking-off/direct-Ollama for translation and drafting,
+  and qwen/1024 for SDK ingest/search/repair. A host catalog, local canary or prose
+  setting alone cannot establish those paths. The subsequent production product
+  effect receipts belong to the later rollout-proof cards, not EC1.03 completion.
 
 ## Verification
 
@@ -179,10 +187,12 @@ existing gate controls.
 Then obtain original application qualification, official current-attempt
 attestations and trusted native deploy evidence. Under the host lock, retain
 fresh before/after source and index proof, actual container health and semantic
-query. The separate Knoxx proof owners then retain their individual live vertical
-receipts; the epic joins the accepted Spanish revision to the public browser.
-Record actual
-IDs, hashes, times, sources and attempt provenance; missing actions stay pending.
+query, then record EC1.03's qualified/admitted deployment receipt, health, source,
+IDs, hashes, times and attempt provenance. These are this story's completion evidence.
+After EC1.03 completes, the separate rollout-proof cards retain their actual live
+vertical/product receipts and the epic joins the approved Spanish revision to the
+public browser. Those later actions do not block EC1.03 completion and remain
+pending epic obligations until genuinely observed.
 
 ## Risks
 
@@ -190,5 +200,5 @@ Activation may populate new projections after an empty-source observation,
 invalidating a reused proof. Writer closure can be broader than Compose. Host
 model availability, provider dimension support, SDK binary drift, Atlas pending
 index definitions and application/controller stack admission must all be
-observed. Eight points covers this bounded consumer and actual rollout proof;
+observed. Eight points covers this bounded consumer and qualified deployment receipt;
 new platform or cross-repository changes require separate reviewed scope.

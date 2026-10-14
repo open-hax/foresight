@@ -4,8 +4,9 @@ type: "epic"
 uuid: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
 title: "EPIC: Preserve retained sources while admitting the native Knoxx CMS embedding cutover"
 priority: "P1"
-points: "21"
+points: "34"
 labels: "deployment, knoxx, embeddings, cms, source-preservation"
+write-id: "1791956992433-0.7wx5udvr0krkzo143zc"
 ---
 
 # EPIC: Preserve retained sources while admitting the native Knoxx CMS embedding cutover
@@ -72,14 +73,17 @@ repository change or copied chunking/graph algorithm is included.
 | Story | UUID | Points | Immediate prerequisite |
 | --- | --- | --- | --- |
 | [Validate the shared embedding runtime](knoxx-validated-shared-embedding-runtime-d3277a3c.md) | `d3277a3c-6e30-42b1-8151-16c041612a6a` | 5 | None |
-| [Materialize and verify retained sources](knoxx-retained-source-embedding-migration-11bc1411.md) | `11bc1411-154d-4db7-8c27-51506ab30508` | 8 | Runtime story |
+| [Qualify the SDK staging/adoption boundary](select-and-qualify-the-genuine-sdk-staging-and-source-adoption-boundary-5a7ee0c0.md) | `6cc1e1ca-c8dd-4cf9-9cd1-24675a7ee0c0` | 5 | None; parallel to runtime |
+| [Materialize and verify retained sources](knoxx-retained-source-embedding-migration-11bc1411.md) | `11bc1411-154d-4db7-8c27-51506ab30508` | 8 | Runtime and SDK prerequisite |
 | [Consume proof and deploy the native CMS](services-controller-bound-embedding-admission-03a057e4.md) | `03a057e4-3098-4fe7-a5b8-95168f45ca96` | 8 | Migration story |
+| [Prove live translation and its judgments](prove-native-cms-translation-and-persisted-independent-judgments-after-rollout-3938fca6.md) | `6890a3d4-f3d7-48f1-bd92-f6223938fca6` | 3 | Completed Services deployment |
+| [Prove content and public Spanish publication](prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md) | `4a9f303e-63d1-48d7-a396-b93c986502d1` | 5 | Deployment and translation proof |
 
-The 21 points are the sum of the three currently authored children, not an
-additional implementation estimate. That total is provisional: planning review
-must add and estimate a prerequisite SDK-boundary design/prototype card before
-EC1.02 is ready, then update the epic's UUID links and aggregate estimate through
-the owning authoring/Rheos surfaces. The prerequisite proves the supported
+The 34 points are the sum of the six authored children, not an additional
+implementation estimate. Estimates remain subject to planning review. Rheos
+created the three additional children and recorded the migration dependency
+vector and aggregate estimate through its actual canonical operations. The
+SDK prerequisite proves the supported
 source families, complete emitted output closure, identity-conflict and transfer
 rules, and the separate authorized append-delta decision before choosing a route.
 It supplies a qualified interface and recoverable fixture proof, not production
@@ -90,13 +94,16 @@ Keep the two existing product-proof owners distinct:
 (`abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf`) and
 [content generation, layout, publication and review](prove-content-generation-layout-publishing-and-review-independently.md)
 (`3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e`). Their separate current-source vertical
-qualification is an application admission input; their independent final live
-receipts are epic closure obligations. EC1.03 owns orchestration and deployment
-receipts, not implementation or closure of those two product workstreams. If
-those existing cards cannot carry this bounded rollout proof under their current
-entry conditions, author separately estimated Knoxx proof substories and bind
-actual UUID dependencies before planning approval; do not silently expand the
-eight-point Services story or claim one combined journey closes both slices.
+qualification is an application admission input. Their broader entry conditions
+and state remain unchanged. The two bounded rollout-proof children above own
+this deployment's independent final live receipts and epic closure join.
+EC1.03 owns orchestration and deployment
+receipts and completes on its qualified/admitted deployment receipt, health and
+source readback without awaiting the later live proof cards. Those cards then
+complete the live product/browser join required for epic closure. EC1.03 does not
+own implementation or closure of those two product workstreams. The bounded
+children retain separate tests and receipts; one combined journey cannot close
+both independent slices or expand the eight-point Services story.
 
 Pinned SDK07085 has no standalone exported graph-input transform. Its complete
 owner `ingestEvents` operation appends base rows and emits additional derived
