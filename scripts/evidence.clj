@@ -1816,19 +1816,21 @@
                        (str "the Receipt River segment directory was replaced "
                             "during lock cleanup; the ledger must be "
                             "adjudicated by hand"))))
-            ;; A verified write released its segment lock above; the writer
-            ;; lock still serializes this checkout. Compare the whole ledger
-            ;; once more so a segment added during lock cleanup keeps the
-            ;; writer lock as the quarantine marker.
+            ;; A verified write, or an unwritten (failed) reservation, released
+            ;; its segment lock above; the writer lock still serializes this
+            ;; checkout. Compare the whole ledger once more so a segment added
+            ;; during lock cleanup keeps the writer lock as the quarantine
+            ;; marker. Only a verified write has a reserved segment to check.
             (when (and writer-lock
                        semantic-basename
-                       @write-verified?
+                       (or @write-verified? (not @write-started?))
                        (not @retain-writer-lock?)
                        (not @directory-replaced?)
                        (not (and quarantined? @quarantined?))
                        (not (and (working-ledger-unchanged-after-write?
                                   reservation)
-                                 (reserved-segment-intact? reservation))))
+                                 (or (not @write-verified?)
+                                     (reserved-segment-intact? reservation)))))
               (reset! retain-writer-lock? true)
               (when-not @late-replacement-error
                 (reset! late-replacement-error
