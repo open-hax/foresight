@@ -833,6 +833,108 @@
                js/Error #"does not preserve the base bytes as a prefix"
                (cli/verify-receipts! {:base base :at head}))))))))
 
+(defn canonical-river-observation []
+  {:event/id "a6d845a8-94da-4d83-b407-a73ee7b48aaf"
+   :event/type :receipt-river/receipt-recorded
+   :event/recorded-at "2026-10-14T06:12:17.427Z"
+   :event/schema {:id :eta-mu.receipt-river/receipt-recorded :version 1}
+   :event/producer {:package/name "@eta-mu/receipt-river"
+                    :package/version "0.1.0"
+                    :command "Receipt River package API"
+                    :actor "test"}
+   :event/subject {:repo "open-hax/foresight"}
+   :event/payload {:ts "2026-10-14T06:12:17.427Z"
+                   :kind :observation
+                   :repo "open-hax/foresight"
+                   :origin "Canonical receipt consumer regression"
+                   :owner "test"
+                   :dod "Preserve immutable historical receipt bytes"
+                   :pi "eta-mu"
+                   :host "test"
+                   :manifest "source-manifest.json sha256:retained"
+                   :refs "retained source and test references"}})
+
+(deftest canonical-river-events-admit-without-changing-legacy-evidence
+  (let [event (canonical-river-observation)
+        legacy (cli/evidence-receipt passed-result
+                                     "2026-10-14T06:12:17.427Z"
+                                     "test" "nbb/node@test")]
+    (is (not (law/receipt-envelope? event)))
+    (is (not (law/receipt-envelope? (:event/payload event))))
+    (is (not (law/evidence-receipt? event)))
+    (is (not (law/receipt-attests-result? event passed-result)))
+    (is (= {:receipt/total 2 :receipt/evidence 1 :receipt/legacy-evidence 0}
+           (cli/require-valid-receipt-records! [legacy event])))
+    (doseq [value [nil 42 {} []]]
+      (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
+                           (cli/require-valid-receipt-records! [value]))))))
+
+(deftest actual-canonical-337d-events-are-admitted-without-rewrite
+  ;; Exact lines 197–198 of 337d2eafe21b8093053a1449956ed38d326c7b04.
+  ;; A retained fixture keeps this regression runnable in a shallow CI checkout.
+  (let [bytes (fs/readFileSync
+               (path/join cli/root "test" "fixtures"
+                          "canonical-receipt-river-events.edn"))
+        appended (cli/read-receipt-records!
+                  (cli/decode-utf8! bytes "canonical regression fixture"))]
+    (is (= ["8fa78a8b-badb-4750-814a-6f7fb31b14a9"
+            "3d4cd40f-d37c-4c00-b533-f22cc3e1ff62"]
+           (mapv :event/id appended)))
+    (is (= {:receipt/total 2 :receipt/evidence 0 :receipt/legacy-evidence 0}
+           (cli/require-valid-receipt-records! appended)))))
+
+(deftest canonical-river-events-reject-malformed-contract-boundaries
+  (let [event (canonical-river-observation)]
+    (doseq [key (keys event)]
+      (is (thrown-with-msg?
+           js/Error #"invalid receipt envelopes"
+           (cli/require-valid-receipt-records! [(dissoc event key)]))))
+    (doseq [invalid [(assoc event :event/id 42)
+                     (assoc event :event/id "not-a-uuid")
+                     (assoc event :event/type :other/event)
+                     (assoc event :event/schema [])
+                     (assoc-in event [:event/schema :id] :other/schema)
+                     (assoc-in event [:event/schema :version] "1")
+                     (assoc-in event [:event/schema :version] 2)
+                     (assoc event :event/recorded-at 42)
+                     (assoc event :event/recorded-at "2026-02-30T00:00:00Z")
+                     (assoc event :event/recorded-at "2026-10-14T24:00:00Z")
+                     (assoc event :event/producer [])
+                     (assoc-in event [:event/producer :package/name] "other")
+                     (assoc-in event [:event/producer :package/version] 1)
+                     (assoc event :event/subject "open-hax/foresight")
+                     (assoc event :event/payload [])
+                     (assoc-in event [:event/payload :ts] "2026-99-99T00:00:00Z")
+                     (assoc-in event [:event/payload :kind] "observation")
+                     (assoc-in event [:event/payload :kind] :unknown)
+                     (assoc-in event [:event/payload :manifest] 42)
+                     (assoc-in event [:event/payload :refs] [42])]]
+      (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
+                           (cli/require-valid-receipt-records! [invalid]))))
+    (doseq [key [:repo :origin :owner :dod :pi :host :manifest :refs]]
+      (doseq [value [nil 42 ""]]
+        (is (thrown-with-msg?
+             js/Error #"invalid receipt envelopes"
+             (cli/require-valid-receipt-records!
+              [(assoc-in event [:event/payload key] value)])))))))
+
+(deftest canonical-envelope-cannot-smuggle-legacy-evidence-or-a-fallback
+  (let [event (canonical-river-observation)
+        legacy (cli/evidence-receipt passed-result
+                                     "2026-10-14T06:12:17.427Z"
+                                     "test" "nbb/node@test")]
+    (doseq [invalid [(merge legacy event)
+                     (assoc legacy :event/schema nil)
+                     (assoc legacy :event/type :receipt-river/receipt-recorded)
+                     (assoc-in event [:event/payload :origin]
+                               law/evidence-receipt-origin)
+                     (assoc event :event/payload legacy)
+                     (assoc event :event/payload
+                            (assoc-in legacy [:evidence/result :result/exit] 1))]]
+      (is (thrown-with-msg?
+           js/Error #"invalid receipt envelopes"
+           (cli/require-valid-receipt-records! [invalid]))))))
+
 (deftest evidence-append-preserves-history-and-validates-uncommitted-suffix
   (doseq [terminal-newline? [true false]]
     (with-historical-ledger-fixture terminal-newline?
