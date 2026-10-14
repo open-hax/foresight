@@ -240,6 +240,7 @@
   {:event/type :receipt-river/receipt-recorded
    :event/schema {:id :eta-mu.receipt-river/receipt-recorded :version 1}
    :producer/package "@eta-mu/receipt-river"
+   :producer/admitted-versions #{"0.1.0"}
    :payload/kind :observation
    :payload/string-fields [:repo :origin :owner :dod :pi :host :manifest :refs]
    :event/keys #{:event/id :event/type :event/recorded-at :event/schema
@@ -289,7 +290,8 @@
           (map? producer)
           (= (:producer/package canonical-observation-contract)
              (:package/name producer))
-          (nonblank-string? (:package/version producer))
+          (contains? (:producer/admitted-versions canonical-observation-contract)
+                     (:package/version producer))
           (map? subject)
           (nonblank-string? (:repo subject))
           (map? payload)
