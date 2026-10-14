@@ -574,3 +574,12 @@
   spore: none
   receipt-refs: 39b703b1-085e-484f-8658-5b00943d5512,67bd38c06f0ce26c3b1f30120c2b1f3255c5b61f,7d3f3c81401b7be7a3e481ef1d3435133c63da1f
   note: A declared external version-admission contract needs explicit consumer data and membership, rather than a nonblank version check. Use coherent invalid-version neighbors through pure admission, secure append and immutable suffix verification; preserve trusted history without revalidation and reserve historical event IDs independently. Commit actual RED before the smallest GREEN, keep every original assertion and retain inherited wrapper warnings. Exact final receipt verification follows provenance commit. No new spore or promotion; CMS deployment remains active.
+- ts: 2026-10-14T16:08:12.423228598Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Consume adopted anonymous latest-free OpenCode MiMo routing
+  p-efficiency: 0.82
+  p-friction: 0.44
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 48396bc7b83b90cb49b7970ccfd60749729b08f1df9b1b4371d4c63f89e202f4
+  note: Check fresh upstream merge state before retaining old adoption holds. Imported runtime defaults are explicit qualification limits. Catalog selection and an unexplained server error are separate evidence; no credentials inferred. No spore or promotion.
