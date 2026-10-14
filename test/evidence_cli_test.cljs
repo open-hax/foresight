@@ -1449,9 +1449,11 @@
 
 (deftest receipt-segments-hold-exactly-one-physical-line
   ;; The segment contract is one physical EDN line; blank lines before or
-  ;; after the record are not discarded silently.
+  ;; after the record are not discarded silently. Bare carriage returns are
+  ;; physical breaks too (encode-edn-line! already rejects them).
   (is (= [{:a 1}] (cli/read-segment-records! "s.edn" (js/Buffer.from "{:a 1}\n"))))
-  (doseq [text ["\n{:a 1}\n" "{:a 1}\n\n" "{:a 1}\n \n"]]
+  (doseq [text ["\n{:a 1}\n" "{:a 1}\n\n" "{:a 1}\n \n"
+                "{:a\r1}\n" "{:a 1}\r\n" "\r{:a 1}\n"]]
     (is (thrown-with-msg?
          js/Error #"exactly one physical line"
          (cli/read-segment-records! "s.edn" (js/Buffer.from text)))
@@ -1728,6 +1730,20 @@
             (is (= [] (filterv #(str/includes? % (str law/receipt-segment-directory "/"))
                                @shows))
                 "no per-segment git show")))))))
+
+(deftest git-blobs-batch-rejects-oversized-segment-blobs
+  ;; Writer path caps a receipt at max-receipt-line-bytes. Immutable
+  ;; cat-file --batch must apply the same bound (and an aggregate cap)
+  ;; before buffering up to 1 GiB, so a hostile revision fails closed on a
+  ;; typical CI worker instead of exhausting memory.
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base-text commit!]}]
+      (let [n (inc cli/max-receipt-line-bytes)
+            body (str (apply str (repeat (dec n) "x")) "\n")
+            head (commit! base-text {"2026-10-14T000000000Z-big.edn" body})]
+        (is (thrown-with-msg?
+             js/Error (re-pattern (str "exceeds " cli/max-receipt-line-bytes))
+             (cli/read-immutable-receipt-segments! head)))))))
 
 (deftest receipt-verification-exempts-historical-timestamps
   ;; The canonical-instant rule binds new records only; retained history with
