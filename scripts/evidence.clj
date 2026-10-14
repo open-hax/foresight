@@ -168,6 +168,13 @@
 ;; then never be a cooperating writer's receipt, so it stays quarantined.
 (def receipt-writer-lock-name ".receipt-river.writer.lock")
 
+;; The segment directory itself can be renamed away and replaced while a gate
+;; runs. Every lock in it is then reached only through the held descriptor of
+;; the renamed directory, so that quarantine is recorded here instead, in the
+;; stable `.ημ` directory that holds the legacy ledger and the segment
+;; directory. Its presence closes the working ledger until adjudicated.
+(def receipt-quarantine-marker-name ".receipt-river.quarantine")
+
 (defn receipt-segment-timestamp-valid?
   "The name's timestamp must be a real UTC calendar date and clock time, not
   only the right number of digits. The receipt timestamp law decides, so any
@@ -881,38 +888,47 @@
     (catch :default _close-error nil))
   (throw error))
 
-(defn open-parent-directory! [directory]
-  (let [initial-stats (lstat-if-present! directory "Receipt River parent directory")]
-    (when-not initial-stats
-      (append-error! "Receipt River parent directory does not exist"))
-    (require-directory-stats! initial-stats "Receipt River parent directory")
-    (let [fd (fs/openSync
-              directory
-              (bit-or (fs-constant! "O_RDONLY")
-                      (fs-constant! "O_DIRECTORY")
-                      (fs-constant! "O_NOFOLLOW")))]
-      (try
-        (let [fd-stats (fs/fstatSync fd bigint-stat-options)
-              proc-path (str "/proc/self/fd/" fd)]
-          (require-directory-stats! fd-stats "Receipt River parent descriptor")
-          (require-path-identity! directory fd-stats
-                                  "Receipt River parent directory"
-                                  require-directory-stats!)
-          (let [proc-stats (fs/statSync proc-path bigint-stat-options)]
-            (when-not (and (.isDirectory proc-stats)
-                           (same-file? proc-stats fd-stats))
-              (append-error! "/proc/self/fd did not resolve to the held parent descriptor")))
-          {:directory directory
-           :fd fd
-           :stats fd-stats
-           :proc-path proc-path})
-        (catch :default error
-          (close-after-open-error! fd error))))))
+(defn open-parent-directory!
+  ([directory]
+   (open-parent-directory! directory "Receipt River parent directory"))
+  ([directory description]
+   (let [initial-stats (lstat-if-present! directory description)]
+     (when-not initial-stats
+       (append-error! (str description " does not exist")))
+     (require-directory-stats! initial-stats description)
+     (let [fd (fs/openSync
+               directory
+               (bit-or (fs-constant! "O_RDONLY")
+                       (fs-constant! "O_DIRECTORY")
+                       (fs-constant! "O_NOFOLLOW")))]
+       (try
+         (let [fd-stats (fs/fstatSync fd bigint-stat-options)
+               proc-path (str "/proc/self/fd/" fd)]
+           (require-directory-stats! fd-stats (str description " descriptor"))
+           (require-path-identity! directory fd-stats description
+                                   require-directory-stats!)
+           (let [proc-stats (fs/statSync proc-path bigint-stat-options)]
+             (when-not (and (.isDirectory proc-stats)
+                            (same-file? proc-stats fd-stats))
+               (append-error! "/proc/self/fd did not resolve to the held parent descriptor")))
+           {:directory directory
+            :description description
+            :fd fd
+            :stats fd-stats
+            :proc-path proc-path})
+         (catch :default error
+           (close-after-open-error! fd error)))))))
 
-(defn require-parent-identity! [{:keys [directory stats]}]
+(defn require-parent-identity! [{:keys [directory stats description]}]
   (require-path-identity! directory stats
-                          "Receipt River parent directory"
+                          (or description "Receipt River parent directory")
                           require-directory-stats!))
+
+(defn parent-identity-intact? [parent]
+  (try
+    (require-parent-identity! parent)
+    true
+    (catch :default _error false)))
 
 (defn append-lock-path [{:keys [proc-path]} basename]
   (path/join proc-path (str "." basename ".append.lock")))
@@ -985,6 +1001,36 @@
     (finally
       (fs/closeSync (:fd lock)))))
 
+(defn create-quarantine-marker!
+  "Creates a quarantine marker exclusively at `marker-path`. Any entry already
+  occupying the path still refuses later writers, so it is left in place for
+  adjudication. Throws only when no marker could be established."
+  [parent marker-path]
+  (let [flags (bit-or (fs-constant! "O_WRONLY")
+                      (fs-constant! "O_CREAT")
+                      (fs-constant! "O_EXCL")
+                      (fs-constant! "O_NOFOLLOW"))
+        fd (try
+             (fs/openSync marker-path flags 384)
+             (catch :default error
+               (when-not (= "EEXIST" (.-code error))
+                 (append-error!
+                  (str "a Receipt River quarantine marker could not be "
+                       "established at " (path/basename marker-path)
+                       "; the ledger must be adjudicated by hand: "
+                       (.-message error))))))]
+    (when fd
+      (try
+        (write-all! fd (.encode (js/TextEncoder.)
+                                (str "quarantine pid=" (.-pid js/process)
+                                     "\n")))
+        (fs/fsyncSync fd)
+        (finally
+          (fs/closeSync fd))))
+    (when parent
+      (fs/fsyncSync (:fd parent)))
+    marker-path))
+
 (defn retain-quarantine-lock!
   "Keeps `lock` as a durable quarantine marker. Closing a held descriptor
   preserves nothing once its path was unlinked or replaced, so the lock's
@@ -1001,29 +1047,28 @@
       (fs/closeSync (:fd lock))
       (catch :default _close-error nil))
     (when-not verified?
-      (let [flags (bit-or (fs-constant! "O_WRONLY")
-                          (fs-constant! "O_CREAT")
-                          (fs-constant! "O_EXCL")
-                          (fs-constant! "O_NOFOLLOW"))
-            fd (try
-                 (fs/openSync (:path lock) flags 384)
-                 (catch :default error
-                   (when-not (= "EEXIST" (.-code error))
-                     (append-error!
-                      (str "a Receipt River quarantine marker could not be "
-                           "re-established at " (path/basename (:path lock))
-                           "; the ledger must be adjudicated by hand: "
-                           (.-message error))))))]
-        (when fd
-          (try
-            (write-all! fd (.encode (js/TextEncoder.)
-                                    (str "quarantine pid=" (.-pid js/process)
-                                         "\n")))
-            (fs/fsyncSync fd)
-            (finally
-              (fs/closeSync fd))))
-        (fs/fsyncSync (:fd parent))))
+      (create-quarantine-marker! parent (:path lock)))
     lock))
+
+(defn establish-ledger-quarantine!
+  "Records a quarantine in the stable `.ημ` directory `ancestor` after the
+  segment directory this reservation holds was renamed or replaced. When the
+  held `.ημ` descriptor no longer names the canonical path either, a marker
+  is also attempted at the canonical path and the failure is reported, since
+  the held one may be unreachable."
+  [ancestor]
+  (let [intact? (parent-identity-intact? ancestor)]
+    (create-quarantine-marker!
+     ancestor (path/join (:proc-path ancestor) receipt-quarantine-marker-name))
+    (when-not intact?
+      (try
+        (create-quarantine-marker!
+         nil (path/join (:directory ancestor) receipt-quarantine-marker-name))
+        (catch :default _error nil))
+      (append-error!
+       (str "the Receipt River ledger directory was replaced while the gate "
+            "ran; the ledger must be adjudicated by hand")))
+    ancestor))
 
 (defn require-safe-existing-target! [target-path]
   (when-let [stats (lstat-if-present! target-path "Receipt River file")]
@@ -1140,6 +1185,9 @@
 (defn receipt-segment-directory []
   (path/join (path/dirname receipt-file) "receipts"))
 
+(defn receipt-quarantine-marker-path []
+  (path/join (path/dirname receipt-file) receipt-quarantine-marker-name))
+
 (defn receipt-segment-file-name [iso-timestamp suffix]
   (str (str/replace iso-timestamp #"[:.]" "") "-" suffix ".edn"))
 
@@ -1191,6 +1239,11 @@
   the caller holds. Any other retained append lock quarantines the whole
   ledger."
   [own-basename]
+  (when (lstat-if-present! (receipt-quarantine-marker-path)
+                           "Receipt River quarantine marker")
+    (append-error!
+     (str "a Receipt River quarantine marker quarantines the ledger until it "
+          "is adjudicated: " receipt-quarantine-marker-name)))
   (let [legacy-bytes (read-working-regular-file!
                       receipt-file "Receipt River file")
         directory (receipt-segment-directory)
@@ -1302,7 +1355,15 @@
    (let [absolute-file (path/resolve file)
          directory (path/dirname absolute-file)
          basename (path/basename absolute-file)
-         parent (open-parent-directory! directory)]
+         parent (open-parent-directory! directory)
+         ancestor (when validate-ledger?
+                    (try
+                      (open-parent-directory!
+                       (path/dirname receipt-file)
+                       "Receipt River ledger directory")
+                      (catch :default error
+                        (fs/closeSync (:fd parent))
+                        (throw error))))]
      (try
        (let [writer-lock (when validate-ledger?
                            (acquire-receipt-writer-lock! parent))
@@ -1329,6 +1390,7 @@
                {:requested-file absolute-file
                 :directory directory
                 :parent parent
+                :ancestor ancestor
                 :lock lock
                 :writer-lock writer-lock
                 :target target
@@ -1345,6 +1407,7 @@
                   held)
                 :target-open? (atom true)
                 :quarantined? (atom false)
+                :parent-replaced? (atom false)
                 :write-started? (atom false)
                 :write-verified? (atom false)}
                (catch :default error
@@ -1366,7 +1429,11 @@
                 error
                 (catch :default cleanup-error cleanup-error))))))
        (catch :default error
-         (fs/closeSync (:fd parent))
+         (try
+           (fs/closeSync (:fd parent))
+           (finally
+             (when ancestor
+               (fs/closeSync (:fd ancestor)))))
          (throw error))))))
 
 (defn held-inode-unlinked?
@@ -1405,29 +1472,42 @@
     (catch :default _error false)))
 
 (defn close-append-reservation!
-  [{:keys [parent lock writer-lock target target-open? write-started?
-           write-verified? quarantined? semantic-basename]
+  [{:keys [parent ancestor lock writer-lock target target-open? write-started?
+           write-verified? quarantined? parent-replaced? semantic-basename]
     :as reservation}]
   (let [unwritten-removed? (atom false)
-        retain-writer-lock? (atom false)]
+        retain-writer-lock? (atom false)
+        ;; The canonical segment directory is no longer the one this
+        ;; reservation holds. Locks and cleanup below reach only the renamed
+        ;; directory, so the quarantine goes into the stable `.ημ` ancestor.
+        directory-replaced? (boolean
+                             (and ancestor
+                                  (or (and parent-replaced? @parent-replaced?)
+                                      (not (parent-identity-intact? parent)))))]
     (try
-      ;; Adjudicate the unwritten reservation while its descriptor is still
-      ;; held, so an unlinked inode can be told apart from a renamed one.
-      (reset! unwritten-removed?
-              (if (and semantic-basename (not @write-started?))
-                (remove-unwritten-segment! reservation)
-                true))
-      (when @target-open?
-        (fs/closeSync (:fd target))
-        (reset! target-open? false))
+      (try
+        (when directory-replaced?
+          (establish-ledger-quarantine! ancestor))
+        (finally
+          ;; Adjudicate the unwritten reservation while its descriptor is still
+          ;; held, so an unlinked inode can be told apart from a renamed one.
+          (reset! unwritten-removed?
+                  (if (and semantic-basename (not @write-started?))
+                    (remove-unwritten-segment! reservation)
+                    true))
+          (when @target-open?
+            (fs/closeSync (:fd target))
+            (reset! target-open? false))))
       (finally
         (try
           (if (or (and @write-started? (not @write-verified?))
                   (not @unwritten-removed?)
-                  (and quarantined? @quarantined?))
+                  (and quarantined? @quarantined?)
+                  directory-replaced?)
             ;; A short write, fsync/close failure, post-write identity change,
             ;; content injected into the reserved segment, a reservation moved
-            ;; out from under its path, or a segment added while the gate ran.
+            ;; out from under its path, a segment added while the gate ran, or
+            ;; a replaced segment directory.
             ;; Retain the lock as a durable quarantine marker so a later
             ;; writer cannot normalize the damage. A vanished lock path is
             ;; recreated, since closing its descriptor would preserve nothing.
@@ -1444,11 +1524,15 @@
           (finally
             (try
               (when writer-lock
-                (if @retain-writer-lock?
+                (if (or @retain-writer-lock? directory-replaced?)
                   (retain-quarantine-lock! parent writer-lock)
                   (release-writer-lock! parent writer-lock)))
               (finally
-                (fs/closeSync (:fd parent))))))))))
+                (try
+                  (fs/closeSync (:fd parent))
+                  (finally
+                    (when ancestor
+                      (fs/closeSync (:fd ancestor)))))))))))))
 
 (defn with-append-reservation!
   ([file run!]
@@ -1460,10 +1544,22 @@
        (finally
          (close-append-reservation! reservation))))))
 
+(defn require-reserved-parent-identity!
+  "Checks the held segment directory still names its path, recording a
+  failure so cleanup quarantines the ledger through the `.ημ` ancestor."
+  [{:keys [parent parent-replaced?]}]
+  (try
+    (require-parent-identity! parent)
+    (catch :default error
+      (when parent-replaced?
+        (reset! parent-replaced? true))
+      (throw error))))
+
 (defn append-reserved-edn-line!
-  [{:keys [requested-file directory parent lock target target-path
+  [{:keys [requested-file directory lock target target-path
            held-ledger-bytes target-open? write-started? write-verified?
-           quarantined? semantic-basename validated-working]}
+           quarantined? semantic-basename validated-working]
+    :as reservation}
    record
    line]
   (*secure-append-phase-hook*
@@ -1471,7 +1567,7 @@
    {:requested-file requested-file
     :directory directory
     :target-path target-path})
-  (require-parent-identity! parent)
+  (require-reserved-parent-identity! reservation)
   (require-append-lock-identity! lock)
   (require-held-ledger-unchanged! target held-ledger-bytes)
   ;; A gate can run for a long time; the rest of the ledger must still extend
@@ -1511,13 +1607,13 @@
           expected-size (+ before-size (.-byteLength payload))]
       (when-not (= expected-size (safe-file-size! after))
         (append-error! "Receipt River append size verification failed")))
-    (require-parent-identity! parent)
+    (require-reserved-parent-identity! reservation)
     (*secure-append-phase-hook*
      :after-write
      {:requested-file requested-file
       :directory directory
       :target-path target-path})
-    (require-parent-identity! parent)
+    (require-reserved-parent-identity! reservation)
     (require-append-lock-identity! lock)
     (let [final-stats (require-target-identity! target)]
       (when semantic-basename
