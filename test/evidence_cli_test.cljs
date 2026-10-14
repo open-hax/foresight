@@ -972,6 +972,55 @@
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
 
+(deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
+  ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
+  ;; durable forged segment. The held `.ημ` descriptor then names the moved
+  ;; directory, so the canonical replacement gets its own marker, and that
+  ;; marker's directory entry must be fsynced through the canonical
+  ;; replacement: a crash must not keep the forged ledger but lose the
+  ;; quarantine.
+  (with-receipt-fixture
+    (fn [{:keys [fixture directory segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            moved (path/join fixture ".ημ.moved")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            marker (path/join directory cli/receipt-quarantine-marker-name)
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            synced-parents (atom [])
+            create-marker! cli/create-quarantine-marker!]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/create-quarantine-marker!
+                      (fn [parent marker-path]
+                        ;; Record which directory this marker's entry is
+                        ;; fsynced through (nil means none).
+                        (swap! synced-parents conj
+                               (when parent
+                                 (let [stats (fs/fstatSync (:fd parent))]
+                                   [(.-dev stats) (.-ino stats)])))
+                        (create-marker! parent marker-path))]
+          (is (thrown?
+               js/Error
+               (run-semantic-gate-with!
+                file segment
+                (fn []
+                  (fs/renameSync directory moved)
+                  (fs/mkdirSync directory)
+                  (fs/mkdirSync segments)
+                  (fs/writeFileSync file "" "utf8")
+                  (fs/writeFileSync forged (str forged-line "\n") "utf8"))))))
+        (is (fs/existsSync marker)
+            "the canonical replacement `.ημ` carries a quarantine marker")
+        (let [canonical (fs/statSync directory)]
+          (is (some #{[(.-dev canonical) (.-ino canonical)]} @synced-parents)
+              "the canonical marker is fsynced through the canonical directory"))
+        (with-redefs [cli/receipt-file file]
+          (is (thrown-with-msg?
+               js/Error #"quarantine"
+               (cli/read-working-receipt-segments! nil))
+              "the replacement ledger is quarantined"))))))
+
 (deftest working-ledger-rejects-executable-files
   ;; The immutable reader accepts only 100644 blobs, so an executable working
   ;; file would yield evidence that cannot be verified once committed.
