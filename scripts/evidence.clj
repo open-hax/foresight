@@ -1051,6 +1051,20 @@
           (append-error! "descriptor write made no progress"))
         (recur (+ offset written))))))
 
+(defn remove-created-lock!
+  "Removes a lock this process just created with O_EXCL when acquisition
+  aborts before any gate ran. Only a path that still names the descriptor's
+  inode is unlinked, and the directory entry removal is synced. Anything
+  uncertain leaves the path in place for adjudication."
+  [parent lock-path fd]
+  (try
+    (let [fd-stats (fs/fstatSync fd bigint-stat-options)
+          path-stats (lstat-if-present! lock-path "Receipt River append lock")]
+      (when (and path-stats (same-file? fd-stats path-stats))
+        (fs/unlinkSync lock-path)
+        (fs/fsyncSync (:fd parent))))
+    (catch :default _cleanup-error nil)))
+
 (defn acquire-lock-file! [parent lock-path busy-message]
   (require-parent-identity! parent)
   (let [flags (bit-or (fs-constant! "O_WRONLY")
@@ -1077,6 +1091,9 @@
         (require-parent-identity! parent)
         {:fd fd :path lock-path :stats stats})
       (catch :default error
+        ;; No gate or receipt write has started: a lock left here would block
+        ;; every later writer although nobody holds it.
+        (remove-created-lock! parent lock-path fd)
         (close-after-open-error! fd error)))))
 
 (defn acquire-append-lock! [parent basename]
@@ -1458,6 +1475,23 @@
      (validate-working-receipt-ledger! semantic-basename))
     (catch :default _error false)))
 
+(defn reserved-segment-intact?
+  "True only when the reserved segment path still names the written inode
+  and holds exactly the verified bytes. Used after the reserved descriptor is
+  closed, through final lock cleanup; any read failure counts as a change."
+  [{:keys [target target-path written-segment-bytes]}]
+  (try
+    (let [expected (and written-segment-bytes @written-segment-bytes)
+          bytes (when expected
+                  (read-working-regular-file! target-path "Receipt River segment"))
+          stats (when expected
+                  (lstat-if-present! target-path "Receipt River segment"))]
+      (boolean (and expected
+                    stats
+                    (same-file? stats (:stats target))
+                    (.equals expected bytes))))
+    (catch :default _error false)))
+
 (defn require-held-ledger-unchanged! [target validated-bytes]
   (let [current-bytes (stable-held-target-bytes! target)]
     (when-not (.equals validated-bytes current-bytes)
@@ -1560,7 +1594,10 @@
                 :quarantined? (atom false)
                 :parent-replaced? (atom false)
                 :write-started? (atom false)
-                :write-verified? (atom false)}
+                :write-verified? (atom false)
+                ;; Bytes of the verified write, kept so the reserved segment
+                ;; can be revalidated after its descriptor is closed.
+                :written-segment-bytes (atom nil)}
                (catch :default error
                  (when (and validate-ledger?
                             (not (remove-unwritten-segment!
@@ -1658,7 +1695,18 @@
           (if (or (and @write-started? (not @write-verified?))
                   (not @unwritten-removed?)
                   (and quarantined? @quarantined?)
-                  @directory-replaced?)
+                  @directory-replaced?
+                  ;; The verified segment must still be exactly what was
+                  ;; written when its lock is about to be released.
+                  (and semantic-basename
+                       @write-verified?
+                       (not (reserved-segment-intact? reservation))
+                       (do (reset! late-replacement-error
+                                   (js/Error.
+                                    (str "the Receipt River segment changed "
+                                         "after it was written; the ledger "
+                                         "must be adjudicated by hand")))
+                           true)))
             ;; A short write, fsync/close failure, post-write identity change,
             ;; content injected into the reserved segment, a reservation moved
             ;; out from under its path, a segment added while the gate ran, or
@@ -1703,8 +1751,9 @@
                        (not @retain-writer-lock?)
                        (not @directory-replaced?)
                        (not (and quarantined? @quarantined?))
-                       (not (working-ledger-unchanged-after-write?
-                             reservation)))
+                       (not (and (working-ledger-unchanged-after-write?
+                                  reservation)
+                                 (reserved-segment-intact? reservation))))
               (reset! retain-writer-lock? true)
               (when-not @late-replacement-error
                 (reset! late-replacement-error
@@ -1767,7 +1816,8 @@
 (defn append-reserved-edn-line!
   [{:keys [requested-file directory lock target target-path
            held-ledger-bytes target-open? write-started? write-verified?
-           quarantined? semantic-basename validated-working]
+           quarantined? semantic-basename validated-working
+           written-segment-bytes]
     :as reservation}
    record
    line]
@@ -1850,6 +1900,21 @@
     ;; reservation cleanup retains the lock as a quarantine marker.
     (fs/closeSync (:fd target))
     (reset! target-open? false)
+    (when written-segment-bytes
+      (reset! written-segment-bytes expected-bytes))
+    (*secure-append-phase-hook*
+     :after-close
+     {:requested-file requested-file
+      :directory directory
+      :target-path target-path})
+    ;; The close is observable (CLOSE_WRITE), so gate-spawned work can rewrite
+    ;; or replace the segment right after it; the last byte comparison above
+    ;; ran before that. Revalidate the path and content now.
+    (when (and semantic-basename
+               (not (reserved-segment-intact? reservation)))
+      (reset! quarantined? true)
+      (append-error!
+       "Receipt River segment changed after it was closed"))
     (reset! write-verified? true)
     record))
 

@@ -146,7 +146,9 @@ directory. A failure before the write removes an empty reserved segment and
 releases the lock, unless the working ledger changed while the gate ran; that
 change keeps the lock as a quarantine marker. The rest of the working ledger
 is compared with the pre-gate snapshot again after the write, and a change
-there also keeps the lock. If the reserved path has vanished, the lock is released only
+there also keeps the lock. After the reserved descriptor is closed, the
+segment path must still name the written inode with exactly the written
+bytes, checked again before each lock is released; a mismatch keeps the lock. If the reserved path has vanished, the lock is released only
 when the still-held descriptor proves the inode unlinked; a renamed
 reservation keeps the lock. Any uncertain result after writing begins deliberately
 retains the lock as a quarantine marker for the whole ledger so a later
