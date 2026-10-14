@@ -35,6 +35,12 @@
 
 (def max-receipt-line-bytes (* 1024 1024))
 
+(def max-receipt-batch-bytes
+  "Ceiling for one immutable `git cat-file --batch` of segment blobs. Each
+  segment is already capped at `max-receipt-line-bytes`; this keeps the
+  aggregate buffer well under the former 1 GiB spawnSync limit."
+  (* max-receipt-line-bytes 64))
+
 (def ^:dynamic *secure-append-phase-hook*
   (fn [_phase _context] nil))
 
@@ -188,20 +194,90 @@
               (str "Receipt River numbers must round-trip exactly; "
                    lexeme " does not"))))))
 
-(defn git-blobs-batch!
-  "Returns object-id -> Buffer for `object-ids` from one `git cat-file
-  --batch` process. Each answer must be the requested blob, in order, with
-  exactly its declared size and terminator."
+(defn assert-receipt-batch-sizes!
+  "Fails closed when any blob exceeds the writer's per-receipt bound or the
+  batch aggregate would force a multi-hundred-megabyte buffer."
+  [sizes]
+  (doseq [[oid size] sizes]
+    (when-not (and (js/Number.isSafeInteger size) (not (neg? size)))
+      (throw (js/Error.
+              (str "Receipt River segment blob size is not a safe integer: "
+                   oid " " size))))
+    (when (> size max-receipt-line-bytes)
+      (throw (js/Error.
+              (str "Receipt River segment blob exceeds "
+                   max-receipt-line-bytes " bytes: " oid)))))
+  (let [total (reduce + 0 (vals sizes))]
+    (when (> total max-receipt-batch-bytes)
+      (throw (js/Error.
+              (str "Receipt River segment batch exceeds "
+                   max-receipt-batch-bytes " bytes")))))
+  sizes)
+
+(defn git-blob-batch-sizes!
+  "Returns object-id -> byte size from one `git cat-file --batch-check`.
+  Output is only headers, so the buffer stays small before any blob body is
+  read."
   [object-ids]
   (if (empty? object-ids)
     {}
     (let [result (child-process/spawnSync
                   "git"
+                  #js ["--no-replace-objects" "cat-file" "--batch-check"]
+                  #js {:cwd root
+                       :shell false
+                       :input (str (str/join "\n" object-ids) "\n")
+                       :encoding "utf8"
+                       :maxBuffer (* 1024 1024)})
+          error (.-error result)
+          status (.-status result)]
+      (when error
+        (throw (js/Error. (str "Git invocation failed: " (.-message error)))))
+      (when-not (= 0 status)
+        (throw (js/Error.
+                (str "Git invocation failed with exit " status ": "
+                     (str/trim (or (.-stderr result) ""))))))
+      (let [lines (vec (remove str/blank? (str/split (or (.-stdout result) "") #"\n")))]
+        (when-not (= (count lines) (count object-ids))
+          (throw (js/Error.
+                  (str "git cat-file --batch-check returned "
+                       (count lines) " lines for " (count object-ids)
+                       " object ids"))))
+        (assert-receipt-batch-sizes!
+         (into {}
+               (map (fn [oid line]
+                      (let [[_ id kind size]
+                            (re-matches #"([0-9a-f]+) ([a-z]+) ([0-9]+)" line)
+                            size (when size (js/parseInt size 10))]
+                        (when-not (and (= oid id) (= "blob" kind)
+                                       (js/Number.isSafeInteger size))
+                          (throw (js/Error.
+                                  (str "Unexpected git cat-file --batch-check "
+                                       "entry for " oid ": " line))))
+                        [oid size]))
+                    object-ids
+                    lines)))))))
+
+(defn git-blobs-batch!
+  "Returns object-id -> Buffer for `object-ids` from one `git cat-file
+  --batch` process. Sizes are checked with `--batch-check` first against the
+  writer's per-receipt and aggregate bounds; the body buffer is then sized to
+  that known total instead of 1 GiB. Each answer must be the requested blob,
+  in order, with exactly its declared size and terminator."
+  [object-ids]
+  (if (empty? object-ids)
+    {}
+    (let [sizes (git-blob-batch-sizes! object-ids)
+          total (reduce + 0 (map #(get sizes %) object-ids))
+          ;; Headers are small; keep a tight ceiling over the known body total.
+          max-buffer (+ total (* 256 (inc (count object-ids))) 4096)
+          result (child-process/spawnSync
+                  "git"
                   #js ["--no-replace-objects" "cat-file" "--batch"]
                   #js {:cwd root
                        :shell false
                        :input (str (str/join "\n" object-ids) "\n")
-                       :maxBuffer (* 1024 1024 1024)})
+                       :maxBuffer max-buffer})
           error (.-error result)
           status (.-status result)]
       (when error
@@ -225,10 +301,12 @@
                 header (.toString (.subarray out 0 newline-at) "utf8")
                 [_ oid kind size] (re-matches #"([0-9a-f]+) ([a-z]+) ([0-9]+)" header)
                 size (when size (js/parseInt size 10))
+                expected (get sizes (first ids))
                 start (inc newline-at)
                 end (when size (+ start size))]
             (when-not (and (= oid (first ids)) (= "blob" kind)
                            (js/Number.isSafeInteger size)
+                           (= size expected)
                            (< end (.-length out))
                            (= 10 (aget out end)))
               (throw (js/Error.
@@ -237,6 +315,7 @@
             (recur (.subarray out (inc end))
                    (assoc acc oid (js/Buffer.from (.subarray out start end)))
                    (next ids))))))))
+
 
 (defn read-receipt-records! [contents]
   (->> (str/split-lines contents)
@@ -356,11 +435,13 @@
                 (str "Receipt River segment must contain exactly one record: "
                      segment-path))))
       ;; The segment contract is one physical line: the record, then its
-      ;; only newline. Blank lines are not dropped silently.
-      (when (str/includes? (subs contents 0 (dec (count contents))) "\n")
-        (throw (js/Error.
-                (str "Receipt River segment must hold exactly one physical line: "
-                     segment-path))))
+      ;; only newline. Blank lines and embedded carriage returns are not
+      ;; dropped silently (encode-edn-line! already rejects both).
+      (let [body (subs contents 0 (dec (count contents)))]
+        (when (or (str/includes? body "\n") (str/includes? body "\r"))
+          (throw (js/Error.
+                  (str "Receipt River segment must hold exactly one physical line: "
+                       segment-path)))))
       records)))
 
 (defn segment-entry [segment-path bytes]
