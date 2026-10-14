@@ -962,6 +962,8 @@
                 (fs/writeFileSync forged (str forged-line "\n") "utf8")))))
         (is (= [(path/basename forged)] (segment-names segments))
             "no receipt was written for the gate")
+        (is (fs/existsSync (path/join directory cli/receipt-quarantine-marker-name))
+            "the quarantine marker lives in the stable `.ημ` ancestor")
         (with-redefs [cli/receipt-file file]
           (is (thrown-with-msg?
                js/Error #"quarantine"

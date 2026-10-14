@@ -143,7 +143,11 @@ size-checked, and followed by file and directory `fsync`. Pre-write rejection
 releases the lock; uncertainty after writing starts retains the lock as a
 quarantine marker for manual adjudication. A retained lock is verified by
 path identity first; if gate code unlinked or replaced it, a fresh marker is
-created exclusively at the same path. This protects the adapter boundary
+created exclusively at the same path. If the segment directory itself was
+renamed or replaced while the gate ran, every lock is reachable only through
+the renamed directory, so the adapter also creates
+`.ημ/.receipt-river.quarantine` through a held `.ημ` descriptor; its presence
+closes the working ledger until it is adjudicated. This protects the adapter boundary
 from pathname swaps, partial writes, and cooperating races; it does not exclude
 an unrelated writer that ignores the lock.
 

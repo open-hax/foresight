@@ -19,5 +19,7 @@ an actual IERS leap second, 23:59:60 UTC); historical records
 keep whatever `:ts` they were written with. Writers in one checkout take
 `.receipt-river.writer.lock` for the whole reserve, gate and write sequence, so
 they run one at a time. A retained `.<segment>.append.lock` is a quarantine
-marker: the ledger stays closed to writers until someone adjudicates it.
+marker: the ledger stays closed to writers until someone adjudicates it. So
+does `../.receipt-river.quarantine`, left when this directory was renamed or
+replaced while a gate ran.
 Segment and legacy files must not be executable (Git `100644` blobs only).
