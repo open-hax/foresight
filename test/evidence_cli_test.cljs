@@ -836,6 +836,57 @@
         (is (= [] (segment-names segments)))
         (is (= [] (lock-files segments)))))))
 
+(deftest concurrent-writers-are-told-apart-from-quarantine
+  ;; Same-checkout writers serialize on one ledger-wide writer lock, so a
+  ;; second writer is refused as "active", never as a quarantine verdict, and
+  ;; any segment that appears while a gate runs cannot be a cooperating
+  ;; writer's receipt.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file
+                    cli/git-capture! (fn [_] reviewed-root-revision)
+                    cli/read-immutable-receipt-ledger! empty-committed-ledger
+                    cli/read-immutable-receipt-segments! (fn [_] {})]
+        (let [first-segment (path/join segments "2026-10-13T000000000Z-a.edn")
+              second-segment (path/join segments "2026-10-13T000001000Z-b.edn")
+              active (cli/open-append-reservation! first-segment true)]
+          (try
+            (is (thrown-with-msg?
+                 js/Error #"another writer holds an active Receipt River reservation"
+                 (cli/open-append-reservation! second-segment true)))
+            (is (not (fs/existsSync second-segment))
+                "the refused writer reserves nothing")
+            (finally
+              (cli/close-append-reservation! active)))
+          (is (= [] (lock-files segments)))
+          (is (= [] (segment-names segments)))
+          (is (not (fs/existsSync (path/join segments cli/receipt-writer-lock-name))))
+          (cli/close-append-reservation!
+           (cli/open-append-reservation! second-segment true))
+          (is (= [] (segment-names segments))))))))
+
+(deftest quarantine-outlives-the-writer-lock
+  ;; A quarantine is the retained per-segment lock; the writer lock itself is
+  ;; released, so the next writer reports the quarantine, not an active writer.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file]
+        (run-gate-against-reserved-segment!
+         segments
+         (fn [{:keys [segment renamed forged-line]}]
+           (fs/renameSync segment renamed)
+           (fs/writeFileSync renamed (str forged-line "\n") "utf8")))
+        (is (not (fs/existsSync (path/join segments cli/receipt-writer-lock-name))))
+        (with-redefs [cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})]
+          (is (thrown-with-msg?
+               js/Error #"retained append lock quarantines"
+               (cli/open-append-reservation!
+                (path/join segments "2026-10-13T000002000Z-c.edn") true))))))))
+
 (deftest working-ledger-files-are-read-through-the-validated-descriptor
   (with-receipt-fixture
     (fn [{:keys [segments]}]

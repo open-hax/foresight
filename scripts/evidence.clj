@@ -161,6 +161,13 @@
 
 (def append-lock-name-pattern #"[.].+[.]append[.]lock")
 
+;; One ledger-wide lock serializes same-checkout semantic writers for the whole
+;; validate -> gate -> write section. Parallelism is across branches (a fork and
+;; its org add disjoint segments that verify-receipts merges), not concurrent
+;; processes in one working tree: a segment that appears while a gate runs can
+;; then never be a cooperating writer's receipt, so it stays quarantined.
+(def receipt-writer-lock-name ".receipt-river.writer.lock")
+
 (defn receipt-segment-timestamp-valid?
   "The name's timestamp must be a real UTC calendar date and clock time, not
   only the right number of digits. The receipt timestamp law decides, so any
@@ -876,10 +883,9 @@
           (append-error! "descriptor write made no progress"))
         (recur (+ offset written))))))
 
-(defn acquire-append-lock! [parent basename]
+(defn acquire-lock-file! [parent lock-path busy-message]
   (require-parent-identity! parent)
-  (let [lock-path (append-lock-path parent basename)
-        flags (bit-or (fs-constant! "O_WRONLY")
+  (let [flags (bit-or (fs-constant! "O_WRONLY")
                       (fs-constant! "O_CREAT")
                       (fs-constant! "O_EXCL")
                       (fs-constant! "O_NOFOLLOW"))
@@ -887,8 +893,7 @@
              (fs/openSync lock-path flags 384)
              (catch :default error
                (if (= "EEXIST" (.-code error))
-                 (append-error!
-                  "another writer holds the append lock, or a stale/unsafe lock exists")
+                 (append-error! busy-message)
                  (append-error! (str "append lock could not be created: "
                                      (.-message error))))))]
     (try
@@ -905,6 +910,18 @@
         {:fd fd :path lock-path :stats stats})
       (catch :default error
         (close-after-open-error! fd error)))))
+
+(defn acquire-append-lock! [parent basename]
+  (acquire-lock-file!
+   parent (append-lock-path parent basename)
+   "another writer holds the append lock, or a stale/unsafe lock exists"))
+
+(defn acquire-receipt-writer-lock! [parent]
+  (acquire-lock-file!
+   parent (path/join (:proc-path parent) receipt-writer-lock-name)
+   (str "another writer holds an active Receipt River reservation; retry after "
+        "it finishes (a writer lock left by a crashed process must be "
+        "adjudicated and removed by hand)")))
 
 (defn require-append-lock-identity! [lock]
   (let [fd-stats (fs/fstatSync (:fd lock) bigint-stat-options)]
@@ -1080,8 +1097,9 @@
 
 (defn read-working-receipt-segments!
   "Reads the working ledger. `own-basename` names the caller's reserved (still
-  empty) segment, which is skipped along with its own lock. Any other
-  retained append lock quarantines the whole ledger."
+  empty) segment, which is skipped along with its own lock and the writer lock
+  the caller holds. Any other retained append lock quarantines the whole
+  ledger."
   [own-basename]
   (let [legacy-bytes (read-working-regular-file!
                       receipt-file "Receipt River file")
@@ -1100,6 +1118,9 @@
                     (= receipt-segment-readme basename) nil
                     (= own-basename basename) nil
                     (= (str "." own-basename ".append.lock") basename) nil
+                    ;; Only a reserving writer reads the working ledger, and it
+                    ;; holds this lock; no other writer can be active.
+                    (and own-basename (= receipt-writer-lock-name basename)) nil
                     (re-matches append-lock-name-pattern basename)
                     (append-error!
                      (str "a retained append lock quarantines the Receipt River "
@@ -1150,6 +1171,15 @@
 
 (declare remove-unwritten-segment!)
 
+(defn release-writer-lock!
+  "Releases the ledger-wide writer lock. A quarantine is carried by the
+  retained per-segment lock, so the writer lock never outlives its writer
+  unless its own identity check fails, which leaves it for adjudication."
+  [parent writer-lock]
+  (try
+    (release-append-lock! parent writer-lock)
+    (catch :default _error nil)))
+
 (defn open-append-reservation!
   ([file]
    (open-append-reservation! file false))
@@ -1160,7 +1190,14 @@
          basename (path/basename absolute-file)
          parent (open-parent-directory! directory)]
      (try
-       (let [lock (acquire-append-lock! parent basename)
+       (let [writer-lock (when validate-ledger?
+                           (acquire-receipt-writer-lock! parent))
+             lock (try
+                    (acquire-append-lock! parent basename)
+                    (catch :default error
+                      (when writer-lock
+                        (release-writer-lock! parent writer-lock))
+                      (throw error)))
              retain-lock? (atom false)]
          (try
            (require-append-lock-identity! lock)
@@ -1180,6 +1217,7 @@
                 :directory directory
                 :parent parent
                 :lock lock
+                :writer-lock writer-lock
                 :target target
                 :target-path target-path
                 :semantic-basename (when validate-ledger? basename)
@@ -1206,9 +1244,13 @@
                    (reset! retain-lock? true))
                  (close-after-open-error! (:fd target) error))))
            (catch :default error
-             (if @retain-lock?
-               (fs/closeSync (:fd lock))
-               (release-append-lock! parent lock))
+             (try
+               (if @retain-lock?
+                 (fs/closeSync (:fd lock))
+                 (release-append-lock! parent lock))
+               (finally
+                 (when writer-lock
+                   (release-writer-lock! parent writer-lock))))
              (throw error))))
        (catch :default error
          (fs/closeSync (:fd parent))
@@ -1248,8 +1290,8 @@
     (catch :default _error false)))
 
 (defn close-append-reservation!
-  [{:keys [parent lock target target-open? write-started? write-verified?
-           quarantined? semantic-basename]
+  [{:keys [parent lock writer-lock target target-open? write-started?
+           write-verified? quarantined? semantic-basename]
     :as reservation}]
   (let [unwritten-removed? (atom false)]
     (try
@@ -1275,7 +1317,11 @@
             (fs/closeSync (:fd lock))
             (release-append-lock! parent lock))
           (finally
-            (fs/closeSync (:fd parent))))))))
+            (try
+              (when writer-lock
+                (release-writer-lock! parent writer-lock))
+              (finally
+                (fs/closeSync (:fd parent))))))))))
 
 (defn with-append-reservation!
   ([file run!]
