@@ -1199,6 +1199,34 @@
        js/Error #"exactly one EDN form"
        (cli/read-receipt-records! "{:a 1} trailing\n"))))
 
+(deftest receipt-numbers-must-round-trip-exactly
+  ;; cljs.reader turns every EDN number into a JS double before record IDs
+  ;; are hashed, so distinct lexemes such as 9007199254740992 and
+  ;; 9007199254740993 would share one identity. Only numbers whose exact
+  ;; value survives reading are accepted.
+  (is (= [{:n 9007199254740991 :m -9007199254740991}]
+         (cli/read-receipt-records!
+          "{:n 9007199254740991 :m -9007199254740991}\n")))
+  (is (= [{:score 0.2 :other 0.9 :tiny 1.5e-7}]
+         (cli/read-receipt-records! "{:score 0.20 :other 0.9 :tiny 1.5e-7}\n")))
+  (is (= [{:text "9007199254740993 0.10000000000000001" :k :a9007199254740993
+           :c \9}]
+         (cli/read-receipt-records!
+          "{:text \"9007199254740993 0.10000000000000001\" :k :a9007199254740993 :c \\9}\n"))
+      "digits inside strings, keywords and characters are not numbers")
+  (doseq [lexeme ["9007199254740992" "9007199254740993" "-9007199254740993"
+                  "0.10000000000000001" "1.0" "2e3" "1e400" "1N" "1.5M"
+                  "1/2" "0x10" "017"]]
+    (is (thrown-with-msg?
+         js/Error #"must round-trip exactly"
+         (cli/read-receipt-records! (str "{:n " lexeme "}\n")))
+        lexeme))
+  (is (thrown-with-msg?
+       js/Error #"must round-trip exactly"
+       (cli/encode-edn-line! {:n 9007199254740992}))
+      "the writer refuses a receipt its readers would reject")
+  (is (not= (cli/record-id {:n 1}) (cli/record-id {:n 2}))))
+
 (deftest immutable-catalog-requires-one-complete-edn-form
   (let [contents "{:catalog/version 1}\n"
         calls (atom [])]

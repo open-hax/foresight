@@ -128,7 +128,10 @@ legacy first segment; every new receipt is an immutable one-record file under
 all segments ordered by the UTC instant named by `:ts` (offsets and fractional
 seconds normalized), then canonical record identity. New records need an RFC
 3339 `:ts` naming a real instant; historical records keep their original `:ts`
-and sort deterministically. Parallel branches (a fork and its org) add
+and sort deterministically. Record identity hashes the value read, so every
+number in any segment must read back exactly: safe integers, or a non-integral
+float written as its double's own decimal value (no `N`/`M`, ratios, radix or
+leading zeros). Parallel branches (a fork and its org) add
 disjoint segment files instead of contending on one monolith. Writers in one
 checkout serialize on `.ημ/receipts/.receipt-river.writer.lock` for the whole
 reserve, gate and write sequence, so a segment that appears while a gate runs
@@ -139,8 +142,11 @@ The local append adapter is Linux-specific and fails closed without
 writer reserves its own new segment with `O_EXCL` and a sibling lock for that
 segment; it bounds one physical EDN line to 1 MiB, completes the descriptor
 write, verifies the resulting size, and synchronizes both the file and parent
-directory. A failure before the write releases the lock and removes an empty
-reserved segment. If the reserved path has vanished, the lock is released only
+directory. A failure before the write removes an empty reserved segment and
+releases the lock, unless the working ledger changed while the gate ran; that
+change keeps the lock as a quarantine marker. The rest of the working ledger
+is compared with the pre-gate snapshot again after the write, and a change
+there also keeps the lock. If the reserved path has vanished, the lock is released only
 when the still-held descriptor proves the inode unlinked; a renamed
 reservation keeps the lock. Any uncertain result after writing begins deliberately
 retains the lock as a quarantine marker for the whole ledger so a later

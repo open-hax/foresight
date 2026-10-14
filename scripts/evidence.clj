@@ -99,12 +99,100 @@
                                  "")))))))
     (or (.-stdout result) (js/Buffer.alloc 0))))
 
+(defn edn-token-delimiter? [ch]
+  (boolean (re-matches #"[\s,()\[\]{}\";]" ch)))
+
+(defn edn-number-lexemes
+  "Numeric literal tokens of one EDN text. Strings, character literals and
+  comments are skipped, and digits inside symbols or keywords are not
+  numbers."
+  [text]
+  (let [n (count text)]
+    (loop [i 0
+           out []]
+      (if (>= i n)
+        out
+        (let [ch (.charAt text i)]
+          (cond
+            (= "\"" ch)
+            (recur (loop [j (inc i)]
+                     (cond
+                       (>= j n) n
+                       (= "\\" (.charAt text j)) (recur (+ j 2))
+                       (= "\"" (.charAt text j)) (inc j)
+                       :else (recur (inc j))))
+                   out)
+
+            (= ";" ch)
+            (recur (let [j (.indexOf text "\n" i)] (if (neg? j) n j)) out)
+
+            (edn-token-delimiter? ch) (recur (inc i) out)
+
+            :else
+            (let [end (loop [j (if (= "\\" ch) (+ i 2) (inc i))]
+                        (if (and (< j n) (not (edn-token-delimiter? (.charAt text j))))
+                          (recur (inc j))
+                          (min j n)))
+                  token (subs text i end)]
+              (recur end (if (re-find #"^[+-]?[0-9]" token)
+                           (conj out token)
+                           out)))))))))
+
+(defn decimal-value
+  "Exact decimal value of a plain decimal literal as [negative? digits
+  exponent] with no leading or trailing zero digits, or nil."
+  [lexeme]
+  (when-let [[_ sign whole fraction exponent]
+             (re-matches #"([+-]?)([0-9]+)(?:\.([0-9]+))?(?:[eE]([+-]?[0-9]+))?"
+                         lexeme)]
+    (let [fraction (or fraction "")
+          digits (str/replace (str whole fraction) #"^0+" "")
+          trailing (count (re-find #"0*$" digits))
+          exponent (+ (js/parseInt (or exponent "0") 10)
+                      (- (count fraction))
+                      trailing)
+          digits (subs digits 0 (- (count digits) trailing))]
+      (if (str/blank? digits)
+        [false "" 0]
+        [(= "-" sign) digits exponent]))))
+
+(def max-safe-integer-digits (str js/Number.MAX_SAFE_INTEGER))
+
+(defn exact-number-lexeme?
+  "True when reading `lexeme` keeps its exact EDN value. JS doubles are the
+  only numbers cljs.reader yields, so integers must be safe integers and a
+  float must be the double's own shortest decimal, not integral (1.0 would
+  read as the integer 1). N/M suffixes, ratios, radix, hex and leading-zero
+  forms are rejected."
+  [lexeme]
+  (if-let [[_ digits] (re-matches #"[+-]?(0|[1-9][0-9]*)" lexeme)]
+    (or (< (count digits) (count max-safe-integer-digits))
+        (and (= (count digits) (count max-safe-integer-digits))
+             (<= (compare digits max-safe-integer-digits) 0)))
+    (and (re-matches #"[+-]?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][+-]?[0-9]+)?" lexeme)
+         (let [value (js/Number lexeme)]
+           (and (js/Number.isFinite value)
+                (not (js/Number.isInteger value))
+                (= (decimal-value lexeme)
+                   (decimal-value (str value))))))))
+
+(defn require-exact-receipt-numbers!
+  "Record IDs hash the value cljs.reader produced, so a number that loses
+  precision while reading would let two distinct records share one ID."
+  [text]
+  (doseq [lexeme (edn-number-lexemes text)]
+    (when-not (exact-number-lexeme? lexeme)
+      (throw (js/Error.
+              (str "Receipt River numbers must round-trip exactly; "
+                   lexeme " does not"))))))
+
 (defn read-receipt-records! [contents]
   (->> (str/split-lines contents)
        (remove str/blank?)
        (map-indexed
         (fn [index line]
           (try
+            (require-exact-receipt-numbers! line)
             (read-single-edn! line "Receipt River record")
             (catch :default error
               (throw (js/Error.
@@ -1183,6 +1271,7 @@
   (let [line (pr-str record)]
     (when (or (str/includes? line "\n") (str/includes? line "\r"))
       (append-error! "receipt serialization must occupy exactly one physical line"))
+    (require-exact-receipt-numbers! line)
     (let [parsed (try
                    (reader/read-string line)
                    (catch :default error

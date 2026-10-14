@@ -137,11 +137,13 @@ lock left by a crashed process must be removed by hand. Each writer reserves
 its own new segment with `O_EXCL` and a sibling lock for that segment; a
 reservation that ends before writing removes its empty segment. A retained
 lock (see below) quarantines the whole ledger. The rest of the working ledger
-is revalidated against `HEAD` immediately before the receipt is written. A
+is revalidated against `HEAD` immediately before the receipt is written, and
+compared with the pre-gate snapshot again after it is written. A
 complete line is bounded to 1 MiB, written through the held descriptor,
 size-checked, and followed by file and directory `fsync`. Pre-write rejection
-releases the lock; uncertainty after writing starts retains the lock as a
-quarantine marker for manual adjudication. A retained lock is verified by
+releases the lock, unless the working ledger changed while the gate ran; that
+change, a change after the write, and any uncertainty after writing starts
+retain the lock as a quarantine marker for manual adjudication. A retained lock is verified by
 path identity first; if gate code unlinked or replaced it, a fresh marker is
 created exclusively at the same path. If the segment directory itself was
 renamed or replaced while the gate ran, every lock is reachable only through
