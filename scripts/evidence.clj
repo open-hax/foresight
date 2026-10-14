@@ -851,6 +851,14 @@
     (append-error! (str description " must have exactly one hard link")))
   stats)
 
+(defn require-non-executable-stats!
+  "Git records any executable bit as a 100755 blob, which the immutable
+  Receipt River reader rejects, so a working ledger file must have none."
+  [stats description]
+  (when-not (zero? (bit-and (js/Number (.-mode stats)) 73))
+    (append-error! (str description " must not be executable")))
+  stats)
+
 (defn require-path-identity! [file expected-stats description stats-check!]
   (let [path-stats (lstat-if-present! file description)]
     (when-not path-stats
@@ -969,6 +977,46 @@
     (fs/fsyncSync (:fd parent))
     (finally
       (fs/closeSync (:fd lock)))))
+
+(defn retain-quarantine-lock!
+  "Keeps `lock` as a durable quarantine marker. Closing a held descriptor
+  preserves nothing once its path was unlinked or replaced, so the lock's
+  path identity is verified first; failing that, a fresh marker is created
+  exclusively at the same path. Any entry already occupying that path still
+  refuses later writers, so it is left for adjudication. Throws only when no
+  marker could be established."
+  [parent lock]
+  (let [verified? (try
+                    (require-append-lock-identity! lock)
+                    true
+                    (catch :default _error false))]
+    (try
+      (fs/closeSync (:fd lock))
+      (catch :default _close-error nil))
+    (when-not verified?
+      (let [flags (bit-or (fs-constant! "O_WRONLY")
+                          (fs-constant! "O_CREAT")
+                          (fs-constant! "O_EXCL")
+                          (fs-constant! "O_NOFOLLOW"))
+            fd (try
+                 (fs/openSync (:path lock) flags 384)
+                 (catch :default error
+                   (when-not (= "EEXIST" (.-code error))
+                     (append-error!
+                      (str "a Receipt River quarantine marker could not be "
+                           "re-established at " (path/basename (:path lock))
+                           "; the ledger must be adjudicated by hand: "
+                           (.-message error))))))]
+        (when fd
+          (try
+            (write-all! fd (.encode (js/TextEncoder.)
+                                    (str "quarantine pid=" (.-pid js/process)
+                                         "\n")))
+            (fs/fsyncSync fd)
+            (finally
+              (fs/closeSync fd))))
+        (fs/fsyncSync (:fd parent))))
+    lock))
 
 (defn require-safe-existing-target! [target-path]
   (when-let [stats (lstat-if-present! target-path "Receipt River file")]
@@ -1100,6 +1148,7 @@
       (append-error! (str description " could not be securely opened: "
                           "it does not exist")))
     (require-regular-stats! stats description)
+    (require-non-executable-stats! stats description)
     ;; Validate and read the same inode: a pathname swapped after the lstat
     ;; (for a symlink or another file) must not be followed.
     (let [fd (try
@@ -1112,6 +1161,7 @@
       (try
         (let [fd-stats (fs/fstatSync fd bigint-stat-options)]
           (require-regular-stats! fd-stats (str description " descriptor"))
+          (require-non-executable-stats! fd-stats description)
           (when-not (same-file? fd-stats stats)
             (append-error! (str description " identity changed")))
           (let [bytes (fs/readFileSync fd)]
@@ -1119,7 +1169,11 @@
                          (safe-file-size! (fs/fstatSync fd bigint-stat-options)))
               (append-error! (str description " changed during read")))
             (require-path-identity! file fd-stats description
-                                    require-regular-stats!)
+                                    (fn [path-stats path-description]
+                                      (require-regular-stats!
+                                       path-stats path-description)
+                                      (require-non-executable-stats!
+                                       path-stats path-description)))
             bytes))
         (finally
           (fs/closeSync fd))))))
@@ -1144,7 +1198,13 @@
              (decode-utf8! legacy-bytes "Receipt River ledger")))]
           (keep (fn [basename]
                   (cond
-                    (= receipt-segment-readme basename) nil
+                    (= receipt-segment-readme basename)
+                    (when-let [stats (lstat-if-present!
+                                      (path/join directory basename)
+                                      "Receipt River segment README")]
+                      (require-non-executable-stats!
+                       stats "Receipt River segment README")
+                      nil)
                     (= own-basename basename) nil
                     (= (str "." own-basename ".append.lock") basename) nil
                     ;; Only a reserving writer reads the working ledger, and it
@@ -1294,7 +1354,7 @@
               parent writer-lock
               (try
                 (if @retain-lock?
-                  (fs/closeSync (:fd lock))
+                  (retain-quarantine-lock! parent lock)
                   (release-append-lock! parent lock))
                 error
                 (catch :default cleanup-error cleanup-error))))))
@@ -1362,21 +1422,23 @@
             ;; content injected into the reserved segment, a reservation moved
             ;; out from under its path, or a segment added while the gate ran.
             ;; Retain the lock as a durable quarantine marker so a later
-            ;; writer cannot normalize the damage.
-            (fs/closeSync (:fd lock))
+            ;; writer cannot normalize the damage. A vanished lock path is
+            ;; recreated, since closing its descriptor would preserve nothing.
+            (retain-quarantine-lock! parent lock)
             (release-append-lock! parent lock))
           (catch :default error
             ;; Segment-lock identity or cleanup failed (for example the lock
             ;; was unlinked while a candidate added its own segment). Keep the
             ;; writer lock as the quarantine marker so the next run cannot
-            ;; treat that segment as an ordinary extension.
+            ;; treat that segment as an ordinary extension; if the writer lock
+            ;; path is gone too, a fresh marker is created in its place.
             (reset! retain-writer-lock? true)
             (throw error))
           (finally
             (try
               (when writer-lock
                 (if @retain-writer-lock?
-                  (fs/closeSync (:fd writer-lock))
+                  (retain-quarantine-lock! parent writer-lock)
                   (release-writer-lock! parent writer-lock)))
               (finally
                 (fs/closeSync (:fd parent))))))))))
@@ -1417,6 +1479,9 @@
                              working)
                        (record-id record))
         (append-error! "receipt repeats a record already in the ledger"))))
+  (when semantic-basename
+    (require-non-executable-stats! (require-target-identity! target)
+                                   "Receipt River segment"))
   (let [before (require-target-identity! target)
         before-size (safe-file-size! before)
         separator (if (terminal-newline? (:fd target) before-size)
@@ -1447,7 +1512,9 @@
       :target-path target-path})
     (require-parent-identity! parent)
     (require-append-lock-identity! lock)
-    (require-target-identity! target)
+    (let [final-stats (require-target-identity! target)]
+      (when semantic-basename
+        (require-non-executable-stats! final-stats "Receipt River segment")))
     (when-not (.equals expected-bytes (stable-held-target-bytes! target))
       (append-error! "Receipt River bytes changed after append"))
     ;; Closing is part of the verified write boundary. If it fails, the outer

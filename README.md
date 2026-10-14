@@ -128,8 +128,9 @@ immutable historical records and cannot attest a current promotion;
 relative to the reviewed base.
 
 The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
-no-follow parent directory descriptor, rejects symbolic or multiply linked
-ledger files, and serializes semantic writers in one checkout on
+no-follow parent directory descriptor, rejects symbolic, multiply linked or
+executable ledger files (Git would record an executable file as a `100755`
+blob, which immutable review rejects), and serializes semantic writers in one checkout on
 `.ημ/receipts/.receipt-river.writer.lock` for the whole reserve, gate and
 write sequence. A concurrent writer fails closed instead of waiting. A writer
 lock left by a crashed process must be removed by hand. Each writer reserves
@@ -140,7 +141,9 @@ is revalidated against `HEAD` immediately before the receipt is written. A
 complete line is bounded to 1 MiB, written through the held descriptor,
 size-checked, and followed by file and directory `fsync`. Pre-write rejection
 releases the lock; uncertainty after writing starts retains the lock as a
-quarantine marker for manual adjudication. This protects the adapter boundary
+quarantine marker for manual adjudication. A retained lock is verified by
+path identity first; if gate code unlinked or replaced it, a fresh marker is
+created exclusively at the same path. This protects the adapter boundary
 from pathname swaps, partial writes, and cooperating races; it does not exclude
 an unrelated writer that ignores the lock.
 

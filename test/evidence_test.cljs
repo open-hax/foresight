@@ -131,6 +131,29 @@
     (is (= expected (merged-order [whole tenth hundredth offset utc same-instant])))
     (is (= expected (merged-order (reverse expected))))))
 
+(deftest receipt-timestamps-accept-actual-leap-seconds
+  ;; RFC 3339 permits second 60 only at an inserted leap second: 23:59:60 UTC
+  ;; at the end of a day IERS announced, in any UTC offset.
+  (doseq [ts ["2016-12-31T23:59:60Z" "1972-06-30T23:59:60.5Z"
+              "2016-12-31T17:59:60-06:00" "2017-01-01T00:59:60+01:00"
+              "2012-06-30T23:59:60.000+00:00"]]
+    (is (evidence/canonical-receipt-ts? ts) ts))
+  (doseq [ts ["2015-12-31T23:59:60Z" "2016-06-30T23:59:60Z"
+              "2016-12-31T23:58:60Z" "2016-12-31T23:59:60+01:00"
+              "1971-12-31T23:59:60Z" "2016-12-31T23:59:61Z"]]
+    (is (not (evidence/canonical-receipt-ts? ts)) ts))
+  (let [before {:n 1 :ts "2016-12-31T23:59:59.9Z"}
+        leap {:n 2 :ts "2016-12-31T23:59:60Z"}
+        leap-local {:n 3 :ts "2016-12-31T17:59:60.000-06:00"}
+        late-leap {:n 4 :ts "2016-12-31T23:59:60.5Z"}
+        after {:n 5 :ts "2017-01-01T00:00:00Z"}
+        expected [before leap leap-local late-leap after]]
+    (is (= (evidence/receipt-ts-sort-key (:ts leap))
+           (evidence/receipt-ts-sort-key (:ts leap-local)))
+        "the same leap-second instant in another offset sorts equal")
+    (is (= expected (merged-order (reverse expected))))
+    (is (= expected (merged-order [after late-leap leap-local before leap])))))
+
 (deftest merged-ledger-keeps-historical-timestamps-total
   ;; Historical records predate the canonical-instant rule; merging must not
   ;; reject them, and their order must not depend on segment order.

@@ -254,12 +254,32 @@
                       day-of-year)]
     (+ (* era 146097) day-of-era -719468)))
 
+(def ^:private leap-second-days
+  "UTC dates whose last minute had an inserted leap second (23:59:60), as
+  announced by IERS Bulletin C. No leap second has been inserted since
+  2016-12-31; extend this table if IERS announces another."
+  (into #{}
+        (map (fn [[year month day]] (days-from-civil year month day)))
+        [[1972 6 30] [1972 12 31] [1973 12 31] [1974 12 31] [1975 12 31]
+         [1976 12 31] [1977 12 31] [1978 12 31] [1979 12 31] [1981 6 30]
+         [1982 6 30] [1983 6 30] [1985 6 30] [1987 12 31] [1989 12 31]
+         [1990 12 31] [1992 6 30] [1993 6 30] [1994 6 30] [1995 12 31]
+         [1997 6 30] [1998 12 31] [2005 12 31] [2008 12 31] [2012 6 30]
+         [2015 6 30] [2016 12 31]]))
+
+(defn- leap-second-at? [utc-seconds]
+  (and (= 86399 (mod utc-seconds 86400))
+       (contains? leap-second-days (quot (- utc-seconds 86399) 86400))))
+
 (defn receipt-ts-instant
-  "Parses an RFC 3339 timestamp into `[utc-epoch-seconds fraction-digits]`,
+  "Parses an RFC 3339 timestamp into `[utc-epoch-seconds leap fraction-digits]`,
   or nil unless it names a real calendar date, clock time, and known UTC
-  offset. Rejects `-00:00` (RFC 3339 unknown-offset). Fraction digits drop
-  trailing zeros, so equal instants compare equal and fractions of any
-  precision order correctly as strings."
+  offset. Rejects `-00:00` (RFC 3339 unknown-offset). Second 60 is accepted
+  only at an actual inserted leap second (23:59:60 UTC, in any offset); it
+  reads as the preceding second with `leap` 1, so it orders after 23:59:59
+  and before the next day. Fraction digits drop trailing zeros, so equal
+  instants compare equal and fractions of any precision order correctly as
+  strings."
   [ts]
   (when (string? ts)
     (when-let [[_ year month day hour minute second fraction zulu sign
@@ -271,7 +291,7 @@
             offset-minute (if zulu 0 (parse-decimal offset-minute))]
         (when (and (<= 1 month 12)
                    (<= 1 day (days-in-month year month))
-                   (< hour 24) (< minute 60) (< second 60)
+                   (< hour 24) (< minute 60) (<= second 60)
                    (< offset-hour 24) (< offset-minute 60)
                    ;; RFC 3339: -00:00 means the local offset is unknown, so the
                    ;; timestamp does not name a known UTC instant.
@@ -279,15 +299,18 @@
                              (zero? offset-hour)
                              (zero? offset-minute))))
           (let [offset-seconds (* (if (= "-" sign) -1 1)
-                                  (+ (* 3600 offset-hour) (* 60 offset-minute)))]
-            [(- (+ (* 86400 (days-from-civil year month day))
-                   (* 3600 hour) (* 60 minute) second)
-                offset-seconds)
-             (str/replace (or fraction "") #"0+$" "")]))))))
+                                  (+ (* 3600 offset-hour) (* 60 offset-minute)))
+                leap (if (= 60 second) 1 0)
+                utc-seconds (- (+ (* 86400 (days-from-civil year month day))
+                                  (* 3600 hour) (* 60 minute) (- second leap))
+                               offset-seconds)]
+            (when (or (zero? leap) (leap-second-at? utc-seconds))
+              [utc-seconds leap (str/replace (or fraction "") #"0+$" "")])))))))
 
 (defn canonical-receipt-ts?
   "True when `ts` is an RFC 3339 string naming a real instant: a valid
-  calendar date, clock time, and UTC offset."
+  calendar date, clock time (second 60 only at an actual leap second), and
+  UTC offset."
   [ts]
   (some? (receipt-ts-instant ts)))
 
@@ -473,9 +496,9 @@
   anything else (historical free-form values, or no :ts) sorts first by its
   canonical printed form. Every key has the same shape and element types."
   [ts]
-  (if-let [[seconds fraction] (receipt-ts-instant ts)]
-    [1 seconds fraction ""]
-    [0 0 "" (pr-str (canonical-form ts))]))
+  (if-let [[seconds leap fraction] (receipt-ts-instant ts)]
+    [1 seconds leap fraction ""]
+    [0 0 0 "" (pr-str (canonical-form ts))]))
 
 (defn merge-ledger-records
   "Merges segment records into one ledger ordered by the instant named by

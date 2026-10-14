@@ -14,8 +14,10 @@ checks the merged ledger as a whole: no base segment edited or removed, no
 base record dropped, no record repeated, no new record in the legacy file, and
 every new record valid under the current receipt law.
 
-New records need an RFC 3339 `:ts` naming a real instant; historical records
+New records need an RFC 3339 `:ts` naming a real instant (second 60 only at
+an actual IERS leap second, 23:59:60 UTC); historical records
 keep whatever `:ts` they were written with. Writers in one checkout take
 `.receipt-river.writer.lock` for the whole reserve, gate and write sequence, so
 they run one at a time. A retained `.<segment>.append.lock` is a quarantine
 marker: the ledger stays closed to writers until someone adjudicates it.
+Segment and legacy files must not be executable (Git `100644` blobs only).
