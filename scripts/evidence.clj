@@ -134,7 +134,8 @@
                           (recur (inc j))
                           (min j n)))
                   token (subs text i end)]
-              (recur end (if (re-find #"^[+-]?[0-9]" token)
+              ;; `##Inf`, `##-Inf` and `##NaN` are symbolic numbers.
+              (recur end (if (re-find #"^(?:[+-]?[0-9]|##)" token)
                            (conj out token)
                            out)))))))))
 
@@ -163,7 +164,8 @@
   only numbers cljs.reader yields, so integers must be safe integers and a
   float must be the double's own shortest decimal, not integral (1.0 would
   read as the integer 1). N/M suffixes, ratios, radix, hex and leading-zero
-  forms are rejected."
+  forms are rejected, as are the symbolic non-finite ##Inf, ##-Inf and
+  ##NaN."
   [lexeme]
   (if-let [[_ digits] (re-matches #"[+-]?(0|[1-9][0-9]*)" lexeme)]
     (or (< (count digits) (count max-safe-integer-digits))
@@ -352,6 +354,12 @@
       (when-not (= 1 (count records))
         (throw (js/Error.
                 (str "Receipt River segment must contain exactly one record: "
+                     segment-path))))
+      ;; The segment contract is one physical line: the record, then its
+      ;; only newline. Blank lines are not dropped silently.
+      (when (str/includes? (subs contents 0 (dec (count contents))) "\n")
+        (throw (js/Error.
+                (str "Receipt River segment must hold exactly one physical line: "
                      segment-path))))
       records)))
 
@@ -1414,6 +1422,11 @@
                     (when-let [stats (lstat-if-present!
                                       (path/join directory basename)
                                       "Receipt River segment README")]
+                      ;; Immutable readers require a 100644 blob; a directory or
+                      ;; special file with mode 0644 would pass an executable-bit
+                      ;; check and then fail verification after commit.
+                      (require-regular-stats!
+                       stats "Receipt River segment README")
                       (require-non-executable-stats!
                        stats "Receipt River segment README")
                       nil)
