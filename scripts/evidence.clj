@@ -1262,6 +1262,11 @@
                     (when-let [stats (lstat-if-present!
                                       (path/join directory basename)
                                       "Receipt River segment README")]
+                      ;; Immutable readers require a 100644 blob; a directory or
+                      ;; special file with mode 0644 would pass an executable-bit
+                      ;; check and then fail verification after commit.
+                      (require-regular-stats!
+                       stats "Receipt River segment README")
                       (require-non-executable-stats!
                        stats "Receipt River segment README")
                       nil)
@@ -1547,6 +1552,20 @@
                 (if (or @retain-writer-lock? @directory-replaced?)
                   (retain-quarantine-lock! parent writer-lock)
                   (release-writer-lock! parent writer-lock)))
+              ;; Writer-lock unlink can be the signal gate-spawned work waits
+              ;; on before renaming the segment directory. Recheck while the
+              ;; ancestor descriptor is still held so a post-release replace
+              ;; still quarantines the canonical ledger.
+              (when (and ancestor
+                         (not @directory-replaced?)
+                         (not (parent-identity-intact? parent)))
+                (reset! directory-replaced? true)
+                (establish-ledger-quarantine! ancestor)
+                (reset! late-replacement-error
+                        (js/Error.
+                         (str "the Receipt River segment directory was replaced "
+                              "after writer-lock release; the ledger must be "
+                              "adjudicated by hand"))))
               (finally
                 (try
                   (fs/closeSync (:fd parent))
@@ -1597,7 +1616,15 @@
   ;; A gate can run for a long time; the rest of the ledger must still extend
   ;; HEAD at the moment this receipt is written.
   (when semantic-basename
-    (let [working (validate-working-receipt-ledger! semantic-basename)]
+    ;; The ledger validated before the gate ran. Any failure now — or a
+    ;; successful revalidation that differs — means the working ledger changed
+    ;; while the gate ran, so quarantine before throwing so cleanup retains
+    ;; the lock and forged segments cannot become ordinary extensions.
+    (let [working (try
+                    (validate-working-receipt-ledger! semantic-basename)
+                    (catch :default error
+                      (reset! quarantined? true)
+                      (throw error)))]
       (when-not (same-working-ledger? validated-working working)
         (reset! quarantined? true)
         (append-error!
@@ -1712,6 +1739,18 @@
             repository-path))
         (:catalog/repositories catalog)))
 
+(defn quarantine-if-ledger-changed!
+  "When a gate throws without writing, mark the reservation quarantined if the
+  working ledger no longer matches the pre-gate snapshot (or no longer validates)."
+  [{:keys [quarantined? semantic-basename validated-working]}]
+  (when (and semantic-basename quarantined? (not @quarantined?))
+    (try
+      (let [working (validate-working-receipt-ledger! semantic-basename)]
+        (when-not (same-working-ledger? validated-working working)
+          (reset! quarantined? true)))
+      (catch :default _
+        (reset! quarantined? true)))))
+
 (defn run-selected-gates! [catalog catalog-identity {:keys [only kinds]}]
   ;; Fail before a gate executes when this host cannot durably retain its result.
   (require-secure-append-support!)
@@ -1731,10 +1770,17 @@
                             (with-append-reservation!
                               (new-receipt-segment-file) true
                               (fn [reservation]
-                                (let [result (run-gate!
-                                              (get paths repository-path)
-                                              gate
-                                              catalog-identity)]
+                                (let [result
+                                      (try
+                                        (run-gate!
+                                         (get paths repository-path)
+                                         gate
+                                         catalog-identity)
+                                        (catch :default error
+                                          ;; Gate threw before append: revalidate
+                                          ;; so a forged segment still quarantines.
+                                          (quarantine-if-ledger-changed! reservation)
+                                          (throw error)))]
                                   (append-evidence-receipt! reservation result)
                                   result)))))
                         gates)
