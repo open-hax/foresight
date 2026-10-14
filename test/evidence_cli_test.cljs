@@ -772,6 +772,70 @@
                  (lock-files segments))
               "the lock quarantines the ledger until the forged segment is adjudicated"))))))
 
+(defn run-gate-against-reserved-segment! [segments mutate!]
+  (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+        renamed (path/join segments "2026-10-13T000001000Z-forged.edn")
+        forged-line (cli/encode-edn-line!
+                     (cli/validated-evidence-receipt!
+                      (assoc passed-result :result/command ["forged"])))]
+    (with-redefs [cli/new-receipt-segment-file (fn [] segment)
+                  cli/git-capture! (fn [_] reviewed-root-revision)
+                  cli/read-immutable-receipt-ledger! empty-committed-ledger
+                  cli/read-immutable-receipt-segments! (fn [_] {})
+                  cli/require-repositories!
+                  (fn [& _]
+                    {"repo" {:path "repo"
+                             :absolute "/repo"
+                             :revision child-revision}})
+                  cli/run-gate!
+                  (fn [& _]
+                    (mutate! {:segment segment :renamed renamed
+                              :forged-line forged-line})
+                    passed-result)]
+      (is (thrown?
+           js/Error
+           (cli/run-selected-gates!
+            {:catalog/repositories
+             {"repo" {:repository/path "repo"
+                      :repository/gates [local-gate]}}}
+            test-catalog-identity
+            {:only #{"repo"} :kinds #{:unit}}))))
+    {:segment segment :renamed renamed}))
+
+(deftest selected-gates-quarantine-a-renamed-reservation
+  ;; Path absence is not proof of removal: the reserved inode may live on
+  ;; under another well-named segment holding forged content.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file]
+        (let [{:keys [segment renamed]}
+              (run-gate-against-reserved-segment!
+               segments
+               (fn [{:keys [segment renamed forged-line]}]
+                 (fs/renameSync segment renamed)
+                 (fs/writeFileSync renamed (str forged-line "\n") "utf8")))]
+          (is (= [(path/basename renamed)] (segment-names segments)))
+          (is (= [(str "." (path/basename segment) ".append.lock")]
+                 (lock-files segments))
+              "the lock is retained because the held inode was not unlinked")
+          (is (thrown-with-msg?
+               js/Error #"retained append lock quarantines"
+               (cli/read-working-receipt-segments! nil))))))))
+
+(deftest selected-gates-release-an-unlinked-reservation
+  ;; When the held inode is provably gone (no links remain), nothing of the
+  ;; reservation survives and the lock is released.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (with-redefs [cli/receipt-file file]
+        (run-gate-against-reserved-segment!
+         segments
+         (fn [{:keys [segment]}] (fs/unlinkSync segment)))
+        (is (= [] (segment-names segments)))
+        (is (= [] (lock-files segments)))))))
+
 (deftest working-ledger-files-are-read-through-the-validated-descriptor
   (with-receipt-fixture
     (fn [{:keys [segments]}]
@@ -1031,6 +1095,28 @@
                        (:ledger/bytes
                         (cli/read-immutable-receipt-ledger! base)))))))))
 
+(deftest receipt-verification-exempts-historical-timestamps
+  ;; The canonical-instant rule binds new records only; retained history with
+  ;; an earlier free-form :ts still verifies against itself and its extensions.
+  (with-historical-ledger-fixture true
+    (fn [{:keys [historical current commit!]}]
+      (let [legacy-text (str (pr-str (assoc historical :ts "yesterday")) "\n")
+            base (commit! legacy-text)
+            _ (is (zero? (cli/verify-receipts! {:base base :at base})))
+            head (commit! legacy-text
+                          {"2026-08-29T172240Z-a.edn"
+                           (str (pr-str current) "\n")})
+            _ (with-out-str
+                (is (zero? (cli/verify-receipts! {:base base :at head}))))
+            invalid (commit! legacy-text
+                             {"2026-08-29T172240Z-a.edn"
+                              (str (pr-str (assoc current :ts
+                                                  "2026-02-30T12:00:00Z"))
+                                   "\n")})]
+        (is (thrown-with-msg?
+             js/Error #"invalid receipt envelopes"
+             (cli/verify-receipts! {:base base :at invalid})))))))
+
 (deftest merged-ledger-orders-by-timestamp-then-record-id
   (let [a {:ts "2026-01-02T00:00:00Z" :n 1}
         b {:ts "2026-01-01T00:00:00Z" :n 2}
@@ -1077,6 +1163,10 @@
                 "2026-10-13T120060Z-a.edn"]]
     (is (not (cli/receipt-segment-name? name)) name))
   (is (cli/receipt-segment-name? "2024-02-29T235959999Z-leap.edn"))
+  ;; Two-digit years are real years, not 1900-based Date.UTC offsets.
+  (is (cli/receipt-segment-name? "0050-01-01T000000Z-a.edn"))
+  (is (cli/receipt-segment-name? "0099-12-31T235959Z-a.edn"))
+  (is (not (cli/receipt-segment-name? "0050-02-29T000000Z-a.edn")))
   (is (cli/receipt-segment-name?
        (path/basename (cli/new-receipt-segment-file)))))
 

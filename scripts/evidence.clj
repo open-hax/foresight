@@ -163,20 +163,14 @@
 
 (defn receipt-segment-timestamp-valid?
   "The name's timestamp must be a real UTC calendar date and clock time, not
-  only the right number of digits."
+  only the right number of digits. The receipt timestamp law decides, so any
+  four-digit year (including 0000-0099) is read literally."
   [value]
-  (when-let [[_ & fields]
+  (when-let [[_ year month day hour minute second]
              (re-matches #"([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2})([0-9]{2})([0-9]{2}).*"
                          value)]
-    (let [[year month day hour minute second] (map #(js/parseInt % 10) fields)
-          date (js/Date. (js/Date.UTC year (dec month) day hour minute second))]
-      (and (< hour 24) (< minute 60) (< second 60)
-           (= year (.getUTCFullYear date))
-           (= (dec month) (.getUTCMonth date))
-           (= day (.getUTCDate date))
-           (= hour (.getUTCHours date))
-           (= minute (.getUTCMinutes date))
-           (= second (.getUTCSeconds date))))))
+    (law/canonical-receipt-ts?
+     (str year "-" month "-" day "T" hour ":" minute ":" second "Z"))))
 
 (defn receipt-segment-name? [value]
   (boolean (and (string? value)
@@ -1220,18 +1214,31 @@
          (fs/closeSync (:fd parent))
          (throw error))))))
 
+(defn held-inode-unlinked?
+  "True only when the still-open reserved descriptor proves its inode has no
+  remaining directory entry. A closed descriptor proves nothing."
+  [{:keys [target target-open?]}]
+  (try
+    (and (or (nil? target-open?) @target-open?)
+         (let [stats (fs/fstatSync (:fd target) bigint-stat-options)]
+           (and (same-file? stats (:stats target))
+                (= "0" (str (.-nlink stats))))))
+    (catch :default _error false)))
+
 (defn remove-unwritten-segment!
   "Removes a reserved segment that was never written, while the lock is still
   held, so an aborted gate cannot leave an empty file in the ledger."
-  [{:keys [parent target target-path]}]
-  ;; Returns true only when no reserved segment is left behind: it was already
-  ;; gone, or it was still this writer's empty file and was removed. Anything
-  ;; else (content injected into it, a replaced file, a failed unlink) is false,
-  ;; and the caller retains the lock as a quarantine marker.
+  [{:keys [parent target target-path] :as reservation}]
+  ;; Returns true only when no reserved segment is left behind: it was still
+  ;; this writer's empty file and was removed, or its path is gone and the held
+  ;; descriptor proves the inode was unlinked. Anything else (content injected
+  ;; into it, a renamed or replaced file, a failed unlink) is false, and the
+  ;; caller retains the lock as a quarantine marker. Path absence alone is not
+  ;; proof: the inode may live on under another well-named segment.
   (try
     (let [stats (lstat-if-present! target-path "Receipt River file")]
       (cond
-        (nil? stats) true
+        (nil? stats) (held-inode-unlinked? reservation)
         (and (same-file? stats (:stats target))
              (zero? (safe-file-size! stats)))
         (do (fs/unlinkSync target-path)
@@ -1244,26 +1251,31 @@
   [{:keys [parent lock target target-open? write-started? write-verified?
            quarantined? semantic-basename]
     :as reservation}]
-  (try
-    (when @target-open?
-      (fs/closeSync (:fd target))
-      (reset! target-open? false))
-    (finally
-      (try
-        (let [unwritten-removed? (if (and semantic-basename (not @write-started?))
-                                   (remove-unwritten-segment! reservation)
-                                   true)]
+  (let [unwritten-removed? (atom false)]
+    (try
+      ;; Adjudicate the unwritten reservation while its descriptor is still
+      ;; held, so an unlinked inode can be told apart from a renamed one.
+      (reset! unwritten-removed?
+              (if (and semantic-basename (not @write-started?))
+                (remove-unwritten-segment! reservation)
+                true))
+      (when @target-open?
+        (fs/closeSync (:fd target))
+        (reset! target-open? false))
+      (finally
+        (try
           (if (or (and @write-started? (not @write-verified?))
-                  (not unwritten-removed?)
+                  (not @unwritten-removed?)
                   (and quarantined? @quarantined?))
             ;; A short write, fsync/close failure, post-write identity change,
-            ;; content injected into the reserved segment, or a segment added
-            ;; while the gate ran. Retain the lock as a durable quarantine
-            ;; marker so a later writer cannot normalize the damage.
+            ;; content injected into the reserved segment, a reservation moved
+            ;; out from under its path, or a segment added while the gate ran.
+            ;; Retain the lock as a durable quarantine marker so a later
+            ;; writer cannot normalize the damage.
             (fs/closeSync (:fd lock))
-            (release-append-lock! parent lock)))
-        (finally
-          (fs/closeSync (:fd parent)))))))
+            (release-append-lock! parent lock))
+          (finally
+            (fs/closeSync (:fd parent))))))))
 
 (defn with-append-reservation!
   ([file run!]
