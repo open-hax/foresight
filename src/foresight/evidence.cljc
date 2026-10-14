@@ -317,6 +317,21 @@
           (canonical-observation-receipt? receipt)
           (receipt-envelope? receipt)))))
 
+(defn duplicate-appended-event-ids
+  "Report exact event identities repeated by newly admitted records.
+  Trusted history seeds identity reservations without revalidating, rewriting
+  or deduplicating historical records. Legacy records without IDs add nothing.
+  Record-shape admission remains the caller's separate obligation."
+  [trusted-records appended-records]
+  (let [event-ids (fn [records]
+                    (keep #(when (map? %) (:event/id %)) records))
+        counts (frequencies (concat (set (event-ids trusted-records))
+                                    (event-ids appended-records)))]
+    (->> (event-ids appended-records)
+         (filter #(> (get counts % 0) 1))
+         distinct
+         vec)))
+
 (defn evidence-receipt? [receipt]
   (let [schema (:evidence/schema receipt)]
     (and (receipt-envelope? receipt)

@@ -105,6 +105,24 @@
                      "2026-10-14T06:12:17+00:00"]]
     (is (false? (evidence/utc-receipt-timestamp? timestamp)))))
 
+(deftest appended-event-identity-law-reserves-history-without-rewriting-it
+  (let [event-a {:event/id "a" :event/payload {:note "original"}}
+        changed-a (assoc-in event-a [:event/payload :note] "different")
+        event-b {:event/id "b"}
+        historical [event-a event-a {:kind :observation} 42]]
+    (is (= [] (evidence/duplicate-appended-event-ids historical [])))
+    (is (= [] (evidence/duplicate-appended-event-ids historical [event-b])))
+    (is (= ["a"] (evidence/duplicate-appended-event-ids historical [event-a])))
+    (is (= ["a"] (evidence/duplicate-appended-event-ids historical [changed-a])))
+    (is (= ["a"] (evidence/duplicate-appended-event-ids [] [event-a event-a])))
+    (is (= ["a"] (evidence/duplicate-appended-event-ids [] [event-a changed-a])))
+    (is (= ["b" "a"]
+           (evidence/duplicate-appended-event-ids historical
+                                                  [event-b event-b event-a])))
+    (is (= [] (evidence/duplicate-appended-event-ids
+               [{:event/id 42}] [{:event/id "42"} {:kind :test-run}])))
+    (is (= [event-a event-a {:kind :observation} 42] historical))))
+
 (deftest validates-gate-catalogs
   (is (evidence/valid-catalog? valid-catalog))
   (is (= :gate/command
