@@ -223,11 +223,21 @@
        (git-commit-id? (:ledger/revision value))
        (sha256? (:ledger/sha256 value))))
 
+(defn canonical-receipt-ts?
+  "True when `ts` is a UTC (or offset) instant string suitable as a merge key."
+  [ts]
+  (boolean
+   (and (string? ts)
+        (re-matches
+         #"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})"
+         ts))))
+
 (defn receipt-envelope? [receipt]
   (and (map? receipt)
        (keyword? (:kind receipt))
+       (canonical-receipt-ts? (:ts receipt))
        (every? nonblank-string?
-               ((juxt :ts :origin :owner :dod :pi :host) receipt))
+               ((juxt :origin :owner :dod :pi :host) receipt))
        (vector? (:manifest receipt))
        (every? nonblank-string? (:manifest receipt))
        (vector? (:refs receipt))
@@ -400,11 +410,19 @@
        (mapv #(mapv :path %))))
 
 (defn merge-ledger-records
-  "Merges segment records into one ledger ordered by `:ts`, then record ID."
+  "Merges segment records into one ledger ordered by `:ts`, then record ID.
+  Map records must carry a canonical instant `:ts` before they may sort."
   [id-fn segments]
-  (->> (for [{:segment/keys [records]} segments
-             record records]
-         {:record record :id (id-fn record)})
-       (sort-by (fn [{:keys [record id]}]
-                  [(str (when (map? record) (:ts record))) id]))
-       (mapv :record)))
+  (let [rows (for [{:segment/keys [records]} segments
+                   record records]
+               (do
+                 (when (and (map? record)
+                            (contains? record :ts)
+                            (not (canonical-receipt-ts? (:ts record))))
+                   (throw (ex-info "Receipt River record :ts is not a canonical instant"
+                                   {:ts (:ts record)})))
+                 {:record record :id (id-fn record)}))]
+    (->> rows
+         (sort-by (fn [{:keys [record id]}]
+                    [(str (when (map? record) (:ts record))) id]))
+         (mapv :record))))
