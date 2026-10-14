@@ -224,7 +224,8 @@
        (sha256? (:ledger/sha256 value))))
 
 (def ^:private receipt-ts-pattern
-  #"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(?:(Z)|([+-])(\d{2}):(\d{2}))")
+  ;; RFC 3339 §5.6 permits lowercase t/z as well as uppercase T/Z.
+  #"(\d{4})-(\d{2})-(\d{2})[Tt](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(?:([Zz])|([+-])(\d{2}):(\d{2}))")
 
 (defn- parse-decimal [digits]
   #?(:clj (Long/parseLong digits)

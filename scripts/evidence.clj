@@ -1477,16 +1477,20 @@
     :as reservation}]
   (let [unwritten-removed? (atom false)
         retain-writer-lock? (atom false)
+        late-replacement-error (atom nil)
         ;; The canonical segment directory is no longer the one this
         ;; reservation holds. Locks and cleanup below reach only the renamed
         ;; directory, so the quarantine goes into the stable `.ημ` ancestor.
-        directory-replaced? (boolean
-                             (and ancestor
-                                  (or (and parent-replaced? @parent-replaced?)
-                                      (not (parent-identity-intact? parent)))))]
+        ;; Kept live until writer-lock release: a rename after the per-segment
+        ;; unlock would otherwise miss the one-time snapshot below.
+        directory-replaced? (atom
+                             (boolean
+                              (and ancestor
+                                   (or (and parent-replaced? @parent-replaced?)
+                                       (not (parent-identity-intact? parent))))))]
     (try
       (try
-        (when directory-replaced?
+        (when @directory-replaced?
           (establish-ledger-quarantine! ancestor))
         (finally
           ;; Adjudicate the unwritten reservation while its descriptor is still
@@ -1503,7 +1507,7 @@
           (if (or (and @write-started? (not @write-verified?))
                   (not @unwritten-removed?)
                   (and quarantined? @quarantined?)
-                  directory-replaced?)
+                  @directory-replaced?)
             ;; A short write, fsync/close failure, post-write identity change,
             ;; content injected into the reserved segment, a reservation moved
             ;; out from under its path, a segment added while the gate ran, or
@@ -1522,17 +1526,37 @@
             (reset! retain-writer-lock? true)
             (throw error))
           (finally
+            ;; Recheck after segment-lock cleanup. Gate-spawned work that
+            ;; watches the unlock can rename/replace the directory before the
+            ;; writer lock is released; following the held descriptor then
+            ;; would clear that lock in the renamed directory and leave the
+            ;; canonical ledger unquarantined.
+            (when (and ancestor
+                       (not @directory-replaced?)
+                       (not (parent-identity-intact? parent)))
+              (reset! directory-replaced? true)
+              (establish-ledger-quarantine! ancestor)
+              (reset! retain-writer-lock? true)
+              (reset! late-replacement-error
+                      (js/Error.
+                       (str "the Receipt River segment directory was replaced "
+                            "during lock cleanup; the ledger must be "
+                            "adjudicated by hand"))))
             (try
               (when writer-lock
-                (if (or @retain-writer-lock? directory-replaced?)
+                (if (or @retain-writer-lock? @directory-replaced?)
                   (retain-quarantine-lock! parent writer-lock)
                   (release-writer-lock! parent writer-lock)))
               (finally
                 (try
                   (fs/closeSync (:fd parent))
                   (finally
-                    (when ancestor
-                      (fs/closeSync (:fd ancestor)))))))))))))
+                    (try
+                      (when ancestor
+                        (fs/closeSync (:fd ancestor)))
+                      (finally
+                        (when-let [error @late-replacement-error]
+                          (throw error))))))))))))))
 
 (defn with-append-reservation!
   ([file run!]
