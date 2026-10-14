@@ -875,6 +875,59 @@
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
 
+(deftest selected-gates-quarantine-a-segment-added-after-the-receipt-write
+  ;; Gate-spawned work can wait for the reserved segment to become nonempty
+  ;; and then add a schema-valid forged segment. The pre-write comparison has
+  ;; already passed, so the whole working ledger is compared again after the
+  ;; write; an unexpected segment quarantines before the locks are released.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))]
+        (fs/writeFileSync file "" "utf8")
+        (binding [cli/*secure-append-phase-hook*
+                  (fn [phase _]
+                    (when (= :after-write phase)
+                      (fs/writeFileSync forged (str forged-line "\n") "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"changed after the receipt was written"
+               (run-semantic-gate-with! file segment (fn [])))))
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
+(deftest selected-gates-quarantine-a-segment-added-during-lock-cleanup
+  ;; The same forged segment can be added once the per-segment lock is
+  ;; released, while the writer lock still serializes the checkout. Compare
+  ;; the whole ledger again before releasing the writer lock and retain it as
+  ;; the quarantine marker on any change.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            forged? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        ;; Forge only after the first (per-segment) unlock.
+                        (when (compare-and-set! forged? false true)
+                          (fs/writeFileSync forged (str forged-line "\n")
+                                            "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"changed during lock cleanup"
+               (run-semantic-gate-with! file segment (fn [])))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
 (deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
   ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
   ;; durable forged segment. The held `.ημ` descriptor then names the moved
