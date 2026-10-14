@@ -1360,11 +1360,40 @@
          js/Error #"must round-trip exactly"
          (cli/read-receipt-records! (str "{:n " lexeme "}\n")))
         lexeme))
+  (doseq [lexeme ["##Inf" "##-Inf" "##NaN"]]
+    (is (thrown-with-msg?
+         js/Error #"must round-trip exactly"
+         (cli/read-receipt-records! (str "{:n " lexeme "}\n")))
+        (str "symbolic non-finite " lexeme)))
   (is (thrown-with-msg?
        js/Error #"must round-trip exactly"
        (cli/encode-edn-line! {:n 9007199254740992}))
       "the writer refuses a receipt its readers would reject")
   (is (not= (cli/record-id {:n 1}) (cli/record-id {:n 2}))))
+
+(deftest receipt-segments-hold-exactly-one-physical-line
+  ;; The segment contract is one physical EDN line; blank lines before or
+  ;; after the record are not discarded silently.
+  (is (= [{:a 1}] (cli/read-segment-records! "s.edn" (js/Buffer.from "{:a 1}\n"))))
+  (doseq [text ["\n{:a 1}\n" "{:a 1}\n\n" "{:a 1}\n \n"]]
+    (is (thrown-with-msg?
+         js/Error #"exactly one physical line"
+         (cli/read-segment-records! "s.edn" (js/Buffer.from text)))
+        (pr-str text))))
+
+(deftest working-readme-must-be-a-regular-file
+  ;; Immutable review accepts the README only as a 100644 blob, so the working
+  ;; ledger rejects a directory (or other non-regular entry) at that path.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      ;; A directory without execute bits passes an executable-bit check.
+      (fs/mkdirSync (path/join segments "README.md"))
+      (fs/chmodSync (path/join segments "README.md") 420)
+      (with-redefs [cli/receipt-file file]
+        (is (thrown-with-msg?
+             js/Error #"README must be a regular file"
+             (cli/read-working-receipt-segments! "x.edn")))))))
 
 (deftest immutable-catalog-requires-one-complete-edn-form
   (let [contents "{:catalog/version 1}\n"
