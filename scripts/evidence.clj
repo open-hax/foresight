@@ -1358,6 +1358,17 @@
        (every? true? (map #(.equals (:segment/bytes %1) (:segment/bytes %2))
                           before after))))
 
+(defn working-ledger-unchanged-after-write?
+  "Re-reads the whole working ledger (skipping only the caller's reserved
+  segment and its locks) and compares it with the pre-gate snapshot. Any
+  read or validation failure counts as a change."
+  [{:keys [semantic-basename validated-working]}]
+  (try
+    (same-working-ledger?
+     validated-working
+     (validate-working-receipt-ledger! semantic-basename))
+    (catch :default _error false)))
+
 (defn require-held-ledger-unchanged! [target validated-bytes]
   (let [current-bytes (stable-held-target-bytes! target)]
     (when-not (.equals validated-bytes current-bytes)
@@ -1593,6 +1604,26 @@
                        (str "the Receipt River segment directory was replaced "
                             "during lock cleanup; the ledger must be "
                             "adjudicated by hand"))))
+            ;; A verified write released its segment lock above; the writer
+            ;; lock still serializes this checkout. Compare the whole ledger
+            ;; once more so a segment added during lock cleanup keeps the
+            ;; writer lock as the quarantine marker.
+            (when (and writer-lock
+                       semantic-basename
+                       @write-verified?
+                       (not @retain-writer-lock?)
+                       (not @directory-replaced?)
+                       (not (and quarantined? @quarantined?))
+                       (not (working-ledger-unchanged-after-write?
+                             reservation)))
+              (reset! retain-writer-lock? true)
+              (when-not @late-replacement-error
+                (reset! late-replacement-error
+                        (js/Error.
+                         (str "the Receipt River ledger changed during lock "
+                              "cleanup: only the reserved segment may be "
+                              "added; the ledger must be adjudicated by "
+                              "hand")))))
             (try
               (when writer-lock
                 (if (or @retain-writer-lock? @directory-replaced?)
@@ -1717,6 +1748,15 @@
         (require-non-executable-stats! final-stats "Receipt River segment")))
     (when-not (.equals expected-bytes (stable-held-target-bytes! target))
       (append-error! "Receipt River bytes changed after append"))
+    ;; The pre-write comparison is not the last word: gate-spawned work can
+    ;; wait for the reserved segment to become nonempty and then add a forged
+    ;; segment. Compare the whole ledger again before the locks are released.
+    (when (and semantic-basename
+               (not (working-ledger-unchanged-after-write? reservation)))
+      (reset! quarantined? true)
+      (append-error!
+       (str "Receipt River ledger changed after the receipt was written: "
+            "only the reserved segment may be added")))
     ;; Closing is part of the verified write boundary. If it fails, the outer
     ;; reservation cleanup retains the lock as a quarantine marker.
     (fs/closeSync (:fd target))
