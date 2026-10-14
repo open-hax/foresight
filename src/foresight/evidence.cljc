@@ -256,9 +256,10 @@
 
 (defn receipt-ts-instant
   "Parses an RFC 3339 timestamp into `[utc-epoch-seconds fraction-digits]`,
-  or nil unless it names a real calendar date, clock time, and UTC offset.
-  Fraction digits drop trailing zeros, so equal instants compare equal and
-  fractions of any precision order correctly as strings."
+  or nil unless it names a real calendar date, clock time, and known UTC
+  offset. Rejects `-00:00` (RFC 3339 unknown-offset). Fraction digits drop
+  trailing zeros, so equal instants compare equal and fractions of any
+  precision order correctly as strings."
   [ts]
   (when (string? ts)
     (when-let [[_ year month day hour minute second fraction zulu sign
@@ -271,7 +272,12 @@
         (when (and (<= 1 month 12)
                    (<= 1 day (days-in-month year month))
                    (< hour 24) (< minute 60) (< second 60)
-                   (< offset-hour 24) (< offset-minute 60))
+                   (< offset-hour 24) (< offset-minute 60)
+                   ;; RFC 3339: -00:00 means the local offset is unknown, so the
+                   ;; timestamp does not name a known UTC instant.
+                   (not (and (= "-" sign)
+                             (zero? offset-hour)
+                             (zero? offset-minute))))
           (let [offset-seconds (* (if (= "-" sign) -1 1)
                                   (+ (* 3600 offset-hour) (* 60 offset-minute)))]
             [(- (+ (* 86400 (days-from-civil year month day))

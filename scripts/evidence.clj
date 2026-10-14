@@ -1172,10 +1172,12 @@
 (declare remove-unwritten-segment!)
 
 (defn release-writer-lock!
-  "Releases the ledger-wide writer lock. A quarantine is carried by the
-  retained per-segment lock, so the writer lock never outlives its writer.
-  If release fails (the lock was replaced, or its unlink or directory fsync
-  failed) every later writer would be blocked, so the failure is reported."
+  "Releases the ledger-wide writer lock. A quarantine is normally carried by
+  the retained per-segment lock, so the writer lock does not outlive its
+  writer. When segment-lock cleanup itself fails, `close-append-reservation!`
+  retains the writer lock instead. If release fails (the lock was replaced,
+  or its unlink or directory fsync failed) every later writer would be
+  blocked, so the failure is reported."
   [parent writer-lock]
   (try
     (release-append-lock! parent writer-lock)
@@ -1310,7 +1312,8 @@
   [{:keys [parent lock writer-lock target target-open? write-started?
            write-verified? quarantined? semantic-basename]
     :as reservation}]
-  (let [unwritten-removed? (atom false)]
+  (let [unwritten-removed? (atom false)
+        retain-writer-lock? (atom false)]
     (try
       ;; Adjudicate the unwritten reservation while its descriptor is still
       ;; held, so an unlinked inode can be told apart from a renamed one.
@@ -1333,10 +1336,19 @@
             ;; writer cannot normalize the damage.
             (fs/closeSync (:fd lock))
             (release-append-lock! parent lock))
+          (catch :default error
+            ;; Segment-lock identity or cleanup failed (for example the lock
+            ;; was unlinked while a candidate added its own segment). Keep the
+            ;; writer lock as the quarantine marker so the next run cannot
+            ;; treat that segment as an ordinary extension.
+            (reset! retain-writer-lock? true)
+            (throw error))
           (finally
             (try
               (when writer-lock
-                (release-writer-lock! parent writer-lock))
+                (if @retain-writer-lock?
+                  (fs/closeSync (:fd writer-lock))
+                  (release-writer-lock! parent writer-lock)))
               (finally
                 (fs/closeSync (:fd parent))))))))))
 

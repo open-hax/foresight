@@ -802,6 +802,55 @@
             {:only #{"repo"} :kinds #{:unit}}))))
     {:segment segment :renamed renamed}))
 
+(deftest selected-gates-retain-writer-lock-when-segment-lock-vanishes
+  ;; Candidate gate code can unlink the per-segment lock and add its own
+  ;; well-named segment. Pre-write lock-identity then aborts before ledger
+  ;; revalidation; cleanup must keep the writer lock so the forged segment
+  ;; cannot be accepted as an ordinary extension on the next run.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            append-lock (path/join segments
+                                   (str "." (path/basename segment) ".append.lock"))
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/receipt-file file
+                      cli/new-receipt-segment-file (fn [] segment)
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/require-repositories!
+                      (fn [& _]
+                        {"repo" {:path "repo"
+                                 :absolute "/repo"
+                                 :revision child-revision}})
+                      cli/run-gate!
+                      (fn [& _]
+                        (fs/unlinkSync append-lock)
+                        (fs/writeFileSync forged (str forged-line "\n") "utf8")
+                        passed-result)]
+          (is (thrown-with-msg?
+               js/Error #"append lock"
+               (cli/run-selected-gates!
+                {:catalog/repositories
+                 {"repo" {:repository/path "repo"
+                          :repository/gates [local-gate]}}}
+                test-catalog-identity
+                {:only #{"repo"} :kinds #{:unit}})))
+          (is (= [(path/basename forged)] (segment-names segments))
+              "no receipt was written for the gate")
+          (is (= [] (lock-files segments))
+              "the vanished segment lock leaves no per-segment quarantine")
+          (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+              "the writer lock is retained as the quarantine marker")
+          (is (thrown-with-msg?
+               js/Error #"active Receipt River reservation|writer lock"
+               (cli/open-append-reservation!
+                (path/join segments "2026-10-13T000002000Z-next.edn") true))))))))
+
 (deftest selected-gates-quarantine-a-renamed-reservation
   ;; Path absence is not proof of removal: the reserved inode may live on
   ;; under another well-named segment holding forged content.
