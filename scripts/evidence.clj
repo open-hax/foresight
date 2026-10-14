@@ -1858,6 +1858,27 @@
                          (str "the Receipt River segment directory was replaced "
                               "after writer-lock release; the ledger must be "
                               "adjudicated by hand"))))
+              ;; Content can change without replacing the directory: work that
+              ;; waited for the writer-lock unlink may add or rewrite a
+              ;; segment. Revalidate the whole ledger and reserved bytes; on
+              ;; mismatch recreate the writer-lock path as a quarantine marker.
+              (when (and writer-lock
+                         semantic-basename
+                         (or @write-verified? (not @write-started?))
+                         (not @directory-replaced?)
+                         (not (and quarantined? @quarantined?))
+                         (not (and (working-ledger-unchanged-after-write?
+                                    reservation)
+                                   (or (not @write-verified?)
+                                       (reserved-segment-intact? reservation)))))
+                (create-quarantine-marker! parent (:path writer-lock))
+                (when-not @late-replacement-error
+                  (reset! late-replacement-error
+                          (js/Error.
+                           (str "the Receipt River ledger changed after "
+                                "writer-lock release: only the reserved "
+                                "segment may be added; the ledger must be "
+                                "adjudicated by hand")))))
               (finally
                 (try
                   (fs/closeSync (:fd parent))
