@@ -1429,13 +1429,18 @@
   "Releases the ledger-wide writer lock. A quarantine is normally carried by
   the retained per-segment lock, so the writer lock does not outlive its
   writer. When segment-lock cleanup itself fails, `close-append-reservation!`
-  retains the writer lock instead. If release fails (the lock was replaced,
-  or its unlink or directory fsync failed) every later writer would be
-  blocked, so the failure is reported."
+  retains the writer lock instead. If release fails because the path was
+  unlinked or replaced, recreate a quarantine marker at the writer-lock path
+  (same as when both locks vanish) so a forged segment cannot become an
+  ordinary extension. Other release failures are still reported."
   [parent writer-lock]
   (try
     (release-append-lock! parent writer-lock)
     (catch :default error
+      ;; Gate code may unlink only the writer lock after a successful-looking
+      ;; append; retain-quarantine-lock! recreates the marker when the held
+      ;; descriptor no longer names the path.
+      (retain-quarantine-lock! parent writer-lock)
       (append-error!
        (str "the Receipt River writer lock could not be released and must be "
             "adjudicated by hand: " (.-message error))))))
@@ -1594,6 +1599,15 @@
         (when directory-replaced?
           (establish-ledger-quarantine! ancestor))
         (finally
+          ;; A gate that threw never reached append-reserved-edn-line!, so
+          ;; compare the ledger with its pre-gate snapshot here as well; a
+          ;; segment it added keeps the lock as the quarantine marker.
+          (when (and semantic-basename
+                     quarantined?
+                     (not @write-started?)
+                     (not @quarantined?)
+                     (not (working-ledger-unchanged-after-write? reservation)))
+            (reset! quarantined? true))
           ;; Adjudicate the unwritten reservation while its descriptor is still
           ;; held, so an unlinked inode can be told apart from a renamed one.
           (reset! unwritten-removed?
@@ -1674,6 +1688,10 @@
     :target-path target-path})
   (require-reserved-parent-identity! reservation)
   (require-append-lock-identity! lock)
+  ;; Gate code may unlink only the ledger-wide writer lock; never write a
+  ;; receipt without it.
+  (when-let [writer-lock (:writer-lock reservation)]
+    (require-append-lock-identity! writer-lock))
   (require-held-ledger-unchanged! target held-ledger-bytes)
   ;; A gate can run for a long time; the rest of the ledger must still extend
   ;; HEAD at the moment this receipt is written.
@@ -1728,6 +1746,8 @@
       :target-path target-path})
     (require-reserved-parent-identity! reservation)
     (require-append-lock-identity! lock)
+    (when-let [writer-lock (:writer-lock reservation)]
+      (require-append-lock-identity! writer-lock))
     (let [final-stats (require-target-identity! target)]
       (when semantic-basename
         (require-non-executable-stats! final-stats "Receipt River segment")))

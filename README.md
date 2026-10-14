@@ -138,7 +138,8 @@ its own new segment with `O_EXCL` and a sibling lock for that segment; a
 reservation that ends before writing removes its empty segment. A retained
 lock (see below) quarantines the whole ledger. The rest of the working ledger
 is revalidated against `HEAD` immediately before the receipt is written, and
-compared with the pre-gate snapshot again after it is written. A
+compared with the pre-gate snapshot again after it is written or when a
+gate aborts before writing. The writer lock is verified around the write. A
 complete line is bounded to 1 MiB, written through the held descriptor,
 size-checked, and followed by file and directory `fsync`. Pre-write rejection
 releases the lock, unless the working ledger changed while the gate ran; that

@@ -805,8 +805,10 @@
 (deftest selected-gates-retain-writer-lock-when-segment-lock-vanishes
   ;; Candidate gate code can unlink the per-segment lock and add its own
   ;; well-named segment. Pre-write lock-identity then aborts before ledger
-  ;; revalidation; cleanup must keep the writer lock so the forged segment
-  ;; cannot be accepted as an ordinary extension on the next run.
+  ;; revalidation; cleanup compares the unwritten reservation's ledger with
+  ;; the pre-gate snapshot, so the vanished segment lock is recreated as a
+  ;; durable quarantine marker and the forged segment cannot be accepted as an
+  ;; ordinary extension on the next run.
   (with-receipt-fixture
     (fn [{:keys [segments file]}]
       (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
@@ -842,12 +844,10 @@
                 {:only #{"repo"} :kinds #{:unit}})))
           (is (= [(path/basename forged)] (segment-names segments))
               "no receipt was written for the gate")
-          (is (= [] (lock-files segments))
-              "the vanished segment lock leaves no per-segment quarantine")
-          (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
-              "the writer lock is retained as the quarantine marker")
+          (is (= [(path/basename append-lock)] (lock-files segments))
+              "the vanished segment lock is recreated as the quarantine marker")
           (is (thrown-with-msg?
-               js/Error #"active Receipt River reservation|writer lock"
+               js/Error #"quarantines the Receipt River ledger"
                (cli/open-append-reservation!
                 (path/join segments "2026-10-13T000002000Z-next.edn") true))))))))
 
@@ -1250,8 +1250,8 @@
                           :repository/gates [local-gate]}}}
                 test-catalog-identity
                 {:only #{"repo"} :kinds #{:unit}})))
-          (is (= 1 (count (segment-records segments)))
-              "the verified receipt itself was written")
+          (is (= [] (segment-records segments))
+              "no receipt is written once the writer lock was replaced")
           (is (= "pid=0\n" (fs/readFileSync writer-lock "utf8"))
               "the replaced lock is left for adjudication")
           (is (= [] (lock-files segments))))))))

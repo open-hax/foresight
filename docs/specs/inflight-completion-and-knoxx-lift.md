@@ -145,8 +145,11 @@ write, verifies the resulting size, and synchronizes both the file and parent
 directory. A failure before the write removes an empty reserved segment and
 releases the lock, unless the working ledger changed while the gate ran; that
 change keeps the lock as a quarantine marker. The rest of the working ledger
-is compared with the pre-gate snapshot again after the write, and a change
-there also keeps the lock. If the reserved path has vanished, the lock is released only
+is compared with the pre-gate snapshot again after the write, and when a
+gate aborts before writing; a change there also keeps the lock. No receipt is
+written unless the writer lock still names its path before and after the
+write, and a writer lock that cannot be released is recreated as a
+quarantine marker. If the reserved path has vanished, the lock is released only
 when the still-held descriptor proves the inode unlinked; a renamed
 reservation keeps the lock. Any uncertain result after writing begins deliberately
 retains the lock as a quarantine marker for the whole ledger so a later
