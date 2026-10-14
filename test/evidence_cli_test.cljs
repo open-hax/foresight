@@ -928,6 +928,100 @@
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
 
+(deftest selected-gates-quarantine-a-segment-changed-after-it-is-closed
+  ;; Gate-spawned work can watch the reserved segment for CLOSE_WRITE and
+  ;; overwrite it in place or rename another file over it right after the
+  ;; verified close. The written bytes are kept and the reserved path is
+  ;; revalidated after closing; any mismatch quarantines.
+  (doseq [[label mutate!]
+          [["overwritten in place"
+            (fn [segment forged-line]
+              (fs/writeFileSync segment (str forged-line "\n") "utf8"))]
+           ["replaced by rename"
+            (fn [segment forged-line]
+              (let [staged (str segment ".staged")]
+                (fs/writeFileSync staged (str forged-line "\n") "utf8")
+                (fs/renameSync staged segment)))]]]
+    (with-receipt-fixture
+      (fn [{:keys [segments file]}]
+        (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+              forged-line (cli/encode-edn-line!
+                           (cli/validated-evidence-receipt!
+                            (assoc passed-result :result/command ["forged"])))]
+          (fs/writeFileSync file "" "utf8")
+          (binding [cli/*secure-append-phase-hook*
+                    (fn [phase _]
+                      (when (= :after-close phase)
+                        (mutate! segment forged-line)))]
+            (is (thrown-with-msg?
+                 js/Error #"changed after it was closed"
+                 (run-semantic-gate-with! file segment (fn [])))
+                label))
+          (is (next-writer-refused? segments file)
+              (str label ": the altered receipt cannot become ordinary evidence")))))))
+
+(deftest selected-gates-quarantine-a-segment-changed-during-lock-cleanup
+  ;; The same overwrite can land once the per-segment lock is released. The
+  ;; reserved segment is revalidated before the writer lock is released, and
+  ;; the writer lock is retained as the quarantine marker on any change.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            forged? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        (when (compare-and-set! forged? false true)
+                          (fs/writeFileSync segment (str forged-line "\n")
+                                            "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"changed during lock cleanup"
+               (run-semantic-gate-with! file segment (fn [])))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the altered receipt cannot become ordinary evidence")))))
+
+(deftest lock-acquisition-failures-remove-the-new-lock
+  ;; A lock this process created with O_EXCL is removed again when marker
+  ;; setup fails before any gate ran, so later writers are not blocked by a
+  ;; lock nobody holds. A path that no longer names the created lock is left
+  ;; for adjudication.
+  (with-receipt-fixture
+    (fn [{:keys [segments]}]
+      (let [parent (cli/open-parent-directory! segments)
+            segment-lock (path/join segments ".test.edn.append.lock")
+            writer-lock (path/join segments cli/receipt-writer-lock-name)]
+        (try
+          (with-redefs [cli/write-all! (fn [& _] (throw (js/Error. "marker write failed")))]
+            (is (thrown-with-msg?
+                 js/Error #"marker write failed"
+                 (cli/acquire-append-lock! parent "test.edn")))
+            (is (not (fs/existsSync segment-lock))
+                "an aborted segment-lock acquisition leaves no lock")
+            (is (thrown-with-msg?
+                 js/Error #"marker write failed"
+                 (cli/acquire-receipt-writer-lock! parent)))
+            (is (not (fs/existsSync writer-lock))
+                "an aborted writer-lock acquisition leaves no lock"))
+          (with-redefs [cli/write-all!
+                        (fn [& _]
+                          (fs/unlinkSync segment-lock)
+                          (fs/writeFileSync segment-lock "other\n" "utf8")
+                          (throw (js/Error. "marker write failed")))]
+            (is (thrown-with-msg?
+                 js/Error #"marker write failed"
+                 (cli/acquire-append-lock! parent "test.edn")))
+            (is (= "other\n" (fs/readFileSync segment-lock "utf8"))
+                "a replaced lock path is not removed"))
+          (finally
+            (fs/closeSync (:fd parent))))))))
+
 (deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
   ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
   ;; durable forged segment. The held `.ημ` descriptor then names the moved
