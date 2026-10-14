@@ -556,3 +556,12 @@
   spore: none
   receipt-refs: bd7cdb59a4581225078fafef7d861a77e2f4feeadb67681df355bcb5da65523f
   note: Source-only corrections and genuine metadata custody advanced. Keep first-class initial authoring distinct from creation events; preserve protected relationships and shared identity-law ownership. All implementation, native review, qualification and deployment obligations remain; no new spore.
+- ts: 2026-10-14T14:12:54.617156411Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: correct-existing-durable-receipt-card-from-real-retention-gap
+  p-efficiency: 0.83
+  p-friction: 0.31
+  p-skill-candidate: 0.00
+  spore: none
+  receipt-refs: b4cdfa1e495fbb2739c9f83d2a920b0210bc8570f9a2e0dd869883e8065eb5f9
+  note: Immutable event identity differs from operation correlation: multiple lawful emissions can share correlation and receipt bodies. Reuse the canonical admission authority and require selected actual writer/readback qualification. A failed bare loader probe from missing classpath is not proof that a CLJC writer is JVM-only, and source pinning is not runtime qualification. Correct the existing scope from actual CMS loss after rollover, preserving metadata and immutable history rather than creating another plan. No new spore or promotion.
