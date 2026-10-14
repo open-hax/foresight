@@ -33,13 +33,22 @@
     (catch :default error
       (throw (js/Error. (str "Invalid " label ": " (.-message error)))))))
 
-(def max-receipt-line-bytes (* 1024 1024))
+(def max-receipt-line-bytes
+  "Ceiling for one complete segment blob: the EDN record plus its mandatory
+  trailing newline."
+  (* 1024 1024))
 
 (def max-receipt-batch-bytes
-  "Ceiling for one immutable `git cat-file --batch` of segment blobs. Each
-  segment is already capped at `max-receipt-line-bytes`; this keeps the
-  aggregate buffer well under the former 1 GiB spawnSync limit."
+  "Ceiling for one immutable `git cat-file --batch` chunk of segment blobs.
+  Each segment is capped at `max-receipt-line-bytes`; chunking keeps any one
+  spawnSync buffer well under the former 1 GiB limit without capping the
+  lifetime size of the ledger."
   (* max-receipt-line-bytes 64))
+
+(def max-receipt-listing-bytes
+  "Ceiling for one `git ls-tree` / metadata capture of the segment directory.
+  Header lines are small; 32 MiB covers hundreds of thousands of segments."
+  (* 32 1024 1024))
 
 (def ^:dynamic *secure-append-phase-hook*
   (fn [_phase _context] nil))
@@ -72,7 +81,8 @@
   (let [result (child-process/spawnSync
                 "git"
                 (clj->js (into ["--no-replace-objects"] args))
-                #js {:cwd root :encoding "utf8" :shell false})
+                #js {:cwd root :encoding "utf8" :shell false
+                     :maxBuffer max-receipt-listing-bytes})
         error (.-error result)
         status (.-status result)]
     (when error
@@ -89,7 +99,8 @@
   (let [result (child-process/spawnSync
                 "git"
                 (clj->js (into ["--no-replace-objects"] args))
-                #js {:cwd root :shell false})
+                #js {:cwd root :shell false
+                     :maxBuffer max-receipt-listing-bytes})
         error (.-error result)
         status (.-status result)]
     (when error
@@ -194,9 +205,30 @@
               (str "Receipt River numbers must round-trip exactly; "
                    lexeme " does not"))))))
 
+(defn exact-inst-string?
+  "True when `#inst` text keeps its value under cljs.reader, which stores at
+  most millisecond precision."
+  [instant]
+  (boolean
+   (re-matches
+    #"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,3})?(Z|[+-]\d{2}:\d{2})"
+    instant)))
+
+(defn require-exact-receipt-tags!
+  "Record IDs hash the value cljs.reader produced, so a tagged instant with
+  sub-millisecond fraction would collide with another truncated to the same
+  millisecond."
+  [text]
+  (doseq [[_ instant] (re-seq #"#inst\s*\"([^\"]*)\"" text)]
+    (when-not (exact-inst-string? instant)
+      (throw (js/Error.
+              (str "Receipt River tagged instants must round-trip exactly; "
+                   "#inst \"" instant "\" does not"))))))
+
 (defn assert-receipt-batch-sizes!
-  "Fails closed when any blob exceeds the writer's per-receipt bound or the
-  batch aggregate would force a multi-hundred-megabyte buffer."
+  "Fails closed when any blob exceeds the writer's per-segment bound. The
+  aggregate batch ceiling is applied per chunk in `git-blobs-batch!`, so the
+  lifetime ledger size is not capped by one spawnSync call."
   [sizes]
   (doseq [[oid size] sizes]
     (when-not (and (js/Number.isSafeInteger size) (not (neg? size)))
@@ -207,11 +239,6 @@
       (throw (js/Error.
               (str "Receipt River segment blob exceeds "
                    max-receipt-line-bytes " bytes: " oid)))))
-  (let [total (reduce + 0 (vals sizes))]
-    (when (> total max-receipt-batch-bytes)
-      (throw (js/Error.
-              (str "Receipt River segment batch exceeds "
-                   max-receipt-batch-bytes " bytes")))))
   sizes)
 
 (defn git-blob-batch-sizes!
@@ -228,7 +255,9 @@
                        :shell false
                        :input (str (str/join "\n" object-ids) "\n")
                        :encoding "utf8"
-                       :maxBuffer (* 1024 1024)})
+                       ;; Header lines are ~55–80 bytes; scale with the request
+                       ;; so the full ledger is not capped at 1 MiB of metadata.
+                       :maxBuffer (+ 4096 (* 160 (count object-ids)))})
           error (.-error result)
           status (.-status result)]
       (when error
@@ -258,63 +287,86 @@
                     object-ids
                     lines)))))))
 
+(defn receipt-blob-chunks
+  "Splits object IDs into runs whose total size stays within the batch cap."
+  [object-ids sizes]
+  (vec
+   (remove empty?
+           (reduce (fn [chunks oid]
+                     (let [current (peek chunks)
+                           total (reduce + 0 (map #(get sizes %) current))
+                           size (get sizes oid 0)]
+                       (if (and (seq current)
+                                (> (+ total size) max-receipt-batch-bytes))
+                         (conj chunks [oid])
+                         (conj (pop chunks) (conj (vec current) oid)))))
+                   [[]]
+                   object-ids))))
+
+(defn git-blobs-batch-chunk!
+  "Reads one chunk of object IDs through `git cat-file --batch`. `sizes` must
+  already have passed `assert-receipt-batch-sizes!`."
+  [object-ids sizes]
+  (let [total (reduce + 0 (map #(get sizes %) object-ids))
+        max-buffer (+ total (* 256 (inc (count object-ids))) 4096)
+        result (child-process/spawnSync
+                "git"
+                #js ["--no-replace-objects" "cat-file" "--batch"]
+                #js {:cwd root
+                     :shell false
+                     :input (str (str/join "\n" object-ids) "\n")
+                     :maxBuffer max-buffer})
+        error (.-error result)
+        status (.-status result)]
+    (when error
+      (throw (js/Error. (str "Git invocation failed: " (.-message error)))))
+    (when-not (= 0 status)
+      (throw (js/Error.
+              (str "Git invocation failed with exit " status ": "
+                   (str/trim (if-let [stderr (.-stderr result)]
+                               (.toString stderr "utf8")
+                               ""))))))
+    (loop [out (.-stdout result)
+           acc {}
+           ids (seq object-ids)]
+      (if-not ids
+        (do (when (pos? (.-length out))
+              (throw (js/Error. "git cat-file --batch returned extra output")))
+            acc)
+        (let [newline-at (.indexOf out 10)
+              _ (when (neg? newline-at)
+                  (throw (js/Error. "git cat-file --batch output is truncated")))
+              header (.toString (.subarray out 0 newline-at) "utf8")
+              [_ oid kind size] (re-matches #"([0-9a-f]+) ([a-z]+) ([0-9]+)" header)
+              size (when size (js/parseInt size 10))
+              expected (get sizes (first ids))
+              start (inc newline-at)
+              end (when size (+ start size))]
+          (when-not (and (= oid (first ids)) (= "blob" kind)
+                         (js/Number.isSafeInteger size)
+                         (= size expected)
+                         (< end (.-length out))
+                         (= 10 (aget out end)))
+            (throw (js/Error.
+                    (str "Unexpected git cat-file --batch entry for "
+                         (first ids) ": " header))))
+          (recur (.subarray out (inc end))
+                 (assoc acc oid (js/Buffer.from (.subarray out start end)))
+                 (next ids)))))))
+
 (defn git-blobs-batch!
-  "Returns object-id -> Buffer for `object-ids` from one `git cat-file
-  --batch` process. Sizes are checked with `--batch-check` first against the
-  writer's per-receipt and aggregate bounds; the body buffer is then sized to
-  that known total instead of 1 GiB. Each answer must be the requested blob,
-  in order, with exactly its declared size and terminator."
+  "Returns object-id -> Buffer for `object-ids`. Sizes are checked with
+  `--batch-check` first against the writer's per-segment bound; blobs are
+  then read in chunks whose aggregate stays within `max-receipt-batch-bytes`,
+  so the lifetime ledger is not capped by one spawnSync buffer."
   [object-ids]
   (if (empty? object-ids)
     {}
-    (let [sizes (git-blob-batch-sizes! object-ids)
-          total (reduce + 0 (map #(get sizes %) object-ids))
-          ;; Headers are small; keep a tight ceiling over the known body total.
-          max-buffer (+ total (* 256 (inc (count object-ids))) 4096)
-          result (child-process/spawnSync
-                  "git"
-                  #js ["--no-replace-objects" "cat-file" "--batch"]
-                  #js {:cwd root
-                       :shell false
-                       :input (str (str/join "\n" object-ids) "\n")
-                       :maxBuffer max-buffer})
-          error (.-error result)
-          status (.-status result)]
-      (when error
-        (throw (js/Error. (str "Git invocation failed: " (.-message error)))))
-      (when-not (= 0 status)
-        (throw (js/Error.
-                (str "Git invocation failed with exit " status ": "
-                     (str/trim (if-let [stderr (.-stderr result)]
-                                 (.toString stderr "utf8")
-                                 ""))))))
-      (loop [out (.-stdout result)
-             acc {}
-             ids (seq object-ids)]
-        (if-not ids
-          (do (when (pos? (.-length out))
-                (throw (js/Error. "git cat-file --batch returned extra output")))
-              acc)
-          (let [newline-at (.indexOf out 10)
-                _ (when (neg? newline-at)
-                    (throw (js/Error. "git cat-file --batch output is truncated")))
-                header (.toString (.subarray out 0 newline-at) "utf8")
-                [_ oid kind size] (re-matches #"([0-9a-f]+) ([a-z]+) ([0-9]+)" header)
-                size (when size (js/parseInt size 10))
-                expected (get sizes (first ids))
-                start (inc newline-at)
-                end (when size (+ start size))]
-            (when-not (and (= oid (first ids)) (= "blob" kind)
-                           (js/Number.isSafeInteger size)
-                           (= size expected)
-                           (< end (.-length out))
-                           (= 10 (aget out end)))
-              (throw (js/Error.
-                      (str "Unexpected git cat-file --batch entry for "
-                           (first ids) ": " header))))
-            (recur (.subarray out (inc end))
-                   (assoc acc oid (js/Buffer.from (.subarray out start end)))
-                   (next ids))))))))
+    (let [sizes (git-blob-batch-sizes! object-ids)]
+      (reduce (fn [acc chunk]
+                (merge acc (git-blobs-batch-chunk! chunk sizes)))
+              {}
+              (receipt-blob-chunks object-ids sizes)))))
 
 
 (defn read-receipt-records! [contents]
@@ -324,6 +376,7 @@
         (fn [index line]
           (try
             (require-exact-receipt-numbers! line)
+            (require-exact-receipt-tags! line)
             (read-single-edn! line "Receipt River record")
             (catch :default error
               (throw (js/Error.
@@ -1436,6 +1489,7 @@
     (when (or (str/includes? line "\n") (str/includes? line "\r"))
       (append-error! "receipt serialization must occupy exactly one physical line"))
     (require-exact-receipt-numbers! line)
+    (require-exact-receipt-tags! line)
     (let [parsed (try
                    (reader/read-string line)
                    (catch :default error
@@ -1444,9 +1498,12 @@
       (when-not (= record parsed)
         (append-error! "receipt does not round-trip through EDN")))
     (let [bytes (.encode (js/TextEncoder.) line)]
-      (when (> (.-byteLength bytes) max-receipt-line-bytes)
+      ;; Immutable verification measures the complete segment (record +
+      ;; newline); keep the same bound here so a written receipt always
+      ;; verifies.
+      (when (> (inc (.-byteLength bytes)) max-receipt-line-bytes)
         (append-error! (str "receipt exceeds " max-receipt-line-bytes
-                            " UTF-8 bytes")))
+                            " UTF-8 bytes including its newline")))
       line)))
 
 (defn read-held-target-bytes! [target]
