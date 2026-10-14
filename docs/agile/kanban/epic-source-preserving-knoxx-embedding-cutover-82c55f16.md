@@ -1,0 +1,143 @@
+---
+category: "kanban"
+type: "epic"
+uuid: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
+title: "EPIC: Preserve retained sources while admitting the native Knoxx CMS embedding cutover"
+priority: "P1"
+points: "21"
+labels: "deployment, knoxx, embeddings, cms, source-preservation"
+---
+
+# EPIC: Preserve retained sources while admitting the native Knoxx CMS embedding cutover
+
+## Context
+
+The Website is delivered, but the production Knoxx backend remains
+`841642adffa2656edd842db72843da0a0f4d8336`, using
+`gte-large-en-v1.5`/1024 through Proxx. The intended native CMS uses direct host
+Ollama, `qwen3-embedding:8b`/1024, and the configured publication agents.
+Equal vector dimensions do not make different models' vectors comparable.
+
+[Services a303](https://github.com/open-hax/services/blob/a3034ccddbc43aecf34a70df444ebe0e5314f83c/digitalocean/services/knoxx/probe-embedding-migration.js)
+refuses the old contract while running or stopped, before Mongo inventory.
+It admits only an unchanged target or a genuinely unused store with no prior
+contract and no graph vector index. It has no migration-proof consumption
+branch. This epic supplies the missing application proof and its deployment
+integration; it does not reinterpret the existing gate.
+
+Two retained production observations define the starting case, not admission:
+
+- At `2026-10-14T03:51:48.748Z`, Mongo contained 736 events; zero compacted
+  memories, event chunks, compacted vectors, graph-node embeddings, vector
+  partitions, graph views and graph labels. The graph index was READY and
+  queryable. The old writer remained active, and source texts and index
+  definition were not returned. Retained capture:
+  `prod-goal-production-deployment-status-selected-Mongo-metadata-readonly-0354-v1.stdout`,
+  SHA-256 `591dd9a4f6a5ee3a172a972fec700948a3a7cf2844b5a5ede3bca3b764789831`.
+- At `2026-10-14T04:04:30.778Z`, the actual pinned SDK eligibility operation
+  counted 312 hot-eligible events and 424 `graph.node` events, no `graph.edge`
+  or unknown kinds, and 359 blank/missing texts. The index definition was
+  `embedding`/1024/cosine with filters `project`, `node_id`,
+  `embedding_model`, and `embedding_dimensions`, READY and queryable. Installed
+  eligibility module SHA-256 was
+  `c1074a3d3a54353f36d29da38254ac137eb480497bc3b0ed914f779f83892d2e`,
+  matching pinned SDK source. Retained capture:
+  `prod-goal-production-pinned-eligibility-and-graph-index-definition-readonly-0408-v1.stdout`,
+  SHA-256 `a876a00b73c609048a79cb165e8a3808c9a6b76dbb9ce0f91b4d182f7efc1f6d`.
+
+Both captures are retained under the operator's
+`20261010/review-state/services-02128b-native-review-readback-v1` evidence root.
+Their equal counts do not prove a locked snapshot, source preservation, source
+reference resolution, complete graph obligations, or a completed migration.
+The fresh locked source inventory must determine the actual obligations.
+
+## Outcome
+
+Deploy the new native Knoxx CMS through an accepted controller and Services
+caller after generating every required target embedding, proving complete
+retained-source coverage, and preserving canonical content and causal history.
+Then demonstrate a real Spanish CMS document through Knoxx translation,
+persisted review, separate whole-publication approval, reconciliation, and the
+public Website browser. Existing publications survive the rollout.
+
+## Scope
+
+Foresight owns these planning cards and dependency coordination. Knoxx owns
+portable `.cljc` shapes/laws, its CLJS provider/Mongo/CLI adapters, runtime
+integration, migration, and application qualification. Services owns topology,
+host exclusion, proof consumption, and deploy admission. Reuse the existing
+exported cores of SDK `07085d6557b75834ce6f50e6c54b8ca47e1c7c08`; no SDK
+repository change or copied chunking/graph algorithm is included.
+
+| Story | UUID | Points | Immediate prerequisite |
+| --- | --- | --- | --- |
+| [Validate the shared embedding runtime](knoxx-validated-shared-embedding-runtime-d3277a3c.md) | `d3277a3c-6e30-42b1-8151-16c041612a6a` | 5 | None |
+| [Materialize and verify retained sources](knoxx-retained-source-embedding-migration-11bc1411.md) | `11bc1411-154d-4db7-8c27-51506ab30508` | 8 | Runtime story |
+| [Consume proof and deploy the native CMS](services-controller-bound-embedding-admission-03a057e4.md) | `03a057e4-3098-4fe7-a5b8-95168f45ca96` | 8 | Migration story |
+
+The 21 points are the sum of the children, not an additional implementation
+estimate. Pinned SDK07085 has no standalone exported graph-input transform. Its complete
+owner `ingestEvents` operation appends base rows and emits additional derived
+events, graph edges and labels. An isolated staging database is an examined,
+unaccepted route to reuse that operation. Planning review must settle all staging
+outputs, source identities, conflicts and any explicit new-source append/adoption
+obligation. A small zero-obligation profile cannot satisfy the observed case.
+
+## Non-goals
+
+A fresh-store relabel, old-model completion path, manual target receipt,
+deployment-gate override, reset/deletion of retained data, re-insertion of
+historical events into the production canonical store, OpenPlanner companion deployment or repository changes,
+review-policy change, or board-engine implementation. This planning PR does not
+implement or execute migration, assign future accepted commits, or admit a
+board transition.
+
+## Acceptance criteria
+
+- [ ] Every actual future Knoxx ingest, hot/compact query and repair path in
+  scope uses one validated model/route/dimension-bound generation runtime.
+  Actual provider results account for every input and contain only finite
+  1024-dimensional vectors; a partial batch cannot supply qualification.
+- [ ] A recoverable snapshot and exact rollback journal precede mutation.
+  Under a held deployment lock and complete stopped-writer proof, the owning
+  CLI enumerates and preserves the full canonical source and causal history,
+  materializes all proven hot and supported graph obligations, and verifies
+  exact source-to-vector/chunk coverage. Any new canonical/derived source facts
+  have an explicit accepted append delta with source provenance, separate from
+  derived projection writes; whole-store counts reconcile originals plus that
+  delta, rather than requiring count equality. They cannot be deleted in rollback.
+  Unknown/colliding source identities and unsupported families refuse; content,
+  title or model agreement cannot merge identities.
+- [ ] Services consumes a freshly recomputed application proof bound to the
+  same database, application source, accepted controller, caller, native run
+  and attempt. Writer restart, drift, stale/borrowed proof or source change
+  refuses. Existing unchanged-target/fresh-store behavior retains its gates.
+- [ ] Original application-owned production qualification, controller/caller
+  attestation and protected review remain required. Neither this plan nor the
+  Website-only exception supplies Knoxx qualification.
+- [ ] The actual native CMS completes the Spanish journey and public browser
+  proof; the Website, existing English/German publications, Proxx and SDK
+  settings are preserved unless separately reviewed changes are required.
+
+## Verification
+
+Planning review assesses scope, estimates, dependencies, SDK ownership seams,
+coverage and recovery. Rheos owns admission and readiness after that review.
+Implementation starts with meaningful red laws and controls, then the owning
+Knoxx runtime/CLI and Services adapter. Run the genuine required owner suites
+with zero errors/warnings, the same-source integration/e2e qualification and
+four 250-mutation batches with 1,000 distinct fingerprints, followed by the
+actual hosted attestations and locked deployment proof. Re-read source
+commitments after materialization and verify live CMS/API/browser behavior.
+No historical capture, local fixture, passing model canary or count alone is a
+substitute for any required gate.
+
+## Risks
+
+The 424 graph records need source-family closure, and ordinary hot sources can
+also imply graph materialization. Empty graph vectors are not zero graph work.
+The SDK factory creates indexes and the default provider omits the requested
+dimensions; neither may be used as a claimed read-only or validated boundary.
+Reusing the graph owner operation requires explicit isolation and complete
+output/adoption custody; graph edges, labels and new source facts cannot be
+silently discarded. Revise and review any missing ownership boundary before code.
