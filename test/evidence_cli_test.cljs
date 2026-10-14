@@ -1078,6 +1078,36 @@
             "the forged segment cannot be accepted as an ordinary extension")))))
 
 
+(deftest selected-gates-quarantine-a-segment-added-after-a-failed-gate-unlocks
+  ;; A gate can throw and leave delayed work that waits for the per-segment
+  ;; lock to disappear before adding a forged segment. The unwritten
+  ;; reservation's ledger is compared again before the writer lock is
+  ;; released, and the writer lock is retained on any change.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            forged? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        (when (compare-and-set! forged? false true)
+                          (fs/writeFileSync forged (str forged-line "\n")
+                                            "utf8")))]
+          (is (thrown? js/Error
+                       (run-semantic-gate-with!
+                        file segment
+                        (fn [] (throw (js/Error. "gate exploded")))))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
 (deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
   ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
   ;; durable forged segment. The held `.ημ` descriptor then names the moved
