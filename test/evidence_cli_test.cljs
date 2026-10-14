@@ -851,6 +851,142 @@
                (cli/open-append-reservation!
                 (path/join segments "2026-10-13T000002000Z-next.edn") true))))))))
 
+(defn run-semantic-gate-with! [segments file segment gate!]
+  (with-redefs [cli/receipt-file file
+                cli/new-receipt-segment-file (fn [] segment)
+                cli/git-capture! (fn [_] reviewed-root-revision)
+                cli/read-immutable-receipt-ledger! empty-committed-ledger
+                cli/read-immutable-receipt-segments! (fn [_] {})
+                cli/require-repositories!
+                (fn [& _]
+                  {"repo" {:path "repo"
+                           :absolute "/repo"
+                           :revision child-revision}})
+                cli/run-gate! (fn [& _] (gate!) passed-result)]
+    (cli/run-selected-gates!
+     {:catalog/repositories
+      {"repo" {:repository/path "repo"
+               :repository/gates [local-gate]}}}
+     test-catalog-identity
+     {:only #{"repo"} :kinds #{:unit}})))
+
+(defn next-writer-refused? [segments file]
+  (with-redefs [cli/receipt-file file
+                cli/git-capture! (fn [_] reviewed-root-revision)
+                cli/read-immutable-receipt-ledger! empty-committed-ledger
+                cli/read-immutable-receipt-segments! (fn [_] {})]
+    (try
+      (cli/close-append-reservation!
+       (cli/open-append-reservation!
+        (path/join segments "2026-10-13T000002000Z-next.edn") true))
+      false
+      (catch :default _error true))))
+
+(deftest selected-gates-reestablish-quarantine-when-both-locks-vanish
+  ;; Gate code unlinks the per-segment lock and the writer lock, then adds a
+  ;; valid forged segment. Closing the held writer-lock descriptor preserves
+  ;; nothing once its path is gone, so cleanup must verify the writer lock and
+  ;; durably recreate a quarantine marker before relying on it.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            writer-lock (path/join segments cli/receipt-writer-lock-name)
+            append-lock (path/join segments
+                                   (str "." (path/basename segment) ".append.lock"))
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))]
+        (fs/writeFileSync file "" "utf8")
+        (is (thrown?
+             js/Error
+             (run-semantic-gate-with!
+              segments file segment
+              (fn []
+                (fs/unlinkSync append-lock)
+                (fs/unlinkSync writer-lock)
+                (fs/writeFileSync forged (str forged-line "\n") "utf8")))))
+        (is (= [(path/basename forged)] (segment-names segments))
+            "no receipt was written for the gate")
+        (is (fs/existsSync writer-lock)
+            "a quarantine marker replaces the vanished writer lock")
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
+(deftest selected-gates-reestablish-a-vanished-segment-quarantine
+  ;; Gate code writes forged content into the reserved segment and unlinks
+  ;; its lock. The reservation is retained as quarantine, so the segment lock
+  ;; must be recreated rather than merely closed.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            append-lock (path/join segments
+                                   (str "." (path/basename segment) ".append.lock"))
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))]
+        (fs/writeFileSync file "" "utf8")
+        (is (thrown?
+             js/Error
+             (run-semantic-gate-with!
+              segments file segment
+              (fn []
+                (fs/unlinkSync append-lock)
+                (fs/writeFileSync segment (str forged-line "\n") "utf8")))))
+        (is (= [(path/basename append-lock)] (lock-files segments))
+            "the segment quarantine marker is recreated")
+        (is (next-writer-refused? segments file))))))
+
+(deftest working-ledger-rejects-executable-files
+  ;; The immutable reader accepts only 100644 blobs, so an executable working
+  ;; file would yield evidence that cannot be verified once committed.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-12T000000000Z-a.edn")
+            line (cli/encode-edn-line!
+                  (cli/validated-evidence-receipt!
+                   (assoc passed-result :result/command ["earlier"])))]
+        (fs/writeFileSync file "" "utf8")
+        (fs/writeFileSync segment (str line "\n") "utf8")
+        (with-redefs [cli/receipt-file file]
+          (is (= 2 (count (cli/read-working-receipt-segments! nil))))
+          (fs/chmodSync segment 0755)
+          (is (thrown-with-msg?
+               js/Error #"must not be executable"
+               (cli/read-working-receipt-segments! nil)))
+          (fs/chmodSync segment 0644)
+          (fs/chmodSync file 0744)
+          (is (thrown-with-msg?
+               js/Error #"must not be executable"
+               (cli/read-working-receipt-segments! nil))))))))
+
+(deftest selected-gates-reject-mode-changes-while-the-gate-runs
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [existing (path/join segments "2026-10-12T000000000Z-a.edn")
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            line (cli/encode-edn-line!
+                  (cli/validated-evidence-receipt!
+                   (assoc passed-result :result/command ["earlier"])))]
+        (fs/writeFileSync file "" "utf8")
+        (fs/writeFileSync existing (str line "\n") "utf8")
+        ;; Only the mode of an existing segment changes.
+        (is (thrown-with-msg?
+             js/Error #"must not be executable"
+             (run-semantic-gate-with!
+              segments file segment #(fs/chmodSync existing 0755))))
+        (is (= [(path/basename existing)] (segment-names segments))
+            "no receipt was written")
+        (fs/chmodSync existing 0644)
+        ;; The reserved segment itself is made executable.
+        (is (thrown-with-msg?
+             js/Error #"must not be executable"
+             (run-semantic-gate-with!
+              segments file segment #(fs/chmodSync segment 0700))))
+        (is (= [(path/basename existing)] (segment-names segments))
+            "the executable reservation was not written or kept")
+        (is (= [] (lock-files segments)))))))
+
 (deftest selected-gates-quarantine-a-renamed-reservation
   ;; Path absence is not proof of removal: the reserved inode may live on
   ;; under another well-named segment holding forged content.
