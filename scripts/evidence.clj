@@ -1329,13 +1329,18 @@
   "Releases the ledger-wide writer lock. A quarantine is normally carried by
   the retained per-segment lock, so the writer lock does not outlive its
   writer. When segment-lock cleanup itself fails, `close-append-reservation!`
-  retains the writer lock instead. If release fails (the lock was replaced,
-  or its unlink or directory fsync failed) every later writer would be
-  blocked, so the failure is reported."
+  retains the writer lock instead. If release fails because the path was
+  unlinked or replaced, recreate a quarantine marker at the writer-lock path
+  (same as when both locks vanish) so a forged segment cannot become an
+  ordinary extension. Other release failures are still reported."
   [parent writer-lock]
   (try
     (release-append-lock! parent writer-lock)
     (catch :default error
+      ;; Gate code may unlink only the writer lock after a successful-looking
+      ;; append; retain-quarantine-lock! recreates the marker when the held
+      ;; descriptor no longer names the path.
+      (retain-quarantine-lock! parent writer-lock)
       (append-error!
        (str "the Receipt River writer lock could not be released and must be "
             "adjudicated by hand: " (.-message error))))))
@@ -1781,7 +1786,22 @@
                                           ;; so a forged segment still quarantines.
                                           (quarantine-if-ledger-changed! reservation)
                                           (throw error)))]
-                                  (append-evidence-receipt! reservation result)
+                                  ;; Quarantine only when receipt construction
+                                  ;; fails before append-reserved (which has its
+                                  ;; own revalidation / lock-identity paths).
+                                  (let [receipt
+                                        (try
+                                          (validated-evidence-receipt! result)
+                                          (catch :default error
+                                            (quarantine-if-ledger-changed! reservation)
+                                            (throw error)))
+                                        line
+                                        (try
+                                          (encode-edn-line! receipt)
+                                          (catch :default error
+                                            (quarantine-if-ledger-changed! reservation)
+                                            (throw error)))]
+                                    (append-reserved-edn-line! reservation receipt line))
                                   result)))))
                         gates)
           summary (law/summarize-results results)]
