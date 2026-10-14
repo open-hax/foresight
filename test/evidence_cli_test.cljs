@@ -1594,6 +1594,36 @@
                        (:ledger/bytes
                         (cli/read-immutable-receipt-ledger! base)))))))))
 
+(deftest immutable-segments-are-read-in-one-git-process
+  ;; Every receipt is its own segment and the committed ledger is read
+  ;; several times per gate, so one `git show` per segment grows the process
+  ;; count with the ledger. Segment blobs are read in one batched process.
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base-text current commit!]}]
+      (let [files (into (sorted-map)
+                        (for [i (range 3)]
+                          [(str "2026-10-14T00000" i "Z-s" i ".edn")
+                           (str (pr-str (assoc current
+                                               :ts (str "2026-10-14T00:00:0" i "Z")
+                                               :host (str "h" i)))
+                                "\n")]))
+            head (commit! base-text files)
+            shows (atom [])
+            git-buffer! cli/git-buffer!]
+        (with-redefs [cli/git-buffer!
+                      (fn [args]
+                        (when (= "show" (first args))
+                          (swap! shows conj (second args)))
+                        (git-buffer! args))]
+          (let [stored (cli/read-immutable-receipt-segments! head)]
+            (is (= (mapv #(str law/receipt-segment-directory "/" %) (keys files))
+                   (vec (keys stored))))
+            (is (= (vec (vals files))
+                   (mapv #(.toString % "utf8") (vals stored))))
+            (is (= [] (filterv #(str/includes? % (str law/receipt-segment-directory "/"))
+                               @shows))
+                "no per-segment git show")))))))
+
 (deftest receipt-verification-exempts-historical-timestamps
   ;; The canonical-instant rule binds new records only; retained history with
   ;; an earlier free-form :ts still verifies against itself and its extensions.
