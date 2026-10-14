@@ -1537,7 +1537,15 @@
   ;; A gate can run for a long time; the rest of the ledger must still extend
   ;; HEAD at the moment this receipt is written.
   (when semantic-basename
-    (let [working (validate-working-receipt-ledger! semantic-basename)]
+    ;; The ledger validated before the gate ran. Any failure now — or a
+    ;; successful revalidation that differs — means the working ledger changed
+    ;; while the gate ran, so quarantine before throwing so cleanup retains
+    ;; the lock and forged segments cannot become ordinary extensions.
+    (let [working (try
+                    (validate-working-receipt-ledger! semantic-basename)
+                    (catch :default error
+                      (reset! quarantined? true)
+                      (throw error)))]
       (when-not (same-working-ledger? validated-working working)
         (reset! quarantined? true)
         (append-error!

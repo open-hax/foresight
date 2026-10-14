@@ -996,6 +996,8 @@
                (cli/read-working-receipt-segments! nil))))))))
 
 (deftest selected-gates-reject-mode-changes-while-the-gate-runs
+  ;; Each scenario gets a fresh fixture: a mode change during the gate fails
+  ;; revalidation and quarantines (retains the append lock).
   (with-receipt-fixture
     (fn [{:keys [segments file]}]
       (let [existing (path/join segments "2026-10-12T000000000Z-a.edn")
@@ -1004,22 +1006,35 @@
                   (cli/validated-evidence-receipt!
                    (assoc passed-result :result/command ["earlier"])))]
         (fs/writeFileSync file "" "utf8")
-        (fs/writeFileSync existing (str line "\n") "utf8")
-        ;; Only the mode of an existing segment changes.
+        (fs/writeFileSync existing (str line "
+") "utf8")
         (is (thrown-with-msg?
              js/Error #"must not be executable"
              (run-semantic-gate-with!
               file segment #(fs/chmodSync existing 0755))))
         (is (= [(path/basename existing)] (segment-names segments))
             "no receipt was written")
-        (fs/chmodSync existing 0644)
-        ;; The reserved segment itself is made executable.
+        (is (seq (lock-files segments))
+            "revalidation failure quarantines the ledger"))))
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [existing (path/join segments "2026-10-12T000000000Z-a.edn")
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            line (cli/encode-edn-line!
+                  (cli/validated-evidence-receipt!
+                   (assoc passed-result :result/command ["earlier"])))]
+        (fs/writeFileSync file "" "utf8")
+        (fs/writeFileSync existing (str line "
+") "utf8")
         (is (thrown-with-msg?
              js/Error #"must not be executable"
              (run-semantic-gate-with!
               file segment #(fs/chmodSync segment 0700))))
         (is (= [(path/basename existing)] (segment-names segments))
             "the executable reservation was not written or kept")
+        ;; Own reserved basename is skipped in working-ledger validation, so the
+        ;; executable-bit refusal on the target does not set quarantined?; cleanup
+        ;; removes the unwritten reservation and releases the lock.
         (is (= [] (lock-files segments)))))))
 
 (deftest selected-gates-quarantine-a-renamed-reservation
@@ -1501,14 +1516,24 @@
        (path/basename (cli/new-receipt-segment-file)))))
 
 (deftest aborted-or-overtaken-gates-leave-no-segment
-  ;; A gate that throws, or a ledger edited while the gate runs, must leave
-  ;; neither an empty reserved segment nor a lock behind.
-  (doseq [[run-gate message]
-          [[(fn [_] (throw (js/Error. "gate exploded"))) #"gate exploded"]
+  ;; A gate that only throws leaves no empty reserved segment and no lock.
+  ;; Editing the ledger while the gate runs quarantines (retains a lock) so a
+  ;; forged segment cannot become an ordinary extension after cleanup.
+  (doseq [[run-gate message expect-lock?]
+          [[(fn [_] (throw (js/Error. "gate exploded"))) #"gate exploded" false]
            [(fn [{:keys [file]}]
               (fs/writeFileSync file "{:kind :observation}\n" "utf8")
               passed-result)
-            #"does not preserve the committed ledger"]]]
+            #"does not preserve the committed ledger" true]
+           [(fn [{:keys [segments file]}]
+              ;; Schema-valid forged segment plus a stray file: revalidation
+              ;; throws, and quarantine must retain the lock.
+              (fs/writeFileSync (path/join segments "2026-10-13T000001000Z-forged.edn")
+                                "{:kind :observation :origin :test :owner \"t\" :ts \"2026-10-13T00:00:01.000Z\" :dod \"d\" :pi \"p\" :host \"h\" :manifest {} :refs []}\n"
+                                "utf8")
+              (fs/writeFileSync (path/join segments "notes.txt") "x\n" "utf8")
+              passed-result)
+            #".*" true]]]
     (with-receipt-fixture
       (fn [{:keys [segments file] :as context}]
         (fs/writeFileSync file "" "utf8")
@@ -1526,8 +1551,11 @@
                           :repository/gates [local-gate]}}}
                 test-catalog-identity
                 {:only #{"repo"} :kinds #{:unit}})))
-          (is (= [] (segment-names segments)))
-          (is (= [] (lock-files segments))))))))
+          (if expect-lock?
+            (is (seq (lock-files segments))
+                "ledger change while gate ran must quarantine")
+            (do (is (= [] (segment-names segments)))
+                (is (= [] (lock-files segments))))))))))
 
 (deftest receipt-verification-keeps-the-segment-directory
   (with-historical-ledger-fixture true
