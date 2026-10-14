@@ -183,6 +183,35 @@ planning.
 
 ## Risks
 
+### Eight-point implementation breakdown and split condition
+
+Eight points is a conditional estimate for one migration lifecycle after EC1.01
+and the SDK-boundary prerequisite have been accepted. Those dependencies own
+runtime/provider qualification and selection of the genuine staging/adoption
+boundary; this story consumes their accepted interfaces. The estimate allocates
+the following efforts, including the corresponding causal refusal tests:
+
+| Effort | Points | Bounded deliverable |
+| --- | ---: | --- |
+| Inspect and preservation commitments | 1 | Plain-Mongo inventory, pinned source eligibility, lossless original-source commitments and unknown-family refusal. |
+| Materialize and adopt accepted output | 2 | Invoke the selected owner operation in its isolated database, freeze its complete output delta, verify the independent decision, and apply only that accepted delta through the qualified interface. |
+| Verify coverage and query identities | 2 | Recompute hot/graph source-to-chunk coverage, physical partition and legacy-identity checks, exact index readiness, and a semantic query on the owned fixture. |
+| Journal, resume and rollback | 1 | Record owned derived before-images and operation bindings; restore a compatible derived state without removing original or newly admitted source facts. |
+| Lifecycle qualification | 2 | Run the retained ordinary/graph fixture through inspect/apply/verify, interruption/resume and rollback; exercise changed snapshot/delta/authority/attempt refusals and qualify the candidate CLI/image interface. |
+| Total | 8 | One complete source-preserving lifecycle; none of its required phases is deferred to claim completion. |
+
+This budget assumes the prerequisite proves a reusable exported SDK route for
+all discovered supported families, and names an already qualified independent
+accepting authority and decision channel. It does not include changing SDK
+exports, inventing graph/compact algorithms, building a new acceptance service,
+or implementing the Services production caller. If prerequisite review or the
+first complete fixture shows any of those assumptions false, or reveals a source
+family needing a separate owner procedure, stop before the affected mutation.
+Record the concrete additional deliverable and split it into independently
+estimated, reviewed owning work through Rheos before readiness/implementation
+continues. Preserve this story's full lifecycle criteria and re-estimate the
+remaining work; eight points is not a hard cap that permits dropping a phase.
+
 The 424 graph records may include multiple source families; ordinary events can
 produce more graph work. Existing exports may not expose complete materialization
 without source writes. An isolated-SDK staging database proposal is being

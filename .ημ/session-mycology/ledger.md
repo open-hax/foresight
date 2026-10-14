@@ -529,3 +529,12 @@
   spore: none
   receipt-refs: 0c31d03bcc0be3450955f00119eae4add947880201d79ab252ea2efc5c0f33eb
   note: Built actual canonical planning CLI from stable2d and passed four targets,206tests1105assertions and zero-warning lint; did not adopt its separate production review transport. Three child tasks and actual runtime/SDK prerequisite edges plus34point aggregate now have engine provenance and readback. Corrected hidden deployment/live-proof completion cycle and retained independent composed-plan review. First story-type creation refused before writes; supported task creation preserved scope. Engine still emits empty dependency arrays and lacks literal initial-status materialization; preserve those actual gaps for upstream correction, without hand-written state or fake edges. Source successor remains planning, with native findings and normal review pending. No source-model call, migration, deployment, readiness, settlement or approval credit; no spore.
+- ts: 2026-10-14T07:16:56.813456707Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Repair canonical observation receipt admission and complete scoped CMS cutover review corrections
+  p-efficiency: 0.55
+  p-friction: 0.74
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 6d7ed9d2164e177ad10b5dc1075b241cf791c911f0d963a50fb6090e6f399cf5
+  note: Actual hosted receipt_history failure exposed a producer/consumer shape mismatch. Preserve original ledger bytes, admit the supported observation envelope explicitly, reject mixed fallback/evidence claims and retain legacy attestations. Causal RED is committed separately; exact hosted-equivalent local suites, full lint, real receipt history and pinned migration-pack suite pass with independent bounded review. CMS planning now binds tenant/project/current exact-output accepted translation and durable receipt readback. A named five-point Knoxx durability prerequisite feeds Services and content through actual Rheos edges; no later-proof dependency cycle. Remaining default-incoming metadata and empty-dependency engine gaps stay explicit. Native current-head reviews, shared complete-support adoption, implementation, qualification and actual CMS Spanish publication remain required. No production mutation or spore.

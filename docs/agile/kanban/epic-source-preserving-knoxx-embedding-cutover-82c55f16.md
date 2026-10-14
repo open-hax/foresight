@@ -4,9 +4,9 @@ type: "epic"
 uuid: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
 title: "EPIC: Preserve retained sources while admitting the native Knoxx CMS embedding cutover"
 priority: "P1"
-points: "34"
+points: "39"
 labels: "deployment, knoxx, embeddings, cms, source-preservation"
-write-id: "1791956992433-0.7wx5udvr0krkzo143zc"
+write-id: "1791961843782-0.2e33pc18waxcn6mr7xp"
 ---
 
 # EPIC: Preserve retained sources while admitting the native Knoxx CMS embedding cutover
@@ -75,14 +75,21 @@ repository change or copied chunking/graph algorithm is included.
 | [Validate the shared embedding runtime](knoxx-validated-shared-embedding-runtime-d3277a3c.md) | `d3277a3c-6e30-42b1-8151-16c041612a6a` | 5 | None |
 | [Qualify the SDK staging/adoption boundary](select-and-qualify-the-genuine-sdk-staging-and-source-adoption-boundary-5a7ee0c0.md) | `6cc1e1ca-c8dd-4cf9-9cd1-24675a7ee0c0` | 5 | None; parallel to runtime |
 | [Materialize and verify retained sources](knoxx-retained-source-embedding-migration-11bc1411.md) | `11bc1411-154d-4db7-8c27-51506ab30508` | 8 | Runtime and SDK prerequisite |
-| [Consume proof and deploy the native CMS](services-controller-bound-embedding-admission-03a057e4.md) | `03a057e4-3098-4fe7-a5b8-95168f45ca96` | 8 | Migration story |
+| [Qualify durable scoped publication receipts](knoxx-durable-scoped-publication-receipts-b450407b.md) | `afacb7b7-263a-48e6-a744-a9f4b450407b` | 5 | None; parallel to runtime and SDK |
+| [Consume proof and deploy the native CMS](services-controller-bound-embedding-admission-03a057e4.md) | `03a057e4-3098-4fe7-a5b8-95168f45ca96` | 8 | Migration and durable receipt qualification |
 | [Prove live translation and its judgments](prove-native-cms-translation-and-persisted-independent-judgments-after-rollout-3938fca6.md) | `6890a3d4-f3d7-48f1-bd92-f6223938fca6` | 3 | Completed Services deployment |
-| [Prove content and public Spanish publication](prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md) | `4a9f303e-63d1-48d7-a396-b93c986502d1` | 5 | Deployment and translation proof |
+| [Prove content and public Spanish publication](prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md) | `4a9f303e-63d1-48d7-a396-b93c986502d1` | 5 | Deployment, translation proof and qualified durable receipts |
 
-The 34 points are the sum of the six authored children, not an additional
+The 39 points are the sum of the seven authored children, not an additional
 implementation estimate. Estimates remain subject to planning review. Rheos
 created the three additional children and recorded the migration dependency
-vector and aggregate estimate through its actual canonical operations. The
+vector and aggregate estimate through its actual canonical operations. The new
+durability child is an initial first-class Markdown card; no creation event or
+readiness is claimed. Actual Rheos operations link its UUID into Services and
+content dependencies and update the aggregate to 39. Knoxx exclusively owns its
+application adapter/runtime implementation and qualification; Foresight owns this
+coordination. Its accepted fixture qualification precedes rollout and never waits
+on the later production Spanish receipt. The
 SDK prerequisite proves the supported
 source families, complete emitted output closure, identity-conflict and transfer
 rules, and the separate authorized append-delta decision before choosing a route.

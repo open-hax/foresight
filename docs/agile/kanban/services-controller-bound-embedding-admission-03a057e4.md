@@ -1,15 +1,16 @@
 ---
 category: "kanban"
-type: "story"
+labels: "services, deployment, embeddings, cms, 8sp"
 story_id: "EC1.03"
-uuid: "03a057e4-3098-4fe7-a5b8-95168f45ca96"
-epic: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
+dependency: ["11bc1411-154d-4db7-8c27-51506ab30508", "afacb7b7-263a-48e6-a744-a9f4b450407b"]
 parent: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
-dependency: ["11bc1411-154d-4db7-8c27-51506ab30508"]
+type: "story"
+write-id: "1791961842945-0.ob0mhdo3fgb89sng0lm"
+points: "8"
 title: "EC1.03: Consume controller-bound embedding proof and deploy the native Knoxx CMS"
 priority: "P1"
-points: "8"
-labels: "services, deployment, embeddings, cms, 8sp"
+epic: "82c55f16-a688-4ba5-983d-c44c618cdd5d"
+uuid: "03a057e4-3098-4fe7-a5b8-95168f45ca96"
 ---
 
 # EC1.03: Consume controller-bound embedding proof and deploy the native Knoxx CMS
@@ -23,6 +24,16 @@ CLI in the current fenced run/attempt, not a prerequisite from an older caller.
 `open-hax/services` owns
 this consumer, host exclusion and deployment orchestration; application
 migration and coverage semantics remain in `open-hax/knoxx`.
+
+Also requires the independently qualified
+[durable Knoxx publication-receipt capability](knoxx-durable-scoped-publication-receipts-b450407b.md)
+(`afacb7b7-263a-48e6-a744-a9f4b450407b`). Its accepted application source/build,
+effective adapter/storage configuration and independent scoped readback contract
+must be part of the selected candidate before rollout. Services verifies that
+handoff and retains the owning source qualification; it does not implement the
+adapter or wait for the later live Spanish receipt. Missing sink, changed storage
+or retention configuration, source/build mismatch or unqualified persistence
+refuses admission. Rheos records this parallel prerequisite alongside migration.
 
 [The adopted a303 gate](https://github.com/open-hax/services/blob/a3034ccddbc43aecf34a70df444ebe0e5314f83c/.github/workflows/deploy-digitalocean.yml#L336-L494)
 refuses the old gte contract before inventory, even when stopped. Its recovery
