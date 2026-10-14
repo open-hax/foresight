@@ -1586,6 +1586,42 @@
                js/Error message
                (cli/verify-receipts! {:base base :at head}))))))))
 
+(deftest receipt-verification-migrates-an-unterminated-final-legacy-row
+  ;; A valid legacy ledger may lack a terminal newline. Its final row can only
+  ;; be preserved as a segment by adding that one terminator, since every
+  ;; segment must end with a newline.
+  (with-historical-ledger-fixture true
+    (fn [{:keys [historical commit!]}]
+      (let [second (assoc historical :owner "second")
+            first-line (str (pr-str historical) "\n")
+            unterminated (str first-line (pr-str second))
+            with-two (commit! unterminated)]
+        (is (some? (cli/verify-receipts!
+                    {:base with-two
+                     :at (commit! first-line
+                                  {"2026-08-29T172240Z-b.edn"
+                                   (str (pr-str second) "\n")})}))
+            "the final row moves into a newline-terminated segment")
+        (commit! unterminated)
+        (let [only (commit! (pr-str second))]
+          (is (some? (cli/verify-receipts!
+                      {:base only
+                       :at (commit! ""
+                                    {"2026-08-29T172240Z-b.edn"
+                                     (str (pr-str second) "\n")})}))
+              "a one-row unterminated legacy file can empty into a segment"))
+        (commit! unterminated)
+        ;; The terminator is the only allowed difference: a reserialized row
+        ;; is still rejected.
+        (is (thrown-with-msg?
+             js/Error #"exact line is preserved as a segment"
+             (cli/verify-receipts!
+              {:base with-two
+               :at (commit! first-line
+                            {"2026-08-29T172240Z-b.edn"
+                             (str (str/replace (pr-str second) "{" "{ ")
+                                  "\n")})})))))))
+
 (deftest receipt-verification-rejects-historical-rewrite-and-truncation
   (with-historical-ledger-fixture true
     (fn [{:keys [base base-text historical current commit!]}]
