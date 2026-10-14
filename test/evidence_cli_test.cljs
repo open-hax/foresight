@@ -972,6 +972,29 @@
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
 
+(deftest selected-gates-quarantine-a-segment-added-after-the-receipt-write
+  ;; Gate-spawned work can wait for the reserved segment to become nonempty
+  ;; and then add a schema-valid forged segment. The pre-write comparison has
+  ;; already passed, so the whole working ledger is compared again after the
+  ;; write; an unexpected segment quarantines before the locks are released.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))]
+        (fs/writeFileSync file "" "utf8")
+        (binding [cli/*secure-append-phase-hook*
+                  (fn [phase _]
+                    (when (= :after-write phase)
+                      (fs/writeFileSync forged (str forged-line "\n") "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"changed after the receipt was written"
+               (run-semantic-gate-with! file segment (fn [])))))
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
 (deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
   ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
   ;; durable forged segment. The held `.ημ` descriptor then names the moved
@@ -1260,6 +1283,34 @@
   (is (thrown-with-msg?
        js/Error #"exactly one EDN form"
        (cli/read-receipt-records! "{:a 1} trailing\n"))))
+
+(deftest receipt-numbers-must-round-trip-exactly
+  ;; cljs.reader turns every EDN number into a JS double before record IDs
+  ;; are hashed, so distinct lexemes such as 9007199254740992 and
+  ;; 9007199254740993 would share one identity. Only numbers whose exact
+  ;; value survives reading are accepted.
+  (is (= [{:n 9007199254740991 :m -9007199254740991}]
+         (cli/read-receipt-records!
+          "{:n 9007199254740991 :m -9007199254740991}\n")))
+  (is (= [{:score 0.2 :other 0.9 :tiny 1.5e-7}]
+         (cli/read-receipt-records! "{:score 0.20 :other 0.9 :tiny 1.5e-7}\n")))
+  (is (= [{:text "9007199254740993 0.10000000000000001" :k :a9007199254740993
+           :c \9}]
+         (cli/read-receipt-records!
+          "{:text \"9007199254740993 0.10000000000000001\" :k :a9007199254740993 :c \\9}\n"))
+      "digits inside strings, keywords and characters are not numbers")
+  (doseq [lexeme ["9007199254740992" "9007199254740993" "-9007199254740993"
+                  "0.10000000000000001" "1.0" "2e3" "1e400" "1N" "1.5M"
+                  "1/2" "0x10" "017"]]
+    (is (thrown-with-msg?
+         js/Error #"must round-trip exactly"
+         (cli/read-receipt-records! (str "{:n " lexeme "}\n")))
+        lexeme))
+  (is (thrown-with-msg?
+       js/Error #"must round-trip exactly"
+       (cli/encode-edn-line! {:n 9007199254740992}))
+      "the writer refuses a receipt its readers would reject")
+  (is (not= (cli/record-id {:n 1}) (cli/record-id {:n 2}))))
 
 (deftest immutable-catalog-requires-one-complete-edn-form
   (let [contents "{:catalog/version 1}\n"
