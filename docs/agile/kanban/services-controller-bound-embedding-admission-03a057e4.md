@@ -33,7 +33,16 @@ must be part of the selected candidate before rollout. Services verifies that
 handoff and retains the owning source qualification; it does not implement the
 adapter or wait for the later live Spanish receipt. Missing sink, changed storage
 or retention configuration, source/build mismatch or unqualified persistence
-refuses admission. Rheos records this parallel prerequisite alongside migration.
+refuses admission. Services names and verifies the actual persistent storage
+mapping for `KNOXX_PUBLICATION_RECEIPT_LEDGER_DIRECTORY`, including host or backend
+identity, mount source/container destination, scoped namespace, permissions and
+replacement/reschedule lifetime. Consume the owning qualified failed-attempt
+recovery interface and container-replacement/remount readback; a same-volume
+process-restart receipt or container writable layer cannot qualify this handoff.
+Missing recovery custody, foreign/remapped storage or discarded schema/ledger
+history refuses admission. New storage infrastructure or a broader recovery
+protocol needs separately reviewed owning scope before this consumer proceeds.
+Rheos records this parallel prerequisite alongside migration.
 
 Consume four other separately estimated prerequisites before production admission:
 [predeployment translation qualification](qualify-selected-native-knoxx-translation-and-sme-decisions-before-deployment-5eae82d9.md) (`60e85d88-3960-449f-8376-10e75eae82d9`),
@@ -183,6 +192,13 @@ old compatibility CMS completion, or unreviewed OpenPlanner changes.
   source and current attempt. Official controller/caller attestation checks,
   protected review and all required native gates remain satisfied. The exact
   Website exception does not apply to Knoxx.
+- [ ] The selected durable publication-receipt directory resolves to the admitted
+  persistent deployment storage, with actual host/backend, mount, scope and schema/
+  ledger identities retained outside the image. Consume independent original-
+  receipt readback after fixture container/image replacement and remount, plus
+  the owning exact-attempt crash-recovery qualification. Changed storage mapping,
+  ephemeral writable-layer selection, missing recovery or retention drift refuses
+  rollout. Preserve existing public artifacts and historical receipt bytes.
 - [ ] Existing Website, English/German publications, content-root ownership,
   Proxx configuration and SDK settings survive with fresh health/public checks.
   Recovery uses the snapshot/journal and owning compatibility proof; environment

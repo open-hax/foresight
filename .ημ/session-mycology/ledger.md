@@ -592,3 +592,12 @@
   spore: none
   receipt-refs: /home/err/.local/share/openhax-codex/20261010/review-state/root-F140-durable-receipt-body-contract-successor-v1/canonical-receipt-event.edn
   note: An accepted planning contract must follow the actual named owning storage seam. Selected fresh durable reads and explicit same-event retry need acknowledged storage proof, while private qualification stays distinct from hosted/source/image admission. Preserve board metadata and append-only provenance. No new spore.
+- ts: 2026-10-14T23:52:10.732438106Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Correct CMS receipt GET and pending crash/storage obligations in planning
+  p-efficiency: 0.83
+  p-friction: 0.59
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: fca8a009ea6501fe6f472de5c671111f561563f6b0f1b6cbe31a5d4169060175
+  note: Separate fresh selected Clio readback from legacy journal behavior; same-process retry and same-volume restart cannot establish failed-attempt crash recovery or container-replacement lifetime. Preserve explicit unknown effect windows and stop/split broader ownership work instead of inflating a five-point seam silently. No spore or promotion.

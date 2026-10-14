@@ -153,10 +153,16 @@ then independently read the original receipt using the declared storage lookup.
 For the controlled live receipt, record its committed storage identity and obtain
 the same independent readback after an authorized restart; preserve the actual
 restart/runtime identities. Never reset or flood production to run negative or
-retention controls. The existing `/api/publications/receipts` route serves the
-process-local journal even when a custom emission sink is supplied, so it cannot
-stand in for the durable adapter's independent storage read. Record the exact
-qualified storage query/API actually used rather than inventing a durable route.
+retention controls. When `KNOXX_PUBLICATION_RECEIPT_LEDGER_DIRECTORY` selects
+the scoped Clio adapter, `/api/publications/receipts` and both registered CMS GETs
+must consume fresh scoped storage readback. Verify that actual selection, trusted
+scope and storage source; qualify the receipt GET through an independent reader
+after restart rather than treating its URL alone as durability evidence. When
+unselected, the receipt GET retains the bounded process-local journal behavior;
+a custom callback alone does not select or qualify durable readback. Record the
+exact configured adapter and storage query/API actually exercised. A returned
+response, an unselected journal GET or a sink declaration cannot substitute for
+acknowledged canonical commit and independent durable readback.
 
 Five points covers the two bounded live paths, independent persisted judgments,
 whole approval, reconciliation and browser/manifest join on already qualified
