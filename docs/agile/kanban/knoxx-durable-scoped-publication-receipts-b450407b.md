@@ -50,9 +50,19 @@ Persist the actual validated receipt and server-derived organization/tenant and
 project provenance, joined to its trigger, publication, concrete revision, target
 and operation correlation. Preserve payload bytes/digest and conflicts; caller
 scope strings or similar titles cannot establish identity. Do not invent new
-publication trigger fields. Provide a separate owning storage lookup for an
-independent reader/process: `/api/publications/receipts` remains the journal route
-and cannot qualify a custom sink's durable records.
+publication trigger fields. Provide a named owning storage lookup usable by an
+independent reader/process. When the explicit
+`KNOXX_PUBLICATION_RECEIPT_LEDGER_DIRECTORY` selection is configured, the runtime
+persists each emitted receipt through its scoped Clio adapter, and
+`/api/publications/receipts` plus both registered CMS GETs consume fresh scoped
+readback from that owning adapter. When unselected, the receipt GET retains the
+existing bounded process-local journal behavior. A custom callback's return,
+journal response or sink declaration alone cannot qualify durability: require
+acknowledged commit, exact canonical envelope/payload readback through the owning
+lookup and actual publisher process restart with fresh readers. Keep callback
+failures distinct from commit acknowledgment failures. An internal failed-attempt
+capability must retain the exact prepared envelope and admitted scope for explicit
+persistence retry without re-entering reconciliation or repeating publication.
 
 Reuse pinned Clio `388c462b3f1a5b0c51bc93486ab954a7f89cedbe` event/schema
 contracts and `append-admission` for immutable event identity, exact replay and

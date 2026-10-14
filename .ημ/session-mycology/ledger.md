@@ -583,3 +583,12 @@
   spore: none
   receipt-refs: 48396bc7b83b90cb49b7970ccfd60749729b08f1df9b1b4371d4c63f89e202f4
   note: Check fresh upstream merge state before retaining old adoption holds. Imported runtime defaults are explicit qualification limits. Catalog selection and an unexplained server error are separate evidence; no credentials inferred. No spore or promotion.
+- ts: 2026-10-14T22:47:23.111666152Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Reconcile existing durable publication-receipt prerequisite
+  p-efficiency: 0.85
+  p-friction: 0.2
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: /home/err/.local/share/openhax-codex/20261010/review-state/root-F140-durable-receipt-body-contract-successor-v1/canonical-receipt-event.edn
+  note: An accepted planning contract must follow the actual named owning storage seam. Selected fresh durable reads and explicit same-event retry need acknowledged storage proof, while private qualification stays distinct from hosted/source/image admission. Preserve board metadata and append-only provenance. No new spore.
