@@ -1649,6 +1649,26 @@
                js/Error message
                (cli/verify-receipts! {:base base :at head}))))))))
 
+(deftest receipt-verification-rejects-committed-operational-files
+  ;; `.ημ/.receipt-river.quarantine` and the writer lock are working-tree
+  ;; operational state. A reviewed revision that carries either one would
+  ;; close every checkout's working ledger, so immutable review rejects it.
+  (doseq [operational [".receipt-river.quarantine"
+                       ".receipt-river.writer.lock"]]
+    (with-historical-ledger-fixture true
+      (fn [{:keys [directory base base-text commit!]}]
+        (let [marker (path/join directory operational)]
+          (fs/writeFileSync marker "quarantine pid=1\n")
+          (let [head (commit! base-text)]
+            (is (thrown-with-msg?
+                 js/Error #"operational file must not be committed"
+                 (cli/verify-receipts! {:base base :at head}))
+                operational)
+            (is (thrown-with-msg?
+                 js/Error #"operational file must not be committed"
+                 (cli/read-immutable-merged-ledger! head))
+                operational)))))))
+
 (deftest receipt-verification-rejects-historical-rewrite-and-truncation
   (with-historical-ledger-fixture true
     (fn [{:keys [base base-text historical current commit!]}]
