@@ -149,6 +149,15 @@ are not treated as adopted Clio388 capabilities.
   recoverable cases through owning evidence; it does not replace the operation
   with blanket refusal. Cases without adequate effect attribution retain explicit
   unknown state and block unsafe automatic repetition.
+- [ ] Real process interruption or write failure during durable intent persistence,
+  during actual observation/envelope handoff persistence, and during the owning-FD
+  receipt append is exercised independently. Unacknowledged pre-effect custody
+  produces no target effect. A torn or corrupted record preserves the exact
+  observed bytes and intact historical prefix, remains unknown, and blocks unsafe
+  effects or automatic repetition; it is not treated as a complete history or
+  repaired by guessed success. Any required repair/append-recovery primitive is a
+  named, separately reviewed dependency of its existing owner. Healthy complete
+  custody still permits the legitimate recovery required above.
 - [ ] Actual target/source drift, later peer materialization, changed configuration,
   foreign tenant/project, missing custody and corrupted history preserve prior
   bytes/publications and refuse unsafe recovery writes. A current matching route
@@ -170,8 +179,13 @@ are not treated as adopted Clio388 capabilities.
 First reproduce the current loss through the actual public route/owning target on
 an isolated recoverable fixture. Preserve predecessor-failing controls and all
 existing assertions. Drive real append failure and lost ACK at the actual owning
-inode, then terminate the actual publisher rather than resetting an atom or merely
-constructing another store. Inspect exact intent/envelope/event IDs, errors, actual
+inode. Separately interrupt the actual durable-intent write, observation/envelope
+handoff write and receipt append while each owning write is in progress, then
+terminate the actual publisher rather than resetting an atom or merely constructing
+another store. A fixture that terminates only after a completed append does not
+qualify interruption during persistence. Inspect exact retained partial bytes and
+the intact prefix, unknown custody and refusal before unsafe effects alongside
+positive complete-custody recovery. Inspect exact intent/envelope/event IDs, errors, actual
 target/artifact bytes, ledger prefix and callback evidence through fresh independent
 processes. Exercise the distinct crash windows and positive safe recovery neighbors,
 including repeated completed recovery, genuine later/noop demand and wrong-scope
@@ -183,7 +197,18 @@ Provisional eight points: one for owning seam/custody discovery; one for portabl
 intent/observation/recovery contracts; three for actual pre-effect and exact-envelope
 wiring; two for causal fresh-process recovery/refusal controls; one for owner
 qualification and the Services/AFAC interface handoff. Review calibrates the estimate
-before readiness. If safe async fencing, directory/power-loss durability or another
+before readiness.
+
+## Risks
+
+The pinned Clio Node adapter appends before forcing the owning FD and rejects
+malformed EDN history; its current API supplies no torn-tail repair. Actual write
+interruption can therefore leave unknown custody. Qualifying an existing generic
+repair or adding a necessary owning primitive requires a named reviewed dependency,
+with preserved historical bytes and recoverable healthy neighbors; do not count
+clean replay or post-append lost-ACK evidence as that qualification.
+
+If safe async fencing, directory/power-loss durability or another
 missing generic primitive requires Clio source, identify that concrete upstream
 owner and split it through review rather than copying it into Knoxx or silently
 widening these eight points. Publisher process interruption is required; host power

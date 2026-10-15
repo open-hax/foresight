@@ -131,7 +131,14 @@ publication or namespace is a negative-test fixture.
 
 Provisional three points: one for exact configuration/provisioning/storage custody;
 one for actual container replacement and independent readback; one for admission
-refusal controls and the AFAC/EC1.03 handoff. This assumes the selected mapping fits
+refusal controls and the AFAC/EC1.03 handoff.
+
+## Risks
+
+The receipt and schema custody must share the admitted persistent storage lifetime;
+a reused path inside a replacement container does not establish mount identity or
+retention. Missing, ephemeral or mismatched mapping blocks the affected admission.
+This assumes the selected mapping fits
 an existing reviewed Services state boundary. A missing backend, broader lifecycle
 or new platform requires separate reviewed scope/re-estimation before readiness.
 

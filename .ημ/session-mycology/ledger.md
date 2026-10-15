@@ -610,3 +610,12 @@
   spore: none
   receipt-refs: /home/err/.local/share/openhax-codex/20261010/review-state/root-F140-f07-concrete-publication-recovery-storage-split-v1/canonical-receipt-event.edn
   note: A recovered outcome must remain distinct from an acknowledged pre-effect intent and an actual prepared receipt envelope. Split broader application crash custody and deployment storage lifetime into concrete owners; preserve canonical board state and truthfully pending readiness rather than overloading the emission adapter. No spore or promotion.
+- ts: 2026-10-15T00:38:46.815470752Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Preserve in-write crash windows in publication recovery planning
+  p-efficiency: 0.86
+  p-friction: 0.49
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: f2f3a7b04ffc14e97014b758abe13504fcfe32bd736ecbabefd0536fe0e4f872
+  note: Post-append lost acknowledgment and process restart do not cover interruption inside actual persistence. Keep exact partial bytes and unknown outcomes, require named owning recovery primitives where necessary, and retain healthy legitimate recovery. No spore.
