@@ -229,6 +229,115 @@
        (vector? (:refs receipt))
        (every? nonblank-string? (:refs receipt))))
 
+(def canonical-observation-contract
+  "Foresight's supported external observation shape, not the producer registry.
+  Producer provenance: open-hax/eta-mu d98ab446d56ddfd24542df49b102b851f2a767fa,
+  packages/receipt-river/src/cljs/eta_mu/receipt_river/law/receipt.cljs,
+  SHA256 a40dd843cf298926dfbe229d5544470dbd51682fd538e841a0fad62d29bed320.
+  The actual producer law separately validated both retained regression events.
+  Other producer kinds, representations and versions require explicit admission;
+  none of this grants revision-bound gate-result or promotion evidence credit."
+  {:event/type :receipt-river/receipt-recorded
+   :event/schema {:id :eta-mu.receipt-river/receipt-recorded :version 1}
+   :producer/package "@eta-mu/receipt-river"
+   :producer/admitted-versions #{"0.1.0"}
+   :payload/kind :observation
+   :payload/string-fields [:repo :origin :owner :dod :pi :host :manifest :refs]
+   :event/keys #{:event/id :event/type :event/recorded-at :event/schema
+                 :event/producer :event/subject :event/payload
+                 :event/caused-by :event/causes :event/refs}})
+
+(defn utc-receipt-timestamp?
+  "Validate the consumer's UTC string representation, including fractional
+  seconds, without converting or normalizing the immutable receipt."
+  [value]
+  (boolean
+   (when (string? value)
+     (when-let [[_ year month day hour minute second]
+                (re-matches
+                 #"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?Z"
+                 value)]
+       (let [[year month day hour minute second]
+             (mapv parse-long [year month day hour minute second])
+             leap? (or (zero? (mod year 400))
+                       (and (zero? (mod year 4))
+                            (not (zero? (mod year 100)))))
+             last-day (case month
+                        2 (if leap? 29 28)
+                        (4 6 9 11) 30
+                        31)]
+         (and (<= 1 month 12)
+              (<= 1 day last-day)
+              (<= 0 hour 23)
+              (<= 0 minute 59)
+              (<= 0 second 59)))))))
+
+(defn canonical-observation-receipt? [receipt]
+  (let [producer (:event/producer receipt)
+        subject (:event/subject receipt)
+        payload (:event/payload receipt)]
+    (boolean
+     (and (map? receipt)
+          (every? (:event/keys canonical-observation-contract) (keys receipt))
+          (nonblank-string? (:event/id receipt))
+          (re-matches
+           #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+           (:event/id receipt))
+          (= (:event/type canonical-observation-contract) (:event/type receipt))
+          (= (:event/schema canonical-observation-contract)
+             (:event/schema receipt))
+          (utc-receipt-timestamp? (:event/recorded-at receipt))
+          (map? producer)
+          (= (:producer/package canonical-observation-contract)
+             (:package/name producer))
+          (contains? (:producer/admitted-versions canonical-observation-contract)
+                     (:package/version producer))
+          (nonblank-string? (:actor producer))
+          (nonblank-string? (:command producer))
+          (nonblank-string? (:eta-mu/version producer))
+          (git-commit-id? (:source/commit producer))
+          (map? subject)
+          (nonblank-string? (:repo subject))
+          (map? payload)
+          (every? #(and (keyword? %) (nil? (namespace %))) (keys payload))
+          (= (:payload/kind canonical-observation-contract) (:kind payload))
+          (utc-receipt-timestamp? (:ts payload))
+          (every? #(nonblank-string? (get payload %))
+                  (:payload/string-fields canonical-observation-contract))
+          (= (:repo subject) (:repo payload))
+          (not= evidence-receipt-origin (:origin payload))
+          (every? (fn [key]
+                    (or (not (contains? receipt key))
+                        (and (vector? (get receipt key))
+                             (every? nonblank-string? (get receipt key)))))
+                  [:event/caused-by :event/causes :event/refs])))))
+
+(defn receipt-record?
+  "Admit supported records without flattening envelopes or changing their bytes.
+  Any event key selects the external contract, so a partial or mixed envelope
+  cannot fall back to the legacy receipt contract."
+  [receipt]
+  (boolean
+   (and (map? receipt)
+        (if (some #(and (keyword? %) (= "event" (namespace %))) (keys receipt))
+          (canonical-observation-receipt? receipt)
+          (receipt-envelope? receipt)))))
+
+(defn duplicate-appended-event-ids
+  "Report exact event identities repeated by newly admitted records.
+  Trusted history seeds identity reservations without revalidating, rewriting
+  or deduplicating historical records. Legacy records without IDs add nothing.
+  Record-shape admission remains the caller's separate obligation."
+  [trusted-records appended-records]
+  (let [event-ids (fn [records]
+                    (keep #(when (map? %) (:event/id %)) records))
+        counts (frequencies (concat (set (event-ids trusted-records))
+                                    (event-ids appended-records)))]
+    (->> (event-ids appended-records)
+         (filter #(> (get counts % 0) 1))
+         distinct
+         vec)))
+
 (defn evidence-receipt? [receipt]
   (let [schema (:evidence/schema receipt)]
     (and (receipt-envelope? receipt)

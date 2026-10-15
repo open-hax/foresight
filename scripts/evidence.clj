@@ -223,24 +223,32 @@
     (throw (js/Error. (str "Invalid quality gate catalog: " (pr-str errors)))))
    catalog))
 
-(defn require-valid-receipt-records! [records]
-  (let [invalid-envelopes (remove law/receipt-envelope? records)
-        evidence-records (filter #(= law/evidence-receipt-origin (:origin %))
-                                 records)
-        invalid-evidence (remove law/evidence-receipt? evidence-records)]
-    (when (seq invalid-envelopes)
-      (throw (js/Error.
-              (str "Immutable ledger contains invalid receipt envelopes: "
-                   (pr-str (vec invalid-envelopes))))))
-    (when (seq invalid-evidence)
-      (throw (js/Error.
-              (str "Immutable ledger contains invalid evidence receipts: "
-                   (pr-str (mapv #(law/result-errors (:evidence/result %))
-                                 invalid-evidence))))))
-    {:receipt/total (count records)
-     :receipt/evidence (count evidence-records)
-     :receipt/legacy-evidence
-     (count (filter #(nil? (:evidence/schema %)) evidence-records))}))
+(defn require-valid-receipt-records!
+  ([records]
+   (require-valid-receipt-records! [] records))
+  ([trusted-records records]
+   (let [invalid-envelopes (remove law/receipt-record? records)
+         evidence-records (filter #(= law/evidence-receipt-origin (:origin %))
+                                  records)
+         invalid-evidence (remove law/evidence-receipt? evidence-records)]
+     (when (seq invalid-envelopes)
+       (throw (js/Error.
+               (str "Immutable ledger contains invalid receipt envelopes: "
+                    (pr-str (vec invalid-envelopes))))))
+     (when (seq invalid-evidence)
+       (throw (js/Error.
+               (str "Immutable ledger contains invalid evidence receipts: "
+                    (pr-str (mapv #(law/result-errors (:evidence/result %))
+                                  invalid-evidence))))))
+     (when-let [duplicates (seq (law/duplicate-appended-event-ids
+                                trusted-records records))]
+       (throw (js/Error.
+               (str "Immutable ledger contains duplicate canonical event IDs: "
+                    (pr-str (vec duplicates))))))
+     {:receipt/total (count records)
+      :receipt/evidence (count evidence-records)
+      :receipt/legacy-evidence
+      (count (filter #(nil? (:evidence/schema %)) evidence-records))})))
 
 (declare appended-receipt-records!)
 
@@ -260,6 +268,7 @@
         base-ledger (read-immutable-receipt-ledger! trusted-base-revision)
         ledger (read-immutable-receipt-ledger! reviewed-root-revision)]
     (require-valid-receipt-records!
+     (:ledger/records base-ledger)
      (appended-receipt-records! (:ledger/bytes base-ledger)
                                 (:ledger/bytes ledger)))
     (if-not (law/promotion-evidence-consistent?
@@ -789,6 +798,8 @@
       (append-error!
        "Receipt River does not preserve the committed ledger as a prefix"))
     (require-valid-receipt-records!
+     (read-receipt-records!
+      (decode-utf8! committed-bytes "committed Receipt River records"))
      (appended-receipt-records! committed-bytes bytes))
     bytes))
 
@@ -1048,7 +1059,8 @@
                           (:ledger/bytes ledger))
         candidates (filter #(= law/evidence-receipt-origin (:origin %)) records)
         evidence-count (count candidates)
-        counts (require-valid-receipt-records! appended-records)]
+        counts (require-valid-receipt-records! (:ledger/records base-ledger)
+                                               appended-records)]
     (println "PASS"
              (pr-str (assoc (:ledger/identity ledger)
                             :ledger/base-revision base

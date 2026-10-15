@@ -833,6 +833,322 @@
                js/Error #"does not preserve the base bytes as a prefix"
                (cli/verify-receipts! {:base base :at head}))))))))
 
+(defn canonical-river-observation []
+  {:event/id "a6d845a8-94da-4d83-b407-a73ee7b48aaf"
+   :event/type :receipt-river/receipt-recorded
+   :event/recorded-at "2026-10-14T06:12:17.427Z"
+   :event/schema {:id :eta-mu.receipt-river/receipt-recorded :version 1}
+   :event/producer {:package/name "@eta-mu/receipt-river"
+                    :package/version "0.1.0"
+                    :command "Receipt River package API"
+                    :actor "test"
+                    :eta-mu/version "0.1.0"
+                    :source/commit child-revision}
+   :event/subject {:repo "open-hax/foresight"}
+   :event/payload {:ts "2026-10-14T06:12:17.427Z"
+                   :kind :observation
+                   :repo "open-hax/foresight"
+                   :origin "Canonical receipt consumer regression"
+                   :owner "test"
+                   :dod "Preserve immutable historical receipt bytes"
+                   :pi "eta-mu"
+                   :host "test"
+                   :manifest "source-manifest.json sha256:retained"
+                   :refs "retained source and test references"}})
+
+(deftest canonical-river-events-admit-without-changing-legacy-evidence
+  (let [event (canonical-river-observation)
+        legacy (cli/evidence-receipt passed-result
+                                     "2026-10-14T06:12:17.427Z"
+                                     "test" "nbb/node@test")]
+    (is (not (law/receipt-envelope? event)))
+    (is (not (law/receipt-envelope? (:event/payload event))))
+    (is (not (law/evidence-receipt? event)))
+    (is (not (law/receipt-attests-result? event passed-result)))
+    (is (= {:receipt/total 2 :receipt/evidence 1 :receipt/legacy-evidence 0}
+           (cli/require-valid-receipt-records! [legacy event])))
+    (doseq [value [nil 42 {} []]]
+      (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
+                           (cli/require-valid-receipt-records! [value]))))))
+
+(deftest actual-canonical-337d-events-are-admitted-without-rewrite
+  ;; Exact lines 197–198 of 337d2eafe21b8093053a1449956ed38d326c7b04.
+  ;; A retained fixture keeps this regression runnable in a shallow CI checkout.
+  (let [bytes (fs/readFileSync
+               (path/join cli/root "test" "fixtures"
+                          "canonical-receipt-river-events.edn"))
+        appended (cli/read-receipt-records!
+                  (cli/decode-utf8! bytes "canonical regression fixture"))]
+    (is (= ["8fa78a8b-badb-4750-814a-6f7fb31b14a9"
+            "3d4cd40f-d37c-4c00-b533-f22cc3e1ff62"]
+           (mapv :event/id appended)))
+    (is (= {:receipt/total 2 :receipt/evidence 0 :receipt/legacy-evidence 0}
+           (cli/require-valid-receipt-records! appended)))))
+
+(deftest canonical-observations-pass-immutable-suffix-and-secure-append-boundaries
+  (doseq [terminal-newline? [true false]]
+    (with-historical-ledger-fixture terminal-newline?
+      (fn [{:keys [base base-text file commit!]}]
+        (let [event (canonical-river-observation)
+              text (str base-text (when-not terminal-newline? "\n")
+                        (pr-str event) "\n")]
+          ;; Leave the canonical event uncommitted, so secure append must
+          ;; validate it as a new suffix rather than trust it as history.
+          (fs/writeFileSync file text "utf8")
+          (let [receipt (cli/append-evidence-receipt! passed-result)
+                bytes (fs/readFileSync file)
+                head (commit! (.toString bytes "utf8"))
+                output (with-out-str
+                         (is (zero? (cli/verify-receipts!
+                                     {:base base :at head}))))]
+            (is (str/includes? output ":appended-receipts 2"))
+            (is (str/includes? output ":appended-evidence-receipts 1"))
+            (is (cli/buffer-prefix? (js/Buffer.from text "utf8") bytes))
+            (is (= [receipt]
+                   (cli/appended-receipt-records!
+                    (js/Buffer.from text "utf8") bytes)))))))))
+
+(deftest canonical-river-events-reject-malformed-contract-boundaries
+  (let [event (canonical-river-observation)]
+    (doseq [key (keys event)]
+      (is (thrown-with-msg?
+           js/Error #"invalid receipt envelopes"
+           (cli/require-valid-receipt-records! [(dissoc event key)]))))
+    (doseq [invalid [(assoc event :event/id 42)
+                     (assoc event :event/id "not-a-uuid")
+                     (assoc event :event/type :other/event)
+                     (assoc event :event/schema [])
+                     (assoc-in event [:event/schema :id] :other/schema)
+                     (assoc-in event [:event/schema :version] "1")
+                     (assoc-in event [:event/schema :version] 2)
+                     (assoc event :event/recorded-at 42)
+                     (assoc event :event/recorded-at "2026-02-30T00:00:00Z")
+                     (assoc event :event/recorded-at "2026-10-14T24:00:00Z")
+                     (assoc event :event/producer [])
+                     (assoc-in event [:event/producer :package/name] "other")
+                     (assoc-in event [:event/producer :package/version] 1)
+                     (assoc-in event [:event/producer :package/version] "999.0.0")
+                     (assoc event :event/subject "open-hax/foresight")
+                     (assoc event :event/payload [])
+                     (assoc-in event [:event/payload :ts] "2026-99-99T00:00:00Z")
+                     (assoc-in event [:event/payload :kind] "observation")
+                     (assoc-in event [:event/payload :kind] :unknown)
+                     (assoc-in event [:event/payload :kind] :test-run)
+                     (assoc-in event [:event/payload :manifest] 42)
+                     (assoc-in event [:event/payload :manifest] ["source"])
+                     (assoc-in event [:event/payload :refs] ["source"])
+                     (assoc-in event [:event/payload :refs] [42])]]
+      (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
+                           (cli/require-valid-receipt-records! [invalid]))))
+    (doseq [key [:repo :origin :owner :dod :pi :host :manifest :refs]]
+      (doseq [value [nil 42 ""]]
+        (is (thrown-with-msg?
+             js/Error #"invalid receipt envelopes"
+             (cli/require-valid-receipt-records!
+              [(assoc-in event [:event/payload key] value)])))))))
+
+(deftest unadmitted-producer-versions-refuse-suffix-and-secure-append
+  (doseq [terminal-newline? [true false]]
+    (with-historical-ledger-fixture terminal-newline?
+      (fn [{:keys [base base-text file directory commit!]}]
+        (let [event (assoc-in (canonical-river-observation)
+                              [:event/producer :package/version] "999.0.0")
+              text (str base-text (when-not terminal-newline? "\n")
+                        (pr-str event) "\n")]
+          ;; The unsupported record is a new working-tree suffix, not trusted
+          ;; history, when the evidence writer checks admission before append.
+          (fs/writeFileSync file text "utf8")
+          (is (thrown-with-msg?
+               js/Error #"invalid receipt envelopes"
+               (cli/append-evidence-receipt! passed-result)))
+          (is (.equals (js/Buffer.from text "utf8")
+                       (fs/readFileSync file)))
+          (is (not (fs/existsSync
+                    (path/join directory ".receipts.edn.append.lock"))))
+          ;; Restore the exact neighbor after a RED writer may have appended,
+          ;; then independently exercise immutable base-relative admission.
+          (let [head (commit! text)]
+            (is (thrown-with-msg?
+                 js/Error #"invalid receipt envelopes"
+                 (cli/verify-receipts! {:base base :at head})))
+            (is (.equals (js/Buffer.from base-text "utf8")
+                         (:ledger/bytes
+                          (cli/read-immutable-receipt-ledger! base))))))))))
+
+(deftest incomplete-producer-custody-refuses-new-suffix-before-append
+  (let [event (canonical-river-observation)
+        missing (mapv #(update event :event/producer dissoc %)
+                      [:actor :command :eta-mu/version :source/commit])
+        malformed [(assoc-in event [:event/producer :actor] " ")
+                   (assoc-in event [:event/producer :command] 42)
+                   (assoc-in event [:event/producer :eta-mu/version] [])
+                   (assoc-in event [:event/producer :source/commit] "main")]]
+    (doseq [terminal-newline? [true false]
+            invalid (concat missing malformed)]
+      (with-historical-ledger-fixture terminal-newline?
+        (fn [{:keys [base base-text file directory commit!]}]
+          (let [text (str base-text (when-not terminal-newline? "\n")
+                          (pr-str invalid) "\n")
+                phases (atom [])]
+            (fs/writeFileSync file text "utf8")
+            (binding [cli/*secure-append-phase-hook*
+                      (fn [phase _] (swap! phases conj phase))]
+              (is (thrown-with-msg?
+                   js/Error #"invalid receipt envelopes"
+                   (cli/append-evidence-receipt! passed-result))))
+            (is (= [] @phases))
+            (is (.equals (js/Buffer.from text "utf8")
+                         (fs/readFileSync file)))
+            (is (not (fs/existsSync
+                      (path/join directory ".receipts.edn.append.lock"))))
+            ;; A failing predecessor may have appended. Restore the exact
+            ;; requested suffix before independent immutable verification.
+            (let [head (commit! text)]
+              (is (thrown-with-msg?
+                   js/Error #"invalid receipt envelopes"
+                   (cli/verify-receipts! {:base base :at head})))
+              (is (.equals (js/Buffer.from base-text "utf8")
+                           (:ledger/bytes
+                            (cli/read-immutable-receipt-ledger! base)))))))))))
+
+(deftest producer-custody-admission-preserves-trusted-history
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base-text file commit!]}]
+      (let [historical (update (canonical-river-observation) :event/producer
+                               #(apply dissoc % [:actor :command :eta-mu/version
+                                                 :source/commit]))
+            trusted-text (str base-text (pr-str historical) "\n")
+            base (commit! trusted-text)
+            fresh (assoc (canonical-river-observation)
+                         :event/id "d1e845a8-94da-4d83-b407-a73ee7b48aaf")
+            head (commit! (str trusted-text (pr-str fresh) "\n"))]
+        (is (zero? (cli/verify-receipts! {:base base :at base})))
+        (is (zero? (cli/verify-receipts! {:base base :at head})))
+        (is (.equals (js/Buffer.from trusted-text "utf8")
+                     (:ledger/bytes (cli/read-immutable-receipt-ledger! base))))
+        (let [receipt (cli/append-evidence-receipt! passed-result)
+              bytes (fs/readFileSync file)]
+          (is (cli/buffer-prefix? (js/Buffer.from trusted-text "utf8") bytes))
+          (is (= [fresh receipt]
+                 (cli/appended-receipt-records!
+                  (:ledger/bytes (cli/read-immutable-receipt-ledger! base))
+                  bytes))))))))
+
+(deftest canonical-envelope-cannot-smuggle-legacy-evidence-or-a-fallback
+  (let [event (canonical-river-observation)
+        legacy (cli/evidence-receipt passed-result
+                                     "2026-10-14T06:12:17.427Z"
+                                     "test" "nbb/node@test")]
+    (doseq [invalid [(merge legacy event)
+                     (assoc legacy :event/schema nil)
+                     (assoc legacy :event/type :receipt-river/receipt-recorded)
+                     (assoc-in event [:event/payload :origin]
+                               law/evidence-receipt-origin)
+                     (assoc event :event/payload legacy)
+                     (assoc event :event/payload
+                            (assoc-in legacy [:evidence/result :result/exit] 1))]]
+      (is (thrown-with-msg?
+           js/Error #"invalid receipt envelopes"
+           (cli/require-valid-receipt-records! [invalid]))))))
+
+(deftest canonical-suffix-records-cannot-repeat-event-identities
+  (let [event (canonical-river-observation)]
+    (doseq [repeated [event (assoc-in event [:event/payload :note] "conflict")]]
+      (is (thrown-with-msg?
+           js/Error #"duplicate canonical event IDs"
+           (cli/require-valid-receipt-records! [event repeated]))))))
+
+(defn with-canonical-identity-fixture [collision-in-base? run!]
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base base-text commit!] :as context}]
+      (let [event (canonical-river-observation)
+            trusted-text (str base-text
+                              (when collision-in-base?
+                                (str (pr-str event) "\n")))
+            trusted-base (if collision-in-base? (commit! trusted-text) base)]
+        (run! (assoc context
+                     :base trusted-base :base-text trusted-text
+                     :event event :collision-in-base? collision-in-base?))))))
+
+(defn duplicate-canonical-suffix [{:keys [event collision-in-base?]} repeated]
+  (str (when-not collision-in-base? (str (pr-str event) "\n"))
+       (pr-str repeated) "\n"))
+
+(deftest immutable-receipt-history-rejects-canonical-replay-and-conflicting-ids
+  (doseq [collision-in-base? [false true]]
+    (with-canonical-identity-fixture collision-in-base?
+      (fn [{:keys [base base-text event commit!] :as context}]
+        (doseq [repeated [event
+                         (assoc-in event [:event/payload :note] "conflict")]]
+          (let [head (commit! (str base-text
+                                  (duplicate-canonical-suffix context repeated)))]
+            (is (thrown-with-msg?
+                 js/Error #"duplicate canonical event IDs"
+                 (cli/verify-receipts! {:base base :at head})))
+            (is (.equals (js/Buffer.from base-text "utf8")
+                         (:ledger/bytes
+                          (cli/read-immutable-receipt-ledger! base))))))))))
+
+(deftest secure-evidence-append-rejects-new-canonical-identity-collisions
+  (doseq [collision-in-base? [false true]]
+    (with-canonical-identity-fixture collision-in-base?
+      (fn [{:keys [base-text event file directory] :as context}]
+        (doseq [repeated [event
+                         (assoc-in event [:event/payload :note] "conflict")]]
+          (let [held-text (str base-text
+                               (duplicate-canonical-suffix context repeated))]
+            (fs/writeFileSync file held-text "utf8")
+            (is (thrown-with-msg?
+                 js/Error #"duplicate canonical event IDs"
+                 (cli/append-evidence-receipt! passed-result)))
+            (is (= held-text (fs/readFileSync file "utf8")))
+            (is (not (fs/existsSync
+                      (path/join directory ".receipts.edn.append.lock"))))))))))
+
+(deftest promotion-refuses-new-canonical-identity-collisions
+  (doseq [collision-in-base? [false true]]
+    (with-canonical-identity-fixture collision-in-base?
+      (fn [{:keys [base base-text event current commit!] :as context}]
+        (let [catalog {:catalog/version 1
+                       :catalog/repositories
+                       {"repo" {:repository/path "repo"
+                                :repository/gates [local-gate]}}}]
+          (with-redefs [cli/read-immutable-catalog-bundle!
+                        (fn [_] {:catalog catalog
+                                 :catalog-identity test-catalog-identity})
+                        cli/validate-catalog! identity
+                        cli/gitlink-target! (fn [& _] child-revision)]
+            (doseq [repeated [event
+                             (assoc-in event [:event/payload :note] "conflict")]]
+              (let [head (commit!
+                          (str base-text
+                               (duplicate-canonical-suffix context repeated)
+                               (pr-str current) "\n"))]
+                (is (thrown-with-msg?
+                     js/Error #"duplicate canonical event IDs"
+                     (cli/promotion-ready-at!
+                      child-revision #{:repo/unit} [passed-result]
+                      base head)))))))))))
+
+(deftest canonical-identity-check-grandfathers-unchanged-history-only
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base-text commit!]}]
+      (let [event (canonical-river-observation)
+            trusted-text (str base-text (pr-str event) "\n"
+                              (pr-str event) "\n")
+            base (commit! trusted-text)
+            fresh (assoc event :event/id "d1e845a8-94da-4d83-b407-a73ee7b48aaf")
+            head (commit! (str trusted-text (pr-str fresh) "\n"))
+            output (with-out-str
+                     (is (zero? (cli/verify-receipts! {:base base :at base})))
+                     (is (zero? (cli/verify-receipts! {:base base :at head}))))]
+        (is (str/includes? output ":total-receipts 4"))
+        (is (str/includes? output ":appended-receipts 1"))
+        (is (str/includes? output ":appended-evidence-receipts 0"))
+        (is (str/includes? output ":legacy-evidence-receipts 1"))
+        (is (.equals (js/Buffer.from trusted-text "utf8")
+                     (:ledger/bytes (cli/read-immutable-receipt-ledger! base))))))))
+
 (deftest evidence-append-preserves-history-and-validates-uncommitted-suffix
   (doseq [terminal-newline? [true false]]
     (with-historical-ledger-fixture terminal-newline?

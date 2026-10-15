@@ -89,6 +89,88 @@
     (is (false? (evidence/receipt-envelope? (dissoc receipt :origin))))
     (is (false? (evidence/receipt-envelope? 42)))))
 
+(deftest canonical-observation-timestamps-validate-without-coercion
+  (doseq [timestamp ["2024-02-29T00:00:00Z"
+                     "2000-02-29T23:59:59.123456789Z"
+                     "2026-10-14T06:12:17.427Z"]]
+    (is (evidence/utc-receipt-timestamp? timestamp)))
+  (doseq [timestamp [nil 42 #inst "2026-10-14T06:12:17.427Z"
+                     "1900-02-29T00:00:00Z"
+                     "2026-02-29T00:00:00Z"
+                     "2026-04-31T00:00:00Z"
+                     "2026-00-01T00:00:00Z"
+                     "2026-13-01T00:00:00Z"
+                     "2026-10-14T00:60:00Z"
+                     "2026-10-14T00:00:60Z"
+                     "2026-10-14T06:12:17+00:00"]]
+    (is (false? (evidence/utc-receipt-timestamp? timestamp)))))
+
+(deftest canonical-observations-require-an-admitted-producer-version
+  (let [receipt {:event/id "a6d845a8-94da-4d83-b407-a73ee7b48aaf"
+                 :event/type :receipt-river/receipt-recorded
+                 :event/recorded-at "2026-10-14T06:12:17.427Z"
+                 :event/schema {:id :eta-mu.receipt-river/receipt-recorded
+                                :version 1}
+                 :event/producer {:package/name "@eta-mu/receipt-river"
+                                  :package/version "0.1.0"
+                                  :eta-mu/version "0.1.0"
+                                  :command "Receipt River package API"
+                                  :actor "test"
+                                  :source/commit revision-a}
+                 :event/subject {:repo "open-hax/foresight"}
+                 :event/payload {:ts "2026-10-14T06:12:17.427Z"
+                                 :kind :observation
+                                 :repo "open-hax/foresight"
+                                 :origin "Canonical receipt consumer regression"
+                                 :owner "test"
+                                 :dod "Preserve immutable historical receipt bytes"
+                                 :pi "eta-mu"
+                                 :host "test"
+                                 :manifest "source-manifest.json sha256:retained"
+                                 :refs "retained source and test references"}}
+        unknown-version (assoc-in receipt [:event/producer :package/version]
+                                  "999.0.0")
+        legacy (receipt-for (recorded-result :repo/unit :passed revision-a))]
+    (is (evidence/canonical-observation-receipt? receipt))
+    (is (false? (evidence/canonical-observation-receipt? unknown-version)))
+    ;; This consumer requires new canonical producer custody; these fields
+    ;; are not asserted to be mandatory in upstream Receipt River's envelope law.
+    (doseq [key [:actor :command :eta-mu/version :source/commit]]
+      (is (false? (evidence/canonical-observation-receipt?
+                   (update receipt :event/producer dissoc key))))
+      (doseq [value [nil "" "  " 42 []]]
+        (is (false? (evidence/receipt-record?
+                     (assoc-in receipt [:event/producer key] value))))))
+    (doseq [commit ["main" (apply str (repeat 39 "a"))
+                    (apply str (repeat 41 "a"))
+                    (apply str (repeat 40 "A"))
+                    (str (apply str (repeat 39 "a")) "g")
+                    (apply str (repeat 63 "a"))]]
+      (is (false? (evidence/canonical-observation-receipt?
+                   (assoc-in receipt [:event/producer :source/commit] commit)))))
+    (is (evidence/canonical-observation-receipt?
+          (assoc-in receipt [:event/producer :source/commit]
+                    (apply str (repeat 64 "a")))))
+    (is (evidence/receipt-record? legacy))))
+
+(deftest appended-event-identity-law-reserves-history-without-rewriting-it
+  (let [event-a {:event/id "a" :event/payload {:note "original"}}
+        changed-a (assoc-in event-a [:event/payload :note] "different")
+        event-b {:event/id "b"}
+        historical [event-a event-a {:kind :observation} 42]]
+    (is (= [] (evidence/duplicate-appended-event-ids historical [])))
+    (is (= [] (evidence/duplicate-appended-event-ids historical [event-b])))
+    (is (= ["a"] (evidence/duplicate-appended-event-ids historical [event-a])))
+    (is (= ["a"] (evidence/duplicate-appended-event-ids historical [changed-a])))
+    (is (= ["a"] (evidence/duplicate-appended-event-ids [] [event-a event-a])))
+    (is (= ["a"] (evidence/duplicate-appended-event-ids [] [event-a changed-a])))
+    (is (= ["b" "a"]
+           (evidence/duplicate-appended-event-ids historical
+                                                  [event-b event-b event-a])))
+    (is (= [] (evidence/duplicate-appended-event-ids
+               [{:event/id 42}] [{:event/id "42"} {:kind :test-run}])))
+    (is (= [event-a event-a {:kind :observation} 42] historical))))
+
 (deftest validates-gate-catalogs
   (is (evidence/valid-catalog? valid-catalog))
   (is (= :gate/command
