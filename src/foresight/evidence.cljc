@@ -466,10 +466,18 @@
 ;; Segmented Receipt River ledger law (pure). Adapters supply bytes and a
 ;; content-hash function; ordering and duplicate rules live here.
 
+(defn- persistent-queue?
+  "True for a cljs/JVM persistent queue (#queue ...), which is sequential
+  and equal to a list or vector of the same elements but is a distinct EDN
+  tagged collection."
+  [value]
+  #?(:clj (instance? clojure.lang.PersistentQueue value)
+     :cljs (instance? PersistentQueue value)))
+
 (defn canonical-form
   "An order-independent representation of an EDN value: map entries and set
-  members are sorted, and vectors and lists stay distinct, so equal values
-  always print identically and unequal values never collide."
+  members are sorted, and vectors, lists and queues stay distinct, so equal
+  values always print identically and unequal values never collide."
   [value]
   (cond
     (map? value)
@@ -478,6 +486,7 @@
                              value)))]
     (set? value) [:set (vec (sort-by pr-str (map canonical-form value)))]
     (vector? value) [:vector (mapv canonical-form value)]
+    (persistent-queue? value) [:queue (mapv canonical-form value)]
     (sequential? value) [:list (mapv canonical-form value)]
     :else value))
 

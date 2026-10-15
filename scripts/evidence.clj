@@ -120,10 +120,11 @@
   (boolean (re-matches #"[\s,()\[\]{}\";]" ch)))
 
 (defn edn-lexemes
-  "Lexemes of one EDN text as [kind text] pairs, kind :string (raw contents
-  between the quotes, escapes kept) or :token. Comments and delimiters are
-  skipped, so text inside strings, character literals and comments never
-  becomes a token."
+  "Lexemes of one EDN text as [kind text] pairs. Kind is :string (raw
+  contents between the quotes, escapes kept), :token, :open or :close.
+  Whitespace, commas and comments are skipped. Structural brackets stay so
+  a later pass can skip whole forms (including `#_` discards). Text inside
+  strings, character literals and comments never becomes a token."
   [text]
   (let [n (count text)]
     (loop [i 0
@@ -144,6 +145,12 @@
 
             (= ";" ch)
             (recur (let [j (.indexOf text "\n" i)] (if (neg? j) n j)) out)
+
+            (contains? #{"(" "[" "{"} ch)
+            (recur (inc i) (conj out [:open ch]))
+
+            (contains? #{")" "]" "}"} ch)
+            (recur (inc i) (conj out [:close ch]))
 
             (edn-token-delimiter? ch) (recur (inc i) out)
 
@@ -166,19 +173,72 @@
               (filter #(re-find #"^(?:[+-]?[0-9]|##)" %)))
         (edn-lexemes text)))
 
+(defn- edn-tag-token?
+  "True for an EDN tagged-literal dispatch token such as `#inst` or
+  `#uuid`. Not `#_` (discard) and not symbolic `##Inf`."
+  [value]
+  (boolean (and (string? value) (re-matches #"#[A-Za-z][^\"\\s]*" value))))
+
+(defn- edn-skip-form
+  "Index after one complete EDN form starting at `idx` in `lexemes`.
+  Collections use matched :open/:close depth. A tag consumes its value.
+  A `#_` discard skips its operand and then continues as another form
+  (tools.reader discard semantics)."
+  [lexemes idx]
+  (let [[kind value] (get lexemes idx)]
+    (cond
+      (nil? kind) idx
+
+      (= :string kind) (inc idx)
+
+      (= :open kind)
+      (loop [i (inc idx) depth 1]
+        (let [[k _] (get lexemes i)]
+          (cond
+            (nil? k) i
+            (= :open k) (recur (inc i) (inc depth))
+            (= :close k) (if (= 1 depth)
+                           (inc i)
+                           (recur (inc i) (dec depth)))
+            :else (recur (inc i) depth))))
+
+      (and (= :token kind) (= "#_" value))
+      (edn-skip-form lexemes (edn-skip-form lexemes (inc idx)))
+
+      (and (= :token kind) (edn-tag-token? value))
+      (edn-skip-form lexemes (inc idx))
+
+      (= :token kind) (inc idx)
+
+      :else (inc idx))))
+
 (defn edn-inst-strings
   "Raw string contents of every real `#inst` tag in one EDN text. A `#inst`
-  inside a string or comment is not a tag. A tag not followed by a string
-  is left to cljs.reader, which rejects it."
+  inside a string or comment is not a tag. Reader-discard forms (`#_ ...`)
+  between the tag and its string are skipped, matching tools.reader. A tag
+  not followed by a string is left to cljs.reader, which rejects it."
   [text]
-  (let [lexemes (edn-lexemes text)]
-    (into []
-          (keep-indexed
-           (fn [index [kind value]]
-             (when (and (= :token kind) (= "#inst" value))
-               (let [[next-kind next-value] (get lexemes (inc index))]
-                 (when (= :string next-kind) next-value)))))
-          lexemes)))
+  (let [lexemes (edn-lexemes text)
+        n (count lexemes)]
+    (loop [i 0
+           out []]
+      (if (>= i n)
+        out
+        (let [[kind value] (nth lexemes i)]
+          (if (and (= :token kind) (= "#inst" value))
+            (let [after-discards
+                  (loop [k (inc i)]
+                    (let [[nk nv] (get lexemes k)]
+                      (if (and (= :token nk) (= "#_" nv))
+                        ;; Discard only the operand; further `#_` or the
+                        ;; instant string is handled by this loop / below.
+                        (recur (edn-skip-form lexemes (inc k)))
+                        k)))
+                  [nk nv] (get lexemes after-discards)]
+              (if (= :string nk)
+                (recur (inc after-discards) (conj out nv))
+                (recur (inc i) out)))
+            (recur (inc i) out)))))))
 
 (defn decimal-value
   "Exact decimal value of a plain decimal literal as [negative? digits

@@ -1512,7 +1512,10 @@
   (doseq [text ["{:ts #inst \"2026-01-01T00:00:00.0001Z\"}\n"
                 "{:ts #inst \"2026-01-01T00:00:00.12345Z\"}\n"
                 "{:ts #inst,\"2026-01-01T00:00:00.0001Z\"}\n"
-                "{:ts #inst , \"2026-01-01T00:00:00.0002Z\"}\n"]]
+                "{:ts #inst , \"2026-01-01T00:00:00.0002Z\"}\n"
+                "{:ts #inst #_ nil \"2026-01-01T00:00:00.0001Z\"}\n"
+                "{:ts #inst #_ 0 \"2026-01-01T00:00:00.0002Z\"}\n"
+                "{:ts #inst #_ {:a [1 2]} \"2026-01-01T00:00:00.0001Z\"}\n"]]
     (is (thrown-with-msg?
          js/Error #"must round-trip exactly"
          (cli/read-receipt-records! text))
@@ -1543,7 +1546,15 @@
       "a real tag after a string mentioning #inst is still checked")
   (is (= ["2026-01-01T00:00:00Z"]
          (cli/edn-inst-strings
-          "{:a \"#inst\" ; #inst \"x\"\n :b #inst,\"2026-01-01T00:00:00Z\"}"))))
+          "{:a \"#inst\" ; #inst \"x\"\n :b #inst,\"2026-01-01T00:00:00Z\"}")))
+  (is (= ["2026-01-01T00:00:00.0001Z"]
+         (cli/edn-inst-strings
+          "{:ts #inst #_ nil \"2026-01-01T00:00:00.0001Z\"}"))
+      "reader-discard forms between #inst and its string are skipped")
+  (is (= ["2026-01-01T00:00:00.0001Z"]
+         (cli/edn-inst-strings
+          "{:ts #inst #_ {:a [1]} \"2026-01-01T00:00:00.0001Z\"}"))
+      "discarded collections between #inst and its string are skipped"))
 
 (deftest encode-edn-line-counts-the-segment-newline
   ;; Immutable verification measures the complete segment blob (record +
@@ -2020,6 +2031,16 @@
     (is (not= (cli/record-id a) (cli/record-id (assoc a :a 9))))
     (is (not= (cli/record-id {:manifest ["x"]})
               (cli/record-id {:manifest '("x")})))
+    (let [q (cljs.reader/read-string "#queue [1 2]")
+          lst (cljs.reader/read-string "(1 2)")
+          vec* (cljs.reader/read-string "[1 2]")]
+      (is (= q lst vec*) "queues, lists and vectors compare equal by value")
+      (is (not= (cli/record-id {:manifest q})
+                (cli/record-id {:manifest lst}))
+          "tagged queues must not share a record ID with lists")
+      (is (not= (cli/record-id {:manifest q})
+                (cli/record-id {:manifest vec*}))
+          "tagged queues must not share a record ID with vectors"))
     (is (thrown-with-msg?
          js/Error #"repeats a record"
          (cli/merged-receipt-records!
