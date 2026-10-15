@@ -2013,6 +2013,16 @@
         :else false))
     (catch :default _error false)))
 
+(defn reserved-basename-present?
+  "True when the reservation's basename names any entry in its held segment
+  directory. After an unwritten reservation was removed, that is content this
+  writer did not write. A failed lstat counts as present (fail closed)."
+  [{:keys [parent semantic-basename]}]
+  (try
+    (boolean (lstat-if-present! (path/join (:proc-path parent) semantic-basename)
+                                "Receipt River segment"))
+    (catch :default _error true)))
+
 (defn close-append-reservation!
   [{:keys [parent ancestor lock writer-lock target target-open? write-started?
            write-verified? quarantined? parent-replaced? semantic-basename]
@@ -2171,6 +2181,9 @@
               ;; waited for the writer-lock unlink may add or rewrite a
               ;; segment. Revalidate the whole ledger and reserved bytes; on
               ;; mismatch recreate the writer-lock path as a quarantine marker.
+              ;; The comparison skips the reserved basename, so an unwritten
+              ;; (removed) reservation must also still be absent: delayed work
+              ;; can recreate it under that name after this release.
               (when (and writer-lock
                          semantic-basename
                          (or @write-verified? (not @write-started?))
@@ -2178,8 +2191,11 @@
                          (not (and quarantined? @quarantined?))
                          (not (and (working-ledger-unchanged-after-write?
                                     reservation)
-                                   (or (not @write-verified?)
-                                       (reserved-segment-intact? reservation)))))
+                                   (if @write-verified?
+                                     (reserved-segment-intact? reservation)
+                                     (not (and @unwritten-removed?
+                                               (reserved-basename-present?
+                                                reservation)))))))
                 (create-quarantine-marker! parent (:path writer-lock))
                 (when-not @late-replacement-error
                   (reset! late-replacement-error
