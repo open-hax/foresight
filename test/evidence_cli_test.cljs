@@ -415,7 +415,7 @@
                       (fn [revision]
                         (is (= reviewed-root-revision revision))
                         (empty-committed-ledger revision))
-                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -483,7 +483,7 @@
                       cli/new-receipt-segment-file (fn [] segment)
                       cli/git-capture! (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
                       cli/validate-working-receipt-ledger! (fn [_] nil)
                       cli/require-repositories! (fn [& _] {"repo" {}})
                       cli/run-gate! (fn [& _]
@@ -581,11 +581,11 @@
                                    :ledger/records
                                    (cli/read-receipt-records!
                                     (.toString legacy-committed "utf8"))))
-                          cli/read-immutable-receipt-segments!
+                          cli/read-immutable-receipt-segment-entries!
                           (fn [_]
-                            (into (sorted-map)
-                                  (map (fn [[k v]] [k (js/Buffer.from v "utf8")]))
-                                  committed-segments))
+                            (mapv (fn [[k v]]
+                                    (cli/segment-entry k (js/Buffer.from v "utf8")))
+                                  (sort committed-segments)))
                           cli/require-repositories!
                           (fn [& _]
                             {"repo" {:path "repo"
@@ -619,7 +619,7 @@
                       cli/git-capture!
                       (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -676,7 +676,7 @@
           (with-redefs [cli/receipt-file file
                         cli/git-capture! (fn [_] reviewed-root-revision)
                         cli/read-immutable-receipt-ledger! empty-committed-ledger
-                        cli/read-immutable-receipt-segments! (fn [_] {})
+                        cli/read-immutable-receipt-segment-entries! (fn [_] [])
                         cli/require-repositories! (fn [& _] {"repo" {}})
                         cli/run-gate! (fn [& _]
                                         (reset! gate-ran? true)
@@ -706,7 +706,7 @@
                       cli/git-capture!
                       (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -746,7 +746,7 @@
                       cli/new-receipt-segment-file (fn [] segment)
                       cli/git-capture! (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -781,7 +781,7 @@
     (with-redefs [cli/new-receipt-segment-file (fn [] segment)
                   cli/git-capture! (fn [_] reviewed-root-revision)
                   cli/read-immutable-receipt-ledger! empty-committed-ledger
-                  cli/read-immutable-receipt-segments! (fn [_] {})
+                  cli/read-immutable-receipt-segment-entries! (fn [_] [])
                   cli/require-repositories!
                   (fn [& _]
                     {"repo" {:path "repo"
@@ -823,7 +823,7 @@
                       cli/new-receipt-segment-file (fn [] segment)
                       cli/git-capture! (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -856,7 +856,7 @@
                 cli/new-receipt-segment-file (fn [] segment)
                 cli/git-capture! (fn [_] reviewed-root-revision)
                 cli/read-immutable-receipt-ledger! empty-committed-ledger
-                cli/read-immutable-receipt-segments! (fn [_] {})
+                cli/read-immutable-receipt-segment-entries! (fn [_] [])
                 cli/require-repositories!
                 (fn [& _]
                   {"repo" {:path "repo"
@@ -874,7 +874,7 @@
   (with-redefs [cli/receipt-file file
                 cli/git-capture! (fn [_] reviewed-root-revision)
                 cli/read-immutable-receipt-ledger! empty-committed-ledger
-                cli/read-immutable-receipt-segments! (fn [_] {})]
+                cli/read-immutable-receipt-segment-entries! (fn [_] [])]
     (try
       (cli/close-append-reservation!
        (cli/open-append-reservation!
@@ -1231,7 +1231,7 @@
                       cli/new-receipt-segment-file (fn [] segment)
                       cli/git-capture! (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
                       cli/require-repositories!
                       (fn [& _]
                         {"repo" {:path "repo"
@@ -1267,7 +1267,7 @@
       (with-redefs [cli/receipt-file file
                     cli/git-capture! (fn [_] reviewed-root-revision)
                     cli/read-immutable-receipt-ledger! empty-committed-ledger
-                    cli/read-immutable-receipt-segments! (fn [_] {})]
+                    cli/read-immutable-receipt-segment-entries! (fn [_] [])]
         (let [first-segment (path/join segments "2026-10-13T000000000Z-a.edn")
               second-segment (path/join segments "2026-10-13T000001000Z-b.edn")
               active (cli/open-append-reservation! first-segment true)]
@@ -1301,7 +1301,7 @@
         (is (not (fs/existsSync (path/join segments cli/receipt-writer-lock-name))))
         (with-redefs [cli/git-capture! (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segments! (fn [_] {})]
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])]
           (is (thrown-with-msg?
                js/Error #"retained append lock quarantines"
                (cli/open-append-reservation!
@@ -1389,6 +1389,28 @@
           "{:ts #inst \"2026-01-01T00:00:00.001Z\"}\n"))
       "millisecond precision remains accepted"))
 
+(deftest receipt-inst-text-inside-strings-is-not-a-tag
+  ;; The exactness check lexes EDN like the number check: `#inst` text that
+  ;; ends a string value is not a tag, so it must not pair the string's
+  ;; closing quote with the next quoted span. Real tags are still checked.
+  (doseq [record [{:note "round-trips as #inst" :pi "eta-mu"}
+                  {:note "a #inst\"b\" c" :pi "eta-mu"}
+                  {:note "#inst" :dod "x" :ts "2026-01-01T00:00:00Z"}]]
+    (let [text (str (pr-str record) "\n")]
+      (is (= [record] (cli/read-receipt-records! text)) (pr-str text))))
+  (is (= [{:note "#inst"
+           :ts (cli/read-single-edn! "#inst \"2026-01-01T00:00:00.001Z\"" "inst")}]
+         (cli/read-receipt-records!
+          "{:note \"#inst\" :ts #inst \"2026-01-01T00:00:00.001Z\"}\n")))
+  (is (thrown-with-msg?
+       js/Error #"must round-trip exactly"
+       (cli/read-receipt-records!
+        "{:note \"#inst\" :ts #inst \"2026-01-01T00:00:00.0001Z\"}\n"))
+      "a real tag after a string mentioning #inst is still checked")
+  (is (= ["2026-01-01T00:00:00Z"]
+         (cli/edn-inst-strings
+          "{:a \"#inst\" ; #inst \"x\"\n :b #inst,\"2026-01-01T00:00:00Z\"}"))))
+
 (deftest encode-edn-line-counts-the-segment-newline
   ;; Immutable verification measures the complete segment blob (record +
   ;; newline). The writer must use the same bound so a receipt it emits can
@@ -1418,6 +1440,45 @@
     (is (thrown-with-msg?
          js/Error (re-pattern (str "exceeds " cli/max-receipt-line-bytes))
          (cli/read-segment-records! "s.edn" (js/Buffer.from body))))))
+
+(deftest working-segment-size-is-checked-before-reading
+  ;; A huge or sparse well-named working segment must fail closed with the
+  ;; documented size error from the held descriptor's size, before the
+  ;; reader allocates the file (3 GiB is past Node's whole-file read limit).
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (fs/writeFileSync file "" "utf8")
+      (let [big (path/join segments "2026-10-14T000000000Z-sparse.edn")
+            fd (fs/openSync big "w")]
+        (try
+          (fs/ftruncateSync fd (* 3 1024 1024 1024))
+          (finally (fs/closeSync fd)))
+        (with-redefs [cli/receipt-file file]
+          (is (thrown-with-msg?
+               js/Error (re-pattern (str "exceeds " cli/max-receipt-line-bytes
+                                         " bytes"))
+               (cli/read-working-receipt-segments! nil))))))))
+
+(deftest gate-descendants-are-killed-before-the-gate-result-returns
+  ;; A gate can leave a detached child waiting for the locks to disappear.
+  ;; The gate runs as its own process group, which is killed and drained
+  ;; before the result (and so the receipt write and lock release) proceeds.
+  (let [directory (fs/mkdtempSync (path/join (os/tmpdir) "foresight-gate-"))
+        pid-file (path/join directory "child.pid")]
+    (try
+      (let [result (cli/spawn-result
+                    directory
+                    ["sh" "-c" (str "sleep 30 >/dev/null 2>&1 & echo $! > "
+                                    pid-file)])
+            child (js/parseInt (str/trim (fs/readFileSync pid-file "utf8")) 10)]
+        (is (= 0 (.-status result)))
+        (is (pos? child))
+        (is (not (try (js/process.kill child 0) true
+                      (catch :default _ false)))
+            "the backgrounded descendant no longer exists")
+        (try (js/process.kill child "SIGKILL") (catch :default _ nil)))
+      (finally
+        (fs/rmSync directory #js {:recursive true :force true})))))
 
 (deftest receipt-blob-chunks-are-linear-in-segment-count
   ;; Chunk construction must carry a running total; recomputing the sum of
@@ -1608,13 +1669,14 @@
                   :ledger/records records})]
     (with-redefs [cli/read-immutable-receipt-ledger!
                   (fn [revision] (ledger revision base-text [base-record]))
-                  cli/read-immutable-receipt-segments!
+                  cli/read-immutable-receipt-segment-entries!
                   (fn [revision]
                     (if (= revision child-revision)
-                      {}
-                      {".ημ/receipts/2026-08-29T172241Z-x.edn"
-                       (js/Buffer.from (str (pr-str invalid-record) "\n")
-                                       "utf8")}))]
+                      []
+                      [(cli/segment-entry
+                        ".ημ/receipts/2026-08-29T172241Z-x.edn"
+                        (js/Buffer.from (str (pr-str invalid-record) "\n")
+                                        "utf8"))]))]
       (is (thrown-with-msg?
            js/Error #"invalid receipt envelopes"
            (cli/verify-receipts!
@@ -1713,6 +1775,36 @@
             (is (= [] (filterv #(str/includes? % (str law/receipt-segment-directory "/"))
                                @shows))
                 "no per-segment git show")))))))
+
+(deftest immutable-ledger-parses-each-chunk-and-drops-segment-bytes
+  ;; Chunking the cat-file subprocess does not bound memory if every chunk's
+  ;; blobs are merged into one lifetime map. Each blob is parsed while its
+  ;; chunk is current, and only hashes and records are retained.
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base-text current commit!]}]
+      (let [files (into (sorted-map)
+                        (map (fn [n]
+                               [(str "2026-10-14T00000" n "000Z-c" n ".edn")
+                                (str (pr-str (assoc current :n n)) "\n")]))
+                        (range 3))
+            head (commit! base-text files)
+            chunk-sizes (atom [])
+            chunk! cli/git-blobs-batch-chunk!]
+        (with-redefs [cli/max-receipt-batch-bytes 1
+                      cli/git-blobs-batch-chunk!
+                      (fn [& args]
+                        (swap! chunk-sizes conj (count (first args)))
+                        (apply chunk! args))]
+          (let [ledger (cli/read-immutable-merged-ledger! head)
+                stored (remove :segment/legacy? (:ledger/segments ledger))]
+            (is (= [1 1 1] @chunk-sizes) "one blob per chunk")
+            (is (= 3 (count stored)))
+            (is (every? #(not (contains? % :segment/bytes)) stored)
+                "segment bytes are not retained")
+            (is (= (mapv #(cli/sha256 (js/Buffer.from % "utf8")) (vals files))
+                   (mapv :segment/sha256 stored)))
+            (is (= (mapv #(str law/receipt-segment-directory "/" %) (keys files))
+                   (mapv :segment/path stored)))))))))
 
 (deftest git-blobs-batch-rejects-oversized-segment-blobs
   ;; Writer path caps a receipt at max-receipt-line-bytes. Immutable
@@ -1828,7 +1920,7 @@
         (with-redefs [cli/receipt-file file
                       cli/git-capture! (fn [_] reviewed-root-revision)
                       cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segments! (fn [_] {})
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
                       cli/require-repositories! (fn [& _] {"repo" {}})
                       cli/run-gate! (fn [& _] (run-gate context))]
           (is (thrown-with-msg?
@@ -2137,7 +2229,7 @@
                   (fn [at]
                     (swap! reads conj [:ledger at])
                     ledger)
-                  cli/read-immutable-receipt-segments! (fn [_] {})
+                  cli/read-immutable-receipt-segment-entries! (fn [_] [])
                   cli/ledger-extension-records!
                   (fn [& _]
                     (swap! reads conj :append-history)
@@ -2207,7 +2299,7 @@
                            :catalog-identity test-catalog-identity})
                   cli/validate-catalog! identity
                   cli/read-immutable-receipt-ledger! (fn [_] ledger)
-                  cli/read-immutable-receipt-segments! (fn [_] {})
+                  cli/read-immutable-receipt-segment-entries! (fn [_] [])
                   cli/ledger-extension-records! (fn [& _] [])
                   cli/require-result-gitlinks! (fn [& _] true)]
       (is (thrown-with-msg?
