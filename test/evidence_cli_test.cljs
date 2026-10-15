@@ -1657,11 +1657,15 @@
 
 (deftest receipt-segments-hold-exactly-one-physical-line
   ;; The segment contract is one physical EDN line; blank lines before or
-  ;; after the record are not discarded silently. Bare carriage returns are
-  ;; physical breaks too (encode-edn-line! already rejects them).
+  ;; after the record are not discarded silently. Embedded carriage returns
+  ;; are physical breaks (encode-edn-line! already rejects them on writes),
+  ;; but a single trailing CR is kept so a CRLF legacy row can migrate
+  ;; byte-identical into a segment.
   (is (= [{:a 1}] (cli/read-segment-records! "s.edn" (js/Buffer.from "{:a 1}\n"))))
+  (is (= [{:a 1}] (cli/read-segment-records! "s.edn" (js/Buffer.from "{:a 1}\r\n")))
+      "CRLF-terminated legacy rows migrate intact")
   (doseq [text ["\n{:a 1}\n" "{:a 1}\n\n" "{:a 1}\n \n"
-                "{:a\r1}\n" "{:a 1}\r\n" "\r{:a 1}\n"]]
+                "{:a\r1}\n" "\r{:a 1}\n" "{:a 1}\r\r\n"]]
     (is (thrown-with-msg?
          js/Error #"exactly one physical line"
          (cli/read-segment-records! "s.edn" (js/Buffer.from text)))

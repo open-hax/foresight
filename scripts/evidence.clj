@@ -591,10 +591,14 @@
                 (str "Receipt River segment must contain exactly one record: "
                      segment-path))))
       ;; The segment contract is one physical line: the record, then its
-      ;; only newline. Blank lines and embedded carriage returns are not
-      ;; dropped silently (encode-edn-line! already rejects both).
-      (let [body (subs contents 0 (dec (count contents)))]
-        (when (or (str/includes? body "\n") (str/includes? body "\r"))
+      ;; only newline. A single trailing CR is allowed so a CRLF legacy row
+      ;; can migrate byte-identical; embedded CRs and blank lines are not
+      ;; dropped silently (encode-edn-line! still rejects CR on new writes).
+      (let [body (subs contents 0 (dec (count contents)))
+            body* (if (str/ends-with? body "\r")
+                    (subs body 0 (dec (count body)))
+                    body)]
+        (when (or (str/includes? body* "\n") (str/includes? body* "\r"))
           (throw (js/Error.
                   (str "Receipt River segment must hold exactly one physical line: "
                        segment-path)))))
