@@ -119,10 +119,11 @@
 (defn edn-token-delimiter? [ch]
   (boolean (re-matches #"[\s,()\[\]{}\";]" ch)))
 
-(defn edn-number-lexemes
-  "Numeric literal tokens of one EDN text. Strings, character literals and
-  comments are skipped, and digits inside symbols or keywords are not
-  numbers."
+(defn edn-lexemes
+  "Lexemes of one EDN text as [kind text] pairs, kind :string (raw contents
+  between the quotes, escapes kept) or :token. Comments and delimiters are
+  skipped, so text inside strings, character literals and comments never
+  becomes a token."
   [text]
   (let [n (count text)]
     (loop [i 0
@@ -132,13 +133,14 @@
         (let [ch (.charAt text i)]
           (cond
             (= "\"" ch)
-            (recur (loop [j (inc i)]
-                     (cond
-                       (>= j n) n
-                       (= "\\" (.charAt text j)) (recur (+ j 2))
-                       (= "\"" (.charAt text j)) (inc j)
-                       :else (recur (inc j))))
-                   out)
+            (let [end (loop [j (inc i)]
+                        (cond
+                          (>= j n) n
+                          (= "\\" (.charAt text j)) (recur (+ j 2))
+                          (= "\"" (.charAt text j)) (inc j)
+                          :else (recur (inc j))))]
+              (recur end (conj out [:string (subs text (inc i)
+                                                  (max (inc i) (dec end)))])))
 
             (= ";" ch)
             (recur (let [j (.indexOf text "\n" i)] (if (neg? j) n j)) out)
@@ -149,12 +151,34 @@
             (let [end (loop [j (if (= "\\" ch) (+ i 2) (inc i))]
                         (if (and (< j n) (not (edn-token-delimiter? (.charAt text j))))
                           (recur (inc j))
-                          (min j n)))
-                  token (subs text i end)]
+                          (min j n)))]
+              (recur end (conj out [:token (subs text i end)])))))))))
+
+(defn edn-number-lexemes
+  "Numeric literal tokens of one EDN text. Strings, character literals and
+  comments are skipped, and digits inside symbols or keywords are not
+  numbers."
+  [text]
+  (into []
+        (comp (filter #(= :token (first %)))
+              (map second)
               ;; `##Inf`, `##-Inf` and `##NaN` are symbolic numbers.
-              (recur end (if (re-find #"^(?:[+-]?[0-9]|##)" token)
-                           (conj out token)
-                           out)))))))))
+              (filter #(re-find #"^(?:[+-]?[0-9]|##)" %)))
+        (edn-lexemes text)))
+
+(defn edn-inst-strings
+  "Raw string contents of every real `#inst` tag in one EDN text. A `#inst`
+  inside a string or comment is not a tag. A tag not followed by a string
+  is left to cljs.reader, which rejects it."
+  [text]
+  (let [lexemes (edn-lexemes text)]
+    (into []
+          (keep-indexed
+           (fn [index [kind value]]
+             (when (and (= :token kind) (= "#inst" value))
+               (let [[next-kind next-value] (get lexemes (inc index))]
+                 (when (= :string next-kind) next-value)))))
+          lexemes)))
 
 (defn decimal-value
   "Exact decimal value of a plain decimal literal as [negative? digits
@@ -219,8 +243,10 @@
   sub-millisecond fraction would collide with another truncated to the same
   millisecond."
   [text]
-  ;; EDN treats commas as whitespace, so `#inst,"..."` is a valid spelling.
-  (doseq [[_ instant] (re-seq #"#inst[\s,]*\"([^\"]*)\"" text)]
+  ;; Lexed, not matched as raw text: EDN treats commas as whitespace, so
+  ;; `#inst,"..."` is a valid spelling, while `#inst` text inside a string
+  ;; value is not a tag at all.
+  (doseq [instant (edn-inst-strings text)]
     (when-not (exact-inst-string? instant)
       (throw (js/Error.
               (str "Receipt River tagged instants must round-trip exactly; "
@@ -305,70 +331,81 @@
                 object-ids)]
     (vec (remove empty? chunks))))
 
+(defn copy-blob [_oid bytes]
+  (js/Buffer.from bytes))
+
 (defn git-blobs-batch-chunk!
   "Reads one chunk of object IDs through `git cat-file --batch`. `sizes` must
-  already have passed `assert-receipt-batch-sizes!`."
-  [object-ids sizes]
-  (let [total (reduce + 0 (map #(get sizes %) object-ids))
-        max-buffer (+ total (* 256 (inc (count object-ids))) 4096)
-        result (child-process/spawnSync
-                "git"
-                #js ["--no-replace-objects" "cat-file" "--batch"]
-                #js {:cwd root
-                     :shell false
-                     :input (str (str/join "\n" object-ids) "\n")
-                     :maxBuffer max-buffer})
-        error (.-error result)
-        status (.-status result)]
-    (when error
-      (throw (js/Error. (str "Git invocation failed: " (.-message error)))))
-    (when-not (= 0 status)
-      (throw (js/Error.
-              (str "Git invocation failed with exit " status ": "
-                   (str/trim (if-let [stderr (.-stderr result)]
-                               (.toString stderr "utf8")
-                               ""))))))
-    (loop [out (.-stdout result)
-           acc {}
-           ids (seq object-ids)]
-      (if-not ids
-        (do (when (pos? (.-length out))
-              (throw (js/Error. "git cat-file --batch returned extra output")))
-            acc)
-        (let [newline-at (.indexOf out 10)
-              _ (when (neg? newline-at)
-                  (throw (js/Error. "git cat-file --batch output is truncated")))
-              header (.toString (.subarray out 0 newline-at) "utf8")
-              [_ oid kind size] (re-matches #"([0-9a-f]+) ([a-z]+) ([0-9]+)" header)
-              size (when size (js/parseInt size 10))
-              expected (get sizes (first ids))
-              start (inc newline-at)
-              end (when size (+ start size))]
-          (when-not (and (= oid (first ids)) (= "blob" kind)
-                         (js/Number.isSafeInteger size)
-                         (= size expected)
-                         (< end (.-length out))
-                         (= 10 (aget out end)))
-            (throw (js/Error.
-                    (str "Unexpected git cat-file --batch entry for "
-                         (first ids) ": " header))))
-          (recur (.subarray out (inc end))
-                 (assoc acc oid (js/Buffer.from (.subarray out start end)))
-                 (next ids)))))))
+  already have passed `assert-receipt-batch-sizes!`. Each blob's bytes (a view
+  into this chunk's output) are passed to `transform` with its object ID; the
+  default copies them."
+  ([object-ids sizes]
+   (git-blobs-batch-chunk! object-ids sizes copy-blob))
+  ([object-ids sizes transform]
+   (let [total (reduce + 0 (map #(get sizes %) object-ids))
+         max-buffer (+ total (* 256 (inc (count object-ids))) 4096)
+         result (child-process/spawnSync
+                 "git"
+                 #js ["--no-replace-objects" "cat-file" "--batch"]
+                 #js {:cwd root
+                      :shell false
+                      :input (str (str/join "\n" object-ids) "\n")
+                      :maxBuffer max-buffer})
+         error (.-error result)
+         status (.-status result)]
+     (when error
+       (throw (js/Error. (str "Git invocation failed: " (.-message error)))))
+     (when-not (= 0 status)
+       (throw (js/Error.
+               (str "Git invocation failed with exit " status ": "
+                    (str/trim (if-let [stderr (.-stderr result)]
+                                (.toString stderr "utf8")
+                                ""))))))
+     (loop [out (.-stdout result)
+            acc {}
+            ids (seq object-ids)]
+       (if-not ids
+         (do (when (pos? (.-length out))
+               (throw (js/Error. "git cat-file --batch returned extra output")))
+             acc)
+         (let [newline-at (.indexOf out 10)
+               _ (when (neg? newline-at)
+                   (throw (js/Error. "git cat-file --batch output is truncated")))
+               header (.toString (.subarray out 0 newline-at) "utf8")
+               [_ oid kind size] (re-matches #"([0-9a-f]+) ([a-z]+) ([0-9]+)" header)
+               size (when size (js/parseInt size 10))
+               expected (get sizes (first ids))
+               start (inc newline-at)
+               end (when size (+ start size))]
+           (when-not (and (= oid (first ids)) (= "blob" kind)
+                          (js/Number.isSafeInteger size)
+                          (= size expected)
+                          (< end (.-length out))
+                          (= 10 (aget out end)))
+             (throw (js/Error.
+                     (str "Unexpected git cat-file --batch entry for "
+                          (first ids) ": " header))))
+           (recur (.subarray out (inc end))
+                  (assoc acc oid (transform oid (.subarray out start end)))
+                  (next ids))))))))
 
 (defn git-blobs-batch!
   "Returns object-id -> Buffer for `object-ids`. Sizes are checked with
   `--batch-check` first against the writer's per-segment bound; blobs are
   then read in chunks whose aggregate stays within `max-receipt-batch-bytes`,
-  so the lifetime ledger is not capped by one spawnSync buffer."
-  [object-ids]
-  (if (empty? object-ids)
-    {}
-    (let [sizes (git-blob-batch-sizes! object-ids)]
-      (reduce (fn [acc chunk]
-                (merge acc (git-blobs-batch-chunk! chunk sizes)))
-              {}
-              (receipt-blob-chunks object-ids sizes)))))
+  so the lifetime ledger is not capped by one spawnSync buffer. With
+  `transform`, each blob is reduced (for example parsed) while its chunk is
+  current, so only the transformed values outlive the chunk's buffer."
+  ([object-ids]
+   (git-blobs-batch! object-ids copy-blob))
+  ([object-ids transform]
+   (if (empty? object-ids)
+     {}
+     (let [sizes (git-blob-batch-sizes! object-ids)]
+       (reduce (fn [acc chunk]
+                 (merge acc (git-blobs-batch-chunk! chunk sizes transform)))
+               {}
+               (receipt-blob-chunks object-ids sizes))))))
 
 
 (defn read-receipt-records! [contents]
@@ -503,10 +540,19 @@
                        segment-path)))))
       records)))
 
-(defn segment-entry [segment-path bytes]
+(defn segment-entry
+  "A parsed segment. Only its content hash is kept, not its bytes, so a large
+  ledger is held as records plus hashes; equality of segment files is
+  equality of their SHA-256."
+  [segment-path bytes]
   {:segment/path segment-path
-   :segment/bytes bytes
+   :segment/sha256 (sha256 bytes)
    :segment/records (read-segment-records! segment-path bytes)})
+
+(defn segment-sha256
+  "Content hash of a segment entry; the legacy entry keeps its bytes."
+  [segment]
+  (or (:segment/sha256 segment) (sha256 (:segment/bytes segment))))
 
 (defn legacy-segment-entry [bytes records]
   {:segment/path law/receipt-ledger-path
@@ -532,10 +578,10 @@
                   (str "Receipt River operational file must not be committed: "
                        repository-path " at " revision))))))))
 
-(defn read-immutable-receipt-segments!
-  "Returns repository-path -> bytes for every segment blob at `revision`.
-  The reviewed tree must not carry working-tree operational files. Blob IDs
-  come from ls-tree and all segment bytes are read in one git process."
+(defn immutable-receipt-segment-object-ids!
+  "Returns repository-path -> blob ID for every segment at `revision`, with
+  `:segment/directory?` metadata. The reviewed tree must not carry
+  working-tree operational files."
   [revision]
   (require-no-committed-operational-files! revision)
   (let [directory (str law/receipt-segment-directory "/")
@@ -577,14 +623,46 @@
                        (str "Receipt River segment name must match "
                             "<UTC timestamp>-<id>.edn: " repository-path))))))
          (sorted-map)
-         entries)
+         entries)]
+    (with-meta object-ids {:segment/directory? (boolean (seq own))})))
+
+(defn read-immutable-receipt-segments!
+  "Returns repository-path -> bytes for every segment blob at `revision`.
+  Blob IDs come from ls-tree and segment bytes are read by `git cat-file
+  --batch` in bounded chunks."
+  [revision]
+  (let [object-ids (immutable-receipt-segment-object-ids! revision)
         blobs (git-blobs-batch! (vec (distinct (vals object-ids))))]
     (with-meta
       (into (sorted-map)
             (map (fn [[repository-path object-id]]
                    [repository-path (get blobs object-id)]))
             object-ids)
-      {:segment/directory? (boolean (seq own))})))
+      (meta object-ids))))
+
+(defn read-immutable-receipt-segment-entries!
+  "Parsed segment entries (path, hash, records) at `revision`. Each blob is
+  parsed while its batch chunk is current and its bytes are then dropped, so
+  verifier memory holds records and hashes rather than every segment's
+  bytes."
+  [revision]
+  (let [object-ids (immutable-receipt-segment-object-ids! revision)
+        path-of (reduce (fn [acc [repository-path object-id]]
+                          (if (contains? acc object-id)
+                            acc
+                            (assoc acc object-id repository-path)))
+                        {}
+                        object-ids)
+        parsed (git-blobs-batch!
+                (vec (distinct (vals object-ids)))
+                (fn [object-id bytes]
+                  (dissoc (segment-entry (get path-of object-id) bytes)
+                          :segment/path)))]
+    (with-meta
+      (mapv (fn [[repository-path object-id]]
+              (assoc (get parsed object-id) :segment/path repository-path))
+            object-ids)
+      (meta object-ids))))
 
 (defn merged-receipt-records!
   "Merges every segment into one ledger ordered by timestamp, then record ID.
@@ -599,8 +677,9 @@
 (defn merged-ledger-sha256
   "Identity of the whole segmented ledger: every segment path and content hash."
   [segments]
-  (sha256 (apply str (map (fn [{:segment/keys [path bytes]}]
-                            (str path "\t" (sha256 bytes) "\n"))
+  (sha256 (apply str (map (fn [segment]
+                            (str (:segment/path segment) "\t"
+                                 (segment-sha256 segment) "\n"))
                           segments))))
 
 (defn segmented-ledger [legacy-ledger segments]
@@ -614,11 +693,9 @@
 
 (defn read-immutable-merged-ledger! [revision]
   (let [legacy (read-immutable-receipt-ledger! revision)
-        stored (read-immutable-receipt-segments! revision)
+        stored (read-immutable-receipt-segment-entries! revision)
         segments (into [(legacy-segment-entry (:ledger/bytes legacy)
                                               (:ledger/records legacy))]
-                       (map (fn [[segment-path bytes]]
-                              (segment-entry segment-path bytes)))
                        stored)]
     (assoc (segmented-ledger legacy segments)
            :ledger/segment-directory?
@@ -697,13 +774,13 @@
   (let [head-by-path (into {} (map (juxt :segment/path identity)) head-segments)
         merged-head (merged-receipt-records! head-segments)]
     (merged-receipt-records! base-segments)
-    (doseq [{:segment/keys [path bytes legacy?]} base-segments
+    (doseq [{:segment/keys [path legacy?] :as base} base-segments
             :when (not legacy?)]
       (let [head (get head-by-path path)]
         (when-not head
           (throw (js/Error.
                   (str "Receipt River segment was removed: " path))))
-        (when-not (.equals bytes (:segment/bytes head))
+        (when-not (= (segment-sha256 base) (segment-sha256 head))
           (throw (js/Error.
                   (str "Receipt River segment was edited: " path))))))
     (let [base-ids (into #{} (comp (mapcat :segment/records) (map record-id))
@@ -733,10 +810,11 @@
                   (str "The legacy Receipt River ledger " law/receipt-ledger-path
                        " may only lose whole lines; it was rewritten or reordered"))))
         (let [removed (removed-line-slices head-bytes bytes)
-              segment-bodies (->> head-segments
-                                  (remove :segment/legacy?)
-                                  (map :segment/bytes)
-                                  vec)]
+              ;; Segments keep their content hash, not their bytes.
+              segment-hashes (into #{}
+                                   (comp (remove :segment/legacy?)
+                                         (map segment-sha256))
+                                   head-segments)]
           (doseq [line removed]
             ;; Only the final row of an unterminated legacy file lacks a
             ;; newline. Its sole preservation form is that row plus the one
@@ -745,7 +823,7 @@
                                                line
                                                (str line "\n"))
                                              "utf8")]
-              (when-not (some #(.equals % line-bytes) segment-bodies)
+              (when-not (contains? segment-hashes (sha256 line-bytes))
                 (throw (js/Error.
                         (str "The legacy Receipt River ledger "
                              law/receipt-ledger-path
@@ -967,11 +1045,50 @@
                           :revision head})]))
           selected)))
 
+(defn process-group-alive? [pid]
+  (try
+    (js/process.kill (- pid) 0)
+    true
+    (catch :default error
+      (not= "ESRCH" (.-code error)))))
+
+(defn contain-gate-descendants!
+  "Kills the gate's whole process group and waits until it is empty. A gate
+  may leave detached descendants behind; killing them before the receipt is
+  written and the locks are released keeps them from mutating the working
+  ledger after the final revalidation. Returns true once the group is gone."
+  [pid]
+  ;; Only a real child PID: signalling group 0 would hit this process's own.
+  (or (not (and (number? pid) (pos? pid)))
+      (do (try
+            (js/process.kill (- pid) "SIGKILL")
+            (catch :default _error nil))
+          (let [deadline (+ (js/Date.now) 5000)]
+            (loop []
+              (cond
+                (not (process-group-alive? pid)) true
+                (> (js/Date.now) deadline) false
+                :else (do (js/Atomics.wait
+                           (js/Int32Array. (js/SharedArrayBuffer. 4)) 0 0 50)
+                          (recur))))))))
+
 (defn spawn-result [cwd command]
-  (child-process/spawnSync
-   (first command)
-   (clj->js (rest command))
-   #js {:cwd cwd :encoding "utf8" :stdio "inherit" :shell false}))
+  ;; `detached` makes the gate the leader of its own process group (and
+  ;; session), so every descendant that stays in it can be killed once the
+  ;; gate exits.
+  (let [result (child-process/spawnSync
+                (first command)
+                (clj->js (rest command))
+                #js {:cwd cwd :encoding "utf8" :stdio "inherit" :shell false
+                     :detached true})]
+    (if (contain-gate-descendants! (.-pid result))
+      result
+      ;; Still-running descendants could mutate the ledger after release, so
+      ;; the reservation keeps its lock as a quarantine marker.
+      (throw (ex-info
+              (str "Gate descendants of " (first command)
+                   " survived SIGKILL; the gate result cannot be retained")
+              {:receipt-river/quarantine true})))))
 
 (defn local-result [cwd gate]
   (let [result (spawn-result cwd (:gate/command gate))
@@ -1554,41 +1671,67 @@
               (.toISOString (js/Date.))
               (.toString (crypto/randomBytes 6) "hex"))))
 
-(defn read-working-regular-file! [file description]
-  (let [stats (lstat-if-present! file description)]
-    (when-not stats
-      (append-error! (str description " could not be securely opened: "
-                          "it does not exist")))
-    (require-regular-stats! stats description)
-    (require-non-executable-stats! stats description)
-    ;; Validate and read the same inode: a pathname swapped after the lstat
-    ;; (for a symlink or another file) must not be followed.
-    (let [fd (try
-               (fs/openSync file (bit-or (fs-constant! "O_RDONLY")
-                                         (fs-constant! "O_NOFOLLOW")
-                                         (fs-constant! "O_NONBLOCK")))
-               (catch :default error
-                 (append-error! (str description " could not be securely opened: "
-                                     (.-message error)))))]
-      (try
-        (let [fd-stats (fs/fstatSync fd bigint-stat-options)]
-          (require-regular-stats! fd-stats (str description " descriptor"))
-          (require-non-executable-stats! fd-stats description)
-          (when-not (same-file? fd-stats stats)
-            (append-error! (str description " identity changed")))
-          (let [bytes (fs/readFileSync fd)]
-            (when-not (= (.-length bytes)
-                         (safe-file-size! (fs/fstatSync fd bigint-stat-options)))
-              (append-error! (str description " changed during read")))
-            (require-path-identity! file fd-stats description
-                                    (fn [path-stats path-description]
-                                      (require-regular-stats!
-                                       path-stats path-description)
-                                      (require-non-executable-stats!
-                                       path-stats path-description)))
-            bytes))
-        (finally
-          (fs/closeSync fd))))))
+(defn read-held-bytes!
+  "Reads exactly `size` bytes from `fd`, allocating `size` plus one byte so
+  growth after the fstat is seen without reading the rest of the file."
+  [fd size description]
+  (let [buffer (js/Buffer.alloc (inc size))
+        total (loop [offset 0]
+                (if (>= offset (.-length buffer))
+                  offset
+                  (let [n (fs/readSync fd buffer offset
+                                       (- (.-length buffer) offset) offset)]
+                    (if (zero? n) offset (recur (+ offset n))))))]
+    (when-not (= total size)
+      (append-error! (str description " changed during read")))
+    (.subarray buffer 0 size)))
+
+(defn read-working-regular-file!
+  "Reads a working ledger file through a validated no-follow descriptor.
+  With `max-bytes`, the held descriptor's size is checked before any
+  allocation, so an oversized or sparse file fails closed with the size
+  error instead of being buffered whole."
+  ([file description]
+   (read-working-regular-file! file description nil))
+  ([file description max-bytes]
+   (let [stats (lstat-if-present! file description)]
+     (when-not stats
+       (append-error! (str description " could not be securely opened: "
+                           "it does not exist")))
+     (require-regular-stats! stats description)
+     (require-non-executable-stats! stats description)
+     ;; Validate and read the same inode: a pathname swapped after the lstat
+     ;; (for a symlink or another file) must not be followed.
+     (let [fd (try
+                (fs/openSync file (bit-or (fs-constant! "O_RDONLY")
+                                          (fs-constant! "O_NOFOLLOW")
+                                          (fs-constant! "O_NONBLOCK")))
+                (catch :default error
+                  (append-error! (str description " could not be securely opened: "
+                                      (.-message error)))))]
+       (try
+         (let [fd-stats (fs/fstatSync fd bigint-stat-options)]
+           (require-regular-stats! fd-stats (str description " descriptor"))
+           (require-non-executable-stats! fd-stats description)
+           (when-not (same-file? fd-stats stats)
+             (append-error! (str description " identity changed")))
+           (let [size (safe-file-size! fd-stats)
+                 _ (when (and max-bytes (> size max-bytes))
+                     (append-error!
+                      (str description " exceeds " max-bytes " bytes: " file)))
+                 bytes (read-held-bytes! fd size description)]
+             (when-not (= (.-length bytes)
+                          (safe-file-size! (fs/fstatSync fd bigint-stat-options)))
+               (append-error! (str description " changed during read")))
+             (require-path-identity! file fd-stats description
+                                     (fn [path-stats path-description]
+                                       (require-regular-stats!
+                                        path-stats path-description)
+                                       (require-non-executable-stats!
+                                        path-stats path-description)))
+             bytes))
+         (finally
+           (fs/closeSync fd)))))))
 
 (defn read-working-receipt-segments!
   "Reads the working ledger. `own-basename` names the caller's reserved (still
@@ -1641,7 +1784,8 @@
                      (str law/receipt-segment-directory "/" basename)
                      (read-working-regular-file!
                       (path/join directory basename)
-                      "Receipt River segment"))
+                      "Receipt River segment"
+                      max-receipt-line-bytes))
                     :else
                     (append-error!
                      (str "unexpected file in the Receipt River segment directory: "
@@ -1671,7 +1815,7 @@
   "True when two working-ledger reads name the same files with the same bytes."
   [before after]
   (and (= (mapv :segment/path before) (mapv :segment/path after))
-       (every? true? (map #(.equals (:segment/bytes %1) (:segment/bytes %2))
+       (every? true? (map #(= (segment-sha256 %1) (segment-sha256 %2))
                           before after))))
 
 (defn working-ledger-unchanged-after-write?
@@ -2061,7 +2205,13 @@
   ([file validate-ledger? run!]
    (let [reservation (open-append-reservation! file validate-ledger?)]
      (try
-       (run! reservation)
+       (try
+         (run! reservation)
+         (catch :default error
+           (when (and (:receipt-river/quarantine (ex-data error))
+                      (:quarantined? reservation))
+             (reset! (:quarantined? reservation) true))
+           (throw error)))
        (finally
          (close-append-reservation! reservation))))))
 
