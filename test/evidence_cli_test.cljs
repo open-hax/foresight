@@ -1480,6 +1480,25 @@
       (finally
         (fs/rmSync directory #js {:recursive true :force true})))))
 
+(deftest working-legacy-ledger-is-bounded-by-its-committed-size
+  ;; The frozen legacy file can only lose lines, so the working copy is
+  ;; bounded by its committed size plus one segment of slack; a huge or
+  ;; sparse replacement fails closed with the size error before allocation.
+  (with-receipt-fixture
+    (fn [{:keys [file]}]
+      (let [fd (fs/openSync file "w")]
+        (try
+          (fs/ftruncateSync fd (* 3 1024 1024 1024))
+          (finally (fs/closeSync fd))))
+      (with-redefs [cli/receipt-file file
+                    cli/current-committed-receipt-segments!
+                    (fn [] [(cli/legacy-segment-entry (js/Buffer.alloc 0) [])])]
+        (is (thrown-with-msg?
+             js/Error
+             (re-pattern (str "Receipt River file exceeds "
+                              cli/max-receipt-line-bytes " bytes"))
+             (cli/validate-working-receipt-ledger! nil)))))))
+
 (deftest receipt-blob-chunks-are-linear-in-segment-count
   ;; Chunk construction must carry a running total; recomputing the sum of
   ;; the current chunk for every ID is quadratic and hangs large ledgers.
