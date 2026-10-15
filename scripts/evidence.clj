@@ -1960,6 +1960,27 @@
                        (str "the Receipt River segment directory was replaced "
                             "during lock cleanup; the ledger must be "
                             "adjudicated by hand"))))
+            ;; An unwritten reservation was removed before unlock. Gate-spawned
+            ;; work that watches the unlock can recreate that basename; the
+            ;; whole-ledger comparison below still skips it, so check here.
+            (when (and writer-lock
+                       semantic-basename
+                       @unwritten-removed?
+                       (not @write-started?)
+                       (not @retain-writer-lock?)
+                       (not @directory-replaced?)
+                       (not (and quarantined? @quarantined?))
+                       (lstat-if-present!
+                        (path/join (:proc-path parent) semantic-basename)
+                        "Receipt River segment"))
+              (reset! retain-writer-lock? true)
+              (when-not @late-replacement-error
+                (reset! late-replacement-error
+                        (js/Error.
+                         (str "the Receipt River ledger changed during lock "
+                              "cleanup: the reserved basename reappeared "
+                              "after the unwritten reservation was removed; "
+                              "the ledger must be adjudicated by hand")))))
             ;; A verified write, or an unwritten (failed) reservation, released
             ;; its segment lock above; the writer lock still serializes this
             ;; checkout. Compare the whole ledger once more so a segment added
