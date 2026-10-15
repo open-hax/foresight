@@ -619,3 +619,12 @@
   spore: none
   receipt-refs: f2f3a7b04ffc14e97014b758abe13504fcfe32bd736ecbabefd0536fe0e4f872
   note: Post-append lost acknowledgment and process restart do not cover interruption inside actual persistence. Keep exact partial bytes and unknown outcomes, require named owning recovery primitives where necessary, and retain healthy legitimate recovery. No spore.
+- ts: 2026-10-15T00:42:37.427727306Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Preserve causal missing producer custody receipt regression
+  p-efficiency: 0.9
+  p-friction: 0.37
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: 86ea9e19687cbfab77df0fab1f9897a5e7a4995bd3720086b6d89ccb4270000f
+  note: A supported package identity and version do not establish actor, command, component version or source provenance. Test new suffix admission and real append byte preservation while grandfathering exact trusted history. Do not misattribute scoped consumer policy to upstream producer law; no transient lock absence claim. No spore.
