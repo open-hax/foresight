@@ -1452,7 +1452,9 @@
   ;; .0002Z would share one record ID. Reject tagged instants that cannot
   ;; round-trip before deriving IDs.
   (doseq [text ["{:ts #inst \"2026-01-01T00:00:00.0001Z\"}\n"
-                "{:ts #inst \"2026-01-01T00:00:00.12345Z\"}\n"]]
+                "{:ts #inst \"2026-01-01T00:00:00.12345Z\"}\n"
+                "{:ts #inst,\"2026-01-01T00:00:00.0001Z\"}\n"
+                "{:ts #inst , \"2026-01-01T00:00:00.0002Z\"}\n"]]
     (is (thrown-with-msg?
          js/Error #"must round-trip exactly"
          (cli/read-receipt-records! text))
@@ -1481,6 +1483,28 @@
     (let [ok {:pad (apply str (repeat (dec pad) "x"))}]
       (is (string? (cli/encode-edn-line! ok))
           "one byte under the bound still encodes"))))
+
+(deftest working-segment-reader-enforces-the-complete-segment-size-bound
+  ;; Immutable batch reads reject blobs over max-receipt-line-bytes. The
+  ;; working reader must apply the same complete-segment bound so an
+  ;; externally added oversized segment cannot be approved then fail after
+  ;; commit.
+  (let [n (inc cli/max-receipt-line-bytes)
+        body (str (apply str (repeat (dec n) "x")) "\n")]
+    (is (thrown-with-msg?
+         js/Error (re-pattern (str "exceeds " cli/max-receipt-line-bytes))
+         (cli/read-segment-records! "s.edn" (js/Buffer.from body))))))
+
+(deftest receipt-blob-chunks-are-linear-in-segment-count
+  ;; Chunk construction must carry a running total; recomputing the sum of
+  ;; the current chunk for every ID is quadratic and hangs large ledgers.
+  (let [size (quot cli/max-receipt-batch-bytes 50)
+        n 200
+        ids (mapv #(str "oid-" %) (range n))
+        sizes (into {} (map (fn [id] [id size]) ids))
+        chunks (cli/receipt-blob-chunks ids sizes)]
+    (is (= 4 (count chunks)) "four equal chunks fill the batch bound")
+    (is (every? #(= 50 (count %)) chunks))))
 
 (deftest receipt-segments-hold-exactly-one-physical-line
   ;; The segment contract is one physical EDN line; blank lines before or

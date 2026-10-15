@@ -219,7 +219,8 @@
   sub-millisecond fraction would collide with another truncated to the same
   millisecond."
   [text]
-  (doseq [[_ instant] (re-seq #"#inst\s*\"([^\"]*)\"" text)]
+  ;; EDN treats commas as whitespace, so `#inst,"..."` is a valid spelling.
+  (doseq [[_ instant] (re-seq #"#inst[\s,]*\"([^\"]*)\"" text)]
     (when-not (exact-inst-string? instant)
       (throw (js/Error.
               (str "Receipt River tagged instants must round-trip exactly; "
@@ -288,20 +289,21 @@
                     lines)))))))
 
 (defn receipt-blob-chunks
-  "Splits object IDs into runs whose total size stays within the batch cap."
+  "Splits object IDs into runs whose total size stays within the batch cap.
+  The reduction carries the current chunk's byte total so construction stays
+  linear in the number of segments."
   [object-ids sizes]
-  (vec
-   (remove empty?
-           (reduce (fn [chunks oid]
-                     (let [current (peek chunks)
-                           total (reduce + 0 (map #(get sizes %) current))
-                           size (get sizes oid 0)]
-                       (if (and (seq current)
-                                (> (+ total size) max-receipt-batch-bytes))
-                         (conj chunks [oid])
-                         (conj (pop chunks) (conj (vec current) oid)))))
-                   [[]]
-                   object-ids))))
+  (let [[chunks _total]
+        (reduce (fn [[chunks total] oid]
+                  (let [size (get sizes oid 0)]
+                    (if (and (seq (peek chunks))
+                             (> (+ total size) max-receipt-batch-bytes))
+                      [(conj chunks [oid]) size]
+                      [(conj (pop chunks) (conj (peek chunks) oid))
+                       (+ total size)])))
+                [[[]] 0]
+                object-ids)]
+    (vec (remove empty? chunks))))
 
 (defn git-blobs-batch-chunk!
   "Reads one chunk of object IDs through `git cat-file --batch`. `sizes` must
@@ -472,6 +474,10 @@
   (when (zero? (.-length bytes))
     (throw (js/Error.
             (str "Receipt River segment must not be empty: " segment-path))))
+  (when (> (.-length bytes) max-receipt-line-bytes)
+    (throw (js/Error.
+            (str "Receipt River segment blob exceeds "
+                 max-receipt-line-bytes " bytes: " segment-path))))
   (when-not (= 10 (.at bytes -1))
     (throw (js/Error.
             (str "Receipt River segment must end with a newline: "
