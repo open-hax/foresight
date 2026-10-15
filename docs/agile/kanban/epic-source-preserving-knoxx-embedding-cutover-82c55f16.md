@@ -76,7 +76,9 @@ repository change or copied chunking/graph algorithm is included.
 | [Validate the shared embedding runtime](knoxx-validated-shared-embedding-runtime-d3277a3c.md) | `d3277a3c-6e30-42b1-8151-16c041612a6a` | 5 | None |
 | [Qualify the SDK staging/adoption boundary](select-and-qualify-the-genuine-sdk-staging-and-source-adoption-boundary-5a7ee0c0.md) | `6cc1e1ca-c8dd-4cf9-9cd1-24675a7ee0c0` | 5 | None; parallel to runtime |
 | [Materialize and verify retained sources](knoxx-retained-source-embedding-migration-11bc1411.md) | `11bc1411-154d-4db7-8c27-51506ab30508` | 8 | Runtime and SDK prerequisite |
-| [Qualify durable scoped publication receipts](knoxx-durable-scoped-publication-receipts-b450407b.md) | `afacb7b7-263a-48e6-a744-a9f4b450407b` | 5 | None; parallel to runtime and SDK |
+| [Qualify durable scoped publication receipts](knoxx-durable-scoped-publication-receipts-b450407b.md) | `afacb7b7-263a-48e6-a744-a9f4b450407b` | 5 | Attempt recovery and persistent storage qualification; adapter source can qualify in parallel |
+| [Qualify publication attempt custody/recovery](qualify-crash-surviving-publication-attempt-custody-and-receipt-recovery-4a1450f4.md) | `e945de08-58ec-4028-b8cb-5dbd4a1450f4` | 8 proposed | Qualified existing receipt/Clio source interface; no AFAC completion edge |
+| [Qualify persistent receipt storage/replacement](qualify-persistent-publication-receipt-storage-through-publisher-replacement-4996f2bc.md) | `a3ca141e-865e-4c35-8053-53084996f2bc` | 3 proposed | Accepted attempt recovery and existing scoped readback interface |
 | [Qualify native translation before deployment](qualify-selected-native-knoxx-translation-and-sme-decisions-before-deployment-5eae82d9.md) | `60e85d88-3960-449f-8376-10e75eae82d9` | 5 | Runtime; owning translation stores |
 | [Qualify native content/publication before deployment](qualify-selected-native-knoxx-content-and-publication-decisions-before-deployment-88af373d.md) | `a7402e9d-6538-4e38-9919-93fe88af373d` | 5 | Runtime, durable receipts and translation qualification |
 | [Qualify the database-enforced writer fence](qualify-a-database-enforced-cutover-writer-fence-before-deployment-2129f2bf.md) | `c002072c-2415-46a8-b533-6b502129f2bf` | 5 | None; fixture mechanism qualification |
@@ -85,8 +87,13 @@ repository change or copied chunking/graph algorithm is included.
 | [Prove live translation and its judgments](prove-native-cms-translation-and-persisted-independent-judgments-after-rollout-3938fca6.md) | `6890a3d4-f3d7-48f1-bd92-f6223938fca6` | 3 | Completed Services deployment |
 | [Prove content and public Spanish publication](prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md) | `4a9f303e-63d1-48d7-a396-b93c986502d1` | 5 | Deployment, translation proof and qualified durable receipts |
 
-The 59 points are the sum of the eleven authored children, not an additional
-implementation estimate. Four additional five-point prerequisites were created
+The existing eleven children total 59 points. Two newly authored proposed
+first-class source cards add separately estimated ownership: Knoxx publication
+attempt custody/recovery (8) and Services persistent receipt storage/replacement
+(3). Their proposed thirteen-child aggregate is **70 points**, not an additional
+implementation estimate. Current canonical epic metadata remains 59 until root
+uses Rheos to register the reviewed children/dependencies and update the aggregate;
+this body proposal supplies no executed estimate or readiness credit. Four additional five-point prerequisites were created
 through canonical Rheos, with actual incoming metadata and task-created events.
 They qualify the two native product paths, the database fence and the isolated
 trusted gate before Services consumes their accepted interfaces. None depends
@@ -97,8 +104,19 @@ durability child is an initial first-class Markdown card; no creation event or
 readiness is claimed. Actual Rheos operations link its UUID into Services and
 content dependencies and update the aggregate to 39. Knoxx exclusively owns its
 application adapter/runtime implementation and qualification; Foresight owns this
-coordination. Its accepted fixture qualification precedes rollout and never waits
-on the later production Spanish receipt. The
+coordination. Its five-point emission/readback scope consumes the separately
+accepted attempt-recovery and deployment-storage qualifications. Those source
+proposals carry no invented creation event, write-ID, created_at or readiness.
+The attempt owner consumes the already qualified existing receipt interface as
+source input, without requiring AFAC completion. The storage owner consumes
+accepted attempt/readback source and can close without AFAC or EC1.03 completion.
+AFAC then consumes both completed capabilities before EC1.03 admission. This is
+acyclic: qualified source interface → attempt owner → storage owner → AFAC →
+Services deployment → later live proofs. AFAC additionally consumes the attempt
+owner directly. Root registers those actual local links canonically after planning
+review; an authored dependency description does not claim operational registration.
+Accepted fixture qualification precedes rollout and never waits on the later
+production Spanish receipt. The
 SDK prerequisite proves the supported
 source families, complete emitted output closure, identity-conflict and transfer
 rules, and the separate authorized append-delta decision before choosing a route.
@@ -135,8 +153,8 @@ planning closure; external owner source remains an explicit body reference,
 not an unsupported cross-board executable edge. Those real operational effects,
 readiness and the remaining initial-status finding are still pending. No fake
 lifecycle round trip, manually edited established metadata or creation history
-stands in for them. The 59-point child aggregate excludes this standalone
-three-point operational prerequisite.
+stands in for them. Both the existing 59-point and proposed 70-point child aggregates exclude this
+standalone three-point operational prerequisite.
 
 Pinned SDK07085 has no standalone exported graph-input transform. Its complete
 owner `ingestEvents` operation appends base rows and emits additional derived

@@ -601,3 +601,12 @@
   spore: none
   receipt-refs: fca8a009ea6501fe6f472de5c671111f561563f6b0f1b6cbe31a5d4169060175
   note: Separate fresh selected Clio readback from legacy journal behavior; same-process retry and same-volume restart cannot establish failed-attempt crash recovery or container-replacement lifetime. Preserve explicit unknown effect windows and stop/split broader ownership work instead of inflating a five-point seam silently. No spore or promotion.
+- ts: 2026-10-15T00:27:59.942820963Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Author concrete Knoxx crash recovery and Services persistent storage owners
+  p-efficiency: 0.85
+  p-friction: 0.52
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: /home/err/.local/share/openhax-codex/20261010/review-state/root-F140-f07-concrete-publication-recovery-storage-split-v1/canonical-receipt-event.edn
+  note: A recovered outcome must remain distinct from an acknowledged pre-effect intent and an actual prepared receipt envelope. Split broader application crash custody and deployment storage lifetime into concrete owners; preserve canonical board state and truthfully pending readiness rather than overloading the emission adapter. No spore or promotion.

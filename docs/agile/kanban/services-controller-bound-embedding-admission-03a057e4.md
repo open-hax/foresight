@@ -33,16 +33,16 @@ must be part of the selected candidate before rollout. Services verifies that
 handoff and retains the owning source qualification; it does not implement the
 adapter or wait for the later live Spanish receipt. Missing sink, changed storage
 or retention configuration, source/build mismatch or unqualified persistence
-refuses admission. Services names and verifies the actual persistent storage
-mapping for `KNOXX_PUBLICATION_RECEIPT_LEDGER_DIRECTORY`, including host or backend
-identity, mount source/container destination, scoped namespace, permissions and
-replacement/reschedule lifetime. Consume the owning qualified failed-attempt
-recovery interface and container-replacement/remount readback; a same-volume
-process-restart receipt or container writable layer cannot qualify this handoff.
-Missing recovery custody, foreign/remapped storage or discarded schema/ledger
-history refuses admission. New storage infrastructure or a broader recovery
-protocol needs separately reviewed owning scope before this consumer proceeds.
-Rheos records this parallel prerequisite alongside migration.
+refuses admission. Its full handoff consumes separately owned Knoxx attempt recovery
+`e945de08-58ec-4028-b8cb-5dbd4a1450f4` and Services persistent storage/replacement
+qualification `a3ca141e-865e-4c35-8053-53084996f2bc`. This eight-point consumer
+uses their accepted interfaces and actual persistent mapping; it does not absorb
+their implementation. Recheck selected directory, host/backend, mount, scoped
+schema/ledger and permission/lifetime identity against actual replacement readback.
+Missing custody, ephemeral/remapped storage or a same-volume process-restart-only
+receipt refuses admission. Unknown effect/callback outcome cannot authorize unsafe
+automatic repetition. Rheos records the AFAC prerequisite alongside migration;
+the newly proposed owner links await root's actual canonical registration.
 
 Consume four other separately estimated prerequisites before production admission:
 [predeployment translation qualification](qualify-selected-native-knoxx-translation-and-sme-decisions-before-deployment-5eae82d9.md) (`60e85d88-3960-449f-8376-10e75eae82d9`),
@@ -192,13 +192,12 @@ old compatibility CMS completion, or unreviewed OpenPlanner changes.
   source and current attempt. Official controller/caller attestation checks,
   protected review and all required native gates remain satisfied. The exact
   Website exception does not apply to Knoxx.
-- [ ] The selected durable publication-receipt directory resolves to the admitted
-  persistent deployment storage, with actual host/backend, mount, scope and schema/
-  ledger identities retained outside the image. Consume independent original-
-  receipt readback after fixture container/image replacement and remount, plus
-  the owning exact-attempt crash-recovery qualification. Changed storage mapping,
-  ephemeral writable-layer selection, missing recovery or retention drift refuses
-  rollout. Preserve existing public artifacts and historical receipt bytes.
+- [ ] AFAC supplies the separately accepted attempt-recovery and persistent storage/
+  replacement capabilities. The selected receipt directory resolves to their named
+  actual storage outside the image, with matching host/backend, mount, scope,
+  permissions and complete schema/ledger custody. Original receipt/history/public
+  bytes survive fixture container/image replacement and remount through independent
+  readback. Missing recovery, ephemeral selection or lifetime drift refuses rollout.
 - [ ] Existing Website, English/German publications, content-root ownership,
   Proxx configuration and SDK settings survive with fresh health/public checks.
   Recovery uses the snapshot/journal and owning compatibility proof; environment

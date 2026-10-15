@@ -28,6 +28,20 @@ source/build and configuration before rollout. The content proof
 This task never depends on either later live proof. The real Spanish receipt
 remains the content proof's output, not a prerequisite for qualifying persistence.
 
+Two separately estimated proposed owners close the newly identified durability
+boundaries: [Knoxx attempt custody/recovery](qualify-crash-surviving-publication-attempt-custody-and-receipt-recovery-4a1450f4.md)
+(`e945de08-58ec-4028-b8cb-5dbd4a1450f4`, eight points) and
+[Services persistent storage/replacement qualification](qualify-persistent-publication-receipt-storage-through-publisher-replacement-4996f2bc.md)
+(`a3ca141e-865e-4c35-8053-53084996f2bc`, three points). This five-point task
+retains its scoped emission/acknowledgment/readback implementation and consumes
+their accepted capabilities before full durability closure. The Knoxx owner
+consumes the qualified existing receipt interface as source evidence, without
+depending on this card's completion. The storage owner consumes accepted Knoxx
+recovery/readback source; this task consumes both completed qualifications. Neither
+owner waits on EC1.03 or a later live proof. After planning review, root registers
+the two local prerequisites through canonical Rheos; these proposed source/body
+references do not claim that operational registration already occurred.
+
 ## Outcome
 
 Select, configure or implement one bounded durable adapter on Knoxx's actual
@@ -60,34 +74,28 @@ existing bounded process-local journal behavior. A custom callback's return,
 journal response or sink declaration alone cannot qualify durability: require
 acknowledged commit, exact canonical envelope/payload readback through the owning
 lookup and actual publisher process restart with fresh readers. Keep callback
-failures distinct from commit acknowledgment failures.
+failures distinct from commit acknowledgment failures. A retained in-process
+failed attempt keeps the exact prepared envelope and admitted scope for explicit
+persistence retry without re-entering reconciliation or repeating publication.
+That process capability does not qualify durable pending-attempt or callback custody.
 
-Name and qualify the existing application-owned durable handoff/recovery boundary
-for a failed or unacknowledged receipt commit. Its custody must survive publisher
-termination after the publication effect and before explicit persistence retry,
-including a real append with a lost acknowledgment. Retain the exact originally
-prepared Clio envelope, admitted scope, immutable receipt payload/correlation and
-actual observed or unknown effect state in acknowledged durable custody before
-the first receipt-commit attempt. A fresh publisher/recovery process must recover
-that same attempt, resume Clio exact-event admission and obtain a new acknowledgment
-without re-entering reconciliation, repeating publication or duplicating an
-already completed callback. Process-local exception data or a `retry!` closure
-cannot supply this crash-recovery evidence. Qualification must expose any earlier
-effect-to-custody crash window; it cannot infer safety from a later saved envelope.
-Use the existing owning protocol and Clio authority; if no bounded recoverable
-boundary fits the current seam, split and re-estimate concrete owning work before
-implementation or admission under the risk rule below.
+Consume the eight-point Knoxx owner's accepted pre-effect intent and fresh-process
+recovery contract. A genuine intended operation precedes publication; an actual
+observed receipt and its prepared Clio envelope follow supported effect evidence.
+Already-prepared envelopes retain exact identity/payload/scope across failed commit
+or lost acknowledgment. Missing original effect attribution, an envelope that never
+existed or unknown callback delivery must not be relabelled as a successful original
+receipt or permission to repeat publication/callbacks. This task neither supplies
+that recovery implementation nor claims general at-most-once delivery.
 
-Services must bind the selected directory to its actual persistent deployment
-storage: the host or storage-backend identity, mount source/container destination,
-owning scope/namespace, schema and ledger custody, permissions and replacement/
-reschedule lifecycle. A container writable layer or temporary fixture directory
-cannot qualify deployment durability. On the isolated deployment fixture, replace
-the publisher container/image, remount that same admitted storage into a fresh
-container and independently recover the original canonical envelope and receipt.
-Retain both runtime identities and the mount/storage readback. Knoxx owns adapter
-and recovery semantics; Services owns storage provisioning and deployment custody.
-New infrastructure outside those existing seams requires separate reviewed scope.
+Consume the three-point Services owner's actual persistent storage mapping and
+fixture container/image replacement/remount readback. Directory selection, a
+container writable layer or process restart on the same volume alone cannot
+establish deployment storage lifetime. The mapping retains actual host/backend,
+mount, scope/namespace, schema/ledger and permissions identity outside the image;
+its qualified lifetime is explicit. Application recovery belongs to Knoxx and
+storage provisioning/admission to Services. Missing either accepted capability
+keeps this full durability handoff and EC1.03 admission pending.
 
 Reuse pinned Clio `388c462b3f1a5b0c51bc93486ab954a7f89cedbe` event/schema
 contracts and `append-admission` for immutable event identity, exact replay and
@@ -112,7 +120,8 @@ publication effect.
 ## Non-goals
 
 A Foresight publication engine, second receipt/board authority, copied application
-source in Services, generic persistence platform, new acceptance service, changed
+source in Services, implementation of the separately owned attempt-recovery or
+deployment-storage scopes, generic persistence platform, new acceptance service, changed
 translation/publication laws merely to satisfy storage, rewritten receipts, or
 execution of the production Spanish journey. Never restart or flood production
 to run negative or retention controls.
@@ -145,22 +154,16 @@ to run negative or retention controls.
   correlation or an effect idempotency key. Persistence retry preserves the
   committed event and its provenance without fabricating another publication
   effect.
-- [ ] Actual failed/unacknowledged emission custody is durably recoverable after
-  terminating the original publisher before explicit retry. Exercise both a
-  definite pre-append failure and a real append followed by lost acknowledgment.
-  A fresh process recovers the exact original envelope/scope and observed or
-  unknown effect state, obtains acknowledged exact-event commit/readback and
-  preserves one publication effect and at-most-once completed callback delivery.
-  Preserve the original error and every historical byte; disappearance of the
-  process-local retry closure cannot become a fresh reconciliation or a fabricated
-  successful receipt. Unqualified custody or an uncovered effect-to-custody window
-  prevents completion.
-- [ ] The qualified deployment fixture uses the named persistent storage mapping
-  consumed by Services. Replacement of the publisher container/image and remount
-  into a fresh container recover the same canonical receipt, scope and schema/
-  ledger history through independent lookup while preserving public bytes. Actual
-  storage/mount identities and permissions agree; process restart on one volume
-  alone cannot supply container-replacement or reschedule-lifetime proof.
+- [ ] Consume accepted source and genuine causal qualification from Knoxx owner
+  `e945de08-58ec-4028-b8cb-5dbd4a1450f4`: acknowledged intent before effect, exact
+  prepared-envelope recovery after failed commit/lost ACK and actual publisher
+  termination, positive legitimate recovery, and truthful unknown effect/callback
+  states that block unsafe automatic repeat. A retained exception/retry closure
+  or committed-record process restart cannot supply this owner's evidence.
+- [ ] Consume Services owner `a3ca141e-865e-4c35-8053-53084996f2bc`'s admitted
+  persistent storage mapping and actual fixture container/image replacement/remount
+  readback. Original receipt/scope/schema/ledger/public bytes survive independently
+  through the named lifetime; missing/foreign/ephemeral storage refuses closure.
 - [ ] Accepted Knoxx source/build and genuine hosted qualification bind head,
   base/tested candidate where required, compiled adapter/runtime hashes, image
   digest, workflow/run/attempt and actual fixture/database/configuration identity.
@@ -168,26 +171,25 @@ to run negative or retention controls.
   unrelated green checks or old receipts cannot supply admission.
 - [ ] Before rollout, Services verifies its selected application candidate and
   effective configuration against this accepted build and qualified storage
-  contract. Missing sink, stale source, changed namespace/retention or build mismatch
-  fails admission. Completion needs no later live Spanish receipt or content proof.
+  contract, including the two accepted owning capabilities above. Missing sink,
+  crash-recovery custody, persistent storage/replacement proof, stale source,
+  changed namespace/retention or build mismatch fails admission. Completion needs
+  no later live Spanish receipt or content proof.
 
 ## Verification and estimate
 
 Write causal predecessor-failing controls in Knoxx for missing persistence,
-write/readback failure, foreign scope, immutable conflict, pending-attempt loss
-across publisher termination, restart/rollover and container-replacement storage
-loss. Exercise the real configured emission adapter, owning recovery boundary and
-storage on the isolated recoverable fixture. Terminate the publisher between
-failed/unacknowledged commit and explicit retry, recover the original attempt in a
-fresh process and prove no repeated publication/callback effect. Separately replace
-the fixture publisher container/image, remount the admitted persistent storage and
-read the original committed receipt through a fresh independent reader. These
-controls must preserve actual errors and unknown outcomes rather than manufacture
-a replacement success.
+write/readback failure, foreign scope, immutable conflict and restart/rollover
+loss. Exercise the real configured emission adapter and storage on the isolated
+recoverable fixture; restart its actual process and read through a fresh reader.
 Retain commands, native record IDs, payload/manifest hashes, configuration identity
 and genuine refusals. Run the canonical owner's law, adapter integration, vertical
 E2E and required hosted qualification; missing tools and failures remain visible.
-These storage controls do not claim model inference or live production proof.
+Consume the separate owners' exact source/runtime/storage/run/attempt evidence
+and their actual causal crash/replacement controls; do not duplicate their
+implementation in this five-point adapter. Bind their accepted interfaces to the
+same selected runtime/configuration consumed by Services. These storage controls
+do not claim model inference or live production proof.
 
 | Effort | Points | Bounded deliverable |
 | --- | ---: | --- |
@@ -199,9 +201,12 @@ These storage controls do not claim model inference or live production proof.
 
 ## Risks
 
-Five points assumes one bounded adapter fits existing Knoxx emission/storage seams.
-Verify that before implementation. A missing emission boundary, broader correlation/
-recovery protocol or new infrastructure requires stopping the affected work and
+Five points assumes one bounded emission/readback adapter fits existing Knoxx
+seams. The separately estimated eight-point attempt-recovery and three-point
+storage-replacement source proposals address the discovered broader boundaries;
+their review, canonical registration and accepted implementation remain pending.
+Verify every scope/estimate before readiness. Further missing generic primitives,
+broader recovery or new infrastructure requires stopping the affected work and
 splitting/re-estimating concrete owning work through review and Rheos coordination.
 Do not widen this task silently or complete it with a journal-only proof. Services
 and the content proof remain blocked until their full qualified durable contract
