@@ -112,7 +112,11 @@
                  :event/schema {:id :eta-mu.receipt-river/receipt-recorded
                                 :version 1}
                  :event/producer {:package/name "@eta-mu/receipt-river"
-                                  :package/version "0.1.0"}
+                                  :package/version "0.1.0"
+                                  :eta-mu/version "0.1.0"
+                                  :command "Receipt River package API"
+                                  :actor "test"
+                                  :source/commit revision-a}
                  :event/subject {:repo "open-hax/foresight"}
                  :event/payload {:ts "2026-10-14T06:12:17.427Z"
                                  :kind :observation
@@ -129,6 +133,24 @@
         legacy (receipt-for (recorded-result :repo/unit :passed revision-a))]
     (is (evidence/canonical-observation-receipt? receipt))
     (is (false? (evidence/canonical-observation-receipt? unknown-version)))
+    ;; This consumer requires new canonical producer custody; these fields
+    ;; are not asserted to be mandatory in upstream Receipt River's envelope law.
+    (doseq [key [:actor :command :eta-mu/version :source/commit]]
+      (is (false? (evidence/canonical-observation-receipt?
+                   (update receipt :event/producer dissoc key))))
+      (doseq [value [nil "" "  " 42 []]]
+        (is (false? (evidence/receipt-record?
+                     (assoc-in receipt [:event/producer key] value))))))
+    (doseq [commit ["main" (apply str (repeat 39 "a"))
+                    (apply str (repeat 41 "a"))
+                    (apply str (repeat 40 "A"))
+                    (str (apply str (repeat 39 "a")) "g")
+                    (apply str (repeat 63 "a"))]]
+      (is (false? (evidence/canonical-observation-receipt?
+                   (assoc-in receipt [:event/producer :source/commit] commit)))))
+    (is (evidence/canonical-observation-receipt?
+          (assoc-in receipt [:event/producer :source/commit]
+                    (apply str (repeat 64 "a")))))
     (is (evidence/receipt-record? legacy))))
 
 (deftest appended-event-identity-law-reserves-history-without-rewriting-it

@@ -841,7 +841,9 @@
    :event/producer {:package/name "@eta-mu/receipt-river"
                     :package/version "0.1.0"
                     :command "Receipt River package API"
-                    :actor "test"}
+                    :actor "test"
+                    :eta-mu/version "0.1.0"
+                    :source/commit child-revision}
    :event/subject {:repo "open-hax/foresight"}
    :event/payload {:ts "2026-10-14T06:12:17.427Z"
                    :kind :observation
@@ -972,6 +974,65 @@
             (is (.equals (js/Buffer.from base-text "utf8")
                          (:ledger/bytes
                           (cli/read-immutable-receipt-ledger! base))))))))))
+
+(deftest incomplete-producer-custody-refuses-new-suffix-before-append
+  (let [event (canonical-river-observation)
+        missing (mapv #(update event :event/producer dissoc %)
+                      [:actor :command :eta-mu/version :source/commit])
+        malformed [(assoc-in event [:event/producer :actor] " ")
+                   (assoc-in event [:event/producer :command] 42)
+                   (assoc-in event [:event/producer :eta-mu/version] [])
+                   (assoc-in event [:event/producer :source/commit] "main")]]
+    (doseq [terminal-newline? [true false]
+            invalid (concat missing malformed)]
+      (with-historical-ledger-fixture terminal-newline?
+        (fn [{:keys [base base-text file directory commit!]}]
+          (let [text (str base-text (when-not terminal-newline? "\n")
+                          (pr-str invalid) "\n")
+                phases (atom [])]
+            (fs/writeFileSync file text "utf8")
+            (binding [cli/*secure-append-phase-hook*
+                      (fn [phase _] (swap! phases conj phase))]
+              (is (thrown-with-msg?
+                   js/Error #"invalid receipt envelopes"
+                   (cli/append-evidence-receipt! passed-result))))
+            (is (= [] @phases))
+            (is (.equals (js/Buffer.from text "utf8")
+                         (fs/readFileSync file)))
+            (is (not (fs/existsSync
+                      (path/join directory ".receipts.edn.append.lock"))))
+            ;; A failing predecessor may have appended. Restore the exact
+            ;; requested suffix before independent immutable verification.
+            (let [head (commit! text)]
+              (is (thrown-with-msg?
+                   js/Error #"invalid receipt envelopes"
+                   (cli/verify-receipts! {:base base :at head})))
+              (is (.equals (js/Buffer.from base-text "utf8")
+                           (:ledger/bytes
+                            (cli/read-immutable-receipt-ledger! base)))))))))))
+
+(deftest producer-custody-admission-preserves-trusted-history
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base-text file commit!]}]
+      (let [historical (update (canonical-river-observation) :event/producer
+                               #(apply dissoc % [:actor :command :eta-mu/version
+                                                 :source/commit]))
+            trusted-text (str base-text (pr-str historical) "\n")
+            base (commit! trusted-text)
+            fresh (assoc (canonical-river-observation)
+                         :event/id "d1e845a8-94da-4d83-b407-a73ee7b48aaf")
+            head (commit! (str trusted-text (pr-str fresh) "\n"))]
+        (is (zero? (cli/verify-receipts! {:base base :at base})))
+        (is (zero? (cli/verify-receipts! {:base base :at head})))
+        (is (.equals (js/Buffer.from trusted-text "utf8")
+                     (:ledger/bytes (cli/read-immutable-receipt-ledger! base))))
+        (let [receipt (cli/append-evidence-receipt! passed-result)
+              bytes (fs/readFileSync file)]
+          (is (cli/buffer-prefix? (js/Buffer.from trusted-text "utf8") bytes))
+          (is (= [fresh receipt]
+                 (cli/appended-receipt-records!
+                  (:ledger/bytes (cli/read-immutable-receipt-ledger! base))
+                  bytes))))))))
 
 (deftest canonical-envelope-cannot-smuggle-legacy-evidence-or-a-fallback
   (let [event (canonical-river-observation)
