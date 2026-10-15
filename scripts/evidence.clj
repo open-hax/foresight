@@ -1737,15 +1737,17 @@
   "Reads the working ledger. `own-basename` names the caller's reserved (still
   empty) segment, which is skipped along with its own lock and the writer lock
   the caller holds. Any other retained append lock quarantines the whole
-  ledger."
-  [own-basename]
+  ledger. `legacy-max-bytes` bounds the frozen legacy file before it is
+  allocated; it may only lose lines, so callers pass its committed size plus
+  one segment of slack."
+  [own-basename & [legacy-max-bytes]]
   (when (lstat-if-present! (receipt-quarantine-marker-path)
                            "Receipt River quarantine marker")
     (append-error!
      (str "a Receipt River quarantine marker quarantines the ledger until it "
           "is adjudicated: " receipt-quarantine-marker-name)))
   (let [legacy-bytes (read-working-regular-file!
-                      receipt-file "Receipt River file")
+                      receipt-file "Receipt River file" legacy-max-bytes)
         directory (receipt-segment-directory)
         directory-stats (lstat-if-present!
                          directory "Receipt River segment directory")]
@@ -1800,8 +1802,16 @@
   "The working ledger must extend the committed ledger, and every
   uncommitted record must satisfy the current receipt law."
   [own-basename]
-  (let [working (read-working-receipt-segments! own-basename)
-        committed (current-committed-receipt-segments!)]
+  (let [committed (current-committed-receipt-segments!)
+        committed-legacy (first (filter :segment/legacy? committed))
+        working (read-working-receipt-segments!
+                 own-basename
+                 ;; The legacy file may only lose lines. One segment's worth of
+                 ;; slack still lets a small append reach the clearer "frozen"
+                 ;; error, while a huge replacement fails before allocation.
+                 (when committed-legacy
+                   (+ (.-length (:segment/bytes committed-legacy))
+                      max-receipt-line-bytes)))]
     (try
       (require-valid-receipt-records!
        (ledger-extension-records! committed working))
