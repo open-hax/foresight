@@ -628,3 +628,12 @@
   spore: none
   receipt-refs: 86ea9e19687cbfab77df0fab1f9897a5e7a4995bd3720086b6d89ccb4270000f
   note: A supported package identity and version do not establish actor, command, component version or source provenance. Test new suffix admission and real append byte preservation while grandfathering exact trusted history. Do not misattribute scoped consumer policy to upstream producer law; no transient lock absence claim. No spore.
+- ts: 2026-10-15T00:46:46.051454748Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Qualify canonical producer provenance consumer repair
+  p-efficiency: 0.92
+  p-friction: 0.31
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: b4c8cae0f6c09099fb15bde0b31d6965eae1679d588283d200b8c6c99dcf5b52
+  note: Four exact consumer checks repair genuine provenance acceptance while preserving registered legacy/history controls. Qualified full registered source tests and owning lint on the actual pinned runtime. Keep inherited npm config warnings separate, retain incorrect abbreviated-base invocation, and require final committed receipt-history verification. No spore.
