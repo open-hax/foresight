@@ -38,9 +38,21 @@ their accepted capabilities before full durability closure. The Knoxx owner
 consumes the qualified existing receipt interface as source evidence, without
 depending on this card's completion. The storage owner consumes accepted Knoxx
 recovery/readback source; this task consumes both completed qualifications. Neither
-owner waits on EC1.03 or a later live proof. After planning review, root registers
-the two local prerequisites through canonical Rheos; these proposed source/body
-references do not claim that operational registration already occurred.
+owner waits on EC1.03 or a later live proof.
+
+Canonical registration is an explicit blocking operation before AFAC readiness or
+completion and before its handoff can unblock rollout. After planning review,
+root reads the two first-class local sources by their actual UUID through the
+qualified/adopted Rheos authority, then records AFAC's dependency vector as
+`["e945de08-58ec-4028-b8cb-5dbd4a1450f4", "a3ca141e-865e-4c35-8053-53084996f2bc"]`
+through its canonical metadata operation. Fresh canonical readback and actual
+operation/source/completion custody must establish those exact local edges while
+preserving unrelated metadata and all historical ledger bytes. Failed, missing or
+uncertain registration blocks dependent operational advance and follows Rheos's
+adopted recovery authority. Private adapter/source qualification may proceed in
+parallel as described above; it supplies no AFAC readiness or completion. No
+body reference, fabricated creation history or manual established-frontmatter
+edit substitutes for the actual registration, which remains pending here.
 
 ## Outcome
 
@@ -128,6 +140,12 @@ to run negative or retention controls.
 
 ## Acceptance criteria
 
+- [ ] Before AFAC readiness/completion or downstream rollout admission, canonical
+  Rheos readback establishes both exact local prerequisite UUIDs above in AFAC's
+  dependency vector, with actual operation/source/completion custody. Both owning
+  qualifications then satisfy the full durability criteria below. Missing edges,
+  prose-only dependencies or unaccepted capabilities block that operational
+  advance; no creation history is manufactured for first-class Markdown sources.
 - [ ] The selected runtime's actual emission path uses the named adapter and
   persistent namespace. Effective configuration, record identity, scope-qualified
   lookup and retention policy are inspectable. A detached helper or declared sink

@@ -637,3 +637,12 @@
   spore: none
   receipt-refs: b4c8cae0f6c09099fb15bde0b31d6965eae1679d588283d200b8c6c99dcf5b52
   note: Four exact consumer checks repair genuine provenance acceptance while preserving registered legacy/history controls. Qualified full registered source tests and owning lint on the actual pinned runtime. Keep inherited npm config warnings separate, retain incorrect abbreviated-base invocation, and require final committed receipt-history verification. No spore.
+- ts: 2026-10-15T01:14:53.523448325Z
+  session: 01a12257-fc69-7720-888c-dd2595ff7dc7
+  task: Require actual canonical deployment prerequisite edges and exact aggregate update
+  p-efficiency: 0.9
+  p-friction: 0.44
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: c56c53f96d39607f691d940e3af1a758936bea3f7be74c701ab018438dd5969b
+  note: Explicitly gate operational readiness and handoff on real engine dependency and aggregate readbacks. Source body references are reviewable requirements, not executed graph edges. Preserve prior six-effect scope and unknown source custody; no spore.

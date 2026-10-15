@@ -92,8 +92,15 @@ first-class source cards add separately estimated ownership: Knoxx publication
 attempt custody/recovery (8) and Services persistent receipt storage/replacement
 (3). Their proposed thirteen-child aggregate is **70 points**, not an additional
 implementation estimate. Current canonical epic metadata remains 59 until root
-uses Rheos to register the reviewed children/dependencies and update the aggregate;
-this body proposal supplies no executed estimate or readiness credit. Four additional five-point prerequisites were created
+uses Rheos to register the reviewed children/dependencies and update the aggregate.
+The exact canonical epic update from 59 to 70 for these thirteen named children
+is an explicit blocking operation before this added durability plan advances or
+cutover planning closes; the standalone three-point metadata operation is excluded.
+Fresh canonical readback and actual operation/source/completion custody must
+establish 70. A pending operation, retained 59 or body arithmetic cannot satisfy
+that gate. Root preserves unrelated metadata and historical ledger bytes and
+uses adopted Rheos recovery for any actual uncertain operation. This body
+proposal supplies no executed estimate or readiness credit. Four additional five-point prerequisites were created
 through canonical Rheos, with actual incoming metadata and task-created events.
 They qualify the two native product paths, the database fence and the isolated
 trusted gate before Services consumes their accepted interfaces. None depends
@@ -174,6 +181,15 @@ board transition.
 
 ## Acceptance criteria
 
+- [ ] Before the added durability plan advances or cutover planning closes,
+  qualified/adopted canonical Rheos records this epic's aggregate as 70 for the
+  thirteen named children, excluding standalone metadata prerequisite
+  `ada3bc51-1528-4ae3-aa46-095d217142ea`. Retain fresh canonical readback and actual
+  operation/source/completion custody; a still-pending update or literal 59 blocks
+  that advance. AFAC additionally requires its two actual local prerequisite
+  edges before readiness/completion, as specified in its owning card. If planning
+  review changes a child estimate, first review the revised exact aggregate and
+  perform its matching canonical update before advancing.
 - [ ] Every actual future Knoxx ingest, hot/compact query and repair path in
   scope uses one validated model/route/dimension-bound generation runtime.
   Actual provider results account for every input and contain only finite
