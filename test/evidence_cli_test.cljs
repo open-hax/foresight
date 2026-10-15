@@ -1173,6 +1173,34 @@
         (is (next-writer-refused? segments file)
             "the recreated reserved basename cannot become ordinary evidence")))))
 
+(deftest selected-gates-quarantine-a-reserved-basename-recreated-after-writer-unlock
+  ;; Delayed work can wait for the writer-lock unlink itself and only then
+  ;; recreate the removed reservation under its own basename. The final
+  ;; post-release check skips that basename in the whole-ledger comparison,
+  ;; so it must look for it explicitly when the reservation was unwritten.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-writer-lock! cli/release-writer-lock!]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-writer-lock!
+                      (fn [parent writer-lock]
+                        (release-writer-lock! parent writer-lock)
+                        (fs/writeFileSync segment (str forged-line "\n")
+                                          "utf8"))]
+          (is (thrown-with-msg?
+               js/Error #"after writer-lock release"
+               (run-semantic-gate-with!
+                file segment
+                (fn [] (throw (js/Error. "gate exploded")))))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "a quarantine marker is recreated at the writer-lock path")
+        (is (next-writer-refused? segments file)
+            "the recreated reserved basename cannot become ordinary evidence")))))
+
 (deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
   ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
   ;; durable forged segment. The held `.ημ` descriptor then names the moved
