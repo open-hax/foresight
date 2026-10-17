@@ -1432,6 +1432,33 @@
            (cli/read-receipt-records! text))
         "the actual reader still accepts exact millisecond precision")))
 
+(deftest receipt-dispatch-discard-checks-the-active-instant
+  ;; The actual reader accepts both dispatch collections as discarded forms.
+  ;; The surviving tagged value still needs precision admission before IDs.
+  (doseq [discarded ["#{}" "#:ns{:x :y}"]]
+    (let [prefix (str "{:ts \"2026-01-01T00:00:00Z\" :kind :observation"
+                      " :origin \"test\" :owner \"test\" :dod \"exact\""
+                      " :pi \"receipt-river\" :host \"test\""
+                      " :manifest [] :refs [] :payload #inst #_")
+          text-for (fn [active]
+                     (str prefix discarded " \"" active "\"}\n"))]
+      (doseq [active ["2026-01-01T00:00:00.0001Z"
+                      "2026-01-01T00:00:00.0002Z"]]
+        (let [text (text-for active)]
+          (is (law/receipt-envelope? (cljs.reader/read-string text))
+              "the actual reader accepts the complete envelope before exactness")
+          (is (= [active] (cli/edn-inst-strings text))
+              "a discarded dispatch collection cannot hide the active instant")
+          (is (thrown-with-msg?
+               js/Error #"Receipt River tagged instants must round-trip exactly"
+               (cli/read-receipt-records! text))
+              "the exactness guard rejects the actual reader's precision loss")))
+      (let [active "2026-01-01T00:00:00.001Z"
+            text (text-for active)]
+        (is (= [active] (cli/edn-inst-strings text)))
+        (is (= [(cljs.reader/read-string text)] (cli/read-receipt-records! text))
+            "exact millisecond payloads remain accepted in complete envelopes")))))
+
 (deftest receipt-inst-text-inside-strings-is-not-a-tag
   ;; The exactness check lexes EDN like the number check: `#inst` text that
   ;; ends a string value is not a tag, so it must not pair the string's
@@ -2110,11 +2137,12 @@
                (cli/verify-receipts! {:base base :at head}))))))))
 
 (deftest receipt-verification-rejects-committed-operational-files
-  ;; `.ημ/.receipt-river.quarantine` and the writer lock are working-tree
-  ;; operational state. A reviewed revision that carries either one would
-  ;; close every checkout's working ledger, so immutable review rejects it.
+  ;; Quarantine and legacy/flat-writer locks live beside the legacy ledger;
+  ;; the segment writer lock lives inside receipts/. All are working-tree
+  ;; operational state, so immutable review rejects their committed paths.
   (doseq [operational [".receipt-river.quarantine"
-                       ".receipt-river.writer.lock"]]
+                       ".receipt-river.writer.lock"
+                       "receipts/.receipt-river.writer.lock"]]
     (with-historical-ledger-fixture true
       (fn [{:keys [directory base base-text commit!]}]
         (let [marker (path/join directory operational)]
