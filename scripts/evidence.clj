@@ -209,6 +209,12 @@
       (and (= :token kind) (= "#_" value))
       (edn-skip-form lexemes (edn-skip-form lexemes (inc idx)))
 
+      ;; A set or namespaced map dispatch and its collection are one form.
+      (and (= :token kind)
+           (or (= "#" value) (str/starts-with? value "#:"))
+           (= :open (first (get lexemes (inc idx)))))
+      (edn-skip-form lexemes (inc idx))
+
       (and (= :token kind) (edn-tag-token? value))
       (edn-skip-form lexemes (inc idx))
 
@@ -639,10 +645,13 @@
   [receipt-quarantine-marker-name receipt-writer-lock-name])
 
 (defn require-no-committed-operational-files! [revision]
-  (let [ledger-directory (.dirname (.-posix path) law/receipt-ledger-path)]
-    (doseq [name receipt-operational-file-names]
-      (let [repository-path (.join (.-posix path) ledger-directory name)
-            entries (remove str/blank?
+  (let [ledger-directory (.dirname (.-posix path) law/receipt-ledger-path)
+        repository-paths (conj (mapv #(.join (.-posix path) ledger-directory %)
+                                    receipt-operational-file-names)
+                               (.join (.-posix path) law/receipt-segment-directory
+                                      receipt-writer-lock-name))]
+    (doseq [repository-path repository-paths]
+      (let [entries (remove str/blank?
                             (str/split (git-capture! ["ls-tree" "-z" revision
                                                       "--" repository-path])
                                        #"\u0000"))]

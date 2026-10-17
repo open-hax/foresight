@@ -117,10 +117,13 @@ gitlink in its tree. It rechecks the root boundary after all reads.
 The Receipt River ledger is segmented. `.ημ/receipts.edn` is the legacy,
 frozen first segment; every new receipt is its own immutable file under
 `.ημ/receipts/` (`<UTC timestamp>-<random id>.edn`, exactly one
-newline-terminated record). The ledger is the merge of all segments, ordered
-by the UTC instant named by `:ts` and then by the SHA-256
-of the record's EDN, so parallel branches add disjoint files instead of
-editing the same lines, and a diverged fork and org merge without conflicts.
+newline-terminated record). The ledger is the merge of all segments. New
+records require an RFC 3339 `:ts` naming a real instant; records with such an
+instant order by UTC time, then canonical record identity (SHA-256). Retained
+historical records keep their original `:ts`: values naming no real instant
+sort first by their canonical printed timestamp, then record identity.
+Parallel branches add disjoint files instead of editing the same lines, and a
+diverged fork and org merge without conflicts.
 The runner writes each complete result as a new segment. Schema-v2 receipts
 retain the actual host and `nbb`/Node adapter identity. Older receipts remain
 immutable historical records and cannot attest a current promotion;
