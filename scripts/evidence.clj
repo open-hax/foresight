@@ -154,6 +154,10 @@
 
             (edn-token-delimiter? ch) (recur (inc i) out)
 
+            (and (= "#" ch) (< (inc i) n) (= "_" (.charAt text (inc i))))
+            ;; Reader discard is a prefix even without whitespace: #_x.
+            (recur (+ i 2) (conj out [:token "#_"]))
+
             :else
             (let [end (loop [j (if (= "\\" ch) (+ i 2) (inc i))]
                         (if (and (< j n) (not (edn-token-delimiter? (.charAt text j))))

@@ -162,7 +162,7 @@ reviewed root commit that is also the clean current `HEAD`. With Git replacement
 objects disabled, it requires regular non-executable blobs, reads the catalog
 and the segmented Receipt River ledger from that same Git object, hashes the
 raw byte streams, and decodes strict UTF-8. Against a trusted base it proves:
-no base segment was edited or removed; no base record was dropped; the frozen
+no base one-record segment was edited or removed; no base record was dropped; the frozen
 legacy file may only lose whole lines (terminator-preserving subsequence) when
 those records move into segments; and every new record obeys the current
 envelope law. Exact byte-prefix of the entire `.ημ/receipts.edn` monolith is

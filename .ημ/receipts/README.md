@@ -10,7 +10,7 @@ receipt on one line, ending with a newline. Never edit or delete a committed seg
 `nbb scripts/evidence.clj verify-receipts --base <commit> --at <commit>` loads
 the legacy file and every segment, merges them by the UTC instant of `:ts`
 (offsets and fractional seconds normalized) then record ID, and
-checks the merged ledger as a whole: no base segment edited or removed, no
+checks the merged ledger as a whole: no base one-record segment edited or removed, no
 base record dropped, no record repeated, no new record in the legacy file, and
 every new record valid under the current receipt law.
 
