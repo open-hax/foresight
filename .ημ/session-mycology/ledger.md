@@ -592,3 +592,12 @@
   spore: none
   receipt-refs: 6d5bafedba1cbb99cff836ff2ed6b1319e7dc4070017a2da55feeb8915a53148
   note: Verified CR roots4302631973/4302631982 against actual post-write quarantine and duplicate-law source; two prose corrections only, no artificial tests or approval transfer. Historical receipts preserved; fresh new-head review remains required.
+- ts: 2026-10-17T13:39:53.147956177Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: PR35 preserve dispatch exactness and actual operational lock paths
+  p-efficiency: 0.94
+  p-friction: 0.18
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 0aeb5f369765438fada94b75f32e7b3f552b18d6928134d6b7e0322034e1aa9b
+  note: Verified current CR5557922511 roots4302786624/4302786630 with actual reader and complete-envelope controls: full owning RED106/635/12FAIL thenGREEN0/0, lint0E0W. Added actual segment lock diagnostic while retaining legacy paths and generic rejection; corrected historical timestamp ordering prose. Failed7cd review/stage-refusal remains unaccepted; new-head hosted gates/review still required. No automatic retry, provider/policy change, or deployment credit.
