@@ -547,3 +547,12 @@
   spore: none
   receipt-refs: b853e735eb5ca8b70f52328462893e76e46c9f011124ee13ee73419e1bfd66f8
   note: Read the current process task children file before any pidfd or prctl setup; unavailable child evidence must fail closed rather than fold to an empty descendant set. The actual two enable_subreaper/direct_children functions are exercised with controlled missing, empty, occupied and denied proc cases; all path and kernel effects are intercepted. Six genuine missing-evidence failures became full owning GREEN104tests611assertions0fail0error, registered lint0errors0warnings. Preserve original traces, canonical legacy/segments and all prior reflection bytes. Prior78 model attempt and live retry remain dated; no new-head hosted approval or merge/deployment claimed. No spore or policy change.
+- ts: 2026-10-17T09:12:32.451204803Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: Remove PR35 unused Node gate custody helpers and obsolete test wrapper
+  p-efficiency: 0.94
+  p-friction: 0.15
+  p-skill-candidate: 0.10
+  spore: none
+  receipt-refs: 696c667f3f3aa8fd981c975b5eb05f977cd9dae57998159f62dac14b807fbbc9
+  note: Native current6871 CodeRabbit full20 review5557141989 identified body item ddd43f7e2b9fb7def1778d81. Remove exactly two unused Node helpers and one obsolete test with-redefs wrapper; preserve complete live spawn-result/Python custody path, both Python adapters and every existing assertion. Independent root source peer verified committed preimages and exact mechanical deletion. Same complete owning suite passes104tests611assertions0fail0error with normal subreaper cleanup; registered lint errors0warnings0 and diffcheck0. Dead-code deletion warrants no artificial causalRED or duplicated test. Preserve all old receipts and reflection prefix; write one new canonical receipt segment. Current6871 hosted first grep failure and ongoing second review remain dated and supply no new-head approval. No merge/deployment claim and no new spore.
