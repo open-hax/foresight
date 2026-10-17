@@ -1414,6 +1414,24 @@
                 (catch :default _ :rejected)))
         "the exactness guard accepts the surviving millisecond instant")))
 
+(deftest receipt-adjacent-discard-checks-the-active-instant
+  ;; The actual NBB reader accepts #_x without a delimiter and truncates a
+  ;; surviving sub-millisecond instant. Scan the same active form before IDs.
+  (doseq [active ["2026-01-01T00:00:00.0001Z" "2026-01-01T00:00:00.0002Z"]]
+    (let [text (str "{:ts #inst #_x \"" active "\"}\n")]
+      (is (= [active] (cli/edn-inst-strings text))
+          "an adjacent discarded symbol cannot hide the active instant")
+      (is (thrown-with-msg?
+           js/Error #"Receipt River tagged instants must round-trip exactly"
+           (cli/read-receipt-records! text))
+          "the exactness guard rejects the actual reader's precision loss")))
+  (let [active "2026-01-01T00:00:00.001Z"
+        text (str "{:ts #inst #_x \"" active "\"}\n")]
+    (is (= [active] (cli/edn-inst-strings text)))
+    (is (= [{:ts (cljs.reader/read-string (str "#inst \"" active "\""))}]
+           (cli/read-receipt-records! text))
+        "the actual reader still accepts exact millisecond precision")))
+
 (deftest receipt-inst-text-inside-strings-is-not-a-tag
   ;; The exactness check lexes EDN like the number check: `#inst` text that
   ;; ends a string value is not a tag, so it must not pair the string's
