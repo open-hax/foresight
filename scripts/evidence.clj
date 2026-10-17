@@ -1077,33 +1077,6 @@
                           :revision head})]))
           selected)))
 
-(defn process-group-alive? [pid]
-  (try
-    (js/process.kill (- pid) 0)
-    true
-    (catch :default error
-      (not= "ESRCH" (.-code error)))))
-
-(defn contain-gate-descendants!
-  "Kills the gate's whole process group and waits until it is empty. A gate
-  may leave detached descendants behind; killing them before the receipt is
-  written and the locks are released keeps them from mutating the working
-  ledger after the final revalidation. Returns true once the group is gone."
-  [pid]
-  ;; Only a real child PID: signalling group 0 would hit this process's own.
-  (or (not (and (number? pid) (pos? pid)))
-      (do (try
-            (js/process.kill (- pid) "SIGKILL")
-            (catch :default _error nil))
-          (let [deadline (+ (js/Date.now) 5000)]
-            (loop []
-              (cond
-                (not (process-group-alive? pid)) true
-                (> (js/Date.now) deadline) false
-                :else (do (js/Atomics.wait
-                           (js/Int32Array. (js/SharedArrayBuffer. 4)) 0 0 50)
-                          (recur))))))))
-
 (defn spawn-result
   "Own the gate through a Linux subreaper; keep normal streams and gate status.
    The fresh adapter retains detached descendants and observes caller death.
