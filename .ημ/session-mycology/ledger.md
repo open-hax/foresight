@@ -583,3 +583,12 @@
   spore: none
   receipt-refs: 2026-10-17T120052571Z-ffc9fcdf6de0,14ece6e64d410c0b9386562e0f8601cad6434808bae84f8dd13c82d548686d97
   note: Bind actual protected ETA7112/defaultref and its NUL-framed owned-context guard before advancing caller. Preserve e2a premodel refusal and all105/617 historical product evidence; new owning workspace24/122 and caller lint pass without replaying unchanged process corpus. Fresh whole-input hosted review remains required; no source/fullcandidate approval or deployment transfer. No spore created.
+- ts: 2026-10-17T12:28:19.695792164Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: PR35 correct two verified receipt specification statements
+  p-efficiency: 0.95
+  p-friction: 0.15
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 6d5bafedba1cbb99cff836ff2ed6b1319e7dc4070017a2da55feeb8915a53148
+  note: Verified CR roots4302631973/4302631982 against actual post-write quarantine and duplicate-law source; two prose corrections only, no artificial tests or approval transfer. Historical receipts preserved; fresh new-head review remains required.
