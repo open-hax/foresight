@@ -114,31 +114,69 @@ the clean current `HEAD`, loads both the catalog and Receipt River from that
 same Git object, and requires every result revision to equal the corresponding
 gitlink in its tree. It rechecks the root boundary after all reads.
 
-The runner appends each complete result to `.ημ/receipts.edn`. Schema-v2
-receipts retain the actual host and `nbb`/Node adapter identity. Older
-receipts remain immutable historical records and cannot attest a current
-promotion; `verify-receipts` applies the current envelope law only to the
-suffix appended after the reviewed base.
+The Receipt River ledger is segmented. `.ημ/receipts.edn` is the legacy,
+frozen first segment; every new receipt is its own immutable file under
+`.ημ/receipts/` (`<UTC timestamp>-<random id>.edn`, exactly one
+newline-terminated record). The ledger is the merge of all segments. New
+records require an RFC 3339 `:ts` naming a real instant; records with such an
+instant order by UTC time, then canonical record identity (SHA-256). Retained
+historical records keep their original `:ts`: values naming no real instant
+sort first by their canonical printed timestamp, then record identity.
+Parallel branches add disjoint files instead of editing the same lines, and a
+diverged fork and org merge without conflicts.
+The runner writes each complete result as a new segment. Schema-v2 receipts
+retain the actual host and `nbb`/Node adapter identity. Older receipts remain
+immutable historical records and cannot attest a current promotion;
+`verify-receipts` applies the current envelope law only to records that are new
+relative to the reviewed base.
 
-The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
-no-follow parent directory descriptor, rejects symbolic or multiply linked
-ledger files, and serializes cooperating writers with an exclusive sibling
-lock. A complete line is bounded to 1 MiB, written through the held descriptor,
+The adapter currently requires Linux `/proc/self/fd` semantics. Gate execution also requires
+Python 3.9+ with Linux subreaper, pidfd and waitid support. A fresh gate adapter
+retains every child identity, including descendants that create another session,
+and binds its lifetime to the calling receipt process. Gate stdout/stderr remain
+inherited; incomplete or interrupted custody quarantines the receipt reservation.
+The existing five-second child-cleanup bound does not impose a gate runtime cap.
+The append adapter holds a
+no-follow parent directory descriptor, rejects symbolic, multiply linked or
+executable ledger files (Git would record an executable file as a `100755`
+blob, which immutable review rejects), and serializes semantic writers in one checkout on
+`.ημ/receipts/.receipt-river.writer.lock` for the whole reserve, gate and
+write sequence. A concurrent writer fails closed instead of waiting. A writer
+lock left by a crashed process must be removed by hand. Each writer reserves
+its own new segment with `O_EXCL` and a sibling lock for that segment; a
+reservation that ends before writing removes its empty segment. A retained
+lock (see below) quarantines the whole ledger. The rest of the working ledger
+is revalidated against `HEAD` immediately before the receipt is written, and
+compared with the pre-gate snapshot again after it is written or when a
+gate aborts before writing. The writer lock is verified around the write. A
+complete line is bounded to 1 MiB, written through the held descriptor,
 size-checked, and followed by file and directory `fsync`. Pre-write rejection
-releases the lock; uncertainty after writing starts retains the lock as a
-quarantine marker for manual adjudication. This protects the adapter boundary
+releases the lock, unless the working ledger changed while the gate ran; that
+change, a change after the write, and any uncertainty after writing starts
+retain the lock as a quarantine marker for manual adjudication. A retained lock is verified by
+path identity first; if gate code unlinked or replaced it, a fresh marker is
+created exclusively at the same path. If the segment directory itself was
+renamed or replaced while the gate ran, every lock is reachable only through
+the renamed directory, so the adapter also creates
+`.ημ/.receipt-river.quarantine` through a held `.ημ` descriptor; its presence
+closes the working ledger until it is adjudicated. This protects the adapter boundary
 from pathname swaps, partial writes, and cooperating races; it does not exclude
 an unrelated writer that ignores the lock.
 
 For immutable review, the adapter disables Git replacement objects, requires
 regular non-executable blobs, hashes
-their raw bytes, decodes strict UTF-8, and proves the reviewed ledger preserves
-the trusted base ledger byte-for-byte before accepting whole appended lines.
-The current receipt-envelope and evidence-result laws apply only to that
-appended suffix. The exact trusted prefix remains historical evidence even
-when its envelopes predate the current schema. Secure append applies the same
-boundary against the committed `HEAD` ledger: it validates the uncommitted
-suffix before running a gate or writing its receipt. Rewrites, truncation, and
+their raw bytes, decodes strict UTF-8, and proves the reviewed ledger extends
+the trusted base ledger as an event ledger: every base segment file is still
+present byte-for-byte, every base record is still present somewhere in the
+merged ledger, the legacy file only ever loses whole lines (no new record, no
+rewrite or reordering), and no record appears twice. Records may move out of the legacy file into segments; that is how a
+fork and its org reconcile histories that split inside the legacy file. The
+current receipt-envelope and evidence-result laws apply only to the new
+records. Historical records remain evidence even when their envelopes predate
+the current schema. Secure append applies the same boundary against the
+committed `HEAD` ledger: it validates the whole working ledger before running a
+gate, then writes the receipt into a newly created (`O_EXCL`) segment. Rewrites,
+deletions, legacy appends, and
 malformed new records still fail closed. Summary totals describe the entire
 ledger; appended counts describe the records subject to current validation.
 The portable consistency law then requires exact receipt/result equality.
