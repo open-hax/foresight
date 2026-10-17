@@ -529,3 +529,12 @@
   spore: none
   receipt-refs: 7a121bd181d56237fcd34677f902aaf8ff44740edcb9bf0b74a8499da3df20e5
   note: Reused the exact suggested regex correction after four causal owning assertions failed; 102 tests and 586 assertions now pass, with zero lint warnings. Preserve the isolated nested-reader rejection and do not infer an accepted ID collision from two nil diagnostic IDs. Existing receipts remain immutable; new-head hosted review remains required.
+- ts: 2026-10-17T07:05:25.596215338Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: Fix PR35 late adopted-child cleanup after leader reaping and clarify append adapter documentation
+  p-efficiency: 0.90
+  p-friction: 0.30
+  p-skill-candidate: 0.25
+  spore: none
+  receipt-refs: 921d2fb02c2c9260c3c678291f1b7f814696393e49f7c2d05777333922d7aea9
+  note: Use Popen.returncode to avoid waitid after a leader is reaped while continuing strict late-descendant drain. Deterministic actual cleanup control mocks all process/signal effects and produces three causal failures before the guard; full owning suite then passes103tests593assertions with zero errors/failures, registered lint zero warnings. Keep real detached and INT/TERM controls, old failed traces and current-head review obligations; no spore or policy change.
