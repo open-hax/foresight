@@ -2662,6 +2662,45 @@
   (is (= 4 (cli/result-exit {:result/outcome :blocked})))
   (is (zero? (cli/result-exit {:result/outcome :not-applicable}))))
 
+(deftest receipt-identities-refuse-unpaired-surrogates
+  (let [a (js/String.fromCharCode 0xD800)
+        b (js/String.fromCharCode 0xD801)]
+    (is (not= a b) "the rejected inputs are distinct before UTF-8 encoding")
+    (doseq [value [a b (js/String.fromCharCode 0xDC00)
+                   (str "prefix" a "suffix")]]
+      (doseq [record [{:note value} {value :as-key}
+                      {:nested [value]} {:nested (list value)}
+                      {:nested #{value}} {:note (keyword value)}
+                      {:note (symbol value)}]]
+        (is (thrown-with-msg? js/Error #"unpaired UTF-16 surrogate"
+                             (cli/record-id record)))))
+    (is (= "b73d297c0898a616b797a242f06370d4c94dd77556b737c4e8aab15839d8a4ad"
+           (cli/record-id {:note "😀"}))
+        "a valid surrogate pair keeps its existing content ID")
+    (is (string? (cli/record-id {:note "�"})))
+    (is (thrown-with-msg? js/Error #"unpaired UTF-16 surrogate"
+                         (cli/encode-edn-line! {:note a})))
+    (is (thrown-with-msg? js/Error #"unpaired UTF-16 surrogate"
+                         (cli/read-receipt-records! "{:note \"\\uD800\"}\n")))))
+
+(deftest migration-does-not-equate-distinct-malformed-unicode-records
+  (let [a (cljs.reader/read-string "{:note \"\\uD800\"}")
+        b (cljs.reader/read-string "{:note \"\\uD801\"}")
+        legacy-path ".ημ/receipts.edn"
+        base {:segment/path legacy-path :segment/legacy? true
+              :segment/bytes (js/Buffer.from "{:note \"\\uD800\"}\n" "utf8")
+              :segment/records [a]}
+        empty-legacy {:segment/path legacy-path :segment/legacy? true
+                      :segment/bytes (js/Buffer.from "" "utf8")
+                      :segment/records []}
+        successor {:segment/path "2026-10-17T050000Z-malformed.edn"
+                   :segment/records [b]}]
+    (is (not= a b))
+    (is (thrown-with-msg?
+         js/Error #"unpaired UTF-16 surrogate"
+         (cli/ledger-extension-records! [base] [empty-legacy successor]))
+        "UTF-8 replacement must not make a dropped base fact look retained")))
+
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
 
