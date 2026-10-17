@@ -1392,6 +1392,28 @@
           "{:ts #inst \"2026-01-01T00:00:00.001Z\"}\n"))
       "millisecond precision remains accepted"))
 
+(deftest receipt-tagged-discard-checks-the-active-instant
+  ;; A discarded tagged form includes its string operand. Exactness belongs
+  ;; to the surviving outer #inst, never the discarded inner timestamp.
+  (let [active "2026-01-01T00:00:00.0001Z"
+        text (str "{:ts #inst #_ #inst \"2026-01-01T00:00:00Z\" \""
+                  active "\"}\n")]
+    (is (= [active] (cli/edn-inst-strings text))
+        "the scanner must skip the whole tagged discard")
+    (is (thrown-with-msg?
+         js/Error #"Receipt River tagged instants must round-trip exactly"
+         (cli/read-receipt-records! text))
+        "the exactness guard rejects the surviving sub-millisecond instant"))
+  (let [active "2026-01-01T00:00:00.001Z"
+        text (str "{:ts #inst #_ #inst \"2026-01-01T00:00:00.0001Z\" \""
+                  active "\"}\n")]
+    (is (= [active] (cli/edn-inst-strings text))
+        "a discarded sub-millisecond timestamp is not the active tag")
+    (is (= :accepted
+           (try (cli/require-exact-receipt-tags! text) :accepted
+                (catch :default _ :rejected)))
+        "the exactness guard accepts the surviving millisecond instant")))
+
 (deftest receipt-inst-text-inside-strings-is-not-a-tag
   ;; The exactness check lexes EDN like the number check: `#inst` text that
   ;; ends a string value is not a tag, so it must not pair the string's
