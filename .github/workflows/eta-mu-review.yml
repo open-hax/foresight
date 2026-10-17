@@ -14,7 +14,7 @@ jobs:
   review:
     name: Evidence-first review (eta-mu)
     # The reviewed paging contract avoids OpenCode Read's per-line truncation.
-    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@4eaa34d18b5e07d9f26f0ebe4d20cf7e65ef9a41
+    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@7112c36440d180ca183d6a3f89661cee161fdae5
     with:
       pr_head_sha: ${{ github.event.pull_request.head.sha }}
       muse_revision: c1369c223cf3c57e3e31934a6d746bfcdfe73f5a
