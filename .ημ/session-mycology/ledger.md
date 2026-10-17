@@ -556,3 +556,12 @@
   spore: none
   receipt-refs: 696c667f3f3aa8fd981c975b5eb05f977cd9dae57998159f62dac14b807fbbc9
   note: Native current6871 CodeRabbit full20 review5557141989 identified body item ddd43f7e2b9fb7def1778d81. Remove exactly two unused Node helpers and one obsolete test with-redefs wrapper; preserve complete live spawn-result/Python custody path, both Python adapters and every existing assertion. Independent root source peer verified committed preimages and exact mechanical deletion. Same complete owning suite passes104tests611assertions0fail0error with normal subreaper cleanup; registered lint errors0warnings0 and diffcheck0. Dead-code deletion warrants no artificial causalRED or duplicated test. Preserve all old receipts and reflection prefix; write one new canonical receipt segment. Current6871 hosted first grep failure and ongoing second review remain dated and supply no new-head approval. No merge/deployment claim and no new spore.
+- ts: 2026-10-17T10:29:35.101944654Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: Repair PR35 adjacent-discard precision admission and segment migration wording
+  p-efficiency: 0.92
+  p-friction: 0.24
+  p-skill-candidate: 0.15
+  spore: none
+  receipt-refs: a17d96ba286b20dc08f82a21b70a1da49a6d70c7e5a1d4fe74b69bb16026b975
+  note: Actual current2391 CodeRabbit review5557330045 two findings verified: adjacent #_x fused by scanner and legacy migration prose overgeneralized immutability. Actual pure NBB diagnostics establish reader-to-ID precision collision for distinct0001/0002 instants, without claiming valid envelope append/promotion. Ordinary test-only351e95b2 produced105tests617assertions5causalFAIL0errors; exact source85243450 passed same105/617/0/0, full registered staticlint0errors0warnings and diffcheck0, all native cleanup qualified. Dedicated reader-prefix branch preserves corpus; two prose phrases match one-record segment law; existing accepted4eaa caller180 yields75min per invocation with full coverage and canonical recovery limits unchanged. Prior2391 partial33of44 deadline/acceptednull remains immutable. agents7fd retained until canonical39 actual adoption. Append one current canonical receipt segment and preserve every old receipt and SM prefix. No new spore, hosted current-head approval, merge or deployment claim.
