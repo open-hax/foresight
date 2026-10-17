@@ -177,7 +177,7 @@
   "True for an EDN tagged-literal dispatch token such as `#inst` or
   `#uuid`. Not `#_` (discard) and not symbolic `##Inf`."
   [value]
-  (boolean (and (string? value) (re-matches #"#[A-Za-z][^\"\\s]*" value))))
+  (boolean (and (string? value) (re-matches #"#[A-Za-z][^\"\s]*" value))))
 
 (defn- edn-skip-form
   "Index after one complete EDN form starting at `idx` in `lexemes`.
