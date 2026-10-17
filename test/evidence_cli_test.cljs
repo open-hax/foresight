@@ -1945,7 +1945,7 @@
               (fs/writeFileSync file "{:kind :observation}\n" "utf8")
               passed-result)
             #"does not preserve the committed ledger" true]
-           [(fn [{:keys [segments file]}]
+           [(fn [{:keys [segments]}]
               ;; Schema-valid forged segment plus a stray file: revalidation
               ;; throws, and quarantine must retain the lock.
               (fs/writeFileSync (path/join segments "2026-10-13T000001000Z-forged.edn")
@@ -2003,7 +2003,7 @@
   ;; row into a segment and the legacy file returns to the org bytes; the
   ;; result verifies against BOTH bases, and later syncs merge cleanly.
   (with-historical-ledger-fixture true
-    (fn [{:keys [base base-text current commit!]}]
+    (fn [{:keys [base-text current commit!]}]
       (let [org-row (assoc current :ts "2026-10-02T00:00:00Z" :host "org")
             fork-row (assoc current :ts "2026-10-02T00:00:01Z" :host "fork")
             org-text (str base-text (pr-str org-row) "\n")
@@ -2159,7 +2159,7 @@
 (deftest evidence-append-preserves-history-and-validates-uncommitted-suffix
   (doseq [terminal-newline? [true false]]
     (with-historical-ledger-fixture terminal-newline?
-      (fn [{:keys [base base-text file segments]}]
+      (fn [{:keys [base-text file segments]}]
         ;; A second writer must accept the first writer's uncommitted segment.
         (let [first-receipt (cli/append-evidence-receipt! passed-result)
               second-receipt (cli/append-evidence-receipt!
@@ -2703,5 +2703,84 @@
 
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
+
+
+(defn owned-controller-observation [controller args]
+  ;; Each controller has a fresh subreaper which reaps adopted baseline fixtures
+  ;; while their exact PID/start-bound cleanup waits are still running.
+  (let [result (child-process/spawnSync
+                 "python3"
+                 (clj->js (into [(path/join cli/root "test" "fixtures"
+                                            "owned-process-supervisor.py")
+                                "--timeout-ms" "50000"
+                                "--max-output-bytes" "65536"
+                                "--cleanup-ms" "10000" "--"
+                                (.-execPath js/process) "-e" controller]
+                               args))
+                 #js {:encoding "utf8" :shell false :timeout 65000})]
+    (when-not (and (nil? (.-error result)) (= 0 (.-status result)))
+      (throw (ex-info "Owned controller supervisor failed to return"
+                      {:status (.-status result) :stderr (.-stderr result)})))
+    (let [capture (js->clj (js/JSON.parse (str/trim (.-stdout result)))
+                          :keywordize-keys true)]
+      (when-not (and (= 0 (:exit-code capture))
+                     (= "exited" (:termination capture))
+                     (true? (:cleanup-complete? capture))
+                     (false? (:timed-out? capture))
+                     (false? (:capture-truncated? capture)))
+        (throw (ex-info "Owned controller custody did not complete normally"
+                        {:capture capture})))
+      (js->clj (js/JSON.parse (str/trim (:output capture)))
+               :keywordize-keys true))))
+
+(def gate-custody-controller
+  "Real child-process controls; readiness precedes every causal assertion."
+  "const fs=require('fs'),os=require('os'),path=require('path'),cp=require('child_process');\nconst mode=process.argv[1],root=process.argv[2],nbb=process.argv[3];\nconst dir=fs.mkdtempSync(path.join(os.tmpdir(),'foresight-custody-'));\nconst leafFile=path.join(dir,'leaf.json'),gateFile=path.join(dir,'gate.json');\nconst identity=p=>{try{const s=fs.readFileSync('/proc/'+p+'/stat','utf8');return {pid:p,start:s.slice(s.lastIndexOf(')')+1).trim().split(/\\s+/)[19]};}catch(e){if(e.code==='ENOENT'||e.code==='ESRCH')return null;throw e;}};\nconst same=x=>{const y=x&&identity(x.pid);return !!(y&&y.start===x.start);};\nconst read=p=>{try{return JSON.parse(fs.readFileSync(p,'utf8'));}catch(e){return null;}};\nconst wait=async(f,ms)=>{const end=Date.now()+ms;do{if(f())return true;await new Promise(r=>setTimeout(r,10));}while(Date.now()<end);return !!f();};\nconst leaf='const fs=require(\"fs\");const s=fs.readFileSync(\"/proc/self/stat\",\"utf8\");fs.writeFileSync('+JSON.stringify(leafFile)+',JSON.stringify({pid:process.pid,start:s.slice(s.lastIndexOf(\")\")+1).trim().split(/\\\\s+/)[19]}));setInterval(()=>{},1000);';\nconst gate='const fs=require(\"fs\"),cp=require(\"child_process\");const s=fs.readFileSync(\"/proc/self/stat\",\"utf8\");fs.writeFileSync('+JSON.stringify(gateFile)+',JSON.stringify({pid:process.pid,start:s.slice(s.lastIndexOf(\")\")+1).trim().split(/\\\\s+/)[19]}));const c=cp.spawn(process.execPath,[\"-e\",'+JSON.stringify(leaf)+'],{detached:true,stdio:\"ignore\"});c.unref();const end=Date.now()+10000;while(!fs.existsSync('+JSON.stringify(leafFile)+')){if(Date.now()>end)throw Error(\"owned leaf readiness timeout\");Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,10);}'+(mode==='escape'?'process.exit(0);':'setInterval(()=>{},1000);');\nconst expr=\"(require '[evidence :as e]) (e/spawn-result \"+JSON.stringify(dir)+' ['+JSON.stringify(process.execPath)+' \"-e\" '+JSON.stringify(gate)+']) nil';\nlet parent,leafID,gateID,closed=false,parentCode=null,parentSignal=null;\nconst out={ready:false,parentExited:false,signalDelivered:false,forcedParent:false,gateAbsent:false,leafAbsent:false};\n(async()=>{try{\n parent=cp.spawn(process.execPath,[nbb,'-cp',path.join(root,'scripts')+':'+path.join(root,'src'),'-e',expr],{cwd:root,stdio:['ignore','pipe','pipe']});\n parent.stdout.on('data',b=>process.stderr.write(b));parent.stderr.on('data',b=>process.stderr.write(b));\n parent.on('error',e=>{out.bootstrapError=String(e);closed=true;});\n parent.on('exit',(code,signal)=>{closed=true;parentCode=code;parentSignal=signal;});\n out.ready=await wait(()=>{leafID=read(leafFile);gateID=read(gateFile);return leafID&&gateID;},15000);\n if(out.ready&&mode!=='escape')out.signalDelivered=parent.kill(mode);\n out.parentExited=await wait(()=>closed,10000);\n out.gateAbsent=!!gateID&&await wait(()=>!same(gateID),4000);\n out.leafAbsent=!!leafID&&await wait(()=>!same(leafID),4000);\n out.parentCode=parentCode;out.parentSignal=parentSignal;\n }finally{\n  // Baseline assertions retain the pre-cleanup observations. Stop only these\n  // newly created, start-bound fixtures so a causal RED leaves no live child.\n  if(parent&&!closed){out.forcedParent=true;parent.kill('SIGKILL');if(!await wait(()=>closed,3000))throw Error('owned caller cleanup deadline');}\n  for(const x of [gateID,leafID])if(same(x)){try{process.kill(x.pid,'SIGKILL');}catch(e){if(e.code!=='ESRCH')throw e;}}\n  if(!await wait(()=>!same(gateID)&&!same(leafID),3000))throw Error('owned fixture cleanup deadline');\n  out.fixtureCleanup=true;\n  fs.rmSync(dir,{recursive:true,force:true});\n }\n console.log(JSON.stringify(out));\n})().catch(e=>{console.error(e);process.exitCode=2;});")
+
+(defn gate-custody-observation [mode]
+  (owned-controller-observation gate-custody-controller
+                                [mode cli/root (aget (.-argv js/process) 1)]))
+
+(deftest gate-redetached-descendant-is-gone-before-result-returns
+  (let [seen (gate-custody-observation "escape")]
+    (is (true? (:ready seen)) "actual gate and re-detached leaf reached readiness")
+    (is (true? (:parentExited seen)))
+    (is (= 0 (:parentCode seen)))
+    (is (false? (:forcedParent seen)))
+    (is (true? (:fixtureCleanup seen)))
+    (is (true? (:gateAbsent seen)))
+    (is (true? (:leafAbsent seen)) "setsid-equivalent Node detached child is gone")))
+
+(deftest interrupted-receipt-caller-leaves-no-running-gate-or-escaped-leaf
+  (doseq [mode ["SIGINT" "SIGTERM"]]
+    (let [seen (gate-custody-observation mode)]
+      (is (true? (:ready seen)) "actual gate and re-detached leaf reached readiness")
+      (is (true? (:signalDelivered seen)))
+      (is (true? (:parentExited seen)))
+      (is (false? (:forcedParent seen)))
+      (is (true? (:fixtureCleanup seen)))
+      (is (or (= mode (:parentSignal seen))
+              (= (if (= mode "SIGINT") 130 143) (:parentCode seen))))
+      (is (true? (:gateAbsent seen)) "targeted caller interruption closes its gate")
+      (is (true? (:leafAbsent seen)) "targeted caller interruption closes escaped leaf"))))
+
+(def spawn-error-controller
+  "Patch the native export before evidence loads; no helper or gate is started."
+  "const fs=require('fs'),os=require('os'),path=require('path'),cp=require('child_process');\nconst code=process.argv[1],pidMode=process.argv[2],root=process.argv[3],nbb=process.argv[4];\nconst dir=fs.mkdtempSync(path.join(os.tmpdir(),'foresight-spawn-error-'));\nconst preload=path.join(dir,'spawn-error.cjs');\ntry{\n const pid=pidMode==='positive'?321:undefined;\n const injected=\"const cp=require('child_process'),original=cp.spawnSync;globalThis.__foresightSpawnStubCalls=0;cp.spawnSync=function(command,...args){if(command==='python3'||command==='fixture-gate-stub'){globalThis.__foresightSpawnStubCalls++;const error=Object.assign(new Error('controlled spawn transport error'),{code:\"+JSON.stringify(code)+\"});return {pid:\"+(pid===undefined?'undefined':pid)+\",status:null,signal:null,error,output:[]};}return original.call(this,command,...args);};\";\n fs.writeFileSync(preload,injected);\n const expr=\"(require '[evidence :as e]) (let [seen (try (let [r (with-redefs [e/contain-gate-descendants! (fn [_pid] true)] (e/spawn-result (js/process.cwd) [\\\"fixture-gate-stub\\\"]))] #js {:outcome \\\"unavailable\\\" :errorCode (some-> r .-error .-code)}) (catch :default error #js {:outcome \\\"threw\\\" :quarantine (true? (:receipt-river/quarantine (ex-data error)))}))] (aset seen \\\"stubCalls\\\" (aget js/globalThis \\\"__foresightSpawnStubCalls\\\")) (js/console.log (js/JSON.stringify seen))) nil\";\n const r=cp.spawnSync(process.execPath,['-r',preload,nbb,'-cp',path.join(root,'scripts')+':'+path.join(root,'src'),'-e',expr],{cwd:root,encoding:'utf8',timeout:15000});\n if(r.error||r.status!==0||r.stderr.trim())throw Error('controlled NBB spawn-error fixture did not complete normally');\n const seen=JSON.parse(r.stdout.trim());\n if(seen.stubCalls!==1)throw Error('controlled spawn interception was not reached exactly once');\n console.log(JSON.stringify(seen));\n}finally{fs.rmSync(dir,{recursive:true,force:true});}\n")
+
+(deftest spawn-transport-errors-retain-receipt-quarantine
+  (doseq [[code pid-mode] [["ENOBUFS" "positive"] ["EUNKNOWN" "missing"]]]
+    (let [seen (owned-controller-observation
+                 spawn-error-controller
+                 [code pid-mode cli/root (aget (.-argv js/process) 1)])]
+      (is (= 1 (:stubCalls seen)))
+      (is (= {:outcome "threw" :quarantine true :stubCalls 1} seen)
+          "unknown or post-start spawn failure is receipt quarantine"))))
+
+(deftest proven-preexec-python-unavailability-remains-unavailable
+  (let [seen (owned-controller-observation
+               spawn-error-controller
+               ["ENOENT" "missing" cli/root (aget (.-argv js/process) 1)])]
+    (is (= {:outcome "unavailable" :errorCode "ENOENT" :stubCalls 1} seen))))
 
 (test/run-tests 'evidence-cli-test)
