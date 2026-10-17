@@ -2884,4 +2884,75 @@
       (is (zero? (:afterReapProbes seen))
           "a reaped leader is never passed to waitid again"))))
 
+(def proc-children-preflight-controller
+  "Exercise both actual setup functions with controlled proc and kernel effects."
+  (str/join "\n"
+    [     "import importlib.util, json, os, sys"
+     "from types import SimpleNamespace"
+     "from unittest.mock import patch"
+     "spec = importlib.util.spec_from_file_location('custody_preflight_under_test', sys.argv[1])"
+     "module = importlib.util.module_from_spec(spec)"
+     "spec.loader.exec_module(module)"
+     "observed = {}"
+     "for mode in ['missing', 'empty', 'occupied', 'denied']:"
+     "    effects = []"
+     "    class ProcPath:"
+     "        def __init__(self, value): self.value = str(value)"
+     "        def is_dir(self): return self.value == '/proc/self/task'"
+     "        def iterdir(self): return [ProcPath(self.value + '/' + str(os.getpid()))]"
+     "        def __truediv__(self, name): return ProcPath(self.value + '/' + name)"
+     "        def read_text(self):"
+     "            assert self.value.endswith('/children'), 'unexpected proc read'"
+     "            if mode == 'missing': raise FileNotFoundError('controlled missing children')"
+     "            if mode == 'denied': raise PermissionError('controlled denied children')"
+     "            return '731' if mode == 'occupied' else ''"
+     "    def pidfd(pid):"
+     "        effects.append('pidfd')"
+     "        return 771"
+     "    def close(fd):"
+     "        assert fd == 771"
+     "        effects.append('close')"
+     "    def prctl(operation, *args):"
+     "        effects.append('prctl:' + str(operation))"
+     "        if operation == 37: args[0]._obj.value = 1"
+     "        return 0"
+     "    # All proc reads and kernel-affecting pidfd/prctl/close operations are"
+     "    # intercepted. No fake PID/fd reaches the operating system."
+     "    with patch.object(module, 'Path', ProcPath),          patch.object(module, 'process_identity', return_value={'start': 1}),          patch.object(module.os, 'pidfd_open', side_effect=pidfd),          patch.object(module.os, 'close', side_effect=close),          patch.object(module.ctypes, 'CDLL', return_value=SimpleNamespace(prctl=prctl)):"
+     "        try:"
+     "            module.enable_subreaper()"
+     "            result = {'outcome': 'ready', 'errorType': None, 'error': None}"
+     "        except OSError as error:"
+     "            result = {'outcome': 'refused', 'errorType': type(error).__name__, 'error': str(error)}"
+     "        except RuntimeError as error:"
+     "            result = {'outcome': 'refused', 'errorType': type(error).__name__, 'error': str(error)}"
+     "    observed[mode] = dict(result, kernelEffects=effects)"
+     "print(json.dumps(observed))"]))
+
+(deftest missing-proc-children-refuses-before-custody
+  (doseq [relative ["scripts/lib/owned-gate-process.py"
+                    "test/fixtures/owned-process-supervisor.py"]]
+    (let [result (child-process/spawnSync
+                   "python3"
+                   (clj->js ["-B" "-c" proc-children-preflight-controller
+                             (path/join cli/root relative)])
+                   #js {:encoding "utf8" :shell false :timeout 10000})]
+      (when-not (and (nil? (.-error result)) (= 0 (.-status result))
+                     (str/blank? (.-stderr result)))
+        (throw (ex-info "Controlled proc-children preflight did not execute normally"
+                        {:status (.-status result) :stderr (.-stderr result)})))
+      (let [seen (js->clj (js/JSON.parse (.-stdout result)) :keywordize-keys true)]
+        (is (= "refused" (get-in seen [:missing :outcome])) relative)
+        (is (empty? (get-in seen [:missing :kernelEffects]))
+            "missing child evidence is refused before kernel custody effects")
+        (is (str/includes? (or (get-in seen [:missing :error]) "")
+                           "CONFIG_PROC_CHILDREN") relative)
+        (is (= "ready" (get-in seen [:empty :outcome])) relative)
+        (is (= ["pidfd" "close" "prctl:36" "prctl:37"]
+               (get-in seen [:empty :kernelEffects])) relative)
+        (is (= "refused" (get-in seen [:occupied :outcome])) relative)
+        (is (empty? (get-in seen [:occupied :kernelEffects])) relative)
+        (is (= "refused" (get-in seen [:denied :outcome])) relative)
+        (is (empty? (get-in seen [:denied :kernelEffects])) relative)))))
+
 (test/run-tests 'evidence-cli-test)
