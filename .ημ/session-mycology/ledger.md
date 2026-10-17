@@ -520,3 +520,12 @@
   spore: none
   receipt-refs: sha256:d4797e6266c855050201b2e148e65d78f6c183230650ee750fd9c88f412d3061
   note: Wait every captured owned intermediate through exit; quarantine unknown post-start spawn errors; preserve malformed-Unicode causal controls and immutable history. Actual172CLJS tests/1100assertions plus27migration tests pass; native review and deployment remain separate.
+- ts: 2026-10-17T06:13:33.507181590Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: Fix PR35 active-instant prevalidation after tagged discards
+  p-efficiency: 0.85
+  p-friction: 0.35
+  p-skill-candidate: 0.30
+  spore: none
+  receipt-refs: 7a121bd181d56237fcd34677f902aaf8ff44740edcb9bf0b74a8499da3df20e5
+  note: Reused the exact suggested regex correction after four causal owning assertions failed; 102 tests and 586 assertions now pass, with zero lint warnings. Preserve the isolated nested-reader rejection and do not infer an accepted ID collision from two nil diagnostic IDs. Existing receipts remain immutable; new-head hosted review remains required.
