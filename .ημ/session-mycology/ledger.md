@@ -565,3 +565,12 @@
   spore: none
   receipt-refs: a17d96ba286b20dc08f82a21b70a1da49a6d70c7e5a1d4fe74b69bb16026b975
   note: Actual current2391 CodeRabbit review5557330045 two findings verified: adjacent #_x fused by scanner and legacy migration prose overgeneralized immutability. Actual pure NBB diagnostics establish reader-to-ID precision collision for distinct0001/0002 instants, without claiming valid envelope append/promotion. Ordinary test-only351e95b2 produced105tests617assertions5causalFAIL0errors; exact source85243450 passed same105/617/0/0, full registered staticlint0errors0warnings and diffcheck0, all native cleanup qualified. Dedicated reader-prefix branch preserves corpus; two prose phrases match one-record segment law; existing accepted4eaa caller180 yields75min per invocation with full coverage and canonical recovery limits unchanged. Prior2391 partial33of44 deadline/acceptednull remains immutable. agents7fd retained until canonical39 actual adoption. Append one current canonical receipt segment and preserve every old receipt and SM prefix. No new spore, hosted current-head approval, merge or deployment claim.
+- ts: 2026-10-17T10:44:09.437793950Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: Consume protected canonical .agents39 through the existing PR35 caller pin
+  p-efficiency: 0.95
+  p-friction: 0.12
+  p-skill-candidate: 0.10
+  spore: none
+  receipt-refs: b54b9b4e3d1eb4a5e1e19e88140211096060088134def5e13b1cd905229d5c51
+  note: Native .agents39 MERGED7ab at10:40:51, independent parents e391+157/treea552 verified before changing only agents_revision7fd→7ab in existing accepted ETA4eaa Foresightcaller. Source919ddd17 preserves180minute job budget/Muse/OpenCode version/anonymousdynamicmodeldiscovery/allgates/permissions. Product/test/CLI source stays exact previously qualified105/617GREEN; no duplicatepuretest or new-head hostedcredit. Old5166 automaticreview39025420560 remains sourcebound and may be superseded after ordinarypublication. Keep all receipts and SM prefix; one new canonicalsegment, no new spore, no approval/merge/deploy claim. Actual newheadcatalog/fullinput/consumer/publication qualification remains required.
