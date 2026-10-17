@@ -511,3 +511,12 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-17T05:25:20.279205783Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: Repair PR35 detached process custody, parent interruption and Unicode record identity
+  p-efficiency: 0.67
+  p-friction: 0.74
+  p-skill-candidate: 0.40
+  spore: none
+  receipt-refs: sha256:d4797e6266c855050201b2e148e65d78f6c183230650ee750fd9c88f412d3061
+  note: Wait every captured owned intermediate through exit; quarantine unknown post-start spawn errors; preserve malformed-Unicode causal controls and immutable history. Actual172CLJS tests/1100assertions plus27migration tests pass; native review and deployment remain separate.
