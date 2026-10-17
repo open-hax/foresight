@@ -3001,4 +3001,116 @@
         (is (= "refused" (get-in seen [:denied :outcome])) relative)
         (is (empty? (get-in seen [:denied :kernelEffects])) relative)))))
 
+
+(def first-cleanup-zombie-controller
+  "Inject a late zombie or live child after main-loop reaping; mock kernel effects."
+  (str/join "\n"
+    ["import importlib.util, json, os, sys"
+     "from types import SimpleNamespace"
+     "from unittest.mock import patch"
+     "spec = importlib.util.spec_from_file_location('supervisor_cleanup_under_test', sys.argv[1])"
+     "gate = importlib.util.module_from_spec(spec)"
+     "spec.loader.exec_module(gate)"
+     "observations = {}"
+     "for mode in ['zombie', 'live']:"
+     "    state = {'injected': False, 'pending': False, 'reaped': False,"
+     "             'killed': False, 'signals': [], 'waitCalls': 0, 'closed': False}"
+     "    class Pipe:"
+     "        def close(self): pass"
+     "    class Process:"
+     "        pid = 771"
+     "        returncode = None"
+     "        stdout = Pipe()"
+     "        def wait(self, timeout):"
+     "            self.returncode = 0"
+     "            return 0"
+     "    process = Process()"
+     "    class Owned:"
+     "        leader_retained = True"
+     "        def __init__(self, pid): assert pid == process.pid"
+     "        def discover(self): pass"
+     "        def reap_nonleader(self): pass"
+     "        def live_descendants(self): return []"
+     "        def close(self): state['closed'] = True"
+     "    class Capture:"
+     "        eof = True"
+     "        truncated = False"
+     "        data = b''"
+     "        def __init__(self, pipe, limit): assert pipe is process.stdout"
+     "        def drain(self, _seconds): pass"
+     "        def close(self): pass"
+     "    def children(pid):"
+     "        assert pid == os.getpid()"
+     "        return {772} if state['pending'] else set()"
+     "    def identity(pid):"
+     "        assert pid == 772"
+     "        return {'start': 1, 'parent': os.getpid(), 'group': 772,"
+     "                'state': 'Z' if mode == 'zombie' or state['killed'] else 'S'}"
+     "    def leader_exit(pid):"
+     "        assert pid == process.pid and process.returncode is None"
+     "        # This owned child exits after the main-loop reap, before leader exit"
+     "        # is observed. The live control models an undiscovered late child."
+     "        if not state['injected']:"
+     "            state['injected'] = state['pending'] = True"
+     "        return SimpleNamespace(si_code=os.CLD_EXITED, si_status=0)"
+     "    def waitpid(pid, flags):"
+     "        assert pid == 772 and flags == os.WNOHANG"
+     "        state['waitCalls'] += 1"
+     "        if mode == 'zombie' or state['killed']:"
+     "            state['pending'] = False"
+     "            state['reaped'] = True"
+     "            return pid, 0"
+     "        return 0, 0"
+     "    def kill(pid, sig):"
+     "        assert pid == 772 and sig == gate.signal.SIGKILL"
+     "        state['signals'].append('child')"
+     "        state['killed'] = True"
+     "    def killpg(pid, sig):"
+     "        assert pid == process.pid and sig == gate.signal.SIGKILL"
+     "        state['signals'].append('group')"
+     "    # Execute actual supervise and actual reap_adopted_children. Every fake"
+     "    # process identity/signal/wait is intercepted; none reaches the kernel."
+     "    with patch.multiple(gate, enable_subreaper=lambda: None, OwnedChildren=Owned,"
+     "                        Capture=Capture, direct_children=children,"
+     "                        process_identity=identity, leader_exit=leader_exit), \\"
+     "         patch.object(gate.subprocess, 'Popen', return_value=process) as spawn, \\"
+     "         patch.object(gate.os, 'waitpid', side_effect=waitpid), \\"
+     "         patch.object(gate.os, 'kill', side_effect=kill), \\"
+     "         patch.object(gate.os, 'killpg', side_effect=killpg), \\"
+     "         patch.object(gate.signal, 'signal', return_value=gate.signal.SIG_DFL):"
+     "        result = gate.supervise(['controlled-no-spawn'], 1000, cleanup_ms=1000)"
+     "        assert spawn.call_count == 1"
+     "        state['childrenAbsent'] = not children(os.getpid())"
+     "    observations[mode] = {'result': result, **state}"
+     "print(json.dumps(observations))"]))
+
+(deftest first-cleanup-reaps-zombies-without-accepting-live-descendants
+  (let [result (child-process/spawnSync
+                 "python3"
+                 (clj->js ["-B" "-c" first-cleanup-zombie-controller
+                           (path/join cli/root "test" "fixtures"
+                                      "owned-process-supervisor.py")])
+                 #js {:encoding "utf8" :shell false :timeout 10000})]
+    (when-not (and (nil? (.-error result)) (= 0 (.-status result))
+                   (str/blank? (.-stderr result)))
+      (throw (ex-info "Controlled first-cleanup race did not execute normally"
+                      {:status (.-status result) :stderr (.-stderr result)})))
+    (let [seen (js->clj (js/JSON.parse (.-stdout result)) :keywordize-keys true)]
+      (doseq [mode [:zombie :live]]
+        (is (true? (get-in seen [mode :injected])))
+        (is (true? (get-in seen [mode :reaped])))
+        (is (true? (get-in seen [mode :childrenAbsent])))
+        (is (true? (get-in seen [mode :closed])))
+        (is (true? (get-in seen [mode :result :cleanup-complete?])))
+        (is (= 0 (get-in seen [mode :result :exit-code]))))
+      (is (= "exited" (get-in seen [:zombie :result :termination])))
+      (is (str/blank? (get-in seen [:zombie :result :diagnostic])))
+      (is (empty? (get-in seen [:zombie :signals]))
+          "an exited adopted zombie is reaped without signalling")
+      (is (= "cleanup-error" (get-in seen [:live :result :termination])))
+      (is (str/includes? (get-in seen [:live :result :diagnostic])
+                         "late owned descendants"))
+      (is (= ["group" "child"] (get-in seen [:live :signals]))
+          "a genuinely live late child is still refused and cleaned"))))
+
 (test/run-tests 'evidence-cli-test)
