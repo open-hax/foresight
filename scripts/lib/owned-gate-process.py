@@ -54,6 +54,11 @@ def enable_subreaper():
         raise RuntimeError("Linux subreaper, pidfd, and waitid support required")
     if not process_identity(os.getpid()) or not Path("/proc/self/task").is_dir():
         raise RuntimeError("Readable Linux /proc child custody required")
+    try:
+        Path(f"/proc/self/task/{os.getpid()}/children").read_text()
+    except OSError as error:
+        raise RuntimeError(
+            "Linux /proc task children (CONFIG_PROC_CHILDREN) required") from error
     if direct_children(os.getpid()):
         raise RuntimeError("Supervisor must start without pre-existing children")
     probe = os.pidfd_open(os.getpid())
