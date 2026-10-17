@@ -601,3 +601,12 @@
   spore: none
   receipt-refs: 0aeb5f369765438fada94b75f32e7b3f552b18d6928134d6b7e0322034e1aa9b
   note: Verified current CR5557922511 roots4302786624/4302786630 with actual reader and complete-envelope controls: full owning RED106/635/12FAIL thenGREEN0/0, lint0E0W. Added actual segment lock diagnostic while retaining legacy paths and generic rejection; corrected historical timestamp ordering prose. Failed7cd review/stage-refusal remains unaccepted; new-head hosted gates/review still required. No automatic retry, provider/policy change, or deployment credit.
+- ts: 2026-10-17T14:28:59.962730272Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: Repair PR35 first-cleanup adopted-zombie classification without accepting live descendants
+  p-efficiency: 0.94
+  p-friction: 0.22
+  p-skill-candidate: 0.15
+  spore: none
+  receipt-refs: cd68361b501359465642af6b87d7b48095c614b3cfc0b6af5b3805db823e0621
+  note: Verified current9d native CodeRabbit5558192907 Minor4302997749: an adopted child can become a zombie after main-loop reaping but before first cleanup. Add exactly three fixture lines to reap exited adopted children with WNOHANG before classifying remaining children. The new real supervisor/reaper deterministic control intercepts every process/kernel effect, gives exactly three causal RED assertions, and preserves genuinely live late-child refusal/signalling/cleanup. Full owning107tests653assertions3FAIL0ERROR became0FAIL0ERROR, registeredlint0errors0warnings, all nativecaptures closed/normal. Test-only cb5dd249 and source91fb0726 remain separate. Preserve current9d genuinely accepted full47 MiMo APPROVED5558163234 as dated evidence only: successor needs fresh gates/review. Keep old receipts and all SM prefix, no spore, approval transfer, merge or deployment claim.
