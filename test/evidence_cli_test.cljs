@@ -2809,4 +2809,79 @@
                ["ENOENT" "missing" cli/root (aget (.-argv js/process) 1)])]
     (is (= {:outcome "unavailable" :errorCode "ENOENT" :stubCalls 1} seen))))
 
+(def reaped-leader-cleanup-controller
+  "Inject a late adopted child after wait; every process/signal effect is mocked."
+  (str/join "\n"
+    [     "import importlib.util, json, os, sys"
+     "from types import SimpleNamespace"
+     "from unittest.mock import patch"
+     "spec = importlib.util.spec_from_file_location('owned_gate_under_test', sys.argv[1])"
+     "gate = importlib.util.module_from_spec(spec)"
+     "spec.loader.exec_module(gate)"
+     "state = {'lateChildInjected': False, 'lateChildPending': False,"
+     "         'lateChildReaped': False, 'afterReapProbes': 0, 'closed': False}"
+     "class Process:"
+     "    pid = 771"
+     "    returncode = None"
+     "    def wait(self, timeout):"
+     "        self.returncode = 0"
+     "        return 0"
+     "process = Process()"
+     "class Owned:"
+     "    leader_retained = True"
+     "    def __init__(self, pid):"
+     "        assert pid == process.pid"
+     "    def discover(self): pass"
+     "    def reap_nonleader(self): pass"
+     "    def kill_owned(self): pass"
+     "    def live_descendants(self): return False"
+     "    def close(self): state['closed'] = True"
+     "def children(_pid):"
+     "    if process.returncode is not None and not state['lateChildInjected']:"
+     "        state['lateChildInjected'] = state['lateChildPending'] = True"
+     "    return {772} if state['lateChildPending'] else set()"
+     "def reap(_leader, _terminate):"
+     "    if state['lateChildPending']:"
+     "        state['lateChildPending'] = False"
+     "        state['lateChildReaped'] = True"
+     "def leader_exit(pid):"
+     "    assert pid == process.pid"
+     "    if process.returncode is not None:"
+     "        state['afterReapProbes'] += 1"
+     "        raise ChildProcessError('controlled already-reaped leader')"
+     "    return SimpleNamespace(si_code=os.CLD_EXITED, si_status=0)"
+     "# No process, signal, pidfd, parent-death or kill effect is allowed by this"
+     "# deterministic race control: it executes the actual cleanup state machine."
+     "with patch.multiple(gate, enable_subreaper=lambda: None,"
+     "                    arm_parent_death=lambda _parent: None, OwnedChildren=Owned,"
+     "                    direct_children=children, reap_adopted_children=reap,"
+     "                    leader_exit=leader_exit), \\"
+     "     patch.object(gate.subprocess, 'Popen', return_value=process) as spawn, \\"
+     "     patch.object(gate.os, 'getppid', return_value=42), \\"
+     "     patch.object(gate.signal, 'signal', return_value=gate.signal.SIG_DFL), \\"
+     "     patch.object(gate.time, 'sleep', return_value=None):"
+     "    outcome = gate.supervise_gate(['controlled-no-spawn'], 42)"
+     "    assert spawn.call_count == 1"
+     "print(json.dumps({'outcome': outcome, **state}))"]))
+
+(deftest reaped-leader-cleanup-drains-a-late-adopted-child
+  (let [result (child-process/spawnSync
+                 "python3"
+                 (clj->js ["-B" "-c" reaped-leader-cleanup-controller
+                           (path/join cli/root "scripts" "lib" "owned-gate-process.py")])
+                 #js {:encoding "utf8" :shell false :timeout 10000})]
+    (when-not (and (nil? (.-error result)) (= 0 (.-status result))
+                   (str/blank? (.-stderr result)))
+      (throw (ex-info "Controlled cleanup race did not execute normally"
+                      {:status (.-status result) :stderr (.-stderr result)})))
+    (let [seen (js->clj (js/JSON.parse (.-stdout result)) :keywordize-keys true)]
+      (is (true? (:lateChildInjected seen)))
+      (is (true? (:lateChildReaped seen)))
+      (is (true? (:closed seen)))
+      (is (= 0 (get-in seen [:outcome :status])))
+      (is (true? (get-in seen [:outcome :cleanupComplete])))
+      (is (nil? (get-in seen [:outcome :error])))
+      (is (zero? (:afterReapProbes seen))
+          "a reaped leader is never passed to waitid again"))))
+
 (test/run-tests 'evidence-cli-test)
