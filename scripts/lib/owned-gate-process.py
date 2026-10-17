@@ -256,7 +256,8 @@ def supervise_gate(command, expected_parent):
                     reap_adopted_children(process.pid, True)
                     if owned:
                         owned.reap_nonleader()
-                    exited = leader_exit(process.pid)
+                    exited = (process.returncode is not None
+                              or leader_exit(process.pid))
                     children = direct_children(os.getpid()) - {process.pid}
                     if exited and not children and (
                             not owned or not owned.live_descendants()):

@@ -128,12 +128,12 @@ immutable historical records and cannot attest a current promotion;
 relative to the reviewed base.
 
 The adapter currently requires Linux `/proc/self/fd` semantics. Gate execution also requires
-Python3.9+ with Linux subreaper, pidfd and waitid support. A fresh gate adapter
+Python 3.9+ with Linux subreaper, pidfd and waitid support. A fresh gate adapter
 retains every child identity, including descendants that create another session,
 and binds its lifetime to the calling receipt process. Gate stdout/stderr remain
 inherited; incomplete or interrupted custody quarantines the receipt reservation.
 The existing five-second child-cleanup bound does not impose a gate runtime cap.
-It holds a
+The append adapter holds a
 no-follow parent directory descriptor, rejects symbolic, multiply linked or
 executable ledger files (Git would record an executable file as a `100755`
 blob, which immutable review rejects), and serializes semantic writers in one checkout on
