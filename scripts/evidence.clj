@@ -1,6 +1,6 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 (ns evidence
-  (:require [cljs.core :refer [clj->js]]
+  (:require [cljs.core :refer [clj->js js->clj]]
             [cljs.reader :as reader]
             [clojure.string :as str]
             [foresight.evidence :as law]
@@ -468,6 +468,13 @@
                (receipt-blob-chunks object-ids sizes))))))
 
 
+(defn require-receipt-unicode!
+  "Refuse text that UTF-8 encoding would replace before hashing or writing."
+  [text]
+  (when-not (law/unicode-scalar-text? text)
+    (throw (js/Error. "Receipt River text contains an unpaired UTF-16 surrogate")))
+  text)
+
 (defn read-receipt-records! [contents]
   (->> (str/split-lines contents)
        (remove str/blank?)
@@ -476,7 +483,9 @@
           (try
             (require-exact-receipt-numbers! line)
             (require-exact-receipt-tags! line)
-            (read-single-edn! line "Receipt River record")
+            (let [record (read-single-edn! line "Receipt River record")]
+              (require-receipt-unicode! (pr-str record))
+              record)
             (catch :default error
               (throw (js/Error.
                       (str "Invalid Receipt River EDN at line " (inc index)
@@ -565,7 +574,7 @@
 (defn record-id
   "Stable content identity used to order and deduplicate merged records."
   [record]
-  (sha256 (pr-str (law/canonical-form record))))
+  (-> record law/canonical-form pr-str require-receipt-unicode! sha256))
 
 (defn read-segment-records! [segment-path bytes]
   (when (zero? (.-length bytes))
@@ -580,25 +589,25 @@
             (str "Receipt River segment must end with a newline: "
                  segment-path))))
   (let [contents (decode-utf8! bytes (str "Receipt River segment "
-                                          segment-path))]
-    (let [records (try
-                    (read-receipt-records! contents)
-                    (catch :default error
-                      (throw (js/Error. (str (.-message error) " in "
-                                             segment-path)))))]
-      (when-not (= 1 (count records))
+                                         segment-path))
+        records (try
+                  (read-receipt-records! contents)
+                  (catch :default error
+                    (throw (js/Error. (str (.-message error) " in "
+                                           segment-path)))))]
+    (when-not (= 1 (count records))
+      (throw (js/Error.
+              (str "Receipt River segment must contain exactly one record: "
+                   segment-path))))
+    ;; The segment contract is one physical line: the record, then its
+    ;; only newline. Blank lines and embedded carriage returns are not
+    ;; dropped silently (encode-edn-line! already rejects both).
+    (let [body (subs contents 0 (dec (count contents)))]
+      (when (or (str/includes? body "\n") (str/includes? body "\r"))
         (throw (js/Error.
-                (str "Receipt River segment must contain exactly one record: "
-                     segment-path))))
-      ;; The segment contract is one physical line: the record, then its
-      ;; only newline. Blank lines and embedded carriage returns are not
-      ;; dropped silently (encode-edn-line! already rejects both).
-      (let [body (subs contents 0 (dec (count contents)))]
-        (when (or (str/includes? body "\n") (str/includes? body "\r"))
-          (throw (js/Error.
-                  (str "Receipt River segment must hold exactly one physical line: "
-                       segment-path)))))
-      records)))
+                (str "Receipt River segment must hold exactly one physical line: "
+                     segment-path)))))
+    records))
 
 (defn segment-entry
   "A parsed segment. Only its content hash is kept, not its bytes, so a large
@@ -1095,23 +1104,55 @@
                            (js/Int32Array. (js/SharedArrayBuffer. 4)) 0 0 50)
                           (recur))))))))
 
-(defn spawn-result [cwd command]
-  ;; `detached` makes the gate the leader of its own process group (and
-  ;; session), so every descendant that stays in it can be killed once the
-  ;; gate exits.
-  (let [result (child-process/spawnSync
-                (first command)
-                (clj->js (rest command))
-                #js {:cwd cwd :encoding "utf8" :stdio "inherit" :shell false
-                     :detached true})]
-    (if (contain-gate-descendants! (.-pid result))
+(defn spawn-result
+  "Own the gate through a Linux subreaper; keep normal streams and gate status.
+   The fresh adapter retains detached descendants and observes caller death.
+   Missing/invalid custody or an interruption quarantines the held receipt."
+  [cwd command]
+  (let [adapter (path/join root "scripts" "lib" "owned-gate-process.py")
+        result (child-process/spawnSync
+                 "python3"
+                 (clj->js (into [adapter (str (.-pid js/process)) "--"] command))
+                 #js {:cwd cwd :encoding "utf8" :shell false
+                      :stdio #js ["inherit" "inherit" "inherit" "pipe"]
+                      :maxBuffer 65536})
+        launch-error (.-error result)
+        helper-pid (.-pid result)
+        unavailable? (and launch-error
+                          (contains? #{"ENOENT" "EACCES"} (.-code launch-error))
+                          (or (nil? helper-pid)
+                              (and (integer? helper-pid) (<= helper-pid 0))))]
+    ;; Only a proven pre-exec Python launch failure is ordinary unavailability.
+    ;; Unknown or post-start transport errors cannot establish gate custody.
+    (if unavailable?
       result
-      ;; Still-running descendants could mutate the ledger after release, so
-      ;; the reservation keeps its lock as a quarantine marker.
-      (throw (ex-info
-              (str "Gate descendants of " (first command)
-                   " survived SIGKILL; the gate result cannot be retained")
-              {:receipt-river/quarantine true})))))
+      (let [wire (some-> (.-output result) (aget 3))
+            custody (try
+                      (when (string? wire)
+                        (js->clj (js/JSON.parse wire) :keywordize-keys true))
+                      (catch :default _error nil))
+            status (:status custody)
+            signal (:signal custody)
+            pid (:pid custody)
+            error (:error custody)]
+        (when-not (and (nil? launch-error)
+                       (= 0 (.-status result))
+                       (map? custody)
+                       (true? (:cleanupComplete custody))
+                       (false? (:cancelled custody))
+                       (or (nil? status)
+                           (and (integer? status) (<= 0 status 255)))
+                       (or (nil? signal) (string? signal))
+                       (or (nil? pid) (and (integer? pid) (pos? pid)))
+                       (or (nil? error) (string? error))
+                       (or (some? status) (some? signal) (some? error)))
+          (throw (ex-info "Gate process custody was interrupted or incomplete"
+                          {:receipt-river/quarantine true})))
+        (set! (.-pid result) pid)
+        (set! (.-status result) status)
+        (set! (.-signal result) signal)
+        (set! (.-error result) (when error (js/Error. error)))
+        result))))
 
 (defn local-result [cwd gate]
   (let [result (spawn-result cwd (:gate/command gate))
@@ -1615,6 +1656,7 @@
 
 (defn encode-edn-line! [record]
   (let [line (pr-str record)]
+    (require-receipt-unicode! line)
     (when (or (str/includes? line "\n") (str/includes? line "\r"))
       (append-error! "receipt serialization must occupy exactly one physical line"))
     (require-exact-receipt-numbers! line)
