@@ -574,3 +574,12 @@
   spore: none
   receipt-refs: b54b9b4e3d1eb4a5e1e19e88140211096060088134def5e13b1cd905229d5c51
   note: Native .agents39 MERGED7ab at10:40:51, independent parents e391+157/treea552 verified before changing only agents_revision7fd→7ab in existing accepted ETA4eaa Foresightcaller. Source919ddd17 preserves180minute job budget/Muse/OpenCode version/anonymousdynamicmodeldiscovery/allgates/permissions. Product/test/CLI source stays exact previously qualified105/617GREEN; no duplicatepuretest or new-head hostedcredit. Old5166 automaticreview39025420560 remains sourcebound and may be superseded after ordinarypublication. Keep all receipts and SM prefix; one new canonicalsegment, no new spore, no approval/merge/deploy claim. Actual newheadcatalog/fullinput/consumer/publication qualification remains required.
+- ts: 2026-10-17T12:01:33.738074280Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: PR35 consume actually adopted machine-safe review-context workflow
+  p-efficiency: 0.86
+  p-friction: 0.32
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: 2026-10-17T120052571Z-ffc9fcdf6de0,14ece6e64d410c0b9386562e0f8601cad6434808bae84f8dd13c82d548686d97
+  note: Bind actual protected ETA7112/defaultref and its NUL-framed owned-context guard before advancing caller. Preserve e2a premodel refusal and all105/617 historical product evidence; new owning workspace24/122 and caller lint pass without replaying unchanged process corpus. Fresh whole-input hosted review remains required; no source/fullcandidate approval or deployment transfer. No spore created.
