@@ -538,3 +538,12 @@
   spore: none
   receipt-refs: 921d2fb02c2c9260c3c678291f1b7f814696393e49f7c2d05777333922d7aea9
   note: Use Popen.returncode to avoid waitid after a leader is reaped while continuing strict late-descendant drain. Deterministic actual cleanup control mocks all process/signal effects and produces three causal failures before the guard; full owning suite then passes103tests593assertions with zero errors/failures, registered lint zero warnings. Keep real detached and INT/TERM controls, old failed traces and current-head review obligations; no spore or policy change.
+- ts: 2026-10-17T08:15:54.302787076Z
+  session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
+  task: Repair PR35 missing proc children evidence before custody setup in both adapters
+  p-efficiency: 0.90
+  p-friction: 0.30
+  p-skill-candidate: 0.25
+  spore: none
+  receipt-refs: b853e735eb5ca8b70f52328462893e76e46c9f011124ee13ee73419e1bfd66f8
+  note: Read the current process task children file before any pidfd or prctl setup; unavailable child evidence must fail closed rather than fold to an empty descendant set. The actual two enable_subreaper/direct_children functions are exercised with controlled missing, empty, occupied and denied proc cases; all path and kernel effects are intercepted. Six genuine missing-evidence failures became full owning GREEN104tests611assertions0fail0error, registered lint0errors0warnings. Preserve original traces, canonical legacy/segments and all prior reflection bytes. Prior78 model attempt and live retry remain dated; no new-head hosted approval or merge/deployment claimed. No spore or policy change.
