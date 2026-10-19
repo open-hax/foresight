@@ -40,14 +40,19 @@ projection writes a manifest, and a receipt references it.
   - Tier-0 fragments are inlined.
   - Tier-1 fragments become pointers or skills.
   - Absolutes project by surface. `:pr-gate` becomes one line plus its gate,
-    `:interactive` keeps full prose, and `:runtime-hook` becomes a hook or full
-    prose.
+    `:runtime-hook` becomes a hook or full prose, and `:interactive` and
+    `:gap` keep full prose.
   - Unsupported declarations are reported, not dropped.
 - [ ] Exceeding the budget is a compile error, never a truncation.
 - [ ] The adapter writes the artifacts and the manifest; it lives next to
   `emit-agents!`.
 - [ ] Provenance markers go in HTML comments, which Claude Code strips before
   injection.
+- [ ] Each artifact ends with a visible `contract-sentinel: <nonce>` line. The
+  nonce is random per build and recorded as `:projection/sentinel` in the
+  manifest, together with `:effective-contract/hash`. A harness that can
+  echo the nonce loaded the file through its end, so the file was not
+  truncated.
 
 ## Non-goals
 
@@ -68,7 +73,8 @@ projection writes a manifest, and a receipt references it.
   manifest marks it `:included`.
 - [ ] GIVEN absolutes of each surface WHEN projected THEN:
   - each `:pr-gate` absolute appears as one line naming its gate;
-  - each `:interactive` absolute appears in full, uncompressed;
+  - each `:interactive` and each `:gap` absolute appears in full,
+    uncompressed;
   - each `:runtime-hook` absolute appears as a hook where the profile supports
     one, and in full otherwise.
 - [ ] GIVEN a declaration the target cannot carry WHEN projected THEN the build

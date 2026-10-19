@@ -65,8 +65,9 @@ file and the hash of the lineage copy it came from.
 - [ ] GIVEN the fragment set WHEN each directive and rule from both lineages is
   traced THEN each one is either present in exactly one fragment or listed as
   dropped with a reason.
-- [ ] GIVEN the fragments WHEN parsed with the EDN reader THEN every file
-  reads, and the fragment ids are unique.
+- [ ] GIVEN the fragments WHEN parsed to end of file with the EDN reader THEN
+  every file contains exactly one top-level `(fragment …)` form and nothing
+  else, and the fragment ids are unique.
 - [ ] GIVEN the tier-0 fragments WHEN their bytes are counted THEN the count is
   recorded as the baseline for LOC.07 budgets.
 
@@ -77,11 +78,17 @@ set -euo pipefail
 # CONTRACT_ROOT is the source location chosen in open question 7, e.g. ~/.ημ/contract or ~/.agents/.ημ/contract
 # parse every fragment, require at least one and unique ids, and total the UTF-8 bytes of tier-0 fragments
 CONTRACT_ROOT="${CONTRACT_ROOT:?set CONTRACT_ROOT to the open-question-7 source location}" bb -e '
+(require (quote [clojure.edn :as edn]))
 (let [dir (str (System/getenv "CONTRACT_ROOT") "/fragments")
       _   (assert (.isDirectory (java.io.File. dir)) (str "no fragments directory: " dir))
       fs  (filter #(.isFile %) (file-seq (java.io.File. dir)))
       _   (assert (seq fs) (str "empty fragment scan: " dir))
-      rd  (fn [f] (let [s (slurp f) form (read-string s)]
+      ;; read every form to EOF (the newline keeps a trailing comment from swallowing the bracket)
+      one (fn [f s] (let [forms (edn/read-string (str "[" s "\n]"))]
+                      (assert (and (= 1 (count forms)) (seq? (first forms)) (= (quote fragment) (ffirst forms)))
+                              (str "expected exactly one top-level (fragment ...) form: " f))
+                      (first forms)))
+      rd  (fn [f] (let [s (slurp f) form (one (.getName f) s)]
                     {:file (.getName f) :id (second form)
                      :tier (some #(when (and (seq? %) (= (first %) (quote tier))) (second %)) form)
                      :bytes (count (.getBytes s "UTF-8"))}))

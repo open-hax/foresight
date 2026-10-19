@@ -32,11 +32,16 @@ Registry-keyed Malli schemas are defined for:
 - the layer declaration: `:layer/id`, `:layer/root`, `:use`, `:drop`,
   `:targets`;
 - the parsed fragment: id, tier, `absolute` with its enforcement `:surface`
-  (`:pr-gate`, `:runtime-hook` or `:interactive`), `gate`, `override`, body
+  (`:pr-gate`, `:runtime-hook`, `:interactive` or `:gap`), `gate`, `override`, body
   and content hash;
 - the effective contract;
 - the projection manifest:
   - the layer chain, the target, and the budget with its unit and actual size;
+  - `:effective-contract/hash`, the hash of the folded contract, which is the
+    same for every harness projected from it;
+  - `:projection/sentinel`, a random nonce generated per build and emitted as
+    the last line of the artifact, used to prove that a harness loaded the
+    whole file;
   - one entry per fragment, holding its id, hash, the declaring layer, and a
     **disposition**: `:included`, `:dropped` (with the dropping layer and
     reason), `:shadowed` (with the overriding layer and its hash) or

@@ -129,8 +129,9 @@ the contract is the source language and must not become a map blob.
 ```
 
 Each fragment has a stable id and a tier. It may also carry an `absolute`
-marker with its enforcement `:surface` (`:pr-gate`, `:runtime-hook` or
-`:interactive`), and a `gate` reference. The compiler records each fragment's
+marker with its enforcement `:surface` (`:pr-gate`, `:runtime-hook`,
+`:interactive` or `:gap`), and a `gate` reference. `:gap` marks an absolute
+whose intended enforcement does not exist yet; it carries a follow-up card. The compiler records each fragment's
 content hash.
 
 ### The fold: one merge rule per kind of declaration
@@ -139,7 +140,7 @@ content hash.
 |---|---|
 | settings | `deep-merge`. Maps merge, vectors concatenate in layer order, scalars take the nearest layer. This rule exists today. |
 | instruction fragments | Ordered union keyed by fragment id. The same id resolves to the nearest layer only when that layer marks it `:override`. An unmarked id collision is a compile error. Text is never merged by similarity (ledger discipline rule 4). |
-| absolutes | A layer below the one that declares an absolute may not drop or loosen it. A `:pr-gate` absolute compiles to its gate, and its prose shrinks to one line. A `:runtime-hook` absolute compiles to a host hook where the harness supports one, and keeps full prose otherwise. An `:interactive` absolute keeps full tier-0 prose. |
+| absolutes | A layer below the one that declares an absolute may not drop or loosen it. A `:pr-gate` absolute compiles to its gate, and its prose shrinks to one line. A `:runtime-hook` absolute compiles to a host hook where the harness supports one, and keeps full prose otherwise. An `:interactive` or `:gap` absolute keeps full tier-0 prose. Only real gate or hook evidence admits compression. |
 | permissions | A child layer may only tighten. |
 | tools and hooks | Union, then the profile filter (`dsl/profile.cljc`). |
 | modes and participants | Keyed merge, following the v2 shape in `~/.ημ/opmf/ημΠ.dev.v2/`. |
@@ -163,6 +164,8 @@ harness's artifacts.
     full prose where it does not.
   - An `:interactive` absolute is never compressed. Compression would remove
     the active instruction without preserving its guarantee.
+  - A `:gap` absolute (enforcement planned but missing) is never compressed
+    either. A follow-up card is not enforcement.
 - Unsupported declarations are reported, not dropped silently.
 - Every projection writes a manifest: the layer chain, fragment ids and hashes,
   the target, the budget and the actual size. A receipt references that
