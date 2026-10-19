@@ -246,8 +246,13 @@ source at tag rust-v0.163.0, `codex-rs/core/src/agents_md.rs`.
   - An untrusted project loads no project files.
 - **Order.** Root to working directory, joined by blank lines, so closer files
   come later.
-- **Size.** `project_doc_max_bytes` defaults to 32,768 bytes. The file that
-  crosses the budget is truncated and a warning is logged.
+- **Size.** `project_doc_max_bytes` defaults to 32,768 bytes and applies to the
+  **combined** root-to-working-directory chain, not to each file.
+  - Root files are read first.
+  - The file that crosses the remaining budget is truncated and a warning is
+    logged.
+  - A nested file can therefore be truncated even when every emitted file is
+    individually under 32 KiB (`agents_md.rs#L145-L166`).
 - **Injection.** `developer_instructions` is injected before `AGENTS.md`. A
   `SessionStart` hook's output becomes developer context;
   `additionalContextLimit` defaults to 2,500 tokens. Source:
@@ -259,7 +264,7 @@ source at tag rust-v0.163.0, `codex-rs/core/src/agents_md.rs`.
 |---|---|---|---|---|---|
 | Claude Code | working directory up to the filesystem root; subdirectories lazy | root first | `claudeMdExcludes`, `--setting-sources`, AGENTS.md mode | `SessionStart` (10k characters per string) | files over 4 MiB skipped; 200 lines advised |
 | OpenCode | working directory up to the git worktree (or `/`) | **nearest first** | `OPENCODE_DISABLE_CLAUDE_CODE*`; per-file exclusion UNKNOWN | none (compaction only) | UNKNOWN |
-| Codex | project root (`.git`) down to the working directory; nothing above the root | root first | override file, fallback names | `SessionStart` (2,500 tokens); `developer_instructions` | 32 KiB (truncates) |
+| Codex | project root (`.git`) down to the working directory; nothing above the root | root first | override file, fallback names | `SessionStart` (2,500 tokens); `developer_instructions` | 32 KiB across the whole chain (truncates) |
 
 ## 6. Prior art for per-type merge rules
 
@@ -304,14 +309,31 @@ All sources were accessed on 2026-10-19.
      `~/spaces/.ημ`) fold into that repository's root projection, because
      Codex cannot see them otherwise.
   3. In-repository band: per-directory deltas, composed by the harness for
-     Claude Code and Codex. OpenCode folds at the git root.
+     Claude Code and Codex. OpenCode needs a scoped strategy, because a
+     subdirectory layer cannot be folded into the git-root projection without
+     applying its rules to unrelated directories. OpenCode loads every
+     `AGENTS.md` hit from the session directory up to the worktree, nearest
+     first, and its Read tool attaches files lazily. Candidates:
+     - (a) Emit a per-directory delta file when the delta is
+       order-independent, meaning a pure fragment union with no `:override`.
+       Ordering then does not matter.
+     - (b) When a subdirectory layer carries an override, emit a scoped file
+       that restates the overridden fragments in full, and record in the
+       manifest that the ancestor copy is shadowed.
+
+     LOC.07's fixture must include a subdirectory layer session for OpenCode.
 - **Cost of folding everything into one file per harness (option B).** It is
   deterministic, but it gives up the lazy subdirectory loading of Claude Code
   and OpenCode.
-- **Budgets bind differently.**
-  - Codex truncates project files at 32 KiB, so it needs a hard ceiling.
-  - Claude Code's `SessionStart` injection is capped at 10k characters and
-    Codex's at 2,500 tokens, so the tier-0 core alone fits injection.
+- **Budgets bind differently, and in different units.**
+  - Codex truncates at 32 KiB across the **whole** project-document chain, so
+    the budget check must run on the chain, not on each file.
+  - Claude Code caps `SessionStart` injection at 10,000 **characters**.
+  - Codex caps hook context at 2,500 **tokens**.
+  - Profiles must therefore state the unit and the enforcement rule for each
+    limit (bytes, characters or tokens). Any conversion must be verified
+    against the harness, not assumed.
+  - The aim is a tier-0 core small enough to fit the smallest injection cap.
 - **Duplicate suppression.** On Claude Code, the AGENTS.md mode and
   `claudeMdExcludes` together can prevent the double load in `~`. That is a
   settings change, which muse could own as part of the projection.

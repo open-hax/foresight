@@ -40,7 +40,9 @@ lands.
   - the agents Markdown;
   - `.mcp.json`;
   - `.claude/settings.json`, including its hook entries;
-  - the generated `src/gen/**` entrypoint.
+  - the generated `src/gen/**` entrypoint;
+  - `.ημ/contract-0.edn` from LOC.01, with its per-file SHA-256 values, so
+    that a source edit is detected even when the projections are unchanged.
 - [ ] Normalise only documented sources of nondeterminism, such as absolute
   home paths and build timestamps, and list each normalisation in the test.
 - [ ] Wire the comparison into the existing test build.
@@ -67,8 +69,8 @@ npx shadow-cljs compile test   # muse's existing test build, which runs the gold
 ## Risks
 
 Artifacts may not be deterministic today, for example because of bundle
-hashing. Mitigation: digest only stable sections and record each exception as
-a finding.
+hashing. Mitigation: normalise only documented nondeterministic fields, then
+compare all remaining artifact bytes. Record unresolved exceptions as findings.
 
 ## Verification state
 

@@ -18,7 +18,7 @@ created_at: "2026-10-19T21:05:27.000Z"
 
 > Design: `docs/notes/design/layered-operating-contracts.md` §The fold
 > Target repository: katamorph, provisional pending open question 6
-> Blocked by: LOC.04 and open question 6
+> Blocked by: LOC.04, open question 6, and open question 3 (module resolution order) for the `:use`/`:drop` scope item
 
 ## Context
 
@@ -30,6 +30,14 @@ merging, absolutes need to be non-removable, and permissions may only tighten.
 
 A pure function folds an ordered layer chain into an effective contract or
 returns explained errors. Each kind of declaration has its own merge rule.
+
+The API is defined as a left fold.
+
+- `(extend effective layer)` applies one layer to an effective contract.
+- `(fold chain)` is `(reduce extend empty-contract chain)`.
+
+The only composition operation is `extend`, applied to an effective contract
+and a layer. Effective contracts are never passed back to `fold` as layers.
 
 ## Scope
 
@@ -52,11 +60,12 @@ returns explained errors. Each kind of declaration has its own merge rule.
 
 ## Acceptance criteria
 
-- [ ] GIVEN any chain WHEN folded twice in sequence (folding an effective
-  contract again) THEN the result is unchanged (idempotence).
-- [ ] GIVEN chains `a`, `b` and `c` WHEN `(fold [(fold [a b]) c])` and
-  `(fold [a b c])` are compared THEN they are equal (associativity of
-  composition).
+- [ ] GIVEN any chain `c` and layer `l` WHEN `(fold (conj c l))` and
+  `(extend (fold c) l)` are compared THEN they are equal (the left-fold law).
+- [ ] GIVEN any effective contract `e` WHEN extended with an empty layer THEN
+  the result equals `e` (identity).
+- [ ] GIVEN the same chain WHEN folded twice THEN the results are equal,
+  including manifest ordering (determinism).
 - [ ] GIVEN a child layer that drops an absolute or loosens a permission WHEN
   folded THEN the fold returns an error naming both layers and the declaration.
 - [ ] GIVEN two layers that define the same fragment id without `:override`
@@ -72,8 +81,10 @@ returns explained errors. Each kind of declaration has its own merge rule.
 
 ## Risks
 
-Associativity can fail for drops that resolve against modules. Mitigation:
-define `:drop` resolution on the folded `:use` set and test it as a property.
+`:drop` can resolve differently depending on which modules are already in
+the effective contract. Mitigation: `extend` resolves `:drop` against the
+effective contract's folded `:use` set, and a property test checks it under
+the left-fold law.
 
 ## Verification state
 

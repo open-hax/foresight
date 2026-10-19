@@ -73,7 +73,19 @@ file and the hash of the lineage copy it came from.
 ## Verification
 
 ```bash
-bb -e '(doseq [f (file-seq (java.io.File. (str (System/getenv "HOME") "/.ημ/contract/fragments"))) :when (.isFile f)] (println (.getName f) (count (slurp f))))'
+# parse every fragment, require unique ids, and total the UTF-8 bytes of tier-0 fragments
+bb -e '
+(let [dir (str (System/getenv "HOME") "/.ημ/contract/fragments")
+      fs  (filter #(.isFile %) (file-seq (java.io.File. dir)))
+      rd  (fn [f] (let [s (slurp f) form (read-string s)]
+                    {:file (.getName f) :id (second form)
+                     :tier (some #(when (and (seq? %) (= (first %) (quote tier))) (second %)) form)
+                     :bytes (count (.getBytes s "UTF-8"))}))
+      xs  (map rd fs)
+      dup (->> xs (map :id) frequencies (filter #(> (val %) 1)))]
+  (assert (every? :id xs) "fragment without id")
+  (assert (empty? dup) (str "duplicate ids: " (pr-str dup)))
+  (println "fragments" (count xs) "tier0-bytes" (reduce + (map :bytes (filter #(= 0 (:tier %)) xs)))))'
 grep -rnP '\x{05DC}\x{05D2}' ~/.ημ/contract/ && echo "FAIL: look-alike operator" || echo ok
 ```
 

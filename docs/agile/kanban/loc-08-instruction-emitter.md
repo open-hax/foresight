@@ -39,7 +39,9 @@ projection writes a manifest, and a receipt references it.
   artifact text and a manifest.
   - Tier-0 fragments are inlined.
   - Tier-1 fragments become pointers or skills.
-  - Each absolute becomes one line that names its gate.
+  - Absolutes project by surface. `:pr-gate` becomes one line plus its gate,
+    `:interactive` keeps full prose, and `:runtime-hook` becomes a hook or full
+    prose.
   - Unsupported declarations are reported, not dropped.
 - [ ] Exceeding the budget is a compile error, never a truncation.
 - [ ] The adapter writes the artifacts and the manifest; it lives next to
@@ -61,6 +63,19 @@ projection writes a manifest, and a receipt references it.
   bytes.
 - [ ] GIVEN the same effective contract and profile WHEN projected twice THEN
   both outputs are byte-identical.
+- [ ] GIVEN a tier-1 fragment and a profile WHEN projected THEN the artifact
+  contains a pointer or skill reference for it, as the profile allows, and the
+  manifest marks it `:included`.
+- [ ] GIVEN absolutes of each surface WHEN projected THEN:
+  - each `:pr-gate` absolute appears as one line naming its gate;
+  - each `:interactive` absolute appears in full, uncompressed;
+  - each `:runtime-hook` absolute appears as a hook where the profile supports
+    one, and in full otherwise.
+- [ ] GIVEN a declaration the target cannot carry WHEN projected THEN the build
+  reports it, and the manifest marks it `:unsupported` with the missing
+  capability. It is never dropped silently.
+- [ ] GIVEN a profile whose budget applies across a chain (Codex) WHEN
+  projected THEN the check sums the whole emitted chain.
 - [ ] GIVEN the contract-0 golden test WHEN this story's code lands THEN the
   test still passes.
 

@@ -1,10 +1,11 @@
 ---
 category: "kanban"
-labels: "contracts, muse, harness, decision, 3sp"
+labels: "contracts, muse, harness, decision, 5sp"
 type: "story"
 story_id: "LOC.07"
-points: "3"
+points: "5"
 title: "LOC.07 — Declare harness capability profiles and budgets, and decide who performs the fold"
+dependency: ["loc-fragment-source"]
 priority: "P1"
 status: "incoming"
 epic: "layered-operating-contracts"
@@ -18,7 +19,7 @@ created_at: "2026-10-19T21:05:27.000Z"
 > Design: `docs/notes/design/layered-operating-contracts.md` §Projection, open question 1
 > Research: `docs/research/layered-operating-contracts-inventory.md` §5 and §7
 > Target repository: muse (profile data), with the decision recorded in the design note
-> Blocked by: open question 1
+> Blocked by: LOC.03 (tier-0 baseline) and open question 1
 
 ## Context
 
@@ -34,15 +35,25 @@ exclusion mechanism and injection hook. Research section 5 records those.
   - on-demand channels (skills, pointer files, MCP resources);
   - whether the harness can exclude its own ancestor files, and how;
   - its injection hook;
-  - its byte budget.
+  - each of its native limits, with its **unit** (bytes, characters or
+    tokens), its **scope** (per file, per hook string, or across the whole
+    loaded chain) and its enforcement rule. For example, Codex's 32 KiB applies
+    across the combined root-to-working-directory chain, and Claude Code's
+    10,000 characters applies to each `SessionStart` string.
 - The design note records the open-question-1 decision for each harness.
 
 ## Scope
 
 - [ ] Build a fixture tree with marked instruction files in `~`, at a git root
-  and in a subdirectory. Record the actual load order and walk boundary in the
-  installed Claude Code, OpenCode and Codex. This settles the OpenCode
-  docs-versus-source conflict in research section 5.
+  and in a subdirectory that carries its own `.ημ` layer. Record the actual
+  load order and walk boundary in the installed Claude Code, OpenCode and
+  Codex.
+  - Include an OpenCode session started in the subdirectory, to choose between
+    the scoped-projection candidates in research section 7.
+  - Include a Codex chain that approaches 32 KiB, to confirm the cumulative
+    truncation.
+  - This also settles the OpenCode docs-versus-source conflict in research
+    section 5.
 - [ ] Profiles as EDN, grounded in cited research and the fixture results.
 - [ ] Evaluate the three-band hybrid from research section 7 against options A
   and B.
@@ -57,8 +68,12 @@ exclusion mechanism and injection hook. Research section 5 records those.
 
 - [ ] GIVEN each profile field WHEN reviewed THEN it cites a research-note
   source, or is marked UNKNOWN with a verification step.
-- [ ] GIVEN the tier-0 baseline WHEN compared with each budget THEN the
-  baseline fits, or the overflow is reported as a finding.
+- [ ] GIVEN the tier-0 baseline WHEN measured in each limit's own unit THEN
+  it fits every limit, or the overflow is reported as a finding. Any
+  byte-to-character or byte-to-token conversion used is verified against the
+  harness, not assumed.
+- [ ] GIVEN a Codex profile WHEN checked THEN its budget rule is evaluated on
+  the whole projected chain (root file plus nested files), not on each file.
 
 ## Verification
 

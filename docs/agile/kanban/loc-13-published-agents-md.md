@@ -29,15 +29,23 @@ machine the same file would duplicate its ancestor layers.
 
 ## Outcome
 
-A published-repository profile projects a standalone `AGENTS.md`: tier 0 of the
-effective contract, plus pointers of the form `contract-id@hash` to tier-1
-material. A layer marked `:layer/root true` produces a repository whose
-contract does not depend on private ancestors.
+A published-repository profile projects a standalone `AGENTS.md`.
+
+- Tier 0 of the effective contract is inline.
+- The tier-1 material is **committed with the repository** in a published
+  directory such as `.ημ/contract/published/`.
+- Pointers are repository-relative paths carrying a content hash, so a clone
+  resolves them with no `~/.ημ` library and no external resolver.
+- A layer marked `:layer/root true` produces a repository whose contract does
+  not depend on private ancestors.
 
 ## Scope
 
 - [ ] A published-repository profile, with its budget.
-- [ ] Pointer format and resolution notes for adopters.
+- [ ] Emit the tier-1 material into the repository's published directory.
+- [ ] A pointer format: a repository-relative path plus a SHA-256 content
+  hash.
+- [ ] A small pointer-check script that adopters and CI can run.
 - [ ] A local de-duplication rule, so that this machine's harnesses do not load
   the published file in addition to their own projection.
 
@@ -49,15 +57,21 @@ contract does not depend on private ancestors.
 ## Acceptance criteria
 
 - [ ] GIVEN a fresh clone on a machine with no `~/.ημ` WHEN `AGENTS.md` is read
-  THEN it is self-contained for tier 0 and every pointer resolves to a
-  published location.
+  THEN it is self-contained for tier 0, and every pointer resolves to a file
+  inside the clone whose SHA-256 matches the pointer.
 - [ ] GIVEN this machine WHEN a harness starts in the pilot repository THEN the
   contract is not loaded twice.
 
 ## Verification
 
 ```bash
-git clone --depth 1 <pilot-repo> /tmp/adopter && wc -c /tmp/adopter/AGENTS.md
+# on a machine (or container) with no ~/.ημ
+git clone --depth 1 <pilot-repo> /tmp/adopter && cd /tmp/adopter
+test ! -e "$HOME/.ημ" || echo "WARN: run without ~/.ημ"
+# every pointer resolves inside the clone and its hash matches
+grep -oE '\(\./[^)#]+#sha256=[0-9a-f]{64}\)' AGENTS.md | tr -d '()' | while IFS='#' read -r p h; do
+  [ -f "$p" ] && [ "$(sha256sum "$p" | cut -d' ' -f1)" = "${h#sha256=}" ] && echo "ok $p" || echo "BROKEN $p"
+done
 ```
 
 ## Risks

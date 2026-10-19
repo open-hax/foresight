@@ -5,7 +5,7 @@ type: "story"
 story_id: "LOC.10"
 points: "3"
 title: "LOC.10 — Cut Claude Code over to the compiled projection and remove the double load"
-dependency: ["loc-fragment-source", "loc-instruction-emitter"]
+dependency: ["loc-fragment-source", "loc-harness-profiles", "loc-instruction-emitter"]
 priority: "P1"
 status: "incoming"
 epic: "layered-operating-contracts"
@@ -19,7 +19,7 @@ created_at: "2026-10-19T21:05:27.000Z"
 > Design: `docs/notes/design/layered-operating-contracts.md` §Projection
 > Research: `docs/research/layered-operating-contracts-inventory.md` §3 and §5 (Claude Code)
 > Target: the `~/.claude` device repository plus muse publication
-> Blocked by: LOC.03 and LOC.08
+> Blocked by: LOC.03, LOC.07 (budgets and profiles) and LOC.08
 
 ## Context
 
@@ -55,6 +55,10 @@ created_at: "2026-10-19T21:05:27.000Z"
 
 - [ ] GIVEN a session started in `~` WHEN context is inspected THEN exactly one
   copy of the contract is loaded.
+- [ ] GIVEN a session started in `~/spaces/foresight` WHEN context is
+  inspected THEN exactly one copy of the contract is loaded there too. Claude
+  Code's discovery depends on the ancestry of the working directory, so the
+  `~` result does not establish this case.
 - [ ] GIVEN the before and after measurements WHEN compared THEN always-on
   contract bytes are within budget, and both measurements are recorded in a
   receipt.

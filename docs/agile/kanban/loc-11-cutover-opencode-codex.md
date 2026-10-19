@@ -5,7 +5,7 @@ type: "story"
 story_id: "LOC.11"
 points: "3"
 title: "LOC.11 — Cut OpenCode and Codex over to compiled projections of the same contract"
-dependency: ["loc-fragment-source", "loc-instruction-emitter"]
+dependency: ["loc-fragment-source", "loc-harness-profiles", "loc-instruction-emitter"]
 priority: "P1"
 status: "incoming"
 epic: "layered-operating-contracts"
@@ -19,7 +19,7 @@ created_at: "2026-10-19T21:05:27.000Z"
 > Design: `docs/notes/design/layered-operating-contracts.md` §Projection
 > Research: `docs/research/layered-operating-contracts-inventory.md` §3 and §5 (OpenCode, Codex)
 > Target: the `~/.ημ` root layer (`config/opencode/settings/core.edn`) and the muse projection
-> Blocked by: LOC.03 and LOC.08
+> Blocked by: LOC.03, LOC.07 (budgets and profiles) and LOC.08
 
 ## Context
 

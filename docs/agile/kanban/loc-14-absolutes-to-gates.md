@@ -1,10 +1,10 @@
 ---
 category: "kanban"
-labels: "contracts, pr-flow, gates, 2sp"
+labels: "contracts, pr-flow, gates, 3sp"
 type: "story"
 story_id: "LOC.14"
-points: "2"
-title: "LOC.14 — Map every absolute to the PR gate that enforces it, or record the gap"
+points: "3"
+title: "LOC.14 — Classify every absolute by enforcement surface and map it to its gate, hook, prose-only status or gap"
 dependency: ["loc-fragment-source"]
 priority: "P2"
 status: "incoming"
@@ -14,7 +14,7 @@ uuid: "loc-absolutes-to-gates"
 created_at: "2026-10-19T21:05:27.000Z"
 ---
 
-# LOC.14 — Map every absolute to the PR gate that enforces it, or record the gap
+# LOC.14 — Classify every absolute by enforcement surface and map it to its gate, hook, prose-only status or gap
 
 > Design: `docs/notes/design/layered-operating-contracts.md` §The fold (absolutes), §Projection
 > Target: `~/.ημ/contract` fragments plus the existing pr-flow and eta-mu review gates
@@ -28,17 +28,28 @@ session.
 
 ## Outcome
 
-Every fragment marked `(absolute)` names its enforcing gate, for example a
-pr-flow law, a required check or an eta-mu review gate. A fragment with no
-gate is listed as a gap. The projection emits each absolute as one line plus
-its gate reference.
+Every fragment marked `(absolute)` is classified by its enforcement surface.
+
+- `:pr-gate` absolutes name an existing gate, for example a pr-flow law, a
+  required check or an eta-mu review gate.
+- `:runtime-hook` absolutes name an existing host hook.
+- `:interactive` absolutes are recorded as prose-only. They stay full tier-0
+  prose until a specified runtime check exists.
+- An absolute whose intended surface has no implementation yet is listed as a
+  gap.
+
+Only `:pr-gate` absolutes, and `:runtime-hook` absolutes on harnesses that have
+the hook, are ever compressed to one line.
 
 ## Scope
 
 - [ ] An inventory of absolutes in the LOC.03 fragments: the immutable
   directives, safety, license and ledger discipline.
-- [ ] For each absolute, the existing gate that enforces it, cited by file and
-  line, or a gap entry.
+- [ ] For each absolute, its surface and its enforcement: the existing gate or
+  hook, cited by file and line, or a prose-only classification, or a gap entry.
+- [ ] An audit table at `~/.ημ/contract/absolutes.edn` with one row per
+  absolute: fragment id, surface, then gate path and line, hook, or
+  follow-up card uuid.
 - [ ] A follow-up card for each gap. This story does not implement gates.
 
 ## Non-goals
@@ -47,15 +58,29 @@ its gate reference.
 
 ## Acceptance criteria
 
-- [ ] GIVEN the fragment set WHEN filtered for absolutes THEN each one has
-  either a `(gate …)` reference that resolves to an existing gate, or a gap
-  entry linked to a follow-up card.
+- [ ] GIVEN the fragment set WHEN filtered for absolutes THEN each absolute has
+  exactly one audit row, and each row's evidence resolves:
+  - a gate or hook path that exists, at the cited line;
+  - or a prose-only classification for an `:interactive` absolute;
+  - or a follow-up card uuid that exists on the board.
+- [ ] GIVEN an `:interactive` absolute WHEN projected by LOC.08 THEN it appears
+  in full.
 
 ## Verification
 
 ```bash
-grep -rn "(absolute)" ~/.ημ/contract/fragments | wc -l
-grep -rn "(gate " ~/.ημ/contract/fragments | wc -l
+# per-absolute audit, not marker counts: every absolute has one row and its evidence resolves
+# run from the foresight root so follow-up card uuids resolve against docs/agile/kanban
+bb -e '
+(let [rows  (clojure.edn/read-string (slurp (str (System/getenv "HOME") "/.ημ/contract/absolutes.edn")))
+      cards (->> (file-seq (java.io.File. "docs/agile/kanban")) (filter #(.isFile %)) (map slurp))
+      card? (fn [u] (some #(.contains % (str "uuid: \"" u "\"")) cards))]
+  (doseq [{:keys [fragment surface gate-path card]} rows]
+    (println fragment surface
+             (cond gate-path (if (.exists (java.io.File. gate-path)) "gate-ok" "GATE-MISSING")
+                   card      (if (card? card) "card-ok" "CARD-MISSING")
+                   (= surface :interactive) "prose-only"
+                   :else     "UNRESOLVED"))))'
 ```
 
 ## Risks

@@ -5,6 +5,7 @@ type: "story"
 story_id: "LOC.04"
 points: "3"
 title: "LOC.04 — Declare portable shapes for layers, fragments, effective contracts and projection manifests"
+dependency: ["loc-fragment-source"]
 priority: "P1"
 status: "incoming"
 epic: "layered-operating-contracts"
@@ -17,7 +18,7 @@ created_at: "2026-10-19T21:05:27.000Z"
 
 > Design: `docs/notes/design/layered-operating-contracts.md` §Layers, §Fragments, §Ownership across the constellation, open question 6
 > Target repository: katamorph (contract-language), provisional pending open question 6
-> Blocked by: open question 6
+> Blocked by: LOC.03 (fragment inputs) and open question 6
 
 ## Context
 
@@ -30,11 +31,16 @@ Registry-keyed Malli schemas are defined for:
 
 - the layer declaration: `:layer/id`, `:layer/root`, `:use`, `:drop`,
   `:targets`;
-- the parsed fragment: id, tier, `absolute`, `gate`, `override`, body and
-  content hash;
+- the parsed fragment: id, tier, `absolute` with its enforcement `:surface`
+  (`:pr-gate`, `:runtime-hook` or `:interactive`), `gate`, `override`, body
+  and content hash;
 - the effective contract;
-- the projection manifest: layer chain, fragment ids and hashes, target,
-  budget and actual size.
+- the projection manifest:
+  - the layer chain, the target, and the budget with its unit and actual size;
+  - one entry per fragment, holding its id, hash, the declaring layer, and a
+    **disposition**: `:included`, `:dropped` (with the dropping layer and
+    reason), `:shadowed` (with the overriding layer and its hash) or
+    `:unsupported` (with the target capability that is missing).
 
 ## Scope
 
@@ -55,6 +61,9 @@ Registry-keyed Malli schemas are defined for:
   one conforms.
 - [ ] GIVEN a fragment with no id, an unknown tier, or `override` without a
   target WHEN it is validated THEN it is rejected with an explained error.
+- [ ] GIVEN a manifest entry WHEN validated THEN its disposition is one of
+  included, dropped, shadowed or unsupported, and every non-included entry
+  carries its reason fields.
 - [ ] GIVEN a fragment whose whitespace has been reformatted WHEN it is hashed
   THEN the hash is unchanged. GIVEN a fragment whose text has changed WHEN it is
   hashed THEN the hash differs.

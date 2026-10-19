@@ -21,8 +21,12 @@ status: "draft"
 - The current `muse/.ημ/config` tree is **contract-0**, the first operating
   contract. It becomes a named, hashed module that any layer can select. A
   golden test proves that it still compiles to byte-identical artifacts.
-- Absolutes are enforced as workflow gates on pull requests. Their prose copy
-  shrinks to one line.
+- Absolutes are classified by the surface that can enforce them.
+  - **Gate-enforceable** absolutes become workflow gates on pull requests, and
+    their prose copy shrinks to one line.
+  - **Interactive** absolutes govern conduct inside a conversation, for example
+    "always ask questions" or "label uncertainty". They stay as full tier-0
+    prose until a specified runtime check can enforce them.
 
 The current token cost of agent sessions is a symptom of the missing fold.
 Contract text has no identity, so nothing can recognise a duplicate. See
@@ -107,17 +111,27 @@ A fragment keeps the readable S-expression form required by
 the contract is the source language and must not become a map blob.
 
 ```clojure
+;; interactive absolute: no PR gate can observe it, so it stays full tier-0 prose
 (fragment :opmf/directives
   (tier 0)
-  (absolute)
-  (gate :pr-flow/autonomy)
+  (absolute :surface :interactive)
   (directives
     "Autonomy: offer options when meaningful; never coerce; label uncertainty."
     "Always ask questions: when a decision is needed by the user, use the question tool."))
+
+;; gate-enforceable absolute: prose shrinks to one line naming the gate
+;; (the gate id is illustrative; LOC.14 maps each absolute to a real gate or records a gap)
+(fragment :opmf/ledger-append-only
+  (tier 0)
+  (absolute :surface :pr-gate)
+  (gate :receipt-river/append-only)
+  (rule "Append-only: never rewrite historical events or receipts."))
 ```
 
-Each fragment has a stable id, a tier, and optionally an `absolute` marker and
-a `gate`. The compiler records each fragment's content hash.
+Each fragment has a stable id and a tier. It may also carry an `absolute`
+marker with its enforcement `:surface` (`:pr-gate`, `:runtime-hook` or
+`:interactive`), and a `gate` reference. The compiler records each fragment's
+content hash.
 
 ### The fold: one merge rule per kind of declaration
 
@@ -125,7 +139,7 @@ a `gate`. The compiler records each fragment's content hash.
 |---|---|
 | settings | `deep-merge`. Maps merge, vectors concatenate in layer order, scalars take the nearest layer. This rule exists today. |
 | instruction fragments | Ordered union keyed by fragment id. The same id resolves to the nearest layer only when that layer marks it `:override`. An unmarked id collision is a compile error. Text is never merged by similarity (ledger discipline rule 4). |
-| absolutes | A layer below the one that declares an absolute may not drop or loosen it. Each absolute compiles to a PR gate, and its prose shrinks to one line. |
+| absolutes | A layer below the one that declares an absolute may not drop or loosen it. A `:pr-gate` absolute compiles to its gate, and its prose shrinks to one line. A `:runtime-hook` absolute compiles to a host hook where the harness supports one, and keeps full prose otherwise. An `:interactive` absolute keeps full tier-0 prose. |
 | permissions | A child layer may only tighten. |
 | tools and hooks | Union, then the profile filter (`dsl/profile.cljc`). |
 | modes and participants | Keyed merge, following the v2 shape in `~/.ημ/opmf/ημΠ.dev.v2/`. |
@@ -142,8 +156,13 @@ harness's artifacts.
   is a compile error, never a silent truncation.
 - Tier-1 fragments become on-demand material: skills, pointer files or MCP
   resources, according to the target's capabilities.
-- Absolutes become gates. The prompt keeps a one-line statement of each absolute
-  together with the gate that enforces it.
+- Absolutes project by surface.
+  - A `:pr-gate` absolute keeps a one-line statement together with the gate
+    that enforces it.
+  - A `:runtime-hook` absolute uses the hook where the harness has one, and
+    full prose where it does not.
+  - An `:interactive` absolute is never compressed. Compression would remove
+    the active instruction without preserving its guarantee.
 - Unsupported declarations are reported, not dropped silently.
 - Every projection writes a manifest: the layer chain, fragment ids and hashes,
   the target, the budget and the actual size. A receipt references that
@@ -186,9 +205,14 @@ Markdown through `emit-agents!` (`muse/src/clj/eta_mu/opencode/build.clj`) and
    depends on the harness loading semantics in the research note.
 2. **What shape does the published `AGENTS.md` take?** An outside adopter has no
    `~/.ημ`, so the published file must stand alone. On this machine the same
-   file duplicates its ancestor layers. Proposal: publish tier-0 plus
-   `contract-id@hash` pointers, and let local harnesses receive the fold from
-   muse.
+   file duplicates its ancestor layers.
+   - Proposal: publish tier 0 inline in `AGENTS.md`, and publish the
+     **tier-1 material with the repository** in a committed directory (for
+     example `.ημ/contract/published/`).
+   - Pointers are repository-relative paths carrying a content hash, so a
+     clone resolves every pointer without `~/.ημ` or any external resolver.
+   - Local harnesses receive the fold from muse and do not load the published
+     file in addition.
 3. **Where are named contract modules resolved from?** Proposal: the layer chain
    first (nearest first), then a library directory at `~/.ημ/contracts/`.
 4. **Who owns rendering?** A change in `~/.ημ` re-renders every descendant tree.
@@ -214,10 +238,11 @@ Markdown through `emit-agents!` (`muse/src/clj/eta_mu/opencode/build.clj`) and
 
 ## Risks
 
-- **Silent behaviour change.** Moving a rule from tier 0 to tier 1 can stop
-  agents from following it. Mitigation: absolutes stay in tier 0 as one line
-  each and are enforced by gates, and each cutover records sessions before and
-  after.
+- **Silent behaviour change.** Moving a rule from tier 0 to tier 1, or
+  compressing it, can stop agents from following it. Mitigations:
+  - interactive absolutes are never compressed;
+  - only gate-backed absolutes shrink to one line;
+  - each cutover records sessions before and after.
 - **Shadowing becomes the new drift.** Mitigation: an unmarked fragment-id
   collision is a compile error, and `:override` is explicit and recorded in the
   projection manifest.
@@ -230,9 +255,12 @@ Markdown through `emit-agents!` (`muse/src/clj/eta_mu/opencode/build.clj`) and
 ## Verification
 
 - Contract-0 golden test: byte-identical artifacts.
-- Property tests for the fold: associativity of the layer chain, idempotence
-  of re-folding an effective contract, absolutes never removed, permissions
-  never loosened.
+- Property tests for the fold:
+  - the left-fold law: `(fold (conj c l))` equals `(extend (fold c) l)`;
+  - extending with an empty layer is the identity;
+  - determinism;
+  - absolutes are never removed;
+  - permissions are never loosened.
 - For each harness, always-on instruction bytes are measured before and after
   cutover, and each projection manifest is checked against the target budget.
 - The inventory command from the research note is re-run after cutover. No new

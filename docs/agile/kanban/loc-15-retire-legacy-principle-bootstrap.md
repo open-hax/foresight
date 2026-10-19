@@ -57,7 +57,11 @@ The extension targets pi, which the user has called a poor first target.
 
 ```bash
 pnpm -C packages/extensions test
-rg -n "PRINCIPLE\.edn" --glob '!**/node_modules/**' ~/spaces/foresight/muse/src ~/spaces/foresight/eta-mu/packages
+rg -n "PRINCIPLE\.edn" --hidden --glob '!**/node_modules/**' \
+  ~/spaces/foresight/muse/src ~/spaces/foresight/eta-mu/packages \
+  ~/.claude/settings.json ~/.claude/hooks ~/.claude/CLAUDE.md \
+  ~/.config/opencode ~/.ημ/config \
+  ~/.codex/config.toml ~/.codex/AGENTS.md
 ```
 
 ## Risks
