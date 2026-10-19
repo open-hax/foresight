@@ -47,7 +47,23 @@ Registry-keyed Malli schemas are defined for:
 - [ ] Shapes in `.cljc`, with examples and counterexamples.
 - [ ] A fragment reader that turns the S-expression form into the parsed shape,
   keeping the raw text for projection.
-- [ ] Content hashing defined over the normalised fragment body.
+- [ ] Content hashing defined over the normalised fragment body. The
+  canonicalisation:
+  1. Read the fragment with the EDN reader. This discards comments and all
+     whitespace **between** tokens.
+  2. Print the read form with `pr-str`, with `*print-namespace-maps*` false
+     and the default print settings, using one canonical printer shared by
+     every runtime (JVM, bb and nbb).
+  3. Take SHA-256 of the UTF-8 bytes of that string.
+
+  Text **inside** string literals, including whitespace and line breaks, is
+  content. Changing it changes the hash. Examples, recorded as test fixtures:
+  - `(rule  "a b")` and `(rule "a b")` hash the same, because only whitespace
+    between tokens changed;
+  - `(rule "a b")` and `(rule "a  b")` hash differently, because whitespace
+    inside a string changed;
+  - adding a `;; comment` line does not change the hash;
+  - reordering forms inside the fragment changes the hash.
 
 ## Non-goals
 
@@ -64,9 +80,9 @@ Registry-keyed Malli schemas are defined for:
 - [ ] GIVEN a manifest entry WHEN validated THEN its disposition is one of
   included, dropped, shadowed or unsupported, and every non-included entry
   carries its reason fields.
-- [ ] GIVEN a fragment whose whitespace has been reformatted WHEN it is hashed
-  THEN the hash is unchanged. GIVEN a fragment whose text has changed WHEN it is
-  hashed THEN the hash differs.
+- [ ] GIVEN the four canonicalisation fixtures WHEN hashed on the JVM, bb and
+  nbb THEN each runtime produces the same hash for each fixture, and the
+  same-or-different outcome matches the fixture table.
 
 ## Verification
 

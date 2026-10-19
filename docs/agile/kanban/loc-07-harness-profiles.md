@@ -48,8 +48,11 @@ exclusion mechanism and injection hook. Research section 5 records those.
   and in a subdirectory that carries its own `.ημ` layer. Record the actual
   load order and walk boundary in the installed Claude Code, OpenCode and
   Codex.
-  - Include an OpenCode session started in the subdirectory, to choose between
-    the scoped-projection candidates in research section 7.
+  - Include an OpenCode session started in a subdirectory whose layer
+    overrides an ancestor fragment. The test asserts the **effective
+    instructions**: exactly one version of the fragment, the overriding one,
+    is present in the loaded context. This chooses between the push-down
+    strategy and the fold fallback in research section 7.
   - Include a Codex chain that approaches 32 KiB, to confirm the cumulative
     truncation.
   - This also settles the OpenCode docs-versus-source conflict in research
@@ -74,6 +77,10 @@ exclusion mechanism and injection hook. Research section 5 records those.
   harness, not assumed.
 - [ ] GIVEN a Codex profile WHEN checked THEN its budget rule is evaluated on
   the whole projected chain (root file plus nested files), not on each file.
+- [ ] GIVEN the fixture's overriding subdirectory layer WHEN a session starts
+  there in each harness THEN the recorded effective instructions contain only
+  the overriding version of the fragment. Load order alone does not satisfy
+  this criterion.
 
 ## Verification
 

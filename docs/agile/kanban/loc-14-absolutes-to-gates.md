@@ -47,9 +47,14 @@ the hook, are ever compressed to one line.
   directives, safety, license and ledger discipline.
 - [ ] For each absolute, its surface and its enforcement: the existing gate or
   hook, cited by file and line, or a prose-only classification, or a gap entry.
-- [ ] An audit table at `~/.ημ/contract/absolutes.edn` with one row per
-  absolute: fragment id, surface, then gate path and line, hook, or
-  follow-up card uuid.
+- [ ] An audit table at `$CONTRACT_ROOT/absolutes.edn` (the open-question-7
+  location), with exactly one row per absolute. Each row holds `:fragment` and
+  `:surface`, then the evidence for that surface:
+  - `:gate-path` and `:gate-line`;
+  - or `:hook-path` and `:hook-event`;
+  - or a follow-up `:card` uuid.
+
+  Interactive rows need no evidence.
 - [ ] A follow-up card for each gap. This story does not implement gates.
 
 ## Non-goals
@@ -70,17 +75,33 @@ the hook, are ever compressed to one line.
 
 ```bash
 # per-absolute audit, not marker counts: every absolute has one row and its evidence resolves
-# run from the foresight root so follow-up card uuids resolve against docs/agile/kanban
-bb -e '
-(let [rows  (clojure.edn/read-string (slurp (str (System/getenv "HOME") "/.ημ/contract/absolutes.edn")))
-      cards (->> (file-seq (java.io.File. "docs/agile/kanban")) (filter #(.isFile %)) (map slurp))
-      card? (fn [u] (some #(.contains % (str "uuid: \"" u "\"")) cards))]
-  (doseq [{:keys [fragment surface gate-path card]} rows]
-    (println fragment surface
-             (cond gate-path (if (.exists (java.io.File. gate-path)) "gate-ok" "GATE-MISSING")
-                   card      (if (card? card) "card-ok" "CARD-MISSING")
-                   (= surface :interactive) "prose-only"
-                   :else     "UNRESOLVED"))))'
+# run from the foresight root with CONTRACT_ROOT set (open question 7); exits nonzero on any problem
+CONTRACT_ROOT="${CONTRACT_ROOT:?set CONTRACT_ROOT}" bb -e '
+(require (quote [clojure.edn :as edn]) (quote [clojure.string :as str]))
+(let [root     (System/getenv "CONTRACT_ROOT")
+      frags    (->> (file-seq (java.io.File. (str root "/fragments"))) (filter #(.isFile %)) (map (comp read-string slurp)))
+      absolute (fn [form] (some #(when (and (seq? %) (= (first %) (quote absolute))) %) form))
+      expected (set (keep #(when (absolute %) (second %)) frags))         ; ids of fragments marked (absolute …)
+      rows     (edn/read-string (slurp (str root "/absolutes.edn")))
+      ids      (map :fragment rows)
+      dups     (keep (fn [[k v]] (when (> v 1) k)) (frequencies ids))
+      cards    (->> (file-seq (java.io.File. "docs/agile/kanban")) (filter #(.isFile %)) (map slurp))
+      card?    (fn [u] (some #(str/includes? % (str "uuid: \"" u "\"")) cards))
+      line-ok? (fn [p l] (let [f (java.io.File. p)] (and (.isFile f) (pos-int? l) (<= l (count (str/split-lines (slurp f)))))))
+      problems (concat
+                 (for [m (sort (remove (set ids) expected))] [:missing-row m])
+                 (for [x (sort (remove expected ids))]       [:row-without-absolute x])
+                 (for [d dups]                               [:duplicate-row d])
+                 (for [{:keys [fragment surface gate-path gate-line hook-path hook-event card]} rows
+                       :let [why (case surface
+                                   :pr-gate      (when-not (or (line-ok? gate-path gate-line) (and card (card? card))) :gate-evidence)
+                                   :runtime-hook (when-not (or (and (.isFile (java.io.File. (str hook-path))) (some? hook-event)) (and card (card? card))) :hook-evidence)
+                                   :interactive  nil
+                                   :unknown-surface)]
+                       :when why] [why fragment]))]
+  (doseq [p problems] (println "FAIL" p))
+  (println "absolutes" (count expected) "rows" (count rows) "problems" (count problems))
+  (System/exit (if (empty? problems) 0 1)))'
 ```
 
 ## Risks

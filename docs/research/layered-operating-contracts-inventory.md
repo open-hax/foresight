@@ -317,11 +317,26 @@ All sources were accessed on 2026-10-19.
      - (a) Emit a per-directory delta file when the delta is
        order-independent, meaning a pure fragment union with no `:override`.
        Ordering then does not matter.
-     - (b) When a subdirectory layer carries an override, emit a scoped file
-       that restates the overridden fragments in full, and record in the
-       manifest that the ancestor copy is shadowed.
+     - (b) When a subdirectory layer carries an override, **push the
+       overridden fragment down**. A manifest entry marked "shadowed" does
+       not stop OpenCode loading the ancestor file, so the ancestor fragment
+       would still apply. Instead:
+       - The ancestor projection omits any fragment that a descendant layer
+         overrides.
+       - The fragment is emitted into each sibling scope that does not
+         override it.
+       - The overriding scope emits its own version.
 
-     LOC.07's fixture must include a subdirectory layer session for OpenCode.
+       This keeps exactly one version of the fragment loaded in every
+       directory, at the cost of duplication across siblings. Where that
+       duplication exceeds the budget, OpenCode falls back to folding a
+       single file per session root (option B), and the manifest records the
+       limitation.
+
+     LOC.07's fixture must include an OpenCode session started in a
+     subdirectory with an overriding layer. It must assert the **effective
+     instructions**, meaning which fragment versions are present in the loaded
+     context, not only the load order.
 - **Cost of folding everything into one file per harness (option B).** It is
   deterministic, but it gives up the lazy subdirectory loading of Claude Code
   and OpenCode.

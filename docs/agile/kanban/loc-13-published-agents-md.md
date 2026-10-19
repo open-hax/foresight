@@ -65,13 +65,23 @@ A published-repository profile projects a standalone `AGENTS.md`.
 ## Verification
 
 ```bash
-# on a machine (or container) with no ~/.ημ
+# on a machine (or container) with no ~/.ημ; every failure exits nonzero
+set -euo pipefail
+if [ -e "$HOME/.ημ" ]; then echo "FAIL: ~/.ημ present; run in a clean environment"; exit 1; fi
 git clone --depth 1 <pilot-repo> /tmp/adopter && cd /tmp/adopter
-test ! -e "$HOME/.ημ" || echo "WARN: run without ~/.ημ"
-# every pointer resolves inside the clone and its hash matches
-grep -oE '\(\./[^)#]+#sha256=[0-9a-f]{64}\)' AGENTS.md | tr -d '()' | while IFS='#' read -r p h; do
-  [ -f "$p" ] && [ "$(sha256sum "$p" | cut -d' ' -f1)" = "${h#sha256=}" ] && echo "ok $p" || echo "BROKEN $p"
-done
+root=$(pwd -P); fail=0; n=0
+# every Markdown link target in AGENTS.md that is not a URL or an anchor must be a valid pointer
+while read -r target; do
+  case "$target" in http*://*|\#*) continue;; esac
+  n=$((n+1))
+  if [[ ! "$target" =~ ^\./[^#]+#sha256=[0-9a-f]{64}$ ]]; then echo "UNRECOGNIZED $target"; fail=1; continue; fi
+  p=${target%%#*}; h=${target##*sha256=}
+  real=$(realpath -e -- "$p" 2>/dev/null) || { echo "MISSING $p"; fail=1; continue; }
+  case "$real" in "$root"/*) ;; *) echo "ESCAPES-CLONE $p"; fail=1; continue;; esac
+  [ "$(sha256sum -- "$real" | cut -d' ' -f1)" = "$h" ] || { echo "HASH-MISMATCH $p"; fail=1; }
+done < <(grep -oE '\]\([^)]+\)' AGENTS.md | sed -E 's/^\]\((.*)\)$/\1/')
+[ "$n" -gt 0 ] || { echo "FAIL: no pointers found"; exit 1; }
+exit "$fail"
 ```
 
 ## Risks

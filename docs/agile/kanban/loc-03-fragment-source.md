@@ -73,10 +73,14 @@ file and the hash of the lineage copy it came from.
 ## Verification
 
 ```bash
-# parse every fragment, require unique ids, and total the UTF-8 bytes of tier-0 fragments
-bb -e '
-(let [dir (str (System/getenv "HOME") "/.ημ/contract/fragments")
+set -euo pipefail
+# CONTRACT_ROOT is the source location chosen in open question 7, e.g. ~/.ημ/contract or ~/.agents/.ημ/contract
+# parse every fragment, require at least one and unique ids, and total the UTF-8 bytes of tier-0 fragments
+CONTRACT_ROOT="${CONTRACT_ROOT:?set CONTRACT_ROOT to the open-question-7 source location}" bb -e '
+(let [dir (str (System/getenv "CONTRACT_ROOT") "/fragments")
+      _   (assert (.isDirectory (java.io.File. dir)) (str "no fragments directory: " dir))
       fs  (filter #(.isFile %) (file-seq (java.io.File. dir)))
+      _   (assert (seq fs) (str "empty fragment scan: " dir))
       rd  (fn [f] (let [s (slurp f) form (read-string s)]
                     {:file (.getName f) :id (second form)
                      :tier (some #(when (and (seq? %) (= (first %) (quote tier))) (second %)) form)
@@ -86,7 +90,7 @@ bb -e '
   (assert (every? :id xs) "fragment without id")
   (assert (empty? dup) (str "duplicate ids: " (pr-str dup)))
   (println "fragments" (count xs) "tier0-bytes" (reduce + (map :bytes (filter #(= 0 (:tier %)) xs)))))'
-grep -rnP '\x{05DC}\x{05D2}' ~/.ημ/contract/ && echo "FAIL: look-alike operator" || echo ok
+if grep -rnP '\x{05DC}\x{05D2}' "$CONTRACT_ROOT"; then echo "FAIL: look-alike operator"; exit 1; else echo ok; fi
 ```
 
 ## Risks
