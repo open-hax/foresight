@@ -307,4 +307,6 @@ The research note cites these.
 - `muse/examples/settings-merge/{global,project}.edn` illustrates the intended
   cross-layer settings merge.
 - Research: [layered operating contracts inventory](../../research/layered-operating-contracts-inventory.md).
-- Epic: see `docs/agile/kanban/` (uuid listed in the research note and PR).
+- Epic: [`docs/agile/kanban/epic-layered-operating-contracts.md`](../../agile/kanban/epic-layered-operating-contracts.md)
+  (`uuid: layered-operating-contracts`), with stories `loc-01` to `loc-15` in
+  the same directory.
