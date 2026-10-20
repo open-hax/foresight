@@ -1023,6 +1023,59 @@
           (is (next-writer-refused? segments file)
               (str label ": forged content cannot become ordinary evidence")))))))
 
+;; A later cooperating writer may take the writer lock as soon as this run
+;; releases it. Its segment is not gate tampering: selected-gate descendants
+;; are reaped by owned-gate custody before the reservation closes, so the
+;; whole-ledger comparison belongs under the writer lock. Only this run's
+;; own reserved basename is rechecked after release, since no cooperating
+;; writer touches it.
+(defn later-writer-reservation! [segments]
+  (cli/open-append-reservation!
+   (path/join segments "2026-10-13T000002000Z-later.edn") true))
+
+(defn later-writer-append! [reservation]
+  (let [record (cli/validated-evidence-receipt!
+                (assoc passed-result :result/command ["later"]))]
+    (cli/append-reserved-edn-line! reservation record
+                                   (cli/encode-edn-line! record))))
+
+(deftest a-later-writer-after-writer-lock-release-is-not-quarantined
+  (doseq [label ["finished" "holding the writer lock"]]
+    (with-receipt-fixture
+      (fn [{:keys [segments file]}]
+        (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+              release-writer-lock! cli/release-writer-lock!
+              later (atom nil)
+              outcome (atom nil)]
+          (fs/writeFileSync file "" "utf8")
+          (with-redefs [cli/release-writer-lock!
+                        (fn [parent writer-lock]
+                          (release-writer-lock! parent writer-lock)
+                          (when (nil? @later)
+                            (let [reservation (later-writer-reservation! segments)]
+                              (reset! later reservation)
+                              (later-writer-append! reservation)
+                              (when (= "finished" label)
+                                (cli/close-append-reservation! reservation)))))]
+            (reset! outcome
+                    (try (run-semantic-gate-with! file segment (fn [])) :ok
+                         (catch :default error (.-message error)))))
+          (when (= "holding the writer lock" label)
+            (is (= :ok (try (cli/close-append-reservation! @later) :ok
+                            (catch :default error (.-message error))))
+                (str label ": the later writer releases its own lock")))
+          (is (= :ok @outcome)
+              (str label ": the earlier run does not mistake a later writer "
+                   "for gate tampering"))
+          (is (= ["2026-10-13T000000000Z-test.edn"
+                  "2026-10-13T000002000Z-later.edn"]
+                 (segment-names segments))
+              label)
+          (is (not (fs/existsSync
+                    (path/join segments cli/receipt-writer-lock-name)))
+              (str label ": no stale quarantine marker remains"))
+          (is (= [] (lock-files segments)) label))))))
+
 (deftest lock-acquisition-failures-remove-the-new-lock
   ;; A lock this process created with O_EXCL is removed again when marker
   ;; setup fails before any gate ran, so later writers are not blocked by a
@@ -1569,7 +1622,8 @@
 (deftest receipt-dispatch-discard-checks-the-active-instant
   ;; The actual reader accepts both dispatch collections as discarded forms.
   ;; The surviving tagged value still needs precision admission before IDs.
-  (doseq [discarded ["#{}" "#:ns{:x :y}"]]
+  ;; Includes the nonempty set from Codex PRRT_kwDOU4VJMM6s2qTA.
+  (doseq [discarded ["#{}" "#{0}" "#{0 [1]}" "#:ns{:x :y}"]]
     (let [prefix (str "{:ts \"2026-01-01T00:00:00Z\" :kind :observation"
                       " :origin \"test\" :owner \"test\" :dod \"exact\""
                       " :pi \"receipt-river\" :host \"test\""
