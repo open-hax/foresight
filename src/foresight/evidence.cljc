@@ -474,6 +474,14 @@
   #?(:clj (instance? clojure.lang.PersistentQueue value)
      :cljs (instance? PersistentQueue value)))
 
+(defn unicode-scalar-text?
+  "True for text with paired UTF-16 surrogates and no unpaired code units.
+  No normalization or replacement is allowed before content identity."
+  [value]
+  (and (string? value)
+       (nil? (re-find #"[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]"
+                      value))))
+
 (defn canonical-form
   "An order-independent representation of an EDN value: map entries and set
   members are sorted, and vectors, lists and queues stay distinct, so equal

@@ -471,6 +471,18 @@
                  #{:repo/unit} [not-applicable]
                  (immutable-ledger [not-applicable]))))))
 
+(deftest receipt-text-keeps-unicode-scalar-values
+  (doseq [text ["" "plain" "é" "é" "😀" "�" "\u0000\n\r\t"
+                (str "left" (js/String.fromCharCode 0xD800 0xDC00) "right")
+                (js/String.fromCharCode 0xDBFF 0xDFFF)]]
+    (is (evidence/unicode-scalar-text? text)))
+  (doseq [units [[0xD800] [0xDBFF] [0xDC00] [0xDFFF]
+                [0xD800 0x41] [0x41 0xDC00]
+                [0xD800 0xD800 0xDC00] [0xD800 0xDC00 0xDC00]]]
+    (is (not (evidence/unicode-scalar-text?
+              (apply str (map #(js/String.fromCharCode %) units))))))
+  (is (false? (evidence/unicode-scalar-text? nil))))
+
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
 

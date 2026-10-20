@@ -1526,6 +1526,73 @@
           "{:ts #inst \"2026-01-01T00:00:00.001Z\"}\n"))
       "millisecond precision remains accepted"))
 
+(deftest receipt-tagged-discard-checks-the-active-instant
+  ;; A discarded tagged form includes its string operand. Exactness belongs
+  ;; to the surviving outer #inst, never the discarded inner timestamp.
+  (let [active "2026-01-01T00:00:00.0001Z"
+        text (str "{:ts #inst #_ #inst \"2026-01-01T00:00:00Z\" \""
+                  active "\"}\n")]
+    (is (= [active] (cli/edn-inst-strings text))
+        "the scanner must skip the whole tagged discard")
+    (is (thrown-with-msg?
+         js/Error #"Receipt River tagged instants must round-trip exactly"
+         (cli/read-receipt-records! text))
+        "the exactness guard rejects the surviving sub-millisecond instant"))
+  (let [active "2026-01-01T00:00:00.001Z"
+        text (str "{:ts #inst #_ #inst \"2026-01-01T00:00:00.0001Z\" \""
+                  active "\"}\n")]
+    (is (= [active] (cli/edn-inst-strings text))
+        "a discarded sub-millisecond timestamp is not the active tag")
+    (is (= :accepted
+           (try (cli/require-exact-receipt-tags! text) :accepted
+                (catch :default _ :rejected)))
+        "the exactness guard accepts the surviving millisecond instant")))
+
+(deftest receipt-adjacent-discard-checks-the-active-instant
+  ;; The actual NBB reader accepts #_x without a delimiter and truncates a
+  ;; surviving sub-millisecond instant. Scan the same active form before IDs.
+  (doseq [active ["2026-01-01T00:00:00.0001Z" "2026-01-01T00:00:00.0002Z"]]
+    (let [text (str "{:ts #inst #_x \"" active "\"}\n")]
+      (is (= [active] (cli/edn-inst-strings text))
+          "an adjacent discarded symbol cannot hide the active instant")
+      (is (thrown-with-msg?
+           js/Error #"Receipt River tagged instants must round-trip exactly"
+           (cli/read-receipt-records! text))
+          "the exactness guard rejects the actual reader's precision loss")))
+  (let [active "2026-01-01T00:00:00.001Z"
+        text (str "{:ts #inst #_x \"" active "\"}\n")]
+    (is (= [active] (cli/edn-inst-strings text)))
+    (is (= [{:ts (cljs.reader/read-string (str "#inst \"" active "\""))}]
+           (cli/read-receipt-records! text))
+        "the actual reader still accepts exact millisecond precision")))
+
+(deftest receipt-dispatch-discard-checks-the-active-instant
+  ;; The actual reader accepts both dispatch collections as discarded forms.
+  ;; The surviving tagged value still needs precision admission before IDs.
+  (doseq [discarded ["#{}" "#:ns{:x :y}"]]
+    (let [prefix (str "{:ts \"2026-01-01T00:00:00Z\" :kind :observation"
+                      " :origin \"test\" :owner \"test\" :dod \"exact\""
+                      " :pi \"receipt-river\" :host \"test\""
+                      " :manifest [] :refs [] :payload #inst #_")
+          text-for (fn [active]
+                     (str prefix discarded " \"" active "\"}\n"))]
+      (doseq [active ["2026-01-01T00:00:00.0001Z"
+                      "2026-01-01T00:00:00.0002Z"]]
+        (let [text (text-for active)]
+          (is (law/receipt-envelope? (cljs.reader/read-string text))
+              "the actual reader accepts the complete envelope before exactness")
+          (is (= [active] (cli/edn-inst-strings text))
+              "a discarded dispatch collection cannot hide the active instant")
+          (is (thrown-with-msg?
+               js/Error #"Receipt River tagged instants must round-trip exactly"
+               (cli/read-receipt-records! text))
+              "the exactness guard rejects the actual reader's precision loss")))
+      (let [active "2026-01-01T00:00:00.001Z"
+            text (text-for active)]
+        (is (= [active] (cli/edn-inst-strings text)))
+        (is (= [(cljs.reader/read-string text)] (cli/read-receipt-records! text))
+            "exact millisecond payloads remain accepted in complete envelopes")))))
+
 (deftest receipt-inst-text-inside-strings-is-not-a-tag
   ;; The exactness check lexes EDN like the number check: `#inst` text that
   ;; ends a string value is not a tag, so it must not pair the string's
@@ -2140,7 +2207,7 @@
   ;; row into a segment and the legacy file returns to the org bytes; the
   ;; result verifies against BOTH bases, and later syncs merge cleanly.
   (with-historical-ledger-fixture true
-    (fn [{:keys [base base-text current commit!]}]
+    (fn [{:keys [base-text current commit!]}]
       (let [org-row (assoc current :ts "2026-10-02T00:00:00Z" :host "org")
             fork-row (assoc current :ts "2026-10-02T00:00:01Z" :host "fork")
             org-text (str base-text (pr-str org-row) "\n")
@@ -2243,11 +2310,12 @@
                                   "\n")})})))))))
 
 (deftest receipt-verification-rejects-committed-operational-files
-  ;; `.ημ/.receipt-river.quarantine` and the writer lock are working-tree
-  ;; operational state. A reviewed revision that carries either one would
-  ;; close every checkout's working ledger, so immutable review rejects it.
+  ;; Quarantine and legacy/flat-writer locks live beside the legacy ledger;
+  ;; the segment writer lock lives inside receipts/. All are working-tree
+  ;; operational state, so immutable review rejects their committed paths.
   (doseq [operational [".receipt-river.quarantine"
-                       ".receipt-river.writer.lock"]]
+                       ".receipt-river.writer.lock"
+                       "receipts/.receipt-river.writer.lock"]]
     (with-historical-ledger-fixture true
       (fn [{:keys [directory base base-text commit!]}]
         (let [marker (path/join directory operational)]
@@ -2347,7 +2415,7 @@
 (deftest evidence-append-preserves-history-and-validates-uncommitted-suffix
   (doseq [terminal-newline? [true false]]
     (with-historical-ledger-fixture terminal-newline?
-      (fn [{:keys [base base-text file segments]}]
+      (fn [{:keys [base-text file segments]}]
         ;; A second writer must accept the first writer's uncommitted segment.
         (let [first-receipt (cli/append-evidence-receipt! passed-result)
               second-receipt (cli/append-evidence-receipt!
@@ -2850,7 +2918,387 @@
   (is (= 4 (cli/result-exit {:result/outcome :blocked})))
   (is (zero? (cli/result-exit {:result/outcome :not-applicable}))))
 
+(deftest receipt-identities-refuse-unpaired-surrogates
+  (let [a (js/String.fromCharCode 0xD800)
+        b (js/String.fromCharCode 0xD801)]
+    (is (not= a b) "the rejected inputs are distinct before UTF-8 encoding")
+    (doseq [value [a b (js/String.fromCharCode 0xDC00)
+                   (str "prefix" a "suffix")]]
+      (doseq [record [{:note value} {value :as-key}
+                      {:nested [value]} {:nested (list value)}
+                      {:nested #{value}} {:note (keyword value)}
+                      {:note (symbol value)}]]
+        (is (thrown-with-msg? js/Error #"unpaired UTF-16 surrogate"
+                             (cli/record-id record)))))
+    (is (= "b73d297c0898a616b797a242f06370d4c94dd77556b737c4e8aab15839d8a4ad"
+           (cli/record-id {:note "😀"}))
+        "a valid surrogate pair keeps its existing content ID")
+    (is (string? (cli/record-id {:note "�"})))
+    (is (thrown-with-msg? js/Error #"unpaired UTF-16 surrogate"
+                         (cli/encode-edn-line! {:note a})))
+    (is (thrown-with-msg? js/Error #"unpaired UTF-16 surrogate"
+                         (cli/read-receipt-records! "{:note \"\\uD800\"}\n")))))
+
+(deftest migration-does-not-equate-distinct-malformed-unicode-records
+  (let [a (cljs.reader/read-string "{:note \"\\uD800\"}")
+        b (cljs.reader/read-string "{:note \"\\uD801\"}")
+        legacy-path ".ημ/receipts.edn"
+        base {:segment/path legacy-path :segment/legacy? true
+              :segment/bytes (js/Buffer.from "{:note \"\\uD800\"}\n" "utf8")
+              :segment/records [a]}
+        empty-legacy {:segment/path legacy-path :segment/legacy? true
+                      :segment/bytes (js/Buffer.from "" "utf8")
+                      :segment/records []}
+        successor {:segment/path "2026-10-17T050000Z-malformed.edn"
+                   :segment/records [b]}]
+    (is (not= a b))
+    (is (thrown-with-msg?
+         js/Error #"unpaired UTF-16 surrogate"
+         (cli/ledger-extension-records! [base] [empty-legacy successor]))
+        "UTF-8 replacement must not make a dropped base fact look retained")))
+
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
+
+
+(defn owned-controller-observation [controller args]
+  ;; Each controller has a fresh subreaper which reaps adopted baseline fixtures
+  ;; while their exact PID/start-bound cleanup waits are still running.
+  (let [result (child-process/spawnSync
+                 "python3"
+                 (clj->js (into [(path/join cli/root "test" "fixtures"
+                                            "owned-process-supervisor.py")
+                                "--timeout-ms" "50000"
+                                "--max-output-bytes" "65536"
+                                "--cleanup-ms" "10000" "--"
+                                (.-execPath js/process) "-e" controller]
+                               args))
+                 #js {:encoding "utf8" :shell false :timeout 65000})]
+    (when-not (and (nil? (.-error result)) (= 0 (.-status result)))
+      (throw (ex-info "Owned controller supervisor failed to return"
+                      {:status (.-status result) :stderr (.-stderr result)})))
+    (let [capture (js->clj (js/JSON.parse (str/trim (.-stdout result)))
+                          :keywordize-keys true)]
+      (when-not (and (= 0 (:exit-code capture))
+                     (= "exited" (:termination capture))
+                     (true? (:cleanup-complete? capture))
+                     (false? (:timed-out? capture))
+                     (false? (:capture-truncated? capture)))
+        (throw (ex-info "Owned controller custody did not complete normally"
+                        {:capture capture})))
+      (js->clj (js/JSON.parse (str/trim (:output capture)))
+               :keywordize-keys true))))
+
+(def gate-custody-controller
+  "Real child-process controls; readiness precedes every causal assertion."
+  "const fs=require('fs'),os=require('os'),path=require('path'),cp=require('child_process');\nconst mode=process.argv[1],root=process.argv[2],nbb=process.argv[3];\nconst dir=fs.mkdtempSync(path.join(os.tmpdir(),'foresight-custody-'));\nconst leafFile=path.join(dir,'leaf.json'),gateFile=path.join(dir,'gate.json'),releaseFile=path.join(dir,'release');\nconst identity=p=>{try{const s=fs.readFileSync('/proc/'+p+'/stat','utf8'),f=s.slice(s.lastIndexOf(')')+1).trim().split(/\\s+/);return {pid:p,start:f[19],parent:Number(f[1])};}catch(e){if(e.code==='ENOENT'||e.code==='ESRCH')return null;throw e;}};\nconst same=x=>{const y=x&&identity(x.pid);return !!(y&&y.start===x.start);};\nconst children=x=>{\n if(!same(x))return null;\n const pids=new Set();\n for(const tid of fs.readdirSync('/proc/'+x.pid+'/task')){\n  try{for(const p of fs.readFileSync('/proc/'+x.pid+'/task/'+tid+'/children','utf8').trim().split(/\\s+/))if(p)pids.add(Number(p));}\n  catch(e){if(e.code!=='ENOENT'&&e.code!=='ESRCH')throw e;}\n }\n if(!same(x))return null;\n return [...pids].map(identity).filter(y=>y&&y.parent===x.pid);\n};\nconst intermediateSnapshot=(caller,gate,leaf)=>{\n if(!same(caller)||!same(gate)||!same(leaf))return null;\n const key=x=>x.pid+':'+x.start,seen=new Set([key(caller)]),queue=[caller],found=[];\n while(queue.length){\n  const next=children(queue.shift());if(!next)return null;\n  for(const x of next){if(seen.has(key(x)))continue;seen.add(key(x));queue.push(x);if(key(x)!==key(gate)&&key(x)!==key(leaf))found.push(x);}\n  if(seen.size>32)throw Error('owned fixture process bound exceeded');\n }\n return same(caller)&&same(gate)&&same(leaf)&&seen.has(key(gate))&&seen.has(key(leaf))?found:null;\n};\nconst read=p=>{try{return JSON.parse(fs.readFileSync(p,'utf8'));}catch(e){return null;}};\nconst wait=async(f,ms)=>{const end=Date.now()+ms;do{if(f())return true;await new Promise(r=>setTimeout(r,10));}while(Date.now()<end);return !!f();};\nconst leaf='const fs=require(\"fs\");const s=fs.readFileSync(\"/proc/self/stat\",\"utf8\");fs.writeFileSync('+JSON.stringify(leafFile)+',JSON.stringify({pid:process.pid,start:s.slice(s.lastIndexOf(\")\")+1).trim().split(/\\\\s+/)[19]}));setInterval(()=>{},1000);';\nconst gate='const fs=require(\"fs\"),cp=require(\"child_process\");const s=fs.readFileSync(\"/proc/self/stat\",\"utf8\");fs.writeFileSync('+JSON.stringify(gateFile)+',JSON.stringify({pid:process.pid,start:s.slice(s.lastIndexOf(\")\")+1).trim().split(/\\\\s+/)[19]}));const c=cp.spawn(process.execPath,[\"-e\",'+JSON.stringify(leaf)+'],{detached:true,stdio:\"ignore\"});c.unref();const end=Date.now()+10000;while(!fs.existsSync('+JSON.stringify(leafFile)+')){if(Date.now()>end)throw Error(\"owned leaf readiness timeout\");Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,10);}while(!fs.existsSync('+JSON.stringify(releaseFile)+')){if(Date.now()>end)throw Error(\"owned snapshot release timeout\");Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,10);}'+(mode==='escape'?'process.exit(0);':'setInterval(()=>{},1000);');\nconst expr=\"(require '[evidence :as e]) (e/spawn-result \"+JSON.stringify(dir)+' ['+JSON.stringify(process.execPath)+' \"-e\" '+JSON.stringify(gate)+']) nil';\nlet parent,parentID,leafID,gateID,intermediateIDs=[],closed=false,parentCode=null,parentSignal=null;\nconst out={ready:false,parentExited:false,signalDelivered:false,forcedParent:false,gateAbsent:false,leafAbsent:false,intermediatesCaptured:false,intermediatesAbsent:false};\n(async()=>{try{\n parent=cp.spawn(process.execPath,[nbb,'-cp',path.join(root,'scripts')+':'+path.join(root,'src'),'-e',expr],{cwd:root,stdio:['ignore','pipe','pipe']});\n parentID=identity(parent.pid);\n parent.stdout.on('data',b=>process.stderr.write(b));parent.stderr.on('data',b=>process.stderr.write(b));\n parent.on('error',e=>{out.bootstrapError=String(e);closed=true;});\n parent.on('exit',(code,signal)=>{closed=true;parentCode=code;parentSignal=signal;});\n out.ready=await wait(()=>{\n  leafID=read(leafFile);gateID=read(gateFile);if(!leafID||!gateID)return false;\n  const captured=intermediateSnapshot(parentID,gateID,leafID);if(captured===null)return false;\n  intermediateIDs=captured;out.intermediatesCaptured=true;return true;\n },15000);\n if(out.ready){fs.writeFileSync(releaseFile,'release\\n',{flag:'wx'});if(mode!=='escape')out.signalDelivered=parent.kill(mode);}\n out.parentExited=await wait(()=>closed,10000);\n out.gateAbsent=!!gateID&&await wait(()=>!same(gateID),4000);\n out.leafAbsent=!!leafID&&await wait(()=>!same(leafID),4000);\n out.intermediatesAbsent=out.intermediatesCaptured&&await wait(()=>intermediateIDs.every(x=>!same(x)),6000);\n out.intermediates=intermediateIDs.map(({pid,start})=>({pid,start}));\n out.parentCode=parentCode;out.parentSignal=parentSignal;\n }finally{\n  // Baseline assertions retain the pre-cleanup observations. Stop only these\n  // newly created, start-bound fixtures so a causal RED leaves no live child.\n  if(parent&&!closed){out.forcedParent=true;parent.kill('SIGKILL');if(!await wait(()=>closed,3000))throw Error('owned caller cleanup deadline');}\n  for(const x of [...intermediateIDs,gateID,leafID])if(same(x)){try{process.kill(x.pid,'SIGKILL');}catch(e){if(e.code!=='ESRCH')throw e;}}\n  if(!await wait(()=>!same(gateID)&&!same(leafID)&&intermediateIDs.every(x=>!same(x)),3000))throw Error('owned fixture cleanup deadline');\n  out.fixtureCleanup=true;\n  fs.rmSync(dir,{recursive:true,force:true});\n }\n console.log(JSON.stringify(out));\n})().catch(e=>{console.error(e);process.exitCode=2;});")
+
+(defn gate-custody-observation [mode]
+  (owned-controller-observation gate-custody-controller
+                                [mode cli/root (aget (.-argv js/process) 1)]))
+
+(deftest gate-redetached-descendant-is-gone-before-result-returns
+  (let [seen (gate-custody-observation "escape")]
+    (is (true? (:ready seen)) "actual gate and re-detached leaf reached readiness")
+    (is (true? (:parentExited seen)))
+    (is (= 0 (:parentCode seen)))
+    (is (false? (:forcedParent seen)))
+    (is (true? (:fixtureCleanup seen)))
+    (is (true? (:intermediatesCaptured seen)))
+    (is (true? (:intermediatesAbsent seen)) "captured intermediate helpers are reaped")
+    (is (true? (:gateAbsent seen)))
+    (is (true? (:leafAbsent seen)) "setsid-equivalent Node detached child is gone")))
+
+(deftest interrupted-receipt-caller-leaves-no-running-gate-or-escaped-leaf
+  (doseq [mode ["SIGINT" "SIGTERM"]]
+    (let [seen (gate-custody-observation mode)]
+      (is (true? (:ready seen)) "actual gate and re-detached leaf reached readiness")
+      (is (true? (:signalDelivered seen)))
+      (is (true? (:parentExited seen)))
+      (is (false? (:forcedParent seen)))
+      (is (true? (:fixtureCleanup seen)))
+      (is (true? (:intermediatesCaptured seen)))
+      (is (true? (:intermediatesAbsent seen)) "captured intermediate helpers are reaped")
+      (is (or (= mode (:parentSignal seen))
+              (= (if (= mode "SIGINT") 130 143) (:parentCode seen))))
+      (is (true? (:gateAbsent seen)) "targeted caller interruption closes its gate")
+      (is (true? (:leafAbsent seen)) "targeted caller interruption closes escaped leaf"))))
+
+(def spawn-error-controller
+  "Patch the native export before evidence loads; no helper or gate is started."
+  "const fs=require('fs'),os=require('os'),path=require('path'),cp=require('child_process');\nconst code=process.argv[1],pidMode=process.argv[2],root=process.argv[3],nbb=process.argv[4];\nconst dir=fs.mkdtempSync(path.join(os.tmpdir(),'foresight-spawn-error-'));\nconst preload=path.join(dir,'spawn-error.cjs');\ntry{\n const pid=pidMode==='positive'?321:undefined;\n const injected=\"const cp=require('child_process'),original=cp.spawnSync;globalThis.__foresightSpawnStubCalls=0;cp.spawnSync=function(command,...args){if(command==='python3'||command==='fixture-gate-stub'){globalThis.__foresightSpawnStubCalls++;const error=Object.assign(new Error('controlled spawn transport error'),{code:\"+JSON.stringify(code)+\"});return {pid:\"+(pid===undefined?'undefined':pid)+\",status:null,signal:null,error,output:[]};}return original.call(this,command,...args);};\";\n fs.writeFileSync(preload,injected);\n const expr=\"(require '[evidence :as e]) (let [seen (try (let [r (e/spawn-result (js/process.cwd) [\\\"fixture-gate-stub\\\"])] #js {:outcome \\\"unavailable\\\" :errorCode (some-> r .-error .-code)}) (catch :default error #js {:outcome \\\"threw\\\" :quarantine (true? (:receipt-river/quarantine (ex-data error)))}))] (aset seen \\\"stubCalls\\\" (aget js/globalThis \\\"__foresightSpawnStubCalls\\\")) (js/console.log (js/JSON.stringify seen))) nil\";\n const r=cp.spawnSync(process.execPath,['-r',preload,nbb,'-cp',path.join(root,'scripts')+':'+path.join(root,'src'),'-e',expr],{cwd:root,encoding:'utf8',timeout:15000});\n if(r.error||r.status!==0||r.stderr.trim())throw Error('controlled NBB spawn-error fixture did not complete normally');\n const seen=JSON.parse(r.stdout.trim());\n if(seen.stubCalls!==1)throw Error('controlled spawn interception was not reached exactly once');\n console.log(JSON.stringify(seen));\n}finally{fs.rmSync(dir,{recursive:true,force:true});}\n")
+
+(deftest spawn-transport-errors-retain-receipt-quarantine
+  (doseq [[code pid-mode] [["ENOBUFS" "positive"] ["EUNKNOWN" "missing"]]]
+    (let [seen (owned-controller-observation
+                 spawn-error-controller
+                 [code pid-mode cli/root (aget (.-argv js/process) 1)])]
+      (is (= 1 (:stubCalls seen)))
+      (is (= {:outcome "threw" :quarantine true :stubCalls 1} seen)
+          "unknown or post-start spawn failure is receipt quarantine"))))
+
+(deftest proven-preexec-python-unavailability-remains-unavailable
+  (let [seen (owned-controller-observation
+               spawn-error-controller
+               ["ENOENT" "missing" cli/root (aget (.-argv js/process) 1)])]
+    (is (= {:outcome "unavailable" :errorCode "ENOENT" :stubCalls 1} seen))))
+
+(def reaped-leader-cleanup-controller
+  "Inject a late adopted child after wait; every process/signal effect is mocked."
+  (str/join "\n"
+    [     "import importlib.util, json, os, sys"
+     "from types import SimpleNamespace"
+     "from unittest.mock import patch"
+     "spec = importlib.util.spec_from_file_location('owned_gate_under_test', sys.argv[1])"
+     "gate = importlib.util.module_from_spec(spec)"
+     "spec.loader.exec_module(gate)"
+     "state = {'lateChildInjected': False, 'lateChildPending': False,"
+     "         'lateChildReaped': False, 'afterReapProbes': 0, 'closed': False}"
+     "class Process:"
+     "    pid = 771"
+     "    returncode = None"
+     "    def wait(self, timeout):"
+     "        self.returncode = 0"
+     "        return 0"
+     "process = Process()"
+     "class Owned:"
+     "    leader_retained = True"
+     "    def __init__(self, pid):"
+     "        assert pid == process.pid"
+     "    def discover(self): pass"
+     "    def reap_nonleader(self): pass"
+     "    def kill_owned(self): pass"
+     "    def live_descendants(self): return False"
+     "    def close(self): state['closed'] = True"
+     "def children(_pid):"
+     "    if process.returncode is not None and not state['lateChildInjected']:"
+     "        state['lateChildInjected'] = state['lateChildPending'] = True"
+     "    return {772} if state['lateChildPending'] else set()"
+     "def reap(_leader, _terminate):"
+     "    if state['lateChildPending']:"
+     "        state['lateChildPending'] = False"
+     "        state['lateChildReaped'] = True"
+     "def leader_exit(pid):"
+     "    assert pid == process.pid"
+     "    if process.returncode is not None:"
+     "        state['afterReapProbes'] += 1"
+     "        raise ChildProcessError('controlled already-reaped leader')"
+     "    return SimpleNamespace(si_code=os.CLD_EXITED, si_status=0)"
+     "# No process, signal, pidfd, parent-death or kill effect is allowed by this"
+     "# deterministic race control: it executes the actual cleanup state machine."
+     "with patch.multiple(gate, enable_subreaper=lambda: None,"
+     "                    arm_parent_death=lambda _parent: None, OwnedChildren=Owned,"
+     "                    direct_children=children, reap_adopted_children=reap,"
+     "                    leader_exit=leader_exit), \\"
+     "     patch.object(gate.subprocess, 'Popen', return_value=process) as spawn, \\"
+     "     patch.object(gate.os, 'getppid', return_value=42), \\"
+     "     patch.object(gate.signal, 'signal', return_value=gate.signal.SIG_DFL), \\"
+     "     patch.object(gate.time, 'sleep', return_value=None):"
+     "    outcome = gate.supervise_gate(['controlled-no-spawn'], 42)"
+     "    assert spawn.call_count == 1"
+     "print(json.dumps({'outcome': outcome, **state}))"]))
+
+(deftest reaped-leader-cleanup-drains-a-late-adopted-child
+  (let [result (child-process/spawnSync
+                 "python3"
+                 (clj->js ["-B" "-c" reaped-leader-cleanup-controller
+                           (path/join cli/root "scripts" "lib" "owned-gate-process.py")])
+                 #js {:encoding "utf8" :shell false :timeout 10000})]
+    (when-not (and (nil? (.-error result)) (= 0 (.-status result))
+                   (str/blank? (.-stderr result)))
+      (throw (ex-info "Controlled cleanup race did not execute normally"
+                      {:status (.-status result) :stderr (.-stderr result)})))
+    (let [seen (js->clj (js/JSON.parse (.-stdout result)) :keywordize-keys true)]
+      (is (true? (:lateChildInjected seen)))
+      (is (true? (:lateChildReaped seen)))
+      (is (true? (:closed seen)))
+      (is (= 0 (get-in seen [:outcome :status])))
+      (is (true? (get-in seen [:outcome :cleanupComplete])))
+      (is (nil? (get-in seen [:outcome :error])))
+      (is (zero? (:afterReapProbes seen))
+          "a reaped leader is never passed to waitid again"))))
+
+(def proc-children-preflight-controller
+  "Exercise both actual setup functions with controlled proc and kernel effects."
+  (str/join "\n"
+    [     "import importlib.util, json, os, sys"
+     "from types import SimpleNamespace"
+     "from unittest.mock import patch"
+     "spec = importlib.util.spec_from_file_location('custody_preflight_under_test', sys.argv[1])"
+     "module = importlib.util.module_from_spec(spec)"
+     "spec.loader.exec_module(module)"
+     "observed = {}"
+     "for mode in ['missing', 'empty', 'occupied', 'denied']:"
+     "    effects = []"
+     "    class ProcPath:"
+     "        def __init__(self, value): self.value = str(value)"
+     "        def is_dir(self): return self.value == '/proc/self/task'"
+     "        def iterdir(self): return [ProcPath(self.value + '/' + str(os.getpid()))]"
+     "        def __truediv__(self, name): return ProcPath(self.value + '/' + name)"
+     "        def read_text(self):"
+     "            assert self.value.endswith('/children'), 'unexpected proc read'"
+     "            if mode == 'missing': raise FileNotFoundError('controlled missing children')"
+     "            if mode == 'denied': raise PermissionError('controlled denied children')"
+     "            return '731' if mode == 'occupied' else ''"
+     "    def pidfd(pid):"
+     "        effects.append('pidfd')"
+     "        return 771"
+     "    def close(fd):"
+     "        assert fd == 771"
+     "        effects.append('close')"
+     "    def prctl(operation, *args):"
+     "        effects.append('prctl:' + str(operation))"
+     "        if operation == 37: args[0]._obj.value = 1"
+     "        return 0"
+     "    # All proc reads and kernel-affecting pidfd/prctl/close operations are"
+     "    # intercepted. No fake PID/fd reaches the operating system."
+     "    with patch.object(module, 'Path', ProcPath),          patch.object(module, 'process_identity', return_value={'start': 1}),          patch.object(module.os, 'pidfd_open', side_effect=pidfd),          patch.object(module.os, 'close', side_effect=close),          patch.object(module.ctypes, 'CDLL', return_value=SimpleNamespace(prctl=prctl)):"
+     "        try:"
+     "            module.enable_subreaper()"
+     "            result = {'outcome': 'ready', 'errorType': None, 'error': None}"
+     "        except OSError as error:"
+     "            result = {'outcome': 'refused', 'errorType': type(error).__name__, 'error': str(error)}"
+     "        except RuntimeError as error:"
+     "            result = {'outcome': 'refused', 'errorType': type(error).__name__, 'error': str(error)}"
+     "    observed[mode] = dict(result, kernelEffects=effects)"
+     "print(json.dumps(observed))"]))
+
+(deftest missing-proc-children-refuses-before-custody
+  (doseq [relative ["scripts/lib/owned-gate-process.py"
+                    "test/fixtures/owned-process-supervisor.py"]]
+    (let [result (child-process/spawnSync
+                   "python3"
+                   (clj->js ["-B" "-c" proc-children-preflight-controller
+                             (path/join cli/root relative)])
+                   #js {:encoding "utf8" :shell false :timeout 10000})]
+      (when-not (and (nil? (.-error result)) (= 0 (.-status result))
+                     (str/blank? (.-stderr result)))
+        (throw (ex-info "Controlled proc-children preflight did not execute normally"
+                        {:status (.-status result) :stderr (.-stderr result)})))
+      (let [seen (js->clj (js/JSON.parse (.-stdout result)) :keywordize-keys true)]
+        (is (= "refused" (get-in seen [:missing :outcome])) relative)
+        (is (empty? (get-in seen [:missing :kernelEffects]))
+            "missing child evidence is refused before kernel custody effects")
+        (is (str/includes? (or (get-in seen [:missing :error]) "")
+                           "CONFIG_PROC_CHILDREN") relative)
+        (is (= "ready" (get-in seen [:empty :outcome])) relative)
+        (is (= ["pidfd" "close" "prctl:36" "prctl:37"]
+               (get-in seen [:empty :kernelEffects])) relative)
+        (is (= "refused" (get-in seen [:occupied :outcome])) relative)
+        (is (empty? (get-in seen [:occupied :kernelEffects])) relative)
+        (is (= "refused" (get-in seen [:denied :outcome])) relative)
+        (is (empty? (get-in seen [:denied :kernelEffects])) relative)))))
+
+
+(def first-cleanup-zombie-controller
+  "Inject a late zombie or live child after main-loop reaping; mock kernel effects."
+  (str/join "\n"
+    ["import importlib.util, json, os, sys"
+     "from types import SimpleNamespace"
+     "from unittest.mock import patch"
+     "spec = importlib.util.spec_from_file_location('supervisor_cleanup_under_test', sys.argv[1])"
+     "gate = importlib.util.module_from_spec(spec)"
+     "spec.loader.exec_module(gate)"
+     "observations = {}"
+     "for mode in ['zombie', 'live']:"
+     "    state = {'injected': False, 'pending': False, 'reaped': False,"
+     "             'killed': False, 'signals': [], 'waitCalls': 0, 'closed': False}"
+     "    class Pipe:"
+     "        def close(self): pass"
+     "    class Process:"
+     "        pid = 771"
+     "        returncode = None"
+     "        stdout = Pipe()"
+     "        def wait(self, timeout):"
+     "            self.returncode = 0"
+     "            return 0"
+     "    process = Process()"
+     "    class Owned:"
+     "        leader_retained = True"
+     "        def __init__(self, pid): assert pid == process.pid"
+     "        def discover(self): pass"
+     "        def reap_nonleader(self): pass"
+     "        def live_descendants(self): return []"
+     "        def close(self): state['closed'] = True"
+     "    class Capture:"
+     "        eof = True"
+     "        truncated = False"
+     "        data = b''"
+     "        def __init__(self, pipe, limit): assert pipe is process.stdout"
+     "        def drain(self, _seconds): pass"
+     "        def close(self): pass"
+     "    def children(pid):"
+     "        assert pid == os.getpid()"
+     "        return {772} if state['pending'] else set()"
+     "    def identity(pid):"
+     "        assert pid == 772"
+     "        return {'start': 1, 'parent': os.getpid(), 'group': 772,"
+     "                'state': 'Z' if mode == 'zombie' or state['killed'] else 'S'}"
+     "    def leader_exit(pid):"
+     "        assert pid == process.pid and process.returncode is None"
+     "        # This owned child exits after the main-loop reap, before leader exit"
+     "        # is observed. The live control models an undiscovered late child."
+     "        if not state['injected']:"
+     "            state['injected'] = state['pending'] = True"
+     "        return SimpleNamespace(si_code=os.CLD_EXITED, si_status=0)"
+     "    def waitpid(pid, flags):"
+     "        assert pid == 772 and flags == os.WNOHANG"
+     "        state['waitCalls'] += 1"
+     "        if mode == 'zombie' or state['killed']:"
+     "            state['pending'] = False"
+     "            state['reaped'] = True"
+     "            return pid, 0"
+     "        return 0, 0"
+     "    def kill(pid, sig):"
+     "        assert pid == 772 and sig == gate.signal.SIGKILL"
+     "        state['signals'].append('child')"
+     "        state['killed'] = True"
+     "    def killpg(pid, sig):"
+     "        assert pid == process.pid and sig == gate.signal.SIGKILL"
+     "        state['signals'].append('group')"
+     "    # Execute actual supervise and actual reap_adopted_children. Every fake"
+     "    # process identity/signal/wait is intercepted; none reaches the kernel."
+     "    with patch.multiple(gate, enable_subreaper=lambda: None, OwnedChildren=Owned,"
+     "                        Capture=Capture, direct_children=children,"
+     "                        process_identity=identity, leader_exit=leader_exit), \\"
+     "         patch.object(gate.subprocess, 'Popen', return_value=process) as spawn, \\"
+     "         patch.object(gate.os, 'waitpid', side_effect=waitpid), \\"
+     "         patch.object(gate.os, 'kill', side_effect=kill), \\"
+     "         patch.object(gate.os, 'killpg', side_effect=killpg), \\"
+     "         patch.object(gate.signal, 'signal', return_value=gate.signal.SIG_DFL):"
+     "        result = gate.supervise(['controlled-no-spawn'], 1000, cleanup_ms=1000)"
+     "        assert spawn.call_count == 1"
+     "        state['childrenAbsent'] = not children(os.getpid())"
+     "    observations[mode] = {'result': result, **state}"
+     "print(json.dumps(observations))"]))
+
+(deftest first-cleanup-reaps-zombies-without-accepting-live-descendants
+  (let [result (child-process/spawnSync
+                 "python3"
+                 (clj->js ["-B" "-c" first-cleanup-zombie-controller
+                           (path/join cli/root "test" "fixtures"
+                                      "owned-process-supervisor.py")])
+                 #js {:encoding "utf8" :shell false :timeout 10000})]
+    (when-not (and (nil? (.-error result)) (= 0 (.-status result))
+                   (str/blank? (.-stderr result)))
+      (throw (ex-info "Controlled first-cleanup race did not execute normally"
+                      {:status (.-status result) :stderr (.-stderr result)})))
+    (let [seen (js->clj (js/JSON.parse (.-stdout result)) :keywordize-keys true)]
+      (doseq [mode [:zombie :live]]
+        (is (true? (get-in seen [mode :injected])))
+        (is (true? (get-in seen [mode :reaped])))
+        (is (true? (get-in seen [mode :childrenAbsent])))
+        (is (true? (get-in seen [mode :closed])))
+        (is (true? (get-in seen [mode :result :cleanup-complete?])))
+        (is (= 0 (get-in seen [mode :result :exit-code]))))
+      (is (= "exited" (get-in seen [:zombie :result :termination])))
+      (is (str/blank? (get-in seen [:zombie :result :diagnostic])))
+      (is (empty? (get-in seen [:zombie :signals]))
+          "an exited adopted zombie is reaped without signalling")
+      (is (= "cleanup-error" (get-in seen [:live :result :termination])))
+      (is (str/includes? (get-in seen [:live :result :diagnostic])
+                         "late owned descendants"))
+      (is (= ["group" "child"] (get-in seen [:live :signals]))
+          "a genuinely live late child is still refused and cleaned"))))
 
 (test/run-tests 'evidence-cli-test)

@@ -1,3 +1,6 @@
 {:linters
  {:unresolved-namespace {:exclude [js]}
-  :unresolved-var {:exclude [cljs.core/clj->js cljs.core/js->clj]}}}
+  ;; NBB runs scripts/evidence.clj as ClojureScript. These are real runtime
+  ;; exports, absent from the linter's JVM-mode library index for .clj files.
+  :unresolved-var {:exclude [cljs.core/clj->js cljs.core/js->clj
+                             cljs.reader/read-string]}}}

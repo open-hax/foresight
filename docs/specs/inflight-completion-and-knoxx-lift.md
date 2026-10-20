@@ -146,9 +146,10 @@ directory. A failure before the write removes an empty reserved segment and
 releases the lock, unless the working ledger changed while the gate ran; that
 change keeps the lock as a quarantine marker. The rest of the working ledger
 is compared with the pre-gate snapshot again after the write, and when a
-gate aborts before writing; a change there also keeps the lock. No receipt is
-written unless the writer lock still names its path before and after the
-write, and a writer lock that cannot be released is recreated as a
+gate aborts before writing; a change there also keeps the lock. The writer lock
+must name its path before the write. If its post-write check fails, receipt bytes
+may already exist, but the segment remains quarantined. A writer lock that
+cannot be released is recreated as a
 quarantine marker. After the reserved descriptor is closed, the segment path
 must still name the written inode with exactly the written bytes, checked
 again before each lock is released; a mismatch keeps the lock. If the reserved path has vanished, the lock is released only
@@ -164,10 +165,10 @@ reviewed root commit that is also the clean current `HEAD`. With Git replacement
 objects disabled, it requires regular non-executable blobs, reads the catalog
 and the segmented Receipt River ledger from that same Git object, hashes the
 raw byte streams, and decodes strict UTF-8. Against a trusted base it proves:
-no base segment was edited or removed; no base record was dropped; the frozen
+no base one-record segment was edited or removed; no base record was dropped; the frozen
 legacy file may only lose whole lines (terminator-preserving subsequence) when
-those records move into segments; and every new record obeys the current
-envelope law. Exact byte-prefix of the entire `.ημ/receipts.edn` monolith is
+those records move into segments; no record appears twice; and every new record
+obeys the current envelope law. Exact byte-prefix of the entire `.ημ/receipts.edn` monolith is
 no longer the promotion invariant once segments exist. Every result revision
 must equal its repository gitlink in the reviewed tree, and the adapter
 rechecks root state after the reads. A mutable working tree, a caller-supplied
