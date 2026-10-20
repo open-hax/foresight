@@ -2226,9 +2226,9 @@
                        (not @retain-writer-lock?)
                        (not @directory-replaced?)
                        (not (and quarantined? @quarantined?))
-                       (lstat-if-present!
-                        (path/join (:proc-path parent) semantic-basename)
-                        "Receipt River segment"))
+                       ;; A failed lstat counts as present, so cleanup still
+                       ;; retains the writer lock and closes descriptors.
+                       (reserved-basename-present? reservation))
               (reset! retain-writer-lock? true)
               (when-not @late-replacement-error
                 (reset! late-replacement-error
