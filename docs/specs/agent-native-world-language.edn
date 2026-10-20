@@ -1,0 +1,336 @@
+{:language/id :foresight/agent-native-world
+ :language/version 1
+ :language/status :proposed
+
+ :language/laws
+ [:data-before-runtime
+  :closed-evaluation
+  :typed-references
+  :actors-share-pipes-not-authority
+  :typed-capabilities
+  :events-are-facts-state-is-projection
+  :desired-state-is-data
+  :authority-is-evidence-backed
+  :sessions-are-causal-subgraphs
+  :context-is-a-projection
+  :effects-leave-receipts
+  :errors-are-data]
+
+ :language/primitives
+ {:collections #{:list :vector :map :set}
+  :predicates #{:= :not= :< :<= :> :>= :contains? :subset?}
+  :sequence #{:map :filter :fold :reduce}
+  :composition #{:comp :pipe}
+  :control #{:option :result :traverse}
+  :identity #{:ref}}
+
+ :language/schema-forms
+ #{:string :int :bool :keyword :enum :maybe :vector :tuple :set
+   :map :or :and :ref :pred}
+
+ :language/actor-kinds
+ #{:human :program :agent}
+
+ :language/core-schemas
+ {:ref
+  [:tuple :keyword :string]
+
+  :actor
+  [:map
+   [:actor/id [:ref :ref]]
+   [:actor/kind [:enum :human :program :agent]]
+   [:actor/authorities {:optional true} [:vector [:ref :ref]]]
+   [:actor/roles {:optional true} [:vector [:ref :ref]]]]
+
+  :authority-evidence
+  [:map
+   [:authority-evidence/id [:ref :ref]]
+   [:authority-evidence/issuer [:ref :ref]]
+   [:authority-evidence/subject [:ref :ref]]
+   [:authority-evidence/grants [:vector [:ref :ref]]]
+   [:authority-evidence/evidence [:vector [:ref :ref]]]
+   [:authority-evidence/valid-from :string]
+   [:authority-evidence/valid-until [:maybe :string]]]
+
+  :resource
+  [:map
+   [:resource/id [:ref :ref]]
+   [:resource/kind :keyword]
+   [:resource/schema [:ref :ref]]
+   [:resource/provenance {:optional true} [:vector [:ref :ref]]]]
+
+  :role
+  [:map
+   [:role/id [:ref :ref]]
+   [:role/mission :string]
+   [:role/instructions [:vector :string]]
+   [:role/output-contract [:ref :ref]]]
+
+  :capability
+  [:map
+   [:capability/id [:ref :ref]]
+   [:capability/input [:ref :ref]]
+   [:capability/output [:ref :ref]]
+   [:capability/effects [:set :keyword]]]
+
+  :policy
+  [:map
+   [:policy/id [:ref :ref]]
+   [:policy/effect [:enum :allow :deny]]
+   [:policy/when [:vector :any]]]
+
+  :observation
+  [:map
+   [:observation/id [:ref :ref]]
+   [:observation/actor [:ref :ref]]
+   [:observation/resource [:ref :ref]]
+   [:observation/value :any]]
+
+  :claim
+  [:map
+   [:claim/id [:ref :ref]]
+   [:claim/proposition :any]
+   [:claim/evidence [:vector [:ref :ref]]]
+   [:claim/confidence [:pred :probability]]]
+
+  :desired-state
+  [:map
+   [:desired-state/id [:ref :ref]]
+   [:desired-state/conditions [:vector [:vector :any]]]]
+
+  :plan
+  [:map
+   [:plan/id [:ref :ref]]
+   [:plan/from [:ref :ref]]
+   [:plan/to [:ref :ref]]
+   [:plan/actions [:vector [:ref :ref]]]]
+
+  :event
+  [:map
+   [:event/id [:ref :ref]]
+   [:event/type :keyword]
+   [:event/actor [:ref :ref]]
+   [:event/session [:ref :ref]]
+   [:event/causes [:vector [:ref :ref]]]
+   [:event/payload :any]]
+
+  :receipt
+  [:map
+   [:receipt/id [:ref :ref]]
+   [:receipt/event [:ref :ref]]
+   [:receipt/status [:enum :accepted :denied :failed]]
+   [:receipt/policy {:optional true} [:ref :ref]]
+   [:receipt/evidence [:vector :any]]]
+
+  :session
+  [:map
+   [:session/id [:ref :ref]]
+   [:session/root-event [:ref :ref]]
+   [:session/actor [:ref :ref]]
+   [:session/status [:enum :pending :running :completed :failed]]
+   [:session/children [:vector [:ref :ref]]]
+   [:session/resources [:vector [:ref :ref]]]
+   [:session/artifacts [:vector [:ref :ref]]]
+   [:session/receipts [:vector [:ref :ref]]]]
+
+  :session-result
+  [:map
+   [:session/id [:ref :ref]]
+   [:session/root-event [:ref :ref]]
+   [:session/status [:enum :completed :failed]]
+   [:session/events [:vector [:ref :ref]]]
+   [:session/resources [:vector [:ref :ref]]]
+   [:session/children [:vector [:ref :ref]]]
+   [:session/artifacts [:vector [:ref :ref]]]
+   [:session/receipts [:vector [:ref :ref]]]
+   [:session/projection-diff :any]]
+
+  :session-started
+  [:map
+   [:session/id [:ref :ref]]
+   [:actor/id [:ref :ref]]
+   [:goal :string]
+   [:world/current [:ref :ref]]
+   [:world/desired [:ref :ref]]
+   [:forms/allowed [:set :keyword]]]
+
+  :resource-read
+  [:map
+   [:resource/id [:ref :ref]]
+   [:purpose :string]]
+
+  :agent-invoke
+  [:map
+   [:actor/id [:ref :ref]]
+   [:role/id [:ref :ref]]
+   [:task :any]
+   [:resources [:vector [:ref :ref]]]
+   [:output/schema [:ref :ref]]]
+
+  :session-await
+  [:map
+   [:sessions [:vector [:ref :ref]]]
+   [:join [:enum :all :any]]]
+
+  :artifact-emit
+  [:map
+   [:artifact/id [:ref :ref]]
+   [:artifact/kind :keyword]
+   [:inputs [:vector [:ref :ref]]]
+   [:content :any]]
+
+  :session-complete
+  [:map
+   [:status [:enum :completed :failed]]
+   [:result [:maybe [:ref :ref]]]]}
+
+ :language/predicates
+ {:probability
+  {:predicate/description "number in the inclusive interval [0,1]"}}
+
+ :language/capabilities
+ {[:capability "resource/read"]
+  {:capability/id [:capability "resource/read"]
+   :capability/input [:schema "resource-read"]
+   :capability/output [:schema "resource"]
+   :capability/effects #{:resource/read :event/append :receipt/append}}
+
+  [:capability "agent/invoke"]
+  {:capability/id [:capability "agent/invoke"]
+   :capability/input [:schema "agent-invoke"]
+   :capability/output [:schema "session"]
+   :capability/effects #{:session/create :agent/call :event/append :receipt/append}}
+
+  [:capability "session/await"]
+  {:capability/id [:capability "session/await"]
+   :capability/input [:schema "session-await"]
+   :capability/output [:schema "session-result"]
+   :capability/effects #{:session/observe :event/append :receipt/append}}
+
+  [:capability "artifact/emit"]
+  {:capability/id [:capability "artifact/emit"]
+   :capability/input [:schema "artifact-emit"]
+   :capability/output [:schema "artifact"]
+   :capability/effects #{:artifact/create :event/append :receipt/append}}
+
+  [:capability "session/complete"]
+  {:capability/id [:capability "session/complete"]
+   :capability/input [:schema "session-complete"]
+   :capability/output [:schema "session-result"]
+   :capability/effects #{:session/complete :event/append :receipt/append}}}
+
+ :language/effect-forms
+ {:session/started
+  {:form/input [:schema "session-started"]
+   :form/capability nil
+   :form/resolver :session/start
+   :form/events #{:session/started}}
+
+  :resource/read
+  {:form/input [:schema "resource-read"]
+   :form/capability [:capability "resource/read"]
+   :form/resolver :resource/read
+   :form/events #{:resource/read}}
+
+  :agent/invoke
+  {:form/input [:schema "agent-invoke"]
+   :form/capability [:capability "agent/invoke"]
+   :form/resolver :agent/invoke
+   :form/events #{:session/started :agent/invoked}}
+
+  :session/await
+  {:form/input [:schema "session-await"]
+   :form/capability [:capability "session/await"]
+   :form/resolver :session/await
+   :form/events #{:session/awaited}}
+
+  :artifact/emit
+  {:form/input [:schema "artifact-emit"]
+   :form/capability [:capability "artifact/emit"]
+   :form/resolver :artifact/emit
+   :form/events #{:artifact/emitted}}
+
+  :session/complete
+  {:form/input [:schema "session-complete"]
+   :form/capability [:capability "session/complete"]
+   :form/resolver :session/complete
+   :form/events #{:session/completed}}}
+
+ :language/node-classes
+ {:literal {:evaluation :value}
+  :pure {:evaluation :deterministic-expansion}
+  :effect {:evaluation :effect-request}
+  :pending {:evaluation :stable-pending-ref}
+  :invalid {:evaluation :typed-error}}
+
+ :language/context-shape
+ [:map
+  [:context/actor [:ref :ref]]
+  [:context/session [:ref :ref]]
+  [:context/policies [:vector [:ref :ref]]]
+  [:context/schema-registry :any]
+  [:context/resolver-registry :any]
+  [:context/world-slice :any]
+  [:context/capabilities [:set [:ref :ref]]]]
+
+ :language/codecs
+ {:edn
+  {:codec/trust :portable
+   :codec/role :canonical-source-and-interchange}
+  :pickle
+  {:codec/trust :trusted-local-only
+   :codec/role :runtime-cache
+   :codec/untrusted-load? false}}
+
+ :language/first-proof
+ {:world/current [:projection "empty"]
+  :world/desired [:desired-state "coordinator-complete"]
+  :actors
+  [{:actor/id [:actor "coordinator"]
+    :actor/kind :agent
+    :actor/roles [[:role "research-coordinator"]]}
+   {:actor/id [:actor "specialist-a"] :actor/kind :agent}
+   {:actor/id [:actor "specialist-b"] :actor/kind :agent}]
+  :resources [[:resource "a"] [:resource "b"]]
+  :program
+  [[:session/started
+    {:session/id [:session "root"]
+     :actor/id [:actor "coordinator"]
+     :goal "Read two resources, delegate two focused questions, synthesize one artifact."
+     :world/current [:projection "empty"]
+     :world/desired [:desired-state "coordinator-complete"]
+     :forms/allowed #{:resource/read :agent/invoke :session/await
+                      :artifact/emit :session/complete}}]
+   [:resource/read {:resource/id [:resource "a"] :purpose "Collect evidence."}]
+   [:resource/read {:resource/id [:resource "b"] :purpose "Collect evidence."}]
+   [:agent/invoke
+    {:actor/id [:actor "specialist-a"]
+     :role/id [:role "specialist"]
+     :task {:question "Analyze the first concern."}
+     :resources [[:resource "a"] [:resource "b"]]
+     :output/schema [:schema "specialist-result"]}]
+   [:agent/invoke
+    {:actor/id [:actor "specialist-b"]
+     :role/id [:role "specialist"]
+     :task {:question "Analyze the second concern."}
+     :resources [[:resource "a"] [:resource "b"]]
+     :output/schema [:schema "specialist-result"]}]
+   [:session/await
+    {:sessions [[:session "child-a"] [:session "child-b"]]
+     :join :all}]
+   [:artifact/emit
+    {:artifact/id [:artifact "synthesis"]
+     :artifact/kind :document
+     :inputs [[:session "child-a"] [:session "child-b"]]
+     :content {:from :child-session-results}}]
+   [:session/complete
+    {:status :completed
+     :result [:artifact "synthesis"]}]]}
+
+ :language/ownership
+ {:foresight #{:composition-law :architecture :cross-repository-evidence :end-to-end-proof}
+  :katamorph #{:portable-grammar :schemas :registries :resolver-contracts :cross-host-conformance}
+  :clio #{:event-identity :causal-graph :schema-history :admission :canonical-replay}
+  :knoxx #{:product-session-composition :model-facing-context}
+  :proxx #{:provider-routing-policy :abductive-route-selection}
+  :host-adapters #{:python :node :nbb :filesystem :network :provider-effects}}}
