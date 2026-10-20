@@ -1,14 +1,14 @@
 ---
-uuid: "dev-origin-map"
-title: "Record the fork-org map as validated data"
-status: "incoming"
-type: "task"
-priority: "P1"
-points: "2"
+category: "kanban"
 labels: "workspace, law"
 parent: "fork-dev-origins"
-category: "kanban"
-write-id: "1790900465819-0.qjktgtt0chhkx20d6"
+type: "task"
+write-id: "1790923115273-0.ykb3u5hxe3bfm0lpxjl"
+points: "2"
+title: "Record the fork-org map as validated data"
+priority: "P1"
+status: "in_progress"
+uuid: "dev-origin-map"
 created_at: "2026-10-02T00:21:05.819Z"
 ---
 
