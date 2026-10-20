@@ -1228,6 +1228,43 @@
         (is (next-writer-refused? segments file)
             "the recreated reserved basename cannot become ordinary evidence")))))
 
+(deftest a-failed-basename-lstat-during-cleanup-keeps-the-normal-quarantine-path
+  ;; CodeRabbit cr-comment b69ff5a04005de651e697c4e: the pre-release check for
+  ;; a recreated reserved basename must treat a failed lstat as present (fail
+  ;; closed) through reserved-basename-present?, so cleanup still retains the
+  ;; writer lock through its normal path and reports why, instead of an
+  ;; inspection error escaping the finally block.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            lstat-if-present! cli/lstat-if-present!
+            failed? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/lstat-if-present!
+                      (fn [file description]
+                        (if (and (= "Receipt River segment" description)
+                                 (= (path/basename segment) (path/basename file))
+                                 (not (fs/existsSync segment)))
+                          (do (reset! failed? true)
+                              (cli/append-error!
+                               (str description " could not be inspected: EACCES")))
+                          (lstat-if-present! file description)))]
+          (let [message (try (run-semantic-gate-with!
+                              file segment
+                              (fn [] (throw (js/Error. "gate exploded"))))
+                             nil
+                             (catch :default error (.-message error)))]
+            (is @failed? "the injected lstat failure was reached")
+            (is (string? message) "the run still fails")
+            (is (not (re-find #"could not be inspected" (or message "")))
+                "the inspection error does not replace the cleanup outcome")
+            (is (re-find #"reserved basename reappeared" (or message ""))
+                "the failed lstat is treated as a present basename")))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the ledger stays closed for adjudication")))))
+
 (deftest selected-gates-quarantine-a-reserved-basename-recreated-after-writer-unlock
   ;; Delayed work can wait for the writer-lock unlink itself and only then
   ;; recreate the removed reservation under its own basename. The final
