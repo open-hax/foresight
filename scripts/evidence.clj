@@ -2279,33 +2279,32 @@
                          (str "the Receipt River segment directory was replaced "
                               "after writer-lock release; the ledger must be "
                               "adjudicated by hand"))))
-              ;; Content can change without replacing the directory: work that
-              ;; waited for the writer-lock unlink may add or rewrite a
-              ;; segment. Revalidate the whole ledger and reserved bytes; on
+              ;; The whole-ledger comparison ran above, under the writer
+              ;; lock. After release a later cooperating writer may add its
+              ;; own segment at any moment, so new segments are not evidence
+              ;; of tampering here; selected-gate descendants were already
+              ;; reaped by owned-gate custody before this reservation closed.
+              ;; No cooperating writer touches this run's reserved basename,
+              ;; so only that is rechecked: written bytes must be intact, and
+              ;; an unwritten (removed) reservation must still be absent. On
               ;; mismatch recreate the writer-lock path as a quarantine marker.
-              ;; The comparison skips the reserved basename, so an unwritten
-              ;; (removed) reservation must also still be absent: delayed work
-              ;; can recreate it under that name after this release.
               (when (and writer-lock
                          semantic-basename
                          (or @write-verified? (not @write-started?))
                          (not @directory-replaced?)
                          (not (and quarantined? @quarantined?))
-                         (not (and (working-ledger-unchanged-after-write?
-                                    reservation)
-                                   (if @write-verified?
-                                     (reserved-segment-intact? reservation)
-                                     (not (and @unwritten-removed?
-                                               (reserved-basename-present?
-                                                reservation)))))))
+                         (not (if @write-verified?
+                                (reserved-segment-intact? reservation)
+                                (not (and @unwritten-removed?
+                                          (reserved-basename-present?
+                                           reservation))))))
                 (create-quarantine-marker! parent (:path writer-lock))
                 (when-not @late-replacement-error
                   (reset! late-replacement-error
                           (js/Error.
-                           (str "the Receipt River ledger changed after "
-                                "writer-lock release: only the reserved "
-                                "segment may be added; the ledger must be "
-                                "adjudicated by hand")))))
+                           (str "the Receipt River reserved segment changed "
+                                "after writer-lock release; the ledger must "
+                                "be adjudicated by hand")))))
               (finally
                 (try
                   (fs/closeSync (:fd parent))

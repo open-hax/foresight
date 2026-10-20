@@ -151,7 +151,10 @@ is revalidated against `HEAD` immediately before the receipt is written, and
 compared with the pre-gate snapshot again after it is written or when a
 gate aborts before writing. The writer lock is verified around the write. The
 reserved segment's path and bytes are revalidated after its descriptor is
-closed and again before each lock is released. A
+closed and again before each lock is released. The whole-ledger comparison
+finishes while the writer lock is still held; after release only the run's
+own reserved segment is rechecked, so a later writer's new segment is not
+mistaken for tampering. A
 complete line is bounded to 1 MiB, written through the held descriptor,
 size-checked, and followed by file and directory `fsync`. Pre-write rejection
 releases the lock, unless the working ledger changed while the gate ran; that

@@ -989,17 +989,15 @@
             "the altered receipt cannot become ordinary evidence")))))
 
 (deftest selected-gates-quarantine-ledger-changes-after-writer-lock-release
-  ;; Gate-spawned work can wait for `.receipt-river.writer.lock` to be
-  ;; unlinked and then add or rewrite a segment. The post-release path must
-  ;; revalidate ledger contents and reserved bytes, not only directory
-  ;; identity, and establish a quarantine marker on any mismatch.
+  ;; Work that waits for `.receipt-river.writer.lock` to be unlinked and then
+  ;; rewrites this run's reserved segment is never a cooperating writer, so
+  ;; the post-release path revalidates the reserved bytes and establishes a
+  ;; quarantine marker on mismatch. A segment added after release may be a
+  ;; later writer's (a-later-writer-after-writer-lock-release-is-not-
+  ;; quarantined); gate descendants that could forge one are reaped by
+  ;; owned-gate custody before the reservation closes.
   (doseq [[label mutate!]
-          [["added segment"
-            (fn [segments _segment forged-line]
-              (fs/writeFileSync
-               (path/join segments "2026-10-13T000001000Z-forged.edn")
-               (str forged-line "\n") "utf8"))]
-           ["rewritten reserved segment"
+          [["rewritten reserved segment"
             (fn [_segments segment forged-line]
               (fs/writeFileSync segment (str forged-line "\n") "utf8"))]]]
     (with-receipt-fixture
@@ -1061,8 +1059,12 @@
                     (try (run-semantic-gate-with! file segment (fn [])) :ok
                          (catch :default error (.-message error)))))
           (when (= "holding the writer lock" label)
-            (is (= :ok (try (cli/close-append-reservation! @later) :ok
-                            (catch :default error (.-message error))))
+            (is (= :ok (with-redefs [cli/receipt-file file
+                                     cli/git-capture! (fn [_] reviewed-root-revision)
+                                     cli/read-immutable-receipt-ledger! empty-committed-ledger
+                                     cli/read-immutable-receipt-segment-entries! (fn [_] [])]
+                         (try (cli/close-append-reservation! @later) :ok
+                              (catch :default error (.-message error)))))
                 (str label ": the later writer releases its own lock")))
           (is (= :ok @outcome)
               (str label ": the earlier run does not mistake a later writer "
