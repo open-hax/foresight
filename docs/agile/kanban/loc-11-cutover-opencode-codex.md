@@ -58,9 +58,11 @@ Code, within their budgets. Each projection has a manifest and a receipt.
 - [ ] GIVEN the rendered OpenCode config WHEN its `instructions` are resolved
   THEN no `operation-mindfuck` or `ημΠ.dev` path remains, and the projection
   path appears exactly once.
-- [ ] GIVEN a new OpenCode session and a new Codex session WHEN each is asked
-  for the value after `contract-sentinel:` THEN each replies with exactly its
-  manifest's `:projection/sentinel` nonce. The nonce is random per build, so
+- [ ] GIVEN a new OpenCode session and a new Codex session started in
+  `$WORKDIR`, the same directory whose chain step 4 checks, WHEN each is asked
+  for the value after `contract-sentinel:` THEN each one's complete output,
+  minus the trailing newline, is exactly its manifest's
+  `:projection/sentinel` nonce. The nonce is random per build, so
   the reply proves the harness loaded that projection through its last line,
   without truncation.
 - [ ] GIVEN the Codex project-document chain WHEN its bytes are summed THEN the
@@ -94,7 +96,8 @@ ASK="Reply with only the value that follows 'contract-sentinel:' in your instruc
 echo_check() {  # harness expected command...
   local h=$1 want=$2 got attempt; shift 2
   for attempt in 1 2; do
-    got=$("$@" 2>/dev/null | tail -n 1 | tr -d '[:space:]') || got=""
+    # complete stdout, compared exactly (command substitution strips only trailing newlines)
+    got=$(cd "$WORKDIR" && "$@" 2>/dev/null) || got=""
     printf '%s %s attempt=%s want=%s got=%s\n' "$(date -u +%FT%TZ)" "$h" "$attempt" "$want" "$got" >> "$LOG"
     [ "$got" = "$want" ] && return 0
   done
@@ -138,7 +141,9 @@ echo "LOC.11 verified"
 OpenCode silently ignores missing instruction files. Mitigation: the sentinel
 check proves presence in the session, not only in config. The sentinel check
 goes through the model. The nonce cannot be guessed, so a correct reply is
-evidence, but a wrong reply can also mean model noise. The verification retries
+evidence, but a wrong reply can also mean model noise. A harness that prints
+progress to stdout fails this exact comparison by design; the LOC.07 fixture
+records which output option yields only the final message. The verification retries
 once, appends every reply to `sentinel-replies.log` and a receipt, and fails
 only when both attempts miss.
 

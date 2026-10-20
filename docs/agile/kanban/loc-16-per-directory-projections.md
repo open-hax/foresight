@@ -69,14 +69,26 @@ projection.
   layer, the fragment id and the target.
 - [ ] GIVEN an in-repository `:override` and a target with
   `:per-session-selection` WHEN sessions start at the root, the sibling and
-  the overriding child THEN the root and the sibling contain only the ancestor
-  version and the child only the overriding version.
+  the overriding child THEN:
+  - for the overridden fragment id, the root and the sibling contain only the
+    ancestor version and the child only the overriding version;
+  - every other fragment of the ancestor layers is still present, unchanged, in
+    all three sessions.
+- [ ] GIVEN any per-directory projection WHEN emitted THEN the LOC.08 emitter
+  produces it, and its manifest validates against the LOC.04 manifest schema:
+  layer chain, fragment dispositions, scoped `:limits`,
+  `:effective-contract/hash` and `:projection/sentinel`. A separate
+  implementation that records only file lists does not satisfy this story.
 
 ## Verification
 
 ```bash
-npx shadow-cljs compile test   # muse: per-directory projection and override-refusal tests
-# then re-run the LOC.07 fixture's three-path session checks against the emitted files
+set -euo pipefail
+# muse's test build is a node-test target that autoruns and exits nonzero on failure;
+# it includes the per-directory projection, override-refusal and manifest-schema tests
+npx shadow-cljs compile test
+# the LOC.07 fixture runner: three session paths in three harnesses; nonzero on any mismatch
+bb fixture/run.bb --harness claude,opencode,codex --paths root,sibling,child
 ```
 
 ## Risks

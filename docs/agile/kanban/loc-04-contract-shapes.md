@@ -44,7 +44,11 @@ Registry-keyed Malli schemas are defined for:
   `(fragment :opmf/output (tier 0) (override :of :home :hash "3f2a…") (output-shape …))`;
 - the effective contract;
 - the projection manifest:
-  - the layer chain, the target, and the budget with its unit and actual size;
+  - the layer chain and the target;
+  - `:limits`, one `{:unit :scope :max :actual}` entry per profile limit.
+    `:actual` is a map from emitted file or hook id to its measurement for a
+    per-file or per-hook-string scope, and a single number only for a
+    whole-chain scope;
   - `:effective-contract/hash`, the hash of the folded contract, which is the
     same for every harness projected from it;
   - `:projection/sentinel`, a random nonce generated per build and emitted as

@@ -42,19 +42,34 @@ and a layer. Effective contracts are never passed back to `fold` as layers.
 ## Scope
 
 - [ ] Settings: `deep-merge`, reused or ported unchanged.
-- [ ] Instruction fragments: ordered union keyed by id. The nearest layer wins
-  only with `:override`; an unmarked collision is an error. Text is never
-  compared for similarity.
+- [ ] Instruction fragments: union keyed by id. The nearest layer wins only
+  with `:override`; an unmarked collision is an error. Text is never compared
+  for similarity.
+  - **Meaning is the set.** The effective contract's meaning is the set of
+    fragment ids and hashes.
+  - **Canonical order.** Order is defined as layer depth (root first), then
+    fragment id. It applies wherever muse emits a single artifact.
+  - **Order independence.** Harnesses that compose several files use their
+    own order: Claude Code and Codex root first, OpenCode nearest first. Every
+    fragment therefore has to be order-independent. A fragment may not
+    restate, qualify, narrow or contradict another fragment's subject. A change
+    to an ancestor's meaning must be an `:override`.
 - [ ] Absolutes: a descendant layer cannot drop or override them; an attempt is
   an error.
 - [ ] Permissions: a child may only tighten them; a loosening is an error.
   - **Shape:** a permission set maps exact keys (tool or action names; glob
     keys are compared literally, not by matching) to a level, plus a
     `:default` level.
-  - **Order:** `:deny` < `:ask` < `:allow`. A child tightens when, for every
-    key, its effective level is at most the parent's effective level for that
-    key. A key's effective level is its own entry if present, otherwise the
-    set's `:default`.
+  - **Order:** `:deny` < `:ask` < `:allow`.
+  - **Effective level of a key in the folded child:**
+    1. the child's own entry for the key, if present;
+    2. otherwise, if the parent has an explicit entry or an inherited level
+       for the key, that parent level is **inherited**;
+    3. only otherwise, the child's `:default`.
+
+    The child's `:default` never replaces a level the parent set for that key.
+  - **Tightening:** a child tightens when, for every key in either set and for
+    `:default`, its effective level is at most the parent's effective level.
   - **Boundary cases:**
     - omitting a key inherits the parent's level, which is valid;
     - adding a new key at or below the parent's `:default` is valid;
@@ -81,7 +96,7 @@ and a layer. Effective contracts are never passed back to `fold` as layers.
 - [ ] GIVEN any effective contract `e` WHEN extended with an empty layer THEN
   the result equals `e` (identity).
 - [ ] GIVEN the same chain WHEN folded twice THEN the results are equal,
-  including manifest ordering (determinism).
+  including the canonical fragment order (determinism).
 - [ ] GIVEN a child layer that drops an absolute or loosens a permission WHEN
   folded THEN the fold returns an error naming both layers and the declaration.
 - [ ] GIVEN two layers that define the same fragment id without `:override`
@@ -90,6 +105,10 @@ and a layer. Effective contracts are never passed back to `fold` as layers.
 - [ ] GIVEN generated parent and child permission sets WHEN folded THEN the
   fold succeeds exactly when the child is below or equal to the parent in the
   order above, including the boundary cases.
+- [ ] GIVEN a parent `{"tool" :deny, :default :allow}` and a child
+  `{:default :ask}` WHEN folded THEN `"tool"` stays `:deny` (inherited, not the
+  child's default) and the fold succeeds. GIVEN a child `{"tool" :allow}`
+  under the same parent THEN the fold fails as a loosening.
 - [ ] GIVEN an override whose `:hash` differs from the ancestor's current hash
   WHEN folded THEN the fold returns `:stale-override`, naming both hashes.
 - [ ] Generative property tests cover each of the criteria above.

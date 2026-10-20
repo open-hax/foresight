@@ -317,10 +317,18 @@ All sources were accessed on 2026-10-19.
        worktree, nearest first, and its Read tool attaches more lazily.
 
      Consequences:
-     - (a) An in-repository delta is sound only when it is **order-independent**,
-       meaning a pure fragment union with no `:override`. Every session then
-       loads exactly the union of the layers on its path, in all three
-       harnesses.
+     - (a) An in-repository delta is sound only when it is
+       **order-independent**: a pure fragment union with no `:override`, whose
+       fragments neither restate, qualify, narrow nor contradict any other
+       fragment's subject (the LOC.05 authoring rule).
+       - The harnesses compose files in different orders: Claude Code and
+         Codex root first, OpenCode nearest first.
+       - With order-independent fragments, every session still loads the same
+         **set** of fragment ids and hashes in all three harnesses, and only
+         the order differs.
+       - Muse emits the canonical order (layer depth root first, then fragment
+         id) inside every single artifact. The manifest records each harness's
+         actual cross-file order, so that order is reviewable.
      - (b) An in-repository `:override` cannot be expressed by files. The root
        directory needs the ancestor version for sessions started at the root,
        but every session in the overriding child also loads that root file, so

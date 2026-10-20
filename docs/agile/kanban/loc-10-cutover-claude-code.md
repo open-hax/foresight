@@ -90,7 +90,8 @@ done
 if [ "$PHASE" = after ]; then
   # every limit in the Claude projection manifest holds in its own unit (LOC.08 :limits)
   bb -e "(let [m (clojure.edn/read-string (slurp \"$M/claude.manifest.edn\"))
-              bad (remove #(<= (:actual %) (:max %)) (:limits m))]
+              vals* (fn [a] (if (map? a) (vals a) [a]))   ; per-file/hook maps or a whole-chain number
+              bad (remove (fn [l] (every? #(<= % (:max l)) (vals* (:actual l)))) (:limits m))]
           (when (or (empty? (:limits m)) (seq bad)) (println \"FAIL limits\" (pr-str (or (seq bad) :missing))) (System/exit 1)))"
   claude -p "ok" >/dev/null && echo "claude starts"
 fi

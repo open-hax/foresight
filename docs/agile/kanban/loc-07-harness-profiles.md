@@ -91,6 +91,13 @@ exclusion mechanism and injection hook. Research section 5 records those.
 - [ ] GIVEN a harness without verified per-session selection WHEN its profile
   is written THEN `:per-session-selection` is false, so in-repository
   overrides are a compile error for that target.
+- [ ] GIVEN the same session path in all three harnesses WHEN the effective
+  instructions are recorded THEN the sets of fragment ids and hashes are equal
+  across harnesses. Each harness's actual cross-file order is recorded beside
+  the set.
+- [ ] The fixture is a runnable script, `bb fixture/run.bb --harness
+  claude,opencode,codex --paths root,sibling,child`, committed with the
+  profiles. It exits nonzero on any mismatch, and LOC.11 and LOC.16 reuse it.
 
 ## Verification
 
