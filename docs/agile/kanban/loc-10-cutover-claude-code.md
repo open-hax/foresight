@@ -59,17 +59,43 @@ created_at: "2026-10-19T21:05:27.000Z"
   inspected THEN exactly one copy of the contract is loaded there too. Claude
   Code's discovery depends on the ancestry of the working directory, so the
   `~` result does not establish this case.
-- [ ] GIVEN the before and after measurements WHEN compared THEN always-on
-  contract bytes are within budget, and both measurements are recorded in a
-  receipt.
+- [ ] GIVEN the before and after measurements for both working directories
+  WHEN compared THEN every limit in the Claude projection manifest holds in
+  its own unit, and both measurements are recorded in receipts.
 - [ ] GIVEN the new `CLAUDE.md` WHEN Claude Code starts THEN it starts cleanly,
   which is the `~/.claude` definition of done.
 
 ## Verification
 
 ```bash
-git -C ~/.claude diff --stat
-claude --version && claude -p "say ok" >/dev/null && echo starts
+# PHASE=before (run on the current hand copies) or PHASE=after (run on the published projection)
+set -euo pipefail
+PHASE="${PHASE:?before|after}"; M="${MANIFEST_DIR:?set MANIFEST_DIR}"; OUT="$M/claude-cutover.log"
+LOG=$(mktemp); SETTINGS=$(mktemp --suffix=.json)
+# record every instruction file Claude Code loads; the payload field name is confirmed by the LOC.07 fixture
+cat > "$SETTINGS" <<JSON
+{"hooks":{"InstructionsLoaded":[{"hooks":[{"type":"command","command":"jq -r '.file_path // .path // empty' >> $LOG"}]}]}}
+JSON
+for dir in "$HOME" "$HOME/spaces/foresight"; do
+  : > "$LOG"
+  (cd "$dir" && claude -p "ok" --settings "$SETTINGS" >/dev/null)
+  [ -s "$LOG" ] || { echo "FAIL: no instruction-load events recorded in $dir"; exit 1; }
+  copies=$(sort -u "$LOG" | tr '\n' '\0' | xargs -0 -r grep -l -e 'contract-sentinel:' -e '(mission' | wc -l)
+  bytes=$(sort -u "$LOG" | tr '\n' '\0' | xargs -0 -r cat | wc -c)
+  echo "$PHASE dir=$dir contract-copies=$copies always-on-bytes=$bytes" | tee -a "$OUT"
+  if [ "$PHASE" = after ]; then
+    [ "$copies" -eq 1 ] || { echo "FAIL: $dir loads $copies contract copies"; exit 1; }
+  fi
+done
+if [ "$PHASE" = after ]; then
+  # every limit in the Claude projection manifest holds in its own unit (LOC.08 :limits)
+  bb -e "(let [m (clojure.edn/read-string (slurp \"$M/claude.manifest.edn\"))
+              bad (remove #(<= (:actual %) (:max %)) (:limits m))]
+          (when (or (empty? (:limits m)) (seq bad)) (println \"FAIL limits\" (pr-str (or (seq bad) :missing))) (System/exit 1)))"
+  claude -p "ok" >/dev/null && echo "claude starts"
+fi
+~/.agents/skills/receipt-river/scripts/rr-append.bb --kind :test-run --origin "LOC.10 $PHASE" \
+  --note "$(grep "^$PHASE " "$OUT" | tail -n 2 | tr '\n' ';')"
 ```
 
 ## Risks

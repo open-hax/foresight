@@ -95,6 +95,8 @@ CONTRACT_ROOT="${CONTRACT_ROOT:?set CONTRACT_ROOT to the open-question-7 source 
       xs  (map rd fs)
       dup (->> xs (map :id) frequencies (filter #(> (val %) 1)))]
   (assert (every? :id xs) "fragment without id")
+  (assert (every? #(contains? #{0 1} (:tier %)) xs)
+          (str "fragment without a valid (tier 0|1): " (pr-str (map :file (remove #(contains? #{0 1} (:tier %)) xs)))))
   (assert (empty? dup) (str "duplicate ids: " (pr-str dup)))
   (println "fragments" (count xs) "tier0-bytes" (reduce + (map :bytes (filter #(= 0 (:tier %)) xs)))))'
 if grep -rnP '\x{05DC}\x{05D2}' "$CONTRACT_ROOT"; then echo "FAIL: look-alike operator"; exit 1; else echo ok; fi

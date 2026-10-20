@@ -43,6 +43,11 @@ lists every file and the hash of each.
 - [ ] Add `.ημ/contract-0.edn` to the chosen tree, containing `:contract/id`,
   `:contract/version`, the file list and per-file SHA-256 values. A
   deterministic script generates it.
+- [ ] Bind version 1 to recoverable source bytes. Record the full 40-hex
+  commit of the chosen tree and the tree path in `contract-0.edn`, and push an
+  immutable tag `contract-0/v1` at that commit to the tree's remote. Each later
+  version gets its own tag, so earlier versions stay selectable and can be
+  reconstructed.
 - [ ] Record the divergence of the other tree, file by file, as a follow-up
   input. This story does not reconcile it.
 
@@ -57,6 +62,9 @@ lists every file and the hash of each.
   runs produce byte-identical `contract-0.edn`.
 - [ ] GIVEN any edit to a file under `.ημ/config` or `.ημ/plugins` WHEN the
   script runs THEN the content hash changes and the edited path is reported.
+- [ ] GIVEN a fresh clone of the remote WHEN `contract-0/v1` is checked out
+  THEN the manifest script reproduces exactly the recorded per-file hashes, so
+  version 1 is recoverable from the tag alone.
 - [ ] GIVEN the design note WHEN it is read THEN open question 0 is marked
   resolved with the date and the owner decision.
 

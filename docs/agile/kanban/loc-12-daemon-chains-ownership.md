@@ -55,6 +55,10 @@ every descendant layer.
   logged and skipped.
 - [ ] GIVEN the dev tree WHEN the stable daemon sees a change in it THEN no
   build or global publish runs, and the skip is logged with its reason.
+- [ ] GIVEN a tree whose `:layer/owner` is missing, malformed or names another
+  daemon WHEN the daemon plans THEN ownership fails closed. An explicit match
+  with the daemon's own identity is required, and otherwise the tree is logged
+  and skipped before any `:exec` or `:publish`.
 - [ ] Pure planning tests cover fan-out, ownership and debounce merging.
 
 ## Verification

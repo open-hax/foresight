@@ -32,8 +32,16 @@ Registry-keyed Malli schemas are defined for:
 - the layer declaration: `:layer/id`, `:layer/root`, `:use`, `:drop`,
   `:targets`;
 - the parsed fragment: id, tier, `absolute` with its enforcement `:surface`
-  (`:pr-gate`, `:runtime-hook`, `:interactive` or `:gap`), `gate`, `override`, body
-  and content hash;
+  (`:pr-gate`, `:runtime-hook`, `:interactive` or `:gap`), `gate`,
+  `override`, body and content hash. `override` is
+  `(override :of <layer-id> :hash <sha256>)`:
+  - the fragment's own id is the overridden id;
+  - `:of` names the ancestor layer whose version it replaces;
+  - `:hash` pins the content hash of that version, so an ancestor edit makes
+    the override stale instead of silently shadowing new text.
+
+  Example:
+  `(fragment :opmf/output (tier 0) (override :of :home :hash "3f2a…") (output-shape …))`;
 - the effective contract;
 - the projection manifest:
   - the layer chain, the target, and the budget with its unit and actual size;
@@ -80,8 +88,9 @@ Registry-keyed Malli schemas are defined for:
 
 - [ ] GIVEN the LOC.03 fragments WHEN they are read and validated THEN every
   one conforms.
-- [ ] GIVEN a fragment with no id, an unknown tier, or `override` without a
-  target WHEN it is validated THEN it is rejected with an explained error.
+- [ ] GIVEN a fragment with no id, an unknown tier, or an `override` missing
+  `:of` or a 64-hex `:hash` WHEN it is validated THEN it is rejected with an
+  explained error.
 - [ ] GIVEN a manifest entry WHEN validated THEN its disposition is one of
   included, dropped, shadowed or unsupported, and every non-included entry
   carries its reason fields.

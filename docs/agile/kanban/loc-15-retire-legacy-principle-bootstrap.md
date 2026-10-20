@@ -56,12 +56,18 @@ The extension targets pi, which the user has called a poor first target.
 ## Verification
 
 ```bash
+set -euo pipefail
 pnpm -C packages/extensions test
-rg -n "PRINCIPLE\.edn" --hidden --glob '!**/node_modules/**' \
-  ~/spaces/foresight/muse/src ~/spaces/foresight/eta-mu/packages \
-  ~/.claude/settings.json ~/.claude/hooks ~/.claude/CLAUDE.md \
-  ~/.config/opencode ~/.ημ/config \
-  ~/.codex/config.toml ~/.codex/AGENTS.md
+# any live reader outside the legacy extension itself fails the check
+if rg -n "PRINCIPLE\.edn" --hidden --glob '!**/node_modules/**' \
+     --glob '!**/contract_runtime_v2*' \
+     ~/spaces/foresight/muse/src ~/spaces/foresight/eta-mu/packages \
+     ~/.claude/settings.json ~/.claude/hooks ~/.claude/CLAUDE.md \
+     ~/.config/opencode ~/.ημ/config \
+     ~/.codex/config.toml ~/.codex/AGENTS.md; then
+  echo "FAIL: live PRINCIPLE.edn reader found"; exit 1
+fi
+echo "no live readers"
 ```
 
 ## Risks

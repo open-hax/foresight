@@ -48,11 +48,17 @@ exclusion mechanism and injection hook. Research section 5 records those.
   and in a subdirectory that carries its own `.ημ` layer. Record the actual
   load order and walk boundary in the installed Claude Code, OpenCode and
   Codex.
-  - Include an OpenCode session started in a subdirectory whose layer
-    overrides an ancestor fragment. The test asserts the **effective
-    instructions**: exactly one version of the fragment, the overriding one,
-    is present in the loaded context. This chooses between the push-down
-    strategy and the fold fallback in research section 7.
+  - Include, for every harness, a layer in a subdirectory that overrides an
+    ancestor fragment. Start sessions at three paths: the repository root, a
+    sibling directory without the override, and the overriding child. Record
+    the **effective instructions** at each path, meaning which fragment
+    versions are present in the loaded context.
+  - For each harness, determine whether per-session selection works: a hook
+    that injects the session directory's fold while the contract stays out of
+    native file-walk loading. This covers Claude Code and Codex
+    `SessionStart`, and for OpenCode a muse plugin that injects or transforms
+    the system prompt per session directory, which is UNKNOWN today. Record
+    the result as the profile's `:per-session-selection` capability.
   - Include a Codex chain that approaches 32 KiB, to confirm the cumulative
     truncation.
   - This also settles the OpenCode docs-versus-source conflict in research
@@ -77,10 +83,14 @@ exclusion mechanism and injection hook. Research section 5 records those.
   harness, not assumed.
 - [ ] GIVEN a Codex profile WHEN checked THEN its budget rule is evaluated on
   the whole projected chain (root file plus nested files), not on each file.
-- [ ] GIVEN the fixture's overriding subdirectory layer WHEN a session starts
-  there in each harness THEN the recorded effective instructions contain only
-  the overriding version of the fragment. Load order alone does not satisfy
-  this criterion.
+- [ ] GIVEN the fixture's overriding subdirectory layer WHEN sessions start at
+  the root, the non-overriding sibling and the overriding child THEN, for each
+  harness whose profile claims `:per-session-selection`, the root and the
+  sibling contain only the ancestor version and the child only the overriding
+  version. Load order alone does not satisfy this criterion.
+- [ ] GIVEN a harness without verified per-session selection WHEN its profile
+  is written THEN `:per-session-selection` is false, so in-repository
+  overrides are a compile error for that target.
 
 ## Verification
 

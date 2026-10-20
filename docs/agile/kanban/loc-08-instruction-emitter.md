@@ -64,10 +64,23 @@ projection writes a manifest, and a receipt references it.
 - [ ] GIVEN a profile with budget N and a tier-0 set larger than N WHEN
   projected THEN the build fails and names the fragments and their sizes.
 - [ ] GIVEN a projection WHEN its manifest is read THEN it lists the layer
-  chain, every fragment id and hash, the target, the budget and the actual
-  bytes.
+  chain, every fragment id and hash, the target, and one `:limits` entry per
+  profile limit: `{:unit :scope :max :actual}`. `:actual` is measured in that
+  limit's own unit:
+  - bytes as UTF-8 length;
+  - characters by the counting method the LOC.07 profile records and verifies
+    against the harness;
+  - tokens by the harness tokenizer, or by a documented estimator with a
+    stated safety margin.
+- [ ] GIVEN a limit whose `:actual` exceeds `:max` in its own unit WHEN
+  projected THEN the build fails and names the limit, its unit and scope, and
+  both numbers. A byte count is never substituted for a character or token
+  limit.
 - [ ] GIVEN the same effective contract and profile WHEN projected twice THEN
-  both outputs are byte-identical.
+  the outputs are byte-identical once the final `contract-sentinel:` line is
+  removed, and the manifests are equal except for `:projection/sentinel`.
+  That exclusion is the only normalisation. The nonce stays random per build,
+  because LOC.11's evidence depends on it being impossible to guess.
 - [ ] GIVEN a tier-1 fragment and a profile WHEN projected THEN the artifact
   contains a pointer or skill reference for it, as the profile allows, and the
   manifest marks it `:included`.

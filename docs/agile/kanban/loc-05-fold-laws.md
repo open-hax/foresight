@@ -48,6 +48,22 @@ and a layer. Effective contracts are never passed back to `fold` as layers.
 - [ ] Absolutes: a descendant layer cannot drop or override them; an attempt is
   an error.
 - [ ] Permissions: a child may only tighten them; a loosening is an error.
+  - **Shape:** a permission set maps exact keys (tool or action names; glob
+    keys are compared literally, not by matching) to a level, plus a
+    `:default` level.
+  - **Order:** `:deny` < `:ask` < `:allow`. A child tightens when, for every
+    key, its effective level is at most the parent's effective level for that
+    key. A key's effective level is its own entry if present, otherwise the
+    set's `:default`.
+  - **Boundary cases:**
+    - omitting a key inherits the parent's level, which is valid;
+    - adding a new key at or below the parent's `:default` is valid;
+    - adding a key above the parent's `:default` is a loosening;
+    - raising `:default` is a loosening;
+    - an unknown level is an error.
+- [ ] Overrides: an `(override :of L :hash H)` fragment replaces the ancestor
+  version only when layer `L` declares that id and its current hash is `H`.
+  A missing `L` or a different hash is a `:stale-override` error.
 - [ ] Tools and hooks: union, then the profile filter.
 - [ ] Modes and participants: keyed merge.
 - [ ] `:use` and `:drop` resolution against the module library (the order
@@ -71,6 +87,11 @@ and a layer. Effective contracts are never passed back to `fold` as layers.
 - [ ] GIVEN two layers that define the same fragment id without `:override`
   WHEN folded THEN the fold returns an error. With `:override` the nearest
   layer wins, and the manifest records the shadowed id and hash.
+- [ ] GIVEN generated parent and child permission sets WHEN folded THEN the
+  fold succeeds exactly when the child is below or equal to the parent in the
+  order above, including the boundary cases.
+- [ ] GIVEN an override whose `:hash` differs from the ancestor's current hash
+  WHEN folded THEN the fold returns `:stale-override`, naming both hashes.
 - [ ] Generative property tests cover each of the criteria above.
 
 ## Verification

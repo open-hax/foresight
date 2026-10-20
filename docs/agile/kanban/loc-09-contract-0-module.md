@@ -30,6 +30,10 @@ LOC.02 golden set.
 
 - [ ] Resolve `:muse/contract-0` as a module, in the order decided by open
   question 3.
+- [ ] Before selection, load the module's bytes from its pinned source (the
+  `contract-0/vN` tag or commit) and verify every file against the manifest's
+  per-file SHA-256. On any mismatch, refuse to select it, with an explained
+  error.
 - [ ] Run the golden comparison against the output of the layered path.
 - [ ] Record the content hash of contract-0 version 1 in the projection
   manifest.
@@ -44,6 +48,8 @@ LOC.02 golden set.
   compiler THEN the golden test passes with no new normalisations.
 - [ ] GIVEN a layer that drops a fragment of contract-0 WHEN built THEN the
   manifest records the drop and the golden test reports the difference.
+- [ ] GIVEN a module source whose bytes differ from its manifest WHEN selected
+  THEN selection is refused and names the differing file.
 
 ## Verification
 

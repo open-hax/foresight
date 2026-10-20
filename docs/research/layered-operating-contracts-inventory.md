@@ -308,35 +308,46 @@ All sources were accessed on 2026-10-19.
   2. Ancestor band: layers between `~` and a repository root (for example
      `~/spaces/.ημ`) fold into that repository's root projection, because
      Codex cannot see them otherwise.
-  3. In-repository band: per-directory deltas, composed by the harness for
-     Claude Code and Codex. OpenCode needs a scoped strategy, because a
-     subdirectory layer cannot be folded into the git-root projection without
-     applying its rules to unrelated directories. OpenCode loads every
-     `AGENTS.md` hit from the session directory up to the worktree, nearest
-     first, and its Read tool attaches files lazily. Candidates:
-     - (a) Emit a per-directory delta file when the delta is
-       order-independent, meaning a pure fragment union with no `:override`.
-       Ordering then does not matter.
-     - (b) When a subdirectory layer carries an override, **push the
-       overridden fragment down**. A manifest entry marked "shadowed" does
-       not stop OpenCode loading the ancestor file, so the ancestor fragment
-       would still apply. Instead:
-       - The ancestor projection omits any fragment that a descendant layer
-         overrides.
-       - The fragment is emitted into each sibling scope that does not
-         override it.
-       - The overriding scope emits its own version.
+  3. In-repository band: per-directory delta files, composed by the harness's
+     own directory walk. **No file-walk harness can remove an ancestor
+     file.**
+     - Claude Code and Codex concatenate root first, so a nearer file comes
+       later.
+     - OpenCode loads every `AGENTS.md` from the session directory up to the
+       worktree, nearest first, and its Read tool attaches more lazily.
 
-       This keeps exactly one version of the fragment loaded in every
-       directory, at the cost of duplication across siblings. Where that
-       duplication exceeds the budget, OpenCode falls back to folding a
-       single file per session root (option B), and the manifest records the
-       limitation.
+     Consequences:
+     - (a) An in-repository delta is sound only when it is **order-independent**,
+       meaning a pure fragment union with no `:override`. Every session then
+       loads exactly the union of the layers on its path, in all three
+       harnesses.
+     - (b) An in-repository `:override` cannot be expressed by files. The root
+       directory needs the ancestor version for sessions started at the root,
+       but every session in the overriding child also loads that root file, so
+       both versions would be present. Omitting the ancestor version (the
+       earlier "push-down" idea) breaks root sessions instead. Ordering ("the
+       later file wins") leaves both versions loaded and relies on the model.
+       That is not the "exactly one version" the fold promises.
+     - (c) Sound options for an in-repository override:
+       1. Refuse it at compile time for every file-walk target, so overrides
+          live only in bands that muse folds itself (the global and ancestor
+          bands).
+       2. Select the folded projection for each session through a hook.
+          Claude Code `SessionStart` (10,000 characters) and Codex
+          `SessionStart` (2,500 tokens) can inject the session directory's
+          fold. For OpenCode, whether a muse OpenCode plugin can inject or
+          transform the system prompt per session directory is **UNKNOWN**.
+          The contract fragments must then also be kept out of native
+          file-walk loading.
 
-     LOC.07's fixture must include an OpenCode session started in a
-     subdirectory with an overriding layer. It must assert the **effective
-     instructions**, meaning which fragment versions are present in the loaded
-     context, not only the load order.
+       Until LOC.07 verifies option 2 for a harness, option 1 applies to that
+       harness.
+
+     LOC.07's fixture must test three session paths for each harness: the
+     repository root, a sibling directory without an override, and the
+     overriding child. It must assert the **effective instructions**, meaning
+     which fragment versions are present in the loaded context, not only the
+     load order.
 - **Cost of folding everything into one file per harness (option B).** It is
   deterministic, but it gives up the lazy subdirectory loading of Claude Code
   and OpenCode.

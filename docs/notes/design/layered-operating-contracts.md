@@ -167,6 +167,13 @@ harness's artifacts.
   - A `:gap` absolute (enforcement planned but missing) is never compressed
     either. A follow-up card is not enforcement.
 - Unsupported declarations are reported, not dropped silently.
+- **In-repository overrides.** A harness that composes files by walking
+  directories cannot remove an ancestor file, so an in-repository `:override`
+  would leave both versions loaded (research section 7). Per-directory delta
+  files are therefore pure unions. An in-repository override compiles only for
+  a target whose profile has verified per-session selection, meaning a hook
+  that injects the session directory's fold while the contract stays out of
+  native file-walk loading. For any other target it is a compile error.
 - Every projection writes a manifest: the layer chain, fragment ids and hashes,
   the target, the budget and the actual size. A receipt references that
   manifest.
@@ -272,7 +279,7 @@ Markdown through `emit-agents!` (`muse/src/clj/eta_mu/opencode/build.clj`) and
 ## Board breakdown
 
 The epic `layered-operating-contracts` in `docs/agile/kanban` implements this
-design. Its stories `LOC.01` to `LOC.15` follow the phases below and name the
+design. Its stories `LOC.01` to `LOC.16` follow the phases below and name the
 open question that blocks each one. Under the unblocked-slice rule, an open
 question blocks only the stories that its answer could change.
 
@@ -281,7 +288,7 @@ question blocks only the stories that its answer could change.
 | Preserve | LOC.01 freeze contract-0, LOC.02 golden artifacts |
 | Source | LOC.03 fragment source, LOC.14 absolutes to gates, LOC.15 retire the legacy bootstrap |
 | Laws | LOC.04 shapes, LOC.05 fold laws, LOC.06 layer chain and well-formedness |
-| Projection | LOC.07 harness profiles, LOC.08 instruction emitter, LOC.09 contract-0 as a module, LOC.13 published `AGENTS.md` |
+| Projection | LOC.07 harness profiles, LOC.08 instruction emitter, LOC.16 per-directory projections, LOC.09 contract-0 as a module, LOC.13 published `AGENTS.md` |
 | Cutover | LOC.10 Claude Code, LOC.11 OpenCode and Codex, LOC.12 daemon chains and ownership |
 
 ## Non-goals
@@ -311,5 +318,5 @@ The research note cites these.
   cross-layer settings merge.
 - Research: [layered operating contracts inventory](../../research/layered-operating-contracts-inventory.md).
 - Epic: [`docs/agile/kanban/epic-layered-operating-contracts.md`](../../agile/kanban/epic-layered-operating-contracts.md)
-  (`uuid: layered-operating-contracts`), with stories `loc-01` to `loc-15` in
+  (`uuid: layered-operating-contracts`), with stories `loc-01` to `loc-16` in
   the same directory.

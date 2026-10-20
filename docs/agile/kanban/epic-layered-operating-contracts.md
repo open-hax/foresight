@@ -2,7 +2,7 @@
 category: "kanban"
 labels: "contracts, muse, katamorph, alpha, harness, context-budget, epic"
 type: "epic"
-points: "49"
+points: "54"
 title: "EPIC: One layered operating contract, folded up the directory tree to ~/.ημ and projected into every harness"
 priority: "P1"
 status: "incoming"
@@ -62,10 +62,11 @@ Stories are listed in dependency order within each phase.
 - LOC.08 `loc-instruction-emitter`: muse `:publish {:instructions …}` with manifest. Depends on LOC.02, LOC.05 and LOC.07.
 - LOC.09 `loc-contract-0-module`: contract-0 selectable as a module and golden-equal. Depends on LOC.02, LOC.05 and LOC.08.
 - LOC.13 `loc-published-agents-md`: standalone published `AGENTS.md` projection (open question 2). Depends on LOC.08.
+- LOC.16 `loc-per-directory-projections`: per-directory in-repository projections (pure-union deltas or per-session selection); in-repository overrides refused where a target cannot honour them (open question 1). Depends on LOC.06, LOC.07 and LOC.08.
 
 **Cutover**
 - LOC.10 `loc-cutover-claude-code`: replace the Claude Code hand copies and remove the double load. Depends on LOC.03, LOC.07 and LOC.08.
-- LOC.11 `loc-cutover-opencode-codex`: replace the OpenCode glob and the Codex copy. Depends on LOC.03, LOC.07 and LOC.08.
+- LOC.11 `loc-cutover-opencode-codex`: replace the OpenCode glob and the Codex copy. Depends on LOC.03, LOC.07, LOC.08 and LOC.16.
 - LOC.12 `loc-daemon-chains-ownership`: daemon layer fan-out and stable/dev ownership (open question 4). Depends on LOC.06.
 
 ## Open questions and the slices they block
@@ -75,7 +76,7 @@ Each design open question blocks only the stories its answer could change.
 | Question | Blocks |
 |---|---|
 | 0: which tree is contract-0 | LOC.01, then LOC.02 and LOC.09 |
-| 1: who performs the fold | LOC.07, then LOC.08, LOC.10 and LOC.11 |
+| 1: who performs the fold | LOC.07, then LOC.08, LOC.16, LOC.10 and LOC.11 |
 | 2: shape of the published `AGENTS.md` | LOC.13 |
 | 3: where named modules are resolved from | LOC.05 (the `:use`/`:drop` item), LOC.06 and LOC.09 |
 | 4: who owns rendering | LOC.12 |
