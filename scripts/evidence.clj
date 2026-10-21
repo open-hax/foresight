@@ -2298,6 +2298,12 @@
                                 (not (and @unwritten-removed?
                                           (reserved-basename-present?
                                            reservation))))))
+                ;; A later cooperating writer may already own the writer-lock
+                ;; path and will unlink it on release; record the quarantine in
+                ;; the stable `.ημ` directory, which no writer clears.
+                (create-quarantine-marker!
+                 ancestor (path/join (:proc-path ancestor)
+                                     receipt-quarantine-marker-name))
                 (create-quarantine-marker! parent (:path writer-lock))
                 (when-not @late-replacement-error
                   (reset! late-replacement-error
