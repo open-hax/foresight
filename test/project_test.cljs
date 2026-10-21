@@ -48,7 +48,7 @@
   (let [modules [{:path "shx" :url "git@github.com:octave-commons/shx.git"}
                  {:path "opencode" :url "git@github.com:open-hax/opencode.git"}]
         roots {"open-hax/opencode" "anomalyco/opencode"}
-        required #{"shx" "opencode"}
+        required {"shx" "octave-commons/shx" "opencode" "open-hax/opencode"}
         rows [{:source/path "shx" :org/upstream "octave-commons/shx"
                :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
               {:source/path "opencode" :org/upstream "open-hax/opencode"
@@ -69,7 +69,7 @@
   ;; Codex PRRT_kwDOT3TWPM6rqMQW: once .gitmodules points a module at its
   ;; personal dev origin, the row must still be required and accepted.
   (let [roots {"open-hax/opencode" "anomalyco/opencode"}
-        required #{"shx" "opencode"}
+        required {"shx" "octave-commons/shx" "opencode" "open-hax/opencode"}
         rows [{:source/path "shx" :org/upstream "octave-commons/shx"
                :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
               {:source/path "opencode" :org/upstream "open-hax/opencode"
@@ -100,7 +100,13 @@
     (testing "a required path absent from the modules still needs a row (CodeRabbit review 5605249621 cr-comment:v1:ab9c0c8f2a97f462c475b6f2)"
       (is (= #{:dev-origin/missing}
              (set (map :law/id (:errors (dev-origins/validate rows dev-modules roots
-                                                              (conj required "absent"))))))))
+                                                              (assoc required "absent" "open-hax/absent"))))))))
+    (testing "a dev-pointed module still checks :org/upstream against the model (CodeRabbit PRRT_kwDOU4VJMM6u7W4I)"
+      (is (contains? (ids (-> rows
+                              (assoc-in [0 :org/upstream] "someone/unrelated")
+                              (assoc-in [0 :network/root] "someone/unrelated"))
+                          dev-modules)
+                     :dev-origin/upstream-mismatch)))
     (testing "a nested canonical path cannot cover itself through its own row (CodeRabbit PRRT_kwDOU4VJMM6u5uIo)"
       ;; .agents points at riatzukiza/.agents; a row naming that origin must
       ;; not turn the excluded path into covered coverage.
@@ -114,7 +120,7 @@
   (let [modules [{:path "shx" :url "git@github.com:octave-commons/shx.git"}
                  {:path "opencode" :url "git@github.com:open-hax/opencode.git"}]
         roots {"open-hax/opencode" "anomalyco/opencode"}
-        required #{"shx" "opencode"}
+        required {"shx" "octave-commons/shx" "opencode" "open-hax/opencode"}
         rows [{:source/path "shx" :org/upstream "octave-commons/shx"
                :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
               {:source/path "opencode" :org/upstream "open-hax/opencode"
@@ -135,7 +141,7 @@
 (deftest checked-in-dev-origins-cover-current-submodules
   (let [rows (edn/read-string (fs/readFileSync "config/dev-origins.edn" "utf8"))
         result (dev-origins/validate rows (workspace/current-submodules) network-roots
-                                     (project/dev-origin-required-paths))]
+                                     (project/dev-origin-required-upstreams))]
     (is (:valid? result) (pr-str (:errors result)))
     (is (= 23 (count rows)))
     (is (= "riatzukiza/mojomast-opencode"
@@ -143,10 +149,11 @@
 
 (deftest dev-origin-required-paths-come-from-the-project-model
   ;; Independently owned submodules need a row; the nested canonical .agents does not.
-  (let [required (project/dev-origin-required-paths)]
+  (let [required (project/dev-origin-required-upstreams)]
     (is (= 23 (count required)))
     (is (not (contains? required ".agents")))
-    (is (contains? required "opencode"))))
+    (is (= "open-hax/opencode" (get required "opencode")))
+    (is (= "octave-commons/shx" (get required "shx")))))
 
 (def kanban-org-base
   "open-hax/foresight base fcfc2d17f28640203066ddfe0a22f87db7372a32: its
