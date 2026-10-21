@@ -48,12 +48,13 @@
   (let [modules [{:path "shx" :url "git@github.com:octave-commons/shx.git"}
                  {:path "opencode" :url "git@github.com:open-hax/opencode.git"}]
         roots {"open-hax/opencode" "anomalyco/opencode"}
+        required #{"shx" "opencode"}
         rows [{:source/path "shx" :org/upstream "octave-commons/shx"
                :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
               {:source/path "opencode" :org/upstream "open-hax/opencode"
                :dev/origin "riatzukiza/mojomast-opencode"
                :network/root "anomalyco/opencode"}]]
-    (is (:valid? (dev-origins/validate rows modules roots)))
+    (is (:valid? (dev-origins/validate rows modules roots required)))
     (doseq [[changed expected]
             [[(pop rows) :dev-origin/missing]
              [(conj rows (assoc (first rows) :source/path "extra")) :dev-origin/unknown-submodule]
@@ -61,13 +62,14 @@
              [(assoc-in rows [1 :network/root] "octave-commons/shx") :dev-origin/duplicate-network]
              [(assoc-in rows [1 :org/upstream] "open-hax/missing") :dev-origin/upstream-mismatch]
              [(assoc-in rows [0 :dev/origin] "open-hax/shx") :dev-origin/personal-owner]]]
-      (is (some #(= expected (:law/id %)) (:errors (dev-origins/validate changed modules roots)))
+      (is (some #(= expected (:law/id %)) (:errors (dev-origins/validate changed modules roots required)))
           (str expected)))))
 
 (deftest dev-origin-coverage-is-keyed-by-path-not-owner
   ;; Codex PRRT_kwDOT3TWPM6rqMQW: once .gitmodules points a module at its
   ;; personal dev origin, the row must still be required and accepted.
   (let [roots {"open-hax/opencode" "anomalyco/opencode"}
+        required #{"shx" "opencode"}
         rows [{:source/path "shx" :org/upstream "octave-commons/shx"
                :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
               {:source/path "opencode" :org/upstream "open-hax/opencode"
@@ -76,9 +78,12 @@
         dev-modules [{:path "shx" :url "git@github.com:riatzukiza/shx.git"}
                      {:path "opencode" :url "https://github.com/riatzukiza/mojomast-opencode.git"}]
         ids (fn [rows modules]
-              (set (map :law/id (:errors (dev-origins/validate rows modules roots)))))]
+              (set (map :law/id (:errors (dev-origins/validate rows modules roots required)))))]
     (testing "dev-origin URLs satisfy their rows"
-      (is (:valid? (dev-origins/validate rows dev-modules roots))))
+      (is (:valid? (dev-origins/validate rows dev-modules roots required))))
+    (testing "a dev-pointed module whose row is removed is still missing (CodeRabbit PRRT_kwDOU4VJMM6u4m7H)"
+      ;; Required paths come from the manifest, not from the rows themselves.
+      (is (contains? (ids (pop rows) dev-modules) :dev-origin/missing)))
     (testing "an org-pointed module without a row is still missing beside dev-pointed ones"
       (is (contains? (ids (pop rows) (assoc-in dev-modules [1 :url] "git@github.com:open-hax/opencode.git"))
                      :dev-origin/missing)))
@@ -91,20 +96,21 @@
     (testing "an unrelated personal module without a row is not an org module"
       (is (:valid? (dev-origins/validate
                     rows (conj dev-modules {:path ".agents" :url "git@github.com:riatzukiza/.agents.git"})
-                    roots))))))
+                    roots required))))))
 
 (deftest dev-origin-network-root-is-checked-against-supplied-facts
   ;; Codex PRRT_kwDOT3TWPM6rqMQa / CodeRabbit PRRT_kwDOT3TWPM6uiWm8.
   (let [modules [{:path "shx" :url "git@github.com:octave-commons/shx.git"}
                  {:path "opencode" :url "git@github.com:open-hax/opencode.git"}]
         roots {"open-hax/opencode" "anomalyco/opencode"}
+        required #{"shx" "opencode"}
         rows [{:source/path "shx" :org/upstream "octave-commons/shx"
                :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
               {:source/path "opencode" :org/upstream "open-hax/opencode"
                :dev/origin "riatzukiza/mojomast-opencode"
                :network/root "anomalyco/opencode"}]
         ids (fn [rows roots]
-              (set (map :law/id (:errors (dev-origins/validate rows modules roots)))))]
+              (set (map :law/id (:errors (dev-origins/validate rows modules roots required)))))]
     (testing "a well-formed but wrong root is refused"
       (is (contains? (ids (assoc-in rows [0 :network/root] "someone/shx") roots)
                      :dev-origin/network-root-mismatch)))
@@ -117,11 +123,19 @@
 
 (deftest checked-in-dev-origins-cover-current-submodules
   (let [rows (edn/read-string (fs/readFileSync "config/dev-origins.edn" "utf8"))
-        result (dev-origins/validate rows (workspace/current-submodules) network-roots)]
+        result (dev-origins/validate rows (workspace/current-submodules) network-roots
+                                     (project/dev-origin-required-paths))]
     (is (:valid? result) (pr-str (:errors result)))
     (is (= 23 (count rows)))
     (is (= "riatzukiza/mojomast-opencode"
            (:dev/origin (first (filter #(= "opencode" (:source/path %)) rows)))))))
+
+(deftest dev-origin-required-paths-come-from-the-project-model
+  ;; Independently owned submodules need a row; the nested canonical .agents does not.
+  (let [required (project/dev-origin-required-paths)]
+    (is (= 23 (count required)))
+    (is (not (contains? required ".agents")))
+    (is (contains? required "opencode"))))
 
 (def kanban-org-base
   "open-hax/foresight base fcfc2d17f28640203066ddfe0a22f87db7372a32: its
