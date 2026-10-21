@@ -2,7 +2,8 @@
 
 Updated October 20, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [shared-ledger corrective source and hosted proof](e0-execution.md).
+Latest execution: [directory-bound segment ownership and hosted proof](e0-directory-binding.md).
+Earlier [shared-ledger corrections](e0-execution.md) retain their original source window.
 The [previous global refresh](e0-refresh.md) retains 442 frozen identities,
 441 open and one native merge at its observation window.
 Five open PRs changed head/base, plus the merged PR's changed head. E0 remains
@@ -157,8 +158,8 @@ tests/assertions pass; lint/compiler warnings are zero.
 that exact head. Isolated, digest-verified CI-pinned BB and compatible `gh`
 remove host-tool blockers without changing child package policy.
 
-Clio #5 remains open and merge-unqualified: its directory-ABA finding remains,
-and review convergence is unmet. CodeRabbit's native cooldown ends October 21
+At this earlier source window, Clio #5 was open and merge-unqualified with
+the directory-ABA finding outstanding and review convergence unmet. CodeRabbit's native cooldown ends October 21
 at 00:36:46 UTC; Codex's account-quota boundary is unknown. Existing Clio #3
 proposes the absent MiMo lane; its historic missing-secret failure predates
 current secret-name setup, and fresh admitted execution remains unproven.
@@ -171,6 +172,26 @@ Cephalon agents remain paused. M0–M7 are still unqualified.
 
 The [immutable shared-ledger execution attempt](../../.ημ/stabilization/snapshots/4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5.json)
 binds source, native CI, test outputs, quota/finding states and the E0 readback.
+
+## Directory-bound ledger execution and replay custody — October 20
+
+Existing Clio #5 now holds parent descriptors through segment operations and
+retains acquired entry descriptors for later link-count checks. Red commits
+reproduce both defects; latest green head `5a7a04c6ced7b15be940e16dc772c95b0525d55f` passes
+JVM126/556, NBB101/534, compiled Shadow101/534 and BB29/182 with zero
+failures/errors/warnings. Hosted CI39526548866 succeeds; actual checkout
+merge/tree proof is retained. Native readback retains 63 threads/0 unresolved; two
+body-only findings have itemized settlements. Current-head review convergence
+and the absent MiMo route remain unqualified. Native macOS/Windows are untested.
+
+The [execution report](e0-directory-binding.md) preserves failed probes and
+recovery behavior. [E5 replay custody](e5-replay-custody.md) recovers the existing
+proposed tolerance, comparison fields/rules and explicit adoption hold without
+changing recovered source or resuming agents. E0/E5 use existing Rheos comments;
+all 23 consumer pins and original work remain preserved. M0–M7 stay unqualified.
+
+The [immutable directory-binding execution attempt](../../.ημ/stabilization/snapshots/f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b.json)
+binds exact source, executed CI trees, source custody and both Rheos readbacks.
 
 ## Canonical delivery relationships
 
@@ -203,4 +224,4 @@ outside this registration result.
 
 ## Next action
 
-Continue on existing Clio #5 through E0: reproduce and repair the directory-ABA window with parent-descriptor binding and adversarial native-host tests, preserving read-only portability and current failure contracts.
+Continue existing Clio #5 and Foresight #142 review settlement at their exact current heads; retain the MiMo-route and source-bound gate obligations before any merge or consumer-pin update.

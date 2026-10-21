@@ -561,3 +561,13 @@
   spore: none
   receipt-refs: 327bb32c792c8adae78824448d4dc66b0f633e61d6ae64ef1084b0809ffd2b60
   note: Match host tools to the existing CI contract in an isolated directory before interpreting infrastructure failures as source failures. Preserve red commits, ordinary push readback, real native settlement and exact-head CI separately from review quorum. Missing workflow routes and quota stay explicit; no duplicate task or spore.
+
+- ts: 2026-10-21T01:22:54.879242+00:00
+  session: codex/stabilization-portfolio
+  task: Repair parent-directory ABA and preserve complete source-bound review evidence
+  p-efficiency: 0.78
+  p-friction: 0.60
+  p-skill-candidate: 0.64
+  spore: none
+  receipt-refs: 4c28d5853e659e58cadce2f40efc0b2f6ba16dc16dbcbcfc93b824d75c698bad
+  note: Keep actual descriptor identity and traversal capability separate from pathname checks. Full native review pagination exposes body-only obligations; typed JVM function replacements must preserve primitive signatures. Failed probes remain evidence. Existing source custody and review skills cover the pattern; no new spore or promotion.

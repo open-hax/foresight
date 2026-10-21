@@ -297,6 +297,8 @@ Canonical epic: `stabilization-e5`. Qualification gate: `M5`. Prerequisites: E2,
 
 **Exit proof:** Field Eros/Eris ownership, numerical units/contracts, persistence and replay are verified from the owning source and actual tests.
 
+**Replay adoption hold:** The [revision-bound candidate and missing qualification evidence](../../.ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json) retain the recovered same-target formula, compared fields and exact-equality requirements. The candidate is proposed only. Before replay can qualify E5.2/E5.5, the adopted contract must reference a new immutable record naming the accepted comparator/values, exact field paths and units, source/runtime/configuration, independent review and executed replay evidence. No tolerance or B1–B3 result is adopted by this checkpoint.
+
 **Existing work:** Unresolved; locate the owning child card/issue before creating execution work.
 
 ### E5.3 — Reconcile OpenPlanner: Preserve authorization before graph traversal, bounded search, feedback deduplication and truthful results.

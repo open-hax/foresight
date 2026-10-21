@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "kind": "e0-directory-binding-execution-overlay",
+  "observed_at": "2026-10-21T01:21:36.089443+00:00",
+  "existing_work": "riatzukiza/clio#5",
+  "coordination_epics": [
+    "stabilization-e0",
+    "stabilization-e2"
+  ],
+  "execution_owner": "codex under active stabilization goal, existing E0",
+  "source_before": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+  "red_commit": "6c4d26c2af7a83beb75f030f4abbc798509a4f88",
+  "directory_binding_head": "9a10f1d49d49fda55811b09138e961c781ca574b",
+  "descriptor_cache_red_commits": [
+    "59eaad0d7ae0bc2be19cd6f28c8449a84ba4285b",
+    "2959cec4ae7adc0ca602802699a70272484b4720"
+  ],
+  "descriptor_cache_green_head": "7c85a26e3663f3c8b9f2fe038feb9ec5a9bb99cc",
+  "traversal_probe_red_commit": "88441bc84bc2e64ff67e8f60eaa1b0d672f69c32",
+  "traversal_probe_green_head": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+  "published_head": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+  "base_sha": "7262ddaaf39b32deb1794c5c6595724b6d69538e",
+  "state": "OPEN",
+  "source_preservation": "ordinary forward commits; original source and RED states remain ancestors",
+  "local_checks": {
+    "directory_binding_red": {
+      "JVM": "4tests/11assertions,6failures/0errors",
+      "NBB": "4tests/11assertions,6failures/0errors"
+    },
+    "directory_binding_green": {
+      "JVM": [
+        125,
+        550
+      ],
+      "NBB": [
+        100,
+        530
+      ],
+      "Shadow": [
+        100,
+        530
+      ],
+      "BB": [
+        29,
+        182
+      ],
+      "failures": 0,
+      "errors": 0,
+      "compiler_warnings": 0
+    },
+    "descriptor_cache_red": {
+      "JVM": "1test/6assertions,6failures/0errors after classpath/signature repair"
+    },
+    "traversal_probe_red": {
+      "NBB": "1test/4assertions,3failures/0errors"
+    },
+    "latest_NBB": {
+      "tests": 101,
+      "assertions": 534,
+      "failures": 0,
+      "errors": 0
+    },
+    "latest_compiled_Shadow": {
+      "tests": 101,
+      "assertions": 534,
+      "failures": 0,
+      "errors": 0,
+      "compiler_warnings": 0
+    },
+    "latest_JVM": {
+      "tests": 126,
+      "assertions": 556,
+      "failures": 0,
+      "errors": 0
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "hosted_ci": {
+    "run_id": 39526548866,
+    "url": "https://github.com/riatzukiza/clio/actions/runs/39526548866",
+    "head_sha": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+    "status": "completed",
+    "conclusion": "success",
+    "executed_merge_candidate": "efe27b0fb69b0439ed572f6b6a522f4e39db2a12",
+    "base_sha": "7262ddaaf39b32deb1794c5c6595724b6d69538e",
+    "head_parent": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+    "tree_sha": "4a016bf6188e990caa37e538547d6c7230f504e3",
+    "same_tree_as_head": true,
+    "runtime_results": {
+      "BB": [
+        29,
+        182
+      ],
+      "JVM": [
+        126,
+        556
+      ],
+      "NBB": [
+        101,
+        534
+      ],
+      "Shadow": [
+        101,
+        534
+      ]
+    },
+    "all_failures_errors_warnings": 0
+  },
+  "settlements": [
+    {
+      "thread": "PRRT_kwDOU4VfQc6ujoR4",
+      "root_comment_id": 4331187538,
+      "reply_url": "https://github.com/riatzukiza/clio/pull/5#discussion_r4331978405",
+      "kind": "Fixed",
+      "resolved": true
+    },
+    {
+      "review_id": 5522077596,
+      "item_id": "cr-comment:v1:deabc4a2d3ec6453d31280c1",
+      "reply_url": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6305430429",
+      "kind": "Fixed; pre-existing real-process race test verified"
+    },
+    {
+      "review_id": 5593563315,
+      "item_id": "cr-comment:v1:b88b96144167eaffd3f56298",
+      "reply_url": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6305495511",
+      "kind": "Fixed; descriptor retention verified"
+    }
+  ],
+  "traversal_finding_settlement": {
+    "thread": "PRRT_kwDOU4VfQc6uljyf",
+    "root_comment_id": 4332021895,
+    "reply_url": "https://github.com/riatzukiza/clio/pull/5#discussion_r4332057208",
+    "kind": "Fixed",
+    "resolved": true
+  },
+  "native_threads": {
+    "total": 63,
+    "unresolved": 0,
+    "unresolved_thread_ids": [],
+    "complete": true
+  },
+  "review": {
+    "qualified": false,
+    "status_report": "clio-final-status.txt in native evidence",
+    "coderabbit_prior_request": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6305507451",
+    "coderabbit_current_request_result": {
+      "exit_code": 0,
+      "stdout": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6305624892\n",
+      "stderr": ""
+    },
+    "codex": "account quota unavailable; reset boundary unknown; latest native source retained in complete paginated comments",
+    "mimo": "configured cohort obligation; current route absent, existing Clio3 candidate remains unqualified",
+    "approval": "no approval inferred from requests, CI or settlements"
+  },
+  "portability": "validated directory descriptor bridge required; explicit unsupported-host refusal, native macOS/Windows not qualified",
+  "field_replay_custody": {
+    "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+    "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
+    "bytes": 4933
+  },
+  "root_review_gate": "native run39522223787 now queued; predecessor39522109889 completed cancelled after an observed active MiMo job; cancellation cause not inferred, no operator restart or success inferred",
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938.json.gz",
+    "sha256": "5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938",
+    "bytes": 345791,
+    "uncompressed_sha256": "ecf1234353fe2fb8345b074b1a59f91066b9d933cc60d42892cc32f8f588508b",
+    "uncompressed_bytes": 3038937
+  },
+  "consumer_pins": "all23 unchanged",
+  "original_work_preserved": true,
+  "global_census_scope": {
+    "frozen": 442,
+    "last_global_open": 441,
+    "last_global_native_merged": 1,
+    "changed_open_at_previous_refresh": 5,
+    "current_batch": "Clio5 source and gate evidence plus E5 source-custody correction only; no new global census"
+  },
+  "created_tasks": 0,
+  "new_prs": [],
+  "merges": 0,
+  "qualified": false,
+  "m0_m7": "unqualified",
+  "cms_cephalon": "agents remain paused; no dispatch or restart"
+}

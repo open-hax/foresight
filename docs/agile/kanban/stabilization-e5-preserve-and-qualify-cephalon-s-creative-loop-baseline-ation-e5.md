@@ -1,14 +1,14 @@
 ---
-uuid: "stabilization-e5"
-title: "Stabilization E5 — Preserve and qualify Cephalon's creative-loop baseline"
-status: "incoming"
-type: "epic"
-priority: "P1"
-labels: "stabilization, coordination, e5"
-parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-dependency: ["stabilization-e2", "stabilization-e3"]
 category: "kanban"
-write-id: "1792481173091-0.zxcqa78965o4ait05a0"
+labels: "stabilization, coordination, e5"
+dependency: ["stabilization-e2", "stabilization-e3"]
+parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
+type: "epic"
+write-id: "1792544921882-0.jt4swidckmduyv4279v"
+title: "Stabilization E5 — Preserve and qualify Cephalon's creative-loop baseline"
+priority: "P1"
+status: "incoming"
+uuid: "stabilization-e5"
 created_at: "2026-10-20T07:26:13.091Z"
 ---
 
@@ -50,3 +50,8 @@ The accepted design and implementation branches have coherent provenance, and B1
 ## Definition of done
 
 The accepted design and implementation branches have coherent provenance, and B1, B2 and B3 each have an independently evidenced status.
+
+---
+E0 source-custody correction for existing E5.2/E5.5: exact personal Foresight revisioncf57e8988f32ea3a8adc2dfaab5993dd5875c622 retains selection cardb5f2ba9e-8d67-4c73-9919-e275983aca87 and its numeric proposal. Recovered blobs278b36a3e55184ea9c1c17efb7d83a68e22e7d55/e593dcb6c17b3fe04107564651632f0dad717717 reproduce native Git hashes. Candidate/hold snapshotcb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0 records proposed absolute/relative1e-9 formula, continuous field categories/units and exact discrete/hash comparisons, with adoption/comparator/runtime/configuration/replay evidence explicitly absent. Portfolio now requires a new immutable accepted contract/test record before any replay gate can pass. No original recovered blob changed, design adopted, B1-B3 result inferred or execution task created. Existing selection/solver/verification UUIDs retained. E5 remains incoming/M5 unqualified; CMS/Cephalon agents remain paused. Report docs/stabilization/e5-replay-custody.md.
+
+---

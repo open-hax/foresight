@@ -471,7 +471,12 @@
               "status": "proposed authored input; not adopted into local mainline",
               "relationship": "existing work candidate; do not recreate"
             }
-          ]
+          ],
+          "replay_adoption_hold": {
+            "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+            "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
+            "bytes": 4933
+          }
         },
         {
           "slot": "E5.3",
@@ -538,7 +543,12 @@
               "status": "proposed authored input; not adopted into local mainline",
               "relationship": "existing work candidate; do not recreate"
             }
-          ]
+          ],
+          "replay_adoption_hold": {
+            "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+            "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
+            "bytes": 4933
+          }
         },
         {
           "slot": "E5.6",
@@ -888,5 +898,34 @@
     },
     "qualification": "pending",
     "auto_merge": false
+  },
+  "e5_replay_custody": {
+    "report": "docs/stabilization/e5-replay-custody.md",
+    "candidate_and_hold": {
+      "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+      "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
+      "bytes": 4933
+    },
+    "status": "recovered proposed comparator; adoption and actual replay qualification blocked",
+    "created_tasks": 0,
+    "agents": "CMS/Cephalon paused"
+  },
+  "e0_directory_binding": {
+    "report": "docs/stabilization/e0-directory-binding.md",
+    "overlay": "docs/stabilization/e0-directory-binding.json",
+    "published_head": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938.json.gz",
+      "sha256": "5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938",
+      "bytes": 345791,
+      "uncompressed_sha256": "ecf1234353fe2fb8345b074b1a59f91066b9d933cc60d42892cc32f8f588508b",
+      "uncompressed_bytes": 3038937
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b.json",
+      "sha256": "f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b",
+      "bytes": 38579
+    }
   }
 }
