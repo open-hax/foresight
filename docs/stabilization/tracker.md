@@ -1,0 +1,200 @@
+# Foresight Stabilization — Persistent Tracker
+
+Updated October 20, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
+
+Latest execution: [shared-ledger corrective source and hosted proof](e0-execution.md).
+The [previous global refresh](e0-refresh.md) retains 442 frozen identities,
+441 open and one native merge at its observation window.
+Five open PRs changed head/base, plus the merged PR's changed head. E0 remains
+in breakdown; M0–M7 remain unqualified. CMS/Cephalon agents remain paused.
+
+## Current gate state
+
+Eight coordination epics are registered under existing program `760f7f1e-a086-4e0a-82a5-71d2a761073d`. E0 is now in **breakdown**; E1–E7 remain **incoming**. Every milestone remains **unqualified**. E0 reconciliation is assigned to Codex through Rheos. Stack execution/merge authority remains unqualified; the registration author is Codex.
+
+| Epic | Canonical card | Gate | Missing qualification evidence |
+| --- | --- | --- | --- |
+| E0 | [stabilization-e0](../agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md) | M0: unqualified | Census frozen at 442 PRs / 815 repositories; E0 ownership assigned and mapping decisions recorded; execution ownership, custody and semantic dependency holds still prevent qualification |
+| E1 | [stabilization-e1](../agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md) | M1: unqualified | Protected current-source reviewer path and fork → upstream → consumer qualification |
+| E2 | [stabilization-e2](../agile/kanban/stabilization-e2-reconcile-shared-contracts-events-and-persistence-ation-e2.md) | M2: unqualified | Accepted shared implementations, persistence/replay proofs and exact consumer pins |
+| E3 | [stabilization-e3](../agile/kanban/stabilization-e3-settle-identity-deployment-and-openplanner-integration-ation-e3.md) | M3: unqualified | Provider ownership decision, executed identity/deployment integration and OpenPlanner disposition |
+| E4 | [stabilization-e4](../agile/kanban/stabilization-e4-reconcile-knoxx-cms-and-translation-work-ation-e4.md) | M4: unqualified | All CMS source dispositions and integrated application proof; existing SME/publication cards stay separate |
+| E5 | [stabilization-e5](../agile/kanban/stabilization-e5-preserve-and-qualify-cephalon-s-creative-loop-baseline-ation-e5.md) | M5: unqualified | Adopted October 7/8 design, integrated Field/recall/adapter pins, independently evidenced B1–B3 status |
+| E6 | [stabilization-e6](../agile/kanban/stabilization-e6-close-the-remaining-foresight-constellation-backlog-ation-e6.md) | M6: unqualified | Terminal closure of every frozen cohort PR and preservation of every unique implementation |
+| E7 | [stabilization-e7](../agile/kanban/stabilization-e7-produce-the-release-baseline-and-state-of-the-world-report-ation-e7.md) | M7: unqualified | Reproducible release matrix, independent closure audit, world-state report and two handoffs |
+
+## Observed evidence
+
+- [Portfolio contracts](portfolio.md): eight epics and all 44 proposed story slots, each with an exit proof.
+- [Source-backed work graph](work-graph.json): stable epic identities, planning dependencies, candidate links to existing work and explicit unresolved slots. Candidate links do not assert implementation equivalence.
+
+- Root was refreshed from local `device/yoga` at `c551e986b9720e0aafe8d3cba88cde0376f1dbce` to current upstream main `cffc34448aa6807fc51135d7f90f0f9fe6ba7efe`. New work is on `codex/stabilization-portfolio`. Device branches and remote Stealth history are retained.
+
+- The refreshed board had **77 cards** before this registration; the eight missing epics make **85**. Existing UUIDs, parents and statuses are retained. CLI comments link the existing program, PR reconciliation and two CMS delivery cards to this annex.
+
+- Rheos CLI `@eta-mu/rheos@0.2.0` was installed in an isolated temporary tools directory, without changing workspace package policy. Creation and comments use its operational write paths and append events through the `.events` symlink into `.ημ/kanban-events/ledger.edn`.
+
+- [Targeted current PR references](../../.ημ/stabilization/snapshots/8bab636a453874728050cd4edb21a6d34368202444b3d1f2e2109f335b67d0a0.json): six referenced upstream/personal PRs with immutable head/base SHAs and API states. This is **not** a complete PR census; reviews, checks, protected gates, owners and exhaustive pagination remain missing. No qualification is inferred.
+
+- August 29 inventory and terminal-state audit remain historical inputs. The proposal’s initial engineering statuses are historical assertions and were not copied into current milestone state. B1/B2/B3 are **unassessed here**, not reported as live passes or failures.
+
+## Machine synchronization and registration records
+
+- [Git synchronization manifest](../../.ημ/stabilization/snapshots/5f4cfa85ac737449c5243cab03cab37dc6f64c6038815f5db41124227c2c6bc7.json): upstream main refreshed, all **23 direct gitlinks verified**, before/after refs and preserved local-work stash `a6d17823e6742648f654284fff95d623c936f1e5`. The stale test-count edit remains in that named stash; current main already uses the newer count of 25. Existing untracked user work is retained.
+- Axxium’s broad history fetch timed out. Recovery fetched the exact recorded commit and `origin/main` at depth 1, then used `submodule update --no-fetch`; the pinned checkout now matches. Full historical download is not claimed.
+- [Registration snapshot](../../.ημ/stabilization/snapshots/cf11648fe0f8cb9db9ab25373b2b87b03d925477ac17801e1a331b51f0c21afa.json): 77 → 85 cards, eight ledger-backed creation events, no execution-story copies and no prior card state changes. Snapshot hashes attest captured bytes, not an independent reviewer or milestone approval.
+
+## E0 census freeze — October 20
+
+The [complete census and reconciliation report](e0-census.md) records **442 open
+PRs across 815 inspected repositories**, including authenticated private-repository
+coverage and eight authored external-upstream PRs. Repository membership and all
+PR head/base identities passed a second source check with no drift. Native
+reviews, comments, checks and threads are retained in immutable evidence; two
+3,000-file API caps were repaired with complete merge-base tree deltas.
+
+[PR register](e0-pr-census.csv) · [source-backed graph](e0-work-graph.json) ·
+[unresolved work](e0-unresolved.json).
+
+Reconciliation retained 3,821 existing card observations and 617 open issue
+records. There are 192 explicit PR/card associations, 183 sourced PR relationship
+observations and no new execution tasks. Missing native assignees (441 PRs),
+unmapped cards (250 PRs), 11 distinct missing/malformed relationship tokens,
+and differing card revisions remain explicit. M0 is unqualified pending actual
+ownership and dependency decisions. The raw private repository inventory is
+stored in a local Git-excluded evidence object; no PR is hosted in a private
+repository and nothing was published by this run.
+
+## E0 resolution decisions — October 20
+
+Codex now owns reconciliation on **existing E0**, through a Rheos assignment.
+The [resolution report](e0-resolution.md), [decision graph](e0-resolution.json)
+and [442-row owner/work index](e0-owner-work-index.csv) add decisions to the
+frozen census without replacing its observations. No tasks were created.
+
+The 192 original association rows are retained; **34 formerly unmatched PRs**
+now bind explicit existing work. The evidence includes **23 exact authored card
+blobs from 12 PRs**, recovered and Git-hash-verified from frozen added-file
+patches. The other **216 PRs** retain native PR work anchors (84 constellation
+candidates); these are explicit owned coverage questions, not claims of card
+implementation equivalence. All 133 supplemental personal/external scope rows
+remain visible without importing them as Foresight execution stories.
+
+All 11 former missing relationship references have dispositions: seven legacy
+ID references located, one existing UUID filename alias resolved, one malformed
+Knoxx target quarantined with a concrete repair proposal, and two empty entries
+rejected as no edge. All 1,170 original card relationships, 28 recovered card
+relationships and 183 PR ancestry observations are classified. Containment and
+ancestry confer no accepted execution order. Two mixed Knoxx evidence cycles
+retain existing issues #324/#325 as integration/qualification holds. Four
+captured text observations (two unique blobs) fail Git blob hash reproduction
+and are excluded from new identity authority decisions.
+
+**M0 remains unqualified.** All residual obligations are owned by Codex on E0;
+actual merge owners, terminal dispositions, child custody/repair, semantic
+ordering and source-hash recovery still require exact-source proof. E0 remains
+in breakdown. The frozen unresolved register records the initial observations;
+the resolution overlay records the subsequent decisions.
+
+The [immutable resolution attempt](../../.ημ/stabilization/snapshots/917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9.json)
+binds the operational E0 writes, source artifacts and successful integrity checks.
+
+## E0 persisted refresh and custody recovery — October 20
+
+The [442-row refresh](e0-refresh.csv) and [additive overlay](e0-refresh.json)
+retain every frozen/current head/base pair. Fresh paginated native evidence
+covers reviews, comments, checks, statuses, files and thread metadata for all
+six changed sources and Knoxx #331. The five changed open PRs retain eight
+unresolved threads; Axxium #10's failed review gate remains explicit. This run
+refreshes the frozen cohort, without claiming a new repository/new-PR census.
+
+Session Mycology #1 merged at
+`ddb63291cf856ab59ef14f02b8346e42f6ef651b`; native ancestry confirms its frozen
+source survives. Semantic preservation, merge qualification and downstream
+integration remain unassessed. All 23 root consumer pins are unchanged.
+
+Exact-ref base64 recovery now reproduces **all four quarantined observations,
+covering two unique Git blobs**. Their exact-source-recovery hold is satisfied;
+original mismatching captures and historical decisions remain intact. This
+does not adopt child status, prove behavior or admit execution work.
+
+Current source also confirms Knoxx #331 already merged at
+`0fdaae13f421ff9623b1bb6fe1afb7694ab68ca1`, despite issue #323's stale active-target
+prose. Complete published trees prove all **32 mailbox-delta paths** remain
+identical in #333/#335 and differ from #331; #375/#376 retain #331 bytes there.
+The proposed identity-before-mailbox order still needs the documented re-split,
+preserved-source movements and intermediate qualification under existing
+#324/#325/#372/#377. No active merge order is accepted.
+
+The checkpoint is attached to existing E0 through a Rheos comment. No new work
+items, child edits, merges, closures or agent restarts were performed. Canonical
+PR-flow status failed because installed `gh` lacks `--slurp`; raw collection
+used explicit pages/cursors and supplies no gate verdict. Root validation,
+36 tests/286 assertions, zero-warning lint and Rheos drift checks pass.
+
+The [immutable execution attempt](../../.ημ/stabilization/snapshots/058fa645a02d2007399d0add776c8ca031c72cec237bc953e1bc33211f4b7b84.json)
+binds native evidence, exact artifacts, the Rheos checkpoint/readback and validation.
+
+## Shared-ledger execution — October 20
+
+Existing [Clio #5](https://github.com/riatzukiza/clio/pull/5) now contains red
+commit `d83296ff2250a8d2faa7f9441681bdd6befeb993` and green head
+`38c0b8c9e45160ae4fecd7d87bf6c700f62cc631`, published by ordinary fast-forward.
+Read-only replay skips only unsupported directory-sync preflight; real force
+failures still propagate. An unowned, unlinked temporary preserves `claim-lost`;
+acknowledged results retain link/path checks. Both native findings have fixed
+replies and resolved readbacks. No new task or PR was created for these repairs.
+
+BB (29/182), JVM (119/530), NBB (94/510) and compiled Shadow (94/510)
+tests/assertions pass; lint/compiler warnings are zero.
+[Hosted CI](https://github.com/riatzukiza/clio/actions/runs/39520773474) passes at
+that exact head. Isolated, digest-verified CI-pinned BB and compatible `gh`
+remove host-tool blockers without changing child package policy.
+
+Clio #5 remains open and merge-unqualified: its directory-ABA finding remains,
+and review convergence is unmet. CodeRabbit's native cooldown ends October 21
+at 00:36:46 UTC; Codex's account-quota boundary is unknown. Existing Clio #3
+proposes the absent MiMo lane; its historic missing-secret failure predates
+current secret-name setup, and fresh admitted execution remains unproven.
+No credential values were read and no privileged workflow was rerun.
+
+[Execution overlay](e0-execution.json) retains source, gates, quotas, settlement
+and native evidence. Codex owns the existing Clio #5 repair loop via E0.
+All root pins and independent child working copies remain unchanged; CMS and
+Cephalon agents remain paused. M0–M7 are still unqualified.
+
+The [immutable shared-ledger execution attempt](../../.ημ/stabilization/snapshots/4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5.json)
+binds source, native CI, test outputs, quota/finding states and the E0 readback.
+
+## Canonical delivery relationships
+
+**CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.
+
+**Cephalon:** E5 coordinates source reconciliation. The October design bytes and existing authored character-card UUIDs have now been recovered from personal Foresight #3 and linked in the work graph. Their adoption remains unresolved; no card copies were created. B1–B3 proof and the separate continuation handoff follow the portfolio contract.
+
+## Qualification update procedure
+
+1. Resolve canonical card identity and dependencies against current source evidence.
+2. Capture a new content-addressed milestone-attempt snapshot under `.ημ/stabilization/snapshots/`, retaining all required fields from the portfolio.
+3. Append a receipt that references its digest and exact source revisions; keep failures, missing access and blockers explicit.
+4. Record the result as a Rheos comment and use lawful CLI transitions only when their own contracts are satisfied.
+5. Refresh this projection from those events. Never overwrite a previous qualification attempt or carry an approval to a different source revision.
+
+## Verification
+
+Root project validation passes with 25 sources, 23 direct submodules and 39
+invariants. Workspace tests pass (24 tests, 120 assertions), project tests pass
+(12 tests, 166 assertions), and `clj-kondo --lint scripts test` reports zero
+errors and warnings. Negative-case workspace diagnostics are expected test
+fixtures, not executed child quality gates. Rheos reports no drift; all 77
+prior board identities and states are preserved. Eight creation events and
+four linkage comments are retained in the existing event ledger.
+
+Static checks verify 44 unique slots, canonical epic parents and dependency
+vectors, valid local links, source/snapshot digests and append-only ledger
+prefixes. Independent PR review and product/release qualification remain
+outside this registration result.
+
+## Next action
+
+Continue on existing Clio #5 through E0: reproduce and repair the directory-ABA window with parent-descriptor binding and adversarial native-host tests, preserving read-only portability and current failure contracts.

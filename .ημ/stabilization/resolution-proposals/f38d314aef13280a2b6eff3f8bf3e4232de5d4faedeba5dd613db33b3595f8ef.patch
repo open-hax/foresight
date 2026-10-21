@@ -1,0 +1,11 @@
+--- a/kanban/epics/events-agent-runtime-separation.md
++++ b/kanban/epics/events-agent-runtime-separation.md
+@@ -3,7 +3,7 @@
+ title: "Events, Triggers, Actions, Schedules, and Agents Runtime Separation"
+ status: accepted
+ priority: "P2"
+-labels: "["epics"]"
++labels: ["epics"]
+ created_at: "2026-05-06T00:00:00Z"
+ source: "specs/epics/events-agent-runtime-separation.md"
+ points: null

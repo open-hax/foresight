@@ -6,7 +6,7 @@ priority: "P1"
 labels: ["content", "representation", "publishing", "evaluation"]
 created_at: "2026-08-29T15:09:34.658Z"
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-write-id: "1788020875018-0.d8zsk9zc8rhbqfrv9d"
+write-id: "1792481223014-0.6xflbtpmstj5cjiqyqp"
 ---
 
 # Prove content generation, layout, publishing, and review independently
@@ -43,5 +43,7 @@ brief + source artifacts + content policy
 
 ---
 This is the deliberate post-inflight successor lane for content generation, layout, publication effects, and product/content judgment. It remains todo until the opening PR portfolio is terminal. Entry evidence must identify the Knoxx behavior and revision being characterized; translation generation and SME translation review remain outside this card.
+
+Linked as the existing content/layout/publication delivery card from stabilization-e4 and E7 handoff obligations. CMS/translations and Cephalon remain separate continuation tracks; this card continues to own content/publication separately from translation/SME review. Related-work mapping only; no status or parent change.
 
 ---

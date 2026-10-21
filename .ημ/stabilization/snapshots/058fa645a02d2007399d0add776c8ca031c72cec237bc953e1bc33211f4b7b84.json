@@ -1,0 +1,1302 @@
+{
+  "schema_version": 1,
+  "kind": "e0-continuation-attempt",
+  "attempt_id": "c1d86745-25d1-4351-92d3-628ce1fd70b3",
+  "observed_at": "2026-10-21T00:06:27.752728+00:00",
+  "epic": "stabilization-e0",
+  "gate": "M0",
+  "frozen_cohort": {
+    "path": "docs/stabilization/e0-work-graph.json",
+    "sha256": "2de8e1f76aad6d2acb40718a12443cd4e1ee066cf6fd4ad1324464192af8ca42",
+    "size": 442
+  },
+  "frozen_cohort_source_revision": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+  "current_pr_count": {
+    "frozen": 442,
+    "observed": 442,
+    "open": 441,
+    "merged": 1,
+    "closed_unmerged": 0,
+    "changed_head_or_base": 6,
+    "changed_open_head_or_base": 5,
+    "changed_merged_head_or_base": 1
+  },
+  "pagination_and_access": {
+    "all_frozen_identities": 442,
+    "unavailable_frozen_identities": 0,
+    "fresh_paginated_detail_sources": 7,
+    "complete_files_reviews_comments_checks_statuses_and_thread_metadata": true,
+    "other_reviews": "historical frozen source, not recollected",
+    "repository_membership": "not recollected; prior report retained as secondary evidence",
+    "new_pr_discovery": "not performed in this execution"
+  },
+  "per_pr_repository_number_head_base_tested_candidate_and_disposition": {
+    "path": "docs/stabilization/e0-refresh.json",
+    "json_pointer": "/pull_requests",
+    "rows": 442,
+    "tested_merge_candidates": "explicitly null; no candidate execution"
+  },
+  "merged_or_superseded": {
+    "observed_native_merge": {
+      "identity": "riatzukiza/session-mycology#1",
+      "repository": "riatzukiza/session-mycology",
+      "number": 1,
+      "url": "https://github.com/riatzukiza/session-mycology/pull/1",
+      "frozen_head_sha": "4cba181e9a51da3c2cfaf871b3681a74d709058a",
+      "frozen_base_sha": "5576255623fbaa84aa32ef494f13e347c781e5e4",
+      "current_head_sha": "881edfe00cbba71bd50307ff0d52f28a152a7e70",
+      "current_base_sha": "5576255623fbaa84aa32ef494f13e347c781e5e4",
+      "state": "MERGED",
+      "is_draft": false,
+      "tested_merge_candidate": null,
+      "disposition": "native-merged-observation; campaign qualification pending",
+      "reconciliation_owner": "codex on stabilization-e0",
+      "execution_merge_owner": null,
+      "native_assignees": [],
+      "review_check_source": "fresh paginated native evidence",
+      "fresh_review_check_summary": {
+        "head_sha": "881edfe00cbba71bd50307ff0d52f28a152a7e70",
+        "base_sha": "5576255623fbaa84aa32ef494f13e347c781e5e4",
+        "source_stable": true,
+        "review_records": 5,
+        "unresolved_threads": 0,
+        "file_count": 2,
+        "latest_observed_checks": [
+          {
+            "id": 118941017461,
+            "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273840/job/118941017461"
+          },
+          {
+            "id": 118936145120,
+            "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273840/job/118936145120"
+          },
+          {
+            "id": 118935639424,
+            "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273840/job/118935639424"
+          },
+          {
+            "id": 118935639097,
+            "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273840/job/118935639097"
+          },
+          {
+            "id": 118925919263,
+            "name": "Session Mycology lint + Shadow test + release build",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273333/job/118925919263"
+          }
+        ],
+        "qualification": "unassessed; no inferred requiredness, approval quorum or review rounds",
+        "is_merged": true,
+        "merge_commit_sha": "ddb63291cf856ab59ef14f02b8346e42f6ef651b"
+      },
+      "semantic_source_preservation": "Git ancestry verified separately; behavior not qualified",
+      "consumer_pin_evidence": ".ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz#/consumer_pins"
+    },
+    "preserved_source_ancestry": "native bundle /knoxx_extra_native/merged-source-ancestry; frozen source ancestor verified",
+    "semantic_qualification": null,
+    "supersessions_performed": []
+  },
+  "current_review_findings_checks_and_reviewer_identity": {
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz",
+      "sha256": "6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6",
+      "bytes": 4026181,
+      "uncompressed_sha256": "252fe6546d7b75e22ee3fc8cf061ed225699ba6bd6608501872d42a0c3c78921",
+      "uncompressed_bytes": 34313035
+    },
+    "source": "/details retains native actors/IDs, full reviews/comments/checks/statuses and thread metadata",
+    "summaries": {
+      "riatzukiza/clio#5": {
+        "head_sha": "e04da66c3aefe9f3b124e275d92a1771feb04bd8",
+        "base_sha": "7262ddaaf39b32deb1794c5c6595724b6d69538e",
+        "source_stable": true,
+        "review_records": 97,
+        "unresolved_threads": 3,
+        "file_count": 14,
+        "latest_observed_checks": [
+          {
+            "id": 118938713288,
+            "name": "Clio BB + JVM + NBB + Shadow + lint",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/clio/actions/runs/39513111812/job/118938713288"
+          }
+        ],
+        "qualification": "unassessed; no inferred requiredness, approval quorum or review rounds",
+        "is_merged": false,
+        "merge_commit_sha": "1b3795cdeffa04582383d890c27cf9cd5fabe5e5"
+      },
+      "riatzukiza/.agents#34": {
+        "head_sha": "e6b0796270066f7e649d5763d0d414b34d75464a",
+        "base_sha": "8497afdd329c3dcaefb78eec36d8e629a59d9eb2",
+        "source_stable": true,
+        "review_records": 183,
+        "unresolved_threads": 1,
+        "file_count": 11,
+        "latest_observed_checks": [
+          {
+            "id": 118936057239,
+            "name": "GitGuardian Security Checks",
+            "app_id": 46505,
+            "app_slug": "gitguardian",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/.agents/runs/118936057239"
+          }
+        ],
+        "qualification": "unassessed; no inferred requiredness, approval quorum or review rounds",
+        "is_merged": false,
+        "merge_commit_sha": null
+      },
+      "riatzukiza/axxium#10": {
+        "head_sha": "562eefe1c4d57fd18daa2602b1a7cc7ac867adce",
+        "base_sha": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+        "source_stable": true,
+        "review_records": 38,
+        "unresolved_threads": 3,
+        "file_count": 22,
+        "latest_observed_checks": [
+          {
+            "id": 118950628935,
+            "name": "review-gate / review-resolution-gate",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "failure",
+            "url": "https://github.com/riatzukiza/axxium/actions/runs/39516751521/job/118950628935"
+          },
+          {
+            "id": 118935012863,
+            "name": "build",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/axxium/actions/runs/39511989015/job/118935012863"
+          },
+          {
+            "id": 118935012536,
+            "name": "deployment-boundary",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/axxium/actions/runs/39511989015/job/118935012536"
+          }
+        ],
+        "qualification": "unassessed; no inferred requiredness, approval quorum or review rounds",
+        "is_merged": false,
+        "merge_commit_sha": "138b4134ad358d765c53a7b4fdb44e521fba75b8"
+      },
+      "riatzukiza/sol#6": {
+        "head_sha": "0ddc5e6a1b218c1b4333c4c4eeb71d31c5af4b3d",
+        "base_sha": "a93ab2a4abc8b578fc2bfd20b1088e7e0e05d749",
+        "source_stable": true,
+        "review_records": 133,
+        "unresolved_threads": 0,
+        "file_count": 16,
+        "latest_observed_checks": [
+          {
+            "id": 118945840386,
+            "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/sol/actions/runs/39512138335/job/118945840386"
+          },
+          {
+            "id": 118940682325,
+            "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/sol/actions/runs/39512138335/job/118940682325"
+          },
+          {
+            "id": 118935496262,
+            "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/sol/actions/runs/39512138335/job/118935496262"
+          },
+          {
+            "id": 118935496196,
+            "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/sol/actions/runs/39512138335/job/118935496196"
+          },
+          {
+            "id": 118935493732,
+            "name": "runtime",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/sol/actions/runs/39512137904/job/118935493732"
+          }
+        ],
+        "qualification": "unassessed; no inferred requiredness, approval quorum or review rounds",
+        "is_merged": false,
+        "merge_commit_sha": "60ab3eda9355b8da76a49f2ed016d5155d0ef264"
+      },
+      "riatzukiza/session-mycology#1": {
+        "head_sha": "881edfe00cbba71bd50307ff0d52f28a152a7e70",
+        "base_sha": "5576255623fbaa84aa32ef494f13e347c781e5e4",
+        "source_stable": true,
+        "review_records": 5,
+        "unresolved_threads": 0,
+        "file_count": 2,
+        "latest_observed_checks": [
+          {
+            "id": 118941017461,
+            "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273840/job/118941017461"
+          },
+          {
+            "id": 118936145120,
+            "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273840/job/118936145120"
+          },
+          {
+            "id": 118935639424,
+            "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273840/job/118935639424"
+          },
+          {
+            "id": 118935639097,
+            "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273840/job/118935639097"
+          },
+          {
+            "id": 118925919263,
+            "name": "Session Mycology lint + Shadow test + release build",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/session-mycology/actions/runs/39509273333/job/118925919263"
+          }
+        ],
+        "qualification": "unassessed; no inferred requiredness, approval quorum or review rounds",
+        "is_merged": true,
+        "merge_commit_sha": "ddb63291cf856ab59ef14f02b8346e42f6ef651b"
+      },
+      "riatzukiza/foresight#34": {
+        "head_sha": "1159a9dad7356115e01de67039fbe221b200223a",
+        "base_sha": "8e3ddd4f362d7f9612556b5185b6be9af646eac8",
+        "source_stable": true,
+        "review_records": 99,
+        "unresolved_threads": 1,
+        "file_count": 10,
+        "latest_observed_checks": [
+          {
+            "id": 118936520008,
+            "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/foresight/actions/runs/39510976958/job/118936520008"
+          },
+          {
+            "id": 118932417352,
+            "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/foresight/actions/runs/39510976958/job/118932417352"
+          },
+          {
+            "id": 118931619939,
+            "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/foresight/actions/runs/39510976958/job/118931619939"
+          },
+          {
+            "id": 118931619717,
+            "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/riatzukiza/foresight/actions/runs/39510976958/job/118931619717"
+          }
+        ],
+        "qualification": "unassessed; no inferred requiredness, approval quorum or review rounds",
+        "is_merged": false,
+        "merge_commit_sha": "8fef016e54d65a1774bc1e87df8227fe344520df"
+      },
+      "open-hax/knoxx#331": {
+        "head_sha": "d835a0224ece799462ec9b3f8f60baacd9abade2",
+        "base_sha": "51d196bdf2440b758798552385ab415ade2226f1",
+        "source_stable": true,
+        "review_records": 65,
+        "unresolved_threads": 0,
+        "file_count": 142,
+        "latest_observed_checks": [
+          {
+            "id": 106137609336,
+            "name": "staging / deploy",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "skipped",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35533145920/job/106137609336"
+          },
+          {
+            "id": 106137357272,
+            "name": "staging / build",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "failure",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35533145920/job/106137357272"
+          },
+          {
+            "id": 106137343010,
+            "name": "testing",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "skipped",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35533145920/job/106137343010"
+          },
+          {
+            "id": 106137342323,
+            "name": "staging / admit",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35533145920/job/106137342323"
+          },
+          {
+            "id": 106137341262,
+            "name": "Send GitHub event to Discord",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35533145711/job/106137341262"
+          },
+          {
+            "id": 106133683459,
+            "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "failure",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531754668/job/106133683459"
+          },
+          {
+            "id": 106133584382,
+            "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "failure",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531754668/job/106133584382"
+          },
+          {
+            "id": 106133519805,
+            "name": "review-gate / review-resolution-gate",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531771416/job/106133519805"
+          },
+          {
+            "id": 106133518839,
+            "name": "Send inline review comment to Discord",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531771077/job/106133518839"
+          },
+          {
+            "id": 106133477651,
+            "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531754668/job/106133477651"
+          },
+          {
+            "id": 106133477511,
+            "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531754668/job/106133477511"
+          },
+          {
+            "id": 106133476452,
+            "name": "knoxx (backend + frontend)",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531754266/job/106133476452"
+          },
+          {
+            "id": 106133476438,
+            "name": "deployment-boundary",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531754266/job/106133476438"
+          },
+          {
+            "id": 106133476284,
+            "name": "bundle",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531754263/job/106133476284"
+          },
+          {
+            "id": 106133473685,
+            "name": "staging",
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "status": "completed",
+            "conclusion": "skipped",
+            "url": "https://github.com/open-hax/knoxx/actions/runs/35531752501/job/106133473685"
+          }
+        ],
+        "qualification": "unassessed; no inferred requiredness, approval quorum or review rounds",
+        "is_merged": true,
+        "merge_commit_sha": "0fdaae13f421ff9623b1bb6fe1afb7694ab68ca1"
+      }
+    },
+    "approval_or_gate_evaluation": "unassessed; canonical status failed on unsupported gh --slurp"
+  },
+  "exact_consumer_pins": {
+    "observed_at": "2026-10-21T00:02:19.266224+00:00",
+    "root_head": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "branch": "codex/stabilization-portfolio",
+    "index_gitlinks": [
+      {
+        "path": ".agents",
+        "sha": "00a05c8f6ba68ff30a98266879310464e966748b",
+        "stage": "0"
+      },
+      {
+        "path": "Truth",
+        "sha": "8ade66a3553bdd89696aebf4fc4628a6fe66e5ae",
+        "stage": "0"
+      },
+      {
+        "path": "axxium",
+        "sha": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+        "stage": "0"
+      },
+      {
+        "path": "bitch-tracker",
+        "sha": "2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90",
+        "stage": "0"
+      },
+      {
+        "path": "calliope",
+        "sha": "2655ae6eddbd20ac400a8e1ff99914c56d81b835",
+        "stage": "0"
+      },
+      {
+        "path": "chat-ui",
+        "sha": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+        "stage": "0"
+      },
+      {
+        "path": "clio",
+        "sha": "788cdd3434615a7932b924e68520dbf7f88408c2",
+        "stage": "0"
+      },
+      {
+        "path": "epiphany",
+        "sha": "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66",
+        "stage": "0"
+      },
+      {
+        "path": "eta-mu",
+        "sha": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+        "stage": "0"
+      },
+      {
+        "path": "kanban-orchestrator",
+        "sha": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+        "stage": "0"
+      },
+      {
+        "path": "katamorph",
+        "sha": "3bd4cf26e68dc88fbe67f831baa4bc389e3363e7",
+        "stage": "0"
+      },
+      {
+        "path": "knoxx",
+        "sha": "fb08a10a8aa32a594cc97ae11b820113de4cf386",
+        "stage": "0"
+      },
+      {
+        "path": "muse",
+        "sha": "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde",
+        "stage": "0"
+      },
+      {
+        "path": "opencode",
+        "sha": "cc4b45612974f735ddec46009ede07729511fba4",
+        "stage": "0"
+      },
+      {
+        "path": "osmos",
+        "sha": "0c33018e27f861536822086afcdab666a60add44",
+        "stage": "0"
+      },
+      {
+        "path": "proxx",
+        "sha": "abbbc8b1ad80738233593e17e751203db785c9e2",
+        "stage": "0"
+      },
+      {
+        "path": "receipt-river",
+        "sha": "7c7c62343fea0241ac545e37f14e57ab344bfa30",
+        "stage": "0"
+      },
+      {
+        "path": "rheos",
+        "sha": "11811264a308d406cb612aefa1dad40818675e5e",
+        "stage": "0"
+      },
+      {
+        "path": "services",
+        "sha": "d361c7837ba369f5c22c9a3f9d827e74605b6c7d",
+        "stage": "0"
+      },
+      {
+        "path": "session-mycology",
+        "sha": "30339f9aa3df83ef8c335d4544307272abfbb131",
+        "stage": "0"
+      },
+      {
+        "path": "shx",
+        "sha": "6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa",
+        "stage": "0"
+      },
+      {
+        "path": "sol",
+        "sha": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+        "stage": "0"
+      },
+      {
+        "path": "uxx",
+        "sha": "97e67a7a758c080450a200e8e6e1ada614eabc6d",
+        "stage": "0"
+      }
+    ],
+    "root_sources": {
+      ".gitmodules": {
+        "sha256": "05b297cc7daf4a90c29e3d97bc176ffc02813403f601da069867009a2c704360",
+        "bytes": 2450
+      },
+      "src/foresight/project.cljc": {
+        "sha256": "3603a902652d05c480540cf129ea5c93d674fd3df7ec6a438f9e5bbe2bed9727",
+        "bytes": 31444
+      }
+    }
+  },
+  "blockers_with_owner_and_unblock_proof": [
+    {
+      "id": "merge-ownership",
+      "owner": "codex on stabilization-e0",
+      "unblock_proof": "accepted execution/merge owners and terminal intent for each dependent stack"
+    },
+    {
+      "id": "coverage-and-custody",
+      "owner": "codex on stabilization-e0",
+      "unblock_proof": "semantic disposition of native PR-backed work, legacy IDs, malformed child declarations and cross-network authority"
+    },
+    {
+      "id": "knoxx-recomposition",
+      "owner": "codex on stabilization-e0; existing Knoxx issues 324/325/372 retain product work",
+      "unblock_proof": "published preserved-source movement ledger and qualified intermediate heads; all 32 mailbox paths in identity335 require the documented re-split before proposed identity-before-mailbox order"
+    },
+    {
+      "id": "current-review-gates",
+      "owner": "codex on stabilization-e0",
+      "unblock_proof": "exact-current-head independent review/required-check qualification; Axxium10 failure and unresolved conversations retain their actual states"
+    }
+  ],
+  "remediation_prs_created": [],
+  "remediation_discovery": "not exhaustively re-enumerated",
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz",
+    "sha256": "6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6",
+    "bytes": 4026181,
+    "uncompressed_sha256": "252fe6546d7b75e22ee3fc8cf061ed225699ba6bd6608501872d42a0c3c78921",
+    "uncompressed_bytes": 34313035
+  },
+  "recovered_source_custody": [
+    {
+      "repository": "open-hax/eta-mu",
+      "revision": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "source_path": "kanban/tasks/terminal-ui-differential-render-host.md",
+      "expected_blob_oid": "db577393bda999e8309c1e6c51e9de2e6aa402f6",
+      "actual_blob_oid": "db577393bda999e8309c1e6c51e9de2e6aa402f6",
+      "bytes": 6802,
+      "recovered_path": ".ημ/stabilization/recovered/db577393bda999e8309c1e6c51e9de2e6aa402f6.md",
+      "sha256": "e8634f6fd316bd9822f2dcec1ce094de27a7e7dbcf74d1334646d5d81a645902",
+      "decision": "exact source custody recovered for this observation; no child state admission or product qualification"
+    },
+    {
+      "repository": "open-hax/knoxx",
+      "revision": "3409977bca4ba35e09967f9a99d50867a679a73c",
+      "source_path": "kanban/tasks/knoxx-publication-resource-contracts.md",
+      "expected_blob_oid": "20316282a233b1134a91bc326d2908fa37a57415",
+      "actual_blob_oid": "20316282a233b1134a91bc326d2908fa37a57415",
+      "bytes": 13244,
+      "recovered_path": ".ημ/stabilization/recovered/20316282a233b1134a91bc326d2908fa37a57415.md",
+      "sha256": "dd3ec7debeca8ecbcb3e5a28030a9b16e3834f2f33b6b8b40c5303a07fd6f248",
+      "decision": "exact source custody recovered for this observation; no child state admission or product qualification"
+    },
+    {
+      "repository": "riatzukiza/eta-mu",
+      "revision": "4094522330f58c597cce6d515b14b5fb29baceda",
+      "source_path": "kanban/tasks/terminal-ui-differential-render-host.md",
+      "expected_blob_oid": "db577393bda999e8309c1e6c51e9de2e6aa402f6",
+      "actual_blob_oid": "db577393bda999e8309c1e6c51e9de2e6aa402f6",
+      "bytes": 6802,
+      "recovered_path": ".ημ/stabilization/recovered/db577393bda999e8309c1e6c51e9de2e6aa402f6.md",
+      "sha256": "e8634f6fd316bd9822f2dcec1ce094de27a7e7dbcf74d1334646d5d81a645902",
+      "decision": "exact source custody recovered for this observation; no child state admission or product qualification"
+    },
+    {
+      "repository": "riatzukiza/knoxx",
+      "revision": "b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792",
+      "source_path": "kanban/tasks/knoxx-publication-resource-contracts.md",
+      "expected_blob_oid": "20316282a233b1134a91bc326d2908fa37a57415",
+      "actual_blob_oid": "20316282a233b1134a91bc326d2908fa37a57415",
+      "bytes": 13244,
+      "recovered_path": ".ημ/stabilization/recovered/20316282a233b1134a91bc326d2908fa37a57415.md",
+      "sha256": "dd3ec7debeca8ecbcb3e5a28030a9b16e3834f2f33b6b8b40c5303a07fd6f248",
+      "decision": "exact source custody recovered for this observation; no child state admission or product qualification"
+    }
+  ],
+  "knoxx_boundary_counts": {
+    "mailbox_delta_paths": 32,
+    "identity_same_blob_as_mailbox": 32,
+    "identity_differs_from_qualified331": 32,
+    "foundation375_differs_from_qualified331": 0,
+    "policy376_differs_from_qualified331": 0
+  },
+  "artifacts": {
+    "docs/stabilization/e0-refresh.md": {
+      "sha256": "af897deb003c34785c18457b96fec2d191e7e5e67c7b1a486ca213dbb454b1fb",
+      "bytes": 7773
+    },
+    "docs/stabilization/e0-refresh.json": {
+      "sha256": "8dbf126470cd43f63be8276b6b5ee4d77804c961e56c1d136200c9e62ab8fcfd",
+      "bytes": 518676
+    },
+    "docs/stabilization/e0-refresh.csv": {
+      "sha256": "5a9bcd670c1b880de444ce321a318ef1b840dd60ee385cd0f8efcb09b3af7935",
+      "bytes": 141072
+    },
+    ".ημ/stabilization/recovered/20316282a233b1134a91bc326d2908fa37a57415.md": {
+      "sha256": "dd3ec7debeca8ecbcb3e5a28030a9b16e3834f2f33b6b8b40c5303a07fd6f248",
+      "bytes": 13244
+    },
+    ".ημ/stabilization/recovered/db577393bda999e8309c1e6c51e9de2e6aa402f6.md": {
+      "sha256": "e8634f6fd316bd9822f2dcec1ce094de27a7e7dbcf74d1334646d5d81a645902",
+      "bytes": 6802
+    }
+  },
+  "canonical_operation": {
+    "transport": "rheos CLI @eta-mu/rheos@0.2.0",
+    "command": "rheos comment stabilization-e0 --text <checkpoint>",
+    "result": {
+      "command": "rheos comment stabilization-e0 --text <retained exact checkpoint>",
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"uuid\": \"stabilization-e0\",\n  \"comment\": \"E0 execution checkpoint: fresh exact frozen-cohort reads confirm 442 identities: 441 open, 1 native merge, 0 closed-unmerged. Five open PRs changed head/base; merged Session Mycology #1 also changed head (six total, same counting as the prior report). Merge ddb63291cf856ab59ef14f02b8346e42f6ef651b retains frozen source 4cba181e9a51da3c2cfaf871b3681a74d709058a on its ancestry; this is not semantic/merge-gate qualification. Current paginated reviews/comments/checks/statuses/files/thread metadata collected for six changed sources and Knoxx331; Axxium10 failed gate and 8 unresolved changed-open threads stay explicit.\\n\\nExact-ref base64 recovery now reproduces all 4 quarantined source observations / 2 unique Git blobs; exact bytes and bindings retained. That exact-source-recovery hold is satisfied only for those observations. Original mismatching captures stay unchanged; child status/behavior/admission remains unqualified.\\n\\nNative source confirms Knoxx331 already merged at 0fdaae13f421ff9623b1bb6fe1afb7694ab68ca1 despite stale active-target prose in issue323. Complete published trees verify all32 mailbox-delta paths identical in333/335 and different from331, while375/376 retain331 bytes at those paths. Retargeting335 alone cannot implement the documented identity-before-mailbox split. Existing324/325/372/377 keep their work; no new task, child edit, closure or accepted merge schedule.\\n\\nEvidence: docs/stabilization/e0-refresh.md, e0-refresh.json, e0-refresh.csv; native snapshot .ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz (sha256 6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6). Original census/ledgers and all23 consumer pins retained. Canonical pr-flow status attempt failed on installed gh --slurp support; no gate pass claimed. Root validate,36tests/286assertions, lint0/0 and Rheos drift pass. Codex retains reconciliation ownership on existing E0; E0 breakdown, E1-E7 incoming, M0-M7 UNQUALIFIED. CMS/Cephalon paused; no agent work dispatched. Next source proof: published335 32-path restoration and qualified intermediate source before any active order.\"\n}\n",
+      "stderr": ""
+    },
+    "readback": {
+      "uuid": "stabilization-e0",
+      "frontmatter": {
+        "category": "kanban",
+        "labels": "stabilization, coordination, e0",
+        "dependency": [],
+        "parent": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+        "type": "epic",
+        "write-id": "1792541070490-0.4wfhjbb27m4nanm43hl",
+        "title": "Stabilization E0 — Reconstruct the authoritative backlog",
+        "priority": "P1",
+        "status": "breakdown",
+        "uuid": "stabilization-e0",
+        "assignee": "codex",
+        "created_at": "2026-10-20T07:25:52.971Z"
+      },
+      "sections": [
+        {
+          "type": "body",
+          "content": "# E0 — Reconstruct the authoritative backlog\n\n## Context\n\nWe need to know exactly which work exists, how branches overlap, and which source is authoritative before merging anything.\n\nStabilization coordination only. Preserve child ownership and existing story identities.\n\n## Scope\n\n- E0.1: Freeze the PR census: Capture all upstream and personal PRs with immutable head SHAs, reviews, checks and base branches.\n- E0.2: Identify unique implementations: Distinguish stacked branches, duplicate source, old snapshots and changes that haven't reached upstream.\n- E0.3: Reconcile Rheos ownership: Connect existing PRs, UUIDs, cards, epics and dependencies without creating duplicate tasks.\n- E0.4: Preserve historical work: Secure unique code, evidence, Cephalon designs and unpublished fixes.\n- E0.5: Establish campaign rules: Allow only necessary repairs during stabilization, with explicit ownership and history preservation.\n\nThe slot-by-slot exit proofs and existing-task candidates are in [the portfolio](../../stabilization/portfolio.md#e0--reconstruct-the-authoritative-backlog).\n\n## Acceptance\n\nEvery PR has an owner, intended disposition and verified dependency relationship. The census is complete, not capped by a GitHub search-result limit.\n\n- Resolve every slot to existing canonical work or an explicit owned gap before creating execution stories.\n- Bind qualification evidence to exact source revisions and preserve prior attempts.\n- Registration and board status do not qualify a milestone.\n\n## Dependencies\n\nNone; establishes the frozen cohort.\n\n## Evidence\n\n[Portfolio tracker](../../stabilization/tracker.md); [source-backed work graph](../../stabilization/work-graph.json).\n\n## Definition of done\n\nEvery PR has an owner, intended disposition and verified dependency relationship. The census is complete, not capped by a GitHub search-result limit."
+        },
+        {
+          "type": "comment",
+          "content": "E0 execution begins: enumerate direct source upstreams, both organization repository inventories and all riatzukiza repositories through final API pages; verify actual fork networks including renamed forks; capture exact PR head/base and complete review/check/thread pages. Reconcile against existing current-source Rheos UUIDs and dependency declarations without creating execution-story copies. Separate observed associations from accepted prerequisites and keep missing ownership/disposition evidence explicit.\n\nCensus frozen: 442 open PRs across 815 repositories (663 authenticated personal + 48 open-hax + 104 octave-commons; eight external authored PRs added). Complete list pagination and final source/membership checks pass with no drift. Native reviews/comments/checks/threads retained; two 3000-file caps repaired by complete Git-tree deltas. docs/stabilization/e0-census.md, e0-pr-census.csv, e0-work-graph.json and e0-unresolved.json bind existing work. 3821 card observations, 192 PR/card associations, 183 PR relationship observations, zero new execution tasks. 250 PRs lack explicit card matches; 441 lack native assignees; 11 distinct malformed/missing relationship tokens remain. E0 stays breakdown and M0 unqualified. Preserve original card UUIDs and histories, one owner per dependent stack, repair-only changes, exact-source evidence reuse, and unique source before any closure.\n\nTaking explicit E0 reconciliation ownership under the current user instruction. Assignee codex owns census identity matching, dependency adjudication and blocker follow-through for this existing card. Native PR assignees, declared child owners and author identities remain historical evidence; this is not an assignment of merge authority or a claim of accepted implementation coverage. Use the frozen 442-PR census, create no tasks, and keep M0 unqualified while source custody or semantic prerequisites remain unresolved.\n\nE0 gap decisions recorded in docs/stabilization/e0-resolution.md and e0-resolution.json; all 442 frozen PR/head rows are indexed in e0-owner-work-index.csv. Codex owns reconciliation and every residual hold on this existing E0; execution/merge authority remains unassigned by this action. Retain 192 original PR/card association rows; 34 formerly unmatched PRs now bind explicit existing work. Frozen added-file patches recover 23 exact authored card blobs across 12 PRs, with 28 existing relationships. The other 216 rows retain native PR anchors (84 constellation candidates); this does not prove implementation coverage or require duplicate cards. All 133 supplemental scope rows stay visible without importing execution work.\n\nAll 11 former missing relationship references are adjudicated: 7 legacy-ID references located, 1 existing UUID filename alias resolved, 1 malformed Knoxx target quarantined with an exact-blob YAML repair proposal, and 2 empty references rejected as no edge. Preserve child identities and admission histories. Classified all 1170 frozen card relationships and 183 PR ancestry observations; parent/epic containment and branch ancestry do not confer execution order. Retain 72 literal Knoxx supplier declarations and 2 mixed evidence cycle components against existing task/index issues, including reconciliation #324 and qualification #325. No new tasks, child mutations, merges or closures.\n\nM0 remains UNQUALIFIED and E0 stays breakdown. Remaining holds owned here: accepted stack execution/merge owners and terminal intent; semantic coverage and source preservation; legacy/child custody and malformed-source repair; Knoxx integration/recomposition; and 4 captured-text hash mismatches (2 unique blobs) excluded from new identity authority decisions. Frozen source/census artifacts remain unchanged. The repair proposal is reviewable and tested only in scratch; it is not applied to a child.\n\nE0 execution checkpoint: fresh exact frozen-cohort reads confirm 442 identities: 441 open, 1 native merge, 0 closed-unmerged. Five open PRs changed head/base; merged Session Mycology #1 also changed head (six total, same counting as the prior report). Merge ddb63291cf856ab59ef14f02b8346e42f6ef651b retains frozen source 4cba181e9a51da3c2cfaf871b3681a74d709058a on its ancestry; this is not semantic/merge-gate qualification. Current paginated reviews/comments/checks/statuses/files/thread metadata collected for six changed sources and Knoxx331; Axxium10 failed gate and 8 unresolved changed-open threads stay explicit.\n\nExact-ref base64 recovery now reproduces all 4 quarantined source observations / 2 unique Git blobs; exact bytes and bindings retained. That exact-source-recovery hold is satisfied only for those observations. Original mismatching captures stay unchanged; child status/behavior/admission remains unqualified.\n\nNative source confirms Knoxx331 already merged at 0fdaae13f421ff9623b1bb6fe1afb7694ab68ca1 despite stale active-target prose in issue323. Complete published trees verify all32 mailbox-delta paths identical in333/335 and different from331, while375/376 retain331 bytes at those paths. Retargeting335 alone cannot implement the documented identity-before-mailbox split. Existing324/325/372/377 keep their work; no new task, child edit, closure or accepted merge schedule.\n\nEvidence: docs/stabilization/e0-refresh.md, e0-refresh.json, e0-refresh.csv; native snapshot .ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz (sha256 6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6). Original census/ledgers and all23 consumer pins retained. Canonical pr-flow status attempt failed on installed gh --slurp support; no gate pass claimed. Root validate,36tests/286assertions, lint0/0 and Rheos drift pass. Codex retains reconciliation ownership on existing E0; E0 breakdown, E1-E7 incoming, M0-M7 UNQUALIFIED. CMS/Cephalon paused; no agent work dispatched. Next source proof: published335 32-path restoration and qualified intermediate source before any active order."
+        }
+      ],
+      "source-path": "/home/err/spaces/foresight/docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md"
+    }
+  },
+  "pre_existing_file_hashes": {
+    "docs/stabilization/portfolio.md": {
+      "bytes": 32899,
+      "sha256": "bca509845fb52bb0646ab8dc640d7f98b6f55abb8183e4683e887e68017437da"
+    },
+    "docs/stabilization/e0-owner-work-index.csv": {
+      "bytes": 197238,
+      "sha256": "10650da17640c45f336d77b6eccb723f6bfc4afd9682bee9dfbd08bb938f6cd1"
+    },
+    "docs/stabilization/work-graph.json": {
+      "bytes": 41308,
+      "sha256": "587c3a6548a8bc6f9509913601aa8f5ebd56cc360af88b698340e37863e064a6"
+    },
+    "docs/stabilization/e0-resolution.json": {
+      "bytes": 2467085,
+      "sha256": "f13ed0b9920e4616e1b8da2abb3895321400445ca1e8f56ab147be5c2a743661"
+    },
+    "docs/stabilization/e0-census.md": {
+      "bytes": 14252,
+      "sha256": "68d3d2949a5ca99a59af33a2e13ce474d87ba5a269f451b5ed68fa1148ab14f6"
+    },
+    "docs/stabilization/e0-resolution.md": {
+      "bytes": 15237,
+      "sha256": "ba38f6177ce79affc91e7a613c581694629ee1b0a4d7bc51e5212d5780f0e7f9"
+    },
+    "docs/stabilization/e0-work-graph.json": {
+      "bytes": 6244088,
+      "sha256": "2de8e1f76aad6d2acb40718a12443cd4e1ee066cf6fd4ad1324464192af8ca42"
+    },
+    "docs/stabilization/tracker.md": {
+      "bytes": 11239,
+      "sha256": "d8c71b3b9f87670743f7b04c5f5b50ce3f64857604282654ec7edfb65ee93ed7"
+    },
+    "docs/stabilization/e0-unresolved.json": {
+      "bytes": 133712,
+      "sha256": "42e7928ecb09c38affa2fb1ef85093120c9bf604cf41d855b9775868d9e75f89"
+    },
+    "docs/stabilization/e0-pr-census.csv": {
+      "bytes": 264342,
+      "sha256": "40a69aa5c727bea4ac1f3d826dc28b00988950f2d87792d4fcdecd8b52bc077e"
+    },
+    ".ημ/stabilization/sources/ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923.txt": {
+      "bytes": 22367,
+      "sha256": "ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923"
+    },
+    ".ημ/stabilization/snapshots/4f080d1ab8959daa744d5c6d0d396c0522c00f81713e076f0c5e6574408e6f76.json": {
+      "bytes": 133564,
+      "sha256": "4f080d1ab8959daa744d5c6d0d396c0522c00f81713e076f0c5e6574408e6f76"
+    },
+    ".ημ/stabilization/snapshots/8bab636a453874728050cd4edb21a6d34368202444b3d1f2e2109f335b67d0a0.json": {
+      "bytes": 4424,
+      "sha256": "8bab636a453874728050cd4edb21a6d34368202444b3d1f2e2109f335b67d0a0"
+    },
+    ".ημ/stabilization/snapshots/cf11648fe0f8cb9db9ab25373b2b87b03d925477ac17801e1a331b51f0c21afa.json": {
+      "bytes": 43067,
+      "sha256": "cf11648fe0f8cb9db9ab25373b2b87b03d925477ac17801e1a331b51f0c21afa"
+    },
+    ".ημ/stabilization/snapshots/5f4cfa85ac737449c5243cab03cab37dc6f64c6038815f5db41124227c2c6bc7.json": {
+      "bytes": 42594,
+      "sha256": "5f4cfa85ac737449c5243cab03cab37dc6f64c6038815f5db41124227c2c6bc7"
+    },
+    ".ημ/stabilization/snapshots/6a4135f6046e7864e18079d0c45dcc679b17a2442ddcff80081ddd0d8d49ed5a.json.gz": {
+      "bytes": 57396906,
+      "sha256": "6a4135f6046e7864e18079d0c45dcc679b17a2442ddcff80081ddd0d8d49ed5a"
+    },
+    ".ημ/stabilization/snapshots/62874eae7ee052cce39d658402326449e617a49b0965abe6795a93a2ad6fe341.json": {
+      "bytes": 2136,
+      "sha256": "62874eae7ee052cce39d658402326449e617a49b0965abe6795a93a2ad6fe341"
+    },
+    ".ημ/stabilization/snapshots/917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9.json": {
+      "bytes": 5432,
+      "sha256": "917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9"
+    },
+    ".ημ/stabilization/local-census/5051b3b0271a42a8d0b352066cef690211b033f13d7e34b59787bd1a046a6a73.json.gz": {
+      "bytes": 305320,
+      "sha256": "5051b3b0271a42a8d0b352066cef690211b033f13d7e34b59787bd1a046a6a73"
+    },
+    ".ημ/stabilization/recovered/0ec2872e50ffd6f34a8cde1bb2a7c027df4f062e.md": {
+      "bytes": 40761,
+      "sha256": "a396793412841b8d6d539c3e53e0ee483d1620cf9d0cf953794b662fef731797"
+    },
+    ".ημ/stabilization/recovered/e67290983db85260b558a041c04686e88ef88f80.md": {
+      "bytes": 10063,
+      "sha256": "8cd125c6edb353c063fd9be0a99e51cfd92818e9783aca9dda9311cfc612a970"
+    },
+    ".ημ/stabilization/resolution-proposals/f38d314aef13280a2b6eff3f8bf3e4232de5d4faedeba5dd613db33b3595f8ef.patch": {
+      "bytes": 384,
+      "sha256": "f38d314aef13280a2b6eff3f8bf3e4232de5d4faedeba5dd613db33b3595f8ef"
+    },
+    "docs/agile/kanban/epic-develop-on-riatzukiza-forks-orgs-receive-promotions-and-run-ops--origins.md": {
+      "bytes": 4872,
+      "sha256": "3b5bfd88c47fba62a77db7618f5ee475e5e4ec93f93fbaf9f6d5243ae7459f7b"
+    },
+    "docs/agile/kanban/e1-06-transplant-edges-one-at-a-time.md": {
+      "bytes": 1787,
+      "sha256": "767dfb3263c1349c1d2767f0597bcfc6fa073ae543e7385207686375a078432f"
+    },
+    "docs/agile/kanban/e1-09-honest-quality-gates.md": {
+      "bytes": 2131,
+      "sha256": "4e274922aeeac58aa528da28b32046af768d8bfa1ce7372446af442e5b3d172a"
+    },
+    "docs/agile/kanban/detect-fork-org-drift-ft-check.md": {
+      "bytes": 1929,
+      "sha256": "400c2385c12de96de1c14976bf648f6ef7ac7a394c36accc47e48acc972dd3d8"
+    },
+    "docs/agile/kanban/run-the-foresight-root-gate-on-every-pull-request-te-in-ci.md": {
+      "bytes": 1974,
+      "sha256": "7ffb1ed70ffe7cd28ff1fb91a21f2f9a2a41a0bbd76f497b1dab41aa0c637d0f"
+    },
+    "docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md": {
+      "bytes": 990,
+      "sha256": "e30730693271de4a0918f95ee3c8143ec5d38acd849895199cc57feaacc2a4f5"
+    },
+    "docs/agile/kanban/cc2-01-separate-source-hydration-from-repository-access.md": {
+      "bytes": 3755,
+      "sha256": "d04f88cf950061f55820a4426334e3f8a0feec8174a306612047f764c8b95c50"
+    },
+    "docs/agile/kanban/b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f.md": {
+      "bytes": 2587,
+      "sha256": "647472064d3ee0c4dc5fe4d259665a9223bf499fb2a6a8235ee3f135253fd39d"
+    },
+    "docs/agile/kanban/add-a-promote-stage-to-pr-flow-romotion.md": {
+      "bytes": 3650,
+      "sha256": "713a6ef2f1babab1576dca76b1c039be4f564933945300cff22ed73c6dc0589a"
+    },
+    "docs/agile/kanban/e1-11-donor-retirement-after-cutover.md": {
+      "bytes": 1870,
+      "sha256": "fcba3393dc66c29338be753aa4e6e233735edbca75d42f43225ebc598bbc44ca"
+    },
+    "docs/agile/kanban/make-org-repositories-promotion-only-and-document-the-split-ops-only.md": {
+      "bytes": 2007,
+      "sha256": "cb3587553ccdd6c43031f7f846da7a1edb895144b517615a4ac96424e6bea8a1"
+    },
+    "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md": {
+      "bytes": 3114,
+      "sha256": "b141eae3492fb3ed2506987788d1bc39e59412c869d3a5ac6ed9fd7576f11b21"
+    },
+    "docs/agile/kanban/converge-alpha-reaction-planning-1d0d272c.md": {
+      "bytes": 1002,
+      "sha256": "ff5ea4bb7fb2ff2bf3943a863f4a131a5ba9eea3313aefdb96329a0e18edbd1a"
+    },
+    "docs/agile/kanban/ed7a709b-43e6-4270-9cb7-2cad9d89b4d0.md": {
+      "bytes": 1937,
+      "sha256": "8d56de8e45ee2e54c1803f44301229fc350cb961875665ee5b0e960323f316f8"
+    },
+    "docs/agile/kanban/replace-sol-legacy-ledger-dependency-with-clio.md": {
+      "bytes": 3046,
+      "sha256": "6b6dd49fc64e1a757b8f1ce46070303fcaf28b9326fe68e6468289f9c6c68422"
+    },
+    "docs/agile/kanban/loc-13-published-agents-md.md": {
+      "bytes": 3791,
+      "sha256": "f9297f74aeb62ac2d885f18751bae61657303ef7dc6d2949a5ec7d91fdcc283e"
+    },
+    "docs/agile/kanban/e1-08-osmos-ingestion-service.md": {
+      "bytes": 2087,
+      "sha256": "63b5015f77a82948bb9b066bd467143e4b22bc026e1ddcbf4c1d837a0872f90a"
+    },
+    "docs/agile/kanban/loc-15-retire-legacy-principle-bootstrap.md": {
+      "bytes": 2964,
+      "sha256": "095b49d93dec12acb901059d93f9fa0f6a6caf5fc5e5e39bf1e3c588d20b6ebd"
+    },
+    "docs/agile/kanban/cc2-03-configure-child-remotes-for-active-policy.md": {
+      "bytes": 3946,
+      "sha256": "630b900b03974715a366157460ac5926bf1bd174994da9369862198860576474"
+    },
+    "docs/agile/kanban/e1-10-reviewer-start-window-protection.md": {
+      "bytes": 2158,
+      "sha256": "fb32dd02beb07bc302719f5903ae51ee05074eec0c9c3b5d5a6443fb4b4a355d"
+    },
+    "docs/agile/kanban/establish-the-pinned-repository-census-94175066.md": {
+      "bytes": 1585,
+      "sha256": "168c5a0111ee060ecbbc30553745e6da56d40097ce2faa4f138c430443b16c6b"
+    },
+    "docs/agile/kanban/stabilization-e7-produce-the-release-baseline-and-state-of-the-world-report-ation-e7.md": {
+      "bytes": 2460,
+      "sha256": "2617e364ed4068b3f3d8f5371ccf529714f00f9fc67e3bd1dec13f9052181b17"
+    },
+    "docs/agile/kanban/converge-alpha-portable-envelopes-ae23b7a1.md": {
+      "bytes": 1113,
+      "sha256": "6d7b8f35cea3bf0ee64875aeb36ab6214f77def8763398ac379f2e4df0c43ddd"
+    },
+    "docs/agile/kanban/760f7f1e-a086-4e0a-82a5-71d2a761073d.md": {
+      "bytes": 2395,
+      "sha256": "20a2211f7c572739240948f97f21a42560c37892e7864941f219cff74e709602"
+    },
+    "docs/agile/kanban/cc1-02-cloud-safe-submodule-transport.md": {
+      "bytes": 4189,
+      "sha256": "47db0e04af3d454faba53e51e69a3e0b71685330d743707a6b98f3056e4f8024"
+    },
+    "docs/agile/kanban/converge-alpha-markdown-resolution-57b63011.md": {
+      "bytes": 1034,
+      "sha256": "6306360c32da3cba8c0676e4f84b330756cba9e2194342c0d8a530b553cc9d0a"
+    },
+    "docs/agile/kanban/loc-07-harness-profiles.md": {
+      "bytes": 5346,
+      "sha256": "1bec49823eacda046b695f32bbe2588f55204ed47625e323d9dcb8999aa2d2a3"
+    },
+    "docs/agile/kanban/cc1-01-codex-cloud-bootstrap-contract.md": {
+      "bytes": 5895,
+      "sha256": "ff27772f85c94bf5b365e8ec706fadc2203eed3a892b0acc2c65f813f484081c"
+    },
+    "docs/agile/kanban/stabilization-e3-settle-identity-deployment-and-openplanner-integration-ation-e3.md": {
+      "bytes": 2289,
+      "sha256": "b3c6dc2486038d6f9ba1985d7d5fb65f093bfcb6d7182a72c55177d145f1b50b"
+    },
+    "docs/agile/kanban/loc-09-contract-0-module.md": {
+      "bytes": 2346,
+      "sha256": "1c180be329aafdddeea02bf9be547302547b5f5860aef87122585a90d109b24b"
+    },
+    "docs/agile/kanban/converge-alpha-mermaid-graph-laws-c3a5e4b3.md": {
+      "bytes": 999,
+      "sha256": "42437597c8a620c75d80708702cbe9e5bbb3395a38fb0218ee069a4d52eee14d"
+    },
+    "docs/agile/kanban/stabilization-e2-reconcile-shared-contracts-events-and-persistence-ation-e2.md": {
+      "bytes": 2145,
+      "sha256": "ab98e1662417c2210528eb48e1ce9a83f6d82269c299aed6d01da439f022e242"
+    },
+    "docs/agile/kanban/ddebd3d4-7a75-5657-8ab9-cd606406f998.md": {
+      "bytes": 2755,
+      "sha256": "09f38ead3579eb67f1b1fcc7a4c579953e09445910d219c8b8412796c4d20d7c"
+    },
+    "docs/agile/kanban/converge-alpha-event-laws-6b44f2f4.md": {
+      "bytes": 933,
+      "sha256": "11b41458ce39b97fb5cc2da9045215ed298a3f47e6235edbbe1219152954baf3"
+    },
+    "docs/agile/kanban/restore-reproducible-sol-node-22-runtime-prerequisites-dd91f6b6.md": {
+      "bytes": 5935,
+      "sha256": "a552dbab9a4374331a80e08c5be9087fc142b30d24136a97fac6096bca5d2749"
+    },
+    "docs/agile/kanban/loc-02-contract-0-golden-artifacts.md": {
+      "bytes": 2607,
+      "sha256": "b8e9e87c3cd2ec9156810f083e2697de53b994af9643835a9bc1928e94eb0eed"
+    },
+    "docs/agile/kanban/loc-03-fragment-source.md": {
+      "bytes": 5045,
+      "sha256": "c6c47b57bf77c6ae9c79f2b97ab3399bc9da0dae26990f3ffd33ec40d86bc692"
+    },
+    "docs/agile/kanban/cc1-05-fresh-root-only-cloud-acceptance.md": {
+      "bytes": 4090,
+      "sha256": "06a3eb99d56214eec51d6d586764864b08367c5ec6241edee322083930377ebf"
+    },
+    "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md": {
+      "bytes": 6102,
+      "sha256": "ee7115ba54f0684d04584c4d9a23be3ccbb238d379c054bdea2c53eac723ab88"
+    },
+    "docs/agile/kanban/e1-01-migration-surface-manifest.md": {
+      "bytes": 2850,
+      "sha256": "ac2f515927d3e36c0fe80cde5360de405fd0b1062615cf6008b6f6b37fa06ef7"
+    },
+    "docs/agile/kanban/cc2-04-codex-cloud-access-acceptance-matrix.md": {
+      "bytes": 5623,
+      "sha256": "2bd81c4d291490a87cf2c10d166e6e3c57714b2e4053f9033aa1ccc0fac9b045"
+    },
+    "docs/agile/kanban/e1-12-migration-documentation.md": {
+      "bytes": 1805,
+      "sha256": "f4aebba1d4a96e868bb8ea481502d6986cb2f0c7388d0a2275abae230e556c5d"
+    },
+    "docs/agile/kanban/loc-12-daemon-chains-ownership.md": {
+      "bytes": 2982,
+      "sha256": "e6d2423a2efd5e5924a8b45254a555aa4f635fe26344cf583c8c91fd96a98f1d"
+    },
+    "docs/agile/kanban/recover-inaccessible-census-revisions-3c4226e3.md": {
+      "bytes": 1192,
+      "sha256": "0d7eeb529fb81d29f3b49e2da5bb61da5f8712045c7a1d31bc5bff48eea7c993"
+    },
+    "docs/agile/kanban/record-the-fork-org-map-as-validated-data-igin-map.md": {
+      "bytes": 2081,
+      "sha256": "d13f28bcd520cf1e48289ab5fa939cb6ddd9472e605427adf4e2205744f803c6"
+    },
+    "docs/agile/kanban/e1-07-remaining-eta-mu-consumers.md": {
+      "bytes": 2250,
+      "sha256": "0d6e2577c4caf76adab3f1647d14ab791aa331eb00695303ea081c130a549c4f"
+    },
+    "docs/agile/kanban/e1-02-faithful-clean-copies.md": {
+      "bytes": 2019,
+      "sha256": "12a253193a46c99363b2876e50014f57316c799d9e60f68285621b7b85cbb887"
+    },
+    "docs/agile/kanban/create-the-riatzukiza-dev-forks-ev-forks.md": {
+      "bytes": 2302,
+      "sha256": "82986b4c18ec4b8a0eacdd53e85082a9bc9312e17499091957848f5fea1c5ed1"
+    },
+    "docs/agile/kanban/epic-codex-cloud-self-hydrating-foresight-workspace.md": {
+      "bytes": 8051,
+      "sha256": "d3ff67b8eefdf6b30d22a300c05e09707f7210d025d9dda84da97aa9183eabe6"
+    },
+    "docs/agile/kanban/loc-06-layer-chain.md": {
+      "bytes": 2521,
+      "sha256": "a5cd2726969492d8666c8243e26c25162e86192cc028ad7960967ed6fe68daa1"
+    },
+    "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md": {
+      "bytes": 3351,
+      "sha256": "081873ec8bbd951919266d092c089b36a3a3e761bbc085fca3d3ccf2b8aca783"
+    },
+    "docs/agile/kanban/330aa63f-f697-5bd6-9fc0-3f19fbea2be4.md": {
+      "bytes": 11253,
+      "sha256": "20b9a6dcc0de8534e808a3b8e356801dea5b7c604daeed1face19b67e5857954"
+    },
+    "docs/agile/kanban/loc-04-contract-shapes.md": {
+      "bytes": 4906,
+      "sha256": "6175e6033138ec388eaad370b47a1e53c57a6fd4902f5f301248205798e1f2b3"
+    },
+    "docs/agile/kanban/5f19dd78-9ee5-4c3f-97a8-930f76994447.md": {
+      "bytes": 2534,
+      "sha256": "bfc0e4b922b5ab270fc466140d10a5e1b313f0567d2c69bbb365de956465d9d4"
+    },
+    "docs/agile/kanban/cc2-02-project-dev-origin-map-into-codex-selection.md": {
+      "bytes": 4754,
+      "sha256": "bfa3763b04ee73b05bd2a1cd9c098fec88801be8ed41ef386d50756214b53ee7"
+    },
+    "docs/agile/kanban/point-foresight-s-submodules-and-local-checkouts-at-the-forks-to-forks.md": {
+      "bytes": 1741,
+      "sha256": "e9062e8a3e73dc8950d39823fba83fa654197f1a063e6a946b30abc82750d319"
+    },
+    "docs/agile/kanban/coordinate-eta-mu-github-evidence-agent.md": {
+      "bytes": 6406,
+      "sha256": "5240c510bf7605d8b0fcaedee100199490c7f6c14fdfc5f745bd96859c4994ed"
+    },
+    "docs/agile/kanban/stabilization-e5-preserve-and-qualify-cephalon-s-creative-loop-baseline-ation-e5.md": {
+      "bytes": 2514,
+      "sha256": "37ed6787bdf08ec310213c17c2214151019bc5dc9e926b7838e8ac03f1c905c0"
+    },
+    "docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md": {
+      "bytes": 2416,
+      "sha256": "013f3135fde9ae9a066ffc69d2baf9cace7b96f6da8fe692d3bbc45c7c880767"
+    },
+    "docs/agile/kanban/loc-16-per-directory-projections.md": {
+      "bytes": 4428,
+      "sha256": "95fd44d5947f8ec742c1cd289b6d185bf43e14a1e2518e091f5089e183a6f428"
+    },
+    "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md": {
+      "bytes": 2223,
+      "sha256": "15f1f0db74911ac5c9e4b55646be3f13f722c05c0bb79647b6f3ea60532fb7e0"
+    },
+    "docs/agile/kanban/loc-08-instruction-emitter.md": {
+      "bytes": 5154,
+      "sha256": "26b5b711e1965672af45d80ddbcdd9ea5d4f334e5bbd94d52bfa80d2cf064220"
+    },
+    "docs/agile/kanban/loc-14-absolutes-to-gates.md": {
+      "bytes": 6338,
+      "sha256": "2a5e3264d5b5c269ba5c6ffd0da7cd4fb2fa48221520de485c1689b1b7154678"
+    },
+    "docs/agile/kanban/e1-04-independent-git-history.md": {
+      "bytes": 1784,
+      "sha256": "26a873efb8d53a1f72c31566090a28e169181d0428cee4f4db4c23f6a59f2b4f"
+    },
+    "docs/agile/kanban/cc1-04-toolchain-and-root-validation.md": {
+      "bytes": 3786,
+      "sha256": "48c59b0729ebdcc842b7d90e73243f1d467349d5edabd9857b874a6630e6c2ef"
+    },
+    "docs/agile/kanban/loc-01-contract-0-freeze.md": {
+      "bytes": 3161,
+      "sha256": "b483b4592b08ea800c0b824c097a38025f89492228ebf3c0a102c2ae92a0926e"
+    },
+    "docs/agile/kanban/e1-05-foresight-discovers-children.md": {
+      "bytes": 2024,
+      "sha256": "a388c55d0f85358827022b24f5c2d8c4e94286f8ee31341ac075ecb1032abc39"
+    },
+    "docs/agile/kanban/configure-review-and-merge-protection-on-every-fork-ew-setup.md": {
+      "bytes": 4441,
+      "sha256": "a3006cf79f1292f770fda76e18ae2c353cf836fc1bb6fcca2042b695a28af51c"
+    },
+    "docs/agile/kanban/stabilization-e6-close-the-remaining-foresight-constellation-backlog-ation-e6.md": {
+      "bytes": 2304,
+      "sha256": "eea84dd110460a3611615381a481edab4b0fa95b725911ade3a6c8ac3d9c0e07"
+    },
+    "docs/agile/kanban/cut-sol-session-ledgers-over-to-clio-96c99928.md": {
+      "bytes": 2711,
+      "sha256": "878d099794cf86a1e8ce655f314698ab1bbfa714ff561c4ce0bf6cc065b21c9a"
+    },
+    "docs/agile/kanban/epic-layered-operating-contracts.md": {
+      "bytes": 5566,
+      "sha256": "969c67c849f1eb903e32ee5c61fb42fc8953a43ccbb545ce450a2303e13b23d1"
+    },
+    "docs/agile/kanban/cc1-03-idempotent-direct-child-hydration.md": {
+      "bytes": 5296,
+      "sha256": "8b931349eaa37e6f870152f44310072e7d47e69680beb92561b2241a9139063b"
+    },
+    "docs/agile/kanban/98371a85-76ed-46e4-9fef-b733b630c799.md": {
+      "bytes": 2763,
+      "sha256": "1240891c187961c37c7c82c7138a674dc1ff70e713828ecc87a3b607cb503c42"
+    },
+    "docs/agile/kanban/loc-05-fold-laws.md": {
+      "bytes": 6074,
+      "sha256": "0631a5aca0701d9f8be77a0fb2be261da05df68018153ca9b1e2d8b14bbca52f"
+    },
+    "docs/agile/kanban/admit-sol-episode-events-through-clio-2c5ad649.md": {
+      "bytes": 3711,
+      "sha256": "bf9492e02ddc94729cbff691c8efc0eec17250124caf21600672c63108e57717"
+    },
+    "docs/agile/kanban/a32d2994-3a80-46c3-bc52-5815f3cf51ab.md": {
+      "bytes": 1399,
+      "sha256": "5434e32b80a7be4f7bc540bacc107c2daecb2a6a48402b9db86aa834378ce527"
+    },
+    "docs/agile/kanban/e1-03-bootstrap-dependency-resolution.md": {
+      "bytes": 2266,
+      "sha256": "01654d81e903b82e86dcc1ab211341c3034c180dd2457f4dc1aea5c3bb52f08b"
+    },
+    "docs/agile/kanban/loc-10-cutover-claude-code.md": {
+      "bytes": 5011,
+      "sha256": "d56859a60f8ee535fe55ad3721a53622ad8408aba9bf9677acfd4085701b7d81"
+    },
+    "docs/agile/kanban/record-digitalocean-deployment-acceptance-86af1ffc.md": {
+      "bytes": 1053,
+      "sha256": "fd2b8191e2e725cd4bb16ffad6295fc083dba63fb3fae7f6b8b495b00a127d56"
+    },
+    "docs/agile/kanban/bind-coverage-promotion-to-immutable-report-evidence.md": {
+      "bytes": 900,
+      "sha256": "4724f1f86bd1a99cb827c360da6342dd2e59ca0d44da2f1d48181029d3340db5"
+    },
+    "docs/agile/kanban/stabilization-e4-reconcile-knoxx-cms-and-translation-work-ation-e4.md": {
+      "bytes": 2429,
+      "sha256": "326f06bbdbe3eabdd49b8b9c9a1537dfa829c1ad00981487709a3f88094f37bc"
+    },
+    "docs/agile/kanban/isolate-exact-commit-evidence-execution-be44f659.md": {
+      "bytes": 1033,
+      "sha256": "dd651e661f296c136bc10a79ed0b2e38f3b1d19db25117fb09a699e56cc637ee"
+    },
+    "docs/agile/kanban/epic-codex-cloud-repository-access-and-fork-auth.md": {
+      "bytes": 5499,
+      "sha256": "c925dbe61f934f56574e532c9a2f0e5be18fe0dde39d8fe750587756e3a11a50"
+    },
+    "docs/agile/kanban/prove-translation-generation-and-sme-review-independently.md": {
+      "bytes": 2180,
+      "sha256": "bd385a52991635c0c1470f7ade9698b8d37832025f9fdecbd692ef848b9f58b5"
+    },
+    "docs/agile/kanban/loc-11-cutover-opencode-codex.md": {
+      "bytes": 7616,
+      "sha256": "d87ad7faaaf351225ebd51ab17c00b6db796faf581c4b41e11e56549c3f5f0b4"
+    },
+    ".ημ/receipts.edn": {
+      "bytes": 333807,
+      "sha256": "5924c685dd728c207fa4de5a0e02acf635e1be924e80abb0cefcb957278d8cba"
+    },
+    ".ημ/session-mycology/ledger.md": {
+      "bytes": 31325,
+      "sha256": "322027a27301f4d41b9f02048b012a3db883d29ad6cc6bc2debf245fa8aeb411"
+    },
+    ".ημ/kanban-events/ledger.edn": {
+      "bytes": 176509,
+      "sha256": "2f77181a1e7ad9cc5019530b611956c8d9d79fbf343aa575e15cdf1bb4c41e50"
+    },
+    "README.md": {
+      "bytes": 10803,
+      "sha256": "aa974f161e3dee4df896ed13b8d1fdccd881bb6d3b4bc65e948dc737b0823ee7"
+    }
+  },
+  "append_only_ledger_prefixes": {
+    ".ημ/receipts.edn": {
+      "bytes": 333807,
+      "sha256": "5924c685dd728c207fa4de5a0e02acf635e1be924e80abb0cefcb957278d8cba"
+    },
+    ".ημ/session-mycology/ledger.md": {
+      "bytes": 31325,
+      "sha256": "322027a27301f4d41b9f02048b012a3db883d29ad6cc6bc2debf245fa8aeb411"
+    },
+    ".ημ/kanban-events/ledger.edn": {
+      "bytes": 176509,
+      "sha256": "2f77181a1e7ad9cc5019530b611956c8d9d79fbf343aa575e15cdf1bb4c41e50"
+    }
+  },
+  "navigation_projections": [
+    "docs/stabilization/tracker.md",
+    "docs/stabilization/work-graph.json"
+  ],
+  "validation": {
+    "integrity": "PASS 442 frozen identities and CSV rows; 441 open/1 merge; 5 open + 1 merged source changes; 7 complete stable native collections; 4 exact-ref custody recoveries/2 blobs; 32-path independent published-tree comparisons; merge ancestry; all23 consumer pins unchanged; all85 card identities/states; exact Rheos comment readback; untouched pre-existing file hashes and append-only ledger prefixes; snapshot digests; local links/whitespace.",
+    "project": "PASS 25 sources/23 submodules/39 invariants",
+    "workspace_tests": "\nTesting workspace-test\nSTART opencode bun run lint\nERROR opencode lint spawn ENOENT\nFAIL opencode lint\nSTART jscpd --config .jscpd.json /home/err/spaces/foresight/opencode\nERROR jscpd spawn ENOENT\nSTART jscpd --config .jscpd.json /workspace/opencode\nSKIP uninitialized test repository is not initialized\n\nRan 24 tests containing 120 assertions.\n0 failures, 0 errors.\n",
+    "project_tests": "\nTesting project-test\n\nRan 12 tests containing 166 assertions.\n0 failures, 0 errors.\n",
+    "lint": "PASS clj-kondo --lint scripts test: 0 errors/0 warnings",
+    "rheos_drift": "PASS no drift before and after checkpoint",
+    "preservation": "untouched pre-existing file digests, ledger prefixes and 23 index consumer pins verified",
+    "integrity_check_source": "import base64,csv,gzip,hashlib,json,pathlib,re,subprocess,yaml\nR=pathlib.Path('/home/err/spaces/foresight');D=pathlib.Path('/tmp/foresight-e0-continuation-20261020')\ndef sha(b):return hashlib.sha256(b).hexdigest()\nbefore=json.load(open(D/'before.json'))\nchanged={'docs/stabilization/tracker.md','docs/stabilization/work-graph.json','docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md'}\nledgers={'.ημ/receipts.edn','.ημ/session-mycology/ledger.md','.ημ/kanban-events/ledger.edn'}\nfor path,meta in before.items():\n    b=(R/path).read_bytes()\n    if path in changed:continue\n    if path in ledgers:b=b[:meta['bytes']]\n    assert sha(b)==meta['sha256'],('pre-existing bytes changed',path)\no=json.load(open(R/'docs/stabilization/e0-refresh.json'));ref=o['native_evidence'];b=(R/ref['path']).read_bytes();assert sha(b)==ref['sha256'];plain=gzip.decompress(b);assert sha(plain)==ref['uncompressed_sha256'];native=json.loads(plain)\nold=json.load(open(R/'docs/stabilization/e0-work-graph.json'));rows={p['identity']:p for p in old['pull_requests']};curr={p['identity']:p for p in o['pull_requests']}\nassert len(curr)==len(o['pull_requests'])==442 and curr.keys()==rows.keys()\nassert sum(p['state']=='OPEN' for p in curr.values())==441\nassert sum(p['state']=='MERGED' for p in curr.values())==1\nassert len(o['changed_sources'])==6 and o['summary']['changed_open_head_or_base']==5\nfor k,p in curr.items():assert (p['frozen_head_sha'],p['frozen_base_sha'])==(rows[k]['head_sha'],rows[k]['base_sha']) and p['tested_merge_candidate'] is None\nassert len(list(csv.DictReader(open(R/'docs/stabilization/e0-refresh.csv'))))==442\nfor p in o['recovered_source_custody']:\n    b=(R/p['recovered_path']).read_bytes();assert sha(b)==p['sha256'];assert hashlib.sha1(b'blob '+str(len(b)).encode()+b'\\0'+b).hexdigest()==p['expected_blob_oid']==p['actual_blob_oid']\nassert len(o['recovered_source_custody'])==4 and len({p['actual_blob_oid'] for p in o['recovered_source_custody']})==2\nbs=native['knoxx_boundary'];assert bs['counts']=={'mailbox_delta_paths':32,'identity_same_blob_as_mailbox':32,'identity_differs_from_qualified331':32,'foundation375_differs_from_qualified331':0,'policy376_differs_from_qualified331':0}\nassert not any(x['data']['truncated'] for x in bs['trees'].values())\nfor p in bs['path_observations']:\n    nodes=p['nodes'];assert nodes['335']['sha']==nodes['333']['sha'];assert (nodes['335'] or {}).get('sha')!=(nodes['331'] or {}).get('sha')\n    assert (nodes['375'] or {}).get('sha')==(nodes['376'] or {}).get('sha')==(nodes['331'] or {}).get('sha')\ncomp=native['knoxx_extra_native']['merged-source-ancestry']['data'];assert comp['behind_by']==0 and comp['merge_base_commit']['sha']==rows['riatzukiza/session-mycology#1']['head_sha']\nassert len(native['details'])==7 and all(x['source_stable'] for x in native['details'].values())\nassert sum(x['unresolved_threads'] for k,x in o['fresh_detail_summaries'].items() if k in curr and curr[k]['state']=='OPEN')==8\nfor x in native['details'].values():\n    assert all(v['complete'] and len(v['pages'][-1]['data']['check_runs'] if k=='checks' else v['pages'][-1]['data'])<100 for k,v in x['evidence'].items())\n    assert len(x['evidence']['files']['items'])==x['start']['data']['changed_files']\n    assert not x['thread_pages'][-1]['response']['data']['repository']['pullRequest']['reviewThreads']['pageInfo']['hasNextPage']\nassert len(o['consumer_pins']['index_gitlinks'])==23\nnowpins=[]\nfor line in subprocess.check_output(['git','ls-files','--stage'],cwd=R,text=True).splitlines():\n    meta,path=line.split('\\t');mode,oid,stage=meta.split()\n    if mode=='160000':nowpins.append({'path':path,'sha':oid,'stage':stage})\nassert nowpins==o['consumer_pins']['index_gitlinks']\ncards={}\nfor p in (R/'docs/agile/kanban').glob('*.md'):\n    text=p.read_text()\n    if text.startswith('---'):\n        fm=yaml.safe_load(text.split('---',2)[1]);assert fm['uuid'] not in cards;cards[fm['uuid']]=fm\nassert len(cards)==85 and cards['stabilization-e0']['status']=='breakdown' and cards['stabilization-e0']['assignee']=='codex'\nassert all(cards['stabilization-e'+str(n)]['status']=='incoming' for n in range(1,8))\nreadback=json.load(open(D/'e0-readback.json'));assert readback['frontmatter']==cards['stabilization-e0']\ndef strings(x):\n    if isinstance(x,str):yield x\n    elif isinstance(x,dict):\n        for v in x.values():yield from strings(v)\n    elif isinstance(x,list):\n        for v in x:yield from strings(v)\ncomment=(D/'e0-checkpoint-comment.txt').read_text().rstrip('\\n');assert any(comment in s for s in strings(readback))\nfor name in ['e0-refresh.md','tracker.md']:\n    p=R/'docs/stabilization'/name\n    for link in re.findall(r'\\]\\(([^)]+)\\)',p.read_text()):\n        if '://' not in link:assert (p.parent/link.split('#')[0]).resolve().exists(),link\n    assert all(s==s.rstrip() for s in p.read_text().splitlines())\nsubprocess.run(['git','diff','--check'],cwd=R,check=True,capture_output=True)\nprint('PASS 442 frozen identities and CSV rows; 441 open/1 merge; 5 open + 1 merged source changes; 7 complete stable native collections; 4 exact-ref custody recoveries/2 blobs; 32-path independent published-tree comparisons; merge ancestry; all23 consumer pins unchanged; all85 card identities/states; exact Rheos comment readback; untouched pre-existing file hashes and append-only ledger prefixes; snapshot digests; local links/whitespace.')\n"
+  },
+  "failed_attempts": [
+    {
+      "operation": "canonical pr-flow status open-hax/knoxx331",
+      "outcome": "installed gh rejects --slurp; explicit native pagination used; no gate verdict"
+    },
+    {
+      "operation": "local persistence of mirrored source blobs",
+      "outcome": "duplicate-content guard refused second repository copy; corrected to reuse only byte-identical object; first native object retained; no pre-existing bytes overwritten"
+    }
+  ],
+  "decision": {
+    "status": "unqualified",
+    "m0_qualified": false,
+    "authorized_reviewer": null,
+    "coordination_owner": "codex on existing E0",
+    "source_custody_recovery": "satisfied only for four named observations",
+    "merge_authority_assigned": false
+  },
+  "created_tasks": 0,
+  "cms_cephalon": "Paused; no agents started or messages sent"
+}

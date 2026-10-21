@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "kind": "e0-execution-overlay",
+  "observed_at": "2026-10-21T00:29:40.957896+00:00",
+  "existing_work": "riatzukiza/clio#5",
+  "url": "https://github.com/riatzukiza/clio/pull/5",
+  "coordination_epics": [
+    "stabilization-e0",
+    "stabilization-e2"
+  ],
+  "execution_owner": "codex under active user stabilization goal",
+  "owner_operation": "Rheos comment on existing E0; raw operation retained in native evidence",
+  "source_before": "e04da66c3aefe9f3b124e275d92a1771feb04bd8",
+  "red_commit": "d83296ff2250a8d2faa7f9441681bdd6befeb993",
+  "published_head": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+  "base_sha": "7262ddaaf39b32deb1794c5c6595724b6d69538e",
+  "state": "OPEN",
+  "disposition": "preserve-open; corrected two findings, qualification pending",
+  "source_preserved": "ordinary fast-forward commits retain original source and red regression state",
+  "local_checks": {
+    "bb": {
+      "tests": 29,
+      "assertions": 182
+    },
+    "jvm": {
+      "tests": 119,
+      "assertions": 530
+    },
+    "nbb": {
+      "tests": 94,
+      "assertions": 510
+    },
+    "shadow": {
+      "tests": 94,
+      "assertions": 510,
+      "compiler_warnings": 0
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "all": "zero failures/errors; exact commands and outputs retained"
+  },
+  "hosted_ci": {
+    "run_id": 39520773474,
+    "url": "https://github.com/riatzukiza/clio/actions/runs/39520773474",
+    "head_sha": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "settled_findings": [
+    {
+      "thread": "PRRT_kwDOU4VfQc6ukcbC",
+      "root_comment_id": 4331540380,
+      "reply_url": "https://github.com/riatzukiza/clio/pull/5#discussion_r4331734104",
+      "kind": "fixed",
+      "resolved": true
+    },
+    {
+      "thread": "PRRT_kwDOU4VfQc6ukcbD",
+      "root_comment_id": 4331540382,
+      "reply_url": "https://github.com/riatzukiza/clio/pull/5#discussion_r4331733656",
+      "kind": "fixed",
+      "resolved": true
+    }
+  ],
+  "outstanding_findings": [
+    {
+      "thread": "PRRT_kwDOU4VfQc6ujoR4",
+      "root_comment_id": 4331187538,
+      "url": "https://github.com/riatzukiza/clio/pull/5#discussion_r4331187538",
+      "summary": "Pin captured directory identity through enumeration and every segment open; pathname rechecks permit temporary ABA replacement.",
+      "owner": "codex on existing Clio5/E0",
+      "unblock_proof": "adversarial tests reproduce the temporary replacement, then descriptor-bound reads preserve the captured parent across native adapters without weakening portability or read-only behavior."
+    }
+  ],
+  "review": {
+    "status": "unqualified",
+    "coderabbit_request": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6304845341",
+    "coderabbit": "rate-limited, native source6304846635",
+    "retry_at_utc": "2026-10-21T00:36:46Z",
+    "codex": "account quota unavailable, retry boundary UNKNOWN",
+    "mimo": "current cohort obligation; proposed workflow exists in Clio3, absent from Clio5 head and fork main",
+    "approval_quorum": "not met",
+    "unresolved_threads": 1
+  },
+  "review_route_candidate": {
+    "work": "riatzukiza/clio#3",
+    "head_sha": "5d4f98b29d1253fea8483bd2fd16893421041e5b",
+    "qualification": "blocked; historical run37974666512 failed missing App credentials on October9; secret names now present as of October19, installation and fresh admitted execution unproven",
+    "dependency_type": "review execution route candidate, not ledger semantic prerequisite",
+    "source": "exact candidate/reusable workflow, canonical gate and failed native log retained"
+  },
+  "knoxx": {
+    "current_main": "3409977bca4ba35e09967f9a99d50867a679a73c",
+    "observation": "published old331/333/335/375/376 heads all diverge from current main; compare metadata retained; no blind stack merge or accepted order"
+  },
+  "consumer_pins": "all23 root index gitlinks unchanged",
+  "global_census_scope": "No new global census; previous442/441/1 observation remains historical. This overlay updates Clio5 only.",
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2.json.gz",
+    "sha256": "91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2",
+    "bytes": 1559862,
+    "uncompressed_sha256": "6477443ac9d4a39fd5ad7d6a56d866bd35136ba6f072664816c005be411e833c",
+    "uncompressed_bytes": 7803310
+  },
+  "created_execution_tasks": 0,
+  "created_remediation_prs": [],
+  "qualified": false,
+  "m0_m7": "unqualified",
+  "cms_cephalon": "paused; no work dispatched"
+}

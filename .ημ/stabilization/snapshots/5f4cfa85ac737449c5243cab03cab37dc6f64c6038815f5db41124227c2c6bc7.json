@@ -1,0 +1,1263 @@
+{
+  "kind": "machine-git-sync",
+  "observed_at": "2026-10-20T07:30:25.949988Z",
+  "root_before": {
+    "path": ".",
+    "branch": {
+      "code": 0,
+      "out": "device/yoga",
+      "err": ""
+    },
+    "status": {
+      "code": 0,
+      "out": "M \".\\316\\267\\316\\274/receipts.edn\"\n M test/workspace_test.cljs\n?? .claude/\n?? \".\\316\\267\\316\\274/stabilization/\"",
+      "err": ""
+    },
+    "remotes": {
+      "code": 0,
+      "out": "origin\tgit@github.com:open-hax/foresight.git (fetch)\norigin\tgit@github.com:open-hax/foresight.git (push)",
+      "err": ""
+    },
+    "head": {
+      "code": 0,
+      "out": "c551e986b9720e0aafe8d3cba88cde0376f1dbce",
+      "err": ""
+    },
+    "upstream": {
+      "code": 0,
+      "out": "origin/device/yoga",
+      "err": ""
+    }
+  },
+  "root_after": {
+    "branch": "codex/stabilization-portfolio",
+    "baseline_revision": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "local_main": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "origin_main": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "origin_stealth": "67a3289534bb17a4c298e26028b279c7ae3d265f"
+  },
+  "scope": "root and 23 direct repositories; pinned source hydration, no nested traversal or pin promotion",
+  "preserved_stash": {
+    "sha": "a6d17823e6742648f654284fff95d623c936f1e5",
+    "message": "codex pre-sync 2026-10-20: preserved laptop workspace test edit and portfolio receipt",
+    "contents": "local test expectation 22 -> 24, plus opening observation; current main expectation is 25; no stale test patch reapplied",
+    "retained": true
+  },
+  "before": [
+    {
+      "path": "Truth",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:octave-commons/Truth.git (fetch)\norigin\tgit@github.com:octave-commons/Truth.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "e2e5bdb3249385d49bcd000829ac9273acc3ca45",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "bitch-tracker",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:octave-commons/bitch-tracker.git (fetch)\norigin\tgit@github.com:octave-commons/bitch-tracker.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "calliope",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:octave-commons/calliope.git (fetch)\norigin\tgit@github.com:octave-commons/calliope.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "43963c84b612c896cb383bffa5e7d58e32211472",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "epiphany",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:octave-commons/epiphany.git (fetch)\norigin\tgit@github.com:octave-commons/epiphany.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "eta-mu",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/eta-mu.git (fetch)\norigin\tgit@github.com:open-hax/eta-mu.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "c2bbf7547592cb9e0c82eee01c2b01555c6cee68",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "katamorph",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "?? .clj-kondo/imports/\n?? .lsp/",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/katamorph.git (fetch)\norigin\tgit@github.com:open-hax/katamorph.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "3bd4cf26e68dc88fbe67f831baa4bc389e3363e7",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "knoxx",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/knoxx.git (fetch)\norigin\tgit@github.com:open-hax/knoxx.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "fb08a10a8aa32a594cc97ae11b820113de4cf386",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "muse",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "?? \".\\316\\267\\316\\274/config/shared/plugins/epiphany-context.edn\"\n?? \".\\316\\267\\316\\274/plugins/epiphany_context.cljs\"\n?? docs/architecture/codex-target-boundary.md\n?? docs/architecture/epiphany-context-capability.md\n?? src/cljs/eta_mu/domain/epiphany_context.cljc\n?? src/cljs/eta_mu/law/\n?? src/cljs/eta_mu/shape/\n?? test/cljs/eta_mu/domain/epiphany_context_test.cljs\n?? test/cljs/eta_mu/shape/",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:octave-commons/muse.git (fetch)\norigin\tgit@github.com:octave-commons/muse.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "proxx",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/proxx.git (fetch)\norigin\tgit@github.com:open-hax/proxx.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "abbbc8b1ad80738233593e17e751203db785c9e2",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "services",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/services.git (fetch)\norigin\tgit@github.com:open-hax/services.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "ecaa754ca4f0d28910296b83b4be38341b20b35b",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "uxx",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/uxx.git (fetch)\norigin\tgit@github.com:open-hax/uxx.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "97e67a7a758c080450a200e8e6e1ada614eabc6d",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "opencode",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/opencode.git (fetch)\norigin\tgit@github.com:open-hax/opencode.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "cc4b45612974f735ddec46009ede07729511fba4",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": ".agents",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "?? skills/webhook-fullstack/.clj-kondo/\n?? skills/webhook-fullstack/.cpcache/\n?? skills/webhook-fullstack/.lsp/\n?? skills/webhook-fullstack/.shadow-cljs/",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:riatzukiza/.agents.git (fetch)\norigin\tgit@github.com:riatzukiza/.agents.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "f9cd55ae40f14e0b0cc0e228c289d726fa0d1c21",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "shx",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:octave-commons/shx.git (fetch)\norigin\tgit@github.com:octave-commons/shx.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "kanban-orchestrator",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/kanban-orchestrator.git (fetch)\norigin\tgit@github.com:open-hax/kanban-orchestrator.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "clio",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/clio.git (fetch)\norigin\tgit@github.com:open-hax/clio.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "788cdd3434615a7932b924e68520dbf7f88408c2",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "chat-ui",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/chat-ui.git (fetch)\norigin\tgit@github.com:open-hax/chat-ui.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "rheos",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/rheos.git (fetch)\norigin\tgit@github.com:open-hax/rheos.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "11811264a308d406cb612aefa1dad40818675e5e",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "session-mycology",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/session-mycology.git (fetch)\norigin\tgit@github.com:open-hax/session-mycology.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "30339f9aa3df83ef8c335d4544307272abfbb131",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "sol",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/sol.git (fetch)\norigin\tgit@github.com:open-hax/sol.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "osmos",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/osmos.git (fetch)\norigin\tgit@github.com:open-hax/osmos.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "0c33018e27f861536822086afcdab666a60add44",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    },
+    {
+      "path": "receipt-river",
+      "branch": {
+        "code": 0,
+        "out": "device/yoga",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/receipt-river.git (fetch)\norigin\tgit@github.com:open-hax/receipt-river.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "7c7c62343fea0241ac545e37f14e57ab344bfa30",
+        "err": ""
+      },
+      "upstream": {
+        "code": 0,
+        "out": "origin/device/yoga",
+        "err": ""
+      }
+    },
+    {
+      "path": "axxium",
+      "branch": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "status": {
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      "remotes": {
+        "code": 0,
+        "out": "origin\tgit@github.com:open-hax/axxium.git (fetch)\norigin\tgit@github.com:open-hax/axxium.git (push)\nupstream\tgit@github.com:open-hax/axxium.git (fetch)\nupstream\tgit@github.com:open-hax/axxium.git (push)",
+        "err": ""
+      },
+      "head": {
+        "code": 0,
+        "out": "ee5284a00eb5c034cd6ef0db281726f00ce77cca",
+        "err": ""
+      },
+      "upstream": {
+        "code": 128,
+        "out": "",
+        "err": "fatal: HEAD does not point to a branch"
+      }
+    }
+  ],
+  "sync_attempt": {
+    "root": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "observed_at": "2026-10-20T07:26:53.281882+00:00",
+    "repositories": [
+      {
+        "path": "Truth",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "update": {
+          "code": 0,
+          "out": "Submodule path 'Truth': checked out '8ade66a3553bdd89696aebf4fc4628a6fe66e5ae'",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "8ade66a3553bdd89696aebf4fc4628a6fe66e5ae",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "bitch-tracker",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:octave-commons/bitch-tracker\n   693f138..b0ac29b  device/stealth -> origin/device/stealth\n   4f1015b..66db820  main           -> origin/main"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "calliope",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:octave-commons/calliope\n * [new branch]      codex/restore-evidence-review -> origin/codex/restore-evidence-review\n   efe85a0..a731093  main       -> origin/main"
+        },
+        "update": {
+          "code": 0,
+          "out": "Submodule path 'calliope': checked out '2655ae6eddbd20ac400a8e1ff99914c56d81b835'",
+          "err": "From github.com:octave-commons/calliope\n * branch            2655ae6eddbd20ac400a8e1ff99914c56d81b835 -> FETCH_HEAD"
+        },
+        "head": {
+          "code": 0,
+          "out": "2655ae6eddbd20ac400a8e1ff99914c56d81b835",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "epiphany",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:octave-commons/epiphany\n   21ddc71..de47366  feat/clio-edn-recovery -> origin/feat/clio-edn-recovery"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "eta-mu",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/eta-mu\n - [deleted]           (none)     -> origin/feat/typed-evidence-lanes\n - [deleted]           (none)     -> origin/work/clio-local-foundation\n * [new branch]        codex/eta-known-grep-overflow-recovery -> origin/codex/eta-known-grep-overflow-recovery\n * [new branch]        codex/native-review-description-preservation -> origin/codex/native-review-description-preservation\n * [new branch]        codex/rheos-design-metadata-plan -> origin/codex/rheos-design-metadata-plan\n * [new branch]        codex/rheos-todo-replan-plan -> origin/codex/rheos-todo-replan-plan\n * [new branch]        codex/truth-review-timeout-budget -> origin/codex/truth-review-timeout-budget\n   476b07bd..7112c364  main       -> origin/main\n * [new branch]        plan/ordinary-complete-support-native-qualification-20261014 -> origin/plan/ordinary-complete-support-native-qualification-20261014\n * [new branch]        plan/rheos-initial-metadata-20261014 -> origin/plan/rheos-initial-metadata-20261014\n * [new branch]        release/exact-knoxx-actionability-e7dec81f -> origin/release/exact-knoxx-actionability-e7dec81f"
+        },
+        "update": {
+          "code": 0,
+          "out": "Submodule path 'eta-mu': checked out '0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90'",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "katamorph",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "3bd4cf26e68dc88fbe67f831baa4bc389e3363e7",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "?? .clj-kondo/imports/\n?? .lsp/",
+          "err": ""
+        }
+      },
+      {
+        "path": "knoxx",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/knoxx\n * [new branch]        claude/knoxx-open-prs-da7tns -> origin/claude/knoxx-open-prs-da7tns\n   76dce8dc..c07397a6  claude/knoxx-translation-deployment-gr0lgf -> origin/claude/knoxx-translation-deployment-gr0lgf\n * [new branch]        codex/cms-source-locale-review -> origin/codex/cms-source-locale-review\n * [new branch]        codex/consume-qualified-controller -> origin/codex/consume-qualified-controller\n * [new branch]        codex/fix-native-music-result -> origin/codex/fix-native-music-result\n * [new branch]        codex/native-opencode-assessment-route -> origin/codex/native-opencode-assessment-route\n * [new branch]        codex/pr305-01-build-test-gates -> origin/codex/pr305-01-build-test-gates\n * [new branch]        codex/pr305-02-source-authority -> origin/codex/pr305-02-source-authority\n * [new branch]        codex/pr305-03-run-event-providers -> origin/codex/pr305-03-run-event-providers\n * [new branch]        codex/pr305-04-mailbox-providers -> origin/codex/pr305-04-mailbox-providers\n * [new branch]        codex/pr305-05-identity-authority -> origin/codex/pr305-05-identity-authority\n * [new branch]        codex/pr305-06-mcp-oauth -> origin/codex/pr305-06-mcp-oauth\n * [new branch]        codex/pr305-07-openplanner-providers -> origin/codex/pr305-07-openplanner-providers\n * [new branch]        codex/pr305-08-agent-admission -> origin/codex/pr305-08-agent-admission\n * [new branch]        codex/pr305-09-translation-publication -> origin/codex/pr305-09-translation-publication\n * [new branch]        codex/pr305-10-bluesky-boundary -> origin/codex/pr305-10-bluesky-boundary\n * [new branch]        codex/pr305-11-discord-gateway -> origin/codex/pr305-11-discord-gateway\n * [new branch]        codex/pr305-12-memory-resources -> origin/codex/pr305-12-memory-resources\n * [new branch]        codex/pr305-13-app-routes -> origin/codex/pr305-13-app-routes\n * [new branch]        codex/pr305-14-runtime-composition -> origin/codex/pr305-14-runtime-composition\n * [new branch]        codex/pr305-15-frontend-foundation -> origin/codex/pr305-15-frontend-foundation\n * [new branch]        codex/pr305-16-frontend-identity -> origin/codex/pr305-16-frontend-identity\n * [new branch]        codex/pr305-17-frontend-agents-contracts -> origin/codex/pr305-17-frontend-agents-contracts\n * [new branch]        codex/pr305-18-frontend-chat -> origin/codex/pr305-18-frontend-chat\n * [new branch]        codex/pr305-19-frontend-content -> origin/codex/pr305-19-frontend-content\n * [new branch]        codex/pr305-20-frontend-translation -> origin/codex/pr305-20-frontend-translation\n * [new branch]        codex/pr305-21-frontend-shell-mail -> origin/codex/pr305-21-frontend-shell-mail\n * [new branch]        codex/pr305-22-frontend-build -> origin/codex/pr305-22-frontend-build\n * [new branch]        codex/pr305-23-browser-proof -> origin/codex/pr305-23-browser-proof\n * [new branch]        codex/pr305-identity-foundation -> origin/codex/pr305-identity-foundation\n * [new branch]        codex/pr305-policy-provider-foundation -> origin/codex/pr305-policy-provider-foundation\n * [new branch]        codex/pr305-wiki-notification-repair -> origin/codex/pr305-wiki-notification-repair\n * [new branch]        codex/qualification-runner-truthful -> origin/codex/qualification-runner-truthful\n * [new branch]        codex/restore-evidence-review -> origin/codex/restore-evidence-review\n * [new branch]        feat/axxium-identity-local -> origin/feat/axxium-identity-local\n   d49242b2..3409977b  main       -> origin/main\n * [new branch]        plan/bluesky-internal-file-size-extraction-20261015 -> origin/plan/bluesky-internal-file-size-extraction-20261015"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "fb08a10a8aa32a594cc97ae11b820113de4cf386",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "muse",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:octave-commons/muse\n   d52d536..5a4aa51  build/cold-generated-host-targets -> origin/build/cold-generated-host-targets\n * [new branch]      codex/actionability-input-purpose -> origin/codex/actionability-input-purpose\n * [new branch]      codex/muse-bounded-review-pages-plan -> origin/codex/muse-bounded-review-pages-plan\n * [new branch]      codex/muse-full-review-input -> origin/codex/muse-full-review-input\n * [new branch]      codex/muse-host-read-closure -> origin/codex/muse-host-read-closure\n * [new branch]      codex/muse-quoted-diff-paths -> origin/codex/muse-quoted-diff-paths\n * [new branch]      codex/muse-review-tool-guidance -> origin/codex/muse-review-tool-guidance\n * [new branch]      codex/muse-stale-assessment-recovery -> origin/codex/muse-stale-assessment-recovery\n * [new branch]      codex/muse-terminal-length-recovery -> origin/codex/muse-terminal-length-recovery\n * [new branch]      codex/positive-cohort-input -> origin/codex/positive-cohort-input\n * [new branch]      codex/rejection-input-purpose -> origin/codex/rejection-input-purpose\n * [new branch]      fix/reviewer-free-tier-bash-tool -> origin/fix/reviewer-free-tier-bash-tool\n   04f91e3..9d3ae49  main       -> origin/main\n * [new branch]      plan/ordinary-complete-component-assessment-20261014 -> origin/plan/ordinary-complete-component-assessment-20261014\n * [new branch]      plan/ordinary-complete-support-input-20261014 -> origin/plan/ordinary-complete-support-input-20261014\n * [new branch]      release/host-bound-review-evidence-root-100a58d4 -> origin/release/host-bound-review-evidence-root-100a58d4"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "?? \".\\316\\267\\316\\274/config/shared/plugins/epiphany-context.edn\"\n?? \".\\316\\267\\316\\274/plugins/epiphany_context.cljs\"\n?? docs/architecture/codex-target-boundary.md\n?? docs/architecture/epiphany-context-capability.md\n?? src/cljs/eta_mu/domain/epiphany_context.cljc\n?? src/cljs/eta_mu/law/\n?? src/cljs/eta_mu/shape/\n?? test/cljs/eta_mu/domain/epiphany_context_test.cljs\n?? test/cljs/eta_mu/shape/",
+          "err": ""
+        }
+      },
+      {
+        "path": "proxx",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/proxx\n * [new branch]      codex/issue31-config-env-isolation -> origin/codex/issue31-config-env-isolation\n * [new branch]      codex/kimi-bounded-async -> origin/codex/kimi-bounded-async\n * [new branch]      codex/kimi-discord-delivery-receipts -> origin/codex/kimi-discord-delivery-receipts\n * [new branch]      codex/kimi-low-thinking -> origin/codex/kimi-low-thinking\n * [new branch]      codex/kimi-structured-runtime -> origin/codex/kimi-structured-runtime\n * [new branch]      codex/proxx-scoped-staging -> origin/codex/proxx-scoped-staging\n * [new branch]      codex/restore-kimi-review -> origin/codex/restore-kimi-review\n * [new branch]      fix/credential-failure-policy -> origin/fix/credential-failure-policy\n   cf59b23..d4d52a3  staging                 -> origin/staging"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "abbbc8b1ad80738233593e17e751203db785c9e2",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "services",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/services\n * [new branch]      codex/knoxx-controller-maintenance -> origin/codex/knoxx-controller-maintenance\n * [new branch]      codex/knoxx-controller-toolchain-fix -> origin/codex/knoxx-controller-toolchain-fix\n   31cd6dc..1e7ad3d  codex/knoxx-nested-https -> origin/codex/knoxx-nested-https\n * [new branch]      codex/restore-evidence-review -> origin/codex/restore-evidence-review\n * [new branch]      codex/services-controller-receiver-accepted-main -> origin/codex/services-controller-receiver-accepted-main\n * [new branch]      codex/services-deployment-guide -> origin/codex/services-deployment-guide\n * [new branch]      codex/services-environment-required-secret-bc4-v1 -> origin/codex/services-environment-required-secret-bc4-v1\n * [new branch]      codex/website-candidate-promotion -> origin/codex/website-candidate-promotion\n * [new branch]      codex/website-cms-deployment -> origin/codex/website-cms-deployment\n * [new branch]      codex/website-staging-volume-expansion -> origin/codex/website-staging-volume-expansion\n * [new branch]      compat/environment-secret-interface-bc4-20261017 -> origin/compat/environment-secret-interface-bc4-20261017\n * [new branch]      feat/axxium-at-federation -> origin/feat/axxium-at-federation\n   f3c48ad..48c9cc2  main       -> origin/main"
+        },
+        "update": {
+          "code": 0,
+          "out": "Submodule path 'services': checked out 'd361c7837ba369f5c22c9a3f9d827e74605b6c7d'",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "d361c7837ba369f5c22c9a3f9d827e74605b6c7d",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "uxx",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/uxx\n * [new branch]      ci/add-uxx-ci -> origin/ci/add-uxx-ci\n * [new branch]      codex/kimi-structured-runtime -> origin/codex/kimi-structured-runtime\n * [new branch]      codex/restore-kimi-review -> origin/codex/restore-kimi-review\n * [new branch]      codex/uxx-assessment-concurrency -> origin/codex/uxx-assessment-concurrency\n * [new branch]      codex/uxx-assessment-failure-diagnostics -> origin/codex/uxx-assessment-failure-diagnostics\n * [new branch]      codex/uxx-native-actor-binding -> origin/codex/uxx-native-actor-binding\n * [new branch]      codex/uxx-native-intake-env -> origin/codex/uxx-native-intake-env\n * [new branch]      codex/uxx-reviewed-details-preflight -> origin/codex/uxx-reviewed-details-preflight\n * [new branch]      codex/uxx-scoped-assessment -> origin/codex/uxx-scoped-assessment\n   c72fd2e..a31cbbc  main          -> origin/main"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "97e67a7a758c080450a200e8e6e1ada614eabc6d",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "opencode",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "cc4b45612974f735ddec46009ede07729511fba4",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": ".agents",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "update": {
+          "code": 0,
+          "out": "Submodule path '.agents': checked out '00a05c8f6ba68ff30a98266879310464e966748b'",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "00a05c8f6ba68ff30a98266879310464e966748b",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "?? skills/webhook-fullstack/.clj-kondo/\n?? skills/webhook-fullstack/.cpcache/\n?? skills/webhook-fullstack/.lsp/\n?? skills/webhook-fullstack/.shadow-cljs/",
+          "err": ""
+        }
+      },
+      {
+        "path": "shx",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:octave-commons/shx\n   6cd0ce3..d02ca8b  feat/keryx-clio-synthesis -> origin/feat/keryx-clio-synthesis\n * [new branch]      feat/supervisor-ir-card -> origin/feat/supervisor-ir-card\n * [new branch]      fix/ci-install-clojure-lsp -> origin/fix/ci-install-clojure-lsp\n   c3a6631..f4ee133  main                    -> origin/main"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "kanban-orchestrator",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/kanban-orchestrator\n   8e16609..036de03  main            -> origin/main\n * [new branch]      promote/3683870 -> origin/promote/3683870"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "clio",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/clio\n   788cdd3..d474fed  main            -> origin/main\n * [new branch]      promote/e6f5cf4 -> origin/promote/e6f5cf4"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "788cdd3434615a7932b924e68520dbf7f88408c2",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "chat-ui",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/chat-ui\n   8638553..599991f  main            -> origin/main\n * [new branch]      promote/0bad166 -> origin/promote/0bad166\n * [new branch]      promote/7d0d72c -> origin/promote/7d0d72c"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "rheos",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/rheos\n * [new branch]      codex/rheos-comment-rendering -> origin/codex/rheos-comment-rendering\n   1181126..9043d10  main       -> origin/main"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "11811264a308d406cb612aefa1dad40818675e5e",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "session-mycology",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/session-mycology\n * [new branch]      claude/eta-mu-module-refactor-2c36i2 -> origin/claude/eta-mu-module-refactor-2c36i2\n   30339f9..071b2fa  main            -> origin/main\n * [new branch]      promote/5576255 -> origin/promote/5576255"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "30339f9aa3df83ef8c335d4544307272abfbb131",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "sol",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/sol\n * [new branch]      promote/a93ab2a -> origin/promote/a93ab2a"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "osmos",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/osmos\n   0c33018..30e48e7  main            -> origin/main\n * [new branch]      promote/cf355ea -> origin/promote/cf355ea"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "0c33018e27f861536822086afcdab666a60add44",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "receipt-river",
+        "fetch": {
+          "code": 0,
+          "out": "",
+          "err": "From github.com:open-hax/receipt-river\n * [new branch]      claude/eta-mu-module-refactor-2c36i2 -> origin/claude/eta-mu-module-refactor-2c36i2\n   7c7c623..747d503  main       -> origin/main"
+        },
+        "update": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "head": {
+          "code": 0,
+          "out": "7c7c62343fea0241ac545e37f14e57ab344bfa30",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        }
+      },
+      {
+        "path": "axxium",
+        "fetch": {
+          "code": 124,
+          "err": "timeout after 240s"
+        },
+        "update": {
+          "code": 125,
+          "err": "fetch failed; checkout not attempted"
+        },
+        "head": {
+          "code": 0,
+          "out": "ee5284a00eb5c034cd6ef0db281726f00ce77cca",
+          "err": ""
+        },
+        "status": {
+          "code": 0,
+          "out": "",
+          "err": ""
+        },
+        "recovery": {
+          "method": "depth-1 exact gitlink fetch; submodule update --no-fetch --init --checkout; depth-1 origin/main fetch",
+          "outcome": "passed",
+          "full_history_fetch": "timed out after 240s; not retried",
+          "head": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+          "origin_main": "9572e74d4c67b252568822eff24a06b9521d2c7d"
+        }
+      }
+    ]
+  },
+  "verified_gitlinks": {
+    ".agents": "00a05c8f6ba68ff30a98266879310464e966748b",
+    "Truth": "8ade66a3553bdd89696aebf4fc4628a6fe66e5ae",
+    "axxium": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+    "bitch-tracker": "2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90",
+    "calliope": "2655ae6eddbd20ac400a8e1ff99914c56d81b835",
+    "chat-ui": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+    "clio": "788cdd3434615a7932b924e68520dbf7f88408c2",
+    "epiphany": "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66",
+    "eta-mu": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+    "kanban-orchestrator": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+    "katamorph": "3bd4cf26e68dc88fbe67f831baa4bc389e3363e7",
+    "knoxx": "fb08a10a8aa32a594cc97ae11b820113de4cf386",
+    "muse": "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde",
+    "opencode": "cc4b45612974f735ddec46009ede07729511fba4",
+    "osmos": "0c33018e27f861536822086afcdab666a60add44",
+    "proxx": "abbbc8b1ad80738233593e17e751203db785c9e2",
+    "receipt-river": "7c7c62343fea0241ac545e37f14e57ab344bfa30",
+    "rheos": "11811264a308d406cb612aefa1dad40818675e5e",
+    "services": "d361c7837ba369f5c22c9a3f9d827e74605b6c7d",
+    "session-mycology": "30339f9aa3df83ef8c335d4544307272abfbb131",
+    "shx": "6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa",
+    "sol": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+    "uxx": "97e67a7a758c080450a200e8e6e1ada614eabc6d"
+  },
+  "all_23_gitlinks_match": true,
+  "untracked_user_work": "pre-existing .claude and child untracked files left intact",
+  "limits": [
+    "Axxium full-history refresh timed out; requested commit and origin/main were then fetched with depth 1.",
+    "Git synchronization does not mean child code or runtime has been release-qualified."
+  ]
+}

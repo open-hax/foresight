@@ -1,0 +1,1239 @@
+{
+  "kind": "portfolio-registration",
+  "observed_at": "2026-10-20T07:30:25.949988Z",
+  "root_baseline": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+  "program_uuid": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+  "epics": [
+    {
+      "id": "E0",
+      "uuid": "stabilization-e0",
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "gate": "M0",
+      "dependencies": [],
+      "registration_status": "incoming",
+      "qualification_status": "unqualified"
+    },
+    {
+      "id": "E1",
+      "uuid": "stabilization-e1",
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "gate": "M1",
+      "dependencies": [
+        "stabilization-e0"
+      ],
+      "registration_status": "incoming",
+      "qualification_status": "unqualified"
+    },
+    {
+      "id": "E2",
+      "uuid": "stabilization-e2",
+      "path": "docs/agile/kanban/stabilization-e2-reconcile-shared-contracts-events-and-persistence-ation-e2.md",
+      "gate": "M2",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1"
+      ],
+      "registration_status": "incoming",
+      "qualification_status": "unqualified"
+    },
+    {
+      "id": "E3",
+      "uuid": "stabilization-e3",
+      "path": "docs/agile/kanban/stabilization-e3-settle-identity-deployment-and-openplanner-integration-ation-e3.md",
+      "gate": "M3",
+      "dependencies": [
+        "stabilization-e1",
+        "stabilization-e2"
+      ],
+      "registration_status": "incoming",
+      "qualification_status": "unqualified"
+    },
+    {
+      "id": "E4",
+      "uuid": "stabilization-e4",
+      "path": "docs/agile/kanban/stabilization-e4-reconcile-knoxx-cms-and-translation-work-ation-e4.md",
+      "gate": "M4",
+      "dependencies": [
+        "stabilization-e2",
+        "stabilization-e3"
+      ],
+      "registration_status": "incoming",
+      "qualification_status": "unqualified"
+    },
+    {
+      "id": "E5",
+      "uuid": "stabilization-e5",
+      "path": "docs/agile/kanban/stabilization-e5-preserve-and-qualify-cephalon-s-creative-loop-baseline-ation-e5.md",
+      "gate": "M5",
+      "dependencies": [
+        "stabilization-e2",
+        "stabilization-e3"
+      ],
+      "registration_status": "incoming",
+      "qualification_status": "unqualified"
+    },
+    {
+      "id": "E6",
+      "uuid": "stabilization-e6",
+      "path": "docs/agile/kanban/stabilization-e6-close-the-remaining-foresight-constellation-backlog-ation-e6.md",
+      "gate": "M6",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1"
+      ],
+      "registration_status": "incoming",
+      "qualification_status": "unqualified"
+    },
+    {
+      "id": "E7",
+      "uuid": "stabilization-e7",
+      "path": "docs/agile/kanban/stabilization-e7-produce-the-release-baseline-and-state-of-the-world-report-ation-e7.md",
+      "gate": "M7",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1",
+        "stabilization-e2",
+        "stabilization-e3",
+        "stabilization-e4",
+        "stabilization-e5",
+        "stabilization-e6"
+      ],
+      "registration_status": "incoming",
+      "qualification_status": "unqualified"
+    }
+  ],
+  "before_board": {
+    "total-tasks": 77,
+    "columns": [
+      {
+        "status": "icebox",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "incoming",
+        "count": 43,
+        "tasks": [
+          {
+            "uuid": "pr-flow-promotion",
+            "title": "Add a promote stage to pr-flow",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f",
+            "title": "Admit one current-head approval from the reviewer set",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "c0f3604a-9503-46d3-9e17-bc6a2c5ad649",
+            "title": "Admit Sol episode events through Clio",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-bootstrap-contract",
+            "title": "CC1.01 — Implement and test the pinned direct-source bootstrap contract",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-submodule-transport",
+            "title": "CC1.02 — Make direct submodule transport cloud-safe without rewriting identity",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-direct-child-hydration",
+            "title": "CC1.03 — Add one idempotent command to hydrate exact direct children",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-toolchain-validation",
+            "title": "CC1.04 — Prepare the minimum bootstrap toolchain and validation launcher",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-root-only-acceptance",
+            "title": "CC1.05 — Prove a fresh root-only Codex Cloud environment end to end",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-access-tiers",
+            "title": "CC2.01 — Separate source hydration from first-class repository access",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-fork-selection-projection",
+            "title": "CC2.02 — Project the validated dev-origin map into Codex repository selection",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-child-remote-configuration",
+            "title": "CC2.03 — Configure child remotes from the active fork policy without changing source law",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-access-acceptance-matrix",
+            "title": "CC2.04 — Prove the Codex Cloud repository-access matrix",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "fork-review-setup",
+            "title": "Configure review and merge protection on every fork",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "create-dev-forks",
+            "title": "Create the riatzukiza dev forks",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "8d16aa9f-fbad-4bbf-87d5-296196c99928",
+            "title": "Cut Sol session ledgers over to Clio",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-repository-access",
+            "title": "EPIC: Codex Cloud repository selection expresses access, not the Foresight source graph",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-self-hydrating-foresight",
+            "title": "EPIC: Codex Cloud treats Foresight as one self-hydrating workspace",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "fork-dev-origins",
+            "title": "EPIC: develop on riatzukiza forks; orgs receive promotions and run ops",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "layered-operating-contracts",
+            "title": "EPIC: One layered operating contract, folded up the directory tree to ~/.ημ and projected into every harness",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "330aa63f-f697-5bd6-9fc0-3f19fbea2be4",
+            "title": "Host persistent MiMo and Kimi review workers",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-contract-0-freeze",
+            "title": "LOC.01 — Name, hash and freeze contract-0",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-contract-0-golden-artifacts",
+            "title": "LOC.02 — Prove contract-0 still builds byte-identical artifacts",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-fragment-source",
+            "title": "LOC.03 — Merge both contract lineages into identified, tiered fragments",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-contract-shapes",
+            "title": "LOC.04 — Declare portable shapes for layers, fragments, effective contracts and projection manifests",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-fold-laws",
+            "title": "LOC.05 — Fold a layer chain into an effective contract with one merge rule per kind of declaration",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-layer-chain",
+            "title": "LOC.06 — Discover the layer chain for a path and check it is well-formed before use",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-harness-profiles",
+            "title": "LOC.07 — Declare harness capability profiles and budgets, and decide who performs the fold",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-instruction-emitter",
+            "title": "LOC.08 — Emit budgeted instruction projections with manifests from muse",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-contract-0-module",
+            "title": "LOC.09 — Select contract-0 as a module and prove it unchanged through the layered compiler",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-cutover-claude-code",
+            "title": "LOC.10 — Cut Claude Code over to the compiled projection and remove the double load",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-cutover-opencode-codex",
+            "title": "LOC.11 — Cut OpenCode and Codex over to compiled projections of the same contract",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-per-directory-projections",
+            "title": "LOC.16 — Emit per-directory in-repository projections and refuse overrides a target cannot honour",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "foresight-submodules-to-forks",
+            "title": "Point Foresight's submodules and local checkouts at the forks",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "ddebd3d4-7a75-5657-8ab9-cd606406f998",
+            "title": "Reconcile fork staging and promotion PRs",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "dev-origin-map",
+            "title": "Record the fork-org map as validated data",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "replace-sol-legacy-ledger-dependency-with-clio",
+            "title": "Replace Sol legacy ledger dependency with Clio",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "foresight-root-gate-in-ci",
+            "title": "Run the Foresight root gate on every pull request",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "fork-org-drift-check",
+            "title": "Detect fork/org drift",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-daemon-chains-ownership",
+            "title": "LOC.12 — Re-render descendant layers on ancestor change without letting the stable daemon build dev trees",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-published-agents-md",
+            "title": "LOC.13 — Publish a standalone AGENTS.md projection that adopters can use without ~/.ημ",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-absolutes-to-gates",
+            "title": "LOC.14 — Classify every absolute by enforcement surface and map it to its gate, hook, prose-only status or gap",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "org-ops-only",
+            "title": "Make org repositories promotion-only and document the split",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-retire-legacy-principle-bootstrap",
+            "title": "LOC.15 — Stop the pi-era extension from bootstrapping .ημ/PRINCIPLE.edn copies",
+            "priority": "P3",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "accepted",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "breakdown",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "blocked",
+        "count": 15,
+        "tasks": [
+          {
+            "uuid": "df13cad6-a617-4513-968a-c2e56b44f2f4",
+            "title": "Converge Alpha Event laws",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "bb1cbe3c-2bef-4923-a0a5-875e57b63011",
+            "title": "Converge Alpha Markdown resolution",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "25f31e12-5bcd-492c-9f66-6cc6c3a5e4b3",
+            "title": "Converge Alpha Mermaid graph laws",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "3f2c935b-7a8e-4324-9a5a-9181ae23b7a1",
+            "title": "Converge Alpha portable envelopes",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "941b965d-c087-4307-8ec5-a4f31d0d272c",
+            "title": "Converge Alpha reaction planning",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-02-faithful-clean-copies",
+            "title": "E1.02 — Contributor receives faithful, clean copies without donor modification",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-03-bootstrap-dependency-resolution",
+            "title": "E1.03 — Each receiver can resolve its bootstrap dependencies from immutable donor revisions",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-04-independent-git-history",
+            "title": "E1.04 — Each product has an independently addressable Git history and development branch",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-06-transplant-edges-one-at-a-time",
+            "title": "E1.06 — Receivers switch transplant-to-transplant edges one at a time",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-07-remaining-eta-mu-consumers",
+            "title": "E1.07 — Remaining eta-mu consumers use the new products without donor copies",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-08-osmos-ingestion-service",
+            "title": "E1.08 — Osmos preserves ingestion behavior as an independent JVM service",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-09-honest-quality-gates",
+            "title": "E1.09 — Every child has honest quality gates and self-contained agent guidance",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-10-reviewer-start-window-protection",
+            "title": "E1.10 — Unreviewed changes cannot merge during the reviewer-start window",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "ff0803c0-9b04-4623-8725-516886af1ffc",
+            "title": "Record DigitalOcean deployment acceptance",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "dabfaac3-c388-4979-827b-0cd93c4226e3",
+            "title": "Recover inaccessible census revisions",
+            "priority": "P1",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "ready",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "todo",
+        "count": 7,
+        "tasks": [
+          {
+            "uuid": "f66c6539-d719-48ae-8284-18fd989b31ef",
+            "title": "Authenticate promotion evidence",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "93572f91-a9fc-4555-8dd6-469b180f81d6",
+            "title": "Bind coverage promotion to immutable report evidence",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-11-donor-retirement-after-cutover",
+            "title": "E1.11 — Donor packages and obsolete workflow paths are retired only after the cutover proof",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "c9cfd94c-4c18-4469-acf4-d79fbe44f659",
+            "title": "Isolate exact-commit evidence execution",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+            "title": "Prove content generation layout publishing and review independently",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf",
+            "title": "Prove translation generation and SME review independently",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-12-migration-documentation",
+            "title": "E1.12 — Contributors can find the products and their migration documentation",
+            "priority": "P2",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "in_progress",
+        "count": 6,
+        "tasks": [
+          {
+            "uuid": "e1-01-migration-surface-manifest",
+            "title": "E1.01 — Maintainer can inspect the exact migration surface before any write",
+            "priority": "P0",
+            "board": "kanban"
+          },
+          {
+            "uuid": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+            "title": "Complete the inflight portfolio and begin purified Knoxx extraction",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-05-foresight-discovers-children",
+            "title": "E1.05 — Foresight discovers each new product as a pinned, actionable child",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "a1d0645d-49a6-4e8d-b744-4e1a94175066",
+            "title": "Establish the pinned repository census",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+            "title": "Reconcile the opening pull-request portfolio",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "146f1b47-c6a7-5a37-996b-a381dd91f6b6",
+            "title": "Restore reproducible Sol Node 22 runtime prerequisites",
+            "priority": "P1",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "review",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "document",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "done",
+        "count": 5,
+        "tasks": [
+          {
+            "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+            "title": "Codify revision-bound layered evidence gates",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "5f19dd78-9ee5-4c3f-97a8-930f76994447",
+            "title": "Inventory root consolidation inputs without granting execution authority",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "ed7a709b-43e6-4270-9cb7-2cad9d89b4d0",
+            "title": "Scaffold foresight workspace orchestration with NBB",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "a32d2994-3a80-46c3-bc52-5815f3cf51ab",
+            "title": "Add report-only cross-repository duplication scanning",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "98371a85-76ed-46e4-9fef-b733b630c799",
+            "title": "Map non-Node submodule quality gates into foresight",
+            "priority": "P2",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "rejected",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "in-progress",
+        "count": 1,
+        "tasks": [
+          {
+            "uuid": "4f5cb66d-4fd2-47cf-92cc-2185b057a889",
+            "title": "Coordinate the eta-mu GitHub evidence agent",
+            "priority": "P1",
+            "board": "kanban"
+          }
+        ]
+      }
+    ],
+    "wip-limits": {}
+  },
+  "registered_board": {
+    "total-tasks": 85,
+    "columns": [
+      {
+        "status": "icebox",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "incoming",
+        "count": 51,
+        "tasks": [
+          {
+            "uuid": "pr-flow-promotion",
+            "title": "Add a promote stage to pr-flow",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f",
+            "title": "Admit one current-head approval from the reviewer set",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "c0f3604a-9503-46d3-9e17-bc6a2c5ad649",
+            "title": "Admit Sol episode events through Clio",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-bootstrap-contract",
+            "title": "CC1.01 — Implement and test the pinned direct-source bootstrap contract",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-submodule-transport",
+            "title": "CC1.02 — Make direct submodule transport cloud-safe without rewriting identity",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-direct-child-hydration",
+            "title": "CC1.03 — Add one idempotent command to hydrate exact direct children",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-toolchain-validation",
+            "title": "CC1.04 — Prepare the minimum bootstrap toolchain and validation launcher",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-root-only-acceptance",
+            "title": "CC1.05 — Prove a fresh root-only Codex Cloud environment end to end",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-access-tiers",
+            "title": "CC2.01 — Separate source hydration from first-class repository access",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-fork-selection-projection",
+            "title": "CC2.02 — Project the validated dev-origin map into Codex repository selection",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-child-remote-configuration",
+            "title": "CC2.03 — Configure child remotes from the active fork policy without changing source law",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-access-acceptance-matrix",
+            "title": "CC2.04 — Prove the Codex Cloud repository-access matrix",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "fork-review-setup",
+            "title": "Configure review and merge protection on every fork",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "create-dev-forks",
+            "title": "Create the riatzukiza dev forks",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "8d16aa9f-fbad-4bbf-87d5-296196c99928",
+            "title": "Cut Sol session ledgers over to Clio",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-repository-access",
+            "title": "EPIC: Codex Cloud repository selection expresses access, not the Foresight source graph",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "codex-cloud-self-hydrating-foresight",
+            "title": "EPIC: Codex Cloud treats Foresight as one self-hydrating workspace",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "fork-dev-origins",
+            "title": "EPIC: develop on riatzukiza forks; orgs receive promotions and run ops",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "layered-operating-contracts",
+            "title": "EPIC: One layered operating contract, folded up the directory tree to ~/.ημ and projected into every harness",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "330aa63f-f697-5bd6-9fc0-3f19fbea2be4",
+            "title": "Host persistent MiMo and Kimi review workers",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-contract-0-freeze",
+            "title": "LOC.01 — Name, hash and freeze contract-0",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-contract-0-golden-artifacts",
+            "title": "LOC.02 — Prove contract-0 still builds byte-identical artifacts",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-fragment-source",
+            "title": "LOC.03 — Merge both contract lineages into identified, tiered fragments",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-contract-shapes",
+            "title": "LOC.04 — Declare portable shapes for layers, fragments, effective contracts and projection manifests",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-fold-laws",
+            "title": "LOC.05 — Fold a layer chain into an effective contract with one merge rule per kind of declaration",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-layer-chain",
+            "title": "LOC.06 — Discover the layer chain for a path and check it is well-formed before use",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-harness-profiles",
+            "title": "LOC.07 — Declare harness capability profiles and budgets, and decide who performs the fold",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-instruction-emitter",
+            "title": "LOC.08 — Emit budgeted instruction projections with manifests from muse",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-contract-0-module",
+            "title": "LOC.09 — Select contract-0 as a module and prove it unchanged through the layered compiler",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-cutover-claude-code",
+            "title": "LOC.10 — Cut Claude Code over to the compiled projection and remove the double load",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-cutover-opencode-codex",
+            "title": "LOC.11 — Cut OpenCode and Codex over to compiled projections of the same contract",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-per-directory-projections",
+            "title": "LOC.16 — Emit per-directory in-repository projections and refuse overrides a target cannot honour",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "foresight-submodules-to-forks",
+            "title": "Point Foresight's submodules and local checkouts at the forks",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "ddebd3d4-7a75-5657-8ab9-cd606406f998",
+            "title": "Reconcile fork staging and promotion PRs",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "dev-origin-map",
+            "title": "Record the fork-org map as validated data",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "replace-sol-legacy-ledger-dependency-with-clio",
+            "title": "Replace Sol legacy ledger dependency with Clio",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "foresight-root-gate-in-ci",
+            "title": "Run the Foresight root gate on every pull request",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "stabilization-e0",
+            "title": "Stabilization E0 — Reconstruct the authoritative backlog",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "stabilization-e1",
+            "title": "Stabilization E1 — Qualify the review and merge pipeline",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "stabilization-e2",
+            "title": "Stabilization E2 — Reconcile shared contracts, events and persistence",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "stabilization-e3",
+            "title": "Stabilization E3 — Settle identity, deployment and OpenPlanner integration",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "stabilization-e4",
+            "title": "Stabilization E4 — Reconcile Knoxx CMS and translation work",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "stabilization-e5",
+            "title": "Stabilization E5 — Preserve and qualify Cephalon's creative-loop baseline",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "stabilization-e6",
+            "title": "Stabilization E6 — Close the remaining Foresight constellation backlog",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "stabilization-e7",
+            "title": "Stabilization E7 — Produce the release baseline and state-of-the-world report",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "fork-org-drift-check",
+            "title": "Detect fork/org drift",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-daemon-chains-ownership",
+            "title": "LOC.12 — Re-render descendant layers on ancestor change without letting the stable daemon build dev trees",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-published-agents-md",
+            "title": "LOC.13 — Publish a standalone AGENTS.md projection that adopters can use without ~/.ημ",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-absolutes-to-gates",
+            "title": "LOC.14 — Classify every absolute by enforcement surface and map it to its gate, hook, prose-only status or gap",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "org-ops-only",
+            "title": "Make org repositories promotion-only and document the split",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "loc-retire-legacy-principle-bootstrap",
+            "title": "LOC.15 — Stop the pi-era extension from bootstrapping .ημ/PRINCIPLE.edn copies",
+            "priority": "P3",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "accepted",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "breakdown",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "blocked",
+        "count": 15,
+        "tasks": [
+          {
+            "uuid": "df13cad6-a617-4513-968a-c2e56b44f2f4",
+            "title": "Converge Alpha Event laws",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "bb1cbe3c-2bef-4923-a0a5-875e57b63011",
+            "title": "Converge Alpha Markdown resolution",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "25f31e12-5bcd-492c-9f66-6cc6c3a5e4b3",
+            "title": "Converge Alpha Mermaid graph laws",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "3f2c935b-7a8e-4324-9a5a-9181ae23b7a1",
+            "title": "Converge Alpha portable envelopes",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "941b965d-c087-4307-8ec5-a4f31d0d272c",
+            "title": "Converge Alpha reaction planning",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-02-faithful-clean-copies",
+            "title": "E1.02 — Contributor receives faithful, clean copies without donor modification",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-03-bootstrap-dependency-resolution",
+            "title": "E1.03 — Each receiver can resolve its bootstrap dependencies from immutable donor revisions",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-04-independent-git-history",
+            "title": "E1.04 — Each product has an independently addressable Git history and development branch",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-06-transplant-edges-one-at-a-time",
+            "title": "E1.06 — Receivers switch transplant-to-transplant edges one at a time",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-07-remaining-eta-mu-consumers",
+            "title": "E1.07 — Remaining eta-mu consumers use the new products without donor copies",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-08-osmos-ingestion-service",
+            "title": "E1.08 — Osmos preserves ingestion behavior as an independent JVM service",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-09-honest-quality-gates",
+            "title": "E1.09 — Every child has honest quality gates and self-contained agent guidance",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-10-reviewer-start-window-protection",
+            "title": "E1.10 — Unreviewed changes cannot merge during the reviewer-start window",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "ff0803c0-9b04-4623-8725-516886af1ffc",
+            "title": "Record DigitalOcean deployment acceptance",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "dabfaac3-c388-4979-827b-0cd93c4226e3",
+            "title": "Recover inaccessible census revisions",
+            "priority": "P1",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "ready",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "todo",
+        "count": 7,
+        "tasks": [
+          {
+            "uuid": "f66c6539-d719-48ae-8284-18fd989b31ef",
+            "title": "Authenticate promotion evidence",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "93572f91-a9fc-4555-8dd6-469b180f81d6",
+            "title": "Bind coverage promotion to immutable report evidence",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-11-donor-retirement-after-cutover",
+            "title": "E1.11 — Donor packages and obsolete workflow paths are retired only after the cutover proof",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "c9cfd94c-4c18-4469-acf4-d79fbe44f659",
+            "title": "Isolate exact-commit evidence execution",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+            "title": "Prove content generation layout publishing and review independently",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf",
+            "title": "Prove translation generation and SME review independently",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-12-migration-documentation",
+            "title": "E1.12 — Contributors can find the products and their migration documentation",
+            "priority": "P2",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "in_progress",
+        "count": 6,
+        "tasks": [
+          {
+            "uuid": "e1-01-migration-surface-manifest",
+            "title": "E1.01 — Maintainer can inspect the exact migration surface before any write",
+            "priority": "P0",
+            "board": "kanban"
+          },
+          {
+            "uuid": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+            "title": "Complete the inflight portfolio and begin purified Knoxx extraction",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "e1-05-foresight-discovers-children",
+            "title": "E1.05 — Foresight discovers each new product as a pinned, actionable child",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "a1d0645d-49a6-4e8d-b744-4e1a94175066",
+            "title": "Establish the pinned repository census",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+            "title": "Reconcile the opening pull-request portfolio",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "146f1b47-c6a7-5a37-996b-a381dd91f6b6",
+            "title": "Restore reproducible Sol Node 22 runtime prerequisites",
+            "priority": "P1",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "review",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "document",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "done",
+        "count": 5,
+        "tasks": [
+          {
+            "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+            "title": "Codify revision-bound layered evidence gates",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "5f19dd78-9ee5-4c3f-97a8-930f76994447",
+            "title": "Inventory root consolidation inputs without granting execution authority",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "ed7a709b-43e6-4270-9cb7-2cad9d89b4d0",
+            "title": "Scaffold foresight workspace orchestration with NBB",
+            "priority": "P1",
+            "board": "kanban"
+          },
+          {
+            "uuid": "a32d2994-3a80-46c3-bc52-5815f3cf51ab",
+            "title": "Add report-only cross-repository duplication scanning",
+            "priority": "P2",
+            "board": "kanban"
+          },
+          {
+            "uuid": "98371a85-76ed-46e4-9fef-b733b630c799",
+            "title": "Map non-Node submodule quality gates into foresight",
+            "priority": "P2",
+            "board": "kanban"
+          }
+        ]
+      },
+      {
+        "status": "rejected",
+        "count": 0,
+        "tasks": []
+      },
+      {
+        "status": "in-progress",
+        "count": 1,
+        "tasks": [
+          {
+            "uuid": "4f5cb66d-4fd2-47cf-92cc-2185b057a889",
+            "title": "Coordinate the eta-mu GitHub evidence agent",
+            "priority": "P1",
+            "board": "kanban"
+          }
+        ]
+      }
+    ],
+    "wip-limits": {}
+  },
+  "work_graph_sha256": "f93cec25f24cdca525d5cd0d534751f93b706ad23dd1ab856af99b02434b5062",
+  "source_sha256": "ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923",
+  "story_slots": 44,
+  "created_execution_stories": 0,
+  "created_coordination_epics": 8,
+  "existing_card_identities_and_states_preserved": true,
+  "gate_transitions": [],
+  "complete_pr_census": false
+}

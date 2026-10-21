@@ -1,0 +1,224 @@
+I think the right structure is one stabilization program containing eight epics, with the two original agent goals—CMS/translations and Cephalon's creative loop—kept as separate delivery tracks.
+
+The distinction I'd make is:
+
+- Stabilization: Finish merging, reconciling, or deliberately superseding the existing work. Produce a reproducible baseline.
+- Goal completion: Get the CMS fully operational and complete Cephalon's memory/field/mood loop. These may still have work remaining after stabilization.
+- Agent restart: A separate decision based on the verified baseline and precisely defined remaining work.
+
+We already have plenty of stories and epics throughout Rheos and GitHub. I wouldn't recreate them. The new epics should coordinate the existing work, establish missing dependencies, and make progress measurable.
+
+# Foresight Stabilization Program
+
+Proposed portfolio · October 19, 2026 · Not yet registered as canonical Rheos tasks
+
+## Milestone roadmap
+
+\#chatgpt-mermaid-\_r_2cf\_{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;fill:rgb(255, 255, 255);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_2cf\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_2cf\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_2cf\_ .error-icon{fill:rgba(255, 255, 255, 0.03);}#chatgpt-mermaid-\_r_2cf\_ .error-text{fill:rgb(255, 255, 255);stroke:rgb(255, 255, 255);}#chatgpt-mermaid-\_r_2cf\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_2cf\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_2cf\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_2cf\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_2cf\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_2cf\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_2cf\_ .marker{fill:rgba(255, 255, 255, 0.498);stroke:rgba(255, 255, 255, 0.498);}#chatgpt-mermaid-\_r_2cf\_ .marker.cross{stroke:rgba(255, 255, 255, 0.498);}#chatgpt-mermaid-\_r_2cf\_ svg{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;}#chatgpt-mermaid-\_r_2cf\_ p{margin:0;}#chatgpt-mermaid-\_r_2cf\_ .label{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:rgb(255, 255, 255);}#chatgpt-mermaid-\_r_2cf\_ .cluster-label text{fill:rgb(255, 255, 255);}#chatgpt-mermaid-\_r_2cf\_ .cluster-label span{color:rgb(255, 255, 255);}#chatgpt-mermaid-\_r_2cf\_ .cluster-label span p{background-color:transparent;}#chatgpt-mermaid-\_r_2cf\_ .label text,#chatgpt-mermaid-\_r_2cf\_ span{fill:rgb(255, 255, 255);color:rgb(255, 255, 255);}#chatgpt-mermaid-\_r_2cf\_ .node rect,#chatgpt-mermaid-\_r_2cf\_ .node circle,#chatgpt-mermaid-\_r_2cf\_ .node ellipse,#chatgpt-mermaid-\_r_2cf\_ .node polygon,#chatgpt-mermaid-\_r_2cf\_ .node path{fill:rgb(68, 41, 53);stroke:rgb(171, 79, 122);stroke-width:1px;}#chatgpt-mermaid-\_r_2cf\_ .rough-node .label text,#chatgpt-mermaid-\_r_2cf\_ .node .label text,#chatgpt-mermaid-\_r_2cf\_ .image-shape .label,#chatgpt-mermaid-\_r_2cf\_ .icon-shape .label{text-anchor:middle;}#chatgpt-mermaid-\_r_2cf\_ .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#chatgpt-mermaid-\_r_2cf\_ .rough-node .label,#chatgpt-mermaid-\_r_2cf\_ .node .label,#chatgpt-mermaid-\_r_2cf\_ .image-shape .label,#chatgpt-mermaid-\_r_2cf\_ .icon-shape .label{text-align:center;}#chatgpt-mermaid-\_r_2cf\_ .node.clickable{cursor:pointer;}#chatgpt-mermaid-\_r_2cf\_ .root .anchor path{fill:rgba(255, 255, 255, 0.498)!important;stroke-width:0;stroke:rgba(255, 255, 255, 0.498);}#chatgpt-mermaid-\_r_2cf\_ .arrowheadPath{fill:rgba(255, 255, 255, 0.498);}#chatgpt-mermaid-\_r_2cf\_ .edgePath .path{stroke:rgba(255, 255, 255, 0.498);stroke-width:1px;}#chatgpt-mermaid-\_r_2cf\_ .flowchart-link{stroke:rgba(255, 255, 255, 0.498);fill:none;}#chatgpt-mermaid-\_r_2cf\_ .edgeLabel{background-color:rgb(24, 24, 24);text-align:center;}#chatgpt-mermaid-\_r_2cf\_ .edgeLabel p{background-color:rgb(24, 24, 24);}#chatgpt-mermaid-\_r_2cf\_ .edgeLabel rect{opacity:0.5;background-color:rgb(24, 24, 24);fill:rgb(24, 24, 24);}#chatgpt-mermaid-\_r_2cf\_ .labelBkg{background-color:rgba(24, 24, 24, 0.5);}#chatgpt-mermaid-\_r_2cf\_ .cluster rect{fill:rgba(255, 255, 255, 0.03);stroke:rgba(255, 255, 255, 0.082);stroke-width:1px;}#chatgpt-mermaid-\_r_2cf\_ .cluster text{fill:rgb(255, 255, 255);}#chatgpt-mermaid-\_r_2cf\_ .cluster span{color:rgb(255, 255, 255);}#chatgpt-mermaid-\_r_2cf\_ div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:12px;background:rgba(255, 255, 255, 0.03);border:1px solid rgba(255, 255, 255, 0.082);border-radius:2px;pointer-events:none;z-index:100;}#chatgpt-mermaid-\_r_2cf\_ .flowchartTitleText{text-anchor:middle;font-size:18px;fill:rgb(255, 255, 255);}#chatgpt-mermaid-\_r_2cf\_ rect.text{fill:none;stroke-width:0;}#chatgpt-mermaid-\_r_2cf\_ .icon-shape,#chatgpt-mermaid-\_r_2cf\_ .image-shape{background-color:rgb(24, 24, 24);text-align:center;}#chatgpt-mermaid-\_r_2cf\_ .icon-shape p,#chatgpt-mermaid-\_r_2cf\_ .image-shape p{background-color:rgb(24, 24, 24);padding:2px;}#chatgpt-mermaid-\_r_2cf\_ .icon-shape .label rect,#chatgpt-mermaid-\_r_2cf\_ .image-shape .label rect{opacity:0.5;background-color:rgb(24, 24, 24);fill:rgb(24, 24, 24);}#chatgpt-mermaid-\_r_2cf\_ .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#chatgpt-mermaid-\_r_2cf\_ .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#chatgpt-mermaid-\_r_2cf\_ .node .neo-node{stroke:rgb(171, 79, 122);}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_2cf\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_2cf\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].node .neo-line path{stroke:rgb(171, 79, 122);filter:none;}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_2cf\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_2cf\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_2cf\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_2cf\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_2cf\_ .node text{font-size:14px;font-weight:600;letter-spacing:normal;fill:rgb(255, 186, 218);}#chatgpt-mermaid-\_r_2cf\_ .edgeLabels text{font-size:13px;font-weight:600;letter-spacing:-0.08px;fill:rgb(255, 186, 218);}#chatgpt-mermaid-\_r_2cf\_ .node tspan[font-weight="normal"],#chatgpt-mermaid-\_r_2cf\_ .edgeLabels tspan[font-weight="normal"]{font-weight:600;}#chatgpt-mermaid-\_r_2cf\_ .edgeLabel .label rect{opacity:1;rx:13px;ry:13px;fill:rgb(41, 16, 28);stroke:rgb(95, 53, 72);stroke-width:1px;}#chatgpt-mermaid-\_r_2cf\_ .node rect,#chatgpt-mermaid-\_r_2cf\_ .node circle,#chatgpt-mermaid-\_r_2cf\_ .node ellipse,#chatgpt-mermaid-\_r_2cf\_ .node polygon,#chatgpt-mermaid-\_r_2cf\_ .node path{fill:rgb(77, 31, 52);stroke:rgba(255, 255, 255, 0.1);stroke-width:1px;}#chatgpt-mermaid-\_r_2cf\_ .node rect{rx:16px;ry:16px;}#chatgpt-mermaid-\_r_2cf\_ .node.mermaid-decision .label-container{fill:rgb(41, 16, 28);stroke:rgb(95, 53, 72);stroke-dasharray:2,2;}#chatgpt-mermaid-\_r_2cf\_ .edgePaths .flowchart-link{stroke:rgba(255, 255, 255, 0.498);stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;}#chatgpt-mermaid-\_r_2cf\_ .marker{fill:rgba(255, 255, 255, 0.498);stroke:rgba(255, 255, 255, 0.498);}#chatgpt-mermaid-\_r_2cf\_ :root{--mermaid-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}#chatgpt-mermaid-\_r_2cf\_ .start rect{fill:rgb(217, 234, 250)!important;stroke:rgb(86, 136, 184)!important;color:rgb(23, 54, 81)!important;}#chatgpt-mermaid-\_r_2cf\_ .start polygon{fill:rgb(217, 234, 250)!important;stroke:rgb(86, 136, 184)!important;color:rgb(23, 54, 81)!important;}#chatgpt-mermaid-\_r_2cf\_ .start ellipse{fill:rgb(217, 234, 250)!important;stroke:rgb(86, 136, 184)!important;color:rgb(23, 54, 81)!important;}#chatgpt-mermaid-\_r_2cf\_ .start circle{fill:rgb(217, 234, 250)!important;stroke:rgb(86, 136, 184)!important;color:rgb(23, 54, 81)!important;}#chatgpt-mermaid-\_r_2cf\_ .start path{fill:rgb(217, 234, 250)!important;stroke:rgb(86, 136, 184)!important;color:rgb(23, 54, 81)!important;}#chatgpt-mermaid-\_r_2cf\_ .start tspan{fill:rgb(23, 54, 81)!important;}#chatgpt-mermaid-\_r_2cf\_ .finish rect{fill:rgb(216, 238, 224)!important;stroke:rgb(83, 149, 106)!important;color:rgb(32, 77, 48)!important;}#chatgpt-mermaid-\_r_2cf\_ .finish polygon{fill:rgb(216, 238, 224)!important;stroke:rgb(83, 149, 106)!important;color:rgb(32, 77, 48)!important;}#chatgpt-mermaid-\_r_2cf\_ .finish ellipse{fill:rgb(216, 238, 224)!important;stroke:rgb(83, 149, 106)!important;color:rgb(32, 77, 48)!important;}#chatgpt-mermaid-\_r_2cf\_ .finish circle{fill:rgb(216, 238, 224)!important;stroke:rgb(83, 149, 106)!important;color:rgb(32, 77, 48)!important;}#chatgpt-mermaid-\_r_2cf\_ .finish path{fill:rgb(216, 238, 224)!important;stroke:rgb(83, 149, 106)!important;color:rgb(32, 77, 48)!important;}#chatgpt-mermaid-\_r_2cf\_ .finish tspan{fill:rgb(32, 77, 48)!important;}E0 • Inventory & ownershipE1 • Review & merge pipelineE2 • Shared data foundationsE3 • Identity & deploymentE4 • CMS & translationsE5 • Cephalon sourcebaselineE6 • Remaining module PRsE7 • Release & world-statereport
+
+The arrows represent qualification dependencies, not necessarily serial work. Independent modules can progress in parallel after their shared dependencies are accepted.
+
+| Gate | Milestone                            | Evidence required                                                 |
+| ---- | ------------------------------------ | ----------------------------------------------------------------- |
+| M0   | Baseline frozen                      | Complete PR census and ownership map                              |
+| M1   | Review pipeline qualified            | Protected checks, accepted reviewer path, exact-source promotions |
+| M2   | Shared foundations reconciled        | Accepted data contracts and consumer pins                         |
+| M3   | Identity/deployment boundary settled | Auth compatibility and release qualification tests                |
+| M4   | CMS backlog reconciled               | PR dispositions, integrated source and functional evidence        |
+| M5   | Cephalon baseline reconciled         | Preserved design, integrated source and B1–B3 status              |
+| M6   | Remaining backlog closed             | No unresolved PRs from the frozen cohort                          |
+| M7   | State-of-the-world release           | Reproducible version, evidence, residual goals and handoffs       |
+
+The milestones will be evidence gates, not percentages somebody fills in because work seems nearly finished.
+
+## The eight epics and their child stories
+
+### E0 — Reconstruct the authoritative backlog
+
+Why: We need to know exactly which work exists, how branches overlap, and which source is authoritative before merging anything.
+
+Child stories
+
+- E0.1 — Freeze the PR census: Capture all upstream and personal PRs with immutable head SHAs, reviews, checks and base branches.
+- E0.2 — Identify unique implementations: Distinguish stacked branches, duplicate source, old snapshots and changes that haven't reached upstream.
+- E0.3 — Reconcile Rheos ownership: Connect existing PRs, UUIDs, cards, epics and dependencies without creating duplicate tasks.
+- E0.4 — Preserve historical work: Secure unique code, evidence, Cephalon designs and unpublished fixes.
+- E0.5 — Establish campaign rules: Allow only necessary repairs during stabilization, with explicit ownership and history preservation.
+
+Definition of done: Every PR has an owner, intended disposition and verified dependency relationship. The census is complete, not capped by a GitHub search-result limit.
+
+### E1 — Qualify the review and merge pipeline
+
+Why: We cannot close hundreds of PRs reliably if the review infrastructure itself remains inconsistent.
+
+Child stories
+
+- E1.1 — Qualify Muse: Resolve complete-input review and evidence-directory handling.
+- E1.2 — Qualify Eta Mu and Proxx: Establish source-bound reviews, independent reviewer identity, complete verdicts and failure recovery.
+- E1.3 — Qualify fork promotions: Ensure accepted personal-fork work reaches the appropriate organization without dropping newer history.
+- E1.4 — Resolve outstanding findings: Test fixes, rerun current-head reviews, and settle actual review threads.
+- E1.5 — Add merge-drift verification: Recheck affected consumers after each shared dependency is accepted.
+
+Definition of done: We can demonstrate at least one complete fork → reviewed upstream PR → protected merge → verified consumer update, with no approval or evidence incorrectly transferred between revisions.
+
+### E2 — Reconcile shared contracts, events and persistence
+
+Why: Clio, Rheos, Katamorph and the receipt infrastructure are the shared foundations of both goal agents.
+
+Child stories
+
+- E2.1 — Clio: Admit segmented ledgers, exact retries, canonical replay and durable recovery.
+- E2.2 — Rheos: Resolve document identity, duplicate UUIDs, frontmatter custody and lawful lifecycle updates.
+- E2.3 — Document history: Preserve concurrent revisions, source relationships and event provenance.
+- E2.4 — Katamorph and Foresight shapes: Reconcile portable semantic laws with representation-specific adapters.
+- E2.5 — Receipt River and consumers: Qualify append-only evidence, reader semantics and exact downstream pins.
+
+Definition of done: Shared event and data contracts have qualified implementations, and consumers use the accepted revisions without silently changing history.
+
+### E3 — Settle identity, deployment and OpenPlanner integration
+
+Why: The main CMS merge conflict isn't merely textual. It reflects incompatible identity ownership between current Knoxx and the older Wiki stack.
+
+Child stories
+
+- E3.1 — Decide Axxium ownership: Resolve the remote-versus-embedded provider boundary documented in [Knoxx #324](https://github.com/open-hax/knoxx/issues/324?utm_source=chatgpt.com).
+- E3.2 — Qualify Knoxx authorization: Test login, logout, sessions, MCP authority, revocation and cross-tenant refusal.
+- E3.3 — Resolve Axxium's upstream PRs: Settle concurrency and OAuth-state findings.
+- E3.4 — Qualify Services: Verify protected deployment authority, required secrets, staging and rollback.
+- E3.5 — Promote OpenPlanner: Resolve [Foresight #139](https://github.com/open-hax/foresight/pull/139?utm_source=chatgpt.com) and establish accepted runtime/source pins.
+
+Definition of done: Identity and deployment interfaces are compatible across the accepted repositories, with executed integration tests.
+
+### E4 — Reconcile Knoxx CMS and translation work
+
+Why: We want all existing CMS implementation work preserved and merged into a coherent application before asking an agent to continue feature development.
+
+Child stories
+
+- E4.1 — Recompose PR #305: Reconcile its 23 extracted layers with current main, newer PR #387, PR #388 and personal fork #19.
+- E4.2 — Qualify content history: Source locale, revisions, approved media, human review decisions and stale-source refusal.
+- E4.3 — Qualify translations: Ensure English and Spanish use their correct independent review and publication conditions.
+- E4.4 — Stabilize persistence and embeddings: Durable publication receipts, Qwen migration, readback after restart and rollback.
+- E4.5 — Run complete application verification: Backend/frontend tests, lint, migration ratchets, protected release evidence and browser tours.
+- E4.6 — Merge and reconcile: Account for all CMS PRs without overwriting newer code.
+
+Definition of done: The CMS source is reconciled and its actual running capabilities are reported precisely. The remaining agent goal is documented if end-to-end operation is not yet proven.
+
+### E5 — Preserve and qualify Cephalon's creative-loop baseline
+
+Why: We need to preserve the actual physical graph, independent mood and authorized recall design rather than letting the resumed agent redefine its goal.
+
+Child stories
+
+- E5.1 — Adopt the design: Bring the October 7 character-memory document and October 8 accepted milestone into the Foresight mainline.
+- E5.2 — Qualify Field ownership: Reconcile the Eros/Eris physical model, numerical contracts, persistence and replay.
+- E5.3 — Reconcile OpenPlanner: Preserve authorization before graph traversal, bounded search, feedback deduplication and truthful results.
+- E5.4 — Integrate Knoxx's character adapter: Reconcile [personal Knoxx #14](https://github.com/riatzukiza/knoxx/pull/14?utm_source=chatgpt.com) with accepted runtime source.
+- E5.5 — Define executable B1–B3 verification: Require actual persisted encounter state, consumed mood transition and automatic prompt-level recall.
+- E5.6 — Produce a continuation handoff: Exact source pins, uncompleted stories, safe runtime limits and acceptance evidence.
+
+Definition of done: The accepted design and implementation branches have coherent provenance, and B1, B2 and B3 each have an independently evidenced status.
+
+The wider always-on personality and social-creative goals remain subsequent milestones.
+
+### E6 — Close the remaining Foresight constellation backlog
+
+Why: We need to finish the entire inherited queue, not just the two actively developed products.
+
+Child stories
+
+- E6.1 — Truth: Reconcile physics, performance, native interaction, represented life, water accounting and Gate planning.
+- E6.2 — Agent/tooling modules: Proxx, Muse, Sol, Shx, Katamorph, UXX and supporting packages.
+- E6.3 — Knowledge and media modules: Epiphany, Calliope, Bitch Tracker, Osmos, Receipt River and other independent children.
+- E6.4 — OpenPlanner historical backlog: Reconcile old fix pairs and source compatibility instead of blindly merging old branches.
+- E6.5 — Foresight root: Accept or supersede overlapping architecture, archaeology, cognitive-substrate and operating-contract planning.
+- E6.6 — Resolve every PR disposition: Close superseded and declined work only after its source and rationale are accounted for.
+
+Definition of done: The complete frozen cohort has terminal, verifiable dispositions. No unique implementation disappears during cleanup.
+
+### E7 — Produce the release baseline and state-of-the-world report
+
+Why: This is the outcome that makes the entire stabilization campaign useful.
+
+Child stories
+
+- E7.1 — Reconstruct Foresight: Validate root, submodules, source metadata and documentation against exact accepted commits.
+- E7.2 — Execute the release matrix: Record passing and failing builds, tests, reviews, integration tests and runtime checks.
+- E7.3 — Audit PR closure: Independently verify all cohort dispositions and newly introduced remediation PRs.
+- E7.4 — Publish the world-state: Identify what is implemented, tested, operational, blocked, or merely proposed.
+- E7.5 — Prepare two agent handoffs: One for CMS/translations and one for the Cephalon creative loop.
+- E7.6 — Preserve release evidence: Immutable source manifest, tests, provenance and unresolved debts.
+
+Definition of done: We have a reproducible Foresight baseline with an auditable history and no ambiguity about what either agent should do next.
+
+## How we'll track progress
+
+I would make the epic portfolio into a persistent tracker, with each epic recording its current milestone, blockers, and the evidence that qualifies it for the next stage.
+
+## Initial portfolio status
+
+Observed engineering state, not canonical Rheos task status
+
+E0
+
+Inventory
+
+Initial census available; full immutable reconciliation pending
+
+E1
+
+Review pipeline
+
+Working components; upstream review and pin blockers
+
+E2
+
+Shared foundations
+
+Multiple implementations exist; adoption unresolved
+
+E3
+
+Identity/deployment
+
+Live components observed; integration conflicts
+
+E4
+
+CMS/translations
+
+Substantial source; final release and browser proof missing
+
+E5
+
+Cephalon
+
+Design recovered; 0/3 live B1–B3 milestones proven
+
+E6
+
+Other modules
+
+Large upstream and fork backlog awaiting disposition
+
+E7
+
+Release baseline
+
+Not yet constructed
+
+For every milestone transition, the tracker should retain an immutable snapshot of the PR count, merged or superseded changes, exact SHAs, outstanding review findings and new blockers. A failed check doesn't erase earlier progress, but it prevents that particular source from being marked qualified.
+
+I would also keep work-in-progress limits: one active merge owner per dependent stack, parallel execution only for genuinely independent repositories, and no expensive redundant snapshot builds when existing immutable sources are reusable.
+
+## Deliverable
+
+Foresight Stabilization — Epic Portfolio
+
+Complete Markdown specification with eight epics, 43 proposed child stories, milestone contracts, dependencies and acceptance criteria.
+
+Download epic portfolio
+
+The important next step is E0: turn the existing PR inventory into a canonical, source-backed work graph. That graph can then drive milestone transitions and merge ordering without inventing new copies of the stories already managed by Rheos.
+
+These eight epics and their stories are drafted, not yet registered as live Rheos work. No merges or agent restarts have been performed.

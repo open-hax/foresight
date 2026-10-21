@@ -1,0 +1,880 @@
+{
+  "schema_version": 1,
+  "program": {
+    "uuid": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+    "path": "docs/agile/kanban/760f7f1e-a086-4e0a-82a5-71d2a761073d.md",
+    "relationship": "continuation coordination annex; existing program scope and delivery cards retained"
+  },
+  "source": {
+    "path": ".ημ/stabilization/sources/ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923.txt",
+    "sha256": "ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923",
+    "proposal_date": "2026-10-19"
+  },
+  "root_revision": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+  "epics": [
+    {
+      "id": "E0",
+      "uuid": "stabilization-e0",
+      "title": "Reconstruct the authoritative backlog",
+      "gate": "M0",
+      "dependencies": [],
+      "stories": [
+        {
+          "slot": "E0.1",
+          "description": "Freeze the PR census: Capture all upstream and personal PRs with immutable head SHAs, reviews, checks and base branches.",
+          "acceptance": "All declared upstreams and personal forks are enumerated through the last API page; each PR has immutable head/base SHAs, reviews, checks and review-thread evidence. Missing access is an explicit gap.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "a1d0645d-49a6-4e8d-b744-4e1a94175066",
+              "path": "docs/agile/kanban/establish-the-pinned-repository-census-94175066.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E0.2",
+          "description": "Identify unique implementations: Distinguish stacked branches, duplicate source, old snapshots and changes that haven't reached upstream.",
+          "acceptance": "For every overlapping stack, retain ancestry, patch/blob comparisons and a source-preservation decision; titles and age do not prove duplication.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E0.3",
+          "description": "Reconcile Rheos ownership: Connect existing PRs, UUIDs, cards, epics and dependencies without creating duplicate tasks.",
+          "acceptance": "Each cohort item maps to repository-qualified canonical card UUIDs, existing parent epics, accountable owner and evidenced dependencies; unresolved matches stay unresolved.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "fork-dev-origins",
+              "path": "docs/agile/kanban/epic-develop-on-riatzukiza-forks-orgs-receive-promotions-and-run-ops--origins.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E0.4",
+          "description": "Preserve historical work: Secure unique code, evidence, Cephalon designs and unpublished fixes.",
+          "acceptance": "Unique code, unpublished fixes and the October 7/8 Cephalon design are retained in retrievable immutable commits or content-addressed artifacts before any closure.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "dabfaac3-c388-4979-827b-0cd93c4226e3",
+              "path": "docs/agile/kanban/recover-inaccessible-census-revisions-3c4226e3.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E0.5",
+          "description": "Establish campaign rules: Allow only necessary repairs during stabilization, with explicit ownership and history preservation.",
+          "acceptance": "Record repair-only scope, per-stack ownership, exceptions and preservation obligations on the existing program.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "breakdown"
+    },
+    {
+      "id": "E1",
+      "uuid": "stabilization-e1",
+      "title": "Qualify the review and merge pipeline",
+      "gate": "M1",
+      "dependencies": [
+        "stabilization-e0"
+      ],
+      "stories": [
+        {
+          "slot": "E1.1",
+          "description": "Qualify Muse: Resolve complete-input review and evidence-directory handling.",
+          "acceptance": "A complete-input Muse review retains evidence-directory inputs and a revision-bound result; omitted input fails qualification.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "c9cfd94c-4c18-4469-acf4-d79fbe44f659",
+              "path": "docs/agile/kanban/isolate-exact-commit-evidence-execution-be44f659.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E1.2",
+          "description": "Qualify Eta Mu and Proxx: Establish source-bound reviews, independent reviewer identity, complete verdicts and failure recovery.",
+          "acceptance": "Eta Mu and Proxx demonstrate independent authorized reviewer identity, complete verdicts and failed-run recovery at exact source revisions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "f66c6539-d719-48ae-8284-18fd989b31ef",
+              "path": "docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E1.3",
+          "description": "Qualify fork promotions: Ensure accepted personal-fork work reaches the appropriate organization without dropping newer history.",
+          "acceptance": "Demonstrate a fork-to-upstream protected merge with preserved newer history and consumer verification at exact commits.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "fork-dev-origins",
+              "path": "docs/agile/kanban/epic-develop-on-riatzukiza-forks-orgs-receive-promotions-and-run-ops--origins.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E1.4",
+          "description": "Resolve outstanding findings: Test fixes, rerun current-head reviews, and settle actual review threads.",
+          "acceptance": "Each substantive finding has a tested current-head disposition and its actual review thread settled; older approvals cannot transfer.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E1.5",
+          "description": "Add merge-drift verification: Recheck affected consumers after each shared dependency is accepted.",
+          "acceptance": "Accepting a shared source triggers verification of affected consumers at named pins; failures leave that combination unqualified.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E2",
+      "uuid": "stabilization-e2",
+      "title": "Reconcile shared contracts, events and persistence",
+      "gate": "M2",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1"
+      ],
+      "stories": [
+        {
+          "slot": "E2.1",
+          "description": "Clio: Admit segmented ledgers, exact retries, canonical replay and durable recovery.",
+          "acceptance": "Segmented ledger admission, exact retry, canonical replay and durable recovery pass real persistence and failure-path tests.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "replace-sol-legacy-ledger-dependency-with-clio",
+              "path": "docs/agile/kanban/replace-sol-legacy-ledger-dependency-with-clio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E2.2",
+          "description": "Rheos: Resolve document identity, duplicate UUIDs, frontmatter custody and lawful lifecycle updates.",
+          "acceptance": "Document identity, duplicate UUID rejection, frontmatter custody and lifecycle transitions have executable lawful and refusal cases.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E2.3",
+          "description": "Document history: Preserve concurrent revisions, source relationships and event provenance.",
+          "acceptance": "Concurrent revisions preserve source relationships and provenance through persistence/replay without silent overwrite.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E2.4",
+          "description": "Katamorph and Foresight shapes: Reconcile portable semantic laws with representation-specific adapters.",
+          "acceptance": "Portable .cljc semantic contracts are distinguished from host adapters and tested at producer and consumer boundaries; lifts remain explicit decisions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E2.5",
+          "description": "Receipt River and consumers: Qualify append-only evidence, reader semantics and exact downstream pins.",
+          "acceptance": "Append-only writes, reader behavior and consumer pins are verified at exact accepted revisions without rewriting historical receipts.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "f66c6539-d719-48ae-8284-18fd989b31ef",
+              "path": "docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e2-reconcile-shared-contracts-events-and-persistence-ation-e2.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E3",
+      "uuid": "stabilization-e3",
+      "title": "Settle identity, deployment and OpenPlanner integration",
+      "gate": "M3",
+      "dependencies": [
+        "stabilization-e1",
+        "stabilization-e2"
+      ],
+      "stories": [
+        {
+          "slot": "E3.1",
+          "description": "Decide Axxium ownership: Resolve the remote-versus-embedded provider boundary documented in [Knoxx #324](https://github.com/open-hax/knoxx/issues/324?utm_source=chatgpt.com).",
+          "acceptance": "An accepted remote/embedded-provider decision preserves or explicitly migrates principal, membership and session semantics; #324 supplies a reconciliation reference.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E3.2",
+          "description": "Qualify Knoxx authorization: Test login, logout, sessions, MCP authority, revocation and cross-tenant refusal.",
+          "acceptance": "Executed login/logout/session, MCP authority, revocation and cross-tenant denial tests name the actual integration head and environment.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E3.3",
+          "description": "Resolve Axxium's upstream PRs: Settle concurrency and OAuth-state findings.",
+          "acceptance": "Each Axxium upstream PR and its concurrency/OAuth-state findings has a verified disposition with current-head evidence.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E3.4",
+          "description": "Qualify Services: Verify protected deployment authority, required secrets, staging and rollback.",
+          "acceptance": "Protected deployment admission, secret requirements, staging and rollback have executed evidence without recording secret values.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "ff0803c0-9b04-4623-8725-516886af1ffc",
+              "path": "docs/agile/kanban/record-digitalocean-deployment-acceptance-86af1ffc.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E3.5",
+          "description": "Promote OpenPlanner: Resolve [Foresight #139](https://github.com/open-hax/foresight/pull/139?utm_source=chatgpt.com) and establish accepted runtime/source pins.",
+          "acceptance": "Foresight #139 has an evidenced disposition and OpenPlanner runtime/source pins are accepted explicitly; listing a proposed submodule does not admit it.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e3-settle-identity-deployment-and-openplanner-integration-ation-e3.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E4",
+      "uuid": "stabilization-e4",
+      "title": "Reconcile Knoxx CMS and translation work",
+      "gate": "M4",
+      "dependencies": [
+        "stabilization-e2",
+        "stabilization-e3"
+      ],
+      "stories": [
+        {
+          "slot": "E4.1",
+          "description": "Recompose PR #305: Reconcile its 23 extracted layers with current main, newer PR #387, PR #388 and personal fork #19.",
+          "acceptance": "A movement ledger accounts for all 23 extracted #305 layers against main, #387/#388 and personal #19, with source/blob provenance and no newer code lost.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.2",
+          "description": "Qualify content history: Source locale, revisions, approved media, human review decisions and stale-source refusal.",
+          "acceptance": "Source locale, revisions, media approval, human decisions and stale-source refusal pass through actual content-history adapters.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+              "path": "docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.3",
+          "description": "Qualify translations: Ensure English and Spanish use their correct independent review and publication conditions.",
+          "acceptance": "English and Spanish independently demonstrate their required review and publication conditions, including negative cases.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf",
+              "path": "docs/agile/kanban/prove-translation-generation-and-sme-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.4",
+          "description": "Stabilize persistence and embeddings: Durable publication receipts, Qwen migration, readback after restart and rollback.",
+          "acceptance": "Publication receipts and embedding migrations survive restart/readback and support a tested rollback; Qwen claims identify actual model and dimensions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+              "path": "docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.5",
+          "description": "Run complete application verification: Backend/frontend tests, lint, migration ratchets, protected release evidence and browser tours.",
+          "acceptance": "Applicable backend/frontend, lint, migration and protected release gates pass at the integrated head; browser or headless product acceptance follows the accepted product contract.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "ff0803c0-9b04-4623-8725-516886af1ffc",
+              "path": "docs/agile/kanban/record-digitalocean-deployment-acceptance-86af1ffc.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.6",
+          "description": "Merge and reconcile: Account for all CMS PRs without overwriting newer code.",
+          "acceptance": "Every frozen CMS PR is merged, verifiably superseded, split-and-closed or declined-and-closed with preserved source and rationale.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e4-reconcile-knoxx-cms-and-translation-work-ation-e4.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E5",
+      "uuid": "stabilization-e5",
+      "title": "Preserve and qualify Cephalon's creative-loop baseline",
+      "gate": "M5",
+      "dependencies": [
+        "stabilization-e2",
+        "stabilization-e3"
+      ],
+      "stories": [
+        {
+          "slot": "E5.1",
+          "description": "Adopt the design: Bring the October 7 character-memory document and October 8 accepted milestone into the Foresight mainline.",
+          "acceptance": "Locate and retain the exact October 7 design and October 8 accepted milestone revisions, then obtain explicit mainline adoption; the pasted summary is not design authority.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "63a0e4ff-353f-4c90-ab8a-7241d958d54c",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-epic.md",
+              "blob_oid": "1076feb3b90f7a1ef2a7bb3f40daf69f7c6148af",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        },
+        {
+          "slot": "E5.2",
+          "description": "Qualify Field ownership: Reconcile the Eros/Eris physical model, numerical contracts, persistence and replay.",
+          "acceptance": "Field Eros/Eris ownership, numerical units/contracts, persistence and replay are verified from the owning source and actual tests.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "b5f2ba9e-8d67-4c73-9919-e275983aca87",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-field-contract.md",
+              "blob_oid": "278b36a3e55184ea9c1c17efb7d83a68e22e7d55",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            },
+            {
+              "uuid": "ff3e628b-cd5c-4a89-a397-42cc88dbde70",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-physical-field.md",
+              "blob_oid": "c1f52cd6f9f2f74a71fac816620a03e0e7f5e9c9",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        },
+        {
+          "slot": "E5.3",
+          "description": "Reconcile OpenPlanner: Preserve authorization before graph traversal, bounded search, feedback deduplication and truthful results.",
+          "acceptance": "OpenPlanner proves authorization before traversal, bounded search, feedback deduplication and truthful found/empty/refused results.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "a1e9d6af-0233-4dcb-9677-5c76fa9a2701",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-recall.md",
+              "blob_oid": "fc4aa165744f64684d2fb474a2ee3145cdd56e18",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        },
+        {
+          "slot": "E5.4",
+          "description": "Integrate Knoxx's character adapter: Reconcile [personal Knoxx #14](https://github.com/riatzukiza/knoxx/pull/14?utm_source=chatgpt.com) with accepted runtime source.",
+          "acceptance": "Personal Knoxx #14 is compared and reconciled against the accepted runtime pin; preserve adapter behavior and provenance.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "a1e9d6af-0233-4dcb-9677-5c76fa9a2701",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-recall.md",
+              "blob_oid": "fc4aa165744f64684d2fb474a2ee3145cdd56e18",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        },
+        {
+          "slot": "E5.5",
+          "description": "Define executable B1–B3 verification: Require actual persisted encounter state, consumed mood transition and automatic prompt-level recall.",
+          "acceptance": "B1 proves persisted encounter state across restart; B2 proves an independently stored mood transition is consumed; B3 proves automatic authorized recall reaches the actual character prompt. Record each separately.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "5ea872c3-1db4-47c5-a63d-d49f99f79497",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-loop-verification.md",
+              "blob_oid": "f7fddc37429c0afad113a555b73b0c270fc9b07e",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            },
+            {
+              "uuid": "4cac8ac8-1a9f-441d-ac87-aa09f874eb57",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-mood.md",
+              "blob_oid": "81f7e11f98d9e1aa957fe0ca428c04a91c92a798",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        },
+        {
+          "slot": "E5.6",
+          "description": "Produce a continuation handoff: Exact source pins, uncompleted stories, safe runtime limits and acceptance evidence.",
+          "acceptance": "A source-pinned handoff names unfinished canonical stories, safe runtime bounds, B1/B2/B3 evidence and restart prerequisites.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "63a0e4ff-353f-4c90-ab8a-7241d958d54c",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-epic.md",
+              "blob_oid": "1076feb3b90f7a1ef2a7bb3f40daf69f7c6148af",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            },
+            {
+              "uuid": "b3da01be-aed8-4d61-88c4-82a62fc5cf1f",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-continuity.md",
+              "blob_oid": "6048cd47cca6fe38d44dc5b921b598ea65a120e1",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e5-preserve-and-qualify-cephalon-s-creative-loop-baseline-ation-e5.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E6",
+      "uuid": "stabilization-e6",
+      "title": "Close the remaining Foresight constellation backlog",
+      "gate": "M6",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1"
+      ],
+      "stories": [
+        {
+          "slot": "E6.1",
+          "description": "Truth: Reconcile physics, performance, native interaction, represented life, water accounting and Gate planning.",
+          "acceptance": "All frozen Truth PRs covering physics/performance/native interaction/life/water/Gate planning have source-preserving terminal dispositions.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E6.2",
+          "description": "Agent/tooling modules: Proxx, Muse, Sol, Shx, Katamorph, UXX and supporting packages.",
+          "acceptance": "Proxx, Muse, Sol, Shx, Katamorph, UXX and supporting-tool PRs each have repository-owned gates and terminal dispositions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "fork-dev-origins",
+              "path": "docs/agile/kanban/epic-develop-on-riatzukiza-forks-orgs-receive-promotions-and-run-ops--origins.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "replace-sol-legacy-ledger-dependency-with-clio",
+              "path": "docs/agile/kanban/replace-sol-legacy-ledger-dependency-with-clio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E6.3",
+          "description": "Knowledge and media modules: Epiphany, Calliope, Bitch Tracker, Osmos, Receipt River and other independent children.",
+          "acceptance": "Epiphany, Calliope, Bitch Tracker, Osmos, Receipt River and remaining knowledge/media PRs have terminal dispositions without broad child-policy rewrites.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E6.4",
+          "description": "OpenPlanner historical backlog: Reconcile old fix pairs and source compatibility instead of blindly merging old branches.",
+          "acceptance": "Old OpenPlanner fix pairs are compared against accepted sources and compatibility tests before merge or evidenced supersession.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E6.5",
+          "description": "Foresight root: Accept or supersede overlapping architecture, archaeology, cognitive-substrate and operating-contract planning.",
+          "acceptance": "Overlapping root architecture, archaeology, cognitive-substrate and operating-contract plans are explicitly accepted or superseded; existing planning epics retain their identities.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "layered-operating-contracts",
+              "path": "docs/agile/kanban/epic-layered-operating-contracts.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E6.6",
+          "description": "Resolve every PR disposition: Close superseded and declined work only after its source and rationale are accounted for.",
+          "acceptance": "Every cohort PR has a verifiable terminal outcome and every useful split has an existing canonical successor; externally blocked open work still blocks M6.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e6-close-the-remaining-foresight-constellation-backlog-ation-e6.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E7",
+      "uuid": "stabilization-e7",
+      "title": "Produce the release baseline and state-of-the-world report",
+      "gate": "M7",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1",
+        "stabilization-e2",
+        "stabilization-e3",
+        "stabilization-e4",
+        "stabilization-e5",
+        "stabilization-e6"
+      ],
+      "stories": [
+        {
+          "slot": "E7.1",
+          "description": "Reconstruct Foresight: Validate root, submodules, source metadata and documentation against exact accepted commits.",
+          "acceptance": "The root, direct gitlinks, source metadata and documentation reconstruct from an immutable release manifest with no unexplained drift.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "a1d0645d-49a6-4e8d-b744-4e1a94175066",
+              "path": "docs/agile/kanban/establish-the-pinned-repository-census-94175066.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "codex-cloud-self-hydrating-foresight",
+              "path": "docs/agile/kanban/epic-codex-cloud-self-hydrating-foresight-workspace.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E7.2",
+          "description": "Execute the release matrix: Record passing and failing builds, tests, reviews, integration tests and runtime checks.",
+          "acceptance": "The exact release matrix retains pass/fail/blocked/unavailable/skipped/not-applicable outcomes, commands, tool versions and source revisions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E7.3",
+          "description": "Audit PR closure: Independently verify all cohort dispositions and newly introduced remediation PRs.",
+          "acceptance": "A separate audit reconciles cohort totals and all campaign remediation PRs against remote terminal states; unresolved work prevents M7.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E7.4",
+          "description": "Publish the world-state: Identify what is implemented, tested, operational, blocked, or merely proposed.",
+          "acceptance": "The report distinguishes implemented, tested, operational, blocked and proposed claims, each with supporting evidence and known limits.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E7.5",
+          "description": "Prepare two agent handoffs: One for CMS/translations and one for the Cephalon creative loop.",
+          "acceptance": "Produce separate CMS/translations and Cephalon handoffs; the CMS handoff retains separate SME translation and content/publication goals.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf",
+              "path": "docs/agile/kanban/prove-translation-generation-and-sme-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+              "path": "docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E7.6",
+          "description": "Preserve release evidence: Immutable source manifest, tests, provenance and unresolved debts.",
+          "acceptance": "Preserve a content-addressed source/test/provenance manifest and unresolved-debt register, with retrievable immutable artifacts.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e7-produce-the-release-baseline-and-state-of-the-world-report-ation-e7.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    }
+  ],
+  "e0_census": {
+    "report": "docs/stabilization/e0-census.md",
+    "graph": "docs/stabilization/e0-work-graph.json",
+    "unresolved": "docs/stabilization/e0-unresolved.json",
+    "complete_open_pr_enumeration": true,
+    "m0_qualified": false,
+    "count": 442,
+    "repositories": 815
+  },
+  "e0_resolution": {
+    "report": "docs/stabilization/e0-resolution.md",
+    "decisions": "docs/stabilization/e0-resolution.json",
+    "owner_work_index": "docs/stabilization/e0-owner-work-index.csv",
+    "parent_census_graph": "docs/stabilization/e0-work-graph.json",
+    "coordinator": "codex",
+    "owning_card": "stabilization-e0",
+    "summary": {
+      "frozen_prs": 442,
+      "e0_reconciliation_owner_bound": 442,
+      "work_anchor_accounted": 442,
+      "native_pr_assignment_changes": 0,
+      "existing_association_rows_retained": 192,
+      "quarantined_text_observations": 4,
+      "quarantined_unique_blob_oids": 2,
+      "new_verified_authored_card_observations": 23,
+      "new_verified_authored_card_prs": 12,
+      "newly_explicit_bound_former_unmapped_prs": 34,
+      "native_pr_backed_rows": 216,
+      "former_gap_tokens": 11,
+      "unlocated_former_gap_tokens": 0,
+      "gap_decisions": {
+        "locate-existing-legacy-id": 7,
+        "reject-empty-reference": 2,
+        "quarantine-malformed-target": 1,
+        "resolve-existing-uuid-path-alias": 1
+      },
+      "namespace_supplier_declarations": 72,
+      "unresolved_supplier_aliases": 0,
+      "knoxx_mixed_dependency_cycle_components": 2,
+      "created_tasks": 0,
+      "m0_qualified": false,
+      "frozen_card_relationship_observations_adjudicated": 1170,
+      "containment_observations": 721,
+      "declared_blocker_observations": 449,
+      "new_verified_card_relationship_observations": 28,
+      "cross_network_identity_holds": 3,
+      "pr_ancestry_observations_adjudicated": 183,
+      "differing_card_revision_groups_retained": 93,
+      "constellation_native_pr_backed_rows": 84,
+      "inventory_only_prs": 133
+    },
+    "m0_qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9.json",
+      "sha256": "917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9"
+    }
+  },
+  "e0_refresh": {
+    "report": "docs/stabilization/e0-refresh.md",
+    "overlay": "docs/stabilization/e0-refresh.json",
+    "csv": "docs/stabilization/e0-refresh.csv",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz",
+      "sha256": "6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6",
+      "bytes": 4026181,
+      "uncompressed_sha256": "252fe6546d7b75e22ee3fc8cf061ed225699ba6bd6608501872d42a0c3c78921",
+      "uncompressed_bytes": 34313035
+    },
+    "summary": {
+      "frozen": 442,
+      "observed": 442,
+      "open": 441,
+      "merged": 1,
+      "closed_unmerged": 0,
+      "changed_head_or_base": 6,
+      "changed_open_head_or_base": 5,
+      "changed_merged_head_or_base": 1
+    },
+    "recovered_custody_observations": 4,
+    "new_tasks": 0,
+    "m0_qualified": false,
+    "cms_cephalon": "paused",
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/058fa645a02d2007399d0add776c8ca031c72cec237bc953e1bc33211f4b7b84.json",
+      "sha256": "058fa645a02d2007399d0add776c8ca031c72cec237bc953e1bc33211f4b7b84",
+      "bytes": 71058
+    }
+  },
+  "e0_execution": {
+    "report": "docs/stabilization/e0-execution.md",
+    "overlay": "docs/stabilization/e0-execution.json",
+    "existing_work": "riatzukiza/clio#5",
+    "published_head": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+    "hosted_ci": {
+      "run_id": 39520773474,
+      "url": "https://github.com/riatzukiza/clio/actions/runs/39520773474",
+      "head_sha": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2.json.gz",
+      "sha256": "91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2",
+      "bytes": 1559862,
+      "uncompressed_sha256": "6477443ac9d4a39fd5ad7d6a56d866bd35136ba6f072664816c005be411e833c",
+      "uncompressed_bytes": 7803310
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5.json",
+      "sha256": "4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5",
+      "bytes": 24761
+    }
+  }
+}

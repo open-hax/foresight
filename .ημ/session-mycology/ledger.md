@@ -511,3 +511,53 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+
+- ts: 2026-10-20T07:31:14.612500Z
+  session: codex/stabilization-portfolio
+  task: Refresh new-machine Git sources and register a linked stabilization portfolio
+  p-efficiency: 0.75
+  p-friction: 0.45
+  p-skill-candidate: 0.60
+  spore: none
+  receipt-refs: ca95e10f74df04bd2974dbfd7711e6325f6a8e55cd7604cf9047ff8209462b2a
+  note: Refresh root evidence before card discovery on a replacement computer. The published eta-mu bridge lacked create; isolated pinned Rheos 0.2.0 supplied ledger-backed creation. A shallow Axxium checkout triggered a large default fetch; targeted gitlink fetch plus submodule update --no-fetch restored the exact baseline. Existing source-preserving stash remains explicit.
+
+- ts: 2026-10-20T08:04:58.093684Z
+  session: codex/stabilization-portfolio
+  task: Freeze 442 PRs and reconcile existing source-qualified Rheos work
+  p-efficiency: 0.72
+  p-friction: 0.65
+  p-skill-candidate: 0.85
+  spore: 20261020-e0-enumeration-and-item-bounds.md
+  receipt-refs: 873e646ca7813784157edfe87c3b0fd9b958f7a63395673ed6f9998c4e9d931d
+  note: Authenticated inventory exposed omitted private repositories; native 3000-file caps required complete tree recovery. Fork/card source observations stayed distinct. Existing work was linked without task creation; owner and dependency gaps keep M0 unqualified.
+
+- ts: 2026-10-20T08:48:09.245252Z
+  session: codex/stabilization-portfolio
+  task: Resolve frozen-census ownership, mapping and dependency gaps on existing E0
+  p-efficiency: 0.80
+  p-friction: 0.50
+  p-skill-candidate: 0.65
+  spore: none
+  receipt-refs: 7e55c13c7b89baabab8c5b8b24a2356b8737d41e1a42ea7f112b17af6c0a6302
+  note: Reconstruct complete added card blobs from the frozen patch corpus and require exact Git blob hashes before broadening card discovery. Preserve legacy IDs and malformed sources as custody questions; assign reconciliation accountability without inventing merge authority. Existing E0 carries residual holds and native PR anchors avoid duplicate stories. The earlier census-bound spore remains the reusable learning record.
+
+- ts: 2026-10-21T00:06:27.752728+00:00
+  session: codex/stabilization-portfolio
+  task: Persist E0 live refresh, exact blob recovery and published Knoxx boundary proof
+  p-efficiency: 0.82
+  p-friction: 0.45
+  p-skill-candidate: 0.60
+  spore: none
+  receipt-refs: 57e48e4eb4d2795281ac87009e1dc1579122d4093116b820c87f76834eba975d
+  note: Recover prior thread reports before interpreting cohort-count differences. Base64 exact-ref retrieval plus Git blob hashing repairs rendered-control-text custody without overwriting the failed capture. Separate changed-open sources from changed merged sources, preserve stale sequence claims as history, and compare published path/blob sets before carrying proposed integration order forward. Existing census spore is retained; no duplicate learning artifact.
+
+- ts: 2026-10-21T00:31:35.802396+00:00
+  session: codex/stabilization-portfolio
+  task: Execute shared Clio ledger corrective work and publish verified source
+  p-efficiency: 0.83
+  p-friction: 0.40
+  p-skill-candidate: 0.60
+  spore: none
+  receipt-refs: 327bb32c792c8adae78824448d4dc66b0f633e61d6ae64ef1084b0809ffd2b60
+  note: Match host tools to the existing CI contract in an isolated directory before interpreting infrastructure failures as source failures. Preserve red commits, ordinary push readback, real native settlement and exact-head CI separately from review quorum. Missing workflow routes and quota stay explicit; no duplicate task or spore.

@@ -12,6 +12,11 @@ Registration is distinct from standalone acceptance: the
 outstanding build, consumer, review-policy, and documentation evidence. Update
 that register and the routing map when a module's acceptance lands.
 
+The [Foresight Stabilization portfolio](docs/stabilization/portfolio.md) coordinates
+inherited work through eight epics under the existing program. Its
+[persistent tracker](docs/stabilization/tracker.md) links canonical Rheos cards,
+qualification evidence and separate CMS/translations and Cephalon handoffs.
+
 ## New actor: start here
 
 A capable actor should be able to route work from the checkout without prior
