@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "stabilization-checkpoint-publication",
+  "observed_at": "2026-10-21T00:35:15.001955+00:00",
+  "new_campaign_pr": {
+    "url": "https://github.com/open-hax/foresight/pull/142",
+    "number": 142,
+    "state": "open",
+    "merged": false,
+    "mergeable": false,
+    "draft": false,
+    "body": "The stabilization program and its execution evidence existed only in local uncommitted files. This publishes the canonical E0–E7 coordination cards on existing program identities, the frozen 442-PR census, additive ownership/relationship decisions, exact source-custody recovery, and the first corrective shared-ledger execution checkpoint.\n\nThe latest global sweep observed 441 open PRs and one native merge. Five open sources changed head/base, plus the merged source. Original observations and snapshots remain intact; the current execution overlay records Clio #5 red/green commits, two native finding settlements and successful hosted CI at 38c0b8c9e45160ae4fecd7d87bf6c700f62cc631. Its directory-ABA finding and independent review gate remain open.\n\nE0 remains in breakdown, E1–E7 remain incoming, and M0–M7 remain unqualified. CMS/Cephalon agents remain paused. All 23 root gitlinks and independently owned child checkouts are unchanged. Private repository inventory stays in Git-excluded local evidence. The compressed public native corpus is retained as immutable data; scoped CSV attributes preserve its original CRLF register bytes.\n\nValidation: root project contract (25 sources / 23 submodules / 39 invariants), workspace and project suites (36 tests / 286 assertions), zero-warning root lint, Rheos no drift, source/snapshot digests, exact staged bytes and whitespace checks. Clio separately passes BB, JVM, NBB and compiled Shadow suites plus exact-head hosted CI. Hosted checks and independent review of this PR remain required.\n\nEntry point: docs/stabilization/tracker.md. Detailed source/action proof: docs/stabilization/e0-execution.md.",
+    "title": "docs(stabilization): register program and publish E0 execution evidence",
+    "base": "main",
+    "base_sha": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "head": "codex/stabilization-portfolio",
+    "head_sha": "6b630662f279149e61e9411a0021915663b19c73",
+    "head_repo_id": 1333057084,
+    "head_repo_full_name": "open-hax/foresight",
+    "merge_commit_sha": null,
+    "user": {
+      "login": "riatzukiza",
+      "name": "riatzukiza",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/10676925?v=4",
+      "id": 10676925
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-21T00:34:10Z",
+    "updated_at": "2026-10-21T00:34:10Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 1,
+    "changed_files": 50,
+    "additions": 223599,
+    "deletions": 8,
+    "display_url": "https://github.com/open-hax/foresight/pull/142",
+    "display_title": "docs(stabilization): register program and publish E0 execution evidence"
+  },
+  "native_readback": {
+    "data": {
+      "repository": {
+        "pullRequest": {
+          "headRefOid": "6b630662f279149e61e9411a0021915663b19c73",
+          "baseRefOid": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+          "isDraft": false,
+          "mergeable": "MERGEABLE",
+          "autoMergeRequest": null,
+          "state": "OPEN"
+        }
+      }
+    }
+  },
+  "frozen_cohort": {
+    "size": 442,
+    "identity": "62874eae7ee052cce39d658402326449e617a49b0965abe6795a93a2ad6fe341",
+    "modified": false
+  },
+  "scope": "Necessary E0 program/evidence publication; track independently from frozen cohort",
+  "initial_commit": "6b630662f279149e61e9411a0021915663b19c73",
+  "e0_attempt": "4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5",
+  "clio_source": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+  "auto_merge": false,
+  "qualification": "required checks and independent review pending; no milestone qualification",
+  "private_inventory": "Git-excluded local evidence retained; not staged or pushed",
+  "unrelated_work": "untracked .claude retained; all consumer gitlinks and original child checkouts unchanged"
+}

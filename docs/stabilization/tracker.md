@@ -8,6 +8,12 @@ The [previous global refresh](e0-refresh.md) retains 442 frozen identities,
 Five open PRs changed head/base, plus the merged PR's changed head. E0 remains
 in breakdown; M0–M7 remain unqualified. CMS/Cephalon agents remain paused.
 
+Versioned checkpoint: [Foresight #142](https://github.com/open-hax/foresight/pull/142),
+initial commit `6b630662f279149e61e9411a0021915663b19c73`. This new E0 publication
+PR is tracked separately from the frozen 442. Auto-merge is off; its required
+checks and independent review remain unqualified. Private census evidence and
+unrelated work were excluded from publication.
+
 ## Current gate state
 
 Eight coordination epics are registered under existing program `760f7f1e-a086-4e0a-82a5-71d2a761073d`. E0 is now in **breakdown**; E1–E7 remain **incoming**. Every milestone remains **unqualified**. E0 reconciliation is assigned to Codex through Rheos. Stack execution/merge authority remains unqualified; the registration author is Codex.

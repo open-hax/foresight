@@ -876,5 +876,17 @@
       "sha256": "4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5",
       "bytes": 24761
     }
+  },
+  "campaign_publication": {
+    "pull_request": "open-hax/foresight#142",
+    "url": "https://github.com/open-hax/foresight/pull/142",
+    "scope": "new E0 checkpoint publication, outside original frozen cohort",
+    "snapshot": {
+      "path": ".ημ/stabilization/snapshots/04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b.json",
+      "sha256": "04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b",
+      "bytes": 4227
+    },
+    "qualification": "pending",
+    "auto_merge": false
   }
 }
