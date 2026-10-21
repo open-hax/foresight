@@ -96,7 +96,14 @@
     (testing "an unrelated personal module without a row is not an org module"
       (is (:valid? (dev-origins/validate
                     rows (conj dev-modules {:path ".agents" :url "git@github.com:riatzukiza/.agents.git"})
-                    roots required))))))
+                    roots required))))
+    (testing "a nested canonical path cannot cover itself through its own row (CodeRabbit PRRT_kwDOU4VJMM6u5uIo)"
+      ;; .agents points at riatzukiza/.agents; a row naming that origin must
+      ;; not turn the excluded path into covered coverage.
+      (is (contains? (ids (conj rows {:source/path ".agents" :org/upstream "open-hax/.agents"
+                                      :dev/origin "riatzukiza/.agents" :network/root "open-hax/.agents"})
+                          (conj dev-modules {:path ".agents" :url "git@github.com:riatzukiza/.agents.git"}))
+                     :dev-origin/unknown-submodule)))))
 
 (deftest dev-origin-network-root-is-checked-against-supplied-facts
   ;; Codex PRRT_kwDOT3TWPM6rqMQa / CodeRabbit PRRT_kwDOT3TWPM6uiWm8.
