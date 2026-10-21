@@ -1,0 +1,884 @@
+{
+  "schema_version": 1,
+  "kind": "e0-candidate-ci-isolation-execution",
+  "observed_at": "2026-10-21T04:04:42.997860+00:00",
+  "census": {
+    "overlay": "docs/stabilization/e0-ci-isolation-census.json",
+    "register": "docs/stabilization/e0-ci-isolation-census.csv",
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/3bfae6197e4510b9fcdfc081982d23b95e238183d3d4fbd4b4b9af30ae557643.json.gz",
+      "sha256": "3bfae6197e4510b9fcdfc081982d23b95e238183d3d4fbd4b4b9af30ae557643",
+      "bytes": 143177,
+      "uncompressed_sha256": "40f72708817a9102ac774aa924b620a36d9b0d7b1edd0a562ec39a37bbec7685",
+      "uncompressed_bytes": 2167117
+    },
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 441,
+        "MERGED": 1,
+        "CLOSED": 0
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 180,
+      "open_reported_base_differs_from_live_tip": 179,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 301,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 135
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 1,
+      "changed_open_head_or_reported_base_from_freeze": 5,
+      "changed_source_or_proposed_merge_since_prior_topology": 0
+    },
+    "window": [
+      "2026-10-21T03:58:42.302496+00:00",
+      "2026-10-21T03:59:00.994223+00:00"
+    ]
+  },
+  "candidate": {
+    "repository": "open-hax/eta-mu",
+    "pr": 361,
+    "head": "1635d310a36c25b42646f14d4810359306fc76d9",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "source_refs": {
+      "8cd62714": "8cd6271434150a4f670866e1069e62e2db065832",
+      "551b154b": "551b154b550aa50e08b7e86f29dfebf38b7c10b9",
+      "5b5f19dd": "5b5f19dd31f835f2899eb3076260ded67beb4d73"
+    },
+    "auto_merge": false,
+    "state": "testing",
+    "qualified": false,
+    "new_five_point_owner": "e449367d-8fc1-4e8b-a1bb-995cbdd97334",
+    "parent": "290f0cdf-9160-453e-a69c-67211432baa7",
+    "prior_points": "producer2/publisher5/hosted3 unchanged; warning-parity2 separate",
+    "operational_readiness": "No native planning/approval/adoption credit",
+    "source_proof": {
+      "path": ".\u03b7\u03bc/review-evidence/candidate-ci-isolation/2850b3e3b0ec36711a5161e5888589afa58b0053c583ef05bbdaa10390699bff.json.gz",
+      "sha256": "2850b3e3b0ec36711a5161e5888589afa58b0053c583ef05bbdaa10390699bff",
+      "bytes": 651778,
+      "uncompressed_sha256": "cd8edf9b19d9977dd7f8ec25f5a4925f1b297d0f1a84a577f410623a94fe13b2",
+      "uncompressed_bytes": 4229152,
+      "captures": 135,
+      "green": {
+        "head": "5b5f19dd31f835f2899eb3076260ded67beb4d73",
+        "red": "551b154b550aa50e08b7e86f29dfebf38b7c10b9"
+      }
+    },
+    "local_results": {
+      "causal_red": {
+        "tests": 9,
+        "assertions": 169,
+        "failures": 27,
+        "errors": 0
+      },
+      "final_registered": {
+        "tests": 10,
+        "assertions": 183,
+        "failures": 0,
+        "errors": 0
+      },
+      "eta_full": {
+        "tests": 194,
+        "assertions": 587,
+        "failures": 0,
+        "errors": 0,
+        "compiler_warnings": 0,
+        "retained_diagnostic": "intentional SIGTERM/SIGKILL escalation fixture"
+      },
+      "kondo": {
+        "errors": 0,
+        "warnings": 0,
+        "existing_architecture_info": 1
+      },
+      "actionlint_shellcheck": {
+        "exit": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "scope": [
+          ".github/workflows/rheos.yml",
+          ".github/workflows/rheos-github-sync-ci.yml",
+          ".github/workflows/sandbox-bundle.yml",
+          ".github/workflows/sol-ci.yml"
+        ],
+        "suppression": false
+      },
+      "path_audit": {
+        "exit": 0,
+        "handwritten_workflows": 4
+      },
+      "emitter_check": {
+        "exit": 0,
+        "gate_count": 10,
+        "main_pr_gate": "unchanged"
+      },
+      "protocol_strict_types": {
+        "exit": 0,
+        "stderr_bytes": 0
+      }
+    },
+    "parsed_preservation": {
+      "result": "PASS",
+      "baseline": "3772f776b65598c76c91f2127df2788d8d0074ca",
+      "carriers": {
+        "rheos": {
+          "path": ".github/workflows/rheos.yml",
+          "baseline_blob": "e241391d0ecf001ad7a98cf8450080eb6309db9c",
+          "preserved_deterministic_steps": true,
+          "read_only_token": true,
+          "checkout_credentials": false,
+          "credential_steps_removed": [
+            "Detect eta-mu app credentials",
+            "Create cross-repository read token",
+            "Configure private Git dependency reads",
+            "Remove private Git authorization"
+          ]
+        },
+        "rheos-github-sync-ci": {
+          "path": ".github/workflows/rheos-github-sync-ci.yml",
+          "baseline_blob": "55c4216806d01fe34651e2a396913f30544aff43",
+          "preserved_deterministic_steps": true,
+          "read_only_token": true,
+          "checkout_credentials": false,
+          "credential_steps_removed": [
+            "Detect eta-mu app credentials",
+            "Create cross-repository read token",
+            "Configure private Git dependency reads",
+            "Remove private Git authorization"
+          ]
+        },
+        "sandbox-bundle": {
+          "path": ".github/workflows/sandbox-bundle.yml",
+          "baseline_blob": "bd2c3dbe799dd0216298c45600172a885cb41fab",
+          "preserved_deterministic_steps": true,
+          "read_only_token": true,
+          "checkout_credentials": false,
+          "credential_steps_removed": [
+            "Detect eta-mu app credentials",
+            "Create cross-repository read token",
+            "Mirror private Git dependencies"
+          ]
+        },
+        "sol-ci": {
+          "path": ".github/workflows/sol-ci.yml",
+          "baseline_blob": "74fd95a0f9ef8fba23371d42309d5bac162fba57",
+          "preserved_deterministic_steps": true,
+          "read_only_token": true,
+          "checkout_credentials": false,
+          "credential_steps_removed": [
+            "Detect eta-mu app credentials",
+            "Create cross-repository read token",
+            "Configure private Git dependency reads",
+            "Remove private Git authorization"
+          ]
+        }
+      },
+      "unchanged_package_trees": {
+        "packages/protocols": "6d9ab7f269f043a7192a8f90e82bccaea422e6b8",
+        "packages/rheos": "c79adb742d066f458a431703956175503e28acfc",
+        "packages/sol": "5f2894edf542377d89b03c7f9b321e2c65683e54",
+        "packages/clio": "82bc39da2cdccd669ee1aa35804c0b6448f5859f",
+        "packages/chat-ui": "0949e38d00ea78951c28771bb0dd40e56632d507"
+      },
+      "limits": [
+        "Two checksum pipelines differ only by input materialization; separate actual extracted-step byte/digest/tamper fixture proves behavior.",
+        "Source comparison is not hosted execution or full sandbox proof."
+      ]
+    },
+    "board": {
+      "result": "PASS",
+      "baseline": "3772f776b65598c76c91f2127df2788d8d0074ca",
+      "canonical_cards": 309,
+      "old308identities_states_preserved": true,
+      "changed_existing_content_only": [
+        {
+          "uuid": "rheos-ci-does-not-gate-build-warnings",
+          "fields": [
+            "content"
+          ]
+        },
+        {
+          "uuid": "290f0cdf-9160-453e-a69c-67211432baa7",
+          "fields": [
+            "content"
+          ]
+        }
+      ],
+      "new5pointowner": {
+        "uuid": "e449367d-8fc1-4e8b-a1bb-995cbdd97334",
+        "points": "5",
+        "parent": "290f0cdf-9160-453e-a69c-67211432baa7",
+        "status": "testing",
+        "dependency": []
+      },
+      "old13snapshotidentities_preserved": true,
+      "all_relative_export_and_live_path_parity": true,
+      "unchanged11undated_readtime_fallback_ids": [
+        "0dd12d60-d7ea-43d0-8b1e-87e14c4e61dd",
+        "256c5dd5-1a65-4ad0-8087-80b8f9a69c77",
+        "4985bd7d-c027-4bca-8ae9-35aa21d7ba35",
+        "7c44b3fc-7dbe-4c96-9125-4cce4ec4796e",
+        "a343a87e-a96f-4df8-bffd-5c3ef331ad26",
+        "rheos-canonical-task-fold-and-snapshots",
+        "rheos-edn-config-and-card-selection",
+        "rheos-event-store-git-worldline-adr",
+        "rheos-git-commit-attribution-and-branch-fold",
+        "rheos-ledger-authoritative-projections",
+        "rheos-markdown-projection-push-pull-sync"
+      ],
+      "ledgers": {
+        "receipts.edn": {
+          "prefix_bytes": 555922,
+          "prefix_sha256": "4403f2ea599e8b0c1677663c065ea2e63b894b36a149116acc6504dcb3e94626",
+          "appended_bytes": 7259
+        },
+        "kanban/.events/ledger.edn": {
+          "prefix_bytes": 1804207,
+          "prefix_sha256": "1100578ea04ca9d796eda01963f996337ce083a7e3d23dcf3dca5ce42ae3a575",
+          "appended_bytes": 13642
+        },
+        ".\u03b7\u03bc/session-mycology/ledger.md": {
+          "prefix_bytes": 108447,
+          "prefix_sha256": "8338a8a37ab9f1febcde6670f8a0ee65f4aa71dc0b4031e8bbaaa253c4efaae9",
+          "appended_bytes": 988
+        },
+        ".\u03b7\u03bc/session-reflections.edn": {
+          "prefix_bytes": 36581,
+          "prefix_sha256": "c2df5af102ffef348684a8d84edaa75cf8031264a1398a8c1e93a8255801d807",
+          "appended_bytes": 0
+        }
+      },
+      "unchanged338owner_paths": [
+        ".github/workflows/opencode-code-review.yml",
+        ".github/scripts/opencode-code-review-workflow.test.mjs",
+        ".github/scripts/run-opencode-review-recovery.mjs",
+        ".github/scripts/opencode-review-tool-recovery.test.mjs",
+        ".github/scripts/opencode-review-invocation-integrity.test.mjs"
+      ],
+      "strict_zero_warning_qualified": false
+    },
+    "native_ci": {
+      "observed_at": "2026-10-21T04:04:34.840908+00:00",
+      "head": "1635d310a36c25b42646f14d4810359306fc76d9",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "checkout": "c140cef92f5f38b50d226c2c8f1f2134c1261a4a",
+      "tree": "e6c72702117e339a4bbf343d996be4499a1d2d92",
+      "parents": [
+        "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "1635d310a36c25b42646f14d4810359306fc76d9"
+      ],
+      "completed_jobs": [
+        {
+          "name": "Sol",
+          "run": 39541426118,
+          "job": 119029811040,
+          "result": "success",
+          "exact_checkout": "c140cef92f5f38b50d226c2c8f1f2134c1261a4a",
+          "tree": "e6c72702117e339a4bbf343d996be4499a1d2d92",
+          "actual_suites": [
+            {
+              "tests": 10,
+              "assertions": 183
+            },
+            {
+              "tests": 142,
+              "assertions": 607
+            }
+          ],
+          "compiler_builds": [
+            "2026-10-21T03:58:53.3643030Z [:test] Build completed. (216 files, 215 compiled, 0 warnings, 14.49s)",
+            "2026-10-21T03:59:13.9790118Z [:server] Build completed. (202 files, 185 compiled, 0 warnings, 11.53s)"
+          ],
+          "actual_carrier_warnings": [
+            "2026-10-21T03:57:58.3991790Z (node:2413) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:57:58.5723914Z (node:2425) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:57:58.7121385Z (node:2425) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:58:00.0184881Z (node:2459) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:58:00.7382722Z (node:2473) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:58:04.1682171Z (node:2473) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:58:13.1012334Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'",
+            "2026-10-21T03:58:13.1015149Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:13.1021275Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:13.1024619Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'",
+            "2026-10-21T03:58:13.1030445Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:13.1033721Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'",
+            "2026-10-21T03:58:13.2933983Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:13.2939169Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'",
+            "2026-10-21T03:58:13.3078138Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'",
+            "2026-10-21T03:58:13.3082346Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:13.3131080Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:13.3134466Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'",
+            "2026-10-21T03:59:14.2069477Z (node:3938) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:59:14.5149240Z (node:3938) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:59:15.0044508Z (node:3950) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:59:15.3113294Z (node:3966) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:59:15.5781881Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02, DeLaGuardo/setup-clojure@ada62bb3282a01a296659d48378b812b8e097360, pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+          ],
+          "strict_whole_carrier_zero_warning": false,
+          "log_sha256": "32ce6ef8f0c4bc3efed46cd8abcb452ccdc794c095c31659fb3a738e0fdadf47",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Check out repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Set up Java",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Set up Clojure CLI and clj-kondo",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Set up pnpm",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Set up Node.js",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Lint Sol source and tests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Install workspace dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Verify workflow gate contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Verify warning gate regressions",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Test Sol",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Build Sol server",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Upload Sol validation evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Post Set up Node.js",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 23
+            },
+            {
+              "name": "Post Set up pnpm",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 24
+            },
+            {
+              "name": "Post Set up Java",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Check out repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
+        },
+        {
+          "name": "GitHub-sync",
+          "run": 39541426116,
+          "job": 119029811124,
+          "result": "success",
+          "exact_checkout": "c140cef92f5f38b50d226c2c8f1f2134c1261a4a",
+          "tree": "e6c72702117e339a4bbf343d996be4499a1d2d92",
+          "actual_suites": [
+            {
+              "tests": 10,
+              "assertions": 183
+            },
+            {
+              "tests": 212,
+              "assertions": 1219
+            },
+            {
+              "tests": 212,
+              "assertions": 1219
+            }
+          ],
+          "compiler_builds": [
+            "2026-10-21T03:58:49.2949473Z [:test] Build completed. (162 files, 161 compiled, 0 warnings, 13.24s)",
+            "2026-10-21T03:59:19.2264377Z [:server] Build completed. (111 files, 53 compiled, 0 warnings, 18.65s)",
+            "2026-10-21T03:59:30.0791932Z [:cli] Build completed. (116 files, 57 compiled, 0 warnings, 10.83s)",
+            "2026-10-21T03:59:37.5453531Z [:github-sync] Build completed. (75 files, 28 compiled, 0 warnings, 7.46s)",
+            "2026-10-21T03:59:48.9124082Z [:app] Build completed. (95 files, 49 compiled, 0 warnings, 11.36s)"
+          ],
+          "actual_carrier_warnings": [
+            "2026-10-21T03:57:58.5489242Z (node:2611) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:57:59.2019229Z (node:2635) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:58:00.1159078Z (node:2652) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:58:01.2586220Z (node:2652) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:58:09.8927348Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'",
+            "2026-10-21T03:58:09.8933099Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:09.8935587Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:09.8939717Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'",
+            "2026-10-21T03:58:09.8942954Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:09.8946281Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'",
+            "2026-10-21T03:58:10.0454366Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'",
+            "2026-10-21T03:58:10.0458389Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:10.0614849Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:10.0617591Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'",
+            "2026-10-21T03:58:10.0679127Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:10.0682229Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'",
+            "2026-10-21T03:58:10.2667881Z (node:2731) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:58:10.5353590Z (node:2731) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:59:56.4873947Z (node:4018) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:59:56.9335854Z (node:4018) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:59:57.9793988Z (node:4030) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:59:58.3151175Z (node:4046) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:59:58.5988305Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02, DeLaGuardo/setup-clojure@ada62bb3282a01a296659d48378b812b8e097360, pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+          ],
+          "strict_whole_carrier_zero_warning": false,
+          "log_sha256": "1e99beaf379485e9ba6b1c2464fa96f8c8e8f0227a277d29435e56687d74060f",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Checkout eta-mu",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Setup Java",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Setup pnpm",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Setup Node.js",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Install workspace",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Install Clojure CLI and clj-kondo",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Verify workflow gate contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Lint Rheos sync change surface",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Test Rheos",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Release-build Rheos including GitHub projector",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Generate canonical eta-mu board snapshot",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Validate canonical status aliases and UUIDs",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Record Rheos drift history",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Dry-run Rheos GitHub Issue projection",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Publish evidence summary",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Upload Rheos sync evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Setup Node.js",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 31
+            },
+            {
+              "name": "Post Setup pnpm",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 32
+            },
+            {
+              "name": "Post Setup Java",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 33
+            },
+            {
+              "name": "Post Checkout eta-mu",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 34
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 35
+            }
+          ]
+        },
+        {
+          "name": "Rheos",
+          "run": 39541426121,
+          "job": 119029810926,
+          "result": "success",
+          "exact_checkout": "c140cef92f5f38b50d226c2c8f1f2134c1261a4a",
+          "tree": "e6c72702117e339a4bbf343d996be4499a1d2d92",
+          "actual_suites": [
+            {
+              "tests": 10,
+              "assertions": 183
+            },
+            {
+              "tests": 78,
+              "assertions": 332
+            },
+            {
+              "tests": 212,
+              "assertions": 1219
+            },
+            {
+              "tests": 212,
+              "assertions": 1219
+            }
+          ],
+          "compiler_builds": [
+            "2026-10-21T03:58:46.4973439Z [:test] Build completed. (140 files, 139 compiled, 0 warnings, 7.83s)",
+            "2026-10-21T03:58:50.0986168Z [:lib] Build completed. (112 files, 103 compiled, 0 warnings, 3.49s)",
+            "2026-10-21T03:59:19.9663187Z [:test] Build completed. (162 files, 161 compiled, 0 warnings, 8.59s)",
+            "2026-10-21T03:59:40.4962948Z [:server] Build completed. (111 files, 53 compiled, 0 warnings, 12.50s)",
+            "2026-10-21T03:59:48.9669754Z [:cli] Build completed. (116 files, 57 compiled, 0 warnings, 8.46s)",
+            "2026-10-21T03:59:54.2811254Z [:github-sync] Build completed. (75 files, 28 compiled, 0 warnings, 5.31s)",
+            "2026-10-21T04:00:02.6334240Z [:app] Build completed. (95 files, 49 compiled, 0 warnings, 8.35s)"
+          ],
+          "actual_carrier_warnings": [
+            "2026-10-21T03:57:58.6841595Z (node:2196) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:57:59.0702924Z (node:2220) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:57:59.7029878Z (node:2234) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:58:00.4467993Z (node:2295) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:58:00.6729240Z (node:2295) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T03:58:09.2179544Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'",
+            "2026-10-21T03:58:09.2181824Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:09.2186907Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:09.2202816Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'",
+            "2026-10-21T03:58:09.2205059Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+            "2026-10-21T03:58:09.2206493Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'",
+            "2026-10-21T03:58:09.3724229Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:09.3729530Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'",
+            "2026-10-21T03:58:09.3833351Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'",
+            "2026-10-21T03:58:09.3835801Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:09.3870408Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'",
+            "2026-10-21T03:58:09.3871933Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+            "2026-10-21T03:58:09.5292435Z (node:2443) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T03:58:09.7482866Z (node:2443) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+            "2026-10-21T04:00:02.9404193Z (node:4008) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T04:00:03.0369016Z (node:4016) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T04:00:03.2559094Z (node:4032) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+            "2026-10-21T04:00:03.4621702Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830, actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, DeLaGuardo/setup-clojure@ada62bb3282a01a296659d48378b812b8e097360, pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+          ],
+          "strict_whole_carrier_zero_warning": false,
+          "log_sha256": "5016b90dc9a91135cd7baf487c0d20640afabe32d182f3121cbf43545446f170",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Get pnpm store path",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Install dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Install Clojure CLI and clj-kondo",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Verify workflow gate contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Test protocols",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Lint protocols",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Check public protocol types",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Test",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Lint",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Build Rheos release targets",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Upload shadow-cljs logs",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 17
+            },
+            {
+              "name": "Post Run actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 30
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 31
+            },
+            {
+              "name": "Post Run pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 32
+            },
+            {
+              "name": "Post Run actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 33
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 34
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 35
+            }
+          ]
+        }
+      ],
+      "bundle": {
+        "run": 39541426083,
+        "job": 119029811018,
+        "status": "in_progress",
+        "conclusion": null,
+        "source": "latest retained native readback; same handle left running, no rerun/cancellation",
+        "qualification": false
+      },
+      "strict_zero_warning_qualified": false,
+      "same_repository_signer_isolation_hosted_qualified": false,
+      "no_credential_expressions_in_actual_four_candidate_sources": true,
+      "native_provider_review_qualified": false,
+      "narrative": "Dedicated Sol run39541426118/job119029811040, Rheos run39541426121/job119029810926 and GitHub-sync run39541426116/job119029811124 each actually completed SUCCESS at the exact merge/tree above. All three actually ran the new10/183 workflow owner. Sol ran142/607 plus warning-gate regressions and server build; Rheos ran78/332 protocol tests plus native cases, strict types,212/1219 and all four releases; sync ran212/1219, all releases, canonical snapshot/alias/UUID validation, drift history and read-only projection dry-run, with evidence upload. Actual checkout logs independently bind H/B/M; GitHub commit object confirms both parents and tree. All three retain real install/action/runtime carrier warnings, despite zero compiler warnings, so strict whole-carrier qualification is held. Full bundle39541426083/job119029811018 remains in_progress at retained readback and is left running. No skipped/pending job or prior successful run supplies new-source qualification."
+    },
+    "current_head_review": "No trusted approval at retained readback; canonical loop BLOCKED. CodeRabbit pending; Codex account quota UNKNOWN, no retry; missing MiMo/Kimi routes not approval/exception.",
+    "open_review": "Combined historical-path/snapshot thread remains open; snapshot fixed, append-only historical path correction remains separately owned. Three positive body summary items still conservatively unanswered; explanatory disposition supplies no canonical admission credit.",
+    "worktree": {
+      "owned_worktree": "/home/err/.local/share/foresight-worktrees/eta-rheos-ci-isolation",
+      "clean_before_remove": true,
+      "pushed_head": "1635d310a36c25b42646f14d4810359306fc76d9",
+      "removed": true,
+      "primary_head_unchanged": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+      "unrelated_root_claude_worktree": "preserved; no cleanup authority"
+    }
+  },
+  "remaining_holds": [
+    "Actual exact-head independent review/convergence and all deterministic gates remain required.",
+    "Strict whole-carrier warning contract held; native carrier warnings and intentional eta SIGTERM fixture diagnostic retained.",
+    "Future event portability and full event fold owners incoming; old absolute event facts immutable,11undated read-time fallback cards unchanged.",
+    "Separate trusted publisher5/hosted3/adoption and Services/Uxx future caller migrations remain unqualified.",
+    "CodeQL upload write permission and purpose-specific trusted/event-only publisher boundaries remain separately unqualified.",
+    "Root required legacy reviewer gate fails; root merges frozen; concrete E5 fixture oracle remains open."
+  ],
+  "native_evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/0536b335d532aa5f6692ec33816cd52077ac1ad42eda751b8154cbd4babb353f.json.gz",
+    "sha256": "0536b335d532aa5f6692ec33816cd52077ac1ad42eda751b8154cbd4babb353f",
+    "bytes": 826073,
+    "uncompressed_sha256": "bf3d5eb158e1a07c310d273ba4608bbd353ec8c1bc89ef59291391865ec7fc6c",
+    "uncompressed_bytes": 5249917,
+    "captures": 187
+  },
+  "preservation": {
+    "root_gitlinks": 23,
+    "all_previous_frozen_ids": 442,
+    "new_PR361": "Separate remediation, outside frozen cohort",
+    "unrelated_uncommitted_work": "preserved",
+    "CMS_Cephalon_agents": "paused",
+    "M0_M7": "unqualified",
+    "B1_B2_B3": "unassessed",
+    "root_E0": "breakdown",
+    "root_E1_E7": "incoming"
+  },
+  "audit_incidents": [
+    "Custom parsed audit initially guessed a permission subset/carrier key/step name/block selector; failures retained and corrected against source without product changes.",
+    "Original lint SC2094 is ambiguity, not actual corruption proof; original find excluded checksum files. New exact-shell equivalence/tamper/cleanup proof retained.",
+    "New broad sync trigger caused local selection audit mismatch; only that unnecessary new trigger removed, existing coverage preserved.",
+    "Original npm interpolation warnings removed only by explicit child userconfig input; host config unchanged, original captures retained."
+  ]
+}

@@ -1091,5 +1091,30 @@
     "existing_owner": "stabilization-e0",
     "milestones": "M0-M7 unqualified",
     "agents": "CMS/Cephalon paused"
+  },
+  "e0_candidate_ci_isolation_execution": {
+    "report": "docs/stabilization/e0-ci-isolation.md",
+    "overlay": "docs/stabilization/e0-ci-isolation.json",
+    "census": "docs/stabilization/e0-ci-isolation-census.json",
+    "register": "docs/stabilization/e0-ci-isolation-census.csv",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 361,
+      "head": "1635d310a36c25b42646f14d4810359306fc76d9",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5"
+    },
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/0536b335d532aa5f6692ec33816cd52077ac1ad42eda751b8154cbd4babb353f.json.gz",
+      "sha256": "0536b335d532aa5f6692ec33816cd52077ac1ad42eda751b8154cbd4babb353f",
+      "bytes": 826073,
+      "uncompressed_sha256": "bf3d5eb158e1a07c310d273ba4608bbd353ec8c1bc89ef59291391865ec7fc6c",
+      "uncompressed_bytes": 5249917,
+      "captures": 187
+    },
+    "new5pointowner": "e449367d-8fc1-4e8b-a1bb-995cbdd97334",
+    "qualified": false,
+    "existing_root_owner": "stabilization-e0",
+    "milestones": "M0-M7 unqualified",
+    "agents": "CMS/Cephalon paused"
   }
 }

@@ -601,3 +601,13 @@
   spore: none
   receipt-refs: b64b7f63469843b18c9c21e9e865174262f374c1807d2b197ae906b96cf5ba3d
   note: Recover actual source schemas and owner filenames before writing verification code, resolve full source IDs mechanically from Git, and model native append-before-terminal-marker serialization. Repeated assumptions caused avoidable checker failures and one audit identity typo; each retained and corrected, never treated as product success. Canonical regeneration exposed existing11undated read-time fallbacks and newly triggered inherited CI credential guards; keep those distinct from bounded source behavior and never restore signing custody for a green label. Existing board-compatibility and live-ref custody spores cover these seams; no duplicate spore or same-session promotion.
+
+- ts: 2026-10-21T04:05:36.396970+00:00
+  session: codex/stabilization-portfolio
+  task: Execute four-carrier CI isolation and refresh the frozen442 census
+  p-efficiency: 0.69
+  p-friction: 0.67
+  p-skill-candidate: 0.55
+  spore: none
+  receipt-refs: 60cc9dbb8195c881919489eb066369b3d83541c1ba6d70145554c88213681bec
+  note: Scope a new evidenced CI gap without expanding prior producer/publisher points. Preserve complete parsed deterministic steps, immutable package trees and exact H/B/M/tree before transferring test coverage. Keep candidate signer removal separate from hosted same-repository proof, strict warnings and independent reviews. Original source/audit/lint/environment failures remain evidence; correct guessed keys and labels against real schemas. Existing generated-source and terminal-truth spores cover this pattern, so no duplicate spore or promotion. CMS/Cephalon remain paused.

@@ -2,11 +2,13 @@
 
 Updated October 20, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [canonical board repair and refreshed native evidence](e0-producer-followup.md).
-The fresh 03:00:51–03:01:15 UTC sweep retains 442 frozen identities, 441 open,
-one observed merge and five changed open reported head/base pairs; no tuple
-changed since the prior topology audit. PR361 now includes the implemented
-metadata/export repair; inherited hosted App guards still fail before tests.
+Latest execution: [candidate CI credential isolation and refreshed census](e0-ci-isolation.md).
+The fresh 03:58:42–03:59:00 UTC sweep retains 442 frozen identities, 441 open,
+one observed merge and five changed open reported head/base pairs; both passes
+are stable and no tuple changed since the 03:01 audit. PR361 now removes App
+custody from four deterministic CI carriers; actual hosted execution is recorded
+in the report, with warning/review/adoption holds preserved.
+Earlier [canonical board repair](e0-producer-followup.md),
 Earlier [anonymous producer repair and native gate proof](e0-anonymous-producer.md),
 [review dispositions](e0-review-findings.md) and [selection custody amendments](e5-source-amendments.md).
 The [442-source live-base topology audit](e0-base-topology.md) and
@@ -283,6 +285,18 @@ restoration or waiver; warning/timestamp/review holds remain explicit.
 Historical ledgers and all 23 consumer pins remain intact; clean pushed child
 worktree removed. E0 stays breakdown, all milestones unqualified, CMS/Cephalon paused.
 
+## Candidate deterministic CI isolation — October 21 UTC
+
+[Execution report](e0-ci-isolation.md) and [overlay](e0-ci-isolation.json) bind
+PR361's four-carrier credential correction and causal RED/GREEN. All original
+checks/pins and five package source trees survive; registered10/183 and
+eta194/587 pass locally, unfiltered workflow lint passes. The new finite5-point
+owner is testing; prior2/5/3-point chain and warning-parity2 remain separate.
+Actual CLI snapshot contains309cards with all prior308states preserved.
+Hosted execution, exact merge/tree and warning limitations are retained in the
+report. Independent review, trusted publication and root merge freeze remain
+open; no milestone or paused agent advances.
+
 ## Canonical delivery relationships
 
 **CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.
@@ -314,4 +328,4 @@ outside this registration result.
 
 ## Next action
 
-Continue E0 with the inherited Rheos deterministic-CI credential holds and current-head PR361 review, preserving the root merge freeze and separate publisher/hosted-proof obligations.
+Continue E0 with current-head PR361 hosted/review convergence and remaining warning/publication contracts, preserving the root merge freeze and paused CMS/Cephalon agents.
