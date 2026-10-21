@@ -671,3 +671,13 @@
   spore: none
   receipt-refs: receipts.edn additive-native-readability catalog
   note: Delimit full identifiers and use explicit prose in future comments. Correct older compact labels and compound wording through canonical additive comments, never by changing published events. Existing learning retained; no new spore.
+
+- ts: 2026-10-21T08:14:42.250442+00:00
+  session: codex/stabilization-portfolio
+  task: Bind completed hosted archive owners and fresh frozen cohort
+  p-efficiency: 0.76
+  p-friction: 0.61
+  p-skill-candidate: 0.58
+  spore: none
+  receipt-refs: 2120a5ec90172b1dcc218a4b209d7196fadb837ab43a57b89e3fdabaebf98b62
+  note: Native owner sections, checkout merge, Git parents/tree and artifact metadata must agree before hosted credit. Preserve CLI escape-guard and flag-position failures, and Python tuple/list assertion mistakes as capture failures rather than product RED. Whole-carrier warnings and metadata-only artifact limits remain. Native API omissions are explicit missing source/event custody; no inference from H/current M. Existing terminal-truth learning suffices; no new spore/promotion.

@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "kind": "e0-completed-native-archive-owner-proof",
+  "at": "2026-10-21T08:11:45.875521+00:00",
+  "root_parent": "4377d17cb6cfb73e0861e9400aefbd9a7a1c255c",
+  "publisher": {
+    "repository": "open-hax/eta-mu",
+    "pr": 362,
+    "head": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+    "owner": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "state": "in_progress",
+    "full_story_complete": false,
+    "native": {
+      "source": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+      "run": 39563090634,
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "completed_at": "2026-10-21T08:00:20Z",
+      "merge": "04003cb0173a3e83ba5a8cabc997f401f5fa8410",
+      "tree": "075d173d095cccbdef9e846631225fb53a579fb4",
+      "parents": [
+        "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb"
+      ],
+      "log_sha256": "e504031771b73b16b13c7c618407a278004b908bdadc621e5cccbe995aa9a521",
+      "log_bytes": 962818,
+      "cljs_summaries": [
+        [
+          "11",
+          "199"
+        ],
+        [
+          "8",
+          "319"
+        ],
+        [
+          "6",
+          "57"
+        ],
+        [
+          "17",
+          "557"
+        ],
+        [
+          "10",
+          "71"
+        ],
+        [
+          "194",
+          "587"
+        ],
+        [
+          "11",
+          "199"
+        ],
+        [
+          "29",
+          "182"
+        ],
+        [
+          "80",
+          "388"
+        ],
+        [
+          "78",
+          "395"
+        ],
+        [
+          "78",
+          "395"
+        ],
+        [
+          "212",
+          "1219"
+        ],
+        [
+          "212",
+          "1219"
+        ],
+        [
+          "142",
+          "607"
+        ],
+        [
+          "70",
+          "172"
+        ],
+        [
+          "47",
+          "120"
+        ],
+        [
+          "95",
+          "259"
+        ],
+        [
+          "95",
+          "259"
+        ],
+        [
+          "78",
+          "332"
+        ],
+        [
+          "3",
+          "6"
+        ],
+        [
+          "3",
+          "6"
+        ],
+        [
+          "17",
+          "64"
+        ],
+        [
+          "17",
+          "64"
+        ]
+      ],
+      "archive_present": true,
+      "publication_present": true,
+      "head_lines": [
+        "2026-10-21T07:37:51.1820330Z HEAD is now at 04003cb0 Merge 6a796582d74f93c1a1f18ca5c89eb3a0b19445eb into 7112c36440d180ca183d6a3f89661cee161fdae5"
+      ],
+      "warnings": [
+        "2026-10-21T07:37:53.3634994Z (node:2437) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+        "2026-10-21T07:37:53.5420195Z (node:2449) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+        "2026-10-21T07:37:54.4987041Z (node:2492) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+        "2026-10-21T07:37:56.0963151Z (node:2506) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+        "2026-10-21T07:37:56.2911675Z (node:2506) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+        "2026-10-21T07:38:04.1863064Z .../canvas@3.2.3/node_modules/canvas install: (node:2585) [DEP0176] DeprecationWarning: fs.R_OK is deprecated, use fs.constants.R_OK instead",
+        "2026-10-21T08:00:07.5673091Z (node:27605) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+        "2026-10-21T08:00:08.1521280Z (node:27605) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.",
+        "2026-10-21T08:00:17.8412389Z (node:27629) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+        "2026-10-21T08:00:18.0315119Z (node:27637) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+        "2026-10-21T08:00:18.3365158Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02, DeLaGuardo/setup-clojure@ada62bb3282a01a296659d48378b812b8e097360, pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      ],
+      "intentional_process_diagnostic": true,
+      "qualification": false,
+      "registered_owners": {
+        "review-publication": {
+          "cljs_results": [
+            [
+              "17",
+              "557"
+            ]
+          ],
+          "failure_summary": [
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "pass_marker": true
+        },
+        "review-publication-archive": {
+          "cljs_results": [
+            [
+              "10",
+              "71"
+            ]
+          ],
+          "failure_summary": [
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "pass_marker": true
+        }
+      },
+      "artifact": {
+        "id": 12329254296,
+        "name": "eta-mu-sandbox-04003cb0173a3e83ba5a8cabc997f401f5fa8410",
+        "size_in_bytes": 317327290,
+        "digest": "sha256:f2ffbcd635dc03df409d406596bc42c78a98fcc220f380b5b5a34668a32c6e12",
+        "expired": false,
+        "created_at": "2026-10-21T08:00:17Z",
+        "expires_at": "2026-11-20T08:00:07Z",
+        "downloaded_or_restored": false
+      },
+      "carrier_warning_instances": 11,
+      "strict_whole_carrier_qualified": false,
+      "verification": "PASS: native run/attempt/job/source/merge/tree/log/test/artifact identities agree; no review/adoption/deployment qualification",
+      "failed_capture_probes": [
+        "First raw gh log read refused terminal escape sequences and retained empty stdout.",
+        "Second gh call put api-specific flag at global position and failed before request.",
+        "Explicit api --allow-escape-sequences retained exact redirected bytes to file without printing escapes.",
+        "Initial owner-proof Python assertion confused tuples with JSON arrays; corrected list normalization did not change native source or log."
+      ]
+    }
+  },
+  "census": {
+    "source_projection": "docs/stabilization/e0-archive-execution-census.json",
+    "register": "docs/stabilization/e0-archive-execution-census.csv",
+    "projection_window": [
+      "2026-10-21T07:18:54.410682+00:00",
+      "2026-10-21T07:19:14.522295+00:00"
+    ],
+    "fresh_native_window": [
+      "2026-10-21T08:04:39.990983+00:00",
+      "2026-10-21T08:05:02.253563+00:00"
+    ],
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 441,
+        "MERGED": 1,
+        "CLOSED": 0
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 180,
+      "open_reported_base_differs_from_live_tip": 179,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 301,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 135
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 1
+    },
+    "changed_open_head_or_base_from_freeze": 5,
+    "all_442_observed_rows_equal_prior_projection": true,
+    "source_or_proposed_tuple_changes_since_0719": [],
+    "fresh_native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/89fa2f81a87075971bb35cf62d33d162144751d5a627440aeb234f9fce33ede2.json.gz",
+      "sha256": "89fa2f81a87075971bb35cf62d33d162144751d5a627440aeb234f9fce33ede2",
+      "bytes": 146644,
+      "raw_sha256": "30e2e0666c22f49d74efcc39ab8e73336489c2565493aa095f42c4d24657eaeb",
+      "raw_bytes": 2169192,
+      "captures": 64
+    },
+    "new_repositories_or_PRs_censused": false,
+    "tested_candidates_in_frozen_cohort": 0
+  },
+  "root_native": {
+    "head": "4377d17cb6cfb73e0861e9400aefbd9a7a1c255c",
+    "run": 39564048828,
+    "conclusion": "failure",
+    "context_job": 119101931039,
+    "context_result": "success",
+    "deterministic_job": 119101931385,
+    "deterministic_result": "success",
+    "model_job": 119102292923,
+    "failure_step": "Require eta-mu app credentials",
+    "model_executed": false,
+    "terminal_job": 119102471019,
+    "terminal_result": "failure",
+    "signing_restored": false,
+    "required_gate_waived": false
+  },
+  "implementation_continuation": {
+    "existing_publisher_only": true,
+    "scope": "Native collection, independent Git source reconstruction and actual immutable Muse verification under existing card; no standalone plan.",
+    "proof_does_not_transfer_to_unpublished_successors": true,
+    "actual_native_custody_gap": {
+      "run_head_sha_is_H": true,
+      "sampled_run_has_original_G": false,
+      "sampled_run_has_caller_workflow_source": false,
+      "sampled_pull_requests": [],
+      "sampled_referenced_workflows": [],
+      "current_merge_is_original_event_proof": false
+    },
+    "new_source_qualified": false
+  },
+  "holds": {
+    "root_merge_frozen": true,
+    "root_receipt_P1_open": true,
+    "root_invalid_new_against_accepted_base": 2,
+    "root_whole_invalid": 13,
+    "encounter_oracle_open": true,
+    "independent_approving_review": false,
+    "strict_whole_carrier_zero_warning": false,
+    "protected_default_adoption": false,
+    "native_privileged_publication": false,
+    "deployment": false,
+    "all23consumer_pins_unchanged": true,
+    "CMS_Cephalon": "paused"
+  },
+  "native_evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/1b38dc78c2f85e746073eacadae743d1acecea9cdbdf06cb1a80a301f404eda1.json.gz",
+    "sha256": "1b38dc78c2f85e746073eacadae743d1acecea9cdbdf06cb1a80a301f404eda1",
+    "bytes": 110636,
+    "raw_sha256": "30e31f18796606413cace41204d40b440b9a629e378e3bd4ced2af37ca9d4932",
+    "raw_bytes": 1138632,
+    "captures": 33
+  },
+  "qualification": false
+}

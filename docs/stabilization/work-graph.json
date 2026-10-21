@@ -1285,5 +1285,33 @@
       "deterministic_pending": 6,
       "reevaluation_required": true
     }
+  },
+  "e0_archive_hosted_execution": {
+    "report": "docs/stabilization/e0-hosted-archive-proof.md",
+    "overlay": "docs/stabilization/e0-hosted-archive-proof.json",
+    "head": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+    "run": 39563090634,
+    "job": 119099506987,
+    "tested_merge": "04003cb0173a3e83ba5a8cabc997f401f5fa8410",
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/1b38dc78c2f85e746073eacadae743d1acecea9cdbdf06cb1a80a301f404eda1.json.gz",
+      "sha256": "1b38dc78c2f85e746073eacadae743d1acecea9cdbdf06cb1a80a301f404eda1",
+      "bytes": 110636,
+      "raw_sha256": "30e31f18796606413cace41204d40b440b9a629e378e3bd4ced2af37ca9d4932",
+      "raw_bytes": 1138632,
+      "captures": 33
+    },
+    "fresh_census_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/89fa2f81a87075971bb35cf62d33d162144751d5a627440aeb234f9fce33ede2.json.gz",
+      "sha256": "89fa2f81a87075971bb35cf62d33d162144751d5a627440aeb234f9fce33ede2",
+      "bytes": 146644,
+      "raw_sha256": "30e2e0666c22f49d74efcc39ab8e73336489c2565493aa095f42c4d24657eaeb",
+      "raw_bytes": 2169192,
+      "captures": 64
+    },
+    "full_publisher_complete": false,
+    "qualified": false,
+    "owner": "stabilization-e0",
+    "agents": "CMS/Cephalon paused"
   }
 }

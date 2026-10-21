@@ -4,7 +4,7 @@ labels: "stabilization, coordination, e1"
 dependency: ["stabilization-e0"]
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
 type: "epic"
-write-id: "1792568313930-0.38xo86odovbrnc4b450"
+write-id: "1792570210346-0.o93mjigxumcki3f8pjc"
 title: "Stabilization E1 — Qualify the review and merge pipeline"
 priority: "P1"
 status: "incoming"
@@ -74,5 +74,7 @@ E1 current-source gate evidence, without state transition: root ef538b65 native 
 Current E0 child checkpoint67e8d9dd repairs three native review findings and implements physical ZIP/resource admission, not the complete trusted publisher. Native all3threads resolved; current approvals0, CodeRabbit pending and6deterministic checks pending at observed window; no retry of UNKNOWN Codex account quota. Root142 continues to fail missing App setup after deterministic success and the accepted-base root receipt suffix still contains2invalid nested ETA events. Keep root merge freeze, required protections, signing removal and existing five-point publisher/three-point hosted-proof boundaries. Hosted bundle success at old5610head is not successor evidence. Collector/native metadata custody, complete immutable verifier, durable claim/onePOST/completeGET, protected setup/default adoption and hosted rollout remain open. No rootpin or CMS/Cephalon restart. See docs/stabilization/e0-archive-execution.md.
 
 The current child checkpoint is 6a796582d74f93c1a1f18ca5c89eb3a0b19445eb. Two later CodeRabbit body findings receive itemized Fixed dispositions in reply 6310680841: parity requires value-result rows on each host, and parent cleanup assertions claim admission-worker scope only. Actual tests: publication 17 / 557, archive 10 / 71, 138 parity cases, lint zero warnings. Product runtime is unchanged. Prior review/check results do not qualify this successor; full publisher and root receipt P1 remain open. No signing restoration, required-check waiver, root pin advance, merge, deployment or paused CMS/Cephalon execution.
+
+Native child head `6a796582d74f93c1a1f18ca5c89eb3a0b19445eb` now has completed sandbox run `39563090634`, attempt 1, job `119099506987`, tested merge `04003cb0173a3e83ba5a8cabc997f401f5fa8410` and tree `075d173d095cccbdef9e846631225fb53a579fb4`. Actual publication 17 / 557 and archive 10 / 71 pass. Eleven carrier warnings retain the strict whole-carrier hold; artifact metadata is not a restore proof. Current root run `39564048828` passes context and deterministic evidence but fails Require eta-mu app credentials and the terminal gate. Keep signing removal, required protections, merge freeze and separate full trusted-publisher/adoption/hosted-rollout obligations. Native Actions metadata for the sampled run provides H, but original event G and caller source custody remain unobserved; current merge topology cannot manufacture them. Root receipt P1 and encounter oracle stay open. CMS and Cephalon remain paused.
 
 ---

@@ -367,6 +367,24 @@ Final root readability findings receive an additive canonical E0 correction
 with full delimited source identifiers and unambiguous worktree/fixture wording.
 Historical events remain intact; receipt P1 and encounter oracle stay open.
 
+## Completed native archive-owner execution — October 21 UTC
+
+[Hosted source proof](e0-hosted-archive-proof.md) now binds actual successful
+run `39563090634`, attempt 1, job `119099506987` at child head
+`6a796582d74f93c1a1f18ca5c89eb3a0b19445eb`. Exact merge
+`04003cb0173a3e83ba5a8cabc997f401f5fa8410` and native tree/parents/log agree.
+The registered publication owner ran 17 / 557 and archive owner 10 / 71 with
+zero failures/errors. Eleven carrier warnings retain the strict whole-carrier
+hold; the 317327290-byte artifact has metadata only, no restore proof.
+
+The fresh 08:05 UTC two-pass census remains 442 frozen / 441 open / one merged /
+five changed open heads or bases; all 442 observed rows match the immutable
+07:19 projection. Root native context/deterministic jobs pass and missing-App /
+terminal gates fail. Full publisher, original-event/source custody, receipt P1,
+independent review, adoption and milestones remain open. CMS/Cephalon stay
+paused; the unpublished collector/source/verifier implementations gain no old
+hosted credit. No consumer pin, merge or deployment advances.
+
 ## Canonical delivery relationships
 
 **CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.
