@@ -97,6 +97,10 @@
       (is (:valid? (dev-origins/validate
                     rows (conj dev-modules {:path ".agents" :url "git@github.com:riatzukiza/.agents.git"})
                     roots required))))
+    (testing "a required path absent from the modules still needs a row (CodeRabbit review 5605249621 cr-comment:v1:ab9c0c8f2a97f462c475b6f2)"
+      (is (= #{:dev-origin/missing}
+             (set (map :law/id (:errors (dev-origins/validate rows dev-modules roots
+                                                              (conj required "absent"))))))))
     (testing "a nested canonical path cannot cover itself through its own row (CodeRabbit PRRT_kwDOU4VJMM6u5uIo)"
       ;; .agents points at riatzukiza/.agents; a row naming that origin must
       ;; not turn the excluded path into covered coverage.
