@@ -47,7 +47,8 @@
         origins-result
         (dev-origins/validate
          (edn/read-string (fs/readFileSync (path/join root "config/dev-origins.edn") "utf8"))
-         (current-gitmodules))
+         (current-gitmodules)
+         (edn/read-string (fs/readFileSync (path/join root "config/dev-origin-network-roots.edn") "utf8")))
         valid? (and (:valid? project-result)
                     (:valid? lineage-result)
                     (:valid? origins-result))]

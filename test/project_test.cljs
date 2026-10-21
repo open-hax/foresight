@@ -79,8 +79,12 @@
               (set (map :law/id (:errors (dev-origins/validate rows modules roots)))))]
     (testing "dev-origin URLs satisfy their rows"
       (is (:valid? (dev-origins/validate rows dev-modules roots))))
-    (testing "a dev-origin-pointed module without a row is still missing"
-      (is (contains? (ids (pop rows) dev-modules) :dev-origin/missing)))
+    (testing "an org-pointed module without a row is still missing beside dev-pointed ones"
+      (is (contains? (ids (pop rows) (assoc-in dev-modules [1 :url] "git@github.com:open-hax/opencode.git"))
+                     :dev-origin/missing)))
+    (testing "a row whose path is not a submodule is still unknown"
+      (is (contains? (ids (conj rows (assoc (first rows) :source/path "extra")) dev-modules)
+                     :dev-origin/unknown-submodule)))
     (testing "a module pointing at neither upstream nor dev origin is a mismatch"
       (is (contains? (ids rows (assoc-in dev-modules [0 :url] "git@github.com:riatzukiza/other.git"))
                      :dev-origin/upstream-mismatch)))
