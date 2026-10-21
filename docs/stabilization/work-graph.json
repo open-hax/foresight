@@ -6,7 +6,7 @@
     "relationship": "continuation coordination annex; existing program scope and delivery cards retained"
   },
   "source": {
-    "path": ".ημ/stabilization/sources/ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923.txt",
+    "path": ".\u03b7\u03bc/stabilization/sources/ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923.txt",
     "sha256": "ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923",
     "proposal_date": "2026-10-19"
   },
@@ -473,7 +473,7 @@
             }
           ],
           "replay_adoption_hold": {
-            "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+            "path": ".\u03b7\u03bc/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
             "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
             "bytes": 4933
           }
@@ -518,7 +518,7 @@
         },
         {
           "slot": "E5.5",
-          "description": "Define executable B1–B3 verification: Require actual persisted encounter state, consumed mood transition and automatic prompt-level recall.",
+          "description": "Define executable B1\u2013B3 verification: Require actual persisted encounter state, consumed mood transition and automatic prompt-level recall.",
           "acceptance": "B1 proves persisted encounter state across restart; B2 proves an independently stored mood transition is consumed; B3 proves automatic authorized recall reaches the actual character prompt. Record each separately.",
           "mapping_status": "recovered-authored-card-inputs",
           "related_work": [],
@@ -545,7 +545,7 @@
             }
           ],
           "replay_adoption_hold": {
-            "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+            "path": ".\u03b7\u03bc/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
             "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
             "bytes": 4933
           }
@@ -826,7 +826,7 @@
     },
     "m0_qualified": false,
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9.json",
       "sha256": "917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9"
     }
   },
@@ -835,7 +835,7 @@
     "overlay": "docs/stabilization/e0-refresh.json",
     "csv": "docs/stabilization/e0-refresh.csv",
     "native_evidence": {
-      "path": ".ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz",
       "sha256": "6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6",
       "bytes": 4026181,
       "uncompressed_sha256": "252fe6546d7b75e22ee3fc8cf061ed225699ba6bd6608501872d42a0c3c78921",
@@ -856,7 +856,7 @@
     "m0_qualified": false,
     "cms_cephalon": "paused",
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/058fa645a02d2007399d0add776c8ca031c72cec237bc953e1bc33211f4b7b84.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/058fa645a02d2007399d0add776c8ca031c72cec237bc953e1bc33211f4b7b84.json",
       "sha256": "058fa645a02d2007399d0add776c8ca031c72cec237bc953e1bc33211f4b7b84",
       "bytes": 71058
     }
@@ -874,7 +874,7 @@
       "conclusion": "success"
     },
     "native_evidence": {
-      "path": ".ημ/stabilization/snapshots/91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2.json.gz",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2.json.gz",
       "sha256": "91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2",
       "bytes": 1559862,
       "uncompressed_sha256": "6477443ac9d4a39fd5ad7d6a56d866bd35136ba6f072664816c005be411e833c",
@@ -882,7 +882,7 @@
     },
     "qualified": false,
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5.json",
       "sha256": "4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5",
       "bytes": 24761
     }
@@ -892,7 +892,7 @@
     "url": "https://github.com/open-hax/foresight/pull/142",
     "scope": "new E0 checkpoint publication, outside original frozen cohort",
     "snapshot": {
-      "path": ".ημ/stabilization/snapshots/04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b.json",
       "sha256": "04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b",
       "bytes": 4227
     },
@@ -902,7 +902,7 @@
   "e5_replay_custody": {
     "report": "docs/stabilization/e5-replay-custody.md",
     "candidate_and_hold": {
-      "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
       "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
       "bytes": 4933
     },
@@ -915,7 +915,7 @@
     "overlay": "docs/stabilization/e0-directory-binding.json",
     "published_head": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
     "native_evidence": {
-      "path": ".ημ/stabilization/snapshots/5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938.json.gz",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938.json.gz",
       "sha256": "5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938",
       "bytes": 345791,
       "uncompressed_sha256": "ecf1234353fe2fb8345b074b1a59f91066b9d933cc60d42892cc32f8f588508b",
@@ -923,7 +923,7 @@
     },
     "qualified": false,
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b.json",
       "sha256": "f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b",
       "bytes": 38579
     }
@@ -955,7 +955,7 @@
       "pr_base_ref_target_differs_from_independent_tip": 0
     },
     "native_evidence": {
-      "path": ".ημ/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
       "sha256": "bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e",
       "bytes": 4203652,
       "uncompressed_sha256": "c6ae119fe99d06dbd0256d75496ab2f47490ba67ba9a89692b25afc4201c8264",
@@ -963,7 +963,7 @@
     },
     "qualified": false,
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json",
       "sha256": "835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd",
       "bytes": 37487
     }
@@ -977,7 +977,7 @@
       "riatzukiza/eta-mu#22"
     ],
     "native_evidence": {
-      "path": ".ημ/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
       "sha256": "bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e",
       "bytes": 4203652,
       "uncompressed_sha256": "c6ae119fe99d06dbd0256d75496ab2f47490ba67ba9a89692b25afc4201c8264",
@@ -985,7 +985,7 @@
     },
     "qualified": false,
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json",
       "sha256": "835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd",
       "bytes": 37487
     }
@@ -994,7 +994,7 @@
     "report": "docs/stabilization/e0-caller-custody.md",
     "workflow": ".github/workflows/eta-mu-review.yml",
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/90caac8f69da54423ad8d1fbf54407b937b92c5a8e760540b6f6c36d6e09c7b1.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/90caac8f69da54423ad8d1fbf54407b937b92c5a8e760540b6f6c36d6e09c7b1.json",
       "sha256": "90caac8f69da54423ad8d1fbf54407b937b92c5a8e760540b6f6c36d6e09c7b1",
       "bytes": 95458
     },
@@ -1038,7 +1038,7 @@
       "auto_merge": false
     },
     "native_evidence": {
-      "path": ".ημ/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
       "sha256": "92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185",
       "bytes": 2647915,
       "uncompressed_sha256": "a702a5bb4b4387eb54bfb17f2fec4aa92177f98cc42d0bb344d4e900061b5794",
@@ -1046,7 +1046,7 @@
     },
     "qualified": false,
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json",
       "sha256": "51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3",
       "bytes": 4208
     }
@@ -1056,7 +1056,7 @@
     "selection_amendments": "docs/stabilization/e5-source-amendments.md",
     "open_oracle_comment": 4332332161,
     "native_evidence": {
-      "path": ".ημ/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
       "sha256": "92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185",
       "bytes": 2647915,
       "uncompressed_sha256": "a702a5bb4b4387eb54bfb17f2fec4aa92177f98cc42d0bb344d4e900061b5794",
@@ -1064,9 +1064,32 @@
     },
     "qualified": false,
     "attempt_manifest": {
-      "path": ".ημ/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json",
+      "path": ".\u03b7\u03bc/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json",
       "sha256": "51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3",
       "bytes": 4208
     }
+  },
+  "e0_producer_followup_execution": {
+    "report": "docs/stabilization/e0-producer-followup.md",
+    "overlay": "docs/stabilization/e0-producer-followup.json",
+    "census": "docs/stabilization/e0-producer-followup-census.json",
+    "register": "docs/stabilization/e0-producer-followup-census.csv",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 361,
+      "head": "3772f776b65598c76c91f2127df2788d8d0074ca",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5"
+    },
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1.json.gz",
+      "sha256": "f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1",
+      "bytes": 159883,
+      "uncompressed_sha256": "d72d9f2985952874f97a1e1182dce4b0270ea2d4dec94db98275779f7722817a",
+      "uncompressed_bytes": 1565619
+    },
+    "qualified": false,
+    "existing_owner": "stabilization-e0",
+    "milestones": "M0-M7 unqualified",
+    "agents": "CMS/Cephalon paused"
   }
 }

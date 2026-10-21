@@ -591,3 +591,13 @@
   spore: none
   receipt-refs: 6fd50def5bbce538723d6471cf0c69fa4dc064d1cb5a4adc5980a91c563e65e3
   note: Follow existing reviewed ownership into actual extracted-step RED/GREEN on accepted current verifier. Preserve mixed ledger histories, distinguish local transport fixtures from native production qualification, and inspect successful job scope rather than its label. Root merge freeze and one concrete oracle remain explicit; apply custody amendments without editing recovered bytes. Native metadata refusal and a draft revision typo were corrected before publication. Existing source-custody/terminal-truth skills cover this; no new spore or promotion.
+
+- ts: 2026-10-21T03:21:27.477633+00:00
+  session: codex/stabilization-portfolio
+  task: Repair canonical board metadata/export and persist stable442 refresh with inherited CI failures
+  p-efficiency: 0.66
+  p-friction: 0.78
+  p-skill-candidate: 0.62
+  spore: none
+  receipt-refs: b64b7f63469843b18c9c21e9e865174262f374c1807d2b197ae906b96cf5ba3d
+  note: Recover actual source schemas and owner filenames before writing verification code, resolve full source IDs mechanically from Git, and model native append-before-terminal-marker serialization. Repeated assumptions caused avoidable checker failures and one audit identity typo; each retained and corrected, never treated as product success. Canonical regeneration exposed existing11undated read-time fallbacks and newly triggered inherited CI credential guards; keep those distinct from bounded source behavior and never restore signing custody for a green label. Existing board-compatibility and live-ref custody spores cover these seams; no duplicate spore or same-session promotion.

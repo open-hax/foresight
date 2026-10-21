@@ -2,7 +2,12 @@
 
 Updated October 20, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [anonymous producer repair and native gate proof](e0-anonymous-producer.md),
+Latest execution: [canonical board repair and refreshed native evidence](e0-producer-followup.md).
+The fresh 03:00:51–03:01:15 UTC sweep retains 442 frozen identities, 441 open,
+one observed merge and five changed open reported head/base pairs; no tuple
+changed since the prior topology audit. PR361 now includes the implemented
+metadata/export repair; inherited hosted App guards still fail before tests.
+Earlier [anonymous producer repair and native gate proof](e0-anonymous-producer.md),
 [review dispositions](e0-review-findings.md) and [selection custody amendments](e5-source-amendments.md).
 The [442-source live-base topology audit](e0-base-topology.md) and
 [shared review-route source reconciliation](e0-review-route.md) retain their source windows.
@@ -266,6 +271,18 @@ The [immutable producer/custody execution attempt](../../.ημ/stabilization/sna
 binds exact report/configuration hashes, native evidence, actual operational
 readbacks and local verification limits.
 
+## Canonical board repair and fresh E0 execution — October 21 UTC
+
+[Execution report](e0-producer-followup.md) and [overlay](e0-producer-followup.json)
+bind PR361 head `3772f776b65598c76c91f2127df2788d8d0074ca` and its metadata/export causal RED/GREEN.
+The actual CLI regenerated 308 current cards with preserved states and 2/5-point
+planning data. Full Rheos local tests pass 212 / 1,219 assertions; prior native
+bundle actually passed the 338-test owner only at its older source. Current
+Rheos/sync CI fail at inherited missing-App setup before tests. No credential
+restoration or waiver; warning/timestamp/review holds remain explicit.
+Historical ledgers and all 23 consumer pins remain intact; clean pushed child
+worktree removed. E0 stays breakdown, all milestones unqualified, CMS/Cephalon paused.
+
 ## Canonical delivery relationships
 
 **CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.
@@ -297,4 +314,4 @@ outside this registration result.
 
 ## Next action
 
-Read current-head PR361 native review and full registered-owner CI evidence; settle actual findings while preserving separate trusted-publisher/hosted-proof obligations and the root merge freeze.
+Continue E0 with the inherited Rheos deterministic-CI credential holds and current-head PR361 review, preserving the root merge freeze and separate publisher/hosted-proof obligations.
