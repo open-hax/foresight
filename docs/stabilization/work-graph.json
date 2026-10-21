@@ -927,5 +927,81 @@
       "sha256": "f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b",
       "bytes": 38579
     }
+  },
+  "e0_live_base_topology": {
+    "report": "docs/stabilization/e0-base-topology.md",
+    "overlay": "docs/stabilization/e0-base-topology.json",
+    "register": "docs/stabilization/e0-base-topology.csv",
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 441,
+        "MERGED": 1,
+        "CLOSED": 0
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 180,
+      "open_reported_base_differs_from_live_tip": 179,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 301,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 135
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 1,
+      "changed_open_head_or_reported_base_from_original_freeze": 5,
+      "pr_base_ref_target_differs_from_independent_tip": 0
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
+      "sha256": "bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e",
+      "bytes": 4203652,
+      "uncompressed_sha256": "c6ae119fe99d06dbd0256d75496ab2f47490ba67ba9a89692b25afc4201c8264",
+      "uncompressed_bytes": 26685701
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json",
+      "sha256": "835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd",
+      "bytes": 37487
+    }
+  },
+  "e0_review_route": {
+    "report": "docs/stabilization/e0-review-route.md",
+    "overlay": "docs/stabilization/e0-review-route.json",
+    "existing_sources": [
+      "riatzukiza/clio#3",
+      "open-hax/eta-mu#328",
+      "riatzukiza/eta-mu#22"
+    ],
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
+      "sha256": "bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e",
+      "bytes": 4203652,
+      "uncompressed_sha256": "c6ae119fe99d06dbd0256d75496ab2f47490ba67ba9a89692b25afc4201c8264",
+      "uncompressed_bytes": 26685701
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json",
+      "sha256": "835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd",
+      "bytes": 37487
+    }
+  },
+  "e0_root_caller_custody": {
+    "report": "docs/stabilization/e0-caller-custody.md",
+    "workflow": ".github/workflows/eta-mu-review.yml",
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/90caac8f69da54423ad8d1fbf54407b937b92c5a8e760540b6f6c36d6e09c7b1.json",
+      "sha256": "90caac8f69da54423ad8d1fbf54407b937b92c5a8e760540b6f6c36d6e09c7b1",
+      "bytes": 95458
+    },
+    "qualified": false,
+    "route_activated": false,
+    "forwarded_secret_names": [],
+    "hosted_result": null,
+    "existing_owner": "stabilization-e1"
   }
 }

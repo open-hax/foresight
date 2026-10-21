@@ -2,11 +2,14 @@
 
 Updated October 20, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [directory-bound segment ownership and hosted proof](e0-directory-binding.md).
+Latest execution: [442-source live-base topology audit](e0-base-topology.md) and
+[shared review-route source reconciliation](e0-review-route.md).
+Earlier [directory-bound segment ownership and hosted proof](e0-directory-binding.md)
+retains its original source window.
 Earlier [shared-ledger corrections](e0-execution.md) retain their original source window.
 The [previous global refresh](e0-refresh.md) retains 442 frozen identities,
 441 open and one native merge at its observation window.
-Five open PRs changed head/base, plus the merged PR's changed head. E0 remains
+Five open PRs changed reported head/base fields, plus the merged PR's changed head. E0 remains
 in breakdown; M0–M7 remain unqualified. CMS/Cephalon agents remain paused.
 
 Versioned checkpoint: [Foresight #142](https://github.com/open-hax/foresight/pull/142),
@@ -193,6 +196,44 @@ all 23 consumer pins and original work remain preserved. M0–M7 stay unqualifie
 The [immutable directory-binding execution attempt](../../.ημ/stabilization/snapshots/f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b.json)
 binds exact source, executed CI trees, source custody and both Rheos readbacks.
 
+## Live-base topology and existing review-route qualification — October 20
+
+The [fresh 442-row overlay](e0-base-topology.json) confirms 441 open / 1 merged and
+five changed open reported head/base pairs against the original freeze.
+Only Clio #5's published repair head changed since the prior global refresh.
+Two stable PR/ref passes cover 144 live base refs: 179 open PRs have a reported
+base differing from the live tip; all PR base-ref targets match independent
+refs. These are field distinctions, not 179 new branch movements.
+
+Of 441 open PRs, 301 proposed merges match live B/H, five name an older base,
+and 135 are natively CONFLICTING with no proposed merge. Native Git object
+readbacks reproduce all five old-base parent pairs. Proposed/matching is never
+executed/tested; every audit row retains null tested candidate and unqualified
+status. Existing E0 owns the holds; no new tasks, merges or source rewrites.
+
+[Review-route custody](e0-review-route.md) locates actual PR328 isolation code,
+main's newer verifier and the existing PR22 producer→publisher→hosted-proof
+chain. PR22 has actual unanimous planning approval and executed candidate/tree
+proof, while successful carrier logs retain real warnings. Runtime readiness,
+source composition, protected adoption and actual Clio enrollment remain held.
+All 23 pins and prior source/ledgers remain intact; CMS/Cephalon remain paused.
+
+The [immutable live-base and reviewer-route attempt](../../.ημ/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json)
+binds both native passes, source custody, current holds and canonical readbacks.
+
+## Root caller credential correction — October 20
+
+[Caller custody](e0-caller-custody.md) removes the three App/webhook secret
+forwardings from the existing root reviewer caller, retaining deterministic
+gates, immutable pins and read-only permissions. The legacy reviewer remains
+unavailable until the existing producer/publisher route is implemented and
+qualified; no gate is waived. Local root laws, validation, lint and Rheos drift
+checks pass. Hosted execution remains unobserved in this checkpoint.
+
+The [immutable caller supplement](../../.ημ/stabilization/snapshots/90caac8f69da54423ad8d1fbf54407b937b92c5a8e760540b6f6c36d6e09c7b1.json)
+binds exact before/after configuration, local verification and the existing E1
+comment/readback. Earlier topology and source-custody artifacts remain intact.
+
 ## Canonical delivery relationships
 
 **CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.
@@ -224,4 +265,4 @@ outside this registration result.
 
 ## Next action
 
-Continue existing Clio #5 and Foresight #142 review settlement at their exact current heads; retain the MiMo-route and source-bound gate obligations before any merge or consumer-pin update.
+Continue existing E0 reconciliation using live B/H and actual executed-candidate evidence; preserve main verifier/source and settle the existing producer/readiness dependency before any review-route activation or consumer-pin update.

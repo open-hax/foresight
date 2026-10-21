@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "e0-review-route-source-reconciliation",
+  "observed_at": "2026-10-21T01:50:25.607155+00:00",
+  "coordination": [
+    "stabilization-e0",
+    "stabilization-e1"
+  ],
+  "owner": "codex, through existing work anchors",
+  "sources": {
+    "clio3": "5d4f98b29d1253fea8483bd2fd16893421041e5b",
+    "eta_main": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "eta328": "e5dff6330f14e08b0698761865b11ae8730f7391",
+    "eta22": "e9666aa2dc9e593dce783be430b80d9bed0de6ae",
+    "eta22_base": "fefa6dd52135e1045b1ad56802a346dc0779970c"
+  },
+  "clio3": {
+    "native_old_test_run": 37974666512,
+    "actual_failure": "missing App credentials on October9; credential names later observed, no installed/current route qualification inferred",
+    "historical_acceptance": "native October9 same-writer trust decision and withdrawn finding retained; does not override current supplied candidate/signer separation policy",
+    "current_canonical_gate": "blocked; legacy Handled/P1 and review convergence remain obligations",
+    "workflow_pin": "45ec644c2d15ed511e9bc1e797d1b4073b63dbfc"
+  },
+  "eta328": {
+    "implementation": "real controller and isolated publication job; absent from accepted main; source not adopted by this audit",
+    "canonical_gate": "BLOCKED:9P0/P1not-fixed,19without qualifying replies,1unresolved native thread,13unanswered body items,review convergence incomplete",
+    "actual_open_thread": "protected private Sol test/build not performed; environment and secret-name reads returned404, no absence or approval inferred",
+    "divergence_from_observed_main": {
+      "main_only_commits": 173,
+      "candidate_only_commits": 25
+    },
+    "adoption": "observe-only; no Services activation or caller enrollment",
+    "native_check_channels": "19passing channels observed, not a complete qualification"
+  },
+  "eta22": {
+    "native_planning_gate": "PASS: exact-head CodeRabbit+MiMo approvals,9passing check channels,4threads0unresolved,available cohort unanimous",
+    "proposed_and_executed_merge": "6dd07beb8341e83b4c7a2e708caac66c07031ab1",
+    "executed_jobs": [
+      116544220244,
+      116544220772
+    ],
+    "merge_tree_equals_head_tree": "7b16bc9946ea33a8149087ba4a0e7083ad0951f5",
+    "source_delta": "eight card/ledger paths; no producer/publisher implementation",
+    "whole_run_zero_warnings": false,
+    "warning_sources": "actual raw successful bundle/coverage logs retain npm/dependency/missing-bin/Actions warnings; code/compiler/kondo zero-warning summaries remain distinct",
+    "baseline_relation": "accepted main7112 descends from fefa by69commits; retain all accepted source and both exact ledger suffixes",
+    "merged": false,
+    "readiness_changed": false
+  },
+  "existing_story_chain": [
+    {
+      "uuid": "cf32641a-b336-407e-b68b-c75ec7d20dbb",
+      "role": "anonymous producer",
+      "status": "breakdown",
+      "points": 2
+    },
+    {
+      "uuid": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+      "role": "trusted collector/publisher/status",
+      "status": "breakdown",
+      "points": 5
+    },
+    {
+      "uuid": "164c2de7-7495-4738-94e1-a81167edefb0",
+      "role": "existing actual hosted proof",
+      "status": "breakdown in proposed PR22; ready at accepted main source",
+      "points": "3 proposed in PR22"
+    }
+  ],
+  "composition_holds": [
+    "Preserve main production discovery/invocation/full-input/recovery verifier rather than replacing it with old PR328 whole workflow.",
+    "PR328 controller CheckRun and PR22 proposed App3152464 publication status are different authority protocols; reconcile on existing owners before adoption.",
+    "Ordinary targets stay disabled until actual source/custody/grants/required App binding and hosted proof; planning/native green is not runtime adoption.",
+    "All four fefa ledger prefixes and both unique main/PR22 suffixes must survive source composition; no backdated/imported history."
+  ],
+  "already_accepted_warning_corrections": [
+    "5521dc2293cfa4e25e5105f593110b04fc94dc22",
+    "f3aeb7ed1463ad17fdb92533dd67b37ed156a734"
+  ],
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
+    "sha256": "bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e",
+    "bytes": 4203652,
+    "uncompressed_sha256": "c6ae119fe99d06dbd0256d75496ab2f47490ba67ba9a89692b25afc4201c8264",
+    "uncompressed_bytes": 26685701
+  },
+  "new_tasks": 0,
+  "privileged_workflow_reruns": 0,
+  "secret_values_read": 0,
+  "source_mutations": 0,
+  "qualified": false,
+  "cms_cephalon": "paused"
+}

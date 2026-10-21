@@ -34,8 +34,8 @@ jobs:
         run_gate migration_pack env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s docs/migrations/eta-mu-breakdown/checks -p check_pack.py
         run_gate receipt_history npx --yes nbb@1.4.207 -cp src:scripts scripts/evidence.clj verify-receipts --base "${PR_BASE_SHA}" --at "${PR_HEAD_SHA}"
         run_gate diff_hygiene git diff --check "${PR_BASE_SHA}...HEAD"
-    # Least privilege: forward only the secrets the review job consumes.
-    secrets:
-      ETA_MU_APP_ID: ${{ secrets.ETA_MU_APP_ID }}
-      ETA_MU_APP_PRIVATE_KEY: ${{ secrets.ETA_MU_APP_PRIVATE_KEY }}
-      DISCORD_REVIEW_WEBHOOK_URL: ${{ secrets.DISCORD_REVIEW_WEBHOOK_URL }}
+    # Candidate jobs receive only the read-only automatic GitHub token. Do not
+    # forward App signing credentials or publication webhooks to this runner.
+    # This legacy workflow requires App credentials before model execution;
+    # its reviewer remains unavailable until the existing anonymous producer /
+    # trusted publisher route is implemented and independently qualified.

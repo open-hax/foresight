@@ -571,3 +571,13 @@
   spore: none
   receipt-refs: 4c28d5853e659e58cadce2f40efc0b2f6ba16dc16dbcbcfc93b824d75c698bad
   note: Keep actual descriptor identity and traversal capability separate from pathname checks. Full native review pagination exposes body-only obligations; typed JVM function replacements must preserve primitive signatures. Failed probes remain evidence. Existing source custody and review skills cover the pattern; no new spore or promotion.
+
+- ts: 2026-10-21T01:56:09.219021+00:00
+  session: codex/stabilization-portfolio
+  task: Audit live base/candidate topology and recover existing reviewer implementation authority
+  p-efficiency: 0.86
+  p-friction: 0.55
+  p-skill-candidate: 0.85
+  spore: 20261021-live-ref-and-tested-merge-custody.md
+  receipt-refs: 2088bade161bfa2c14d33c01d3aef22afa66cda87305ad6e02aabf7b1a44d5d4
+  note: Retain reported PR bases, live refs, proposed merges and actual tested trees as separate evidence. Source discovery recovered existing isolated publisher and reviewed card chain while exposing unadopted protocol differences and historical warnings. Verify canonical card mutations semantically while demanding exact ledger prefixes. One spore incubated; no promotion.
