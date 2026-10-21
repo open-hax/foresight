@@ -1,13 +1,20 @@
 # Foresight Stabilization — Persistent Tracker
 
-Updated October 20, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
+Updated October 21, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [completed native bundle and additive receipt adjudication](e0-receipt-adjudication.md).
+Latest execution: [portable publisher core and refreshed census](e0-publisher-execution.md).
+The 05:01:54–05:02:15 UTC sweep retains 442 frozen identities, 441 open,
+one observed merge and five changed open head/base pairs; no tuple moved since
+03:59. Existing publisher source is now in progress at eta-mu #362, with
+14 tests / 216 assertions and 22 NBB/Babashka parity cases passing. The full
+publisher, native review, hosted proof and adoption remain unfinished.
+
+Earlier [completed native bundle and additive receipt adjudication](e0-receipt-adjudication.md).
 The full eta-mu bundle passed at source `1635d310`; current child `fb8bf0e1`
 adds twelve valid native receipt envelopes while retaining 71 invalid historical
 rows and the open receipt finding. No historical record is rewritten or admitted
 automatically. Earlier [four-carrier CI isolation](e0-ci-isolation.md).
-The fresh 03:58:42–03:59:00 UTC sweep retains 442 frozen identities, 441 open,
+The earlier 03:58:42–03:59:00 UTC sweep retains 442 frozen identities, 441 open,
 one observed merge and five changed open reported head/base pairs; both passes
 are stable and no tuple changed since the 03:01 audit. PR 361 now removes App
 custody from four deterministic CI carriers; actual hosted execution is recorded

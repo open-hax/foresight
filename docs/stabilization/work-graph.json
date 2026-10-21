@@ -1141,5 +1141,33 @@
     "qualified": false,
     "root_owner": "stabilization-e0",
     "agents": "CMS/Cephalon paused"
+  },
+  "e0_publisher_core_execution": {
+    "report": "docs/stabilization/e0-publisher-execution.md",
+    "overlay": "docs/stabilization/e0-publisher-execution.json",
+    "census": "docs/stabilization/e0-publisher-execution-census.json",
+    "register": "docs/stabilization/e0-publisher-execution-census.csv",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 362,
+      "head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+      "green": "754d7b639c8e889c4266a9d58c2f75e6ff1906f5",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "dependency_pr": 361
+    },
+    "publisher_owner": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "publisher_state": "in_progress",
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/d084d82a56660ec793e141ee100ffb964a5778ef0987c048afcc8f8027d78e61.json.gz",
+      "sha256": "d084d82a56660ec793e141ee100ffb964a5778ef0987c048afcc8f8027d78e61",
+      "bytes": 951264,
+      "raw_sha256": "8a8aa13f4a7b0492ea32b2bab8a7030db3a05fd7a770e0bfb072be7e18fbe13c",
+      "raw_bytes": 4316398,
+      "captures": 99
+    },
+    "full_publisher_complete": false,
+    "qualified": false,
+    "root_owner": "stabilization-e0",
+    "agents": "CMS/Cephalon paused"
   }
 }

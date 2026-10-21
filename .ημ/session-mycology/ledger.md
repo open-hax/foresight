@@ -631,3 +631,13 @@
   spore: 20261021-source-schema-before-append.md
   receipt-refs: 75fb3b2c1d39ece9e4939bb2b96258bee97545921c78367c6d304d94d7309d39
   note: A generic flat template omitted the local repo field and used offset-string timestamps. Native package construction plus validation diagnoses all eleven new invalid rows, while append-only history stays unchanged and failed. New valid adjudications attest source/format facts, not retroactive execution approval. Shape validation also cannot prove repository/source binding: an overbroad temporary helper replacement was caught before append by an independent subject/producer check. Use source-owned builders, negative controls and semantic binding guards before irreversible appends. Retain all failures and historical states. One project-local spore incubated; no promotion or canonical skill mutation.
+
+- ts: 2026-10-21T05:40:17.955156Z
+  session: codex/stabilization-portfolio
+  task: Execute portable publisher core and refresh the frozen cohort
+  p-efficiency: 0.77
+  p-friction: 0.64
+  p-skill-candidate: 0.59
+  spore: none
+  receipt-refs: 923bc9087d54f01dbfb80ce1195b410697e16dfc6bbbbb1a5b05e6c595fa02c8
+  note: Test real accepted interface shapes and both legal and illegal paths before treating a green fixture as meaningful. Separate collector source from pinned producer source, shared-M history from per-PR intents, and raw publication envelopes from native payloads. Preserve initial incompatible fixtures, schema/tool failures, review counterexamples, unknown outcomes and actual warning diagnostics. Internal source review and local process proofs confer no native authentication, hosted adoption or full-story completion. Existing source-schema, custody and terminal-truth spores cover the pattern; no second spore or promotion. Full stabilization remains active and product agents paused.

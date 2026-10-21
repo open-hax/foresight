@@ -1,0 +1,1034 @@
+{
+  "schema_version": 1,
+  "kind": "e0-trusted-publication-core-execution",
+  "at": "2026-10-21T05:38:00.356350+00:00",
+  "root_parent": "3b272e9ecd472e3af02ff420c6e1297a6cf7c258",
+  "census": {
+    "report": "docs/stabilization/e0-publisher-execution-census.json",
+    "register": "docs/stabilization/e0-publisher-execution-census.csv",
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/f28f64f2074f705d9d78986cc837a7ed7fa3703978e17a7bc12f514b1a31ec52.json.gz",
+      "sha256": "f28f64f2074f705d9d78986cc837a7ed7fa3703978e17a7bc12f514b1a31ec52",
+      "bytes": 143156,
+      "raw_sha256": "164070313766529babafe732587a35ef856c3cd1ba14bc9e4ca6832cbec8767e",
+      "raw_bytes": 2167130
+    },
+    "window": [
+      "2026-10-21T05:01:54.029968+00:00",
+      "2026-10-21T05:02:15.191279+00:00"
+    ],
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 441,
+        "MERGED": 1,
+        "CLOSED": 0
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 180,
+      "open_reported_base_differs_from_live_tip": 179,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 301,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 135
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 1,
+      "changed_open_head_or_reported_base_from_freeze": 5,
+      "changed_source_or_proposed_merge_since_0359": 0
+    }
+  },
+  "producer_dependency": {
+    "pr": "https://github.com/open-hax/eta-mu/pull/361",
+    "head": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "current_source_completed_bundle": {
+      "observed_at": "2026-10-21T05:02:52.087900+00:00",
+      "result": "native_completed_success",
+      "run": 39545026096,
+      "job": 119041140691,
+      "head": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "executed_merge": "2be578cb53bccd26504ccb0afe7f6b1219bc5b0c",
+      "tree": "5d98fbd28127826d22b59ec43e411aae7b5e7cd1",
+      "run_started_at": "2026-10-21T04:37:08Z",
+      "native_updated_at": "2026-10-21T04:55:53Z",
+      "registered_review_owner": {
+        "tests": 338,
+        "pass": 338,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "node_test_summaries": [
+        {
+          "tests": 338,
+          "pass": 338,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 377,
+          "pass": 377,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 34,
+          "pass": 34,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 23,
+          "pass": 23,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 7,
+          "pass": 7,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 4,
+          "pass": 4,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 22,
+          "pass": 22,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      ],
+      "actual_cljs_suite_summaries": [
+        {
+          "tests": 10,
+          "assertions": 183
+        },
+        {
+          "tests": 8,
+          "assertions": 319
+        },
+        {
+          "tests": 6,
+          "assertions": 57
+        },
+        {
+          "tests": 194,
+          "assertions": 587
+        },
+        {
+          "tests": 10,
+          "assertions": 183
+        },
+        {
+          "tests": 29,
+          "assertions": 182
+        },
+        {
+          "tests": 80,
+          "assertions": 388
+        },
+        {
+          "tests": 78,
+          "assertions": 395
+        },
+        {
+          "tests": 78,
+          "assertions": 395
+        },
+        {
+          "tests": 212,
+          "assertions": 1219
+        },
+        {
+          "tests": 212,
+          "assertions": 1219
+        },
+        {
+          "tests": 142,
+          "assertions": 607
+        },
+        {
+          "tests": 70,
+          "assertions": 172
+        },
+        {
+          "tests": 47,
+          "assertions": 120
+        },
+        {
+          "tests": 95,
+          "assertions": 259
+        },
+        {
+          "tests": 95,
+          "assertions": 259
+        },
+        {
+          "tests": 78,
+          "assertions": 332
+        },
+        {
+          "tests": 3,
+          "assertions": 6
+        },
+        {
+          "tests": 3,
+          "assertions": 6
+        },
+        {
+          "tests": 17,
+          "assertions": 64
+        },
+        {
+          "tests": 17,
+          "assertions": 64
+        }
+      ],
+      "workspace_gate_labels": [
+        "\u2713 review-workflow (39.5s)",
+        "\u2713 assessment-workflows (217.6s)",
+        "\u2713 legacy-ai-catalog (1.1s)",
+        "\u2713 contract-guard (0.1s)",
+        "\u2713 eta-mu (25.2s)",
+        "\u2713 clio (86.4s)",
+        "\u2713 rheos (22.7s)",
+        "\u2713 sol (24.3s)",
+        "\u2713 terminal-ui (14.8s)",
+        "\u2713 turn-processor (15.6s)",
+        "\u2713 extensions (12.8s)",
+        "\u2713 protocols (29.5s)",
+        "\u2713 chat-ui (16.2s)",
+        "\u2713 axxium (15.5s)",
+        "\u2713 kanban-legacy (1.3s)"
+      ],
+      "compiler_builds": [
+        "2026-10-21T04:38:18.5647240Z [:apply-patch] Build completed. (52 files, 5 compiled, 0 warnings, 8.50s)",
+        "2026-10-21T04:38:23.7956238Z [:bootstrap] Build completed. (48 files, 4 compiled, 0 warnings, 5.23s)",
+        "2026-10-21T04:38:28.3865126Z [:chronos] Build completed. (49 files, 5 compiled, 0 warnings, 4.59s)",
+        "2026-10-21T04:38:34.1070369Z [:contract-runtime] Build completed. (62 files, 14 compiled, 0 warnings, 5.72s)",
+        "2026-10-21T04:38:38.9576173Z [:contract-runtime-v2] Build completed. (64 files, 15 compiled, 0 warnings, 4.85s)",
+        "2026-10-21T04:38:42.6647783Z [:custom-providers] Build completed. (48 files, 4 compiled, 0 warnings, 3.71s)",
+        "2026-10-21T04:38:46.2376383Z [:graph-memory] Build completed. (54 files, 5 compiled, 0 warnings, 3.57s)",
+        "2026-10-21T04:38:49.6270499Z [:image-render] Build completed. (53 files, 4 compiled, 0 warnings, 3.39s)",
+        "2026-10-21T04:38:53.3220950Z [:lisp-decomp-nudge] Build completed. (49 files, 5 compiled, 0 warnings, 3.69s)",
+        "2026-10-21T04:38:57.3808957Z [:opencode-global-instructions] Build completed. (62 files, 14 compiled, 0 warnings, 4.06s)",
+        "2026-10-21T04:39:01.7814588Z [:opmf-contract-gate] Build completed. (64 files, 15 compiled, 0 warnings, 4.40s)",
+        "2026-10-21T04:39:06.0057956Z [:receipt-river] Build completed. (64 files, 16 compiled, 0 warnings, 4.22s)",
+        "2026-10-21T04:39:09.8965636Z [:session-mycology] Build completed. (54 files, 6 compiled, 0 warnings, 3.89s)",
+        "2026-10-21T04:39:13.5379078Z [:task-timing] Build completed. (48 files, 4 compiled, 0 warnings, 3.64s)",
+        "2026-10-21T04:39:17.0827667Z [:websearch-open-hax] Build completed. (53 files, 5 compiled, 0 warnings, 3.54s)",
+        "2026-10-21T04:39:33.0199631Z [:opencode-apply-patch] Build completed. (52 files, 5 compiled, 0 warnings, 11.79s)",
+        "2026-10-21T04:39:39.1414082Z [:opencode-bootstrap] Build completed. (50 files, 5 compiled, 0 warnings, 6.12s)",
+        "2026-10-21T04:39:43.6091573Z [:opencode-chronos] Build completed. (50 files, 5 compiled, 0 warnings, 4.47s)",
+        "2026-10-21T04:39:49.3467291Z [:opencode-contract-runtime] Build completed. (62 files, 14 compiled, 0 warnings, 5.74s)",
+        "2026-10-21T04:39:54.1369272Z [:opencode-contract-runtime-v2] Build completed. (64 files, 15 compiled, 0 warnings, 4.79s)",
+        "2026-10-21T04:39:58.1103557Z [:opencode-custom-providers] Build completed. (50 files, 5 compiled, 0 warnings, 3.97s)",
+        "2026-10-21T04:40:03.1469675Z [:opencode-graph-memory] Build completed. (54 files, 5 compiled, 0 warnings, 5.04s)",
+        "2026-10-21T04:40:07.5032036Z [:opencode-image-render] Build completed. (54 files, 5 compiled, 0 warnings, 4.36s)",
+        "2026-10-21T04:40:11.1487351Z [:opencode-lisp-decomp-nudge] Build completed. (50 files, 5 compiled, 0 warnings, 3.65s)",
+        "2026-10-21T04:40:15.9136428Z [:opencode-opencode-global-instructions] Build completed. (62 files, 14 compiled, 0 warnings, 4.76s)",
+        "2026-10-21T04:40:20.5246263Z [:opencode-opmf-contract-gate] Build completed. (62 files, 14 compiled, 0 warnings, 4.61s)",
+        "2026-10-21T04:40:24.9614649Z [:opencode-receipt-river] Build completed. (64 files, 16 compiled, 0 warnings, 4.44s)",
+        "2026-10-21T04:40:29.0819216Z [:opencode-session-mycology] Build completed. (54 files, 6 compiled, 0 warnings, 4.12s)",
+        "2026-10-21T04:40:33.4216349Z [:opencode-task-timing] Build completed. (50 files, 5 compiled, 0 warnings, 4.34s)",
+        "2026-10-21T04:40:37.5605367Z [:opencode-websearch-open-hax] Build completed. (53 files, 5 compiled, 0 warnings, 4.14s)",
+        "2026-10-21T04:42:36.6328615Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 15.33s)",
+        "2026-10-21T04:42:42.5344681Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 5.88s)",
+        "2026-10-21T04:43:11.6325063Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 15.36s)",
+        "2026-10-21T04:43:16.4364922Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 4.78s)",
+        "2026-10-21T04:43:44.4146874Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 15.02s)",
+        "2026-10-21T04:43:50.2246998Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 5.78s)",
+        "2026-10-21T04:45:29.6694068Z [:test] Build completed. (204 files, 203 compiled, 0 warnings, 9.55s)",
+        "2026-10-21T04:47:03.0964850Z [:test] Build completed. (118 files, 117 compiled, 0 warnings, 26.70s)",
+        "2026-10-21T04:47:24.8787941Z [:test] Build completed. (162 files, 161 compiled, 0 warnings, 9.31s)",
+        "2026-10-21T04:47:49.6314919Z [:test] Build completed. (216 files, 215 compiled, 0 warnings, 11.63s)",
+        "2026-10-21T04:48:04.5587481Z [:test] Build completed. (82 files, 81 compiled, 0 warnings, 5.84s)",
+        "2026-10-21T04:48:20.1926318Z [:test] Build completed. (71 files, 70 compiled, 0 warnings, 7.51s)",
+        "2026-10-21T04:48:32.8475328Z [:node-test] Build completed. (90 files, 89 compiled, 0 warnings, 7.83s)",
+        "2026-10-21T04:48:50.7564443Z [:test] Build completed. (140 files, 139 compiled, 0 warnings, 8.80s)",
+        "2026-10-21T04:48:54.7903575Z [:lib] Build completed. (112 files, 103 compiled, 0 warnings, 3.94s)",
+        "2026-10-21T04:49:17.8230224Z [:test] Build completed. (59 files, 58 compiled, 0 warnings, 6.97s)",
+        "2026-10-21T04:49:34.1277987Z [:test] Build completed. (76 files, 75 compiled, 0 warnings, 6.82s)",
+        "2026-10-21T04:50:24.4734166Z packages/extensions build: [:apply-patch] Build completed. (52 files, 1 compiled, 0 warnings, 30.80s)",
+        "2026-10-21T04:50:27.2864207Z packages/chat-ui build: [:lib] Build completed. (80 files, 78 compiled, 0 warnings, 36.29s)",
+        "2026-10-21T04:50:38.1164588Z packages/extensions build: [:bootstrap] Build completed. (48 files, 1 compiled, 0 warnings, 13.61s)",
+        "2026-10-21T04:50:49.8234225Z packages/extensions build: [:chronos] Build completed. (49 files, 1 compiled, 0 warnings, 11.72s)",
+        "2026-10-21T04:50:51.1604319Z packages/axxium build: [:server] Build completed. (73 files, 20 compiled, 0 warnings, 60.32s)",
+        "2026-10-21T04:51:05.7896912Z packages/contracts/output build: [:output-contracts] Build completed. (77 files, 33 compiled, 0 warnings, 54.57s)",
+        "2026-10-21T04:51:06.7932856Z packages/extensions build: [:contract-runtime] Build completed. (62 files, 1 compiled, 0 warnings, 16.96s)",
+        "2026-10-21T04:51:17.3169595Z packages/extensions build: [:contract-runtime-v2] Build completed. (64 files, 1 compiled, 0 warnings, 10.51s)",
+        "2026-10-21T04:51:26.9734314Z packages/extensions build: [:custom-providers] Build completed. (48 files, 1 compiled, 0 warnings, 9.65s)",
+        "2026-10-21T04:51:37.5974270Z packages/extensions build: [:graph-memory] Build completed. (54 files, 1 compiled, 0 warnings, 10.63s)",
+        "2026-10-21T04:51:39.7494240Z packages/fork-tax build: [:fork-tax] Build completed. (50 files, 6 compiled, 0 warnings, 38.06s)",
+        "2026-10-21T04:51:47.1897151Z packages/extensions build: [:image-render] Build completed. (53 files, 1 compiled, 0 warnings, 9.59s)",
+        "2026-10-21T04:51:55.4691895Z packages/extensions build: [:lisp-decomp-nudge] Build completed. (49 files, 1 compiled, 0 warnings, 8.28s)",
+        "2026-10-21T04:52:06.1490186Z packages/extensions build: [:opencode-global-instructions] Build completed. (62 files, 1 compiled, 0 warnings, 10.67s)",
+        "2026-10-21T04:52:08.8975647Z packages/receipt-river build: [:receipt-river] Build completed. (59 files, 15 compiled, 0 warnings, 36.31s)",
+        "2026-10-21T04:52:10.5992523Z packages/contracts/output build: [:cli] Build completed. (79 files, 35 compiled, 0 warnings, 48.38s)",
+        "2026-10-21T04:52:16.6434800Z packages/extensions build: [:opmf-contract-gate] Build completed. (64 files, 1 compiled, 0 warnings, 10.49s)",
+        "2026-10-21T04:52:29.6298208Z packages/extensions build: [:receipt-river] Build completed. (64 files, 1 compiled, 0 warnings, 12.98s)",
+        "2026-10-21T04:52:41.1910033Z packages/extensions build: [:session-mycology] Build completed. (54 files, 1 compiled, 0 warnings, 11.55s)",
+        "2026-10-21T04:52:47.2399047Z packages/session-mycology build: [:session-mycology] Build completed. (55 files, 11 compiled, 0 warnings, 40.70s)",
+        "2026-10-21T04:52:50.0054469Z packages/extensions build: [:task-timing] Build completed. (48 files, 1 compiled, 0 warnings, 8.81s)",
+        "2026-10-21T04:52:57.6754384Z packages/extensions build: [:websearch-open-hax] Build completed. (53 files, 1 compiled, 0 warnings, 7.66s)",
+        "2026-10-21T04:52:58.4634189Z packages/sol build: [:server] Build completed. (202 files, 185 compiled, 0 warnings, 24.48s)",
+        "2026-10-21T04:53:01.5034417Z packages/turn-processor build: [:turn-processor] Build completed. (58 files, 14 compiled, 0 warnings, 37.63s)",
+        "2026-10-21T04:53:11.7688776Z packages/extensions build: [:opencode-apply-patch] Build completed. (52 files, 0 compiled, 0 warnings, 7.58s)",
+        "2026-10-21T04:53:15.2700922Z packages/extensions build: [:opencode-bootstrap] Build completed. (50 files, 0 compiled, 0 warnings, 3.50s)",
+        "2026-10-21T04:53:17.9427463Z packages/extensions build: [:opencode-chronos] Build completed. (50 files, 0 compiled, 0 warnings, 2.67s)",
+        "2026-10-21T04:53:21.1929002Z packages/extensions build: [:opencode-contract-runtime] Build completed. (62 files, 0 compiled, 0 warnings, 3.25s)",
+        "2026-10-21T04:53:23.8031004Z packages/extensions build: [:opencode-contract-runtime-v2] Build completed. (64 files, 0 compiled, 0 warnings, 2.61s)",
+        "2026-10-21T04:53:25.9949544Z packages/extensions build: [:opencode-custom-providers] Build completed. (50 files, 0 compiled, 0 warnings, 2.19s)",
+        "2026-10-21T04:53:28.1958383Z packages/extensions build: [:opencode-graph-memory] Build completed. (54 files, 0 compiled, 0 warnings, 2.20s)",
+        "2026-10-21T04:53:30.3767470Z packages/extensions build: [:opencode-image-render] Build completed. (54 files, 0 compiled, 0 warnings, 2.18s)",
+        "2026-10-21T04:53:32.4389082Z packages/extensions build: [:opencode-lisp-decomp-nudge] Build completed. (50 files, 0 compiled, 0 warnings, 2.06s)",
+        "2026-10-21T04:53:34.8889717Z packages/extensions build: [:opencode-opencode-global-instructions] Build completed. (62 files, 0 compiled, 0 warnings, 2.45s)",
+        "2026-10-21T04:53:37.1893186Z packages/extensions build: [:opencode-opmf-contract-gate] Build completed. (62 files, 0 compiled, 0 warnings, 2.30s)",
+        "2026-10-21T04:53:39.5313011Z packages/extensions build: [:opencode-receipt-river] Build completed. (64 files, 0 compiled, 0 warnings, 2.34s)",
+        "2026-10-21T04:53:41.7044060Z packages/extensions build: [:opencode-session-mycology] Build completed. (54 files, 0 compiled, 0 warnings, 2.17s)",
+        "2026-10-21T04:53:43.8871763Z packages/extensions build: [:opencode-task-timing] Build completed. (50 files, 0 compiled, 0 warnings, 2.18s)",
+        "2026-10-21T04:53:46.0400428Z packages/extensions build: [:opencode-websearch-open-hax] Build completed. (53 files, 0 compiled, 0 warnings, 2.15s)",
+        "2026-10-21T04:54:18.2794197Z packages/terminal-ui build: [:terminal-ui] Build completed. (57 files, 12 compiled, 0 warnings, 23.57s)",
+        "2026-10-21T04:54:23.0658360Z packages/rheos build: [:server] Build completed. (111 files, 53 compiled, 0 warnings, 22.54s)",
+        "2026-10-21T04:54:31.3228770Z packages/rheos build: [:cli] Build completed. (116 files, 57 compiled, 0 warnings, 8.24s)",
+        "2026-10-21T04:54:37.0542409Z packages/rheos build: [:github-sync] Build completed. (75 files, 28 compiled, 0 warnings, 5.73s)",
+        "2026-10-21T04:54:45.5550433Z packages/rheos build: [:app] Build completed. (95 files, 49 compiled, 0 warnings, 8.50s)",
+        "2026-10-21T04:55:08.2121082Z packages/eta-mu build: [:cli] Build completed. (166 files, 113 compiled, 0 warnings, 18.50s)"
+      ],
+      "actual_carrier_warning_lines": [
+        "2026-10-21T04:37:33.9490042Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'",
+        "2026-10-21T04:37:33.9491609Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+        "2026-10-21T04:37:33.9493606Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+        "2026-10-21T04:37:33.9497000Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'",
+        "2026-10-21T04:37:33.9500744Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+        "2026-10-21T04:37:33.9503327Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'",
+        "2026-10-21T04:37:34.1965459Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'",
+        "2026-10-21T04:37:34.1968488Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+        "2026-10-21T04:37:34.2052134Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+        "2026-10-21T04:37:34.2055064Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'",
+        "2026-10-21T04:37:34.2105485Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+        "2026-10-21T04:37:34.2107672Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'",
+        "2026-10-21T04:55:50.4009019Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02, DeLaGuardo/setup-clojure@ada62bb3282a01a296659d48378b812b8e097360, pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      ],
+      "strict_whole_carrier_zero_warning": false,
+      "artifact": {
+        "id": 12321835602,
+        "name": "eta-mu-sandbox-2be578cb53bccd26504ccb0afe7f6b1219bc5b0c",
+        "size_in_bytes": 313399759,
+        "url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12321835602",
+        "archive_download_url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12321835602/zip",
+        "expired": false,
+        "created_at": "2026-10-21T04:55:49Z",
+        "expires_at": "2026-11-20T04:55:40Z",
+        "updated_at": "2026-10-21T04:55:49Z",
+        "digest": "sha256:b1529415aaf3599323f72ddeeb8134bb1a31322ac1b6160e623eac9c91c2e06d",
+        "workflow_run": {
+          "id": 39545026096,
+          "repository_id": 1189985055,
+          "head_repository_id": 1401249220,
+          "head_branch": "feat/anonymous-review-producer-20261021",
+          "head_sha": "fb8bf0e18b0aac9179e821952adfa7f257c5160f"
+        }
+      },
+      "artifact_bytes_downloaded_or_restore_executed": false,
+      "logs_sha256": "81dbbd822b50bc15a1e8cfc70f44aeebb8796f8905030016e74361f3795c6991",
+      "limits": [
+        "Actual full registered suite pass is distinct from receipt-file admission; historical receipt validation still fails.",
+        "Native artifact metadata/digest observed; full bundle artifact bytes not downloaded/unpacked/restored.",
+        "No provider inference, review publication, protected-source adoption or merge qualification is inferred."
+      ]
+    },
+    "new_source_qualification": false
+  },
+  "publisher_source": {
+    "head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+    "source_parent": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+    "source_green": "754d7b639c8e889c4266a9d58c2f75e6ff1906f5",
+    "pr": "https://github.com/open-hax/eta-mu/pull/362",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "verified_files": [
+      {
+        "path": "receipts.edn",
+        "bytes": 606611,
+        "sha256": "c944477ae5113e955f41658727273216ba89ba74fcfdf4b476d13d764d3d70cf"
+      },
+      {
+        "path": "kanban/.events/ledger.edn",
+        "bytes": 1827003,
+        "sha256": "c334f3a6a91c9fe2eb48e0685c716596dd4fb0c524e727111e4e871a389c8d8e"
+      },
+      {
+        "path": "kanban/.kanban/board.json",
+        "bytes": 1315679,
+        "sha256": "bea0a1f92aad2c2aade15550ca4d0ba9f20775ecdde3e7b9cb093d15fa3e8c7e"
+      },
+      {
+        "path": "kanban/tasks/independently-admit-and-publish-review-evidence-from-trusted-default-code-1c707551.md",
+        "bytes": 21851,
+        "sha256": "f8d24a01f3c9c4c3cf229e8966d4c4660a5c3a6c754c933f26d75ce7c215f6b5"
+      },
+      {
+        "path": ".\u03b7\u03bc/session-mycology/ledger.md",
+        "bytes": 111519,
+        "sha256": "71e945443cd93befa1410e04523bb4dc1524942c36b3c2a099e6dc6650aa8627"
+      },
+      {
+        "path": ".\u03b7\u03bc/review-evidence/trusted-publication-core/ca4dd05a1dabaa4fa533677c48dce8b3020ed38d7909bf8b731e97aa9419ba9a.json.gz",
+        "bytes": 531645,
+        "sha256": "ca4dd05a1dabaa4fa533677c48dce8b3020ed38d7909bf8b731e97aa9419ba9a"
+      },
+      {
+        "path": ".\u03b7\u03bc/review-evidence/trusted-publication-core/a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b.json.gz",
+        "bytes": 184989,
+        "sha256": "a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b"
+      },
+      {
+        "path": ".\u03b7\u03bc/review-evidence/trusted-publication-core/315e872800f0c25306cec8bc7e0823ef3139fbc270780023d6c505452bb64056.json.gz",
+        "bytes": 266072,
+        "sha256": "315e872800f0c25306cec8bc7e0823ef3139fbc270780023d6c505452bb64056"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_publication.cljc",
+        "bytes": 7327,
+        "sha256": "6e1c10df330b1cbc00eb350f36796e5745b4ef226799c1b927c14d0beccc4f3a"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc",
+        "bytes": 14458,
+        "sha256": "5deecfd960924927559c3020caf6b61873686fb510c1dd2a226cfe6f7e14386a"
+      },
+      {
+        "path": ".github/scripts/opencode_review_publish_test.cljs",
+        "bytes": 23651,
+        "sha256": "c9c99be1abb6a9774b707e11d78206d9ef9a1728467e954908efd34baffc7333"
+      },
+      {
+        "path": "scripts/test.bb",
+        "bytes": 6397,
+        "sha256": "ec917c573fa727ccae2a18223ced039afee473a4022c6550d4ccf8d2a4c150df"
+      }
+    ],
+    "all_12_full_commit_file_hashes_match": true,
+    "clean_owned_worktree": true,
+    "full_publisher_complete": false,
+    "publisher_state": "in_progress",
+    "native_review_or_adoption_qualified": false
+  },
+  "publisher_core": {
+    "commit": "754d7b639c8e889c4266a9d58c2f75e6ff1906f5",
+    "parent": "822e363dc75626cf9b1c2c2b799cc5fdb9db5834",
+    "files": [
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_publication.cljc",
+        "bytes": 7327,
+        "sha256": "6e1c10df330b1cbc00eb350f36796e5745b4ef226799c1b927c14d0beccc4f3a"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc",
+        "bytes": 14458,
+        "sha256": "5deecfd960924927559c3020caf6b61873686fb510c1dd2a226cfe6f7e14386a"
+      },
+      {
+        "path": ".github/scripts/opencode_review_publish_test.cljs",
+        "bytes": 23651,
+        "sha256": "c9c99be1abb6a9774b707e11d78206d9ef9a1728467e954908efd34baffc7333"
+      },
+      {
+        "path": "scripts/test.bb",
+        "bytes": 6397,
+        "sha256": "ec917c573fa727ccae2a18223ced039afee473a4022c6550d4ccf8d2a4c150df"
+      }
+    ],
+    "owning_suite": {
+      "tests": 14,
+      "assertions": 216,
+      "failures": 0,
+      "errors": 0
+    },
+    "portable_parity_cases": 22,
+    "full_cli": {
+      "tests": 194,
+      "assertions": 587,
+      "workflow_tests": 10,
+      "workflow_assertions": 183,
+      "compiler_warnings": 0,
+      "kondo_errors": 0,
+      "kondo_warnings": 0,
+      "inherited_fixture_diagnostic_retained": true
+    },
+    "internal_source_review": "PASS at exact file hashes; no native review or admission credit",
+    "full_publisher_complete": false,
+    "card_state": "in_progress",
+    "qualification": false,
+    "at": "2026-10-21T05:26:07.620231+00:00"
+  },
+  "child_source_verification": {
+    "result": "PASS",
+    "source_base": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+    "green_source": "754d7b639c8e889c4266a9d58c2f75e6ff1906f5",
+    "canonical_cards": 309,
+    "only_publisher_status_and_content_changed": [
+      {
+        "uuid": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+        "fields": [
+          "content",
+          "status"
+        ]
+      }
+    ],
+    "publisher_status": "in_progress",
+    "all_other_states_and_planning_preserved": true,
+    "reviewed_card_body_and_comments_preserved": true,
+    "existing_undated_readtime_fallbacks": [
+      "rheos-canonical-task-fold-and-snapshots",
+      "rheos-event-store-git-worldline-adr",
+      "rheos-git-commit-attribution-and-branch-fold",
+      "rheos-markdown-projection-push-pull-sync",
+      "4985bd7d-c027-4bca-8ae9-35aa21d7ba35",
+      "256c5dd5-1a65-4ad0-8087-80b8f9a69c77",
+      "7c44b3fc-7dbe-4c96-9125-4cce4ec4796e",
+      "0dd12d60-d7ea-43d0-8b1e-87e14c4e61dd",
+      "rheos-ledger-authoritative-projections",
+      "a343a87e-a96f-4df8-bffd-5c3ef331ad26",
+      "rheos-edn-config-and-card-selection"
+    ],
+    "live_relative_export_parity": true,
+    "all_four_ledger_prefixes": {
+      "receipts.edn": {
+        "preserved_bytes": 603350,
+        "sha256": "cdf51ffd23f301ee07e410c9b3351320de7ef4ff291466723dfa44699e3f0965",
+        "new_bytes": 3261
+      },
+      "kanban/.events/ledger.edn": {
+        "preserved_bytes": 1821001,
+        "sha256": "793d2e430cc1e0c52d4a253cc4a92f35779e433c6c99deb17dc63ea4e8b1860c",
+        "new_bytes": 6002
+      },
+      ".\u03b7\u03bc/session-mycology/ledger.md": {
+        "preserved_bytes": 110591,
+        "sha256": "9fdfcc8e74e9b781c9745da50acc61b177dbbe5a2b782f16da3e48fde8b91c07",
+        "new_bytes": 928
+      },
+      ".\u03b7\u03bc/session-reflections.edn": {
+        "preserved_bytes": 36581,
+        "sha256": "c2df5af102ffef348684a8d84edaa75cf8031264a1398a8c1e93a8255801d807",
+        "new_bytes": 0
+      }
+    },
+    "historical_drift_output_retained": true,
+    "new_drift_events": 0,
+    "source_changes_only_four_owned_core_files": true,
+    "all_other_package_workflow_dependency_policy_unchanged": true,
+    "immutable_evidence_digests": "PASS",
+    "new_receipt": {
+      "mode": "new",
+      "rows": 1,
+      "invalid": 0,
+      "errors": 0,
+      "valid": true
+    },
+    "whole_receipt_history": {
+      "mode": "full",
+      "rows": 349,
+      "invalid": 71,
+      "errors": 118,
+      "valid": false
+    },
+    "whole_receipt_exit": 1,
+    "full_publisher_complete": false,
+    "native_qualification": false
+  },
+  "child_worktree_cleanup": {
+    "removed": "/home/err/.local/share/foresight-worktrees/eta-trusted-review-publication",
+    "exists": false,
+    "registered": false,
+    "pushed_branch": "feat/trusted-review-publication-20261021",
+    "pushed_head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+    "primary_head": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+    "primary_unchanged": true,
+    "worktrees_after": "worktree /home/err/spaces/foresight/.git/modules/eta-mu\nHEAD 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90\ndetached\n\n"
+  },
+  "child_native_proofs": [
+    {
+      "kind": "pure-core",
+      "path": ".\u03b7\u03bc/review-evidence/trusted-publication-core/ca4dd05a1dabaa4fa533677c48dce8b3020ed38d7909bf8b731e97aa9419ba9a.json.gz",
+      "sha256": "ca4dd05a1dabaa4fa533677c48dce8b3020ed38d7909bf8b731e97aa9419ba9a",
+      "bytes": 531645,
+      "raw_sha256": "dc2e052930b2690f748b0ebb4a6303bcceee1129329df32c8078b37f7a3181cb",
+      "raw_bytes": 2772351,
+      "captures": 134
+    },
+    {
+      "sha256": "a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b",
+      "bytes": 184989,
+      "raw_sha256": "3c63178ed085f25b595cd55ea910f0946f84a7f4a8eb71d2a2ac30033c6f6195",
+      "raw_bytes": 1222004,
+      "captures": 108,
+      "kind": "runtime",
+      "path": ".\u03b7\u03bc/review-evidence/trusted-publication-core/a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b.json.gz"
+    },
+    {
+      "sha256": "315e872800f0c25306cec8bc7e0823ef3139fbc270780023d6c505452bb64056",
+      "bytes": 266072,
+      "raw_sha256": "6bab9d9cd8e65938572be4cdfd04262c70f2b0ad6b745fc4b4817b301a7d6065",
+      "raw_bytes": 1228258,
+      "captures": 241,
+      "source_files_verified": 180,
+      "cross_pr_assertions": 18,
+      "kind": "persistence",
+      "path": ".\u03b7\u03bc/review-evidence/trusted-publication-core/315e872800f0c25306cec8bc7e0823ef3139fbc270780023d6c505452bb64056.json.gz"
+    }
+  ],
+  "native_publisher_status": "open-hax/eta-mu#362  head 5610a2c\n  actionability history: UNAVAILABLE; threads retain finding obligations\n  coderabbit: rate-limited   checks: {:skip 4, :pending 9, :pass 6}\n  threads: 0 total, 0 unresolved; by severity {}; informational 0\n  exact-head approvals: #{}  observed commit binding: {}\n  completed code rounds: 0 / soft minimum 5  participants: #{\"coderabbit\" \"mimo\"}\n  codex quota-unavailable: native source 6308863857 request  scope account observed 2026-10-21T05:33:19Z retry-at-ms UNKNOWN\n  gate: BLOCKED\n    - No trusted exact-head APPROVED review meets the quorum\n    - 9 pending deterministic/required check(s)\n    - Review loop requires 5 completed rounds or unanimous current-head approval, with every finding settled\n",
+  "review_request": {
+    "operation": "canonical pr-flow request code / CodeRabbit",
+    "result": "No request sent: cooldown; retry after 2026-10-21T06:02:20.000Z",
+    "new_request_sent": false,
+    "coderabbit_retry_after": "2026-10-21T06:02:20.000Z",
+    "codex_account_boundary": "UNKNOWN; native notice 6308863857, no author retry",
+    "canonical_current_head_approval": false
+  },
+  "new_publisher_ci": {
+    "runs": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "workflow_runs": [
+            {
+              "id": 39550202583,
+              "name": "Muse review-context diagnostic",
+              "status": "completed",
+              "conclusion": "skipped",
+              "run_number": 155,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202583/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202583/logs",
+              "workflow_id": 321702546
+            },
+            {
+              "id": 39550202795,
+              "name": "Rheos GitHub Sync CI",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_number": 117,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202795/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202795/logs",
+              "workflow_id": 328154799
+            },
+            {
+              "id": 39550202738,
+              "name": "coverage",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_number": 977,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202738/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202738/logs",
+              "workflow_id": 250424035
+            },
+            {
+              "id": 39550202603,
+              "name": "rheos",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_number": 356,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202603/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202603/logs",
+              "workflow_id": 322430562
+            },
+            {
+              "id": 39550202681,
+              "name": "Sandbox bundle",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_number": 524,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202681/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202681/logs",
+              "workflow_id": 321657236
+            },
+            {
+              "id": 39550202557,
+              "name": "eta-mu-main-pr-gate",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_number": 527,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202557/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202557/logs",
+              "workflow_id": 250426957
+            },
+            {
+              "id": 39550202658,
+              "name": "OpenCode evidence PR review",
+              "status": "completed",
+              "conclusion": "success",
+              "run_number": 497,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202658/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202658/logs",
+              "workflow_id": 285820008
+            },
+            {
+              "id": 39550202596,
+              "name": "GitHub Events to Discord",
+              "status": "completed",
+              "conclusion": "success",
+              "run_number": 4969,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202596/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202596/logs",
+              "workflow_id": 286482693
+            },
+            {
+              "id": 39550202683,
+              "name": "CodeQL",
+              "status": "completed",
+              "conclusion": "success",
+              "run_number": 717,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202683/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202683/logs",
+              "workflow_id": 315364495
+            },
+            {
+              "id": 39550202752,
+              "name": "Sol CI",
+              "status": "completed",
+              "conclusion": "success",
+              "run_number": 328,
+              "jobs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202752/jobs",
+              "logs_url": "https://api.github.com/repos/open-hax/eta-mu/actions/runs/39550202752/logs",
+              "workflow_id": 321066790
+            }
+          ]
+        },
+        "isError": false
+      }
+    },
+    "bundle_jobs": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "jobs": [
+            {
+              "id": 119057415817,
+              "name": "bundle",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_id": 39550202681,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Check out full repository history",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Prepare revision-bound source bundle",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Set up Java 21",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Set up Node 24 for assessment evidence",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Set up pnpm 10.14.0",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Set up pinned Clojure CLI and clj-kondo",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Set up pinned Babashka",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Install, validate, test, and build",
+                  "status": "in_progress",
+                  "conclusion": null,
+                  "number": 9
+                },
+                {
+                  "name": "Collect generated outputs and portable toolchains",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 10
+                },
+                {
+                  "name": "Package optional dependency cache",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 11
+                },
+                {
+                  "name": "Upload sandbox bundle",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 12
+                },
+                {
+                  "name": "Upload optional dependency cache",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 13
+                },
+                {
+                  "name": "Preserve validation result",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 14
+                },
+                {
+                  "name": "Post Set up pnpm 10.14.0",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 25
+                },
+                {
+                  "name": "Post Set up Node 24 for assessment evidence",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 26
+                },
+                {
+                  "name": "Post Set up Java 21",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 27
+                },
+                {
+                  "name": "Post Check out full repository history",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 28
+                }
+              ]
+            }
+          ]
+        },
+        "isError": false
+      }
+    },
+    "review_jobs": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "jobs": [
+            {
+              "id": 119057416530,
+              "name": "OpenCode producer evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 39550202658,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Enforce truthful reusable review result",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                }
+              ]
+            },
+            {
+              "id": 119057417202,
+              "name": "Review pull request with OpenCode MiMo",
+              "status": "completed",
+              "conclusion": "skipped",
+              "run_id": 39550202658,
+              "logs_url": null,
+              "steps": null
+            },
+            {
+              "id": 119057417590,
+              "name": "Compile Muse tools and stage skills",
+              "status": "completed",
+              "conclusion": "skipped",
+              "run_id": 39550202658,
+              "logs_url": null,
+              "steps": null
+            },
+            {
+              "id": 119057461612,
+              "name": "Produce deterministic review evidence",
+              "status": "completed",
+              "conclusion": "skipped",
+              "run_id": 39550202658,
+              "logs_url": null,
+              "steps": null
+            }
+          ]
+        },
+        "isError": false
+      }
+    },
+    "scope": "Targeted first-page native readback at this capture. Full bundle 39550202681 / job 119057415817 is running and retained without restart. Ordinary fork inference/context jobs skipped; terminal success is supported-event handling only.",
+    "qualification": false
+  },
+  "interface_proofs": {
+    "runtime": {
+      "eta": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "muse": "c1369c223cf3c57e3e31934a6d746bfcdfe73f5a",
+      "independent_builds": 2,
+      "bytes": 144409,
+      "same_sha256": "d9fea235fddec9581ba1be959e596f32b82588f78cef5fd76d55f04d24b91030",
+      "pinned_smoke_assertions_each": 30,
+      "relocated_full_input_bytes": 69120,
+      "canonical_pages": 36,
+      "negative_controls": 9,
+      "model_callbacks": "inert fixtures only; no provider execution",
+      "same_pin_native_identity": false,
+      "root_muse_pin": "0b9a91492c8355e6933dc2164d35668cb76d9e60",
+      "offered_native_artifact_downloaded": false
+    },
+    "persistence": {
+      "accepted_owner": "eta-mu 7112c36440d180ca183d6a3f89661cee161fdae5 / packages/clio",
+      "source_files_verified": 180,
+      "cross_pr_shared_M_assertions": 18,
+      "cross_pr_numbers": [
+        361,
+        362
+      ],
+      "fake_POST_count": 1,
+      "actual_SIGKILL_before_response": true,
+      "unknown_outcome_no_retry": true,
+      "protected_shared_store_adoption": false,
+      "direct_clio_pin_durability_not_inherited": true,
+      "segments_are_not_shared_slot_locks": true
+    },
+    "actual_Muse_publisher_projection": "Pinned source actual publishReview; valid COMMENT+inline and APPROVE+empty; one inert fake call each; zero intercepted network/process attempts. No real review publication."
+  },
+  "knoxx_readonly_lookup": {
+    "runtime_status_only": true,
+    "memory_and_semantic_queries": "No matching prior worker route found in queried surfaces.",
+    "reviewer_identity_or_admission_proof": false,
+    "agent_or_runtime_mutation": false
+  },
+  "root_required_gate": {
+    "observed_head": "3b272e9ecd472e3af02ff420c6e1297a6cf7c258",
+    "run": 39546511735,
+    "deterministic": "success",
+    "context": "success",
+    "model": "failure at Require eta-mu app credentials",
+    "terminal_required_gate": "failure",
+    "signing_credentials_restored": false,
+    "merge_freeze": true
+  },
+  "root_code_tests": {
+    "scope": "Unchanged root runtime/test/workflow/manifest code; prior code-scoped checks retained, not rerun for prose/data.",
+    "tests": 36,
+    "assertions": 286,
+    "sources": 25,
+    "submodules": 23,
+    "invariants": 39,
+    "kondo_errors": 0,
+    "kondo_warnings": 0
+  },
+  "full_publisher_complete": false,
+  "remaining_publisher": [
+    "central accepted-default workflow and disabled registry",
+    "finite physical ZIP/CRC/member/byte/time decode admission",
+    "bounded authenticated native collection and actual source/build custody",
+    "real verifier/Muse/Clio effect adapters and persistent shared-store capability",
+    "durable review/status claim, current tuple wire guards and complete native readback",
+    "protected setup/default adoption, fixture hosted proof and later ordinary rollout"
+  ],
+  "native_evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/d084d82a56660ec793e141ee100ffb964a5778ef0987c048afcc8f8027d78e61.json.gz",
+    "sha256": "d084d82a56660ec793e141ee100ffb964a5778ef0987c048afcc8f8027d78e61",
+    "bytes": 951264,
+    "raw_sha256": "8a8aa13f4a7b0492ea32b2bab8a7030db3a05fd7a770e0bfb072be7e18fbe13c",
+    "raw_bytes": 4316398,
+    "captures": 99
+  },
+  "program": {
+    "root_owner": "stabilization-e0",
+    "E0": "breakdown",
+    "E1-E7": "incoming",
+    "M0-M7": "unqualified",
+    "B1-B3": "unassessed",
+    "CMS_Cephalon": "paused; no restart",
+    "root_pins_advanced": false,
+    "goal_complete": false
+  },
+  "qualification": false
+}
