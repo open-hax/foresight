@@ -1169,5 +1169,73 @@
     "qualified": false,
     "root_owner": "stabilization-e0",
     "agents": "CMS/Cephalon paused"
+  },
+  "e0_root_receipt_contract_correction": {
+    "report": "docs/stabilization/e0-root-receipt-contract.md",
+    "overlay": "docs/stabilization/e0-root-receipt-contract.json",
+    "root_source": "ef538b657568b4339f738665a86f3f8f34fa6280",
+    "accepted_base": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "invalid_new_root_rows": [
+      245,
+      246
+    ],
+    "root_receipt_gate_pass": false,
+    "history_preserved": true,
+    "documentary_catalog_admits_old_rows": false,
+    "recovered_reader_applicable": false,
+    "publisher_completed_bundle": {
+      "repository": "open-hax/eta-mu",
+      "pr": 362,
+      "run": 39550202681,
+      "job": 119057415817,
+      "attempt": 1,
+      "head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "tested_merge": "c63d7c5648dae6afb81e92103da2714f77023f18",
+      "tree": "11de5ce3eb07b4d67dffa800349ced4a6211bba5",
+      "conclusion": "success",
+      "completed_at": "2026-10-21T05:55:34Z",
+      "owning_tests": 14,
+      "owning_assertions": 216,
+      "artifact": {
+        "id": 12323938548,
+        "name": "eta-mu-sandbox-c63d7c5648dae6afb81e92103da2714f77023f18",
+        "size_in_bytes": 315410622,
+        "url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12323938548",
+        "archive_download_url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12323938548/zip",
+        "expired": false,
+        "created_at": "2026-10-21T05:55:31Z",
+        "expires_at": "2026-11-20T05:55:21Z",
+        "updated_at": "2026-10-21T05:55:31Z",
+        "digest": "sha256:468ff4b9328070deafbc906bd9cb3518101453bb8dcc5b7fcbf1f8192fe09cd7",
+        "workflow_run": {
+          "id": 39550202681,
+          "repository_id": 1189985055,
+          "head_repository_id": 1401249220,
+          "head_branch": "feat/trusted-review-publication-20261021",
+          "head_sha": "5610a2cc42126114cd599cef33cbee1af97000e3"
+        }
+      },
+      "artifact_downloaded_or_restored": false,
+      "carrier_warning_instances": 11,
+      "carrier_warning_scope": "DEPxxxx DeprecationWarning or GitHub warning markers; ordinary zero-warning compiler messages excluded",
+      "intentional_SIGTERM_to_SIGKILL_fixture_diagnostic_preserved": true,
+      "strict_whole_carrier_qualified": false,
+      "native_reviewer_approval": false,
+      "publisher_complete": false,
+      "default_adoption": false,
+      "deployment": false
+    },
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/9fec8c09d58756a92492e603608d0b40d6114d99918c9e71b14ec8be94f9e356.json.gz",
+      "sha256": "9fec8c09d58756a92492e603608d0b40d6114d99918c9e71b14ec8be94f9e356",
+      "bytes": 350779,
+      "raw_sha256": "8aba1ac2c274e985ce6dbd9620173a2ed8fa797dc2cc8a7c40eab0f9fc1be668",
+      "raw_bytes": 3028146,
+      "captures": 49
+    },
+    "qualified": false,
+    "root_owner": "stabilization-e0",
+    "agents": "CMS/Cephalon paused"
   }
 }

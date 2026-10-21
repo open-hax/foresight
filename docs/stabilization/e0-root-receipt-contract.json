@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "kind": "e0-root-receipt-owner-contract-correction",
+  "at": "2026-10-21T06:00:25.159896+00:00",
+  "root_source": "ef538b657568b4339f738665a86f3f8f34fa6280",
+  "accepted_base": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+  "census": {
+    "report": "docs/stabilization/e0-publisher-execution-census.json",
+    "source_window": [
+      "2026-10-21T05:01:54.029968+00:00",
+      "2026-10-21T05:02:15.191279+00:00"
+    ],
+    "frozen": 442,
+    "open": 441,
+    "merged": 1,
+    "changed_open_head_or_reported_base_from_freeze": 5,
+    "new_sweep_in_this_correction": false
+  },
+  "root_receipts": {
+    "source_audit": {
+      "source": "ef538b657568b4339f738665a86f3f8f34fa6280",
+      "records": 246,
+      "root-valid": 233,
+      "invalid": [
+        {
+          "line": 94,
+          "raw-sha256-with-LF": "82918fd7492abda0f07cc05633796480c918e08112553c939f1cf079f46e8801",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "decision",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 95,
+          "raw-sha256-with-LF": "673aeb168999a646cb755b0951f09239e06db8b7e733136057533a363e115318",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "test-run",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 96,
+          "raw-sha256-with-LF": "39150ddd96aba258ad65cda6e46e8c924dceeba04a4cd20fd548533d60d4ff2f",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "test-run",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 97,
+          "raw-sha256-with-LF": "e3945a14e2b050a6968b7bc62476fb08df440f444f1ca64e85d10c858751a22a",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "decision",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 98,
+          "raw-sha256-with-LF": "051d92b92433c7f492762437c909cee6b3eb0cfc78e723fb22116678d12ec4dc",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "test-run",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 99,
+          "raw-sha256-with-LF": "b19e78e9f6a274b31d5f04738204aa981e2992a1c764b24f2b27c04e9a9de9b9",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "push-truth",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 100,
+          "raw-sha256-with-LF": "d37ee082eff2961ba595948dfe51b24ef3d826b017ea201d691f091ace7d4e1c",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "build",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 134,
+          "raw-sha256-with-LF": "817b5b46bc03588712ead5964d254d8889964309b5722c3e9707a27d38a860ff",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "test-run",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 135,
+          "raw-sha256-with-LF": "cd7b7b6f981368d076342f31773fe81fbef797bbf9a6d2ce23d9b0760438c295",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "test-run",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 136,
+          "raw-sha256-with-LF": "84e6490c87a927a2d5282d4984912fdc5005c6ec588769fca6ffaaab8f657b66",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "observation",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 137,
+          "raw-sha256-with-LF": "db1bf2585b5f90ad3f6b3c4e919d6198da178299776d6a9a70432adfd781f8de",
+          "event-id": "",
+          "event-type": null,
+          "producer-source": null,
+          "subject-source": null,
+          "top-level-kind": "test-run",
+          "root-envelope-valid": false
+        },
+        {
+          "line": 245,
+          "raw-sha256-with-LF": "75fb3b2c1d39ece9e4939bb2b96258bee97545921c78367c6d304d94d7309d39",
+          "event-id": "fde0bbb9-adb0-4698-9d15-42fa3a695dfc",
+          "event-type": "receipt-recorded",
+          "producer-source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+          "subject-source": "4275451b7f80c70fdc17cca55e1d9cb798974003",
+          "top-level-kind": null,
+          "root-envelope-valid": false
+        },
+        {
+          "line": 246,
+          "raw-sha256-with-LF": "923bc9087d54f01dbfb80ce1195b410697e16dfc6bbbbb1a5b05e6c595fa02c8",
+          "event-id": "2779af77-d433-4ff2-b958-d0b4e1d1130e",
+          "event-type": "receipt-recorded",
+          "producer-source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+          "subject-source": "3b272e9ecd472e3af02ff420c6e1297a6cf7c258",
+          "top-level-kind": null,
+          "root-envelope-valid": false
+        }
+      ],
+      "root-validator": "foresight.evidence/receipt-envelope?"
+    },
+    "actual_source_base_gate": {
+      "base": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+      "head": "ef538b657568b4339f738665a86f3f8f34fa6280",
+      "exact-prefix-preserved": true,
+      "base-records": 206,
+      "head-records": 246,
+      "appended-records": 40,
+      "invalid-appended-records": 2,
+      "native-current-base-validation-refused": true
+    },
+    "new_invalid_rows": [
+      {
+        "line": 245,
+        "raw-sha256-with-LF": "75fb3b2c1d39ece9e4939bb2b96258bee97545921c78367c6d304d94d7309d39",
+        "event-id": "fde0bbb9-adb0-4698-9d15-42fa3a695dfc",
+        "event-type": "receipt-recorded",
+        "producer-source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+        "subject-source": "4275451b7f80c70fdc17cca55e1d9cb798974003",
+        "top-level-kind": null,
+        "root-envelope-valid": false
+      },
+      {
+        "line": 246,
+        "raw-sha256-with-LF": "923bc9087d54f01dbfb80ce1195b410697e16dfc6bbbbb1a5b05e6c595fa02c8",
+        "event-id": "2779af77-d433-4ff2-b958-d0b4e1d1130e",
+        "event-type": "receipt-recorded",
+        "producer-source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+        "subject-source": "3b272e9ecd472e3af02ff420c6e1297a6cf7c258",
+        "top-level-kind": null,
+        "root-envelope-valid": false
+      }
+    ],
+    "documentary_append": {
+      "old-records-repaired": false,
+      "prefix-preserved": true,
+      "current-base-validation-refused": true,
+      "invalid-new-records": 2,
+      "accepted-base-suffix-records": 41,
+      "prospective-line-sha256": "27dff3523656dba284ac4725bb02c9343e04f35103f7d055e014464578eb6a8b",
+      "source": "ef538b657568b4339f738665a86f3f8f34fa6280",
+      "prefix-bytes": 386287,
+      "owning-adapter": "evidence/require-valid-receipt-records! + encode-edn-line! + append-edn-line!",
+      "after-bytes": 388514,
+      "owning-validator": "foresight.evidence/receipt-envelope?",
+      "base": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+      "new-record-valid": true,
+      "p1-settled": false,
+      "negative-controls-refused": 6,
+      "after-sha256": "198bcee2c5902f2432f90784a9c644ea8e57d7884ca428e9a2f0da02ed9b84cf"
+    },
+    "whole_after_records": 247,
+    "whole_after_invalid": 13,
+    "historical_invalid_inside_accepted_base": 11,
+    "current_base_gate_pass": false,
+    "trusted_base_changed": false,
+    "old_rows_rewritten_or_admitted": false,
+    "withdrawn_claim": "ETA native schema/source guards on root events 245/246 do not establish Foresight root receipt validity."
+  },
+  "native_findings": {
+    "root_P1": {
+      "thread": "PRRT_kwDOT3TWPM6uoVb9",
+      "comment": 4333214808,
+      "open": true,
+      "disposition": "Valid and incomplete. Append preserved; actual accepted-base gate still fails."
+    },
+    "spacing_P2": {
+      "thread": "PRRT_kwDOT3TWPM6uoVcB",
+      "comment": 4333214813,
+      "path": "docs/stabilization/e0-ci-isolation.md",
+      "line": 58,
+      "fix": "Separate words, test counts and code-delimited run/job identifiers; retain historical source window.",
+      "native_settlement_at_this_capture": false
+    },
+    "encounter_oracle_P2": {
+      "thread": "PRRT_kwDOT3TWPM6umRcM",
+      "open": true,
+      "disposition": "No concrete adopted encounter state/recall/action oracle supplied; no product restart."
+    }
+  },
+  "recovered_frozen_correction_reader": {
+    "card": "707901cb-e498-4ce3-aa1c-245202ced648",
+    "repository": "riatzukiza/foresight",
+    "pr": 3,
+    "source": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+    "card_blob": "d306363b00f4b9e02bb52292f797ae7af49acb96",
+    "law_blob": "6789f30c62ae538006e994d9f1a5230738c33400",
+    "adapter_blob": "3f1a0759d797d84d42be5ab006bfb10b564f32de",
+    "permitted_envelope_fields": [
+      "manifest",
+      "refs",
+      "dod",
+      "pi"
+    ],
+    "applies_to_nested_eta_events": false,
+    "imported_or_executed": false,
+    "accepted_root_adoption": false,
+    "disposition": "Cannot change kind/timestamp/owner/origin/host or event semantics. This frozen implementation cannot repair the two nested ETA rows."
+  },
+  "publisher_completed_native_bundle": {
+    "repository": "open-hax/eta-mu",
+    "pr": 362,
+    "run": 39550202681,
+    "job": 119057415817,
+    "attempt": 1,
+    "head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "tested_merge": "c63d7c5648dae6afb81e92103da2714f77023f18",
+    "tree": "11de5ce3eb07b4d67dffa800349ced4a6211bba5",
+    "conclusion": "success",
+    "completed_at": "2026-10-21T05:55:34Z",
+    "owning_tests": 14,
+    "owning_assertions": 216,
+    "artifact": {
+      "id": 12323938548,
+      "name": "eta-mu-sandbox-c63d7c5648dae6afb81e92103da2714f77023f18",
+      "size_in_bytes": 315410622,
+      "url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12323938548",
+      "archive_download_url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12323938548/zip",
+      "expired": false,
+      "created_at": "2026-10-21T05:55:31Z",
+      "expires_at": "2026-11-20T05:55:21Z",
+      "updated_at": "2026-10-21T05:55:31Z",
+      "digest": "sha256:468ff4b9328070deafbc906bd9cb3518101453bb8dcc5b7fcbf1f8192fe09cd7",
+      "workflow_run": {
+        "id": 39550202681,
+        "repository_id": 1189985055,
+        "head_repository_id": 1401249220,
+        "head_branch": "feat/trusted-review-publication-20261021",
+        "head_sha": "5610a2cc42126114cd599cef33cbee1af97000e3"
+      }
+    },
+    "artifact_downloaded_or_restored": false,
+    "carrier_warning_instances": 11,
+    "carrier_warning_scope": "DEPxxxx DeprecationWarning or GitHub warning markers; ordinary zero-warning compiler messages excluded",
+    "intentional_SIGTERM_to_SIGKILL_fixture_diagnostic_preserved": true,
+    "strict_whole_carrier_qualified": false,
+    "native_reviewer_approval": false,
+    "publisher_complete": false,
+    "default_adoption": false,
+    "deployment": false
+  },
+  "publisher_native_status": "open-hax/eta-mu#362  head 5610a2c\n  actionability history: UNAVAILABLE; threads retain finding obligations\n  coderabbit: rate-limited   checks: {:skip 4, :pass 16}\n  threads: 0 total, 0 unresolved; by severity {}; informational 0\n  exact-head approvals: #{}  observed commit binding: {}\n  completed code rounds: 0 / soft minimum 5  participants: #{\"coderabbit\" \"mimo\"}\n  codex quota-unavailable: native source 6308863857 request  scope account observed 2026-10-21T05:33:19Z retry-at-ms UNKNOWN\n  gate: BLOCKED\n    - No trusted exact-head APPROVED review meets the quorum\n    - Review loop requires 5 completed rounds or unanimous current-head approval, with every finding settled\n",
+  "root_required_gate": {
+    "head": "ef538b657568b4339f738665a86f3f8f34fa6280",
+    "run": 39551062080,
+    "context": "success",
+    "deterministic": "success",
+    "model_job": 119060436411,
+    "model": "failure at Require eta-mu app credentials",
+    "terminal_job": 119060545680,
+    "terminal": "failure",
+    "credentials_or_protection_changed": false
+  },
+  "validation": {
+    "root_evidence_unit_tests": {
+      "tests": 17,
+      "assertions": 89,
+      "failures": 0,
+      "errors": 0
+    },
+    "prospective_valid_root_record": true,
+    "negative_controls_refused": 6,
+    "source_code_changed": false,
+    "new_base_receipt_gate_pass": false
+  },
+  "native_evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/9fec8c09d58756a92492e603608d0b40d6114d99918c9e71b14ec8be94f9e356.json.gz",
+    "sha256": "9fec8c09d58756a92492e603608d0b40d6114d99918c9e71b14ec8be94f9e356",
+    "bytes": 350779,
+    "raw_sha256": "8aba1ac2c274e985ce6dbd9620173a2ed8fa797dc2cc8a7c40eab0f9fc1be668",
+    "raw_bytes": 3028146,
+    "captures": 49
+  },
+  "program": {
+    "E0": "breakdown",
+    "E1-E7": "incoming",
+    "M0-M7": "unqualified",
+    "B1-B3": "unassessed",
+    "CMS_Cephalon": "paused",
+    "root_gitlinks_advanced": false,
+    "full_stabilization_complete": false
+  },
+  "qualification": false,
+  "review_followup": {
+    "reviewer": "coderabbit",
+    "pr": 362,
+    "head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+    "request_url": "https://github.com/open-hax/eta-mu/pull/362#issuecomment-6309254437",
+    "request_id": 6309254437,
+    "native_created_at": "2026-10-21T06:03:07Z",
+    "requester": "riatzukiza",
+    "approval": false,
+    "codex_retry": false
+  },
+  "final_verification_evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/8a8cbbe84c4f1500a7e38a3a5f168e01d0ced2ab9c827052290cf9a33f16fd7a.json.gz",
+    "sha256": "8a8cbbe84c4f1500a7e38a3a5f168e01d0ced2ab9c827052290cf9a33f16fd7a",
+    "bytes": 28760,
+    "raw_sha256": "7bf831433c02adc031580503d7a4ea04518fcf85aa4727d385330cd0d544c952",
+    "raw_bytes": 113251,
+    "captures": 18
+  }
+}

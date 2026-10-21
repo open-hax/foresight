@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "e0-root-receipt-contract-correction-execution-attempt",
+  "at": "2026-10-21T06:04:19.401670+00:00",
+  "root_parent": "ef538b657568b4339f738665a86f3f8f34fa6280",
+  "files": [
+    {
+      "path": "docs/stabilization/e0-root-receipt-contract.md",
+      "bytes": 6890,
+      "sha256": "3783b86c5a8fe5c90750adfd6e9856c25dbdc11323f7a93bf0234c534c637f2d"
+    },
+    {
+      "path": "docs/stabilization/e0-root-receipt-contract.json",
+      "bytes": 14357,
+      "sha256": "1ac00ea1ddc0d144c73ad9025371c5041900e0700dab1e79e701c58133e7f8c6"
+    },
+    {
+      "path": "docs/stabilization/e0-ci-isolation.md",
+      "bytes": 6845,
+      "sha256": "bbbbabcc09384f41c00d13728f3493879da36eb91d765de5f4897cbbe24460bc"
+    },
+    {
+      "path": "docs/stabilization/tracker.md",
+      "bytes": 27279,
+      "sha256": "2fadcf05ee64d26db2ea23e0cf54a38f87d6534bcda2c7da633a54a03d573098"
+    },
+    {
+      "path": "docs/stabilization/work-graph.json",
+      "bytes": 59966,
+      "sha256": "4cd5f299351c8bb6f5cb183857c25c6624be2c4ae3f98ea6517b1eb079ecaeae"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "bytes": 35294,
+      "sha256": "270b8f6d08bb46a17dd53dfef07f1e37055911433c44f7b8b395842f8a8ad320"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "bytes": 13779,
+      "sha256": "ee13b4fe16c9a0ec2857271a06f4f4d85d9437443f327402c287a044c6a0147c"
+    },
+    {
+      "path": ".\u03b7\u03bc/receipts.edn",
+      "bytes": 388514,
+      "sha256": "198bcee2c5902f2432f90784a9c644ea8e57d7884ca428e9a2f0da02ed9b84cf"
+    },
+    {
+      "path": ".\u03b7\u03bc/kanban-events/ledger.edn",
+      "bytes": 232664,
+      "sha256": "b64e18499c38bd8c4c4fa257aa868ab8b7a8447c5bd1cb74007f1ae3a901886e"
+    },
+    {
+      "path": ".\u03b7\u03bc/session-mycology/ledger.md",
+      "bytes": 40993,
+      "sha256": "95391607768fde2d3ccdb6eeb59a56528b8ebdde48e00342d2e8e4a5eb8144c2"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/9fec8c09d58756a92492e603608d0b40d6114d99918c9e71b14ec8be94f9e356.json.gz",
+      "bytes": 350779,
+      "sha256": "9fec8c09d58756a92492e603608d0b40d6114d99918c9e71b14ec8be94f9e356"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/8a8cbbe84c4f1500a7e38a3a5f168e01d0ced2ab9c827052290cf9a33f16fd7a.json.gz",
+      "bytes": 28760,
+      "sha256": "8a8cbbe84c4f1500a7e38a3a5f168e01d0ced2ab9c827052290cf9a33f16fd7a"
+    }
+  ],
+  "verification": {
+    "prefixes_preserved": [
+      ".\u03b7\u03bc/receipts.edn",
+      ".\u03b7\u03bc/kanban-events/ledger.edn",
+      ".\u03b7\u03bc/session-mycology/ledger.md"
+    ],
+    "historical_json_and_census_unchanged": true,
+    "all_23_gitlinks_unchanged": true,
+    "both_wrong_owner_lines_preserved": true,
+    "new_root_catalog_valid": true,
+    "root_base_gate_still_failed": true,
+    "new_archive_files_verified": 49,
+    "markdown_links_valid": true,
+    "board_states_unchanged": true,
+    "CMS_Cephalon": "paused",
+    "qualification": false
+  },
+  "new_root_catalog_sha256": "27dff3523656dba284ac4725bb02c9343e04f35103f7d055e014464578eb6a8b",
+  "root_accepted_base_gate": "FAIL: two invalid newly appended nested ETA events retained unchanged",
+  "P1_settled": false,
+  "qualification": false
+}

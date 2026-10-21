@@ -2,7 +2,17 @@
 
 Updated October 21, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [portable publisher core and refreshed census](e0-publisher-execution.md).
+Latest execution: [root receipt contract correction and completed hosted publisher proof](e0-root-receipt-contract.md).
+The actual root receipt gate fails: two newly appended ETA event envelopes do
+not satisfy Foresight's flat contract. Original bytes are preserved; one valid
+root documentary catalog retracts the cross-schema validity implication without
+repairing or admitting either record. The existing frozen correction reader
+permits only manifest/refs/dod/pi corrections and cannot repair these events.
+Native P1 remains open. The publisher's exact-source hosted bundle now passes
+at `5610a2cc`, including 14 tests / 216 assertions; carrier warnings, native
+review, full publisher/adoption and root missing-App qualification stay held.
+
+Earlier execution: [portable publisher core and refreshed census](e0-publisher-execution.md).
 The 05:01:54–05:02:15 UTC sweep retains 442 frozen identities, 441 open,
 one observed merge and five changed open head/base pairs; no tuple moved since
 03:59. Existing publisher source is now in progress at eta-mu #362, with

@@ -641,3 +641,13 @@
   spore: none
   receipt-refs: 923bc9087d54f01dbfb80ce1195b410697e16dfc6bbbbb1a5b05e6c595fa02c8
   note: Test real accepted interface shapes and both legal and illegal paths before treating a green fixture as meaningful. Separate collector source from pinned producer source, shared-M history from per-PR intents, and raw publication envelopes from native payloads. Preserve initial incompatible fixtures, schema/tool failures, review counterexamples, unknown outcomes and actual warning diagnostics. Internal source review and local process proofs confer no native authentication, hosted adoption or full-story completion. Existing source-schema, custody and terminal-truth spores cover the pattern; no second spore or promotion. Full stabilization remains active and product agents paused.
+
+- ts: 2026-10-21T06:01:02.379847+00:00
+  session: codex/stabilization-portfolio
+  task: Correct root receipt ownership claims while preserving invalid immutable events
+  p-efficiency: 0.58
+  p-friction: 0.88
+  p-skill-candidate: 0.86
+  spore: none
+  receipt-refs: 27dff3523656dba284ac4725bb02c9343e04f35103f7d055e014464578eb6a8b
+  note: The earlier source-schema lesson was applied to the wrong owner. ETA native events validate only for ETA; root Foresight requires its own flat envelope. Both wrong-owner root appends stay immutable and failed. Use the actual consuming repository predicate, semantic validator, encoder and append boundary, with source binding and negative controls, before writing. Existing frozen correction work permits only four metadata fields and cannot repair nested event identity. Documentary correction supplies no admission. One existing spore already incubated this session; no second spore or promotion. Hosted bundle completion is test evidence, while carrier warnings, native review and actual publisher adoption remain separate obligations.
