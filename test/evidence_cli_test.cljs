@@ -1078,6 +1078,45 @@
               (str label ": no stale quarantine marker remains"))
           (is (= [] (lock-files segments)) label))))))
 
+(deftest a-later-writer-cannot-erase-a-post-release-quarantine
+  ;; Once this run releases the writer lock, a later cooperating writer may
+  ;; own `.receipt-river.writer.lock` before the post-release recheck runs.
+  ;; A marker at that path would then hit EEXIST and be unlinked by the later
+  ;; writer's own release, losing the quarantine. The durable marker is
+  ;; written in the stable `.ημ` directory, which no writer clears.
+  (with-receipt-fixture
+    (fn [{:keys [directory segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-writer-lock! cli/release-writer-lock!
+            later (atom nil)
+            outcome (atom nil)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-writer-lock!
+                      (fn [parent writer-lock]
+                        (release-writer-lock! parent writer-lock)
+                        (when (nil? @later)
+                          (fs/writeFileSync segment (str forged-line "\n")
+                                            "utf8")
+                          (reset! later (later-writer-reservation! segments))))]
+          (reset! outcome
+                  (try (run-semantic-gate-with! file segment (fn [])) :ok
+                       (catch :default error (.-message error)))))
+        (is (re-find #"changed after writer-lock release" (str @outcome))
+            "the rewrite of the reserved segment is reported")
+        (with-redefs [cli/receipt-file file
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])]
+          (try (cli/close-append-reservation! @later)
+               (catch :default _error nil)))
+        (is (fs/existsSync (path/join directory cli/receipt-quarantine-marker-name))
+            "the quarantine marker survives the later writer's release")
+        (is (next-writer-refused? segments file)
+            "forged content cannot become ordinary evidence")))))
+
 (deftest lock-acquisition-failures-remove-the-new-lock
   ;; A lock this process created with O_EXCL is removed again when marker
   ;; setup fails before any gate ran, so later writers are not blocked by a
