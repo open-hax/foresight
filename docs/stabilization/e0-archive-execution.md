@@ -136,3 +136,10 @@ Authorized review replies used the pinned
 The next E0 execution step is the existing publisher's authenticated collector
 and immutable verifier composition, retaining current-source review and receipt
 holds.
+
+The final native root readability findings `4333580355` and `4333580359`
+receive an additive canonical E0 correction: prior head/base/tested merge/tree
+are separated with full SHA delimiters, 386287 preserved bytes are stated
+explicitly, and the wording now says hosted proof in a fixture remains unfinished
+and each worktree was clean when removed after its branch was pushed. Historical
+comments and events remain unchanged; no proof or approval credit follows.

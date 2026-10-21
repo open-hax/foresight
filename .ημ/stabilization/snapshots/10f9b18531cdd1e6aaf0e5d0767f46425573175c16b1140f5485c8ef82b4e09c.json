@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "e0-additive-readability-execution-attempt",
+  "root_parent": "b540ba6c0018be8002207e61b0862e49cc5406f1",
+  "files": [
+    {
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "bytes": 38270,
+      "sha256": "7cb73c3d5556ec96e64f24664317160ac0697255cb8fcc2bf9009014af8ec75a"
+    },
+    {
+      "path": ".\u03b7\u03bc/kanban-events/ledger.edn",
+      "bytes": 239014,
+      "sha256": "975f8e333dc764ccc5a871ec35c2b559a77980dea6774b2d2837cc3cff7854d0"
+    },
+    {
+      "path": ".\u03b7\u03bc/receipts.edn",
+      "bytes": 395806,
+      "sha256": "213b4773bd4eb339bf39d5be83beb2122dbab2b140b6d306457ff8e81491f1fd"
+    },
+    {
+      "path": ".\u03b7\u03bc/session-mycology/ledger.md",
+      "bytes": 42356,
+      "sha256": "550cb1318e5c18446a452c681980b48475bc3eceb8f8bf8975bea7475bdfd632"
+    },
+    {
+      "path": "docs/stabilization/e0-archive-execution.md",
+      "bytes": 9147,
+      "sha256": "7da7b331f8ace27ba4a938997aa052612e0a99c751d26b6efcf4db507c1570bd"
+    },
+    {
+      "path": "docs/stabilization/e0-archive-execution.json",
+      "bytes": 20777,
+      "sha256": "e482cc42d5a37d9f7f44fb378996404d8683c568a04fb00c8ce682b1a8c07d32"
+    },
+    {
+      "path": "docs/stabilization/tracker.md",
+      "bytes": 29253,
+      "sha256": "8ee3b044f7d6f3497881670472246d02df34e5c3b8ccd8516e9e6407a4524ebe"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/158a76e23ee07d1fbaf36a8273a46e325453957b9f23576a8d7334b7d705f292.json.gz",
+      "bytes": 23879,
+      "sha256": "158a76e23ee07d1fbaf36a8273a46e325453957b9f23576a8d7334b7d705f292"
+    }
+  ],
+  "P1_settled": false,
+  "qualification": false
+}

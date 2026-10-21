@@ -363,6 +363,10 @@ only (archive 10 / 71). Both receive itemized Fixed dispositions in native reply
 6310680841. Product runtime stays unchanged; prior evidence and warnings remain.
 No old-head review or hosted result qualifies the successor.
 
+Final root readability findings receive an additive canonical E0 correction
+with full delimited source identifiers and unambiguous worktree/fixture wording.
+Historical events remain intact; receipt P1 and encounter oracle stay open.
+
 ## Canonical delivery relationships
 
 **CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.

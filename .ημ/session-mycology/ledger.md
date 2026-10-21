@@ -661,3 +661,13 @@
   spore: none
   receipt-refs: 7a6c60b451b99c3853f2848c72f8947a103f6a8440c0df39abdb23d1b3170a36
   note: The consuming root flat contract differs from ETA native events. Validate prospective root writes through actual owner before append and keep prior wrong-owner failures open. Actual archive bytes, worker budgets and async composition clocks require causal probes; synthetic facts and old hosted results cannot qualify successor publication. Preserve failed verification assumptions and native pending/quota outcomes. Existing source-schema/terminal-truth spores cover learning; no new spore or same-session promotion.
+
+- ts: 2026-10-21T07:43:47.471026+00:00
+  session: codex/stabilization-portfolio
+  task: Additive native root readability correction
+  p-efficiency: 0.91
+  p-friction: 0.37
+  p-skill-candidate: 0.3
+  spore: none
+  receipt-refs: receipts.edn additive-native-readability catalog
+  note: Delimit full identifiers and use explicit prose in future comments. Correct older compact labels and compound wording through canonical additive comments, never by changing published events. Existing learning retained; no new spore.

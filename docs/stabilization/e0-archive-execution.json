@@ -535,5 +535,18 @@
     "raw_sha256": "7f924a013b6a760f1ab0c753ea9d5293c7948fbd750922becb75f3285d14315e",
     "raw_bytes": 349726,
     "captures": 77
+  },
+  "root_readability_correction": {
+    "native_findings": [
+      4333580355,
+      4333580359
+    ],
+    "history_preserved": true,
+    "pending_settlement_after_publication": true,
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/158a76e23ee07d1fbaf36a8273a46e325453957b9f23576a8d7334b7d705f292.json.gz",
+      "sha256": "158a76e23ee07d1fbaf36a8273a46e325453957b9f23576a8d7334b7d705f292",
+      "bytes": 23879
+    }
   }
 }
