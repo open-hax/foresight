@@ -5,7 +5,7 @@ Updated October 20, 2026. This table projects canonical Rheos cards and immutabl
 Latest execution: [candidate CI credential isolation and refreshed census](e0-ci-isolation.md).
 The fresh 03:58:42–03:59:00 UTC sweep retains 442 frozen identities, 441 open,
 one observed merge and five changed open reported head/base pairs; both passes
-are stable and no tuple changed since the 03:01 audit. PR361 now removes App
+are stable and no tuple changed since the 03:01 audit. PR 361 now removes App
 custody from four deterministic CI carriers; actual hosted execution is recorded
 in the report, with warning/review/adoption holds preserved.
 Earlier [canonical board repair](e0-producer-followup.md),
@@ -245,7 +245,7 @@ comment/readback. Earlier topology and source-custody artifacts remain intact.
 
 ## Anonymous producer execution and native review correction — October 20
 
-The existing producer now has RED/GREEN commits in [eta-mu PR361](https://github.com/open-hax/eta-mu/pull/361),
+The existing producer now has RED/GREEN commits in [eta-mu PR 361](https://github.com/open-hax/eta-mu/pull/361),
 head `9c05ba9d7de528529d08b901a1f3a6635fb34f7d`, accepted-source base `7112c36440d180ca183d6a3f89661cee161fdae5`.
 [Execution proof](e0-anonymous-producer.md) preserves current verifier/recovery,
 both source histories and exact ledger suffixes. Actual Rheos hops place the
@@ -256,7 +256,7 @@ terminal success does not mean inference. Other native CI/review remains pending
 The successful main-tests channel ran two contract-guard cases and emitted
 warnings, so it is not a full hosted-owner or warning-free baseline.
 
-Root067's actual deterministic/context jobs passed, but the missing-App model
+Root revision `0679659a14bcb83313779a617656c648de07d395`'s actual deterministic/context jobs passed, but the missing-App model
 job and required terminal gate failed. Native protection still requires the
 existing review gate and CodeRabbit. **Root merges remain frozen until the
 isolated route and required gate qualify.** Superseded credential-bearing run
@@ -267,7 +267,7 @@ original recovered bytes and historical comments remain intact, the exact
 selection manifest is recovered and linked, full Clio source/prerequisite
 rationale is in allowed descriptive metadata, and the original E5 receipt is
 bound. The concrete character oracle remains an open finding. No paused agent
-or accepted product baseline advances. PR361 is separate from the frozen442.
+or accepted product baseline advances. PR 361 is separate from the frozen cohort of 442.
 
 The [immutable producer/custody execution attempt](../../.ημ/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json)
 binds exact report/configuration hashes, native evidence, actual operational
@@ -276,7 +276,7 @@ readbacks and local verification limits.
 ## Canonical board repair and fresh E0 execution — October 21 UTC
 
 [Execution report](e0-producer-followup.md) and [overlay](e0-producer-followup.json)
-bind PR361 head `3772f776b65598c76c91f2127df2788d8d0074ca` and its metadata/export causal RED/GREEN.
+bind PR 361 head `3772f776b65598c76c91f2127df2788d8d0074ca` and its metadata/export causal RED/GREEN.
 The actual CLI regenerated 308 current cards with preserved states and 2/5-point
 planning data. Full Rheos local tests pass 212 / 1,219 assertions; prior native
 bundle actually passed the 338-test owner only at its older source. Current
@@ -288,14 +288,22 @@ worktree removed. E0 stays breakdown, all milestones unqualified, CMS/Cephalon p
 ## Candidate deterministic CI isolation — October 21 UTC
 
 [Execution report](e0-ci-isolation.md) and [overlay](e0-ci-isolation.json) bind
-PR361's four-carrier credential correction and causal RED/GREEN. All original
-checks/pins and five package source trees survive; registered10/183 and
-eta194/587 pass locally, unfiltered workflow lint passes. The new finite5-point
-owner is testing; prior2/5/3-point chain and warning-parity2 remain separate.
-Actual CLI snapshot contains309cards with all prior308states preserved.
+PR 361's four-carrier credential correction and causal RED/GREEN. All original
+checks/pins and five package source trees survive; registered tests: 10 / 183 and
+eta tests: 194 / 587 pass locally, unfiltered workflow lint passes. The new finite 5-point
+owner is testing; prior producer (2 points), publisher (5) and hosted proof (3) chain and warning parity (2 points) remain separate.
+Actual CLI snapshot contains 309 cards with all prior 308 states preserved.
 Hosted execution, exact merge/tree and warning limitations are retained in the
 report. Independent review, trusted publication and root merge freeze remain
 open; no milestone or paused agent advances.
+
+## Audit readability correction — October 21 UTC
+
+[Native review correction](e0-review-correction.md) narrows the earlier spacing
+disposition to its actual correction event, supplies readable canonical E0/E1
+comments and states the exact fork-terminal qualification limit. Historical
+comments, events, snapshots and source-window overlays remain unchanged.
+This correction supplies no approval, inference, publication or milestone credit.
 
 ## Canonical delivery relationships
 
@@ -328,4 +336,4 @@ outside this registration result.
 
 ## Next action
 
-Continue E0 with current-head PR361 hosted/review convergence and remaining warning/publication contracts, preserving the root merge freeze and paused CMS/Cephalon agents.
+Continue E0 with current-head PR 361 hosted/review convergence and remaining warning/publication contracts, preserving the root merge freeze and paused CMS/Cephalon agents.

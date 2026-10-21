@@ -611,3 +611,13 @@
   spore: none
   receipt-refs: 60cc9dbb8195c881919489eb066369b3d83541c1ba6d70145554c88213681bec
   note: Scope a new evidenced CI gap without expanding prior producer/publisher points. Preserve complete parsed deterministic steps, immutable package trees and exact H/B/M/tree before transferring test coverage. Keep candidate signer removal separate from hosted same-repository proof, strict warnings and independent reviews. Original source/audit/lint/environment failures remain evidence; correct guessed keys and labels against real schemas. Existing generated-source and terminal-truth spores cover this pattern, so no duplicate spore or promotion. CMS/Cephalon remain paused.
+
+- ts: 2026-10-21T04:12:12.520154+00:00
+  session: codex/stabilization-portfolio
+  task: Correct repeated audit spacing and terminal capability wording
+  p-efficiency: 0.56
+  p-friction: 0.72
+  p-skill-candidate: 0.60
+  spore: none
+  receipt-refs: c3ea0833a2489db3cf60fb3bdd6fff254f67d27b2f6f55b84f18c6a12f5300ed
+  note: The operator authored fused count and source labels after a prior correction. Use spaced prose and explicit identifier labels at authoring time. Narrow overbroad dispositions; append readable corrections rather than edit immutable events or content-addressed evidence. Terminal success must name which execution path ran and every required unproven capability. Existing custody and terminal-truth spores cover this recurring pattern; no duplicate spore or promotion.
