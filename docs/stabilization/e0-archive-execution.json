@@ -1,0 +1,539 @@
+{
+  "schema_version": 1,
+  "kind": "e0-bounded-physical-archive-execution",
+  "at": "2026-10-21T07:29:50.071395+00:00",
+  "root_parent": "83008bd6bc4845cafe2cc5bdf10fcd62a8430dfe",
+  "census": {
+    "report": "docs/stabilization/e0-archive-execution-census.json",
+    "register": "docs/stabilization/e0-archive-execution-census.csv",
+    "window": [
+      "2026-10-21T07:18:54.410682+00:00",
+      "2026-10-21T07:19:14.522295+00:00"
+    ],
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 441,
+        "MERGED": 1,
+        "CLOSED": 0
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 180,
+      "open_reported_base_differs_from_live_tip": 179,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 301,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 135
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 1,
+      "changed_open_head_or_reported_base_from_freeze": 5,
+      "changed_source_or_proposed_merge_since_0609": 0
+    },
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/3a32c2eb65ee72c8efde55b80069529ef82ef79d7c10a8e433dbf7763f6141ce.json.gz",
+      "sha256": "3a32c2eb65ee72c8efde55b80069529ef82ef79d7c10a8e433dbf7763f6141ce",
+      "bytes": 146583,
+      "raw_sha256": "6770ff9890bb55949727140807098c9be8c8b24f8adc51abf73a850bbd6a0bde",
+      "raw_bytes": 2169009,
+      "captures": 63
+    },
+    "source_or_proposal_changes_since_0609": [],
+    "new_repositories_or_PRs_censused": false,
+    "tested_merge_candidates": 0
+  },
+  "publisher": {
+    "repository": "open-hax/eta-mu",
+    "pr": 362,
+    "url": "https://github.com/open-hax/eta-mu/pull/362",
+    "head": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+    "code": "51a0ceecb90c7ed92e24f24e4bef7cb4afef5275",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "native_proposed_merge": null,
+    "proposed_merge_tested": false,
+    "dependency_pr": 361,
+    "owner": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "state": "in_progress",
+    "assignee": "Codex",
+    "auto_merge": false,
+    "source_preservation": {
+      "result": "PASS",
+      "base": "5610a2cc42126114cd599cef33cbee1af97000e3",
+      "source": "51a0ceecb90c7ed92e24f24e4bef7cb4afef5275",
+      "all309identities_states_planning_preserved": true,
+      "only_owned_publisher_snapshot_change": [
+        {
+          "uuid": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+          "fields": [
+            "content"
+          ]
+        }
+      ],
+      "publisher_file_assignee": "Codex",
+      "assignee_not_projected_in_existing_snapshot": true,
+      "all_four_ledger_prefixes": {
+        "receipts.edn": {
+          "prior_bytes": 606611,
+          "prior_sha256": "c944477ae5113e955f41658727273216ba89ba74fcfdf4b476d13d764d3d70cf",
+          "appended_bytes": 4930
+        },
+        ".\u03b7\u03bc/session-reflections.edn": {
+          "prior_bytes": 36581,
+          "prior_sha256": "c2df5af102ffef348684a8d84edaa75cf8031264a1398a8c1e93a8255801d807",
+          "appended_bytes": 921
+        },
+        ".\u03b7\u03bc/session-mycology/ledger.md": {
+          "prior_bytes": 111519,
+          "prior_sha256": "71e945443cd93befa1410e04523bb4dc1524942c36b3c2a099e6dc6650aa8627",
+          "appended_bytes": 832
+        },
+        "kanban/.events/ledger.edn": {
+          "prior_bytes": 1827003,
+          "prior_sha256": "c334f3a6a91c9fe2eb48e0685c716596dd4fb0c524e727111e4e871a389c8d8e",
+          "appended_bytes": 5747
+        }
+      },
+      "publisher_state": "in_progress",
+      "full_publisher_complete": false,
+      "historical_receipt_failure_unchanged": true,
+      "corrected_verifier_assumption": "Existing snapshot omits assignee; inspect actual file and source-built CLI event, not a nonexistent projection field.",
+      "failed_reflection_source_probe": "NBB direct source lacked malli.core, no append. Actual source-built compiled session-mycology CLI appended successfully.",
+      "evidence": {
+        "path": ".\u03b7\u03bc/review-evidence/trusted-publication-archive/2441693df7dcc5948e91bd351270357255e9f78c83a92e278dbf8cd88571a1e7.json.gz",
+        "sha256": "2441693df7dcc5948e91bd351270357255e9f78c83a92e278dbf8cd88571a1e7",
+        "bytes": 893110,
+        "raw_sha256": "202ebd41a872d92b83225b4ab10c488da6d9eb7223233b0d2342135374e97c9d",
+        "raw_bytes": 5028379,
+        "captures": 314,
+        "source": "51a0ceecb90c7ed92e24f24e4bef7cb4afef5275",
+        "source_files": {
+          ".github/scripts/opencode_review_archive_test.cljs": {
+            "sha256": "dd456387e271b3426920bf8f3c58ade2a0efd5722bb4f5d5f88f1d0afe181adc",
+            "bytes": 16345
+          },
+          ".github/scripts/opencode_review_publish_test.cljs": {
+            "sha256": "73d692ea8df626beacfacc7118ac53990dbcfeaa632294972f9945407fa377a4",
+            "bytes": 32930
+          },
+          "packages/eta-mu/commands/workflows.cljs": {
+            "sha256": "ae93eb42ba2a4e4a4add1cf76bc542f97698723f16521f294d1abd6e82b94a13",
+            "bytes": 21598
+          },
+          "packages/eta-mu/commands/workflows_test.cljs": {
+            "sha256": "6d9a5c4984d269fb4035844aaa2a3e4423eb64f5a25ff082e69e08dd923aed30",
+            "bytes": 30701
+          },
+          "packages/eta-mu/src/cljs/eta_mu/domain/review_archive.cljc": {
+            "sha256": "e2a7f3087b00b4dbac2ee48b5c16829e2e28dd9d68161b4c6698b8f66905b23f",
+            "bytes": 5324
+          },
+          "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc": {
+            "sha256": "e030a73df3bcba8ad1beba7ee8f8536b34a891fece7e37ebdcc01ae753349751",
+            "bytes": 14962
+          },
+          "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs": {
+            "sha256": "a38618278378aad23fffe5d548b8b5f755d33aafc75f715f7f40a141451283d0",
+            "bytes": 11164
+          },
+          "packages/eta-mu/src/cljs/eta_mu/infra/review_archive.cljs": {
+            "sha256": "844afd9ffb0842397794da93cde65ea80385eaafc830489439453b621763fd49",
+            "bytes": 5904
+          },
+          "packages/eta-mu/src/cljs/eta_mu/law/review_archive.cljc": {
+            "sha256": "bbdd77f18eb65cd8a740bb8ca648cf25695354dd8c92d2dfe0f8d559ede8095b",
+            "bytes": 1540
+          },
+          "packages/eta-mu/src/cljs/eta_mu/law/review_publication.cljc": {
+            "sha256": "1efdd21e0142ddb3e12195d3b9c385b7a2c8dbd29f6a1197ac1708bfdad706d1",
+            "bytes": 7262
+          },
+          "packages/eta-mu/src/cljs/eta_mu/shape/review_archive.cljc": {
+            "sha256": "b7c18347dfe6e99a4a4f05274bb2cede64dfc4fd0e5844bba568649f938967b0",
+            "bytes": 6197
+          },
+          "scripts/test.bb": {
+            "sha256": "89153282c6b01ae9ed57b80cf307b865b0bf111679c8eb628f492a3059515b7f",
+            "bytes": 6584
+          }
+        },
+        "tests": {
+          "archive": [
+            10,
+            71
+          ],
+          "publication": [
+            17,
+            554
+          ],
+          "parity_cases": 138,
+          "independent_physical_cases": 59,
+          "independent_failures": 0,
+          "cli": [
+            194,
+            587
+          ],
+          "workflows": [
+            11,
+            199
+          ],
+          "release_build_warnings": 0,
+          "kondo_warnings": 0
+        },
+        "resource_probe_elapsed_ms": 14.042219999999986,
+        "qualified": false
+      }
+    },
+    "local_evidence": {
+      "path": ".\u03b7\u03bc/review-evidence/trusted-publication-archive/2441693df7dcc5948e91bd351270357255e9f78c83a92e278dbf8cd88571a1e7.json.gz",
+      "sha256": "2441693df7dcc5948e91bd351270357255e9f78c83a92e278dbf8cd88571a1e7",
+      "bytes": 893110,
+      "raw_sha256": "202ebd41a872d92b83225b4ab10c488da6d9eb7223233b0d2342135374e97c9d",
+      "raw_bytes": 5028379,
+      "captures": 314,
+      "source": "51a0ceecb90c7ed92e24f24e4bef7cb4afef5275",
+      "source_files": {
+        ".github/scripts/opencode_review_archive_test.cljs": {
+          "sha256": "dd456387e271b3426920bf8f3c58ade2a0efd5722bb4f5d5f88f1d0afe181adc",
+          "bytes": 16345
+        },
+        ".github/scripts/opencode_review_publish_test.cljs": {
+          "sha256": "73d692ea8df626beacfacc7118ac53990dbcfeaa632294972f9945407fa377a4",
+          "bytes": 32930
+        },
+        "packages/eta-mu/commands/workflows.cljs": {
+          "sha256": "ae93eb42ba2a4e4a4add1cf76bc542f97698723f16521f294d1abd6e82b94a13",
+          "bytes": 21598
+        },
+        "packages/eta-mu/commands/workflows_test.cljs": {
+          "sha256": "6d9a5c4984d269fb4035844aaa2a3e4423eb64f5a25ff082e69e08dd923aed30",
+          "bytes": 30701
+        },
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_archive.cljc": {
+          "sha256": "e2a7f3087b00b4dbac2ee48b5c16829e2e28dd9d68161b4c6698b8f66905b23f",
+          "bytes": 5324
+        },
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc": {
+          "sha256": "e030a73df3bcba8ad1beba7ee8f8536b34a891fece7e37ebdcc01ae753349751",
+          "bytes": 14962
+        },
+        "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs": {
+          "sha256": "a38618278378aad23fffe5d548b8b5f755d33aafc75f715f7f40a141451283d0",
+          "bytes": 11164
+        },
+        "packages/eta-mu/src/cljs/eta_mu/infra/review_archive.cljs": {
+          "sha256": "844afd9ffb0842397794da93cde65ea80385eaafc830489439453b621763fd49",
+          "bytes": 5904
+        },
+        "packages/eta-mu/src/cljs/eta_mu/law/review_archive.cljc": {
+          "sha256": "bbdd77f18eb65cd8a740bb8ca648cf25695354dd8c92d2dfe0f8d559ede8095b",
+          "bytes": 1540
+        },
+        "packages/eta-mu/src/cljs/eta_mu/law/review_publication.cljc": {
+          "sha256": "1efdd21e0142ddb3e12195d3b9c385b7a2c8dbd29f6a1197ac1708bfdad706d1",
+          "bytes": 7262
+        },
+        "packages/eta-mu/src/cljs/eta_mu/shape/review_archive.cljc": {
+          "sha256": "b7c18347dfe6e99a4a4f05274bb2cede64dfc4fd0e5844bba568649f938967b0",
+          "bytes": 6197
+        },
+        "scripts/test.bb": {
+          "sha256": "89153282c6b01ae9ed57b80cf307b865b0bf111679c8eb628f492a3059515b7f",
+          "bytes": 6584
+        }
+      },
+      "tests": {
+        "archive": [
+          10,
+          71
+        ],
+        "publication": [
+          17,
+          554
+        ],
+        "parity_cases": 138,
+        "independent_physical_cases": 59,
+        "independent_failures": 0,
+        "cli": [
+          194,
+          587
+        ],
+        "workflows": [
+          11,
+          199
+        ],
+        "release_build_warnings": 0,
+        "kondo_warnings": 0
+      },
+      "resource_probe_elapsed_ms": 14.042219999999986,
+      "qualified": false,
+      "historical_source_and_test_counts_preserved": true
+    },
+    "native_findings": [
+      {
+        "thread": "PRRT_kwDORu27H86upMtJ",
+        "resolved": true,
+        "resolved_by": "riatzukiza",
+        "reply_ids": [
+          4334110964
+        ]
+      },
+      {
+        "thread": "PRRT_kwDORu27H86upMtO",
+        "resolved": true,
+        "resolved_by": "coderabbitai[bot]",
+        "reply_ids": [
+          4334103846
+        ]
+      },
+      {
+        "thread": "PRRT_kwDORu27H86upMtS",
+        "resolved": true,
+        "resolved_by": "riatzukiza",
+        "reply_ids": [
+          4334106349
+        ]
+      }
+    ],
+    "review": {
+      "exact_head_approvals": 0,
+      "coderabbit": "pending",
+      "manual_retry": false,
+      "pending_deterministic_checks_at_retained_observation": 6,
+      "codex_quota_source": 6308863857,
+      "codex_retry_at": "UNKNOWN",
+      "codex_retried": false,
+      "mimo_kimi_approval": false,
+      "full_available_cohort_rounds": 0,
+      "observation_scope": "Earlier67e8d9 window retained; later6a7965 source needs new independent review and hosted checks.",
+      "successor_approval": 0,
+      "pending_current_source_checks": true,
+      "latest_observation": {
+        "head": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+        "coderabbit": "rate-limited",
+        "deterministic_pending": 6,
+        "approvals": 0,
+        "threads_total": 3,
+        "threads_unresolved": 0,
+        "no_unanswered_body_items_listed_after_reply": true,
+        "evidence_changed_during_collection_requires_reevaluation": true,
+        "retry_requested": false
+      }
+    },
+    "native_runs_at_observation": [
+      {
+        "id": 39561946481,
+        "name": "Code Review Comments to Discord",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561945872,
+        "name": "GitHub Events to Discord",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561876204,
+        "name": "Code Review Comments to Discord",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561876123,
+        "name": "GitHub Events to Discord",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561839948,
+        "name": "Code Review Comments to Discord",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561838349,
+        "name": "GitHub Events to Discord",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759391,
+        "name": "Muse review-context diagnostic",
+        "status": "completed",
+        "conclusion": "skipped",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759592,
+        "name": "rheos",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759819,
+        "name": "eta-mu-main-pr-gate",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759392,
+        "name": "Sandbox bundle",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759477,
+        "name": "OpenCode evidence PR review",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759586,
+        "name": "GitHub Events to Discord",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759661,
+        "name": "coverage",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759484,
+        "name": "Sol CI",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759657,
+        "name": "Rheos GitHub Sync CI",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      },
+      {
+        "id": 39561759397,
+        "name": "CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "head": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+      }
+    ],
+    "hosted_old_head": {
+      "head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+      "run": 39550202681,
+      "job": 119057415817,
+      "tested_merge": "c63d7c5648dae6afb81e92103da2714f77023f18",
+      "tree": "11de5ce3eb07b4d67dffa800349ced4a6211bba5",
+      "result": "success",
+      "archive_owner_present": false,
+      "carrier_warning_instances": 11,
+      "transfer_to_successor": false
+    },
+    "full_story_complete": false,
+    "remaining": [
+      "authenticated native collector/source/build custody",
+      "complete immutable Muse verifier orchestration",
+      "durable claims and native one-POST/complete GET readback",
+      "protected registry/setup/default adoption",
+      "hosted fixture proof and ordinary rollout"
+    ],
+    "pushed_clean_worktree_removed": true,
+    "first_archive_checkpoint": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d",
+    "measurement_correction": {
+      "path": ".\u03b7\u03bc/review-evidence/trusted-publication-archive/2b4d4b8bb1773239f623eb51cc64dbd33a18ee997d08eaaad9d8932666a5188d.json.gz",
+      "sha256": "2b4d4b8bb1773239f623eb51cc64dbd33a18ee997d08eaaad9d8932666a5188d",
+      "bytes": 10055,
+      "raw_sha256": "fe3da2ba874866083397d416f6b049c5ee17fc74adbfc5a8227d28dbc56670eb",
+      "source": "22dce3bb7644e855deaaf28594f017141592f877",
+      "publication_tests": 17,
+      "publication_assertions": 557,
+      "archive_tests": 10,
+      "archive_assertions": 71,
+      "parity_cases": 138,
+      "new_source_hashes": {
+        ".github/scripts/opencode_review_archive_test.cljs": "869ba448c1bb347699e58ab9f5c9972455a4e808b60bb7b522de458814eedc17",
+        ".github/scripts/opencode_review_publish_test.cljs": "74c95f5fc20624529bd5e80bd518df4e724eb97be72dea49ea15a59c199cb3df"
+      },
+      "review_id": 5596322438,
+      "items": [
+        "cr-comment:v1:0c73402c833136109ed5d78d",
+        "cr-comment:v1:f9ea3eebea4a27f0833e0fe1"
+      ],
+      "no_product_runtime_edits": true,
+      "approval": false,
+      "published_head": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+      "native_reply": 6310680841,
+      "review": "https://github.com/open-hax/eta-mu/pull/362#pullrequestreview-5596322438",
+      "prior_parent_handle_coverage_implication_withdrawn": true
+    }
+  },
+  "root_receipts": {
+    "accepted_base": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "actual_immutable_source_gate_exit": 2,
+    "whole_invalid": 13,
+    "invalid_new_against_accepted_base": 2,
+    "invalid_lines": [
+      245,
+      246
+    ],
+    "historical_bytes_preserved": true,
+    "P1_thread": "PRRT_kwDOT3TWPM6uoVb9",
+    "P1_open": true,
+    "new_root_catalog_validates_actual_flat_owner_contract": true,
+    "old_invalid_rows_repaired_or_admitted": false,
+    "reader_adopted": false,
+    "latest_catalog": {
+      "suffix": 44,
+      "prefix-preserved": true,
+      "invalid": 13,
+      "catalog-valid": true,
+      "records": 250,
+      "invalid-new": 2,
+      "catalog-sha256-with-LF": "8fa3d7178e02354fb2f8749d07108e2dc8b206545ea6575fa2f0d2de82846929",
+      "qualification": false,
+      "after-sha256": "9cb63b40da9237b937a81682ada0c9de79ca36a636f9fa8cfb6c18b2c81c60ed"
+    }
+  },
+  "holds": [
+    "Root merge freeze and existing App-setup failure remain.",
+    "P2 encounter oracle remains unresolved; no paused product execution.",
+    "All23consumer gitlinks remain unchanged.",
+    "Warnings/install/intentional process diagnostics retained; no strict whole-carrier zero-warning qualification.",
+    "No signing restoration, protection waiver, merger, deployment or accepted-default advancement."
+  ],
+  "CMS_Cephalon": "paused",
+  "native_evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/d9e1d4b67b1a7b10c7dd69c0e7017511fc522c3ca484ab159fb103a238b81696.json.gz",
+    "sha256": "d9e1d4b67b1a7b10c7dd69c0e7017511fc522c3ca484ab159fb103a238b81696",
+    "bytes": 77057,
+    "raw_sha256": "2d783ad6ec98d8ded6ff5f30b80c7f3cc5e7e61b641df37632f1a9cfec35a91b",
+    "raw_bytes": 436817,
+    "captures": 42
+  },
+  "qualification": false,
+  "later_native_evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/071ce2a61ad0b50b7684e961e12bf2db439c8affe8d052e66cfa1bff632fa67f.json.gz",
+    "sha256": "071ce2a61ad0b50b7684e961e12bf2db439c8affe8d052e66cfa1bff632fa67f",
+    "bytes": 91295,
+    "raw_sha256": "7f924a013b6a760f1ab0c753ea9d5293c7948fbd750922becb75f3285d14315e",
+    "raw_bytes": 349726,
+    "captures": 77
+  }
+}

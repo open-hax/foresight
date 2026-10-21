@@ -336,6 +336,33 @@ history still fails: 71 invalid rows / 118 errors. The receipt review stays open
 The exact existing publisher plan and 37 source captures establish interface
 compatibility only; no implementation, readiness or adoption follows.
 
+## Bounded physical archive execution — October 21 UTC
+
+[Executed source and limits](e0-archive-execution.md) bind pushed eta-mu PR 362
+head `67e8d9dd7807452ac82d425e9fbb2ce51caeb56d`: bounded physical ZIP admission,
+three native finding repairs and an async composition-clock correction. Actual
+archive 10 / 71, publication 17 / 554 with 138 NBB/Babashka cases, independent
+physical corpus 59 / 0, CLI 194 / 587 and workflow 11 / 199 pass. Scoped lint and
+release have zero warnings; retained carrier diagnostics remain holds.
+
+The fresh 07:19 UTC two-pass census remains **442 frozen, 441 open, one merged,
+five changed open heads/bases**, with no source/proposal movement since 06:09.
+All three original child findings read back resolved; current approval remains
+zero, with CodeRabbit and six deterministic checks pending at the retained
+observation. Full authenticated publisher remains in_progress; older hosted
+success does not qualify this successor. All 309 child states/planning, ledger
+prefixes and 23 root pins survive; pushed clean child worktree removed.
+Root receipt P1 stays open: two new invalid ETA envelopes remain unchanged and
+failed against the accepted base. No reader adoption, gate waiver, milestone,
+merge, deployment or paused CMS/Cephalon execution follows.
+
+The later native review adds two measurement corrections at successor
+`6a796582d74f93c1a1f18ca5c89eb3a0b19445eb`: parity rejects exception sentinels
+(actual 17 / 557), and cleanup assertions claim parent admission-worker scope
+only (archive 10 / 71). Both receive itemized Fixed dispositions in native reply
+6310680841. Product runtime stays unchanged; prior evidence and warnings remain.
+No old-head review or hosted result qualifies the successor.
+
 ## Canonical delivery relationships
 
 **CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.

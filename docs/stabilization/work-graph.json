@@ -1237,5 +1237,53 @@
     "qualified": false,
     "root_owner": "stabilization-e0",
     "agents": "CMS/Cephalon paused"
+  },
+  "e0_archive_execution": {
+    "report": "docs/stabilization/e0-archive-execution.md",
+    "overlay": "docs/stabilization/e0-archive-execution.json",
+    "census": "docs/stabilization/e0-archive-execution-census.json",
+    "register": "docs/stabilization/e0-archive-execution-census.csv",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 362,
+      "head": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "first_checkpoint": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+    },
+    "owner": "stabilization-e0",
+    "publisher_owner": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "publisher_state": "in_progress",
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/d9e1d4b67b1a7b10c7dd69c0e7017511fc522c3ca484ab159fb103a238b81696.json.gz",
+      "sha256": "d9e1d4b67b1a7b10c7dd69c0e7017511fc522c3ca484ab159fb103a238b81696",
+      "bytes": 77057,
+      "raw_sha256": "2d783ad6ec98d8ded6ff5f30b80c7f3cc5e7e61b641df37632f1a9cfec35a91b",
+      "raw_bytes": 436817,
+      "captures": 42
+    },
+    "root_receipt_P1_open": true,
+    "qualified": false,
+    "agents": "CMS/Cephalon paused",
+    "measurement_correction": {
+      "review": 5596322438,
+      "reply": 6310680841,
+      "test_source": "22dce3bb7644e855deaaf28594f017141592f877",
+      "product_runtime_unchanged": true,
+      "parent_only_cleanup_claim": true
+    },
+    "later_native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/071ce2a61ad0b50b7684e961e12bf2db439c8affe8d052e66cfa1bff632fa67f.json.gz",
+      "sha256": "071ce2a61ad0b50b7684e961e12bf2db439c8affe8d052e66cfa1bff632fa67f",
+      "bytes": 91295,
+      "raw_sha256": "7f924a013b6a760f1ab0c753ea9d5293c7948fbd750922becb75f3285d14315e",
+      "raw_bytes": 349726,
+      "captures": 77
+    },
+    "review_current": {
+      "coderabbit": "rate-limited",
+      "approvals": 0,
+      "deterministic_pending": 6,
+      "reevaluation_required": true
+    }
   }
 }

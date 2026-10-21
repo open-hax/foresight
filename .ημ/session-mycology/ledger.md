@@ -651,3 +651,13 @@
   spore: none
   receipt-refs: 27dff3523656dba284ac4725bb02c9343e04f35103f7d055e014464578eb6a8b
   note: The earlier source-schema lesson was applied to the wrong owner. ETA native events validate only for ETA; root Foresight requires its own flat envelope. Both wrong-owner root appends stay immutable and failed. Use the actual consuming repository predicate, semantic validator, encoder and append boundary, with source binding and negative controls, before writing. Existing frozen correction work permits only four metadata fields and cannot repair nested event identity. Documentary correction supplies no admission. One existing spore already incubated this session; no second spore or promotion. Hosted bundle completion is test evidence, while carrier warnings, native review and actual publisher adoption remain separate obligations.
+
+- ts: 2026-10-21T07:30:32.963161+00:00
+  session: codex/stabilization-portfolio
+  task: Persist fresh frozen cohort and real archive/native repair execution
+  p-efficiency: 0.64
+  p-friction: 0.83
+  p-skill-candidate: 0.64
+  spore: none
+  receipt-refs: 7a6c60b451b99c3853f2848c72f8947a103f6a8440c0df39abdb23d1b3170a36
+  note: The consuming root flat contract differs from ETA native events. Validate prospective root writes through actual owner before append and keep prior wrong-owner failures open. Actual archive bytes, worker budgets and async composition clocks require causal probes; synthetic facts and old hosted results cannot qualify successor publication. Preserve failed verification assumptions and native pending/quota outcomes. Existing source-schema/terminal-truth spores cover learning; no new spore or same-session promotion.
