@@ -24,17 +24,16 @@
   requires it or its module points at an org repository. A required module may
   point at its row's dev origin (see upstream-mismatch), but a row's dev origin
   never adds coverage, so a nested canonical input cannot cover itself.
-  Required paths never come from the rows, so deleting a row cannot hide its
-  path."
+  Every supplied required path needs a row, even when it is absent from
+  `modules`. Required paths never come from the rows, so deleting a row cannot
+  hide its path."
   [rows modules network-roots required-paths]
   (let [module-repos (into {} (map (fn [{:keys [path url]}] [path (github-repo url)])) modules)
         ;; Coverage never comes from a row's own :dev/origin: a dev-pointed
         ;; module is covered only through required-paths, so a nested canonical
         ;; input (.agents -> riatzukiza/.agents) cannot cover itself.
         org-paths (keep (fn [[path repo]] (when (org-repo? repo) path)) module-repos)
-        paths (into (set org-paths)
-                    (filter #(contains? module-repos %))
-                    required-paths)
+        paths (into (set org-paths) required-paths)
         present (set (map :source/path rows))
         error (fn [id value] {:law/id id :actual value})
         errors (concat
