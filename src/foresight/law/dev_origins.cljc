@@ -21,19 +21,18 @@
   submodule paths that must each have a row (independently owned repositories;
   nested canonical inputs such as .agents are left out by the caller).
   Coverage is keyed by submodule path: a path is required when the manifest
-  requires it or its module points at an org repository, and a module also
-  counts when it points at the dev origin of the row for its path. Required
-  paths never come from the rows, so deleting a row cannot hide its path."
+  requires it or its module points at an org repository. A required module may
+  point at its row's dev origin (see upstream-mismatch), but a row's dev origin
+  never adds coverage, so a nested canonical input cannot cover itself.
+  Required paths never come from the rows, so deleting a row cannot hide its
+  path."
   [rows modules network-roots required-paths]
-  (let [row-by-path (into {} (map (juxt :source/path identity)) rows)
-        module-repos (into {} (map (fn [{:keys [path url]}] [path (github-repo url)])) modules)
-        org-modules (into {}
-                          (filter (fn [[path repo]]
-                                    (or (org-repo? repo)
-                                        (and (some? repo)
-                                             (= repo (:dev/origin (get row-by-path path)))))))
-                          module-repos)
-        paths (into (set (keys org-modules))
+  (let [module-repos (into {} (map (fn [{:keys [path url]}] [path (github-repo url)])) modules)
+        ;; Coverage never comes from a row's own :dev/origin: a dev-pointed
+        ;; module is covered only through required-paths, so a nested canonical
+        ;; input (.agents -> riatzukiza/.agents) cannot cover itself.
+        org-paths (keep (fn [[path repo]] (when (org-repo? repo) path)) module-repos)
+        paths (into (set org-paths)
                     (filter #(contains? module-repos %))
                     required-paths)
         present (set (map :source/path rows))
