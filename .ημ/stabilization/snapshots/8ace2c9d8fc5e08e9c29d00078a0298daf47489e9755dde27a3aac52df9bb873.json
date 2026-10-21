@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "kind": "e0-receipt-adjudication-execution-attempt",
+  "at": "2026-10-21T04:53:28.936142Z",
+  "root_parent": "4275451b7f80c70fdc17cca55e1d9cb798974003",
+  "files": [
+    {
+      "path": "docs/stabilization/e0-receipt-adjudication.md",
+      "bytes": 6430,
+      "sha256": "e460559f74362c398896744cd74e6822ac4b8af0268569884d51ee4d2c13a48f"
+    },
+    {
+      "path": "docs/stabilization/e0-receipt-adjudication.json",
+      "bytes": 26142,
+      "sha256": "0d9be727054f4798c1791d0c6a34b0e84aa34813434fd085c191c7bac70526bd"
+    },
+    {
+      "path": "docs/stabilization/tracker.md",
+      "bytes": 26072,
+      "sha256": "a4d38c5beb5aa42f7ed1586904c0a4a9bc07e2024e420aba749eeebd86d88920"
+    },
+    {
+      "path": "docs/stabilization/work-graph.json",
+      "bytes": 55765,
+      "sha256": "480f1be24969c1b9afa0f7d7f3b71d2bc03aa16bec92c285265106df4d0642c7"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "bytes": 31507,
+      "sha256": "98b94f25a5cdb601a310c73bf596ff7ba0f513c7c01418b2dcedb54bac01df92"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "bytes": 11268,
+      "sha256": "ba14cbf9527444ee9e076dc7a8881fb45444bf55282a79fa2a22fac92c80380f"
+    },
+    {
+      "path": ".ημ/receipts.edn",
+      "bytes": 382350,
+      "sha256": "4508ff5e687062a8b2c1a6ba119e2c6d39887288e2fd4f2581cca1ea2214734b"
+    },
+    {
+      "path": ".ημ/kanban-events/ledger.edn",
+      "bytes": 224904,
+      "sha256": "3ee6a7eba67e70d6df7a130967984d3780875e390ff2d782c5e78d04add31537"
+    },
+    {
+      "path": ".ημ/session-mycology/ledger.md",
+      "bytes": 38914,
+      "sha256": "9a23a0267c00d6a45461dead5293563c2e39a56aade8fa65fbac3def473c73fd"
+    },
+    {
+      "path": ".ημ/session-mycology/spores/20261021-source-schema-before-append.md",
+      "bytes": 2374,
+      "sha256": "3765afed66141a177459ce5be8dd9a31451bc8e50e3dda701d8e73bc0b2a50e7"
+    },
+    {
+      "path": ".ημ/stabilization/snapshots/9ad130601ed3ffefb50fe9f7f65bac3974646b984f7757a3f94cb4dae8b40a4f.json.gz",
+      "bytes": 13543,
+      "sha256": "9ad130601ed3ffefb50fe9f7f65bac3974646b984f7757a3f94cb4dae8b40a4f"
+    },
+    {
+      "path": ".ημ/stabilization/snapshots/64af1dfcfc396aefdb62e2d933ccb2c26dbc96f24cd1cba0cca864f009480c8f.json.gz",
+      "bytes": 158747,
+      "sha256": "64af1dfcfc396aefdb62e2d933ccb2c26dbc96f24cd1cba0cca864f009480c8f"
+    }
+  ],
+  "child_publication": {
+    "published_head": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "state": "open",
+    "auto_merge": false,
+    "all8committed_file_hashes_verified": true,
+    "all_runtime_workflow_test_dependency_source_unchanged": true,
+    "all4historical_ledger_prefixes_preserved": true,
+    "new_native_receipt_events": 12,
+    "new_record_errors": 0,
+    "whole_history_invalid": 71,
+    "whole_history_errors": 118,
+    "evidence": {
+      "path": ".ημ/review-evidence/receipt-adjudication/d3f755771ed95fe44671dfd8d39b687ac919c387ceb26ea11c7384f8bfb5a9bd.json.gz",
+      "sha256": "d3f755771ed95fe44671dfd8d39b687ac919c387ceb26ea11c7384f8bfb5a9bd",
+      "bytes": 1515472,
+      "raw_sha256": "5ced7b45d5c41fbe609eb437d2cacd128f4de1ae32e3437320cc15f610189aaa",
+      "raw_bytes": 7421180,
+      "capture_count": 139,
+      "baseline": "1635d310a36c25b42646f14d4810359306fc76d9",
+      "new_events": 12,
+      "new_errors": 0,
+      "whole_history_invalid": 71,
+      "whole_history_errors": 118
+    },
+    "clean": true
+  },
+  "native_bundle": {
+    "result": "native_completed_success",
+    "run": 39541426083,
+    "job": 119029811018,
+    "head": "1635d310a36c25b42646f14d4810359306fc76d9",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "executed_merge": "c140cef92f5f38b50d226c2c8f1f2134c1261a4a",
+    "tree": "e6c72702117e339a4bbf343d996be4499a1d2d92",
+    "registered_review_owner": {
+      "tests": 338,
+      "pass": 338,
+      "fail": 0,
+      "skip": 0
+    },
+    "actual_cljs_suite_summaries": [
+      {
+        "tests": 10,
+        "assertions": 183
+      },
+      {
+        "tests": 8,
+        "assertions": 319
+      },
+      {
+        "tests": 6,
+        "assertions": 57
+      },
+      {
+        "tests": 194,
+        "assertions": 587
+      },
+      {
+        "tests": 10,
+        "assertions": 183
+      },
+      {
+        "tests": 29,
+        "assertions": 182
+      },
+      {
+        "tests": 80,
+        "assertions": 388
+      },
+      {
+        "tests": 78,
+        "assertions": 395
+      },
+      {
+        "tests": 78,
+        "assertions": 395
+      },
+      {
+        "tests": 212,
+        "assertions": 1219
+      },
+      {
+        "tests": 212,
+        "assertions": 1219
+      },
+      {
+        "tests": 142,
+        "assertions": 607
+      },
+      {
+        "tests": 70,
+        "assertions": 172
+      },
+      {
+        "tests": 47,
+        "assertions": 120
+      },
+      {
+        "tests": 95,
+        "assertions": 259
+      },
+      {
+        "tests": 95,
+        "assertions": 259
+      },
+      {
+        "tests": 78,
+        "assertions": 332
+      },
+      {
+        "tests": 3,
+        "assertions": 6
+      },
+      {
+        "tests": 3,
+        "assertions": 6
+      },
+      {
+        "tests": 17,
+        "assertions": 64
+      },
+      {
+        "tests": 17,
+        "assertions": 64
+      }
+    ],
+    "all_workspace_gate_labels": [
+      "review-workflow passed (39.4s)",
+      "assessment-workflows passed (219.3s)",
+      "legacy-ai-catalog passed (1.2s)",
+      "contract-guard passed (0.1s)",
+      "eta-mu passed (25.4s)",
+      "clio passed (88.4s)",
+      "rheos passed (23.5s)",
+      "sol passed (26.6s)",
+      "terminal-ui passed (14.8s)",
+      "turn-processor passed (16.6s)",
+      "extensions passed (13.0s)",
+      "protocols passed (30.2s)",
+      "chat-ui passed (17.1s)",
+      "axxium passed (16.7s)",
+      "kanban-legacy passed (1.3s)"
+    ],
+    "compiler_builds": [
+      "2026-10-21T03:58:53.0858900Z [:apply-patch] Build completed. (52 files, 5 compiled, 0 warnings, 9.45s)",
+      "2026-10-21T03:58:58.5530409Z [:bootstrap] Build completed. (48 files, 4 compiled, 0 warnings, 5.46s)",
+      "2026-10-21T03:59:03.0660027Z [:chronos] Build completed. (49 files, 5 compiled, 0 warnings, 4.51s)",
+      "2026-10-21T03:59:09.3694169Z [:contract-runtime] Build completed. (62 files, 14 compiled, 0 warnings, 6.30s)",
+      "2026-10-21T03:59:14.2235171Z [:contract-runtime-v2] Build completed. (64 files, 15 compiled, 0 warnings, 4.85s)",
+      "2026-10-21T03:59:17.7857955Z [:custom-providers] Build completed. (48 files, 4 compiled, 0 warnings, 3.56s)",
+      "2026-10-21T03:59:21.6626112Z [:graph-memory] Build completed. (54 files, 5 compiled, 0 warnings, 3.88s)",
+      "2026-10-21T03:59:25.4490533Z [:image-render] Build completed. (53 files, 4 compiled, 0 warnings, 3.78s)",
+      "2026-10-21T03:59:29.0535023Z [:lisp-decomp-nudge] Build completed. (49 files, 5 compiled, 0 warnings, 3.60s)",
+      "2026-10-21T03:59:33.1303568Z [:opencode-global-instructions] Build completed. (62 files, 14 compiled, 0 warnings, 4.08s)",
+      "2026-10-21T03:59:38.1564052Z [:opmf-contract-gate] Build completed. (64 files, 15 compiled, 0 warnings, 5.02s)",
+      "2026-10-21T03:59:42.0296001Z [:receipt-river] Build completed. (64 files, 16 compiled, 0 warnings, 3.87s)",
+      "2026-10-21T03:59:45.9801804Z [:session-mycology] Build completed. (54 files, 6 compiled, 0 warnings, 3.95s)",
+      "2026-10-21T03:59:49.3448544Z [:task-timing] Build completed. (48 files, 4 compiled, 0 warnings, 3.36s)",
+      "2026-10-21T03:59:52.7938367Z [:websearch-open-hax] Build completed. (53 files, 5 compiled, 0 warnings, 3.45s)",
+      "2026-10-21T04:00:08.2389727Z [:opencode-apply-patch] Build completed. (52 files, 5 compiled, 0 warnings, 10.98s)",
+      "2026-10-21T04:00:14.2895348Z [:opencode-bootstrap] Build completed. (50 files, 5 compiled, 0 warnings, 6.05s)",
+      "2026-10-21T04:00:19.0781464Z [:opencode-chronos] Build completed. (50 files, 5 compiled, 0 warnings, 4.79s)",
+      "2026-10-21T04:00:24.4011524Z [:opencode-contract-runtime] Build completed. (62 files, 14 compiled, 0 warnings, 5.32s)",
+      "2026-10-21T04:00:29.5594548Z [:opencode-contract-runtime-v2] Build completed. (64 files, 15 compiled, 0 warnings, 5.16s)",
+      "2026-10-21T04:00:33.6506524Z [:opencode-custom-providers] Build completed. (50 files, 5 compiled, 0 warnings, 4.09s)",
+      "2026-10-21T04:00:38.2774799Z [:opencode-graph-memory] Build completed. (54 files, 5 compiled, 0 warnings, 4.63s)",
+      "2026-10-21T04:00:42.3795256Z [:opencode-image-render] Build completed. (54 files, 5 compiled, 0 warnings, 4.10s)",
+      "2026-10-21T04:00:46.3661618Z [:opencode-lisp-decomp-nudge] Build completed. (50 files, 5 compiled, 0 warnings, 3.99s)",
+      "2026-10-21T04:00:51.0389900Z [:opencode-opencode-global-instructions] Build completed. (62 files, 14 compiled, 0 warnings, 4.67s)",
+      "2026-10-21T04:00:55.2051631Z [:opencode-opmf-contract-gate] Build completed. (62 files, 14 compiled, 0 warnings, 4.17s)",
+      "2026-10-21T04:00:59.6249071Z [:opencode-receipt-river] Build completed. (64 files, 16 compiled, 0 warnings, 4.42s)",
+      "2026-10-21T04:01:03.7209467Z [:opencode-session-mycology] Build completed. (54 files, 6 compiled, 0 warnings, 4.10s)",
+      "2026-10-21T04:01:07.5629244Z [:opencode-task-timing] Build completed. (50 files, 5 compiled, 0 warnings, 3.84s)",
+      "2026-10-21T04:01:11.4902665Z [:opencode-websearch-open-hax] Build completed. (53 files, 5 compiled, 0 warnings, 3.93s)",
+      "2026-10-21T04:03:08.5299257Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 14.44s)",
+      "2026-10-21T04:03:14.0988332Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 5.54s)",
+      "2026-10-21T04:03:43.7109742Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 15.50s)",
+      "2026-10-21T04:03:49.5849378Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 5.84s)",
+      "2026-10-21T04:04:18.9757393Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 15.57s)",
+      "2026-10-21T04:04:24.8793915Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 5.88s)",
+      "2026-10-21T04:06:05.2910680Z [:test] Build completed. (204 files, 203 compiled, 0 warnings, 9.69s)",
+      "2026-10-21T04:07:40.8480452Z [:test] Build completed. (118 files, 117 compiled, 0 warnings, 26.80s)",
+      "2026-10-21T04:08:03.4119233Z [:test] Build completed. (162 files, 161 compiled, 0 warnings, 9.91s)",
+      "2026-10-21T04:08:30.5776594Z [:test] Build completed. (216 files, 215 compiled, 0 warnings, 13.53s)",
+      "2026-10-21T04:08:45.5585681Z [:test] Build completed. (82 files, 81 compiled, 0 warnings, 5.89s)",
+      "2026-10-21T04:09:02.2091327Z [:test] Build completed. (71 files, 70 compiled, 0 warnings, 7.58s)",
+      "2026-10-21T04:09:15.0374586Z [:node-test] Build completed. (90 files, 89 compiled, 0 warnings, 8.12s)",
+      "2026-10-21T04:09:33.7116489Z [:test] Build completed. (140 files, 139 compiled, 0 warnings, 9.16s)",
+      "2026-10-21T04:09:37.7599404Z [:lib] Build completed. (112 files, 103 compiled, 0 warnings, 3.95s)",
+      "2026-10-21T04:10:01.6888857Z [:test] Build completed. (59 files, 58 compiled, 0 warnings, 7.16s)",
+      "2026-10-21T04:10:19.1679278Z [:test] Build completed. (76 files, 75 compiled, 0 warnings, 7.44s)",
+      "2026-10-21T04:11:06.7011998Z packages/extensions build: [:apply-patch] Build completed. (52 files, 1 compiled, 0 warnings, 28.67s)",
+      "2026-10-21T04:11:16.0009306Z packages/chat-ui build: [:lib] Build completed. (80 files, 78 compiled, 0 warnings, 37.12s)",
+      "2026-10-21T04:11:21.5879274Z packages/extensions build: [:bootstrap] Build completed. (48 files, 1 compiled, 0 warnings, 14.88s)",
+      "2026-10-21T04:11:32.8169431Z packages/extensions build: [:chronos] Build completed. (49 files, 1 compiled, 0 warnings, 11.23s)",
+      "2026-10-21T04:11:36.6229318Z packages/axxium build: [:server] Build completed. (73 files, 20 compiled, 0 warnings, 60.30s)",
+      "2026-10-21T04:11:48.2060496Z packages/extensions build: [:contract-runtime] Build completed. (62 files, 1 compiled, 0 warnings, 15.39s)",
+      "2026-10-21T04:11:49.4777091Z packages/contracts/output build: [:output-contracts] Build completed. (77 files, 33 compiled, 0 warnings, 53.07s)",
+      "2026-10-21T04:12:00.3229437Z packages/extensions build: [:contract-runtime-v2] Build completed. (64 files, 1 compiled, 0 warnings, 12.11s)",
+      "2026-10-21T04:12:09.8226935Z packages/extensions build: [:custom-providers] Build completed. (48 files, 1 compiled, 0 warnings, 9.51s)",
+      "2026-10-21T04:12:20.9871149Z packages/extensions build: [:graph-memory] Build completed. (54 files, 1 compiled, 0 warnings, 11.15s)",
+      "2026-10-21T04:12:21.5972710Z packages/fork-tax build: [:fork-tax] Build completed. (50 files, 6 compiled, 0 warnings, 33.55s)",
+      "2026-10-21T04:12:29.7363735Z packages/extensions build: [:image-render] Build completed. (53 files, 1 compiled, 0 warnings, 8.73s)",
+      "2026-10-21T04:12:38.7369753Z packages/extensions build: [:lisp-decomp-nudge] Build completed. (49 files, 1 compiled, 0 warnings, 9.01s)",
+      "2026-10-21T04:12:50.9859773Z packages/extensions build: [:opencode-global-instructions] Build completed. (62 files, 1 compiled, 0 warnings, 12.24s)",
+      "2026-10-21T04:12:54.9383035Z packages/receipt-river build: [:receipt-river] Build completed. (59 files, 15 compiled, 0 warnings, 39.08s)",
+      "2026-10-21T04:12:55.3117326Z packages/contracts/output build: [:cli] Build completed. (79 files, 35 compiled, 0 warnings, 50.51s)",
+      "2026-10-21T04:13:00.5666397Z packages/extensions build: [:opmf-contract-gate] Build completed. (64 files, 1 compiled, 0 warnings, 9.58s)",
+      "2026-10-21T04:13:13.2925535Z packages/extensions build: [:receipt-river] Build completed. (64 files, 1 compiled, 0 warnings, 12.73s)",
+      "2026-10-21T04:13:21.6910529Z packages/extensions build: [:session-mycology] Build completed. (54 files, 1 compiled, 0 warnings, 8.40s)",
+      "2026-10-21T04:13:32.5869749Z packages/extensions build: [:task-timing] Build completed. (48 files, 1 compiled, 0 warnings, 10.89s)",
+      "2026-10-21T04:13:35.0795248Z packages/session-mycology build: [:session-mycology] Build completed. (55 files, 11 compiled, 0 warnings, 43.07s)",
+      "2026-10-21T04:13:39.5082262Z packages/extensions build: [:websearch-open-hax] Build completed. (53 files, 1 compiled, 0 warnings, 6.91s)",
+      "2026-10-21T04:13:48.8169258Z packages/sol build: [:server] Build completed. (202 files, 185 compiled, 0 warnings, 27.72s)",
+      "2026-10-21T04:13:52.9129472Z packages/turn-processor build: [:turn-processor] Build completed. (58 files, 14 compiled, 0 warnings, 41.39s)",
+      "2026-10-21T04:14:00.1502901Z packages/extensions build: [:opencode-apply-patch] Build completed. (52 files, 0 compiled, 0 warnings, 7.53s)",
+      "2026-10-21T04:14:03.9287466Z packages/extensions build: [:opencode-bootstrap] Build completed. (50 files, 0 compiled, 0 warnings, 3.77s)",
+      "2026-10-21T04:14:07.2284947Z packages/extensions build: [:opencode-chronos] Build completed. (50 files, 0 compiled, 0 warnings, 3.30s)",
+      "2026-10-21T04:14:10.8710496Z packages/extensions build: [:opencode-contract-runtime] Build completed. (62 files, 0 compiled, 0 warnings, 3.64s)",
+      "2026-10-21T04:14:14.1134565Z packages/extensions build: [:opencode-contract-runtime-v2] Build completed. (64 files, 0 compiled, 0 warnings, 3.24s)",
+      "2026-10-21T04:14:17.0209966Z packages/extensions build: [:opencode-custom-providers] Build completed. (50 files, 0 compiled, 0 warnings, 2.91s)",
+      "2026-10-21T04:14:20.2632066Z packages/extensions build: [:opencode-graph-memory] Build completed. (54 files, 0 compiled, 0 warnings, 3.24s)",
+      "2026-10-21T04:14:23.6022159Z packages/extensions build: [:opencode-image-render] Build completed. (54 files, 0 compiled, 0 warnings, 3.34s)",
+      "2026-10-21T04:14:26.4164401Z packages/extensions build: [:opencode-lisp-decomp-nudge] Build completed. (50 files, 0 compiled, 0 warnings, 2.81s)",
+      "2026-10-21T04:14:29.3298876Z packages/extensions build: [:opencode-opencode-global-instructions] Build completed. (62 files, 0 compiled, 0 warnings, 2.91s)",
+      "2026-10-21T04:14:32.6862846Z packages/extensions build: [:opencode-opmf-contract-gate] Build completed. (62 files, 0 compiled, 0 warnings, 3.36s)",
+      "2026-10-21T04:14:36.0531476Z packages/extensions build: [:opencode-receipt-river] Build completed. (64 files, 0 compiled, 0 warnings, 3.37s)",
+      "2026-10-21T04:14:38.9626811Z packages/extensions build: [:opencode-session-mycology] Build completed. (54 files, 0 compiled, 0 warnings, 2.91s)",
+      "2026-10-21T04:14:41.4098636Z packages/extensions build: [:opencode-task-timing] Build completed. (50 files, 0 compiled, 0 warnings, 2.45s)",
+      "2026-10-21T04:14:44.4834705Z packages/extensions build: [:opencode-websearch-open-hax] Build completed. (53 files, 0 compiled, 0 warnings, 3.07s)",
+      "2026-10-21T04:15:19.5819500Z packages/terminal-ui build: [:terminal-ui] Build completed. (57 files, 12 compiled, 0 warnings, 25.14s)",
+      "2026-10-21T04:15:24.1628631Z packages/rheos build: [:server] Build completed. (111 files, 53 compiled, 0 warnings, 23.84s)",
+      "2026-10-21T04:15:33.0244650Z packages/rheos build: [:cli] Build completed. (116 files, 57 compiled, 0 warnings, 8.85s)",
+      "2026-10-21T04:15:39.3578857Z packages/rheos build: [:github-sync] Build completed. (75 files, 28 compiled, 0 warnings, 6.33s)",
+      "2026-10-21T04:15:48.2703641Z packages/rheos build: [:app] Build completed. (95 files, 49 compiled, 0 warnings, 8.91s)",
+      "2026-10-21T04:16:11.8906168Z packages/eta-mu build: [:cli] Build completed. (166 files, 113 compiled, 0 warnings, 19.03s)"
+    ],
+    "actual_carrier_warning_lines": [
+      "2026-10-21T03:58:14.9862231Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'",
+      "2026-10-21T03:58:14.9865147Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+      "2026-10-21T03:58:14.9873849Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+      "2026-10-21T03:58:14.9876674Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'",
+      "2026-10-21T03:58:14.9878435Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'",
+      "2026-10-21T03:58:14.9879861Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'",
+      "2026-10-21T03:58:15.2133442Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'",
+      "2026-10-21T03:58:15.2135437Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+      "2026-10-21T03:58:15.2518118Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+      "2026-10-21T03:58:15.2520223Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'",
+      "2026-10-21T03:58:15.2569097Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'",
+      "2026-10-21T03:58:15.2571482Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'",
+      "2026-10-21T04:16:54.7584696Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02, DeLaGuardo/setup-clojure@ada62bb3282a01a296659d48378b812b8e097360, pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+    ],
+    "strict_whole_carrier_zero_warning": false,
+    "artifact": {
+      "id": 12320571591,
+      "name": "eta-mu-sandbox-c140cef92f5f38b50d226c2c8f1f2134c1261a4a",
+      "size_in_bytes": 310380465,
+      "url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12320571591",
+      "archive_download_url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12320571591/zip",
+      "expired": false,
+      "created_at": "2026-10-21T04:16:53Z",
+      "expires_at": "2026-11-20T04:16:44Z",
+      "updated_at": "2026-10-21T04:16:53Z",
+      "digest": "sha256:87d25e58bf97cc254a47c5c8ab7676620a977b9f35faeaafe94bb8866da0f177",
+      "workflow_run": {
+        "id": 39541426083,
+        "repository_id": 1189985055,
+        "head_repository_id": 1401249220,
+        "head_branch": "feat/anonymous-review-producer-20261021",
+        "head_sha": "1635d310a36c25b42646f14d4810359306fc76d9"
+      }
+    },
+    "artifact_bytes_downloaded_or_restore_executed": false,
+    "no_model_or_review_publication_qualification": true,
+    "logs_sha256": "fdfaf4a973e0e72ffea3f6aceb11203dcb63301ebffec228601956619b0ff8e8",
+    "limits": [
+      "Native metadata/digest and actual job logs observed; artifact was not downloaded, unpacked or restored.",
+      "This source includes unvalidated newly written receipt flats; current validator reproduction/correction is separate.",
+      "Whole workspace suite summary does not cover absent receipt-file admission; no fullledger pass inferred."
+    ]
+  },
+  "verification": {
+    "result": "PASS",
+    "root_parent": "4275451b7f80c70fdc17cca55e1d9cb798974003",
+    "new_child_receipt_events_valid": 12,
+    "historical_child_validation": {
+      "failed": true,
+      "invalid": 71,
+      "errors": 118
+    },
+    "root_new_catalog_schema_and_source_binding": "PASS; whole root history not asserted valid",
+    "root_ledger_prefixes_preserved": {
+      ".ημ/receipts.edn": {
+        "bytes": 376916,
+        "sha256": "98561fef78ff81b55a8fe90981dc6effef9550fb84690e9d0ea699183efff5cc"
+      },
+      ".ημ/kanban-events/ledger.edn": {
+        "bytes": 221093,
+        "sha256": "772fc875cc556e32eceecb6b69202ca0f9ab1e82692fe5d3e568085139f12646"
+      },
+      ".ημ/session-mycology/ledger.md": {
+        "bytes": 37832,
+        "sha256": "a898f6525f4986ce439f70aa3558e90a56fa73a5e91315ca3d67e4276c8ae206"
+      }
+    },
+    "all_23_gitlinks_preserved": true,
+    "existing_E0_E1_content_and_metadata_preserved": true,
+    "all_runtime_test_workflow_manifest_sources_unchanged": true,
+    "all_old_frozen_custody_bytes_preserved": true,
+    "local_links_and_native_evidence_digests": "PASS",
+    "root_drift": "No drift detected.",
+    "prior_root_test_scope": "36 tests / 286 assertions and 25 sources / 23 submodules / 39 invariants retained at unchanged code; not rerun for prose/data changes",
+    "program": "E0 breakdown, all milestones unqualified, CMS/Cephalon paused",
+    "incidents": [
+      "First prospective root event was schema-valid but a global temporary helper replacement misbound its subject source to the child. The semantic source guard caught it before append; original candidate retained as rejected, builder corrected, native validation plus exact subject/producer/repository guards passed before actual append.",
+      "Earlier inline Python capture checker had else0 SyntaxError before subprocess or append; corrected script ran actual full/new validators."
+    ]
+  },
+  "root_receipt": {
+    "native_envelopes": 1,
+    "new_record_sha256": "75fb3b2c1d39ece9e4939bb2b96258bee97545921c78367c6d304d94d7309d39",
+    "new_record_bytes": 4052,
+    "repo": "open-hax/foresight",
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "whole_root_history_validation": "not performed or inferred",
+    "root_original_prefix_preserved": true,
+    "incidents": [
+      "First prospective root event was schema-valid but a global temporary helper replacement misbound its subject source to the child. The semantic source guard caught it before append; original candidate retained as rejected, builder corrected, native validation plus exact subject/producer/repository guards passed before actual append.",
+      "Earlier inline Python capture checker had else0 SyntaxError before subprocess or append; corrected script ran actual full/new validators."
+    ]
+  },
+  "root_receipt_source_guard": "PASS: prospective root envelope schema and independent repository/source binding\n",
+  "root_receipt_builder": "(ns build-current-receipt\n  (:require [eta-mu.receipt-river.api :as api]\n            [eta-mu.receipt-river.domain.receipt :as receipt]\n            [eta-mu.receipt-river.shape.edn :as edn]\n            [eta-mu.receipt-river.law.receipt :as law]\n            [\"node:fs\" :as fs]))\n(def input (js->clj (js/JSON.parse (fs/readFileSync (first *command-line-args*) \"utf8\")) :keywordize-keys true))\n(def now (.toISOString (js/Date.)))\n(def application-version (.-version (js/JSON.parse (fs/readFileSync \"packages/eta-mu/package.json\" \"utf8\"))))\n(def payload (receipt/build-payload (:payload input) (:repository input) now :catalog))\n(def event (api/build-event {:event-id (random-uuid) :recorded-at now\n                              :component-manifest {:eta-mu/version application-version}\n                              :command \"source-owned receipt API / stabilization evidence catalog\"\n                              :producer {:actor/id \"codex\" :source/commit (or (:producer-source input) (:parent input))}\n                              :subject {:repository/id (str \"github.com/\" (:repository input))\n                                        :source/commit (:parent input)}\n                              :refs (:event-refs input)} payload))\n(def line (edn/format-line event))\n(def validation (api/validate-line line 348))\n(assert (:ok validation))\n(assert (empty? (law/record-errors event)))\n(fs/writeFileSync (:out input) (str line \"\\n\"))\n(println (pr-str {:valid (:ok validation) :repo (get-in event [:event/payload :repo])\n                 :recorded-at now :schema (:event/schema event) :event-id (:event/id event)}))\n",
+  "root_receipt_api_source_manifest": [
+    {
+      "path": "packages/receipt-river/src/cljs/eta_mu/receipt_river/api.cljs",
+      "source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "bytes": 1594,
+      "sha256": "c027fff0ef9dcbb2b3fa7b2ab77bf9afd0b240a6e8304661fcb2e4be332a0812",
+      "git_blob": "ed64a327e65398d9327c37c1b20e0c626a663d9d"
+    },
+    {
+      "path": "packages/receipt-river/src/cljs/eta_mu/receipt_river/domain/event.cljs",
+      "source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "bytes": 1388,
+      "sha256": "bd284edccb1e355b19a6b356593a7daa2cb1f52055024f8efc4aca9d90762253",
+      "git_blob": "511ce035d57998c8ebf01e5d84b57f981ab37e91"
+    },
+    {
+      "path": "packages/receipt-river/src/cljs/eta_mu/receipt_river/domain/receipt.cljs",
+      "source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "bytes": 1869,
+      "sha256": "adc98967a40d80cde6f3fdf9e328a221986c3f16b8b1631e18e1f4fa78b10a35",
+      "git_blob": "d9829c12e4dcdf3c1c6fd23a95a193ace17bd710"
+    },
+    {
+      "path": "packages/receipt-river/src/cljs/eta_mu/receipt_river/law/receipt.cljs",
+      "source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "bytes": 4927,
+      "sha256": "a40dd843cf298926dfbe229d5544470dbd51682fd538e841a0fad62d29bed320",
+      "git_blob": "99f480e1c3fc5be282b3d5bb64310eb052ace2b8"
+    },
+    {
+      "path": "packages/receipt-river/src/cljs/eta_mu/receipt_river/shape/edn.cljs",
+      "source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "bytes": 234,
+      "sha256": "0e06bef509eda4cf3aa63e53577d14b74e780563608aa52d6161ae296ceb3914",
+      "git_blob": "dc540c11a609b13646c8445d3b3392b373334cb7"
+    },
+    {
+      "path": "packages/receipt-river/src/cljs/eta_mu/receipt_river/extern/bus.cljs",
+      "source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "bytes": 273,
+      "sha256": "068f93ced2662e2493e5b6f42ce47b566b02b21eab225aab994b71de2e2a99fe",
+      "git_blob": "dc62d8918c92c3bc253986d9adb6c30964ff6345"
+    },
+    {
+      "path": "packages/eta-mu/package.json",
+      "source": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "bytes": 2044,
+      "sha256": "ef409d0d88b0c3fa6bc7dd6ea52ad3e881b83a5a5f3e44942b3a0094d18b79e6",
+      "git_blob": "793246d65ae57121f57bc87ab869a45d80b29b22"
+    }
+  ],
+  "qualification": false,
+  "remaining_program": "Complete original stabilization goal remains active; E0 breakdown, all milestones unqualified, CMS/Cephalon paused."
+}

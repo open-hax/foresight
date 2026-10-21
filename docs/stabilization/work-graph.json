@@ -1116,5 +1116,30 @@
     "existing_root_owner": "stabilization-e0",
     "milestones": "M0-M7 unqualified",
     "agents": "CMS/Cephalon paused"
+  },
+  "e0_receipt_adjudication_execution": {
+    "report": "docs/stabilization/e0-receipt-adjudication.md",
+    "overlay": "docs/stabilization/e0-receipt-adjudication.json",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 361,
+      "head": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5"
+    },
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/64af1dfcfc396aefdb62e2d933ccb2c26dbc96f24cd1cba0cca864f009480c8f.json.gz",
+      "sha256": "64af1dfcfc396aefdb62e2d933ccb2c26dbc96f24cd1cba0cca864f009480c8f",
+      "bytes": 158747,
+      "raw_sha256": "bb92d811a559d36001cd732698e0f615c07602b01838e73736501bdf30e6fe98",
+      "raw_bytes": 1559121,
+      "captures": 53
+    },
+    "new_valid_events": 12,
+    "historical_invalid_rows": 71,
+    "receipt_thread_open": true,
+    "publisher_owner": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "qualified": false,
+    "root_owner": "stabilization-e0",
+    "agents": "CMS/Cephalon paused"
   }
 }

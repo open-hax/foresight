@@ -2,7 +2,11 @@
 
 Updated October 20, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [candidate CI credential isolation and refreshed census](e0-ci-isolation.md).
+Latest execution: [completed native bundle and additive receipt adjudication](e0-receipt-adjudication.md).
+The full eta-mu bundle passed at source `1635d310`; current child `fb8bf0e1`
+adds twelve valid native receipt envelopes while retaining 71 invalid historical
+rows and the open receipt finding. No historical record is rewritten or admitted
+automatically. Earlier [four-carrier CI isolation](e0-ci-isolation.md).
 The fresh 03:58:42–03:59:00 UTC sweep retains 442 frozen identities, 441 open,
 one observed merge and five changed open reported head/base pairs; both passes
 are stable and no tuple changed since the 03:01 audit. PR 361 now removes App
@@ -305,6 +309,16 @@ comments and states the exact fork-terminal qualification limit. Historical
 comments, events, snapshots and source-window overlays remain unchanged.
 This correction supplies no approval, inference, publication or milestone credit.
 
+## Completed bundle and receipt admission — October 21 UTC
+
+[Execution](e0-receipt-adjudication.md) binds the completed 15-suite eta-mu
+bundle, exact checkout/tree, real warnings and artifact-metadata limits.
+The receipt API reproduces eleven new format-invalid records; current-time
+adjudications and a catalog validate without altering original bytes. Full
+history still fails: 71 invalid rows / 118 errors. The receipt review stays open.
+The exact existing publisher plan and 37 source captures establish interface
+compatibility only; no implementation, readiness or adoption follows.
+
 ## Canonical delivery relationships
 
 **CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.
@@ -336,4 +350,4 @@ outside this registration result.
 
 ## Next action
 
-Continue E0 with current-head PR 361 hosted/review convergence and remaining warning/publication contracts, preserving the root merge freeze and paused CMS/Cephalon agents.
+Continue E0 with current-source receipt admission/review and the existing trusted-publisher implementation, preserving historical bytes, root merge freeze and paused CMS/Cephalon agents.

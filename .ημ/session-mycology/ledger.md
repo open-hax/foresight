@@ -621,3 +621,13 @@
   spore: none
   receipt-refs: c3ea0833a2489db3cf60fb3bdd6fff254f67d27b2f6f55b84f18c6a12f5300ed
   note: The operator authored fused count and source labels after a prior correction. Use spaced prose and explicit identifier labels at authoring time. Narrow overbroad dispositions; append readable corrections rather than edit immutable events or content-addressed evidence. Terminal success must name which execution path ran and every required unproven capability. Existing custody and terminal-truth spores cover this recurring pattern; no duplicate spore or promotion.
+
+- ts: 2026-10-21T04:50:09.194875Z
+  session: codex/stabilization-portfolio
+  task: Validate new receipt envelopes against source-owned schema and preserve invalid history
+  p-efficiency: 0.71
+  p-friction: 0.80
+  p-skill-candidate: 0.85
+  spore: 20261021-source-schema-before-append.md
+  receipt-refs: 75fb3b2c1d39ece9e4939bb2b96258bee97545921c78367c6d304d94d7309d39
+  note: A generic flat template omitted the local repo field and used offset-string timestamps. Native package construction plus validation diagnoses all eleven new invalid rows, while append-only history stays unchanged and failed. New valid adjudications attest source/format facts, not retroactive execution approval. Shape validation also cannot prove repository/source binding: an overbroad temporary helper replacement was caught before append by an independent subject/producer check. Use source-owned builders, negative controls and semantic binding guards before irreversible appends. Retain all failures and historical states. One project-local spore incubated; no promotion or canonical skill mutation.
