@@ -147,7 +147,7 @@
     (is (= "riatzukiza/mojomast-opencode"
            (:dev/origin (first (filter #(= "opencode" (:source/path %)) rows)))))))
 
-(deftest dev-origin-required-paths-come-from-the-project-model
+(deftest dev-origin-required-upstreams-come-from-the-project-model
   ;; Independently owned submodules need a row; the nested canonical .agents does not.
   (let [required (project/dev-origin-required-upstreams)]
     (is (= 23 (count required)))
