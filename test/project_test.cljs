@@ -187,6 +187,25 @@
     (is (some #(= :foresight/gitmodule-url-matches (:law/id %))
               (:errors result)))))
 
+(deftest gitmodule-dev-origin-urls-pass-the-project-gate
+  ;; CodeRabbit PRRT_kwDOU4VJMM6u7W4B: a module pointed at its row's dev origin
+  ;; is accepted by dev-origins/validate, so the project gate must accept it too.
+  (let [dev-origin-repos {"shx" "riatzukiza/shx"}
+        point (fn [url] (mapv #(if (= "shx" (:path %)) (assoc % :url url) %)
+                              (project/gitmodule-declarations)))
+        ids (fn [actual] (set (map :law/id (:errors (law/validate-project project/project actual
+                                                                           dev-origin-repos)))))]
+    (testing "the declared org URL and the matching dev origin both pass"
+      (is (:valid? (law/validate-project project/project (project/gitmodule-declarations) dev-origin-repos)))
+      (is (:valid? (law/validate-project project/project (point "git@github.com:riatzukiza/shx.git") dev-origin-repos)))
+      (is (:valid? (law/validate-project project/project (point "https://github.com/riatzukiza/shx.git") dev-origin-repos))))
+    (testing "an unrelated URL, or another path's dev origin, is still drift"
+      (is (contains? (ids (point "git@github.com:riatzukiza/other.git")) :foresight/gitmodule-url-matches))
+      (is (contains? (set (map :law/id (:errors (law/validate-project project/project
+                                                                      (point "git@github.com:riatzukiza/shx.git")
+                                                                      {}))))
+                     :foresight/gitmodule-url-matches)))))
+
 (deftest duplicate-source-paths-are-illegal
   (let [first-path (get-in project/project [:project/sources 0 :source/path])
         changed (assoc-in project/project [:project/sources 1 :source/path] first-path)
