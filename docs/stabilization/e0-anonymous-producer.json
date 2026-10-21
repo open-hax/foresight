@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "e0-anonymous-producer-execution",
+  "observed_at": "2026-10-21T02:34:40.043871+00:00",
+  "producer": {
+    "repository": "open-hax/eta-mu",
+    "pr": 361,
+    "head": "9c05ba9d7de528529d08b901a1f3a6635fb34f7d",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "red": "83dd52478fd6928027aa66bfa665f52b3953e671",
+    "composition": "96862eef543ace2bbd788221ae05ee19121312db",
+    "card": "cf32641a-b336-407e-b68b-c75ec7d20dbb",
+    "state": "testing",
+    "local_checks": {
+      "registered_tests": 338,
+      "pass": 338,
+      "fail": 0,
+      "skip": 0,
+      "emitted_warnings": 0,
+      "actionlint_shellcheck": "PASS"
+    },
+    "test_scope": "Actual extracted workflow steps, inert model/catalog/validation boundaries and existing TRANSPORT_MOCK_ONLY verifier; no canonical production-law or native provider credit",
+    "hosted_scope": {
+      "ordinary_producer_jobs": "SKIPPED for fork enrollment",
+      "terminal_producer_job": "SUCCESS unsupported-event path, not inference",
+      "main_tests_job": "SUCCESS two contract-guard cases, not registered338; actual warning carrier",
+      "executed_merge": "8f4256e8f48c3a5a951f73441de60ce45754b6f0",
+      "tree": "0c41aca0623bb5bd63983058b1abf0b78ca04cfc",
+      "merge_tree_equals_head_tree": true
+    },
+    "accepted": false,
+    "qualified": false,
+    "auto_merge": false
+  },
+  "root": {
+    "pr": 142,
+    "observed_head": "0679659a14bcb83313779a617656c648de07d395",
+    "native_run": 39530887009,
+    "deterministic_and_context_jobs": "SUCCESS",
+    "model_job": "FAILURE absent App credentials",
+    "required_terminal_review_gate": "FAILURE",
+    "merges": "FROZEN until isolated route and required gate qualify",
+    "protection_waived": false,
+    "superseded_run": 39522223787,
+    "superseded_terminal_state": "completed/cancelled"
+  },
+  "existing_next_dependencies": {
+    "publisher": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "hosted_proof": "164c2de7-7495-4738-94e1-a81167edefb0"
+  },
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
+    "sha256": "92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185",
+    "bytes": 2647915,
+    "uncompressed_sha256": "a702a5bb4b4387eb54bfb17f2fec4aa92177f98cc42d0bb344d4e900061b5794",
+    "uncompressed_bytes": 18102773
+  },
+  "source_preservation": {
+    "frozen_denominator": 442,
+    "new_pr361": "separate remediation; no frozen-row replacement",
+    "root_gitlinks_changed": false,
+    "primary_eta_revision": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+    "reviewed_plan_pr22": "unchanged",
+    "owned_worktree": "clean, pushed and removed"
+  },
+  "remaining_qualification": {
+    "M0_M7": "unqualified",
+    "B1_B2_B3": "unassessed",
+    "CMS_Cephalon_agents": "paused",
+    "character_fixture_oracle": "open"
+  }
+}

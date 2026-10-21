@@ -1003,5 +1003,70 @@
     "forwarded_secret_names": [],
     "hosted_result": null,
     "existing_owner": "stabilization-e1"
+  },
+  "e0_anonymous_producer_execution": {
+    "report": "docs/stabilization/e0-anonymous-producer.md",
+    "overlay": "docs/stabilization/e0-anonymous-producer.json",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 361,
+      "head": "9c05ba9d7de528529d08b901a1f3a6635fb34f7d",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "red": "83dd52478fd6928027aa66bfa665f52b3953e671",
+      "composition": "96862eef543ace2bbd788221ae05ee19121312db",
+      "card": "cf32641a-b336-407e-b68b-c75ec7d20dbb",
+      "state": "testing",
+      "local_checks": {
+        "registered_tests": 338,
+        "pass": 338,
+        "fail": 0,
+        "skip": 0,
+        "emitted_warnings": 0,
+        "actionlint_shellcheck": "PASS"
+      },
+      "test_scope": "Actual extracted workflow steps, inert model/catalog/validation boundaries and existing TRANSPORT_MOCK_ONLY verifier; no canonical production-law or native provider credit",
+      "hosted_scope": {
+        "ordinary_producer_jobs": "SKIPPED for fork enrollment",
+        "terminal_producer_job": "SUCCESS unsupported-event path, not inference",
+        "main_tests_job": "SUCCESS two contract-guard cases, not registered338; actual warning carrier",
+        "executed_merge": "8f4256e8f48c3a5a951f73441de60ce45754b6f0",
+        "tree": "0c41aca0623bb5bd63983058b1abf0b78ca04cfc",
+        "merge_tree_equals_head_tree": true
+      },
+      "accepted": false,
+      "qualified": false,
+      "auto_merge": false
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
+      "sha256": "92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185",
+      "bytes": 2647915,
+      "uncompressed_sha256": "a702a5bb4b4387eb54bfb17f2fec4aa92177f98cc42d0bb344d4e900061b5794",
+      "uncompressed_bytes": 18102773
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json",
+      "sha256": "51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3",
+      "bytes": 4208
+    }
+  },
+  "e0_native_review_dispositions": {
+    "report": "docs/stabilization/e0-review-findings.md",
+    "selection_amendments": "docs/stabilization/e5-source-amendments.md",
+    "open_oracle_comment": 4332332161,
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
+      "sha256": "92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185",
+      "bytes": 2647915,
+      "uncompressed_sha256": "a702a5bb4b4387eb54bfb17f2fec4aa92177f98cc42d0bb344d4e900061b5794",
+      "uncompressed_bytes": 18102773
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json",
+      "sha256": "51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3",
+      "bytes": 4208
+    }
   }
 }

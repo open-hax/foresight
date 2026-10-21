@@ -31,4 +31,11 @@ threshold cases remain required before adopting the completion criterion.
 requires the adopted contract to reference a new immutable qualification record
 binding the reviewed comparator, values, fields, units, exact implementation and
 actual tests. This custody checkpoint cannot pass that gate. Existing E5 receives
-the evidence through Rheos; CMS/Cephalon agents remain paused.
+the evidence through Rheos. The historical hold is recorded by Rheos write-id
+`1792544921882-0.jt4swidckmduyv4279v` for `stabilization-e5`, retained in the
+[immutable execution attempt](../../.ημ/stabilization/snapshots/f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b.json).
+It references the candidate/hold record above. CMS/Cephalon agents remain paused.
+
+[Source amendments](e5-source-amendments.md) subsequently bind the recovered
+selection manifest, separate exact head/base observations and the still-missing
+end-to-end fixture oracle. No original recovered byte sequence is changed.

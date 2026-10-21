@@ -581,3 +581,13 @@
   spore: 20261021-live-ref-and-tested-merge-custody.md
   receipt-refs: 2088bade161bfa2c14d33c01d3aef22afa66cda87305ad6e02aabf7b1a44d5d4
   note: Retain reported PR bases, live refs, proposed merges and actual tested trees as separate evidence. Source discovery recovered existing isolated publisher and reviewed card chain while exposing unadopted protocol differences and historical warnings. Verify canonical card mutations semantically while demanding exact ledger prefixes. One spore incubated; no promotion.
+
+- ts: 2026-10-21T02:37:07.159150+00:00
+  session: codex/stabilization-portfolio
+  task: Execute anonymous producer dependency and settle additive custody review findings
+  p-efficiency: 0.82
+  p-friction: 0.51
+  p-skill-candidate: 0.58
+  spore: none
+  receipt-refs: 6fd50def5bbce538723d6471cf0c69fa4dc064d1cb5a4adc5980a91c563e65e3
+  note: Follow existing reviewed ownership into actual extracted-step RED/GREEN on accepted current verifier. Preserve mixed ledger histories, distinguish local transport fixtures from native production qualification, and inspect successful job scope rather than its label. Root merge freeze and one concrete oracle remain explicit; apply custody amendments without editing recovered bytes. Native metadata refusal and a draft revision typo were corrected before publication. Existing source-custody/terminal-truth skills cover this; no new spore or promotion.

@@ -1,0 +1,86 @@
+{
+  "kind": "stabilization-anonymous-producer-execution-attempt",
+  "schema_version": 1,
+  "observed_at": "2026-10-21T02:37:07.159150+00:00",
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
+    "sha256": "92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185",
+    "bytes": 2647915,
+    "uncompressed_sha256": "a702a5bb4b4387eb54bfb17f2fec4aa92177f98cc42d0bb344d4e900061b5794",
+    "uncompressed_bytes": 18102773
+  },
+  "artifacts": [
+    {
+      "path": ".github/workflows/eta-mu-review.yml",
+      "sha256": "2c53426df5e2d86fcb66f928880d59e1921d0743b460a7c8fecb169771b149f0",
+      "bytes": 2608
+    },
+    {
+      "path": "docs/stabilization/e0-anonymous-producer.md",
+      "sha256": "83d65a9f0c811da66046ba7d7a871e45bb414e410011df343ae7e2aa6c538da1",
+      "bytes": 4669
+    },
+    {
+      "path": "docs/stabilization/e0-anonymous-producer.json",
+      "sha256": "3b787751e611e121f7ed2dd4c43b73ed5672863e0093ff3622774741a335488a",
+      "bytes": 2892
+    },
+    {
+      "path": "docs/stabilization/e0-review-findings.md",
+      "sha256": "9a83d8b9a20f1f6d84378a9d376afe161a0601637f97232565d507e88196a975",
+      "bytes": 3471
+    },
+    {
+      "path": "docs/stabilization/e5-source-amendments.md",
+      "sha256": "3fdb4ebae17ea77b82d5017191fa6e07e007b8c584cb1520b508b895cefc3a07",
+      "bytes": 3361
+    },
+    {
+      "path": "docs/stabilization/e5-replay-custody.md",
+      "sha256": "b4bf753378590139131727b2c68d9d5f788421bea601a582c629cf38e691bfba",
+      "bytes": 2639
+    },
+    {
+      "path": ".ημ/notes/2026-10-07-cephalon-field-kernel-selection.md",
+      "sha256": "611e12472f8c565a2855b71441a505ac74bde4a406ba0b735777ccd83026d4b4",
+      "bytes": 530
+    },
+    {
+      "path": ".ημ/stabilization/recovered/README.md",
+      "sha256": "3d74b20849d9ed5693d3d3f1080223f83cbfc6271c6be02c106109f299f7414a",
+      "bytes": 994
+    },
+    {
+      "path": ".ημ/stabilization/recovered/f2635cf86afa665343cc7c43b743f58a1cb09a74.json",
+      "sha256": "8856028e69b1269cd0caa59f92dc3d29bce488e7b96e1eec34ae50523495060b",
+      "bytes": 7435
+    }
+  ],
+  "validation": {
+    "root_project": "PASS25sources23submodules39invariants",
+    "catalog": "PASS",
+    "clj_kondo": "0errors0warnings",
+    "actionlint_with_shellcheck": "owning root caller PASS, no parsed runtime change",
+    "rheos_root": "no drift",
+    "producer_local_registered": "338/338,0fail/skip/warnings",
+    "canonical_card_integrity": {
+      "result": "PASS",
+      "scope": "Actual old/new canonical E0 section content prefixes and prior frontmatter except lawful write-id retained; first verifier skipped absent body field and was strengthened to mandatory section assertions.",
+      "preserved_sections": 2,
+      "new_descriptive_metadata": "Census acquisition has no incoming epic dependency. Nested execution qualification is held on riatzukiza/clio#5 at exact source 5a7a04c6ced7b15be940e16dc772c95b0525d55f and its native review gates; old 5a7a04c is only a display alias. E2 depends on E0, so adding an incoming E2 edge here would create a cycle. All 23 consumer pins stay unchanged."
+    },
+    "preservation": "Exact ledger prefixes/unrelated bytes and all root gitlinks retained; primary eta clean0ed; owned pushed worktree removed"
+  },
+  "limits": [
+    "Producer native fork skips are not anonymous inference.",
+    "Native main-tests success covers2contractguard cases with real carrier warnings, not338hosted owner.",
+    "Root current required review gate fails absent App; root merges frozen without protection change.",
+    "Character oracle remains open, no invented fixture results, design adoption or B1-B3 qualification.",
+    "No milestone, caller pin, trusted publication or paused-agent qualification."
+  ],
+  "honest_corrections": [
+    "Custom source-revision metadata key refused before effect; allowed description field records full source/prerequisite rationale.",
+    "Draft RED SHA corrected against actual Git-derived commit file before publication.",
+    "Card verifier strengthened from skipped absent body branch to mandatory native sections/frontmatter prefix assertions."
+  ]
+}

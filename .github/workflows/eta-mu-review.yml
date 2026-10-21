@@ -39,3 +39,5 @@ jobs:
     # This legacy workflow requires App credentials before model execution;
     # its reviewer remains unavailable until the existing anonymous producer /
     # trusted publisher route is implemented and independently qualified.
+    # Root merges remain frozen until that route and the required review gate
+    # qualify; missing credentials or a failed gate never permit a merge.

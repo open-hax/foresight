@@ -2,8 +2,10 @@
 
 Updated October 20, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [442-source live-base topology audit](e0-base-topology.md) and
-[shared review-route source reconciliation](e0-review-route.md).
+Latest execution: [anonymous producer repair and native gate proof](e0-anonymous-producer.md),
+[review dispositions](e0-review-findings.md) and [selection custody amendments](e5-source-amendments.md).
+The [442-source live-base topology audit](e0-base-topology.md) and
+[shared review-route source reconciliation](e0-review-route.md) retain their source windows.
 Earlier [directory-bound segment ownership and hosted proof](e0-directory-binding.md)
 retains its original source window.
 Earlier [shared-ledger corrections](e0-execution.md) retain their original source window.
@@ -234,6 +236,36 @@ The [immutable caller supplement](../../.ημ/stabilization/snapshots/90caac8f69
 binds exact before/after configuration, local verification and the existing E1
 comment/readback. Earlier topology and source-custody artifacts remain intact.
 
+## Anonymous producer execution and native review correction — October 20
+
+The existing producer now has RED/GREEN commits in [eta-mu PR361](https://github.com/open-hax/eta-mu/pull/361),
+head `9c05ba9d7de528529d08b901a1f3a6635fb34f7d`, accepted-source base `7112c36440d180ca183d6a3f89661cee161fdae5`.
+[Execution proof](e0-anonymous-producer.md) preserves current verifier/recovery,
+both source histories and exact ledger suffixes. Actual Rheos hops place the
+existing producer card in testing. All 338 local registered tests and unfiltered
+workflow checks pass; inert fixtures provide no native provider or canonical
+production-law qualification. The fork producer jobs are natively skipped;
+terminal success does not mean inference. Other native CI/review remains pending.
+The successful main-tests channel ran two contract-guard cases and emitted
+warnings, so it is not a full hosted-owner or warning-free baseline.
+
+Root067's actual deterministic/context jobs passed, but the missing-App model
+job and required terminal gate failed. Native protection still requires the
+existing review gate and CodeRabbit. **Root merges remain frozen until the
+isolated route and required gate qualify.** Superseded credential-bearing run
+39522223787 is confirmed cancelled; no signing keys or gate waivers are restored.
+
+[Current review dispositions](e0-review-findings.md) correct custody additively:
+original recovered bytes and historical comments remain intact, the exact
+selection manifest is recovered and linked, full Clio source/prerequisite
+rationale is in allowed descriptive metadata, and the original E5 receipt is
+bound. The concrete character oracle remains an open finding. No paused agent
+or accepted product baseline advances. PR361 is separate from the frozen442.
+
+The [immutable producer/custody execution attempt](../../.ημ/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json)
+binds exact report/configuration hashes, native evidence, actual operational
+readbacks and local verification limits.
+
 ## Canonical delivery relationships
 
 **CMS/translations:** existing translation/SME card `abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf` and content/publication card `3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e` remain separate execution contracts, linked through E4 and the E7 handoff. Their current `todo` status does not imply complete CMS story coverage.
@@ -265,4 +297,4 @@ outside this registration result.
 
 ## Next action
 
-Continue existing E0 reconciliation using live B/H and actual executed-candidate evidence; preserve main verifier/source and settle the existing producer/readiness dependency before any review-route activation or consumer-pin update.
+Read current-head PR361 native review and full registered-owner CI evidence; settle actual findings while preserving separate trusted-publisher/hosted-proof obligations and the root merge freeze.
