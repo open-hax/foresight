@@ -618,6 +618,16 @@
 (defn submodule-sources []
   (filterv #(= :git-submodule (:source/type %)) sources))
 
+(defn dev-origin-required-paths
+  "Submodule paths that need a dev-origin row: every independently owned
+  repository. Nested canonical inputs such as .agents are excluded. Derived
+  from the manifest model, not from dev-origin rows or current URLs."
+  []
+  (into #{}
+        (comp (filter #(= :independent-repository (:source/ownership %)))
+              (map :source/path))
+        (submodule-sources)))
+
 (defn consolidation-inputs []
   (filterv :source/consolidation? sources))
 

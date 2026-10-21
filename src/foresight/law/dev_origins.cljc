@@ -15,12 +15,16 @@
       (str/starts-with? (or repo "") "octave-commons/")))
 
 (defn validate
-  "Validate dev-origin `rows` against `.gitmodules` `modules` and the caller's
+  "Validate dev-origin `rows` against `.gitmodules` `modules`, the caller's
   `network-roots` facts (org upstream -> GitHub fork-network root; an absent
-  upstream is its own root). Coverage is keyed by submodule path: a module is
-  covered when it points at an org repository, or at the dev origin of the row
-  for its path."
-  [rows modules network-roots]
+  upstream is its own root) and `required-paths`, the manifest-derived set of
+  submodule paths that must each have a row (independently owned repositories;
+  nested canonical inputs such as .agents are left out by the caller).
+  Coverage is keyed by submodule path: a path is required when the manifest
+  requires it or its module points at an org repository, and a module also
+  counts when it points at the dev origin of the row for its path. Required
+  paths never come from the rows, so deleting a row cannot hide its path."
+  [rows modules network-roots required-paths]
   (let [row-by-path (into {} (map (juxt :source/path identity)) rows)
         module-repos (into {} (map (fn [{:keys [path url]}] [path (github-repo url)])) modules)
         org-modules (into {}
@@ -29,7 +33,9 @@
                                         (and (some? repo)
                                              (= repo (:dev/origin (get row-by-path path)))))))
                           module-repos)
-        paths (set (keys org-modules))
+        paths (into (set (keys org-modules))
+                    (filter #(contains? module-repos %))
+                    required-paths)
         present (set (map :source/path rows))
         error (fn [id value] {:law/id id :actual value})
         errors (concat
