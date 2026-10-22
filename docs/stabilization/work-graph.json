@@ -1313,5 +1313,23 @@
     "qualified": false,
     "owner": "stabilization-e0",
     "agents": "CMS/Cephalon paused"
+  },
+  "e0_collector_verifier_execution": {
+    "report": "docs/stabilization/e0-collector-verifier-execution.md",
+    "overlay": "docs/stabilization/e0-collector-verifier-execution.json",
+    "census": "docs/stabilization/e0-collector-verifier-census.json",
+    "child_head": "87187ddc3a375c4fcea28b7c882659737f53e698",
+    "frozen_PRs": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "changed_open_H_B_from_freeze": 4,
+    "source_tuple_drift": 0,
+    "proposed_merge_drift": 4,
+    "followup_changed_records_stable": true,
+    "tested_candidates": 0,
+    "publisher": "in_progress",
+    "qualified": false,
+    "CMS_Cephalon": "paused"
   }
 }

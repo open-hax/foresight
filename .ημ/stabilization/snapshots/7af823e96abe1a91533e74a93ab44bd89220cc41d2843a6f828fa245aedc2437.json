@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "kind": "e0-collector-verifier-execution-and-20261022-census-attempt",
+  "root_parent": "6043d6f3fd927d107d1e1ba4981c08415741013e",
+  "at": "2026-10-22T01:05:39.271162+00:00",
+  "child_published_head": "87187ddc3a375c4fcea28b7c882659737f53e698",
+  "files": [
+    {
+      "path": ".\u03b7\u03bc/kanban-events/ledger.edn",
+      "bytes": 244582,
+      "sha256": "89ff5e3f0ca4013b9e6da3ac5590dbc50cc2881a18bca0c943d1b8973d1727f2"
+    },
+    {
+      "path": ".\u03b7\u03bc/receipts.edn",
+      "bytes": 400700,
+      "sha256": "186eb1fedacdbcd9af9d9f3b5ffcb1dcbe5c5eb9e2c3aeecbb43ad9075b32f4c"
+    },
+    {
+      "path": ".\u03b7\u03bc/session-mycology/ledger.md",
+      "bytes": 44227,
+      "sha256": "0baaed0f69b0c5cb17204147b4c321b0150a701eb1860d1794b4ab46d27c8652"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/2fa614180d66e297c7e80505642ff75760145f9314458603d7fe2576412351f6.json.gz",
+      "bytes": 26112,
+      "sha256": "2fa614180d66e297c7e80505642ff75760145f9314458603d7fe2576412351f6"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/a88fef68f9a5a6fdbf386c2a3b1e4bfb416b2b45526761cfab787bfcc4c554f7.json.gz",
+      "bytes": 180184,
+      "sha256": "a88fef68f9a5a6fdbf386c2a3b1e4bfb416b2b45526761cfab787bfcc4c554f7"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/a91d3c75c97b90d94adacefed2b29e847733c27667c50ee971ef7efc14a3cf16.json.gz",
+      "bytes": 11747,
+      "sha256": "a91d3c75c97b90d94adacefed2b29e847733c27667c50ee971ef7efc14a3cf16"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "bytes": 40574,
+      "sha256": "723e929d6dea0878965d016be3a601613635bda8c59c97cd0935ca81f70d4ffc"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "bytes": 17125,
+      "sha256": "0c9611491274016857625b69766261598cd6a9ce0f5e4678360e82d5856fd4d8"
+    },
+    {
+      "path": "docs/stabilization/e0-collector-verifier-census.csv",
+      "bytes": 326750,
+      "sha256": "70b7b2c1c4dbbc96b1852b5468959831e358b4259f485718d0c07c1af5f6a0b5"
+    },
+    {
+      "path": "docs/stabilization/e0-collector-verifier-census.json",
+      "bytes": 724866,
+      "sha256": "cad159624cd0c8f49ce269b6b7ad10c7a21fa0b9e5b31826802a854f1fa91b73"
+    },
+    {
+      "path": "docs/stabilization/e0-collector-verifier-execution.json",
+      "bytes": 88931,
+      "sha256": "8ef800f27a51eb6d5ade4bc1c5c59b3831d69d4fe077cd28850e26c9e73779e7"
+    },
+    {
+      "path": "docs/stabilization/e0-collector-verifier-execution.md",
+      "bytes": 6098,
+      "sha256": "d047366e75c0d2c1707a04366ebebf7921a28da15ad93a6536d50ac2d8af4857"
+    },
+    {
+      "path": "docs/stabilization/tracker.md",
+      "bytes": 32177,
+      "sha256": "476dd03ba73824a9c6be3a85fa4dab25f8323a8bb6848d7f69392d285b1c2988"
+    },
+    {
+      "path": "docs/stabilization/work-graph.json",
+      "bytes": 63897,
+      "sha256": "faded12b5cfceb9efb60196fadce62ded3059e5baee65a91153320b8083f1bb6"
+    }
+  ],
+  "verification": {
+    "result": "PASS",
+    "at": "2026-10-22T01:05:01.157559+00:00",
+    "root_parent": "6043d6f3fd927d107d1e1ba4981c08415741013e",
+    "all_three_prefixes_preserved": true,
+    "all23gitlinks_unchanged": true,
+    "prior_reports_and_censuses_unchanged": true,
+    "graph_prior_keys_equal": true,
+    "only_owned_E0_E1_comments": true,
+    "prior_card_metadata_and_bodies_preserved": true,
+    "native_captures_verified": 87,
+    "census": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 437,
+        "MERGED": 4,
+        "CLOSED": 1
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 186,
+      "open_reported_base_differs_from_live_tip": 181,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 4,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 295,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 137
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 6
+    },
+    "tested_candidates": 0,
+    "receipt": {
+      "valid": true,
+      "prefix-preserved": true,
+      "prefix-bytes": 398079,
+      "after-sha256": "186eb1fedacdbcd9af9d9f3b5ffcb1dcbe5c5eb9e2c3aeecbb43ad9075b32f4c",
+      "record-sha256-with-LF": "a10a590a0e2316e6671ef96539fcd629fef27963008e8f70fd5e226f23f8a4c3",
+      "accepted-base-suffix": 47,
+      "invalid-new": 2,
+      "qualification": false
+    },
+    "child_pushed_and_clean_worktree_removed": true,
+    "CMS_Cephalon": "paused",
+    "qualification": false
+  },
+  "P1_settled": false,
+  "qualification": false
+}

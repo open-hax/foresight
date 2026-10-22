@@ -1,0 +1,1844 @@
+{
+  "schema_version": 1,
+  "kind": "e0-native-collector-source-and-immutable-verifier-execution",
+  "at": "2026-10-22T01:02:56.739513+00:00",
+  "root_parent": "6043d6f3fd927d107d1e1ba4981c08415741013e",
+  "publisher": {
+    "repository": "open-hax/eta-mu",
+    "fork": "riatzukiza/eta-mu",
+    "pr": 362,
+    "head": "87187ddc3a375c4fcea28b7c882659737f53e698",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "code_source": "57a3ad2356c3c515474bc2b29ec36a700abe56f4",
+    "state": "in_progress",
+    "full_story_complete": false,
+    "execution": {
+      "schema_version": 1,
+      "kind": "trusted-publication-collector-and-immutable-verifier-execution",
+      "at": "2026-10-22T00:55:34.569003+00:00",
+      "repository": "open-hax/eta-mu",
+      "pr": 362,
+      "source_base": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+      "source": "57a3ad2356c3c515474bc2b29ec36a700abe56f4",
+      "owner": {
+        "uuid": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+        "status": "in_progress",
+        "assignee": "Codex",
+        "points": 5,
+        "full_story_complete": false
+      },
+      "code_files": [
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/README.md",
+          "bytes": 1494,
+          "sha256": "db5f920322f20e6f82192894617c1cea8c5ad9705b575877767a770e1ac56067"
+        },
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/domain/review.cljc",
+          "bytes": 16650,
+          "sha256": "0df06e46f9307f9a80f4dd70013d6fb8f869a99ddff99fc00cf66c0e4810b466"
+        },
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/extern/review_invocation.cljs",
+          "bytes": 10639,
+          "sha256": "17dda3b9121e4ab96829a5f3ab3d181ca267ca95bd1aba6c2ac33ce47ef3a0ae"
+        },
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/law/review_invocation.cljc",
+          "bytes": 16075,
+          "sha256": "7a97ff024da488b6b847d1af5053508b18c6d135ad19841bf0faa4ea3dafd133"
+        },
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/shape/git_diff_path.cljc",
+          "bytes": 3522,
+          "sha256": "168a2ab5e16cdd377e1749fbb1278ce6cb82ecd0676968dc69e8e38d83e9dfba"
+        },
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/publish-opencode-review.cjs",
+          "bytes": 6572,
+          "sha256": "bb75bc57d8eeaf7edbd77f34e9a4da2d319617d06809f9aadfb0d94e7ae6c2c9"
+        },
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/review-invocation.cjs",
+          "bytes": 144409,
+          "sha256": "d9fea235fddec9581ba1be959e596f32b82588f78cef5fd76d55f04d24b91030"
+        },
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/run-opencode-review-recovery.mjs",
+          "bytes": 86229,
+          "sha256": "7e12b32abebf27b1e87bb9767bcf217caf8ce1cc0a7a05515a67f91b9005e133"
+        },
+        {
+          "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/runtime.json",
+          "bytes": 3461,
+          "sha256": "1fd734d89c4b18dce24a6a87c6024561382b52531285b020fded67e2410d6e8a"
+        },
+        {
+          "path": ".github/scripts/opencode_review_collection_test.cljs",
+          "bytes": 26642,
+          "sha256": "46bae9bcff9a1f7b512b79c41785d1235c6ace37320e664df8ac8a6715e35353"
+        },
+        {
+          "path": ".github/scripts/opencode_review_source_test.cljs",
+          "bytes": 19660,
+          "sha256": "1f949ebc77940855b813c2967dff9389f06d205c53e93dc0615436ae038fe2e3"
+        },
+        {
+          "path": ".github/scripts/opencode_review_verification_test.cljs",
+          "bytes": 19643,
+          "sha256": "3dd1bfbeb87207720823afe50217956931a8ead7de6a5dcecc6c73970124573d"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc",
+          "bytes": 1915,
+          "sha256": "8df8fc390969dde4f5668ecb55bc8ae026beda85803367820e4fdbf1df9b4274"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc",
+          "bytes": 2954,
+          "sha256": "c2ff6731ed49e2ed035fd4987ae8fe628b432404fd095f45647ae20d4152e09f"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc",
+          "bytes": 1670,
+          "sha256": "23ff9f3da9633b43f7eef3870988c158816420109a2ce9f21fafac253dac6ba1"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_collection.cljs",
+          "bytes": 4861,
+          "sha256": "f2ac112aaf6ff7aec23e4068b5bc81d405ba09f6955de105c62de0b6ceb706bb"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_source.cljs",
+          "bytes": 14658,
+          "sha256": "82d3855c84220d9346e3e79b7e4615e48e7cf552cdde089e1040635acad1aa34"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs",
+          "bytes": 20104,
+          "sha256": "596087fc00f5236c7b2b820415d0a30d93df43f17bb0ae71ca289d22d7568015"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_collection.cljs",
+          "bytes": 17627,
+          "sha256": "7948a20435a8fffa04cf3644210ecd54eef9a30fac202807703b378a4cab4009"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_source.cljs",
+          "bytes": 1433,
+          "sha256": "b616b4c806b623a7c559332698c2059a2a88706b153a09701df0122f770f4cc8"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs",
+          "bytes": 2119,
+          "sha256": "30e227d21a94bdebbe28bd7c166f19be7af2a5a88a39c596a1db478fc0babca5"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/law/review_collection.cljc",
+          "bytes": 3171,
+          "sha256": "94bff9dfd9592fda759f2bd3aa638cd52ad63c1bb109840fe7b19247e722f550"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/law/review_source.cljc",
+          "bytes": 2253,
+          "sha256": "e7b7fdd895bb49c2e58d7e020651ae5a1f8171229802075cb1ea2db49967660a"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc",
+          "bytes": 2447,
+          "sha256": "844d08578ed1a38788ea3b77ffccd07e5870733ac6829067dcf5137e3dcf20ae"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_collection.cljc",
+          "bytes": 1301,
+          "sha256": "22e8df01614835709be50aca5bafc29e901f7805c278261c68b62d522c5d979e"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_source.cljc",
+          "bytes": 322,
+          "sha256": "e85e8f51a71f0585ac3e472d680832d29273a6678888f343546ff186dce03038"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_verification.cljc",
+          "bytes": 397,
+          "sha256": "3c0db80c50927f3354bfb281a76f77f90c2b6d6298bd46c06a334ffd60871550"
+        },
+        {
+          "path": "scripts/test.bb",
+          "bytes": 7147,
+          "sha256": "9f78c05cea10995750b287be665ae47850fa5ca99bbe51ac722d70394362ac8f"
+        }
+      ],
+      "evidence": [
+        {
+          "path": ".ημ/review-evidence/trusted-publication-collector/92355701f2d8375caa7ddcc48acc3ee07c62896d212ff47f78e69b94be59412f.json.gz",
+          "bytes": 64136,
+          "sha256": "92355701f2d8375caa7ddcc48acc3ee07c62896d212ff47f78e69b94be59412f",
+          "raw_bytes": 461996,
+          "raw_sha256": "a73ab8182d0d1820e375d5b8335d6fd9a66513f847fdd6ad1d88c30694d2393e",
+          "captures": 189
+        },
+        {
+          "path": ".ημ/review-evidence/trusted-publication-collector/051a9f965222391ee7cb4948c60be713ccf3a69f43e3bbefefde16e990e7b971.json.gz",
+          "bytes": 476551,
+          "sha256": "051a9f965222391ee7cb4948c60be713ccf3a69f43e3bbefefde16e990e7b971",
+          "raw_bytes": 1857995,
+          "raw_sha256": "3ca9077afcf1cbdf0468d0957c4571da2ee0995dd9e1185814199c2bc3ee67b3",
+          "captures": 111
+        }
+      ],
+      "tests": {
+        "review_workflow": {
+          "tests": 338,
+          "failed": 0
+        },
+        "publication": {
+          "tests": 17,
+          "assertions": 557,
+          "parity_cases": 138
+        },
+        "collection": {
+          "tests": 19,
+          "assertions": 106
+        },
+        "source": {
+          "tests": 7,
+          "assertions": 101
+        },
+        "verification": {
+          "tests": 2,
+          "assertions": 104
+        },
+        "archive": {
+          "tests": 10,
+          "assertions": 71
+        },
+        "full_cli": {
+          "tests": 194,
+          "assertions": 587
+        },
+        "workflow_resources": {
+          "tests": 11,
+          "assertions": 199
+        },
+        "new_pure_NBB_BB_value_cases": 5,
+        "owning_lint": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "CLI_release_compiler_warnings": 0,
+        "gates": {
+          "source": "c4c78184718847d484cf59f2a482ac60b7cac2ce",
+          "source_unchanged": true,
+          "results": [
+            {
+              "label": "registered-review-owners",
+              "command": [
+                "bb",
+                "scripts/test.bb",
+                "--only",
+                "review-workflow,review-publication,review-publication-collection,review-publication-source,review-verification,review-publication-archive"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-publisher-collector",
+              "source": "c4c78184718847d484cf59f2a482ac60b7cac2ce",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 101.74361955499626,
+              "completed_at": "2026-10-22T00:52:35.205523+00:00",
+              "stdout": {
+                "bytes": 41699,
+                "sha256": "73769ffd3e4dd84553a782789a8ed0ca313cb5c0de54f6c66fc83e9095f22709"
+              },
+              "stderr": {
+                "bytes": 0,
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "label": "full-cli-tests",
+              "command": [
+                "pnpm",
+                "-C",
+                "packages/eta-mu",
+                "test"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-publisher-collector",
+              "source": "c4c78184718847d484cf59f2a482ac60b7cac2ce",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 16.414570177992573,
+              "completed_at": "2026-10-22T00:52:51.620629+00:00",
+              "stdout": {
+                "bytes": 2584,
+                "sha256": "89e3430d4a56bcbf40442c5edd2515bd3259b3799e5a92b9b850b9a97cc7592c"
+              },
+              "stderr": {
+                "bytes": 201,
+                "sha256": "3f52e7b7331b05026f0c149b8fc0183ecbd2f98d58c55f6c8322a54120678950"
+              }
+            },
+            {
+              "label": "cli-kondo",
+              "command": [
+                "pnpm",
+                "-C",
+                "packages/eta-mu",
+                "lint:kondo"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-publisher-collector",
+              "source": "c4c78184718847d484cf59f2a482ac60b7cac2ce",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 2.170549063012004,
+              "completed_at": "2026-10-22T00:52:53.792102+00:00",
+              "stdout": {
+                "bytes": 442,
+                "sha256": "68692385dffdea51f245e43d9d7585e8a0fc9763ef7745a016bd5fd42026b712"
+              },
+              "stderr": {
+                "bytes": 0,
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "label": "scoped-kondo",
+              "command": [
+                "clj-kondo",
+                "--lint",
+                "scripts/test.bb",
+                ".github/scripts/opencode_review_collection_test.cljs",
+                ".github/scripts/opencode_review_source_test.cljs",
+                ".github/scripts/opencode_review_verification_test.cljs"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-publisher-collector",
+              "source": "c4c78184718847d484cf59f2a482ac60b7cac2ce",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 3,
+              "seconds": 0.21498926100321114,
+              "completed_at": "2026-10-22T00:52:54.007613+00:00",
+              "stdout": {
+                "bytes": 317,
+                "sha256": "82b7230f755ef775ef8e4754d4465a656d218c80a44e92e7caea9c6402f44606"
+              },
+              "stderr": {
+                "bytes": 0,
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "label": "cli-release",
+              "command": [
+                "pnpm",
+                "-C",
+                "packages/eta-mu",
+                "build"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-publisher-collector",
+              "source": "c4c78184718847d484cf59f2a482ac60b7cac2ce",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 21.488380353024695,
+              "completed_at": "2026-10-22T00:53:15.496445+00:00",
+              "stdout": {
+                "bytes": 223,
+                "sha256": "dfa1440f8f79ffe3002ffdbf6e4ef69651871c9558624167cbd5fe588d5807c3"
+              },
+              "stderr": {
+                "bytes": 121,
+                "sha256": "883e345d3a1404758ac4d373cb0232ba171eca3404e806b05c370f15f78cb939"
+              }
+            }
+          ],
+          "pass": true,
+          "scope": "registered six review owners, full CLI, owning lint and CLI release",
+          "retained_failure": "scoped-kondo.status.json: root cwd lacked package await config; no suppression changed",
+          "scoped_kondo_corrected": {
+            "command": [
+              "clj-kondo",
+              "--lint",
+              "../../scripts/test.bb",
+              "../../.github/scripts/opencode_review_collection_test.cljs",
+              "../../.github/scripts/opencode_review_source_test.cljs",
+              "../../.github/scripts/opencode_review_verification_test.cljs"
+            ],
+            "cwd": "/home/err/.local/share/foresight-worktrees/eta-publisher-collector/packages/eta-mu",
+            "environment_names": [
+              "HOME",
+              "LANG",
+              "PATH",
+              "SHELL",
+              "USER"
+            ],
+            "exit": 0,
+            "seconds": 0.23624143801862374,
+            "source": "c4c78184718847d484cf59f2a482ac60b7cac2ce",
+            "retained_prior_failure": "scoped-kondo.status.json (wrong root cwd, await unresolved)"
+          },
+          "no_source_change_for_repair": true
+        }
+      },
+      "repairs": [
+        "Inherited PATH cannot select Git; fixed /usr/bin/git and sanitized environment, independently replayed zero canary calls.",
+        "Malformed and duplicate commit structural headers refuse; independently replayed.",
+        "Fetched exact attempt must match completed/successful summary.",
+        "Collector schedule/workflow_run trigger is distinct from supported pull_request producer event.",
+        "Actual strict JSON, immutable Muse invocation, discovery, recovery replay and publisher envelope APIs compose without executing upload machinery or making native writes."
+      ],
+      "limits": [
+        "Public fixed GET transport is executed; private token scope and source/command authentication remain unproved.",
+        "No production registry is installed; production collection refuses before reads. Injected transport and complete reconstruction fixtures are inert, not native custody.",
+        "The real Git reconstruction is observed/incomplete: original G and caller-workflow source missing; tools, changed files and input verification unsupported. It cannot satisfy complete verifier admission.",
+        "Verifier worker operation time and V8 limits are finite; trusted reconstruction callback must enforce its own cancellable budget. Parent-owned worker/runtime counters do not prove universal process isolation.",
+        "Original COMMENT/empty fixture passes invocation but fails actual publisher validation; separately derived positive fixtures invoke real immutable APIs.",
+        "Historical whole ETA receipt validation remains invalid; no historical bytes or validity policy changed.",
+        "Old hosted proof applies only to 6a796582; successor hosted proof, effective grants, protected custody/default adoption, durable Clio claims, one review POST/complete readback/status and rollout remain unfinished."
+      ],
+      "preservation": {
+        "all_history_append_only": true,
+        "all309_card_states_and_planning_required_unchanged": true,
+        "root_pins_advance": false,
+        "CMS_Cephalon": "paused",
+        "new_spore": false
+      },
+      "native_qualification": false,
+      "metadata_verification": {
+        "result": "PASS",
+        "at": "2026-10-22T00:57:34.003501+00:00",
+        "source": "57a3ad2356c3c515474bc2b29ec36a700abe56f4",
+        "base": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+        "canonical_cards": 309,
+        "all_states_and_planning_unchanged": true,
+        "only_publisher_content_changed": [
+          {
+            "uuid": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+            "fields": [
+              "content"
+            ]
+          }
+        ],
+        "publisher_status": "in_progress",
+        "all_four_prefixes": {
+          "receipts.edn": {
+            "preserved_bytes": 613610,
+            "preserved_sha256": "c426db37bcae7beea64c8cac0a24353a05c332c266dd1bac670d1bb329b06990",
+            "new_bytes": 2762
+          },
+          ".ημ/session-mycology/ledger.md": {
+            "preserved_bytes": 113007,
+            "preserved_sha256": "2037281476548e5c5b9583ec14c1159266d780d3ad0fff272b06de3cc7dfad89",
+            "new_bytes": 978
+          },
+          ".ημ/session-reflections.edn": {
+            "preserved_bytes": 37502,
+            "preserved_sha256": "f87cb4cdc61239f695cfcafe161636b473e928dc127aecf657005dc91804f8df",
+            "new_bytes": 930
+          },
+          "kanban/.events/ledger.edn": {
+            "preserved_bytes": 1833917,
+            "preserved_sha256": "002d2b97d72b7de9b20912a8dd7c7d351fd5ab4b340ed05a290b7aca7a738c79",
+            "new_bytes": 7273
+          }
+        },
+        "existing_undated_readtime_fallbacks": [
+          "rheos-canonical-task-fold-and-snapshots",
+          "rheos-event-store-git-worldline-adr",
+          "rheos-git-commit-attribution-and-branch-fold",
+          "rheos-markdown-projection-push-pull-sync",
+          "4985bd7d-c027-4bca-8ae9-35aa21d7ba35",
+          "256c5dd5-1a65-4ad0-8087-80b8f9a69c77",
+          "7c44b3fc-7dbe-4c96-9125-4cce4ec4796e",
+          "0dd12d60-d7ea-43d0-8b1e-87e14c4e61dd",
+          "rheos-ledger-authoritative-projections",
+          "a343a87e-a96f-4df8-bffd-5c3ef331ad26",
+          "rheos-edn-config-and-card-selection"
+        ],
+        "relative_export_live_parity": true,
+        "source_files_verified": 28,
+        "evidence_files_verified": 300,
+        "new_receipt": {
+          "source": "57a3ad2356c3c515474bc2b29ec36a700abe56f4",
+          "record-valid": true,
+          "prefix-preserved": true,
+          "prefix-bytes": 613610,
+          "record-sha256-with-LF": "2e95dc65f7a644e2ed6fcb4b169113f2972eea80d104cf65f1b386b4ed3d38b9",
+          "after-sha256": "529b45c44fb61229f12f4d6bc291e953600ffcacfcab0c7e68b36e86a82bb79d",
+          "whole-history": {
+            "rows": 353,
+            "invalid": 71,
+            "errors": 118
+          },
+          "whole-history-valid": false
+        },
+        "no_policy_workflow_lockfile_change": true,
+        "full_publisher_complete": false,
+        "native_qualification": false,
+        "CMS_Cephalon": "paused"
+      },
+      "metadata_evidence": {
+        "path": ".ημ/review-evidence/trusted-publication-collector/18416f1a4afc4171a8579b32373800aa209bd5e9f6706fb04c7fc34280c4dc60.json.gz",
+        "bytes": 436965,
+        "sha256": "18416f1a4afc4171a8579b32373800aa209bd5e9f6706fb04c7fc34280c4dc60",
+        "raw_bytes": 1634457,
+        "raw_sha256": "7decbb5e59ff5c4a3aba400ec981b61b18c457d43819eb9cd8defd2870b4afe4",
+        "captures": 62
+      }
+    },
+    "published_verification": {
+      "head": "87187ddc3a375c4fcea28b7c882659737f53e698",
+      "remote_head": "87187ddc3a375c4fcea28b7c882659737f53e698",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "verified_files": [
+        ".ημ/review-evidence/trusted-publication-collector/051a9f965222391ee7cb4948c60be713ccf3a69f43e3bbefefde16e990e7b971.json.gz",
+        ".ημ/review-evidence/trusted-publication-collector/18416f1a4afc4171a8579b32373800aa209bd5e9f6706fb04c7fc34280c4dc60.json.gz",
+        ".ημ/review-evidence/trusted-publication-collector/92355701f2d8375caa7ddcc48acc3ee07c62896d212ff47f78e69b94be59412f.json.gz",
+        ".ημ/review-evidence/trusted-publication-collector/execution.json",
+        ".ημ/session-mycology/ledger.md",
+        ".ημ/session-reflections.edn",
+        "kanban/.events/ledger.edn",
+        "kanban/.kanban/board.json",
+        "kanban/tasks/independently-admit-and-publish-review-evidence-from-trusted-default-code-1c707551.md",
+        "receipts.edn",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/README.md",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/domain/review.cljc",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/extern/review_invocation.cljs",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/law/review_invocation.cljc",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/shape/git_diff_path.cljc",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/publish-opencode-review.cjs",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/review-invocation.cjs",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/run-opencode-review-recovery.mjs",
+        ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/runtime.json",
+        ".github/scripts/opencode_review_collection_test.cljs",
+        ".github/scripts/opencode_review_source_test.cljs",
+        ".github/scripts/opencode_review_verification_test.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/extern/review_collection.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/extern/review_source.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/infra/review_collection.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/infra/review_source.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/law/review_collection.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/law/review_source.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/shape/review_collection.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/shape/review_source.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/shape/review_verification.cljc",
+        "scripts/test.bb"
+      ],
+      "verified_metadata_files": 10,
+      "verified_code_files": 28,
+      "clean": true,
+      "consumer_pin_advance": false,
+      "qualified": false
+    },
+    "cleanup": {
+      "at": "2026-10-22T01:00:38.988468+00:00",
+      "removed_owned_worktree": "/home/err/.local/share/foresight-worktrees/eta-publisher-collector",
+      "pushed_head": "87187ddc3a375c4fcea28b7c882659737f53e698",
+      "was_clean": true,
+      "primary_ETA_head": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+      "primary_unchanged": true,
+      "unrelated_worktrees_and_dirt_untouched": true
+    },
+    "review": "pending; no exact-head approval; request deduplicated as pending; Codex UNKNOWN reset not retried",
+    "hosted_successor_qualification": false
+  },
+  "census": {
+    "source_projection": "docs/stabilization/e0-collector-verifier-census.json",
+    "register": "docs/stabilization/e0-collector-verifier-census.csv",
+    "window": [
+      "2026-10-22T00:51:06.978258+00:00",
+      "2026-10-22T00:51:28.272649+00:00"
+    ],
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 437,
+        "MERGED": 4,
+        "CLOSED": 1
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 186,
+      "open_reported_base_differs_from_live_tip": 181,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 4,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 295,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 137
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 6
+    },
+    "changed_open_head_or_reported_base_from_freeze": 4,
+    "source_H_B_changes_since_20261021_0719": [
+      {
+        "identity": "open-hax/axxium#30",
+        "changes": {
+          "head_or_reported_base_changed_from_prior_refresh": {
+            "before": false,
+            "after": true
+          },
+          "head_sha": {
+            "before": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+            "after": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+          },
+          "independent_live_base_tip_sha": {
+            "before": "9572e74d4c67b252568822eff24a06b9521d2c7d",
+            "after": "99e6c725c64baed7d3ee93930b206724874e1486"
+          },
+          "native_mergeable": {
+            "before": "MERGEABLE",
+            "after": "UNKNOWN"
+          },
+          "native_proposed_merge_parents": {
+            "before": [
+              "9572e74d4c67b252568822eff24a06b9521d2c7d",
+              "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c"
+            ],
+            "after": []
+          },
+          "native_proposed_merge_sha": {
+            "before": "72062fd427acc1fce286b0268be866398d31ccc4",
+            "after": null
+          },
+          "pr_base_ref_target_sha": {
+            "before": "9572e74d4c67b252568822eff24a06b9521d2c7d",
+            "after": "99e6c725c64baed7d3ee93930b206724874e1486"
+          },
+          "proposed_merge_pairing": {
+            "before": "live-base-and-head-match-proposed-parents",
+            "after": "not-applicable-terminal"
+          },
+          "reported_base_differs_from_live_tip": {
+            "before": false,
+            "after": true
+          },
+          "state": {
+            "before": "OPEN",
+            "after": "MERGED"
+          }
+        }
+      },
+      {
+        "identity": "open-hax/sol#2",
+        "changes": {
+          "head_or_reported_base_changed_from_prior_refresh": {
+            "before": false,
+            "after": true
+          },
+          "head_sha": {
+            "before": "a93ab2a4abc8b578fc2bfd20b1088e7e0e05d749",
+            "after": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+          },
+          "native_proposed_merge_parents": {
+            "before": [
+              "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+              "a93ab2a4abc8b578fc2bfd20b1088e7e0e05d749"
+            ],
+            "after": [
+              "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+              "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+            ]
+          },
+          "native_proposed_merge_sha": {
+            "before": "177deae287cb647e5fccff9f37b89dfefae2f3fe",
+            "after": "782de4b48dea640d9c95dc591b1b2449f8d62123"
+          }
+        }
+      },
+      {
+        "identity": "riatzukiza/.agents#34",
+        "changes": {
+          "head_or_reported_base_changed_from_prior_refresh": {
+            "before": false,
+            "after": true
+          },
+          "head_sha": {
+            "before": "e6b0796270066f7e649d5763d0d414b34d75464a",
+            "after": "7f4dfb8229e16996cfdb807694a630b60a130d71"
+          },
+          "native_mergeable": {
+            "before": "CONFLICTING",
+            "after": "MERGEABLE"
+          },
+          "native_proposed_merge_parents": {
+            "before": [],
+            "after": [
+              "580a361ee0110319cc4f3320d9982961073b66a2",
+              "7f4dfb8229e16996cfdb807694a630b60a130d71"
+            ]
+          },
+          "native_proposed_merge_sha": {
+            "before": null,
+            "after": "09cbd9194cc6725e2678e8c73883dd2ee91a970f"
+          },
+          "proposed_merge_pairing": {
+            "before": "unavailable-native-proposed-merge",
+            "after": "live-base-and-head-match-proposed-parents"
+          },
+          "reported_base_differs_from_live_tip": {
+            "before": true,
+            "after": false
+          },
+          "reported_pr_base_sha": {
+            "before": "8497afdd329c3dcaefb78eec36d8e629a59d9eb2",
+            "after": "580a361ee0110319cc4f3320d9982961073b66a2"
+          }
+        }
+      },
+      {
+        "identity": "riatzukiza/axxium#10",
+        "changes": {
+          "head_or_reported_base_changed_from_prior_refresh": {
+            "before": false,
+            "after": true
+          },
+          "head_sha": {
+            "before": "562eefe1c4d57fd18daa2602b1a7cc7ac867adce",
+            "after": "61f7c2e97ece79e50a6224e29c252f5e2d389b16"
+          },
+          "independent_live_base_tip_sha": {
+            "before": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+            "after": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+          },
+          "native_mergeable": {
+            "before": "MERGEABLE",
+            "after": "UNKNOWN"
+          },
+          "native_proposed_merge_parents": {
+            "before": [
+              "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+              "562eefe1c4d57fd18daa2602b1a7cc7ac867adce"
+            ],
+            "after": []
+          },
+          "native_proposed_merge_sha": {
+            "before": "138b4134ad358d765c53a7b4fdb44e521fba75b8",
+            "after": null
+          },
+          "pr_base_ref_target_sha": {
+            "before": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+            "after": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+          },
+          "proposed_merge_pairing": {
+            "before": "live-base-and-head-match-proposed-parents",
+            "after": "not-applicable-terminal"
+          },
+          "reported_base_differs_from_live_tip": {
+            "before": false,
+            "after": true
+          },
+          "state": {
+            "before": "OPEN",
+            "after": "MERGED"
+          }
+        }
+      },
+      {
+        "identity": "riatzukiza/foresight#34",
+        "changes": {
+          "head_or_reported_base_changed_from_prior_refresh": {
+            "before": false,
+            "after": true
+          },
+          "head_sha": {
+            "before": "1159a9dad7356115e01de67039fbe221b200223a",
+            "after": "5e10ea734f908b8c3b7e5164a63ff25ba4c293eb"
+          },
+          "independent_live_base_tip_sha": {
+            "before": "8e3ddd4f362d7f9612556b5185b6be9af646eac8",
+            "after": "6cf607cb4c86c8bed5c8de9b421eba52284c2716"
+          },
+          "native_proposed_merge_parents": {
+            "before": [
+              "8e3ddd4f362d7f9612556b5185b6be9af646eac8",
+              "1159a9dad7356115e01de67039fbe221b200223a"
+            ],
+            "after": [
+              "8e3ddd4f362d7f9612556b5185b6be9af646eac8",
+              "5e10ea734f908b8c3b7e5164a63ff25ba4c293eb"
+            ]
+          },
+          "native_proposed_merge_sha": {
+            "before": "8fef016e54d65a1774bc1e87df8227fe344520df",
+            "after": "e13e6d02734fb5a07d8fdc5534dc54e101c37339"
+          },
+          "pr_base_ref_target_sha": {
+            "before": "8e3ddd4f362d7f9612556b5185b6be9af646eac8",
+            "after": "6cf607cb4c86c8bed5c8de9b421eba52284c2716"
+          },
+          "proposed_merge_pairing": {
+            "before": "live-base-and-head-match-proposed-parents",
+            "after": "proposed-parents-do-not-match-live-base-and-head"
+          },
+          "reported_base_differs_from_live_tip": {
+            "before": false,
+            "after": true
+          }
+        }
+      }
+    ],
+    "new_terminal_observations": [
+      {
+        "identity": "open-hax/axxium#26",
+        "changes": {
+          "independent_live_base_tip_sha": {
+            "before": "9572e74d4c67b252568822eff24a06b9521d2c7d",
+            "after": "99e6c725c64baed7d3ee93930b206724874e1486"
+          },
+          "pr_base_ref_target_sha": {
+            "before": "9572e74d4c67b252568822eff24a06b9521d2c7d",
+            "after": "99e6c725c64baed7d3ee93930b206724874e1486"
+          },
+          "proposed_merge_pairing": {
+            "before": "live-base-and-head-match-proposed-parents",
+            "after": "not-applicable-terminal"
+          },
+          "state": {
+            "before": "OPEN",
+            "after": "CLOSED"
+          }
+        }
+      },
+      {
+        "identity": "open-hax/axxium#30",
+        "changes": {
+          "head_or_reported_base_changed_from_prior_refresh": {
+            "before": false,
+            "after": true
+          },
+          "head_sha": {
+            "before": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+            "after": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+          },
+          "independent_live_base_tip_sha": {
+            "before": "9572e74d4c67b252568822eff24a06b9521d2c7d",
+            "after": "99e6c725c64baed7d3ee93930b206724874e1486"
+          },
+          "native_mergeable": {
+            "before": "MERGEABLE",
+            "after": "UNKNOWN"
+          },
+          "native_proposed_merge_parents": {
+            "before": [
+              "9572e74d4c67b252568822eff24a06b9521d2c7d",
+              "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c"
+            ],
+            "after": []
+          },
+          "native_proposed_merge_sha": {
+            "before": "72062fd427acc1fce286b0268be866398d31ccc4",
+            "after": null
+          },
+          "pr_base_ref_target_sha": {
+            "before": "9572e74d4c67b252568822eff24a06b9521d2c7d",
+            "after": "99e6c725c64baed7d3ee93930b206724874e1486"
+          },
+          "proposed_merge_pairing": {
+            "before": "live-base-and-head-match-proposed-parents",
+            "after": "not-applicable-terminal"
+          },
+          "reported_base_differs_from_live_tip": {
+            "before": false,
+            "after": true
+          },
+          "state": {
+            "before": "OPEN",
+            "after": "MERGED"
+          }
+        }
+      },
+      {
+        "identity": "riatzukiza/axxium#10",
+        "changes": {
+          "head_or_reported_base_changed_from_prior_refresh": {
+            "before": false,
+            "after": true
+          },
+          "head_sha": {
+            "before": "562eefe1c4d57fd18daa2602b1a7cc7ac867adce",
+            "after": "61f7c2e97ece79e50a6224e29c252f5e2d389b16"
+          },
+          "independent_live_base_tip_sha": {
+            "before": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+            "after": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+          },
+          "native_mergeable": {
+            "before": "MERGEABLE",
+            "after": "UNKNOWN"
+          },
+          "native_proposed_merge_parents": {
+            "before": [
+              "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+              "562eefe1c4d57fd18daa2602b1a7cc7ac867adce"
+            ],
+            "after": []
+          },
+          "native_proposed_merge_sha": {
+            "before": "138b4134ad358d765c53a7b4fdb44e521fba75b8",
+            "after": null
+          },
+          "pr_base_ref_target_sha": {
+            "before": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+            "after": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+          },
+          "proposed_merge_pairing": {
+            "before": "live-base-and-head-match-proposed-parents",
+            "after": "not-applicable-terminal"
+          },
+          "reported_base_differs_from_live_tip": {
+            "before": false,
+            "after": true
+          },
+          "state": {
+            "before": "OPEN",
+            "after": "MERGED"
+          }
+        }
+      },
+      {
+        "identity": "riatzukiza/sol#6",
+        "changes": {
+          "independent_live_base_tip_sha": {
+            "before": "a93ab2a4abc8b578fc2bfd20b1088e7e0e05d749",
+            "after": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+          },
+          "native_mergeable": {
+            "before": "MERGEABLE",
+            "after": "UNKNOWN"
+          },
+          "native_proposed_merge_parents": {
+            "before": [
+              "a93ab2a4abc8b578fc2bfd20b1088e7e0e05d749",
+              "0ddc5e6a1b218c1b4333c4c4eeb71d31c5af4b3d"
+            ],
+            "after": []
+          },
+          "native_proposed_merge_sha": {
+            "before": "60ab3eda9355b8da76a49f2ed016d5155d0ef264",
+            "after": null
+          },
+          "pr_base_ref_target_sha": {
+            "before": "a93ab2a4abc8b578fc2bfd20b1088e7e0e05d749",
+            "after": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+          },
+          "proposed_merge_pairing": {
+            "before": "live-base-and-head-match-proposed-parents",
+            "after": "not-applicable-terminal"
+          },
+          "reported_base_differs_from_live_tip": {
+            "before": false,
+            "after": true
+          },
+          "state": {
+            "before": "OPEN",
+            "after": "MERGED"
+          }
+        }
+      }
+    ],
+    "four_proposal_changes_retained": [
+      {
+        "identity": "riatzukiza/clio#1",
+        "merge": "e91ff26535e35e449f9f2cc6439e88c2adbdb626",
+        "parents": [
+          "30fb91b80148245f9a319a7356111ec4df1036da",
+          "17fa6906bece5390c0e81555b947319141caf9a3"
+        ],
+        "state": "OPEN"
+      },
+      {
+        "identity": "riatzukiza/clio#3",
+        "merge": "4242d5a783899e38351bea16c3912ef825d999bc",
+        "parents": [
+          "30fb91b80148245f9a319a7356111ec4df1036da",
+          "5d4f98b29d1253fea8483bd2fd16893421041e5b"
+        ],
+        "state": "OPEN"
+      },
+      {
+        "identity": "riatzukiza/knoxx#1",
+        "merge": "65301ec84f98e925033d2a2fa187b2ea69fbbe9e",
+        "parents": [
+          "3409977bca4ba35e09967f9a99d50867a679a73c",
+          "5670338fcf1db7d51a2690f388e4e4c5c409c48a"
+        ],
+        "state": "OPEN"
+      },
+      {
+        "identity": "riatzukiza/sol#4",
+        "merge": "a3d01f45b45800213a0a93e566f610672dad3b34",
+        "parents": [
+          "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6",
+          "5df50cedcfa7dc3011fd35556003e9ed5a9571b8"
+        ],
+        "state": "OPEN"
+      }
+    ],
+    "followup_eight_records_stable": true,
+    "native_followup": {
+      "window": [
+        "2026-10-22T00:52:49.614392+00:00",
+        "2026-10-22T00:52:50.734220+00:00"
+      ],
+      "stable": true,
+      "observations": {
+        "riatzukiza/clio#1": {
+          "id": "R_kgDOU4VfQQ",
+          "nameWithOwner": "riatzukiza/clio",
+          "pullRequest": {
+            "number": 1,
+            "title": "docs: plan portable identifier admission before ledger append",
+            "url": "https://github.com/riatzukiza/clio/pull/1",
+            "body": "The canonical Clio writer currently appends programmatic numeric-leading keyword identifiers that its own strict reader rejects immediately under NBB 1.4.207. This planning PR addresses [Clio issue 1](https://github.com/open-hax/clio/issues/1) through an incoming three-point card for portable identifier admission and checks at the existing writer boundary.\n\nThe plan preserves strict reading, lawful canonical hash preimages, event identity, locking and immutable ledger prefixes. Shared law fixtures precede minimal adapter changes; adjacent schema/projection writers get an explicit coverage decision. [Foresight 135](https://github.com/open-hax/foresight/issues/135) retains separate ownership of reviewed append-only corpus reconciliation. No implementation or historical data rewrite is included.\n\nEvidence is from actual `runtime/open` / `runtime/append!` / `read-ledger` calls at current Clio `788cdd3434615a7932b924e68520dbf7f88408c2`, in private empty fixtures: both bad identifiers append then fail canonical read-back under exact NBB 1.4.207; the lawful control reads; historical NBB1.3.204 reads the same emitted bytes. Raw artifacts and hashes are retained. These observations reproduce the defect, not a repaired test pass.\n\nThe mapped personal fork and upstream main are identical. This new clone/worktree preserves source, hash protocol, reader, runtime installation and repository settings. Auto-merge is off, and no inherited/registered workflow or eager merge caller exists at this baseline. There is no configured board or existing ready card: qualified planning review and a real lawful Rheos ready event are required before implementation.\n\nValidation: new EDN receipt parses with required keys/vector fields; both Markdown links resolve and diff check passes. Manual CodeRabbit requests are held because the current native personal account footer reports zero included reviews; automatic/pending requests remain deduplicated. Optional unavailable/quota responses supply no approval or round credit.\n\npr-flow-stage:planning\n\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n\n## Summary by CodeRabbit\n\n* **Documentation**\n  * Added planning guidance for rejecting nonportable printed identifiers before ledger writes, while preserving canonical hashing and existing adapter guarantees.\n  * Recorded cross-runtime test criteria, reproduction findings, historical-data reconciliation responsibilities, and readiness conditions.\n  * Clarified that the work remains in planning; no implementation, board transition, or historical rewrite occurred.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+            "state": "OPEN",
+            "isDraft": false,
+            "mergedAt": null,
+            "closedAt": null,
+            "mergedBy": null,
+            "headRefOid": "17fa6906bece5390c0e81555b947319141caf9a3",
+            "baseRefName": "main",
+            "baseRefOid": "788cdd3434615a7932b924e68520dbf7f88408c2",
+            "baseRef": {
+              "name": "main",
+              "target": {
+                "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+              }
+            },
+            "mergeable": "MERGEABLE",
+            "mergeCommit": null,
+            "potentialMergeCommit": {
+              "oid": "e91ff26535e35e449f9f2cc6439e88c2adbdb626",
+              "tree": {
+                "oid": "0446a2001aed423ff75dc3c9a05c8e8a6f4d889d"
+              },
+              "parents": {
+                "nodes": [
+                  {
+                    "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+                  },
+                  {
+                    "oid": "17fa6906bece5390c0e81555b947319141caf9a3"
+                  }
+                ],
+                "pageInfo": {
+                  "hasNextPage": false
+                }
+              }
+            }
+          }
+        },
+        "riatzukiza/clio#3": {
+          "id": "R_kgDOU4VfQQ",
+          "nameWithOwner": "riatzukiza/clio",
+          "pullRequest": {
+            "number": 3,
+            "title": "ci: run the eta-mu evidence review on pull requests",
+            "url": "https://github.com/riatzukiza/clio/pull/3",
+            "body": "Adds `.github/workflows/eta-mu-review.yml`, which calls `open-hax/eta-mu/.github/workflows/opencode-code-review.yml@45ec644c`. That is the same pin, model (`opencode/mimo-v2.6-flash-free`), Muse/agents revisions and OpenCode version that riatzukiza/rheos, receipt-river and sol already use. The eta-mu-ai review then runs on this split-out repository (E1.11).\n\nDeterministic gates for this repository: `pnpm install --frozen-lockfile`, `pnpm lint` and `pnpm test` (bb, JVM, nbb and shadow), mirroring `clio-ci.yml`.\n\n**Operator setup needed (Err):**\n- Add the repository secrets `ETA_MU_APP_ID` and `ETA_MU_APP_PRIVATE_KEY`; this repository has neither yet. Without them, the evidence and compile jobs run, but the review job fails fast with an operator instruction.\n- Install the eta-mu-ai GitHub App on this repository.\n\nUntil both are done, this PR's own review job is expected to fail.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n## Summary by CodeRabbit\n\n* **Chores**\n  * Added automated validation for eligible pull requests, including checks for change hygiene and successful installation. Code quality and test checks run when setup succeeds; if setup fails, those checks are recorded as not attempted.\n  * The validation runs only for non-draft pull requests from the same repository. These changes affect the review process only and do not change application behavior or functionality.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+            "state": "OPEN",
+            "isDraft": false,
+            "mergedAt": null,
+            "closedAt": null,
+            "mergedBy": null,
+            "headRefOid": "5d4f98b29d1253fea8483bd2fd16893421041e5b",
+            "baseRefName": "main",
+            "baseRefOid": "e6f5cf400909ef3d75ad79496645d1d1a8074e88",
+            "baseRef": {
+              "name": "main",
+              "target": {
+                "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+              }
+            },
+            "mergeable": "MERGEABLE",
+            "mergeCommit": null,
+            "potentialMergeCommit": {
+              "oid": "4242d5a783899e38351bea16c3912ef825d999bc",
+              "tree": {
+                "oid": "8283eaa7ed99ea7815cd21834602ed6f5c2fef54"
+              },
+              "parents": {
+                "nodes": [
+                  {
+                    "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+                  },
+                  {
+                    "oid": "5d4f98b29d1253fea8483bd2fd16893421041e5b"
+                  }
+                ],
+                "pageInfo": {
+                  "hasNextPage": false
+                }
+              }
+            }
+          }
+        },
+        "riatzukiza/knoxx#1": {
+          "id": "R_kgDOU4VeEQ",
+          "nameWithOwner": "riatzukiza/knoxx",
+          "pullRequest": {
+            "number": 1,
+            "title": "chore: synchronize accepted Knoxx origin main at 3409977b",
+            "url": "https://github.com/riatzukiza/knoxx/pull/1",
+            "body": "Synchronize the personal Knoxx fork with exact accepted origin main `3409977bca4ba35e09967f9a99d50867a679a73c`, preserving fork main `b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792` through an ordinary merge. The verified comparison is zero fork-only and nine origin-only commits, from merged origin PRs382 and383.\n\nThe original five-file difference contains review/promotion workflow maintenance and appended provenance. All five synchronized artifacts matched exact source bytes before the separately identified owned receipt/reflection append. The incoming card records source/base revisions, scope, acceptance and the separate feature381 dependency. Application source is unchanged.\n\nLocal verification: source ancestry and fork/source historical ledger prefixes preserved; workflow YAML/receipt EDN parse; all three changed workflows pass actionlint; diff whitespace passes. No compiler, package installation, DB, PM2, service, live verifier, testing label, workflow dispatch, secret/settings/protection mutation, or deployment was executed. Historical origin reviews remain provenance and do not qualify this head.\n\nThe separate development replacement of origin PR381 will stack on this branch and preserve its exact original source `40221a69f7fff675b46614d9ab318b4ef52f3786`, with the original eight settled native threads linked individually. This PR does not import that feature.\n\n**Readiness hold:** inherited auto-merge attempts SQUASH on a ready same-repository PR before canonical exact-head qualification. This PR remains draft with auto-merge off until separately reviewed base enforcement is safe. No merge, origin release/deploy publication, or controller activation is implied. CodeRabbit's observed personal-account FairUsage reset `2026-10-06T15:01:50Z` is respected; manual requests are held while pending/cooldown remains.\n\nMigration infrastructure: yes\n\n<!-- pr-flow-stage:planning -->\n",
+            "state": "OPEN",
+            "isDraft": true,
+            "mergedAt": null,
+            "closedAt": null,
+            "mergedBy": null,
+            "headRefOid": "5670338fcf1db7d51a2690f388e4e4c5c409c48a",
+            "baseRefName": "main",
+            "baseRefOid": "b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792",
+            "baseRef": {
+              "name": "main",
+              "target": {
+                "oid": "3409977bca4ba35e09967f9a99d50867a679a73c"
+              }
+            },
+            "mergeable": "MERGEABLE",
+            "mergeCommit": null,
+            "potentialMergeCommit": {
+              "oid": "65301ec84f98e925033d2a2fa187b2ea69fbbe9e",
+              "tree": {
+                "oid": "cf6da506aa58dafd190fa2f660ab277d58f0123a"
+              },
+              "parents": {
+                "nodes": [
+                  {
+                    "oid": "3409977bca4ba35e09967f9a99d50867a679a73c"
+                  },
+                  {
+                    "oid": "5670338fcf1db7d51a2690f388e4e4c5c409c48a"
+                  }
+                ],
+                "pageInfo": {
+                  "hasNextPage": false
+                }
+              }
+            }
+          }
+        },
+        "riatzukiza/sol#4": {
+          "id": "R_kgDOU4VgTg",
+          "nameWithOwner": "riatzukiza/sol",
+          "pullRequest": {
+            "number": 4,
+            "title": "docs: plan lossless late-control admission for Sol turns",
+            "url": "https://github.com/riatzukiza/sol/pull/4",
+            "body": "Current Sol can acknowledge a streamed steer or follow-up with an already resolved nil promise, then clear controls arriving after the final drain. This full planning proposal specifies delivery or explicit rejection for every accepted control, preserving serialized turns, caller acknowledgement, history and cancellation. It implements no runtime change.\n\nRefs https://github.com/open-hax/eta-mu/issues/255 and the exact original Eta card identity sol-turn-session-late-control-messages. All three original scope requirements and both completion criteria remain: deliberate policy for both late control kinds, a direct deterministic final-drain race fixture, no successful-looking discarded message, and complete Sol test/kondo verification. The newly authored Incoming/P2/proposed2 Sol story has a distinct UUID29ea92e6-0804-5097-badd-8985483e958e; it does not move or close the original Eta card, invent cross-board dependency identity, or claim native registration/Ready.\n\nThe plan explicitly distinguishes queue consumption from delivery. The pinned owning turn-processor may observe abort after an awaited drain has already removed controls. Proposed policy hands undelivered normal-completion controls to existing serialized turns, and explicitly refuses undelivered controls on failure/abort/refused admission. Acknowledgement timing, cross-kind ordering, cancellation, pending turns and public API compatibility require reviewed decisions. Portable .cljc laws and shaped decisions precede the existing host adapter; no copied runner or second event/board authority.\n\nBase is the exact personal main bf6c77b92246464b1e34177bc851d1ffc008c1b7, preserving accepted owning Sol1276955c86ff46936cd1ce7d81fbc790f7068e1e and all three merged personal worker/Node22/Clio histories. Whole plan retains every current owner gate: meaningful RED barrier against actual production TurnSession, independent steer/follow-up positives and negatives, zero-warning nonempty compiled tests, lint/contract/guard/planning regressions, server/native-Clio builds and isolated startup/SIGTERM where relevant. Historical monorepo test/lint commands are preserved and mapped to actual standalone owner scripts. No runtime/compiler/provider/cloud/deployment test is claimed by this docs-only change.\n\nPreparation and separate full peer preserve all191 inherited Git entries and all31 historical root compatibility receipts; whole77 new paths comprise story/design plus .ημ evidence. All62 one-LF command captures,15 exact owning Git archives,2 native-bound external pinned archives and literal original Eta card are verified. Current immutable Receipt River154440 actual API admits new selected .ημ physical row1; historical root31 rows are unchanged and not blanket-qualified. Distinct private complete Git/runtime peer has no actionable product finding and separately validates its own two declared receipts. Preparation failures remain inspectable in their original audit history; source is unchanged. Local checks supply no native review approval/cohort or runtime qualification.\n\nPublication is DRAFT, blocked, automatic merge off. All three exact pinned reusable review jobs refuse drafts; the read-only Node22 candidate workflow may still execute on drafts. This bounded static route does not qualify runner isolation, safe READY activation or actual secret visibility. Current native checks remain required. Review and lawful owning-board registration/Ready precede implementation; absent Sol board configuration remains visible. Development stays on the personal fork. Final qualified origin integration must happen through a separate release/deploy PR; this planning PR neither releases the fix nor closes Eta255.\n\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n\n## Summary by CodeRabbit\n\n* **Documentation**\n  * Added planning guidance for handling late steering and follow-up messages, including delivery or rejection expectations, acknowledgement timing, race-condition coverage, and review gates.\n  * Added a separate Sol task that preserves the original issue scope and identity.\n  * Recorded that implementation, runtime changes, and operational workflow updates are not included.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+            "state": "OPEN",
+            "isDraft": true,
+            "mergedAt": null,
+            "closedAt": null,
+            "mergedBy": null,
+            "headRefOid": "5df50cedcfa7dc3011fd35556003e9ed5a9571b8",
+            "baseRefName": "main",
+            "baseRefOid": "bf6c77b92246464b1e34177bc851d1ffc008c1b7",
+            "baseRef": {
+              "name": "main",
+              "target": {
+                "oid": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+              }
+            },
+            "mergeable": "MERGEABLE",
+            "mergeCommit": null,
+            "potentialMergeCommit": {
+              "oid": "a3d01f45b45800213a0a93e566f610672dad3b34",
+              "tree": {
+                "oid": "81bd6c438ba3ff436382fe8d5772fa32bcb4d022"
+              },
+              "parents": {
+                "nodes": [
+                  {
+                    "oid": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+                  },
+                  {
+                    "oid": "5df50cedcfa7dc3011fd35556003e9ed5a9571b8"
+                  }
+                ],
+                "pageInfo": {
+                  "hasNextPage": false
+                }
+              }
+            }
+          }
+        },
+        "open-hax/axxium#26": {
+          "id": "R_kgDOStXBnQ",
+          "nameWithOwner": "open-hax/axxium",
+          "pullRequest": {
+            "number": 26,
+            "title": "Add federated actor identity and agent credentials",
+            "url": "https://github.com/open-hax/axxium/pull/26",
+            "body": "Axxium now represents humans and agents as separate actor kinds, reserves the configured administrator email for verified Google sign-in, and lets administrators issue expiring, revocable agent credentials. A verified AT Protocol OAuth callback can sign in or link a hosted DID; reciprocal handle/DID resolution remains a lookup rather than an authentication grant.\n\nThe production image contains only runtime dependencies and the compiled server, while `open-hax/services` owns the PDS and ingress. Locally, Axxium and Knoxx run under PM2 with Google OIDC and the shared account manager.\n\nValidation: `npm run typecheck`, `npm test`, `npm run boundary:check`, `npm run build`, and `npm audit --omit=dev --audit-level=moderate` passed. The image built, and the public PDS OAuth flow returned a signed-in Axxium human actor through `https://axxium.promethean.rest`.\n\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n## Summary by CodeRabbit\n\n* **New Features**\n  * Sign in with Google or an AT Protocol identity, and link an AT Protocol identity to an existing account.\n  * System administrators can create agents, issue time-limited credentials, review credentials, and revoke them.\n  * Administrators can look up AT Protocol identities and manage actors and their capabilities.\n  * The account portal provides sign-in options, actor details, identity linking, and administrative tools.\n* **Security**\n  * Sign-up enforces password requirements and reserves the configured administrator email for federated sign-in.\n  * Administrative features are restricted to system administrators.\n  * Cross-origin requests are limited to the configured public address, and the application container runs as a non-root user.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+            "state": "CLOSED",
+            "isDraft": false,
+            "mergedAt": null,
+            "closedAt": "2026-10-21T22:36:34Z",
+            "mergedBy": null,
+            "headRefOid": "18f92db5ea106b4f9dd3eb4d84b9da0fc6ee9f04",
+            "baseRefName": "main",
+            "baseRefOid": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+            "baseRef": {
+              "name": "main",
+              "target": {
+                "oid": "99e6c725c64baed7d3ee93930b206724874e1486"
+              }
+            },
+            "mergeable": "MERGEABLE",
+            "mergeCommit": null,
+            "potentialMergeCommit": {
+              "oid": "84bc7373c9d8291957091e50d427ae2c6de53e81",
+              "tree": {
+                "oid": "8bdd1195a675f5a14f69c21763714e0c4985a30b"
+              },
+              "parents": {
+                "nodes": [
+                  {
+                    "oid": "9572e74d4c67b252568822eff24a06b9521d2c7d"
+                  },
+                  {
+                    "oid": "18f92db5ea106b4f9dd3eb4d84b9da0fc6ee9f04"
+                  }
+                ],
+                "pageInfo": {
+                  "hasNextPage": false
+                }
+              }
+            }
+          }
+        },
+        "open-hax/axxium#30": {
+          "id": "R_kgDOStXBnQ",
+          "nameWithOwner": "open-hax/axxium",
+          "pullRequest": {
+            "number": 30,
+            "title": "Promote riatzukiza/axxium main (e619cb3): #1+#7+#6 (supersedes #29)",
+            "url": "https://github.com/open-hax/axxium/pull/30",
+            "body": "## Promote riatzukiza/axxium `e619cb3` → open-hax/axxium main\n\nSupersedes #29 (stale promote of `e1be8cb` before Codex findings fixes).\n\n### What's in this tip\n- Fork #1 merge (`e1be8cbc`): canonical DID actor identity (Err's chosen line)\n- Fork #7 (`b049d7cc`): async/done + `.catch` test wrappers + AGENTS.md\n- Fork #6 (`e619cb36`): Codex/CodeRabbit findings from #29 (Google-state Malli validation, jose async adapter, security hardenings)\n\n### Gate\nDrive through pr-flow (`gate --apply`, merge commit). Do **not** redeploy services#92 or close open-hax/axxium#26 without Err.\n\n### Origin\n- Fork main SHA: `e619cb36f788457dec3f76d5fd47d1cc5691ead5`\n- Branch: `promote/e619cb3`\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n<!-- coderabbit-ai-generated:v1 -->\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added Google and AT Protocol sign-in, account linking, and identity lookup.\n  * Added administrator tools to manage actors, create agents, and issue, review, and revoke agent credentials.\n  * Added an account portal for authentication, identity linking, and agent management.\n  * Added reliable pagination for actor listings and local identity verification.\n* **Bug Fixes**\n  * Improved authentication access controls, OAuth callback handling, and account conflict recovery.\n  * Improved database failure handling and transaction safety.\n  * Standardized local URLs on `127.0.0.1` for consistent redirects.\n* **Documentation**\n  * Expanded deployment, identity, administration, and local setup guidance.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+            "state": "MERGED",
+            "isDraft": false,
+            "mergedAt": "2026-10-21T22:36:33Z",
+            "closedAt": "2026-10-21T22:36:33Z",
+            "mergedBy": {
+              "login": "riatzukiza"
+            },
+            "headRefOid": "d3eda22e442d956c0649cc4f58a3207dc60845f8",
+            "baseRefName": "main",
+            "baseRefOid": "9572e74d4c67b252568822eff24a06b9521d2c7d",
+            "baseRef": {
+              "name": "main",
+              "target": {
+                "oid": "99e6c725c64baed7d3ee93930b206724874e1486"
+              }
+            },
+            "mergeable": "UNKNOWN",
+            "mergeCommit": {
+              "oid": "99e6c725c64baed7d3ee93930b206724874e1486",
+              "tree": {
+                "oid": "1047fa8f0226a450573829eb91d3bcd413b56a10"
+              },
+              "parents": {
+                "nodes": [
+                  {
+                    "oid": "9572e74d4c67b252568822eff24a06b9521d2c7d"
+                  },
+                  {
+                    "oid": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+                  }
+                ],
+                "pageInfo": {
+                  "hasNextPage": false
+                }
+              }
+            },
+            "potentialMergeCommit": null
+          }
+        },
+        "riatzukiza/axxium#10": {
+          "id": "R_kgDOU4Vg0w",
+          "nameWithOwner": "riatzukiza/axxium",
+          "pullRequest": {
+            "number": 10,
+            "title": "fix(axxium): settle open-hax/axxium#30 round-3 Codex findings",
+            "url": "https://github.com/riatzukiza/axxium/pull/10",
+            "body": "Fork-first fixes for the three Codex P2s that Codex opened on open-hax/axxium#30, against the promotion head `6fdce06`. Red is `d1117ec` and green is `72e81af`.\n\n- **r4277636448 (PRRT_kwDOStXBnc6skeB0), recover concurrent DID-link uniqueness conflicts.** If inserting the link binding hits `idx_provider_bindings_subject`, `link-actor!` reloads the winning binding. When the winner is the same actor the link succeeds; when it's a different actor the response is 409, not a raw 502. Tests: `concurrent-link-by-same-actor-succeeds` and `concurrent-link-by-other-actor-is-409`.\n- **r4277636452 (PRRT_kwDOStXBnc6skeB3), keep OAuth starts from evicting live state.** The SDK `stateStore` is now `new-oauth-state-store`, a bounded TTL Map that never evicts a live entry. At capacity it purges expired entries first, then refuses a new key with `state-store-full-error`, and `start!` maps that to 503. The `sessionStore` keeps the LRU store, because sessions are revoked right after binding. Tests: `live-authorization-state-is-never-evicted` and `start-at-capacity-is-503`.\n- **r4277636461 (PRRT_kwDOStXBnc6skeB-), paginate the account-manager actor list.** The new `resources/public/actor-pages.js` `fetchAllActors` pages `/api/actors?limit=100&offset=…` until it gets a short page. It de-duplicates rows that shift between pages and is bounded at 1000 pages. Tests: `scripts/actor-pages.test.mjs` (node:test), now part of `npm test`.\n\nVerification on `72e81af`:\n- `npm test`: cljs 50 tests / 190 assertions, plus 4/4 node:test.\n- Red on `d1117ec`: 2 failures and 1 error in cljs, plus ERR_MODULE_NOT_FOUND for the node test.\n- typecheck and build have 0 warnings; `boundary:check`, the deployment-boundary check and clj-kondo are all clean.\n\nAsync tests keep the AGENTS.md `async`/`done` + `.catch` wrappers; there are no bare `^:async` deftests.\n\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n<!-- coderabbit-ai-generated:v1 -->\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * Actor lists now support cursor-based pagination for reliable loading of large lists, while retaining offset pagination.\n  * OAuth authorization state is bounded and validated for safer sign-in handling.\n  * AT Protocol sign-in attempts are limited per client, with configurable proxy-aware IP detection.\n\n* **Bug Fixes**\n  * Actor loading now handles pagination, duplicates, and changing actor status more reliably.\n  * Concurrent identity-linking attempts now resolve same-identity and conflicting-account races correctly.\n  * Invalid pagination requests return client errors, while capacity and rate-limit conditions return appropriate service responses.\n  * Existing actor records are migrated safely to support reliable pagination.\n\n* **Documentation**\n  * Added guidance for configuring trusted proxy addresses and CIDR ranges.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+            "state": "MERGED",
+            "isDraft": false,
+            "mergedAt": "2026-10-21T20:34:12Z",
+            "closedAt": "2026-10-21T20:34:12Z",
+            "mergedBy": {
+              "login": "riatzukiza"
+            },
+            "headRefOid": "61f7c2e97ece79e50a6224e29c252f5e2d389b16",
+            "baseRefName": "main",
+            "baseRefOid": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c",
+            "baseRef": {
+              "name": "main",
+              "target": {
+                "oid": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+              }
+            },
+            "mergeable": "UNKNOWN",
+            "mergeCommit": {
+              "oid": "d3eda22e442d956c0649cc4f58a3207dc60845f8",
+              "tree": {
+                "oid": "ad05d29c688261018e72e563ce573d8792402abc"
+              },
+              "parents": {
+                "nodes": [
+                  {
+                    "oid": "6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c"
+                  },
+                  {
+                    "oid": "61f7c2e97ece79e50a6224e29c252f5e2d389b16"
+                  }
+                ],
+                "pageInfo": {
+                  "hasNextPage": false
+                }
+              }
+            },
+            "potentialMergeCommit": null
+          }
+        },
+        "riatzukiza/sol#6": {
+          "id": "R_kgDOU4VgTg",
+          "nameWithOwner": "riatzukiza/sol",
+          "pullRequest": {
+            "number": 6,
+            "title": "fix: settle open-hax/sol#2 promotion review findings",
+            "url": "https://github.com/riatzukiza/sol/pull/6",
+            "body": "Fork-first fix for the open review findings on the promotion PR open-hax/sol#2 (`promote/a93ab2a`). After this merges, `open-hax:promote/a93ab2a` fast-forwards to the new fork main and the #2 threads settle as Fixed.\n\n## Findings addressed\n| Finding | Fix |\n| --- | --- |\n| CodeRabbit [r4253314449](https://github.com/open-hax/sol/pull/2#discussion_r4253314449): require a gap for every integration point | Checker requires a keyword `:gap` with a nonempty name on every point. |\n| CodeRabbit [r4253314461](https://github.com/open-hax/sol/pull/2#discussion_r4253314461): reject anchors that don't identify the integration point | `expected-integration-anchors` maps each path to its anchor, kept separate from the proposal. A proposal whose anchor doesn't match is rejected (e.g. `\"ns\"`). |\n| CodeRabbit [r4253314473](https://github.com/open-hax/sol/pull/2#discussion_r4253314473): roll back only artifacts owned by the failed initialization | `open!` deletes the ledger only if this attempt created it, and the schema directory only if it didn't exist before. Cleanup errors are swallowed and the original error is rethrown. Reopen behavior is unchanged. |\n| Codex [r4253317713](https://github.com/open-hax/sol/pull/2#discussion_r4253317713): configure Clio in every exported startup path | New `core/resolve-app-config` (enrich + `clio-store/ensure-configured!`) used by `register-app-routes!` (so `solPlugin` gets it too) and `start!`. A store that is already open (from `bootstrap!`) is reused, never reopened. |\n| Codex [r4253317715](https://github.com/open-hax/sol/pull/2#discussion_r4253317715): validate compiler output in the Node runtime workflow | `scripts/compile-clean.sh` copies the evidence workflow's `compile_clean` (completion line for the target, 0 warnings, no WARNING lines, exit 0, nonempty artifact). `node22-runtime.yml` runs both builds through it. `scripts/compile-clean.test.mjs` (part of `test:guard`) runs the same reject fixtures and asserts that no workflow build line skips the guard. |\n| CodeRabbit [r4330643687](https://github.com/open-hax/sol/pull/2#discussion_r4330643687): close the turn that the compensation path admitted | `emit-start-lifecycle!` now emits `:sol.turn/failed` before `:sol.run/failed` (the compensating emit admits the pending turn start on retry). Red `c3cf73b`, green `dc1e907`. |\n| CodeRabbit review 5497127322 body nit (sol-clio-cutover.md version spacing) | Fixed. |\n\n## Verification (local, Node 22)\n- Red (old source, new tests): checker 5 failures (missing gap, wrong anchor); CLJS 3 failures + 2 errors (rollback leaves ledger/schema; exported seam has no `:clio/store`); guard test 1 failure on the old workflow (unguarded build).\n- Green: `npm test` 143 tests / 540 assertions, 0 failures, 0 warnings (was 138/528). `npm run test:guard` 23/23. `bb scripts/check_review_worker_plan_test.clj` 11 tests / 21 assertions. `bb scripts/check-review-worker-plan.clj` passes. `npm run lint` 0 errors / 0 warnings. `compile-clean.sh` passes for both `server` and `clio-native` builds.\n\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n<!-- coderabbit-ai-generated:v1 -->\n\n## Summary by CodeRabbit\n\n* **Reliability**\n  * Clio startup validates compatible paths before reuse.\n  * Ledger and schema paths cannot overlap, including through symlinks. Interrupted initialization can recover or roll back safely while preserving existing data.\n  * Reopening requires existing, nonempty schema history; concurrent appends are coordinated to prevent conflicting writes.\n  * Failed turn starts now close the turn before reporting run failure.\n\n* **Build Improvements**\n  * Node 22 builds require nonempty artifacts and completion without warnings.\n\n* **Configuration**\n  * Model-prefix allowlists accept sequential or comma-separated values and remain consistent across repeated configuration enrichment.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->\n",
+            "state": "MERGED",
+            "isDraft": false,
+            "mergedAt": "2026-10-21T14:32:56Z",
+            "closedAt": "2026-10-21T14:32:56Z",
+            "mergedBy": {
+              "login": "riatzukiza"
+            },
+            "headRefOid": "0ddc5e6a1b218c1b4333c4c4eeb71d31c5af4b3d",
+            "baseRefName": "main",
+            "baseRefOid": "a93ab2a4abc8b578fc2bfd20b1088e7e0e05d749",
+            "baseRef": {
+              "name": "main",
+              "target": {
+                "oid": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+              }
+            },
+            "mergeable": "UNKNOWN",
+            "mergeCommit": {
+              "oid": "57db8c143c9bca526788c8c9a464cfca6783c3a0",
+              "tree": {
+                "oid": "c23d2cab25c1f8a9d5c6b7b46a3a0ae82e752785"
+              },
+              "parents": {
+                "nodes": [
+                  {
+                    "oid": "a93ab2a4abc8b578fc2bfd20b1088e7e0e05d749"
+                  },
+                  {
+                    "oid": "0ddc5e6a1b218c1b4333c4c4eeb71d31c5af4b3d"
+                  }
+                ],
+                "pageInfo": {
+                  "hasNextPage": false
+                }
+              }
+            },
+            "potentialMergeCommit": null
+          }
+        }
+      },
+      "scope": "four proposal-drift records and four newly terminal records; no tested-candidate or acceptance credit"
+    },
+    "evidence": {
+      "path": ".ημ/stabilization/snapshots/a88fef68f9a5a6fdbf386c2a3b1e4bfb416b2b45526761cfab787bfcc4c554f7.json.gz",
+      "bytes": 180184,
+      "sha256": "a88fef68f9a5a6fdbf386c2a3b1e4bfb416b2b45526761cfab787bfcc4c554f7",
+      "raw_bytes": 2299279,
+      "raw_sha256": "41f1b9e13dbc972e8fe4867625982f8d04cfc4fa4dc607ffe6798b163cc03fbd",
+      "captures": 69
+    },
+    "new_repository_or_PR_census": false,
+    "tested_candidates": 0
+  },
+  "root_native": {
+    "observed_at": "2026-10-21T08:28:27.337Z",
+    "repository": "open-hax/foresight",
+    "head": "6043d6f3fd927d107d1e1ba4981c08415741013e",
+    "runs": {
+      "workflow_runs": [
+        {
+          "id": 39567821319,
+          "name": "eta-mu evidence review",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 371,
+          "jobs_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39567821319/jobs",
+          "logs_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39567821319/logs",
+          "workflow_id": 334678456
+        }
+      ]
+    },
+    "jobs": {
+      "jobs": [
+        {
+          "id": 119114285244,
+          "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39567821319,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Checkout pull request",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Verify exact and clean pull request checkout",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Set up Java 21",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 4
+            },
+            {
+              "name": "Set up Clojure CLI 1.12.5.1654",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 5
+            },
+            {
+              "name": "Set up pnpm 10.14.0",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Set up Node 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Detect eta-mu app credentials",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Create cross-repository read token",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Mirror private Git dependencies",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Stage pull request diff and context",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Run deterministic gates",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Summarize deterministic evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Bind deterministic artifact name",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Upload deterministic evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Post Set up Node 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 29
+            },
+            {
+              "name": "Post Checkout pull request",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 30
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 31
+            }
+          ]
+        },
+        {
+          "id": 119114285374,
+          "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39567821319,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Checkout Muse compatibility compiler",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Checkout global agent skills",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Set up Java 21",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Set up Clojure CLI 1.12.5.1654",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Set up Node 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Compile and verify a read-only Muse review profile",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Assemble revision-bound review context",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Bind review-context artifact name",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Upload review context",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Post Set up Node 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Set up Java 21",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Post Checkout global agent skills",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            },
+            {
+              "name": "Post Checkout Muse compatibility compiler",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 20
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 21
+            }
+          ]
+        },
+        {
+          "id": 119114646892,
+          "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 39567821319,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Checkout pull request",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Verify exact and clean review checkout",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Set up Node 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Download deterministic evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Verify full review input against independent Git snapshot",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Download Muse tools and global skills",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Verify and install the bounded review context",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Test deterministic review publisher",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Require eta-mu app credentials",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 10
+            },
+            {
+              "name": "Install pinned OpenCode CLI",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Capture review start time",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Run bounded evidence-first OpenCode review",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Reverify full input and bind final submission",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 14
+            },
+            {
+              "name": "Validate final review submission",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 15
+            },
+            {
+              "name": "Upload review attempt artifacts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Verify review remained revision-bound",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Create eta-mu GitHub App token for review publication",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 18
+            },
+            {
+              "name": "Publish actual GitHub pull request review",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 19
+            },
+            {
+              "name": "Send new inline review comments to Discord",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 20
+            },
+            {
+              "name": "Post Set up Node 22",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 39
+            },
+            {
+              "name": "Post Checkout pull request",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 40
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 41
+            }
+          ]
+        },
+        {
+          "id": 119114832249,
+          "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 39567821319,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Enforce truthful reusable review result",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 2
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            }
+          ]
+        }
+      ]
+    },
+    "qualification": false
+  },
+  "holds": {
+    "root_merge_frozen": true,
+    "root_receipt_P1_open": true,
+    "root_invalid_new_against_accepted_base": 2,
+    "root_whole_invalid": 13,
+    "encounter_oracle_open": true,
+    "all_milestones": "unqualified",
+    "all23consumer_pins_unchanged": true,
+    "CMS_Cephalon": "paused",
+    "native_privileged_publication": false,
+    "protected_default_adoption": false,
+    "deployment": false
+  },
+  "evidence": {
+    "path": ".ημ/stabilization/snapshots/a91d3c75c97b90d94adacefed2b29e847733c27667c50ee971ef7efc14a3cf16.json.gz",
+    "bytes": 11747,
+    "sha256": "a91d3c75c97b90d94adacefed2b29e847733c27667c50ee971ef7efc14a3cf16",
+    "raw_bytes": 49859,
+    "raw_sha256": "e0542a68ce55f3653cd1b9a1647a5545fb7dc2438f64c54af37bfb3a6c463f1e",
+    "captures": 18
+  },
+  "qualification": false
+}

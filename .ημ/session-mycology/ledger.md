@@ -681,3 +681,13 @@
   spore: none
   receipt-refs: 2120a5ec90172b1dcc218a4b209d7196fadb837ab43a57b89e3fdabaebf98b62
   note: Native owner sections, checkout merge, Git parents/tree and artifact metadata must agree before hosted credit. Preserve CLI escape-guard and flag-position failures, and Python tuple/list assertion mistakes as capture failures rather than product RED. Whole-carrier warnings and metadata-only artifact limits remain. Native API omissions are explicit missing source/event custody; no inference from H/current M. Existing terminal-truth learning suffices; no new spore/promotion.
+
+- ts: 2026-10-22T01:04:20.074822+00:00
+  session: codex/stabilization-portfolio
+  task: Execute and publish E0 collector/source/verifier while refreshing native frozen-cohort evidence
+  p-efficiency: 0.58
+  p-friction: 0.77
+  p-skill-candidate: 0.35
+  spore: none
+  receipt-refs: a10a590a0e2316e6671ef96539fcd629fef27963008e8f70fd5e226f23f8a4c3
+  note: Previous goal turn was progress through actual source changes and native evidence; current turn adds published adapters and materially changed cohort states, not a status-only wait. Re-read native state after elapsed time: the 442-identity cohort now has 437 open, four merged and one closed. Preserve prior windows, proposed-merge drift and qualified-versus-observed distinctions. Use owning lint/receipt APIs and inspect actual composed runtime/publisher contracts; retain authored harness failures and incomplete native custody without weakening gates. One existing session spore stays incubating; no new spore or promotion. Full objective stays active, E0 breakdown, all milestones unqualified, CMS/Cephalon paused.

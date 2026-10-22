@@ -4,7 +4,7 @@ labels: "stabilization, coordination, e1"
 dependency: ["stabilization-e0"]
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
 type: "epic"
-write-id: "1792570210346-0.o93mjigxumcki3f8pjc"
+write-id: "1792630995640-0.rkeahg5vhvmzuvvoynj"
 title: "Stabilization E1 — Qualify the review and merge pipeline"
 priority: "P1"
 status: "incoming"
@@ -76,5 +76,7 @@ Current E0 child checkpoint67e8d9dd repairs three native review findings and imp
 The current child checkpoint is 6a796582d74f93c1a1f18ca5c89eb3a0b19445eb. Two later CodeRabbit body findings receive itemized Fixed dispositions in reply 6310680841: parity requires value-result rows on each host, and parent cleanup assertions claim admission-worker scope only. Actual tests: publication 17 / 557, archive 10 / 71, 138 parity cases, lint zero warnings. Product runtime is unchanged. Prior review/check results do not qualify this successor; full publisher and root receipt P1 remain open. No signing restoration, required-check waiver, root pin advance, merge, deployment or paused CMS/Cephalon execution.
 
 Native child head `6a796582d74f93c1a1f18ca5c89eb3a0b19445eb` now has completed sandbox run `39563090634`, attempt 1, job `119099506987`, tested merge `04003cb0173a3e83ba5a8cabc997f401f5fa8410` and tree `075d173d095cccbdef9e846631225fb53a579fb4`. Actual publication 17 / 557 and archive 10 / 71 pass. Eleven carrier warnings retain the strict whole-carrier hold; artifact metadata is not a restore proof. Current root run `39564048828` passes context and deterministic evidence but fails Require eta-mu app credentials and the terminal gate. Keep signing removal, required protections, merge freeze and separate full trusted-publisher/adoption/hosted-rollout obligations. Native Actions metadata for the sampled run provides H, but original event G and caller source custody remain unobserved; current merge topology cannot manufacture them. Root receipt P1 and encounter oracle stay open. CMS and Cephalon remain paused.
+
+E0 executes the existing publisher adapters at pushed eta-mu head `87187ddc3a375c4fcea28b7c882659737f53e698`; local tests, owning lint and release pass with preserved causal failures. Current native review/checks are pending; old hosted results do not transfer. Private/native source custody, complete reconstruction, durable Clio publication/readback/status, effective grants, protected setup/default adoption and successor hosted proof remain unfinished. Root head `6043d6f3fd927d107d1e1ba4981c08415741013e` run `39567821319` passes context/deterministic jobs but fails missing-App setup and the required terminal gate; model/publication steps skip. Root receipt P1 remains open for two invalid appended events. E1 stays incoming, root merges frozen, all consumer pins unchanged, CMS/Cephalon paused. No credential restoration, gate waiver, acceptance or deployment follows.
 
 ---

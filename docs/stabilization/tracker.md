@@ -1,8 +1,23 @@
 # Foresight Stabilization — Persistent Tracker
 
-Updated October 21, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
+Updated October 22 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [root receipt contract correction and completed hosted publisher proof](e0-root-receipt-contract.md).
+Latest execution: [native collector, source and immutable verifier](e0-collector-verifier-execution.md).
+The October 22 00:51 UTC two-pass refresh retains 442 frozen identities and now
+observes 437 open, four merged and one closed. Four open head/base pairs differ
+from the freeze. Four proposed merges changed during acquisition; their later
+two-pass readback is stable, with original drift retained. Tested candidates
+remain null and the new terminal observations do not confer acceptance.
+Existing eta-mu PR 362 is pushed at `87187ddc3a375c4fcea28b7c882659737f53e698`:
+registered collection 19 / 106, source 7 / 101 and actual immutable verification
+2 / 104 pass with full CLI, lint and release. Real reconstruction remains partial,
+and private/source custody, publication, protected adoption and successor hosted
+qualification remain unfinished. All 309 child states/planning, ledger history
+and 23 root pins survive; the owned worktree was clean when removed after push.
+Root receipt P1 and required native gate remain failed; E0 stays breakdown,
+E1 incoming, all milestones unqualified, CMS/Cephalon paused.
+
+Earlier execution: [root receipt contract correction and completed hosted publisher proof](e0-root-receipt-contract.md).
 The actual root receipt gate fails: two newly appended ETA event envelopes do
 not satisfy Foresight's flat contract. Original bytes are preserved; one valid
 root documentary catalog retracts the cross-schema validity implication without
@@ -417,3 +432,14 @@ outside this registration result.
 ## Next action
 
 Continue E0 with current-source receipt admission/review and the existing trusted-publisher implementation, preserving historical bytes, root merge freeze and paused CMS/Cephalon agents.
+
+## Executed native collection and immutable verification — October 22 UTC
+
+The [execution report](e0-collector-verifier-execution.md), overlay and new census
+preserve the actual source, repairs, local verification and fresh native cohort.
+Prior October 21 windows remain historical. Four external terminal changes and
+new live-base/proposal movement carry no merge, unique-work or milestone credit.
+The existing publisher stays in progress with incomplete native source custody;
+no production registry, privileged publication, protected adoption or rollout is
+claimed. Root receipt and review gates retain their actual failures. No new plan,
+card, consumer pin or CMS/Cephalon execution is introduced.
