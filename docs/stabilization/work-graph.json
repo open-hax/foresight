@@ -1347,5 +1347,24 @@
     "closed": 1,
     "qualified": false,
     "CMS_Cephalon": "paused"
+  },
+  "e0_native_files_execution": {
+    "report": "docs/stabilization/e0-native-files.md",
+    "overlay": "docs/stabilization/e0-native-files.json",
+    "census": "docs/stabilization/e0-native-files-census.json",
+    "child_head": "b265c7220bb07839d188e7e44311d31aff0ae469",
+    "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+    "native_probe_files": 90,
+    "native_probe_missing_patches": 17,
+    "frozen": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "open_H_B_changed_from_freeze": 4,
+    "source_drift": 0,
+    "proposal_drift": 0,
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
   }
 }

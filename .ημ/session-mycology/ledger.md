@@ -701,3 +701,13 @@
   spore: none
   receipt-refs: c673122976fe6eac28d72573a24586e18196fab3cd3133f562da9371b6d9681c
   note: Exercise actual host APIs through their owning runtime and retain native pagination shape evidence. Matching normalized next-link semantics never authorizes fetching supplied URLs. Preserve causal RED and failed mock/runtime/lint probes beside corrected exact-source results. Native fixed-thread readback supplies settlement only; no approval or full publisher qualification. Root8a native setup and receipt P1 remain failed. Latest full census retains its explicit00:51 window; no freshness inference from this checkpoint. Current goal turn advances executed source and settlements; keep full goal active, all23pins and histories unchanged, CMS/Cephalon paused. Existing spore remains incubating; no new spore or promotion.
+
+- ts: 2026-10-22T01:54:41.120255+00:00
+  session: codex/stabilization-portfolio
+  task: Execute native file inventory and refresh frozen cohort with explicit custody gaps
+  p-efficiency: 0.76
+  p-friction: 0.58
+  p-skill-candidate: 0.46
+  spore: none
+  receipt-refs: 7bb89f80e7de8247b42801c2ee848b453a4deacdadad0a38d1e21e27a35d386d
+  note: Previous goal turn and current turn are progress: published causal repairs and real native observations, not status-only waits. Compare every required retained provider field with primary schema; distinguish complete rows from complete patch text, and native public data from original run/caller authority. Preserve the live-edit probe race and redo against isolated frozen source. Current native APIs and existing owner sources prove the missing provider port rather than authorizing current-M/head/time joins. Refresh the original 442 only, preserve prior windows and exact source scope, and retain failures/quotas. All pins and histories unchanged, CMS/Cephalon paused, full goal active. Existing spore remains incubating; no new spore/promotion.

@@ -2,7 +2,19 @@
 
 Updated October 22 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [native pagination repair and settled findings](e0-pagination-repair.md).
+Latest execution: [native file inventory and refreshed cohort](e0-native-files.md).
+Existing eta-mu PR 362 is pushed at `b265c7220bb07839d188e7e44311d31aff0ae469`.
+Registered collection 30 tests / 224 assertions, independent replay, full CLI,
+owning lint/release and 20 actual pure parity values pass. The real fixed public
+GET/inventory probe reads 90 files twice; 17 missing patches remain unsupported,
+and patch-text completeness stays unverified. Original G/caller/provider custody
+and complete reconstruction/verifier composition remain unfinished. Fresh two-pass
+01:46:44–01:47:05 UTC census retains 442 frozen / 437 open / four merged / one closed,
+four changed open head/base pairs, with zero acquisition drift or compared tuple
+changes since 00:51. Parent root native run 39706085424 fails setup/terminal gates;
+receipt P1 stays open. All pins/history/card states preserved; CMS/Cephalon paused.
+
+Earlier execution: [native pagination repair and settled findings](e0-pagination-repair.md).
 Existing eta-mu PR 362 is pushed at `ab03d9350e40a368748b2d1c4612a0038d3c21af`;
 collection passes 23 tests / 154 assertions, full CLI/lint/release and ten actual
 pure value parity cases pass. Both verified native pagination findings are
