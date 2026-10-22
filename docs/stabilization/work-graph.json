@@ -1331,5 +1331,21 @@
     "publisher": "in_progress",
     "qualified": false,
     "CMS_Cephalon": "paused"
+  },
+  "e0_pagination_repair": {
+    "report": "docs/stabilization/e0-pagination-repair.md",
+    "overlay": "docs/stabilization/e0-pagination-repair.json",
+    "child_head": "ab03d9350e40a368748b2d1c4612a0038d3c21af",
+    "source": "9fc17a59b82997b8a1c8903c51c0e0b8f2f45bf9",
+    "native_inline_unresolved": 0,
+    "exact_head_approvals": 0,
+    "publisher": "in_progress",
+    "census_window": "2026-10-22 00:51 UTC",
+    "frozen": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "qualified": false,
+    "CMS_Cephalon": "paused"
   }
 }

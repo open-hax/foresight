@@ -2,7 +2,18 @@
 
 Updated October 22 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [native collector, source and immutable verifier](e0-collector-verifier-execution.md).
+Latest execution: [native pagination repair and settled findings](e0-pagination-repair.md).
+Existing eta-mu PR 362 is pushed at `ab03d9350e40a368748b2d1c4612a0038d3c21af`;
+collection passes 23 tests / 154 assertions, full CLI/lint/release and ten actual
+pure value parity cases pass. Both verified native pagination findings are
+resolved as fixed; current-head approval and hosted qualification remain absent.
+All 309 states/planning, ledger prefixes and 23 root pins are preserved. The
+latest census remains the October 22 00:51 UTC window: 442 frozen / 437 open /
+four merged / one closed / four changed open head/base pairs. Current root parent
+`8a034f11` native run `39703701043` fails missing-App setup and its terminal gate.
+Root receipt P1 remains open. E0 stays breakdown; CMS/Cephalon remain paused.
+
+Earlier execution: [native collector, source and immutable verifier](e0-collector-verifier-execution.md).
 The October 22 00:51 UTC two-pass refresh retains 442 frozen identities and now
 observes 437 open, four merged and one closed. Four open head/base pairs differ
 from the freeze. Four proposed merges changed during acquisition; their later
