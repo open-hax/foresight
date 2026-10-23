@@ -38,8 +38,10 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] GIVEN two contexts with the same human/model WHEN bound THEN they have distinct context provenance and bounded grants.
 - [ ] GIVEN a spoofed producer, expired grant or wrong tenant/audience WHEN a message is admitted THEN it is denied without creating a valid event.
-- [ ] GIVEN a retry or resume WHEN admitted THEN the canonical Knoxx/Clio contract preserves the original source; retries retain the original message ID and destination and deduplicate before side effects. The owning implementation identifies the versioned rule and its atomic admission/effect boundary.
-- [ ] GIVEN a non-idempotent operation commits its effect but its response is lost WHEN the same message is retried with its original ID and destination THEN exactly one observable effect exists, including across concurrent retries; deduplication returns the recorded outcome without executing the effect again.
+- [ ] GIVEN a retry or resume WHEN admitted THEN the canonical Knoxx/Clio contract preserves the original producer (instance-id, actor-id) and binding identity; retrying a message preserves those identities, its message ID and destination and deduplicates before side effects. A changed producer or binding is rejected as a retry and requires an explicitly authorized new message. The owning implementation identifies the versioned rule and its atomic admission/effect boundary.
+- [ ] GIVEN a non-idempotent operation commits its effect but its response is lost WHEN the same message is retried with its original producer (instance-id, actor-id), binding identity, message ID and destination and passes current authorization for delivery and protected outcome access THEN exactly one observable effect exists, including across concurrent retries; deduplication returns the authorized recorded outcome without executing the effect again.
+- [ ] GIVEN authorization expires or is revoked after an effect commits but before retry WHEN delivery or recorded-outcome retrieval is attempted THEN current admission denies it without a second effect or protected outcome data. A recorded outcome never bypasses current authorization.
+- [ ] GIVEN the original message ID and destination with a changed producer instance, producer actor or binding identity WHEN retried THEN admission denies the retry without effects or protected outcome data, even if the substituted producer has an otherwise valid grant.
 
 ## Verification
 
@@ -57,6 +59,7 @@ code; preserve source revision and actual observed capability separately.
 ## Additional identity criteria
 
 - [ ] GIVEN two new contexts WHEN bound THEN their (instance-id, actor-id) references differ, including parent and child. Only an authenticated resume of the same context may reuse its binding.
+- [ ] GIVEN an authenticated context with either an instance-id mismatch or an actor-id mismatch against its stored binding WHEN use or resume is attempted THEN each mismatch independently denies admission before delivery, effects or protected outcome return.
 - [ ] GIVEN context A private memory WHEN context B, including its parent or sibling, calls the memory tool THEN retrieval is denied without an explicit sharing grant. Parentage alone grants no private-memory access.
 
 ## Admission and compatibility criteria

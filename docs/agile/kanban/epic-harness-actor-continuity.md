@@ -39,7 +39,7 @@ activation or replacement of native harness scheduling.
 - [ ] Every child completes planning review and lawful Rheos admission before implementation begins.
 - [ ] Every child supplies implementation evidence before completion.
 - [ ] Codex tool parity and actor integration are independently demonstrated.
-- [ ] Hermes/Orbit capability and deployment evidence is recorded.
+- [ ] Hermes/Orbit supplies explicit HAC.04 evidence that it consumes the selected contract and preserves actor and message boundaries, alongside capability and deployment evidence. Health checks alone do not qualify a contract consumer.
 - [ ] Local/remote identity and memory-boundary negative tests pass.
 
 ## Verification

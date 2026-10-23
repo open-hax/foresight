@@ -28,21 +28,29 @@ profile and effective-contract hash. Credentials stay in the runtime's secret
 store; manifests contain references only. Each spawned context gets distinct
 provenance and a bounded delegated grant. A verified resume may reuse a binding;
 new tasks must not be silently aliased by model name or similar content.
+On every use and resume, the authenticated context instance ID and actor ID
+must each equal the stored binding instance ID and actor ID. Test each mismatch
+independently; either denies admission before delivery, effects or protected
+outcome return. Caller-supplied identities cannot replace the stored binding.
 
 Message envelopes carry producer instance/actor, destination instance/actor,
 message id, correlation/causation, schema version, contract hash and an opaque
 payload reference or permitted payload. Authentication binds the envelope to
 its producer; user-supplied actor ids never establish authority. Define delivery,
 deduplication, ordering and cancellation through existing Knoxx/Clio contracts
-before implementing adapters. Retries retain the original message ID and
-destination and deduplicate before side effects under the canonical HAC.02
+before implementing adapters. Retries retain the original producer
+(instance-id, actor-id), binding identity, message ID and destination and
+deduplicate before side effects under the canonical HAC.02
 rule; the owning implementation names its versioned rule and atomic
 admission/effect boundary. A transport failure preserves pending work with an
 explicit retry policy; it never silently switches actor or destination. Test a
 non-idempotent effect committed before its response is lost: retrying the same
-message must return the recorded outcome with exactly one observable effect.
-An explicitly authorized destination change creates a new message, never a
-retargeted retry.
+message with current delivery and protected-outcome authorization returns the
+authorized recorded outcome with exactly one observable effect. Authorization
+expired or revoked before retry denies delivery and protected outcome return
+without repeating the effect. Cached outcomes never bypass current admission.
+A producer or binding change denies retry; any explicitly authorized producer,
+binding or destination change creates a new message, never a retargeted retry.
 
 ## Local and remote federation
 
@@ -105,11 +113,14 @@ is the linearization point; already delivered bytes cannot be recalled. Revoked
 materialized projections become unavailable for later reads until reauthorized
 or rebuilt through current source-read and destination-publish authorization.
 Non-revoked projections need no new promotion or rebuild for an authorized read.
-An authorized rebuild reads the current source revision, revalidates policy and
+An authorized rebuild first passes current source-read and destination-publish
+authorization before accessing source bytes or transforming content. It then
+reads the current source revision, revalidates policy and
 revocation dependencies, and recomputes the versioned transformation and output
 hash before publication admission. Its event binds those inputs and output; a
 change before publication admission requires rejection or revalidation.
-An unauthorized rebuild produces and exposes no content. This conservative default is a proposal to review, not a claim
+An unauthorized rebuild reads no source bytes, performs no transformation, and
+produces no promotion event or projection; a content-free denial audit is allowed. This conservative default is a proposal to review, not a claim
 that current Knoxx implements it.
 
 ## Canonical contract and delegation rules

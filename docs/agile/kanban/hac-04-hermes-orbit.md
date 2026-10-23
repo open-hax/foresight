@@ -37,8 +37,9 @@ No production cutover, broad credential copying, new board implementation or aut
 
 ## Acceptance criteria
 
-- [ ] GIVEN the running deployment or its absence WHEN probed THEN endpoint, revision, health and missing prerequisites are recorded without secrets.
+- [ ] GIVEN the running deployment or its absence WHEN probed THEN endpoint, source_revision, deployed_runtime_revision, health and missing prerequisites are recorded separately without secrets. deployed_runtime_revision is explicitly unknown if no deployment is available or its revision cannot be verified; checkout source_revision never substitutes for runtime evidence.
 - [ ] GIVEN a Hermes context WHEN a test adapter is qualified THEN tool and actor/message capabilities have independent evidence, and every unsupported capability is recorded as unsupported in the adapter manifest with a negative test.
+- [ ] GIVEN a selected contract WHEN a Hermes/Orbit test adapter is qualified THEN its evidence identifies the consumed contract and profile, shows actor binding and message admission through HAC.02, and demonstrates supported message delivery plus wrong-context and unauthorized-message denial. Discovery or health evidence alone cannot satisfy consumer qualification; unsupported capabilities retain explicit dispositions and negative tests.
 - [ ] GIVEN Orbit workspace mutation WHEN requested by an agent THEN existing grant and workspace revision boundaries remain enforced.
 
 ## Verification
