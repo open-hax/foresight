@@ -1442,5 +1442,15 @@
     "qualified": false,
     "publisher": "in_progress",
     "CMS_Cephalon": "paused"
+  },
+  "e0_outcome_execution": {
+    "report": "docs/stabilization/e0-outcome-execution.md",
+    "overlay": "docs/stabilization/e0-outcome-execution.json",
+    "child_head": "f7963bdaa0dbdbb24c0b990d46f572c37dcb6a20",
+    "source": "7002b307da9bec55053fddeb640543d6a7e54da5",
+    "census": "docs/stabilization/e0-outcome-census.json",
+    "qualified": false,
+    "CMS_Cephalon": "paused",
+    "root_source": "27540f50f05151fc58be84df6bd8f2c2e6e7a081"
   }
 }

@@ -2,7 +2,24 @@
 
 Updated October 23 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [lossless review scope and fresh native/cohort proof](e0-review-scope-execution.md).
+Latest execution: [durable outcomes, native repairs and fresh cohort evidence](e0-outcome-execution.md).
+Published ETA `f7963bda` binds source `7002b307`: intent40/390, collection33/1022,
+publication18/602, archive11/100, runtime4/120 and helper6/71 pass with independent
+counterexamples repaired. Same500-member/96.9MB ZIP retains every byte: parent
+callback falls from17s to19–22ms, RSS from4.58GB to353MB. Full owning CLI/lint/release
+pass. Native current-source Sol/Sync/Rheos succeed at executed `e157f704`, exact
+parents/tree verified;23 diagnostics each remain. Sandbox is still running at
+bounded observation. Five native threads Fixed, one Handled against opener
+withdrawal; archive body item answered. Current review request rate limited until
+after07:04:53UTC; no exact approval, twenty older body items remain. Fresh05:47
+census:442 frozen/437 open/4 merged/1 closed/6 changed open H/B, drift0/0.
+All23 pins/309 child states/planning/four prefixes/100 paths survive. Receipt362
+valid; historical71invalid/118errors and root receipt P1/missing-App/terminal
+holds remain. E0 breakdown/E1 incoming/M0–M7 unqualified; CMS/Cephalon paused.
+Original G/caller/tools/input custody/full authenticated publication/adoption
+remain unfinished. No standalone planning.
+
+Earlier execution: [lossless review scope and fresh native/cohort proof](e0-review-scope-execution.md).
 Published ETA `c9ef250d` binds source `03878641`. Native PR 100 paths/all 100 blobs
 verify; all 409 original evidence files/modes/22 archives survive with 90 non-evidence
 paths visible. Independent P2 external reread repaired: RED two failures, GREEN 4/50,

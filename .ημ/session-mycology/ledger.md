@@ -761,3 +761,13 @@
   spore: none
   receipt-refs: 0331141c483431ed495792cf4d69e38570f21b4cb8ece67875b9cd88f6f75d5b
   note: Preserve every original byte/mode and failed attempt while reducing native input paths. Verify the exact emitted bytes, separate reviewer admission from archive custody and old native success from successor qualification. Timestamp refusal occurred before append; resume without duplicating card/ledger effects. No new spore/promotion.
+
+- ts: 2026-10-23T06:17:40.234Z
+  session: foresight-stabilization
+  task: Preserve actual outcome and review-repair execution with independent counterexamples
+  p-efficiency: 0.8
+  p-friction: 0.7
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 581d6cff5f7d082fff9a9d68b33e1957accac801e2d333e7d45de104e1f5b3b0
+  note: Large parent decoding can overshoot a deadline without late acceptance. Preserve data types and complete bytes when changing transport. Retain canonical owned paths for failure cleanup. Native reviewed-source logs can disprove a finding but never impersonate reviewer withdrawal. No new spore or same-session promotion.
