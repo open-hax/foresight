@@ -39,7 +39,8 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] GIVEN a parent and spawned child WHEN registered THEN parent linkage and separate actor provenance are recorded without shared credentials.
 - [ ] GIVEN verified resume and cancellation WHEN processed THEN the documented binding/revocation policy is applied and tested.
-- [ ] GIVEN an unavailable native message API WHEN projected THEN tool access remains explicit and message integration is reported unsupported.
+- [ ] GIVEN an unavailable native message API WHEN projected THEN tool access remains explicit and message integration is reported unsupported; this records discovery but does not satisfy integration completion.
+- [ ] GIVEN each desktop, CLI or SDK surface claimed supported in the versioned capability matrix WHEN a parent/child native message and reply are sent through the adapter THEN the intended Knoxx actors receive them with correlation intact and no duplicate effect on retry. At least one positive supported route is required for story completion.
 
 ## Verification
 
@@ -53,3 +54,8 @@ test or Rheos status transition.
 
 Native capability availability and deployed source can differ from checked-in
 code; preserve source revision and actual observed capability separately.
+
+## Additional identity criteria
+
+- [ ] GIVEN two new contexts WHEN bound THEN their (instance-id, actor-id) references differ, including parent and child. Only an authenticated resume of the same context may reuse its binding.
+- [ ] GIVEN context A private memory WHEN context B, including its parent or sibling, calls the memory tool THEN retrieval is denied without an explicit sharing grant. Parentage alone grants no private-memory access.

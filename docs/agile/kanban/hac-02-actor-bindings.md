@@ -52,3 +52,8 @@ test or Rheos status transition.
 
 Native capability availability and deployed source can differ from checked-in
 code; preserve source revision and actual observed capability separately.
+
+## Additional identity criteria
+
+- [ ] GIVEN two new contexts WHEN bound THEN their (instance-id, actor-id) references differ, including parent and child. Only an authenticated resume of the same context may reuse its binding.
+- [ ] GIVEN context A private memory WHEN context B, including its parent or sibling, calls the memory tool THEN retrieval is denied without an explicit sharing grant. Parentage alone grants no private-memory access.

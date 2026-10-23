@@ -2,7 +2,7 @@
 category: "kanban"
 labels: "muse, knoxx, codex, hermes, federation, epic"
 type: "epic"
-points: "21"
+points: "29"
 title: "EPIC: Shared Muse tools and scoped Knoxx actors across harness contexts"
 priority: "P1"
 status: "incoming"
@@ -36,7 +36,8 @@ activation or replacement of native harness scheduling.
 
 ## Acceptance criteria
 
-- [ ] Every child has implementation evidence and lawful Rheos admission before implementation begins.
+- [ ] Every child completes planning review and lawful Rheos admission before implementation begins.
+- [ ] Every child supplies implementation evidence before completion.
 - [ ] Codex tool parity and actor integration are independently demonstrated.
 - [ ] Hermes/Orbit capability and deployment evidence is recorded.
 - [ ] Local/remote identity and memory-boundary negative tests pass.
@@ -55,3 +56,8 @@ Host capabilities evolve; the compatibility matrix must bind measured versions.
 - [Research](../../research/harness-actor-continuity.md)
 - [Design](../../notes/design/harness-actor-continuity.md)
 - [Layered-contract epic](epic-layered-operating-contracts.md)
+
+## Additional child slices
+
+- HAC.06: `hac-06-layered-tool-projection` — layered tools/instructions agreement (3 points), depends on HAC.01 and LOC.05/06/07/08.
+- HAC.07: `hac-07-memory-promotion` — online authorization and revocation qualification (5 points), depends on HAC.02 and HAC.05.

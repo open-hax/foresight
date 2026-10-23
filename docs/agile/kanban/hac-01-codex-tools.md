@@ -28,7 +28,7 @@ Compile and qualify the shared Muse tools in Codex.
 
 ## Scope
 
-Reuse the existing MCP compiler, produce a Codex registration artifact and compare allowed tool names and argument schemas with the same profile in Claude/OpenCode.
+Qualify the existing single-tree MCP compiler and Codex registration independently of LOC implementation. Compare exposed tool names and argument schemas under the same existing profile in Claude/OpenCode. Layered integration is HAC.06 and remains blocked on LOC implementation.
 
 ## Non-goals
 
@@ -39,6 +39,8 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] GIVEN a selected profile WHEN Codex connects THEN initialize, tools/list and one harmless tool call pass with recorded artifact and profile hashes.
 - [ ] GIVEN existing unrelated Codex servers WHEN the registration is applied and rolled back THEN those definitions remain unchanged.
 - [ ] GIVEN hooks or native task messages WHEN only MCP is available THEN the capability manifest reports them unsupported.
+- [ ] GIVEN the same selected profile WHEN tool registries are normalized THEN allowed tool names and argument schemas agree across the supported targets, with explicit dispositions for every host-specific gap.
+- [ ] GIVEN a profile-excluded tool WHEN Codex lists or calls it THEN it is absent from tools/list and the call is denied.
 
 ## Verification
 

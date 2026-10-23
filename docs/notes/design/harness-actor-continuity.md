@@ -82,3 +82,19 @@ explicitly reporting lifecycle/message integration as unavailable.
 Hermes is a candidate consumer through Orbit's existing plugin, pending probes.
 Contract-0 source selection and language ownership remain the earlier LOC open
 questions; this extension does not resolve them by assumption.
+
+## Review refinements
+
+HAC.01 independently qualifies the existing single-tree MCP compiler. HAC.06
+depends on LOC.05/06/07/08 to prove tools and instructions share the same
+effective-contract hash. PR141 supplies specifications, not those implementations.
+New contexts have distinct actor references; authenticated resume is the only
+reuse exception. Parentage grants no private-memory access.
+HAC.05 qualifies transport and identity; HAC.07 separately qualifies memory.
+The initial protected-read consistency model checks source authority online on
+every read and promotion. No cached grant permits offline disclosure. Revocations
+committed before the read authorization check must deny that read. The check
+is the linearization point; already delivered bytes cannot be recalled. Revoked
+materialized projections become unavailable for later reads until reauthorized
+or rebuilt. This conservative default is a proposal to review, not a claim
+that current Knoxx implements it.

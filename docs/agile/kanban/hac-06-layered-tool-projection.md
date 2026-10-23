@@ -1,0 +1,48 @@
+---
+category: "kanban"
+labels: "muse, knoxx, harness, 3sp"
+type: "story"
+story_id: "HAC.06"
+points: "3"
+title: "HAC.06 — Project one layered contract into tools and instructions"
+priority: "P1"
+status: "incoming"
+uuid: "hac-06-layered-tool-projection"
+epic: "harness-actor-continuity"
+parent: "harness-actor-continuity"
+dependency: ["hac-01-codex-tools", "loc-layer-chain", "loc-fold-laws", "loc-harness-profiles", "loc-instruction-emitter"]
+---
+
+# Project one layered contract into tools and instructions
+
+> Design: [harness actor continuity](../../notes/design/harness-actor-continuity.md)
+> Research: [grounding](../../research/harness-actor-continuity.md)
+
+## Context
+
+Planning extends PR141; its LOC work is not implemented by the merge.
+
+## Outcome
+
+Project one layered contract into tools and instructions.
+
+## Scope
+
+Use the LOC fold and manifest to drive the existing shared tool compiler; preserve standalone MCP qualification from HAC.01.
+
+## Non-goals
+
+No production activation or alternate board/event authority.
+
+## Acceptance criteria
+
+- [ ] GIVEN a path and selected layers WHEN tools and instructions compile THEN both manifests reference the same effective-contract hash.
+- [ ] GIVEN a profile exclusion or ancestor change WHEN rebuilt THEN tool exposure follows the effective contract and stale projection evidence is invalidated.
+
+## Verification
+
+Implementation names the existing owner test runner, then records the isolated positive and negative scenarios above as version-bound receipts. Missing runtime access blocks qualification. This planning card claims no executed integration test or Rheos transition.
+
+## Risks
+
+Source and running runtime may diverge; verify deployed revision and actual capability.
