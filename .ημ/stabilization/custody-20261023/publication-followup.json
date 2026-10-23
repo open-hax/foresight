@@ -1,0 +1,62 @@
+{
+  "observed_at": "2026-10-23T07:04:06.027Z",
+  "root_published_head": "c5217d6e99fa2fb91d8b9c0c0b86cba7b69020b4",
+  "root_pr": 142,
+  "root_native_head_verified": true,
+  "root_pr_body_readback_exact": true,
+  "root_generated_suffix_preserved": true,
+  "root_auto_merge": null,
+  "child_published_head": "874068612a9c576ef3d3e6847f72de2fee9a996b",
+  "child_owned_worktree_removed_normally": true,
+  "unexpected_fetch": {
+    "command": "git fetch --no-tags origin c5217d6e99fa2fb91d8b9c0c0b86cba7b69020b4",
+    "inherited_submodule_recursion": true,
+    "observed_children": [
+      ".agents",
+      "Truth",
+      "axxium"
+    ],
+    "observed_ref_updates_in_agents": [
+      "new origin/codex/foresight-mimo-waiver",
+      "new origin/codex/pr-flow-native-colon-body",
+      "origin/docs/segmented-receipt-ledger e85b8f2..7f4dfb8"
+    ],
+    "owned_process_group": 541849,
+    "terminated_exit": 143,
+    "no_checkout_command": true,
+    "objects_and_remote_refs_only": true,
+    "no_rollback_or_ref_deletion": true,
+    "corrected_command": "git -c fetch.recurseSubmodules=false fetch --no-recurse-submodules --no-tags origin c5217d6e99fa2fb91d8b9c0c0b86cba7b69020b4",
+    "corrected_exit": 0,
+    "corrected_fetch_head": "c5217d6e99fa2fb91d8b9c0c0b86cba7b69020b4",
+    "bounded_observation": "Only .agents reported concrete remote-ref updates; Truth printed a fetch start without update details; axxium was interrupted during object indexing. No specific Truth/axxium ref update is inferred."
+  },
+  "accepted_root_pins_preserved": [
+    "160000 commit 00a05c8f6ba68ff30a98266879310464e966748b\t.agents",
+    "160000 commit 8ade66a3553bdd89696aebf4fc4628a6fe66e5ae\tTruth",
+    "160000 commit 2439d4d6b8e546cda276f09f5c96db59226ecad6\taxxium",
+    "160000 commit 2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90\tbitch-tracker",
+    "160000 commit 2655ae6eddbd20ac400a8e1ff99914c56d81b835\tcalliope",
+    "160000 commit 86385532b4f8606946555d0ada8e3fb22f35b4c3\tchat-ui",
+    "160000 commit 788cdd3434615a7932b924e68520dbf7f88408c2\tclio",
+    "160000 commit ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66\tepiphany",
+    "160000 commit 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90\teta-mu",
+    "160000 commit 8e16609dd191bdd2e9a3c0320ce4238b5cd83467\tkanban-orchestrator",
+    "160000 commit 3bd4cf26e68dc88fbe67f831baa4bc389e3363e7\tkatamorph",
+    "160000 commit fb08a10a8aa32a594cc97ae11b820113de4cf386\tknoxx",
+    "160000 commit b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde\tmuse",
+    "160000 commit cc4b45612974f735ddec46009ede07729511fba4\topencode",
+    "160000 commit 0c33018e27f861536822086afcdab666a60add44\tosmos",
+    "160000 commit abbbc8b1ad80738233593e17e751203db785c9e2\tproxx",
+    "160000 commit 7c7c62343fea0241ac545e37f14e57ab344bfa30\treceipt-river",
+    "160000 commit 11811264a308d406cb612aefa1dad40818675e5e\trheos",
+    "160000 commit d361c7837ba369f5c22c9a3f9d827e74605b6c7d\tservices",
+    "160000 commit 30339f9aa3df83ef8c335d4544307272abfbb131\tsession-mycology",
+    "160000 commit 6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa\tshx",
+    "160000 commit 1276955c86ff46936cd1ce7d81fbc790f7068e1e\tsol",
+    "160000 commit 97e67a7a758c080450a200e8e6e1ada614eabc6d\tuxx"
+  ],
+  "unowned_claude": "not traversed or modified",
+  "CMS_Cephalon": "paused",
+  "qualification": false
+}

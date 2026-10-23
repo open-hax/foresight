@@ -48,3 +48,5 @@ E0 remains breakdown, E1 incoming, publisher in progress and M0–M7 unqualified
 Lossless core captures: `.ημ/stabilization/snapshots/d506a57574f93e9cb00886eecd8b629918bb4f07935b55dfcbfa0c643bc9f2c0.json.gz` (SHA256 `d506a57574f93e9cb00886eecd8b629918bb4f07935b55dfcbfa0c643bc9f2c0`).
 
 Complete closure captures: `.ημ/stabilization/snapshots/d05ce5461d557166c16257b4c880e78df90ce6eee5f470672d4c7ff014034538.json.gz` (SHA256 `d05ce5461d557166c16257b4c880e78df90ce6eee5f470672d4c7ff014034538`).
+
+Publication follow-up: root `c5217d6e` and PR body read back exactly; the owned child worktree was clean and removed normally. The root verification fetch inherited recursive submodule settings. It was stopped (exit143), then repeated successfully with recursion explicitly disabled. Concrete `.agents` remote-ref updates are retained in `.ημ/stabilization/custody-20261023/publication-followup.json`; no checkout ran, no refs were rolled back, and all23 accepted gitlinks remain exact. This records the operational correction without qualification credit.

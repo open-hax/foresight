@@ -781,3 +781,13 @@
   spore: none
   receipt-refs: 00a6a55292d8cafb846727446c4ed1d1d961d92fceba406dd4ff69e9acb30203
   note: Central verification must preserve the actual producer rerun schema. Configuration generation does not establish compiled adapter or authenticated execution. Wait on the exact producer handle before dependent capture reads. No new spore or same-session promotion.
+
+- ts: 2026-10-23T07:04:53.557Z
+  session: foresight-stabilization
+  task: Correct inherited recursive publication fetch
+  p-efficiency: 0.7
+  p-friction: 0.5
+  p-skill-candidate: 0.6
+  spore: none
+  receipt-refs: 64817b99660b4516b1785151a287f13c9ded6b2c7c2e853e67939552da05164d
+  note: Root-only publication verification must explicitly disable submodule recursion, regardless of inherited Git configuration. Stop the owned process before further repository traversal and retain actual ref observations. No new spore or same-session promotion.
