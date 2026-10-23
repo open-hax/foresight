@@ -1,0 +1,701 @@
+{
+  "started_at": "2026-10-23T03:32:33.473829+00:00",
+  "completed_at": "2026-10-23T03:32:35.629892+00:00",
+  "query": "query{r0:repository(owner:\"riatzukiza\",name:\"babylon-experiment\"){id nameWithOwner isPrivate pullRequest(number:6){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"riatzukiza\",name:\"babylon-experiment\"){id nameWithOwner isPrivate pullRequest(number:7){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"riatzukiza\",name:\"babylon-experiment\"){id nameWithOwner isPrivate pullRequest(number:8){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"riatzukiza\",name:\"babylon-experiment\"){id nameWithOwner isPrivate pullRequest(number:9){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"riatzukiza\",name:\"beez\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"riatzukiza\",name:\"bitch-tracker\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"riatzukiza\",name:\"bitch-tracker\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"riatzukiza\",name:\"bitch-tracker\"){id nameWithOwner isPrivate pullRequest(number:3){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"riatzukiza\",name:\"calliope\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"riatzukiza\",name:\"calliope\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"riatzukiza\",name:\"calliope\"){id nameWithOwner isPrivate pullRequest(number:3){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"riatzukiza\",name:\"calliope\"){id nameWithOwner isPrivate pullRequest(number:4){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"riatzukiza\",name:\"calliope\"){id nameWithOwner isPrivate pullRequest(number:5){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"riatzukiza\",name:\"calliope\"){id nameWithOwner isPrivate pullRequest(number:8){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"riatzukiza\",name:\"chat-ui\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"riatzukiza\",name:\"chat-ui\"){id nameWithOwner isPrivate pullRequest(number:3){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"riatzukiza\",name:\"clio\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"riatzukiza\",name:\"clio\"){id nameWithOwner isPrivate pullRequest(number:3){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"riatzukiza\",name:\"clio\"){id nameWithOwner isPrivate pullRequest(number:5){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"riatzukiza\",name:\"corvid\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNTM3MzQ2MTg=",
+        "nameWithOwner": "riatzukiza/babylon-experiment",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 6,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "7dfaea1f188c0eb45a993955dea58b87090e93e1",
+          "baseRefName": "master",
+          "baseRefOid": "cc19792f44868e9578e3d7859c94923dd57673ae",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "1d21eafbe3d312e91626fff644eef0f8a6661ab6",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+                },
+                {
+                  "oid": "7dfaea1f188c0eb45a993955dea58b87090e93e1"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r1": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNTM3MzQ2MTg=",
+        "nameWithOwner": "riatzukiza/babylon-experiment",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 7,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "f91bae42d5b7b529eb1ba99069409d57d99e37ab",
+          "baseRefName": "master",
+          "baseRefOid": "cc19792f44868e9578e3d7859c94923dd57673ae",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "4769dcf6fd54b8d54bd9ac188e98a09b4b32f2f6",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+                },
+                {
+                  "oid": "f91bae42d5b7b529eb1ba99069409d57d99e37ab"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r2": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNTM3MzQ2MTg=",
+        "nameWithOwner": "riatzukiza/babylon-experiment",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 8,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c17c797d569f646ac00dc81bcde9bccb09f06c0f",
+          "baseRefName": "master",
+          "baseRefOid": "cc19792f44868e9578e3d7859c94923dd57673ae",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "3e9aa1de16d169647810d13afb88a641c9558f23",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+                },
+                {
+                  "oid": "c17c797d569f646ac00dc81bcde9bccb09f06c0f"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r3": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNTM3MzQ2MTg=",
+        "nameWithOwner": "riatzukiza/babylon-experiment",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 9,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "bb28731cb5eeddad315212cd8e11c8bbe0522ddd",
+          "baseRefName": "master",
+          "baseRefOid": "cc19792f44868e9578e3d7859c94923dd57673ae",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "ff0a254e34daf379d44c7bd46fee3ca58a837c00",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+                },
+                {
+                  "oid": "bb28731cb5eeddad315212cd8e11c8bbe0522ddd"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r4": {
+        "id": "MDEwOlJlcG9zaXRvcnkxOTIyNDY1Njc=",
+        "nameWithOwner": "riatzukiza/beez",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "60d50e7f7bc16641155efa9d7d73618c87fd4d04",
+          "baseRefName": "master",
+          "baseRefOid": "4804998390f04e69a9c43ddda0ed0485b90472ec",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "4804998390f04e69a9c43ddda0ed0485b90472ec"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "73db74db95ed194492acd2cbd7acaf2b69e0d206",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "4804998390f04e69a9c43ddda0ed0485b90472ec"
+                },
+                {
+                  "oid": "60d50e7f7bc16641155efa9d7d73618c87fd4d04"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOU4Vc5w",
+        "nameWithOwner": "riatzukiza/bitch-tracker",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "64af437938b15b0e0bd37c80cc01610a1dc25992",
+          "baseRefName": "main",
+          "baseRefOid": "4f1015bae457e6b4890f80a5d312f4259fce3ddb",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "63ed558e0103785372dabce983b41201b56d3e67"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "81c8ca23f0bbb6993aa7d2e17f856da801997e2d",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "63ed558e0103785372dabce983b41201b56d3e67"
+                },
+                {
+                  "oid": "64af437938b15b0e0bd37c80cc01610a1dc25992"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOU4Vc5w",
+        "nameWithOwner": "riatzukiza/bitch-tracker",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c2b9cc2c817825095239f70fb116af8a1cd3ad74",
+          "baseRefName": "main",
+          "baseRefOid": "4f1015bae457e6b4890f80a5d312f4259fce3ddb",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "63ed558e0103785372dabce983b41201b56d3e67"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "cb9d1d9b4f4664fe9b122d768e431d4ee6825cc0",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "63ed558e0103785372dabce983b41201b56d3e67"
+                },
+                {
+                  "oid": "c2b9cc2c817825095239f70fb116af8a1cd3ad74"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOU4Vc5w",
+        "nameWithOwner": "riatzukiza/bitch-tracker",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 3,
+          "state": "OPEN",
+          "isDraft": true,
+          "headRefOid": "cda8f73fa848693d844438a6c1dcaf7d18659b24",
+          "baseRefName": "codex/issue5-reaction-label-planning",
+          "baseRefOid": "64af437938b15b0e0bd37c80cc01610a1dc25992",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/issue5-reaction-label-planning",
+            "target": {
+              "oid": "64af437938b15b0e0bd37c80cc01610a1dc25992"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "8f0140c443d4de680ef8baa4f2e4d8e107edde32",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "64af437938b15b0e0bd37c80cc01610a1dc25992"
+                },
+                {
+                  "oid": "cda8f73fa848693d844438a6c1dcaf7d18659b24"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOU4VdRQ",
+        "nameWithOwner": "riatzukiza/calliope",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "04e5ed3166941ff59b8f823d61465b9b015e8626",
+          "baseRefName": "main",
+          "baseRefOid": "efe85a036504adfb45d8cab26920a6d4482aa53d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r9": {
+        "id": "R_kgDOU4VdRQ",
+        "nameWithOwner": "riatzukiza/calliope",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "df4ee1e7177367521b84f35adf5f4ef09f9e862c",
+          "baseRefName": "codex/calliope-upstream-sync",
+          "baseRefOid": "04e5ed3166941ff59b8f823d61465b9b015e8626",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/calliope-upstream-sync",
+            "target": {
+              "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "e78107e74d77bb0c307248d59928ffdbaa3ae7b1",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+                },
+                {
+                  "oid": "df4ee1e7177367521b84f35adf5f4ef09f9e862c"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOU4VdRQ",
+        "nameWithOwner": "riatzukiza/calliope",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 3,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "ef1885c16950355ffaf9e640189004f0aa9a24e4",
+          "baseRefName": "codex/calliope-upstream-sync",
+          "baseRefOid": "04e5ed3166941ff59b8f823d61465b9b015e8626",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/calliope-upstream-sync",
+            "target": {
+              "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "daed561d369dc563c159087d21158562f3d030bc",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+                },
+                {
+                  "oid": "ef1885c16950355ffaf9e640189004f0aa9a24e4"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOU4VdRQ",
+        "nameWithOwner": "riatzukiza/calliope",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 4,
+          "state": "OPEN",
+          "isDraft": true,
+          "headRefOid": "287895c23d60a69cab605a6d56fcf4cb50e2d32e",
+          "baseRefName": "codex/calliope-upstream-sync",
+          "baseRefOid": "04e5ed3166941ff59b8f823d61465b9b015e8626",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/calliope-upstream-sync",
+            "target": {
+              "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "480bb5eeae2e03b30fe7e3254de5d10d552cf2c1",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+                },
+                {
+                  "oid": "287895c23d60a69cab605a6d56fcf4cb50e2d32e"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOU4VdRQ",
+        "nameWithOwner": "riatzukiza/calliope",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 5,
+          "state": "OPEN",
+          "isDraft": true,
+          "headRefOid": "56cf4fc3975696cc1648f2fa83661eb09bce593b",
+          "baseRefName": "codex/calliope-upstream-sync",
+          "baseRefOid": "04e5ed3166941ff59b8f823d61465b9b015e8626",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/calliope-upstream-sync",
+            "target": {
+              "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "9f655bdaf166b1046b694b4cf9ec9d44db9cbbf2",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+                },
+                {
+                  "oid": "56cf4fc3975696cc1648f2fa83661eb09bce593b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOU4VdRQ",
+        "nameWithOwner": "riatzukiza/calliope",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 8,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "537029f68b1a676f6b227f53aac9bb81c5d0c046",
+          "baseRefName": "main",
+          "baseRefOid": "660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a7ba85832974d6508be9c30c07a7ff305e44eb13",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c"
+                },
+                {
+                  "oid": "537029f68b1a676f6b227f53aac9bb81c5d0c046"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOU4Vfqw",
+        "nameWithOwner": "riatzukiza/chat-ui",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b937ccee303d7766ad8df0211167d6daef5c746d",
+          "baseRefName": "main",
+          "baseRefOid": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7d0d72c175d0f562dc0db40db2a4d7cdf7882903"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "530f0f469cbeb0a22e453366a64343038cea4268",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "7d0d72c175d0f562dc0db40db2a4d7cdf7882903"
+                },
+                {
+                  "oid": "b937ccee303d7766ad8df0211167d6daef5c746d"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOU4Vfqw",
+        "nameWithOwner": "riatzukiza/chat-ui",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 3,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "968bc61a68ab91a4b30cedcfc06c16699344c4da",
+          "baseRefName": "main",
+          "baseRefOid": "0bad1661fb283a0dd878bcb902b6cc6ce191f3c9",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7d0d72c175d0f562dc0db40db2a4d7cdf7882903"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "3217fe9ea52453f722103bf3301290620f03279a",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "7d0d72c175d0f562dc0db40db2a4d7cdf7882903"
+                },
+                {
+                  "oid": "968bc61a68ab91a4b30cedcfc06c16699344c4da"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r16": {
+        "id": "R_kgDOU4VfQQ",
+        "nameWithOwner": "riatzukiza/clio",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "17fa6906bece5390c0e81555b947319141caf9a3",
+          "baseRefName": "main",
+          "baseRefOid": "788cdd3434615a7932b924e68520dbf7f88408c2",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "e91ff26535e35e449f9f2cc6439e88c2adbdb626",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+                },
+                {
+                  "oid": "17fa6906bece5390c0e81555b947319141caf9a3"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r17": {
+        "id": "R_kgDOU4VfQQ",
+        "nameWithOwner": "riatzukiza/clio",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 3,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "5d4f98b29d1253fea8483bd2fd16893421041e5b",
+          "baseRefName": "main",
+          "baseRefOid": "e6f5cf400909ef3d75ad79496645d1d1a8074e88",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "4242d5a783899e38351bea16c3912ef825d999bc",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+                },
+                {
+                  "oid": "5d4f98b29d1253fea8483bd2fd16893421041e5b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDOU4VfQQ",
+        "nameWithOwner": "riatzukiza/clio",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 5,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "5fad794de1a9e23d6e5aaad42eaa933be1c070be",
+          "baseRefName": "main",
+          "baseRefOid": "7262ddaaf39b32deb1794c5c6595724b6d69538e",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r19": {
+        "id": "R_kgDOS9pEJw",
+        "nameWithOwner": "riatzukiza/corvid",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a541ae2676f5617d5e66f8b88af1f69c13186cbd",
+          "baseRefName": "main",
+          "baseRefOid": "5560f18e7c0e5d235efee6d175df3948243bac30",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "6a8118e4f2446c0dd2d03703aa4d2b829120c05d"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "d249125760d6ba4266e341b70f62f39ee1b53ed3",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "6a8118e4f2446c0dd2d03703aa4d2b829120c05d"
+                },
+                {
+                  "oid": "a541ae2676f5617d5e66f8b88af1f69c13186cbd"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,21 @@
 
 Updated October 23 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [cold bootstrap, native owner proof and structured worker failures](e0-bootstrap-execution.md).
+Latest execution: [current-source native results, fresh cohort and source custody](e0-native-cd975.md).
+ETA head `cd9751d01a2b93123281d032f42a83fb4b9d42cb` now has actual native
+Sol 142/607 and Rheos 212/1219 passes at merge `f299bd6159b9fc32b11922a119464018f9643134`,
+verified base/head parents and matching head tree. Compiler warnings are zero;
+concrete carrier diagnostics remain. Sandbox 39894128562 is still running.
+Root e9f native diff hygiene exits 0; receipt history exits 2 and missing-App/
+terminal gates remain failed. One body-only trace item is settled; twenty native
+LGTM IDs remain conservatively unclassified, with no fabricated fix/approval.
+Fresh 03:32 UTC census: 442 frozen / 437 open / 4 merged / 1 closed / 6 changed open H/B;
+source drift 0, proposal drift 1 retained with stable targeted Sol #4 recheck.
+Axxium #3/#4 appended history and exact shared proposal bytes are preserved without
+adoption/deployment authority. Native readback source implementation continues
+under the existing publisher. All pins/history/states preserved; CMS/Cephalon paused.
+
+Earlier execution: [cold bootstrap, native owner proof and structured worker failures](e0-bootstrap-execution.md).
 Published ETA checkpoint `cd9751d01a2b93123281d032f42a83fb4b9d42cb` binds
 source `b8af64f41de139d17741ee2696ab82bdb38a81d1`: intent 29/200, full CLI 194/587
 plus workflows 11/199, lint/release zero warnings and actual public adapter probes pass.

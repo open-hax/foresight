@@ -1,0 +1,83 @@
+{
+  "started_at": "2026-10-23T03:32:36.856769+00:00",
+  "completed_at": "2026-10-23T03:32:37.658097+00:00",
+  "query": "query{r0:repository(owner:\"riatzukiza\",name:\"trader.prototype.react\"){id nameWithOwner isPrivate pullRequest(number:8){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"riatzukiza\",name:\"uxx\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNjM4OTQ2NDc=",
+        "nameWithOwner": "riatzukiza/trader.prototype.react",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 8,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "aab6285ec858ccab91b8eff79a6836c192f81b90",
+          "baseRefName": "master",
+          "baseRefOid": "d08a104c0b46361513d77c9b9589a65cd23b5596",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "d08a104c0b46361513d77c9b9589a65cd23b5596"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "aa89053a0ec1a8101d7d67d9f7245802ce0279e4",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d08a104c0b46361513d77c9b9589a65cd23b5596"
+                },
+                {
+                  "oid": "aab6285ec858ccab91b8eff79a6836c192f81b90"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDOSPHNBw",
+        "nameWithOwner": "riatzukiza/uxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "915e12fdea6065ce543b851e75ac40ab8e4a0fb9",
+          "baseRefName": "main",
+          "baseRefOid": "c9959b8bd0316044ff4a200e38ac8d4ca9442f37",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "c9959b8bd0316044ff4a200e38ac8d4ca9442f37"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a644d26d5adfafc8f0ffe43de6bceb8b5d9eca47",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9959b8bd0316044ff4a200e38ac8d4ca9442f37"
+                },
+                {
+                  "oid": "915e12fdea6065ce543b851e75ac40ab8e4a0fb9"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

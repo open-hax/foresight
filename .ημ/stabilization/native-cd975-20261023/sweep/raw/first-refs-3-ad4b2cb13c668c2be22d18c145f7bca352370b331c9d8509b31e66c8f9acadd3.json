@@ -1,0 +1,286 @@
+{
+  "started_at": "2026-10-23T03:32:37.718826+00:00",
+  "completed_at": "2026-10-23T03:32:39.206901+00:00",
+  "query": "query{r0:repository(owner:\"open-hax\",name:\"website\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r1:repository(owner:\"openai\",name:\"parameter-golf\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r2:repository(owner:\"riatzukiza\",name:\".agents\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r3:repository(owner:\"riatzukiza\",name:\"TANF-app\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r4:repository(owner:\"riatzukiza\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-sync-upstream-58b0fd9\"){name target{oid}}}r5:repository(owner:\"riatzukiza\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r6:repository(owner:\"riatzukiza\",name:\"axxium\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r7:repository(owner:\"riatzukiza\",name:\"babylon-experiment\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r8:repository(owner:\"riatzukiza\",name:\"beez\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r9:repository(owner:\"riatzukiza\",name:\"bitch-tracker\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/issue5-reaction-label-planning\"){name target{oid}}}r10:repository(owner:\"riatzukiza\",name:\"bitch-tracker\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r11:repository(owner:\"riatzukiza\",name:\"calliope\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/calliope-upstream-sync\"){name target{oid}}}r12:repository(owner:\"riatzukiza\",name:\"calliope\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r13:repository(owner:\"riatzukiza\",name:\"chat-ui\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r14:repository(owner:\"riatzukiza\",name:\"clio\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r15:repository(owner:\"riatzukiza\",name:\"corvid\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r16:repository(owner:\"riatzukiza\",name:\"devel\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r17:repository(owner:\"riatzukiza\",name:\"devel\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/staging\"){name target{oid}}}r18:repository(owner:\"riatzukiza\",name:\"discord-chatter\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r19:repository(owner:\"riatzukiza\",name:\"duck\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r20:repository(owner:\"riatzukiza\",name:\"epiphany\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r21:repository(owner:\"riatzukiza\",name:\"eros-eris-field\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r22:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/eta-mu-accepted-upstream-sync\"){name target{oid}}}r23:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/integration/source-map-reviewed-origin4eaa-20261017\"){name target{oid}}}r24:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/integration/trusted-review-publication-fefa6dd5\"){name target{oid}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOSxR0jg",
+        "nameWithOwner": "open-hax/website",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "6fd48ac5df9a16e414efbbf2b6abe98ad331be78"
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDORL3_gg",
+        "nameWithOwner": "openai/parameter-golf",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+          }
+        }
+      },
+      "r2": {
+        "id": "R_kgDOTlQJUg",
+        "nameWithOwner": "riatzukiza/.agents",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "580a361ee0110319cc4f3320d9982961073b66a2"
+          }
+        }
+      },
+      "r3": {
+        "id": "MDEwOlJlcG9zaXRvcnkzNDAxNzYwMDE=",
+        "nameWithOwner": "riatzukiza/TANF-app",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "800375a66a8a151bc22678bf27529392a77f19b0"
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOU4Vcow",
+        "nameWithOwner": "riatzukiza/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-sync-upstream-58b0fd9",
+          "target": {
+            "oid": "b239e6bf1a43fcce64ccebf9234b0a1ff0734be1"
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOU4Vcow",
+        "nameWithOwner": "riatzukiza/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "58b0fd91ea65b7a4b3a1f571f22f3d394374a871"
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOU4Vg0w",
+        "nameWithOwner": "riatzukiza/axxium",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "d3eda22e442d956c0649cc4f58a3207dc60845f8"
+          }
+        }
+      },
+      "r7": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNTM3MzQ2MTg=",
+        "nameWithOwner": "riatzukiza/babylon-experiment",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "cc19792f44868e9578e3d7859c94923dd57673ae"
+          }
+        }
+      },
+      "r8": {
+        "id": "MDEwOlJlcG9zaXRvcnkxOTIyNDY1Njc=",
+        "nameWithOwner": "riatzukiza/beez",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "4804998390f04e69a9c43ddda0ed0485b90472ec"
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOU4Vc5w",
+        "nameWithOwner": "riatzukiza/bitch-tracker",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/issue5-reaction-label-planning",
+          "target": {
+            "oid": "64af437938b15b0e0bd37c80cc01610a1dc25992"
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOU4Vc5w",
+        "nameWithOwner": "riatzukiza/bitch-tracker",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "63ed558e0103785372dabce983b41201b56d3e67"
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOU4VdRQ",
+        "nameWithOwner": "riatzukiza/calliope",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/calliope-upstream-sync",
+          "target": {
+            "oid": "04e5ed3166941ff59b8f823d61465b9b015e8626"
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOU4VdRQ",
+        "nameWithOwner": "riatzukiza/calliope",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c"
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOU4Vfqw",
+        "nameWithOwner": "riatzukiza/chat-ui",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "7d0d72c175d0f562dc0db40db2a4d7cdf7882903"
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOU4VfQQ",
+        "nameWithOwner": "riatzukiza/clio",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "30fb91b80148245f9a319a7356111ec4df1036da"
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOS9pEJw",
+        "nameWithOwner": "riatzukiza/corvid",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "6a8118e4f2446c0dd2d03703aa4d2b829120c05d"
+          }
+        }
+      },
+      "r16": {
+        "id": "R_kgDOQPK6ww",
+        "nameWithOwner": "riatzukiza/devel",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "80a95e5638f4ee95e182ebf0a22f4735ab55964f"
+          }
+        }
+      },
+      "r17": {
+        "id": "R_kgDOQPK6ww",
+        "nameWithOwner": "riatzukiza/devel",
+        "isPrivate": false,
+        "ref": {
+          "name": "staging",
+          "target": {
+            "oid": "4745a2687894a5618582fe9a9d597879052b753e"
+          }
+        }
+      },
+      "r18": {
+        "id": "MDEwOlJlcG9zaXRvcnkxNDY0MDAyNTQ=",
+        "nameWithOwner": "riatzukiza/discord-chatter",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "e9f7a58407fa26c334c42b4a843ea37849671c0e"
+          }
+        }
+      },
+      "r19": {
+        "id": "R_kgDOMWUnow",
+        "nameWithOwner": "riatzukiza/duck",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "6493d3af6fd1f729e91217fc5137da7cd0e1e626"
+          }
+        }
+      },
+      "r20": {
+        "id": "R_kgDOU4VdlA",
+        "nameWithOwner": "riatzukiza/epiphany",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "643be698ea0d841dd19385506b272872306e456e"
+          }
+        }
+      },
+      "r21": {
+        "id": "R_kgDOU_2F9w",
+        "nameWithOwner": "riatzukiza/eros-eris-field",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "b4cb390287c902ced2d383eb60b91a5bbb9da7d2"
+          }
+        }
+      },
+      "r22": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/eta-mu-accepted-upstream-sync",
+          "target": {
+            "oid": "093a6dbf00fcfadea26f07ac7e3db29bc627a533"
+          }
+        }
+      },
+      "r23": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "ref": {
+          "name": "integration/source-map-reviewed-origin4eaa-20261017",
+          "target": {
+            "oid": "5b9dd533f9747136446c8f8a6f9c6ed320f07f44"
+          }
+        }
+      },
+      "r24": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "ref": {
+          "name": "integration/trusted-review-publication-fefa6dd5",
+          "target": {
+            "oid": "fefa6dd52135e1045b1ad56802a346dc0779970c"
+          }
+        }
+      }
+    }
+  }
+}

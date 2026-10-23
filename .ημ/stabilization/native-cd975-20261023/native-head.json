@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "/home/err/.cache/foresight-tools/bin/gh",
+    "api",
+    "repos/open-hax/eta-mu/git/commits/cd9751d01a2b93123281d032f42a83fb4b9d42cb"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"sha\":\"cd9751d01a2b93123281d032f42a83fb4b9d42cb\",\"node_id\":\"C_kwDORu27H9oAKGNkOTc1MWQwMWEyYjkzMTIzMjgxZDAzMmY0MmE4M2ZiNGI5ZDQyY2I\",\"url\":\"https://api.github.com/repos/open-hax/eta-mu/git/commits/cd9751d01a2b93123281d032f42a83fb4b9d42cb\",\"html_url\":\"https://github.com/open-hax/eta-mu/commit/cd9751d01a2b93123281d032f42a83fb4b9d42cb\",\"author\":{\"name\":\"Error\",\"email\":\"foamy125@gmail.com\",\"date\":\"2026-10-23T03:16:09Z\"},\"committer\":{\"name\":\"Error\",\"email\":\"foamy125@gmail.com\",\"date\":\"2026-10-23T03:16:09Z\"},\"tree\":{\"sha\":\"622796e74b4af898ec0d21de2fa6617e0a400b8e\",\"url\":\"https://api.github.com/repos/open-hax/eta-mu/git/trees/622796e74b4af898ec0d21de2fa6617e0a400b8e\"},\"message\":\"docs(review): persist worker preflight repair and retry evidence\",\"parents\":[{\"sha\":\"b8af64f41de139d17741ee2696ab82bdb38a81d1\",\"url\":\"https://api.github.com/repos/open-hax/eta-mu/git/commits/b8af64f41de139d17741ee2696ab82bdb38a81d1\",\"html_url\":\"https://github.com/open-hax/eta-mu/commit/b8af64f41de139d17741ee2696ab82bdb38a81d1\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+  "stderr": ""
+}

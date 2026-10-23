@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "/home/err/.cache/foresight-tools/bin/gh",
+    "api",
+    "repos/open-hax/eta-mu/actions/runs/39894128580/artifacts?per_page=100"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"total_count\":0,\"artifacts\":[]}",
+  "stderr": ""
+}

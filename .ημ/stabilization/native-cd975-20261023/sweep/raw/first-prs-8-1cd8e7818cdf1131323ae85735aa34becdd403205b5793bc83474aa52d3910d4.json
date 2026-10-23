@@ -1,0 +1,671 @@
+{
+  "started_at": "2026-10-23T03:32:32.305449+00:00",
+  "completed_at": "2026-10-23T03:32:33.727692+00:00",
+  "query": "query{r0:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:126){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:127){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:128){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:129){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:133){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:53){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:92){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:94){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:95){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:96){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:97){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:98){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate pullRequest(number:99){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"open-hax\",name:\"privaxxy\"){id nameWithOwner isPrivate pullRequest(number:7){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:323){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:330){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:343){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:365){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:433){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:435){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 126,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "909a526756e3a41a5ec9ba5973660ffe4b5cb336",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "6fe185b1ecf7fe28552d246eab0bc1ef52b452fc",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "909a526756e3a41a5ec9ba5973660ffe4b5cb336"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 127,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "99456c1f27b1e97b4bbb79e26f5dfedcaaaa1a4b",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "1cbfd37ac13c760a9f601b83a42b5585a08e3e8a",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "99456c1f27b1e97b4bbb79e26f5dfedcaaaa1a4b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r2": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 128,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "98a0b41df3f7ffbb885bd53b5eee3e095d84bd22",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "b476092490ebd3409fb96175618c8d6131c0d18b",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "98a0b41df3f7ffbb885bd53b5eee3e095d84bd22"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 129,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "2e70c3ec5b0285b5960c241e0c5ba8a4d8ec1042",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "704fadd6cfb28d0aeb3b4d9b2356cc8f74e92b21",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "2e70c3ec5b0285b5960c241e0c5ba8a4d8ec1042"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 133,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b1de5ef3634052ea757eddca21d0ac106d211781",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "470f54c4aecc4b181f09c149a458f14a4f26ad81",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "b1de5ef3634052ea757eddca21d0ac106d211781"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 53,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b443a6d382a1eda2af324f80002d1ae376a5778b",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "f76c5657664a7d6e303a9cb268528a5ec30dc8ec",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "b443a6d382a1eda2af324f80002d1ae376a5778b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 92,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b2100547407640b0634dccde73effeb20c785e4f",
+          "baseRefName": "main",
+          "baseRefOid": "d7283eee78e90feac384c09eee208f068fc66c99",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "3d811d155672f0b49ca9b98b33f65b25f8729d78",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08"
+                },
+                {
+                  "oid": "b2100547407640b0634dccde73effeb20c785e4f"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 94,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b2100547407640b0634dccde73effeb20c785e4f",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "984d217267cf9e2c75b9530f82c8282d87c7c552",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "b2100547407640b0634dccde73effeb20c785e4f"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 95,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "7ba9151a6a553b71880dbace2643aeaa2d467cfd",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "5f623e95e6eae72e35475b07f1f55ecf4f2fea8d",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "7ba9151a6a553b71880dbace2643aeaa2d467cfd"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 96,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "479e12e77d407de9ba08a6e6eab415dc7d1f31b8",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "ce3340cd777e4cca1d478080477361da390bd556",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "479e12e77d407de9ba08a6e6eab415dc7d1f31b8"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 97,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "582efb7ebbdc542650fd239bfc5f2de076316c53",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "40ff32f7b8b3651db12541c0dceb6f683dca9333",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "582efb7ebbdc542650fd239bfc5f2de076316c53"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 98,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "acd8fe557ef3dd0d74113247866ff9ff0974e351",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "8df23d3cd94f554d2dde666910176ca77ae3b62d",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "acd8fe557ef3dd0d74113247866ff9ff0974e351"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 99,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "93204ecf5183003a6153775bff2a1b533a6a7f59",
+          "baseRefName": "staging",
+          "baseRefOid": "25477cd354ae473ee9df271ded5ee836dd087b2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "c712d5bab47d54e3177254af44af783e8f989e75",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+                },
+                {
+                  "oid": "93204ecf5183003a6153775bff2a1b533a6a7f59"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDORo7ZZg",
+        "nameWithOwner": "open-hax/privaxxy",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 7,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "0983376be50b2782512776a868f290b5c8555f97",
+          "baseRefName": "main",
+          "baseRefOid": "de3e3dade0e4f21850f76416acca1c5783484d15",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "de3e3dade0e4f21850f76416acca1c5783484d15"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "8eb94ddafabdadbf7b868ecef116733d37dccf3a",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "de3e3dade0e4f21850f76416acca1c5783484d15"
+                },
+                {
+                  "oid": "0983376be50b2782512776a868f290b5c8555f97"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 323,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "afc606524cc8106589c249bb849ed76402df1c67",
+          "baseRefName": "staging",
+          "baseRefOid": "51413aa9fcbd5da7ff0ea6937ccfceece475af15",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r15": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 330,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "1de04a234058c23c74b02d1dea399533a25f9993",
+          "baseRefName": "staging",
+          "baseRefOid": "8f5deb39c613855f976c0fa01a827f662dbb5f30",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r16": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 343,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "ed7772dcf197444a5848e739e0f9c2f34cf6bb46",
+          "baseRefName": "staging",
+          "baseRefOid": "8f5deb39c613855f976c0fa01a827f662dbb5f30",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r17": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 365,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "1cfa6e1b12f9c8dd61c5181815bae4e07c40f96b",
+          "baseRefName": "staging",
+          "baseRefOid": "51413aa9fcbd5da7ff0ea6937ccfceece475af15",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "90fa7d39328b645953e504b4c979ec40a4d2ac4e",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+                },
+                {
+                  "oid": "1cfa6e1b12f9c8dd61c5181815bae4e07c40f96b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 433,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "36b4e6b2fcebf015352eec80808ba1b23667c703",
+          "baseRefName": "staging",
+          "baseRefOid": "10a7d2303490127de38afa4d6a17ef8e2670874d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r19": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 435,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "ec7aaa79635a848c8fce0c78b8b8a401b154c29b",
+          "baseRefName": "staging",
+          "baseRefOid": "10a7d2303490127de38afa4d6a17ef8e2670874d",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "f19744ba26c587935fb289a439c4a098be78d102",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+                },
+                {
+                  "oid": "ec7aaa79635a848c8fce0c78b8b8a401b154c29b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

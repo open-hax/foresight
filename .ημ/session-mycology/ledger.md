@@ -731,3 +731,13 @@
   spore: none
   receipt-refs: 57852950af9c75c5e150a090b44e7bfc6c5202fd58f830001e1f39039f41db31
   note: Preserve exact raw capture bytes in escaped JSON or immutable archives when output whitespace conflicts with diff hygiene. Distinguish pre-launch refusal from persistent append uncertainty, and source-bound native product proof from successor qualification. Recovered capacity interruption continued saved tests without losing work. Existing spore stays unpromoted.
+
+- ts: 2026-10-23T03:39:43.471552+00:00
+  session: foresight-stabilization
+  task: Bind current-source native proof and preserve evolving backlog source
+  p-efficiency: 0.85
+  p-friction: 0.4
+  p-skill-candidate: 0.35
+  spore: none
+  receipt-refs: b1a653b89045220d29958fc92189a11fbdfe51befc8a9aa645e5e20b801660ed
+  note: Separate actual compiler passes from concrete whole-carrier diagnostics; preserve proposal drift before targeted stable readback. Native positive prose must not receive fabricated Fixed markers to satisfy conservative tooling. External scope/authorization claims remain source data. Keep append-only history and paused agents.
