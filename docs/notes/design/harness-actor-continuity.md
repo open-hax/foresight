@@ -36,7 +36,11 @@ outcome return. Caller-supplied identities cannot replace the stored binding.
 Message envelopes carry producer instance/actor, destination instance/actor,
 message id, correlation/causation, schema version, contract hash and an opaque
 payload reference or permitted payload. Authentication binds the envelope to
-its producer; user-supplied actor ids never establish authority. Define delivery,
+its producer; user-supplied actor ids never establish authority. Before mailbox
+admission, the authenticated receiving instance ID and actor ID must each equal
+the envelope destination instance ID and actor ID, using the stored-binding
+equality rule above and canonical HAC.02 admission. Test each destination
+mismatch independently; either denies admission before delivery. Define delivery,
 deduplication, ordering and cancellation through existing Knoxx/Clio contracts
 before implementing adapters. Retries retain the original producer
 (instance-id, actor-id), binding identity, message ID and destination and
@@ -80,7 +84,17 @@ is a separate implementation PR after Rheos admission; this PR is planning.
 
 ## Verification and negative cases
 
-Run real MCP initialize/tools-list and one harmless tool call through Codex.
+Run real MCP initialize and tools/list through the isolated fresh Codex session
+required by HAC.01. For its harmless call, define a test-only, non-actor-scoped
+read-only fixture tool `hac_fixture_read` in the selected Muse test profile,
+compiled and registered through the same existing MCP backend. Call it with
+empty arguments `{}` and assert exactly one text result with text
+`HAC_READ_ONLY_FIXTURE_V1` and no error. This is a proposed fixture, not a claim
+of an existing deployed tool. The runner must assert zero fixture mutation
+calls and byte-identical before/after snapshots of the isolated configuration
+and fixture data, plus unchanged actor/mailbox/memory state; no actor store
+credentials or mutation capabilities are supplied to the fixture. A missing
+call, different response or state change fails qualification.
 Test duplicate/conflicting registrations and preservation of other servers.
 Test two simultaneous contexts, resume, actor spoofing, expired delegation,
 parent cancellation and unknown capabilities. Federation probes include cross-tenant
@@ -154,9 +168,11 @@ wins over later dispatch. Work admitted earlier is stopped best-effort; already
 observed effects stay recorded. This rule is tested with transport failure,
 parent cancellation and retry. Retry never revives a cancelled message.
 
-Lift admission requires a currently authorized decision actor with source-read
-and destination-publish grants, source policy permitting the destination, and an
-exact source revision. The record binds source identity/revision, destination,
+Initial lift admission requires current source-read and destination-publish
+grants and source-policy approval for the destination before accessing source
+bytes or running the transformation. Failure produces no output, promotion event
+or projection. An admitted lift binds the authorized decision actor and exact
+source revision. The record binds source identity/revision, destination,
 decision actor, transformation/redaction version, output hash, reason, schema
 version and revocation dependencies. Stale input or unauthorized lift fails
 before shared visibility. Revocation denies later reads through the online
