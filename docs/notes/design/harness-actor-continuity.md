@@ -131,3 +131,12 @@ decision actor, transformation/redaction version, output hash, reason, schema
 version and revocation dependencies. Stale input or unauthorized lift fails
 before shared visibility. Revocation denies later reads through the online
 authority check defined above, including projections materialized earlier.
+
+## Payload reference admission
+
+A message payload reference conveys no read authority by itself. Resolution
+requires the authenticated destination actor's current source-read grant, tenant
+and audience match, and exact authorized source revision. Wrong destination,
+revoked/expired grant or inaccessible source denies resolution without returning
+content. HAC.02 specifies these checks in the canonical Knoxx contract; HAC.05
+qualifies them through the adapter. No existing resolver behavior is presumed.

@@ -37,7 +37,7 @@ No production activation or alternate board/event authority.
 ## Acceptance criteria
 
 - [ ] GIVEN a path and selected layers WHEN tools and instructions compile THEN both manifests reference the same effective-contract hash.
-- [ ] GIVEN a profile exclusion or ancestor change WHEN rebuilt THEN tool exposure follows the effective contract and stale projection evidence is invalidated.
+- [ ] GIVEN a profile exclusion or ancestor change WHEN rebuilt THEN tool exposure and emitted instructions both follow the rebuilt effective contract, both manifests agree on its new hash, and stale projection evidence is invalidated.
 
 ## Verification
 

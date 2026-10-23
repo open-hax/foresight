@@ -38,7 +38,7 @@ No production cutover, broad credential copying, new board implementation or aut
 ## Acceptance criteria
 
 - [ ] GIVEN a local actor and a remote binding WHEN connected THEN both instances validate audience, tenant and current grants independently.
-- [ ] GIVEN replay or remote outage WHEN message delivery is attempted THEN duplicate effects are prevented, failed delivery stays pending under the declared retry policy, and recovery preserves causal identity.
+- [ ] GIVEN replay or remote outage WHEN message delivery is attempted THEN duplicate effects are prevented, failed delivery stays pending under the declared retry policy, and recovery preserves causal identity and the original remote (instance-id, actor-id) destination mapping. Any destination change is rejected unless a new mapping and grant are explicitly authorized.
 - [ ] GIVEN revoked or expired message authorization WHEN new delivery is attempted THEN destination admission denies it; no cached transport grant bypasses destination checks.
 
 ## Verification
@@ -53,3 +53,7 @@ test or Rheos status transition.
 
 Native capability availability and deployed source can differ from checked-in
 code; preserve source revision and actual observed capability separately.
+
+## Payload reference criteria
+
+- [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authorized destination with a current matching grant resolves only the permitted revision.

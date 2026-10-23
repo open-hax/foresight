@@ -64,3 +64,7 @@ code; preserve source revision and actual observed capability separately.
 - [ ] GIVEN a requested child grant WHEN it adds a capability, broadens tenant/audience/resource scope or extends expiry beyond the parent's grant THEN delegation is rejected. Child rights must be a subset and expiry no later than the parent's.
 - [ ] GIVEN a revoked binding, mismatched installation or principal, or resume after revocation WHEN resumed or used THEN admission denies; a new grant/binding requires explicit authorization.
 - [ ] GIVEN a message encoded under an unknown major schema or incompatible required fields WHEN admitted THEN it fails with a version error; older compatible schemas use only an explicit versioned migration.
+
+## Payload reference criteria
+
+- [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authorized destination with a current matching grant resolves only the permitted revision.
