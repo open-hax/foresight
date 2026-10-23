@@ -36,10 +36,13 @@ No production activation or alternate board/event authority.
 
 ## Acceptance criteria
 
-- [ ] GIVEN private source content WHEN promotion is proposed THEN a separately authorized event carries source revision, destination scope, decision actor and transformation.
+- [ ] GIVEN private source content WHEN promotion is proposed THEN a separately authorized event carries source identity and revision, destination scope, decision actor, transformation/redaction, reason, schema version, and revocation dependencies. Missing fields reject admission.
 - [ ] GIVEN source authority is unreachable WHEN a protected read or promotion is requested THEN it fails closed without returning source-derived content.
 - [ ] GIVEN revocation committed before read authorization, both before delivery and after projection creation, WHEN retrieval occurs THEN it denies disclosure and invalidates the affected materialized projection for future use.
 - [ ] GIVEN a schedule or repeated references WHEN triggered THEN it may propose a lift but cannot authorize it.
+
+- [ ] GIVEN an unauthorized lift, stale source revision or transformation bound to different source bytes WHEN promoted THEN admission rejects it before shared content becomes visible.
+- [ ] GIVEN a lift WHEN authorized THEN the decision actor has current source-read and destination-publish authority, source policy permits that destination, and the transformed output hash binds the exact source revision and transformation version.
 
 ## Verification
 

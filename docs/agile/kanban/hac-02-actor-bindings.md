@@ -57,3 +57,10 @@ code; preserve source revision and actual observed capability separately.
 
 - [ ] GIVEN two new contexts WHEN bound THEN their (instance-id, actor-id) references differ, including parent and child. Only an authenticated resume of the same context may reuse its binding.
 - [ ] GIVEN context A private memory WHEN context B, including its parent or sibling, calls the memory tool THEN retrieval is denied without an explicit sharing grant. Parentage alone grants no private-memory access.
+
+## Admission and compatibility criteria
+
+- [ ] GIVEN an authenticated producer with the wrong role or missing capability WHEN a message is admitted THEN it is denied without a valid event.
+- [ ] GIVEN a requested child grant WHEN it adds a capability, broadens tenant/audience/resource scope or extends expiry beyond the parent's grant THEN delegation is rejected. Child rights must be a subset and expiry no later than the parent's.
+- [ ] GIVEN a revoked binding, mismatched installation or principal, or resume after revocation WHEN resumed or used THEN admission denies; a new grant/binding requires explicit authorization.
+- [ ] GIVEN a message encoded under an unknown major schema or incompatible required fields WHEN admitted THEN it fails with a version error; older compatible schemas use only an explicit versioned migration.

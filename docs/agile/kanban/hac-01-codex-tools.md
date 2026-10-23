@@ -37,7 +37,7 @@ No production cutover, broad credential copying, new board implementation or aut
 ## Acceptance criteria
 
 - [ ] GIVEN a selected profile WHEN Codex connects THEN initialize, tools/list and one harmless tool call pass with recorded artifact and profile hashes.
-- [ ] GIVEN existing unrelated Codex servers WHEN the registration is applied and rolled back THEN those definitions remain unchanged.
+- [ ] GIVEN existing unrelated Codex servers WHEN the registration is applied and rolled back THEN those definitions remain unchanged, the new registration is absent after rollback, and a fresh Codex session cannot discover or call it.
 - [ ] GIVEN hooks or native task messages WHEN only MCP is available THEN the capability manifest reports them unsupported.
 - [ ] GIVEN the same selected profile WHEN tool registries are normalized THEN allowed tool names and argument schemas agree across the supported targets, with explicit dispositions for every host-specific gap.
 - [ ] GIVEN a profile-excluded tool WHEN Codex lists or calls it THEN it is absent from tools/list and the call is denied.

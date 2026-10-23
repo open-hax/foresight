@@ -59,3 +59,7 @@ code; preserve source revision and actual observed capability separately.
 
 - [ ] GIVEN two new contexts WHEN bound THEN their (instance-id, actor-id) references differ, including parent and child. Only an authenticated resume of the same context may reuse its binding.
 - [ ] GIVEN context A private memory WHEN context B, including its parent or sibling, calls the memory tool THEN retrieval is denied without an explicit sharing grant. Parentage alone grants no private-memory access.
+
+## Cancellation criteria
+
+- [ ] GIVEN failed transport followed by committed parent cancellation WHEN retry dispatch runs THEN queued descendant work is terminally cancelled and no new attempt starts. A run already admitted before cancellation is stopped best-effort and its observed effects remain recorded; cancellation never fabricates rollback.

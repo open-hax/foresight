@@ -98,3 +98,36 @@ is the linearization point; already delivered bytes cannot be recalled. Revoked
 materialized projections become unavailable for later reads until reauthorized
 or rebuilt. This conservative default is a proposal to review, not a claim
 that current Knoxx implements it.
+
+## Canonical contract and delegation rules
+
+The Knoxx repository is the canonical semantic owner of binding and message
+contracts. HAC.02 introduces versioned registry entries there, using Katamorph
+schema machinery and Clio envelope conventions rather than parallel actor models.
+Serialization is explicit tagged EDN with namespaced keys and an integer major
+schema version. Transport JSON is an adapter codec whose roundtrip must preserve
+the canonical values; raw host objects are never canonical contract data.
+Unknown major versions or required fields fail admission. An older schema is
+accepted only through a named, versioned migration with tests. Muse, Axxium and
+Clio consume that registry contract; changes require an owning Knoxx PR before
+adapter adoption. The effective operating-contract hash is produced by LOC.05/08
+and passed unchanged; this plan defines no competing hashing algorithm.
+
+A delegated child grant must be a subset of its parent's capabilities and
+allowed tenants, audiences and resource scopes, with expiry no later than the
+parent's. Any widening fails. Binding validation checks authenticated principal,
+installation identity, context identity, expiry and revocation on every use and
+resume. Revoked bindings cannot resume; parentage grants no implicit privileges.
+
+Committed cancellation is terminal for queued or retrying descendant work and
+wins over later dispatch. Work admitted earlier is stopped best-effort; already
+observed effects stay recorded. This rule is tested with transport failure,
+parent cancellation and retry. Retry never revives a cancelled message.
+
+Lift admission requires a currently authorized decision actor with source-read
+and destination-publish grants, source policy permitting the destination, and an
+exact source revision. The record binds source identity/revision, destination,
+decision actor, transformation/redaction version, output hash, reason, schema
+version and revocation dependencies. Stale input or unauthorized lift fails
+before shared visibility. Revocation denies later reads through the online
+authority check defined above, including projections materialized earlier.
