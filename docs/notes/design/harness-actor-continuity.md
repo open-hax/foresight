@@ -96,7 +96,8 @@ every read and promotion. No cached grant permits offline disclosure. Revocation
 committed before the read authorization check must deny that read. The check
 is the linearization point; already delivered bytes cannot be recalled. Revoked
 materialized projections become unavailable for later reads until reauthorized
-or rebuilt. This conservative default is a proposal to review, not a claim
+or rebuilt through current source-read and destination-publish authorization.
+An unauthorized rebuild produces and exposes no content. This conservative default is a proposal to review, not a claim
 that current Knoxx implements it.
 
 ## Canonical contract and delegation rules
@@ -113,11 +114,17 @@ Clio consume that registry contract; changes require an owning Knoxx PR before
 adapter adoption. The effective operating-contract hash is produced by LOC.05/08
 and passed unchanged; this plan defines no competing hashing algorithm.
 
-A delegated child grant must be a subset of its parent's capabilities and
-allowed tenants, audiences and resource scopes, with expiry no later than the
-parent's. Any widening fails. Binding validation checks authenticated principal,
-installation identity, context identity, expiry and revocation on every use and
-resume. Revoked bindings cannot resume; parentage grants no implicit privileges.
+Delegation requires an issuer authorized by the parent grant's explicit
+delegation permission, bound to the authenticated principal and parent grant.
+A parent grant without delegation permission is non-delegable. A delegated child
+grant must be a subset of its parent's capabilities and allowed tenants, audiences
+and resource scopes, with expiry no later than the parent's. Any widening fails.
+Binding validation checks authenticated principal, installation identity, context
+identity, capability profile, expiry and revocation on every use and resume.
+The binding profile must match the active contract's profile, and the binding
+and message envelope effective-contract hashes must equal the active contract
+hash; mismatches deny use and resume. Revoked bindings cannot resume; parentage
+grants no implicit privileges.
 
 Committed cancellation is terminal for queued or retrying descendant work and
 wins over later dispatch. Work admitted earlier is stopped best-effort; already

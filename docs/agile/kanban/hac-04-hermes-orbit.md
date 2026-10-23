@@ -38,7 +38,7 @@ No production cutover, broad credential copying, new board implementation or aut
 ## Acceptance criteria
 
 - [ ] GIVEN the running deployment or its absence WHEN probed THEN endpoint, revision, health and missing prerequisites are recorded without secrets.
-- [ ] GIVEN a Hermes context WHEN a test adapter is qualified THEN tool and actor/message capabilities have independent evidence.
+- [ ] GIVEN a Hermes context WHEN a test adapter is qualified THEN tool and actor/message capabilities have independent evidence, and every unsupported capability is recorded as unsupported in the adapter manifest with a negative test.
 - [ ] GIVEN Orbit workspace mutation WHEN requested by an agent THEN existing grant and workspace revision boundaries remain enforced.
 
 ## Verification

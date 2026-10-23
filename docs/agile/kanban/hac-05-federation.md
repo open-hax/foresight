@@ -37,7 +37,7 @@ No production cutover, broad credential copying, new board implementation or aut
 
 ## Acceptance criteria
 
-- [ ] GIVEN a local actor and a remote binding WHEN connected THEN both instances validate audience, tenant and current grants independently.
+- [ ] GIVEN a local actor and a remote binding WHEN connected THEN both identity providers verify the explicit mapping, and each destination validates audience, tenant, role, capability and current grants independently; display-name or human-account equality grants no authority.
 - [ ] GIVEN replay or remote outage WHEN message delivery is attempted THEN duplicate effects are prevented, failed delivery stays pending under the declared retry policy, and recovery preserves causal identity and the original remote (instance-id, actor-id) destination mapping. Any destination change is rejected unless a new mapping and grant are explicitly authorized.
 - [ ] GIVEN revoked or expired message authorization WHEN new delivery is attempted THEN destination admission denies it; no cached transport grant bypasses destination checks.
 
@@ -56,4 +56,4 @@ code; preserve source revision and actual observed capability separately.
 
 ## Payload reference criteria
 
-- [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authorized destination with a current matching grant resolves only the permitted revision.
+- [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authenticated destination with a current source-read grant, matching tenant and audience, resolves only the exact authorized source revision.

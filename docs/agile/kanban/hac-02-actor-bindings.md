@@ -67,4 +67,9 @@ code; preserve source revision and actual observed capability separately.
 
 ## Payload reference criteria
 
-- [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authorized destination with a current matching grant resolves only the permitted revision.
+- [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authenticated destination with a current source-read grant, matching tenant and audience, resolves only the exact authorized source revision.
+
+## Active contract admission criteria
+
+- [ ] GIVEN a binding profile or binding/envelope effective-contract hash that differs from the active contract WHEN use or resume is attempted THEN admission denies it; profile and both hashes must match the active contract.
+- [ ] GIVEN a parent grant without explicit delegation permission, or an issuer not authorized by that permission and bound to the authenticated principal and parent grant WHEN a child grant is requested THEN delegation is rejected and no child grant is issued.

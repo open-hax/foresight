@@ -46,3 +46,7 @@ Implementation names the existing owner test runner, then records the isolated p
 ## Risks
 
 Source and running runtime may diverge; verify deployed revision and actual capability.
+
+## Active contract admission criteria
+
+- [ ] GIVEN a binding profile or binding/envelope effective-contract hash that differs from the active contract WHEN use or resume is attempted THEN admission denies it; profile and both hashes must match the active contract.

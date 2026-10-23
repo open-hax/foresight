@@ -63,3 +63,5 @@ code; preserve source revision and actual observed capability separately.
 ## Cancellation criteria
 
 - [ ] GIVEN failed transport followed by committed parent cancellation WHEN retry dispatch runs THEN queued descendant work is terminally cancelled and no new attempt starts. A run already admitted before cancellation is stopped best-effort and its observed effects remain recorded; cancellation never fabricates rollback.
+
+- [ ] GIVEN a native message delivery fails without cancellation WHEN the retry policy runs THEN pending work remains associated with the original message and destination, retry follows the declared policy, and no duplicate effect is committed.

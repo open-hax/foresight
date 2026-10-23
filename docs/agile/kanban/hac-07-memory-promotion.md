@@ -28,7 +28,7 @@ Qualify permissioned memory promotion and revocation.
 
 ## Scope
 
-Use existing Knoxx/Axxium authorization and Clio events. Define the initial consistency rule as an online source-authority check for every protected read and every promotion; no offline grant cache authorizes disclosure. The check is the read authorization linearization point: revocations committed before it deny; already delivered content cannot be retracted. Retained destination projections are hidden from future reads until reauthorized or rebuilt.
+Use existing Knoxx/Axxium authorization and Clio events. Define the initial consistency rule as an online source-authority check for every protected read and every promotion; no offline grant cache authorizes disclosure. The check is the read authorization linearization point: revocations committed before it deny; already delivered content cannot be retracted. Retained destination projections remain hidden until a new authorized promotion or rebuild passes current source-read and destination-publish checks.
 
 ## Non-goals
 
@@ -43,6 +43,8 @@ No production activation or alternate board/event authority.
 
 - [ ] GIVEN an unauthorized lift, stale source revision or transformation bound to different source bytes WHEN promoted THEN admission rejects it before shared content becomes visible.
 - [ ] GIVEN a lift WHEN authorized THEN the decision actor has current source-read and destination-publish authority, source policy permits that destination, and the transformed output hash binds the exact source revision and transformation version.
+
+- [ ] GIVEN a revoked projection WHEN rebuild is attempted without current source-read and destination-publish authorization THEN no content is rebuilt or exposed.
 
 ## Verification
 
