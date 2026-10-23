@@ -2784,3 +2784,12 @@
   p-skill-candidate: 0.2
   spore: none
   note: Python unittest discovery generated __pycache__ and correctly failed clean checkout binding; prevent artifact creation while preserving the gate.
+- ts: 2026-10-23T02:20:27.924759644Z
+  session: /home/err/spaces/foresight
+  task: Map Axxium SSO and Proxx federation across replacement droplet and laptops
+  p-efficiency: 0.8
+  p-friction: 0.3
+  p-skill-candidate: 0.2
+  spore: none
+  receipt-refs: codex/axxium-sso-proxx-federation
+  note: Separate actor identity, browser session reuse, cross-device approval and model-capacity federation; existing transfer/password-delegation PRs do not prove SSO. Validate SSH key against trusted host alias before attempting explicit current identity key.
