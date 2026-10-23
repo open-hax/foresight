@@ -761,3 +761,13 @@
   spore: none
   receipt-refs: 0331141c483431ed495792cf4d69e38570f21b4cb8ece67875b9cd88f6f75d5b
   note: Preserve every original byte/mode and failed attempt while reducing native input paths. Verify the exact emitted bytes, separate reviewer admission from archive custody and old native success from successor qualification. Timestamp refusal occurred before append; resume without duplicating card/ledger effects. No new spore/promotion.
+
+- ts: 2026-10-23T07:05:01.311797+00:00
+  session: antigravity-review-rollout
+  task: Apply pinned shared reviewer to23target repositories
+  p-efficiency: 0.8
+  p-friction: 0.4
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 2026-10-23T07:05:01.311797+00:00
+  note: Separate immutable runtime and org-local workflow revisions; verify API readback and actual hosted artifacts before activation claims.

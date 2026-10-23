@@ -1,0 +1,167 @@
+{
+  "observed_at": "2026-10-23T07:05:01.311797+00:00",
+  "runtime_and_workflow_pins": {
+    "workflow_revision": "6461caabbe4eefbd1615036936863d06ee69d68d",
+    "octave_revision": "5bc9a8543ceb8afb04d3fd7e92ba0e1d9c2a03dd",
+    "runtime_revision": "3bcf27bef296f9349fdf4997df256a617da5f120",
+    "workflow_sha256": "f6c5f07015846b14a27f03bd8a59cd5445cd06ec10f5613413c92d12ca35d82b"
+  },
+  "implementation_pr": "https://github.com/open-hax/eta-mu/pull/364",
+  "integration_pr": "https://github.com/open-hax/foresight/pull/145",
+  "member_prs": [
+    {
+      "path": "Truth",
+      "url": "https://github.com/octave-commons/Truth/pull/62",
+      "head_sha": "9f84ab5b02f3dbea474be90b7b8a95ac6f0b754c",
+      "draft": true
+    },
+    {
+      "path": "bitch-tracker",
+      "url": "https://github.com/octave-commons/bitch-tracker/pull/8",
+      "head_sha": "962e3dc06b9c825df6a1f3181ac18bd6e681a286",
+      "draft": true
+    },
+    {
+      "path": "calliope",
+      "url": "https://github.com/octave-commons/calliope/pull/21",
+      "head_sha": "4d84c3538facd44302e13e72ec42c474ec459959",
+      "draft": true
+    },
+    {
+      "path": "epiphany",
+      "url": "https://github.com/octave-commons/epiphany/pull/19",
+      "head_sha": "b53da972397354c36166c4ec0f409e10941646ae",
+      "draft": true
+    },
+    {
+      "path": "katamorph",
+      "url": "https://github.com/open-hax/katamorph/pull/29",
+      "head_sha": "170a23a2126af8b939c7105f5d482584e43c0281",
+      "draft": true
+    },
+    {
+      "path": "knoxx",
+      "url": "https://github.com/open-hax/knoxx/pull/395",
+      "head_sha": "3d3e5128d9c1195fd0d82e4a0b783abbd948a09b",
+      "draft": true
+    },
+    {
+      "path": "muse",
+      "url": "https://github.com/octave-commons/muse/pull/31",
+      "head_sha": "ca73ee77b356aa6d7f0253c3c79c16136a68946c",
+      "draft": true
+    },
+    {
+      "path": "proxx",
+      "url": "https://github.com/open-hax/proxx/pull/458",
+      "head_sha": "f7fa29ff1cc1ce033578f711b41a3ae4414bd7da",
+      "draft": true
+    },
+    {
+      "path": "uxx",
+      "url": "https://github.com/open-hax/uxx/pull/23",
+      "head_sha": "79ce3ee145c77acd293bbdb73ec93b73e18d4ea7",
+      "draft": true
+    },
+    {
+      "path": "opencode",
+      "url": "https://github.com/open-hax/opencode/pull/2",
+      "head_sha": "79f4f4e10283251e8e4feb4365411c93bfe5e7c0",
+      "draft": true
+    },
+    {
+      "path": "shx",
+      "url": "https://github.com/octave-commons/shx/pull/4",
+      "head_sha": "2bf4fbefe851bf4817095156dce6cba3d2939edf",
+      "draft": false
+    },
+    {
+      "path": "kanban-orchestrator",
+      "url": "https://github.com/open-hax/kanban-orchestrator/pull/3",
+      "head_sha": "0946c27102013184946ca8245ce1486469500ad5",
+      "draft": true
+    },
+    {
+      "path": "clio",
+      "url": "https://github.com/open-hax/clio/pull/4",
+      "head_sha": "b1b838793369246f5e6da9d5a8059493453aa9b5",
+      "draft": true
+    },
+    {
+      "path": "chat-ui",
+      "url": "https://github.com/open-hax/chat-ui/pull/5",
+      "head_sha": "2f2d831adf3743dd5bd542e19512f50ba8cfde4f",
+      "draft": true
+    },
+    {
+      "path": "rheos",
+      "url": "https://github.com/open-hax/rheos/pull/7",
+      "head_sha": "b22c7c19017f2f187da88899981979e4de4cccc9",
+      "draft": true
+    },
+    {
+      "path": "session-mycology",
+      "url": "https://github.com/open-hax/session-mycology/pull/5",
+      "head_sha": "c352505437242fdc2ec28fa2ff2fed3d3da10b8d",
+      "draft": true
+    },
+    {
+      "path": "sol",
+      "url": "https://github.com/open-hax/sol/pull/3",
+      "head_sha": "fd796832d4a95a255f184ecf793e5075c0cb0fbf",
+      "draft": true
+    },
+    {
+      "path": "osmos",
+      "url": "https://github.com/open-hax/osmos/pull/3",
+      "head_sha": "29ad553650bdca792315a987f9c56bea08c8ddd2",
+      "draft": true
+    },
+    {
+      "path": "receipt-river",
+      "url": "https://github.com/open-hax/receipt-river/pull/5",
+      "head_sha": "e4b4b2d4989eb6862440c81fc6b7995a73bb4a9b",
+      "draft": true
+    },
+    {
+      "path": "axxium",
+      "url": "https://github.com/open-hax/axxium/pull/31",
+      "head_sha": "9b6cff432f5961134abf3a1feb483c840ec9dcd4",
+      "draft": true
+    },
+    {
+      "path": "services",
+      "url": "https://github.com/open-hax/services/pull/104",
+      "head_sha": "8b4e22c5666372a665ded179772d2ccabad12f2b",
+      "draft": true
+    }
+  ],
+  "local_validation": {
+    "caller_count": 23,
+    "actionlint": "pass",
+    "exact_pin_check": "pass",
+    "rollout_law_tests": "9 tests 109 assertions pass"
+  },
+  "hosted_observations": [
+    {
+      "repository": "open-hax/eta-mu",
+      "run_id": 39915003919,
+      "preflight": "pass",
+      "local_worker_checkout": "pass",
+      "review": "explicit prompt-size refusal",
+      "artifact_upload": "pass",
+      "cleanup": "pass"
+    },
+    {
+      "repository": "octave-commons/shx",
+      "run_id": 39915186368,
+      "preflight": "pass",
+      "local_worker_checkout": "pass",
+      "review": "explicit prompt-size refusal",
+      "artifact_upload": "pass",
+      "cleanup": "pass"
+    }
+  ],
+  "activation": "pending successful full native hosted review; no native approval credit",
+  "merge_authority": "not granted"
+}
