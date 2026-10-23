@@ -38,7 +38,8 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] GIVEN two contexts with the same human/model WHEN bound THEN they have distinct context provenance and bounded grants.
 - [ ] GIVEN a spoofed producer, expired grant or wrong tenant/audience WHEN a message is admitted THEN it is denied without creating a valid event.
-- [ ] GIVEN a retry or resume WHEN admitted THEN existing Knoxx/Clio identity rules prevent duplicate effects and preserve the original source.
+- [ ] GIVEN a retry or resume WHEN admitted THEN the canonical Knoxx/Clio contract preserves the original source; retries retain the original message ID and destination and deduplicate before side effects. The owning implementation identifies the versioned rule and its atomic admission/effect boundary.
+- [ ] GIVEN a non-idempotent operation commits its effect but its response is lost WHEN the same message is retried with its original ID and destination THEN exactly one observable effect exists, including across concurrent retries; deduplication returns the recorded outcome without executing the effect again.
 
 ## Verification
 

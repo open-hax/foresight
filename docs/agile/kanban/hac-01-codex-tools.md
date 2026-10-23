@@ -36,7 +36,8 @@ No production cutover, broad credential copying, new board implementation or aut
 
 ## Acceptance criteria
 
-- [ ] GIVEN a selected profile WHEN Codex connects THEN initialize, tools/list and one harmless tool call pass with recorded artifact and profile hashes.
+- [ ] GIVEN a selected profile and its registration applied to an isolated Codex configuration WHEN an isolated fresh Codex session starts THEN it discovers the registered target through that configuration and completes initialize, tools/list and one harmless non-actor-scoped tool call with recorded artifact and profile hashes; a direct or pre-existing connection does not qualify the applied registration.
+- [ ] GIVEN an actor-scoped tool WHEN an unbound or wrong-context Codex session calls it THEN HAC.02 authenticated context admission denies the call before any protected content or effect. Until HAC.02 admission is available, these tools are reported unsupported in the capability manifest and cannot execute; process cwd never authenticates a context. This restriction does not block non-actor-scoped MCP qualification.
 - [ ] GIVEN existing unrelated Codex servers WHEN the registration is applied and rolled back THEN those definitions remain unchanged, the new registration is absent after rollback, and a fresh Codex session cannot discover or call it.
 - [ ] GIVEN hooks or native task messages WHEN only MCP is available THEN the capability manifest reports them unsupported.
 - [ ] GIVEN the same selected profile WHEN tool registries are normalized THEN allowed tool names and argument schemas agree across the supported targets, with explicit dispositions for every host-specific gap.

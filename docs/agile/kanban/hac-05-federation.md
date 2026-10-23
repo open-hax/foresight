@@ -38,7 +38,8 @@ No production cutover, broad credential copying, new board implementation or aut
 ## Acceptance criteria
 
 - [ ] GIVEN a local actor and a remote binding WHEN connected THEN both identity providers verify the explicit mapping, and each destination validates audience, tenant, role, capability and current grants independently; display-name or human-account equality grants no authority.
-- [ ] GIVEN replay or remote outage WHEN message delivery is attempted THEN duplicate effects are prevented, failed delivery stays pending under the declared retry policy, and recovery preserves causal identity and the original remote (instance-id, actor-id) destination mapping. Any destination change is rejected unless a new mapping and grant are explicitly authorized.
+- [ ] GIVEN replay or remote outage WHEN message delivery is attempted THEN retries retain the original message ID and remote (instance-id, actor-id) destination, HAC.02 deduplication runs before side effects, and failed delivery stays pending under the declared retry policy with causal identity preserved. Any destination change is rejected unless a new mapping and grant are explicitly authorized; changing destination creates a separately authorized message rather than retargeting a retry.
+- [ ] GIVEN a remote non-idempotent operation commits but its response is lost WHEN delivery retries with the original message ID and destination THEN exactly one observable remote effect exists and the recorded outcome is returned without repeating that effect.
 - [ ] GIVEN revoked or expired message authorization WHEN new delivery is attempted THEN destination admission denies it; no cached transport grant bypasses destination checks.
 
 ## Verification

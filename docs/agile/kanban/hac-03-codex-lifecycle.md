@@ -40,7 +40,9 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] GIVEN a parent and spawned child WHEN registered THEN parent linkage and separate actor provenance are recorded without shared credentials.
 - [ ] GIVEN verified resume and cancellation WHEN processed THEN the documented binding/revocation policy is applied and tested.
 - [ ] GIVEN an unavailable native message API WHEN projected THEN tool access remains explicit and message integration is reported unsupported; this records discovery but does not satisfy integration completion.
-- [ ] GIVEN each desktop, CLI or SDK surface claimed supported in the versioned capability matrix WHEN a parent/child native message and reply are sent through the adapter THEN the intended Knoxx actors receive them with correlation intact and no duplicate effect on retry. At least one positive supported route is required for story completion.
+- [ ] GIVEN desktop, CLI and SDK WHEN capability discovery is performed THEN every surface has a versioned supported, unsupported or unavailable disposition with probe evidence, or evidence of the prerequisite preventing a probe; no surface is omitted and unavailable is not treated as supported.
+- [ ] GIVEN each desktop, CLI or SDK surface claimed supported in the versioned capability matrix WHEN a parent/child native message and reply are sent through the adapter THEN that route enforces the canonical HAC.02 admission checks before delivery, and the intended Knoxx actors receive them with correlation intact and no duplicate effect on retry. At least one positive supported route is required for story completion.
+- [ ] GIVEN a spoofed producer, unauthorized destination or revoked binding WHEN a supported native adapter route attempts delivery THEN HAC.02 admission denies it before delivery, creating no admitted message event or downstream effect; a denial audit record is permitted.
 
 ## Verification
 
@@ -64,4 +66,4 @@ code; preserve source revision and actual observed capability separately.
 
 - [ ] GIVEN failed transport followed by committed parent cancellation WHEN retry dispatch runs THEN queued descendant work is terminally cancelled and no new attempt starts. A run already admitted before cancellation is stopped best-effort and its observed effects remain recorded; cancellation never fabricates rollback.
 
-- [ ] GIVEN a native message delivery fails without cancellation WHEN the retry policy runs THEN pending work remains associated with the original message and destination, retry follows the declared policy, and no duplicate effect is committed.
+- [ ] GIVEN a native message delivery fails without cancellation WHEN the retry policy runs THEN pending work retains the original message ID and destination, retry follows the declared policy, and HAC.02 deduplication precedes side effects. Losing the response after a non-idempotent effect commits and retrying produces exactly one observable effect.

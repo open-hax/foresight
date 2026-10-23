@@ -36,8 +36,8 @@ No production activation or alternate board/event authority.
 
 ## Acceptance criteria
 
-- [ ] GIVEN a path and selected layers WHEN tools and instructions compile THEN both manifests reference the same effective-contract hash.
-- [ ] GIVEN a profile exclusion or ancestor change WHEN rebuilt THEN tool exposure and emitted instructions both follow the rebuilt effective contract, both manifests agree on its new hash, and stale projection evidence is invalidated.
+- [ ] GIVEN a path and pinned selected layer and profile revisions WHEN tools and instructions compile THEN each projection is independently validated against the canonical effective contract reconstructed from those inputs using the existing LOC.04 canonicalization and LOC.05/08 fold/hash algorithm. Each receipt records its own recomputation, input revisions and projection validation; both manifest hashes must equal that independently computed hash. Copying a hash between manifests alone is insufficient, and no competing hash algorithm is introduced.
+- [ ] GIVEN a profile exclusion or ancestor edit that changes the canonical effective contract WHEN rebuilt and activated THEN tool exposure and emitted instructions both follow that rebuilt contract, both manifests validate against its recomputed new hash, and stale projection evidence is invalidated. A use or resume carrying the previous binding or envelope hash is denied before delivery or effects, even if both old manifests agree; an unchanged effective contract need not acquire a new hash.
 
 ## Verification
 

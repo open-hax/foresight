@@ -34,8 +34,15 @@ message id, correlation/causation, schema version, contract hash and an opaque
 payload reference or permitted payload. Authentication binds the envelope to
 its producer; user-supplied actor ids never establish authority. Define delivery,
 deduplication, ordering and cancellation through existing Knoxx/Clio contracts
-before implementing adapters. A transport failure preserves pending work with
-an explicit retry policy; it never silently switches actor or destination.
+before implementing adapters. Retries retain the original message ID and
+destination and deduplicate before side effects under the canonical HAC.02
+rule; the owning implementation names its versioned rule and atomic
+admission/effect boundary. A transport failure preserves pending work with an
+explicit retry policy; it never silently switches actor or destination. Test a
+non-idempotent effect committed before its response is lost: retrying the same
+message must return the recorded outcome with exactly one observable effect.
+An explicitly authorized destination change creates a new message, never a
+retargeted retry.
 
 ## Local and remote federation
 
@@ -97,6 +104,11 @@ committed before the read authorization check must deny that read. The check
 is the linearization point; already delivered bytes cannot be recalled. Revoked
 materialized projections become unavailable for later reads until reauthorized
 or rebuilt through current source-read and destination-publish authorization.
+Non-revoked projections need no new promotion or rebuild for an authorized read.
+An authorized rebuild reads the current source revision, revalidates policy and
+revocation dependencies, and recomputes the versioned transformation and output
+hash before publication admission. Its event binds those inputs and output; a
+change before publication admission requires rejection or revalidation.
 An unauthorized rebuild produces and exposes no content. This conservative default is a proposal to review, not a claim
 that current Knoxx implements it.
 
