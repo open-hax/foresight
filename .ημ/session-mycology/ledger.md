@@ -751,3 +751,13 @@
   spore: none
   receipt-refs: 8c93744cb554cbeebcfeb5d20e790361e7be70a269c9dbf6a4dff7c2a06fa86d
   note: Matching content and native App fields do not authenticate installation. Independent adversarial readback found inline conflict omission after registered tests passed; preserve causal repair and original review. Earlier native passes, page1 samples, carrier diagnostics and unsupported custody remain distinct. Recover post-append assertion without repeating side effects. No new spore/promotion.
+
+- ts: 2026-10-23T04:57:26.816374+00:00
+  session: foresight-stabilization
+  task: Preserve native review input and fresh source-bound cohort proof
+  p-efficiency: 0.75
+  p-friction: 0.65
+  p-skill-candidate: 0.55
+  spore: none
+  receipt-refs: 0331141c483431ed495792cf4d69e38570f21b4cb8ece67875b9cd88f6f75d5b
+  note: Preserve every original byte/mode and failed attempt while reducing native input paths. Verify the exact emitted bytes, separate reviewer admission from archive custody and old native success from successor qualification. Timestamp refusal occurred before append; resume without duplicating card/ledger effects. No new spore/promotion.

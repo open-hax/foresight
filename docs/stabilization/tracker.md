@@ -2,7 +2,22 @@
 
 Updated October 23 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [bounded readback and completed older Sandbox](e0-readback-execution.md).
+Latest execution: [lossless review scope and fresh native/cohort proof](e0-review-scope-execution.md).
+Published ETA `c9ef250d` binds source `03878641`. Native PR 100 paths/all 100 blobs
+verify; all 409 original evidence files/modes/22 archives survive with 90 non-evidence
+paths visible. Independent P2 external reread repaired: RED two failures, GREEN 4/50,
+lint 0warnings and runtime 2/104 pass. No native binary-content review credit.
+Receipt 360 valid; historical 71 invalid/118 errors, 309 states/planning/four prefixes
+preserved. Earlier DB99 full Sandbox/owners now succeed at exact M 84ca1a0b;
+22 carrier diagnostics and 329061196-byte metadata-only artifact remain. Root 173
+hygiene 0/receipt 2/missing-App/terminal failures remain. Fresh 04:25 census:
+442 frozen/437 open/4 merged/1 closed/6 changed open H/B, drift 0/0; Axxium 3/4 ahead-only
+append changes retained without authority. All 23 pins/history survive; E0 breakdown,
+E1 incoming, M0–M7 unqualified, publisher in_progress, CMS/Cephalon paused.
+Current-head review/full authenticated publisher/original G/caller/input custody
+remain unfinished. No standalone planning.
+
+Earlier execution: [bounded readback and completed older Sandbox](e0-readback-execution.md).
 Published ETA db99b168 binds source 6e1f088f: readback 10/130, collection 30/224,
 publication 17/557, parity and full CLI/lint/release pass. Independent inline App
 conflict is causally repaired; eight successor controls pass. Actual public GET

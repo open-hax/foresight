@@ -1429,5 +1429,18 @@
     "qualified": false,
     "publisher": "in_progress",
     "CMS_Cephalon": "paused"
+  },
+  "e0_review_scope_execution": {
+    "report": "docs/stabilization/e0-review-scope-execution.md",
+    "overlay": "docs/stabilization/e0-review-scope-execution.json",
+    "child_head": "c9ef250dcf5d981c820bbca1abf7c578ee864412",
+    "scope_source": "03878641fd55b9327cdb01e8b522a99bab05d587",
+    "native_paths": 100,
+    "binary_review_credit": false,
+    "frozen_cohort": "e0-review-scope-census.json",
+    "source_bound_DB99_Sandbox": "success at actual M84ca1a0b;22carrierdiagnostics",
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
   }
 }
