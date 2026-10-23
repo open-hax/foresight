@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "nbb",
+    "-cp",
+    "src:scripts",
+    "/home/err/spaces/foresight/.ημ/stabilization/readback-20261023/append-receipt.cljs"
+  ],
+  "exit_code": 0,
+  "stdout": "PASS one valid flat root catalog; historical failures unchanged\n",
+  "stderr": ""
+}

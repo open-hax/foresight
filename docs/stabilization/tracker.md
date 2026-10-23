@@ -2,7 +2,21 @@
 
 Updated October 23 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [current-source native results, fresh cohort and source custody](e0-native-cd975.md).
+Latest execution: [bounded readback and completed older Sandbox](e0-readback-execution.md).
+Published ETA db99b168 binds source 6e1f088f: readback 10/130, collection 30/224,
+publication 17/557, parity and full CLI/lint/release pass. Independent inline App
+conflict is causally repaired; eight successor controls pass. Actual public GET
+samples and absent-registry refusal remain unqualified for authentication/full
+traversal. All 309 child states/planning/four prefixes survive; receipt 359 valid,
+historical 71 invalid/118 errors unchanged. Earlier CD975 Sandbox now succeeds
+at exact f299bd61; 22 carrier diagnostics and 328412696-byte artifact metadata
+limits remain. Root 23e hygiene 0 / receipt 2 and missing-App/terminal fail. Current-head
+review/full publisher/original G/caller/input custody remain open. Retained full
+03:32 UTC census: 442 frozen / 437 open / 4 merged / 1 closed / 6 changed open H/B,
+drift 0/1. All accepted pins/history preserved; E0 breakdown, M0–M7 unqualified,
+CMS/Cephalon paused. No standalone planning.
+
+Earlier execution: [current-source native results, fresh cohort and source custody](e0-native-cd975.md).
 ETA head `cd9751d01a2b93123281d032f42a83fb4b9d42cb` now has actual native
 Sol 142/607 and Rheos 212/1219 passes at merge `f299bd6159b9fc32b11922a119464018f9643134`,
 verified base/head parents and matching head tree. Compiler warnings are zero;

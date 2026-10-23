@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "nbb",
+    "scripts/project.clj",
+    "validate"
+  ],
+  "exit_code": 0,
+  "stdout": "PASS foresight 25 workspace sources 23 submodules 39 invariants 1 lineage sources 6 provisional claims\n",
+  "stderr": ""
+}

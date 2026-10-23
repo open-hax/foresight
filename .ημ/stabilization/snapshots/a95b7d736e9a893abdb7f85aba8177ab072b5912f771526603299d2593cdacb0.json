@@ -1,0 +1,30 @@
+{
+  "kind": "e0-bounded-native-readback-checkpoint",
+  "root_source": "23e07bb97508dd1e0f081e0d2732806e733b2121",
+  "child_head": "db99b1682c94ecdf9f8b239709dd44cb6101c7da",
+  "readback_source": "6e1f088fcd81dba5e9edaf526e453962875215c6",
+  "report_sha256": "d4c6b0f527df5b23bdc8e5a4a53942be16fd82827931cdab8d6606409535bde5",
+  "overlay_sha256": "dc9b8779b1e41cdcb290844b4c7ebd79ee8357bd354a1dc0d7962c3bbcec64d3",
+  "archive_sha256": "54b5e1a2c0c1a78a7ba93a7da433c703e30861f46b7540cd3708d9dc27e3f3b1",
+  "prefixes": {
+    ".\u03b7\u03bc/receipts.edn": {
+      "base_bytes": 415104,
+      "base_sha256": "2c1d3e32880303de9be369df7f924a3314abd27e382bafb0cca9e4fd509b1939",
+      "current_bytes": 417967,
+      "prefix_preserved": true
+    },
+    ".\u03b7\u03bc/kanban-events/ledger.edn": {
+      "base_bytes": 266405,
+      "base_sha256": "6e748f4f30c444a757211f3fe8ea619a832a3fd0538f473a36103150024ac824",
+      "current_bytes": 270855,
+      "prefix_preserved": true
+    },
+    ".\u03b7\u03bc/session-mycology/ledger.md": {
+      "base_bytes": 48244,
+      "base_sha256": "9a2ace82d4693e47504b42c038a15d321e3f781f6927794bd10bbaffafb77172",
+      "current_bytes": 48957,
+      "prefix_preserved": true
+    }
+  },
+  "qualified": false
+}

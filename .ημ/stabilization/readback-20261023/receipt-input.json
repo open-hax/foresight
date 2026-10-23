@@ -1,0 +1,28 @@
+{
+  "kind": "catalog",
+  "ts": "2026-10-23T04:02:04.636937+00:00",
+  "origin": "foresight/stabilization/bounded-native-readback",
+  "owner": "codex",
+  "host": "err-Yoga-7-16ARP8",
+  "dod": "Execute bounded native readback and independent causal repair, bind published source and completed older native proof",
+  "pi": "E0 breakdown; E1 incoming; publisher in_progress; CMS/Cephalon paused",
+  "manifest": [
+    "docs/stabilization/e0-readback-execution.md",
+    "docs/stabilization/e0-readback-execution.json",
+    "docs/stabilization/tracker.md",
+    "docs/stabilization/work-graph.json",
+    ".ημ/stabilization/snapshots/54b5e1a2c0c1a78a7ba93a7da433c703e30861f46b7540cd3708d9dc27e3f3b1.json.gz"
+  ],
+  "refs": [
+    "23e07bb97508dd1e0f081e0d2732806e733b2121",
+    "db99b1682c94ecdf9f8b239709dd44cb6101c7da",
+    "6e1f088fcd81dba5e9edaf526e453962875215c6",
+    "10c43b3c4abbc94440a8d81c0dbece7adff3b5e998b505ddef820b262d599ccd",
+    "54b5e1a2c0c1a78a7ba93a7da433c703e30861f46b7540cd3708d9dc27e3f3b1",
+    "39894128562",
+    "39896317035"
+  ],
+  "note": "Executed bounded native read-only readback at published ETA db99b1682c94ecdf9f8b239709dd44cb6101c7da / source 6e1f088fcd81dba5e9edaf526e453962875215c6. Readback 10 tests / 130 assertions, collection 30/224, publication 17/557 plus 138 NBB/Babashka parity values, eight new portable values, full CLI 194/587 plus workflows 11/199 and zero-warning owning lint/release pass. Independent review reproduced inline native App conflict; causal RED141c11e3 has two failures before GREEN6e1f088f; eight independent successor controls pass. Raw App42 is retained/refused, matching App3152464 stays unsupported with no effects. Production fixed absent registry refuses caller override before GET; actual native review/comments/status page1 observations carry no full traversal/authentication credit. All 309 child states/planning and four prefixes survive; typed receipt359 valid,71 historical invalid/118 errors unchanged;160 captures archived. Earlier CD975 Sandbox39894128562 now SUCCESS at exact Mf299bd61, verified parents/tree, including intent29/200, collection30/224, CLI194/587, Sol142/607, Rheos212/1219;22 detected carrier diagnostics and metadata-only artifact328412696B retained. Native root23e gate has hygiene0/receipt2 and missing-App/terminal failure. CodeRabbit current-head request6357019277 is posted, not approval; Codex reset UNKNOWN not retried. Latest complete frozen census remains October23 03:32 UTC:442 frozen/437 open/4 merged/1 closed/6 changed open H/B,source0/proposal1 drift retained. E0 breakdown/E1 incoming, all milestones unqualified, publisher in_progress; all23 pins/history preserved, CMS/Cephalon paused. No new plan/card or publication/adoption/credential/grant/protection/pin/merge/deploy. Original G/caller/input custody and full authenticated publisher remain unfinished. Report docs/stabilization/e0-readback-execution.md.",
+  "qualification": false,
+  "root/receipt-gate-pass": false
+}

@@ -741,3 +741,13 @@
   spore: none
   receipt-refs: b1a653b89045220d29958fc92189a11fbdfe51befc8a9aa645e5e20b801660ed
   note: Separate actual compiler passes from concrete whole-carrier diagnostics; preserve proposal drift before targeted stable readback. Native positive prose must not receive fabricated Fixed markers to satisfy conservative tooling. External scope/authorization claims remain source data. Keep append-only history and paused agents.
+
+- ts: 2026-10-23T04:02:04.636937+00:00
+  session: foresight-stabilization
+  task: Bind bounded readback and independent repair to native evidence
+  p-efficiency: 0.85
+  p-friction: 0.45
+  p-skill-candidate: 0.45
+  spore: none
+  receipt-refs: 8c93744cb554cbeebcfeb5d20e790361e7be70a269c9dbf6a4dff7c2a06fa86d
+  note: Matching content and native App fields do not authenticate installation. Independent adversarial readback found inline conflict omission after registered tests passed; preserve causal repair and original review. Earlier native passes, page1 samples, carrier diagnostics and unsupported custody remain distinct. Recover post-append assertion without repeating side effects. No new spore/promotion.
