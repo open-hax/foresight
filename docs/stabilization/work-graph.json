@@ -1452,5 +1452,15 @@
     "qualified": false,
     "CMS_Cephalon": "paused",
     "root_source": "27540f50f05151fc58be84df6bd8f2c2e6e7a081"
+  },
+  "e0_custody_execution": {
+    "report": "docs/stabilization/e0-custody-execution.md",
+    "overlay": "docs/stabilization/e0-custody-execution.json",
+    "census": "docs/stabilization/e0-custody-census.json",
+    "child_head": "874068612a9c576ef3d3e6847f72de2fee9a996b",
+    "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+    "root_source": "88ae0bba14901cf4924e0bafd4743480b5d3eeca",
+    "qualified": false,
+    "CMS_Cephalon": "paused"
   }
 }

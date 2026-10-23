@@ -771,3 +771,13 @@
   spore: none
   receipt-refs: 581d6cff5f7d082fff9a9d68b33e1957accac801e2d333e7d45de104e1f5b3b0
   note: Large parent decoding can overshoot a deadline without late acceptance. Preserve data types and complete bytes when changing transport. Retain canonical owned paths for failure cleanup. Native reviewed-source logs can disprove a finding but never impersonate reviewer withdrawal. No new spore or same-session promotion.
+
+- ts: 2026-10-23T07:00:18.303Z
+  session: foresight-stabilization
+  task: Preserve producer attempts and exact manifest identity with source-bound execution proof
+  p-efficiency: 0.85
+  p-friction: 0.6
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 00a6a55292d8cafb846727446c4ed1d1d961d92fceba406dd4ff69e9acb30203
+  note: Central verification must preserve the actual producer rerun schema. Configuration generation does not establish compiled adapter or authenticated execution. Wait on the exact producer handle before dependent capture reads. No new spore or same-session promotion.

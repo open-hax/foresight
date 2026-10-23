@@ -2,7 +2,21 @@
 
 Updated October 23 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [durable outcomes, native repairs and fresh cohort evidence](e0-outcome-execution.md).
+Latest execution: [source custody, producer attempts and refreshed evidence](e0-custody-execution.md).
+Published ETA `87406861` binds source `c9fc461f`: source8/175, verifier5/181,
+independent28 pinned-runtime/270 reference cases,14+33 portable values and full
+CLI/lint/release pass. Exact manifest bytes and producer1/review2 binding repaired;
+partial source retains native-execution-custody. Actual pinned JVM generation
+produces22 expected permissions; full adapter remains uncompiled/unobserved.
+Prior F796 Sandbox succeeds at exact `e157f704`,23diagnostics; artifact metadata
+only and no successor hosted proof transfer. Root88 receipt2/hygiene0/missing-App/
+terminal fails. Fresh06:45 census:442 frozen/437open/4merged/1closed/6changed openH/B,
+drift0/0;Axxium3/4 proposed workflow append diffs retained. Preserve309 states/four
+prefixes/receipt363/100 paths/all23 accepted pins. Native approval/convergence,
+authenticated G/caller/full profile/input/publication/adoption unfinished.
+E0 breakdown/E1 incoming/M0–M7 unqualified; CMS/Cephalon paused. No standalone planning.
+
+Earlier execution: [durable outcomes, native repairs and fresh cohort evidence](e0-outcome-execution.md).
 Published ETA `f7963bda` binds source `7002b307`: intent40/390, collection33/1022,
 publication18/602, archive11/100, runtime4/120 and helper6/71 pass with independent
 counterexamples repaired. Same500-member/96.9MB ZIP retains every byte: parent
