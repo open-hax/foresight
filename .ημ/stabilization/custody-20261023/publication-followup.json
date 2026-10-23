@@ -58,5 +58,25 @@
   ],
   "unowned_claude": "not traversed or modified",
   "CMS_Cephalon": "paused",
-  "qualification": false
+  "qualification": false,
+  "review_request": {
+    "head": "874068612a9c576ef3d3e6847f72de2fee9a996b",
+    "request": 6359478727,
+    "request_created_at": "2026-10-23T07:06:14Z",
+    "native_acknowledgment": 6359480336,
+    "ack_created_at": "2026-10-23T07:06:20Z",
+    "acknowledgment": "Full review triggered.",
+    "cooldown_respected": true,
+    "review_complete": false,
+    "approval_credit": false,
+    "paid_or_override": false,
+    "codex_retried": false,
+    "pre_request_checks": {
+      "passed": 17,
+      "pending": 1,
+      "skipped": 4
+    },
+    "unanswered_older_body_items": 20,
+    "actionability_history": "unavailable"
+  }
 }

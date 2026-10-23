@@ -15,6 +15,9 @@ drift0/0;Axxium3/4 proposed workflow append diffs retained. Preserve309 states/f
 prefixes/receipt363/100 paths/all23 accepted pins. Native approval/convergence,
 authenticated G/caller/full profile/input/publication/adoption unfinished.
 E0 breakdown/E1 incoming/M0–M7 unqualified; CMS/Cephalon paused. No standalone planning.
+Included exact-head CodeRabbit request6359478727 at07:06:14UTC is acknowledged
+by native6359480336: full review triggered, no completion/approval credit.
+Pre-request17pass/1pending/4skip;20 older body items remain. No Codex retry.
 
 Earlier execution: [durable outcomes, native repairs and fresh cohort evidence](e0-outcome-execution.md).
 Published ETA `f7963bda` binds source `7002b307`: intent40/390, collection33/1022,
