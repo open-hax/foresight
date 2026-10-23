@@ -1,0 +1,54 @@
+---
+category: "kanban"
+labels: "muse, knoxx, harness, 3sp"
+type: "story"
+story_id: "HAC.01"
+points: "3"
+title: "HAC.01 — Compile and qualify the shared Muse tools in Codex"
+priority: "P1"
+status: "incoming"
+uuid: "hac-01-codex-tools"
+epic: "harness-actor-continuity"
+parent: "harness-actor-continuity"
+---
+
+# HAC.01 — Compile and qualify the shared Muse tools in Codex
+
+> Design: [harness actor continuity](../../notes/design/harness-actor-continuity.md)
+> Research: [grounding](../../research/harness-actor-continuity.md)
+> Target: muse
+
+## Context
+
+PR 141 provides the layered-contract plan. This slice connects its selected operating contract to host tools and Knoxx identity.
+
+## Outcome
+
+Compile and qualify the shared Muse tools in Codex.
+
+## Scope
+
+Reuse the existing MCP compiler, produce a Codex registration artifact and compare allowed tool names and argument schemas with the same profile in Claude/OpenCode.
+
+## Non-goals
+
+No production cutover, broad credential copying, new board implementation or automatic memory lift.
+
+## Acceptance criteria
+
+- [ ] GIVEN a selected profile WHEN Codex connects THEN initialize, tools/list and one harmless tool call pass with recorded artifact and profile hashes.
+- [ ] GIVEN existing unrelated Codex servers WHEN the registration is applied and rolled back THEN those definitions remain unchanged.
+- [ ] GIVEN hooks or native task messages WHEN only MCP is available THEN the capability manifest reports them unsupported.
+
+## Verification
+
+Implementation supplies named upstream test runners and sanitized end-to-end
+evidence for each criterion, including negative cases. Run the affected owner's
+existing test suite, then the isolated adapter scenario; missing runtime access
+remains an explicit blocker. This planning card claims no executed integration
+test or Rheos status transition.
+
+## Risks
+
+Native capability availability and deployed source can differ from checked-in
+code; preserve source revision and actual observed capability separately.
