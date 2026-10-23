@@ -1,0 +1,15 @@
+open-hax/foresight#142  head d8ece87
+  actionability history: UNAVAILABLE; threads retain finding obligations
+  coderabbit: completed   checks: {:fail 1, :pass 3}
+  threads: 13 total, 2 unresolved; by severity {:p2 1, :p1 1}; informational 0
+  exact-head approvals: #{}  observed commit binding: {}
+  completed planning rounds: 0 / soft minimum 5  participants: #{"coderabbit" "mimo"}
+  codex quota-unavailable: native source 6305004007 request  scope account observed 2026-10-21T00:34:25Z retry-at-ms UNKNOWN
+  gate: BLOCKED
+    - No trusted exact-head APPROVED review meets the quorum
+    - 1 failing deterministic/required check(s)
+    - 1 P0/P1 thread(s) not fixed
+    - 2 thread(s) without a settlement reply
+    - 2 unresolved thread(s)
+    - 13 unanswered review summary item(s)
+    - Review loop requires 5 completed rounds or unanimous current-head approval, with every finding settled

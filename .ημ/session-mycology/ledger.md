@@ -711,3 +711,13 @@
   spore: none
   receipt-refs: 7bb89f80e7de8247b42801c2ee848b453a4deacdadad0a38d1e21e27a35d386d
   note: Previous goal turn and current turn are progress: published causal repairs and real native observations, not status-only waits. Compare every required retained provider field with primary schema; distinguish complete rows from complete patch text, and native public data from original run/caller authority. Preserve the live-edit probe race and redo against isolated frozen source. Current native APIs and existing owner sources prove the missing provider port rather than authorizing current-M/head/time joins. Refresh the original 442 only, preserve prior windows and exact source scope, and retain failures/quotas. All pins and histories unchanged, CMS/Cephalon paused, full goal active. Existing spore remains incubating; no new spore/promotion.
+
+- ts: 2026-10-23T02:44:46.999404+00:00
+  session: foresight-stabilization
+  task: Persist guarded intent layer repair and bootstrap regression evidence
+  p-efficiency: 0.65
+  p-friction: 0.9
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 4362924099d6831bf8293be93b2ba35271f1c2e8582ea6b102e15f21eb1dc97e
+  note: Keep captures in owned persistent repository paths and commit promptly. Temporary capture loss is explicit; only retained or freshly reproduced evidence supports claims. Existing spore remains unpromoted.

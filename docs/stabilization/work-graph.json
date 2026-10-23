@@ -1366,5 +1366,23 @@
     "qualified": false,
     "publisher": "in_progress",
     "CMS_Cephalon": "paused"
+  },
+  "e0_clio_intent_execution": {
+    "report": "docs/stabilization/e0-clio-intent-execution.md",
+    "overlay": "docs/stabilization/e0-clio-intent-execution.json",
+    "census": "docs/stabilization/e0-clio-intent-census.json",
+    "child_head": "fa117fba0b761f8aa655e26c2ae8675b1af178cd",
+    "source": "bb82398568f7abf7f2c1103e0aa34806b7b87153",
+    "clio_candidate": "5fad794de1a9e23d6e5aaad42eaa933be1c070be",
+    "frozen": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "open_H_B_changed_from_freeze": 6,
+    "source_drift": 0,
+    "proposal_drift": 0,
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
   }
 }

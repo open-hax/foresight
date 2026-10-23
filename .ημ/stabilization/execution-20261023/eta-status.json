@@ -1,0 +1,13 @@
+{
+  "command": [
+    "nbb",
+    "-cp",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+    "status",
+    "open-hax/eta-mu",
+    "362"
+  ],
+  "exit": 0,
+  "at": "2026-10-23T02:35:13.272630+00:00"
+}

@@ -1,0 +1,491 @@
+{
+  "started_at": "2026-10-23T02:32:04.936018+00:00",
+  "completed_at": "2026-10-23T02:32:06.221546+00:00",
+  "query": "query{r0:repository(owner:\"octave-commons\",name:\"gates-of-aker\"){id nameWithOwner isPrivate pullRequest(number:152){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"octave-commons\",name:\"muse\"){id nameWithOwner isPrivate pullRequest(number:14){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"octave-commons\",name:\"muse\"){id nameWithOwner isPrivate pullRequest(number:21){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"octave-commons\",name:\"muse\"){id nameWithOwner isPrivate pullRequest(number:23){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"octave-commons\",name:\"muse\"){id nameWithOwner isPrivate pullRequest(number:30){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"open-hax\",name:\"axxium\"){id nameWithOwner isPrivate pullRequest(number:13){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"open-hax\",name:\"axxium\"){id nameWithOwner isPrivate pullRequest(number:26){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"open-hax\",name:\"axxium\"){id nameWithOwner isPrivate pullRequest(number:30){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:321){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:325){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:328){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:333){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:335){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:336){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:344){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:346){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:347){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:348){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:351){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:352){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOQ5SSJQ",
+        "nameWithOwner": "octave-commons/gates-of-aker",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 152,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8578d5d4f767addf0876043a0a5964cea793acba",
+          "baseRefName": "main",
+          "baseRefOid": "a9a7b5658da5bb5ab57dcc40a19a9cdd53792621",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "a9a7b5658da5bb5ab57dcc40a19a9cdd53792621"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a82e34b47c80f8d00f38b2937601652e55abc958",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "a9a7b5658da5bb5ab57dcc40a19a9cdd53792621"
+                },
+                {
+                  "oid": "8578d5d4f767addf0876043a0a5964cea793acba"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDOTVwKag",
+        "nameWithOwner": "octave-commons/muse",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 14,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "5a4aa510626d13705434ca93a8537bbdb288b097",
+          "baseRefName": "main",
+          "baseRefOid": "846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r2": {
+        "id": "R_kgDOTVwKag",
+        "nameWithOwner": "octave-commons/muse",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 21,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "958894f8004e703c5f3bb4d4f13e7cac318b4af8",
+          "baseRefName": "main",
+          "baseRefOid": "c1369c223cf3c57e3e31934a6d746bfcdfe73f5a",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r3": {
+        "id": "R_kgDOTVwKag",
+        "nameWithOwner": "octave-commons/muse",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 23,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "889f1a537e747502cfa7e1ab928dd92e9b1bb4e4",
+          "baseRefName": "main",
+          "baseRefOid": "ba7f47dc6db26096a2a821d7a3c7ef62cb00c879",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r4": {
+        "id": "R_kgDOTVwKag",
+        "nameWithOwner": "octave-commons/muse",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 30,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "100a58d470bfb4eb8af738c5dd4ad176a25aff46",
+          "baseRefName": "main",
+          "baseRefOid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "7124858c60b73b2c3cc74e6cfb7842651ca509dd",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa"
+                },
+                {
+                  "oid": "100a58d470bfb4eb8af738c5dd4ad176a25aff46"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOStXBnQ",
+        "nameWithOwner": "open-hax/axxium",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 13,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "0e0a67299b61ae8ac309385a6400ca603ac3855f",
+          "baseRefName": "main",
+          "baseRefOid": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "99e6c725c64baed7d3ee93930b206724874e1486"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r6": {
+        "id": "R_kgDOStXBnQ",
+        "nameWithOwner": "open-hax/axxium",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 26,
+          "state": "CLOSED",
+          "isDraft": false,
+          "headRefOid": "18f92db5ea106b4f9dd3eb4d84b9da0fc6ee9f04",
+          "baseRefName": "main",
+          "baseRefOid": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "99e6c725c64baed7d3ee93930b206724874e1486"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "84bc7373c9d8291957091e50d427ae2c6de53e81",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "9572e74d4c67b252568822eff24a06b9521d2c7d"
+                },
+                {
+                  "oid": "18f92db5ea106b4f9dd3eb4d84b9da0fc6ee9f04"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOStXBnQ",
+        "nameWithOwner": "open-hax/axxium",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 30,
+          "state": "MERGED",
+          "isDraft": false,
+          "headRefOid": "d3eda22e442d956c0649cc4f58a3207dc60845f8",
+          "baseRefName": "main",
+          "baseRefOid": "9572e74d4c67b252568822eff24a06b9521d2c7d",
+          "mergeable": "UNKNOWN",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "99e6c725c64baed7d3ee93930b206724874e1486"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r8": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 321,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "0799ef9be4cc05fb24281ef1304b4e4c8f94d69c",
+          "baseRefName": "main",
+          "baseRefOid": "9e43ffcfa39b2140ba5b2d14102d7c189d898a55",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r9": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 325,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8c27f2ddda691074e14982780a3f90922f804842",
+          "baseRefName": "main",
+          "baseRefOid": "9e43ffcfa39b2140ba5b2d14102d7c189d898a55",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "bb6ed2c16977b19856df2708ad0d27211d064a6c",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+                },
+                {
+                  "oid": "8c27f2ddda691074e14982780a3f90922f804842"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 328,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "e5dff6330f14e08b0698761865b11ae8730f7391",
+          "baseRefName": "main",
+          "baseRefOid": "476b07bd66efb84566a4159556deacb1e9407e6f",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r11": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 333,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "33852976fd7d30afc2fc28cee62d2bacca866a81",
+          "baseRefName": "main",
+          "baseRefOid": "a4a560555cd06eb1faebc0b934500470fd726568",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r12": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 335,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "969095596da6f39bf1238b2f74702e222d20a832",
+          "baseRefName": "work/wiki-identity-local-stack",
+          "baseRefOid": "2431570f10868197484d8e2902ad7508840625e7",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "work/wiki-identity-local-stack",
+            "target": {
+              "oid": "33852976fd7d30afc2fc28cee62d2bacca866a81"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r13": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 336,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a2f428afd7623dcd188d535512525ee521a5ba61",
+          "baseRefName": "main",
+          "baseRefOid": "476b07bd66efb84566a4159556deacb1e9407e6f",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r14": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 344,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "ca9b17a97009d607ec7794ecee44547a45b118c3",
+          "baseRefName": "main",
+          "baseRefOid": "09a4454480baa67f6fdc40f6f73f5e48ef0457d1",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r15": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 346,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a91a73e0e5efa165baf6d7247338f3ef17751752",
+          "baseRefName": "main",
+          "baseRefOid": "09a4454480baa67f6fdc40f6f73f5e48ef0457d1",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r16": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 347,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "392790c561f6a2aaed1d789c2c29139f82090a90",
+          "baseRefName": "main",
+          "baseRefOid": "09a4454480baa67f6fdc40f6f73f5e48ef0457d1",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r17": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 348,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "ebf1e101c468303721a93db6418a4207d3ef0f05",
+          "baseRefName": "main",
+          "baseRefOid": "d98ab446d56ddfd24542df49b102b851f2a767fa",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r18": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 351,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "215b06c5e98a235d21cb293fca32c42d04748ed8",
+          "baseRefName": "main",
+          "baseRefOid": "0a4b8a8c372af1cea751d6f4bac7502e332bf5e3",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r19": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 352,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c0fe3dceb64ffeb0ea1fa8e67388a6bde2a93155",
+          "baseRefName": "main",
+          "baseRefOid": "0a4b8a8c372af1cea751d6f4bac7502e332bf5e3",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      }
+    }
+  }
+}

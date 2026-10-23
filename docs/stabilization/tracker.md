@@ -1,8 +1,25 @@
 # Foresight Stabilization — Persistent Tracker
 
-Updated October 22 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
+Updated October 23 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [native file inventory and refreshed cohort](e0-native-files.md).
+Latest execution: [Clio-backed intent, repaired layer boundary and bootstrap regression](e0-clio-intent-execution.md).
+Published ETA checkpoint `fa117fba0b761f8aa655e26c2ae8675b1af178cd` contains
+boundary GREEN `bb82398568f7abf7f2c1103e0aa34806b7b87153`: fresh 23/110 passes;
+eight changed published bytes verify. Earlier a762 Sandbox succeeds at its exact
+merge/tree, with 23 warning diagnostics and artifact-metadata-only limits.
+Native Rheos/sync/Sol bootstrap fails before tests on absent bb. Causal RED
+`b0ac577c` precedes local GREEN `14cb2742`; full successor qualification is pending.
+Clio `5fad794d` has exact-head CodeRabbit approval but convergence remains blocked.
+Root receipt P1, missing-App/terminal gate, character oracle and separate ETA
+classifier P1 remain open. Original G/caller and full publication/adoption stay held.
+
+Fresh October 23 02:32:04–02:32:26 UTC two-pass census: **442 frozen / 437 open /
+four merged / one closed / six changed open head/base pairs**. Axxium #3/#4 changed
+heads since the retained October 22 window; zero acquisition source/proposal drift.
+All 23 root pins and historical bytes survive. E0 breakdown, E1 incoming, publisher
+in_progress, milestones unqualified; CMS/Cephalon paused. No standalone planning.
+
+Earlier execution: [native file inventory and refreshed cohort](e0-native-files.md).
 Existing eta-mu PR 362 is pushed at `b265c7220bb07839d188e7e44311d31aff0ae469`.
 Registered collection 30 tests / 224 assertions, independent replay, full CLI,
 owning lint/release and 20 actual pure parity values pass. The real fixed public

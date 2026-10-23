@@ -1,0 +1,551 @@
+{
+  "started_at": "2026-10-23T02:32:19.400704+00:00",
+  "completed_at": "2026-10-23T02:32:20.817622+00:00",
+  "query": "query{r0:repository(owner:\"riatzukiza\",name:\"devel\"){id nameWithOwner isPrivate pullRequest(number:146){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"riatzukiza\",name:\"devel\"){id nameWithOwner isPrivate pullRequest(number:148){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"riatzukiza\",name:\"devel\"){id nameWithOwner isPrivate pullRequest(number:152){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"riatzukiza\",name:\"devel\"){id nameWithOwner isPrivate pullRequest(number:154){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"riatzukiza\",name:\"discord-chatter\"){id nameWithOwner isPrivate pullRequest(number:10){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"riatzukiza\",name:\"discord-chatter\"){id nameWithOwner isPrivate pullRequest(number:11){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"riatzukiza\",name:\"discord-chatter\"){id nameWithOwner isPrivate pullRequest(number:12){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"riatzukiza\",name:\"discord-chatter\"){id nameWithOwner isPrivate pullRequest(number:13){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"riatzukiza\",name:\"discord-chatter\"){id nameWithOwner isPrivate pullRequest(number:14){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"riatzukiza\",name:\"discord-chatter\"){id nameWithOwner isPrivate pullRequest(number:8){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"riatzukiza\",name:\"discord-chatter\"){id nameWithOwner isPrivate pullRequest(number:9){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"riatzukiza\",name:\"duck\"){id nameWithOwner isPrivate pullRequest(number:7){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"riatzukiza\",name:\"duck\"){id nameWithOwner isPrivate pullRequest(number:8){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"riatzukiza\",name:\"epiphany\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"riatzukiza\",name:\"epiphany\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"riatzukiza\",name:\"eros-eris-field\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:22){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:26){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOQPK6ww",
+        "nameWithOwner": "riatzukiza/devel",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 146,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "7a54fa0398149a98885bd6b5f2931b55c11f2610",
+          "baseRefName": "staging",
+          "baseRefOid": "bf846230e928b119a3fd18037630aabe6c73cb50",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "4745a2687894a5618582fe9a9d597879052b753e"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "de81a27074dd855c24e825cd03a0bd79a427fe0a",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "4745a2687894a5618582fe9a9d597879052b753e"
+                },
+                {
+                  "oid": "7a54fa0398149a98885bd6b5f2931b55c11f2610"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDOQPK6ww",
+        "nameWithOwner": "riatzukiza/devel",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 148,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "99edb6031066e95b19d4faf0b4be1cddc2bd748f",
+          "baseRefName": "staging",
+          "baseRefOid": "bf846230e928b119a3fd18037630aabe6c73cb50",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "4745a2687894a5618582fe9a9d597879052b753e"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r2": {
+        "id": "R_kgDOQPK6ww",
+        "nameWithOwner": "riatzukiza/devel",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 152,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "27189eaa5ca805077143f2efe676996064d25d07",
+          "baseRefName": "staging",
+          "baseRefOid": "4745a2687894a5618582fe9a9d597879052b753e",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "4745a2687894a5618582fe9a9d597879052b753e"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a35be1fda5b0b2a3406605676e41375b6f6881bb",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "4745a2687894a5618582fe9a9d597879052b753e"
+                },
+                {
+                  "oid": "27189eaa5ca805077143f2efe676996064d25d07"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOQPK6ww",
+        "nameWithOwner": "riatzukiza/devel",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 154,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "4745a2687894a5618582fe9a9d597879052b753e",
+          "baseRefName": "main",
+          "baseRefOid": "80a95e5638f4ee95e182ebf0a22f4735ab55964f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "80a95e5638f4ee95e182ebf0a22f4735ab55964f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "079f53480168145106d7203f0ae2224f3c46af8c",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "80a95e5638f4ee95e182ebf0a22f4735ab55964f"
+                },
+                {
+                  "oid": "4745a2687894a5618582fe9a9d597879052b753e"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r4": {
+        "id": "MDEwOlJlcG9zaXRvcnkxNDY0MDAyNTQ=",
+        "nameWithOwner": "riatzukiza/discord-chatter",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 10,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "31bd3941978cc7aa6a7efcfc873477628b2edf67",
+          "baseRefName": "master",
+          "baseRefOid": "afd955d550a34001b758fbdfe4e6b56365700754",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "e9f7a58407fa26c334c42b4a843ea37849671c0e"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r5": {
+        "id": "MDEwOlJlcG9zaXRvcnkxNDY0MDAyNTQ=",
+        "nameWithOwner": "riatzukiza/discord-chatter",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 11,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "668a348f88475bd8cea756bee9ac7cd1f14eca0f",
+          "baseRefName": "master",
+          "baseRefOid": "afd955d550a34001b758fbdfe4e6b56365700754",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "e9f7a58407fa26c334c42b4a843ea37849671c0e"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r6": {
+        "id": "MDEwOlJlcG9zaXRvcnkxNDY0MDAyNTQ=",
+        "nameWithOwner": "riatzukiza/discord-chatter",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 12,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "d9b50a5a9dc7a56b4ca23969ddfb4af0d3904c57",
+          "baseRefName": "master",
+          "baseRefOid": "afd955d550a34001b758fbdfe4e6b56365700754",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "e9f7a58407fa26c334c42b4a843ea37849671c0e"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r7": {
+        "id": "MDEwOlJlcG9zaXRvcnkxNDY0MDAyNTQ=",
+        "nameWithOwner": "riatzukiza/discord-chatter",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 13,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "008d49d9756e95e5291cb246ea59caebcc3612a4",
+          "baseRefName": "master",
+          "baseRefOid": "afd955d550a34001b758fbdfe4e6b56365700754",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "e9f7a58407fa26c334c42b4a843ea37849671c0e"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r8": {
+        "id": "MDEwOlJlcG9zaXRvcnkxNDY0MDAyNTQ=",
+        "nameWithOwner": "riatzukiza/discord-chatter",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 14,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "dd0945f2b0240087d646f4d6d77b9d3329910a77",
+          "baseRefName": "master",
+          "baseRefOid": "afd955d550a34001b758fbdfe4e6b56365700754",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "e9f7a58407fa26c334c42b4a843ea37849671c0e"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r9": {
+        "id": "MDEwOlJlcG9zaXRvcnkxNDY0MDAyNTQ=",
+        "nameWithOwner": "riatzukiza/discord-chatter",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 8,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "f173d2f96d53fb5ce15f1fd1b60e52b88e3cdd9d",
+          "baseRefName": "master",
+          "baseRefOid": "ec9c48194c332ac22f1033bcc067cb41e9dd1a8d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "e9f7a58407fa26c334c42b4a843ea37849671c0e"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r10": {
+        "id": "MDEwOlJlcG9zaXRvcnkxNDY0MDAyNTQ=",
+        "nameWithOwner": "riatzukiza/discord-chatter",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 9,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "da8197a48fb07d1322df9c39550aa8d0441b57c9",
+          "baseRefName": "master",
+          "baseRefOid": "afd955d550a34001b758fbdfe4e6b56365700754",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "e9f7a58407fa26c334c42b4a843ea37849671c0e"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r11": {
+        "id": "R_kgDOMWUnow",
+        "nameWithOwner": "riatzukiza/duck",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 7,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "9cf170a6e746c886b6931d2815bd6f072fff1aee",
+          "baseRefName": "main",
+          "baseRefOid": "6493d3af6fd1f729e91217fc5137da7cd0e1e626",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "6493d3af6fd1f729e91217fc5137da7cd0e1e626"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "0ef6a1f95304365e938be0ca57269fd972fb2512",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "6493d3af6fd1f729e91217fc5137da7cd0e1e626"
+                },
+                {
+                  "oid": "9cf170a6e746c886b6931d2815bd6f072fff1aee"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOMWUnow",
+        "nameWithOwner": "riatzukiza/duck",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 8,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "cbae5092aab3496224c2cad930c3ac94201ae32d",
+          "baseRefName": "main",
+          "baseRefOid": "6493d3af6fd1f729e91217fc5137da7cd0e1e626",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "6493d3af6fd1f729e91217fc5137da7cd0e1e626"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "6cc256e55faaba76e8ed68938c887dc78cf65dbc",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "6493d3af6fd1f729e91217fc5137da7cd0e1e626"
+                },
+                {
+                  "oid": "cbae5092aab3496224c2cad930c3ac94201ae32d"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOU4VdlA",
+        "nameWithOwner": "riatzukiza/epiphany",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a5e70b20f11c9b2f3c7aad552a46bc51fbe06a28",
+          "baseRefName": "main",
+          "baseRefOid": "643be698ea0d841dd19385506b272872306e456e",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "643be698ea0d841dd19385506b272872306e456e"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "df4dea4df285fe90e3bfebd04dffbaac56aa44aa",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "643be698ea0d841dd19385506b272872306e456e"
+                },
+                {
+                  "oid": "a5e70b20f11c9b2f3c7aad552a46bc51fbe06a28"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOU4VdlA",
+        "nameWithOwner": "riatzukiza/epiphany",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8d6587ef7a01e75b00ce98b2b6ceee40a190ebc2",
+          "baseRefName": "main",
+          "baseRefOid": "643be698ea0d841dd19385506b272872306e456e",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "643be698ea0d841dd19385506b272872306e456e"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "fd4bff99f0312b07ebaa2b44f2feea08aa5e3b6b",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "643be698ea0d841dd19385506b272872306e456e"
+                },
+                {
+                  "oid": "8d6587ef7a01e75b00ce98b2b6ceee40a190ebc2"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOU_2F9w",
+        "nameWithOwner": "riatzukiza/eros-eris-field",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8c116456505b14e7c70b014c71c06fa514fc5962",
+          "baseRefName": "main",
+          "baseRefOid": "a2c64bee9878fef3abd2b38481b972e6aa29cd37",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "b4cb390287c902ced2d383eb60b91a5bbb9da7d2"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r16": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "80eb46e032c51c6d1e05d046d8c1e133b23f5678",
+          "baseRefName": "main",
+          "baseRefOid": "084cd150b8d5b9848d026e9ef8717747964dcd6d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "4094522330f58c597cce6d515b14b5fb29baceda"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r17": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c28ab572ee5eb7478f2ce9cb30e3973014bb1a2f",
+          "baseRefName": "main",
+          "baseRefOid": "084cd150b8d5b9848d026e9ef8717747964dcd6d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "4094522330f58c597cce6d515b14b5fb29baceda"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r18": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 22,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "e9666aa2dc9e593dce783be430b80d9bed0de6ae",
+          "baseRefName": "integration/trusted-review-publication-fefa6dd5",
+          "baseRefOid": "fefa6dd52135e1045b1ad56802a346dc0779970c",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "integration/trusted-review-publication-fefa6dd5",
+            "target": {
+              "oid": "fefa6dd52135e1045b1ad56802a346dc0779970c"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "6dd07beb8341e83b4c7a2e708caac66c07031ab1",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "fefa6dd52135e1045b1ad56802a346dc0779970c"
+                },
+                {
+                  "oid": "e9666aa2dc9e593dce783be430b80d9bed0de6ae"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r19": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 26,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "aa5250bccbba289c7fb4e52ffe5cf8c92f126d48",
+          "baseRefName": "integration/source-map-reviewed-origin4eaa-20261017",
+          "baseRefOid": "4eaa34d18b5e07d9f26f0ebe4d20cf7e65ef9a41",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "integration/source-map-reviewed-origin4eaa-20261017",
+            "target": {
+              "oid": "5b9dd533f9747136446c8f8a6f9c6ed320f07f44"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      }
+    }
+  }
+}

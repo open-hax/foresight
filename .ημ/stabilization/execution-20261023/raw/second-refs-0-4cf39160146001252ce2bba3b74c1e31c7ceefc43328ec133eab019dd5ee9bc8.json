@@ -1,0 +1,286 @@
+{
+  "started_at": "2026-10-23T02:32:23.769535+00:00",
+  "completed_at": "2026-10-23T02:32:24.529004+00:00",
+  "query": "query{r0:repository(owner:\"Gar-Gar23\",name:\"TheBox\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r1:repository(owner:\"lakeraven\",name:\"vista-rpc\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/shared-infra\"){name target{oid}}}r2:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-bounded-look-200\"){name target{oid}}}r3:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-cadence-gap-evidence\"){name target{oid}}}r4:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-condensed-water-research\"){name target{oid}}}r5:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-current-composition\"){name target{oid}}}r6:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-damped-admission-evidence\"){name target{oid}}}r7:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-damped-flight\"){name target{oid}}}r8:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-flight-precision\"){name target{oid}}}r9:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-focus-cadence\"){name target{oid}}}r10:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-focus-cadence-native\"){name target{oid}}}r11:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-focus-controls\"){name target{oid}}}r12:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-focus-input\"){name target{oid}}}r13:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-guarded-approach\"){name target{oid}}}r14:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-guarded-smoke-results\"){name target{oid}}}r15:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-hardware-native\"){name target{oid}}}r16:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-input-menu-evidence\"){name target{oid}}}r17:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-input-observation-window\"){name target{oid}}}r18:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-kepler-baseline\"){name target{oid}}}r19:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-kepler-cost\"){name target{oid}}}r20:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-life-actor-plan\"){name target{oid}}}r21:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-motion-trails\"){name target{oid}}}r22:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-motion-trails-core\"){name target{oid}}}r23:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-native-current\"){name target{oid}}}r24:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-native-demo-tour\"){name target{oid}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "MDEwOlJlcG9zaXRvcnkzMzc1ODYzNjA=",
+        "nameWithOwner": "Gar-Gar23/TheBox",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "f7be5f1c401208eacfd4b95f57c326d54c6f8904"
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDOS_sNvg",
+        "nameWithOwner": "lakeraven/vista-rpc",
+        "isPrivate": false,
+        "ref": {
+          "name": "shared-infra",
+          "target": {
+            "oid": "1d9f3a615aef27af8f0214eadb736478ab682a03"
+          }
+        }
+      },
+      "r2": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-bounded-look-200",
+          "target": {
+            "oid": "678ea3d1cd0acb1bac0f59073ce28b8a48786c85"
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-cadence-gap-evidence",
+          "target": {
+            "oid": "93dc5b2bc0c734e5d8c311ac004035581db885b4"
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-condensed-water-research",
+          "target": {
+            "oid": "8f9ee36b8848e046e40eb5fb36ab4cbab5ab6946"
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-current-composition",
+          "target": {
+            "oid": "b395c4049718f7ce015ddf25fc0a192d97821373"
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-damped-admission-evidence",
+          "target": {
+            "oid": "0040c81ae7e399ef546f0151397949c20a8a989d"
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-damped-flight",
+          "target": {
+            "oid": "2e8df7319340c1f410aab945b2465135c911713a"
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-flight-precision",
+          "target": {
+            "oid": "6944df4ec266ec25059c89181fe3d07522d076b3"
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-focus-cadence",
+          "target": {
+            "oid": "2398808f545850938f79e5ca6cebc13a6f5e0158"
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-focus-cadence-native",
+          "target": {
+            "oid": "c79be1e957695505b48ea7f1905821927e7fb270"
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-focus-controls",
+          "target": {
+            "oid": "3064336a482bd7e93875808f6ad1200164347c68"
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-focus-input",
+          "target": {
+            "oid": "74fe6df8e73e06838a9ada04af3c983cec73079c"
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-guarded-approach",
+          "target": {
+            "oid": "36692669c439043696a09e3c5144b899878b4718"
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-guarded-smoke-results",
+          "target": {
+            "oid": "a29447c994e65e5b78c4e01efa4c11aec8d32206"
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-hardware-native",
+          "target": {
+            "oid": "4805fae52bd6764e4cf01555bc1d7417dd373349"
+          }
+        }
+      },
+      "r16": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-input-menu-evidence",
+          "target": {
+            "oid": "d703715bae567ef3681089bec3ab648783750031"
+          }
+        }
+      },
+      "r17": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-input-observation-window",
+          "target": {
+            "oid": "aa1fd95be217f21056160327fe695104e945331b"
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-kepler-baseline",
+          "target": {
+            "oid": "a50e51243672a6d8842f8f2fc233beb6db645a2f"
+          }
+        }
+      },
+      "r19": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-kepler-cost",
+          "target": {
+            "oid": "9c5c889d8923c76bf9a9530a8bd18cd72f37a93f"
+          }
+        }
+      },
+      "r20": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-life-actor-plan",
+          "target": {
+            "oid": "1bda27a27f1e88c061ebdff718264a55ef2a9938"
+          }
+        }
+      },
+      "r21": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-motion-trails",
+          "target": {
+            "oid": "7f0f2b3fe65f91c2dc1305bcf3a02a3c7ef18cc1"
+          }
+        }
+      },
+      "r22": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-motion-trails-core",
+          "target": {
+            "oid": "295031485bc5ced52850cf95bddf21394d9493ff"
+          }
+        }
+      },
+      "r23": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-native-current",
+          "target": {
+            "oid": "4bfba34da458184cedb3d65a61fc8e731afc8942"
+          }
+        }
+      },
+      "r24": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-native-demo-tour",
+          "target": {
+            "oid": "c7cc34a8248a615f39eeefd5ba8ac841b65e49fa"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+open-hax/eta-mu#362  head fa117fb
+  actionability history: UNAVAILABLE; threads retain finding obligations
+  coderabbit: pending   checks: {:skip 4, :pass 10, :pending 4, :fail 4}
+  threads: 6 total, 1 unresolved; by severity {:p1 1}; informational 0
+  exact-head approvals: #{}  observed commit binding: {}
+  completed code rounds: 0 / soft minimum 5  participants: #{"coderabbit" "mimo"}
+  codex quota-unavailable: native source 6308863857 request  scope account observed 2026-10-21T05:33:19Z retry-at-ms UNKNOWN
+  gate: BLOCKED
+    - No trusted exact-head APPROVED review meets the quorum
+    - 4 failing deterministic/required check(s)
+    - 4 pending deterministic/required check(s)
+    - 1 P0/P1 thread(s) not fixed
+    - 1 thread(s) without a settlement reply
+    - 1 unresolved thread(s)
+    - 21 unanswered review summary item(s)
+    - Review loop requires 5 completed rounds or unanimous current-head approval, with every finding settled
+    - Review evidence changed while collecting conversations; re-evaluate

@@ -1,0 +1,220 @@
+{
+  "started_at": "2026-10-23T02:32:24.904673+00:00",
+  "completed_at": "2026-10-23T02:32:26.531647+00:00",
+  "query": "query{r0:repository(owner:\"riatzukiza\",name:\"osmos\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r1:repository(owner:\"riatzukiza\",name:\"proxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/staging\"){name target{oid}}}r2:repository(owner:\"riatzukiza\",name:\"rheos\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/preserve-markdown-source\"){name target{oid}}}r3:repository(owner:\"riatzukiza\",name:\"rheos\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/sync-rheos-origin-main\"){name target{oid}}}r4:repository(owner:\"riatzukiza\",name:\"rheos\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r5:repository(owner:\"riatzukiza\",name:\"riatzukiza.github.io\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r6:repository(owner:\"riatzukiza\",name:\"roarar-bot-ui\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r7:repository(owner:\"riatzukiza\",name:\"services\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/sync-services-origin-main\"){name target{oid}}}r8:repository(owner:\"riatzukiza\",name:\"services\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/integration/services-main-a3034ccd\"){name target{oid}}}r9:repository(owner:\"riatzukiza\",name:\"services\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r10:repository(owner:\"riatzukiza\",name:\"session-mycology\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r11:repository(owner:\"riatzukiza\",name:\"shuvgeist\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r12:repository(owner:\"riatzukiza\",name:\"shx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/shx-sync-upstream-f4ee133\"){name target{oid}}}r13:repository(owner:\"riatzukiza\",name:\"shx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r14:repository(owner:\"riatzukiza\",name:\"sol\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r15:repository(owner:\"riatzukiza\",name:\"spacemacs.d\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r16:repository(owner:\"riatzukiza\",name:\"symbiant\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r17:repository(owner:\"riatzukiza\",name:\"trader.prototype.react\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r18:repository(owner:\"riatzukiza\",name:\"uxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOU4VgiQ",
+        "nameWithOwner": "riatzukiza/osmos",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "cf355ea6bf19681bd65ae4fa9af392491821eab1"
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDOU4Veag",
+        "nameWithOwner": "riatzukiza/proxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "staging",
+          "target": {
+            "oid": "cf59b233a56d76c50b282e3e88863260a5741c17"
+          }
+        }
+      },
+      "r2": {
+        "id": "R_kgDOU4Vf-Q",
+        "nameWithOwner": "riatzukiza/rheos",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/preserve-markdown-source",
+          "target": {
+            "oid": "b85854514c613b13a3a9930795f5ae595ab30ac7"
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOU4Vf-Q",
+        "nameWithOwner": "riatzukiza/rheos",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/sync-rheos-origin-main",
+          "target": {
+            "oid": "ea92504b9e09d06320a64aa3a7b595d47cdfe903"
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOU4Vf-Q",
+        "nameWithOwner": "riatzukiza/rheos",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "ed86eda713fa99ba86c6178592e92dce07a2f06a"
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDONVKlHQ",
+        "nameWithOwner": "riatzukiza/riatzukiza.github.io",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "c61d2e9b7aa23ee4e533167ee0e87e7c43055fc3"
+          }
+        }
+      },
+      "r6": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNDc3NzM1ODE=",
+        "nameWithOwner": "riatzukiza/roarar-bot-ui",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "dc6e7b97e9fa8522c6cf1ff93c8c90fc743f2d4f"
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOU4VemQ",
+        "nameWithOwner": "riatzukiza/services",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/sync-services-origin-main",
+          "target": {
+            "oid": "f070fb7eaf6a59a51f94928ac1537748bcc44259"
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOU4VemQ",
+        "nameWithOwner": "riatzukiza/services",
+        "isPrivate": false,
+        "ref": {
+          "name": "integration/services-main-a3034ccd",
+          "target": {
+            "oid": "a3034ccddbc43aecf34a70df444ebe0e5314f83c"
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOU4VemQ",
+        "nameWithOwner": "riatzukiza/services",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "214882daad9ec324e66d552203b22e5a0838f79d"
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOU4VgLQ",
+        "nameWithOwner": "riatzukiza/session-mycology",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "ddb63291cf856ab59ef14f02b8346e42f6ef651b"
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOSIHdOg",
+        "nameWithOwner": "riatzukiza/shuvgeist",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "87316f29da74b8a93fddbb6ceb937f97d31a1968"
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOU4Ve6Q",
+        "nameWithOwner": "riatzukiza/shx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/shx-sync-upstream-f4ee133",
+          "target": {
+            "oid": "f4ee133dcf1650c7eafb623ef084f62417252477"
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOU4Ve6Q",
+        "nameWithOwner": "riatzukiza/shx",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "c3a6631a39e57d88898c3ba52cd62573e4b9ecf9"
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOU4VgTg",
+        "nameWithOwner": "riatzukiza/sol",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOS5NOtg",
+        "nameWithOwner": "riatzukiza/spacemacs.d",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "364a7257dd2eb40b3483506325c09504a6f0f8cf"
+          }
+        }
+      },
+      "r16": {
+        "id": "MDEwOlJlcG9zaXRvcnk3NjYzNzg4Mg==",
+        "nameWithOwner": "riatzukiza/symbiant",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "94589e268268d408f166f38cffe9c4f66b054bd3"
+          }
+        }
+      },
+      "r17": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNjM4OTQ2NDc=",
+        "nameWithOwner": "riatzukiza/trader.prototype.react",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "d08a104c0b46361513d77c9b9589a65cd23b5596"
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDOSPHNBw",
+        "nameWithOwner": "riatzukiza/uxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "c9959b8bd0316044ff4a200e38ac8d4ca9442f37"
+          }
+        }
+      }
+    }
+  }
+}

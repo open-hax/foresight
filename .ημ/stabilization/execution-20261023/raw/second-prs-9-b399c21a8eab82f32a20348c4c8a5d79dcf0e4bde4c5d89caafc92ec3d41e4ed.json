@@ -1,0 +1,656 @@
+{
+  "started_at": "2026-10-23T02:32:18.400974+00:00",
+  "completed_at": "2026-10-23T02:32:19.993467+00:00",
+  "query": "query{r0:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:437){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:444){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:445){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:452){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:453){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate pullRequest(number:455){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"open-hax\",name:\"services\"){id nameWithOwner isPrivate pullRequest(number:84){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"open-hax\",name:\"services\"){id nameWithOwner isPrivate pullRequest(number:92){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"open-hax\",name:\"services\"){id nameWithOwner isPrivate pullRequest(number:99){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"open-hax\",name:\"sol\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"open-hax\",name:\"website\"){id nameWithOwner isPrivate pullRequest(number:3){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"openai\",name:\"parameter-golf\"){id nameWithOwner isPrivate pullRequest(number:227){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"openai\",name:\"parameter-golf\"){id nameWithOwner isPrivate pullRequest(number:240){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"openai\",name:\"parameter-golf\"){id nameWithOwner isPrivate pullRequest(number:247){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"openai\",name:\"parameter-golf\"){id nameWithOwner isPrivate pullRequest(number:248){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"openai\",name:\"parameter-golf\"){id nameWithOwner isPrivate pullRequest(number:258){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"openai\",name:\"parameter-golf\"){id nameWithOwner isPrivate pullRequest(number:276){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"riatzukiza\",name:\".agents\"){id nameWithOwner isPrivate pullRequest(number:10){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"riatzukiza\",name:\".agents\"){id nameWithOwner isPrivate pullRequest(number:21){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"riatzukiza\",name:\".agents\"){id nameWithOwner isPrivate pullRequest(number:34){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 437,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "640c607e91aeb6afae43ec4ded747b98b8e21101",
+          "baseRefName": "staging",
+          "baseRefOid": "10a7d2303490127de38afa4d6a17ef8e2670874d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r1": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 444,
+          "state": "OPEN",
+          "isDraft": true,
+          "headRefOid": "c9357168f26a208f48d781369c046467aeda188f",
+          "baseRefName": "staging",
+          "baseRefOid": "cf59b233a56d76c50b282e3e88863260a5741c17",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r2": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 445,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "aba0697a4d08a87bf59a33cc03e171b95eef2016",
+          "baseRefName": "staging",
+          "baseRefOid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "b2a757a3cdf5367792dbdbf5016d9a18ef54cc25",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+                },
+                {
+                  "oid": "aba0697a4d08a87bf59a33cc03e171b95eef2016"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 452,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "14e755ea6fb66d1d9a0497213c996b1f56821875",
+          "baseRefName": "staging",
+          "baseRefOid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "e4897c736b5ee24fc4985d267a7f70e81271153d",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+                },
+                {
+                  "oid": "14e755ea6fb66d1d9a0497213c996b1f56821875"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 453,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "d59b38681089d832dc2802d7f88f53077d5a1b7b",
+          "baseRefName": "staging",
+          "baseRefOid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "87d8073be6877121eca7371d11ea2cc035df3363",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+                },
+                {
+                  "oid": "d59b38681089d832dc2802d7f88f53077d5a1b7b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 455,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "3ed25eec53a5bed6dc224f108323ea5d20420a22",
+          "baseRefName": "staging",
+          "baseRefOid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "staging",
+            "target": {
+              "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "2ff0773c66722f343ee69ce5c4fbc76726e586d5",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+                },
+                {
+                  "oid": "3ed25eec53a5bed6dc224f108323ea5d20420a22"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOSuY53Q",
+        "nameWithOwner": "open-hax/services",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 84,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "e29d2ce3adca261a8fbaab1173287303941d03cf",
+          "baseRefName": "main",
+          "baseRefOid": "f3c48add48a6b0f096f4fff18ff82a37e4c4ddcf",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a9bc45df0fadf696094f8613a748ac8181fc637b",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+                },
+                {
+                  "oid": "e29d2ce3adca261a8fbaab1173287303941d03cf"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOSuY53Q",
+        "nameWithOwner": "open-hax/services",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 92,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "3016fdaee920607efc4e72b56e12e112599e8918",
+          "baseRefName": "main",
+          "baseRefOid": "214882daad9ec324e66d552203b22e5a0838f79d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r8": {
+        "id": "R_kgDOSuY53Q",
+        "nameWithOwner": "open-hax/services",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 99,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "5b753995fdf2f8427d753ac0200b61abb5e0e9d8",
+          "baseRefName": "main",
+          "baseRefOid": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "e01818e517be76914fa2646e21a9da4ccbe055db",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+                },
+                {
+                  "oid": "5b753995fdf2f8427d753ac0200b61abb5e0e9d8"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOUYwqmg",
+        "nameWithOwner": "open-hax/sol",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6",
+          "baseRefName": "main",
+          "baseRefOid": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "1276955c86ff46936cd1ce7d81fbc790f7068e1e"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "782de4b48dea640d9c95dc591b1b2449f8d62123",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "1276955c86ff46936cd1ce7d81fbc790f7068e1e"
+                },
+                {
+                  "oid": "3a18e2d8e0f26e8467ce95928ff7bf893e6c86d6"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOSxR0jg",
+        "nameWithOwner": "open-hax/website",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 3,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "cdaf988f69f0a6efc717c522deae0ea2888d6253",
+          "baseRefName": "main",
+          "baseRefOid": "cc422fed440d1bd643e5236d7c3fb1343cde1872",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "6fd48ac5df9a16e414efbbf2b6abe98ad331be78"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "62e4d7c530a166c8ffc8f7fc1b1147844482104e",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "6fd48ac5df9a16e414efbbf2b6abe98ad331be78"
+                },
+                {
+                  "oid": "cdaf988f69f0a6efc717c522deae0ea2888d6253"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDORL3_gg",
+        "nameWithOwner": "openai/parameter-golf",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 227,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "109f2619bf1d81a2b636d6e1a02207e60cd32f31",
+          "baseRefName": "main",
+          "baseRefOid": "45bbccff356439d2f0b0dbae06cc3fa58b9576ed",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "5882f64a78f05b7de65a2c4c7a48c14b921d6798",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+                },
+                {
+                  "oid": "109f2619bf1d81a2b636d6e1a02207e60cd32f31"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDORL3_gg",
+        "nameWithOwner": "openai/parameter-golf",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 240,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b2bcd556fea04e49b01a43f0644bcbc1143fc451",
+          "baseRefName": "main",
+          "baseRefOid": "45bbccff356439d2f0b0dbae06cc3fa58b9576ed",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a3f2bf1a0205ce69e494a3f33e5a51d078aba8b9",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+                },
+                {
+                  "oid": "b2bcd556fea04e49b01a43f0644bcbc1143fc451"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDORL3_gg",
+        "nameWithOwner": "openai/parameter-golf",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 247,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c739b4ae8a4c7cb6e4a1d3b1fa5182c17c7b4304",
+          "baseRefName": "main",
+          "baseRefOid": "45bbccff356439d2f0b0dbae06cc3fa58b9576ed",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "8bf5ac1eddd8d0f96fd716fc67da3bb08401a1c3",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+                },
+                {
+                  "oid": "c739b4ae8a4c7cb6e4a1d3b1fa5182c17c7b4304"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDORL3_gg",
+        "nameWithOwner": "openai/parameter-golf",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 248,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "f5027810bdfbb59e4488e5e0da55791e3ee9c7a1",
+          "baseRefName": "main",
+          "baseRefOid": "80f7a211cdf537225c942ea353fd62e629675157",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "9098ee80c6010fcd0d7c561a6f86bb830ff64af8",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+                },
+                {
+                  "oid": "f5027810bdfbb59e4488e5e0da55791e3ee9c7a1"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDORL3_gg",
+        "nameWithOwner": "openai/parameter-golf",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 258,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "f98375ec012af0026cb798b895d9dd061e30591c",
+          "baseRefName": "main",
+          "baseRefOid": "ee82226cf58b5ace00a0d79250bfa0e8e58c4313",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a3f4def2dee15a013aab609dbec0c8ac0565e889",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+                },
+                {
+                  "oid": "f98375ec012af0026cb798b895d9dd061e30591c"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r16": {
+        "id": "R_kgDORL3_gg",
+        "nameWithOwner": "openai/parameter-golf",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 276,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c4ed3db6e7c1aaa8c6f62c08442538bfc275b6f3",
+          "baseRefName": "main",
+          "baseRefOid": "2cff08e1a1a95a35b2bf09b1c2d5fc6b367237b7",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a762ea6cfbf818b4bad444b50aa9699024a6cd8e",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "f5c079314c4877fbb0af378c0abade5a8ca33d3a"
+                },
+                {
+                  "oid": "c4ed3db6e7c1aaa8c6f62c08442538bfc275b6f3"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r17": {
+        "id": "R_kgDOTlQJUg",
+        "nameWithOwner": "riatzukiza/.agents",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 10,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b39d306a64b21b0c09ee59b2b9db3ed7facb46b0",
+          "baseRefName": "main",
+          "baseRefOid": "37030a3e27701f1289c1b51059824878219693c0",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "580a361ee0110319cc4f3320d9982961073b66a2"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r18": {
+        "id": "R_kgDOTlQJUg",
+        "nameWithOwner": "riatzukiza/.agents",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 21,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "7b245ecf081cb45b219d4a19663d54460f18df89",
+          "baseRefName": "main",
+          "baseRefOid": "8a7e588b3f55e69c6aa9212c9679646e772e09a7",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "580a361ee0110319cc4f3320d9982961073b66a2"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r19": {
+        "id": "R_kgDOTlQJUg",
+        "nameWithOwner": "riatzukiza/.agents",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 34,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "7f4dfb8229e16996cfdb807694a630b60a130d71",
+          "baseRefName": "main",
+          "baseRefOid": "580a361ee0110319cc4f3320d9982961073b66a2",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "580a361ee0110319cc4f3320d9982961073b66a2"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "09cbd9194cc6725e2678e8c73883dd2ee91a970f",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "580a361ee0110319cc4f3320d9982961073b66a2"
+                },
+                {
+                  "oid": "7f4dfb8229e16996cfdb807694a630b60a130d71"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

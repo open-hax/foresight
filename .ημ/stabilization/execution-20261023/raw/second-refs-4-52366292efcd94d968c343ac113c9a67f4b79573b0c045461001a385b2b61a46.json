@@ -1,0 +1,286 @@
+{
+  "started_at": "2026-10-23T02:32:24.529784+00:00",
+  "completed_at": "2026-10-23T02:32:25.928251+00:00",
+  "query": "query{r0:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r1:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r2:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/integration/native-cms-cutover-fcfc2d17-v1\"){name target{oid}}}r3:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r4:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32\"){name target{oid}}}r5:repository(owner:\"riatzukiza\",name:\"i3-config\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r6:repository(owner:\"riatzukiza\",name:\"kanban-orchestrator\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r7:repository(owner:\"riatzukiza\",name:\"katamorph\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r8:repository(owner:\"riatzukiza\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/knoxx161-hold-evidence\"){name target{oid}}}r9:repository(owner:\"riatzukiza\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/knoxx161-verification-evidence\"){name target{oid}}}r10:repository(owner:\"riatzukiza\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/sync-knoxx-origin-main\"){name target{oid}}}r11:repository(owner:\"riatzukiza\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/development/cms-controller-application-20261017\"){name target{oid}}}r12:repository(owner:\"riatzukiza\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/integration/cms-reviewed-origin2ba3b84d-20261017\"){name target{oid}}}r13:repository(owner:\"riatzukiza\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/integration/private-cms-19f8f2d7\"){name target{oid}}}r14:repository(owner:\"riatzukiza\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/integration/sdk-planning-642c680a\"){name target{oid}}}r15:repository(owner:\"riatzukiza\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r16:repository(owner:\"riatzukiza\",name:\"meteor-chat\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r17:repository(owner:\"riatzukiza\",name:\"meteor-notes\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r18:repository(owner:\"riatzukiza\",name:\"muse\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/chore/sync-upstream-main-846b47e\"){name target{oid}}}r19:repository(owner:\"riatzukiza\",name:\"muse\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/integration/muse-reviewed-origin9d3ae495-20261017\"){name target{oid}}}r20:repository(owner:\"riatzukiza\",name:\"muse\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r21:repository(owner:\"riatzukiza\",name:\"muse\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/plan/native-review-body-target-a9f2-20261017\"){name target{oid}}}r22:repository(owner:\"riatzukiza\",name:\"notes\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/master\"){name target{oid}}}r23:repository(owner:\"riatzukiza\",name:\"openplanner\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/sync-openplanner-origin-main\"){name target{oid}}}r24:repository(owner:\"riatzukiza\",name:\"openplanner\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "4094522330f58c597cce6d515b14b5fb29baceda"
+          }
+        }
+      },
+      "r1": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+          }
+        }
+      },
+      "r2": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "ref": {
+          "name": "integration/native-cms-cutover-fcfc2d17-v1",
+          "target": {
+            "oid": "fcfc2d17f28640203066ddfe0a22f87db7372a32"
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "6cf607cb4c86c8bed5c8de9b421eba52284c2716"
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "ref": {
+          "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "target": {
+            "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOS6fFfQ",
+        "nameWithOwner": "riatzukiza/i3-config",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "8e070e6c8f09c14b268e412c7adbac89dec1379a"
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOU4VfDA",
+        "nameWithOwner": "riatzukiza/kanban-orchestrator",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "368387003c5294efd2eadd8411d343870443c6bc"
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOU4Vd8A",
+        "nameWithOwner": "riatzukiza/katamorph",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "fe6017b28baa2d561550dc03768b3dd0da3f1480"
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOU4VeEQ",
+        "nameWithOwner": "riatzukiza/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/knoxx161-hold-evidence",
+          "target": {
+            "oid": "51adea734380b20b7273dcfea5d9cad284845424"
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOU4VeEQ",
+        "nameWithOwner": "riatzukiza/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/knoxx161-verification-evidence",
+          "target": {
+            "oid": "95eed680e1ababc7a5b62bb91ce437d282de8dc7"
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOU4VeEQ",
+        "nameWithOwner": "riatzukiza/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/sync-knoxx-origin-main",
+          "target": {
+            "oid": "5670338fcf1db7d51a2690f388e4e4c5c409c48a"
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOU4VeEQ",
+        "nameWithOwner": "riatzukiza/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "development/cms-controller-application-20261017",
+          "target": {
+            "oid": "dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03"
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOU4VeEQ",
+        "nameWithOwner": "riatzukiza/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "integration/cms-reviewed-origin2ba3b84d-20261017",
+          "target": {
+            "oid": "2ba3b84de4fff8acbff9dabe9049b0ab287b6635"
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOU4VeEQ",
+        "nameWithOwner": "riatzukiza/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "integration/private-cms-19f8f2d7",
+          "target": {
+            "oid": "19f8f2d7e6e7684c93df8b620ad83ffc0ec30b1c"
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOU4VeEQ",
+        "nameWithOwner": "riatzukiza/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "integration/sdk-planning-642c680a",
+          "target": {
+            "oid": "642c680a86353b79afcfd7a5ea64f8f27250a9d6"
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOU4VeEQ",
+        "nameWithOwner": "riatzukiza/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "3409977bca4ba35e09967f9a99d50867a679a73c"
+          }
+        }
+      },
+      "r16": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzY0Mjg4MDk=",
+        "nameWithOwner": "riatzukiza/meteor-chat",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "41ccece86b448ff95b3fb15be86f15092456328c"
+          }
+        }
+      },
+      "r17": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNDc5MDgxNDI=",
+        "nameWithOwner": "riatzukiza/meteor-notes",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "12b8e202132b63a9534a0e4ad14700ff93ce62ba"
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDOU4VePw",
+        "nameWithOwner": "riatzukiza/muse",
+        "isPrivate": false,
+        "ref": {
+          "name": "chore/sync-upstream-main-846b47e",
+          "target": {
+            "oid": "39c5db79b0e2222a096e0dcf61e7f894c9b6ffaf"
+          }
+        }
+      },
+      "r19": {
+        "id": "R_kgDOU4VePw",
+        "nameWithOwner": "riatzukiza/muse",
+        "isPrivate": false,
+        "ref": {
+          "name": "integration/muse-reviewed-origin9d3ae495-20261017",
+          "target": {
+            "oid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa"
+          }
+        }
+      },
+      "r20": {
+        "id": "R_kgDOU4VePw",
+        "nameWithOwner": "riatzukiza/muse",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "04f91e39cb74af722a439340fd29afe914e72a30"
+          }
+        }
+      },
+      "r21": {
+        "id": "R_kgDOU4VePw",
+        "nameWithOwner": "riatzukiza/muse",
+        "isPrivate": false,
+        "ref": {
+          "name": "plan/native-review-body-target-a9f2-20261017",
+          "target": {
+            "oid": "9f758e8c9d91243478326c7c963e8f85bb391fd6"
+          }
+        }
+      },
+      "r22": {
+        "id": "MDEwOlJlcG9zaXRvcnkyNDc5MDQ4MTQ=",
+        "nameWithOwner": "riatzukiza/notes",
+        "isPrivate": false,
+        "ref": {
+          "name": "master",
+          "target": {
+            "oid": "e93a11a06aeb9621ba3a149ea4e5fa041d456766"
+          }
+        }
+      },
+      "r23": {
+        "id": "R_kgDOSPHGTw",
+        "nameWithOwner": "riatzukiza/openplanner",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/sync-openplanner-origin-main",
+          "target": {
+            "oid": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08"
+          }
+        }
+      },
+      "r24": {
+        "id": "R_kgDOSPHGTw",
+        "nameWithOwner": "riatzukiza/openplanner",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "f95a53a4da8ed90588b0be320ba8e86c6a03668d"
+          }
+        }
+      }
+    }
+  }
+}
