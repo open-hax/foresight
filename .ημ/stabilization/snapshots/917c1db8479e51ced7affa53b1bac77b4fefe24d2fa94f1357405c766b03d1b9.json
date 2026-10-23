@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "e0-gap-resolution-attempt",
+  "created_at": "2026-10-20T08:48:09.245252Z",
+  "parent_freeze_manifest": ".ημ/stabilization/snapshots/62874eae7ee052cce39d658402326449e617a49b0965abe6795a93a2ad6fe341.json",
+  "frozen_census_graph": {
+    "path": "docs/stabilization/e0-work-graph.json",
+    "sha256": "2de8e1f76aad6d2acb40718a12443cd4e1ee066cf6fd4ad1324464192af8ca42"
+  },
+  "native_corpus": {
+    "path": ".ημ/stabilization/snapshots/6a4135f6046e7864e18079d0c45dcc679b17a2442ddcff80081ddd0d8d49ed5a.json.gz",
+    "sha256": "6a4135f6046e7864e18079d0c45dcc679b17a2442ddcff80081ddd0d8d49ed5a",
+    "uncompressed_sha256": "42058292ac9f4c950a06620aa913d776cf4a63e3020393338733833a1dbda630",
+    "compressed_bytes": 57396906,
+    "uncompressed_bytes": 310123243
+  },
+  "summary": {
+    "frozen_prs": 442,
+    "e0_reconciliation_owner_bound": 442,
+    "work_anchor_accounted": 442,
+    "native_pr_assignment_changes": 0,
+    "existing_association_rows_retained": 192,
+    "quarantined_text_observations": 4,
+    "quarantined_unique_blob_oids": 2,
+    "new_verified_authored_card_observations": 23,
+    "new_verified_authored_card_prs": 12,
+    "newly_explicit_bound_former_unmapped_prs": 34,
+    "native_pr_backed_rows": 216,
+    "former_gap_tokens": 11,
+    "unlocated_former_gap_tokens": 0,
+    "gap_decisions": {
+      "locate-existing-legacy-id": 7,
+      "reject-empty-reference": 2,
+      "quarantine-malformed-target": 1,
+      "resolve-existing-uuid-path-alias": 1
+    },
+    "namespace_supplier_declarations": 72,
+    "unresolved_supplier_aliases": 0,
+    "knoxx_mixed_dependency_cycle_components": 2,
+    "created_tasks": 0,
+    "m0_qualified": false,
+    "frozen_card_relationship_observations_adjudicated": 1170,
+    "containment_observations": 721,
+    "declared_blocker_observations": 449,
+    "new_verified_card_relationship_observations": 28,
+    "cross_network_identity_holds": 3,
+    "pr_ancestry_observations_adjudicated": 183,
+    "differing_card_revision_groups_retained": 93,
+    "constellation_native_pr_backed_rows": 84,
+    "inventory_only_prs": 133
+  },
+  "e0": {
+    "uuid": "stabilization-e0",
+    "state": "breakdown",
+    "assignee": "codex",
+    "ownership_scope": "reconciliation and residual hold follow-through; no execution/merge assignment",
+    "operational_writer": "@eta-mu/rheos@0.2.0",
+    "writes": "one assignee frontmatter mutation and two comments on existing E0; no card creation or child-board mutation"
+  },
+  "artifacts": {
+    "docs/stabilization/e0-resolution.md": {
+      "sha256": "ba38f6177ce79affc91e7a613c581694629ee1b0a4d7bc51e5212d5780f0e7f9",
+      "bytes": 15237
+    },
+    "docs/stabilization/e0-resolution.json": {
+      "sha256": "f13ed0b9920e4616e1b8da2abb3895321400445ca1e8f56ab147be5c2a743661",
+      "bytes": 2467085
+    },
+    "docs/stabilization/e0-owner-work-index.csv": {
+      "sha256": "10650da17640c45f336d77b6eccb723f6bfc4afd9682bee9dfbd08bb938f6cd1",
+      "bytes": 197238
+    },
+    "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md": {
+      "sha256": "ee7115ba54f0684d04584c4d9a23be3ccbb238d379c054bdea2c53eac723ab88",
+      "bytes": 6102
+    },
+    ".ημ/stabilization/snapshots/4f080d1ab8959daa744d5c6d0d396c0522c00f81713e076f0c5e6574408e6f76.json": {
+      "sha256": "4f080d1ab8959daa744d5c6d0d396c0522c00f81713e076f0c5e6574408e6f76",
+      "bytes": 133564
+    },
+    ".ημ/stabilization/resolution-proposals/f38d314aef13280a2b6eff3f8bf3e4232de5d4faedeba5dd613db33b3595f8ef.patch": {
+      "sha256": "f38d314aef13280a2b6eff3f8bf3e4232de5d4faedeba5dd613db33b3595f8ef",
+      "bytes": 384
+    }
+  },
+  "operational_ledger_prefix": {
+    "path": ".ημ/kanban-events/ledger.edn",
+    "sha256": "2f77181a1e7ad9cc5019530b611956c8d9d79fbf343aa575e15cdf1bb4c41e50",
+    "bytes": 176509
+  },
+  "checks": {
+    "frozen_source_revalidation": "pass: archive compressed/uncompressed SHA256, 23 exact card blobs, new issue bindings, all 442 exact heads and 17 target-source observations",
+    "immutable_census_and_append_only_ledgers": "pass",
+    "mapping_and_identity_integrity": "pass: 442 unique rows, no duplicate work anchors/tasks, all original association identities retained",
+    "relationship_integrity": "pass: 1170 frozen and 28 recovered card relationships, 183 ancestry records, 11 reference dispositions; independent cyclic-component verification",
+    "patch_proposal": "pass: applies/parses and preserves UUID/status in scratch only; not applied to child",
+    "board": "85 root identities, non-E0 metadata/states preserved aside from earlier lawful comment write IDs; E0 codex/breakdown; Rheos no drift",
+    "project_validation": "pass: 25 sources, 23 submodules, 39 invariants",
+    "lint": "clj-kondo scripts test: 0 errors / 0 warnings",
+    "links_and_whitespace": "pass"
+  },
+  "created_tasks": 0,
+  "m0_qualified": false,
+  "limits": [
+    "Coordination accountability is explicit; accepted execution/merge ownership and terminal intent remain M0 holds.",
+    "Native PR-backed work anchors do not establish Rheos implementation equivalence.",
+    "Four text observations fail blob custody; they are retained and excluded from new authority decisions.",
+    "Legacy identity custody and the malformed source require owning workflow evidence/repair.",
+    "No current network state, merge/review qualification, runtime proof or external publication is claimed."
+  ]
+}

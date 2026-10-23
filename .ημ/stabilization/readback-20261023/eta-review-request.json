@@ -1,0 +1,20 @@
+{
+  "observed_at": "2026-10-23T03:58:00.580585+00:00",
+  "argv": [
+    "nbb",
+    "-cp",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+    "request",
+    "open-hax/eta-mu",
+    "362",
+    "code",
+    "--reviewer",
+    "coderabbit",
+    "--note",
+    "Review published bounded native readback and independent inline App conflict repair at db99b1682c94ecdf9f8b239709dd44cb6101c7da. Causal controls, exact raw archive and full local checks retained. Authentication/publication/adoption remain unqualified."
+  ],
+  "exit_code": 0,
+  "stdout": "https://github.com/open-hax/eta-mu/pull/362#issuecomment-6357019277\n",
+  "stderr": ""
+}

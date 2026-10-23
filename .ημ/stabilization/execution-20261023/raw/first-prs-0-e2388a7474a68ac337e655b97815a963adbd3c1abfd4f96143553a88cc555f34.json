@@ -1,0 +1,656 @@
+{
+  "started_at": "2026-10-23T02:32:04.934880+00:00",
+  "completed_at": "2026-10-23T02:32:06.603770+00:00",
+  "query": "query{r0:repository(owner:\"Gar-Gar23\",name:\"TheBox\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"lakeraven\",name:\"vista-rpc\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:10){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:11){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:12){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:13){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:14){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:15){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:16){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:17){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:18){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:19){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:20){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:21){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:22){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:23){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:24){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:25){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:27){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate pullRequest(number:28){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "MDEwOlJlcG9zaXRvcnkzMzc1ODYzNjA=",
+        "nameWithOwner": "Gar-Gar23/TheBox",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "d1b1eac95e5281c0f8bf73bc7cba15e9f531a1bf",
+          "baseRefName": "main",
+          "baseRefOid": "59887ef08382d96d5a1335c0a01d65d86cd6a89e",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "f7be5f1c401208eacfd4b95f57c326d54c6f8904"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r1": {
+        "id": "R_kgDOS_sNvg",
+        "nameWithOwner": "lakeraven/vista-rpc",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "9fb040ffd83818a07917751c7495b92eb865fe22",
+          "baseRefName": "shared-infra",
+          "baseRefOid": "1d9f3a615aef27af8f0214eadb736478ab682a03",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "shared-infra",
+            "target": {
+              "oid": "1d9f3a615aef27af8f0214eadb736478ab682a03"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "1194c21aba5de2ef30cd2c037cce92378383715d",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "1d9f3a615aef27af8f0214eadb736478ab682a03"
+                },
+                {
+                  "oid": "9fb040ffd83818a07917751c7495b92eb865fe22"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r2": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 10,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8807f32c1dcacf4569fb88354a1b6b0c4dcecfee",
+          "baseRefName": "codex/truth-playable-gate",
+          "baseRefOid": "c99a61c13e950542407b2bc8a78497e6d3b73fa8",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-playable-gate",
+            "target": {
+              "oid": "c99a61c13e950542407b2bc8a78497e6d3b73fa8"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "fce056d4621aaac6b0c87ed2db8a470056ac815b",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c99a61c13e950542407b2bc8a78497e6d3b73fa8"
+                },
+                {
+                  "oid": "8807f32c1dcacf4569fb88354a1b6b0c4dcecfee"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 11,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "6944df4ec266ec25059c89181fe3d07522d076b3",
+          "baseRefName": "codex/truth-review-runtime",
+          "baseRefOid": "8807f32c1dcacf4569fb88354a1b6b0c4dcecfee",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-review-runtime",
+            "target": {
+              "oid": "8807f32c1dcacf4569fb88354a1b6b0c4dcecfee"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "3985b54d76c80903af55e991f2e56b6b405faefc",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "8807f32c1dcacf4569fb88354a1b6b0c4dcecfee"
+                },
+                {
+                  "oid": "6944df4ec266ec25059c89181fe3d07522d076b3"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 12,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8557575efdb993cfd3867f055430968c2e412a14",
+          "baseRefName": "codex/truth-flight-precision",
+          "baseRefOid": "6944df4ec266ec25059c89181fe3d07522d076b3",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-flight-precision",
+            "target": {
+              "oid": "6944df4ec266ec25059c89181fe3d07522d076b3"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "5df22ab30c2ba916cea8821990a87a7038878e12",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "6944df4ec266ec25059c89181fe3d07522d076b3"
+                },
+                {
+                  "oid": "8557575efdb993cfd3867f055430968c2e412a14"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 13,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "46a8da780c6cf0fe96781b2641a0f0e7294ae0f3",
+          "baseRefName": "codex/truth-flight-precision",
+          "baseRefOid": "6944df4ec266ec25059c89181fe3d07522d076b3",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-flight-precision",
+            "target": {
+              "oid": "6944df4ec266ec25059c89181fe3d07522d076b3"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "fd564054b40527f655ea0fe93ca374261aaa3ad9",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "6944df4ec266ec25059c89181fe3d07522d076b3"
+                },
+                {
+                  "oid": "46a8da780c6cf0fe96781b2641a0f0e7294ae0f3"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 14,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "295031485bc5ced52850cf95bddf21394d9493ff",
+          "baseRefName": "codex/truth-flight-precision",
+          "baseRefOid": "6944df4ec266ec25059c89181fe3d07522d076b3",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-flight-precision",
+            "target": {
+              "oid": "6944df4ec266ec25059c89181fe3d07522d076b3"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "bd62036034bab64c1b06fc2445b76a506665ae59",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "6944df4ec266ec25059c89181fe3d07522d076b3"
+                },
+                {
+                  "oid": "295031485bc5ced52850cf95bddf21394d9493ff"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 15,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "7f0f2b3fe65f91c2dc1305bcf3a02a3c7ef18cc1",
+          "baseRefName": "codex/truth-motion-trails-core",
+          "baseRefOid": "295031485bc5ced52850cf95bddf21394d9493ff",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-motion-trails-core",
+            "target": {
+              "oid": "295031485bc5ced52850cf95bddf21394d9493ff"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "9c1636904bc5d57dba2ad0e965cff9a1969b5efa",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "295031485bc5ced52850cf95bddf21394d9493ff"
+                },
+                {
+                  "oid": "7f0f2b3fe65f91c2dc1305bcf3a02a3c7ef18cc1"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 16,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "3064336a482bd7e93875808f6ad1200164347c68",
+          "baseRefName": "codex/truth-motion-trails",
+          "baseRefOid": "7f0f2b3fe65f91c2dc1305bcf3a02a3c7ef18cc1",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-motion-trails",
+            "target": {
+              "oid": "7f0f2b3fe65f91c2dc1305bcf3a02a3c7ef18cc1"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "6d45e231e931b87788f089bccec4a12c9242bdb5",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "7f0f2b3fe65f91c2dc1305bcf3a02a3c7ef18cc1"
+                },
+                {
+                  "oid": "3064336a482bd7e93875808f6ad1200164347c68"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 17,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "74fe6df8e73e06838a9ada04af3c983cec73079c",
+          "baseRefName": "codex/truth-focus-controls",
+          "baseRefOid": "3064336a482bd7e93875808f6ad1200164347c68",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-focus-controls",
+            "target": {
+              "oid": "3064336a482bd7e93875808f6ad1200164347c68"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "5aa1a10c795764c5c10640766c1e9f25326324e1",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "3064336a482bd7e93875808f6ad1200164347c68"
+                },
+                {
+                  "oid": "74fe6df8e73e06838a9ada04af3c983cec73079c"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 18,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "1ef53d69fdfcfd8431dd3711504052ad4e2eb618",
+          "baseRefName": "codex/truth-focus-controls",
+          "baseRefOid": "3064336a482bd7e93875808f6ad1200164347c68",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-focus-controls",
+            "target": {
+              "oid": "3064336a482bd7e93875808f6ad1200164347c68"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "9dd45fac1a977d16e8cdc7f84b6c0391d3502b37",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "3064336a482bd7e93875808f6ad1200164347c68"
+                },
+                {
+                  "oid": "1ef53d69fdfcfd8431dd3711504052ad4e2eb618"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 19,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "2398808f545850938f79e5ca6cebc13a6f5e0158",
+          "baseRefName": "codex/truth-focus-input",
+          "baseRefOid": "74fe6df8e73e06838a9ada04af3c983cec73079c",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-focus-input",
+            "target": {
+              "oid": "74fe6df8e73e06838a9ada04af3c983cec73079c"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "2352769db01f18112e4e3db9964d78ee3066db73",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "74fe6df8e73e06838a9ada04af3c983cec73079c"
+                },
+                {
+                  "oid": "2398808f545850938f79e5ca6cebc13a6f5e0158"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 20,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8bcfc12d9ca2851891a4060f52f287f9b9f455f8",
+          "baseRefName": "codex/truth-playable-gate",
+          "baseRefOid": "c99a61c13e950542407b2bc8a78497e6d3b73fa8",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-playable-gate",
+            "target": {
+              "oid": "c99a61c13e950542407b2bc8a78497e6d3b73fa8"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "85ad5741f019024f1ca1eca0453cde116d8ed30e",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c99a61c13e950542407b2bc8a78497e6d3b73fa8"
+                },
+                {
+                  "oid": "8bcfc12d9ca2851891a4060f52f287f9b9f455f8"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 21,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "6059730cc9969c2215382e57218813a9519925d7",
+          "baseRefName": "codex/truth-focus-cadence",
+          "baseRefOid": "b402939931575e377ae4409d9cd4061dff11df06",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "codex/truth-focus-cadence",
+            "target": {
+              "oid": "2398808f545850938f79e5ca6cebc13a6f5e0158"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r14": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 22,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c79be1e957695505b48ea7f1905821927e7fb270",
+          "baseRefName": "codex/truth-focus-cadence",
+          "baseRefOid": "b402939931575e377ae4409d9cd4061dff11df06",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "codex/truth-focus-cadence",
+            "target": {
+              "oid": "2398808f545850938f79e5ca6cebc13a6f5e0158"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r15": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 23,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "82d398d1b4ebe8384e577651e58445f976ce5855",
+          "baseRefName": "codex/truth-focus-cadence",
+          "baseRefOid": "b402939931575e377ae4409d9cd4061dff11df06",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "codex/truth-focus-cadence",
+            "target": {
+              "oid": "2398808f545850938f79e5ca6cebc13a6f5e0158"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r16": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 24,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "01f0909b0c1cd5b86c274add98dfbf1b1146c2a4",
+          "baseRefName": "codex/truth-progression-plan",
+          "baseRefOid": "96b19f086707388e43f272e5ec87a3a7378d4c4c",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "codex/truth-progression-plan",
+            "target": {
+              "oid": "8557575efdb993cfd3867f055430968c2e412a14"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r17": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 25,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "4805fae52bd6764e4cf01555bc1d7417dd373349",
+          "baseRefName": "codex/truth-focus-cadence-native",
+          "baseRefOid": "c79be1e957695505b48ea7f1905821927e7fb270",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-focus-cadence-native",
+            "target": {
+              "oid": "c79be1e957695505b48ea7f1905821927e7fb270"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "3c718438d210c3387822cdf722d1b4fc8e6165e4",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c79be1e957695505b48ea7f1905821927e7fb270"
+                },
+                {
+                  "oid": "4805fae52bd6764e4cf01555bc1d7417dd373349"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 27,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a50e51243672a6d8842f8f2fc233beb6db645a2f",
+          "baseRefName": "codex/truth-focus-cadence",
+          "baseRefOid": "2398808f545850938f79e5ca6cebc13a6f5e0158",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-focus-cadence",
+            "target": {
+              "oid": "2398808f545850938f79e5ca6cebc13a6f5e0158"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "c54fbc5095ed327ace745c75bcec50d327fe106f",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "2398808f545850938f79e5ca6cebc13a6f5e0158"
+                },
+                {
+                  "oid": "a50e51243672a6d8842f8f2fc233beb6db645a2f"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r19": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 28,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "9c5c889d8923c76bf9a9530a8bd18cd72f37a93f",
+          "baseRefName": "codex/truth-kepler-baseline",
+          "baseRefOid": "a50e51243672a6d8842f8f2fc233beb6db645a2f",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/truth-kepler-baseline",
+            "target": {
+              "oid": "a50e51243672a6d8842f8f2fc233beb6db645a2f"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "361eb76ad02835a91543017961d449e587cb5ed7",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "a50e51243672a6d8842f8f2fc233beb6db645a2f"
+                },
+                {
+                  "oid": "9c5c889d8923c76bf9a9530a8bd18cd72f37a93f"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

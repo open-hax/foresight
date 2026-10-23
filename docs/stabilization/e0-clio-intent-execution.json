@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-23T02:32:26.541604+00:00",
+  "root_source": "d8ece877c9a9e07a87fec12f650bced173f6b164",
+  "published_child_head": "fa117fba0b761f8aa655e26c2ae8675b1af178cd",
+  "child_source": "bb82398568f7abf7f2c1103e0aa34806b7b87153",
+  "canonical_clio_candidate": "5fad794de1a9e23d6e5aaad42eaa933be1c070be",
+  "capture_snapshot": ".ημ/stabilization/snapshots/2b36c625e92cfe3791d221aee3704afd581f253489aa550e4c4b45c5386025dd.json.gz",
+  "capture_count": 153,
+  "capture_raw_sha256": "2ec68fb715bdb07303cbb078d9d9f79492bb8bbee6ecb98190f53217dfb29897",
+  "capture_packed_sha256": "2b36c625e92cfe3791d221aee3704afd581f253489aa550e4c4b45c5386025dd",
+  "census_summary": {
+    "frozen_identities": 442,
+    "observed_states": {
+      "OPEN": 437,
+      "MERGED": 4,
+      "CLOSED": 1
+    },
+    "unique_live_base_refs": 144,
+    "reported_base_differs_from_live_tip": 186,
+    "open_reported_base_differs_from_live_tip": 181,
+    "missing_live_base_ref": 0,
+    "source_tuple_changed_during_acquisition": 0,
+    "native_proposed_merge_changed_during_acquisition": 0,
+    "open_proposed_merge_pairings": {
+      "live-base-and-head-match-proposed-parents": 295,
+      "proposed-parents-do-not-match-live-base-and-head": 5,
+      "unavailable-native-proposed-merge": 137
+    },
+    "changed_head_or_reported_base_from_prior_refresh": 8,
+    "open_head_or_reported_base_changed_from_freeze": 6
+  },
+  "census_comparison": {
+    "completed_at": "2026-10-22T04:14:36.008062+00:00",
+    "changed_tuples": [
+      "riatzukiza/axxium#3",
+      "riatzukiza/axxium#4"
+    ],
+    "fields": [
+      "state",
+      "head_sha",
+      "reported_pr_base_sha",
+      "independent_live_base_tip_sha",
+      "native_proposed_merge_sha"
+    ]
+  },
+  "published_bytes": {
+    "published_head": "fa117fba0b761f8aa655e26c2ae8675b1af178cd",
+    "source": "bb82398568f7abf7f2c1103e0aa34806b7b87153",
+    "verified_files_since_a762": [
+      {
+        "path": ".github/scripts/opencode_review_intent_test.cljs",
+        "bytes": 30425,
+        "sha256": "37c4bac43b70b925f3f6067178d4132f58c1e07e6a4403ae705759bb5d0206c0",
+        "git_blob": "c9e370049323492c7b5f7f3da6fc3d7afaf3f646"
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-intent-boundary/20261023-0225/focused.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-intent-boundary/20261023-0225/focused.stdout",
+        "bytes": 502,
+        "sha256": "442b4820525228646a7caf2bc9e2b6debe6290c4e68d56c03ce1fa68cea6ef8f",
+        "git_blob": "6ac3914dc55ed3bdbf9705f689d111f4a00fe21a"
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-intent-boundary/20261023-0225/invocation.json",
+        "bytes": 467,
+        "sha256": "c36164b0598b0cb36789e5dbf0f9060027a3d9d51c5b4f4300b5b681e41ba34f",
+        "git_blob": "82ed985ccc94fe232b95333f1fed7db256cda072"
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-intent-boundary/20261023-0225/result.json",
+        "bytes": 838,
+        "sha256": "f78b4ee9f5d7fe06f104b0bc9fc61e5b26106430c0ef0f700748aa9e39ecf45f",
+        "git_blob": "cf9ebeeedb60fe06fb6b3ba365e74018a7b4a461"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_intent.cljs",
+        "bytes": 6299,
+        "sha256": "1a2a06d83aa6a7e94c1a7bf4f8b27740adfa884298b1aa692a9cb5ccb56fd920",
+        "git_blob": "8a8074f697e81d4c37360e08bce4d6a41009e296"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs",
+        "bytes": 5578,
+        "sha256": "8d9b978105d3ddfd525f27898fe125fb5d707302de42bcccbef39ddf0bee4a77",
+        "git_blob": "067089aabce786fae56308efbd326eecbed8d51e"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_intent_worker.cljs",
+        "bytes": 7599,
+        "sha256": "ad49c694f97693a762d188cd8fa7f82229395640ae9e2d607a01a7fdfe5ee0dc",
+        "git_blob": "09215c2413f235ac1021ec8648011b91f974207f"
+      }
+    ],
+    "all_verified": true,
+    "sandbox_prior_source": "a76225c0bea040473949cb394d8d530fd23f1afc",
+    "sandbox_run": 39721175314,
+    "sandbox_conclusion": "success",
+    "sandbox_merge": "30ccce5f6a94601f6f527d9609b45443152d047b",
+    "sandbox_tree": "866497bd19c676df15698e5d7bcb49ad798bf3b1",
+    "separate_original_G_or_caller_source": false,
+    "artifact_metadata_only": true,
+    "root_source": "d8ece877c9a9e07a87fec12f650bced173f6b164",
+    "qualification": false
+  },
+  "current_focused_gate": {
+    "tests": 23,
+    "assertions": 110,
+    "failures": 0,
+    "errors": 0,
+    "retained_in_child": "fa117fba0b761f8aa655e26c2ae8675b1af178cd"
+  },
+  "bootstrap_regression": {
+    "introduced_by": "ed0fde2f5a1902f2258e16b0b9228b0913e1ea59",
+    "red": "b0ac577cfd3c899d4baac553c870d47918933850",
+    "local_green": "14cb2742bfd1a15d5ab450b8f3ee6d3a64147790",
+    "published": false,
+    "full_successor_gates": "pending",
+    "native_runs": [
+      39721175244,
+      39721175305,
+      39721175246
+    ],
+    "cause": "Package-wide NBB dependency configuration makes unrelated workflow tests invoke absent bb before tests."
+  },
+  "native_review": {
+    "root": "blocked; 2 unresolved, zero exact-head approvals",
+    "eta": "blocked; 1 unresolved P1, zero exact-head approvals; changing evidence during collection",
+    "clio": "CodeRabbit exact-head approval at 5fad; convergence still blocked; 63 threads zero unresolved",
+    "codex": "native account quota; reset UNKNOWN; not retried"
+  },
+  "root_receipt_gate": {
+    "exit_code": 2,
+    "accepted_base": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "new_invalid": 2,
+    "whole_history_invalid": 13,
+    "repair_or_admission": false
+  },
+  "local_root_verification": {
+    "project": "25 sources / 23 submodules / 39 invariants",
+    "workspace": "24 tests /120 assertions",
+    "project_tests": "12 tests /166 assertions",
+    "lint": "0 errors /0 warnings"
+  },
+  "preserved": {
+    "root_gitlinks": 23,
+    "primary_eta": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+    "primary_clio": "788cdd3434615a7932b924e68520dbf7f88408c2",
+    "historical_bytes": true,
+    "states": "E0 breakdown; E1 incoming; publisher in_progress",
+    "CMS_Cephalon": "paused"
+  },
+  "limits": [
+    "Complete authenticated publication and reconstruction/verifier composition remain unfinished.",
+    "Original G and exact executed caller are not established by candidate merge/tree equality.",
+    "Sandbox success at a762 does not qualify successor source. Carrier retains 23 warning diagnostics; artifact metadata is not restore proof.",
+    "Bootstrap GREEN is local and still awaits independent/full gates and publication.",
+    "Unarchived earlier temporary captures were lost on host resume; fresh 23/110 capture is retained in fa117 and original 809 captures remain committed at a762.",
+    "No protected adoption, credential/grant/protection/caller-pin changes, merges, deployments or milestone qualification."
+  ],
+  "qualification": false
+}

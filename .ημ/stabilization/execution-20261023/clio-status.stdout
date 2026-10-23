@@ -1,0 +1,9 @@
+riatzukiza/clio#5  head 5fad794
+  actionability history: UNAVAILABLE; threads retain finding obligations
+  coderabbit: completed   checks: {}
+  threads: 63 total, 0 unresolved; by severity {}; informational 0
+  exact-head approvals: #{"coderabbit"}  observed commit binding: {"coderabbit" #{"5fad794de1a9e23d6e5aaad42eaa933be1c070be"}}
+  completed code rounds: 0 / soft minimum 5  participants: #{"coderabbit" "mimo"}
+  codex quota-unavailable: native source 6332174912 request 6179300216 scope account observed 2026-10-22T03:45:57Z retry-at-ms UNKNOWN
+  gate: BLOCKED
+    - Review loop requires 5 completed rounds or unanimous current-head approval, with every finding settled

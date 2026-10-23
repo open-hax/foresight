@@ -1,0 +1,3079 @@
+{
+  "schema_version": 1,
+  "evidence": {
+    "path": ".ημ/stabilization/snapshots/6a4135f6046e7864e18079d0c45dcc679b17a2442ddcff80081ddd0d8d49ed5a.json.gz",
+    "sha256": "6a4135f6046e7864e18079d0c45dcc679b17a2442ddcff80081ddd0d8d49ed5a",
+    "uncompressed_sha256": "42058292ac9f4c950a06620aa913d776cf4a63e3020393338733833a1dbda630",
+    "compressed_bytes": 57396906,
+    "uncompressed_bytes": 310123243
+  },
+  "unmapped_prs": [
+    "Gar-Gar23/TheBox#1",
+    "lakeraven/vista-rpc#2",
+    "octave-commons/Truth#42",
+    "octave-commons/Truth#43",
+    "octave-commons/Truth#59",
+    "octave-commons/calliope#20",
+    "octave-commons/fork_tales#10",
+    "octave-commons/fork_tales#11",
+    "octave-commons/fork_tales#13",
+    "octave-commons/fork_tales#15",
+    "octave-commons/gates-of-aker#152",
+    "octave-commons/muse#30",
+    "open-hax/axxium#13",
+    "open-hax/axxium#26",
+    "open-hax/axxium#30",
+    "open-hax/event-ledger#3",
+    "open-hax/foresight#105",
+    "open-hax/foresight#106",
+    "open-hax/foresight#115",
+    "open-hax/foresight#116",
+    "open-hax/foresight#117",
+    "open-hax/foresight#119",
+    "open-hax/foresight#123",
+    "open-hax/knoxx#305",
+    "open-hax/knoxx#333",
+    "open-hax/knoxx#335",
+    "open-hax/knoxx#337",
+    "open-hax/knoxx#339",
+    "open-hax/knoxx#341",
+    "open-hax/knoxx#343",
+    "open-hax/knoxx#345",
+    "open-hax/knoxx#347",
+    "open-hax/knoxx#349",
+    "open-hax/knoxx#351",
+    "open-hax/knoxx#355",
+    "open-hax/knoxx#357",
+    "open-hax/knoxx#359",
+    "open-hax/knoxx#361",
+    "open-hax/knoxx#363",
+    "open-hax/knoxx#365",
+    "open-hax/knoxx#367",
+    "open-hax/knoxx#369",
+    "open-hax/knoxx#371",
+    "open-hax/knoxx#375",
+    "open-hax/knoxx#376",
+    "open-hax/knoxx#381",
+    "open-hax/knoxx#388",
+    "open-hax/knoxx#389",
+    "open-hax/openhax#2",
+    "open-hax/openhax#3",
+    "open-hax/openhax#4",
+    "open-hax/openhax#5",
+    "open-hax/openplanner#100",
+    "open-hax/openplanner#101",
+    "open-hax/openplanner#105",
+    "open-hax/openplanner#107",
+    "open-hax/openplanner#110",
+    "open-hax/openplanner#112",
+    "open-hax/openplanner#115",
+    "open-hax/openplanner#117",
+    "open-hax/openplanner#119",
+    "open-hax/openplanner#121",
+    "open-hax/openplanner#122",
+    "open-hax/openplanner#123",
+    "open-hax/openplanner#125",
+    "open-hax/openplanner#127",
+    "open-hax/openplanner#128",
+    "open-hax/openplanner#53",
+    "open-hax/openplanner#92",
+    "open-hax/openplanner#98",
+    "open-hax/privaxxy#7",
+    "open-hax/proxx#323",
+    "open-hax/proxx#330",
+    "open-hax/proxx#343",
+    "open-hax/proxx#365",
+    "open-hax/proxx#444",
+    "open-hax/proxx#445",
+    "open-hax/proxx#452",
+    "open-hax/proxx#453",
+    "open-hax/proxx#455",
+    "open-hax/services#84",
+    "open-hax/services#92",
+    "open-hax/services#99",
+    "open-hax/sol#2",
+    "open-hax/website#3",
+    "openai/parameter-golf#227",
+    "openai/parameter-golf#240",
+    "openai/parameter-golf#247",
+    "openai/parameter-golf#248",
+    "openai/parameter-golf#258",
+    "openai/parameter-golf#276",
+    "riatzukiza/.agents#10",
+    "riatzukiza/.agents#34",
+    "riatzukiza/TANF-app#10",
+    "riatzukiza/TANF-app#13",
+    "riatzukiza/TANF-app#14",
+    "riatzukiza/TANF-app#15",
+    "riatzukiza/TANF-app#16",
+    "riatzukiza/TANF-app#17",
+    "riatzukiza/TANF-app#18",
+    "riatzukiza/TANF-app#19",
+    "riatzukiza/TANF-app#20",
+    "riatzukiza/TANF-app#23",
+    "riatzukiza/TANF-app#26",
+    "riatzukiza/TANF-app#29",
+    "riatzukiza/TANF-app#4",
+    "riatzukiza/TANF-app#40",
+    "riatzukiza/TANF-app#5",
+    "riatzukiza/TANF-app#58",
+    "riatzukiza/TANF-app#59",
+    "riatzukiza/TANF-app#6",
+    "riatzukiza/TANF-app#61",
+    "riatzukiza/TANF-app#62",
+    "riatzukiza/TANF-app#63",
+    "riatzukiza/TANF-app#65",
+    "riatzukiza/TANF-app#66",
+    "riatzukiza/TANF-app#69",
+    "riatzukiza/TANF-app#7",
+    "riatzukiza/TANF-app#70",
+    "riatzukiza/TANF-app#71",
+    "riatzukiza/TANF-app#72",
+    "riatzukiza/TANF-app#73",
+    "riatzukiza/TANF-app#74",
+    "riatzukiza/TANF-app#76",
+    "riatzukiza/TANF-app#77",
+    "riatzukiza/TANF-app#79",
+    "riatzukiza/TANF-app#8",
+    "riatzukiza/TANF-app#80",
+    "riatzukiza/TANF-app#81",
+    "riatzukiza/TANF-app#82",
+    "riatzukiza/TANF-app#83",
+    "riatzukiza/TANF-app#84",
+    "riatzukiza/TANF-app#85",
+    "riatzukiza/TANF-app#86",
+    "riatzukiza/TANF-app#87",
+    "riatzukiza/TANF-app#88",
+    "riatzukiza/TANF-app#89",
+    "riatzukiza/Truth#2",
+    "riatzukiza/axxium#10",
+    "riatzukiza/babylon-experiment#10",
+    "riatzukiza/babylon-experiment#11",
+    "riatzukiza/babylon-experiment#3",
+    "riatzukiza/babylon-experiment#4",
+    "riatzukiza/babylon-experiment#5",
+    "riatzukiza/babylon-experiment#6",
+    "riatzukiza/babylon-experiment#7",
+    "riatzukiza/babylon-experiment#8",
+    "riatzukiza/babylon-experiment#9",
+    "riatzukiza/beez#1",
+    "riatzukiza/bitch-tracker#1",
+    "riatzukiza/bitch-tracker#2",
+    "riatzukiza/bitch-tracker#3",
+    "riatzukiza/calliope#1",
+    "riatzukiza/calliope#8",
+    "riatzukiza/chat-ui#1",
+    "riatzukiza/chat-ui#3",
+    "riatzukiza/clio#1",
+    "riatzukiza/clio#3",
+    "riatzukiza/clio#5",
+    "riatzukiza/corvid#2",
+    "riatzukiza/devel#146",
+    "riatzukiza/devel#148",
+    "riatzukiza/devel#152",
+    "riatzukiza/devel#154",
+    "riatzukiza/discord-chatter#10",
+    "riatzukiza/discord-chatter#11",
+    "riatzukiza/discord-chatter#12",
+    "riatzukiza/discord-chatter#13",
+    "riatzukiza/discord-chatter#14",
+    "riatzukiza/discord-chatter#8",
+    "riatzukiza/discord-chatter#9",
+    "riatzukiza/duck#7",
+    "riatzukiza/duck#8",
+    "riatzukiza/eros-eris-field#2",
+    "riatzukiza/express_login#1",
+    "riatzukiza/express_login#10",
+    "riatzukiza/express_login#12",
+    "riatzukiza/express_login#13",
+    "riatzukiza/express_login#15",
+    "riatzukiza/express_login#16",
+    "riatzukiza/express_login#17",
+    "riatzukiza/express_login#18",
+    "riatzukiza/express_login#19",
+    "riatzukiza/express_login#20",
+    "riatzukiza/express_login#21",
+    "riatzukiza/express_login#3",
+    "riatzukiza/express_login#5",
+    "riatzukiza/express_login#6",
+    "riatzukiza/express_login#7",
+    "riatzukiza/express_login#8",
+    "riatzukiza/express_login#9",
+    "riatzukiza/foresight#16",
+    "riatzukiza/foresight#5",
+    "riatzukiza/foresight#6",
+    "riatzukiza/foresight#7",
+    "riatzukiza/foresight#8",
+    "riatzukiza/i3-config#1",
+    "riatzukiza/kanban-orchestrator#1",
+    "riatzukiza/katamorph#1",
+    "riatzukiza/katamorph#2",
+    "riatzukiza/katamorph#3",
+    "riatzukiza/knoxx#3",
+    "riatzukiza/knoxx#4",
+    "riatzukiza/knoxx#5",
+    "riatzukiza/knoxx#7",
+    "riatzukiza/meteor-chat#2",
+    "riatzukiza/meteor-chat#3",
+    "riatzukiza/meteor-notes#1",
+    "riatzukiza/notes#10",
+    "riatzukiza/notes#11",
+    "riatzukiza/notes#12",
+    "riatzukiza/notes#4",
+    "riatzukiza/notes#7",
+    "riatzukiza/notes#8",
+    "riatzukiza/notes#9",
+    "riatzukiza/openplanner#2",
+    "riatzukiza/proxx#1",
+    "riatzukiza/rheos#19",
+    "riatzukiza/rheos#3",
+    "riatzukiza/rheos#5",
+    "riatzukiza/rheos#6",
+    "riatzukiza/riatzukiza.github.io#24",
+    "riatzukiza/riatzukiza.github.io#29",
+    "riatzukiza/riatzukiza.github.io#30",
+    "riatzukiza/riatzukiza.github.io#31",
+    "riatzukiza/roarar-bot-ui#10",
+    "riatzukiza/roarar-bot-ui#11",
+    "riatzukiza/roarar-bot-ui#12",
+    "riatzukiza/roarar-bot-ui#4",
+    "riatzukiza/roarar-bot-ui#7",
+    "riatzukiza/roarar-bot-ui#8",
+    "riatzukiza/roarar-bot-ui#9",
+    "riatzukiza/session-mycology#1",
+    "riatzukiza/shuvgeist#1",
+    "riatzukiza/sol#6",
+    "riatzukiza/spacemacs.d#6",
+    "riatzukiza/symbiant#10",
+    "riatzukiza/symbiant#11",
+    "riatzukiza/symbiant#12",
+    "riatzukiza/symbiant#13",
+    "riatzukiza/symbiant#14",
+    "riatzukiza/symbiant#15",
+    "riatzukiza/symbiant#16",
+    "riatzukiza/symbiant#17",
+    "riatzukiza/symbiant#7",
+    "riatzukiza/symbiant#8",
+    "riatzukiza/trader.prototype.react#10",
+    "riatzukiza/trader.prototype.react#4",
+    "riatzukiza/trader.prototype.react#8",
+    "riatzukiza/uxx#1"
+  ],
+  "unassigned_merge_owners": [
+    "Gar-Gar23/TheBox#1",
+    "lakeraven/vista-rpc#2",
+    "octave-commons/Truth#10",
+    "octave-commons/Truth#11",
+    "octave-commons/Truth#12",
+    "octave-commons/Truth#13",
+    "octave-commons/Truth#14",
+    "octave-commons/Truth#15",
+    "octave-commons/Truth#16",
+    "octave-commons/Truth#17",
+    "octave-commons/Truth#18",
+    "octave-commons/Truth#19",
+    "octave-commons/Truth#20",
+    "octave-commons/Truth#21",
+    "octave-commons/Truth#22",
+    "octave-commons/Truth#23",
+    "octave-commons/Truth#24",
+    "octave-commons/Truth#25",
+    "octave-commons/Truth#27",
+    "octave-commons/Truth#28",
+    "octave-commons/Truth#29",
+    "octave-commons/Truth#30",
+    "octave-commons/Truth#32",
+    "octave-commons/Truth#33",
+    "octave-commons/Truth#34",
+    "octave-commons/Truth#35",
+    "octave-commons/Truth#36",
+    "octave-commons/Truth#37",
+    "octave-commons/Truth#38",
+    "octave-commons/Truth#39",
+    "octave-commons/Truth#40",
+    "octave-commons/Truth#41",
+    "octave-commons/Truth#42",
+    "octave-commons/Truth#43",
+    "octave-commons/Truth#44",
+    "octave-commons/Truth#45",
+    "octave-commons/Truth#46",
+    "octave-commons/Truth#47",
+    "octave-commons/Truth#48",
+    "octave-commons/Truth#49",
+    "octave-commons/Truth#50",
+    "octave-commons/Truth#51",
+    "octave-commons/Truth#52",
+    "octave-commons/Truth#53",
+    "octave-commons/Truth#54",
+    "octave-commons/Truth#55",
+    "octave-commons/Truth#56",
+    "octave-commons/Truth#57",
+    "octave-commons/Truth#58",
+    "octave-commons/Truth#59",
+    "octave-commons/Truth#60",
+    "octave-commons/Truth#61",
+    "octave-commons/Truth#8",
+    "octave-commons/Truth#9",
+    "octave-commons/calliope#20",
+    "octave-commons/epiphany#18",
+    "octave-commons/fork_tales#10",
+    "octave-commons/fork_tales#11",
+    "octave-commons/fork_tales#13",
+    "octave-commons/fork_tales#15",
+    "octave-commons/gates-of-aker#152",
+    "octave-commons/muse#14",
+    "octave-commons/muse#21",
+    "octave-commons/muse#23",
+    "octave-commons/muse#30",
+    "open-hax/axxium#13",
+    "open-hax/axxium#26",
+    "open-hax/axxium#30",
+    "open-hax/eta-mu#321",
+    "open-hax/eta-mu#325",
+    "open-hax/eta-mu#328",
+    "open-hax/eta-mu#333",
+    "open-hax/eta-mu#335",
+    "open-hax/eta-mu#336",
+    "open-hax/eta-mu#344",
+    "open-hax/eta-mu#346",
+    "open-hax/eta-mu#347",
+    "open-hax/eta-mu#348",
+    "open-hax/eta-mu#351",
+    "open-hax/eta-mu#352",
+    "open-hax/eta-mu#353",
+    "open-hax/event-ledger#3",
+    "open-hax/foresight#105",
+    "open-hax/foresight#106",
+    "open-hax/foresight#112",
+    "open-hax/foresight#115",
+    "open-hax/foresight#116",
+    "open-hax/foresight#117",
+    "open-hax/foresight#118",
+    "open-hax/foresight#119",
+    "open-hax/foresight#123",
+    "open-hax/foresight#128",
+    "open-hax/foresight#129",
+    "open-hax/foresight#130",
+    "open-hax/foresight#131",
+    "open-hax/foresight#133",
+    "open-hax/foresight#137",
+    "open-hax/foresight#139",
+    "open-hax/foresight#140",
+    "open-hax/foresight#78",
+    "open-hax/foresight#91",
+    "open-hax/knoxx#286",
+    "open-hax/knoxx#305",
+    "open-hax/knoxx#333",
+    "open-hax/knoxx#335",
+    "open-hax/knoxx#337",
+    "open-hax/knoxx#339",
+    "open-hax/knoxx#341",
+    "open-hax/knoxx#343",
+    "open-hax/knoxx#345",
+    "open-hax/knoxx#347",
+    "open-hax/knoxx#349",
+    "open-hax/knoxx#351",
+    "open-hax/knoxx#353",
+    "open-hax/knoxx#355",
+    "open-hax/knoxx#357",
+    "open-hax/knoxx#359",
+    "open-hax/knoxx#361",
+    "open-hax/knoxx#363",
+    "open-hax/knoxx#365",
+    "open-hax/knoxx#367",
+    "open-hax/knoxx#369",
+    "open-hax/knoxx#371",
+    "open-hax/knoxx#375",
+    "open-hax/knoxx#376",
+    "open-hax/knoxx#381",
+    "open-hax/knoxx#387",
+    "open-hax/knoxx#388",
+    "open-hax/knoxx#389",
+    "open-hax/knoxx#390",
+    "open-hax/openhax#2",
+    "open-hax/openhax#3",
+    "open-hax/openhax#4",
+    "open-hax/openhax#5",
+    "open-hax/openplanner#100",
+    "open-hax/openplanner#101",
+    "open-hax/openplanner#102",
+    "open-hax/openplanner#103",
+    "open-hax/openplanner#104",
+    "open-hax/openplanner#105",
+    "open-hax/openplanner#106",
+    "open-hax/openplanner#107",
+    "open-hax/openplanner#108",
+    "open-hax/openplanner#109",
+    "open-hax/openplanner#110",
+    "open-hax/openplanner#111",
+    "open-hax/openplanner#112",
+    "open-hax/openplanner#113",
+    "open-hax/openplanner#114",
+    "open-hax/openplanner#115",
+    "open-hax/openplanner#116",
+    "open-hax/openplanner#117",
+    "open-hax/openplanner#118",
+    "open-hax/openplanner#119",
+    "open-hax/openplanner#120",
+    "open-hax/openplanner#121",
+    "open-hax/openplanner#122",
+    "open-hax/openplanner#123",
+    "open-hax/openplanner#124",
+    "open-hax/openplanner#125",
+    "open-hax/openplanner#126",
+    "open-hax/openplanner#127",
+    "open-hax/openplanner#128",
+    "open-hax/openplanner#129",
+    "open-hax/openplanner#133",
+    "open-hax/openplanner#53",
+    "open-hax/openplanner#92",
+    "open-hax/openplanner#94",
+    "open-hax/openplanner#95",
+    "open-hax/openplanner#96",
+    "open-hax/openplanner#97",
+    "open-hax/openplanner#98",
+    "open-hax/openplanner#99",
+    "open-hax/privaxxy#7",
+    "open-hax/proxx#323",
+    "open-hax/proxx#330",
+    "open-hax/proxx#343",
+    "open-hax/proxx#365",
+    "open-hax/proxx#433",
+    "open-hax/proxx#435",
+    "open-hax/proxx#437",
+    "open-hax/proxx#444",
+    "open-hax/proxx#445",
+    "open-hax/proxx#452",
+    "open-hax/proxx#453",
+    "open-hax/proxx#455",
+    "open-hax/services#84",
+    "open-hax/services#92",
+    "open-hax/services#99",
+    "open-hax/sol#2",
+    "open-hax/website#3",
+    "openai/parameter-golf#227",
+    "openai/parameter-golf#240",
+    "openai/parameter-golf#247",
+    "openai/parameter-golf#248",
+    "openai/parameter-golf#258",
+    "openai/parameter-golf#276",
+    "riatzukiza/.agents#10",
+    "riatzukiza/.agents#21",
+    "riatzukiza/.agents#34",
+    "riatzukiza/TANF-app#10",
+    "riatzukiza/TANF-app#13",
+    "riatzukiza/TANF-app#14",
+    "riatzukiza/TANF-app#15",
+    "riatzukiza/TANF-app#16",
+    "riatzukiza/TANF-app#17",
+    "riatzukiza/TANF-app#18",
+    "riatzukiza/TANF-app#19",
+    "riatzukiza/TANF-app#20",
+    "riatzukiza/TANF-app#23",
+    "riatzukiza/TANF-app#26",
+    "riatzukiza/TANF-app#29",
+    "riatzukiza/TANF-app#4",
+    "riatzukiza/TANF-app#40",
+    "riatzukiza/TANF-app#5",
+    "riatzukiza/TANF-app#58",
+    "riatzukiza/TANF-app#59",
+    "riatzukiza/TANF-app#6",
+    "riatzukiza/TANF-app#61",
+    "riatzukiza/TANF-app#62",
+    "riatzukiza/TANF-app#63",
+    "riatzukiza/TANF-app#65",
+    "riatzukiza/TANF-app#66",
+    "riatzukiza/TANF-app#69",
+    "riatzukiza/TANF-app#7",
+    "riatzukiza/TANF-app#70",
+    "riatzukiza/TANF-app#71",
+    "riatzukiza/TANF-app#72",
+    "riatzukiza/TANF-app#73",
+    "riatzukiza/TANF-app#74",
+    "riatzukiza/TANF-app#76",
+    "riatzukiza/TANF-app#77",
+    "riatzukiza/TANF-app#79",
+    "riatzukiza/TANF-app#8",
+    "riatzukiza/TANF-app#80",
+    "riatzukiza/TANF-app#81",
+    "riatzukiza/TANF-app#82",
+    "riatzukiza/TANF-app#83",
+    "riatzukiza/TANF-app#84",
+    "riatzukiza/TANF-app#85",
+    "riatzukiza/TANF-app#86",
+    "riatzukiza/TANF-app#87",
+    "riatzukiza/TANF-app#88",
+    "riatzukiza/TANF-app#89",
+    "riatzukiza/Truth#1",
+    "riatzukiza/Truth#2",
+    "riatzukiza/Truth#3",
+    "riatzukiza/Truth#4",
+    "riatzukiza/Truth#5",
+    "riatzukiza/Truth#6",
+    "riatzukiza/axxium#10",
+    "riatzukiza/axxium#2",
+    "riatzukiza/axxium#3",
+    "riatzukiza/axxium#4",
+    "riatzukiza/axxium#5",
+    "riatzukiza/babylon-experiment#10",
+    "riatzukiza/babylon-experiment#11",
+    "riatzukiza/babylon-experiment#3",
+    "riatzukiza/babylon-experiment#4",
+    "riatzukiza/babylon-experiment#5",
+    "riatzukiza/babylon-experiment#6",
+    "riatzukiza/babylon-experiment#7",
+    "riatzukiza/babylon-experiment#8",
+    "riatzukiza/babylon-experiment#9",
+    "riatzukiza/beez#1",
+    "riatzukiza/bitch-tracker#1",
+    "riatzukiza/bitch-tracker#2",
+    "riatzukiza/bitch-tracker#3",
+    "riatzukiza/calliope#1",
+    "riatzukiza/calliope#2",
+    "riatzukiza/calliope#3",
+    "riatzukiza/calliope#4",
+    "riatzukiza/calliope#5",
+    "riatzukiza/calliope#8",
+    "riatzukiza/chat-ui#1",
+    "riatzukiza/chat-ui#3",
+    "riatzukiza/clio#1",
+    "riatzukiza/clio#3",
+    "riatzukiza/clio#5",
+    "riatzukiza/corvid#2",
+    "riatzukiza/devel#146",
+    "riatzukiza/devel#148",
+    "riatzukiza/devel#152",
+    "riatzukiza/devel#154",
+    "riatzukiza/discord-chatter#10",
+    "riatzukiza/discord-chatter#11",
+    "riatzukiza/discord-chatter#12",
+    "riatzukiza/discord-chatter#13",
+    "riatzukiza/discord-chatter#14",
+    "riatzukiza/discord-chatter#8",
+    "riatzukiza/discord-chatter#9",
+    "riatzukiza/duck#8",
+    "riatzukiza/epiphany#1",
+    "riatzukiza/epiphany#2",
+    "riatzukiza/eros-eris-field#2",
+    "riatzukiza/eta-mu#1",
+    "riatzukiza/eta-mu#2",
+    "riatzukiza/eta-mu#22",
+    "riatzukiza/eta-mu#26",
+    "riatzukiza/eta-mu#3",
+    "riatzukiza/eta-mu#4",
+    "riatzukiza/eta-mu#5",
+    "riatzukiza/eta-mu#6",
+    "riatzukiza/eta-mu#7",
+    "riatzukiza/eta-mu#9",
+    "riatzukiza/express_login#1",
+    "riatzukiza/express_login#10",
+    "riatzukiza/express_login#12",
+    "riatzukiza/express_login#13",
+    "riatzukiza/express_login#15",
+    "riatzukiza/express_login#16",
+    "riatzukiza/express_login#17",
+    "riatzukiza/express_login#18",
+    "riatzukiza/express_login#19",
+    "riatzukiza/express_login#20",
+    "riatzukiza/express_login#21",
+    "riatzukiza/express_login#3",
+    "riatzukiza/express_login#5",
+    "riatzukiza/express_login#6",
+    "riatzukiza/express_login#7",
+    "riatzukiza/express_login#8",
+    "riatzukiza/express_login#9",
+    "riatzukiza/foresight#10",
+    "riatzukiza/foresight#11",
+    "riatzukiza/foresight#12",
+    "riatzukiza/foresight#13",
+    "riatzukiza/foresight#14",
+    "riatzukiza/foresight#15",
+    "riatzukiza/foresight#16",
+    "riatzukiza/foresight#17",
+    "riatzukiza/foresight#18",
+    "riatzukiza/foresight#19",
+    "riatzukiza/foresight#2",
+    "riatzukiza/foresight#20",
+    "riatzukiza/foresight#21",
+    "riatzukiza/foresight#23",
+    "riatzukiza/foresight#24",
+    "riatzukiza/foresight#25",
+    "riatzukiza/foresight#3",
+    "riatzukiza/foresight#34",
+    "riatzukiza/foresight#39",
+    "riatzukiza/foresight#4",
+    "riatzukiza/foresight#40",
+    "riatzukiza/foresight#41",
+    "riatzukiza/foresight#42",
+    "riatzukiza/foresight#43",
+    "riatzukiza/foresight#5",
+    "riatzukiza/foresight#6",
+    "riatzukiza/foresight#7",
+    "riatzukiza/foresight#8",
+    "riatzukiza/foresight#9",
+    "riatzukiza/i3-config#1",
+    "riatzukiza/kanban-orchestrator#1",
+    "riatzukiza/katamorph#1",
+    "riatzukiza/katamorph#2",
+    "riatzukiza/katamorph#3",
+    "riatzukiza/knoxx#1",
+    "riatzukiza/knoxx#10",
+    "riatzukiza/knoxx#11",
+    "riatzukiza/knoxx#12",
+    "riatzukiza/knoxx#13",
+    "riatzukiza/knoxx#14",
+    "riatzukiza/knoxx#15",
+    "riatzukiza/knoxx#16",
+    "riatzukiza/knoxx#17",
+    "riatzukiza/knoxx#18",
+    "riatzukiza/knoxx#19",
+    "riatzukiza/knoxx#2",
+    "riatzukiza/knoxx#20",
+    "riatzukiza/knoxx#3",
+    "riatzukiza/knoxx#4",
+    "riatzukiza/knoxx#5",
+    "riatzukiza/knoxx#6",
+    "riatzukiza/knoxx#7",
+    "riatzukiza/knoxx#8",
+    "riatzukiza/knoxx#9",
+    "riatzukiza/meteor-chat#2",
+    "riatzukiza/meteor-chat#3",
+    "riatzukiza/meteor-notes#1",
+    "riatzukiza/muse#1",
+    "riatzukiza/muse#15",
+    "riatzukiza/muse#16",
+    "riatzukiza/muse#2",
+    "riatzukiza/muse#3",
+    "riatzukiza/muse#4",
+    "riatzukiza/notes#10",
+    "riatzukiza/notes#11",
+    "riatzukiza/notes#12",
+    "riatzukiza/notes#4",
+    "riatzukiza/notes#7",
+    "riatzukiza/notes#8",
+    "riatzukiza/notes#9",
+    "riatzukiza/openplanner#1",
+    "riatzukiza/openplanner#2",
+    "riatzukiza/openplanner#3",
+    "riatzukiza/osmos#1",
+    "riatzukiza/proxx#1",
+    "riatzukiza/rheos#19",
+    "riatzukiza/rheos#2",
+    "riatzukiza/rheos#3",
+    "riatzukiza/rheos#5",
+    "riatzukiza/rheos#6",
+    "riatzukiza/riatzukiza.github.io#24",
+    "riatzukiza/riatzukiza.github.io#29",
+    "riatzukiza/riatzukiza.github.io#30",
+    "riatzukiza/riatzukiza.github.io#31",
+    "riatzukiza/roarar-bot-ui#10",
+    "riatzukiza/roarar-bot-ui#11",
+    "riatzukiza/roarar-bot-ui#12",
+    "riatzukiza/roarar-bot-ui#4",
+    "riatzukiza/roarar-bot-ui#7",
+    "riatzukiza/roarar-bot-ui#8",
+    "riatzukiza/roarar-bot-ui#9",
+    "riatzukiza/services#1",
+    "riatzukiza/services#2",
+    "riatzukiza/services#3",
+    "riatzukiza/session-mycology#1",
+    "riatzukiza/shuvgeist#1",
+    "riatzukiza/shx#1",
+    "riatzukiza/shx#2",
+    "riatzukiza/shx#3",
+    "riatzukiza/shx#4",
+    "riatzukiza/shx#5",
+    "riatzukiza/shx#6",
+    "riatzukiza/sol#4",
+    "riatzukiza/sol#6",
+    "riatzukiza/spacemacs.d#6",
+    "riatzukiza/symbiant#10",
+    "riatzukiza/symbiant#11",
+    "riatzukiza/symbiant#12",
+    "riatzukiza/symbiant#13",
+    "riatzukiza/symbiant#14",
+    "riatzukiza/symbiant#15",
+    "riatzukiza/symbiant#16",
+    "riatzukiza/symbiant#17",
+    "riatzukiza/symbiant#7",
+    "riatzukiza/symbiant#8",
+    "riatzukiza/trader.prototype.react#10",
+    "riatzukiza/trader.prototype.react#4",
+    "riatzukiza/trader.prototype.react#8",
+    "riatzukiza/uxx#1"
+  ],
+  "unrouted_scope_prs": [
+    "Gar-Gar23/TheBox#1",
+    "lakeraven/vista-rpc#2",
+    "openai/parameter-golf#227",
+    "openai/parameter-golf#240",
+    "openai/parameter-golf#247",
+    "openai/parameter-golf#248",
+    "openai/parameter-golf#258",
+    "openai/parameter-golf#276",
+    "riatzukiza/.agents#10",
+    "riatzukiza/.agents#21",
+    "riatzukiza/.agents#34",
+    "riatzukiza/TANF-app#10",
+    "riatzukiza/TANF-app#13",
+    "riatzukiza/TANF-app#14",
+    "riatzukiza/TANF-app#15",
+    "riatzukiza/TANF-app#16",
+    "riatzukiza/TANF-app#17",
+    "riatzukiza/TANF-app#18",
+    "riatzukiza/TANF-app#19",
+    "riatzukiza/TANF-app#20",
+    "riatzukiza/TANF-app#23",
+    "riatzukiza/TANF-app#26",
+    "riatzukiza/TANF-app#29",
+    "riatzukiza/TANF-app#4",
+    "riatzukiza/TANF-app#40",
+    "riatzukiza/TANF-app#5",
+    "riatzukiza/TANF-app#58",
+    "riatzukiza/TANF-app#59",
+    "riatzukiza/TANF-app#6",
+    "riatzukiza/TANF-app#61",
+    "riatzukiza/TANF-app#62",
+    "riatzukiza/TANF-app#63",
+    "riatzukiza/TANF-app#65",
+    "riatzukiza/TANF-app#66",
+    "riatzukiza/TANF-app#69",
+    "riatzukiza/TANF-app#7",
+    "riatzukiza/TANF-app#70",
+    "riatzukiza/TANF-app#71",
+    "riatzukiza/TANF-app#72",
+    "riatzukiza/TANF-app#73",
+    "riatzukiza/TANF-app#74",
+    "riatzukiza/TANF-app#76",
+    "riatzukiza/TANF-app#77",
+    "riatzukiza/TANF-app#79",
+    "riatzukiza/TANF-app#8",
+    "riatzukiza/TANF-app#80",
+    "riatzukiza/TANF-app#81",
+    "riatzukiza/TANF-app#82",
+    "riatzukiza/TANF-app#83",
+    "riatzukiza/TANF-app#84",
+    "riatzukiza/TANF-app#85",
+    "riatzukiza/TANF-app#86",
+    "riatzukiza/TANF-app#87",
+    "riatzukiza/TANF-app#88",
+    "riatzukiza/TANF-app#89",
+    "riatzukiza/babylon-experiment#10",
+    "riatzukiza/babylon-experiment#11",
+    "riatzukiza/babylon-experiment#3",
+    "riatzukiza/babylon-experiment#4",
+    "riatzukiza/babylon-experiment#5",
+    "riatzukiza/babylon-experiment#6",
+    "riatzukiza/babylon-experiment#7",
+    "riatzukiza/babylon-experiment#8",
+    "riatzukiza/babylon-experiment#9",
+    "riatzukiza/beez#1",
+    "riatzukiza/corvid#2",
+    "riatzukiza/devel#146",
+    "riatzukiza/devel#148",
+    "riatzukiza/devel#152",
+    "riatzukiza/devel#154",
+    "riatzukiza/discord-chatter#10",
+    "riatzukiza/discord-chatter#11",
+    "riatzukiza/discord-chatter#12",
+    "riatzukiza/discord-chatter#13",
+    "riatzukiza/discord-chatter#14",
+    "riatzukiza/discord-chatter#8",
+    "riatzukiza/discord-chatter#9",
+    "riatzukiza/duck#7",
+    "riatzukiza/duck#8",
+    "riatzukiza/express_login#1",
+    "riatzukiza/express_login#10",
+    "riatzukiza/express_login#12",
+    "riatzukiza/express_login#13",
+    "riatzukiza/express_login#15",
+    "riatzukiza/express_login#16",
+    "riatzukiza/express_login#17",
+    "riatzukiza/express_login#18",
+    "riatzukiza/express_login#19",
+    "riatzukiza/express_login#20",
+    "riatzukiza/express_login#21",
+    "riatzukiza/express_login#3",
+    "riatzukiza/express_login#5",
+    "riatzukiza/express_login#6",
+    "riatzukiza/express_login#7",
+    "riatzukiza/express_login#8",
+    "riatzukiza/express_login#9",
+    "riatzukiza/i3-config#1",
+    "riatzukiza/meteor-chat#2",
+    "riatzukiza/meteor-chat#3",
+    "riatzukiza/meteor-notes#1",
+    "riatzukiza/notes#10",
+    "riatzukiza/notes#11",
+    "riatzukiza/notes#12",
+    "riatzukiza/notes#4",
+    "riatzukiza/notes#7",
+    "riatzukiza/notes#8",
+    "riatzukiza/notes#9",
+    "riatzukiza/riatzukiza.github.io#24",
+    "riatzukiza/riatzukiza.github.io#29",
+    "riatzukiza/riatzukiza.github.io#30",
+    "riatzukiza/riatzukiza.github.io#31",
+    "riatzukiza/roarar-bot-ui#10",
+    "riatzukiza/roarar-bot-ui#11",
+    "riatzukiza/roarar-bot-ui#12",
+    "riatzukiza/roarar-bot-ui#4",
+    "riatzukiza/roarar-bot-ui#7",
+    "riatzukiza/roarar-bot-ui#8",
+    "riatzukiza/roarar-bot-ui#9",
+    "riatzukiza/shuvgeist#1",
+    "riatzukiza/spacemacs.d#6",
+    "riatzukiza/symbiant#10",
+    "riatzukiza/symbiant#11",
+    "riatzukiza/symbiant#12",
+    "riatzukiza/symbiant#13",
+    "riatzukiza/symbiant#14",
+    "riatzukiza/symbiant#15",
+    "riatzukiza/symbiant#16",
+    "riatzukiza/symbiant#17",
+    "riatzukiza/symbiant#7",
+    "riatzukiza/symbiant#8",
+    "riatzukiza/trader.prototype.react#10",
+    "riatzukiza/trader.prototype.react#4",
+    "riatzukiza/trader.prototype.react#8"
+  ],
+  "card_dependency_gaps": [
+    {
+      "from": "octave-commons/epiphany::ae0dc804-1cfa-4dd5-b3e9-99a4f4ec9885",
+      "relationship": "epic",
+      "target_token": "epic-03-retrieval-substrate",
+      "source": "octave-commons/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-003g-wire-ep-ingest-and-durable-lucene-search.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::ae0dc804-1cfa-4dd5-b3e9-99a4f4ec9885",
+      "relationship": "dependency",
+      "target_token": "",
+      "source": "octave-commons/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-003g-wire-ep-ingest-and-durable-lucene-search.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::c95a201b-57b7-47e3-ad04-2865ba1b95d9",
+      "relationship": "parent",
+      "target_token": "eng-005a-record-review-decisions-as-append-only-events",
+      "source": "octave-commons/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-005g-durable-lineage-candidate-store-generation-persistence-query.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::c95a201b-57b7-47e3-ad04-2865ba1b95d9",
+      "relationship": "epic",
+      "target_token": "01900d7c-7f3a-7e8b-9c4d-000000000005",
+      "source": "octave-commons/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-005g-durable-lineage-candidate-store-generation-persistence-query.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::03c76b89-2ba4-4c54-a3a0-61ed9dabbf95",
+      "relationship": "parent",
+      "target_token": "eng-017g-normalize-cli-and-http-command-contracts",
+      "source": "octave-commons/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-017g2-shared-cli-http-command-vocabulary-decoder-seam.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::a1146c30-11d6-43e0-bb2a-7d5bf5cdfac8",
+      "relationship": "parent",
+      "target_token": "eng-017g-normalize-cli-and-http-command-contracts",
+      "source": "octave-commons/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-017m-fix-broken-bin-ep-launcher-infinite-self-exec-never-runs-clojure.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::a51d82f0-be84-4fa5-95aa-d777143d7856",
+      "relationship": "parent",
+      "target_token": "eng-017b-enforce-schemas-through-validating-observation-ports",
+      "source": "octave-commons/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-017n-assurance-kernel-hardening-prod-wrapper-wiring-write-op-classifier-guard-law-suite-generalization.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::a51d82f0-be84-4fa5-95aa-d777143d7856",
+      "relationship": "epic",
+      "target_token": "01900d7c-7f3a-7e8b-9c4d-000000000001",
+      "source": "octave-commons/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-017n-assurance-kernel-hardening-prod-wrapper-wiring-write-op-classifier-guard-law-suite-generalization.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "open-hax/knoxx::knoxx-event-runtime-boot-coupling",
+      "relationship": "epic",
+      "target_token": "knoxx-events-agent-runtime-separation",
+      "source": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-event-runtime-boot-coupling.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "riatzukiza/devel::kanban-specs-drafts-output-contract-gate-phase4-gpt-review-md",
+      "relationship": "parent",
+      "target_token": "contract-enforced-agent-output-pipeline-2026-03-23.md",
+      "source": "riatzukiza/devel@80a95e5638f4ee95e182ebf0a22f4735ab55964f:kanban/drafts/output-contract-gate-phase4-gpt-review.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::ae0dc804-1cfa-4dd5-b3e9-99a4f4ec9885",
+      "relationship": "epic",
+      "target_token": "epic-03-retrieval-substrate",
+      "source": "riatzukiza/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-003g-wire-ep-ingest-and-durable-lucene-search.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::ae0dc804-1cfa-4dd5-b3e9-99a4f4ec9885",
+      "relationship": "dependency",
+      "target_token": "",
+      "source": "riatzukiza/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-003g-wire-ep-ingest-and-durable-lucene-search.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::c95a201b-57b7-47e3-ad04-2865ba1b95d9",
+      "relationship": "parent",
+      "target_token": "eng-005a-record-review-decisions-as-append-only-events",
+      "source": "riatzukiza/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-005g-durable-lineage-candidate-store-generation-persistence-query.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::c95a201b-57b7-47e3-ad04-2865ba1b95d9",
+      "relationship": "epic",
+      "target_token": "01900d7c-7f3a-7e8b-9c4d-000000000005",
+      "source": "riatzukiza/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-005g-durable-lineage-candidate-store-generation-persistence-query.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::03c76b89-2ba4-4c54-a3a0-61ed9dabbf95",
+      "relationship": "parent",
+      "target_token": "eng-017g-normalize-cli-and-http-command-contracts",
+      "source": "riatzukiza/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-017g2-shared-cli-http-command-vocabulary-decoder-seam.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::a1146c30-11d6-43e0-bb2a-7d5bf5cdfac8",
+      "relationship": "parent",
+      "target_token": "eng-017g-normalize-cli-and-http-command-contracts",
+      "source": "riatzukiza/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-017m-fix-broken-bin-ep-launcher-infinite-self-exec-never-runs-clojure.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::a51d82f0-be84-4fa5-95aa-d777143d7856",
+      "relationship": "parent",
+      "target_token": "eng-017b-enforce-schemas-through-validating-observation-ports",
+      "source": "riatzukiza/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-017n-assurance-kernel-hardening-prod-wrapper-wiring-write-op-classifier-guard-law-suite-generalization.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::a51d82f0-be84-4fa5-95aa-d777143d7856",
+      "relationship": "epic",
+      "target_token": "01900d7c-7f3a-7e8b-9c4d-000000000001",
+      "source": "riatzukiza/epiphany@643be698ea0d841dd19385506b272872306e456e:docs/kanban/stories/eng-017n-assurance-kernel-hardening-prod-wrapper-wiring-write-op-classifier-guard-law-suite-generalization.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "open-hax/knoxx::knoxx-event-runtime-boot-coupling",
+      "relationship": "epic",
+      "target_token": "knoxx-events-agent-runtime-separation",
+      "source": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-event-runtime-boot-coupling.md",
+      "targets": [],
+      "resolution": "unresolved"
+    },
+    {
+      "from": "octave-commons/epiphany::restore-durable-clio-observations-and-zero-warning-epiphany-gates",
+      "relationship": "dependency",
+      "target_token": "",
+      "source": "octave-commons/epiphany@de47366e82f3f4b6405020776f3c3428aaef0596:docs/kanban/chores/restore-durable-clio-observations-and-zero-warning-epiphany-gates.md",
+      "targets": [],
+      "resolution": "unresolved"
+    }
+  ],
+  "divergent_card_observations": [
+    {
+      "identity": "octave-commons/Truth::body-trails-ringbuffer",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/body-trails-ringbuffer.md",
+          "status": "todo",
+          "sha256": "1ff051e11fe6b57d28e349ddf0cf7ffe24d51a2ab8f751b0e42a6820387d6a04"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/body-trails-ringbuffer.md",
+          "status": "todo",
+          "sha256": "1ff051e11fe6b57d28e349ddf0cf7ffe24d51a2ab8f751b0e42a6820387d6a04"
+        },
+        {
+          "id": "octave-commons/Truth@34f56263e845448dd506f5ec85497e473e19ef81:kanban/tasks/body-trails-ringbuffer.md",
+          "status": "in_progress",
+          "sha256": "15932307ff7a254b5620813a2d2952e8cd1184ece08f231c77a289b16ac4242e"
+        },
+        {
+          "id": "octave-commons/Truth@7f0f2b3fe65f91c2dc1305bcf3a02a3c7ef18cc1:kanban/tasks/body-trails-ringbuffer.md",
+          "status": "in_progress",
+          "sha256": "fc1f2b950acb173e6d5ac4262c587cf8ca941e602f6427c40665d1f66a30cd34"
+        },
+        {
+          "id": "octave-commons/Truth@74fe6df8e73e06838a9ada04af3c983cec73079c:kanban/tasks/body-trails-ringbuffer.md",
+          "status": "in_progress",
+          "sha256": "a51a214c2f8d3453622579fd8399e5af8f69edf9b7a04b724b887cc8f08baf03"
+        },
+        {
+          "id": "octave-commons/Truth@295031485bc5ced52850cf95bddf21394d9493ff:kanban/tasks/body-trails-ringbuffer.md",
+          "status": "in_progress",
+          "sha256": "446fa31c2328c352b48a971be45599bfb14a6d467b931d4e96eb4388274592a9"
+        },
+        {
+          "id": "octave-commons/Truth@81b4ae206d0cc04066e81771f05274180fa1ba19:kanban/tasks/body-trails-ringbuffer.md",
+          "status": "in_progress",
+          "sha256": "caf55faf23b1c8936aa6924ac6f17bb9357eaf5287757c9797a258469d89e112"
+        },
+        {
+          "id": "octave-commons/Truth@1ef53d69fdfcfd8431dd3711504052ad4e2eb618:kanban/tasks/body-trails-ringbuffer.md",
+          "status": "in_progress",
+          "sha256": "ecd2944f1bd48f2cfa410c2ec9f84b3a5e60725d3486161c064bd33197e395a2"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::ci-coverage-workflow-broken",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/ci-coverage-workflow-broken.md",
+          "status": "ready",
+          "sha256": "82386c59d2f0f83d00051e8ae3cc15a7776fba1b3d8f63c3c43c562906b77469"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/ci-coverage-workflow-broken.md",
+          "status": "ready",
+          "sha256": "82386c59d2f0f83d00051e8ae3cc15a7776fba1b3d8f63c3c43c562906b77469"
+        },
+        {
+          "id": "riatzukiza/Truth@b3c7623da73c86e41f680a16d9c1088d983b9fa9:kanban/tasks/ci-coverage-workflow-broken.md",
+          "status": "ready",
+          "sha256": "41eb35ef5b11466a40b4f94472f1ed68dabb8804cad5fd639560f47bc9610f3d"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::embodied-character-voxel-mode",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/embodied-character-voxel-mode.md",
+          "status": "icebox",
+          "sha256": "941cb948f6f7da567ebba5d1aa5bfc5dd04fe73871a150e8fe73a94c0a2ee86f"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/embodied-character-voxel-mode.md",
+          "status": "icebox",
+          "sha256": "941cb948f6f7da567ebba5d1aa5bfc5dd04fe73871a150e8fe73a94c0a2ee86f"
+        },
+        {
+          "id": "octave-commons/Truth@8557575efdb993cfd3867f055430968c2e412a14:kanban/tasks/embodied-character-voxel-mode.md",
+          "status": "incoming",
+          "sha256": "94be5f1806b5481a907509acac56a8bbe5d6f6ef9e32a3b0d4bb15da78f15a98"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::fix-warp-disabled-stale-write",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/fix-warp-disabled-stale-write.md",
+          "status": "todo",
+          "sha256": "9349ba63c3e840a615925c378fc51aa3250ad9154898b7037ecbcd9e4ecd2af2"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/fix-warp-disabled-stale-write.md",
+          "status": "todo",
+          "sha256": "9349ba63c3e840a615925c378fc51aa3250ad9154898b7037ecbcd9e4ecd2af2"
+        },
+        {
+          "id": "octave-commons/Truth@76ba6a46139e4de2d769aed0d32f61d4025681d3:kanban/tasks/fix-warp-disabled-stale-write.md",
+          "status": "review",
+          "sha256": "f90c72994984adfdbf9dec88b19112e5c25753e3ffa8f4c692eb76d9e492d622"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::flight-no-jump-accel",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/flight-no-jump-accel.md",
+          "status": "review",
+          "sha256": "829ff45448c385c5c6a0398bfbf6e80fc7e7c25ae648854418189ba1bc63820c"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/flight-no-jump-accel.md",
+          "status": "review",
+          "sha256": "829ff45448c385c5c6a0398bfbf6e80fc7e7c25ae648854418189ba1bc63820c"
+        },
+        {
+          "id": "octave-commons/Truth@6944df4ec266ec25059c89181fe3d07522d076b3:kanban/tasks/flight-no-jump-accel.md",
+          "status": "in_progress",
+          "sha256": "0a6e17918ad8dc042289d4065d42832c3ea0fa6bbfc51e20f8883ee5153ae33d"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::focus-follows-pilot",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/focus-follows-pilot.md",
+          "status": "review",
+          "sha256": "3f150515704b47d40685ddf85c22b3dff7250a8e37884474134226d5b3824e97"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/focus-follows-pilot.md",
+          "status": "review",
+          "sha256": "3f150515704b47d40685ddf85c22b3dff7250a8e37884474134226d5b3824e97"
+        },
+        {
+          "id": "octave-commons/Truth@15ec0af7346e97428381892205275836dd24baea:kanban/tasks/focus-follows-pilot.md",
+          "status": "review",
+          "sha256": "9aa82cecfeb219201c79faffd3d0b8be80e901936e39616a6d4a3c90e2ca44ba"
+        },
+        {
+          "id": "octave-commons/Truth@c79be1e957695505b48ea7f1905821927e7fb270:kanban/tasks/focus-follows-pilot.md",
+          "status": "in_progress",
+          "sha256": "3771d9935f84c3262df3cdabbe0543447ec1efc75a569b2abecc6bda765f912b"
+        },
+        {
+          "id": "octave-commons/Truth@3064336a482bd7e93875808f6ad1200164347c68:kanban/tasks/focus-follows-pilot.md",
+          "status": "in_progress",
+          "sha256": "fa675d5d54fdcfe65746d1e9e8af3f7ea9d51b495232850fc1055a024c801151"
+        },
+        {
+          "id": "octave-commons/Truth@74fe6df8e73e06838a9ada04af3c983cec73079c:kanban/tasks/focus-follows-pilot.md",
+          "status": "in_progress",
+          "sha256": "b79c04edf5b216b7d66af312ba3c6a23a8aae1af524a79f2b8a9cc8a26edd6fd"
+        },
+        {
+          "id": "octave-commons/Truth@2398808f545850938f79e5ca6cebc13a6f5e0158:kanban/tasks/focus-follows-pilot.md",
+          "status": "in_progress",
+          "sha256": "369aed29c61a06d252941378335222dfa3359c832fa527bd692edd5bf22940d1"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::formation-placement-v2",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/formation-placement-v2.md",
+          "status": "review",
+          "sha256": "bc3fd50744bd70c84592b0ef8e43c3ecb1d70d4dbafb052387799a3b9c2a68c8"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/formation-placement-v2.md",
+          "status": "review",
+          "sha256": "bc3fd50744bd70c84592b0ef8e43c3ecb1d70d4dbafb052387799a3b9c2a68c8"
+        },
+        {
+          "id": "octave-commons/Truth@c99a61c13e950542407b2bc8a78497e6d3b73fa8:kanban/tasks/formation-placement-v2.md",
+          "status": "review",
+          "sha256": "eae1ac4ebdcb549bf6eff7d31206bc25270acfe3c7053f21159cfd18b522742b"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::mote-of-light-shader",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/mote-of-light-shader.md",
+          "status": "todo",
+          "sha256": "fe00d6f40d6b21391eedd4b55311c00f3d51a63916a64d29185fec1a634acab0"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/mote-of-light-shader.md",
+          "status": "todo",
+          "sha256": "fe00d6f40d6b21391eedd4b55311c00f3d51a63916a64d29185fec1a634acab0"
+        },
+        {
+          "id": "octave-commons/Truth@6059730cc9969c2215382e57218813a9519925d7:kanban/tasks/mote-of-light-shader.md",
+          "status": "todo",
+          "sha256": "f33523c1d87877cd81e3617401e023afdaf0a6234313f1161dd811755f880b42"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::narrowing-commitment-horizon",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/narrowing-commitment-horizon.md",
+          "status": "done",
+          "sha256": "edf065e5d6b8bcb04c478fc3467c3444ca0c074cce07f2eb78904f6f5c92ffc3"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/narrowing-commitment-horizon.md",
+          "status": "done",
+          "sha256": "edf065e5d6b8bcb04c478fc3467c3444ca0c074cce07f2eb78904f6f5c92ffc3"
+        },
+        {
+          "id": "octave-commons/Truth@8557575efdb993cfd3867f055430968c2e412a14:kanban/tasks/narrowing-commitment-horizon.md",
+          "status": "done",
+          "sha256": "c04d3b2538cd46b9f8de69ccce11a8c8b8d5a15fed26501ef85cf6f915a304c9"
+        },
+        {
+          "id": "octave-commons/Truth@8bcfc12d9ca2851891a4060f52f287f9b9f455f8:kanban/tasks/narrowing-commitment-horizon.md",
+          "status": "done",
+          "sha256": "c04d3b2538cd46b9f8de69ccce11a8c8b8d5a15fed26501ef85cf6f915a304c9"
+        },
+        {
+          "id": "octave-commons/Truth@7f1fbcae786a7aa4c6b1cb2eed5d79dd71bb6e58:kanban/tasks/narrowing-commitment-horizon.md",
+          "status": "done",
+          "sha256": "f36f52c86a95e83bb40170754533768a98b8213e4b86570ce985349f37681cba"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::perf-tick-residual-gap-to-60fps",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/perf-tick-residual-gap-to-60fps.md",
+          "status": "in_progress",
+          "sha256": "5d26be7c8603e52e1db6f5e2905643e2634eca3f8f0a8ca06bb1e8259c7f27ff"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/perf-tick-residual-gap-to-60fps.md",
+          "status": "in_progress",
+          "sha256": "5d26be7c8603e52e1db6f5e2905643e2634eca3f8f0a8ca06bb1e8259c7f27ff"
+        },
+        {
+          "id": "octave-commons/Truth@9c5c889d8923c76bf9a9530a8bd18cd72f37a93f:kanban/tasks/perf-tick-residual-gap-to-60fps.md",
+          "status": "in_progress",
+          "sha256": "e00d10395166c808f0e498fef275d35d58a8d64e80c6ff51f4f94d2373b4cb87"
+        },
+        {
+          "id": "octave-commons/Truth@c598d813c3cb3d020aa13b35fd58e876b4a8f7d5:kanban/tasks/perf-tick-residual-gap-to-60fps.md",
+          "status": "in_progress",
+          "sha256": "ba0eba007a77b6d845f2a9bb6c842ab3c8cd505ed5a2e5ab273a94c44edac3a3"
+        },
+        {
+          "id": "octave-commons/Truth@82d398d1b4ebe8384e577651e58445f976ce5855:kanban/tasks/perf-tick-residual-gap-to-60fps.md",
+          "status": "in_progress",
+          "sha256": "7d88ce9f776c71489aee35086c0f08947f94c6fba430f580ce1e7eb06cb84675"
+        },
+        {
+          "id": "octave-commons/Truth@a50e51243672a6d8842f8f2fc233beb6db645a2f:kanban/tasks/perf-tick-residual-gap-to-60fps.md",
+          "status": "in_progress",
+          "sha256": "1f740775dd8e5c2a5f47bb4a7f17f1c8d20c3c777737adde3e7d49eba05f8134"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::remove-passive-halo-invert-influence",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/remove-passive-halo-invert-influence.md",
+          "status": "todo",
+          "sha256": "017b8be8d53b95a7892a4f625436d91b4a7fd792f82f3dca0f7a7d1ac92db1c6"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/remove-passive-halo-invert-influence.md",
+          "status": "todo",
+          "sha256": "017b8be8d53b95a7892a4f625436d91b4a7fd792f82f3dca0f7a7d1ac92db1c6"
+        },
+        {
+          "id": "octave-commons/Truth@63fe02434563b858874a2511ea95c7a24052ec59:kanban/tasks/remove-passive-halo-invert-influence.md",
+          "status": "in_progress",
+          "sha256": "e33ca8a951eb5884516a17eda5e35e66f76160dc4c6781ca9cdff6450e7e7c95"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::run-alias-broken-missing-infra-main",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/run-alias-broken-missing-infra-main.md",
+          "status": "ready",
+          "sha256": "f2fa441a334fdbed4732043abb459f3a62052bd1a77d1a45467db8719705495d"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/run-alias-broken-missing-infra-main.md",
+          "status": "ready",
+          "sha256": "f2fa441a334fdbed4732043abb459f3a62052bd1a77d1a45467db8719705495d"
+        },
+        {
+          "id": "octave-commons/Truth@c99a61c13e950542407b2bc8a78497e6d3b73fa8:kanban/tasks/run-alias-broken-missing-infra-main.md",
+          "status": "review",
+          "sha256": "d1c8d0d7d2f5c376a80a0b49a74c5e307cd52e73321389fe974ed330ee31bd6f"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::spark-orientation-angular-momentum",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/spark-orientation-angular-momentum.md",
+          "status": "todo",
+          "sha256": "aa099d9cd52563a705131accae54a18d8f8d5e1355343463f6064750973b51c8"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/spark-orientation-angular-momentum.md",
+          "status": "todo",
+          "sha256": "aa099d9cd52563a705131accae54a18d8f8d5e1355343463f6064750973b51c8"
+        },
+        {
+          "id": "octave-commons/Truth@c99a61c13e950542407b2bc8a78497e6d3b73fa8:kanban/tasks/spark-orientation-angular-momentum.md",
+          "status": "review",
+          "sha256": "d697b6325e6415f1d7e1521bf103b5fcc6cbdb0b2d06a90d1c37bffe7efac018"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::star-substep-heating",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/star-substep-heating.md",
+          "status": "todo",
+          "sha256": "fd4a2d78b9548fae6247a837572bf60e94bc642f0bfa81bd3986edc504b46009"
+        },
+        {
+          "id": "riatzukiza/Truth@58b0fd91ea65b7a4b3a1f571f22f3d394374a871:kanban/tasks/star-substep-heating.md",
+          "status": "todo",
+          "sha256": "fd4a2d78b9548fae6247a837572bf60e94bc642f0bfa81bd3986edc504b46009"
+        },
+        {
+          "id": "octave-commons/Truth@b50a4fa5d4b05f4044cf3bf5210c47b8959397e3:kanban/tasks/star-substep-heating.md",
+          "status": "todo",
+          "sha256": "0721a471a83a942444e09b7e1d5abf41a2ec1abe1926d34c09d7f9a7af912259"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/calliope::ft-000b-define-media-workbench-domain-laws",
+      "observations": [
+        {
+          "id": "octave-commons/calliope@a731093b878f600ee30648a01f1a6cd44f3439f0:docs/kanban/stories/ft-000b-define-studio-domain-laws.md",
+          "status": "breakdown",
+          "sha256": "3057f5f0daa99cd0005925c6b3268f71775c9ecd9f918135cbf2951119d024df"
+        },
+        {
+          "id": "riatzukiza/calliope@660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c:docs/kanban/stories/ft-000b-define-studio-domain-laws.md",
+          "status": "breakdown",
+          "sha256": "3057f5f0daa99cd0005925c6b3268f71775c9ecd9f918135cbf2951119d024df"
+        },
+        {
+          "id": "riatzukiza/calliope@ef1885c16950355ffaf9e640189004f0aa9a24e4:docs/kanban/stories/ft-000b-define-studio-domain-laws.md",
+          "status": "breakdown",
+          "sha256": "619ba50a77b42a35c252dd6828a316c83780af25e177f7766d413cfd3c515df2"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/calliope::ft-004a-define-release-manifest-and-publication-target-laws",
+      "observations": [
+        {
+          "id": "octave-commons/calliope@a731093b878f600ee30648a01f1a6cd44f3439f0:docs/kanban/stories/ft-004a-define-release-and-target-laws.md",
+          "status": "icebox",
+          "sha256": "faab25bafb77922d1262f66e94f6227e77a34fe8b7e8f9a39d38997ca3bf3c8d"
+        },
+        {
+          "id": "riatzukiza/calliope@660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c:docs/kanban/stories/ft-004a-define-release-and-target-laws.md",
+          "status": "icebox",
+          "sha256": "faab25bafb77922d1262f66e94f6227e77a34fe8b7e8f9a39d38997ca3bf3c8d"
+        },
+        {
+          "id": "riatzukiza/calliope@287895c23d60a69cab605a6d56fcf4cb50e2d32e:docs/kanban/stories/ft-004a-define-release-and-target-laws.md",
+          "status": "icebox",
+          "sha256": "8a37d7997ae2f75f68d568d5cdbf6721f29432ae4c705103b1e496352a19f0f5"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/calliope::calliope-issue-13-portable-sonic-seed-skill",
+      "observations": [
+        {
+          "id": "octave-commons/calliope@a731093b878f600ee30648a01f1a6cd44f3439f0:docs/kanban/stories/land-the-portable-sonic-seed-skill-with-hosted-tests-ed-skill.md",
+          "status": "incoming",
+          "sha256": "d2ffb0bf94bc461e1c15cf58d3459c5687222e78e46112fbb2c43557c2944019"
+        },
+        {
+          "id": "riatzukiza/calliope@660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c:docs/kanban/stories/land-the-portable-sonic-seed-skill-with-hosted-tests-ed-skill.md",
+          "status": "incoming",
+          "sha256": "d2ffb0bf94bc461e1c15cf58d3459c5687222e78e46112fbb2c43557c2944019"
+        },
+        {
+          "id": "riatzukiza/calliope@df4ee1e7177367521b84f35adf5f4ef09f9e862c:docs/kanban/stories/land-the-portable-sonic-seed-skill-with-hosted-tests-ed-skill.md",
+          "status": "incoming",
+          "sha256": "d4d59529295e829a9945bc44907f11e00e7e56e9182406c3c757007f6e572be4"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/calliope::calliope-issue-11-re-ingest-suno-metadata",
+      "observations": [
+        {
+          "id": "octave-commons/calliope@a731093b878f600ee30648a01f1a6cd44f3439f0:docs/kanban/stories/re-ingest-suno-metadata-and-rebuild-its-projection-metadata.md",
+          "status": "incoming",
+          "sha256": "ec20f717c8be96a9da3c6872b360ed1c61d0d1172cb3170c965e35a739b265c4"
+        },
+        {
+          "id": "riatzukiza/calliope@660e8adaee92fcd5d9ea3af83f42f3e9e7bdf05c:docs/kanban/stories/re-ingest-suno-metadata-and-rebuild-its-projection-metadata.md",
+          "status": "incoming",
+          "sha256": "ec20f717c8be96a9da3c6872b360ed1c61d0d1172cb3170c965e35a739b265c4"
+        },
+        {
+          "id": "riatzukiza/calliope@56cf4fc3975696cc1648f2fa83661eb09bce593b:docs/kanban/stories/re-ingest-suno-metadata-and-rebuild-its-projection-metadata.md",
+          "status": "incoming",
+          "sha256": "7c5ea359e877140d65cbc58d449b8b287636357b3411e9b9f43be92a5ad1f973"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/muse::0bd45066-9d1c-4cc4-a28e-fcfecf7eac7a",
+      "observations": [
+        {
+          "id": "octave-commons/muse@9d3ae4957d99880ffbfad640d283e4c4692d99fa:docs/agile/kanban/0bd45066-9d1c-4cc4-a28e-fcfecf7eac7a.md",
+          "status": "incoming",
+          "sha256": "25256d0e245b4af97db19cc1951b950bdaf17237d77d9e82a3271b8ab4483eb0"
+        },
+        {
+          "id": "riatzukiza/muse@39c5db79b0e2222a096e0dcf61e7f894c9b6ffaf:docs/agile/kanban/0bd45066-9d1c-4cc4-a28e-fcfecf7eac7a.md",
+          "status": "incoming",
+          "sha256": "c6c15ef7837fbe102dffc28d6b251c8f39de30508af001773d5dd7ff8ffb17f8"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/muse::a9f2e662-77dc-40a9-9121-f108b8e1ccb2",
+      "observations": [
+        {
+          "id": "octave-commons/muse@9d3ae4957d99880ffbfad640d283e4c4692d99fa:docs/agile/kanban/a9f2e662-77dc-40a9-9121-f108b8e1ccb2.md",
+          "status": null,
+          "sha256": "0226837cb738e251df0c75a5258874aff6888f40745b57de0947cb1e5b5139f1"
+        },
+        {
+          "id": "riatzukiza/muse@9f758e8c9d91243478326c7c963e8f85bb391fd6:docs/agile/kanban/a9f2e662-77dc-40a9-9121-f108b8e1ccb2.md",
+          "status": "in_progress",
+          "sha256": "bb756ed7a7b37bf5617a4db4086db45db2b4270856f804f4f1d368dedb9cfb9e"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/muse::9f35579b-e522-4445-a022-daa6f07ae3da",
+      "observations": [
+        {
+          "id": "octave-commons/muse@9d3ae4957d99880ffbfad640d283e4c4692d99fa:docs/agile/kanban/bind-review-summary-claims-to-current-evidence-f07ae3da.md",
+          "status": "ready",
+          "sha256": "593007c6de5c8a0b0c577aad3e66e56a16412431ec476077f7bd51529256b8c4"
+        },
+        {
+          "id": "riatzukiza/muse@04f91e39cb74af722a439340fd29afe914e72a30:docs/agile/kanban/bind-review-summary-claims-to-current-evidence-f07ae3da.md",
+          "status": "ready",
+          "sha256": "593007c6de5c8a0b0c577aad3e66e56a16412431ec476077f7bd51529256b8c4"
+        },
+        {
+          "id": "riatzukiza/muse@6c431b08be7d3943a55ac1dbf6f13dcc13a2c98a:docs/agile/kanban/bind-review-summary-claims-to-current-evidence-f07ae3da.md",
+          "status": "ready",
+          "sha256": "e9414621a9ba5660abbeefb69f81880c8cd2ec4f095468f4709acb0f6c1057f8"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/muse::1bc0a6b5-3286-4e43-afc4-8cf8ae0549a0",
+      "observations": [
+        {
+          "id": "octave-commons/muse@9d3ae4957d99880ffbfad640d283e4c4692d99fa:docs/agile/kanban/make-self-authored-review-publication-truthful-ae0549a0.md",
+          "status": "ready",
+          "sha256": "aaa63b61cdeaf365ec27348004af9ec1ae84ef429338bdabf1c0a67d76a950d3"
+        },
+        {
+          "id": "riatzukiza/muse@04f91e39cb74af722a439340fd29afe914e72a30:docs/agile/kanban/make-self-authored-review-publication-truthful-ae0549a0.md",
+          "status": "ready",
+          "sha256": "aaa63b61cdeaf365ec27348004af9ec1ae84ef429338bdabf1c0a67d76a950d3"
+        },
+        {
+          "id": "riatzukiza/muse@59bb5f898ec51c51c2324d061857d790a04514f2:docs/agile/kanban/make-self-authored-review-publication-truthful-ae0549a0.md",
+          "status": "ready",
+          "sha256": "f5947afa4477fbe308cd38731273f2fea98df2ce27f2f8b106377171b22ea4f7"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/axxium::axxium-discord-oauth",
+      "observations": [
+        {
+          "id": "open-hax/axxium@9572e74d4c67b252568822eff24a06b9521d2c7d:kanban/axxium-discord-oauth.md",
+          "status": "todo",
+          "sha256": "6241f6bfdc5c097c9e60a95da0461e3d74faa5466e113c49d4430c5c8751e94e"
+        },
+        {
+          "id": "riatzukiza/axxium@6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c:kanban/axxium-discord-oauth.md",
+          "status": "todo",
+          "sha256": "6241f6bfdc5c097c9e60a95da0461e3d74faa5466e113c49d4430c5c8751e94e"
+        },
+        {
+          "id": "riatzukiza/axxium@114ecd1ff1d933347341a82a664860598fd2c56a:kanban/axxium-discord-oauth.md",
+          "status": "todo",
+          "sha256": "fa25a8ad9075d39f0ab6c5ee179a199cb37b86727d3a1d6412b88dce36919a22"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/axxium::axxium-github-workflow",
+      "observations": [
+        {
+          "id": "open-hax/axxium@9572e74d4c67b252568822eff24a06b9521d2c7d:kanban/axxium-github-workflow.md",
+          "status": "todo",
+          "sha256": "55004eccb1a188bfc40c380cecbe9bc8710333acd5a6484e70c7e236a35fc4fb"
+        },
+        {
+          "id": "riatzukiza/axxium@6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c:kanban/axxium-github-workflow.md",
+          "status": "todo",
+          "sha256": "55004eccb1a188bfc40c380cecbe9bc8710333acd5a6484e70c7e236a35fc4fb"
+        },
+        {
+          "id": "riatzukiza/axxium@105cf1a389e7ab38c47c3eef2a85f50253a54523:kanban/axxium-github-workflow.md",
+          "status": "todo",
+          "sha256": "e71f00e3f0daa6aae09a00c82ba9b0c9712488fef30c91abe87110792cb2a042"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/axxium::axxium-knoxx-identity-migration",
+      "observations": [
+        {
+          "id": "open-hax/axxium@9572e74d4c67b252568822eff24a06b9521d2c7d:kanban/axxium-knoxx-identity-migration.md",
+          "status": "todo",
+          "sha256": "302b4db8522fccc5b434e6239ff9d35455878fa2f02d3d42e3b57389d91acaf8"
+        },
+        {
+          "id": "riatzukiza/axxium@6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c:kanban/axxium-knoxx-identity-migration.md",
+          "status": "todo",
+          "sha256": "302b4db8522fccc5b434e6239ff9d35455878fa2f02d3d42e3b57389d91acaf8"
+        },
+        {
+          "id": "riatzukiza/axxium@f6f20647b4c34eebb4f8f3ed5fe2010f05bcbeec:kanban/axxium-knoxx-identity-migration.md",
+          "status": "todo",
+          "sha256": "2c64a6f7d31c25c078042c11bf68cd49ac28d77f408d26212fa095439d1e3a64"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/axxium::axxium-proxx-identity-migration",
+      "observations": [
+        {
+          "id": "open-hax/axxium@9572e74d4c67b252568822eff24a06b9521d2c7d:kanban/axxium-proxx-identity-migration.md",
+          "status": "todo",
+          "sha256": "b84e7e0254b1c041305dec1e2e7118db23f3c4ca9b21cf7495a962dce44f16f7"
+        },
+        {
+          "id": "riatzukiza/axxium@6fdce062e54b93c92343ebfc8b3bc5d9fc7c3a4c:kanban/axxium-proxx-identity-migration.md",
+          "status": "todo",
+          "sha256": "b84e7e0254b1c041305dec1e2e7118db23f3c4ca9b21cf7495a962dce44f16f7"
+        },
+        {
+          "id": "riatzukiza/axxium@2219bd17f2d6e8d6827770668c10ed9b1aa4d568:kanban/axxium-proxx-identity-migration.md",
+          "status": "todo",
+          "sha256": "10a4b9d6873e21450b418974d3cf65492657269b40fc2ef568dd7f2e5c5679cf"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::290f0cdf-9160-453e-a69c-67211432baa7",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@7112c36440d180ca183d6a3f89661cee161fdae5:kanban/epics/make-reusable-opencode-review-gates-truth-preserving.md",
+          "status": "in_progress",
+          "sha256": "da41a2018359d1c6364ba61b9702270fe120bf6be1e3920bfe588f6e76db0f95"
+        },
+        {
+          "id": "riatzukiza/eta-mu@4094522330f58c597cce6d515b14b5fb29baceda:kanban/epics/make-reusable-opencode-review-gates-truth-preserving.md",
+          "status": "in_progress",
+          "sha256": "da41a2018359d1c6364ba61b9702270fe120bf6be1e3920bfe588f6e76db0f95"
+        },
+        {
+          "id": "riatzukiza/eta-mu@e9666aa2dc9e593dce783be430b80d9bed0de6ae:kanban/epics/make-reusable-opencode-review-gates-truth-preserving.md",
+          "status": "in_progress",
+          "sha256": "cea368794da22410556563308ba3d7ffdb1336656d4096f4b22643585e24d52b"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::164c2de7-7495-4738-94e1-a81167edefb0",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@7112c36440d180ca183d6a3f89661cee161fdae5:kanban/epics/prove-reusable-review-gate-red-path-in-a-fixture-caller.md",
+          "status": "ready",
+          "sha256": "c965e436b5aa7d206c9cf2e27235f23b8ab15fa0b39e5ed64e10f0b2ea1722d5"
+        },
+        {
+          "id": "riatzukiza/eta-mu@4094522330f58c597cce6d515b14b5fb29baceda:kanban/epics/prove-reusable-review-gate-red-path-in-a-fixture-caller.md",
+          "status": "ready",
+          "sha256": "c965e436b5aa7d206c9cf2e27235f23b8ab15fa0b39e5ed64e10f0b2ea1722d5"
+        },
+        {
+          "id": "riatzukiza/eta-mu@e9666aa2dc9e593dce783be430b80d9bed0de6ae:kanban/epics/prove-reusable-review-gate-red-path-in-a-fixture-caller.md",
+          "status": "breakdown",
+          "sha256": "9f8d5df92d7dd81a902d8193f205d695a16c252984a95da4f38a37241babfbff"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::clio-local-edn-service-providers-and-deprecated-ledger-retirement",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@7112c36440d180ca183d6a3f89661cee161fdae5:kanban/tasks/clio-local-edn-service-providers-and-deprecated-ledger-retirement.md",
+          "status": "in_progress",
+          "sha256": "4832b41cdce23bd787f11086e0b4d147346689e0d1d16bb9f3ba11d79cc9c89e"
+        },
+        {
+          "id": "riatzukiza/eta-mu@4094522330f58c597cce6d515b14b5fb29baceda:kanban/tasks/clio-local-edn-service-providers-and-deprecated-ledger-retirement.md",
+          "status": "in_progress",
+          "sha256": "4832b41cdce23bd787f11086e0b4d147346689e0d1d16bb9f3ba11d79cc9c89e"
+        },
+        {
+          "id": "open-hax/eta-mu@969095596da6f39bf1238b2f74702e222d20a832:kanban/tasks/clio-local-edn-service-providers-and-deprecated-ledger-retirement.md",
+          "status": "in_progress",
+          "sha256": "12cc0770b44a10aa8e7e1f32b45a1dfb7f6f77f86598671dc743251e20f486bb"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::axxium-wiki-identity",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@7112c36440d180ca183d6a3f89661cee161fdae5:kanban/tasks/make-axxium-the-identity-owner-for-local-wiki-cms-identity.md",
+          "status": "breakdown",
+          "sha256": "eb1578acacba3b128ab6ad5aa96eaf832976f588dc3f930be50264d0342423b1"
+        },
+        {
+          "id": "riatzukiza/eta-mu@4094522330f58c597cce6d515b14b5fb29baceda:kanban/tasks/make-axxium-the-identity-owner-for-local-wiki-cms-identity.md",
+          "status": "breakdown",
+          "sha256": "eb1578acacba3b128ab6ad5aa96eaf832976f588dc3f930be50264d0342423b1"
+        },
+        {
+          "id": "open-hax/eta-mu@33852976fd7d30afc2fc28cee62d2bacca866a81:kanban/tasks/make-axxium-the-identity-owner-for-local-wiki-cms-identity.md",
+          "status": "in_progress",
+          "sha256": "57fab752723f7d22e6de6a850154fe20204b35c9761cb462a247bcee743c9e93"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::opencode-mimo-evidence-review-agent",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@7112c36440d180ca183d6a3f89661cee161fdae5:kanban/tasks/opencode-mimo-evidence-review-agent.md",
+          "status": "in_progress",
+          "sha256": "4b8aae6eb5dd99bf51a7fe47311efe2447ca5d2eed7b6512df390a47e727572a"
+        },
+        {
+          "id": "riatzukiza/eta-mu@4094522330f58c597cce6d515b14b5fb29baceda:kanban/tasks/opencode-mimo-evidence-review-agent.md",
+          "status": "in_progress",
+          "sha256": "bf35cb1f448f5678e97b04154c5a00bfa492fb1dffe2d81628cf2bd8651094a2"
+        },
+        {
+          "id": "open-hax/eta-mu@50eae26c14cf8d462d01368b621c9d87310404a1:kanban/tasks/opencode-mimo-evidence-review-agent.md",
+          "status": "breakdown",
+          "sha256": "f7444143bb3b7b153f0bbfdc97309f4eb120e6b2aa307dfc70cce87ffef83f28"
+        },
+        {
+          "id": "open-hax/eta-mu@a91a73e0e5efa165baf6d7247338f3ef17751752:kanban/tasks/opencode-mimo-evidence-review-agent.md",
+          "status": "in_progress",
+          "sha256": "dc619f404d5c38113265766112d5d7e869d82ebb40f6936aabc4d59afb7be23a"
+        },
+        {
+          "id": "open-hax/eta-mu@e5dff6330f14e08b0698761865b11ae8730f7391:kanban/tasks/opencode-mimo-evidence-review-agent.md",
+          "status": "in_progress",
+          "sha256": "44744e9a346e347ae3bacc74179cc481e46184c5dc08273b647ed773904e06b8"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::rheos-preserve-inline-yaml-label-arrays",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@7112c36440d180ca183d6a3f89661cee161fdae5:kanban/tasks/preserve-inline-yaml-label-arrays-in-rheos-projections-l-arrays.md",
+          "status": "review",
+          "sha256": "93483985e9dcc17459bd07997fde608f5792f15b42785e41ace4b5be79d3c9fe"
+        },
+        {
+          "id": "riatzukiza/eta-mu@4094522330f58c597cce6d515b14b5fb29baceda:kanban/tasks/preserve-inline-yaml-label-arrays-in-rheos-projections-l-arrays.md",
+          "status": "review",
+          "sha256": "93483985e9dcc17459bd07997fde608f5792f15b42785e41ace4b5be79d3c9fe"
+        },
+        {
+          "id": "open-hax/eta-mu@969095596da6f39bf1238b2f74702e222d20a832:kanban/tasks/preserve-inline-yaml-label-arrays-in-rheos-projections-l-arrays.md",
+          "status": "review",
+          "sha256": "881d2652316eb0798ed9b970509cbe386518eaef88910097a525ae0f3a43747f"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::7c44b3fc-7dbe-4c96-9125-4cce4ec4796e",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@7112c36440d180ca183d6a3f89661cee161fdae5:kanban/tasks/recover-unavailable-review-tool-loop.md",
+          "status": null,
+          "sha256": "782951068195252dc74a85e07a43021d580509f9078748a5546f4de46bf92750"
+        },
+        {
+          "id": "open-hax/eta-mu@ebf1e101c468303721a93db6418a4207d3ef0f05:kanban/tasks/recover-unavailable-review-tool-loop.md",
+          "status": null,
+          "sha256": "d11027f5bcbcdd807a77f4e9d5dde4e1922b872334be7fd7f1bc2b9b402af19f"
+        },
+        {
+          "id": "riatzukiza/eta-mu@093a6dbf00fcfadea26f07ac7e3db29bc627a533:kanban/tasks/recover-unavailable-review-tool-loop.md",
+          "status": null,
+          "sha256": "122a511a028b465200ef4752dc6a0631c498990daa1bf93f9bbb8ae419edb3e3"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::ultra-workflow-failure-signalling",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@7112c36440d180ca183d6a3f89661cee161fdae5:kanban/tasks/ultra-workflow-failure-signalling.md",
+          "status": "incoming",
+          "sha256": "cb55dd07610be1f07fb49b4a0fac4b96a242d9a560109116c10a7f1daf5f2768"
+        },
+        {
+          "id": "riatzukiza/eta-mu@4094522330f58c597cce6d515b14b5fb29baceda:kanban/tasks/ultra-workflow-failure-signalling.md",
+          "status": "incoming",
+          "sha256": "cb55dd07610be1f07fb49b4a0fac4b96a242d9a560109116c10a7f1daf5f2768"
+        },
+        {
+          "id": "riatzukiza/eta-mu@64f3561c4232785d101f0398838ea62796ba2d8b:kanban/tasks/ultra-workflow-failure-signalling.md",
+          "status": "incoming",
+          "sha256": "c1d6baf2ba8debcea442d879d99967089d6b410f9aaa45720865e3beb816448b"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::760f7f1e-a086-4e0a-82a5-71d2a761073d",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/760f7f1e-a086-4e0a-82a5-71d2a761073d.md",
+          "status": "in_progress",
+          "sha256": "4ba4da2c1f1340abddf29e97094bc89ce4833348fbb30b407cae854805ac68d8"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/760f7f1e-a086-4e0a-82a5-71d2a761073d.md",
+          "status": "in_progress",
+          "sha256": "4ba4da2c1f1340abddf29e97094bc89ce4833348fbb30b407cae854805ac68d8"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/760f7f1e-a086-4e0a-82a5-71d2a761073d.md",
+          "status": "in_progress",
+          "sha256": "20a2211f7c572739240948f97f21a42560c37892e7864941f219cff74e709602"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::f66c6539-d719-48ae-8284-18fd989b31ef",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md",
+          "status": "todo",
+          "sha256": "e30730693271de4a0918f95ee3c8143ec5d38acd849895199cc57feaacc2a4f5"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md",
+          "status": "todo",
+          "sha256": "e30730693271de4a0918f95ee3c8143ec5d38acd849895199cc57feaacc2a4f5"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md",
+          "status": "todo",
+          "sha256": "e30730693271de4a0918f95ee3c8143ec5d38acd849895199cc57feaacc2a4f5"
+        },
+        {
+          "id": "riatzukiza/foresight@f21a6961f21e08c57f00fab0635f369c71be8a58:docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md",
+          "status": "todo",
+          "sha256": "955a0aaa4b2ec89167bccea4cc21373ae0e4ec160e9592ff85b5e288427404ec"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f.md",
+          "status": "incoming",
+          "sha256": "647472064d3ee0c4dc5fe4d259665a9223bf499fb2a6a8235ee3f135253fd39d"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f.md",
+          "status": "incoming",
+          "sha256": "647472064d3ee0c4dc5fe4d259665a9223bf499fb2a6a8235ee3f135253fd39d"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f.md",
+          "status": "incoming",
+          "sha256": "647472064d3ee0c4dc5fe4d259665a9223bf499fb2a6a8235ee3f135253fd39d"
+        },
+        {
+          "id": "riatzukiza/foresight@f88576b974ed60d79d5d6147da884258bbdf8459:docs/agile/kanban/b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f.md",
+          "status": "incoming",
+          "sha256": "b63bdb80eacefb2cfc209172a68ea604029599d4759b298d8b0038074bee62d3"
+        },
+        {
+          "id": "riatzukiza/foresight@cf57e8988f32ea3a8adc2dfaab5993dd5875c622:docs/agile/kanban/b0bb29f3-56d5-5c7c-9a1e-f4a1989e952f.md",
+          "status": "incoming",
+          "sha256": "647472064d3ee0c4dc5fe4d259665a9223bf499fb2a6a8235ee3f135253fd39d"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::93572f91-a9fc-4555-8dd6-469b180f81d6",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/bind-coverage-promotion-to-immutable-report-evidence.md",
+          "status": "todo",
+          "sha256": "4724f1f86bd1a99cb827c360da6342dd2e59ca0d44da2f1d48181029d3340db5"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/bind-coverage-promotion-to-immutable-report-evidence.md",
+          "status": "todo",
+          "sha256": "4724f1f86bd1a99cb827c360da6342dd2e59ca0d44da2f1d48181029d3340db5"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/bind-coverage-promotion-to-immutable-report-evidence.md",
+          "status": "todo",
+          "sha256": "4724f1f86bd1a99cb827c360da6342dd2e59ca0d44da2f1d48181029d3340db5"
+        },
+        {
+          "id": "riatzukiza/foresight@712a95c48cdb7e9f86b9a9efca285c5af3ef9b03:docs/agile/kanban/bind-coverage-promotion-to-immutable-report-evidence.md",
+          "status": "todo",
+          "sha256": "dd15a659bae287ff6f02ca46808bfa4a46c2903478d60d34275ed84c41dcb2ac"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::codex-cloud-bootstrap-contract",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/cc1-01-codex-cloud-bootstrap-contract.md",
+          "status": "incoming",
+          "sha256": "ff27772f85c94bf5b365e8ec706fadc2203eed3a892b0acc2c65f813f484081c"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/cc1-01-codex-cloud-bootstrap-contract.md",
+          "status": "incoming",
+          "sha256": "ff27772f85c94bf5b365e8ec706fadc2203eed3a892b0acc2c65f813f484081c"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/cc1-01-codex-cloud-bootstrap-contract.md",
+          "status": "incoming",
+          "sha256": "ff27772f85c94bf5b365e8ec706fadc2203eed3a892b0acc2c65f813f484081c"
+        },
+        {
+          "id": "riatzukiza/foresight@cf57e8988f32ea3a8adc2dfaab5993dd5875c622:docs/agile/kanban/cc1-01-codex-cloud-bootstrap-contract.md",
+          "status": "incoming",
+          "sha256": "ff27772f85c94bf5b365e8ec706fadc2203eed3a892b0acc2c65f813f484081c"
+        },
+        {
+          "id": "riatzukiza/foresight@93f3c0d57b8d61d1fb964d89db4d1c4bcfca03a2:docs/agile/kanban/cc1-01-codex-cloud-bootstrap-contract.md",
+          "status": "review",
+          "sha256": "aedfa2bdadcd527f8b33795b17c3e33d704256e91186c6bf486ca3aa1c0f3c4f"
+        },
+        {
+          "id": "open-hax/foresight@6d0b414498ff8feed5c871c30714c23680858ba0:docs/agile/kanban/cc1-01-codex-cloud-bootstrap-contract.md",
+          "status": "review",
+          "sha256": "aedfa2bdadcd527f8b33795b17c3e33d704256e91186c6bf486ca3aa1c0f3c4f"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::3f2c935b-7a8e-4324-9a5a-9181ae23b7a1",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/converge-alpha-portable-envelopes-ae23b7a1.md",
+          "status": "blocked",
+          "sha256": "6d7b8f35cea3bf0ee64875aeb36ab6214f77def8763398ac379f2e4df0c43ddd"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/converge-alpha-portable-envelopes-ae23b7a1.md",
+          "status": "blocked",
+          "sha256": "6d7b8f35cea3bf0ee64875aeb36ab6214f77def8763398ac379f2e4df0c43ddd"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/converge-alpha-portable-envelopes-ae23b7a1.md",
+          "status": "blocked",
+          "sha256": "6d7b8f35cea3bf0ee64875aeb36ab6214f77def8763398ac379f2e4df0c43ddd"
+        },
+        {
+          "id": "riatzukiza/foresight@a92b94bf8fa00dc3765cb9be55fa178391f11198:docs/agile/kanban/converge-alpha-portable-envelopes-ae23b7a1.md",
+          "status": "blocked",
+          "sha256": "2998359afbc6cec66c8fcd80b50d42c574cc8e60577a0f45e697a9e615137082"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::4f5cb66d-4fd2-47cf-92cc-2185b057a889",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/coordinate-eta-mu-github-evidence-agent.md",
+          "status": "in-progress",
+          "sha256": "5240c510bf7605d8b0fcaedee100199490c7f6c14fdfc5f745bd96859c4994ed"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/coordinate-eta-mu-github-evidence-agent.md",
+          "status": "in-progress",
+          "sha256": "5240c510bf7605d8b0fcaedee100199490c7f6c14fdfc5f745bd96859c4994ed"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/coordinate-eta-mu-github-evidence-agent.md",
+          "status": "in-progress",
+          "sha256": "5240c510bf7605d8b0fcaedee100199490c7f6c14fdfc5f745bd96859c4994ed"
+        },
+        {
+          "id": "riatzukiza/foresight@cf57e8988f32ea3a8adc2dfaab5993dd5875c622:docs/agile/kanban/coordinate-eta-mu-github-evidence-agent.md",
+          "status": "in-progress",
+          "sha256": "5240c510bf7605d8b0fcaedee100199490c7f6c14fdfc5f745bd96859c4994ed"
+        },
+        {
+          "id": "riatzukiza/foresight@8ef5f80aa610838e7db0088b1c0bff2958dad871:docs/agile/kanban/coordinate-eta-mu-github-evidence-agent.md",
+          "status": "in-progress",
+          "sha256": "add113cb0fe381b887e4c4a61dd959b14ea45b2d22ee342045290cc97afe1007"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::fork-org-drift-check",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/detect-fork-org-drift-ft-check.md",
+          "status": "incoming",
+          "sha256": "400c2385c12de96de1c14976bf648f6ef7ac7a394c36accc47e48acc972dd3d8"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/detect-fork-org-drift-ft-check.md",
+          "status": "incoming",
+          "sha256": "400c2385c12de96de1c14976bf648f6ef7ac7a394c36accc47e48acc972dd3d8"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/detect-fork-org-drift-ft-check.md",
+          "status": "incoming",
+          "sha256": "400c2385c12de96de1c14976bf648f6ef7ac7a394c36accc47e48acc972dd3d8"
+        },
+        {
+          "id": "riatzukiza/foresight@57179b05d2d613ecb1fd1bc2291a15eb9d486a20:docs/agile/kanban/detect-fork-org-drift-ft-check.md",
+          "status": "incoming",
+          "sha256": "07de909ca01e69d01952f0f23cd35fb12a47b5bd38264be467f3e6bebbd6dad6"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::e1-10-reviewer-start-window-protection",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/e1-10-reviewer-start-window-protection.md",
+          "status": "blocked",
+          "sha256": "fb32dd02beb07bc302719f5903ae51ee05074eec0c9c3b5d5a6443fb4b4a355d"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/e1-10-reviewer-start-window-protection.md",
+          "status": "blocked",
+          "sha256": "fb32dd02beb07bc302719f5903ae51ee05074eec0c9c3b5d5a6443fb4b4a355d"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/e1-10-reviewer-start-window-protection.md",
+          "status": "blocked",
+          "sha256": "fb32dd02beb07bc302719f5903ae51ee05074eec0c9c3b5d5a6443fb4b4a355d"
+        },
+        {
+          "id": "open-hax/foresight@930069325c788cc1d5884e8e66d8885226021050:docs/agile/kanban/e1-10-reviewer-start-window-protection.md",
+          "status": "blocked",
+          "sha256": "bbbe3c2846081fb36fa28859478dd8733a23346f844efd948763764d146c1101"
+        },
+        {
+          "id": "riatzukiza/foresight@8110eb803aeb45416245172e4157bdb9cb7d0f5d:docs/agile/kanban/e1-10-reviewer-start-window-protection.md",
+          "status": "blocked",
+          "sha256": "bbbe3c2846081fb36fa28859478dd8733a23346f844efd948763764d146c1101"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::a1d0645d-49a6-4e8d-b744-4e1a94175066",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/establish-the-pinned-repository-census-94175066.md",
+          "status": "in_progress",
+          "sha256": "168c5a0111ee060ecbbc30553745e6da56d40097ce2faa4f138c430443b16c6b"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/establish-the-pinned-repository-census-94175066.md",
+          "status": "in_progress",
+          "sha256": "168c5a0111ee060ecbbc30553745e6da56d40097ce2faa4f138c430443b16c6b"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/establish-the-pinned-repository-census-94175066.md",
+          "status": "in_progress",
+          "sha256": "168c5a0111ee060ecbbc30553745e6da56d40097ce2faa4f138c430443b16c6b"
+        },
+        {
+          "id": "riatzukiza/foresight@639ced70bb439aa2b2efc063703c62eb29aed0d1:docs/agile/kanban/establish-the-pinned-repository-census-94175066.md",
+          "status": "in_progress",
+          "sha256": "4a95907a6c86476c64412a697ec6f2ac6342dddb63dbb0955d292f674ce1a4ff"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::c9cfd94c-4c18-4469-acf4-d79fbe44f659",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/isolate-exact-commit-evidence-execution-be44f659.md",
+          "status": "todo",
+          "sha256": "dd651e661f296c136bc10a79ed0b2e38f3b1d19db25117fb09a699e56cc637ee"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/isolate-exact-commit-evidence-execution-be44f659.md",
+          "status": "todo",
+          "sha256": "dd651e661f296c136bc10a79ed0b2e38f3b1d19db25117fb09a699e56cc637ee"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/isolate-exact-commit-evidence-execution-be44f659.md",
+          "status": "todo",
+          "sha256": "dd651e661f296c136bc10a79ed0b2e38f3b1d19db25117fb09a699e56cc637ee"
+        },
+        {
+          "id": "riatzukiza/foresight@70980fb64f55121d6633a6725cc91f25828b493d:docs/agile/kanban/isolate-exact-commit-evidence-execution-be44f659.md",
+          "status": "todo",
+          "sha256": "d40dae02540dcf7c61e4369d40a69650bc168fc33945286d15b431cf13f54f46"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+          "status": "todo",
+          "sha256": "0c8d1288aa45b56e7dca8b048ba0f033eb0e83b8e13cde60a7c487a16a56989a"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+          "status": "todo",
+          "sha256": "0c8d1288aa45b56e7dca8b048ba0f033eb0e83b8e13cde60a7c487a16a56989a"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+          "status": "todo",
+          "sha256": "013f3135fde9ae9a066ffc69d2baf9cace7b96f6da8fe692d3bbc45c7c880767"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/prove-translation-generation-and-sme-review-independently.md",
+          "status": "todo",
+          "sha256": "9c4e98b8b5f49f4197749e9708d6db13b0d6e362ce851fc3b4cb7435a6ae517f"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/prove-translation-generation-and-sme-review-independently.md",
+          "status": "todo",
+          "sha256": "9c4e98b8b5f49f4197749e9708d6db13b0d6e362ce851fc3b4cb7435a6ae517f"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/prove-translation-generation-and-sme-review-independently.md",
+          "status": "todo",
+          "sha256": "bd385a52991635c0c1470f7ade9698b8d37832025f9fdecbd692ef848b9f58b5"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::0d73c22a-b018-4b8c-92fe-560127f53294",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+          "status": "in_progress",
+          "sha256": "fdee3ef9ecfa150b92635787b347d4c9296684bfe7e1ca00afc45e54ea434111"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+          "status": "in_progress",
+          "sha256": "fdee3ef9ecfa150b92635787b347d4c9296684bfe7e1ca00afc45e54ea434111"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+          "status": "in_progress",
+          "sha256": "2bd2f3c080b79f5db4f514cfe64ed90fc2cb07ebe80f021499d6585e6b7e9960"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::dev-origin-map",
+      "observations": [
+        {
+          "id": "open-hax/foresight@cffc34448aa6807fc51135d7f90f0f9fe6ba7efe:docs/agile/kanban/record-the-fork-org-map-as-validated-data-igin-map.md",
+          "status": "incoming",
+          "sha256": "d13f28bcd520cf1e48289ab5fa939cb6ddd9472e605427adf4e2205744f803c6"
+        },
+        {
+          "id": "riatzukiza/foresight@8e3ddd4f362d7f9612556b5185b6be9af646eac8:docs/agile/kanban/record-the-fork-org-map-as-validated-data-igin-map.md",
+          "status": "in_progress",
+          "sha256": "38d31e56d838632744175f127b4d85620fed1b1a6e748f6b2400a015336fbd35"
+        },
+        {
+          "id": "open-hax/foresight@working-tree-observation:docs/agile/kanban/record-the-fork-org-map-as-validated-data-igin-map.md",
+          "status": "incoming",
+          "sha256": "d13f28bcd520cf1e48289ab5fa939cb6ddd9472e605427adf4e2205744f803c6"
+        },
+        {
+          "id": "open-hax/foresight@45e33f93a5680e4c75a3b683f9870ced82a9f18c:docs/agile/kanban/record-the-fork-org-map-as-validated-data-igin-map.md",
+          "status": "in_progress",
+          "sha256": "38d31e56d838632744175f127b4d85620fed1b1a6e748f6b2400a015336fbd35"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/record-the-fork-org-map-as-validated-data-igin-map.md",
+          "status": "in_progress",
+          "sha256": "38d31e56d838632744175f127b4d85620fed1b1a6e748f6b2400a015336fbd35"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-knowledge-ops-contract-runtime-dod-restructure",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/epics/knowledge-ops-contract-runtime-dod-restructure.md",
+          "status": "ready",
+          "sha256": "c129331860d6a53cb2fdac8b096c27e249db358ec3afbd3d688cabcf962049ca"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/epics/knowledge-ops-contract-runtime-dod-restructure.md",
+          "status": "ready",
+          "sha256": "c129331860d6a53cb2fdac8b096c27e249db358ec3afbd3d688cabcf962049ca"
+        },
+        {
+          "id": "riatzukiza/knoxx@c35c5175ae398f8524ec2a1acedfe1e736f827ea:kanban/epics/knowledge-ops-contract-runtime-dod-restructure.md",
+          "status": "ready",
+          "sha256": "60aa59044d1f526052c37234b2e8261eabfe5e97482a34845728b0d41ad0925c"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-publication-runtime-follow-up",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/epics/knoxx-publication-runtime-follow-up.md",
+          "status": "accepted",
+          "sha256": "a9134c5c51a7ad2b51e39213cec12fa2c5e311beec1ccc6aaf04716a2a8d933e"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/epics/knoxx-publication-runtime-follow-up.md",
+          "status": "accepted",
+          "sha256": "a9134c5c51a7ad2b51e39213cec12fa2c5e311beec1ccc6aaf04716a2a8d933e"
+        },
+        {
+          "id": "open-hax/knoxx@1de1aeb54463a0f8062f6b73a3479ea4722feb4e:kanban/epics/knoxx-publication-runtime-follow-up.md",
+          "status": "accepted",
+          "sha256": "2f66f1960013431f418ab9ebbf97eac96f61b8342d7f9570a8cb5ed88ed304d5"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-knowledge-ops-adaptive-expand-policy-telemetry",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knowledge-ops-adaptive-expand-policy-telemetry.md",
+          "status": "ready",
+          "sha256": "39acb6a5daed27008877c635efad9f9898ba6b6ba2a2ecf2dd4a41ed7b3c586f"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knowledge-ops-adaptive-expand-policy-telemetry.md",
+          "status": "ready",
+          "sha256": "39acb6a5daed27008877c635efad9f9898ba6b6ba2a2ecf2dd4a41ed7b3c586f"
+        },
+        {
+          "id": "riatzukiza/knoxx@1f2989044b0e5400773047a24594d2dd8567ec2b:kanban/tasks/knowledge-ops-adaptive-expand-policy-telemetry.md",
+          "status": "ready",
+          "sha256": "ca0173a4ac1304da807fcc2aaf9ca581d9a19a6bfbb7350313ec800d6fb3755a"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-knowledge-ops-docs-source-of-truth-normalization",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knowledge-ops-docs-source-of-truth-normalization.md",
+          "status": "ready",
+          "sha256": "04191933182fe82e20157e5714e5c97f890d24ec7525ed86db96e1fc6e66ba7c"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knowledge-ops-docs-source-of-truth-normalization.md",
+          "status": "ready",
+          "sha256": "04191933182fe82e20157e5714e5c97f890d24ec7525ed86db96e1fc6e66ba7c"
+        },
+        {
+          "id": "riatzukiza/knoxx@27a8b66765b4e2164898d705643142f3c3f4c6b4:kanban/tasks/knowledge-ops-docs-source-of-truth-normalization.md",
+          "status": "ready",
+          "sha256": "adb629d79d04dfceef330b5612d12954e58758fa399c15f280c6b0f0496ca329"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-action-agent-spawn-boundary-fix",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-action-agent-spawn-boundary-fix.md",
+          "status": "ready",
+          "sha256": "4f2bc991aad60c03cef5f9ff745d5ad329bb1c9566226ce03221a9605623c639"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-action-agent-spawn-boundary-fix.md",
+          "status": "ready",
+          "sha256": "4f2bc991aad60c03cef5f9ff745d5ad329bb1c9566226ce03221a9605623c639"
+        },
+        {
+          "id": "riatzukiza/knoxx@c46f571ba70d155fcd62080a9eec0831f5101f96:kanban/tasks/knoxx-action-agent-spawn-boundary-fix.md",
+          "status": "in_progress",
+          "sha256": "7322b59c3309bcec2c2d45d3078c3f0580b10dd493178fb7bb3a567856046fb5"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-knoxx-backend-lint-async-workflows-src",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-backend-lint-async-workflows-src.md",
+          "status": "in_progress",
+          "sha256": "86ded65aa9f505ff4647281d1c01bc16c9e6b072aa1f978b1070747ae872ec54"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-backend-lint-async-workflows-src.md",
+          "status": "in_progress",
+          "sha256": "86ded65aa9f505ff4647281d1c01bc16c9e6b072aa1f978b1070747ae872ec54"
+        },
+        {
+          "id": "riatzukiza/knoxx@dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03:kanban/tasks/knoxx-backend-lint-async-workflows-src.md",
+          "status": "in_progress",
+          "sha256": "c650bf4d26c0125a3b52cc8d4c47f27f61ac14df7d3e1eb723e716ed6cb10b2d"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-knoxx-backend-lint-test-boundaries",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-backend-lint-test-boundaries.md",
+          "status": "todo",
+          "sha256": "eac86d2bee688dff73827fd6b1e9fe7314285cdba65ccf75179f3314de011d0d"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-backend-lint-test-boundaries.md",
+          "status": "todo",
+          "sha256": "eac86d2bee688dff73827fd6b1e9fe7314285cdba65ccf75179f3314de011d0d"
+        },
+        {
+          "id": "riatzukiza/knoxx@dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03:kanban/tasks/knoxx-backend-lint-test-boundaries.md",
+          "status": "in_progress",
+          "sha256": "35eaeab1f12fc8de2412da639bcad0a7729eea73b1f9f34fa26905263123d5bc"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-knoxx-backend-lint-zero-warning-gate",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-backend-lint-zero-warning-gate.md",
+          "status": "todo",
+          "sha256": "fb592fc9e9724285b5864a2e16eb00a8fa00ff14251a09a0191c7f31196f46f3"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-backend-lint-zero-warning-gate.md",
+          "status": "todo",
+          "sha256": "fb592fc9e9724285b5864a2e16eb00a8fa00ff14251a09a0191c7f31196f46f3"
+        },
+        {
+          "id": "riatzukiza/knoxx@8f0e58db49bafec4a25c5eac161f72076d3ab263:kanban/tasks/knoxx-backend-lint-zero-warning-gate.md",
+          "status": "breakdown",
+          "sha256": "98361153fcf1e966e850edafa5901b1e001c1ca330468ffccf5b014f2471652d"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-cms-resource-backed-publication-ui",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-cms-resource-backed-publication-ui.md",
+          "status": "review",
+          "sha256": "47ed80df8d991ec02abd1514b7db09170195e384721a71f110b39f43d0482a6e"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-cms-resource-backed-publication-ui.md",
+          "status": "review",
+          "sha256": "47ed80df8d991ec02abd1514b7db09170195e384721a71f110b39f43d0482a6e"
+        },
+        {
+          "id": "open-hax/knoxx@482079b722b111991c8e8321e89520eec79f3d5a:kanban/tasks/knoxx-cms-resource-backed-publication-ui.md",
+          "status": "in_progress",
+          "sha256": "e768d2f2d439972f9ab5754b243d11ddb4a4dcceaeb45cc3d688bdda8c84d0e2"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-frontend-app-bridge-retirement",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-frontend-app-bridge-retirement.md",
+          "status": "accepted",
+          "sha256": "a4977d6d73d07915095f71170fbdc7ea51c206b008500023ae2db4a1b35ef313"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-frontend-app-bridge-retirement.md",
+          "status": "accepted",
+          "sha256": "a4977d6d73d07915095f71170fbdc7ea51c206b008500023ae2db4a1b35ef313"
+        },
+        {
+          "id": "open-hax/knoxx@482079b722b111991c8e8321e89520eec79f3d5a:kanban/tasks/knoxx-frontend-app-bridge-retirement.md",
+          "status": "accepted",
+          "sha256": "387e36f08f890cabf438f3dcd15f5351f4f9a2c9f1f9f044f939dfa472f2942f"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-http-event-runtime-lifecycle-separation",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-http-event-runtime-lifecycle-separation.md",
+          "status": "ready",
+          "sha256": "f23cc74cb6ff5f2a8f4ed3df926b34342cb918b39563d957e6d5e6c675ae01ef"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-http-event-runtime-lifecycle-separation.md",
+          "status": "ready",
+          "sha256": "f23cc74cb6ff5f2a8f4ed3df926b34342cb918b39563d957e6d5e6c675ae01ef"
+        },
+        {
+          "id": "riatzukiza/knoxx@41e57c08ab5518af9ad7ff05fdd3cf871ceb676c:kanban/tasks/knoxx-http-event-runtime-lifecycle-separation.md",
+          "status": "ready",
+          "sha256": "5962be196b604911708a1e83a9935ca87bf4c62f5907f194e8dff5d90d100179"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-publication-lossless-edn-state-edits",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-publication-lossless-edn-state-edits.md",
+          "status": "ready",
+          "sha256": "7ebff923aab120b4512e1cf29cfb61197d4d26dd94f57fa320e03b0f56968b22"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-publication-lossless-edn-state-edits.md",
+          "status": "ready",
+          "sha256": "7ebff923aab120b4512e1cf29cfb61197d4d26dd94f57fa320e03b0f56968b22"
+        },
+        {
+          "id": "riatzukiza/knoxx@fa814892b920e2a2ee97bbe6116a064e2047ef6b:kanban/tasks/knoxx-publication-lossless-edn-state-edits.md",
+          "status": "ready",
+          "sha256": "51204fec644f95e461fc36adecd4365654bf0ba08f8a4377c50747e72cbf1227"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-resource-repository-snapshot-observation",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-resource-repository-snapshot-observation.md",
+          "status": "incoming",
+          "sha256": "11c2bf504f1c918dfc2b5fd88421fcc0cb64508e5dfaa75d7368a74ce2b1841a"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-resource-repository-snapshot-observation.md",
+          "status": "incoming",
+          "sha256": "11c2bf504f1c918dfc2b5fd88421fcc0cb64508e5dfaa75d7368a74ce2b1841a"
+        },
+        {
+          "id": "open-hax/knoxx@1de1aeb54463a0f8062f6b73a3479ea4722feb4e:kanban/tasks/knoxx-resource-repository-snapshot-observation.md",
+          "status": "incoming",
+          "sha256": "5dd1fcf03c6fe8062c9455848241a581f6219bf715090f61de84b332a2e7a8eb"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-tenant-fail-closed-route-guard",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-tenant-fail-closed-route-guard.md",
+          "status": "ready",
+          "sha256": "1d40baf6aa889602a42f22d557d8c3bd5a94b6e09389bbf0599a9306242723e4"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-tenant-fail-closed-route-guard.md",
+          "status": "ready",
+          "sha256": "1d40baf6aa889602a42f22d557d8c3bd5a94b6e09389bbf0599a9306242723e4"
+        },
+        {
+          "id": "open-hax/knoxx@1de1aeb54463a0f8062f6b73a3479ea4722feb4e:kanban/tasks/knoxx-tenant-fail-closed-route-guard.md",
+          "status": "ready",
+          "sha256": "912800909847c8bbaa22638d7acd0c0ef6ecefdb592938bdc6087908f4eda49c"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-translation-config-publication-dependency-removal",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-translation-config-publication-dependency-removal.md",
+          "status": "incoming",
+          "sha256": "471034b70908e4c31462267e1deb669dc1c015235b3d374447eb837f2b420b90"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-translation-config-publication-dependency-removal.md",
+          "status": "incoming",
+          "sha256": "471034b70908e4c31462267e1deb669dc1c015235b3d374447eb837f2b420b90"
+        },
+        {
+          "id": "open-hax/knoxx@1de1aeb54463a0f8062f6b73a3479ea4722feb4e:kanban/tasks/knoxx-translation-config-publication-dependency-removal.md",
+          "status": "incoming",
+          "sha256": "3a733055ba08fcac1e412466f23ab95040b39b38b8e512df2875b50973d6c148"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-translation-config-trusted-auth-context",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-translation-config-trusted-auth-context.md",
+          "status": "incoming",
+          "sha256": "4486cfb56b3ac4c8eab673614ec7f02a6352c6579dc8df6b8ef7b8f59ece3c00"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-translation-config-trusted-auth-context.md",
+          "status": "incoming",
+          "sha256": "4486cfb56b3ac4c8eab673614ec7f02a6352c6579dc8df6b8ef7b8f59ece3c00"
+        },
+        {
+          "id": "open-hax/knoxx@1de1aeb54463a0f8062f6b73a3479ea4722feb4e:kanban/tasks/knoxx-translation-config-trusted-auth-context.md",
+          "status": "incoming",
+          "sha256": "153c8af09817de1ba8c1600be360053ae01b1d96ec108f077b44d5b837f7a8d8"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-translations-event-sourced",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-translations-event-sourced.md",
+          "status": "incoming",
+          "sha256": "472ee5a824c63a6ce0a7fe55521e0cbb5245ed9323197f0974ea0def081e7012"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-translations-event-sourced.md",
+          "status": "incoming",
+          "sha256": "472ee5a824c63a6ce0a7fe55521e0cbb5245ed9323197f0974ea0def081e7012"
+        },
+        {
+          "id": "open-hax/knoxx@1de1aeb54463a0f8062f6b73a3479ea4722feb4e:kanban/tasks/knoxx-translations-event-sourced.md",
+          "status": "incoming",
+          "sha256": "a0cad536ed16853dccfcb103223564be0d2eb8ffa8018b2505654b6ec8d29c64"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-versioned-resolved-translation-config",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/tasks/knoxx-versioned-resolved-translation-config.md",
+          "status": "incoming",
+          "sha256": "7cf860f63d2cb3e248e3bedb97190f14ef2404493df2d7840514bbd0383195c4"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/tasks/knoxx-versioned-resolved-translation-config.md",
+          "status": "incoming",
+          "sha256": "7cf860f63d2cb3e248e3bedb97190f14ef2404493df2d7840514bbd0383195c4"
+        },
+        {
+          "id": "open-hax/knoxx@1de1aeb54463a0f8062f6b73a3479ea4722feb4e:kanban/tasks/knoxx-versioned-resolved-translation-config.md",
+          "status": "incoming",
+          "sha256": "d220cf45417f86c5ca6ffaacb9a60b4d98c4d7d0407aaaff9964287c3602b3ba"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-2.3-content-editor-provenance",
+      "observations": [
+        {
+          "id": "open-hax/knoxx@3409977bca4ba35e09967f9a99d50867a679a73c:kanban/workbench/2.3-content-editor-provenance.md",
+          "status": "ready",
+          "sha256": "625b7fef58016f4ef5a940154e37bbf61ada79d29815f95b0a4bb2b30b3e9840"
+        },
+        {
+          "id": "riatzukiza/knoxx@b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792:kanban/workbench/2.3-content-editor-provenance.md",
+          "status": "ready",
+          "sha256": "625b7fef58016f4ef5a940154e37bbf61ada79d29815f95b0a4bb2b30b3e9840"
+        },
+        {
+          "id": "riatzukiza/knoxx@d30221d335aca426f655acb4e777e7f5ffc0f37e:kanban/workbench/2.3-content-editor-provenance.md",
+          "status": "ready",
+          "sha256": "5c31f09f5a17af89451ca99e806698d40afe2555b1720fed310d3e36adca0651"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::f369c598-279c-498d-a64f-45d2ce16ad34",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@a48a9ec76a6118b1557d11a4bc78e4caae45cdc6:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "0c7c2ece05ebd744e8e2926378d16658fbce2537294c036a4548b9cf17fa49ca"
+        },
+        {
+          "id": "octave-commons/Truth@34f56263e845448dd506f5ec85497e473e19ef81:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "49e92e754919dc4776714ae5c304b13f6ef78745d38d9f5590213f987fc8392d"
+        },
+        {
+          "id": "octave-commons/Truth@6944df4ec266ec25059c89181fe3d07522d076b3:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "984a25e8ed7c433a25814580bd263fe481ee750e46a13b8ac4e252bfd9242c11"
+        },
+        {
+          "id": "octave-commons/Truth@a29447c994e65e5b78c4e01efa4c11aec8d32206:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "50408133baa732730029ee1d7ed603a96b6bd80ed7f10d432985f3304819f13c"
+        },
+        {
+          "id": "octave-commons/Truth@36692669c439043696a09e3c5144b899878b4718:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "a8b038a9ba237026ed85ae857c31f4529c0959d3c948959ba182486caa359e5e"
+        },
+        {
+          "id": "octave-commons/Truth@954a7498494fad76c0391c4178fce71131b080b4:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "60b23a5a73e866300fdf3cd78afbf0308f7283f6c5499f7d030b6a9d1d5bcb5b"
+        },
+        {
+          "id": "octave-commons/Truth@073054c338bc3c589d329fb0ad3866458862f245:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "efe928f6f0457162892b15d2782bf5ed6ab8c2e9ad13ccc11516f171fea4b891"
+        },
+        {
+          "id": "octave-commons/Truth@678ea3d1cd0acb1bac0f59073ce28b8a48786c85:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "a528321440a5171b7112a2dcc365fe1d77ac0a08b41baaf68e1e3f97dc0c899a"
+        },
+        {
+          "id": "octave-commons/Truth@74fe6df8e73e06838a9ada04af3c983cec73079c:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "0e48e3aa79069ca86b765b37dbb5744637c6281ca4965d785fe17ea6f3d1a4b1"
+        },
+        {
+          "id": "octave-commons/Truth@93dc5b2bc0c734e5d8c311ac004035581db885b4:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "cfaba69efb9bbdef03a537adcb3d716a22eb7c1b5ce5b4da16f13ca614c0bdb5"
+        },
+        {
+          "id": "octave-commons/Truth@b395c4049718f7ce015ddf25fc0a192d97821373:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "b7bbc6751863fe7640bc659c18877f55566312d937c2e4eb8ae16d3b60b6bc52"
+        },
+        {
+          "id": "octave-commons/Truth@4bfba34da458184cedb3d65a61fc8e731afc8942:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "86bdfb679b682388cd5593c2dbb07b8ee01096622dd7a4ae61410d0ae419b90c"
+        },
+        {
+          "id": "octave-commons/Truth@659b99a379aa6fb5400edb32fda35aa44d9b859f:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "f3fe9fbbbe4bb4891e40c075c882b003fe7371dd1b9127e8863e6680b19000b4"
+        },
+        {
+          "id": "octave-commons/Truth@7f1fbcae786a7aa4c6b1cb2eed5d79dd71bb6e58:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "186f38a53a6fa1fefba81add38e42f05c79dea67f1bfb3fc80a7d8626840b49c"
+        },
+        {
+          "id": "octave-commons/Truth@2e8df7319340c1f410aab945b2465135c911713a:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "74d4f277689e84c393a4b896ec14ccc29fc0cee3db8bcf62d502fac1b291f606"
+        },
+        {
+          "id": "octave-commons/Truth@aa1fd95be217f21056160327fe695104e945331b:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "e91110ccef368732142d06f03a9dd173b31c3608b98503479a12f823c7c2cee0"
+        },
+        {
+          "id": "octave-commons/Truth@5ce5decae9ab756082d7e693834b4904a4c33e42:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "5492b0a26e5df79cdaa3243d8d0743de9d994fb8b6cb1851fb1aa23fdc0defc3"
+        },
+        {
+          "id": "octave-commons/Truth@c99a61c13e950542407b2bc8a78497e6d3b73fa8:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "e62aeb0c3413f588a0d1e07aa79d193f7d177ab39f3d579932afc52fcb8a962d"
+        },
+        {
+          "id": "octave-commons/Truth@81b4ae206d0cc04066e81771f05274180fa1ba19:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "a5d139f65c903a9f31b6bec3bda9ad20bd0785103840f6397ae9f17a5af24670"
+        },
+        {
+          "id": "octave-commons/Truth@64f8141b40cfb8db94ea2f005004f068a3f47a72:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "b51c01a930f3475a4740dd87ab71518490f5cc8592606975cd8b652a074a48d2"
+        },
+        {
+          "id": "octave-commons/Truth@4805fae52bd6764e4cf01555bc1d7417dd373349:kanban/tasks/verify-native-fly-resolve-sculpt-loop-and-graceful-exit.md",
+          "status": "in_progress",
+          "sha256": "a32c71c66cff1b3c51cc2732156f2247c36dff47492487805b317750312a65e9"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::reusable-clio-document-history",
+      "observations": [
+        {
+          "id": "open-hax/eta-mu@a2f428afd7623dcd188d535512525ee521a5ba61:kanban/tasks/reusable-clio-document-history-and-edn-projections--history.md",
+          "status": "review",
+          "sha256": "8fa9799ae512fce3973f53119e2e7b029de59f511a89937de57a6fb1b0274b00"
+        },
+        {
+          "id": "riatzukiza/eta-mu@d2487fad2a71d974b21d8cd71a81bfde8fc5e479:kanban/tasks/reusable-clio-document-history-and-edn-projections--history.md",
+          "status": "review",
+          "sha256": "d215aa359470612930bef40885543e6ccd4ea11fadf8f949b86f4f0889162da9"
+        },
+        {
+          "id": "riatzukiza/eta-mu@15093b7f5d9e1500f0ef02bcc0968850955fb014:kanban/tasks/reusable-clio-document-history-and-edn-projections--history.md",
+          "status": "review",
+          "sha256": "d215aa359470612930bef40885543e6ccd4ea11fadf8f949b86f4f0889162da9"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-translation-resource-locale-filter-options",
+      "observations": [
+        {
+          "id": "riatzukiza/knoxx@fe871a8658598c77cfd9948b68ed109b48a646eb:kanban/tasks/keep-resource-translation-locales-selectable-without-legacy-statistics--options.md",
+          "status": "breakdown",
+          "sha256": "a95ad0a8f2d7af3e457dd6a12e12c020b282e2720933322be25e48a84833788e"
+        },
+        {
+          "id": "riatzukiza/knoxx@dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03:kanban/tasks/keep-resource-translation-locales-selectable-without-legacy-statistics--options.md",
+          "status": "ready",
+          "sha256": "e5c7a5d9482a761263dcb902224b126565504111562a512686f0f741cda845b4"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-translation-review-current-view-mutation-lifecycle",
+      "observations": [
+        {
+          "id": "riatzukiza/knoxx@fe871a8658598c77cfd9948b68ed109b48a646eb:kanban/tasks/keep-translation-review-mutations-bound-to-the-current-view-lifecycle.md",
+          "status": "breakdown",
+          "sha256": "dc5d47105a27bfa0e6ca8d549604bd39cc0a1a7d64c7e78ece41126d3007d285"
+        },
+        {
+          "id": "riatzukiza/knoxx@dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03:kanban/tasks/keep-translation-review-mutations-bound-to-the-current-view-lifecycle.md",
+          "status": "in_progress",
+          "sha256": "aebf1332d26df6d29348241b05bc6dd53d599be6d841e9a532ff6f93031be27a"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::ae9a3cb7-a630-4d8d-8d60-c69b825d008d",
+      "observations": [
+        {
+          "id": "riatzukiza/knoxx@fe871a8658598c77cfd9948b68ed109b48a646eb:kanban/tasks/preserve-current-translation-drafts-while-refreshing-completed-reviews-825d008d.md",
+          "status": "breakdown",
+          "sha256": "72d1b5ccd78d69e4842ee44226fd061ae8853586943f0d20bdb09db96468ee06"
+        },
+        {
+          "id": "riatzukiza/knoxx@dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03:kanban/tasks/preserve-current-translation-drafts-while-refreshing-completed-reviews-825d008d.md",
+          "status": "ready",
+          "sha256": "03991c06053630e1b76ed9e1dcee2d89a39f9c9b2b01a4869df64799fab10a66"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::knoxx-translation-review-legacy-fixture-auth-preflight",
+      "observations": [
+        {
+          "id": "riatzukiza/knoxx@fe871a8658598c77cfd9948b68ed109b48a646eb:kanban/tasks/seed-run-owned-legacy-review-fixtures-and-prove-auth-preflight-reflight.md",
+          "status": "breakdown",
+          "sha256": "fbf065d5b855216ac813fd7596f182ce2b0aaac7efc44337f9b44c5a9337c54c"
+        },
+        {
+          "id": "riatzukiza/knoxx@dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03:kanban/tasks/seed-run-owned-legacy-review-fixtures-and-prove-auth-preflight-reflight.md",
+          "status": "in_progress",
+          "sha256": "6f64b9f5691248947c05f9dbb52d787dbc0ff49f530e43bbc6135a9bfb888a86"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::life-to-represented-actor-spec",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@8557575efdb993cfd3867f055430968c2e412a14:kanban/tasks/ground-the-first-causal-life-to-represented-actor-boundary-tor-spec.md",
+          "status": "incoming",
+          "sha256": "dbc0a5875768a7878758948da646bbbaa02f1c7527f131fbdfe49af10fd92286"
+        },
+        {
+          "id": "octave-commons/Truth@7f05e4f47c5af55937e2d3149a8d293ae0870e36:kanban/tasks/ground-the-first-causal-life-to-represented-actor-boundary-tor-spec.md",
+          "status": "incoming",
+          "sha256": "336c4e527437e3fb63884949786fc31b3ec77141735f57675932f8b5a09eb505"
+        },
+        {
+          "id": "octave-commons/Truth@1bda27a27f1e88c061ebdff718264a55ef2a9938:kanban/tasks/ground-the-first-causal-life-to-represented-actor-boundary-tor-spec.md",
+          "status": "incoming",
+          "sha256": "7ddf455578ace95c7d2bc513e99994444dbce9537516731e0840c836b6c20c89"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::a2b46a04-d541-4714-aed9-bf07d9a9c923",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@8557575efdb993cfd3867f055430968c2e412a14:kanban/tasks/recover-the-playable-gate-dependency-plan-from-runtime-and-corpus-evidence.md",
+          "status": "review",
+          "sha256": "cef0585c870060a7ee4e1620a4b6ea6b9e937572752414837cc4d5fdf3feb65b"
+        },
+        {
+          "id": "octave-commons/Truth@8bcfc12d9ca2851891a4060f52f287f9b9f455f8:kanban/tasks/recover-the-playable-gate-dependency-plan-from-runtime-and-corpus-evidence.md",
+          "status": "review",
+          "sha256": "f0ba62ea30233fe07c8a88f119dc78aaf034a41efb010173ba0ca89ecf83254b"
+        },
+        {
+          "id": "octave-commons/Truth@c99a61c13e950542407b2bc8a78497e6d3b73fa8:kanban/tasks/recover-the-playable-gate-dependency-plan-from-runtime-and-corpus-evidence.md",
+          "status": "review",
+          "sha256": "dda29a377e5d7c68775c9f507e6565135e52e2c9b8c6b42dc39d0e438f3e1ec4"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::committed-clock-executable-policy",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@8557575efdb993cfd3867f055430968c2e412a14:kanban/tasks/specify-the-executable-committed-world-clock-and-later-history-contract-e-policy.md",
+          "status": "incoming",
+          "sha256": "df31e9f957409d1c2972663e91901d439afc1f9407d2dc57914ad54e478194fa"
+        },
+        {
+          "id": "octave-commons/Truth@e093999875de78ce249cc13520fd4268575c1dd4:kanban/tasks/specify-the-executable-committed-world-clock-and-later-history-contract-e-policy.md",
+          "status": "incoming",
+          "sha256": "5a629f46ad9eb6a3b6710c53c1bd9e6ba68b63b95de31589553d68af3ab07255"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/shx::heretic-schema-literal-attribution",
+      "observations": [
+        {
+          "id": "riatzukiza/shx@dac25e949e4b904e5ea159e58d829dcc0d322692:kanban/decision-how-to-mutation-test-malli-schema-literals-ribution.md",
+          "status": "incoming",
+          "sha256": "8f6cda77b264476090f6f928ec539e5e00d8538a09c016cc203e30e389ecc888"
+        },
+        {
+          "id": "riatzukiza/shx@f4ee133dcf1650c7eafb623ef084f62417252477:kanban/decision-how-to-mutation-test-malli-schema-literals-ribution.md",
+          "status": "incoming",
+          "sha256": "9e43ba627ef84dec19a32950be0720157bc21cafcc6e627e41cfada4beff5699"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/knoxx::prepare-the-pinned-openplanner-sdk-in-knoxx-sandbox-bundles",
+      "observations": [
+        {
+          "id": "riatzukiza/knoxx@dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03:kanban/tasks/prepare-the-pinned-openplanner-sdk-in-knoxx-sandbox-bundles.md",
+          "status": "in_progress",
+          "sha256": "fb2ea2eaf1f8cc7389e981afb9bdc479b3fb65e9b9080b3548cd1b0cc4325ef0"
+        },
+        {
+          "id": "riatzukiza/knoxx@642c680a86353b79afcfd7a5ea64f8f27250a9d6:kanban/tasks/prepare-the-pinned-openplanner-sdk-in-knoxx-sandbox-bundles.md",
+          "status": "breakdown",
+          "sha256": "8f76bab4a87fc9cd22ecb6dc0a078251c34a0df1c57b894ad83798cdbdd9025c"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/eta-mu::6fa1867d-24da-4b20-92ee-b6372e66c1f4",
+      "observations": [
+        {
+          "id": "riatzukiza/eta-mu@c28ab572ee5eb7478f2ce9cb30e3973014bb1a2f:kanban/tasks/reconcile-evidence-lane-catalog-with-accepted-fold.md",
+          "status": null,
+          "sha256": "ed8a69b9c43bbbce46f1d6346fa5bd32509c7bda6329fb1b8242c9a7c7b50716"
+        },
+        {
+          "id": "riatzukiza/eta-mu@5fde158451ffb425ace778bc9832198b7fd6fc75:kanban/tasks/reconcile-evidence-lane-catalog-with-accepted-fold.md",
+          "status": null,
+          "sha256": "c7045363dccfdf1371e548bb86104252a6b0122b66506086d6a264f80c4917ac"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/Truth::a4744132-2328-4cb2-a550-e1328d346673",
+      "observations": [
+        {
+          "id": "octave-commons/Truth@239eb9b2494241e3a9850b67b77d37407bd2191b:kanban/tasks/ground-condensed-water-material-and-inventory-aware-retention-8d346673.md",
+          "status": "incoming",
+          "sha256": "0eb39e3645fce63b09bfe35545f7b6956ca750a4f3649f5b715352ed84cceab1"
+        },
+        {
+          "id": "octave-commons/Truth@8f9ee36b8848e046e40eb5fb36ab4cbab5ab6946:kanban/tasks/ground-condensed-water-material-and-inventory-aware-retention-8d346673.md",
+          "status": "incoming",
+          "sha256": "e9ba057e727831dc1e80288f3819fb4c39cd7d93cef821a2b61024a0a03382a1"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/shx::structural-smells-and-boundary-check",
+      "observations": [
+        {
+          "id": "riatzukiza/shx@f4ee133dcf1650c7eafb623ef084f62417252477:kanban/add-the-structural-smell-report-and-a-namespace-law-boundary-check-ry-check.md",
+          "status": "incoming",
+          "sha256": "8bac56ded9958b3b142d4c0872b8deaa9f42b0e16dc8082e56974c85758f1758"
+        },
+        {
+          "id": "riatzukiza/shx@1d134133067ab2d4f1372d9469e13fe016b8263d:kanban/add-the-structural-smell-report-and-a-namespace-law-boundary-check-ry-check.md",
+          "status": "incoming",
+          "sha256": "9207620f6a2f75b8912b24416cd75ad28e00352d3ed6e2bbf2b755f91007f59a"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/shx::shx-kanban-shx-bb-cli-untested",
+      "observations": [
+        {
+          "id": "riatzukiza/shx@f4ee133dcf1650c7eafb623ef084f62417252477:kanban/shx-bb-cli-untested.md",
+          "status": "incoming",
+          "sha256": "24b466c5628df5b57a0408db488864e3481a9f2202c5f4ff45724e0d8708a883"
+        },
+        {
+          "id": "riatzukiza/shx@698efc86a3749db0fdc4ce62e1dac2ec71f1f5a5:kanban/shx-bb-cli-untested.md",
+          "status": "incoming",
+          "sha256": "daaa8b7140985f40efe80b59e433f5edc29b91ee54ef5ea23d9f57f41edae14b"
+        }
+      ]
+    },
+    {
+      "identity": "octave-commons/shx::shx-kanban-shx-core-runtime-missing",
+      "observations": [
+        {
+          "id": "riatzukiza/shx@f4ee133dcf1650c7eafb623ef084f62417252477:kanban/shx-core-runtime-missing.md",
+          "status": "incoming",
+          "sha256": "cf357823010627f01b4a9a15643fd1448bc0f18e24d33dd901b753ef7e3a9f1b"
+        },
+        {
+          "id": "riatzukiza/shx@e271747deae46bd2f50d77d3a7b8d4b8f0d4ca00:kanban/shx-core-runtime-missing.md",
+          "status": "incoming",
+          "sha256": "fd322f73847bb235604b9ae7bb2887cf77bb40606dcf89c8926d23fefb4ee74c"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::ada3bc51-1528-4ae3-aa46-095d217142ea",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/apply-adopted-rheos-metadata-repair-to-foresight-cutover-cards-217142ea.md",
+          "status": "incoming",
+          "sha256": "5867e1139842d8c4bc54be85311f51c14da0e69a16454134089dd1c34f6c9dd2"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/apply-adopted-rheos-metadata-repair-to-foresight-cutover-cards-217142ea.md",
+          "status": "incoming",
+          "sha256": "9db7757c05bc758c104f1b4ea6b8b7b87daf7dfa7f8d07f1af6610b38dec88f2"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::82c55f16-a688-4ba5-983d-c44c618cdd5d",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/epic-source-preserving-knoxx-embedding-cutover-82c55f16.md",
+          "status": null,
+          "sha256": "6b6e52bda803e36850f0e48291ff9cb098911ea28255ccae82d617175627256d"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/epic-source-preserving-knoxx-embedding-cutover-82c55f16.md",
+          "status": "breakdown",
+          "sha256": "b27024b171b4268b841d7b69d4cdff790ebd77bd73dcb4748908e5058605973b"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::afacb7b7-263a-48e6-a744-a9f4b450407b",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/knoxx-durable-scoped-publication-receipts-b450407b.md",
+          "status": "incoming",
+          "sha256": "25876e7f5efb3bfc1fa742c73bc6993fea2e2731d43099adc2eb63ef1ce59bd9"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/knoxx-durable-scoped-publication-receipts-b450407b.md",
+          "status": "incoming",
+          "sha256": "8e6dc8cb173869adcc04a195bfe021894308f7b0f17cd98a4a3a9d7b4dbd42c5"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::11bc1411-154d-4db7-8c27-51506ab30508",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/knoxx-retained-source-embedding-migration-11bc1411.md",
+          "status": null,
+          "sha256": "bca7bc7883f3ddc8163e24754878376bd6e82adbbcffbf48a4a833c7e23b99d1"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/knoxx-retained-source-embedding-migration-11bc1411.md",
+          "status": "breakdown",
+          "sha256": "206978da55e97ee448e9555547cda5302f868c67f38d3f5e83b40c663939afda"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::d3277a3c-6e30-42b1-8151-16c041612a6a",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/knoxx-validated-shared-embedding-runtime-d3277a3c.md",
+          "status": null,
+          "sha256": "0613257849e5b7126f7a4cdfb712a45f4544bf89239f72e5c677b713aac2f928"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/knoxx-validated-shared-embedding-runtime-d3277a3c.md",
+          "status": "breakdown",
+          "sha256": "2fa2ef87bc27809d38f94c78a705aadb1217379d75f3ebf930a2518d9ad6791e"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::4a9f303e-63d1-48d7-a396-b93c986502d1",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md",
+          "status": "incoming",
+          "sha256": "75ddb094d115e3f231006563e4746a8f2b538e5f22d87c03c9982074763ced36"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/prove-native-content-judgment-publication-and-public-rendering-after-rollout-986502d1.md",
+          "status": "incoming",
+          "sha256": "bc200795a03454adcba08f14cbf83a1f8fc4f0c26e34bd4d8e8cc5106720416b"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::e945de08-58ec-4028-b8cb-5dbd4a1450f4",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/qualify-crash-surviving-publication-attempt-custody-and-receipt-recovery-4a1450f4.md",
+          "status": "incoming",
+          "sha256": "7c708415d0822614e129b05a36422678d3b64d06188b62158b180e6185e76825"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/qualify-crash-surviving-publication-attempt-custody-and-receipt-recovery-4a1450f4.md",
+          "status": "incoming",
+          "sha256": "11f1dd5136c96c0dfb43f3d76d69d1ab64e45e8fdcbcd379bae7e3a6e7c476ce"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::a3ca141e-865e-4c35-8053-53084996f2bc",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/qualify-persistent-publication-receipt-storage-through-publisher-replacement-4996f2bc.md",
+          "status": "incoming",
+          "sha256": "91b8760a3235e87220bfc3efc21391c9817b4f0fe3ee7c8bcd85d547c8c00d4d"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/qualify-persistent-publication-receipt-storage-through-publisher-replacement-4996f2bc.md",
+          "status": "incoming",
+          "sha256": "ba7629e11851a8c5585293c5c17c0608fb5988b570d829892c923bbc68c17252"
+        }
+      ]
+    },
+    {
+      "identity": "open-hax/foresight::03a057e4-3098-4fe7-a5b8-95168f45ca96",
+      "observations": [
+        {
+          "id": "open-hax/foresight@af07f19628482cac8e25ccebaf39b00d9ad9738a:docs/agile/kanban/services-controller-bound-embedding-admission-03a057e4.md",
+          "status": null,
+          "sha256": "461f36da73e980261bacc972012a3a70ee034f39c9a8b056068d01fc2d7f2dde"
+        },
+        {
+          "id": "riatzukiza/foresight@375235326cc8d8230bfd979fbe5097683a7b572c:docs/agile/kanban/services-controller-bound-embedding-admission-03a057e4.md",
+          "status": "breakdown",
+          "sha256": "a4a491476380cc3ec977529da4402c52376ac5022930039efbe074d32619c2b4"
+        }
+      ]
+    }
+  ],
+  "board_discovery_gaps": [
+    {
+      "repository": "open-hax/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../epiphany/docs/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "open-hax/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../proxx/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "open-hax/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../Truth/kanban/tasks",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "open-hax/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../bitch-tracker/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "open-hax/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../muse/docs/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "open-hax/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../fork_tales_v2/docs/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "riatzukiza/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../epiphany/docs/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "riatzukiza/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../proxx/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "riatzukiza/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../Truth/kanban/tasks",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "riatzukiza/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../bitch-tracker/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "riatzukiza/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../muse/docs/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    },
+    {
+      "repository": "riatzukiza/eta-mu",
+      "config": "kanban/openhax.kanban.json",
+      "external_board_path": "../fork_tales_v2/docs/kanban",
+      "outcome": "not-followed-cross-repository-path"
+    }
+  ],
+  "qualification_status": "M0 unqualified: enumeration is complete, ownership and relationship acceptance remain unresolved; no new execution tasks"
+}

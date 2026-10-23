@@ -1,0 +1,1562 @@
+{
+  "schema_version": 1,
+  "root_source": "173cfa24520648849b9e0f553330229d6226b77d",
+  "child_head": "c9ef250dcf5d981c820bbca1abf7c578ee864412",
+  "scope_source": "03878641fd55b9327cdb01e8b522a99bab05d587",
+  "child_native_publication": {
+    "head": "c9ef250dcf5d981c820bbca1abf7c578ee864412",
+    "source": "03878641fd55b9327cdb01e8b522a99bab05d587",
+    "whole_git_object_fetch_verified": true,
+    "native_pr_paths": 100,
+    "terminal_page_empty": true,
+    "native_blobs": [
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/README.md",
+        "bytes": 1494,
+        "sha256": "db5f920322f20e6f82192894617c1cea8c5ad9705b575877767a770e1ac56067",
+        "git_blob": "c711de7b2c85977983f11074d3e6fc8b0edd0947",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/domain/review.cljc",
+        "bytes": 16650,
+        "sha256": "0df06e46f9307f9a80f4dd70013d6fb8f869a99ddff99fc00cf66c0e4810b466",
+        "git_blob": "bb3c575ed3e32ac2c0cd6dfa92cbf6d3e904bd9e",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/extern/review_invocation.cljs",
+        "bytes": 10639,
+        "sha256": "17dda3b9121e4ab96829a5f3ab3d181ca267ca95bd1aba6c2ac33ce47ef3a0ae",
+        "git_blob": "f27fe9902e31cc6b7f9679abaa36c0125f10b2ae",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/law/review_invocation.cljc",
+        "bytes": 16075,
+        "sha256": "7a97ff024da488b6b847d1af5053508b18c6d135ad19841bf0faa4ea3dafd133",
+        "git_blob": "395b37d801731cc01da167bec3ac7aa17f4b4c43",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/shape/git_diff_path.cljc",
+        "bytes": 3522,
+        "sha256": "168a2ab5e16cdd377e1749fbb1278ce6cb82ecd0676968dc69e8e38d83e9dfba",
+        "git_blob": "ae54accc30b2c21f6d0f6fcae54cffcf37dfec92",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/publish-opencode-review.cjs",
+        "bytes": 6572,
+        "sha256": "bb75bc57d8eeaf7edbd77f34e9a4da2d319617d06809f9aadfb0d94e7ae6c2c9",
+        "git_blob": "e9d70b4b9d2ee823e921a5af32451ee5317eb252",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/review-invocation.cjs",
+        "bytes": 144409,
+        "sha256": "d9fea235fddec9581ba1be959e596f32b82588f78cef5fd76d55f04d24b91030",
+        "git_blob": "7ceb531660e9236fb4d3fc73e86dbb42b3893e82",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/run-opencode-review-recovery.mjs",
+        "bytes": 86229,
+        "sha256": "7e12b32abebf27b1e87bb9767bcf217caf8ce1cc0a7a05515a67f91b9005e133",
+        "git_blob": "8cb20e7ba0d17482ae3b2f8b252a386dda570938",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/runtime.json",
+        "bytes": 3461,
+        "sha256": "1fd734d89c4b18dce24a6a87c6024561382b52531285b020fded67e2410d6e8a",
+        "git_blob": "534327a723511dbc1bbe8b7cc0b3f780d6ca5e69",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode-code-review-workflow.test.mjs",
+        "bytes": 154191,
+        "sha256": "c5f3545d1037408b69a930d8fa72fe7318054b82d55a7e9b05564e2273322c9e",
+        "git_blob": "ff266145d1b415234a054c674813d7ec6c6c62ca",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode-review-intent-bootstrap.test.mjs",
+        "bytes": 2680,
+        "sha256": "dc0ab7bde8b81f5eacdfe2131f0c2c0ca1a7e0856136b4f154f95c20e04d73d7",
+        "git_blob": "9d8cc40de0c84b887ebf7a283d7cc31bf12e2815",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_archive_test.cljs",
+        "bytes": 16421,
+        "sha256": "869ba448c1bb347699e58ab9f5c9972455a4e808b60bb7b522de458814eedc17",
+        "git_blob": "654b02c1340d9c2d802723136226aaae9d57c917",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_collection_test.cljs",
+        "bytes": 49506,
+        "sha256": "e4535847d9ad05388c661542f85a9e31fb4f46bd8f9e13a00988ebe14b712503",
+        "git_blob": "4f5ad399f1d4bd4e7304cc048c789c769d5d85b5",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_intent_process_test.mjs",
+        "bytes": 3452,
+        "sha256": "1889d1caad0e16a9b4d762a7fb7b47fc32687b28bb912da42c604184ef94b722",
+        "git_blob": "7ec189fb3e1909f20051e6b354c9303327784e35",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_intent_test.cljs",
+        "bytes": 40178,
+        "sha256": "fc4a843b0354aedafc747d2ed9199708e4ffa7b5d03a178707fe7c4e853d2aa0",
+        "git_blob": "fcd98256f24f2e333198239b6c06721126c494ff",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_intent_uncertain_test.mjs",
+        "bytes": 1923,
+        "sha256": "02f8d03e28a23de05bfd57d59d758cac9dd183c98eafa46ab34ceb1776fd8916",
+        "git_blob": "95a0ede8fd6587fcd62a5f040f65d78e52c6750b",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_publish_test.cljs",
+        "bytes": 33366,
+        "sha256": "74c95f5fc20624529bd5e80bd518df4e724eb97be72dea49ea15a59c199cb3df",
+        "git_blob": "1cc79ab57311acf7a0d780551ee7bde2dbfa2eee",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_readback_test.cljs",
+        "bytes": 21321,
+        "sha256": "8f724fe6fdc4d414d73ed3605b0e06bde5a8a94b9b3de64b3622bc88f4786682",
+        "git_blob": "96fcec5e21ad2b530daf33fccf6f79f56d455ff7",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_source_test.cljs",
+        "bytes": 19660,
+        "sha256": "1f949ebc77940855b813c2967dff9389f06d205c53e93dc0615436ae038fe2e3",
+        "git_blob": "41d9f36a30d12772afca2c91f807429e6ac62ad6",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_verification_test.cljs",
+        "bytes": 19643,
+        "sha256": "3dd1bfbeb87207720823afe50217956931a8ead7de6a5dcecc6c73970124573d",
+        "git_blob": "80c6ba5661dcf9c722edff8d2176879b3cdeff74",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/opencode-code-review.yml",
+        "bytes": 204820,
+        "sha256": "ff76052bada6c56797901a796b21393c3b2a5c2a2b1b7bd1e302ade38b0551dd",
+        "git_blob": "e4d30c31265a763a20a64ada1ed8565969483366",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/rheos-github-sync-ci.yml",
+        "bytes": 5965,
+        "sha256": "1f3a6e83b950164037679ae4ed5cc7ed655ee0f8e41b0e1d7a3ac983af21e6c4",
+        "git_blob": "11370cf71ed6445660f523a5ef8eadd472224747",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/rheos.yml",
+        "bytes": 8300,
+        "sha256": "03d1e750cf641feae5a1dd315fa5d046801c402997890c47bbf0ae7dced39df8",
+        "git_blob": "701369791b0a7adea6fe748dfc1e45e127fbbb04",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/sandbox-bundle.yml",
+        "bytes": 9372,
+        "sha256": "81b24e3db9b75279ae5fbe2471868650afd7762bed728eb5b248677fd5e7b779",
+        "git_blob": "81650f890648b373b02b52aca9934179b8b8cf14",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/sol-ci.yml",
+        "bytes": 3540,
+        "sha256": "6e547cd476d7ecc33c1e0e8cca5b4ee79b91ea655398b6d91848b14e261288b7",
+        "git_blob": "b957bc452a26d9d24bf8a6d4fac6f4d46f784e91",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-core/a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b.json.gz",
+        "bytes": 184989,
+        "sha256": "a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b",
+        "git_blob": "61d355b32af5273205bfe940ac9bbe3dfbea85fc",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-readback/checkpoint.json",
+        "bytes": 2710,
+        "sha256": "207a7245414e93e48d610963be0b03684b2606ba240aa4197a11be3042830c58",
+        "git_blob": "597541f6654cb206aa7357895a496d2cc151cdb1",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/README.md",
+        "bytes": 4021,
+        "sha256": "ba959d3d17d06f5a0bb3625ef85e753dae2651e7b8804352da5f1867d938454b",
+        "git_blob": "dcfdd25d61d3de1235619d2ef8b3de1d390abae1",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/audit.json",
+        "bytes": 33488,
+        "sha256": "e6b8db860b8064bd00be56bb1d97dd3ab38d33c323247fa54bf0842ee8368029",
+        "git_blob": "f1b7c682c9fd2022b6f65cf41bf7110100724e3b",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/bundle.1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa.json.gz",
+        "bytes": 30424227,
+        "sha256": "1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa",
+        "git_blob": "b54a90f437a0abe259484c7295c139078094d4f2",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/failed.3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6.json.gz",
+        "bytes": 15003819,
+        "sha256": "3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6",
+        "git_blob": "c76bd56f4dc6e69202ea2494d694486922af3dd6",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/failed.fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4.json.gz",
+        "bytes": 30194904,
+        "sha256": "fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4",
+        "git_blob": "8479bc6dc7b083b8bc1674396a339cf4b1d2970d",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/index.json",
+        "bytes": 200395,
+        "sha256": "dc4ddd49882c113c087ee8b1f2f6bc72a74d55f80d09bdf8fcc47dd6651e1f23",
+        "git_blob": "c70c5621a3e8133f2c550296a8bf88e250038c50",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/inspect.bb",
+        "bytes": 8986,
+        "sha256": "11635aa31673fae8e6656154c9da173df7f0ac91502f097e09a0713d3cbb68bd",
+        "git_blob": "baeea2b8453c8acd41599da245b7e7b066ebe18c",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/test_inspection.bb",
+        "bytes": 8896,
+        "sha256": "19a04ccd235ed458799982879bf24613d0d979cd568cc53501a9d7db3bfc80bf",
+        "git_blob": "42873630d44062cae92bca01aaab5bf37125797c",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/session-mycology/ledger.md",
+        "bytes": 119269,
+        "sha256": "38a9a55f819c6dfd68ebbea0e33c9726c42f29992910bf1ff1f99310a061ac69",
+        "git_blob": "e92f1bb5456effac1992071447027d1a65326d2a",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/session-reflections.edn",
+        "bytes": 41622,
+        "sha256": "76a5109bd3e6f5d40a40b82f9f4b5d21838d832f267929e9d87ce82acf4ab4f3",
+        "git_blob": "c05675110bea57d15022634abc6ba6e37e4cfa5b",
+        "native_blob_matches": true
+      },
+      {
+        "path": "contracts/workflows/.gates.edn",
+        "bytes": 8294,
+        "sha256": "31ae91cdf914a6dfed64b6a036323d9e7cd22c38e58c393212e84e850e42cfdb",
+        "git_blob": "fc4fda88a9a67b67ae2d7d0c4bd79c5005ed7287",
+        "native_blob_matches": true
+      },
+      {
+        "path": "contracts/workflows/ci.edn",
+        "bytes": 11215,
+        "sha256": "e76878328cf271a0b8fc9a8043e4c73254c00579253a7d2100239c5e39eab54b",
+        "git_blob": "737bb516def835d3332d4c6a13ca2b216b153e14",
+        "native_blob_matches": true
+      },
+      {
+        "path": "contracts/workflows/packages.edn",
+        "bytes": 8187,
+        "sha256": "9119c1732847a10d76116559d05df71b3b86c86a472b7bcf94c92e4ed76a7fce",
+        "git_blob": "a8dbaae2ba905a0ee083e94a0eead11e70d9b770",
+        "native_blob_matches": true
+      },
+      {
+        "path": "contracts/workflows/resources.edn",
+        "bytes": 3949,
+        "sha256": "5b6333e6b45496181c5ae90a7cc455d444a20a9bd5152e031d5d366bf4ea5eae",
+        "git_blob": "efff0d0e028b54231a5ee961d0b29f739f27c74a",
+        "native_blob_matches": true
+      },
+      {
+        "path": "docs/agent-workflows.md",
+        "bytes": 42870,
+        "sha256": "a808d760c063807a2c602a99eff8ef4a3c2ab5abf81bf4b6bc688c07aa3e5b04",
+        "git_blob": "271a5980082d5deb785d318ef5569cd8152128af",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/.events/ledger.edn",
+        "bytes": 1866373,
+        "sha256": "a842f3db94bd5d9adf30c875e042cc3eba4fe9bc8274c630302db3e9c4b499a1",
+        "git_blob": "8f4a9e18b59ed0cd3a98d690e6bd1689799d050a",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/.kanban/board.json",
+        "bytes": 1336939,
+        "sha256": "6860076cfd81dbace9c70a1aa8f2e9bf33514f08c9c968741a6062398aa7d26e",
+        "git_blob": "825e84eaae4a826d4506a755abe4f226b1640773",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/epics/make-reusable-opencode-review-gates-truth-preserving.md",
+        "bytes": 3575,
+        "sha256": "2e84c7775a5a47987d8c04267be73e18dfb219ecb52d0c563f1feb382c7fb50a",
+        "git_blob": "afab6ecc2c13e255461b70f742eb48eb974ac5a2",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/epics/prove-reusable-review-gate-red-path-in-a-fixture-caller.md",
+        "bytes": 12151,
+        "sha256": "9f8d5df92d7dd81a902d8193f205d695a16c252984a95da4f38a37241babfbff",
+        "git_blob": "53e16786d34fe5bbc83d798d4ae91bc25f674eb0",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/independently-admit-and-publish-review-evidence-from-trusted-default-code-1c707551.md",
+        "bytes": 52260,
+        "sha256": "6d3399a65b434a0b23ac410c40f7615ffd3971d116ea2dfd67ffc280fe95ec67",
+        "git_blob": "ec22de3748cd12fb931911512ce54eb05936e6b0",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/ledger-events-persist-absolute-source-paths-from-the-writer-s-checkout.md",
+        "bytes": 4284,
+        "sha256": "205c8a4f8e2e9c7ad170e2d15f0a89f633a0c636262e7a0bd1bbc88064bf43f5",
+        "git_blob": "345211398f2d396761b00924cbb87ca93214cae9",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/produce-anonymous-review-evidence-without-publication-credentials-c7d20dbb.md",
+        "bytes": 14439,
+        "sha256": "58ac88267adfca6d6436c96316e6d408f88d407eb041998e3843f81e5441fda0",
+        "git_blob": "eaca63a9431a721e3a80e6383f13e049775935bc",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/rheos-canonical-task-fold-and-snapshots.md",
+        "bytes": 3801,
+        "sha256": "94fa35669a8768cccf3b99d7506e003651d1c1cdd0ba286cf604927bb08ea2ce",
+        "git_blob": "ce2c5e9c1e9d1ba26c1c1b3de9b27992ecb1cf96",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/rheos-ci-does-not-gate-build-warnings.md",
+        "bytes": 2924,
+        "sha256": "69a9c95ba3ebd3f54242377e74d6928ae0c01ef7d984d88cb04cf2fc87535ebb",
+        "git_blob": "34ad1e2a10faed2c43631436d8303de7e4dac127",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/run-candidate-deterministic-ci-without-signing-credentials-bdd97334.md",
+        "bytes": 8305,
+        "sha256": "000e911805a59788f64084f8a68f5bce7ab647229fa470835938758aa2e2f9de",
+        "git_blob": "79bc10f818132b53278ed7cc6dee351026ba414f",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/commands/workflows_test.cljs",
+        "bytes": 30701,
+        "sha256": "6d9a5c4984d269fb4035844aaa2a3e4423eb64f5a25ff082e69e08dd923aed30",
+        "git_blob": "fac6e1c6bff9fe3002e591ceaff967ef07e2e721",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/intent-runtime/barrier_entry.cljs",
+        "bytes": 260,
+        "sha256": "900b03423f1cd6ace5b1879b89744269a6ed118636fdf3910938de40c0403a48",
+        "git_blob": "d95513d01edfedb8880efcb4a1a88c9ec1e43cd2",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/intent-runtime/nbb.edn",
+        "bytes": 348,
+        "sha256": "496c521ec79e0254bb82a1454a5b5e44dc344ae639508fabf9a022b12420b01b",
+        "git_blob": "5a6de374253c00f9c560b4843802a2842732309c",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/intent-runtime/test_entry.cljs",
+        "bytes": 336,
+        "sha256": "344cc6622605a727301ebcfcdfab7d842342de3a6fc806218d5da7c1b419ba2f",
+        "git_blob": "6ab36fa52603389d564c9b53bd1ce106406887ee",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/intent-runtime/worker_entry.cljs",
+        "bytes": 251,
+        "sha256": "87515a2856d86c4a5470d965baf95d41a51b1e0e7adc99434a57ceb2f3405deb",
+        "git_blob": "da6fba062bd8a83a893e796789f50d1c13b18272",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/package.json",
+        "bytes": 2278,
+        "sha256": "bb7cb9caf07dfb80fd02606d24c0cbf77275cdea8d795808fb04f30c9124bb06",
+        "git_blob": "b7f7026ac0708752dae5faff6982e0fed6e9aa00",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_archive.cljc",
+        "bytes": 5324,
+        "sha256": "e2a7f3087b00b4dbac2ee48b5c16829e2e28dd9d68161b4c6698b8f66905b23f",
+        "git_blob": "575a0c4c6fef3e48bf89bb18a5343c1a5066ff6b",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc",
+        "bytes": 1915,
+        "sha256": "8df8fc390969dde4f5668ecb55bc8ae026beda85803367820e4fdbf1df9b4274",
+        "git_blob": "32c4d8ecb841b3ea00f8e9a59ed5e0b9f6c615fc",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_intent.cljc",
+        "bytes": 6253,
+        "sha256": "ffc573a74325acbd354630ff9f187ec779418316f7df2c9dd2f91d2e7257b6eb",
+        "git_blob": "b4d14ca41448828b9c5040631b918e06292ab42e",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc",
+        "bytes": 15331,
+        "sha256": "3c835f42bec62425e2d903a4464b6eed75568913c0d0dc37bfd66b0b70ea9b46",
+        "git_blob": "4003953a21f166ef0805d6bd83ae7565642b304f",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_readback.cljc",
+        "bytes": 2036,
+        "sha256": "2383bd89b917afa144aaeedd67e02d8525ae515a07f7f1fd5ba7592987cbbb62",
+        "git_blob": "5827607232b220325059a2d82352e25bdf204466",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc",
+        "bytes": 2954,
+        "sha256": "c2ff6731ed49e2ed035fd4987ae8fe628b432404fd095f45647ae20d4152e09f",
+        "git_blob": "8e64e91bec09b5b9ac585de0306ee4a52ac2de8f",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc",
+        "bytes": 1670,
+        "sha256": "23ff9f3da9633b43f7eef3870988c158816420109a2ce9f21fafac253dac6ba1",
+        "git_blob": "2f021f4865029cb25895e9297ce68c4cc61f4f37",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs",
+        "bytes": 11164,
+        "sha256": "a38618278378aad23fffe5d548b8b5f755d33aafc75f715f7f40a141451283d0",
+        "git_blob": "38b6894ad6487638df55db344f28454004aad310",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_collection.cljs",
+        "bytes": 5794,
+        "sha256": "b8c568716088c9d2a8e4a3f0f743a696601993d5f878328aaa9045176bce1bc1",
+        "git_blob": "139c6d477d5a0851c6b1e0ca6ec8a5d8c472c5ad",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_intent.cljs",
+        "bytes": 6313,
+        "sha256": "98c284133dbd3e7eab236a3e566e60f817244f3b6e77e4661e12a285d04df773",
+        "git_blob": "67fd60ec6b307753fa21341a983ed62a8aa99207",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_source.cljs",
+        "bytes": 14658,
+        "sha256": "82d3855c84220d9346e3e79b7e4615e48e7cf552cdde089e1040635acad1aa34",
+        "git_blob": "454dde30a24fd65d2174926e7e5b3b0485e7138d",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs",
+        "bytes": 20104,
+        "sha256": "596087fc00f5236c7b2b820415d0a30d93df43f17bb0ae71ca289d22d7568015",
+        "git_blob": "c1a00a42368d9218c55d0f29e06cfdd11a0a279d",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_archive.cljs",
+        "bytes": 5904,
+        "sha256": "844afd9ffb0842397794da93cde65ea80385eaafc830489439453b621763fd49",
+        "git_blob": "e6ba384aafadc0dc90ca56cf4ddc5f602a539855",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_collection.cljs",
+        "bytes": 20307,
+        "sha256": "b38fe7488d74131e7f05dbb9b0d7377f2dd267070bb98a0a19c25b5a7598ddef",
+        "git_blob": "44ef26e02684ec3283de5bb86153c3203633ee56",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs",
+        "bytes": 6069,
+        "sha256": "0f500f32e6fe5d78f729cb1bdf0ee79634f73e68d629b35bbd6696cf912fc729",
+        "git_blob": "7b171754e27c9a5494edec8ea204d3c5289b594d",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_intent_worker.cljs",
+        "bytes": 7658,
+        "sha256": "808be56a3d64d8ccfb4824f728b35798f8e449b5d21d6632875cc3708efcc20b",
+        "git_blob": "227a292c1d39b486cf43e9d456eb7da8b16f8217",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_readback.cljs",
+        "bytes": 8417,
+        "sha256": "bb9596f674f1d2efae12437751cd7078c4704cf370a2339767bfbb2225a001e3",
+        "git_blob": "6d91289608dc38794f7f8903c23ea487796e3a42",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_source.cljs",
+        "bytes": 1433,
+        "sha256": "b616b4c806b623a7c559332698c2059a2a88706b153a09701df0122f770f4cc8",
+        "git_blob": "b36a5508286ae35b67ac68708b7013944d5cfb9b",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs",
+        "bytes": 2119,
+        "sha256": "30e227d21a94bdebbe28bd7c166f19be7af2a5a88a39c596a1db478fc0babca5",
+        "git_blob": "da3118443d82c0e591550ce7ca5afe37c5d49006",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_archive.cljc",
+        "bytes": 1540,
+        "sha256": "bbdd77f18eb65cd8a740bb8ca648cf25695354dd8c92d2dfe0f8d559ede8095b",
+        "git_blob": "85c8f91924d529afb8df3f16bdc5f9bce0aed6c4",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_collection.cljc",
+        "bytes": 5836,
+        "sha256": "9a483954bc4a3ca9072b1c4a7aa3c1cf85148bb66a195345d8b5893de6a6cc2a",
+        "git_blob": "1a0896f44b6c7a16c7d63bd10cb527ca1af7f929",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_intent.cljc",
+        "bytes": 3982,
+        "sha256": "e432c4045b11aec9d56a69a1ff4ec8fb1ef46007f6ae6fc356e029836fd5b8ff",
+        "git_blob": "24bd32e4dcb5fd04e9c0aad1d2f85f70adb3f472",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_publication.cljc",
+        "bytes": 7262,
+        "sha256": "1efdd21e0142ddb3e12195d3b9c385b7a2c8dbd29f6a1197ac1708bfdad706d1",
+        "git_blob": "704dbd832ff85e79137205b5b83c61c1acbbbd63",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_readback.cljc",
+        "bytes": 1028,
+        "sha256": "e573a29dd4a63d6124062c59eb791bf01219be0544bde2259ea0963469bd7f89",
+        "git_blob": "d6afa3b6d0c46648f50fb9c9ac32634598f9fad4",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_source.cljc",
+        "bytes": 2253,
+        "sha256": "e7b7fdd895bb49c2e58d7e020651ae5a1f8171229802075cb1ea2db49967660a",
+        "git_blob": "e20b238f1e0c52fba0a0df6e6c43e86b076d41c2",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc",
+        "bytes": 2447,
+        "sha256": "844d08578ed1a38788ea3b77ffccd07e5870733ac6829067dcf5137e3dcf20ae",
+        "git_blob": "848e51f13bb7f859382265109d4ba6fb901996e3",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_archive.cljc",
+        "bytes": 6197,
+        "sha256": "b7c18347dfe6e99a4a4f05274bb2cede64dfc4fd0e5844bba568649f938967b0",
+        "git_blob": "cbce2d616a0a63519e8d7887b0b806a4d6d5db96",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_collection.cljc",
+        "bytes": 2044,
+        "sha256": "750a0a304c6a0ad12ca37936f8684b5c18c3c45d8997c441756098da9dedcf51",
+        "git_blob": "9db0b41af2d0ecaf6d9aa7a295e09f289ad4e338",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_intent.cljc",
+        "bytes": 917,
+        "sha256": "f18b48bc0243291021849f93fb4dd7ecb4b483d3e70426c71daf62a6f8e9e72f",
+        "git_blob": "c37c190fe46b96da291eb1ff131780fb2d9e8872",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_readback.cljc",
+        "bytes": 2778,
+        "sha256": "d41eb3d7520e0e7cf3728b78bc2d78cc459618cf40ccc59c15f2109bbf0ba680",
+        "git_blob": "d2f0ea047ef9352401f86c3348b8f268c8be1368",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_source.cljc",
+        "bytes": 322,
+        "sha256": "e85e8f51a71f0585ac3e472d680832d29273a6678888f343546ff186dce03038",
+        "git_blob": "04234882bcfc04417cf4a898d38083d8f6ee3160",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_verification.cljc",
+        "bytes": 397,
+        "sha256": "3c0db80c50927f3354bfb281a76f77f90c2b6d6298bd46c06a334ffd60871550",
+        "git_blob": "4dcf5cd7715359419b0f1d09e1b5ca0ac88bc972",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/test/cljs/eta_mu/review_intent_worker_barrier.cljs",
+        "bytes": 3191,
+        "sha256": "cc04fb97ccc4a7a017525bc5059adbcc4bc6d56c241d9265db437f9420a34e42",
+        "git_blob": "0c01314e9cfb1b96aaed8463c57157246077f822",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/src/rheos/backend/domain/kanban_projection.cljc",
+        "bytes": 1634,
+        "sha256": "af3a9858f0c0095e92f9e6a21a0e7165d8456291cd002199e35fb630b2ff6272",
+        "git_blob": "23ad6e78b8517f816053bb2f38ade3b69d77a92d",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/src/rheos/backend/extern/path.cljs",
+        "bytes": 387,
+        "sha256": "4d45831c8240ca1976c1e6e77d30e6086b8df5074b8c5f19c0a4895cba6450fc",
+        "git_blob": "cc1b54e84fa3ab5d0b5e2398f6e712a3cfe95f6a",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/src/rheos/backend/infra/cli.cljs",
+        "bytes": 33825,
+        "sha256": "6ea75966933d5fd89f6968307a69ce1a919ac78cac3fa6b2ea5fc07135118f68",
+        "git_blob": "7764408c563eea00a20e276139f43c43b52044b7",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/test/rheos/backend/domain/kanban_projection_test.cljc",
+        "bytes": 4071,
+        "sha256": "814f031ad3cf0a16843fc2cbfbd226ddac50ed3a87175b65198cd2c4d3d5fec7",
+        "git_blob": "3dddf954177977ec360b7225e6509b0731cf87fc",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/test/rheos/backend/infra/cli_test.cljs",
+        "bytes": 16635,
+        "sha256": "e9ead8dc713582a63ccbc14b139199b23e9ccdfacb4a6359351cfc0d2af49f1f",
+        "git_blob": "0790303d4f75989321c56d7cb9f276e197d356d7",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/test/rheos/backend/infra/task_store_test.cljs",
+        "bytes": 12120,
+        "sha256": "f0d349b49361ca493023e31b7f34dbc70b50cfe036488ddc89c8f3cfe36d3d85",
+        "git_blob": "e82a248a1e25b89497699d6ffa77ebeb0308dbe1",
+        "native_blob_matches": true
+      },
+      {
+        "path": "pnpm-lock.yaml",
+        "bytes": 324773,
+        "sha256": "f3666e7872e6ff96de9d0ac650b8b7872f37de1c62df5544930dcaf0975fbd9d",
+        "git_blob": "9158b91b75404e3f31eb805ac985f3078383d508",
+        "native_blob_matches": true
+      },
+      {
+        "path": "receipts.edn",
+        "bytes": 636385,
+        "sha256": "25e61a66187911f53ff0be6911a1432097e1df481de8d7bb0396b24da27ab0f7",
+        "git_blob": "d4ba14932c217854f2b4eb2d5ba201abf800461d",
+        "native_blob_matches": true
+      },
+      {
+        "path": "scripts/test.bb",
+        "bytes": 7643,
+        "sha256": "0c1d595051cb876e4c99b7e9867f0e03ff928d4f622192bb6faadd6a76dc0473",
+        "git_blob": "e25da933772d70046b97ad438578032a3d36db90",
+        "native_blob_matches": true
+      }
+    ],
+    "binary_review_credit": false,
+    "qualification": false
+  },
+  "child_preservation": {
+    "prefixes": {
+      "receipts.edn": {
+        "base_bytes": 633169,
+        "current_bytes": 636385,
+        "base_sha256": "bcdc565ab5db37af4ded2dc75d2d7088a0a6474035b59444c2319c7481e36f35",
+        "prefix_preserved": true
+      },
+      "kanban/.events/ledger.edn": {
+        "base_bytes": 1862523,
+        "current_bytes": 1866373,
+        "base_sha256": "1f7679df0456c22e1be94e91ee68cca3a376a48c858fde0c3566fb9db0e9307a",
+        "prefix_preserved": true
+      },
+      ".ημ/session-mycology/ledger.md": {
+        "base_bytes": 118674,
+        "current_bytes": 119269,
+        "base_sha256": "98bc7a3c9febdf5a4b730c472f9b249e8130de2384da71062a15cd3b3b70d8fd",
+        "prefix_preserved": true
+      },
+      ".ημ/session-reflections.edn": {
+        "base_bytes": 41622,
+        "current_bytes": 41622,
+        "base_sha256": "76a5109bd3e6f5d40a40b82f9f4b5d21838d832f267929e9d87ce82acf4ab4f3",
+        "prefix_preserved": true
+      }
+    },
+    "cards_preserved": 309,
+    "non_evidence_paths": 90,
+    "qualification": false,
+    "CMS_Cephalon": "paused",
+    "paths": [
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/README.md",
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/domain/review.cljc",
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/extern/review_invocation.cljs",
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/law/review_invocation.cljc",
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/shape/git_diff_path.cljc",
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/publish-opencode-review.cjs",
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/review-invocation.cjs",
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/run-opencode-review-recovery.mjs",
+      ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/runtime.json",
+      ".github/scripts/opencode-code-review-workflow.test.mjs",
+      ".github/scripts/opencode-review-intent-bootstrap.test.mjs",
+      ".github/scripts/opencode_review_archive_test.cljs",
+      ".github/scripts/opencode_review_collection_test.cljs",
+      ".github/scripts/opencode_review_intent_process_test.mjs",
+      ".github/scripts/opencode_review_intent_test.cljs",
+      ".github/scripts/opencode_review_intent_uncertain_test.mjs",
+      ".github/scripts/opencode_review_publish_test.cljs",
+      ".github/scripts/opencode_review_readback_test.cljs",
+      ".github/scripts/opencode_review_source_test.cljs",
+      ".github/scripts/opencode_review_verification_test.cljs",
+      ".github/workflows/opencode-code-review.yml",
+      ".github/workflows/rheos-github-sync-ci.yml",
+      ".github/workflows/rheos.yml",
+      ".github/workflows/sandbox-bundle.yml",
+      ".github/workflows/sol-ci.yml",
+      ".ημ/review-evidence/trusted-publication-core/a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b.json.gz",
+      ".ημ/review-evidence/trusted-publication-readback/checkpoint.json",
+      ".ημ/review-evidence/trusted-publication-review-scope/README.md",
+      ".ημ/review-evidence/trusted-publication-review-scope/audit.json",
+      ".ημ/review-evidence/trusted-publication-review-scope/bundle.1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa.json.gz",
+      ".ημ/review-evidence/trusted-publication-review-scope/failed.3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6.json.gz",
+      ".ημ/review-evidence/trusted-publication-review-scope/failed.fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4.json.gz",
+      ".ημ/review-evidence/trusted-publication-review-scope/index.json",
+      ".ημ/review-evidence/trusted-publication-review-scope/inspect.bb",
+      ".ημ/review-evidence/trusted-publication-review-scope/test_inspection.bb",
+      ".ημ/session-mycology/ledger.md",
+      ".ημ/session-reflections.edn",
+      "contracts/workflows/.gates.edn",
+      "contracts/workflows/ci.edn",
+      "contracts/workflows/packages.edn",
+      "contracts/workflows/resources.edn",
+      "docs/agent-workflows.md",
+      "kanban/.events/ledger.edn",
+      "kanban/.kanban/board.json",
+      "kanban/epics/make-reusable-opencode-review-gates-truth-preserving.md",
+      "kanban/epics/prove-reusable-review-gate-red-path-in-a-fixture-caller.md",
+      "kanban/tasks/independently-admit-and-publish-review-evidence-from-trusted-default-code-1c707551.md",
+      "kanban/tasks/ledger-events-persist-absolute-source-paths-from-the-writer-s-checkout.md",
+      "kanban/tasks/produce-anonymous-review-evidence-without-publication-credentials-c7d20dbb.md",
+      "kanban/tasks/rheos-canonical-task-fold-and-snapshots.md",
+      "kanban/tasks/rheos-ci-does-not-gate-build-warnings.md",
+      "kanban/tasks/run-candidate-deterministic-ci-without-signing-credentials-bdd97334.md",
+      "packages/eta-mu/commands/workflows_test.cljs",
+      "packages/eta-mu/intent-runtime/barrier_entry.cljs",
+      "packages/eta-mu/intent-runtime/nbb.edn",
+      "packages/eta-mu/intent-runtime/test_entry.cljs",
+      "packages/eta-mu/intent-runtime/worker_entry.cljs",
+      "packages/eta-mu/package.json",
+      "packages/eta-mu/src/cljs/eta_mu/domain/review_archive.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/domain/review_intent.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/domain/review_readback.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/extern/review_collection.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/extern/review_intent.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/extern/review_source.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/infra/review_archive.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/infra/review_collection.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/infra/review_intent_worker.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/infra/review_readback.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/infra/review_source.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs",
+      "packages/eta-mu/src/cljs/eta_mu/law/review_archive.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/law/review_collection.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/law/review_intent.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/law/review_publication.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/law/review_readback.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/law/review_source.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/shape/review_archive.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/shape/review_collection.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/shape/review_intent.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/shape/review_readback.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/shape/review_source.cljc",
+      "packages/eta-mu/src/cljs/eta_mu/shape/review_verification.cljc",
+      "packages/eta-mu/test/cljs/eta_mu/review_intent_worker_barrier.cljs",
+      "packages/rheos/src/rheos/backend/domain/kanban_projection.cljc",
+      "packages/rheos/src/rheos/backend/extern/path.cljs",
+      "packages/rheos/src/rheos/backend/infra/cli.cljs",
+      "packages/rheos/test/rheos/backend/domain/kanban_projection_test.cljc",
+      "packages/rheos/test/rheos/backend/infra/cli_test.cljs",
+      "packages/rheos/test/rheos/backend/infra/task_store_test.cljs",
+      "pnpm-lock.yaml",
+      "receipts.edn",
+      "scripts/test.bb"
+    ]
+  },
+  "independent_review": {
+    "manifest": {
+      "reviewed_freeze": {
+        "bundle.1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa.json.gz": "1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa",
+        "README.md": "83ceb363179a899e3d66e7672170db25af153d51a1b5e658c868ea9e31101230",
+        "test_inspection.bb": "dea4ecd454930db95d6ca20e4e84ad5b309e6fd810edd29cdaee41985b88bfcd",
+        "index.json": "dc4ddd49882c113c087ee8b1f2f6bc72a74d55f80d09bdf8fcc47dd6651e1f23",
+        "inspect.bb": "cf9a1f5acac35503252028dc2eab87792b7aa222c84f04adb145ac106879d9a1",
+        "failed.3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6.json.gz": "3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6",
+        "failed.fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4.json.gz": "fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4",
+        "audit.json": "95aeb61792487af4a5647ceba260936a8f1e8b0d07ebf92ebb3d27136a41a800"
+      },
+      "captures": {
+        "external-reread-probe.bb": {
+          "bytes": 1437,
+          "sha256": "bef39a0e3232dda81d2face329516b05cf7eff04b9b5ed803fc33b098417bea3"
+        },
+        "verify.py": {
+          "bytes": 5079,
+          "sha256": "68854e40872eb2fe586a2badd92cd672e63faef4bb1bf8fe0a136fb35c87b117"
+        },
+        "controls.result.json": {
+          "bytes": 290,
+          "sha256": "a299a03be244fb02203b50da4fd1b314796634c2df8be254b76d89563b277162"
+        },
+        "reviewed-test_inspection.bb": {
+          "bytes": 7824,
+          "sha256": "dea4ecd454930db95d6ca20e4e84ad5b309e6fd810edd29cdaee41985b88bfcd"
+        },
+        "controls.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "reviewed-inspect.bb": {
+          "bytes": 8776,
+          "sha256": "cf9a1f5acac35503252028dc2eab87792b7aa222c84f04adb145ac106879d9a1"
+        },
+        "independent-roundtrip.json": {
+          "bytes": 145647,
+          "sha256": "a1593f586cf2735cc11d45820a3f65cc091f0894dcf0a9a6c8673193bf23b14b"
+        },
+        "external-reread-probe.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "roundtrip.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "controls.stdout": {
+          "bytes": 86,
+          "sha256": "c78b8c56c29f32a11bd3101b6d4e695d229f1ae423b0eb2e25ab20ea6ca3c304"
+        },
+        "roundtrip.stdout": {
+          "bytes": 2540,
+          "sha256": "8082a7257dd060f7c2da23c3e7ff19537074a5cfddbee7ddf1835d83f9111c09"
+        },
+        "helper.stdout": {
+          "bytes": 106,
+          "sha256": "c49e5dc20dd3ad22082b110380bb763125692fc78d445bb7b9b63b603625c88a"
+        },
+        "reviewed-README.md": {
+          "bytes": 3950,
+          "sha256": "83ceb363179a899e3d66e7672170db25af153d51a1b5e658c868ea9e31101230"
+        },
+        "external-reread-probe.stdout": {
+          "bytes": 290,
+          "sha256": "b1d04e29e14db20eb8267b4ea056f8d16b0710b52444ac610e8d70cab4702db8"
+        },
+        "helper.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "helper.result.json": {
+          "bytes": 143,
+          "sha256": "22005178832aef2dc0356fd858677158cc302488748a166a6fbe647c3a155cc5"
+        },
+        "review.md": {
+          "bytes": 2431,
+          "sha256": "3f9a657a99582c4e23f1ef3349f9361fdc8396190776a6798d3b50745b4000a3"
+        }
+      },
+      "findings": 1,
+      "finding_severity": "P2",
+      "preservation_passed": true,
+      "controls": {
+        "tests": 3,
+        "assertions": 48,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "repair": {
+      "bundle.1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa.json.gz": "1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa",
+      "README.md": "ba959d3d17d06f5a0bb3625ef85e753dae2651e7b8804352da5f1867d938454b",
+      "test_inspection.bb": "19a04ccd235ed458799982879bf24613d0d979cd568cc53501a9d7db3bfc80bf",
+      "index.json": "dc4ddd49882c113c087ee8b1f2f6bc72a74d55f80d09bdf8fcc47dd6651e1f23",
+      "inspect.bb": "11635aa31673fae8e6656154c9da173df7f0ac91502f097e09a0713d3cbb68bd",
+      "failed.3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6.json.gz": "3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6",
+      "failed.fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4.json.gz": "fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4",
+      "audit.json": "95aeb61792487af4a5647ceba260936a8f1e8b0d07ebf92ebb3d27136a41a800"
+    },
+    "remaining_narrow_findings": 0,
+    "native_binary_review_credit": false
+  },
+  "native_source_bound": {
+    "head": "db99b1682c94ecdf9f8b239709dd44cb6101c7da",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "merge": "84ca1a0b11d39155f372b76507f2016c0c9ce022",
+    "tree": "f4caf9753f2a44d1b1d885e5cc57de1f35903abf",
+    "parent_and_tree_verified": true,
+    "owners": {
+      "sol": {
+        "run": 39897640627,
+        "job": 120231650493,
+        "test_summary": "Ran 142 tests containing 607 assertions.",
+        "compiler_warning_count": 0,
+        "detected_carrier_warning_diagnostics": [
+          {
+            "line": 153,
+            "text": "2026-10-23T03:56:23.8196580Z (node:2227) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 176,
+            "text": "2026-10-23T03:56:23.9391155Z (node:2239) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 179,
+            "text": "2026-10-23T03:56:24.1055293Z (node:2239) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 206,
+            "text": "2026-10-23T03:56:25.2375247Z (node:2274) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 234,
+            "text": "2026-10-23T03:56:25.8765035Z (node:2289) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 244,
+            "text": "2026-10-23T03:56:29.5169115Z (node:2289) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 300,
+            "text": "2026-10-23T03:56:36.8435137Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'"
+          },
+          {
+            "line": 301,
+            "text": "2026-10-23T03:56:36.8436966Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 302,
+            "text": "2026-10-23T03:56:36.8438671Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 303,
+            "text": "2026-10-23T03:56:36.8440535Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'"
+          },
+          {
+            "line": 304,
+            "text": "2026-10-23T03:56:36.8442232Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 305,
+            "text": "2026-10-23T03:56:36.8444094Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'"
+          },
+          {
+            "line": 320,
+            "text": "2026-10-23T03:56:36.9874177Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 321,
+            "text": "2026-10-23T03:56:36.9875942Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'"
+          },
+          {
+            "line": 322,
+            "text": "2026-10-23T03:56:36.9967796Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 323,
+            "text": "2026-10-23T03:56:36.9969771Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'"
+          },
+          {
+            "line": 324,
+            "text": "2026-10-23T03:56:36.9996993Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 325,
+            "text": "2026-10-23T03:56:36.9998952Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'"
+          },
+          {
+            "line": 680,
+            "text": "2026-10-23T03:57:19.5835698Z (node:3767) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 688,
+            "text": "2026-10-23T03:57:19.8881981Z (node:3767) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 697,
+            "text": "2026-10-23T03:57:20.6331461Z (node:3779) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 703,
+            "text": "2026-10-23T03:57:20.8287110Z (node:3795) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          }
+        ],
+        "non_diagnostic_configuration_rows_excluded": []
+      },
+      "sync": {
+        "run": 39897640566,
+        "job": 120231649811,
+        "test_summary": "Ran 212 tests containing 1219 assertions.",
+        "compiler_warning_count": 0,
+        "detected_carrier_warning_diagnostics": [
+          {
+            "line": 154,
+            "text": "2026-10-23T03:56:25.7134255Z (node:2173) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 181,
+            "text": "2026-10-23T03:56:26.2137094Z (node:2199) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 208,
+            "text": "2026-10-23T03:56:26.9897228Z (node:2213) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 218,
+            "text": "2026-10-23T03:56:32.1794981Z (node:2213) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 241,
+            "text": "2026-10-23T03:56:40.1528442Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'"
+          },
+          {
+            "line": 242,
+            "text": "2026-10-23T03:56:40.1532469Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 243,
+            "text": "2026-10-23T03:56:40.1538103Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 244,
+            "text": "2026-10-23T03:56:40.1540917Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'"
+          },
+          {
+            "line": 245,
+            "text": "2026-10-23T03:56:40.1543352Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 246,
+            "text": "2026-10-23T03:56:40.1545701Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'"
+          },
+          {
+            "line": 261,
+            "text": "2026-10-23T03:56:40.3377941Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 262,
+            "text": "2026-10-23T03:56:40.3380120Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'"
+          },
+          {
+            "line": 263,
+            "text": "2026-10-23T03:56:40.3537962Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 264,
+            "text": "2026-10-23T03:56:40.3539918Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'"
+          },
+          {
+            "line": 265,
+            "text": "2026-10-23T03:56:40.3595381Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 266,
+            "text": "2026-10-23T03:56:40.3597352Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'"
+          },
+          {
+            "line": 279,
+            "text": "2026-10-23T03:56:40.5238583Z (node:2295) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 282,
+            "text": "2026-10-23T03:56:40.7508184Z (node:2295) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 1828,
+            "text": "2026-10-23T03:58:06.6990631Z (node:3553) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 1834,
+            "text": "2026-10-23T03:58:07.0932880Z (node:3553) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 1843,
+            "text": "2026-10-23T03:58:08.1938368Z (node:3565) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 1849,
+            "text": "2026-10-23T03:58:08.4540820Z (node:3581) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          }
+        ],
+        "non_diagnostic_configuration_rows_excluded": [
+          {
+            "line": 1817,
+            "text": "2026-10-23T03:58:06.5571604Z   if-no-files-found: warn"
+          }
+        ]
+      },
+      "rheos": {
+        "run": 39897640526,
+        "job": 120231649943,
+        "test_summary": "Ran 212 tests containing 1219 assertions.",
+        "compiler_warning_count": 0,
+        "detected_carrier_warning_diagnostics": [
+          {
+            "line": 154,
+            "text": "2026-10-23T03:56:22.6347554Z (node:2180) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 181,
+            "text": "2026-10-23T03:56:23.1260514Z (node:2205) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 206,
+            "text": "2026-10-23T03:56:23.7794214Z (node:2219) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 235,
+            "text": "2026-10-23T03:56:24.9606045Z (node:2280) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 238,
+            "text": "2026-10-23T03:56:25.0220770Z (node:2280) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 277,
+            "text": "2026-10-23T03:56:33.3123320Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'"
+          },
+          {
+            "line": 278,
+            "text": "2026-10-23T03:56:33.3127774Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 279,
+            "text": "2026-10-23T03:56:33.3130314Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 280,
+            "text": "2026-10-23T03:56:33.3133265Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'"
+          },
+          {
+            "line": 281,
+            "text": "2026-10-23T03:56:33.3136575Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 282,
+            "text": "2026-10-23T03:56:33.3139176Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'"
+          },
+          {
+            "line": 297,
+            "text": "2026-10-23T03:56:33.6693400Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 298,
+            "text": "2026-10-23T03:56:33.6697364Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'"
+          },
+          {
+            "line": 299,
+            "text": "2026-10-23T03:56:33.6813693Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 300,
+            "text": "2026-10-23T03:56:33.6816262Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'"
+          },
+          {
+            "line": 301,
+            "text": "2026-10-23T03:56:33.6859362Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 302,
+            "text": "2026-10-23T03:56:33.6861260Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'"
+          },
+          {
+            "line": 315,
+            "text": "2026-10-23T03:56:33.8443529Z (node:2433) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 318,
+            "text": "2026-10-23T03:56:33.9197246Z (node:2433) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 1126,
+            "text": "2026-10-23T03:58:30.6631459Z (node:3996) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 1129,
+            "text": "2026-10-23T03:58:30.7781660Z (node:4004) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 1134,
+            "text": "2026-10-23T03:58:31.0474151Z (node:4020) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          }
+        ],
+        "non_diagnostic_configuration_rows_excluded": []
+      }
+    },
+    "qualification": false
+  },
+  "Sandbox_source_bound": {
+    "head": "db99b1682c94ecdf9f8b239709dd44cb6101c7da",
+    "merge": "84ca1a0b11d39155f372b76507f2016c0c9ce022",
+    "run": 39897640743,
+    "job": 120231650622,
+    "conclusion": "success",
+    "verified_test_summaries": [
+      "Ran 10 tests containing 130 assertions.",
+      "Ran 29 tests containing 200 assertions.",
+      "Ran 30 tests containing 224 assertions.",
+      "Ran 17 tests containing 557 assertions.",
+      "Ran 194 tests containing 587 assertions."
+    ],
+    "compiler_warnings": 0,
+    "carrier_warning_diagnostics": [
+      {
+        "line": 303,
+        "text": "2026-10-23T03:56:27.8762893Z (node:2684) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+      },
+      {
+        "line": 332,
+        "text": "2026-10-23T03:56:28.0669185Z (node:2696) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+      },
+      {
+        "line": 358,
+        "text": "2026-10-23T03:56:29.0840570Z (node:2739) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+      },
+      {
+        "line": 387,
+        "text": "2026-10-23T03:56:29.8977287Z (node:2753) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+      },
+      {
+        "line": 390,
+        "text": "2026-10-23T03:56:30.1643448Z (node:2753) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+      },
+      {
+        "line": 480,
+        "text": "2026-10-23T03:56:40.1402501Z .../canvas@3.2.3/node_modules/canvas install: (node:2831) [DEP0176] DeprecationWarning: fs.R_OK is deprecated, use fs.constants.R_OK instead"
+      },
+      {
+        "line": 486,
+        "text": "2026-10-23T03:56:40.7853452Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'"
+      },
+      {
+        "line": 487,
+        "text": "2026-10-23T03:56:40.7855982Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+      },
+      {
+        "line": 488,
+        "text": "2026-10-23T03:56:40.7865872Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'"
+      },
+      {
+        "line": 489,
+        "text": "2026-10-23T03:56:40.7869273Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+      },
+      {
+        "line": 490,
+        "text": "2026-10-23T03:56:40.7872896Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+      },
+      {
+        "line": 491,
+        "text": "2026-10-23T03:56:40.7876380Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'"
+      },
+      {
+        "line": 506,
+        "text": "2026-10-23T03:56:41.0519192Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'"
+      },
+      {
+        "line": 507,
+        "text": "2026-10-23T03:56:41.0523446Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+      },
+      {
+        "line": 508,
+        "text": "2026-10-23T03:56:41.0659559Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+      },
+      {
+        "line": 509,
+        "text": "2026-10-23T03:56:41.0663422Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'"
+      },
+      {
+        "line": 510,
+        "text": "2026-10-23T03:56:41.0720737Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+      },
+      {
+        "line": 511,
+        "text": "2026-10-23T03:56:41.0724910Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'"
+      },
+      {
+        "line": 4062,
+        "text": "2026-10-23T04:21:32.7877807Z (node:30045) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+      },
+      {
+        "line": 4068,
+        "text": "2026-10-23T04:21:33.4794992Z (node:30045) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+      },
+      {
+        "line": 4118,
+        "text": "2026-10-23T04:21:44.8619316Z (node:30069) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+      },
+      {
+        "line": 4121,
+        "text": "2026-10-23T04:21:45.0815230Z (node:30077) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+      }
+    ],
+    "artifact_metadata": {
+      "total_count": 1,
+      "artifacts": [
+        {
+          "id": 12478685831,
+          "node_id": "MDg6QXJ0aWZhY3QxMjQ3ODY4NTgzMQ==",
+          "name": "eta-mu-sandbox-84ca1a0b11d39155f372b76507f2016c0c9ce022",
+          "size_in_bytes": 329061196,
+          "url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12478685831",
+          "archive_download_url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12478685831/zip",
+          "expired": false,
+          "digest": "sha256:d8f64e5b0dd2adbc440fea70f15485bc384c50f51e4cbc1b9645e33682e38548",
+          "created_at": "2026-10-23T04:21:44Z",
+          "updated_at": "2026-10-23T04:21:44Z",
+          "expires_at": "2026-11-22T04:21:32Z",
+          "workflow_run": {
+            "id": 39897640743,
+            "repository_id": 1189985055,
+            "head_repository_id": 1401249220,
+            "head_branch": "feat/trusted-review-publication-20261021",
+            "head_sha": "db99b1682c94ecdf9f8b239709dd44cb6101c7da"
+          }
+        }
+      ]
+    },
+    "artifact_contents_or_restoration_verified": false,
+    "publication_qualification": false,
+    "initial_probe_limit": "First parser assumed7-char checkout abbreviation, actual logs use8; corrected match against full native Git object. No source/native test failure."
+  },
+  "root_native": {
+    "head": "173cfa24520648849b9e0f553330229d6226b77d",
+    "run": 39898267946,
+    "deterministic_job": 120233635700,
+    "diff_hygiene_exit": 0,
+    "receipt_history_exit": 2,
+    "model": "failure: missing App",
+    "terminal": "failure"
+  },
+  "review": {
+    "prior_request": 6357019277,
+    "skip_response": 6357020571,
+    "reported_included_files": 476,
+    "observed_repository_limit": 100,
+    "current_request": {
+      "observed_at": "2026-10-23T04:57:09.372841+00:00",
+      "argv": [
+        "nbb",
+        "-cp",
+        "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+        "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+        "request",
+        "open-hax/eta-mu",
+        "362",
+        "code",
+        "--reviewer",
+        "coderabbit",
+        "--note",
+        "Current head c9ef250dcf5d981c820bbca1abf7c578ee864412 now has native100 total paths and all100 native blob matches. Review all visible90 source/config/card/ledger paths plus bounded helper/index/audit. Lossless archive preserves409 original files/modes/22archives; binary contents have no native review credit. Independent P2 verified-stdout repair RED4/50 two failures then GREEN4/50 and runtime2/104 pass. Previous DB99 request6357019277 skipped for476>100; not a completed review. Original G/caller/authentication/publication/adoption remain unqualified. No paid/on-demand activation."
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/open-hax/eta-mu/pull/362#issuecomment-6357732688\n",
+      "stderr": ""
+    },
+    "codex_reset": "UNKNOWN; not retried",
+    "approval": false,
+    "convergence": false
+  },
+  "frozen_cohort": {
+    "schema_version": 1,
+    "kind": "e0-frozen-cohort-live-base-topology-audit",
+    "started_at": "2026-10-23T04:25:18.250661+00:00",
+    "completed_at": "2026-10-23T04:25:39.046599+00:00",
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 437,
+        "MERGED": 4,
+        "CLOSED": 1
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 186,
+      "open_reported_base_differs_from_live_tip": 181,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 295,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 137
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 8,
+      "open_head_or_reported_base_changed_from_freeze": 6
+    },
+    "source_fields": "PR baseRefOid is retained as a reported PR observation; independent repository.ref supplies the branch tip; potential merge is a proposal, never executed-test proof.",
+    "qualification": false,
+    "global_scope": "same442 identities; no new repository/new-PR census",
+    "limits": [
+      "No reviews, checks or source bodies refreshed for every row in this audit.",
+      "Null/conflicted/unavailable proposed merges do not confer a merge or closure disposition.",
+      "No current ref/proposed merge is a tested candidate.",
+      "Both passes and every raw query retained; drift remains a hold."
+    ],
+    "comparison_to_retained_window": {
+      "completed_at": "2026-10-23T03:32:48.621899+00:00",
+      "fields": [
+        "state",
+        "head_sha",
+        "reported_pr_base_sha",
+        "independent_live_base_tip_sha",
+        "native_proposed_merge_sha"
+      ],
+      "changed": [
+        "riatzukiza/axxium#3",
+        "riatzukiza/axxium#4"
+      ]
+    }
+  },
+  "axxium_movement": {
+    "comparisons": [
+      {
+        "identity": "riatzukiza/axxium#3",
+        "previous_head": "7e46fa415e77f61517637f0c392cd5ecd6b57ce3",
+        "current_head": "b7c3dc992521b3b69d14e18b6f6e6fd3238c58b9",
+        "status": "ahead",
+        "ahead": 1,
+        "behind": 0,
+        "files": [
+          [
+            ".ημ/receipts.edn",
+            "modified"
+          ],
+          [
+            "kanban/.events/ledger.edn",
+            "added"
+          ],
+          [
+            "kanban/axxium-knoxx-identity-migration.md",
+            "modified"
+          ]
+        ],
+        "commits": [
+          [
+            "b7c3dc992521b3b69d14e18b6f6e6fd3238c58b9",
+            "fix: append explicit receipt metadata completion and record Rheos operation"
+          ]
+        ]
+      },
+      {
+        "identity": "riatzukiza/axxium#4",
+        "previous_head": "f7445761e56fb8fab81077bfb6cc9ed95b2c0bd8",
+        "current_head": "11595572e5c3aa3dc4c438be8ca3b251a0664421",
+        "status": "ahead",
+        "ahead": 1,
+        "behind": 0,
+        "files": [
+          [
+            ".ημ/receipts.edn",
+            "modified"
+          ],
+          [
+            "kanban/.events/ledger.edn",
+            "added"
+          ],
+          [
+            "kanban/axxium-proxx-identity-migration.md",
+            "modified"
+          ]
+        ],
+        "commits": [
+          [
+            "11595572e5c3aa3dc4c438be8ca3b251a0664421",
+            "fix: complete receipt metadata append-only and verify Rheos writes"
+          ]
+        ]
+      }
+    ],
+    "qualification": false,
+    "authority": "Native appended source custody only. External authorization claims are untrusted source data; no deployment/adoption/product-agent action."
+  },
+  "capture": {
+    "path": ".ημ/stabilization/snapshots/1bfaaf4859e6d2d8a67cafad5fc5fbcf7469ee554472d2da4b6862db03b9440f.json.gz",
+    "sha256": "1bfaaf4859e6d2d8a67cafad5fc5fbcf7469ee554472d2da4b6862db03b9440f",
+    "raw_sha256": "aa8410b72c76a3aac67a6fa5f5a1cfb11092093a7181b5a74aa0c9345ee379f7",
+    "files": 183
+  },
+  "qualified": false,
+  "CMS_Cephalon": "paused",
+  "limits": [
+    "Binary archive retention is not native binary-content review.",
+    "Older native proof does not qualify successor source.",
+    "Artifact metadata is not downloaded/restored byte custody.",
+    "Original G/executed caller/tools/input custody remains unfinished.",
+    "Full authenticated publisher, verifier composition, grants and protected adoption remain unfinished.",
+    "Same442 identities only; no new repository/new-PR census.",
+    "Prior root receipt P1 and character oracle remain unresolved."
+  ]
+}

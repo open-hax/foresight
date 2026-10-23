@@ -1,0 +1,43 @@
+{
+  "head": "874068612a9c576ef3d3e6847f72de2fee9a996b",
+  "rows": [
+    {
+      "at": "2026-10-23T07:06:01.237424+00:00",
+      "phase": "status",
+      "argv": [
+        "nbb",
+        "-cp",
+        "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+        "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+        "status",
+        "open-hax/eta-mu",
+        "362"
+      ],
+      "exit_code": 0,
+      "stdout": "open-hax/eta-mu#362  head 8740686\n  actionability history: UNAVAILABLE; threads retain finding obligations\n  coderabbit: completed   checks: {:skip 4, :pass 17, :pending 1}\n  threads: 14 total, 0 unresolved; by severity {}; informational 0\n  exact-head approvals: #{}  observed commit binding: {}\n  completed code rounds: 0 / soft minimum 5  participants: #{\"coderabbit\" \"mimo\"}\n  codex quota-unavailable: native source 6308863857 request  scope account observed 2026-10-21T05:33:19Z retry-at-ms UNKNOWN\n  gate: BLOCKED\n    - No trusted exact-head APPROVED review meets the quorum\n    - 1 pending deterministic/required check(s)\n    - 20 unanswered review summary item(s)\n    - Review loop requires 5 completed rounds or unanimous current-head approval, with every finding settled\n",
+      "stderr": ""
+    },
+    {
+      "at": "2026-10-23T07:06:14.480610+00:00",
+      "phase": "request",
+      "argv": [
+        "nbb",
+        "-cp",
+        "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+        "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+        "request",
+        "open-hax/eta-mu",
+        "362",
+        "code",
+        "--reviewer",
+        "coderabbit",
+        "--note",
+        "Review exact head 874068612a9c576ef3d3e6847f72de2fee9a996b, binding source c9fc461f2a14d613e9f1897f5143676378e154c2. Actual producer1/review2 and exact manifest-byte custody repairs; causal source8/175 and verifier5/181, independent28 pinned-runtime/270 reference controls, full owning checks pass. Full authenticated execution remains held; inert eight-tool fixtures and 22-tool generated configuration are not native/compiled-profile proof. Please perform the included full code review; no paid/on-demand/override. Prior observed cooldown after07:04:53UTC has elapsed. Do not retry Codex."
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/open-hax/eta-mu/pull/362#issuecomment-6359478727\n",
+      "stderr": ""
+    }
+  ],
+  "qualification": false
+}

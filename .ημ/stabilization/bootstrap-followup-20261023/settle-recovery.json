@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "nbb",
+    "-cp",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+    "settle",
+    "open-hax/eta-mu",
+    "362",
+    "PRRT_kwDORu27H86vdBQR",
+    "Fixed in b8af64f41de139d17741ee2696ab82bdb38a81d1 (published checkpoint cd9751d01a2b93123281d032f42a83fb4b9d42cb): shared private invoke-worker normalizes known pre-spawn installation/input-bound errors to transition refusal; recovery remains unknown because prior append uncertainty persists. All unclassified exceptions stay unknown. Tests-only RED b599dc1cdbebc3bdd19279f19ef4100fbacd2196 reproduces 32 failures; GREEN passes 29 tests / 200 assertions. Real host-port installation/input-bound controls and genuine opaque Clio recovery token survive launch failures, retry the exact event successfully and refuse second use. No authority comes from thrown data. Full CLI194/587 plus workflows11/199, owning/test lint and release pass with zero warnings. Independent actual public probe passes. No successor hosted qualification/adoption is claimed."
+  ],
+  "exit_code": 0,
+  "stdout": "settled PRRT_kwDORu27H86vdBQR as fixed\n",
+  "stderr": ""
+}

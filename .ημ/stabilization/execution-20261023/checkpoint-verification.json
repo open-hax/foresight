@@ -1,0 +1,13 @@
+{
+  "base": "d8ece877c9a9e07a87fec12f650bced173f6b164",
+  "root_gitlinks": 23,
+  "primary_eta_unchanged": true,
+  "primary_clio_unchanged": true,
+  "prior_graph_keys_equal": true,
+  "all_prior_tracked_bytes_outside_owned_paths_unchanged": true,
+  "snapshot_files_verified": 153,
+  "census_rows": 442,
+  "append_only_prefixes": true,
+  "secrets_scan": "no token-shaped credential in owned capture files",
+  "qualification": false
+}

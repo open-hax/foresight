@@ -1,0 +1,1 @@
+{"argv": ["clj-kondo", "--lint", "scripts", "test"], "exit_code": 0}

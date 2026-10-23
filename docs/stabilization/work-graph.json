@@ -1,0 +1,1466 @@
+{
+  "schema_version": 1,
+  "program": {
+    "uuid": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+    "path": "docs/agile/kanban/760f7f1e-a086-4e0a-82a5-71d2a761073d.md",
+    "relationship": "continuation coordination annex; existing program scope and delivery cards retained"
+  },
+  "source": {
+    "path": ".ημ/stabilization/sources/ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923.txt",
+    "sha256": "ea29ad3518d9d450de9829a27d1752ca69cb3f43181642ff6051e27f2924e923",
+    "proposal_date": "2026-10-19"
+  },
+  "root_revision": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+  "epics": [
+    {
+      "id": "E0",
+      "uuid": "stabilization-e0",
+      "title": "Reconstruct the authoritative backlog",
+      "gate": "M0",
+      "dependencies": [],
+      "stories": [
+        {
+          "slot": "E0.1",
+          "description": "Freeze the PR census: Capture all upstream and personal PRs with immutable head SHAs, reviews, checks and base branches.",
+          "acceptance": "All declared upstreams and personal forks are enumerated through the last API page; each PR has immutable head/base SHAs, reviews, checks and review-thread evidence. Missing access is an explicit gap.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "a1d0645d-49a6-4e8d-b744-4e1a94175066",
+              "path": "docs/agile/kanban/establish-the-pinned-repository-census-94175066.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E0.2",
+          "description": "Identify unique implementations: Distinguish stacked branches, duplicate source, old snapshots and changes that haven't reached upstream.",
+          "acceptance": "For every overlapping stack, retain ancestry, patch/blob comparisons and a source-preservation decision; titles and age do not prove duplication.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E0.3",
+          "description": "Reconcile Rheos ownership: Connect existing PRs, UUIDs, cards, epics and dependencies without creating duplicate tasks.",
+          "acceptance": "Each cohort item maps to repository-qualified canonical card UUIDs, existing parent epics, accountable owner and evidenced dependencies; unresolved matches stay unresolved.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "fork-dev-origins",
+              "path": "docs/agile/kanban/epic-develop-on-riatzukiza-forks-orgs-receive-promotions-and-run-ops--origins.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E0.4",
+          "description": "Preserve historical work: Secure unique code, evidence, Cephalon designs and unpublished fixes.",
+          "acceptance": "Unique code, unpublished fixes and the October 7/8 Cephalon design are retained in retrievable immutable commits or content-addressed artifacts before any closure.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "dabfaac3-c388-4979-827b-0cd93c4226e3",
+              "path": "docs/agile/kanban/recover-inaccessible-census-revisions-3c4226e3.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E0.5",
+          "description": "Establish campaign rules: Allow only necessary repairs during stabilization, with explicit ownership and history preservation.",
+          "acceptance": "Record repair-only scope, per-stack ownership, exceptions and preservation obligations on the existing program.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "breakdown"
+    },
+    {
+      "id": "E1",
+      "uuid": "stabilization-e1",
+      "title": "Qualify the review and merge pipeline",
+      "gate": "M1",
+      "dependencies": [
+        "stabilization-e0"
+      ],
+      "stories": [
+        {
+          "slot": "E1.1",
+          "description": "Qualify Muse: Resolve complete-input review and evidence-directory handling.",
+          "acceptance": "A complete-input Muse review retains evidence-directory inputs and a revision-bound result; omitted input fails qualification.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "c9cfd94c-4c18-4469-acf4-d79fbe44f659",
+              "path": "docs/agile/kanban/isolate-exact-commit-evidence-execution-be44f659.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E1.2",
+          "description": "Qualify Eta Mu and Proxx: Establish source-bound reviews, independent reviewer identity, complete verdicts and failure recovery.",
+          "acceptance": "Eta Mu and Proxx demonstrate independent authorized reviewer identity, complete verdicts and failed-run recovery at exact source revisions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "f66c6539-d719-48ae-8284-18fd989b31ef",
+              "path": "docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E1.3",
+          "description": "Qualify fork promotions: Ensure accepted personal-fork work reaches the appropriate organization without dropping newer history.",
+          "acceptance": "Demonstrate a fork-to-upstream protected merge with preserved newer history and consumer verification at exact commits.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "fork-dev-origins",
+              "path": "docs/agile/kanban/epic-develop-on-riatzukiza-forks-orgs-receive-promotions-and-run-ops--origins.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E1.4",
+          "description": "Resolve outstanding findings: Test fixes, rerun current-head reviews, and settle actual review threads.",
+          "acceptance": "Each substantive finding has a tested current-head disposition and its actual review thread settled; older approvals cannot transfer.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E1.5",
+          "description": "Add merge-drift verification: Recheck affected consumers after each shared dependency is accepted.",
+          "acceptance": "Accepting a shared source triggers verification of affected consumers at named pins; failures leave that combination unqualified.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E2",
+      "uuid": "stabilization-e2",
+      "title": "Reconcile shared contracts, events and persistence",
+      "gate": "M2",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1"
+      ],
+      "stories": [
+        {
+          "slot": "E2.1",
+          "description": "Clio: Admit segmented ledgers, exact retries, canonical replay and durable recovery.",
+          "acceptance": "Segmented ledger admission, exact retry, canonical replay and durable recovery pass real persistence and failure-path tests.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "replace-sol-legacy-ledger-dependency-with-clio",
+              "path": "docs/agile/kanban/replace-sol-legacy-ledger-dependency-with-clio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E2.2",
+          "description": "Rheos: Resolve document identity, duplicate UUIDs, frontmatter custody and lawful lifecycle updates.",
+          "acceptance": "Document identity, duplicate UUID rejection, frontmatter custody and lifecycle transitions have executable lawful and refusal cases.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E2.3",
+          "description": "Document history: Preserve concurrent revisions, source relationships and event provenance.",
+          "acceptance": "Concurrent revisions preserve source relationships and provenance through persistence/replay without silent overwrite.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E2.4",
+          "description": "Katamorph and Foresight shapes: Reconcile portable semantic laws with representation-specific adapters.",
+          "acceptance": "Portable .cljc semantic contracts are distinguished from host adapters and tested at producer and consumer boundaries; lifts remain explicit decisions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E2.5",
+          "description": "Receipt River and consumers: Qualify append-only evidence, reader semantics and exact downstream pins.",
+          "acceptance": "Append-only writes, reader behavior and consumer pins are verified at exact accepted revisions without rewriting historical receipts.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "f66c6539-d719-48ae-8284-18fd989b31ef",
+              "path": "docs/agile/kanban/authenticate-promotion-evidence-989b31ef.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e2-reconcile-shared-contracts-events-and-persistence-ation-e2.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E3",
+      "uuid": "stabilization-e3",
+      "title": "Settle identity, deployment and OpenPlanner integration",
+      "gate": "M3",
+      "dependencies": [
+        "stabilization-e1",
+        "stabilization-e2"
+      ],
+      "stories": [
+        {
+          "slot": "E3.1",
+          "description": "Decide Axxium ownership: Resolve the remote-versus-embedded provider boundary documented in [Knoxx #324](https://github.com/open-hax/knoxx/issues/324?utm_source=chatgpt.com).",
+          "acceptance": "An accepted remote/embedded-provider decision preserves or explicitly migrates principal, membership and session semantics; #324 supplies a reconciliation reference.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E3.2",
+          "description": "Qualify Knoxx authorization: Test login, logout, sessions, MCP authority, revocation and cross-tenant refusal.",
+          "acceptance": "Executed login/logout/session, MCP authority, revocation and cross-tenant denial tests name the actual integration head and environment.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E3.3",
+          "description": "Resolve Axxium's upstream PRs: Settle concurrency and OAuth-state findings.",
+          "acceptance": "Each Axxium upstream PR and its concurrency/OAuth-state findings has a verified disposition with current-head evidence.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E3.4",
+          "description": "Qualify Services: Verify protected deployment authority, required secrets, staging and rollback.",
+          "acceptance": "Protected deployment admission, secret requirements, staging and rollback have executed evidence without recording secret values.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "ff0803c0-9b04-4623-8725-516886af1ffc",
+              "path": "docs/agile/kanban/record-digitalocean-deployment-acceptance-86af1ffc.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E3.5",
+          "description": "Promote OpenPlanner: Resolve [Foresight #139](https://github.com/open-hax/foresight/pull/139?utm_source=chatgpt.com) and establish accepted runtime/source pins.",
+          "acceptance": "Foresight #139 has an evidenced disposition and OpenPlanner runtime/source pins are accepted explicitly; listing a proposed submodule does not admit it.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e3-settle-identity-deployment-and-openplanner-integration-ation-e3.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E4",
+      "uuid": "stabilization-e4",
+      "title": "Reconcile Knoxx CMS and translation work",
+      "gate": "M4",
+      "dependencies": [
+        "stabilization-e2",
+        "stabilization-e3"
+      ],
+      "stories": [
+        {
+          "slot": "E4.1",
+          "description": "Recompose PR #305: Reconcile its 23 extracted layers with current main, newer PR #387, PR #388 and personal fork #19.",
+          "acceptance": "A movement ledger accounts for all 23 extracted #305 layers against main, #387/#388 and personal #19, with source/blob provenance and no newer code lost.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.2",
+          "description": "Qualify content history: Source locale, revisions, approved media, human review decisions and stale-source refusal.",
+          "acceptance": "Source locale, revisions, media approval, human decisions and stale-source refusal pass through actual content-history adapters.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+              "path": "docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.3",
+          "description": "Qualify translations: Ensure English and Spanish use their correct independent review and publication conditions.",
+          "acceptance": "English and Spanish independently demonstrate their required review and publication conditions, including negative cases.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf",
+              "path": "docs/agile/kanban/prove-translation-generation-and-sme-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.4",
+          "description": "Stabilize persistence and embeddings: Durable publication receipts, Qwen migration, readback after restart and rollback.",
+          "acceptance": "Publication receipts and embedding migrations survive restart/readback and support a tested rollback; Qwen claims identify actual model and dimensions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+              "path": "docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.5",
+          "description": "Run complete application verification: Backend/frontend tests, lint, migration ratchets, protected release evidence and browser tours.",
+          "acceptance": "Applicable backend/frontend, lint, migration and protected release gates pass at the integrated head; browser or headless product acceptance follows the accepted product contract.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "ff0803c0-9b04-4623-8725-516886af1ffc",
+              "path": "docs/agile/kanban/record-digitalocean-deployment-acceptance-86af1ffc.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E4.6",
+          "description": "Merge and reconcile: Account for all CMS PRs without overwriting newer code.",
+          "acceptance": "Every frozen CMS PR is merged, verifiably superseded, split-and-closed or declined-and-closed with preserved source and rationale.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e4-reconcile-knoxx-cms-and-translation-work-ation-e4.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E5",
+      "uuid": "stabilization-e5",
+      "title": "Preserve and qualify Cephalon's creative-loop baseline",
+      "gate": "M5",
+      "dependencies": [
+        "stabilization-e2",
+        "stabilization-e3"
+      ],
+      "stories": [
+        {
+          "slot": "E5.1",
+          "description": "Adopt the design: Bring the October 7 character-memory document and October 8 accepted milestone into the Foresight mainline.",
+          "acceptance": "Locate and retain the exact October 7 design and October 8 accepted milestone revisions, then obtain explicit mainline adoption; the pasted summary is not design authority.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "63a0e4ff-353f-4c90-ab8a-7241d958d54c",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-epic.md",
+              "blob_oid": "1076feb3b90f7a1ef2a7bb3f40daf69f7c6148af",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        },
+        {
+          "slot": "E5.2",
+          "description": "Qualify Field ownership: Reconcile the Eros/Eris physical model, numerical contracts, persistence and replay.",
+          "acceptance": "Field Eros/Eris ownership, numerical units/contracts, persistence and replay are verified from the owning source and actual tests.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "b5f2ba9e-8d67-4c73-9919-e275983aca87",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-field-contract.md",
+              "blob_oid": "278b36a3e55184ea9c1c17efb7d83a68e22e7d55",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            },
+            {
+              "uuid": "ff3e628b-cd5c-4a89-a397-42cc88dbde70",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-physical-field.md",
+              "blob_oid": "c1f52cd6f9f2f74a71fac816620a03e0e7f5e9c9",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ],
+          "replay_adoption_hold": {
+            "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+            "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
+            "bytes": 4933
+          }
+        },
+        {
+          "slot": "E5.3",
+          "description": "Reconcile OpenPlanner: Preserve authorization before graph traversal, bounded search, feedback deduplication and truthful results.",
+          "acceptance": "OpenPlanner proves authorization before traversal, bounded search, feedback deduplication and truthful found/empty/refused results.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "a1e9d6af-0233-4dcb-9677-5c76fa9a2701",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-recall.md",
+              "blob_oid": "fc4aa165744f64684d2fb474a2ee3145cdd56e18",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        },
+        {
+          "slot": "E5.4",
+          "description": "Integrate Knoxx's character adapter: Reconcile [personal Knoxx #14](https://github.com/riatzukiza/knoxx/pull/14?utm_source=chatgpt.com) with accepted runtime source.",
+          "acceptance": "Personal Knoxx #14 is compared and reconciled against the accepted runtime pin; preserve adapter behavior and provenance.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "a1e9d6af-0233-4dcb-9677-5c76fa9a2701",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-recall.md",
+              "blob_oid": "fc4aa165744f64684d2fb474a2ee3145cdd56e18",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        },
+        {
+          "slot": "E5.5",
+          "description": "Define executable B1–B3 verification: Require actual persisted encounter state, consumed mood transition and automatic prompt-level recall.",
+          "acceptance": "B1 proves persisted encounter state across restart; B2 proves an independently stored mood transition is consumed; B3 proves automatic authorized recall reaches the actual character prompt. Record each separately.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "5ea872c3-1db4-47c5-a63d-d49f99f79497",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-loop-verification.md",
+              "blob_oid": "f7fddc37429c0afad113a555b73b0c270fc9b07e",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            },
+            {
+              "uuid": "4cac8ac8-1a9f-441d-ac87-aa09f874eb57",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-mood.md",
+              "blob_oid": "81f7e11f98d9e1aa957fe0ca428c04a91c92a798",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ],
+          "replay_adoption_hold": {
+            "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+            "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
+            "bytes": 4933
+          }
+        },
+        {
+          "slot": "E5.6",
+          "description": "Produce a continuation handoff: Exact source pins, uncompleted stories, safe runtime limits and acceptance evidence.",
+          "acceptance": "A source-pinned handoff names unfinished canonical stories, safe runtime bounds, B1/B2/B3 evidence and restart prerequisites.",
+          "mapping_status": "recovered-authored-card-inputs",
+          "related_work": [],
+          "recovered_card_inputs": [
+            {
+              "uuid": "63a0e4ff-353f-4c90-ab8a-7241d958d54c",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-epic.md",
+              "blob_oid": "1076feb3b90f7a1ef2a7bb3f40daf69f7c6148af",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            },
+            {
+              "uuid": "b3da01be-aed8-4d61-88c4-82a62fc5cf1f",
+              "repository": "riatzukiza/foresight",
+              "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+              "path": "docs/agile/kanban/cephalon-character-continuity.md",
+              "blob_oid": "6048cd47cca6fe38d44dc5b921b598ea65a120e1",
+              "source_pull_request": "riatzukiza/foresight#3",
+              "status": "proposed authored input; not adopted into local mainline",
+              "relationship": "existing work candidate; do not recreate"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e5-preserve-and-qualify-cephalon-s-creative-loop-baseline-ation-e5.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E6",
+      "uuid": "stabilization-e6",
+      "title": "Close the remaining Foresight constellation backlog",
+      "gate": "M6",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1"
+      ],
+      "stories": [
+        {
+          "slot": "E6.1",
+          "description": "Truth: Reconcile physics, performance, native interaction, represented life, water accounting and Gate planning.",
+          "acceptance": "All frozen Truth PRs covering physics/performance/native interaction/life/water/Gate planning have source-preserving terminal dispositions.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E6.2",
+          "description": "Agent/tooling modules: Proxx, Muse, Sol, Shx, Katamorph, UXX and supporting packages.",
+          "acceptance": "Proxx, Muse, Sol, Shx, Katamorph, UXX and supporting-tool PRs each have repository-owned gates and terminal dispositions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "fork-dev-origins",
+              "path": "docs/agile/kanban/epic-develop-on-riatzukiza-forks-orgs-receive-promotions-and-run-ops--origins.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "replace-sol-legacy-ledger-dependency-with-clio",
+              "path": "docs/agile/kanban/replace-sol-legacy-ledger-dependency-with-clio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E6.3",
+          "description": "Knowledge and media modules: Epiphany, Calliope, Bitch Tracker, Osmos, Receipt River and other independent children.",
+          "acceptance": "Epiphany, Calliope, Bitch Tracker, Osmos, Receipt River and remaining knowledge/media PRs have terminal dispositions without broad child-policy rewrites.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E6.4",
+          "description": "OpenPlanner historical backlog: Reconcile old fix pairs and source compatibility instead of blindly merging old branches.",
+          "acceptance": "Old OpenPlanner fix pairs are compared against accepted sources and compatibility tests before merge or evidenced supersession.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E6.5",
+          "description": "Foresight root: Accept or supersede overlapping architecture, archaeology, cognitive-substrate and operating-contract planning.",
+          "acceptance": "Overlapping root architecture, archaeology, cognitive-substrate and operating-contract plans are explicitly accepted or superseded; existing planning epics retain their identities.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "layered-operating-contracts",
+              "path": "docs/agile/kanban/epic-layered-operating-contracts.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E6.6",
+          "description": "Resolve every PR disposition: Close superseded and declined work only after its source and rationale are accounted for.",
+          "acceptance": "Every cohort PR has a verifiable terminal outcome and every useful split has an existing canonical successor; externally blocked open work still blocks M6.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e6-close-the-remaining-foresight-constellation-backlog-ation-e6.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    },
+    {
+      "id": "E7",
+      "uuid": "stabilization-e7",
+      "title": "Produce the release baseline and state-of-the-world report",
+      "gate": "M7",
+      "dependencies": [
+        "stabilization-e0",
+        "stabilization-e1",
+        "stabilization-e2",
+        "stabilization-e3",
+        "stabilization-e4",
+        "stabilization-e5",
+        "stabilization-e6"
+      ],
+      "stories": [
+        {
+          "slot": "E7.1",
+          "description": "Reconstruct Foresight: Validate root, submodules, source metadata and documentation against exact accepted commits.",
+          "acceptance": "The root, direct gitlinks, source metadata and documentation reconstruct from an immutable release manifest with no unexplained drift.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "a1d0645d-49a6-4e8d-b744-4e1a94175066",
+              "path": "docs/agile/kanban/establish-the-pinned-repository-census-94175066.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "codex-cloud-self-hydrating-foresight",
+              "path": "docs/agile/kanban/epic-codex-cloud-self-hydrating-foresight-workspace.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E7.2",
+          "description": "Execute the release matrix: Record passing and failing builds, tests, reviews, integration tests and runtime checks.",
+          "acceptance": "The exact release matrix retains pass/fail/blocked/unavailable/skipped/not-applicable outcomes, commands, tool versions and source revisions.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E7.3",
+          "description": "Audit PR closure: Independently verify all cohort dispositions and newly introduced remediation PRs.",
+          "acceptance": "A separate audit reconciles cohort totals and all campaign remediation PRs against remote terminal states; unresolved work prevents M7.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "0d73c22a-b018-4b8c-92fe-560127f53294",
+              "path": "docs/agile/kanban/reconcile-the-opening-pull-request-portfolio.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E7.4",
+          "description": "Publish the world-state: Identify what is implemented, tested, operational, blocked, or merely proposed.",
+          "acceptance": "The report distinguishes implemented, tested, operational, blocked and proposed claims, each with supporting evidence and known limits.",
+          "mapping_status": "unresolved",
+          "related_work": []
+        },
+        {
+          "slot": "E7.5",
+          "description": "Prepare two agent handoffs: One for CMS/translations and one for the Cephalon creative loop.",
+          "acceptance": "Produce separate CMS/translations and Cephalon handoffs; the CMS handoff retains separate SME translation and content/publication goals.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "abdd5a2d-dbad-46a0-ba3f-2149dfeafbcf",
+              "path": "docs/agile/kanban/prove-translation-generation-and-sme-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            },
+            {
+              "uuid": "3fd1fdf7-dc2e-4b2a-bb5a-7979a686529e",
+              "path": "docs/agile/kanban/prove-content-generation-layout-publishing-and-review-independently.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        },
+        {
+          "slot": "E7.6",
+          "description": "Preserve release evidence: Immutable source manifest, tests, provenance and unresolved debts.",
+          "acceptance": "Preserve a content-addressed source/test/provenance manifest and unresolved-debt register, with retrievable immutable artifacts.",
+          "mapping_status": "candidate-links",
+          "related_work": [
+            {
+              "uuid": "4f263499-a765-4b0f-bac0-7f8175672d60",
+              "path": "docs/agile/kanban/codify-revision-bound-layered-evidence-gates.md",
+              "relationship": "related; coverage requires E0 verification"
+            }
+          ]
+        }
+      ],
+      "path": "docs/agile/kanban/stabilization-e7-produce-the-release-baseline-and-state-of-the-world-report-ation-e7.md",
+      "registration_status": "incoming",
+      "qualification_status": "unqualified",
+      "merge_owner": null,
+      "current_board_status": "incoming"
+    }
+  ],
+  "e0_census": {
+    "report": "docs/stabilization/e0-census.md",
+    "graph": "docs/stabilization/e0-work-graph.json",
+    "unresolved": "docs/stabilization/e0-unresolved.json",
+    "complete_open_pr_enumeration": true,
+    "m0_qualified": false,
+    "count": 442,
+    "repositories": 815
+  },
+  "e0_resolution": {
+    "report": "docs/stabilization/e0-resolution.md",
+    "decisions": "docs/stabilization/e0-resolution.json",
+    "owner_work_index": "docs/stabilization/e0-owner-work-index.csv",
+    "parent_census_graph": "docs/stabilization/e0-work-graph.json",
+    "coordinator": "codex",
+    "owning_card": "stabilization-e0",
+    "summary": {
+      "frozen_prs": 442,
+      "e0_reconciliation_owner_bound": 442,
+      "work_anchor_accounted": 442,
+      "native_pr_assignment_changes": 0,
+      "existing_association_rows_retained": 192,
+      "quarantined_text_observations": 4,
+      "quarantined_unique_blob_oids": 2,
+      "new_verified_authored_card_observations": 23,
+      "new_verified_authored_card_prs": 12,
+      "newly_explicit_bound_former_unmapped_prs": 34,
+      "native_pr_backed_rows": 216,
+      "former_gap_tokens": 11,
+      "unlocated_former_gap_tokens": 0,
+      "gap_decisions": {
+        "locate-existing-legacy-id": 7,
+        "reject-empty-reference": 2,
+        "quarantine-malformed-target": 1,
+        "resolve-existing-uuid-path-alias": 1
+      },
+      "namespace_supplier_declarations": 72,
+      "unresolved_supplier_aliases": 0,
+      "knoxx_mixed_dependency_cycle_components": 2,
+      "created_tasks": 0,
+      "m0_qualified": false,
+      "frozen_card_relationship_observations_adjudicated": 1170,
+      "containment_observations": 721,
+      "declared_blocker_observations": 449,
+      "new_verified_card_relationship_observations": 28,
+      "cross_network_identity_holds": 3,
+      "pr_ancestry_observations_adjudicated": 183,
+      "differing_card_revision_groups_retained": 93,
+      "constellation_native_pr_backed_rows": 84,
+      "inventory_only_prs": 133
+    },
+    "m0_qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9.json",
+      "sha256": "917c1db8479e51ced7affa53b1bac77b4fefe24d2fa94f1357405c766b03d1b9"
+    }
+  },
+  "e0_refresh": {
+    "report": "docs/stabilization/e0-refresh.md",
+    "overlay": "docs/stabilization/e0-refresh.json",
+    "csv": "docs/stabilization/e0-refresh.csv",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz",
+      "sha256": "6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6",
+      "bytes": 4026181,
+      "uncompressed_sha256": "252fe6546d7b75e22ee3fc8cf061ed225699ba6bd6608501872d42a0c3c78921",
+      "uncompressed_bytes": 34313035
+    },
+    "summary": {
+      "frozen": 442,
+      "observed": 442,
+      "open": 441,
+      "merged": 1,
+      "closed_unmerged": 0,
+      "changed_head_or_base": 6,
+      "changed_open_head_or_base": 5,
+      "changed_merged_head_or_base": 1
+    },
+    "recovered_custody_observations": 4,
+    "new_tasks": 0,
+    "m0_qualified": false,
+    "cms_cephalon": "paused",
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/058fa645a02d2007399d0add776c8ca031c72cec237bc953e1bc33211f4b7b84.json",
+      "sha256": "058fa645a02d2007399d0add776c8ca031c72cec237bc953e1bc33211f4b7b84",
+      "bytes": 71058
+    }
+  },
+  "e0_execution": {
+    "report": "docs/stabilization/e0-execution.md",
+    "overlay": "docs/stabilization/e0-execution.json",
+    "existing_work": "riatzukiza/clio#5",
+    "published_head": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+    "hosted_ci": {
+      "run_id": 39520773474,
+      "url": "https://github.com/riatzukiza/clio/actions/runs/39520773474",
+      "head_sha": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2.json.gz",
+      "sha256": "91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2",
+      "bytes": 1559862,
+      "uncompressed_sha256": "6477443ac9d4a39fd5ad7d6a56d866bd35136ba6f072664816c005be411e833c",
+      "uncompressed_bytes": 7803310
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5.json",
+      "sha256": "4b0b0e81c8313b3336f7f1645bac9bfd8db319fd7f049e131f547bfc8b01d5b5",
+      "bytes": 24761
+    }
+  },
+  "campaign_publication": {
+    "pull_request": "open-hax/foresight#142",
+    "url": "https://github.com/open-hax/foresight/pull/142",
+    "scope": "new E0 checkpoint publication, outside original frozen cohort",
+    "snapshot": {
+      "path": ".ημ/stabilization/snapshots/04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b.json",
+      "sha256": "04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b",
+      "bytes": 4227
+    },
+    "qualification": "pending",
+    "auto_merge": false
+  },
+  "e5_replay_custody": {
+    "report": "docs/stabilization/e5-replay-custody.md",
+    "candidate_and_hold": {
+      "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+      "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
+      "bytes": 4933
+    },
+    "status": "recovered proposed comparator; adoption and actual replay qualification blocked",
+    "created_tasks": 0,
+    "agents": "CMS/Cephalon paused"
+  },
+  "e0_directory_binding": {
+    "report": "docs/stabilization/e0-directory-binding.md",
+    "overlay": "docs/stabilization/e0-directory-binding.json",
+    "published_head": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938.json.gz",
+      "sha256": "5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938",
+      "bytes": 345791,
+      "uncompressed_sha256": "ecf1234353fe2fb8345b074b1a59f91066b9d933cc60d42892cc32f8f588508b",
+      "uncompressed_bytes": 3038937
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b.json",
+      "sha256": "f78114fd9dd24675c5a2093057c370aa14621ee1b5a66bc6553b30634ba6f62b",
+      "bytes": 38579
+    }
+  },
+  "e0_live_base_topology": {
+    "report": "docs/stabilization/e0-base-topology.md",
+    "overlay": "docs/stabilization/e0-base-topology.json",
+    "register": "docs/stabilization/e0-base-topology.csv",
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 441,
+        "MERGED": 1,
+        "CLOSED": 0
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 180,
+      "open_reported_base_differs_from_live_tip": 179,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 301,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 135
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 1,
+      "changed_open_head_or_reported_base_from_original_freeze": 5,
+      "pr_base_ref_target_differs_from_independent_tip": 0
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
+      "sha256": "bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e",
+      "bytes": 4203652,
+      "uncompressed_sha256": "c6ae119fe99d06dbd0256d75496ab2f47490ba67ba9a89692b25afc4201c8264",
+      "uncompressed_bytes": 26685701
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json",
+      "sha256": "835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd",
+      "bytes": 37487
+    }
+  },
+  "e0_review_route": {
+    "report": "docs/stabilization/e0-review-route.md",
+    "overlay": "docs/stabilization/e0-review-route.json",
+    "existing_sources": [
+      "riatzukiza/clio#3",
+      "open-hax/eta-mu#328",
+      "riatzukiza/eta-mu#22"
+    ],
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
+      "sha256": "bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e",
+      "bytes": 4203652,
+      "uncompressed_sha256": "c6ae119fe99d06dbd0256d75496ab2f47490ba67ba9a89692b25afc4201c8264",
+      "uncompressed_bytes": 26685701
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd.json",
+      "sha256": "835a586492376530c78af6b79eebf5645709d3dea6fd68dd4035154c8ffa0bcd",
+      "bytes": 37487
+    }
+  },
+  "e0_root_caller_custody": {
+    "report": "docs/stabilization/e0-caller-custody.md",
+    "workflow": ".github/workflows/eta-mu-review.yml",
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/90caac8f69da54423ad8d1fbf54407b937b92c5a8e760540b6f6c36d6e09c7b1.json",
+      "sha256": "90caac8f69da54423ad8d1fbf54407b937b92c5a8e760540b6f6c36d6e09c7b1",
+      "bytes": 95458
+    },
+    "qualified": false,
+    "route_activated": false,
+    "forwarded_secret_names": [],
+    "hosted_result": null,
+    "existing_owner": "stabilization-e1"
+  },
+  "e0_anonymous_producer_execution": {
+    "report": "docs/stabilization/e0-anonymous-producer.md",
+    "overlay": "docs/stabilization/e0-anonymous-producer.json",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 361,
+      "head": "9c05ba9d7de528529d08b901a1f3a6635fb34f7d",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "red": "83dd52478fd6928027aa66bfa665f52b3953e671",
+      "composition": "96862eef543ace2bbd788221ae05ee19121312db",
+      "card": "cf32641a-b336-407e-b68b-c75ec7d20dbb",
+      "state": "testing",
+      "local_checks": {
+        "registered_tests": 338,
+        "pass": 338,
+        "fail": 0,
+        "skip": 0,
+        "emitted_warnings": 0,
+        "actionlint_shellcheck": "PASS"
+      },
+      "test_scope": "Actual extracted workflow steps, inert model/catalog/validation boundaries and existing TRANSPORT_MOCK_ONLY verifier; no canonical production-law or native provider credit",
+      "hosted_scope": {
+        "ordinary_producer_jobs": "SKIPPED for fork enrollment",
+        "terminal_producer_job": "SUCCESS unsupported-event path, not inference",
+        "main_tests_job": "SUCCESS two contract-guard cases, not registered338; actual warning carrier",
+        "executed_merge": "8f4256e8f48c3a5a951f73441de60ce45754b6f0",
+        "tree": "0c41aca0623bb5bd63983058b1abf0b78ca04cfc",
+        "merge_tree_equals_head_tree": true
+      },
+      "accepted": false,
+      "qualified": false,
+      "auto_merge": false
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
+      "sha256": "92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185",
+      "bytes": 2647915,
+      "uncompressed_sha256": "a702a5bb4b4387eb54bfb17f2fec4aa92177f98cc42d0bb344d4e900061b5794",
+      "uncompressed_bytes": 18102773
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json",
+      "sha256": "51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3",
+      "bytes": 4208
+    }
+  },
+  "e0_native_review_dispositions": {
+    "report": "docs/stabilization/e0-review-findings.md",
+    "selection_amendments": "docs/stabilization/e5-source-amendments.md",
+    "open_oracle_comment": 4332332161,
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185.json.gz",
+      "sha256": "92897a503c8378a5ce0a98e56c38628309df68ef113f1feee832956dd62ac185",
+      "bytes": 2647915,
+      "uncompressed_sha256": "a702a5bb4b4387eb54bfb17f2fec4aa92177f98cc42d0bb344d4e900061b5794",
+      "uncompressed_bytes": 18102773
+    },
+    "qualified": false,
+    "attempt_manifest": {
+      "path": ".ημ/stabilization/snapshots/51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3.json",
+      "sha256": "51bee761bcda25f77d84c454d8b5d308491c942befa49dfc4c82a1ebbf56fbc3",
+      "bytes": 4208
+    }
+  },
+  "e0_producer_followup_execution": {
+    "report": "docs/stabilization/e0-producer-followup.md",
+    "overlay": "docs/stabilization/e0-producer-followup.json",
+    "census": "docs/stabilization/e0-producer-followup-census.json",
+    "register": "docs/stabilization/e0-producer-followup-census.csv",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 361,
+      "head": "3772f776b65598c76c91f2127df2788d8d0074ca",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5"
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1.json.gz",
+      "sha256": "f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1",
+      "bytes": 159883,
+      "uncompressed_sha256": "d72d9f2985952874f97a1e1182dce4b0270ea2d4dec94db98275779f7722817a",
+      "uncompressed_bytes": 1565619
+    },
+    "qualified": false,
+    "existing_owner": "stabilization-e0",
+    "milestones": "M0-M7 unqualified",
+    "agents": "CMS/Cephalon paused"
+  },
+  "e0_candidate_ci_isolation_execution": {
+    "report": "docs/stabilization/e0-ci-isolation.md",
+    "overlay": "docs/stabilization/e0-ci-isolation.json",
+    "census": "docs/stabilization/e0-ci-isolation-census.json",
+    "register": "docs/stabilization/e0-ci-isolation-census.csv",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 361,
+      "head": "1635d310a36c25b42646f14d4810359306fc76d9",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5"
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/0536b335d532aa5f6692ec33816cd52077ac1ad42eda751b8154cbd4babb353f.json.gz",
+      "sha256": "0536b335d532aa5f6692ec33816cd52077ac1ad42eda751b8154cbd4babb353f",
+      "bytes": 826073,
+      "uncompressed_sha256": "bf3d5eb158e1a07c310d273ba4608bbd353ec8c1bc89ef59291391865ec7fc6c",
+      "uncompressed_bytes": 5249917,
+      "captures": 187
+    },
+    "new5pointowner": "e449367d-8fc1-4e8b-a1bb-995cbdd97334",
+    "qualified": false,
+    "existing_root_owner": "stabilization-e0",
+    "milestones": "M0-M7 unqualified",
+    "agents": "CMS/Cephalon paused"
+  },
+  "e0_receipt_adjudication_execution": {
+    "report": "docs/stabilization/e0-receipt-adjudication.md",
+    "overlay": "docs/stabilization/e0-receipt-adjudication.json",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 361,
+      "head": "fb8bf0e18b0aac9179e821952adfa7f257c5160f",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5"
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/64af1dfcfc396aefdb62e2d933ccb2c26dbc96f24cd1cba0cca864f009480c8f.json.gz",
+      "sha256": "64af1dfcfc396aefdb62e2d933ccb2c26dbc96f24cd1cba0cca864f009480c8f",
+      "bytes": 158747,
+      "raw_sha256": "bb92d811a559d36001cd732698e0f615c07602b01838e73736501bdf30e6fe98",
+      "raw_bytes": 1559121,
+      "captures": 53
+    },
+    "new_valid_events": 12,
+    "historical_invalid_rows": 71,
+    "receipt_thread_open": true,
+    "publisher_owner": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "qualified": false,
+    "root_owner": "stabilization-e0",
+    "agents": "CMS/Cephalon paused"
+  },
+  "e0_publisher_core_execution": {
+    "report": "docs/stabilization/e0-publisher-execution.md",
+    "overlay": "docs/stabilization/e0-publisher-execution.json",
+    "census": "docs/stabilization/e0-publisher-execution-census.json",
+    "register": "docs/stabilization/e0-publisher-execution-census.csv",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 362,
+      "head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+      "green": "754d7b639c8e889c4266a9d58c2f75e6ff1906f5",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "dependency_pr": 361
+    },
+    "publisher_owner": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "publisher_state": "in_progress",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/d084d82a56660ec793e141ee100ffb964a5778ef0987c048afcc8f8027d78e61.json.gz",
+      "sha256": "d084d82a56660ec793e141ee100ffb964a5778ef0987c048afcc8f8027d78e61",
+      "bytes": 951264,
+      "raw_sha256": "8a8aa13f4a7b0492ea32b2bab8a7030db3a05fd7a770e0bfb072be7e18fbe13c",
+      "raw_bytes": 4316398,
+      "captures": 99
+    },
+    "full_publisher_complete": false,
+    "qualified": false,
+    "root_owner": "stabilization-e0",
+    "agents": "CMS/Cephalon paused"
+  },
+  "e0_root_receipt_contract_correction": {
+    "report": "docs/stabilization/e0-root-receipt-contract.md",
+    "overlay": "docs/stabilization/e0-root-receipt-contract.json",
+    "root_source": "ef538b657568b4339f738665a86f3f8f34fa6280",
+    "accepted_base": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "invalid_new_root_rows": [
+      245,
+      246
+    ],
+    "root_receipt_gate_pass": false,
+    "history_preserved": true,
+    "documentary_catalog_admits_old_rows": false,
+    "recovered_reader_applicable": false,
+    "publisher_completed_bundle": {
+      "repository": "open-hax/eta-mu",
+      "pr": 362,
+      "run": 39550202681,
+      "job": 119057415817,
+      "attempt": 1,
+      "head": "5610a2cc42126114cd599cef33cbee1af97000e3",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "tested_merge": "c63d7c5648dae6afb81e92103da2714f77023f18",
+      "tree": "11de5ce3eb07b4d67dffa800349ced4a6211bba5",
+      "conclusion": "success",
+      "completed_at": "2026-10-21T05:55:34Z",
+      "owning_tests": 14,
+      "owning_assertions": 216,
+      "artifact": {
+        "id": 12323938548,
+        "name": "eta-mu-sandbox-c63d7c5648dae6afb81e92103da2714f77023f18",
+        "size_in_bytes": 315410622,
+        "url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12323938548",
+        "archive_download_url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12323938548/zip",
+        "expired": false,
+        "created_at": "2026-10-21T05:55:31Z",
+        "expires_at": "2026-11-20T05:55:21Z",
+        "updated_at": "2026-10-21T05:55:31Z",
+        "digest": "sha256:468ff4b9328070deafbc906bd9cb3518101453bb8dcc5b7fcbf1f8192fe09cd7",
+        "workflow_run": {
+          "id": 39550202681,
+          "repository_id": 1189985055,
+          "head_repository_id": 1401249220,
+          "head_branch": "feat/trusted-review-publication-20261021",
+          "head_sha": "5610a2cc42126114cd599cef33cbee1af97000e3"
+        }
+      },
+      "artifact_downloaded_or_restored": false,
+      "carrier_warning_instances": 11,
+      "carrier_warning_scope": "DEPxxxx DeprecationWarning or GitHub warning markers; ordinary zero-warning compiler messages excluded",
+      "intentional_SIGTERM_to_SIGKILL_fixture_diagnostic_preserved": true,
+      "strict_whole_carrier_qualified": false,
+      "native_reviewer_approval": false,
+      "publisher_complete": false,
+      "default_adoption": false,
+      "deployment": false
+    },
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/9fec8c09d58756a92492e603608d0b40d6114d99918c9e71b14ec8be94f9e356.json.gz",
+      "sha256": "9fec8c09d58756a92492e603608d0b40d6114d99918c9e71b14ec8be94f9e356",
+      "bytes": 350779,
+      "raw_sha256": "8aba1ac2c274e985ce6dbd9620173a2ed8fa797dc2cc8a7c40eab0f9fc1be668",
+      "raw_bytes": 3028146,
+      "captures": 49
+    },
+    "qualified": false,
+    "root_owner": "stabilization-e0",
+    "agents": "CMS/Cephalon paused"
+  },
+  "e0_archive_execution": {
+    "report": "docs/stabilization/e0-archive-execution.md",
+    "overlay": "docs/stabilization/e0-archive-execution.json",
+    "census": "docs/stabilization/e0-archive-execution-census.json",
+    "register": "docs/stabilization/e0-archive-execution-census.csv",
+    "source": {
+      "repository": "open-hax/eta-mu",
+      "pr": 362,
+      "head": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "first_checkpoint": "67e8d9dd7807452ac82d425e9fbb2ce51caeb56d"
+    },
+    "owner": "stabilization-e0",
+    "publisher_owner": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+    "publisher_state": "in_progress",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/d9e1d4b67b1a7b10c7dd69c0e7017511fc522c3ca484ab159fb103a238b81696.json.gz",
+      "sha256": "d9e1d4b67b1a7b10c7dd69c0e7017511fc522c3ca484ab159fb103a238b81696",
+      "bytes": 77057,
+      "raw_sha256": "2d783ad6ec98d8ded6ff5f30b80c7f3cc5e7e61b641df37632f1a9cfec35a91b",
+      "raw_bytes": 436817,
+      "captures": 42
+    },
+    "root_receipt_P1_open": true,
+    "qualified": false,
+    "agents": "CMS/Cephalon paused",
+    "measurement_correction": {
+      "review": 5596322438,
+      "reply": 6310680841,
+      "test_source": "22dce3bb7644e855deaaf28594f017141592f877",
+      "product_runtime_unchanged": true,
+      "parent_only_cleanup_claim": true
+    },
+    "later_native_evidence": {
+      "path": ".ημ/stabilization/snapshots/071ce2a61ad0b50b7684e961e12bf2db439c8affe8d052e66cfa1bff632fa67f.json.gz",
+      "sha256": "071ce2a61ad0b50b7684e961e12bf2db439c8affe8d052e66cfa1bff632fa67f",
+      "bytes": 91295,
+      "raw_sha256": "7f924a013b6a760f1ab0c753ea9d5293c7948fbd750922becb75f3285d14315e",
+      "raw_bytes": 349726,
+      "captures": 77
+    },
+    "review_current": {
+      "coderabbit": "rate-limited",
+      "approvals": 0,
+      "deterministic_pending": 6,
+      "reevaluation_required": true
+    }
+  },
+  "e0_archive_hosted_execution": {
+    "report": "docs/stabilization/e0-hosted-archive-proof.md",
+    "overlay": "docs/stabilization/e0-hosted-archive-proof.json",
+    "head": "6a796582d74f93c1a1f18ca5c89eb3a0b19445eb",
+    "run": 39563090634,
+    "job": 119099506987,
+    "tested_merge": "04003cb0173a3e83ba5a8cabc997f401f5fa8410",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/1b38dc78c2f85e746073eacadae743d1acecea9cdbdf06cb1a80a301f404eda1.json.gz",
+      "sha256": "1b38dc78c2f85e746073eacadae743d1acecea9cdbdf06cb1a80a301f404eda1",
+      "bytes": 110636,
+      "raw_sha256": "30e31f18796606413cace41204d40b440b9a629e378e3bd4ced2af37ca9d4932",
+      "raw_bytes": 1138632,
+      "captures": 33
+    },
+    "fresh_census_evidence": {
+      "path": ".ημ/stabilization/snapshots/89fa2f81a87075971bb35cf62d33d162144751d5a627440aeb234f9fce33ede2.json.gz",
+      "sha256": "89fa2f81a87075971bb35cf62d33d162144751d5a627440aeb234f9fce33ede2",
+      "bytes": 146644,
+      "raw_sha256": "30e2e0666c22f49d74efcc39ab8e73336489c2565493aa095f42c4d24657eaeb",
+      "raw_bytes": 2169192,
+      "captures": 64
+    },
+    "full_publisher_complete": false,
+    "qualified": false,
+    "owner": "stabilization-e0",
+    "agents": "CMS/Cephalon paused"
+  },
+  "e0_collector_verifier_execution": {
+    "report": "docs/stabilization/e0-collector-verifier-execution.md",
+    "overlay": "docs/stabilization/e0-collector-verifier-execution.json",
+    "census": "docs/stabilization/e0-collector-verifier-census.json",
+    "child_head": "87187ddc3a375c4fcea28b7c882659737f53e698",
+    "frozen_PRs": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "changed_open_H_B_from_freeze": 4,
+    "source_tuple_drift": 0,
+    "proposed_merge_drift": 4,
+    "followup_changed_records_stable": true,
+    "tested_candidates": 0,
+    "publisher": "in_progress",
+    "qualified": false,
+    "CMS_Cephalon": "paused"
+  },
+  "e0_pagination_repair": {
+    "report": "docs/stabilization/e0-pagination-repair.md",
+    "overlay": "docs/stabilization/e0-pagination-repair.json",
+    "child_head": "ab03d9350e40a368748b2d1c4612a0038d3c21af",
+    "source": "9fc17a59b82997b8a1c8903c51c0e0b8f2f45bf9",
+    "native_inline_unresolved": 0,
+    "exact_head_approvals": 0,
+    "publisher": "in_progress",
+    "census_window": "2026-10-22 00:51 UTC",
+    "frozen": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "qualified": false,
+    "CMS_Cephalon": "paused"
+  },
+  "e0_native_files_execution": {
+    "report": "docs/stabilization/e0-native-files.md",
+    "overlay": "docs/stabilization/e0-native-files.json",
+    "census": "docs/stabilization/e0-native-files-census.json",
+    "child_head": "b265c7220bb07839d188e7e44311d31aff0ae469",
+    "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+    "native_probe_files": 90,
+    "native_probe_missing_patches": 17,
+    "frozen": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "open_H_B_changed_from_freeze": 4,
+    "source_drift": 0,
+    "proposal_drift": 0,
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
+  },
+  "e0_clio_intent_execution": {
+    "report": "docs/stabilization/e0-clio-intent-execution.md",
+    "overlay": "docs/stabilization/e0-clio-intent-execution.json",
+    "census": "docs/stabilization/e0-clio-intent-census.json",
+    "child_head": "fa117fba0b761f8aa655e26c2ae8675b1af178cd",
+    "source": "bb82398568f7abf7f2c1103e0aa34806b7b87153",
+    "clio_candidate": "5fad794de1a9e23d6e5aaad42eaa933be1c070be",
+    "frozen": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "open_H_B_changed_from_freeze": 6,
+    "source_drift": 0,
+    "proposal_drift": 0,
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
+  },
+  "e0_bootstrap_preflight_execution": {
+    "report": "docs/stabilization/e0-bootstrap-execution.md",
+    "overlay": "docs/stabilization/e0-bootstrap-execution.json",
+    "child_head": "cd9751d01a2b93123281d032f42a83fb4b9d42cb",
+    "source": "b8af64f41de139d17741ee2696ab82bdb38a81d1",
+    "native_owner_source": "ed4c7cb508feed77eff5d03f3fad7d686ac84657",
+    "native_executed_merge": "abda0ec5cb195abe8ec497e29775ca69a8f5c5c0",
+    "intent_tests": 29,
+    "intent_assertions": 200,
+    "inline_unresolved": 0,
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
+  },
+  "e0_native_cd975_execution": {
+    "report": "docs/stabilization/e0-native-cd975.md",
+    "overlay": "docs/stabilization/e0-native-cd975.json",
+    "census": "docs/stabilization/e0-native-cd975-census.json",
+    "child_head": "cd9751d01a2b93123281d032f42a83fb4b9d42cb",
+    "native_merge": "f299bd6159b9fc32b11922a119464018f9643134",
+    "frozen": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "open_H_B_changed_from_freeze": 6,
+    "source_drift": 0,
+    "proposal_drift": 1,
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
+  },
+  "e0_readback_execution": {
+    "report": "docs/stabilization/e0-readback-execution.md",
+    "overlay": "docs/stabilization/e0-readback-execution.json",
+    "child_head": "db99b1682c94ecdf9f8b239709dd44cb6101c7da",
+    "source": "6e1f088fcd81dba5e9edaf526e453962875215c6",
+    "readback_tests": 10,
+    "readback_assertions": 130,
+    "independent_controls": 8,
+    "older_Sandbox": "success/source-bound CD975 at M f299bd61",
+    "census_retained": "e0-native-cd975-census.json",
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
+  },
+  "e0_review_scope_execution": {
+    "report": "docs/stabilization/e0-review-scope-execution.md",
+    "overlay": "docs/stabilization/e0-review-scope-execution.json",
+    "child_head": "c9ef250dcf5d981c820bbca1abf7c578ee864412",
+    "scope_source": "03878641fd55b9327cdb01e8b522a99bab05d587",
+    "native_paths": 100,
+    "binary_review_credit": false,
+    "frozen_cohort": "e0-review-scope-census.json",
+    "source_bound_DB99_Sandbox": "success at actual M84ca1a0b;22carrierdiagnostics",
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
+  },
+  "e0_outcome_execution": {
+    "report": "docs/stabilization/e0-outcome-execution.md",
+    "overlay": "docs/stabilization/e0-outcome-execution.json",
+    "child_head": "f7963bdaa0dbdbb24c0b990d46f572c37dcb6a20",
+    "source": "7002b307da9bec55053fddeb640543d6a7e54da5",
+    "census": "docs/stabilization/e0-outcome-census.json",
+    "qualified": false,
+    "CMS_Cephalon": "paused",
+    "root_source": "27540f50f05151fc58be84df6bd8f2c2e6e7a081"
+  },
+  "e0_custody_execution": {
+    "report": "docs/stabilization/e0-custody-execution.md",
+    "overlay": "docs/stabilization/e0-custody-execution.json",
+    "census": "docs/stabilization/e0-custody-census.json",
+    "child_head": "874068612a9c576ef3d3e6847f72de2fee9a996b",
+    "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+    "root_source": "88ae0bba14901cf4924e0bafd4743480b5d3eeca",
+    "qualified": false,
+    "CMS_Cephalon": "paused"
+  }
+}

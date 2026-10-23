@@ -1,0 +1,50 @@
+{
+  "prefixes": {
+    ".ημ/receipts.edn": {
+      "base_bytes": 415104,
+      "base_sha256": "2c1d3e32880303de9be369df7f924a3314abd27e382bafb0cca9e4fd509b1939",
+      "current_bytes": 417967,
+      "prefix_preserved": true
+    },
+    ".ημ/kanban-events/ledger.edn": {
+      "base_bytes": 266405,
+      "base_sha256": "6e748f4f30c444a757211f3fe8ea619a832a3fd0538f473a36103150024ac824",
+      "current_bytes": 270855,
+      "prefix_preserved": true
+    },
+    ".ημ/session-mycology/ledger.md": {
+      "base_bytes": 48244,
+      "base_sha256": "9a2ace82d4693e47504b42c038a15d321e3f781f6927794bd10bbaffafb77172",
+      "current_bytes": 48957,
+      "prefix_preserved": true
+    }
+  },
+  "receipt_suffix_sha256": "8c93744cb554cbeebcfeb5d20e790361e7be70a269c9dbf6a4dff7c2a06fa86d",
+  "gitlinks": [
+    "160000 commit 00a05c8f6ba68ff30a98266879310464e966748b\t.agents",
+    "160000 commit 8ade66a3553bdd89696aebf4fc4628a6fe66e5ae\tTruth",
+    "160000 commit 2439d4d6b8e546cda276f09f5c96db59226ecad6\taxxium",
+    "160000 commit 2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90\tbitch-tracker",
+    "160000 commit 2655ae6eddbd20ac400a8e1ff99914c56d81b835\tcalliope",
+    "160000 commit 86385532b4f8606946555d0ada8e3fb22f35b4c3\tchat-ui",
+    "160000 commit 788cdd3434615a7932b924e68520dbf7f88408c2\tclio",
+    "160000 commit ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66\tepiphany",
+    "160000 commit 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90\teta-mu",
+    "160000 commit 8e16609dd191bdd2e9a3c0320ce4238b5cd83467\tkanban-orchestrator",
+    "160000 commit 3bd4cf26e68dc88fbe67f831baa4bc389e3363e7\tkatamorph",
+    "160000 commit fb08a10a8aa32a594cc97ae11b820113de4cf386\tknoxx",
+    "160000 commit b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde\tmuse",
+    "160000 commit cc4b45612974f735ddec46009ede07729511fba4\topencode",
+    "160000 commit 0c33018e27f861536822086afcdab666a60add44\tosmos",
+    "160000 commit abbbc8b1ad80738233593e17e751203db785c9e2\tproxx",
+    "160000 commit 7c7c62343fea0241ac545e37f14e57ab344bfa30\treceipt-river",
+    "160000 commit 11811264a308d406cb612aefa1dad40818675e5e\trheos",
+    "160000 commit d361c7837ba369f5c22c9a3f9d827e74605b6c7d\tservices",
+    "160000 commit 30339f9aa3df83ef8c335d4544307272abfbb131\tsession-mycology",
+    "160000 commit 6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa\tshx",
+    "160000 commit 1276955c86ff46936cd1ce7d81fbc790f7068e1e\tsol",
+    "160000 commit 97e67a7a758c080450a200e8e6e1ada614eabc6d\tuxx"
+  ],
+  "CMS_Cephalon": "paused",
+  "qualified": false
+}

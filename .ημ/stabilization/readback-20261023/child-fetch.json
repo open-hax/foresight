@@ -1,0 +1,7 @@
+{
+  "expected_head": "db99b1682c94ecdf9f8b239709dd44cb6101c7da",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "From github.com:riatzukiza/eta-mu\n * branch              feat/trusted-review-publication-20261021 -> FETCH_HEAD\n",
+  "whole_git_object_verified": true
+}

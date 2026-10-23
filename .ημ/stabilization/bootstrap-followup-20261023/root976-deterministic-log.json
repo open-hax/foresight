@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "/home/err/.cache/foresight-tools/bin/gh",
+    "api",
+    "repos/open-hax/foresight/actions/jobs/120212036821/logs"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway\n"
+}

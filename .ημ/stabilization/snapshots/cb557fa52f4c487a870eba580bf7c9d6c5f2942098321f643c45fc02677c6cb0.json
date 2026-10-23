@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "kind": "e5-replay-contract-candidate-and-adoption-hold",
+  "observed_at": "2026-10-21T01:07:33.052661+00:00",
+  "epic": "stabilization-e5",
+  "gate": "M5",
+  "coordinator": "codex via existing E0",
+  "existing_work": {
+    "selection_uuid": "b5f2ba9e-8d67-4c73-9919-e275983aca87",
+    "physical_field_uuid": "ff3e628b-cd5c-4a89-a397-42cc88dbde70",
+    "verification_uuid": "5ea872c3-1db4-47c5-a63d-d49f99f79497",
+    "source_pr": "https://github.com/riatzukiza/foresight/pull/3"
+  },
+  "source_observations": [
+    {
+      "repository": "riatzukiza/foresight",
+      "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+      "source_path": "docs/agile/kanban/cephalon-character-field-contract.md",
+      "git_blob": "278b36a3e55184ea9c1c17efb7d83a68e22e7d55",
+      "sha256": "0f3821a5f85b901d1a03d3532fcdcc6e4be58fc3da5cd3c0dea3e14df9896cf4",
+      "bytes": 4857,
+      "recovered_path": ".ημ/stabilization/recovered/278b36a3e55184ea9c1c17efb7d83a68e22e7d55.md",
+      "authority": "exact proposed source; not adopted or implementation proof"
+    },
+    {
+      "repository": "riatzukiza/foresight",
+      "revision": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+      "source_path": "docs/notes/2026-10-07-cephalon-field-kernel-selection.md",
+      "git_blob": "e593dcb6c17b3fe04107564651632f0dad717717",
+      "sha256": "4bd35dba59a5cc01020faed2ead59d885f46f889510a0414db4e4b9c6fde122b",
+      "bytes": 20432,
+      "recovered_path": ".ημ/stabilization/recovered/e593dcb6c17b3fe04107564651632f0dad717717.md",
+      "authority": "exact proposed source; not adopted or implementation proof"
+    }
+  ],
+  "candidate": {
+    "authority": "recovered proposal only; numeric values not selected by this stabilization checkpoint",
+    "target": "same compiled CLJS kernel on Node; no cross-runtime parity claim",
+    "numeric_type": "finite IEEE-754 binary64",
+    "comparison_rule": "abs(a-b) <= absolute_tolerance + relative_tolerance * max(abs(a), abs(b))",
+    "absolute_tolerance": 1e-09,
+    "relative_tolerance": 1e-09,
+    "continuous_fields": [
+      "positions",
+      "velocities",
+      "field vectors",
+      "continuous force/scalar summaries"
+    ],
+    "units": {
+      "positions": "world units",
+      "velocities": "world units/second",
+      "field_vectors": "world units/second",
+      "force_and_scalar_summaries": "each declared source/config unit; exact field enumeration still required by accepted implementation"
+    },
+    "exact_fields": [
+      "IDs",
+      "event order",
+      "residual microseconds",
+      "seed counters",
+      "wallet counts",
+      "contact classifications",
+      "permissions",
+      "included memories",
+      "selected actions",
+      "state/config/artifact hash bytes"
+    ],
+    "discrete_rule": "all exact fields equal; scalar tolerance never excuses changed path, ownership or choice",
+    "finite_rule": "nonfinite physical values refuse; threshold-near cases must retain exact discrete outcomes",
+    "clock_quantum_microseconds": 10000,
+    "maximum_substeps_per_call": 100,
+    "seed_contract": "nonzero uint32 xorshift32 shifts13,17,5 and explicit draw counter; continuous simplex mapping separately qualified"
+  },
+  "qualification": {
+    "status": "unqualified",
+    "contract_adopted": false,
+    "adopted_contract_revision": null,
+    "accepted_numeric_comparator_artifact": null,
+    "selected_owning_implementation_revision": null,
+    "selected_runtime_configuration_hash": null,
+    "independent_review_ids": [],
+    "executed_replay_evidence": [],
+    "B1": "unassessed",
+    "B2": "unassessed",
+    "B3": "unassessed"
+  },
+  "blocking_requirements": [
+    "Explicit reviewed mainline adoption of exact character design and numeric selection revision.",
+    "Owning repository acknowledgement of ABI, pure kernel and adapter boundaries, source license and collision policy.",
+    "Exact finite compared field paths/units, coefficients, bounds, threshold cases, runtime/artifact/config hashes and frozen input/state schedule.",
+    "Reviewed absolute/relative tolerance and comparator implementation; choose exact discrete/hash equality independently.",
+    "Lawful native Rheos readiness and predecessor retention; current proposal/card identity is not admission.",
+    "Actual red/green and independent persisted replay across the selected runtime at the adopted contract revision."
+  ],
+  "adoption_rule": "If replay becomes an adopted gate, the adopted contract must reference a new immutable qualification snapshot binding chosen comparator/value/fields, exact source/runtime/config and actual test/review evidence; this candidate is never a passing qualification.",
+  "source_preservation": "Recovered milestone e67290983db85260b558a041c04686e88ef88f80 remains byte-identical; all previous snapshots retained.",
+  "cms_cephalon": "agents remain paused; no runtime/solver work dispatched",
+  "created_execution_tasks": 0
+}

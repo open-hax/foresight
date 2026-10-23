@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "kind": "targeted-reference-observation",
+  "observed_at": "2026-10-20T07:27:02.200339+00:00",
+  "complete_census": false,
+  "missing": [
+    "exhaustive repository and fork enumeration",
+    "PR pagination across the cohort",
+    "review findings and review threads",
+    "check runs and protected gates",
+    "per-item accountable owners and dispositions",
+    "canonical child task matching"
+  ],
+  "pull_requests": [
+    {
+      "base": {
+        "ref": "main",
+        "repo": "open-hax/foresight",
+        "sha": "fcfc2d17f28640203066ddfe0a22f87db7372a32"
+      },
+      "draft": false,
+      "head": {
+        "ref": "promote/45e33f9",
+        "repo": "open-hax/foresight",
+        "sha": "45e33f93a5680e4c75a3b683f9870ced82a9f18c"
+      },
+      "html_url": "https://github.com/open-hax/foresight/pull/139",
+      "merged_at": null,
+      "number": 139,
+      "repository": "open-hax/foresight",
+      "state": "open",
+      "title": "Promote riatzukiza/foresight main (45e33f9): add OpenPlanner submodule",
+      "updated_at": "2026-10-13T00:19:24Z"
+    },
+    {
+      "base": {
+        "ref": "main",
+        "repo": "open-hax/knoxx",
+        "sha": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a"
+      },
+      "draft": false,
+      "head": {
+        "ref": "work/wiki-stack-1-foundations",
+        "repo": "open-hax/knoxx",
+        "sha": "1d3b207ab2e5bfc6b2fa149836b855d458a9c997"
+      },
+      "html_url": "https://github.com/open-hax/knoxx/pull/305",
+      "merged_at": null,
+      "number": 305,
+      "repository": "open-hax/knoxx",
+      "state": "open",
+      "title": "Clio persistence and local Wiki stack: implementation handoff",
+      "updated_at": "2026-10-13T15:42:38Z"
+    },
+    {
+      "base": {
+        "ref": "main",
+        "repo": "open-hax/knoxx",
+        "sha": "3409977bca4ba35e09967f9a99d50867a679a73c"
+      },
+      "draft": true,
+      "head": {
+        "ref": "codex/cms-source-locale-review",
+        "repo": "open-hax/knoxx",
+        "sha": "482079b722b111991c8e8321e89520eec79f3d5a"
+      },
+      "html_url": "https://github.com/open-hax/knoxx/pull/387",
+      "merged_at": null,
+      "number": 387,
+      "repository": "open-hax/knoxx",
+      "state": "open",
+      "title": "Repair CMS receipt readback and scope the native stream migration",
+      "updated_at": "2026-10-18T03:38:12Z"
+    },
+    {
+      "base": {
+        "ref": "codex/cms-source-locale-review",
+        "repo": "open-hax/knoxx",
+        "sha": "662a1f8f9f522c7fc601aea6f857e36378bdecc2"
+      },
+      "draft": true,
+      "head": {
+        "ref": "codex/qualification-runner-truthful",
+        "repo": "open-hax/knoxx",
+        "sha": "d3ccf687a8756377fd6360119e2cbe3d6be42326"
+      },
+      "html_url": "https://github.com/open-hax/knoxx/pull/388",
+      "merged_at": null,
+      "number": 388,
+      "repository": "open-hax/knoxx",
+      "state": "open",
+      "title": "Authenticate production mutation evidence and preserve exact source/payload custody",
+      "updated_at": "2026-10-18T03:35:52Z"
+    },
+    {
+      "base": {
+        "ref": "integration/cms-reviewed-origin2ba3b84d-20261017",
+        "repo": "riatzukiza/knoxx",
+        "sha": "2ba3b84de4fff8acbff9dabe9049b0ab287b6635"
+      },
+      "draft": false,
+      "head": {
+        "ref": "development/cms-controller-application-20261017",
+        "repo": "riatzukiza/knoxx",
+        "sha": "dafd2c2e60d6f03e21a75d1bbcd8f766cf988b03"
+      },
+      "html_url": "https://github.com/riatzukiza/knoxx/pull/19",
+      "merged_at": null,
+      "number": 19,
+      "repository": "riatzukiza/knoxx",
+      "state": "open",
+      "title": "Integrate CMS review lifecycle and authenticated production qualification",
+      "updated_at": "2026-10-18T03:16:14Z"
+    },
+    {
+      "base": {
+        "ref": "main",
+        "repo": "riatzukiza/knoxx",
+        "sha": "b3903dfc4c9e9dd5e32ae658cf5d8abb88b8e792"
+      },
+      "draft": true,
+      "head": {
+        "ref": "codex/cephalon-automatic-graph-recall",
+        "repo": "riatzukiza/knoxx",
+        "sha": "b6f4dfbb4a006934a191c8fb3f26f270579e7e62"
+      },
+      "html_url": "https://github.com/riatzukiza/knoxx/pull/14",
+      "merged_at": null,
+      "number": 14,
+      "repository": "riatzukiza/knoxx",
+      "state": "open",
+      "title": "Connect character encounter memory to automatic scoped graph recall",
+      "updated_at": "2026-10-14T12:56:55Z"
+    }
+  ]
+}

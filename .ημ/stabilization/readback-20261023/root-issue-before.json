@@ -1,0 +1,39 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "issue": {
+      "url": "https://github.com/open-hax/foresight/pull/142",
+      "title": "fix(stabilization): isolate reviewer credentials and publish E0 reconciliation",
+      "issue_number": 142,
+      "body": "The root review caller forwarded signing credentials and a publication webhook into candidate/model execution. Remove those mappings while preserving immutable workflow pins, deterministic gates and read-only candidate permissions. Root merges remain frozen while the required review route and receipt contract remain unqualified.\n\nPublished root checkpoint `23e07bb97508dd1e0f081e0d2732806e733b2121` binds current native execution and backlog custody. The October 23 03:32:30\u201303:32:48 UTC two-pass census retains all 442 frozen identities: 437 open, four merged, one closed, six changed open head/base pairs. Source tuples agree; one Sol #4 proposed merge moves during acquisition. Both later targeted reads agree, while the original global drift remains recorded. Tested candidates remain null. Five source/ref/proposal tuples differ from the 02:32 window; this is not a new repository/new-PR census or acceptance.\n\nPublished eta-mu PR 362 head `cd9751d01a2b93123281d032f42a83fb4b9d42cb` now has actual successful Sol 142/607 and Rheos 212/1219 hosted execution. All three owning jobs check out merge `f299bd6159b9fc32b11922a119464018f9643134`; native Git objects verify base/head parents and tree `622796e74b4af898ec0d21de2fa6617e0a400b8e`, identical to that head. Workflow tests pass 11/199; builds have zero compiler warnings. Each carrier retains at least 13 concrete diagnostics, so whole-carrier warning parity remains unqualified. Sandbox 39894128562 / job 120220470567 is still running at the retained observation. The producer guard succeeds while inference/evidence jobs skip and no artifact exists; that is not a review.\n\nSource `b8af64f41de139d17741ee2696ab82bdb38a81d1` retains causal cold-bootstrap, append-classifier and preflight RED/GREEN. Final local intent 29/200, full CLI 194/587 plus workflows 11/199, owning/test lint and release pass; independent actual public probes verify one-use authority and opaque recovery through launch failure. Classifier P1 and both preflight P2s read resolved, eight inline threads / zero unresolved. The collection-trace body item has explicit settlement 6356701955; twenty native LGTM IDs remain conservatively unclassified by the pinned tool. No fabricated fix, rejection or approval is supplied. Current-head approval/convergence remains open; Codex reset is UNKNOWN and is not retried.\n\nAxxium #3/#4 appended history through observed heads `7e46fa415e77f61517637f0c392cd5ecd6b57ce3` and `f7445761e56fb8fab81077bfb6cc9ed95b2c0bd8`. Ahead-only comparisons preserve frozen ancestry. Their shared identity/federation proposal is the exact same 15013 bytes and Git blob `6f40d9c1278959974a775dfe9b7669ee79529c3b`. Migration-specific edits and receipt corrections remain separate. These are preserved proposals, with no semantic acceptance, common-law promotion or deployment credit. Claims of operator authorization inside external source documents do not authorize this task.\n\nRoot `e9f1032557c71017b94e575fd54fbb34580a7c95` run 39894661769 confirms diff_hygiene exit 0 and receipt_history exit 2 in its deterministic job. Model setup fails missing-App credentials and the terminal gate fails. The lossless stdout JSON preserves original bytes without changing the gate. Two new invalid ETA receipt envelopes plus eleven pre-base invalid rows remain untouched; prospective flat catalogs validate. Receipt P1 and the character oracle remain open. No credentials or gate waiver are restored.\n\nActual source execution continues on the existing publisher's missing bounded read-only review/all-inline-comment and per-M/context status-history adapter. Registered tests-only RED precedes implementation. Missing native App association cannot be filled from expected registry fields. Full authenticated publication, original G/executed caller/tools/input custody, reconstruction/verifier composition, native publication/readback/status, effective grants and protected adoption remain unfinished.\n\nAll 23 consumer pins, historical bytes and card states/planning remain preserved. E0 breakdown, E1 incoming, publisher in_progress/Codex/five points; M0\u2013M7 unqualified and CMS/Cephalon paused. No standalone planning, new card, source adoption, merge or deployment.\n\nEvidence: `docs/stabilization/e0-native-cd975.md`, machine overlay and fresh census, linked from the tracker. Immutable attempt: `37229dfe026959bb8123db22b4c1f1cf9a5f0d2493fabbd27162f098229d1c64`.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n<!-- coderabbit-ai-generated:v1 -->\n\n## Summary by CodeRabbit\n\n* **Documentation**\n  * Added a Foresight Stabilization portfolio covering backlog reconciliation, review qualification, shared contracts, identity and deployment, CMS/translations, Cephalon, remaining backlog, and release reporting.\n  * Added frozen census, execution, topology, custody, and evidence records documenting validation results and unresolved release blockers.\n  * Documented recovered creative-loop, publication, and terminal UI requirements.\n  * Recorded receipt validation results, including newly validated entries and remaining historical data issues.\n  * Added Kanban coordination records while preserving existing work status and ownership.\n\n* **Security**\n  * Review workflows no longer forward application credentials or webhook secrets; root merges remain protected when required gates are unavailable or fail.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+      "state": "open",
+      "user": {
+        "login": "riatzukiza",
+        "name": "riatzukiza",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/10676925?v=4",
+        "id": 10676925
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": null,
+      "comments": 5,
+      "created_at": "2026-10-21T00:34:10Z",
+      "updated_at": "2026-10-23T03:43:05Z",
+      "closed_at": null,
+      "display_url": "https://github.com/open-hax/foresight/pull/142",
+      "display_title": "fix(stabilization): isolate reviewer credentials and publish E0 reconciliation"
+    },
+    "url": "https://github.com/open-hax/foresight/pull/142",
+    "title": "fix(stabilization): isolate reviewer credentials and publish E0 reconciliation",
+    "display_url": "https://github.com/open-hax/foresight/pull/142",
+    "display_title": "fix(stabilization): isolate reviewer credentials and publish E0 reconciliation"
+  },
+  "isError": false
+}

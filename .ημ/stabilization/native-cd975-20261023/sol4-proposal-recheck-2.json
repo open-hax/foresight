@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-10-23T03:35:17.524084+00:00",
+  "argv": [
+    "/home/err/.cache/foresight-tools/bin/gh",
+    "api",
+    "graphql",
+    "-f",
+    "query=query{repository(owner:\"riatzukiza\",name:\"sol\"){pullRequest(number:4){state headRefOid baseRefOid baseRefName baseRef{target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid}}}}}}"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"data\":{\"repository\":{\"pullRequest\":{\"state\":\"OPEN\",\"headRefOid\":\"5df50cedcfa7dc3011fd35556003e9ed5a9571b8\",\"baseRefOid\":\"bf6c77b92246464b1e34177bc851d1ffc008c1b7\",\"baseRefName\":\"main\",\"baseRef\":{\"target\":{\"oid\":\"4191c104ac8f80cfd3645c25eeebfa1ff1e60b3c\"}},\"potentialMergeCommit\":{\"oid\":\"ca889dd73b9d2311dd5b443de90401ba6734099a\",\"parents\":{\"nodes\":[{\"oid\":\"4191c104ac8f80cfd3645c25eeebfa1ff1e60b3c\"},{\"oid\":\"5df50cedcfa7dc3011fd35556003e9ed5a9571b8\"}]}}}}}}",
+  "stderr": ""
+}

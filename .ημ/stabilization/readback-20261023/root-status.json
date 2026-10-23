@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-10-23T03:50:07.985468+00:00",
+  "argv": [
+    "nbb",
+    "-cp",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+    "status",
+    "open-hax/foresight",
+    "142"
+  ],
+  "exit_code": 0,
+  "stdout": "open-hax/foresight#142  head 23e07bb\n  actionability history: UNAVAILABLE; threads retain finding obligations\n  coderabbit: completed   checks: {:fail 1, :pass 3}\n  threads: 13 total, 2 unresolved; by severity {:p2 1, :p1 1}; informational 0\n  exact-head approvals: #{}  observed commit binding: {}\n  completed planning rounds: 0 / soft minimum 5  participants: #{\"coderabbit\" \"mimo\"}\n  codex quota-unavailable: native source 6305004007 request  scope account observed 2026-10-21T00:34:25Z retry-at-ms UNKNOWN\n  gate: BLOCKED\n    - No trusted exact-head APPROVED review meets the quorum\n    - 1 failing deterministic/required check(s)\n    - 1 P0/P1 thread(s) not fixed\n    - 2 thread(s) without a settlement reply\n    - 2 unresolved thread(s)\n    - 13 unanswered review summary item(s)\n    - Review loop requires 5 completed rounds or unanimous current-head approval, with every finding settled\n",
+  "stderr": ""
+}

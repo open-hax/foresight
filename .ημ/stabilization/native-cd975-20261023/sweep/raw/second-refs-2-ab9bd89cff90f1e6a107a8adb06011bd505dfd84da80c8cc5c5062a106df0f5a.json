@@ -1,0 +1,286 @@
+{
+  "started_at": "2026-10-23T03:32:46.510651+00:00",
+  "completed_at": "2026-10-23T03:32:47.207418+00:00",
+  "query": "query{r0:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-07-openplanner-providers\"){name target{oid}}}r1:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-08-agent-admission\"){name target{oid}}}r2:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-09-translation-publication\"){name target{oid}}}r3:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-10-bluesky-boundary\"){name target{oid}}}r4:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-11-discord-gateway\"){name target{oid}}}r5:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-12-memory-resources\"){name target{oid}}}r6:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-13-app-routes\"){name target{oid}}}r7:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-14-runtime-composition\"){name target{oid}}}r8:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-15-frontend-foundation\"){name target{oid}}}r9:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-16-frontend-identity\"){name target{oid}}}r10:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-17-frontend-agents-contracts\"){name target{oid}}}r11:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-18-frontend-chat\"){name target{oid}}}r12:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-19-frontend-content\"){name target{oid}}}r13:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-20-frontend-translation\"){name target{oid}}}r14:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-21-frontend-shell-mail\"){name target{oid}}}r15:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-22-frontend-build\"){name target{oid}}}r16:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-identity-foundation\"){name target{oid}}}r17:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r18:repository(owner:\"open-hax\",name:\"openhax\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r19:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r20:repository(owner:\"open-hax\",name:\"openplanner\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/staging\"){name target{oid}}}r21:repository(owner:\"open-hax\",name:\"privaxxy\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r22:repository(owner:\"open-hax\",name:\"proxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/staging\"){name target{oid}}}r23:repository(owner:\"open-hax\",name:\"services\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r24:repository(owner:\"open-hax\",name:\"sol\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-07-openplanner-providers",
+          "target": {
+            "oid": "ac6ece1ca001075a7f9b19cf79751a4d30e023db"
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-08-agent-admission",
+          "target": {
+            "oid": "d30c9c5aca75e5904ec061d7a3c87e3d72d9aaf0"
+          }
+        }
+      },
+      "r2": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-09-translation-publication",
+          "target": {
+            "oid": "1826e7f6ad0d9502b75f04ba0e91ee30dedcc93a"
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-10-bluesky-boundary",
+          "target": {
+            "oid": "b5d9007d54001545f284e0a7e0b89549cc5aa7b9"
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-11-discord-gateway",
+          "target": {
+            "oid": "93794f692b14015a5009fb7c2722025990ce5a46"
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-12-memory-resources",
+          "target": {
+            "oid": "09eff5eded1d0fff0d081b0659ecadfc70880fd5"
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-13-app-routes",
+          "target": {
+            "oid": "d2ac37a2d9294f8727abec9c5dc20119a5e70620"
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-14-runtime-composition",
+          "target": {
+            "oid": "5bf0831bb394be42f1303936fb8627e9bd3e5ce7"
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-15-frontend-foundation",
+          "target": {
+            "oid": "364e2a24ce792ad29518e87ab834cc15d446a136"
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-16-frontend-identity",
+          "target": {
+            "oid": "54f189e14325badc6378da6cc842cdcefa95fbd6"
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-17-frontend-agents-contracts",
+          "target": {
+            "oid": "53ab67040d8f3a612bbdddeb20dcf49d954a2511"
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-18-frontend-chat",
+          "target": {
+            "oid": "68895c8d7d6e2d365dd130bee5b2763f92e4eb3b"
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-19-frontend-content",
+          "target": {
+            "oid": "c4534cbc0c6d56f7a7354cdae655587b850bb0c1"
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-20-frontend-translation",
+          "target": {
+            "oid": "2b325dd98a4011af9b8d783200a449936bbc4d3b"
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-21-frontend-shell-mail",
+          "target": {
+            "oid": "0c0a8a9f1d133b3551e53e83f5d6dcddf0158f5c"
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-22-frontend-build",
+          "target": {
+            "oid": "e641add588ef059a06fe6d4c593041991545aa91"
+          }
+        }
+      },
+      "r16": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-identity-foundation",
+          "target": {
+            "oid": "424d47d1509680f20c048cccf1aa3808fe28d2c1"
+          }
+        }
+      },
+      "r17": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "3409977bca4ba35e09967f9a99d50867a679a73c"
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDOQPDgig",
+        "nameWithOwner": "open-hax/openhax",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "9e20f5da53515925ee9c013bbdc19957d37107eb"
+          }
+        }
+      },
+      "r19": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08"
+          }
+        }
+      },
+      "r20": {
+        "id": "R_kgDOR4Z9pw",
+        "nameWithOwner": "open-hax/openplanner",
+        "isPrivate": false,
+        "ref": {
+          "name": "staging",
+          "target": {
+            "oid": "25477cd354ae473ee9df271ded5ee836dd087b2f"
+          }
+        }
+      },
+      "r21": {
+        "id": "R_kgDORo7ZZg",
+        "nameWithOwner": "open-hax/privaxxy",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "de3e3dade0e4f21850f76416acca1c5783484d15"
+          }
+        }
+      },
+      "r22": {
+        "id": "R_kgDORjtCag",
+        "nameWithOwner": "open-hax/proxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "staging",
+          "target": {
+            "oid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d"
+          }
+        }
+      },
+      "r23": {
+        "id": "R_kgDOSuY53Q",
+        "nameWithOwner": "open-hax/services",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+          }
+        }
+      },
+      "r24": {
+        "id": "R_kgDOUYwqmg",
+        "nameWithOwner": "open-hax/sol",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "1276955c86ff46936cd1ce7d81fbc790f7068e1e"
+          }
+        }
+      }
+    }
+  }
+}

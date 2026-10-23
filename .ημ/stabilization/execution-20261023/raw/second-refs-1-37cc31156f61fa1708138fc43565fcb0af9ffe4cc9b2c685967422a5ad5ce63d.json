@@ -1,0 +1,286 @@
+{
+  "started_at": "2026-10-23T02:32:23.769822+00:00",
+  "completed_at": "2026-10-23T02:32:24.904069+00:00",
+  "query": "query{r0:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-native-input-probe\"){name target{oid}}}r1:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-native-pulse-evidence\"){name target{oid}}}r2:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-natural-approach\"){name target{oid}}}r3:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-natural-flight-profile\"){name target{oid}}}r4:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-physical-approach\"){name target{oid}}}r5:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-playable-gate\"){name target{oid}}}r6:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-progression-plan\"){name target{oid}}}r7:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-ready-candidate-approach\"){name target{oid}}}r8:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-review-runtime\"){name target{oid}}}r9:repository(owner:\"octave-commons\",name:\"Truth\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/truth-warp-lifecycle\"){name target{oid}}}r10:repository(owner:\"octave-commons\",name:\"calliope\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r11:repository(owner:\"octave-commons\",name:\"epiphany\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r12:repository(owner:\"octave-commons\",name:\"fork_tales\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r13:repository(owner:\"octave-commons\",name:\"gates-of-aker\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r14:repository(owner:\"octave-commons\",name:\"muse\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r15:repository(owner:\"open-hax\",name:\"axxium\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r16:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r17:repository(owner:\"open-hax\",name:\"eta-mu\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/work/wiki-identity-local-stack\"){name target{oid}}}r18:repository(owner:\"open-hax\",name:\"event-ledger\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r19:repository(owner:\"open-hax\",name:\"foresight\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/main\"){name target{oid}}}r20:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/cms-source-locale-review\"){name target{oid}}}r21:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-03-run-event-providers\"){name target{oid}}}r22:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-04-mailbox-providers\"){name target{oid}}}r23:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-05-identity-authority\"){name target{oid}}}r24:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate ref(qualifiedName:\"refs/heads/codex/pr305-06-mcp-oauth\"){name target{oid}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-native-input-probe",
+          "target": {
+            "oid": "1ef39b1a2a2763076dbda0f1e9cf65daa8e6227c"
+          }
+        }
+      },
+      "r1": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-native-pulse-evidence",
+          "target": {
+            "oid": "073054c338bc3c589d329fb0ad3866458862f245"
+          }
+        }
+      },
+      "r2": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-natural-approach",
+          "target": {
+            "oid": "954a7498494fad76c0391c4178fce71131b080b4"
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-natural-flight-profile",
+          "target": {
+            "oid": "7f1fbcae786a7aa4c6b1cb2eed5d79dd71bb6e58"
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-physical-approach",
+          "target": {
+            "oid": "64f8141b40cfb8db94ea2f005004f068a3f47a72"
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-playable-gate",
+          "target": {
+            "oid": "c99a61c13e950542407b2bc8a78497e6d3b73fa8"
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-progression-plan",
+          "target": {
+            "oid": "8557575efdb993cfd3867f055430968c2e412a14"
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-ready-candidate-approach",
+          "target": {
+            "oid": "a48a9ec76a6118b1557d11a4bc78e4caae45cdc6"
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-review-runtime",
+          "target": {
+            "oid": "8807f32c1dcacf4569fb88354a1b6b0c4dcecfee"
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOTDahaQ",
+        "nameWithOwner": "octave-commons/Truth",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/truth-warp-lifecycle",
+          "target": {
+            "oid": "76ba6a46139e4de2d769aed0d32f61d4025681d3"
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOTkaDCg",
+        "nameWithOwner": "octave-commons/calliope",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "a731093b878f600ee30648a01f1a6cd44f3439f0"
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOTVRLIg",
+        "nameWithOwner": "octave-commons/epiphany",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "643be698ea0d841dd19385506b272872306e456e"
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDORR-GZQ",
+        "nameWithOwner": "octave-commons/fork_tales",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "4ca81b1b792e9b89d6d86198e688676a2c62457e"
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOQ5SSJQ",
+        "nameWithOwner": "octave-commons/gates-of-aker",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "a9a7b5658da5bb5ab57dcc40a19a9cdd53792621"
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOTVwKag",
+        "nameWithOwner": "octave-commons/muse",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa"
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOStXBnQ",
+        "nameWithOwner": "open-hax/axxium",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "99e6c725c64baed7d3ee93930b206724874e1486"
+          }
+        }
+      },
+      "r16": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "7112c36440d180ca183d6a3f89661cee161fdae5"
+          }
+        }
+      },
+      "r17": {
+        "id": "R_kgDORu27Hw",
+        "nameWithOwner": "open-hax/eta-mu",
+        "isPrivate": false,
+        "ref": {
+          "name": "work/wiki-identity-local-stack",
+          "target": {
+            "oid": "33852976fd7d30afc2fc28cee62d2bacca866a81"
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDOTWpBFg",
+        "nameWithOwner": "open-hax/event-ledger",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "ada7374b7f4e1c3b0ab4e6bbe996f10f06e9b93a"
+          }
+        }
+      },
+      "r19": {
+        "id": "R_kgDOT3TWPA",
+        "nameWithOwner": "open-hax/foresight",
+        "isPrivate": false,
+        "ref": {
+          "name": "main",
+          "target": {
+            "oid": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe"
+          }
+        }
+      },
+      "r20": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/cms-source-locale-review",
+          "target": {
+            "oid": "482079b722b111991c8e8321e89520eec79f3d5a"
+          }
+        }
+      },
+      "r21": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-03-run-event-providers",
+          "target": {
+            "oid": "d835a0224ece799462ec9b3f8f60baacd9abade2"
+          }
+        }
+      },
+      "r22": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-04-mailbox-providers",
+          "target": {
+            "oid": "30e43bf26e64869e2e76cc568d3031968f6c6784"
+          }
+        }
+      },
+      "r23": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-05-identity-authority",
+          "target": {
+            "oid": "98f2398cd014bc9d90feee10396d91ac44c68f5a"
+          }
+        }
+      },
+      "r24": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "ref": {
+          "name": "codex/pr305-06-mcp-oauth",
+          "target": {
+            "oid": "1d2122c14224674b505110ae281d3325ea518269"
+          }
+        }
+      }
+    }
+  }
+}

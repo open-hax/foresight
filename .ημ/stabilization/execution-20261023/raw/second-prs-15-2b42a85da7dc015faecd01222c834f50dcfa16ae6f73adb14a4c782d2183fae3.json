@@ -1,0 +1,656 @@
+{
+  "started_at": "2026-10-23T02:32:19.994976+00:00",
+  "completed_at": "2026-10-23T02:32:21.101136+00:00",
+  "query": "query{r0:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:3){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:4){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:5){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:6){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:7){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"riatzukiza\",name:\"eta-mu\"){id nameWithOwner isPrivate pullRequest(number:9){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:1){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:10){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:12){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:13){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:15){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:16){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:17){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:18){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:19){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:20){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:21){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:3){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:5){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:6){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 3,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "d2487fad2a71d974b21d8cd71a81bfde8fc5e479",
+          "baseRefName": "main",
+          "baseRefOid": "084cd150b8d5b9848d026e9ef8717747964dcd6d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "4094522330f58c597cce6d515b14b5fb29baceda"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r1": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 4,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "5fde158451ffb425ace778bc9832198b7fd6fc75",
+          "baseRefName": "main",
+          "baseRefOid": "084cd150b8d5b9848d026e9ef8717747964dcd6d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "4094522330f58c597cce6d515b14b5fb29baceda"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r2": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 5,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "15093b7f5d9e1500f0ef02bcc0968850955fb014",
+          "baseRefName": "main",
+          "baseRefOid": "084cd150b8d5b9848d026e9ef8717747964dcd6d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "4094522330f58c597cce6d515b14b5fb29baceda"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r3": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 6,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "093a6dbf00fcfadea26f07ac7e3db29bc627a533",
+          "baseRefName": "main",
+          "baseRefOid": "084cd150b8d5b9848d026e9ef8717747964dcd6d",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "4094522330f58c597cce6d515b14b5fb29baceda"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r4": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 7,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "64f3561c4232785d101f0398838ea62796ba2d8b",
+          "baseRefName": "codex/eta-mu-accepted-upstream-sync",
+          "baseRefOid": "093a6dbf00fcfadea26f07ac7e3db29bc627a533",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/eta-mu-accepted-upstream-sync",
+            "target": {
+              "oid": "093a6dbf00fcfadea26f07ac7e3db29bc627a533"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "0774893675c373caa366337af01a7f1bee715481",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "093a6dbf00fcfadea26f07ac7e3db29bc627a533"
+                },
+                {
+                  "oid": "64f3561c4232785d101f0398838ea62796ba2d8b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOU4VdxA",
+        "nameWithOwner": "riatzukiza/eta-mu",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 9,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "94b034596d596a7e417f1fac97527e090ab749d2",
+          "baseRefName": "main",
+          "baseRefOid": "b03cb58407cc333b7cabd77431842d44f0deb415",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "4094522330f58c597cce6d515b14b5fb29baceda"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r6": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 1,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "7e1f30113ce5c6bf1d9264ab027bb37bb28580e4",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "18e668896bef8dfa09f7d83b4005191c5f9f07bd",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "7e1f30113ce5c6bf1d9264ab027bb37bb28580e4"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r7": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 10,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "e3e90b19fdb70bb0b9efd2475f657e242b2be19e",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "c549628d7de0dcf5cc60d51d58c9105b5a7c2821",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "e3e90b19fdb70bb0b9efd2475f657e242b2be19e"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r8": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 12,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "165e4e87cdda0e5807b67d47d4bf1c580af05b5d",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "d5a7653203d42ee9d82f51766ceb9d3a0b56115d",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "165e4e87cdda0e5807b67d47d4bf1c580af05b5d"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r9": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 13,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "e0dd0dae79fd632738c9b0483dcdd6b87066d292",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "c4241e8aa974baf498029e09f8f1f6f5afc438a7",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "e0dd0dae79fd632738c9b0483dcdd6b87066d292"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r10": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 15,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c5e366168f3cf7785d9753c841deffc815c65d9c",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "3905b925a4b1b279c12685d63ee4338e5cbc96e6",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "c5e366168f3cf7785d9753c841deffc815c65d9c"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r11": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 16,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "cda021183c4f832858c2874dc48eb5c6a3c24413",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "b830cc1a24800bcf6b0206b315aaf93b20ab2a11",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "cda021183c4f832858c2874dc48eb5c6a3c24413"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r12": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 17,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "55690a633fd8d6fac951496bb49ccba0c24dacd9",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "36410369a997f5ec17df96e1aac8ce51b4064816",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "55690a633fd8d6fac951496bb49ccba0c24dacd9"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r13": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 18,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "1316b92a104a09e1fb5e67b2cae807e8ce86b19f",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "f4cad718b5eb39e7cd1ee2c18f31df188f75de1f",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "1316b92a104a09e1fb5e67b2cae807e8ce86b19f"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r14": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 19,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "fca9a340071c2fedd0f662340943be9a6b4d3596",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "522c44412dbf96915a9467295ece2f9746667ef6",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "fca9a340071c2fedd0f662340943be9a6b4d3596"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r15": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 20,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "649ef63e6e8b7f8963b506446f4649c604e98e6d",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "c3c1c2618c9623c41dde11e0e6e8cbd9a1916c4e",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "649ef63e6e8b7f8963b506446f4649c604e98e6d"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r16": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 21,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "15a665d19ae3a6e9cc54c3d32bed5df0942e62cf",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "3328d36b0860b6051fa2f03cfb3ba30d0b2817b5",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "15a665d19ae3a6e9cc54c3d32bed5df0942e62cf"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r17": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 3,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a7f86b452141bf3c9182a5374356885ba5fb3d6d",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "6e80af2c5115757e18d8a58ae641e9a4a320cc07",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "a7f86b452141bf3c9182a5374356885ba5fb3d6d"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r18": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 5,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "9a3b835ddf6dbd7542e417044deac4fd84121e35",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "41dbd336e6e1eb898d1da4f04d1369b5bd18d2e1",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "9a3b835ddf6dbd7542e417044deac4fd84121e35"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r19": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 6,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c2bbfe83e66557bfbdf629f576ea59ef42fa7bb7",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "cd4dacbd1b029fc04829e18bcc6c34c997b1e3be",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "c2bbfe83e66557bfbdf629f576ea59ef42fa7bb7"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

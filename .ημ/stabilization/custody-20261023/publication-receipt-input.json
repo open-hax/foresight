@@ -1,0 +1,18 @@
+{
+  "kind": "observation",
+  "ts": "2026-10-23T07:04:06.027Z",
+  "origin": "foresight/stabilization/publication-readback",
+  "owner": "codex",
+  "host": "err-Yoga-7-16ARP8",
+  "pi": "foresight",
+  "dod": "Record published source and correct inherited recursive Git fetching while preserving accepted pins and working files",
+  "manifest": [
+    ".\u03b7\u03bc/stabilization/custody-20261023/publication-followup.json"
+  ],
+  "refs": [
+    "root:c5217d6e99fa2fb91d8b9c0c0b86cba7b69020b4",
+    "child:874068612a9c576ef3d3e6847f72de2fee9a996b"
+  ],
+  "note": "Root native head/body readback and child publication verify. Root verification fetch inherited recursive submodule config, fetched objects/remote refs in .agents/Truth and began axxium, then owned process group was terminated143. No checkout command ran; repeat with explicit --no-recurse-submodules succeeded0. All23 accepted root gitlinks remain exact. No refs rolled back/deleted, no unowned working files touched. CMS/Cephalon paused; no acceptance/adoption credit.",
+  "qualification": false
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "e0-pagination-execution-and-native-settlement-attempt",
+  "root_parent": "8a034f11a5f9034cb1846e3db5e4d55401faac95",
+  "at": "2026-10-22T01:30:10.390493+00:00",
+  "child_published_head": "ab03d9350e40a368748b2d1c4612a0038d3c21af",
+  "files": [
+    {
+      "path": ".\u03b7\u03bc/kanban-events/ledger.edn",
+      "bytes": 248360,
+      "sha256": "243164cac554a7171819521b8ef029d4a25ff076646d33fbcebc19c6cdfa75d7"
+    },
+    {
+      "path": ".\u03b7\u03bc/receipts.edn",
+      "bytes": 403054,
+      "sha256": "1d9843cadff579618454b9f4329fd1eb3f2c8a8ff1f526471b287b556386af25"
+    },
+    {
+      "path": ".\u03b7\u03bc/session-mycology/ledger.md",
+      "bytes": 45282,
+      "sha256": "754c931f8bb70de54f309e63258b9780d679b39b4d9c7dca2a52aabb224c6c47"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/d0ac5a0c004545f6d3bae15fb274401b293ab369b7e8c8d8c50b36d760f16636.json.gz",
+      "bytes": 442976,
+      "sha256": "d0ac5a0c004545f6d3bae15fb274401b293ab369b7e8c8d8c50b36d760f16636"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/d8be9b8819728579ab939eac55962410ae6024a9ad30a91b8cc469ffb5adba30.json.gz",
+      "bytes": 414267,
+      "sha256": "d8be9b8819728579ab939eac55962410ae6024a9ad30a91b8cc469ffb5adba30"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "bytes": 42097,
+      "sha256": "df4269e9fdae9ad28c749da627f0b08181f8339fff3296697f58d4bd628f41b7"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "bytes": 18648,
+      "sha256": "ff5bc370c38343d2f299820019208451932ffe2b3067d757961a8a462231b81b"
+    },
+    {
+      "path": "docs/stabilization/e0-pagination-repair.json",
+      "bytes": 55482,
+      "sha256": "54175912526e14734601192a98621fe3f470205e2a352d35dd5f645742cbfcc3"
+    },
+    {
+      "path": "docs/stabilization/e0-pagination-repair.md",
+      "bytes": 5035,
+      "sha256": "b33d6f8a412f92701e9def065f238b3d6a13e1b73927fc35258918dac0b53d47"
+    },
+    {
+      "path": "docs/stabilization/tracker.md",
+      "bytes": 32988,
+      "sha256": "0d647940fe0622908d17a3561e49ee3ff037216c718edd126c4568d91e28e827"
+    },
+    {
+      "path": "docs/stabilization/work-graph.json",
+      "bytes": 64439,
+      "sha256": "fe2effa0d4b0bd51e41cb937ece88534c4adc467534ade919db4922ab5ca44a9"
+    }
+  ],
+  "qualification": false
+}

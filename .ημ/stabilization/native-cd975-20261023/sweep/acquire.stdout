@@ -1,0 +1,20 @@
+{
+  "frozen_identities": 442,
+  "observed_states": {
+    "OPEN": 437,
+    "MERGED": 4,
+    "CLOSED": 1
+  },
+  "unique_live_base_refs": 144,
+  "reported_base_differs_from_live_tip": 186,
+  "open_reported_base_differs_from_live_tip": 181,
+  "missing_live_base_ref": 0,
+  "source_tuple_changed_during_acquisition": 0,
+  "native_proposed_merge_changed_during_acquisition": 1,
+  "open_proposed_merge_pairings": {
+    "live-base-and-head-match-proposed-parents": 295,
+    "proposed-parents-do-not-match-live-base-and-head": 5,
+    "unavailable-native-proposed-merge": 137
+  },
+  "changed_head_or_reported_base_from_prior_refresh": 8
+}

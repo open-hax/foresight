@@ -1,0 +1,1246 @@
+{
+  "schema_version": 1,
+  "kind": "e0-native-file-inventory-execution-and-fresh-census",
+  "at": "2026-10-22T01:53:16.889278+00:00",
+  "root_parent": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+  "publisher": {
+    "repository": "open-hax/eta-mu",
+    "pr": 362,
+    "head": "b265c7220bb07839d188e7e44311d31aff0ae469",
+    "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+    "execution": {
+      "schema_version": 1,
+      "kind": "trusted-publication-native-changed-files-execution",
+      "at": "2026-10-22T01:48:20.392532+00:00",
+      "repository": "open-hax/eta-mu",
+      "pr": 362,
+      "source_base": "ab03d9350e40a368748b2d1c4612a0038d3c21af",
+      "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+      "code_files": [
+        {
+          "path": ".github/scripts/opencode_review_collection_test.cljs",
+          "bytes": 49456,
+          "sha256": "c04a8eba1d75a5678c64ac7c0ed5f71108fe1ec33715e11ac23264fe96bfad63"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_collection.cljs",
+          "bytes": 20124,
+          "sha256": "9bae0032e6c090dbdf32cfaaf24553d357fc50aecd41a37933dfd5ddaf090cb4"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/law/review_collection.cljc",
+          "bytes": 5669,
+          "sha256": "193f37c2c44ecc30c90b882e86b437199bc35b622b90f318a50df47092904368"
+        },
+        {
+          "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_collection.cljc",
+          "bytes": 2044,
+          "sha256": "750a0a304c6a0ad12ca37936f8684b5c18c3c45d8997c441756098da9dedcf51"
+        }
+      ],
+      "evidence": [
+        {
+          "path": ".\u03b7\u03bc/review-evidence/trusted-publication-files/0f268a323e13e7393777e8ca88c9b18fb17305f0ec52373c10d39979214703d9.json.gz",
+          "sha256": "0f268a323e13e7393777e8ca88c9b18fb17305f0ec52373c10d39979214703d9",
+          "bytes": 688010,
+          "raw_sha256": "09bb1c2562f01d77dd0de290f744a16d0b8176907ebb4f6e7f1e4dd2371acea6",
+          "raw_bytes": 2987522,
+          "captures": 247
+        }
+      ],
+      "tests": {
+        "collection": {
+          "tests": 30,
+          "assertions": 224,
+          "failures": 0,
+          "independent_replay": true
+        },
+        "pure_NBB_BB_equal_value_cases": 20,
+        "full_CLI": {
+          "tests": 194,
+          "assertions": 587
+        },
+        "workflow_resources": {
+          "tests": 11,
+          "assertions": 199
+        },
+        "lint_warnings": 0,
+        "release_warnings": 0,
+        "gates": {
+          "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+          "source_unchanged": true,
+          "results": [
+            {
+              "label": "registered-review-owners",
+              "command": [
+                "bb",
+                "scripts/test.bb",
+                "--only",
+                "review-publication-collection"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-source-reconstruction-20261022",
+              "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 1.2180872810131405,
+              "completed_at": "2026-10-22T01:45:11.324722+00:00",
+              "stdout": {
+                "bytes": 516,
+                "sha256": "ac4d05f875bea5b355a51489b989a491625a012db744d917230e1be5b153cda6"
+              },
+              "stderr": {
+                "bytes": 0,
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "label": "full-cli-tests",
+              "command": [
+                "pnpm",
+                "-C",
+                "packages/eta-mu",
+                "test"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-source-reconstruction-20261022",
+              "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 16.970966338994913,
+              "completed_at": "2026-10-22T01:45:28.296138+00:00",
+              "stdout": {
+                "bytes": 2606,
+                "sha256": "b8d12171aa6d81d7393da4df145829b966a9bf99d4def4bd43cc9d46ec39f2de"
+              },
+              "stderr": {
+                "bytes": 212,
+                "sha256": "9193c29d6662102ae2f18e10eba6c36ebff9b684ea058cba6a36ad79fc086049"
+              }
+            },
+            {
+              "label": "cli-kondo",
+              "command": [
+                "pnpm",
+                "-C",
+                "packages/eta-mu",
+                "lint:kondo"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-source-reconstruction-20261022",
+              "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 2.2203332710196264,
+              "completed_at": "2026-10-22T01:45:30.516992+00:00",
+              "stdout": {
+                "bytes": 453,
+                "sha256": "c41d6c226238674ee5b40f8c83bd4259cfb58677e7a75d2acd537e28feff1d67"
+              },
+              "stderr": {
+                "bytes": 0,
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "label": "scoped-kondo",
+              "command": [
+                "clj-kondo",
+                "--config-dir",
+                "packages/eta-mu/.clj-kondo",
+                "--lint",
+                ".github/scripts/opencode_review_collection_test.cljs"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-source-reconstruction-20261022",
+              "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 0.16492161198402755,
+              "completed_at": "2026-10-22T01:45:30.682420+00:00",
+              "stdout": {
+                "bytes": 43,
+                "sha256": "9089e6caa88671065e421d84c89c3174d6030ba39ce9ddc7a8a4de964c609327"
+              },
+              "stderr": {
+                "bytes": 0,
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "label": "cli-release",
+              "command": [
+                "pnpm",
+                "-C",
+                "packages/eta-mu",
+                "build"
+              ],
+              "cwd": "/home/err/.local/share/foresight-worktrees/eta-source-reconstruction-20261022",
+              "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+              "environment_names": [
+                "HOME",
+                "LANG",
+                "PATH",
+                "SHELL",
+                "USER",
+                "npm_config_userconfig"
+              ],
+              "exit": 0,
+              "seconds": 23.41597178200027,
+              "completed_at": "2026-10-22T01:45:54.098891+00:00",
+              "stdout": {
+                "bytes": 234,
+                "sha256": "4e7ae046888ba01e71a4588ede07ca79c39a0f007c29963f8ede1097e2168cbe"
+              },
+              "stderr": {
+                "bytes": 132,
+                "sha256": "4755f18de202432fc2eb5229da8982a494fb2c582c1637aa98a0fa2535740840"
+              }
+            }
+          ],
+          "pass": true
+        }
+      },
+      "native_probe": {
+        "code_source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+        "observed_head": "ab03d9350e40a368748b2d1c4612a0038d3c21af",
+        "observed_base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "reported_merge": "760f14fd20f52e177215d413a2bc80b06ddc7fa7",
+        "source_tuple_stable": true,
+        "inventory_passes": 2,
+        "inventories_equal": true,
+        "files": 90,
+        "pages_per_pass": 9,
+        "requests": 20,
+        "page_requests": 18,
+        "response_bytes": 1981780,
+        "missing_patches": 17,
+        "inventory_complete": true,
+        "patches_available": false,
+        "patch_text_completeness": "unverified",
+        "registry_enrolled": false,
+        "scope": "actual fixed public GET and actual internal product inventory function; no original event, run/caller custody or production enrollment"
+      },
+      "repairs": [
+        "Native PR files array collected within both existing tuple/run observation passes using fixed local routes and existing budgets.",
+        "Exact count from PR changed_files is bounded to0..3000; unique filenames, seven statuses, required typed metadata and optional prior filename validated.",
+        "Missing/null/string patch states remain distinct; inventory completeness never claims complete patch text.",
+        "Independent review found required metadata gap; retained causal RED/GREEN repairs it without URL fetch or arithmetic policy."
+      ],
+      "native_custody_discovery": {
+        "exact_original_G": false,
+        "exact_run_bound_caller_source": false,
+        "run_39705590021": "last actual observation in_progress at sourceab03; no terminal claim",
+        "actual_producer_39705590064": "success with one producer-evidence success,three skippedjobs,no artifacts,empty PR/referenced workflow arrays",
+        "current_provider_port_found": false,
+        "historical_HMAC": "Authenticates payload bytes only; donor custom ND-EDN journal not reused and no G/run/caller relation inferred.",
+        "Clio": "Existing admission/storage/replay authority; separate provider authentication remains missing.",
+        "report_capture": "event-seam/event-seam-report.md"
+      },
+      "owner": {
+        "uuid": "ed4e2a2a-6055-4d53-9cea-f3971c707551",
+        "status": "in_progress",
+        "assignee": "Codex",
+        "points": 5,
+        "full_story_complete": false
+      },
+      "limits": [
+        "Production registry remains absent/refusing; public fixed GET probe calls the internal inventory function under explicit local test composition, not registry enrollment.",
+        "Actual source reconstruction remains observed/incomplete. New inventory is not yet a complete reconstruction/verifier input; tools/input proof and original G/caller custody stay unsupported.",
+        "Native rows without patches cannot supply inline line validation. Available patch strings alone do not establish complete native patch text.",
+        "Causal REDs, ambient-provider suite failure, exploratory wrong API path and coordinator live-edit probe race are retained alongside exact frozen controls and stripped-environment passes.",
+        "No native publication, private-token scope, protected default adoption, approval or successor hosted qualification. Whole ETA receipts remain71invalid/118errors."
+      ],
+      "preservation": {
+        "all309_states_and_planning_required_unchanged": true,
+        "four_ledger_prefixes_required": true,
+        "root_pins_advance": false,
+        "CMS_Cephalon": "paused",
+        "new_spore": false
+      },
+      "qualification": false
+    },
+    "published_verification": {
+      "at": "2026-10-22T01:50:17.211817+00:00",
+      "head": "b265c7220bb07839d188e7e44311d31aff0ae469",
+      "remote_head": "b265c7220bb07839d188e7e44311d31aff0ae469",
+      "source": "48c9e810fc067f1528ab59a137568b17fe29db90",
+      "verified_files": [
+        ".\u03b7\u03bc/review-evidence/trusted-publication-files/0f268a323e13e7393777e8ca88c9b18fb17305f0ec52373c10d39979214703d9.json.gz",
+        ".\u03b7\u03bc/review-evidence/trusted-publication-files/660d447b71a5b50ba8e84a1d86b9db91068e0dda1f8fc641ac7db3ce3925f42f.json.gz",
+        ".\u03b7\u03bc/review-evidence/trusted-publication-files/execution.json",
+        ".\u03b7\u03bc/session-mycology/ledger.md",
+        ".\u03b7\u03bc/session-reflections.edn",
+        "kanban/.events/ledger.edn",
+        "kanban/.kanban/board.json",
+        "kanban/tasks/independently-admit-and-publish-review-evidence-from-trusted-default-code-1c707551.md",
+        "receipts.edn",
+        ".github/scripts/opencode_review_collection_test.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/infra/review_collection.cljs",
+        "packages/eta-mu/src/cljs/eta_mu/law/review_collection.cljc",
+        "packages/eta-mu/src/cljs/eta_mu/shape/review_collection.cljc",
+        ".\u03b7\u03bc/review-evidence/trusted-publication-files/34fde6837efd8271bb712563d142b039140b1c6c05d5a29063be3ec29a1d9184.json"
+      ],
+      "count": 14,
+      "clean": true,
+      "qualification": false
+    },
+    "cleanup": {
+      "at": "2026-10-22T01:51:18.932543+00:00",
+      "path": "/home/err/.local/share/foresight-worktrees/eta-source-reconstruction-20261022",
+      "head": "b265c7220bb07839d188e7e44311d31aff0ae469",
+      "remote_head": "b265c7220bb07839d188e7e44311d31aff0ae469",
+      "clean_before_remove": true,
+      "removed": true,
+      "primary_unchanged": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90"
+    },
+    "inline_threads_unresolved": 0,
+    "current_head_approvals": 0,
+    "CodeRabbit": "rate-limited; known included-review cooldown not retried",
+    "Codex": "account quota reset UNKNOWN; no retry",
+    "checks_at_readback": {
+      "pass": 6,
+      "pending": 10,
+      "skip": 4
+    },
+    "status": "in_progress",
+    "full_story_complete": false,
+    "native_adoption_or_hosted_qualification": false
+  },
+  "census": {
+    "projection": "docs/stabilization/e0-native-files-census.json",
+    "csv": "docs/stabilization/e0-native-files-census.csv",
+    "window": {
+      "start": "2026-10-22T01:46:44.843531+00:00",
+      "end": "2026-10-22T01:47:05.234824+00:00"
+    },
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 437,
+        "MERGED": 4,
+        "CLOSED": 1
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 186,
+      "open_reported_base_differs_from_live_tip": 181,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 295,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 137
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 6
+    },
+    "changed_open_H_B_from_freeze": 4,
+    "changes_since_0051": [],
+    "source_drift": 0,
+    "proposed_merge_drift": 0,
+    "tested_candidates": 0,
+    "evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/499ad1d9be5d6a3653ad7a31f772c3ea0dd32f792ef9d2b1734c03bbf1590c15.json.gz",
+      "bytes": 146617,
+      "sha256": "499ad1d9be5d6a3653ad7a31f772c3ea0dd32f792ef9d2b1734c03bbf1590c15",
+      "raw_bytes": 2163578,
+      "raw_sha256": "c628265f1545caba4b888241131ac91793d14e78221cf4b342a5bff41afd7395",
+      "captures": 63
+    },
+    "new_repository_or_PR_census": false
+  },
+  "root_native": {
+    "at": "2026-10-22T01:47:25.575952+00:00",
+    "head": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+    "runs": [
+      {
+        "run": {
+          "id": 39706085424,
+          "name": "eta-mu evidence review",
+          "node_id": "WFR_kwLOT3TWPM8AAAAJPqrIMA",
+          "head_branch": "codex/stabilization-portfolio",
+          "head_sha": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+          "path": ".github/workflows/eta-mu-review.yml",
+          "display_title": "fix(stabilization): isolate reviewer credentials and publish E0 reconciliation",
+          "run_number": 373,
+          "event": "pull_request",
+          "status": "completed",
+          "conclusion": "failure",
+          "workflow_id": 334678456,
+          "check_suite_id": 107608568342,
+          "check_suite_node_id": "CS_kwDOT3TWPM8AAAAZDfhyFg",
+          "url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424",
+          "html_url": "https://github.com/open-hax/foresight/actions/runs/39706085424",
+          "pull_requests": [
+            {
+              "url": "https://api.github.com/repos/open-hax/foresight/pulls/142",
+              "id": 4944512775,
+              "number": 142,
+              "head": {
+                "ref": "codex/stabilization-portfolio",
+                "sha": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+                "repo": {
+                  "id": 1333057084,
+                  "url": "https://api.github.com/repos/open-hax/foresight",
+                  "name": "foresight"
+                }
+              },
+              "base": {
+                "ref": "main",
+                "sha": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+                "repo": {
+                  "id": 1333057084,
+                  "url": "https://api.github.com/repos/open-hax/foresight",
+                  "name": "foresight"
+                }
+              }
+            }
+          ],
+          "created_at": "2026-10-22T01:30:34Z",
+          "updated_at": "2026-10-22T01:32:01Z",
+          "actor": {
+            "login": "riatzukiza",
+            "id": 10676925,
+            "node_id": "MDQ6VXNlcjEwNjc2OTI1",
+            "avatar_url": "https://avatars.githubusercontent.com/u/10676925?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/riatzukiza",
+            "html_url": "https://github.com/riatzukiza",
+            "followers_url": "https://api.github.com/users/riatzukiza/followers",
+            "following_url": "https://api.github.com/users/riatzukiza/following{/other_user}",
+            "gists_url": "https://api.github.com/users/riatzukiza/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/riatzukiza/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/riatzukiza/subscriptions",
+            "organizations_url": "https://api.github.com/users/riatzukiza/orgs",
+            "repos_url": "https://api.github.com/users/riatzukiza/repos",
+            "events_url": "https://api.github.com/users/riatzukiza/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/riatzukiza/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "run_attempt": 1,
+          "referenced_workflows": [
+            {
+              "path": "open-hax/eta-mu/.github/workflows/opencode-code-review.yml@45ec644c2d15ed511e9bc1e797d1b4073b63dbfc",
+              "sha": "45ec644c2d15ed511e9bc1e797d1b4073b63dbfc"
+            }
+          ],
+          "run_started_at": "2026-10-22T01:30:34Z",
+          "triggering_actor": {
+            "login": "riatzukiza",
+            "id": 10676925,
+            "node_id": "MDQ6VXNlcjEwNjc2OTI1",
+            "avatar_url": "https://avatars.githubusercontent.com/u/10676925?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/riatzukiza",
+            "html_url": "https://github.com/riatzukiza",
+            "followers_url": "https://api.github.com/users/riatzukiza/followers",
+            "following_url": "https://api.github.com/users/riatzukiza/following{/other_user}",
+            "gists_url": "https://api.github.com/users/riatzukiza/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/riatzukiza/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/riatzukiza/subscriptions",
+            "organizations_url": "https://api.github.com/users/riatzukiza/orgs",
+            "repos_url": "https://api.github.com/users/riatzukiza/repos",
+            "events_url": "https://api.github.com/users/riatzukiza/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/riatzukiza/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "jobs_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424/jobs",
+          "logs_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424/logs",
+          "check_suite_url": "https://api.github.com/repos/open-hax/foresight/check-suites/107608568342",
+          "artifacts_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424/artifacts",
+          "cancel_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424/cancel",
+          "rerun_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424/rerun",
+          "previous_attempt_url": null,
+          "workflow_url": "https://api.github.com/repos/open-hax/foresight/actions/workflows/334678456",
+          "head_commit": {
+            "id": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+            "tree_id": "fe54b8823c68d96752a17fedd8654617f7d1cb8c",
+            "message": "docs(stabilization): bind native pagination repairs and settlement",
+            "timestamp": "2026-10-22T01:30:10Z",
+            "author": {
+              "name": "Error",
+              "email": "foamy125@gmail.com"
+            },
+            "committer": {
+              "name": "Error",
+              "email": "foamy125@gmail.com"
+            }
+          },
+          "repository": {
+            "id": 1333057084,
+            "node_id": "R_kgDOT3TWPA",
+            "name": "foresight",
+            "full_name": "open-hax/foresight",
+            "private": false,
+            "owner": {
+              "login": "open-hax",
+              "id": 243925769,
+              "node_id": "O_kgDODooDCQ",
+              "avatar_url": "https://avatars.githubusercontent.com/u/243925769?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/open-hax",
+              "html_url": "https://github.com/open-hax",
+              "followers_url": "https://api.github.com/users/open-hax/followers",
+              "following_url": "https://api.github.com/users/open-hax/following{/other_user}",
+              "gists_url": "https://api.github.com/users/open-hax/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/open-hax/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/open-hax/subscriptions",
+              "organizations_url": "https://api.github.com/users/open-hax/orgs",
+              "repos_url": "https://api.github.com/users/open-hax/repos",
+              "events_url": "https://api.github.com/users/open-hax/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/open-hax/received_events",
+              "type": "Organization",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "html_url": "https://github.com/open-hax/foresight",
+            "description": null,
+            "fork": false,
+            "url": "https://api.github.com/repos/open-hax/foresight",
+            "forks_url": "https://api.github.com/repos/open-hax/foresight/forks",
+            "keys_url": "https://api.github.com/repos/open-hax/foresight/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/open-hax/foresight/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/open-hax/foresight/teams",
+            "hooks_url": "https://api.github.com/repos/open-hax/foresight/hooks",
+            "issue_events_url": "https://api.github.com/repos/open-hax/foresight/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/open-hax/foresight/events",
+            "assignees_url": "https://api.github.com/repos/open-hax/foresight/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/open-hax/foresight/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/open-hax/foresight/tags",
+            "blobs_url": "https://api.github.com/repos/open-hax/foresight/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/open-hax/foresight/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/open-hax/foresight/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/open-hax/foresight/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/open-hax/foresight/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/open-hax/foresight/languages",
+            "stargazers_url": "https://api.github.com/repos/open-hax/foresight/stargazers",
+            "contributors_url": "https://api.github.com/repos/open-hax/foresight/contributors",
+            "subscribers_url": "https://api.github.com/repos/open-hax/foresight/subscribers",
+            "subscription_url": "https://api.github.com/repos/open-hax/foresight/subscription",
+            "commits_url": "https://api.github.com/repos/open-hax/foresight/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/open-hax/foresight/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/open-hax/foresight/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/open-hax/foresight/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/open-hax/foresight/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/open-hax/foresight/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/open-hax/foresight/merges",
+            "archive_url": "https://api.github.com/repos/open-hax/foresight/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/open-hax/foresight/downloads",
+            "issues_url": "https://api.github.com/repos/open-hax/foresight/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/open-hax/foresight/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/open-hax/foresight/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/open-hax/foresight/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/open-hax/foresight/labels{/name}",
+            "releases_url": "https://api.github.com/repos/open-hax/foresight/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/open-hax/foresight/deployments"
+          },
+          "head_repository": {
+            "id": 1333057084,
+            "node_id": "R_kgDOT3TWPA",
+            "name": "foresight",
+            "full_name": "open-hax/foresight",
+            "private": false,
+            "owner": {
+              "login": "open-hax",
+              "id": 243925769,
+              "node_id": "O_kgDODooDCQ",
+              "avatar_url": "https://avatars.githubusercontent.com/u/243925769?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/open-hax",
+              "html_url": "https://github.com/open-hax",
+              "followers_url": "https://api.github.com/users/open-hax/followers",
+              "following_url": "https://api.github.com/users/open-hax/following{/other_user}",
+              "gists_url": "https://api.github.com/users/open-hax/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/open-hax/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/open-hax/subscriptions",
+              "organizations_url": "https://api.github.com/users/open-hax/orgs",
+              "repos_url": "https://api.github.com/users/open-hax/repos",
+              "events_url": "https://api.github.com/users/open-hax/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/open-hax/received_events",
+              "type": "Organization",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "html_url": "https://github.com/open-hax/foresight",
+            "description": null,
+            "fork": false,
+            "url": "https://api.github.com/repos/open-hax/foresight",
+            "forks_url": "https://api.github.com/repos/open-hax/foresight/forks",
+            "keys_url": "https://api.github.com/repos/open-hax/foresight/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/open-hax/foresight/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/open-hax/foresight/teams",
+            "hooks_url": "https://api.github.com/repos/open-hax/foresight/hooks",
+            "issue_events_url": "https://api.github.com/repos/open-hax/foresight/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/open-hax/foresight/events",
+            "assignees_url": "https://api.github.com/repos/open-hax/foresight/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/open-hax/foresight/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/open-hax/foresight/tags",
+            "blobs_url": "https://api.github.com/repos/open-hax/foresight/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/open-hax/foresight/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/open-hax/foresight/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/open-hax/foresight/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/open-hax/foresight/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/open-hax/foresight/languages",
+            "stargazers_url": "https://api.github.com/repos/open-hax/foresight/stargazers",
+            "contributors_url": "https://api.github.com/repos/open-hax/foresight/contributors",
+            "subscribers_url": "https://api.github.com/repos/open-hax/foresight/subscribers",
+            "subscription_url": "https://api.github.com/repos/open-hax/foresight/subscription",
+            "commits_url": "https://api.github.com/repos/open-hax/foresight/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/open-hax/foresight/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/open-hax/foresight/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/open-hax/foresight/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/open-hax/foresight/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/open-hax/foresight/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/open-hax/foresight/merges",
+            "archive_url": "https://api.github.com/repos/open-hax/foresight/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/open-hax/foresight/downloads",
+            "issues_url": "https://api.github.com/repos/open-hax/foresight/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/open-hax/foresight/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/open-hax/foresight/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/open-hax/foresight/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/open-hax/foresight/labels{/name}",
+            "releases_url": "https://api.github.com/repos/open-hax/foresight/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/open-hax/foresight/deployments"
+          }
+        },
+        "jobs": {
+          "total_count": 4,
+          "jobs": [
+            {
+              "id": 119586329108,
+              "run_id": 39706085424,
+              "workflow_name": "eta-mu evidence review",
+              "head_branch": "codex/stabilization-portfolio",
+              "run_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424",
+              "run_attempt": 1,
+              "node_id": "CR_kwDOT3TWPM8AAAAb1-aSFA",
+              "head_sha": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+              "url": "https://api.github.com/repos/open-hax/foresight/actions/jobs/119586329108",
+              "html_url": "https://github.com/open-hax/foresight/actions/runs/39706085424/job/119586329108",
+              "status": "completed",
+              "conclusion": "success",
+              "created_at": "2026-10-22T01:30:34Z",
+              "started_at": "2026-10-22T01:30:36Z",
+              "completed_at": "2026-10-22T01:31:31Z",
+              "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1,
+                  "started_at": "2026-10-22T01:30:37Z",
+                  "completed_at": "2026-10-22T01:30:39Z"
+                },
+                {
+                  "name": "Checkout Muse compatibility compiler",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2,
+                  "started_at": "2026-10-22T01:30:39Z",
+                  "completed_at": "2026-10-22T01:30:40Z"
+                },
+                {
+                  "name": "Checkout global agent skills",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3,
+                  "started_at": "2026-10-22T01:30:40Z",
+                  "completed_at": "2026-10-22T01:30:42Z"
+                },
+                {
+                  "name": "Set up Java 21",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4,
+                  "started_at": "2026-10-22T01:30:42Z",
+                  "completed_at": "2026-10-22T01:30:42Z"
+                },
+                {
+                  "name": "Set up Clojure CLI 1.12.5.1654",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5,
+                  "started_at": "2026-10-22T01:30:42Z",
+                  "completed_at": "2026-10-22T01:30:43Z"
+                },
+                {
+                  "name": "Set up Node 22",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6,
+                  "started_at": "2026-10-22T01:30:43Z",
+                  "completed_at": "2026-10-22T01:30:46Z"
+                },
+                {
+                  "name": "Compile and verify a read-only Muse review profile",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7,
+                  "started_at": "2026-10-22T01:30:46Z",
+                  "completed_at": "2026-10-22T01:31:25Z"
+                },
+                {
+                  "name": "Assemble revision-bound review context",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8,
+                  "started_at": "2026-10-22T01:31:25Z",
+                  "completed_at": "2026-10-22T01:31:25Z"
+                },
+                {
+                  "name": "Bind review-context artifact name",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9,
+                  "started_at": "2026-10-22T01:31:25Z",
+                  "completed_at": "2026-10-22T01:31:25Z"
+                },
+                {
+                  "name": "Upload review context",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10,
+                  "started_at": "2026-10-22T01:31:25Z",
+                  "completed_at": "2026-10-22T01:31:27Z"
+                },
+                {
+                  "name": "Post Set up Node 22",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17,
+                  "started_at": "2026-10-22T01:31:27Z",
+                  "completed_at": "2026-10-22T01:31:28Z"
+                },
+                {
+                  "name": "Post Set up Java 21",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 18,
+                  "started_at": "2026-10-22T01:31:28Z",
+                  "completed_at": "2026-10-22T01:31:28Z"
+                },
+                {
+                  "name": "Post Checkout global agent skills",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 19,
+                  "started_at": "2026-10-22T01:31:28Z",
+                  "completed_at": "2026-10-22T01:31:28Z"
+                },
+                {
+                  "name": "Post Checkout Muse compatibility compiler",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 20,
+                  "started_at": "2026-10-22T01:31:28Z",
+                  "completed_at": "2026-10-22T01:31:28Z"
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 21,
+                  "started_at": "2026-10-22T01:31:28Z",
+                  "completed_at": "2026-10-22T01:31:28Z"
+                }
+              ],
+              "check_run_url": "https://api.github.com/repos/open-hax/foresight/check-runs/119586329108",
+              "labels": [
+                "ubuntu-24.04"
+              ],
+              "runner_id": 1000068907,
+              "runner_name": "GitHub Actions 1000068907",
+              "runner_group_id": 0,
+              "runner_group_name": "GitHub Actions"
+            },
+            {
+              "id": 119586329353,
+              "run_id": 39706085424,
+              "workflow_name": "eta-mu evidence review",
+              "head_branch": "codex/stabilization-portfolio",
+              "run_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424",
+              "run_attempt": 1,
+              "node_id": "CR_kwDOT3TWPM8AAAAb1-aTCQ",
+              "head_sha": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+              "url": "https://api.github.com/repos/open-hax/foresight/actions/jobs/119586329353",
+              "html_url": "https://github.com/open-hax/foresight/actions/runs/39706085424/job/119586329353",
+              "status": "completed",
+              "conclusion": "success",
+              "created_at": "2026-10-22T01:30:34Z",
+              "started_at": "2026-10-22T01:30:37Z",
+              "completed_at": "2026-10-22T01:31:08Z",
+              "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1,
+                  "started_at": "2026-10-22T01:30:38Z",
+                  "completed_at": "2026-10-22T01:30:40Z"
+                },
+                {
+                  "name": "Checkout pull request",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2,
+                  "started_at": "2026-10-22T01:30:40Z",
+                  "completed_at": "2026-10-22T01:30:43Z"
+                },
+                {
+                  "name": "Verify exact and clean pull request checkout",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3,
+                  "started_at": "2026-10-22T01:30:43Z",
+                  "completed_at": "2026-10-22T01:30:44Z"
+                },
+                {
+                  "name": "Set up Java 21",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 4,
+                  "started_at": "2026-10-22T01:30:44Z",
+                  "completed_at": "2026-10-22T01:30:44Z"
+                },
+                {
+                  "name": "Set up Clojure CLI 1.12.5.1654",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 5,
+                  "started_at": "2026-10-22T01:30:44Z",
+                  "completed_at": "2026-10-22T01:30:44Z"
+                },
+                {
+                  "name": "Set up pnpm 10.14.0",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 6,
+                  "started_at": "2026-10-22T01:30:44Z",
+                  "completed_at": "2026-10-22T01:30:44Z"
+                },
+                {
+                  "name": "Set up Node 22",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7,
+                  "started_at": "2026-10-22T01:30:44Z",
+                  "completed_at": "2026-10-22T01:30:46Z"
+                },
+                {
+                  "name": "Detect eta-mu app credentials",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 8,
+                  "started_at": "2026-10-22T01:30:46Z",
+                  "completed_at": "2026-10-22T01:30:46Z"
+                },
+                {
+                  "name": "Create cross-repository read token",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 9,
+                  "started_at": "2026-10-22T01:30:46Z",
+                  "completed_at": "2026-10-22T01:30:46Z"
+                },
+                {
+                  "name": "Mirror private Git dependencies",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 10,
+                  "started_at": "2026-10-22T01:30:46Z",
+                  "completed_at": "2026-10-22T01:30:46Z"
+                },
+                {
+                  "name": "Stage pull request diff and context",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11,
+                  "started_at": "2026-10-22T01:30:46Z",
+                  "completed_at": "2026-10-22T01:30:47Z"
+                },
+                {
+                  "name": "Run deterministic gates",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12,
+                  "started_at": "2026-10-22T01:30:47Z",
+                  "completed_at": "2026-10-22T01:31:02Z"
+                },
+                {
+                  "name": "Summarize deterministic evidence",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13,
+                  "started_at": "2026-10-22T01:31:02Z",
+                  "completed_at": "2026-10-22T01:31:02Z"
+                },
+                {
+                  "name": "Bind deterministic artifact name",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14,
+                  "started_at": "2026-10-22T01:31:02Z",
+                  "completed_at": "2026-10-22T01:31:02Z"
+                },
+                {
+                  "name": "Upload deterministic evidence",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15,
+                  "started_at": "2026-10-22T01:31:02Z",
+                  "completed_at": "2026-10-22T01:31:05Z"
+                },
+                {
+                  "name": "Post Set up Node 22",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 29,
+                  "started_at": "2026-10-22T01:31:05Z",
+                  "completed_at": "2026-10-22T01:31:05Z"
+                },
+                {
+                  "name": "Post Checkout pull request",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 30,
+                  "started_at": "2026-10-22T01:31:05Z",
+                  "completed_at": "2026-10-22T01:31:05Z"
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 31,
+                  "started_at": "2026-10-22T01:31:05Z",
+                  "completed_at": "2026-10-22T01:31:05Z"
+                }
+              ],
+              "check_run_url": "https://api.github.com/repos/open-hax/foresight/check-runs/119586329353",
+              "labels": [
+                "ubuntu-24.04"
+              ],
+              "runner_id": 1000068908,
+              "runner_name": "GitHub Actions 1000068908",
+              "runner_group_id": 0,
+              "runner_group_name": "GitHub Actions"
+            },
+            {
+              "id": 119586635293,
+              "run_id": 39706085424,
+              "workflow_name": "eta-mu evidence review",
+              "head_branch": "codex/stabilization-portfolio",
+              "run_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424",
+              "run_attempt": 1,
+              "node_id": "CR_kwDOT3TWPM8AAAAb1-s-HQ",
+              "head_sha": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+              "url": "https://api.github.com/repos/open-hax/foresight/actions/jobs/119586635293",
+              "html_url": "https://github.com/open-hax/foresight/actions/runs/39706085424/job/119586635293",
+              "status": "completed",
+              "conclusion": "failure",
+              "created_at": "2026-10-22T01:31:31Z",
+              "started_at": "2026-10-22T01:31:34Z",
+              "completed_at": "2026-10-22T01:31:53Z",
+              "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1,
+                  "started_at": "2026-10-22T01:31:34Z",
+                  "completed_at": "2026-10-22T01:31:36Z"
+                },
+                {
+                  "name": "Checkout pull request",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2,
+                  "started_at": "2026-10-22T01:31:36Z",
+                  "completed_at": "2026-10-22T01:31:39Z"
+                },
+                {
+                  "name": "Verify exact and clean review checkout",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3,
+                  "started_at": "2026-10-22T01:31:39Z",
+                  "completed_at": "2026-10-22T01:31:39Z"
+                },
+                {
+                  "name": "Set up Node 22",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4,
+                  "started_at": "2026-10-22T01:31:39Z",
+                  "completed_at": "2026-10-22T01:31:40Z"
+                },
+                {
+                  "name": "Download deterministic evidence",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5,
+                  "started_at": "2026-10-22T01:31:40Z",
+                  "completed_at": "2026-10-22T01:31:41Z"
+                },
+                {
+                  "name": "Verify full review input against independent Git snapshot",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6,
+                  "started_at": "2026-10-22T01:31:41Z",
+                  "completed_at": "2026-10-22T01:31:41Z"
+                },
+                {
+                  "name": "Download Muse tools and global skills",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7,
+                  "started_at": "2026-10-22T01:31:41Z",
+                  "completed_at": "2026-10-22T01:31:42Z"
+                },
+                {
+                  "name": "Verify and install the bounded review context",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8,
+                  "started_at": "2026-10-22T01:31:42Z",
+                  "completed_at": "2026-10-22T01:31:50Z"
+                },
+                {
+                  "name": "Test deterministic review publisher",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9,
+                  "started_at": "2026-10-22T01:31:50Z",
+                  "completed_at": "2026-10-22T01:31:50Z"
+                },
+                {
+                  "name": "Require eta-mu app credentials",
+                  "status": "completed",
+                  "conclusion": "failure",
+                  "number": 10,
+                  "started_at": "2026-10-22T01:31:50Z",
+                  "completed_at": "2026-10-22T01:31:50Z"
+                },
+                {
+                  "name": "Install pinned OpenCode CLI",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 11,
+                  "started_at": "2026-10-22T01:31:50Z",
+                  "completed_at": "2026-10-22T01:31:50Z"
+                },
+                {
+                  "name": "Capture review start time",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 12,
+                  "started_at": "2026-10-22T01:31:50Z",
+                  "completed_at": "2026-10-22T01:31:50Z"
+                },
+                {
+                  "name": "Run bounded evidence-first OpenCode review",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 13,
+                  "started_at": "2026-10-22T01:31:50Z",
+                  "completed_at": "2026-10-22T01:31:50Z"
+                },
+                {
+                  "name": "Reverify full input and bind final submission",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 14,
+                  "started_at": "2026-10-22T01:31:50Z",
+                  "completed_at": "2026-10-22T01:31:50Z"
+                },
+                {
+                  "name": "Validate final review submission",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 15,
+                  "started_at": "2026-10-22T01:31:50Z",
+                  "completed_at": "2026-10-22T01:31:50Z"
+                },
+                {
+                  "name": "Upload review attempt artifacts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16,
+                  "started_at": "2026-10-22T01:31:50Z",
+                  "completed_at": "2026-10-22T01:31:51Z"
+                },
+                {
+                  "name": "Verify review remained revision-bound",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17,
+                  "started_at": "2026-10-22T01:31:51Z",
+                  "completed_at": "2026-10-22T01:31:51Z"
+                },
+                {
+                  "name": "Create eta-mu GitHub App token for review publication",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 18,
+                  "started_at": "2026-10-22T01:31:51Z",
+                  "completed_at": "2026-10-22T01:31:51Z"
+                },
+                {
+                  "name": "Publish actual GitHub pull request review",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 19,
+                  "started_at": "2026-10-22T01:31:51Z",
+                  "completed_at": "2026-10-22T01:31:51Z"
+                },
+                {
+                  "name": "Send new inline review comments to Discord",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 20,
+                  "started_at": "2026-10-22T01:31:51Z",
+                  "completed_at": "2026-10-22T01:31:51Z"
+                },
+                {
+                  "name": "Post Set up Node 22",
+                  "status": "completed",
+                  "conclusion": "skipped",
+                  "number": 39,
+                  "started_at": "2026-10-22T01:31:51Z",
+                  "completed_at": "2026-10-22T01:31:51Z"
+                },
+                {
+                  "name": "Post Checkout pull request",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 40,
+                  "started_at": "2026-10-22T01:31:51Z",
+                  "completed_at": "2026-10-22T01:31:51Z"
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 41,
+                  "started_at": "2026-10-22T01:31:51Z",
+                  "completed_at": "2026-10-22T01:31:51Z"
+                }
+              ],
+              "check_run_url": "https://api.github.com/repos/open-hax/foresight/check-runs/119586635293",
+              "labels": [
+                "ubuntu-24.04"
+              ],
+              "runner_id": 1000068909,
+              "runner_name": "GitHub Actions 1000068909",
+              "runner_group_id": 0,
+              "runner_group_name": "GitHub Actions"
+            },
+            {
+              "id": 119586745691,
+              "run_id": 39706085424,
+              "workflow_name": "eta-mu evidence review",
+              "head_branch": "codex/stabilization-portfolio",
+              "run_url": "https://api.github.com/repos/open-hax/foresight/actions/runs/39706085424",
+              "run_attempt": 1,
+              "node_id": "CR_kwDOT3TWPM8AAAAb1-ztWw",
+              "head_sha": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+              "url": "https://api.github.com/repos/open-hax/foresight/actions/jobs/119586745691",
+              "html_url": "https://github.com/open-hax/foresight/actions/runs/39706085424/job/119586745691",
+              "status": "completed",
+              "conclusion": "failure",
+              "created_at": "2026-10-22T01:31:53Z",
+              "started_at": "2026-10-22T01:31:56Z",
+              "completed_at": "2026-10-22T01:32:00Z",
+              "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1,
+                  "started_at": "2026-10-22T01:31:57Z",
+                  "completed_at": "2026-10-22T01:31:57Z"
+                },
+                {
+                  "name": "Enforce truthful reusable review result",
+                  "status": "completed",
+                  "conclusion": "failure",
+                  "number": 2,
+                  "started_at": "2026-10-22T01:31:57Z",
+                  "completed_at": "2026-10-22T01:31:57Z"
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3,
+                  "started_at": "2026-10-22T01:31:57Z",
+                  "completed_at": "2026-10-22T01:31:57Z"
+                }
+              ],
+              "check_run_url": "https://api.github.com/repos/open-hax/foresight/check-runs/119586745691",
+              "labels": [
+                "ubuntu-24.04"
+              ],
+              "runner_id": 1000068910,
+              "runner_name": "GitHub Actions 1000068910",
+              "runner_group_id": 0,
+              "runner_group_name": "GitHub Actions"
+            }
+          ]
+        }
+      }
+    ],
+    "qualification": false
+  },
+  "evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/a4cf0c2a27058eedd77aabb0989ad6b5228875042caea26b10738a80f912c8ad.json.gz",
+    "bytes": 902686,
+    "sha256": "a4cf0c2a27058eedd77aabb0989ad6b5228875042caea26b10738a80f912c8ad",
+    "raw_bytes": 3707568,
+    "raw_sha256": "b5c4c2f7cc1ad73d99ee731dfc69ed8b75fb92e529c8b7f10bee18fee943a7ad",
+    "captures": 70
+  },
+  "holds": {
+    "receipt_invalid_new": 2,
+    "receipt_invalid_whole": 13,
+    "root_receipt_P1_open": true,
+    "character_oracle_open": true,
+    "root_merge_frozen": true,
+    "all23pins_unchanged": true,
+    "CMS_Cephalon": "paused",
+    "all_milestones": "unqualified"
+  },
+  "qualification": false
+}

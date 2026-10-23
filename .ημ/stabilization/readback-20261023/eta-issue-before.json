@@ -1,0 +1,39 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "issue": {
+      "url": "https://github.com/open-hax/eta-mu/pull/362",
+      "title": "fix(review): add bounded archive admission and publication contracts",
+      "issue_number": 362,
+      "body": "The review producer mixed candidate/model execution with signing and native publication. This branch depends on #361 and adds portable publication decisions, physical archive admission, bounded native reads, independent Git reconstruction, immutable verification, and Clio-backed intent coordination. Trusted installation and complete authenticated publication remain unqualified.\n\nPublished final checkpoint `cd9751d01a2b93123281d032f42a83fb4b9d42cb` binds source `b8af64f41de139d17741ee2696ab82bdb38a81d1`. Tests-only preflight RED `b599dc1cdbebc3bdd19279f19ef4100fbacd2196` reproduces 32 failures; final intent suite passes 29 tests / 200 assertions. Known installation/input-bound pre-launch errors refuse transitions; recovery and unclassified launch failures remain unknown. Genuine opaque recovery authority survives launch failure, retries successfully and refuses second use. Full CLI 194/587 plus workflows 11/199, lint/release and independent actual public probes pass. Classifier P1 and both preflight P2 threads read resolved: eight inline threads / zero unresolved. Current-head approval/convergence and successor hosted qualification remain open.\n\nEarlier source `ed4c7cb508feed77eff5d03f3fad7d686ac84657` has actual successful Sol 142/607 and Rheos 212/1219 hosted execution at merge `abda0ec5cb195abe8ec497e29775ca69a8f5c5c0`, verified base/head parents and identical head tree. This does not qualify the final successor or whole-carrier warning parity. Final execution: `.\u03b7\u03bc/review-evidence/trusted-publication-preflight/checkpoint.json`; 41 exact captures. Ledger now has 358 rows, still 71 invalid / 118 errors. All 309 states/planning and four historical prefixes remain preserved.\n\nEarlier checkpoint `ed4c7cb508feed77eff5d03f3fad7d686ac84657` binds source `1b76c9e1e6d6122a844ef418b0b4439ac8ee9495`. Dedicated intent runtime configuration restores ordinary cold NBB workflow checks without adding Babashka to unrelated workflows. Bootstrap RED `b0ac577cfd3c899d4baac553c870d47918933850` precedes GREEN `14cb2742bfd1a15d5ab450b8f3ee6d3a64147790`. Both configured NBB 1.5.211 and fixed 1.5.212 run the actual workflow suite 11 tests / 199 assertions with bb absent.\n\nClassifier RED `328a22c99caa2a1ed56fbbf5a7bef7c9567bc609` reproduces 24 assertion failures. GREEN preserves unknown append outcomes and exact recovery for native Error and malformed error tags; typed admission refusals remain. The collection test now compares the complete parsed three-GET trace. A fourth real GET passes the old substring oracle and fails the exact comparison.\n\nIntent 25 tests / 143 assertions, collection 30 / 224, registered review-workflow 339 Node tests, full CLI 194 / 587 plus workflows 11 / 199 pass. Owning/scoped lint and release have zero warnings. The initial ambient-provider failure is retained beside the provider-free CLI pass. Independent actual public-adapter probes verify private one-use authority, alternate-factory refusal, opaque recovery after a real visible append/fsync uncertainty, second-use refusal, and fresh-clock failure without authority.\n\nCanonical Clio alias stays pinned to candidate `5fad794de1a9e23d6e5aaad42eaa933be1c070be`; expected descriptor identity is checked under Clio's owning lock. It is not accepted root adoption. Earlier 809-capture intent evidence and every failed source/test mechanism remain intact. New bootstrap/finding archive retains 138 exact captures. Two output files use lossless JSON copies to preserve their trailing bytes without changing diff hygiene.\n\nAll three native classifier/preflight findings are resolved as fixed; current-head review convergence and hosted qualification remain open. Codex's native account quota has UNKNOWN reset and is not retried. No paid review or auto-merge is enabled.\n\nAll 309 card states/planning and four ledger prefixes verify. One prospective typed receipt validates; history remains 71 invalid rows / 118 errors. Publisher stays in_progress / Codex / five points. Original event G/executed caller/tools/input custody, complete reconstruction/verifier composition, native publication/readback/status, effective grants and protected adoption remain unfinished. Root pins, credentials, workflow protection and paused CMS/Cephalon remain unchanged.\n\nExact source, gates, retained failures and limits: `.\u03b7\u03bc/review-evidence/trusted-publication-bootstrap/checkpoint.json`. Older Sandbox results remain bound to their own source, warnings and artifact-metadata limits.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n<!-- coderabbit-ai-generated:v1 -->\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added portable board snapshots with paths relative to a selected root, while preserving planning metadata.\n  * Added read-only review metadata collection, source reconstruction, evidence verification, bounded archive validation, and safeguards for publication decisions.\n* **Bug Fixes**\n  * Improved checksum validation and snapshot error handling; invalid or unverifiable evidence is rejected.\n* **Chores**\n  * CI workflows no longer require private-repository access or publication credentials.\n* **Tests**\n  * Expanded coverage for credential-free workflows, review evidence, archive validation, publication decisions, and snapshot portability.\n* **Documentation**\n  * Clarified that producer evidence does not establish publication qualification or confirm publication.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+      "state": "open",
+      "user": {
+        "login": "riatzukiza",
+        "name": "riatzukiza",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/10676925?v=4",
+        "id": 10676925
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": null,
+      "comments": 7,
+      "created_at": "2026-10-21T05:33:10Z",
+      "updated_at": "2026-10-23T03:56:11Z",
+      "closed_at": null,
+      "display_url": "https://github.com/open-hax/eta-mu/pull/362",
+      "display_title": "fix(review): add bounded archive admission and publication contracts"
+    },
+    "url": "https://github.com/open-hax/eta-mu/pull/362",
+    "title": "fix(review): add bounded archive admission and publication contracts",
+    "display_url": "https://github.com/open-hax/eta-mu/pull/362",
+    "display_title": "fix(review): add bounded archive admission and publication contracts"
+  },
+  "isError": false
+}

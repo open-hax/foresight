@@ -1,0 +1,2 @@
+# Preserve frozen CSV bytes; RFC 4180 CRLF is an end-of-line, not trailing data.
+docs/stabilization/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

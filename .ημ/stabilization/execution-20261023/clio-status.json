@@ -1,0 +1,13 @@
+{
+  "command": [
+    "nbb",
+    "-cp",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+    "status",
+    "riatzukiza/clio",
+    "5"
+  ],
+  "exit": 0,
+  "at": "2026-10-23T02:35:34.891183+00:00"
+}

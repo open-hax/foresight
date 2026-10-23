@@ -1,0 +1,21 @@
+{
+  "kind": "catalog",
+  "ts": "2026-10-23T07:07:26.716Z",
+  "origin": "foresight/stabilization/exact-head-review-request",
+  "owner": "codex",
+  "host": "err-Yoga-7-16ARP8",
+  "pi": "foresight",
+  "dod": "Preserve actual included full-review request/acknowledgment without completion or approval credit",
+  "manifest": [
+    "docs/stabilization/e0-custody-execution.md",
+    "docs/stabilization/tracker.md",
+    ".\u03b7\u03bc/stabilization/custody-20261023/review-request-followup.json",
+    ".\u03b7\u03bc/stabilization/custody-20261023/review-request-native-comments.json"
+  ],
+  "refs": [
+    "https://github.com/open-hax/eta-mu/pull/362#issuecomment-6359478727",
+    "https://github.com/open-hax/eta-mu/pull/362#issuecomment-6359480336"
+  ],
+  "note": "After the observed07:04:53UTC included-review cooldown, actual writer request6359478727 at07:06:14 binds ETA874068612a9c576ef3d3e6847f72de2fee9a996b/sourcec9fc461f2a14d613e9f1897f5143676378e154c2. Native CodeRabbit acknowledgment6359480336 at07:06:20 says Full review triggered. This supplies no completed review/round/approval credit. Pre-request17pass/1pending/4skip,20older unanswered body items and unavailable actionability history remain. No paid/on-demand override or Codex retry. CMS/Cephalon remain paused.",
+  "qualification": false
+}

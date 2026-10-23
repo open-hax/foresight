@@ -1,0 +1,12 @@
+
+Testing workspace-test
+START opencode bun run lint
+ERROR opencode lint spawn ENOENT
+FAIL opencode lint
+START jscpd --config .jscpd.json /home/err/spaces/foresight/opencode
+ERROR jscpd spawn ENOENT
+START jscpd --config .jscpd.json /workspace/opencode
+SKIP uninitialized test repository is not initialized
+
+Ran 24 tests containing 120 assertions.
+0 failures, 0 errors.

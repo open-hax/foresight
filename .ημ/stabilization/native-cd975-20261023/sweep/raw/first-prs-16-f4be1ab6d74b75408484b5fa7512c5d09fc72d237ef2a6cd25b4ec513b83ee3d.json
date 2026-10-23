@@ -1,0 +1,476 @@
+{
+  "started_at": "2026-10-23T03:32:35.071490+00:00",
+  "completed_at": "2026-10-23T03:32:35.867086+00:00",
+  "query": "query{r0:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:7){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:8){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"riatzukiza\",name:\"express_login\"){id nameWithOwner isPrivate pullRequest(number:9){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:10){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:11){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:12){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:13){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:14){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:15){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:16){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:17){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:18){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:19){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:2){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:20){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:21){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:23){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:24){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:25){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"riatzukiza\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:3){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 7,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b6804f4ea562e13142b78824e37c382082d869d0",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "5b571187563b62f854e4ee955ccc35db980874d6",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "b6804f4ea562e13142b78824e37c382082d869d0"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r1": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 8,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "97f74e0998a30159ba75daa94f94514cf569febb",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "c8dd4257e1d51e90d70b8b609d7061d1e6a900d1",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "97f74e0998a30159ba75daa94f94514cf569febb"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r2": {
+        "id": "MDEwOlJlcG9zaXRvcnkyMzgxMTUxNjU=",
+        "nameWithOwner": "riatzukiza/express_login",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 9,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a8bcc7d182447d70a36b04fc9318805e1eedfc30",
+          "baseRefName": "master",
+          "baseRefOid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "master",
+            "target": {
+              "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "a4ac1b8ece14a2e4fa54102bab8704f8c71e571a",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c9058563c9dcd3f06c60eac8d8e89965b566b0ac"
+                },
+                {
+                  "oid": "a8bcc7d182447d70a36b04fc9318805e1eedfc30"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r3": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 10,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "9ee0f2da02a7918273a51e459cc7305fd9c9a0ff",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r4": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 11,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a8710485f919395b3c903ac8076c1369ec921084",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r5": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 12,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8110eb803aeb45416245172e4157bdb9cb7d0f5d",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r6": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 13,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "403024e981a9c2c23776ac8999d023a7845bb02d",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r7": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 14,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "fbea44eb4740cad704fb66ae0bb11fec043cbb7d",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r8": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 15,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c3ac827031e1efee019cfbacc972d7e4a1e917ba",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r9": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 16,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c8f938336afaf1c48d44047d6f9d0f7f6f7d0dbc",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r10": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 17,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "8b214dfdcfde96ba91a59cf5048230f7e4efac21",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r11": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 18,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "a92b94bf8fa00dc3765cb9be55fa178391f11198",
+          "baseRefName": "main",
+          "baseRefOid": "4927ab7d439ac7e1093c574096a2d5a6d6241391",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "6cf607cb4c86c8bed5c8de9b421eba52284c2716"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r12": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 19,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "70980fb64f55121d6633a6725cc91f25828b493d",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r13": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 2,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "0fdeb010174de5169984b9c841ab0d32f10d7147",
+          "baseRefName": "main",
+          "baseRefOid": "4927ab7d439ac7e1093c574096a2d5a6d6241391",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "6cf607cb4c86c8bed5c8de9b421eba52284c2716"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r14": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 20,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "f21a6961f21e08c57f00fab0635f369c71be8a58",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r15": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 21,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "712a95c48cdb7e9f86b9a9efca285c5af3ef9b03",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r16": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 23,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "5e221acbbcd0147111e7335909a455b2a6ad5a5b",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r17": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 24,
+          "state": "OPEN",
+          "isDraft": true,
+          "headRefOid": "639ced70bb439aa2b2efc063703c62eb29aed0d1",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r18": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 25,
+          "state": "OPEN",
+          "isDraft": true,
+          "headRefOid": "57179b05d2d613ecb1fd1bc2291a15eb9d486a20",
+          "baseRefName": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+          "baseRefOid": "96a6dca24cb7a14b041bdd6e3e7922c568238da9",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "sync/origin-fcfc2d17f28640203066ddfe0a22f87db7372a32",
+            "target": {
+              "oid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r19": {
+        "id": "R_kgDOU4VJMA",
+        "nameWithOwner": "riatzukiza/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 3,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "cf57e8988f32ea3a8adc2dfaab5993dd5875c622",
+          "baseRefName": "main",
+          "baseRefOid": "4927ab7d439ac7e1093c574096a2d5a6d6241391",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "6cf607cb4c86c8bed5c8de9b421eba52284c2716"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      }
+    }
+  }
+}

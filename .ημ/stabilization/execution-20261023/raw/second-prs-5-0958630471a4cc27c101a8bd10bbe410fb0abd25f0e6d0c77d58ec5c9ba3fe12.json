@@ -1,0 +1,686 @@
+{
+  "started_at": "2026-10-23T02:32:16.877629+00:00",
+  "completed_at": "2026-10-23T02:32:18.399799+00:00",
+  "query": "query{r0:repository(owner:\"open-hax\",name:\"foresight\"){id nameWithOwner isPrivate pullRequest(number:91){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r1:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:286){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r2:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:305){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r3:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:333){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r4:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:335){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r5:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:337){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r6:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:339){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r7:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:341){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r8:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:343){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r9:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:345){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r10:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:347){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r11:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:349){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r12:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:351){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r13:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:353){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r14:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:355){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r15:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:357){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r16:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:359){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r17:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:361){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r18:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:363){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}r19:repository(owner:\"open-hax\",name:\"knoxx\"){id nameWithOwner isPrivate pullRequest(number:365){number state isDraft headRefOid baseRefName baseRefOid mergeable baseRef{name target{oid}} potentialMergeCommit{oid parents(first:2){nodes{oid} pageInfo{hasNextPage}}}}}}",
+  "exit_code": 0,
+  "stderr": "",
+  "response": {
+    "data": {
+      "r0": {
+        "id": "R_kgDOT3TWPA",
+        "nameWithOwner": "open-hax/foresight",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 91,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "f77a945f836b5cfbfddfd0fdaff8cfdecb74b3c7",
+          "baseRefName": "main",
+          "baseRefOid": "78befe3daed9a27d79aa511848de3985602decbc",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r1": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 286,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "1de1aeb54463a0f8062f6b73a3479ea4722feb4e",
+          "baseRefName": "main",
+          "baseRefOid": "060b1898e921d1c253968476753cac10c4ed0765",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "3409977bca4ba35e09967f9a99d50867a679a73c"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r2": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 305,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "1d3b207ab2e5bfc6b2fa149836b855d458a9c997",
+          "baseRefName": "main",
+          "baseRefOid": "d49242b22cd8b303a2ac9807c70a3acb42a47a1a",
+          "mergeable": "CONFLICTING",
+          "baseRef": {
+            "name": "main",
+            "target": {
+              "oid": "3409977bca4ba35e09967f9a99d50867a679a73c"
+            }
+          },
+          "potentialMergeCommit": null
+        }
+      },
+      "r3": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 333,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "30e43bf26e64869e2e76cc568d3031968f6c6784",
+          "baseRefName": "codex/pr305-03-run-event-providers",
+          "baseRefOid": "87122de9ab406ac1ec5df0285e363f0ea6738456",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-03-run-event-providers",
+            "target": {
+              "oid": "d835a0224ece799462ec9b3f8f60baacd9abade2"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "c253f9cd74759dec2f48a5d78e547d63b54fc282",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d835a0224ece799462ec9b3f8f60baacd9abade2"
+                },
+                {
+                  "oid": "30e43bf26e64869e2e76cc568d3031968f6c6784"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r4": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 335,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "98f2398cd014bc9d90feee10396d91ac44c68f5a",
+          "baseRefName": "codex/pr305-04-mailbox-providers",
+          "baseRefOid": "30e43bf26e64869e2e76cc568d3031968f6c6784",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-04-mailbox-providers",
+            "target": {
+              "oid": "30e43bf26e64869e2e76cc568d3031968f6c6784"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "4fd4e59a1f0cc1bcaab4b3fafe9e80a093d3c6df",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "30e43bf26e64869e2e76cc568d3031968f6c6784"
+                },
+                {
+                  "oid": "98f2398cd014bc9d90feee10396d91ac44c68f5a"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r5": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 337,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "1d2122c14224674b505110ae281d3325ea518269",
+          "baseRefName": "codex/pr305-05-identity-authority",
+          "baseRefOid": "98f2398cd014bc9d90feee10396d91ac44c68f5a",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-05-identity-authority",
+            "target": {
+              "oid": "98f2398cd014bc9d90feee10396d91ac44c68f5a"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "af5d10e931ce00756e62fb8f335e7d91664783ad",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "98f2398cd014bc9d90feee10396d91ac44c68f5a"
+                },
+                {
+                  "oid": "1d2122c14224674b505110ae281d3325ea518269"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r6": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 339,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "ac6ece1ca001075a7f9b19cf79751a4d30e023db",
+          "baseRefName": "codex/pr305-06-mcp-oauth",
+          "baseRefOid": "1d2122c14224674b505110ae281d3325ea518269",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-06-mcp-oauth",
+            "target": {
+              "oid": "1d2122c14224674b505110ae281d3325ea518269"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "2436ca60cafe136b598b4cc973542074c665a5a9",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "1d2122c14224674b505110ae281d3325ea518269"
+                },
+                {
+                  "oid": "ac6ece1ca001075a7f9b19cf79751a4d30e023db"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r7": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 341,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "d30c9c5aca75e5904ec061d7a3c87e3d72d9aaf0",
+          "baseRefName": "codex/pr305-07-openplanner-providers",
+          "baseRefOid": "ac6ece1ca001075a7f9b19cf79751a4d30e023db",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-07-openplanner-providers",
+            "target": {
+              "oid": "ac6ece1ca001075a7f9b19cf79751a4d30e023db"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "82a3ee38374f2e456acdb06e196fc81c0a3620b2",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "ac6ece1ca001075a7f9b19cf79751a4d30e023db"
+                },
+                {
+                  "oid": "d30c9c5aca75e5904ec061d7a3c87e3d72d9aaf0"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r8": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 343,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "1826e7f6ad0d9502b75f04ba0e91ee30dedcc93a",
+          "baseRefName": "codex/pr305-08-agent-admission",
+          "baseRefOid": "d30c9c5aca75e5904ec061d7a3c87e3d72d9aaf0",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-08-agent-admission",
+            "target": {
+              "oid": "d30c9c5aca75e5904ec061d7a3c87e3d72d9aaf0"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "6fee270b1b8ca68e1209eae0e5f46e4adbd27276",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d30c9c5aca75e5904ec061d7a3c87e3d72d9aaf0"
+                },
+                {
+                  "oid": "1826e7f6ad0d9502b75f04ba0e91ee30dedcc93a"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r9": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 345,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "b5d9007d54001545f284e0a7e0b89549cc5aa7b9",
+          "baseRefName": "codex/pr305-09-translation-publication",
+          "baseRefOid": "1826e7f6ad0d9502b75f04ba0e91ee30dedcc93a",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-09-translation-publication",
+            "target": {
+              "oid": "1826e7f6ad0d9502b75f04ba0e91ee30dedcc93a"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "eadc29938319ddb3a593567795dd79ec84765744",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "1826e7f6ad0d9502b75f04ba0e91ee30dedcc93a"
+                },
+                {
+                  "oid": "b5d9007d54001545f284e0a7e0b89549cc5aa7b9"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r10": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 347,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "93794f692b14015a5009fb7c2722025990ce5a46",
+          "baseRefName": "codex/pr305-10-bluesky-boundary",
+          "baseRefOid": "b5d9007d54001545f284e0a7e0b89549cc5aa7b9",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-10-bluesky-boundary",
+            "target": {
+              "oid": "b5d9007d54001545f284e0a7e0b89549cc5aa7b9"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "d1b86313f44ac99720e4ab500978df51533b5ff0",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "b5d9007d54001545f284e0a7e0b89549cc5aa7b9"
+                },
+                {
+                  "oid": "93794f692b14015a5009fb7c2722025990ce5a46"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r11": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 349,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "09eff5eded1d0fff0d081b0659ecadfc70880fd5",
+          "baseRefName": "codex/pr305-11-discord-gateway",
+          "baseRefOid": "93794f692b14015a5009fb7c2722025990ce5a46",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-11-discord-gateway",
+            "target": {
+              "oid": "93794f692b14015a5009fb7c2722025990ce5a46"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "4459740381c97e07e61a0e904c393d5af5517ffb",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "93794f692b14015a5009fb7c2722025990ce5a46"
+                },
+                {
+                  "oid": "09eff5eded1d0fff0d081b0659ecadfc70880fd5"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r12": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 351,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "d2ac37a2d9294f8727abec9c5dc20119a5e70620",
+          "baseRefName": "codex/pr305-12-memory-resources",
+          "baseRefOid": "09eff5eded1d0fff0d081b0659ecadfc70880fd5",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-12-memory-resources",
+            "target": {
+              "oid": "09eff5eded1d0fff0d081b0659ecadfc70880fd5"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "7b20399a179e8ac94fa9c92347116c6dd735daed",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "09eff5eded1d0fff0d081b0659ecadfc70880fd5"
+                },
+                {
+                  "oid": "d2ac37a2d9294f8727abec9c5dc20119a5e70620"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r13": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 353,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "5bf0831bb394be42f1303936fb8627e9bd3e5ce7",
+          "baseRefName": "codex/pr305-13-app-routes",
+          "baseRefOid": "d2ac37a2d9294f8727abec9c5dc20119a5e70620",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-13-app-routes",
+            "target": {
+              "oid": "d2ac37a2d9294f8727abec9c5dc20119a5e70620"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "6adf512d8bc5406f4b4f8ddc8f8b6588b727d28c",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "d2ac37a2d9294f8727abec9c5dc20119a5e70620"
+                },
+                {
+                  "oid": "5bf0831bb394be42f1303936fb8627e9bd3e5ce7"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r14": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 355,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "364e2a24ce792ad29518e87ab834cc15d446a136",
+          "baseRefName": "codex/pr305-14-runtime-composition",
+          "baseRefOid": "5bf0831bb394be42f1303936fb8627e9bd3e5ce7",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-14-runtime-composition",
+            "target": {
+              "oid": "5bf0831bb394be42f1303936fb8627e9bd3e5ce7"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "0e85c7f7e060b5228efd12ff5a5bc029eecf710c",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "5bf0831bb394be42f1303936fb8627e9bd3e5ce7"
+                },
+                {
+                  "oid": "364e2a24ce792ad29518e87ab834cc15d446a136"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r15": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 357,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "54f189e14325badc6378da6cc842cdcefa95fbd6",
+          "baseRefName": "codex/pr305-15-frontend-foundation",
+          "baseRefOid": "364e2a24ce792ad29518e87ab834cc15d446a136",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-15-frontend-foundation",
+            "target": {
+              "oid": "364e2a24ce792ad29518e87ab834cc15d446a136"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "77dc2a944bc59a1fd3e95b8171a4cdd140fc9265",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "364e2a24ce792ad29518e87ab834cc15d446a136"
+                },
+                {
+                  "oid": "54f189e14325badc6378da6cc842cdcefa95fbd6"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r16": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 359,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "53ab67040d8f3a612bbdddeb20dcf49d954a2511",
+          "baseRefName": "codex/pr305-16-frontend-identity",
+          "baseRefOid": "54f189e14325badc6378da6cc842cdcefa95fbd6",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-16-frontend-identity",
+            "target": {
+              "oid": "54f189e14325badc6378da6cc842cdcefa95fbd6"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "33691dd884a823dc128454bbb3147233a7b004ae",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "54f189e14325badc6378da6cc842cdcefa95fbd6"
+                },
+                {
+                  "oid": "53ab67040d8f3a612bbdddeb20dcf49d954a2511"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r17": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 361,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "68895c8d7d6e2d365dd130bee5b2763f92e4eb3b",
+          "baseRefName": "codex/pr305-17-frontend-agents-contracts",
+          "baseRefOid": "53ab67040d8f3a612bbdddeb20dcf49d954a2511",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-17-frontend-agents-contracts",
+            "target": {
+              "oid": "53ab67040d8f3a612bbdddeb20dcf49d954a2511"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "c3795a636fd93d066d60ea6c54af5406e83b9402",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "53ab67040d8f3a612bbdddeb20dcf49d954a2511"
+                },
+                {
+                  "oid": "68895c8d7d6e2d365dd130bee5b2763f92e4eb3b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r18": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 363,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "c4534cbc0c6d56f7a7354cdae655587b850bb0c1",
+          "baseRefName": "codex/pr305-18-frontend-chat",
+          "baseRefOid": "68895c8d7d6e2d365dd130bee5b2763f92e4eb3b",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-18-frontend-chat",
+            "target": {
+              "oid": "68895c8d7d6e2d365dd130bee5b2763f92e4eb3b"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "8a84c7b39f0862c4e9db154f02e980205c711a2d",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "68895c8d7d6e2d365dd130bee5b2763f92e4eb3b"
+                },
+                {
+                  "oid": "c4534cbc0c6d56f7a7354cdae655587b850bb0c1"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      },
+      "r19": {
+        "id": "R_kgDOR4ZK1A",
+        "nameWithOwner": "open-hax/knoxx",
+        "isPrivate": false,
+        "pullRequest": {
+          "number": 365,
+          "state": "OPEN",
+          "isDraft": false,
+          "headRefOid": "2b325dd98a4011af9b8d783200a449936bbc4d3b",
+          "baseRefName": "codex/pr305-19-frontend-content",
+          "baseRefOid": "c4534cbc0c6d56f7a7354cdae655587b850bb0c1",
+          "mergeable": "MERGEABLE",
+          "baseRef": {
+            "name": "codex/pr305-19-frontend-content",
+            "target": {
+              "oid": "c4534cbc0c6d56f7a7354cdae655587b850bb0c1"
+            }
+          },
+          "potentialMergeCommit": {
+            "oid": "e30e43b5c275c2bc09efe5f1c23189eb2189651f",
+            "parents": {
+              "nodes": [
+                {
+                  "oid": "c4534cbc0c6d56f7a7354cdae655587b850bb0c1"
+                },
+                {
+                  "oid": "2b325dd98a4011af9b8d783200a449936bbc4d3b"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

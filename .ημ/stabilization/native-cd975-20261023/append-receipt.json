@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "nbb",
+    "-cp",
+    "src:scripts",
+    "/home/err/spaces/foresight/.\u03b7\u03bc/stabilization/native-cd975-20261023/append-receipt.cljs"
+  ],
+  "exit_code": 0,
+  "stdout": "PASS one valid flat root catalog; historical failures unchanged\n",
+  "stderr": ""
+}

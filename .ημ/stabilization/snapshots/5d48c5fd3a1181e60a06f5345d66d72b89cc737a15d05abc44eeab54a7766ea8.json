@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "e0-native-file-inventory-and-refreshed-census-attempt",
+  "root_parent": "b26f5701e0dc04b0d96cd9e79fbb1b0f72de8866",
+  "at": "2026-10-22T01:55:03.226598+00:00",
+  "child_published_head": "b265c7220bb07839d188e7e44311d31aff0ae469",
+  "files": [
+    {
+      "path": ".\u03b7\u03bc/kanban-events/ledger.edn",
+      "bytes": 252657,
+      "sha256": "d59c0e879e85890efb22b2e203b3f43fead3c35ef08d03107e1c68c04eda884f"
+    },
+    {
+      "path": ".\u03b7\u03bc/receipts.edn",
+      "bytes": 405964,
+      "sha256": "3ded8ac6e60922ff9e5658269457195565336fdd9afdd990377943a4ab6d708a"
+    },
+    {
+      "path": ".\u03b7\u03bc/session-mycology/ledger.md",
+      "bytes": 46373,
+      "sha256": "dcebadd857b9199b3887a649e5b5463a5981d5cf938b414aa9ef8bccee78bc84"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/499ad1d9be5d6a3653ad7a31f772c3ea0dd32f792ef9d2b1734c03bbf1590c15.json.gz",
+      "bytes": 146617,
+      "sha256": "499ad1d9be5d6a3653ad7a31f772c3ea0dd32f792ef9d2b1734c03bbf1590c15"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/87bf97b007f8dd3d46371b2f9a5304295074458f49dc2fa2f110a6b6e8d33016.json.gz",
+      "bytes": 30899,
+      "sha256": "87bf97b007f8dd3d46371b2f9a5304295074458f49dc2fa2f110a6b6e8d33016"
+    },
+    {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/a4cf0c2a27058eedd77aabb0989ad6b5228875042caea26b10738a80f912c8ad.json.gz",
+      "bytes": 902686,
+      "sha256": "a4cf0c2a27058eedd77aabb0989ad6b5228875042caea26b10738a80f912c8ad"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "bytes": 43879,
+      "sha256": "236a4769ad52f9a54bcfef85f859ecf487a4daf64966082babc21203e6dba0d0"
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "bytes": 20431,
+      "sha256": "54755ba1edd114d2045743ffb025d5512d8e644173365da7f6436aeade6d8303"
+    },
+    {
+      "path": "docs/stabilization/e0-native-files-census.csv",
+      "bytes": 326746,
+      "sha256": "5650ec92d3aa93820a229bb9bf9486811299cb1d2fd4303a362e941111f5124f"
+    },
+    {
+      "path": "docs/stabilization/e0-native-files-census.json",
+      "bytes": 724862,
+      "sha256": "d023acde07833e0a5a4e4c865a96511713c7d0cbdbdd4b759bdf5b947b98c1ec"
+    },
+    {
+      "path": "docs/stabilization/e0-native-files.json",
+      "bytes": 57683,
+      "sha256": "f376142f506d16f8f7120dfcb65d0d381599e929a642dbfd0e83af7cc43912d8"
+    },
+    {
+      "path": "docs/stabilization/e0-native-files.md",
+      "bytes": 7298,
+      "sha256": "4506dfe437d91d5fedf1a4494173a42e145630b0e3655eb1ae5697ec4c217322"
+    },
+    {
+      "path": "docs/stabilization/tracker.md",
+      "bytes": 33897,
+      "sha256": "0c1a5eef5725fa7705535cd2d8404f8d17397d9a21c7f67c106df4cfc99d7b1e"
+    },
+    {
+      "path": "docs/stabilization/work-graph.json",
+      "bytes": 65086,
+      "sha256": "d56980495e4d126be6623e9fc1bdaa8f42e05c947940a2986d97ce5565b56fe8"
+    }
+  ],
+  "qualification": false
+}

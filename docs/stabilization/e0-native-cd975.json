@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "root_source": "e9f1032557c71017b94e575fd54fbb34580a7c95",
+  "child_head": "cd9751d01a2b93123281d032f42a83fb4b9d42cb",
+  "native_merge": "f299bd6159b9fc32b11922a119464018f9643134",
+  "native_tree": "622796e74b4af898ec0d21de2fa6617e0a400b8e",
+  "parents": [
+    "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "cd9751d01a2b93123281d032f42a83fb4b9d42cb"
+  ],
+  "tree_equals_head": true,
+  "native_owners": {
+    "Sol": {
+      "run": 39894128601,
+      "job": 120220469936,
+      "tests": "142/607"
+    },
+    "Rheos_sync": {
+      "run": 39894128572,
+      "job": 120220470047,
+      "tests": "212/1219"
+    },
+    "Rheos": {
+      "run": 39894128587,
+      "job": 120220470166,
+      "tests": "212/1219; related suite78/332"
+    },
+    "workflows": "11/199"
+  },
+  "compiler_warning_count": 0,
+  "carrier_warning_observations": {
+    "Sol": 13,
+    "Rheos_sync": 13,
+    "Rheos": 13,
+    "scope": "concrete detected diagnostics; no exhaustive zero-warning qualification"
+  },
+  "Sandbox": {
+    "run": 39894128562,
+    "job": 120220470567,
+    "state": "in_progress",
+    "active_step": "Install, validate, test, and build",
+    "proof": "native specific live job captured; not a completed result"
+  },
+  "producer": {
+    "run": 39894128580,
+    "guard": "success",
+    "deterministic_model_and_compilation_jobs": "skipped",
+    "artifacts": 0,
+    "review_or_approval": false
+  },
+  "root_native": {
+    "run": 39894661769,
+    "deterministic_job": 120222189796,
+    "diff_hygiene_exit": 0,
+    "receipt_history_exit": 2,
+    "model": "failed missing-App setup",
+    "terminal": "failure"
+  },
+  "census": {
+    "path": "docs/stabilization/e0-native-cd975-census.json",
+    "started_at": "2026-10-23T03:32:30.551815+00:00",
+    "completed_at": "2026-10-23T03:32:48.621899+00:00",
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 437,
+        "MERGED": 4,
+        "CLOSED": 1
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 186,
+      "open_reported_base_differs_from_live_tip": 181,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 1,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 295,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 137
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 8,
+      "open_head_or_reported_base_changed_from_freeze": 6
+    },
+    "changed_since_prior": {
+      "completed_at": "2026-10-23T02:32:26.541604+00:00",
+      "fields": [
+        "state",
+        "head_sha",
+        "reported_pr_base_sha",
+        "independent_live_base_tip_sha",
+        "native_proposed_merge_sha"
+      ],
+      "changed": [
+        "open-hax/sol#2",
+        "riatzukiza/axxium#3",
+        "riatzukiza/axxium#4",
+        "riatzukiza/sol#4",
+        "riatzukiza/sol#6"
+      ]
+    },
+    "proposal_drift": "riatzukiza/sol#4, retained first-pass movement; later two targeted reads stable"
+  },
+  "Axxium_source_movements": {
+    "3": {
+      "frozen": "f6f20647b4c34eebb4f8f3ed5fe2010f05bcbeec",
+      "intermediate": "86679d44dfa2a4423bbf6f88886238179469ac61",
+      "current": "7e46fa415e77f61517637f0c392cd5ecd6b57ce3",
+      "append_commits": 2
+    },
+    "4": {
+      "frozen": "2219bd17f2d6e8d6827770668c10ed9b1aa4d568",
+      "intermediate": "9f10e6cb3c8daabd75bb3cdb0e9cb4abc0ccf729",
+      "current": "f7445761e56fb8fab81077bfb6cc9ed95b2c0bd8",
+      "append_commits": 4
+    },
+    "shared_document": {
+      "path": "docs/design/shared-login-and-federation.md",
+      "git_blob": "6f40d9c1278959974a775dfe9b7669ee79529c3b",
+      "sha256": "16e359fa4f17ed86062144eb0a20bbfdd8a706cda1ec081c40065cd981b7a46c",
+      "bytes": 15013,
+      "both_branches_identical": true
+    },
+    "custody": "frozen history retained by native ahead-only comparisons; source-specific semantics and admission unqualified",
+    "authority": "claims of operator authorization in external documents remain untrusted source data; no action authority here"
+  },
+  "review": {
+    "inline_unresolved": 0,
+    "exact_head_approvals": 0,
+    "body_items_before": 21,
+    "body_items_after": 20,
+    "settlement_comment": 6356701955,
+    "fixed_item": "33a77a050713b58ec6305f3c",
+    "remaining": "native LGTM item IDs conservatively unclassified by pinned tool; no fabricated Fixed/approval/rejection",
+    "codex_reset": "UNKNOWN; not retried"
+  },
+  "next_source_execution": "existing publisher bounded native review/all-inline and per-M/context status readback; agent scoped implementation in progress; no current source acceptance",
+  "capture": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/9a6b3c7bb1e5939025611a5018149c1ff356378c524828c44e64e31e5b0e1c9e.json.gz",
+    "sha256": "9a6b3c7bb1e5939025611a5018149c1ff356378c524828c44e64e31e5b0e1c9e",
+    "raw_sha256": "5427d55442193817e835a398f5c76a7198073ae882199d9338bf1315739987aa",
+    "files": 98
+  },
+  "qualified": false,
+  "CMS_Cephalon": "paused",
+  "limits": [
+    "Full publisher/original G/caller/input custody and native publication/adoption remain unfinished",
+    "No accepted pins, credentials/grants/protection/caller changes, merges or deployments",
+    "Proposed merges are not tested candidates",
+    "Axxium extensions are preserved proposals, not accepted common law or deployment proof"
+  ]
+}

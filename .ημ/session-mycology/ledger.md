@@ -511,3 +511,283 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+
+- ts: 2026-10-20T07:31:14.612500Z
+  session: codex/stabilization-portfolio
+  task: Refresh new-machine Git sources and register a linked stabilization portfolio
+  p-efficiency: 0.75
+  p-friction: 0.45
+  p-skill-candidate: 0.60
+  spore: none
+  receipt-refs: ca95e10f74df04bd2974dbfd7711e6325f6a8e55cd7604cf9047ff8209462b2a
+  note: Refresh root evidence before card discovery on a replacement computer. The published eta-mu bridge lacked create; isolated pinned Rheos 0.2.0 supplied ledger-backed creation. A shallow Axxium checkout triggered a large default fetch; targeted gitlink fetch plus submodule update --no-fetch restored the exact baseline. Existing source-preserving stash remains explicit.
+
+- ts: 2026-10-20T08:04:58.093684Z
+  session: codex/stabilization-portfolio
+  task: Freeze 442 PRs and reconcile existing source-qualified Rheos work
+  p-efficiency: 0.72
+  p-friction: 0.65
+  p-skill-candidate: 0.85
+  spore: 20261020-e0-enumeration-and-item-bounds.md
+  receipt-refs: 873e646ca7813784157edfe87c3b0fd9b958f7a63395673ed6f9998c4e9d931d
+  note: Authenticated inventory exposed omitted private repositories; native 3000-file caps required complete tree recovery. Fork/card source observations stayed distinct. Existing work was linked without task creation; owner and dependency gaps keep M0 unqualified.
+
+- ts: 2026-10-20T08:48:09.245252Z
+  session: codex/stabilization-portfolio
+  task: Resolve frozen-census ownership, mapping and dependency gaps on existing E0
+  p-efficiency: 0.80
+  p-friction: 0.50
+  p-skill-candidate: 0.65
+  spore: none
+  receipt-refs: 7e55c13c7b89baabab8c5b8b24a2356b8737d41e1a42ea7f112b17af6c0a6302
+  note: Reconstruct complete added card blobs from the frozen patch corpus and require exact Git blob hashes before broadening card discovery. Preserve legacy IDs and malformed sources as custody questions; assign reconciliation accountability without inventing merge authority. Existing E0 carries residual holds and native PR anchors avoid duplicate stories. The earlier census-bound spore remains the reusable learning record.
+
+- ts: 2026-10-21T00:06:27.752728+00:00
+  session: codex/stabilization-portfolio
+  task: Persist E0 live refresh, exact blob recovery and published Knoxx boundary proof
+  p-efficiency: 0.82
+  p-friction: 0.45
+  p-skill-candidate: 0.60
+  spore: none
+  receipt-refs: 57e48e4eb4d2795281ac87009e1dc1579122d4093116b820c87f76834eba975d
+  note: Recover prior thread reports before interpreting cohort-count differences. Base64 exact-ref retrieval plus Git blob hashing repairs rendered-control-text custody without overwriting the failed capture. Separate changed-open sources from changed merged sources, preserve stale sequence claims as history, and compare published path/blob sets before carrying proposed integration order forward. Existing census spore is retained; no duplicate learning artifact.
+
+- ts: 2026-10-21T00:31:35.802396+00:00
+  session: codex/stabilization-portfolio
+  task: Execute shared Clio ledger corrective work and publish verified source
+  p-efficiency: 0.83
+  p-friction: 0.40
+  p-skill-candidate: 0.60
+  spore: none
+  receipt-refs: 327bb32c792c8adae78824448d4dc66b0f633e61d6ae64ef1084b0809ffd2b60
+  note: Match host tools to the existing CI contract in an isolated directory before interpreting infrastructure failures as source failures. Preserve red commits, ordinary push readback, real native settlement and exact-head CI separately from review quorum. Missing workflow routes and quota stay explicit; no duplicate task or spore.
+
+- ts: 2026-10-21T01:22:54.879242+00:00
+  session: codex/stabilization-portfolio
+  task: Repair parent-directory ABA and preserve complete source-bound review evidence
+  p-efficiency: 0.78
+  p-friction: 0.60
+  p-skill-candidate: 0.64
+  spore: none
+  receipt-refs: 4c28d5853e659e58cadce2f40efc0b2f6ba16dc16dbcbcfc93b824d75c698bad
+  note: Keep actual descriptor identity and traversal capability separate from pathname checks. Full native review pagination exposes body-only obligations; typed JVM function replacements must preserve primitive signatures. Failed probes remain evidence. Existing source custody and review skills cover the pattern; no new spore or promotion.
+
+- ts: 2026-10-21T01:56:09.219021+00:00
+  session: codex/stabilization-portfolio
+  task: Audit live base/candidate topology and recover existing reviewer implementation authority
+  p-efficiency: 0.86
+  p-friction: 0.55
+  p-skill-candidate: 0.85
+  spore: 20261021-live-ref-and-tested-merge-custody.md
+  receipt-refs: 2088bade161bfa2c14d33c01d3aef22afa66cda87305ad6e02aabf7b1a44d5d4
+  note: Retain reported PR bases, live refs, proposed merges and actual tested trees as separate evidence. Source discovery recovered existing isolated publisher and reviewed card chain while exposing unadopted protocol differences and historical warnings. Verify canonical card mutations semantically while demanding exact ledger prefixes. One spore incubated; no promotion.
+
+- ts: 2026-10-21T02:37:07.159150+00:00
+  session: codex/stabilization-portfolio
+  task: Execute anonymous producer dependency and settle additive custody review findings
+  p-efficiency: 0.82
+  p-friction: 0.51
+  p-skill-candidate: 0.58
+  spore: none
+  receipt-refs: 6fd50def5bbce538723d6471cf0c69fa4dc064d1cb5a4adc5980a91c563e65e3
+  note: Follow existing reviewed ownership into actual extracted-step RED/GREEN on accepted current verifier. Preserve mixed ledger histories, distinguish local transport fixtures from native production qualification, and inspect successful job scope rather than its label. Root merge freeze and one concrete oracle remain explicit; apply custody amendments without editing recovered bytes. Native metadata refusal and a draft revision typo were corrected before publication. Existing source-custody/terminal-truth skills cover this; no new spore or promotion.
+
+- ts: 2026-10-21T03:21:27.477633+00:00
+  session: codex/stabilization-portfolio
+  task: Repair canonical board metadata/export and persist stable442 refresh with inherited CI failures
+  p-efficiency: 0.66
+  p-friction: 0.78
+  p-skill-candidate: 0.62
+  spore: none
+  receipt-refs: b64b7f63469843b18c9c21e9e865174262f374c1807d2b197ae906b96cf5ba3d
+  note: Recover actual source schemas and owner filenames before writing verification code, resolve full source IDs mechanically from Git, and model native append-before-terminal-marker serialization. Repeated assumptions caused avoidable checker failures and one audit identity typo; each retained and corrected, never treated as product success. Canonical regeneration exposed existing11undated read-time fallbacks and newly triggered inherited CI credential guards; keep those distinct from bounded source behavior and never restore signing custody for a green label. Existing board-compatibility and live-ref custody spores cover these seams; no duplicate spore or same-session promotion.
+
+- ts: 2026-10-21T04:05:36.396970+00:00
+  session: codex/stabilization-portfolio
+  task: Execute four-carrier CI isolation and refresh the frozen442 census
+  p-efficiency: 0.69
+  p-friction: 0.67
+  p-skill-candidate: 0.55
+  spore: none
+  receipt-refs: 60cc9dbb8195c881919489eb066369b3d83541c1ba6d70145554c88213681bec
+  note: Scope a new evidenced CI gap without expanding prior producer/publisher points. Preserve complete parsed deterministic steps, immutable package trees and exact H/B/M/tree before transferring test coverage. Keep candidate signer removal separate from hosted same-repository proof, strict warnings and independent reviews. Original source/audit/lint/environment failures remain evidence; correct guessed keys and labels against real schemas. Existing generated-source and terminal-truth spores cover this pattern, so no duplicate spore or promotion. CMS/Cephalon remain paused.
+
+- ts: 2026-10-21T04:12:12.520154+00:00
+  session: codex/stabilization-portfolio
+  task: Correct repeated audit spacing and terminal capability wording
+  p-efficiency: 0.56
+  p-friction: 0.72
+  p-skill-candidate: 0.60
+  spore: none
+  receipt-refs: c3ea0833a2489db3cf60fb3bdd6fff254f67d27b2f6f55b84f18c6a12f5300ed
+  note: The operator authored fused count and source labels after a prior correction. Use spaced prose and explicit identifier labels at authoring time. Narrow overbroad dispositions; append readable corrections rather than edit immutable events or content-addressed evidence. Terminal success must name which execution path ran and every required unproven capability. Existing custody and terminal-truth spores cover this recurring pattern; no duplicate spore or promotion.
+
+- ts: 2026-10-21T04:50:09.194875Z
+  session: codex/stabilization-portfolio
+  task: Validate new receipt envelopes against source-owned schema and preserve invalid history
+  p-efficiency: 0.71
+  p-friction: 0.80
+  p-skill-candidate: 0.85
+  spore: 20261021-source-schema-before-append.md
+  receipt-refs: 75fb3b2c1d39ece9e4939bb2b96258bee97545921c78367c6d304d94d7309d39
+  note: A generic flat template omitted the local repo field and used offset-string timestamps. Native package construction plus validation diagnoses all eleven new invalid rows, while append-only history stays unchanged and failed. New valid adjudications attest source/format facts, not retroactive execution approval. Shape validation also cannot prove repository/source binding: an overbroad temporary helper replacement was caught before append by an independent subject/producer check. Use source-owned builders, negative controls and semantic binding guards before irreversible appends. Retain all failures and historical states. One project-local spore incubated; no promotion or canonical skill mutation.
+
+- ts: 2026-10-21T05:40:17.955156Z
+  session: codex/stabilization-portfolio
+  task: Execute portable publisher core and refresh the frozen cohort
+  p-efficiency: 0.77
+  p-friction: 0.64
+  p-skill-candidate: 0.59
+  spore: none
+  receipt-refs: 923bc9087d54f01dbfb80ce1195b410697e16dfc6bbbbb1a5b05e6c595fa02c8
+  note: Test real accepted interface shapes and both legal and illegal paths before treating a green fixture as meaningful. Separate collector source from pinned producer source, shared-M history from per-PR intents, and raw publication envelopes from native payloads. Preserve initial incompatible fixtures, schema/tool failures, review counterexamples, unknown outcomes and actual warning diagnostics. Internal source review and local process proofs confer no native authentication, hosted adoption or full-story completion. Existing source-schema, custody and terminal-truth spores cover the pattern; no second spore or promotion. Full stabilization remains active and product agents paused.
+
+- ts: 2026-10-21T06:01:02.379847+00:00
+  session: codex/stabilization-portfolio
+  task: Correct root receipt ownership claims while preserving invalid immutable events
+  p-efficiency: 0.58
+  p-friction: 0.88
+  p-skill-candidate: 0.86
+  spore: none
+  receipt-refs: 27dff3523656dba284ac4725bb02c9343e04f35103f7d055e014464578eb6a8b
+  note: The earlier source-schema lesson was applied to the wrong owner. ETA native events validate only for ETA; root Foresight requires its own flat envelope. Both wrong-owner root appends stay immutable and failed. Use the actual consuming repository predicate, semantic validator, encoder and append boundary, with source binding and negative controls, before writing. Existing frozen correction work permits only four metadata fields and cannot repair nested event identity. Documentary correction supplies no admission. One existing spore already incubated this session; no second spore or promotion. Hosted bundle completion is test evidence, while carrier warnings, native review and actual publisher adoption remain separate obligations.
+
+- ts: 2026-10-21T07:30:32.963161+00:00
+  session: codex/stabilization-portfolio
+  task: Persist fresh frozen cohort and real archive/native repair execution
+  p-efficiency: 0.64
+  p-friction: 0.83
+  p-skill-candidate: 0.64
+  spore: none
+  receipt-refs: 7a6c60b451b99c3853f2848c72f8947a103f6a8440c0df39abdb23d1b3170a36
+  note: The consuming root flat contract differs from ETA native events. Validate prospective root writes through actual owner before append and keep prior wrong-owner failures open. Actual archive bytes, worker budgets and async composition clocks require causal probes; synthetic facts and old hosted results cannot qualify successor publication. Preserve failed verification assumptions and native pending/quota outcomes. Existing source-schema/terminal-truth spores cover learning; no new spore or same-session promotion.
+
+- ts: 2026-10-21T07:43:47.471026+00:00
+  session: codex/stabilization-portfolio
+  task: Additive native root readability correction
+  p-efficiency: 0.91
+  p-friction: 0.37
+  p-skill-candidate: 0.3
+  spore: none
+  receipt-refs: receipts.edn additive-native-readability catalog
+  note: Delimit full identifiers and use explicit prose in future comments. Correct older compact labels and compound wording through canonical additive comments, never by changing published events. Existing learning retained; no new spore.
+
+- ts: 2026-10-21T08:14:42.250442+00:00
+  session: codex/stabilization-portfolio
+  task: Bind completed hosted archive owners and fresh frozen cohort
+  p-efficiency: 0.76
+  p-friction: 0.61
+  p-skill-candidate: 0.58
+  spore: none
+  receipt-refs: 2120a5ec90172b1dcc218a4b209d7196fadb837ab43a57b89e3fdabaebf98b62
+  note: Native owner sections, checkout merge, Git parents/tree and artifact metadata must agree before hosted credit. Preserve CLI escape-guard and flag-position failures, and Python tuple/list assertion mistakes as capture failures rather than product RED. Whole-carrier warnings and metadata-only artifact limits remain. Native API omissions are explicit missing source/event custody; no inference from H/current M. Existing terminal-truth learning suffices; no new spore/promotion.
+
+- ts: 2026-10-22T01:04:20.074822+00:00
+  session: codex/stabilization-portfolio
+  task: Execute and publish E0 collector/source/verifier while refreshing native frozen-cohort evidence
+  p-efficiency: 0.58
+  p-friction: 0.77
+  p-skill-candidate: 0.35
+  spore: none
+  receipt-refs: a10a590a0e2316e6671ef96539fcd629fef27963008e8f70fd5e226f23f8a4c3
+  note: Previous goal turn was progress through actual source changes and native evidence; current turn adds published adapters and materially changed cohort states, not a status-only wait. Re-read native state after elapsed time: the 442-identity cohort now has 437 open, four merged and one closed. Preserve prior windows, proposed-merge drift and qualified-versus-observed distinctions. Use owning lint/receipt APIs and inspect actual composed runtime/publisher contracts; retain authored harness failures and incomplete native custody without weakening gates. One existing session spore stays incubating; no new spore or promotion. Full objective stays active, E0 breakdown, all milestones unqualified, CMS/Cephalon paused.
+
+- ts: 2026-10-22T01:29:23.293045+00:00
+  session: codex/stabilization-portfolio
+  task: Publish native pagination repairs and settle verified findings under E0
+  p-efficiency: 0.73
+  p-friction: 0.62
+  p-skill-candidate: 0.45
+  spore: none
+  receipt-refs: c673122976fe6eac28d72573a24586e18196fab3cd3133f562da9371b6d9681c
+  note: Exercise actual host APIs through their owning runtime and retain native pagination shape evidence. Matching normalized next-link semantics never authorizes fetching supplied URLs. Preserve causal RED and failed mock/runtime/lint probes beside corrected exact-source results. Native fixed-thread readback supplies settlement only; no approval or full publisher qualification. Root8a native setup and receipt P1 remain failed. Latest full census retains its explicit00:51 window; no freshness inference from this checkpoint. Current goal turn advances executed source and settlements; keep full goal active, all23pins and histories unchanged, CMS/Cephalon paused. Existing spore remains incubating; no new spore or promotion.
+
+- ts: 2026-10-22T01:54:41.120255+00:00
+  session: codex/stabilization-portfolio
+  task: Execute native file inventory and refresh frozen cohort with explicit custody gaps
+  p-efficiency: 0.76
+  p-friction: 0.58
+  p-skill-candidate: 0.46
+  spore: none
+  receipt-refs: 7bb89f80e7de8247b42801c2ee848b453a4deacdadad0a38d1e21e27a35d386d
+  note: Previous goal turn and current turn are progress: published causal repairs and real native observations, not status-only waits. Compare every required retained provider field with primary schema; distinguish complete rows from complete patch text, and native public data from original run/caller authority. Preserve the live-edit probe race and redo against isolated frozen source. Current native APIs and existing owner sources prove the missing provider port rather than authorizing current-M/head/time joins. Refresh the original 442 only, preserve prior windows and exact source scope, and retain failures/quotas. All pins and histories unchanged, CMS/Cephalon paused, full goal active. Existing spore remains incubating; no new spore/promotion.
+
+- ts: 2026-10-23T02:44:46.999404+00:00
+  session: foresight-stabilization
+  task: Persist guarded intent layer repair and bootstrap regression evidence
+  p-efficiency: 0.65
+  p-friction: 0.9
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 4362924099d6831bf8293be93b2ba35271f1c2e8582ea6b102e15f21eb1dc97e
+  note: Keep captures in owned persistent repository paths and commit promptly. Temporary capture loss is explicit; only retained or freshly reproduced evidence supports claims. Existing spore remains unpromoted.
+
+- ts: 2026-10-23T03:19:34.656051+00:00
+  session: foresight-stabilization
+  task: Bind bootstrap restoration, native owner execution and structured worker failures
+  p-efficiency: 0.8
+  p-friction: 0.65
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 57852950af9c75c5e150a090b44e7bfc6c5202fd58f830001e1f39039f41db31
+  note: Preserve exact raw capture bytes in escaped JSON or immutable archives when output whitespace conflicts with diff hygiene. Distinguish pre-launch refusal from persistent append uncertainty, and source-bound native product proof from successor qualification. Recovered capacity interruption continued saved tests without losing work. Existing spore stays unpromoted.
+
+- ts: 2026-10-23T03:39:43.471552+00:00
+  session: foresight-stabilization
+  task: Bind current-source native proof and preserve evolving backlog source
+  p-efficiency: 0.85
+  p-friction: 0.4
+  p-skill-candidate: 0.35
+  spore: none
+  receipt-refs: b1a653b89045220d29958fc92189a11fbdfe51befc8a9aa645e5e20b801660ed
+  note: Separate actual compiler passes from concrete whole-carrier diagnostics; preserve proposal drift before targeted stable readback. Native positive prose must not receive fabricated Fixed markers to satisfy conservative tooling. External scope/authorization claims remain source data. Keep append-only history and paused agents.
+
+- ts: 2026-10-23T04:02:04.636937+00:00
+  session: foresight-stabilization
+  task: Bind bounded readback and independent repair to native evidence
+  p-efficiency: 0.85
+  p-friction: 0.45
+  p-skill-candidate: 0.45
+  spore: none
+  receipt-refs: 8c93744cb554cbeebcfeb5d20e790361e7be70a269c9dbf6a4dff7c2a06fa86d
+  note: Matching content and native App fields do not authenticate installation. Independent adversarial readback found inline conflict omission after registered tests passed; preserve causal repair and original review. Earlier native passes, page1 samples, carrier diagnostics and unsupported custody remain distinct. Recover post-append assertion without repeating side effects. No new spore/promotion.
+
+- ts: 2026-10-23T04:57:26.816374+00:00
+  session: foresight-stabilization
+  task: Preserve native review input and fresh source-bound cohort proof
+  p-efficiency: 0.75
+  p-friction: 0.65
+  p-skill-candidate: 0.55
+  spore: none
+  receipt-refs: 0331141c483431ed495792cf4d69e38570f21b4cb8ece67875b9cd88f6f75d5b
+  note: Preserve every original byte/mode and failed attempt while reducing native input paths. Verify the exact emitted bytes, separate reviewer admission from archive custody and old native success from successor qualification. Timestamp refusal occurred before append; resume without duplicating card/ledger effects. No new spore/promotion.
+
+- ts: 2026-10-23T06:17:40.234Z
+  session: foresight-stabilization
+  task: Preserve actual outcome and review-repair execution with independent counterexamples
+  p-efficiency: 0.8
+  p-friction: 0.7
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 581d6cff5f7d082fff9a9d68b33e1957accac801e2d333e7d45de104e1f5b3b0
+  note: Large parent decoding can overshoot a deadline without late acceptance. Preserve data types and complete bytes when changing transport. Retain canonical owned paths for failure cleanup. Native reviewed-source logs can disprove a finding but never impersonate reviewer withdrawal. No new spore or same-session promotion.
+
+- ts: 2026-10-23T07:00:18.303Z
+  session: foresight-stabilization
+  task: Preserve producer attempts and exact manifest identity with source-bound execution proof
+  p-efficiency: 0.85
+  p-friction: 0.6
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 00a6a55292d8cafb846727446c4ed1d1d961d92fceba406dd4ff69e9acb30203
+  note: Central verification must preserve the actual producer rerun schema. Configuration generation does not establish compiled adapter or authenticated execution. Wait on the exact producer handle before dependent capture reads. No new spore or same-session promotion.
+
+- ts: 2026-10-23T07:04:53.557Z
+  session: foresight-stabilization
+  task: Correct inherited recursive publication fetch
+  p-efficiency: 0.7
+  p-friction: 0.5
+  p-skill-candidate: 0.6
+  spore: none
+  receipt-refs: 64817b99660b4516b1785151a287f13c9ded6b2c7c2e853e67939552da05164d
+  note: Root-only publication verification must explicitly disable submodule recursion, regardless of inherited Git configuration. Stop the owned process before further repository traversal and retain actual ref observations. No new spore or same-session promotion.

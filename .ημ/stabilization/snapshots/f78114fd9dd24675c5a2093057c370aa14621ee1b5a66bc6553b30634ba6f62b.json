@@ -1,0 +1,496 @@
+{
+  "schema_version": 1,
+  "kind": "e0-directory-binding-execution-attempt",
+  "attempt_id": "53e76e29-eb5b-4ae1-b081-5d50bf4c09ba",
+  "observed_at": "2026-10-21T01:22:54.879242+00:00",
+  "epic": "stabilization-e0",
+  "gate": "M0",
+  "frozen_cohort": {
+    "path": "docs/stabilization/e0-work-graph.json",
+    "sha256": "2de8e1f76aad6d2acb40718a12443cd4e1ee066cf6fd4ad1324464192af8ca42",
+    "size": 442
+  },
+  "current_pr_count": {
+    "scope": "targeted execution overlay; no new global enumeration",
+    "last_global_observation": {
+      "frozen": 442,
+      "open": 441,
+      "native_merged": 1,
+      "changed_open_head_or_base": 5
+    },
+    "current_selected_pr": "riatzukiza/clio#5 remains OPEN",
+    "new_remediation_pr_separately_tracked": "open-hax/foresight#142"
+  },
+  "pagination_and_access": {
+    "native_threads": 63,
+    "thread_and_reply_pages_complete": true,
+    "native_reviews_and_issue_comments": "fully paginated retained in native snapshot",
+    "private_inventory": "original local Git-excluded object unchanged; not republished"
+  },
+  "per_pr_source_tested_candidate_disposition": {
+    "schema_version": 1,
+    "kind": "e0-directory-binding-execution-overlay",
+    "observed_at": "2026-10-21T01:21:36.089443+00:00",
+    "existing_work": "riatzukiza/clio#5",
+    "coordination_epics": [
+      "stabilization-e0",
+      "stabilization-e2"
+    ],
+    "execution_owner": "codex under active stabilization goal, existing E0",
+    "source_before": "38c0b8c9e45160ae4fecd7d87bf6c700f62cc631",
+    "red_commit": "6c4d26c2af7a83beb75f030f4abbc798509a4f88",
+    "directory_binding_head": "9a10f1d49d49fda55811b09138e961c781ca574b",
+    "descriptor_cache_red_commits": [
+      "59eaad0d7ae0bc2be19cd6f28c8449a84ba4285b",
+      "2959cec4ae7adc0ca602802699a70272484b4720"
+    ],
+    "descriptor_cache_green_head": "7c85a26e3663f3c8b9f2fe038feb9ec5a9bb99cc",
+    "traversal_probe_red_commit": "88441bc84bc2e64ff67e8f60eaa1b0d672f69c32",
+    "traversal_probe_green_head": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+    "published_head": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+    "base_sha": "7262ddaaf39b32deb1794c5c6595724b6d69538e",
+    "state": "OPEN",
+    "source_preservation": "ordinary forward commits; original source and RED states remain ancestors",
+    "local_checks": {
+      "directory_binding_red": {
+        "JVM": "4tests/11assertions,6failures/0errors",
+        "NBB": "4tests/11assertions,6failures/0errors"
+      },
+      "directory_binding_green": {
+        "JVM": [
+          125,
+          550
+        ],
+        "NBB": [
+          100,
+          530
+        ],
+        "Shadow": [
+          100,
+          530
+        ],
+        "BB": [
+          29,
+          182
+        ],
+        "failures": 0,
+        "errors": 0,
+        "compiler_warnings": 0
+      },
+      "descriptor_cache_red": {
+        "JVM": "1test/6assertions,6failures/0errors after classpath/signature repair"
+      },
+      "traversal_probe_red": {
+        "NBB": "1test/4assertions,3failures/0errors"
+      },
+      "latest_NBB": {
+        "tests": 101,
+        "assertions": 534,
+        "failures": 0,
+        "errors": 0
+      },
+      "latest_compiled_Shadow": {
+        "tests": 101,
+        "assertions": 534,
+        "failures": 0,
+        "errors": 0,
+        "compiler_warnings": 0
+      },
+      "latest_JVM": {
+        "tests": 126,
+        "assertions": 556,
+        "failures": 0,
+        "errors": 0
+      },
+      "lint": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "hosted_ci": {
+      "run_id": 39526548866,
+      "url": "https://github.com/riatzukiza/clio/actions/runs/39526548866",
+      "head_sha": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+      "status": "completed",
+      "conclusion": "success",
+      "executed_merge_candidate": "efe27b0fb69b0439ed572f6b6a522f4e39db2a12",
+      "base_sha": "7262ddaaf39b32deb1794c5c6595724b6d69538e",
+      "head_parent": "5a7a04c6ced7b15be940e16dc772c95b0525d55f",
+      "tree_sha": "4a016bf6188e990caa37e538547d6c7230f504e3",
+      "same_tree_as_head": true,
+      "runtime_results": {
+        "BB": [
+          29,
+          182
+        ],
+        "JVM": [
+          126,
+          556
+        ],
+        "NBB": [
+          101,
+          534
+        ],
+        "Shadow": [
+          101,
+          534
+        ]
+      },
+      "all_failures_errors_warnings": 0
+    },
+    "settlements": [
+      {
+        "thread": "PRRT_kwDOU4VfQc6ujoR4",
+        "root_comment_id": 4331187538,
+        "reply_url": "https://github.com/riatzukiza/clio/pull/5#discussion_r4331978405",
+        "kind": "Fixed",
+        "resolved": true
+      },
+      {
+        "review_id": 5522077596,
+        "item_id": "cr-comment:v1:deabc4a2d3ec6453d31280c1",
+        "reply_url": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6305430429",
+        "kind": "Fixed; pre-existing real-process race test verified"
+      },
+      {
+        "review_id": 5593563315,
+        "item_id": "cr-comment:v1:b88b96144167eaffd3f56298",
+        "reply_url": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6305495511",
+        "kind": "Fixed; descriptor retention verified"
+      }
+    ],
+    "traversal_finding_settlement": {
+      "thread": "PRRT_kwDOU4VfQc6uljyf",
+      "root_comment_id": 4332021895,
+      "reply_url": "https://github.com/riatzukiza/clio/pull/5#discussion_r4332057208",
+      "kind": "Fixed",
+      "resolved": true
+    },
+    "native_threads": {
+      "total": 63,
+      "unresolved": 0,
+      "unresolved_thread_ids": [],
+      "complete": true
+    },
+    "review": {
+      "qualified": false,
+      "status_report": "clio-final-status.txt in native evidence",
+      "coderabbit_prior_request": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6305507451",
+      "coderabbit_current_request_result": {
+        "exit_code": 0,
+        "stdout": "https://github.com/riatzukiza/clio/pull/5#issuecomment-6305624892\n",
+        "stderr": ""
+      },
+      "codex": "account quota unavailable; reset boundary unknown; latest native source retained in complete paginated comments",
+      "mimo": "configured cohort obligation; current route absent, existing Clio3 candidate remains unqualified",
+      "approval": "no approval inferred from requests, CI or settlements"
+    },
+    "portability": "validated directory descriptor bridge required; explicit unsupported-host refusal, native macOS/Windows not qualified",
+    "field_replay_custody": {
+      "path": ".ημ/stabilization/snapshots/cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0.json",
+      "sha256": "cb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0",
+      "bytes": 4933
+    },
+    "root_review_gate": "native run39522223787 now queued; predecessor39522109889 completed cancelled after an observed active MiMo job; cancellation cause not inferred, no operator restart or success inferred",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938.json.gz",
+      "sha256": "5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938",
+      "bytes": 345791,
+      "uncompressed_sha256": "ecf1234353fe2fb8345b074b1a59f91066b9d933cc60d42892cc32f8f588508b",
+      "uncompressed_bytes": 3038937
+    },
+    "consumer_pins": "all23 unchanged",
+    "original_work_preserved": true,
+    "global_census_scope": {
+      "frozen": 442,
+      "last_global_open": 441,
+      "last_global_native_merged": 1,
+      "changed_open_at_previous_refresh": 5,
+      "current_batch": "Clio5 source and gate evidence plus E5 source-custody correction only; no new global census"
+    },
+    "created_tasks": 0,
+    "new_prs": [],
+    "merges": 0,
+    "qualified": false,
+    "m0_m7": "unqualified",
+    "cms_cephalon": "agents remain paused; no dispatch or restart"
+  },
+  "merged_or_superseded_changes": [],
+  "preserved_source": "ordinary forward RED/GREEN commits; original root/child work preserved; all root gitlinks unchanged",
+  "current_reviews_checks_and_identity": "Clio full hosted CI and exact checkout/tree proof pass; fresh CodeRabbit review pending, Codex account quota unknown, MiMo route unqualified; root source checks queued. No approval fabricated.",
+  "exact_consumer_pins": {
+    "observed_at": "2026-10-21T00:02:19.266224+00:00",
+    "root_head": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "branch": "codex/stabilization-portfolio",
+    "index_gitlinks": [
+      {
+        "path": ".agents",
+        "sha": "00a05c8f6ba68ff30a98266879310464e966748b",
+        "stage": "0"
+      },
+      {
+        "path": "Truth",
+        "sha": "8ade66a3553bdd89696aebf4fc4628a6fe66e5ae",
+        "stage": "0"
+      },
+      {
+        "path": "axxium",
+        "sha": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+        "stage": "0"
+      },
+      {
+        "path": "bitch-tracker",
+        "sha": "2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90",
+        "stage": "0"
+      },
+      {
+        "path": "calliope",
+        "sha": "2655ae6eddbd20ac400a8e1ff99914c56d81b835",
+        "stage": "0"
+      },
+      {
+        "path": "chat-ui",
+        "sha": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+        "stage": "0"
+      },
+      {
+        "path": "clio",
+        "sha": "788cdd3434615a7932b924e68520dbf7f88408c2",
+        "stage": "0"
+      },
+      {
+        "path": "epiphany",
+        "sha": "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66",
+        "stage": "0"
+      },
+      {
+        "path": "eta-mu",
+        "sha": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+        "stage": "0"
+      },
+      {
+        "path": "kanban-orchestrator",
+        "sha": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+        "stage": "0"
+      },
+      {
+        "path": "katamorph",
+        "sha": "3bd4cf26e68dc88fbe67f831baa4bc389e3363e7",
+        "stage": "0"
+      },
+      {
+        "path": "knoxx",
+        "sha": "fb08a10a8aa32a594cc97ae11b820113de4cf386",
+        "stage": "0"
+      },
+      {
+        "path": "muse",
+        "sha": "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde",
+        "stage": "0"
+      },
+      {
+        "path": "opencode",
+        "sha": "cc4b45612974f735ddec46009ede07729511fba4",
+        "stage": "0"
+      },
+      {
+        "path": "osmos",
+        "sha": "0c33018e27f861536822086afcdab666a60add44",
+        "stage": "0"
+      },
+      {
+        "path": "proxx",
+        "sha": "abbbc8b1ad80738233593e17e751203db785c9e2",
+        "stage": "0"
+      },
+      {
+        "path": "receipt-river",
+        "sha": "7c7c62343fea0241ac545e37f14e57ab344bfa30",
+        "stage": "0"
+      },
+      {
+        "path": "rheos",
+        "sha": "11811264a308d406cb612aefa1dad40818675e5e",
+        "stage": "0"
+      },
+      {
+        "path": "services",
+        "sha": "d361c7837ba369f5c22c9a3f9d827e74605b6c7d",
+        "stage": "0"
+      },
+      {
+        "path": "session-mycology",
+        "sha": "30339f9aa3df83ef8c335d4544307272abfbb131",
+        "stage": "0"
+      },
+      {
+        "path": "shx",
+        "sha": "6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa",
+        "stage": "0"
+      },
+      {
+        "path": "sol",
+        "sha": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+        "stage": "0"
+      },
+      {
+        "path": "uxx",
+        "sha": "97e67a7a758c080450a200e8e6e1ada614eabc6d",
+        "stage": "0"
+      }
+    ],
+    "root_sources": {
+      ".gitmodules": {
+        "sha256": "05b297cc7daf4a90c29e3d97bc176ffc02813403f601da069867009a2c704360",
+        "bytes": 2450
+      },
+      "src/foresight/project.cljc": {
+        "sha256": "3603a902652d05c480540cf129ea5c93d674fd3df7ec6a438f9e5bbe2bed9727",
+        "bytes": 31444
+      }
+    }
+  },
+  "blockers": [
+    {
+      "scope": "Clio5 merge qualification",
+      "owner": "codex via existing Clio5/E0",
+      "unblock_proof": "fresh current-source complete review convergence through all available reviewer routes plus required deterministic gates; retain unavailable account quota and missing MiMo route truthfully"
+    },
+    {
+      "scope": "Foresight142 evidence review",
+      "owner": "codex via existing E0",
+      "unblock_proof": "publish and review replay-custody correction at exact root head; settle native finding; execute current required gates without approval transfer"
+    },
+    {
+      "scope": "M5 replay adoption",
+      "owner": "codex coordination through existing E5, agents paused",
+      "unblock_proof": "reviewed owning-source numeric selection, immutable adopted comparator/config/test record and independent actual B1-B3 evidence; recovered proposal is not acceptance"
+    }
+  ],
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938.json.gz",
+    "sha256": "5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938",
+    "bytes": 345791,
+    "uncompressed_sha256": "ecf1234353fe2fb8345b074b1a59f91066b9d933cc60d42892cc32f8f588508b",
+    "uncompressed_bytes": 3038937
+  },
+  "prior_hosted_source_proof": ".ημ/stabilization/snapshots/fdffc1ba7f2855f12cc2eb047a4dc5ba3f2bcb602b5cf1eff50517fff7098bcb.json.gz",
+  "artifacts": {
+    "docs/stabilization/e0-directory-binding.md": {
+      "bytes": 5320,
+      "sha256": "b5f3e2455a9295abf36e091fb6bd55fb8039f1d7410334c9d46fd9c6a0857a8c"
+    },
+    "docs/stabilization/e0-directory-binding.json": {
+      "bytes": 6339,
+      "sha256": "44ac846598b3baf8de98e1a6a5f31303e9d6a7c4fcb2db4c4095d6292773f9db"
+    },
+    "docs/stabilization/e5-replay-custody.md": {
+      "bytes": 2093,
+      "sha256": "88d91c834bbca3ae0b1d92707e1e6d71c623fb7635f11bcb03502877cd2ea532"
+    },
+    "docs/stabilization/portfolio.md": {
+      "bytes": 33527,
+      "sha256": "86266d7560c12e4beab5865c7269d3d43692ff221694359d702b61c3b922bbce"
+    }
+  },
+  "canonical_checkpoints": {
+    "E0": {
+      "operation": {
+        "exit_code": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"uuid\": \"stabilization-e0\",\n  \"comment\": \"E0 execution checkpoint: existing Clio #5 is now at 5a7a04c6ced7b15be940e16dc772c95b0525d55f through ordinary forward RED/GREEN commits. Parent-directory ABA is bound to a retained descriptor across enumeration, entry durability and publication. Follow-up fixes retain acquired entry descriptors and require child traversal during the Node binding capability probe. RED probes reproduced 6 JVM/NBB ABA failures, 6 descriptor-retention failures and 3 stat-only-proxy failures. Full hosted CI 39526548866 passes BB 29/182, JVM 126/556, NBB 101/534 and compiled Shadow 101/534 with zero failures/errors/compiler warnings; lint is clean. Actual executed merge candidate efe27b0fb69b0439ed572f6b6a522f4e39db2a12 has the exact head tree. Native readback: 63 threads, zero unresolved; two body findings have itemized settlements. Fresh exact-head review remains pending; Codex quota reset is unknown and MiMo route candidate Clio #3 remains unqualified. Reports: docs/stabilization/e0-directory-binding.md/json; native snapshot 5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938. E5 custody correction retains the existing proposed numeric contract and an explicit adoption hold, with real existing-E5 comment/readback. No tolerance/design adoption, new execution task, merge, pin update or agent restart. Previous 442 frozen / 441 open / 1 merge and 5 changed open head/base observations retain their original window; this is a targeted execution overlay. E0 stays breakdown; M0-M7 unqualified; CMS/Cephalon paused.\"\n}\n",
+        "stderr": "",
+        "text": "E0 execution checkpoint: existing Clio #5 is now at 5a7a04c6ced7b15be940e16dc772c95b0525d55f through ordinary forward RED/GREEN commits. Parent-directory ABA is bound to a retained descriptor across enumeration, entry durability and publication. Follow-up fixes retain acquired entry descriptors and require child traversal during the Node binding capability probe. RED probes reproduced 6 JVM/NBB ABA failures, 6 descriptor-retention failures and 3 stat-only-proxy failures. Full hosted CI 39526548866 passes BB 29/182, JVM 126/556, NBB 101/534 and compiled Shadow 101/534 with zero failures/errors/compiler warnings; lint is clean. Actual executed merge candidate efe27b0fb69b0439ed572f6b6a522f4e39db2a12 has the exact head tree. Native readback: 63 threads, zero unresolved; two body findings have itemized settlements. Fresh exact-head review remains pending; Codex quota reset is unknown and MiMo route candidate Clio #3 remains unqualified. Reports: docs/stabilization/e0-directory-binding.md/json; native snapshot 5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938. E5 custody correction retains the existing proposed numeric contract and an explicit adoption hold, with real existing-E5 comment/readback. No tolerance/design adoption, new execution task, merge, pin update or agent restart. Previous 442 frozen / 441 open / 1 merge and 5 changed open head/base observations retain their original window; this is a targeted execution overlay. E0 stays breakdown; M0-M7 unqualified; CMS/Cephalon paused."
+      },
+      "readback": {
+        "uuid": "stabilization-e0",
+        "frontmatter": {
+          "category": "kanban",
+          "labels": "stabilization, coordination, e0",
+          "dependency": [],
+          "parent": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+          "type": "epic",
+          "write-id": "1792545712937-0.t413knxuvnkqi73k08",
+          "title": "Stabilization E0 — Reconstruct the authoritative backlog",
+          "priority": "P1",
+          "status": "breakdown",
+          "uuid": "stabilization-e0",
+          "assignee": "codex",
+          "created_at": "2026-10-20T07:25:52.971Z"
+        },
+        "sections": [
+          {
+            "type": "body",
+            "content": "# E0 — Reconstruct the authoritative backlog\n\n## Context\n\nWe need to know exactly which work exists, how branches overlap, and which source is authoritative before merging anything.\n\nStabilization coordination only. Preserve child ownership and existing story identities.\n\n## Scope\n\n- E0.1: Freeze the PR census: Capture all upstream and personal PRs with immutable head SHAs, reviews, checks and base branches.\n- E0.2: Identify unique implementations: Distinguish stacked branches, duplicate source, old snapshots and changes that haven't reached upstream.\n- E0.3: Reconcile Rheos ownership: Connect existing PRs, UUIDs, cards, epics and dependencies without creating duplicate tasks.\n- E0.4: Preserve historical work: Secure unique code, evidence, Cephalon designs and unpublished fixes.\n- E0.5: Establish campaign rules: Allow only necessary repairs during stabilization, with explicit ownership and history preservation.\n\nThe slot-by-slot exit proofs and existing-task candidates are in [the portfolio](../../stabilization/portfolio.md#e0--reconstruct-the-authoritative-backlog).\n\n## Acceptance\n\nEvery PR has an owner, intended disposition and verified dependency relationship. The census is complete, not capped by a GitHub search-result limit.\n\n- Resolve every slot to existing canonical work or an explicit owned gap before creating execution stories.\n- Bind qualification evidence to exact source revisions and preserve prior attempts.\n- Registration and board status do not qualify a milestone.\n\n## Dependencies\n\nNone; establishes the frozen cohort.\n\n## Evidence\n\n[Portfolio tracker](../../stabilization/tracker.md); [source-backed work graph](../../stabilization/work-graph.json).\n\n## Definition of done\n\nEvery PR has an owner, intended disposition and verified dependency relationship. The census is complete, not capped by a GitHub search-result limit."
+          },
+          {
+            "type": "comment",
+            "content": "E0 execution begins: enumerate direct source upstreams, both organization repository inventories and all riatzukiza repositories through final API pages; verify actual fork networks including renamed forks; capture exact PR head/base and complete review/check/thread pages. Reconcile against existing current-source Rheos UUIDs and dependency declarations without creating execution-story copies. Separate observed associations from accepted prerequisites and keep missing ownership/disposition evidence explicit.\n\nCensus frozen: 442 open PRs across 815 repositories (663 authenticated personal + 48 open-hax + 104 octave-commons; eight external authored PRs added). Complete list pagination and final source/membership checks pass with no drift. Native reviews/comments/checks/threads retained; two 3000-file caps repaired by complete Git-tree deltas. docs/stabilization/e0-census.md, e0-pr-census.csv, e0-work-graph.json and e0-unresolved.json bind existing work. 3821 card observations, 192 PR/card associations, 183 PR relationship observations, zero new execution tasks. 250 PRs lack explicit card matches; 441 lack native assignees; 11 distinct malformed/missing relationship tokens remain. E0 stays breakdown and M0 unqualified. Preserve original card UUIDs and histories, one owner per dependent stack, repair-only changes, exact-source evidence reuse, and unique source before any closure.\n\nTaking explicit E0 reconciliation ownership under the current user instruction. Assignee codex owns census identity matching, dependency adjudication and blocker follow-through for this existing card. Native PR assignees, declared child owners and author identities remain historical evidence; this is not an assignment of merge authority or a claim of accepted implementation coverage. Use the frozen 442-PR census, create no tasks, and keep M0 unqualified while source custody or semantic prerequisites remain unresolved.\n\nE0 gap decisions recorded in docs/stabilization/e0-resolution.md and e0-resolution.json; all 442 frozen PR/head rows are indexed in e0-owner-work-index.csv. Codex owns reconciliation and every residual hold on this existing E0; execution/merge authority remains unassigned by this action. Retain 192 original PR/card association rows; 34 formerly unmatched PRs now bind explicit existing work. Frozen added-file patches recover 23 exact authored card blobs across 12 PRs, with 28 existing relationships. The other 216 rows retain native PR anchors (84 constellation candidates); this does not prove implementation coverage or require duplicate cards. All 133 supplemental scope rows stay visible without importing execution work.\n\nAll 11 former missing relationship references are adjudicated: 7 legacy-ID references located, 1 existing UUID filename alias resolved, 1 malformed Knoxx target quarantined with an exact-blob YAML repair proposal, and 2 empty references rejected as no edge. Preserve child identities and admission histories. Classified all 1170 frozen card relationships and 183 PR ancestry observations; parent/epic containment and branch ancestry do not confer execution order. Retain 72 literal Knoxx supplier declarations and 2 mixed evidence cycle components against existing task/index issues, including reconciliation #324 and qualification #325. No new tasks, child mutations, merges or closures.\n\nM0 remains UNQUALIFIED and E0 stays breakdown. Remaining holds owned here: accepted stack execution/merge owners and terminal intent; semantic coverage and source preservation; legacy/child custody and malformed-source repair; Knoxx integration/recomposition; and 4 captured-text hash mismatches (2 unique blobs) excluded from new identity authority decisions. Frozen source/census artifacts remain unchanged. The repair proposal is reviewable and tested only in scratch; it is not applied to a child.\n\nE0 execution checkpoint: fresh exact frozen-cohort reads confirm 442 identities: 441 open, 1 native merge, 0 closed-unmerged. Five open PRs changed head/base; merged Session Mycology #1 also changed head (six total, same counting as the prior report). Merge ddb63291cf856ab59ef14f02b8346e42f6ef651b retains frozen source 4cba181e9a51da3c2cfaf871b3681a74d709058a on its ancestry; this is not semantic/merge-gate qualification. Current paginated reviews/comments/checks/statuses/files/thread metadata collected for six changed sources and Knoxx331; Axxium10 failed gate and 8 unresolved changed-open threads stay explicit.\n\nExact-ref base64 recovery now reproduces all 4 quarantined source observations / 2 unique Git blobs; exact bytes and bindings retained. That exact-source-recovery hold is satisfied only for those observations. Original mismatching captures stay unchanged; child status/behavior/admission remains unqualified.\n\nNative source confirms Knoxx331 already merged at 0fdaae13f421ff9623b1bb6fe1afb7694ab68ca1 despite stale active-target prose in issue323. Complete published trees verify all32 mailbox-delta paths identical in333/335 and different from331, while375/376 retain331 bytes at those paths. Retargeting335 alone cannot implement the documented identity-before-mailbox split. Existing324/325/372/377 keep their work; no new task, child edit, closure or accepted merge schedule.\n\nEvidence: docs/stabilization/e0-refresh.md, e0-refresh.json, e0-refresh.csv; native snapshot .ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz (sha256 6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6). Original census/ledgers and all23 consumer pins retained. Canonical pr-flow status attempt failed on installed gh --slurp support; no gate pass claimed. Root validate,36tests/286assertions, lint0/0 and Rheos drift pass. Codex retains reconciliation ownership on existing E0; E0 breakdown, E1-E7 incoming, M0-M7 UNQUALIFIED. CMS/Cephalon paused; no agent work dispatched. Next source proof: published335 32-path restoration and qualified intermediate source before any active order.\n\nExecution ownership under the active user stabilization goal: Codex owns the bounded current-head repair/review loop for existing native Clio PR riatzukiza/clio#5 (e04da66c3aefe9f3b124e275d92a1771feb04bd8) as a shared-ledger prerequisite linked through E0/E2. This reuses its existing PR work record and creates no duplicate story. Native gate now runs with isolated checksum-verified gh2.102.1; it remains blocked on three findings and current-head review convergence. Isolated checkout /tmp/foresight-clio-segments-e04da66 preserves the pinned child checkout. Reproduced unsupported-platform read-only force and unowned-temp lost-claim defects before repair; descriptor-bound directory ABA finding remains an independent open obligation. Source changes will use red/green commits, exact-head source checks and ordinary forward-only publication. CMS/Cephalon remain paused; no child pin/deployment or milestone advance.\n\nShared-ledger execution checkpoint: corrected two verified findings on existing riatzukiza/clio#5 using red commit d83296ff2250a8d2faa7f9441681bdd6befeb993 and published green head38c0b8c9e45160ae4fecd7d87bf6c700f62cc631. Unsupported-platform read-only replay skips preflight only; actual force errors remain visible. An unowned/unlinked temporary keeps claim-lost; acknowledged results retain link/path guards. Native fixed replies and resolved readbacks: discussion_r4331734104 and4331733656. Ordinary fast-forward preserves original source; no new work item or PR.\n\nBB29tests/182assertions, JVM119/530, NBB94/510 and compiled Shadow94/510 pass, lint/compiler warnings0. Hosted Clio CI39520773474 succeeds at exact green head. Isolated checksum-verified gh2.102.1 and CI-pinned BB1.13.219 remove local compatibility blockers; failed initial attempts retained. Native macOS/Windows execution is not claimed.\n\nClio5 remains OPEN and merge-unqualified: directory ABA thread PRRT_kwDOU4VfQc6ujoR4 is still open; no current-head approval/convergence. One CodeRabbit request posted; actual cooldown ends2026-10-21T00:36:46Z. Codex account quota resetUNKNOWN. Existing Clio3 proposes MiMo route absent from current5/main; historic October9 missing-secret failure predates now-visible secret-name setup, not proof of fresh operation. No secret values read or privileged rerun.\n\nEvidence docs/stabilization/e0-execution.md/json and native snapshot .ημ/stabilization/snapshots/91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2.json.gz. Existing E0 retains coordination and Codex owns bounded Clio5 execution. E0breakdown, E1-E7incoming, M0-M7unqualified. All23 root gitlinks/child checkouts retained; no merge, closure, deployment or CMS/Cephalon restart. Next source action: parent-descriptor ABA regression and native-adapter repair on existing Clio5; retain complete-input review and current-head CI obligations.\n\nPublished versioned stabilization checkpoint in existing program scope: new open-hax/foresight#142 https://github.com/open-hax/foresight/pull/142, initial commit6b630662f279149e61e9411a0021915663b19c73 against cffc34448aa6807fc51135d7f90f0f9fe6ba7efe. Track this necessary E0 publication PR separately from frozen442; no denominator rewrite. Native readback: OPEN, ready, MERGEABLE, auto-merge absent. Independent review/current-head checks remain required. The 50 explicitly staged owned files preserve registration, append-only receipts, immutable census/resolution/refresh/source-custody proof and actual Clio5 corrective execution. Exact original CSV CRLF bytes retained with scoped attributes. Private local-census evidence and unrelated .claude work excluded. No child pointer, merge, closure, deployment, CMS/Cephalon restart or milestone pass. Source/publication attempt .ημ/stabilization/snapshots/04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b.json.\n\nE0 execution checkpoint: existing Clio #5 is now at 5a7a04c6ced7b15be940e16dc772c95b0525d55f through ordinary forward RED/GREEN commits. Parent-directory ABA is bound to a retained descriptor across enumeration, entry durability and publication. Follow-up fixes retain acquired entry descriptors and require child traversal during the Node binding capability probe. RED probes reproduced 6 JVM/NBB ABA failures, 6 descriptor-retention failures and 3 stat-only-proxy failures. Full hosted CI 39526548866 passes BB 29/182, JVM 126/556, NBB 101/534 and compiled Shadow 101/534 with zero failures/errors/compiler warnings; lint is clean. Actual executed merge candidate efe27b0fb69b0439ed572f6b6a522f4e39db2a12 has the exact head tree. Native readback: 63 threads, zero unresolved; two body findings have itemized settlements. Fresh exact-head review remains pending; Codex quota reset is unknown and MiMo route candidate Clio #3 remains unqualified. Reports: docs/stabilization/e0-directory-binding.md/json; native snapshot 5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938. E5 custody correction retains the existing proposed numeric contract and an explicit adoption hold, with real existing-E5 comment/readback. No tolerance/design adoption, new execution task, merge, pin update or agent restart. Previous 442 frozen / 441 open / 1 merge and 5 changed open head/base observations retain their original window; this is a targeted execution overlay. E0 stays breakdown; M0-M7 unqualified; CMS/Cephalon paused."
+          }
+        ],
+        "source-path": "/home/err/spaces/foresight/docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md"
+      }
+    },
+    "E5": {
+      "operation": {
+        "exit_code": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"uuid\": \"stabilization-e5\",\n  \"comment\": \"E0 source-custody correction for existing E5.2/E5.5: exact personal Foresight revisioncf57e8988f32ea3a8adc2dfaab5993dd5875c622 retains selection cardb5f2ba9e-8d67-4c73-9919-e275983aca87 and its numeric proposal. Recovered blobs278b36a3e55184ea9c1c17efb7d83a68e22e7d55/e593dcb6c17b3fe04107564651632f0dad717717 reproduce native Git hashes. Candidate/hold snapshotcb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0 records proposed absolute/relative1e-9 formula, continuous field categories/units and exact discrete/hash comparisons, with adoption/comparator/runtime/configuration/replay evidence explicitly absent. Portfolio now requires a new immutable accepted contract/test record before any replay gate can pass. No original recovered blob changed, design adopted, B1-B3 result inferred or execution task created. Existing selection/solver/verification UUIDs retained. E5 remains incoming/M5 unqualified; CMS/Cephalon agents remain paused. Report docs/stabilization/e5-replay-custody.md.\"\n}\n",
+        "stderr": "",
+        "text": "E0 source-custody correction for existing E5.2/E5.5: exact personal Foresight revisioncf57e8988f32ea3a8adc2dfaab5993dd5875c622 retains selection cardb5f2ba9e-8d67-4c73-9919-e275983aca87 and its numeric proposal. Recovered blobs278b36a3e55184ea9c1c17efb7d83a68e22e7d55/e593dcb6c17b3fe04107564651632f0dad717717 reproduce native Git hashes. Candidate/hold snapshotcb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0 records proposed absolute/relative1e-9 formula, continuous field categories/units and exact discrete/hash comparisons, with adoption/comparator/runtime/configuration/replay evidence explicitly absent. Portfolio now requires a new immutable accepted contract/test record before any replay gate can pass. No original recovered blob changed, design adopted, B1-B3 result inferred or execution task created. Existing selection/solver/verification UUIDs retained. E5 remains incoming/M5 unqualified; CMS/Cephalon agents remain paused. Report docs/stabilization/e5-replay-custody.md."
+      },
+      "readback": {
+        "uuid": "stabilization-e5",
+        "frontmatter": {
+          "category": "kanban",
+          "labels": "stabilization, coordination, e5",
+          "dependency": [
+            "stabilization-e2",
+            "stabilization-e3"
+          ],
+          "parent": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+          "type": "epic",
+          "write-id": "1792544921882-0.jt4swidckmduyv4279v",
+          "title": "Stabilization E5 — Preserve and qualify Cephalon's creative-loop baseline",
+          "priority": "P1",
+          "status": "incoming",
+          "uuid": "stabilization-e5",
+          "created_at": "2026-10-20T07:26:13.091Z"
+        },
+        "sections": [
+          {
+            "type": "body",
+            "content": "# E5 — Preserve and qualify Cephalon's creative-loop baseline\n\n## Context\n\nWe need to preserve the actual physical graph, independent mood and authorized recall design rather than letting the resumed agent redefine its goal.\n\nStabilization coordination only. Preserve child ownership and existing story identities.\n\n## Scope\n\n- E5.1: Adopt the design: Bring the October 7 character-memory document and October 8 accepted milestone into the Foresight mainline.\n- E5.2: Qualify Field ownership: Reconcile the Eros/Eris physical model, numerical contracts, persistence and replay.\n- E5.3: Reconcile OpenPlanner: Preserve authorization before graph traversal, bounded search, feedback deduplication and truthful results.\n- E5.4: Integrate Knoxx's character adapter: Reconcile [personal Knoxx #14](https://github.com/riatzukiza/knoxx/pull/14?utm_source=chatgpt.com) with accepted runtime source.\n- E5.5: Define executable B1–B3 verification: Require actual persisted encounter state, consumed mood transition and automatic prompt-level recall.\n- E5.6: Produce a continuation handoff: Exact source pins, uncompleted stories, safe runtime limits and acceptance evidence.\n\nThe slot-by-slot exit proofs and existing-task candidates are in [the portfolio](../../stabilization/portfolio.md#e5--preserve-and-qualify-cephalons-creative-loop-baseline).\n\n## Acceptance\n\nThe accepted design and implementation branches have coherent provenance, and B1, B2 and B3 each have an independently evidenced status.\n\n- Resolve every slot to existing canonical work or an explicit owned gap before creating execution stories.\n- Bind qualification evidence to exact source revisions and preserve prior attempts.\n- Registration and board status do not qualify a milestone.\n\n## Dependencies\n\n`stabilization-e2`, `stabilization-e3`\n\n## Evidence\n\n[Portfolio tracker](../../stabilization/tracker.md); [source-backed work graph](../../stabilization/work-graph.json).\n\n## Definition of done\n\nThe accepted design and implementation branches have coherent provenance, and B1, B2 and B3 each have an independently evidenced status."
+          },
+          {
+            "type": "comment",
+            "content": "E0 source-custody correction for existing E5.2/E5.5: exact personal Foresight revisioncf57e8988f32ea3a8adc2dfaab5993dd5875c622 retains selection cardb5f2ba9e-8d67-4c73-9919-e275983aca87 and its numeric proposal. Recovered blobs278b36a3e55184ea9c1c17efb7d83a68e22e7d55/e593dcb6c17b3fe04107564651632f0dad717717 reproduce native Git hashes. Candidate/hold snapshotcb557fa52f4c487a870eba580bf7c9d6c5f2942098321f643c45fc02677c6cb0 records proposed absolute/relative1e-9 formula, continuous field categories/units and exact discrete/hash comparisons, with adoption/comparator/runtime/configuration/replay evidence explicitly absent. Portfolio now requires a new immutable accepted contract/test record before any replay gate can pass. No original recovered blob changed, design adopted, B1-B3 result inferred or execution task created. Existing selection/solver/verification UUIDs retained. E5 remains incoming/M5 unqualified; CMS/Cephalon agents remain paused. Report docs/stabilization/e5-replay-custody.md."
+          }
+        ],
+        "source-path": "/home/err/spaces/foresight/docs/agile/kanban/stabilization-e5-preserve-and-qualify-cephalon-s-creative-loop-baseline-ation-e5.md"
+      }
+    }
+  },
+  "pre_existing_ledger_prefixes": {
+    ".ημ/receipts.edn": {
+      "bytes": 346025,
+      "sha256": "8239d3f5aa747c82d0d2c0a0ab911395640fff21390ff012aecc750ba8bcf7ae"
+    },
+    ".ημ/kanban-events/ledger.edn": {
+      "bytes": 183968,
+      "sha256": "05cd9f4fc45071950b6e86ae67d44172ea44b7c1d4668f80586dfbac7e56f47a"
+    },
+    ".ημ/session-mycology/ledger.md": {
+      "bytes": 32781,
+      "sha256": "ed9c588a28c8eef23f402c748ba1b2cdc8c53170eac042c8ade18066a8d4f322"
+    }
+  },
+  "decision": {
+    "status": "unqualified",
+    "authorized_reviewer": null,
+    "coordination_owner": "codex",
+    "m0_m7": "unqualified",
+    "source_progress": "directory ABA, repeated descriptor discovery and stat-only proxy refusal repaired; native findings/body settlements and exact-tree hosted CI retained"
+  },
+  "created_execution_tasks": 0,
+  "new_prs": [],
+  "cms_cephalon": "agents paused; no dispatch or restart"
+}

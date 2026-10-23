@@ -1,0 +1,37 @@
+{
+  "kind": "catalog",
+  "ts": "2026-10-23T02:44:46.999404+00:00",
+  "origin": "foresight/stabilization/clio-intent-boundary-execution",
+  "owner": "codex",
+  "host": "err-Yoga-7-16ARP8",
+  "dod": "Persist actual guarded-intent source, strict layer repair, bootstrap causal regression and fresh frozen cohort under existing E0/E1",
+  "pi": "E0 breakdown; E1 incoming; publisher in_progress; CMS/Cephalon paused",
+  "manifest": [
+    "docs/stabilization/e0-clio-intent-execution.md",
+    "docs/stabilization/e0-clio-intent-execution.json",
+    "docs/stabilization/e0-clio-intent-census.json",
+    "docs/stabilization/e0-clio-intent-census.csv",
+    "docs/stabilization/tracker.md",
+    "docs/stabilization/work-graph.json",
+    ".ημ/stabilization/snapshots/2b36c625e92cfe3791d221aee3704afd581f253489aa550e4c4b45c5386025dd.json.gz"
+  ],
+  "refs": [
+    "d8ece877c9a9e07a87fec12f650bced173f6b164",
+    "fa117fba0b761f8aa655e26c2ae8675b1af178cd",
+    "bb82398568f7abf7f2c1103e0aa34806b7b87153",
+    "5fad794de1a9e23d6e5aaad42eaa933be1c070be",
+    "2b36c625e92cfe3791d221aee3704afd581f253489aa550e4c4b45c5386025dd",
+    "b0ac577cfd3c899d4baac553c870d47918933850",
+    "14cb2742bfd1a15d5ab450b8f3ee6d3a64147790"
+  ],
+  "note": "E0 executed checkpoint: published ETA head fa117fba0b761f8aa655e26c2ae8675b1af178cd, layer GREEN bb82398568f7abf7f2c1103e0aa34806b7b87153, fresh intent 23 tests / 110 assertions; eight changed GitHub bytes verify. Clio candidate 5fad794de1a9e23d6e5aaad42eaa933be1c070be has exact-head CodeRabbit approval but convergence remains blocked. Fresh October 23 02:32 UTC two-pass census: 442 frozen, 437 open, four merged, one closed, six changed open head/base pairs; Axxium #3/#4 moved since October 22, zero acquisition drift. Older a762 Sandbox exact merge/tree succeeds but retains 23 warnings and artifact-metadata-only limits. Rheos/sync/Sol bootstrap fails before tests on absent bb; causal RED b0ac577cfd3c899d4baac553c870d47918933850 precedes local GREEN 14cb2742bfd1a15d5ab450b8f3ee6d3a64147790, broader successor gates pending. Native ETA classifier P1 repair is separate. Root receipt verification still exits 2; original invalid bytes and P1/character oracle remain. Full publisher, original G/caller, native publication and protected adoption remain held. Report docs/stabilization/e0-clio-intent-execution.md. All 23 pins, states/planning and prior ledger bytes preserved; E0 breakdown, E1 incoming, publisher in_progress, CMS/Cephalon paused, no milestone or merge credit.",
+  "tests": "Fresh intent 23/110; all eight changed published bytes match native GitHub blobs. Root project validation, workspace24/120, project12/166, lint0warnings pass. Root receipt-history exits2; no historical receipt repair. Local bootstrap GREEN agent report is source-bound, independent/full successor gates pending.",
+  "decisions": [
+    "Preserve all root pins, independent primary repos, source history, card states/planning and paused CMS/Cephalon.",
+    "Keep failed receipt/review/native gates and carrier warnings visible. No waiver or credentials.",
+    "Do not qualify successor with older Sandbox or infer original G/caller from merge/tree equality.",
+    "Persist captures in owned repository paths after host-resume loss of unarchived temporary evidence."
+  ],
+  "qualification": false,
+  "root/receipt-gate-pass": false
+}

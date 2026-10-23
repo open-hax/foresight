@@ -1,0 +1,30 @@
+{
+  "kind": "e0-lossless-review-scope-checkpoint",
+  "root_source": "173cfa24520648849b9e0f553330229d6226b77d",
+  "child_head": "c9ef250dcf5d981c820bbca1abf7c578ee864412",
+  "scope_source": "03878641fd55b9327cdb01e8b522a99bab05d587",
+  "report_sha256": "dc9d0c62c0b6507b029dcf2eb2617f40f200dd9cced05102ac5f56461e828382",
+  "overlay_sha256": "1f2687da8e03d41b4f8c60afb4b8d107bd72af7243b3d5e50da1a322292c7daf",
+  "archive_sha256": "1bfaaf4859e6d2d8a67cafad5fc5fbcf7469ee554472d2da4b6862db03b9440f",
+  "prefixes": {
+    ".\u03b7\u03bc/receipts.edn": {
+      "base_bytes": 417967,
+      "base_sha256": "35b708792dd2949686fd66d560b3f75e89069a05b1e41d4c3e886860677e7337",
+      "current_bytes": 421294,
+      "prefix_preserved": true
+    },
+    ".\u03b7\u03bc/kanban-events/ledger.edn": {
+      "base_bytes": 270855,
+      "base_sha256": "9d785e1cb0d9102ad1703373925c7dbdd08154bb241c17be36b73bd4837c669c",
+      "current_bytes": 276241,
+      "prefix_preserved": true
+    },
+    ".\u03b7\u03bc/session-mycology/ledger.md": {
+      "base_bytes": 48957,
+      "base_sha256": "003385d7eb79e2b55c495f9ab9cb135529b2398f54f9f66974e900934f2f78b2",
+      "current_bytes": 49610,
+      "prefix_preserved": true
+    }
+  },
+  "qualified": false
+}

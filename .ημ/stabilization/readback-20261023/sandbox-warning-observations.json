@@ -1,0 +1,94 @@
+{
+  "scope": "concrete detected warning diagnostics, not exhaustive proof of all warning categories",
+  "count": 22,
+  "rows": [
+    {
+      "line": 303,
+      "text": "2026-10-23T03:16:42.7573620Z (node:2222) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+    },
+    {
+      "line": 332,
+      "text": "2026-10-23T03:16:42.8967197Z (node:2234) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+    },
+    {
+      "line": 358,
+      "text": "2026-10-23T03:16:47.4915931Z (node:2278) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+    },
+    {
+      "line": 387,
+      "text": "2026-10-23T03:16:48.2262291Z (node:2292) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+    },
+    {
+      "line": 390,
+      "text": "2026-10-23T03:16:48.4517230Z (node:2292) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+    },
+    {
+      "line": 482,
+      "text": "2026-10-23T03:17:02.7820777Z .../canvas@3.2.3/node_modules/canvas install: (node:2377) [DEP0176] DeprecationWarning: fs.R_OK is deprecated, use fs.constants.R_OK instead"
+    },
+    {
+      "line": 486,
+      "text": "2026-10-23T03:17:03.3872099Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'"
+    },
+    {
+      "line": 487,
+      "text": "2026-10-23T03:17:03.3874595Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+    },
+    {
+      "line": 488,
+      "text": "2026-10-23T03:17:03.3877054Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+    },
+    {
+      "line": 489,
+      "text": "2026-10-23T03:17:03.3879824Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'"
+    },
+    {
+      "line": 490,
+      "text": "2026-10-23T03:17:03.3882389Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+    },
+    {
+      "line": 491,
+      "text": "2026-10-23T03:17:03.3884883Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'"
+    },
+    {
+      "line": 506,
+      "text": "2026-10-23T03:17:03.5989813Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'"
+    },
+    {
+      "line": 507,
+      "text": "2026-10-23T03:17:03.5991627Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+    },
+    {
+      "line": 508,
+      "text": "2026-10-23T03:17:03.6096224Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+    },
+    {
+      "line": 509,
+      "text": "2026-10-23T03:17:03.6098326Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'"
+    },
+    {
+      "line": 510,
+      "text": "2026-10-23T03:17:03.6144113Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+    },
+    {
+      "line": 511,
+      "text": "2026-10-23T03:17:03.6145790Z \u2009WARN\u2009 Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'"
+    },
+    {
+      "line": 4048,
+      "text": "2026-10-23T03:36:15.1151273Z (node:29449) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+    },
+    {
+      "line": 4054,
+      "text": "2026-10-23T03:36:15.7150143Z (node:29449) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+    },
+    {
+      "line": 4104,
+      "text": "2026-10-23T03:36:24.9315233Z (node:29472) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+    },
+    {
+      "line": 4107,
+      "text": "2026-10-23T03:36:25.1473341Z (node:29480) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+    }
+  ]
+}

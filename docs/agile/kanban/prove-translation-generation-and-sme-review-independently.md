@@ -6,7 +6,7 @@ priority: "P1"
 labels: ["translation", "transduction", "evaluation"]
 created_at: "2026-08-29T15:09:34.361Z"
 parent: "760f7f1e-a086-4e0a-82a5-71d2a761073d"
-write-id: "1788020874514-0.e9n7ziinhpa6bgm3kfg"
+write-id: "1792481222535-0.jqp1yah31f9o6k9psci"
 ---
 
 # Prove translation generation and SME review independently
@@ -41,5 +41,7 @@ source segment + locale + terminology + policy
 
 ---
 This is the deliberate post-inflight successor lane for translation generation plus SME judgment. It remains todo until the opening PR portfolio is terminal. Entry evidence must identify the Knoxx behavior and revision being characterized; layout, publishing, and product/content review remain outside this card.
+
+Linked as the existing translation/SME-review delivery card from stabilization-e4 and E7 handoff obligations. This is a related-work mapping, not a claim that every CMS translation requirement is already covered. Preserve the separate revision-bound SME acceptance contract; no status or parent change.
 
 ---

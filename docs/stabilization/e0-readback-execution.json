@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "root_source": "23e07bb97508dd1e0f081e0d2732806e733b2121",
+  "child_head": "db99b1682c94ecdf9f8b239709dd44cb6101c7da",
+  "readback_source": "6e1f088fcd81dba5e9edaf526e453962875215c6",
+  "child_checkpoint": {
+    "schema_version": 1,
+    "source": "6e1f088fcd81dba5e9edaf526e453962875215c6",
+    "previous_published_head": "cd9751d01a2b93123281d032f42a83fb4b9d42cb",
+    "red": "28de0da1197d23fc839061aef76936975048f4ca",
+    "initial_green": "6fa625cd66658d850241d0d3f762ef5eb6ba8746",
+    "independent_finding_red": "141c11e3bb285c427b2d51c7ea746d09072998cd",
+    "green": "6e1f088fcd81dba5e9edaf526e453962875215c6",
+    "archive": ".ημ/review-evidence/trusted-publication-readback/10c43b3c4abbc94440a8d81c0dbece7adff3b5e998b505ddef820b262d599ccd.json.gz",
+    "archive_sha256": "10c43b3c4abbc94440a8d81c0dbece7adff3b5e998b505ddef820b262d599ccd",
+    "archive_raw_sha256": "5d7285278c5fa5b2cbc31d963bc90c818c75cf4c58457ab98fac453c299d89f5",
+    "captures": 160,
+    "lossless_representations": [],
+    "focused": "readback10/130;collection30/224;publication17/557+138parity;eightnewportablevalues",
+    "full_checks": "CLI194/587+workflows11/199;owninglint/release0warnings; testcleanupdiagnostic retained",
+    "native_probe": "actualpublicGETreview/commentspage1/statuspage1 plusproductionabsentregistryrefusal; notcompletetraversal/installation/authentication",
+    "independent_review": "6fa inlineAppconflict reproduced; causal repair and successor8controls; original_commit_id existinglaw limit retained",
+    "prefixes": {
+      "receipts.edn": {
+        "base_bytes": 629819,
+        "base_sha256": "4bab89bf2a7d9289cadc254087740f0f251208b8c6fe504236af65348f02c055",
+        "current_bytes": 633169,
+        "prefix_preserved": true
+      },
+      "kanban/.events/ledger.edn": {
+        "base_bytes": 1858284,
+        "base_sha256": "5fd39175866a87726442fcf392262c66d9a636f3f567baed19bcd6c0c6870b14",
+        "current_bytes": 1862523,
+        "prefix_preserved": true
+      },
+      ".ημ/session-mycology/ledger.md": {
+        "base_bytes": 117993,
+        "base_sha256": "20e1735b43e0dcb8ce7d612cb9186c02eaed97d6ff9f89e1670b47ae520b7851",
+        "current_bytes": 118674,
+        "prefix_preserved": true
+      },
+      ".ημ/session-reflections.edn": {
+        "base_bytes": 41622,
+        "base_sha256": "76a5109bd3e6f5d40a40b82f9f4b5d21838d832f267929e9d87ce82acf4ab4f3",
+        "current_bytes": 41622,
+        "prefix_preserved": true
+      }
+    },
+    "cards_preserved": 309,
+    "publisher": "in_progress/Codex/5points",
+    "qualification": false,
+    "CMS_Cephalon": "paused",
+    "limits": [
+      "KnownreviewID required;unknownPOSTdiscoveryunfinished",
+      "OriginalG/caller/inputcustody and complete authenticated publication/composition/adoption unfinished",
+      "NativeAppmetadata doesnotproveinstallationassociation",
+      "TwoAPIstablepasses/terminalpages donotindependentlyproveprovideromissionabsence",
+      "EarlierCD975Sandboxproof sourcebound, notsuccessorqualification"
+    ]
+  },
+  "native_published_bytes": {
+    "whole_git_commit_fetch": true,
+    "four_source_archive_checkpoint_blobs": true
+  },
+  "earlier_native": {
+    "head": "cd9751d01a2b93123281d032f42a83fb4b9d42cb",
+    "merge": "f299bd6159b9fc32b11922a119464018f9643134",
+    "parent_and_tree_proof": "e0-native-cd975.json",
+    "Sandbox": {
+      "run": 39894128562,
+      "job": 120220470567,
+      "conclusion": "success",
+      "intent": "29/200",
+      "collection": "30/224",
+      "CLI": "194/587",
+      "workflows": "11/199",
+      "Sol": "142/607",
+      "Rheos": "212/1219",
+      "detected_warning_diagnostics": 22,
+      "artifact": {
+        "id": 12476707740,
+        "bytes": 328412696,
+        "digest": "sha256:c2859ccdb605a3fd4bcca03bbf4c9fbc8456d104efeba67645063fed00a48055",
+        "scope": "native upload metadata only; bytes/download/restoration not verified"
+      }
+    }
+  },
+  "root_native": {
+    "head": "23e07bb97508dd1e0f081e0d2732806e733b2121",
+    "run": 39896317035,
+    "deterministic_job": 120227496208,
+    "receipt_history_exit": 2,
+    "diff_hygiene_exit": 0,
+    "model": "failed missing-App setup",
+    "terminal": "failure"
+  },
+  "review": {
+    "old_head_observation": "18pass/4skip,8threads/0unresolved,0exactapprovals,20unansweredpositivebodyIDs",
+    "current_head_status_capture": "eta-status-published.json",
+    "request": {
+      "observed_at": "2026-10-23T03:58:00.580585+00:00",
+      "argv": [
+        "nbb",
+        "-cp",
+        "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+        "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+        "request",
+        "open-hax/eta-mu",
+        "362",
+        "code",
+        "--reviewer",
+        "coderabbit",
+        "--note",
+        "Review published bounded native readback and independent inline App conflict repair at db99b1682c94ecdf9f8b239709dd44cb6101c7da. Causal controls, exact raw archive and full local checks retained. Authentication/publication/adoption remain unqualified."
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/open-hax/eta-mu/pull/362#issuecomment-6357019277\n",
+      "stderr": ""
+    },
+    "request_id": 6357019277,
+    "codex_reset": "UNKNOWN; not retried",
+    "current_head_qualification": false
+  },
+  "frozen_cohort": {
+    "path": "docs/stabilization/e0-native-cd975-census.json",
+    "window": "2026-10-23T03:32:30.551815+00:00/2026-10-23T03:32:48.621899+00:00",
+    "frozen": 442,
+    "open": 437,
+    "merged": 4,
+    "closed": 1,
+    "changed_open_H_B": 6,
+    "source_drift": 0,
+    "proposal_drift": 1,
+    "retained_not_resampled_here": true
+  },
+  "capture": {
+    "path": ".ημ/stabilization/snapshots/54b5e1a2c0c1a78a7ba93a7da433c703e30861f46b7540cd3708d9dc27e3f3b1.json.gz",
+    "sha256": "54b5e1a2c0c1a78a7ba93a7da433c703e30861f46b7540cd3708d9dc27e3f3b1",
+    "raw_sha256": "3284668213012c31257cdd44ef0996e9e92e66898e75abc19d56e7283e0fd9dc",
+    "files": 28
+  },
+  "qualified": false,
+  "CMS_Cephalon": "paused",
+  "limits": [
+    "KnownreviewID required;unknownPOSTdiscoveryunfinished",
+    "OriginalG/caller/inputcustody and complete authenticated publication/composition/adoption unfinished",
+    "NativeAppmetadata doesnotproveinstallationassociation",
+    "TwoAPIstablepasses/terminalpages donotindependentlyproveprovideromissionabsence",
+    "EarlierCD975Sandboxproof sourcebound, notsuccessorqualification"
+  ]
+}

@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "kind": "e0-live-base-and-existing-review-route-attempt",
+  "attempt_id": "968d592b-73e8-4750-b402-92890d50a9ba",
+  "observed_at": "2026-10-21T01:56:09.219021+00:00",
+  "epic": "stabilization-e0",
+  "coordination": [
+    "stabilization-e0",
+    "stabilization-e1"
+  ],
+  "gate": "M0",
+  "frozen_cohort": {
+    "path": "docs/stabilization/e0-work-graph.json",
+    "sha256": "2de8e1f76aad6d2acb40718a12443cd4e1ee066cf6fd4ad1324464192af8ca42",
+    "size": 442
+  },
+  "current_pr_count": {
+    "observation_window": [
+      "2026-10-21T01:39:02.638630+00:00",
+      "2026-10-21T01:39:23.510947+00:00"
+    ],
+    "counts": {
+      "OPEN": 441,
+      "MERGED": 1,
+      "CLOSED": 0
+    },
+    "new_repository_or_new_pr_census": false,
+    "separate_remediation_pr": "open-hax/foresight#142"
+  },
+  "pagination_and_access": {
+    "both_native_source_passes": 442,
+    "both_independent_ref_passes": 144,
+    "native_query_batches": 58,
+    "query_errors": 0,
+    "source_tuple_changes": 0,
+    "ref_access": "all144live branches available; same public frozen sources",
+    "native_proposed_merge_parents": "complete parent pages for all available candidates;5mismatches separately reproduced by native Git object reads",
+    "private_inventory": "original local excluded object unchanged; no publication"
+  },
+  "per_pr_source_disposition_register": {
+    "path": "docs/stabilization/e0-base-topology.json",
+    "sha256": "be684e10e06f74330637127ce68e8b95f271fea0ff95c2b11ac04e6e582c2e06",
+    "qualification": "all442source-only/unqualified, tested candidate null"
+  },
+  "merged_or_superseded_changes": [],
+  "preserved_source": "no source rewrite, closure, merge, readiness transition or duplicate task; all prior frozen/source/snapshot identities retained",
+  "current_reviews_checks_and_identity": {
+    "Clio5": "previous exact-head native CodeRabbit approval and hosted CI remain distinct from unresolved MiMo route",
+    "Clio3": "native failed old execution/withdrawal history retained; no privileged rerun",
+    "eta328": "canonical gate blocked despite native green channels; actual Sol behavior/settlement and adoption remain unqualified",
+    "eta22": "actual current planning cohort PASS and historical executed B/H/M/tree verified; warnings, no implementation/readiness/adoption remain explicit"
+  },
+  "exact_consumer_pins": {
+    "observed_at": "2026-10-21T00:02:19.266224+00:00",
+    "root_head": "cffc34448aa6807fc51135d7f90f0f9fe6ba7efe",
+    "branch": "codex/stabilization-portfolio",
+    "index_gitlinks": [
+      {
+        "path": ".agents",
+        "sha": "00a05c8f6ba68ff30a98266879310464e966748b",
+        "stage": "0"
+      },
+      {
+        "path": "Truth",
+        "sha": "8ade66a3553bdd89696aebf4fc4628a6fe66e5ae",
+        "stage": "0"
+      },
+      {
+        "path": "axxium",
+        "sha": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+        "stage": "0"
+      },
+      {
+        "path": "bitch-tracker",
+        "sha": "2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90",
+        "stage": "0"
+      },
+      {
+        "path": "calliope",
+        "sha": "2655ae6eddbd20ac400a8e1ff99914c56d81b835",
+        "stage": "0"
+      },
+      {
+        "path": "chat-ui",
+        "sha": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+        "stage": "0"
+      },
+      {
+        "path": "clio",
+        "sha": "788cdd3434615a7932b924e68520dbf7f88408c2",
+        "stage": "0"
+      },
+      {
+        "path": "epiphany",
+        "sha": "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66",
+        "stage": "0"
+      },
+      {
+        "path": "eta-mu",
+        "sha": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+        "stage": "0"
+      },
+      {
+        "path": "kanban-orchestrator",
+        "sha": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+        "stage": "0"
+      },
+      {
+        "path": "katamorph",
+        "sha": "3bd4cf26e68dc88fbe67f831baa4bc389e3363e7",
+        "stage": "0"
+      },
+      {
+        "path": "knoxx",
+        "sha": "fb08a10a8aa32a594cc97ae11b820113de4cf386",
+        "stage": "0"
+      },
+      {
+        "path": "muse",
+        "sha": "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde",
+        "stage": "0"
+      },
+      {
+        "path": "opencode",
+        "sha": "cc4b45612974f735ddec46009ede07729511fba4",
+        "stage": "0"
+      },
+      {
+        "path": "osmos",
+        "sha": "0c33018e27f861536822086afcdab666a60add44",
+        "stage": "0"
+      },
+      {
+        "path": "proxx",
+        "sha": "abbbc8b1ad80738233593e17e751203db785c9e2",
+        "stage": "0"
+      },
+      {
+        "path": "receipt-river",
+        "sha": "7c7c62343fea0241ac545e37f14e57ab344bfa30",
+        "stage": "0"
+      },
+      {
+        "path": "rheos",
+        "sha": "11811264a308d406cb612aefa1dad40818675e5e",
+        "stage": "0"
+      },
+      {
+        "path": "services",
+        "sha": "d361c7837ba369f5c22c9a3f9d827e74605b6c7d",
+        "stage": "0"
+      },
+      {
+        "path": "session-mycology",
+        "sha": "30339f9aa3df83ef8c335d4544307272abfbb131",
+        "stage": "0"
+      },
+      {
+        "path": "shx",
+        "sha": "6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa",
+        "stage": "0"
+      },
+      {
+        "path": "sol",
+        "sha": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+        "stage": "0"
+      },
+      {
+        "path": "uxx",
+        "sha": "97e67a7a758c080450a200e8e6e1ada614eabc6d",
+        "stage": "0"
+      }
+    ],
+    "root_sources": {
+      ".gitmodules": {
+        "sha256": "05b297cc7daf4a90c29e3d97bc176ffc02813403f601da069867009a2c704360",
+        "bytes": 2450
+      },
+      "src/foresight/project.cljc": {
+        "sha256": "3603a902652d05c480540cf129ea5c93d674fd3df7ec6a438f9e5bbe2bed9727",
+        "bytes": 31444
+      }
+    }
+  },
+  "blockers": [
+    {
+      "kind": "reported-base-is-not-live-tip",
+      "open_members": 179,
+      "owner": "codex on existing E0",
+      "unblock_proof": "bind independently read live B and H to actual executed merge/tree and fresh reviews/checks; keep reported snapshot field separately"
+    },
+    {
+      "kind": "proposed-merge-uses-another-base",
+      "identities": [
+        "octave-commons/Truth#8",
+        "open-hax/knoxx#381",
+        "riatzukiza/TANF-app#26",
+        "riatzukiza/clio#1",
+        "riatzukiza/rheos#2"
+      ],
+      "owner": "codex on existing E0; retain each existing PR/work anchor",
+      "unblock_proof": "current B/H-bound candidate plus actual tests and source preservation; a stale or matching native proposed merge alone is insufficient"
+    },
+    {
+      "kind": "native-conflict-without-proposed-merge",
+      "open_members": 135,
+      "owner": "codex on existing E0",
+      "unblock_proof": "history-preserving unique-source reconciliation and current B/H/M verification before disposition; no automatic close or rebase"
+    },
+    {
+      "kind": "matching-proposed-parents-are-not-test-proof",
+      "open_members": 301,
+      "owner": "codex on existing E0",
+      "unblock_proof": "actual executed candidate/tree and complete relevant checks/reviews for each source"
+    },
+    {
+      "kind": "review-route-source-composition",
+      "owner": "codex coordination on existing E0/E1, existing child owners/UUIDs retained",
+      "unblock_proof": "main-verifier-preserving source composition and lawful producer→publisher→hosted proof admission; actual signer/source/App/posture proof before Clio enrollment; no policy waiver from historic same-writer acceptance"
+    }
+  ],
+  "artifacts": {
+    "docs/stabilization/e0-base-topology.md": {
+      "sha256": "37d280e976b684dec971f21fe2fc9736573388ea42072b1efccf82831e980f4d",
+      "bytes": 4702
+    },
+    "docs/stabilization/e0-base-topology.json": {
+      "sha256": "be684e10e06f74330637127ce68e8b95f271fea0ff95c2b11ac04e6e582c2e06",
+      "bytes": 727630
+    },
+    "docs/stabilization/e0-base-topology.csv": {
+      "sha256": "389ea0e720ec80d28be64990192c39da6fe62eadba04602428ec362be3c27196",
+      "bytes": 206287
+    },
+    "docs/stabilization/e0-review-route.md": {
+      "sha256": "8a9cbbf6207d100a8899630f74a768c66ede2d1aba60fc8ca2902cbe8aebc4e6",
+      "bytes": 4296
+    },
+    "docs/stabilization/e0-review-route.json": {
+      "sha256": "f8a1ce5ac78adee1c990a57e808450d0f3165d12915e339e00fe1d2f921c59d7",
+      "bytes": 4613
+    }
+  },
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e.json.gz",
+    "sha256": "bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e",
+    "bytes": 4203652,
+    "uncompressed_sha256": "c6ae119fe99d06dbd0256d75496ab2f47490ba67ba9a89692b25afc4201c8264",
+    "uncompressed_bytes": 26685701
+  },
+  "source_survey": {
+    "delegated_under": "eta-mu AGENTS explicit scoped survey delegation",
+    "exact_captured_manifest_files": 254,
+    "verification": "all captured file hashes verified against raw native source/log custody; not an independent approval or full product audit"
+  },
+  "canonical_checkpoints": {
+    "stabilization-e0": {
+      "operation": {
+        "exit_code": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"uuid\": \"stabilization-e0\",\n  \"comment\": \"E0 executed live-base/source audit across the same 442 frozen identities in two stable passes: 441 open, 1 merged; 144 independent base refs, all available. 179 open PR reported bases differ from their live tips (field distinction, not 179 newly changed branches). All PR base-ref targets match independent live refs. 301 native proposed merges match current B/H; 5 have old base parents, independently reproduced through Git commit reads; 135 are CONFLICTING with no proposed merge. Every audit tested-candidate field stays null and no merge qualification is inferred. Five open reported head/base pairs still differ from the original freeze; only Clio5 head changed since the prior global refresh. Source register/overlay: docs/stabilization/e0-base-topology.csv/json/md. Native snapshot bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e. Existing E0/Codex owns the explicit ref/candidate/conflict holds on existing PR/work anchors. No task, merge, source rewrite, pin update or agent restart; all prior bytes retained. CMS/Cephalon stay paused; M0-M7 unqualified.\"\n}\n",
+        "stderr": "",
+        "text": "E0 executed live-base/source audit across the same 442 frozen identities in two stable passes: 441 open, 1 merged; 144 independent base refs, all available. 179 open PR reported bases differ from their live tips (field distinction, not 179 newly changed branches). All PR base-ref targets match independent live refs. 301 native proposed merges match current B/H; 5 have old base parents, independently reproduced through Git commit reads; 135 are CONFLICTING with no proposed merge. Every audit tested-candidate field stays null and no merge qualification is inferred. Five open reported head/base pairs still differ from the original freeze; only Clio5 head changed since the prior global refresh. Source register/overlay: docs/stabilization/e0-base-topology.csv/json/md. Native snapshot bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e. Existing E0/Codex owns the explicit ref/candidate/conflict holds on existing PR/work anchors. No task, merge, source rewrite, pin update or agent restart; all prior bytes retained. CMS/Cephalon stay paused; M0-M7 unqualified."
+      },
+      "readback": {
+        "uuid": "stabilization-e0",
+        "frontmatter": {
+          "category": "kanban",
+          "labels": "stabilization, coordination, e0",
+          "dependency": [],
+          "parent": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+          "type": "epic",
+          "write-id": "1792547491501-0.6w0qflhpa0sw7krwg52",
+          "title": "Stabilization E0 — Reconstruct the authoritative backlog",
+          "priority": "P1",
+          "status": "breakdown",
+          "uuid": "stabilization-e0",
+          "assignee": "codex",
+          "created_at": "2026-10-20T07:25:52.971Z"
+        },
+        "sections": [
+          {
+            "type": "body",
+            "content": "# E0 — Reconstruct the authoritative backlog\n\n## Context\n\nWe need to know exactly which work exists, how branches overlap, and which source is authoritative before merging anything.\n\nStabilization coordination only. Preserve child ownership and existing story identities.\n\n## Scope\n\n- E0.1: Freeze the PR census: Capture all upstream and personal PRs with immutable head SHAs, reviews, checks and base branches.\n- E0.2: Identify unique implementations: Distinguish stacked branches, duplicate source, old snapshots and changes that haven't reached upstream.\n- E0.3: Reconcile Rheos ownership: Connect existing PRs, UUIDs, cards, epics and dependencies without creating duplicate tasks.\n- E0.4: Preserve historical work: Secure unique code, evidence, Cephalon designs and unpublished fixes.\n- E0.5: Establish campaign rules: Allow only necessary repairs during stabilization, with explicit ownership and history preservation.\n\nThe slot-by-slot exit proofs and existing-task candidates are in [the portfolio](../../stabilization/portfolio.md#e0--reconstruct-the-authoritative-backlog).\n\n## Acceptance\n\nEvery PR has an owner, intended disposition and verified dependency relationship. The census is complete, not capped by a GitHub search-result limit.\n\n- Resolve every slot to existing canonical work or an explicit owned gap before creating execution stories.\n- Bind qualification evidence to exact source revisions and preserve prior attempts.\n- Registration and board status do not qualify a milestone.\n\n## Dependencies\n\nNone; establishes the frozen cohort.\n\n## Evidence\n\n[Portfolio tracker](../../stabilization/tracker.md); [source-backed work graph](../../stabilization/work-graph.json).\n\n## Definition of done\n\nEvery PR has an owner, intended disposition and verified dependency relationship. The census is complete, not capped by a GitHub search-result limit."
+          },
+          {
+            "type": "comment",
+            "content": "E0 execution begins: enumerate direct source upstreams, both organization repository inventories and all riatzukiza repositories through final API pages; verify actual fork networks including renamed forks; capture exact PR head/base and complete review/check/thread pages. Reconcile against existing current-source Rheos UUIDs and dependency declarations without creating execution-story copies. Separate observed associations from accepted prerequisites and keep missing ownership/disposition evidence explicit.\n\nCensus frozen: 442 open PRs across 815 repositories (663 authenticated personal + 48 open-hax + 104 octave-commons; eight external authored PRs added). Complete list pagination and final source/membership checks pass with no drift. Native reviews/comments/checks/threads retained; two 3000-file caps repaired by complete Git-tree deltas. docs/stabilization/e0-census.md, e0-pr-census.csv, e0-work-graph.json and e0-unresolved.json bind existing work. 3821 card observations, 192 PR/card associations, 183 PR relationship observations, zero new execution tasks. 250 PRs lack explicit card matches; 441 lack native assignees; 11 distinct malformed/missing relationship tokens remain. E0 stays breakdown and M0 unqualified. Preserve original card UUIDs and histories, one owner per dependent stack, repair-only changes, exact-source evidence reuse, and unique source before any closure.\n\nTaking explicit E0 reconciliation ownership under the current user instruction. Assignee codex owns census identity matching, dependency adjudication and blocker follow-through for this existing card. Native PR assignees, declared child owners and author identities remain historical evidence; this is not an assignment of merge authority or a claim of accepted implementation coverage. Use the frozen 442-PR census, create no tasks, and keep M0 unqualified while source custody or semantic prerequisites remain unresolved.\n\nE0 gap decisions recorded in docs/stabilization/e0-resolution.md and e0-resolution.json; all 442 frozen PR/head rows are indexed in e0-owner-work-index.csv. Codex owns reconciliation and every residual hold on this existing E0; execution/merge authority remains unassigned by this action. Retain 192 original PR/card association rows; 34 formerly unmatched PRs now bind explicit existing work. Frozen added-file patches recover 23 exact authored card blobs across 12 PRs, with 28 existing relationships. The other 216 rows retain native PR anchors (84 constellation candidates); this does not prove implementation coverage or require duplicate cards. All 133 supplemental scope rows stay visible without importing execution work.\n\nAll 11 former missing relationship references are adjudicated: 7 legacy-ID references located, 1 existing UUID filename alias resolved, 1 malformed Knoxx target quarantined with an exact-blob YAML repair proposal, and 2 empty references rejected as no edge. Preserve child identities and admission histories. Classified all 1170 frozen card relationships and 183 PR ancestry observations; parent/epic containment and branch ancestry do not confer execution order. Retain 72 literal Knoxx supplier declarations and 2 mixed evidence cycle components against existing task/index issues, including reconciliation #324 and qualification #325. No new tasks, child mutations, merges or closures.\n\nM0 remains UNQUALIFIED and E0 stays breakdown. Remaining holds owned here: accepted stack execution/merge owners and terminal intent; semantic coverage and source preservation; legacy/child custody and malformed-source repair; Knoxx integration/recomposition; and 4 captured-text hash mismatches (2 unique blobs) excluded from new identity authority decisions. Frozen source/census artifacts remain unchanged. The repair proposal is reviewable and tested only in scratch; it is not applied to a child.\n\nE0 execution checkpoint: fresh exact frozen-cohort reads confirm 442 identities: 441 open, 1 native merge, 0 closed-unmerged. Five open PRs changed head/base; merged Session Mycology #1 also changed head (six total, same counting as the prior report). Merge ddb63291cf856ab59ef14f02b8346e42f6ef651b retains frozen source 4cba181e9a51da3c2cfaf871b3681a74d709058a on its ancestry; this is not semantic/merge-gate qualification. Current paginated reviews/comments/checks/statuses/files/thread metadata collected for six changed sources and Knoxx331; Axxium10 failed gate and 8 unresolved changed-open threads stay explicit.\n\nExact-ref base64 recovery now reproduces all 4 quarantined source observations / 2 unique Git blobs; exact bytes and bindings retained. That exact-source-recovery hold is satisfied only for those observations. Original mismatching captures stay unchanged; child status/behavior/admission remains unqualified.\n\nNative source confirms Knoxx331 already merged at 0fdaae13f421ff9623b1bb6fe1afb7694ab68ca1 despite stale active-target prose in issue323. Complete published trees verify all32 mailbox-delta paths identical in333/335 and different from331, while375/376 retain331 bytes at those paths. Retargeting335 alone cannot implement the documented identity-before-mailbox split. Existing324/325/372/377 keep their work; no new task, child edit, closure or accepted merge schedule.\n\nEvidence: docs/stabilization/e0-refresh.md, e0-refresh.json, e0-refresh.csv; native snapshot .ημ/stabilization/snapshots/6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6.json.gz (sha256 6e886224254bf9ca7d36c6f0ffc058428250e91fdc2acd0290a0cfecfe5dabe6). Original census/ledgers and all23 consumer pins retained. Canonical pr-flow status attempt failed on installed gh --slurp support; no gate pass claimed. Root validate,36tests/286assertions, lint0/0 and Rheos drift pass. Codex retains reconciliation ownership on existing E0; E0 breakdown, E1-E7 incoming, M0-M7 UNQUALIFIED. CMS/Cephalon paused; no agent work dispatched. Next source proof: published335 32-path restoration and qualified intermediate source before any active order.\n\nExecution ownership under the active user stabilization goal: Codex owns the bounded current-head repair/review loop for existing native Clio PR riatzukiza/clio#5 (e04da66c3aefe9f3b124e275d92a1771feb04bd8) as a shared-ledger prerequisite linked through E0/E2. This reuses its existing PR work record and creates no duplicate story. Native gate now runs with isolated checksum-verified gh2.102.1; it remains blocked on three findings and current-head review convergence. Isolated checkout /tmp/foresight-clio-segments-e04da66 preserves the pinned child checkout. Reproduced unsupported-platform read-only force and unowned-temp lost-claim defects before repair; descriptor-bound directory ABA finding remains an independent open obligation. Source changes will use red/green commits, exact-head source checks and ordinary forward-only publication. CMS/Cephalon remain paused; no child pin/deployment or milestone advance.\n\nShared-ledger execution checkpoint: corrected two verified findings on existing riatzukiza/clio#5 using red commit d83296ff2250a8d2faa7f9441681bdd6befeb993 and published green head38c0b8c9e45160ae4fecd7d87bf6c700f62cc631. Unsupported-platform read-only replay skips preflight only; actual force errors remain visible. An unowned/unlinked temporary keeps claim-lost; acknowledged results retain link/path guards. Native fixed replies and resolved readbacks: discussion_r4331734104 and4331733656. Ordinary fast-forward preserves original source; no new work item or PR.\n\nBB29tests/182assertions, JVM119/530, NBB94/510 and compiled Shadow94/510 pass, lint/compiler warnings0. Hosted Clio CI39520773474 succeeds at exact green head. Isolated checksum-verified gh2.102.1 and CI-pinned BB1.13.219 remove local compatibility blockers; failed initial attempts retained. Native macOS/Windows execution is not claimed.\n\nClio5 remains OPEN and merge-unqualified: directory ABA thread PRRT_kwDOU4VfQc6ujoR4 is still open; no current-head approval/convergence. One CodeRabbit request posted; actual cooldown ends2026-10-21T00:36:46Z. Codex account quota resetUNKNOWN. Existing Clio3 proposes MiMo route absent from current5/main; historic October9 missing-secret failure predates now-visible secret-name setup, not proof of fresh operation. No secret values read or privileged rerun.\n\nEvidence docs/stabilization/e0-execution.md/json and native snapshot .ημ/stabilization/snapshots/91d111935d0839945eb5da25305dcb5f7f72fd05227d780cb7be1f7a9a3455d2.json.gz. Existing E0 retains coordination and Codex owns bounded Clio5 execution. E0breakdown, E1-E7incoming, M0-M7unqualified. All23 root gitlinks/child checkouts retained; no merge, closure, deployment or CMS/Cephalon restart. Next source action: parent-descriptor ABA regression and native-adapter repair on existing Clio5; retain complete-input review and current-head CI obligations.\n\nPublished versioned stabilization checkpoint in existing program scope: new open-hax/foresight#142 https://github.com/open-hax/foresight/pull/142, initial commit6b630662f279149e61e9411a0021915663b19c73 against cffc34448aa6807fc51135d7f90f0f9fe6ba7efe. Track this necessary E0 publication PR separately from frozen442; no denominator rewrite. Native readback: OPEN, ready, MERGEABLE, auto-merge absent. Independent review/current-head checks remain required. The 50 explicitly staged owned files preserve registration, append-only receipts, immutable census/resolution/refresh/source-custody proof and actual Clio5 corrective execution. Exact original CSV CRLF bytes retained with scoped attributes. Private local-census evidence and unrelated .claude work excluded. No child pointer, merge, closure, deployment, CMS/Cephalon restart or milestone pass. Source/publication attempt .ημ/stabilization/snapshots/04c53eac43df9947d1d8c7d200b1d3e9a013e7f39bd2ef16c3eca99093e0da2b.json.\n\nE0 execution checkpoint: existing Clio #5 is now at 5a7a04c6ced7b15be940e16dc772c95b0525d55f through ordinary forward RED/GREEN commits. Parent-directory ABA is bound to a retained descriptor across enumeration, entry durability and publication. Follow-up fixes retain acquired entry descriptors and require child traversal during the Node binding capability probe. RED probes reproduced 6 JVM/NBB ABA failures, 6 descriptor-retention failures and 3 stat-only-proxy failures. Full hosted CI 39526548866 passes BB 29/182, JVM 126/556, NBB 101/534 and compiled Shadow 101/534 with zero failures/errors/compiler warnings; lint is clean. Actual executed merge candidate efe27b0fb69b0439ed572f6b6a522f4e39db2a12 has the exact head tree. Native readback: 63 threads, zero unresolved; two body findings have itemized settlements. Fresh exact-head review remains pending; Codex quota reset is unknown and MiMo route candidate Clio #3 remains unqualified. Reports: docs/stabilization/e0-directory-binding.md/json; native snapshot 5c0a7de45683e73e14052ba1f9ad8079b7ef25f7908339b66b829040dbbde938. E5 custody correction retains the existing proposed numeric contract and an explicit adoption hold, with real existing-E5 comment/readback. No tolerance/design adoption, new execution task, merge, pin update or agent restart. Previous 442 frozen / 441 open / 1 merge and 5 changed open head/base observations retain their original window; this is a targeted execution overlay. E0 stays breakdown; M0-M7 unqualified; CMS/Cephalon paused.\n\nPublished E0 directory-binding checkpoint b75b487e6877665e5b61ad0f6d321d7eb1b05ef2 to existing Foresight #142. The first root push refused inherited recursive submodule publication at detached Axxium; no gitlink changed, and a per-command root-only push succeeded with native head readback. No child checkout or package policy was altered. Exact-commit receipt-history verification passes (227 receipts, 21 append-only additions versus base cffc3444). Replay-record native thread has a Fixed reply and resolved readback; current root CI run39527188005 is pending. Canonical review request sends nothing during the known CodeRabbit cooldown, retry boundary2026-10-21T01:38:10Z. These are preserved holds, not approvals. Clio head5a7a04c remains open with exact-tree hosted CI success; fresh independent review is still required. All23 pins and unrelated work are preserved; CMS/Cephalon stay paused, M0-M7 unqualified.\n\nE0 executed live-base/source audit across the same 442 frozen identities in two stable passes: 441 open, 1 merged; 144 independent base refs, all available. 179 open PR reported bases differ from their live tips (field distinction, not 179 newly changed branches). All PR base-ref targets match independent live refs. 301 native proposed merges match current B/H; 5 have old base parents, independently reproduced through Git commit reads; 135 are CONFLICTING with no proposed merge. Every audit tested-candidate field stays null and no merge qualification is inferred. Five open reported head/base pairs still differ from the original freeze; only Clio5 head changed since the prior global refresh. Source register/overlay: docs/stabilization/e0-base-topology.csv/json/md. Native snapshot bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e. Existing E0/Codex owns the explicit ref/candidate/conflict holds on existing PR/work anchors. No task, merge, source rewrite, pin update or agent restart; all prior bytes retained. CMS/Cephalon stay paused; M0-M7 unqualified."
+          }
+        ],
+        "source-path": "/home/err/spaces/foresight/docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md"
+      }
+    },
+    "stabilization-e1": {
+      "operation": {
+        "exit_code": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"uuid\": \"stabilization-e1\",\n  \"comment\": \"E0 reviewer-route source reconciliation is retained in docs/stabilization/e0-review-route.md/json, native snapshot bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e. Existing Clio3 remains an unqualified credential-bearing caller. Current eta-mu main7112 has the accepted verifier but coupled inference/App custody; open PR328 has real isolated publisher/controller code, still divergent and unadopted with actual protected Sol behavior/settlement holds. Personal eta-mu22 has native planning PASS (exact CodeRabbit+MiMo,9passing channels,4resolved threads) and actual executed B/H/M/tree proof, but raw successful jobs retain real carrier warnings. No merge/readiness/runtime grant is inferred. Existing producer cf32641a-b336-407e-b68b-c75ec7d20dbb (2) -> publisher ed4e2a2a-6055-4d53-9cea-f3971c707551 (5) -> hosted proof164c2de7-7495-4738-94e1-a81167edefb0 (3 proposed) already own the work. Preserve main69accepted commits/current verifier and both exact four-ledger suffixes; reconcile PR328 controller CheckRun vs PR22 proposed publication status before adoption. Historical October9 same-writer acceptance is retained, not used to override current signer-isolation policy. No privileged rerun, secret value read, duplicate task or paused-agent restart. E1 stays incoming/M1 unqualified.\"\n}\n",
+        "stderr": "",
+        "text": "E0 reviewer-route source reconciliation is retained in docs/stabilization/e0-review-route.md/json, native snapshot bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e. Existing Clio3 remains an unqualified credential-bearing caller. Current eta-mu main7112 has the accepted verifier but coupled inference/App custody; open PR328 has real isolated publisher/controller code, still divergent and unadopted with actual protected Sol behavior/settlement holds. Personal eta-mu22 has native planning PASS (exact CodeRabbit+MiMo,9passing channels,4resolved threads) and actual executed B/H/M/tree proof, but raw successful jobs retain real carrier warnings. No merge/readiness/runtime grant is inferred. Existing producer cf32641a-b336-407e-b68b-c75ec7d20dbb (2) -> publisher ed4e2a2a-6055-4d53-9cea-f3971c707551 (5) -> hosted proof164c2de7-7495-4738-94e1-a81167edefb0 (3 proposed) already own the work. Preserve main69accepted commits/current verifier and both exact four-ledger suffixes; reconcile PR328 controller CheckRun vs PR22 proposed publication status before adoption. Historical October9 same-writer acceptance is retained, not used to override current signer-isolation policy. No privileged rerun, secret value read, duplicate task or paused-agent restart. E1 stays incoming/M1 unqualified."
+      },
+      "readback": {
+        "uuid": "stabilization-e1",
+        "frontmatter": {
+          "category": "kanban",
+          "labels": "stabilization, coordination, e1",
+          "dependency": [
+            "stabilization-e0"
+          ],
+          "parent": "760f7f1e-a086-4e0a-82a5-71d2a761073d",
+          "type": "epic",
+          "write-id": "1792547492183-0.j0s2w7vmollb7zr0jbh",
+          "title": "Stabilization E1 — Qualify the review and merge pipeline",
+          "priority": "P1",
+          "status": "incoming",
+          "uuid": "stabilization-e1",
+          "created_at": "2026-10-20T07:26:11.778Z"
+        },
+        "sections": [
+          {
+            "type": "body",
+            "content": "# E1 — Qualify the review and merge pipeline\n\n## Context\n\nWe cannot close hundreds of PRs reliably if the review infrastructure itself remains inconsistent.\n\nStabilization coordination only. Preserve child ownership and existing story identities.\n\n## Scope\n\n- E1.1: Qualify Muse: Resolve complete-input review and evidence-directory handling.\n- E1.2: Qualify Eta Mu and Proxx: Establish source-bound reviews, independent reviewer identity, complete verdicts and failure recovery.\n- E1.3: Qualify fork promotions: Ensure accepted personal-fork work reaches the appropriate organization without dropping newer history.\n- E1.4: Resolve outstanding findings: Test fixes, rerun current-head reviews, and settle actual review threads.\n- E1.5: Add merge-drift verification: Recheck affected consumers after each shared dependency is accepted.\n\nThe slot-by-slot exit proofs and existing-task candidates are in [the portfolio](../../stabilization/portfolio.md#e1--qualify-the-review-and-merge-pipeline).\n\n## Acceptance\n\nWe can demonstrate at least one complete fork → reviewed upstream PR → protected merge → verified consumer update, with no approval or evidence incorrectly transferred between revisions.\n\n- Resolve every slot to existing canonical work or an explicit owned gap before creating execution stories.\n- Bind qualification evidence to exact source revisions and preserve prior attempts.\n- Registration and board status do not qualify a milestone.\n\n## Dependencies\n\n`stabilization-e0`\n\n## Evidence\n\n[Portfolio tracker](../../stabilization/tracker.md); [source-backed work graph](../../stabilization/work-graph.json).\n\n## Definition of done\n\nWe can demonstrate at least one complete fork → reviewed upstream PR → protected merge → verified consumer update, with no approval or evidence incorrectly transferred between revisions."
+          },
+          {
+            "type": "comment",
+            "content": "E0 reviewer-route source reconciliation is retained in docs/stabilization/e0-review-route.md/json, native snapshot bc949fd90dcd05c712060938dae7a6e695c084003cc3554f3fbea65f46bd339e. Existing Clio3 remains an unqualified credential-bearing caller. Current eta-mu main7112 has the accepted verifier but coupled inference/App custody; open PR328 has real isolated publisher/controller code, still divergent and unadopted with actual protected Sol behavior/settlement holds. Personal eta-mu22 has native planning PASS (exact CodeRabbit+MiMo,9passing channels,4resolved threads) and actual executed B/H/M/tree proof, but raw successful jobs retain real carrier warnings. No merge/readiness/runtime grant is inferred. Existing producer cf32641a-b336-407e-b68b-c75ec7d20dbb (2) -> publisher ed4e2a2a-6055-4d53-9cea-f3971c707551 (5) -> hosted proof164c2de7-7495-4738-94e1-a81167edefb0 (3 proposed) already own the work. Preserve main69accepted commits/current verifier and both exact four-ledger suffixes; reconcile PR328 controller CheckRun vs PR22 proposed publication status before adoption. Historical October9 same-writer acceptance is retained, not used to override current signer-isolation policy. No privileged rerun, secret value read, duplicate task or paused-agent restart. E1 stays incoming/M1 unqualified."
+          }
+        ],
+        "source-path": "/home/err/spaces/foresight/docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md"
+      }
+    }
+  },
+  "root_validation": [
+    {
+      "command": [
+        "nbb",
+        "scripts/project.clj",
+        "validate"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS foresight 25 workspace sources 23 submodules 39 invariants 1 lineage sources 6 provisional claims\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "nbb",
+        "-cp",
+        "src:scripts",
+        "scripts/evidence.clj",
+        "validate"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS quality gate catalog\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "clj-kondo",
+        "--lint",
+        "scripts",
+        "test"
+      ],
+      "exit_code": 0,
+      "stdout": "linting took 317ms, errors: 0, warnings: 0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/tmp/foresight-stabilization-tools-20261020/node_modules/.bin/rheos",
+        "drift"
+      ],
+      "exit_code": 0,
+      "stdout": "No drift detected.\n",
+      "stderr": ""
+    }
+  ],
+  "integrity_result": "PASS442 native rows/identities and CSV rows;58query batches;144live refs;all23pins/all85cardstates;prior ledger/unrelated byte prefixes;prior E0 sections/frontmatter retained except canonical write-id;both Rheos readbacks;native/survey hashes;owned links/whitespace. Earlier overbroad card-byte-prefix refusal retained; canonical metadata mutation verified.\n",
+  "failed_preservation_assertion": "First integrity assertion refused the E0 card byte-prefix comparison. Canonical Rheos comment intentionally changed write-id and appended text before the closing delimiter. This was an overbroad preservation assertion, not evidence of lost source; verify all prior frontmatter except the recorded mutation token and every existing section prefix through actual old/new readbacks. Existing ledger/receipt prefixes and unrelated bytes still require exact equality.\n",
+  "pre_existing_ledger_prefixes": {
+    ".ημ/receipts.edn": {
+      "bytes": 352079,
+      "sha256": "0f58a23d26bde57d2a47cc93a2d50749bb28357f0358ce297560b0658dd40736"
+    },
+    ".ημ/kanban-events/ledger.edn": {
+      "bytes": 188514,
+      "sha256": "2fd05c649fd9d1759a70c41ea2d6a68110ca6cd5ab99f7dd379829ac1c8a598f"
+    },
+    ".ημ/session-mycology/ledger.md": {
+      "bytes": 33454,
+      "sha256": "2506658df1d956e8aa832c01f5bc0d1beb7fdc892eab3eeebe191ac86fa1f051"
+    }
+  },
+  "decision": {
+    "status": "unqualified",
+    "authorized_reviewer": null,
+    "coordination_owner": "codex",
+    "m0_m7": "unqualified",
+    "e0": "breakdown",
+    "e1_e7": "incoming",
+    "source_execution_progress": "all442live tuples/ref/proposed-parent distinctions audited; existing route ownership and native execution/current-policy gaps recovered"
+  },
+  "cms_cephalon": "agents paused, no runtime or restarted task",
+  "created_execution_tasks": 0,
+  "new_prs": [],
+  "source_mutations": 0
+}

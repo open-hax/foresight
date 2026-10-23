@@ -1,0 +1,140 @@
+{
+  "evidence_kind": "actual committed Git blob and native branch observations; selection remains a planning proposal",
+  "observed_at": "2026-10-07T16:45:10.502296+00:00",
+  "proposed_owner_repository": "octave-commons/eros-eris-field",
+  "proposed_library": "@workspace/eros-eris-field",
+  "native_branch_archive": {
+    "path": ".ημ/review-evidence/cephalon-character/native-eros-eris-field-main-20261007.json",
+    "bytes": 3803,
+    "sha256": "d59e1814dc348367279c0f6b6eeff965f23c9cb4355673150d321f00f597bde6"
+  },
+  "source_blobs": [
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/eros-eris-field",
+      "revision": "3af779f3ec306834710719ccb46f49370343eed9",
+      "path": "README.md",
+      "bytes": 944,
+      "sha256": "6bba187882c4d01e75f56511aeddeca3b2b6790ac065f19f0305ff8f289f6ffa",
+      "git_tree_entry": "100644 blob 0292601a75c81f5f064860c6ab94fd7183dc0c9d\tREADME.md"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/eros-eris-field",
+      "revision": "3af779f3ec306834710719ccb46f49370343eed9",
+      "path": "package.json",
+      "bytes": 522,
+      "sha256": "9d78b7f650f9d0a04b613268ddf50e773381b616960caac2f94773a13bf5e4b2",
+      "git_tree_entry": "100644 blob 9ce1d3557ab076d3466403bb20edb3305dea93de\tpackage.json"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/eros-eris-field",
+      "revision": "3af779f3ec306834710719ccb46f49370343eed9",
+      "path": "src/types.ts",
+      "bytes": 2325,
+      "sha256": "71415c293be511b98e289de57ee0b73c16d8114adbdc6017c8879e1a848b1c22",
+      "git_tree_entry": "100644 blob 8a394f3568bb10082c1c3dada9598f805077933e\tsrc/types.ts"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/eros-eris-field",
+      "revision": "3af779f3ec306834710719ccb46f49370343eed9",
+      "path": "src/sim.ts",
+      "bytes": 8257,
+      "sha256": "f5027154801f060cca515e23c5dd5a9928485d5d6f2506c1af83e73326df0a2f",
+      "git_tree_entry": "100644 blob 15646b2f24f61a3dd256cded8c2f6b58eefbfeff\tsrc/sim.ts"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/eros-eris-field",
+      "revision": "3af779f3ec306834710719ccb46f49370343eed9",
+      "path": "src/quadtree.ts",
+      "bytes": 4530,
+      "sha256": "fcfefce4f97793825014b0dd0a274ddd990705d49cabdd0dde76acb5e1000d5c",
+      "git_tree_entry": "100644 blob 10b067ae045cd8157bd47a2f28b34f301cb53217\tsrc/quadtree.ts"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/eros-eris-field",
+      "revision": "3af779f3ec306834710719ccb46f49370343eed9",
+      "path": "src/graph-ant.ts",
+      "bytes": 5589,
+      "sha256": "b92efd839a571eba71bcc885b50918e41a0662fdecbc819187af0a942a59f9db",
+      "git_tree_entry": "100644 blob ea1b0c9c3b73c5214e60da5f0b2d517894dc8a4f\tsrc/graph-ant.ts"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/eros-eris-field",
+      "revision": "3af779f3ec306834710719ccb46f49370343eed9",
+      "path": "src/semantic.ts",
+      "bytes": 12786,
+      "sha256": "909ff0233a35b7fd65385939f16b0b3c437922567b3d0fdf2a93922e7b9e111b",
+      "git_tree_entry": "100644 blob f104643f2ce1bcfb9390382a7f2540a6deee41f4\tsrc/semantic.ts"
+    },
+    {
+      "repository_path": "/home/err/spaces/foresight/openplanner",
+      "revision": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08",
+      "path": "README.md",
+      "bytes": 6966,
+      "sha256": "8a6275e5f1be06f40322102240335f73e26fc264b3c2a0d732b029882cf40719",
+      "git_tree_entry": "100644 blob fa87512bc051ad69a29865393909d17dd84f288a\tREADME.md"
+    },
+    {
+      "repository_path": "/home/err/spaces/foresight/openplanner",
+      "revision": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08",
+      "path": "packages/graph/eros-eris-field/package.json",
+      "bytes": 556,
+      "sha256": "ddb0335de16171a751ac5a65597c6ad27872b7c5cfdfd857dc28e982684ca529",
+      "git_tree_entry": "100644 blob 2d22f7d0c208c8d06cb3970b0a9fc2e2a5892273\tpackages/graph/eros-eris-field/package.json"
+    },
+    {
+      "repository_path": "/home/err/spaces/foresight/openplanner",
+      "revision": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08",
+      "path": "packages/graph/eros-eris-field/src/types.ts",
+      "bytes": 2496,
+      "sha256": "7ca4f386e534a926994ddd926a9044fbf111e291d1796975d93c987a579fe313",
+      "git_tree_entry": "100644 blob 6244639dd7a8988d0efd7ec2cf64af112670a4d3\tpackages/graph/eros-eris-field/src/types.ts"
+    },
+    {
+      "repository_path": "/home/err/spaces/foresight/openplanner",
+      "revision": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08",
+      "path": "packages/graph/eros-eris-field/src/sim.ts",
+      "bytes": 9105,
+      "sha256": "c69958002dba0207b17e5e42adc2e044b396dd69f03b5b104b693162234d4340",
+      "git_tree_entry": "100644 blob 7fe405a5ce2289d184de3d3b3c464c9d17778da8\tpackages/graph/eros-eris-field/src/sim.ts"
+    },
+    {
+      "repository_path": "/home/err/spaces/foresight/openplanner",
+      "revision": "07085d6557b75834ce6f50e6c54b8ca47e1c7c08",
+      "path": "src/routes/v1/graph.ts",
+      "bytes": 202632,
+      "sha256": "217a99b3b89d8a952b1d988c8054df7af34e38a3c7b9da777f668e62ad03d2e2",
+      "git_tree_entry": "100644 blob 2a8b1cb5bee48a5fb05840d6e081fabe49d116db\tsrc/routes/v1/graph.ts"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/fork_tales",
+      "revision": "f4c43d7b9c832a54bc5d224cb4d5d2497c04423b",
+      "path": "part64/code/world_web/nooi.py",
+      "bytes": 8419,
+      "sha256": "204d86943660ceb4c81415b62776e37b30534d0ff2268ff49c43ab44bc236c1c",
+      "git_tree_entry": "100644 blob 7f48862a52ae22436ed2e01caa6749a777e60c88\tpart64/code/world_web/nooi.py"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/fork_tales",
+      "revision": "f4c43d7b9c832a54bc5d224cb4d5d2497c04423b",
+      "path": "part64/code/world_web/daimoi_probabilistic.py",
+      "bytes": 219160,
+      "sha256": "be5da8022cfa15498c46db3b4fa95f1193f7e7d4bf7ec80b84c83201061009b2",
+      "git_tree_entry": "100644 blob b1941e5218da0832d05b4b125539dfbcbc03e6b8\tpart64/code/world_web/daimoi_probabilistic.py"
+    },
+    {
+      "repository_path": "/home/err/devel/orgs/octave-commons/fork_tales",
+      "revision": "f4c43d7b9c832a54bc5d224cb4d5d2497c04423b",
+      "path": "docs/notes/system_design/2026-02-20-design-hole-responses-field-and-collisions.md",
+      "bytes": 6834,
+      "sha256": "c4ef760eb2b1cd050a95391a0b36675c2971e351d17d3559dd97e962373185fc",
+      "git_tree_entry": "100644 blob 01ddf7d23d378051ec2c38a6dfa10a0f967a5f69\tdocs/notes/system_design/2026-02-20-design-hole-responses-field-and-collisions.md"
+    }
+  ],
+  "boundaries": [
+    "Standalone main freshly fetched3af; local365 checkout remains clean and unchanged. No standalone source/build/runtime mutation.",
+    "Personal fork read404; no fork existence, owner acknowledgement, source synchronization, hosted review surface or license established.",
+    "Selected OpenPlanner force/types/memory blobs unchanged versus local582; native070 lacks local582ROADMAP. Native source controls current claims.",
+    "Earlier actual isolated step/callback probes remain retained; no new solver, law tests, native readiness, physical recall or deployed conformance executed.",
+    "Initial rg included a nonexistent Fork Tales packages path and returned2; corrected exact donor source read, no verification credit from the failed search."
+  ]
+}

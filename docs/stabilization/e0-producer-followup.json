@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "kind": "e0-producer-followup-execution",
+  "observed_at": "2026-10-21T03:18:23.951606+00:00",
+  "census": {
+    "overlay": "docs/stabilization/e0-producer-followup-census.json",
+    "register": "docs/stabilization/e0-producer-followup-census.csv",
+    "native_evidence": {
+      "path": ".\u03b7\u03bc/stabilization/snapshots/0a3cf662ae2eb74dbd63512646fcc0af85c626e1e97d7655b33c23babd518c02.json.gz",
+      "sha256": "0a3cf662ae2eb74dbd63512646fcc0af85c626e1e97d7655b33c23babd518c02",
+      "bytes": 145494,
+      "uncompressed_sha256": "c2efe4a1b431445fd5e66851f41c03b457f53ec13daad9b2da9b137072416241",
+      "uncompressed_bytes": 2158867
+    },
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 441,
+        "MERGED": 1,
+        "CLOSED": 0
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 180,
+      "open_reported_base_differs_from_live_tip": 179,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 301,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 135
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 1,
+      "changed_open_head_or_reported_base_from_freeze": 5,
+      "changed_source_or_proposed_merge_since_prior_topology": 0
+    },
+    "window": [
+      "2026-10-21T03:00:51.498860+00:00",
+      "2026-10-21T03:01:15.814500+00:00"
+    ]
+  },
+  "producer": {
+    "repository": "open-hax/eta-mu",
+    "pr": 361,
+    "head": "3772f776b65598c76c91f2127df2788d8d0074ca",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "source_refs": {
+      "dcee272c": "dcee272c21474968467fe0a09c2bf9fc0479adf4",
+      "d8023409": "d80234094062fb02780b5c406160d1b1250167ad",
+      "11249932": "11249932650e3be158a31b370ffe66acb1cac93f",
+      "f9178d97": "f9178d978eedd9ace5991c1949142a7acb757871"
+    },
+    "evidence": {
+      "path": ".\u03b7\u03bc/review-evidence/anonymous-producer/0d1d3bcc9429a85f4bbce036a246544cf12e01c2092ce5da90dc42c45de71ff8.json.gz",
+      "sha256": "0d1d3bcc9429a85f4bbce036a246544cf12e01c2092ce5da90dc42c45de71ff8",
+      "bytes": 1660221,
+      "uncompressed_sha256": "3bd09144c55e424324cfa8e72e085d28938d66fd20ef6affd360746c5a2cd1ab",
+      "uncompressed_bytes": 7759370
+    },
+    "state": "testing",
+    "qualified": false,
+    "auto_merge": false,
+    "local_rheos": {
+      "tests": 212,
+      "assertions": 1219,
+      "failures": 0,
+      "errors": 0,
+      "kondo_warnings": 0,
+      "all_four_release_target_warnings": 0
+    },
+    "eta_cli": {
+      "provider_neutral_assertions": "194/587 plus workflows6/78 pass",
+      "original_host_carrier": "one existing no-provider fixture fails with inherited provider config; no real fetch",
+      "strict_zero_emitted_warning_qualified": false,
+      "warning": "preexisting intentional process-escalation console.warn retained"
+    },
+    "snapshot": {
+      "canonical_cards": 308,
+      "all_current_identities_and_states_preserved": true,
+      "old_snapshot_identities_preserved": 13,
+      "producer_points": "2",
+      "publisher_points": "5",
+      "dependency_preserved": true,
+      "exported_source_paths": "relative through actual existing CLI writer",
+      "live_paths_and_historical_events": "unchanged",
+      "undated_read_time_fallback_cards": 11,
+      "deterministic_replay_qualified": false
+    },
+    "original_hosted_bundle": {
+      "run": 39533211428,
+      "job": 119003740821,
+      "result": "success",
+      "head": "9c05ba9d7de528529d08b901a1f3a6635fb34f7d",
+      "executed_merge": "8f4256e8f48c3a5a951f73441de60ce45754b6f0",
+      "tree": "0c41aca0623bb5bd63983058b1abf0b78ca04cfc",
+      "registered_tests": 338,
+      "pass": 338,
+      "fail": 0,
+      "skip": 0,
+      "carrier_warnings": true,
+      "transfers_to_successor": false
+    },
+    "successor_native_ci": {
+      "proposed_merge": "bceea9702b149f50826db1d80cd03657d7426632",
+      "parents": [
+        "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "3772f776b65598c76c91f2127df2788d8d0074ca"
+      ],
+      "tree": "bb2ca99c5ed941a86996f1d41b5eb2ac76a39b14",
+      "early_failure_checkout_observed": true,
+      "rheos_job": 119016922471,
+      "sync_job": 119016922655,
+      "failure": "inherited unavailable-App private-dependency guard before tests",
+      "later_tests_lint_build": "skipped",
+      "bundle_coverage_main_gate": "pending at retained readback",
+      "ordinary_fork_producer": "skipped; terminal unsupported-event success is not inference",
+      "successful_tested_candidate": null
+    },
+    "review": {
+      "migration_thread": "handled/resolved with native readback",
+      "combined_path_snapshot_thread": "open; snapshot fixed, historical event portability remains existing owner",
+      "body_disposition_comment": 6307124249,
+      "exact_head_approval": false,
+      "coderabbit": "rate-limited",
+      "codex": "account quota UNKNOWN; not retried",
+      "canonical_gate": "BLOCKED",
+      "canonical_summary_items_reported_unanswered": 3,
+      "no_review_gate_parser_credit_claim": true
+    }
+  },
+  "remaining_holds": [
+    "Historical event portability/future writer and tolerance owner stays incoming; no rewrite or invented alias.",
+    "Existing full event-fold owner incoming; undated fallback remains unqualified.",
+    "Separate trusted publisher5 and hosted proof3 remain unqualified.",
+    "Services/Uxx old pins unchanged; all producer secrets must be removed before future qualified pin advancement.",
+    "Inherited Rheos deterministic CI credential carriers need an owned secretless repair.",
+    "Root required model gate fails; root merges frozen; concrete E5 oracle remains open."
+  ],
+  "native_evidence": {
+    "path": ".\u03b7\u03bc/stabilization/snapshots/f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1.json.gz",
+    "sha256": "f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1",
+    "bytes": 159883,
+    "uncompressed_sha256": "d72d9f2985952874f97a1e1182dce4b0270ea2d4dec94db98275779f7722817a",
+    "uncompressed_bytes": 1565619
+  },
+  "preservation": {
+    "all_23_root_gitlinks": "unchanged",
+    "child_worktree": "clean, pushed, removed",
+    "reviewed_plan22": "unchanged",
+    "frozen_denominator": 442,
+    "new_pr361": "separate remediation",
+    "unrelated_uncommitted_work": "preserved",
+    "CMS_Cephalon_agents": "paused",
+    "new_cards": 0,
+    "M0_M7": "unqualified",
+    "B1_B2_B3": "unassessed"
+  },
+  "audit_corrections": [
+    "One incorrectly expanded source ID was explicitly withdrawn in a native additive comment and corrected from Git before publication; original bytes retained.",
+    "Parser zero-point expectation, column key and test-owner filename assumptions were corrected against actual source; raw failures and incidents retained.",
+    "Drift CLI lists historical June-August events; no active child no-drift claim."
+  ]
+}

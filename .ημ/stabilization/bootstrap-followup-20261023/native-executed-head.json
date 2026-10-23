@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "/home/err/.cache/foresight-tools/bin/gh",
+    "api",
+    "repos/open-hax/eta-mu/git/commits/ed4c7cb508feed77eff5d03f3fad7d686ac84657"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"sha\":\"ed4c7cb508feed77eff5d03f3fad7d686ac84657\",\"node_id\":\"C_kwDORu27H9oAKGVkNGM3Y2I1MDhmZWVkNzdlZmY1ZDAzZjNmYWQ3ZDY4NmFjODQ2NTc\",\"url\":\"https://api.github.com/repos/open-hax/eta-mu/git/commits/ed4c7cb508feed77eff5d03f3fad7d686ac84657\",\"html_url\":\"https://github.com/open-hax/eta-mu/commit/ed4c7cb508feed77eff5d03f3fad7d686ac84657\",\"author\":{\"name\":\"Error\",\"email\":\"foamy125@gmail.com\",\"date\":\"2026-10-23T02:55:27Z\"},\"committer\":{\"name\":\"Error\",\"email\":\"foamy125@gmail.com\",\"date\":\"2026-10-23T02:55:27Z\"},\"tree\":{\"sha\":\"2e118693f46d89a9ced651d6417e38f63af721b0\",\"url\":\"https://api.github.com/repos/open-hax/eta-mu/git/trees/2e118693f46d89a9ced651d6417e38f63af721b0\"},\"message\":\"docs(review): bind bootstrap and uncertainty repair execution\",\"parents\":[{\"sha\":\"1b76c9e1e6d6122a844ef418b0b4439ac8ee9495\",\"url\":\"https://api.github.com/repos/open-hax/eta-mu/git/commits/1b76c9e1e6d6122a844ef418b0b4439ac8ee9495\",\"html_url\":\"https://github.com/open-hax/eta-mu/commit/1b76c9e1e6d6122a844ef418b0b4439ac8ee9495\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+  "stderr": ""
+}

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "nbb",
+    "-cp",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+    "status",
+    "open-hax/eta-mu",
+    "362"
+  ],
+  "exit_code": 0,
+  "stdout": "open-hax/eta-mu#362  head db99b16\n  actionability history: UNAVAILABLE; threads retain finding obligations\n  coderabbit: completed   checks: {:skip 4, :pending 9, :pass 8}\n  threads: 8 total, 0 unresolved; by severity {}; informational 0\n  exact-head approvals: #{}  observed commit binding: {}\n  completed code rounds: 0 / soft minimum 5  participants: #{\"coderabbit\" \"mimo\"}\n  codex quota-unavailable: native source 6308863857 request  scope account observed 2026-10-21T05:33:19Z retry-at-ms UNKNOWN\n  gate: BLOCKED\n    - No trusted exact-head APPROVED review meets the quorum\n    - 9 pending deterministic/required check(s)\n    - 20 unanswered review summary item(s)\n    - Review loop requires 5 completed rounds or unanimous current-head approval, with every finding settled\n",
+  "stderr": ""
+}

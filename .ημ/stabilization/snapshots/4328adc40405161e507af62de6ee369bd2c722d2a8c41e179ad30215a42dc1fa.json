@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "kind": "stabilization-producer-followup-execution-attempt",
+  "observed_at": "2026-10-21T03:22:16.371428+00:00",
+  "root_parent_commit": "656ccf5a6efcaedf16373ef96332784928c13c46",
+  "producer": {
+    "repository": "open-hax/eta-mu",
+    "pr": 361,
+    "head": "3772f776b65598c76c91f2127df2788d8d0074ca",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "source_refs": {
+      "dcee272c": "dcee272c21474968467fe0a09c2bf9fc0479adf4",
+      "d8023409": "d80234094062fb02780b5c406160d1b1250167ad",
+      "11249932": "11249932650e3be158a31b370ffe66acb1cac93f",
+      "f9178d97": "f9178d978eedd9ace5991c1949142a7acb757871"
+    },
+    "evidence": {
+      "path": ".ημ/review-evidence/anonymous-producer/0d1d3bcc9429a85f4bbce036a246544cf12e01c2092ce5da90dc42c45de71ff8.json.gz",
+      "sha256": "0d1d3bcc9429a85f4bbce036a246544cf12e01c2092ce5da90dc42c45de71ff8",
+      "bytes": 1660221,
+      "uncompressed_sha256": "3bd09144c55e424324cfa8e72e085d28938d66fd20ef6affd360746c5a2cd1ab",
+      "uncompressed_bytes": 7759370
+    },
+    "state": "testing",
+    "qualified": false,
+    "auto_merge": false,
+    "local_rheos": {
+      "tests": 212,
+      "assertions": 1219,
+      "failures": 0,
+      "errors": 0,
+      "kondo_warnings": 0,
+      "all_four_release_target_warnings": 0
+    },
+    "eta_cli": {
+      "provider_neutral_assertions": "194/587 plus workflows6/78 pass",
+      "original_host_carrier": "one existing no-provider fixture fails with inherited provider config; no real fetch",
+      "strict_zero_emitted_warning_qualified": false,
+      "warning": "preexisting intentional process-escalation console.warn retained"
+    },
+    "snapshot": {
+      "canonical_cards": 308,
+      "all_current_identities_and_states_preserved": true,
+      "old_snapshot_identities_preserved": 13,
+      "producer_points": "2",
+      "publisher_points": "5",
+      "dependency_preserved": true,
+      "exported_source_paths": "relative through actual existing CLI writer",
+      "live_paths_and_historical_events": "unchanged",
+      "undated_read_time_fallback_cards": 11,
+      "deterministic_replay_qualified": false
+    },
+    "original_hosted_bundle": {
+      "run": 39533211428,
+      "job": 119003740821,
+      "result": "success",
+      "head": "9c05ba9d7de528529d08b901a1f3a6635fb34f7d",
+      "executed_merge": "8f4256e8f48c3a5a951f73441de60ce45754b6f0",
+      "tree": "0c41aca0623bb5bd63983058b1abf0b78ca04cfc",
+      "registered_tests": 338,
+      "pass": 338,
+      "fail": 0,
+      "skip": 0,
+      "carrier_warnings": true,
+      "transfers_to_successor": false
+    },
+    "successor_native_ci": {
+      "proposed_merge": "bceea9702b149f50826db1d80cd03657d7426632",
+      "parents": [
+        "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "3772f776b65598c76c91f2127df2788d8d0074ca"
+      ],
+      "tree": "bb2ca99c5ed941a86996f1d41b5eb2ac76a39b14",
+      "early_failure_checkout_observed": true,
+      "rheos_job": 119016922471,
+      "sync_job": 119016922655,
+      "failure": "inherited unavailable-App private-dependency guard before tests",
+      "later_tests_lint_build": "skipped",
+      "bundle_coverage_main_gate": "pending at retained readback",
+      "ordinary_fork_producer": "skipped; terminal unsupported-event success is not inference",
+      "successful_tested_candidate": null
+    },
+    "review": {
+      "migration_thread": "handled/resolved with native readback",
+      "combined_path_snapshot_thread": "open; snapshot fixed, historical event portability remains existing owner",
+      "body_disposition_comment": 6307124249,
+      "exact_head_approval": false,
+      "coderabbit": "rate-limited",
+      "codex": "account quota UNKNOWN; not retried",
+      "canonical_gate": "BLOCKED",
+      "canonical_summary_items_reported_unanswered": 3,
+      "no_review_gate_parser_credit_claim": true
+    }
+  },
+  "native_evidence": {
+    "path": ".ημ/stabilization/snapshots/f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1.json.gz",
+    "sha256": "f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1",
+    "bytes": 159883,
+    "uncompressed_sha256": "d72d9f2985952874f97a1e1182dce4b0270ea2d4dec94db98275779f7722817a",
+    "uncompressed_bytes": 1565619
+  },
+  "frozen_census": {
+    "overlay": "docs/stabilization/e0-producer-followup-census.json",
+    "register": "docs/stabilization/e0-producer-followup-census.csv",
+    "native_evidence": {
+      "path": ".ημ/stabilization/snapshots/0a3cf662ae2eb74dbd63512646fcc0af85c626e1e97d7655b33c23babd518c02.json.gz",
+      "sha256": "0a3cf662ae2eb74dbd63512646fcc0af85c626e1e97d7655b33c23babd518c02",
+      "bytes": 145494,
+      "uncompressed_sha256": "c2efe4a1b431445fd5e66851f41c03b457f53ec13daad9b2da9b137072416241",
+      "uncompressed_bytes": 2158867
+    },
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 441,
+        "MERGED": 1,
+        "CLOSED": 0
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 180,
+      "open_reported_base_differs_from_live_tip": 179,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 301,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 135
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 1,
+      "changed_open_head_or_reported_base_from_freeze": 5,
+      "changed_source_or_proposed_merge_since_prior_topology": 0
+    },
+    "window": [
+      "2026-10-21T03:00:51.498860+00:00",
+      "2026-10-21T03:01:15.814500+00:00"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/stabilization/tracker.md",
+      "sha256": "8b6fa257d311870d5422c9f953e5e41fa24dde9e0ffcf1300497f418916a7875",
+      "bytes": 23721
+    },
+    {
+      "path": "docs/stabilization/work-graph.json",
+      "sha256": "ceb89b72e13a7190b945c593a099434b006cfc631875e21f1bf20ce78f0f2846",
+      "bytes": 53620
+    },
+    {
+      "path": "docs/stabilization/e0-producer-followup.md",
+      "sha256": "21517e4cbd4b5f32751d5391724cc44e311e274c63d5838bdc591bf63ac4ec51",
+      "bytes": 8211
+    },
+    {
+      "path": "docs/stabilization/e0-producer-followup.json",
+      "sha256": "b8fd3338ccf84ac217c6361944f927cedb993afbbeb900afaffc14fd6214f9df",
+      "bytes": 7115
+    },
+    {
+      "path": "docs/stabilization/e0-producer-followup-census.json",
+      "sha256": "47bc881468e0cdcf33e1ad54f73e92c2f8cb50c4c24737993cef2f99a546fdf3",
+      "bytes": 726445
+    },
+    {
+      "path": "docs/stabilization/e0-producer-followup-census.csv",
+      "sha256": "37e760eec3b3ddc4afe7b78385b9defb66f8405105ec25fff82b1da9f4ae813a",
+      "bytes": 182301
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md",
+      "sha256": "e743ecbd632430233f9c4c20121e9d4724218a335a5b329ee0a6925507c69214",
+      "bytes": 22771
+    },
+    {
+      "path": "docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md",
+      "sha256": "fb250564dd4a8b8a03d7362f21c40651693fc6b354c7d8c540fdc5eea42839b9",
+      "bytes": 6601
+    },
+    {
+      "path": ".ημ/receipts.edn",
+      "sha256": "bab06b75eb7a4fd521dc280a9342892e25d5b8f81a2730a84598ca4876994188",
+      "bytes": 368164
+    },
+    {
+      "path": ".ημ/kanban-events/ledger.edn",
+      "sha256": "421e17eca4119f9fcda1d71aa4be344c14110e1ec74342e60c067cb25f221d50",
+      "bytes": 207476
+    },
+    {
+      "path": ".ημ/session-mycology/ledger.md",
+      "sha256": "cc58e62bad086d6e1ac53a5f82248e5b0cc81a31d7b0dfaaffe47441ad578701",
+      "bytes": 36143
+    },
+    {
+      "path": ".ημ/stabilization/snapshots/f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1.json.gz",
+      "sha256": "f6a471896f082175052e3fe3e31a82b345449547631c8c967163d1cdd72fb4a1",
+      "bytes": 159883
+    },
+    {
+      "path": ".ημ/stabilization/snapshots/0a3cf662ae2eb74dbd63512646fcc0af85c626e1e97d7655b33c23babd518c02.json.gz",
+      "sha256": "0a3cf662ae2eb74dbd63512646fcc0af85c626e1e97d7655b33c23babd518c02",
+      "bytes": 145494
+    },
+    {
+      "path": ".ημ/stabilization/snapshots/8d6ee5d867c6796ca35673b47464f83d7acddeba8c4ca160e4834d53abf71ca7.json.gz",
+      "sha256": "8d6ee5d867c6796ca35673b47464f83d7acddeba8c4ca160e4834d53abf71ca7",
+      "bytes": 27607
+    }
+  ],
+  "verification": {
+    "result": "PASS",
+    "frozen_rows": 442,
+    "open": 441,
+    "merged": 1,
+    "changed_open_head_base_from_freeze": 5,
+    "native_sweep_stable": true,
+    "root_prefixes_preserved": {
+      ".ημ/receipts.edn": true,
+      ".ημ/kanban-events/ledger.edn": true,
+      ".ημ/session-mycology/ledger.md": true
+    },
+    "root_gitlinks_preserved": 23,
+    "E0_E1_metadata_and_prior_comment_content_preserved": true,
+    "verification_incident": "Initial custom body-prefix assertion included native terminal --- marker. Verified existing CLI appends comments before that closing marker; all prior content bytes stay exact and marker remains terminal. Corrected checker models actual serialization, not a source edit.",
+    "local_report_links": "PASS",
+    "source_blob_custody": "original recovered bytes unchanged",
+    "root_tests": "36 tests/286 assertions, all pass",
+    "root_project_validation": "25 sources/23 submodules/39 invariants pass",
+    "root_kondo": "0 errors/0 warnings",
+    "root_drift_readback": "No drift detected.",
+    "child_worktree": {
+      "clean_status": "",
+      "branch_remote_readback": "3772f776b65598c76c91f2127df2788d8d0074ca\trefs/heads/feat/anonymous-review-producer-20261021\n",
+      "head": "3772f776b65598c76c91f2127df2788d8d0074ca",
+      "remove_exit": 0,
+      "remove_stdout": "",
+      "remove_stderr": "",
+      "worktree_absent": true
+    },
+    "limits": [
+      "No merge/adoption/independent current-head review or product milestone qualification.",
+      "Prior pending native evidence included, unrelated .claude untracked work excluded."
+    ]
+  },
+  "verification_sources": {
+    "final_checker": "from pathlib import Path\nimport json,csv,hashlib,gzip,subprocess,re,yaml\nr=Path('/home/err/spaces/foresight');d=Path('/tmp/foresight-producer-followup-20261021')\nx=json.loads((r/'docs/stabilization/e0-producer-followup.json').read_text());a=json.loads((r/'docs/stabilization/e0-producer-followup-census.json').read_text());frozen=json.loads((r/'docs/stabilization/e0-work-graph.json').read_text())['pull_requests'];rows=list(csv.DictReader((r/'docs/stabilization/e0-producer-followup-census.csv').open()))\nassert len(rows)==len(a['pull_requests'])==len(frozen)==442\nassert {q['identity'] for q in rows}=={q['identity'] for q in a['pull_requests']}=={q['identity'] for q in frozen}\nassert a['summary']['observed_states']=={'OPEN':441,'MERGED':1,'CLOSED':0}\nassert all(p['tested_merge_candidate'] is None for p in a['pull_requests'])\nassert a['summary']['changed_open_head_or_reported_base_from_freeze']==5\nassert a['summary']['changed_source_or_proposed_merge_since_prior_topology']==0\nsnapshots=[a['native_evidence'],x['native_evidence']]\nfor s in snapshots:\n raw=(r/s['path']).read_bytes();assert len(raw)==s['bytes'] and hashlib.sha256(raw).hexdigest()==s['sha256'];un=gzip.decompress(raw);assert len(un)==s['uncompressed_bytes'] and hashlib.sha256(un).hexdigest()==s['uncompressed_sha256'];json.loads(un)\n# Pending prior native checkpoint remains content-addressed and unedited.\nold=r/'.ημ/stabilization/snapshots/8d6ee5d867c6796ca35673b47464f83d7acddeba8c4ca160e4834d53abf71ca7.json.gz';assert hashlib.sha256(old.read_bytes()).hexdigest()==old.name.split('.')[0]\nb=json.loads((d/'root-before.json').read_text());prefix={}\nfor path,info in b.items():\n if path=='root-gitlinks':continue\n raw=(r/path).read_bytes();assert hashlib.sha256(raw[:info['bytes']]).hexdigest()==info['sha256'];prefix[path]=True\ncurrent=[l for l in subprocess.check_output(['git','ls-tree','HEAD'],text=True).splitlines() if l.startswith('160000 ')]\nassert current==b['root-gitlinks'] and len(current)==23\nassert subprocess.check_output(['git','diff','--raw','HEAD','--',*[z.split('\\t')[1] for z in current]],text=True)==''\nassert subprocess.check_output(['git','diff','--name-only','--','.ημ/stabilization/recovered'],text=True)==''\nfor path in ['docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md','docs/agile/kanban/stabilization-e1-qualify-the-review-and-merge-pipeline-ation-e1.md']:\n old=subprocess.check_output(['git','show','HEAD:'+path],text=True);now=(r/path).read_text();oldparts=old.split('---',2);newparts=now.split('---',2);om=yaml.safe_load(oldparts[1]);nm=yaml.safe_load(newparts[1]);assert {k:v for k,v in om.items() if k!='write-id'}=={k:v for k,v in nm.items() if k!='write-id'};assert oldparts[2].endswith('\\n\\n---') and newparts[2].endswith('\\n\\n---'),path;assert newparts[2].startswith(oldparts[2][:-3]),path\nfor name in ['tracker.md','e0-producer-followup.md']:\n p=r/'docs/stabilization'/name\n for link in re.findall(r'\\]\\(([^)]+)\\)',p.read_text()):\n  if re.match(r'^(https?:|#)',link):continue\n  target=(p.parent/link.split('#')[0]).resolve();assert target.exists(),(name,link)\nproof={'result':'PASS','frozen_rows':442,'open':441,'merged':1,'changed_open_head_base_from_freeze':5,'native_sweep_stable':True,'root_prefixes_preserved':prefix,'root_gitlinks_preserved':23,'E0_E1_metadata_and_prior_comment_content_preserved':True,'verification_incident':'Initial custom body-prefix assertion included native terminal --- marker. Verified existing CLI appends comments before that closing marker; all prior content bytes stay exact and marker remains terminal. Corrected checker models actual serialization, not a source edit.','local_report_links':'PASS','source_blob_custody':'original recovered bytes unchanged','root_tests':'36 tests/286 assertions, all pass','root_project_validation':'25 sources/23 submodules/39 invariants pass','root_kondo':'0 errors/0 warnings','root_drift_readback':(d/'root-drift.stdout').read_text().strip(),'child_worktree':json.loads((d/'child-worktree-cleanup.json').read_text()),'limits':['No merge/adoption/independent current-head review or product milestone qualification.','Prior pending native evidence included, unrelated .claude untracked work excluded.']}\n(d/'root-final-verification.json').write_text(json.dumps(proof,indent=2)+'\\n');print('PASS: 442 rows, immutable evidence digests, E0/E1 history, root ledger prefixes, 23 gitlinks and local links.')\n",
+    "initial_trailer_assumption_failure": "Traceback (most recent call last):\n  File \"/tmp/foresight-producer-followup-20261021/verify-root-checkpoint.py\", line 25, in <module>\n    old=subprocess.check_output(['git','show','HEAD:'+path],text=True);now=(r/path).read_text();oldparts=old.split('---',2);newparts=now.split('---',2);om=yaml.safe_load(oldparts[1]);nm=yaml.safe_load(newparts[1]);assert {k:v for k,v in om.items() if k!='write-id'}=={k:v for k,v in nm.items() if k!='write-id'};assert newparts[2].startswith(oldparts[2].rstrip()),path\n                                                                                                                                                                                                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: docs/agile/kanban/stabilization-e0-reconstruct-the-authoritative-backlog-ation-e0.md\n",
+    "root_tests": {
+      "root-project-validate.stdout": "PASS foresight 25 workspace sources 23 submodules 39 invariants 1 lineage sources 6 provisional claims\n",
+      "root-workspace-tests.stdout": "\nTesting workspace-test\nSTART opencode bun run lint\nERROR opencode lint spawn ENOENT\nFAIL opencode lint\nSTART jscpd --config .jscpd.json /home/err/spaces/foresight/opencode\nERROR jscpd spawn ENOENT\nSTART jscpd --config .jscpd.json /workspace/opencode\nSKIP uninitialized test repository is not initialized\n\nRan 24 tests containing 120 assertions.\n0 failures, 0 errors.\n",
+      "root-project-tests.stdout": "\nTesting project-test\n\nRan 12 tests containing 166 assertions.\n0 failures, 0 errors.\n",
+      "root-kondo.stdout": "linting took 451ms, errors: 0, warnings: 0\n",
+      "receipt-parse.stdout": "PASS 238 root receipt maps parse\n"
+    }
+  },
+  "qualified": false,
+  "limits": [
+    "Historical event portability/future writer and tolerance owner stays incoming; no rewrite or invented alias.",
+    "Existing full event-fold owner incoming; undated fallback remains unqualified.",
+    "Separate trusted publisher5 and hosted proof3 remain unqualified.",
+    "Services/Uxx old pins unchanged; all producer secrets must be removed before future qualified pin advancement.",
+    "Inherited Rheos deterministic CI credential carriers need an owned secretless repair.",
+    "Root required model gate fails; root merges frozen; concrete E5 oracle remains open."
+  ],
+  "preservation": {
+    "all_23_root_gitlinks": "unchanged",
+    "child_worktree": "clean, pushed, removed",
+    "reviewed_plan22": "unchanged",
+    "frozen_denominator": 442,
+    "new_pr361": "separate remediation",
+    "unrelated_uncommitted_work": "preserved",
+    "CMS_Cephalon_agents": "paused",
+    "new_cards": 0,
+    "M0_M7": "unqualified",
+    "B1_B2_B3": "unassessed"
+  }
+}
