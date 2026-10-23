@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-10-23T03:16:51.935773+00:00",
+  "published_head": "cd9751d01a2b93123281d032f42a83fb4b9d42cb",
+  "source": "b8af64f41de139d17741ee2696ab82bdb38a81d1",
+  "all_source_and_archive_bytes_verified": true,
+  "files": [
+    {
+      "path": ".github/scripts/opencode_review_intent_test.cljs",
+      "git_blob": "fcd98256f24f2e333198239b6c06721126c494ff",
+      "bytes": 40178,
+      "sha256": "fc4a843b0354aedafc747d2ed9199708e4ffa7b5d03a178707fe7c4e853d2aa0"
+    },
+    {
+      "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs",
+      "git_blob": "7b171754e27c9a5494edec8ea204d3c5289b594d",
+      "bytes": 6069,
+      "sha256": "0f500f32e6fe5d78f729cb1bdf0ee79634f73e68d629b35bbd6696cf912fc729"
+    },
+    {
+      "path": ".\u03b7\u03bc/review-evidence/trusted-publication-preflight/df7f02a1229a770d88a33efd671f15e98cb7e3157e1bdc752b715dffea236764.json.gz",
+      "git_blob": "141ce4ca7039186f22e388bf97cd8320a4e03311",
+      "bytes": 37350,
+      "sha256": "df7f02a1229a770d88a33efd671f15e98cb7e3157e1bdc752b715dffea236764"
+    },
+    {
+      "path": ".\u03b7\u03bc/review-evidence/trusted-publication-preflight/checkpoint.json",
+      "git_blob": "3c138a14d2b305a192ebdfd7012275b5d08fa95c",
+      "bytes": 4895,
+      "sha256": "86d8d9261b0874ce8b7ae1a382636c3f7d2f4400faf9ee7d11099c4daa0813f8"
+    }
+  ],
+  "qualification": false
+}

@@ -1,0 +1,24 @@
+{
+  "prefixes": {
+    ".\u03b7\u03bc/receipts.edn": {
+      "base_bytes": 409159,
+      "base_sha256": "c540247e4506f384af9eb4a3d2b75971a949d74beb7130abee39e22c3042571c",
+      "current_bytes": 411977,
+      "prefix_preserved": true
+    },
+    ".\u03b7\u03bc/kanban-events/ledger.edn": {
+      "base_bytes": 255959,
+      "base_sha256": "78a5f3cd3482c9e7b3d6661a5a732b2a86a60d15a3833f7296a8b6803fe123a5",
+      "current_bytes": 262660,
+      "prefix_preserved": true
+    },
+    ".\u03b7\u03bc/session-mycology/ledger.md": {
+      "base_bytes": 46898,
+      "base_sha256": "fe6279038c88131832ffe2527dcd031edc33ee97d8c87e9437008f9bb6b67533",
+      "current_bytes": 47596,
+      "prefix_preserved": true
+    }
+  },
+  "receipt_suffix_sha256": "57852950af9c75c5e150a090b44e7bfc6c5202fd58f830001e1f39039f41db31",
+  "qualification": false
+}

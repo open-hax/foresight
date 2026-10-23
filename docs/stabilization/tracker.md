@@ -2,7 +2,20 @@
 
 Updated October 23 UTC, 2026. This table projects canonical Rheos cards and immutable evidence. It does not replace card state or confer merge authority.
 
-Latest execution: [Clio-backed intent, repaired layer boundary and bootstrap regression](e0-clio-intent-execution.md).
+Latest execution: [cold bootstrap, native owner proof and structured worker failures](e0-bootstrap-execution.md).
+Published ETA checkpoint `cd9751d01a2b93123281d032f42a83fb4b9d42cb` binds
+source `b8af64f41de139d17741ee2696ab82bdb38a81d1`: intent 29/200, full CLI 194/587
+plus workflows 11/199, lint/release zero warnings and actual public adapter probes pass.
+Classifier P1 and both launch-error P2 threads read resolved; eight inline threads,
+zero unresolved. Current-head review/convergence and hosted qualification stay open.
+Earlier ed4c native Sol 142/607 and Rheos 212/1219 succeed at actual merge abda0ec5,
+verified parents and identical head tree. That proof never transfers to successors.
+Root 976 native receipt and diff hygiene fail; lossless capture JSON now restores
+local diff hygiene, while original receipt bytes/P1 and missing-App/terminal holds remain.
+Latest full census remains October 23 02:32: 442 frozen / 437 open / 4 merged / 1 closed / six
+changed open H/B, zero acquisition drift. All pins/history/states preserved; CMS/Cephalon paused.
+
+Earlier execution: [Clio-backed intent, repaired layer boundary and bootstrap regression](e0-clio-intent-execution.md).
 Published ETA checkpoint `fa117fba0b761f8aa655e26c2ae8675b1af178cd` contains
 boundary GREEN `bb82398568f7abf7f2c1103e0aa34806b7b87153`: fresh 23/110 passes;
 eight changed published bytes verify. Earlier a762 Sandbox succeeds at its exact

@@ -1384,5 +1384,19 @@
     "qualified": false,
     "publisher": "in_progress",
     "CMS_Cephalon": "paused"
+  },
+  "e0_bootstrap_preflight_execution": {
+    "report": "docs/stabilization/e0-bootstrap-execution.md",
+    "overlay": "docs/stabilization/e0-bootstrap-execution.json",
+    "child_head": "cd9751d01a2b93123281d032f42a83fb4b9d42cb",
+    "source": "b8af64f41de139d17741ee2696ab82bdb38a81d1",
+    "native_owner_source": "ed4c7cb508feed77eff5d03f3fad7d686ac84657",
+    "native_executed_merge": "abda0ec5cb195abe8ec497e29775ca69a8f5c5c0",
+    "intent_tests": 29,
+    "intent_assertions": 200,
+    "inline_unresolved": 0,
+    "qualified": false,
+    "publisher": "in_progress",
+    "CMS_Cephalon": "paused"
   }
 }

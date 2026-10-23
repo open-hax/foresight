@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "nbb",
+    "-cp",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts",
+    "/home/err/.cache/foresight-tools/pr-flow-repo/skills/pr-flow/scripts/pr.cljs",
+    "settle",
+    "open-hax/eta-mu",
+    "362",
+    "PRRT_kwDORu27H86vC7vO",
+    "Fixed in 1b76c9e1e6d6122a844ef418b0b4439ac8ee9495 (published checkpoint ed4c7cb5): guard namespace classification with keyword? so native Error and nil/numeric/string/map tags preserve unknown append-outcome and exact recovery. Tests-only RED 328a22c99caa2a1ed56fbbf5a7bef7c9567bc609 reproduces 24 assertion failures; GREEN passes intent 25 tests / 143 assertions with actual worker-entry fault injection and typed refusal controls. Separate collection nitpick: the emitted EDN :calls now equals all three expected GETs; an inert fourth real GET passes the old substring oracle and fails the exact trace. Full CLI 194/587 plus workflows 11/199, owning/test lint and release pass; no hosted qualification or adoption is claimed."
+  ],
+  "exit_code": 0,
+  "stdout": "settled PRRT_kwDORu27H86vC7vO as fixed\n",
+  "stderr": ""
+}

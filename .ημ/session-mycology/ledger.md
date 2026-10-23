@@ -721,3 +721,13 @@
   spore: none
   receipt-refs: 4362924099d6831bf8293be93b2ba35271f1c2e8582ea6b102e15f21eb1dc97e
   note: Keep captures in owned persistent repository paths and commit promptly. Temporary capture loss is explicit; only retained or freshly reproduced evidence supports claims. Existing spore remains unpromoted.
+
+- ts: 2026-10-23T03:19:34.656051+00:00
+  session: foresight-stabilization
+  task: Bind bootstrap restoration, native owner execution and structured worker failures
+  p-efficiency: 0.8
+  p-friction: 0.65
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 57852950af9c75c5e150a090b44e7bfc6c5202fd58f830001e1f39039f41db31
+  note: Preserve exact raw capture bytes in escaped JSON or immutable archives when output whitespace conflicts with diff hygiene. Distinguish pre-launch refusal from persistent append uncertainty, and source-bound native product proof from successor qualification. Recovered capacity interruption continued saved tests without losing work. Existing spore stays unpromoted.

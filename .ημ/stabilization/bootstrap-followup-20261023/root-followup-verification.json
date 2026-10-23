@@ -1,0 +1,14 @@
+{
+  "base": "976fc89e2cd515d584d2cf73c129aceceb5ca5ab",
+  "root_gitlinks": 23,
+  "primary_pins_unchanged": true,
+  "all_prior_graph_keys_unchanged": true,
+  "prior_reports_census_and_original_raw_bytes_preserved": true,
+  "root_ledger_prefixes": 3,
+  "E0_E1_states_planning_and_body_prefixes_preserved": true,
+  "capture_archive_entries_verified": 47,
+  "diff_hygiene_at_accepted_base_exit": 0,
+  "no_credential_shaped_tokens_in_owned_captures": true,
+  "CMS_Cephalon": "paused",
+  "qualification": false
+}

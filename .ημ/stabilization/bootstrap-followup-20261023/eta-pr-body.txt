@@ -1,0 +1,33 @@
+The review producer mixed candidate/model execution with signing and native publication. This branch depends on #361 and adds portable publication decisions, physical archive admission, bounded native reads, independent Git reconstruction, immutable verification, and Clio-backed intent coordination. Trusted installation and complete authenticated publication remain unqualified.
+
+Published checkpoint `ed4c7cb508feed77eff5d03f3fad7d686ac84657` binds source `1b76c9e1e6d6122a844ef418b0b4439ac8ee9495`. Dedicated intent runtime configuration restores ordinary cold NBB workflow checks without adding Babashka to unrelated workflows. Bootstrap RED `b0ac577cfd3c899d4baac553c870d47918933850` precedes GREEN `14cb2742bfd1a15d5ab450b8f3ee6d3a64147790`. Both configured NBB 1.5.211 and fixed 1.5.212 run the actual workflow suite 11 tests / 199 assertions with bb absent.
+
+Classifier RED `328a22c99caa2a1ed56fbbf5a7bef7c9567bc609` reproduces 24 assertion failures. GREEN preserves unknown append outcomes and exact recovery for native Error and malformed error tags; typed admission refusals remain. The collection test now compares the complete parsed three-GET trace. A fourth real GET passes the old substring oracle and fails the exact comparison.
+
+Intent 25 tests / 143 assertions, collection 30 / 224, registered review-workflow 339 Node tests, full CLI 194 / 587 plus workflows 11 / 199 pass. Owning/scoped lint and release have zero warnings. The initial ambient-provider failure is retained beside the provider-free CLI pass. Independent actual public-adapter probes verify private one-use authority, alternate-factory refusal, opaque recovery after a real visible append/fsync uncertainty, second-use refusal, and fresh-clock failure without authority.
+
+Canonical Clio alias stays pinned to candidate `5fad794de1a9e23d6e5aaad42eaa933be1c070be`; expected descriptor identity is checked under Clio's owning lock. It is not accepted root adoption. Earlier 809-capture intent evidence and every failed source/test mechanism remain intact. New bootstrap/finding archive retains 138 exact captures. Two output files use lossless JSON copies to preserve their trailing bytes without changing diff hygiene.
+
+Native classifier P1 is resolved as fixed. Two newly observed preflight-exception P2 findings remain under causal repair; current-head review convergence and hosted qualification remain open. Codex's native account quota has UNKNOWN reset and is not retried. No paid review or auto-merge is enabled.
+
+All 309 card states/planning and four ledger prefixes verify. One prospective typed receipt validates; history remains 71 invalid rows / 118 errors. Publisher stays in_progress / Codex / five points. Original event G/executed caller/tools/input custody, complete reconstruction/verifier composition, native publication/readback/status, effective grants and protected adoption remain unfinished. Root pins, credentials, workflow protection and paused CMS/Cephalon remain unchanged.
+
+Exact source, gates, retained failures and limits: `.ημ/review-evidence/trusted-publication-bootstrap/checkpoint.json`. Older Sandbox results remain bound to their own source, warnings and artifact-metadata limits.
+
+<!-- This is an auto-generated comment: release notes by coderabbit.ai -->
+<!-- coderabbit-ai-generated:v1 -->
+
+## Summary by CodeRabbit
+
+* **New Features**
+  * Added portable board snapshots with paths relative to a selected root, while preserving planning metadata.
+  * Added read-only review metadata collection, source reconstruction, evidence verification, bounded archive validation, and safeguards for publication decisions.
+* **Bug Fixes**
+  * Improved checksum validation and snapshot error handling; invalid or unverifiable evidence is rejected.
+* **Chores**
+  * CI workflows no longer require private-repository access or publication credentials.
+* **Tests**
+  * Expanded coverage for credential-free workflows, review evidence, archive validation, publication decisions, and snapshot portability.
+* **Documentation**
+  * Clarified that producer evidence does not establish publication qualification or confirm publication.
+<!-- end of auto-generated comment: release notes by coderabbit.ai -->
