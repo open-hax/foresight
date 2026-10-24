@@ -67,6 +67,7 @@ code; preserve source revision and actual observed capability separately.
 - [ ] GIVEN an authenticated producer with the wrong role or missing capability WHEN a message is admitted THEN it is denied without a valid event.
 - [ ] GIVEN a requested child grant WHEN it adds a capability, broadens tenant/audience/resource scope or extends expiry beyond the parent's grant THEN delegation is rejected. Child rights must be a subset and expiry no later than the parent's.
 - [ ] GIVEN a revoked binding, mismatched installation or principal, or resume after revocation WHEN resumed or used THEN admission denies; a new grant/binding requires explicit authorization.
+- [ ] GIVEN a canonical binding or message WHEN encoded and decoded through transport JSON THEN it validates against the Knoxx-owned, Katamorph-defined versioned tagged EDN schema with namespaced keys and an integer major version, and the decoded canonical value equals the original without loss of tags, key namespaces, identity or payload values. Raw host objects presented as canonical contract data are rejected; only the explicit adapter codec may convert them at the boundary.
 - [ ] GIVEN a message encoded under an unknown major schema or incompatible required fields WHEN admitted THEN it fails with a version error; older compatible schemas use only an explicit versioned migration.
 
 ## Payload reference criteria

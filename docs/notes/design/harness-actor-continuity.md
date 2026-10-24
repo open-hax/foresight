@@ -23,8 +23,8 @@ contracts; Clio owns event identity/replay. Katamorph supplies portable shapes.
 Epiphany supplies archaeological evidence, Rheos supplies work state.
 
 A binding identifies instance id, actor id, authenticated principal reference,
-harness family, installation id, session/task id, parent context, capability
-profile and effective-contract hash. Credentials stay in the runtime's secret
+harness family, installation id, repository identity or explicit operator scope,
+session/task id, parent context, capability profile and effective-contract hash. Credentials stay in the runtime's secret
 store; manifests contain references only. Each spawned context gets distinct
 provenance and a bounded delegated grant. A verified resume may reuse a binding;
 new tasks must not be silently aliased by model name or similar content.
@@ -131,8 +131,11 @@ An authorized rebuild first passes current source-read and destination-publish
 authorization before accessing source bytes or transforming content. It then
 reads the current source revision, revalidates policy and
 revocation dependencies, and recomputes the versioned transformation and output
-hash before publication admission. Its event binds those inputs and output; a
-change before publication admission requires rejection or revalidation.
+hash before publication admission. Its event binds those inputs and output,
+including both grant identities/revisions. Publication admission compares source
+revision, source-policy decision, revocation dependencies and both grants with
+the event-bound values; any difference rejects or requires revalidation and a
+newly bound event before visibility, as qualified separately in HAC.07.
 An unauthorized rebuild reads no source bytes, performs no transformation, and
 produces no promotion event or projection; a content-free denial audit is allowed. This conservative default is a proposal to review, not a claim
 that current Knoxx implements it.
@@ -156,8 +159,13 @@ delegation permission, bound to the authenticated principal and parent grant.
 A parent grant without delegation permission is non-delegable. A delegated child
 grant must be a subset of its parent's capabilities and allowed tenants, audiences
 and resource scopes, with expiry no later than the parent's. Any widening fails.
-Binding validation checks authenticated principal, installation identity, context
-identity, capability profile, expiry and revocation on every use and resume.
+Binding validation checks authenticated principal, installation identity,
+repository identity or explicit operator scope, context identity, capability
+profile, expiry and revocation on every use and resume. For mutating jobs, the
+requested repository must equal the bound repository or fall within the
+explicitly authorized operator scope; scope is never inferred from cwd. Test a
+repository-A binding against repository B, and a request outside operator scope:
+each denies before delivery or effects on both use and resume.
 The binding profile must match the active contract's profile, and the binding
 and message envelope effective-contract hashes must equal the active contract
 hash; mismatches deny use and resume. Revoked bindings cannot resume; parentage
