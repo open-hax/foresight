@@ -1,6 +1,7 @@
 ---
 uuid: "dadfda98-6756-4f39-a249-5659654da41e"
 parent: "459f49be-7023-40d2-9091-92cb945ce610"
+blocked_by: ["fb5291be-dd7f-4eb4-8363-6cbcd92e2f11"]
 title: "Apply one-way abstract environmental interventions"
 type: "story"
 status: "incoming"

@@ -37,3 +37,10 @@ See [integration contract](../../integrations/primordia/README.md) and retained 
 ## Risks
 
 Native lifecycle/thread affinity, GPU availability, sampled assay coverage, incomplete lineage tracing, and unknown physical calibration.
+
+## Stories
+
+- [fork](primordia-fork.md) — `a06c7294-5eea-4280-b75a-d833aee8e68f`
+- [baseline](primordia-baseline.md) — `bf276601-5713-4329-836d-5aec5325fe1b`
+- [native](primordia-native.md) — `fb5291be-dd7f-4eb4-8363-6cbcd92e2f11`
+- [environment](primordia-environment.md) — `dadfda98-6756-4f39-a249-5659654da41e`
