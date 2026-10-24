@@ -511,3 +511,12 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-23T02:03:17.599120011Z
+  session: /home/err/spaces/foresight/.worktrees/harness-actors-plan
+  task: Recover merged planning status and connect harness tools to Knoxx actors
+  p-efficiency: 0.8
+  p-friction: 0.35
+  p-skill-candidate: 0.2
+  spore: none
+  receipt-refs: open-hax/foresight#141
+  note: Inspect GitHub state before resuming old review loops; approval and merged status differ from convergence evidence. No spore warranted.
