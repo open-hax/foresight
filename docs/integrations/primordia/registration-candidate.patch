@@ -1,0 +1,40 @@
+--- a/.gitmodules
++++ b/.gitmodules
+@@ -91,3 +91,7 @@
+ 	path = axxium
+ 	url = git@github.com:open-hax/axxium.git
+ 	branch = device/yoga
++[submodule "Primordia"]
++	path = Primordia
++	url = https://github.com/riatzukiza/Primordia.git
++	branch = master
+--- a/src/foresight/project.cljc
++++ b/src/foresight/project.cljc
+@@ -334,6 +334,17 @@
+     :source/invariants [:truth/single-simulation-substrate
+                         :truth/domain-never-imports-infra
+                         :truth/single-writer-components]}
++   {:source/id :primordia
++    :source/name "Primordia"
++    :source/path "Primordia"
++    :source/type :git-submodule
++    :source/repository "riatzukiza/Primordia"
++    :source/url "https://github.com/riatzukiza/Primordia.git"
++    :source/ownership :independent-repository
++    :source/role :artificial-life-simulator
++    :source/actionable? true
++    :source/invariants [:foresight/independent-repository-ownership
++                        :foresight/unavailable-never-pass]}
+    {:source/id :bitch-tracker
+     :source/name "bitch-tracker"
+     :source/path "bitch-tracker"
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -33,6 +33,7 @@
+ | Path | Repository | Role | Look here for |
+ | --- | --- | --- | --- |
+ | `Truth` | octave-commons/Truth | simulation-research | ECS simulation substrate, pure domain systems/phases, single-writer components |
++| `Primordia` | riatzukiza/Primordia | artificial-life-simulator | Independent Rust/wgpu simulator, native lifecycle, deterministic runs and telemetry; MIT upstream preserved |
+ | `bitch-tracker` | octave-commons/bitch-tracker | betterdiscord-plugin | BetterDiscord client plugin behavior |
+ | `calliope` | octave-commons/calliope | corpus | Append-only ingestion truth, Receipt River accountability, corpus documents |
+ | `epiphany` | octave-commons/epiphany | knowledge-archaeology | Observed→derived→provisional→accepted promotion, git-history-derived knowledge |
