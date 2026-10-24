@@ -1,7 +1,7 @@
 ---
 uuid: "fb5291be-dd7f-4eb4-8363-6cbcd92e2f11"
 parent: "459f49be-7023-40d2-9091-92cb945ce610"
-blocked_by: ["a06c7294-5eea-4280-b75a-d833aee8e68f", "bf276601-5713-4329-836d-5aec5325fe1b"]
+blocked_by: ["bf276601-5713-4329-836d-5aec5325fe1b"]
 title: "Host a batched Primordia native instance from Truth"
 type: "story"
 status: "incoming"
@@ -39,3 +39,7 @@ See [integration contract](../../integrations/primordia/README.md) and retained 
 ## Risks
 
 Native lifecycle/thread affinity, GPU availability, sampled assay coverage, incomplete lineage tracing, and unknown physical calibration.
+
+## External prerequisite
+
+A verified writable downstream fork is required before publishing native changes. This prerequisite is fork availability only; final Foresight registration is not a native-development dependency. Fork creation is currently blocked by the unavailable API/browser sign-in.
