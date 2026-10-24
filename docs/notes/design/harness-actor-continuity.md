@@ -133,12 +133,15 @@ materialized projections become unavailable for later reads until reauthorized
 or rebuilt through current source-read and destination-publish authorization.
 Non-revoked projections need no new promotion or rebuild for an authorized read.
 An authorized rebuild first passes current source-read and destination-publish
-authorization before accessing source bytes or transforming content. It then
+authorization and current source-policy approval for the destination before
+accessing source bytes or transforming content. It then
 reads the current source revision, revalidates policy and
 revocation dependencies, and recomputes the versioned transformation and output
 hash before publication admission. Its event binds those inputs and output,
-including both grant identities/revisions. Publication admission compares source
-revision, source-policy decision, revocation dependencies and both grants with
+including both grant identities/revisions and source-policy decision/revision.
+Publication admission hashes actual replacement bytes and compares their hash
+and transformation version to the event, then compares source
+revision, source-policy decision/revision, revocation dependencies and both grants with
 the event-bound values; any difference rejects or requires revalidation and a
 newly bound event before visibility, as qualified separately in HAC.07.
 An unauthorized rebuild reads no source bytes, performs no transformation, and
@@ -167,7 +170,9 @@ Delegation requires an issuer authorized by the parent grant's explicit
 delegation permission, bound to the authenticated principal and parent grant.
 A parent grant without delegation permission is non-delegable. A delegated child
 grant must be a subset of its parent's capabilities and allowed tenants, audiences
-and resource scopes, with expiry no later than the parent's. Any widening fails.
+and resource scopes, with expiry no later than the parent's. Any widening fails. Every use and resume validates the full delegation chain;
+revocation or expiry of any ancestor invalidates descendants before admission,
+delivery, effects or protected outcome return. Missing chain authority fails closed.
 Binding validation checks authenticated principal, installation identity,
 repository identity or explicit operator scope, context identity, capability
 profile, expiry and revocation on every use and resume. For mutating jobs, the

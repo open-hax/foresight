@@ -66,6 +66,9 @@ code; preserve source revision and actual observed capability separately.
 
 ## Admission and compatibility criteria
 
+- [ ] GIVEN a binding for repository A WHEN use or resume targets repository B THEN admission denies before delivery, effects or protected outcome return. An explicit operator-scope binding independently denies requests outside that scope on use and resume; cwd never establishes scope.
+- [ ] GIVEN a delegated child grant WHEN any ancestor grant is revoked before first use or before resume THEN full-chain validation denies before delivery, effects or protected outcome return; an apparently valid unexpired child cannot bypass ancestor revocation.
+
 - [ ] GIVEN an authenticated receiver whose instance-id or actor-id differs from the envelope destination WHEN mailbox admission is attempted THEN each mismatch independently denies before admission, delivery, effects or protected outcome return.
 
 - [ ] GIVEN an authenticated producer with the wrong role or missing capability WHEN a message is admitted THEN it is denied without a valid event.
