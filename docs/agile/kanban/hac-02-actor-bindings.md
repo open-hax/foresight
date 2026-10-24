@@ -43,6 +43,8 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] GIVEN authorization expires or is revoked after an effect commits but before retry WHEN delivery or recorded-outcome retrieval is attempted THEN current admission denies it without a second effect or protected outcome data. A recorded outcome never bypasses current authorization.
 - [ ] GIVEN the original message ID and destination with a changed producer instance, producer actor or binding identity WHEN retried THEN admission denies the retry without effects or protected outcome data, even if the substituted producer has an otherwise valid grant.
 
+- [ ] GIVEN a non-idempotent effect committed before a crash and lost response WHEN recovery retries the same message with original producer, binding, message ID and destination and current delivery/protected-outcome authorization THEN the durable deduplication record and protected outcome recover with the effect under the versioned HAC.02 atomic rule or an equivalent recoverable protocol; retry returns the first recorded outcome without repeating the effect. A crash must never expose a committed effect with a missing recovery/deduplication outcome.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end
@@ -63,6 +65,8 @@ code; preserve source revision and actual observed capability separately.
 - [ ] GIVEN context A private memory WHEN context B, including its parent or sibling, calls the memory tool THEN retrieval is denied without an explicit sharing grant. Parentage alone grants no private-memory access.
 
 ## Admission and compatibility criteria
+
+- [ ] GIVEN an authenticated receiver whose instance-id or actor-id differs from the envelope destination WHEN mailbox admission is attempted THEN each mismatch independently denies before admission, delivery, effects or protected outcome return.
 
 - [ ] GIVEN an authenticated producer with the wrong role or missing capability WHEN a message is admitted THEN it is denied without a valid event.
 - [ ] GIVEN a requested child grant WHEN it adds a capability, broadens tenant/audience/resource scope or extends expiry beyond the parent's grant THEN delegation is rejected. Child rights must be a subset and expiry no later than the parent's.

@@ -44,6 +44,8 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] GIVEN each desktop, CLI or SDK surface claimed supported in the versioned capability matrix WHEN a parent/child native message and reply are sent through the adapter THEN that route enforces the canonical HAC.02 admission checks before delivery, and the intended Knoxx actors receive them with correlation intact and no duplicate effect on retry. At least one positive supported route is required for story completion.
 - [ ] GIVEN a spoofed producer, unauthorized destination or revoked binding WHEN a supported native adapter route attempts delivery THEN HAC.02 admission denies it before delivery, creating no admitted message event or downstream effect; a denial audit record is permitted.
 
+- [ ] GIVEN a non-idempotent effect committed before a crash and lost response WHEN recovery retries the same message with original producer, binding, message ID and destination and current delivery/protected-outcome authorization THEN the durable deduplication record and protected outcome recover with the effect under the versioned HAC.02 atomic rule or an equivalent recoverable protocol; retry returns the first recorded outcome without repeating the effect. A crash must never expose a committed effect with a missing recovery/deduplication outcome.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

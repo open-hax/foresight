@@ -46,7 +46,12 @@ before implementing adapters. Retries retain the original producer
 (instance-id, actor-id), binding identity, message ID and destination and
 deduplicate before side effects under the canonical HAC.02
 rule; the owning implementation names its versioned rule and atomic
-admission/effect boundary. A transport failure preserves pending work with an
+admission/effect boundary. The deduplication record and protected outcome must
+be durably committed with the effect, or recovered through an equivalent
+versioned protocol that prevents another effect and preserves the first outcome.
+Test crash recovery after the effect commits and before its response arrives: an
+authorized retry returns that durable outcome with exactly one effect.
+A transport failure preserves pending work with an
 explicit retry policy; it never silently switches actor or destination. Test a
 non-idempotent effect committed before its response is lost: retrying the same
 message with current delivery and protected-outcome authorization returns the
