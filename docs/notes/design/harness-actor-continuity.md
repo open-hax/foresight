@@ -156,8 +156,12 @@ the canonical values; raw host objects are never canonical contract data.
 Unknown major versions or required fields fail admission. An older schema is
 accepted only through a named, versioned migration with tests. Muse, Axxium and
 Clio consume that registry contract; changes require an owning Knoxx PR before
-adapter adoption. The effective operating-contract hash is produced by LOC.05/08
-and passed unchanged; this plan defines no competing hashing algorithm.
+adapter adoption. The layered effective operating-contract hash is produced by LOC.05/08
+and passed unchanged; this plan defines no competing hashing algorithm. HAC.01
+remains independent of LOC implementation: standalone qualification pins the
+compiler revision, exact single-tree configuration/profile paths and Git blob
+IDs, and loaded target artifact hashes. These byte-provenance identities do not
+claim a canonical layered operating-contract hash; HAC.06 qualifies that later.
 
 Delegation requires an issuer authorized by the parent grant's explicit
 delegation permission, bound to the authenticated principal and parent grant.
