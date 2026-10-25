@@ -1023,3 +1023,17 @@ The default kondo scripts/test command initially used stale namespace analysis
 for the previously added historical-import law; linting src/scripts/test refreshed
 it, after which the unchanged canonical scripts/test command passed0/0.
 Evidence: the caller-eligibility RED/GREEN receipt segments. No spore incubated.
+
+
+## 2026-10-25T09:29:15.582935Z — Published member review repair handoff
+
+Friction3/5; reuse4/5; no additional spore. Shared renderer repairs propagated
+to all23callers and22member heads;21fixed threads settled. Native root13gates
+pass at a34f0a8b against actual2b base. Required Rheos provenance changes expose
+the review input limits: root Git capture exceeds1MiB and ETA must capture an
+already-large1,759,928-byte base event ledger. Preserve complete input and
+append-only authority rather than truncating or weakening limits. Two disputed
+findings await supported native disposition; local independent assessment supplies
+no Bot identity. Receipt: 2026-10-25T092915582Z-member-review-repairs.edn. The one malformed local new-segment
+filename was corrected before publication with identical record bytes; all
+previously published receipt files and frozen legacy history remain unchanged.
