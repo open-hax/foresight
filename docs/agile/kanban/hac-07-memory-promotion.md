@@ -51,7 +51,7 @@ No production activation or alternate board/event authority.
 ## Separate qualification receipts and exits
 
 - Initial promotion, protected reads and revocation invalidation have a dedicated receipt naming the source/destination revisions and their authorization matrix. This slice exits only after authorized promotion/read, unauthorized pre-read denial, unreachable-authority denial, scheduled-proposal non-authority, and post-materialization revocation denial all pass.
-- Revoked-projection rebuild has a separate receipt and authorization/publication-race matrix. This slice exits only after denied rebuild performs no source access or transformation, authorized rebuild binds current inputs/output, and each source/policy/revocation/grant change before publication rejects or revalidates without premature visibility.
+- Revoked-projection rebuild has a separate receipt and authorization/publication-race matrix. This slice exits only after denied rebuild performs no source access or transformation, authorized rebuild binds current inputs/output, each source/policy/revocation/grant change before publication rejects or revalidates without premature visibility, and separate source-substitution and destination-substitution tests independently deny visibility even with otherwise matching content/hash/revision metadata and valid current grants. Both substitution results are mandatory entries in this rebuild receipt and completion matrix.
 - HAC.07 completes only when both receipts pass against compatible pinned contract/runtime revisions and cross-reference the same source/projection identity. Passing one slice supplies no completion evidence for the other. These are implementation evidence slices, not new board identities or transitions.
 
 ## Verification

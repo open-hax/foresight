@@ -94,7 +94,7 @@ code; preserve source revision and actual observed capability separately.
 
 ## Payload reference criteria
 
-- [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authenticated destination with a current source-read grant, matching tenant and audience, resolves only the exact authorized source revision.
+- [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authenticated destination with a current source-read grant authorizing the referenced source identity and resource scope, matching tenant and audience, resolves only the exact authorized source revision. A grant scoped to a different source identity or resource is independently denied before returning content, even with matching tenant, audience and revision.
 
 ## Active contract admission criteria
 

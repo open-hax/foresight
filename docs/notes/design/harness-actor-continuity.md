@@ -224,8 +224,11 @@ authority check defined above, including projections materialized earlier.
 ## Payload reference admission
 
 A message payload reference conveys no read authority by itself. Resolution
-requires the authenticated destination actor's current source-read grant, tenant
-and audience match, and exact authorized source revision. Wrong destination,
+requires the authenticated destination actor's current source-read grant to
+authorize the referenced source identity and resource scope, alongside tenant
+and audience match and exact authorized source revision. A grant for a different
+source identity or resource scope independently denies content return, even
+when destination, tenant, audience and revision otherwise match. Wrong destination,
 revoked/expired grant or inaccessible source denies resolution without returning
 content. HAC.02 specifies these checks in the canonical Knoxx contract; HAC.05
 qualifies them through the adapter. No existing resolver behavior is presumed.
