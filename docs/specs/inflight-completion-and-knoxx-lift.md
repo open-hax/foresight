@@ -122,29 +122,56 @@ gate attempt is appended as a complete `:test-run` record in Receipt River.
 Schema-v2 receipts retain the actual host and `nbb`/Node adapter identity;
 legacy records remain append-only history but cannot attest a promotion.
 
+The Receipt River ledger is segmented. `.ημ/receipts.edn` is the frozen
+legacy first segment; every new receipt is an immutable one-record file under
+`.ημ/receipts/` (`<UTC timestamp>-<id>.edn`). The merged ledger is the union of
+all segments ordered by the UTC instant named by `:ts` (offsets and fractional
+seconds normalized), then canonical record identity. New records need an RFC
+3339 `:ts` naming a real instant; historical records keep their original `:ts`
+and sort deterministically. Record identity hashes the value read, so every
+number in any segment must read back exactly: safe integers, or a non-integral
+float written as its double's own decimal value (no `N`/`M`, ratios, radix or
+leading zeros). Parallel branches (a fork and its org) add
+disjoint segment files instead of contending on one monolith. Writers in one
+checkout serialize on `.ημ/receipts/.receipt-river.writer.lock` for the whole
+reserve, gate and write sequence, so a segment that appears while a gate runs
+is never a cooperating writer's receipt.
+
 The local append adapter is Linux-specific and fails closed without
-`/proc/self/fd`, `O_NOFOLLOW`, and exclusive-create support. It holds and
-revalidates the parent, ledger, and sibling-lock identities; accepts only a
-regular single-link ledger; bounds one physical EDN line to 1 MiB; completes
-the descriptor write; verifies the resulting size; and synchronizes both the
-file and parent directory. A failure before the write releases the lock. Any
-uncertain result after writing begins deliberately retains the lock as a
-quarantine marker so a later cooperating writer cannot make a partial record
-look normal. The lock serializes this adapter's writers; processes that ignore
-the protocol remain outside its trust boundary.
+`/proc/self/fd`, `O_NOFOLLOW`, and exclusive-create support. Each semantic
+writer reserves its own new segment with `O_EXCL` and a sibling lock for that
+segment; it bounds one physical EDN line to 1 MiB, completes the descriptor
+write, verifies the resulting size, and synchronizes both the file and parent
+directory. A failure before the write removes an empty reserved segment and
+releases the lock, unless the working ledger changed while the gate ran; that
+change keeps the lock as a quarantine marker. The rest of the working ledger
+is compared with the pre-gate snapshot again after the write, and when a
+gate aborts before writing; a change there also keeps the lock. The writer lock
+must name its path before the write. If its post-write check fails, receipt bytes
+may already exist, but the segment remains quarantined. A writer lock that
+cannot be released is recreated as a
+quarantine marker. If the reserved path has vanished, the lock is released only
+when the still-held descriptor proves the inode unlinked; a renamed
+reservation keeps the lock. Any uncertain result after writing begins deliberately
+retains the lock as a quarantine marker for the whole ledger so a later
+cooperating writer cannot make a partial record look normal. Processes that
+ignore the protocol remain outside its trust boundary.
 
 The pure portable predicate proves record consistency only and is never an
 authority decision. The effectful promotion adapter requires an explicit full
 reviewed root commit that is also the clean current `HEAD`. With Git replacement
 objects disabled, it requires regular non-executable blobs, reads the catalog
-and `.ημ/receipts.edn` from that same Git object, hashes both raw byte streams,
-and decodes strict UTF-8. It also proves that the head ledger preserves the
-trusted base ledger as an exact byte prefix and contains only whole appended
-receipt lines. Every result revision must equal its repository gitlink in the
-reviewed tree, and the adapter rechecks root state after the reads. A mutable
-working tree, a caller-supplied catalog, an unrelated or replacement commit, a
-copied digest, or a hash stored only beside the result cannot authorize
-promotion.
+and the segmented Receipt River ledger from that same Git object, hashes the
+raw byte streams, and decodes strict UTF-8. Against a trusted base it proves:
+no base one-record segment was edited or removed; no base record was dropped; the frozen
+legacy file may only lose whole lines (terminator-preserving subsequence) when
+those records move into segments; no record appears twice; and every new record
+obeys the current envelope law. Exact byte-prefix of the entire `.ημ/receipts.edn` monolith is
+no longer the promotion invariant once segments exist. Every result revision
+must equal its repository gitlink in the reviewed tree, and the adapter
+rechecks root state after the reads. A mutable working tree, a caller-supplied
+catalog, an unrelated or replacement commit, a copied digest, or a hash stored
+only beside the result cannot authorize promotion.
 
 The reviewed Git commit supplies content-addressed integrity and
 review-authorized immutable evidence; it does not authenticate the process or
