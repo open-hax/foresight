@@ -59,3 +59,9 @@ code; preserve source revision and actual observed capability separately.
 ## Payload reference criteria
 
 - [ ] GIVEN an opaque payload reference WHEN a different destination, wrong tenant/audience, expired/revoked grant or stale source revision attempts resolution THEN no payload content is returned; an authenticated destination with a current source-read grant, matching tenant and audience, resolves only the exact authorized source revision.
+
+
+## Inline payload boundary qualification
+
+- [ ] GIVEN a protected inline payload addressed to an unauthorized remote destination WHEN prepared THEN the sender denies before source-byte access or serialization/disclosure, with no payload-bearing transport emission. An explicitly public payload requires recorded source-policy classification.
+- [ ] GIVEN a permitted inline payload with source identity/revision and authorization provenance WHEN received THEN the destination independently validates current content-access grants, tenant, audience, exact source revision and its authenticated binding before delivery, effects or protected outcome return. Wrong destination, expired/revoked grants, stale revision and missing provenance are separate denial cases, including retries and recorded outcomes; no copied bytes bypass source revocation.

@@ -32,6 +32,19 @@ On every use and resume, the authenticated context instance ID and actor ID
 must each equal the stored binding instance ID and actor ID. Test each mismatch
 independently; either denies admission before delivery, effects or protected
 outcome return. Caller-supplied identities cannot replace the stored binding.
+The canonical context identity is the immutable tuple of instance id, actor id,
+authenticated principal reference, harness family, installation id, tagged
+repository identity or explicit operator-scope identity, native session/task id,
+and authenticated parent-context reference (explicitly nil for a root context).
+The actor pair is an index into the stored binding, not a replacement for that
+full tuple: lookup authenticates the pair and compares the same canonical tuple
+for equality on first use and resume. A mismatched harness, session/task,
+principal, installation, scope or parent reference denies before delivery,
+effects or protected outcome return. Parent provenance supplies no grant.
+Capability profile and effective-contract hash are separately validated binding
+policy, not context-identity fields; changing policy requires explicit binding
+authorization and invalidates stale policy evidence rather than silently
+changing context identity.
 
 Message envelopes carry producer instance/actor, destination instance/actor,
 message id, correlation/causation, schema version, contract hash and an opaque
@@ -165,6 +178,11 @@ remains independent of LOC implementation: standalone qualification pins the
 compiler revision, exact single-tree configuration/profile paths and Git blob
 IDs, and loaded target artifact hashes. These byte-provenance identities do not
 claim a canonical layered operating-contract hash; HAC.06 qualifies that later.
+HAC.02 can specify portable admission laws against explicitly synthetic contract
+inputs before that producer exists, preserving every required admission check.
+Actual active-contract qualification of those laws through HAC.03 use/resume
+requires the implemented LOC producer and canonical contract/projection evidence
+qualified in HAC.06; fixture or copied hashes never qualify that integration.
 
 Delegation requires an issuer authorized by the parent grant's explicit
 delegation permission, bound to the authenticated principal and parent grant.
@@ -208,3 +226,22 @@ and audience match, and exact authorized source revision. Wrong destination,
 revoked/expired grant or inaccessible source denies resolution without returning
 content. HAC.02 specifies these checks in the canonical Knoxx contract; HAC.05
 qualifies them through the adapter. No existing resolver behavior is presumed.
+
+
+## Inline payload admission
+
+Permitted inline payloads retain the same content authority as references.
+Before a sender reads protected source bytes or serializes/discloses them to a
+transport, it verifies current source-read authority and the authenticated
+intended destination's current content-access grant, tenant, audience and exact
+source revision. The inline envelope binds that source identity/revision and
+authorization provenance. At destination admission, those same current grants,
+source revision, tenant, audience and destination binding are revalidated before
+payload delivery, effects or protected outcome return. Missing provenance,
+unauthorized destination, stale revision, or expired/revoked grants denies
+without content disclosure. Public inline data needs an explicit source-policy
+classification; absence of private metadata never implies public authority.
+Retries and stored outcomes retain current authorization checks; copying bytes
+into an envelope cannot bypass source revocation. HAC.02 specifies these laws;
+HAC.05 qualifies the sender and receiver boundaries separately, including
+unauthorized-destination negatives with no payload-bearing transport emission.

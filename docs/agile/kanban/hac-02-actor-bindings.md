@@ -30,6 +30,18 @@ Specify portable harness actor bindings and message admission.
 
 Reuse actor/mailbox/event authority and specify identity, delegation, correlation, deduplication and revocation contracts before host adapters.
 
+HAC.02 specifies the portable contract and admission laws with the active
+capability profile and effective-contract hash as explicit authoritative inputs.
+The layered hash remains the LOC.04/05/08 contract consumed with the LOC.06
+chain and LOC.07 profile; this card defines no competing canonicalization, fold
+or hash algorithm. Portable law tests may use explicitly synthetic contract
+inputs, which establish neither a deployed active contract nor layered integration.
+All admission criteria remain required. Integrated active-contract qualification,
+including HAC.03 use/resume scenarios, requires the implemented LOC producer and
+canonical contract/projection evidence qualified by HAC.06. That qualification
+remains blocked until those inputs exist; matching fixture hashes or copied
+manifest hashes cannot substitute for it.
+
 ## Non-goals
 
 No production cutover, broad credential copying, new board implementation or automatic memory lift.
@@ -47,6 +59,9 @@ No production cutover, broad credential copying, new board implementation or aut
 
 ## Verification
 
+Portable contract work supplies named upstream law/schema test runners with
+explicit fixture provenance. Integrated qualification follows the LOC/HAC.06
+evidence boundary in Scope; portable test success alone is insufficient.
 Implementation supplies named upstream test runners and sanitized end-to-end
 evidence for each criterion, including negative cases. Run the affected owner's
 existing test suite, then the isolated adapter scenario; missing runtime access
@@ -85,3 +100,11 @@ code; preserve source revision and actual observed capability separately.
 
 - [ ] GIVEN a binding profile or binding/envelope effective-contract hash that differs from the active contract WHEN use or resume is attempted THEN admission denies it; profile and both hashes must match the active contract.
 - [ ] GIVEN a parent grant without explicit delegation permission, or an issuer not authorized by that permission and bound to the authenticated principal and parent grant WHEN a child grant is requested THEN delegation is rejected and no child grant is issued.
+
+
+## Context identity and inline payload criteria
+
+- [ ] GIVEN a binding lookup or equality check WHEN first use or resume is admitted THEN context identity is the same canonical immutable tuple: instance id, actor id, authenticated principal, harness family, installation id, tagged repository/operator-scope identity, native session/task id and authenticated parent-context reference (explicit nil for a root). The actor pair indexes the stored binding; it never substitutes for validating the full tuple. Capability profile and effective-contract hash are separately validated binding policy, and parent provenance grants no authority.
+- [ ] GIVEN an otherwise valid actor pair and grant WHEN the authenticated harness, native session/task, principal, installation, scope or parent reference differs from the stored tuple THEN each mismatch independently denies first use and resume before delivery, effects or protected outcome return.
+- [ ] GIVEN a private inline payload WHEN prepared for transport THEN the sender validates current source-read authority and the intended authenticated destination's current content-access grant, tenant, audience and exact source revision before reading protected bytes or serializing/disclosing them. The envelope binds source identity/revision and authorization provenance; missing provenance or unauthorized destination emits no payload-bearing transport message.
+- [ ] GIVEN an inline payload with expired/revoked grants, wrong destination/tenant/audience or stale source revision WHEN destination admission, retry or recorded-outcome retrieval occurs THEN current content authorization denies before payload delivery, effects or protected outcome return. Each negative is tested independently; source revocation cannot be bypassed by copied bytes. Public inline data requires explicit source-policy classification.
