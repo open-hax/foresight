@@ -1,11 +1,12 @@
 ---
 uuid: "9f439b79-b810-4b59-97ed-8911ca8ab1b8"
 title: "Compose immutable receipt corrections with the segmented reader"
-status: incoming
-priority: P1
-points: 5
-labels: [receipts, evidence, compatibility, antigravity]
+status: "in_progress"
+priority: "P1"
+points: "5"
+labels: ["receipts", "evidence", "compatibility", "antigravity"]
 created_at: "2026-10-25"
+write-id: "1792911786585-0.ezsps3ff09r7wcrv2z6"
 ---
 
 ## Context

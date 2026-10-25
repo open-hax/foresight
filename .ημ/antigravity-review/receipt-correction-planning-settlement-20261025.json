@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-10-25T07:07:00.067Z",
+  "user_authorization": "Implement after CodeRabbit review; all merge gates remain unchanged",
+  "planning_fix": "201e77b8e2bef63c52d8503a431cf96a40fb8483",
+  "coderabbit_verifications": [
+    "https://github.com/open-hax/foresight/pull/148#discussion_r4369972434",
+    "https://github.com/open-hax/foresight/pull/148#discussion_r4369970344",
+    "https://github.com/open-hax/foresight/pull/148#discussion_r4369970873"
+  ],
+  "card": "9f439b79-b810-4b59-97ed-8911ca8ab1b8",
+  "rheos_transitions": [
+    "incoming->accepted",
+    "accepted->breakdown",
+    "breakdown->ready",
+    "ready->todo",
+    "todo->in_progress"
+  ],
+  "state_readbacks_verified": true,
+  "planning_unanimity_claimed": false,
+  "merge_authorized": false,
+  "red": {
+    "suite": "nbb test/evidence_test.cljs",
+    "tests": 58,
+    "assertions": 442,
+    "failures": 134,
+    "errors": 0,
+    "reason": "Correction APIs and shape predicates absent; strict ordinary malformed receipts remain refused",
+    "adapter_suite": "new adapter regressions running; no completed result claimed",
+    "frozen_fixtures": "test/fixtures/receipt-correction",
+    "production_changes": false
+  }
+}

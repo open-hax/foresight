@@ -3113,4 +3113,122 @@
       (is (= ["group" "child"] (get-in seen [:live :signals]))
           "a genuinely live late child is still refused and cleaned"))))
 
+(def correction-fixture-root
+  (path/join cli/root "test/fixtures/receipt-correction"))
+
+(defn frozen-correction-records []
+  (mapv #(fs/readFileSync
+          (path/join correction-fixture-root (str "original-" % ".edn")))
+        [1 2]))
+
+(defn correction-document [entries]
+  {:ts "2026-10-25T07:00:00.000Z" :kind :correction
+   :origin "source-bound-documentary-correction" :owner "test"
+   :dod "Retain immutable original receipts" :pi "foresight" :host "fixture"
+   :manifest [law/receipt-ledger-path] :refs [] :correction/entries entries})
+
+(defn with-correction-ledger [run!]
+  (let [raws (frozen-correction-records)]
+    (with-historical-ledger-fixture true
+      (fn [{:keys [base-text commit!] :as context}]
+        (let [source (commit! (str base-text (apply str (map #(.toString % "utf8") raws))))
+              originals (mapv #(first (cli/read-receipt-records! (.toString % "utf8"))) raws)
+              entries (mapv (fn [raw record line fields]
+                              {:receipt/source-revision source
+                               :receipt/source-path law/receipt-ledger-path
+                               :receipt/line line :receipt/origin (:origin record)
+                               :receipt/source-sha256 (cli/sha256 raw)
+                               :receipt/identity (cli/record-id record)
+                               :envelope/corrected-fields fields})
+                            raws originals [2 3]
+                            [{:manifest [(:manifest (first originals))]
+                              :refs [(:refs (first originals))]}
+                             {:kind :test-run}])
+              files {"2026-10-23T061014592Z-original.edn" (.toString (first raws) "utf8")
+                     "2026-10-23T070501311Z-original.edn" (.toString (second raws) "utf8")}
+              corrected-files (fn [entries]
+                                (assoc files "2026-10-25T070000000Z-correction.edn"
+                                       (str (pr-str (correction-document entries)) "\n")))]
+          (run! (assoc context :source source :raws raws :originals originals
+                       :entries entries :files files :corrected-files corrected-files)))))))
+
+(defn correction-promotion! [base head]
+  (let [catalog {:catalog/version 1
+                 :catalog/repositories
+                 {"repo" {:repository/path "repo" :repository/gates [local-gate]}}}]
+    (with-redefs [cli/read-immutable-catalog-bundle!
+                  (fn [_] {:catalog catalog :catalog-identity test-catalog-identity})
+                  cli/validate-catalog! identity]
+      (cli/promotion-ready-at! child-revision #{:repo/unit} [passed-result] base head))))
+
+(deftest frozen-originals-match-source-hashes-and-fail-strict-envelopes
+  (let [raws (frozen-correction-records)
+        records (mapv #(first (cli/read-receipt-records! (.toString % "utf8"))) raws)]
+    (is (= ["1c0ac43b287497ceac38d792feede62f5f05c2bdf12099570d06a767f64e3914"
+            "545730a0e14d1288b7796717ea14924657e0ad9156a86d0bd7589fb39261d75a"]
+           (mapv cli/sha256 raws)))
+    (is (= :observation (:kind (first records))))
+    (is (= "test-run" (:kind (second records))))
+    (doseq [record records]
+      (is (false? (law/receipt-envelope? record)))
+      (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
+                            (cli/require-valid-receipt-records! [record]))))))
+
+(deftest all-consumers-admit-bound-corrections-of-verbatim-moved-originals
+  (with-correction-ledger
+    (fn [{:keys [base base-text commit! corrected-files entries raws originals]}]
+      (let [head (commit! base-text (corrected-files entries))
+            before (fs/readFileSync cli/receipt-file)
+            api (resolve 'evidence/admit-merged-receipt-extension!)]
+        (is (some? api) "one shared segmented admission API must exist")
+        (is (zero? (cli/verify-receipts! {:base base :at head})))
+        (is (false? (correction-promotion! base head))
+            "corrected ordinary test-run is no promotion evidence")
+        (is (seq (cli/validate-working-receipt-ledger! nil)))
+        (is (zero? (cli/verify-receipts! {:base head :at head}))
+            "correction documents remain authenticated after entering the base")
+        (when api
+          (let [result (api (:ledger/segments (cli/read-immutable-merged-ledger! base))
+                            (:ledger/segments (cli/read-immutable-merged-ledger! head)) head)]
+            (is (= 2 (count (:receipt/corrections result))))
+            (doseq [original originals]
+              (is (some #{original} (:receipt/originals result))))))
+        (is (.equals before (fs/readFileSync cli/receipt-file)))
+        (doseq [[name raw] (map vector
+                              ["2026-10-23T061014592Z-original.edn"
+                               "2026-10-23T070501311Z-original.edn"] raws)]
+          (is (.equals raw (fs/readFileSync (path/join cli/root law/receipt-segment-directory name)))))))))
+
+(deftest correction-bindings-in-the-base-never-acquire-grandfathered-authority
+  (with-correction-ledger
+    (fn [{:keys [base-text commit! corrected-files entries]}]
+      (doseq [[field value] [[:receipt/source-sha256 (apply str (repeat 64 "0"))]
+                             [:receipt/origin "wrong"]
+                             [:receipt/line 999]
+                             [:receipt/identity (apply str (repeat 64 "0"))]
+                             [:receipt/source-path "../outside.edn"]
+                             [:receipt/source-path ".ημ/receipts/../receipts.edn"]
+                             [:receipt/source-revision "main"]]]
+        (let [head (commit! base-text (corrected-files (assoc-in entries [0 field] value)))]
+          (is (thrown-with-msg? js/Error #"[Cc]orrection"
+                                (cli/verify-receipts! {:base head :at head})) (str field))
+          (is (thrown-with-msg? js/Error #"[Cc]orrection"
+                                (correction-promotion! head head)) (str field))
+          (is (thrown-with-msg? js/Error #"[Cc]orrection"
+                                (cli/validate-working-receipt-ledger! nil)) (str field)))))))
+
+(deftest correction-source-ancestry-is-the-actual-consumer-not-a-selected-fixture
+  (with-correction-ledger
+    (fn [{:keys [base base-text commit! corrected-files entries source]}]
+      ;; Keep the source object, then construct the consumer without its ancestry.
+      (cli/git-capture! ["reset" "--hard" base])
+      (let [head (commit! base-text (corrected-files entries))]
+        (is (not= source head))
+        (is (thrown-with-msg? js/Error #"not an ancestor"
+                              (cli/verify-receipts! {:base base :at head})))
+        (is (thrown-with-msg? js/Error #"not an ancestor"
+                              (correction-promotion! base head)))
+        (is (thrown-with-msg? js/Error #"not an ancestor"
+                              (cli/validate-working-receipt-ledger! nil)))))))
+
 (test/run-tests 'evidence-cli-test)
