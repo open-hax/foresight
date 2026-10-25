@@ -3158,7 +3158,8 @@
                  {"repo" {:repository/path "repo" :repository/gates [local-gate]}}}]
     (with-redefs [cli/read-immutable-catalog-bundle!
                   (fn [_] {:catalog catalog :catalog-identity test-catalog-identity})
-                  cli/validate-catalog! identity]
+                  cli/validate-catalog! identity
+                  cli/gitlink-target! (fn [& _] child-revision)]
       (cli/promotion-ready-at! (or target-revision child-revision)
                                #{:repo/unit} [passed-result] base head))))
 
@@ -3284,9 +3285,37 @@
       (is (thrown-with-msg? js/Error #"not an ancestor"
                             (cli/validate-working-receipt-ledger! nil))))))
 
+(deftest newly-imported-invalid-original-cannot-borrow-a-corrected-view
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base-text commit! current]}]
+      (let [original (assoc current :origin "new-nonconforming-import" :pi :eta-mu)
+            raw (str (pr-str original) "\n")
+            source (commit! (str base-text raw))
+            ;; The immutable source is an ancestor but its record is absent from
+            ;; the comparison base. This deliberately synthetic history tests
+            ;; admission, without claiming its intermediate deletion was lawful.
+            base (commit! base-text)
+            entry {:receipt/source-revision source :receipt/line 2
+                   :receipt/origin (:origin original)
+                   :receipt/source-sha256 (cli/sha256 raw)
+                   :envelope/corrected-fields {:pi "eta-mu"}}
+            head (commit! base-text
+                          {"2026-10-25T080000000Z-new.edn" raw
+                           "2026-10-25T080001000Z-correction.edn"
+                           (str (pr-str (correction-document [entry])) "\n")})]
+        (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
+                              (cli/verify-receipts! {:base base :at head})))
+        (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
+                              (correction-promotion! base head)))
+        ;; Hold the same source-bearing base while retaining the working import.
+        ;; The writer must apply the identical new-original admission rule.
+        (cli/git-capture! ["reset" "--soft" base])
+        (is (thrown-with-msg? js/Error #"invalid receipt envelopes"
+                              (cli/validate-working-receipt-ledger! nil)))))))
+
 (deftest corrected-evidence-metadata-preserves-result-validation-and-promotion-law
   (with-historical-ledger-fixture true
-    (fn [{:keys [base base-text commit! current]}]
+    (fn [{:keys [base-text commit! current]}]
       (doseq [[outcome valid?] [[:passed true] [:failed true] [:unavailable true]
                                [:invalid-exit false]]]
         (let [result (case outcome
@@ -3295,30 +3324,32 @@
                        :unavailable (-> passed-result (dissoc :result/exit)
                                         (assoc :result/outcome :unavailable :result/reason "offline"))
                        :invalid-exit (assoc passed-result :result/exit 1))
-              original (assoc current :manifest "exact old path" :evidence/result result)
+              original (assoc current :pi :eta-mu :evidence/result result)
               raw (str (pr-str original) "\n")
               source (commit! (str base-text raw))
               entry {:receipt/source-revision source :receipt/line 2
                      :receipt/origin law/evidence-receipt-origin
                      :receipt/source-sha256 (cli/sha256 raw)
-                     :envelope/corrected-fields {:manifest ["exact old path"]}}
+                     :envelope/corrected-fields {:pi "eta-mu"}}
               head (commit! base-text
                             {"2026-10-25T070000000Z-evidence.edn" raw
                              "2026-10-25T070001000Z-correction.edn"
                              (str (pr-str (correction-document [entry])) "\n")})]
           (if valid?
-            (do (is (zero? (cli/verify-receipts! {:base base :at head})))
+            (do (is (zero? (cli/verify-receipts! {:base source :at head})))
                 (is (seq (cli/validate-working-receipt-ledger! nil))))
             (do (is (thrown-with-msg? js/Error #"invalid evidence receipts"
-                                      (cli/verify-receipts! {:base base :at head})))
+                                      (cli/verify-receipts! {:base source :at head})))
                 (is (thrown-with-msg? js/Error #"invalid evidence receipts"
-                                      (correction-promotion! base head)))
+                                      (correction-promotion! source head)))
                 (is (thrown-with-msg? js/Error #"invalid evidence receipts"
                                       (cli/validate-working-receipt-ledger! nil)))))
           (when (and valid? (not= :passed outcome))
-            (is (false? (correction-promotion! base head))))
+            (is (false? (correction-promotion! source head))))
           (when (= :passed outcome)
-            (is (false? (correction-promotion! base head sha256-child-revision))
+            (is (true? (correction-promotion! source head child-revision))
+                "metadata correction preserves matching-revision promotion")
+            (is (false? (correction-promotion! source head sha256-child-revision))
                 "metadata correction cannot refresh stale revision-bound evidence")))))))
 
 (test/run-tests 'evidence-cli-test)

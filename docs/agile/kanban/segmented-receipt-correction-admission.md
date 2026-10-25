@@ -133,8 +133,23 @@ reauthenticates each source against the current consumer anchor, and requires
 exactly one active byte-identical original at any permitted current location.
 Duplicate target claims across correction documents fail. The existing pure
 correction law derives disclosed views without changing originals. Validate all
-correction documents, targeted derived views and newly introduced records with
-the strict envelope and existing evidence-semantic checks. Untargeted ordinary
+correction documents and targeted derived views with the strict envelope and
+existing evidence-semantic checks. Independently validate every newly introduced
+non-correction original before applying views. The only historical-import
+exceptions are the two frozen originals identified by these exact pairs of
+LF-inclusive raw SHA256 and canonical original record identity:
+
+- `1c0ac43b287497ceac38d792feede62f5f05c2bdf12099570d06a767f64e3914` /
+  `8c32195ba96bb3f406931eb4f9829c13bb76313a56aca34dc35de513e85861f2`.
+- `545730a0e14d1288b7796717ea14924657e0ad9156a86d0bd7589fb39261d75a` /
+  `03fef2783af6afe1535245b6696976bf9731ab97726cf7e4eb03f7b8ff20dfe4`.
+
+An exception also requires an authenticated correction source binding and a valid
+corrected view. An ancestor source alone grants no exemption. The registry grants
+no evidence, approval or promotion authority. A new non-conforming ordinary
+record cannot gain admission by appending its own correction. Corrections to
+already trusted base originals retain the existing four metadata interpretations.
+ Untargeted ordinary
 base records retain the migration's grandfathering; a correction entering the
 base never acquires grandfathered authority. Correction order is based on the
 source ancestry and original identity, not timestamp/display/merged ordinal.
