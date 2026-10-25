@@ -1,0 +1,43 @@
+{
+  "schema": "foresight/receipt-migration-gitlink-correction-v1",
+  "observed_at": "2026-10-25T05:40:44.688660+00:00",
+  "previous_head": "802297d05b47a27f497d1f7cc0151f66c6d6df97",
+  "hosted_failure": {
+    "run": 40165943917,
+    "job": 121086892238,
+    "step": "Checkout pull request",
+    "message": "fatal: No url found for submodule path 'openplanner' in .gitmodules"
+  },
+  "correction": "Remove only the incoming undeclared OpenPlanner gitlink from the candidate index; no child checkout or package was modified.",
+  "gitlink_map_equal_to_base": true,
+  "base": "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd",
+  "gitlinks": {
+    ".agents": "00a05c8f6ba68ff30a98266879310464e966748b",
+    "Truth": "8ade66a3553bdd89696aebf4fc4628a6fe66e5ae",
+    "axxium": "2439d4d6b8e546cda276f09f5c96db59226ecad6",
+    "bitch-tracker": "2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90",
+    "calliope": "2655ae6eddbd20ac400a8e1ff99914c56d81b835",
+    "chat-ui": "86385532b4f8606946555d0ada8e3fb22f35b4c3",
+    "clio": "788cdd3434615a7932b924e68520dbf7f88408c2",
+    "epiphany": "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66",
+    "eta-mu": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+    "kanban-orchestrator": "8e16609dd191bdd2e9a3c0320ce4238b5cd83467",
+    "katamorph": "3bd4cf26e68dc88fbe67f831baa4bc389e3363e7",
+    "knoxx": "fb08a10a8aa32a594cc97ae11b820113de4cf386",
+    "muse": "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde",
+    "opencode": "cc4b45612974f735ddec46009ede07729511fba4",
+    "osmos": "0c33018e27f861536822086afcdab666a60add44",
+    "proxx": "abbbc8b1ad80738233593e17e751203db785c9e2",
+    "receipt-river": "7c7c62343fea0241ac545e37f14e57ab344bfa30",
+    "rheos": "11811264a308d406cb612aefa1dad40818675e5e",
+    "services": "d361c7837ba369f5c22c9a3f9d827e74605b6c7d",
+    "session-mycology": "30339f9aa3df83ef8c335d4544307272abfbb131",
+    "shx": "6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa",
+    "sol": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+    "uxx": "97e67a7a758c080450a200e8e6e1ada614eabc6d"
+  },
+  "prior_claim_withdrawn": "The prior receipt note said every child gitlink remained unchanged. That was false at 802297d0: the incoming OpenPlanner link was hidden by default submodule diff configuration. The original note and failed run are preserved.",
+  "source_runtime_and_tests_changed": false,
+  "prior_local_ledger_gate": "Still actual historical success; it did not verify checkout submodule topology.",
+  "current_hosted_qualification": false
+}
