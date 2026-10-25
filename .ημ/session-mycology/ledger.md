@@ -900,3 +900,12 @@
   spore: none
   receipt-refs: 2026-10-25T052944517Z-adoption-e4f988ac731a.edn
   note: A merged fork migration is reusable source, not proof of local adoption. Reconcile its ancestry explicitly, preserve current inventory and legacy bytes, run the owning suites, and keep malformed proposed receipts distinct from historical grandfathering. No new spore.
+
+
+## 2026-10-25T09:56:42.620247Z — Resolve receipt-verifier refs explicitly
+
+Friction2/5; reuse3/5; no spore. CodeRabbit identified an ambiguous `<commit>`
+placeholder; this session also encountered the verifier's deliberate refusal of
+literal HEAD. Document both full-ID requirements and execute the ref-resolution
+example against the actual integration base. Runtime semantics, legacy bytes
+and prior segments stay unchanged. Receipt: 2026-10-25T095642620Z-full-commit-documentation.edn.
