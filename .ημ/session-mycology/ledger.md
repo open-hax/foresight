@@ -1000,3 +1000,13 @@
   spore: none
   receipt-refs: .ημ/receipts/2026-10-25T072418324Z-correction-consumer-proof.edn
   note: CodeRabbit planning verification needed actual consumer ancestry and remotely readable immutable commits. Preserve fixture-negative anchors explicitly; compose accepted source laws with segment identity rather than rebind history. All three consumers now share source-byte reauthentication, including base corrections. Local and native source tests pass; consumer admission passes locally without edits to originals. Provider timeout and credential failures remain separate from approval and underlying-cause claims.
+
+- ts: 2026-10-25T08:04:08.588Z
+  session: receipt-correction-admission
+  task: Close new-original admission bypass found in CodeRabbit4370070676
+  p-efficiency: 0.85
+  p-friction: 0.25
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 2026-10-25T080408000Z-new-original-green.edn
+  note: Validate original admission separately from derived-view validity; an ancestor source is not a historical exception. Two frozen imports use explicit content identity pairs. Positive matching-revision promotion control prevents an invalid manifest from masking stale-result checks.

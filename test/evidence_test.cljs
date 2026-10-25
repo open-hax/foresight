@@ -1036,4 +1036,22 @@
               (:receipt/errors result)))
     (is (= [] (:receipt/corrections result)))))
 
+(deftest historical-import-exceptions-bind-only-two-reviewed-originals
+  (let [approved [["1c0ac43b287497ceac38d792feede62f5f05c2bdf12099570d06a767f64e3914"
+                   "8c32195ba96bb3f406931eb4f9829c13bb76313a56aca34dc35de513e85861f2"]
+                  ["545730a0e14d1288b7796717ea14924657e0ad9156a86d0bd7589fb39261d75a"
+                   "03fef2783af6afe1535245b6696976bf9731ab97726cf7e4eb03f7b8ff20dfe4"]]
+        allowed? (resolve 'foresight.evidence/historical-receipt-import?)]
+    (is (some? allowed?))
+    (when allowed?
+      (doseq [[digest id] approved]
+        (let [binding {:binding/verified? true :receipt/source-sha256 digest
+                       :receipt/identity id}]
+          (is (true? (allowed? binding)))
+          (doseq [other [(dissoc binding :binding/verified?)
+                         (assoc binding :binding/verified? false)
+                         (assoc binding :receipt/identity "new-record")
+                         (assoc binding :receipt/source-sha256 "different-bytes")]]
+            (is (false? (allowed? other)))))))))
+
 (test/run-tests 'evidence-test)
