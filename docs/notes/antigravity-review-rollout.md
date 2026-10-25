@@ -379,8 +379,14 @@ record is retained; the second ordinary test-run grants no promotion evidence.
 [Consumer custody](../../.ημ/antigravity-review/receipt-correction-consumer-qualification-20261025.json)
 discloses the exact bindings, provenance and local result.
 
-This consumer qualification is local. CodeRabbit's included code review was
-rate-limited until 07:38:30 UTC, and the published #145 head remains `d9fb8d4f`.
+At that local qualification, CodeRabbit's included code review was
+rate-limited until 07:38:30 UTC, and the published #145 head was `d9fb8d4f`.
+The subsequent published consumer `24642b15` passed all 13 native deterministic
+gates in run40172943872, including actual-base receipt history with 303 records
+and 38 segments. Its Antigravity input preparation refused the complete diff
+at 1,054,047 bytes, above the existing 1,048,576-byte cap. Generated JSON metadata
+is subsequently compacted without changing any parsed values or raw ledger bytes;
+limits and complete-file review remain unchanged.
 No native approval, consumer hosted pass, default adoption, merge authorization
 or full Clio cutover is inferred. Separately, eta-mu364 MiMo attempt2 timed out
 after 45 minutes despite reading/assessing all 77 diff chunks; its missing final
