@@ -1,0 +1,296 @@
+{
+  "pull_request": "open-hax/foresight#148",
+  "head": "541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b",
+  "base_tip": "02f330d45a7ccbf14349d1b1638927f473fb58ae",
+  "canonical_base": "02f330d45a7ccbf14349d1b1638927f473fb58ae",
+  "model": "gemini-3.8-flash-high",
+  "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+  "invocation": {
+    "status": 0,
+    "model": "gemini-3.8-flash-high",
+    "timeout_seconds": 600,
+    "cli_version": "1.4.6",
+    "cli_sha256": "128780f5776959ba6a991bde1f0a8b699eee37a59ed30deb9926147fedfa56c4",
+    "bwrap": "/usr/local/libexec/antigravity-review/bwrap-0.9.0",
+    "bwrap_sha256": "e318903862396f96de3df57264e0158682b952fd3fb53ac23d876413e7b30f71",
+    "settings_sha256": "c30666edd3bc4cb8e577486d7518f20c08c68bdfbd59e7ae4a632d86b43b4150",
+    "effect_policy": "strict-deny-overlay",
+    "native_approval": false,
+    "stdin_bytes": 1541502,
+    "stdin_sha256": "b600699f47c4647807184bdd875392bc0d872efe4514d18103f94fb9022435c6"
+  },
+  "input": {
+    "files": 16,
+    "input_bytes": 1459784,
+    "input_sha256": "943bb71c1c3b04b0ac938e335268b97f85cf165af2ce27649733b26f440c2935",
+    "diff_bytes": 106668,
+    "diff_sha256": "c2e9c97777acba3328cc5068ca7369d30a5a4e876d59ab3b62282b2928033ce1",
+    "prompt_bytes": 1462824,
+    "prompt_sha256": "1a1cbd500fe6f03ad1c3ae79a830df97a8f435ca6aa1ec5b40be606763532cc5",
+    "changed_line_paths": 16,
+    "changed_line_locations": 1660,
+    "independent_checks": {
+      "exact_requested_base_head": true,
+      "unique_merge_base": true,
+      "payload_manifest_bytes_sha": true,
+      "complete_diff_digest": true,
+      "sorted_paths_and_manifest_order": true,
+      "all_base_head_blobs_and_metadata": true,
+      "full_git_diff_exact": true
+    }
+  },
+  "native": {
+    "envelope_status": "SUCCESS",
+    "conversation_id": "3ca51bf5-5744-461b-a1ee-4ee16a85118e",
+    "duration_seconds": 80.975594329,
+    "num_turns": 1,
+    "structured_output": {
+      "findings": [],
+      "schema": "open-hax.antigravity-review/v1",
+      "questions": [
+        "Was the review payload truncated during transport, omitting the complete base/head blobs for 12 of the 16 paths including src/foresight/evidence.cljc and scripts/evidence.clj?",
+        "Can the complete untruncated diff and file blobs be supplied to enable full qualification of the segmented receipt-correction logic?"
+      ],
+      "summary": "Input was truncated before complete head/base file blobs could be inspected for 12 of the 16 paths, including scripts/evidence.clj and src/foresight/evidence.cljc. The available receipt and planning metadata artifacts introduce no confirmed defects.",
+      "head": "541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b",
+      "status": "clean",
+      "base": "02f330d45a7ccbf14349d1b1638927f473fb58ae",
+      "scope_complete": false,
+      "diff_digest": "c2e9c97777acba3328cc5068ca7369d30a5a4e876d59ab3b62282b2928033ce1",
+      "toolSummary": "Antigravity code review",
+      "toolAction": "Submitting review results",
+      "reviewed_paths": [
+        ".\u03b7\u03bc/antigravity-review/receipt-correction-local-green-20261025.json",
+        ".\u03b7\u03bc/antigravity-review/receipt-correction-planning-settlement-20261025.json",
+        ".\u03b7\u03bc/antigravity-review/receipt-correction-source-census-20261025.json",
+        ".\u03b7\u03bc/kanban-events/ledger.edn",
+        ".\u03b7\u03bc/receipts/2026-10-25T055714321Z-8760f17a66c8.edn",
+        ".\u03b7\u03bc/receipts/2026-10-25T065920046Z-planning-correction-spec.edn",
+        ".\u03b7\u03bc/receipts/2026-10-25T070700067Z-correction-red.edn",
+        ".\u03b7\u03bc/receipts/2026-10-25T071448210Z-correction-green.edn",
+        "docs/agile/kanban/segmented-receipt-correction-admission.md",
+        "scripts/evidence.clj",
+        "src/foresight/evidence.cljc",
+        "test/evidence_cli_test.cljs",
+        "test/evidence_test.cljs",
+        "test/fixtures/receipt-correction/original-1.edn",
+        "test/fixtures/receipt-correction/original-2.edn",
+        "test/fixtures/receipt-correction/sources.json"
+      ],
+      "model": "gemini-3.8-flash-high"
+    },
+    "law_result_errors": [
+      "scope"
+    ],
+    "stream_errors": [],
+    "terminal_matches": true,
+    "input_errors": []
+  },
+  "process": {
+    "start": {
+      "pid": 464088,
+      "parent_pid": 463987
+    },
+    "status": 0,
+    "signal": null,
+    "timed_out": false,
+    "oversized": false,
+    "group_cleanup": true,
+    "error": null,
+    "native_stderr_bytes": 0
+  },
+  "artifact_files": {
+    "cli-version.json": {
+      "bytes": 226,
+      "sha256": "59dc92f67a4352cc248ff65636f1adb410dc9f4bbb5aab469e8df2725eb5410e"
+    },
+    "input.json": {
+      "bytes": 10403,
+      "sha256": "57d12f0613245180c7a23a0ec4a7dff352dce902db06d1772dc2684c3d953cfb"
+    },
+    "input.txt": {
+      "bytes": 1459784,
+      "sha256": "943bb71c1c3b04b0ac938e335268b97f85cf165af2ce27649733b26f440c2935"
+    },
+    "invocation.json": {
+      "bytes": 2671,
+      "sha256": "a2b131a1245105eddf0b7364e7fa4fd26d738fdc0816ac6a3da352ea4fbd1543"
+    },
+    "native-envelope.json": {
+      "bytes": 6289,
+      "sha256": "2ea5fb9788a3915c591e652e977d363f135f888fac9144030a307dd1db290931"
+    },
+    "native.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native.stdout.json": {
+      "bytes": 11964,
+      "sha256": "17ed6056e7dde1e9574e05e85eebea571e21568f01f5b56e84fc1ffa80d7b3d9"
+    },
+    "process-start.json": {
+      "bytes": 35,
+      "sha256": "8e539892fb64cf8af27cf6011fb3c7a1244040a9a679898e7ded56cabc17d31e"
+    },
+    "process.json": {
+      "bytes": 122,
+      "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+    },
+    "result.schema.json": {
+      "bytes": 1795,
+      "sha256": "d7ebd44a3ab30dc8aee070972ff808d9b8418bc4acc02b24f77ad4fb5cf2d1c5"
+    },
+    "strict-settings.json": {
+      "bytes": 253,
+      "sha256": "c30666edd3bc4cb8e577486d7518f20c08c68bdfbd59e7ae4a632d86b43b4150"
+    }
+  },
+  "result_admitted": false,
+  "native_approval": false,
+  "review_published": false,
+  "preflight_refusal": {
+    "attempt": "operator-preflight-only",
+    "model_process_started": false,
+    "error": "ENOENT: no such file or directory, lstat '/home/err/.gemini/antigravity-cli/.gemini'",
+    "cause": "--worker-home was passed the nested CLI state directory instead of its parent authenticated HOME",
+    "preserved_output_directory": "/home/err/.local/share/antigravity-review/qualification/20261025/foresight-pr148-r6-541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b"
+  },
+  "native_usage_comparison": {
+    "source": "retained pinned-runtime artifacts; model/provider was not reinvoked",
+    "interpretation": "CLI-emitted usage and response are recorded, but user_input lifecycle events contain no echoed input text, byte count, or digest. Local stdin measurements prove what the adapter serialized, not what the provider actually consumed. Repeated model truncation claims are not evidence of a specific clipping boundary.",
+    "runs": {
+      "foresight-pr148-r6-541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b-run": {
+        "head": "541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b",
+        "native_status": "SUCCESS",
+        "duration_seconds": 80.975594329,
+        "local_manifest_written": {
+          "input_bytes": 1459784,
+          "input_sha256": "943bb71c1c3b04b0ac938e335268b97f85cf165af2ce27649733b26f440c2935",
+          "prompt_bytes": 1462824,
+          "prompt_sha256": "1a1cbd500fe6f03ad1c3ae79a830df97a8f435ca6aa1ec5b40be606763532cc5",
+          "stdin_bytes": 1541502,
+          "stdin_sha256": "b600699f47c4647807184bdd875392bc0d872efe4514d18103f94fb9022435c6",
+          "diff_bytes": 106668,
+          "diff_sha256": "c2e9c97777acba3328cc5068ca7369d30a5a4e876d59ab3b62282b2928033ce1"
+        },
+        "cli_emitted_usage": {
+          "input_tokens": 94852,
+          "output_tokens": 12084,
+          "thinking_tokens": 11344,
+          "cache_read_tokens": 0,
+          "total_tokens": 106936
+        },
+        "same_usage_in_agent_response_event": {
+          "input_tokens": 94852,
+          "output_tokens": 12084,
+          "thinking_tokens": 11344,
+          "cache_read_tokens": 0,
+          "total_tokens": 106936
+        },
+        "user_input_event_count": 1,
+        "user_input_event_metadata": [
+          {
+            "keys": [
+              "conversation_id",
+              "state",
+              "step_index",
+              "step_type"
+            ],
+            "step_type": "user_input",
+            "state": "DONE",
+            "text_delta_field_present": false,
+            "text_delta_bytes": null,
+            "usage": null
+          }
+        ],
+        "agent_response_event": {
+          "text_delta_bytes": 1820,
+          "text_delta_sha256": "7505fcd789308a59f8e3295ab475047bb0bef262917b195db0ee88703c1be2a5",
+          "reported_usage": {
+            "input_tokens": 94852,
+            "output_tokens": 12084,
+            "thinking_tokens": 11344,
+            "cache_read_tokens": 0,
+            "total_tokens": 106936
+          }
+        },
+        "structured_result": {
+          "scope_complete": false,
+          "reviewed_paths": 16,
+          "findings": 0,
+          "questions": 2,
+          "questions_with_truncation_text": 2,
+          "summary_has_truncation_text": true
+        },
+        "user_input_bytes_or_digest_echoed_by_native_user_event": false,
+        "provider_context_consumption_or_clipping_boundary_established": false
+      },
+      "foresight-pr145-r6-40167985191/output": {
+        "head": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+        "native_status": "SUCCESS",
+        "duration_seconds": 183.468916722,
+        "local_manifest_written": {
+          "input_bytes": 2122542,
+          "input_sha256": "ecc87ba69aaeff4148047738b4a4570e457d2d8710f00b56234362b68ff37f37",
+          "prompt_bytes": 2125582,
+          "prompt_sha256": "ce3ab5392995e41add33a53736310c76ae4dd8cd8066e2a8ad15ec0f06dd6075",
+          "stdin_bytes": 2316284,
+          "stdin_sha256": "5e19b2593ee08246cd34ef01d88297bea0af0362f5541c3f829dcca079d3837a",
+          "diff_bytes": 525455,
+          "diff_sha256": "5449fa4a8c5681438bec4d9fdad88bd5da8de78872bf748288e3922e66a6d630"
+        },
+        "cli_emitted_usage": {
+          "input_tokens": 93075,
+          "output_tokens": 27725,
+          "thinking_tokens": 26688,
+          "cache_read_tokens": 0,
+          "total_tokens": 120800
+        },
+        "same_usage_in_agent_response_event": {
+          "input_tokens": 93075,
+          "output_tokens": 27725,
+          "thinking_tokens": 26688,
+          "cache_read_tokens": 0,
+          "total_tokens": 120800
+        },
+        "user_input_event_count": 1,
+        "user_input_event_metadata": [
+          {
+            "keys": [
+              "conversation_id",
+              "state",
+              "step_index",
+              "step_type"
+            ],
+            "step_type": "user_input",
+            "state": "DONE",
+            "text_delta_field_present": false,
+            "text_delta_bytes": null,
+            "usage": null
+          }
+        ],
+        "agent_response_event": {
+          "text_delta_bytes": 2780,
+          "text_delta_sha256": "31a005cd39a9dde79155654e2c694d60af8b6c16e26c5838d2664523c5641304",
+          "reported_usage": {
+            "input_tokens": 93075,
+            "output_tokens": 27725,
+            "thinking_tokens": 26688,
+            "cache_read_tokens": 0,
+            "total_tokens": 120800
+          }
+        },
+        "structured_result": {
+          "scope_complete": true,
+          "reviewed_paths": 22,
+          "findings": 0,
+          "questions": 2,
+          "questions_with_truncation_text": 1,
+          "summary_has_truncation_text": false
+        },
+        "user_input_bytes_or_digest_echoed_by_native_user_event": false,
+        "provider_context_consumption_or_clipping_boundary_established": false
+      }
+    }
+  }
+}

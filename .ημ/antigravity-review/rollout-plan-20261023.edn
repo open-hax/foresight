@@ -1,4 +1,3 @@
-;; Derived operational snapshot; hosted CLI evidence supplies no native approval or merge/adoption authority.
 {:rollout/authority :derived-disposable-projection,
  :rollout/default-branch-adoption :unmerged,
  :rollout/historical-R5-hosted-failure
@@ -295,12 +294,17 @@
  {:source "riatzukiza/.agents",
   :branch "docs/segmented-receipt-ledger",
   :revision "7f4dfb8229e16996cfdb807694a630b60a130d71",
-  :current-checkout-mode :legacy,
+  :current-checkout-mode :segmented,
   :cutover-adopted false},
  :rollout/receipt-correction-plan
  {:pr "https://github.com/open-hax/foresight/pull/148",
-  :head "2c451cc7548e425fd975e4049fdbc1da3fb828ba",
-  :status :planning-only},
+  :initial-head "2c451cc7548e425fd975e4049fdbc1da3fb828ba",
+  :head "541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b",
+  :status
+  :implemented-local-and-native-deterministic-pass-code-review-pending,
+  :code-request
+  "https://github.com/open-hax/foresight/pull/148#issuecomment-6394780804",
+  :retry-not-before "2026-10-25T07:38:30Z"},
  :rollout/historical-R6-initial-hosted
  {:raw_files 99,
   :descriptor
@@ -319,6 +323,19 @@
  :rollout/counts {:targets 23, :eta-mu-callers 17, :muse-callers 6},
  :rollout/workflow-path ".github/workflows/antigravity-review.yml",
  :rollout/observed-at "2026-10-23T10:39:46.338898+00:00",
+ :rollout/correction-consumer
+ {:default-adoption false,
+  :publication :evidence-branch-only,
+  :proof
+  ".ημ/antigravity-review/receipt-correction-consumer-qualification-20261025.json",
+  :segments 36,
+  :records 301,
+  :corrections 2,
+  :head "34158900e139a994ace97ba59f874316a56d3e68",
+  :native-consumer-qualification false,
+  :full-clio-cutover false,
+  :base "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd",
+  :local-admission :passed},
  :rollout/date "2026-10-23",
  :rollout/excluded [".agents" "eta" "clobber"],
  :rollout/segmented-composition

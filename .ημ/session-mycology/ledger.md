@@ -990,3 +990,13 @@
   spore: none
   receipt-refs: 2026-10-25T063339885Z-rheos-preflight-ef5a69847752.edn
   note: Existing delegation works; installed legacy CLI reports policy refusal with exit0. Require actual state/event readback and preserve the refusal diagnostic. No replacement board engine or real status mutation was needed.
+
+- ts: 2026-10-25T07:24:18.324Z
+  session: 01a1717c-d90d-71b3-ad21-5d2b0cc599a1
+  task: Implement reviewed segmented correction admission and qualify actual rollout consumer
+  p-efficiency: 0.75
+  p-friction: 0.65
+  p-skill-candidate: 0.45
+  spore: none
+  receipt-refs: .ημ/receipts/2026-10-25T072418324Z-correction-consumer-proof.edn
+  note: CodeRabbit planning verification needed actual consumer ancestry and remotely readable immutable commits. Preserve fixture-negative anchors explicitly; compose accepted source laws with segment identity rather than rebind history. All three consumers now share source-byte reauthentication, including base corrections. Local and native source tests pass; consumer admission passes locally without edits to originals. Provider timeout and credential failures remain separate from approval and underlying-cause claims.

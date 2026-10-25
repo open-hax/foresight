@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-10-25T06:15:48.272Z",
+  "observed_at": "2026-10-25T07:23:26.945Z",
   "runtime_and_workflow_pins": {
     "workflow_revision": "2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2",
     "octave_revision": "93ea554332bcdafffc26688836b2e6a655575c94",
@@ -1410,15 +1410,24 @@
   "integration_head_source": "Current published native PR145 R6 head; local segmented composition is separate and unpublished.",
   "receipt_correction_plan": {
     "pr": "https://github.com/open-hax/foresight/pull/148",
-    "head": "2c451cc7548e425fd975e4049fdbc1da3fb828ba",
-    "status": "planning-only; no implementation or correction admission",
+    "head": "541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b",
+    "status": "implemented and locally/native deterministically tested; code review pending",
     "first_record_kind_already_valid": true,
     "remaining_defects": [
       "first receipt scalar manifest and refs",
       "second receipt string kind test-run"
     ],
     "historical_edits": false,
-    "planning_review": "deferred for native CodeRabbit cooldown observed 2026-10-25T05:54:55Z +43 minutes"
+    "planning_review": "all three CodeRabbit findings verified at201e77b8; user authorized implementation after that review",
+    "initial_plan_head": "2c451cc7548e425fd975e4049fdbc1da3fb828ba",
+    "code_review": {
+      "request": "https://github.com/open-hax/foresight/pull/148#issuecomment-6394780804",
+      "rate_limit_reply": "https://github.com/open-hax/foresight/pull/148#issuecomment-6394781720",
+      "retry_not_before": "2026-10-25T07:38:30Z",
+      "code_review_completed": false
+    },
+    "native_reader_proof": ".ημ/antigravity-review/receipt-correction-native-qualification-20261025.json",
+    "consumer_local_proof": ".ημ/antigravity-review/receipt-correction-consumer-qualification-20261025.json"
   },
   "member_current_audit": {
     "before_recovery": ".ημ/antigravity-review/member-pr-audit-20261025.json",
@@ -1461,7 +1470,8 @@
       "lint_errors": 0,
       "lint_warnings": 0,
       "project_invariants": 39
-    }
+    },
+    "observation_scope": "Historical initial147-only composition; superseded for local consumer admission by receipt_correction_consumer"
   },
   "root_R6_hosted_run": {
     "id": 40167985191,
@@ -1473,5 +1483,40 @@
     "artifact_sha256": "c69d4e79acc54c83e157fa8be39871266233364470372f0566ddd4904a4ff09c",
     "proof": ".ημ/antigravity-review/hosted-qualification-root-R6-20261025.json",
     "model_questions_retained": 2
+  },
+  "receipt_correction_consumer": {
+    "consumer_head": "34158900e139a994ace97ba59f874316a56d3e68",
+    "trusted_integration_base": "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd",
+    "reader_head": "541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b",
+    "status": "local-consumer-gate-passed-reader-code-review-pending",
+    "records": 301,
+    "segments": 36,
+    "explicit_corrections": 2,
+    "ledger_sha256": "7ba7e521ce72daf45c5b7076c0982187c4b4f17430b43605ff99fbce0a0a6349",
+    "legacy_sha256": "628c21721edd557f8856dcbdc1e0ca57c16541faf1b5117e634f1620c57212ef",
+    "native_consumer_qualification": false,
+    "native_approval": false,
+    "default_adoption": false,
+    "full_clio_cutover": false
+  },
+  "eta_mimo_attempt2": {
+    "run_id": 39939125856,
+    "head": "4072220789297ca94eec97506c13cd80772c7d55",
+    "conclusion": "failure",
+    "observed_reason": "45-minute deadline, no final submission or accepted host trace",
+    "coverage_chunks_read_and_assessed": "77/77",
+    "underlying_cause": "unknown",
+    "native_review_published": false,
+    "proof": ".ημ/antigravity-review/eta-mimo-attempt2-diagnostic-20261025.json"
+  },
+  "reader_antigravity_advisory": {
+    "head": "541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b",
+    "model": "gemini-3.8-flash-high",
+    "result_admitted": false,
+    "reason": "model scope_complete=false; captured complete input does not prove provider-internal consumption",
+    "input_bytes": 1459784,
+    "input_sha256": "943bb71c1c3b04b0ac938e335268b97f85cf165af2ce27649733b26f440c2935",
+    "native_approval": false,
+    "proof": ".ημ/antigravity-review/antigravity-pr148-scope-refusal-20261025.json"
   }
 }

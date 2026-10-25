@@ -337,8 +337,9 @@ The native compliance result remains separately observable.
 Foresight #147 adopts the existing segmented migration and passes native
 deterministic checks. Its existing model-review caller withholds signing
 credentials and consequently fails the credential prerequisite; no native
-approval is inferred. Foresight #148 is a planning-only bridge to the previously
-merged immutable correction reader. The first rollout receipt already has a
+approval is inferred. Foresight #148 began as a planning bridge and now carries the composed
+correction reader after CodeRabbit verified all planning fixes and the user
+authorized implementation. Its code review remains pending. The first rollout receipt already has a
 valid keyword kind and needs scalar manifest/refs interpretations; only the
 second needs a proposed ordinary-receipt kind interpretation. Neither original
 record is rewritten, and full Clio cutover remains unimplemented.
@@ -353,3 +354,36 @@ ordinary envelopes. This is segmented Receipt River adoption, not a full Clio
 cutover, correction waiver or default-branch merge. The current published R6 root
 run40167985191 completed successfully at d9fb8d4f; its independent artifact
 validation is separate. The local migration composition remains unpublished.
+
+
+## October 25 explicit correction admission
+
+Reader implementation `541eb5a26e6eae6dbf4ab44b7900f167b0a83d0b` preserves
+the accepted four field interpretations and adds only a qualified, bound ordinary
+`"test-run"` to `:test-run` representation. The same source authentication serves
+immutable verification, promotion readiness and held-ledger writes. Corrections
+in the comparison base are reauthenticated rather than grandfathered. Local laws
+58/448, adapter 115/721 and workspace 24/120 pass; lint has zero warnings/errors.
+[Native run40172110081](https://github.com/open-hax/foresight/actions/runs/40172110081)
+passes all deterministic checks including receipt history on the exact #148 head.
+Its MiMo job fails at the withheld-credentials boundary and publishes no review.
+
+Local consumer `34158900e139a994ace97ba59f874316a56d3e68` composes this reader
+and one new correction segment with the rollout. The actual immutable gate
+against integration base `2b26173c2cbcf58f14abda2b4e710bd9a912e9bd` passes:
+301 records, 36 segments and two explicit corrections. The frozen legacy hash
+remains `628c21721edd557f8856dcbdc1e0ca57c16541faf1b5117e634f1620c57212ef`;
+every prior segment and all 23 gitlinks are unchanged, and both original source
+rows remain byte-identical exactly once. The original keyword kind on the first
+record is retained; the second ordinary test-run grants no promotion evidence.
+[Consumer custody](../../.ημ/antigravity-review/receipt-correction-consumer-qualification-20261025.json)
+discloses the exact bindings, provenance and local result.
+
+This consumer qualification is local. CodeRabbit's included code review was
+rate-limited until 07:38:30 UTC, and the published #145 head remains `d9fb8d4f`.
+No native approval, consumer hosted pass, default adoption, merge authorization
+or full Clio cutover is inferred. Separately, eta-mu364 MiMo attempt2 timed out
+after 45 minutes despite reading/assessing all 77 diff chunks; its missing final
+submission and host trace leave the underlying stall cause unknown. The actual
+raw artifacts and [diagnostic](../../.ημ/antigravity-review/eta-mimo-attempt2-diagnostic-20261025.json)
+are retained, and no native review was published.
