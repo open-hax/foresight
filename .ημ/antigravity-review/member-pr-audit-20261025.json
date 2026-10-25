@@ -1,0 +1,2172 @@
+{
+  "observed_at": "2026-10-25T05:58:10.407023+00:00",
+  "scope": "root plus 22 actionable direct members; no package execution",
+  "callers": [
+    {
+      "path": ".",
+      "url": "https://github.com/open-hax/foresight/pull/145",
+      "native": {
+        "url": "https://github.com/open-hax/foresight/pull/145",
+        "state": "OPEN",
+        "isDraft": false,
+        "headRefOid": "c61c563d25c15ba13751461b0235235cb6437f16",
+        "baseRefOid": "27540f50f05151fc58be84df6bd8f2c2e6e7a081",
+        "mergeStateStatus": "DIRTY",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 1,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MQ"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/foresight-antigravity-rollout-20261023",
+      "local_head": "0a344db6023139bbacf8edd77db326f3001804f2",
+      "local_head_matches_native": false,
+      "local_status": " M .github/workflows/antigravity-review.yml\n M \".\\316\\267\\316\\274/antigravity-review/rollout-plan-20261023.edn\"\n M \".\\316\\267\\316\\274/antigravity-review/rollout-status-20261023.json\"\n M \".\\316\\267\\316\\274/receipts.edn\"\n M \".\\316\\267\\316\\274/session-mycology/ledger.md\"\n M docs/notes/antigravity-review-rollout.md\n M src/foresight/antigravity_review.cljc\n M test/antigravity_review_test.cljs\n?? \".\\316\\267\\316\\274/antigravity-review/hosted-qualification-A3-20261023.json\"\n?? \".\\316\\267\\316\\274/antigravity-review/hosted-qualification-R4-20261023.json\"\n?? \".\\316\\267\\316\\274/antigravity-review/hosted-qualification-R6-20261023.json\"\n?? \".\\316\\267\\316\\274/antigravity-review/hosted-qualification-R6-initial-20261023.json\"\n?? \".\\316\\267\\316\\274/antigravity-review/hosted-refusal-R5-20261023.json\"\n?? \".\\316\\267\\316\\274/antigravity-review/native-mimo-refusal-R4-20261023.json\"\n?? \".\\316\\267\\316\\274/antigravity-review/receipt-guidance-refresh-20261024.json\"\n?? \".\\316\\267\\316\\274/antigravity-review/receipt-repair-proposal.edn\"\n"
+    },
+    {
+      "path": "eta-mu",
+      "url": "https://github.com/open-hax/eta-mu/pull/364",
+      "native": {
+        "url": "https://github.com/open-hax/eta-mu/pull/364",
+        "state": "OPEN",
+        "isDraft": false,
+        "headRefOid": "4072220789297ca94eec97506c13cd80772c7d55",
+        "baseRefOid": "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "mergeStateStatus": "UNSTABLE",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "PENDING",
+                  "contexts": {
+                    "totalCount": 21,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MjE"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Produce deterministic review evidence",
+                        "status": "IN_PROGRESS",
+                        "conclusion": null,
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125856/job/121088922578"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939966786/job/120368739037"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39941296651/job/120373097249"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review / preflight",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939126005/job/120365922360"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Analyze (javascript-typescript)",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125833/job/120365921667"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Send GitHub event to Discord",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125851/job/120365921481"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Send GitHub event to Discord",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939250101/job/120366333600"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Send GitHub event to Discord",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939296859/job/120366494881"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "bundle",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125880/job/120366792593"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "TS package tests",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125941/job/120365921929"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "main-lint",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125869/job/120365922249"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review / review",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939126005/job/120365963968"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125856/job/121088922307"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "CLJS extension tests + coverage",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125941/job/120365922137"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "eta-mu-lint",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125869/job/120365922059"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "eta-mu CLI + turn-processor + terminal-ui",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125941/job/120365921693"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "clio-nbb-shadow-lint",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125869/job/120365922597"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "main-tests",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125869/job/120365922324"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "main-build",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/actions/runs/39939125869/job/120365922282"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "CodeQL",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/eta-mu/runs/120366304607"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/eta-antigravity-review-20261023",
+      "local_head": "4072220789297ca94eec97506c13cd80772c7d55",
+      "local_head_matches_native": true,
+      "local_status": ""
+    },
+    {
+      "path": "Truth",
+      "url": "https://github.com/octave-commons/Truth/pull/62",
+      "expected_head": "ab50f45df987d3f2d7e4fa5b725d299cbd977249",
+      "native": {
+        "url": "https://github.com/octave-commons/Truth/pull/62",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "ab50f45df987d3f2d7e4fa5b725d299cbd977249",
+        "baseRefOid": "58b0fd91ea65b7a4b3a1f571f22f3d394374a871",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 8,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "OA"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/Truth/actions/runs/39938308680/job/120363226588"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/Truth/actions/runs/39938312217/job/120363238531"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu)",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/Truth/actions/runs/39938308390/job/120363224865"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "coverage",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/Truth/actions/runs/39938307797/job/120363220921"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "analyze",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/Truth/actions/runs/39938308180/job/120363221874"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "unit",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/Truth/actions/runs/39938307807/job/120363221362"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "integration",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/Truth/actions/runs/39938307807/job/120363220918"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/Truth",
+      "local_head": "ab50f45df987d3f2d7e4fa5b725d299cbd977249",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "bitch-tracker",
+      "url": "https://github.com/octave-commons/bitch-tracker/pull/8",
+      "expected_head": "470dbb83d2f1388bc4fc16617e3faa784c27e3bb",
+      "native": {
+        "url": "https://github.com/octave-commons/bitch-tracker/pull/8",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "470dbb83d2f1388bc4fc16617e3faa784c27e3bb",
+        "baseRefOid": "66db8205747996ea6cbffed82d8476c1abec6a13",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 5,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "NQ"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/bitch-tracker/actions/runs/39938307235/job/120363255431"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/bitch-tracker/actions/runs/39938312039/job/120363237652"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu)",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/bitch-tracker/actions/runs/39938307317/job/120363220878"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Bitch Tracker lint + Shadow test + plugin build and verify",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/bitch-tracker/actions/runs/39938306692/job/120363216774"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/bitch-tracker",
+      "local_head": "470dbb83d2f1388bc4fc16617e3faa784c27e3bb",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "calliope",
+      "url": "https://github.com/octave-commons/calliope/pull/21",
+      "expected_head": "ac1db3ad86e34f71dbaa1346c4bf7b2a22689cfa",
+      "native": {
+        "url": "https://github.com/octave-commons/calliope/pull/21",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "ac1db3ad86e34f71dbaa1346c4bf7b2a22689cfa",
+        "baseRefOid": "a731093b878f600ee30648a01f1a6cd44f3439f0",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 5,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "NQ"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/calliope/actions/runs/39938316062/job/120363249891"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/calliope/actions/runs/39938316595/job/120363310198"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu)",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/calliope/actions/runs/39938316108/job/120363250297"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "test",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/calliope/actions/runs/39938315347/job/120363245636"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/calliope",
+      "local_head": "ac1db3ad86e34f71dbaa1346c4bf7b2a22689cfa",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "epiphany",
+      "url": "https://github.com/octave-commons/epiphany/pull/19",
+      "expected_head": "189fb640d6fc2b280a7b9044e35bade0210e7b91",
+      "native": {
+        "url": "https://github.com/octave-commons/epiphany/pull/19",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "189fb640d6fc2b280a7b9044e35bade0210e7b91",
+        "baseRefOid": "643be698ea0d841dd19385506b272872306e456e",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 8,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "OA"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/epiphany/actions/runs/39938344783/job/120363346406"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/epiphany/actions/runs/39938348137/job/120363360669"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu)",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/epiphany/actions/runs/39938345198/job/120363347402"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "unit-test",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/epiphany/actions/runs/39938344265/job/120363343044"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "static",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/epiphany/actions/runs/39938344265/job/120363343306"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "coverage",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/epiphany/actions/runs/39938344265/job/120363343444"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "assurance-evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/epiphany/actions/runs/39938344265/job/120363794450"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/epiphany",
+      "local_head": "189fb640d6fc2b280a7b9044e35bade0210e7b91",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "katamorph",
+      "url": "https://github.com/open-hax/katamorph/pull/29",
+      "expected_head": "05901aaa41fd72819004448d984eb544e6efcfa8",
+      "native": {
+        "url": "https://github.com/open-hax/katamorph/pull/29",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "05901aaa41fd72819004448d984eb544e6efcfa8",
+        "baseRefOid": "fe6017b28baa2d561550dc03768b3dd0da3f1480",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 7,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "Nw"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/katamorph/actions/runs/39938346795/job/120363353374"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/katamorph/actions/runs/39938349893/job/120363421431"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/katamorph/actions/runs/39938347008/job/120363355860"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "lint, test, examples, and build",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/katamorph/actions/runs/39938346506/job/120363350124"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/katamorph/actions/runs/39938347008/job/120363354857"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/katamorph/actions/runs/39938347008/job/120363356335"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/katamorph",
+      "local_head": "05901aaa41fd72819004448d984eb544e6efcfa8",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "knoxx",
+      "url": "https://github.com/open-hax/knoxx/pull/395",
+      "expected_head": "4f57cd0e51a630dc025981c8ed82efb139ebd167",
+      "native": {
+        "url": "https://github.com/open-hax/knoxx/pull/395",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "4f57cd0e51a630dc025981c8ed82efb139ebd167",
+        "baseRefOid": "3409977bca4ba35e09967f9a99d50867a679a73c",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 17,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MTc"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938353062/job/120363374132"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938358374/job/120363390597"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Review pull request with OpenCode",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938352424/job/120363370956"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "testing",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938351554/job/120363372792"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938353916/job/120363377967"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Send GitHub event to Discord",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938352884/job/120363371078"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review-gate / review-resolution-gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938353084/job/120363371638"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review-gate / review-resolution-gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938358844/job/120363390801"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "deployment-boundary",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938352663/job/120363370337"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "deployment-boundary",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938358276/job/120363388312"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938353916/job/120363420357"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "knoxx (backend + frontend)",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938352663/job/120363370611"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "knoxx (backend + frontend)",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938358276/job/120363388512"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938353916/job/120363379612"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "staging",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938351554/job/120363407761"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/knoxx/actions/runs/39938353916/job/120363377952"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/knoxx",
+      "local_head": "4f57cd0e51a630dc025981c8ed82efb139ebd167",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "muse",
+      "url": "https://github.com/octave-commons/muse/pull/31",
+      "expected_head": "7eead3df3d166cc5eebb43933857ed232ed55058",
+      "native": {
+        "url": "https://github.com/octave-commons/muse/pull/31",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "7eead3df3d166cc5eebb43933857ed232ed55058",
+        "baseRefOid": "9d3ae4957d99880ffbfad640d283e4c4692d99fa",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 6,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "Ng"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/muse/actions/runs/39938365740/job/120363416947"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/muse/actions/runs/39938368335/job/120363470269"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu)",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/muse/actions/runs/39938366436/job/120363418900"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "test",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/muse/actions/runs/39938365469/job/120363412921"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "bundle",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/muse/actions/runs/39938365679/job/120363414055"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/muse",
+      "local_head": "7eead3df3d166cc5eebb43933857ed232ed55058",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "proxx",
+      "url": "https://github.com/open-hax/proxx/pull/458",
+      "expected_head": "479e2730ed26033c0b7f0a6b065a653090ecdf02",
+      "native": {
+        "url": "https://github.com/open-hax/proxx/pull/458",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "479e2730ed26033c0b7f0a6b065a653090ecdf02",
+        "baseRefOid": "d4d52a39ff1db65ad36e9a429e03489c1208e32d",
+        "mergeStateStatus": "DIRTY",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 1,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MQ"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/proxx",
+      "local_head": "479e2730ed26033c0b7f0a6b065a653090ecdf02",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "uxx",
+      "url": "https://github.com/open-hax/uxx/pull/23",
+      "expected_head": "3524f2e4f4825c1be32c47fb36259068d772b868",
+      "native": {
+        "url": "https://github.com/open-hax/uxx/pull/23",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "3524f2e4f4825c1be32c47fb36259068d772b868",
+        "baseRefOid": "a31cbbc96a6f46a659e1a522d1e7579e440d4387",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 14,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MTQ"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938388483/job/120363488847"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938392900/job/120363560546"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938388367/job/120363529385"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Send GitHub event to Discord",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938387634/job/120363482900"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Review runner regression tests",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938387629/job/120363483574"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review-gate / review-resolution-gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938388243/job/120363485253"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review-gate / review-resolution-gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938393333/job/120363501147"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "UXX lint + build + typecheck + vitest + adapters",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938387661/job/120363483219"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Review pull request with OpenCode",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938387629/job/120363586264"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938388367/job/120363488355"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Publish preserved Kimi review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938387629/job/120363586155"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938388367/job/120363546409"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/uxx/actions/runs/39938388367/job/120363488192"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/uxx",
+      "local_head": "3524f2e4f4825c1be32c47fb36259068d772b868",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "opencode",
+      "url": "https://github.com/open-hax/opencode/pull/2",
+      "expected_head": "497d4ab459d84baa7de5d264c0eb4ce230a1e0cd",
+      "native": {
+        "url": "https://github.com/open-hax/opencode/pull/2",
+        "state": "CLOSED",
+        "isDraft": true,
+        "headRefOid": "497d4ab459d84baa7de5d264c0eb4ce230a1e0cd",
+        "baseRefOid": "d29f57ccce34ade0c07fc3b4a23f9a574aa2ef01",
+        "mergeStateStatus": "UNSTABLE",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "FAILURE",
+                  "contexts": {
+                    "totalCount": 16,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MTY"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "nix-eval",
+                        "status": "COMPLETED",
+                        "conclusion": "CANCELLED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396224/job/120363514487"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "unit (linux)",
+                        "status": "COMPLETED",
+                        "conclusion": "CANCELLED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396212/job/120363514247"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "typecheck",
+                        "status": "COMPLETED",
+                        "conclusion": "CANCELLED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396245/job/120363509846"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396935/job/120363515250"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938401771/job/120363529334"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396852/job/120363515405"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "check-standards",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938395160/job/120363509064"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "check-standards",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938402059/job/120363529300"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "unit (windows)",
+                        "status": "COMPLETED",
+                        "conclusion": "CANCELLED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396212/job/120363514664"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "e2e (linux)",
+                        "status": "COMPLETED",
+                        "conclusion": "CANCELLED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396212/job/120363514774"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396852/job/120363514493"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "check-compliance",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938395160/job/120363509162"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "check-compliance",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938402059/job/120363529098"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "e2e (windows)",
+                        "status": "COMPLETED",
+                        "conclusion": "CANCELLED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396212/job/120363514796"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/opencode/actions/runs/39938396852/job/120363515545"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/opencode",
+      "local_head": "497d4ab459d84baa7de5d264c0eb4ce230a1e0cd",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "shx",
+      "url": "https://github.com/octave-commons/shx/pull/4",
+      "expected_head": "564574e6a8dd57f22f3ccb25177f26d4e9015728",
+      "native": {
+        "url": "https://github.com/octave-commons/shx/pull/4",
+        "state": "OPEN",
+        "isDraft": false,
+        "headRefOid": "564574e6a8dd57f22f3ccb25177f26d4e9015728",
+        "baseRefOid": "f4ee133dcf1650c7eafb623ef084f62417252477",
+        "mergeStateStatus": "BLOCKED",
+        "reviewDecision": "APPROVED",
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 12,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MTI"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938331324/job/120363349485"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938588959/job/120364156535"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review / preflight",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938323452/job/120363274339"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "SHX review caller regression",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938323468/job/120363274210"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "analyze",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938322851/job/120363271267"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "unit-test",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938323224/job/120363273305"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review / review",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938323452/job/120363323868"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938323468/job/120363362306"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938323468/job/120363362319"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938323468/job/120363891621"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/octave-commons/shx/actions/runs/39938323468/job/120369779082"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/shx",
+      "local_head": "564574e6a8dd57f22f3ccb25177f26d4e9015728",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "kanban-orchestrator",
+      "url": "https://github.com/open-hax/kanban-orchestrator/pull/3",
+      "expected_head": "d558790516d158f269fb5cb6b4988974648c2158",
+      "native": {
+        "url": "https://github.com/open-hax/kanban-orchestrator/pull/3",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "d558790516d158f269fb5cb6b4988974648c2158",
+        "baseRefOid": "036de0310bf8eed7f6217fa29c579becec15b0b1",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 4,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "NA"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/kanban-orchestrator/actions/runs/39938407146/job/120363545388"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/kanban-orchestrator/actions/runs/39938413291/job/120363568302"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Kanban Orchestrator contract EDN parse",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/kanban-orchestrator/actions/runs/39938406591/job/120363541847"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/kanban-orchestrator",
+      "local_head": "d558790516d158f269fb5cb6b4988974648c2158",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "clio",
+      "url": "https://github.com/open-hax/clio/pull/4",
+      "expected_head": "db2e34de3a817c8db2eb2dc36fc9e72e42084e0d",
+      "native": {
+        "url": "https://github.com/open-hax/clio/pull/4",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "db2e34de3a817c8db2eb2dc36fc9e72e42084e0d",
+        "baseRefOid": "9b14cda67d76639ee33aa90eff3caf10dd120d7c",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 4,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "NA"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/clio/actions/runs/39938425312/job/120363608716"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/clio/actions/runs/39938430811/job/120363667159"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Clio BB + JVM + NBB + Shadow + lint",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/clio/actions/runs/39938424966/job/120363604303"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/clio",
+      "local_head": "db2e34de3a817c8db2eb2dc36fc9e72e42084e0d",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "chat-ui",
+      "url": "https://github.com/open-hax/chat-ui/pull/5",
+      "expected_head": "420193f56ff5b81435605061906d429cc26838ce",
+      "native": {
+        "url": "https://github.com/open-hax/chat-ui/pull/5",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "420193f56ff5b81435605061906d429cc26838ce",
+        "baseRefOid": "599991f1098effb7e1a1c97ea5abc3e0d2a8fab9",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 4,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "NA"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/chat-ui/actions/runs/39938431172/job/120363694809"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/chat-ui/actions/runs/39938434440/job/120363639781"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Chat UI lint + Shadow test + build",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/chat-ui/actions/runs/39938430539/job/120363623980"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/chat-ui",
+      "local_head": "420193f56ff5b81435605061906d429cc26838ce",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "rheos",
+      "url": "https://github.com/open-hax/rheos/pull/7",
+      "expected_head": "7af57b80c60a164a4012166d5b85776477678728",
+      "native": {
+        "url": "https://github.com/open-hax/rheos/pull/7",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "7af57b80c60a164a4012166d5b85776477678728",
+        "baseRefOid": "9043d1037519e9d0be640130b75dc9c4348444fc",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 7,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "Nw"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/rheos/actions/runs/39938436626/job/120363696335"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/rheos/actions/runs/39938440046/job/120363658660"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/rheos/actions/runs/39938436678/job/120363695342"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/rheos/actions/runs/39938436678/job/120363647083"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/rheos/actions/runs/39938436678/job/120363647960"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/rheos/actions/runs/39938436678/job/120363645994"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/rheos",
+      "local_head": "7af57b80c60a164a4012166d5b85776477678728",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "session-mycology",
+      "url": "https://github.com/open-hax/session-mycology/pull/5",
+      "expected_head": "0c4af3438e028272625c43a752f2ee2f342217d1",
+      "native": {
+        "url": "https://github.com/open-hax/session-mycology/pull/5",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "0c4af3438e028272625c43a752f2ee2f342217d1",
+        "baseRefOid": "5cc973120bafb86b41ca00ec079cc0f486b0bf48",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 5,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "NQ"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/session-mycology/actions/runs/39938445881/job/120363676993"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/session-mycology/actions/runs/39938449460/job/120363688965"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu)",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/session-mycology/actions/runs/39938445957/job/120363675789"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Session Mycology lint + Shadow test + release build",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/session-mycology/actions/runs/39938445513/job/120363672450"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/session-mycology",
+      "local_head": "0c4af3438e028272625c43a752f2ee2f342217d1",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "sol",
+      "url": "https://github.com/open-hax/sol/pull/3",
+      "expected_head": "d950f6cee16743ba7c770aa957cff10fcffbaff7",
+      "native": {
+        "url": "https://github.com/open-hax/sol/pull/3",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "d950f6cee16743ba7c770aa957cff10fcffbaff7",
+        "baseRefOid": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 3,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "Mw"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/sol/actions/runs/39938462741/job/120363732908"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/sol/actions/runs/39938469484/job/120363755173"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/sol",
+      "local_head": "d950f6cee16743ba7c770aa957cff10fcffbaff7",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "osmos",
+      "url": "https://github.com/open-hax/osmos/pull/3",
+      "expected_head": "fcfa946582a486ad6979354437c65547b98d68d0",
+      "native": {
+        "url": "https://github.com/open-hax/osmos/pull/3",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "fcfa946582a486ad6979354437c65547b98d68d0",
+        "baseRefOid": "30e48e75e25d7dd9b63a7566fe276e14804c7871",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 4,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "NA"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/osmos/actions/runs/39938472278/job/120363764337"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/osmos/actions/runs/39938473663/job/120363769633"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Osmos kondo lint + JVM unit tests",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/osmos/actions/runs/39938471779/job/120363760960"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/osmos",
+      "local_head": "fcfa946582a486ad6979354437c65547b98d68d0",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "receipt-river",
+      "url": "https://github.com/open-hax/receipt-river/pull/5",
+      "expected_head": "e2b0664bab51391ce6fabdbacba55bce0414095a",
+      "native": {
+        "url": "https://github.com/open-hax/receipt-river/pull/5",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "e2b0664bab51391ce6fabdbacba55bce0414095a",
+        "baseRefOid": "747d5030d332ec0c93d32edaced7e9603eebb01f",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 8,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "OA"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/receipt-river/actions/runs/39938475643/job/120363775734"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/receipt-river/actions/runs/39938478133/job/120363826939"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/receipt-river/actions/runs/39938475701/job/120363837787"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Receipt River lint + Shadow test + release build + public API",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/receipt-river/actions/runs/39938475160/job/120363773601"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/receipt-river/actions/runs/39938475701/job/120363831699"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/receipt-river/actions/runs/39938475701/job/120363776791"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/receipt-river/actions/runs/39938475701/job/120363775529"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/receipt-river",
+      "local_head": "e2b0664bab51391ce6fabdbacba55bce0414095a",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "axxium",
+      "url": "https://github.com/open-hax/axxium/pull/31",
+      "expected_head": "89f3f00c908c492831c49c05e100ecefe063578f",
+      "native": {
+        "url": "https://github.com/open-hax/axxium/pull/31",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "89f3f00c908c492831c49c05e100ecefe063578f",
+        "baseRefOid": "99e6c725c64baed7d3ee93930b206724874e1486",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 11,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MTE"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938483533/job/120363864984"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938488258/job/120363818361"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu)",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938483417/job/120363801863"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "deployment-boundary",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938482755/job/120363796952"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Analyze (actions)",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938479444/job/120363792275"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review-gate / review-resolution-gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938483492/job/120363800400"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review-gate / review-resolution-gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938488266/job/120363815943"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Analyze (javascript-typescript)",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938479444/job/120363791994"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "build",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/axxium/actions/runs/39938482755/job/120363797107"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "CodeQL",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/axxium/runs/120364011979"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/axxium",
+      "local_head": "89f3f00c908c492831c49c05e100ecefe063578f",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    },
+    {
+      "path": "services",
+      "url": "https://github.com/open-hax/services/pull/104",
+      "expected_head": "64684c79fda2b8efebcb8a2d2c78ac58cd697489",
+      "native": {
+        "url": "https://github.com/open-hax/services/pull/104",
+        "state": "OPEN",
+        "isDraft": true,
+        "headRefOid": "64684c79fda2b8efebcb8a2d2c78ac58cd697489",
+        "baseRefOid": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4",
+        "mergeStateStatus": "CLEAN",
+        "reviewDecision": null,
+        "autoMergeRequest": null,
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "statusCheckRollup": {
+                  "state": "SUCCESS",
+                  "contexts": {
+                    "totalCount": 10,
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": "MTA"
+                    },
+                    "nodes": [
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588372/job/120364153293"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "review",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588621/job/120364197551"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Produce deterministic review evidence",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588686/job/120364157351"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Validate service definitions",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588048/job/120364150625"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "coderabbit-review-gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588007/job/120364150542"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "coderabbit-review-gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588003/job/120364153393"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Compile Muse tools and stage skills",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588686/job/120364197053"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo",
+                        "status": "COMPLETED",
+                        "conclusion": "SKIPPED",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588686/job/120364156922"
+                      },
+                      {
+                        "__typename": "CheckRun",
+                        "name": "Evidence-first review (eta-mu) / OpenCode evidence review gate",
+                        "status": "COMPLETED",
+                        "conclusion": "SUCCESS",
+                        "detailsUrl": "https://github.com/open-hax/services/actions/runs/39938588686/job/120364155759"
+                      },
+                      {
+                        "__typename": "StatusContext",
+                        "context": "CodeRabbit",
+                        "state": "SUCCESS",
+                        "targetUrl": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "checkout": "/home/err/.local/share/foresight-worktrees/antigravity-members-20261023/services",
+      "local_head": "64684c79fda2b8efebcb8a2d2c78ac58cd697489",
+      "local_head_matches_native": true,
+      "local_status": "",
+      "prior_recorded_head_matches_native": true
+    }
+  ],
+  "native_query": "query {r0: repository(owner:\"open-hax\",name:\"foresight\"){pullRequest(number:145){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r1: repository(owner:\"open-hax\",name:\"eta-mu\"){pullRequest(number:364){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r2: repository(owner:\"octave-commons\",name:\"Truth\"){pullRequest(number:62){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r3: repository(owner:\"octave-commons\",name:\"bitch-tracker\"){pullRequest(number:8){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r4: repository(owner:\"octave-commons\",name:\"calliope\"){pullRequest(number:21){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r5: repository(owner:\"octave-commons\",name:\"epiphany\"){pullRequest(number:19){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r6: repository(owner:\"open-hax\",name:\"katamorph\"){pullRequest(number:29){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r7: repository(owner:\"open-hax\",name:\"knoxx\"){pullRequest(number:395){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r8: repository(owner:\"octave-commons\",name:\"muse\"){pullRequest(number:31){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r9: repository(owner:\"open-hax\",name:\"proxx\"){pullRequest(number:458){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r10: repository(owner:\"open-hax\",name:\"uxx\"){pullRequest(number:23){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r11: repository(owner:\"open-hax\",name:\"opencode\"){pullRequest(number:2){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r12: repository(owner:\"octave-commons\",name:\"shx\"){pullRequest(number:4){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r13: repository(owner:\"open-hax\",name:\"kanban-orchestrator\"){pullRequest(number:3){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r14: repository(owner:\"open-hax\",name:\"clio\"){pullRequest(number:4){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r15: repository(owner:\"open-hax\",name:\"chat-ui\"){pullRequest(number:5){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r16: repository(owner:\"open-hax\",name:\"rheos\"){pullRequest(number:7){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r17: repository(owner:\"open-hax\",name:\"session-mycology\"){pullRequest(number:5){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r18: repository(owner:\"open-hax\",name:\"sol\"){pullRequest(number:3){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r19: repository(owner:\"open-hax\",name:\"osmos\"){pullRequest(number:3){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r20: repository(owner:\"open-hax\",name:\"receipt-river\"){pullRequest(number:5){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r21: repository(owner:\"open-hax\",name:\"axxium\"){pullRequest(number:31){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}} r22: repository(owner:\"open-hax\",name:\"services\"){pullRequest(number:104){url state isDraft headRefOid baseRefOid mergeStateStatus reviewDecision autoMergeRequest{enabledAt} commits(last:1){nodes{commit{statusCheckRollup{state contexts(first:100){totalCount pageInfo{hasNextPage endCursor} nodes{__typename ... on CheckRun{name status conclusion detailsUrl} ... on StatusContext{context state targetUrl}}}}}}}}}}",
+  "limits": [
+    "Rollup state is not review approval or merge qualification.",
+    "Draft PRs are not evidence of activated default-branch workflows.",
+    "Root local rollout changes remain unpublished."
+  ]
+}

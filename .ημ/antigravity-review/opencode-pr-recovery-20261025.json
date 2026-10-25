@@ -1,0 +1,46 @@
+{
+  "observed_at": "2026-10-25T06:01:32.361066+00:00",
+  "reason": "Native compliance bot closed the PR for missing template sections and unsupported ci title; no human closure was found.",
+  "before": {
+    "state": "closed",
+    "draft": true,
+    "head": "497d4ab459d84baa7de5d264c0eb4ce230a1e0cd",
+    "title": "ci: add pinned Antigravity Flash code review",
+    "body": "Pin the shared Antigravity advisory reviewer to R6 using exactly `gemini-3.8-flash-high`. R6 admits valid native pure-finish progress while retaining strict effect denial and complete bounded input validation.\n\n- Reusable workflow: `open-hax/eta-mu/.github/workflows/antigravity-code-review.yml@2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2`.\n- Trusted eta-mu runtime: `5152dcce6e279a49b5a706ab3d3eaa4224df6cd3`, published as an ancestor of source head `38c3f66d4a25a83877f2133e2d2e337f823cf59f`.\n- Changed scope: `.github/workflows/antigravity-review.yml`, `.ημ/receipts.edn`, `.ημ/session-mycology/ledger.md`. All cards remain unchanged and incoming; existing receipt and reflection bytes are preserved.\n\nThe caller keeps read-only permissions, exact PR base/head binding, no forwarded secrets, and the approved event/concurrency behavior. AGY and every model descendant receive zero GitHub credentials of any scope. Existing product checks, package-manager policy and branch protections remain intact.\n\nMember validation: caller actionlint, exact R5-to-R6 runtime-only comparison, diff hygiene, unchanged cards and append-only provenance checks pass. Child product suites and fresh native review remain separate obligations.\n\nShared-source validation: 42 Node runtime integration tests, 7 pure-law tests / 99 assertions, and 12 reusable-workflow Node tests pass. The coordinator checked all 23 mapped R6 callers; root rollout laws remain 12 tests / 166 assertions. Fresh real R6 systemd cases returned clean in 24.0887s and one deliberate defect in 46.0651s, each with strict initialization, five events, one turn, current-law errors [], zero stderr and cleanup. The 49 raw proof files are retained losslessly; `service-qualification-R6.json` records custody and results.\n\nBoth shared workers are online and all 23 readiness readbacks passed. R6 hosted qualification and eligible native review for this new member head remain pending; drafts intentionally skip. Earlier R5's actual protocol refusal is preserved, with no retry, wider tool permissions or limit waiver. Prior-head hosted runs and native service cases supply no current-head credit. Negative runner enforcement remains UNKNOWN. Imported CLI evidence grants zero native approval or merge credit; auto-merge stays off.\n\nDepends on [eta-mu#364](https://github.com/open-hax/eta-mu/pull/364); coordinated by [foresight#145](https://github.com/open-hax/foresight/pull/145).\n",
+    "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679"
+  },
+  "coordination_issue": "https://github.com/open-hax/foresight/issues/149",
+  "expected": {
+    "state": "open",
+    "title": "chore(opencode): add pinned Antigravity Flash code review",
+    "body": "### Issue for this PR\n\nCloses open-hax/foresight#149. OpenCode has issues disabled; the Foresight issue tracks this member integration.\n\n### Type of change\n\n- [x] New feature\n\n### What does this PR do?\n\nAdds the shared advisory Antigravity reviewer using `gemini-3.8-flash-high`. The caller pins eta-mu workflow `2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2` and runtime `5152dcce6e279a49b5a706ab3d3eaa4224df6cd3`, binds the exact PR base/head, and forwards no signing or deployment credentials. Existing product checks remain intact.\n\nScope: one workflow and append-only execution/reflection records. Depends on open-hax/eta-mu#364; coordinated by open-hax/foresight#145. This PR remains draft with auto-merge off.\n\n### How did you verify your code works?\n\nThe current caller matches the shared renderer in the 2026-10-25 check of all 23 Foresight targets. Workflow lint and append-only checks passed during preparation. Shared hosted R6 runs on eta-mu and shx produced validated output and cleanup; those runs do not qualify this member head. Fresh native review and default-branch activation remain pending. Product suites were not run for this workflow-only change.\n\n### Screenshots / recordings\n\nNo UI changes.\n\n### Checklist\n\n- [x] I have tested my changes locally (workflow rendering and lint).\n- [x] I have not included unrelated changes in this PR.\n"
+  },
+  "result": "reopened-with-exact-template-body-and-valid-title; native standards checks pending",
+  "after": {
+    "observed_at": "2026-10-25T06:06:28.756361+00:00",
+    "url": "https://github.com/open-hax/opencode/pull/2",
+    "state": "open",
+    "draft": true,
+    "head": "497d4ab459d84baa7de5d264c0eb4ce230a1e0cd",
+    "title": "chore(opencode): add pinned Antigravity Flash code review",
+    "body_sha256": "4c4dbfb20390dc106e0e621470ddc55a6a295b231b0a280b266a109fdbc17a8c",
+    "auto_merge": null,
+    "labels": [
+      "needs:title"
+    ]
+  },
+  "linked_issue_readback": {
+    "repository": {
+      "pullRequest": {
+        "closingIssuesReferences": {
+          "totalCount": 1,
+          "nodes": [
+            {
+              "url": "https://github.com/open-hax/foresight/issues/149"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
-  "observed_at": "2026-10-23T07:05:01.311797+00:00",
+  "observed_at": "2026-10-25T06:05:31.923993+00:00",
   "runtime_and_workflow_pins": {
-    "workflow_revision": "6461caabbe4eefbd1615036936863d06ee69d68d",
-    "octave_revision": "5bc9a8543ceb8afb04d3fd7e92ba0e1d9c2a03dd",
-    "runtime_revision": "3bcf27bef296f9349fdf4997df256a617da5f120",
-    "workflow_sha256": "f6c5f07015846b14a27f03bd8a59cd5445cd06ec10f5613413c92d12ca35d82b"
+    "workflow_revision": "2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2",
+    "octave_revision": "93ea554332bcdafffc26688836b2e6a655575c94",
+    "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+    "workflow_sha256": "9eab25fa2a8e2508d9eb14b268a41639afa0b562b8267f11c603643a75651c16"
   },
   "implementation_pr": "https://github.com/open-hax/eta-mu/pull/364",
   "integration_pr": "https://github.com/open-hax/foresight/pull/145",
@@ -12,135 +12,341 @@
     {
       "path": "Truth",
       "url": "https://github.com/octave-commons/Truth/pull/62",
-      "head_sha": "9f84ab5b02f3dbea474be90b7b8a95ac6f0b754c",
-      "draft": true
+      "head_sha": "ab50f45df987d3f2d7e4fa5b725d299cbd977249",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "58b0fd91ea65b7a4b3a1f571f22f3d394374a871",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:19:42.844374Z",
+      "body_sha256": "b924972a63cdb5c41fb2fd53f44f146030daf80a26b6b1676e26a4b22126af20",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "bitch-tracker",
       "url": "https://github.com/octave-commons/bitch-tracker/pull/8",
-      "head_sha": "962e3dc06b9c825df6a1f3181ac18bd6e681a286",
-      "draft": true
+      "head_sha": "470dbb83d2f1388bc4fc16617e3faa784c27e3bb",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "66db8205747996ea6cbffed82d8476c1abec6a13",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:19:43.016477Z",
+      "body_sha256": "79c949679ef02033e9c87eb955fb63333395eaad9b767f8b02e43c9c8971ced1",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "calliope",
       "url": "https://github.com/octave-commons/calliope/pull/21",
-      "head_sha": "4d84c3538facd44302e13e72ec42c474ec459959",
-      "draft": true
+      "head_sha": "ac1db3ad86e34f71dbaa1346c4bf7b2a22689cfa",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "a731093b878f600ee30648a01f1a6cd44f3439f0",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:19:45.912618Z",
+      "body_sha256": "b924972a63cdb5c41fb2fd53f44f146030daf80a26b6b1676e26a4b22126af20",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "epiphany",
       "url": "https://github.com/octave-commons/epiphany/pull/19",
-      "head_sha": "b53da972397354c36166c4ec0f409e10941646ae",
-      "draft": true
+      "head_sha": "189fb640d6fc2b280a7b9044e35bade0210e7b91",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "643be698ea0d841dd19385506b272872306e456e",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:02.338666Z",
+      "body_sha256": "b924972a63cdb5c41fb2fd53f44f146030daf80a26b6b1676e26a4b22126af20",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "katamorph",
       "url": "https://github.com/open-hax/katamorph/pull/29",
-      "head_sha": "170a23a2126af8b939c7105f5d482584e43c0281",
-      "draft": true
+      "head_sha": "05901aaa41fd72819004448d984eb544e6efcfa8",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "fe6017b28baa2d561550dc03768b3dd0da3f1480",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:02.851438Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "knoxx",
       "url": "https://github.com/open-hax/knoxx/pull/395",
-      "head_sha": "3d3e5128d9c1195fd0d82e4a0b783abbd948a09b",
-      "draft": true
+      "head_sha": "4f57cd0e51a630dc025981c8ed82efb139ebd167",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "3409977bca4ba35e09967f9a99d50867a679a73c",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:06.341628Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "muse",
       "url": "https://github.com/octave-commons/muse/pull/31",
-      "head_sha": "ca73ee77b356aa6d7f0253c3c79c16136a68946c",
-      "draft": true
+      "head_sha": "7eead3df3d166cc5eebb43933857ed232ed55058",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "9d3ae4957d99880ffbfad640d283e4c4692d99fa",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:12.475864Z",
+      "body_sha256": "b924972a63cdb5c41fb2fd53f44f146030daf80a26b6b1676e26a4b22126af20",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "proxx",
       "url": "https://github.com/open-hax/proxx/pull/458",
-      "head_sha": "f7fa29ff1cc1ce033578f711b41a3ae4414bd7da",
-      "draft": true
+      "head_sha": "479e2730ed26033c0b7f0a6b065a653090ecdf02",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "d4d52a39ff1db65ad36e9a429e03489c1208e32d",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:22.607093Z",
+      "body_sha256": "b0a3353e06d765b34bb3f0eaf6102cc69c72b767c5ba8381c882d332cb225474",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "uxx",
       "url": "https://github.com/open-hax/uxx/pull/23",
-      "head_sha": "79ce3ee145c77acd293bbdb73ec93b73e18d4ea7",
-      "draft": true
+      "head_sha": "3524f2e4f4825c1be32c47fb36259068d772b868",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "a31cbbc96a6f46a659e1a522d1e7579e440d4387",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:23.572611Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "opencode",
       "url": "https://github.com/open-hax/opencode/pull/2",
-      "head_sha": "79f4f4e10283251e8e4feb4365411c93bfe5e7c0",
-      "draft": true
+      "head_sha": "497d4ab459d84baa7de5d264c0eb4ce230a1e0cd",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "d29f57ccce34ade0c07fc3b4a23f9a574aa2ef01",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:27.011932Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+      "metadata_repaired_at": "2026-10-25T06:05:31.923993+00:00",
+      "coordination_issue": "https://github.com/open-hax/foresight/issues/149",
+      "native_compliance": "fresh check pending"
     },
     {
       "path": "shx",
       "url": "https://github.com/octave-commons/shx/pull/4",
-      "head_sha": "2bf4fbefe851bf4817095156dce6cba3d2939edf",
-      "draft": false
+      "head_sha": "564574e6a8dd57f22f3ccb25177f26d4e9015728",
+      "draft": false,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "f4ee133dcf1650c7eafb623ef084f62417252477",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:19:52.724016Z",
+      "body_sha256": "ec83ed1bf3c980f0eba8879e1727887cfb8dbe9158117c7f88e555cb163e89e3",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "kanban-orchestrator",
       "url": "https://github.com/open-hax/kanban-orchestrator/pull/3",
-      "head_sha": "0946c27102013184946ca8245ce1486469500ad5",
-      "draft": true
+      "head_sha": "d558790516d158f269fb5cb6b4988974648c2158",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "036de0310bf8eed7f6217fa29c579becec15b0b1",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:32.526297Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "clio",
       "url": "https://github.com/open-hax/clio/pull/4",
-      "head_sha": "b1b838793369246f5e6da9d5a8059493453aa9b5",
-      "draft": true
+      "head_sha": "db2e34de3a817c8db2eb2dc36fc9e72e42084e0d",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "9b14cda67d76639ee33aa90eff3caf10dd120d7c",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:42.324337Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "chat-ui",
       "url": "https://github.com/open-hax/chat-ui/pull/5",
-      "head_sha": "2f2d831adf3743dd5bd542e19512f50ba8cfde4f",
-      "draft": true
+      "head_sha": "420193f56ff5b81435605061906d429cc26838ce",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "599991f1098effb7e1a1c97ea5abc3e0d2a8fab9",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:44.361236Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "rheos",
       "url": "https://github.com/open-hax/rheos/pull/7",
-      "head_sha": "b22c7c19017f2f187da88899981979e4de4cccc9",
-      "draft": true
+      "head_sha": "7af57b80c60a164a4012166d5b85776477678728",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "9043d1037519e9d0be640130b75dc9c4348444fc",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:47.188278Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "session-mycology",
       "url": "https://github.com/open-hax/session-mycology/pull/5",
-      "head_sha": "c352505437242fdc2ec28fa2ff2fed3d3da10b8d",
-      "draft": true
+      "head_sha": "0c4af3438e028272625c43a752f2ee2f342217d1",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "5cc973120bafb86b41ca00ec079cc0f486b0bf48",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:20:52.161241Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "sol",
       "url": "https://github.com/open-hax/sol/pull/3",
-      "head_sha": "fd796832d4a95a255f184ecf793e5075c0cb0fbf",
-      "draft": true
+      "head_sha": "d950f6cee16743ba7c770aa957cff10fcffbaff7",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "1276955c86ff46936cd1ce7d81fbc790f7068e1e",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:21:00.971681Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "osmos",
       "url": "https://github.com/open-hax/osmos/pull/3",
-      "head_sha": "29ad553650bdca792315a987f9c56bea08c8ddd2",
-      "draft": true
+      "head_sha": "fcfa946582a486ad6979354437c65547b98d68d0",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "30e48e75e25d7dd9b63a7566fe276e14804c7871",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:21:03.706679Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "receipt-river",
       "url": "https://github.com/open-hax/receipt-river/pull/5",
-      "head_sha": "e4b4b2d4989eb6862440c81fc6b7995a73bb4a9b",
-      "draft": true
+      "head_sha": "e2b0664bab51391ce6fabdbacba55bce0414095a",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "747d5030d332ec0c93d32edaced7e9603eebb01f",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:21:06.466933Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "axxium",
       "url": "https://github.com/open-hax/axxium/pull/31",
-      "head_sha": "9b6cff432f5961134abf3a1feb483c840ec9dcd4",
-      "draft": true
+      "head_sha": "89f3f00c908c492831c49c05e100ecefe063578f",
+      "draft": true,
+      "head_source": "R6 exact local/remote/native PR and body readback; original ledger prefixes preserved",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "99e6c725c64baed7d3ee93930b206724874e1486",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:21:10.989928Z",
+      "body_sha256": "6c2bdfd53132309379a75a56bc7cbec1ea46a8819f106ccc748e789f38bb9679",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"
     },
     {
       "path": "services",
       "url": "https://github.com/open-hax/services/pull/104",
-      "head_sha": "8b4e22c5666372a665ded179772d2ccabad12f2b",
-      "draft": true
+      "head_sha": "64684c79fda2b8efebcb8a2d2c78ac58cd697489",
+      "draft": true,
+      "head_source": "Services R6 agent exact remote/native PR and body readback",
+      "uncommitted_caller_update": false,
+      "publication": "pushed",
+      "base_sha": "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4",
+      "auto_merge": null,
+      "state": "open",
+      "pr_observed_at": "2026-10-23T10:30:17.541777+00:00",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+      "body_sha256": "870763e56ead9fbd77db02aaaad10cb01dc716352da4fd803e7c8e22012e3694"
     }
   ],
   "local_validation": {
     "caller_count": 23,
-    "actionlint": "pass",
-    "exact_pin_check": "pass",
-    "rollout_law_tests": "9 tests 109 assertions pass"
+    "actionlint": "23 callers pass",
+    "exact_pin_check": "23 callers matching, CLI exit 0",
+    "rollout_law_tests": "12 tests 166 assertions pass",
+    "project_law_tests": "12 tests 166 assertions pass",
+    "workspace_law_tests": "24 tests 120 assertions pass",
+    "evidence_law_tests": "17 tests 89 assertions pass",
+    "lineage_law_tests": "11 tests 58 assertions pass",
+    "clj_kondo": "0 errors 0 warnings",
+    "receipt_history": "In-place correction proposal withdrawn after refreshing Receipt River. Historical receipt bytes remain unchanged. The local checkout is still legacy; the original invalid appended envelopes remain unqualified until an adopted correction or ledger migration path handles them.",
+    "shared_source": {
+      "node_runtime_tests": 42,
+      "pure_tests": 7,
+      "pure_assertions": 99,
+      "workflow_tests": 12,
+      "kondo_errors": 0,
+      "kondo_warnings": 0
+    }
   },
   "hosted_observations": [
     {
@@ -160,8 +366,1068 @@
       "review": "explicit prompt-size refusal",
       "artifact_upload": "pass",
       "cleanup": "pass"
+    },
+    {
+      "repository": "open-hax/eta-mu",
+      "run_id": 39919264609,
+      "review": "reported AppArmor failure before CLI initialization",
+      "native_review_produced": false,
+      "host_repair": "repaired; isolated native service qualification passed",
+      "evidence_source": "eta-mu worker-provisioning.json at ee80c8de92df0f4f85c847b312ffe94549c0c569"
     }
   ],
-  "activation": "pending successful full native hosted review; no native approval credit",
-  "merge_authority": "not granted"
+  "activation": "R6 installed, service-qualified and both current hosted routes independently validated; all22 member proposals published. Root final publication awaits reconciliation with the owning ledger contract; the in-place repair proposal is withdrawn. Default adoption is unmerged, native review convergence unqualified, no approval or access-control enforcement credit invented.",
+  "merge_authority": "not granted",
+  "implementation_head_sha": "4072220789297ca94eec97506c13cd80772c7d55",
+  "integration_head_sha": "c61c563d25c15ba13751461b0235235cb6437f16",
+  "caller_format": 3,
+  "negative_canaries": {
+    "status": "UNKNOWN",
+    "note": "Each unapproved caller remained queued with runner_id 0 for 180 seconds; cancelled. No explicit enforcement denial observed. Group configuration readback is not a universal enforcement proof.",
+    "runs": [
+      "https://github.com/open-hax/katamorph/actions/runs/39918251555",
+      "https://github.com/octave-commons/muse/actions/runs/39918900721"
+    ],
+    "runner_allocated": false,
+    "qualification_credit": false
+  },
+  "implementation_head_source": "FinalR6 sourcebranch remote+nativePR exact readback; no auto merge",
+  "publication": {
+    "eta_source_head": "4072220789297ca94eec97506c13cd80772c7d55",
+    "root_integration": "R6 integration publication prepared in the commit containing this snapshot. Receipt admission remains unqualified; publication supplies no merge credit.",
+    "default_branch_adoption": "UNMERGED",
+    "R5": "Historical R5: all 21 other member callers were published; source and proof were published on auxiliary ref 904ad0ac while the source PR remained at 5e6af548 during its then-live MiMo review. The later terminal failure is retained separately.",
+    "member_callers_pushed_R5": 21,
+    "member_callers_pushed_R4_or_R5": 21,
+    "eta_source_and_proofs_pushed_R4": true,
+    "eta_source_and_proofs_R5": "Historical R5 source and proof are retained on auxiliary ref 904ad0ac. The source PR has since advanced to the current R6 head.",
+    "member_callers_pushed_R6": 21,
+    "eta_source_and_proofs_R6": "40722207 published, with append-only ledger clarification",
+    "R6": "All 21 other member callers and eta-mu source are published. This snapshot accompanies the root R6 caller for publication; default-branch adoption and original receipt reconciliation remain incomplete."
+  },
+  "deployment_state": {
+    "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+    "runtime_path": "/home/err/.local/share/antigravity-review/runtime-5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+    "services": {
+      "antigravity-review-open-hax.service": {
+        "is-active": "active",
+        "is-enabled": "enabled"
+      },
+      "antigravity-review-octave-commons.service": {
+        "is-active": "active",
+        "is-enabled": "enabled"
+      }
+    },
+    "organization_runners_online": 2,
+    "ready_repositories": 23,
+    "observed_at": "2026-10-23T10:07:41.137673+00:00",
+    "runtime_publication": {
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+      "source_commit": "38c3f66d4a25a83877f2133e2d2e337f823cf59f",
+      "status": "published"
+    },
+    "default_branch_adoption": "unmerged"
+  },
+  "native_service_qualification": {
+    "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+    "status": "passed",
+    "descriptor": {
+      "repository": "open-hax/eta-mu",
+      "path": ".ημ/antigravity-review/service-qualification-R6.json",
+      "bytes": 7728,
+      "sha256": "a711b263e93a28d0401353fa20820cbce34979efb8b6c1cabfce5a4bbfdf708f",
+      "publication": "published-source38c3f66d"
+    },
+    "cases": {
+      "clean": {
+        "service_unit": "antigravity-r6-native-clean-dbld_yma",
+        "service_exit": 0,
+        "wall_seconds": 27.89,
+        "native_duration_seconds": 24.088677621,
+        "native_conversation_id": "ed817167-30ab-4148-ab5b-cb3e41376cb8",
+        "fresh_conversation_distinct_from_R5": true,
+        "native_turns": 1,
+        "event_count": 5,
+        "strict_native_init": true,
+        "base_tip": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+        "canonical_base": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+        "head": "fa36a56fb106e068d8661abc6232fdc008371516",
+        "diff_digest": "a293093b7f47130b5dbcd93cf89adf97fbea941cfe7da157b363d78186e1d3ac",
+        "input_sha256": "1a0e075cbaedbd3d8c26f59d1a7c6eb0d3337ba058a90b1c82554028e9627ce9",
+        "input_bytes": 1330,
+        "prompt_bytes": 4370,
+        "stdin_bytes": 4832,
+        "status": "clean",
+        "finding_count": 0,
+        "findings": [],
+        "current_R6_law_errors": [],
+        "process_group_cleanup": true,
+        "workspace_removed": true,
+        "native_stderr_bytes": 0,
+        "cli_sha256": "128780f5776959ba6a991bde1f0a8b699eee37a59ed30deb9926147fedfa56c4",
+        "bwrap_sha256": "e318903862396f96de3df57264e0158682b952fd3fb53ac23d876413e7b30f71",
+        "settings_sha256": "c30666edd3bc4cb8e577486d7518f20c08c68bdfbd59e7ae4a632d86b43b4150",
+        "raw_files": {
+          "input.txt": {
+            "bytes": 1330,
+            "sha256": "1a0e075cbaedbd3d8c26f59d1a7c6eb0d3337ba058a90b1c82554028e9627ce9"
+          },
+          "input.json": {
+            "bytes": 1464,
+            "sha256": "e50fd3de92285f9b2b3e725b03e3263defbb8210264dce60805e213f2ddf0d63"
+          },
+          "native.stdout.json": {
+            "bytes": 6070,
+            "sha256": "062b30e36576d7177caa0c66f9c11b30bc636218628bbdaf75dc3d35c6cbbf3c"
+          },
+          "native.stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "native-envelope.json": {
+            "bytes": 3560,
+            "sha256": "1daad754bbd69ecf04faecd1db8e0f99ea0969181871abe7eb611a1779832a69"
+          },
+          "review.json": {
+            "bytes": 516,
+            "sha256": "ec3be2b3c10fc7b24bc7000e7036cbdf23df078afe8e6fddecee92a5d0744c54"
+          },
+          "invocation.json": {
+            "bytes": 2578,
+            "sha256": "d8c530967548bfc5c1e4f228df4793fbd8f6af7332c52d5020f33dcbe255ef4b"
+          },
+          "process.json": {
+            "bytes": 122,
+            "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+          },
+          "finish-metadata.json": {
+            "bytes": 82,
+            "sha256": "a2a8d1184eb4f7f9ed40865c1d1522e7f3af8d0c781c7a52d66049269aeba126"
+          }
+        }
+      },
+      "defect": {
+        "service_unit": "antigravity-r6-native-defect-dbld_yma",
+        "service_exit": 0,
+        "wall_seconds": 49.693,
+        "native_duration_seconds": 46.065075283,
+        "native_conversation_id": "afa0a6dd-2bb5-49ab-b81c-5ee6c82ac5b2",
+        "fresh_conversation_distinct_from_R5": true,
+        "native_turns": 1,
+        "event_count": 5,
+        "strict_native_init": true,
+        "base_tip": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+        "canonical_base": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+        "head": "78ef5c894570b47c9a04896ef29db50091c6b532",
+        "diff_digest": "cd0d7c7ce9f3553c965bc4dbe0dd8b6936ac6aa602fbeacceb09f4d3530f8250",
+        "input_sha256": "3c870b22100d5732c767c8cdfa1c48cf33482d16fdb6ffac9df92c9358e41d9c",
+        "input_bytes": 1314,
+        "prompt_bytes": 4354,
+        "stdin_bytes": 4816,
+        "status": "findings",
+        "finding_count": 1,
+        "findings": [
+          {
+            "path": "increment.clj",
+            "line": 4,
+            "title": "inc-one increments input by 2 instead of 1"
+          }
+        ],
+        "current_R6_law_errors": [],
+        "process_group_cleanup": true,
+        "workspace_removed": true,
+        "native_stderr_bytes": 0,
+        "cli_sha256": "128780f5776959ba6a991bde1f0a8b699eee37a59ed30deb9926147fedfa56c4",
+        "bwrap_sha256": "e318903862396f96de3df57264e0158682b952fd3fb53ac23d876413e7b30f71",
+        "settings_sha256": "c30666edd3bc4cb8e577486d7518f20c08c68bdfbd59e7ae4a632d86b43b4150",
+        "raw_files": {
+          "input.txt": {
+            "bytes": 1314,
+            "sha256": "3c870b22100d5732c767c8cdfa1c48cf33482d16fdb6ffac9df92c9358e41d9c"
+          },
+          "input.json": {
+            "bytes": 1464,
+            "sha256": "c2cc8d0ed32eea1c3c5fb9fbfbbb4f926f0f6caf8c87475e3a16af663e4e1322"
+          },
+          "native.stdout.json": {
+            "bytes": 8160,
+            "sha256": "8815d8ec6f9182e3cdf2e395f29095c65c824e2cbca8f8713adb01a42d4d8e75"
+          },
+          "native.stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "native-envelope.json": {
+            "bytes": 5111,
+            "sha256": "2ca722d6abb5bf732fddfd8144eb16c88776710053e47e30c91cd322823a8e3d"
+          },
+          "review.json": {
+            "bytes": 1327,
+            "sha256": "373fb9397a26977c7f4ae5b41b82dbae787fdba5754baa305cfddb199a320e83"
+          },
+          "invocation.json": {
+            "bytes": 2584,
+            "sha256": "e176de4a445210ed3a11cb7cbaf5ca53919ff2fa9aa0f3c69eafba366cc3d935"
+          },
+          "process.json": {
+            "bytes": 122,
+            "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+          },
+          "finish-metadata.json": {
+            "bytes": 77,
+            "sha256": "1ed27ab9acb8a85f5809705c445656621f93a2e39f9b030052618e90c309213a"
+          }
+        }
+      }
+    },
+    "limits": [
+      "Two fresh systemd service calls bind exact clean R6 source; current laws independently checked canonical unique merge base/base_tip, complete forced-text full-index diff, every complete blob/path and all prompt/stdin digests.",
+      "Both real native traces contain five events; optional ACTIVE finish wrapper handling is covered separately by owning deterministic R6 tests and is not claimed observed in these two calls.",
+      "Live defect AGY observed under antigravity-review-bwrap(unconfined), NoNewPrivs1; clean call completed before descendant capture.",
+      "Successful imported CLI advisory evidence supplies no native GitHub approval, merge, deployment or access-control enforcement credit.",
+      "No source, hostenv, global settings, listener, readiness, auth or historical receipt changes were performed."
+    ],
+    "evidence_custody": {
+      "durable_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/R6-service",
+      "raw_file_count": 49,
+      "raw_total_bytes": 91361,
+      "raw_manifest_sha256": "9e54aa71f9a424dac09c2b263fdac976c7b93d4b5b11a81116d5679f40581647",
+      "lossless_archive_sha256": "7be891e089ff87bf75f41f957ed52f90e571f3d70b9213b62310f23dc5a91875",
+      "lossless_archive_bytes": 111795,
+      "all_reconstructions_byte_exact": true,
+      "original_tmp_directory": "/tmp/antigravity-r6-service-qualification-dbld_yma"
+    }
+  },
+  "hosted_execution": {
+    "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+    "status": "both-current-R6-runs-passed",
+    "runs": [
+      {
+        "repository": "open-hax/eta-mu",
+        "head_sha": "4072220789297ca94eec97506c13cd80772c7d55",
+        "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+        "run_id": 39939126005,
+        "job_id": 120365963968,
+        "url": "https://github.com/open-hax/eta-mu/actions/runs/39939126005",
+        "status": "completed",
+        "conclusion": "success",
+        "review": "findings",
+        "finding_count": 1,
+        "paths": 57,
+        "native_duration_seconds": 278.349439762,
+        "native_events": 6,
+        "artifact_id": 12495272961,
+        "artifact_sha256": "8e6d7e8961aedab8b7bb431f028c31209f4cae739cd3d8a8a0363e82f992b52b",
+        "law_errors": [],
+        "full_input_and_blobs_verified": true,
+        "cleanup_verified": true,
+        "native_approval": false
+      },
+      {
+        "repository": "octave-commons/shx",
+        "head_sha": "564574e6a8dd57f22f3ccb25177f26d4e9015728",
+        "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+        "run_id": 39938323452,
+        "job_id": 120363323868,
+        "url": "https://github.com/octave-commons/shx/actions/runs/39938323452",
+        "status": "completed",
+        "conclusion": "success",
+        "review": "clean",
+        "finding_count": 0,
+        "paths": 4,
+        "native_duration_seconds": 220.273053082,
+        "native_events": 6,
+        "artifact_id": 12494238848,
+        "artifact_sha256": "76755066a1d056340ce784019b8c1751f3bc4a3d7ba73df63a7bd870b0f06d47",
+        "law_errors": [],
+        "full_input_and_blobs_verified": true,
+        "cleanup_verified": true,
+        "native_approval": false
+      }
+    ],
+    "proof": {
+      "path": ".ημ/antigravity-review/hosted-qualification-R6-20261023.json",
+      "bytes": 13043,
+      "sha256": "bef089fce35c952cc4dc327bd3a1cffbe882a41be33f1db44ca5523f78d7b131"
+    },
+    "native_approval": false,
+    "eta_advisory_triage": {
+      "finding_count": 1,
+      "same_previous_false_premise_count": 1,
+      "additional_findings_requiring_disposition": 0,
+      "full_triage": "/home/err/.local/share/antigravity-review/qualification/20261023/R6-final-hosted-eta407/raw/eta/advisory-triage.json"
+    },
+    "negative_enforcement": "UNKNOWN"
+  },
+  "member_pr_readback": {
+    "members": 21,
+    "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+    "drafts": 20,
+    "ready": [
+      "shx"
+    ],
+    "auto_merge_enabled": 0,
+    "evidence": "Twenty-member exact native catalog plus Services PR104 direct readback",
+    "no_default_adoption": true
+  },
+  "historical_A3_hosted_proof": {
+    "path": ".ημ/antigravity-review/hosted-qualification-A3-20261023.json",
+    "storage": "Compact canonical facts/validation/triage descriptor; raw ZIPs and full archive retained losslessly in operator cache and GitHub",
+    "operator_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/A3",
+    "full_archive_bytes": 793819,
+    "operator_cache_is_ledger_or_approval_authority": false,
+    "later_R4_head_credit": false
+  },
+  "runtime_input_contract": {
+    "canonical_base": "Unique merge base of requested target tip and PR head; ambiguous merge bases fail closed",
+    "base_tip": "Requested target tip retained separately",
+    "patch": "Forced-text full-index patch; verify every declared old/new blob independently"
+  },
+  "inventory": {
+    "targets": 23,
+    "eta_mu_route": 17,
+    "muse_route": 6,
+    "source": "src/foresight/project.cljc#sources",
+    "excluded_inventory_only": [
+      ".agents",
+      "eta",
+      "clobber"
+    ],
+    "ownership": "Independent direct member repositories; no nested execution or package-manager policy changes",
+    "member_heads": "Actual dedicated worktree heads matched final native publication readbacks; this does not alter root gitlink pins"
+  },
+  "merge_state": {
+    "in_progress": false,
+    "index_tree": "54f98c791bb378af1668a07754118e380293c176",
+    "receipt_repair_status": "In-place correction proposal withdrawn after refreshing Receipt River. Historical receipt bytes remain unchanged. The local checkout is still legacy; the original invalid appended envelopes remain unqualified until an adopted correction or ledger migration path handles them.",
+    "default_branch_adoption": "UNMERGED",
+    "status": "base-merge-committed",
+    "base_merge_revision": "0a344db6023139bbacf8edd77db326f3001804f2",
+    "base_merge_tree": "54f98c791bb378af1668a07754118e380293c176"
+  },
+  "native_review_observation": {
+    "evidence_source": "Fresh canonical pr-flow status at407 plus exact hosted proof descriptors",
+    "eta_known_threads": 10,
+    "eta_known_threads_settled": 10,
+    "shx_known_threads": 8,
+    "shx_known_threads_settled": 8,
+    "coderabbit": "Current source route rate-limited; ten inline threads settled; one positive body-item obligation remains",
+    "eta_checks_pending": 2,
+    "merge_qualified": false,
+    "observed_at": "2026-10-23T10:39:46.338889+00:00",
+    "eta_pending_check": "Current head407 has two pending deterministic/required checks; original old MiMo failure remains historical",
+    "eta_bundle_run": 39925909693,
+    "eta_bundle_conclusion": "success",
+    "eta_deterministic_evidence": "success",
+    "eta_coderabbit_request_url": "https://github.com/open-hax/eta-mu/pull/364#issuecomment-6361479814",
+    "eta_coderabbit_quota_comment": 6361351133,
+    "source_latest_inline": {
+      "review_id": 5626282606,
+      "comment_id": 4357996738,
+      "thread_id": "PRRT_kwDORu27H86viyN2",
+      "reviewed_head": "5e6af5489b42e494f3f83642a37ea4e1f98ad945",
+      "status": "fixed-and-canonically-settled-at-published-R6head",
+      "fix_revision": "8b6fe29ad0df2cb053050ea352082aef1f0a0fdb",
+      "settlement_method": "canonicalpr-flow Fixed8b6 readback success"
+    },
+    "positive_body_item": {
+      "review_id": 5626282606,
+      "item_id": "cr-comment:v1:482d819be14bcccdb6a994be",
+      "native_text": "The linked probe archive exists and is tracked. The broken-link concern does not apply.",
+      "acknowledgment": "https://github.com/open-hax/eta-mu/pull/364#issuecomment-6361931130",
+      "status": "truthfully-acknowledged-gate-still-conservative-blocker",
+      "no_invented_fix": true
+    },
+    "historical_shx_R4_native_approval": {
+      "provider": "mimo",
+      "login": "eta-mu-ai[bot]",
+      "review_id": 5625972708,
+      "head": "1717d9a7173f676d7df959c08c33eabd71ce0b7b",
+      "state": "APPROVED",
+      "submitted_at": "2026-10-23T08:48:04Z",
+      "url": "https://github.com/octave-commons/shx/pull/4#pullrequestreview-5625972708",
+      "canonical_admission": "eligible exact-head approval; not completed full cohort convergence",
+      "current_R5_head_credit": false
+    },
+    "shx_coderabbit_request_url": "https://github.com/octave-commons/shx/pull/4#issuecomment-6361422785",
+    "eta_coderabbit_quota_comment_is_historical": true,
+    "shx_strict_command_fix": {
+      "head": "609aa87a3ff2f8cece455ea2e435a008dca97669",
+      "thread_id": "PRRT_kwDOTzw-Q86viwCg",
+      "root_comment": 4357982311,
+      "settlement": "https://github.com/octave-commons/shx/pull/4#discussion_r4358187666",
+      "status": "settled-resolved-native-readback"
+    },
+    "eta_mimo_failure": {
+      "run": 39925909707,
+      "job": 120329391391,
+      "head": "5e6af5489b42e494f3f83642a37ea4e1f98ad945",
+      "completed_at": "2026-10-23T09:59:07Z",
+      "reason": "No complete canonical submission: initial attempt unfinished with120/122chunks assessed; recovery timed out after45minutes. No recorded provider error or cancellation.",
+      "descriptor": ".ημ/antigravity-review/native-mimo-refusal-R4-20261023.json",
+      "raw_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/old-mimo-39925909707-failure",
+      "approval": false
+    },
+    "historical_shx_R5_native_approval": {
+      "review_id": 5626629838,
+      "provider": "mimo",
+      "login": "eta-mu-ai[bot]",
+      "head": "609aa87a3ff2f8cece455ea2e435a008dca97669",
+      "state": "APPROVED",
+      "submitted_at": "2026-10-23T09:51:36Z",
+      "canonical_admission": "formal native observation only; not assessed for finalR6head",
+      "current_R6_head_credit": false
+    },
+    "source_readability_fix": {
+      "head": "4072220789297ca94eec97506c13cd80772c7d55",
+      "thread": "PRRT_kwDORu27H86vkBlS",
+      "root_comment": 4358514940,
+      "status": "canonically-settled"
+    },
+    "pending_jobs_observed_at": "2026-10-23T10:46:48.666583+00:00",
+    "pending_jobs": [
+      {
+        "id": 120367917995,
+        "name": "Produce deterministic review evidence",
+        "status": "in_progress",
+        "conclusion": null,
+        "started_at": "2026-10-23T10:31:41Z",
+        "html_url": "https://github.com/open-hax/eta-mu/actions/runs/39939125856/job/120367917995",
+        "run_id": 39939125856
+      },
+      {
+        "id": 120366792593,
+        "name": "bundle",
+        "status": "in_progress",
+        "conclusion": null,
+        "started_at": "2026-10-23T10:28:50Z",
+        "html_url": "https://github.com/open-hax/eta-mu/actions/runs/39939125880/job/120366792593",
+        "run_id": 39939125880
+      }
+    ]
+  },
+  "historical_R4_hosted_proof": {
+    "status": "both final R4 runs passed",
+    "completed": true,
+    "runtime_revision": "9955ba838ff187beced4beb26f4c271941a956ec",
+    "runs": [
+      {
+        "repository": "open-hax/eta-mu",
+        "run_id": 39925909795,
+        "head_sha": "5e6af5489b42e494f3f83642a37ea4e1f98ad945",
+        "paths": 54,
+        "native_duration_seconds": 321.908806169,
+        "artifact_id": 12489034409,
+        "artifact_sha256": "b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/open-hax/eta-mu/actions/runs/39925909795",
+        "review": "clean",
+        "strict_initialization": true,
+        "law_errors": [],
+        "native_stderr_bytes": 0,
+        "workspace_removed": true,
+        "full_index_diff_and_all_blobs_verified": true,
+        "canonical_base": "unique merge base of requested target tip and PR head",
+        "base_tip": "requested target tip preserved independently",
+        "native_approval": false,
+        "evidence_source": "coordinator native artifact and independent validation readback",
+        "observed_at": "2026-10-23T08:49:13.514679+00:00",
+        "canonical_base_sha": "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "requested_base_tip_sha": "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "reviewed_path_count": 54,
+        "independent_current_R4_law_errors": [],
+        "scope_complete": true,
+        "input_sha256": "3dd6c0ccbae574bec66512c91233d2d0e805d59b68d705b5a68407e9f8a894a3",
+        "diff_digest": "5fe1fb2f2f75604be974ed52063ccbb12000ecf21a4a388a52f9cb69781444e8"
+      },
+      {
+        "repository": "octave-commons/shx",
+        "run_id": 39926493415,
+        "head_sha": "1717d9a7173f676d7df959c08c33eabd71ce0b7b",
+        "paths": 4,
+        "native_duration_seconds": 181.372344673,
+        "artifact_id": 12489847091,
+        "artifact_sha256": "c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/octave-commons/shx/actions/runs/39926493415",
+        "review": "clean",
+        "strict_initialization": true,
+        "law_errors": [],
+        "native_stderr_bytes": 0,
+        "workspace_removed": true,
+        "full_index_diff_and_all_blobs_verified": true,
+        "canonical_base": "unique merge base of requested target tip and PR head",
+        "base_tip": "requested target tip preserved independently",
+        "native_approval": false,
+        "evidence_source": "coordinator native artifact and independent validation readback",
+        "observed_at": "2026-10-23T08:49:13.514679+00:00",
+        "canonical_base_sha": "f4ee133dcf1650c7eafb623ef084f62417252477",
+        "requested_base_tip_sha": "f4ee133dcf1650c7eafb623ef084f62417252477",
+        "reviewed_path_count": 4,
+        "independent_current_R4_law_errors": [],
+        "scope_complete": true,
+        "input_sha256": "ead42e75b2815109aad138251f69b76c8354caad872e97585de1d58791bb2d56",
+        "diff_digest": "9303b8f1b87c0b78d6b9a18bcfb3aa29629a86d4dc9e03b5a1d0b9c9ff1c7c8d"
+      }
+    ],
+    "compact_proof": {
+      "path": ".ημ/antigravity-review/hosted-qualification-R4-20261023.json",
+      "status": "recorded",
+      "bytes": 94438,
+      "sha256": "ede10e24bcde467251d50d827ca18aa1434938b2956743dbce5a5400af663882",
+      "raw_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/R4",
+      "retained_files_including_manifest": 98,
+      "all_raw_file_bytecounts_and_sha256_verified": true,
+      "operator_cache_is_ledger_or_approval_authority": false
+    },
+    "prior_apparmor_failure_run": 39919264609,
+    "service_qualification_does_not_supply_hosted_pr_credit": true,
+    "imported_cli_evidence_only": true,
+    "native_approval": false,
+    "review_convergence": "Not qualified: all known findings settled; SHX has a native current-head MiMo approval, CodeRabbit remains rate-limited on both pilots, and ETA native MiMo review is live. ETA deterministic/bundle jobs passed. Imported CLI evidence itself grants no approval."
+  },
+  "historical_R4_service_qualification": {
+    "passed": true,
+    "runtime_revision": "9955ba838ff187beced4beb26f4c271941a956ec",
+    "scope": "Real isolated systemd cases; separate from Node integration fixtures and hosted PR review",
+    "evidence": {
+      "repository": "open-hax/eta-mu",
+      "revision": "5e6af5489b42e494f3f83642a37ea4e1f98ad945",
+      "path": ".ημ/antigravity-review/service-qualification-R4.json",
+      "sha256": "1e16c56bd6d233b7714e8ca3da01e92db6996b3ba527be7d80386e25f72015f2",
+      "embedded_files_verified": 47
+    },
+    "cases": [
+      {
+        "case": "clean",
+        "service_exit": 0,
+        "wall_seconds": 33.1,
+        "native_duration_seconds": 28.380800615,
+        "status": "clean",
+        "base_tip": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+        "base": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+        "head": "fa36a56fb106e068d8661abc6232fdc008371516",
+        "diff_digest": "a293093b7f47130b5dbcd93cf89adf97fbea941cfe7da157b363d78186e1d3ac",
+        "findings": [],
+        "native_stderr_bytes": 0,
+        "workspace_removed": true,
+        "service_stderr": ""
+      },
+      {
+        "case": "defect",
+        "service_exit": 0,
+        "wall_seconds": 35.391,
+        "native_duration_seconds": 31.541713518999998,
+        "status": "findings",
+        "base_tip": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+        "base": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+        "head": "78ef5c894570b47c9a04896ef29db50091c6b532",
+        "diff_digest": "cd0d7c7ce9f3553c965bc4dbe0dd8b6936ac6aa602fbeacceb09f4d3530f8250",
+        "findings": [
+          {
+            "path": "increment.clj",
+            "line": 4,
+            "title": "inc-one adds 2 instead of incrementing by 1"
+          }
+        ],
+        "native_stderr_bytes": 0,
+        "workspace_removed": true,
+        "service_stderr": ""
+      }
+    ],
+    "strict_initialization": true,
+    "law_errors": [],
+    "filesystem": {
+      "profile": "antigravity-review-bwrap (unconfined)",
+      "root_readonly": true,
+      "outside_write_errno": 30,
+      "snapshot_write_roundtrip": true,
+      "observation_scope": "Prior unchanged-profile service-context probe retained; the R4 run did not repeat this filesystem or live kernel-profile scan"
+    },
+    "native_approval": false,
+    "limits": [
+      "Only these two fresh immutable-fixture cases were run against R4; no old R3 input manifest was passed to its new law.",
+      "The fixture base_tip equals its unique merge base; divergent-history semantics remain owning deterministic-test evidence, not a new native scenario.",
+      "Live kernel-profile scanning happened after the short native runs completed; its empty list supplies no independent current-process profile observation. Exact root-owned binary/profile digests and the unchanged prior service-context profile qualification are retained.",
+      "The existing R3 qualification directory was not modified.",
+      "No source, hostenv, settings, listener-start, readiness or authentication changes were performed.",
+      "Successful imported CLI advisory artifacts supply no native GitHub approval, merge or deployment credit."
+    ]
+  },
+  "R6_preparation": {
+    "status": "all21-member-and-source-publications-complete",
+    "member_snapshots": 20,
+    "member_edits": false,
+    "host_changes": false,
+    "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+    "all23_callers_prepared_and_checked": true,
+    "old_source_review_hold": "released-terminal-failure",
+    "host_ready": "2026-10-23T10:07:41.137673+00:00",
+    "source_reviewability": "two-raw-proof-containers-being-compacted-with-verbatim-public-Git-and-cache-custody",
+    "published_member_callers_R6": 21
+  },
+  "historical_R5_service_qualification": {
+    "runtime_revision": "8b6fe29ad0df2cb053050ea352082aef1f0a0fdb",
+    "status": "passed",
+    "original_files": 49,
+    "descriptor": {
+      "repository": "open-hax/eta-mu",
+      "path": ".ημ/antigravity-review/service-qualification-R5.json",
+      "bytes": 15552,
+      "sha256": "c5a668a89c2d4a61c1e356b760eab0d3351e74002492c7943f8cb6fe479e121c",
+      "source_head_prepared_locally": "904ad0acd5d0c2ca634c5af68a8ee98619f2a3c7",
+      "source_commit_public_on_auxiliary": "904ad0acd5d0c2ca634c5af68a8ee98619f2a3c7"
+    },
+    "qualification": {
+      "schema": "open-hax.antigravity-service-qualification/v1",
+      "runtime_revision": "8b6fe29ad0df2cb053050ea352082aef1f0a0fdb",
+      "source_tree": "03ba8c8f8cdf669cad6505bc5efcd8394a41b360",
+      "observed_at": "2026-10-23T09:30:29.581297+00:00",
+      "evidence_kind": "imported-cli-advisory",
+      "native_approval": false,
+      "cases": {
+        "clean": {
+          "service_unit": "antigravity-r5-native-clean-y0g8s5hr",
+          "service_exit": 0,
+          "wall_seconds": 30.8,
+          "native_duration_seconds": 26.191215022,
+          "native_conversation_id": "3a8ef440-69b4-489a-ab53-8dc06332ee3e",
+          "fresh_conversation_distinct_from_R4": true,
+          "native_turns": 1,
+          "event_count": 5,
+          "strict_native_init": true,
+          "base_tip": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+          "canonical_base": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+          "head": "fa36a56fb106e068d8661abc6232fdc008371516",
+          "diff_digest": "a293093b7f47130b5dbcd93cf89adf97fbea941cfe7da157b363d78186e1d3ac",
+          "input_sha256": "1a0e075cbaedbd3d8c26f59d1a7c6eb0d3337ba058a90b1c82554028e9627ce9",
+          "input_bytes": 1330,
+          "prompt_bytes": 4370,
+          "stdin_bytes": 4832,
+          "status": "clean",
+          "finding_count": 0,
+          "findings": [],
+          "current_R5_law_errors": [],
+          "process_group_cleanup": true,
+          "workspace_removed": true,
+          "native_stderr_bytes": 0,
+          "raw_files": {
+            "input.txt": {
+              "bytes": 1330,
+              "sha256": "1a0e075cbaedbd3d8c26f59d1a7c6eb0d3337ba058a90b1c82554028e9627ce9"
+            },
+            "input.json": {
+              "bytes": 1464,
+              "sha256": "e50fd3de92285f9b2b3e725b03e3263defbb8210264dce60805e213f2ddf0d63"
+            },
+            "native.stdout.json": {
+              "bytes": 6177,
+              "sha256": "220b8cc7f9b3e00fc69679af5b65859e9aba9bb260a33fcf907f3e3dae565c76"
+            },
+            "native.stderr.log": {
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "native-envelope.json": {
+              "bytes": 3630,
+              "sha256": "f4430f96bc76878d2992d8790c896844093f271c7c14d4d9f4c36b5aff72778f"
+            },
+            "review.json": {
+              "bytes": 546,
+              "sha256": "52a1931bda9a2c7eaa41ff77ef751f2bb436bcaf70931dd0b15d67fa31fb1a49"
+            },
+            "invocation.json": {
+              "bytes": 2578,
+              "sha256": "2e1b34f74f65da1f078d07e18e739781905c6de893340bb0a19b508b149b22fb"
+            },
+            "process.json": {
+              "bytes": 122,
+              "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+            },
+            "finish-metadata.json": {
+              "bytes": 87,
+              "sha256": "5f65595ca73763fab78a34d31be605df984d5ca6b1f72db46d22182053e3854a"
+            }
+          }
+        },
+        "defect": {
+          "service_unit": "antigravity-r5-native-defect-y0g8s5hr",
+          "service_exit": 0,
+          "wall_seconds": 39.838,
+          "native_duration_seconds": 35.561254364,
+          "native_conversation_id": "f2876e04-9d76-4622-8907-3181f61ef4b5",
+          "fresh_conversation_distinct_from_R4": true,
+          "native_turns": 1,
+          "event_count": 5,
+          "strict_native_init": true,
+          "base_tip": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+          "canonical_base": "34322bfa842f32b081dd98e450d72c3d6b7a32c4",
+          "head": "78ef5c894570b47c9a04896ef29db50091c6b532",
+          "diff_digest": "cd0d7c7ce9f3553c965bc4dbe0dd8b6936ac6aa602fbeacceb09f4d3530f8250",
+          "input_sha256": "3c870b22100d5732c767c8cdfa1c48cf33482d16fdb6ffac9df92c9358e41d9c",
+          "input_bytes": 1314,
+          "prompt_bytes": 4354,
+          "stdin_bytes": 4816,
+          "status": "findings",
+          "finding_count": 1,
+          "findings": [
+            {
+              "path": "increment.clj",
+              "line": 4,
+              "title": "inc-one increments input by two instead of one"
+            }
+          ],
+          "current_R5_law_errors": [],
+          "process_group_cleanup": true,
+          "workspace_removed": true,
+          "native_stderr_bytes": 0,
+          "raw_files": {
+            "input.txt": {
+              "bytes": 1314,
+              "sha256": "3c870b22100d5732c767c8cdfa1c48cf33482d16fdb6ffac9df92c9358e41d9c"
+            },
+            "input.json": {
+              "bytes": 1464,
+              "sha256": "c2cc8d0ed32eea1c3c5fb9fbfbbb4f926f0f6caf8c87475e3a16af663e4e1322"
+            },
+            "native.stdout.json": {
+              "bytes": 8943,
+              "sha256": "c513bf503cde0b69a2759169b3377413be280c933b3feb60bf77172d4fed2147"
+            },
+            "native.stderr.log": {
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "native-envelope.json": {
+              "bytes": 5634,
+              "sha256": "836cd6419810e52842ed50f57dcb76e6f493fa58bb90ed66a13d327db3675d6d"
+            },
+            "review.json": {
+              "bytes": 1578,
+              "sha256": "9625b0c325e8af1b2d0b2a0f8f8994b64957fdb8a072c87b50e764b709c81ecc"
+            },
+            "invocation.json": {
+              "bytes": 2584,
+              "sha256": "ed366daf85afdab5113fea146ef07be8bea5cc3f6656f72dcd833fbc2b19059e"
+            },
+            "process.json": {
+              "bytes": 122,
+              "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+            },
+            "finish-metadata.json": {
+              "bytes": 86,
+              "sha256": "dfe090b9da45cb0f4901439f71e6fc5972161e5758df7c6e4b202d32ba5f75ee"
+            }
+          }
+        }
+      },
+      "context_manifest_sha256": "6c9495b89f6df71737ca9a82a1f8099d48cacf181b393fda4ccd225e56fe414d",
+      "previous_R4_proof_unchanged": true,
+      "old_proof_manifest_sha256": "ca5ddd2c5fa7570c667e3600b3c4238bde51033aab8768a1087ed3fff7782106",
+      "persistent_worker_observation": "MainPID=0\nId=antigravity-review-open-hax.service\nActiveState=inactive\n\nMainPID=0\nId=antigravity-review-octave-commons.service\nActiveState=inactive\n",
+      "limits": [
+        "Fresh immutable fixture cases validate R5 native transport and current laws; cumulative-budget rejection is separate owning deterministic-test evidence.",
+        "Canonical unique merge base/base_tip, forced-text full-index patch, every full blob/path and prompt/stdin digests independently match.",
+        "Live kernel evidence captured the defect AGY under antigravity-review-bwrap(unconfined), NoNewPrivs1; the clean call had already completed.",
+        "No source, hostenv, settings, listener, readiness or authentication changes were performed.",
+        "All R4 evidence remains unchanged; no old manifest was passed as R5 model input.",
+        "Successful imported CLI advisory evidence supplies no native GitHub approval, merge or deployment credit."
+      ],
+      "passed": true
+    },
+    "raw_custody": {
+      "operator_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/R5-service",
+      "raw_files": "raw/",
+      "lossless_archive": "service-qualification-R5.lossless.json",
+      "lossless_archive_bytes": 104359,
+      "lossless_archive_sha256": "e999a30fe1d9edfe4bfb0a115e0582659045038dd8cbc8aa66595a862595c442",
+      "git_lossless_revision": "321cb772c5b61d99d5ae1d63bb1a5f3adf71e450",
+      "git_lossless_path": ".ημ/antigravity-review/service-qualification-R5.json",
+      "public_after_source_branch_push": true,
+      "reason": "Keep current complete PR diff below unchanged1MiB review ceiling while preserving original bytes.",
+      "git_lossless_revision_now_public_on_auxiliary": true
+    }
+  },
+  "historical_R5_hosted_failure": {
+    "runtime_revision": "8b6fe29ad0df2cb053050ea352082aef1f0a0fdb",
+    "status": "SHX-completed-failure-native-progress-format-refusal",
+    "runs": [
+      {
+        "repository": "octave-commons/shx",
+        "head_sha": "609aa87a3ff2f8cece455ea2e435a008dca97669",
+        "run_id": 39933620116,
+        "job_id": 120347727240,
+        "url": "https://github.com/octave-commons/shx/actions/runs/39933620116",
+        "status": "completed",
+        "conclusion": "failure",
+        "refusal": {
+          "kind": "native-admission",
+          "details": [
+            "native-effects"
+          ]
+        },
+        "artifact_id": 12493341260,
+        "artifact_bytes": 88520,
+        "artifact_sha256": "d772dfcc7553169581f76ace52069c0e5ce164d5f40792c7910f2162ec236620",
+        "native_terminal_status": "SUCCESS",
+        "native_turns": 1,
+        "native_events": 6,
+        "native_duration_seconds": 434.243635839,
+        "native_stderr_bytes": 0,
+        "process_exit": 0,
+        "group_cleanup": true,
+        "format_observation": "Extra ACTIVE tool_name finish progress step; clipped preview is not terminal authority; complete terminal passes semantic law; no effectful tool observed",
+        "approval": false
+      }
+    ],
+    "source_R5_final_PR_head": "not-yet-updated-preserve-live-prior-MiMo",
+    "native_approval": false,
+    "failure_proof": {
+      "path": ".ημ/antigravity-review/hosted-refusal-R5-20261023.json",
+      "bytes": 5220,
+      "sha256": "02c676a1264266e5325172a0f2ba894d67cbe0f5be16ce88e82a0c36708f40b6",
+      "raw_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/R5-hosted-shx-failure",
+      "raw_files": 53,
+      "raw_bytes": 644099,
+      "cache_files": 57,
+      "lossless_archive_sha256": "403e43836b31d136f4ec261305e0f52098f5e54717c7de12ca4494e5ece7c01d",
+      "native_approval": false
+    },
+    "false_finding_triage": {
+      "status": "refuted-prior-known-coercion-premise",
+      "official_docs": "https://docs.github.com/en/actions/reference/workflows-and-actions/expressions",
+      "native_same_head_edited_run": 39933629421,
+      "edited_run_conclusion": "skipped",
+      "decisive_run_not_cancelled": 39933620116,
+      "scope": "actual scheduling observation only; no runner restriction enforcement credit"
+    }
+  },
+  "historical_R5_auxiliary_source_publication": {
+    "branch": "codex/antigravity-runtime-r5",
+    "runtime_sha": "8b6fe29ad0df2cb053050ea352082aef1f0a0fdb",
+    "published_source_and_proof_sha": "904ad0acd5d0c2ca634c5af68a8ee98619f2a3c7",
+    "native_source_PR_head_unchanged": "5e6af5489b42e494f3f83642a37ea4e1f98ad945",
+    "lossless_proof_revision_now_public": "321cb772c5b61d99d5ae1d63bb1a5f3adf71e450"
+  },
+  "historical_R5_source_prepare_only": {
+    "base_tip": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "head": "904ad0acd5d0c2ca634c5af68a8ee98619f2a3c7",
+    "file-count": 55,
+    "paths": [
+      ".agents/agents/antigravity-reviewer.md",
+      ".github/actionlint.yaml",
+      ".github/antigravity/README.md",
+      ".github/antigravity/antigravity/extern/host.cljs",
+      ".github/antigravity/antigravity/infra/review.cljs",
+      ".github/antigravity/antigravity/law/review.cljc",
+      ".github/antigravity/antigravity/law/sandbox.cljc",
+      ".github/antigravity/antigravity/shape/diff.cljc",
+      ".github/antigravity/antigravity/shape/finish.cljc",
+      ".github/antigravity/antigravity/shape/stream.cljc",
+      ".github/antigravity/result.schema.json",
+      ".github/antigravity/review.cljs",
+      ".github/antigravity/review_test.cljs",
+      ".github/antigravity/run-cli.mjs",
+      ".github/antigravity/runner.test.mjs",
+      ".github/antigravity/strict-settings.json",
+      ".github/scripts/antigravity-code-review-workflow.test.mjs",
+      ".github/workflows/antigravity-code-review.yml",
+      ".github/workflows/antigravity-review.yml",
+      ".ημ/antigravity-review/actual-clean-end-to-end/cli-version.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/finish-metadata.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/input.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/input.txt",
+      ".ημ/antigravity-review/actual-clean-end-to-end/invocation.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/native.stdout.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/process-start.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/process.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/result.schema.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/review.json",
+      ".ημ/antigravity-review/actual-clean-end-to-end/strict-settings.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/cli-version.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/finish-metadata.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/input.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/input.txt",
+      ".ημ/antigravity-review/actual-defect-end-to-end/invocation.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/native.stdout.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/process-start.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/process.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/result.schema.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/review.json",
+      ".ημ/antigravity-review/actual-defect-end-to-end/strict-settings.json",
+      ".ημ/antigravity-review/diagnostic-probes.json",
+      ".ημ/antigravity-review/qualification.json",
+      ".ημ/antigravity-review/service-qualification-R4.json",
+      ".ημ/antigravity-review/service-qualification-R5.json",
+      ".ημ/antigravity-review/service-qualification.json",
+      ".ημ/antigravity-review/stream-qualification-clean.json",
+      ".ημ/antigravity-review/stream-qualification-defect.json",
+      ".ημ/antigravity-review/stream-qualification-large-shx.json",
+      ".ημ/antigravity-review/worker-provisioning.json",
+      ".ημ/receipts.edn",
+      ".ημ/session-mycology/ledger.md",
+      ".ημ/session-mycology/spores/20261023-antigravity-native-finish-and-permission-contracts.md",
+      "kanban/tasks/antigravity-cli-review-agent.md",
+      "scripts/test.bb"
+    ],
+    "diff-bytes": 999695,
+    "input-bytes": 2516279,
+    "prompt-bytes": 2519319,
+    "stdin-bytes": 3098382,
+    "diff_digest": "c0b443f4612b4d30fe4f8764138d031b53c9e4b582db44315c16429c7eddc840",
+    "input-sha256": "d01e7e489d5bc14ebec6aea836f9893966d34f25c5f54b17bfe157ab1409bb51",
+    "limits": {
+      "files": 256,
+      "file-bytes": 1048576,
+      "diff-bytes": 1048576,
+      "input-bytes": 4194304,
+      "prompt-bytes": 4718592,
+      "stdin-bytes": 8388608,
+      "response-bytes": 2097152
+    },
+    "largest_blob_bytes": 358297,
+    "model_calls": 0,
+    "independent_input_law_errors": [],
+    "every_full_blob_match": true,
+    "canonical_changed_path_count": 55,
+    "remaining_bytes": {
+      "diff-bytes": 48881,
+      "input-bytes": 1678025,
+      "prompt-bytes": 2199273,
+      "stdin-bytes": 5290226
+    }
+  },
+  "historical_R5_prepared_source_sha": "904ad0acd5d0c2ca634c5af68a8ee98619f2a3c7",
+  "implementation_prepared_head_sha": "4072220789297ca94eec97506c13cd80772c7d55",
+  "R6_source_prepare_only": {
+    "root": "/tmp/antigravity-r6-source407-preflight-ymakbe_m",
+    "passed": true,
+    "head": "4072220789297ca94eec97506c13cd80772c7d55",
+    "base_tip": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+    "file_count": 57,
+    "input_bytes": 1466891,
+    "prompt_bytes": 1469931,
+    "stdin_bytes": 1694140,
+    "diff_digest": "1faae6c819c7259f6d171430080148f672493d06b3421248da1fe05f9836340a",
+    "input_sha256": "475897af112e57adc717e20d13ab7ed1798db4774003ffb1ac7e52705aa53dda",
+    "model_invoked": false,
+    "independent_validation": {
+      "errors": [],
+      "model_invoked": false,
+      "paths": 57,
+      "base_tip": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "head": "4072220789297ca94eec97506c13cd80772c7d55",
+      "diff_digest": "1faae6c819c7259f6d171430080148f672493d06b3421248da1fe05f9836340a",
+      "every_full_blob_match": true
+    }
+  },
+  "historical_R6_initial_hosted_proof": {
+    "descriptor": ".ημ/antigravity-review/hosted-qualification-R6-initial-20261023.json",
+    "bytes": 10971,
+    "sha256": "cac4e92d083a85536704b9c61b38e1a5456544247fad1a17738dce9a1476d2b2",
+    "ETA_head": "38c3f66d4a25a83877f2133e2d2e337f823cf59f",
+    "SHX_head": "564574e6a8dd57f22f3ccb25177f26d4e9015728",
+    "status": "both-validated; source-head-now-superseded-by-readable-ledger-clarification",
+    "raw_files": 99,
+    "cache_files": 102,
+    "raw_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/R6-final-hosted",
+    "native_approval": false
+  },
+  "R6_readability_clarification": {
+    "head": "4072220789297ca94eec97506c13cd80772c7d55",
+    "files": 2,
+    "append_only": true,
+    "ledger_bytes_added": 1127,
+    "code_runtime_pins_unchanged": true,
+    "thread": "PRRT_kwDORu27H86vkBlS",
+    "native_root_comment": 4358514940,
+    "status": "published-and-canonically-settled"
+  },
+  "historical_R6_source38_prepare_only": {
+    "source_head": "38c3f66d4a25a83877f2133e2d2e337f823cf59f",
+    "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+    "model_invoked": false,
+    "path_count": 57,
+    "diff_bytes": 561596,
+    "input_bytes": 1462802,
+    "prompt_bytes": 1465842,
+    "stdin_bytes": 1689945,
+    "independent_validation": {
+      "errors": [],
+      "model_invoked": false,
+      "paths": 57,
+      "base_tip": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "head": "38c3f66d4a25a83877f2133e2d2e337f823cf59f",
+      "diff_digest": "9f29b6e63a696385f1082073ec7303b4709e0ef04c8e7cff445658f1f80377e1",
+      "every_full_blob_match": true
+    },
+    "proof_directory": "/tmp/antigravity-r6-source-preflight-005kzy1m"
+  },
+  "receipt_guidance_refresh": {
+    "source_repository": "riatzukiza/.agents",
+    "branch": "docs/segmented-receipt-ledger",
+    "revision": "7f4dfb8229e16996cfdb807694a630b60a130d71",
+    "observed_at": "2026-10-24T05:05:43.743773+00:00",
+    "local_mode": "legacy",
+    "clio_cutover_adopted": false,
+    "in_place_repair_proposal": "withdrawn",
+    "new_guidance": "Corrections are new records. A skill refresh does not migrate repository storage or replace its owning validator."
+  },
+  "receipt_migration_adoption": {
+    "pr": "https://github.com/open-hax/foresight/pull/147",
+    "head": "02f330d45a7ccbf14349d1b1638927f473fb58ae",
+    "base": "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd",
+    "reused_source": "4ac72ec4f4b3bbcae72c168bb352b85513b4b53a",
+    "local_gate": "passed",
+    "record_count": 283,
+    "segment_count": 18,
+    "core_runtime_test_blobs_identical": 6,
+    "full_clio_cutover": false,
+    "original_rollout_receipts_qualified": false,
+    "complete_gitlink_map_equals_base": true,
+    "prior_hosted_checkout_failure": 40165943917,
+    "prior_preservation_claim": "withdrawn for 802297d0; inherited undeclared OpenPlanner gitlink removed in successor",
+    "fresh_hosted_qualification": false,
+    "ledger_sha256": "72d95c1f339da5f1743881318f98d7ca2fbdd4f589275ee735081bfb17293856",
+    "native_deterministic": {
+      "run_id": 40166508743,
+      "job_id": 121088551569,
+      "conclusion": "success",
+      "head": "02f330d45a7ccbf14349d1b1638927f473fb58ae"
+    },
+    "native_model": {
+      "conclusion": "failure",
+      "reason": "ETA_MU_APP_ID / ETA_MU_APP_PRIVATE_KEY withheld from candidate caller",
+      "approval": false
+    }
+  },
+  "integration_head_source": "Historical pre-R6 remote head recorded above; obtain the new commit-contained source from the current native PR head.",
+  "receipt_correction_plan": {
+    "pr": "https://github.com/open-hax/foresight/pull/148",
+    "head": "2c451cc7548e425fd975e4049fdbc1da3fb828ba",
+    "status": "planning-only; no implementation or correction admission",
+    "first_record_kind_already_valid": true,
+    "remaining_defects": [
+      "first receipt scalar manifest and refs",
+      "second receipt string kind test-run"
+    ],
+    "historical_edits": false,
+    "planning_review": "deferred for native CodeRabbit cooldown observed 2026-10-25T05:54:55Z +43 minutes"
+  },
+  "member_current_audit": {
+    "before_recovery": ".ημ/antigravity-review/member-pr-audit-20261025.json",
+    "caller_check": ".ημ/antigravity-review/member-caller-check-20261025.json",
+    "caller_check_exit": 0,
+    "targets": 23,
+    "opencode_recovery": ".ημ/antigravity-review/opencode-pr-recovery-20261025.json",
+    "member_heads_match_native": 22,
+    "root_head_note": "R6 working source differs from historical native PR head until this publication.",
+    "native_approval_credit": false
+  }
 }

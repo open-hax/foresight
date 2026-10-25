@@ -801,3 +801,63 @@
   spore: none
   receipt-refs: 2026-10-23T07:05:01.311797+00:00
   note: Separate immutable runtime and org-local workflow revisions; verify API readback and actual hosted artifacts before activation claims.
+
+
+## 2026-10-23 Antigravity rollout final runtime qualification
+
+- Outcome: existing local login now powers both persistent organization workers; all22 member PRs carry R4, and both final hosted pilots passed with complete native artifacts and cleanup. Root integration remains local pending explicit four-receipt repair approval; native merge gates remain separate.
+- Friction score: 3. Native stdin needed a held-open stream; service user namespaces needed one exact root-owned executable profile; PR snapshots needed a unique merge base, forced text and full index IDs. Git Unicode path quoting also caused repeated guard failures; use NUL-delimited paths or explicit core.quotepath=false.
+- Verification:38 runtime integration tests,71 pure assertions,12 workflow tests; actual clean/defect service cases; final hosted eta39925909795 and shx39926493415, both clean/fullscope/currentlaw/cleanup PASS.
+- Evidence: `.ημ/antigravity-review/hosted-qualification-R4-20261023.json`, exact member/status records and append-only receipts. Durable raw cache is storage, not ledger or approval authority.
+- Learning boundary: provider confidence and a clean self-review do not replace divergent-history/attribute regressions or native PR approval. The initial SHX CLI false positives remain preserved with source-linked triage.
+- No new spore; the eta-mu spore already incubated this session remains unpromoted.
+
+
+## 2026-10-23 R5 bounded reviewer rollout
+
+- Friction score:3/3 for late cumulative blob admission;2/3 for raw proof expansion;2/3 for conservative classification of native positive prose.
+- Learned: enforce aggregate allocation bounds while reading, prove the unread tail with an invalid-UTF-8 sentinel, and retain raw proof through immutable history/hash-linked custody rather than widening review limits.
+- Evidence: public source/proof `904ad0acd5d0c2ca634c5af68a8ee98619f2a3c7`; R5service49rawfiles; all21member callers published; root23caller exactchecks; native SHXrun39933620116 remains live.
+- Native positive review prose was acknowledged truthfully; no fictional defect repair, policy waiver or approval was manufactured.
+- Four malformed owned receipt envelopes remain unchanged; exact correction proposal awaits useroverride. Root merge index/history and unrelated primary work remain preserved.
+- No new spore; prior incubated spore remains unpromoted.
+
+- ts: 2026-10-23T10:44:29.306581+00:00
+  session: antigravity-review-rollout
+  task: Qualify both current R6 hosted routes and finish the member rollout records
+  p-efficiency: 0.6
+  p-friction: 0.8
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 813778aafbcf645f606766dd72b4f9bfd5483f3e78c759f9f3bd5de708a11943
+  note: Treat optional native progress previews as non-authoritative and validate their exact shape before accepting the full terminal result. Preserve failed runs and immutable raw custody while keeping review artifacts within complete-input bounds. Current ETA and SHX routes passed; native merge gates and the four pending historical receipt corrections remain separate. No new spore or same-session promotion.
+
+- ts: 2026-10-23T10:47:18.320197+00:00
+  session: antigravity-review-rollout
+  task: Reconcile mutable rollout status with current source and native live jobs
+  p-efficiency: 0.9
+  p-friction: 0.2
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 39649047ca8f9921a488620f8889d4f3788acb05d35bb7485b36474d3d628422
+  note: Keep historical observations explicitly historical when the current source advances. Poll exact native job IDs; a long-running step is not a terminal failure. No new spore.
+
+- ts: 2026-10-24T05:06:30.377Z
+  session: receipt-river-guidance-reassessment-20261024
+  task: Correct stale skill assumptions without rewriting history
+  p-efficiency: 0.8
+  p-friction: 0.7
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 2026-10-24T05:06:30.377Z
+  note: Check upstream branches and the actual repository mode before treating a stale skill as an approval blocker. New guidance does not itself migrate a legacy validator. No new spore.
+
+- ts: 2026-10-25T06:05:31.923993+00:00
+  session: 01a1717c-d90d-71b3-ad21-5d2b0cc599a1
+  task: Publish R6 root preparation and repair closed member PR metadata
+  p-efficiency: 0.75
+  p-friction: 0.6
+  p-skill-candidate: 0.4
+  spore: none
+  receipt-refs: antigravity-R6-root-publication-preparation
+  note: Fresh native census found an automated child PR closure missed by older green checks. Child contribution metadata is part of rollout custody; no historical receipts or review-credit policy changed.

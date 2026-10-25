@@ -38,10 +38,16 @@ preinstalled eta-mu runtime, including when the reusable workflow resides in Mus
 
 Candidate callers grant only `contents: read` and `pull-requests: read`, forward no
 secrets, bind the PR base and head, and leave review publication with the existing
-trusted publisher. Generated files are configuration proposals. Hosted installation
-is incomplete until the producer and member rollouts are reviewed and merged,
-the isolated worker/model is verified available, and actual hosted execution proves
-the integration. A generated file or passing local test is not that proof.
+trusted publisher. Generated files are configuration proposals. Hosting is operational at the observed revisions documented below. Default-branch
+adoption remains incomplete until the producer and member rollouts are reviewed
+and merged. A generated file or passing local test alone supplies no hosted proof.
+
+Callers retain the opened, synchronize, reopened, and ready-for-review events and
+also review `edited` events when `changes.base.ref.from` is nonempty. Title/body
+edits skip review. Their concurrency groups include the run ID, so those edits
+cannot cancel an active review or displace a pending review. Eligible events
+share the stable PR review group. Exact callers from either earlier generated
+format remain recognized for safe updates.
 
 ## Verification before implementation
 
@@ -99,6 +105,11 @@ nbb -cp src:scripts:test test/antigravity_review_test.cljs
 clj-kondo --lint scripts/antigravity_rollout.clj src/foresight/antigravity_review.cljc test/antigravity_review_test.cljs
 ```
 
+Current local verification: 12 rollout tests with 166 assertions, zero failures
+or errors; all 23 generated callers pass actionlint and the exact-pin check;
+clj-kondo reports zero warnings. The generated concurrency expressions are
+executed in tests across eligible and ineligible edits with distinct run IDs.
+
 ## Pinned rollout plan, October 23
 
 The derived operational plan lives at
@@ -108,20 +119,163 @@ identities:
 
 | Purpose | Repository | Immutable revision |
 | --- | --- | --- |
-| Canonical workflow | open-hax/eta-mu | `6461caabbe4eefbd1615036936863d06ee69d68d` |
-| Installed runtime | open-hax/eta-mu | `3bcf27bef296f9349fdf4997df256a617da5f120` |
-| Octave Commons compatibility workflow | octave-commons/muse | `5bc9a8543ceb8afb04d3fd7e92ba0e1d9c2a03dd` |
+| Canonical workflow | open-hax/eta-mu | `2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2` |
+| Pinned runtime | open-hax/eta-mu | `5152dcce6e279a49b5a706ab3d3eaa4224df6cd3` |
+| Octave Commons compatibility workflow | octave-commons/muse | `93ea554332bcdafffc26688836b2e6a655575c94` |
 
 The canonical and compatibility Git blobs at
 `.github/workflows/antigravity-code-review.yml` were independently read from their
-respective workflow commits: 12,458 bytes each, SHA-256
-`f6c5f07015846b14a27f03bd8a59cd5445cd06ec10f5613413c92d12ca35d82b`.
-That verifies byte equivalence for these revisions. After application by the root
-operator, the exact mapped `check` invocation verified all 23 checkouts available
+respective workflow commits: 12,643 bytes each, SHA-256
+`9eab25fa2a8e2508d9eb14b268a41639afa0b562b8267f11c603643a75651c16`.
+That verifies byte equivalence for these revisions. After application through the
+generator, the exact mapped `check` invocation verified all 23 checkouts available
 and all 23 local caller files matching their expected route and pins, with exit 0.
-The snapshot records that local-file result; hosted-run, review-qualification,
-and merge evidence remain pending until separately observed. It is a disposable
+The snapshot records that local-file result and the separately observed hosted
+runs below; native review qualification and merge/adoption remain pending. It is a disposable
 projection, not an event ledger or acceptance record.
+
+R6 retains early cumulative base/head blob admission and adds one narrowly
+recognized native finish-progress shape. An optional ACTIVE `tool` record must
+name `finish`, have the exact allowed keys and preview containers, and immediately
+precede the final DONE finish with the same conversation and index. Its clipped
+preview is never review authority. Complete terminal validation, permissions and
+all input limits remain unchanged. Raw replay and twenty adversarial mutations
+verify that boundary.
+
+Fresh R6 systemd service cases used this machine's existing Antigravity login:
+clean 24.088677621 seconds and the known line 4 defect in 46.065075283 seconds.
+Both produced five events and one turn with strict initialization, empty current
+law errors and stderr, and complete cleanup. These cases did not emit the optional
+wrapper; the hosted SHX case below did. The published
+[R6 service descriptor](https://github.com/open-hax/eta-mu/blob/4072220789297ca94eec97506c13cd80772c7d55/.%CE%B7%CE%BC/antigravity-review/service-qualification-R6.json)
+is 7,728 bytes, SHA-256
+`a711b263e93a28d0401353fa20820cbce34979efb8b6c1cabfce5a4bbfdf708f`.
+All 49 raw files and the lossless archive remain verified under
+`/home/err/.local/share/antigravity-review/qualification/20261023/R6-service`.
+
+Both workers were stopped and all 23 readiness flags disabled during rotation.
+After qualification, both services were active/enabled, both runners online,
+and all 23 readiness/group values read back. CLI, root-owned bwrap/AppArmor,
+global namespace restrictions and A4/B4 group restrictions are unchanged. The
+current source is `4072220789297ca94eec97506c13cd80772c7d55`; runtime and all
+21 other member callers are public at R6. The last source commit appends a readable
+ledger clarification and its receipt; runtime code and pins are unchanged.
+
+Two initial R6 hosted runs passed independent validation:
+
+| Repository | Head | Run | Result |
+| --- | --- | --- | --- |
+| eta-mu | `38c3f66d4a25a83877f2133e2d2e337f823cf59f` | [39937922355](https://github.com/open-hax/eta-mu/actions/runs/39937922355) | 57 paths; one retained false coercion finding; 197.8665 seconds |
+| shx | `564574e6a8dd57f22f3ccb25177f26d4e9015728` | [39938323452](https://github.com/octave-commons/shx/actions/runs/39938323452) | Four paths, clean; 220.2731 seconds; real six-event finish wrapper |
+
+Both had exact pins, complete canonical input and blob checks, current R6 law
+errors empty, strict native output, empty stderr and cleanup. The
+[initial R6 descriptor](../../.ημ/antigravity-review/hosted-qualification-R6-initial-20261023.json)
+binds 99 raw files in the 102-file durable cache
+`/home/err/.local/share/antigravity-review/qualification/20261023/R6-final-hosted`.
+The eta-mu head above is superseded by the ledger clarification; it supplies no
+current-head credit. Its fresh [40722207 run](https://github.com/open-hax/eta-mu/actions/runs/39939126005)
+also passed: 57 paths, six events, one turn and 278.3494 native seconds, with
+strict initialization, empty current-law errors/stderr and complete cleanup.
+It retains the same one false coercion finding and official-document rebuttal.
+The [current combined descriptor](../../.ημ/antigravity-review/hosted-qualification-R6-20261023.json)
+is 13,043 bytes, SHA-256
+`bef089fce35c952cc4dc327bd3a1cffbe882a41be33f1db44ca5523f78d7b131`.
+Its fresh ETA artifact is `12495272961`, ZIP SHA-256
+`8e6d7e8961aedab8b7bb431f028c31209f4cae739cd3d8a8a0363e82f992b52b`.
+All 56 fresh raw files are retained under
+`/home/err/.local/share/antigravity-review/qualification/20261023/R6-final-hosted-eta407`;
+the initial 99 raw files remain unchanged. SHX's proof remains current, with
+artifact `12494238848`, SHA-256
+`76755066a1d056340ce784019b8c1751f3bc4a3d7ba73df63a7bd870b0f06d47`.
+
+The original R5 hosted refusal remains a failure in the
+[refusal descriptor](../../.ημ/antigravity-review/hosted-refusal-R5-20261023.json).
+Its native stream completed, but R5 rejected the newly observed finish wrapper.
+Historical R5 service evidence remains separately bound to its revision. The
+[old MiMo failure](../../.ημ/antigravity-review/native-mimo-refusal-R4-20261023.json)
+contains no complete canonical submission: its first attempt assessed 120 of
+122 chunks and recovery timed out. No approval or completed cohort is claimed.
+
+To reduce duplicate archive payloads in the source review, two owned containers
+were reduced from 520,338 to 37,004 bytes of explicit metadata and custody links.
+Their original bytes remain in public commit
+`904ad0acd5d0c2ca634c5af68a8ee98619f2a3c7` and verified durable storage. All 61
+diagnostic entries (57 tracked and four local), 15 stream files, three derived
+files, hashes, modes, provenance and original outcomes are retained. No review
+scope or input bound was weakened. A fresh complete review is still required.
+
+Historical R4 service proof remains unchanged at
+[its published source head](https://github.com/open-hax/eta-mu/blob/5e6af5489b42e494f3f83642a37ea4e1f98ad945/.%CE%B7%CE%BC/antigravity-review/service-qualification-R4.json):
+clean 28.3808 seconds and defect 31.5417 seconds. It supplies no R6 qualification.
+The following hosted runs likewise remain historical R4 evidence.
+
+Both final R4 hosted CLI runs passed at their exact published heads:
+
+| Repository | Head | Run | Result |
+| --- | --- | --- | --- |
+| eta-mu | `5e6af5489b42e494f3f83642a37ea4e1f98ad945` | [39925909795](https://github.com/open-hax/eta-mu/actions/runs/39925909795) | Clean, 54 paths, 321.9088 native seconds |
+| shx | `1717d9a7173f676d7df959c08c33eabd71ce0b7b` | [39926493415](https://github.com/octave-commons/shx/actions/runs/39926493415) | Clean, four paths, 181.3723 native seconds |
+
+Independent validation checked forced-text full-index patches and every declared
+old/new blob, the current R4 law with no errors, empty native stderr, and cleanup.
+The runtime's canonical `base` is the unique merge base of the requested target
+tip and PR head; `base_tip` separately preserves that requested target tip. The
+eta-mu artifact is `12489034409`, SHA-256
+`b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f`;
+the shx artifact is `12489847091`, SHA-256
+`c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6`.
+The 94,438-byte
+[compact R4 hosted proof](../../.ημ/antigravity-review/hosted-qualification-R4-20261023.json)
+records both runs. Its 97 raw retained files plus manifest were verified by byte
+count and SHA-256 under
+`/home/err/.local/share/antigravity-review/qualification/20261023/R4`.
+
+The historical
+[A3 proof descriptor](../../.ημ/antigravity-review/hosted-qualification-A3-20261023.json)
+retains canonical metadata, validation and triage. Its full 793,819-byte archive
+and raw ZIPs are retained losslessly, with descriptor hashes, under
+`/home/err/.local/share/antigravity-review/qualification/20261023/A3` and on GitHub.
+Large raw ZIP/base64 payloads are excluded from the root diff so bounded review
+admission can inspect its source. The operator cache is storage, with no ledger
+or approval authority. Historical A3 results supply no later-head R4 credit.
+
+Negative runner canaries remain **UNKNOWN**: unapproved callers stayed queued
+with runner ID zero for 180 seconds and were cancelled, with no explicit denial
+observed. Configuration readback supplies no additional enforcement credit.
+Earlier hosted prompt-size and AppArmor refusals retain their observed outcomes.
+
+All 21 member caller updates are published at verified R6 heads. Twenty remain
+draft; SHX is ready, with auto-merge off for all 21. Source runtime validation
+passed 42 integration tests, seven pure tests with 99 assertions and 12 workflow
+tests. Root rollout laws passed 12 tests with 166 assertions; project validation
+and clj-kondo passed with zero warnings. All 23 local callers match R6 and the
+unchanged A4/B4 workflow routes. Child product checks and native review obligations
+remain separate.
+
+Hosting is operational at R6; default-branch adoption remains **unmerged**.
+The source allocation finding and ledger-readability clarification are fixed;
+SHX's strict verification command finding is settled. The old positive
+archive-link observation was acknowledged truthfully without inventing a repair;
+the conservative canonical body-item obligation still blocks. Historical native
+approvals supply no later-head credit, and fresh source deterministic/native
+reviews remain pending. Imported CLI results supply no native GitHub approval.
+
+The in-place receipt correction proposal was withdrawn on October 24 after
+refreshing Receipt River from `riatzukiza/.agents` branch
+`docs/segmented-receipt-ledger` at `7f4dfb8229e16996cfdb807694a630b60a130d71`.
+The updated guidance makes corrections new records. Every historical receipt
+remains unchanged. This checkout still has a legacy ledger, without the
+segmented directory or Clio cutover declaration; refreshing the skill does not
+migrate storage or waive its owning validator. The original invalid appended
+envelopes therefore remain an unresolved validation failure. The base merge is committed locally as `0a344db6023139bbacf8edd77db326f3001804f2`,
+with the preserved tree `54f98c791bb378af1668a07754118e380293c176`.
+The existing segmented migration is prepared separately in
+[Foresight #147](https://github.com/open-hax/foresight/pull/147); its immutable
+merged-ledger gate passes locally, while the original malformed rollout receipts
+remain an explicit failing control. The root R6 update is prepared for publication
+in this review branch while that gate stays unqualified. Automatic merge remains off; current
+review convergence and default adoption are not qualified.
 
 This invocation checks the exact full mapping from the saved plan, including the
 separately prepared eta-mu worktree. Run it from the rollout checkout. Using
@@ -160,7 +314,31 @@ under `.ημ/`.
 | epiphany, muse, shx | Preserve their existing Rheos/board authority and lawful transitions. Epiphany also resolves the common Git directory for worktree metadata. No workflow rollout authorizes a second board engine or hand-edited operational status. |
 | Other direct members | The root survey found no additional receipt/mycology-specific rule in their root `AGENTS.md`; the global contract still applies. Later descendant instructions must be inspected before touching their paths. |
 
-Workflow generation alone leaves the isolated runner registration, selected model,
-trusted publication path, and hosted end-to-end execution to be verified. Existing
-required checks and branch policies remain authoritative; a pending producer or
-member PR is not an activated review workflow.
+The observed hosting and final CLI runs establish execution at their recorded
+revisions. Existing required checks, native review obligations and branch policies
+remain authoritative; pending producer/member PRs do not establish default-branch
+adoption or native approval.
+
+
+## October 25 publication and receipt reconciliation
+
+The R6 root caller and prepared operational evidence are published for review
+without claiming receipt admission or merge qualification. A fresh explicit
+23-target checkout check matches every caller; the 22 member PR heads match
+their local revisions. Root laws pass 12 tests / 166 assertions and targeted
+clj-kondo reports zero errors or warnings.
+
+The fresh PR census found OpenCode #2 automatically closed by its imported
+contribution checks. Its title and body now follow the actual repository
+requirements, and it was reopened as a draft with auto-merge off. OpenCode has
+issues disabled; Foresight issue149 supplies its verified closing-issue link.
+The native compliance result remains separately observable.
+
+Foresight #147 adopts the existing segmented migration and passes native
+deterministic checks. Its existing model-review caller withholds signing
+credentials and consequently fails the credential prerequisite; no native
+approval is inferred. Foresight #148 is a planning-only bridge to the previously
+merged immutable correction reader. The first rollout receipt already has a
+valid keyword kind and needs scalar manifest/refs interpretations; only the
+second needs a proposed ordinary-receipt kind interpretation. Neither original
+record is rewritten, and full Clio cutover remains unimplemented.

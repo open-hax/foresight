@@ -1,0 +1,262 @@
+{
+  "schema": "open-hax.antigravity-final-hosted-custody/v1",
+  "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+  "routes": {
+    "eta": {
+      "schema": "open-hax.antigravity-hosted-validation/v1",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+      "runtime_tree": "e57b14f13e207f88def4cc9f5ebcf6b473585fbe",
+      "workflow_revision": "2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2",
+      "repository": "open-hax/eta-mu",
+      "head": "38c3f66d4a25a83877f2133e2d2e337f823cf59f",
+      "base_tip": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "canonical_base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "run_id": 39937922355,
+      "review_job_id": 120361968328,
+      "artifact": {
+        "id": 12495091070,
+        "name": "antigravity-review-39937922355-1",
+        "api_digest": "sha256:f6a220c7d81089da117d56324143e679cf7fd04537f7d0dcaeb31ddcff457920",
+        "actual_zip_sha256": "f6a220c7d81089da117d56324143e679cf7fd04537f7d0dcaeb31ddcff457920",
+        "digest_matches": true,
+        "expired": false,
+        "bytes": 308301
+      },
+      "input_bytes": 1462802,
+      "prompt_bytes": 1465842,
+      "stdin_bytes": 1689945,
+      "file_count": 57,
+      "input_sha256": "597cba19bef44704ba38c529203d943729f8b5434cf779d9290785f0f3df00d2",
+      "diff_digest": "9f29b6e63a696385f1082073ec7303b4709e0ef04c8e7cff445658f1f80377e1",
+      "native_duration_seconds": 197.866470938,
+      "native_turns": 1,
+      "event_count": 5,
+      "event_shapes": [
+        {
+          "event": "init"
+        },
+        {
+          "event": "step_update",
+          "step_type": "user_input",
+          "state": "DONE",
+          "step_index": 0,
+          "tool_name": null
+        },
+        {
+          "event": "step_update",
+          "step_type": "agent_response",
+          "state": "DONE",
+          "step_index": 1,
+          "tool_name": null
+        },
+        {
+          "event": "step_update",
+          "step_type": "finish",
+          "state": "DONE",
+          "step_index": 2,
+          "tool_name": null
+        },
+        {
+          "event": "result"
+        }
+      ],
+      "status": "findings",
+      "finding_count": 1,
+      "findings": [
+        {
+          "body": "In `.github/workflows/antigravity-review.yml` at line 18 (and line 13), the condition `(github.event.action != 'edited' || github.event.changes.base.ref.from != '')` is intended to restrict execution on PR edit events to base-ref retargets while isolating title/body edits to distinct concurrency groups. However, when a PR is edited without changing the base ref (such as modifying the title or description), `github.event.changes.base` is omitted from the webhook payload. In GitHub Actions expression evaluation, dereferencing `changes.base.ref.from` evaluates to `null`. Under GitHub Actions loose scalar coercion rules, `null` coerces to `0` and empty string `''` coerces to `NaN`, causing `null != ''` to evaluate to `true` (`0 != NaN`). Consequently, the expression evaluates to `true` on title and body edits, triggering unnecessary review runs at line 18 and resolving the concurrency group to 'review' instead of `github.run_id` at line 13, which cancels active reviews contrary to the intended retarget-only policy.",
+          "confidence": 0.95,
+          "evidence": [
+            ".github/workflows/antigravity-review.yml:13",
+            ".github/workflows/antigravity-review.yml:18",
+            ".github/antigravity/fixtures/native-finish-progress.ndjson"
+          ],
+          "failure_trace": [
+            "A pull request is opened and an Antigravity review begins execution under concurrency group antigravity-review-<workflow>-<pr>-review.",
+            "The PR author edits the pull request title or body, emitting a pull_request event with action 'edited' where github.event.changes contains only title or body keys.",
+            "The runner evaluates the concurrency group at line 13 and the job guard at line 18, attempting to evaluate github.event.changes.base.ref.from != ''.",
+            "Because changes.base is undefined, dereferencing yields null, which GitHub Actions compares against '' via numeric coercion (0 != NaN), evaluating to true.",
+            "The job condition evaluates to true, triggering a redundant review execution, while the concurrency group resolves to 'review' instead of github.run_id, prematurely canceling the in-progress review."
+          ],
+          "line": 18,
+          "path": ".github/workflows/antigravity-review.yml",
+          "title": "PR title and body edits trigger review runs and cancel active reviews due to flawed retarget expression"
+        }
+      ],
+      "scope_complete": true,
+      "reviewed_path_count": 57,
+      "strict_native_init": true,
+      "genuine_native_structured_output": true,
+      "current_R6_law_errors": [],
+      "process_group_cleanup": true,
+      "job_cleanup_success": true,
+      "snapshot_and_job_root_removed": true,
+      "native_stderr_bytes": 0,
+      "negative_access_control_enforcement_canary": "UNKNOWN",
+      "native_approval": false,
+      "evidence_kind": "imported-cli-advisory",
+      "raw_files": {
+        "input.txt": {
+          "bytes": 1462802,
+          "sha256": "597cba19bef44704ba38c529203d943729f8b5434cf779d9290785f0f3df00d2"
+        },
+        "input.json": {
+          "bytes": 34983,
+          "sha256": "6efce7775f06e94ac21c7040875ebb3dd971f671efc59394d1644a21482d8b68"
+        },
+        "native.stdout.json": {
+          "bytes": 24995,
+          "sha256": "ad3551bed319eb8c21302e33da717e1bcdb98fd0703b3b37d9be38d62e7cbb89"
+        },
+        "native.stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "native-envelope.json": {
+          "bytes": 16714,
+          "sha256": "ea24fd3424ae7cd5a1bbc4bae237bbe2ec9334af28aae40b0c74fed7ccb3bf0c"
+        },
+        "review.json": {
+          "bytes": 7155,
+          "sha256": "39d1c98f325d59212f87dc682318bb06e84674c312fb133d42a9ae62cab18257"
+        },
+        "process.json": {
+          "bytes": 122,
+          "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+        },
+        "invocation.json": {
+          "bytes": 2528,
+          "sha256": "0400193283c2fb1cd86e7a0dfd27e4576d328441a3c9d0607670df9d370d067a"
+        }
+      }
+    },
+    "shx": {
+      "schema": "open-hax.antigravity-hosted-validation/v1",
+      "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
+      "runtime_tree": "e57b14f13e207f88def4cc9f5ebcf6b473585fbe",
+      "workflow_revision": "93ea554332bcdafffc26688836b2e6a655575c94",
+      "repository": "octave-commons/shx",
+      "head": "564574e6a8dd57f22f3ccb25177f26d4e9015728",
+      "base_tip": "f4ee133dcf1650c7eafb623ef084f62417252477",
+      "canonical_base": "f4ee133dcf1650c7eafb623ef084f62417252477",
+      "run_id": 39938323452,
+      "review_job_id": 120363323868,
+      "artifact": {
+        "id": 12494238848,
+        "name": "antigravity-review-39938323452-1",
+        "api_digest": "sha256:76755066a1d056340ce784019b8c1751f3bc4a3d7ba73df63a7bd870b0f06d47",
+        "actual_zip_sha256": "76755066a1d056340ce784019b8c1751f3bc4a3d7ba73df63a7bd870b0f06d47",
+        "digest_matches": true,
+        "expired": false,
+        "bytes": 91881
+      },
+      "input_bytes": 319987,
+      "prompt_bytes": 323027,
+      "stdin_bytes": 337783,
+      "file_count": 4,
+      "input_sha256": "492f1b11c1d395524063d08d3712b163ddaaac1ab2f9adbc5eaadc89aea7afe5",
+      "diff_digest": "beaf69b8b14f344c6c1e4cfe5633a1fb5d80fe02356a0059b83516af6af32dfc",
+      "native_duration_seconds": 220.273053082,
+      "native_turns": 1,
+      "event_count": 6,
+      "event_shapes": [
+        {
+          "event": "init"
+        },
+        {
+          "event": "step_update",
+          "step_type": "user_input",
+          "state": "DONE",
+          "step_index": 0,
+          "tool_name": null
+        },
+        {
+          "event": "step_update",
+          "step_type": "agent_response",
+          "state": "DONE",
+          "step_index": 1,
+          "tool_name": null
+        },
+        {
+          "event": "step_update",
+          "step_type": "tool",
+          "state": "ACTIVE",
+          "step_index": 2,
+          "tool_name": "finish"
+        },
+        {
+          "event": "step_update",
+          "step_type": "finish",
+          "state": "DONE",
+          "step_index": 2,
+          "tool_name": null
+        },
+        {
+          "event": "result"
+        }
+      ],
+      "status": "clean",
+      "finding_count": 0,
+      "findings": [],
+      "scope_complete": true,
+      "reviewed_path_count": 4,
+      "strict_native_init": true,
+      "genuine_native_structured_output": true,
+      "current_R6_law_errors": [],
+      "process_group_cleanup": true,
+      "job_cleanup_success": true,
+      "snapshot_and_job_root_removed": true,
+      "native_stderr_bytes": 0,
+      "negative_access_control_enforcement_canary": "UNKNOWN",
+      "native_approval": false,
+      "evidence_kind": "imported-cli-advisory",
+      "raw_files": {
+        "input.txt": {
+          "bytes": 319987,
+          "sha256": "492f1b11c1d395524063d08d3712b163ddaaac1ab2f9adbc5eaadc89aea7afe5"
+        },
+        "input.json": {
+          "bytes": 3170,
+          "sha256": "ea711ba33a216df6b34197d63ad5c42961e5060afa64c2900c15d6f2a0e6d05d"
+        },
+        "native.stdout.json": {
+          "bytes": 11455,
+          "sha256": "64c7faa1c4a73fbc380c65f904e091157480d0cf9415e2cfbe29a0aa5e0cb875"
+        },
+        "native.stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "native-envelope.json": {
+          "bytes": 6035,
+          "sha256": "2f0767e77962812b2bf46fec0971143ce0748166334a8a683c5065dd31caf3a5"
+        },
+        "review.json": {
+          "bytes": 1742,
+          "sha256": "c1d4acb371cae5567965ab4f14746e3ebdf0765beef8f8183f053bfb74dfdbb1"
+        },
+        "process.json": {
+          "bytes": 122,
+          "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+        },
+        "invocation.json": {
+          "bytes": 2563,
+          "sha256": "a3d5a16efd83c9a7bc68f1e07e5d087f1a4517abfdab1a63782a4a38fe304b71"
+        }
+      }
+    }
+  },
+  "passed": true,
+  "native_approval": false,
+  "enforcement_canary": "UNKNOWN",
+  "custody": {
+    "durable_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/R6-final-hosted",
+    "raw_file_count": 99,
+    "raw_total_bytes": 2708201,
+    "raw_manifest_sha256": "5d413d910728deaa4bdcefcecc8bd56293535b54af5152cd083fd14cb6dfb3c2",
+    "lossless_archive_sha256": "a7ebc6bfff732c82caae197ad152bb97b5b3b6aa6a141be582a050c709454d40",
+    "lossless_archive_bytes": 3149785,
+    "all_reconstructions_byte_exact": true,
+    "original_tmp_directory": "/tmp/antigravity-final-r6-hosted-monitor"
+  }
+}

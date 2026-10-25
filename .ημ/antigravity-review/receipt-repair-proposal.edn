@@ -1,0 +1,148 @@
+{:schema :foresight/receipt-repair-proposal-v1,
+ :withdrawal
+ {:at "2026-10-24",
+  :reason
+  "User identified outdated skill guidance. Refreshed Receipt River from riatzukiza/.agents docs/segmented-receipt-ledger at 7f4dfb8229e16996cfdb807694a630b60a130d71. Corrections are new records; no historical rewrite is requested.",
+  :historical-ledger-edits false,
+  :owning-gate-status
+  "Current Foresight checkout remains legacy and its original invalid appended envelopes remain a real validation failure. Skill synchronization does not adopt a Clio cutover or waive that validator."},
+ :source-head "c61c563d25c15ba13751461b0235235cb6437f16",
+ :common-base "27540f50f05151fc58be84df6bd8f2c2e6e7a081",
+ :scope
+ "Four owned proposed Antigravity receipt envelopes across Foresight and eta-mu; no applied ledger rewrite.",
+ :records
+ [{:ledger-path ".ημ/receipts.edn",
+   :corrected-sha256
+   "589052537d89e891702d99ae0b5633edf40ed356ae5a44d96f28ce0834e7ec13",
+   :repository "open-hax/foresight",
+   :corrected-edn
+   "{:kind :observation :ts \"2026-10-23T06:10:14.592490Z\" :origin \"codex-desktop/01a16756-fd90-7710-8295-c8a237aeb290\" :owner \"codex\" :dod \"Antigravity CLI reviewer and all-member workflow rollout\" :pi \"eta-mu\" :host \"local\" :manifest [\".github/antigravity; .github/workflows/antigravity-code-review.yml\"] :refs [\"https://github.com/open-hax/eta-mu/pull/364\"] :note \"Inventory scope root plus22 actionable direct members. Inventory-only .agents excluded. Independent worktrees preserve existing dirt. Review runtime and workflow proposals remain unqualified until reviewed and hosted worker provisioned.\"}\n",
+   :corrected-row
+   {:pi "eta-mu",
+    :refs ["https://github.com/open-hax/eta-mu/pull/364"],
+    :dod "Antigravity CLI reviewer and all-member workflow rollout",
+    :manifest
+    [".github/antigravity; .github/workflows/antigravity-code-review.yml"],
+    :note
+    "Inventory scope root plus22 actionable direct members. Inventory-only .agents excluded. Independent worktrees preserve existing dirt. Review runtime and workflow proposals remain unqualified until reviewed and hosted worker provisioned.",
+    :ts "2026-10-23T06:10:14.592490Z",
+    :host "local",
+    :kind :observation,
+    :origin "codex-desktop/01a16756-fd90-7710-8295-c8a237aeb290",
+    :owner "codex"},
+   :source-commit "1f3f7317012e23d7ec0f35a7e22b2b01cdff65b3",
+   :original-edn
+   "{:kind :observation :ts \"2026-10-23T06:10:14.592490Z\" :origin \"codex-desktop/01a16756-fd90-7710-8295-c8a237aeb290\" :owner \"codex\" :dod \"Antigravity CLI reviewer and all-member workflow rollout\" :pi \"eta-mu\" :host \"local\" :manifest \".github/antigravity; .github/workflows/antigravity-code-review.yml\" :refs \"https://github.com/open-hax/eta-mu/pull/364\" :note \"Inventory scope root plus22 actionable direct members. Inventory-only .agents excluded. Independent worktrees preserve existing dirt. Review runtime and workflow proposals remain unqualified until reviewed and hosted worker provisioned.\"}\n",
+   :record 1,
+   :original-sha256
+   "1c0ac43b287497ceac38d792feede62f5f05c2bdf12099570d06a767f64e3914"}
+  {:ledger-path ".ημ/receipts.edn",
+   :corrected-sha256
+   "8b9f14e2289ca61b43e9ce1393b673b88a6cf1cdcaab642de1cf1622e7d42682",
+   :repository "open-hax/foresight",
+   :corrected-edn
+   "{:ts \"2026-10-23T07:05:01.311797+00:00\" :kind :test-run :origin \"antigravity-member-rollout\" :owner \"codex\" :dod \"Pinned advisory reviewer caller across all23 targets\" :pi \"foresight\" :host \"local\" :manifest [\"src/foresight/antigravity_review.cljc\" \"scripts/antigravity_rollout.clj\" \"test/antigravity_review_test.cljs\" \".github/workflows/antigravity-review.yml\" \".\\u03b7\\u03bc/antigravity-review/rollout-status-20261023.json\"] :refs [\"https://github.com/open-hax/eta-mu/pull/364\"] :note \"All23 localcallers exactmatch; memberproposals published; nativehostedroutes verified explicitpromptrefusal artifactcleanup; transportrepair underway noactivationclaim.\" :tests \"rollout9/109PASS; existingproject12/166 andworkspace24/120PASS; kondo0warnings; actionlintall23PASS\"}\n",
+   :corrected-row
+   {:pi "foresight",
+    :tests
+    "rollout9/109PASS; existingproject12/166 andworkspace24/120PASS; kondo0warnings; actionlintall23PASS",
+    :refs ["https://github.com/open-hax/eta-mu/pull/364"],
+    :dod "Pinned advisory reviewer caller across all23 targets",
+    :manifest
+    ["src/foresight/antigravity_review.cljc"
+     "scripts/antigravity_rollout.clj"
+     "test/antigravity_review_test.cljs"
+     ".github/workflows/antigravity-review.yml"
+     ".ημ/antigravity-review/rollout-status-20261023.json"],
+    :note
+    "All23 localcallers exactmatch; memberproposals published; nativehostedroutes verified explicitpromptrefusal artifactcleanup; transportrepair underway noactivationclaim.",
+    :ts "2026-10-23T07:05:01.311797+00:00",
+    :host "local",
+    :kind :test-run,
+    :origin "antigravity-member-rollout",
+    :owner "codex"},
+   :source-commit "c61c563d25c15ba13751461b0235235cb6437f16",
+   :original-edn
+   "{:ts \"2026-10-23T07:05:01.311797+00:00\" :kind \"test-run\" :origin \"antigravity-member-rollout\" :owner \"codex\" :dod \"Pinned advisory reviewer caller across all23 targets\" :pi \"foresight\" :host \"local\" :manifest [\"src/foresight/antigravity_review.cljc\" \"scripts/antigravity_rollout.clj\" \"test/antigravity_review_test.cljs\" \".github/workflows/antigravity-review.yml\" \".\\u03b7\\u03bc/antigravity-review/rollout-status-20261023.json\"] :refs [\"https://github.com/open-hax/eta-mu/pull/364\"] :note \"All23 localcallers exactmatch; memberproposals published; nativehostedroutes verified explicitpromptrefusal artifactcleanup; transportrepair underway noactivationclaim.\" :tests \"rollout9/109PASS; existingproject12/166 andworkspace24/120PASS; kondo0warnings; actionlintall23PASS\"}\n",
+   :record 2,
+   :original-sha256
+   "545730a0e14d1288b7796717ea14924657e0ad9156a86d0bd7589fb39261d75a"}
+  {:ledger-path ".ημ/receipts.edn",
+   :corrected-sha256
+   "f7945c0f60b8a63b2c1e0bc9fd433d0d5414642f5ccc458782a7158f8298ee7e",
+   :repository "open-hax/eta-mu",
+   :corrected-edn
+   "{:ts \"2026-10-23T06:54:38.287573+00:00\" :kind :test-run :origin \"antigravity-member-rollout\" :owner \"codex\" :dod \"Pinned thin caller in every actionable member\" :pi \"foresight\" :host \"local\" :manifest [\".github/workflows/antigravity-review.yml\"] :refs [\"https://github.com/open-hax/foresight/pull/145\" \"3bcf27bef296f9349fdf4997df256a617da5f120\"] :note \"All23 generated callers pass actionlint and exact pin check; local hosting approved, orgrestricted groups readback verified, native hosted run remains pending.\" :tests \"actionlint1.7.12 all23PASS; root rollout checkPASS\"}\n",
+   :corrected-row
+   {:pi "foresight",
+    :tests "actionlint1.7.12 all23PASS; root rollout checkPASS",
+    :refs
+    ["https://github.com/open-hax/foresight/pull/145"
+     "3bcf27bef296f9349fdf4997df256a617da5f120"],
+    :dod "Pinned thin caller in every actionable member",
+    :manifest [".github/workflows/antigravity-review.yml"],
+    :note
+    "All23 generated callers pass actionlint and exact pin check; local hosting approved, orgrestricted groups readback verified, native hosted run remains pending.",
+    :ts "2026-10-23T06:54:38.287573+00:00",
+    :host "local",
+    :kind :test-run,
+    :origin "antigravity-member-rollout",
+    :owner "codex"},
+   :source-commit "6bf686bf98620ef09f9dd80412568e1964192b4c",
+   :original-edn
+   "{:ts \"2026-10-23T06:54:38.287573+00:00\" :kind \"test-run\" :origin \"antigravity-member-rollout\" :owner \"codex\" :dod \"Pinned thin caller in every actionable member\" :pi \"foresight\" :host \"local\" :manifest [\".github/workflows/antigravity-review.yml\"] :refs [\"https://github.com/open-hax/foresight/pull/145\" \"3bcf27bef296f9349fdf4997df256a617da5f120\"] :note \"All23 generated callers pass actionlint and exact pin check; local hosting approved, orgrestricted groups readback verified, native hosted run remains pending.\" :tests \"actionlint1.7.12 all23PASS; root rollout checkPASS\"}\n",
+   :record 3,
+   :original-sha256
+   "84572e560f571e37d0addc82fd5dc1589af11ef652e0df6eba07c79c2045a71d"}
+  {:ledger-path ".ημ/receipts.edn",
+   :corrected-sha256
+   "a0fc407ddc3e408a0d8f8fe3ce07c41e04097ef977cb5b1a723d2a51916d5d49",
+   :repository "open-hax/eta-mu",
+   :corrected-edn
+   "{:ts \"2026-10-23T07:00:18.978185+00:00\" :kind :test-run :origin \"antigravity-hosted-ci-repair\" :owner \"codex\" :dod \"Hosted test launcher resolves pinned package-local NBB without global install\" :pi \"foresight\" :host \"local\" :manifest [\"scripts/test.bb\" \".github/antigravity/runner.test.mjs\" \".github/workflows/antigravity-review.yml\"] :refs [\"https://github.com/open-hax/eta-mu/actions/runs/39913663423/job/120282177577\"] :note \"Reproduced hosted missing global NBB failure; package-local pinned CLI now used. Existing workflow pins rotated to Node24 action source, runtime stays immutableA.\" :tests \"No-global-NBB PATH: workflow11PASS, laws6/56PASS, runner23PASS; kondo0warnings\"}\n",
+   :corrected-row
+   {:pi "foresight",
+    :tests
+    "No-global-NBB PATH: workflow11PASS, laws6/56PASS, runner23PASS; kondo0warnings",
+    :refs
+    ["https://github.com/open-hax/eta-mu/actions/runs/39913663423/job/120282177577"],
+    :dod
+    "Hosted test launcher resolves pinned package-local NBB without global install",
+    :manifest
+    ["scripts/test.bb"
+     ".github/antigravity/runner.test.mjs"
+     ".github/workflows/antigravity-review.yml"],
+    :note
+    "Reproduced hosted missing global NBB failure; package-local pinned CLI now used. Existing workflow pins rotated to Node24 action source, runtime stays immutableA.",
+    :ts "2026-10-23T07:00:18.978185+00:00",
+    :host "local",
+    :kind :test-run,
+    :origin "antigravity-hosted-ci-repair",
+    :owner "codex"},
+   :source-commit "c01c31d3ca3d57d7613a1bdca1f1b220d3aeb786",
+   :original-edn
+   "{:ts \"2026-10-23T07:00:18.978185+00:00\" :kind \"test-run\" :origin \"antigravity-hosted-ci-repair\" :owner \"codex\" :dod \"Hosted test launcher resolves pinned package-local NBB without global install\" :pi \"foresight\" :host \"local\" :manifest [\"scripts/test.bb\" \".github/antigravity/runner.test.mjs\" \".github/workflows/antigravity-review.yml\"] :refs [\"https://github.com/open-hax/eta-mu/actions/runs/39913663423/job/120282177577\"] :note \"Reproduced hosted missing global NBB failure; package-local pinned CLI now used. Existing workflow pins rotated to Node24 action source, runtime stays immutableA.\" :tests \"No-global-NBB PATH: workflow11PASS, laws6/56PASS, runner23PASS; kondo0warnings\"}\n",
+   :record 4,
+   :original-sha256
+   "ca0660c13c9095b7577c402fe150aad31c0e669507073cf0dbeebc5dfe5f7214"}],
+ :status :withdrawn-in-place-repair-proposal,
+ :preservation
+ "Original row bytes are retained here and in their source Git commits.",
+ :changes
+ [{:record 1,
+   :repository "open-hax/foresight",
+   :fields [:manifest :refs],
+   :change :wrap-original-strings-in-single-element-vectors}
+  {:record 2,
+   :repository "open-hax/foresight",
+   :fields [:kind],
+   :change :string-to-keyword}
+  {:record 3,
+   :repository "open-hax/eta-mu",
+   :fields [:kind],
+   :change :string-to-keyword}
+  {:record 4,
+   :repository "open-hax/eta-mu",
+   :fields [:kind],
+   :change :string-to-keyword}],
+ :merge-target "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd"}

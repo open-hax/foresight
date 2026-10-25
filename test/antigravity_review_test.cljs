@@ -45,13 +45,89 @@
                       "pr_head_sha: ${{ github.event.pull_request.head.sha }}"
                       "pr_base_sha: ${{ github.event.pull_request.base.sha }}"
                       "model: gemini-3.8-flash-high"
-                      "types: [opened, synchronize, reopened, ready_for_review]"
+                      "types: [opened, synchronize, reopened, ready_for_review, edited]"
+                      "github.event.action != 'edited' || github.event.changes.base.ref.from != ''"
                       "cancel-in-progress: true"
                       "contents: read" "pull-requests: read"]]
       (is (str/includes? text required) required))
     (doseq [forbidden ["secrets:" "write" "pull_request_target" "checkout@"
                        "npm" "pnpm" "run:"]]
       (is (not (str/includes? text forbidden)) forbidden))))
+
+(deftest retarget-events-review-the-new-base-without-replaying-title-or-body-edits
+  (let [event {:pull_request {:draft false}}]
+    (doseq [action ["opened" "synchronize" "reopened" "ready_for_review"]]
+      (is (review/review-event? (assoc event :action action)) action))
+    (is (review/review-event? (assoc event :action "edited"
+                                    :changes {:base {:ref {:from "main"}}})))
+    (doseq [changes [nil {} {:title {:from "Old title"}} {:body {:from "Old body"}}
+                     {:base {:sha {:from revision}}} {:base {:ref {}}}
+                     {:base {:ref {:from nil}}} {:base {:ref {:from ""}}}]]
+      (is (not (review/review-event? (assoc event :action "edited" :changes changes)))
+          (pr-str changes)))
+    (is (review/review-event? (assoc event :action "edited"
+                                    :changes {:base {:ref {:from "release/previous"}}
+                                              :title {:from "Old title"}})))
+    (is (not (review/review-event? {:action "edited" :pull_request {:draft true}
+                                   :changes {:base {:ref {:from "main"}}}})))
+    (doseq [action ["closed" "labeled" "assigned" nil]]
+      (is (not (review/review-event? (assoc event :action action))) (pr-str action)))))
+
+(deftest previous-generated-trigger-format-remains-managed
+  (doseq [repository ["open-hax/eta-mu" "octave-commons/muse"]]
+    (let [retarget (str/replace (review/render-workflow previous-revision revision repository)
+                                "-${{ (github.event.action != 'edited' || github.event.changes.base.ref.from != '') && 'review' || github.run_id }}"
+                                "")
+          old (-> retarget
+                  (str/replace "types: [opened, synchronize, reopened, ready_for_review, edited]"
+                               "types: [opened, synchronize, reopened, ready_for_review]")
+                  (str/replace "${{ github.event.pull_request.draft == false && (github.event.action != 'edited' || github.event.changes.base.ref.from != '') }}"
+                               "${{ github.event.pull_request.draft == false }}"))]
+      (is (= :revision-mismatch
+             (review/workflow-status old previous-revision revision repository)))
+      (is (= :revision-mismatch
+             (review/workflow-status retarget previous-revision revision repository)))
+      (is (= :unmanaged
+             (review/workflow-status (str old "# unrelated edit\n")
+                                     previous-revision revision repository))))))
+
+(defn evaluate-generated-expression [expression event run-id]
+  (let [normalized (assoc-in event [:changes :base :ref :from]
+                             (or (get-in event [:changes :base :ref :from]) ""))
+        context {:workflow "Antigravity evidence review" :run_id run-id
+                 :event (assoc-in normalized [:pull_request :number] 42)}]
+    ((js/Function. "github" (str "return (" expression ");")) (clj->js context))))
+
+(deftest actual-generated-concurrency-isolates-ineligible-edits-before-job-admission
+  (let [workflow (review/render-workflow revision)
+        group-template (second (re-find #"  group: ([^\n]+)" workflow))
+        condition (second (re-find #"    if: \$\{\{\s*(.*?)\s*\}\}" workflow))
+        group (fn [event run-id]
+                (str/replace group-template #"\$\{\{\s*(.*?)\s*\}\}"
+                             (fn [[_ expression]]
+                               (str (evaluate-generated-expression expression event run-id)))))
+        event {:action "opened" :pull_request {:draft false}}
+        review-group (group event "100")
+        cases [["opened" nil true] ["synchronize" nil true]
+               ["reopened" nil true] ["ready_for_review" nil true]
+               ["edited" {:base {:ref {:from "main"}}} true]
+               ["edited" {:title {:from "old"}} false]
+               ["edited" {:body {:from "old"}} false]
+               ["edited" {:base {:sha {:from revision}}} false]
+               ["edited" {:base {:ref {:from ""}}} false]
+               ["edited" nil false]]]
+    (is (str/ends-with? review-group "-review"))
+    (doseq [[action changes eligible?] cases]
+      (let [input (assoc event :action action :changes changes)
+            first-group (group input "100")
+            second-group (group input "101")]
+        (is (= eligible? (evaluate-generated-expression condition input "100")) (pr-str input))
+        (if eligible?
+          (is (= review-group first-group second-group) (pr-str input))
+          (do
+            (is (= 3 (count (set [review-group first-group second-group]))) (pr-str input))
+            (is (str/ends-with? first-group "-100"))
+            (is (str/ends-with? second-group "-101"))))))))
 
 (deftest runtime-pin-can-precede-the-workflow-pin
   (let [text (review/render-workflow revision previous-revision)]

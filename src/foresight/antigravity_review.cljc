@@ -11,6 +11,23 @@
 (def compatibility-workflow-repository "octave-commons/muse")
 (def workflow-repositories
   #{canonical-workflow-repository compatibility-workflow-repository})
+(def pull-request-actions ["opened" "synchronize" "reopened" "ready_for_review" "edited"])
+(def edit-review-predicate
+  "github.event.action != 'edited' || github.event.changes.base.ref.from != ''")
+(def review-condition
+  (str "${{ github.event.pull_request.draft == false && (" edit-review-predicate ") }}"))
+(def concurrency-suffix
+  (str "-${{ (" edit-review-predicate ") && 'review' || github.run_id }}"))
+
+(defn review-event?
+  "Accept normal caller events or a base-ref retarget; ignore other PR edits and drafts."
+  [{:keys [action pull_request changes]}]
+  (boolean
+    (and (false? (:draft pull_request))
+         (contains? (set pull-request-actions) action)
+         (or (not= "edited" action)
+             (let [previous-base (get-in changes [:base :ref :from])]
+               (and (string? previous-base) (seq previous-base)))))))
 
 (defn revision?
   "True only for an immutable lowercase, full-length Git commit SHA."
@@ -42,12 +59,7 @@
       (filterv #(contains? (set only) (:path %)) declared)
       (vec declared))))
 
-(defn render-workflow
-  "Render the sole managed caller with immutable workflow and runtime revisions."
-  ([revision] (render-workflow revision revision))
-  ([revision runtime-revision]
-   (render-workflow revision runtime-revision canonical-workflow-repository))
-  ([revision runtime-revision workflow-repository]
+(defn- render-template [revision runtime-revision workflow-repository format-version]
    (when-not (and (revision? revision) (revision? runtime-revision))
      (throw (ex-info "Workflow/runtime revisions must be exact lowercase 40-character commit SHAs" {})))
    (when-not (contains? workflow-repositories workflow-repository)
@@ -55,19 +67,28 @@
    (str generator-marker "\n"
        "name: Antigravity evidence review\n\n"
        "on:\n  pull_request:\n"
-       "    types: [opened, synchronize, reopened, ready_for_review]\n\n"
+       "    types: [" (str/join ", " (if (= :initial format-version) (pop pull-request-actions) pull-request-actions)) "]\n\n"
        "permissions:\n  contents: read\n  pull-requests: read\n\n"
        "concurrency:\n"
-       "  group: antigravity-review-${{ github.workflow }}-${{ github.event.pull_request.number }}\n"
+       "  group: antigravity-review-${{ github.workflow }}-${{ github.event.pull_request.number }}"
+       (when (= :current format-version) concurrency-suffix) "\n"
        "  cancel-in-progress: true\n\n"
        "jobs:\n  review:\n"
-       "    if: ${{ github.event.pull_request.draft == false }}\n"
+       "    if: " (if (= :initial format-version) "${{ github.event.pull_request.draft == false }}" review-condition) "\n"
        "    uses: " workflow-repository "/.github/workflows/antigravity-code-review.yml@" revision "\n"
        "    with:\n"
        "      pr_head_sha: ${{ github.event.pull_request.head.sha }}\n"
        "      pr_base_sha: ${{ github.event.pull_request.base.sha }}\n"
        "      review_runtime_revision: " runtime-revision "\n"
-       "      model: gemini-3.8-flash-high\n")))
+       "      model: gemini-3.8-flash-high\n"))
+
+(defn render-workflow
+  "Render the managed caller, reviewing base retargets while ignoring other PR edits."
+  ([revision] (render-workflow revision revision))
+  ([revision runtime-revision]
+   (render-workflow revision runtime-revision canonical-workflow-repository))
+  ([revision runtime-revision workflow-repository]
+   (render-template revision runtime-revision workflow-repository :current)))
 
 (defn workflow-status
   "Distinguish absence, exact match, owned revision drift, and unknown file content."
@@ -87,7 +108,8 @@
       (= actual expected) :matching
       (and (revision? prior-revision) (revision? prior-runtime)
            (contains? workflow-repositories prior-repository)
-           (= actual (render-workflow prior-revision prior-runtime prior-repository))) :revision-mismatch
+           (some #(= actual (render-template prior-revision prior-runtime prior-repository %))
+                 [:initial :retarget :current])) :revision-mismatch
       :else :unmanaged))))
 
 (defn route-targets
