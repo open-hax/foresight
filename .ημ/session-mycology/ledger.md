@@ -1037,3 +1037,31 @@ findings await supported native disposition; local independent assessment suppli
 no Bot identity. Receipt: 2026-10-25T092915582Z-member-review-repairs.edn. The one malformed local new-segment
 filename was corrected before publication with identical record bytes; all
 previously published receipt files and frozen legacy history remain unchanged.
+
+
+## 2026-10-25T09:56:42.620247Z — Resolve receipt-verifier refs explicitly
+
+Friction2/5; reuse3/5; no spore. CodeRabbit identified an ambiguous `<commit>`
+placeholder; this session also encountered the verifier's deliberate refusal of
+literal HEAD. Document both full-ID requirements and execute the ref-resolution
+example against the actual integration base. Runtime semantics, legacy bytes
+and prior segments stay unchanged. Receipt: 2026-10-25T095642620Z-full-commit-documentation.edn.
+
+
+## 2026-10-25T09:58:24.680588Z — Preserve dependent reader while updating its prerequisite
+
+Friction1/5; reuse3/5; no spore. A reviewed documentation correction belongs on
+the prerequisite and dependent branches. Keep all code/test blobs unchanged and
+resolve the append-only learning-log overlap as parent prefix plus exact donor
+suffix. Receipt: 2026-10-25T095824680Z-prerequisite-doc-sync.edn.
+
+
+## 2026-10-25T10:01:15.291162Z — Native member execution and reviewed prerequisite documentation
+
+Friction2/5; reuse3/5; no spore. Qualify exact native captures rather than
+inferring operation from generated YAML: SHX868 matches all Git inputs, strict
+settings, reconstructed stdin and the pinned terminal law. Its independent MiMo
+approval does not settle the older finding. CodeRabbit147 found an actual
+full-commit documentation ambiguity; carry the verified example through both
+dependents, preserving learning-log interleaving and every immutable receipt.
+Receipt: 2026-10-25T100115291Z-doc-sync-and-hosted-proof.edn.

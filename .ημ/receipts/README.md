@@ -7,7 +7,20 @@ receipt on one line, ending with a newline. Never edit or delete a committed seg
 
 `../receipts.edn` is the frozen legacy first segment. Do not append to it.
 
-`nbb scripts/evidence.clj verify-receipts --base <commit> --at <commit>` loads
+`nbb -cp src:scripts scripts/evidence.clj verify-receipts --base <full-base-sha> --at <full-head-sha>`
+requires full lowercase Git commit IDs: exactly 40 or 64 hexadecimal characters.
+Literal refs such as `HEAD` and abbreviated SHAs are rejected by both options.
+Resolve refs before invoking the verifier, for example from the repository root:
+
+```sh
+receipt_base_sha="$(git rev-parse 'origin/main^{commit}')"
+receipt_head_sha="$(git rev-parse 'HEAD^{commit}')"
+nbb -cp src:scripts scripts/evidence.clj verify-receipts \
+  --base "$receipt_base_sha" --at "$receipt_head_sha"
+```
+
+Choose the actual comparison base for the operation; `origin/main` is an example
+and must already represent the intended fetched base. The verifier loads
 the legacy file and every segment, merges them by the UTC instant of `:ts`
 (offsets and fractional seconds normalized) then record ID, and
 checks the merged ledger as a whole: no base one-record segment edited or removed, no
