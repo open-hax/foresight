@@ -487,7 +487,7 @@
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
 
 ;; BEGIN receipt-correction-view RED contract
-;; The only new production API is receipt-correction-view [items verified-targets].
+;; Preserved PR28 receipt-correction-view [items verified-targets] regression contract.
 ;; The RED commit used a test-only absent-API resolver. GREEN calls the now
 ;; implemented API directly, retaining every assertion. Git, ancestry, UTF-8 and
 ;; including-LF digest verification belong to the adapter. Digests below are

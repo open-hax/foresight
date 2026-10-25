@@ -3152,14 +3152,15 @@
           (run! (assoc context :source source :raws raws :originals originals
                        :entries entries :files files :corrected-files corrected-files)))))))
 
-(defn correction-promotion! [base head]
+(defn correction-promotion! [base head & [target-revision]]
   (let [catalog {:catalog/version 1
                  :catalog/repositories
                  {"repo" {:repository/path "repo" :repository/gates [local-gate]}}}]
     (with-redefs [cli/read-immutable-catalog-bundle!
                   (fn [_] {:catalog catalog :catalog-identity test-catalog-identity})
                   cli/validate-catalog! identity]
-      (cli/promotion-ready-at! child-revision #{:repo/unit} [passed-result] base head))))
+      (cli/promotion-ready-at! (or target-revision child-revision)
+                               #{:repo/unit} [passed-result] base head))))
 
 (deftest frozen-originals-match-source-hashes-and-fail-strict-envelopes
   (let [raws (frozen-correction-records)
@@ -3230,5 +3231,94 @@
                               (correction-promotion! base head)))
         (is (thrown-with-msg? js/Error #"not an ancestor"
                               (cli/validate-working-receipt-ledger! nil)))))))
+
+(deftest correction-source-may-be-a-regular-segment-and-legacy-entries-stay-compatible
+  (with-correction-ledger
+    (fn [{:keys [base base-text commit! corrected-files entries files]}]
+      (let [source (commit! base-text files)
+            first-entry (dissoc (first entries) :receipt/source-path :receipt/identity)
+            second-entry (assoc (second entries) :receipt/source-revision source
+                                :receipt/source-path ".ημ/receipts/2026-10-23T070501311Z-original.edn"
+                                :receipt/line 1)
+            head (commit! base-text (corrected-files [first-entry second-entry]))]
+        (is (zero? (cli/verify-receipts! {:base base :at head})))
+        (is (false? (correction-promotion! base head)))
+        (is (seq (cli/validate-working-receipt-ledger! nil)))))))
+
+(deftest correction-admission-rejects-byte-reformatting-and-duplicate-claims
+  (with-correction-ledger
+    (fn [{:keys [base base-text commit! corrected-files entries]}]
+      (doseq [files [(update (corrected-files entries)
+                             "2026-10-23T061014592Z-original.edn" #(str " " %))
+                     (corrected-files (conj entries (first entries)))]]
+        (let [head (commit! base-text files)]
+          (is (thrown-with-msg? js/Error #"[Cc]orrection"
+                                (cli/verify-receipts! {:base base :at head})))
+          (is (thrown-with-msg? js/Error #"[Cc]orrection"
+                                (correction-promotion! base head)))
+          (is (thrown-with-msg? js/Error #"[Cc]orrection"
+                                (cli/validate-working-receipt-ledger! nil))))))))
+
+(deftest corrections-refuse-unterminated-original-sources-and-uncommitted-descendants
+  (with-correction-ledger
+    (fn [{:keys [base base-text commit! corrected-files entries raws]}]
+      (let [first-raw (.toString (first raws) "utf8")
+            last-raw (.toString (second raws) "utf8")
+            no-lf (subs last-raw 0 (dec (count last-raw)))
+            source (commit! (str base-text first-raw no-lf))
+            entries (assoc-in (assoc-in entries [1 :receipt/source-revision] source)
+                              [1 :receipt/source-sha256] (cli/sha256 no-lf))
+            head (commit! base-text (corrected-files entries))]
+        (is (thrown-with-msg? js/Error #"include final LF"
+                              (cli/verify-receipts! {:base base :at head})))
+        (is (thrown-with-msg? js/Error #"include final LF"
+                              (correction-promotion! base head)))
+        (is (thrown-with-msg? js/Error #"include final LF"
+                              (cli/validate-working-receipt-ledger! nil))))))
+  (with-correction-ledger
+    (fn [{:keys [base base-text commit! corrected-files entries]}]
+      (commit! base-text (corrected-files entries))
+      ;; Keep the working ledger but move only the fixture's held HEAD behind
+      ;; the immutable source. A writer must not use a future commit as anchor.
+      (cli/git-capture! ["reset" "--soft" base])
+      (is (thrown-with-msg? js/Error #"not an ancestor"
+                            (cli/validate-working-receipt-ledger! nil))))))
+
+(deftest corrected-evidence-metadata-preserves-result-validation-and-promotion-law
+  (with-historical-ledger-fixture true
+    (fn [{:keys [base base-text commit! current]}]
+      (doseq [[outcome valid?] [[:passed true] [:failed true] [:unavailable true]
+                               [:invalid-exit false]]]
+        (let [result (case outcome
+                       :passed passed-result
+                       :failed (assoc passed-result :result/outcome :failed :result/exit 1)
+                       :unavailable (-> passed-result (dissoc :result/exit)
+                                        (assoc :result/outcome :unavailable :result/reason "offline"))
+                       :invalid-exit (assoc passed-result :result/exit 1))
+              original (assoc current :manifest "exact old path" :evidence/result result)
+              raw (str (pr-str original) "\n")
+              source (commit! (str base-text raw))
+              entry {:receipt/source-revision source :receipt/line 2
+                     :receipt/origin law/evidence-receipt-origin
+                     :receipt/source-sha256 (cli/sha256 raw)
+                     :envelope/corrected-fields {:manifest ["exact old path"]}}
+              head (commit! base-text
+                            {"2026-10-25T070000000Z-evidence.edn" raw
+                             "2026-10-25T070001000Z-correction.edn"
+                             (str (pr-str (correction-document [entry])) "\n")})]
+          (if valid?
+            (do (is (zero? (cli/verify-receipts! {:base base :at head})))
+                (is (seq (cli/validate-working-receipt-ledger! nil))))
+            (do (is (thrown-with-msg? js/Error #"invalid evidence receipts"
+                                      (cli/verify-receipts! {:base base :at head})))
+                (is (thrown-with-msg? js/Error #"invalid evidence receipts"
+                                      (correction-promotion! base head)))
+                (is (thrown-with-msg? js/Error #"invalid evidence receipts"
+                                      (cli/validate-working-receipt-ledger! nil)))))
+          (when (and valid? (not= :passed outcome))
+            (is (false? (correction-promotion! base head))))
+          (when (= :passed outcome)
+            (is (false? (correction-promotion! base head sha256-child-revision))
+                "metadata correction cannot refresh stale revision-bound evidence")))))))
 
 (test/run-tests 'evidence-cli-test)
