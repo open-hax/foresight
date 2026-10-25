@@ -970,6 +970,142 @@
      :receipt/legacy-evidence
      (count (filter #(nil? (:evidence/schema %)) evidence-records))}))
 
+(defn physical-receipt-items!
+  "PR28 source-byte custody, retaining physical ordinals and final LF. Parse
+  through the current exact-number/tag/Unicode reader, never a reserialization."
+  [bytes]
+  (decode-utf8! bytes "Receipt correction source")
+  (loop [offset 0 line 1 items []]
+    (if (= offset (.-length bytes)) items
+      (let [lf (.indexOf bytes 10 offset)
+            end (if (neg? lf) (.-length bytes) (inc lf))
+            raw (.subarray bytes offset end)
+            text (decode-utf8! raw "Receipt correction physical source line")]
+        (recur end (inc line)
+               (if (str/blank? text) items
+                 (conj items {:receipt/line line :receipt/bytes raw
+                              :receipt/record (first (read-receipt-records! text))})))))))
+
+(defn correction-source-path? [repository-path]
+  (or (= law/receipt-ledger-path repository-path)
+      (and (string? repository-path)
+           (= law/receipt-segment-directory (.dirname (.-posix path) repository-path))
+           (receipt-segment-name? (.basename (.-posix path) repository-path)))))
+
+(defn correction-entries [records]
+  (into [] (mapcat #(let [entries (:correction/entries %)]
+                     (if (vector? entries) entries []))) records))
+
+(defn verify-correction-source!
+  "Authenticate one immutable source against the exact consumer anchor and
+  exactly one active original, regardless of its current segment/display order."
+  [entry anchor head-segments source-cache]
+  (let [shape-errors (law/receipt-correction-entry-errors entry)
+        repository-path (get entry :receipt/source-path law/receipt-ledger-path)]
+    (when (seq shape-errors)
+      (throw (js/Error. (str "Receipt correction entry refused: " (pr-str shape-errors)))))
+    (when-not (correction-source-path? repository-path)
+      (throw (js/Error. "Receipt correction source path is not a canonical ledger or segment")))
+    (when-not (law/git-commit-id? anchor)
+      (throw (js/Error. "Receipt correction anchor must be a full Git commit ID")))
+    (let [{:receipt/keys [line origin source-revision source-sha256]} entry
+          _ (try
+              (git-capture! ["merge-base" "--is-ancestor" source-revision anchor])
+              (catch :default _
+                (throw (js/Error. "Receipt correction source is not an ancestor of the exact anchor"))))
+          cache-key [source-revision repository-path]
+          source-items
+          (or (get @source-cache cache-key)
+              (let [bytes (if (= repository-path law/receipt-ledger-path)
+                            (:ledger/bytes (read-immutable-receipt-ledger! source-revision))
+                            (let [objects (immutable-receipt-segment-object-ids! source-revision)
+                                  object-id (get objects repository-path)]
+                              (when-not object-id
+                                (throw (js/Error. "Receipt correction source segment is absent")))
+                              (get (git-blobs-batch! [object-id]) object-id)))
+                    _ (when-not (= repository-path law/receipt-ledger-path)
+                        (read-segment-records! repository-path bytes))
+                    items (physical-receipt-items! bytes)]
+                (swap! source-cache assoc cache-key items)
+                items))
+          source-item (some #(when (= line (:receipt/line %)) %) source-items)
+          raw (:receipt/bytes source-item)
+          original (:receipt/record source-item)]
+      (when-not source-item (throw (js/Error. "Receipt correction source line is absent")))
+      (when-not (= 10 (.at raw -1))
+        (throw (js/Error. "Receipt correction source line must include final LF")))
+      (when-not (= source-sha256 (sha256 raw))
+        (throw (js/Error. "Receipt correction source hash differs (including LF)")))
+      (when-not (= origin (:origin original))
+        (throw (js/Error. "Receipt correction source origin differs")))
+      (let [id (record-id original)
+            matches (for [segment head-segments
+                          record (:segment/records segment)
+                          :when (= id (record-id record))]
+                      [segment record])]
+        (when (and (contains? entry :receipt/identity) (not= id (:receipt/identity entry)))
+          (throw (js/Error. "Receipt correction target identity differs")))
+        (when-not (= 1 (count matches))
+          (throw (js/Error. "Receipt correction needs exactly one active original")))
+        (let [[segment record] (first matches)
+              ;; Regular segments are one physical LF-terminated line, whose
+              ;; hash was taken over their actual raw bytes by the shared reader.
+              ;; Compare original source hash to that hash; never hash pr-str.
+              identical? (if (:segment/legacy? segment)
+                           (some #(and (= id (record-id (:receipt/record %)))
+                                       (.equals raw (:receipt/bytes %)))
+                                 (physical-receipt-items! (:segment/bytes segment)))
+                           (= source-sha256 (segment-sha256 segment)))]
+          (when-not (and (= original record) identical?)
+            (throw (js/Error. "Receipt correction active target bytes differ from source"))))
+        {:binding/verified? true :receipt/line line :receipt/origin origin
+         :receipt/source-revision source-revision :receipt/source-path repository-path
+         :receipt/source-sha256 source-sha256 :receipt/identity id
+         :receipt/record original}))))
+
+(defn admit-merged-receipt-extension!
+  "One admission boundary for verification, promotion and held-ledger writes.
+  Conservation always uses originals; all correction documents are reverified,
+  including base history. New non-correction originals are independently strict,
+  except for the two explicitly bound historical imports in the pure law.
+  Untargeted ordinary base records retain grandfathering."
+  [base-segments head-segments anchor]
+  (let [appended (ledger-extension-records! base-segments head-segments)
+        records (merged-receipt-records! head-segments)
+        documents (filterv law/correction-document? records)]
+    (if (empty? documents)
+      (assoc (require-valid-receipt-records! appended)
+             :receipt/originals appended :receipt/views appended
+             :receipt/corrections [] :ledger/views records)
+      (let [source-cache (atom {})
+            bindings (into {} (map (fn [entry]
+                                     [(law/correction-binding-key entry)
+                                      (verify-correction-source! entry anchor head-segments source-cache)]))
+                           (correction-entries documents))
+            historical-ids (into #{} (comp (filter law/historical-receipt-import?)
+                                            (map :receipt/identity))
+                                 (vals bindings))
+            _ (require-valid-receipt-records!
+               (filterv #(and (not (law/correction-document? %))
+                              (not (contains? historical-ids (record-id %))))
+                        appended))
+            selected-ids (into (set (map record-id (into appended documents)))
+                               (map :receipt/identity) (vals bindings))
+            selected (filterv #(contains? selected-ids (record-id %)) records)
+            result (law/segmented-receipt-correction-view
+                    (mapv #(hash-map :receipt/identity (record-id %) :receipt/record %) selected)
+                    bindings)]
+        (when (seq (:receipt/errors result))
+          (throw (js/Error. (str "Receipt correction admission refused: "
+                                (pr-str (:receipt/errors result))))))
+        (let [views (:receipt/views result)
+              _ (require-valid-receipt-records! views)
+              by-id (zipmap (map record-id selected) views)
+              counts (require-valid-receipt-records!
+                      (mapv #(get by-id (record-id %)) appended))]
+          (merge result counts
+                 {:ledger/views (mapv #(get by-id (record-id %) %) records)}))))))
+
 (declare appended-receipt-records!)
 
 (defn promotion-ready-at!
@@ -988,12 +1124,12 @@
         base-ledger (read-immutable-merged-ledger! trusted-base-revision)
         ledger (read-immutable-merged-ledger! reviewed-root-revision)]
     (require-segment-directory-kept! base-ledger ledger)
-    (require-valid-receipt-records!
-     (ledger-extension-records! (:ledger/segments base-ledger)
-                                (:ledger/segments ledger)))
-    (if-not (law/promotion-evidence-consistent?
+    (let [admitted (admit-merged-receipt-extension!
+                    (:ledger/segments base-ledger) (:ledger/segments ledger)
+                    reviewed-root-revision)]
+      (if-not (law/promotion-evidence-consistent?
              catalog catalog-identity target-revision
-             required-gate-ids results ledger)
+             required-gate-ids results (assoc ledger :ledger/records (:ledger/views admitted)))
       false
       (do
         (require-result-gitlinks!
@@ -1004,7 +1140,7 @@
           (when-not (= before after)
             (throw (js/Error.
                     "Reviewed root state changed during promotion review")))
-          true)))))
+          true))))))
 
 (defn parse-csv [value flag]
   (let [values (into #{} (remove str/blank?)
@@ -1847,8 +1983,10 @@
                    (+ (.-length (:segment/bytes committed-legacy))
                       max-receipt-line-bytes)))]
     (try
-      (require-valid-receipt-records!
-       (ledger-extension-records! committed working))
+      (admit-merged-receipt-extension!
+       committed working
+       (when (some law/correction-document? (mapcat :segment/records working))
+         (str/trim (git-capture! ["rev-parse" "HEAD"]))))
       working
       (catch :default error
         (append-error!
@@ -2357,7 +2495,8 @@
                           (:ledger/segments ledger))
         candidates (filter #(= law/evidence-receipt-origin (:origin %)) records)
         evidence-count (count candidates)
-        counts (require-valid-receipt-records! appended-records)]
+        counts (admit-merged-receipt-extension!
+                (:ledger/segments base-ledger) (:ledger/segments ledger) at)]
     (println "PASS"
              (pr-str (assoc (:ledger/identity ledger)
                             :ledger/base-revision base
@@ -2365,6 +2504,7 @@
                             :ledger/appended-receipts (count appended-records)
                             :ledger/appended-evidence-receipts
                             (:receipt/evidence counts)
+                            :ledger/corrections (:receipt/corrections counts)
                             :ledger/legacy-evidence-receipts
                             (count (filter #(nil? (:evidence/schema %)) candidates))
                             :ledger/evidence-receipts evidence-count)))

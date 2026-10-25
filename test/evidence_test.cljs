@@ -486,4 +486,572 @@
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
 
+;; BEGIN receipt-correction-view RED contract
+;; Preserved PR28 receipt-correction-view [items verified-targets] regression contract.
+;; The RED commit used a test-only absent-API resolver. GREEN calls the now
+;; implemented API directly, retaining every assertion. Git, ancestry, UTF-8 and
+;; including-LF digest verification belong to the adapter. Digests below are
+;; opaque fixture identities, not hashes independently verified by this suite.
+;;
+;; Error maps use :error with the precise keywords asserted below; additional
+;; ordinary-envelope errors may coexist with a correction refusal. Refused
+;; entries must not apply even a subset of their fields. Duplicate targets are
+;; refused globally, including across correction records/source identities.
+;; Successful provenance is the original documentary entry plus
+;; :correction/line (the absolute line of the correction record).
+(defn correction-view-under-test [items verified-targets]
+  (if-let [view (resolve 'foresight.evidence/receipt-correction-view)]
+    (view items verified-targets)
+    {:receipt/originals (mapv :receipt/record items)
+     :receipt/views (mapv :receipt/record items)
+     :receipt/corrections [] :receipt/errors [{:error :api-missing}]}))
+
+(def correction-source-revision
+  "91a6fc6b27264da4b8c9b8cd7919f153adea0ff2")
+(def correction-source-digest (apply str (repeat 64 "a")))
+
+(def correction-original
+  (assoc (receipt-for (recorded-result :repo/unit :passed revision-a))
+         :manifest ".ημ/receipts.edn,automation:follow-up"
+         :refs "root1069,request6044932186"
+         :dod [" first objective " "second; objective"]
+         :pi :cephalon/character-memory))
+
+(def correction-fields
+  {:manifest [".ημ/receipts.edn,automation:follow-up"]
+   :refs ["root1069,request6044932186"]
+   :dod " first objective ; second; objective"
+   :pi "cephalon/character-memory"})
+
+(defn documentary-correction [entries]
+  {:ts "2026-10-07T22:09:45.368Z"
+   :kind :correction
+   :repo "open-hax/foresight"
+   :origin "documentary-envelope-correction"
+   :owner "test-coordinator"
+   :dod "Retain bound envelope interpretation without rewriting history"
+   :pi "cephalon/character-memory"
+   :host "test"
+   :manifest [".ημ/receipts.edn"]
+   :refs ["append correction or leave originals; containing repo supplies attribution"]
+   :correction/entries entries})
+
+(defn correction-fixture
+  ([] (correction-fixture correction-original correction-fields))
+  ([original fields]
+   (let [entry {:receipt/line 267
+                :receipt/origin (:origin original)
+                :receipt/source-revision correction-source-revision
+                :receipt/source-sha256 correction-source-digest
+                :envelope/corrected-fields fields}
+         binding (assoc (dissoc entry :envelope/corrected-fields)
+                        :binding/verified? true :receipt/record original)]
+     {:items [{:receipt/line 267 :receipt/record original}
+              {:receipt/line 278 :receipt/record (documentary-correction [entry])}]
+      :targets {[correction-source-revision 267 correction-source-digest] binding}
+      :entry entry})))
+
+(def correction-binding-key
+  [correction-source-revision 267 correction-source-digest])
+
+(defn fixture-entry [fixture entry]
+  (assoc-in fixture [:items 1 :receipt/record :correction/entries] [entry]))
+
+(defn expect-correction-success! [scenario {:keys [items targets]} views provenance]
+  (is (= {:receipt/originals (mapv :receipt/record items)
+          :receipt/views views
+          :receipt/corrections provenance
+          :receipt/errors []}
+         (correction-view-under-test items targets))
+      scenario))
+
+(defn expect-correction-refusal! [scenario expected-code {:keys [items targets]}]
+  (let [result (correction-view-under-test items targets)]
+    (is (contains? (set (map :error (:receipt/errors result))) expected-code)
+        (str scenario " must report " expected-code))
+    (is (= {:receipt/views (mapv :receipt/record items)
+            :receipt/corrections []}
+           (select-keys result [:receipt/views :receipt/corrections]))
+        (str scenario " must retain every original view and admit no correction"))))
+
+(deftest receipt-correction-valid-ordinary-records-remain-exact
+  (let [ordinary (dissoc (receipt-for (recorded-result :repo/unit :passed revision-a))
+                         :repo)
+        ;; Kind alone does not activate documentary grammar.
+        kind-only (assoc ordinary :kind :correction)
+        items [{:receipt/line 17 :receipt/record ordinary}
+               {:receipt/line 259 :receipt/record kind-only}]]
+    (expect-correction-success! "valid ordinary maps need no correction or repo field"
+                                {:items items :targets {}}
+                                [ordinary kind-only] [])))
+
+(deftest receipt-correction-empty-input-has-empty-result
+  (expect-correction-success! "empty ledger selection"
+                              {:items [] :targets {}} [] []))
+
+(deftest receipt-correction-documentary-syntax-keeps-originals-and-evidence
+  (let [{:keys [items entry] :as fixture} (correction-fixture)
+        corrected (assoc correction-original
+                         :manifest [".ημ/receipts.edn,automation:follow-up"]
+                         :refs ["root1069,request6044932186"]
+                         :dod " first objective ; second; objective"
+                         :pi "cephalon/character-memory")]
+    (expect-correction-success!
+     "four exact interpretations preserve ts/owner/origin/kind and evidence/result"
+     fixture [corrected (:receipt/record (second items))]
+     [(assoc entry :correction/line 278)])))
+
+(deftest receipt-correction-converts-each-permitted-invalid-field-independently
+  (let [ordinary (receipt-for (recorded-result :repo/unit :passed revision-a))]
+    (doseq [[field original-value replacement]
+            [[:manifest "path-a,path-b" ["path-a,path-b"]]
+             [:refs "ref-a,ref-b" ["ref-a,ref-b"]]
+             [:dod ["alpha " " beta"] "alpha ;  beta"]
+             [:pi :cephalon/character-memory "cephalon/character-memory"]
+             [:pi :eta-mu "eta-mu"]]]
+      (let [original (assoc ordinary field original-value)
+            {:keys [items entry] :as fixture}
+            (correction-fixture original {field replacement})]
+        (expect-correction-success!
+         (str "exact conversion of " field " from " (pr-str original-value))
+         fixture [(assoc original field replacement)
+                  (:receipt/record (second items))]
+         [(assoc entry :correction/line 278)])))))
+
+(deftest receipt-correction-supports-full-sha256-source-identity
+  (let [{:keys [entry targets] :as fixture} (correction-fixture)
+        revision (apply str (repeat 64 "b"))
+        entry (assoc entry :receipt/source-revision revision)
+        binding (assoc (get targets correction-binding-key)
+                       :receipt/source-revision revision)
+        fixture (assoc (fixture-entry fixture entry)
+                       :targets {[revision 267 correction-source-digest] binding})]
+    (expect-correction-success!
+     "full SHA256 commit identity is matched, not verified by the pure law"
+     fixture [(merge correction-original correction-fields)
+              (:receipt/record (second (:items fixture)))]
+     [(assoc entry :correction/line 278)])))
+
+(deftest receipt-correction-semantic-evidence-remains-for-existing-outer-validator
+  (let [original (assoc-in correction-original [:evidence/result :result/exit] 7)
+        {:keys [items entry] :as fixture} (correction-fixture original correction-fields)]
+    (expect-correction-success!
+     "envelope interpretation retains a semantically invalid result unchanged"
+     fixture [(merge original correction-fields) (:receipt/record (second items))]
+     [(assoc entry :correction/line 278)])))
+
+(deftest receipt-correction-key-presence-requires-correction-kind
+  (doseq [entries [nil []]]
+    (expect-correction-refusal!
+     (str "entries key present on non-correction kind, value " (pr-str entries))
+     :receipt-correction/kind
+     {:items [{:receipt/line 278
+               :receipt/record (assoc (documentary-correction entries)
+                                      :kind :observation)}]
+      :targets {}})))
+
+(deftest receipt-correction-rejects-empty-or-nonvector-entries
+  (let [fixture (correction-fixture)]
+    (doseq [entries [nil [] {} (list (:entry fixture)) "entries"]]
+      (expect-correction-refusal!
+       (str "entries must be a nonempty vector: " (pr-str entries))
+       :receipt-correction/entries
+       (assoc-in fixture [:items 1 :receipt/record :correction/entries] entries)))))
+
+(deftest receipt-correction-rejects-nonmap-entry
+  (expect-correction-refusal! "entry is not a map" :receipt-correction/entry-type
+                              (fixture-entry (correction-fixture) 42)))
+
+(deftest receipt-correction-requires-exact-documentary-entry-fields
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (doseq [field (keys entry)]
+      (expect-correction-refusal! (str "missing entry key " field)
+                                  :receipt-correction/entry-fields
+                                  (fixture-entry fixture (dissoc entry field))))
+    (expect-correction-refusal! "extra entry key is not documentary grammar"
+                                :receipt-correction/entry-fields
+                                (fixture-entry fixture (assoc entry :extra true)))))
+
+(deftest receipt-correction-requires-positive-absolute-target-line
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (doseq [line [0 -1 267.5 "267" nil]]
+      (expect-correction-refusal! (str "invalid target ordinal " (pr-str line))
+                                  :receipt-correction/target-line
+                                  (fixture-entry fixture (assoc entry :receipt/line line))))))
+
+(deftest receipt-correction-requires-nonblank-entry-origin
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (doseq [origin [nil "" "  " :origin]]
+      (expect-correction-refusal! (str "invalid entry origin " (pr-str origin))
+                                  :receipt-correction/entry-origin
+                                  (fixture-entry fixture (assoc entry :receipt/origin origin))))))
+
+(deftest receipt-correction-requires-full-lowercase-source-identities
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (doseq [revision ["main" "91a6fc6" (apply str (repeat 40 "A")) nil]]
+      (expect-correction-refusal! (str "invalid source revision " (pr-str revision))
+                                  :receipt-correction/source-revision
+                                  (fixture-entry fixture
+                                                 (assoc entry :receipt/source-revision revision))))
+    (doseq [digest ["a" (apply str (repeat 64 "A")) nil]]
+      (expect-correction-refusal! (str "invalid source SHA256 " (pr-str digest))
+                                  :receipt-correction/source-sha256
+                                  (fixture-entry fixture
+                                                 (assoc entry :receipt/source-sha256 digest))))))
+
+(deftest receipt-correction-rejects-missing-binding-and-wrong-lookup-identity
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (expect-correction-refusal! "no verified fact for the exact lookup triple"
+                                :receipt-correction/binding-missing
+                                (assoc fixture :targets {}))
+    (doseq [[field value] [[:receipt/source-revision revision-b]
+                          [:receipt/source-sha256 (apply str (repeat 64 "b"))]]]
+      (expect-correction-refusal! (str "lookup uses a different " field)
+                                  :receipt-correction/binding-missing
+                                  (fixture-entry fixture (assoc entry field value))))))
+
+(deftest receipt-correction-rejects-malformed-binding-container-or-value
+  (let [fixture (correction-fixture)]
+    (doseq [targets [nil [] "facts"]]
+      (expect-correction-refusal! (str "facts table is not a map: " (pr-str targets))
+                                  :receipt-correction/bindings-type
+                                  (assoc fixture :targets targets)))
+    (expect-correction-refusal! "bound fact is not a map"
+                                :receipt-correction/binding-type
+                                (assoc fixture :targets {correction-binding-key 42}))))
+
+(deftest receipt-correction-requires-complete-binding-facts
+  (let [{:keys [targets] :as fixture} (correction-fixture)]
+    (doseq [field [:receipt/line :receipt/origin :receipt/source-revision
+                  :receipt/source-sha256 :receipt/record]]
+      (expect-correction-refusal! (str "bound fact missing " field)
+                                  :receipt-correction/binding-fields
+                                  (assoc-in fixture [:targets correction-binding-key]
+                                            (dissoc (get targets correction-binding-key) field))))))
+
+(deftest receipt-correction-requires-explicit-true-verification-fact
+  (let [fixture (correction-fixture)]
+    (doseq [verified [false nil 1 "true"]]
+      (expect-correction-refusal! (str "binding is not explicitly verified: " (pr-str verified))
+                                  :receipt-correction/binding-unverified
+                                  (assoc-in fixture
+                                            [:targets correction-binding-key :binding/verified?]
+                                            verified)))))
+
+(deftest receipt-correction-matches-binding-line-origin-revision-and-hash
+  (let [fixture (correction-fixture)]
+    (doseq [[field value code]
+            [[:receipt/line 268 :receipt-correction/line-mismatch]
+             [:receipt/origin "other-origin" :receipt-correction/origin-mismatch]
+             [:receipt/source-revision revision-b :receipt-correction/revision-mismatch]
+             [:receipt/source-sha256 (apply str (repeat 64 "b"))
+              :receipt-correction/hash-mismatch]]]
+      (expect-correction-refusal! (str "bound fact contradicts entry " field) code
+                                  (assoc-in fixture [:targets correction-binding-key field] value)))))
+
+(deftest receipt-correction-matches-entry-origin-to-prior-original
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (expect-correction-refusal! "entry origin differs from prior map and bound fact"
+                                :receipt-correction/origin-mismatch
+                                (fixture-entry fixture
+                                               (assoc entry :receipt/origin "other-origin")))))
+
+(deftest receipt-correction-matches-bound-record-to-prior-original-map
+  (let [fixture (correction-fixture)]
+    (expect-correction-refusal!
+     "bound original differs even in a field not being corrected"
+     :receipt-correction/record-mismatch
+     (assoc-in fixture [:targets correction-binding-key :receipt/record :owner] "other-owner"))
+    (expect-correction-refusal!
+     "selected prior original differs from the verified original"
+     :receipt-correction/record-mismatch
+     (assoc-in fixture [:items 0 :receipt/record :evidence/result :result/exit] 7))))
+
+(deftest receipt-correction-rejects-target-not-present-at-absolute-line
+  (expect-correction-refusal! "prior item was supplied under another absolute line"
+                              :receipt-correction/target-missing
+                              (assoc-in (correction-fixture) [:items 0 :receipt/line] 266)))
+
+(deftest receipt-correction-rejects-self-and-forward-targets
+  (let [{:keys [entry items targets]} (correction-fixture)]
+    (doseq [line [278 279]]
+      (let [entry (assoc entry :receipt/line line)
+            correction (documentary-correction [entry])
+            binding (assoc (get targets correction-binding-key) :receipt/line line)
+            selected (if (= line 278)
+                       [{:receipt/line 278 :receipt/record correction}]
+                       [(second (assoc items 1 {:receipt/line 278 :receipt/record correction}))
+                        {:receipt/line 279 :receipt/record correction-original}])]
+        (expect-correction-refusal!
+         (str "target ordinal " line " is not before correction line278")
+         :receipt-correction/target-not-prior
+         {:items selected
+          :targets {[correction-source-revision line correction-source-digest] binding}})))))
+
+(deftest receipt-correction-rejects-duplicate-and-conflicting-targets-in-one-record
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (doseq [[scenario second-entry]
+            [["identical duplicate target" entry]
+             ["conflicting replacement for the same target"
+              (assoc-in entry [:envelope/corrected-fields :pi] "changed")]]]
+      (expect-correction-refusal!
+       scenario :receipt-correction/duplicate-target
+       (assoc-in fixture [:items 1 :receipt/record :correction/entries]
+                 [entry second-entry])))))
+
+(deftest receipt-correction-rejects-duplicate-targets-globally
+  (let [{:keys [entry items targets]} (correction-fixture)]
+    (doseq [[scenario second-entry second-targets]
+            [["same target in a later correction record" entry targets]
+             ["same absolute target under a different verified source identity"
+              (assoc entry :receipt/source-revision revision-b)
+              (assoc targets [revision-b 267 correction-source-digest]
+                     (assoc (get targets correction-binding-key)
+                            :receipt/source-revision revision-b))]]]
+      (expect-correction-refusal!
+       scenario :receipt-correction/duplicate-target
+       {:items (conj items {:receipt/line 279
+                            :receipt/record (documentary-correction [second-entry])})
+        :targets second-targets}))))
+
+(deftest receipt-correction-requires-nonempty-corrected-field-map
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (doseq [fields [nil {} [] "fields"]]
+      (expect-correction-refusal! (str "invalid corrected-fields " (pr-str fields))
+                                  :receipt-correction/corrected-fields
+                                  (fixture-entry fixture
+                                                 (assoc entry :envelope/corrected-fields fields))))))
+
+(deftest receipt-correction-rejects-all-unsupported-metadata-and-semantic-fields
+  (let [{:keys [entry] :as fixture} (correction-fixture)]
+    (doseq [[field value]
+            [[:ts "later"] [:owner "new-owner"] [:origin "new-origin"]
+             [:kind :decision] [:host "other-host"] [:repo "other-repo"]
+             [:evidence/schema 2] [:evidence/adapter "other-adapter"]
+             [:evidence/result {:result/outcome :passed}]
+             [:result/command ["true"]] [:result/outcome :passed]
+             [:result/revision revision-b] [:unknown "value"]]]
+      (expect-correction-refusal!
+       (str "unsupported corrected field " field)
+       :receipt-correction/unsupported-fields
+       (fixture-entry fixture
+                      (assoc-in entry [:envelope/corrected-fields field] value))))))
+
+(deftest receipt-correction-rejects-no-op-and-replacement-of-valid-metadata
+  (let [ordinary (receipt-for (recorded-result :repo/unit :passed revision-a))]
+    (doseq [field [:manifest :refs :dod :pi]]
+      (expect-correction-refusal!
+       (str "already valid metadata cannot be corrected: " field)
+       :receipt-correction/field-already-valid
+       (correction-fixture ordinary {field (get ordinary field)})))
+    (expect-correction-refusal!
+     "a different replacement cannot rewrite an already valid DoD"
+     :receipt-correction/field-already-valid
+     (correction-fixture ordinary {:dod "new objective"}))))
+
+(deftest receipt-correction-rejects-uninterpretable-original-field-types
+  (let [ordinary (receipt-for (recorded-result :repo/unit :passed revision-a))]
+    (doseq [[field value replacement]
+            [[:manifest " " [" "]] [:refs "" [""]]
+             [:manifest nil ["invented"]] [:refs :reference ["reference"]]
+             [:dod [] ""] [:dod ["ok" " "] "ok;  "]
+             [:dod ["ok" 42] "ok; 42"] [:dod (list "a" "b") "a; b"]
+             [:pi nil "invented"] [:pi 42 "42"]]]
+      (expect-correction-refusal!
+       (str "unsupported original " field " value " (pr-str value))
+       :receipt-correction/original-field
+       (correction-fixture (assoc ordinary field value) {field replacement})))))
+
+(deftest receipt-correction-rejects-inexact-field-interpretations
+  (doseq [[field replacement]
+          [[:manifest [".ημ/receipts.edn" "automation:follow-up"]]
+           [:refs ["root1069" "request6044932186"]]
+           [:manifest ".ημ/receipts.edn,automation:follow-up"]
+           [:refs ["root1069,request6044932186" 42]]
+           [:dod " first objective , second; objective"]
+           [:dod "first objective; second; objective"]
+           [:dod [" first objective " "second; objective"]]
+           [:pi ":cephalon/character-memory"]
+           [:pi "character-memory"] [:pi :cephalon/character-memory]]]
+    (expect-correction-refusal!
+     (str "inexact replacement for " field ": " (pr-str replacement))
+     :receipt-correction/field-interpretation
+     (correction-fixture correction-original {field replacement}))))
+
+(deftest receipt-correction-invalid-ordinary-views-remain-errors
+  (doseq [[scenario original]
+          [["uncorrected malformed ordinary map" correction-original]
+           ["ordinary map missing required origin" (dissoc correction-original :origin)]
+           ["ordinary scalar" 42]]]
+    (expect-correction-refusal!
+     scenario :receipt/invalid-envelope
+     {:items [{:receipt/line 267 :receipt/record original}] :targets {}})))
+
+(deftest receipt-correction-partial-interpretation-does-not-hide-remaining-invalid-fields
+  (let [{:keys [items entry targets]}
+        (correction-fixture correction-original
+                            {:manifest [".ημ/receipts.edn,automation:follow-up"]})
+        result (correction-view-under-test items targets)]
+    (is (contains? (set (map :error (:receipt/errors result))) :receipt/invalid-envelope)
+        "refs/DoD/Pi remain invalid after a permitted manifest interpretation")
+    (is (= {:receipt/originals (mapv :receipt/record items)
+            :receipt/views [(assoc correction-original
+                                   :manifest [".ημ/receipts.edn,automation:follow-up"])
+                            (:receipt/record (second items))]
+            :receipt/corrections [(assoc entry :correction/line 278)]}
+           (select-keys result [:receipt/originals :receipt/views :receipt/corrections]))
+        "a derived partial view is retained with its provenance and explicit envelope error")))
+
+(deftest receipt-correction-record-itself-must-have-a-strict-envelope
+  (expect-correction-refusal!
+   "correction with invalid own envelope cannot admit target interpretations"
+   :receipt/invalid-envelope
+   (assoc-in (correction-fixture) [:items 1 :receipt/record :owner] "")))
+;; END receipt-correction-view RED contract
+
+(def segmented-original-id (apply str (repeat 64 "c")))
+
+(defn segmented-fixture
+  ([original fields] (segmented-fixture original fields true))
+  ([original fields qualified?]
+   (let [entry (cond-> {:receipt/line 267
+                       :receipt/origin (:origin original)
+                       :receipt/source-revision correction-source-revision
+                       :receipt/source-sha256 correction-source-digest
+                       :envelope/corrected-fields fields}
+                 qualified? (assoc :receipt/source-path evidence/receipt-ledger-path
+                                   :receipt/identity segmented-original-id))
+         binding (assoc (dissoc entry :envelope/corrected-fields)
+                        :receipt/source-path evidence/receipt-ledger-path
+                        :receipt/identity segmented-original-id
+                        :receipt/record original :binding/verified? true)]
+     {:items [{:receipt/identity segmented-original-id :receipt/record original}
+              {:receipt/identity (apply str (repeat 64 "d"))
+               :receipt/record (documentary-correction [entry])}]
+      :targets {[correction-source-revision evidence/receipt-ledger-path
+                 267 correction-source-digest] binding}
+      :entry entry})))
+
+(defn segmented-view [{:keys [items targets]}]
+  (if-let [view (resolve 'foresight.evidence/segmented-receipt-correction-view)]
+    (view items targets)
+    {:receipt/originals (mapv :receipt/record items)
+     :receipt/views (mapv :receipt/record items)
+     :receipt/corrections [] :receipt/errors [{:error :api-missing}]}))
+
+(defn ordinary-kind-original []
+  (-> (receipt-for (recorded-result :repo/unit :passed revision-a))
+      (dissoc :evidence/schema :evidence/adapter :evidence/result)
+      (assoc :origin "ordinary-documentary-record" :kind "test-run")))
+
+(deftest segmented-corrections-use-original-identity-without-display-order
+  (doseq [qualified? [false true]]
+    (let [fixture (segmented-fixture correction-original correction-fields qualified?)
+          forward-display (update fixture :items #(vec (reverse %)))
+          result (segmented-view forward-display)]
+      (is (= [] (:receipt/errors result)))
+      (is (= (mapv :receipt/record (:items forward-display))
+             (:receipt/originals result)))
+      (is (= (merge correction-original correction-fields)
+             (second (:receipt/views result))))
+      (is (= segmented-original-id
+             (:receipt/identity (first (:receipt/corrections result))))))))
+
+(deftest segmented-kind-extension-is-bound-and-exact
+  (let [original (ordinary-kind-original)
+        fixture (segmented-fixture original {:kind :test-run})
+        result (segmented-view fixture)]
+    (is (false? (evidence/receipt-envelope? original)))
+    (is (= [] (:receipt/errors result)))
+    (is (= (assoc original :kind :test-run) (first (:receipt/views result))))
+    (is (= original (first (:receipt/originals result))))
+    (doseq [bad [(assoc fixture :targets {})
+                 (segmented-fixture original {:kind :test-run} false)
+                 (segmented-fixture original {:kind :observation})
+                 (segmented-fixture (assoc original :kind "observation")
+                                    {:kind :observation})
+                 (segmented-fixture (assoc original :kind :test-run)
+                                    {:kind :test-run})
+                 (segmented-fixture original {:kind :test-run :owner "rewrite"})]]
+      (let [refused (segmented-view bad)]
+        (is (seq (:receipt/errors refused)))
+        (is (= (mapv :receipt/record (:items bad)) (:receipt/views refused)))
+        (is (= [] (:receipt/corrections refused)))))))
+
+(deftest kind-correction-excludes-evidence-event-and-correction-markers
+  (let [ordinary (ordinary-kind-original)]
+    (doseq [extra [{:origin evidence/evidence-receipt-origin}
+                   {:evidence/anything nil}
+                   {:event/type nil} {:event/type :unknown}
+                   {:event/type :receipt-river/receipt-recorded :event/id "evt"}
+                   {:envelope/corrected-fields nil}
+                   {:envelope/corrected-fields {:kind :test-run} :extra true}
+                   {:correction/entries nil}]]
+      (is (seq (:receipt/errors
+                (segmented-view (segmented-fixture (merge ordinary extra)
+                                                   {:kind :test-run}))))
+          (pr-str extra)))
+    (doseq [extra [{} {:event/id nil} {:event/id "ordinary data"}
+                   {:evidence-like/result :data}]]
+      (is (= [] (:receipt/errors
+                  (segmented-view (segmented-fixture (merge ordinary extra)
+                                                     {:kind :test-run}))))))
+    (doseq [[symbol key] [['event-envelope? :event/type]
+                          ['correction-entry? :envelope/corrected-fields]
+                          ['correction-document? :correction/entries]]]
+      (if-let [predicate (resolve (cljs.core/symbol (str "foresight.evidence/" symbol)))]
+        (do (is (false? (predicate {:event/id "plain"})))
+            (is (false? (predicate 42)))
+            (is (true? (predicate {key nil :additional true}))))
+        (is false (str "missing pure predicate " symbol))))))
+
+(deftest segmented-correction-binding-and-entry-boundaries
+  (let [fixture (segmented-fixture (ordinary-kind-original) {:kind :test-run})
+        key (first (keys (:targets fixture)))]
+    (doseq [[field bad] [[:binding/verified? false]
+                         [:receipt/identity (apply str (repeat 64 "e"))]
+                         [:receipt/record {}]
+                         [:receipt/source-path ".ημ/receipts/other.edn"]
+                         [:receipt/line 1] [:receipt/origin "other"]
+                         [:receipt/source-revision revision-b]
+                         [:receipt/source-sha256 (apply str (repeat 64 "e"))]]]
+      (is (seq (:receipt/errors
+                (segmented-view (assoc-in fixture [:targets key field] bad))))
+          (str field)))
+    (doseq [entry [(assoc (:entry fixture) :unexpected true)
+                   (dissoc (:entry fixture) :receipt/identity)
+                   (assoc (:entry fixture) :envelope/corrected-fields {})
+                   (assoc (:entry fixture) :receipt/line 0) 42]]
+      (is (seq (:receipt/errors
+                (segmented-view (assoc-in fixture
+                                          [:items 1 :receipt/record :correction/entries]
+                                          [entry])))))))
+  (let [fixture (segmented-fixture (ordinary-kind-original) {:kind :test-run})
+        duplicate (update fixture :items conj
+                          {:receipt/identity (apply str (repeat 64 "e"))
+                           :receipt/record (assoc (documentary-correction [(:entry fixture)])
+                                                 :origin "second-correction")})
+        result (segmented-view duplicate)]
+    (is (some #(= :receipt-correction/duplicate-target (:error %))
+              (:receipt/errors result)))
+    (is (= [] (:receipt/corrections result)))))
+
+(deftest historical-import-exceptions-bind-only-two-reviewed-originals
+  (let [approved [["1c0ac43b287497ceac38d792feede62f5f05c2bdf12099570d06a767f64e3914"
+                   "8c32195ba96bb3f406931eb4f9829c13bb76313a56aca34dc35de513e85861f2"]
+                  ["545730a0e14d1288b7796717ea14924657e0ad9156a86d0bd7589fb39261d75a"
+                   "03fef2783af6afe1535245b6696976bf9731ab97726cf7e4eb03f7b8ff20dfe4"]]
+        allowed? (resolve 'foresight.evidence/historical-receipt-import?)]
+    (is (some? allowed?))
+    (when allowed?
+      (doseq [[digest id] approved]
+        (let [binding {:binding/verified? true :receipt/source-sha256 digest
+                       :receipt/identity id}]
+          (is (true? (allowed? binding)))
+          (doseq [other [(dissoc binding :binding/verified?)
+                         (assoc binding :binding/verified? false)
+                         (assoc binding :receipt/identity "new-record")
+                         (assoc binding :receipt/source-sha256 "different-bytes")]]
+            (is (false? (allowed? other)))))))))
+
 (test/run-tests 'evidence-test)
