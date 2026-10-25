@@ -29,7 +29,20 @@ coordinates also need explicit composition with records moved into segments.
 
 This plan starts from #147 head
 `02f330d45a7ccbf14349d1b1638927f473fb58ae`. It imports no malformed records into
-its active ledger. Initial Incoming metadata is a manually authored board input,
+its active ledger. The census contains historical **test fixtures**, not correction
+entries admitted at this planning head. Source ancestry is evaluated against the
+consumer being verified (`--at`, or the locked writer's held HEAD), never the
+planning branch that supplies the reader. Both original revisions are ancestors
+of published consumer head `d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d` and its
+segmented descendant `2b9df80d0135804be0998ee6be23cc0453767993`; neither is an
+ancestor of planning head `2c451cc7548e425fd975e4049fdbc1da3fb828ba`.
+Admission at that planning head must therefore reject those fixture sources.
+Never substitute different receipts at the same physical ordinals to manufacture
+ancestry. Each positive test constructs an ancestor containing the exact fixture
+bytes; negative tests deliberately use a detached source. The census pins both
+roles and verifies the source line, raw UTF-8 and LF hash together.
+
+Initial Incoming metadata is a manually authored board input,
 not a claimed Rheos admission or transition. Consumer card
 `4634f396-e931-41d1-8883-0282b85e6022` names the rollout; this prerequisite does
 not depend on completing that consumer.
@@ -71,6 +84,65 @@ corrections remain actual failures.
   original remains present exactly once. Record the actual outcome separately
   from historical observations; never rewrite them.
 
+## Shared admission contract
+
+`correction-document?` is an exclusion/scan discriminator: a map containing
+`:correction/entries`, regardless of its value or any additional keys. It is not
+proof of validity. A valid correction document has `:kind :correction`, the nine
+required ordinary envelope keys, optional documentary metadata, and a nonempty
+vector at `:correction/entries`. A plain historical `:kind :correction` record
+without that marker remains documentary data and grants no correction authority.
+
+Each entry is a closed map with these seven keys:
+
+```clojure
+{:receipt/source-revision "<full same-repository commit SHA>"
+ :receipt/source-path ".ημ/receipts.edn or a regular .ημ/receipts/<name>.edn"
+ :receipt/line 1
+ :receipt/origin "<exact original origin>"
+ :receipt/source-sha256 "<SHA256 of exact physical source bytes including LF>"
+ :receipt/identity "<existing record-id of the original parsed map>"
+ :envelope/corrected-fields {:manifest ["<exact original scalar>"]}}
+```
+
+Retain #28's closed five-key entry as a compatibility variant: it omits only
+`:receipt/source-path` and `:receipt/identity`, defaults to the canonical legacy
+path and derives identity from authenticated source bytes. That variant retains
+only #28's four permitted field interpretations. The explicit kind extension
+requires the fully qualified seven-key variant. Neither variant accepts unknown
+entry keys, empty corrected fields, invalid locators or partially valid changes.
+Target identity always identifies the original map, never the derived view.
+
+The shared pure exclusion predicates have open key sets deliberately:
+`event-envelope?` means a map containing `:event/type`; `correction-entry?` means
+a map containing `:envelope/corrected-fields`. Nil/unknown marker values and
+additional keys still match; these are conservative target exclusions, not
+claims of event/entry validity. A plain map with `:event/id` alone is not an event
+and remains ordinary data. Kind correction excludes either predicate, a
+`correction-document?`, the reserved evidence origin, or any keyword key whose
+namespace is exactly `evidence`. Valid-looking hybrid maps cannot evade these
+exclusions by adding receipt envelope keys.
+
+One adapter operation, `admit-merged-receipt-extension!`, serves immutable
+verification, promotion readiness and held-ledger validation. It first runs
+#35's raw record/segment conservation checks. It then scans **every head
+record**, including frozen legacy history, every base segment and every new
+segment, for `correction-document?`. It validates each document and entry,
+reauthenticates each source against the current consumer anchor, and requires
+exactly one active byte-identical original at any permitted current location.
+Duplicate target claims across correction documents fail. The existing pure
+correction law derives disclosed views without changing originals. Validate all
+correction documents, targeted derived views and newly introduced records with
+the strict envelope and existing evidence-semantic checks. Untargeted ordinary
+base records retain the migration's grandfathering; a correction entering the
+base never acquires grandfathered authority. Correction order is based on the
+source ancestry and original identity, not timestamp/display/merged ordinal.
+
+The base/source census at #147 head and composed consumer head found no parsed
+correction-document markers; historical narrative corrections are not silently
+reclassified. Tests must also introduce a correction, commit it into the base,
+then corrupt/revoke its binding and prove all three consumers still reject it.
+
 ## Non-goals
 
 Historical receipt edits; automatic coercion; kind changes on evidence receipts;
@@ -82,7 +154,9 @@ is not evidence that the dedicated all-Clio cutover has occurred.
 ## Acceptance criteria
 
 1. Frozen fixtures taken from the two exact source commits fail with current
-   source for the expected envelope defects. Fixtures retain exact original bytes
+   source for the expected envelope defects. Positive source revisions are ancestors
+   of their actual consumer anchors; the isolated planning-head/non-ancestor
+   pairing is an explicit failing control. Fixtures retain exact original bytes
    and LF hashes, including the first record's already-valid keyword kind.
 2. The existing four permitted field interpretations remain identical. One
    explicit bound `"test-run"` to `:test-run` correction admits the ordinary
@@ -95,6 +169,9 @@ is not evidence that the dedicated all-Clio cutover has occurred.
    refuses kind correction. Failed, unavailable, stale and invalid revision-bound
    results retain their original validation outcomes. A corrected ordinary
    test-run supplies no promotion result, provider approval or CI success.
+   Positive/negative fixtures cover both shape predicates, extra keys, nil and
+   unknown marker values, event/entry hybrids, correction documents, and the
+   ordinary `:event/id`-only control.
 5. The same positive and negative cases cover all three consumers, including
    reauthentication when the correction already belongs to the base, a moved
    legacy line, and an uncommitted source descending from the held HEAD.

@@ -3,7 +3,10 @@
   "status": "planning-source-census-only",
   "integration_prerequisite": "https://github.com/open-hax/foresight/pull/147",
   "correction_reader_source": "https://github.com/riatzukiza/foresight/pull/28",
-  "original_records": [
+  "admitted_corrections": 0,
+  "legacy_rewrites": false,
+  "full_clio_cutover": false,
+  "historical_source_fixtures": [
     {
       "source_revision": "1f3f7317012e23d7ec0f35a7e22b2b01cdff65b3",
       "source_path": ".ημ/receipts.edn",
@@ -16,6 +19,11 @@
         "manifest-vector?": false,
         "refs-vector?": false,
         "evidence-keys": []
+      },
+      "verified_ancestry": {
+        "consumer_published_head": true,
+        "consumer_segmented_head": true,
+        "planning_negative_control_head": false
       }
     },
     {
@@ -30,10 +38,19 @@
         "manifest-vector?": true,
         "refs-vector?": true,
         "evidence-keys": []
+      },
+      "verified_ancestry": {
+        "consumer_published_head": true,
+        "consumer_segmented_head": true,
+        "planning_negative_control_head": false
       }
     }
   ],
-  "admitted_corrections": 0,
-  "legacy_rewrites": false,
-  "full_clio_cutover": false
+  "fixture_contract": {
+    "role": "historical-test-fixtures-not-admitted-correction-documents",
+    "consumer_published_head": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+    "consumer_segmented_head": "2b9df80d0135804be0998ee6be23cc0453767993",
+    "planning_negative_control_head": "2c451cc7548e425fd975e4049fdbc1da3fb828ba",
+    "ancestry_anchor_rule": "Actual verified consumer --at commit or held writer HEAD; never the reader planning head. Positive fixture tests construct source ancestors. Non-ancestor source fails closed."
+  }
 }
