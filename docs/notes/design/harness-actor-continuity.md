@@ -172,11 +172,10 @@ schema machinery and Clio envelope conventions rather than parallel actor models
 Serialization is explicit tagged EDN with namespaced keys and an integer major
 schema version. Transport JSON is an adapter codec whose roundtrip must preserve
 the canonical values; raw host objects are never canonical contract data.
-Unknown major versions or required fields fail admission. An older schema is
+Unknown major versions, incompatible required fields and missing required fields fail admission. An older schema is
 accepted only through a named, versioned migration with tests. Muse, Axxium and
 Clio consume that registry contract; changes require an owning Knoxx PR before
-adapter adoption. The layered effective operating-contract hash is produced by LOC.05/08
-and passed unchanged; this plan defines no competing hashing algorithm. HAC.01
+adapter adoption. LOC.04 defines the effective-contract hash field; LOC.05 defines the folded contract and canonical fragment meaning; LOC.06 validates the layer chain; LOC.07 supplies a separate profile input; LOC.08 carries the unchanged hash in each projection. This plan defines no competing hashing algorithm. HAC.01
 remains independent of LOC implementation: standalone qualification pins the
 compiler revision, exact single-tree configuration/profile paths and Git blob
 IDs, and loaded target artifact hashes. These byte-provenance identities do not
