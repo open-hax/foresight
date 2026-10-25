@@ -520,3 +520,13 @@
   spore: none
   receipt-refs: open-hax/foresight#141
   note: Inspect GitHub state before resuming old review loops; approval and merged status differ from convergence evidence. No spore warranted.
+
+- ts: 2026-10-25T05:53:19Z
+  session: harness-actors-plan
+  task: Resolve actual qualification gaps while upstream repair is reviewed
+  p-efficiency: 0.7
+  p-friction: 0.8
+  p-skill-candidate: 0.4
+  spore: none
+  receipt-refs: 2026-10-25T05:53:19Z
+  note: Keep actual tool manifests and active-contract evidence distinct from fixtures; revise overloaded dependent stories through Rheos without narrowing scope or moving readiness early.

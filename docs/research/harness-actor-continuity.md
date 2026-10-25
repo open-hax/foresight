@@ -41,12 +41,14 @@ independently authenticated Knoxx actor or a second reviewer principal.
 
 Read through the authorized Drive connector on 2026-10-22. These documents are
 private source material; the following is a minimal architecture synthesis,
-not a copy of customer or personal material. Original bytes remain in Drive.
+not a copy of customer or personal material. Original bytes remain in Drive. Direct source URLs are omitted here; recover
+the named sources through the authorized connector. This edit neither changes
+Drive sharing permissions nor claims independent verification of them.
 
-- [Knoxx / Foresight folder](https://drive.google.com/drive/folders/1U9uBsMHgoc2b3ZPFamPlRjeHxze4djou).
-- [Semi-permeable memory](https://drive.google.com/file/d/1kXm7fE0uWgB69xxtQaVEWWq-yY5oKRCP/view): each harness is a node with its own actor; local private memory and shared identity; scheduled versus event-triggered lift remains open.
-- [Annotated group identity successor v0.2](https://docs.google.com/document/d/1uVix-vVrurat0DAV8uRbIa1T4VXyOzbfWDGhL35dRbo/edit): private, team and organization projections require authority, provenance, revocation and explicit promotion. Group identity is an architecture metaphor.
-- [ChatGPT handoff v0.2](https://docs.google.com/document/d/1bDcD5M-DdXRgy4IPlpEGU1vJkIT4uOWvMHwI6ObTiBw/edit): preserve predecessors and dissent; qualify assemblies with versioned evidence. Commercial and customer details are outside this plan.
+- Knoxx / Foresight folder (available through the authorized Drive connector).
+- Semi-permeable memory: each harness is a node with its own actor; local private memory and shared identity; scheduled versus event-triggered lift remains open.
+- Annotated group identity successor v0.2: private, team and organization projections require authority, provenance, revocation and explicit promotion. Group identity is an architecture metaphor.
+- ChatGPT handoff v0.2: preserve predecessors and dissent; qualify assemblies with versioned evidence. Commercial and customer details are outside this plan.
 
 ## Conversation recovery
 

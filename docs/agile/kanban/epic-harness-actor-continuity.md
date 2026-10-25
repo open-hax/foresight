@@ -2,7 +2,8 @@
 category: "kanban"
 labels: "muse, knoxx, codex, hermes, federation, epic"
 type: "epic"
-points: "29"
+write-id: "1792907536480-0.6nih56mx7stjlmna3vl"
+points: "32"
 title: "EPIC: Shared Muse tools and scoped Knoxx actors across harness contexts"
 priority: "P1"
 status: "incoming"
@@ -25,7 +26,7 @@ with a distinct Knoxx actor for its context and explicit local/remote grants.
 
 - HAC.01: `hac-01-codex-tools` — Compile and qualify the shared Muse tools in Codex (3 points).
 - HAC.02: `hac-02-actor-bindings` — Specify portable harness actor bindings and message admission (5 points).
-- HAC.03: `hac-03-codex-lifecycle` — Connect Codex contexts and native task messages to Knoxx (5 points).
+- HAC.03: `hac-03-codex-lifecycle` — Connect Codex contexts and native task messages to Knoxx (8 points; requires bounded qualification breakdown before readiness).
 - HAC.04: `hac-04-hermes-orbit` — Qualify Hermes and Orbit as another contract consumer (3 points).
 - HAC.05: `hac-05-federation` — Prove actor continuity between local and remote Knoxx (5 points).
 

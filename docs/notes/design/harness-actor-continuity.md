@@ -152,7 +152,10 @@ reads the current source revision, revalidates policy and
 revocation dependencies, and recomputes the versioned transformation and output
 hash before publication admission. Its event binds those inputs and output,
 including both grant identities/revisions and source-policy decision/revision.
-Publication admission hashes actual replacement bytes and compares their hash
+Publication admission first compares the actual source identity and destination
+with the event-bound source and destination; cross-source or cross-destination
+publication denies even when bytes, revision numbers or grants otherwise match.
+It then hashes actual replacement bytes and compares their hash
 and transformation version to the event, then compares source
 revision, source-policy decision/revision, revocation dependencies and both grants with
 the event-bound values; any difference rejects or requires revalidation and a

@@ -61,3 +61,9 @@ Implementation names the existing owner test runner, then records the isolated p
 ## Risks
 
 Source and running runtime may diverge; verify deployed revision and actual capability.
+
+
+## Rebuild source and destination binding
+
+- [ ] GIVEN a rebuilt projection event WHEN publication is admitted THEN the actual source identity and destination must each equal the event-bound source and destination, in addition to all existing content, transformation, revision, policy, revocation and grant comparisons.
+- [ ] GIVEN otherwise matching content/hash/revision metadata and valid current grants WHEN publication substitutes a different source identity or a different destination THEN each substitution independently denies visibility. A separately authorized source or destination requires a new correctly bound event, never retargeting an existing rebuild event.
