@@ -1,0 +1,39 @@
+{
+  "observed_at": "2026-10-25T05:57:14.321Z",
+  "status": "planning-source-census-only",
+  "integration_prerequisite": "https://github.com/open-hax/foresight/pull/147",
+  "correction_reader_source": "https://github.com/riatzukiza/foresight/pull/28",
+  "original_records": [
+    {
+      "source_revision": "1f3f7317012e23d7ec0f35a7e22b2b01cdff65b3",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 261,
+      "source_sha256_including_lf": "1c0ac43b287497ceac38d792feede62f5f05c2bdf12099570d06a767f64e3914",
+      "source_utf8": "{:kind :observation :ts \"2026-10-23T06:10:14.592490Z\" :origin \"codex-desktop/01a16756-fd90-7710-8295-c8a237aeb290\" :owner \"codex\" :dod \"Antigravity CLI reviewer and all-member workflow rollout\" :pi \"eta-mu\" :host \"local\" :manifest \".github/antigravity; .github/workflows/antigravity-code-review.yml\" :refs \"https://github.com/open-hax/eta-mu/pull/364\" :note \"Inventory scope root plus22 actionable direct members. Inventory-only .agents excluded. Independent worktrees preserve existing dirt. Review runtime and workflow proposals remain unqualified until reviewed and hosted worker provisioned.\"}\n",
+      "projection": {
+        "kind-edn": ":observation",
+        "origin": "codex-desktop/01a16756-fd90-7710-8295-c8a237aeb290",
+        "manifest-vector?": false,
+        "refs-vector?": false,
+        "evidence-keys": []
+      }
+    },
+    {
+      "source_revision": "c61c563d25c15ba13751461b0235235cb6437f16",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 262,
+      "source_sha256_including_lf": "545730a0e14d1288b7796717ea14924657e0ad9156a86d0bd7589fb39261d75a",
+      "source_utf8": "{:ts \"2026-10-23T07:05:01.311797+00:00\" :kind \"test-run\" :origin \"antigravity-member-rollout\" :owner \"codex\" :dod \"Pinned advisory reviewer caller across all23 targets\" :pi \"foresight\" :host \"local\" :manifest [\"src/foresight/antigravity_review.cljc\" \"scripts/antigravity_rollout.clj\" \"test/antigravity_review_test.cljs\" \".github/workflows/antigravity-review.yml\" \".\\u03b7\\u03bc/antigravity-review/rollout-status-20261023.json\"] :refs [\"https://github.com/open-hax/eta-mu/pull/364\"] :note \"All23 localcallers exactmatch; memberproposals published; nativehostedroutes verified explicitpromptrefusal artifactcleanup; transportrepair underway noactivationclaim.\" :tests \"rollout9/109PASS; existingproject12/166 andworkspace24/120PASS; kondo0warnings; actionlintall23PASS\"}\n",
+      "projection": {
+        "kind-edn": "\"test-run\"",
+        "origin": "antigravity-member-rollout",
+        "manifest-vector?": true,
+        "refs-vector?": true,
+        "evidence-keys": []
+      }
+    }
+  ],
+  "admitted_corrections": 0,
+  "legacy_rewrites": false,
+  "full_clio_cutover": false
+}
