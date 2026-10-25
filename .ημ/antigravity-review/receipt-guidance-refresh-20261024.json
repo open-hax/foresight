@@ -1,0 +1,60 @@
+{
+  "source_repository": "riatzukiza/.agents",
+  "source_branch": "docs/segmented-receipt-ledger",
+  "source_commit": "7f4dfb8229e16996cfdb807694a630b60a130d71",
+  "fetched_main": "395e8c2f31143691153eb0b116512ebbb203b09b",
+  "observed_at": "2026-10-24T05:03:10.603507+00:00",
+  "copies": [
+    {
+      "root": "/home/err/.agents",
+      "branch": "device/yoga",
+      "head_before": "4e8a318c984536c494c4c06d92e2c15d31128ef5",
+      "files": [
+        {
+          "path": "skills/receipt-river/SKILL.md",
+          "before_sha256": "0a415a11111961374382171359742c768798c5eb3cbc0ee4fa5bf8b3a1c62842",
+          "after_sha256": "bc3f8aa59ca1bcb8c8bb6ce8151970c8bde943fe545da9de8b6973fe174a82ee",
+          "bytes": 39853
+        },
+        {
+          "path": "skills/receipt-river/CONTRACT.edn",
+          "before_sha256": "1cb514a2744c7a7315048a45640ef06cd158cbbfb1dd093143b90563134d58f4",
+          "after_sha256": "926fb5444cb8bc42c92239c43af7b633f0599b05c0a1da14a9dde40970d3808c",
+          "bytes": 21788
+        }
+      ],
+      "head_after": "4e8a318c984536c494c4c06d92e2c15d31128ef5"
+    },
+    {
+      "root": "/home/err/spaces/foresight/.agents",
+      "branch": "detached, unchanged",
+      "head_before": "00a05c8f6ba68ff30a98266879310464e966748b",
+      "files": [
+        {
+          "path": "skills/receipt-river/SKILL.md",
+          "before_sha256": "0a415a11111961374382171359742c768798c5eb3cbc0ee4fa5bf8b3a1c62842",
+          "after_sha256": "bc3f8aa59ca1bcb8c8bb6ce8151970c8bde943fe545da9de8b6973fe174a82ee",
+          "bytes": 39853
+        },
+        {
+          "path": "skills/receipt-river/CONTRACT.edn",
+          "before_sha256": "1cb514a2744c7a7315048a45640ef06cd158cbbfb1dd093143b90563134d58f4",
+          "after_sha256": "926fb5444cb8bc42c92239c43af7b633f0599b05c0a1da14a9dde40970d3808c",
+          "bytes": 21788
+        }
+      ],
+      "head_after": "00a05c8f6ba68ff30a98266879310464e966748b"
+    }
+  ],
+  "rollout_reassessment": {
+    "source_repository": "riatzukiza/.agents",
+    "branch": "docs/segmented-receipt-ledger",
+    "revision": "7f4dfb8229e16996cfdb807694a630b60a130d71",
+    "observed_at": "2026-10-24T05:05:43.743773+00:00",
+    "local_mode": "legacy",
+    "clio_cutover_adopted": false,
+    "in_place_repair_proposal": "withdrawn",
+    "new_guidance": "Corrections are new records. A skill refresh does not migrate repository storage or replace its owning validator."
+  },
+  "preserved_root_index": "54f98c791bb378af1668a07754118e380293c176"
+}

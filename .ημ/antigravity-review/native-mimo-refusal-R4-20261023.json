@@ -1,0 +1,222 @@
+{
+  "schema": "foresight.native-review-failure-custody/v1",
+  "observed_at": "2026-10-23T10:05:45.652352+00:00",
+  "repository": "open-hax/eta-mu",
+  "head": "5e6af5489b42e494f3f83642a37ea4e1f98ad945",
+  "run_id": 39925909707,
+  "job_id": 120329391391,
+  "conclusion": "failure",
+  "native_approval": false,
+  "cause": "No complete canonical submission: initial attempt unfinished with120/122chunks assessed; recovery timed out after45minutes. No recorded provider error or cancellation.",
+  "diagnosis": {
+    "schema": "open-hax.mimo-failure-diagnosis/v1",
+    "repository": "open-hax/eta-mu",
+    "run_id": 39925909707,
+    "job_id": 120329391391,
+    "head": "5e6af5489b42e494f3f83642a37ea4e1f98ad945",
+    "conclusion": "failure",
+    "cancelled": false,
+    "cause": "Attempt1 completed without review_submit; bounded recovery attempt2 exceeded invocation deadline without canonical healthy omission. No provider error was recorded; silence does not establish provider root cause.",
+    "accepted_invocation": null,
+    "native_approval": false,
+    "retry_investigator": false,
+    "attempts": [
+      {
+        "attempt": 1,
+        "exit_code": 0,
+        "invocation_state": "completed",
+        "response_file": "model-response-attempt-1.txt",
+        "stderr_file": "opencode-stderr-attempt-1.log",
+        "submission_state": "missing",
+        "timed_out": false,
+        "timeout_ms": 2700000,
+        "exit_signal": null,
+        "termination_signals": [],
+        "parent_signal": null,
+        "process_id": 2639,
+        "process_group_id": 2639,
+        "cleanup_complete": true,
+        "captures_closed": true,
+        "response_sha256": "b736f8923a6464085323fa631701e34803882c5beeff99a42032117e7c628344",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "submission_sha256": null,
+        "canonical_verdict": {
+          "reviewCallCount": null,
+          "acceptedInvocation": null,
+          "reason": "missing-review-submit",
+          "ok": false,
+          "code": "healthy-unfinished-review",
+          "pageCount": null,
+          "violations": [],
+          "reasonKind": "missing-review-submit",
+          "sessionID": null
+        },
+        "verification_state": "returned",
+        "event_count": 510,
+        "event_type_counts": {
+          "step_start": 131,
+          "tool_use": 241,
+          "step_finish": 131,
+          "text": 7
+        },
+        "last_event_timestamp": "2026-10-23T09:14:00.620000+00:00",
+        "last_event_type": "step_finish",
+        "stderr_bytes": 0,
+        "response_digest_matches": true
+      },
+      {
+        "attempt": 2,
+        "exit_code": null,
+        "invocation_state": "deadline-exceeded",
+        "response_file": "model-response-attempt-2.txt",
+        "stderr_file": "opencode-stderr-attempt-2.log",
+        "submission_state": "missing",
+        "timed_out": true,
+        "timeout_ms": 2700000,
+        "exit_signal": "SIGTERM",
+        "termination_signals": [
+          "SIGTERM"
+        ],
+        "parent_signal": null,
+        "process_id": 6419,
+        "process_group_id": 6419,
+        "cleanup_complete": true,
+        "captures_closed": true,
+        "response_sha256": "4a5b979e03fc9a2d77178081113ec72366b5b7678e990e825e7d44ee3d8d3563",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "submission_sha256": null,
+        "canonical_verdict": {
+          "reviewCallCount": null,
+          "acceptedInvocation": null,
+          "reason": "unestablished-review-trace",
+          "ok": false,
+          "code": "unterminated-host-trace",
+          "pageCount": null,
+          "violations": [],
+          "reasonKind": "unestablished-review-trace",
+          "sessionID": null
+        },
+        "verification_state": "returned",
+        "event_count": 151,
+        "event_type_counts": {
+          "step_start": 50,
+          "tool_use": 50,
+          "step_finish": 50,
+          "text": 1
+        },
+        "last_event_timestamp": "2026-10-23T09:19:01.669000+00:00",
+        "last_event_type": "step_finish",
+        "stderr_bytes": 0,
+        "response_digest_matches": true
+      }
+    ],
+    "artifact": {
+      "id": 12493443031,
+      "node_id": "MDg6QXJ0aWZhY3QxMjQ5MzQ0MzAzMQ==",
+      "name": "review-attempt-364-39925909707-1",
+      "size_in_bytes": 951140,
+      "url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12493443031",
+      "archive_download_url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12493443031/zip",
+      "expired": false,
+      "digest": "sha256:cab752fd0bd15db73964392b12fbd9a6e335c2aed4002d2a6a882982f3d34467",
+      "created_at": "2026-10-23T09:59:03Z",
+      "updated_at": "2026-10-23T09:59:03Z",
+      "expires_at": "2026-11-06T09:59:02Z",
+      "workflow_run": {
+        "id": 39925909707,
+        "repository_id": 1189985055,
+        "head_repository_id": 1189985055,
+        "head_branch": "codex/antigravity-review-agent",
+        "head_sha": "5e6af5489b42e494f3f83642a37ea4e1f98ad945"
+      }
+    },
+    "archive_actual_sha256": "cab752fd0bd15db73964392b12fbd9a6e335c2aed4002d2a6a882982f3d34467"
+  },
+  "raw_custody": {
+    "path": "/home/err/.local/share/antigravity-review/qualification/20261023/old-mimo-39925909707-failure",
+    "files": 20,
+    "total_bytes": 11108678,
+    "manifest": {
+      "manifest.json": {
+        "bytes": 3092,
+        "sha256": "079d36975a07aba1bd0dd6c3b08bfd0affba2ca7202e5abd5ffdbd2bcb0c62ac"
+      },
+      "12493443031.zip": {
+        "bytes": 951140,
+        "sha256": "cab752fd0bd15db73964392b12fbd9a6e335c2aed4002d2a6a882982f3d34467"
+      },
+      "run.json": {
+        "bytes": 12408,
+        "sha256": "17b49c9f1728b505a11d700037d3e22a9f893f647625401b70b4d795ad4b908a"
+      },
+      "job.log": {
+        "bytes": 2197898,
+        "sha256": "99e0dfe1d29636b6542380910b626c0120d752b9828d19ee2eb2d3d80e5f6aeb"
+      },
+      "diagnosis.json": {
+        "bytes": 4441,
+        "sha256": "98735616380aa6d26c61cf929917e07cf82d905fd14452faced8bda2e6da7020"
+      },
+      "jobs.json": {
+        "bytes": 14505,
+        "sha256": "f2f2f07b4a6729947fa4c20328df33a75693f3069a4e1a9f9a2e132e17cc474b"
+      },
+      "artifacts.json": {
+        "bytes": 2181,
+        "sha256": "fbd9da912342384232d8bd0a29e765d17731f632d62fe7ed8e814591531d0035"
+      },
+      "attempt/model-response-attempt-1.txt": {
+        "bytes": 1716777,
+        "sha256": "b736f8923a6464085323fa631701e34803882c5beeff99a42032117e7c628344"
+      },
+      "attempt/model-discovery.json": {
+        "bytes": 4483,
+        "sha256": "52fd0563a146ee576af67d814a468f29b03006e02b61e10b891da0716263b771"
+      },
+      "attempt/input-verification.json": {
+        "bytes": 1248,
+        "sha256": "7ad62b295092e1defb82ec48c647c68eaaae7ccd99e94cbb511e605d09e82b95"
+      },
+      "attempt/model-version.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "attempt/model-catalog-source-response.json": {
+        "bytes": 690,
+        "sha256": "bb3e502be5d63c3ed499e91c74cd6e9251e69f00cab2c6d22d23b54cbb530788"
+      },
+      "attempt/model-catalog.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "attempt/recovery.json": {
+        "bytes": 2618,
+        "sha256": "8422b5032ebc3ec60e5738849e85c343efaeab57266e71ce7358e0d388413346"
+      },
+      "attempt/opencode-stderr-attempt-1.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "attempt/model-response-attempt-2.txt": {
+        "bytes": 307576,
+        "sha256": "4a5b979e03fc9a2d77178081113ec72366b5b7678e990e825e7d44ee3d8d3563"
+      },
+      "attempt/model-catalog.stdout": {
+        "bytes": 10201,
+        "sha256": "65a5eb9b8fa9db6f0f4575e203bd4053cecf700f658c6f56863a3cdb91c34a95"
+      },
+      "attempt/model-catalog-source.json": {
+        "bytes": 5879412,
+        "sha256": "6d719b2bd5700f3ba67071ded2d145364acf7b1a20493214a81aae2df1e19798"
+      },
+      "attempt/opencode-stderr-attempt-2.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "attempt/model-version.stdout": {
+        "bytes": 8,
+        "sha256": "4c40e3f2d9fe364d21b14d766e9d597551f023a19ae7bb2b387bd86dd43d1031"
+      }
+    }
+  }
+}

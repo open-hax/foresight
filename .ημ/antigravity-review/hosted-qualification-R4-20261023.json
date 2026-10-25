@@ -1,0 +1,711 @@
+{
+  "schema": "foresight/antigravity-hosted-qualification-v1",
+  "recorded_at": "2026-10-23T08:49:31.523546+00:00",
+  "evidence_kind": "imported-cli-advisory",
+  "native_approval": false,
+  "runtime_revision": "9955ba838ff187beced4beb26f4c271941a956ec",
+  "workflow_revision": "2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2",
+  "octave_revision": "93ea554332bcdafffc26688836b2e6a655575c94",
+  "verification_summary": {
+    "schema": "open-hax.antigravity-hosted-validation/v1",
+    "observed_at": "2026-10-23T08:48:21.943374+00:00",
+    "evidence_kind": "imported-cli-advisory",
+    "native_approval": false,
+    "runtime_revision": "9955ba838ff187beced4beb26f4c271941a956ec",
+    "runtime_tree": "6be97a75dd8398dabc13194412f62eebe5770aa0",
+    "workflow_mirror_identical_bytes": true,
+    "workflow_file_sha256": "9eab25fa2a8e2508d9eb14b268a41639afa0b562b8267f11c603643a75651c16",
+    "negative_access_control_enforcement_canary": "UNKNOWN",
+    "runs": {
+      "eta": {
+        "repository": "open-hax/eta-mu",
+        "pr": 364,
+        "run_id": 39925909795,
+        "run_attempt": 1,
+        "review_job_id": 120322152492,
+        "head": "5e6af5489b42e494f3f83642a37ea4e1f98ad945",
+        "base_tip": "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "canonical_base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "workflow_revision": "2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2",
+        "conclusion": "success",
+        "artifact": {
+          "id": 12489034409,
+          "name": "antigravity-review-39925909795-1",
+          "api_digest": "sha256:b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f",
+          "actual_zip_sha256": "b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f",
+          "digest_matches": true,
+          "expired": false,
+          "bytes": 454222
+        },
+        "input_bytes": 2444293,
+        "prompt_bytes": 2447333,
+        "stdin_bytes": 3018842,
+        "diff_bytes": 965631,
+        "file_count": 54,
+        "input_sha256": "3dd6c0ccbae574bec66512c91233d2d0e805d59b68d705b5a68407e9f8a894a3",
+        "diff_digest": "5fe1fb2f2f75604be974ed52063ccbb12000ecf21a4a388a52f9cb69781444e8",
+        "native_duration_seconds": 321.908806169,
+        "native_turns": 1,
+        "event_count": 5,
+        "strict_native_init": true,
+        "genuine_native_structured_output": true,
+        "finish_metadata": {
+          "toolAction": "Completing review",
+          "toolSummary": "Evidence-first review"
+        },
+        "scope_complete": true,
+        "reviewed_path_count": 54,
+        "status": "clean",
+        "finding_count": 0,
+        "findings": [],
+        "native_stderr_bytes": 0,
+        "process_group_cleanup": true,
+        "job_cleanup_success": true,
+        "snapshot_and_job_root_removed": true,
+        "independent_current_R4_law_errors": [],
+        "fresh_PR_head_and_base_tip_match": true,
+        "runtime_revision_present_in_actual_job_logs": true,
+        "raw_files": {
+          "input.txt": {
+            "bytes": 2444293,
+            "sha256": "3dd6c0ccbae574bec66512c91233d2d0e805d59b68d705b5a68407e9f8a894a3"
+          },
+          "input.json": {
+            "bytes": 33172,
+            "sha256": "444217964f7c06a6c2696181b8b65ecc0df6288627c4662535e33b3a93c647d5"
+          },
+          "native.stdout.json": {
+            "bytes": 16398,
+            "sha256": "3bee49405663495ea4a013edbe96ebae23288c70e54d53413b2edd8a052d24cb"
+          },
+          "native.stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "native-envelope.json": {
+            "bytes": 10802,
+            "sha256": "0287b4bf788b53d0eff8f95c366d20b929b2a7df231db11c2c348bd3ddc49054"
+          },
+          "review.json": {
+            "bytes": 4164,
+            "sha256": "5f233e84819a39dfe566f59fed99d07477e074d06b73a0f87ea146ea6bb94308"
+          },
+          "process.json": {
+            "bytes": 122,
+            "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+          },
+          "invocation.json": {
+            "bytes": 2528,
+            "sha256": "e9caf771f3c3040f2630207fdab5f34b731d9d433496cc1cd1f37a5d29dfcf04"
+          },
+          "finish-metadata.json": {
+            "bytes": 81,
+            "sha256": "c0a00dc60284795c9e4680241c921a2a14094ecc2ff204d3d7113bacaecadd02"
+          }
+        }
+      },
+      "shx": {
+        "repository": "octave-commons/shx",
+        "pr": 4,
+        "run_id": 39926493415,
+        "run_attempt": 1,
+        "review_job_id": 120324119976,
+        "head": "1717d9a7173f676d7df959c08c33eabd71ce0b7b",
+        "base_tip": "f4ee133dcf1650c7eafb623ef084f62417252477",
+        "canonical_base": "f4ee133dcf1650c7eafb623ef084f62417252477",
+        "workflow_revision": "93ea554332bcdafffc26688836b2e6a655575c94",
+        "conclusion": "success",
+        "artifact": {
+          "id": 12489847091,
+          "name": "antigravity-review-39926493415-1",
+          "api_digest": "sha256:c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6",
+          "actual_zip_sha256": "c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6",
+          "digest_matches": true,
+          "expired": false,
+          "bytes": 88703
+        },
+        "input_bytes": 307353,
+        "prompt_bytes": 310393,
+        "stdin_bytes": 324687,
+        "diff_bytes": 17438,
+        "file_count": 4,
+        "input_sha256": "ead42e75b2815109aad138251f69b76c8354caad872e97585de1d58791bb2d56",
+        "diff_digest": "9303b8f1b87c0b78d6b9a18bcfb3aa29629a86d4dc9e03b5a1d0b9c9ff1c7c8d",
+        "native_duration_seconds": 181.372344673,
+        "native_turns": 1,
+        "event_count": 5,
+        "strict_native_init": true,
+        "genuine_native_structured_output": true,
+        "finish_metadata": {
+          "toolAction": "Formatting review result",
+          "toolSummary": "Review result formatting"
+        },
+        "scope_complete": true,
+        "reviewed_path_count": 4,
+        "status": "clean",
+        "finding_count": 0,
+        "findings": [],
+        "native_stderr_bytes": 0,
+        "process_group_cleanup": true,
+        "job_cleanup_success": true,
+        "snapshot_and_job_root_removed": true,
+        "independent_current_R4_law_errors": [],
+        "fresh_PR_head_and_base_tip_match": true,
+        "runtime_revision_present_in_actual_job_logs": true,
+        "raw_files": {
+          "input.txt": {
+            "bytes": 307353,
+            "sha256": "ead42e75b2815109aad138251f69b76c8354caad872e97585de1d58791bb2d56"
+          },
+          "input.json": {
+            "bytes": 3170,
+            "sha256": "b3c32354b94d40a1d59ab7d8449d0767db76077a5615407cbdb502122cc14cec"
+          },
+          "native.stdout.json": {
+            "bytes": 9402,
+            "sha256": "73caca99fcb6ab8d322042442bec8ae5ad03410458616251457702971ae7dd71"
+          },
+          "native.stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "native-envelope.json": {
+            "bytes": 5818,
+            "sha256": "8ea7c7b5b4c392c74d07a17f60c196b5de5439e91449f6e86f14026f442805aa"
+          },
+          "review.json": {
+            "bytes": 1637,
+            "sha256": "ced615cd4a9dae24a338f22189db5a855563f99402564af494e13188c559f356"
+          },
+          "process.json": {
+            "bytes": 122,
+            "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+          },
+          "invocation.json": {
+            "bytes": 2563,
+            "sha256": "454b14e6abf10894d391e730be7305189758814789bf29290c4fad9d9c7ca315"
+          },
+          "finish-metadata.json": {
+            "bytes": 91,
+            "sha256": "155c8a9fc59e9f700cfd2de54473108dfe6e8768fa0d7763b486e4e6ed876085"
+          }
+        }
+      }
+    },
+    "limits": [
+      "Current R4 input manifests and laws were used; prior A3 manifests/proofs were not repurposed.",
+      "Exact full-index forced-text Git diff, every changed Git path/blob, canonical unique merge base, base_tip, prompt/stdin byte counts and digests independently match.",
+      "These are complete imported CLI advisory artifacts, not native GitHub review approvals or merge/deployment credit.",
+      "The natural same-head metadata-edit skip is a scheduling observation; negative access-control enforcement remains UNKNOWN.",
+      "Earlier A3 hosted/service and R4 service qualifications were left unchanged.",
+      "No source, receipts, pushes, settings, listener or permission changes occurred during monitoring."
+    ]
+  },
+  "raw_cache": {
+    "path": "/home/err/.local/share/antigravity-review/qualification/20261023/R4",
+    "manifest_sha256": "70573d07dd91f1ebe4283b18c627adda5c285f30cde3f15462a7acbce9c9850e",
+    "file_count_excluding_manifest": 97,
+    "manifest": {
+      "shx.final-caller.yml": {
+        "bytes": 1016,
+        "sha256": "b29157879746052db072bce4893ac702849fd71b4f480c1d79808fea6dd99df6"
+      },
+      "shx.final-pr.json": {
+        "bytes": 20066,
+        "sha256": "fcaee1d49ad6f20472c9dc8948c029143b944f52d4f9768445f035de181abeda"
+      },
+      "trusted-muse-mirror-workflow.yml": {
+        "bytes": 12643,
+        "sha256": "9eab25fa2a8e2508d9eb14b268a41639afa0b562b8267f11c603643a75651c16"
+      },
+      "eta.initial-caller.yml": {
+        "bytes": 1012,
+        "sha256": "99a7d742ba9ef231ddbd459f16acb59e21bc50940a668f6586a42fbd3dcd0ced"
+      },
+      "watch.py": {
+        "bytes": 4093,
+        "sha256": "2f1a0853b0e6c0e6f6a4adbaca5a2373d6e9f9cd4de43b7556f481df1ff8d214"
+      },
+      "shx.initial-pr.json": {
+        "bytes": 20066,
+        "sha256": "f426533ce741fadd08c0dc0c818ca1508981bcfa20a6f9cc661cc4728d7c08fa"
+      },
+      "scope-notes.json": {
+        "bytes": 795,
+        "sha256": "61b7fc1f90a8f23f3b2e3b6bcbb50d90b5939e7cb50783abda64f04d00306d8c"
+      },
+      "validate-r4.cljs": {
+        "bytes": 4820,
+        "sha256": "24c324d153d2e479ad837b44494af489a3b9f1a0db937e9b773a16fc09cad00f"
+      },
+      "verification-summary.json": {
+        "bytes": 7854,
+        "sha256": "73685aff67b0a019e11210944f54afe2d270a5a3673a376a31f4d5b0361712a7"
+      },
+      "eta.same-head-run-observations.json": {
+        "bytes": 30513,
+        "sha256": "87889e9204f49dc472d3dd9db2dffbeef325007cea9f26f04c76d282b5e33f31"
+      },
+      "r4-runtime-source-context.json": {
+        "bytes": 3242,
+        "sha256": "aaa891b627de89159c28eaf2690426700560a9a18e37fb6ee7a4df0a5b84bd21"
+      },
+      "39925909795.run.latest.json": {
+        "bytes": 14141,
+        "sha256": "b697354782eff4d26a6524c139bcb118799a28011ef103e39ec9cfb5467be353"
+      },
+      "eta.initial-pr.json": {
+        "bytes": 20774,
+        "sha256": "9ea809a3eb0d5829a81807fb5fa4f9a0b8cc88a9dd23f25543e69a38b492ac0e"
+      },
+      "trusted-workflow.yml": {
+        "bytes": 12643,
+        "sha256": "9eab25fa2a8e2508d9eb14b268a41639afa0b562b8267f11c603643a75651c16"
+      },
+      "39926493415.run.latest.json": {
+        "bytes": 14319,
+        "sha256": "63de132a092bbef5fa20ea787cb608b9a86ec952ad643a9887da1225a2215882"
+      },
+      "trusted-source-pins.json": {
+        "bytes": 417,
+        "sha256": "e1046a10c7ad1466c70a1db6af9b3264f6349a130a3905926a25f1c9c82a4c28"
+      },
+      "shx.initial-caller.yml": {
+        "bytes": 1016,
+        "sha256": "531069cff3f2b9fb76ad4b071e0cd0d2fbee42589d0ac83c57c579b1fa6d716c"
+      },
+      "eta/cleanup-proof.json": {
+        "bytes": 719,
+        "sha256": "4c0cf09cbb98aa3339d60cf1194f73fca0c494254b23b2a4b545c2138ac36ca4"
+      },
+      "eta/independent-validation.stderr.txt": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "eta/fresh-pr-readback.json": {
+        "bytes": 19404,
+        "sha256": "582dad3fb7cc7da381261e78d644c29d92b4fe1d2d0329d4b30018d13d4a73c4"
+      },
+      "eta/logs.zip": {
+        "bytes": 27335,
+        "sha256": "277708f256fb5df18375510090eff0aab71a4311920f14542a30c6ad04106896"
+      },
+      "eta/independent-validation.json": {
+        "bytes": 3708,
+        "sha256": "3ebfe7cfd32fca61c72b5e6edd1d7d66f303a07c22ea6eecba6798b2ff6f3bf1"
+      },
+      "eta/12489034409.zip": {
+        "bytes": 454222,
+        "sha256": "b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f"
+      },
+      "eta/logs-download.json": {
+        "bytes": 100,
+        "sha256": "947ef8f746cf2a756f2aba6ec363cbc3a32dc2a4fafd7e190272700fb537be1f"
+      },
+      "eta/artifact-downloads.json": {
+        "bytes": 338,
+        "sha256": "facc0bbd6c2eba76a7e34f9244ca275af0f5cd4d5d9975dba87844b8a7753add"
+      },
+      "eta/jobs.json": {
+        "bytes": 5317,
+        "sha256": "a0ecb01eb0029eeddd72e2f569ce284821e87b2a09d05aba4f7496947500f2d5"
+      },
+      "eta/artifacts.json": {
+        "bytes": 923,
+        "sha256": "fc4f119b8d235f84c35bf34c4b182b88da185b5849a4233eb64a76fb83f83d7c"
+      },
+      "shx/cleanup-proof.json": {
+        "bytes": 719,
+        "sha256": "c27018d5ab906c43f868aa197880e12376520e07978f99c81d03483379e2e9c6"
+      },
+      "shx/independent-validation.stderr.txt": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "shx/fresh-pr-readback.json": {
+        "bytes": 21101,
+        "sha256": "7d6561e966093bc76dd451d9f562c7997cc291402954d09aadfd3c01f7282583"
+      },
+      "shx/logs.zip": {
+        "bytes": 21999,
+        "sha256": "6e6897604094240a53868221a565acbbad74a1dd50429cff4924a452cb25910a"
+      },
+      "shx/independent-validation.json": {
+        "bytes": 607,
+        "sha256": "022e7eac42b3cd8c1777c8790e18277d2d6bee076c496b539a05e197f21e1180"
+      },
+      "shx/logs-download.json": {
+        "bytes": 100,
+        "sha256": "0d417e34d0e0665d1a526383857c64ff6f45e297a48d107005e52e5196fac5de"
+      },
+      "shx/artifact-downloads.json": {
+        "bytes": 337,
+        "sha256": "b311e267886c2cac3e8a3a4c51cd671776fc6d45924954949bec195aae73cccd"
+      },
+      "shx/12489847091.zip": {
+        "bytes": 88703,
+        "sha256": "c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6"
+      },
+      "shx/jobs.json": {
+        "bytes": 5336,
+        "sha256": "fc015a78633260d5c55acab663990c9df2a22af1d983f2341aad544507d0dc6a"
+      },
+      "shx/artifacts.json": {
+        "bytes": 922,
+        "sha256": "86da1465625f67c3c891d28042793641b6b5c747692522ef02cb5b3eed0d4207"
+      },
+      "eta/logs/1_review _ preflight.txt": {
+        "bytes": 6488,
+        "sha256": "2e2616a13f3d20f3f59c3a1539a4aead4f8ad48f63f3c811c8d9a5520166e990"
+      },
+      "eta/logs/0_review _ review.txt": {
+        "bytes": 38381,
+        "sha256": "f74c2fe6c014a78eb235cfcab0c18ac96e461e4ca623190fef55e5c807603f04"
+      },
+      "eta/artifact-12489034409/review-exit.txt": {
+        "bytes": 22,
+        "sha256": "4213b5dcd51e49bc6794978466f67b68f6848862da9abee09effb77a7cc94439"
+      },
+      "eta/artifact-12489034409/runtime-preflight.txt": {
+        "bytes": 25,
+        "sha256": "b13e25391ed5f49f53da44f83b6d15dbf0dab610dfb1a4731b29edcb4aae5008"
+      },
+      "eta/logs/review _ preflight/system.txt": {
+        "bytes": 1430,
+        "sha256": "7ae7d62b50787d71dcca5dcd7545ce4eedec6b49d5b4cdd90c38349b3b19b994"
+      },
+      "eta/logs/review _ preflight/1_Set up job.txt": {
+        "bytes": 2549,
+        "sha256": "2969bc809d2c4d079864bcb00c58491585346d7173f9efb722a1f710c76aca91"
+      },
+      "eta/logs/review _ preflight/3_Complete job.txt": {
+        "bytes": 280,
+        "sha256": "52e642da3b2ebbd96e22ccaaa87bbb62c9128bebfd3f22c626ec8203a46bdfae"
+      },
+      "eta/logs/review _ preflight/2_Validate immutable same-repository review request.txt": {
+        "bytes": 3665,
+        "sha256": "2b9bd8cef2eb794a31a7e3b32572755a042d4ac13c1019d4918b2dc35327d093"
+      },
+      "eta/logs/review _ review/system.txt": {
+        "bytes": 1448,
+        "sha256": "1f843db207685504a371c7812708635d5170a8b5de253ce1ec449d927066c1ea"
+      },
+      "eta/logs/review _ review/1_Set up job.txt": {
+        "bytes": 1735,
+        "sha256": "b7b00a41feb77eef8abf898baf483aaf58b0a1e501bb542d67100f659ed6f6e3"
+      },
+      "eta/logs/review _ review/13_Complete job.txt": {
+        "bytes": 61,
+        "sha256": "4c6830e204f6ab2277390ff0b9d89d06ecbad22363dfc27faa562e74a7a4e3f4"
+      },
+      "eta/logs/review _ review/6_Remove only this job's isolated review files.txt": {
+        "bytes": 1770,
+        "sha256": "2ff3369ddc1e570642b431a68d97a3da3a52f9528af57620ae3674f91c55291a"
+      },
+      "eta/logs/review _ review/12_Post Fetch candidate git objects without candidate execution.txt": {
+        "bytes": 50,
+        "sha256": "f297d47cea7591d552f784375e9b31599d67dd3ba6874fdd087b4a56cbddf4f5"
+      },
+      "eta/logs/review _ review/4_Run approved trusted review runtime.txt": {
+        "bytes": 3610,
+        "sha256": "2ce84fe2c570a628c65e8ec04762c8a19b7769810d96fbdb30857a96ffd8d681"
+      },
+      "eta/logs/review _ review/2_Verify preinstalled trusted runtime and allocate isolated paths.txt": {
+        "bytes": 4254,
+        "sha256": "9c1c4b054ffd8b79f9ade521896a2f558ae9a7d85b960b94aa5567c583784d90"
+      },
+      "eta/logs/review _ review/5_Upload review evidence including failure diagnostics.txt": {
+        "bytes": 3044,
+        "sha256": "a718c15076c9d744e77e635e6d2bed25b1f774ddabaa9768973c497c0fcb0042"
+      },
+      "eta/logs/review _ review/3_Fetch candidate git objects without candidate execution.txt": {
+        "bytes": 23878,
+        "sha256": "74fc6be345a66a69c181973487c63532c80a9110054b0a92c5367e2cacce5151"
+      },
+      "eta/artifact-12489034409/output/cli-version.json": {
+        "bytes": 226,
+        "sha256": "59dc92f67a4352cc248ff65636f1adb410dc9f4bbb5aab469e8df2725eb5410e"
+      },
+      "eta/artifact-12489034409/output/finish-metadata.json": {
+        "bytes": 81,
+        "sha256": "c0a00dc60284795c9e4680241c921a2a14094ecc2ff204d3d7113bacaecadd02"
+      },
+      "eta/artifact-12489034409/output/input.txt": {
+        "bytes": 2444293,
+        "sha256": "3dd6c0ccbae574bec66512c91233d2d0e805d59b68d705b5a68407e9f8a894a3"
+      },
+      "eta/artifact-12489034409/output/process.json": {
+        "bytes": 122,
+        "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+      },
+      "eta/artifact-12489034409/output/invocation.json": {
+        "bytes": 2528,
+        "sha256": "e9caf771f3c3040f2630207fdab5f34b731d9d433496cc1cd1f37a5d29dfcf04"
+      },
+      "eta/artifact-12489034409/output/review.json": {
+        "bytes": 4164,
+        "sha256": "5f233e84819a39dfe566f59fed99d07477e074d06b73a0f87ea146ea6bb94308"
+      },
+      "eta/artifact-12489034409/output/process-start.json": {
+        "bytes": 35,
+        "sha256": "7a55a3625154b81726b5615b9760a84bb8ea9e328bd153946f5f4e847ffe1a2d"
+      },
+      "eta/artifact-12489034409/output/native.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "eta/artifact-12489034409/output/strict-settings.json": {
+        "bytes": 253,
+        "sha256": "c30666edd3bc4cb8e577486d7518f20c08c68bdfbd59e7ae4a632d86b43b4150"
+      },
+      "eta/artifact-12489034409/output/native-envelope.json": {
+        "bytes": 10802,
+        "sha256": "0287b4bf788b53d0eff8f95c366d20b929b2a7df231db11c2c348bd3ddc49054"
+      },
+      "eta/artifact-12489034409/output/native.stdout.json": {
+        "bytes": 16398,
+        "sha256": "3bee49405663495ea4a013edbe96ebae23288c70e54d53413b2edd8a052d24cb"
+      },
+      "eta/artifact-12489034409/output/result.schema.json": {
+        "bytes": 1795,
+        "sha256": "d7ebd44a3ab30dc8aee070972ff808d9b8418bc4acc02b24f77ad4fb5cf2d1c5"
+      },
+      "eta/artifact-12489034409/output/input.json": {
+        "bytes": 33172,
+        "sha256": "444217964f7c06a6c2696181b8b65ecc0df6288627c4662535e33b3a93c647d5"
+      },
+      "shx/logs/1_review _ preflight.txt": {
+        "bytes": 6492,
+        "sha256": "15e80b02f0e1d0d70ef0d11eaa76a772bb0e4502df20d4ebe1e16d6518728805"
+      },
+      "shx/logs/0_review _ review.txt": {
+        "bytes": 23955,
+        "sha256": "b01824a67e6ec24c3b9f3c44bc5cc97b974673e5d691ad31d574eee910503ca4"
+      },
+      "shx/artifact-12489847091/review-exit.txt": {
+        "bytes": 22,
+        "sha256": "4213b5dcd51e49bc6794978466f67b68f6848862da9abee09effb77a7cc94439"
+      },
+      "shx/artifact-12489847091/runtime-preflight.txt": {
+        "bytes": 25,
+        "sha256": "b13e25391ed5f49f53da44f83b6d15dbf0dab610dfb1a4731b29edcb4aae5008"
+      },
+      "shx/logs/review _ preflight/system.txt": {
+        "bytes": 1439,
+        "sha256": "59c261c37b9b92fa5c8f24d267643b48e44a7974d08c5847f2aa6b439d58921a"
+      },
+      "shx/logs/review _ preflight/1_Set up job.txt": {
+        "bytes": 2553,
+        "sha256": "8eb55adad123da318d86f4cb83baadd6c1b789adce9dc2147e2400573f3d6e56"
+      },
+      "shx/logs/review _ preflight/3_Complete job.txt": {
+        "bytes": 280,
+        "sha256": "c0d6526a7553deb38d4fd614d1f76f2b2e707d2589d6d642bfc8847350124a52"
+      },
+      "shx/logs/review _ preflight/2_Validate immutable same-repository review request.txt": {
+        "bytes": 3665,
+        "sha256": "8b2ee5048597fb9a36db84eb4d32541131408ee6ae4ac42409aa20a6e33e28a3"
+      },
+      "shx/logs/review _ review/system.txt": {
+        "bytes": 1463,
+        "sha256": "a4bd92df9601a9817811abbca9a62aa6aec8f627cbbbaaaa769a6a8bce331053"
+      },
+      "shx/logs/review _ review/1_Set up job.txt": {
+        "bytes": 1745,
+        "sha256": "5a4f9149766a6ab6c26aa50d3eff8904e1c9efc9b026688394d5f4c555de1fe2"
+      },
+      "shx/logs/review _ review/13_Complete job.txt": {
+        "bytes": 61,
+        "sha256": "3706e57c275b5df647135f4362788a6cf4e57020bb31abeb094b7afdb643de5f"
+      },
+      "shx/logs/review _ review/6_Remove only this job's isolated review files.txt": {
+        "bytes": 1788,
+        "sha256": "f0e3f263231f52a6cc14b91e6992ba758b2c3b75bfd5bb658db5fdcb09d7ce3d"
+      },
+      "shx/logs/review _ review/12_Post Fetch candidate git objects without candidate execution.txt": {
+        "bytes": 50,
+        "sha256": "fbf20a1ead05f20b140d8981a48ae90653337fd252c21b822cac4b8976f85dc5"
+      },
+      "shx/logs/review _ review/4_Run approved trusted review runtime.txt": {
+        "bytes": 3628,
+        "sha256": "685605dde1c5380b47057214b4ad47310e53dae04a55dbad64408fa9170abfe6"
+      },
+      "shx/logs/review _ review/2_Verify preinstalled trusted runtime and allocate isolated paths.txt": {
+        "bytes": 4254,
+        "sha256": "72825736eaa122942dd02143cf9dad3178168c0ba21bdf8ff243c7d09bffe0b8"
+      },
+      "shx/logs/review _ review/5_Upload review evidence including failure diagnostics.txt": {
+        "bytes": 3099,
+        "sha256": "a42738c369cf1d85e501d9aa6fc2c526ef399e506d1a600efb02b0ab4347ab83"
+      },
+      "shx/logs/review _ review/3_Fetch candidate git objects without candidate execution.txt": {
+        "bytes": 9351,
+        "sha256": "827244a4ee9dc128f01a3d722106d03e88e454d47307dafbb33ec146609e0c57"
+      },
+      "shx/artifact-12489847091/output/cli-version.json": {
+        "bytes": 226,
+        "sha256": "59dc92f67a4352cc248ff65636f1adb410dc9f4bbb5aab469e8df2725eb5410e"
+      },
+      "shx/artifact-12489847091/output/finish-metadata.json": {
+        "bytes": 91,
+        "sha256": "155c8a9fc59e9f700cfd2de54473108dfe6e8768fa0d7763b486e4e6ed876085"
+      },
+      "shx/artifact-12489847091/output/input.txt": {
+        "bytes": 307353,
+        "sha256": "ead42e75b2815109aad138251f69b76c8354caad872e97585de1d58791bb2d56"
+      },
+      "shx/artifact-12489847091/output/process.json": {
+        "bytes": 122,
+        "sha256": "c9cd1762784ed8df6057cc8a719750c53b87a8886646e1003aaf17d5d554f55e"
+      },
+      "shx/artifact-12489847091/output/invocation.json": {
+        "bytes": 2563,
+        "sha256": "454b14e6abf10894d391e730be7305189758814789bf29290c4fad9d9c7ca315"
+      },
+      "shx/artifact-12489847091/output/review.json": {
+        "bytes": 1637,
+        "sha256": "ced615cd4a9dae24a338f22189db5a855563f99402564af494e13188c559f356"
+      },
+      "shx/artifact-12489847091/output/process-start.json": {
+        "bytes": 35,
+        "sha256": "0efb579eeac6be8724ab381faac097f28101395879feaaf2dff1b5cc81539f3c"
+      },
+      "shx/artifact-12489847091/output/native.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "shx/artifact-12489847091/output/strict-settings.json": {
+        "bytes": 253,
+        "sha256": "c30666edd3bc4cb8e577486d7518f20c08c68bdfbd59e7ae4a632d86b43b4150"
+      },
+      "shx/artifact-12489847091/output/native-envelope.json": {
+        "bytes": 5818,
+        "sha256": "8ea7c7b5b4c392c74d07a17f60c196b5de5439e91449f6e86f14026f442805aa"
+      },
+      "shx/artifact-12489847091/output/native.stdout.json": {
+        "bytes": 9402,
+        "sha256": "73caca99fcb6ab8d322042442bec8ae5ad03410458616251457702971ae7dd71"
+      },
+      "shx/artifact-12489847091/output/result.schema.json": {
+        "bytes": 1795,
+        "sha256": "d7ebd44a3ab30dc8aee070972ff808d9b8418bc4acc02b24f77ad4fb5cf2d1c5"
+      },
+      "shx/artifact-12489847091/output/input.json": {
+        "bytes": 3170,
+        "sha256": "b3c32354b94d40a1d59ab7d8449d0767db76077a5615407cbdb502122cc14cec"
+      }
+    },
+    "purpose": "Durable verbatim operator raw-artifact cache, not a provenance ledger or approval authority. Git keeps native metadata, validation results and digest-bound custody references. Original ZIP artifacts also remain at native GitHub run URLs until expiry."
+  },
+  "cases": {
+    "eta": {
+      "files": {
+        "12489034409.zip": {
+          "bytes": 454222,
+          "sha256": "b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f",
+          "retained_raw_file": "/home/err/.local/share/antigravity-review/qualification/20261023/R4/eta/12489034409.zip"
+        },
+        "artifact-downloads.json": {
+          "bytes": 338,
+          "sha256": "facc0bbd6c2eba76a7e34f9244ca275af0f5cd4d5d9975dba87844b8a7753add",
+          "utf8": "[\n  {\n    \"id\": 12489034409,\n    \"name\": \"antigravity-review-39925909795-1\",\n    \"api_digest\": \"sha256:b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f\",\n    \"actual_zip_sha256\": \"b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f\",\n    \"digest_matches\": true,\n    \"expired\": false,\n    \"bytes\": 454222\n  }\n]"
+        },
+        "artifacts.json": {
+          "bytes": 923,
+          "sha256": "fc4f119b8d235f84c35bf34c4b182b88da185b5849a4233eb64a76fb83f83d7c",
+          "utf8": "{\n  \"total_count\": 1,\n  \"artifacts\": [\n    {\n      \"id\": 12489034409,\n      \"node_id\": \"MDg6QXJ0aWZhY3QxMjQ4OTAzNDQwOQ==\",\n      \"name\": \"antigravity-review-39925909795-1\",\n      \"size_in_bytes\": 454222,\n      \"url\": \"https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12489034409\",\n      \"archive_download_url\": \"https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12489034409/zip\",\n      \"expired\": false,\n      \"digest\": \"sha256:b453b2fff43c9e7ae6bf4e1438ebfb508a2247b6323fb5080964c6e06b6a171f\",\n      \"created_at\": \"2026-10-23T08:43:13Z\",\n      \"updated_at\": \"2026-10-23T08:43:13Z\",\n      \"expires_at\": \"2026-11-06T09:43:11Z\",\n      \"workflow_run\": {\n        \"id\": 39925909795,\n        \"repository_id\": 1189985055,\n        \"head_repository_id\": 1189985055,\n        \"head_branch\": \"codex/antigravity-review-agent\",\n        \"head_sha\": \"5e6af5489b42e494f3f83642a37ea4e1f98ad945\"\n      }\n    }\n  ]\n}"
+        },
+        "cleanup-proof.json": {
+          "bytes": 719,
+          "sha256": "4c0cf09cbb98aa3339d60cf1194f73fca0c494254b23b2a4b545c2138ac36ca4",
+          "utf8": "{\n  \"run\": 39925909795,\n  \"review_job\": 120322152492,\n  \"runtime_preflight\": \"runtime-preflight exit=0\\n\",\n  \"runtime_exit\": \"review-runtime exit=0\\n\",\n  \"process\": {\n    \"status\": 0,\n    \"signal\": null,\n    \"timed_out\": false,\n    \"oversized\": false,\n    \"group_cleanup\": true,\n    \"error\": null\n  },\n  \"native_stderr_bytes\": 0,\n  \"snapshot_exists\": false,\n  \"job_evidence_root_exists\": false,\n  \"job_cleanup_step\": [\n    {\n      \"name\": \"Remove only this job's isolated review files\",\n      \"status\": \"completed\",\n      \"conclusion\": \"success\",\n      \"number\": 6,\n      \"started_at\": \"2026-10-23T08:43:13Z\",\n      \"completed_at\": \"2026-10-23T08:43:13Z\"\n    }\n  ],\n  \"observed_at\": \"2026-10-23T08:44:27.752164+00:00\"\n}"
+        },
+        "fresh-pr-readback.json": {
+          "bytes": 19404,
+          "sha256": "582dad3fb7cc7da381261e78d644c29d92b4fe1d2d0329d4b30018d13d4a73c4",
+          "utf8": "{\n  \"url\": \"https://api.github.com/repos/open-hax/eta-mu/pulls/364\",\n  \"id\": 4978584642,\n  \"node_id\": \"PR_kwDORu27H88AAAABKL8sQg\",\n  \"html_url\": \"https://github.com/open-hax/eta-mu/pull/364\",\n  \"diff_url\": \"https://github.com/open-hax/eta-mu/pull/364.diff\",\n  \"patch_url\": \"https://github.com/open-hax/eta-mu/pull/364.patch\",\n  \"issue_url\": \"https://api.github.com/repos/open-hax/eta-mu/issues/364\",\n  \"commits_url\": \"https://api.github.com/repos/open-hax/eta-mu/pulls/364/commits\",\n  \"review_comments_url\": \"https://api.github.com/repos/open-hax/eta-mu/pulls/364/comments\",\n  \"review_comment_url\": \"https://api.github.com/repos/open-hax/eta-mu/pulls/comments{/number}\",\n  \"comments_url\": \"https://api.github.com/repos/open-hax/eta-mu/issues/364/comments\",\n  \"statuses_url\": \"https://api.github.com/repos/open-hax/eta-mu/statuses/5e6af5489b42e494f3f83642a37ea4e1f98ad945\",\n  \"number\": 364,\n  \"state\": \"open\",\n  \"locked\": false,\n  \"title\": \"feat: add Antigravity CLI review with Gemini Flash 3.8\",\n  \"user\": {\n    \"login\": \"riatzukiza\",\n    \"id\": 10676925,\n    \"node_id\": \"MDQ6VXNlcjEwNjc2OTI1\",\n    \"avatar_url\": \"https://avatars.githubusercontent.com/u/10676925?v=4\",\n    \"gravatar_id\": \"\",\n    \"url\": \"https://api.github.com/users/riatzukiza\",\n    \"html_url\": \"https://github.com/riatzukiza\",\n    \"followers_url\": \"https://api.github.com/users/riatzukiza/followers\",\n    \"following_url\": \"https://api.github.com/users/riatzukiza/following{/other_user}\",\n    \"gists_url\": \"https://api.github.com/users/riatzukiza/gists{/gist_id}\",\n    \"starred_url\": \"https://api.github.com/users/riatzukiza/starred{/owner}{/repo}\",\n    \"subscriptions_url\": \"https://api.github.com/users/riatzukiza/subscriptions\",\n    \"organizations_url\": \"https://api.github.com/users/riatzukiza/orgs\",\n    \"repos_url\": \"https://api.github.com/users/riatzukiza/repos\",\n    \"events_url\": \"https://api.github.com/users/riatzukiza/events{/privacy}\",\n    \"received_events_url\": \"https://api.github.com/users/riatzukiza/received_events\",\n    \"type\": \"User\",\n    \"user_view_type\": \"public\",\n    \"site_admin\": false\n  },\n  \"body\": \"Adds an Antigravity CLI observer that reviews complete PR text changes with `gemini-3.8-flash-high`. The reusable workflow validates the live immutable PR request, runs a preinstalled trusted runtime using this machine\\u2019s existing login, and retains strict native evidence and cleanup diagnostics as advisory artifacts.\\n\\nThe runtime derives one unique merge base, preserves the requested target tip separately, includes complete base/head UTF-8 blobs and a canonical full-index text diff, and rejects incomplete, stale or malformed results. The finish-only agent runs with a strict deny overlay and no inherited GitHub credentials. Model output grants no native GitHub approval credit.\\n\\nValidation: 38 integration tests, 6 pure tests / 71 assertions, 12 workflow tests, zero lint warnings, and fresh actual R4 service-context clean/defect cases pass. Both previous A3 hosted pilots passed with retained raw artifacts; current R4 self-review is [run 39925909795](https://github.com/open-hax/eta-mu/actions/runs/39925909795). Runner-group workflow/repository readbacks pass; unapproved-workflow scheduling canaries remain inconclusive.\\n\\nRuntime: `9955ba838ff187beced4beb26f4c271941a956ec`; reusable workflow: `2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2`. [Foresight rollout #145](https://github.com/open-hax/foresight/pull/145) tracks all 22 member proposals; [Services #104](https://github.com/open-hax/services/pull/104) owns worker deployment sources and [Muse #31](https://github.com/octave-commons/muse/pull/31) owns the byte-identical Octave compatibility entry point. Source adoption and merge qualification remain pending; auto-merge is off.\\n\",\n  \"labels\": [],\n  \"milestone\": null,\n  \"active_lock_reason\": null,\n  \"created_at\": \"2026-10-23T06:04:32Z\",\n  \"updated_at\": \"2026-10-23T08:41:48Z\",\n  \"closed_at\": null,\n  \"merged_at\": null,\n  \"merge_commit_sha\": \"b92eb5f24f34b49242c87170f766d734d2751fae\",\n  \"assignee\": null,\n  \"assignees\": [],\n  \"requested_reviewers\": [],\n  \"requested_teams\": [],\n  \"head\": {\n    \"label\": \"open-hax:codex/antigravity-review-agent\",\n    \"ref\": \"codex/antigravity-review-agent\",\n    \"repo\": {\n      \"id\": 1189985055,\n      \"node_id\": \"R_kgDORu27Hw\",\n      \"name\": \"eta-mu\",\n      \"full_name\": \"open-hax/eta-mu\",\n      \"owner\": {\n        \"login\": \"open-hax\",\n        \"id\": 243925769,\n        \"node_id\": \"O_kgDODooDCQ\",\n        \"avatar_url\": \"https://avatars.githubusercontent.com/u/243925769?v=4\",\n        \"gravatar_id\": \"\",\n        \"url\": \"https://api.github.com/users/open-hax\",\n        \"html_url\": \"https://github.com/open-hax\",\n        \"followers_url\": \"https://api.github.com/users/open-hax/followers\",\n        \"following_url\": \"https://api.github.com/users/open-hax/following{/other_user}\",\n        \"gists_url\": \"https://api.github.com/users/open-hax/gists{/gist_id}\",\n        \"starred_url\": \"https://api.github.com/users/open-hax/starred{/owner}{/repo}\",\n        \"subscriptions_url\": \"https://api.github.com/users/open-hax/subscriptions\",\n        \"organizations_url\": \"https://api.github.com/users/open-hax/orgs\",\n        \"repos_url\": \"https://api.github.com/users/open-hax/repos\",\n        \"events_url\": \"https://api.github.com/users/open-hax/events{/privacy}\",\n        \"received_events_url\": \"https://api.github.com/users/open-hax/received_events\",\n        \"type\": \"Organization\",\n        \"user_view_type\": \"public\",\n        \"site_admin\": false\n      },\n      \"private\": false,\n      \"fork\": false,\n      \"archived\": false,\n      \"disabled\": false,\n      \"description\": \"Eta-mu monorepo: control plane, pi home, GitHub automation, truth/docs kernels, and Promethean runtime.\",\n      \"homepage\": null,\n      \"language\": \"JavaScript\",\n      \"visibility\": \"public\",\n      \"is_template\": false,\n      \"topics\": [],\n      \"forks_count\": 1,\n      \"forks\": 1,\n      \"stargazers_count\": 1,\n      \"watchers_count\": 1,\n      \"watchers\": 1,\n      \"open_issues_count\": 131,\n      \"open_issues\": 131,\n      \"size\": 30917,\n      \"default_branch\": \"main\",\n      \"has_issues\": true,\n      \"has_projects\": true,\n      \"has_wiki\": true,\n      \"has_pages\": false,\n      \"has_downloads\": false,\n      \"has_discussions\": false,\n      \"has_pull_requests\": true,\n      \"pushed_at\": \"2026-10-23T08:36:58Z\",\n      \"created_at\": \"2026-03-23T21:26:48Z\",\n      \"updated_at\": \"2026-10-17T11:54:19Z\",\n      \"allow_forking\": true,\n      \"web_commit_signoff_required\": false,\n      \"pull_request_creation_policy\": \"all\",\n      \"license\": null,\n      \"url\": \"https://api.github.com/repos/open-hax/eta-mu\",\n      \"html_url\": \"https://github.com/open-hax/eta-mu\",\n      \"archive_url\": \"https://api.github.com/repos/open-hax/eta-mu/{archive_format}{/ref}\",\n      \"assignees_url\": \"https://api.github.com/repos/open-hax/eta-mu/assignees{/user}\",\n      \"blobs_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/blobs{/sha}\",\n      \"branches_url\": \"https://api.github.com/repos/open-hax/eta-mu/branches{/branch}\",\n      \"collaborators_url\": \"https://api.github.com/repos/open-hax/eta-mu/collaborators{/collaborator}\",\n      \"comments_url\": \"https://api.github.com/repos/open-hax/eta-mu/comments{/number}\",\n      \"commits_url\": \"https://api.github.com/repos/open-hax/eta-mu/commits{/sha}\",\n      \"compare_url\": \"https://api.github.com/repos/open-hax/eta-mu/compare/{base}...{head}\",\n      \"contents_url\": \"https://api.github.com/repos/open-hax/eta-mu/contents/{+path}\",\n      \"contributors_url\": \"https://api.github.com/repos/open-hax/eta-mu/contributors\",\n      \"deployments_url\": \"https://api.github.com/repos/open-hax/eta-mu/deployments\",\n      \"downloads_url\": \"https://api.github.com/repos/open-hax/eta-mu/downloads\",\n      \"events_url\": \"https://api.github.com/repos/open-hax/eta-mu/events\",\n      \"forks_url\": \"https://api.github.com/repos/open-hax/eta-mu/forks\",\n      \"git_commits_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/commits{/sha}\",\n      \"git_refs_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/refs{/sha}\",\n      \"git_tags_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/tags{/sha}\",\n      \"git_url\": \"git://github.com/open-hax/eta-mu.git\",\n      \"issue_comment_url\": \"https://api.github.com/repos/open-hax/eta-mu/issues/comments{/number}\",\n      \"issue_events_url\": \"https://api.github.com/repos/open-hax/eta-mu/issues/events{/number}\",\n      \"issues_url\": \"https://api.github.com/repos/open-hax/eta-mu/issues{/number}\",\n      \"keys_url\": \"https://api.github.com/repos/open-hax/eta-mu/keys{/key_id}\",\n      \"labels_url\": \"https://api.github.com/repos/open-hax/eta-mu/labels{/name}\",\n      \"languages_url\": \"https://api.github.com/repos/open-hax/eta-mu/languages\",\n      \"merges_url\": \"https://api.github.com/repos/open-hax/eta-mu/merges\",\n      \"milestones_url\": \"https://api.github.com/repos/open-hax/eta-mu/milestones{/number}\",\n      \"notifications_url\": \"https://api.github.com/repos/open-hax/eta-mu/notifications{?since,all,participating}\",\n      \"pulls_url\": \"https://api.github.com/repos/open-hax/eta-mu/pulls{/number}\",\n      \"releases_url\": \"https://api.github.com/repos/open-hax/eta-mu/releases{/id}\",\n      \"ssh_url\": \"git@github.com:open-hax/eta-mu.git\",\n      \"stargazers_url\": \"https://api.github.com/repos/open-hax/eta-mu/stargazers\",\n      \"statuses_url\": \"https://api.github.com/repos/open-hax/eta-mu/statuses/{sha}\",\n      \"subscribers_url\": \"https://api.github.com/repos/open-hax/eta-mu/subscribers\",\n      \"subscription_url\": \"https://api.github.com/repos/open-hax/eta-mu/subscription\",\n      \"tags_url\": \"https://api.github.com/repos/open-hax/eta-mu/tags\",\n      \"teams_url\": \"https://api.github.com/repos/open-hax/eta-mu/teams\",\n      \"trees_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/trees{/sha}\",\n      \"clone_url\": \"https://github.com/open-hax/eta-mu.git\",\n      \"mirror_url\": null,\n      \"hooks_url\": \"https://api.github.com/repos/open-hax/eta-mu/hooks\",\n      \"svn_url\": \"https://github.com/open-hax/eta-mu\"\n    },\n    \"sha\": \"5e6af5489b42e494f3f83642a37ea4e1f98ad945\",\n    \"user\": {\n      \"login\": \"open-hax\",\n      \"id\": 243925769,\n      \"node_id\": \"O_kgDODooDCQ\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/243925769?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/open-hax\",\n      \"html_url\": \"https://github.com/open-hax\",\n      \"followers_url\": \"https://api.github.com/users/open-hax/followers\",\n      \"following_url\": \"https://api.github.com/users/open-hax/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/open-hax/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/open-hax/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/open-hax/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/open-hax/orgs\",\n      \"repos_url\": \"https://api.github.com/users/open-hax/repos\",\n      \"events_url\": \"https://api.github.com/users/open-hax/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/open-hax/received_events\",\n      \"type\": \"Organization\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    }\n  },\n  \"base\": {\n    \"label\": \"open-hax:main\",\n    \"ref\": \"main\",\n    \"repo\": {\n      \"id\": 1189985055,\n      \"node_id\": \"R_kgDORu27Hw\",\n      \"name\": \"eta-mu\",\n      \"full_name\": \"open-hax/eta-mu\",\n      \"owner\": {\n        \"login\": \"open-hax\",\n        \"id\": 243925769,\n        \"node_id\": \"O_kgDODooDCQ\",\n        \"avatar_url\": \"https://avatars.githubusercontent.com/u/243925769?v=4\",\n        \"gravatar_id\": \"\",\n        \"url\": \"https://api.github.com/users/open-hax\",\n        \"html_url\": \"https://github.com/open-hax\",\n        \"followers_url\": \"https://api.github.com/users/open-hax/followers\",\n        \"following_url\": \"https://api.github.com/users/open-hax/following{/other_user}\",\n        \"gists_url\": \"https://api.github.com/users/open-hax/gists{/gist_id}\",\n        \"starred_url\": \"https://api.github.com/users/open-hax/starred{/owner}{/repo}\",\n        \"subscriptions_url\": \"https://api.github.com/users/open-hax/subscriptions\",\n        \"organizations_url\": \"https://api.github.com/users/open-hax/orgs\",\n        \"repos_url\": \"https://api.github.com/users/open-hax/repos\",\n        \"events_url\": \"https://api.github.com/users/open-hax/events{/privacy}\",\n        \"received_events_url\": \"https://api.github.com/users/open-hax/received_events\",\n        \"type\": \"Organization\",\n        \"user_view_type\": \"public\",\n        \"site_admin\": false\n      },\n      \"private\": false,\n      \"fork\": false,\n      \"archived\": false,\n      \"disabled\": false,\n      \"description\": \"Eta-mu monorepo: control plane, pi home, GitHub automation, truth/docs kernels, and Promethean runtime.\",\n      \"homepage\": null,\n      \"language\": \"JavaScript\",\n      \"visibility\": \"public\",\n      \"is_template\": false,\n      \"topics\": [],\n      \"forks_count\": 1,\n      \"forks\": 1,\n      \"stargazers_count\": 1,\n      \"watchers_count\": 1,\n      \"watchers\": 1,\n      \"open_issues_count\": 131,\n      \"open_issues\": 131,\n      \"size\": 30917,\n      \"default_branch\": \"main\",\n      \"has_issues\": true,\n      \"has_projects\": true,\n      \"has_wiki\": true,\n      \"has_pages\": false,\n      \"has_downloads\": false,\n      \"has_discussions\": false,\n      \"has_pull_requests\": true,\n      \"pushed_at\": \"2026-10-23T08:36:58Z\",\n      \"created_at\": \"2026-03-23T21:26:48Z\",\n      \"updated_at\": \"2026-10-17T11:54:19Z\",\n      \"allow_forking\": true,\n      \"web_commit_signoff_required\": false,\n      \"pull_request_creation_policy\": \"all\",\n      \"license\": null,\n      \"url\": \"https://api.github.com/repos/open-hax/eta-mu\",\n      \"html_url\": \"https://github.com/open-hax/eta-mu\",\n      \"archive_url\": \"https://api.github.com/repos/open-hax/eta-mu/{archive_format}{/ref}\",\n      \"assignees_url\": \"https://api.github.com/repos/open-hax/eta-mu/assignees{/user}\",\n      \"blobs_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/blobs{/sha}\",\n      \"branches_url\": \"https://api.github.com/repos/open-hax/eta-mu/branches{/branch}\",\n      \"collaborators_url\": \"https://api.github.com/repos/open-hax/eta-mu/collaborators{/collaborator}\",\n      \"comments_url\": \"https://api.github.com/repos/open-hax/eta-mu/comments{/number}\",\n      \"commits_url\": \"https://api.github.com/repos/open-hax/eta-mu/commits{/sha}\",\n      \"compare_url\": \"https://api.github.com/repos/open-hax/eta-mu/compare/{base}...{head}\",\n      \"contents_url\": \"https://api.github.com/repos/open-hax/eta-mu/contents/{+path}\",\n      \"contributors_url\": \"https://api.github.com/repos/open-hax/eta-mu/contributors\",\n      \"deployments_url\": \"https://api.github.com/repos/open-hax/eta-mu/deployments\",\n      \"downloads_url\": \"https://api.github.com/repos/open-hax/eta-mu/downloads\",\n      \"events_url\": \"https://api.github.com/repos/open-hax/eta-mu/events\",\n      \"forks_url\": \"https://api.github.com/repos/open-hax/eta-mu/forks\",\n      \"git_commits_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/commits{/sha}\",\n      \"git_refs_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/refs{/sha}\",\n      \"git_tags_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/tags{/sha}\",\n      \"git_url\": \"git://github.com/open-hax/eta-mu.git\",\n      \"issue_comment_url\": \"https://api.github.com/repos/open-hax/eta-mu/issues/comments{/number}\",\n      \"issue_events_url\": \"https://api.github.com/repos/open-hax/eta-mu/issues/events{/number}\",\n      \"issues_url\": \"https://api.github.com/repos/open-hax/eta-mu/issues{/number}\",\n      \"keys_url\": \"https://api.github.com/repos/open-hax/eta-mu/keys{/key_id}\",\n      \"labels_url\": \"https://api.github.com/repos/open-hax/eta-mu/labels{/name}\",\n      \"languages_url\": \"https://api.github.com/repos/open-hax/eta-mu/languages\",\n      \"merges_url\": \"https://api.github.com/repos/open-hax/eta-mu/merges\",\n      \"milestones_url\": \"https://api.github.com/repos/open-hax/eta-mu/milestones{/number}\",\n      \"notifications_url\": \"https://api.github.com/repos/open-hax/eta-mu/notifications{?since,all,participating}\",\n      \"pulls_url\": \"https://api.github.com/repos/open-hax/eta-mu/pulls{/number}\",\n      \"releases_url\": \"https://api.github.com/repos/open-hax/eta-mu/releases{/id}\",\n      \"ssh_url\": \"git@github.com:open-hax/eta-mu.git\",\n      \"stargazers_url\": \"https://api.github.com/repos/open-hax/eta-mu/stargazers\",\n      \"statuses_url\": \"https://api.github.com/repos/open-hax/eta-mu/statuses/{sha}\",\n      \"subscribers_url\": \"https://api.github.com/repos/open-hax/eta-mu/subscribers\",\n      \"subscription_url\": \"https://api.github.com/repos/open-hax/eta-mu/subscription\",\n      \"tags_url\": \"https://api.github.com/repos/open-hax/eta-mu/tags\",\n      \"teams_url\": \"https://api.github.com/repos/open-hax/eta-mu/teams\",\n      \"trees_url\": \"https://api.github.com/repos/open-hax/eta-mu/git/trees{/sha}\",\n      \"clone_url\": \"https://github.com/open-hax/eta-mu.git\",\n      \"mirror_url\": null,\n      \"hooks_url\": \"https://api.github.com/repos/open-hax/eta-mu/hooks\",\n      \"svn_url\": \"https://github.com/open-hax/eta-mu\"\n    },\n    \"sha\": \"7112c36440d180ca183d6a3f89661cee161fdae5\",\n    \"user\": {\n      \"login\": \"open-hax\",\n      \"id\": 243925769,\n      \"node_id\": \"O_kgDODooDCQ\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/243925769?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/open-hax\",\n      \"html_url\": \"https://github.com/open-hax\",\n      \"followers_url\": \"https://api.github.com/users/open-hax/followers\",\n      \"following_url\": \"https://api.github.com/users/open-hax/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/open-hax/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/open-hax/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/open-hax/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/open-hax/orgs\",\n      \"repos_url\": \"https://api.github.com/users/open-hax/repos\",\n      \"events_url\": \"https://api.github.com/users/open-hax/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/open-hax/received_events\",\n      \"type\": \"Organization\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    }\n  },\n  \"_links\": {\n    \"comments\": {\n      \"href\": \"https://api.github.com/repos/open-hax/eta-mu/issues/364/comments\"\n    },\n    \"commits\": {\n      \"href\": \"https://api.github.com/repos/open-hax/eta-mu/pulls/364/commits\"\n    },\n    \"statuses\": {\n      \"href\": \"https://api.github.com/repos/open-hax/eta-mu/statuses/5e6af5489b42e494f3f83642a37ea4e1f98ad945\"\n    },\n    \"html\": {\n      \"href\": \"https://github.com/open-hax/eta-mu/pull/364\"\n    },\n    \"issue\": {\n      \"href\": \"https://api.github.com/repos/open-hax/eta-mu/issues/364\"\n    },\n    \"review_comments\": {\n      \"href\": \"https://api.github.com/repos/open-hax/eta-mu/pulls/364/comments\"\n    },\n    \"review_comment\": {\n      \"href\": \"https://api.github.com/repos/open-hax/eta-mu/pulls/comments{/number}\"\n    },\n    \"self\": {\n      \"href\": \"https://api.github.com/repos/open-hax/eta-mu/pulls/364\"\n    }\n  },\n  \"author_association\": \"MEMBER\",\n  \"auto_merge\": null,\n  \"draft\": false,\n  \"merged\": false,\n  \"mergeable\": true,\n  \"rebaseable\": false,\n  \"mergeable_state\": \"unstable\",\n  \"merged_by\": null,\n  \"comments\": 6,\n  \"review_comments\": 22,\n  \"maintainer_can_modify\": false,\n  \"commits\": 13,\n  \"additions\": 4470,\n  \"deletions\": 0,\n  \"changed_files\": 54\n}"
+        },
+        "independent-validation.json": {
+          "bytes": 3708,
+          "sha256": "3ebfe7cfd32fca61c72b5e6edd1d7d66f303a07c22ea6eecba6798b2ff6f3bf1",
+          "utf8": "{\n  \"findings\": [],\n  \"num_turns\": 1,\n  \"errors\": [],\n  \"base_tip\": \"7112c36440d180ca183d6a3f89661cee161fdae5\",\n  \"native_duration_seconds\": 321.908806169,\n  \"head\": \"5e6af5489b42e494f3f83642a37ea4e1f98ad945\",\n  \"status\": \"clean\",\n  \"native_permission_mode\": \"strict\",\n  \"event_count\": 5,\n  \"base\": \"7112c36440d180ca183d6a3f89661cee161fdae5\",\n  \"diff_digest\": \"5fe1fb2f2f75604be974ed52063ccbb12000ecf21a4a388a52f9cb69781444e8\",\n  \"reviewed_paths\": [\n    \".agents/agents/antigravity-reviewer.md\",\n    \".github/actionlint.yaml\",\n    \".github/antigravity/README.md\",\n    \".github/antigravity/antigravity/extern/host.cljs\",\n    \".github/antigravity/antigravity/infra/review.cljs\",\n    \".github/antigravity/antigravity/law/review.cljc\",\n    \".github/antigravity/antigravity/law/sandbox.cljc\",\n    \".github/antigravity/antigravity/shape/diff.cljc\",\n    \".github/antigravity/antigravity/shape/finish.cljc\",\n    \".github/antigravity/antigravity/shape/stream.cljc\",\n    \".github/antigravity/result.schema.json\",\n    \".github/antigravity/review.cljs\",\n    \".github/antigravity/review_test.cljs\",\n    \".github/antigravity/run-cli.mjs\",\n    \".github/antigravity/runner.test.mjs\",\n    \".github/antigravity/strict-settings.json\",\n    \".github/scripts/antigravity-code-review-workflow.test.mjs\",\n    \".github/workflows/antigravity-code-review.yml\",\n    \".github/workflows/antigravity-review.yml\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/cli-version.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/finish-metadata.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/input.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/input.txt\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/invocation.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/native.stdout.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/process-start.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/process.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/result.schema.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/review.json\",\n    \".ημ/antigravity-review/actual-clean-end-to-end/strict-settings.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/cli-version.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/finish-metadata.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/input.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/input.txt\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/invocation.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/native.stdout.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/process-start.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/process.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/result.schema.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/review.json\",\n    \".ημ/antigravity-review/actual-defect-end-to-end/strict-settings.json\",\n    \".ημ/antigravity-review/diagnostic-probes.json\",\n    \".ημ/antigravity-review/qualification.json\",\n    \".ημ/antigravity-review/service-qualification-R4.json\",\n    \".ημ/antigravity-review/service-qualification.json\",\n    \".ημ/antigravity-review/stream-qualification-clean.json\",\n    \".ημ/antigravity-review/stream-qualification-defect.json\",\n    \".ημ/antigravity-review/stream-qualification-large-shx.json\",\n    \".ημ/antigravity-review/worker-provisioning.json\",\n    \".ημ/receipts.edn\",\n    \".ημ/session-mycology/ledger.md\",\n    \".ημ/session-mycology/spores/20261023-antigravity-native-finish-and-permission-contracts.md\",\n    \"kanban/tasks/antigravity-cli-review-agent.md\",\n    \"scripts/test.bb\"\n  ]\n}\n"
+        },
+        "independent-validation.stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "utf8": ""
+        },
+        "jobs.json": {
+          "bytes": 5317,
+          "sha256": "a0ecb01eb0029eeddd72e2f569ce284821e87b2a09d05aba4f7496947500f2d5",
+          "utf8": "{\n  \"total_count\": 2,\n  \"jobs\": [\n    {\n      \"id\": 120322103565,\n      \"run_id\": 39925909795,\n      \"workflow_name\": \"Antigravity evidence review\",\n      \"head_branch\": \"codex/antigravity-review-agent\",\n      \"run_url\": \"https://api.github.com/repos/open-hax/eta-mu/actions/runs/39925909795\",\n      \"run_attempt\": 1,\n      \"node_id\": \"CR_kwDORu27H88AAAAcA8GZDQ\",\n      \"head_sha\": \"5e6af5489b42e494f3f83642a37ea4e1f98ad945\",\n      \"url\": \"https://api.github.com/repos/open-hax/eta-mu/actions/jobs/120322103565\",\n      \"html_url\": \"https://github.com/open-hax/eta-mu/actions/runs/39925909795/job/120322103565\",\n      \"status\": \"completed\",\n      \"conclusion\": \"success\",\n      \"created_at\": \"2026-10-23T08:37:03Z\",\n      \"started_at\": \"2026-10-23T08:37:06Z\",\n      \"completed_at\": \"2026-10-23T08:37:11Z\",\n      \"name\": \"review / preflight\",\n      \"steps\": [\n        {\n          \"name\": \"Set up job\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 1,\n          \"started_at\": \"2026-10-23T08:37:07Z\",\n          \"completed_at\": \"2026-10-23T08:37:08Z\"\n        },\n        {\n          \"name\": \"Validate immutable same-repository review request\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 2,\n          \"started_at\": \"2026-10-23T08:37:08Z\",\n          \"completed_at\": \"2026-10-23T08:37:09Z\"\n        },\n        {\n          \"name\": \"Complete job\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 3,\n          \"started_at\": \"2026-10-23T08:37:09Z\",\n          \"completed_at\": \"2026-10-23T08:37:09Z\"\n        }\n      ],\n      \"check_run_url\": \"https://api.github.com/repos/open-hax/eta-mu/check-runs/120322103565\",\n      \"labels\": [\n        \"ubuntu-24.04\"\n      ],\n      \"runner_id\": 1000069948,\n      \"runner_name\": \"GitHub Actions 1000069948\",\n      \"runner_group_id\": 0,\n      \"runner_group_name\": \"GitHub Actions\"\n    },\n    {\n      \"id\": 120322152492,\n      \"run_id\": 39925909795,\n      \"workflow_name\": \"Antigravity evidence review\",\n      \"head_branch\": \"codex/antigravity-review-agent\",\n      \"run_url\": \"https://api.github.com/repos/open-hax/eta-mu/actions/runs/39925909795\",\n      \"run_attempt\": 1,\n      \"node_id\": \"CR_kwDORu27H88AAAAcA8JYLA\",\n      \"head_sha\": \"5e6af5489b42e494f3f83642a37ea4e1f98ad945\",\n      \"url\": \"https://api.github.com/repos/open-hax/eta-mu/actions/jobs/120322152492\",\n      \"html_url\": \"https://github.com/open-hax/eta-mu/actions/runs/39925909795/job/120322152492\",\n      \"status\": \"completed\",\n      \"conclusion\": \"success\",\n      \"created_at\": \"2026-10-23T08:37:11Z\",\n      \"started_at\": \"2026-10-23T08:37:13Z\",\n      \"completed_at\": \"2026-10-23T08:43:16Z\",\n      \"name\": \"review / review\",\n      \"steps\": [\n        {\n          \"name\": \"Set up job\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 1,\n          \"started_at\": \"2026-10-23T08:37:14Z\",\n          \"completed_at\": \"2026-10-23T08:37:17Z\"\n        },\n        {\n          \"name\": \"Verify preinstalled trusted runtime and allocate isolated paths\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 2,\n          \"started_at\": \"2026-10-23T08:37:17Z\",\n          \"completed_at\": \"2026-10-23T08:37:17Z\"\n        },\n        {\n          \"name\": \"Fetch candidate git objects without candidate execution\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 3,\n          \"started_at\": \"2026-10-23T08:37:17Z\",\n          \"completed_at\": \"2026-10-23T08:37:20Z\"\n        },\n        {\n          \"name\": \"Run approved trusted review runtime\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 4,\n          \"started_at\": \"2026-10-23T08:37:20Z\",\n          \"completed_at\": \"2026-10-23T08:43:10Z\"\n        },\n        {\n          \"name\": \"Upload review evidence including failure diagnostics\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 5,\n          \"started_at\": \"2026-10-23T08:43:10Z\",\n          \"completed_at\": \"2026-10-23T08:43:13Z\"\n        },\n        {\n          \"name\": \"Remove only this job's isolated review files\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 6,\n          \"started_at\": \"2026-10-23T08:43:13Z\",\n          \"completed_at\": \"2026-10-23T08:43:13Z\"\n        },\n        {\n          \"name\": \"Post Fetch candidate git objects without candidate execution\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 12,\n          \"started_at\": \"2026-10-23T08:43:13Z\",\n          \"completed_at\": \"2026-10-23T08:43:13Z\"\n        },\n        {\n          \"name\": \"Complete job\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 13,\n          \"started_at\": \"2026-10-23T08:43:13Z\",\n          \"completed_at\": \"2026-10-23T08:43:13Z\"\n        }\n      ],\n      \"check_run_url\": \"https://api.github.com/repos/open-hax/eta-mu/check-runs/120322152492\",\n      \"labels\": [\n        \"self-hosted\",\n        \"Linux\",\n        \"X64\",\n        \"antigravity-review\"\n      ],\n      \"runner_id\": 312,\n      \"runner_name\": \"foresight-antigravity-open-hax\",\n      \"runner_group_id\": 3,\n      \"runner_group_name\": \"antigravity-review\"\n    }\n  ]\n}"
+        },
+        "logs-download.json": {
+          "bytes": 100,
+          "sha256": "947ef8f746cf2a756f2aba6ec363cbc3a32dc2a4fafd7e190272700fb537be1f",
+          "utf8": "{\n  \"sha256\": \"277708f256fb5df18375510090eff0aab71a4311920f14542a30c6ad04106896\",\n  \"bytes\": 27335\n}"
+        },
+        "logs.zip": {
+          "bytes": 27335,
+          "sha256": "277708f256fb5df18375510090eff0aab71a4311920f14542a30c6ad04106896",
+          "retained_raw_file": "/home/err/.local/share/antigravity-review/qualification/20261023/R4/eta/logs.zip"
+        }
+      }
+    },
+    "shx": {
+      "files": {
+        "12489847091.zip": {
+          "bytes": 88703,
+          "sha256": "c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6",
+          "retained_raw_file": "/home/err/.local/share/antigravity-review/qualification/20261023/R4/shx/12489847091.zip"
+        },
+        "artifact-downloads.json": {
+          "bytes": 337,
+          "sha256": "b311e267886c2cac3e8a3a4c51cd671776fc6d45924954949bec195aae73cccd",
+          "utf8": "[\n  {\n    \"id\": 12489847091,\n    \"name\": \"antigravity-review-39926493415-1\",\n    \"api_digest\": \"sha256:c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6\",\n    \"actual_zip_sha256\": \"c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6\",\n    \"digest_matches\": true,\n    \"expired\": false,\n    \"bytes\": 88703\n  }\n]"
+        },
+        "artifacts.json": {
+          "bytes": 922,
+          "sha256": "86da1465625f67c3c891d28042793641b6b5c747692522ef02cb5b3eed0d4207",
+          "utf8": "{\n  \"total_count\": 1,\n  \"artifacts\": [\n    {\n      \"id\": 12489847091,\n      \"node_id\": \"MDg6QXJ0aWZhY3QxMjQ4OTg0NzA5MQ==\",\n      \"name\": \"antigravity-review-39926493415-1\",\n      \"size_in_bytes\": 88703,\n      \"url\": \"https://api.github.com/repos/octave-commons/shx/actions/artifacts/12489847091\",\n      \"archive_download_url\": \"https://api.github.com/repos/octave-commons/shx/actions/artifacts/12489847091/zip\",\n      \"expired\": false,\n      \"digest\": \"sha256:c8fcb9084000291d3f0f2c1a89e43ab4e2aadfe5049c710b998739a5ee6726e6\",\n      \"created_at\": \"2026-10-23T08:45:25Z\",\n      \"updated_at\": \"2026-10-23T08:45:25Z\",\n      \"expires_at\": \"2026-11-06T09:45:23Z\",\n      \"workflow_run\": {\n        \"id\": 39926493415,\n        \"repository_id\": 1329348163,\n        \"head_repository_id\": 1329348163,\n        \"head_branch\": \"codex/antigravity-review\",\n        \"head_sha\": \"1717d9a7173f676d7df959c08c33eabd71ce0b7b\"\n      }\n    }\n  ]\n}"
+        },
+        "cleanup-proof.json": {
+          "bytes": 719,
+          "sha256": "c27018d5ab906c43f868aa197880e12376520e07978f99c81d03483379e2e9c6",
+          "utf8": "{\n  \"run\": 39926493415,\n  \"review_job\": 120324119976,\n  \"runtime_preflight\": \"runtime-preflight exit=0\\n\",\n  \"runtime_exit\": \"review-runtime exit=0\\n\",\n  \"process\": {\n    \"status\": 0,\n    \"signal\": null,\n    \"timed_out\": false,\n    \"oversized\": false,\n    \"group_cleanup\": true,\n    \"error\": null\n  },\n  \"native_stderr_bytes\": 0,\n  \"snapshot_exists\": false,\n  \"job_evidence_root_exists\": false,\n  \"job_cleanup_step\": [\n    {\n      \"name\": \"Remove only this job's isolated review files\",\n      \"status\": \"completed\",\n      \"conclusion\": \"success\",\n      \"number\": 6,\n      \"started_at\": \"2026-10-23T08:45:25Z\",\n      \"completed_at\": \"2026-10-23T08:45:25Z\"\n    }\n  ],\n  \"observed_at\": \"2026-10-23T08:46:57.163494+00:00\"\n}"
+        },
+        "fresh-pr-readback.json": {
+          "bytes": 21101,
+          "sha256": "7d6561e966093bc76dd451d9f562c7997cc291402954d09aadfd3c01f7282583",
+          "utf8": "{\n  \"url\": \"https://api.github.com/repos/octave-commons/shx/pulls/4\",\n  \"id\": 4979122486,\n  \"node_id\": \"PR_kwDOTzw-Q88AAAABKMdhNg\",\n  \"html_url\": \"https://github.com/octave-commons/shx/pull/4\",\n  \"diff_url\": \"https://github.com/octave-commons/shx/pull/4.diff\",\n  \"patch_url\": \"https://github.com/octave-commons/shx/pull/4.patch\",\n  \"issue_url\": \"https://api.github.com/repos/octave-commons/shx/issues/4\",\n  \"commits_url\": \"https://api.github.com/repos/octave-commons/shx/pulls/4/commits\",\n  \"review_comments_url\": \"https://api.github.com/repos/octave-commons/shx/pulls/4/comments\",\n  \"review_comment_url\": \"https://api.github.com/repos/octave-commons/shx/pulls/comments{/number}\",\n  \"comments_url\": \"https://api.github.com/repos/octave-commons/shx/issues/4/comments\",\n  \"statuses_url\": \"https://api.github.com/repos/octave-commons/shx/statuses/1717d9a7173f676d7df959c08c33eabd71ce0b7b\",\n  \"number\": 4,\n  \"state\": \"open\",\n  \"locked\": false,\n  \"title\": \"ci: add pinned Antigravity Flash code review\",\n  \"user\": {\n    \"login\": \"riatzukiza\",\n    \"id\": 10676925,\n    \"node_id\": \"MDQ6VXNlcjEwNjc2OTI1\",\n    \"avatar_url\": \"https://avatars.githubusercontent.com/u/10676925?v=4\",\n    \"gravatar_id\": \"\",\n    \"url\": \"https://api.github.com/users/riatzukiza\",\n    \"html_url\": \"https://github.com/riatzukiza\",\n    \"followers_url\": \"https://api.github.com/users/riatzukiza/followers\",\n    \"following_url\": \"https://api.github.com/users/riatzukiza/following{/other_user}\",\n    \"gists_url\": \"https://api.github.com/users/riatzukiza/gists{/gist_id}\",\n    \"starred_url\": \"https://api.github.com/users/riatzukiza/starred{/owner}{/repo}\",\n    \"subscriptions_url\": \"https://api.github.com/users/riatzukiza/subscriptions\",\n    \"organizations_url\": \"https://api.github.com/users/riatzukiza/orgs\",\n    \"repos_url\": \"https://api.github.com/users/riatzukiza/repos\",\n    \"events_url\": \"https://api.github.com/users/riatzukiza/events{/privacy}\",\n    \"received_events_url\": \"https://api.github.com/users/riatzukiza/received_events\",\n    \"type\": \"User\",\n    \"user_view_type\": \"public\",\n    \"site_admin\": false\n  },\n  \"body\": \"Adopt the shared Antigravity advisory reviewer using exactly `gemini-3.8-flash-high`.\\n\\n- Reusable workflow: `octave-commons/muse/.github/workflows/antigravity-code-review.yml@93ea554332bcdafffc26688836b2e6a655575c94`.\\n- Trusted eta-mu runtime: `9955ba838ff187beced4beb26f4c271941a956ec`.\\n- Scope: `.github/workflows/antigravity-review.yml`, `kanban/antigravity-review-rollout.md`, `receipts.edn`, and `.\\u03b7\\u03bc/session-mycology/ledger.md`. The card remains incoming; existing receipt and reflection bytes are preserved.\\n\\nThe caller retains read-only permissions, exact PR base/head binding and no forwarded secrets. AGY and every model descendant receive no GitHub credentials of any scope. Retarget edits trigger review; unrelated edits use isolated concurrency groups. Existing product checks, package-manager policy and branch protections remain intact.\\n\\nChild validation: actionlint, exact caller/runtime comparison, diff hygiene, unchanged card frontmatter and append-only provenance checks pass. Child product suites and fresh exact-head review remain separate obligations.\\n\\nShared-source validation: 38 Node runtime integration tests, 6 pure-law tests / 71 assertions, and 12 reusable-workflow Node tests pass. Separately, Foresight rollout laws pass 12 tests / 166 assertions, with all 23 mapped callers checked. Real R4 systemd cases returned clean in 28.3808s and one line-4 defect in 31.5417s, with strict initialization, zero law errors/stderr and cleanup; proof is retained in eta-mu's `service-qualification-R4.json`.\\n\\nBoth shared listeners are online and all 23 readiness readbacks passed. Hosted proof for this new member head remains pending; draft PRs intentionally skip. Negative runner-group enforcement remains UNKNOWN. Imported CLI evidence grants zero native approval or merge credit; auto-merge stays off.\\n\\nDepends on [eta-mu#364](https://github.com/open-hax/eta-mu/pull/364); coordinated by [foresight#145](https://github.com/open-hax/foresight/pull/145).\\n\\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\\n<!-- coderabbit-ai-generated:v1 -->\\n\\n## Summary by CodeRabbit\\n\\n* **New Features**\\n  * Pull requests can receive an automated evidence review when opened, updated, reopened, or marked ready for review. Draft pull requests are skipped, and edits trigger a review only when the target branch changes.\\n* **Documentation**\\n  * Added rollout guidance with acceptance criteria and local verification steps. Hosted qualification and adoption remain pending.\\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->\\n\",\n  \"labels\": [],\n  \"milestone\": null,\n  \"active_lock_reason\": null,\n  \"created_at\": \"2026-10-23T07:02:01Z\",\n  \"updated_at\": \"2026-10-23T08:48:04Z\",\n  \"closed_at\": null,\n  \"merged_at\": null,\n  \"merge_commit_sha\": \"0cc398772a9c49575135aada7ef14e634d082b87\",\n  \"assignee\": null,\n  \"assignees\": [],\n  \"requested_reviewers\": [],\n  \"requested_teams\": [],\n  \"head\": {\n    \"label\": \"octave-commons:codex/antigravity-review\",\n    \"ref\": \"codex/antigravity-review\",\n    \"repo\": {\n      \"id\": 1329348163,\n      \"node_id\": \"R_kgDOTzw-Qw\",\n      \"name\": \"shx\",\n      \"full_name\": \"octave-commons/shx\",\n      \"owner\": {\n        \"login\": \"octave-commons\",\n        \"id\": 242438226,\n        \"node_id\": \"O_kgDODnNQUg\",\n        \"avatar_url\": \"https://avatars.githubusercontent.com/u/242438226?v=4\",\n        \"gravatar_id\": \"\",\n        \"url\": \"https://api.github.com/users/octave-commons\",\n        \"html_url\": \"https://github.com/octave-commons\",\n        \"followers_url\": \"https://api.github.com/users/octave-commons/followers\",\n        \"following_url\": \"https://api.github.com/users/octave-commons/following{/other_user}\",\n        \"gists_url\": \"https://api.github.com/users/octave-commons/gists{/gist_id}\",\n        \"starred_url\": \"https://api.github.com/users/octave-commons/starred{/owner}{/repo}\",\n        \"subscriptions_url\": \"https://api.github.com/users/octave-commons/subscriptions\",\n        \"organizations_url\": \"https://api.github.com/users/octave-commons/orgs\",\n        \"repos_url\": \"https://api.github.com/users/octave-commons/repos\",\n        \"events_url\": \"https://api.github.com/users/octave-commons/events{/privacy}\",\n        \"received_events_url\": \"https://api.github.com/users/octave-commons/received_events\",\n        \"type\": \"Organization\",\n        \"user_view_type\": \"public\",\n        \"site_admin\": false\n      },\n      \"private\": false,\n      \"fork\": false,\n      \"archived\": false,\n      \"disabled\": false,\n      \"description\": null,\n      \"homepage\": null,\n      \"language\": \"Clojure\",\n      \"visibility\": \"public\",\n      \"is_template\": false,\n      \"topics\": [],\n      \"forks_count\": 1,\n      \"forks\": 1,\n      \"stargazers_count\": 0,\n      \"watchers_count\": 0,\n      \"watchers\": 0,\n      \"open_issues_count\": 1,\n      \"open_issues\": 1,\n      \"size\": 436,\n      \"default_branch\": \"main\",\n      \"has_issues\": true,\n      \"has_projects\": true,\n      \"has_wiki\": true,\n      \"has_pages\": false,\n      \"has_downloads\": false,\n      \"has_discussions\": false,\n      \"has_pull_requests\": true,\n      \"pushed_at\": \"2026-10-23T08:41:52Z\",\n      \"created_at\": \"2026-08-10T02:23:13Z\",\n      \"updated_at\": \"2026-10-04T19:48:13Z\",\n      \"allow_forking\": true,\n      \"web_commit_signoff_required\": false,\n      \"pull_request_creation_policy\": \"all\",\n      \"license\": {\n        \"key\": \"gpl-3.0\",\n        \"name\": \"GNU General Public License v3.0\",\n        \"url\": \"https://api.github.com/licenses/gpl-3.0\",\n        \"spdx_id\": \"GPL-3.0\",\n        \"node_id\": \"MDc6TGljZW5zZTk=\"\n      },\n      \"url\": \"https://api.github.com/repos/octave-commons/shx\",\n      \"html_url\": \"https://github.com/octave-commons/shx\",\n      \"archive_url\": \"https://api.github.com/repos/octave-commons/shx/{archive_format}{/ref}\",\n      \"assignees_url\": \"https://api.github.com/repos/octave-commons/shx/assignees{/user}\",\n      \"blobs_url\": \"https://api.github.com/repos/octave-commons/shx/git/blobs{/sha}\",\n      \"branches_url\": \"https://api.github.com/repos/octave-commons/shx/branches{/branch}\",\n      \"collaborators_url\": \"https://api.github.com/repos/octave-commons/shx/collaborators{/collaborator}\",\n      \"comments_url\": \"https://api.github.com/repos/octave-commons/shx/comments{/number}\",\n      \"commits_url\": \"https://api.github.com/repos/octave-commons/shx/commits{/sha}\",\n      \"compare_url\": \"https://api.github.com/repos/octave-commons/shx/compare/{base}...{head}\",\n      \"contents_url\": \"https://api.github.com/repos/octave-commons/shx/contents/{+path}\",\n      \"contributors_url\": \"https://api.github.com/repos/octave-commons/shx/contributors\",\n      \"deployments_url\": \"https://api.github.com/repos/octave-commons/shx/deployments\",\n      \"downloads_url\": \"https://api.github.com/repos/octave-commons/shx/downloads\",\n      \"events_url\": \"https://api.github.com/repos/octave-commons/shx/events\",\n      \"forks_url\": \"https://api.github.com/repos/octave-commons/shx/forks\",\n      \"git_commits_url\": \"https://api.github.com/repos/octave-commons/shx/git/commits{/sha}\",\n      \"git_refs_url\": \"https://api.github.com/repos/octave-commons/shx/git/refs{/sha}\",\n      \"git_tags_url\": \"https://api.github.com/repos/octave-commons/shx/git/tags{/sha}\",\n      \"git_url\": \"git://github.com/octave-commons/shx.git\",\n      \"issue_comment_url\": \"https://api.github.com/repos/octave-commons/shx/issues/comments{/number}\",\n      \"issue_events_url\": \"https://api.github.com/repos/octave-commons/shx/issues/events{/number}\",\n      \"issues_url\": \"https://api.github.com/repos/octave-commons/shx/issues{/number}\",\n      \"keys_url\": \"https://api.github.com/repos/octave-commons/shx/keys{/key_id}\",\n      \"labels_url\": \"https://api.github.com/repos/octave-commons/shx/labels{/name}\",\n      \"languages_url\": \"https://api.github.com/repos/octave-commons/shx/languages\",\n      \"merges_url\": \"https://api.github.com/repos/octave-commons/shx/merges\",\n      \"milestones_url\": \"https://api.github.com/repos/octave-commons/shx/milestones{/number}\",\n      \"notifications_url\": \"https://api.github.com/repos/octave-commons/shx/notifications{?since,all,participating}\",\n      \"pulls_url\": \"https://api.github.com/repos/octave-commons/shx/pulls{/number}\",\n      \"releases_url\": \"https://api.github.com/repos/octave-commons/shx/releases{/id}\",\n      \"ssh_url\": \"git@github.com:octave-commons/shx.git\",\n      \"stargazers_url\": \"https://api.github.com/repos/octave-commons/shx/stargazers\",\n      \"statuses_url\": \"https://api.github.com/repos/octave-commons/shx/statuses/{sha}\",\n      \"subscribers_url\": \"https://api.github.com/repos/octave-commons/shx/subscribers\",\n      \"subscription_url\": \"https://api.github.com/repos/octave-commons/shx/subscription\",\n      \"tags_url\": \"https://api.github.com/repos/octave-commons/shx/tags\",\n      \"teams_url\": \"https://api.github.com/repos/octave-commons/shx/teams\",\n      \"trees_url\": \"https://api.github.com/repos/octave-commons/shx/git/trees{/sha}\",\n      \"clone_url\": \"https://github.com/octave-commons/shx.git\",\n      \"mirror_url\": null,\n      \"hooks_url\": \"https://api.github.com/repos/octave-commons/shx/hooks\",\n      \"svn_url\": \"https://github.com/octave-commons/shx\"\n    },\n    \"sha\": \"1717d9a7173f676d7df959c08c33eabd71ce0b7b\",\n    \"user\": {\n      \"login\": \"octave-commons\",\n      \"id\": 242438226,\n      \"node_id\": \"O_kgDODnNQUg\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/242438226?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/octave-commons\",\n      \"html_url\": \"https://github.com/octave-commons\",\n      \"followers_url\": \"https://api.github.com/users/octave-commons/followers\",\n      \"following_url\": \"https://api.github.com/users/octave-commons/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/octave-commons/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/octave-commons/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/octave-commons/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/octave-commons/orgs\",\n      \"repos_url\": \"https://api.github.com/users/octave-commons/repos\",\n      \"events_url\": \"https://api.github.com/users/octave-commons/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/octave-commons/received_events\",\n      \"type\": \"Organization\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    }\n  },\n  \"base\": {\n    \"label\": \"octave-commons:main\",\n    \"ref\": \"main\",\n    \"repo\": {\n      \"id\": 1329348163,\n      \"node_id\": \"R_kgDOTzw-Qw\",\n      \"name\": \"shx\",\n      \"full_name\": \"octave-commons/shx\",\n      \"owner\": {\n        \"login\": \"octave-commons\",\n        \"id\": 242438226,\n        \"node_id\": \"O_kgDODnNQUg\",\n        \"avatar_url\": \"https://avatars.githubusercontent.com/u/242438226?v=4\",\n        \"gravatar_id\": \"\",\n        \"url\": \"https://api.github.com/users/octave-commons\",\n        \"html_url\": \"https://github.com/octave-commons\",\n        \"followers_url\": \"https://api.github.com/users/octave-commons/followers\",\n        \"following_url\": \"https://api.github.com/users/octave-commons/following{/other_user}\",\n        \"gists_url\": \"https://api.github.com/users/octave-commons/gists{/gist_id}\",\n        \"starred_url\": \"https://api.github.com/users/octave-commons/starred{/owner}{/repo}\",\n        \"subscriptions_url\": \"https://api.github.com/users/octave-commons/subscriptions\",\n        \"organizations_url\": \"https://api.github.com/users/octave-commons/orgs\",\n        \"repos_url\": \"https://api.github.com/users/octave-commons/repos\",\n        \"events_url\": \"https://api.github.com/users/octave-commons/events{/privacy}\",\n        \"received_events_url\": \"https://api.github.com/users/octave-commons/received_events\",\n        \"type\": \"Organization\",\n        \"user_view_type\": \"public\",\n        \"site_admin\": false\n      },\n      \"private\": false,\n      \"fork\": false,\n      \"archived\": false,\n      \"disabled\": false,\n      \"description\": null,\n      \"homepage\": null,\n      \"language\": \"Clojure\",\n      \"visibility\": \"public\",\n      \"is_template\": false,\n      \"topics\": [],\n      \"forks_count\": 1,\n      \"forks\": 1,\n      \"stargazers_count\": 0,\n      \"watchers_count\": 0,\n      \"watchers\": 0,\n      \"open_issues_count\": 1,\n      \"open_issues\": 1,\n      \"size\": 436,\n      \"default_branch\": \"main\",\n      \"has_issues\": true,\n      \"has_projects\": true,\n      \"has_wiki\": true,\n      \"has_pages\": false,\n      \"has_downloads\": false,\n      \"has_discussions\": false,\n      \"has_pull_requests\": true,\n      \"pushed_at\": \"2026-10-23T08:41:52Z\",\n      \"created_at\": \"2026-08-10T02:23:13Z\",\n      \"updated_at\": \"2026-10-04T19:48:13Z\",\n      \"allow_forking\": true,\n      \"web_commit_signoff_required\": false,\n      \"pull_request_creation_policy\": \"all\",\n      \"license\": {\n        \"key\": \"gpl-3.0\",\n        \"name\": \"GNU General Public License v3.0\",\n        \"url\": \"https://api.github.com/licenses/gpl-3.0\",\n        \"spdx_id\": \"GPL-3.0\",\n        \"node_id\": \"MDc6TGljZW5zZTk=\"\n      },\n      \"url\": \"https://api.github.com/repos/octave-commons/shx\",\n      \"html_url\": \"https://github.com/octave-commons/shx\",\n      \"archive_url\": \"https://api.github.com/repos/octave-commons/shx/{archive_format}{/ref}\",\n      \"assignees_url\": \"https://api.github.com/repos/octave-commons/shx/assignees{/user}\",\n      \"blobs_url\": \"https://api.github.com/repos/octave-commons/shx/git/blobs{/sha}\",\n      \"branches_url\": \"https://api.github.com/repos/octave-commons/shx/branches{/branch}\",\n      \"collaborators_url\": \"https://api.github.com/repos/octave-commons/shx/collaborators{/collaborator}\",\n      \"comments_url\": \"https://api.github.com/repos/octave-commons/shx/comments{/number}\",\n      \"commits_url\": \"https://api.github.com/repos/octave-commons/shx/commits{/sha}\",\n      \"compare_url\": \"https://api.github.com/repos/octave-commons/shx/compare/{base}...{head}\",\n      \"contents_url\": \"https://api.github.com/repos/octave-commons/shx/contents/{+path}\",\n      \"contributors_url\": \"https://api.github.com/repos/octave-commons/shx/contributors\",\n      \"deployments_url\": \"https://api.github.com/repos/octave-commons/shx/deployments\",\n      \"downloads_url\": \"https://api.github.com/repos/octave-commons/shx/downloads\",\n      \"events_url\": \"https://api.github.com/repos/octave-commons/shx/events\",\n      \"forks_url\": \"https://api.github.com/repos/octave-commons/shx/forks\",\n      \"git_commits_url\": \"https://api.github.com/repos/octave-commons/shx/git/commits{/sha}\",\n      \"git_refs_url\": \"https://api.github.com/repos/octave-commons/shx/git/refs{/sha}\",\n      \"git_tags_url\": \"https://api.github.com/repos/octave-commons/shx/git/tags{/sha}\",\n      \"git_url\": \"git://github.com/octave-commons/shx.git\",\n      \"issue_comment_url\": \"https://api.github.com/repos/octave-commons/shx/issues/comments{/number}\",\n      \"issue_events_url\": \"https://api.github.com/repos/octave-commons/shx/issues/events{/number}\",\n      \"issues_url\": \"https://api.github.com/repos/octave-commons/shx/issues{/number}\",\n      \"keys_url\": \"https://api.github.com/repos/octave-commons/shx/keys{/key_id}\",\n      \"labels_url\": \"https://api.github.com/repos/octave-commons/shx/labels{/name}\",\n      \"languages_url\": \"https://api.github.com/repos/octave-commons/shx/languages\",\n      \"merges_url\": \"https://api.github.com/repos/octave-commons/shx/merges\",\n      \"milestones_url\": \"https://api.github.com/repos/octave-commons/shx/milestones{/number}\",\n      \"notifications_url\": \"https://api.github.com/repos/octave-commons/shx/notifications{?since,all,participating}\",\n      \"pulls_url\": \"https://api.github.com/repos/octave-commons/shx/pulls{/number}\",\n      \"releases_url\": \"https://api.github.com/repos/octave-commons/shx/releases{/id}\",\n      \"ssh_url\": \"git@github.com:octave-commons/shx.git\",\n      \"stargazers_url\": \"https://api.github.com/repos/octave-commons/shx/stargazers\",\n      \"statuses_url\": \"https://api.github.com/repos/octave-commons/shx/statuses/{sha}\",\n      \"subscribers_url\": \"https://api.github.com/repos/octave-commons/shx/subscribers\",\n      \"subscription_url\": \"https://api.github.com/repos/octave-commons/shx/subscription\",\n      \"tags_url\": \"https://api.github.com/repos/octave-commons/shx/tags\",\n      \"teams_url\": \"https://api.github.com/repos/octave-commons/shx/teams\",\n      \"trees_url\": \"https://api.github.com/repos/octave-commons/shx/git/trees{/sha}\",\n      \"clone_url\": \"https://github.com/octave-commons/shx.git\",\n      \"mirror_url\": null,\n      \"hooks_url\": \"https://api.github.com/repos/octave-commons/shx/hooks\",\n      \"svn_url\": \"https://github.com/octave-commons/shx\"\n    },\n    \"sha\": \"f4ee133dcf1650c7eafb623ef084f62417252477\",\n    \"user\": {\n      \"login\": \"octave-commons\",\n      \"id\": 242438226,\n      \"node_id\": \"O_kgDODnNQUg\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/242438226?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/octave-commons\",\n      \"html_url\": \"https://github.com/octave-commons\",\n      \"followers_url\": \"https://api.github.com/users/octave-commons/followers\",\n      \"following_url\": \"https://api.github.com/users/octave-commons/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/octave-commons/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/octave-commons/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/octave-commons/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/octave-commons/orgs\",\n      \"repos_url\": \"https://api.github.com/users/octave-commons/repos\",\n      \"events_url\": \"https://api.github.com/users/octave-commons/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/octave-commons/received_events\",\n      \"type\": \"Organization\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    }\n  },\n  \"_links\": {\n    \"comments\": {\n      \"href\": \"https://api.github.com/repos/octave-commons/shx/issues/4/comments\"\n    },\n    \"commits\": {\n      \"href\": \"https://api.github.com/repos/octave-commons/shx/pulls/4/commits\"\n    },\n    \"statuses\": {\n      \"href\": \"https://api.github.com/repos/octave-commons/shx/statuses/1717d9a7173f676d7df959c08c33eabd71ce0b7b\"\n    },\n    \"html\": {\n      \"href\": \"https://github.com/octave-commons/shx/pull/4\"\n    },\n    \"issue\": {\n      \"href\": \"https://api.github.com/repos/octave-commons/shx/issues/4\"\n    },\n    \"review_comments\": {\n      \"href\": \"https://api.github.com/repos/octave-commons/shx/pulls/4/comments\"\n    },\n    \"review_comment\": {\n      \"href\": \"https://api.github.com/repos/octave-commons/shx/pulls/comments{/number}\"\n    },\n    \"self\": {\n      \"href\": \"https://api.github.com/repos/octave-commons/shx/pulls/4\"\n    }\n  },\n  \"author_association\": \"MEMBER\",\n  \"auto_merge\": null,\n  \"draft\": false,\n  \"merged\": false,\n  \"mergeable\": true,\n  \"rebaseable\": true,\n  \"mergeable_state\": \"blocked\",\n  \"merged_by\": null,\n  \"comments\": 3,\n  \"review_comments\": 19,\n  \"maintainer_can_modify\": false,\n  \"commits\": 5,\n  \"additions\": 168,\n  \"deletions\": 0,\n  \"changed_files\": 4\n}"
+        },
+        "independent-validation.json": {
+          "bytes": 607,
+          "sha256": "022e7eac42b3cd8c1777c8790e18277d2d6bee076c496b539a05e197f21e1180",
+          "utf8": "{\n  \"findings\": [],\n  \"num_turns\": 1,\n  \"errors\": [],\n  \"base_tip\": \"f4ee133dcf1650c7eafb623ef084f62417252477\",\n  \"native_duration_seconds\": 181.372344673,\n  \"head\": \"1717d9a7173f676d7df959c08c33eabd71ce0b7b\",\n  \"status\": \"clean\",\n  \"native_permission_mode\": \"strict\",\n  \"event_count\": 5,\n  \"base\": \"f4ee133dcf1650c7eafb623ef084f62417252477\",\n  \"diff_digest\": \"9303b8f1b87c0b78d6b9a18bcfb3aa29629a86d4dc9e03b5a1d0b9c9ff1c7c8d\",\n  \"reviewed_paths\": [\n    \".github/workflows/antigravity-review.yml\",\n    \".ημ/session-mycology/ledger.md\",\n    \"kanban/antigravity-review-rollout.md\",\n    \"receipts.edn\"\n  ]\n}\n"
+        },
+        "independent-validation.stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "utf8": ""
+        },
+        "jobs.json": {
+          "bytes": 5336,
+          "sha256": "fc015a78633260d5c55acab663990c9df2a22af1d983f2341aad544507d0dc6a",
+          "utf8": "{\n  \"total_count\": 2,\n  \"jobs\": [\n    {\n      \"id\": 120324061606,\n      \"run_id\": 39926493415,\n      \"workflow_name\": \"Antigravity evidence review\",\n      \"head_branch\": \"codex/antigravity-review\",\n      \"run_url\": \"https://api.github.com/repos/octave-commons/shx/actions/runs/39926493415\",\n      \"run_attempt\": 1,\n      \"node_id\": \"CR_kwDOTzw-Q88AAAAcA995pg\",\n      \"head_sha\": \"1717d9a7173f676d7df959c08c33eabd71ce0b7b\",\n      \"url\": \"https://api.github.com/repos/octave-commons/shx/actions/jobs/120324061606\",\n      \"html_url\": \"https://github.com/octave-commons/shx/actions/runs/39926493415/job/120324061606\",\n      \"status\": \"completed\",\n      \"conclusion\": \"success\",\n      \"created_at\": \"2026-10-23T08:41:58Z\",\n      \"started_at\": \"2026-10-23T08:42:01Z\",\n      \"completed_at\": \"2026-10-23T08:42:06Z\",\n      \"name\": \"review / preflight\",\n      \"steps\": [\n        {\n          \"name\": \"Set up job\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 1,\n          \"started_at\": \"2026-10-23T08:42:02Z\",\n          \"completed_at\": \"2026-10-23T08:42:03Z\"\n        },\n        {\n          \"name\": \"Validate immutable same-repository review request\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 2,\n          \"started_at\": \"2026-10-23T08:42:03Z\",\n          \"completed_at\": \"2026-10-23T08:42:04Z\"\n        },\n        {\n          \"name\": \"Complete job\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 3,\n          \"started_at\": \"2026-10-23T08:42:04Z\",\n          \"completed_at\": \"2026-10-23T08:42:04Z\"\n        }\n      ],\n      \"check_run_url\": \"https://api.github.com/repos/octave-commons/shx/check-runs/120324061606\",\n      \"labels\": [\n        \"ubuntu-24.04\"\n      ],\n      \"runner_id\": 1000026722,\n      \"runner_name\": \"GitHub Actions 1000026722\",\n      \"runner_group_id\": 0,\n      \"runner_group_name\": \"GitHub Actions\"\n    },\n    {\n      \"id\": 120324119976,\n      \"run_id\": 39926493415,\n      \"workflow_name\": \"Antigravity evidence review\",\n      \"head_branch\": \"codex/antigravity-review\",\n      \"run_url\": \"https://api.github.com/repos/octave-commons/shx/actions/runs/39926493415\",\n      \"run_attempt\": 1,\n      \"node_id\": \"CR_kwDOTzw-Q88AAAAcA-BdqA\",\n      \"head_sha\": \"1717d9a7173f676d7df959c08c33eabd71ce0b7b\",\n      \"url\": \"https://api.github.com/repos/octave-commons/shx/actions/jobs/120324119976\",\n      \"html_url\": \"https://github.com/octave-commons/shx/actions/runs/39926493415/job/120324119976\",\n      \"status\": \"completed\",\n      \"conclusion\": \"success\",\n      \"created_at\": \"2026-10-23T08:42:07Z\",\n      \"started_at\": \"2026-10-23T08:42:08Z\",\n      \"completed_at\": \"2026-10-23T08:45:28Z\",\n      \"name\": \"review / review\",\n      \"steps\": [\n        {\n          \"name\": \"Set up job\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 1,\n          \"started_at\": \"2026-10-23T08:42:09Z\",\n          \"completed_at\": \"2026-10-23T08:42:12Z\"\n        },\n        {\n          \"name\": \"Verify preinstalled trusted runtime and allocate isolated paths\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 2,\n          \"started_at\": \"2026-10-23T08:42:12Z\",\n          \"completed_at\": \"2026-10-23T08:42:13Z\"\n        },\n        {\n          \"name\": \"Fetch candidate git objects without candidate execution\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 3,\n          \"started_at\": \"2026-10-23T08:42:13Z\",\n          \"completed_at\": \"2026-10-23T08:42:14Z\"\n        },\n        {\n          \"name\": \"Run approved trusted review runtime\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 4,\n          \"started_at\": \"2026-10-23T08:42:14Z\",\n          \"completed_at\": \"2026-10-23T08:45:23Z\"\n        },\n        {\n          \"name\": \"Upload review evidence including failure diagnostics\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 5,\n          \"started_at\": \"2026-10-23T08:45:23Z\",\n          \"completed_at\": \"2026-10-23T08:45:25Z\"\n        },\n        {\n          \"name\": \"Remove only this job's isolated review files\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 6,\n          \"started_at\": \"2026-10-23T08:45:25Z\",\n          \"completed_at\": \"2026-10-23T08:45:25Z\"\n        },\n        {\n          \"name\": \"Post Fetch candidate git objects without candidate execution\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 12,\n          \"started_at\": \"2026-10-23T08:45:25Z\",\n          \"completed_at\": \"2026-10-23T08:45:25Z\"\n        },\n        {\n          \"name\": \"Complete job\",\n          \"status\": \"completed\",\n          \"conclusion\": \"success\",\n          \"number\": 13,\n          \"started_at\": \"2026-10-23T08:45:25Z\",\n          \"completed_at\": \"2026-10-23T08:45:25Z\"\n        }\n      ],\n      \"check_run_url\": \"https://api.github.com/repos/octave-commons/shx/check-runs/120324119976\",\n      \"labels\": [\n        \"self-hosted\",\n        \"Linux\",\n        \"X64\",\n        \"antigravity-review\"\n      ],\n      \"runner_id\": 1869,\n      \"runner_name\": \"foresight-antigravity-octave-commons\",\n      \"runner_group_id\": 3,\n      \"runner_group_name\": \"antigravity-review\"\n    }\n  ]\n}"
+        },
+        "logs-download.json": {
+          "bytes": 100,
+          "sha256": "0d417e34d0e0665d1a526383857c64ff6f45e297a48d107005e52e5196fac5de",
+          "utf8": "{\n  \"sha256\": \"6e6897604094240a53868221a565acbbad74a1dd50429cff4924a452cb25910a\",\n  \"bytes\": 21999\n}"
+        },
+        "logs.zip": {
+          "bytes": 21999,
+          "sha256": "6e6897604094240a53868221a565acbbad74a1dd50429cff4924a452cb25910a",
+          "retained_raw_file": "/home/err/.local/share/antigravity-review/qualification/20261023/R4/shx/logs.zip"
+        }
+      }
+    }
+  },
+  "storage_decision": "Raw ZIP and complete extracted input/native/log bytes are retained verbatim in the SHA256-verified durable cache rather than repeated as base64 in Git; this keeps the integration diff inside complete-input admission limits."
+}

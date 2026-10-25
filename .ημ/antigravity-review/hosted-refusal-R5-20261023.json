@@ -1,0 +1,106 @@
+{
+  "schema": "open-hax.antigravity-hosted-failure-descriptor/v1",
+  "created_at": "2026-10-23T09:56:47.430761+00:00",
+  "repository": "octave-commons/shx",
+  "pull_request": "https://github.com/octave-commons/shx/pull/4",
+  "run_url": "https://github.com/octave-commons/shx/actions/runs/39933620116",
+  "conclusion": "failure",
+  "admission": "refused-native-effects",
+  "no_admitted_review": true,
+  "native_approval": false,
+  "enforcement_qualification": "UNKNOWN",
+  "summary": {
+    "schema": "open-hax.antigravity-hosted-failure/v1",
+    "observed_at": "2026-10-23T09:52:53.617833+00:00",
+    "runtime_revision": "8b6fe29ad0df2cb053050ea352082aef1f0a0fdb",
+    "workflow_revision": "93ea554332bcdafffc26688836b2e6a655575c94",
+    "head": "609aa87a3ff2f8cece455ea2e435a008dca97669",
+    "base_tip": "f4ee133dcf1650c7eafb623ef084f62417252477",
+    "canonical_base": "f4ee133dcf1650c7eafb623ef084f62417252477",
+    "run_id": 39933620116,
+    "review_job_id": 120347727240,
+    "conclusion": "failure",
+    "runtime_refusal": "native-admission",
+    "current_R5_law_errors": [
+      "native-effects"
+    ],
+    "artifact": {
+      "id": 12493341260,
+      "name": "antigravity-review-39933620116-1",
+      "api_digest": "sha256:d772dfcc7553169581f76ace52069c0e5ce164d5f40792c7910f2162ec236620",
+      "actual_zip_sha256": "d772dfcc7553169581f76ace52069c0e5ce164d5f40792c7910f2162ec236620",
+      "digest_matches": true,
+      "expired": false,
+      "bytes": 88520
+    },
+    "native_status": "SUCCESS",
+    "native_duration_seconds": 434.243635839,
+    "native_turns": 1,
+    "event_count": 6,
+    "native_stderr_bytes": 0,
+    "unexpected_step": {
+      "step_type": "tool",
+      "state": "ACTIVE",
+      "step_index": 2,
+      "tool_name": "finish",
+      "tool_info_name": "finish",
+      "tool_info_keys": [
+        "name",
+        "parameters"
+      ],
+      "parameters_are_clipped_preview": true
+    },
+    "followed_by_same_index_finish_DONE": true,
+    "other_effectful_tool_or_subagent_event_observed": false,
+    "complete_terminal_structure_and_semantic_law_pass_separately": true,
+    "full_input_canonical_base_and_blob_validation_errors_except_transport": [],
+    "file_count": 4,
+    "input_bytes": 314084,
+    "diff_digest": "8b7d0158d0b2a53f44231e7739740980e9501348ec43ba306540001f3f034590",
+    "process_group_cleanup": true,
+    "job_cleanup_success": true,
+    "snapshot_and_job_root_removed": true,
+    "review_artifact_written": false,
+    "retry_attempted": false,
+    "source_or_host_changes": false,
+    "native_approval": false,
+    "negative_enforcement_canary": "UNKNOWN",
+    "source_prepare_only_summary": "/tmp/antigravity-r5-source-preflight-pc5ivyyj/summary.json",
+    "interpretation": "Current closed stream grammar rejected an additional native progress shape. The observed tool was the already-configured pure finish formatter, not a command/read/write/MCP/subagent operation. The current refusal remains valid; no law was changed or bypassed."
+  },
+  "triage": {
+    "source_document": "https://docs.github.com/en/actions/reference/workflows-and-actions/expressions",
+    "assessment": "The native finding repeats the false premise that empty string coerces to NaN while null coerces to 0. GitHub documents both as 0 under loose equality, so that numeric-coercion premise does not support the claimed cancellation. This bounded content assessment cannot override the native transport refusal.",
+    "full_unchanged_finding_path": "raw/shx/advisory-triage.json",
+    "same_head_observation": {
+      "path": "shx/same-head-scheduling-observations.json",
+      "same_head": "609aa87a3ff2f8cece455ea2e435a008dca97669",
+      "metadata_edit_run": 39933629421,
+      "metadata_edit_conclusion": "skipped",
+      "decisive_run": 39933620116,
+      "decisive_conclusion": "failure",
+      "decisive_run_was_cancelled": false,
+      "limitations": "Observed scheduling supports this title/body-edit behavior only; no access-control enforcement qualification. The local JavaScript fixture is not a general GitHub Actions expression interpreter."
+    }
+  },
+  "evidence": {
+    "durable_cache": "/home/err/.local/share/antigravity-review/qualification/20261023/R5-hosted-shx-failure",
+    "original_full_proof": "/tmp/antigravity-r5-shx-hosted-monitor",
+    "raw_subdirectory": "raw",
+    "raw_file_count": 53,
+    "raw_total_bytes": 644099,
+    "raw_manifest": "raw/manifest.json",
+    "raw_manifest_sha256": "e92d284ff995415349f5057945089c940e9d1ec57a63b548cba7e2605866093c",
+    "lossless_archive": "lossless-archive.json",
+    "lossless_archive_sha256": "403e43836b31d136f4ec261305e0f52098f5e54717c7de12ca4494e5ece7c01d",
+    "lossless_archive_bytes": 721641,
+    "reconstruction_verification": "archive-verification.json"
+  },
+  "restrictions": [
+    "No R5 retry or further model call was made.",
+    "No source, host settings, GitHub, listener, readiness or receipt mutation.",
+    "The clipped tool_info.parameters preview is not review authority.",
+    "The genuine native terminal semantic shape was inspected separately; the full invocation remains refused by the unchanged R5 law.",
+    "No review.json or native-envelope.json was synthesized in the failed artifact."
+  ]
+}

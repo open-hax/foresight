@@ -1,0 +1,64 @@
+{
+  "observed_at": "2026-10-25T07:14:48.210Z",
+  "status": "local-green-not-native-review-or-activation",
+  "red_commit": "945187b28ec66d30b788ec72551267db7ea2db70",
+  "sources": {
+    "correction_law": "https://github.com/riatzukiza/foresight/pull/28",
+    "segmented_reader": "https://github.com/riatzukiza/foresight/pull/35"
+  },
+  "tests": {
+    "laws": {
+      "tests": 58,
+      "assertions": 448,
+      "failures": 0,
+      "errors": 0
+    },
+    "adapter": {
+      "tests": 115,
+      "assertions": 721,
+      "failures": 0,
+      "errors": 0
+    },
+    "workspace": {
+      "tests": 24,
+      "assertions": 120,
+      "failures": 0,
+      "errors": 0
+    },
+    "project": {
+      "sources": 25,
+      "submodules": 23,
+      "invariants": 39,
+      "pass": true
+    },
+    "clj_kondo": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "red_adapter": {
+    "tests": 111,
+    "assertions": 693,
+    "failures": 25,
+    "errors": 2,
+    "reason": "Missing shared admission API and original strict envelope refusal; no parse error in completed RED run"
+  },
+  "shared_consumers": [
+    "verify-receipts!",
+    "promotion-ready-at!",
+    "validate-working-receipt-ledger!"
+  ],
+  "rheos": {
+    "status": "testing",
+    "write_id": "1792912370878-0.9qc533uwk1ezmm5qcnv"
+  },
+  "legacy_mutated": false,
+  "committed_segments_mutated": false,
+  "full_clio_cutover": false,
+  "merge_authorized": false,
+  "native_approval_claimed": false,
+  "limits": [
+    "Await exact-head code review and native deterministic receipt-history qualification",
+    "Actual consumer application is separate; no source-only pass substitutes for its integration gate"
+  ]
+}
