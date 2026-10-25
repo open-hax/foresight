@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-10-25T06:05:31.923993+00:00",
+  "observed_at": "2026-10-25T06:15:48.272Z",
   "runtime_and_workflow_pins": {
     "workflow_revision": "2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2",
     "octave_revision": "93ea554332bcdafffc26688836b2e6a655575c94",
@@ -379,7 +379,7 @@
   "activation": "R6 installed, service-qualified and both current hosted routes independently validated; all22 member proposals published. Root final publication awaits reconciliation with the owning ledger contract; the in-place repair proposal is withdrawn. Default adoption is unmerged, native review convergence unqualified, no approval or access-control enforcement credit invented.",
   "merge_authority": "not granted",
   "implementation_head_sha": "4072220789297ca94eec97506c13cd80772c7d55",
-  "integration_head_sha": "c61c563d25c15ba13751461b0235235cb6437f16",
+  "integration_head_sha": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
   "caller_format": 3,
   "negative_canaries": {
     "status": "UNKNOWN",
@@ -394,7 +394,7 @@
   "implementation_head_source": "FinalR6 sourcebranch remote+nativePR exact readback; no auto merge",
   "publication": {
     "eta_source_head": "4072220789297ca94eec97506c13cd80772c7d55",
-    "root_integration": "R6 integration publication prepared in the commit containing this snapshot. Receipt admission remains unqualified; publication supplies no merge credit.",
+    "root_integration": "R6 published at d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d; local adoption of #147 awaits correction admission before further publication.",
     "default_branch_adoption": "UNMERGED",
     "R5": "Historical R5: all 21 other member callers were published; source and proof were published on auxiliary ref 904ad0ac while the source PR remained at 5e6af548 during its then-live MiMo review. The later terminal failure is retained separately.",
     "member_callers_pushed_R5": 21,
@@ -403,7 +403,7 @@
     "eta_source_and_proofs_R5": "Historical R5 source and proof are retained on auxiliary ref 904ad0ac. The source PR has since advanced to the current R6 head.",
     "member_callers_pushed_R6": 21,
     "eta_source_and_proofs_R6": "40722207 published, with append-only ledger clarification",
-    "R6": "All 21 other member callers and eta-mu source are published. This snapshot accompanies the root R6 caller for publication; default-branch adoption and original receipt reconciliation remain incomplete."
+    "R6": "All 23 caller proposals now publish R6. Default-branch adoption and original receipt reconciliation remain incomplete."
   },
   "deployment_state": {
     "runtime_revision": "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
@@ -701,7 +701,7 @@
     "index_tree": "54f98c791bb378af1668a07754118e380293c176",
     "receipt_repair_status": "In-place correction proposal withdrawn after refreshing Receipt River. Historical receipt bytes remain unchanged. The local checkout is still legacy; the original invalid appended envelopes remain unqualified until an adopted correction or ledger migration path handles them.",
     "default_branch_adoption": "UNMERGED",
-    "status": "base-merge-committed",
+    "status": "local-segmented-composition-commit",
     "base_merge_revision": "0a344db6023139bbacf8edd77db326f3001804f2",
     "base_merge_tree": "54f98c791bb378af1668a07754118e380293c176"
   },
@@ -1407,7 +1407,7 @@
       "approval": false
     }
   },
-  "integration_head_source": "Historical pre-R6 remote head recorded above; obtain the new commit-contained source from the current native PR head.",
+  "integration_head_source": "Current published native PR145 R6 head; local segmented composition is separate and unpublished.",
   "receipt_correction_plan": {
     "pr": "https://github.com/open-hax/foresight/pull/148",
     "head": "2c451cc7548e425fd975e4049fdbc1da3fb828ba",
@@ -1429,5 +1429,49 @@
     "member_heads_match_native": 22,
     "root_head_note": "R6 working source differs from historical native PR head until this publication.",
     "native_approval_credit": false
+  },
+  "segmented_receipt_composition": {
+    "source_pr": "https://github.com/open-hax/foresight/pull/147",
+    "source_head": "02f330d45a7ccbf14349d1b1638927f473fb58ae",
+    "rollout_parent": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+    "proof": ".ημ/antigravity-review/ledger-composition-20261025.json",
+    "legacy_sha256": "628c21721edd557f8856dcbdc1e0ca57c16541faf1b5117e634f1620c57212ef",
+    "records_moved_verbatim": 10,
+    "inherited_record_segments_unchanged": 17,
+    "readme_unchanged": true,
+    "working_conservation": "passed",
+    "known_invalid_envelopes": 2,
+    "admission": "refused",
+    "full_clio_cutover": false,
+    "publication": "local only",
+    "verification_receipt": ".ημ/receipts/2026-10-25T061859327Z-composition-verification-dafc960ab3fc.edn",
+    "tests": {
+      "pure": {
+        "tests": 22,
+        "assertions": 158
+      },
+      "adapter": {
+        "tests": 107,
+        "assertions": 653
+      },
+      "rollout": {
+        "tests": 12,
+        "assertions": 166
+      },
+      "lint_errors": 0,
+      "lint_warnings": 0,
+      "project_invariants": 39
+    }
+  },
+  "root_R6_hosted_run": {
+    "id": 40167985191,
+    "head": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+    "conclusion": "success",
+    "independent_artifact_validation": "passed for captured input and native protocol; provider-internal context consumption unknown",
+    "native_approval": false,
+    "artifact_id": 12589930215,
+    "artifact_sha256": "c69d4e79acc54c83e157fa8be39871266233364470372f0566ddd4904a4ff09c",
+    "proof": ".ημ/antigravity-review/hosted-qualification-root-R6-20261025.json",
+    "model_questions_retained": 2
   }
 }

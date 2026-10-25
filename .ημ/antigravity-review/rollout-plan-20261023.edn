@@ -55,10 +55,10 @@
  :rollout/caller-format 3,
  :rollout/model "gemini-3.8-flash-high",
  :rollout/merge-state
- {:status :base-merge-committed,
-  :index-tree "54f98c791bb378af1668a07754118e380293c176",
-  :receipt-repair :in-place-proposal-withdrawn-legacy-gate-unresolved,
-  :base-merge-revision "0a344db6023139bbacf8edd77db326f3001804f2"},
+ {:status :local-segmented-composition-commit,
+  :base-merge-revision "0a344db6023139bbacf8edd77db326f3001804f2",
+  :rollout-parent "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+  :migration-parent "02f330d45a7ccbf14349d1b1638927f473fb58ae"},
  :rollout/source-publication
  {:published-head "4072220789297ca94eec97506c13cd80772c7d55",
   :status :published},
@@ -66,8 +66,7 @@
  {:repository "open-hax/eta-mu",
   :revision "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3"},
  :rollout/kind :antigravity-review/operational-plan,
- :rollout/status
- :R6-root-publication-prepared-receipt-gate-unqualified,
+ :rollout/status :R6-published-local-segmented-composition-unqualified,
  :rollout/deployment
  {:service-cases :passed,
   :raw-custody
@@ -322,6 +321,13 @@
  :rollout/observed-at "2026-10-23T10:39:46.338898+00:00",
  :rollout/date "2026-10-23",
  :rollout/excluded [".agents" "eta" "clobber"],
+ :rollout/segmented-composition
+ {:source "02f330d45a7ccbf14349d1b1638927f473fb58ae",
+  :proof ".ημ/antigravity-review/ledger-composition-20261025.json",
+  :records-moved-verbatim 10,
+  :known-invalid-envelopes 2,
+  :admission :refused,
+  :publication :local-only},
  :rollout/compatibility
  {:repository "octave-commons/muse",
   :revision "93ea554332bcdafffc26688836b2e6a655575c94",
@@ -400,19 +406,19 @@
  [{:path ".",
    :merge-evidence nil,
    :workflow-repo "open-hax/eta-mu",
-   :head-revision nil,
+   :head-revision "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
    :repository "open-hax/foresight",
    :wrapper-verification
    {:checkout-status :available, :workflow-status :matching},
    :checkout
    "/home/err/.local/share/foresight-worktrees/foresight-antigravity-rollout-20261023",
    :hosted-evidence nil,
-   :publication :prepared-R6-publication,
+   :publication :R6-published,
    :review-qualified nil,
    :workflow-revision "2f49ccc2378ef2bbe873e79fb3cd52508ebe32f2",
    :default-branch-adoption :unmerged,
    :base-revision "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd",
-   :head-binding :containing-commit,
+   :head-binding :current-native-pr-head,
    :runtime-revision "5152dcce6e279a49b5a706ab3d3eaa4224df6cd3",
    :branch "codex/antigravity-review-rollout"}
   {:path "Truth",

@@ -1,0 +1,222 @@
+{
+  "observed_at": "2026-10-25T06:13:14.621206+00:00",
+  "kind": "segmented-ledger-composition",
+  "source_pr": "https://github.com/open-hax/foresight/pull/147",
+  "source_revision": "02f330d45a7ccbf14349d1b1638927f473fb58ae",
+  "rollout_parent": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+  "frozen_legacy_sha256": "628c21721edd557f8856dcbdc1e0ca57c16541faf1b5117e634f1620c57212ef",
+  "legacy_bytes": 432361,
+  "records_moved_verbatim": 10,
+  "inherited_segment_files_unchanged": 18,
+  "relocations": [
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 267,
+      "source_sha256_including_lf": "1c0ac43b287497ceac38d792feede62f5f05c2bdf12099570d06a767f64e3914",
+      "target_path": ".ημ/receipts/2026-10-23T061014592Z-rollout-import-1c0ac43b287497ce.edn",
+      "bytes": 598,
+      "projection": {
+        "ts": "2026-10-23T06:10:14.592490Z",
+        "origin": "codex-desktop/01a16756-fd90-7710-8295-c8a237aeb290",
+        "kind-edn": ":observation",
+        "ordinary-envelope?": false
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 268,
+      "source_sha256_including_lf": "545730a0e14d1288b7796717ea14924657e0ad9156a86d0bd7589fb39261d75a",
+      "target_path": ".ημ/receipts/2026-10-23T070501311Z-rollout-import-545730a0e14d1288.edn",
+      "bytes": 769,
+      "projection": {
+        "ts": "2026-10-23T07:05:01.311797+00:00",
+        "origin": "antigravity-member-rollout",
+        "kind-edn": "\"test-run\"",
+        "ordinary-envelope?": false
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 269,
+      "source_sha256_including_lf": "35020568ff1434ebb12cdead93a3c4545a3dacc195c88b3ec208f34afac2999e",
+      "target_path": ".ημ/receipts/2026-10-23T082818020Z-rollout-import-35020568ff1434eb.edn",
+      "bytes": 1498,
+      "projection": {
+        "ts": "2026-10-23T08:28:18.020558+00:00",
+        "origin": "antigravity-hosted-qualification-A3",
+        "kind-edn": ":test-run",
+        "ordinary-envelope?": true
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 270,
+      "source_sha256_including_lf": "fc8785a4b17424a8da30540a54d2cc10c90d66d0c9a920f4c0a7bb08a00847e6",
+      "target_path": ".ημ/receipts/2026-10-23T085017220Z-rollout-import-fc8785a4b17424a8.edn",
+      "bytes": 2377,
+      "projection": {
+        "ts": "2026-10-23T08:50:17.220811+00:00",
+        "origin": "antigravity-final-R4-hosted-qualification",
+        "kind-edn": ":test-run",
+        "ordinary-envelope?": true
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 271,
+      "source_sha256_including_lf": "bdfb70a3f50fefd4320f91099d386b41cef7219a4ca0c2fe083baa23292b6ba0",
+      "target_path": ".ημ/receipts/2026-10-23T094918084Z-rollout-import-bdfb70a3f50fefd4.edn",
+      "bytes": 2400,
+      "projection": {
+        "ts": "2026-10-23T09:49:18.084799+00:00",
+        "origin": "antigravity-R5-all-member-publication",
+        "kind-edn": ":test-run",
+        "ordinary-envelope?": true
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 272,
+      "source_sha256_including_lf": "b353fe4c532f7d70845b3e5b8c9db2bc75a8875070b0542a3b8fcd05c6cb18a2",
+      "target_path": ".ημ/receipts/2026-10-23T095415193Z-rollout-import-b353fe4c532f7d70.edn",
+      "bytes": 1414,
+      "projection": {
+        "ts": "2026-10-23T09:54:15.193900+00:00",
+        "origin": "antigravity-R5-hosted-progress-refusal",
+        "kind-edn": ":observation",
+        "ordinary-envelope?": true
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 273,
+      "source_sha256_including_lf": "813778aafbcf645f606766dd72b4f9bfd5483f3e78c759f9f3bd5de708a11943",
+      "target_path": ".ημ/receipts/2026-10-23T104429306Z-rollout-import-813778aafbcf645f.edn",
+      "bytes": 2454,
+      "projection": {
+        "ts": "2026-10-23T10:44:29.306581+00:00",
+        "origin": "antigravity-R6-current-hosted-qualification",
+        "kind-edn": ":test-run",
+        "ordinary-envelope?": true
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 274,
+      "source_sha256_including_lf": "39649047ca8f9921a488620f8889d4f3788acb05d35bb7485b36474d3d628422",
+      "target_path": ".ημ/receipts/2026-10-23T104718320Z-rollout-import-39649047ca8f9921.edn",
+      "bytes": 1090,
+      "projection": {
+        "ts": "2026-10-23T10:47:18.320197+00:00",
+        "origin": "antigravity-R6-current-publication-reconciliation",
+        "kind-edn": ":observation",
+        "ordinary-envelope?": true
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 275,
+      "source_sha256_including_lf": "d59786c9e6442a4deb7afacd5de29f865c3f9591d8a061fea4a9a6835cd95df5",
+      "target_path": ".ημ/receipts/2026-10-24T050630377Z-rollout-import-d59786c9e6442a4d.edn",
+      "bytes": 1467,
+      "projection": {
+        "ts": "2026-10-24T05:06:30.377Z",
+        "origin": "receipt-river-upstream-guidance-reassessment-20261024",
+        "kind-edn": ":adjudication",
+        "ordinary-envelope?": true
+      }
+    },
+    {
+      "source_revision": "d9fb8d4f87ca664e8b1bdb0a6d721a1343b59e2d",
+      "source_path": ".ημ/receipts.edn",
+      "source_line": 276,
+      "source_sha256_including_lf": "12ecd9ad7ae275f3e0c3352737bcfd7e024bc6872c9800d18b0e96830c3d7a36",
+      "target_path": ".ημ/receipts/2026-10-25T060531923Z-rollout-import-12ecd9ad7ae275f3.edn",
+      "bytes": 1229,
+      "projection": {
+        "ts": "2026-10-25T06:05:31.923993+00:00",
+        "origin": "antigravity-R6-root-publication-preparation",
+        "kind-edn": ":catalog",
+        "ordinary-envelope?": true
+      }
+    }
+  ],
+  "original_invalid_envelopes_preserved": 2,
+  "correction_admission": false,
+  "full_clio_cutover": false,
+  "publication": "local merge preparation only; live d9fb8d4f model review remains untouched",
+  "working_validation": {
+    "conservation": "passed",
+    "base": "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd",
+    "total-records": 295,
+    "segment-record-files": 29,
+    "new-records": 29,
+    "invalid-envelopes": 2,
+    "invalid-origins": [
+      "codex-desktop/01a16756-fd90-7710-8295-c8a237aeb290",
+      "antigravity-member-rollout"
+    ],
+    "admission": "refused"
+  },
+  "core_runtime_test_blobs_identical": [
+    "scripts/evidence.clj",
+    "src/foresight/evidence.cljc",
+    "scripts/lib/owned-gate-process.py",
+    "test/evidence_cli_test.cljs",
+    "test/evidence_test.cljs",
+    "test/fixtures/owned-process-supervisor.py"
+  ],
+  "tests": {
+    "evidence_laws": {
+      "tests": 22,
+      "assertions": 158,
+      "failures": 0,
+      "errors": 0
+    },
+    "rollout_laws": {
+      "tests": 12,
+      "assertions": 166,
+      "failures": 0,
+      "errors": 0
+    },
+    "adapter": {
+      "tests": 107,
+      "assertions": 653,
+      "failures": 0,
+      "errors": 0,
+      "log": "/home/err/.local/share/foresight-tools/root-composition-evidence-cli-20261025.log",
+      "sha256": "4a0833bb0e8dab77fc81a1f3275c3357be95306a016a72ea48fabb3fac33ccc9"
+    },
+    "clj_kondo": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "project": {
+      "sources": 25,
+      "submodules": 23,
+      "invariants": 39
+    }
+  },
+  "initial_working_validation": {
+    "conservation": "passed",
+    "base": "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd",
+    "total-records": 293,
+    "segment-record-files": 27,
+    "new-records": 27,
+    "invalid-envelopes": 2,
+    "invalid-origins": [
+      "codex-desktop/01a16756-fd90-7710-8295-c8a237aeb290",
+      "antigravity-member-rollout"
+    ],
+    "admission": "refused"
+  }
+}

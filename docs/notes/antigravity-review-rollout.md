@@ -265,8 +265,8 @@ The in-place receipt correction proposal was withdrawn on October 24 after
 refreshing Receipt River from `riatzukiza/.agents` branch
 `docs/segmented-receipt-ledger` at `7f4dfb8229e16996cfdb807694a630b60a130d71`.
 The updated guidance makes corrections new records. Every historical receipt
-remains unchanged. This checkout still has a legacy ledger, without the
-segmented directory or Clio cutover declaration; refreshing the skill does not
+remains unchanged. At withdrawal this checkout still had a legacy ledger, without the
+segmented directory or Clio cutover declaration; refreshing the skill did not
 migrate storage or waive its owning validator. The original invalid appended
 envelopes therefore remain an unresolved validation failure. The base merge is committed locally as `0a344db6023139bbacf8edd77db326f3001804f2`,
 with the preserved tree `54f98c791bb378af1668a07754118e380293c176`.
@@ -342,3 +342,14 @@ merged immutable correction reader. The first rollout receipt already has a
 valid keyword kind and needs scalar manifest/refs interpretations; only the
 second needs a proposed ordinary-receipt kind interpretation. Neither original
 record is rewritten, and full Clio cutover remains unimplemented.
+
+
+The subsequent local composition adopts #147 without changing its six evidence
+runtime/test blobs. Ten divergent rollout records move verbatim into separate
+segments; the legacy file equals the existing migration's frozen legacy bytes.
+The working conservation check retains all 293 records exactly once and every
+inherited segment byte. Admission still refuses exactly the two malformed
+ordinary envelopes. This is segmented Receipt River adoption, not a full Clio
+cutover, correction waiver or default-branch merge. The current published R6 root
+run40167985191 completed successfully at d9fb8d4f; its independent artifact
+validation is separate. The local migration composition remains unpublished.
