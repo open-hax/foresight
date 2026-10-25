@@ -1,11 +1,11 @@
 ---
 uuid: "4634f396-e931-41d1-8883-0282b85e6022"
 title: "Apply Antigravity CLI review to every Foresight member"
-status: "ready"
+status: "testing"
 priority: "P1"
 points: "5"
 labels: ["ci", "review", "antigravity"]
-write-id: "1792918939628-0.5l8u93zv6guf0l11dxm"
+write-id: "1792919537650-0.83lvwaentt59a6h9itr"
 ---
 
 ## Context
@@ -57,4 +57,6 @@ Muse mirror bytes must match the canonical workflow SHA256 before activation.
 
 ---
 Member code-review repair plan (2026-10-25): verify CodeRabbit findings from Truth62, bitch-tracker8, Knoxx395, chat-ui5, Sol3, Opencode2 and Osmos3; add RED cases for unsupported fork/missing repository heads and converted_to_draft cancellation; preserve title/body edit isolation, base retarget reviews, exact workflow/runtime/model pins, read-only permissions and safe old-format upgrades. Then update the shared pure renderer and explicitly mapped owned callers; correct proposal-tense/immutable-verification documentation. Existing independent gates, draft state and merge authorization remain unchanged. RED observed on current renderer: 14 tests/178 assertions, 9 failures/0 errors; no implementation repair yet.
+
+Review repair GREEN: renderer14tests/178assertions, workspace24/120, project12/166 and project-model25sources/23submodules/39invariants pass. clj-kondo src/scripts/test and canonical scripts/test pass0warnings/errors after namespace-cache refresh. Exact mapped generation/check all23targets passes; actionlint1.7.12 root caller passes. Fork/missing heads now skip at caller and converted_to_draft cancels the PR review group without model execution. Original edit-isolation and safe upgrade checks remain. Member repairs/publication/native qualification remain pending; no merge/adoption or approval claim.
 ---

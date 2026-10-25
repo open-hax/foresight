@@ -1010,3 +1010,16 @@
   spore: none
   receipt-refs: 2026-10-25T080408000Z-new-original-green.edn
   note: Validate original admission separately from derived-view validity; an ancestor source is not a historical exception. Two frozen imports use explicit content identity pairs. Positive matching-revision promotion control prevents an invalid manifest from masking stale-result checks.
+
+
+## 2026-10-25 — Member review caller admission repairs
+
+Friction2/5, novelty1/5, reuse4/5. Completed member reviews exposed two shared
+caller omissions: fork heads reached preflight and draft conversion left an
+active review running. RED2909ff24 reproduced both; GREEN14/178 preserves edit
+isolation and safe prior-format upgrades. Regenerated all23explicitly mapped
+callers; source proposals remain separate from native qualification and adoption.
+The default kondo scripts/test command initially used stale namespace analysis
+for the previously added historical-import law; linting src/scripts/test refreshed
+it, after which the unchanged canonical scripts/test command passed0/0.
+Evidence: the caller-eligibility RED/GREEN receipt segments. No spore incubated.

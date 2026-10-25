@@ -11,19 +11,26 @@
 (def compatibility-workflow-repository "octave-commons/muse")
 (def workflow-repositories
   #{canonical-workflow-repository compatibility-workflow-repository})
-(def pull-request-actions ["opened" "synchronize" "reopened" "ready_for_review" "edited"])
+(def prior-pull-request-actions ["opened" "synchronize" "reopened" "ready_for_review" "edited"])
+(def pull-request-actions
+  ["opened" "synchronize" "reopened" "ready_for_review" "converted_to_draft" "edited"])
 (def edit-review-predicate
   "github.event.action != 'edited' || github.event.changes.base.ref.from != ''")
-(def review-condition
+(def prior-review-condition
   (str "${{ github.event.pull_request.draft == false && (" edit-review-predicate ") }}"))
+(def review-condition
+  (str "${{ github.event.pull_request.head.repo.full_name == github.repository && "
+       "github.event.pull_request.draft == false && (" edit-review-predicate ") }}"))
 (def concurrency-suffix
   (str "-${{ (" edit-review-predicate ") && 'review' || github.run_id }}"))
 
 (defn review-event?
-  "Accept normal caller events or a base-ref retarget; ignore other PR edits and drafts."
-  [{:keys [action pull_request changes]}]
+  "Accept same-repository review events; skip fork/missing heads, drafts and unrelated edits."
+  [{:keys [action pull_request changes repository]}]
   (boolean
-    (and (false? (:draft pull_request))
+    (and (string? (:full_name repository)) (seq (:full_name repository))
+         (= (:full_name repository) (get-in pull_request [:head :repo :full_name]))
+         (false? (:draft pull_request))
          (contains? (set pull-request-actions) action)
          (or (not= "edited" action)
              (let [previous-base (get-in changes [:base :ref :from])]
@@ -67,14 +74,20 @@
    (str generator-marker "\n"
        "name: Antigravity evidence review\n\n"
        "on:\n  pull_request:\n"
-       "    types: [" (str/join ", " (if (= :initial format-version) (pop pull-request-actions) pull-request-actions)) "]\n\n"
+       "    types: [" (str/join ", " (case format-version
+                                          :initial (pop prior-pull-request-actions)
+                                          :current pull-request-actions
+                                          prior-pull-request-actions)) "]\n\n"
        "permissions:\n  contents: read\n  pull-requests: read\n\n"
        "concurrency:\n"
        "  group: antigravity-review-${{ github.workflow }}-${{ github.event.pull_request.number }}"
-       (when (= :current format-version) concurrency-suffix) "\n"
+       (when (contains? #{:prior-current :current} format-version) concurrency-suffix) "\n"
        "  cancel-in-progress: true\n\n"
        "jobs:\n  review:\n"
-       "    if: " (if (= :initial format-version) "${{ github.event.pull_request.draft == false }}" review-condition) "\n"
+       "    if: " (case format-version
+                    :initial "${{ github.event.pull_request.draft == false }}"
+                    :current review-condition
+                    prior-review-condition) "\n"
        "    uses: " workflow-repository "/.github/workflows/antigravity-code-review.yml@" revision "\n"
        "    with:\n"
        "      pr_head_sha: ${{ github.event.pull_request.head.sha }}\n"
@@ -109,7 +122,7 @@
       (and (revision? prior-revision) (revision? prior-runtime)
            (contains? workflow-repositories prior-repository)
            (some #(= actual (render-template prior-revision prior-runtime prior-repository %))
-                 [:initial :retarget :current])) :revision-mismatch
+                 [:initial :retarget :prior-current :current])) :revision-mismatch
       :else :unmanaged))))
 
 (defn route-targets

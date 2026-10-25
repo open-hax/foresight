@@ -42,12 +42,22 @@ trusted publisher. Generated files are configuration proposals. Hosting is opera
 adoption remains incomplete until the producer and member rollouts are reviewed
 and merged. A generated file or passing local test alone supplies no hosted proof.
 
-Callers retain the opened, synchronize, reopened, and ready-for-review events and
-also review `edited` events when `changes.base.ref.from` is nonempty. Title/body
+Callers retain the opened, synchronize, reopened, and ready-for-review events,
+include `converted_to_draft` to cancel an active PR review without starting
+another model call, and also review `edited` events when `changes.base.ref.from` is nonempty. Title/body
 edits skip review. Their concurrency groups include the run ID, so those edits
 cannot cancel an active review or displace a pending review. Eligible events
 share the stable PR review group. Exact callers from either earlier generated
-format remain recognized for safe updates.
+format remain recognized for safe updates. Fork heads and absent repository
+identity skip at the caller before reaching the same-repository preflight.
+
+A base-branch advance does not emit a PR `synchronize` event. Existing artifacts
+therefore retain their historical base/head binding; a successful check alone
+supplies no current-base qualification. Before giving advisory evidence credit,
+the existing trusted qualification process must compare its base and head to the
+live PR and require a new review when either differs. Automatic base-advance
+dispatch is not provided by this caller. Required deterministic checks and tested
+merge-candidate obligations remain independent.
 
 ## Verification before implementation
 
