@@ -1,10 +1,11 @@
 ---
 uuid: "4634f396-e931-41d1-8883-0282b85e6022"
 title: "Apply Antigravity CLI review to every Foresight member"
-status: incoming
-priority: P1
-points: 5
-labels: [ci, review, antigravity]
+status: "ready"
+priority: "P1"
+points: "5"
+labels: ["ci", "review", "antigravity"]
+write-id: "1792918939628-0.5l8u93zv6guf0l11dxm"
 ---
 
 ## Context
@@ -53,3 +54,7 @@ Consumer PRs depend on reviewed eta-mu runtime/workflow commits and authenticate
 worker provisioning. Per-organization runner groups must restrict access to their exact immutable
 canonical or compatibility workflow commit and approved calling repositories.
 Muse mirror bytes must match the canonical workflow SHA256 before activation.
+
+---
+Member code-review repair plan (2026-10-25): verify CodeRabbit findings from Truth62, bitch-tracker8, Knoxx395, chat-ui5, Sol3, Opencode2 and Osmos3; add RED cases for unsupported fork/missing repository heads and converted_to_draft cancellation; preserve title/body edit isolation, base retarget reviews, exact workflow/runtime/model pins, read-only permissions and safe old-format upgrades. Then update the shared pure renderer and explicitly mapped owned callers; correct proposal-tense/immutable-verification documentation. Existing independent gates, draft state and merge authorization remain unchanged. RED observed on current renderer: 14 tests/178 assertions, 9 failures/0 errors; no implementation repair yet.
+---
