@@ -1,0 +1,2254 @@
+{
+  "schema_version": 1,
+  "root_source": "88ae0bba14901cf4924e0bafd4743480b5d3eeca",
+  "child_head": "874068612a9c576ef3d3e6847f72de2fee9a996b",
+  "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+  "canonical_note": "Executed E0 source-custody checkpoint ETA#362 874068612a9c576ef3d3e6847f72de2fee9a996b source c9fc461f2a14d613e9f1897f5143676378e154c2. Source8/175 and verifier5/181 pass after causal RED6/34 failures. Independent28 pinned-runtime and270 reference cases pass;14+33 portable values and fullCLI194/587/workflows11/199/lint/release pass. Actual manifest byte identity and original producer1/review2 provenance repaired; partial source always retains native-execution-custody. Existing G/caller policy and inert8-tool fixture remain. Actual pinned JVM profile configuration22 generated/independently reproduced; full adapter uncompiled/unobserved, real NBB failures retained. F796 native Sandbox39909048197 now succeeds at exact e157f704 parents/tree,23diagnostics;469643137-byte artifact metadata only, no successor proof transfer. Root88 receipt2/hygiene0/missing-App/terminal fails. Fresh06:45:43–06:46:02 same442/437open/4merged/1closed/6changed openH/B,drift0/0;Axxium3/4 proposed workflow append diffs retained. Preserve309states/fourprefixes/receipt363 historical71invalid118errors/100paths/all23pins. E0breakdown,E1incoming,publisherin_progress,M0–M7unqualified,CMS/Cephalonpaused. No exact native approval/full authenticated G/caller/profile/input custody/publication/adoption. No standalone planning/newcard/merge/deploy/credential/grant/protection/pin/adoption effect. Report docs/stabilization/e0-custody-execution.md.",
+  "child_native_publication": {
+    "head": "874068612a9c576ef3d3e6847f72de2fee9a996b",
+    "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+    "whole_git_object_fetch_verified": true,
+    "native_pr_paths": 100,
+    "terminal_page_empty": true,
+    "native_blobs": [
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/README.md",
+        "bytes": 1494,
+        "sha256": "db5f920322f20e6f82192894617c1cea8c5ad9705b575877767a770e1ac56067",
+        "git_blob": "c711de7b2c85977983f11074d3e6fc8b0edd0947",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/domain/review.cljc",
+        "bytes": 16650,
+        "sha256": "0df06e46f9307f9a80f4dd70013d6fb8f869a99ddff99fc00cf66c0e4810b466",
+        "git_blob": "bb3c575ed3e32ac2c0cd6dfa92cbf6d3e904bd9e",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/extern/review_invocation.cljs",
+        "bytes": 10639,
+        "sha256": "17dda3b9121e4ab96829a5f3ab3d181ca267ca95bd1aba6c2ac33ce47ef3a0ae",
+        "git_blob": "f27fe9902e31cc6b7f9679abaa36c0125f10b2ae",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/law/review_invocation.cljc",
+        "bytes": 16075,
+        "sha256": "7a97ff024da488b6b847d1af5053508b18c6d135ad19841bf0faa4ea3dafd133",
+        "git_blob": "395b37d801731cc01da167bec3ac7aa17f4b4c43",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/muse-src/eta_mu/shape/git_diff_path.cljc",
+        "bytes": 3522,
+        "sha256": "168a2ab5e16cdd377e1749fbb1278ce6cb82ecd0676968dc69e8e38d83e9dfba",
+        "git_blob": "ae54accc30b2c21f6d0f6fcae54cffcf37dfec92",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/publish-opencode-review.cjs",
+        "bytes": 6572,
+        "sha256": "bb75bc57d8eeaf7edbd77f34e9a4da2d319617d06809f9aadfb0d94e7ae6c2c9",
+        "git_blob": "e9d70b4b9d2ee823e921a5af32451ee5317eb252",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/review-invocation.cjs",
+        "bytes": 144409,
+        "sha256": "d9fea235fddec9581ba1be959e596f32b82588f78cef5fd76d55f04d24b91030",
+        "git_blob": "7ceb531660e9236fb4d3fc73e86dbb42b3893e82",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/run-opencode-review-recovery.mjs",
+        "bytes": 86229,
+        "sha256": "7e12b32abebf27b1e87bb9767bcf217caf8ce1cc0a7a05515a67f91b9005e133",
+        "git_blob": "8cb20e7ba0d17482ae3b2f8b252a386dda570938",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/fixtures/review-publication-verifier/c1369c223cf3c57e3e31934a6d746bfcdfe73f5a/runtime.json",
+        "bytes": 3461,
+        "sha256": "1fd734d89c4b18dce24a6a87c6024561382b52531285b020fded67e2410d6e8a",
+        "git_blob": "534327a723511dbc1bbe8b7cc0b3f780d6ca5e69",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode-code-review-workflow.test.mjs",
+        "bytes": 154191,
+        "sha256": "c5f3545d1037408b69a930d8fa72fe7318054b82d55a7e9b05564e2273322c9e",
+        "git_blob": "ff266145d1b415234a054c674813d7ec6c6c62ca",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode-review-intent-bootstrap.test.mjs",
+        "bytes": 2680,
+        "sha256": "dc0ab7bde8b81f5eacdfe2131f0c2c0ca1a7e0856136b4f154f95c20e04d73d7",
+        "git_blob": "9d8cc40de0c84b887ebf7a283d7cc31bf12e2815",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_archive_test.cljs",
+        "bytes": 20791,
+        "sha256": "717bc17715aeb3b961df38cf9f96bdb36aa58b7ecdb2995a8f4cfb177e29f081",
+        "git_blob": "f3b27f09ca55be48dc4dd6e8e3dbfa7d7f72b775",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_collection_test.cljs",
+        "bytes": 57053,
+        "sha256": "15503222474a100fc1ef818a6f5fcd5d92484503bbda608accb6e1bb19530d93",
+        "git_blob": "288b592ac9d580a701d0c29c9e2746312594f605",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_intent_process_test.mjs",
+        "bytes": 3452,
+        "sha256": "1889d1caad0e16a9b4d762a7fb7b47fc32687b28bb912da42c604184ef94b722",
+        "git_blob": "7ec189fb3e1909f20051e6b354c9303327784e35",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_intent_test.cljs",
+        "bytes": 55186,
+        "sha256": "1accc1cd6bdc4c1df09217133c9617708c74c613276a85b2a91c1a433aaf2318",
+        "git_blob": "4ace46add57a7b3a0a46ff47d65844c36f95dff2",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_intent_uncertain_test.mjs",
+        "bytes": 1923,
+        "sha256": "02f8d03e28a23de05bfd57d59d758cac9dd183c98eafa46ab34ceb1776fd8916",
+        "git_blob": "95a0ede8fd6587fcd62a5f040f65d78e52c6750b",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_publish_test.cljs",
+        "bytes": 35061,
+        "sha256": "c28821d881d6f7ffba354eb2ce04bde1015ed694225c2155646781e73fac34f5",
+        "git_blob": "4a5f81c8e2e3f99c380cd478d1aa7b1f528ce3a5",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_readback_test.cljs",
+        "bytes": 21321,
+        "sha256": "8f724fe6fdc4d414d73ed3605b0e06bde5a8a94b9b3de64b3622bc88f4786682",
+        "git_blob": "96fcec5e21ad2b530daf33fccf6f79f56d455ff7",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_source_test.cljs",
+        "bytes": 23091,
+        "sha256": "0a11d664d4779104f55d3925d8f49e289a0906b422445af5dc22750c491cc850",
+        "git_blob": "a1ce21464760c39db45dbdbb968fa901b5ed621a",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/scripts/opencode_review_verification_test.cljs",
+        "bytes": 31149,
+        "sha256": "01becafaa1cc37e1def294874870eff8e85147039b952e234f71f41150eb18dc",
+        "git_blob": "22b0b7924d4dc7c228a86527d1bca7028653355a",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/opencode-code-review.yml",
+        "bytes": 204820,
+        "sha256": "ff76052bada6c56797901a796b21393c3b2a5c2a2b1b7bd1e302ade38b0551dd",
+        "git_blob": "e4d30c31265a763a20a64ada1ed8565969483366",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/rheos-github-sync-ci.yml",
+        "bytes": 5965,
+        "sha256": "1f3a6e83b950164037679ae4ed5cc7ed655ee0f8e41b0e1d7a3ac983af21e6c4",
+        "git_blob": "11370cf71ed6445660f523a5ef8eadd472224747",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/rheos.yml",
+        "bytes": 8300,
+        "sha256": "03d1e750cf641feae5a1dd315fa5d046801c402997890c47bbf0ae7dced39df8",
+        "git_blob": "701369791b0a7adea6fe748dfc1e45e127fbbb04",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/sandbox-bundle.yml",
+        "bytes": 9372,
+        "sha256": "81b24e3db9b75279ae5fbe2471868650afd7762bed728eb5b248677fd5e7b779",
+        "git_blob": "81650f890648b373b02b52aca9934179b8b8cf14",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".github/workflows/sol-ci.yml",
+        "bytes": 3540,
+        "sha256": "6e547cd476d7ecc33c1e0e8cca5b4ee79b91ea655398b6d91848b14e261288b7",
+        "git_blob": "b957bc452a26d9d24bf8a6d4fac6f4d46f784e91",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-core/a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b.json.gz",
+        "bytes": 184989,
+        "sha256": "a037f990af6bba87fad5b1e10ce3d3ae54f2c313aa6ae0ac4dc23803b331ee9b",
+        "git_blob": "61d355b32af5273205bfe940ac9bbe3dfbea85fc",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-readback/checkpoint.json",
+        "bytes": 2710,
+        "sha256": "207a7245414e93e48d610963be0b03684b2606ba240aa4197a11be3042830c58",
+        "git_blob": "597541f6654cb206aa7357895a496d2cc151cdb1",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/README.md",
+        "bytes": 7669,
+        "sha256": "c9c67d59e44f893818d85907d48c6a3ddd313be452127cf59df391a63e1b7543",
+        "git_blob": "2fa2b94a1e3c10f768d43c12ca45f5c98dcc5803",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/audit.json",
+        "bytes": 85556,
+        "sha256": "ae43d94be8a3cabd6d5ee0929121ecc076ec00ebd7115202f937d516bc46c7d8",
+        "git_blob": "b16193119e65cabe85809f888c34aa934c7bc6f9",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/bundle.1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa.json.gz",
+        "bytes": 30424227,
+        "sha256": "1b5524abf5cbc787eb0f6da6cbf0f5a4c234a62338b86879a5398d0ce616f1fa",
+        "git_blob": "b54a90f437a0abe259484c7295c139078094d4f2",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/failed.3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6.json.gz",
+        "bytes": 15003819,
+        "sha256": "3b2da80b2ba4057201bd7234f8cde42b179b1bc70ca2c7fcaf45558d8e50a2d6",
+        "git_blob": "c76bd56f4dc6e69202ea2494d694486922af3dd6",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/failed.fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4.json.gz",
+        "bytes": 30194904,
+        "sha256": "fda4f4acaf63e96f7a68fd431ec72dbb0514b997b953c84885566a4b115b70b4",
+        "git_blob": "8479bc6dc7b083b8bc1674396a339cf4b1d2970d",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/index.json",
+        "bytes": 200395,
+        "sha256": "dc4ddd49882c113c087ee8b1f2f6bc72a74d55f80d09bdf8fcc47dd6651e1f23",
+        "git_blob": "c70c5621a3e8133f2c550296a8bf88e250038c50",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/inspect.bb",
+        "bytes": 8986,
+        "sha256": "11635aa31673fae8e6656154c9da173df7f0ac91502f097e09a0713d3cbb68bd",
+        "git_blob": "baeea2b8453c8acd41599da245b7e7b066ebe18c",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/review-evidence/trusted-publication-review-scope/test_inspection.bb",
+        "bytes": 9877,
+        "sha256": "2e8e28aad38f1bfa2d2152b0a81cd71fa7202743063be1e0f20f54efc17b82d7",
+        "git_blob": "270164efb7b8cc61578b38a6ad49c3fec45624bd",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/session-mycology/ledger.md",
+        "bytes": 121146,
+        "sha256": "ca5f10828f82914758ef9c49d2e11e6a7eeccf1c3c9027f4e4119ce489c08fa7",
+        "git_blob": "8143f2134b18c816adf6047450b3768c1785f255",
+        "native_blob_matches": true
+      },
+      {
+        "path": ".ημ/session-reflections.edn",
+        "bytes": 41622,
+        "sha256": "76a5109bd3e6f5d40a40b82f9f4b5d21838d832f267929e9d87ce82acf4ab4f3",
+        "git_blob": "c05675110bea57d15022634abc6ba6e37e4cfa5b",
+        "native_blob_matches": true
+      },
+      {
+        "path": "contracts/workflows/.gates.edn",
+        "bytes": 8294,
+        "sha256": "31ae91cdf914a6dfed64b6a036323d9e7cd22c38e58c393212e84e850e42cfdb",
+        "git_blob": "fc4fda88a9a67b67ae2d7d0c4bd79c5005ed7287",
+        "native_blob_matches": true
+      },
+      {
+        "path": "contracts/workflows/ci.edn",
+        "bytes": 11215,
+        "sha256": "e76878328cf271a0b8fc9a8043e4c73254c00579253a7d2100239c5e39eab54b",
+        "git_blob": "737bb516def835d3332d4c6a13ca2b216b153e14",
+        "native_blob_matches": true
+      },
+      {
+        "path": "contracts/workflows/packages.edn",
+        "bytes": 8187,
+        "sha256": "9119c1732847a10d76116559d05df71b3b86c86a472b7bcf94c92e4ed76a7fce",
+        "git_blob": "a8dbaae2ba905a0ee083e94a0eead11e70d9b770",
+        "native_blob_matches": true
+      },
+      {
+        "path": "contracts/workflows/resources.edn",
+        "bytes": 3949,
+        "sha256": "5b6333e6b45496181c5ae90a7cc455d444a20a9bd5152e031d5d366bf4ea5eae",
+        "git_blob": "efff0d0e028b54231a5ee961d0b29f739f27c74a",
+        "native_blob_matches": true
+      },
+      {
+        "path": "docs/agent-workflows.md",
+        "bytes": 42870,
+        "sha256": "a808d760c063807a2c602a99eff8ef4a3c2ab5abf81bf4b6bc688c07aa3e5b04",
+        "git_blob": "271a5980082d5deb785d318ef5569cd8152128af",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/.events/ledger.edn",
+        "bytes": 1890045,
+        "sha256": "252f110461b31a4e8b2af72e216b2a946fbfc1b3e33a113d705c3fbc09a1b6ed",
+        "git_blob": "edb8eba2f0ec9075bb8ffe22a236486eebb52904",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/.kanban/board.json",
+        "bytes": 1336939,
+        "sha256": "6860076cfd81dbace9c70a1aa8f2e9bf33514f08c9c968741a6062398aa7d26e",
+        "git_blob": "825e84eaae4a826d4506a755abe4f226b1640773",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/epics/make-reusable-opencode-review-gates-truth-preserving.md",
+        "bytes": 3575,
+        "sha256": "2e84c7775a5a47987d8c04267be73e18dfb219ecb52d0c563f1feb382c7fb50a",
+        "git_blob": "afab6ecc2c13e255461b70f742eb48eb974ac5a2",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/epics/prove-reusable-review-gate-red-path-in-a-fixture-caller.md",
+        "bytes": 12151,
+        "sha256": "9f8d5df92d7dd81a902d8193f205d695a16c252984a95da4f38a37241babfbff",
+        "git_blob": "53e16786d34fe5bbc83d798d4ae91bc25f674eb0",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/independently-admit-and-publish-review-evidence-from-trusted-default-code-1c707551.md",
+        "bytes": 72262,
+        "sha256": "4bf32b21ea7c94d8b4f109283aebb02e2ea38c361634489a36fac3437c11409a",
+        "git_blob": "0edeb4cbace071557777e8b5b1fdbfdce34f77d7",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/ledger-events-persist-absolute-source-paths-from-the-writer-s-checkout.md",
+        "bytes": 4284,
+        "sha256": "205c8a4f8e2e9c7ad170e2d15f0a89f633a0c636262e7a0bd1bbc88064bf43f5",
+        "git_blob": "345211398f2d396761b00924cbb87ca93214cae9",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/produce-anonymous-review-evidence-without-publication-credentials-c7d20dbb.md",
+        "bytes": 14439,
+        "sha256": "58ac88267adfca6d6436c96316e6d408f88d407eb041998e3843f81e5441fda0",
+        "git_blob": "eaca63a9431a721e3a80e6383f13e049775935bc",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/rheos-canonical-task-fold-and-snapshots.md",
+        "bytes": 3801,
+        "sha256": "94fa35669a8768cccf3b99d7506e003651d1c1cdd0ba286cf604927bb08ea2ce",
+        "git_blob": "ce2c5e9c1e9d1ba26c1c1b3de9b27992ecb1cf96",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/rheos-ci-does-not-gate-build-warnings.md",
+        "bytes": 2924,
+        "sha256": "69a9c95ba3ebd3f54242377e74d6928ae0c01ef7d984d88cb04cf2fc87535ebb",
+        "git_blob": "34ad1e2a10faed2c43631436d8303de7e4dac127",
+        "native_blob_matches": true
+      },
+      {
+        "path": "kanban/tasks/run-candidate-deterministic-ci-without-signing-credentials-bdd97334.md",
+        "bytes": 8305,
+        "sha256": "000e911805a59788f64084f8a68f5bce7ab647229fa470835938758aa2e2f9de",
+        "git_blob": "79bc10f818132b53278ed7cc6dee351026ba414f",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/commands/workflows_test.cljs",
+        "bytes": 30701,
+        "sha256": "6d9a5c4984d269fb4035844aaa2a3e4423eb64f5a25ff082e69e08dd923aed30",
+        "git_blob": "fac6e1c6bff9fe3002e591ceaff967ef07e2e721",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/intent-runtime/barrier_entry.cljs",
+        "bytes": 260,
+        "sha256": "900b03423f1cd6ace5b1879b89744269a6ed118636fdf3910938de40c0403a48",
+        "git_blob": "d95513d01edfedb8880efcb4a1a88c9ec1e43cd2",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/intent-runtime/nbb.edn",
+        "bytes": 348,
+        "sha256": "496c521ec79e0254bb82a1454a5b5e44dc344ae639508fabf9a022b12420b01b",
+        "git_blob": "5a6de374253c00f9c560b4843802a2842732309c",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/intent-runtime/test_entry.cljs",
+        "bytes": 343,
+        "sha256": "92e5198e57cde3ca2493dc04167699681f01420071ca9b2fd3497093bdf96b96",
+        "git_blob": "6171b181ea578065035a1b763db16f4cab7baabf",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/intent-runtime/worker_entry.cljs",
+        "bytes": 251,
+        "sha256": "87515a2856d86c4a5470d965baf95d41a51b1e0e7adc99434a57ceb2f3405deb",
+        "git_blob": "da6fba062bd8a83a893e796789f50d1c13b18272",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/package.json",
+        "bytes": 2278,
+        "sha256": "bb7cb9caf07dfb80fd02606d24c0cbf77275cdea8d795808fb04f30c9124bb06",
+        "git_blob": "b7f7026ac0708752dae5faff6982e0fed6e9aa00",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_archive.cljc",
+        "bytes": 5324,
+        "sha256": "e2a7f3087b00b4dbac2ee48b5c16829e2e28dd9d68161b4c6698b8f66905b23f",
+        "git_blob": "575a0c4c6fef3e48bf89bb18a5343c1a5066ff6b",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc",
+        "bytes": 3371,
+        "sha256": "cc11fa569abfc99eb13d97bdedd43065861b131e8aac936a1d58ca91026e3463",
+        "git_blob": "3b4cce0418515a13494607be10141fa8caad1b6e",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_intent.cljc",
+        "bytes": 7361,
+        "sha256": "4ad9209af005697796a2cca4b115730e1dc9ec78b324a669ebd5ebb87d65b1f4",
+        "git_blob": "3cddcb90c2bb5f63e6163e3b58bfece1eb9f8d2f",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc",
+        "bytes": 15570,
+        "sha256": "fc0bd68e8bed41c707885507ef715e110a909fad5873bbee1b1e00abd7277705",
+        "git_blob": "c8a7fe569097c702eab4f1132f0165368e98ee4a",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_readback.cljc",
+        "bytes": 2036,
+        "sha256": "2383bd89b917afa144aaeedd67e02d8525ae515a07f7f1fd5ba7592987cbbb62",
+        "git_blob": "5827607232b220325059a2d82352e25bdf204466",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc",
+        "bytes": 3135,
+        "sha256": "54b0dcfd5833f227d819823ff6ff761421dd70a70eb2c4fa2a0e7d86c2fe2bcd",
+        "git_blob": "9013f61a63494f802584cb37738d647a17bc76a9",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc",
+        "bytes": 2330,
+        "sha256": "a9e64088cba09520fb93789b09aecc3f8396ad44946d59576cf867d582e35250",
+        "git_blob": "d0a3581f12d103510d73db6556397dfdf7198db2",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs",
+        "bytes": 18094,
+        "sha256": "41f67c3d7802bcaeda3bb806a1c09b9d359c9b59fa2b48a8173ffdf87b0d70fd",
+        "git_blob": "cc39b01cbbde39607ab5ec009a85182256ac7d3b",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_collection.cljs",
+        "bytes": 5794,
+        "sha256": "b8c568716088c9d2a8e4a3f0f743a696601993d5f878328aaa9045176bce1bc1",
+        "git_blob": "139c6d477d5a0851c6b1e0ca6ec8a5d8c472c5ad",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_intent.cljs",
+        "bytes": 6313,
+        "sha256": "98c284133dbd3e7eab236a3e566e60f817244f3b6e77e4661e12a285d04df773",
+        "git_blob": "67fd60ec6b307753fa21341a983ed62a8aa99207",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_source.cljs",
+        "bytes": 14658,
+        "sha256": "82d3855c84220d9346e3e79b7e4615e48e7cf552cdde089e1040635acad1aa34",
+        "git_blob": "454dde30a24fd65d2174926e7e5b3b0485e7138d",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs",
+        "bytes": 20387,
+        "sha256": "0f2133e5c45eb284597995da43c05cae52fe050daa7c36a6eb9b29cbf74d869d",
+        "git_blob": "9c758369cdccd6a734bfe99eb916ac98a4971bae",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_archive.cljs",
+        "bytes": 5904,
+        "sha256": "844afd9ffb0842397794da93cde65ea80385eaafc830489439453b621763fd49",
+        "git_blob": "e6ba384aafadc0dc90ca56cf4ddc5f602a539855",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_collection.cljs",
+        "bytes": 20307,
+        "sha256": "b38fe7488d74131e7f05dbb9b0d7377f2dd267070bb98a0a19c25b5a7598ddef",
+        "git_blob": "44ef26e02684ec3283de5bb86153c3203633ee56",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs",
+        "bytes": 9531,
+        "sha256": "2eeae3f6ffe044b3b71abd861d7ff00886e4f52a1761e6045da24b81c7fd2f64",
+        "git_blob": "11b746e1c76a9e9404d0e41efb6858a9d5660755",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_intent_worker.cljs",
+        "bytes": 7658,
+        "sha256": "808be56a3d64d8ccfb4824f728b35798f8e449b5d21d6632875cc3708efcc20b",
+        "git_blob": "227a292c1d39b486cf43e9d456eb7da8b16f8217",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_readback.cljs",
+        "bytes": 8417,
+        "sha256": "bb9596f674f1d2efae12437751cd7078c4704cf370a2339767bfbb2225a001e3",
+        "git_blob": "6d91289608dc38794f7f8903c23ea487796e3a42",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_source.cljs",
+        "bytes": 1433,
+        "sha256": "b616b4c806b623a7c559332698c2059a2a88706b153a09701df0122f770f4cc8",
+        "git_blob": "b36a5508286ae35b67ac68708b7013944d5cfb9b",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs",
+        "bytes": 2138,
+        "sha256": "4bdf3c484b689752c33c2f05f7a81c71de618e18e018a0ef0f812e4dacedb74d",
+        "git_blob": "f768820510e0cb5df4d97d80ce6cee90467b1d42",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_archive.cljc",
+        "bytes": 1540,
+        "sha256": "bbdd77f18eb65cd8a740bb8ca648cf25695354dd8c92d2dfe0f8d559ede8095b",
+        "git_blob": "85c8f91924d529afb8df3f16bdc5f9bce0aed6c4",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_collection.cljc",
+        "bytes": 5836,
+        "sha256": "9a483954bc4a3ca9072b1c4a7aa3c1cf85148bb66a195345d8b5893de6a6cc2a",
+        "git_blob": "1a0896f44b6c7a16c7d63bd10cb527ca1af7f929",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_intent.cljc",
+        "bytes": 4097,
+        "sha256": "0a7efdcac1f86126a88d8c92b2082586fcb61a0b4540e97d38e4d802bb60032b",
+        "git_blob": "ac13d8152c5f8e1330987ef742fa7b2d8e8b3a37",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_publication.cljc",
+        "bytes": 7262,
+        "sha256": "1efdd21e0142ddb3e12195d3b9c385b7a2c8dbd29f6a1197ac1708bfdad706d1",
+        "git_blob": "704dbd832ff85e79137205b5b83c61c1acbbbd63",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_readback.cljc",
+        "bytes": 1028,
+        "sha256": "e573a29dd4a63d6124062c59eb791bf01219be0544bde2259ea0963469bd7f89",
+        "git_blob": "d6afa3b6d0c46648f50fb9c9ac32634598f9fad4",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_source.cljc",
+        "bytes": 2253,
+        "sha256": "e7b7fdd895bb49c2e58d7e020651ae5a1f8171229802075cb1ea2db49967660a",
+        "git_blob": "e20b238f1e0c52fba0a0df6e6c43e86b076d41c2",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc",
+        "bytes": 4432,
+        "sha256": "0fe74499cd01739ed5c33831d7bab43c6699ead850e5a9781f9b95972eee4fde",
+        "git_blob": "d47583a4113cb1ba09db6273332ef0a7089aad62",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_archive.cljc",
+        "bytes": 6197,
+        "sha256": "b7c18347dfe6e99a4a4f05274bb2cede64dfc4fd0e5844bba568649f938967b0",
+        "git_blob": "cbce2d616a0a63519e8d7887b0b806a4d6d5db96",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_collection.cljc",
+        "bytes": 2044,
+        "sha256": "750a0a304c6a0ad12ca37936f8684b5c18c3c45d8997c441756098da9dedcf51",
+        "git_blob": "9db0b41af2d0ecaf6d9aa7a295e09f289ad4e338",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_intent.cljc",
+        "bytes": 917,
+        "sha256": "f18b48bc0243291021849f93fb4dd7ecb4b483d3e70426c71daf62a6f8e9e72f",
+        "git_blob": "c37c190fe46b96da291eb1ff131780fb2d9e8872",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_readback.cljc",
+        "bytes": 2778,
+        "sha256": "d41eb3d7520e0e7cf3728b78bc2d78cc459618cf40ccc59c15f2109bbf0ba680",
+        "git_blob": "d2f0ea047ef9352401f86c3348b8f268c8be1368",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_source.cljc",
+        "bytes": 322,
+        "sha256": "e85e8f51a71f0585ac3e472d680832d29273a6678888f343546ff186dce03038",
+        "git_blob": "04234882bcfc04417cf4a898d38083d8f6ee3160",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/shape/review_verification.cljc",
+        "bytes": 397,
+        "sha256": "3c0db80c50927f3354bfb281a76f77f90c2b6d6298bd46c06a334ffd60871550",
+        "git_blob": "4dcf5cd7715359419b0f1d09e1b5ca0ac88bc972",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/eta-mu/test/cljs/eta_mu/review_intent_worker_barrier.cljs",
+        "bytes": 3191,
+        "sha256": "cc04fb97ccc4a7a017525bc5059adbcc4bc6d56c241d9265db437f9420a34e42",
+        "git_blob": "0c01314e9cfb1b96aaed8463c57157246077f822",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/src/rheos/backend/domain/kanban_projection.cljc",
+        "bytes": 1634,
+        "sha256": "af3a9858f0c0095e92f9e6a21a0e7165d8456291cd002199e35fb630b2ff6272",
+        "git_blob": "23ad6e78b8517f816053bb2f38ade3b69d77a92d",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/src/rheos/backend/extern/path.cljs",
+        "bytes": 387,
+        "sha256": "4d45831c8240ca1976c1e6e77d30e6086b8df5074b8c5f19c0a4895cba6450fc",
+        "git_blob": "cc1b54e84fa3ab5d0b5e2398f6e712a3cfe95f6a",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/src/rheos/backend/infra/cli.cljs",
+        "bytes": 33825,
+        "sha256": "6ea75966933d5fd89f6968307a69ce1a919ac78cac3fa6b2ea5fc07135118f68",
+        "git_blob": "7764408c563eea00a20e276139f43c43b52044b7",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/test/rheos/backend/domain/kanban_projection_test.cljc",
+        "bytes": 4071,
+        "sha256": "814f031ad3cf0a16843fc2cbfbd226ddac50ed3a87175b65198cd2c4d3d5fec7",
+        "git_blob": "3dddf954177977ec360b7225e6509b0731cf87fc",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/test/rheos/backend/infra/cli_test.cljs",
+        "bytes": 16635,
+        "sha256": "e9ead8dc713582a63ccbc14b139199b23e9ccdfacb4a6359351cfc0d2af49f1f",
+        "git_blob": "0790303d4f75989321c56d7cb9f276e197d356d7",
+        "native_blob_matches": true
+      },
+      {
+        "path": "packages/rheos/test/rheos/backend/infra/task_store_test.cljs",
+        "bytes": 12120,
+        "sha256": "f0d349b49361ca493023e31b7f34dbc70b50cfe036488ddc89c8f3cfe36d3d85",
+        "git_blob": "e82a248a1e25b89497699d6ffa77ebeb0308dbe1",
+        "native_blob_matches": true
+      },
+      {
+        "path": "pnpm-lock.yaml",
+        "bytes": 324773,
+        "sha256": "f3666e7872e6ff96de9d0ac650b8b7872f37de1c62df5544930dcaf0975fbd9d",
+        "git_blob": "9158b91b75404e3f31eb805ac985f3078383d508",
+        "native_blob_matches": true
+      },
+      {
+        "path": "receipts.edn",
+        "bytes": 653051,
+        "sha256": "b6554db812263fc62741d6f4ce5a1c621696845f4552cc9d871c226a2f50ad4c",
+        "git_blob": "6c21557ddb79dc3d192cbd450c7d8ef67f32a8dc",
+        "native_blob_matches": true
+      },
+      {
+        "path": "scripts/test.bb",
+        "bytes": 7643,
+        "sha256": "0c1d595051cb876e4c99b7e9867f0e03ff928d4f622192bb6faadd6a76dc0473",
+        "git_blob": "e25da933772d70046b97ad438578032a3d36db90",
+        "native_blob_matches": true
+      }
+    ],
+    "binary_review_credit": false,
+    "qualification": false
+  },
+  "source_execution": {
+    "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+    "tests_red_source": "7a798aa3b50ed908578b1cc2013ed5566e607b0e",
+    "tests_red_verifier": "73b9aa651286e0c87ddb2d9d8fd50e686ded9238",
+    "source_green": "33184ccc9730b0d545c7d0b0660bfbefacc1ce34",
+    "verifier_green": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+    "source_suite": "8 tests / 175 assertions; causal RED six failures then GREEN zero",
+    "verifier_suite": "5 tests / 181 assertions; causal RED 34 failures then GREEN zero",
+    "source_parity_values": 14,
+    "verifier_parity_values": 33,
+    "full_owning": {
+      "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+      "file_sha256": {
+        "packages/eta-mu/src/cljs/eta_mu/law/review_intent.cljc": "0a7efdcac1f86126a88d8c92b2082586fcb61a0b4540e97d38e4d802bb60032b",
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_intent.cljc": "4ad9209af005697796a2cca4b115730e1dc9ec78b324a669ebd5ebb87d65b1f4",
+        "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs": "2eeae3f6ffe044b3b71abd861d7ff00886e4f52a1761e6045da24b81c7fd2f64",
+        ".github/scripts/opencode_review_intent_test.cljs": "1accc1cd6bdc4c1df09217133c9617708c74c613276a85b2a91c1a433aaf2318",
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc": "cc11fa569abfc99eb13d97bdedd43065861b131e8aac936a1d58ca91026e3463",
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc": "fc0bd68e8bed41c707885507ef715e110a909fad5873bbee1b1e00abd7277705",
+        "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs": "41f67c3d7802bcaeda3bb806a1c09b9d359c9b59fa2b48a8173ffdf87b0d70fd",
+        "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs": "0f2133e5c45eb284597995da43c05cae52fe050daa7c36a6eb9b29cbf74d869d",
+        "packages/eta-mu/intent-runtime/test_entry.cljs": "92e5198e57cde3ca2493dc04167699681f01420071ca9b2fd3497093bdf96b96",
+        "scripts/test.bb": "0c1d595051cb876e4c99b7e9867f0e03ff928d4f622192bb6faadd6a76dc0473",
+        ".github/scripts/opencode_review_collection_test.cljs": "15503222474a100fc1ef818a6f5fcd5d92484503bbda608accb6e1bb19530d93",
+        ".github/scripts/opencode_review_publish_test.cljs": "c28821d881d6f7ffba354eb2ce04bde1015ed694225c2155646781e73fac34f5",
+        ".github/scripts/opencode_review_archive_test.cljs": "717bc17715aeb3b961df38cf9f96bdb36aa58b7ecdb2995a8f4cfb177e29f081",
+        ".github/scripts/opencode_review_verification_test.cljs": "01becafaa1cc37e1def294874870eff8e85147039b952e234f71f41150eb18dc",
+        ".ημ/review-evidence/trusted-publication-review-scope/test_inspection.bb": "2e8e28aad38f1bfa2d2152b0a81cd71fa7202743063be1e0f20f54efc17b82d7",
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc": "54b0dcfd5833f227d819823ff6ff761421dd70a70eb2c4fa2a0e7d86c2fe2bcd",
+        "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc": "0fe74499cd01739ed5c33831d7bab43c6699ead850e5a9781f9b95972eee4fde",
+        "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc": "a9e64088cba09520fb93789b09aecc3f8396ad44946d59576cf867d582e35250",
+        "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs": "4bdf3c484b689752c33c2f05f7a81c71de618e18e018a0ef0f812e4dacedb74d",
+        ".github/scripts/opencode_review_source_test.cljs": "0a11d664d4779104f55d3925d8f49e289a0906b422445af5dc22750c491cc850"
+      },
+      "results": [
+        {
+          "name": "cli-test",
+          "argv": [
+            "pnpm",
+            "-C",
+            "packages/eta-mu",
+            "test"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 20.344,
+          "completed_at": "2026-10-23T06:50:14.101134+00:00",
+          "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+          "file_sha256": {
+            "packages/eta-mu/src/cljs/eta_mu/law/review_intent.cljc": "0a7efdcac1f86126a88d8c92b2082586fcb61a0b4540e97d38e4d802bb60032b",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_intent.cljc": "4ad9209af005697796a2cca4b115730e1dc9ec78b324a669ebd5ebb87d65b1f4",
+            "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs": "2eeae3f6ffe044b3b71abd861d7ff00886e4f52a1761e6045da24b81c7fd2f64",
+            ".github/scripts/opencode_review_intent_test.cljs": "1accc1cd6bdc4c1df09217133c9617708c74c613276a85b2a91c1a433aaf2318",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc": "cc11fa569abfc99eb13d97bdedd43065861b131e8aac936a1d58ca91026e3463",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc": "fc0bd68e8bed41c707885507ef715e110a909fad5873bbee1b1e00abd7277705",
+            "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs": "41f67c3d7802bcaeda3bb806a1c09b9d359c9b59fa2b48a8173ffdf87b0d70fd",
+            "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs": "0f2133e5c45eb284597995da43c05cae52fe050daa7c36a6eb9b29cbf74d869d",
+            "packages/eta-mu/intent-runtime/test_entry.cljs": "92e5198e57cde3ca2493dc04167699681f01420071ca9b2fd3497093bdf96b96",
+            "scripts/test.bb": "0c1d595051cb876e4c99b7e9867f0e03ff928d4f622192bb6faadd6a76dc0473",
+            ".github/scripts/opencode_review_collection_test.cljs": "15503222474a100fc1ef818a6f5fcd5d92484503bbda608accb6e1bb19530d93",
+            ".github/scripts/opencode_review_publish_test.cljs": "c28821d881d6f7ffba354eb2ce04bde1015ed694225c2155646781e73fac34f5",
+            ".github/scripts/opencode_review_archive_test.cljs": "717bc17715aeb3b961df38cf9f96bdb36aa58b7ecdb2995a8f4cfb177e29f081",
+            ".github/scripts/opencode_review_verification_test.cljs": "01becafaa1cc37e1def294874870eff8e85147039b952e234f71f41150eb18dc",
+            ".ημ/review-evidence/trusted-publication-review-scope/test_inspection.bb": "2e8e28aad38f1bfa2d2152b0a81cd71fa7202743063be1e0f20f54efc17b82d7",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc": "54b0dcfd5833f227d819823ff6ff761421dd70a70eb2c4fa2a0e7d86c2fe2bcd",
+            "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc": "0fe74499cd01739ed5c33831d7bab43c6699ead850e5a9781f9b95972eee4fde",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc": "a9e64088cba09520fb93789b09aecc3f8396ad44946d59576cf867d582e35250",
+            "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs": "4bdf3c484b689752c33c2f05f7a81c71de618e18e018a0ef0f812e4dacedb74d",
+            ".github/scripts/opencode_review_source_test.cljs": "0a11d664d4779104f55d3925d8f49e289a0906b422445af5dc22750c491cc850"
+          },
+          "removed_provider_variable_names": [
+            "OPENAI_API_KEY"
+          ],
+          "environment_policy": "Runtime/path allowlist; authentication and deployment variables are not forwarded.",
+          "npm_user_config": "explicit empty task-owned file; project configuration retained"
+        },
+        {
+          "name": "cli-lint",
+          "argv": [
+            "pnpm",
+            "-C",
+            "packages/eta-mu",
+            "lint:kondo"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 2.199,
+          "completed_at": "2026-10-23T06:50:16.303957+00:00",
+          "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+          "file_sha256": {
+            "packages/eta-mu/src/cljs/eta_mu/law/review_intent.cljc": "0a7efdcac1f86126a88d8c92b2082586fcb61a0b4540e97d38e4d802bb60032b",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_intent.cljc": "4ad9209af005697796a2cca4b115730e1dc9ec78b324a669ebd5ebb87d65b1f4",
+            "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs": "2eeae3f6ffe044b3b71abd861d7ff00886e4f52a1761e6045da24b81c7fd2f64",
+            ".github/scripts/opencode_review_intent_test.cljs": "1accc1cd6bdc4c1df09217133c9617708c74c613276a85b2a91c1a433aaf2318",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc": "cc11fa569abfc99eb13d97bdedd43065861b131e8aac936a1d58ca91026e3463",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc": "fc0bd68e8bed41c707885507ef715e110a909fad5873bbee1b1e00abd7277705",
+            "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs": "41f67c3d7802bcaeda3bb806a1c09b9d359c9b59fa2b48a8173ffdf87b0d70fd",
+            "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs": "0f2133e5c45eb284597995da43c05cae52fe050daa7c36a6eb9b29cbf74d869d",
+            "packages/eta-mu/intent-runtime/test_entry.cljs": "92e5198e57cde3ca2493dc04167699681f01420071ca9b2fd3497093bdf96b96",
+            "scripts/test.bb": "0c1d595051cb876e4c99b7e9867f0e03ff928d4f622192bb6faadd6a76dc0473",
+            ".github/scripts/opencode_review_collection_test.cljs": "15503222474a100fc1ef818a6f5fcd5d92484503bbda608accb6e1bb19530d93",
+            ".github/scripts/opencode_review_publish_test.cljs": "c28821d881d6f7ffba354eb2ce04bde1015ed694225c2155646781e73fac34f5",
+            ".github/scripts/opencode_review_archive_test.cljs": "717bc17715aeb3b961df38cf9f96bdb36aa58b7ecdb2995a8f4cfb177e29f081",
+            ".github/scripts/opencode_review_verification_test.cljs": "01becafaa1cc37e1def294874870eff8e85147039b952e234f71f41150eb18dc",
+            ".ημ/review-evidence/trusted-publication-review-scope/test_inspection.bb": "2e8e28aad38f1bfa2d2152b0a81cd71fa7202743063be1e0f20f54efc17b82d7",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc": "54b0dcfd5833f227d819823ff6ff761421dd70a70eb2c4fa2a0e7d86c2fe2bcd",
+            "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc": "0fe74499cd01739ed5c33831d7bab43c6699ead850e5a9781f9b95972eee4fde",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc": "a9e64088cba09520fb93789b09aecc3f8396ad44946d59576cf867d582e35250",
+            "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs": "4bdf3c484b689752c33c2f05f7a81c71de618e18e018a0ef0f812e4dacedb74d",
+            ".github/scripts/opencode_review_source_test.cljs": "0a11d664d4779104f55d3925d8f49e289a0906b422445af5dc22750c491cc850"
+          },
+          "removed_provider_variable_names": [
+            "OPENAI_API_KEY"
+          ],
+          "environment_policy": "Runtime/path allowlist; authentication and deployment variables are not forwarded.",
+          "npm_user_config": "explicit empty task-owned file; project configuration retained"
+        },
+        {
+          "name": "cli-release",
+          "argv": [
+            "pnpm",
+            "-C",
+            "packages/eta-mu",
+            "build"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 17.156,
+          "completed_at": "2026-10-23T06:50:33.461541+00:00",
+          "source": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+          "file_sha256": {
+            "packages/eta-mu/src/cljs/eta_mu/law/review_intent.cljc": "0a7efdcac1f86126a88d8c92b2082586fcb61a0b4540e97d38e4d802bb60032b",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_intent.cljc": "4ad9209af005697796a2cca4b115730e1dc9ec78b324a669ebd5ebb87d65b1f4",
+            "packages/eta-mu/src/cljs/eta_mu/infra/review_intent.cljs": "2eeae3f6ffe044b3b71abd861d7ff00886e4f52a1761e6045da24b81c7fd2f64",
+            ".github/scripts/opencode_review_intent_test.cljs": "1accc1cd6bdc4c1df09217133c9617708c74c613276a85b2a91c1a433aaf2318",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_collection.cljc": "cc11fa569abfc99eb13d97bdedd43065861b131e8aac936a1d58ca91026e3463",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_publication.cljc": "fc0bd68e8bed41c707885507ef715e110a909fad5873bbee1b1e00abd7277705",
+            "packages/eta-mu/src/cljs/eta_mu/extern/review_archive.cljs": "41f67c3d7802bcaeda3bb806a1c09b9d359c9b59fa2b48a8173ffdf87b0d70fd",
+            "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs": "0f2133e5c45eb284597995da43c05cae52fe050daa7c36a6eb9b29cbf74d869d",
+            "packages/eta-mu/intent-runtime/test_entry.cljs": "92e5198e57cde3ca2493dc04167699681f01420071ca9b2fd3497093bdf96b96",
+            "scripts/test.bb": "0c1d595051cb876e4c99b7e9867f0e03ff928d4f622192bb6faadd6a76dc0473",
+            ".github/scripts/opencode_review_collection_test.cljs": "15503222474a100fc1ef818a6f5fcd5d92484503bbda608accb6e1bb19530d93",
+            ".github/scripts/opencode_review_publish_test.cljs": "c28821d881d6f7ffba354eb2ce04bde1015ed694225c2155646781e73fac34f5",
+            ".github/scripts/opencode_review_archive_test.cljs": "717bc17715aeb3b961df38cf9f96bdb36aa58b7ecdb2995a8f4cfb177e29f081",
+            ".github/scripts/opencode_review_verification_test.cljs": "01becafaa1cc37e1def294874870eff8e85147039b952e234f71f41150eb18dc",
+            ".ημ/review-evidence/trusted-publication-review-scope/test_inspection.bb": "2e8e28aad38f1bfa2d2152b0a81cd71fa7202743063be1e0f20f54efc17b82d7",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_source.cljc": "54b0dcfd5833f227d819823ff6ff761421dd70a70eb2c4fa2a0e7d86c2fe2bcd",
+            "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc": "0fe74499cd01739ed5c33831d7bab43c6699ead850e5a9781f9b95972eee4fde",
+            "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc": "a9e64088cba09520fb93789b09aecc3f8396ad44946d59576cf867d582e35250",
+            "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs": "4bdf3c484b689752c33c2f05f7a81c71de618e18e018a0ef0f812e4dacedb74d",
+            ".github/scripts/opencode_review_source_test.cljs": "0a11d664d4779104f55d3925d8f49e289a0906b422445af5dc22750c491cc850"
+          },
+          "removed_provider_variable_names": [
+            "OPENAI_API_KEY"
+          ],
+          "environment_policy": "Runtime/path allowlist; authentication and deployment variables are not forwarded.",
+          "npm_user_config": "explicit empty task-owned file; project configuration retained"
+        }
+      ]
+    },
+    "qualification": false,
+    "CMS_Cephalon": "paused"
+  },
+  "independent_verifier": {
+    "observed_at": "2026-10-23T06:54:41.239771+00:00",
+    "reviewer": "independent scoped collection_stability agent",
+    "source_commit": "c9fc461f2a14d613e9f1897f5143676378e154c2",
+    "source_files": [
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/law/review_verification.cljc",
+        "sha256": "0fe74499cd01739ed5c33831d7bab43c6699ead850e5a9781f9b95972eee4fde",
+        "unchanged": true,
+        "git_blob": "d47583a4113cb1ba09db6273332ef0a7089aad62"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/extern/review_verification.cljs",
+        "sha256": "0f2133e5c45eb284597995da43c05cae52fe050daa7c36a6eb9b29cbf74d869d",
+        "unchanged": true,
+        "git_blob": "9c758369cdccd6a734bfe99eb916ac98a4971bae"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/domain/review_verification.cljc",
+        "sha256": "a9e64088cba09520fb93789b09aecc3f8396ad44946d59576cf867d582e35250",
+        "unchanged": true,
+        "git_blob": "d0a3581f12d103510d73db6556397dfdf7198db2"
+      },
+      {
+        "path": "packages/eta-mu/src/cljs/eta_mu/infra/review_verification.cljs",
+        "sha256": "4bdf3c484b689752c33c2f05f7a81c71de618e18e018a0ef0f812e4dacedb74d",
+        "unchanged": true,
+        "git_blob": "f768820510e0cb5df4d97d80ce6cee90467b1d42"
+      },
+      {
+        "path": ".github/scripts/opencode_review_verification_test.cljs",
+        "sha256": "01becafaa1cc37e1def294874870eff8e85147039b952e234f71f41150eb18dc",
+        "unchanged": true,
+        "git_blob": "22b0b7924d4dc7c228a86527d1bca7028653355a"
+      }
+    ],
+    "qualification": false,
+    "qualification_scope": "Local inert composition and source-bound verification only; no original G/executed caller authentication, full22-tool profile/native input reconstruction, native review/publication/adoption credit. Existing G/caller policy unchanged.",
+    "completed": true,
+    "findings": [],
+    "actual_pinned_runtime": {
+      "cases": 28,
+      "passed": 28,
+      "failed": 0,
+      "raw_result_exit_code": 0,
+      "raw_result_stderr_bytes": 0,
+      "resources": {
+        "runtimes": 0,
+        "workers": 0
+      },
+      "positive_cases": 4,
+      "negative_cases": 24,
+      "controls": [
+        "Actual physical ZIP and pinned Muse capsule; no fake canonical verdict",
+        "Producer1/review1, producer1/review2 and producer1/max-safe-review positives",
+        "All11required proof fields independently omitted",
+        "Extra proof/provenance/full-diff fields refuse under source-owned exact schemas",
+        "Producer/review cross-repository and workflow-ref mismatches refuse",
+        "Numeric attempt values, noncanonical IDs and precision-boundary future producer refuse",
+        "Semantically equal manifest with changed whitespace bytes verifies using its actual hash",
+        "Same semantic manifest with the old valid canonical byte hash refuses inside actual runtime",
+        "Verified actual manifest identity replaces caller identity in reconstruction callback",
+        "All effects empty; runtime/worker resources zero"
+      ]
+    },
+    "portable_decimal_reference": {
+      "cases": 270,
+      "reference": "Independent Python ASCII fullmatch and arbitrary-precision integer arithmetic; safe native review bound. No product lexical comparison copied.",
+      "owning_nbb_passed": 270,
+      "babashka_passed": 270,
+      "byte_identical_actual_value_vectors": true,
+      "counterexamples": []
+    },
+    "scope_limits": [
+      "Reused registered fixture helpers from exact source prefix; independent input mutations/assertions and Python arithmetic reference.",
+      "No registered full suite repeated; no tracked file, Git/card/ledger/native mutations.",
+      "No broader security/producer/native source-custody completion claim."
+    ],
+    "raw_evidence": [
+      "source-before.json",
+      "actual-probe.cljs",
+      "actual-results.json",
+      "actual-values.json",
+      "decimal-reference.json",
+      "decimal-probe.cljc",
+      "decimal-nbb.json",
+      "decimal-bb.json",
+      "decimal-summary.json"
+    ]
+  },
+  "profile_execution": {
+    "at": "2026-10-23T06:49:30.707202+00:00",
+    "muse_revision": "c1369c223cf3c57e3e31934a6d746bfcdfe73f5a",
+    "eta_workflow_sha256": "ff76052bada6c56797901a796b21393c3b2a5c2a2b1b7bd1e302ade38b0551dd",
+    "nbb_version": "1.5.212",
+    "pure_config_load_exit": 0,
+    "actual_plugin_load_exit": 1,
+    "actual_plugin_failure": "Could not find namespace: shadow.esm",
+    "actual_plugin_exact_shadow_successor_exit": 1,
+    "actual_plugin_exact_shadow_successor_failure": "deftool does not exist",
+    "jvm_entrypoint_exit": 0,
+    "jvm_stderr_bytes": 0,
+    "actual_jvm_macro_present": true,
+    "permission_count": 22,
+    "permission_names": [
+      "actor_list",
+      "actor_mailbox",
+      "actor_monitor",
+      "agent_list",
+      "muse_phases",
+      "phase_conclusions",
+      "phase_filter",
+      "phase_head",
+      "phase_list_active",
+      "phase_list_idle",
+      "phase_observations",
+      "phase_tail",
+      "review_assess_diff_chunk",
+      "review_begin",
+      "review_classify_finding",
+      "review_propose_finding",
+      "review_read_diff_chunk",
+      "review_record_evidence",
+      "review_status",
+      "review_submit",
+      "task_list",
+      "task_status"
+    ],
+    "equals_independent_source_names": true,
+    "equals_workflow_expected_names": true,
+    "all_permissions_allow": true,
+    "active_profile": ":dev",
+    "actual_full_adapter_compiled": false,
+    "actual_full_adapter_observed": false,
+    "actor_init_or_handlers_invoked": false,
+    "producer_executed_profile_established": false,
+    "native_authentication_or_adoption_credit": false,
+    "source_mutations": false,
+    "capture_scope": "root-owned only",
+    "remaining_boundary": [
+      "Pinned JVM-only deftool/defplugin macros are unavailable to the actual NBB cljs resource loader.",
+      "The existing generated entrypoint requires compiled CLJS plugin namespaces and the host boundary, not JVM data evaluation; only entrypoint generation and pure host config rendering were executed.",
+      "The workflow public export calls host/activate!, which invokes plugins.actors/init! -> backend/ensure! and therefore is outside this no-actor-execution scope.",
+      "To establish actual full adapter source expectation, use the pinned real CLJS/Shadow compiler with its exact dependency closure and a capture-only observer of the existing pipeline/adapter; do not invoke plugin/activate! or substitute handler descriptors."
+    ]
+  },
+  "profile_independent_review": {
+    "at": "2026-10-23T06:53:13.393238+00:00",
+    "source_files_verified_against_muse_c1369": 38,
+    "source_manifest_records_verified": 38,
+    "artifact_manifest_files_verified": 69,
+    "pinned_workflow_bytes_equal": true,
+    "workflow_heredocs_verified": 3,
+    "cached_jvm_jars_verified": 3,
+    "shadow_dependency_archive_and_member_verified": true,
+    "permission_names": {
+      "count": 22,
+      "equals_exact_workflow_tools": true,
+      "all_allow": true,
+      "workflow_sha256": "ff76052bada6c56797901a796b21393c3b2a5c2a2b1b7bd1e302ade38b0551dd"
+    },
+    "jvm_independent_check": {
+      "exit_code": 0,
+      "stdout": "{:existing-pure-entrypoint-source-equal true, :existing-host-config-source-equal true, :actual-resource-symbols [plugins.review-pipeline/plugin plugins.actors/plugin], :permission-count 22, :compiled-adapter-established false, :plugin-activation-performed false}\n",
+      "stderr_bytes": 0
+    },
+    "all_materialized_evidence_unchanged": true,
+    "actionable_findings": [],
+    "qualification": "Actual source/configuration and pure JVM generation evidence only. No compiled/observed 22-tool adapter, actual producer execution, authentication, adoption or approval credit.",
+    "remaining_limits": [
+      "Retained NBB plugin loads both failed at actual loader/macro boundaries.",
+      "JVM command invoked actual generator and private host renderer; independent audit recomputed only their pure functions and did not invoke plugin activation or handlers.",
+      "Generated entrypoint references actual plugin resources but has not been compiled/evaluated as a CLJS adapter."
+    ],
+    "mutations": "Only profile-independent-review root capture files; no product, source-profile evidence, Git, card or ledger changes."
+  },
+  "prior_source_native_verification": {
+    "observed_at": "2026-10-23T06:32:33Z",
+    "sandbox": {
+      "run": 39909048197,
+      "job": 120267534077,
+      "status": "completed",
+      "conclusion": "success",
+      "head": "f7963bdaa0dbdbb24c0b990d46f572c37dcb6a20",
+      "executed_merge": "e157f704554253382331bc981dcbb051f692dac4",
+      "base": "7112c36440d180ca183d6a3f89661cee161fdae5",
+      "parents_verified": [
+        "7112c36440d180ca183d6a3f89661cee161fdae5",
+        "f7963bdaa0dbdbb24c0b990d46f572c37dcb6a20"
+      ],
+      "merge_head_tree": "d9a7411a3e93799b13f13a48c723cfdb95b80dc8",
+      "prior_native_proof_recovery": "prior-native-proof-recovery.json",
+      "actual_log": {
+        "checkouts": [
+          {
+            "line": 250,
+            "command": "2026-10-23T06:01:53.4768581Z [command]/usr/bin/git log -1 --format=%H",
+            "commit": "e157f704554253382331bc981dcbb051f692dac4",
+            "output": "2026-10-23T06:01:53.4795999Z e157f704554253382331bc981dcbb051f692dac4"
+          }
+        ],
+        "tests": [
+          {
+            "line": 530,
+            "text": "2026-10-23T06:02:15.3812740Z Ran 11 tests containing 199 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 1313,
+            "text": "2026-10-23T06:06:10.9341215Z Ran 11 tests containing 199 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2617,
+            "text": "2026-10-23T06:10:38.5052248Z Ran 8 tests containing 319 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2644,
+            "text": "2026-10-23T06:10:43.6058221Z Ran 6 tests containing 57 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2666,
+            "text": "2026-10-23T06:10:46.6420455Z Ran 18 tests containing 602 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2687,
+            "text": "2026-10-23T06:12:36.8172948Z Ran 40 tests containing 390 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2699,
+            "text": "2026-10-23T06:12:38.5779471Z Ran 33 tests containing 1022 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2711,
+            "text": "2026-10-23T06:12:39.7972680Z Ran 10 tests containing 130 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2723,
+            "text": "2026-10-23T06:12:41.8500717Z Ran 7 tests containing 101 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2735,
+            "text": "2026-10-23T06:13:43.0227491Z Ran 4 tests containing 120 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2747,
+            "text": "2026-10-23T06:14:01.9325774Z Ran 11 tests containing 100 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2868,
+            "text": "2026-10-23T06:14:30.5731548Z Ran 194 tests containing 587 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2888,
+            "text": "2026-10-23T06:14:35.5697945Z Ran 11 tests containing 199 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2912,
+            "text": "2026-10-23T06:14:36.3065377Z Ran 29 tests containing 182 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2942,
+            "text": "2026-10-23T06:14:58.5487971Z Ran 80 tests containing 388 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 2969,
+            "text": "2026-10-23T06:15:39.8199867Z Ran 78 tests containing 395 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3001,
+            "text": "2026-10-23T06:16:25.0484239Z Ran 78 tests containing 395 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3131,
+            "text": "2026-10-23T06:16:53.6199882Z Ran 212 tests containing 1219 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3238,
+            "text": "2026-10-23T06:16:54.8745112Z Ran 212 tests containing 1219 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3298,
+            "text": "2026-10-23T06:17:25.2588242Z Ran 142 tests containing 607 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3356,
+            "text": "2026-10-23T06:17:45.3644592Z Ran 70 tests containing 172 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3389,
+            "text": "2026-10-23T06:18:07.5566940Z Ran 47 tests containing 120 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3424,
+            "text": "2026-10-23T06:18:23.5391673Z Ran 95 tests containing 259 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3447,
+            "text": "2026-10-23T06:18:24.0221952Z Ran 95 tests containing 259 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3506,
+            "text": "2026-10-23T06:18:56.8746065Z Ran 78 tests containing 332 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3559,
+            "text": "2026-10-23T06:19:22.6103037Z Ran 3 tests containing 6 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3568,
+            "text": "2026-10-23T06:19:23.8260178Z Ran 3 tests containing 6 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3599,
+            "text": "2026-10-23T06:19:43.5576582Z Ran 17 tests containing 64 assertions.",
+            "zero_failures_errors": true
+          },
+          {
+            "line": 3616,
+            "text": "2026-10-23T06:19:44.0038705Z Ran 17 tests containing 64 assertions.",
+            "zero_failures_errors": true
+          }
+        ],
+        "compiler_builds": [
+          {
+            "line": 706,
+            "text": "2026-10-23T06:02:45.7109843Z [:apply-patch] Build completed. (52 files, 5 compiled, 0 warnings, 11.89s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 708,
+            "text": "2026-10-23T06:02:52.1689755Z [:bootstrap] Build completed. (48 files, 4 compiled, 0 warnings, 6.46s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 710,
+            "text": "2026-10-23T06:02:57.4934534Z [:chronos] Build completed. (49 files, 5 compiled, 0 warnings, 5.32s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 712,
+            "text": "2026-10-23T06:03:04.5085934Z [:contract-runtime] Build completed. (62 files, 14 compiled, 0 warnings, 7.01s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 714,
+            "text": "2026-10-23T06:03:09.5178288Z [:contract-runtime-v2] Build completed. (64 files, 15 compiled, 0 warnings, 5.01s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 716,
+            "text": "2026-10-23T06:03:13.5161998Z [:custom-providers] Build completed. (48 files, 4 compiled, 0 warnings, 4.00s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 718,
+            "text": "2026-10-23T06:03:17.7739350Z [:graph-memory] Build completed. (54 files, 5 compiled, 0 warnings, 4.26s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 720,
+            "text": "2026-10-23T06:03:21.9038961Z [:image-render] Build completed. (53 files, 4 compiled, 0 warnings, 4.13s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 722,
+            "text": "2026-10-23T06:03:26.0349039Z [:lisp-decomp-nudge] Build completed. (49 files, 5 compiled, 0 warnings, 4.13s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 724,
+            "text": "2026-10-23T06:03:30.5955270Z [:opencode-global-instructions] Build completed. (62 files, 14 compiled, 0 warnings, 4.56s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 726,
+            "text": "2026-10-23T06:03:35.2765105Z [:opmf-contract-gate] Build completed. (64 files, 15 compiled, 0 warnings, 4.68s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 728,
+            "text": "2026-10-23T06:03:41.2875013Z [:receipt-river] Build completed. (64 files, 16 compiled, 0 warnings, 6.01s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 730,
+            "text": "2026-10-23T06:03:46.0267783Z [:session-mycology] Build completed. (54 files, 6 compiled, 0 warnings, 4.74s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 732,
+            "text": "2026-10-23T06:03:50.0752974Z [:task-timing] Build completed. (48 files, 4 compiled, 0 warnings, 4.05s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 734,
+            "text": "2026-10-23T06:03:53.9449031Z [:websearch-open-hax] Build completed. (53 files, 5 compiled, 0 warnings, 3.87s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 739,
+            "text": "2026-10-23T06:04:13.2769083Z [:opencode-apply-patch] Build completed. (52 files, 5 compiled, 0 warnings, 13.82s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 741,
+            "text": "2026-10-23T06:04:19.8683396Z [:opencode-bootstrap] Build completed. (50 files, 5 compiled, 0 warnings, 6.59s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 743,
+            "text": "2026-10-23T06:04:25.3867626Z [:opencode-chronos] Build completed. (50 files, 5 compiled, 0 warnings, 5.52s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 745,
+            "text": "2026-10-23T06:04:31.9964240Z [:opencode-contract-runtime] Build completed. (62 files, 14 compiled, 0 warnings, 6.61s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 747,
+            "text": "2026-10-23T06:04:37.4179994Z [:opencode-contract-runtime-v2] Build completed. (64 files, 15 compiled, 0 warnings, 5.42s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 749,
+            "text": "2026-10-23T06:04:42.0389684Z [:opencode-custom-providers] Build completed. (50 files, 5 compiled, 0 warnings, 4.62s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 751,
+            "text": "2026-10-23T06:04:46.7699303Z [:opencode-graph-memory] Build completed. (54 files, 5 compiled, 0 warnings, 4.73s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 753,
+            "text": "2026-10-23T06:04:51.4595283Z [:opencode-image-render] Build completed. (54 files, 5 compiled, 0 warnings, 4.69s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 755,
+            "text": "2026-10-23T06:04:56.3235079Z [:opencode-lisp-decomp-nudge] Build completed. (50 files, 5 compiled, 0 warnings, 4.86s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 757,
+            "text": "2026-10-23T06:05:01.4945439Z [:opencode-opencode-global-instructions] Build completed. (62 files, 14 compiled, 0 warnings, 5.17s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 759,
+            "text": "2026-10-23T06:05:06.4139215Z [:opencode-opmf-contract-gate] Build completed. (62 files, 14 compiled, 0 warnings, 4.92s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 761,
+            "text": "2026-10-23T06:05:11.3461412Z [:opencode-receipt-river] Build completed. (64 files, 16 compiled, 0 warnings, 4.93s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 763,
+            "text": "2026-10-23T06:05:15.5054188Z [:opencode-session-mycology] Build completed. (54 files, 6 compiled, 0 warnings, 4.16s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 765,
+            "text": "2026-10-23T06:05:19.8689114Z [:opencode-task-timing] Build completed. (50 files, 5 compiled, 0 warnings, 4.36s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 767,
+            "text": "2026-10-23T06:05:24.3075954Z [:opencode-websearch-open-hax] Build completed. (53 files, 5 compiled, 0 warnings, 4.44s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 2456,
+            "text": "2026-10-23T06:07:45.6729378Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 19.48s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 2458,
+            "text": "2026-10-23T06:07:52.2634236Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 6.55s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 2467,
+            "text": "2026-10-23T06:08:27.7078697Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 18.08s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 2469,
+            "text": "2026-10-23T06:08:35.0373722Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 7.27s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 2478,
+            "text": "2026-10-23T06:09:13.5469606Z [:opencode-plugin] Build completed. (111 files, 60 compiled, 0 warnings, 20.24s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 2480,
+            "text": "2026-10-23T06:09:19.4689144Z [:review-invocation] Build completed. (55 files, 9 compiled, 0 warnings, 5.89s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 2801,
+            "text": "2026-10-23T06:14:27.2980582Z [:test] Build completed. (204 files, 203 compiled, 0 warnings, 12.88s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3004,
+            "text": "2026-10-23T06:16:25.0637901Z [:test] Build completed. (118 files, 117 compiled, 0 warnings, 33.82s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3134,
+            "text": "2026-10-23T06:16:53.6416443Z [:test] Build completed. (162 files, 161 compiled, 0 warnings, 12.96s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3301,
+            "text": "2026-10-23T06:17:25.2868465Z [:test] Build completed. (216 files, 215 compiled, 0 warnings, 15.76s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3326,
+            "text": "2026-10-23T06:17:45.0058609Z [:test] Build completed. (82 files, 81 compiled, 0 warnings, 8.37s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3373,
+            "text": "2026-10-23T06:18:07.2570656Z [:test] Build completed. (71 files, 70 compiled, 0 warnings, 10.51s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3427,
+            "text": "2026-10-23T06:18:23.5499119Z [:node-test] Build completed. (90 files, 89 compiled, 0 warnings, 10.41s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3466,
+            "text": "2026-10-23T06:18:48.1409281Z [:test] Build completed. (140 files, 139 compiled, 0 warnings, 11.91s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3468,
+            "text": "2026-10-23T06:18:53.0408589Z [:lib] Build completed. (112 files, 103 compiled, 0 warnings, 4.78s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3562,
+            "text": "2026-10-23T06:19:22.6180159Z [:test] Build completed. (59 files, 58 compiled, 0 warnings, 8.87s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3602,
+            "text": "2026-10-23T06:19:43.5700515Z [:test] Build completed. (76 files, 75 compiled, 0 warnings, 9.57s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3699,
+            "text": "2026-10-23T06:20:39.9310151Z packages/extensions build: [:apply-patch] Build completed. (52 files, 1 compiled, 0 warnings, 34.49s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3701,
+            "text": "2026-10-23T06:20:51.0027781Z packages/chat-ui build: [:lib] Build completed. (80 files, 78 compiled, 0 warnings, 47.07s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3706,
+            "text": "2026-10-23T06:20:56.7828654Z packages/extensions build: [:bootstrap] Build completed. (48 files, 1 compiled, 0 warnings, 16.84s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3709,
+            "text": "2026-10-23T06:21:10.2959066Z packages/extensions build: [:chronos] Build completed. (49 files, 1 compiled, 0 warnings, 13.51s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3711,
+            "text": "2026-10-23T06:21:22.0808776Z packages/axxium build: [:server] Build completed. (73 files, 20 compiled, 0 warnings, 73.73s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3716,
+            "text": "2026-10-23T06:21:28.0436173Z packages/extensions build: [:contract-runtime] Build completed. (62 files, 1 compiled, 0 warnings, 17.74s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3731,
+            "text": "2026-10-23T06:21:34.7707391Z packages/contracts/output build: [:output-contracts] Build completed. (77 files, 33 compiled, 0 warnings, 66.49s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3735,
+            "text": "2026-10-23T06:21:40.7969449Z packages/extensions build: [:contract-runtime-v2] Build completed. (64 files, 1 compiled, 0 warnings, 12.74s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3737,
+            "text": "2026-10-23T06:21:50.5974651Z packages/extensions build: [:custom-providers] Build completed. (48 files, 1 compiled, 0 warnings, 9.79s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3740,
+            "text": "2026-10-23T06:22:01.4508782Z packages/extensions build: [:graph-memory] Build completed. (54 files, 1 compiled, 0 warnings, 10.85s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3743,
+            "text": "2026-10-23T06:22:13.1790249Z packages/extensions build: [:image-render] Build completed. (53 files, 1 compiled, 0 warnings, 11.72s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3745,
+            "text": "2026-10-23T06:22:14.1928729Z packages/fork-tax build: [:fork-tax] Build completed. (50 files, 6 compiled, 0 warnings, 44.09s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3751,
+            "text": "2026-10-23T06:22:23.6337939Z packages/extensions build: [:lisp-decomp-nudge] Build completed. (49 files, 1 compiled, 0 warnings, 10.45s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3753,
+            "text": "2026-10-23T06:22:33.5158899Z packages/extensions build: [:opencode-global-instructions] Build completed. (62 files, 1 compiled, 0 warnings, 9.88s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3755,
+            "text": "2026-10-23T06:22:46.9672042Z packages/extensions build: [:opmf-contract-gate] Build completed. (64 files, 1 compiled, 0 warnings, 13.44s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3758,
+            "text": "2026-10-23T06:22:56.9784885Z packages/contracts/output build: [:cli] Build completed. (79 files, 35 compiled, 0 warnings, 64.51s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3763,
+            "text": "2026-10-23T06:22:58.2253501Z packages/extensions build: [:receipt-river] Build completed. (64 files, 1 compiled, 0 warnings, 11.25s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3765,
+            "text": "2026-10-23T06:22:59.9678153Z packages/receipt-river build: [:receipt-river] Build completed. (59 files, 15 compiled, 0 warnings, 48.90s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3769,
+            "text": "2026-10-23T06:23:06.8468942Z packages/extensions build: [:session-mycology] Build completed. (54 files, 1 compiled, 0 warnings, 8.62s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3771,
+            "text": "2026-10-23T06:23:15.8728753Z packages/extensions build: [:task-timing] Build completed. (48 files, 1 compiled, 0 warnings, 9.02s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3774,
+            "text": "2026-10-23T06:23:25.9612054Z packages/extensions build: [:websearch-open-hax] Build completed. (53 files, 1 compiled, 0 warnings, 10.09s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3779,
+            "text": "2026-10-23T06:23:47.4268836Z packages/session-mycology build: [:session-mycology] Build completed. (55 files, 11 compiled, 0 warnings, 57.56s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3782,
+            "text": "2026-10-23T06:24:06.4935941Z packages/sol build: [:server] Build completed. (202 files, 185 compiled, 0 warnings, 38.33s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3784,
+            "text": "2026-10-23T06:24:14.6121086Z packages/extensions build: [:opencode-apply-patch] Build completed. (52 files, 0 compiled, 0 warnings, 25.40s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3786,
+            "text": "2026-10-23T06:24:16.7067746Z packages/turn-processor build: [:turn-processor] Build completed. (58 files, 14 compiled, 0 warnings, 58.39s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3788,
+            "text": "2026-10-23T06:24:19.8849029Z packages/extensions build: [:opencode-bootstrap] Build completed. (50 files, 0 compiled, 0 warnings, 5.22s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3790,
+            "text": "2026-10-23T06:24:23.0736692Z packages/extensions build: [:opencode-chronos] Build completed. (50 files, 0 compiled, 0 warnings, 3.19s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3792,
+            "text": "2026-10-23T06:24:26.8941319Z packages/extensions build: [:opencode-contract-runtime] Build completed. (62 files, 0 compiled, 0 warnings, 3.82s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3794,
+            "text": "2026-10-23T06:24:29.9313516Z packages/extensions build: [:opencode-contract-runtime-v2] Build completed. (64 files, 0 compiled, 0 warnings, 3.04s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3796,
+            "text": "2026-10-23T06:24:32.7673023Z packages/extensions build: [:opencode-custom-providers] Build completed. (50 files, 0 compiled, 0 warnings, 2.83s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3798,
+            "text": "2026-10-23T06:24:35.3194845Z packages/extensions build: [:opencode-graph-memory] Build completed. (54 files, 0 compiled, 0 warnings, 2.55s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3800,
+            "text": "2026-10-23T06:24:37.7229095Z packages/extensions build: [:opencode-image-render] Build completed. (54 files, 0 compiled, 0 warnings, 2.40s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3802,
+            "text": "2026-10-23T06:24:40.3691591Z packages/extensions build: [:opencode-lisp-decomp-nudge] Build completed. (50 files, 0 compiled, 0 warnings, 2.64s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3804,
+            "text": "2026-10-23T06:24:43.3348454Z packages/extensions build: [:opencode-opencode-global-instructions] Build completed. (62 files, 0 compiled, 0 warnings, 2.96s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3806,
+            "text": "2026-10-23T06:24:46.3228989Z packages/extensions build: [:opencode-opmf-contract-gate] Build completed. (62 files, 0 compiled, 0 warnings, 2.98s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3808,
+            "text": "2026-10-23T06:24:49.2620640Z packages/extensions build: [:opencode-receipt-river] Build completed. (64 files, 0 compiled, 0 warnings, 2.94s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3810,
+            "text": "2026-10-23T06:24:51.6142633Z packages/extensions build: [:opencode-session-mycology] Build completed. (54 files, 0 compiled, 0 warnings, 2.35s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3812,
+            "text": "2026-10-23T06:24:54.3481566Z packages/extensions build: [:opencode-task-timing] Build completed. (50 files, 0 compiled, 0 warnings, 2.73s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3814,
+            "text": "2026-10-23T06:24:56.9991853Z packages/extensions build: [:opencode-websearch-open-hax] Build completed. (53 files, 0 compiled, 0 warnings, 2.65s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3935,
+            "text": "2026-10-23T06:25:39.4958419Z packages/terminal-ui build: [:terminal-ui] Build completed. (57 files, 12 compiled, 0 warnings, 31.49s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3937,
+            "text": "2026-10-23T06:25:45.2080990Z packages/rheos build: [:server] Build completed. (111 files, 53 compiled, 0 warnings, 29.07s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3939,
+            "text": "2026-10-23T06:25:55.1395496Z packages/rheos build: [:cli] Build completed. (116 files, 57 compiled, 0 warnings, 9.91s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3941,
+            "text": "2026-10-23T06:26:01.8556396Z packages/rheos build: [:github-sync] Build completed. (75 files, 28 compiled, 0 warnings, 6.71s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3943,
+            "text": "2026-10-23T06:26:11.9566309Z packages/rheos build: [:app] Build completed. (95 files, 49 compiled, 0 warnings, 10.10s)",
+            "compiler_warnings": 0
+          },
+          {
+            "line": 3950,
+            "text": "2026-10-23T06:26:40.0538809Z packages/eta-mu build: [:cli] Build completed. (166 files, 113 compiled, 0 warnings, 23.07s)",
+            "compiler_warnings": 0
+          }
+        ],
+        "diagnostics": [
+          {
+            "line": 303,
+            "category": "node_warning",
+            "text": "2026-10-23T06:01:57.7996578Z (node:2464) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 332,
+            "category": "node_warning",
+            "text": "2026-10-23T06:01:57.9748672Z (node:2476) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 358,
+            "category": "node_warning",
+            "text": "2026-10-23T06:01:58.9896414Z (node:2519) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 387,
+            "category": "node_warning",
+            "text": "2026-10-23T06:01:59.7859909Z (node:2533) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 391,
+            "category": "node_warning",
+            "text": "2026-10-23T06:01:59.8706698Z (node:2533) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 481,
+            "category": "node_warning",
+            "text": "2026-10-23T06:02:08.6113376Z .../canvas@3.2.3/node_modules/canvas install: (node:2623) [DEP0176] DeprecationWarning: fs.R_OK is deprecated, use fs.constants.R_OK instead"
+          },
+          {
+            "line": 485,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.1502498Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/rheos/dist/cli.cjs'"
+          },
+          {
+            "line": 486,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.1508718Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 487,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.1517423Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 488,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.1521081Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/kanban/dist/cli.js'"
+          },
+          {
+            "line": 489,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.1533879Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/ai/dist/cli.js'"
+          },
+          {
+            "line": 490,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.1537767Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/dist/cli.js'"
+          },
+          {
+            "line": 505,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.3439385Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 506,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.3455103Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/.bin/rheos. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs'"
+          },
+          {
+            "line": 507,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.3609334Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 508,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.3613616Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/.bin/openhax-kanban. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/coding-agent/node_modules/@open-hax/kanban-legacy/dist/cli.js'"
+          },
+          {
+            "line": 509,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.3677613Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/pi-ai. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-ai/dist/cli.js'"
+          },
+          {
+            "line": 510,
+            "category": "missing_bin",
+            "text": "2026-10-23T06:02:09.3680401Z  WARN  Failed to create bin at /home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/.bin/eta-mu-beta. ENOENT: no such file or directory, open '/home/runner/work/eta-mu/eta-mu/packages/legacy/github/node_modules/@open-hax/eta-mu-cli/dist/cli.js'"
+          },
+          {
+            "line": 4061,
+            "category": "node_warning",
+            "text": "2026-10-23T06:27:16.5575879Z (node:30317) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 4067,
+            "category": "node_warning",
+            "text": "2026-10-23T06:27:17.0663702Z (node:30317) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities."
+          },
+          {
+            "line": 4133,
+            "category": "node_warning",
+            "text": "2026-10-23T06:27:31.9269210Z (node:30339) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 4136,
+            "category": "node_warning",
+            "text": "2026-10-23T06:27:32.0938760Z (node:30347) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead."
+          },
+          {
+            "line": 4151,
+            "category": "runner_warning",
+            "text": "2026-10-23T06:27:32.3843134Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02, DeLaGuardo/setup-clojure@ada62bb3282a01a296659d48378b812b8e097360, pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+          }
+        ],
+        "categories": {
+          "node_warning": 10,
+          "missing_bin": 12,
+          "runner_warning": 1
+        }
+      },
+      "artifacts": [
+        {
+          "id": 12482823428,
+          "node_id": "MDg6QXJ0aWZhY3QxMjQ4MjgyMzQyOA==",
+          "name": "eta-mu-sandbox-e157f704554253382331bc981dcbb051f692dac4",
+          "size_in_bytes": 469643137,
+          "url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12482823428",
+          "archive_download_url": "https://api.github.com/repos/open-hax/eta-mu/actions/artifacts/12482823428/zip",
+          "expired": false,
+          "digest": "sha256:dce39e096f0211032edd78cab8e615681822b7fda196cbe4615b1404bcd253a0",
+          "created_at": "2026-10-23T06:27:31Z",
+          "updated_at": "2026-10-23T06:27:31Z",
+          "expires_at": "2026-11-22T06:27:16Z",
+          "workflow_run": {
+            "id": 39909048197,
+            "repository_id": 1189985055,
+            "head_repository_id": 1401249220,
+            "head_branch": "feat/trusted-review-publication-20261021",
+            "head_sha": "f7963bdaa0dbdbb24c0b990d46f572c37dcb6a20"
+          }
+        }
+      ],
+      "artifact_qualification": "Native metadata only. No download/physical ZIP verification/restore qualification."
+    },
+    "root": {
+      "head": "88ae0bba14901cf4924e0bafd4743480b5d3eeca",
+      "run": 39910836841,
+      "native_conclusion": "failure",
+      "jobs": {
+        "deterministic": {
+          "job": 120273221448,
+          "native_conclusion": "success",
+          "source_checkouts": [
+            {
+              "line": 307,
+              "command": "2026-10-23T06:20:09.4606903Z [command]/usr/bin/git log -1 --format=%H",
+              "commit": "88ae0bba14901cf4924e0bafd4743480b5d3eeca",
+              "output": "2026-10-23T06:20:09.4635708Z 88ae0bba14901cf4924e0bafd4743480b5d3eeca"
+            }
+          ],
+          "actual_gate_exits": [
+            {
+              "line": 627,
+              "text": "2026-10-23T06:20:26.6125340Z receipt_history: exit 2"
+            },
+            {
+              "line": 628,
+              "text": "2026-10-23T06:20:26.8913378Z diff_hygiene: exit 0"
+            }
+          ],
+          "actual_errors": [],
+          "failed_or_skipped_steps": [
+            {
+              "name": "Set up Java 21",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Set up Clojure CLI 1.12.5.1654",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Set up pnpm 10.14.0",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Detect eta-mu app credentials",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Create cross-repository read token",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Mirror private Git dependencies",
+              "status": "completed",
+              "conclusion": "skipped"
+            }
+          ]
+        },
+        "compile": {
+          "job": 120273221711,
+          "native_conclusion": "success",
+          "source_checkouts": [
+            {
+              "line": 159,
+              "command": "2026-10-23T06:20:07.8893703Z [command]/usr/bin/git log -1 --format=%H",
+              "commit": "0b9a91492c8355e6933dc2164d35668cb76d9e60",
+              "output": "2026-10-23T06:20:07.8922837Z 0b9a91492c8355e6933dc2164d35668cb76d9e60"
+            },
+            {
+              "line": 288,
+              "command": "2026-10-23T06:20:09.1210239Z [command]/usr/bin/git log -1 --format=%H",
+              "commit": "7fd3252e7663ad5e68be5e90429d126aa66c38c8",
+              "output": "2026-10-23T06:20:09.1239706Z 7fd3252e7663ad5e68be5e90429d126aa66c38c8"
+            }
+          ],
+          "actual_gate_exits": [],
+          "actual_errors": [],
+          "failed_or_skipped_steps": []
+        },
+        "model": {
+          "job": 120273563433,
+          "native_conclusion": "failure",
+          "source_checkouts": [
+            {
+              "line": 309,
+              "command": "2026-10-23T06:21:11.6391256Z [command]/usr/bin/git log -1 --format=%H",
+              "commit": "88ae0bba14901cf4924e0bafd4743480b5d3eeca",
+              "output": "2026-10-23T06:21:11.6422013Z 88ae0bba14901cf4924e0bafd4743480b5d3eeca"
+            }
+          ],
+          "actual_gate_exits": [],
+          "actual_errors": [
+            {
+              "line": 1223,
+              "text": "2026-10-23T06:21:24.6806506Z ##[error]ETA_MU_APP_ID / ETA_MU_APP_PRIVATE_KEY are not visible to this repository."
+            },
+            {
+              "line": 1224,
+              "text": "2026-10-23T06:21:24.6814222Z ##[error]Operator action required: create the eta-mu GitHub App credentials as organization secrets with access to this repository, then re-run this workflow."
+            },
+            {
+              "line": 1225,
+              "text": "2026-10-23T06:21:24.6816690Z ##[error]Process completed with exit code 1."
+            }
+          ],
+          "failed_or_skipped_steps": [
+            {
+              "name": "Require eta-mu app credentials",
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Install pinned OpenCode CLI",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Capture review start time",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Run bounded evidence-first OpenCode review",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Reverify full input and bind final submission",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Validate final review submission",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Create eta-mu GitHub App token for review publication",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Publish actual GitHub pull request review",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Send new inline review comments to Discord",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Set up Node 22",
+              "status": "completed",
+              "conclusion": "skipped"
+            }
+          ]
+        },
+        "terminal": {
+          "job": 120273690446,
+          "native_conclusion": "failure",
+          "source_checkouts": [],
+          "actual_gate_exits": [],
+          "actual_errors": [
+            {
+              "line": 118,
+              "text": "2026-10-23T06:21:31.5464240Z ##[error]OpenCode evidence review gate: deterministic_output=failure"
+            },
+            {
+              "line": 119,
+              "text": "2026-10-23T06:21:31.5473802Z ##[error]OpenCode evidence review gate: review_job=failure"
+            },
+            {
+              "line": 120,
+              "text": "2026-10-23T06:21:31.5484927Z ##[error]Process completed with exit code 1."
+            }
+          ],
+          "failed_or_skipped_steps": [
+            {
+              "name": "Enforce truthful reusable review result",
+              "status": "completed",
+              "conclusion": "failure"
+            }
+          ]
+        }
+      },
+      "meaning": "Deterministic nominalsuccess has receipt_history2/hygiene0; compile success separate Muse/agents source. Model/terminal fail on missingApp and deterministic_output failure. No inference/review/approval."
+    },
+    "observation_policy": "One samehandle Sandbox recheck, then dependent completedlog/artifactmetadata. No rerun/restart/unchanged polling. No child/Git/cards/ledger/PR changes."
+  },
+  "child_preservation": {
+    "prefixes": {
+      "receipts.edn": {
+        "base_bytes": 646799,
+        "base_sha256": "093b80b50cc4857c9c3918c37ce0bbdc7d499fd2dc273b94067e6e102fd531fc",
+        "current_bytes": 653051,
+        "prefix_preserved": true
+      },
+      "kanban/.events/ledger.edn": {
+        "base_bytes": 1881384,
+        "base_sha256": "dc826e29406aa259d21fdf71037eca3c967a97a18fa693b3ef7817e07a7109a8",
+        "current_bytes": 1890045,
+        "prefix_preserved": true
+      },
+      ".ημ/session-mycology/ledger.md": {
+        "base_bytes": 120514,
+        "base_sha256": "d38daa997d17616f57b20ec2e29fc2e60701072133556517f73f5ca4b285cb0c",
+        "current_bytes": 121146,
+        "prefix_preserved": true
+      },
+      ".ημ/session-reflections.edn": {
+        "base_bytes": 41622,
+        "base_sha256": "76a5109bd3e6f5d40a40b82f9f4b5d21838d832f267929e9d87ce82acf4ab4f3",
+        "current_bytes": 41622,
+        "prefix_preserved": true
+      }
+    },
+    "cards_preserved": 309,
+    "body_appends_only": [
+      "kanban/tasks/independently-admit-and-publish-review-evidence-from-trusted-default-code-1c707551.md"
+    ],
+    "qualification": false,
+    "CMS_Cephalon": "paused"
+  },
+  "frozen_cohort": {
+    "schema_version": 1,
+    "kind": "e0-frozen-cohort-live-base-topology-audit",
+    "started_at": "2026-10-23T06:45:43.126438+00:00",
+    "completed_at": "2026-10-23T06:46:02.961079+00:00",
+    "summary": {
+      "frozen_identities": 442,
+      "observed_states": {
+        "OPEN": 437,
+        "MERGED": 4,
+        "CLOSED": 1
+      },
+      "unique_live_base_refs": 144,
+      "reported_base_differs_from_live_tip": 186,
+      "open_reported_base_differs_from_live_tip": 181,
+      "missing_live_base_ref": 0,
+      "source_tuple_changed_during_acquisition": 0,
+      "native_proposed_merge_changed_during_acquisition": 0,
+      "open_proposed_merge_pairings": {
+        "live-base-and-head-match-proposed-parents": 295,
+        "proposed-parents-do-not-match-live-base-and-head": 5,
+        "unavailable-native-proposed-merge": 137
+      },
+      "changed_head_or_reported_base_from_prior_refresh": 8,
+      "open_head_or_reported_base_changed_from_freeze": 6
+    },
+    "source_fields": "PR baseRefOid is retained as a reported PR observation; independent repository.ref supplies the branch tip; potential merge is a proposal, never executed-test proof.",
+    "qualification": false,
+    "global_scope": "same442 identities; no new repository/new-PR census",
+    "limits": [
+      "No reviews, checks or source bodies refreshed for every row in this audit.",
+      "Null/conflicted/unavailable proposed merges do not confer a merge or closure disposition.",
+      "No current ref/proposed merge is a tested candidate.",
+      "Both passes and every raw query retained; drift remains a hold."
+    ],
+    "comparison_to_retained_window": {
+      "source": "docs/stabilization/e0-outcome-census.json",
+      "started_at": "2026-10-23T05:47:02.392207+00:00",
+      "completed_at": "2026-10-23T05:47:21.491800+00:00",
+      "changes": [
+        {
+          "identity": "riatzukiza/axxium#3",
+          "changes": {
+            "head_sha": {
+              "before": "20678e78ab74e8a6fbf2f3e3739e86dec9dd9de9",
+              "after": "dca808776b44553293d5f57c8ac169faac229fb6"
+            }
+          }
+        },
+        {
+          "identity": "riatzukiza/axxium#4",
+          "changes": {
+            "head_sha": {
+              "before": "646ea436ec3df1d0e605800a4f44af8d924ff7e1",
+              "after": "49541088db3568a02bde4cd9c08548fde70609c5"
+            }
+          }
+        }
+      ],
+      "qualification": false
+    }
+  },
+  "axxium_movement": [
+    {
+      "identity": "riatzukiza/axxium#3",
+      "before": "20678e78ab74e8a6fbf2f3e3739e86dec9dd9de9",
+      "after": "dca808776b44553293d5f57c8ac169faac229fb6",
+      "status": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "total_commits": 1,
+      "files": [
+        {
+          "path": ".github/workflows/eta-mu-review.yml",
+          "status": "added",
+          "additions": 42,
+          "deletions": 0,
+          "patch_present": true
+        },
+        {
+          "path": ".ημ/receipts.edn",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 0,
+          "patch_present": true
+        }
+      ],
+      "raw_path": ".ημ/stabilization/custody-20261023/sweep/riatzukiza_axxium-3-compare.json",
+      "raw_sha256": "ee12fef90af5ef28fe23439b3b2aecb6211e6ae7ba7c11fe60bc611b89a4a4eb",
+      "qualification": false
+    },
+    {
+      "identity": "riatzukiza/axxium#4",
+      "before": "646ea436ec3df1d0e605800a4f44af8d924ff7e1",
+      "after": "49541088db3568a02bde4cd9c08548fde70609c5",
+      "status": "ahead",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "total_commits": 1,
+      "files": [
+        {
+          "path": ".github/workflows/eta-mu-review.yml",
+          "status": "added",
+          "additions": 42,
+          "deletions": 0,
+          "patch_present": true
+        },
+        {
+          "path": ".ημ/receipts.edn",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 0,
+          "patch_present": true
+        }
+      ],
+      "raw_path": ".ημ/stabilization/custody-20261023/sweep/riatzukiza_axxium-4-compare.json",
+      "raw_sha256": "b99a66c7d3f3003226b639514832767da06fbaae28e1dc050026530ec6cc6959",
+      "qualification": false
+    }
+  ],
+  "capture": {
+    "path": ".ημ/stabilization/snapshots/d05ce5461d557166c16257b4c880e78df90ce6eee5f470672d4c7ff014034538.json.gz",
+    "sha256": "d05ce5461d557166c16257b4c880e78df90ce6eee5f470672d4c7ff014034538",
+    "raw_sha256": "db8ea83eef1b9580dec79b97c9b1ee7c62e4c2a5ce7e5e1721736495850a0f34",
+    "compressed_bytes": 1657180,
+    "entries": 403,
+    "regular_files": 348,
+    "symlinks": 0,
+    "binary_files": 0
+  },
+  "core_capture": {
+    "path": ".ημ/stabilization/snapshots/d506a57574f93e9cb00886eecd8b629918bb4f07935b55dfcbfa0c643bc9f2c0.json.gz",
+    "sha256": "d506a57574f93e9cb00886eecd8b629918bb4f07935b55dfcbfa0c643bc9f2c0",
+    "raw_sha256": "eaba6faf43cef16d1ac87084ca8722c1801557078d073a6d106b8e9fa7f238a2",
+    "compressed_bytes": 1654740,
+    "entries": 398,
+    "regular_files": 343,
+    "symlinks": 0,
+    "binary_files": 0
+  },
+  "qualified": false,
+  "CMS_Cephalon": "paused",
+  "root_preservation": {
+    "root_source": "88ae0bba14901cf4924e0bafd4743480b5d3eeca",
+    "pins_preserved": [
+      "160000 commit 00a05c8f6ba68ff30a98266879310464e966748b\t.agents",
+      "160000 commit 8ade66a3553bdd89696aebf4fc4628a6fe66e5ae\tTruth",
+      "160000 commit 2439d4d6b8e546cda276f09f5c96db59226ecad6\taxxium",
+      "160000 commit 2751fa62b164c739cdb1ef86adc6aa1a9ff1fb90\tbitch-tracker",
+      "160000 commit 2655ae6eddbd20ac400a8e1ff99914c56d81b835\tcalliope",
+      "160000 commit 86385532b4f8606946555d0ada8e3fb22f35b4c3\tchat-ui",
+      "160000 commit 788cdd3434615a7932b924e68520dbf7f88408c2\tclio",
+      "160000 commit ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66\tepiphany",
+      "160000 commit 0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90\teta-mu",
+      "160000 commit 8e16609dd191bdd2e9a3c0320ce4238b5cd83467\tkanban-orchestrator",
+      "160000 commit 3bd4cf26e68dc88fbe67f831baa4bc389e3363e7\tkatamorph",
+      "160000 commit fb08a10a8aa32a594cc97ae11b820113de4cf386\tknoxx",
+      "160000 commit b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde\tmuse",
+      "160000 commit cc4b45612974f735ddec46009ede07729511fba4\topencode",
+      "160000 commit 0c33018e27f861536822086afcdab666a60add44\tosmos",
+      "160000 commit abbbc8b1ad80738233593e17e751203db785c9e2\tproxx",
+      "160000 commit 7c7c62343fea0241ac545e37f14e57ab344bfa30\treceipt-river",
+      "160000 commit 11811264a308d406cb612aefa1dad40818675e5e\trheos",
+      "160000 commit d361c7837ba369f5c22c9a3f9d827e74605b6c7d\tservices",
+      "160000 commit 30339f9aa3df83ef8c335d4544307272abfbb131\tsession-mycology",
+      "160000 commit 6cd0ce366c66ac50dfa3ec55bdd8e55eb021bcaa\tshx",
+      "160000 commit 1276955c86ff46936cd1ce7d81fbc790f7068e1e\tsol",
+      "160000 commit 97e67a7a758c080450a200e8e6e1ada614eabc6d\tuxx"
+    ],
+    "prefixes": {
+      ".ημ/receipts.edn": {
+        "base_bytes": 426729,
+        "base_sha256": "894262db194af3694614aaf78a74e72c99a27d524f7d2b466862ad778a263442",
+        "current_bytes": 430176,
+        "prefix_preserved": true
+      },
+      ".ημ/kanban-events/ledger.edn": {
+        "base_bytes": 282799,
+        "base_sha256": "67b0d05e363f207ceb06e9f336b14e58db1a5e12eb3c878c31309e70e7759443",
+        "current_bytes": 286395,
+        "prefix_preserved": true
+      },
+      ".ημ/session-mycology/ledger.md": {
+        "base_bytes": 50256,
+        "base_sha256": "da5ec568a428bae3675d6d2a82dfd116cc4e3d5acbc2f90df24b117c6c731c61",
+        "current_bytes": 50851,
+        "prefix_preserved": true
+      }
+    },
+    "qualified": false,
+    "CMS_Cephalon": "paused",
+    "prior_work_graph_keys_preserved": 33
+  }
+}

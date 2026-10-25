@@ -762,6 +762,36 @@
   receipt-refs: 0331141c483431ed495792cf4d69e38570f21b4cb8ece67875b9cd88f6f75d5b
   note: Preserve every original byte/mode and failed attempt while reducing native input paths. Verify the exact emitted bytes, separate reviewer admission from archive custody and old native success from successor qualification. Timestamp refusal occurred before append; resume without duplicating card/ledger effects. No new spore/promotion.
 
+- ts: 2026-10-23T06:17:40.234Z
+  session: foresight-stabilization
+  task: Preserve actual outcome and review-repair execution with independent counterexamples
+  p-efficiency: 0.8
+  p-friction: 0.7
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 581d6cff5f7d082fff9a9d68b33e1957accac801e2d333e7d45de104e1f5b3b0
+  note: Large parent decoding can overshoot a deadline without late acceptance. Preserve data types and complete bytes when changing transport. Retain canonical owned paths for failure cleanup. Native reviewed-source logs can disprove a finding but never impersonate reviewer withdrawal. No new spore or same-session promotion.
+
+- ts: 2026-10-23T07:00:18.303Z
+  session: foresight-stabilization
+  task: Preserve producer attempts and exact manifest identity with source-bound execution proof
+  p-efficiency: 0.85
+  p-friction: 0.6
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 00a6a55292d8cafb846727446c4ed1d1d961d92fceba406dd4ff69e9acb30203
+  note: Central verification must preserve the actual producer rerun schema. Configuration generation does not establish compiled adapter or authenticated execution. Wait on the exact producer handle before dependent capture reads. No new spore or same-session promotion.
+
+- ts: 2026-10-23T07:04:53.557Z
+  session: foresight-stabilization
+  task: Correct inherited recursive publication fetch
+  p-efficiency: 0.7
+  p-friction: 0.5
+  p-skill-candidate: 0.6
+  spore: none
+  receipt-refs: 64817b99660b4516b1785151a287f13c9ded6b2c7c2e853e67939552da05164d
+  note: Root-only publication verification must explicitly disable submodule recursion, regardless of inherited Git configuration. Stop the owned process before further repository traversal and retain actual ref observations. No new spore or same-session promotion.
+
 - ts: 2026-10-23T07:05:01.311797+00:00
   session: antigravity-review-rollout
   task: Apply pinned shared reviewer to23target repositories
