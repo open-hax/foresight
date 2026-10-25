@@ -1,0 +1,57 @@
+{
+  "schema": "foresight/receipt-migration-verification-v1",
+  "observed_at": "2026-10-25T05:32:08.867309+00:00",
+  "qualified_local_revision": "96fa8a994cf38a224e461053832cf8c6bfae7a86",
+  "base": "2b26173c2cbcf58f14abda2b4e710bd9a912e9bd",
+  "reused_migration_head": "4ac72ec4f4b3bbcae72c168bb352b85513b4b53a",
+  "core_git_blobs_identical_to_upstream": {
+    "scripts/evidence.clj": true,
+    "src/foresight/evidence.cljc": true,
+    "scripts/lib/owned-gate-process.py": true,
+    "test/evidence_cli_test.cljs": true,
+    "test/evidence_test.cljs": true,
+    "test/fixtures/owned-process-supervisor.py": true
+  },
+  "legacy_bytes_identical_to_base": true,
+  "legacy_sha256": "628c21721edd557f8856dcbdc1e0ca57c16541faf1b5117e634f1620c57212ef",
+  "immutable_verifier": {
+    "exit_code": 0,
+    "records": 281,
+    "segments": 16,
+    "new_records": 15,
+    "ledger_sha256": "6d2f08f2e4768c5047c2c5e6e7f8775b8b458982e9d4c12a3e05ec8953a173fb"
+  },
+  "tests": {
+    "evidence_laws": {
+      "tests": 22,
+      "assertions": 158,
+      "failures": 0,
+      "errors": 0
+    },
+    "evidence_adapters": {
+      "tests": 107,
+      "assertions": 653,
+      "failures": 0,
+      "errors": 0
+    },
+    "workspace": {
+      "tests": 24,
+      "assertions": 120,
+      "failures": 0,
+      "errors": 0
+    },
+    "project": "PASS: 25 sources, 23 submodules, 39 invariants",
+    "kondo": "0 errors, 0 warnings"
+  },
+  "negative_control": {
+    "revision": "0a344db6023139bbacf8edd77db326f3001804f2",
+    "exit_code": 2,
+    "reason": "The legacy Receipt River ledger .ημ/receipts.edn is frozen; write new receipts as segments under .ημ/receipts/",
+    "original_rollout_receipts_qualified": false
+  },
+  "limits": [
+    "Local deterministic verification only; no native approval, hosted qualification, default adoption or deployment claim.",
+    "This adopts the existing segmented phase; no all-Clio cutover declaration or schema history is fabricated.",
+    "The remaining malformed Antigravity proposal records are not grandfathered or normalized by this proof."
+  ]
+}
