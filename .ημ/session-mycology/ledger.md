@@ -980,3 +980,13 @@
   spore: none
   receipt-refs: 2026-10-25T061548272Z-composition-ea4f8f992f9d.edn
   note: Separate byte conservation from envelope admission. Existing migration preserves all records but cannot grant unsupported kind correction; the exact two defects remain explicit.
+
+- ts: 2026-10-25T06:33:39.885Z
+  session: 01a1717c-d90d-71b3-ad21-5d2b0cc599a1
+  task: Verify canonical Rheos readiness path before reviewed-card transition
+  p-efficiency: 0.85
+  p-friction: 0.4
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: 2026-10-25T063339885Z-rheos-preflight-ef5a69847752.edn
+  note: Existing delegation works; installed legacy CLI reports policy refusal with exit0. Require actual state/event readback and preserve the refusal diagnostic. No replacement board engine or real status mutation was needed.
