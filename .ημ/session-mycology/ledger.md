@@ -900,3 +900,13 @@
   spore: none
   receipt-refs: 2026-10-25T052944517Z-adoption-e4f988ac731a.edn
   note: A merged fork migration is reusable source, not proof of local adoption. Reconcile its ancestry explicitly, preserve current inventory and legacy bytes, run the owning suites, and keep malformed proposed receipts distinct from historical grandfathering. No new spore.
+
+- ts: 2026-10-25T08:04:08.588Z
+  session: receipt-correction-admission
+  task: Close new-original admission bypass found in CodeRabbit4370070676
+  p-efficiency: 0.85
+  p-friction: 0.25
+  p-skill-candidate: 0.0
+  spore: none
+  receipt-refs: 2026-10-25T080408000Z-new-original-green.edn
+  note: Validate original admission separately from derived-view validity; an ancestor source is not a historical exception. Two frozen imports use explicit content identity pairs. Positive matching-revision promotion control prevents an invalid manifest from masking stale-result checks.

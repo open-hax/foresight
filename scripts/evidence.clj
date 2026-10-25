@@ -1066,7 +1066,9 @@
 (defn admit-merged-receipt-extension!
   "One admission boundary for verification, promotion and held-ledger writes.
   Conservation always uses originals; all correction documents are reverified,
-  including base history. Only untargeted ordinary base records are grandfathered."
+  including base history. New non-correction originals are independently strict,
+  except for the two explicitly bound historical imports in the pure law.
+  Untargeted ordinary base records retain grandfathering."
   [base-segments head-segments anchor]
   (let [appended (ledger-extension-records! base-segments head-segments)
         records (merged-receipt-records! head-segments)
@@ -1080,6 +1082,13 @@
                                      [(law/correction-binding-key entry)
                                       (verify-correction-source! entry anchor head-segments source-cache)]))
                            (correction-entries documents))
+            historical-ids (into #{} (comp (filter law/historical-receipt-import?)
+                                            (map :receipt/identity))
+                                 (vals bindings))
+            _ (require-valid-receipt-records!
+               (filterv #(and (not (law/correction-document? %))
+                              (not (contains? historical-ids (record-id %))))
+                        appended))
             selected-ids (into (set (map record-id (into appended documents)))
                                (map :receipt/identity) (vals bindings))
             selected (filterv #(contains? selected-ids (record-id %)) records)

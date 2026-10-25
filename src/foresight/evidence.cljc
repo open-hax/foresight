@@ -545,6 +545,25 @@
 (defn correction-document? [record]
   (and (map? record) (contains? record :correction/entries)))
 
+(def ^:private historical-receipt-imports
+  ;; Reviewed historical imports from Foresight PR145, not a general correction
+  ;; exemption. Pairs bind exact LF bytes AND canonical original map identity.
+  ;; Sources: 1f3f7317012e23d7ec0f35a7e22b2b01cdff65b3 line 261;
+  ;; c61c563d25c15ba13751461b0235235cb6437f16 line 262.
+  #{["1c0ac43b287497ceac38d792feede62f5f05c2bdf12099570d06a767f64e3914"
+     "8c32195ba96bb3f406931eb4f9829c13bb76313a56aca34dc35de513e85861f2"]
+    ["545730a0e14d1288b7796717ea14924657e0ad9156a86d0bd7589fb39261d75a"
+     "03fef2783af6afe1535245b6696976bf9731ab97726cf7e4eb03f7b8ff20dfe4"]})
+
+(defn historical-receipt-import?
+  "Whether an adapter-authenticated binding identifies a reviewed old original.
+  This only exempts its original envelope during import; correction, source and
+  derived-view validation remain mandatory and grant no evidence authority."
+  [binding]
+  (and (true? (:binding/verified? binding))
+       (contains? historical-receipt-imports
+                  [(:receipt/source-sha256 binding) (:receipt/identity binding)])))
+
 (defn kind-correction-target? [record]
   (and (map? record)
        (not= evidence-receipt-origin (:origin record))
