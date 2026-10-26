@@ -69,6 +69,8 @@ No production activation or alternate board/event authority.
 
 - [ ] Rebuild promotion events explicitly bind the authorized decision actor alongside existing event values. Atomic publication comparison validates the current decision actor against that bound actor; mismatch rejects or requires revalidation before visibility, retaining all grant/mapping checks.
 
+- [ ] Initial-promotion and revoked-projection-rebuild receipts each include an independent decision-actor-change race: after event binding, change only the decision actor and reject or revalidate before output visibility. Each respective receipt and completion evidence records its result.
+
 ## Verification
 
 Implementation names the existing owner test runner, then records the isolated positive and negative scenarios above as version-bound receipts. Missing runtime access blocks qualification. This planning card claims no executed integration test or Rheos transition.

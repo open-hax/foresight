@@ -83,7 +83,7 @@ addresses/profiles remain unknown. No restart was performed.
 Orbit's hermes-plugin exposes orbit_workspace, orbit_resources and
 orbit_workbench. The runtime contract describes submission, status, events,
 stop and capability discovery, with private authenticated native-task access.
-The ~/.hermes/plugins directory is empty, which does not exclude another
+The observed Hermes plugin directory is empty, which does not exclude another
 profile's loader. Runtime ownership and actual listener addresses must be
 established before activation; source capabilities do not prove a live Knoxx
 bridge. Historical source tests are not current deployment evidence.

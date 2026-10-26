@@ -46,6 +46,8 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] Before HAC.02 actor binding is qualified, omit actor-scoped tools from runtime `tools/list` and retain their explicit unsupported disposition in the separate capability manifest. Parity compares the actual registry with the selected profile’s allowed runtime registry after this exclusion and verifies the unsupported dispositions separately; actor-scoped calls cannot execute or disclose protected results.
 
+Implementation sequencing within the 3-point standalone qualification slice: first registration/rollback, then fresh-session MCP fixture and successful read-only shared-tool evidence, then profile exclusion and source-bound cross-target parity. These use the existing single-tree compiler; missing infrastructure blocks rather than expands this slice. HAC.02 separately owns actor admission implementation; HAC.01 retains only its unsupported/non-execution boundary until that dependency is qualified. HAC.06 owns layered-contract parity. During Rheos breakdown, assign each retained criterion to these ordered verification steps and record blockers before readiness; this prose performs no status transition or runtime qualification.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end
