@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "muse, knoxx, harness, 5sp"
-type: "story"
 story_id: "HAC.02"
+parent: "harness-actor-continuity"
+type: "story"
+write-id: "1793058248677-0.vn7yfsej8avthkjeez"
 points: "5"
 title: "HAC.02 — Specify portable harness actor bindings and message admission"
 priority: "P1"
-status: "incoming"
-uuid: "hac-02-actor-bindings"
+status: "ready"
 epic: "harness-actor-continuity"
-parent: "harness-actor-continuity"
+uuid: "hac-02-actor-bindings"
 ---
 
 # HAC.02 — Specify portable harness actor bindings and message admission
@@ -124,3 +125,8 @@ code; preserve source revision and actual observed capability separately.
 - [ ] GIVEN an otherwise valid actor pair and grant WHEN the authenticated harness, native session/task, principal, installation, scope or parent reference differs from the stored tuple THEN each mismatch independently denies first use and resume before delivery, effects or protected outcome return.
 - [ ] GIVEN a private inline payload WHEN prepared for transport THEN the sender validates current source-read authority and the intended authenticated destination's current content-access grant authorizing the envelope's exact source identity and resource scope, with matching tenant, audience and exact source revision, before reading protected bytes or serializing/disclosing them. The envelope binds source identity/revision and authorization provenance; missing provenance or unauthorized destination emits no payload-bearing transport message.
 - [ ] GIVEN an inline payload with expired/revoked grants, wrong destination/tenant/audience or stale source revision WHEN destination admission, retry or recorded-outcome retrieval occurs THEN current content authorization denies before payload delivery, effects or protected outcome return. Each negative is tested independently; source revocation cannot be bypassed by copied bytes. Public inline data requires explicit source-policy classification.
+
+---
+Owner accepted planning PR144 and directed implementation. Breakdown: portable identity/codec law and roundtrip tests; delegation/current authorization admission denials; replay identity and durable outcome protocol contract. Synthetic law tests remain distinct from LOC/HAC06 runtime qualification.
+
+---

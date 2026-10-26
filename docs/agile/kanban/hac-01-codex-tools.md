@@ -1,15 +1,16 @@
 ---
 category: "kanban"
 labels: "muse, knoxx, harness, 3sp"
-type: "story"
 story_id: "HAC.01"
+parent: "harness-actor-continuity"
+type: "story"
+write-id: "1793058382819-0.swc8ibhnv8otvq0ictp"
 points: "3"
 title: "HAC.01 — Compile and qualify the shared Muse tools in Codex"
 priority: "P1"
-status: "incoming"
-uuid: "hac-01-codex-tools"
+status: "in_progress"
 epic: "harness-actor-continuity"
-parent: "harness-actor-continuity"
+uuid: "hac-01-codex-tools"
 ---
 
 # HAC.01 — Compile and qualify the shared Muse tools in Codex
@@ -60,3 +61,10 @@ test or Rheos status transition.
 
 Native capability availability and deployed source can differ from checked-in
 code; preserve source revision and actual observed capability separately.
+
+---
+Owner accepted and merged planning PR144 as cb73d35b0945e9961745e119dd0c1d9c8dc7dee2 and directed implementation. Breakdown: registration/rollback; fresh isolated Codex MCP fixture and real read-only tool evidence; profile denial and source-bound parity. Actor admission remains HAC02 and layered integration HAC06.
+
+Implementation started in Muse branch codex/hac01-codex-mcp: native isolated Codex MCP registration, duplicate denial, unrelated-server preservation and guarded rollback; pure law6assertions and real CLI smoke pass. Remaining: actual Muse build/profile filtering, fixture+real-tool invocation, fresh native-session evidence and cross-target parity.
+
+---
