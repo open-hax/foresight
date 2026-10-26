@@ -46,6 +46,8 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] Record each remote destination’s complete HAC.02 immutable context tuple. Independently mismatch authenticated principal, harness family, installation, tagged repository/operator scope, native session/task and parent context; each denies before mailbox admission, delivery, effects or protected outcome return, retaining the existing independent mapping, grant, instance-id and actor-id checks.
 - [ ] Independently test source-read grant expiry, source-read grant revocation, destination content-access grant expiry and destination content-access grant revocation. Each denies before delivery, effects, retries and protected-outcome retrieval; retain exact-source/resource scope checks and all other independent denial cases.
 
+- [ ] Independently validate each remote destination’s capability profile, binding effective-contract hash and envelope effective-contract hash against the selected active contract. Each mismatch independently denies before mailbox admission, delivery, effects or protected outcome return, preserving all existing tuple, mapping, grant, instance-id and actor-id checks.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

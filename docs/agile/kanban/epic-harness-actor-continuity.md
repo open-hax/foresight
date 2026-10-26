@@ -29,6 +29,8 @@ with a distinct Knoxx actor for its context and explicit local/remote grants.
 - HAC.03: `hac-03-codex-lifecycle` — Connect Codex contexts and native task messages to Knoxx (8 points; requires bounded qualification breakdown before readiness).
 - HAC.04: `hac-04-hermes-orbit` — Qualify Hermes and Orbit as another contract consumer (3 points).
 - HAC.05: `hac-05-federation` — Prove actor continuity between local and remote Knoxx (5 points).
+- HAC.06: `hac-06-layered-tool-projection` — layered tools/instructions agreement (3 points), depends on HAC.01 and LOC.05/06/07/08.
+- HAC.07: `hac-07-memory-promotion` — online authorization and revocation qualification (5 points), depends on HAC.02 and HAC.05.
 
 ## Non-goals
 
@@ -57,8 +59,3 @@ Host capabilities evolve; the compatibility matrix must bind measured versions.
 - [Research](../../research/harness-actor-continuity.md)
 - [Design](../../notes/design/harness-actor-continuity.md)
 - [Layered-contract epic](epic-layered-operating-contracts.md)
-
-## Additional child slices
-
-- HAC.06: `hac-06-layered-tool-projection` — layered tools/instructions agreement (3 points), depends on HAC.01 and LOC.05/06/07/08.
-- HAC.07: `hac-07-memory-promotion` — online authorization and revocation qualification (5 points), depends on HAC.02 and HAC.05.
