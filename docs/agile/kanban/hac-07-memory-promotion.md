@@ -62,6 +62,9 @@ No production activation or alternate board/event authority.
 
 - [ ] Both initial and rebuild publication compare the event-bound destination scope with its current authoritative value in the same atomic conditional visibility operation. Independently change destination scope at that boundary: deny admission or require revalidation before output becomes visible, with a separate race case in each receipt.
 
+- [ ] Initial-lift and rebuild qualification receipts each record independent wrong-role and missing-capability denial cases alongside the existing cross-tenant, wrong-audience and identity-mapping denials.
+- [ ] Both initial and rebuild events bind the identity-provider mapping decision and revision. The atomic conditional publication comparison checks both against current authoritative mapping state; a changed decision or revision independently denies or requires revalidation before visibility. Retain separate grant, policy, source and destination comparisons.
+
 ## Verification
 
 Implementation names the existing owner test runner, then records the isolated positive and negative scenarios above as version-bound receipts. Missing runtime access blocks qualification. This planning card claims no executed integration test or Rheos transition.
