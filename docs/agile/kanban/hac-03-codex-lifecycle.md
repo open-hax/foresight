@@ -89,7 +89,7 @@ code; preserve source revision and actual observed capability separately.
 ## Additional identity criteria
 
 - [ ] GIVEN two new contexts WHEN bound THEN their (instance-id, actor-id) references differ, including parent and child. Only an authenticated resume of the same context may reuse its binding.
-- [ ] GIVEN context A private memory WHEN context B, including its parent or sibling, calls the memory tool THEN retrieval is denied without an explicit sharing grant. Parentage alone grants no private-memory access.
+- [ ] GIVEN context A private memory WHEN context B, including its parent or sibling, calls the memory tool THEN retrieval is denied without an explicit sharing grant. Parentage alone grants no private-memory access. On each supported native route, positively verify that the owner reads its own private memory and that another context with an explicit valid sharing grant reads only the granted scope; record these alongside the independent unshared-context denial.
 
 ## Canonical context identity on use and resume
 
@@ -99,6 +99,8 @@ code; preserve source revision and actual observed capability separately.
 - [ ] GIVEN the original message ID and destination with otherwise valid current grants WHEN a native retry substitutes the producer instance-id, producer actor-id or binding identity THEN each mismatch independently denies admission under the versioned HAC.02 replay rule, with no delivery, effect or protected-outcome return. The qualification receipt identifies the exercised rule version.
 
 ## Cancellation criteria
+
+- [ ] GIVEN a cancellation request on a supported route WHEN parent cancellation is admitted THEN HAC.02 authenticates the requesting context against the authorized parent and validates its current binding before committing cancellation. Independently test a mismatched parent context and a revoked binding: each denies without committing parent cancellation or changing queued descendant work. Existing committed-cancellation retry-dispatch behavior applies only after authorized admission.
 
 - [ ] GIVEN failed transport followed by committed parent cancellation WHEN retry dispatch runs THEN queued descendant work is terminally cancelled and no new attempt starts. A run already admitted before cancellation is stopped best-effort and its observed effects remain recorded; cancellation never fabricates rollback.
 
