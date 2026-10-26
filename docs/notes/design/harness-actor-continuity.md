@@ -242,7 +242,7 @@ intended destination's current content-access grant, tenant, audience and exact
 source revision. The inline envelope binds that source identity/revision and
 authorization provenance. At destination admission, those same current grants,
 source revision, tenant, audience and destination binding are revalidated before
-payload delivery, effects or protected outcome return. Missing provenance,
+payload delivery, effects or protected outcome return. Admission never caches authority for queued delivery: recheck those same grants online immediately before delivery and effects. Expiry or revocation after admission denies delivery, effects and protected outcome return. Missing provenance,
 unauthorized destination, stale revision, or expired/revoked grants denies
 without content disclosure. Public inline data needs an explicit source-policy
 classification; absence of private metadata never implies public authority.
