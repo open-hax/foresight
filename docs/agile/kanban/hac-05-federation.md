@@ -43,6 +43,9 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] GIVEN authorization expires or is revoked after the remote effect commits WHEN retry or recorded-outcome retrieval is attempted THEN destination admission denies it without another effect or protected outcome data. A changed producer or binding identity also denies retry; a change to either producer identity or binding identity requires a separately authorized new message.
 - [ ] GIVEN revoked or expired message authorization WHEN new delivery is attempted THEN destination admission denies it; no cached transport grant bypasses destination checks.
 
+- [ ] Record each remote destination’s complete HAC.02 immutable context tuple. Independently mismatch authenticated principal, harness family, installation, tagged repository/operator scope, native session/task and parent context; each denies before mailbox admission, delivery, effects or protected outcome return, retaining the existing independent mapping, grant, instance-id and actor-id checks.
+- [ ] Independently test source-read grant expiry, source-read grant revocation, destination content-access grant expiry and destination content-access grant revocation. Each denies before delivery, effects, retries and protected-outcome retrieval; retain exact-source/resource scope checks and all other independent denial cases.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

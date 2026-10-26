@@ -77,6 +77,8 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] Native retry preserves the HAC.02 payload identity as well as producer, binding, message ID and destination. Independently substitute payload identity and deny before delivery, effects or protected outcome return; record the exercised replay rule version.
 - [ ] Parent cancellation additionally requires a distinct cancellation capability or explicit operator scope authorizing cancellation. A context holding only use, read or retry authority independently denies before cancellation commit or any queued descendant work changes, even with authenticated parent identity and a valid current binding.
 
+- [ ] On a supported route, positively verify an authenticated authorized parent with a current binding and sufficient cancellation capability or operator scope admits and commits cancellation. Queued descendant work becomes terminally cancelled, while effects from work admitted before cancellation remain recorded without implying rollback.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

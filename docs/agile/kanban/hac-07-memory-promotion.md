@@ -60,6 +60,8 @@ No production activation or alternate board/event authority.
 - [ ] Initial and rebuild receipt compatibility requires the same destination/projection binding and source identity, while permitting authorized source-revision changes and distinct event and output identities. Positively verify a legitimate changed-revision rebuild and independently deny mismatched destination/projection bindings; event/output equality is not required.
 - [ ] For both initial lift and rebuild, independently revoke each required grant after source-byte access but before publication admission. Publication must reject or revalidate under current authorization without making unauthorized output visible; retain the existing atomic conditional publication boundary and record each race in its corresponding receipt.
 
+- [ ] Both initial and rebuild publication compare the event-bound destination scope with its current authoritative value in the same atomic conditional visibility operation. Independently change destination scope at that boundary: deny admission or require revalidation before output becomes visible, with a separate race case in each receipt.
+
 ## Verification
 
 Implementation names the existing owner test runner, then records the isolated positive and negative scenarios above as version-bound receipts. Missing runtime access blocks qualification. This planning card claims no executed integration test or Rheos transition.
