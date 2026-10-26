@@ -188,7 +188,7 @@ qualified in HAC.06; fixture or copied hashes never qualify that integration.
 
 Delegation requires an issuer authorized by the parent grant's explicit
 delegation permission, bound to the authenticated principal and parent grant.
-A parent grant without delegation permission is non-delegable. A delegated child
+The parent delegation permission must explicitly constrain allowed recipient tuples of authenticated principal, installation identity and harness family. The authenticated child recipient must match an allowed tuple; missing recipient constraints or a mismatch in any of those three fields denies issuance before any child binding or grant exists, even with a valid issuer and capability subset. HAC.02 qualifies each unauthorized recipient field independently. A parent grant without delegation permission is non-delegable. A delegated child
 grant must be a subset of its parent's capabilities and allowed tenants, audiences
 and resource scopes, with expiry no later than the parent's. Repository identity and explicit operator scope are inherited unchanged from the parent grant; delegation cannot change either field or switch between repository and operator scope. Independently deny a changed repository identity or changed/widened operator scope, including when all other delegated fields are valid. Any widening fails. Every use and resume validates the full delegation chain;
 revocation or expiry of any ancestor invalidates descendants before admission,
