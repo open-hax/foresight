@@ -50,4 +50,4 @@ Source and running runtime may diverge; verify deployed revision and actual capa
 
 ## Active contract admission criteria
 
-- [ ] GIVEN a binding profile or binding/envelope effective-contract hash that differs from the active contract WHEN use or resume is attempted THEN admission denies it; profile and both hashes must match the active contract.
+- [ ] GIVEN a binding profile or binding/envelope effective-contract hash that differs from the active contract WHEN use or resume is attempted THEN admission denies it; profile and both hashes must match the active contract. Admission also requires valid tool and instruction projection receipts bound to that active contract, with matching pinned layer, module-library and profile inputs, matching canonical algorithm/specification identity, and successful independent projection-content validation as required above. Missing, stale, invalid or mismatched receipts or failed content validation independently deny use and resume; matching hashes alone never authorize admission.
