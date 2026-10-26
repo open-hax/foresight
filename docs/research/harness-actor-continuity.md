@@ -62,7 +62,7 @@ explicitly dated source for the direction. No claim of exhaustive chat search.
 
 ## Open observations
 
-Orbit checkout exists at /home/err/spaces/orbitdesktop and documents a native
+The observed Orbit desktop repository checkout documents a native
 Hermes plugin with workspace, resources and workbench tool boundaries. Its
 running status needs a separate runtime probe; a checkout is not deployment.
 Knoxx PM2 process names include stopped backend/ingestion processes and online
