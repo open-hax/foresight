@@ -54,6 +54,7 @@ candidates, and accepted lifts are not interchangeable.
 | `osmos` | open-hax/osmos | ingestion-service | Extracted JVM kms-ingestion service, configuration and consumer compatibility |
 | `receipt-river` | open-hax/receipt-river | receipt-ledger | Receipt-writing CLI and accountability records |
 | `axxium` | open-hax/axxium | identity-auth-kernel | Identity and authorization kernel; existing repository history is preserved |
+| `openplanner` | open-hax/openplanner | session-archive-data-lake | API-first data lake for LLM session archives; feeds the cephalon / graph-memory creative loop |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
 | `clobber` | (root-owned, recovered from riatzukiza/devel) | process-supervisor-dsl | Recovered pm2-clj/clobber PM2 DSL: merge law, prototypes, profiles (consolidation input; destined for the shx/Hexis supervisor IR; see `clobber/PROVENANCE.md`) |
@@ -143,7 +144,15 @@ must remain visible. Never convert an unavailable action into a pass.
 ## State
 
 Cards live under `docs/agile/kanban`. Rheos events and receipts belong under
-`.ημ/`; no provenance ledger may be created elsewhere.
+`.ημ/`; no provenance ledger may be created elsewhere. New receipts are
+one-record segment files under `.ημ/receipts/` (`<UTC timestamp>-<id>.edn`);
+`.ημ/receipts.edn` is frozen legacy history. Never append to it. Existing
+segment files are immutable. The one permitted legacy edit is a
+terminator-preserving whole-line migration: head legacy bytes must remain an
+ordered, byte-identical subsequence of the base file after rows move into
+`.ημ/receipts/<UTC timestamp>-<id>.edn` (fork/org reconciliation). Never
+rewrite, reorder, or add new records in the legacy file.
+`scripts/evidence.clj verify-receipts` checks the merged ledger as a whole.
 
 
 ## Pull requests: Promethean review and promotion

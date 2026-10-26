@@ -3,17 +3,23 @@
   (:require [cljs.test :as test :refer [deftest is testing]]
             [clojure.string :as str]
             [foresight.law.project :as law]
+            [foresight.law.dev-origins :as dev-origins]
             [foresight.onboarding :as onboarding]
             [foresight.project :as project]
             [clojure.edn :as edn]
+            ["crypto" :as crypto]
             ["fs" :as fs]
             [workspace :as workspace]))
+
+(def network-roots
+  (edn/read-string (fs/readFileSync "config/dev-origin-network-roots.edn" "utf8")))
 
 (deftest extracted-children-have-routing-and-gate-entries
   (let [agents (fs/readFileSync "AGENTS.md" "utf8")
         catalog (edn/read-string (fs/readFileSync "config/quality-gates.edn" "utf8"))]
     (doseq [path ["kanban-orchestrator" "clio" "chat-ui" "rheos"
-                 "session-mycology" "sol" "osmos" "receipt-river" "axxium"]]
+                 "session-mycology" "sol" "osmos" "receipt-river" "axxium"
+                   "openplanner"]]
       (is (str/includes? agents (str "| `" path "` | open-hax/" path " |")) path)
       (is (seq (get-in catalog [:catalog/repositories path :repository/gates])) path))))
 
@@ -38,6 +44,137 @@
     (is (:valid? result))
     (is (empty? (:errors result)))))
 
+(deftest dev-origin-map-law
+  (let [modules [{:path "shx" :url "git@github.com:octave-commons/shx.git"}
+                 {:path "opencode" :url "git@github.com:open-hax/opencode.git"}]
+        roots {"open-hax/opencode" "anomalyco/opencode"}
+        required {"shx" "octave-commons/shx" "opencode" "open-hax/opencode"}
+        rows [{:source/path "shx" :org/upstream "octave-commons/shx"
+               :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
+              {:source/path "opencode" :org/upstream "open-hax/opencode"
+               :dev/origin "riatzukiza/mojomast-opencode"
+               :network/root "anomalyco/opencode"}]]
+    (is (:valid? (dev-origins/validate rows modules roots required)))
+    (doseq [[changed expected]
+            [[(pop rows) :dev-origin/missing]
+             [(conj rows (assoc (first rows) :source/path "extra")) :dev-origin/unknown-submodule]
+             [(assoc-in rows [1 :dev/origin] "riatzukiza/shx") :dev-origin/duplicate-fork]
+             [(assoc-in rows [1 :network/root] "octave-commons/shx") :dev-origin/duplicate-network]
+             [(assoc-in rows [1 :org/upstream] "open-hax/missing") :dev-origin/upstream-mismatch]
+             [(assoc-in rows [0 :dev/origin] "open-hax/shx") :dev-origin/personal-owner]]]
+      (is (some #(= expected (:law/id %)) (:errors (dev-origins/validate changed modules roots required)))
+          (str expected)))))
+
+(deftest dev-origin-coverage-is-keyed-by-path-not-owner
+  ;; Codex PRRT_kwDOT3TWPM6rqMQW: once .gitmodules points a module at its
+  ;; personal dev origin, the row must still be required and accepted.
+  (let [roots {"open-hax/opencode" "anomalyco/opencode"}
+        required {"shx" "octave-commons/shx" "opencode" "open-hax/opencode"}
+        rows [{:source/path "shx" :org/upstream "octave-commons/shx"
+               :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
+              {:source/path "opencode" :org/upstream "open-hax/opencode"
+               :dev/origin "riatzukiza/mojomast-opencode"
+               :network/root "anomalyco/opencode"}]
+        dev-modules [{:path "shx" :url "git@github.com:riatzukiza/shx.git"}
+                     {:path "opencode" :url "https://github.com/riatzukiza/mojomast-opencode.git"}]
+        ids (fn [rows modules]
+              (set (map :law/id (:errors (dev-origins/validate rows modules roots required)))))]
+    (testing "dev-origin URLs satisfy their rows"
+      (is (:valid? (dev-origins/validate rows dev-modules roots required))))
+    (testing "a dev-pointed module whose row is removed is still missing (CodeRabbit PRRT_kwDOU4VJMM6u4m7H)"
+      ;; Required paths come from the manifest, not from the rows themselves.
+      (is (contains? (ids (pop rows) dev-modules) :dev-origin/missing)))
+    (testing "an org-pointed module without a row is still missing beside dev-pointed ones"
+      (is (contains? (ids (pop rows) (assoc-in dev-modules [1 :url] "git@github.com:open-hax/opencode.git"))
+                     :dev-origin/missing)))
+    (testing "a row whose path is not a submodule is still unknown"
+      (is (contains? (ids (conj rows (assoc (first rows) :source/path "extra")) dev-modules)
+                     :dev-origin/unknown-submodule)))
+    (testing "a module pointing at neither upstream nor dev origin is a mismatch"
+      (is (contains? (ids rows (assoc-in dev-modules [0 :url] "git@github.com:riatzukiza/other.git"))
+                     :dev-origin/upstream-mismatch)))
+    (testing "an unrelated personal module without a row is not an org module"
+      (is (:valid? (dev-origins/validate
+                    rows (conj dev-modules {:path ".agents" :url "git@github.com:riatzukiza/.agents.git"})
+                    roots required))))
+    (testing "a required path absent from the modules still needs a row (CodeRabbit review 5605249621 cr-comment:v1:ab9c0c8f2a97f462c475b6f2)"
+      (is (= #{:dev-origin/missing}
+             (set (map :law/id (:errors (dev-origins/validate rows dev-modules roots
+                                                              (assoc required "absent" "open-hax/absent"))))))))
+    (testing "a dev-pointed module still checks :org/upstream against the model (CodeRabbit PRRT_kwDOU4VJMM6u7W4I)"
+      (is (contains? (ids (-> rows
+                              (assoc-in [0 :org/upstream] "someone/unrelated")
+                              (assoc-in [0 :network/root] "someone/unrelated"))
+                          dev-modules)
+                     :dev-origin/upstream-mismatch)))
+    (testing "a nested canonical path cannot cover itself through its own row (CodeRabbit PRRT_kwDOU4VJMM6u5uIo)"
+      ;; .agents points at riatzukiza/.agents; a row naming that origin must
+      ;; not turn the excluded path into covered coverage.
+      (is (contains? (ids (conj rows {:source/path ".agents" :org/upstream "open-hax/.agents"
+                                      :dev/origin "riatzukiza/.agents" :network/root "open-hax/.agents"})
+                          (conj dev-modules {:path ".agents" :url "git@github.com:riatzukiza/.agents.git"}))
+                     :dev-origin/unknown-submodule)))))
+
+(deftest dev-origin-network-root-is-checked-against-supplied-facts
+  ;; Codex PRRT_kwDOT3TWPM6rqMQa / CodeRabbit PRRT_kwDOT3TWPM6uiWm8.
+  (let [modules [{:path "shx" :url "git@github.com:octave-commons/shx.git"}
+                 {:path "opencode" :url "git@github.com:open-hax/opencode.git"}]
+        roots {"open-hax/opencode" "anomalyco/opencode"}
+        required {"shx" "octave-commons/shx" "opencode" "open-hax/opencode"}
+        rows [{:source/path "shx" :org/upstream "octave-commons/shx"
+               :dev/origin "riatzukiza/shx" :network/root "octave-commons/shx"}
+              {:source/path "opencode" :org/upstream "open-hax/opencode"
+               :dev/origin "riatzukiza/mojomast-opencode"
+               :network/root "anomalyco/opencode"}]
+        ids (fn [rows roots]
+              (set (map :law/id (:errors (dev-origins/validate rows modules roots required)))))]
+    (testing "a well-formed but wrong root is refused"
+      (is (contains? (ids (assoc-in rows [0 :network/root] "someone/shx") roots)
+                     :dev-origin/network-root-mismatch)))
+    (testing "the opencode exception comes from the supplied facts, not the law"
+      (is (contains? (ids rows {}) :dev-origin/network-root-mismatch))
+      (is (contains? (ids (assoc-in rows [1 :network/root] "open-hax/opencode") roots)
+                     :dev-origin/network-root-mismatch)))
+    (testing "the checked-in facts keep only the opencode exception"
+      (is (= {"open-hax/opencode" "anomalyco/opencode"} network-roots)))))
+
+(deftest checked-in-dev-origins-cover-current-submodules
+  (let [rows (edn/read-string (fs/readFileSync "config/dev-origins.edn" "utf8"))
+        result (dev-origins/validate rows (workspace/current-submodules) network-roots
+                                     (project/dev-origin-required-upstreams))]
+    (is (:valid? result) (pr-str (:errors result)))
+    (is (= 23 (count rows)))
+    (is (= "riatzukiza/mojomast-opencode"
+           (:dev/origin (first (filter #(= "opencode" (:source/path %)) rows)))))))
+
+(deftest dev-origin-required-upstreams-come-from-the-project-model
+  ;; Independently owned submodules need a row; the nested canonical .agents does not.
+  (let [required (project/dev-origin-required-upstreams)]
+    (is (= 23 (count required)))
+    (is (not (contains? required ".agents")))
+    (is (= "open-hax/opencode" (get required "opencode")))
+    (is (= "octave-commons/shx" (get required "shx")))))
+
+(def kanban-org-base
+  "open-hax/foresight base fcfc2d17f28640203066ddfe0a22f87db7372a32: its
+  .ημ/kanban-events/ledger.edn blob, which fork history must keep as a prefix."
+  {:commit "fcfc2d17f28640203066ddfe0a22f87db7372a32"
+   :blob "2b5d16ddab10b50a786eb9f121bba29e9194e0e7"
+   :bytes 143351})
+
+(defn- git-blob-id [buffer]
+  (-> (crypto/createHash "sha1")
+      (.update (str "blob " (.-length buffer) "\u0000"))
+      (.update buffer)
+      (.digest "hex")))
+
+(deftest kanban-ledger-preserves-the-org-base-as-a-prefix
+  ;; CodeRabbit PRRT_kwDOT3TWPM6uiWm1: fork events go after the base history.
+  (let [ledger (fs/readFileSync ".ημ/kanban-events/ledger.edn")
+        {:keys [blob bytes]} kanban-org-base]
+    (is (<= bytes (.-length ledger)))
+    (is (= blob (git-blob-id (.subarray ledger 0 bytes))))))
+
 (deftest checked-in-gitmodules-match-project-law
   (let [result (law/validate-project project/project (workspace/current-submodules))]
     (is (:valid? result) (pr-str (:errors result)))))
@@ -49,6 +186,25 @@
     (is (false? (:valid? result)))
     (is (some #(= :foresight/gitmodule-url-matches (:law/id %))
               (:errors result)))))
+
+(deftest gitmodule-dev-origin-urls-pass-the-project-gate
+  ;; CodeRabbit PRRT_kwDOU4VJMM6u7W4B: a module pointed at its row's dev origin
+  ;; is accepted by dev-origins/validate, so the project gate must accept it too.
+  (let [dev-origin-repos {"shx" "riatzukiza/shx"}
+        point (fn [url] (mapv #(if (= "shx" (:path %)) (assoc % :url url) %)
+                              (project/gitmodule-declarations)))
+        ids (fn [actual] (set (map :law/id (:errors (law/validate-project project/project actual
+                                                                           dev-origin-repos)))))]
+    (testing "the declared org URL and the matching dev origin both pass"
+      (is (:valid? (law/validate-project project/project (project/gitmodule-declarations) dev-origin-repos)))
+      (is (:valid? (law/validate-project project/project (point "git@github.com:riatzukiza/shx.git") dev-origin-repos)))
+      (is (:valid? (law/validate-project project/project (point "https://github.com/riatzukiza/shx.git") dev-origin-repos))))
+    (testing "an unrelated URL, or another path's dev origin, is still drift"
+      (is (contains? (ids (point "git@github.com:riatzukiza/other.git")) :foresight/gitmodule-url-matches))
+      (is (contains? (set (map :law/id (:errors (law/validate-project project/project
+                                                                      (point "git@github.com:riatzukiza/shx.git")
+                                                                      {}))))
+                     :foresight/gitmodule-url-matches)))))
 
 (deftest duplicate-source-paths-are-illegal
   (let [first-path (get-in project/project [:project/sources 0 :source/path])

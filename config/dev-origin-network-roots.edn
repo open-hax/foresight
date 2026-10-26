@@ -1,0 +1,4 @@
+;; SPDX-License-Identifier: GPL-3.0-or-later
+;; Reviewed upstream -> GitHub fork-network root facts for config/dev-origins.edn.
+;; An upstream absent here is expected to be its own network root.
+{"open-hax/opencode" "anomalyco/opencode"}

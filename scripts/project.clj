@@ -1,10 +1,12 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 (ns project
   (:require [foresight.law.lineage :as lineage-law]
+            [foresight.law.dev-origins :as dev-origins]
             [foresight.law.project :as law]
             [foresight.lineage :as lineage]
             [foresight.onboarding :as onboarding]
             [foresight.project :as project-model]
+            [clojure.edn :as edn]
             [nbb.core :as nbb]
             [workspace :as workspace]
             ["fs" :as fs]
@@ -38,12 +40,24 @@
   0)
 
 (defn validate! []
-  (let [project-result
-        (law/validate-project project-model/project (current-gitmodules))
+  (let [origin-rows
+        (edn/read-string (fs/readFileSync (path/join root "config/dev-origins.edn") "utf8"))
+        project-result
+        ;; A module may point at its row's dev origin; dev-origins/validate
+        ;; checks that row, so the project gate accepts the same URL.
+        (law/validate-project project-model/project (current-gitmodules)
+                              (into {} (map (juxt :source/path :dev/origin)) origin-rows))
         lineage-result
         (lineage-law/validate-inventory lineage/sources)
+        origins-result
+        (dev-origins/validate
+         origin-rows
+         (current-gitmodules)
+         (edn/read-string (fs/readFileSync (path/join root "config/dev-origin-network-roots.edn") "utf8"))
+         (project-model/dev-origin-required-upstreams))
         valid? (and (:valid? project-result)
-                    (:valid? lineage-result))]
+                    (:valid? lineage-result)
+                    (:valid? origins-result))]
     (if valid?
       (do
         (println "PASS" (name (:project/id project-result))
@@ -58,7 +72,8 @@
         (binding [*out* *err*]
           (println "FAIL" (name (:project/id project-result)))
           (doseq [error (concat (:errors project-result)
-                                (:errors lineage-result))]
+                                (:errors lineage-result)
+                                (:errors origins-result))]
             (prn error)))
         1))))
 

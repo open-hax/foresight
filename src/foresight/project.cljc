@@ -552,6 +552,16 @@
      :source/role :identity-auth-kernel
      :source/actionable? true
      :source/invariants []}
+    {:source/id :openplanner
+     :source/name "openplanner"
+     :source/path "openplanner"
+     :source/type :git-submodule
+     :source/repository "open-hax/openplanner"
+     :source/url "git@github.com:open-hax/openplanner.git"
+     :source/ownership :independent-repository
+     :source/role :session-archive-data-lake
+     :source/actionable? true
+     :source/invariants []}
     {:source/id :eta
     :source/name "eta"
     :source/path "eta"
@@ -607,6 +617,19 @@
 
 (defn submodule-sources []
   (filterv #(= :git-submodule (:source/type %)) sources))
+
+(defn dev-origin-required-upstreams
+  "Submodule path -> declared org upstream (owner/repo) for every path that
+  needs a dev-origin row: every independently owned repository. Nested
+  canonical inputs such as .agents are excluded. Derived from the manifest
+  model, not from dev-origin rows or current URLs."
+  []
+  (into {}
+        (comp (filter #(= :independent-repository (:source/ownership %)))
+              (map (fn [{:source/keys [path url]}]
+                     [path (second (re-matches #"^(?:git@github.com:|https://github.com/)([^/]+/[^/]+?)(?:[.]git)?$"
+                                               url))])))
+        (submodule-sources)))
 
 (defn consolidation-inputs []
   (filterv :source/consolidation? sources))
