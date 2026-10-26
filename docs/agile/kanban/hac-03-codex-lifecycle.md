@@ -73,6 +73,10 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] GIVEN a non-idempotent effect committed before a crash and lost response WHEN recovery retries the same message with original producer, binding, message ID and destination and current delivery/protected-outcome authorization THEN the durable deduplication record and protected outcome recover with the effect under the versioned HAC.02 atomic rule or an equivalent versioned recoverable protocol; the qualification receipt identifies the exact versioned HAC.02 rule or equivalent protocol exercised. Retry returns the first recorded outcome without repeating the effect. A crash must never expose a committed effect with a missing recovery/deduplication outcome.
 
+- [ ] On every supported request/reply route, independently test unknown, stale and mismatched in-flight correlation IDs; each denies before delivery, effects or protected outcome return even with otherwise valid context and grants.
+- [ ] Native retry preserves the HAC.02 payload identity as well as producer, binding, message ID and destination. Independently substitute payload identity and deny before delivery, effects or protected outcome return; record the exercised replay rule version.
+- [ ] Parent cancellation additionally requires a distinct cancellation capability or explicit operator scope authorizing cancellation. A context holding only use, read or retry authority independently denies before cancellation commit or any queued descendant work changes, even with authenticated parent identity and a valid current binding.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

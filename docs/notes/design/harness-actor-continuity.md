@@ -250,3 +250,7 @@ Retries and stored outcomes retain current authorization checks; copying bytes
 into an envelope cannot bypass source revocation. HAC.02 specifies these laws;
 HAC.05 qualifies the sender and receiver boundaries separately, including
 unauthorized-destination negatives with no payload-bearing transport emission.
+
+Delegation permission is non-transitive by default. Further delegation requires explicit parent authorization, and the child delegation permission, including recipient constraints, must be no broader than its parent. HAC.02 independently denies unauthorized grandchild issuance and widened delegation permission before grant or binding creation.
+
+Both initial lift and rebuild qualification independently revoke each required grant after source-byte access but before publication admission. Admission rejects or revalidates against current authority without unauthorized visibility, under the existing atomic conditional publication rule; the respective receipts record those races. This does not impose a full-interval lease.

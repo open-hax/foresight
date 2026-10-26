@@ -42,6 +42,8 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] GIVEN a selected contract WHEN a Hermes/Orbit test adapter is qualified THEN its evidence identifies the consumed contract and profile, shows actor binding and message admission through HAC.02, and demonstrates a supported native request/reply roundtrip in which the reply reaches the originating actor with correlation and producer/destination actor references preserved. Wrong-context, unauthorized-message and unauthorized-reply attempts independently deny before protected delivery or effects. Discovery or health evidence alone cannot satisfy consumer qualification; unsupported capabilities retain explicit dispositions and negative tests.
 - [ ] GIVEN an isolated Orbit workspace WHEN a mutation is requested with a sufficient current grant and current workspace revision THEN the authorized mutation succeeds with the expected state change. Independently test an insufficient grant and a stale revision: each denies the mutation and leaves workspace content and revision unchanged, verified by before/after snapshots; a separate denial audit record is permitted.
 
+- [ ] Positive shared-tool registration, invocation and expected-result evidence must come from a non-fixture runtime using the selected Muse tool set; fixture or test-double responses cannot qualify tool parity. Independently invoke a supported tool without its required capability and with a mismatched actor binding: each denies before execution or protected-result return with no effect, recorded separately from unsupported-capability evidence.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

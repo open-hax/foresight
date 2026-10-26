@@ -57,6 +57,9 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] GIVEN a non-idempotent effect committed before a crash and lost response WHEN recovery retries the same message with original producer, binding, message ID and destination and current delivery/protected-outcome authorization THEN the durable deduplication record and protected outcome recover with the effect under the versioned HAC.02 atomic rule or an equivalent recoverable protocol; retry returns the first recorded outcome without repeating the effect. A crash must never expose a committed effect with a missing recovery/deduplication outcome.
 
+- [ ] The versioned replay identity binds payload identity (content digest or exact immutable source revision) alongside producer, binding, message ID and destination. Independently substitute payload identity on retry and deny before delivery, effects or protected outcome return.
+- [ ] Delegation permission is non-transitive by default. Further delegation requires explicit parent authorization; child delegation permission and recipient constraints must be no broader than the parent’s. Independently deny unauthorized grandchild issuance and widened delegation permission before issuing grants or bindings.
+
 ## Verification
 
 Portable contract work supplies named upstream law/schema test runners with
