@@ -150,7 +150,12 @@ gate aborts before writing; a change there also keeps the lock. The writer lock
 must name its path before the write. If its post-write check fails, receipt bytes
 may already exist, but the segment remains quarantined. A writer lock that
 cannot be released is recreated as a
-quarantine marker. If the reserved path has vanished, the lock is released only
+quarantine marker. After the reserved descriptor is closed, the segment path
+must still name the written inode with exactly the written bytes, checked
+again before each lock is released; a mismatch keeps the lock. The
+whole-ledger comparison finishes under the writer lock; after its release
+only the run's own reserved segment is rechecked, so a later cooperating
+writer's segment is not treated as tampering. If the reserved path has vanished, the lock is released only
 when the still-held descriptor proves the inode unlinked; a renamed
 reservation keeps the lock. Any uncertain result after writing begins deliberately
 retains the lock as a quarantine marker for the whole ledger so a later

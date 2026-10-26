@@ -79,6 +79,53 @@
    :ledger/bytes (js/Buffer.alloc 0)
    :ledger/records []})
 
+(def one-gate-catalog
+  {:catalog/repositories
+   {"repo" {:repository/path "repo"
+            :repository/gates [local-gate]}}})
+
+(def one-gate-repositories
+  {"repo" {:path "repo"
+           :absolute "/repo"
+           :revision child-revision}})
+
+(defn run-one-gate!
+  "Runs `local-gate` from `one-gate-catalog` through `run-selected-gates!`
+  against the working legacy ledger `:file`, with HEAD, the committed ledger
+  and the gate's repository stubbed. Optional overrides: `:segment` (the
+  reserved segment path), `:gate!` (a side effect run by the gate before it
+  returns `passed-result`), `:run-gate` (replaces the whole gate), `:git-capture`,
+  `:committed` (revision -> committed ledger), `:segments` (revision ->
+  committed segment entries), `:repositories` and `:validate-working`."
+  [{:keys [file segment gate! run-gate git-capture committed segments
+           repositories validate-working]}]
+  (let [new-segment-file cli/new-receipt-segment-file
+        validate-working-ledger cli/validate-working-receipt-ledger!]
+    (with-redefs [cli/receipt-file file
+                  cli/new-receipt-segment-file (if segment
+                                                 (fn [] segment)
+                                                 new-segment-file)
+                  cli/git-capture! (or git-capture
+                                       (fn [_] reviewed-root-revision))
+                  cli/read-immutable-receipt-ledger! (or committed
+                                                         empty-committed-ledger)
+                  cli/read-immutable-receipt-segment-entries! (or segments (fn [_] []))
+                  cli/validate-working-receipt-ledger! (or validate-working
+                                                           validate-working-ledger)
+                  cli/require-repositories! (fn [& _]
+                                              (or repositories
+                                                  one-gate-repositories))
+                  cli/run-gate! (or run-gate
+                                    (fn [& _]
+                                      (when gate! (gate!))
+                                      passed-result))]
+      (cli/run-selected-gates!
+       one-gate-catalog test-catalog-identity
+       {:only #{"repo"} :kinds #{:unit}}))))
+
+(defn run-semantic-gate-with! [file segment gate!]
+  (run-one-gate! {:file file :segment segment :gate! gate!}))
+
 (deftest secure-append-creates-and-serializes-regular-receipts
   (with-receipt-fixture
     (fn [{:keys [file]}]
@@ -399,132 +446,75 @@
     (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
             segment (path/join segments "2026-10-13T000000000Z-test.edn")
-            lock-file (path/join segments ".2026-10-13T000000000Z-test.edn.append.lock")
-            catalog {:catalog/repositories
-                     {"repo" {:repository/path "repo"
-                              :repository/gates [local-gate]}}}]
+            lock-file (path/join segments ".2026-10-13T000000000Z-test.edn.append.lock")]
         ;; Semantic evidence appends require an explicitly initialized ledger.
         (fs/writeFileSync file "" "utf8")
-        (with-redefs [cli/receipt-file file
-                      cli/new-receipt-segment-file (fn [] segment)
-                      cli/git-capture!
-                      (fn [args]
-                        (is (= ["rev-parse" "HEAD"] args))
-                        reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger!
-                      (fn [revision]
-                        (is (= reviewed-root-revision revision))
-                        (empty-committed-ledger revision))
-                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                      cli/require-repositories!
-                      (fn [& _]
-                        {"repo" {:path "repo"
-                                 :absolute "/repo"
-                                 :revision child-revision}})
-                      cli/run-gate!
-                      (fn [& _]
-                        (reset! gate-ran? true)
-                        (is (fs/existsSync lock-file))
-                        (is (fs/existsSync segment))
-                        passed-result)]
-          (is (zero? (cli/run-selected-gates!
-                      catalog test-catalog-identity
-                      {:only #{"repo"} :kinds #{:unit}})))
-          (is @gate-ran?)
-          (is (not (fs/existsSync lock-file)))
-          (is (= "" (fs/readFileSync file "utf8")))
-          (let [records (segment-records segments)]
-            (is (= 1 (count records)))
-            (is (= passed-result (:evidence/result (first records))))))))))
+        (is (zero? (run-one-gate!
+                    {:file file
+                     :segment segment
+                     :git-capture (fn [args]
+                                    (is (= ["rev-parse" "HEAD"] args))
+                                    reviewed-root-revision)
+                     :committed (fn [revision]
+                                  (is (= reviewed-root-revision revision))
+                                  (empty-committed-ledger revision))
+                     :gate! (fn []
+                              (reset! gate-ran? true)
+                              (is (fs/existsSync lock-file))
+                              (is (fs/existsSync segment)))})))
+        (is @gate-ran?)
+        (is (not (fs/existsSync lock-file)))
+        (is (= "" (fs/readFileSync file "utf8")))
+        (let [records (segment-records segments)]
+          (is (= 1 (count records)))
+          (is (= passed-result (:evidence/result (first records)))))))))
 
 (deftest selected-gates-reject-an-unsafe-receipt-target-before-execution
   (with-receipt-fixture
     (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
             segment (path/join segments "2026-10-13T000000000Z-test.edn")
-            lock-file (path/join segments ".2026-10-13T000000000Z-test.edn.append.lock")
-            catalog {:catalog/repositories
-                     {"repo" {:repository/path "repo"
-                              :repository/gates [local-gate]}}}]
+            lock-file (path/join segments ".2026-10-13T000000000Z-test.edn.append.lock")]
         (fs/writeFileSync file "" "utf8")
         (fs/writeFileSync lock-file "stale-or-held\n"
                           #js {:encoding "utf8" :flag "wx"})
-        (with-redefs [cli/receipt-file file
-                      cli/new-receipt-segment-file (fn [] segment)
-                      cli/require-repositories!
-                      (fn [& _]
-                        {"repo" {:path "repo"
-                                 :absolute "/repo"
-                                 :revision child-revision}})
-                      cli/run-gate!
-                      (fn [& _]
-                        (reset! gate-ran? true)
-                        passed-result)]
-          (is (thrown-with-msg?
-               js/Error #"another writer holds the append lock"
-               (cli/run-selected-gates!
-                catalog test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (is (false? @gate-ran?))
-          (is (not (fs/existsSync segment)))
-          (is (= "stale-or-held\n"
-                 (fs/readFileSync lock-file "utf8"))))))))
+        (is (thrown-with-msg?
+             js/Error #"another writer holds the append lock"
+             (run-one-gate! {:file file :segment segment
+                             :gate! #(reset! gate-ran? true)})))
+        (is (false? @gate-ran?))
+        (is (not (fs/existsSync segment)))
+        (is (= "stale-or-held\n"
+               (fs/readFileSync lock-file "utf8")))))))
 
 (deftest selected-gates-refuse-to-overwrite-an-existing-segment
   (with-receipt-fixture
     (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
-            segment (path/join segments "2026-10-13T000000000Z-test.edn")
-            catalog {:catalog/repositories
-                     {"repo" {:repository/path "repo"
-                              :repository/gates [local-gate]}}}]
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")]
         (fs/writeFileSync file "" "utf8")
-        (with-redefs [cli/receipt-file file
-                      cli/new-receipt-segment-file (fn [] segment)
-                      cli/git-capture! (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                      cli/validate-working-receipt-ledger! (fn [_] nil)
-                      cli/require-repositories! (fn [& _] {"repo" {}})
-                      cli/run-gate! (fn [& _]
-                                      (reset! gate-ran? true)
-                                      passed-result)]
-          (fs/writeFileSync segment "" "utf8")
-          (is (thrown-with-msg?
-               js/Error #"could not be securely opened"
-               (cli/run-selected-gates!
-                catalog test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (is (false? @gate-ran?))
-          (is (= "" (fs/readFileSync segment "utf8")))
-          (is (= [] (lock-files segments))))))))
+        (fs/writeFileSync segment "" "utf8")
+        (is (thrown-with-msg?
+             js/Error #"could not be securely opened"
+             (run-one-gate! {:file file :segment segment
+                             :validate-working (fn [_] nil)
+                             :repositories {"repo" {}}
+                             :gate! #(reset! gate-ran? true)})))
+        (is (false? @gate-ran?))
+        (is (= "" (fs/readFileSync segment "utf8")))
+        (is (= [] (lock-files segments)))))))
 
 (deftest selected-gates-refuse-to-recreate-a-missing-ledger
   (with-receipt-fixture
     (fn [{:keys [segments file]}]
-      (let [gate-ran? (atom false)
-            catalog {:catalog/repositories
-                     {"repo" {:repository/path "repo"
-                              :repository/gates [local-gate]}}}]
-        (with-redefs [cli/receipt-file file
-                      cli/require-repositories!
-                      (fn [& _]
-                        {"repo" {:path "repo"
-                                 :absolute "/repo"
-                                 :revision child-revision}})
-                      cli/run-gate!
-                      (fn [& _]
-                        (reset! gate-ran? true)
-                        passed-result)]
-          (is (thrown-with-msg?
-               js/Error #"could not be securely opened"
-               (cli/run-selected-gates!
-                catalog test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (is (false? @gate-ran?))
-          (is (not (fs/existsSync file)))
-          (is (= [] (segment-names segments)))
-          (is (= [] (lock-files segments))))))))
+      (let [gate-ran? (atom false)]
+        (is (thrown-with-msg?
+             js/Error #"could not be securely opened"
+             (run-one-gate! {:file file :gate! #(reset! gate-ran? true)})))
+        (is (false? @gate-ran?))
+        (is (not (fs/existsSync file)))
+        (is (= [] (segment-names segments)))
+        (is (= [] (lock-files segments)))))))
 
 (deftest selected-gates-reject-a-valid-truncated-committed-ledger
   (let [first-record {:ts "2026-08-29T22:58:48Z"
@@ -545,10 +535,7 @@
         second-line (str (pr-str second-record) "\n")
         committed-text (str first-line second-line)
         committed-bytes (js/Buffer.from committed-text "utf8")
-        committed-segment ".ημ/receipts/2026-08-29T225849Z-second.edn"
-        catalog {:catalog/repositories
-                 {"repo" {:repository/path "repo"
-                          :repository/gates [local-gate]}}}]
+        committed-segment ".ημ/receipts/2026-08-29T225849Z-second.edn"]
     (is (law/receipt-envelope? first-record))
     (is (law/receipt-envelope? second-record))
     ;; Dropping a committed legacy record, or deleting or editing a committed
@@ -568,76 +555,45 @@
             (when held-segment
               (fs/writeFileSync (path/join segments "2026-08-29T225849Z-second.edn")
                                 held-segment "utf8"))
-            (with-redefs [cli/receipt-file file
-                          cli/git-capture!
-                          (fn [args]
-                            (is (= ["rev-parse" "HEAD"] args))
-                            reviewed-root-revision)
-                          cli/read-immutable-receipt-ledger!
-                          (fn [revision]
-                            (is (= reviewed-root-revision revision))
-                            (assoc (empty-committed-ledger revision)
-                                   :ledger/bytes legacy-committed
-                                   :ledger/records
-                                   (cli/read-receipt-records!
-                                    (.toString legacy-committed "utf8"))))
-                          cli/read-immutable-receipt-segment-entries!
-                          (fn [_]
-                            (mapv (fn [[k v]]
-                                    (cli/segment-entry k (js/Buffer.from v "utf8")))
-                                  (sort committed-segments)))
-                          cli/require-repositories!
-                          (fn [& _]
-                            {"repo" {:path "repo"
-                                     :absolute "/repo"
-                                     :revision child-revision}})
-                          cli/run-gate!
-                          (fn [& _]
-                            (reset! gate-ran? true)
-                            passed-result)]
-              (is (thrown-with-msg?
-                   js/Error #"does not preserve the committed ledger"
-                   (cli/run-selected-gates!
-                    catalog test-catalog-identity
-                    {:only #{"repo"} :kinds #{:unit}})))
-              (is (false? @gate-ran?))
-              (is (= legacy-text (fs/readFileSync file "utf8")))
-              (is (= [] (lock-files segments))))))))))
+            (is (thrown-with-msg?
+                 js/Error #"does not preserve the committed ledger"
+                 (run-one-gate!
+                  {:file file
+                   :git-capture (fn [args]
+                                  (is (= ["rev-parse" "HEAD"] args))
+                                  reviewed-root-revision)
+                   :committed (fn [revision]
+                                (is (= reviewed-root-revision revision))
+                                (assoc (empty-committed-ledger revision)
+                                       :ledger/bytes legacy-committed
+                                       :ledger/records
+                                       (cli/read-receipt-records!
+                                        (.toString legacy-committed "utf8"))))
+                   :segments (fn [_]
+                               (mapv (fn [[k v]]
+                                       (cli/segment-entry
+                                        k (js/Buffer.from v "utf8")))
+                                     (sort committed-segments)))
+                   :gate! #(reset! gate-ran? true)})))
+            (is (false? @gate-ran?))
+            (is (= legacy-text (fs/readFileSync file "utf8")))
+            (is (= [] (lock-files segments)))))))))
 
 (deftest selected-gates-reject-an-invalid-held-ledger-before-execution
   (with-receipt-fixture
     (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
             invalid-segment "{:kind :observation}\n"
-            invalid-file (path/join segments "2026-10-13T000000000Z-bad.edn")
-            catalog {:catalog/repositories
-                     {"repo" {:repository/path "repo"
-                              :repository/gates [local-gate]}}}]
+            invalid-file (path/join segments "2026-10-13T000000000Z-bad.edn")]
         (fs/writeFileSync file "" "utf8")
         (fs/writeFileSync invalid-file invalid-segment "utf8")
-        (with-redefs [cli/receipt-file file
-                      cli/git-capture!
-                      (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                      cli/require-repositories!
-                      (fn [& _]
-                        {"repo" {:path "repo"
-                                 :absolute "/repo"
-                                 :revision child-revision}})
-                      cli/run-gate!
-                      (fn [& _]
-                        (reset! gate-ran? true)
-                        passed-result)]
-          (is (thrown-with-msg?
-               js/Error #"invalid receipt envelopes"
-               (cli/run-selected-gates!
-                catalog test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (is (false? @gate-ran?))
-          (is (= invalid-segment (fs/readFileSync invalid-file "utf8")))
-          (is (= ["2026-10-13T000000000Z-bad.edn"] (segment-names segments)))
-          (is (= [] (lock-files segments))))))))
+        (is (thrown-with-msg?
+             js/Error #"invalid receipt envelopes"
+             (run-one-gate! {:file file :gate! #(reset! gate-ran? true)})))
+        (is (false? @gate-ran?))
+        (is (= invalid-segment (fs/readFileSync invalid-file "utf8")))
+        (is (= ["2026-10-13T000000000Z-bad.edn"] (segment-names segments)))
+        (is (= [] (lock-files segments)))))))
 
 (deftest selected-gates-reject-legacy-appends-and-stray-files
   (doseq [[setup! message]
@@ -673,22 +629,11 @@
         (fs/writeFileSync file "" "utf8")
         (setup! context)
         (let [gate-ran? (atom false)]
-          (with-redefs [cli/receipt-file file
-                        cli/git-capture! (fn [_] reviewed-root-revision)
-                        cli/read-immutable-receipt-ledger! empty-committed-ledger
-                        cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                        cli/require-repositories! (fn [& _] {"repo" {}})
-                        cli/run-gate! (fn [& _]
-                                        (reset! gate-ran? true)
-                                        passed-result)]
-            (is (thrown-with-msg?
-                 js/Error message
-                 (cli/run-selected-gates!
-                  {:catalog/repositories
-                   {"repo" {:repository/path "repo"
-                            :repository/gates [local-gate]}}}
-                  test-catalog-identity
-                  {:only #{"repo"} :kinds #{:unit}}))))
+          (is (thrown-with-msg?
+               js/Error message
+               (run-one-gate! {:file file
+                               :repositories {"repo" {}}
+                               :gate! #(reset! gate-ran? true)})))
           (is (false? @gate-ran?)))))))
 
 (deftest selected-gates-reject-held-ledger-mutation-after-execution
@@ -696,39 +641,24 @@
     (fn [{:keys [segments file]}]
       (let [gate-ran? (atom false)
             changed-ledger "{:kind :observation}\n"
-            segment (path/join segments "2026-10-13T000000000Z-test.edn")
-            catalog {:catalog/repositories
-                     {"repo" {:repository/path "repo"
-                              :repository/gates [local-gate]}}}]
+            segment (path/join segments "2026-10-13T000000000Z-test.edn")]
         (fs/writeFileSync file "" "utf8")
-        (with-redefs [cli/receipt-file file
-                      cli/new-receipt-segment-file (fn [] segment)
-                      cli/git-capture!
-                      (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                      cli/require-repositories!
-                      (fn [& _]
-                        {"repo" {:path "repo"
-                                 :absolute "/repo"
-                                 :revision child-revision}})
-                      cli/run-gate!
-                      (fn [& _]
+        (is (thrown-with-msg?
+             js/Error #"changed after held ledger validation"
+             (run-one-gate!
+              {:file file
+               :segment segment
+               :gate! (fn []
                         (reset! gate-ran? true)
                         ;; Model a non-cooperating writer that ignores the held lock.
-                        (fs/writeFileSync segment changed-ledger "utf8")
-                        passed-result)]
-          (is (thrown-with-msg?
-               js/Error #"changed after held ledger validation"
-               (cli/run-selected-gates!
-                catalog test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (is @gate-ran?)
-          (is (= changed-ledger (fs/readFileSync segment "utf8")))
-          ;; The injected content cannot be safely removed, so the writer lock
-          ;; is retained as a quarantine marker instead of being released.
-          (is (= [(str "." (path/basename segment) ".append.lock")]
-                 (lock-files segments)))
+                        (fs/writeFileSync segment changed-ledger "utf8"))})))
+        (is @gate-ran?)
+        (is (= changed-ledger (fs/readFileSync segment "utf8")))
+        ;; The injected content cannot be safely removed, so the writer lock
+        ;; is retained as a quarantine marker instead of being released.
+        (is (= [(str "." (path/basename segment) ".append.lock")]
+               (lock-files segments)))
+        (with-redefs [cli/receipt-file file]
           (is (thrown-with-msg?
                js/Error #"retained append lock quarantines"
                (cli/read-working-receipt-segments! nil))))))))
@@ -742,64 +672,31 @@
                          (cli/validated-evidence-receipt!
                           (assoc passed-result :result/command ["forged"])))]
         (fs/writeFileSync file "" "utf8")
-        (with-redefs [cli/receipt-file file
-                      cli/new-receipt-segment-file (fn [] segment)
-                      cli/git-capture! (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                      cli/require-repositories!
-                      (fn [& _]
-                        {"repo" {:path "repo"
-                                 :absolute "/repo"
-                                 :revision child-revision}})
-                      cli/run-gate!
-                      (fn [& _]
-                        ;; Candidate gate code promotes its own schema-valid
-                        ;; output into a second, well-named segment.
-                        (fs/writeFileSync forged (str forged-line "\n") "utf8")
-                        passed-result)]
-          (is (thrown-with-msg?
-               js/Error #"ledger changed while the gate ran"
-               (cli/run-selected-gates!
-                {:catalog/repositories
-                 {"repo" {:repository/path "repo"
-                          :repository/gates [local-gate]}}}
-                test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (is (= [(path/basename forged)] (segment-names segments))
-              "no receipt was written for the gate")
-          (is (= [(str "." (path/basename segment) ".append.lock")]
-                 (lock-files segments))
-              "the lock quarantines the ledger until the forged segment is adjudicated"))))))
+        (is (thrown-with-msg?
+             js/Error #"ledger changed while the gate ran"
+             (run-semantic-gate-with!
+              file segment
+              ;; Candidate gate code promotes its own schema-valid output into
+              ;; a second, well-named segment.
+              #(fs/writeFileSync forged (str forged-line "\n") "utf8"))))
+        (is (= [(path/basename forged)] (segment-names segments))
+            "no receipt was written for the gate")
+        (is (= [(str "." (path/basename segment) ".append.lock")]
+               (lock-files segments))
+            "the lock quarantines the ledger until the forged segment is adjudicated")))))
 
-(defn run-gate-against-reserved-segment! [segments mutate!]
+(defn run-gate-against-reserved-segment! [segments file mutate!]
   (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
         renamed (path/join segments "2026-10-13T000001000Z-forged.edn")
         forged-line (cli/encode-edn-line!
                      (cli/validated-evidence-receipt!
                       (assoc passed-result :result/command ["forged"])))]
-    (with-redefs [cli/new-receipt-segment-file (fn [] segment)
-                  cli/git-capture! (fn [_] reviewed-root-revision)
-                  cli/read-immutable-receipt-ledger! empty-committed-ledger
-                  cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                  cli/require-repositories!
-                  (fn [& _]
-                    {"repo" {:path "repo"
-                             :absolute "/repo"
-                             :revision child-revision}})
-                  cli/run-gate!
-                  (fn [& _]
-                    (mutate! {:segment segment :renamed renamed
-                              :forged-line forged-line})
-                    passed-result)]
-      (is (thrown?
-           js/Error
-           (cli/run-selected-gates!
-            {:catalog/repositories
-             {"repo" {:repository/path "repo"
-                      :repository/gates [local-gate]}}}
-            test-catalog-identity
-            {:only #{"repo"} :kinds #{:unit}}))))
+    (is (thrown?
+         js/Error
+         (run-one-gate! {:file file
+                         :segment segment
+                         :gate! #(mutate! {:segment segment :renamed renamed
+                                           :forged-line forged-line})})))
     {:segment segment :renamed renamed}))
 
 (deftest selected-gates-retain-writer-lock-when-segment-lock-vanishes
@@ -819,56 +716,22 @@
                          (cli/validated-evidence-receipt!
                           (assoc passed-result :result/command ["forged"])))]
         (fs/writeFileSync file "" "utf8")
-        (with-redefs [cli/receipt-file file
-                      cli/new-receipt-segment-file (fn [] segment)
-                      cli/git-capture! (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                      cli/require-repositories!
-                      (fn [& _]
-                        {"repo" {:path "repo"
-                                 :absolute "/repo"
-                                 :revision child-revision}})
-                      cli/run-gate!
-                      (fn [& _]
-                        (fs/unlinkSync append-lock)
-                        (fs/writeFileSync forged (str forged-line "\n") "utf8")
-                        passed-result)]
-          (is (thrown-with-msg?
-               js/Error #"append lock"
-               (cli/run-selected-gates!
-                {:catalog/repositories
-                 {"repo" {:repository/path "repo"
-                          :repository/gates [local-gate]}}}
-                test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (is (= [(path/basename forged)] (segment-names segments))
-              "no receipt was written for the gate")
-          (is (= [(path/basename append-lock)] (lock-files segments))
-              "the vanished segment lock is recreated as the quarantine marker")
+        (is (thrown-with-msg?
+             js/Error #"append lock"
+             (run-semantic-gate-with!
+              file segment
+              (fn []
+                (fs/unlinkSync append-lock)
+                (fs/writeFileSync forged (str forged-line "\n") "utf8")))))
+        (is (= [(path/basename forged)] (segment-names segments))
+            "no receipt was written for the gate")
+        (is (= [(path/basename append-lock)] (lock-files segments))
+            "the vanished segment lock is recreated as the quarantine marker")
+        (with-redefs [cli/receipt-file file]
           (is (thrown-with-msg?
                js/Error #"quarantines the Receipt River ledger"
                (cli/open-append-reservation!
                 (path/join segments "2026-10-13T000002000Z-next.edn") true))))))))
-
-(defn run-semantic-gate-with! [file segment gate!]
-  (with-redefs [cli/receipt-file file
-                cli/new-receipt-segment-file (fn [] segment)
-                cli/git-capture! (fn [_] reviewed-root-revision)
-                cli/read-immutable-receipt-ledger! empty-committed-ledger
-                cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                cli/require-repositories!
-                (fn [& _]
-                  {"repo" {:path "repo"
-                           :absolute "/repo"
-                           :revision child-revision}})
-                cli/run-gate! (fn [& _] (gate!) passed-result)]
-    (cli/run-selected-gates!
-     {:catalog/repositories
-      {"repo" {:repository/path "repo"
-               :repository/gates [local-gate]}}}
-     test-catalog-identity
-     {:only #{"repo"} :kinds #{:unit}})))
 
 (defn next-writer-refused? [segments file]
   (with-redefs [cli/receipt-file file
@@ -972,6 +835,47 @@
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
 
+(deftest selected-gates-quarantine-directory-replaced-during-lock-cleanup
+  ;; After a verified write, cleanup releases the per-segment lock. Background
+  ;; work that watches for that unlock can rename the segment directory away
+  ;; and install a fresh one before the writer lock is released. The one-time
+  ;; identity snapshot at the start of close then misses the replacement, so
+  ;; cleanup would follow the held descriptor into the renamed directory,
+  ;; release the writer lock there, and leave the canonical ledger without
+  ;; `.ημ/.receipt-river.quarantine`. Recheck after segment-lock cleanup.
+  (with-receipt-fixture
+    (fn [{:keys [directory segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            moved (path/join directory "receipts.moved")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            replaced-during-unlock? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        ;; release-writer-lock! also calls release-append-lock!;
+                        ;; rename only on the first (per-segment) unlock.
+                        (when (compare-and-set! replaced-during-unlock? false true)
+                          (fs/renameSync segments moved)
+                          (fs/mkdirSync segments)
+                          (fs/writeFileSync forged (str forged-line "\n") "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"replaced during lock cleanup|quarantine"
+               (run-semantic-gate-with! file segment (fn [])))))
+        (is (fs/existsSync (path/join directory cli/receipt-quarantine-marker-name))
+            "the quarantine marker lives in the stable `.ημ` ancestor")
+        (with-redefs [cli/receipt-file file]
+          (is (thrown-with-msg?
+               js/Error #"quarantine"
+               (cli/read-working-receipt-segments! nil))
+              "the replacement directory is quarantined"))
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
 (deftest selected-gates-quarantine-a-segment-added-after-the-receipt-write
   ;; Gate-spawned work can wait for the reserved segment to become nonempty
   ;; and then add a schema-valid forged segment. The pre-write comparison has
@@ -994,6 +898,259 @@
                (run-semantic-gate-with! file segment (fn [])))))
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
+
+(deftest selected-gates-quarantine-a-segment-added-during-lock-cleanup
+  ;; The same forged segment can be added once the per-segment lock is
+  ;; released, while the writer lock still serializes the checkout. Compare
+  ;; the whole ledger again before releasing the writer lock and retain it as
+  ;; the quarantine marker on any change.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            forged? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        ;; Forge only after the first (per-segment) unlock.
+                        (when (compare-and-set! forged? false true)
+                          (fs/writeFileSync forged (str forged-line "\n")
+                                            "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"changed during lock cleanup"
+               (run-semantic-gate-with! file segment (fn [])))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
+(deftest selected-gates-quarantine-a-segment-changed-after-it-is-closed
+  ;; Gate-spawned work can watch the reserved segment for CLOSE_WRITE and
+  ;; overwrite it in place or rename another file over it right after the
+  ;; verified close. The written bytes are kept and the reserved path is
+  ;; revalidated after closing; any mismatch quarantines.
+  (doseq [[label mutate!]
+          [["overwritten in place"
+            (fn [segment forged-line]
+              (fs/writeFileSync segment (str forged-line "\n") "utf8"))]
+           ["replaced by rename"
+            (fn [segment forged-line]
+              (let [staged (str segment ".staged")]
+                (fs/writeFileSync staged (str forged-line "\n") "utf8")
+                (fs/renameSync staged segment)))]]]
+    (with-receipt-fixture
+      (fn [{:keys [segments file]}]
+        (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+              forged-line (cli/encode-edn-line!
+                           (cli/validated-evidence-receipt!
+                            (assoc passed-result :result/command ["forged"])))]
+          (fs/writeFileSync file "" "utf8")
+          (binding [cli/*secure-append-phase-hook*
+                    (fn [phase _]
+                      (when (= :after-close phase)
+                        (mutate! segment forged-line)))]
+            (is (thrown-with-msg?
+                 js/Error #"changed after it was closed"
+                 (run-semantic-gate-with! file segment (fn [])))
+                label))
+          (is (next-writer-refused? segments file)
+              (str label ": the altered receipt cannot become ordinary evidence")))))))
+
+(deftest selected-gates-quarantine-a-segment-changed-during-lock-cleanup
+  ;; The same overwrite can land once the per-segment lock is released. The
+  ;; reserved segment is revalidated before the writer lock is released, and
+  ;; the writer lock is retained as the quarantine marker on any change.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            forged? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        (when (compare-and-set! forged? false true)
+                          (fs/writeFileSync segment (str forged-line "\n")
+                                            "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"changed during lock cleanup"
+               (run-semantic-gate-with! file segment (fn [])))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the altered receipt cannot become ordinary evidence")))))
+
+(deftest selected-gates-quarantine-ledger-changes-after-writer-lock-release
+  ;; Work that waits for `.receipt-river.writer.lock` to be unlinked and then
+  ;; rewrites this run's reserved segment is never a cooperating writer, so
+  ;; the post-release path revalidates the reserved bytes and establishes a
+  ;; quarantine marker on mismatch. A segment added after release may be a
+  ;; later writer's (a-later-writer-after-writer-lock-release-is-not-
+  ;; quarantined); gate descendants that could forge one are reaped by
+  ;; owned-gate custody before the reservation closes.
+  (doseq [[label mutate!]
+          [["rewritten reserved segment"
+            (fn [_segments segment forged-line]
+              (fs/writeFileSync segment (str forged-line "\n") "utf8"))]]]
+    (with-receipt-fixture
+      (fn [{:keys [segments file]}]
+        (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+              forged-line (cli/encode-edn-line!
+                           (cli/validated-evidence-receipt!
+                            (assoc passed-result :result/command ["forged"])))
+              release-writer-lock! cli/release-writer-lock!]
+          (fs/writeFileSync file "" "utf8")
+          (with-redefs [cli/release-writer-lock!
+                        (fn [parent writer-lock]
+                          (release-writer-lock! parent writer-lock)
+                          (mutate! segments segment forged-line))]
+            (is (thrown-with-msg?
+                 js/Error #"changed after writer-lock release"
+                 (run-semantic-gate-with! file segment (fn [])))
+                label))
+          (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+              (str label ": writer lock recreated as the quarantine marker"))
+          (is (next-writer-refused? segments file)
+              (str label ": forged content cannot become ordinary evidence")))))))
+
+;; A later cooperating writer may take the writer lock as soon as this run
+;; releases it. Its segment is not gate tampering: selected-gate descendants
+;; are reaped by owned-gate custody before the reservation closes, so the
+;; whole-ledger comparison belongs under the writer lock. Only this run's
+;; own reserved basename is rechecked after release, since no cooperating
+;; writer touches it.
+(defn later-writer-reservation! [segments]
+  (cli/open-append-reservation!
+   (path/join segments "2026-10-13T000002000Z-later.edn") true))
+
+(defn later-writer-append! [reservation]
+  (let [record (cli/validated-evidence-receipt!
+                (assoc passed-result :result/command ["later"]))]
+    (cli/append-reserved-edn-line! reservation record
+                                   (cli/encode-edn-line! record))))
+
+(deftest a-later-writer-after-writer-lock-release-is-not-quarantined
+  (doseq [label ["finished" "holding the writer lock"]]
+    (with-receipt-fixture
+      (fn [{:keys [segments file]}]
+        (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+              release-writer-lock! cli/release-writer-lock!
+              later (atom nil)
+              outcome (atom nil)]
+          (fs/writeFileSync file "" "utf8")
+          (with-redefs [cli/release-writer-lock!
+                        (fn [parent writer-lock]
+                          (release-writer-lock! parent writer-lock)
+                          (when (nil? @later)
+                            (let [reservation (later-writer-reservation! segments)]
+                              (reset! later reservation)
+                              (later-writer-append! reservation)
+                              (when (= "finished" label)
+                                (cli/close-append-reservation! reservation)))))]
+            (reset! outcome
+                    (try (run-semantic-gate-with! file segment (fn [])) :ok
+                         (catch :default error (.-message error)))))
+          (when (= "holding the writer lock" label)
+            (is (= :ok (with-redefs [cli/receipt-file file
+                                     cli/git-capture! (fn [_] reviewed-root-revision)
+                                     cli/read-immutable-receipt-ledger! empty-committed-ledger
+                                     cli/read-immutable-receipt-segment-entries! (fn [_] [])]
+                         (try (cli/close-append-reservation! @later) :ok
+                              (catch :default error (.-message error)))))
+                (str label ": the later writer releases its own lock")))
+          (is (= :ok @outcome)
+              (str label ": the earlier run does not mistake a later writer "
+                   "for gate tampering"))
+          (is (= ["2026-10-13T000000000Z-test.edn"
+                  "2026-10-13T000002000Z-later.edn"]
+                 (segment-names segments))
+              label)
+          (is (not (fs/existsSync
+                    (path/join segments cli/receipt-writer-lock-name)))
+              (str label ": no stale quarantine marker remains"))
+          (is (= [] (lock-files segments)) label))))))
+
+(deftest a-later-writer-cannot-erase-a-post-release-quarantine
+  ;; Once this run releases the writer lock, a later cooperating writer may
+  ;; own `.receipt-river.writer.lock` before the post-release recheck runs.
+  ;; A marker at that path would then hit EEXIST and be unlinked by the later
+  ;; writer's own release, losing the quarantine. The durable marker is
+  ;; written in the stable `.ημ` directory, which no writer clears.
+  (with-receipt-fixture
+    (fn [{:keys [directory segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-writer-lock! cli/release-writer-lock!
+            later (atom nil)
+            outcome (atom nil)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-writer-lock!
+                      (fn [parent writer-lock]
+                        (release-writer-lock! parent writer-lock)
+                        (when (nil? @later)
+                          (fs/writeFileSync segment (str forged-line "\n")
+                                            "utf8")
+                          (reset! later (later-writer-reservation! segments))))]
+          (reset! outcome
+                  (try (run-semantic-gate-with! file segment (fn [])) :ok
+                       (catch :default error (.-message error)))))
+        (is (re-find #"changed after writer-lock release" (str @outcome))
+            "the rewrite of the reserved segment is reported")
+        (with-redefs [cli/receipt-file file
+                      cli/git-capture! (fn [_] reviewed-root-revision)
+                      cli/read-immutable-receipt-ledger! empty-committed-ledger
+                      cli/read-immutable-receipt-segment-entries! (fn [_] [])]
+          (try (cli/close-append-reservation! @later)
+               (catch :default _error nil)))
+        (is (fs/existsSync (path/join directory cli/receipt-quarantine-marker-name))
+            "the quarantine marker survives the later writer's release")
+        (is (next-writer-refused? segments file)
+            "forged content cannot become ordinary evidence")))))
+
+(deftest lock-acquisition-failures-remove-the-new-lock
+  ;; A lock this process created with O_EXCL is removed again when marker
+  ;; setup fails before any gate ran, so later writers are not blocked by a
+  ;; lock nobody holds. A path that no longer names the created lock is left
+  ;; for adjudication.
+  (with-receipt-fixture
+    (fn [{:keys [segments]}]
+      (let [parent (cli/open-parent-directory! segments)
+            segment-lock (path/join segments ".test.edn.append.lock")
+            writer-lock (path/join segments cli/receipt-writer-lock-name)]
+        (try
+          (with-redefs [cli/write-all! (fn [& _] (throw (js/Error. "marker write failed")))]
+            (is (thrown-with-msg?
+                 js/Error #"marker write failed"
+                 (cli/acquire-append-lock! parent "test.edn")))
+            (is (not (fs/existsSync segment-lock))
+                "an aborted segment-lock acquisition leaves no lock")
+            (is (thrown-with-msg?
+                 js/Error #"marker write failed"
+                 (cli/acquire-receipt-writer-lock! parent)))
+            (is (not (fs/existsSync writer-lock))
+                "an aborted writer-lock acquisition leaves no lock"))
+          (with-redefs [cli/write-all!
+                        (fn [& _]
+                          (fs/unlinkSync segment-lock)
+                          (fs/writeFileSync segment-lock "other\n" "utf8")
+                          (throw (js/Error. "marker write failed")))]
+            (is (thrown-with-msg?
+                 js/Error #"marker write failed"
+                 (cli/acquire-append-lock! parent "test.edn")))
+            (is (= "other\n" (fs/readFileSync segment-lock "utf8"))
+                "a replaced lock path is not removed"))
+          (finally
+            (fs/closeSync (:fd parent))))))))
 
 (deftest selected-gates-quarantine-when-only-the-writer-lock-vanishes
   ;; Gate code can unlink the ledger-wide writer lock and leave the segment
@@ -1025,6 +1182,7 @@
           (is (next-writer-refused? segments file)
               (str label ": the run cannot leave ordinary evidence")))))))
 
+
 (deftest selected-gates-quarantine-a-segment-added-before-a-gate-throws
   ;; A gate can add a schema-valid segment and then throw, so
   ;; append-reserved-edn-line! never runs. Cleanup of the unwritten
@@ -1048,6 +1206,131 @@
             "the unwritten reservation is still removed")
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
+
+
+(deftest selected-gates-quarantine-a-segment-added-after-a-failed-gate-unlocks
+  ;; A gate can throw and leave delayed work that waits for the per-segment
+  ;; lock to disappear before adding a forged segment. The unwritten
+  ;; reservation's ledger is compared again before the writer lock is
+  ;; released, and the writer lock is retained on any change.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged (path/join segments "2026-10-13T000001000Z-forged.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            forged? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        (when (compare-and-set! forged? false true)
+                          (fs/writeFileSync forged (str forged-line "\n")
+                                            "utf8")))]
+          (is (thrown? js/Error
+                       (run-semantic-gate-with!
+                        file segment
+                        (fn [] (throw (js/Error. "gate exploded")))))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the forged segment cannot be accepted as an ordinary extension")))))
+
+(deftest selected-gates-quarantine-a-recreated-reserved-basename-after-failed-unlock
+  ;; Delayed work can recreate the just-deleted reserved segment under its
+  ;; own basename after the per-segment lock is gone. After an unwritten
+  ;; reservation is removed, cleanup must notice that basename's return.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-append-lock! cli/release-append-lock!
+            forged? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-append-lock!
+                      (fn [parent lock]
+                        (release-append-lock! parent lock)
+                        (when (compare-and-set! forged? false true)
+                          (fs/writeFileSync segment (str forged-line "\n")
+                                            "utf8")))]
+          (is (thrown-with-msg?
+               js/Error #"changed during lock cleanup|reappeared|basename"
+               (run-semantic-gate-with!
+                file segment
+                (fn [] (throw (js/Error. "gate exploded")))))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the recreated reserved basename cannot become ordinary evidence")))))
+
+(deftest a-failed-basename-lstat-during-cleanup-keeps-the-normal-quarantine-path
+  ;; CodeRabbit cr-comment b69ff5a04005de651e697c4e: the pre-release check for
+  ;; a recreated reserved basename must treat a failed lstat as present (fail
+  ;; closed) through reserved-basename-present?, so cleanup still retains the
+  ;; writer lock through its normal path and reports why, instead of an
+  ;; inspection error escaping the finally block.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            lstat-if-present! cli/lstat-if-present!
+            failed? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/lstat-if-present!
+                      (fn [file description]
+                        (if (and (= "Receipt River segment" description)
+                                 (= (path/basename segment) (path/basename file))
+                                 (not (fs/existsSync segment)))
+                          (do (reset! failed? true)
+                              (cli/append-error!
+                               (str description " could not be inspected: EACCES")))
+                          (lstat-if-present! file description)))]
+          (let [message (try (run-semantic-gate-with!
+                              file segment
+                              (fn [] (throw (js/Error. "gate exploded"))))
+                             nil
+                             (catch :default error (.-message error)))]
+            (is @failed? "the injected lstat failure was reached")
+            (is (string? message) "the run still fails")
+            (is (not (re-find #"could not be inspected" (or message "")))
+                "the inspection error does not replace the cleanup outcome")
+            (is (re-find #"reserved basename reappeared" (or message ""))
+                "the failed lstat is treated as a present basename")))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "the writer lock is retained as the quarantine marker")
+        (is (next-writer-refused? segments file)
+            "the ledger stays closed for adjudication")))))
+
+(deftest selected-gates-quarantine-a-reserved-basename-recreated-after-writer-unlock
+  ;; Delayed work can wait for the writer-lock unlink itself and only then
+  ;; recreate the removed reservation under its own basename. The final
+  ;; post-release check skips that basename in the whole-ledger comparison,
+  ;; so it must look for it explicitly when the reservation was unwritten.
+  (with-receipt-fixture
+    (fn [{:keys [segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            forged-line (cli/encode-edn-line!
+                         (cli/validated-evidence-receipt!
+                          (assoc passed-result :result/command ["forged"])))
+            release-writer-lock! cli/release-writer-lock!]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/release-writer-lock!
+                      (fn [parent writer-lock]
+                        (release-writer-lock! parent writer-lock)
+                        (fs/writeFileSync segment (str forged-line "\n")
+                                          "utf8"))]
+          (is (thrown-with-msg?
+               js/Error #"after writer-lock release"
+               (run-semantic-gate-with!
+                file segment
+                (fn [] (throw (js/Error. "gate exploded")))))))
+        (is (fs/existsSync (path/join segments cli/receipt-writer-lock-name))
+            "a quarantine marker is recreated at the writer-lock path")
+        (is (next-writer-refused? segments file)
+            "the recreated reserved basename cannot become ordinary evidence")))))
 
 (deftest selected-gates-durably-quarantine-a-replaced-ledger-directory
   ;; Gate code renames `.ημ` itself away and installs a fresh one holding a
@@ -1132,8 +1415,7 @@
                   (cli/validated-evidence-receipt!
                    (assoc passed-result :result/command ["earlier"])))]
         (fs/writeFileSync file "" "utf8")
-        (fs/writeFileSync existing (str line "
-") "utf8")
+        (fs/writeFileSync existing (str line "\n") "utf8")
         (is (thrown-with-msg?
              js/Error #"must not be executable"
              (run-semantic-gate-with!
@@ -1150,8 +1432,7 @@
                   (cli/validated-evidence-receipt!
                    (assoc passed-result :result/command ["earlier"])))]
         (fs/writeFileSync file "" "utf8")
-        (fs/writeFileSync existing (str line "
-") "utf8")
+        (fs/writeFileSync existing (str line "\n") "utf8")
         (is (thrown-with-msg?
              js/Error #"must not be executable"
              (run-semantic-gate-with!
@@ -1172,7 +1453,7 @@
       (with-redefs [cli/receipt-file file]
         (let [{:keys [segment renamed]}
               (run-gate-against-reserved-segment!
-               segments
+               segments file
                (fn [{:keys [segment renamed forged-line]}]
                  (fs/renameSync segment renamed)
                  (fs/writeFileSync renamed (str forged-line "\n") "utf8")))]
@@ -1192,7 +1473,7 @@
       (fs/writeFileSync file "" "utf8")
       (with-redefs [cli/receipt-file file]
         (run-gate-against-reserved-segment!
-         segments
+         segments file
          (fn [{:keys [segment]}] (fs/unlinkSync segment)))
         (is (= [] (segment-names segments)))
         (is (= [] (lock-files segments)))))))
@@ -1206,7 +1487,7 @@
       (with-redefs [cli/receipt-file file]
         (let [{:keys [segment renamed]}
               (run-gate-against-reserved-segment!
-               segments
+               segments file
                (fn [{:keys [segment renamed]}]
                  (fs/linkSync segment renamed)))]
           (is (not (fs/existsSync segment)))
@@ -1227,34 +1508,18 @@
       (fs/writeFileSync file "" "utf8")
       (let [writer-lock (path/join segments cli/receipt-writer-lock-name)
             segment (path/join segments "2026-10-13T000000000Z-test.edn")]
-        (with-redefs [cli/receipt-file file
-                      cli/new-receipt-segment-file (fn [] segment)
-                      cli/git-capture! (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                      cli/require-repositories!
-                      (fn [& _]
-                        {"repo" {:path "repo"
-                                 :absolute "/repo"
-                                 :revision child-revision}})
-                      cli/run-gate!
-                      (fn [& _]
-                        (fs/unlinkSync writer-lock)
-                        (fs/writeFileSync writer-lock "pid=0\n" "utf8")
-                        passed-result)]
-          (is (thrown-with-msg?
-               js/Error #"writer lock could not be released"
-               (cli/run-selected-gates!
-                {:catalog/repositories
-                 {"repo" {:repository/path "repo"
-                          :repository/gates [local-gate]}}}
-                test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (is (= [] (segment-records segments))
-              "no receipt is written once the writer lock was replaced")
-          (is (= "pid=0\n" (fs/readFileSync writer-lock "utf8"))
-              "the replaced lock is left for adjudication")
-          (is (= [] (lock-files segments))))))))
+        (is (thrown-with-msg?
+             js/Error #"writer lock could not be released"
+             (run-semantic-gate-with!
+              file segment
+              (fn []
+                (fs/unlinkSync writer-lock)
+                (fs/writeFileSync writer-lock "pid=0\n" "utf8")))))
+        (is (= [] (segment-records segments))
+            "no receipt is written once the writer lock was replaced")
+        (is (= "pid=0\n" (fs/readFileSync writer-lock "utf8"))
+            "the replaced lock is left for adjudication")
+        (is (= [] (lock-files segments)))))))
 
 (deftest concurrent-writers-are-told-apart-from-quarantine
   ;; Same-checkout writers serialize on one ledger-wide writer lock, so a
@@ -1294,7 +1559,7 @@
       (fs/writeFileSync file "" "utf8")
       (with-redefs [cli/receipt-file file]
         (run-gate-against-reserved-segment!
-         segments
+         segments file
          (fn [{:keys [segment renamed forged-line]}]
            (fs/renameSync segment renamed)
            (fs/writeFileSync renamed (str forged-line "\n") "utf8")))
@@ -1435,7 +1700,8 @@
 (deftest receipt-dispatch-discard-checks-the-active-instant
   ;; The actual reader accepts both dispatch collections as discarded forms.
   ;; The surviving tagged value still needs precision admission before IDs.
-  (doseq [discarded ["#{}" "#:ns{:x :y}"]]
+  ;; Includes the nonempty set from Codex PRRT_kwDOU4VJMM6s2qTA.
+  (doseq [discarded ["#{}" "#{0}" "#{0 [1]}" "#:ns{:x :y}"]]
     (let [prefix (str "{:ts \"2026-01-01T00:00:00Z\" :kind :observation"
                       " :origin \"test\" :owner \"test\" :dod \"exact\""
                       " :pi \"receipt-river\" :host \"test\""
@@ -1590,11 +1856,15 @@
 
 (deftest receipt-segments-hold-exactly-one-physical-line
   ;; The segment contract is one physical EDN line; blank lines before or
-  ;; after the record are not discarded silently. Bare carriage returns are
-  ;; physical breaks too (encode-edn-line! already rejects them).
+  ;; after the record are not discarded silently. Embedded carriage returns
+  ;; are physical breaks (encode-edn-line! already rejects them on writes),
+  ;; but a single trailing CR is kept so a CRLF legacy row can migrate
+  ;; byte-identical into a segment.
   (is (= [{:a 1}] (cli/read-segment-records! "s.edn" (js/Buffer.from "{:a 1}\n"))))
+  (is (= [{:a 1}] (cli/read-segment-records! "s.edn" (js/Buffer.from "{:a 1}\r\n")))
+      "CRLF-terminated legacy rows migrate intact")
   (doseq [text ["\n{:a 1}\n" "{:a 1}\n\n" "{:a 1}\n \n"
-                "{:a\r1}\n" "{:a 1}\r\n" "\r{:a 1}\n"]]
+                "{:a\r1}\n" "\r{:a 1}\n" "{:a 1}\r\r\n"]]
     (is (thrown-with-msg?
          js/Error #"exactly one physical line"
          (cli/read-segment-records! "s.edn" (js/Buffer.from text)))
@@ -2004,14 +2274,22 @@
 
 (deftest aborted-or-overtaken-gates-leave-no-segment
   ;; A gate that only throws leaves no empty reserved segment and no lock.
-  ;; Editing the ledger while the gate runs quarantines (retains a lock) so a
-  ;; forged segment cannot become an ordinary extension after cleanup.
+  ;; Editing the ledger, or forging a segment and then throwing or returning,
+  ;; quarantines (retains a lock) so a forged segment cannot become an
+  ;; ordinary extension after cleanup.
   (doseq [[run-gate message expect-lock?]
           [[(fn [_] (throw (js/Error. "gate exploded"))) #"gate exploded" false]
            [(fn [{:keys [file]}]
               (fs/writeFileSync file "{:kind :observation}\n" "utf8")
               passed-result)
             #"does not preserve the committed ledger" true]
+           [(fn [{:keys [segments]}]
+              (fs/writeFileSync (path/join segments "2026-10-13T000001000Z-forged.edn")
+                                "{:kind :observation :origin :test :owner \"t\" :ts \"2026-10-13T00:00:01.000Z\" :dod \"d\" :pi \"p\" :host \"h\" :manifest {} :refs []}\n"
+                                "utf8")
+              (fs/writeFileSync (path/join segments "notes.txt") "x\n" "utf8")
+              (throw (js/Error. "gate exploded after forge")))
+            #"gate exploded after forge" true]
            [(fn [{:keys [segments]}]
               ;; Schema-valid forged segment plus a stray file: revalidation
               ;; throws, and quarantine must retain the lock.
@@ -2024,25 +2302,16 @@
     (with-receipt-fixture
       (fn [{:keys [segments file] :as context}]
         (fs/writeFileSync file "" "utf8")
-        (with-redefs [cli/receipt-file file
-                      cli/git-capture! (fn [_] reviewed-root-revision)
-                      cli/read-immutable-receipt-ledger! empty-committed-ledger
-                      cli/read-immutable-receipt-segment-entries! (fn [_] [])
-                      cli/require-repositories! (fn [& _] {"repo" {}})
-                      cli/run-gate! (fn [& _] (run-gate context))]
-          (is (thrown-with-msg?
-               js/Error message
-               (cli/run-selected-gates!
-                {:catalog/repositories
-                 {"repo" {:repository/path "repo"
-                          :repository/gates [local-gate]}}}
-                test-catalog-identity
-                {:only #{"repo"} :kinds #{:unit}})))
-          (if expect-lock?
-            (is (seq (lock-files segments))
-                "ledger change while gate ran must quarantine")
-            (do (is (= [] (segment-names segments)))
-                (is (= [] (lock-files segments))))))))))
+        (is (thrown-with-msg?
+             js/Error message
+             (run-one-gate! {:file file
+                             :repositories {"repo" {}}
+                             :run-gate (fn [& _] (run-gate context))})))
+        (if expect-lock?
+          (is (seq (lock-files segments))
+              "ledger change while gate ran must quarantine")
+          (do (is (= [] (segment-names segments)))
+              (is (= [] (lock-files segments)))))))))
 
 (deftest receipt-verification-keeps-the-segment-directory
   (with-historical-ledger-fixture true
@@ -2136,6 +2405,42 @@
                js/Error message
                (cli/verify-receipts! {:base base :at head}))))))))
 
+(deftest receipt-verification-migrates-an-unterminated-final-legacy-row
+  ;; A valid legacy ledger may lack a terminal newline. Its final row can only
+  ;; be preserved as a segment by adding that one terminator, since every
+  ;; segment must end with a newline.
+  (with-historical-ledger-fixture true
+    (fn [{:keys [historical commit!]}]
+      (let [second (assoc historical :owner "second")
+            first-line (str (pr-str historical) "\n")
+            unterminated (str first-line (pr-str second))
+            with-two (commit! unterminated)]
+        (is (some? (cli/verify-receipts!
+                    {:base with-two
+                     :at (commit! first-line
+                                  {"2026-08-29T172240Z-b.edn"
+                                   (str (pr-str second) "\n")})}))
+            "the final row moves into a newline-terminated segment")
+        (commit! unterminated)
+        (let [only (commit! (pr-str second))]
+          (is (some? (cli/verify-receipts!
+                      {:base only
+                       :at (commit! ""
+                                    {"2026-08-29T172240Z-b.edn"
+                                     (str (pr-str second) "\n")})}))
+              "a one-row unterminated legacy file can empty into a segment"))
+        (commit! unterminated)
+        ;; The terminator is the only allowed difference: a reserialized row
+        ;; is still rejected.
+        (is (thrown-with-msg?
+             js/Error #"exact line is preserved as a segment"
+             (cli/verify-receipts!
+              {:base with-two
+               :at (commit! first-line
+                            {"2026-08-29T172240Z-b.edn"
+                             (str (str/replace (pr-str second) "{" "{ ")
+                                  "\n")})})))))))
+
 (deftest receipt-verification-rejects-committed-operational-files
   ;; Quarantine and legacy/flat-writer locks live beside the legacy ledger;
   ;; the segment writer lock lives inside receipts/. All are working-tree
@@ -2189,6 +2494,21 @@
              (cli/verify-receipts!
               {:base with-newline
                :at (commit! (subs base-text 0 (dec (count base-text))))}))))
+      (commit! base-text)
+      ;; Moving a legacy line into a segment with a different serialization of
+      ;; the same EDN value is rejected: IDs match via canonical form, but the
+      ;; removed line's exact bytes must be the segment body.
+      (let [second (assoc historical :owner "second")
+            line (str (pr-str second) "\n")
+            with-two (commit! (str base-text line))
+            reserialized (str (str/replace (pr-str second) "{" "{ ") "\n")
+            moved (commit! base-text
+                           {"2026-08-29T172240Z-reserialize.edn" reserialized})]
+        (is (not= line reserialized))
+        (is (thrown-with-msg?
+             js/Error #"exact line is preserved as a segment"
+             (cli/verify-receipts!
+              {:base with-two :at moved}))))
       (commit! base-text)
       ;; An unterminated base must still preserve terminators of retained lines.
       ;; Base "A\\nB" with head "A" and B moved into a segment deleted the

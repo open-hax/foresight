@@ -142,13 +142,23 @@ executable ledger files (Git would record an executable file as a `100755`
 blob, which immutable review rejects), and serializes semantic writers in one checkout on
 `.ημ/receipts/.receipt-river.writer.lock` for the whole reserve, gate and
 write sequence. A concurrent writer fails closed instead of waiting. A writer
-lock left by a crashed process must be removed by hand. Each writer reserves
+lock left by a crashed process may be a quarantine marker for ledger
+uncertainty, so an operator must verify and adjudicate the ledger before
+removing it by hand; only a lock whose setup fails before any gate runs is
+removed automatically. Each writer reserves
 its own new segment with `O_EXCL` and a sibling lock for that segment; a
 reservation that ends before writing removes its empty segment. A retained
 lock (see below) quarantines the whole ledger. The rest of the working ledger
 is revalidated against `HEAD` immediately before the receipt is written, and
 compared with the pre-gate snapshot again after it is written or when a
-gate aborts before writing. The writer lock is verified around the write. A
+gate aborts before writing. The writer lock is verified around the write. The
+reserved segment's path and bytes are revalidated after its descriptor is
+closed and again before each lock is released. The whole-ledger comparison
+finishes while the writer lock is still held; after release only the run's
+own reserved segment is rechecked, so a later writer's new segment is not
+mistaken for tampering. A mismatch there writes the durable
+`.ημ/.receipt-river.quarantine` marker, which a later writer that already owns
+the writer-lock path cannot remove on its release. A
 complete line is bounded to 1 MiB, written through the held descriptor,
 size-checked, and followed by file and directory `fsync`. Pre-write rejection
 releases the lock, unless the working ledger changed while the gate ran; that

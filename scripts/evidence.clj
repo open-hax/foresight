@@ -610,10 +610,14 @@
               (str "Receipt River segment must contain exactly one record: "
                    segment-path))))
     ;; The segment contract is one physical line: the record, then its
-    ;; only newline. Blank lines and embedded carriage returns are not
-    ;; dropped silently (encode-edn-line! already rejects both).
-    (let [body (subs contents 0 (dec (count contents)))]
-      (when (or (str/includes? body "\n") (str/includes? body "\r"))
+    ;; only newline. A single trailing CR is allowed so a CRLF legacy row
+    ;; can migrate byte-identical; embedded CRs and blank lines are not
+    ;; dropped silently (encode-edn-line! still rejects CR on new writes).
+    (let [body (subs contents 0 (dec (count contents)))
+          body* (if (str/ends-with? body "\r")
+                  (subs body 0 (dec (count body)))
+                  body)]
+      (when (or (str/includes? body* "\n") (str/includes? body* "\r"))
         (throw (js/Error.
                 (str "Receipt River segment must hold exactly one physical line: "
                      segment-path)))))
@@ -825,6 +829,22 @@
         (= (first wanted) (first available)) (recur (rest wanted) (rest available))
         :else (recur wanted (rest available))))))
 
+(defn removed-line-slices
+  "Base line slices that a terminator-preserving subsequence match against
+  `head` does not consume. Each removed slice must reappear as an entire
+  non-legacy segment body so emptying or rewriting legacy cannot invent
+  alternate serializations. A final unterminated slice reappears with one
+  added newline, the only form a segment can hold."
+  [head base]
+  (loop [wanted (seq (line-slices head))
+         available (seq (line-slices base))
+         removed []]
+    (cond
+      (empty? available) removed
+      (and (seq wanted) (= (first wanted) (first available)))
+      (recur (rest wanted) (rest available) removed)
+      :else (recur wanted (rest available) (conj removed (first available))))))
+
 (defn ledger-extension-records!
   "Checks that `head-segments` extend `base-segments` as an event ledger and
   returns the new records in merged order. Rules:
@@ -868,11 +888,32 @@
                      law/receipt-segment-directory "/"))))
       (doseq [{:segment/keys [bytes legacy?]} base-segments
               :when legacy?
-              :let [head (first (filter :segment/legacy? head-segments))]]
-        (when-not (line-subsequence? (:segment/bytes head) bytes)
+              :let [head (or (first (filter :segment/legacy? head-segments))
+                             {:segment/bytes (js/Buffer.alloc 0)})
+                    head-bytes (:segment/bytes head)]]
+        (when-not (line-subsequence? head-bytes bytes)
           (throw (js/Error.
                   (str "The legacy Receipt River ledger " law/receipt-ledger-path
-                       " may only lose whole lines; it was rewritten or reordered")))))
+                       " may only lose whole lines; it was rewritten or reordered"))))
+        (let [removed (removed-line-slices head-bytes bytes)
+              ;; Segments keep their content hash, not their bytes.
+              segment-hashes (into #{}
+                                   (comp (remove :segment/legacy?)
+                                         (map segment-sha256))
+                                   head-segments)]
+          (doseq [line removed]
+            ;; Only the final row of an unterminated legacy file lacks a
+            ;; newline. Its sole preservation form is that row plus the one
+            ;; terminator every segment needs.
+            (let [line-bytes (js/Buffer.from (if (str/ends-with? line "\n")
+                                               line
+                                               (str line "\n"))
+                                             "utf8")]
+              (when-not (contains? segment-hashes (sha256 line-bytes))
+                (throw (js/Error.
+                        (str "The legacy Receipt River ledger "
+                             law/receipt-ledger-path
+                             " may only lose a line when that exact line is preserved as a segment"))))))))
       (filterv #(not (contains? base-ids (record-id %))) merged-head))))
 
 (defn read-immutable-catalog-bundle! [revision]
@@ -1424,6 +1465,20 @@
           (append-error! "descriptor write made no progress"))
         (recur (+ offset written))))))
 
+(defn remove-created-lock!
+  "Removes a lock this process just created with O_EXCL when acquisition
+  aborts before any gate ran. Only a path that still names the descriptor's
+  inode is unlinked, and the directory entry removal is synced. Anything
+  uncertain leaves the path in place for adjudication."
+  [parent lock-path fd]
+  (try
+    (let [fd-stats (fs/fstatSync fd bigint-stat-options)
+          path-stats (lstat-if-present! lock-path "Receipt River append lock")]
+      (when (and path-stats (same-file? fd-stats path-stats))
+        (fs/unlinkSync lock-path)
+        (fs/fsyncSync (:fd parent))))
+    (catch :default _cleanup-error nil)))
+
 (defn acquire-lock-file! [parent lock-path busy-message]
   (require-parent-identity! parent)
   (let [flags (bit-or (fs-constant! "O_WRONLY")
@@ -1450,6 +1505,9 @@
         (require-parent-identity! parent)
         {:fd fd :path lock-path :stats stats})
       (catch :default error
+        ;; No gate or receipt write has started: a lock left here would block
+        ;; every later writer although nobody holds it.
+        (remove-created-lock! parent lock-path fd)
         (close-after-open-error! fd error)))))
 
 (defn acquire-append-lock! [parent basename]
@@ -1873,6 +1931,23 @@
      (validate-working-receipt-ledger! semantic-basename))
     (catch :default _error false)))
 
+(defn reserved-segment-intact?
+  "True only when the reserved segment path still names the written inode
+  and holds exactly the verified bytes. Used after the reserved descriptor is
+  closed, through final lock cleanup; any read failure counts as a change."
+  [{:keys [target target-path written-segment-bytes]}]
+  (try
+    (let [expected (and written-segment-bytes @written-segment-bytes)
+          bytes (when expected
+                  (read-working-regular-file! target-path "Receipt River segment"))
+          stats (when expected
+                  (lstat-if-present! target-path "Receipt River segment"))]
+      (boolean (and expected
+                    stats
+                    (same-file? stats (:stats target))
+                    (.equals expected bytes))))
+    (catch :default _error false)))
+
 (defn require-held-ledger-unchanged! [target validated-bytes]
   (let [current-bytes (stable-held-target-bytes! target)]
     (when-not (.equals validated-bytes current-bytes)
@@ -1975,7 +2050,10 @@
                 :quarantined? (atom false)
                 :parent-replaced? (atom false)
                 :write-started? (atom false)
-                :write-verified? (atom false)}
+                :write-verified? (atom false)
+                ;; Bytes of the verified write, kept so the reserved segment
+                ;; can be revalidated after its descriptor is closed.
+                :written-segment-bytes (atom nil)}
                (catch :default error
                  (when (and validate-ledger?
                             (not (remove-unwritten-segment!
@@ -2037,22 +2115,36 @@
         :else false))
     (catch :default _error false)))
 
+(defn reserved-basename-present?
+  "True when the reservation's basename names any entry in its held segment
+  directory. After an unwritten reservation was removed, that is content this
+  writer did not write. A failed lstat counts as present (fail closed)."
+  [{:keys [parent semantic-basename]}]
+  (try
+    (boolean (lstat-if-present! (path/join (:proc-path parent) semantic-basename)
+                                "Receipt River segment"))
+    (catch :default _error true)))
+
 (defn close-append-reservation!
   [{:keys [parent ancestor lock writer-lock target target-open? write-started?
            write-verified? quarantined? parent-replaced? semantic-basename]
     :as reservation}]
   (let [unwritten-removed? (atom false)
         retain-writer-lock? (atom false)
+        late-replacement-error (atom nil)
         ;; The canonical segment directory is no longer the one this
         ;; reservation holds. Locks and cleanup below reach only the renamed
         ;; directory, so the quarantine goes into the stable `.ημ` ancestor.
-        directory-replaced? (boolean
-                             (and ancestor
-                                  (or (and parent-replaced? @parent-replaced?)
-                                      (not (parent-identity-intact? parent)))))]
+        ;; Kept live until writer-lock release: a rename after the per-segment
+        ;; unlock would otherwise miss the one-time snapshot below.
+        directory-replaced? (atom
+                             (boolean
+                              (and ancestor
+                                   (or (and parent-replaced? @parent-replaced?)
+                                       (not (parent-identity-intact? parent))))))]
     (try
       (try
-        (when directory-replaced?
+        (when @directory-replaced?
           (establish-ledger-quarantine! ancestor))
         (finally
           ;; A gate that threw never reached append-reserved-edn-line!, so
@@ -2078,7 +2170,18 @@
           (if (or (and @write-started? (not @write-verified?))
                   (not @unwritten-removed?)
                   (and quarantined? @quarantined?)
-                  directory-replaced?)
+                  @directory-replaced?
+                  ;; The verified segment must still be exactly what was
+                  ;; written when its lock is about to be released.
+                  (and semantic-basename
+                       @write-verified?
+                       (not (reserved-segment-intact? reservation))
+                       (do (reset! late-replacement-error
+                                   (js/Error.
+                                    (str "the Receipt River segment changed "
+                                         "after it was written; the ledger "
+                                         "must be adjudicated by hand")))
+                           true)))
             ;; A short write, fsync/close failure, post-write identity change,
             ;; content injected into the reserved segment, a reservation moved
             ;; out from under its path, a segment added while the gate ran, or
@@ -2097,17 +2200,127 @@
             (reset! retain-writer-lock? true)
             (throw error))
           (finally
+            ;; Recheck after segment-lock cleanup. Gate-spawned work that
+            ;; watches the unlock can rename/replace the directory before the
+            ;; writer lock is released; following the held descriptor then
+            ;; would clear that lock in the renamed directory and leave the
+            ;; canonical ledger unquarantined.
+            (when (and ancestor
+                       (not @directory-replaced?)
+                       (not (parent-identity-intact? parent)))
+              (reset! directory-replaced? true)
+              (establish-ledger-quarantine! ancestor)
+              (reset! retain-writer-lock? true)
+              (reset! late-replacement-error
+                      (js/Error.
+                       (str "the Receipt River segment directory was replaced "
+                            "during lock cleanup; the ledger must be "
+                            "adjudicated by hand"))))
+            ;; An unwritten reservation was removed before unlock. Gate-spawned
+            ;; work that watches the unlock can recreate that basename; the
+            ;; whole-ledger comparison below still skips it, so check here.
+            (when (and writer-lock
+                       semantic-basename
+                       @unwritten-removed?
+                       (not @write-started?)
+                       (not @retain-writer-lock?)
+                       (not @directory-replaced?)
+                       (not (and quarantined? @quarantined?))
+                       ;; A failed lstat counts as present, so cleanup still
+                       ;; retains the writer lock and closes descriptors.
+                       (reserved-basename-present? reservation))
+              (reset! retain-writer-lock? true)
+              (when-not @late-replacement-error
+                (reset! late-replacement-error
+                        (js/Error.
+                         (str "the Receipt River ledger changed during lock "
+                              "cleanup: the reserved basename reappeared "
+                              "after the unwritten reservation was removed; "
+                              "the ledger must be adjudicated by hand")))))
+            ;; A verified write, or an unwritten (failed) reservation, released
+            ;; its segment lock above; the writer lock still serializes this
+            ;; checkout. Compare the whole ledger once more so a segment added
+            ;; during lock cleanup keeps the writer lock as the quarantine
+            ;; marker. Only a verified write has a reserved segment to check.
+            (when (and writer-lock
+                       semantic-basename
+                       (or @write-verified? (not @write-started?))
+                       (not @retain-writer-lock?)
+                       (not @directory-replaced?)
+                       (not (and quarantined? @quarantined?))
+                       (not (and (working-ledger-unchanged-after-write?
+                                  reservation)
+                                 (or (not @write-verified?)
+                                     (reserved-segment-intact? reservation)))))
+              (reset! retain-writer-lock? true)
+              (when-not @late-replacement-error
+                (reset! late-replacement-error
+                        (js/Error.
+                         (str "the Receipt River ledger changed during lock "
+                              "cleanup: only the reserved segment may be "
+                              "added; the ledger must be adjudicated by "
+                              "hand")))))
             (try
               (when writer-lock
-                (if (or @retain-writer-lock? directory-replaced?)
+                (if (or @retain-writer-lock? @directory-replaced?)
                   (retain-quarantine-lock! parent writer-lock)
                   (release-writer-lock! parent writer-lock)))
+              ;; Writer-lock unlink can be the signal gate-spawned work waits
+              ;; on before renaming the segment directory. Recheck while the
+              ;; ancestor descriptor is still held so a post-release replace
+              ;; still quarantines the canonical ledger.
+              (when (and ancestor
+                         (not @directory-replaced?)
+                         (not (parent-identity-intact? parent)))
+                (reset! directory-replaced? true)
+                (establish-ledger-quarantine! ancestor)
+                (reset! late-replacement-error
+                        (js/Error.
+                         (str "the Receipt River segment directory was replaced "
+                              "after writer-lock release; the ledger must be "
+                              "adjudicated by hand"))))
+              ;; The whole-ledger comparison ran above, under the writer
+              ;; lock. After release a later cooperating writer may add its
+              ;; own segment at any moment, so new segments are not evidence
+              ;; of tampering here; selected-gate descendants were already
+              ;; reaped by owned-gate custody before this reservation closed.
+              ;; No cooperating writer touches this run's reserved basename,
+              ;; so only that is rechecked: written bytes must be intact, and
+              ;; an unwritten (removed) reservation must still be absent. On
+              ;; mismatch recreate the writer-lock path as a quarantine marker.
+              (when (and writer-lock
+                         semantic-basename
+                         (or @write-verified? (not @write-started?))
+                         (not @directory-replaced?)
+                         (not (and quarantined? @quarantined?))
+                         (not (if @write-verified?
+                                (reserved-segment-intact? reservation)
+                                (not (and @unwritten-removed?
+                                          (reserved-basename-present?
+                                           reservation))))))
+                ;; A later cooperating writer may already own the writer-lock
+                ;; path and will unlink it on release; record the quarantine in
+                ;; the stable `.ημ` directory, which no writer clears.
+                (create-quarantine-marker!
+                 ancestor (path/join (:proc-path ancestor)
+                                     receipt-quarantine-marker-name))
+                (create-quarantine-marker! parent (:path writer-lock))
+                (when-not @late-replacement-error
+                  (reset! late-replacement-error
+                          (js/Error.
+                           (str "the Receipt River reserved segment changed "
+                                "after writer-lock release; the ledger must "
+                                "be adjudicated by hand")))))
               (finally
                 (try
                   (fs/closeSync (:fd parent))
                   (finally
-                    (when ancestor
-                      (fs/closeSync (:fd ancestor)))))))))))))
+                    (try
+                      (when ancestor
+                        (fs/closeSync (:fd ancestor)))
+                      (finally
+                        (when-let [error @late-replacement-error]
+                          (throw error))))))))))))))
 
 (defn with-append-reservation!
   ([file run!]
@@ -2139,7 +2352,8 @@
 (defn append-reserved-edn-line!
   [{:keys [requested-file directory lock target target-path
            held-ledger-bytes target-open? write-started? write-verified?
-           quarantined? semantic-basename validated-working]
+           quarantined? semantic-basename validated-working
+           written-segment-bytes]
     :as reservation}
    record
    line]
@@ -2228,6 +2442,21 @@
     ;; reservation cleanup retains the lock as a quarantine marker.
     (fs/closeSync (:fd target))
     (reset! target-open? false)
+    (when written-segment-bytes
+      (reset! written-segment-bytes expected-bytes))
+    (*secure-append-phase-hook*
+     :after-close
+     {:requested-file requested-file
+      :directory directory
+      :target-path target-path})
+    ;; The close is observable (CLOSE_WRITE), so gate-spawned work can rewrite
+    ;; or replace the segment right after it; the last byte comparison above
+    ;; ran before that. Revalidate the path and content now.
+    (when (and semantic-basename
+               (not (reserved-segment-intact? reservation)))
+      (reset! quarantined? true)
+      (append-error!
+       "Receipt River segment changed after it was closed"))
     (reset! write-verified? true)
     record))
 
@@ -2292,6 +2521,18 @@
             repository-path))
         (:catalog/repositories catalog)))
 
+(defn quarantine-if-ledger-changed!
+  "When a gate throws without writing, mark the reservation quarantined if the
+  working ledger no longer matches the pre-gate snapshot (or no longer validates)."
+  [{:keys [quarantined? semantic-basename validated-working]}]
+  (when (and semantic-basename quarantined? (not @quarantined?))
+    (try
+      (let [working (validate-working-receipt-ledger! semantic-basename)]
+        (when-not (same-working-ledger? validated-working working)
+          (reset! quarantined? true)))
+      (catch :default _
+        (reset! quarantined? true)))))
+
 (defn run-selected-gates! [catalog catalog-identity {:keys [only kinds]}]
   ;; Fail before a gate executes when this host cannot durably retain its result.
   (require-secure-append-support!)
@@ -2311,11 +2552,33 @@
                             (with-append-reservation!
                               (new-receipt-segment-file) true
                               (fn [reservation]
-                                (let [result (run-gate!
-                                              (get paths repository-path)
-                                              gate
-                                              catalog-identity)]
-                                  (append-evidence-receipt! reservation result)
+                                (let [result
+                                      (try
+                                        (run-gate!
+                                         (get paths repository-path)
+                                         gate
+                                         catalog-identity)
+                                        (catch :default error
+                                          ;; Gate threw before append: revalidate
+                                          ;; so a forged segment still quarantines.
+                                          (quarantine-if-ledger-changed! reservation)
+                                          (throw error)))]
+                                  ;; Quarantine only when receipt construction
+                                  ;; fails before append-reserved (which has its
+                                  ;; own revalidation / lock-identity paths).
+                                  (let [receipt
+                                        (try
+                                          (validated-evidence-receipt! result)
+                                          (catch :default error
+                                            (quarantine-if-ledger-changed! reservation)
+                                            (throw error)))
+                                        line
+                                        (try
+                                          (encode-edn-line! receipt)
+                                          (catch :default error
+                                            (quarantine-if-ledger-changed! reservation)
+                                            (throw error)))]
+                                    (append-reserved-edn-line! reservation receipt line))
                                   result)))))
                         gates)
           summary (law/summarize-results results)]
