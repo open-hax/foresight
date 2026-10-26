@@ -1,16 +1,17 @@
 ---
 category: "kanban"
 labels: "muse, knoxx, harness, 5sp"
-type: "story"
 story_id: "HAC.05"
+dependency: ["hac-02-actor-bindings", "hac-06-layered-tool-projection"]
+parent: "harness-actor-continuity"
+type: "story"
+write-id: "1793042910250-0.bg75iqrtrf8f04ge0b0"
 points: "5"
 title: "HAC.05 — Prove actor and message continuity between local and remote Knoxx"
 priority: "P1"
 status: "incoming"
-uuid: "hac-05-federation"
 epic: "harness-actor-continuity"
-parent: "harness-actor-continuity"
-dependency: ["hac-02-actor-bindings", "hac-03-codex-lifecycle"]
+uuid: "hac-05-federation"
 ---
 
 # HAC.05 — Prove actor and message continuity between local and remote Knoxx
@@ -47,6 +48,8 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] Independently test source-read grant expiry, source-read grant revocation, destination content-access grant expiry and destination content-access grant revocation. Each denies before delivery, effects, retries and protected-outcome retrieval; retain exact-source/resource scope checks and all other independent denial cases.
 
 - [ ] Independently validate each remote destination’s capability profile, binding effective-contract hash and envelope effective-contract hash against the selected active contract. Each mismatch independently denies before mailbox admission, delivery, effects or protected outcome return, preserving all existing tuple, mapping, grant, instance-id and actor-id checks.
+
+- [ ] HAC.06 qualification is a prerequisite: consumer qualification binds the consumed contract and profile to the HAC.06-qualified active contract through its validated receipt, pinned canonical LOC input revisions, independently recomputed effective-contract hash and actual tool/instruction projection validation. Missing or mismatched receipt, inputs, hash or projection denies qualification; copied hashes cannot qualify the route.
 
 ## Verification
 

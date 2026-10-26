@@ -1,16 +1,17 @@
 ---
 category: "kanban"
 labels: "muse, knoxx, harness, 3sp"
-type: "story"
 story_id: "HAC.04"
+dependency: ["hac-02-actor-bindings", "hac-06-layered-tool-projection"]
+parent: "harness-actor-continuity"
+type: "story"
+write-id: "1793042897390-0.5bddcixcs1ef00jtkbf"
 points: "3"
 title: "HAC.04 — Qualify Hermes and Orbit as another contract consumer"
 priority: "P1"
 status: "incoming"
-uuid: "hac-04-hermes-orbit"
 epic: "harness-actor-continuity"
-parent: "harness-actor-continuity"
-dependency: ["hac-02-actor-bindings"]
+uuid: "hac-04-hermes-orbit"
 ---
 
 # HAC.04 — Qualify Hermes and Orbit as another contract consumer
@@ -43,6 +44,8 @@ No production cutover, broad credential copying, new board implementation or aut
 - [ ] GIVEN an isolated Orbit workspace WHEN a mutation is requested with a sufficient current grant authorizing the exact workspace resource being mutated and current workspace revision THEN the authorized mutation succeeds with the expected state change. Independently test an insufficient grant, a grant scoped to a different workspace resource, and a stale revision: each denies the mutation and leaves workspace content and revision unchanged, verified by before/after snapshots; a separate denial audit record is permitted.
 
 - [ ] Positive shared-tool registration, invocation and expected-result evidence must come from a non-fixture runtime using the selected Muse tool set; fixture or test-double responses cannot qualify tool parity. Independently invoke a supported tool without its required capability and with a mismatched actor binding: each denies before execution or protected-result return with no effect, recorded separately from unsupported-capability evidence.
+
+- [ ] HAC.06 qualification is a prerequisite: consumer qualification binds the consumed contract and profile to the HAC.06-qualified active contract through its validated receipt, pinned canonical LOC input revisions, independently recomputed effective-contract hash and actual tool/instruction projection validation. Missing or mismatched receipt, inputs, hash or projection denies qualification; copied hashes cannot qualify the route.
 
 ## Verification
 
