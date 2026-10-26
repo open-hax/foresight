@@ -104,6 +104,9 @@ code; preserve source revision and actual observed capability separately.
 
 ## Context identity and inline payload criteria
 
+- [ ] GIVEN an authenticated producer with a valid role/capability but no current grant for the addressed destination WHEN mailbox admission is attempted THEN the canonical sender-to-destination authorization rule denies before delivery, effects or protected-outcome return.
+- [ ] GIVEN an inline delivery or protected effect racing grant revocation WHEN the versioned atomic authorization/action admission boundary is exercised THEN revocation ordered first denies the action, while an action already admitted first may complete without fabricated rollback and later actions deny. Record both orderings independently for delivery and effect; earlier mailbox admission never substitutes for this protected-action check.
+
 - [ ] GIVEN a protected inline message admitted while grants are valid WHEN either required source-read or destination content-access grant expires or is revoked while queued THEN an online current-grant recheck before delivery/effects denies payload delivery, effects and protected-outcome return. Independently test expiry and revocation for each grant; prior admission or copied bytes supply no authority.
 
 - [ ] GIVEN a binding lookup or equality check WHEN first use or resume is admitted THEN context identity is the same canonical immutable tuple: instance id, actor id, authenticated principal, harness family, installation id, tagged repository/operator-scope identity, native session/task id and authenticated parent-context reference (explicit nil for a root). The actor pair indexes the stored binding; it never substitutes for validating the full tuple. Capability profile and effective-contract hash are separately validated binding policy, and parent provenance grants no authority.

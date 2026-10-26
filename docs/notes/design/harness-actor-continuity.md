@@ -53,7 +53,7 @@ its producer; user-supplied actor ids never establish authority. Before mailbox
 admission, the authenticated receiving instance ID and actor ID must each equal
 the envelope destination instance ID and actor ID, using the stored-binding
 equality rule above and canonical HAC.02 admission. Test each destination
-mismatch independently; either denies admission before delivery. Define delivery,
+mismatch independently; either denies admission before delivery. Canonical HAC.02 sender-to-destination authorization also requires the authenticated producer's current grant to cover this exact addressed destination, beyond a valid role or capability. Independently test an otherwise authorized producer lacking this target grant: deny mailbox admission before delivery, effects or protected outcome return. Define delivery,
 deduplication, ordering and cancellation through existing Knoxx/Clio contracts
 before implementing adapters. Retries retain the original producer
 (instance-id, actor-id), binding identity, message ID and destination and
@@ -242,7 +242,7 @@ intended destination's current content-access grant, tenant, audience and exact
 source revision. The inline envelope binds that source identity/revision and
 authorization provenance. At destination admission, those same current grants,
 source revision, tenant, audience and destination binding are revalidated before
-payload delivery, effects or protected outcome return. Admission never caches authority for queued delivery: recheck those same grants online immediately before delivery and effects. Expiry or revocation after admission denies delivery, effects and protected outcome return. Missing provenance,
+payload delivery, effects or protected outcome return. Admission never caches authority for queued delivery: recheck those same grants online immediately before delivery and effects. Expiry or revocation after mailbox admission denies delivery, effects and protected outcome return when committed before the protected-action authorization linearization point. The online grant comparison and admission of that exact delivery/effect share an atomic boundary ordered against authority revocation, under a versioned Knoxx/Axxium protocol; an unchecked compare-then-act gap is forbidden. Revocation ordered before this boundary denies the action; revocation ordered after an already admitted action does not fabricate rollback of it and denies subsequent actions. HAC.02 independently races revocation with delivery and with an effect and records which operation linearized first and the corresponding allowed/denied result. Missing provenance,
 unauthorized destination, stale revision, or expired/revoked grants denies
 without content disclosure. Public inline data needs an explicit source-policy
 classification; absence of private metadata never implies public authority.
