@@ -79,6 +79,8 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] On a supported route, positively verify an authenticated authorized parent with a current binding and sufficient cancellation capability or operator scope admits and commits cancellation. Queued descendant work becomes terminally cancelled, while effects from work admitted before cancellation remain recorded without implying rollback.
 
+- [ ] Every supported native route independently denies destination-substitution retry before admission/delivery/effects/protected-outcome return, requiring an authorized new message. On every supported route, positively use a child grant, then revoke an ancestor: full-chain validation denies each subsequent use and resume before protected operations.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

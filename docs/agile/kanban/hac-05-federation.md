@@ -51,6 +51,8 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] HAC.06 qualification is a prerequisite: consumer qualification binds the consumed contract and profile to the HAC.06-qualified active contract through its validated receipt, pinned canonical LOC input revisions, independently recomputed effective-contract hash and actual tool/instruction projection validation. Missing or mismatched receipt, inputs, hash or projection denies qualification; copied hashes cannot qualify the route.
 
+Each sanitized end-to-end qualification receipt identifies tested source revision, deployed runtime revision, deployed artifact hash, endpoint or instance, and test-run identity. Unavailable or unverifiable runtime fields are unknown and block qualification; source checkout cannot substitute for deployed evidence.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

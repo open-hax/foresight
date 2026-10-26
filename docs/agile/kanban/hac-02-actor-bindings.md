@@ -64,6 +64,10 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] Delegation recipient constraints include actor ID alongside authenticated principal, installation and harness family. Child grant and binding must reference that authorized actor; independently deny an unauthorized actor recipient before issuance. If Knoxx allocates the actor, allocation and association of that exact actor with the authorized recipient grant/binding occur under the versioned delegation admission protocol; the allocation receipt binds the resulting actor ID and cannot authorize arbitrary supplied actors.
 
+- [ ] A retry substituting destination independently denies before admission, delivery, effects or protected outcome return and requires an explicitly authorized new message.
+- [ ] After a child has successfully used its grant, revoke an ancestor and independently attempt every subsequent use and resume: full-chain validation denies before admission, delivery, effects or protected outcome return.
+- [ ] Queued inline delivery and effects revalidate the producer exact-target grant alongside source-read and destination content-access grants under the atomic authorization/action boundary. Independently race producer-target revocation against dequeue/delivery/effect and record the linearized operation and allowed/denied result; revocation ordered first denies, already-admitted actions preserve observed effects.
+
 ## Verification
 
 Portable contract work supplies named upstream law/schema test runners with

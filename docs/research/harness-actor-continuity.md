@@ -52,7 +52,7 @@ Drive sharing permissions nor claims independent verification of them.
 
 ## Conversation recovery
 
-The recent ChatGPT chat Google Drive Access (6ad930a6-0f3c-83ea-941d-bbb495313176)
+The recent ChatGPT chat Google Drive Access (research conversation alias: drive-access)
 contains the user's request for specs and archaeology: recover original human
 source as reference that can periodically enter agent context. This supports
 Epiphany source recovery, with source identity and epistemic status preserved.

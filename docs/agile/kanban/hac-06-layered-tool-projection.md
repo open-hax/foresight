@@ -44,6 +44,8 @@ No production activation or alternate board/event authority.
 
 - [ ] Validated receipts bind immutable artifact IDs/content digests for the actual tool manifest and instruction artifact, including its terminal sentinel. Admission compares both selected artifacts with those receipt bindings. Independently substitute either artifact while retaining the effective-contract hash: admission denies even when that contract hash is unchanged.
 
+- [ ] Projection receipts bind selected target profile identity alongside its recorded revision. Admission independently verifies both against the actual selected active profile; same revision with substituted profile identity denies.
+
 ## Verification
 
 Implementation names the existing owner test runner, then records the isolated positive and negative scenarios above as version-bound receipts. Missing runtime access blocks qualification. This planning card claims no executed integration test or Rheos transition.

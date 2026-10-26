@@ -47,6 +47,8 @@ No production cutover, broad credential copying, new board implementation or aut
 
 - [ ] HAC.06 qualification is a prerequisite: consumer qualification binds the consumed contract and profile to the HAC.06-qualified active contract through its validated receipt, pinned canonical LOC input revisions, independently recomputed effective-contract hash and actual tool/instruction projection validation. Missing or mismatched receipt, inputs, hash or projection denies qualification; copied hashes cannot qualify the route.
 
+- [ ] Native request/reply qualification requires non-fixture evidence exercising actual Hermes or Orbit host transport. Fixture or test-double replies cannot qualify actor/message continuity.
+
 ## Verification
 
 Implementation supplies named upstream test runners and sanitized end-to-end

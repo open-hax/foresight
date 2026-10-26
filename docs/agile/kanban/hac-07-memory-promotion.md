@@ -67,6 +67,8 @@ No production activation or alternate board/event authority.
 
 - [ ] Both initial and rebuild qualification receipts and completion evidence must include independent publication-boundary races for identity-provider mapping decision change and mapping revision change. Each rejects or requires revalidation before output becomes visible; retain both independent results in each receipt.
 
+- [ ] Rebuild promotion events explicitly bind the authorized decision actor alongside existing event values. Atomic publication comparison validates the current decision actor against that bound actor; mismatch rejects or requires revalidation before visibility, retaining all grant/mapping checks.
+
 ## Verification
 
 Implementation names the existing owner test runner, then records the isolated positive and negative scenarios above as version-bound receipts. Missing runtime access blocks qualification. This planning card claims no executed integration test or Rheos transition.

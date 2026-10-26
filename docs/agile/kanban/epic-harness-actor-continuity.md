@@ -45,6 +45,8 @@ activation or replacement of native harness scheduling.
 - [ ] Hermes/Orbit supplies explicit HAC.04 evidence that it consumes the selected contract and preserves actor and message boundaries, alongside capability and deployment evidence. Health checks alone do not qualify a contract consumer.
 - [ ] Local/remote identity and memory-boundary negative tests pass.
 
+Each child must supply an evidence receipt mapped to its acceptance criteria, recording selected contract hash (explicitly not applicable for HAC.01 single-tree qualification), harness/runtime version, actor/destination identities where applicable, exact commands and positive/negative results. Codex actor integration specifically consumes HAC.03 native parent/child request/reply correlation, retry without duplicate effects and cancellation evidence; registration/binding alone cannot complete it. Unknown Codex CLI/SDK availability and missing lifecycle hooks gate qualification on versioned capability probes (unsupported paths cannot satisfy required positive routes); remote recovery gates on HAC.05 durable recovery evidence, and grant revocation gates on HAC.02/03/05/07 independent denial and race evidence. Preserve the existing host capability drift risk.
+
 ## Verification
 
 Review the evidence delivered by each child through the owning project's test
