@@ -200,3 +200,7 @@ eta-mu kanban list
 ```
 
 All provenance ledgers are physically stored beneath `.ημ/`.
+
+## Primordia integration work
+
+[Standalone research and Truth native-boundary plan](docs/integrations/primordia/README.md). Remote fork creation and direct constellation registration remain pending; the plan records the concrete blocker and evidence.
