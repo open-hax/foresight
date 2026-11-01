@@ -19,7 +19,6 @@ jobs:
       pr_head_sha: ${{ github.event.pull_request.head.sha }}
       muse_revision: c1369c223cf3c57e3e31934a6d746bfcdfe73f5a
       agents_revision: 7ab2f99e048e370f5f943acc2321b8294402e786
-      opencode_version: 1.18.31
       review_timeout_minutes: 180
       setup_eta_mu_toolchain: false
       evidence_gates_script: |
