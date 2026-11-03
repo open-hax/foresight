@@ -2823,3 +2823,13 @@
   spore: 20261103-120500-fork-tax-shared-dirt-classification
   receipt-refs: a74f3b73-c340-43ae-b176-6637b0e4f25c
   note: Classified 18,297 dirt entries into owned-unpreserved, secret, bulk-evidence and someone-else's-preserved before staging. Absorbed 8 of 21 submodule markers only after proving each head via fetch plus merge-base --is-ancestor against the remote branch. Quarantined .env (live GH_TOKEN), ignored and inventoried .ημ/diagnostics, refused to silently register the undeclared openplanner clone, and hashed the agy workflow copies against their pushed PR branch instead of re-committing them.
+
+- ts: 2026-11-03T12:42:00Z
+  session: /home/err/spaces/foresight
+  task: Declare openplanner as a direct submodule
+  p-efficiency: 0.8
+  p-friction: 0.3
+  p-skill-candidate: 0.2
+  spore: none
+  receipt-refs: 635bbed4-cf53-44ae-9009-c7d5161c3b05
+  note: One change had to touch .gitmodules, project.cljc, AGENTS.md and the workspace test together; the contract made the blast radius obvious before editing. Friction was mechanical, not conceptual: inserting a map into a sequence whose last line already carried the vector and form closers produced an unmatched delimiter, and matched-indent edits needed two correction passes. Lesson is the ordinary one - when appending inside an existing form, take the trailing closers off the anchor line first and count the delimiter that closes only the map.
