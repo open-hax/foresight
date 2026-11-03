@@ -25,7 +25,10 @@
              :worktree-pattern "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-{task}"
              :reviewer-role :independent-adversarial
              :implementer-must-not-approve-self true
-             :planning-admission-required true
+              :planning-admission-required true
+              :planning-admission-evidence :completed-independent-reviews-and-explicit-user-direction
+              :hosted-review-queue :nonblocking-for-reviewed-implementation
+              :admission-decision ".ημ/runs/oikos-program-20261103/decisions/local-review-admission.edn"
              :new-successor-admission :verified-prerequisite-artifacts-not-worker-self-report
              :epic-integration-agent :dispatch-after-both-children-verified
              :documentation-agent :independent-foresight-worktree
@@ -40,7 +43,7 @@
   {:key :s3b :uuid "912b707f-2275-45c9-b4a9-aac143e11d9a" :requires [:s3a :s2b :s4a]}
   {:key :s4a :uuid "29caa8e3-289a-416c-9850-8ef9cc769e88" :requires [:s1a :s2a]}
   {:key :s4b :uuid "27ff00af-536d-4d7d-a9ad-a09b5ec2aaf3" :requires [:s4a :s6a]}
-  {:key :s5a :uuid "0e124c65-694e-44f1-9959-ee83e81ca22b" :requires [:s2b :s7a]}
+  {:key :s5a :uuid "0e124c65-694e-44f1-9959-ee83e81ca22b" :requires [:s2a :s2b :s7a]}
   {:key :s5b :uuid "7d0235f1-ab69-4095-b404-bcc1ca60db91" :requires [:s5a]}
   {:key :s6a :uuid "c703893f-aea4-41c2-9eab-c3bd37b28c9b" :requires [:s2a :s4a]}
   {:key :s6b :uuid "0d11e7a7-c131-4c91-aaf7-55ad8ec26002" :requires [:s6a]}

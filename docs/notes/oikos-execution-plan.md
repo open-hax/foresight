@@ -1,9 +1,9 @@
-# Oikos execution plan: precise prerequisites, unchanged authority
+# Oikos execution plan: precise prerequisites and bounded implementation admission
 
-2026-11-03. Planning proposal, not readiness or completion evidence.
+2026-11-03. Current execution checkpoint with historical planning records, not completion evidence.
 License: GPL-3.0-or-later.
 
-## Authority and current hold
+## Current execution checkpoint and authority
 
 Keep the existing [program narrative and epic index](oikos-local-first-workbench.md#epic-map)
 as the entry point for the eight epics. This note describes execution of their
@@ -16,22 +16,73 @@ still owns admission, status and dependency transitions.
 The coordinator must read live tasks before acting; saved card snapshots are
 dated evidence, not a replacement board.
 
+### Implementation admission: current operator decision
+
+The operator's latest **"Just go"** direction accepts the completed sixteen
+independent planning reviews and locally verified planning corrections as
+**implementation admission**, without waiting for hosted review cohorts or a
+native review queue. The bounded authority is recorded in the
+[local-review admission decision](../../.ημ/runs/oikos-program-20261103/decisions/local-review-admission.edn)
+and the manifest's current execution fields. This supersedes the earlier
+all-task planning hold; it does not manufacture native approval, waive
+deterministic or safety checks, admit unverified successors, or complete a task.
+Native PR findings and settlement evidence remain a separate obligation.
+
+### Board state and active implementation
+
+The coordinator verified official Rheos readbacks for S1A
+(`07452a65-4a6a-4704-bf81-50408927dcc8`) through
+`incoming → accepted → breakdown → ready → todo → in_progress`.
+The other **23 Oikos cards remain incoming**, pending verified prerequisite
+artifacts and their own lawful admission. The documentation worker has read the
+decision record, not performed a new live board query.
+
+| Active isolated worker | Starting revision | Evidence limit at this checkpoint |
+| --- | --- | --- |
+| S1A laws/tests in red, then domain/adapters in green, in its own Oikos worktree | `95dfbdb26f65fac8b17bcb11cd192ba47d8efe3c` | Active, not finished; no implementation acceptance claimed |
+| Receipt-transport repair in its separate repair worktree | `4deeab6d` | Active, not finished; no verified `ENOBUFS` or descriptor-cleanup repair claimed |
+
+Independent post-implementation review for every task and fresh epic integration
+after both children are verified remain required future work. Neither active
+workers nor the planning baseline count as those results.
+
+### Review-route planning: nonblocking follow-up
+
+Safe review-route planning was separately authorized, but the latest steering
+makes it **nonblocking for locally reviewed implementation**. No follow-up
+infrastructure work has started and no credentials have changed. Missing hosted
+routes or lagging native queues do not reinstate the superseded implementation
+hold. Fork guards, trusted publisher identity, credential isolation and all
+effect restrictions remain intact.
+
+The manifest's frozen planning-review instructions still describe the earlier
+all-incoming checkpoint. Read them as historical review input, not as an override
+of the later admission decision or live Rheos state.
+
+### Historical native-gate view: superseded for implementation admission
+
 At the original `b9ac3141` checkpoint,
 [planning PR #153](https://github.com/open-hax/foresight/pull/153) had sixteen
 unsettled native threads and two body items. After publishing `51d80fad`, the
 coordinator settled all sixteen threads and posted both itemized body replies;
-native readback reported zero unresolved threads. Current-head review/convergence
-and the receipt-history gate remain blocked. No
-approval, ready transition, task completion or integration completion is asserted.
-**All sixteen tasks are blocked by planning admission.** S1A alone has no proposed
-task prerequisite; that does not make S1A ready or authorize implementation.
+native readback at that checkpoint reported zero unresolved threads. Review of
+the subsequent `f3b039c0` head raised three new threads: two identify the same
+safe-reference producer-order defect, and one requests a public-only setup
+example. Those later findings required their own verified corrections and native
+settlement; this note claims no new native settlement or approval for them.
+Current-head review/convergence and the receipt-history gate were blocked at that
+checkpoint. No ready transition, task completion or integration completion was
+asserted then. **All sixteen tasks were blocked by planning admission** under
+that earlier rule, even dependency-free S1A. The current operator decision above
+supersedes that implementation hold, not the historical native evidence.
 
-## Earlier planning checkpoint, before final dispositions
+## Historical planning checkpoint, before final dispositions
 
-This checkpoint combines the coordinator's reported state with the persisted
+This superseded checkpoint combines the coordinator's reported state with the
+persisted
 [skeptic reconciliation](../../.ημ/runs/oikos-program-20261103/skeptics/reconciliation.edn),
-read for this documentation update. Official board state is reported as **24
-incoming / 0 done**; the documentation worker has not performed a new live Rheos
+read for this documentation update. Official board state at that checkpoint was
+reported as **24 incoming / 0 done**; the documentation worker has not performed a new live Rheos
 or native GitHub query.
 
 All sixteen owned worktrees exist. Sixteen independent planning review reports
@@ -45,16 +96,18 @@ the reconciliation validates matching ID sets and classifies them as:
 | Consensus refuted | 4 | Agreement about candidate refutation, not task approval |
 | Disputed | 23 | Adjudication pending; neither settled nor approved |
 
-The 12 acceptance-criteria corrections are being applied separately. At this
-documentation check, `consensus-fixes-v1.edn` was not found under the program run;
-no completion of those corrections is claimed. Completion must not be reported
-until that artifact exists and is read. Two persisted passes are not a completed
+The 12 acceptance-criteria corrections were being applied separately. At that
+earlier documentation check, `consensus-fixes-v1.edn` had not been found under the
+program run, so completion was not claimed. The
+[subsequently recorded corrections](../../.ημ/runs/oikos-program-20261103/consensus-fixes-v1.edn)
+and their independent verification belong to the later admission evidence.
+Two persisted passes alone are not a completed
 qualified review round, exact-head approval or settlement of all findings.
 At this earlier checkpoint, PR #153's original sixteen threads and two body
 items were still open. Their later native settlements are recorded below;
 local review classification alone did not resolve native review state.
 
-### S1A preparatory specification, not implementation
+### Historical S1A preparatory specification, not implementation
 
 The coordinator reports an independent re-review of the preparatory S1A
 specification found all three P2 findings fixed. The specification SHA-256 is
@@ -62,25 +115,28 @@ specification found all three P2 findings fixed. The specification SHA-256 is
 It is committed privately as `92df993` on `feat/oikos-s1a`:
 [pinned specification](https://github.com/open-hax/oikos/blob/92df993/docs/specs/s1a-generation-contracts.md).
 The native private [Oikos PR #1](https://github.com/open-hax/oikos/pull/1) is
-reported **OPEN**. This is preparatory specification evidence only: no task
-implementation or planning admission is inferred. The parent Oikos gitlink must
-not advance to this unmerged source merely because the specification was pushed.
+reported **OPEN** at that checkpoint. This was preparatory specification evidence
+only: no task implementation or planning admission was inferred from it. The
+parent Oikos gitlink must not advance to this unmerged source merely because the
+specification was pushed.
 The original architecture/smoke links below retain their original source pin.
 
-### Separate receipt-buffer diagnosis
+### Historical receipt-buffer diagnosis
 
 A separate diagnosis/planning branch, `fix/receipt-git-buffer-20261103`, has
 commit `7a0d842` and an open stacked personal
 [Foresight PR #52](https://github.com/riatzukiza/foresight/pull/52), as reported
-by the coordinator. The actual `ENOBUFS` failure is unchanged. The diagnosed
+by the coordinator. The actual `ENOBUFS` failure was unchanged then. The diagnosed
 cause is a **1 MiB** buffer cap against a roughly **1.28 MiB** ledger; the
-historical prefix is safe. A finite **16 MiB** cap is proposed, **not implemented**.
+historical prefix is safe. A finite **16 MiB** cap was proposed, **not implemented**
+at that diagnosis checkpoint; the later active repair worker is recorded above.
 Diagnosis, a planning commit and an open PR are not runtime repair evidence.
 
 ### Existing baseline only
 
-The coordinator reports the current passing baseline below; these suites were
-not rerun by the documentation worker and qualify no future acceptance criterion:
+At that checkpoint, the coordinator reported the passing baseline below. These
+suites were not rerun by the documentation worker and qualify no future
+acceptance criterion:
 
 | Scope | Tests / assertions |
 | --- | --- |
@@ -91,10 +147,12 @@ not rerun by the documentation worker and qualify no future acceptance criterion
 | Child evaluation | 9 / 39 |
 | Lint | 0 errors / 0 warnings |
 
-Policy is unchanged. Per-task post-implementation adversarial code review and
-fresh epic integration remain **future required work**, not merely dispatched
+Safety policy is unchanged. Per-task post-implementation adversarial code review
+and fresh epic integration remain **future required work**, not merely dispatched
 work being counted as complete. Planning reports, spec re-review and baseline
-tests replace none of those gates; all tasks retain the planning-admission hold.
+tests replace none of those gates. All tasks retained the planning-admission
+hold at this historical checkpoint; the later operator decision supersedes that
+hold for scoped implementation, not these verification requirements.
 
 ## Nine operator policy answers
 
@@ -145,24 +203,26 @@ below were created at source `ae35073719974c0df1d2dae301c2179fa4785641` and
 verified with `git -C oikos worktree list` by the coordinator. This is workspace
 existence, not implementation progress. Sixteen separate read-only adversarial
 planning review reports now exist; their session identities are retained in
-`.ημ/runs/oikos-program-20261103/reviewer-sessions.edn`. The checkpoint above
-records their unresolved reconciliation; neither reports nor dispatches are
-approvals. S1A's later preparatory spec commit is recorded separately above.
+`.ημ/runs/oikos-program-20261103/reviewer-sessions.edn`. The historical checkpoint
+records their then-unresolved reconciliation; the later verified fixes and
+operator decision supply bounded implementation admission, not native approval
+or completed code review. S1A's preparatory specification and active red/green
+worker are recorded separately above.
 The Foresight coordinator stays in
 `/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103` on
 `plan/oikos-execution-20261103`; child implementation belongs in Oikos.
 
-| Key | Canonical task UUID | Artifact/outcome | Owned branch suffix | Proposed prerequisites |
+| Key | Canonical task UUID | Artifact/outcome | Owned branch suffix | Required artifact prerequisites |
 | --- | --- | --- | --- | --- |
-| S1A | `07452a65-4a6a-4704-bf81-50408927dcc8` | Isolated generation manifests and render contracts | `feat/oikos-s1a` | None; planning hold still applies |
+| S1A | `07452a65-4a6a-4704-bf81-50408927dcc8` | Isolated generation manifests and render contracts | `feat/oikos-s1a` | None; scoped implementation admitted |
 | S1B | `3d14e0a5-2790-42b8-9a55-54d686925c3c` | Services-owned preview/check/apply/rollback | `feat/oikos-s1b` | S1A |
-| S2A | `93a76dad-678a-4980-86fb-ba0fbb5e8203` | Clio causal event admission and EDN replay | `feat/oikos-s2a` | S1A |
+| S2A | `93a76dad-678a-4980-86fb-ba0fbb5e8203` | Clio causal event admission and EDN replay; initial versioned safe-reference contract and reviewed handoff | `feat/oikos-s2a` | S1A |
 | S2B | `59774be2-cc61-4708-9030-8b7b42935ec3` | i3 subscribe/snapshot race and reconnect reconciliation | `feat/oikos-s2b` | S2A |
 | S3A | `b2f52c1f-bd1b-431e-a417-95c72549ba0d` | Logical memberships and speculative projection branches | `feat/oikos-s3a` | S2A |
 | S3B | `912b707f-2275-45c9-b4a9-aac143e11d9a` | Sandbox leases and deliberate human joining | `feat/oikos-s3b` | S3A, S2B, S4A |
 | S4A | `29caa8e3-289a-416c-9850-8ef9cc769e88` | Scoped named i3/existing-Emacs operations | `feat/oikos-s4a` | S1A, S2A |
 | S4B | `27ff00af-536d-4d7d-a9ad-a09b5ec2aaf3` | Shared client adapter qualification matrix | `feat/oikos-s4b` | S4A, S6A |
-| S5A | `0e124c65-694e-44f1-9959-ee83e81ca22b` | Bounded local OCR/E4B perception adapter | `feat/oikos-s5a` | S2B, S7A |
+| S5A | `0e124c65-694e-44f1-9959-ee83e81ca22b` | Bounded local OCR/E4B perception adapter | `feat/oikos-s5a` | S2A, S2B, S7A |
 | S5B | `7d0235f1-ab69-4095-b404-bcc1ca60db91` | Epistemic knowledge, retention, forgetting and stop controls | `feat/oikos-s5b` | S5A |
 | S6A | `c703893f-aea4-41c2-9eab-c3bd37b28c9b` | All-egress GovOne policy/session binding | `feat/oikos-s6a` | S2A, S4A |
 | S6B | `0d11e7a7-c131-4c91-aaf7-55ad8ec26002` | Scoped Knoxx Lens evidence and gateway history | `feat/oikos-s6b` | S6A |
@@ -174,15 +234,16 @@ The Foresight coordinator stays in
 Epic keys E1–E8 correspond in order to the linked epic index; each owns its
 matching A/B pair. Their UUIDs remain in that index and the manifest.
 
-## Proposed child-artifact DAG
+## Current child-artifact DAG: 27 acyclic edges
 
-Arrows mean prerequisite artifact → consumer, not completed work. The admission
-gate applies to **every** node, not just the root; it is shown separately to
-avoid visually implying that S1A approval admits all successors.
+Arrows mean prerequisite artifact → consumer, not completed work. The sixteen
+child nodes now have **27 acyclic edges**, rather than the former 26: the explicit
+S2A → S5A edge names the initial safe-reference contract producer. Scoped
+implementation admission does not admit every successor; each still needs its
+exact verified prerequisite artifacts and lawful Rheos transition.
 
 ```mermaid
 flowchart TD
-  P[Planning admission and native settlement] -. required for every task .-> ALL[ALL S1A through S8B blocked]
   S1A --> S1B
   S1A --> S2A
   S2A --> S2B
@@ -194,6 +255,7 @@ flowchart TD
   S2A --> S4A
   S4A --> S4B
   S6A --> S4B
+  S2A --> S5A
   S2B --> S5A
   S7A --> S5A
   S5A --> S5B
@@ -213,8 +275,22 @@ flowchart TD
 
 Precision removes unnecessary waits, not safeguards. For example S3A consumes
 S2A's verified event/projection contract rather than waiting for all of E2;
-S5A still needs S2B's reconciliation artifact. A dispatch permit must name the
-exact prerequisite artifact, tested revision and verification evidence, plus
+S5A needs S2A's initial versioned safe-reference contract, S2B's reconciliation
+artifact and S7A's baseline. The
+[`safe-reference-order-fix-v1.edn`](../../.ημ/runs/oikos-program-20261103/safe-reference-order-fix-v1.edn)
+records the added edge and contract handoff. The coordinator reports that
+independent scoped review `ses_e5d669c6cffeaq3v812wQXRMuV` confirmed the cards,
+workflow, official Rheos correction and README; its sole P3 finding was the
+missing S2A prerequisite in this note's S5A row and diagram, corrected here.
+That scoped confirmation is not native approval or implementation acceptance.
+The correction artifact's all-incoming readbacks describe its earlier planning
+checkpoint, not current board state.
+S5A must consume the exact independently reviewed S2A version, digest, source and
+review evidence; S5B may add only separately reviewed compatible prospective
+extensions, not become a future predecessor or retroactively qualify history.
+
+A dispatch permit must name the exact prerequisite artifact, tested revision
+and verification evidence, plus
 the consumer scope and allowed effects. Worker self-report is insufficient.
 The coordinator must reconcile proposed changes through Rheos before treating
 them as canonical dependencies; this note performs no board writes.
@@ -231,9 +307,11 @@ own epic; it is not silently declared complete by S6A's permit.
 ## Per-task review and dispatch protocol
 
 1. Independently review each child's planning artifacts and acceptance criteria.
-   Settle findings, obtain current-head planning admission and use Rheos for
-   lawful ready admission. Program-level discussion cannot substitute for the
-   sixteen separate planning reviews.
+   The completed sixteen separate reviews and locally verified fixes have been
+   accepted by the operator for scoped implementation admission. Do not wait for
+   hosted cohorts or a native queue to begin that reviewed work; preserve native
+   settlement obligations separately. Use Rheos for lawful ready admission.
+   Program-level discussion alone cannot substitute for per-child review.
 2. Verify prerequisite artifacts at exact revisions before issuing a scoped
    dispatch into the child's own worktree. A dependency-free root still needs
    planning admission and the same policy checks.
@@ -268,7 +346,11 @@ operator instructions, retaining links to the existing epic index. Rheos alone
 records any lawful epic transition. No integration, documentation update or merge
 may invent an unavailable approval or turn a policy-blocked criterion into pass.
 
-## Current review-disposition checkpoint
+## Historical review-disposition and native-gate checkpoint
+
+These records retain the sequence before the current implementation admission.
+Their earlier holds and specification-only states do not override the current
+execution checkpoint above.
 
 Both skeptic passes preserve all 53 original candidate IDs. Their twelve agreed
 remaining contracts were amended and independently verified at planning scope.
@@ -286,16 +368,40 @@ The S1A specification advanced to private commit
 initial S1A acceptance is positive inert profile EDN plus truthful unavailable
 Bash rejection; actual positive Bash and non-vacuous write-time race/rollback
 proof stay under S1B's owner-artifact gates. Both native threads were fixed and
-resolved. This is still a specification-only PR, not readiness or working code.
+resolved. At that point the PR contained a specification, not working code or
+readiness evidence. That historical scope does not override the later official
+S1A admission or active implementation worker; no finished implementation is
+inferred.
 
 PR #153's sixteen original threads were subsequently settled as fixed at
 `51d80fad`; both identified body findings were answered in the
 [itemized writer reply](https://github.com/open-hax/foresight/pull/153#issuecomment-6611238670).
 The canonical status readback observed zero unresolved threads but no exact-head
 approval or completed planning round, and requested fresh collection after a
-concurrent evidence change. The actual receipt verifier still exited 2 with
-`spawnSync git ENOBUFS`; the separate repair is planned, not implemented. These
-settlements therefore do not admit implementation or complete an epic.
+concurrent evidence change. At that checkpoint the actual receipt verifier exited
+2 with `spawnSync git ENOBUFS` and the separate repair had not been implemented.
+Those settlements alone did not admit implementation or complete an epic; the
+later explicit operator decision supplies the bounded implementation admission.
+The verifier failure is not waived, and repair success remains unverified.
+
+The separate repair plan subsequently advanced to `4deeab6d`. Its specification
+now includes owned-target descriptor cleanup when committed capture fails after
+opening the target, exactly-once closure and repeated-failure descriptor tests,
+and combined stdout/stderr capture accounting. Independent local review and a
+native CodeRabbit reply accepted this **planning correction**. At that planning
+checkpoint the source and regression tests were unchanged and the repair card
+remained incoming. The later isolated red/green worker is active, not finished;
+neither the descriptor leak nor `ENOBUFS` is claimed fixed by this note.
+
+The [native route diagnosis](../../.ημ/runs/oikos-program-20261103/native-review-route-diagnosis.edn)
+separates fork eligibility from provider availability. PR #153's pinned MiMo
+workflow deliberately skips fork heads; rerunning cannot change that predicate.
+The private Oikos repository exposes no hosted review workflow, and neither
+target has an established Kimi execution/admission route. These are missing
+target routes, not quota exclusions or approvals. The current operator decision
+makes route follow-up nonblocking for reviewed implementation; no new follow-up
+infrastructure or credential change is claimed. Existing fork guards, publisher
+identity checks and credential isolation remain required.
 
 Exact duplicate JSON review inputs and Rheos readbacks are preserved in the
 [pushed evidence manifest](https://github.com/riatzukiza/foresight/blob/e2939d28e1b7ecbeb441dfd6fbac358c4300081a/.%CE%B7%CE%BC/runs/oikos-program-20261103/readback-manifest.json):

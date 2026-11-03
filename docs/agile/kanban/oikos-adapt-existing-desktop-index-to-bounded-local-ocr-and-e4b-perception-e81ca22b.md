@@ -1,10 +1,10 @@
 ---
 category: "kanban"
 labels: "oikos, planning, local-first, task"
-dependency: ["59774be2-cc61-4708-9030-8b7b42935ec3", "0db50b53-6c7a-489a-bff9-048d57ce4cbb"]
+dependency: ["93a76dad-678a-4980-86fb-ba0fbb5e8203", "59774be2-cc61-4708-9030-8b7b42935ec3", "0db50b53-6c7a-489a-bff9-048d57ce4cbb"]
 parent: "92b529b9-256d-4654-8aa6-5f1884a8adaa"
 type: "task"
-write-id: "1793727207052-0.b2pn7g7lv2hk9pgs5f0"
+write-id: "1793728990680-0.k11hnrxiv8pqxzxn0l"
 points: "8"
 title: "Oikos: Adapt existing desktop index to bounded local OCR and E4B perception"
 priority: "P1"
@@ -50,9 +50,11 @@ Future verification: deferred synthetic suppliers return success after stop/revo
 
 Future verification: fake installed and development cache/index/label stores contain distinct sentinels. Capture, projection, label retention, retrieval, deletion and cleanup use only development bindings; installed read spies remain zero and installed bytes unchanged. Omitted project/namespace/cache bindings and normalized/resolved aliases or overlapping roots fail before any store I/O.
 
-- [ ] Safe-reference propagation from S5B: immutable perception events contain only the reviewed closed safe-metadata allowlist and deletable content references admitted through Clio. Raw image/OCR and secret-bearing titles/paths/labels or echoed denial payloads remain outside immutable events/diagnostics. Classify hashes and IDs rather than assuming anonymity; no separate privacy engine.
+### S5A safe-reference consumer gate
 
-Future verification: synthetic markers in supplier output and all rejected metadata stay out of event/diagnostic retention; content erasure leaves valid causal references and replay cannot reconstruct erased perception payloads.
+- [ ] Consume the exact independently reviewed S2A safe-reference artifact, binding its version/content digest, immutable source revision and independent review evidence before perception admission. Missing/mismatched/unreviewed artifact denies admission; S5A requires no S5B output. Immutable perception events contain only that closed safe-metadata allowlist and deletable content references admitted through Clio. Raw image/OCR and secret-bearing titles/paths/labels or echoed denial payloads remain outside immutable events/diagnostics. Classify hashes and IDs rather than assuming anonymity; portable .cljc laws and Clio authority remain unchanged, with no separate privacy engine.
+
+Future verification: synthetic markers in supplier output and all rejected metadata stay out of event/diagnostic retention; content erasure leaves valid causal references and replay cannot reconstruct erased perception payloads. Reject absent/mismatched artifact identity or independent review; a positive fixture uses the exact S2A handoff without S5B artifacts. Preserve raw 24h image/7d text defaults and deletion propagation; S5B extensions cannot retroactively change these admissions.
 
 ### S5A supplier resource ownership
 
@@ -76,6 +78,7 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 
 ## Dependencies
 
+- 93a76dad-678a-4980-86fb-ba0fbb5e8203 (S2A): exact versioned safe-reference contract artifact and independent review/handoff evidence; no S5B predecessor.
 - 59774be2-cc61-4708-9030-8b7b42935ec3 (S2B): reconciled observation revisions, lifetime identity and reconnect invalidation.
 - 0db50b53-6c7a-489a-bff9-048d57ce4cbb (S7A)
 - Baseline edge is S7A only, not ongoing knowledge or optional cloud/12B comparison; avoids a knowledge/qualification cycle.
@@ -100,5 +103,7 @@ Observation-key clarification for native finding 4456856431: the canonical obser
 Consensus planning correction v1: root incoming acceptance/verification now explicitly specifies s5a/stop-barrier, s5a/index-isolation. See the corresponding named root subsections for the contract and concrete future positive/negative fixtures. Also propagates s5b/safe-ledger to perception admission and diagnostic retention. Only the 12 consensus-remaining gaps in skeptics/reconciliation.edn are in scope; the 23 disputed findings receive no settlement/rejection here. All added scenarios are future acceptance requirements, not implemented or executed behavior. Existing dependency vectors, parent relationships, incoming status, historical events and prior correction text remain preserved. Synthetic sandbox/dev-only, zero-spend, existing-model and remote-publication holdbacks remain unchanged; no status advancement or execution permission.
 
 Source-grounded adjudication of :s5a/supplier-accounting: root acceptance now keeps admitted supplier queued/in-flight work and retained/decoded buffers charged until completion or termination is established. Client timeout/disconnect alone cannot release reservations or admit replacements. Deferred-supplier timeout/reconnect fixtures must prove bounded concurrency/bytes; unknown bounded supplier ownership denies dispatch. Stop/publication revocation is separate from termination/quiescence; no implicit operator-supplier reconfiguration is authorized. This is a future acceptance clarification based on inspected source behavior, not a measured running-service result.
+
+Safe-reference order correction for native F153 findings Codex4458493223 and CR4458522612: current root acceptance assigns initial closed/versioned portable .cljc metadata/content-reference definition, independent review and exact artifact handoff to S2A within its existing 5 points. S2A gates its own Clio admission; S5A explicitly depends on S2A plus existing S2B/S7A and consumes the exact reviewed version/digest/source/review evidence without S5B output. S5B follows S5A, consumes/reviews the same baseline and may only compatibly extend it prospectively under separately reviewed versions, never rewrite immutable history or retroactively qualify admission. E2/E5 acceptance reflects this order. Privacy exclusions, raw 24h/7d retention, deletion propagation, accepted-memory consent and Clio authority remain unchanged. Historical comments assigning initial ownership to S5B are superseded, not edited. This is future planning/verification only: no implementation, review completion, native settlement, status transition or execution permission is claimed.
 
 ---

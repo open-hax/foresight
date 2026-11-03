@@ -1,0 +1,104 @@
+{:schema :receipt-repair-merge-preflight/v1
+ :observed-at "2026-11-03T18:14:30Z"
+ :scope :committed-object-only-preview
+ :result :three-ledger-content-conflicts
+ :boundaries {:repair-uncommitted-files-read false :index-writes false
+              :working-tree-merge false :checkout-rebase-reset-clean false
+              :branch-switch-amend-push false :native-workflow-poll false
+              :inference false :native-writer-clarification-published false
+              :git-object-creation true :only-new-report-written true}
+ :heads {:repair "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+         :coordinator "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+         :merge-base "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+         :divergent-commits {:repair 2 :coordinator 2}
+         :repair-chain ["b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+                        "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+                        "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"]
+         :coordinator-chain ["b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+                             "51d80fad671692e9eeab48d88121dfe3e988a9f4"
+                             "f3b039c07cd03e11ccdbfbdb36349d814ab02225"]
+         :applicability "Exact historical heads only. Coordinator corrections and repair GREEN commits are not yet included; repeat this object-only preview on both final committed SHAs."}
+ :instructions-and-attributes
+ {:root-agents-blob-identical-in-base-and-both-heads "1a36198ded29f4d225d544802c99579b2e272a9d"
+  :tracked-gitattributes-in-either-tree []
+  :git-info-attributes-exists false
+  :configured-merge-driver-or-core-attributesfile-query {:exit 1 :output ""}
+  :union-driver-currently-installed-by-these-commits false
+  :no-attribute-or-config-change-performed true}
+ :ordinary-preview
+ {:command "git merge-tree --write-tree --messages --name-only 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+  :exit 1 :conflicted-tree "68969ea48f721604617a3ff0016dc2611d73e949"
+  :conflict-paths [".ημ/kanban-events/ledger.edn"
+                   ".ημ/receipts.edn"
+                   ".ημ/session-mycology/ledger.edn"]
+  :conflict-kind :content
+  :cause "Both branches append distinct records at the same EOF of each shared ledger. All three common-base blobs are exact LF-terminated prefixes of both committed descendants. Default textual merge cannot order the concurrent additions. No source-code or specification path conflicts were reported at these heads."
+  :implementation-previewed false}
+ :ledger-custody
+ [{:path ".ημ/kanban-events/ledger.edn" :owner :rheos
+   :base-bytes 301675 :base-lines 304
+   :base-sha256 "292fa2070657ad3d768376e707f80b1db00d930ee08076979a7a272cc0109624"
+   :exact-base-prefix-in-both true :base-ends-lf true
+   :repair-tail {:bytes 6869 :lines 2 :sha256 "9b089310f9f7f4f65d5cb222789edee28a68c96cacc06bf21b53aa93279e23cf"}
+   :coordinator-tail {:bytes 78359 :lines 61 :sha256 "868ae0fbf35ab2a46a54fe3fc36b713f351fcdf66ac8497b407ce254fa0898a5"}
+   :exact-tail-line-overlap-count 0 :combined-bytes 386903}
+  {:path ".ημ/receipts.edn" :owner :receipt-river
+   :base-bytes 1280738 :base-lines 550
+   :base-sha256 "b0cbce2ed8c3184e7ac8131f66f821d03d6bc9ccbb2af5cc2f535aeabb83ce1f"
+   :exact-base-prefix-in-both true :base-ends-lf true
+   :repair-tail {:bytes 3115 :lines 2 :sha256 "61bc9ebe56fb7e11d168f867491a216885799bcacf3e3dd55562af5b5f508826"}
+   :coordinator-tail {:bytes 6236 :lines 4 :sha256 "01a858d4ed627148941c10f8e76c6e450d5831128b4cdddd551c6d014c44be29"}
+   :exact-tail-line-overlap-count 0 :combined-bytes 1290089}
+  {:path ".ημ/session-mycology/ledger.edn" :owner :session-mycology
+   :base-bytes 257457 :base-lines 285
+   :base-sha256 "31b977db0367b91f9ff3f2ffb05b63950f7122bd3bfaa24cab2d46e76f96e33a"
+   :exact-base-prefix-in-both true :base-ends-lf true
+   :repair-tail {:bytes 1038 :lines 2 :sha256 "52bd297ffe582b1e261e1454fd8dff98e5cb37c8556efe67f53bbef3f60e7513"}
+   :coordinator-tail {:bytes 938 :lines 1 :sha256 "7db380ef14d4a34b67212e15f40279de24a48e7b8e0884662e6a6a3409d16bbd"}
+   :exact-tail-line-overlap-count 0 :combined-bytes 259433}]
+ :union-assessment
+ {:mechanism "One-command git -c merge.default=union merge-tree --write-tree; no persistent config, attributes, index or working-tree writes."
+  :same-exact-histories-tested true
+  :repair-first
+  {:exit 0 :tree "627c19aed2f703f9060ac639273d62be85f8ffa4"
+   :all-three-ledger-bytes-exactly :base-then-repair-tail-then-coordinator-tail
+   :conflict-markers false
+   :receipt-sha256 "59bd8ed06becb09c5de0485f57e049886e7ec278926ed100a21301f1868a2fb1"
+   :preserves-full-repair-ledger-prefix true
+   :preserves-full-coordinator-ledger-prefix false}
+  :coordinator-first
+  {:exit 0 :tree "371345b470645ff1499039d3ee703eb5fcc6078d"
+   :all-three-ledger-bytes-exactly :base-then-coordinator-tail-then-repair-tail
+   :conflict-markers false
+   :receipt-sha256 "719f6695e26a079a52409bcf2d1d13072d96d66887f82a7e0095b29d92883b6a"
+   :preserves-full-coordinator-ledger-prefix true
+   :preserves-full-repair-ledger-prefix false}
+  :preservation "Both tested results retain the exact common historical prefix, every byte of both branch suffixes, their multiplicity and each branch's internal order. No title/UUID/embedding deduplication, timestamp sort, EDN reserialization, event mutation or semantic board operation was performed. Line-overlap counting was only a byte-custody observation; it does not validate Rheos identity or semantics."
+  :limitation "A clean union is not a passing receipt-history gate. Because the two full parent ledgers diverge after the common prefix, no single linear file can preserve BOTH complete parent blobs as prefixes. Do not claim that it does. Original parent blobs and event bytes remain immutable in Git; cross-branch physical order must be explicit."
+  :gate-relevant-source
+  {:committed-readme "f3b039c:README.md:138-148"
+   :rule "Immutable review requires the full trusted-base ledger as an exact byte prefix. Secure append separately checks the current committed HEAD prefix before effects."
+   :committed-workflow "f3b039c:.github/workflows/eta-mu-review.yml:32"
+   :gate "verify-receipts --base ${PR_BASE_SHA} --at ${PR_HEAD_SHA}"
+   :implication "For PR52 targeting the coordinator branch, preserve the final coordinator ledger as the full prefix: coordinator-first bytes, not a blind repair-first union. Only byte-prefix eligibility is previewed here; existing canonical receipt validation still must run on the final merge candidate."
+   :if-policy-requires-both-parent-prefixes "Stop and record that incompatible requirement for owner adjudication; do not drop, duplicate, rewrite or silently reorder events to fake compliance."}}
+ :minimal-additive-merge-plan
+ ["Wait only for the repair worker's own committed GREEN handoff and the coordinator's corrected published commit, as directed. Do not inspect or interfere with its uncommitted implementation. This report does not resume hosted review waits."
+  "Pin those two final full SHAs and their actual merge base; repeat object-only merge-tree, inspect every newly reported conflict, and recheck exact committed ledger prefixes and suffix custody. This historical clean-union preview cannot qualify future heads."
+  "Use one ordinary additive merge commit through the coordinator's authorized integration path after GREEN. Preserve both committed ancestries; do not rebase, amend, cherry-pick away history or change branches here."
+  "For only the three proven append/append ledger conflicts, retain final coordinator bytes as the trusted full prefix, then append the repair-only committed suffix intact and in branch order. If histories no longer share the proven prefix or tails overlap differently, stop and inspect exact bytes rather than applying this formula blindly."
+  "Keep receipt, Rheos and memory records unchanged, including historical failures and duplicate-looking records. Do not sort, reconstruct, dedupe by title, select ours/theirs, migrate ledgers, add a global union attribute or introduce a second Rheos validator. Native Rheos remains the sole board authority."
+  "Verify the actual merged candidate using the existing canonical owners/gates after the committed buffer repair, preserving the correct trusted PR base. Run the worker's GREEN tests/lint and ordinary integration gates; a union exit0 is not their substitute. Any new receipt must use the resulting committed HEAD through the existing secure-append owner, never by rewriting the merged history."]
+ :concrete-safety-checklist
+ [{:check :worker-green-and-coordinator-publication :state :pending-owner-handoff}
+  {:check :pin-final-heads-and-recompute-merge-base :state :required-after-handoff}
+  {:check :both-ancestries-retained :state :required-on-actual-merge}
+  {:check :all-conflict-paths-reassessed :state :required-on-final-heads}
+  {:check :trusted-coordinator-full-prefix :state :required-on-actual-candidate}
+  {:check :both-tails-verbatim-with-multiplicity-and-internal-order :state :proved-only-for-recorded-heads}
+  {:check :no-event-rewrite-or-title-deduplication :state :required}
+  {:check :canonical-receipt-history-rheos-and-memory-owners :state :no-custom-validation-created}
+  {:check :actual-merge-tests-lint-and-gates :state :not-run-preview-only}
+  {:check :native-F52-writer-clarification :state :coordinator-owned-no-action-here}]
+ :reflection {:lesson "A byte-preserving union can still violate the PR trusted-base prefix when merge-side order is reversed. Compare exact committed histories and both orientations before declaring an append-only merge safe."
+              :separate-ledger-written false :spore-created false}}

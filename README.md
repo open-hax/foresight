@@ -57,7 +57,12 @@ empty or successfully installed module. Its development scaffold and epic map
 are described in [Oikos: a local-first workbench](docs/notes/oikos-local-first-workbench.md).
 
 ```sh
+# Full constellation: requires access to the private oikos submodule.
 git submodule update --init
+
+# Public-only consumers: initialize an explicit permitted subset.
+git submodule update --init -- eta-mu uxx
+
 nbb scripts/workspace.clj inventory
 ```
 

@@ -4,11 +4,11 @@ labels: "oikos, planning, local-first, task"
 dependency: []
 parent: "722906b7-77d7-4414-a976-23996f7533de"
 type: "task"
-write-id: "1793726847016-0.l217ob5loppkpwbt7t"
+write-id: "1793729401684-0.myk9wk0cw93l95fg4a"
 points: "5"
 title: "Oikos: Define isolated generation manifests and target render contracts"
 priority: "P1"
-status: "incoming"
+status: "in_progress"
 uuid: "07452a65-4a6a-4704-bf81-50408927dcc8"
 created_at: "2026-11-03T15:11:05.825Z"
 ---
@@ -17,7 +17,7 @@ created_at: "2026-11-03T15:11:05.825Z"
 
 ## Context
 
-Planning only for private open-hax/oikos at /home/err/spaces/foresight/oikos. Desktop is a local-first shared workbench. Initial incoming proposal; planning review is not complete. Creation authorizes no implementation, live configuration, deployment, inference, upload or spending. This focused slice belongs to Oikos: isolated generations and shx/Muse configuration boundaries.
+Private open-hax/oikos at /home/err/spaces/foresight/oikos is a local-first shared workbench. The original incoming proposal authorized no implementation. Following independent planning review and the user's explicit direction to proceed without waiting for hosted review queues, Rheos admitted this task to in_progress. The reviewed specification at 95dfbdb is the implementation input, not implementation proof. Work remains synthetic and sandbox/dev-only; installed configuration, live deployment, model/service changes, personal capture, uploads and spending remain held. This focused slice belongs to Oikos: isolated generations and shx/Muse configuration boundaries.
 
 ## Outcome
 
@@ -69,5 +69,7 @@ S1A remains prerequisite-free; its portable generation/target-render shapes and 
 Consensus planning correction v1: root incoming acceptance/verification now explicitly specifies s1a/config-isolation. See the corresponding named root subsections for the contract and concrete future positive/negative fixtures. Only the 12 consensus-remaining gaps in skeptics/reconciliation.edn are in scope; the 23 disputed findings receive no settlement/rejection here. All added scenarios are future acceptance requirements, not implemented or executed behavior. Existing dependency vectors, parent relationships, incoming status, historical events and prior correction text remain preserved. Synthetic sandbox/dev-only, zero-spend, existing-model and remote-publication holdbacks remain unchanged; no status advancement or execution permission.
 
 S1A scope correction from native Oikos PR1 findings4458124527/4458124541: initial acceptance is positive inert :oikos/profile-edn rendering plus explicit :adapter-unavailable rejection for the declared but unavailable :shell/bash-env capability. No owner-reviewed safe bash adapter exists; S1A must not depend on unassigned positive bash work or count a mock as that adapter. Positive bash qualification is an upstream shx-owned adapter/validator artifact consumed by S1B, not an extra hidden predecessor of S1A. S1A resolved-isolation/race tests cover evidence collection, normalized/resolved checks and inert render results under replacement; absence of writes is not proof of effect-time safety. Actual serialized write-boundary stale-identity rejection, anchored no-follow operations and observed write/rollback postconditions belong to S1B through the reviewed owner seam. This corrects future acceptance only; specification/implementation planning admission remains held.
+
+User direction on 2026-11-03 authorizes implementation admission using the completed independent adversarial planning reviews without waiting for hosted review cohorts. The parent-supplied reviewed 95dfbdb specification is planning input, not implementation evidence or fabricated native approval. This supersedes the earlier planning-admission hold for S1A only. Use the actual Rheos FSM and deterministic gates; preserve synthetic sandbox/dev-only, isolated agent-owned resources, no personal capture, no model/service changes, zero-spend and remote-publication holdbacks. No implementation has been performed by this admission operation.
 
 ---
