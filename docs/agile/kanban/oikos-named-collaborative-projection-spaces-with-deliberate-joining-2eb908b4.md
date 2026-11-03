@@ -1,13 +1,13 @@
 ---
-uuid: "ff5998a4-2cd6-482c-a43e-94522eb908b4"
-title: "Oikos: named collaborative projection spaces with deliberate joining"
-status: "incoming"
-type: "epic"
-priority: "P1"
+category: "kanban"
 labels: "oikos, planning, local-first, epic"
 dependency: ["3b9279b5-aafd-431a-90a9-128ce4415de0"]
-category: "kanban"
-write-id: "1793718667434-0.l1qj71v5fqnc70o9po"
+type: "epic"
+write-id: "1793724133093-0.43f6o478c4xyt2qyfvj"
+title: "Oikos: named collaborative projection spaces with deliberate joining"
+priority: "P1"
+status: "incoming"
+uuid: "ff5998a4-2cd6-482c-a43e-94522eb908b4"
 created_at: "2026-11-03T15:11:07.434Z"
 ---
 
@@ -37,7 +37,7 @@ No native i3 duplicate-window illusion, hidden-workspace security isolation guar
 
 ## Verification
 
-Pure CLJC branch/membership tests plus sandbox i3 scenarios for concurrent proposals, focus preservation, lease expiry and unsuccessful return. These are future acceptance checks, not executed implementation evidence.
+Pure CLJC branch/membership tests plus sandbox i3 scenarios for concurrent proposals, focus preservation, lease expiry and unsuccessful return. Denied ownership admission and stale revisions must yield explicit denials/conflicts with zero movement; accepted human join must yield an observed join/membership result, while declined join causes no movement. These are future acceptance checks, not executed implementation evidence.
 
 ## Risks
 
@@ -53,3 +53,8 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 ## Dependencies
 
 - 3b9279b5-aafd-431a-90a9-128ce4415de0 (E2)
+
+---
+Native review 5755016882 item cr-comment:v1:5a08a09292697bdfbfc79de8: verification now explicitly covers denied admission and stale revision with zero movement, plus accepted human join with observed membership. Branch lifetime laws belong to Oikos; parent grouping is not a child execution gate. All checks stated here are future acceptance requirements, not executed implementation results. Earlier dependency prose in historical comments is superseded by this correction for current execution edges; historical event/comment bytes remain unchanged. Policy correction — sandbox/dev and synthetic data only; no personal capture. Default raw retention is 24h images and 7d text; propagate deletion to derived/retrieval payloads, with explicit consent for accepted knowledge. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Existing models only; 12B download/load/restart is held. Any cloud experiment is synthetic, GovOne-authorized, verified free and 0 spend only; no allocation or inherited pilot budget. Remote publication remains held. Qualified program merges are authorized only after their required gates; this is not a readiness override, implementation permission or native review approval.
+
+---

@@ -1,13 +1,13 @@
 ---
-uuid: "3de19b00-adae-43e6-a6c4-da339faa6482"
-title: "Oikos: consented labels and bounded Colab training corpus"
-status: "incoming"
-type: "epic"
-priority: "P1"
-labels: "oikos, planning, local-first, epic"
-dependency: ["3b9279b5-aafd-431a-90a9-128ce4415de0", "92b529b9-256d-4654-8aa6-5f1884a8adaa", "e616187d-ba13-42b1-addd-aa4d6244a5be", "e842e6d9-dd41-4ca2-b229-dc2466198864"]
 category: "kanban"
-write-id: "1793718672216-0.46te7656w8aij491bd2"
+labels: "oikos, planning, local-first, epic"
+dependency: ["3b9279b5-aafd-431a-90a9-128ce4415de0", "92b529b9-256d-4654-8aa6-5f1884a8adaa", "e616187d-ba13-42b1-addd-aa4d6244a5be", "0db50b53-6c7a-489a-bff9-048d57ce4cbb"]
+type: "epic"
+write-id: "1793724128468-0.ry67s2flkhplaiq3i1z"
+title: "Oikos: consented labels and bounded Colab training corpus"
+priority: "P1"
+status: "incoming"
+uuid: "3de19b00-adae-43e6-a6c4-da339faa6482"
 created_at: "2026-11-03T15:11:12.216Z"
 ---
 
@@ -37,7 +37,7 @@ No new compute-unit spending, automatic training, automatic production adoption,
 
 ## Verification
 
-Synthetic correction/dedupe/split/export tests; deny export without consent/policy/approval; dry-run budget/teardown proofs only and zero new allocation. These are future acceptance checks, not executed implementation evidence.
+Synthetic correction/dedupe/split/export tests; deny export without consent/policy/approval, with a reused historical pilot budget, missing fresh campaign budget, missing resource-bound proof or uncertain teardown. Dry-run budget/resource/teardown proofs only and zero new allocation; historical pilot authority never transfers. These are future acceptance checks, not executed implementation evidence.
 
 ## Risks
 
@@ -54,5 +54,10 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 - 3b9279b5-aafd-431a-90a9-128ce4415de0 (E2)
 - 92b529b9-256d-4654-8aa6-5f1884a8adaa (E5)
 - e616187d-ba13-42b1-addd-aa4d6244a5be (E6)
-- e842e6d9-dd41-4ca2-b229-dc2466198864 (E7)
+- 0db50b53-6c7a-489a-bff9-048d57ce4cbb (S7A): local baseline only, not optional S7B/cloud/12B comparison completion. These parent entries summarize intent; child execution gates are the concrete artifact edges on S8A/S8B, never implicit whole-parent prerequisites.
 - Related research (not inherited budget or completion authority): qualify-the-bounded-colab-gemma-retrieval-research-pilot-and-retain-production-holdback; parent da84a64d-f118-4722-8709-a1c556034f90.
+
+---
+Native findings 4456846195/4456856448: E8 replaces whole E7 with S7A baseline in native dependencies/root prose, so optional S7B cannot block local corpus work. Children use precise producer artifacts. Verification explicitly denies reused historical pilot budgets and missing resource-bound proof. S8A family/correction lineage stays in one split; S8B export is separately governed and zero-spend. All checks stated here are future acceptance requirements, not executed implementation results. Earlier dependency prose in historical comments is superseded by this correction for current execution edges; historical event/comment bytes remain unchanged. Policy correction — sandbox/dev and synthetic data only; no personal capture. Default raw retention is 24h images and 7d text; propagate deletion to derived/retrieval payloads, with explicit consent for accepted knowledge. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Existing models only; 12B download/load/restart is held. Any cloud experiment is synthetic, GovOne-authorized, verified free and 0 spend only; no allocation or inherited pilot budget. Remote publication remains held. Qualified program merges are authorized only after their required gates; this is not a readiness override, implementation permission or native review approval.
+
+---

@@ -49,9 +49,10 @@ Muse compiles client exposure. shx shell IR is not assumed to parse arbitrary
 Emacs/i3/systemd files without owning target adapters.
 
 The full design and measured smoke live in the private child:
-[`oikos/docs/architecture/workbench.md`](../../oikos/docs/architecture/workbench.md)
-and [`oikos/docs/research/perception-smoke-2026-11-03.md`](../../oikos/docs/research/perception-smoke-2026-11-03.md).
-These links require the private submodule checkout.
+[`oikos/docs/architecture/workbench.md`](https://github.com/open-hax/oikos/blob/ae35073719974c0df1d2dae301c2179fa4785641/docs/architecture/workbench.md)
+and [`oikos/docs/research/perception-smoke-2026-11-03.md`](https://github.com/open-hax/oikos/blob/ae35073719974c0df1d2dae301c2179fa4785641/docs/research/perception-smoke-2026-11-03.md).
+These links pin the private child revision and require repository access; GitHub
+does not resolve ordinary relative file links through the submodule gitlink.
 
 ## Epic map
 

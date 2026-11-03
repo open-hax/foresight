@@ -1,0 +1,20 @@
+{:task :s1a :uuid "07452a65-4a6a-4704-bf81-50408927dcc8"
+ :scope :preparatory-specification-only
+ :local-assessor-session "ses_e5d9fa9fbffewcX0s64krmWdY8"
+ :spec-sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+ :commit "95dfbdb26f65fac8b17bcb11cd192ba47d8efe3c"
+ :pull-request "https://github.com/open-hax/oikos/pull/1"
+ :local-verdict :approve-scoped-specification
+ :native-findings
+ [{:thread "PRRT_kwDOVhh8dc6zP1cB" :root-comment 4458124527
+   :fix "Initial S1A acceptance is positive inert EDN plus truthful unavailable-Bash rejection. Positive Bash owner artifacts are consumed by S1B; no hidden S1A predecessor or mock pass."
+   :native-settlement :fixed-and-resolved}
+  {:thread "PRRT_kwDOVhh8dc6zP1cI" :root-comment 4458124541
+   :fix "S1A tests collection/resolved checks/inert-result freshness; working effect-edge stale identity and anchored serialized write proof remain S1B."
+   :native-settlement :fixed-and-resolved}]
+ :prior-local-fixes-preserved [:resolved-isolation :canonical-byte-goldens :artifact-bijection]
+ :coordinator-source-hash-verified true
+ :source-pushed true
+ :new-codex-planning-request "https://github.com/open-hax/oikos/pull/1#issuecomment-6610981689"
+ :coderabbit-new-request :not-sent-rate-limited-operator-attention
+ :native-approval false :planning-admission false :implementation-completion false}

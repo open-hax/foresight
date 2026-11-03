@@ -4,7 +4,7 @@ labels: "oikos, planning, local-first, task"
 dependency: []
 parent: "722906b7-77d7-4414-a976-23996f7533de"
 type: "task"
-write-id: "1793718990977-0.0ffffm0ykr7bwtplvfuh"
+write-id: "1793726847016-0.l217ob5loppkpwbt7t"
 points: "5"
 title: "Oikos: Define isolated generation manifests and target render contracts"
 priority: "P1"
@@ -36,6 +36,12 @@ No blanket config migration, generic supervisor replacement, secret material in 
 - [ ] Manifest separates dev/installed binary, artifact, state, socket and port namespaces and rejects collisions.
 - [ ] Rendered fixtures use env secret references only; unsupported target formats fail explicitly; Muse is only tool compatibility.
 
+### S1A config isolation
+
+- [ ] Explicit manifest bindings include configuration roots and every rendered destination as well as binary/artifact/state/cache/socket/port resources. Development and installed resources must be disjoint, including normalized aliases, resolved symlink aliases and ancestor/descendant overlaps; missing or unresolved ownership/destination bindings deny before target I/O. No implicit HOME/XDG default may select installed configuration.
+
+Future verification: shared BB/NBB law fixtures with synthetic HOME/XDG accept distinct owned roots/destinations and reject equal paths, dot/parent normalization aliases, resolved symlink aliases and ancestor overlaps across every resource kind. Positive fixtures retain disjoint resolved destinations; negative fixtures assert zero target reads/writes and preserve installed sentinels. These are future acceptance checks, not implementation evidence.
+
 ## Verification
 
 Table/property tests exercise path/port collisions, missing env refs and unsupported targets; fixture diff proves installed configuration untouched. These are future acceptance checks, not executed implementation evidence.
@@ -57,5 +63,11 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 
 ---
 Planning correction supplements and supersedes any single-runtime-only interpretation of shared-law verification. Acceptance requires the same shared CLJC law fixtures to pass in both Babashka (BB) and NBB, with fixture identity and each runtime's actual result retained. Explicit BB subprocess protocol tests must cover EDN framing, success and nonzero exits, malformed/truncated output, timeout and cancellation, including bounded termination/cleanup and truthful error propagation. No malformed output, timeout or cancelled child may be accepted as a successful rendered result. Cross-runtime law parity and subprocess protocol behavior are separate required checks; neither substitutes for the other. These are future acceptance/verification requirements, not tests run or completed implementation in this planning turn.
+
+S1A remains prerequisite-free; its portable generation/target-render shapes and isolated fixture identity precede adapters. Existing BB/NBB law parity and BB subprocess protocol checks remain required, not executed. Current native child prerequisites synchronized to the user-approved precise plan: none (S1A is prerequisite-free). Parent relationship is preserved and is not an implicit gating edge. All checks stated here are future acceptance requirements, not executed implementation results. Earlier dependency prose in historical comments is superseded by this correction for current execution edges; historical event/comment bytes remain unchanged. Policy correction — sandbox/dev and synthetic data only; no personal capture. Default raw retention is 24h images and 7d text; propagate deletion to derived/retrieval payloads, with explicit consent for accepted knowledge. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Existing models only; 12B download/load/restart is held. Any cloud experiment is synthetic, GovOne-authorized, verified free and 0 spend only; no allocation or inherited pilot budget. Remote publication remains held. Qualified program merges are authorized only after their required gates; this is not a readiness override, implementation permission or native review approval.
+
+Consensus planning correction v1: root incoming acceptance/verification now explicitly specifies s1a/config-isolation. See the corresponding named root subsections for the contract and concrete future positive/negative fixtures. Only the 12 consensus-remaining gaps in skeptics/reconciliation.edn are in scope; the 23 disputed findings receive no settlement/rejection here. All added scenarios are future acceptance requirements, not implemented or executed behavior. Existing dependency vectors, parent relationships, incoming status, historical events and prior correction text remain preserved. Synthetic sandbox/dev-only, zero-spend, existing-model and remote-publication holdbacks remain unchanged; no status advancement or execution permission.
+
+S1A scope correction from native Oikos PR1 findings4458124527/4458124541: initial acceptance is positive inert :oikos/profile-edn rendering plus explicit :adapter-unavailable rejection for the declared but unavailable :shell/bash-env capability. No owner-reviewed safe bash adapter exists; S1A must not depend on unassigned positive bash work or count a mock as that adapter. Positive bash qualification is an upstream shx-owned adapter/validator artifact consumed by S1B, not an extra hidden predecessor of S1A. S1A resolved-isolation/race tests cover evidence collection, normalized/resolved checks and inert render results under replacement; absence of writes is not proof of effect-time safety. Actual serialized write-boundary stale-identity rejection, anchored no-follow operations and observed write/rollback postconditions belong to S1B through the reviewed owner seam. This corrects future acceptance only; specification/implementation planning admission remains held.
 
 ---

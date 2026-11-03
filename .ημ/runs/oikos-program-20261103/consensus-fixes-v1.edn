@@ -1,0 +1,67 @@
+{:fix-map/version 1
+ :scope :incoming-planning-contracts-only
+ :source ".ημ/runs/oikos-program-20261103/skeptics/reconciliation.edn"
+ :authority "Records authored acceptance and concrete future verification, not implementation, settlement, native approval or board authority. The 23 disputed findings are untouched by this correction scope."
+ :config "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+ :cards
+ {:s1a "docs/agile/kanban/oikos-define-isolated-generation-manifests-and-target-render-contracts-8927dcc8.md"
+  :s2a "docs/agile/kanban/oikos-admit-desktop-causal-events-through-clio-and-replay-edn-projections-bb5e8203.md"
+  :s2b "docs/agile/kanban/oikos-reconcile-i3-subscribe-snapshot-races-and-reconnect-revisions-42935ec3.md"
+  :s3b "docs/agile/kanban/oikos-admit-sandbox-runtime-workspaces-with-leases-and-deliberate-human-joining-43e11d9a.md"
+  :s4a "docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+  :s5a "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+  :s5b "docs/agile/kanban/oikos-project-epistemic-knowledge-with-retention-forgetting-and-stop-controls-ca60db91.md"
+  :s6b "docs/agile/kanban/oikos-expose-scoped-knoxx-lens-policy-evidence-and-complete-gateway-history-8ec26002.md"
+  :s8a "docs/agile/kanban/oikos-record-consented-corrected-labels-and-leakage-safe-corpus-partitions-0d3ebf42.md"
+  :s8b "docs/agile/kanban/oikos-prepare-govone-approved-reproducible-colab-exports-with-spending-holdback-ffe21376.md"
+  :e1 "docs/agile/kanban/oikos-isolated-generations-and-shx-muse-configuration-boundaries-6f7533de.md"
+  :e2 "docs/agile/kanban/oikos-clio-desktop-journal-and-causal-edn-projections-e4415de0.md"
+  :e5 "docs/agile/kanban/oikos-continuous-local-perception-and-event-backed-knowledge-84a8adaa.md"}
+ :fixes
+ [{:id :s1a/config-isolation :card :s1a :anchor "s1a-config-isolation" :line 39
+   :contract "Explicit config roots/render destinations and all resource aliases/ancestor overlap; synthetic positive and normalized/resolved negative fixtures."}
+  {:id :s2a/coverage-gap :card :s2a :anchor "s2a-coverage-gap" :line 39
+   :contract "Pure coverage/currentness transitions preserve missing intermediates; missing persisted Clio history/causes still fail canonicalization."}
+  {:id :s2b/snapshot-cut :card :s2b :anchor "s2b-snapshot-cut" :line 39
+   :contract "Acknowledged subscription and justified event-stream fence; late earlier events, unmatched nonce/reply, timeout and continual change stay uncertain."}
+  {:id :s2b/freshness-vs-history :card :s2b :anchor "s2b-freshness-vs-history" :line 45
+   :contract "Independent freshness/completeness; queue/coverage gaps; future actual nested synthetic i3 with independent normalized GET_TREE oracle at controlled cut."}
+  {:id :s3b/consent-and-return :card :s3b :anchor "s3b-consent-and-return" :line 39
+   :contract "Exact target/consequences/revision/lease consent, consumed/invalidated; zero-effect decline/cancel and human-navigation supersession; missing/reused return target fails."}
+  {:id :s4a/editor-revision :card :s4a :anchor "s4a-editor-revision" :line 39
+   :contract "Server epoch, actual buffer incarnation/modification revision, actor and exact operation arguments revalidated inside fixed trusted dispatcher."}
+  {:id :s5a/stop-barrier :card :s5a :anchor "s5a-stop-barrier" :line 41
+   :contract "Permission-generation capture/dispatch/publication gates, pre-capture exclusions, bounded stop acknowledgement and no late-reply/reconnect resurrection."}
+  {:id :s5a/index-isolation :card :s5a :anchor "s5a-index-isolation" :line 47
+   :contract "Explicit owned development cache/project/label/read/write/delete bindings; deny missing/colliding bindings before any I/O; installed/dev sentinel and read-spy fixtures."}
+  {:id :s5b/safe-ledger :card :s5b :anchor "s5b-safe-ledger" :line 39
+   :contract "Closed reviewed immutable-metadata allowlist/deletable references via Clio; classify hashes/IDs; secret-marker denial and safe causal replay after erase; explicit per-item expiry/consented indefinite memory with unchanged raw defaults."}
+  {:id :s6b/rehydration-deletion :card :s6b :anchor "s6b-rehydration-deletion" :line 39
+   :contract "Fresh exact session/response/channel delivery; HTTP200 denial; masked audit, six owning unmask gates, safe terminal provenance and actual copy erasure remain distinct; marker tests after expiry/revocation/replay/deletion."}
+  {:id :s8a/consent-admission :card :s8a :anchor "s8a-consent-admission" :line 39
+   :contract "Source/item/purpose consent before retention/use; absent/wrong/revoked denial; predictions/action acceptance grant no human gold, retention, training or export rights."}
+  {:id :s8b/artifact-admission :card :s8b :anchor "s8b-artifact-admission" :line 40
+   :contract "Human cloud consent and authoritative GovOne release bind final bytes/purpose/recipient; unsupported shape/sink held; changed/revoked/wrong-purpose denial has zero transport."}]
+ :propagation
+ [{:id :s1a/config-isolation :cards [:e1] :anchor "acceptance-criteria"}
+  {:id :s5b/safe-ledger :cards [:s2a :s5a :e2 :e5] :anchor "acceptance-criteria"}]
+ :verification
+ {:official-read-task {:affected-cards 13 :exit 0
+                       :semantic-frontmatter-dependencies-preserved true
+                       :rheos-managed-write-id-updated true
+                       :prior-comment-content-preserved true
+                       :readbacks "/tmp/opencode/oikos-consensus-after/"}
+  :official-read-board {:exit 0 :oikos-incoming 24
+                        :readback "/tmp/opencode/oikos-consensus-board.json"}
+  :ledger {:historical-prefix-bytes 357678
+           :historical-prefix-sha256 "43232f1a34c8e3f37e236f1a39053e4bbb2da8dfe192fd634401facdd0fa337d"
+           :exact-prefix-preserved true :official-comment-events-appended 13}
+  :diff-check :pass
+  :markdown-links {:new-links 0 :all-fix-anchors-checked true}
+  :workspace-tests {:command "nbb -cp scripts:test test/workspace_test.cljs"
+                    :tests 24 :assertions 122 :failures 0 :errors 0}
+  :lint {:command "clj-kondo --lint scripts test" :errors 0 :warnings 0}}
+ :implementation-verified false
+ :native-provider-approval false
+ :status-advancement false
+ :reflection "Keep consensus contract authoring distinct from disputed findings and implementation evidence; preserve semantic frontmatter and historical bytes while Rheos updates its own write identity. No out-of-scope receipt/spore writes."}

@@ -1,0 +1,8 @@
+{:decision/id :oikos/accepted-memory-retention
+ :decision/source :question-tool
+ :decision/selection "Per-item expiry (Recommended)"
+ :decision/rule "Retention consent must name an expiry or explicitly choose indefinite retention for that item. Accepting a claim alone extends no deadline; raw sources still expire."
+ :decision/scope :oikos-program
+ :decision/implicit-training-export-permission false
+ :decision/raw-image-default-hours 24
+ :decision/text-default-days 7}

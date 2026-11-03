@@ -1,0 +1,230 @@
+{:artifact/type :oikos/native-planning-disposition-rebinding
+ :artifact/version 2
+ :epistemic/tier :derived
+ :observation-started-at "2026-11-03T17:29:46Z"
+ :predecessor {:path ".ημ/runs/oikos-program-20261103/native-dispositions-v1.edn"
+               :sha256 "cfb0123e492ea1b1a2aaa7b887f1928d9842e7ca4d9f05961ba66aaa1bad5924"
+               :relationship :bounded-source-rebinding
+               :immutable true}
+ :scope {:repository "open-hax/foresight"
+         :pull-request 153
+         :root "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+         :local-head "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+         :assessed-revision :dirty-working-tree
+         :thread-count 16
+         :review-body-item-count 2
+         :new-review false
+         :native-source "Exactly v1's original root IDs/bodies/hashes and two review5755016882 item IDs; v1 supplies their immutable native provenance."
+         :native-refreshed false
+         :native-refresh-note "No GitHub/API calls in this rebinding. Do not interpret v1's historical unresolved-thread observation as a new native-state check. Main owns final-head/native-context refresh before settlement."
+         :not-assessed "No new native Oikos PR1 findings, consensus/disputed local candidates, upstream API capabilities, implementation behavior or approval/readiness. Later card clarifications are checked only for preservation of the original 18 requirements."
+         :allowed-write "Only this new v2 derived artifact; v1, source/cards, history/ledgers and GitHub remain untouched."
+         :permission-boundary "No model invocation, service operation, personal-data operation, new API audit, request/reply/resolve, commit or push."}
+ :method {:baseline "Read v1's complete EDN data, native dispositions, fix requirements and file hashes."
+          :comparison "Hashed all 24 bound cards and the note. Re-read the 15 changed cards against the same original finding requirements; the 10 unchanged file hashes retain v1's exact source bytes. Rebound evidence to current line numbers."
+          :changed-files [:e1 :e2 :e5 :s1a :s1b :s2a :s2b :s3a :s3b :s4a :s5a :s5b :s6b :s8a :s8b]
+          :unchanged-files [:e3 :e4 :e6 :e7 :e8 :note :s4b :s6a :s7a :s7b]
+          :changed-file-count 15
+          :unchanged-file-count 10
+          :concurrent-delta-check "Final hash checks detected additional S3A branch-predecessor, S5A supplier-accounting and S6B Lens-hold clarifications appended during rebinding. Re-read those bounded deltas only; the original native contracts remain intact. No new finding/review or upstream API judgment is issued."
+          :limitation "The previous turn's managed terminal capture had expired; no exact old-text diff was claimed. The durable v1 hashes/requirements plus current source reads and exact ledger-prefix comparisons supply this bounded rebinding."
+          :tests "Read-only source/derived-artifact integrity checks only; no implementation or sandbox tests and no Rheos board validation."}
+ :file-bindings
+ {:e1 {:path "docs/agile/kanban/oikos-isolated-generations-and-shx-muse-configuration-boundaries-6f7533de.md"
+       :sha256 "182b86e91c8392d05bf5d2341476e6130283f5749f2f4d6a7a8b139121f86342"}
+  :e2 {:path "docs/agile/kanban/oikos-clio-desktop-journal-and-causal-edn-projections-e4415de0.md"
+       :sha256 "429ab32bfd35cf8e3fdc4dc8f535d3ea4bee44f85e83ff4413c7624187d75511"}
+  :e3 {:path "docs/agile/kanban/oikos-named-collaborative-projection-spaces-with-deliberate-joining-2eb908b4.md"
+       :sha256 "8d108491138f0b9f4c216301024e9f04aef32e5efaf5cca9fa0c8227e8e51d50"}
+  :e4 {:path "docs/agile/kanban/oikos-shared-muse-i3-and-existing-emacs-capabilities-across-clients-e0a3251a.md"
+       :sha256 "ebb52c1277bdfd3b4176704dce81764ce76cb2c4b9684bb57cf9a82a4917e33d"}
+  :e5 {:path "docs/agile/kanban/oikos-continuous-local-perception-and-event-backed-knowledge-84a8adaa.md"
+       :sha256 "05c1e9668bea9b6f9fbf1274d7979e2047074ad0858b8de693c4be588b164fa0"}
+  :e6 {:path "docs/agile/kanban/oikos-govone-egress-admission-and-knoxx-lens-evidence-6244a5be.md"
+       :sha256 "37ea233c3053ce9c212e9bbd2085fe3037219817587334fc5a20bac7c9fcaa5a"}
+  :e7 {:path "docs/agile/kanban/oikos-empirical-local-gemma-and-ocr-qualification-66198864.md"
+       :sha256 "5a0dfa71d243f72f95eca7cb6c99d6699649ceca7cb46c1a01f64a827c9dda28"}
+  :e8 {:path "docs/agile/kanban/oikos-consented-labels-and-bounded-colab-training-corpus-9faa6482.md"
+       :sha256 "7acc5773895bcdfe2762169f83ff4f3f87426bf5265ec124e80a894c0a0b6bc6"}
+  :note {:path "docs/notes/oikos-local-first-workbench.md"
+         :sha256 "f15ffd991f469dbc78e6966fc46c3297fe3a06296f2f393bcbda33657aad92dc"}
+  :s1a {:path "docs/agile/kanban/oikos-define-isolated-generation-manifests-and-target-render-contracts-8927dcc8.md"
+        :sha256 "06cdfd0eaf6697c3e7701f03c1afbbf6081b52fcb183a95e00b6991b905dc215"}
+  :s1b {:path "docs/agile/kanban/oikos-implement-preview-check-apply-rollback-through-services-owned-generations-86925c3c.md"
+        :sha256 "0df5b61f34ac1a86dd385037ff9669cbfb5435d2d05eacadbd207d9204865601"}
+  :s2a {:path "docs/agile/kanban/oikos-admit-desktop-causal-events-through-clio-and-replay-edn-projections-bb5e8203.md"
+        :sha256 "433ce75a5c15890df9c58ef35d7c26f9835c40fc85ac4225255e95057c65d3c5"}
+  :s2b {:path "docs/agile/kanban/oikos-reconcile-i3-subscribe-snapshot-races-and-reconnect-revisions-42935ec3.md"
+        :sha256 "3f0631cb83028eeeb770c43f1ac09176ffc6aae2672d951095b08e217e5d3e0c"}
+  :s3a {:path "docs/agile/kanban/oikos-implement-logical-memberships-and-speculative-edn-projection-branches-2549ba0d.md"
+        :sha256 "ba8027560024c37a1bdb7161e2e5137fcfe71a4c1404284275701a1ebff054c0"}
+  :s3b {:path "docs/agile/kanban/oikos-admit-sandbox-runtime-workspaces-with-leases-and-deliberate-human-joining-43e11d9a.md"
+        :sha256 "8a1dcdc134c03d5907b3d5a7cb23b977f70d8c1f94c380ef5ef57af48cf875a7"}
+  :s4a {:path "docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+        :sha256 "91a1f7e85932f7d204933d2ab2c5013f261acf78193ab73cf37133223b982984"}
+  :s4b {:path "docs/agile/kanban/oikos-qualify-client-adapter-matrix-without-duplicating-domain-contracts-5ec2aaf3.md"
+        :sha256 "0891ab93e003e83e3aa8482210b1db1c219123b23537f4c3a863cbcd03a42ada"}
+  :s5a {:path "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+        :sha256 "1face79902502bc3eba67310751f40c5c024302eb1c309d3cac4868eec905ed6"}
+  :s5b {:path "docs/agile/kanban/oikos-project-epistemic-knowledge-with-retention-forgetting-and-stop-controls-ca60db91.md"
+        :sha256 "0551fe929e638b58659000a5c3c92b49dea105b278cce2841e64f91c9223824a"}
+  :s6a {:path "docs/agile/kanban/oikos-bind-all-egress-paths-to-the-mojomast-govone-policy-session-37b28c9b.md"
+        :sha256 "af2ccade1920ca174d03678e29e2833f0cbb0956c50dc5f9d406d397ca45a62f"}
+  :s6b {:path "docs/agile/kanban/oikos-expose-scoped-knoxx-lens-policy-evidence-and-complete-gateway-history-8ec26002.md"
+        :sha256 "82162bde2df57c129073c4d1829cbad0971e799d5042d5e85942877079a747f0"}
+  :s7a {:path "docs/agile/kanban/oikos-freeze-synthetic-local-gemma-ocr-baseline-and-runtime-identity-probes-57ce4cbb.md"
+        :sha256 "b8c8ebae894423176070dbfbaf6cca9755bc126532f98f167dc7a8d0dcb45d85"}
+  :s7b {:path "docs/agile/kanban/oikos-qualify-12b-backends-and-governed-proxx-comparison-after-admission-aeb279c3.md"
+        :sha256 "7bcf72aebaa4a5638c02ba9bef7ca3214684a475a7974c8dd1224118922115da"}
+  :s8a {:path "docs/agile/kanban/oikos-record-consented-corrected-labels-and-leakage-safe-corpus-partitions-0d3ebf42.md"
+        :sha256 "6d98d223d4e69a82818773331bd13797b526d3f5792859590f5cdad43d06779c"}
+  :s8b {:path "docs/agile/kanban/oikos-prepare-govone-approved-reproducible-colab-exports-with-spending-holdback-ffe21376.md"
+        :sha256 "fef9739fd3dcef6752f6057f8b3cdfecad0cc108b3f35ff477dc8423cd7303a5"}}
+ :ledger-rebinding
+ {:path ".ημ/kanban-events/ledger.edn"
+  :current-bytes 380034
+  :current-lines 365
+  :sha256 "4c2a70c5ded21736fcef51e1179013e1376499adb0bc495a67543a693b66bc3c"
+  :v1-prefix-bytes 357678
+  :v1-prefix-sha256 "43232f1a34c8e3f37e236f1a39053e4bbb2da8dfe192fd634401facdd0fa337d"
+  :v1-prefix-preserved true
+  :original-prefix-bytes 301675
+  :original-prefix-sha256 "292fa2070657ad3d768376e707f80b1db00d930ee08076979a7a272cc0109624"
+  :original-prefix-preserved true
+  :new-comment-lines [347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365]
+  :interpretation "The 13 later consensus comments, three scope comments and three concurrently appended adjudication clarifications append to the exact v1 ledger. Earlier creation/correction events and native-fix correction events remain unchanged; no history rewrite is required. This is byte custody, not Rheos board validation."
+  :scope-comment-events [{:line 360 :event/id "kanban-07452a65-4a6a-4704-bf81-50408927dcc8-1793726847018" :card :s1a}
+                         {:line 361 :event/id "kanban-3d14e0a5-2790-42b8-9a55-54d686925c3c-1793726847574" :card :s1b}
+                         {:line 362 :event/id "kanban-722906b7-77d7-4414-a976-23996f7533de-1793726848125" :card :e1}]}
+ :scope-clarification
+ {:evidence [{:file :s1a :lines [41 43 65 71]}
+             {:file :s1b :lines [28 36 37 38 42 63]}
+             {:file :e1 :lines [34 37 41 63]}]
+  :s1a "The bounded root contract is portable isolation/identity and positive inert :oikos/profile-edn rendering, with explicit :adapter-unavailable for unavailable :shell/bash-env. Positive bash is not an unassigned hidden S1A predecessor and a mock is not the actual adapter. S1A inert/no-write race checks establish no effect-time write safety."
+  :s1b "Positive bash qualification requires the actual reviewed shx-owned safe renderer and independently pinned positive validator. Non-vacuous effect-edge proof includes replacement of ancestor/destination/current selection after preview, serialized stale-evidence rejection before an otherwise working fixture write, positive admitted writes and observed rollback through the actual accepted Services handoff. No native check/eval substitute, second Oikos renderer or supervisor is authorized."
+  :owner-seam "No original Services handoff or reviewed shx adapter/validator is claimed provided. Missing upstream owner artifacts remain qualification blockers."
+  :settlement-impact "Only the two Services-related thread recommendations below need tighter scope wording. The other 16 recommendations retain v1's substance, with current anchors rebound here. Do not present new scope-comment findings as additional settlements of the original native inventory."}
+ :threads
+ [{:thread/id "PRRT_kwDOT3TWPM6zMzpM" :root-comment/id 4456846184
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :e2 :lines [26 41 59]}
+              {:file :s2a :lines [36 51 69]}
+              {:file :s2b :lines [37 53 71]}
+              {:file :s3a :lines [37 48]}]
+   :reason "Epoch/XID/incarnation, same-epoch reuse isolation and fail-closed uncertain reconnect requirements survive; later safe-reference and coverage-cut clauses do not relax identity or targeting."}
+  {:thread/id "PRRT_kwDOT3TWPM6zMzpT" :root-comment/id 4456846195
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :s8a :lines [4 61 62 63 64 68]}
+              {:file :e8 :lines [4 57 61]}
+              {:file :s7b :lines [4 57 68]}
+              {:file :s8b :lines [4 36 63]}]
+   :reason "S8A and E8 still use S7A rather than whole E7/S7B; concrete producer edges and GovOne admission survive. Later consent/final-artifact release clauses do not reintroduce optional comparison completion."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Id" :root-comment/id 4456856398
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :e2 :lines [26 41 59]}
+              {:file :s2a :lines [36 51 69]}
+              {:file :s2b :lines [37 53 71]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [275 330 335 340]}]
+   :reason "Original creation line 275 remains historical; appended lifetime corrections and current canonical requirements remain present. Both original and v1 ledger prefixes are exact, so no rewrite is recommended."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Ij" :root-comment/id 4456856407
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :e6 :lines [36 40 62]}
+              {:file :s6a :lines [41 65 67 69]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [300 342 343]}]
+   :reason "Unchanged E6/S6A bytes still permit only authenticated allowlisted local-service/loopback routes and deny unauthorized external/untrusted local routes. Historical line 300 and its appended parent correction are preserved."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Iv" :root-comment/id 4456856420
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :s5a :lines [36 65 96]}]
+   :reason "Separately attributed supplier/model facts may still have equal values; the explicit equal-text provenance fixture survives added stop/index/privacy clauses."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1I5" :root-comment/id 4456856431
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :s5a :lines [37 38 65 98]}
+              {:file :s2a :lines [51 69]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [325 346]}]
+   :reason "Capture event observation identity plus supplier/model identity/version and render/transform version remains canonical; exact redelivery, conflicting reuse, identical-byte recapture and changed-version cases survive. Isolated development bindings constrain destination authority, not dedupe identity."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1I8" :root-comment/id 4456856439
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :s3b :lines [36 41 43 47 67]}]
+   :reason "Explicit ownership admission, matching observed revision and unexpired scoped lease still gate movement. New exact-proposal/one-use consent and return clauses strengthen rather than replace these preconditions."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1JC" :root-comment/id 4456856448
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :e8 :lines [36 40 61]}
+              {:file :s8b :lines [37 42 44 48 67]}]
+   :reason "Both parent/child still explicitly deny reused pilot budgets and missing resource-bound proof, retaining other denials and zero allocation. Final-byte release/consent requirements add no budget waiver."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1JH" :root-comment/id 4456856458
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :e7 :lines [35 59 66]}
+              {:file :s7a :lines [36 42 68]}
+              {:file :note :lines [96 97 98 99 100]}]
+   :reason "All relevant files match v1 hashes; disappeared transient45265 remains dated history, not an active target without fresh identity/resource evidence."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1JM" :root-comment/id 4456856471
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :e6 :lines [36 40 62]}
+              {:file :s6a :lines [41 65 67 69]}]
+   :reason "Parent/child local_only definitions and separate permit/deny fixtures are byte-identical to v1; unrelated Lens deletion clarification supplies no alternate policy or egress permission."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1JU" :root-comment/id 4456856486
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :s3a :lines [37 38 42 44 48 66]}]
+   :reason "Original branch/base/proposed/observed identity, exact stale-revision EDN conflict, no branch/membership/history/desktop mutation and no silent rebase remain intact. The later independent branch-predecessor condition requires a distinct conflict, not replacement or weakening of the original observed-revision result."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Je" :root-comment/id 4456856497
+   :still-fixed true :scope :planning-contract :settlement-text-action :replace-v1-with-scope-tightening
+   :evidence [{:file :s1b :lines [28 36 37 38 42 63]}
+              {:file :s1a :lines [71]}
+              {:file :e1 :lines [37 63]}]
+   :reason "Every original safety-gate fixture remains explicit. Added positive-write/race/rollback proof is correctly assigned to S1B's actual owner seams; S1A's inert renderer or absence of writes cannot vacuously satisfy it."
+   :remaining-obligations "v1's future tests remain unexecuted. Actual shx adapter/positive validator and Services handoff must exist before their corresponding positive bash/write/race/rollback qualification."
+   :recommended-settlement "Fixed in <fix-commit-sha>: S1B Verification explicitly requires effect-free preview/check, zero-write denial of unapproved apply, preserved dirty bytes and unchanged unrelated Services paths/services, retaining hashes, secret-free plans and every-interrupted-stage exact rollback. Later scope clarification additionally requires non-vacuous serialized stale-evidence rejection before an otherwise working fixture write, positive admitted writes and observed rollback through the actual accepted Services handoff. S1A's inert profile-EDN/unavailable-bash contract is not that effect-time proof; positive bash also requires the reviewed shx adapter and pinned positive validator. Verified planning requirements only; these owner artifacts and future tests are not claimed supplied or executed."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Jn" :root-comment/id 4456856511
+   :still-fixed true :scope :planning-contract :settlement-text-action :replace-v1-with-scope-tightening
+   :evidence [{:file :e1 :lines [26 37 41 59 63]}
+              {:file :s1b :lines [28 38 42 63]}
+              {:file :s1a :lines [41 43 65 71]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [332 336 360 361 362]}]
+   :reason "The actual reviewed Services contract/version/entry-point gate and no-second-supervisor prohibition survive. S1A now explicitly stops at portable isolation plus inert EDN and truthful unavailable bash; positive bash/effect qualification remains separately owner-gated S1B work, not hidden S1A completion."
+   :remaining-obligations "Services handoff remains unestablished, and the real reviewed shx safe renderer/independent positive validator remain upstream artifacts. No original owner seam is claimed provided."
+   :recommended-settlement "Fixed in <fix-commit-sha>: E1/S1B retain an actual reviewed Services-owned local-generation entry point/versioned contract and explicit owner handoff as a blocking acceptance condition, with plan/result, approval/revision, ownership, interrupted apply and rollback obligations and no second Oikos supervisor. S1A is bounded to portable isolation/identity plus positive inert profile EDN and explicit unavailable-bash rejection; it does not supply promotion or effect-time safety. Positive bash requires the actual reviewed shx adapter/pinned positive validator, and non-vacuous write/race/rollback qualification remains S1B work through the actual accepted Services handoff. Verified the planning gates only: neither original owner seam nor positive qualification is claimed provided."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Jv" :root-comment/id 4456856521
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :s4b :lines [4 56 57 60 62]}
+              {:file :s6a :lines [4 57 58 69]}
+              {:file :e6 :lines [4 56 57 60 62]}
+              {:file :e4 :lines [59 61]}
+              {:file :s4a :lines [4 62 63]}]
+   :reason "Unchanged S4B/S6A/E6/E4 bytes retain synchronized current dependencies and supersession of historical child prose. S4A editor-revision additions preserve S1A/S2A artifact prerequisites and add no whole-parent/client-matrix gate."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1J0" :root-comment/id 4456856532
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :s8a :lines [36 37 41 43 47 68]}]
+   :reason "Versioned family identity and same-split source/transitive-correction/rejected-action/OCR lineage remain explicit; new consent denials restrict admissibility/use without weakening lineage or allowing similarity merges."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1KD" :root-comment/id 4456856559
+   :still-fixed true :scope :planning-document :settlement-text-action :retain-v1
+   :evidence [{:file :note :lines [51 52 53 54 55]}]
+   :reason "Note bytes and local parent head are unchanged; both private blob URLs retain the exact gitlink revision already checked in v1. This rebinding reuses v1's access evidence and makes no fresh API/access claim."}]
+ :review-body-items
+ [{:review/id 5755016882 :item/id "cr-comment:v1:5a08a09292697bdfbfc79de8"
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :e3 :lines [35 36 40 58]}
+              {:file :s3b :lines [36 37 41 43 47]}]
+   :reason "Unchanged E3 retains all three requested scenarios/expected results. S3B still includes denied ownership/stale revision with zero movement and observed accepted join; exact consent/return additions do not replace the positive join observation requirement."}
+  {:review/id 5755016882 :item/id "cr-comment:v1:efd09d07c97f26c80451d912"
+   :still-fixed true :scope :planning-contract :settlement-text-action :retain-v1
+   :evidence [{:file :s5a :lines [28 36 37 38 39 43 45 49 51 53 55 59 61 65 92 94 96 98]}
+              {:file :e5 :lines [37 68]}]
+   :reason "Portable provenance/attribution/admission/index laws still precede outer adapters, with equal-text attribution, explicit observation/projection identity and frozen resource profile requirements. Stop, development-index isolation, safe-reference and continuing supplier-resource-accounting clauses constrain the same boundary, not runtime-owned domain authority."}]
+ :settlement-guidance
+ {:retain-v1 "Reuse the matching v1 recommended-settlement prose, but cite these current evidence anchors and substitute the actual final corrective commit after push/readback. v1's per-item future-test obligations remain in force."
+  :replace-v1-with-scope-tightening ["PRRT_kwDOT3TWPM6zM1Je" "PRRT_kwDOT3TWPM6zM1Jn"]
+  :body-items "Retain review-id:5755016882 and the same stable cr-comment:v1 IDs in the itemized writer comment; these are not thread settlements."
+  :historical-events "Do not rewrite creation/correction events. Current card requirements plus preserved appended corrections remain the evidence for the original ledger-bound roots."
+  :publication "Main owns one final commit/push, verifies the pushed bytes against these bindings, refreshes current native/head context, then publishes actual writer replies before resolving. This file performs none of those effects."
+  :no-credit [:native-approval :readiness :implementation-completion :required-ci :review-round :deployment :runtime-availability]}
+ :result {:original-findings 18
+          :still-fixed 18
+          :remaining []
+          :settlement-scope-tightenings 2
+          :all-future-evidence-unexecuted true
+          :services-owner-seam-claimed-provided false
+          :shx-positive-owner-artifacts-claimed-provided false
+          :meaning "All 18 original planning fixes survive the bounded source rebinding. This supplies no new review, native settlement, implementation or readiness verdict."}
+ :reflection {:ledger-writes 0
+              :spore-created false
+              :lesson "Rebind existing native dispositions to changed source and preserve narrow ownership/evidence scopes; an inert negative boundary cannot supply positive effect-edge qualification."}}

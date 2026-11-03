@@ -1,0 +1,20 @@
+{:task :s2a :uuid "93a76dad-678a-4980-86fb-ba0fbb5e8203"
+ :source-sha "ae35073719974c0df1d2dae301c2179fa4785641"
+ :session-id "ses_e5dbab513ffeD9p7yzAvaklHUZ" :scope :planning-only
+ :verdict :changes_requested
+ :findings
+ [{:id :s2a/incarnation :severity :P1 :title "Epoch plus XID does not identify a window incarnation"
+   :evidence "Frozen S2A acceptance and workbench.md112-116 omit within-epoch lifetime distinction."
+   :required-test "Open A/XID42, close A, open B/XID42 in one epoch: identities differ and A targets cannot resolve to B. Continuous observation retains identity; lifecycle gaps do not silently establish continuity."}
+  {:id :s2a/exact-retry :severity :P1 :title "Specify exact-envelope retry separately from constructing new events"
+   :evidence "Clio make-event stamps new UUID/time; runtime append constructs every call; ledger append admits identical-envelope already-present only."
+   :required-test "Lost-ack resubmits exact constructed envelope to actual Clio admission once; altered UUID payload collides, same-slot newUUID conflicts, next causally-linked event with repeated payload remains distinct."}
+  {:id :s2a/coverage-gap :severity :P1 :title "Replay observation coverage gaps without bypassing Clio validation"
+   :evidence "Projection promises freshness but no gap/resync transition. Clio canonicalize requires complete contiguous persisted history and causes."
+   :required-test "Baseline→coverage-gap→reconciled baseline marks non-current then only restored coverage; missing persisted events/parents still refuse. Shuffled partitions/duplicate copies retain results."}
+  {:id :s2a/concurrent-observations :severity :P2 :title "Deterministic tie order must not manufacture causality"
+   :evidence "Clio orders graph-incomparable events deterministically, not causally."
+   :required-test "Incompatible incomparable writer observations expose unresolved relation rather than last-replayed-wins; explicit reconciliation resolves it using Clio graph/fold."}]
+ :prerequisite-artifacts ["S1A verified generation contracts and BB/NBB parity" "Pinned Clio schema/admission/canonicalization/projection integration"]
+ :policy-blockers ["Planning admission held; synthetic pure/integration fixtures otherwise sufficient."]
+ :user-questions [] :tests-executed false :native-provider-approval false}

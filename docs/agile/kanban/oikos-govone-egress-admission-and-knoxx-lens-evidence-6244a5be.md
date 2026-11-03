@@ -3,7 +3,7 @@ category: "kanban"
 labels: "oikos, planning, local-first, epic"
 dependency: ["3b9279b5-aafd-431a-90a9-128ce4415de0", "29caa8e3-289a-416c-9850-8ef9cc769e88"]
 type: "epic"
-write-id: "1793718989871-0.bzfdp9vkgdf68mx335h"
+write-id: "1793724132338-0.pml810swyog6y4sikli"
 title: "Oikos: GovOne egress admission and Knoxx Lens evidence"
 priority: "P1"
 status: "incoming"
@@ -33,11 +33,11 @@ No alternate policy evaluator, direct provider retry, implicit approval from a f
 
 - [ ] Every egress route requires an authorized GovOne session/mode and rejects missing/expired scope, unsupported redaction or gateway outage.
 - [ ] Nonstreaming complete-history request/response handling validates untrusted output and keeps Lens audit evidence separate from raw payload retention.
-- [ ] Deletion and scoped access are tested end to end; local_only produces no network egress.
+- [ ] Deletion and scoped access are tested end to end; local_only produces zero unauthorized external/cloud/third-party egress. Explicitly authenticated, allowlisted loopback/local-service transport is permitted; private IP alone grants no trust. Unauthenticated/unallowlisted local traffic is denied.
 
 ## Verification
 
-Gateway contract fixtures and deny-network harness cover text/image/derived/tool paths, outage/retry attempts, auth revocation, deletion and adversarial cloud response. These are future acceptance checks, not executed implementation evidence.
+Gateway contract fixtures and deny-network harness cover text/image/derived/tool paths, outage/retry attempts, auth revocation, deletion and adversarial cloud response. Separately assert allowed authenticated/allowlisted local transport, denied external egress in local_only, and denied unauthenticated/unallowlisted local/private-IP destinations, without direct retry. These are future acceptance checks, not executed implementation evidence.
 
 ## Risks
 
@@ -54,9 +54,11 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 ## Dependencies
 
 - 3b9279b5-aafd-431a-90a9-128ce4415de0 (E2)
-- 456b2c69-cb5d-417d-9aeb-ac05e0a3251a (E4)
+- 29caa8e3-289a-416c-9850-8ef9cc769e88 (S4A): shared local capability, not completion of the whole E4 client matrix.
 
 ---
 Planning correction supersedes the original dependency on the whole E4 epic. The security foundation depends on E2 (3b9279b5-aafd-431a-90a9-128ce4415de0) and the shared local capability S4A (29caa8e3-289a-416c-9850-8ef9cc769e88), not completion of all client integrations. S6A admits the GovOne session gate before S4B real remote tool-result qualification. Synthetic no-private-data tests may precede admission; real local text/images/derived labels/tool payloads may not bypass it. Parent hierarchy is organization, not an implicit requirement to finish E4 before its local capability child can execute. No status advancement, implementation completion or live admission is claimed.
+
+Native findings 4456856407/4456856471: E6 root local_only criterion now allows only explicitly authenticated allowlisted local-service/loopback transports while denying unauthorized external/cloud/third-party egress and untrusted private-IP routes. Root dependency prose matches current E2+S4A summary; child S6A concretely consumes S2A+S4A. Historical creation/comments are preserved, not amended. All checks stated here are future acceptance requirements, not executed implementation results. Earlier dependency prose in historical comments is superseded by this correction for current execution edges; historical event/comment bytes remain unchanged. Policy correction — sandbox/dev and synthetic data only; no personal capture. Default raw retention is 24h images and 7d text; propagate deletion to derived/retrieval payloads, with explicit consent for accepted knowledge. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Existing models only; 12B download/load/restart is held. Any cloud experiment is synthetic, GovOne-authorized, verified free and 0 spend only; no allocation or inherited pilot budget. Remote publication remains held. Qualified program merges are authorized only after their required gates; this is not a readiness override, implementation permission or native review approval.
 
 ---

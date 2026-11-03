@@ -1,0 +1,99 @@
+{:reconciliation/version 1
+ :scope :planning-skeptic-comparison
+ :run-root ".ημ/runs/oikos-program-20261103/"
+ :sources
+ {:pass1 {:path "skeptics/pass1.edn" :sha256 "ae3943fc3954aec12c1c58bfd6708545ede22a2378213fb4527ecf482c248d93"}
+  :pass2 {:path "skeptics/pass2.edn" :sha256 "43c06c6a8b91c872e38cd9093ecd23313fdc77bcd5214fe1dc01c47708c1d958"}
+  :remaining-v1 {:path "reviews/remaining-v1.edn" :sha256 "05300a0890361c9f1d39742be36553fe35650331dc40c2c1625ea06d596f9d2d"}
+  :s2a-v1 {:path "reviews/s2a-v1.edn" :sha256 "19a9f53b1949087393001fab8ee8335ace1164dae9af3675bbec81f78977162c"}
+  :s3a-v1 {:path "reviews/s3a-v1.edn" :sha256 "4a7ac722c3dcca74521a1e25b3951d6b0d6ab16b68e579b07685907dc857c08a"}
+  :s3b-v1 {:path "reviews/s3b-v1.edn" :sha256 "bfb260378b1c1ace23ea840deea28acdc5359a22a20c98f86c205adc4102e25d"}
+  :s4b-v1 {:path "reviews/s4b-v1.edn" :sha256 "509a7ce970152de8a4b73dd30a8007e591fe96ea39fe8468df109537f7751d49"}
+  :s7a-v1 {:path "reviews/s7a-v1.edn" :sha256 "41ccc2b0b021e2926e4011d6ad20a8e1c811424c8e10835d1808d79fef60751b"}}
+ :normalization {:confirmed-remaining :remaining :confirmed-addressed :historical-addressed}
+ :comparison-vote-order [:pass1 :pass2]
+ :anchor-ref-format "First element identifies a :sources entry; remaining elements are an EDN get-in path. Original report refs retain the entire candidate finding including evidence and required-test."
+ :classification-rule "Normalize labels only. Equal comparison votes retain that classification; every unequal pair is disputed. Consensus-remaining is exactly the intersection of remaining votes. Agreement is not settlement, approval, implementation proof or execution authority."
+ :counts
+ {:original-report-records 16 :candidate-ids 53
+  :pass1-original {:confirmed-addressed 20 :confirmed-remaining 14 :insufficient-evidence 2 :refuted 17}
+  :pass1-comparison {:historical-addressed 20 :insufficient-evidence 2 :refuted 17 :remaining 14}
+  :pass2-original {:historical-addressed 15 :insufficient-evidence 1 :refuted 6 :remaining 31}
+  :pass2-comparison {:historical-addressed 15 :insufficient-evidence 1 :refuted 6 :remaining 31}
+  :classification {:disputed 23 :historical-addressed 14 :refuted 4 :remaining 12}}
+ :consensus-remaining
+ [:s1a/config-isolation :s2a/coverage-gap :s2b/snapshot-cut :s2b/freshness-vs-history
+  :s3b/consent-and-return :s4a/editor-revision :s5a/stop-barrier :s5a/index-isolation
+  :s5b/safe-ledger :s6b/rehydration-deletion :s8a/consent-admission :s8b/artifact-admission]
+ :disputed-ids
+ [:s1a/effect-boundary :s1a/target-matrix :s1b/shx-check-effects :s1b/bound-approval
+  :s2a/concurrent-observations :s2b/incarnation-generation :s3a/branch-version
+  :s3a/observed-vs-proposed :s3b/check-at-effect :s4a/trusted-context
+  :s5a/supplier-accounting :s5b/copy-deletion :s5b/acceptance-scope :s5b/late-result
+  :s6a/release-matrix :s6a/second-hop :s6a/positive-modes :s6b/lens-scope
+  :s6b/independent-audit :s6b/history-custody :s6b/tool-history
+  :s8a/identity-lineage :s8a/partition-freeze]
+ :findings
+ [{:id :s1a/config-isolation :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 0 2] :pass2 [:pass2 :votes 0 2] :original-report [:remaining-v1 :results 0 :findings 0]}}
+  {:id :s1a/effect-boundary :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 1 2] :pass2 [:pass2 :votes 1 2] :original-report [:remaining-v1 :results 0 :findings 1]}}
+  {:id :s1a/target-matrix :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 2 2] :pass2 [:pass2 :votes 2 2] :original-report [:remaining-v1 :results 0 :findings 2]}}
+  {:id :s1b/owner-handoff :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 3 2] :pass2 [:pass2 :votes 3 2] :original-report [:remaining-v1 :results 1 :findings 0]}}
+  {:id :s1b/shx-check-effects :pass1 :confirmed-addressed :pass2 :remaining :comparison-votes [:historical-addressed :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 4 2] :pass2 [:pass2 :votes 4 2] :original-report [:remaining-v1 :results 1 :findings 1]}}
+  {:id :s1b/bound-approval :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 5 2] :pass2 [:pass2 :votes 5 2] :original-report [:remaining-v1 :results 1 :findings 2]}}
+  {:id :s2a/incarnation :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 6 2] :pass2 [:pass2 :votes 6 2] :original-report [:s2a-v1 :findings 0]}}
+  {:id :s2a/exact-retry :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 7 2] :pass2 [:pass2 :votes 7 2] :original-report [:s2a-v1 :findings 1]}}
+  {:id :s2a/coverage-gap :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 8 2] :pass2 [:pass2 :votes 8 2] :original-report [:s2a-v1 :findings 2]}}
+  {:id :s2a/concurrent-observations :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 9 2] :pass2 [:pass2 :votes 9 2] :original-report [:s2a-v1 :findings 3]}}
+  {:id :s2b/snapshot-cut :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 10 2] :pass2 [:pass2 :votes 10 2] :original-report [:remaining-v1 :results 2 :findings 0]}}
+  {:id :s2b/incarnation-generation :pass1 :confirmed-addressed :pass2 :remaining :comparison-votes [:historical-addressed :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 11 2] :pass2 [:pass2 :votes 11 2] :original-report [:remaining-v1 :results 2 :findings 1]}}
+  {:id :s2b/freshness-vs-history :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 12 2] :pass2 [:pass2 :votes 12 2] :original-report [:remaining-v1 :results 2 :findings 2]}}
+  {:id :s3a/incarnation :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 13 2] :pass2 [:pass2 :votes 13 2] :original-report [:s3a-v1 :findings 0]}}
+  {:id :s3a/branch-version :pass1 :confirmed-addressed :pass2 :remaining :comparison-votes [:historical-addressed :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 14 2] :pass2 [:pass2 :votes 14 2] :original-report [:s3a-v1 :findings 1]}}
+  {:id :s3a/no-mutation-conflict :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 15 2] :pass2 [:pass2 :votes 15 2] :original-report [:s3a-v1 :findings 2]}}
+  {:id :s3a/observed-vs-proposed :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 16 2] :pass2 [:pass2 :votes 16 2] :original-report [:s3a-v1 :findings 3]}}
+  {:id :s3b/physical-ownership :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 17 2] :pass2 [:pass2 :votes 17 2] :original-report [:s3b-v1 :findings 0]}}
+  {:id :s3b/check-at-effect :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 18 2] :pass2 [:pass2 :votes 18 2] :original-report [:s3b-v1 :findings 1]}}
+  {:id :s3b/observed-noninterference :pass1 :refuted :pass2 :refuted :comparison-votes [:refuted :refuted] :classification :refuted :anchor-refs {:pass1 [:pass1 :votes 19 2] :pass2 [:pass2 :votes 19 2] :original-report [:s3b-v1 :findings 2]}}
+  {:id :s3b/consent-and-return :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 20 2] :pass2 [:pass2 :votes 20 2] :original-report [:s3b-v1 :findings 3]}}
+  {:id :s3b/s4a-prerequisite :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 21 2] :pass2 [:pass2 :votes 21 2] :original-report [:s3b-v1 :findings 4]}}
+  {:id :s4a/trusted-context :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 22 2] :pass2 [:pass2 :votes 22 2] :original-report [:remaining-v1 :results 3 :findings 0]}}
+  {:id :s4a/editor-revision :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 23 2] :pass2 [:pass2 :votes 23 2] :original-report [:remaining-v1 :results 3 :findings 1]}}
+  {:id :s4a/unsafe-aliases :pass1 :refuted :pass2 :refuted :comparison-votes [:refuted :refuted] :classification :refuted :anchor-refs {:pass1 [:pass1 :votes 24 2] :pass2 [:pass2 :votes 24 2] :original-report [:remaining-v1 :results 3 :findings 2]}}
+  {:id :s4a/positive-ipc :pass1 :refuted :pass2 :refuted :comparison-votes [:refuted :refuted] :classification :refuted :anchor-refs {:pass1 [:pass1 :votes 25 2] :pass2 [:pass2 :votes 25 2] :original-report [:remaining-v1 :results 3 :findings 3]}}
+  {:id :s5a/redelivery :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 26 2] :pass2 [:pass2 :votes 26 2] :original-report [:remaining-v1 :results 4 :findings 0]}}
+  {:id :s5a/evidence-through-index :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 27 2] :pass2 [:pass2 :votes 27 2] :original-report [:remaining-v1 :results 4 :findings 1]}}
+  {:id :s5a/stop-barrier :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 28 2] :pass2 [:pass2 :votes 28 2] :original-report [:remaining-v1 :results 4 :findings 2]}}
+  {:id :s5a/index-isolation :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 29 2] :pass2 [:pass2 :votes 29 2] :original-report [:remaining-v1 :results 4 :findings 3]}}
+  {:id :s5a/supplier-accounting :pass1 :confirmed-remaining :pass2 :insufficient-evidence :comparison-votes [:remaining :insufficient-evidence] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 30 2] :pass2 [:pass2 :votes 30 2] :original-report [:remaining-v1 :results 4 :findings 4]}}
+  {:id :s5b/expiry :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 31 2] :pass2 [:pass2 :votes 31 2] :original-report [:remaining-v1 :results 5 :findings 0]}}
+  {:id :s5b/safe-ledger :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 32 2] :pass2 [:pass2 :votes 32 2] :original-report [:remaining-v1 :results 5 :findings 1]}}
+  {:id :s5b/copy-deletion :pass1 :insufficient-evidence :pass2 :remaining :comparison-votes [:insufficient-evidence :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 33 2] :pass2 [:pass2 :votes 33 2] :original-report [:remaining-v1 :results 5 :findings 2]}}
+  {:id :s5b/acceptance-scope :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 34 2] :pass2 [:pass2 :votes 34 2] :original-report [:remaining-v1 :results 5 :findings 3]}}
+  {:id :s5b/late-result :pass1 :confirmed-addressed :pass2 :remaining :comparison-votes [:historical-addressed :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 35 2] :pass2 [:pass2 :votes 35 2] :original-report [:remaining-v1 :results 5 :findings 4]}}
+  {:id :s6a/release-matrix :pass1 :confirmed-remaining :pass2 :refuted :comparison-votes [:remaining :refuted] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 36 2] :pass2 [:pass2 :votes 36 2] :original-report [:remaining-v1 :results 6 :findings 0]}}
+  {:id :s6a/second-hop :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 37 2] :pass2 [:pass2 :votes 37 2] :original-report [:remaining-v1 :results 6 :findings 1]}}
+  {:id :s6a/positive-modes :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 38 2] :pass2 [:pass2 :votes 38 2] :original-report [:remaining-v1 :results 6 :findings 2]}}
+  {:id :s6b/lens-scope :pass1 :insufficient-evidence :pass2 :remaining :comparison-votes [:insufficient-evidence :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 39 2] :pass2 [:pass2 :votes 39 2] :original-report [:remaining-v1 :results 7 :findings 0]}}
+  {:id :s6b/independent-audit :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 40 2] :pass2 [:pass2 :votes 40 2] :original-report [:remaining-v1 :results 7 :findings 1]}}
+  {:id :s6b/history-custody :pass1 :refuted :pass2 :remaining :comparison-votes [:refuted :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 41 2] :pass2 [:pass2 :votes 41 2] :original-report [:remaining-v1 :results 7 :findings 2]}}
+  {:id :s6b/tool-history :pass1 :confirmed-addressed :pass2 :remaining :comparison-votes [:historical-addressed :remaining] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 42 2] :pass2 [:pass2 :votes 42 2] :original-report [:remaining-v1 :results 7 :findings 3]}}
+  {:id :s6b/rehydration-deletion :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 43 2] :pass2 [:pass2 :votes 43 2] :original-report [:remaining-v1 :results 7 :findings 4]}}
+  {:id :s7b/synthetic-only :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 44 2] :pass2 [:pass2 :votes 44 2] :original-report [:remaining-v1 :results 8 :findings 0]}}
+  {:id :s7b/precise-deps :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 45 2] :pass2 [:pass2 :votes 45 2] :original-report [:remaining-v1 :results 8 :findings 1]}}
+  {:id :s8a/consent-admission :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 46 2] :pass2 [:pass2 :votes 46 2] :original-report [:remaining-v1 :results 9 :findings 0]}}
+  {:id :s8a/identity-lineage :pass1 :refuted :pass2 :historical-addressed :comparison-votes [:refuted :historical-addressed] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 47 2] :pass2 [:pass2 :votes 47 2] :original-report [:remaining-v1 :results 9 :findings 1]}}
+  {:id :s8a/partition-freeze :pass1 :confirmed-addressed :pass2 :refuted :comparison-votes [:historical-addressed :refuted] :classification :disputed :anchor-refs {:pass1 [:pass1 :votes 48 2] :pass2 [:pass2 :votes 48 2] :original-report [:remaining-v1 :results 9 :findings 2]}}
+  {:id :s8a/precise-deps :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 49 2] :pass2 [:pass2 :votes 49 2] :original-report [:remaining-v1 :results 9 :findings 3]}}
+  {:id :s8b/artifact-admission :pass1 :confirmed-remaining :pass2 :remaining :comparison-votes [:remaining :remaining] :classification :remaining :anchor-refs {:pass1 [:pass1 :votes 50 2] :pass2 [:pass2 :votes 50 2] :original-report [:remaining-v1 :results 10 :findings 0]}}
+  {:id :s8b/zero-spend-resources :pass1 :confirmed-addressed :pass2 :historical-addressed :comparison-votes [:historical-addressed :historical-addressed] :classification :historical-addressed :anchor-refs {:pass1 [:pass1 :votes 51 2] :pass2 [:pass2 :votes 51 2] :original-report [:remaining-v1 :results 10 :findings 1]}}
+  {:id :s8b/versioned-export :pass1 :refuted :pass2 :refuted :comparison-votes [:refuted :refuted] :classification :refuted :anchor-refs {:pass1 [:pass1 :votes 52 2] :pass2 [:pass2 :votes 52 2] :original-report [:remaining-v1 :results 10 :findings 2]}}]
+ :validation
+ {:duplicates [] :pass1-votes 53 :original-findings 53 :reconciled-findings 53
+  :exact-id-sets true :pass2-votes 53 :single-edn-form-inputs 8 :original-report-records 16
+  :extra-ids [] :missing-ids []}
+ :new-human-policy-questions []
+ :review-rerun false
+ :workflow-policy :unchanged
+ :implementation-verified false
+ :live-rheos-readback false
+ :native-provider-approval false}

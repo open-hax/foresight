@@ -1,15 +1,15 @@
 ---
-uuid: "93a76dad-678a-4980-86fb-ba0fbb5e8203"
-title: "Oikos: Admit desktop causal events through Clio and replay EDN projections"
-status: "incoming"
-type: "task"
-priority: "P1"
-points: "5"
-labels: "oikos, planning, local-first, task"
-parent: "3b9279b5-aafd-431a-90a9-128ce4415de0"
-dependency: ["722906b7-77d7-4414-a976-23996f7533de"]
 category: "kanban"
-write-id: "1793718666816-0.g65l4pvzakreofn0bu"
+labels: "oikos, planning, local-first, task"
+dependency: ["07452a65-4a6a-4704-bf81-50408927dcc8"]
+parent: "3b9279b5-aafd-431a-90a9-128ce4415de0"
+type: "task"
+write-id: "1793726617185-0.bfuxzekvkngdnqhuad"
+points: "5"
+title: "Oikos: Admit desktop causal events through Clio and replay EDN projections"
+priority: "P1"
+status: "incoming"
+uuid: "93a76dad-678a-4980-86fb-ba0fbb5e8203"
 created_at: "2026-11-03T15:11:06.816Z"
 ---
 
@@ -33,12 +33,22 @@ No parallel journal kernel, invented complete deltas, guaranteed reopening of cl
 
 ## Acceptance criteria
 
-- [ ] Observation, intention and outcome have distinct shapes and causal links; observed revision and server-epoch+id are mandatory.
+- [ ] Observation, intention and outcome have distinct portable .cljc shapes and causal links; observed revision and window lifetime identity (server epoch, XID, open/incarnation identity or creation revision) are mandatory. Epoch plus XID alone is insufficient; uncertain reconnect continuity invalidates targeting.
 - [ ] Replay is deterministic; stale identity and conflicting admission fail; undo is compensation and cannot guarantee reopening apps.
+
+### S2A coverage gap
+
+- [ ] Pure .cljc replay distinguishes observation currentness/coverage from validity of persisted Clio history. An admitted coverage-gap event makes the projection non-current; an admitted reconciled-baseline event may establish fresh state only for its justified observation cut and leaves missing intermediate observations explicitly unknown. Neither event bypasses Clio admission/canonicalization, manufactures facts or repairs absent persisted events/causes.
+
+Future verification: replay baseline → coverage-gap → reconciled baseline and assert current → uncertain → fresh-at-cut with an explicit historical gap. Shuffled ledger partitions and exact duplicate copies yield the same lawful result; missing persisted sequence entries or causal parents still fail canonicalization rather than becoming acceptable coverage gaps. Rejected reconciliation cannot make a projection current.
+
+- [ ] Safe-reference propagation from S5B: desktop observation/intention/outcome events admit only the reviewed closed immutable-metadata allowlist and deletable content references through Clio. Raw captures/OCR, secret-bearing window titles/paths/labels and echoed rejection payloads cannot enter immutable events or diagnostics; hashes/IDs require classification, not an anonymity assumption.
+
+Future verification: synthetic secret markers in every prohibited field and denial path never enter retained events/diagnostics; after referenced content erasure, valid causal replay retains safe provenance but cannot reconstruct the marker. This is the same S5B safe-reference contract, not a second privacy engine.
 
 ## Verification
 
-CLJC fixtures replay duplicates, out-of-order causal references, XID reuse and unsuccessful compensation; use actual Clio admission tests. These are future acceptance checks, not executed implementation evidence.
+CLJC fixtures replay exact-event duplicates, out-of-order causal references, same-epoch close/reuse and unsuccessful compensation; use actual Clio admission tests. Old memberships/history must not attach to the reused XID, and targeting the old lifetime is denied even with a current revision. Clio runtime append generates a fresh UUID per invocation; retry the exact admitted event through ledger append for event-ID idempotency, not another runtime append call. These are future acceptance checks, not executed implementation evidence.
 
 ## Risks
 
@@ -53,4 +63,11 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 
 ## Dependencies
 
-- 722906b7-77d7-4414-a976-23996f7533de (E1)
+- 07452a65-4a6a-4704-bf81-50408927dcc8 (S1A): generation/source manifest and isolated fixture identity.
+
+---
+Native findings 4456846184 and 4456856398: epoch plus XID is not a lifetime key. Require open/incarnation identity or creation revision; replay/history/membership/action targeting tests cover close/reuse within one epoch and fail-closed uncertain reconnect. Oikos owns portable lifetime laws; Clio event admission/replay is reused. Runtime append assigns a fresh UUID per call; exact-event ledger retry preserves event ID rather than calling runtime append again. Current native child prerequisites synchronized to the user-approved precise plan: 07452a65-4a6a-4704-bf81-50408927dcc8 (S1A). Parent relationship is preserved and is not an implicit gating edge. All checks stated here are future acceptance requirements, not executed implementation results. Earlier dependency prose in historical comments is superseded by this correction for current execution edges; historical event/comment bytes remain unchanged. Policy correction — sandbox/dev and synthetic data only; no personal capture. Default raw retention is 24h images and 7d text; propagate deletion to derived/retrieval payloads, with explicit consent for accepted knowledge. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Existing models only; 12B download/load/restart is held. Any cloud experiment is synthetic, GovOne-authorized, verified free and 0 spend only; no allocation or inherited pilot budget. Remote publication remains held. Qualified program merges are authorized only after their required gates; this is not a readiness override, implementation permission or native review approval.
+
+Consensus planning correction v1: root incoming acceptance/verification now explicitly specifies s2a/coverage-gap. See the corresponding named root subsections for the contract and concrete future positive/negative fixtures. Also propagates s5b/safe-ledger: reviewed immutable metadata allowlist and deletable content references through Clio, not raw payload persistence or a second privacy engine. Only the 12 consensus-remaining gaps in skeptics/reconciliation.edn are in scope; the 23 disputed findings receive no settlement/rejection here. All added scenarios are future acceptance requirements, not implemented or executed behavior. Existing dependency vectors, parent relationships, incoming status, historical events and prior correction text remain preserved. Synthetic sandbox/dev-only, zero-spend, existing-model and remote-publication holdbacks remain unchanged; no status advancement or execution permission.
+
+---

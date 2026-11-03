@@ -1,0 +1,407 @@
+{:adjudication/version 1
+ :scope :bounded-independent-semantic-adjudication
+ :date "2026-11-03"
+ :root "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+ :status :not-a-program-approval
+ :selection {:source "skeptics/reconciliation.edn"
+             :predicate [:classification :disputed]
+             :count 23
+             :sha256 "29aff037129ac44323939a37193e0d2a2f3affd99a5b038e326296a7dbb2b361"}
+ :method {:votes-have-evidentiary-weight false
+          :third-vote-is-automatic-confirmation false
+          :original-votes-preserved true
+          :original-candidates-preserved-by-pinned-reference true
+          :rule "Determine whether the combined scoped requirements already impose the obligation. A missing implementation, algorithm, exhaustive test list or unqualified upstream adapter is not itself a missing planning invariant. An upstream hazard does not establish Oikos adoption."
+          :current-card-evidence "Only the pre-existing provisions quoted below were adjudicated. Concurrent additions for the 12 consensus items are excluded; line numbers describe the read-time files and quotes disambiguate later insertions."
+          :source-claim-boundary "Source behavior was read, not executed. Repository HEADs identify the inspected checkouts, not clean-tree, installed-runtime or adoption attestations."
+          :spec-approval-boundary "Independent approval of S1A preparatory spec 92df993 is supplied by the delegating user, not awarded by this adjudication. Its bytes and commit identity were checked locally."
+          :no-algorithm-prescribed true}
+ :reference-format
+ {:input "Each :anchor-refs value starts with an :input-sources key; remaining elements are the exact EDN get-in path. :original-report resolves to the complete original candidate, including evidence and required-test; pass1/pass2 resolve to both original source-anchor accounts."
+  :evidence "Each :evidence entry names an :evidence-sources key, read-time inclusive line bounds and an exact quote or bounded observation. Paths are absolute or relative to :root as specified."
+  :initial-votes "Verbatim original labels, not normalized dispositions or new corroborating votes."}
+ :input-sources
+ {:pass1 {:path ".ημ/runs/oikos-program-20261103/skeptics/pass1.edn" :sha256 "ae3943fc3954aec12c1c58bfd6708545ede22a2378213fb4527ecf482c248d93"}
+  :pass2 {:path ".ημ/runs/oikos-program-20261103/skeptics/pass2.edn" :sha256 "43c06c6a8b91c872e38cd9093ecd23313fdc77bcd5214fe1dc01c47708c1d958"}
+  :remaining-v1 {:path ".ημ/runs/oikos-program-20261103/reviews/remaining-v1.edn" :sha256 "05300a0890361c9f1d39742be36553fe35650331dc40c2c1625ea06d596f9d2d"}
+  :s2a-v1 {:path ".ημ/runs/oikos-program-20261103/reviews/s2a-v1.edn" :sha256 "19a9f53b1949087393001fab8ee8335ace1164dae9af3675bbec81f78977162c"}
+  :s3a-v1 {:path ".ημ/runs/oikos-program-20261103/reviews/s3a-v1.edn" :sha256 "4a7ac722c3dcca74521a1e25b3951d6b0d6ab16b68e579b07685907dc857c08a"}
+  :s3b-v1 {:path ".ημ/runs/oikos-program-20261103/reviews/s3b-v1.edn" :sha256 "bfb260378b1c1ace23ea840deea28acdc5359a22a20c98f86c205adc4102e25d"}}
+ :owner-heads
+ {:oikos "ae35073719974c0df1d2dae301c2179fa4785641"
+  :clio "788cdd3434615a7932b924e68520dbf7f88408c2"
+  :shx "5dbac4fde8b3626316c71e15b48b9fe62a5802c2"
+  :services "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+  :govone "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+  :supplementary-knoxx "0b2dbe7118b1794fbc30870289a8b3fd3d752902"
+  :i3-source "415987dbf5c21e779826a232018e7940fb1be66c"}
+ :evidence-sources
+ {:s1a "docs/agile/kanban/oikos-define-isolated-generation-manifests-and-target-render-contracts-8927dcc8.md"
+  :s1b "docs/agile/kanban/oikos-implement-preview-check-apply-rollback-through-services-owned-generations-86925c3c.md"
+  :s2a "docs/agile/kanban/oikos-admit-desktop-causal-events-through-clio-and-replay-edn-projections-bb5e8203.md"
+  :s2b "docs/agile/kanban/oikos-reconcile-i3-subscribe-snapshot-races-and-reconnect-revisions-42935ec3.md"
+  :s3a "docs/agile/kanban/oikos-implement-logical-memberships-and-speculative-edn-projection-branches-2549ba0d.md"
+  :s3b "docs/agile/kanban/oikos-admit-sandbox-runtime-workspaces-with-leases-and-deliberate-human-joining-43e11d9a.md"
+  :s4a "docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+  :s5a "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+  :s5b "docs/agile/kanban/oikos-project-epistemic-knowledge-with-retention-forgetting-and-stop-controls-ca60db91.md"
+  :s6a "docs/agile/kanban/oikos-bind-all-egress-paths-to-the-mojomast-govone-policy-session-37b28c9b.md"
+  :s6b "docs/agile/kanban/oikos-expose-scoped-knoxx-lens-policy-evidence-and-complete-gateway-history-8ec26002.md"
+  :s8a "docs/agile/kanban/oikos-record-consented-corrected-labels-and-leakage-safe-corpus-partitions-0d3ebf42.md"
+  :s8b "docs/agile/kanban/oikos-prepare-govone-approved-reproducible-colab-exports-with-spending-holdback-ffe21376.md"
+  :e3 "docs/agile/kanban/oikos-named-collaborative-projection-spaces-with-deliberate-joining-2eb908b4.md"
+  :e6 "docs/agile/kanban/oikos-govone-egress-admission-and-knoxx-lens-evidence-6244a5be.md"
+  :workflow ".ημ/workflows/oikos-program.edn"
+  :retention ".ημ/runs/oikos-program-20261103/decisions/accepted-retention.edn"
+  :oikos-readme "/home/err/spaces/foresight/oikos/README.md"
+  :workbench "/home/err/spaces/foresight/oikos/docs/architecture/workbench.md"
+  :actions "/home/err/spaces/foresight/oikos/src/oikos/law/actions.cljc"
+  :cli "/home/err/spaces/foresight/oikos/src/oikos/infra/cli.cljs"
+  :s1a-spec "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a/docs/specs/s1a-generation-contracts.md"
+  :shx-cli "/home/err/spaces/foresight/shx/src/shx/cli.clj"
+  :shx-config "/home/err/spaces/foresight/shx/src/shx/infra/config.clj"
+  :services-model "/home/err/spaces/foresight/services/docs/deployment-model.md"
+  :canonicalize "/home/err/spaces/foresight/clio/src/clio/domain/canonicalize.cljc"
+  :projection "/home/err/spaces/foresight/clio/src/clio/domain/projection.cljc"
+  :ocr-server "/home/err/.config/i3/devops/ocr/server.py"
+  :ocr-client "/home/err/.config/i3/devops/src/i3/desktop/ocr.clj"
+  :govone-spec "/home/err/devel/orgs/mojomast/govone/spec.md"
+  :govone-readme "/home/err/devel/orgs/mojomast/govone/README.md"
+  :openapi "/home/err/devel/orgs/mojomast/govone/docs/api/openapi.yaml"
+  :inference "/home/err/devel/orgs/mojomast/govone/internal/inference/service.go"
+  :evidence-auth "/home/err/devel/orgs/mojomast/govone/internal/auth/evidence.go"
+  :evidence-http "/home/err/devel/orgs/mojomast/govone/internal/httpserver/stage_api_evidence.go"
+  :lens-tools "/home/err/spaces/knoxx/backend/src/cljs/knoxx/backend/infra/lens/tools.cljs"
+  :knoxx-history "/home/err/spaces/knoxx/backend/src/cljs/knoxx/backend/infra/agent/history.cljs"}
+ :s1a-specification
+ {:commit "92df9937c1faa291eec5104bc3c8e056a7b73317"
+  :sha256 "8bed8627de1f3c4f79ff70f5156f8bbd854e0566e684fe9b1d7fc8fb54c125f0"
+  :working-file-equals-commit true
+  :preparatory-only true
+  :implementation-supplied false}
+ :counts {:already-required 13 :historically-addressed 5 :specification-covered 2
+          :requires-clarification 2 :unverified-integration 1 :total 23}
+ :adjudications
+ [{:id :s1a/effect-boundary
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 1 2] :pass2 [:pass2 :votes 1 2] :original-report [:remaining-v1 :results 0 :findings 1]}
+   :disposition :specification-covered
+   :evidence [{:source :s1a :lines [28 41] :quote "Implement pure CLJC generation/environment shapes and shx/envm boundary with target-specific non-shell render contracts."}
+              {:source :shx-cli :lines [58 95] :observation "env-after-eval launches bash and retains only :out; check reads System/getenv and prints old/new values. This is not an effect-free validator."}
+              {:source :shx-config :lines [20 39] :observation "Default config expansion consults user.home/ENVM_CONFIG; hostname can execute a process."}
+              {:source :s1a-spec :lines [229 233] :quote "It cannot apply, discover config, call native shx CLI `render/check`, source/eval scripts, resolve secrets, invoke an editor or change selection."}
+              {:source :s1a-spec :lines [323 347] :observation "T08 names guarded synthetic HOME/XDG/ENVM, forbidden-read/spawn detection and process/file/selection sentinels across success, failure, timeout and cancellation; T09-T11 cover the separate protocol/effect boundary."}]
+   :reason "The upstream hazard is real, but adoption of native check was never established. The approved preparatory specification now explicitly supplies the disputed seam and guard obligations; no code or executed tests are implied."
+   :bounded-action {:phase :planning-handoff :action "Consume the pinned S1A spec for this obligation; require its T08-T11 evidence after implementation, not during planning." :new-clause-required false}}
+
+  {:id :s1a/target-matrix
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 2 2] :pass2 [:pass2 :votes 2 2] :original-report [:remaining-v1 :results 0 :findings 2]}
+   :disposition :specification-covered
+   :evidence [{:source :s1a :lines [28 37] :quote "unsupported target formats fail explicitly"}
+              {:source :shx-cli :lines [102 122] :observation "emit branches only to bash or bb; unsupported emit targets exit 1. This is not a generic non-shell renderer."}
+              {:source :s1a-spec :lines [235 261] :observation "The matrix names an inert :oikos/profile-edn positive target/profile-edn-v1 validator, conditional :shell/bash-env/bash-env-v1 support, and explicit generic bash/bb/i3/Emacs/systemd/PM2/other-format deferrals. Absent safe bash adapter returns :adapter-unavailable."}
+              {:source :s1a-spec :lines [336 337] :observation "T06 requires positive target roundtrips and complete descriptor/content correspondence; T07 supplies injection/reference negatives."}]
+   :reason "The requested supported/deferred and validator contract exists in 92df993. Its proposed seam names are not available APIs, and validators need not already be implemented for this planning disposition."
+   :bounded-action {:phase :planning-handoff :action "Use this versioned matrix; keep deferred targets and missing owner adapters ineligible until their later qualification." :new-clause-required false}}
+
+  {:id :s1b/shx-check-effects
+   :initial-votes {:pass1 :confirmed-addressed :pass2 :remaining}
+   :comparison-votes [:historical-addressed :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 4 2] :pass2 [:pass2 :votes 4 2] :original-report [:remaining-v1 :results 1 :findings 1]}
+   :disposition :historically-addressed
+   :evidence [{:source :s1b :lines [36 42] :quote "zero lifecycle/process mutation"}
+              {:source :s1b :lines [42 42] :quote "secret-free plans and owner-bound handoff/result evidence"}
+              {:source :shx-cli :lines [52 64] :observation "Source/eval statements can be emitted and env-after-eval runs bash without checking its exit in the returned environment map."}
+              {:source :shx-cli :lines [89 94] :observation "Native check prints actual old/new variable values."}
+              {:source :s1a-spec :lines [304 310] :observation "The consumed producer protocol rejects nonzero/success mismatches and prohibits unsanitized helper stderr/log leakage."}]
+   :reason "The frozen S1B verification was principally before/after hashes; the corrected card now requires filesystem/process noninterference and secret-free evidence. Native check cannot satisfy that contract unchanged. Its existing behavior is not evidence that the future owner adapter is permitted to use it unsafely."
+   :bounded-action {:phase :future-conformance :action "Qualify a non-evaluating preview/check seam with failure and fake-secret cases; never qualify native check merely from a fixture diff." :new-clause-required false}}
+
+  {:id :s1b/bound-approval
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 5 2] :pass2 [:pass2 :votes 5 2] :original-report [:remaining-v1 :results 1 :findings 2]}
+   :disposition :already-required
+   :evidence [{:source :s1b :lines [28 38] :quote "entry point, versioned plan/result shapes, approval/revision binding, ownership, interrupted apply and rollback semantics"}
+              {:source :s1b :lines [36 36] :quote "apply requires explicit generation approval and refuses local modifications"}
+              {:source :oikos-readme :lines [40 43] :quote "Any future executor must obtain trusted context and revalidate at its effect boundary"}
+              {:source :actions :lines [45 70] :observation "validate-proposal checks only caller-supplied preconditions and always returns :execution/authorized? false."}
+              {:source :services-model :lines [128 135] :quote "dev         developer machine; this repo owns nothing"}]
+   :reason "Approval is for the generation/owner plan, not an unbound boolean; dirty-target refusal and trusted effect-boundary revalidation already apply. The owner-reviewed handoff remains unavailable. Exact serialization/CAS mechanics and the concrete approval tuple must be supplied by that owner contract, not invented as an already callable Oikos API or demanded as present code."
+   :bounded-action {:phase :owner-contract-qualification :action "Before binding apply, retain the owner contract's exact generation/plan/environment/baseline approval and effect-time conflict evidence. Continue the existing absent-seam hold." :new-clause-required false}}
+
+  {:id :s2a/concurrent-observations
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 9 2] :pass2 [:pass2 :votes 9 2] :original-report [:s2a-v1 :findings 3]}
+   :disposition :already-required
+   :evidence [{:source :s2a :lines [28 37] :quote "Reuse Clio admission/schema/locking and canonical causal streams"}
+              {:source :canonicalize :lines [134 154] :quote "Concurrent events in different streams remain unordered by the graph; a stable tie-break is used only to produce deterministic replay material."}
+              {:source :projection :lines [3 7] :observation "The generic fold delegates apply-event to its consumer; it does not supply a desktop conflict resolver."}
+              {:source :workbench :lines [112 116] :quote "Each independent Clio writer has its own run/stream identity, explicit causal parents and pinned schema revision."}]
+   :reason "Adopting Clio causal semantics does not license a tie-break to become evidence of causality. No Oikos desktop reducer or normative last-replayed-wins authority rule was found in the owning scaffold. A specific reconciliation algorithm or mandatory display grouping is a future product-law design, not evidence of a second missing planning contract."
+   :bounded-action {:phase :future-conformance :action "Preserve graph incomparability in the desktop law fixtures; a deterministic traversal position must not be asserted as causal precedence. Do not prescribe an algorithm now." :new-clause-required false}}
+
+  {:id :s2b/incarnation-generation
+   :initial-votes {:pass1 :confirmed-addressed :pass2 :remaining}
+   :comparison-votes [:historical-addressed :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 11 2] :pass2 [:pass2 :votes 11 2] :original-report [:remaining-v1 :results 2 :findings 1]}
+   :disposition :historically-addressed
+   :evidence [{:source :s2b :lines [37 41] :quote "Disconnect/epoch change invalidates currentness and stale targets"}
+              {:source :s2b :lines [37 37] :quote "If a reconnect gap cannot establish lifetime continuity, invalidate the old lifetime and fail closed for targeting; never infer continuity from equal XIDs or content."}
+              {:source :s2b :lines [59 59] :quote "retain historical memberships without reassignment"}
+              {:source :actions :lines [8 17] :observation "The current owner manifest has no collector/persistence/effect execution; callback-generation fencing is not implemented here."}]
+   :reason "Compared with the frozen card, same-epoch lifetime reuse and uncertain reconnect invalidation are explicitly corrected. An old callback restoring a superseded lifetime would violate those existing invariants. A generation token is one implementation technique, not another missing normative requirement or a reason to implement the collector in planning."
+   :bounded-action {:phase :future-conformance :action "Include event-connection loss with the request connection alive and late old-generation callbacks in the existing disconnect/resync harness." :new-clause-required false}}
+
+  {:id :s3a/branch-version
+   :initial-votes {:pass1 :confirmed-addressed :pass2 :remaining}
+   :comparison-votes [:historical-addressed :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 14 2] :pass2 [:pass2 :votes 14 2] :original-report [:s3a-v1 :findings 1]}
+   :disposition :requires-clarification
+   :evidence [{:source :s3a :lines [37 38] :quote "`:branch/id`, `:branch/base-revision` and `:branch/proposed-revision`"}
+              {:source :s3a :lines [38 38] :quote "A mismatched observed revision returns EDN"}
+              {:source :s3a :lines [38 42] :observation "The specified conflict precondition is stale observed revision. No clause states which current branch predecessor an edit consumes when the observed desktop revision is unchanged."}
+              {:source :actions :lines [25 43] :observation "The scaffold context/proposal shapes contain no branch identity or branch-version contract; it supplies no implicit solution."}]
+   :addressed-subclaim "Stable branch identity and base/proposed revision fields, plus no-mutation stale-observation conflict, were historically added."
+   :missing-normative-contract "An edit must identify the exact predecessor version of its named speculative branch, independently of observed desktop revision; otherwise two edits of the same branch can both satisfy the stated observed-revision precondition."
+   :reason "The remaining issue is the branch-edit precondition, not a demand for an implemented CAS/store algorithm or for additional fields merely because an example uses them. The current wording fixes stale desktop observations but leaves branch-head staleness undefined."
+   :bounded-action {:phase :planning-clarification :action "State that edits consume a named branch predecessor; missing/wrong/stale predecessor conflicts without mutation even when observed revision is unchanged. Concurrent edits cannot silently overwrite one another; separate branches remain independent. An immutable-successor design or another lawful mechanism may implement this." :new-clause-required true}}
+
+  {:id :s3a/observed-vs-proposed
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 16 2] :pass2 [:pass2 :votes 16 2] :original-report [:s3a-v1 :findings 3]}
+   :disposition :already-required
+   :evidence [{:source :e3 :lines [22 26] :quote "without confusing logical membership with physical i3 placement"}
+              {:source :workbench :lines [79 90] :observation "Observation, proposed membership/layout, preview, admission and actual observed outcome are separate stages. Inactive speculative branches are not instructions to i3."}
+              {:source :s3a :lines [36 38] :observation "Multiple memberships retain one physical identity and create/edit/compare has no physical movement."}
+              {:source :s2a :lines [36 36] :quote "Observation, intention and outcome have distinct portable .cljc shapes and causal links"}]
+   :reason "Zero movement alone would not settle provenance, but the parent and shared observation/intention/outcome laws already do. The proposed placement cannot replace a physical observation merely because it exists in a speculative projection."
+   :bounded-action {:phase :future-conformance :action "Use the P-observed/Q-proposed multiple-view fixture to verify the existing distinction; no additional planning policy is needed." :new-clause-required false}}
+
+  {:id :s3b/check-at-effect
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 18 2] :pass2 [:pass2 :votes 18 2] :original-report [:s3b-v1 :findings 1]}
+   :disposition :already-required
+   :evidence [{:source :s3b :lines [36 41] :quote "movement requires explicit ownership admission for the targeted lifetime/resource, a matching observed revision, and an unexpired scoped lease"}
+              {:source :oikos-readme :lines [40 43] :quote "revalidate at its effect boundary"}
+              {:source :workbench :lines [87 90] :quote "record each attempted action plus actual observed outcome, including partial failure"}
+              {:source :actions :lines [67 70] :observation "The precondition validator performs no execution, so preview success is not an execution grant."}]
+   :reason "The inherited executor rule closes preview-to-dispatch staleness, and the architecture already requires per-attempt actual/partial outcomes. Each movement remains subject to an unexpired lease; a batch does not create an exception. Detailed schedules are implementation verification, not absent planning authority."
+   :bounded-action {:phase :future-conformance :action "Exercise expiry/reassignment/disconnect between preview and dispatch and between batch steps; stop denied steps and report actual partial effects under the existing contract." :new-clause-required false}}
+
+  {:id :s4a/trusted-context
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 22 2] :pass2 [:pass2 :votes 22 2] :original-report [:remaining-v1 :results 3 :findings 0]}
+   :disposition :already-required
+   :evidence [{:source :s4a :lines [32 41] :quote "Named reads enforce auth scopes, buffer allowlists and byte/range bounds"}
+              {:source :s4a :lines [32 32] :quote "No arbitrary remote evaluation/IPC strings, second Emacs daemon, claims all integrations are live today, or clients bypassing shared authorization."}
+              {:source :oikos-readme :lines [40 43] :quote "Caller-supplied context is not authenticated"}
+              {:source :workbench :lines [87 90] :quote "authenticate the actor"}
+              {:source :actions :lines [45 70] :observation "The pure checker explicitly validates caller-supplied context only and never authorizes execution."}]
+   :reason "Trusted context is already the required future executor boundary. A forgeable inert context example is not an adopted authentication source, nor evidence that a future adapter may turn request fields into trusted scopes."
+   :bounded-action {:phase :future-conformance :action "At each actual adapter, test forged actor/scope/target fields against authenticated host context and denial of unauthorized reads as well as mutations." :new-clause-required false}}
+
+  {:id :s5a/supplier-accounting
+   :initial-votes {:pass1 :confirmed-remaining :pass2 :insufficient-evidence}
+   :comparison-votes [:remaining :insufficient-evidence]
+   :anchor-refs {:pass1 [:pass1 :votes 30 2] :pass2 [:pass2 :votes 30 2] :original-report [:remaining-v1 :results 4 :findings 4]}
+   :disposition :requires-clarification
+   :evidence [{:source :ocr-server :lines [183 209] :observation "do_POST reads Content-Length bytes, JSON/base64 decodes and cv2.imdecode allocates the image before acquiring OCR.lock. OCR.run has no request-disconnect cancellation check; the response is written after work. main constructs ThreadingHTTPServer. No explicit supplier admission/queue bound appears in this path."}
+              {:source :ocr-server :lines [141 158] :observation "OCR.run executes detection and recognition synchronously; no client-liveness signal is supplied."}
+              {:source :ocr-client :lines [49 60] :observation "ocr-file! sends the HTTP request with :timeout 120000. This path has no supplier job ID, completion query or cancellation acknowledgement."}
+              {:source :s5a :lines [28 39] :quote "pure provenance, supplier attribution, resource admission and index-projection laws first"}
+              {:source :s5a :lines [70 72] :observation "The frozen profile names memory/CPU/queue frame/byte bounds, inference deadline and pause/stop latency, but does not say when a timed-out supplier job ceases consuming an admission reservation."}]
+   :integration-status :not-established
+   :source-fact "The inspected legacy supplier/client permit work and decoded buffers to outlive the client's wait; client timeout is not supplier termination. This is a source-path hazard, not measured running-service behavior or proof Oikos has adopted that exact path."
+   :missing-normative-contract "The resource budget must remain accountable for admitted supplier work after the caller times out or disconnects, independently of whether late publication is revoked."
+   :reason "The source allegation can now be checked rather than voted on. The bounded planning clarification is conditional on supplier adoption: define the lifetime of resource ownership, not a mandatory rewrite, cancellation API or change to the operator's existing OCR service."
+   :bounded-action {:phase :planning-clarification :action "State that admitted supplier queued/in-flight work and retained buffers remain charged until completion or termination is established. Timeout/disconnect alone cannot free reservations or admit replacements as if the old work ended. If the chosen supplier cannot provide bounded ownership/accounting evidence, deny its admission; do not reconfigure the operator supplier implicitly." :new-clause-required true}}
+
+  {:id :s5b/copy-deletion
+   :initial-votes {:pass1 :insufficient-evidence :pass2 :remaining}
+   :comparison-votes [:insufficient-evidence :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 33 2] :pass2 [:pass2 :votes 33 2] :original-report [:remaining-v1 :results 5 :findings 2]}
+   :disposition :already-required
+   :evidence [{:source :s5b :lines [37 41] :quote "Forgetting removes eligible raw/retrieval payloads with lineage/tombstones while preserving lawful immutable history"}
+              {:source :s5b :lines [58 58] :quote "Retention/forgetting propagates payload deletion through derived/retrieval projections"}
+              {:source :workbench :lines [72 75] :quote "Pause, exclusions and deletion/retention must cover derived indexes and exports, not merely the original image file."}
+              {:source :s8b :lines [28 28] :quote "allowlisted reproducible JSONL/VLM export"}
+              {:source :actions :lines [8 17] :observation "The current Oikos scaffold has persistence disabled; no adopted backup/restore implementation was identified."}]
+   :reason "An owned export, restore or reindex does not exempt a descendant from the existing deletion/tombstone law. The claim establishes no actual unmanaged backup topology. Requiring a new backup service or complete backup algorithm in planning would exceed the evidence."
+   :bounded-action {:phase :future-conformance :action "When owned stores/copies are introduced, inventory their lineage and ensure restore/reindex cannot revive expired/deleted payloads; an unreachable required copy cannot support a complete-deletion claim." :new-clause-required false}}
+
+  {:id :s5b/acceptance-scope
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 34 2] :pass2 [:pass2 :votes 34 2] :original-report [:remaining-v1 :results 5 :findings 3]}
+   :disposition :already-required
+   :evidence [{:source :s5b :lines [36 41] :quote "Acceptance is explicit and provenance-preserving"}
+              {:source :workbench :lines [64 67] :quote "Model suggestions remain derived claims until an explicit accepted fact/action says otherwise."}
+              {:source :workbench :lines [172 175] :quote "Predictions are not human gold by repetition or model agreement."}
+              {:source :retention :lines [4 6] :quote "Accepting a claim alone extends no deadline; raw sources still expire."}
+              {:source :retention :lines [6 6] :observation ":decision/implicit-training-export-permission is false."}
+              {:source :oikos-readme :lines [40 43] :observation "Future executors require trusted context, not caller-provided authorization."}]
+   :reason "Explicit provenance-preserving acceptance concerns the identified fact/action, not an arbitrary future revision or all descendants. Combined trusted-context and consent rules already exclude forged/model-agreement promotion and implied retention/training/export grants. A serialized grant schema is a deliverable, not required existing planning code."
+   :bounded-action {:phase :future-conformance :action "Bind the implemented acceptance event to the authenticated accepting actor, identified claim revision and purpose; test stale/forged/wrong-purpose cases without expanding retention or export authority." :new-clause-required false}}
+
+  {:id :s5b/late-result
+   :initial-votes {:pass1 :confirmed-addressed :pass2 :remaining}
+   :comparison-votes [:historical-addressed :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 35 2] :pass2 [:pass2 :votes 35 2] :original-report [:remaining-v1 :results 5 :findings 4]}
+   :disposition :historically-addressed
+   :evidence [{:source :workflow :lines [10 14] :observation "Images expire at 24h and text at 7d; derived deletion propagates; accepted-payload extension requires per-item expiry or explicit indefinite retention; acceptance alone does not renew."}
+              {:source :retention :lines [4 8] :quote "Retention consent must name an expiry or explicitly choose indefinite retention for that item."}
+              {:source :s5b :lines [37 41] :observation "Lineage/tombstones, retention expiry and deletion propagation are required in replay, including pause/resume/stop."}
+              {:source :workbench :lines [72 75] :observation "Controls cover derived indexes/exports, while sensitive payload storage is separate from immutable provenance."}]
+   :reason "The later retention decision supplies the previously unspecified nonrenewal invariant. Pausing processing is not per-item retention consent; replaying or receiving an old result cannot defeat a tombstone or renew its source deadline. This adjudicates the memory invariant only and does not duplicate the separate consensus stop-barrier amendment."
+   :bounded-action {:phase :future-conformance :action "Exercise expiry/delete while paused or awaiting a result, then late reply/resume/restart, against the fixed deadlines and tombstones; no renewal or payload resurrection." :new-clause-required false}}
+
+  {:id :s6a/release-matrix
+   :initial-votes {:pass1 :confirmed-remaining :pass2 :refuted}
+   :comparison-votes [:remaining :refuted]
+   :anchor-refs {:pass1 [:pass1 :votes 36 2] :pass2 [:pass2 :votes 36 2] :original-report [:remaining-v1 :results 6 :findings 0]}
+   :disposition :already-required
+   :evidence [{:source :openapi :lines [2666 2708] :observation "ChatMessage is closed, with string content and only system/user/assistant roles; ChatCompletionsRequest references it. This schema is not an arbitrary multimodal artifact or upload release grant."}
+              {:source :openapi :lines [3533 3555] :observation "RehydrationDecisionEvidence requested/actual channels are api_response and stage_api and include release_permission/channel_auth/active_session/token/inspection gates. They do not declare arbitrary artifact-sink release authority."}
+              {:source :inference :lines [2298 2346] :observation "validateRequest enforces the message bounds and validRole rejects every role other than system/user/assistant."}
+              {:source :govone-spec :lines [67 79] :quote "new modalities require their own specification and acceptance"}
+              {:source :s6a :lines [28 41] :observation "Reuse the owner's APIs/contracts; no egress without scoped policy session; unsupported image redaction denies, and all payload paths/provider bypasses are instrumented."}
+              {:source :s6a :lines [53 53] :quote "API compatibility requires inspection during implementation."}]
+   :reason "The concrete API limitation is verified, not inferred from memory. But the Oikos contract does not claim that creating a session or redacting OCR text authorizes a separate upload. Reusing scoped owner contracts across every egress path already requires the implementation to distinguish supported from unsupported payload/sink pairs. A filled-in matrix is qualification work, not a missing permission to deny unsupported cases. This is not a claim that these two API schemas exhaust all GovOne endpoints."
+   :bounded-action {:phase :owner-contract-qualification :action "Pin payload/sink compatibility before claiming each path supported; keep unsupported images/tool encodings/artifact uploads denied, and never reuse api_response/stage_api evidence as an unrelated upload grant." :new-clause-required false}}
+
+  {:id :s6a/second-hop
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 37 2] :pass2 [:pass2 :votes 37 2] :original-report [:remaining-v1 :results 6 :findings 1]}
+   :disposition :already-required
+   :evidence [{:source :s6a :lines [41 41] :quote "local_only produces zero unauthorized external/cloud/third-party egress"}
+              {:source :s6a :lines [65 65] :quote "a private IP address alone is not trusted and grants no authorization"}
+              {:source :oikos-readme :lines [76 78] :quote "Loopback is a transport restriction, not proof that a configured local service has no upstream egress: qualify its runtime ownership separately."}
+              {:source :govone-spec :lines [76 81] :observation "External egress needs prior redaction/policy approval; air-gapped operation denies external routing."}]
+   :reason "Zero unauthorized egress is not limited to the first hop. The explicit runtime-ownership qualification warning already rejects the inference that allowlisted local transport proves downstream privacy. The proposed local-proxy-to-cloud schedule tests that requirement rather than defining a new one."
+   :bounded-action {:phase :future-conformance :action "Qualify the local supplier's downstream behavior separately; a local proxy attempting external forwarding must not acquire authority from its first-hop allowlist." :new-clause-required false}}
+
+  {:id :s6a/positive-modes
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 38 2] :pass2 [:pass2 :votes 38 2] :original-report [:remaining-v1 :results 6 :findings 2]}
+   :disposition :already-required
+   :evidence [{:source :s6a :lines [28 28] :quote "local_only/hybrid_redacted/external_approved across text, images, derived labels and tools"}
+              {:source :e6 :lines [34 40] :observation "The parent requires authorized session/mode for every route and gateway contract fixtures, not merely a denial counter."}
+              {:source :govone-spec :lines [78 80] :quote "Permitted external egress requires prior redaction and policy approval."}
+              {:source :inference :lines [798 835] :observation "The pipeline calls the owner redactor and rejects redaction failure before routing."}
+              {:source :inference :lines [1156 1215] :observation "Actual routed messages use redacted messages/outbound assembly; unredacted external retrieved context is denied."}]
+   :reason "A claimed integration of the two external-capable modes must obey the owner's positive transformation contract, not pass by denying everything. The future gateway contract qualification already owns that proof. No external-mode implementation or qualification is currently claimed; a full list of serialized-byte test schedules is not required to exist during planning."
+   :bounded-action {:phase :future-conformance :action "Before claiming either mode supported, use actual pinned owner logic with an injected no-network final-provider capture for synthetic transformation/evidence positives, as well as denials. Unsupported paths stay denied." :new-clause-required false}}
+
+  {:id :s6b/lens-scope
+   :initial-votes {:pass1 :insufficient-evidence :pass2 :remaining}
+   :comparison-votes [:insufficient-evidence :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 39 2] :pass2 [:pass2 :votes 39 2] :original-report [:remaining-v1 :results 7 :findings 0]}
+   :disposition :unverified-integration
+   :evidence [{:source :lens-tools :lines [111 135] :observation "lens_grab_context requests graph text with :includeText true, hydrates rows/windows and returns assembled text; this is not an evidence-only Oikos seam."}
+              {:source :lens-tools :lines [166 206] :observation "Tool assembly accepts nil auth-context and the two-arity create-tools supplies nil. These factory conditions do not prove anonymous reachability of an external endpoint."}
+              {:source :s6b :lines [28 41] :observation "Oikos requires scoped audit evidence separate from raw data and synthetic cross-scope/deletion tests."}
+              {:source :s6b :lines [60 60] :quote "Missing gateway/API compatibility is a blocker"}
+              {:source :workbench :lines [133 136] :quote "Remote tools must preserve caller identity, output scope and the GovOne disclosure boundary."}]
+   :reason "The supplementary checkout establishes hazardous capabilities, not that Oikos adopts those factories or their nil-auth caller path. No adopted Oikos source/caller/endpoint pin is established. Existing scoped evidence-only requirements already exclude blindly exporting raw Lens context; integration qualification remains missing rather than a demonstrated bypass."
+   :bounded-action {:phase :integration-qualification :action "Retain the compatibility hold until the exact Knoxx source revision and Oikos caller/endpoint are pinned with authenticated principal/tenant/resource scope and an evidence-only response contract. Do not adopt raw-context factories as that proof." :new-clause-required false}}
+
+  {:id :s6b/independent-audit
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 40 2] :pass2 [:pass2 :votes 40 2] :original-report [:remaining-v1 :results 7 :findings 1]}
+   :disposition :already-required
+   :evidence [{:source :evidence-auth :lines [9 23] :observation "AuthorizeEvidenceExport requires export permission and ProducerSetComplete, then denies a principal appearing in the producer set regardless of its current role."}
+              {:source :evidence-http :lines [27 102] :observation "The endpoint obtains a trusted principal, loads producer scope using principal.TenantID, applies owner export authorization and verifies the full tenant audit snapshot before filtering session evidence."}
+              {:source :evidence-http :lines [169 179] :quote "Export does not read the customer target, so receipts remain unchecked."}
+              {:source :govone-spec :lines [82 82] :quote "A successful source check does not establish independent WORM custody, operational evidence, compliance, or production readiness."}
+              {:source :s6b :lines [28 41] :observation "Scoped evidence and untrusted-response validation are required; no independent-audit badge from a root/count is promised."}]
+   :reason "These are existing owner authorization and evidence semantics to preserve, not a new Oikos authorization engine. Neither a changed role/key nor a root/count substitutes for complete producer history or independent verification. The card does not authorize treating unavailable/unchecked evidence as verified."
+   :bounded-action {:phase :future-conformance :action "Preserve producer separation and tenant scope; distinguish owner chain verification from unavailable/unchecked independent targets and from malformed/failed exports in the adapter's later tests." :new-clause-required false}}
+
+  {:id :s6b/history-custody
+   :initial-votes {:pass1 :refuted :pass2 :remaining}
+   :comparison-votes [:refuted :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 41 2] :pass2 [:pass2 :votes 41 2] :original-report [:remaining-v1 :results 7 :findings 2]}
+   :disposition :already-required
+   :evidence [{:source :s6b :lines [28 41] :quote "nonstreaming complete-history gateway requests"}
+              {:source :s6b :lines [37 41] :observation "Complete history must be bounded and incomplete histories are required contract-test cases."}
+              {:source :govone-readme :lines [48 50] :quote "Your application owns end-user authentication, UI, conversation history, and recovery UX."}
+              {:source :openapi :lines [2702 2708] :observation "Caller cap is 256 messages/512 KiB; injected session system prompt and the classifier's commonly 64-message configured cap can lower the effective bound."}
+              {:source :knoxx-history :lines [40 72] :observation "The supplementary DefaultTranscriptCodec prunes by message/character policies before provider conversion. This is not evidence Oikos selected it."}
+              {:source :inference :lines [2308 2328] :observation "Owner request validation rejects message/byte overflow rather than trimming the request."}]
+   :reason "A complete bounded history can be rejected when it exceeds bounds; silent pruning cannot make an incomplete transcript satisfy that contract. Naming the actual transcript source, epoch/completeness proof and effective limits is integration-design work already required by the complete-history obligation, not a proven adoption of Knoxx pruning or a reason to implement a transcript store in planning."
+   :bounded-action {:phase :integration-qualification :action "Bind the caller-owned ordered transcript and effective owner limits; deny missing/reordered/overflow histories instead of silently trimming, summarizing or restarting them as complete." :new-clause-required false}}
+
+  {:id :s6b/tool-history
+   :initial-votes {:pass1 :confirmed-addressed :pass2 :remaining}
+   :comparison-votes [:historical-addressed :remaining]
+   :anchor-refs {:pass1 [:pass1 :votes 42 2] :pass2 [:pass2 :votes 42 2] :original-report [:remaining-v1 :results 7 :findings 3]}
+   :disposition :historically-addressed
+   :evidence [{:source :openapi :lines [2666 2680] :observation "The closed message shape has string content and only system/user/assistant roles, with no native tool role or call-ID field."}
+              {:source :inference :lines [2340 2346] :observation "validRole returns false for every other role, including tool."}
+              {:source :s6b :lines [37 41] :observation "History remains complete and hostile output is not authority."}
+              {:source :s6b :lines [60 60] :quote "Missing gateway/API compatibility is a blocker, not authorization to build a second policy engine or retry directly."}]
+   :reason "The current planning correction explicitly makes the unresolved representation a compatibility blocker. That resolves the earlier implication of available generic tool-history integration by denying unsupported qualification, not by supplying a serializer. Silently dropping calls/results or upgrading tool content to system authority would violate complete/untrusted history."
+   :bounded-action {:phase :owner-contract-qualification :action "Keep native-tool continuation unsupported until an owner-reviewed faithful call/result/order/untrusted-data representation exists; otherwise deny it explicitly." :new-clause-required false}}
+
+  {:id :s8a/identity-lineage
+   :initial-votes {:pass1 :refuted :pass2 :historical-addressed}
+   :comparison-votes [:refuted :historical-addressed]
+   :anchor-refs {:pass1 [:pass1 :votes 47 2] :pass2 [:pass2 :votes 47 2] :original-report [:remaining-v1 :results 9 :findings 1]}
+   :disposition :already-required
+   :evidence [{:source :s8a :lines [36 41] :quote "Actual identity controls dedupe; corrections append without similarity merges or rewriting provenance."}
+              {:source :s8a :lines [37 41] :observation "Source observation IDs and transitive correction/family lineage survive; missing/conflicting lineage rejects."}
+              {:source :s5a :lines [37 38] :observation "Observation ID is the admitted capture event ID, distinct from frame hash/lifetime; exact redelivery is idempotent and conflicting identity reuse rejects."}
+              {:source :workbench :lines [172 175] :observation "Labels retain observation/hash, coordinates/transform, model/template, prediction, correction/rejection, consent, actor and split; corrections append."}
+              {:source :canonicalize :lines [8 23] :observation "Clio collapses only exact event-ID/content duplicates and rejects conflicting contents for one ID."}]
+   :reason "The frozen requirement already distinguished actual identity from similarity and required append-only corrections; source hash was never declared label/correction identity. Current source-observation and provenance requirements make the intended distinction still clearer. The precise label schema remains a future deliverable, not an established collision defect."
+   :bounded-action {:phase :future-conformance :action "Test exact retry, conflicting ID reuse and distinct corrections sharing source pixels without losing their parents/provenance; do not dedupe by source hash or equal text." :new-clause-required false}}
+
+  {:id :s8a/partition-freeze
+   :initial-votes {:pass1 :confirmed-addressed :pass2 :refuted}
+   :comparison-votes [:historical-addressed :refuted]
+   :anchor-refs {:pass1 [:pass1 :votes 48 2] :pass2 [:pass2 :votes 48 2] :original-report [:remaining-v1 :results 9 :findings 2]}
+   :disposition :historically-addressed
+   :evidence [{:source :s8a :lines [37 37] :quote "a versioned source-family key from source/session identity, app identity and a frozen temporal grouping policy"}
+              {:source :s8a :lines [37 41] :observation "Transitive corrections/family members co-locate; missing/conflicting lineage is rejected and cross-split near-duplicates fail audit without similarity merges."}
+              {:source :s8a :lines [62 62] :quote "Source, transitive corrections, rejected actions and OCR boxes retain source observation ID/family and stay in one split."}
+              {:source :workbench :lines [172 176] :quote "Train/validation/held-out exports are reproducible derived artifacts."}]
+   :reason "The frozen broad family-grouping wording was strengthened with versioned/frozen grouping, transitive correction inheritance and failed contamination audits. Late conflicting lineage cannot silently pass that contract. A specific quarantine/manifest storage algorithm is not a further normative requirement; invalidating the contaminated artifact is also lawful."
+   :bounded-action {:phase :future-conformance :action "Retain versioned assignments and fail invalid/late cross-split lineage or leakage; never silently rewrite a qualified export to conceal contamination. Choose the lawful invalidation mechanism during implementation." :new-clause-required false}}]
+ :exact-action-list
+ {:planning-clarifications
+  [{:id :s3a/branch-version :action "Add the independent branch-predecessor edit precondition and no-mutation conflict invariant; prescribe no CAS/storage algorithm."}
+   {:id :s5a/supplier-accounting :action "Add supplier reservation lifetime/accounting after caller timeout/disconnect, or deny supplier admission when bounded ownership cannot be established; prescribe no operator-service reconfiguration."}]
+  :specification-handoff
+  [{:ids [:s1a/effect-boundary :s1a/target-matrix]
+    :action "Consume approved preparatory spec 92df993; keep code, adapter availability and future tests explicitly unverified."}]
+  :unverified-integration
+  [{:id :s6b/lens-scope :action "Retain the existing compatibility hold pending exact source/caller/endpoint and authenticated evidence-only seam qualification. Supplementary raw-context/nil-factory code is not adoption proof."}]
+  :other-18-items "No additional planning clause is established. Preserve their per-item future conformance/owner-contract obligations and existing compatibility holds; do not turn this into present implementation approval."}
+ :new-human-policy-questions []
+ :workflow-policy :unchanged
+ :review-rerun false
+ :fresh-findings []
+ :implementation-verified false
+ :tests-executed false
+ :live-calls-executed false
+ :model-calls-executed false
+ :personal-cache-or-credentials-read false
+ :live-rheos-readback false
+ :board-card-source-or-ledger-mutations false
+ :native-pr-writes false
+ :native-provider-approval false
+ :artifact-validation "Single EDN form, exactly the selected 23 unique IDs, permitted dispositions, retained original vote pairs, resolvable original-candidate/both-anchor refs, matching input hashes and disposition counts; not a product test or board validation."
+ :reflection {:receipt-river-and-session-mycology :loaded
+              :separate-ledger-or-spore-write :not-authorized
+              :note "The exclusive new-artifact boundary overrides routine ledger/spore persistence. Distinguish source hazard, integration adoption, normative gap and future conformance; confirmation is never inferred from vote count."}}

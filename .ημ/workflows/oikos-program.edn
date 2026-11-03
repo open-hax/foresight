@@ -1,0 +1,75 @@
+{:workflow/id :oikos-program-20261103
+ :workflow/version 1
+ :workflow/authority "Execution/review plan only. Rheos owns card admission/status/dependencies; this is not a second board implementation."
+ :source/foresight "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+ :source/oikos "ae35073719974c0df1d2dae301c2179fa4785641"
+ :source/cards ".ημ/runs/oikos-program-20261103/cards"
+ :policy {:qualified-program-merges :authorized
+          :deployment :sandbox-and-dev-only
+          :personal-capture :denied-synthetic-only
+          :retention {:images-hours 24 :text-days 7
+                      :derived-deletion :propagate
+                      :accepted-knowledge :explicit-consent
+                      :accepted-payload-extension :per-item-expiry-or-explicit-indefinite
+                      :acceptance-alone-renews-deadline? false}
+          :autonomy :agent-owned-resources-only
+          :operator-resources :explicit-approval
+          :models :existing-resources-only
+          :model-download-load-restart :held
+          :cloud :synthetic-through-govone-verified-no-charge-only
+          :spending 0
+          :remote-publication :held
+          :dependency-precision :specific-child-artifacts}
+ :execution {:coordinator-repository "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+             :oikos-base "/home/err/spaces/foresight/oikos"
+             :worktree-pattern "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-{task}"
+             :reviewer-role :independent-adversarial
+             :implementer-must-not-approve-self true
+             :planning-admission-required true
+             :new-successor-admission :verified-prerequisite-artifacts-not-worker-self-report
+             :epic-integration-agent :dispatch-after-both-children-verified
+             :documentation-agent :independent-foresight-worktree
+             :live-board "rheos read-task/read-board"
+             :journal ".ημ/runs/oikos-program-20261103/dispatch.jsonl"}
+ :proposed-task-edges
+ [{:key :s1a :uuid "07452a65-4a6a-4704-bf81-50408927dcc8" :requires []}
+  {:key :s1b :uuid "3d14e0a5-2790-42b8-9a55-54d686925c3c" :requires [:s1a]}
+  {:key :s2a :uuid "93a76dad-678a-4980-86fb-ba0fbb5e8203" :requires [:s1a]}
+  {:key :s2b :uuid "59774be2-cc61-4708-9030-8b7b42935ec3" :requires [:s2a]}
+  {:key :s3a :uuid "b2f52c1f-bd1b-431e-a417-95c72549ba0d" :requires [:s2a]}
+  {:key :s3b :uuid "912b707f-2275-45c9-b4a9-aac143e11d9a" :requires [:s3a :s2b :s4a]}
+  {:key :s4a :uuid "29caa8e3-289a-416c-9850-8ef9cc769e88" :requires [:s1a :s2a]}
+  {:key :s4b :uuid "27ff00af-536d-4d7d-a9ad-a09b5ec2aaf3" :requires [:s4a :s6a]}
+  {:key :s5a :uuid "0e124c65-694e-44f1-9959-ee83e81ca22b" :requires [:s2b :s7a]}
+  {:key :s5b :uuid "7d0235f1-ab69-4095-b404-bcc1ca60db91" :requires [:s5a]}
+  {:key :s6a :uuid "c703893f-aea4-41c2-9eab-c3bd37b28c9b" :requires [:s2a :s4a]}
+  {:key :s6b :uuid "0d11e7a7-c131-4c91-aaf7-55ad8ec26002" :requires [:s6a]}
+  {:key :s7a :uuid "0db50b53-6c7a-489a-bff9-048d57ce4cbb" :requires [:s1a]}
+  {:key :s7b :uuid "18ef840f-23cb-4dd5-bc19-a2a5aeb279c3" :requires [:s7a :s6a]}
+  {:key :s8a :uuid "2a08e0cb-e029-46ae-b217-399d0d3ebf42" :requires [:s2a :s5a :s6a :s7a]}
+  {:key :s8b :uuid "3cd09bfd-f214-4e16-817d-c36cffe21376" :requires [:s8a :s6a]}]
+ :epics [{:key :e1 :uuid "722906b7-77d7-4414-a976-23996f7533de" :children [:s1a :s1b]}
+         {:key :e2 :uuid "3b9279b5-aafd-431a-90a9-128ce4415de0" :children [:s2a :s2b]}
+         {:key :e3 :uuid "ff5998a4-2cd6-482c-a43e-94522eb908b4" :children [:s3a :s3b]}
+         {:key :e4 :uuid "456b2c69-cb5d-417d-9aeb-ac05e0a3251a" :children [:s4a :s4b]}
+         {:key :e5 :uuid "92b529b9-256d-4654-8aa6-5f1884a8adaa" :children [:s5a :s5b]}
+         {:key :e6 :uuid "e616187d-ba13-42b1-addd-aa4d6244a5be" :children [:s6a :s6b]}
+         {:key :e7 :uuid "e842e6d9-dd41-4ca2-b229-dc2466198864" :children [:s7a :s7b]}
+         {:key :e8 :uuid "3de19b00-adae-43e6-a6c4-da339faa6482" :children [:s8a :s8b]}]
+ :policy-blocked-completion-evidence
+ {:s4b "Actual remote client publication/account setup remains held, not passed by a mock."
+  :s5a "Local E4B runtime availability and resource admission must be observed; synthetic transport is not model qualification."
+  :s7b "12B download/load is held; missing actual backend/speed proof cannot be replaced with theoretical fit."
+  :s8b "No paid compute allocation or personal-data upload; historical budgets are not inherited."}
+ :cli-compatibility-blocker
+ "Installed ultra.bb injects retired OpenCode --dir and expects agent list. Active v2 CLI lacks both. Use explicitly identified harness-native review dispatches with content-hash journal; do not edit globally installed skills or claim ultra CLI execution."
+ :review-stage {:planning-per-card :required
+                :code-per-task :required-after-implementation
+                :skeptic-confirmation :required-before-treating-findings-as-confirmed
+                :native-pr-settlement :required-separately}
+ :planning-review-instructions
+ "Independent adversarial planning review for exactly the requested task key. Read this workflow, the task's own Oikos worktree AGENTS/source/tests at the pinned source, and the frozen official Rheos read-task JSON named by task UUID. You are read-only: no files, services, model calls, board state, credentials, publication or commits. Hunt real acceptance/dependency/authority defects, not missing implementation masquerading as a regression. All cards are incoming and implementation is held for planning admission. Preserve synthetic/dev-only/no-spend/no-publication policy. Each task has its own worktree; use task path .worktrees/feat/oikos-<key>. Related source owners may be read with their AGENTS but must not be edited. Proposed child edges are a derived execution plan pending native Rheos updates, not board authority. Distinguish confirmed source evidence from an inference or unverified API. Report at most five actionable findings with severity P0-P3, title, exact path/symbol evidence, required acceptance test, and whether a user-visible question remains. Also name prerequisite artifacts and whether policy restrictions leave real completion evidence blocked. Return task key, UUID, reviewed source SHA, verdict approve|changes_requested, findings, user_questions. No self-approval or native-provider-approval claims."
+ :review-result-protocol
+ {:required [:task :uuid :source-sha :verdict :findings :prerequisite-artifacts :policy-blockers :user-questions]
+  :finding-required [:severity :title :evidence :required-test]
+  :result-storage :coordinator-appends-immutable-dispatch-result-with-session-id}}

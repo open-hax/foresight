@@ -1,15 +1,15 @@
 ---
-uuid: "18ef840f-23cb-4dd5-bc19-a2a5aeb279c3"
-title: "Oikos: Qualify 12B backends and governed proxx comparison after admission"
-status: "incoming"
-type: "task"
-priority: "P1"
-points: "8"
-labels: "oikos, planning, local-first, task"
-parent: "e842e6d9-dd41-4ca2-b229-dc2466198864"
-dependency: ["0db50b53-6c7a-489a-bff9-048d57ce4cbb", "e616187d-ba13-42b1-addd-aa4d6244a5be"]
 category: "kanban"
-write-id: "1793718671883-0.tc597wqt1co3d4vjf"
+labels: "oikos, planning, local-first, task"
+dependency: ["0db50b53-6c7a-489a-bff9-048d57ce4cbb", "c703893f-aea4-41c2-9eab-c3bd37b28c9b"]
+parent: "e842e6d9-dd41-4ca2-b229-dc2466198864"
+type: "task"
+write-id: "1793724125808-0.oesdaj0i5cywctuq4h"
+points: "8"
+title: "Oikos: Qualify 12B backends and governed proxx comparison after admission"
+priority: "P1"
+status: "incoming"
+uuid: "18ef840f-23cb-4dd5-bc19-a2a5aeb279c3"
 created_at: "2026-11-03T15:11:11.883Z"
 ---
 
@@ -54,7 +54,7 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 ## Dependencies
 
 - 0db50b53-6c7a-489a-bff9-048d57ce4cbb (S7A)
-- e616187d-ba13-42b1-addd-aa4d6244a5be (E6)
+- c703893f-aea4-41c2-9eab-c3bd37b28c9b (S6A): authorized GovOne policy-session admission before governed comparison, not the entire Lens epic.
 
 ## Initial runtime and NPU baseline update — 2026-11-03
 
@@ -63,3 +63,8 @@ Operator-reported follow-up evidence (not remeasured by this planning writer): t
 The NPU live baseline used 3 synthetic 960x600 images containing 9 lines: 9 valid boxes, but exact normalized text only 3/9, with reported inference 130–286 ms. Box/schema validity is not text accuracy or model semantic correctness. Semantic performance remains unmeasured. No private capture, cloud calls or 12B load occurred in the reported baseline. Future measurements require pinned runtime/model/mmproj/hash/hardware/time/context and resource admission; do not infer LLM NPU support from OCR.
 
 Additional acceptance check: preserve this reported baseline with synthetic source/coordinate provenance, distinguish supplier timings from end-to-end latency, and deny model-quality conclusions until stable runtime qualification and independent held-out semantic evaluation exist. No new inference, capture, cloud request or model load is authorized by this card.
+
+---
+S7A provides frozen baseline and S6A GovOne policy admission, not whole E6. Existing-resource-only policy holds all 12B download/load/restart; missing actual backend/speed/runtime proof remains a completion blocker. Synthetic no-charge route tests do not qualify a model or waive resource admission. Current native child prerequisites synchronized to the user-approved precise plan: 0db50b53-6c7a-489a-bff9-048d57ce4cbb (S7A), c703893f-aea4-41c2-9eab-c3bd37b28c9b (S6A). Parent relationship is preserved and is not an implicit gating edge. All checks stated here are future acceptance requirements, not executed implementation results. Earlier dependency prose in historical comments is superseded by this correction for current execution edges; historical event/comment bytes remain unchanged. Policy correction — sandbox/dev and synthetic data only; no personal capture. Default raw retention is 24h images and 7d text; propagate deletion to derived/retrieval payloads, with explicit consent for accepted knowledge. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Existing models only; 12B download/load/restart is held. Any cloud experiment is synthetic, GovOne-authorized, verified free and 0 spend only; no allocation or inherited pilot budget. Remote publication remains held. Qualified program merges are authorized only after their required gates; this is not a readiness override, implementation permission or native review approval.
+
+---

@@ -1,0 +1,132 @@
+{:verification/version 1
+ :date "2026-11-03"
+ :scope :two-adjudicated-planning-clarifications-and-preserved-lens-hold
+ :root "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+ :verdict :adequate
+ :meaning "Both exact planning clarifications are adequately preserved in the root card bodies and saved official Rheos readbacks/comments. The Lens integration remains unverified and held. This is neither a new review of the 23 items nor code/admission credit."
+ :original-adjudication
+ {:path ".ημ/runs/oikos-program-20261103/skeptics/disputed-adjudication.edn"
+  :sha256 "4d50b3d39c87a71f0e0fb1b0e0b86419a15b7cbddf4137f05c68e9c502c5fc1a"
+  :modified false
+  :reference [:exact-action-list :planning-clarifications]}
+ :evidence-boundary
+ {:readbacks :saved-official-rheos-json-supplied-by-coordinator
+  :live-board-readback-performed false
+  :recorded-statuses-only true
+  :section-comparison "The named root Markdown section and saved readback body section are equal after trimming surrounding whitespace only. Section hashes below are SHA-256 of that trimmed UTF-8 section."
+  :other-findings-reassessed false
+  :owning-code-re-audited false}
+ :verdicts
+ [{:id :s3a/branch-version
+   :verdict :adequate
+   :root-anchor
+   {:path "docs/agile/kanban/oikos-implement-logical-memberships-and-speculative-edn-projection-branches-2549ba0d.md"
+    :heading "### S3A branch predecessor"
+    :lines [40 44]
+    :section-sha256 "a73ee3226d6aac1e53e0191d85e04fdd9efaa0d85ed816cd410eb65b8b665940"}
+   :readback-anchor
+   {:path ".ημ/runs/oikos-program-20261103/adjudicated-clarifications/b2f52c1f-bd1b-431e-a417-95c72549ba0d.json"
+    :sha256 "1137b83a67a033a5f2dc21d3cb8a12a3f941ed77526aeb5177ceb5272ff4ce72"
+    :uuid "b2f52c1f-bd1b-431e-a417-95c72549ba0d"
+    :recorded-status "incoming"
+    :write-id "1793727206524-0.0ni5weye9zf9d9lugxby"
+    :body-ref [:sections 0 :content]
+    :comment-ref [:sections 1 :content]
+    :comment-prefix "Source-grounded adjudication of :s3a/branch-version:"}
+   :root-readback-section-equal true
+   :preserved
+   {:exact-named-branch-expected-predecessor true
+    :independent-of-desktop-observation-revision true
+    :missing-wrong-stale-predecessor-conflicts-without-mutation true
+    :no-silent-concurrent-overwrite true
+    :separate-branches-independent true
+    :cas-or-store-algorithm-not-prescribed true
+    :new-clio-authority-not-created true
+    :future-concurrent-edit-and-rejection-fixtures true}
+   :decisive-quote "A missing, wrong or stale predecessor returns an explicit branch-predecessor conflict without mutation, even when the observed desktop revision still matches."
+   :future-proof "The section requires two edits at one predecessor with unchanged desktop revision: one accepted successor, one no-mutation conflict; missing/wrong predecessor, independent branch B and repeated rejection also have explicit fixtures."
+   :remaining-planning-action nil
+   :implementation-credit false}
+
+  {:id :s5a/supplier-accounting
+   :verdict :adequate
+   :root-anchor
+   {:path "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+    :heading "### S5A supplier resource ownership"
+    :lines [57 61]
+    :section-sha256 "cf2b7cbb1fe9c2a5a0593306fed9279e3e8733646c56a32998ebc41f25b8b04c"}
+   :readback-anchor
+   {:path ".ημ/runs/oikos-program-20261103/adjudicated-clarifications/0e124c65-694e-44f1-9959-ee83e81ca22b.json"
+    :sha256 "9c6b86616f231ff5cae79f6e4cfb8877a2a900c6748cbfb79562edfb3a65db6f"
+    :uuid "0e124c65-694e-44f1-9959-ee83e81ca22b"
+    :recorded-status "incoming"
+    :write-id "1793727207052-0.b2pn7g7lv2hk9pgs5f0"
+    :body-ref [:sections 0 :content]
+    :comment-ref [:sections 1 :content]
+    :comment-prefix "Source-grounded adjudication of :s5a/supplier-accounting:"}
+   :root-readback-section-equal true
+   :preserved
+   {:supplier-queued-in-flight-work-and-retained-decoded-buffers-accounted true
+    :charged-until-established-completion-or-termination true
+    :client-timeout-disconnect-does-not-release-reservations true
+    :replacement-admission-cannot-ignore-existing-work true
+    :unknown-bounded-ownership-accounting-denies-admission true
+    :no-implicit-operator-supplier-reconfiguration true
+    :publication-revocation-distinct-from-termination true
+    :future-deferred-supplier-concurrency-and-byte-bound-fixtures true}
+   :decisive-quote "Client timeout or disconnect alone cannot release reservations or admit replacement work as though the original job ended."
+   :future-proof "A deferred synthetic supplier continues after timeout/disconnect; reservations remain charged, repeated timeout/reconnect stays within admitted concurrency/byte bounds, capacity releases only after established completion/termination, and unresolved ownership is not reported as quiescence."
+   :remaining-planning-action nil
+   :implementation-credit false
+   :supplier-adoption-or-runtime-qualification-credit false}]
+ :lens-hold
+ {:id :s6b/lens-scope
+  :disposition :unverified-integration
+  :hold-preserved true
+  :root-anchor
+  {:path "docs/agile/kanban/oikos-expose-scoped-knoxx-lens-policy-evidence-and-complete-gateway-history-8ec26002.md"
+   :lines [71 71]
+   :prefix "Dispute adjudication preserves the existing Lens compatibility hold:"}
+  :readback-anchor
+  {:path ".ημ/runs/oikos-program-20261103/adjudicated-clarifications/0d11e7a7-c131-4c91-aaf7-55ad8ec26002.json"
+   :sha256 "06131ec30f368cd56c0602dbdd58d8ce1473cd7009af5a60e3dec2d9d995eb55"
+   :uuid "0d11e7a7-c131-4c91-aaf7-55ad8ec26002"
+   :recorded-status "incoming"
+   :write-id "1793727207581-0.ztirbjsvbl9md1t61q"
+   :comment-ref [:sections 1 :content]
+   :comment-prefix "Dispute adjudication preserves the existing Lens compatibility hold:"}
+  :decisive-quote "exact adopted Knoxx source revision, Oikos caller/endpoint, trusted principal/tenant/resource scope and evidence-only response contract must be qualified before integration can count complete"
+  :source-hazard-is-not-adoption-or-anonymous-access-proof true
+  :raw-context-factory-not-accepted-as-evidence-only-seam true
+  :remaining "Retain the existing qualification hold until those source/caller/authenticated evidence-only bindings are established; no further planning clarification is required by this bounded verification."
+  :integration-complete false}
+ :specification-handoff
+ {:path "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a/docs/specs/s1a-generation-contracts.md"
+  :current-commit "95dfbdb26f65fac8b17bcb11cd192ba47d8efe3c"
+  :sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+  :commit-blob-sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+  :working-file-equals-commit true
+  :prior-reference "92df9937c1faa291eec5104bc3c8e056a7b73317"
+  :prior-reference-remains-historical true
+  :pushed :reported-by-delegating-user
+  :remote-push-independently-checked false
+  :change-description :same-contracts-plus-native-fix-scope-reported-by-delegating-user
+  :contract-re-audit-performed false
+  :preparatory-specification-only true
+  :code-or-executed-acceptance-credit false}
+ :remaining-planning-clarifications []
+ :remaining-implementation-and-integration-obligations :unchanged
+ :new-human-policy-questions []
+ :workflow-policy :unchanged
+ :original-votes-and-adjudication-not-rewritten true
+ :review-rerun false
+ :fresh-findings []
+ :tests-executed false
+ :services-or-api-calls false
+ :board-status-or-comment-writes false
+ :source-card-or-ledger-writes false
+ :only-new-file ".ημ/runs/oikos-program-20261103/skeptics/adjudicated-fix-verification.edn"
+ :implementation-verified false
+ :planning-admission-or-status-advancement-granted false
+ :native-provider-approval false
+ :reflection "Only the two accepted normative additions and the retained Lens hold were compared with the requested action list. Spec metadata was advanced without rewriting historical adjudication or awarding code credit; no separate ledger/spore write is authorized."}

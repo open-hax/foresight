@@ -1,15 +1,15 @@
 ---
-uuid: "2a08e0cb-e029-46ae-b217-399d0d3ebf42"
-title: "Oikos: Record consented corrected labels and leakage-safe corpus partitions"
-status: "incoming"
-type: "task"
-priority: "P1"
-points: "5"
-labels: "oikos, planning, local-first, task"
-parent: "3de19b00-adae-43e6-a6c4-da339faa6482"
-dependency: ["3b9279b5-aafd-431a-90a9-128ce4415de0", "92b529b9-256d-4654-8aa6-5f1884a8adaa", "e616187d-ba13-42b1-addd-aa4d6244a5be", "e842e6d9-dd41-4ca2-b229-dc2466198864"]
 category: "kanban"
-write-id: "1793718672528-0.i2wjch6ofpkqxdcywj"
+labels: "oikos, planning, local-first, task"
+dependency: ["93a76dad-678a-4980-86fb-ba0fbb5e8203", "0e124c65-694e-44f1-9959-ee83e81ca22b", "c703893f-aea4-41c2-9eab-c3bd37b28c9b", "0db50b53-6c7a-489a-bff9-048d57ce4cbb"]
+parent: "3de19b00-adae-43e6-a6c4-da339faa6482"
+type: "task"
+write-id: "1793726620832-0.pjmrwzynnydig9g5115"
+points: "5"
+title: "Oikos: Record consented corrected labels and leakage-safe corpus partitions"
+priority: "P1"
+status: "incoming"
+uuid: "2a08e0cb-e029-46ae-b217-399d0d3ebf42"
 created_at: "2026-11-03T15:11:12.528Z"
 ---
 
@@ -34,11 +34,17 @@ No new compute-unit spending, automatic training, automatic production adoption,
 ## Acceptance criteria
 
 - [ ] Actual identity controls dedupe; corrections append without similarity merges or rewriting provenance.
-- [ ] Train/dev/held-out assignments group temporal/app/source families; near-duplicate leakage tests reject contaminated splits; consent revocation controls payload availability.
+- [ ] Oikos portable .cljc corpus laws define a versioned source-family key from source/session identity, app identity and a frozen temporal grouping policy. Every source record, correction (transitively), rejected action and OCR box retains its source observation ID and family key; all rows sharing actual identity or correction lineage and all members of that defined family stay in one train/dev/held-out split. Similarity can flag leakage but never establish identity or silently merge families. Consent revocation controls payload availability.
+
+### S8A consent admission
+
+- [ ] Valid explicit consent for the exact source/item and intended purpose precedes label/correction retention and use. Missing, wrong-scoped, expired or revoked consent denies admission/use. Model predictions and action acceptance are not human gold labels and grant no retention, training or cloud-export rights; retain their distinct attribution. Local consent cannot authorize a cloud recipient.
+
+Future verification: synthetic labels/corrections exercise absent consent, wrong source/item/purpose, expiry and revocation and assert no unauthorized retained/used payload. A valid scoped consent permits only its stated local purpose. Revoke after preparation and verify corrections, projections and prepared payload availability are withdrawn, leaving only safe provenance; a prediction or accepted action alone never passes human-gold/retention/training/export admission.
 
 ## Verification
 
-Synthetic replay/correction/identity fixtures and split leakage audit; verify rejected actions and coordinate source lineage survive export preparation. These are future acceptance checks, not executed implementation evidence.
+Synthetic replay/correction/identity fixtures and split leakage audit place a source, correction-of-correction, rejected action and OCR box in the same family/split; missing or conflicting family/lineage is rejected, and cross-split near-duplicates fail the audit without similarity merges. Verify source observation identity and coordinate lineage survive export preparation. Clio supplies append/replay, not product-specific corpus-family semantics. These are future acceptance checks, not executed implementation evidence.
 
 ## Risks
 
@@ -52,8 +58,15 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 
 ## Dependencies
 
-- 3b9279b5-aafd-431a-90a9-128ce4415de0 (E2)
-- 92b529b9-256d-4654-8aa6-5f1884a8adaa (E5)
-- e616187d-ba13-42b1-addd-aa4d6244a5be (E6)
-- e842e6d9-dd41-4ca2-b229-dc2466198864 (E7)
+- 93a76dad-678a-4980-86fb-ba0fbb5e8203 (S2A): causal observation identity and replay contracts.
+- 0e124c65-694e-44f1-9959-ee83e81ca22b (S5A): attributed perception observations and coordinate provenance, not the full knowledge loop.
+- c703893f-aea4-41c2-9eab-c3bd37b28c9b (S6A): policy-session/consent boundary, not the entire Lens epic.
+- 0db50b53-6c7a-489a-bff9-048d57ce4cbb (S7A): frozen synthetic baseline and independent split identity; optional S7B comparisons are not prerequisites.
 - Related research (not inherited budget or completion authority): qualify-the-bounded-colab-gemma-retrieval-research-pilot-and-retain-production-holdback; parent da84a64d-f118-4722-8709-a1c556034f90.
+
+---
+Native findings 4456846195 and 4456856532: consume S2A causal identity, S5A attributed perception, S6A policy boundary and S7A local frozen baseline; optional S7B/whole E7 is not a prerequisite. Versioned source-family key binds source/session identity, app identity and frozen temporal grouping policy. Source, transitive corrections, rejected actions and OCR boxes retain source observation ID/family and stay in one split. Missing/conflicting lineage denies admission; similarity flags leakage but never establishes identity. Current native child prerequisites synchronized to the user-approved precise plan: 93a76dad-678a-4980-86fb-ba0fbb5e8203 (S2A), 0e124c65-694e-44f1-9959-ee83e81ca22b (S5A), c703893f-aea4-41c2-9eab-c3bd37b28c9b (S6A), 0db50b53-6c7a-489a-bff9-048d57ce4cbb (S7A). Parent relationship is preserved and is not an implicit gating edge. All checks stated here are future acceptance requirements, not executed implementation results. Earlier dependency prose in historical comments is superseded by this correction for current execution edges; historical event/comment bytes remain unchanged. Policy correction — sandbox/dev and synthetic data only; no personal capture. Default raw retention is 24h images and 7d text; propagate deletion to derived/retrieval payloads, with explicit consent for accepted knowledge. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Existing models only; 12B download/load/restart is held. Any cloud experiment is synthetic, GovOne-authorized, verified free and 0 spend only; no allocation or inherited pilot budget. Remote publication remains held. Qualified program merges are authorized only after their required gates; this is not a readiness override, implementation permission or native review approval.
+
+Consensus planning correction v1: root incoming acceptance/verification now explicitly specifies s8a/consent-admission. See the corresponding named root subsections for the contract and concrete future positive/negative fixtures. Only the 12 consensus-remaining gaps in skeptics/reconciliation.edn are in scope; the 23 disputed findings receive no settlement/rejection here. All added scenarios are future acceptance requirements, not implemented or executed behavior. Existing dependency vectors, parent relationships, incoming status, historical events and prior correction text remain preserved. Synthetic sandbox/dev-only, zero-spend, existing-model and remote-publication holdbacks remain unchanged; no status advancement or execution permission.
+
+---
