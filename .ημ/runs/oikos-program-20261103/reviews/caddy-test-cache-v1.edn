@@ -1,0 +1,24 @@
+{:report/id :caddy-test-cache-v1-canonical-handoff
+ :kind :coordinator-recovered-exact-worker-evidence
+ :worker-report "../../../../reviews/caddy-test-cache-v1.edn"
+ :worker-report-sha256 "eceb09873321acad4727b6b2fbadb7054ad0c9a6fb46545291ec939b7463ab76"
+ :worker-report-location-drift "The worker wrote its report at coordinator reviews/ rather than this run directory. The original is preserved; this handoff records the actual path instead of claiming a missing file existed."
+ :worker-report-observed-at "2026-11-03T21:15:19.598718+00:00"
+ :task "3f5d0052-dda2-4089-971d-8603e385bd77"
+ :authorization "../decisions/caddy-isolated-test-cache-authorization.edn"
+ :cache "/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773"
+ :binary "/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773/caddy"
+ :environment-variable "CADDY_TEST_BINARY"
+ :archive {:bytes 14595001
+           :sha256 "a7e8306c54138cf88e371c5ec0caf7baf142ecc1d60a30897dfb67d65d3748c8"}
+ :binary-identity {:bytes 40681624 :format :ELF64 :machine :x86_64
+                   :sha256 "d3491373b2d78e4eaa3f498b42852d399d404b0df3f274bbee66d62c12084be0"
+                   :version "v2.8.4 h1:q3pe0wpBj1OcHFZ3n/1nl4V4bxBrYoSoab7rL9BMYNk="}
+ :worker-verification {:archive-checked-before-extraction-and-use true
+                       :extracted-only-regular-caddy-member true
+                       :executed-only ["caddy version"] :exit 0
+                       :system-install false :service-start false :services-tests-run false}
+ :parent-file-readback "Read the complete worker report and cache ownership/verification manifests, then streamed both exact files through Python hashlib: archive 14595001 bytes and binary 40681624 bytes match their pinned SHA256s. No additional binary execution or Services test is claimed."
+ :retention {:active true :exact-remote-backup-verified false
+             :remove-before-verified-backup false}
+ :services-full-gate :not-established-by-tool-preparation}

@@ -1,0 +1,112 @@
+{:review/id :shx-safe-bash-implementation-v1
+ :date "2026-11-03"
+ :scope :shx-owner-red-green-partial-pure-slice
+ :context :己
+ :confidence 1.0
+ :status :incomplete-owner-prerequisite
+ :task/uuid "577a41a3-3778-417b-b65d-186c12a521bf"
+ :board-readback {:command "eta-mu kanban read-task 577a41a3-3778-417b-b65d-186c12a521bf --config /home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+                  :observed-status :in_progress :mutations false}
+ :planning {:head "79ca039d0137aca1e59ebdbf4cd16eb46f737495"
+            :spec-sha256 "2dbeda258a384caa089e64ec578f57abfa85e123581559a603e55615c2abdcdc"
+            :independent-approval-read ".ημ/runs/oikos-program-20261103/reviews/shx-safe-bash-plan-fix-review-v2.edn"}
+ :worktree "/home/err/spaces/foresight/shx/.worktrees/feat/oikos-safe-bash-20261103"
+ :branch "feat/oikos-safe-bash-20261103"
+ :base "f4ee133dcf1650c7eafb623ef084f62417252477"
+ :red {:head "3fdb6dc0bc9093feb54e11beb839ca4e0377d213"
+       :commit-subject "test: red restricted Bash law and independent grammar fixtures"
+       :command "clojure -M:test --focus shx.safe-bash-test --focus shx.law.safe-bash-test"
+       :exit 1 :tests 1 :assertions 1 :errors 1
+       :failure "Could not locate shx/law/safe_bash__init.class, shx/law/safe_bash.clj or shx/law/safe_bash.cljc on classpath"
+       :meaning "Real missing owner-law failure, not a fabricated expected-failure test or waived gate."}
+ :green {:head "b963e96e6da2cc8bf4779b484cde0df40f9d2f35"
+         :subject "feat: green portable restricted Bash semantics and parser slice"
+         :qualification :pure-slice-only
+         :source [{:path "src/shx/domain/safe_bash.cljc"
+                   :sha256 "f796cb2152d6194e71b1840b209440dd9b32774a3b40be9d8ea93b70711570a2"}
+                  {:path "src/shx/domain/bash_validation.cljc"
+                   :sha256 "75b4b07f9ae679233bcf1c1c638ae04b7ec235a84afb7cf0e2d2df2bbd387dac"}
+                  {:path "src/shx/shape/safe_bash.cljc"
+                   :sha256 "fca2d005c8ab417c55ced915e7979b16d7cbb48bce22d9a5cc8b119e546e9d5d"}
+                  {:path "src/shx/law/safe_bash.cljc"
+                   :sha256 "bb3bc7369583c13081bb3f0adc3ab9e63be014075476195df8c8d262e2166655"}]
+         :tests ["test/shx/safe_bash_test.cljc" "test/shx/law/safe_bash_test.clj"
+                 "test/shx/safe_bash_fixture.cljc"]
+         :fixture-sha256 "7f7fa43309ee099853abf0a0311e08df5c1dc13411d93fd4626c9dcde249953e"}
+ :implemented ["Portable scalar-valid UTF-8 byte counting, finite EDN/metadata guard, explicit name/path/literal constraints, reference availability/shadowing invariants and data-to-restricted IR."
+               "Dedicated canonical S1A quote morphism; existing sq/dq, generic IR, CLI/envm/PATH unchanged."
+               "Separate positive non-evaluating parser with no renderer dependency; canonical quote-splice grammar, bounded content/line limits, full ordered expected binding comparison."
+               "Malli-schema-only closed requests, restricted IR, descriptor/result and distinct render/validate envelopes; actual JVM Malli tests."
+               "Shared inert hand-authored goldens, 49 exhaustive two-token hostile-alphabet roundtrips, scalar/path/artifact byte/depth/element boundary cases, mutation-discriminating schema closure tests."]
+ :actual-verification [{:command "npm_config_offline=true bin/analyze --strict"
+                        :exit 0 :checks 7 :tests 37 :assertions 237 :failures 0
+                        :zero-warning-qualified false
+                        :log "target/safe-bash-gate.log"}
+                       {:command "bb -cp src:test -e (require 'shx.safe-bash-test)(clojure.test/run-tests 'shx.safe-bash-test)"
+                        :runtime "babashka v1.12.207" :exit 0 :tests 12 :assertions 140 :failures 0 :errors 0}
+                       {:command "nbb -cp src:test -e (require '[cljs.test :as t] 'shx.safe-bash-test)(t/run-tests 'shx.safe-bash-test)"
+                        :runtime "nbb v1.3.204" :exit 0 :tests 12 :assertions 140 :failures 0 :errors 0}
+                       {:command "bb mutate" :exit 0
+                        :total 139 :killed 96 :survived 4 :no-coverage 39
+                        :timeout 0 :error 0 :tests-timed-out 5
+                        :log "target/safe-bash-mutation.log"}
+                       {:command "bb mutate:survivors" :exit 0 :log "target/safe-bash-survivors.log"}
+                       {:command "bb mutate:gaps" :exit 0 :log "target/safe-bash-gaps.log"}
+                       {:command "git diff --cached --check" :exit 0}]
+ :mutation-triage {:confidence 0.9
+                   :survivors [{:path "src/shx/domain/safe_bash.cljc" :line 38 :mutation "< -> <="
+                                :assessment :equivalent-by-analysis
+                                :reason "Newly admitted character lengths 1 and 4097 cannot survive the remaining path-component and UTF-8-byte constraints respectively."}
+                               {:path "src/shx/domain/safe_bash.cljc" :line 43 :mutation "rest -> next"
+                                :assessment :equivalent-by-analysis
+                                :reason "A path reaching this clause starts / and has length >1; split yields at least two components, so rest and next return the same component sequence."}
+                               {:path "src/shx/domain/safe_bash.cljc" :line 56 :mutation "<= -> <"
+                                :assessment :equivalent-by-analysis
+                                :reason "A collection of 4096 children already exceeds the global 4096-node traversal budget once its own node is counted; both variants reject."}
+                               {:path "src/shx/domain/safe_bash.cljc" :line 82 :mutation "rest -> next"
+                                :assessment :equivalent-by-analysis
+                                :reason "Loop only distinguishes empty? from nonempty; nil versus empty tail is observationally equal here."}]
+                   :new-schema-no-coverage 15
+                   :schema-disposition "Top-level Malli schema literal attribution limitation. Actual JVM tests exercise request/IR/descriptors/results/envelopes; in-memory open-map mutants demonstrate negative closure assertions discriminate. This is not a claim all literal sites were independently killed."
+                   :other-no-coverage "24 existing config/IR/Bash/BB/quote sites; quote attribution is known unstable. Existing gaps were not deleted, excluded or hidden."
+                   :attribution-observation "One intermediate run lost parser attribution and reported five killable survivors already covered by explicit boundary tests. Separating inert fixtures from test namespace dependencies restored attribution on the final run without weakening tests or thresholds."
+                   :score-not-qualification true
+                   :independent-triage-confirmation :pending}
+ :warning {:status :concrete-owner-qualification-hold
+           :message "DEPRECATED SYNTAX (NO_SOURCE_PATH): DEPRECATED: Using integer 0 for object id. Use named variables instead."
+           :diagnostic "A temporary in-process diagnostic wrapper printed a stack and then called the original deprecated-warn unchanged; no source/config suppression persisted."
+           :diagnostic-log "target/safe-bash-warning-provenance.log"
+           :observed-stack ["typed.clj.checker.parse_unparse/parse-object-path:1440"
+                            "typed.cljc.checker.var-env/lookup-Var-nofail"
+                            "typed.cljc.checker.check.nthnext/check-seq"]
+           :dependency-evidence "Pinned typed.lib.clojure-1.4.0.jar, typed/ann/clojure.cljc:1938 annotates cc/seq with :object {:id 0 :path [Seq]}; pinned typed.clj.checker-1.4.0.jar parse_unparse.cljc:1440 emits this exact warning."
+           :disposition "No owned quote semantics or upstream dependency bytes changed. Resolving pinned library annotation needs an evidenced owner-approved narrow dependency remedy; no version bump, patch, stderr hiding or ratchet relaxation attempted."}
+ :not-implemented ["JVM infra facade with descriptor byte/hash verification, trusted pin admission and closed sanitized render/validate results."
+                   "Streaming bounded non-evaluating wire reader with duplicate-key/tag/metadata/depth/element guards before allocation/Malli."
+                   "Actual separately pinned fixed JVM render and validation process entries/classpaths."
+                   "Real BB and NBB external transport positives/crossed-operation negatives and process failure/deadline/group cleanup qualification."
+                   "Absolute composed-consumer deadline and off-main-loop post-spawn parsing/hashing; no hard-real-time claim or fresh per-stage budgets implemented."
+                   "Full effect guards, trusted source/dependency bundle manifests, independent accepted validator/renderer pins, dependency locks and explicit owner handoff."]
+ :api {:proposed-version :shx/safe-bash-v1 :proposed-validator-id :bash-env-v1
+       :exported-fixed-entries [] :accepted-validator-revision nil
+       :accepted-renderer-revision nil :dependency-lock nil
+       :publication-or-owner-acceptance false
+       :warning "Source-file hashes above are observed unreviewed identities, NOT accepted source-bundle pins or an artifact handoff."}
+ :escalation {:target :parent-architect
+              :reason "The remaining bounded streaming reader, separate executable dependency/pin closure, BB/NBB asynchronous process supervisor and single-clock cancellation/reaping composition are system-design and long-horizon integration work. Production implementer instruction requires Architect escalation instead of grinding past that boundary."
+              :nested-delegation false
+              :request "Parent can route the remaining exact reviewed B01-B13 outer obligations to Architect in this same owner worktree, and separately review the committed pure renderer/parser slice. Do not mark the task or owner API complete. No new operator decision requested."}
+ :preservation {:owner-worktree-status :clean
+                :root-branch "feat/supervisor-ir-card"
+                :root-head "5dbac4fde8b3626316c71e15b48b9fe62a5802c2"
+                :root-untracked-unchanged [".agents/" ".github/workflows/agy-review.yml" "scripts/"]
+                :free-space "45 GiB"
+                :active-artifacts ["target/safe-bash-*.log" ".heretic/" ".heretic-sandbox/"]
+                :cleanup "Retain active worktree and unpushed evidence; exact remote backup not verified. No deletions."}
+ :limits ["Not full B01-B13 completion. Pure BB/NBB parity does NOT qualify the missing external JVM transports or independent pin handoff."
+          "No native/generated Bash execution, bash -n, personal discovery, model/service/cloud effects, credential access or package installation."
+          "No parent board/card/receipt writes, push/PR/merge/amend, Services work or Oikos changes. This new report is the only authored parent artifact."
+          "No independent implementation review or approval claimed; parent owns that review and any eventual consumption/admission."]
+ :reflection {:p-efficiency 0.7 :p-friction 0.4 :p-skill-candidate 0.55
+              :learning "Keep inert shared fixtures separate from test namespaces to avoid mutation-attribution instability; distinguish pure scanner/morphism parity from real external transport qualification. Escalate single-clock asynchronous supervisor and pin-closure integration to Architect rather than substitute an unbounded read or synchronous main-loop check."
+              :spore-created false :separate-ledger-write false}}

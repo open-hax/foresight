@@ -1,0 +1,161 @@
+{:report/id :govone-ocr-admission-discovery-20261103
+ :report/kind :bounded-read-only-owner-discovery
+ :report/context {:symbol :己 :confidence 0.98 :tier :observed-source-with-derived-conclusions}
+ :owner {:path "/home/err/devel/orgs/mojomast/govone"
+         :head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+         :tracked-worktree-status :clean
+         :status-command "git status --porcelain --untracked-files=no"
+         :status-limit "Untracked/ignored files were not inventoried or read. No live deployment identity is established."}
+ :parent {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+          :observed-head "81038b2123254783d4ec95f9338a87b8f3579834"}
+ :scope {:only-write "This new report; no other files, ledgers, board state, commits or services changed."
+         :performed [:source-and-contract-reads :read-only-git-identity-and-tracked-status]
+         :not-performed [:network :govone-evaluation :mcp :credential-reads :service-restart
+                         :ocr-post :model-execution :tests :builds :owner-implementation]
+         :test-status :source-inspected-not-executed
+         :reflection "Bounded discovery found an authority-category conflation; parent owns any subsequent reflection/ledger recording. No additional artifact was created."}
+ :instructions-read ["/home/err/AGENTS.md (in harness context)"
+                     "/home/err/devel/AGENTS.md"
+                     "/home/err/devel/README.md"
+                     "/home/err/devel/orgs/mojomast/govone/AGENTS.md"
+                     "/home/err/devel/orgs/mojomast/govone/README.md"
+                     "Parent applicable AGENTS.md supplied in harness context; parent README.md read."
+                     "Owner glob **/AGENTS.md found only owner root AGENTS.md. No intervening orgs/mojomast AGENTS.md or target-report ancestor AGENTS.md was present."]
+
+ :answer
+ {:all-three-owned-by-govone false
+  :disclosure-only-is-also-incomplete true
+  :summary "GovOne implements authenticated tenant gateway admission, signed governance policy, governed endpoint approval/revision binding, local capacity-snapshot admission, response delivery and audit. It does NOT expose a generic verifier for an Oikos named operator-resource consent context, arbitrary OCR resource attestation, or parent execute permit. Its capacity and endpoint mechanisms are real but are scoped to GovOne's model-dispatch path, not a blanket authority over host resources."
+  :current-generic-ocr-verifier :not-found-in-inspected-owner-contracts
+  :absence-confidence 0.95
+  :absence-limit "This is bounded source/API discovery at the named HEAD, not a proof about every deployment, private integration or future owner contract."
+  :runner-question "Asking which reviewed GovOne verifier authenticates all three contexts presupposes an owner contract not established by this source. Do not fill that hole with a guessed endpoint, copied policy kernel or local allow boolean."
+  :local-synthetic-obligation "Existing S7A policy does not make completion of S6A or a live GovOne call an automatic prerequisite for every pure synthetic test. A prospective effectful OCR batch still requires separately established resource/owner approval and scoped parent execution authority. Neither this discovery nor the restart consent supplies that authority."
+  :live-batch-verdict :still-held
+  :reason "The explicit restart decision excludes OCR batch execution. No fresh resource proof, complete local no-egress proof or parent batch execution grant was established here."}
+
+ :authority-separation
+ [{:context :named-owner-resource-approval
+   :existing-authority "Human/operator approval for operator-owned resources; parent consumes its exact scope."
+   :govone-generic-verifier :not-established
+   :evidence [:parent-policy :restart-grant :owner-boundary :policy-types]
+   :distinction "GovOne principal authentication proves possession of an active gateway credential and current role; it does not prove the human approved this particular host resource or OCR batch."}
+  {:context :pinned-resource-admission
+   :existing-authority "Trusted owner/runtime observations and reviewed resource contract; GovOne owns its own endpoint/capacity admission when work actually traverses the gateway."
+   :govone-related-existing-symbols ["router.Service.ReadmitEndpoint" "capacity.Service.CheckEndpoint" "capacity.ValidateObservation"]
+   :generic-ocr-admission :not-established
+   :evidence [:endpoint-admission :capacity-contract :modality-boundary]
+   :distinction "A snapshot digest binds declared data; freshness/threshold validation does not independently attest physical ownership, loaded OCR bytes, absence of second-hop egress, or reserve capacity."}
+  {:context :parent-execute-permit
+   :existing-authority "Parent/coordinator scoped execution admission under existing operator policy and independent review."
+   :govone-generic-verifier :not-established
+   :evidence [:parent-policy :restart-grant :policy-types]
+   :distinction "A parent EDN policy/permit artifact is data unless bound to its trusted issuer/context and exact scope by the consuming boundary. No GovOne signature API for those artifacts was found. The reviewed one-restart grant is explicitly not a six-image batch grant."}]
+
+ :actual-owner-callables
+ [{:symbol "policy.NewService(publicKey ed25519.PublicKey) (*Service, error)"
+   :related "(*Service).VerifyBundle(bundleBytes []byte, signatureText string) (VerifiedBundle, error)"
+   :input "Pinned Ed25519 public key; exact policy bundle bytes and detached base64 signature."
+   :output "VerifiedBundle{Bundle, BundleBytes, Signature, BundleHash}; policy configuration only."
+   :source "internal/policy/service.go:190-197,223-229,328-340"
+   :not "Not authentication of DecisionInput, human consent, host-resource ownership, or an Oikos execute permit."}
+  {:symbol "(*policy.Service).Evaluate(input DecisionInput) (Decision, error)"
+   :related "(*policy.Service).EvaluateScoped(ctx context.Context, input DecisionInput) (Decision, error)"
+   :input-fields ["TenantID" "PolicyProfileID" "PrincipalID" "AISystemID" "DeploymentType" "SensitivityLevel" "ReleaseChannel"]
+   :output-fields ["BundleVersion" "MatchedRuleIDs" "AllowedRuleIDs" "DeniedRuleIDs" "AllowedCapabilities" "DeniedCapabilities" "AllowHybridRedacted" "AllowExternalApproved" "AllowUnmaskedRelease" "AllowUnmaskedReleaseChannel" "LocalPreferred" "EvaluationError"]
+   :source "internal/policy/service.go:37-53,84-116,295-317"
+   :trust "Caller supplies decision context. Signed policy is authenticated, not arbitrary caller assertions. Scoped evaluation uses tenant/profile lifecycle state; it is not a request-context attestation API."
+   :internal-only "github.com/mojomast/govone/internal/... is an internal Go implementation boundary, not an importable external Oikos SDK or documented HTTP OCR verifier."}
+  {:symbol "(*auth.Authenticator).AuthenticateBearerToken(ctx context.Context, authorization string) (Principal, error)"
+   :source "internal/auth/api_keys.go:215-277; internal/auth/middleware.go:15-34"
+   :checks "Token HMAC comparison, active/not revoked/not expired key, tenant/principal identity, valid/current principal role. Middleware inserts the resulting principal into request context."
+   :not "ContextWithPrincipal itself merely inserts data. A direct Evaluate call with PrincipalID is not equivalent to this authenticated HTTP path."}
+  {:symbol "(*router.Service).ReadmitEndpoint(ctx context.Context, snapshot EndpointSnapshot) error"
+   :input-fields ["TenantID" "EndpointID" "EndpointRevision" "DispatchBindingVersion" "EndpointKey" "ProviderKind" "ExecutionMode" "EndpointRef" "Origin" "ModelID" "Approved" "Status"]
+   :source "internal/router/service.go:82-95,368-410,425-452"
+   :checks "Validated active approved snapshot; load current exact tenant/endpoint row; require whole snapshot equality; recheck capacity."
+   :not "Not a receipt authenticating an arbitrary local OCR endpoint or a general parent permit; it depends on GovOne's trusted store and configured checker."}
+  {:symbol "capacity.Load(path string, dev bool, sampler Sampler, now func() time.Time) (*Service, error)"
+   :related ["(*capacity.Service).CheckEndpoint(ctx context.Context, id Identity) error"
+             "capacity.ValidateObservation(profile Profile, document []byte, now time.Time) error"
+             "capacity.Digest(p Profile) string"]
+   :source "internal/capacity/capacity.go:1-2,47-108,144-224"
+   :binding "Pinned profile origin/model; ApprovalRef and MeasurementRef must be sha256 references; observation binds exact profile digest, origin/model, time window, freshness, ready/failed state and resource/running/queue/p95/error/timeout thresholds."
+   :trust "Trusted local Sampler. LocalFiles enforces regular/private/no-follow file reads. ApprovalRef/MeasurementRef syntax and digest are not cryptographic proof of human approval: CheckEndpoint does not resolve or verify signatures for those referenced approvals."
+   :not "No network probing, reservation, concurrency promise, physical attestation or generic six-PNG workload permit."}]
+
+ :actual-http-and-client-contract
+ {:source "docs/api/openapi.yaml; README.md:129-188; examples/http/README.md:3-10,39-65"
+  :operations [{:method :post :path "/api/v1/sessions"
+                :request "{ai_system_id, policy_profile_id?, ttl_seconds?, execution_constraint?, workflow_profile?, metadata?} plus authenticated bearer and optional Idempotency-Key"
+                :response "{session_id, execution_mode, policy_version, workflow_profile, active_stages, ttl_seconds, expires_at, created_at, metadata}"
+                :implementation "internal/httpserver/stage_api_sessions.go:24-43,130-157,203-240"
+                :trust "Tenant/principal are taken from authenticated request context; AI system/profile are resolved server-side. Session is not permission to upload elsewhere."}
+               {:method :post :path "/v1/chat/completions"
+                :request "{session_id, messages:[{role:system|user|assistant, content:string}], stream:false, ...validated completion options}"
+                :not "Closed ChatMessage is string text; no PNG/image content-parts or arbitrary OCR POST authorization."
+                :source "docs/api/openapi.yaml:2666-2696"}
+               {:method :get :path "/api/v1/evidence/{session_id}"
+                :purpose "Separately authorized safe session evidence, not an execution token."}
+               {:method :post :path "/api/v1/admin/tenants/{tenant_id}/policy-bundles/dry-run"
+                :purpose "Administrative candidate-policy comparison; not an OCR/resource permit endpoint. No call made."}]
+  :actual-client "examples/http/generic.mjs (server-side Node fetch); generic.test.mjs uses mocks. Creates local_only session and buffered text completion, rejects redirects and automatic retries. It is not a standalone policy evaluator or image-admission client."
+  :not-requested "No gateway bootstrap, live evaluation, credentials, API calls or network discovery performed."}
+
+ :decision-evidence-binding
+ {:source ["internal/policy/service.go:103-116,190-197"
+           "internal/audit/commitment.go:19-36,48-107"
+           "internal/evidence/store.go:257-288"
+           "internal/inference/service.go:2261"
+           "internal/audit/service.go:29-41,113-125"]
+  :actual "Policy decision carries bundle version and rule/capability results. Persisted safe decision projections bind session/response/stage/status to source audit event and joined payload/record hashes, projection version, exact canonical safe facts, SHA256 commitment/version and created time."
+  :verifiers ["audit.VerifyCanonicalCommitment(canonical []byte, commitment string) bool"
+              "audit.FactsCommitmentStatusOf(factsJSON []byte, commitment string) FactsCommitmentStatus"
+              "audit.VerifyTenant(tenantID string, events []Event, roots []MerkleRoot, anchors []Anchor, cfg VerifyConfig) TenantReport"]
+  :limits "Canonical-facts hash equality is integrity, not producer authentication or authorization. Tenant chain/anchor verification is separate. These evidence objects do not bind the three proposed Oikos contexts or mint a parent OCR execute permit. Missing legacy commitments are explicitly unavailable, not verified."
+  :special-case "spec.md:101-105 defines a separate signed Spark acceptance lock/qualification approval and domain-separated evidence lane. That exact vLLM/GB10 controller contract is not a generic OCR runner API and must not be repurposed by copying it."}
+
+ :evidence
+ {:owner-boundary {:path "README.md" :lines [48 50]
+                   :fact "Application owns end-user authentication/UX; operators own infrastructure/models/secrets; GovOne owns governed admission, routing, delivery and audit."}
+  :policy-types {:path "internal/policy/service.go" :lines [37 116]
+                 :fact "Finite gateway capabilities, release channels and decision fields; no named host-resource or Oikos parent-permit fields."}
+  :endpoint-admission {:path "internal/router/service.go" :lines [368 410]
+                      :fact "Exact endpoint snapshot re-admission and capacity recheck exist, within gateway store authority."}
+  :capacity-contract {:path "internal/capacity/capacity.go" :lines [1 224]
+                      :fact "Real local snapshot checker exists; trusted sampler, not a consent/signature verifier."}
+  :modality-boundary {:path "spec.md" :lines [67 70]
+                      :fact "Start with buffered text completion; new modalities require their own specification/acceptance. Local dispatch observations and unknown-capability denial remain required."}
+  :no-egress-boundary {:path "spec.md" :lines [37 37]
+                       :fact "Offline serving alone does not prove air gap; verified deployment-layer isolation is additional."}
+  :parent-policy {:path "docs/notes/oikos-execution-plan.md" :lines [496 529]
+                  :fact "Synthetic/dev only, explicit operator-resource approval, zero spend; cloud through actual GovOne/no-charge admission; restart exception not batch permission."}
+  :precise-dependencies {:path "docs/agile/kanban/oikos-freeze-synthetic-local-gemma-ocr-baseline-and-runtime-identity-probes-57ce4cbb.md" :lines [57 72]
+                         :fact "S7A consumes S1A only. S7B consumes S7A/S6A. Offline admission is not resource or execution permission."}
+  :synthetic-before-integration {:path "docs/agile/kanban/oikos-bind-all-egress-paths-to-the-mojomast-govone-policy-session-37b28c9b.md" :lines [63 69]
+                                 :fact "Synthetic no-private-data tests may precede admission; authenticated allowlisted local transport is not blanket private-IP trust. Full product integration remains separate."}
+  :restart-grant {:path ".ημ/runs/oikos-program-20261103/decisions/ocr-attestation-restart-authorization.edn" :lines [1 19]
+                  :fact "Explicit human grant permits reviewed identity reporting and one restart of existing ocr-npu.service; no OCR batch, cloud, spending or inherited resource admission."}}
+
+ :source-test-evidence
+ {:execution :not-run-read-only-scope
+  :tests [{:path "internal/policy/service_test.go" :symbols ["TestActivateBundleVerifiesSignatureAndEvaluatesDecision" "TestEvaluateImplementsDenyWins" "TestEvaluateFailsClosedWithoutActiveBundle"]}
+          {:path "internal/policy/scoped_revision_test.go" :symbols ["TestScopedPolicyRevisionSnapshot"]
+           :caveat "Test explicitly distinguishes warm last-known-good cache from invalidation/reload; do not claim each evaluation independently reloads current SQLite state."}
+          {:path "internal/router/service_test.go" :symbols ["TestEndpointRevisionAdmission" "TestNetworkEndpointRequiresApproval"]}
+          {:path "internal/capacity/capacity_test.go" :symbols ["TestCapacityAdmissionFreshness" "TestCapacityStrictSources" "TestCapacityProfileRequired"]}
+          {:path "internal/auth/auth_test.go" :symbols ["TestIssueAndAuthenticateBearerToken" "TestAuthenticationMiddlewareRejectsInvalidToken" "TestAuthenticateBearerTokenRejectsRevokedKey"]}
+          {:path "internal/audit/commitment_test.go" :symbols ["TestCommitFactsRoundTripAndTamper" "TestFactsCommitmentStatusUnavailable"]}]
+  :not-claimed "Presence and inspected assertions are not a passing execution or current OCR qualification result."}
+
+ :handoff
+ {:parent-action "Correct the runner's authority mapping before naming a verifier: separate operator-resource consent, trusted pinned-resource evidence, and parent batch permit from GovOne disclosure/gateway authority. Review its concrete consuming boundary; do not infer a live gate from policy data alone."
+  :pure-tests "May inspect/qualify pure synthetic contracts without inventing a live GovOne dependency; no inherited permission for model execution or network transport."
+  :prospective-six-png-local-batch "Remain held until reviewed exact loaded source/model identity, named-resource consent/admission, no-egress/second-hop isolation evidence, bounded workload and distinct parent batch permission are established. A loopback URL or service health response proves none of those by itself."
+  :owner-side-prerequisite "Only if a consumer truly requires GovOne-governed PNG/OCR or signed arbitrary resource/parent-context admission: no matching owner contract was established here. Flag the exact unsupported payload/sink/authority as an owner planning gap for separate explicit authorization; do not start owner implementation here."
+  :disclosure-hold "Cloud/comparison/real-remote routes still require the existing actual GovOne boundary. A text session/redaction/decision receipt cannot authorize a separate PNG upload or bypass. Unsupported disclosure remains denied."
+  :unknowns [:current-deployed-govone-identity :any-private-external-verifier
+             :current-ocr-loaded-identity :complete-local-no-egress-proof
+             :resource-approval-evidence-for-batch :distinct-parent-batch-permit]
+  :user-restatement-required false
+  :authorization-granted-by-this-report :none}}

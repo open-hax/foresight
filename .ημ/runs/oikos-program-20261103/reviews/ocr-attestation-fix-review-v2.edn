@@ -1,0 +1,116 @@
+{:report/id :oikos/ocr-attestation-fix-review-v2
+ :report/at "2026-11-03T20:03:56Z"
+ :report/kind :independent-targeted-binding-closure-and-activation-plan-review
+ :report/verdict :approve
+ :report/confidence 0.98
+ :report/scope "Close the single prior P2, inspect actual introduced regressions, and assess the supplied activation plan. No broader product/configuration review or live qualification."
+ :reviewed
+ {:worktree "/home/err/.config/i3/.worktrees/feat/oikos-ocr-attestation-20261103"
+  :branch "feat/oikos-ocr-attestation-20261103"
+  :red-commit "3fc3e3d34bb181cf1455a13fe315e077568c04e5"
+  :green-commit "6626d680f079c3330fee1df1f3565475d7ef1a55"
+  :previous-reviewed-commit "10b283d8cc6eb6b674c22a251e953bc21e57ddfd"
+  :algorithm-baseline "c40c59754d4ce70877841dc35a428c4c0be6a66a"
+  :head-and-working-files-match-green true
+  :green-parent-is-red true
+  :red-parent-is-previous-reviewed-commit true
+  :prior-review ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-code-review-v1.edn"
+  :changed-since-prior-review ["devops/ocr/server.py" "devops/ocr/test_attestation.py" "devops/ocr/ATTESTATION.md"]
+  :file-identities
+  [{:path "devops/ocr/server.py" :bytes 12283 :sha256 "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"}
+   {:path "devops/ocr/launch.py" :bytes 1284 :sha256 "63a956d06f8538267f26e8847dfa2e37f296aca7c5a063650665f5ce67b375d6"}
+   {:path "devops/ocr/test_attestation.py" :bytes 12930 :sha256 "7a6a01bab930cd1b1aa80c8f5cc1b680dd4b856f0d83172da583901262b9430a"}
+   {:path "devops/ocr/ATTESTATION.md" :bytes 7380 :sha256 "f8c59945462bba4ac8cd4e1eb876a506bdf7b1fdf38ef63d4bcb08379ed352d6"}]
+  :worktree-clean-at-end true}
+ :code-review
+ {:verdict :approve
+  :open-findings []
+  :introduced-regressions-found []
+  :closed-findings
+  [{:finding/id :ocr-attestation/invalid-startup-binding-accepted
+    :previous-priority :P2
+    :status :closed
+    :closed-at "6626d680f079c3330fee1df1f3565475d7ef1a55"
+    :evidence
+    ["server.py:63-92 requires exact dict records and exact allowed keys, validates field types/content/bounds, rejects bool counts and copies only the whitelisted primitive fields. Ocr.__init__ invokes this at line 143 before Core at line 144."
+     "Counted all 84 malformed subcases in the actual test runner; every case rejects before fake Core, asset reads, compile, warm and listener construction through the real main ordering."
+     "Replayed the original twelve malformed-binding witnesses against exact RED server bytes and current GREEN bytes: all twelve reach the fake Core sentinel on RED, and all twelve reject before Core/assets/compile/warm/listener on GREEN. RED changes only test_attestation.py and retains the previously reviewed vulnerable server bytes."
+     "Replayed all four original completed-invalid-record witnesses, including the 65536-character extra field; all four now reject before startup effects."
+     "Executed the unchanged real launcher helper on the actual 12283-byte current server source with native dependency names replaced by inert modules and a non-main namespace. Its generated source hash/size match the reviewed current server; fully fake initialization then succeeds."
+     "A fake Core mutating the original source/process dictionaries after validation does not change the pre-Core copies or leak added synthetic path/environment markers. GET returns the frozen record without asset rereads."
+     "The legitimate actual-launcher fake-initialization record is 1125 UTF-8 bytes. An exactly 4096-byte synthetic record is accepted; increasing its runtime-version field by one byte is rejected before identity_json publication. The total-size guard is after the inherited initialization/warm, not a claim that untrusted runtime-module output is validated before Core."]}]
+  :bounds-and-compatibility
+  {:source-bytes {:minimum 1 :maximum 1048576 :actual-reviewed-source 12283}
+   :process-start-clock-ticks {:minimum 1 :maximum 9223372036854775807}
+   :clock-ticks-per-second {:minimum 1 :maximum 1000000 :actual-local-launcher-value 100}
+   :timestamp "Real launcher's datetime.now(timezone.utc).isoformat() is accepted; schema permits valid UTC ISO calendar timestamps with Z or +00:00, optional 1-6 fractional digits and maximum 32 characters."
+   :positive-independent-boundary-probes "Accepted all twelve combinations of ticks 1, 10^9, 10^12, 2^63-1 and frequency 1, 100, 1000000. There is no erroneous 10^9 kernel-tick ceiling. Existing tests additionally accept minimum/maximum source sizes and UTC timestamp variants."
+   :identity-whitelist "Source has exactly sha256/bytes/binding; process has exactly launch_started_at_utc/process_start_clock_ticks/clock_ticks_per_second plus locally obtained pid."
+   :non-disclosure "Actual-source fake record excludes model-directory strings, argv/environment keys, synthetic charset content and synthetic path/environment markers injected after validation. No real private input was used."
+   :trust-limit "Closed shape validation is not cryptographic authenticity of forged but correctly shaped startup globals; unchanged pinned launcher/interpreter/dependencies remain the trust base. Source/input identity remains distinct from compiled_artifact_identity=not-attested."}
+  :regression-checks
+  ["Launcher bytes and SHA256 unchanged from prior reviewed commit."
+   "Independent AST comparisons against both c40c59754d4ce70877841dc35a428c4c0be6a66a and 10b283d8cc6eb6b674c22a251e953bc21e57ddfd show _warm, _letterbox, _detect, _recognise, run, do_POST, _send, main, _is_cjk and _junk unchanged."
+   "do_GET is unchanged from the previous reviewed implementation; existing loopback/query restrictions and frozen-record tests pass."
+   "Fake initialization retains detector [1,3,960,960], recognizer [1,3,48,320], target NPU, five fake asset-buffer reads and one mocked warm; no listener is created in positive probes."
+   "git diff --check previous-reviewed-commit green-commit: exit 0."]}
+ :verification
+ {:actual-nine-test-command
+  {:command "PYTHONDONTWRITEBYTECODE=1 TMPDIR=/tmp/opencode python3 -m unittest discover -s devops/ocr -p 'test_*.py' -v"
+   :exit 0 :tests 9 :failures 0 :errors 0 :duration-seconds 0.773}
+  :guarded-independent-replay
+  {:method "Inline stdlib unittest runner containing the current nine tests plus five independent closure probes. A meta_path guard rejects real cv2/numpy/openvino imports; readers/models/Core are fake and _warm is mocked. No probe script was persisted."
+   :exit 0 :tests 14 :failures 0 :errors 0 :duration-seconds 1.341
+   :malformed-subcases-independently-counted 84
+   :original-red-witnesses-reaching-fake-core 12
+   :original-green-witnesses-early-rejected 12
+   :original-invalid-oversized-record-witnesses-early-rejected 4
+   :independent-large-tick-frequency-combinations-accepted 12
+   :actual-source-launcher-positive true
+   :pre-core-copy-frozen-whitelist-no-leak true
+   :exact-4096-byte-boundary-accepted true
+   :one-byte-over-cap-rejected-before-publication true
+   :native-import-attempts 0 :native-modules-left-loaded 0}
+  :inherited-not-rerun
+  {:bb-tests "Parent reports 70 tests / 207 assertions pass."
+   :lint "Existing bb binding warning and six clj-kondo warnings remain visible, outside this changed Python scope. Neither this review nor its scoped green tests claims a warning-free full-workspace lint gate."
+   :reason "Targeted follow-up only; no unrelated i3/config/package work."}}
+ :activation-plan
+ {:verdict :sufficient-subject-to-parent-concrete-preflight
+  :plan-approved true
+  :new-plan-gap-found false
+  :code-fix-no-longer-blocks-activation true
+  :concrete-composed-unit-review-still-required true
+  :concrete-composed-unit-reviewed-by-this-worker false
+  :activation-performed false
+  :reviewed-release "/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55"
+  :parent-reported-selected-metadata
+  {:epistemic-tier :reported-by-parent :independently-requeried false
+   :active true :pid 1371874 :restart "always" :nrestarts 0
+   :existing-administrative-authority "Parent reports sudo -n true succeeds; this worker did not invoke sudo."}
+  :required-concrete-preflight
+  ["Deploy only committed server.py and launch.py from reviewed GREEN 6626d680f079c3330fee1df1f3565475d7ef1a55, verifying the hashes above; do not substitute dirty owner source or change it. Use a fresh root-owned, read-only versioned release, trusted non-symlink ancestors/ACLs and atomic no-overwrite installation. Keep existing five asset paths; no model copy/download or startup trial."
+   "Parent independently reviews the actual composed unit/drop-in and precedence, retaining the exact existing absolute interpreter/flags, environment, working directory, host/port and user. Privately preserve prior unit/drop-in bytes and selected metadata for rollback. Hold on drift."
+   "The reviewed owned override must reset ExecStart to the pinned launch.py and establish effective Restart=no before the single restart. Check inherited force-restart/trigger settings cannot defeat this boundary. An ExecStart-only override while Restart=always is not qualified."
+   "Recheck resources/contention and that no startup has consumed the one-start grant. Validate/reload unit configuration without a test startup. Parent alone performs the one controlled restart after the concrete preflight passes."
+   "During that one startup, inherited compile/warm is permitted by the user's grant; it is not a separate POST or trial. Afterwards use only bounded loopback GET /health and /identity, compare pinned source/assets plus PID/start ticks, and stop on mismatch/failure without retry."
+   "Keep retry suppression effective through the controlled window and failed-worker handling. Rollback preserves/restores only owned metadata and daemon-reloads as appropriate, without a second startup or restoring Restart=always onto a failed worker as an implicit retry. Restarting the former command requires renewed authorization."]
+  :prior-hardware-qualification-required-before-authorized-startup false
+  :reason "The single authorized parent startup is the first actual native compatibility opportunity. Passing fake code tests does not prove that startup will succeed, but lack of prior native proof is not an additional blocker or permission for an extra initialization."
+  :native-proof false :hardware-approval false :ocr-quality-approval false
+  :resource-admission-by-this-review false :s7a-complete false}
+ :execution-boundary
+ {:persistent-write-only ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-fix-review-v2.edn"
+  :product-edits 0 :card-edits 0 :ledger-edits 0 :pr-interactions 0
+  :commits 0 :pushes 0 :installs 0 :downloads 0
+  :service-operations 0 :service-queries 0 :sudo-invocations 0
+  :native-imports 0 :native-model-loads 0 :native-compiles 0
+  :actual-warm-executions 0 :inference-requests 0 :ocr-posts 0
+  :listeners-started 0 :personal-input-reads 0 :i3-controls 0
+  :temporary-fixtures "Existing tests use self-cleaning synthetic temporary files under TMPDIR=/tmp/opencode; independent probes use memory plus committed source bytes. No persistent scratch created."}
+ :reflection
+ {:receipt-owner :parent :session-mycology-owner :parent
+  :separate-ledger-or-spore-write false :spore nil
+  :p-efficiency 0.95 :p-friction 0.05 :p-skill-candidate 0.4
+  :lesson "A narrow follow-up can close a provenance guard with original-witness replay, actual-launcher positive proof and explicit boundary checks, without moving the acceptance target to unauthorized hardware trials."
+  :handoff "Code approved at exact GREEN head; plan sufficient. Parent must independently qualify the concrete composed unit and resources before using the sole authorized restart. This report grants no native, hardware or OCR quality credit."}}

@@ -1,0 +1,45 @@
+{:preflight/id :ocr-attestation-concrete-preflight-6626d680
+ :stage :prepared-not-restarted
+ :authorization "../decisions/ocr-attestation-restart-authorization.edn"
+ :code-review "ocr-attestation-fix-review-v2.edn"
+ :candidate "6626d680f079c3330fee1df1f3565475d7ef1a55"
+ :release {:path "/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55"
+           :exported-from-committed-blobs-only true
+           :atomic-rename-noreplace true :root-owned true
+           :trusted-nonsymlink-ancestors true :directory-mode "0555" :file-mode "0444"
+           :files {"server.py" "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"
+                   "launch.py" "63a956d06f8538267f26e8847dfa2e37f296aca7c5a063650665f5ce67b375d6"}}
+ :private-backup {:path "/home/err/.local/state/oikos-dev/ocr-attestation-20261103/preflight-e1f3ffa2-3372-479c-9dd0-230626d54447"
+                  :directory-mode "0700" :files-mode "0600"
+                  :original-unit-bytes 657
+                  :original-unit-sha256 "1c7a0cdf0a9eed0a17039704fccdbad763d1f5f50da938017417f9432698f384"
+                  :original-execstart-and-selected-properties-preserved true
+                  :credential-or-environment-values-published false
+                  :retain-no-unverified-cleanup true}
+ :unit {:name "ocr-npu.service" :owner-branch "device/stealth"
+        :original-fragment-unchanged true
+        :owned-dropin "/home/err/.config/systemd/user/ocr-npu.service.d/90-oikos-input-identity.conf"
+        :dropin-sha256 "9a0236217a54f59a1444d9029dc0a0efc3fac530d8f7b5ba382014c51765567c"
+        :dropin-content "[Service]\nRestart=no\nExecStart=\nExecStart=/usr/bin/python3 /opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55/launch.py\n"
+        :effective-dropins-exactly-owned-file true
+        :same-absolute-interpreter "/usr/bin/python3" :same-interpreter-flags []
+        :inherited-properties-unchanged [:Environment :EnvironmentFiles :WorkingDirectory :User :Group :Type :OnFailure :OnSuccess :RestartForceExitStatus :WatchdogUSec]
+        :effective-restart "no" :old-main-pid-still-running 1371874 :nrestarts 0
+        :daemon-reload-completed true
+        :verification {:command "systemd-analyze --user verify ocr-npu.service" :exit 0
+                       :diagnostic-bytes 230
+                       :ocr-specific-findings []
+                       :unrelated-existing-warnings [{:unit "ytwall.service.d/override.conf" :reason :assignment-outside-section}
+                                                     {:unit "barrier.service" :reason :start-limit-interval-in-service-section}]
+                       :global-warning-free-claim false}}
+ :resources {:mem-total-bytes 33291132928 :mem-available-bytes 14232145920
+             :snapshot-not-reservation true :disk-free-gib-approximately 45
+             :five-source-declared-existing-asset-hashes-rechecked-unchanged true
+             :original-dirty-i3-source-sha256 "f0dc43fb911e749bbfd41025160bb0171f4b6c775f32fb907a1ece1dc824bf9c"
+             :original-dirty-source-unchanged true}
+ :effects-at-this-record {:new-source-release 1 :owned-unit-dropin 1 :daemon-reloads 1
+                          :service-restarts 0 :native-imports 0 :model-loads 0
+                          :ocr-posts 0 :personal-inputs 0 :downloads 0}
+ :next-gate :independent-concrete-composed-unit-review-before-sole-restart
+ :rollback "Restore only owned override metadata and daemon-reload if needed. Do not restore Restart=always onto a failed worker or restart the previous command without renewed user authorization. Keep exact backups and release evidence."
+ :quality-speed-resource-or-execution-admission false}

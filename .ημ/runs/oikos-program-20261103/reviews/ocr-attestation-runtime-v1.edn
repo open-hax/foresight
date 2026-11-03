@@ -1,0 +1,105 @@
+{:report/id :oikos/ocr-attestation-runtime-v1
+ :report/at "2026-11-03T20:24:07.324521+00:00"
+ :report/kind :independent-bounded-postactivation-input-identity-verification
+ :report/verdict :input-identity-qualified
+ :report/confidence 0.99
+ :report/mismatches []
+ :observation-window {:started-at "2026-11-03T20:24:07.273192+00:00"
+                      :completed-at "2026-11-03T20:24:07.324521+00:00"}
+ :binding
+ {:reviewed-commit "6626d680f079c3330fee1df1f3565475d7ef1a55"
+  :release "/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55"
+  :prior-code-review "ocr-attestation-fix-review-v2.edn"
+  :prior-concrete-review "ocr-attestation-concrete-review-v3.edn"
+  :asset-expectations "All five hashes AND byte lengths independently compared with the pre-activation known disk identities in s7a-runtime-inventory-v1.edn, not merely accepted because the new response reported them."
+  :parent-private-outcome "/home/err/.local/state/oikos-dev/ocr-attestation-20261103/preflight-e1f3ffa2-3372-479c-9dd0-230626d54447/activation-outcome.json"
+  :parent-saved-identity "/home/err/.local/state/oikos-dev/ocr-attestation-20261103/preflight-e1f3ffa2-3372-479c-9dd0-230626d54447/identity-response.json"
+  :fresh-identity-equals-parent-saved-identity-and-outcome true}
+ :fresh-http
+ {:endpoint "http://127.0.0.1:8099"
+  :health {:method :GET :route "/health" :requests 1
+           :observed-at "2026-11-03T20:24:07.289098+00:00" :status 200
+           :bytes 64 :sha256 "cb84461c09f95a5a93160385b75ac81f6bcde68a1f6fa3d3e84a07f28b3edb23"
+           :body {"ok" true "device" "NPU" "det" "960x960" "rec" "48x320"}}
+  :identity
+  {:method :GET :route "/identity" :requests 1
+   :observed-at "2026-11-03T20:24:07.319002+00:00" :status 200
+   :bytes 1167 :sha256 "c35e58936c5f2cdfb3f1293678bff85d9cc3446a1f32e8c795c15d9caa33d985"
+   :body
+   {"assets"
+    {"charset" {"bytes" 26250 "sha256" "a1c84d9bdb9ab29043c58896224d32941783eb821629618416dcb08f12886492"}
+     "detector"
+     {"bin" {"bytes" 2342968 "sha256" "601509fdcbbeaba46f9a866aa63972884cde387129dc57bcddf3db54b267d772"}
+      "xml" {"bytes" 334779 "sha256" "91f25ea6ad4f0bcdebdb01223d4df82c24a487fc1e4091e6efce5eb89bb18d2b"}}
+     "recognizer"
+     {"bin" {"bytes" 5375508 "sha256" "a11f17b26fe6e69b67db9ec0f3c2160796c6710e5089e750b8da9d1df6cfd4fe"}
+      "xml" {"bytes" 372305 "sha256" "78bfad6c4546e26e73da75b0418f5da0e095ea59f590e85b9621fcedfa950dd1"}}}
+    "compiled_artifact_identity" "not-attested"
+    "load_completed_at_utc" "2026-11-03T20:19:44.868763+00:00"
+    "process" {"clock_ticks_per_second" 100
+               "launch_started_at_utc" "2026-11-03T20:19:43.108682+00:00"
+               "pid" 3187253 "process_start_clock_ticks" 45402858}
+    "ready_at_utc" "2026-11-03T20:19:45.190434+00:00"
+    "runtime" {"device" "NPU" "openvino_version" "2025.4.1-20426-82bbf0292c5-releases/2025/4"}
+    "schema" "ocr-input-identity-v1"
+    "source" {"binding" "sha256-of-compile-exec-buffer" "bytes" 12283
+              "sha256" "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"}}}
+  :transport-and-parser
+  {:client :python-stdlib-http-client :numeric-loopback-address true
+   :proxy-use false :redirects-followed 0 :retries 0
+   :socket-timeout-seconds 2 :whole-request-deadline-seconds 3
+   :maximum-body-bytes 4096 :read-limit-with-overflow-detection 4097
+   :content-length-checked true :content-type-json-checked true
+   :utf8 :strict :json :strict :duplicate-keys-rejected true :nonfinite-numbers-rejected true}}
+ :current-service-and-process
+ {:observation-method "Selected-property systemctl --user show ocr-npu.service; /proc/3187253/stat and /proc/3187253/exe only. No process environment, command-line, memory or journal content read."
+  :unit "ocr-npu.service" :ActiveState "active" :SubState "running"
+  :MainPID 3187253 :NRestarts 0 :Restart "no" :NeedDaemonReload "no"
+  :DropInPaths ["/home/err/.config/systemd/user/ocr-npu.service.d/90-oikos-input-identity.conf"]
+  :ExecStart {:interpreter "/usr/bin/python3" :flags []
+              :script "/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55/launch.py"
+              :systemd-exec-pid 3187253}
+  :RestartForceExitStatus "" :OnFailure "" :OnSuccess "" :WatchdogUSec "0"
+  :proc-executable "/usr/bin/python3.12"
+  :proc-executable-equals-resolved-unit-interpreter true
+  :proc-start-clock-ticks-before-and-after-http-and-static-checks 45402858
+  :clock-ticks-per-second 100
+  :fresh-identity-pid-and-start-ticks-match-proc-and-unit true
+  :retry-suppression-preserved true}
+ :static-rechecks
+ {:trusted-root-nonsymlink-release-ancestors true
+  :method "Component-by-component O_DIRECTORY|O_NOFOLLOW directory-FD opens; root ownership and mode & 022 == 0; final directory 0555; only server.py and launch.py; regular root-owned 0444 source files opened with O_NOFOLLOW."
+  :server-sha256 "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"
+  :launcher-sha256 "63a956d06f8538267f26e8847dfa2e37f296aca7c5a063650665f5ce67b375d6"
+  :original-dirty-i3-source-sha256 "f0dc43fb911e749bbfd41025160bb0171f4b6c775f32fb907a1ece1dc824bf9c"
+  :original-unit-sha256 "1c7a0cdf0a9eed0a17039704fccdbad763d1f5f50da938017417f9432698f384"
+  :all-compared-with-pinned-expectations true
+  :model-files-reopened-by-this-review false}
+ :qualified-facts-and-limits
+ {:input-identity "Fresh startup record matches the reviewed source compile/exec-buffer binding and all five known model/charset input hashes and lengths. Its process identity matches the current unit and stable kernel PID/start ticks. Qualification is local provenance under the previously reviewed launcher/interpreter/dependency trust base, not remote cryptographic attestation."
+  :native-initialization "Successful readiness of the exact reviewed runtime, whose record is published only after native initialization and inherited warm complete, supports successful native initialization on this startup. This is now live initialization evidence, not merely the earlier fake-test result. This reviewer did not perform another initialization."
+  :npu-target "The reviewed code requests NPU compilation and the live record reports NPU. This does not independently trace or prove that every native operation executed physically on the NPU."
+  :compiled-artifact-identity :not-attested
+  :dependency-cryptographic-identity :not-established
+  :runtime-version "Runtime module-reported version verified in the live record; not a cryptographic identity of OpenVINO or all loaded libraries."
+  :multi-file-asset-coherence "Each hash identifies the actual buffer consumed by the reviewed startup path; no additional transactional/coherent-release claim across concurrently mutable files."
+  :parent-readiness-observation
+  {:epistemic-tier :parent-recorded-observation :wall-seconds 2.438079410989303
+   :connection-refused-get-observations 11 :restart-attempts 1
+   :interpretation "Polling/readiness wall time for the parent's activation procedure, not an isolated cold-start benchmark or model-speed measurement. The eleven connection refusals are GET readiness observations, not eleven extra startups. Reviewer made no readiness retries."
+   :independent-total-restart-history-proof false}
+  :ocr-quality-qualified false :speed-qualified false :cold-start-benchmark-qualified false
+  :model-measurements-performed false :token-metrics :not-applicable-not-measured
+  :inference-permission-granted false :resource-or-batch-admission false
+  :zero-posts-do-not-prove-quality true}
+ :execution-boundary
+ {:persistent-write-only ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-runtime-v1.edn"
+  :get-health 1 :get-identity 1 :other-http-requests 0 :port-8082-probes 0
+  :ocr-posts 0 :inference-requests 0 :native-package-imports 0
+  :model-loads 0 :warm-executions 0 :service-starts 0 :service-restarts 0
+  :unit-edits 0 :daemon-reloads 0 :source-edits 0 :personal-input-reads 0
+  :board-edits 0 :ledger-edits 0 :commits 0 :pushes 0 :downloads 0 :installs 0}
+ :reflection
+ {:receipt-owner :parent :session-mycology-owner :parent :separate-ledger-or-spore-write false :spore nil
+  :lesson "A fresh bounded startup identity plus pinned source and stable PID/start ticks can qualify consumed input bytes and successful initialization without another inference request, while compiled artifacts, dependency identities, physical-device tracing and quality/performance remain separate unknowns."
+  :handoff "Input identity qualified with no mismatch. Preserve effective Restart=no; no additional startup, POST or measurement is authorized by this verification."}}

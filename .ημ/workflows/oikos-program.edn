@@ -16,7 +16,11 @@
           :operator-resources :explicit-approval
           :models :existing-resources-only
            :model-download-load-restart :held
-           :narrow-operator-exceptions [".ημ/runs/oikos-program-20261103/decisions/ocr-attestation-restart-authorization.edn"]
+            :narrow-operator-exceptions [".ημ/runs/oikos-program-20261103/decisions/ocr-attestation-restart-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/ocr-attestation-activation-outcome.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/ocr-recovery-restart-no.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/ocr-six-image-conditional-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/caddy-isolated-test-cache-authorization.edn"]
           :cloud :synthetic-through-govone-verified-no-charge-only
           :spending 0
           :remote-publication :held
@@ -33,7 +37,12 @@
               :new-successor-admission :verified-prerequisite-artifacts-not-worker-self-report
                :artifact-scoped-permits [".ημ/runs/oikos-program-20261103/permits/generation-component-470c35e7.edn"
                                         ".ημ/runs/oikos-program-20261103/permits/s1a-accepted-62e6eebb.edn"
-                                        ".ημ/runs/oikos-program-20261103/permits/s7a-offline-9b4bc07b.edn"]
+                                        ".ημ/runs/oikos-program-20261103/permits/s7a-offline-9b4bc07b.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s2a-contract-c399b60e.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s2a-wire-97e41a6b.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s3a-accepted-008b0611.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s4a-contract-8ae64df4.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s7a-runner-offline-7cd9320f.edn"]
              :epic-integration-agent :dispatch-after-both-children-verified
              :documentation-agent :independent-foresight-worktree
              :live-board "rheos read-task/read-board"

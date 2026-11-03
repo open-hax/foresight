@@ -1,0 +1,12 @@
+{:decision/id :ocr-recovery-restart-no-20261103
+ :decision/source :question-tool-explicit-user-answer
+ :question "Automatic restarts were disabled to enforce the single-start authorization. Now that the worker is healthy, which recovery policy should remain?"
+ :selected-label "Keep automatic restarts off"
+ :selected-description "Retain Restart=no; a future crash stays visible and any new start needs your approval."
+ :unit "ocr-npu.service" :required-restart "no"
+ :owned-dropin "ocr-npu.service.d/90-oikos-input-identity.conf"
+ :previous-one-restart-grant :consumed
+ :additional-starts-authorized 0
+ :current-input-identity-evidence "../reviews/ocr-attestation-runtime-v1.edn"
+ :not-authorized [:restart-always :bounded-automatic-recovery :additional-manual-start]
+ :effect "Preserve the already effective reviewed override; do not restart the healthy worker to record this decision."}

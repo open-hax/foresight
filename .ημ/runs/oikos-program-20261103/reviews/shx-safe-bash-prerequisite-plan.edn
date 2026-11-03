@@ -1,0 +1,71 @@
+{:review/id :shx-safe-bash-prerequisite-plan
+ :date "2026-11-03"
+ :scope :shx-owner-prerequisite-planning-only
+ :context :己
+ :confidence 1.0
+ :status :awaiting-independent-parent-planning-review
+ :owner-root "/home/err/spaces/foresight/shx"
+ :worktree "/home/err/spaces/foresight/shx/.worktrees/feat/oikos-safe-bash-20261103"
+ :branch "feat/oikos-safe-bash-20261103"
+ :canonical-base {:remote "origin" :url "git@github.com:octave-commons/shx.git"
+                  :remote-default "refs/heads/main"
+                  :sha "f4ee133dcf1650c7eafb623ef084f62417252477"
+                  :verification "git ls-remote --symref origin HEAD matched existing refs/remotes/origin/main; no fetch needed"}
+ :head "cbd0b4349b3f338a86e5b32638b4ac7325786686"
+ :commit "docs: plan isolated safe Bash owner prerequisite"
+ :files [{:path "docs/design/restricted-bash-owner-boundary.md"
+          :sha256 "bd23788783fdd8c41768ee5e26133b8725c7b6a0f0ce36fd7807e4d6d7401058"}
+         {:path "docs/specs/restricted-bash-v1.md"
+          :sha256 "77b85504cc374dc07136c4f1412460c790c3db9e8bf94829246cb6e544874f88"}]
+ :inputs {:discovery ".ημ/runs/oikos-program-20261103/reviews/s1b-owner-prerequisite-discovery.edn"
+          :s1a-path "/home/err/spaces/foresight/oikos/docs/specs/s1a-generation-contracts.md"
+          :s1a-sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+          :agents "Read historical 170-line root and canonical 180-line owner guide; current owner instructions control. Read README, source namespaces, bin/analyze, deps.edn, bb.edn and analysis/mutation documentation."}
+ :proposed-design {:api :shx/safe-bash-v1 :validator-id :bash-env-v1
+                   :availability :not-implemented
+                   :layers "Malli-schema-only law .cljc; pure domain/shape/parser .cljc; JVM Malli/framed transport infra .clj"
+                   :consumer-boundary "Fixed separately pinned JVM renderer and validator entries, called with argv by BB/NBB; no JVM Malli-in-BB assumption; shared fixture qualification separately required"
+                   :validator "Separate positive bounded parser, no renderer imports or generated shell execution; independently pinned validation process/classpath; compare full expected ordered bindings plus descriptor and bytes"
+                   :quote "S1A exact splice bytes 27 22 27 22 27; existing sq/dq/envm/PATH and generic IR unchanged"
+                   :release "No accepted API revision, source bundle hash, review or positive handoff published. Proposed independent bundle manifests and consumer pins require actual implementation review."
+                   :test-matrix "B01–B13: closed schemas, independent positive goldens, ref semantics, hostile grammar, complete cover, descriptors/pins, bounds, parser independence, runtime parity, real transport, effect guards, strict regression/mutation"}
+ :verification [{:command "bin/analyze --strict" :phase :initial-attempt :result :timeout
+                 :limit-ms 20000 :completed-through :jscpd :interrupted-during :typecheck}
+                {:command "npm_config_offline=true bin/analyze --strict" :phase :baseline :exit 0
+                 :tests 19 :assertions 46 :failures 0
+                 :checks [:clj-kondo :splint :cljfmt :clojure-lsp :jscpd :typed-clojure :kaocha]}
+                {:command "clojure -M:test --focus shx.shape.bash-test --focus shx.shape.quote-test --focus shx.law.ir-test"
+                 :exit 0 :tests 13 :assertions 29 :failures 0}
+                {:command "npm_config_offline=true bin/analyze --strict" :phase :post-document-edit :exit 0
+                 :tests 19 :assertions 46 :failures 0 :all-seven-checks-completed true}
+                {:command "git diff --cached --check" :exit 0}
+                {:command "bb --version; nbb --version" :observed ["babashka v1.12.207" "nbb v1.3.204"]}]
+ :warning {:kind :pre-existing-typechecker-deprecation
+           :text "DEPRECATED SYNTAX (NO_SOURCE_PATH): DEPRECATED: Using integer 0 for object id. Use named variables instead."
+           :disposition :unresolved-owner-warning
+           :qualification "Gate exited 0, but zero-warning qualification is not claimed. No unrelated dependency/checker refactor or suppression authorized here."}
+ :mutation {:run false :reason "Docs-only plan; no domain/law/shape changes. Pinned Heretic source directory observed cached, not runtime qualification. Future pure implementation requires actual mutation/survivor/no-coverage evidence."}
+ :review {:attempted-agent :architect
+          :result :blocked-by-harness
+          :error "Subagent depth limit reached (1). Increase experimental.subagent_depth to allow nested subagents."
+          :independent-review false
+          :required-next "Parent dispatches independent planning review before RED/GREEN; no review/admission credit claimed."}
+ :questions-for-review ["Accept initial single-target fixed JVM consumer boundary, with BB/NBB pure fixtures and actual transport qualification rather than unproven direct Malli loading?"
+                        "Accept finite owner limits (128 bindings, 1024 available names, 4096-byte literal, 64-KiB artifact), explicit smaller-bound rejection at the consumer?"
+                        "Accept proposed rejection of refs shadowed by preceding exports (self-ref allowed), or specify alternate exact sequential-ref semantics before RED?"
+                        "How should the existing typed.clojure deprecation warning be resolved under owner zero-warning discipline before implementation qualification?"]
+ :preservation {:root-head "5dbac4fde8b3626316c71e15b48b9fe62a5802c2"
+                :root-branch "feat/supervisor-ir-card"
+                :root-status-before-and-after ["?? .agents/" "?? .github/workflows/agy-review.yml" "?? scripts/"]
+                :owner-worktree-status-after-commit :clean
+                :free-space-before "46 GiB" :free-space-after "45 GiB"
+                :worktree-owner :shx-safe-bash-prerequisite
+                :worktree-lifecycle :active-retained
+                :cleanup-blocker "Unpushed plan commit; exact bytes not verified remotely recoverable. No deletion."
+                :no-push true :no-pr true :no-amend true}
+ :limits ["No production code, RED/GREEN, runtime API implementation, package installation, model/service/native Bash content execution, personal config or credential access."
+          "No Services scope duplicated, Oikos files changed, installed promotion, board/card/frontmatter/state changes or parent ledger writes."
+          "Only owner plan documents and this new parent report authored; parent owns provenance/reflection ledgers. Existing baseline analyzer/test execution does not qualify planned safe Bash."]
+ :reflection {:p-efficiency 0.85 :p-friction 0.25 :p-skill-candidate 0.45
+              :learning "Use canonical remote default before branching from stale owner checkout; re-read newer owner instructions. Complete gate evidence is distinct from a timed-out attempt and from zero-warning qualification. Nested-agent depth blocks must remain explicit, not self-approval."
+              :spore-created false :separate-ledger-write false}}

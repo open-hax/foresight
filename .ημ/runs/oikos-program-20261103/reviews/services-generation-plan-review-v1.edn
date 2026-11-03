@@ -1,0 +1,113 @@
+{:review/id :services-generation-plan-review-v1
+ :date "2026-11-03"
+ :kind :independent-local-planning-review
+ :reviewer :architect
+ :verdict :request-changes
+ :planning-admits-red-green false
+ :native-provider-approval-credit false
+ :candidate {:repository "open-hax/services"
+             :worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+             :base "3fdf9f3922271ea36e52247c3844b07f4eeb463e"
+             :head "ebe5a49f00cfc3fb1501955d8707e6076cf7dc81"
+             :spec "docs/local-generations-v1.md"
+             :spec-sha256 "318f216c130f1076ec33a9a72c2dc7e6fa381a6bb5a1be46c13f5a512a6b2d73"
+             :head-and-spec-hash-verified true
+             :changed-files ["README.md" "docs/deployment-model.md" "docs/local-generations-v1.md"]}
+ :authority {:authorization-read ".ημ/runs/oikos-program-20261103/decisions/s1b-owner-prerequisites-authorization.edn"
+             :planning-report-read ".ημ/runs/oikos-program-20261103/reviews/services-generation-prerequisite-plan.edn"
+             :scope "User selected BUILD owner prerequisites, sandbox only, planning review before functional implementation and independent code qualification before Oikos admission. This review neither expands that authorization nor grants installed effects."
+             :nested-dispatch false
+             :reason "User prohibited model calls; this is the independently dispatched local review, not another hosted workflow loop."}
+ :model {:owner-boundary "Services accepts opaque validated artifact/descriptor bytes into an explicitly provisioned private fixture envelope. Immutable retained trees plus regular-file current replacement; not arbitrary destination writes."
+         :runtime "Portable .cljc laws and BB fixed facade with a fixed Python Linux dir_fd/O_NOFOLLOW/flock/fsync OS edge are appropriate. NBB path-level Node APIs do not supply this anchored descriptor capability; no requirement to implement OS effects in .cljc."
+         :write-path "Trusted fixed launcher policy -> closed wire admission and independently recomputed hashes -> exclusive stable lock -> chain/old-tree/current/destination revalidation -> durable intent and nonce -> candidate writes/readback/validator -> atomic current rename and directory fsync -> verification and durable commit. Failures compensate or hold."
+         :recovery-path "Fresh process must recover exclusively from authenticated owner state under the same stable lock, without synthesizing approval or adopting unknown bytes."}
+ :findings
+ [{:id "LG-P1-1"
+   :priority :P1
+   :title "Closed integer domain cannot represent real nanosecond timestamps"
+   :anchors ["docs/local-generations-v1.md:70-82" "docs/local-generations-v1.md:105-110" "docs/local-generations-v1.md:242-243" "docs/local-generations-v1.md:276-280"]
+   :context :世 :confidence 1.0
+   :evidence "All integers are capped at 9007199254740991, but Identity requires mtime_ns/ctime_ns and Metadata requires mtime_ns. Read-only os.stat of candidate README.md returned st_mtime_ns=1793735800379596064 and st_ctime_ns=1793735800379596064; both exceed that cap. Normal current filesystem observations cannot enter the closed Plan/Journal contract."
+   :impact "A conforming implementation must deny ordinary positive fixtures or truncate observations, defeating accepted metadata equality and identity binding. This is a planning contradiction, not a missing implementation finding."
+   :minimal-fix "Specify a lossless portable wire representation for native timestamps (for example canonical bounded decimal strings or seconds/nanoseconds pairs), explicit signed/pre-epoch policy and hashing rules. Audit native inode/device ranges too. Do not silently round, clamp or convert to milliseconds."
+   :required-tests ["BB/Python identical hash and roundtrip for the observed 1793735800379596064 timestamp"
+                    "Adjacent nanoseconds remain distinguishable in plan drift and restoration comparisons"
+                    "Bounds and negative/pre-epoch policy rejection or exact representation"
+                    "Positive real stat admission without timestamp modification"]}
+  {:id "LG-P1-2"
+   :priority :P1
+   :title "Rollback requires a retained destination that unconditional admission requires absent"
+   :anchors ["docs/local-generations-v1.md:87-92" "docs/local-generations-v1.md:171-180" "docs/local-generations-v1.md:203-214" "docs/local-generations-v1.md:255-263" "docs/local-generations-v1.md:273-274" "docs/local-generations-v1.md:314-318"]
+   :context :世 :confidence 1.0
+   :evidence "Rollback selects a previously retained fully verified generation (176), while candidate destination is generations/<generation> (179-180), and destination absence is required at preview/write admission and immediately before each mutation without an operation exception (203-214). Both cannot hold for the same rollback target. Compensation also describes cleaning candidate files without an explicit prohibition on deleting a retained rollback target."
+   :impact "The advertised apply-A/apply-B/approved-rollback-A acceptance case either always denies or requires undocumented admission and cleanup exceptions."
+   :minimal-fix "Make apply versus rollback destination observations, admission and effect stages explicit. Apply requires absent newly allocated destination; rollback binds the complete identity/hash/accepted metadata of an existing owner-retained target and never rebuilds or cleans it. On rollback failure restore the previously selected B; cleanup authority covers only transaction-created temporary entries. Bind these operation-specific observations into plan/approval."
+   :required-tests ["Real apply A, apply B, independently approved rollback A with A retained at its original name"
+                    "Rollback target byte/metadata/inode replacement before final check refuses, paired with working rollback"
+                    "Every rollback selection/durability failure restores B and preserves both retained A and B trees"
+                    "Existing apply destination remains a denial, never silently treated as rollback/idempotency"]}
+  {:id "LG-P1-3"
+   :priority :P1
+   :title "Closed journal omits the admitted plan and prior generation proof required for fresh-process recovery"
+   :anchors ["docs/local-generations-v1.md:87-94" "docs/local-generations-v1.md:169-182" "docs/local-generations-v1.md:235-245" "docs/local-generations-v1.md:255-261" "docs/local-generations-v1.md:265-278"]
+   :context :世 :confidence 0.98
+   :evidence "Prepared must persist exact immutable generation proof (255), and recovery uses the journal's already-admitted plan (272). But the closed Journal stores only plan_sha256/approval_sha256, Selection, current Identity/bytes and current Metadata. It has neither the Plan nor an anchored durable plan reference nor the old owned_tree_sha256 proof from Plan.expected. No other durable plan artifact is specified. Manifest binds artifact bytes/mode and descriptors, not all accepted uid/gid/mtime/xattrs. The current file's Metadata does not supply prior payload metadata proof."
+   :impact "After process death without original caller input, recovery cannot establish that prior retained payload metadata equals the admitted observation. It must either accept changed retained state from fresh observations or hold ordinary otherwise-recoverable crashes. Neither satisfies the specified real re-entry restoration guarantee."
+   :minimal-fix "Specify a bounded durable recovery capsule before mutation: include the exact admitted Plan and required approval evidence in closed journal state, or reference an exclusively created anchored durable immutable record whose bytes/hash and lifetime are specified. Persist the admitted old-tree proof and operation-specific rollback-target proof, bind policy/revision/custody, and say how fresh-process re-entry obtains and verifies them without a new caller request. Unknown or replaced recovery records hold."
+   :required-tests ["SIGKILL after durable intent and after current rename; fresh process with no original in-memory plan recovers old selection and accepted metadata"
+                    "Old retained payload mtime/xattrs drift after kill is detected from durable pre-crash proof, not adopted"
+                    "Absent/torn/replaced recovery capsule holds before normal work"
+                    "Capsule persistence/fsync failure precedes artifact mutation and preserves old selection"]}
+  {:id "LG-P2-4"
+   :priority :P2
+   :title "Visible full owner baseline failure has no explicit qualification exit gate"
+   :anchors ["docs/local-generations-v1.md:346-365" "docs/local-generations-v1.md:369-394" "docs/environments/promotion.md:55-60"]
+   :context :世 :confidence 0.98
+   :evidence "The plan honestly records 123 tests FAILED with two missing-Caddy setUpClass errors and does not label the 29 focused passes a full baseline. However sequencing says run owner static gates and independently review before handoff without explicitly blocking qualification on resolution and rerun of this known full-test blocker. The promotion precedent explicitly rejects a failing baseline; new local qualification must not silently substitute a focused suite."
+   :impact "An implementer could hand off green new fixtures plus static gates while the documented full owner suite is still unavailable. This is a missing gate disposition, not a request to download or deploy Caddy during planning."
+   :minimal-fix "State that RED may intentionally fail new tests while the environmental baseline blocker stays separately tracked, but GREEN qualification/owner acceptance and consumer handoff remain blocked until a verified CADDY_TEST_BINARY is supplied by the authorized environment and the full required owner suite is rerun on the exact candidate with zero failures/errors. Keep any unavailable JVM/static requirement explicit too. No implicit waiver from focused/static passes; any change to required gates needs separate explicit owner disposition."
+   :required-tests ["Exact final candidate full environment suite exits zero with both previously unavailable Caddy test classes executed"
+                    "Record actual final test/class counts rather than assuming the historical 123 count"
+                    "Focused 29/static/370-resource checks remain labeled distinct evidence, never aggregate into a full-suite pass"]}]
+ :accepted-design-choices
+ [{:choice :envelope-only :disposition :appropriate-for-authorized-sandbox-prerequisite
+   :anchors ["docs/local-generations-v1.md:29-33" "docs/local-generations-v1.md:161-195" "docs/local-generations-v1.md:356-365"]
+   :reason "S1B's current sandbox-only owner-seam/race/rollback fixtures can consume an owner-selected envelope. Installed materialization is explicitly excluded, not an unacknowledged gap. Later home-file installation remains unsupported and requires separate owner planning/authorization, never an Oikos replacement promoter. Future S1B adapter must explicitly map S1A manifest/descriptors to payload paths without claiming all S1A resource namespaces were installed."}
+  {:choice :cooperative-race-limits :disposition :appropriate
+   :anchors ["docs/local-generations-v1.md:197-231" "docs/local-generations-v1.md:322-326"]
+   :reason "Positive-working-write pairs and final-check replacement schedules are non-vacuous. Descriptor containment plus chain revalidation/postchecks is not portrayed as universal atomic ancestor comparison; private cooperative parents are admission assumptions and hostile same-UID/root/mount races are labeled limits. Implementation must enforce the stated private envelope/parent custody preconditions."}
+  {:choice :logical-restoration :disposition :appropriate
+   :anchors ["docs/local-generations-v1.md:252-285" "docs/local-generations-v1.md:327-344"]
+   :reason "Real compensation and SIGKILL re-entry, absent-first-selection, first cause versus recovery failures and uncertain holds are correctly required. No impossible exact-inode/ctime/atime promise. Findings above repair representability and recovery evidence, not weaken these gates."}
+  {:choice :trusted-approval-channel :disposition :appropriate-within-private-threat-model
+   :anchors ["docs/local-generations-v1.md:131-159"]
+   :reason "Trusted launcher rather than self-chosen policy, independent validator entry and exact source pins, plan/revision/root/policy/expiry/nonce bindings are required. Owner-channel forgery/clock control is explicitly excluded; no invented cryptographic attestation or arbitrary executable authority."}
+  {:choice :owner-expansion :disposition :narrow-and-explicit
+   :anchors ["README.md:7-17" "docs/deployment-model.md:51-66" "docs/deployment-model.md:173-195" "docs/local-generations-v1.md:14-27"]
+   :reason "Changed README/model explicitly propose local artifact scope without replacing the existing DO service lane, workflows, production rules or receiver. Only three documentation files changed. Receiver lock/refusal-journal precedent is read for evidence, not reused as a generic filesystem promoter."}]
+ :verification {:performed ["Read actual Services README, complete changed local-generation proposal and deployment-model, promotion runbook and receiver implementation lock/journal precedent"
+                            "Read parent authorization/report and S1B/S1A card evidence; no board mutation"
+                            "Verified HEAD and three-file base-to-head diff; Services git status --short empty"
+                            "Verified spec SHA256 exactly matches requested candidate"
+                            "Read-only Python os.stat reproduces nanosecond range contradiction"
+                            "git diff --check base head on changed documents: exit zero"]
+                :reported-not-rerun {:full-owner-suite "123 tests, FAILED with two missing-Caddy setup errors"
+                                     :focused "29 passed"
+                                     :edn "370 resources parsed under BB, not JVM workflow evidence"
+                                     :kondo "0 errors, 0 warnings"}
+                :not-performed ["New mutation/recovery/race runtime tests: prohibited and no implementation exists"
+                                "Services, Docker, deployments, installs, credential reads or model calls"
+                                "Full owner test rerun; baseline evidence is attributed to parent report"]}
+ :admission {:current :blocked-on-four-planning-corrections
+             :after-correction "Parent obtains exact revised-spec acceptance before RED/GREEN. No new user decision is needed for these narrow repairs: lossless observations, operation-specific retained rollback target, durable recovery proof and visible baseline qualification gate implement already authorized requirements."
+             :needed-user-decision :none-for-current-sandbox-scope
+             :future-decision "Any installed/home/configuration materialization, noncooperative threat-model expansion or required-gate waiver must return to explicit owner/user decision; none is supplied here."
+             :consumer "No callable API or S1B completion credit until actual owner implementation, positive independently pinned validators, runtime fixture qualification, independent code review and exact owner-to-Oikos handoff."}
+ :reflection {:lesson "Review closed data domains against actual host observations, and trace fresh-process recovery using only explicitly durable bytes. Positive rollback must satisfy admission predicates, not only a prose state table."
+              :efficiency 0.9 :friction 0.1 :skill-candidate 0.4
+              :spore-created false
+              :receipt-delegation "This single new review artifact is the sole authorized write; parent retains receipt/reflection publication. No separate ledger or spore writes."}
+ :effects {:sole-authored-path ".ημ/runs/oikos-program-20261103/reviews/services-generation-plan-review-v1.edn"
+           :services-writes false :docs-code-card-ledger-pr-writes false
+           :commits false :pushes false :runtime-mutation-tests false}}

@@ -71,8 +71,9 @@ pre-merge checkpoint, not the current merge state.
 The parent then observed official Rheos S1A readback **done**, after
 `testing → review → document → done`. Parent epic
 `722906b7-77d7-4414-a976-23996f7533de` and the empty dependency vector were
-unchanged. The official 24-card Oikos board is **21 incoming, 2 in_progress,
-1 done; zero epics done**. S2A and S7A remain `in_progress`. These are parent
+unchanged. At that completion checkpoint the official 24-card Oikos board was
+**21 incoming, 2 in_progress, 1 done; zero epics done**. S2A and S7A were
+`in_progress`; the later four-child wave is recorded below. These are parent
 official observations, also recorded in the
 [accepted S1A artifact permit](../../.ημ/runs/oikos-program-20261103/permits/s1a-accepted-62e6eebb.edn),
 not a fresh board query or test run by this documentation worker.
@@ -87,11 +88,23 @@ Neither publication nor S1A completion grants new consumer operational permissio
 installed immutable-worker selection, positive Bash, write-time safety, Services
 promotion/rollback, operator effects or epic integration.
 
-### Current delta: S2A re-review pending, S7A offline artifact qualified
+### Current wave: S3A done, decoder qualified, execution gates still held
 
-| Workstream | Source checkpoint | Current result and hold |
+The pushed coordinator is `81038b2123254783d4ec95f9338a87b8f3579834`, with newer
+uncommitted reviews and official events. Parent official readbacks now report
+**24 Oikos cards: 19 incoming, 3 in_progress, 2 done; zero epics done**. S1A and
+S3A are done; the in-progress children are S2A, S4A and S7A. External owner prerequisites below
+are separate cards, not additions to these 24 or to the 27-edge child DAG.
+The parent successfully recorded the earlier continuation wave with the corrected closed-heredoc
+receipt at `2026-11-03T21:15:37.769Z`. The earlier malformed unterminated-quote
+command was rejected before execution and wrote nothing; no phantom receipt or
+historical rewrite is implied.
+
+| Workstream | Source checkpoint / consumed artifact | Current result and hold |
 | --- | --- | --- |
-| S2A phase-1 contract/projection | `c399b60e1676c47778445c1098eb541ab38743cb` | Metadata/record fixes GREEN; same independent reviewer pending; contract not frozen; actual Clio append/persistence held |
+| S2A frozen contract / qualified private decoder | Contract `c399b60e`; decoder `97e41a6b733f01e1b409f0f68f1efaf9122f5177` | Both decoder findings independently settled; owned synthetic integration continuation authorized; no actual phase-2 result or whole-S2A acceptance |
+| S3A pure memberships/branches | Reviewed candidate `27adbfec5fd60302f93b1adf842dfd3f443644ab`; merge `008b0611198d13eb503bb57d5ef69d8dec1c268c` | Independently qualified, merged and officially done; caller supplies current accepted branch; no persistent CAS, live currentness or S3B movement admission |
+| S4A typed named capability/revision contracts | `8ae64df4c7ad170c5de9206f4d3f712d44c60b43` | Pure contract reviewed, frozen and privately published by the recorded permit; no live dispatcher or runtime effects |
 | S7A combined offline corpus/metrics/preflight | `9b4bc07be6a64dc7b69bdd7716a841162ba3168b` | All four P2 findings settled and offline artifact approved; full S7A remains `in_progress`; quality/speed/inference held |
 
 The [S2A contract review](../../.ημ/runs/oikos-program-20261103/reviews/s2a-contract-code-v1.edn)
@@ -101,9 +114,111 @@ the actual Clio `read-one` reader** at the original source. The implementer then
 reproduced **225 BB/NBB RED failures** and recorded desktop GREEN at **16 tests /
 1,059 assertions in each runtime** on `c399b60e`. Contract digest
 `3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49`
-is pending the **same independent reviewer's** re-review. It is not frozen or
-admitted to phase 2; actual Clio append/persistence, including owned fixtures,
-remains held. No alternate Clio kernel or validator is authorized.
+is now **approved by the original independent reviewer**, with both findings
+settled in the
+[exact-source fix review](../../.ημ/runs/oikos-program-20261103/reviews/s2a-contract-fix-review-v2.edn).
+Parent actual reruns passed desktop **16 / 1,059 in both BB and NBB**, inherited
+**18 BB / 286**, **30 NBB / 392**, evaluation **9 / 39**, and lint **0/0**.
+Published private ref `artifact/oikos-safe-reference-c399b60e` and the
+[frozen contract permit](../../.ημ/runs/oikos-program-20261103/permits/s2a-contract-c399b60e.edn)
+bind the actual independent report SHA-256
+`e329a2fa6b171795a56c1800ac12893d5b1dccd1312f3cf0c7b01d9e0232542e`
+and evidence UUID `b4542a1a-d95a-5fb5-a73d-3ba80bdd4692` to that exact contract.
+
+The parent authorized the original S2A implementer to build **owned synthetic
+actual Clio append, persistence, schema and locking fixtures**, including exact
+envelope retry. This scoped owned-fixture continuation may now proceed under the
+qualified decoder permit below; **no actual phase-2 result is claimed at this
+checkpoint**. Its final integration qualification remains outstanding; decoder
+approval is not evidence that the actual schema/history/locking fixtures passed.
+The frozen contract must not drift before append; changed source needs fresh
+independent review. Live collectors, operational content stores, personal capture
+and operational retention/erasure claims remain held. No alternate Clio kernel
+or validator is authorized; S2A is not done.
+
+The earlier private same-captured-byte decoder candidate was
+`7bd796cff3cf7f3365f1221e789bdb9e37bedaaf`, with **11 tests / 287 assertions in
+each of BB and NBB**, lint **0/0**, and all nine frozen contract hashes unchanged.
+Its narrow profile allows the default owner's literal bounded `#:namespace{...}`
+map spelling while refusing raw `^`, `#_` and tags; it does not replace the owner
+reader or weaken the frozen raw-data law. Its
+[exact decoder review](../../.ημ/runs/oikos-program-20261103/reviews/s2a-wire-code-v1.edn)
+returned **changes requested**: **P1 namespace-expanded key alias collapse** and
+**P2 raw partition-container metadata laundering**. That historical failure is
+not carried forward as an open defect on the reviewed successor.
+
+The [exact successor review](../../.ημ/runs/oikos-program-20261103/reviews/s2a-wire-fix-review-v2.edn)
+now **approves both fixes** at `97e41a6b733f01e1b409f0f68f1efaf9122f5177`, with
+**15 tests / 347 assertions in each runtime**, the inherited full suite green,
+lint **0/0**, and all nine frozen contract files unchanged. The
+[wire continuation permit](../../.ημ/runs/oikos-program-20261103/permits/s2a-wire-97e41a6b.edn)
+binds review SHA-256
+`46c9cffc0afd5976b7b4c751d2a46828c3c836bc4b2ad207d4c6568508526003`,
+the four reviewed wire-file hashes and the original frozen contract. The parent
+has authorized the original implementer to finish **owned synthetic actual Clio
+schema/history, locked append and fresh-process persisted replay fixtures**.
+Preserve those nine plus four files; actual effects tests and independent
+exact-head integration review still precede acceptance. No actual phase-2 result
+or full-S2A completion is claimed.
+
+The parent verified the exact provided pure lifetime and Clio-backed replay
+artifact for S3A (`b2f52c1f-bd1b-431e-a417-95c72549ba0d`) and S4A
+(`29caa8e3-289a-416c-9850-8ef9cc769e88`). Each officially walked
+`incoming → accepted → breakdown → ready → todo → in_progress`; existing
+producer UUID dependencies were retained, not replaced by a false S2A completion.
+Both isolated worktrees initially fast-forward imported `c399b60e`. The original
+dispatches were S3A `ses_e5cf49282ffeOrMeSLNNzvC0eC` for **pure logical
+membership/named-branch laws only**, and S4A `ses_e5cf49280ffeu6M5FZg2Eew6QC` for
+**typed named capability and revision-bound contracts only**. Live i3/Emacs
+effects, dispatcher installation and operational reuse of the old `470c35e7` BB
+transport remain held. Those prerequisite assessments and ordinary Rheos
+transitions were not engine validation of code quality or child completion;
+S3A's later reviewed merge and official completion are recorded next.
+
+The [completed pure S3A review](../../.ημ/runs/oikos-program-20261103/reviews/s3a-code-v1.edn)
+approves only `8642b46e`'s caller-current membership/branch laws. Its accepted-S1A
+composition at `27adbfec5fd60302f93b1adf842dfd3f443644ab` has now fully passed the
+[independent integration-code review](../../.ημ/runs/oikos-program-20261103/reviews/s3a-integration-v2.edn).
+The complete 600-second-budget invocations passed; the earlier 120-second timeout
+remains incomplete historical evidence, not a product failure. Parent fresh
+spaces tests passed **11 / 455 in BB and NBB**, with lint **0/0**.
+
+Native complete-page collection found **zero threads/findings**. Codex's passing
+exact-head receipt **6615777023**, with summary **6615747480**, was verified and
+recognized by the tool as Codex approval. CodeRabbit's check was **SUCCESS**, but
+its Free summary was **not** a full approving review. MiMo/Kimi workflow routes
+were absent; no completed hosted cohort or synthetic native approval is claimed.
+Under the explicit independent-local-review override, ordinary exact-head
+[Oikos PR #2](https://github.com/open-hax/oikos/pull/2) merged at **22:27:45Z** as
+`008b0611198d13eb503bb57d5ef69d8dec1c268c`, with parents accepted S1A `62e6eebb`
+and exact reviewed candidate `27adbfec`. The parent verified merge-tree equality
+to `06d714dd42ec2b12cd51bdc37e1b4b0fe67d9f3b`, clean primary Oikos `main`
+fast-forward, and normal private publication/readback of
+`artifact/oikos-s3a-008b0611`.
+
+The [accepted S3A permit](../../.ημ/runs/oikos-program-20261103/permits/s3a-accepted-008b0611.edn)
+binds those facts. Its parent-to-record board field is the pre-transition
+checkpoint: the later fresh official worker readback confirms
+`in_progress → testing → review → document → done`, retaining the existing E3
+parent and UUID dependencies. **S3A is the second done Oikos child**, not a done
+epic. The caller must still provide its current accepted branch; pure predecessor
+conflict laws do not supply persistent atomic CAS or live currentness. This
+source-composition review is **not fresh epic integration**, and no S3B movement
+or live effects are admitted.
+
+The [pure S4A review](../../.ημ/runs/oikos-program-20261103/reviews/s4a-contract-code-v1.edn)
+passed **11 tests / 99 assertions in both runtimes**, plus **652 independent
+checks per runtime**. The now-present
+[S4A freeze/publication permit](../../.ημ/runs/oikos-program-20261103/permits/s4a-contract-8ae64df4.edn)
+records actual create-only private publication of
+`artifact/oikos-capability-8ae64df4` at that exact source; this is a completed
+publication record, not merely a dispatched agent. Its next scope is **source-
+grounded trusted-dispatcher/owner-authority planning only**. Functional runtime
+implementation, live i3/Emacs effects, dispatcher installation and whole-S4A
+completion remain unqualified.
+The [dispatcher plan](../../.ημ/runs/oikos-program-20261103/reviews/s4a-dispatcher-plan-v1.edn)
+is under a new independent planning review, not implementation admission. No live
+or native shim exists as a qualified result of this planning work.
 
 The [S7A code/artifact review](../../.ημ/runs/oikos-program-20261103/reviews/s7a-code-v1.edn)
 originally required four P2 corrections: text-label/scorer mismatch, phase loss between
@@ -119,44 +234,196 @@ now settles all four and approves the **combined offline artifact** at
 `0085e3d5123e6e219d541aab81c2a4f15a7dc3a876d4cf8db6f44aca2397da24`.
 Private ref `artifact/oikos-s7a-offline-9b4bc07b` and the
 [data-only offline permit](../../.ημ/runs/oikos-program-20261103/permits/s7a-offline-9b4bc07b.edn)
-retain this exact scope. **No S5A admission** follows: S2A/S2B prerequisites and
-the owning real-runtime completion evidence remain separate requirements. Full
-S7A is still `in_progress`; quality, speed and inference remain held. The 24-card
-counts remain **21 incoming, 2 in_progress, 1 done; zero epics done**.
+retain this exact scope. **No S5A admission** follows from this offline artifact
+alone: its required artifact bindings, remaining S2B prerequisite and owning
+real-runtime completion evidence are not supplied by the offline permit. Full
+S7A is still `in_progress`; quality, speed and inference remain held. Its original
+author's separate offline simulator had three P2 findings in the
+[runner review](../../.ημ/runs/oikos-program-20261103/reviews/s7a-ocr-runner-code-v1.edn).
+The [independent fix review](../../.ημ/runs/oikos-program-20261103/reviews/s7a-ocr-runner-fix-review-v2.edn)
+now approves all three fixes at `7cd9320f2c9991f8e36e15e59478b80789ae3b25`
+**OFFLINE ONLY**, including **544 additional passing checks**. The runner-v2
+file SHA-256 is
+`2c291f6f4598b00da1197a8ae3b560042c56bbba9f971ca6d4efa9befbdd948b`;
+the qualified corpus v2 is unchanged. Normal private publication/readback of
+`artifact/oikos-ocr-runner-7cd9320f` is recorded in the
+[offline runner permit](../../.ημ/runs/oikos-program-20261103/permits/s7a-runner-offline-7cd9320f.edn).
+The live CLI remains blocked; this is no execution or whole-S7A admission.
+
+The [hard-runner specification](../../.ημ/runs/oikos-program-20261103/reviews/s7a-hard-runner-plan-v1.edn)
+is under independent planning review, **not authorized implementation or
+execution**. Its proposed aggregate **256 MiB client cgroup** covers three Python
+roles—supervisor/watchdog, network worker and durable writer—not an uncounted
+helper or only an interpreter heap. The allocator/cgroup boundary, durable
+full-raw-evidence store and retention executor, watchdog limits, real HTTP,
+response-instance binding, fresh resource/authority and no-second-hop gates
+remain unqualified. Neither simulator approval nor this design resolves those
+unknowns, supplies a live executor, permits a POST, or renews the consumed restart.
 
 The user selected **"Build owner prerequisites"**, recorded in the
 [S1B owner-prerequisite authorization](../../.ημ/runs/oikos-program-20261103/decisions/s1b-owner-prerequisites-authorization.edn).
-Two owner planning agents are active **before functional code** in isolated
-Services/shx worktrees: Services local-generation architecture/apply/rollback
-boundary and shx safe Bash renderer plus independent validator. Planning review
-precedes code, and independent code review precedes Oikos consumption. Sandbox
-fixtures only, no installed promotion; unrelated root Services/shx dirt is
-preserved. **No owner artifacts are available yet** and S1B remains incoming.
-Do not invent an Oikos-owned substitute kernel. Fresh epic integration still
-requires both owning children to qualify; one completed child is not an epic.
+Independent owner planning reviews and corrections now admit RED/GREEN in the
+isolated Services/shx owner worktrees. Two **external prerequisite cards**, neither
+carrying the Oikos label or counted among the 24, are officially `in_progress`:
+
+- **Services:** `3f5d0052-dda2-4089-971d-8603e385bd77`, exact plan
+  `f8d63271bd3d14cc6ce5ec33466c6e8a747d5d10`, spec SHA-256
+  `500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112`.
+  The [four-correction planning re-review](../../.ημ/runs/oikos-program-20261103/reviews/services-generation-plan-fix-review-v2.edn)
+  closed all four findings at planning scope. The later Caddy-backed environment
+  pass below does not establish **full engine/JVM qualification**; earlier focused
+  29-test/static passes were not a waiver.
+- **shx:** `577a41a3-3778-417b-b65d-186c12a521bf`, exact plan
+  `79ca039d0137aca1e59ebdbf4cd16eb46f737495`, spec SHA-256
+  `2dbeda258a384caa089e64ec578f57abfa85e123581559a603e55615c2abdcdc`.
+  The [planning fix re-review](../../.ημ/runs/oikos-program-20261103/reviews/shx-safe-bash-plan-fix-review-v2.edn)
+  settled its sole P2. The visible typechecker deprecation remains a qualification
+  hold; actual strict gates, implementation review and mutation evidence are
+  future work, not supplied by planning approval.
+
+Owner implementation continues in those isolated worktrees; **no qualified API
+is available yet**. Sandbox fixtures only, no installed promotion; unrelated root Services/shx
+dirt is preserved. S1B remains **incoming**. Its own worktree only fast-forward
+prepared accepted S1A `62e6eebb`; parent reruns of **18 BB / 286, 40 NBB / 546,
+9 evaluation / 39, lint 0/0** are prerequisite checks, not S1B implementation.
+Do not invent an Oikos-owned substitute kernel. Independent code review precedes
+consumer admission, and fresh epic integration still requires both owning
+children to qualify.
+
+The [Services partial implementation record](../../.ημ/runs/oikos-program-20261103/reviews/services-generation-implementation-v1.edn)
+binds the earlier portable-law tranche at `a7e56794f8872be558d423f10c1979033bd08e36`,
+not an available anchored OS engine. The architect is now implementing that engine;
+its outcome is not yet established. The later
+[isolated Caddy test-cache authorization](../../.ημ/runs/oikos-program-20261103/decisions/caddy-isolated-test-cache-authorization.edn)
+permits only the workflow-pinned **Caddy 2.8.4** public binary and checksum in an
+agent-owned fixture cache, with **no installation or service startup**. The parent
+reports the actual download/checksum verified and supplied this ready path to the
+Services architect:
+
+```text
+CADDY_TEST_BINARY=/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773/caddy
+```
+
+The [canonical cache handoff](../../.ημ/runs/oikos-program-20261103/reviews/caddy-test-cache-v1.edn)
+now identifies the worker's actual coordinator-root
+[`reviews/caddy-test-cache-v1.edn`](../../reviews/caddy-test-cache-v1.edn), preserving
+its exact **5,313 bytes** rather than pretending it originally occupied the run
+directory. Parent streaming rehash verified the **14,595,001-byte** archive,
+SHA-256 `a7e8306c54138cf88e371c5ec0caf7baf142ecc1d60a30897dfb67d65d3748c8`,
+and **40,681,624-byte** binary,
+SHA-256 `d3491373b2d78e4eaa3f498b42852d399d404b0df3f274bbee66d62c12084be0`.
+The Services author now reports **134 passing Caddy-backed environment tests**.
+The actual SIGKILL matrix and three further RED cases—clock rollback, replay
+reporting and limit diagnostics—are still running. No unprinted new head, full
+engine/JVM qualification or owner API handoff is claimed; cache preparation is
+not installation or a service startup.
+
+The [earlier shx partial record](../../.ημ/runs/oikos-program-20261103/reviews/shx-safe-bash-implementation-v1.edn)
+is historical. Latest parent-reported progress is `151dff49…`: **44 tests / 330
+assertions** in the strict pass and **21 BB plus 21 NBB transport cases**, with
+exact v5 bundle pins in owner-repository
+`docs/verification/safe-bash-transport-v2.edn`. The **same architect continues**;
+production deadline/cancellation/descendant/effect proof and the typed.clojure
+deprecation-warning hold remain unfinished. These intermediate passes do not
+grant S1B API admission or a qualified renderer/validator handoff.
+
+### Current OCR activation: consumed restart, input identity only
+
+The [independent concrete-unit review](../../.ημ/runs/oikos-program-20261103/reviews/ocr-attestation-concrete-review-v3.edn)
+approved the prepared release/unit. The parent then performed the sole authorized
+restart of source `6626d680f079c3330fee1df1f3565475d7ef1a55`; the
+[activation outcome](../../.ημ/runs/oikos-program-20261103/decisions/ocr-attestation-activation-outcome.edn)
+records **one restart, zero additional starts: the grant is consumed**.
+
+The [completed independent runtime review](../../.ημ/runs/oikos-program-20261103/reviews/ocr-attestation-runtime-v1.edn)
+verified **PID 3187253**, **start ticks 45402858**, the exact source and all five
+consumed asset-input hashes/lengths, reported **OpenVINO 2025.4.1** and NPU target,
+and a fresh **1,167-byte** identity response SHA-256
+`c35e58936c5f2cdfb3f1293678bff85d9cc3446a1f32e8c795c15d9caa33d985`.
+This qualifies startup input identity and successful native initialization under
+the reviewed trust base—not compiled-artifact identity, all dependency identity,
+physical-device tracing, OCR quality/speed or a cold-start benchmark. **No OCR
+POST or measurement was performed.** Original dirty owner source/unit fragment
+and the private rollback backup remain preserved.
+
+The [owner persistence report](../../.ημ/runs/oikos-program-20261103/reviews/ocr-owner-persistence-v1.edn)
+records **only the active owned override committed** as
+`470a96888c21f9a467f8d06f7802e88f3021302b` on `device/stealth`; **no source or
+unit pushes** were performed. Public source publication would expose private historical
+conversation metadata, and a normal unit push would publish five unrelated
+unpublished ancestors. No private historical title is reproduced here. The
+[publication hold](../../.ημ/runs/oikos-program-20261103/decisions/ocr-owner-publication-held.edn)
+records the private-snapshot versus keep-local question as **unanswered**, with
+**no selected destination or consent**. Remote backup is not verified. Preserve
+the local commits, release, exact rollback evidence and consumed marker: no
+deletion, force push, ancestry rewrite or assumed private-snapshot permission.
+This persistence hold changes neither the running `Restart=no` service nor its
+runtime identity and entails no new HTTP or restart.
+
+The user explicitly chose
+[keep automatic restarts off](../../.ημ/runs/oikos-program-20261103/decisions/ocr-recovery-restart-no.edn):
+retain **Restart=no** and authorize **zero additional starts**. A future crash
+stays visible; neither automatic recovery nor another manual/rollback startup is
+authorized.
+
+The separate [conditional six-image authorization](../../.ημ/runs/oikos-program-20261103/decisions/ocr-six-image-conditional-authorization.edn)
+allows **one** batch of the six frozen synthetic PNGs, **at most six sequential
+POSTs, 5 seconds/request, 30 seconds total, and a 256 MiB client ceiling**, on the
+existing loopback worker only. **Execution is still held and the batch grant is
+not consumed**: hard process/time/memory bounds, an independently reviewed runner
+and real HTTP/response-identity binding, durable raw evidence storage, fresh
+resource/authority context, no-second-hop review and explicit parent execution
+admission remain required. Operator consent is not a GovOne signed-policy verdict
+or resource reservation. No retries, extra batches, starts, downloads/new model
+loads, personal inputs, E4B loading, cloud or spending are granted.
 
 ### OCR identity attestation: narrow authorization, not activation
 
+**Historical pre-activation checkpoint:** the inventory, old PID and pending-unit
+review below describe the prepared state before the consumed restart above, not
+current blockers or a claim that activation has not happened.
+
 The [S7A runtime inventory](../../.ημ/runs/oikos-program-20261103/reviews/s7a-runtime-inventory-v1.edn)
-identified the existing port **8099** `ocr-npu.service`, PID **1371874**, and
-on-disk OCR assets. **Loaded source/model identity remains unknown**: the working
+initially identified port **8099** `ocr-npu.service`, PID **1371874**, and
+on-disk OCR assets. **Loaded source/model identity was then unknown**: the working
 server differs from repository HEAD and its file changed after process startup.
 Health metadata and disk hashes do not attest the bytes loaded by that worker.
 
 The later [explicit question-tool authorization](../../.ημ/runs/oikos-program-20261103/decisions/ocr-attestation-restart-authorization.edn)
 permits a **reviewed identity-reporting change and one controlled restart of the
-existing `ocr-npu.service`, using existing assets only**. A separate owner-i3
-worktree's offline patch `10b283d8` is under independent review **now running**;
-parent activation still awaits that review. **No restart has occurred at this
-checkpoint.** The inventory's earlier proposal-only/no-restart text predates this
-narrow grant; neither the inventory nor permission is activation evidence.
+existing `ocr-npu.service`, using existing assets only**. Owner-i3 patch
+`6626d680f079c3330fee1df1f3565475d7ef1a55` corrected the P2 startup-binding guard;
+the [independent fix review](../../.ημ/runs/oikos-program-20261103/reviews/ocr-attestation-fix-review-v2.edn)
+approved it after the nine-test suite and 84 malformed cases. This is scoped code
+and plan approval, not a live runtime attestation.
 
-This authorizes **no downloads, personal inputs, OCR batch execution, six-image
+The parent's [concrete preflight](../../.ημ/runs/oikos-program-20261103/reviews/ocr-attestation-concrete-preflight.edn)
+records exact committed server/launcher export to the new root-owned read-only
+release `/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55`.
+A new owned user-unit drop-in, SHA-256
+`9a0236217a54f59a1444d9029dc0a0efc3fac530d8f7b5ba382014c51765567c`,
+sets `Restart=no` and resets `ExecStart` to the same absolute `/usr/bin/python3`
+with the new launcher. `daemon-reload` completed and user-unit verification exited
+**0**. The original i3 dirty source and unit fragment are untouched; the private
+rollback backup was retained. **At that preflight PID 1371874 was still running,
+NRestarts=0; no restart, model load, warm execution or OCR POST had yet occurred.**
+
+Two unrelated existing unit warnings remain visible: ytwall's assignment outside
+a section and barrier's StartLimit key in the Service section. Verification is
+not a global warning-free claim, and no unrelated unit fix was requested.
+**Independent final review of the concrete composed unit was still pending before
+the sole authorized restart at that checkpoint.** This operator-authorized OCR source/unit
+preparation is not Oikos installed-generation promotion, runtime identity proof,
+or permission for the six-image batch or E4B loading. The inventory's earlier
+proposal-only text predates the grant; neither permission nor preparation counts
+as activation or post-restart attestation.
+
+That initial grant authorized **no downloads, personal inputs, OCR batch execution, six-image
 batch, E4B load, unrelated service/model changes, cloud use or spending**. Loaded
-identity and actual resource admission must still be established; the narrow
-restart grant alone supplies neither inference permission nor quality/speed
-qualification. Other model/service holds remain unchanged. An unsuccessful
-activation grants no repeated restart.
+identity and actual resource admission were separate gates; the restart grant
+alone supplied neither inference permission nor quality/speed qualification.
+The later input-identity result and conditional, still-held batch grant are
+recorded above; no repeated restart follows from either.
 
 ### Historical component-scoped wave: coordinator `de5c276d`
 
@@ -442,13 +709,23 @@ These are bounded program policy decisions, not blanket execution permits:
 9. Dependency precision may replace whole-epic waits with verified specific child
    artifacts. This does not weaken effect, governance or planning gates.
 
-**Explicit later exception, not a blanket policy change:** the
+**Original narrow exception (historical pre-activation checkpoint):** the
 [OCR identity-attestation authorization](#ocr-identity-attestation-narrow-authorization-not-activation)
-permits only the reviewed identity-reporting change and **one** controlled
+authorized only the reviewed identity-reporting change and **one** controlled
 `ocr-npu.service` restart with existing assets, after independent review and
 parent activation. Other download/load/restart holds above remain in force.
 It does not authorize an OCR/six-image batch, personal inputs, E4B load or other
-service/model changes, and no restart is claimed executed by this note.
+service/model changes. No restart had occurred at that earlier checkpoint; the
+actual consumed grant and runtime evidence are recorded above.
+
+**Current precise exceptions, not blanket weakening:** the sole OCR restart is
+now consumed, automatic recovery remains off, and no further start is authorized.
+The separate one-batch six-image consent remains conditional and unconsumed until
+all reviewed hard-boundary, durable-evidence, resource/authority and HTTP/identity
+gates pass. The isolated pinned Caddy fixture-cache download is authorized, not
+system installation, service startup, model downloading or Services acceptance.
+The original personal-data, cloud/GovOne, spending, installation and effect holds
+remain in force outside these explicit scopes.
 
 ## Sources and privacy
 

@@ -1,0 +1,110 @@
+{:permit/id :oikos-s4a-phase1-contract-8ae64df4
+ :permit/date "2026-11-03"
+ :authority :coordinator-delegated-pure-contract-freeze-only
+ :task/uuid "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :source {:repository "open-hax/oikos"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+          :sha "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+          :tree "3c20d6294cd2c18bdfa49b862feb3bdfefa8911b"
+          :diff-base "c399b60e1676c47778445c1098eb541ab38743cb"
+          :published-ref "artifact/oikos-capability-8ae64df4"
+          :published-full-ref "refs/heads/artifact/oikos-capability-8ae64df4"
+          :descriptor "docs/contracts/named-capability-v1.edn"
+          :descriptor-sha256 "93ffe4e70dae3155cb2479e2a74de33ff4ad705c8dcb16e1bde794f13c126c99"
+          :documentation "docs/contracts/named-capability-v1.md"
+          :documentation-sha256 "250caf9e82315ccfef91d55297f31ddf7049370a5a94437fd1e35a9cbb63cf70"}
+ :private-artifact-publication
+ {:visibility-command "env -u GH_TOKEN -u GITHUB_TOKEN gh api repos/open-hax/oikos --jq '{full_name,private,visibility,default_branch,archived}'"
+  :actual {:full_name "open-hax/oikos" :private true :visibility "private"
+           :default_branch "main" :archived false}
+  :authentication-note "Inherited-token metadata GET returned HTTP 401. The existing coordinator-documented token-stripped keyring route succeeded; no credential value or credential file was inspected or changed. Git publication used the existing SSH origin."
+  :prepublication-head-and-clean-worktree-verified true
+  :both-head-and-tag-artifact-names-absent-before-push true
+  :command "git push --porcelain origin 8ae64df4c7ad170c5de9206f4d3f712d44c60b43:refs/heads/artifact/oikos-capability-8ae64df4"
+  :exit 0 :actual-result :new-branch
+  :readback-command "git ls-remote --refs origin refs/heads/artifact/oikos-capability-8ae64df4"
+  :actual-remote-sha "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+  :create-only true :force false :overwrite false
+  :immutability "Freeze by exact commit/tree/content hashes and create-only, never-update artifact-ref policy, matching the existing S2A artifact convention. Server-side branch protection is not asserted. Ref movement or any hash change invalidates consumption; never repair by overwriting this ref or permit."
+  :public-tool-publication false :installation false :pr-created false}
+ :contract {:version "oikos.capability/v1"
+            :digest "2a82066221bfe57cb326f0fecce12082505ddfdbcdd53ab986451f69d67e884b"
+            :digest-algorithm :sha256-of-clio-canonical-edn
+            :canonical-utf8-bytes 29412
+            :value oikos.law.capability/contract
+            :operations [:emacs/read-range :emacs/replace-range :i3/window-read :i3/focus-window]
+            :successful-precondition-result {:status :preconditions-satisfied :authority :none}}
+ :review {:path "../reviews/s4a-contract-code-v1.edn"
+          :sha256 "eac7064d40f40392b1672a6e5ea4ff6199b3caf0c5d1faa605c7142c4c2e3030"
+          :actual-independent-verdict :approved
+          :kind :independent-adversarial-exact-head-code-and-contract-review
+          :source-sha "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+          :findings []
+          :native-provider-approval false
+          :authentication "Read the actual independent report, hash its exact bytes, verify its source/tree/version/digest and all named source/test bindings against Git and the working tree. Candidate-authored pending-review fields stay unchanged; they are not approval evidence."
+          :reported-execution {:bb [11 99] :nbb [11 99]
+                               :independent-probes-per-runtime 652
+                               :independent-probe-runtimes [:bb :nbb]
+                               :failures 0 :errors 0 :lint-errors 0 :lint-warnings 0}
+          :probe-attribution :independent-report-not-rerun-by-freeze-worker}
+ :freeze-worker-actual-verification
+ {:head-and-tree-match true :six-added-files-only true :changed-existing-files []
+  :all-thirteen-source-test-hashes-verified true
+  :descriptor-and-documentation-hashes-verified true
+  :all-fifteen-files-byte-equal-exact-git-source true
+  :frozen-nine-files-byte-equal-c399 true
+  :hash-implementations [:java-message-digest-sha256 :python-hashlib-sha256]
+  :contract-recomputed-in [:bb :nbb]
+  :canonical-transport-note "NBB CLI print adds one terminal newline; do not hash CLI framing as contract content. Both runtimes directly hashed the actual 29412-byte canonical value and returned the exact pinned digest; Python independently hashed BB's unframed canonical bytes."
+  :command "OIKOS_CLIO_SOURCE=/home/err/spaces/foresight/clio OIKOS_CLIO_DEPS=/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps bb scripts/test_capability.clj"
+  :exit 0 :bb [11 99] :nbb [11 99] :failures 0 :errors 0
+  :lint {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+  :inherited-default-tests :verified-by-independent-review-not-rerun-here
+  :new-dependencies-installed false :runtime-fixtures-executed false}
+ :source-and-test-sha256
+ {"src/oikos/law/capability.cljc" "fc47104a528ea4ef9b35bdb05cf533e70ddf09d0df445877e9dd1e04b77328e2"
+  "test/oikos/law/capability_test.cljc" "08622bc52ccf3efeda768bfb201639b62dd16c418bca5134f9abb1a9352e6fd4"
+  "scripts/test_capability.clj" "e263fd144f2cda08ee76321d9bb3031ebb32bf008180a327c9c876ca7f447335"
+  "test/oikos/capability_runner.cljc" "bbad5664f0fb6deee720dd2a7b22750202c25dea721ccbbef2b162e5350aef24"}
+ :frozen-s2a-source-and-test-sha256
+ {"bb.edn" "8f76a349e997923ae8130f81969a9d239522828e60f6645ae9de14ec0ada0af8"
+  "README.md" "85a93c408bb7c9167c297929915422023d377e0fd992a8c6134a1dc4a530f5fa"
+  "src/oikos/law/safe_reference.cljc" "baee008c0a3b2dc4a6ddd7bc8f4a63fed317d0d4514f961d819ad484019cdf60"
+  "src/oikos/law/desktop.cljc" "edea4e32bd0279ccfc2f81a4cfbe24c9e1348f06606f9d597530d28f894680d7"
+  "scripts/test_desktop.clj" "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"
+  "test/oikos/desktop_fixture.cljc" "77122676722cba3af9d62c42fcb725daf4236e6364ec50f7378a5907d4df4c57"
+  "test/oikos/desktop_runner.cljc" "a3b84c0bf587a7ce051d1d1ea9257d75832337d963bec8e609a4da9654b00072"
+  "test/oikos/law/desktop_test.cljc" "be969cb41358194a630b35cadc0db13243be400cc2cffbe250703c2e0bc4b088"
+  "test/oikos/law/plain_event_test.cljc" "5e4044f67c0792adad48ccd6c0544afc064afb8eb51eb853af306efd8996903f"}
+ :prerequisite-custody
+ {:s1a-accepted-merge "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+  :s2a-source "c399b60e1676c47778445c1098eb541ab38743cb"
+  :s2a-permit "s2a-contract-c399b60e.edn"
+  :s2a-permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+  :s2a-version "oikos.desktop.safe-reference/v1"
+  :s2a-digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+  :clio-owner "788cdd3434615a7932b924e68520dbf7f88408c2"
+  :s2a-actual-reader-location-metadata-blocker :held-not-resolved-by-this-freeze
+  :inherited-bb-transport-operational-status :held
+  :s2a-permit-and-nine-files-modified false}
+ :provided [:closed-pure-named-request-resource-scope-approval-result-shapes
+            :inert-exact-revision-bound-preview
+            :pure-precondition-comparison-with-authority-none
+            :bounded-data-and-constant-input-free-denials
+            :frozen-s2a-targetability-reuse]
+ :qualified-scope :phase1-exact-head-portable-contract-only
+ :allowed-next-scope :source-grounded-trusted-dispatcher-and-owner-authority-planning-only
+ :not-provided [:authenticated-actor :authenticated-consent :govone-admission
+                :trusted-current-resource-facts :real-buffer-or-window-identity-attestation
+                :live-utf8-boundary-validation :approval-expiry-revocation-or-single-use
+                :atomic-fresh-check-and-mutation :runtime-dispatcher :runtime-availability
+                :content-return :actual-clio-append-or-persistence]
+ :not-authorized [:functional-runtime-implementation :daemon-or-package-start-or-install
+                  :service-model-emacs-or-i3-calls :private-buffer-inspection
+                  :operator-resource-effects :dispatcher-installation
+                  :raw-eval-or-ipc-publication :remote-client-or-public-tool-publication
+                  :board-or-workflow-or-receipt-mutation :pr-or-merge-or-commit]
+ :constraints "The artifact-ref push above is the sole specifically authorized publication. This permit grants no effect permission and no board-state admission. Missing owner authority denies. Any changed contract/source requires fresh independent review and a new permit; never alter the frozen S2A permit or nine files. Parent must independently review the new dispatcher plan before any separate effect permit. Pure fakes can qualify contracts only, never dispatcher behavior."
+ :runtime-qualification false :whole-s4a-accepted false :whole-s2a-accepted false
+ :fresh-epic-integration false :native-approval-credit 0 :epic-completion-credit 0
+ :parent-owned-persistence [:workflow :receipts :mycology-ledger :card-state :commits]}

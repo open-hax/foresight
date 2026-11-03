@@ -1,0 +1,108 @@
+{:review/id :shx-safe-bash-plan-review-v1
+ :date "2026-11-03"
+ :scope :independent-adversarial-owner-planning-review
+ :context :己
+ :confidence 0.95
+ :verdict :request-changes
+ :summary "One P2 closed-wire-contract ambiguity needs a small planning correction. The remaining proposed owner boundary is acceptable for sandbox-only implementation planning; missing implementation is not a finding."
+ :subject {:repository "octave-commons/shx"
+           :worktree "/home/err/spaces/foresight/shx/.worktrees/feat/oikos-safe-bash-20261103"
+           :base "f4ee133dcf1650c7eafb623ef084f62417252477"
+           :head "cbd0b4349b3f338a86e5b32638b4ac7325786686"
+           :head-and-direct-parent-verified true
+           :worktree-status-at-inspection :clean
+           :changed-files ["docs/design/restricted-bash-owner-boundary.md"
+                           "docs/specs/restricted-bash-v1.md"]}
+ :authority {:source ".ημ/runs/oikos-program-20261103/decisions/s1b-owner-prerequisites-authorization.edn"
+             :selected-label "Build owner prerequisites"
+             :interpretation "Owner-side prerequisites, planning admission before functional work, independent implementation review before Oikos consumption, synthetic sandbox only. No new user decision is needed to settle the finding below."
+             :hosted-review-requested false
+             :hosted-round-or-approval-credit 0}
+ :evidence {:context :世
+            :confidence 1.0
+            :canonical-guide {:path "AGENTS.md" :lines [1 180]
+                              :git-blob "76842aeb568d00a6df539e2a15a929d156f3318d"
+                              :same-at-base-and-head true
+                              :qualification "Read the full 180-line worktree guide. The separate owner root still has the historical 170-line guide; its obsolete board alias does not replace the canonical worktree instructions."}
+            :documents [{:path "docs/design/restricted-bash-owner-boundary.md"
+                         :sha256 "bd23788783fdd8c41768ee5e26133b8725c7b6a0f0ce36fd7807e4d6d7401058"
+                         :lines-read [1 121]}
+                        {:path "docs/specs/restricted-bash-v1.md"
+                         :sha256 "77b85504cc374dc07136c4f1412460c790c3db9e8bf94829246cb6e544874f88"
+                         :lines-read [1 212]}
+                        {:path "/home/err/spaces/foresight/oikos/docs/specs/s1a-generation-contracts.md"
+                         :sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+                         :lines-read [1 392]}]
+            :owner-source-read ["README.md" "src/shx/law/ir.clj"
+                                "src/shx/shape/quote.clj" "src/shx/shape/bash.clj"
+                                "src/shx/cli.clj" "deps.edn" "bb.edn" "bin/analyze"
+                                "docs/static-analysis.md" "docs/mutation-testing.md"
+                                "heretic.edn" "tests.edn"
+                                "test/shx/shape/quote_test.clj"
+                                "test/shx/shape/bash_test.clj"
+                                "test/shx/law/ir_test.clj"]
+            :parent-inputs-read [".ημ/runs/oikos-program-20261103/reviews/shx-safe-bash-prerequisite-plan.edn"
+                                 ".ημ/runs/oikos-program-20261103/reviews/s1b-owner-prerequisite-discovery.edn"
+                                 ".ημ/runs/oikos-program-20261103/decisions/s1b-owner-prerequisites-authorization.edn"]
+            :additional-policy-read ["~/.agents/skills/pr-flow/SKILL.md"
+                                     "~/.agents/skills/receipt-river/SKILL.md"
+                                     "~/.agents/skills/session-mycology/SKILL.md"]}
+ :findings
+ [{:id :shx-plan/validation-operation-envelope
+   :priority :P2
+   :context :己
+   :confidence 0.98
+   :location {:path "docs/specs/restricted-bash-v1.md" :lines [139 154]}
+   :title "Give validation its own explicit closed operation envelope"
+   :evidence "The fixed entries must accept only their matching operation (139-143), but the only concrete envelope has :operation :render (151-152). The next sentence says Validate adds exactly :content and :descriptor, without changing that discriminator. Taken literally it sends :render to the validation-only entry; changing it to :validate is currently an undocumented wire change."
+   :impact "Independent BB/NBB clients and the validation helper can implement different interpretations of an otherwise exact, closed protocol. The positive validator call then either fails its matching-operation check or accepts the renderer discriminator. This is a planning ambiguity, not a claim that any validator code already exists."
+   :minimal-exact-correction "Replace the envelope paragraph with two explicit closed forms: RenderEnvelope = {:protocol :shx/safe-bash-v1 :request-id ID :operation :render :request Request}; ValidateEnvelope = {:protocol :shx/safe-bash-v1 :request-id ID :operation :validate :request Request :content String :descriptor Descriptor}. State that each entry rejects the other operation and all unknown/missing keys, and retain helper-configured trusted pins outside both wire forms. The existing correlated Response shape can stay unchanged."
+   :tests-needed ["B01/B11: each actual fixed entry accepts its own exact envelope on both BB and NBB transports."
+                  "B11: send :render to validation and :validate to rendering, including otherwise well-shaped opposite-operation fields; require sanitized protocol rejection/nonzero exit, never success."
+                  "Reject absent/unknown operation and request-supplied trusted-pins or executable/classpath fields without invoking any generated content."]
+   :settlement "Owner edits only the planning contract, records a new exact head/hash, and obtains independent confirmation of this correction before unrestricted owner RED/GREEN admission."}]
+ :accepted-planning-choices
+ [{:area :closed-owner-language
+   :basis "Spec 16-74, 78-115 and B01-B09 define finite closed literal/ref requests and restricted IR, Unicode/metadata/runtime-value rejection, bounded traversal, exact independent positive parsing and full ordered expected-binding comparison. This does not promote generic IR validity to safety."}
+  {:area :canonical-quote-grammar
+   :basis "Spec 78-107 pins splice hex 27 22 27 22 27, empty/edge/repeated quote goldens, final LF and no headers/alternative shell syntax. This matches S1A 249-258 while deliberately leaving existing sq backslash-splice and dq expansion semantics unchanged. No renderer import, re-render-only proof, shell parser, bash -n or native evaluation is admitted."}
+  {:area :reference-shadowing
+   :basis "Spec 67-74 makes preceding-export shadow rejection a request-validity rule and allows self-reference. This is an acceptable conservative owner subset, not a request to redefine generic shx or read environment values. S1B must propagate rejection for the entire affected request/batch, never reorder, drop or replace bindings to obtain success."}
+  {:area :owner-projection-bounds
+   :basis "Spec 44-64, 155-158 and B08 state owner-smaller admission bounds: 1-128 bindings, names up to 128 characters, 0-1024 available names, 4096-byte literals/paths, 65536-byte artifacts and bounded frames/depth/elements. Limits apply together, including quote expansion. A consumer must visibly hold/reject an oversized projection rather than truncate it or claim the wider S1A schema was narrowed."}
+  {:area :independent-identity-and-coverage
+   :basis "Spec 109-135 requires exact descriptor metadata, UTF-8 byte count/SHA, independently trusted validator pins, separate renderer pins and transitive semantic bundle coverage. Shared schema/domain dependency changes invalidate applicable pins. Runtime/dependency-lock identities and actual callable entries are additional handoff obligations, not supplied by a Git SHA or producer descriptor. Single-target validation explicitly leaves whole-batch target/descriptor/content bijection to S1B."}
+  {:area :owner-layers-and-qualified-runtime
+   :basis "Design 45-76 respects Malli-schema-only law, pure domain/parser and shape, with JVM infra. BB/NBB pure fixture parity is distinct from external Malli validation. Both clients must later call the actual fixed, separately pinned JVM renderer and validator process/classpath; fake helpers or assumed Malli-in-BB availability do not qualify this boundary."}
+  {:area :spawn-and-effect-boundary
+   :basis "Spec 137-179 and B11-B12 prohibit request-selected code/classpaths, shell launch, Clojure CLI dependency/startup resolution, inherited HOME/XDG/CLASSPATH/JVM injection options, personal hooks and secret reads. The 5000-ms budget is spawn-relative, followed by 250-ms TERM grace and 750-ms cleanup budget; it is not permission to wait for JVM readiness before starting the clock."
+   :qualification "Actual implementation proof must cover stdin/draining, cold pinned JVM startup/classpath, EOF/exit/stderr, overflow, timeout/cancellation/late-output races and descendants. Terminal failure cannot be reversed by late success; cleanup uncertainty blocks reuse. These are future B11 obligations, not measured timing or cleanup guarantees established by planning prose."}
+  {:area :compatibility-and-qualification-gates
+   :basis "Design 30-41 and B13 retain generic IR, envm's filesystem-filtered PATH versus runtime IR guards, sq and dq, existing tests and all seven blocking analyzers. Pure changes require mutation survivor/no-coverage inspection, not a score-only assertion or weakened thresholds."}]
+ :baseline {:source :owner-planning-report-not-reviewer-rerun
+            :context :彼
+            :confidence 0.55
+            :reported {:strict-gate-exit 0 :tests 19 :assertions 46
+                       :all-seven-checks-exited-zero true
+                       :focused-tests 13 :focused-assertions 29}
+            :warning "DEPRECATED SYNTAX (NO_SOURCE_PATH): DEPRECATED: Using integer 0 for object id. Use named variables instead."
+            :zero-warning-qualified false
+            :qualification "The plan honestly records an unresolved pre-existing typechecker warning and B13 demands zero findings. Before implementation qualification, rerun the actual strict gate and demonstrate the warning is resolved by an evidenced narrowly scoped owner fix, or retain an explicit hold. A broad unrelated checker/dependency refactor, hidden stderr, relaxed ratchet or successful exit alone cannot settle it. This is an existing release hold, not an additional missing-code planning finding."}
+ :admission {:parent-may-authorize-unrestricted-owner-red-green-now false
+             :reason :one-open-planning-finding
+             :after-settlement "Parent may authorize owner-side RED/GREEN once the explicit envelope correction is independently confirmed at the revised head; the existing user choice already supplies prerequisite scope. No additional user choice or hosted five-round queue is required for this local planning settlement."
+             :owner-implementation-only true
+             :oikos-positive-bash-admission false
+             :installed-promotion false
+             :available-api-or-positive-validator-qualified-by-this-review false
+             :later-gates "Actual laws/tests, portable fixtures, real fixed transports, clean owner gate and mutation evidence, independently reviewed renderer/validator dependency bundles and explicit owner handoff remain necessary before S1B can consume positive Bash. S1A's unavailable-Bash contract is unchanged."}
+ :execution-limits {:functional-source-doc-card-ledger-pr-writes false
+                    :commits-or-branch-moves false
+                    :test-analyzer-or-helper-execution false
+                    :generated-bash-or-native-bash-check false
+                    :model-service-installation-or-credential-effects false
+                    :only-authored-path ".ημ/runs/oikos-program-20261103/reviews/shx-safe-bash-plan-review-v1.edn"
+                    :parent-owns-provenance-and-reflection-ledgers true}
+ :reflection {:p-efficiency 0.85 :p-friction 0.15 :p-skill-candidate 0.35
+              :learning "Judge a plan by explicit future proof obligations, not absent implementation. A concrete closed-wire example still needs to agree with its matching-operation rule; do not silently repair it while granting admission."
+              :spore-created false :separate-ledger-write false}}

@@ -1,0 +1,93 @@
+{:report/id :services-generation-implementation-v1
+ :date "2026-11-03"
+ :context :世 :confidence 1.0
+ :status :partial-red-and-portable-law-green
+ :final-green false
+ :implementation-qualified false
+ :consumer-handoff-authorized false
+ :callable-filesystem-entry :absent
+ :planning {:accepted-head "f8d63271bd3d14cc6ce5ec33466c6e8a747d5d10"
+            :spec "docs/local-generations-v1.md"
+            :spec-sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+            :independent-review ".ημ/runs/oikos-program-20261103/reviews/services-generation-plan-fix-review-v2.edn"
+            :whole-review-read true
+            :spec-unchanged true}
+ :admission {:official-command "eta-mu kanban read-task 3f5d0052-dda2-4089-971d-8603e385bd77 --config /home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+             :actual-status :in_progress
+             :all-returned-body-and-comment-read true
+             :board-write false}
+ :source {:repository "open-hax/services"
+          :worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+          :branch "feat/oikos-local-generations-20261103"
+          :red-commit "fdc4178b107085e3e8f328976c4d462a9062eee9"
+          :portable-law-commit "a7e56794f8872be558d423f10c1979033bd08e36"
+          :tested-head "a7e56794f8872be558d423f10c1979033bd08e36"
+          :pure-entry "src/services/local_generation.cljc"
+          :pure-source-sha256 "5d696309574f7b8d09afcd9f386b52f9c4fa6c3d21f5d3425a1f091c27aba538"
+          :files ["src/services/local_generation.cljc"
+                  "test/services/local_generation_test.cljc"
+                  "scripts/tests/test_local_generation_law.py"
+                  "scripts/tests/test_local_generation_fs.py"]
+          :clean true :push false :pr false
+          :root-head-preserved "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+          :root-dirt-preserved [".agents/" ".github/workflows/agy-review.yml" "scripts/__pycache__/" "scripts/agy-review.sh"]}
+ :implemented {:portable-law "Closed recursive shape declarations for spec records through RecoveryCapsule/Journal, lossless NS64/U64 predicates, UTF8-length canonical preimages, operation-specific destination comparisons, initial pure approval comparisons. No host imports, filesystem, processes or effect authority."
+               :limits "Shape checking plus initial comparison predicates are NOT the full admission/runtime validator: metadata/tree proof hashing, all byte limits, wire duplicate-key handling, custody, independent validator pins, nonce state and recovery remain unimplemented. No grants or available mutator are inferred. Native digest is exercised in parity tests, not yet exposed through a fixed production facade."
+               :parity "Independent Python native SHA256 versus BB MessageDigest versus NBB crypto over pure canonical preimages, Unicode and actual unchanged README stat strings, observed nanoseconds/adjacent values/pre-epoch/bounds. These test-only native imports are outside the pure namespace."
+               :red-fixtures "Expected real Engine facade and direct Python OS edge contract in test fixture, not a refusal stub. Tests describe apply A/apply B/retained rollback A, approved fields, effect-free reads, retained metadata drift, final-current replacement, exhaustive discovered before/after fault checkpoints and actual owned SIGKILL/fresh-process recovery. Fixture provisioning/rendering/snapshots are test-local, not production helper APIs."
+               :red-limits "The filesystem module is absent: import fails before fixture test bodies execute. No actual mutation/rollback/SIGKILL/race fixture is claimed exercised, no independent EDN validator is yet available, no Bash availability is claimed."}
+ :verification {:red {:commands ["PYTHONDONTWRITEBYTECODE=1 python3 -m unittest scripts.tests.test_local_generation_fs"
+                                "bb -cp src:test test/services/local_generation_test.cljc"]
+                      :initial-results ["Python failed importing missing local_generation_fs (1 unittest loader error)"
+                                        "BB failed requiring missing services.local-generation"]
+                      :red-committed-before-implementation true
+                      :remaining-os-red-at-tested-head "Python still fails with ModuleNotFoundError local_generation_fs, 1 loader error; no skipped tests and no refusal mock."}
+                :portable-law [{:runtime :bb :tests 6 :assertions 115 :failures 0 :errors 0}
+                               {:runtime :nbb :tests 6 :assertions 115 :failures 0 :errors 0}
+                               {:runtime :jvm-offline-bundled :tests 6 :assertions 115 :failures 0 :errors 0}]
+                :python-focused {:command "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest scripts.tests.test_environment_policy scripts.tests.test_environment_workflow scripts.tests.test_local_generation_law"
+                                 :tests 30 :seconds 1.260 :failures 0 :errors 0}
+                :full-environment {:command "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/tests -p 'test_environment*.py'"
+                                   :tests 123 :seconds 104.652 :errors 2 :result :failed
+                                   :cause "Verified CADDY_TEST_BINARY absent; EnvironmentCaddyTest and ManagedAxxiumCaddyTest class setup fails. Exact tested-head rerun; not a passing gate."}
+                :edn {:command "java -cp /usr/local/lib/clojure/libexec/clojure-tools-1.12.2.1565.jar clojure.main scripts/check-edn-contracts.clj"
+                      :resources 370 :result :passed
+                      :limit "Offline JVM bundled runtime executed actual parser, but this is NOT the pinned workflow CLI 1.12.5.1664 invocation. That exact required workflow evidence remains unavailable, not waived."}
+                :static-passed ["clj-kondo --lint src test/services/local_generation_test.cljc scripts/check-edn-contracts.clj: zero errors/warnings"
+                                "python3 scripts/check-deployment-boundary.py --self-test"
+                                "python3 scripts/check-deployment-boundary.py"
+                                "python3 scripts/check-deploy-source-pins.py"
+                                "python3 scripts/check-deploy-chain.py"
+                                "Python AST parse of all scripts Python"
+                                "Owner digitalocean YAML/workflow YAML parse"
+                                "bash -n DO library/scripts/service scripts"
+                                "git diff --check"]
+                :not-run ["New OS/race/actual-compensation tests beyond loader RED: absent implementation"
+                          "Full all-pattern Python suite: new filesystem loader RED remains; full required environment suite failure separately recorded"
+                          "Pinned workflow CLI/JVM gates, Docker-dependent gates, unavailable Python typecheck tools"]}
+ :caddy {:declared-path-env :absent :on-path false
+         :locating-scope "command -v caddy and explicit CADDY_TEST_BINARY only; no home-wide hunt or download/install."
+         :required-version "2.8.4 linux amd64, from code-quality.yml pinned archive"
+         :archive-sha256 "a7e8306c54138cf88e371c5ec0caf7baf142ecc1d60a30897dfb67d65d3748c8"
+         :request "Authorized environment must supply an already verified executable via CADDY_TEST_BINARY; exact final candidate full environment suite must execute both classes and exit zero with actual counts. No automatic download/install."
+         :final-qualification-blocker true :red-green-development-blocker false}
+ :continuation {:escalation :parent-route-remaining-os-engine-to-architect
+                :reason "Remaining anchored filesystem transaction/capsule recovery engine is high-stakes, multi-stage OS work. Default implementer instructions require Architect escalation for that tier; nested dispatch is explicitly prohibited here. Return concrete committed RED plus verified portable-law tranche instead of pretending an unchecked mutator is qualified."
+                :new-user-decision-required false
+                :remaining ["Fixed BB facade and bounded strict Python wire decoder with independent native hashes"
+                            "Real independently pinned non-executing inert EDN validator and source custody"
+                            "Linux anchored nofollow descriptor/lock/private-parent boundary and operation-specific destination admission"
+                            "Durable <=32MiB capsule with admitted Plan/approval/policy and exact retained metadata proofs"
+                            "Native mutation/journaling/selection/compensation and fresh-process recovery with no caller plan"
+                            "Complete race/partial-failure/uncertain-hold matrix, actual positive owner writes and rollback"
+                            "Workflow/new-test wiring, all required exact-source gates, independent adversarial code review and explicit qualified handoff"]
+                :parent-owns "Routing continuation, receipts/reflection, board, independent implementation reviews and final admission. No consumer handoff or API availability from this partial tranche."}
+ :effects {:installed false :services false :docker false :deployment false :model false
+           :cloud false :personal-data false :board-writes false :parent-ledger-writes false
+           :functional-os-module false :worker-kills-executed false
+           :ordinary-commits true :amend false :push false :pr false}
+ :scratch {:active-worktree true :free-before "45 GiB" :free-after "45 GiB"
+           :large-allocation false :cleanup :preserve-unpushed-active-worktree}
+ :reflection {:efficiency 0.7 :friction 0.3 :skill-candidate 0.35 :spore-created false
+              :lesson "Keep standard test-vector cryptographic primitives outside portable pure laws; distinguish GREEN law tests from still-RED effect-edge fixtures. Escalate a durable OS engine before unchecked mutation work, preserving executable specifications and exact source commits."
+              :receipt-delegation "Parent owns provenance/reflection ledgers; this new report is the sole parent write."}}

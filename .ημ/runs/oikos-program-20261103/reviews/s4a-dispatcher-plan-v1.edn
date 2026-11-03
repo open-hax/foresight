@@ -1,0 +1,215 @@
+{:plan/id :oikos-s4a-dispatcher-plan-v1
+ :plan/date "2026-11-03"
+ :plan/kind :source-grounded-trusted-dispatcher-and-owner-authority-planning-only
+ :plan/status :pending-independent-parent-review
+ :authority :none
+ :task/uuid "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :runtime-implementation-permission false :effect-permission false
+ :runtime-qualification false :whole-s4a-accepted false :whole-s2a-accepted false
+ :fresh-epic-integration false :native-approval-credit 0 :epic-completion-credit 0
+ :frozen-input
+ {:permit "../permits/s4a-contract-8ae64df4.edn"
+  :permit-sha256 "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+  :source "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+  :tree "3c20d6294cd2c18bdfa49b862feb3bdfefa8911b"
+  :published-ref "refs/heads/artifact/oikos-capability-8ae64df4"
+  :remote-readback "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+  :version "oikos.capability/v1"
+  :digest "2a82066221bfe57cb326f0fecce12082505ddfdbcdd53ab986451f69d67e884b"
+  :independent-review "s4a-contract-code-v1.edn"
+  :independent-review-sha256 "eac7064d40f40392b1672a6e5ea4ff6199b3caf0c5d1faa605c7142c4c2e3030"
+  :qualification "Pure preview/check-preconditions only; successful result has :authority :none. The report's 652 probes per runtime do not test a dispatcher or authenticate consent. No frozen file or candidate pending-review field is changed."
+  :s2a-permit "../permits/s2a-contract-c399b60e.edn"
+  :s2a-permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+  :s2a-phase2-reader-blocker :held-not-resolved-here}
+ :requirements-read
+ [{:path "docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+   :lines [28 47]
+   :requires [:authenticated-read-scope :exact-resource-allowlist :bounded-range
+              :revision-bound-explicit-approval :native-buffer-incarnation
+              :dispatcher-local-final-freshness-check :zero-mutation-on-stale-binding
+              :one-success-only :no-arbitrary-eval-or-ipc :no-second-daemon]
+   :policy-lines [66 70]
+   :known-operator-policy "Synthetic sandbox/dev only. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Current S4A admission excludes all live effects, existing-server buffers and dispatcher installation. Do not ask the operator to repeat these settled rules."
+   :board-validation-or-state-change-claimed false}
+  {:owner "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+   :paths ["AGENTS.md" "docs/contracts/named-capability-v1.md" "docs/architecture/workbench.md"]
+   :anchors ["named-capability-v1.md:108-134" "workbench.md:77-153"]
+   :requires "Reuse one capability vocabulary, existing owner infrastructure and current-resource checks. NBB is primary; native editor operations need an explicit outer protocol. Installed/dev generations and sockets are disjoint; hidden workspaces are not noninterference. No local policy kernel."
+   :interpretation :source-contract-not-runtime-evidence}]
+ :source-observations
+ [{:owner :emacs-supervision :root "/home/err/.config/systemd/user"
+   :head "996d4d7a4ab176276433499e807f81478a579e14"
+   :path "emacs.service" :lines [9 16]
+   :sha256 "1b99b4b9a3ae1ef6be83a92a7ecfcb28feaa2f65b910cf1aa2c795f3a7871a4d"
+   :byte-equal-head true
+   :observed "A supervised /snap/bin/emacs --fg-daemon is declared. Its service owns process lifecycle, not capability semantics. This file does not identify an isolated test endpoint or prove any running server."
+   :reuse "Connect only to a separately permitted, explicitly pinned, already-supervised test endpoint. Do not start/restart/stop the operator service or edit its unit."
+   :runtime-availability :not-inspected}
+  {:owner :emacs-private-layer :root "/home/err/.spacemacs.d"
+   :head "ff76ccd6a8e1afca372a8e523bcdb5914fa7de4b"
+   :files [{:path "layers/agent-sandbox/config.el" :lines [7 15]
+            :sha256 "ede0280ae7d892d8262d3645f25467598a9e2d1dee106d11f83957950b2fb5ec"}
+           {:path "layers/agent-sandbox/funcs.el" :lines [7 60]
+            :sha256 "eee4b1e515b0d7583b7532103bf8fb7a21d12a519408d60718a20271d386b1fb"}]
+   :all-files-byte-equal-head true
+   :observed "The layer names agent-core by default and supplies snapshot/Dired/vterm helpers. These helpers are not an authenticated bounded capability dispatcher. No buffer-incarnation registry, server epoch, atomic replacement or consent mechanism was found in this inspected layer. Naming agent-core is configuration, not proof the server exists."
+   :reuse "Use the existing private-layer ownership seam for the minimal native shim after separate owner/code approval; do not add a second Emacs configuration tree or daemon."
+   :planning-note "docs/notes/agent-i3-sandbox/02-spacemacs-target-layer-architecture.md proposes core/spacemacs/dev targets and named daemons; it is a proposal, not an installed target inventory."
+   :runtime-availability :not-inspected}
+  {:owner :emacs-compatibility-docs
+   :path "/home/err/spaces/foresight/.agents/skills/emacs-daemon-ops/SKILL.md"
+   :lines [19 33]
+   :observed "Documents unrestricted emacs_eval/emacs_open, not safe named operations. Its assertion that --alternate-editor= fails fast is unsafe to reuse."
+   :contradicting-installed-document "/usr/share/man/man1/emacsclient.emacs.1.gz"
+   :document-sha256 "5e0368f59f51e98197c6f9241d8bea897f7e32c6c1537a0484c248ee04437c05"
+   :decompressed-lines [63 69]
+   :actual-document-text "If the empty string is specified, run emacs --daemon to start Emacs in daemon mode, and try to connect to it."
+   :limit "System manpage is not proof of the snap client's implementation/version. No binary was invoked. Any later selected client must demonstrate fail-closed connection to a missing test socket with zero spawned Emacs processes; never use an empty alternate-editor argument or environment value."
+   :required-action :separate-owner-doc-correction-not-authorized-in-this-turn}
+  {:owner :i3-existing-ipc :root "/home/err/.config/i3"
+   :head "415987dbf5c21e779826a232018e7940fb1be66c"
+   :path "devops/src/i3/desktop/i3.clj" :lines [14 23 39 57 68 90]
+   :sha256 "1af623b98967d0793ae6a8b4a101ffe1935e9b549d1941a689b166426a91042f"
+   :byte-equal-head true
+   :observed "tree/workspaces/subscribe-stream call i3-msg. focus-window! resolves a supplied XID in a fresh tree and sends [con_id=N] focus. It has no actor/consent check, S2A incarnation/cut comparison, or server-native atomic compare-and-focus. window-info includes sensitive titles."
+   :reuse "Keep transport/config ownership here; use an explicit adapter protocol if BB is retained. Do not import JVM/BB namespaces into NBB or copy its raw IPC surface into published tools. Never forward the complete tree/title-bearing window-info as a bounded named read."
+   :runtime-availability :not-inspected}
+  {:owner :i3-synthetic-harness :root "/home/err/.config/i3"
+   :head "415987dbf5c21e779826a232018e7940fb1be66c"
+   :files [{:path "sandbox/docker-compose.yml"
+            :sha256 "3ac7acc76576e18233a00d9517e4709e0ea32d59e8450b183e08e64974c22f1f"}
+           {:path "sandbox/Dockerfile"
+            :sha256 "a0463ffe905388034d7034615f779c26603ac1d076c4088923502d1d2bd64b71"}
+           {:path "sandbox/scripts/entrypoint"
+            :sha256 "27c8ca8bff058eb387419c037a95894d6442db6984f58bb18c61e15dec574729"}]
+   :all-files-byte-equal-head true
+   :observed "Existing source defines a non-root Xvfb/i3 sandbox and an explicit I3SOCK. The Dockerfile installs i3/X tools, not Emacs; entrypoint starts Xvfb and i3, not Emacs. No combined existing Emacs test server is established by this harness. Compose includes build and host config/artifact mounts; it must not simply be started under current permission."
+   :reuse "Reuse the owner harness only through a later scoped owner permit, existing available artifacts, synthetic config and agent-owned windows. No build/download/start/host socket mount is admitted here."
+   :runtime-availability :not-inspected}
+  {:owner :muse-compatibility :root "/home/err/spaces/muse"
+   :head "a75282694153cb02cf71c0582d5b3bad6261aa6d"
+   :files [{:path "src/cljs/eta_mu/dsl/profile.cljc" :lines [25 43]
+            :sha256 "d703bb97ec309cac17311c1563fc900a567724c85975fc3406d3985b12032102"}
+           {:path "src/cljs/eta_mu/dsl/compile.cljc" :lines [14 23 79 87]
+            :sha256 "2f19603647cc9d928a7ed35ca8d40d37508a9aff4b2e7617598da61f6227dc4d"}]
+   :all-files-byte-equal-head true :muse-ecosystem-skill-read-before-discovery true
+   :observed "Profile filters registry entries; empty allow means allow-all. Compile carries handlers/effects/tags into host descriptors. Neither authenticates actors or resource consent. Searches of this source tree and .ημ/plugins found no named Emacs/i3 implementation. This is a scoped negative observation, not a whole-machine absence claim."
+   :reuse "Future adapters may use the existing compiler/exposure seam, with explicit closed exposure/effect lists after dispatcher qualification. No Muse build, config edit, daemon action or global publication now; never interpret a profile match as GovOne approval."
+   :runtime-availability :not-inspected}
+  {:owner :knoxx-governed-client-example :root "/home/err/spaces/knoxx"
+   :head "0b2dbe7118b1794fbc30870289a8b3fd3d752902"
+   :path "backend/src/cljs/knoxx/backend/infra/lens/v3_tools.cljs" :lines [19 62 192 275]
+   :sha256 "b75471adcc8e798ab1c2c60f17b0090f8a2696dd5dc42209d1a4b26fcb9a8f1e"
+   :byte-equal-head true
+   :observed "Existing GovOne client calls sessions/redact/inspect/rehydrate/evidence and governed channel messaging. This does not issue editor approvals or prove current caller identity/scopes for Oikos. Its private env-loader and raw interop are not imported or executed."
+   :routing-drift "The Foresight child /home/err/spaces/foresight/knoxx lacks this lens source path. The source fact belongs to the existing /home/err/spaces/knoxx checkout at the hash above, not to the child or an installed backend. No inventory or child source was changed."
+   :reuse "Consume an owner-approved narrow authenticated client boundary when available; do not copy this implementation, read its credential path, invent an editor-approval endpoint or wait for whole S6A completion."
+   :runtime-availability :not-inspected}
+  {:owner :govone-authority :root "/home/err/devel/orgs/mojomast/govone"
+   :head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+   :files [{:path "internal/policy/service.go" :lines [37 113 306 339]
+            :sha256 "394df024882c7c2d16e1b70dcdf81b22e26eb8b464c2449a715c801bf180b8a1"}
+           {:path "internal/auth/middleware.go" :lines [15 54]
+            :sha256 "ab69ff6147b6b44050fe3642ff569c331a0ad005b9b6dcc2701e2d59041a0cac"}
+           {:path "internal/auth/api_keys.go" :lines [21 26 58 111]
+            :sha256 "534d60f0ce4d73ae982d0638462440bf6724d529550a1a7d2af766917d7e51ea"}
+           {:path "docs/api/openapi.yaml"
+            :sha256 "409e3dfbd3e373ce56d883c2398f997e27c6690504dfdfc889ef1415bd4027d1"}]
+   :all-files-byte-equal-head true
+   :observed "AuthenticationMiddleware authenticates bearer principals; PrincipalAuthorizationLookup requires current principal/role state. Policy DecisionInput binds tenant/profile/principal/system; EvaluateScoped uses the exact active scoped bundle, not global fallback. Policy capability names are hybrid_redacted/external_approved/unmasked_release, not emacs/read or i3/write. The inspected OpenAPI contains no emacs/i3/approval/consent match."
+   :reuse "GovOne remains authority. Obtain an owner-defined authenticated mapping/admission artifact and explicit consent protocol; no local copy of its policy/auth/session kernel. Roles or a generic unmasked-release decision alone cannot authorize editing or focus. Missing mappings/owner APIs are upstream owner gaps and hold positives."
+   :runtime-availability :not-inspected}]
+ :next-design
+ {:runtime "NBB outer orchestration and closed CLJS data boundaries; keep pure shapes/comparisons in .cljc. Native buffer object identity and final editor check/mutation require a minimal reviewed Emacs Lisp shim inside the selected existing server, not an NBB-side imitation."
+  :ownership "Oikos owns the consumer adapter and frozen contract use. Spacemacs/private-layer owner owns editor integration; existing i3 owner owns IPC/lifetime integration; GovOne owns governance/auth, with Knoxx as an existing client seam; Muse owns exposure compilation only. Cross-owner implementation changes need their own scoped authorization."
+  :client-input "Client supplies only the frozen closed named request and an opaque approval reference through a future separately versioned outer protocol. Do not extend the frozen request schema with raw Lisp, IPC, file paths, socket names, executable paths, scopes, resource facts or dispatcher selectors."
+  :outer-protocol
+  {:status :proposal-not-implemented
+   :version-proposal "oikos.dispatch/v1"
+   :request-fields [:protocol-version :request-id :contract-version :contract-digest
+                    :named-request :approval-reference]
+   :trusted-context "Actor/session, target endpoint and generation, current scope/allowlists, owner admission, native resource facts and verified consent are injected independently by authenticated owners, never accepted from the client's map. Treat transported positive preconditions as advisory."
+   :serialization "Explicit bounded UTF-8 JSON data framing at the host boundary, fixed enum mapping to frozen Clojure keywords, strict unknown/duplicate-field rejection and exact integer/range checks. No EDN tagged readers, Lisp reader, executable code or host object in the wire payload. Encoding changes do not change contract semantics. Review exact framing, size ceilings and Unicode handling before implementation."
+   :emacs-transport "Prefer an owner-provided named fixed transport. If the existing emacsclient transport is selected, NBB must use shell-free explicit argv to a pinned client/socket, a nonempty reviewed failing alternate-editor, and only a constant audited dispatch wrapper with strictly encoded inert data, never caller-provided forms or function names. An internal fixed wrapper is not a published arbitrary --eval tool. This is a transport design candidate, not permission to call emacsclient or install a handler."
+   :bb-transport "If retaining owner BB IPC helpers, cross a fixed versioned subprocess argv/exit-status/data protocol; never pass shell/command strings or import BB/JVM libraries into NBB. The historical S1A BB transport remains HELD, not implicitly qualified by this plan."
+   :responses "New closed runtime response schema must distinguish refusal, bounded read, applied mutation and indeterminate-after-transport-loss. Frozen preconditions-satisfied is never renamed to authorized/applied. Bound encoded envelope and decoded content separately; no raw exceptions, private buffers, full trees, credential data or ungoverned output."
+   :publication :held}
+  :native-editor-identity
+  {:buffer "Server-owned registry maps an opaque incarnation to the actual live buffer object using object identity, not name, file path, client UUID or copied buffer-local variables. Creation of a new object, even under the same name, gets a new incarnation; kill invalidates the old registry entry. Deny indirect/shared-text aliases and any unregistered buffer; synthetic fixtures must never alias operator text. No buffer enumeration is required or authorized."
+   :epoch "Server/dispatcher owner issues an unpredictable epoch and binds endpoint/generation. Server restart, registry loss/shim reload or reconnect-invalidated session must invalidate old approvals; fail closed until fresh owner registration. Exact server-epoch versus connection-lease semantics must be fixed by the owner without reinterpreting the frozen identity."
+   :revision "Measure actual native content modification state inside the buffer; evaluate buffer-chars-modified-tick/buffer-modified-tick and hook behavior in the exact selected Emacs. Define a monotone owner revision and account for edits, undo, revert, narrowing, text properties and indirect aliases. Never trust a client revision counter. Proposed native primitives are not runtime-verified here."
+   :range "Widen only the owned target under save-restriction, without selecting it or affecting operator windows. Contract offsets are zero-based half-open bytes of strict UTF-8 text, not Lisp character positions, JS UTF-16 units or necessarily Emacs internal multibyte offsets. Derive exact character-boundary mapping from actual strict UTF-8 encoding, reject mid-codepoint endpoints and invalid/non-scalar/raw-byte representations; no normalization or newline conversion. Do not equate byte-to-position/position-bytes with external UTF-8 without exact-version proof."
+   :bounds "Recompute current full buffer UTF-8 length <=1048576, requested span <=4096 and replacement UTF-8 length <=4096; ensure resulting full buffer <=1048576. Reads copy only the allowed exact range without properties; no full-buffer content crosses into NBB or diagnostics."
+   :atomicity "Inside one serialized native handler, verify authenticated execution fence, epoch, actual object, native revision, exact request, scope/ownership and current approval, then perform the bounded mutation without yielding. Audit hooks/timers/process filters/reentrancy; a single event loop or NBB mutex alone is not proof. Use native transactional change/rollback only with tested zero-side-effect refusal, and deny read-only/unsupported hook states. Never blindly suppress security hooks or call arbitrary mode commands. Final check must be inside the otherwise-working mutator, not only before IPC."
+   :read-atomicity "Read scope, object identity, revision, byte boundaries and bounded content snapshot must be checked/copied within the same native boundary. Before returning, apply current governed output admission; revocation/outage must not leak a previously collected result."}
+  :authority-and-consent
+  {:needed-from-existing-owners
+   [:authenticated-tenant-principal-system-session-to-oikos-actor-binding
+    :current-operation-scopes-and-exact-resource-ownership-allowlists
+    :govone-owner-approved-operation-and-disclosure-admission
+    :authenticated-explicit-consent-for-each-exact-mutation-binding
+    :expiry-revocation-and-one-use-execution-fence]
+   :binding "Consent binds exact actor, operation and every argument including literal replacement text and range, contract version/digest, endpoint/generation, server epoch, native buffer/window incarnation and exact revision/cut. Owner identity is not inferred from Linux UID, loopback, model/harness name or caller-provided approval ID."
+   :one-use "Use owner-authenticated approval plus a dispatcher-owned operational claim/consumption registry, not a new policy or ledger authority. Define a linearization point for current owner admission/revocation and the native execution fence. A check-then-remote-call race is not solved by comparing a signed map twice. No successful runtime path until owner and dispatcher protocols establish that fence."
+   :attempts "Serialized atomic claim permits at most one attempt; replay/concurrent reuse denies. Consume or terminally invalidate before any possible mutation, including crash/reply-loss paths. If outcome cannot be established, report indeterminate, do not retry or reissue an equivalent grant automatically. Restart/epoch loss invalidates outstanding approvals rather than forgetting use and allowing replay."
+   :retention "Transient approvals/previews can contain replacement text and linkable identifiers. Keep private and bounded, with owner-set expiry; evidence uses minimum safe references/status, not buffer content or raw approval payloads. No new Clio append, event authority or durable approval store is authorized now."
+   :no-substitution "Synthetic approval maps and stubs may test pure contracts/denials only. They cannot qualify authenticated consent, GovOne admission or runtime mutation success. Agent-owned status narrows eligibility but does not bypass frozen explicit mutation-approval binding."}
+  :i3-boundary
+  {:read "Use the frozen S2A full {server/epoch, window/xid, window/incarnation}, observed revision and coverage. Reuse desktop/targetable?; do not create a second replay/causal kernel. Obtain current facts from the owner, not a caller tree. Define a closed bounded safe output shape; no window titles/full tree by default."
+   :focus "The current owner helper's XID lookup then separate command cannot prove atomic lifetime/cut check-and-focus. NBB or BB serialization does not stop i3/external clients from changing the server between these steps. Owner must supply an actually qualified native compare-and-act/fencing mechanism, or focus remains denied/unavailable. Double collection and postcondition readback are diagnostics, not replacement proof."
+   :held-prerequisite "S2B reconciled current observation/owner coverage and native actuation fencing are separate concrete owner artifacts, not invented whole-epic/S6A completion prerequisites for the already frozen S4A pure contract. No live host tree or focus call is permitted."
+   :noninterference "Use agent-owned synthetic sandbox windows and explicit sandbox I3SOCK/DISPLAY only after a separate permit. Hidden workspaces do not authorize visible focus changes; operator windows/output and host sockets remain excluded."}
+  :installed-versus-development
+  {:current :development-source-only
+   :future-installed-root "~/.local/share/oikos/releases/<sha>"
+   :selection "Only explicit Services/shx promotion may select current; never link current to a worktree."
+   :separation "Distinct owner-approved installed/dev HOME/XDG config/state/runtime, sockets, ports, generations and client/handler identity. Pin payload/handler hashes plus endpoint identity before use; mismatch denies. No source auto-load, Muse watcher-triggered rebuild, global config write or installation is authorized."
+   :existing-service-policy "Reuse supervision, not authority. Loading a shim or creating even synthetic buffers on the operator's existing server is an operator-server effect and is not implicitly allowed. No second daemon, service fallback or package/model download."}}
+ :staged-future-case
+ [{:stage :parent-plan-review :permission-now :planning-only
+   :exit "Independent parent review settles this design and identifies exact owner authority/transport gaps. No implementation, endpoint discovery calls or shim installation during this stage."}
+  {:stage :owner-artifact-and-isolated-target-admission :permission-now :held
+   :exit "Owner provides reviewed actor/admission/consent/fence protocol artifacts and an explicitly nominated existing supervised isolated Emacs test endpoint. Parent separately permits exact synthetic operations, shim source/loading, test actors/resources, limits and teardown. If any owner/target is missing, report blocked; do not substitute an operator server, start another daemon or use an approval fake for a positive."}
+  {:stage :red-green-implementation-case :permission-now :held
+   :exit "After a distinct implementation authorization, new outer protocol/laws/negative tests precede minimal adapter/native shim code. Preserve the frozen pure files and S2A bundle. Independent exact-head source review precedes any runtime effect permit. Pure fixtures establish only contracts, not real identity/atomicity/consent."}
+  {:stage :owned-existing-server-fixtures :permission-now :held
+   :allowed-case "Future separately permitted tests create only newly allocated agent-owned synthetic buffers on the nominated isolated existing server, with a fresh native incarnation/epoch and actual authenticated test-owner authority. Never read/list or mutate other buffers, open files, select frames, restart a service or access personal text."
+   :required-negative-fixtures
+   [:kill-and-recreate-same-name-buffer :intervening-edit :undo-or-revert-revision-change
+    :registry-or-epoch-change :reconnect-invalidates-old-approval
+    :changed-actor-operation-range-text-or-any-argument :wrong-or-revoked-scope-and-allowlist
+    :forged-expired-revoked-replayed-or-concurrently-reused-approval
+    :mid-utf8-codepoint-boundary :non-bmp-and-combining-text :invalid-raw-byte-buffer
+    :indirect-buffer-shared-text-alias :read-only-target :hook-reentrancy
+    :oversize-range-replacement-result-and-wire :missing-owner-or-socket
+    :reply-loss-and-crash-with-no-automatic-retry]
+   :negative-outcome "Zero content mutation and zero content disclosure for every refused operation; count mutator attempts and compare exact owned synthetic before/after bytes, not merely a denial label. Verify forbidden spawn/host-socket/operator-buffer attempts remain zero."
+   :required-positive "With actual test-owner authenticated approval and all bindings unchanged, the real named dispatcher performs the exact bounded synthetic replacement once. Reusing the same approval cannot perform a second mutation. Bounded reads require actual scope and governed output checks. Source import or fake success grants no credit."
+   :i3-case "Only after the owner supplies native fencing/current lifetime proof and a separate sandbox permit: owned sandbox fixtures cover reused XID/incarnation, stale cut, reconnect, wrong scope and one-use focus. Until then do not claim i3 focus qualification."
+   :cleanup "Track only exact fixture-owned handles; permitted teardown kills only those buffers/windows, invalidates approvals and releases test registrations. Never stop the shared server or use broad cleanup. Cleanup failures remain visible and owned; synthetic artifacts must follow workspace verified-recoverability rules."
+   :executed false}
+  {:stage :qualification-not-publication :permission-now :held
+   :exit "Parent independently verifies exact new source/owner pins and actual fixture evidence before any scoped runtime acceptance. S4A task completion additionally needs all its accepted real requirements. Muse/client exposure, remote publication, installed promotion and S6A egress integration each remain distinct future permissions, never inferred from these tests."}]
+ :concrete-user-decision
+ {:status :needed-before-effect-permit-not-asked-in-this-subtask
+  :question "Which already-supervised isolated Emacs test server/socket may host the exact independently reviewed native shim and newly created agent-owned synthetic buffers, and do you authorize those narrowly scoped load/create/replace/kill test effects there? If none is available, retain the source/offline-only hold; no second daemon and no implicit use of your operator server."
+  :why-not-known "A unit file, agent-core default and historical target proposal do not nominate an actual isolated server or authorize handler loading. Existing operator-server buffers/effects are explicitly excluded by current admission."
+  :settled-no-reask [:nbb-first :reuse-existing-supervision :no-second-daemon
+                    :synthetic-agent-owned-only :operator-resources-explicit-approval
+                    :govone-authority :no-raw-tool-publication :no-model-or-service-start]
+  :owner-engineering-not-user-repo-questions [:authenticated-actor-mapping :operation-scope-mapping
+                                           :consent-issuer-and-revocation-fence
+                                           :native-i3-compare-and-act-gap]}
+ :effects-this-turn
+ {:only-authored-coordinator-files ["permits/s4a-contract-8ae64df4.edn" "reviews/s4a-dispatcher-plan-v1.edn"]
+  :only-remote-write "Create refs/heads/artifact/oikos-capability-8ae64df4 at exact 8ae64df4c7ad170c5de9206f4d3f712d44c60b43 in verified-private open-hax/oikos; normal push, no overwrite or force."
+  :functional-runtime-code-writes 0 :product-source-writes 0 :prior-permit-or-review-writes 0
+  :board-workflow-receipt-mycology-writes 0 :commits-prs-merges 0
+  :emacs-i3-daemon-service-model-package-calls 0 :private-buffer-or-personal-capture-calls 0
+  :govone-or-knoxx-session-or-policy-calls 0 :clio-append-or-persistence-calls 0
+  :muse-build-or-global-tool-publication-calls 0}
+ :reflection
+ {:p-efficiency 0.82 :p-friction 0.18 :p-skill-candidate 0.45 :spore nil
+  :note "Actual source/manpage discovery matters: a legacy empty-alternate-editor recommendation can start a daemon, and an XID lookup plus focus is not native CAS. NBB CLI output framing added a newline; direct hashing of the canonical value in both runtimes confirmed the frozen digest without altering contract bytes. Preserve source facts versus proposals and never let artifact publication become runtime permission."
+  :persistence-owner :parent :separate-ledger-or-spore-written false}}

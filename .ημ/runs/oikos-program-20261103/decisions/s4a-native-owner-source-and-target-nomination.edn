@@ -1,0 +1,22 @@
+{:decision/id :s4a-native-owner-source-and-target-nomination-20261103
+ :decision/source :question-tool-explicit-user-answers
+ :source-question "May I implement and independently review the unloaded native Emacs shim in an isolated Spacemacs-owner worktree? This would not edit live startup configuration, load the shim, access buffers or restart Emacs."
+ :source-answer "Allow owner source (Recommended)"
+ :source-scope [:isolated-spacemacs-owner-worktree :unloaded-native-shim-source
+                :offline-source-tests :independent-exact-source-review]
+ :target-question "Metadata shows the existing operator emacs.service running, but no isolated test socket has been nominated. Which target may be considered later, after source review and authority qualification?"
+ :target-answer "Existing operator Emacs"
+ :target-description "Consider only the running emacs.service for a later narrowly reviewed permit: temporary fixed handler and newly created agent-owned synthetic buffers, never other buffers or a restart."
+ :metadata-observation {:unit "emacs.service" :active-state "active"
+                        :sub-state "running" :main-pid 2840 :restart "on-failure"
+                        :method :selected-systemctl-metadata-only
+                        :socket-nomination :not-yet-qualified}
+ :nomination-limit "The operator nominated the existing operator server for consideration; this does not assert it is an isolated server. Any later permit must explicitly account for shared-server noninterference and bind the exact reviewed source, actual endpoint, generation and owner authority."
+ :not-authorized-now [:live-shim-load :buffer-read :buffer-create :buffer-mutation
+                      :buffer-enumeration :live-startup-config-edit :restart
+                      :second-daemon :service-change :installed-oikos-promotion]
+ :future-effect-gate [:independent-exact-source-review :actual-owner-authority-artifacts
+                      :verified-existing-endpoint :bounded-agent-owned-synthetic-fixtures
+                      :separate-exact-source-effect-permit]
+ :unrelated-ocr-publication-question :still-unanswered
+ :runtime-execution-permission false :native-approval-credit 0}

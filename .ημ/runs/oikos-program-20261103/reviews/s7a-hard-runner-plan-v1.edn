@@ -1,0 +1,228 @@
+{:report/id :oikos/s7a-hard-runner-plan-v1
+ :report/kind :design-and-read-only-capability-grounding
+ :report/date "2026-11-03"
+ :report/context {:symbol :己 :confidence 0.98 :tier :observed-plus-explicit-design}
+ :verdict :planning-review-required-live-execution-held
+ :implementation-authorized false
+ :execution-authorized false
+ :scope "ONE hard execution boundary for the conditionally consented synthetic batch; not S6A, S7B, 12B, E4B, a gateway, a policy kernel or a service installation. This document is not a permit."
+
+ :grounding
+ {:coordinator "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+  :product "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a"
+  :observed-product-head "7cd9320f2c9991f8e36e15e59478b80789ae3b25"
+  :instructions "Applicable home/spaces/Foresight/coordinator instructions supplied in harness; product parent and actual worktree AGENTS.md read. No additional AGENTS.md found under coordinator .ημ. Parent owns receipts/reflection."
+  :read ["eval/ocr-runner/README.md" "eval/ocr-runner/artifact-v2.edn"
+         "src/oikos/law/ocr_batch.cljc" "src/oikos/infra/ocr_batch.cljs"
+         "scripts/ocr_batch.cljs" "eval/s7a/manifest-v2.edn" "eval/s7a/corpus.edn"
+         "coordinator decisions/ocr-six-image-conditional-authorization.edn"
+         "coordinator reviews/s7a-ocr-runner-code-v1.edn"
+         "coordinator reviews/govone-ocr-admission-discovery.edn"
+         "coordinator reviews/ocr-attestation-runtime-v1.edn"]
+  :path-prefix "Coordinator decisions/reviews above mean .ημ/runs/oikos-program-20261103/{decisions,reviews}/."
+  :offline-runner-artifact-seal "65ed39dc14864d00ccaa8e62858da24845ca04a75fb3f0b506516178f21f8281"
+  :offline-review "Read the original three P2 witnesses and the corrected deadline checkpoints, owned PNG snapshots and closed exception-status decoder. Exact-head fix verification is already owned by another reviewer; no duplicate full audit or passing-test claim here."
+  :current-cli "Status-only and intentionally BLOCKED. Cooperative timers, memory-store and in-process fake HTTP are not a live executor or hard boundary. Preserve this until a separately qualified entry point exists."
+  :runtime-pin {:pid 3187253 :start-ticks 45402858 :clock-ticks-per-second 100
+                :release "6626d680f079c3330fee1df1f3565475d7ef1a55"
+                :source-sha256 "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"
+                :runtime "2025.4.1-20426-82bbf0292c5-releases/2025/4" :device "NPU"
+                :pin-source :read-parent-runtime-report-not-refreshed-here}
+  :restart "One attestation restart already consumed. Keep Restart=no. No change/restart is proposed, including to obtain stronger response identity or network isolation."
+  :owner-source "Read only selected relevant lines in the pinned /opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55/server.py: imports 29-44, NPU compile 151/154, ThreadingHTTPServer 301 and routes 263-291. This is not a dependency audit."
+  :parallel-review-attempt {:agent :wright :result :unavailable
+                            :error "Subagent depth limit reached (1). Increase experimental.subagent_depth to allow nested subagents."
+                            :interpretation "Harness nesting limit, not a model/provider failure. No substitute model invoked and no independent planning approval claimed."}}
+
+ :capability-observations
+ {:window-local "2026-11-03 approximately 15:15-15:19 -06:00; resource sample at 2026-11-03T15:19:14.719817406-06:00"
+  :kernel "Linux 7.0.0-38-generic x86_64; cgroup v2 unified"
+  :python "/usr/bin/python3, Python 3.12.3"
+  :systemd "255 (255.4-1ubuntu8.18)"
+  :node "v24.14.1"
+  :tools-present ["nbb" "node" "bb" "prlimit" "timeout" "unshare" "systemd-run"]
+  :self {:uid 1000 :gid 1000 :effective-capabilities "0000000000000000" :no-new-privileges 0 :seccomp 0
+         :cgroup "/user.slice/user-1000.slice/user@1000.service/app.slice/i3-wm.service"
+         :as-limit :unlimited :rss-limit :unlimited :stack-soft-bytes 8388608}
+  :controllers {:mount-options "rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot"
+                :root-available "cpuset cpu io memory hugetlb pids rdma misc dmem"
+                :user-manager-and-app-slice-enabled "cpu memory pids"
+                :current-unit-available "cpu memory pids" :current-unit-subtree-enabled ""
+                :current-unit-memory-max "max" :current-unit-swap-max "max"
+                :current-unit-memory-current-bytes 2545971200
+                :current-unit-memory-events "low=0 high=0 max=0 oom=0 oom_kill=0 oom_group_kill=0; sock_throttled=9546"
+                :current-unit-tasks-max 34582 :current-unit-delegate "no"
+                :current-unit-runtime-max "infinity" :current-unit-kill-mode "control-group"
+                :permissions "user@1000.service, app.slice and i3-wm.service directories are err:err 0755; cgroup.procs/subtree_control err:err 0644. app.slice and i3 memory.max err:err 0644; user-manager memory.max root:root 0644."
+                :conclusion "Memory controller exists and raw discretionary permissions are promising. No isolated owned delegated subtree, creation authority, configured 256MiB limit, admission or OOM behavior was qualified. Existing i3 group includes unrelated work and MUST NOT be capped, moved, killed or reconfigured. Systemd-managed writable directories are not a grant to manage their hierarchy manually."}
+  :user-namespaces {:unprivileged-userns-clone 1 :apparmor-restrict-unprivileged-userns 1 :max-user-namespaces 115275
+                    :qualification :not-tested-not-an-egress-isolation-capability}
+  :resource-snapshot {:mem-total-kib 32510872 :mem-available-kib 15152080
+                      :swap-total-kib 72373240 :swap-free-kib 18791328
+                      :filesystem "ext4 /dev/nvme0n1p2 / rw,relatime"
+                      :filesystem-size-bytes 1004804444160 :filesystem-available-bytes 47694835712
+                      :qualification "Read-only capability sample, NOT later-run resource admission or reservation. No NPU/free-VRAM telemetry or service memory measurement acquired."}
+  :commands ["uname -srvmo; python3 --version; systemd --version"
+             "cat /proc/self/cgroup; selected /proc/self/status and /proc/self/limits"
+             "findmnt /sys/fs/cgroup; selected controller files and stat permissions at exact ancestor paths"
+             "systemctl --user show i3-wm.service with only resource/delegation properties"
+             "selected namespace sysctls; selected /proc/meminfo; findmnt/df for ~/.local/state"]
+  :fixture-results
+  [{:id :python-small-hard-as :exit 0
+    :command "prlimit --as=167772160:167772160 -- /usr/bin/python3 -I -S -B -c <inline stdlib imports/allocation fixture>"
+    :imports "resource,sys,os,json,hashlib,http.client,socket,selectors,signal,time,base64,struct,zlib (imports only; no socket constructed)"
+    :output ["AS (167772160, 167772160)" "VmSize: 30188 kB; VmRSS: 18548 kB"
+             "16MiB allocated 16777216" "over-budget=MemoryError"]
+    :proves "Python plus relevant stdlib starts under hard AS; a single 160MiB allocation is denied. Not a full-client/group-memory qualification."}
+   {:id :python-supervisor-start :exit 0
+    :command "prlimit --as=33554432:33554432 -- /usr/bin/python3 -I -S -B -c <inline supervisor imports fixture>"
+    :imports "resource,os,json,hashlib,signal,time,selectors"
+    :output ["AS (33554432, 33554432)" "VmSize: 26400 kB; VmRSS: 14988 kB"]
+    :proves "32MiB AS supervisor is plausible, with only about 6MiB mapping headroom; exact complete implementation must be tested, not assumed."}
+   {:id :node-hard-as-start :exit 1 :core-dumps-disabled true
+    :command "prlimit --core=0:0 --as=268435456:268435456 -- node -e 'console.log(\"entered-js\")'"
+    :output "Fatal process out of memory: SegmentedTable::InitializeTable (subspace allocation)"
+    :entered-js false
+    :proves "This Node build does not enter JS under 256MiB AS. node --version alone succeeds but is not execution evidence. Do not solve this by silently removing the hard cap or using only --max-old-space-size. This does not prove Node cannot fit a separately qualified RSS/cgroup cap."}
+   {:id :process-group-watchdog-fixture :exit 0 :sockets 0 :files-created 0
+    :command "prlimit --as=67108864:67108864 --core=0:0 -- python3 -I -S -B <inline pipe/fork/setsid/sleep/killpg fixture>"
+    :output ["child-ready True" "kill-issued-ms 50.141" "first-wait-nonblocking (0, 0)" "reaped-status 9"]
+    :proves "Independent process can issue group SIGKILL without blocking wait; successful kill syscall does not mean child is already dead. Only this normal sleeping fixture was bounded/reaped. Not proof against uninterruptible IO, scheduler starvation, grandchildren or hostile code."}]
+  :not-performed [:cgroup-writes :transient-unit-creation :namespace-creation :service-changes
+                  :http :ocr-get :ocr-post :native-imports :model-loads :downloads :govone-calls]
+  :evidence-storage "Outputs observed directly in this session; no fixture files created. Commands are transcribed above, not claimed as a complete repeatable functional test suite."}
+
+ :decision
+ {:smallest-defensible-boundary "One fixed Python stdlib OS-edge driver with three roles: nonblocking supervisor, single network worker, single durable-store writer. Use an independently allocated agent-owned cgroup v2 subtree for the aggregate cap, not the existing unit. No installed service/daemon and no generic process runner. Keep NBB for existing portable laws, offline artifact preparation and later offline scoring; never launch Node/NBB as an uncounted member of the live client."
+  :why-three "A supervisor performing fsync can itself stall and miss its timer. The network worker must not perform store IO, and may POST only after a durable writer acknowledgement. Writer OOM/stall must not kill the watchdog. A two-role design with synchronous supervisor store writes fails the hard-watchdog requirement."
+  :as-only-alternative "32MiB supervisor + 48MiB writer + 128MiB worker hard RLIMIT_AS = 208MiB aggregate user address space, if all helpers are included and no threads/forks occur. This bounds mapped user RSS conservatively for these reviewed processes, but NOT aggregate cgroup-charged memory: socket buffers, kernel allocations and filesystem page cache are outside AS. RLIMIT_RSS is not the Linux answer. Therefore AS-only is NOT accepted as an unqualified aggregate-client-256MiB guarantee."
+  :concrete-memory-fix "Qualify one narrowly owned ephemeral cgroup allocation (possibly an agent-owned transient USER scope with Delegate=yes, MemoryMax=268435456, MemorySwapMax=0, TasksMax=3), without installing a service or modifying OCR/i3 units. Parent must first review exact scope allocation/cleanup authority. Do not infer blanket systemd-run authority from its presence. If unavailable, remain blocked; do not quietly reinterpret 256MiB as heap/RSS sampling."
+  :remaining-logical-limits "A normal Linux userspace watchdog is not a hard real-time proof. SIGKILL cannot guarantee death at exactly 30s for a task stuck in uninterruptible kernel IO; pending filesystem IO can complete after kill. Nor does closing a socket cancel already accepted inference in the existing ThreadingHTTPServer. Literal universal guarantees of durable final evidence, no filesystem mutation after 30s, and server cancellation within 30s cannot be supplied by this design or by cgroup.kill. Preserve these explicit holds rather than authorize execution by redefining them."}
+
+ :technical-spec
+ {:budget
+  {:aggregate-cgroup {:memory-max-bytes 268435456 :memory-swap-max-bytes 0 :pids-max 3
+                      :supervisor-leaf-max-bytes 33554432 :writer-leaf-max-bytes 50331648
+                      :worker-leaf-max-bytes 167772160 :unassigned-headroom-bytes 16777216
+                      :memory-oom-group 0
+                      :scope "All live-client roles, bootstrap/interpreter, socket/kernel/page-cache charges attributed by cgroup; native OCR server is explicitly outside CLIENT budget and separately admitted. No uncounted helper/process supervisor/storewriter. Kernel accounting is not perfect whole-host physical-memory attribution."
+                      :oom "Per-leaf caps isolate worker/writer OOM from supervisor; top-level OOM could still kill supervisor if unexpected charges exceed reserve. Verify hierarchy, no parent direct tasks, no outside helpers, and fail on any memory.events max/oom/oom_kill delta. Do not deliberately rely on top-level OOM to stop the job."
+                      :startup "Owner allocator sets top limit before first counted bootstrap exec. All leaves and controllers exist before worker entry. Bootstrap is counted; child gates stay closed until leaf placement/limits/FD closure/readback verified. Initial fork-placement phases must also stay below top cap; never set parent hard-AS so low that child must illegally raise its inherited hard limit. No workload entry before per-role final lowering."
+                      :proof "Read kernel cgroup path/limits and /proc PID/start/cgroup/limits for each role; capture membership and counters before and after. Allocator must provide actual delegated directory FD, not a caller-selected path or descriptive JSON cap."
+                      :authority "Parent planning review chooses/qualifies exactly one owned allocator. No allocator was exercised here."}
+   :rlimit-as-bytes {:supervisor 33554432 :writer 50331648 :worker 134217728}
+   :other-limits "Core=0; no worker fork/exec, no threads, no shell, no new model loads; bounded fd count; per-file RLIMIT_FSIZE plus 2MiB run-store application cap. RLIMIT_NPROC is UID-wide, not a per-client substitute; rely on cgroup pids and fixed reviewed code. Set no_new_privs; dropping inherited FDs/environment is mandatory."
+   :space "At most six PNGs <=32KiB each, six exact JSON request bodies <=64KiB each, six OCR bodies retained <=64KiB each plus bounded GET evidence, metadata and partial artifacts. Reserve 2MiB maximum run data and require >=16MiB free at admission; disk-full still fails closed. No unbounded logs/tracebacks/core files."
+   :time "One absolute CLOCK_MONOTONIC deadline t0+30s, set by counted bootstrap/supervisor before dynamic evidence, PNG reads, resource checks, identity GETs or store IO. Scope allocation itself is separately bounded preparation with no endpoint effects; t0 must precede exec of workload code. Every role uses inherited immutable t0/deadline; no timer reset. Parent lower-priority scheduling and Linux dispatch latency remain stated limits."
+   :per-case "One transaction begins before that case's identity/resource bracket, with deadline min(t0+30s, case-start+5s); includes durable intent, network, response parsing, after-bracket and durable settlement. Each GET also has min(5s, remaining transaction/batch) deadline. Supervisor owns timers; socket timeouts/cooperative checks are defense in depth, not the watchdog."
+   :completion "Finish success and durable final acknowledgement before absolute deadline. At soft cutoff 29s refuse another transaction and attempt terminal checkpoint; at 30s issue SIGKILL to worker/writer groups using pinned pidfds/cgroup kill and stop supervising without blocking waitpid/read/fsync. No retries. A six-case success is not guaranteed: six 5s calls leave no preflight/store time. Partial coverage is reported, never padded or rerun."
+   :limits-of-claim "Kernel hard memory.max and timely kill request are different claims from physical memory reservation, exact-real-time termination or cancellation of native server work. No final approval unless required interpretation of these limits is independently settled."}
+
+  :entry-and-protocol
+  {:entry "Dedicated fixed runner entry point, not arbitrary command execution. Exact Python/interpreter and all entry files hash-pinned in a NEW additive artifact; preserve offline artifact-v2 and old corpus bytes. Use /usr/bin/python3 -I -S -B with explicit fixed args, cwd and allowlisted environment; no PYTHONPATH/sitecustomize, proxy variables or dynamic callbacks. No generic arbitrary URL/argv/path parameters."
+   :wire "Bounded framed JSON over inherited anonymous pipes, not a listening control service: 4-byte big-endian length then strict UTF8 JSON object. Control frame <=16KiB; data frame <=65536+bounded header; closed tags/sequence, duplicate-key rejection, nonfinite rejection and depth<=32. EOF, duplicate sequence, unknown tag or overrun is terminal. Nonblocking supervisor IO, bounded queues, no synchronous pipe drain."
+   :roles "Supervisor owns deadlines/closed state and admission binding. Worker owns sole socket and cannot write files. Writer owns no sockets and only fixed run-dir FD. Worker receives one SEND grant only after writer's durable INTENT ack; no autonomous batch loop on stale grant. No ambient authority in caller labels. Process separation is reliability against reviewed-code failures, NOT same-UID hostile-code isolation."
+   :laws "Keep existing .cljc shape/identity/quality law authoritative. Python duplicates only unavoidable edge framing/size/deadline and strict transport/schema checks; derive closed declarative shape tables from reviewed portable law or prove parity with shared golden vectors. It must not evaluate GovOne policy or create alternative consent/admission semantics. No NBB interpreter inside the live cap. Domain quality scoring may be a later explicitly offline task from committed bytes, not an uncounted live child or a way to finish evidence after the batch deadline."
+   :failure-labels [:held :prepared :intent-durable :response-durable :complete-six
+                    :partial :timeout :deadline :transport-error :http-error :invalid-json
+                    :invalid-response :identity-mismatch :identity-uncertain :resource-denied
+                    :store-error :memory-limit :outcome-unknown]
+   :success "Only complete-six after exactly six distinct ordered durable settlements, unchanged identity brackets, all schema checks, no uncertain durability and no cap/deadline event. Completion is not policy approval or quality acceptance. Never propagate arbitrary exception labels/messages into reports."}
+
+  :authority
+  {:consent "Consume the exact already-recorded one-batch conditional human decision via coordinator trust context; do not ask the answered question again. It is not yet consumed. No child creates an allow boolean."
+   :trusted-resource-source "A separately identified owner/allocator observation channel supplies fresh OS facts and any owner incremental-runtime resource profile. Actual /proc and cgroup FD reads are trusted kernel observations under the host trust base, not signed GovOne facts. If a signed resource admission is required, identify its actual existing issuer/key/channel first; no signer or generic verifier was established here. Missing issuer stays held."
+   :parent-permit "Exact one-run permit comes on a trusted inherited parent control FD from the reviewed coordinator launch context, separate from resource evidence FD/provenance. Bind run UUID, one-shot consent decision ID, exact runner artifact/interpreter, ordered image/body hashes, endpoint/routes, pinned instance/source/assets, resource-observation ID, all limits, t0/deadline, store directory identity and retention. A hash binds content, not issuer. Arbitrary JSON/EDN file passed by the worker cannot authenticate its parent."
+   :channel-trust "Parent launcher implementation and real consuming boundary require independent qualification. PID ancestry or same UID alone is not authentication against another same-UID actor. This design assumes cooperative same-UID parent; hostile same-UID/root threats require a stronger owner-provided isolation/issuer boundary and remain held. No new signing key service invented here."
+   :freshness "Within the 30s window, owner/allocator checks exact pinned PID/start, effective Restart=no and resource limits before initial network admission; repeat instance/resource consistency immediately before each POST. Resource observations <=1s old at POST grant, valid only for this run, no inherited snapshot from this document. MemAvailable >=512MiB is a conservative concrete client+headroom threshold, not a host reservation or an NPU free-memory measurement. Owner must qualify an incremental existing-loaded-NPU resource profile or explicitly leave resource admission unknown; never manufacture VRAM zeroes to satisfy the old synthetic fixture."
+   :one-shot "Before first POST, writer durably latches the parent-issued grant-consumed state under the coordinator's already-authoritative permit identity, serialized by trusted parent. Durable run records are operational evidence, not a second authority ledger. A previous intent, partial run, incomplete checkpoint or uncertain append permanently prevents reuse/resumption of THIS grant; no child reconstructs a new permit by editing a local file. Parent owns grant accounting."
+   :govone "No GovOne call for this unsupported generic OCR path is invented. Existing gateway-signed policy/session/resource mechanisms retain their real scope; they do not authenticate these local contexts. Cloud/remote/comparison routes remain denied. No S6A circular dependency."}
+
+  :durable-store
+  {:location "Private operational ~/.local/state/oikos-dev/<parent-approved-one-shot-run-uuid>/, never Git and never a new Clio/board/authorization ledger. All ancestor ownership/modes and directory FD identity verified no-follow; run dir O_EXCL-created 0700, files 0600 regular no-follow, no caller paths. No raw stdout."
+   :prepare "Writer stores exact six approved PNG bytes AND exact encoded request bodies separately, with SHA256, lengths, fixed case/order/480x160/layout provenance and pinned parent/runtime/artifact identities. Hash SAME private bytes used for dispatch, not mutable source paths. fsync files, then checkpoint manifest and directory; acknowledge only after all complete. Persist initial default outcome=outcome-unknown and deadlines/retention before allowing a socket. Any preparation failure: zero POST."
+   :intent "Before each POST, create immutable per-index INTENT with run/permit ID, consumed ordinal 1..6, exact PNG/body digest, pid/start bracket, route, absolute/stage deadlines and resource proof ID. fsync intent, checkpoint state and directory before SEND. Intent is counted even if network never begins or reply is lost. Never decrement. No retries/resume after timeout, writer death or lost ack."
+   :raw "Worker streams exact received bytes to bounded writer messages. Writer persists raw partial body, http status and bounded headers/route, byte counts, retained-prefix SHA256 versus received-through-stop SHA256, complete flag, request hash, requested instance and bracket observations. Max OCR 64KiB, identity 4KiB, health 4KiB; overflow may retain cap prefix plus separately marked one-byte overflow witness, never claim unreceived suffix. Malformed UTF8/JSON bodies are saved before semantic acceptance. No decompression. Store exact requested PNG, not only reconstructible source/hash."
+   :settlement "Per-case atomic checkpoint references immutable raw object and status; fsync object then checkpoint then parent directory before ack. Bounded status schema, no exception dump. An orphan .partial is not a committed response; retain only within same expiry. Commit is durability evidence only under local ext4/storage-stack fsync guarantees, not power-loss perfection."
+   :timeouts "Writer is not watchdog. If fsync/read/write/rename stalls, supervisor never waits indefinitely: revoke grants, kill network worker and writer by deadline, classify durable prefix only. Initial durable default remains unknown if final checkpoint is unavailable. It is impossible to promise a NEW durable timeout receipt within 30s against arbitrary filesystem stalls. A late kernel disk completion may leave an orphan object; no later POST or success can follow it. If requirement forbids every postdeadline disk mutation, this ext4/userspace design DOES NOT qualify."
+   :retention "Raw PNGs AND request bodies containing base64 PNGs expire within 24h; raw OCR text/response bytes and text-bearing derivations within 7d. Split image-bearing manifest from longer-lived non-image metadata; no base64 duplicated in text logs. Propagate derived deletion; no personal/accepted knowledge reconstructed or admitted. Fixed synthetic fixture originals remain versioned inputs, not newly captured private data."
+   :expiry-authority "One-shot process cannot enforce future 24h/7d deletion after exit by itself. Before launch qualify the existing owner's retention/cleanup executor and exact run-directory expiry registration; do not install a daemon here. If unavailable, durable-store gate remains held. Uncertain append/deletion/cleanup is a HOLD requiring parent accounting, not an alternative authority or permission to rerun. Scratch preservation rules require owner-reviewed disposition; do not silently back up raw run data beyond its retention."}
+
+  :transport-and-instance-binding
+  {:target "Only numeric AF_INET 127.0.0.1:8099, fixed GET /health, GET /identity, POST /ocr. No getaddrinfo/DNS, urllib/environment proxies, redirect, authentication secrets, cookies, retry, reconnection of failed request, HTTP upgrade, compression, or generic URL parameter. Fresh socket per operation, Connection: close. Use bounded manually framed HTTP/1.1 or an independently audited wrapper around http.client with bounded status/header reads; stdlib defaults alone are not a total byte cap."
+   :http-bounds "Status line<=256 bytes, total headers<=8KiB and <=32 fields; body caps above; exact Content-Length, no duplicate/conflicting Content-Length, no Transfer-Encoding, redirect, nonidentity Content-Encoding or trailing framing ambiguity. JSON content type required. Bounded recv chunks and whole-stage deadline rechecked after headers/chunks/EOF and before durable acceptance. Fatal UTF8, no BOM, duplicate/escaped-duplicate keys rejected, nonfinite/huge integers/depth/collection sizes bounded before domain validation. Preserve raw error prefix without echoing it."
+   :order [:amber-image :birch-image :cedar-image :delta-image :elm-image :fir-image]
+   :coverage "Use EXACT manifest-v2 PNG hashes and 480x160 dimensions already read. Three light/three dark backgrounds, two declared blocks each; no rendering, alternate OCR, label regeneration or target-word search. At most six POST intents; any failure stops. Report attempted/sent/received/durable/schema-valid/identity-bound counts separately."
+   :brackets "Before first POST verify fresh health and owner identity against exact prior reviewed pin plus kernel PID/start and selected unit properties. For EACH transaction obtain fresh /identity plus PID/start/listener-owner observation before SEND and again after response, within that transaction's 5s deadline. Bind raw response to socket local/peer tuple and these recorded observations, not just preflight hash. Keep stable pidfd for the pinned server; verify expected listener belongs to it through narrowly selected /proc/net/tcp and PID socket-FD inode observations if owner permits. No /proc environment/cmdline or unrelated sockets. If proof is unavailable, do not claim kernel peer identity."
+   :request-cost "One health GET plus up to twelve identity GETs and six POSTs (19 operations), no polling/retries/warmup. Case-one before identity can reuse the immediately preceding initial identity only if it is the same fresh bracket and within the same case deadline; no extra hidden request. All identity bytes and observations stored within total budget. More GETs do not grant inference or reload permission."
+   :identity-meaning "Existing response has NO per-request identity/nonce or server-authenticated binding. Stable reviewed nonrestart process, trusted source/dependencies, sole pinned listener and before/after identity support LOCAL INSTANCE-BRACKETED provenance, not atomic or cryptographic response attestation. ThreadingHTTPServer and other same-UID clients remain part of the trust limitations. Hashes of requested identity do not fix that gap."
+   :gate "Independent planning review must decide whether this explicitly limited local binding satisfies the existing response-binding gate. If truly atomic embedded binding or remotely authenticated provenance is required, current owner interface cannot satisfy it: HOLD and identify a future owner-owned response nonce/instance field prerequisite. Do not patch/restart now; restart grant is consumed."
+   :after-timeout "Kill/close client prevents reviewed client code from issuing another POST, but an already accepted server job can continue and a request in the kernel send queue may be delivered later. Mark inference/cancellation outcome unknown; do not infer server settlement from client abort or launch next case. Requirement of no surviving server work needs owner cancellation/settlement support absent from this interface, not a client retry or restart."}
+
+  :no-second-hop
+  {:baseline "Static reviewed Python application route shows local base64 decode/OpenCV/OpenVINO path and no deliberate HTTP forwarding. This selected source inspection is not proof of all native library behavior. Loopback is not an air gap; dependencies, native runtime, host/same-UID/root and existing service privileges are trusted unless separately isolated."
+   :required-assessment "Independently inspect exact reviewed owner path/dependency configuration for fetch/download/telemetry/forwarding opportunities and current execution environment without exposing secrets. Require existing-assets/offline configuration evidence and actual owner-compatible egress enforcement proof IF OS-level no-second-hop is a gate; stale environment claims or a local URL cannot substitute. No native imports or inference needed for this planning review."
+   :client-only-isolation "An owned client network namespace or seccomp connect restriction could constrain the client but NOT the existing OCR server's outbound capabilities. A namespace without host loopback access cannot reach this server without an explicitly qualified broker. Adding a proxy does not constrain server egress and increases counted processes/budget. It is not the smallest solution here."
+   :not-authorized "No root firewall, host routing, service namespace, unit hardening, BPF attachment or restart changes under this plan. Existing cgroup MemoryMax is not network policy. If exact server egress prohibition is required and not already enforced, report the owner deployment prerequisite and stay held; do not call static no-route review an OS isolation proof."}}
+
+ :fixture-matrix
+ [{:id :memory-startup :offline-only true
+   :cases ["exact three-role interpreter/import footprint under all final RLIMIT_AS values"
+           "owned cgroup bootstrap placement and before-entry readback; wrong/absent/raised cap blocks"
+           "worker anonymous/file-backed growth, pipe/socket/header stress and writer file-cache charge"
+           "worker and writer leaf OOM individually; watchdog remains alive; top counters and aggregate peak"
+           "extra child/thread/exec attempt rejected; no uncounted launch helper"]
+   :pass "Fresh kernel memory.max=268435456, swap.max=0 before workload; all helpers inside; peak/current/events and statuses captured. AS-only samples cannot pass group-memory gate. Cgroup mutation fixture requires separately reviewed owned allocator first."}
+  {:id :watchdog :offline-only true
+   :cases ["busy CPU; SIGTERM ignored; pipe backpressure; child exit-before-kill/PID reuse"
+           "simulated hung fsync/open/read/rename/writer acknowledgement; never block supervisor"
+           "stage completion at 5001ms despite delayed timer service; absolute deadline near final commit"
+           "lost child/late callback cannot cause a later SEND; WNOHANG/no indefinite wait"
+           "document real uninterruptible IO/scheduler limits, not a passing fake-D-state claim"]
+   :pass "Shortened owned process fixtures demonstrate independent kill request, no subsequent grants and durable-prefix/unknown semantics. Do not promise universal death or final fsync by deadline."}
+  {:id :durability :offline-only true
+   :cases ["crash before/after PNG fsync, directory fsync, consumed latch, INTENT, SEND, response file and settlement"
+           "disk full/read-only/short write/EINTR/symlink/path replacement/ack loss"
+           "exact PNG and encoded-body byte roundtrip hashes; malformed/partial/overflow raw retention"
+           "preexisting run/intent replay cannot send; six-intent maximum; late orphan never counts complete"
+           "24h image/request deletion, 7d text deletion, derived propagation and owner retention registration"]
+   :pass "Zero sends before durable preparation+intent; no retry/resume after ambiguity; shared golden records and actual filesystem failure fixtures on owned synthetic data. No separate ledger authority."}
+  {:id :protocol-transport :offline-only true
+   :cases ["bounded in-process byte-stream fake, no actual endpoint/socket in initial qualification"
+           "redirect/DNS/proxy/generic-host rejection; header count/length, framing conflicts, chunked/compressed rejection"
+           "strict UTF8/BOM/nonfinite/deep/duplicate and escaped duplicate-key JSON"
+           "5s incl durable settlement, 30s incl all preflight; six slow responses yield partial not a seventh request"
+           "frozen PNG caller mutation; exact sequential order; exception forged success cannot pass"
+           "overlarge IPC, unexpected/duplicate tags, EOF, partial control frames, backpressure"]
+   :pass "No real OCR traffic; closed statuses/raw bytes preserved; Python edge vectors match existing .cljc law and simulator golden outputs without copying governance logic. Owned socket fixtures only in a separately approved later test scope if necessary."}
+  {:id :authority-identity :offline-only true
+   :cases ["caller-rehashed approvals and swapped resource/parent channels denied"
+           "old observation, wrong run/artifact/batch/store/instance/deadline, consumed grant denied"
+           "server exits or changes PID/start/listener before/after response => uncertain/stop"
+           "unchanged bracket accepted only with LOCAL INSTANCE-BRACKETED label, never embedded attestation"
+           "response success with failed durability, identity or resource final check cannot be complete-six"]
+   :pass "Actual trusted consuming channel must be reviewed separately; synthetic proofs establish only negative-path mechanics. No fake signer/GovOne API credit."}]
+
+ :ordered-gate-plan
+ [{:gate 1 :owner :independent-parent-planning-review :state :pending
+   :require "Review THIS plan before implementer functional code. Settle whether finite Linux watchdog semantics, uncertain crash outcome, local identity bracketing and reviewed-runtime no-second-hop suffice. Literal stronger guarantees remain held; do not silently weaken them or re-ask already answered batch consent."}
+  {:gate 2 :owner :parent-resource-boundary-review :state :pending
+   :require "Qualify exactly one agent-owned cgroup allocator and transient resource authority, plus fresh owner resource source and separate trusted parent permit channel. No existing service modification. If no qualified aggregate cap/issuer/retention executor/egress proof exists, record specific upstream capability gap and stop."}
+  {:gate 3 :owner :scoped-implementer-after-planning-approval :state :not-started
+   :require "Implement only fixed OS edge, three roles/store/protocol and additive artifact; preserve existing offline artifacts and blocked CLI until separate entry qualifies. Begin with shared failing fixture vectors, then smallest adapters. No live endpoint effects."}
+  {:gate 4 :owner :independent-functional-review :state :not-started
+   :require "Reproduce failure cases, run full candidate tests and zero-warning lint, artifact seals and .cljc parity; inspect real process/cgroup/durable-store qualification outputs. Existing separate reviewer settles old three P2 fixes. Passing simulator tests alone insufficient."}
+  {:gate 5 :owner :parent-preexecution-admission :state :held
+   :require "All exact-head reviews positive; trusted channels and allocator qualified; retention and no-second-hop requirements resolved; fresh runtime/resource facts acquired INSIDE the later 30s job. Parent binds one-shot permit and existing conditional consent without calling this report an authorization. Preserve Restart=no and zero further startups."}
+  {:gate 6 :owner :qualified-fixed-runner-only :state :not-authorized
+   :require "Only after gate 5, ONE <=6 sequential synthetic batch, no retries/resume/restarts/downloads/cloud/private data. Record consumed grant before first POST. Unknown/partial abort permanently ends this run. Any unresolved impossible/unsupported requirement means NO RUN."}]
+
+ :accounting
+ {:only-persistent-write ".ημ/runs/oikos-program-20261103/reviews/s7a-hard-runner-plan-v1.edn"
+  :product-edits 0 :board-edits 0 :receipt-edits 0 :pr-operations 0 :commits 0
+  :http-requests 0 :ocr-posts 0 :native-imports 0 :model-loads 0 :services-changed 0
+  :cgroups-changed 0 :transient-scopes-created 0 :downloads 0 :personal-data-reads 0
+  :fixture-processes "Only small owned stdlib/import/allocation/fork/sleep/kill probes listed above; no saved scratch artifacts. Node fatal allocation probe core dumps disabled."
+  :reflection {:receipt-owner :parent :session-mycology-owner :parent :separate-spore false
+               :lesson "Use a cgroup for aggregate charged memory, not an AS claim disguised as it; keep disk writer outside watchdog control flow. A durable precommitted unknown outcome is honest crash evidence, not guaranteed final durability. Client termination is not server cancellation or atomic identity binding."
+               :planning-limit "No independent nested planning reviewer ran: harness depth cap. Coordinator must obtain that review before implementation."}}}

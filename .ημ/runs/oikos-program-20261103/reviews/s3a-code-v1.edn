@@ -1,0 +1,156 @@
+{:review/id :s3a-code-v1
+ :review/date "2026-11-03"
+ :review/kind :independent-adversarial-exact-head-code-review
+ :task/uuid "b2f52c1f-bd1b-431e-a417-95c72549ba0d"
+ :reviewer {:provider :openai :model "gpt-6.1-sol"
+            :role :independent-reviewer-not-implementer
+            :native-provider-approval false :board-completion-credit 0}
+ :verdict :approved
+ :findings []
+ :approval/scope "Approve only the exact pure S3A logical-space/membership/named-branch implementation reviewed below, conditional on the caller supplying its current accepted branch. Parent owns acceptance and board transitions. No persisted/live currentness, atomic store replacement, S2A whole-task completion, S3B movement admission, or native approval is qualified."
+ :target {:repository "open-hax/oikos"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s3a"
+          :source-sha "8642b46e70ec9dee9851b643dd53de32fb2acbf5"
+          :tree-sha "aa1f4b033fcc463f60b511c3722ae5c0825275af"
+          :diff-base "c399b60e1676c47778445c1098eb541ab38743cb"
+          :diff-files 7 :diff-insertions 571 :diff-deletions 0
+          :head-and-clean-worktree-verified-before-and-after true}
+ :task/context
+ {:absolute-config "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+  :command "eta-mu kanban content b2f52c1f-bd1b-431e-a417-95c72549ba0d --config /home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+  :source-path "docs/agile/kanban/oikos-implement-logical-memberships-and-speculative-edn-projection-branches-2549ba0d.md"
+  :actual-official-body-and-all-comments-read true :comment-sections 1
+  :observed-status :in_progress :status-not-changed true
+  :instructions "Read applicable supplied ancestor instructions, product AGENTS.md and exact-worktree AGENTS.md; no deeper AGENTS.md exists in the reviewed product paths. Parent owns planning/receipts. Only this new report is authored."
+  :planning-review-read ".ημ/runs/oikos-program-20261103/reviews/s3a-v1.edn"
+  :component-policy "Official comment explicitly admits frozen S2A pure contract/lifetime/revision/replay components before whole-producer completion. Actual append/persistence is not supplied or required for this pure slice."}
+ :prerequisite-custody
+ {:permit ".ημ/runs/oikos-program-20261103/permits/s2a-contract-c399b60e.edn"
+  :permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+  :permit-read-and-byte-pinned-first true
+  :independent-review ".ημ/runs/oikos-program-20261103/reviews/s2a-contract-fix-review-v2.edn"
+  :independent-review-sha256 "e329a2fa6b171795a56c1800ac12893d5b1dccd1312f3cf0c7b01d9e0232542e"
+  :actual-bound-review-verdict :approved
+  :actual-bound-review-evidence-id "b4542a1a-d95a-5fb5-a73d-3ba80bdd4692"
+  :review-and-permit-digests-rechecked-after-probes true
+  :review-context "Read existing authenticated parent permit bytes with the ordinary runtime EDN reader, then use its trusted-review-context as in-memory plain DATA. Never use desktop_fixture/context's invented review map. This review does not issue prerequisite approval or authenticate signatures."
+  :contract/version "oikos.desktop.safe-reference/v1"
+  :contract/digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+  :contract/digest-recomputed-in-both-runtimes true
+  :descriptor-sha256 "7ad9541df188201860e212b91d3744a62cd9aa05ae4a8d80c25425b4f0886916"
+  :frozen-files 9
+  :frozen-file-check "Independent Python hashlib SHA-256 equals all nine permit hashes; raw bytes equal git show of BOTH c399b60e and 8642b46e. Final scoped diff is empty for those nine files plus the descriptor. The actual test invoker also checks all nine before running."
+  :clio-owner "/home/err/spaces/foresight/clio"
+  :clio-owner-sha "788cdd3434615a7932b924e68520dbf7f88408c2"
+  :clio-tracked-src-and-test-diff-empty true
+  :clio-untracked-existing-inputs "Existing .agents/, .github/, .nbb/ and scripts/agy-review.sh were observed, not modified or cleaned. Cached dependencies are existing inputs, not newly installed or fully independently authenticated by the owner Git SHA."
+  :readback-blocker
+  {:parent-design-read ".ημ/runs/oikos-program-20261103/reviews/s2a-readback-boundary-design.edn"
+   :actual-pure-owner-reader-probed-both-runtimes true
+   :method "owner-edn/read-one applied to pr-str of a synthetic baseline, without calling any writer or store."
+   :value-equal-location-metadata-present true
+   :raw-readback-frozen-plain-data false
+   :s3a-raw-readback-and-location-only-forgery :sanitized-refusal
+   :decoder-or-stripping-added false
+   :actual-append-calls 0
+   :qualification "Pure in-memory S3A remains reviewable. This result does not resolve S2A phase-2 readback, qualify a decoder, or claim persisted/live replay."}}
+ :actual-verification
+ {:environment {"OIKOS_CLIO_SOURCE" "/home/err/spaces/foresight/clio"
+                "OIKOS_CLIO_DEPS" "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps"
+                "OIKOS_S2A_PERMIT" "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/permits/s2a-contract-c399b60e.edn"}
+  :commands
+  [{:command "bb scripts/test_spaces.clj" :exit 0
+    :bb {:tests 11 :assertions 455 :failures 0 :errors 0}
+    :nbb {:tests 11 :assertions 455 :failures 0 :errors 0}}
+   {:command "bb test" :exit 0
+    :inherited-bb {:tests 18 :assertions 286 :failures 0 :errors 0}
+    :inherited-nbb {:tests 30 :assertions 392 :failures 0 :errors 0}
+    :eval {:tests 9 :assertions 39 :failures 0 :errors 0}
+    :desktop-bb {:tests 16 :assertions 1059 :failures 0 :errors 0}
+    :desktop-nbb {:tests 16 :assertions 1059 :failures 0 :errors 0}}
+   {:command "bb lint" :exit 0 :errors 0 :warnings 0}]
+  :independent-probes
+  {:invocation "bb/nbb -cp src:test:<pinned-clio>/src:<existing-nbb-deps> -e <inline code>; no probe source file, ledger, persistent fixture, installation or store."
+   :schedule-bb {:exit 0 :checks 813 :source-sha256 "f03fe44abe7411ddf6531a05d21c075b9b0d8ff0e3035e2ec0b722d5d36f903d"}
+   :schedule-nbb {:exit 0 :checks 813 :source-sha256 "212c9901c5dd3f6f9483ed3e6fc1a35bf57cae2cdc080de2a7ad06c46e9b55f9"}
+   :same-case-counts-both-runtimes
+   {:interleaving-schedules 24 :scheduled-edits 96 :predecessor-guards 6
+    :exact-stale-conflicts 9 :gap-denials 3 :lifetime-schedules 3 :lifetime-proposals 15}
+   :schedule-proof "Enumerate every ordering of A1/A2/B1/B2, where both A requests consume A/v0 and both B requests consume B/v0 at the unchanged desktop cut. Each branch's first edit succeeds, its second returns the exact predecessor conflict; repeat every rejected second edit three times. Caller-held current branches are replaced ONLY on :edited. Assert immutable base, independent other branch, requested successor membership, unchanged replay/history and both proposed revisions equal 3."
+   :additional-schedules "Exact stale create/compare/edit at actual revisions 2, 3 and 0; missing/nil/wrong/cross-branch predecessors; same revision with another observation event denies base mismatch; active gap denies all three APIs; close/reuse, same-epoch reconciliation and epoch replacement retire old lifetimes; wrong XID/incarnation/epoch cannot join. At most one physical lifetime remains and old memberships are unchanged. Max safe revision denies further edit. Intention/outcome additions do not become observed movement."
+   :boundary-source-sha256 "e28c563112e673a43ccddf616af27a91d06fac2a445a24bd806b5c2d6ab65071"
+   :boundary-bb {:exit 0 :checks 734}
+   :boundary-nbb {:exit 0 :checks 734}
+   :boundary-cases-per-runtime
+   {:collection-sites 76 :metadata-refusals 304 :record-refusals 52
+    :unknown-field-refusals 52 :runtime-container-refusals 304
+    :whole-input-refusals 10 :malformed-token-refusals 5 :wrapper-and-key-refusals 3}
+   :boundary-proof "At every collection-valued input position of create/edit/compare, inject empty metadata, secret metadata, actual host object metadata and callback metadata; record-wrap every map; insert an unknown field into every map; replace every collection with a host object, callback, set or list. Also test nil whole inputs, malformed predecessor tokens, sorted-map/subvector wrappers and a metadata-bearing map key. Every rejection equals the constant message/data/nil-cause diagnostic. Valid opaque content references do not cross into branch snapshots, and raw content input is refused."
+   :exact-result-probe-source-sha256 "a3d115c1a1ec90422b4c34cf5c2ce3620c2097b33a29eff122b89f8eaf91f599"
+   :exact-result-probe-exits {:bb 0 :nbb 0}
+   :counterexamples-found 0}
+  :harness-incidents
+  [{:kind :local-command-timeout :limit-ms 120000
+    :disposition "First combined schedule command completed BB's 813 checks but timed out before an NBB summary. Separate NBB rerun with 300000ms limit completed all 813 checks, exit 0. No product assertion failure observed."}
+   {:kind :inline-probe-extra-closing-delimiter
+    :disposition "Initial exact-result printing probe printed BB data then failed on one extra trailing delimiter in reviewer code. Corrected inline probe completed both runtimes, exit 0. Product sources untouched; not a product regression."}]}
+ :exact-result-proof
+ {:identical-values-observed-both-runtimes true
+  :a/version "e9d2db49fbec90c60dda1f8332b5be3ef4aa70f45da4f1eedf783a4df7a9b1b7"
+  :a2/version "c57ae8b79af3be1ee23c5486ca601d59b3fd01519cac232c63dba4ce1c89f8aa"
+  :b/version "a6be17c6d0bec0c2cea65d8667b7abce32a96dcf15a4ffdd3c6a133cef600b79"
+  :second-edit-using-current
+  {:result/status :conflict :conflict/reason :branch-predecessor
+   :branch/id "00000000-0000-4000-8000-000000000600"
+   :branch/expected-predecessor "e9d2db49fbec90c60dda1f8332b5be3ef4aa70f45da4f1eedf783a4df7a9b1b7"
+   :branch/actual-predecessor "c57ae8b79af3be1ee23c5486ca601d59b3fd01519cac232c63dba4ce1c89f8aa"}
+  :missing-predecessor-using-current
+  {:result/status :conflict :conflict/reason :branch-predecessor
+   :branch/id "00000000-0000-4000-8000-000000000600"
+   :branch/expected-predecessor nil
+   :branch/actual-predecessor "c57ae8b79af3be1ee23c5486ca601d59b3fd01519cac232c63dba4ce1c89f8aa"}
+  :observed-stale
+  {:result/status :conflict :conflict/reason :stale-revision
+   :branch/id "00000000-0000-4000-8000-000000000600"
+   :branch/base-revision 1 :branch/proposed-revision 3 :observed/revision 2}
+  :refusal {:message "Space boundary refused" :data {:oikos/error :invalid-space-input} :cause? false}
+  :independently-supplied-old-branch-statuses [:edited :edited]
+  :pure-boundary-interpretation "Both edits independently supplied an old branch can succeed: this is expected, documented caller-owned pure evaluation, NOT a current CAS claim. docs/contracts/logical-spaces-v1.md:50-56 explicitly requires current accepted branch and future atomic storage enforcement. No storage kernel is demanded by this review."}
+ :code-review-conclusions
+ {:exact-stale-and-predecessor-shapes "src/oikos/law/spaces.cljc:31-48,88-96,131-156; exact official stale map preserved and separate closed predecessor map frozen. Stale observed cut precedes predecessor comparison."
+  :lifetime-and-currentness "spaces.cljc:70-99,101-129 obtains actual provided desktop/replay, snapshots complete window keys/placement/epoch/observation cut, checks targetability, and refuses uncertain or mismatched base. No XID-only migration or native duplication. Current means current at supplied replay cut only."
+  :boundaries "spaces.cljc:50-86,108-110,139-141 reuses frozen require-plain-data!, closed schemas, constant sanitized errors and whole-branch digest validation. No metadata coercion/decoder or alternate ledger semantics."
+  :purity "New law namespace depends only on pure law/digest/Clio canonical/Malli/string namespaces. Existing effect spies passed both runtimes. No adapter/store/Clio-kernel changes appear in the seven-file diff."
+  :test-registration "New explicit dual-runtime invoker is documented and actually executed. Frozen bb.edn remains unchanged; bb test alone does NOT run S3A. Later integration registration is expressly separate, not represented as already complete."
+  :planning-findings-addressed [:s3a/incarnation :s3a/branch-version :s3a/no-mutation-conflict :s3a/observed-vs-proposed]}
+ :frozen-source-and-test-sha256
+ {"bb.edn" "8f76a349e997923ae8130f81969a9d239522828e60f6645ae9de14ec0ada0af8"
+  "README.md" "85a93c408bb7c9167c297929915422023d377e0fd992a8c6134a1dc4a530f5fa"
+  "src/oikos/law/safe_reference.cljc" "baee008c0a3b2dc4a6ddd7bc8f4a63fed317d0d4514f961d819ad484019cdf60"
+  "src/oikos/law/desktop.cljc" "edea4e32bd0279ccfc2f81a4cfbe24c9e1348f06606f9d597530d28f894680d7"
+  "scripts/test_desktop.clj" "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"
+  "test/oikos/desktop_fixture.cljc" "77122676722cba3af9d62c42fcb725daf4236e6364ec50f7378a5907d4df4c57"
+  "test/oikos/desktop_runner.cljc" "a3b84c0bf587a7ce051d1d1ea9257d75832337d963bec8e609a4da9654b00072"
+  "test/oikos/law/desktop_test.cljc" "be969cb41358194a630b35cadc0db13243be400cc2cffbe250703c2e0bc4b088"
+  "test/oikos/law/plain_event_test.cljc" "5e4044f67c0792adad48ccd6c0544afc064afb8eb51eb853af306efd8996903f"}
+ :reviewed-diff-file-sha256
+ {"docs/contracts/logical-spaces-v1.md" "ddc349873ae969cc4262d76da2c522d8f4d9869e19259a782a89645122b09619"
+  "scripts/test_spaces.clj" "8d37507963683e4fff1ddf34ffbfddeb09f43df0d06cd54ffb5d5dab0dcd605e"
+  "src/oikos/law/spaces.cljc" "5c5638e44e37001735e7a8c13c34b2756d90781166b22c5491caa2e192112768"
+  "test/oikos/law/spaces_test.cljc" "34b6aad028e59ab904fadcc99cc4b210154ac8f444ef9e46ce5b3684f8c37236"
+  "test/oikos/spaces_effect_test.cljc" "aad15dc4705d1a7feb93fe43d4ad2ea47651f258f355133d9f4988e0843b5302"
+  "test/oikos/spaces_fixture.cljc" "a3fc9eb3e0ddf447c87c14d5eee78ff45a2a89c45517f63a495906b1dc79db41"
+  "test/oikos/spaces_runner.cljc" "b5e2e9bed206cbfff94c7b98e314d5b97f79d613c6a8c5ea76cb39112c6d4a07"}
+ :effects {:reviewer-authored-files [".ημ/runs/oikos-program-20261103/reviews/s3a-code-v1.edn"]
+           :source-card-ledger-pr-commit-push-edits 0
+           :actual-clio-append-or-schema-history-writes 0
+           :desktop-editor-service-model-or-personal-data-effects 0
+           :test-harness-processes "Required bb/nbb/lint invocations only. Inherited tests use their existing owned synthetic temporary fixtures; new S3A/adversarial probes are in memory."
+           :new-probe-or-scratch-files 0
+           :hosted-cohort-wait false
+           :native-approval-credit 0 :task-completion-by-reviewer false
+           :s3b-movement-admission false :parent-acceptance-required true}
+ :reflection {:p-efficiency 0.82 :p-friction 0.20 :p-skill-candidate 0.35
+              :lesson "Separate replay-cut currentness, caller-owned branch predecessor checks and future atomic store enforcement. Demonstrate raw owner-reader metadata refusal without inventing a decoder or blocking an already qualified pure component. Allow enough time for finite actual-replay schedules; reviewer inline syntax errors are not product findings."
+              :separate-receipt-ledger-or-spore-written false
+              :reason "User authorized only this new parent review artifact; parent owns provenance persistence."}}

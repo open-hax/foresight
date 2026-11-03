@@ -1,0 +1,207 @@
+{:review/id :s7a-ocr-runner-code-v1
+ :review/kind :independent-adversarial-offline-code-and-artifact-review
+ :review/date "2026-11-03"
+ :review/context :observed
+ :review/confidence 1.0
+ :task/uuid "0db50b53-6c7a-489a-bff9-048d57ce4cbb"
+ :verdict :changes-required
+ :qualification :offline-simulator-only
+ :finding-count 3
+ :finding-priorities {:P0 0 :P1 0 :P2 3 :P3 0}
+ :scope
+ {:repository "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a"
+  :base "9b4bc07be6a64dc7b69bdd7716a841162ba3168b"
+  :head "a7a6113b32d9eb96621cb3cffebbe61d8e52b827"
+  :head-independently-read true
+  :product-worktree-clean-before-and-after-checks true
+  :actual-diff {:added-files 12 :modified-existing-files 0 :deleted-files 0}
+  :instructions-read ["/home/err/AGENTS.md"
+                      "/home/err/spaces/AGENTS.md"
+                      "/home/err/spaces/foresight/AGENTS.md"
+                      "/home/err/spaces/foresight/oikos/AGENTS.md"
+                      "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a/AGENTS.md"]
+  :official-parent-configs-read
+  ["/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+   "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.json"]
+  :task-artifact-read "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/docs/agile/kanban/oikos-freeze-synthetic-local-gemma-ocr-baseline-and-runtime-identity-probes-57ce4cbb.md"
+  :task-state-source :read-only-markdown-artifact-not-engine-replay
+  :rheos-board-validation-claimed false
+  :govone-verifier-discovery :separate-parent-agent-not-duplicated
+  :live-execution-authorized false :measurement-credit 0
+  :native-provider-review false :pr-or-merge-approval false}
+ :artifact-verification
+ {:method "Independently recomputed SHA256 over actual bytes, recomputed both canonical seals, checked every bound file, compared all 32 v2-bound files with their 9b4bc07b Git blobs, and loaded the exact pinned six-image inventory. No seal or source was rewritten."
+  :new {:path "eval/ocr-runner/artifact-v1.edn"
+        :file-sha256 "77326298c5757d46f27a1c3150d19d904173211fce019d641a1327578e0d2f2e"
+        :requested-file-sha256-matched true
+        :canonical-seal "4a6a753ac0814040f34c53d0d6cb1d0cb7705dbc1f4bb3bbbff62b05186b3dfc"
+        :canonical-seal-matched true :bound-files 12 :file-mismatches []
+        :live-execution :blocked :future-permit :not-granted}
+  :previous-v2 {:path "eval/s7a/artifact-v2.edn"
+                :file-sha256 "0085e3d5123e6e219d541aab81c2a4f15a7dc3a876d4cf8db6f44aca2397da24"
+                :canonical-seal "46e72b669b03edfb8f7a4d1cd04567da112bb650e421cb51794811a3aa28c584"
+                :canonical-seal-matched true :bound-files 32 :file-mismatches []
+                :bound-file-drift-versus-reviewed-base []
+                :prior-independent-review ".ημ/runs/oikos-program-20261103/reviews/s7a-code-fix-review-v2.edn"
+                :prior-offline-qualification-preserved true
+                :reopened-as-live-prerequisite false}
+  :ordered-png-sha256
+  [{:id :amber-image :sha256 "fa6b5398c64fc3c106e9d3f16e2306ec2ec679465f2a0316a078e8ebdba84e9a"}
+   {:id :birch-image :sha256 "eabe4fa5bd1b60427cb9207627a39bc54bac10fdca03167c7035e94213ab0a5c"}
+   {:id :cedar-image :sha256 "671ab225928e93204fd1cfd7d196f9582f5ee087439c93bb223a126ce12f31aa"}
+   {:id :delta-image :sha256 "c30b638b04df11535d940e22bd7bb6de5fb92920c218f789b7830e6ed7ca002e"}
+   {:id :elm-image :sha256 "3606c2b7af205053a44d1c6a1385afc315572462fc71369136036917cfbe08fb"}
+   {:id :fir-image :sha256 "0ec3f9a6f1776002b898dd706fd7cb85b9a9171e440da80b92ddca4dfcabe6a7"}]
+  :split-and-label-source-bytes-unchanged true}
+ :actual-candidate-checks
+ [{:command "bb test:bb" :exit 0 :tests 26 :assertions 357 :failures 0 :errors 0}
+  {:command "bb test:nbb" :exit 0 :tests 38 :assertions 463 :failures 0 :errors 0
+   :held-s1a-bb-protocol-credit 0
+   :effects "Existing inherited tests use their own temporary synthetic directories and BB helper subprocesses; no OCR/native/model/service operation. No reviewer-authored scratch file was created."}
+  {:command "bb test:eval" :exit 0 :tests 9 :assertions 39 :failures 0 :errors 0}
+  {:command "bb test:s7a" :exit 0 :tests 7 :assertions 181 :failures 0 :errors 0}
+  {:command "bb -f eval/ocr-runner/bb.edn test" :exit 0
+   :suites [{:runtime :bb-laws :tests 2 :assertions 14 :failures 0 :errors 0}
+            {:runtime :nbb-laws :tests 2 :assertions 14 :failures 0 :errors 0}
+            {:runtime :nbb-fake-http :tests 10 :assertions 168 :failures 0 :errors 0}
+            {:runtime :nbb-additive-artifact :tests 1 :assertions 16 :failures 0 :errors 0}]}
+  {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+  {:command "nbb -cp src scripts/ocr_batch.cljs status" :exit 2
+   :expected-exit 2 :status :blocked :execution-authorized? false}
+  {:command "git diff --check 9b4bc07be6a64dc7b69bdd7716a841162ba3168b..a7a6113b32d9eb96621cb3cffebbe61d8e52b827"
+   :exit 2 :diagnostic "eval/ocr-runner/red-v1.txt:12: trailing whitespace in the preserved missing-implementation diagnostic."
+   :disposition "Recorded, not hidden; not elevated to a product defect or permission to rewrite saved RED bytes."}]
+ :independent-probes
+ {:execution "Only inline NBB forms and owned in-process fake effects. No product/test edits or new scratch files."
+  :broad-composition-run {:tests 1 :assertions 162 :failures 6 :errors 0 :exit 1
+                          :interpretation "156 checks passed. Six failed assertions were reviewer expectation mistakes: duplicate-key, escaped-duplicate-key and nesting-limit rejection legitimately returns :invalid-json, not :invalid-response. These six expectations were corrected and independently rerun below; they are not six candidate defects. No full corrected 162-assertion rerun is claimed."}
+  :broad-passing-coverage
+  [:initial-image-reordering-duplicate-identity-label-coordinate-and-byte-drift-blocks-before-dispatch
+   :repinned-incoherent-or-stale-resource-and-denied-context-blocks
+   :complete-source-process-five-asset-runtime-identity-mismatch-stops-before-posts
+   :fatal-utf8-bom-duplicate-key-escaped-key-depth-and-closed-schema-rejection-retains-exact-bytes
+   :normal-six-request-order-case-png-body-hash-binding
+   :composed-word-block-layout-metrics-and-wall-versus-supplier-fields
+   :partial-http-failure-stops-without-retry
+   :overflow-retained-prefix-versus-received-through-stop-counts-and-hashes]
+  :composed-metric-oracle
+  {:first-case :amber-image
+   :synthetic-output "SYNTHETIC AMBER\nnoise"
+   :schema-valid? true :word-recall 0.3333333333333333 :hallucination 0.3333333333333333
+   :block-recall 0.5 :layout-region-iou [0.5 nil]
+   :wall-monotonic-ms 11 :supplier-inference-ms 999
+   :all-six-case-png-and-request-body-receipt-bindings-checked true
+   :model-quality-credit 0}
+  :corrected-controls-and-contract-regressions
+  {:tests 4 :assertions 16 :failures 7 :errors 0 :exit 1
+   :corrected-malformed-status-controls {:assertions 6 :failures 0}
+   :real-regressions "Seven failing contract assertions expose exactly the three findings below, not seven independent findings."
+   :names [corrected-invalid-json-controls
+           per-request-deadline-must-survive-delayed-timer-service
+           mutated-png-must-not-keep-old-pin
+           error-data-must-not-forge-success-or-leak-status]}
+  :extra-controls
+  [{:probe :late-callback-raw-hash-invariance :assertions 7 :failures 0
+    :detail "After a 5ms shortened timeout and a later 15ms synthetic completion, still exactly one receipt/request, zero received/retained bytes, both hashes equal SHA256(empty), and complete? remains false. No later POST or receipt mutation."}
+   {:probe :store-failure-is-closed-and-stops :assertions 3 :failures 0
+    :detail "Synthetic append! throws a marker-bearing exception and arbitrary status: runner reports :store-error, stops after health, and does not echo that marker."}]
+  :harness-friction "An earlier long inline test expression had an unmatched delimiter and did not run tests. Rewritten as smaller forms; candidate files were never changed. The label-expectation correction above is also explicitly retained rather than presented as an initially green probe."}
+ :findings
+ [{:id :s7a-ocr-runner/per-request-clock-deadline-not-enforced-at-settlement
+   :priority :P2 :context :observed :confidence 1.0
+   :path "src/oikos/infra/ocr_batch.cljs" :lines [88 117]
+   :additional-lines [131 134]
+   :claim "A response completing after its per-request deadline can clear the timer and be accepted, because completion checks only the batch deadline."
+   :mechanism "remaining and the setTimeout establish a timer, but no per-request monotonic deadline is checked by on-chunk, finish or the completion handler. A synchronous callback or pending microtask can finish before delayed timer service; finish then clears that timer."
+   :witness {:clock-at-request-start 0 :clock-at-health-completion 5001
+             :batch-deadline 30000 :expected-status :timeout
+             :observed-status :synthetic-complete :observed-first-receipt-wall-ms 5001
+             :requests [[:get "/health"] [:get "/identity"]
+                        [:post "/ocr"] [:post "/ocr"] [:post "/ocr"]
+                        [:post "/ocr"] [:post "/ocr"] [:post "/ocr"]]}
+   :independent-real-clock-control
+   {:test-time-scale 0.001 :effective-request-timer-ms 5
+    :synchronous-health-callback-block-ms 15
+    :observed-first-receipt-wall-ms 16.038614999999993
+    :observed-status :synthetic-complete :observed-request-count 8}
+   :reproduce "Use fixture/fixture with :clock #(deref clock), clock initially 0. In the fake HTTP health completion hook reset! clock to 5001, then deliver valid health/identity/OCR responses synchronously. All six POST stages still run. The real-clock control uses only a 15ms in-process busy callback and the existing shortened test scale, not a socket or service."
+   :required-fix "Pin the per-stage monotonic deadline and recheck it when accepting bytes/completion, before a late successful finish can clear the timer. Keep the absolute batch deadline and late-callback guard. Regress both delayed-timer settlement and normal on-time completion."
+   :boundary "This is a missed cooperative per-request checkpoint, NOT a demand that JavaScript preempt blocking work or a new finding for the already declared missing outer process watchdog."}
+  {:id :s7a-ocr-runner/mutable-png-after-validation-breaks-pin-to-sent-bytes
+   :priority :P2 :context :observed :confidence 1.0
+   :path "src/oikos/infra/ocr_batch.cljs" :lines [137 142]
+   :additional-lines [188 200]
+   :claim "Image validation does not freeze the mutable PNG buffers used after asynchronous preflight; altered bytes can be sent and attributed to the unchanged approved PNG pin."
+   :mechanism "validate-images! hashes caller-owned Buffer objects once. Later encode-request reads those same mutable buffers; receipt metadata copies the original :sha256 without hashing the actual dispatched PNG against it."
+   :witness {:case-id :amber-image
+             :mutation "During synthetic /identity completion, fill the caller batch first PNG Buffer with zero bytes. Only the in-memory copy is changed; no fixture file is touched."
+             :expected "Reject before a changed image dispatch, or send an owned immutable snapshot whose bytes still match the approved pin."
+             :observed-status :synthetic-complete :observed-posts 6
+             :receipt-png-sha256 "fa6b5398c64fc3c106e9d3f16e2306ec2ec679465f2a0316a078e8ebdba84e9a"
+             :actual-dispatched-image-sha256 "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d"}
+   :reproduce "Keep b=(fixture/fixture). In fake-http :before-complete, when route is /identity, call (.fill (get-in b [:images 0 :png]) 0). Run runner/run-synthetic!, decode the first captured POST body image from base64, and compare its SHA256 with the first OCR receipt :png-sha256."
+   :required-fix "Copy/freeze owned PNG bytes before asynchronous handoff and validate/use that same snapshot, or revalidate the exact encoded request bytes immediately before dispatch. Add a regression mutating the original caller buffer while preflight is pending; the sent bytes and receipt pin must never disagree."
+   :boundary "No missing live adapter or model behavior is needed to reproduce the false attribution; it occurs entirely inside the supplied offline simulator."}
+  {:id :s7a-ocr-runner/arbitrary-exception-status-forges-result-and-leaks-label
+   :priority :P2 :context :observed :confidence 1.0
+   :path "src/oikos/infra/ocr_batch.cljs" :lines [143 149]
+   :additional-lines [218 218]
+   :claim "error-status promotes arbitrary exception :status data directly into the public report, including the success label or an unconstrained string."
+   :mechanism "The cause-walking extractor is not a closed error-status decoder. A supplied wall-clock callback error reaches the outer catch and result without the transport/store sanitizers."
+   :witnesses [{:callback ":wall-clock #(throw (ex-info \"redacted\" {:status :synthetic-complete}))"
+                :observed-status :synthetic-complete :requests [] :results []}
+               {:callback ":wall-clock #(throw (ex-info \"redacted\" {:status \"SYNTHETIC_PRIVATE_MARKER\"}))"
+                :observed-status "SYNTHETIC_PRIVATE_MARKER" :requests [] :results []
+                :synthetic-marker-visible-in-report true}]
+   :reproduce "Assoc either throwing wall-clock callback into fixture/fixture and invoke run-synthetic! with the ordinary in-process fake and memory-store. Neither callback allows even the health dispatch, but the arbitrary exception label becomes report :status."
+   :required-fix "Allow only closed failure labels from exception data, default everything else to an owned failure, and never permit a caught exception to produce a completion label. Keep raw messages/strings out of report labels. Regress forged success, arbitrary string/keyword and wrapped-cause statuses alongside genuine deadline/invalid-json failures."
+   :boundary "This forges only simulator completion/error classification. execution-authorized? remains false and measurement-credit remains zero; no GovOne bypass or live execution is claimed."}]
+ :reviewed-positive-boundaries
+ {:old-v2-artifact "All previously qualified files, PNGs, labels and split inputs are unchanged; these new findings do not revoke that independent offline prerequisite."
+  :normal-sequencing "Normal input produces GET health, GET identity, then exactly six ordered sequential fake POSTs, no warmup/retries, concurrency one. Initial missing/duplicate/reordered/mismatched image inputs reject. The asynchronous Buffer-mutation hole is specifically finding two."
+  :identity "The prospective closed identity checks source-buffer binding, process PID/start ticks/clock frequency/timestamp ordering, runtime version/device, all five asset hashes/sizes, and complete equality with the pinned synthetic identity. No compiled-model attestation is manufactured."
+  :evidence "Context hash/scope/freshness and coherent RAM/VRAM checks are synthetic consistency checks. Re-pinning caller documents is not authentication; live-status ignores such approvals and always blocks."
+  :responses "Closed fields, 480x160 integer half-open boxes, confidence bounds, response byte caps, concatenated text and bounded line/box counts are checked before metrics. Normal reports bind case ID, requested identity, PNG and request-body hashes; OCR-response identity is explicitly not attested."
+  :raw-evidence "Malformed JSON/UTF8 and HTTP failures preserve actual bounded bytes and hashes; overflow distinguishes retained prefix from all received through stop. Later callbacks cannot mutate settled raw receipts. The in-memory store is explicitly not durable."
+  :metrics "Actual composed manual-oracle word recall/hallucination, block recall and one-to-one text-matched layout-region IoU were checked, separately from schema. Supplier ms differs from request wall ms; no aggregate population/model qualification is claimed."
+  :no-network-driver "Inspected new runner imports fs/path/crypto and local laws, not a network client. The CLI only prints BLOCKED and exits 2. Review exercised no socket/endpoint/HTTP request. Injected callback :kind tags describe the owned test fixture, not a security sandbox or an authorization seam; no arbitrary relabeled callback is qualified for future live HTTP."
+  :no-model-measurement "All outputs are synthetic; LLM token rate/TTFT are N/A and cold start, cancellation and peak RAM/VRAM are unmeasured."}
+ :remaining-live-capability-gates
+ {:status :blocked :new-code-findings false
+  :trusted-context-verifier "Parent-owned discovery/integration of actual GovOne/owner/resource/parent authority, immutable trusted pins, freshness and revocation. No locally invented policy kernel or self-authenticating caller approval."
+  :process-boundary "Independently enforced/attested 256 MiB full-process cap and 30s whole-process watchdog. Cooperative JS timers, bounded buffers or memory-only receipts are not this proof."
+  :owner-interface "Integrate the separately reviewed identity interface and obtain fresh post-activation source/process/five-asset/runtime evidence. This review neither repeats its concrete-unit gate nor consumes a restart."
+  :durable-raw-store "Separately reviewed owned operational run-store preserving exact raw bytes, hashes, partial-result semantics and store-failure behavior."
+  :response-binding "Resolve identity-to-actual-response binding; preflight identity alone is not a response attestation."
+  :live-driver "Independently review an actual bounded HTTP adapter; do not connect live effects by changing a synthetic transport label."
+  :new-permission "Fresh explicit six-image batch permission plus actual resource/GovOne admission. The separately authorized identity patch and ONE controlled restart are not this grant."
+  :not-imposed-on-old-offline-artifact true
+  :not-implemented-or-simulated-by-this-review true}
+ :owner-authorization-records
+ {:source ".ημ/runs/oikos-program-20261103/decisions/ocr-attestation-restart-authorization.edn"
+  :authorized-scope "Reviewed identity-reporting change and one controlled ocr-npu.service restart using existing assets only; no OCR batch."
+  :prepared-record ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-concrete-preflight.edn"
+  :prepared-restart-policy "Restart=no"
+  :later-concrete-review-read ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-concrete-review-v3.edn"
+  :recorded-concrete-review-verdict :approve
+  :recorded-concrete-review-scope "Existing ONE parent-owned controlled restart, not a batch or model-quality grant."
+  :epistemic-limit "These are read parent records, not a fresh service/process query by this reviewer. No current runtime state or startup success is inferred."
+  :service-or-endpoint-query-in-this-review false :restart-consumed-by-this-review false}
+ :handoff
+ {:next-action "Fix and regress the three additive offline runner defects, preserve all old v2 bytes, and re-seal only a new additive runner artifact for exact-head re-review."
+  :board-state-change-authorized false :whole-s7a-completion false
+  :offline-review-is-execution-permission false
+  :existing-v2-prerequisite-preserved true
+  :privacy-and-retention "Synthetic/sandbox/dev only, no personal capture, zero spending, existing assets only; 24h raw images, 7d raw text, propagated derived deletion and explicit accepted-knowledge consent remain unchanged."}
+ :reflection
+ {:lesson "Test deadline service races at completion, mutable Buffer ownership across async preflight, and the exception-to-result boundary. Passing artifact seals and ordinary negative-path tests do not cover those compositions. Keep simulator correctness findings separate from acknowledged live capability gates."
+  :p-efficiency 0.8 :p-friction 0.25 :p-skill-candidate 0.4
+  :receipt-owner :parent :session-mycology-owner :parent
+  :separate-ledger-or-spore-write false}
+ :write-accounting
+ {:persistent-write-only "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-ocr-runner-code-v1.edn"
+  :product-code-artifact-or-test-edits false :board-or-ledger-edits false
+  :pr-edits false :commits false :pushes false :package-installs false
+  :network-endpoint-service-or-model-operations false
+  :ocr-native-imports false :personal-data-operations false
+  :reviewer-authored-scratch-files 0}}

@@ -1,0 +1,85 @@
+{:review/id :s2a-readback-boundary-design
+ :date "2026-11-03"
+ :kind :read-only-semantic-boundary-probe
+ :verdict :adapter-design-recommended-not-implementation-approved
+ :scope {:source "c399b60e1676c47778445c1098eb541ab38743cb"
+         :owner "788cdd3434615a7932b924e68520dbf7f88408c2"
+         :contract-digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+         :red "7054b48b43d4ae5e4fd5ff89d0eb1f5780d63169"
+         :red-result-provenance :parent-reported-five-failures-zero-errors-not-rerun-because-integration-tests-have-effects}
+ :effects {:production-edits false :append-calls 0 :fixture-creation false
+           :schema-history-writes false :board-writes false :ledger-writes false
+           :commits false :services false :model-calls false
+           :only-created-artifact :this-review}
+ :observed
+ {:draft "Read actual uncommitted src/oikos/infra/desktop_fixture.cljs and scripts/test_desktop_integration.clj, RED commit/test, frozen safe_reference.cljc, frame.cljc, fixture and plain_event_test.cljc, owner shape/edn.cljc and infra/ledger.cljs, cached edamame core/parser source. Actual owner HEAD matches pin. Scoped git diff of frozen law/tests/contracts against c399 is empty. All nine hashes were not independently recomputed in this probe."
+  :failure-path "Draft verify-authority! parses permit using owner read-one then calls safe/qualified? on metadata-bearing context. Draft replay! calls canonicalize-files, whose parsed events likewise reach frozen replay with metadata. Both fail closed correctly. This is a representation boundary gap, not permission to relax safe law."
+  :reader "Owner read-one uses edamame/parse-string-all with {:all false}. That does NOT disable metadata syntax, discard syntax, or all built-in tags."
+  :dependency-source {:path "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps"
+                      :parser-sha256 "93f8bcfb2db9556534a87e9bdb47dcc87a1ed9824b4f7b868b2d6d4fc7023944"
+                      :core-sha256 "f83af1880bfcce96ee54888340def50adf400a2aaf4931b33e21cebcdeb78991"
+                      :source-reading "parser normalize-opts supplies keyword :row/:col/:end-row/:end-col and :end-location true; parse-next uses vary-meta to associate these positions, overwriting colliding wire metadata keys. core documents :location? and :postprocess, but owner exposes no option argument. NBB/BB bundle their reader; inspected cached source is supporting evidence, not proof of bundled source identity. Runtime behavior was independently probed in each."}}
+ :actual-pure-probes
+ {:invocation "bb and nbb -cp src:test:<pinned-clio>/src:<existing-clio-nbb-cache>/nbb-deps -e <inline probe>; no probe source file, installation or persisted fixture."
+  :results-identical-on [:bb :nbb]
+  :owner-examples
+  [{:wire "{:a [1 {:b 2}]}"
+    :root-meta {:row 1 :col 1 :end-row 1 :end-col 16}
+    :nested-vector-meta {:row 1 :col 5 :end-row 1 :end-col 15}}
+   {:wire "^{:row 99 :secret true} {:a 1}"
+    :accepted true :root-meta {:row 1 :col 1 :end-row 1 :end-col 31 :secret true}}
+   {:wire "{:a ^{:row 99} [1]}" :accepted true
+    :nested-vector-meta {:row 1 :col 5 :end-row 1 :end-col 19}}
+   {:wire "#x {:a 1}" :accepted false}
+   {:wire "#inst \"2026-11-03\"" :accepted true :value-kind :date}
+   {:wire "#_ {:secret true} {:a 1}" :accepted true :value {:a 1}}
+   {:wire "{:a true :b false}" :accepted true}]
+  :roundtrip {:fixture :baseline :writer-expression "pr-str (f/baseline), exactly owner append-record! serialization primitive, without calling writer effects"
+              :owner-readback-value-equal true :owner-schema-valid true
+              :owner-readback-root-meta {:row 1 :col 1 :end-row 1 :end-col 962}
+              :frozen-safe-before :refused
+              :fresh-construction-after-exact-location-key-check-safe :ok
+              :canonical-edn-identical true :event-id-sequence-causes-identical true}
+  :fresh-construction-probe "Recursion only through exact plain array/hash map and vector types, deny records; metadata must be nil or exact four keyword location keys with positive integer values. Rebuild maps using into {} and vectors using mapv, recursively visiting keys/values; scalar requires frozen plain-data?. This is an in-memory proof of representation compatibility, NOT a qualified decoder: the wire grammar gate was not implemented/probed."
+  :unknown-metadata-key-refused true
+  :forged-location-only-wire-indistinguishable-after-reconstruction true
+  :raw-in-memory-baseline-with-only-four-location-keys-still-frozen-unsafe true
+  :discard-and-built-in-tag-coverage :explicitly-observed
+  :probe-correction "Initial generic clojure.walk/postwalk stripping probe failed in BB: MapEntry cannot be cast to IObj; NBB accepted it. Replaced only in ephemeral probe with exact-type recursive fresh construction, which passed both. Do not ship generic postwalk stripping."
+  :frame-component-limit "Frozen S1A frame/read-one correctly rejects ^, #tag and #_ examples, but also rejects true/false. Consequently it cannot gate all v1 events (content deletion true), authenticated review context (independent? true), or schema snapshots. Do not silently reuse it as a complete safe-reference decoder. No frozen frame edits proposed."}
+ :recommended-boundary
+ {:name :private-owner-readback-decoder
+  :input :bounded-captured-wire-string-only
+  :not-input [:parsed-value :caller-review-context :path-to-reread :arbitrary-metadata-bearing-value]
+  :semantics
+  ["Keep frozen safe_reference law, nine frozen files, digest and owner unchanged. All direct application event/partition input still passes frozen require-plain-data!/validate-event! before Clio or serialization. A raw tainted object must never be routed through pr-str then this decoder."
+   "Capture bytes once within the existing lock/read authority; enforce byte, line/event-count and nesting/work limits; strict UTF-8 decoding (reject invalid encodings) to immutable string. For permit/review, hash those same captured bytes, compare exact pinned digests, and decode that same immutable string, never hash a file then reopen it. Mutable Buffer supplied by caller is not a custody guarantee; capture/copy into private immutable representation before checking."
+   "Apply a small conservative lexical refusal gate to that exact string BEFORE owner read-one: reject ^ and # outside double-quoted strings at any depth, reject semicolon/comments and backslash/character syntax outside strings, distinguish escaped quotes/backslashes inside strings, and refuse unfinished strings/escapes. No quote-count regex: correct string/escape state is necessary. Rejecting all dispatch outside strings excludes records, unknown and built-in tags, #_, reader conditionals/eval, sets, namespaced-map dispatch. Literal ^/#/semicolon inside strings are data, not metadata syntax. Owner remains sole actual EDN decoder and exact-one-form checker; this gate is NOT a second EDN parser, ledger engine or canonicalization kernel."
+   "Call fixed pinned clio.shape.edn/read-one exactly on the gated captured string. Do not expose a public function accepting an already-read object. Recursively inspect the resulting tree BEFORE fresh construction: allow only exact plain array/hash maps, exact vectors and frozen scalar domain; refuse records, symbols, lists, sets, tagged/host values and custom wrappers; visit keys too. Metadata on collection nodes may only be the exact four keyword keys :row :col :end-row :end-col with positive safe integer values and nondecreasing lexicographic start/end, consistent with byte/text bounds. Refuse unknown keys, empty metadata, unexpected metadata on scalars. Validate before removal; do not use select-keys to discard unknown metadata. Location shape alone is NOT provenance; gate plus direct private call establishes its source."
+   "Construct fresh metadata-free plain maps/vectors recursively. Run unchanged frozen law over complete decoded partition/event BEFORE owner canonicalization and desktop replay; errors are constant input/cause-free Oikos diagnostics. Safe identity and schema checks remain unchanged; no metadata enters event identity."
+   "For histories, decode captured nonblank ledger lines privately, preserving ordering/duplicates, then call existing owner domain canonicalize on decoded partitions plus new already-safe event. Reuse owner schema validation/history/admission/locking/append; do not call canonicalize-files on paths after gating because it rereads and reintroduces metadata. Owner append may internally reread under its own lock as designed; do not replace its admission engine. External writers not honoring adapter coordination lock remain an explicit concurrency threat; prove locking assumptions before append."
+   "For authenticated parent evidence, prefer freshly construct only exact closed expected/artifact/trusted-review fields from the authenticated same-byte read, validate types/keys, then frozen qualified?. This transfers authenticated evidence, never manufactures approval from an untrusted passed-in map. No hypothetical global immutable provenance service is required."]
+  :why-not-owner-change "An additive owner options/decode primitive could suppress locations but still needs raw metadata refusal; owner changes require new source SHA/digest qualification and downstream pin review. Not necessary to prove this adapter design; do not add a replacement kernel."
+  :why-not-metadata-whitelist-alone "Actual ^{:row 99} is accepted and overwritten by owner locations; four-key inspection cannot distinguish forged syntax. Never sanitize caller objects even with identical location maps."
+  :framer-reuse "S1A frame remains a useful qualified restricted protocol component, not a complete byte grammar gate for this boolean-bearing domain. A new tiny lexical refusal gate is new adapter source requiring independent review; it does not amend S1A or activate its held BB operational adapter."}
+ :required-red-green-tests
+ [:bb-and-nbb-same-captured-bytes
+  :top-and-nested-raw-metadata-including-exact-location-only-forgeries
+  :metadata-on-map-keys-and-vectors :unknown-metadata-keys-and-empty-metadata
+  :record-tags :unknown-tags :built-in-inst-and-uuid-tags :discard-and-reader-conditionals
+  :comments-char-literals-and-escaped-quotes-cannot-hide-forbidden-syntax
+  :literal-caret-and-hash-in-strings-are-not-syntax
+  :invalid-utf8-overlong-bytes-depth-work-count-and-multiform-refusal
+  :actual-owner-pr-str-read-one-private-decoder-all-six-event-types-including-content-ref-true
+  :raw-in-memory-metadata-record-and-secret-regressions-unchanged-constant-unsafe
+  :canonical-identity-event-id-sequence-and-causes-unchanged
+  :same-history-coverage-gap-reconciliation-and-owner-schema-validation
+  :authenticated-permit-same-byte-hash-review-context-qualified
+  :path-replacement-between-hash-and-read-cannot-substitute-evidence
+  :existing-history-unknown-and-forged-metadata-refused-before-append
+  :no-double-read-canonicalize-files-bypass
+  :fresh-independent-adapter-code-review-before-any-actual-write]
+ :limits "This is a demonstrated representation failure and a scoped design, not a deployed fix, complete lexical-gate proof, approval of drafts, or fixture result. No integration RED rerun or actual owner writer invocation because those tests append/create. Pure probes used the owner's actual serialization expression, reader, schema and canonical functions. Parent review context failure was traced in source, not independently parsed from actual evidence bytes in this probe. Dependency implementation identity is not fully pinned by owner Git SHA alone. Frozen hashes remain parent-qualified, not freshly certified here."
+ :reflection {:lesson "Reader-generated locations and user metadata are indistinguishable after parse when keys collide. Establish byte-level syntax custody before a private decode; retain strict rejection at the in-memory law boundary."
+              :spore-created false :reason :bounded-design-probe-no-new-ledger-or-spore-authority}
+ :next "Implement only the new private adapter/gate and red tests, obtain independent exact-source decode review, then consider owned synthetic persistence under parent permit. Live collectors/content stores remain held; pure S3A/S4A in-memory work unaffected."}

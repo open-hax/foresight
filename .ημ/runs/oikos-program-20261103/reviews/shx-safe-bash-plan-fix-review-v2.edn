@@ -1,0 +1,55 @@
+{:review/id :shx-safe-bash-plan-fix-review-v2
+ :date "2026-11-03"
+ :scope :independent-exact-planning-correction-review
+ :context :己
+ :confidence 0.99
+ :verdict :approve
+ :prior-review ".ημ/runs/oikos-program-20261103/reviews/shx-safe-bash-plan-review-v1.edn"
+ :subject {:worktree "/home/err/spaces/foresight/shx/.worktrees/feat/oikos-safe-bash-20261103"
+           :prior-head "cbd0b4349b3f338a86e5b32638b4ac7325786686"
+           :head "79ca039d0137aca1e59ebdbf4cd16eb46f737495"
+           :head-and-direct-parent-verified true
+           :status-at-inspection :clean
+           :changed-files ["docs/specs/restricted-bash-v1.md"]
+           :spec-sha256 "2dbeda258a384caa089e64ec578f57abfa85e123581559a603e55615c2abdcdc"
+           :prior-spec-sha256 "77b85504cc374dc07136c4f1412460c790c3db9e8bf94829246cb6e544874f88"
+           :unchanged-design-sha256 "bd23788783fdd8c41768ee5e26133b8725c7b6a0f0ce36fd7807e4d6d7401058"
+           :committed-and-working-spec-hashes-match true}
+ :settlements
+ [{:finding/id :shx-plan/validation-operation-envelope
+   :priority :P2
+   :status :settled
+   :context :世
+   :confidence 1.0
+   :evidence [{:path "docs/specs/restricted-bash-v1.md" :lines [151 167]
+               :observation "Separate exact closed RenderEnvelope and ValidateEnvelope explicitly use :operation :render and :operation :validate. Each named fixed entry accepts only its own envelope. Opposite, missing and unknown operations, missing/unknown keys and supplied trusted-pins/executable/classpath fields reject before any domain work, including otherwise well-shaped opposite-operation input. Trusted pins remain outside both wire envelopes."}
+              {:path "docs/specs/restricted-bash-v1.md" :lines [199 199]
+               :observation "B01 explicitly requires both exact envelopes, each entry's own-operation positives on actual BB and NBB transports, and operation/key rejection before domain work."}
+              {:path "docs/specs/restricted-bash-v1.md" :lines [209 209]
+               :observation "B11 explicitly requires both real pinned JVM entries on both BB and NBB, literal :render/:validate positive cases, both crossed operations with otherwise well-shaped fields, and missing/unknown operation and injected-field rejection with sanitized nonzero protocol failure before domain work. Fake fixtures cannot replace positive helper proof."}]
+   :assessment "The correction fully addresses the sole v1 planning finding. The tests are explicit future acceptance obligations, not executed implementation evidence. No further correction is required for this finding."}]
+ :remaining-findings []
+ :admission {:parent-may-authorize-sandbox-owner-red-green true
+             :scope "Existing authorized shx owner prerequisite only, in the isolated owner worktree with synthetic sandbox fixtures and the previously reviewed planning constraints. This settles the local planning gate; no new user decision or hosted review queue is required."
+             :automatic-board-transition-or-work-started false
+             :production-implementation-qualified false
+             :api-or-positive-validator-availability-established false
+             :oikos-positive-bash-consumer-admission false
+             :installed-promotion false
+             :later-gates "Actual implementation, B01-B13 qualification including both real transports, independent renderer/validator implementation review and accepted pins/handoff still precede positive S1B consumption."}
+ :baseline {:source :user-reported-owner-rerun
+            :context :彼 :confidence 0.55
+            :reported {:strict-checks 7 :all-exit-zero true :tests 19 :assertions 46}
+            :pre-existing-typechecker-deprecation :still-visible
+            :zero-warning-qualified false
+            :reviewer-reran-gate false
+            :disposition "Unchanged implementation-qualification hold: retain the visible warning until an evidenced narrowly scoped owner resolution and actual zero-finding qualification. No suppression, demotion or broad unrelated refactor is admitted by this planning approval."}
+ :review-limits {:only-correction-reviewed true
+                 :read-only-git-and-hash-verification true
+                 :implementation-tests-or-runtime-helpers-run false
+                 :source-doc-card-board-ledger-pr-writes false
+                 :commits-service-model-or-installation-effects false
+                 :only-authored-path ".ημ/runs/oikos-program-20261103/reviews/shx-safe-bash-plan-fix-review-v2.edn"
+                 :parent-owns-provenance-and-reflection-ledgers true}
+ :reflection {:learning "Settle the exact revised discriminator and its explicit positive/negative transport obligations without reopening the accepted design or treating future tests as runtime evidence."
+              :spore-created false :separate-ledger-write false}}

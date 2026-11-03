@@ -1,0 +1,149 @@
+{:review/id :oikos/s7a-hard-runner-plan-review-v1
+ :review/kind :independent-adversarial-planning-review
+ :review/date "2026-11-03"
+ :review/evidence-at "2026-11-03T22:30:43.511156+00:00"
+ :review/context {:symbol :己 :tier :observed-sources-with-labelled-design-inferences}
+ :review/independence {:plan-author false :role :independent-reviewer :nested-agents-spawned 0}
+ :subject {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-hard-runner-plan-v1.edn"
+           :lines-read [1 228] :bytes 38167
+           :sha256 "95a45f037ab5c2d60ed2bd23e6121825314a2b892e945dfc5782822165eeb431"}
+ :verdict :planning-changes-requested-before-functional-red-green
+ :finding-count 4
+ :priorities {:P0 0 :P1 0 :P2 4 :P3 0}
+ :implementation-admission false
+ :allocator-admission false
+ :live-execution-admission false
+ :summary "The three-role Python boundary is credible in principle. Settle four concrete planning seams, principally the exact owned allocator and startup watchdog, before functional OS-edge work. No missing implementation is treated as a defect. This review does not demand universal real-time termination, server cancellation, atomic response attestation, a new GovOne OCR verifier, or renewed batch/restart consent."
+
+ :source-prefixes
+ {:run "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/"
+  :coordinator "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/"
+  :product "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a/"
+  :release "/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55/"
+  :site "/home/err/.local/lib/python3.12/site-packages/"}
+ :anchor-convention "plan means the exact subject above; other relative paths use their explicitly named prefix. Ranges are inclusive."
+
+ :grounding
+ {:read-before-runtime-conclusions
+  [{:prefix :run :path "decisions/ocr-six-image-conditional-authorization.edn" :lines [1 19]
+    :sha256 "0f49bf32fd269c5b34faa9d97b7711f496a3c017c065798a70e3af74469c726b"}
+   {:prefix :run :path "reviews/govone-ocr-admission-discovery.edn" :lines [1 161]
+    :sha256 "7e6f7820f0ec723deb7b76204176018e9e7911c0d1f24895c6e9f88f9db4983e"}
+   {:prefix :run :path "reviews/ocr-attestation-runtime-v1.edn" :lines [1 105]
+    :sha256 "670bb1e0f9c860d9ac6eca8b7800272aa3a02e29474db598f445044409ddcb63"}]
+  :offline-review {:prefix :run :path "reviews/s7a-ocr-runner-fix-review-v2.edn" :lines-read [1 220]
+                   :qualification :prior-independent-offline-simulator-approval-not-live-proof}
+  :product-head {:method "git rev-parse HEAD, read-only" :confidence 1.0
+                 :value "7cd9320f2c9991f8e36e15e59478b80789ae3b25"}
+  :instructions "Inherited home/spaces/Foresight instructions, both Oikos root/worktree AGENTS.md and supplied docs/agile instructions. Coordinator .ημ AGENTS.md glob found none. Parent owns receipts/reflection; this task permits only the new review file."
+  :additional-reads ["product src/oikos/law/ocr_batch.cljc:1-111"
+                     "product eval/ocr-runner/README.md:1-171; eval/s7a/corpus.edn:50-66"
+                     "coordinator S7A card:1-74; docs/notes/oikos-execution-plan.md:280-314,609-642"
+                     "run reviews/s7a-runtime-inventory-v1.edn:1-150, historical only"
+                     "release server.py:1-305 and launch.py:1-34"
+                     "selected installed dependency sources cited below; no dependency import"
+                     "selected OCR unit directives and four-line identity drop-in; /proc/3187253/cgroup only"]
+  :runtime-limit "The runtime report records locally qualified startup INPUT identity, PID 3187253/start ticks 45402858, not compiled/dependency cryptographic attestation or batch admission. This reviewer did not refresh health/identity, inspect process environment/memory, or requalify effective unit state. The current proc cgroup path names ocr-npu.service; it does not refresh the report's identity."
+  :restart-limit "The original unit fragment says Restart=always, but the reviewed identity drop-in says Restart=no and the prior live report verified effective Restart=no. Do not misreport the base fragment as a current restart regression. No additional restart is allowed."
+  :test-status :source-review-no-functional-tests-run}
+
+ :findings
+ [{:id :s7a-hard-plan/exact-owned-allocator-contract-unselected
+   :priority :P2 :context :己 :confidence 0.99
+   :title "Gate 2 delegates allocator design instead of specifying the exact qualification and tool scope."
+   :anchors [{:path :plan :lines [96 112]}
+             {:path :plan :lines [206 214]}
+             {:prefix :coordinator :path "docs/notes/oikos-execution-plan.md" :lines [625 626]}]
+   :problem "The only concrete candidate is 'possibly an agent-owned transient USER scope'; authority says the parent must choose an allocator. No selected allocation entry point, exact newly owned unit/subtree identity, controller/delegation handshake, placement sequence, kill targets, or failure cleanup contract is supplied. A generic request to qualify an allocator is not yet the exact owner/tool plan required before functional changes. Existing writable i3 directories correctly grant nothing."
+   :impact "The implementer cannot tell which narrowly granted OS operations are in scope, whether systemd's launcher is counted, or how to avoid touching existing managed units. This is a missing planning contract, NOT a claim that an unimplemented allocator must already pass."
+   :minimal-fix "Choose ONE user-manager allocation mechanism and document its exact invocation/API properties and per-run unit naming, actual delegated-dir-FD handoff, empty controller parent/three leaves, membership and limit readback, launcher accounting, and cleanup on every failed placement/admission. Specify a grant limited to creation/configuration/kill/removal of that newly allocated agent-owned subtree and its own processes; expressly exclude i3, OCR and ancestor reconfiguration. List the owned no-socket qualification probes (startup/readback/leaf OOM/pids/cleanup) and expected failure outputs. Parent reviews that plan/tool scope before performing it; unknown/unavailable capability remains HOLD, not permission to try another allocator."
+   :verification "A reviewer can enumerate every proposed unit/cgroup write and process target from the plan, without inventing paths or selecting a different mechanism. No allocator qualification is claimed by this review."}
+
+  {:id :s7a-hard-plan/bootstrap-deadline-has-no-independent-dispatch-owner
+   :priority :P2 :context :己 :confidence 0.96
+   :title "Recording t0 before exec does not cover a stalled first supervisor/bootstrap startup."
+   :anchors [{:path :plan :lines [108 119]}
+             {:path :plan :lines [122 124]}
+             {:path :plan :lines [176 182]}]
+   :problem "The specification counts bootstrap/interpreter startup and requires t0 before workload exec, but names only the Python supervisor as independent timer owner. It does not identify who is already armed before the first counted supervisor/bootstrap exec, or how the immutable deadline crosses that startup. If that first exec/import/file read stalls before the supervisor loop, a stored deadline cannot itself dispatch SIGKILL. Starting t0 after supervisor initialization instead silently excludes counted bootstrap time."
+   :impact "There is a concrete unmonitored startup interval even on an otherwise normally scheduled machine. This is different from the accepted unavoidable Linux dispatch/D-state limitations."
+   :minimal-fix "As part of the chosen allocator, specify the already-active owner of the initial absolute deadline, the arming/readback and t0 handoff before the first counted exec, and the overlap/transfer to the nonblocking supervisor without resetting the timer. An existing manager deadline may be used only with its exact supported properties, signal/stop behavior and qualification specified; this review grants no such operation. Any extra workload watchdog process must fit the same aggregate budget and declared role/pids accounting. Add a shortened synthetic stall-before-supervisor-ready witness proving a kill request is dispatched without bootstrap cooperation."
+   :verification "Startup, preflight, each case and settlement share one deadline; a blocked initial bootstrap cannot leave the client waiting indefinitely. Do not claim exact real-time death or cancellation of server inference."}
+
+  {:id :s7a-hard-plan/second-hop-assessment-needs-real-dependency-disposition
+   :priority :P2 :context :己 :confidence 0.98
+   :title "The deferred assessment has a concrete installed import-time telemetry path to resolve."
+   :anchors [{:path :plan :lines [162 166]}
+             {:prefix :run :path "decisions/ocr-six-image-conditional-authorization.edn" :lines [11 17]}
+             {:prefix :site :path "openvino/__init__.py" :lines [104 109]}
+             {:prefix :site :path "openvino/tools/ovc/__init__.py" :lines [15 17]}
+             {:prefix :site :path "openvino/tools/ovc/telemetry_utils.py" :lines [41 64]}
+             {:prefix :site :path "openvino_telemetry/main.py" :lines [60 68]}
+             {:prefix :site :path "openvino_telemetry/backend/backend_ga4.py" :lines [18 22]}]
+   :problem "Selected server-route inspection is correctly not called an air gap, but the planning handoff still delegates the entire dependency/runtime-policy assessment. Installed OpenVINO 2025.4.1 imports its optional conversion tools, whose available path initializes telemetry with enable_opt_in_dialog=False and sends general_import. Installed telemetry accepts NO_FILE in that mode, and its GA4 backend has outbound urlopen/subprocess code. Thus 'local files plus no application forwarding' is not the complete available assessment."
+   :impact "A real outbound opportunity exists in the dependency surface. This review observes DISK SOURCE only: it does NOT prove the optional import succeeded in the pinned worker, telemetry was enabled, any traffic occurred, or image/text bytes were forwarded. The import event is a startup path, not evidence that each OCR request resends it."
+   :minimal-fix "Incorporate this bounded source assessment and explicitly dispose of current runtime/dependency configuration and the fixed batch's reachable path. Obtain narrowly scoped owner evidence for existing-worker telemetry/offline configuration or other concrete no-second-hop policy already in force, without secrets/native imports/restart. A newly edited environment or opt-out file alone is not proof of an already initialized singleton's state. If only application-level no-image-forwarding can be qualified, label exactly that and settle its sufficiency under the recorded consent; do not call it total egress denial. IF OS-enforced server egress denial is actually required, name the owner deployment prerequisite separately and HOLD: this plan grants no firewall, service hardening, namespace or restart operation. Do not invent a GovOne OCR call to authorize telemetry."
+   :verification "The revised plan cites actual dependency/configuration evidence and a scoped judgment, rather than an unperformed assessment or an air-gap claim. Unsupported cloud/disclosure remains denied."}
+
+  {:id :s7a-hard-plan/expiry-executor-and-registration-unbound
+   :priority :P2 :context :己 :confidence 0.98
+   :title "The raw-store expiry contract names no actual owner executor or registration seam."
+   :anchors [{:path :plan :lines [141 149]}
+             {:path :plan :lines [183 189]}
+             {:prefix :coordinator :path "docs/notes/oikos-execution-plan.md" :lines [618 626]}
+             {:prefix :product :path "eval/ocr-runner/README.md" :lines [156 170]}]
+   :problem "'Qualify the existing owner's retention/cleanup executor' is a correct hold, but no executor, callable entry point, custody owner or durable registration acknowledgement is identified. The fixture matrix therefore has no concrete retention integration target. This reviewer found no such implementation in the inspected S7A checkout; that bounded search is not proof of host-wide absence."
+   :impact "A 30-second process cannot perform its own future deletion, so expiry timestamps alone cannot complete this store's planning contract. Leaving the executor anonymous invites a new daemon or an unrelated service change outside the grant."
+   :minimal-fix "Name the actual existing owner cleanup executor and narrowly scoped registration mechanism, including run-directory identity, 24h image/base64-request expiry, 7d OCR/text expiry, interrupted/orphan coverage and derived deletion. Specify which owner retains responsibility after client death and what registration evidence must exist BEFORE raw run data is admitted. If no executor is available, record that exact owner capability gap and keep durable-store/live admission held; do not invent a service or claim future deletion. Frozen versioned synthetic source fixtures are NOT expiry targets, and no automatic backup may extend the raw run copies' retention."
+   :verification "Use owned synthetic run-directory records to verify registration failure blocks admission and the named executor targets only the registered run objects. Executor existence/registration remains unqualified here."}]
+
+ :settled-interpretations
+ [{:topic :finite-linux-watchdog :context :己 :confidence 0.97 :decision :sufficient-prospective-semantics
+   :anchors ["run decisions/ocr-six-image-conditional-authorization.edn:3-14" "plan:100,116-119,147,160"]
+   :judgment "The actual consent bounds this CLIENT and request attempts. It does not require universal Linux real-time termination, cancellation of already accepted native server work, or zero late kernel disk completion. An independent prearmed deadline, bounded kill dispatch/no later SEND and honest unknown/partial outcome suffice prospectively once qualified. F2 concerns missing startup coverage, not impossible perfection."}
+  {:topic :response-binding :context :己 :confidence 0.95 :decision :local-instance-bracketing-sufficient-for-this-synthetic-slice
+   :anchors ["plan:156-160" "run reviews/ocr-attestation-runtime-v1.edn:78-94" "product eval/ocr-runner/README.md:41-45"]
+   :judgment "Under the recorded cooperative local trust base, the proposed pinned pidfd/PID/start/listener plus exact before/after identity, socket tuple and raw bytes can meet the response-binding gate as LOCAL INSTANCE-BRACKETED provenance. It is not atomic/cryptographic response attestation. No source in this scoped consent requires a server nonce patch or another restart. Actual consuming checks still need review/test; this is not current response qualification."}
+  {:topic :durable-crash-outcome :context :己 :confidence 0.98 :decision :accept-design
+   :anchors ["plan:133-149"]
+   :judgment "Durable preparation and each counted INTENT before SEND, with a precommitted unknown default and fsynced immutable raw/settlement references, is an appropriate crash contract. An arbitrary frozen filesystem cannot be promised a new final timeout fsync. Lost ack/intent stops permanently; no rerun/reuse. Missing implementation is not a planning finding."}
+  {:topic :memory-and-minimality :context :己 :confidence 0.96 :decision :accept-three-role-direction
+   :anchors ["plan:71-90,95-114"]
+   :judgment "Separate supervisor/network/writer roles credibly keep fsync outside the watchdog. Aggregate cgroup memory.max=256MiB, swap.max=0 plus leaves/AS is the right claim; AS-only excludes charged kernel/page-cache memory. A synchronous two-role supervisor/store does not satisfy this watchdog, and no equally credible smaller design was established. Node's recorded AS startup failure is not reason to remove the cap. Real allocator/startup and complete import footprints still need qualification."}
+  {:topic :authority-and-dependencies :context :己 :confidence 0.99 :decision :accept-separation
+   :anchors ["plan:132-139" "run reviews/govone-ocr-admission-discovery.edn:25-53,151-160" "coordinator S7A card:54-70"]
+   :judgment "Separate existing human consent, fresh owner/kernel resource observations and inherited trusted parent launch context. A caller hash/boolean is not authority; a signed generic OCR verifier was not established and must not be invented. S7A has no S6A dependency. Same-UID cooperative provenance may be stated honestly without imposing hostile-same-UID authentication as a new goal. GovOne cloud policy remains unchanged."}
+  {:topic :retention-and-coverage :context :己 :confidence 0.98 :decision :accept-scope
+   :anchors ["plan:118,148-149,154-157" "coordinator S7A card:68"]
+   :judgment "At most six sequential fixed 480x160 images, no retries or substituted labels, partial coverage rather than a promised six-case completion, and separately counted bounded GETs are consistent with consent. Versioned synthetic fixture originals remain intact; newly written raw run images/base64 bodies/text retain the default expiry. This does not require deleting Git fixtures."}]
+
+ :bounded-dependency-assessment
+ {:context :己 :confidence 0.97
+  :application "Reviewed release server.py:108-121 loads fixed local asset bytes; :183-245 performs array/OpenCV/native inference; :275-288 decodes the supplied image and sends its result. No application forwarding or download call was found in this path. No route accepts another destination URL."
+  :dependency "Installed _ov_api.py:550-567 forwards byte-buffer model reads; :569-621 compiles existing objects through native Core; its infer wrappers contain no matched telemetry/download/HTTP call. Native implementations remain trusted/unexamined, not air-gapped. OpenVINO's optional import-time telemetry path above prevents treating selected Python application source as a total-network proof."
+  :policy-evidence-limit "Only selected static unit directives and the existing identity drop-in were read. No effective network policy, current singleton consent, current loaded dependency byte identity or kernel egress enforcement was verified. No telemetry consent/CID file, process environment, private input, network trace or unrelated socket was inspected."
+  :disk-source-sha256
+  {"release/server.py" "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"
+   "site/openvino/__init__.py" "baa4969e80bed33845b1a47e842df457ac57d59f051f07878da90c0a32388727"
+   "site/openvino/tools/ovc/__init__.py" "9708216d518dcfe80f35d5f15f6b1c9134d1ab18fc006ff8d7f12dcf78572168"
+   "site/openvino/tools/ovc/telemetry_utils.py" "cf9af08020d9c0b26901084feca738c129868021adf79a813dcf7dd21121efec"
+   "site/openvino_telemetry/main.py" "b23a9f43eba5b73893fb1ff68855389907ed15acf4d36b5b26f718cf049ca945"
+   "site/openvino_telemetry/backend/backend_ga4.py" "aa923081b4a82d93e61e5ab818dbf9a0124834032f15c8d6516bd3c01918278d"}}
+
+ :handoff
+ {:next-action "Architect revises this ONE boundary plan with the four minimal dispositions, starting with the exact owned allocator/startup deadline contract and tool grants; obtain independent re-review before functional OS-edge RED/GREEN."
+  :not-blocked-by-this-review "Read-only discovery and pure offline shared vectors, within an explicit parent scope, need no live OCR or cgroup admission. This is not an instruction to perform them now."
+  :questions-required-now []
+  :question-policy "Do not re-ask batch/restart/download permissions. No concrete unresolved user discretion was established by this review; owner capability discovery/design comes first. If a truly stronger guarantee is later demanded than the existing interface can supply, ask only that exact minimum distinction."
+  :unchanged-holds [:no-get-post :no-inference :no-restarts :no-model-load-download
+                    :no-private-input :no-cloud :no-service-hardening :no-live-allocator-effects
+                    :fresh-resource-and-parent-admission-still-required]}
+ :accounting
+ {:only-persistent-write "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-hard-runner-plan-review-v1.edn"
+  :product-edits 0 :board-edits 0 :ledger-edits 0 :pr-operations 0 :commits 0
+  :sockets-created 0 :http-requests 0 :ocr-posts 0 :native-imports 0 :model-loads 0
+  :cgroup-writes 0 :transient-unit-creation 0 :service-actions 0 :downloads 0
+  :tests "No product tests, native probes or process-control fixtures run. Read-only source/hash/HEAD checks and final EDN parse only."
+  :reflection {:receipt-owner :parent :session-mycology-owner :parent :separate-ledger-or-spore-write false
+               :p-efficiency 0.85 :p-friction 0.25 :p-skill-candidate 0.55 :spore nil
+               :lesson "A credible held design is not a capability claim, but the first executable handoff still needs a selected allocator and a timer owner before bootstrap. Follow actual dependency import edges: local OCR application source can coexist with optional telemetry without proving either image forwarding or total egress safety."}}}

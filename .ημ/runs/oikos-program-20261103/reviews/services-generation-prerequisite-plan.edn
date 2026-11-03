@@ -1,0 +1,87 @@
+{:report/id :services-generation-prerequisite-plan
+ :date "2026-11-03"
+ :context :世
+ :confidence 1.0
+ :phase :planning-only
+ :status :awaiting-independent-planning-review
+ :implementation-authorized-by-this-report false
+ :owner :services
+ :source {:repository "open-hax/services"
+          :canonical-remote "git@github.com:open-hax/services.git"
+          :remote-default "refs/heads/main"
+          :verification "git ls-remote --symref origin HEAD; git fetch origin main"
+          :base "3fdf9f3922271ea36e52247c3844b07f4eeb463e"
+          :base-choice "Current canonical remote default, not stale detached root. Fetch only updated remote refs; no root branch switch."
+          :root-head-preserved "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+          :root-unrelated-dirt-preserved [".agents/" ".github/workflows/agy-review.yml" "scripts/__pycache__/" "scripts/agy-review.sh"]
+          :worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+          :branch "feat/oikos-local-generations-20261103"
+          :commits ["401a8a282e664a63a15a810cb888e11e6ad1cb1d"
+                    "ebe5a49f00cfc3fb1501955d8707e6076cf7dc81"]
+          :review-head "ebe5a49f00cfc3fb1501955d8707e6076cf7dc81"
+          :spec "docs/local-generations-v1.md"
+          :spec-sha256 "318f216c130f1076ec33a9a72c2dc7e6fa381a6bb5a1be46c13f5a512a6b2d73"
+          :files ["README.md" "docs/deployment-model.md" "docs/local-generations-v1.md"]
+          :clean-after-commits true
+          :push false :pr false}
+ :instructions {:read ["/home/err/spaces/foresight/docs/notes/agent-scratch-cleanup.md"
+                       "parent reviews/s1b-owner-prerequisite-discovery.edn"
+                       "Services README.md"
+                       "Services docs/deployment-model.md"
+                       "Services docs/environments/promotion.md"
+                       "Services .github/workflows/code-quality.yml"
+                       "Services scripts/check-deployment-boundary.py"
+                       "Services scripts/check-edn-contracts.clj"]
+                :source-agents "No Services root/ancestor-worktree/docs AGENTS.md. Only tracked Services AGENTS.md is contracts/knoxx/AGENTS.md; no work there. Applicable outer instructions supplied in session."
+                :handoff-ledger :absent}
+ :design {:scope "Proposed narrow local artifact owner orchestration; DigitalOcean service deployment remains one lane. No installed effects."
+          :runtime "Portable .cljc pure laws, BB fixed facade, Python Linux stdlib anchored dir_fd/O_NOFOLLOW/flock OS edge; all proposed, not available APIs."
+          :real-runtime-probes ["bb -e expression passed" "nbb -e expression passed" "Python 3.12.3 dir_fd open/stat/rename/unlink/mkdir and O_NOFOLLOW present"]
+          :contract "Closed v1 plan/result/approval/seed/policy/journal shapes; opaque original descriptors and payload bytes; independent pinned non-executing validator required; no guessed shx API."
+          :ownership "Private provisioned fixture envelope only; immutable generation trees plus regular-file atomic current selection. No arbitrary home/config destination writes."
+          :limits "Cooperative writer lease and private parents required. Entire ancestor chain check plus rename is not universally atomic against hostile same-UID/root/mount mutation. Postcheck drift holds; unavailable OS capabilities do not fall back."
+          :recovery "Real compensation on failed/interrupted stages, old generation bytes/accepted metadata/selection restored or explicit uncertain hold. No inode/ctime/atime equality promise; journals/consumed nonce remain."
+          :matrix "Positive actual owner writes and approved rollback; paired working-edge race refusals; all partial native/durability stages and SIGKILL re-entry; compensation failures and unchanged unrelated siblings."
+          :handoff "Parent coordinates shx. Future consumer pins exact reviewed source, entries, validator revisions, fixture evidence and explicit owner acceptance artifact. No Oikos implementation or completion credit."}
+ :baseline {:unit {:command "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/tests -p 'test_environment*.py'"
+                   :runs [{:phase :before-edit :tests 123 :errors 2 :seconds 101.086}
+                          {:phase :after-main-doc-edit :tests 123 :errors 2 :seconds 95.684}]
+                   :result :failed
+                   :cause "Two Caddy setUpClass errors: verified CADDY_TEST_BINARY absent. No download/install attempted. Not a passing full baseline."}
+            :final-focused {:command "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest scripts.tests.test_environment_policy scripts.tests.test_environment_workflow"
+                            :tests 29 :seconds 1.180 :result :passed}
+            :static-passed ["git diff --check"
+                            "python3 scripts/check-deployment-boundary.py --self-test"
+                            "python3 scripts/check-deployment-boundary.py"
+                            "python3 scripts/check-deploy-source-pins.py"
+                            "python3 scripts/check-deploy-chain.py"
+                            "clj-kondo --lint scripts/check-edn-contracts.clj: zero errors/warnings"
+                            "bash -n digitalocean/lib/*.sh digitalocean/scripts/*.sh"
+                            "bash -n digitalocean/services/*/*.sh"
+                            "Python AST parse of scripts Python files"
+                            "YAML parse of digitalocean YAML and workflow YAML"
+                            "bb scripts/check-edn-contracts.clj: 370 resources"]
+            :not-run ["JVM workflow EDN command (BB parser check is not JVM evidence)"
+                      "Docker/network/install/deployment gates"
+                      "Python ruff/mypy (modules unavailable; no repository typecheck target found)"]}
+ :review {:independent-approval :none
+          :nested-architect-attempt "Tool refused: Subagent depth limit reached (1). Increase experimental.subagent_depth to allow nested subagents. No provider/model failure and no substitution."
+          :parent-action "Dispatch separate owner planning/architecture review on review-head and settle findings before any RED/GREEN."
+          :explicit-decisions-to-qualify ["Envelope-only artifact selection, no arbitrary installed destinations"
+                                          "Cooperative private-sandbox race and OS failure limits"
+                                          "Logical bytes/accepted metadata restoration, not inode/ctime/atime"
+                                          "Trusted owner approval channel, not signature authentication"
+                                          "BB pure facade plus Python anchored filesystem edge"]
+          :operator-question :none-required-before-independent-review}
+ :scratch {:owner-task :services-local-generation-prerequisite
+           :active-worktree true :free-before "46 GiB" :free-after "45 GiB"
+           :large-allocation false :cleanup :preserve
+           :reason "Active registered worktree with authorized unpushed commits; exact pushed/Drive backup not verified, deletion forbidden."}
+ :effects {:functional-code false :installed-promotion false :docker false
+           :deploy false :admin false :root-branch-switch false
+           :rheos-state false :parent-ledger false
+           :parent-report "Only this new parent report authored; no existing review artifact changed."}
+ :reflection {:efficiency 0.85 :friction 0.25 :skill-candidate 0.35
+              :spore-created false
+              :learning "Verify canonical default before creating isolated owner worktree; keep owner architecture proposal distinct from acceptance; depth-limited child must return review dispatch to parent, not self-approve."
+              :ledger-delegation "Parent explicitly owns admission/receipts/reflection ledgers; no separate ledger write."}}

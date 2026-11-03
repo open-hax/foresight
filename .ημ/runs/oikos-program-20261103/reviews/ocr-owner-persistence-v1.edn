@@ -1,0 +1,165 @@
+{:report/id :oikos/ocr-owner-persistence-v1
+ :report/at "2026-11-03T21:20:37.951154+00:00"
+ :report/kind :scoped-owner-persistence-without-runtime-change
+ :report/status :unit-committed-locally-both-publications-blocked
+ :report/confidence 0.99
+ :report/outcome "Committed only the already active reviewed override on the existing unit-owner branch. No push was attempted: exact source history reaches desktop-derived private evidence and its configured origin is public; unit branch publication would include five unrelated preexisting unpublished commits. Neither blocker was bypassed."
+ :instructions
+ {:applicable-read ["/home/err/AGENTS.md"
+                    "/home/err/.config/i3/AGENTS.md"
+                    "/home/err/.config/i3/.worktrees/feat/oikos-ocr-attestation-20261103/AGENTS.md"
+                    "/home/err/.config/systemd/user/AGENTS.md"
+                    "/home/err/spaces/AGENTS.md"
+                    "/home/err/spaces/foresight/AGENTS.md"
+                    "AGENTS.md"]
+  :additional-nested-agents-found false
+  :source-branch-exception "User explicitly authorized publication of the existing isolated task branch; neither the task branch nor original device branch was switched."
+  :unit-reload-boundary "Parent already edited, daemon-reloaded, independently reviewed and activated these exact bytes. This worker did not edit the override or perform another reload/start/restart. Fresh effective NeedDaemonReload=no and exact hash preserve that completed sequence."
+  :receipt-owner :parent :session-mycology-owner :parent}
+ :prior-evidence
+ {:code-review "ocr-attestation-fix-review-v2.edn"
+  :concrete-review "ocr-attestation-concrete-review-v3.edn"
+  :runtime-review "ocr-attestation-runtime-v1.edn"
+  :user-recovery-decision "../decisions/ocr-recovery-restart-no.edn"
+  :prior-one-restart-grant :consumed
+  :additional-starts-authorized 0
+  :automatic-restarts-required "no"}
+ :source-owner
+ {:worktree "/home/err/.config/i3/.worktrees/feat/oikos-ocr-attestation-20261103"
+  :branch "feat/oikos-ocr-attestation-20261103"
+  :reviewed-commit "6626d680f079c3330fee1df1f3565475d7ef1a55"
+  :head-matches-reviewed-commit true
+  :worktree-clean-before-and-after true
+  :index-empty-before-and-after true
+  :committed-scope-inspected "415987dbf5c21e779826a232018e7940fb1be66c..6626d680f079c3330fee1df1f3565475d7ef1a55, devops/ocr only; baseline import retained and authorized, not rewritten."
+  :reviewed-file-identities
+  [{:path "devops/ocr/server.py" :sha256 "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"}
+   {:path "devops/ocr/launch.py" :sha256 "63a956d06f8538267f26e8847dfa2e37f296aca7c5a063650665f5ce67b375d6"}
+   {:path "devops/ocr/test_attestation.py" :sha256 "7a6a01bab930cd1b1aa80c8f5cc1b680dd4b856f0d83172da583901262b9430a"}
+   {:path "devops/ocr/ATTESTATION.md" :sha256 "f8c59945462bba4ac8cd4e1eb876a506bdf7b1fdf38ef63d4bcb08379ed352d6"}]
+  :original-owner-preserved
+  {:path "/home/err/.config/i3" :branch "device/stealth"
+   :head "415987dbf5c21e779826a232018e7940fb1be66c"
+   :dirty-paths-before-and-after ["config" "devops/ocr/server.py"]
+   :server-sha256 "f0dc43fb911e749bbfd41025160bb0171f4b6c775f32fb907a1ece1dc824bf9c"
+   :index-empty true :writes 0}
+  :publication
+  {:status :blocked-private-evidence-in-reachable-history
+   :remote "origin"
+   :configured-and-effective-fetch-and-push-url "git@github.com:riatzukiza/i3-config.git"
+   :normal-url-without-embedded-credentials true
+   :remote-visibility {:method :unauthenticated-github-repository-api :private false :visibility "public"}
+   :requested-ref "refs/heads/artifact/oikos-ocr-attestation-6626d680"
+   :required-target "6626d680f079c3330fee1df1f3565475d7ef1a55"
+   :actual-ls-remote-before :absent
+   :actual-ls-remote-final :absent
+   :source-owner-remote-branch-readback {:ref "refs/heads/device/stealth" :commit "7d3e609adef6241a8e12788dca80669fe911eebe"}
+   :push-attempted false :remote-ref-created false :remote-backup-verified false
+   :privacy-inspection
+   {:commits-outside-local-origin-tracking-branches 17
+    :preexisting-ancestor-commits 13 :ocr-scope-commits 4
+    :reviewed-ocr-diff "Source, synthetic offline tests and ATTESTATION contain no observed user payload. The previously authorized working-source baseline import is not the blocker."
+    :blocking-ancestor "cc2fdbfe6f9991d8fe2c30b50d9f3182ba3c6415"
+    :blocking-path "devops/desktop-aliases.edn"
+    :blocking-line 6
+    :evidence-category :real-indexed-desktop-conversation-window-title-in-source-comment
+    :ancestor-reachable-from-exact-reviewed-commit true
+    :evidence-value-published false
+    :credential-scan "Two broad regex matches were inspected and are environment-variable-name parsing code, not literal credentials. A regex scan alone is not a comprehensive privacy proof."
+    :boundary "An artifact branch does not privatize reachable Git history. Exact reviewed-commit publication necessarily includes this ancestor. No history rewrite, alternate destination or public exposure was authorized to resolve this blocker."}}}
+ :unit-owner
+ {:repository "/home/err/.config/systemd/user"
+  :branch-before-and-after "device/stealth"
+  :parent "996d4d7a4ab176276433499e807f81478a579e14"
+  :commit "470a96888c21f9a467f8d06f7802e88f3021302b"
+  :commit-subject "ocr-npu: persist reviewed launch identity with automatic restarts off"
+  :committed-pathset ["ocr-npu.service.d/90-oikos-input-identity.conf"]
+  :override-sha256 "9a0236217a54f59a1444d9029dc0a0efc3fac530d8f7b5ba382014c51765567c"
+  :override-git-blob "96f51192551734b8f2c4d7b7deda82d72306515e"
+  :override-bytes 136
+  :override-exact-allowed-content true
+  :override-directives ["[Service]" "Restart=no" "ExecStart=" "ExecStart=/usr/bin/python3 /opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55/launch.py"]
+  :original-fragment-sha256 "1c7a0cdf0a9eed0a17039704fccdbad763d1f5f50da938017417f9432698f384"
+  :safe-commit-gates
+  {:preexisting-index-empty true
+   :fresh-branch-head-hash-and-exact-byte-checks true
+   :dropin-regular-file-current-user-owned true
+   :explicit-git-add-only-owned-override true
+   :staged-index-exactly-owned-path true
+   :staged-bytes-match-reviewed-override true
+   :staged-diff-reviewed true :staged-diff-check-exit 0
+   :ordinary-new-commit true :amend false :branch-switch false
+   :committed-parent-pathset-and-bytes-verified true
+   :postcommit-index-empty true
+   :other-status-entries-unchanged true
+   :barrier-dirty-diff-unchanged true
+   :barrier-dirty-diff-sha256 "81a7e2f913b26dfe62f74a089bf39a4ab3edbacaef11c8de1bd62fa0fcfcdbd4"
+   :untracked-files-swept false}
+  :selected-active-metadata-before-and-after
+  {:unit "ocr-npu.service" :ActiveState "active" :SubState "running"
+   :MainPID 3187253 :process-start-clock-ticks 45402858
+   :Restart "no" :NRestarts 0 :NeedDaemonReload "no"
+   :DropInPaths ["/home/err/.config/systemd/user/ocr-npu.service.d/90-oikos-input-identity.conf"]
+   :ExecStart {:interpreter "/usr/bin/python3" :flags []
+               :script "/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55/launch.py"
+               :systemd-exec-pid 3187253}
+   :RestartForceExitStatus "" :OnFailure "" :OnSuccess "" :WatchdogUSec "0"
+   :observation-limit "Extended properties were checked before commit; ActiveState/SubState/MainPID/Restart/NRestarts/NeedDaemonReload, process ticks and override hash were rechecked after commit. No unselected property dump was requested."}
+  :verification
+  {:command "systemd-analyze --user verify ocr-npu.service"
+   :invocations 2 :exits [0 0]
+   :diagnostic-bytes 230
+   :diagnostic-sha256 "e8e21a1af65eeefa334a3fa6cf1de9deb329328e7d785634e4a5899f98c90313"
+   :matches-independent-concrete-review-diagnostics true
+   :existing-unrelated-warnings ["ytwall assignment outside section" "barrier StartLimitIntervalSec in wrong section"]
+   :ocr-findings [] :warnings-fixed false :global-warning-free-claim false
+   :first-observation-wrapper "Stopped on an overly restrictive diagnostic-line matcher after systemd-analyze itself returned 0. Second observation matched the exact previously reviewed diagnostic hash; no warning was hidden and no configuration was changed."
+   :masked-unit-check {:unit "plasma-kwin_x11.service" :observed "masked"}
+   :bounded-private-journal
+   {:since "2026-11-03 20:19:40 UTC" :maximum-entries 30 :entries-read 5
+    :observed-start-event true :observed-npu-containing-message true
+    :error-word-entries 0 :raw-message-bytes-published 0 :raw-journal-persisted false
+    :limit "A bounded journal observation, not proof of full restart history or OCR quality."}}
+  :publication
+  {:status :blocked-unrelated-preexisting-unpublished-commits
+   :remote "origin"
+   :configured-and-effective-fetch-and-push-url "git@github.com:riatzukiza/systemd-user-units.git"
+   :normal-url-without-embedded-credentials true
+   :actual-ls-remote-ref "refs/heads/device/stealth"
+   :actual-ls-remote-before "b02e08a8ea962a6c6bd169d04c803b4f8cd65208"
+   :actual-ls-remote-final "b02e08a8ea962a6c6bd169d04c803b4f8cd65208"
+   :remote-visibility :not-established-unauthenticated-api-unavailable
+   :unrelated-preexisting-unpublished-commits
+   ["2b4dd2261322b93e2ac7daa0d2a29479de38719a"
+    "1621db0ae52eec366d71522d407f8440200d60d2"
+    "a6c836df6c3760750d25f9b568c3a2d4b31e1842"
+    "0d171a87f9978de250b1185d4fb60165034599c8"
+    "996d4d7a4ab176276433499e807f81478a579e14"]
+   :unrelated-path-categories ["federated workstation units" "Knoxx execution controller unit" "OpenCode credential-file reference drop-in" "desktop indexer unit" "original OCR unit"]
+   :unrelated-unit-content-read-for-publication false
+   :push-attempted false :remote-backup-verified false
+   :reason "Normal device/stealth push would publish all five preexisting unrelated commits plus the owned override commit. User explicitly required stopping rather than bundling these commits. Local commit retained; no force/rebase/amend or alternate branch publication."}}
+ :execution-boundary
+ {:coordinator-write-only ".ημ/runs/oikos-program-20261103/reviews/ocr-owner-persistence-v1.edn"
+  :unit-owner-commits 1 :source-owner-commits 0 :pushes 0
+  :source-edits 0 :unit-file-edits 0 :runtime-file-edits 0
+  :service-starts 0 :service-restarts 0 :daemon-reloads 0 :rollbacks 0
+  :http-requests 0 :ocr-posts 0 :inference-requests 0
+  :native-package-imports 0 :model-loads 0 :compiles 0 :warm-executions 0
+  :personal-runtime-input-reads 0
+  :historical-source-private-evidence "Inspected reachable committed source privately only to enforce publication privacy; no title/payload bytes copied into this report."
+  :process-environment-reads 0 :process-command-line-reads 0
+  :credential-file-reads 0 :opencode-server-service-reads 0
+  :full-parent-unit-prints 0 :environment-property-queries 0
+  :pr-interactions 0 :merges 0 :root-branch-switches 0 :ledger-edits 0
+  :downloads 0 :installs 0 :i3-controls 0
+  :private-backup-and-one-shot-intent-marker :untouched-not-opened
+  :scratch-created 0 :cleanup-removals 0
+  :source-worktree-retained true
+  :cleanup-status "No cleanup eligibility claimed: neither source artifact nor unit commit has a verified remote backup from this turn."}
+ :reflection
+ {:receipt-owner :parent :session-mycology-owner :parent
+  :separate-ledger-or-spore-write false :spore nil
+  :p-efficiency 0.85 :p-friction 0.25 :p-skill-candidate 0.55
+  :lesson "Publication safety is a property of all reachable Git history, not merely the leaf diff or artifact branch name. Treat already active exact unit persistence independently from whether its existing branch can safely be pushed."
+  :handoff "Owned unit persistence is complete locally at 470a96888c21f9a467f8d06f7802e88f3021302b. Parent must resolve public-source ancestry privacy and unrelated unit ancestry before remote backup; no extra runtime action is needed or authorized."}}
