@@ -1,0 +1,154 @@
+{:assessment/type :receipt-shape-custody
+ :assessment/date "2026-11-03"
+ :assessment/status :conditional-selective-promotion-recommended
+ :assessment/scope "Receipt bytes, canonical receipt validation, remote custody and integration strategy only; no independent source-code review or merge qualification."
+ :recommendation "Preserve and publish the original repair lineage intact. After independent code review, promote only explicitly selected source/tests and separately authorized planning/board artifacts into a new integration branch rooted at coordinator d25d4e7. Preserve the entire coordinator receipt ledger as the exact prefix and append only valid new custody/adjudication/test records. Do not merge or copy the invalid repair receipt suffix."
+ :boundaries
+ {:only-write ".ημ/runs/oikos-program-20261103/receipt-shape-custody-assessment.edn"
+  :repair-source-or-test-diff-read false
+  :repair-code-reviewed-by-this-assessment false
+  :repair-receipt-tail-read true
+  :canonical-receipt-validation-interface-used true
+  :lineage-index-config-or-board-mutation false
+  :github-write false :push false :fetch false :deletion false
+  :new-verifier-fallback-or-adjudication-engine false
+  :receipt-or-reflection-ledger-written false
+  :reason "The bounded task authorizes only this new assessment artifact. Reflection is embedded here, not appended to another ledger."}
+ :authority
+ {:instructions ["/home/err/AGENTS.md"
+                 "/home/err/spaces/AGENTS.md"
+                 "/home/err/spaces/foresight/AGENTS.md"
+                 "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/AGENTS.md"
+                 "/home/err/spaces/foresight/.worktrees/fix/receipt-git-buffer-20261103/AGENTS.md"]
+  :skills [:receipt-river :pr-flow :work-cycle :session-mycology]
+  :ledger-mode :legacy
+  :ledger-path ".ημ/receipts.edn"
+  :nested-instructions "No additional AGENTS.md at the inspected .ημ/runs artifact ancestors or canonical validation namespace ancestors."
+  :canonical-law "src/foresight/evidence.cljc:222-230 requires vector-of-nonblank-string :manifest and :refs."
+  :canonical-validation "scripts/evidence.clj:226-243 and 1017-1062 validate the exact trusted-base prefix and apply current receipt laws to the appended suffix."
+  :documented-contract "README.md:143-156: exact trusted prefix; malformed new records fail closed."
+  :hosted-command ".github/workflows/eta-mu-review.yml:32: verify-receipts --base ${PR_BASE_SHA} --at ${PR_HEAD_SHA}"}
+ :snapshots
+ {:common-prefix
+  {:commit "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+   :bytes 1280738 :lines 550 :ends-lf true
+   :sha256 "b0cbce2ed8c3184e7ac8131f66f821d03d6bc9ccbb2af5cc2f535aeabb83ce1f"}
+  :coordinator
+  {:commit "d25d4e7a926eddddafeaaf227ce1c592581110fe"
+   :working-directory "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+   :bytes 1289833 :lines 556 :ends-lf true
+   :sha256 "a73bd90dff5d09c8312f8131a24464c8692a3b86832a99d7fab1eaa73af48a2a"
+   :working-ledger-equals-committed true
+   :exact-common-prefix true :new-records 6 :invalid-new-records 0}
+  :repair-published
+  {:branch "fix/receipt-git-buffer-20261103"
+   :remote :personal
+   :advertised-tip "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+   :remote-evidence "Read-only git ls-remote personal refs/heads/fix/receipt-git-buffer-20261103 returned this exact SHA, including the final custody check."
+   :parent "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+   :grandparent "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+   :bytes 1283853 :lines 552 :ends-lf true
+   :sha256 "36c6d31692d065e77f3328c3857a416fb4edab7b85d2204573060e6752171026"
+   :exact-common-prefix true :new-records 2 :invalid-new-records 2
+   :new-tail-sha256 "61bc9ebe56fb7e11d168f867491a216885799bcacf3e3dd55562af5b5f508826"}
+  :repair-current-receipt-snapshot
+  {:commit "036cfd03a58314b2672632057820f3bd42214729"
+   :working-directory "/home/err/spaces/foresight/.worktrees/fix/receipt-git-buffer-20261103"
+   :bytes 1289238 :lines 555 :ends-lf true
+   :sha256 "659f7c903e483677c6559212d562e3a6ff7124eff471c1bd240a4a0a4ebe3eef"
+   :working-ledger-equals-committed true
+   :exact-common-prefix true :new-records 5 :invalid-new-records 3
+   :valid-new-lines [554 555]
+   :published-at-observation false
+   :concurrency "Initially the RED/GREEN lines 553-554 were uncommitted; their 554-line snapshot hash was ae8641537440b337e9891ac5d6ca4fb2ac4e9b8035472b9d072e9a80d5631dd5. While this assessment ran, the worker appended valid line 555 and committed the receipt file as 036cfd03. The first 554 lines retained that exact hash. No worker source/test diff was inspected."
+   :later-heads "Recheck final immutable source and evidence SHAs before promotion; this is a bounded snapshot, not a claim about future writes."}}
+ :invalid-records
+ [{:line 551 :ts "2026-11-03T17:18:18.735728982Z"
+   :origin "receipt-git-buffer-planning"
+   :introduced-by "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+   :bytes-including-lf 1630
+   :raw-utf8-line-sha256-excluding-lf "0a66f43c2b1dcc599045fefa316e1d6b69dfa39ab9b593891c332a191bbb2923"
+   :raw-utf8-line-sha256-including-lf "4968ade87f25dfb9ce0bb6301fa7d502450aaf3872ac10620500b3ec0a8e569f"
+   :invalid-fields {:manifest :string-not-vector :refs :string-not-vector}
+   :pushed true}
+  {:line 552 :ts "2026-11-03T17:50:41.645476897Z"
+   :origin "receipt-git-buffer-planning"
+   :introduced-by "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+   :bytes-including-lf 1485
+   :raw-utf8-line-sha256-excluding-lf "ba4f66428456223b743a8a4cd6c8ed33dbdc7e99b446694f374d854fcabd3797"
+   :raw-utf8-line-sha256-including-lf "52130e6202ec25a1856c4f89bd43ddde22adf93ba9f7bc8dd27b4fb1c266d2a8"
+   :invalid-fields {:manifest :string-not-vector :refs :string-not-vector}
+   :pushed true}
+  {:line 553 :ts "2026-11-03T18:13:35.053877743Z"
+   :origin "receipt-git-buffer-implementation"
+   :introduced-by "036cfd03a58314b2672632057820f3bd42214729"
+   :initial-state :uncommitted-red-receipt
+   :current-state :committed-locally-not-published
+   :bytes-including-lf 1464
+   :raw-utf8-line-sha256-excluding-lf "b79e55eda1c055f82e2413832cc94442f85ccafd00be2ca50deb00b4a458819b"
+   :raw-utf8-line-sha256-including-lf "448c833dcf9dff71b03ca5f32ef2f543d84bd97a0b8a5fc35cc2e78005ab0944"
+   :invalid-fields {:manifest :string-not-vector :refs :string-not-vector}
+   :pushed false}]
+ :hash-contract "Record hashes above identify exact original UTF-8 line bytes, with LF inclusion explicitly distinguished. They are custody hashes, not claims of canonical-EDN record identity or validation success."
+ :validation-observations
+ [{:interface :canonical-repair-cli
+   :command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02 --at 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+   :exit 2 :error "Immutable ledger contains invalid receipt envelopes"
+   :invalid-lines [551 552]}
+  {:interface :canonical-repair-cli
+   :command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02 --at 036cfd03a58314b2672632057820f3bd42214729"
+   :exit 2 :error "Immutable ledger contains invalid receipt envelopes"
+   :invalid-lines [551 552 553]
+   :qualification :exact-committed-receipt-diagnostic-not-trusted-source-adoption}
+  {:interface :canonical-repair-cli
+   :command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base d25d4e7a926eddddafeaaf227ce1c592581110fe --at 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+   :exit 2 :error "Receipt River head does not preserve the base bytes as a prefix"}
+  {:interface :canonical-repair-cli
+   :command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02 --at d25d4e7a926eddddafeaaf227ce1c592581110fe"
+   :exit 0 :total-receipts 556 :appended-receipts 6
+   :qualification :diagnostic-only-not-new-integration-or-trusted-source-adoption}
+  {:interface :canonical-coordinator-cli
+   :command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base d25d4e7a926eddddafeaaf227ce1c592581110fe --at d25d4e7a926eddddafeaaf227ce1c592581110fe"
+   :exit 2 :error "Git invocation failed: spawnSync git ENOBUFS"
+   :qualification "The original coordinator adapter is still transport-blocked. A self-comparison would not establish new-record admission even if transport succeeded."}
+  {:interface :canonical-api-bounded-shape-diagnostic
+   :functions ["evidence/appended-receipt-records!" "foresight.evidence/receipt-envelope?" "evidence/require-valid-receipt-records!"]
+   :snapshot-sha256 "659f7c903e483677c6559212d562e3a6ff7124eff471c1bd240a4a0a4ebe3eef"
+   :base "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+   :appended-receipts 5 :invalid-lines [551 552 553] :valid-lines [554 555]
+   :error "Immutable ledger contains invalid receipt envelopes"
+   :transport "Committed bytes were read with explicit finite 16777216-byte execFileSync capture for this diagnostic; no verifier code was changed or substituted."
+   :qualification :not-a-trusted-base-gate-pass}]
+ :strategy
+ {:legitimate-selective-promotion true
+  :confidence 0.95
+  :reason "This is a new, explicitly scoped source promotion, not a claim that the repair branch was completely merged. Original receipt bytes and source ancestry remain in the original published lineage; all existing target records remain the exact trusted prefix. Source selection does not make malformed records valid or alter active-ledger membership."
+  :ordinary-merge-counterargument "The earlier byte-union preflight did not establish shape admission. A coordinator-first union would keep the target prefix but append three invalid source records; a repair-first union would additionally lose the required coordinator prefix. A clean textual merge is not a passing gate."
+  :adjudication-limit "The existing validator has no adjudication override. A valid later receipt documents custody and corrects assertions only; it cannot waive malformed active suffix records. Neither retyping :manifest/:refs in old records nor selecting the repair tip as a convenient grandfathering base is allowed."
+  :lineage-limit "If an actual applicable contract requires the complete repair ancestry to enter the target, selective source promotion does not satisfy that contract. No such requirement was established in the inspected instructions; their merge-commit rule governs authorized PR merges, not a requirement to import every donor receipt. An explicit full-ancestry requirement would be a real owner blocker, not grounds for an ours merge, a schema exception or fabricated completeness."
+  :native-review-limit "Original local reviews remain historical evidence bound to their original source. No native approval, current-head coverage, completed-round credit or check result transfers to the new integration head."
+  :source-evidence-boundary "Exclude the entire repair-specific .ημ/receipts.edn suffix, including its valid lines, from the target active ledger; preserve it intact on the original branch and reference the exact record/ledger hashes and published commits. This exclusion concerns donor input selection, not removal of target history, a cutover or a new active-ledger exclusion manifest."
+  :no-large-alternative "Holding the work blocked is safer than pretending a complete branch merge passed. No smaller additive receipt correction can make the malformed source suffix pass the unchanged envelope law. A new adjudication engine or ledger migration is unnecessary for this bounded source promotion."}
+ :required-sequence
+ ["Worker/coordinator finish independent adversarial code review and pin final source/evidence commits. Preserve all original receipt bytes, including invalid RED and both committed planning records, through ordinary new commits on the original branch. Do not amend, rebase, reset, discard or edit those records."
+  "Publish the final original branch by ordinary push when authorized. Read back its remote ref and verify the final commit's ledger blob/hash and source/test provenance are recoverable. The final observed remote is only 4deeab6; local 036cfd03 evidence is not yet remotely preserved. A server-side rejection remains a blocker, not permission to bypass a gate."
+  "Create a NEW isolated integration worktree/branch from exact coordinator d25d4e7, or re-pin an authorized newer target if it moves. Leave the coordinator and repair worktrees/branches untouched."
+  "Apply an explicit reviewed source/test path or hunk selection from the pinned source commit as ordinary new integration commits. Record origin commits and exact source blob/hash custody. Do not whole-commit cherry-pick provenance-bearing commits, attach the repair parent through a synthetic ours merge, or describe this as a complete branch merge."
+  "Planning Markdown may accompany the selected repair where independently reviewed and appropriate. Do not blindly copy operational ledgers or transplant card state. Official Rheos remains the sole board authority; any card/UUID/event reconciliation requires its authorized operation and verification. No board integration was assessed here. Preserve excluded source board/memory evidence on the original branch."
+  "Keep all 1289833 coordinator receipt bytes (SHA256 a73bd90dff5d09c8312f8131a24464c8692a3b86832a99d7fab1eaa73af48a2a) intact as the target prefix. Append only new law-valid records with vector :manifest/:refs, explicitly naming the selective boundary, original remote branch, final source/evidence commits and the three immutable invalid-record hashes. Do not copy malformed records into the active suffix."
+  "Record test outcomes only after actual execution. Validate any new receipt with the existing canonical receipt-envelope predicate before append; do not use a helper mode that silently serializes vector fields as scalars. Do not claim origin revision-bound-evidence without its genuine required evidence result."
+  "Run the independently reviewed implementation tests, lint and all applicable deterministic integration gates on the actual committed integration head. Use the real authorized PR trusted base and actual head for verify-receipts, never head-to-itself or a substituted repair base. Obtain fresh exact-head native review and required checks before any later authorized merge."]
+ :later-trusted-gate
+ {:passed-now false :candidate-created false :candidate-head nil
+  :eligible-shape "With d25d4e7 as the actual trusted base, a descendant candidate retaining its exact receipt bytes plus only valid new records is eligible for the unchanged prefix/envelope check. Source promotion alone does not establish that candidate or its passing result."
+  :required-command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base <actual-full-trusted-PR-base> --at <actual-full-integration-head>"
+  :transport-source "The coordinator's old adapter still fails ENOBUFS. The buffer/cleanup repair must independently qualify through its owning source-review/adoption path; this assessment supplies no trusted-code adoption or verifier fallback."
+  :base-drift "If the actual trusted base differs from d25d4e7, retain that base's complete ledger and re-run the canonical check. Older-base or self-check success cannot substitute for the actual pair."
+  :approval-and-board "No approval, board transition, deployment, source publication or merge admission is granted by this artifact."}
+ :artifact-validation {:single-edn-map :passed :clj-kondo {:errors 0 :warnings 0}}
+ :reflection
+ {:efficiency 0.8 :friction 0.25 :skill-candidate 0.5 :spore nil
+  :lesson "Separate byte custody, active-ledger admission and source promotion. Preserve malformed donor evidence remotely without laundering it into a newly selected target suffix; bind every later gate and approval to the actual new base/head."
+  :concurrency-lesson "Freeze receipt hashes at an explicit snapshot: the worker legitimately committed the previously uncommitted tail while this read-only assessment ran."
+  :scope-friction "One initial local-ref listing was broader than needed. No unrelated ref corpus is retained here; subsequent remote queries named only the task branches."
+  :separate-ledger-write false}}

@@ -4,11 +4,11 @@ labels: "oikos, planning, local-first, task"
 dependency: []
 parent: "722906b7-77d7-4414-a976-23996f7533de"
 type: "task"
-write-id: "1793729401684-0.myk9wk0cw93l95fg4a"
+write-id: "1793730955949-0.frh4yldxg2d68mcfo78"
 points: "5"
 title: "Oikos: Define isolated generation manifests and target render contracts"
 priority: "P1"
-status: "in_progress"
+status: "testing"
 uuid: "07452a65-4a6a-4704-bf81-50408927dcc8"
 created_at: "2026-11-03T15:11:05.825Z"
 ---
@@ -71,5 +71,7 @@ Consensus planning correction v1: root incoming acceptance/verification now expl
 S1A scope correction from native Oikos PR1 findings4458124527/4458124541: initial acceptance is positive inert :oikos/profile-edn rendering plus explicit :adapter-unavailable rejection for the declared but unavailable :shell/bash-env capability. No owner-reviewed safe bash adapter exists; S1A must not depend on unassigned positive bash work or count a mock as that adapter. Positive bash qualification is an upstream shx-owned adapter/validator artifact consumed by S1B, not an extra hidden predecessor of S1A. S1A resolved-isolation/race tests cover evidence collection, normalized/resolved checks and inert render results under replacement; absence of writes is not proof of effect-time safety. Actual serialized write-boundary stale-identity rejection, anchored no-follow operations and observed write/rollback postconditions belong to S1B through the reviewed owner seam. This corrects future acceptance only; specification/implementation planning admission remains held.
 
 User direction on 2026-11-03 authorizes implementation admission using the completed independent adversarial planning reviews without waiting for hosted review cohorts. The parent-supplied reviewed 95dfbdb specification is planning input, not implementation evidence or fabricated native approval. This supersedes the earlier planning-admission hold for S1A only. Use the actual Rheos FSM and deterministic gates; preserve synthetic sandbox/dev-only, isolated agent-owned resources, no personal capture, no model/service changes, zero-spend and remote-publication holdbacks. No implementation has been performed by this admission operation.
+
+S1A GREEN candidate at exact tested commit 7896ee8709a9461ee54e2d39739c5ee8ce1a3157. Parent independently reports running bb test: BB 15 tests/245 assertions, NBB 25 tests/314 assertions, eval 9 tests/39 assertions, zero failures/errors; bb lint: 0 errors/0 warnings. Shared fixture SHA256 f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209 is identical across BB and NBB. API documentation: docs/s1a-api.md at that candidate. These are parent-observed results recorded by this board operator, not independently rerun here. Distinct-agent independent CODE review and protocol probes are ACTIVE/PENDING; no acceptance or completion is claimed. User direction removes hosted queue waiting, not deterministic verification or safety holdbacks. Move only S1A from in_progress to testing for candidate verification; do not mark review/document/done or admit any successor.
 
 ---

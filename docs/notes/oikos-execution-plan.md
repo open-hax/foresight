@@ -1,6 +1,7 @@
 # Oikos execution plan: precise prerequisites and bounded implementation admission
 
-2026-11-03. Current execution checkpoint with historical planning records, not completion evidence.
+2026-11-03. Current execution checkpoint with historical planning records;
+bounded repair qualification, not Oikos task or epic completion.
 License: GPL-3.0-or-later.
 
 ## Current execution checkpoint and authority
@@ -28,23 +29,75 @@ all-task planning hold; it does not manufacture native approval, waive
 deterministic or safety checks, admit unverified successors, or complete a task.
 Native PR findings and settlement evidence remain a separate obligation.
 
-### Board state and active implementation
+### Board state and active S1A code review
 
 The coordinator verified official Rheos readbacks for S1A
 (`07452a65-4a6a-4704-bf81-50408927dcc8`) through
-`incoming → accepted → breakdown → ready → todo → in_progress`.
+`incoming → accepted → breakdown → ready → todo → in_progress → testing`.
 The other **23 Oikos cards remain incoming**, pending verified prerequisite
-artifacts and their own lawful admission. The documentation worker has read the
-decision record, not performed a new live board query.
+artifacts and their own lawful admission; **zero Oikos epics are done**. The
+documentation worker has read the local evidence and coordinator's checkpoint,
+not performed a new live board query or rerun implementation suites.
 
-| Active isolated worker | Starting revision | Evidence limit at this checkpoint |
+| Workstream | Current revision | Qualification and evidence limit at this checkpoint |
 | --- | --- | --- |
-| S1A laws/tests in red, then domain/adapters in green, in its own Oikos worktree | `95dfbdb26f65fac8b17bcb11cd192ba47d8efe3c` | Active, not finished; no implementation acceptance claimed |
-| Receipt-transport repair in its separate repair worktree | `4deeab6d` | Active, not finished; no verified `ENOBUFS` or descriptor-cleanup repair claimed |
+| S1A GREEN code candidate | `7896ee8709a9461ee54e2d39739c5ee8ce1a3157` | Pushed to private Oikos PR #1; official `testing`; independent code review and protocol probes active, not finished |
+| Receipt-transport repair | `542ec7b12bc275661ce1a6c2dda009d621e5706f` | Qualified and merged through personal Foresight PR #53; bounded 16 MiB capture and target-owned descriptor cleanup |
+
+S1A's [pushed code candidate](https://github.com/open-hax/oikos/commit/7896ee8709a9461ee54e2d39739c5ee8ce1a3157)
+is on private [Oikos PR #1](https://github.com/open-hax/oikos/pull/1), not a
+completed or accepted task. The coordinator actually reran `bb test` at **15
+tests / 245 assertions**, NBB at **25 / 314**, and evaluation at **9 / 39**;
+clj-kondo reported **0 errors / 0 warnings**. The two currently active workers
+are the independent adversarial code reviewer and protocol-probe reviewer, not
+an implementation worker still doing green. Neither review result is complete,
+and no successor has been accepted on the strength of this candidate.
 
 Independent post-implementation review for every task and fresh epic integration
 after both children are verified remain required future work. Neither active
-workers nor the planning baseline count as those results.
+reviews nor a passing implementation baseline count as those results.
+
+### Receipt repair: qualified source promotion and verified merge
+
+The coordinator is now at `542ec7b12bc275661ce1a6c2dda009d621e5706f`, the merge
+of [personal Foresight PR #53](https://github.com/riatzukiza/foresight/pull/53).
+The repair uses a finite **16 MiB combined stdout/stderr capture budget**, not a
+whole-process memory limit, and closes the owned target descriptor when committed
+capture fails before reservation. The
+[independent code review](../../.ημ/runs/oikos-program-20261103/receipt-repair-code-review-v1.edn)
+passed **123 tests / 833 assertions** plus **52 adversarial probes**, with zero
+findings. The separate
+[bounded integration review](../../.ημ/runs/oikos-program-20261103/receipt-repair-integration-review-v1.edn)
+also reported zero findings for exact source identity, target-prefix
+preservation, new receipt admission and archive custody; it was not a repeated
+full code audit.
+
+The coordinator's actual parent verification from trusted base
+`e31b43a57765a394521d6c49aafd068f5c4d5ad5` to merge
+`542ec7b12bc275661ce1a6c2dda009d621e5706f` returned a strict **PASS: 557 records,
+10 appended**. This is the actual base-to-merge pair, not a HEAD-to-itself pass.
+The earlier `ENOBUFS` checkpoint is no longer a current blocker on this lineage.
+
+The earlier [merge preflight](../../.ημ/runs/oikos-program-20261103/receipt-repair-merge-preflight.edn)
+previewed byte-preserving union, not receipt-shape admission. The
+[receipt-shape custody assessment](../../.ημ/runs/oikos-program-20261103/receipt-shape-custody-assessment.edn)
+showed that the donor's string-valued `:manifest` and `:refs` would still fail
+the unchanged envelope law. That merge strategy was superseded by the
+[selective source-promotion record](../../.ημ/runs/oikos-program-20261103/receipt-repair-source-promotion.edn):
+exactly the reviewed `scripts/evidence.clj` and `test/evidence_cli_test.cljs`
+blobs were promoted, not the complete repair branch or its receipt suffix.
+The promotion record's pending-review fields describe its historical pre-review
+checkpoint, not the current qualification state.
+
+The entire original malformed-receipt lineage remains archived at
+`036cfd03a58314b2672632057820f3bd42214729` on remote
+`riatzukiza/foresight:evidence/receipt-git-buffer-20261103`. The independent
+integration review verified the full **1,289,238 ledger bytes** remotely against
+the local archive, byte-for-byte and by SHA-256. All three malformed records
+remain unchanged there; the complete target prefix was preserved. No schema
+waiver, historical record rewrite, convenient trusted-base substitution or
+native approval transfer occurred. The original branch's full-history failure
+is not relabeled a pass by this separate source promotion.
 
 ### Review-route planning: nonblocking follow-up
 
@@ -129,7 +182,8 @@ commit `7a0d842` and an open stacked personal
 by the coordinator. The actual `ENOBUFS` failure was unchanged then. The diagnosed
 cause is a **1 MiB** buffer cap against a roughly **1.28 MiB** ledger; the
 historical prefix is safe. A finite **16 MiB** cap was proposed, **not implemented**
-at that diagnosis checkpoint; the later active repair worker is recorded above.
+at that diagnosis checkpoint; the later qualified source promotion and merge are
+recorded above.
 Diagnosis, a planning commit and an open PR are not runtime repair evidence.
 
 ### Existing baseline only
@@ -206,8 +260,8 @@ planning review reports now exist; their session identities are retained in
 `.ημ/runs/oikos-program-20261103/reviewer-sessions.edn`. The historical checkpoint
 records their then-unresolved reconciliation; the later verified fixes and
 operator decision supply bounded implementation admission, not native approval
-or completed code review. S1A's preparatory specification and active red/green
-worker are recorded separately above.
+or completed code review. S1A's preparatory specification and current GREEN
+candidate under independent code review are recorded separately above.
 The Foresight coordinator stays in
 `/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103` on
 `plan/oikos-execution-20261103`; child implementation belongs in Oikos.
@@ -370,8 +424,8 @@ Bash rejection; actual positive Bash and non-vacuous write-time race/rollback
 proof stay under S1B's owner-artifact gates. Both native threads were fixed and
 resolved. At that point the PR contained a specification, not working code or
 readiness evidence. That historical scope does not override the later official
-S1A admission or active implementation worker; no finished implementation is
-inferred.
+S1A `testing` state or pushed GREEN candidate; completed review and acceptance are
+not inferred.
 
 PR #153's sixteen original threads were subsequently settled as fixed at
 `51d80fad`; both identified body findings were answered in the
@@ -382,7 +436,9 @@ concurrent evidence change. At that checkpoint the actual receipt verifier exite
 2 with `spawnSync git ENOBUFS` and the separate repair had not been implemented.
 Those settlements alone did not admit implementation or complete an epic; the
 later explicit operator decision supplies the bounded implementation admission.
-The verifier failure is not waived, and repair success remains unverified.
+That verifier failure was not waived. The later source promotion, independent
+qualification and actual base-to-merge pass are recorded in the current checkpoint;
+the old failure is not a current `ENOBUFS` block on the merged lineage.
 
 The separate repair plan subsequently advanced to `4deeab6d`. Its specification
 now includes owned-target descriptor cleanup when committed capture fails after
@@ -390,8 +446,9 @@ opening the target, exactly-once closure and repeated-failure descriptor tests,
 and combined stdout/stderr capture accounting. Independent local review and a
 native CodeRabbit reply accepted this **planning correction**. At that planning
 checkpoint the source and regression tests were unchanged and the repair card
-remained incoming. The later isolated red/green worker is active, not finished;
-neither the descriptor leak nor `ENOBUFS` is claimed fixed by this note.
+remained incoming. That was planning evidence only. The later completed repair,
+independent review and qualified source-promotion merge are recorded above;
+neither a whole donor-branch merge nor a passing malformed history is claimed.
 
 The [native route diagnosis](../../.ημ/runs/oikos-program-20261103/native-review-route-diagnosis.edn)
 separates fork eligibility from provider availability. PR #153's pinned MiMo
