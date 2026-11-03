@@ -9,7 +9,22 @@ This is the same transduction loop behind Epiphany's recovered claims,
 Calliope's creative review and Knoxx's product surfaces. Those names identify
 use cases and ownership; they do not make every implementation interchangeable.
 
-## Current decisions
+## Current execution profile: native agent swarms
+
+The 2026-11-03 user request makes native harness agents and independent review
+contexts the default when available. The operating loop and rollout are in
+[native-swarm-review.md](native-swarm-review.md). Independent PRs run together;
+one coordinator owns each PR or dependent stack. A complete reviewer/skeptic
+cycle, current deterministic checks and final integration review replace
+blanket provider invitation and round-count obligations in this profile.
+
+Actual GitHub required approvals/checks, unsettled findings, protected
+publication, staging proof and merge authorization still apply. A native
+subagent's context ID is not a second GitHub identity. The older graph below is
+retained as the explicit hosted-provider profile and deployment design; it is
+not a prerequisite for local native-agent review.
+
+## Hosted-provider decisions retained from October 3
 
 The October 3 request changes reviewer admission: invite **all available agents**,
 with CodeRabbit, Codex, MiMo and Kimi as intended targets, but require **one eligible approving review on the exact current

@@ -1,0 +1,35 @@
+;; SPDX-License-Identifier: GPL-3.0-or-later
+{:workflow/id :foresight/native-swarm-review
+ :workflow/version 1
+ :workflow/status :source-proposal
+ :workflow/decision-source "User request 2026-11-03"
+ :workflow/skills ["riatzukiza/.agents/skills/ultra-code"
+                   "riatzukiza/.agents/skills/pr-flow"]
+ :execution/default :observed-native-harness-capabilities
+ :execution/fallback :explicit-qualified-adapter
+ :parallelism :ready-independent-packets
+ :ownership {:coordinator :per-pr-or-dependent-stack
+             :writer :per-branch-and-shared-resource
+             :integration :single-writer}
+ :review {:contexts :fresh
+          :roles [:reviewer :skeptic]
+          :roster :fixed-per-review-wave
+          :minimum-rounds nil
+          :incomplete :unresolved
+          :repair-wave-exhaustion :replan-or-record-concrete-blocker}
+ :verification {:source :immutable-snapshot
+                :native-evidence :plan-and-result-bound
+                :integration :final-combined-tree
+                :github :actual-required-policy}
+ :authority {:board :rheos :events :clio :receipts :receipt-river
+             :runtime :active-harness :auth :axxium
+             :hosted-execution :sol :api :knoxx :deployment :services}
+ :activation {:skill-source :candidate
+              :device-installations :not-verified
+              :trusted-native-publisher :not-implemented-by-this-proposal
+              :protection-change :none}
+ :stories [{:id "SWARM-1" :outcome :native-execution-and-evidence}
+           {:id "SWARM-2" :outcome :parallel-pr-ownership :depends-on ["SWARM-1"]}
+           {:id "SWARM-3" :outcome :trusted-publication-adapter :depends-on ["SWARM-1"]}
+           {:id "SWARM-4" :outcome :selective-host-reconciliation :depends-on ["SWARM-1"]}
+           {:id "SWARM-5" :outcome :integrated-tree-qualification}]}

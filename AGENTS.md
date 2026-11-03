@@ -148,6 +148,14 @@ Cards live under `docs/agile/kanban`. Rheos events and receipts belong under
 
 ## Pull requests: Promethean review and promotion
 
+The user's 2026-11-03 workflow direction prefers native harness agents for
+parallel work and independent reviewer/skeptic contexts. Follow
+[`native-swarm-review.md`](docs/notes/native-swarm-review.md) and the canonical
+`pr-flow` native profile. Independent PRs may proceed concurrently; serialize
+real dependencies and shared writers. Qualify the final integrated snapshot.
+Native context evidence does not fabricate a GitHub principal or waive an
+actual required check, approval, conversation or deployment gate.
+
 Use the canonical `~/.agents/skills/pr-flow` skill pack for every PR interaction.
 The process and deployment handoff are specified in
 [`docs/notes/promethean-review-and-promotion.md`](docs/notes/promethean-review-and-promotion.md)
@@ -182,5 +190,9 @@ and [`docs/notes/design/promethean-pr-process.edn`](docs/notes/design/promethean
   that never executes candidate code. Gate code/configuration and required App
   identity must be outside candidate control before process activation.
 
-These are the user's October 3 policy decisions. The linked contract records
-which parts are implemented and which still require reviewed activation.
+The provider roster and persistent-worker execution above describe the retained
+October 3 hosted-provider profile. Native swarm review supersedes those as the
+default execution and review path when the harness is capable. Protection,
+source custody, staging and promotion requirements remain separate. The linked
+contracts record which runtime adapters are implemented and which still require
+reviewed activation.
