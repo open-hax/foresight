@@ -1,0 +1,145 @@
+{:review/version 1
+ :review/kind :independent-adversarial-code-review
+ :review/date "2026-11-03"
+ :verdict :changes-requested
+ :repository "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+ :bindings
+ {:base "95dfbdb26f65fac8b17bcb11cd192ba47d8efe3c"
+  :red "58bcfcf239b0f232e2ead851ad7a7f76ac0c302b"
+  :head "7896ee8709a9461ee54e2d39739c5ee8ce1a3157"
+  :spec-path "docs/specs/s1a-generation-contracts.md"
+  :spec-sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+  :shared-fixture-sha256 "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"
+  :observed-clean-child-worktree true
+  :red-evidence "Read the RED commit object/diff: tests precede GREEN implementation. Historical RED run claims in docs/s1a-api.md were not independently rerun at RED."
+  :planning-policy "User-authorized completed independent planning reviews permit implementation without waiting for the old hosted cohort. This review makes no additional planning-admission judgment."}
+ :execution
+ {:runtimes {:bb "babashka v1.12.207" :nbb "nbb v1.3.204" :lint "clj-kondo v2025.07.28"}
+  :gates [{:command "bb test" :exit 0
+           :suites [{:runtime :bb :tests 15 :assertions 245 :failures 0 :errors 0}
+                    {:runtime :nbb :tests 25 :assertions 314 :failures 0 :errors 0}
+                    {:runtime :nbb-eval :tests 9 :assertions 39 :failures 0 :errors 0}]}
+          {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+          {:command "git diff --check 95dfbdb..7896ee8709a9461ee54e2d39739c5ee8ce1a3157" :exit 0}]
+  :additional-probes "Inline BB/NBB and Python subprocess invocations, not additions to the committed test counts. A temporary, owned /tmp/opencode/s1a-review-hardlink-* fixture was removed in finally. No personal configuration/capture, services, model requests or package installation."
+  :writes "Only this new parent review persists. No code, card, ledger, PR, commit or push modifications."}
+ :findings
+ [{:id :s1a-code/hardlink-to-unlisted-installed-file
+   :priority :P1
+   :context :observed
+   :confidence 1.0
+   :path "src/oikos/infra/generation.cljs"
+   :lines [25 45]
+   :symbols [oikos.infra.generation/inspect oikos.infra.generation/file-identity]
+   :related {:path "src/oikos/law/generation.cljc" :lines [175 182] :symbol oikos.law.generation/validate-generation}
+   :contract ["T03" "spec isolation law 4: reject hardlinked existing destinations"]
+   :problem "Collection drops nlink and the law only checks duplicate leaf IDs among supplied paths. A destination hardlinked to a protected installed file that is not itself an enumerated resource root/destination is accepted as isolated."
+   :repro ["Create an owned synthetic sandbox; f/under f/payload base; create every profile root and base/checkout."
+           "Write base/installed/config/sentinel with synthetic content; fs.linkSync that file to the sole dev destination base/dev/config/profile.edn."
+           "Call (oikos.infra.generation/preview! base [(str base \"/checkout\")] p f/sources f/pins)."]
+   :observed {:destination-nlink 2 :same-inode-as-installed-file true :preview-status :ok :installed-sentinel-unchanged true}
+   :expected "Reject the existing multiply linked destination before qualifying isolation, even when its other link is not another requested path. Do not scan/read installed configuration contents to discover aliases."
+   :regression "Extend the real filesystem tests beyond two requested dev destinations: hardlink a single dev destination to an unenumerated installed fixture and to an unenumerated sibling fixture; both must reject. Retain a positive ordinary single-link destination."
+   :impact-boundary "This is a false inert-isolation qualification, not an observed write or a claim that S1A itself mutates installed files. S1B's independent write-edge obligations remain mandatory."}
+  {:id :s1a-code/noncanonical-resolved-path-bypass
+   :priority :P2
+   :context :observed
+   :confidence 1.0
+   :path "src/oikos/law/generation.cljc"
+   :lines [164 188]
+   :symbols [oikos.law.generation/evidence? oikos.law.generation/validate-generation]
+   :contract ["T02" "T03" "spec isolation laws 1 and 4"]
+   :problem "absolute? only asks whether a path can normalize; validate-generation then compares the original :resolved strings without normalizing them or requiring canonical spelling. Thus resolved evidence can conceal same-scope, cross-scope and forbidden-root collisions."
+   :repro ["Start with (f/context f/payload)."
+           "For the requested dev config root set :resolved to /sandbox/elsewhere/../dev/state; for its requested destination set :resolved to that string plus /profile.edn. Leave all other evidence unchanged."
+           "Repeat with /sandbox/elsewhere/../installed/config and /sandbox/elsewhere/../checkout. Call g/validate-generation for each context in BB and NBB."]
+   :observed {:bb [:ok :ok :ok] :nbb [:ok :ok :ok]
+              :normalized-collisions ["/sandbox/dev/state" "/sandbox/installed/config" "/sandbox/checkout"]}
+   :expected "Reject noncanonical resolved evidence or normalize it before reapplying every isolation law. None of the three contexts may qualify."
+   :regression "Shared BB/NBB fixtures must cover resolved dot/dotdot/repeated-slash spellings for state, installed and forbidden-root aliases, with absent destination leaves too; preserve distinct canonical positive roots."
+   :impact-boundary "The current collect implementation ordinarily produces normalized resolved strings; this is a defect in the separately documented shared supplied-evidence law/API, not a demonstrated OS-resolution bypass through collect."}
+  {:id :s1a-code/invalid-request-echo
+   :priority :P2
+   :context :observed
+   :confidence 1.0
+   :path "scripts/render.clj"
+   :lines [15 20]
+   :symbols [render]
+   :contract ["T01" "T08" "T09" "bounded BB contract: no raw input/value echo on rejection"]
+   :problem "Even after request-result rejects the request, the helper blindly copies its unvalidated :request-id and :profile-sha into stdout. These fields can be arbitrary strings/containers, rather than a validated ID and SHA, and carry rejected input into a retained response channel."
+   :repro ["Run /usr/local/bin/bb --config scripts/render-bb.edn --classpath src scripts/render.clj '{}' with EOF-terminated stdin."
+           "Supply exactly {:request-id \"REVIEW_TEST_SECRET_MARKER\" :profile-sha \"REVIEW_TEST_SECRET_MARKER\"} plus LF. Capture stdout/stderr privately and print only marker-presence/length booleans."]
+   :observed {:exit 2 :stdout-contains-test-marker true :stdout-bytes 178 :stderr-bytes 0}
+   :expected "Invalid correlation fields must not be copied to the failure channel. Validate the envelope before using its fields, and choose a fixed sanitized invalid-envelope failure disposition."
+   :regression "Invoke the actual helper directly with malformed request IDs/hashes including bounded marker strings and nested values. Assert nonzero failure and absence of the markers from both channels. Keep normal valid-ID correlation and legitimate closed rejection tests."
+   :impact-boundary "start! prevalidates normal requests, so this is not a demonstrated final parent Result leak. It is a reproducible failure of the fixed helper's independently required untrusted-stdin/error-channel contract."}
+  {:id :s1a-code/normalizer-retains-nonportable-metadata
+   :priority :P2
+   :context :observed
+   :confidence 1.0
+   :path "src/oikos/law/generation.cljc"
+   :lines [116 124]
+   :symbols [oikos.law.generation/normalize-profile]
+   :contract ["T01" "closed portable data model: metadata and non-EDN values reject at every nesting level"]
+   :problem "normalize-profile calls profile? but not the portable-data/metadata guard. Clojure map updates preserve profile metadata, so its documented closed success result can retain an actual executable function hidden in metadata. This differs from validate-payload, which correctly rejects metadata."
+   :repro ["Let p be (first (:profiles f/payload))."
+           "Call (g/normalize-profile (with-meta p {:untrusted (fn [] :not-portable)}))."
+           "Inspect (fn? (:untrusted (meta (:value result))))."]
+   :observed {:bb {:status :ok :retains-function true} :nbb {:status :ok :retains-function true}}
+   :expected "Return a closed error for metadata-bearing or otherwise nonportable inputs; do not return runtime values under an :ok Profile."
+   :regression "Exercise normalize-profile itself, not only validate-payload, with top-level and nested metadata containing functions and other runtime values in both BB and NBB. All must reject; valid plain profiles still normalize identically."
+   :impact-boundary "No function was evaluated. This is the advertised public normalization ingress returning nonportable data, relevant to independent S2A/S7A consumers."}
+  {:id :s1a-code/context-validation-after-traversal
+   :priority :P2
+   :context :observed
+   :confidence 1.0
+   :path "src/oikos/law/generation.cljc"
+   :lines [173 182]
+   :symbols [oikos.law.generation/validate-generation]
+   :contract ["T01" "closed adapter Context; wrong types reject through Result"]
+   :problem "validate-generation maps over :filesystem-evidence to build lookup/leaves before checking that it is a vector of closed PathEvidence. A malformed external context escapes the documented Result API as an exception instead of returning a fixed error."
+   :repro ["Call (g/validate-generation f/payload {:forbidden-roots [\"/sandbox/checkout\"] :filesystem-evidence 42})."
+           "Catch only around the call to distinguish an escaped exception from an error Result; repeat under BB and NBB."]
+   :observed {:bb :escaped-exception :bb-exception-class "java.lang.IllegalArgumentException" :nbb :escaped-exception}
+   :expected "Validate the closed Context and evidence container before any seq/map traversal; return a sanitized :invalid-shape or :filesystem-unknown Result, never a caller-visible exception."
+   :regression "Shared table-driven tests for nil/scalar/nonvector/ill-shaped filesystem-evidence and malformed Context must all return closed errors without throwing; retain the positive supplied-evidence fixture."
+   :impact-boundary "The existing preview! builds its own vector context; this breaks the separate public shared validator boundary rather than the normal internal preview! call."}]
+ :positive-additional-transport
+ {:description "Real NBB -> fixed BB -> NBB success for two different EDN projections, one config and one artifact destination; second binding includes Unicode and LF."
+  :status :ok
+  :request-id "review-multitarget"
+  :profile-sha "05716246b8ad413a1274c488fdc4ac5cb6c181498b8a8dbf9a4451147c048c73"
+  :generation-sha "837fb4c353c6b20f15ddb18ba000f81bf91d48481354cc8224f8b27ba458f55d"
+  :artifacts [{:target-id "profile" :byte-count 580 :content-sha "e4dce5d5762684242327536a10dbd87c75f44ad9a4a3591a206b1da2cd454ab3"}
+              {:target-id "second" :byte-count 598 :content-sha "9fe5865434cbb74a3c2349b5042fcf63255dba2cbf3d53a506718439085bdccc"}]
+  :validator {:id :profile-edn-v1 :revision "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" :authority :synthetic-test-pin-not-owner-approval}
+  :worker-source-sha256
+  {"scripts/render.clj" "605206bd77b390777c0966cd272087586fc5236ca1b7d7103e87a64eaa9457ca"
+   "scripts/render-bb.edn" "193fcfb3c3291051d14f419495ea0841fcaf4c6923f1d90139ee8cebc215fd74"
+   "src/oikos/law/generation.cljc" "a38e052521c4c079fa1634546d08055db17ac58cdc47e669ecc596d72d08dd72"
+   "src/oikos/law/frame.cljc" "566edcc427a86c144889df8c183537c0c85ab43872426bba50c57a7122ee2b78"
+   "src/oikos/law/digest.cljc" "15254fa3b7c785d83d00a3c699782aa2d8f1cb342762e92213847047e78402ab"
+   "/usr/local/bin/bb" "83fd506a848f11dd0839fb36604c180e4436e5faf0814a2f643537ed22f6835a"}}
+ :contract-coverage
+ [{:tests ["T01"] :evidence "Existing closed-payload/reference tests pass; direct public normalizer/context adversarials reveal findings above. No general closed-ingress qualification. A per-call lexical guard is not an env/secret-resolution capability."}
+  {:tests ["T02" "T03"] :evidence "Existing pairwise roots, lexical aliases, symlinks into state/checkout, missing suffix, cyclic/dangling links, parent/leaf replacement and two-requested-destination hardlinks pass their tests. Additional installed hardlink and noncanonical resolved-evidence probes reveal false passes. No write-time or atomic-snapshot credit."}
+  {:tests ["T04"] :evidence "Existing explicit-port tests pass. Source conservatively compares port numbers across profiles, validates loopback/family/transport/range, and never binds a port. No OS availability/allocation proof."}
+  {:tests ["T05"] :evidence "Both actual runtimes print the same fixture SHA. Exact empty/nested canonical, whitespace/comma, Unicode and multiblock hash goldens pass. Distinct-target transport hashes retained above. Hashes are inert identity, not approval."}
+  {:tests ["T06" "T07"] :evidence "EDN roundtrip, full requested descriptor/content coverage, destinations/formats/validator revision, env-reference completeness and inert hostile literal tests pass. Real distinct-target roundtrip also passes. Bash returns :adapter-unavailable and mixed requests reject wholly; neither is positive Bash qualification."}
+  {:tests ["T08"] :evidence "Existing readFileSync/spawn guards and synthetic installed sentinel/current checks pass. Guard scope is the tested capabilities, not exhaustive syscall/interleaving proof. Direct helper invalid-input echo remains a finding."}
+  {:tests ["T09"] :evidence "Actual process negative matrix passes for malformed/truncated/multiple/mismatched/error/nonzero frames, UTF-8 and stream floods; shared tests exercise result-bijection tampering. The actual helper rejection-channel adversarial is not covered and fails."}
+  {:tests ["T10"] :evidence "Actual cancel-before-launch, during stdin, after stdout, TERM-resistant child, descendant and timeout tests pass. Synthetic cleanup hold blocks admission. Real timers use 6500ms test tolerance; no exhaustive fake-clock enumeration or actual unreapable-process/cleanup-hold production proof is credited."}
+  {:tests ["T11"] :evidence "Reviewed new code has no write/apply/board/service/selection API. Test effects are owned synthetic fixture setup and owned process lifecycle only. Success is inert data, not admission."}]
+ :safe-handoff
+ {:disposition :candidate-api-present-not-prerequisite-qualified
+  :api-document "docs/s1a-api.md"
+  :shared "plan-render/validate-payload remain lexical-only; render-preview/validate-artifacts operate on inert projections; validate-generation checks supplied evidence, not continuity or write permission. normalize-profile and validate-generation require the fixes above before general closed-input consumer qualification."
+  :s2a-s7a "Consumers may inspect and develop against these exact pinned candidate data APIs in owned synthetic fixtures. Do not infer S1A acceptance, board readiness, independent approval or operational admission from green tests or this review. Parent owns prerequisite decisions after fixes and fresh exact-head independent review."
+  :s1b "The false hardlink isolation success must be fixed before using this edge as prerequisite isolation evidence. Positive Bash remains a separately owner-pinned shx artifact obligation, not missing S1A implementation. Services-owned handoff, trusted approval, serialized ownership, immediate identity revalidation, anchored no-follow mutations and rollback/write fixtures remain S1B obligations."
+  :worker "Owner must supply and retain approved immutable/read-only worker artifact and independently pinned validator tuple. repository-worker snapshots of this writable candidate checkout are not a replacement for that boundary; installed promotion is not required by this S1A review."
+  :retained-limits ["Double collection is inert freshness checking, not atomic snapshot or unobserved transient continuity."
+                    "Real timer coverage and synthetic cleanup-hold coverage are explicitly limited, not promoted to exhaustive passes."
+                    "No installed release/current selection, positive Bash renderer, Services receiver, permission grant or production effect is qualified."]}
+ :credits {:implementation-acceptance false :native-github-approval false :hosted-cohort-credit 0 :self-review-credit 0}
+ :reflection {:pattern "Green aggregate tests missed single-destination external hardlinks and direct public-API ingress bypasses. Probe the public seams and unenumerated aliases independently of the main happy path."
+              :spore-created false :ledger-written false :owner-of-synthesis :parent-coordinator}}

@@ -1,0 +1,46 @@
+{:permit/id :oikos-generation-component-470c35e7
+ :permit/authority :coordinator-verification-under-user-approved-artifact-scoped-dependencies
+ :permit/not-board-state-or-native-artifact-validation true
+ :producer {:task :s1a :uuid "07452a65-4a6a-4704-bf81-50408927dcc8"
+            :state :testing :whole-task-complete false}
+ :artifact {:repository "open-hax/oikos"
+            :revision "470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+            :published-ref "artifact/oikos-generation-component-470c35e7"
+            :provided [:portable-generation-manifest :canonical-identity
+                       :closed-profile-and-context-inputs :read-only-isolation
+                       :synthetic-fixture-identity]
+            :files {"src/oikos/law/generation.cljc" "dad31103191e858f464a628edf09c996388546fcca81126f3c61fd49ed5ae2cd"
+                    "src/oikos/law/frame.cljc" "566edcc427a86c144889df8c183537c0c85ab43872426bba50c57a7122ee2b78"
+                    "src/oikos/law/digest.cljc" "15254fa3b7c785d83d00a3c699782aa2d8f1cb342762e92213847047e78402ab"
+                    "src/oikos/infra/generation.cljs" "9578076dd170d096021e7efd95554ca65a3195543cd49799890bf2efbd53982e"
+                    "test/oikos/generation_fixture.cljc" "002246e5e160b9bc6b11c8295ac60046ca5a54c4338fbe2a951e34628b63188e"}
+            :shared-fixture-sha256 "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"}
+ :verification {:original-code-review "reviews/s1a-code-v1.edn"
+                :independent-skeptic "reviews/s1a-code-findings-skeptic-v1.edn"
+                :five-fix-independent-review "reviews/s1a-code-five-fix-review-v2.edn"
+                :scope "All five manifest/isolation/input findings settled; this does not settle the two separate BB protocol findings."
+                :parent-actual-rerun {:revision "470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+                                      :bb [18 286] :nbb [30 392] :eval [9 39]
+                                      :failures 0 :errors 0 :lint-errors 0 :lint-warnings 0}}
+ :consumers
+ {:s2a {:uuid "93a76dad-678a-4980-86fb-ba0fbb5e8203"
+        :scope [:generation-source-manifest :isolated-synthetic-fixture-identity
+                :portable-safe-reference-contract :pure-desktop-projection-laws]
+        :effects "Owned synthetic Clio fixtures only, after the separately required independent safe-reference contract review. No live collector activation."}
+  :s7a {:uuid "0db50b53-6c7a-489a-bff9-048d57ce4cbb"
+        :scope [:isolated-generation-and-fixture-identity :offline-synthetic-corpus
+                :metric-oracles :bounded-existing-endpoint-identity-preflight]
+        :effects "No inference without independently established resource admission; no model load, download, restart, cloud call or heavy benchmark."}}
+ :held {:apis [oikos.infra.bb-render/start!]
+        :capabilities [:bb-renderer-and-validator-transport :deadline-qualification
+                       :positive-bash :write-boundary-safety :promotion :rollback]
+        :known-findings [:s1a-protocol/deadline-excludes-blocking-parent-validation
+                         :s1a-protocol/textdecoder-erases-bom-bytes]
+        :source-tree-warning "The containing commit includes held adapter code. Inheriting it is not permission to invoke it operationally or count it as a qualified prerequisite. Existing synthetic regression suites may run diagnostically; they grant no missing protocol credit."}
+ :board {:authority :rheos :preserve-producer-dependency-uuids true
+         :transition :ordinary-fsm-and-wip-gates-only
+         :artifact-proof "This data records the coordinator's code-artifact verification, not an engine-enforced artifact gate or a second board implementation."}
+ :completion-credit 0 :native-approval-credit 0
+ :unchanged-policy [:synthetic-only :sandbox-dev-only :agent-owned-resources
+                    :zero-spending :no-personal-capture :existing-models-only
+                    :govone-admission :no-installed-or-remote-client-publication]}

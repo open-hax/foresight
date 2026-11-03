@@ -1,0 +1,163 @@
+{:review/type :independent-bounded-protocol-fix-review
+ :review/version 2
+ :review/date "2026-11-03"
+ :review/head "fb9d7cd4a998459cee03d907c81b640a4ada22db"
+ :review/repository "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+ :review/verdict :qualified-within-reviewed-boundary
+ :review/native-approval false
+ :review/task-acceptance false
+ :review/completion false
+ :review/introduced-findings []
+ :review/epistemic-tier :observed
+ :scope
+ {:original-report ".ημ/runs/oikos-program-20261103/reviews/s1a-protocol-probes-v1.edn"
+  :original-head "7896ee8709a9461ee54e2d39739c5ee8ce1a3157"
+  :primary ["src/oikos/infra/bb_render.cljs" "src/oikos/infra/validation_ipc.cljs" "scripts/validate-render.clj"]
+  :supporting ["AGENTS.md" "docs/s1a-api.md" "docs/specs/s1a-generation-contracts.md"
+               "src/oikos/law/frame.cljc" "test/oikos/infra/generation_test.cljs"
+               "test/oikos/fixtures/bb_protocol.clj" "test/oikos/fixtures/bb_validator.clj"
+               "test/oikos/fixtures/bb_echo.clj" "bb.edn" "eval/run_test.cljs"]
+  :not-a-duplicate-full-review true
+  :first-five-findings "No independent re-audit of the already-qualified five fixes; their retained regressions ran as part of the requested full suite."
+  :excluded [:product-edits :pull-requests :board-writes :ledger-writes :commits :services :models
+             :personal-configuration :environment-secret-inspection :package-installs
+             :installed-promotion :s1b-write-edge :native-approval :task-completion]
+  :durable-write "Only this new parent-coordinator review file. Existing full-suite tests own and clean their transient synthetic filesystem fixtures; extra probes used in-memory source/bytes and actual owned subprocesses, not new fixture files."
+  :checkout-clean-before true :checkout-clean-after-tests-and-probes true}
+ :sha256
+ {"src/oikos/infra/bb_render.cljs" "3cb35d0623ca078e8dacdb8a2fb11880015892c4dfac75b47ec25ec496c4a40d"
+  "src/oikos/infra/validation_ipc.cljs" "86753b843f519152ff472fa76a6e0ed404d3efd02a00d285d4e675d2540a1c55"
+  "scripts/validate-render.clj" "44e33f64d253f7246cadbafb336d649105a061c86f848872b59cba48ac1ee1cd"
+  "scripts/render.clj" "a7ddd8e0adcc69d07ca3952816923a01490e7258237c8c3cdcaa3528f3d2d385"
+  "scripts/render-bb.edn" "193fcfb3c3291051d14f419495ea0841fcaf4c6923f1d90139ee8cebc215fd74"
+  "src/oikos/law/frame.cljc" "566edcc427a86c144889df8c183537c0c85ab43872426bba50c57a7122ee2b78"
+  "src/oikos/law/generation.cljc" "dad31103191e858f464a628edf09c996388546fcca81126f3c61fd49ed5ae2cd"
+  "src/oikos/law/digest.cljc" "15254fa3b7c785d83d00a3c699782aa2d8f1cb342762e92213847047e78402ab"
+  "docs/s1a-api.md" "0ecd53f884f04415d91e5553ecc943ca8be70095c538d1a14a9f54eee4d255f6"
+  "docs/specs/s1a-generation-contracts.md" "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+  "test/oikos/fixtures/bb_protocol.clj" "a8c16f70f21b6df89956e27d83d951cb506b651bb314ba31344f804648c5c201"
+  "test/oikos/fixtures/bb_validator.clj" "53b7a18ab433e2aa4e53d2a3d052ea4858b5e7ed2a822187d8dce48f0d0f94c7"
+  "test/oikos/fixtures/bb_echo.clj" "842738e239dd3fb6506cc79a05b039f50f83662c56a460e097ef4652dc37f201"
+  "test/oikos/infra/generation_test.cljs" "769324fa4326f86587c4010c2e5f0b65bc755f3a5ea19ab202df6199c37dd407"
+  "/usr/local/bin/bb" "83fd506a848f11dd0839fb36604c180e4436e5faf0814a2f643537ed22f6835a"}
+ :settlements
+ [{:finding :s1a-protocol/deadline-excludes-blocking-parent-validation
+   :status :settled
+   :evidence [:full-suite :saved-v1-probes :validator-lifecycle :shared-original-deadline :late-callbacks]
+   :source {:file "src/oikos/infra/bb_render.cljs" :lines [65 69 84 99 100 106 113 122 159 175]}
+   :reason "The expensive pure accept-response/render/hash/frame work now runs in a separate independently pinned, killable BB validator. The renderer and validator share one monotonic absolute deadline; parent import is bounded native JSON, not another main-loop EDN/hash pass. The timer remains armed through validator/import/publication, with clock checks before and after import and before the final CAS. Actual heartbeat and timeout probes below verify the architectural move, not just a posthoc clock check."
+   :actual-original-reproduction {:renderer-response-bytes 440243 :renderer-close-ms 12
+                                  :spawn-to-settle-ms 5993 :status :error :code :timeout :late-ok false}
+   :qualification "Measured actual runs met the spawn-relative terminal bound; deterministic delayed-clock schedules also rejected overdue callbacks. This is not a hard-real-time OS proof or an entry-relative responsiveness claim."}
+  {:finding :s1a-protocol/textdecoder-erases-bom-bytes
+   :status :settled
+   :evidence [:saved-v1-probes :independent-validator-pins :private-json]
+   :source [{:file "src/oikos/infra/bb_render.cljs" :lines [136 137]}
+            {:file "scripts/validate-render.clj" :lines [14 18 38 41]}
+            {:file "src/oikos/infra/validation_ipc.cljs" :lines [55 58]}]
+   :reason "Both process roles reject any raw stderr bytes before normal-close acceptance. Renderer BOM reaches the BB restricted reader unchanged, and validator JSON BOM is preserved by ignoreBOM:true and rejected by JSON.parse. Both original real-BB commands now return closed protocol errors without artifacts."
+   :actual-original-reproductions [{:channel :stdout :stdout-bytes 1120 :stderr-bytes 0 :status :error :code :protocol-error}
+                                  {:channel :stderr :stdout-bytes 1117 :stderr-bytes 3 :status :error :code :protocol-error}]}]
+ :checks
+ {:full-suite
+  {:cwd "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+   :command "bb --config bb.edn test" :exit 0
+   :bb {:tests 18 :assertions 286 :failures 0 :errors 0}
+   :nbb {:tests 40 :assertions 546 :failures 0 :errors 0}
+   :eval {:tests 9 :assertions 39 :failures 0 :errors 0 :offline true}
+   :shared-fixture-sha "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"
+   :deadline-regression {:spawn-to-settle-ms 5992.533716000002 :status :error :code :timeout}
+   :full-cap-native-import {:bytes 6356992 :milliseconds 7.572161000003689}
+   :included-focused-tests ["protocol-candidate-bom-byte-framing" "protocol-candidate-parent-validation-deadline"
+                            "trusted-ipc-shape-byte-and-enum-boundaries" "private-ipc-full-cap-native-import-cost"
+                            "independent-real-validator-positive-multitarget" "actual-trusted-validator-negative-ipc"
+                            "validator-heartbeat-cancel-term-resistance-and-descendant"
+                            "deadline-delayed-timer-real-validator-races" "validator-pin-is-separate-from-producer"
+                            "real-validator-length-framing-and-utf8"]
+   :race-schedules "Actual renderer and actual validator, unchanged native import: observed monotonic time advances at validator launch, close, after import, and final CAS. All four schedules rejected with no artifacts; no fake validator approval was substituted."
+   :framing-negatives "Real validator processes exercised negative/out-of-range length argv, truncation, extra bytes and invalid request UTF-8. Private malformed/truncated JSON, unknown keys/enums, invalid UTF-8, BOM, stderr, overflow and nonzero validator exits were also actual processes, not only direct importer calls."}
+  :lint {:command "bb --config bb.edn lint" :exit 0 :errors 0 :warnings 0 :milliseconds 345}
+  :saved-v1-probes
+  {:command "bb --config <target>/scripts/render-bb.edn -e <driver reading the prior report with clojure.edn and executing joined :source-lines through clojure.java.shell/sh nbb -cp src:test -e; BOM stdout, BOM stderr, then deadline echo>"
+   :source "Unmodified saved :reproducible-probes from s1a-protocol-probes-v1.edn; only its documented :stdout/:stderr parameter changes. The one-shot renderer observer restores the real spawn before the new validator launch."
+   :runs [{:probe :bom-channel :channel :stdout :exit 0 :status :error :code :protocol-error :stdout-bytes 1120 :stderr-bytes 0}
+          {:probe :bom-channel :channel :stderr :exit 0 :status :error :code :protocol-error :stdout-bytes 1117 :stderr-bytes 3}
+          {:probe :deadline-bb-echo :exit 0 :status :error :code :timeout :spawn-to-close-ms 12 :spawn-to-settle-ms 5993 :stdout-bytes 440243 :close-ack true}]
+   :fixed-fixture-identity {:payload-sha "ad97f7cde1c24e5be2fd0770472131b288ec013073410ebb036017b631878d9e"
+                            :response-wire-sha "7f3a932ebd7b4e1606967b2003bed37a1ec74ae9d776da7feaaf89be5db43415"}}
+  :validator-lifecycle
+  {:command "nbb -cp src:test -e <independent inline observers using the pinned bb_protocol/bb_validator fixtures and real child_process.spawn; 10ms heartbeat, close acknowledgments, kill(pid,0), owned group checks and actual TERM/KILL forwarding>"
+   :runs [{:mode "validator-slow" :cancel-phase :validator-output :code :cancelled :artifacts 0 :heartbeat 117 :spawn-to-settle-ms 1189.822228 :cancel-to-settle-ms 1002.2128409999999 :signals [:SIGTERM]}
+          {:mode "validator-resist" :cancel-phase :validator-output :code :cancelled :artifacts 0 :heartbeat 116 :spawn-to-settle-ms 1169.040212 :cancel-to-settle-ms 1000.2318679999998 :signals [:SIGTERM :SIGKILL] :kill-after-term-ms 250.1134070000003}
+          {:mode "validator-descendant" :cancel-phase :validator-output :code :cancelled :artifacts 0 :heartbeat 117 :spawn-to-settle-ms 1176.8529360000002 :cancel-to-settle-ms 1000.8500840000002 :signals [:SIGTERM]}
+          {:mode "validator-slow" :code :timeout :artifacts 0 :heartbeat 594 :spawn-to-settle-ms 5993.345418 :validator-spawn-offset-ms 135.74486399999932 :term-offset-ms 4993.2623140000005}]
+   :ownership "Every result above observed both direct close acknowledgments, both direct PIDs absent, both process groups absent and no cleanup holds before publication. Signals targeted the live validator group only, not the already-reconciled renderer. Repeated cancel! after settlement added zero signals."
+   :no-main-loop-reblocking "The heartbeat continued while the separate validator owned blocked/TERM-resistant work. Source inspection confirms no parent canonicalization, frame parsing or portable hashing after renderer spawn; only bounded buffer operations, native JSON import, fixed-code errors and clock/ownership checks remain."}
+  :shared-original-deadline
+  {:method "A real BB renderer fixture slept 3000ms before loading bb_protocol.clj, then a real TERM-resistant bb_validator.clj fixture announced readiness and blocked. Both used the actual adapter and its unchanged absolute deadline."
+   :command "nbb -cp src:test -e <same independent lifecycle observer, mode validator-resist, fixed renderer argv -e '(Thread/sleep 3000) (load-file test/oikos/fixtures/bb_protocol.clj)' with the filename quoted in the actual expression>"
+   :validator-spawn-offset-ms 3123.4354000000003 :term-offset-ms 4993.337963 :kill-offset-ms 5242.845606999999
+   :spawn-to-settle-ms 5992.933361000001 :heartbeat 595 :code :timeout :artifacts 0
+   :both-direct-close-ack true :both-direct-pids-and-groups-absent true :cleanup-holds []
+   :conclusion "No second 5s validator budget and no serial 1s-per-process cleanup budget were granted."}
+  :late-callbacks
+  {:command "nbb -cp src:test -e <independent native-validator cancellation probes; all child spawns, pipes and signals real; post-settlement close/data callback replay explicitly synthetic>"
+   :runs [{:mode :descendant :code :cancelled :cancel-to-settle-ms 1001.2431200000001 :heartbeat 115
+           :owned-descendant-pid 2888449 :owned-descendant-alive-after false}
+          {:mode :valid-json-before-exit :code :cancelled :cancel-to-settle-ms 1002.087794 :heartbeat 128
+           :method "Actual validator loaded scripts/validate-render.clj, emitted its genuine validated success JSON, then slept; cancellation fired on actual validator stdout before EOF/exit."}
+          {:mode :validator-stdin :code :cancelled :cancel-to-settle-ms 1001.406872 :heartbeat 112
+           :method "Cancellation fired at actual native validator stdin.end; subsequent write/error/close callbacks could not replace the terminal decision."}]
+   :all-artifact-counts 0 :both-direct-close-acks true :both-direct-pids-and-groups-absent true
+   :all-cleanup-holds-empty true :new-signals-from-late-callbacks-or-cancel 0
+   :descendant-observation "Enumerated children only beneath the owned validator PID's /proc/<pid>/task/<tid>/children files, across its own threads; captured the actual ProcessBuilder descendant and verified kill(pid,0) reported absence after settlement. No unowned process metadata, environment or user configuration was read."
+   :replay "After recording real cleanup, replayed close(0), data and cancel! against the already-settled owned child objects. No new signal or artifact publication followed. This replay is not presented as a native process success."}
+  :independent-validator-pins
+  {:command "nbb -cp src:test -e <independent real repository worker and spawn observer; only the explicitly described synthetic worker/request/argv mutation per case>"
+   :runs [{:mode :positive :spawns [:renderer :validator] :status :ok :artifacts 1}
+          {:mode :bad-validator-pin :spawns [] :code :child-failed :artifacts 0}
+          {:mode :same-helper-validator :spawns [] :code :child-failed :artifacts 0}
+          {:mode :legacy-six-file :spawns [] :code :child-failed :artifacts 0}
+          {:mode :request-selector :spawns [] :code :invalid-shape :artifacts 0}
+          {:mode :foreign-producer-validator :spawns [:renderer :validator] :code :invalid-artifact :artifacts 0}
+          {:mode :validator-stdout-bom :spawns [:renderer :validator] :code :protocol-error :artifacts 0}
+          {:mode :validator-stderr-bom :spawns [:renderer :validator] :code :protocol-error :artifacts 0}]
+   :all-cleanup-holds-empty true
+   :foreign-pin-method "The actual producer alone received the synthetic c*64 revision. The separately launched actual validator retained the parent's a*64 tuple and rejected the producer's otherwise well-correlated descriptors."
+   :validator-bom-method "Fixed inline BB prefixes raw BOM bytes to native validator stdout or stderr, then loads the real validate-render.clj with the real original byte lengths and pins. Neither genuine success path bypassed rejection."
+   :producer-json-forgery {:method "An owned pinned real BB byte-echo renderer emitted an importer-shaped forged JSON success. The private importer alone admits its shallow shape by design; the actual start! path independently launched the unchanged BB validator, which rejected the producer bytes as invalid wire data."
+                           :private-shape-only-status :ok :actual-spawns [:renderer :validator]
+                           :actual-status :error :code :protocol-error :artifacts 0 :cleanup-holds []}
+   :trust-limit "The importer deliberately does not re-hash/revalidate content semantics on the main loop. Its input is confined to the separately pinned owner-trusted validator; renderer JSON cannot select or bypass that validator. The factory's synthetic snapshot is still not owner approval, installation or immutable production promotion. Production artifact immutability remains the documented owner seam, not a new acceptance claim."}
+  :private-json
+  {:command "nbb -cp src:test -e <independent direct native import-result probes with in-memory JSON/Buffer fixtures; no artifact-semantic approval is inferred from this private shape-only test>"
+   :schema-negatives 24 :schema-negatives-rejected 24 :marker-leaks 0
+   :schema-cases [:extra-root-key :extra-value-key :extra-descriptor-key :unknown-status :unqualified-format
+                  :unknown-validator-id :invalid-revision :invalid-hash :unsafe-byte-count :negative-byte-count
+                  :empty-artifacts :content-count-mismatch :duplicate-target :65-artifacts :utf8-content-over-limit
+                  :unknown-error-code :unknown-coordinate-keyword :foreign-namespaced-coordinate
+                  :negative-index :index-over-limit :fractional-index :empty-errors :65-errors :33-coordinates]
+   :raw-negatives [{:id :invalid-utf8 :code :protocol-error} {:id :truncated :code :protocol-error}
+                   {:id :second-form :code :protocol-error} {:id :bom :code :protocol-error}
+                   {:id :cap-plus-one :code :protocol-error}]
+   :format-keyword :oikos/profile-edn
+   :mapped-error {:code :invalid-shape :field [:targets 4096]}
+   :utf8-content-boundary {:at-65536-bytes :ok :over-65536-bytes :protocol-error}
+   :full-cap-native-import {:bytes 6356992 :status :ok :milliseconds 11.997890000000012}
+   :interpretation "Native UTF-8/BOM/cap behavior and closed enum/coordinate reconstruction were verified separately from the real BB validator's semantic qualification. Full-cap import remained millisecond-scale, not the previous multi-second main-loop EDN/hash work."}}
+ :probe-harness-not-product-errors
+ [{:kind :inline-delimiter-error :exit 1 :disposition "Corrected the in-memory private-JSON probe only; the subsequent 24-schema/5-raw case run completed."}
+  {:kind :nbb-array-seq-unavailable :exit 1 :disposition "Replaced array-seq with seq in the in-memory owned-process observer; subsequent actual process probes completed."}
+  {:kind :initial-descendant-observer-too-narrow
+   :disposition "The first observer queried only the validator leader thread's children list and found none. That absence was not used as descendant proof; a corrected all-owned-threads observer captured and verified the actual descendant PID."}]
+ :limitations
+ ["No exhaustive OS scheduling, PID reuse or hard-real-time guarantee was proved. Existing deterministic clock tests and extra real schedules bound this review's evidence."
+  "Pre-spawn synchronous admission remains documented and was not reframed as start!-entry bounded work."
+  "No first-five finding was reopened without a new causal regression; the full existing regression suite remained green."
+  "No immutable installed worker, native reviewer approval, task acceptance, successor admission, production receiver or S1B write safety was qualified."
+  "No additional reviewer or subagent was spawned; no native review queue or historical round count gated this local review."]
+ :reflection
+ {:original-findings :both-settled-on-exact-head
+  :introduced-trusted-validator-boundary :qualified-within-explicit-owner-trust-and-reviewed-schedules
+  :reusable-check "Retain byte identity across decoder seams and test timer responsiveness while actual expensive validation owns a separately killable process; final clock checks supplement, rather than replace, that boundary."
+  :parent-next-action "Use this exact-head bounded verdict in parent synthesis; it is not board state, native approval or a completion event."}}

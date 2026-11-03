@@ -1,0 +1,27 @@
+{:artifact/id :oikos-s1a-accepted-62e6eebb
+ :artifact/repository "open-hax/oikos"
+ :artifact/source "fb9d7cd4a998459cee03d907c81b640a4ada22db"
+ :artifact/merged "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+ :artifact/tree "8ed3ef2854d5b11522338e32e7e177dae893fc78"
+ :artifact/published-ref "artifact/oikos-s1a-62e6eebb"
+ :artifact/pr "https://github.com/open-hax/oikos/pull/1"
+ :artifact/merge-parents ["ae35073719974c0df1d2dae301c2179fa4785641"
+                          "fb9d7cd4a998459cee03d907c81b640a4ada22db"]
+ :artifact/merged-tree-equals-reviewed-candidate true
+ :qualification "../reviews/s1a-parent-acceptance.edn"
+ :board {:authority :rheos :uuid "07452a65-4a6a-4704-bf81-50408927dcc8"
+         :observed-state :done :path [:testing :review :document :done]
+         :parent "722906b7-77d7-4414-a976-23996f7533de" :dependencies []}
+ :provides [:portable-generation-manifest :canonical-identity :closed-inputs
+            :read-only-synthetic-isolation-and-freshness :inert-profile-edn-rendering
+            :bounded-non-evaluating-edn-framing :development-pinned-renderer-validator-boundary]
+ :approved-development-validator {:format :oikos/profile-edn :id :profile-edn-v1
+                                  :revision "dad31103191e858f464a628edf09c996388546fcca81126f3c61fd49ed5ae2cd"}
+ :earlier-component-permit {:path "generation-component-470c35e7.edn"
+                            :provided-five-file-hashes-unchanged true
+                            :historical-held-protocol-code "Do not operationally reuse the older 470c35e7 adapter. The reviewed protocol repair exists only at the accepted newer source. Consumers must explicitly import and verify it before expanding their scope."}
+ :not-provided [:installed-immutable-worker :positive-bash :serialized-effect-write-boundary
+                :services-generation-promotion :rollback :hard-real-time-os-guarantee
+                :start-entry-responsiveness :authorization-to-run-operator-effects]
+ :unchanged-scope "Development source only; no installation or selected-generation change. S2A and S7A retain their own scoped effect holds. No epic integration is admitted until both of that epic's children qualify."
+ :native-approval-credit 0 :epic-completion-credit 0}

@@ -1,0 +1,141 @@
+{:review/version 2
+ :review/kind :independent-scoped-fix-verification
+ :review/date "2026-11-03"
+ :verdict :five-findings-settled
+ :scope
+ {:only-original-five-ids true
+  :previous-review ".ημ/runs/oikos-program-20261103/reviews/s1a-code-v1.edn"
+  :repository "/home/err/spaces/foresight/oikos/.worktrees/review/oikos-s1a-inputs-470c35e7"
+  :examined "Only the frozen 7896ee8 -> 470c35e7 five-fix diff, its new regressions, affected implementations and independent counterexamples/positive controls. The mutable author checkout was not inspected."
+  :whole-s1a-accepted false
+  :protocol-qualified false
+  :board-or-pr-admission false
+  :hosted-queue-wait-required false}
+ :bindings
+ {:original-head "7896ee8709a9461ee54e2d39739c5ee8ce1a3157"
+  :fix-red "aeb6c555f1dc1916e70127755672c4b5848bec91"
+  :reviewed-head "470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+  :diff-command "git diff --binary 7896ee8709a9461ee54e2d39739c5ee8ce1a3157..470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+  :diff-sha256 "68582c19d77d74a16493525e0d4963018e25ba7a3858694c98fe0708f59af5b6"
+  :spec-sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+  :shared-fixture-sha256-bb "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"
+  :shared-fixture-sha256-nbb "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"
+  :red-evidence "Read RED commit object and RED -> GREEN diff. New regression tests precede the production fixes; GREEN adds six assertions pinning the safe invalid-envelope disposition. No tests were removed. RED itself was not rerun in another checkout."
+  :frozen-worktree-initial-status :clean}
+ :actual-gates
+ [{:command "bb test" :exit 0
+   :suites [{:runtime :bb :tests 18 :assertions 286 :failures 0 :errors 0}
+            {:runtime :nbb :tests 30 :assertions 392 :failures 0 :errors 0}
+            {:runtime :nbb-eval :tests 9 :assertions 39 :failures 0 :errors 0}]}
+  {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+  {:command "git diff --check 7896ee8709a9461ee54e2d39739c5ee8ce1a3157..470c35e7d5bfdfbfd1a93bec3a1f63357015df69" :exit 0}]
+ :per-id
+ [{:id :s1a-code/hardlink-to-unlisted-installed-file
+   :previous-priority :P1 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/infra/generation.cljs" :lines [10 29]
+         :symbols [oikos.infra.generation/file-identity oikos.infra.generation/inspect]
+         :mechanism "Existing regular-file leaves with nlink > 1 reject; identity tokens also include link count. No alias-discovery scan or content read is added."}
+   :regression {:path "test/oikos/infra/generation_test.cljs" :line 207 :test review-v1-hardlink-to-unenumerated-file}
+   :independent-probes
+   {:actual-filesystem true
+    :setup "Fresh owned /tmp/opencode/s1a-five-fix-review-* sandbox, f/under payload, all profile roots and checkout forbidden root."
+    :installed-alias {:nlink 2 :same-inode true :result {:status :error :errors [{:code :filesystem-unknown :field []}]}}
+    :unlisted-sibling-alias {:nlink 2 :same-inode true :result {:status :error :errors [{:code :filesystem-unknown :field []}]}}
+    :content-read-guard {:capability :readFileSync :forbidden-attempts 0}
+    :sentinels-unchanged true
+    :new-hardlink-between-collections {:collections 2 :result-code :filesystem-unknown}
+    :positive-controls {:absent-destination :ok :ordinary-single-link-destination :ok :ordinary-directories-with-nlink-greater-than-one :ok}
+    :cleanup :owned-sandbox-removed-in-finally}
+   :qualification "Settles the original single requested regular-file destination alias finding. It does not establish a write-time no-follow boundary, atomic snapshot or S1B write permission."}
+  {:id :s1a-code/noncanonical-resolved-path-bypass
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/law/generation.cljc" :lines [164 193]
+         :symbols [oikos.law.generation/evidence? oikos.law.generation/validate-generation]
+         :mechanism "Both requested and resolved evidence paths must equal their normalized absolute spelling before isolation comparisons."}
+   :regression {:path "test/oikos/law/generation_test.cljc" :line 166 :test review-v1-noncanonical-resolved-paths}
+   :independent-probes
+   {:runtimes [:bb :nbb]
+    :per-runtime {:noncanonical-rejections 18 :canonical-collision-rejections 3 :canonical-positive :ok}
+    :cases "Each of dev/state, installed/config and checkout using elsewhere/../, /./ and repeated-slash spellings; destination leaf both absent and synthetically present. Canonical versions of all three collisions still reject."
+    :error-shape :closed-result :escaped-exceptions 0}
+   :qualification "Settles the shared supplied-evidence normalization bypass; no claim that supplied evidence itself establishes filesystem continuity."}
+  {:id :s1a-code/invalid-request-echo
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:paths [{:path "scripts/render.clj" :lines [18 20]}
+                 {:path "src/oikos/law/generation.cljc" :lines [270 276]}]
+         :symbols [render oikos.law.generation/response-correlation]
+         :mechanism "Only correctly typed/pattern-validated scalar correlation fields are copied. Invalid fields use fixed invalid-envelope/zero-hash correlation."}
+   :regression {:path "test/oikos/infra/generation_test.cljs" :line 254 :test review-v1-actual-helper-invalid-envelope-no-echo}
+   :independent-probes
+   {:actual-helper "/usr/local/bin/bb --config <frozen>/scripts/render-bb.edn --classpath <frozen>/src:<frozen>/test <frozen>/scripts/render.clj <synthetic-pins>"
+    :environment "Exact synthetic HOME/XDG/ENVM/HOSTNAME/locale map, no inherited environment; temporary owned /tmp/opencode/s1a-five-fix-helper-* removed by context manager."
+    :invalid-input-cases 5
+    :cases ["Original marker-string request-id/profile-sha counterexample."
+            "Nested map ID and vector hash."
+            "Vector ID and nested map hash."
+            "Overlength ID and invalid marker hash."
+            "Duplicate-key malformed frame carrying marker."]
+    :all-invalid-exits 2
+    :stdout "Exact fixed canonical closed error frame for every case; invalid-shape for invalid fields and protocol-error for the duplicate-key frame."
+    :marker-in-stdout false :marker-in-stderr false :stderr-bytes 0
+    :valid-request-control {:exit 0 :status :ok :original-id-and-profile-hash-preserved true :stderr-bytes 0}
+    :legitimate-rejection-control {:exit 2 :closed-error true :valid-correlation-preserved true :stderr-bytes 0}}
+   :qualification "Settles unvalidated correlation-field echo. Valid scalar IDs/hashes remain correlation data; this is not secret detection, broader frame qualification or resolution of the separate BOM/deadline defects."}
+  {:id :s1a-code/normalizer-retains-nonportable-metadata
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/law/generation.cljc" :lines [116 124]
+         :symbol oikos.law.generation/normalize-profile
+         :mechanism "bounded-data? runs before profile? and normalization; metadata and runtime values reject rather than being returned or stripped under success."}
+   :regression {:path "test/oikos/law/generation_test.cljc" :line 182 :test review-v1-direct-normalize-profile-metadata}
+   :independent-probes
+   {:runtimes [:bb :nbb]
+    :per-runtime {:closed-rejections 9 :function-invocations 0 :plain-profile-positive :ok}
+    :cases "Function/atom metadata on profile, inputs, xdg, envm, roots, ports and available-env; direct function HOME and atom config root. Plain profile still returns equal normalized data."}
+   :qualification "Settles the advertised normalize-profile ingress returning metadata-contained runtime values. No embedded function was invoked."}
+  {:id :s1a-code/context-validation-after-traversal
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/law/generation.cljc" :lines [172 187]
+         :symbol oikos.law.generation/validate-generation
+         :mechanism "Portable closed Context, nonempty forbidden-root vector and evidence-vector predicates are checked before lookup/leaves traversal."}
+   :regression {:path "test/oikos/law/generation_test.cljc" :line 197 :test review-v1-context-shape-before-traversal}
+   :independent-probes
+   {:runtimes [:bb :nbb]
+    :per-runtime {:malformed-context-closed-errors 22 :escaped-exceptions 0 :valid-context-positive :ok}
+    :cases "Original :filesystem-evidence 42, nil/scalar/string/keyword/list/function/nonvector containers, malformed entries, missing/extra fields, bad forbidden-roots and runtime-bearing Context metadata."}
+   :qualification "Settles the original error-Result boundary failure without weakening the valid supplied-evidence path."}]
+ :regressions-introduced-by-five-fixes
+ {:observed []
+  :basis "Inspected full five-file diff and RED -> GREEN diff; reran all gates plus independent negative and positive controls. No regression genuinely attributable to these fixes was observed within the authorized scope. This is not a claim of exhaustive correctness."}
+ :current-file-sha256
+ {"AGENTS.md" "96c3c849e38137ea0db44d3ec274b78e7f603a2aadff073496e2b43634e1c9b8"
+  "bb.edn" "ab2aaf2a9931e8d8fcd221f0650a48859763b92f3cd6acaadd62a4b61f6b46af"
+  "docs/specs/s1a-generation-contracts.md" "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+  "docs/s1a-api.md" "1255c3ae2e8d93827fc7fc43a656eee0838e6678dd9e790583255a6c43bec3ca"
+  "scripts/render.clj" "a7ddd8e0adcc69d07ca3952816923a01490e7258237c8c3cdcaa3528f3d2d385"
+  "scripts/render-bb.edn" "193fcfb3c3291051d14f419495ea0841fcaf4c6923f1d90139ee8cebc215fd74"
+  "src/oikos/infra/generation.cljs" "9578076dd170d096021e7efd95554ca65a3195543cd49799890bf2efbd53982e"
+  "src/oikos/law/generation.cljc" "dad31103191e858f464a628edf09c996388546fcca81126f3c61fd49ed5ae2cd"
+  "src/oikos/law/frame.cljc" "566edcc427a86c144889df8c183537c0c85ab43872426bba50c57a7122ee2b78"
+  "src/oikos/law/digest.cljc" "15254fa3b7c785d83d00a3c699782aa2d8f1cb342762e92213847047e78402ab"
+  "src/oikos/infra/bb_render.cljs" "6d2b36287dbab1ba88666e7edca5a19c351c2e05e31afb7f4c1e1463f91c2a40"
+  "test/oikos/law/generation_test.cljc" "0d52a7c4d27973e400e545dcc66ebc5a0b3fa4449b4aa2eb203e6afbc603994e"
+  "test/oikos/infra/generation_test.cljs" "8e78d8aadc3c83ef2647cba89cd65a3129d90a3dd99e639c59a7ba9856e83819"
+  "test/oikos/generation_fixture.cljc" "002246e5e160b9bc6b11c8295ac60046ca5a54c4338fbe2a951e34628b63188e"
+  "/usr/local/bin/bb" "83fd506a848f11dd0839fb36604c180e4436e5faf0814a2f643537ed22f6835a"}
+ :outside-five-id-scope
+ [{:defect :protocol-deadline :priority :P1 :status :known-unfixed-at-reviewed-head
+   :source :user-reported-independent-confirmation :independently-retested-in-this-review false}
+  {:defect :protocol-bom :priority :P2 :status :known-unfixed-at-reviewed-head
+   :source :user-reported-independent-confirmation :independently-retested-in-this-review false}]
+ :handoff
+ {:five-id-obligation :settled-at-exact-reviewed-head
+  :whole-s1a "Not accepted. Separate deadline/BOM work proceeds independently; full protocol and any final head still require their owning verification. Green aggregate tests do not waive those open defects."
+  :consumers "Parent may use this artifact solely as independent settlement evidence for these five IDs when composing the later exact-head prerequisite assessment for S1B/S2A/S7A. No board transition, deployment, effect authorization or whole-S1A prerequisite admission is supplied."
+  :unchanged-boundaries "Inert rendering and supplied-path freshness remain distinct from write-time safety. Owner-approved immutable worker/validator pins, positive Bash and actual S1B write/promotion qualification are neither supplied nor newly required by this five-fix review."
+  :new-wave-preferences-added false
+  :implementation-acceptance false :native-approval false :self-review-credit 0}
+ :write-accounting
+ {:persistent-write "Only this NEW parent review file."
+  :product-board-ledger-pr-edits false :commits-or-pushes false
+  :services-models-installs-personal-reads false
+  :temporary-fixtures "Only owned synthetic /tmp/opencode directories, removed in finally/context-manager cleanup."}}

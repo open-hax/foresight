@@ -1,0 +1,217 @@
+{:review/version 1
+ :review/kind :independent-adversarial-code-and-artifact-review
+ :review/date "2026-11-03"
+ :task :s7a
+ :uuid "0db50b53-6c7a-489a-bff9-048d57ce4cbb"
+ :verdict :changes-required
+ :finding-count 4
+ :priorities {:P0 0 :P1 0 :P2 4 :P3 0}
+ :scope
+ {:repository "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a"
+  :reviewed-head "3b2e89dfe84a85f355c1e7abca70b4e580eea2c9"
+  :initial-worktree-status :clean
+  :examined [:changed-code :changed-tests :offline-corpus :split-and-metric-definitions
+             :fixture-pngs :artifact-seal :source-hashes :fail-closed-identity-preflight]
+  :task-read {:method :eta-mu-kanban-content
+              :absolute-config "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+              :working-directory "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+              :all-returned-comments-read true}
+  :instructions-read ["/home/err/AGENTS.md"
+                      "/home/err/spaces/AGENTS.md"
+                      "/home/err/spaces/foresight/AGENTS.md"
+                      "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/AGENTS.md"
+                      "/home/err/spaces/foresight/oikos/AGENTS.md"
+                      "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a/AGENTS.md"]
+  :inference-authorized false
+  :live-endpoints-probed-by-reviewer false
+  :native-provider-approval false
+  :board-or-pr-admission false
+  :hosted-queue-wait-required false}
+ :bindings
+ {:artifact-path "eval/s7a/artifact.edn"
+  :artifact-file-sha256 "ace68183e9ec6a9c313b4dab15711e58a3b6df95e1ba169a3296df05a228f6c4"
+  :artifact-canonical-seal "9780f1e4c00f87a1ca0ac6df74a34ec6743b8ff31b741ada7aae18f3bba641fc"
+  :canonical-seal-recomputed-and-matched true
+  :artifact-bound-files 27
+  :all-27-file-hashes-recomputed-and-matched true
+  :source-file-sha256
+  {"src/oikos/law/evaluation.cljc" "1e2cf68d3ce6661e2506d5a60471b583a020fb57628629cd857d421b5ef9769e"
+   "test/oikos/law/evaluation_test.cljc" "463af201794521c0e4afc893f0057f15f6ef90b195a57997ff18a7254d1c651d"
+   "scripts/s7a.cljs" "9c69685b0522cd4aa15938c8be83ddf537093d56f768515a5b55e3def93a1703"
+   "eval/s7a/corpus.edn" "0fc84c828ba8d6ac62dab2d82d81225975866b07282fee127d23f146b25085cf"
+   "eval/s7a/manifest.edn" "7e6251e09530237f0d0ef4a9e44858cc3d985d86f7a3034818075c0a97f161b0"
+   "eval/s7a/preflight.edn" "7ce43920381d00fa4975ef0b1bad52f308e1ea940aebf3bc013049ff81496547"}}
+ :generation-prerequisite
+ {:permit ".ημ/runs/oikos-program-20261103/permits/generation-component-470c35e7.edn"
+  :revision "470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+  :all-five-permitted-source-hashes-recomputed-and-matched true
+  :shared-fixture-sha256-observed-in-both-runtimes "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"
+  :provided [:portable-generation-manifest :canonical-identity :closed-inputs
+             :read-only-isolation :synthetic-fixture-identity]
+  :bb-transport-held true
+  :bb-diagnostic-tests-only true
+  :bb-protocol-qualification-credit 0
+  :bb-operational-reuse-required false
+  :whole-s1a-completion-required-for-offline-artifact false}
+ :actual-candidate-gates
+ [{:command "bb test" :exit 0
+   :suites [{:runtime :bb :tests 23 :assertions 331 :failures 0 :errors 0}
+            {:runtime :nbb :tests 35 :assertions 437 :failures 0 :errors 0}
+            {:runtime :nbb-eval :tests 9 :assertions 39 :failures 0 :errors 0}
+            {:runtime :nbb-s7a-artifact :tests 4 :assertions 97 :failures 0 :errors 0}]}
+  {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+  {:command "git diff --check 3b2e89d^..3b2e89d" :exit 0}
+  {:command "nbb -cp src:. scripts/s7a.cljs audit" :exit 0
+   :result {:status :ok :semantic-qualification false
+            :manifest-sha256 "7e6251e09530237f0d0ef4a9e44858cc3d985d86f7a3034818075c0a97f161b0"}}
+  {:command "nbb -cp src:. scripts/s7a.cljs reproduce" :exit 0
+   :result {:status :ok :reproduced-images 6 :output :memory-only}}]
+ :independent-adversarial-tests
+ {:method "In-memory deftest forms passed with -e; no test/source files were created or edited. Test assertions encode the required corrected behavior, so failures below are deliberate counterexample evidence, not failures of bb test."
+  :bb {:command-prefix "bb -cp src:test -e"
+       :tests 3 :assertions 17 :passes 5 :failures 12 :errors 0 :exit 1}
+  :nbb {:command-prefix "nbb -cp src:test:scripts:. -e"
+        :tests 4 :assertions 22 :passes 6 :failures 16 :errors 0 :exit 1}
+  :test-names [reviewer-corpus-label-scorer-contract reviewer-timing-composition
+               reviewer-resource-total-coherence reviewer-manifest-inventory-completeness]
+  :failure-breakdown {:bb {:corpus 6 :timing 4 :resources 2}
+                      :nbb {:corpus 6 :timing 4 :resources 2 :manifest 4}}
+  :controls "Scalar TTFT=20 and decode=20 were correct; coherent synthetic resources returned inert candidate; execution-authorized? remained false; missing resources blocked; unchanged manifest audit passed."
+  :safety "All resource/model/clock facts in counterexamples were synthetic. Manifest mutations were scoped with-redefs of s/read-edn in memory, never changed on disk. No request, inference, model load, service mutation or package install occurred."}
+ :findings
+ [{:id :s7a-code/text-label-scorer-contract-mismatch
+   :priority :P2 :context :observed :confidence 1.0
+   :title "All six frozen text labels disagree with the only text response schema"
+   :locations [{:path "eval/s7a/corpus.edn" :lines [14 14]}
+               {:path "src/oikos/law/evaluation.cljc" :lines [45 57]}
+               {:path "eval/s7a/synthetic-responses.edn" :lines [4 6]}]
+   :proof {:runtimes [:bb :nbb]
+           :form "(e/response-score :text \"17\" {:answer \"17\"})"
+           :actual {:schema-valid? true :semantic-correct? false}
+           :expected {:schema-valid? true :semantic-correct? true}
+           :affected-ids [:amber-text :birch-text :cedar-text :delta-text :elm-text :fir-text]
+           :label-itself-score {:schema-valid? false :semantic-correct? true}}
+   :impact "Using a corpus case's :expected with response-score marks every correct schema-valid text answer semantically wrong, including both held-out text cases. Passing the string label directly instead fails schema validity. The separate oracle file wraps :expected in {:answer ...}, so its passing tests never exercise the actual corpus representation. No declared or tested corpus-to-scorer normalization bridges these two representations."
+   :required-fix "Make corpus :expected conform to the declared response schema, or supply one explicit tested normalization/scoring boundary for corpus cases. Do not conflate shape and semantic judgments."
+   :required-regressions ["Score schema-valid correct responses for every frozen text case through the supported corpus consumer; both booleans must be true."
+                          "Keep schema-valid wrong answers semantically false and numeric/wrong-shape answers schema-invalid."
+                          "Bind any intentional corpus/consumer change in the replacement artifact and rerun split/hash audit."]}
+  {:id :s7a-code/timing-phase-lost-before-summary
+   :priority :P2 :context :observed :confidence 1.0
+   :title "trial-metrics drops the phase required by timing-summary"
+   :locations [{:path "src/oikos/law/evaluation.cljc" :lines [104 114]}
+               {:path "test/oikos/law/evaluation_test.cljc" :lines [45 58]}]
+   :proof {:runtimes [:bb :nbb]
+           :trial {:phase :cold :request-ms 100 :first-token-ms 120 :last-token-ms 220 :generated-tokens 3}
+           :trial-metrics {:ttft-ms 20 :decode-tokens-per-second 20
+                           :ram-peak-bytes nil :vram-peak-bytes nil
+                           :cancel-latency-ms nil :cancel-quiescent? nil}
+           :composition "(e/timing-summary [(e/trial-metrics trial)])"
+           :actual-cold {:ttft-ms {:p50 nil :p95 nil}
+                         :decode-tokens-per-second {:p50 nil :p95 nil}}
+           :expected-cold {:ttft-ms {:p50 20 :p95 20}
+                           :decode-tokens-per-second {:p50 20 :p95 20}}}
+   :impact "The public metric producer and aggregator do not compose: phase filtering silently drops every computed trial and reports missing percentiles despite present valid measurements. Existing summary tests hand-construct phase-bearing metric maps, hiding this loss."
+   :required-fix "Preserve phase in the supported metric result, have the aggregator consume/derive raw trials, or define and test a single explicit phase-bearing adapter. Preserve external cold/warm evidence requirements."
+   :required-regressions ["Feed trial-metrics output through the supported aggregator and check non-nil nearest-rank cold and warm p50/p95 for TTFT and decode rate."
+                          "Keep phases separate and retain nil for genuinely absent data or undefined one-token decode rate."]}
+  {:id :s7a-code/incoherent-memory-evidence-accepted
+   :priority :P2 :context :observed :confidence 1.0
+   :title "Resource preflight accepts free/required memory greater than pinned total capacity"
+   :locations [{:path "src/oikos/law/evaluation.cljc" :lines [126 155]}]
+   :proof {:runtimes [:bb :nbb]
+           :fixture "test/oikos/law/evaluation_test.cljc identity-fixture (synthetic CPU, accelerator none, total RAM 8192 bytes, total VRAM 0 bytes)"
+           :request-base {:now-ms 1793664000000 :max-age-ms 1000
+                          :required-ram-bytes 4096 :required-vram-bytes 0}
+           :resource-base {:observed-at-ms 1793664000000 :agent-owned? true :admitted? true
+                           :available-ram-bytes 8192 :available-vram-bytes 0}
+           :permit "{:scope :s7a-synthetic-measurement :identity-sha256 (e/identity-sha identity-fixture)}"
+           :counterexamples [{:required-vram-bytes 2048 :available-vram-bytes 4096 :pinned-total-vram-bytes 0}
+                             {:required-ram-bytes 16384 :available-ram-bytes 32768 :pinned-total-ram-bytes 8192}]
+           :actual-for-both {:status :candidate :reasons [] :execution-authorized? false}
+           :expected-status :blocked}
+   :impact "Malformed or wrong-device resource telemetry can satisfy the resource predicate despite contradicting the identity that the permit pins. Even CPU-only zero-VRAM identity becomes a candidate for a positive VRAM requirement. This is an incorrect inert preflight result, NOT an observed execution authorization or inference bypass: execution-authorized? correctly remains false."
+   :required-fix "Validate resource telemetry against the pinned hardware accounting domain: reject available or required capacity exceeding known total capacity and contradictory accelerator/VRAM evidence. Keep independent admission and parent execution authority external and mandatory."
+   :required-regressions ["The two synthetic contradictions above return blocked in BB and NBB."
+                          "Coherent CPU-only zero-VRAM demand remains an inert candidate; unknown capacities, stale/denied evidence and unavailable resources remain blocked."
+                          "No candidate ever grants execution authority."]}
+  {:id :s7a-code/audit-does-not-require-complete-image-inventory
+   :priority :P2 :context :observed :confidence 1.0
+   :title "Corpus audit succeeds with no images, omitted held-out images, or duplicate identities"
+   :locations [{:path "scripts/s7a.cljs" :lines [92 99]}
+               {:path "scripts/s7a.cljs" :lines [121 134]}
+               {:path "eval/s7a_test.cljs" :lines [24 32]}]
+   :proof {:runtime :nbb
+           :method "Read the real manifest, then with-redefs only s/read-edn for that manifest path; keep the corpus and every PNG/file on disk unchanged. Call s/audit! for each modified parsed manifest."
+           :mutations ["(assoc m :images [])"
+                       "(dissoc m :images)"
+                       "(update m :images #(vec (rest %))) ; drops held-out amber-image"
+                       "(update m :images conj (first (:images m)))"]
+           :observed-image-counts [0 0 5 7]
+           :actual-statuses [:ok :ok :ok :ok]
+           :expected :reject-all-four}
+   :impact "The audit verifies only rows that happen to be listed; every? over absent/empty images passes. It never checks a one-to-one cover of the six corpus image cases. freeze-artifact! trusts that audit and derives PNG hash bindings from the same incomplete list, so a malformed replacement can be sealed without all corpus images. The artifact test also iterates manifest rows without an inventory cardinality/identity assertion. The CURRENT sealed candidate does contain all six correct images; this finding does not allege its PNG bytes are absent or wrong."
+   :required-fix "Before reporting audit success or sealing, require a vector with unique image IDs/files and exact corpus image-ID coverage, plus matching source blocks/coordinate provenance and owned fixture paths. Do not silently discard missing or duplicate rows."
+   :required-regressions ["Missing/empty image inventory, one omitted held-out image, duplicate image ID/file, and unexpected image ID all fail audit before sealing."
+                          "The exact six-image inventory still audits and reproduces; corpus membership and manifest membership are asserted as equal sets with equal counts."]}]
+ :verified-nonfindings
+ {:context :observed :confidence 1.0
+  :corpus {:cases 18 :groups 6 :modalities [:image :text :action-planning]
+           :ground-truth "Read all case labels/instructions and visually inspected all six SYNTHETIC PNGs. The twelve displayed text lines match their corpus labels; the six action labels follow their supplied revision/ownership instructions. No model result, knowledge-loop output or target-word search supplies the oracle. Corpus authorship is implementation-agent manual-before-measurement, not a separate human-rater claim."
+           :coordinates "All images are 480x160, top-left half-open xyxy. The [20 20 460 60] and [20 90 460 130] labels are explicitly declared layout regions containing their text, NOT glyph-tight supplier OCR boxes. Drawing baselines are not presented as IoU ground truth."
+           :localization-limit "These broad layout regions must not be relabelled as independently measured glyph-tight localization accuracy. No model/supplier localization score is established."}
+  :split {:seed "s7a-v1" :held-out-groups ["amber" "fir"] :development-ids 12 :held-out-ids 6
+          :group-overlap false :modality-group-leakage-observed false
+          :target-word-circular-split-observed false
+          :limits "Shared tiny synthetic templates and source-visible labels do not establish population generalization or secret held-out evaluation. No inference-prompt construction was exercised."}
+  :pngs {:byte-identical-memory-reproduction true
+         :renderer "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+         :font-sha256 "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+         :sha256 {:amber-image "fa6b5398c64fc3c106e9d3f16e2306ec2ec679465f2a0316a078e8ebdba84e9a"
+                  :birch-image "eabe4fa5bd1b60427cb9207627a39bc54bac10fdca03167c7035e94213ab0a5c"
+                  :cedar-image "671ab225928e93204fd1cfd7d196f9582f5ee087439c93bb223a126ce12f31aa"
+                  :delta-image "c30b638b04df11535d940e22bd7bb6de5fb92920c218f789b7830e6ed7ca002e"
+                  :elm-image "3606c2b7af205053a44d1c6a1385afc315572462fc71369136036917cfbe08fb"
+                  :fir-image "0ec3f9a6f1776002b898dd706fd7cb85b9a9171e440da80b92ddca4dfcabe6a7"}}
+  :metric-laws "Word/block multiset matching consumes duplicate matches one-to-one. Manual 2/3 word recall, 2/4 hallucination and 1/3 rectangle IoU oracles agree. Schema validity remains distinct from semantic correctness. Scalar nearest-rank p50/p95, TTFT/decode arithmetic, nil missing-data and explicit quiescence/cancellation definitions were read and candidate tests rerun; aggregation defect is separately listed."
+  :runtime-boundary "S7A preflight code has exactly two declared GETs, no redirects/port search/inference endpoint. Its saved report and sanitizer retain unknown identity and blocked measurement even for HTTP 200 health. It does not operationally depend on held BB transport."}
+ :runtime-limitations-not-defects
+ {:evidence-source "Saved candidate eval/s7a/preflight.edn, NOT a fresh reviewer network observation"
+  :e4b {:observed-at "2026-11-03T19:17:35.543Z" :port 8082 :transport-status :unavailable
+        :identity-status :unknown :measurement-status :blocked}
+  :ocr {:observed-at "2026-11-03T19:17:35.566Z" :port 8099 :http-status 200
+        :supplier-report {:ok true :device "NPU"}
+        :identity-status :unknown :measurement-status :blocked
+        :body-bytes 64 :body-sha256 "cb84461c09f95a5a93160385b75ac81f6bcde68a1f6fa3d3e84a07f28b3edb23"}
+  :historical-45265 :reported-disappeared-not-probed
+  :actual-model-mmproj-hardware-and-resource-qualification :unavailable
+  :quality-or-speed-qualification false
+  :reported-prior-ocr-baseline "3 images/9 lines, 9 valid boxes, 3/9 normalized exact lines and supplier 130-286 ms remain reported historical evidence only; raw supplier output was not supplied or manufactured."
+  :inference-performed-by-reviewer false}
+ :handoff
+ {:s5a-prerequisite-artifact-qualified false
+  :reason "Fix the four artifact/metric/preflight consistency findings, reseal changed bytes, and independently verify the replacement exact head before granting the combined offline artifact prerequisite. PNG bytes, labels, split and current source bindings were independently verified, but that is narrower than approval of this combined corpus/metrics/preflight artifact."
+  :not-required-for-offline-fixes [:live-inference :actual-model-quality :model-download-or-load
+                                  :service-restart :cloud-access :bb-transport-qualification
+                                  :whole-s1a-or-s7a-completion]
+  :whole-s7a-complete false
+  :board-transition-authorized false
+  :native-review-approval false
+  :execution-permission false
+  :unchanged-policies [:synthetic-only :sandbox-dev-only :agent-owned-resources
+                       :zero-spending :no-personal-capture :existing-models-only
+                       :govone-admission :raw-images-24h :raw-text-7d
+                       :derived-deletion-propagates :accepted-knowledge-explicit-consent
+                       :no-installed-or-remote-client-publication]}
+ :reflection
+ {:lesson "Candidate tests cover isolated oracle tables but miss producer/consumer composition and manifest completeness. Exercise actual frozen corpus labels through the scorer, computed trials through summaries, and complete image membership before trusting seals."
+  :p-efficiency 0.85 :p-friction 0.2 :p-skill-candidate 0.5
+  :spore-created false
+  :separate-ledger-writes :not-authorized-by-review-only-scope}
+ :write-accounting
+ {:persistent-write "Only this NEW parent .ημ/runs/oikos-program-20261103/reviews/s7a-code-v1.edn"
+  :product-code-or-artifact-edits false :board-or-ledger-edits false
+  :pr-edits false :commits false :pushes false
+  :service-or-model-operations false :package-installs false
+  :personal-images-or-source-caches-read false
+  :reviewer-scratch-files-created 0}}

@@ -1,0 +1,173 @@
+{:review/type :independent-bounded-protocol-probe
+ :review/version 1
+ :review/date "2026-11-03"
+ :review/verdict :changes-requested
+ :review/full-code-audit false
+ :review/target "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+ :review/head "7896ee8709a9461ee54e2d39739c5ee8ce1a3157"
+ :review/confidence {:context :self :level :directly-observed}
+ :scope
+ {:primary ["src/oikos/law/frame.cljc" "src/oikos/infra/bb_render.cljs"]
+  :supporting ["docs/specs/s1a-generation-contracts.md" "docs/s1a-api.md"
+               "test/oikos/generation_fixture.cljc" "test/oikos/law/generation_test.cljc"
+               "test/oikos/infra/generation_test.cljs" "test/oikos/fixtures/bb_protocol.clj"
+               "test/oikos/fixtures/bb_sleeper.clj" "scripts/render.clj" "scripts/render-bb.edn"
+               "src/oikos/law/generation.cljc" "src/oikos/law/digest.cljc"]
+  :excluded [:full-code-audit :s1b-write-edge :installed-promotion :services :models
+             :personal-configuration :environment-secret-inspection :package-installation
+             :board-writes :ledger-writes :pull-requests :commits]
+  :execution "All probes were local actual commands. Synthetic worker code and response bytes stayed in memory; existing fixture files were read-only. Spawn observers called the real child_process.spawn, not a fake ChildProcess. No new fixture directory or source file was created."
+  :only-authorized-new-file ".ημ/runs/oikos-program-20261103/reviews/s1a-protocol-probes-v1.edn"}
+ :file-sha256
+ {"src/oikos/law/frame.cljc" "566edcc427a86c144889df8c183537c0c85ab43872426bba50c57a7122ee2b78"
+  "src/oikos/infra/bb_render.cljs" "6d2b36287dbab1ba88666e7edca5a19c351c2e05e31afb7f4c1e1463f91c2a40"
+  "docs/specs/s1a-generation-contracts.md" "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+  "docs/s1a-api.md" "1255c3ae2e8d93827fc7fc43a656eee0838e6678dd9e790583255a6c43bec3ca"
+  "test/oikos/fixtures/bb_protocol.clj" "4c1d9161718cc7eee7f1e7902c03c8735f4a06bf51a404a894cf76b4e8589df5"
+  "test/oikos/fixtures/bb_sleeper.clj" "7d265ce7faf8ea42e14604e645158b5195b65f7b39a194064af189800e99793d"}
+ :findings
+ [{:id :s1a-protocol/deadline-excludes-blocking-parent-validation
+   :priority :P1
+   :location {:file "src/oikos/infra/bb_render.cljs" :lines [112 124 125 126]}
+   :contract {:file "docs/specs/s1a-generation-contracts.md" :lines [313 314 315 329 330 332 333]}
+   :claim "A valid response can publish success well after the 5000 ms wall deadline and 6000 ms terminal-result bound. The close handler performs synchronous accept-response/render/hash/parse work; the event-loop timeout cannot run during it, and finish! clears that overdue timer without checking elapsed time."
+   :proof
+   {:fixture :real-bb-32-target-echo
+    :request-id "validation-deadline"
+    :payload-construction "Start with oikos.generation-fixture/payload. Replace dev available-env by TEST_TOKEN plus ENV_<i>_<88 A characters> for i=0..127. Replace targets with 32 copies of the original target, IDs target-0..target-31 and respective /sandbox/dev/config/target-<i>.edn destinations."
+    :payload-sha "ad97f7cde1c24e5be2fd0770472131b288ec013073410ebb036017b631878d9e"
+    :response-wire-sha "7f3a932ebd7b4e1606967b2003bed37a1ec74ae9d776da7feaaf89be5db43415"
+    :request-utf8-bytes 19930 :response-utf8-bytes 440243 :observed-stdout-bytes 440243
+    :pre-spawn-ms 4983 :spawn-to-close-ms 13 :spawn-to-settle-ms 12265 :close-to-settle-ms 12252
+    :observed-status :ok :close-ack true :cleanup-holds []
+    :independent-repeat {:fixture :real-node-32-target-echo :spawn-to-close-ms 24
+                         :spawn-to-settle-ms 11408 :close-to-settle-ms 11384 :observed-status :ok}
+    :fixture-boundary "Only this synthetic fixture substitutes fixed trusted spawn argv and feeds the precomputed response to a real BB byte-echo child. The adapter still performs its actual request validation, spawn bookkeeping, streamed caps, EOF/close handling and full parent acceptance. No validator or accept-response function was mocked. This is not approval of a production worker."
+    :reproduction-probe :deadline-bb-echo}
+   :impact "Terminal timing and cancellation responsiveness are not bounded by the advertised wall clock during parent verification; an already-overdue operation can return artifacts as :ok. This is not an S1B write-edge issue."
+   :regression "Run a real fast fixed helper with this below-cap, valid 32-target response. Measure from actual spawn, not start! entry. Never permit :ok after 5000 ms, and preserve the terminal bound including validation. Add a deterministic elapsed-time/cancellation schedule around parent validation, rather than relying solely on a setTimeout callback or a 6500 ms child-sleep test."
+   :repair-direction "Keep expensive validation cancellable/bounded off the timer event loop, or establish a proven work budget; check an independently measured monotonic deadline before committing success. An after-the-fact elapsed check alone would prevent late :ok but would not restore the terminal-result bound."}
+  {:id :s1a-protocol/textdecoder-erases-bom-bytes
+   :priority :P2
+   :location {:file "src/oikos/infra/bb_render.cljs" :lines [93 94 124]}
+   :contract {:file "docs/specs/s1a-generation-contracts.md" :lines [290 295 317 318 324 325]}
+   :claim "TextDecoder's default BOM handling deletes an initial EF BB BF. The transport therefore accepts a BOM-prefixed response rejected by the actual frame reader, and accepts success despite three bytes on stderr. The empty-success-stderr decision is made on decoded text rather than actual byte count."
+   :proof
+   [{:fixture :real-bb-bom-prefix :direct-reader-status :error :direct-accept-code :protocol-error
+     :transport-status :ok :child-exit 0 :cleanup-holds []}
+    {:fixture :real-bb-stderr-bom :stderr-bytes 3 :transport-status :ok :cleanup-holds []}]
+   :reproduction-probe :bom-channel
+   :impact "Strict byte framing and the empty-success-stderr invariant can be bypassed even though all descriptor/content checks pass. No execution or secret disclosure was demonstrated or is claimed."
+   :regression "Prepend EF BB BF to stdout of a real successful helper and independently send those bytes only to stderr of a real successful helper. Both must return :protocol-error with no artifacts. Retain the direct-reader/transport parity assertion and a literal stderr byte-count assertion."
+   :repair-direction "Preserve BOM bytes during decoding (TextDecoder ignoreBOM:true means include the BOM character), then let the restricted reader reject them; enforce success stderr emptiness from streamed byte counts, not a decoder-normalized string."}]
+ :checks
+ {:shared-baseline
+  [{:runtime :bb
+    :command "bb --config scripts/render-bb.edn -cp src:test -e '(require (quote [clojure.test :as t]) (quote oikos.law.generation-test)) (let [r (t/run-tests (quote oikos.law.generation-test))] (when (pos? (+ (:fail r) (:error r))) (System/exit 1)))'"
+    :exit 0 :tests 10 :assertions 208 :failures 0 :errors 0}
+   {:runtime :nbb
+    :command "nbb -cp src:test -e '(require (quote [cljs.test :as t]) (quote oikos.law.generation-test)) (t/run-tests (quote oikos.law.generation-test))'"
+    :exit 0 :tests 10 :assertions 208 :failures 0 :errors 0}]
+  :shared-fixture-sha "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"
+  :additional-reader-and-closed-response
+  {:command "python3 ran inline source via subprocess.run argv for BB --config scripts/render-bb.edn -cp src:test -e and NBB -cp src:test -e; no source file was written."
+   :per-runtime [{:runtime :bb :exit 0 :reader-checks 27 :reader-passed 27 :closed-bijection-checks 16 :closed-bijection-passed 16 :evaluation-marker false}
+                 {:runtime :nbb :exit 0 :reader-checks 27 :reader-passed 27 :closed-bijection-checks 16 :closed-bijection-passed 16 :evaluation-marker false}]
+   :reader-cases [:empty-map :safe-integer-extremes :nested-comma-whitespace :inert-eval-string
+                  :escaped-surrogate-pair :second-form :banner :comment :duplicate-key :metadata
+                  :reader-eval :tag :list :set :float :boolean :unsafe-integer :unpaired-surrogates
+                  :trailing-token :utf8-byte-boundary :depth-32-and-33 :element-boundary]
+   :bijection-cases [:valid-distinct-two-targets :extra-envelope-key :extra-result-key
+                     :extra-value-key :extra-descriptor-key :empty-descriptors :partial-descriptors
+                     :partial-contents :extra-descriptors :extra-contents :reversed-distinct-contents
+                     :foreign-validator :foreign-target :foreign-destination :duplicate-target :wrong-format]}
+  :actual-process-matrix
+  {:command "nbb -cp src:test -e <inline observer wrapping real spawn; pinned test/oikos/fixtures/bb_protocol.clj; sequential modes below>"
+   :fixture-sha "4c1d9161718cc7eee7f1e7902c03c8735f4a06bf51a404a894cf76b4e8589df5"
+   :observations
+   [{:mode "positive" :status :ok :spawns 1 :elapsed-ms 349 :stdout-bytes 1116 :stderr-bytes 0}
+    {:mode "malformed" :code :protocol-error :spawns 1 :elapsed-ms 313}
+    {:mode "multiple" :code :protocol-error :spawns 1 :elapsed-ms 321}
+    {:mode "invalid-utf8" :code :protocol-error :spawns 1 :elapsed-ms 264}
+    {:mode "stderr" :code :protocol-error :spawns 1 :elapsed-ms 306 :stderr-bytes 12}
+    {:mode "err-flood" :code :protocol-error :spawns 1 :elapsed-ms 306 :stderr-bytes 16384}
+    {:mode "flood" :code :limit-exceeded :spawns 1 :elapsed-ms 1296 :stdout-bytes 1100000}
+    {:mode "slow" :cancel-phase :before :code :cancelled :spawns 0 :elapsed-ms 13}
+    {:mode "slow" :cancel-phase :stdin :code :cancelled :spawns 1 :elapsed-ms 1142}
+    {:mode "late" :cancel-phase :output :code :cancelled :spawns 1 :elapsed-ms 1251}
+    {:mode "resist" :cancel-phase :output :code :cancelled :spawns 1 :elapsed-ms 1268}
+    {:mode "descendant" :cancel-phase :output :code :cancelled :spawns 1 :elapsed-ms 1289}
+    {:mode "slow" :code :timeout :spawns 1 :elapsed-ms 6140}]
+   :ack-observation "For every spawned row, the real child close observer had fired and kill(pid,0) found no direct child at result settlement. No cleanup holds remained; no FAKE_SECRET marker appeared in returned results. Calling cancel! after settlement did not create another outcome."
+   :timing-note "Matrix elapsed values start at invocation and include synchronous pre-spawn validation; they are not exact spawn-deadline measurements. The separate deadline finding measures actual spawn."
+   :fixture-coverage-note "The existing err-flood fixture delivered exactly 16384 bytes in this run, so its error result alone did not prove overflow detection. The separate flushed multibyte fixtures below actually crossed the cap."
+   :limits "This is not exhaustive clock/interleaving enumeration or independent enumeration of every descendant PID. No installed process or user file was inspected."}
+  :actual-streamed-byte-cap-boundaries
+  {:command "nbb -cp src:test -e <real BB inline fixture writes repeated lambda UTF-8 bytes directly to System/out or System/err and flushes>"
+   :observations
+   [{:channel :stderr :bytes-written 16384 :bytes-observed 16384 :code :protocol-error :elapsed-ms 223}
+    {:channel :stderr :bytes-written 16386 :bytes-observed 16386 :code :limit-exceeded :elapsed-ms 1144}
+    {:channel :stdout :bytes-written 1048576 :bytes-observed 1048576 :code :protocol-error :elapsed-ms 1185}
+    {:channel :stdout :bytes-written 1048578 :bytes-observed 1048578 :code :limit-exceeded :elapsed-ms 1157}]
+   :cleanup-holds []}
+  :independent-parent-trust
+  {:command "nbb -cp src:test -e <real repository worker; real spawn; mutate only synthetic trusted context or supplied request as described>"
+   :observations
+   [{:mode :positive :spawns 1 :status :ok :artifacts 1}
+    {:mode :bad-worker-pin :spawns 0 :code :child-failed :artifacts 0}
+    {:mode :missing-validator :spawns 0 :code :validator-unavailable :artifacts 0}
+    {:mode :foreign-validator :spawns 1 :code :invalid-artifact :artifacts 0}
+    {:mode :request-executable :spawns 0 :code :invalid-shape :artifacts 0}
+    {:mode :request-cap :spawns 0 :code :limit-exceeded :artifacts 0}
+    {:mode :bash :spawns 0 :code :adapter-unavailable :artifacts 0}
+    {:mode :mixed :spawns 0 :code :adapter-unavailable :artifacts 0}
+    {:mode :cleanup-hold :spawns 0 :code :cleanup-unconfirmed :artifacts 0}]
+   :foreign-validator-method "The real BB helper was given revision c repeated 64 times in its trusted-argv fixture while the parent retained its separately supplied a revision. ID/hash matched; the parent rejected its valid-looking foreign descriptor."
+   :hold-method "One explicitly synthetic in-memory hold was added and removed only after its no-spawn rejection. No live ownership hold was cleared."
+   :owner-boundary "The repeated-a validator pin and candidate file snapshots are synthetic context, not owner approval. Production reuse still requires the independently owner-approved immutable/read-only worker and validator artifact described at API lines 77-89. No installation or promotion was attempted or qualified."}
+  :other-safe-failure
+  {:fixture :real-repository-bb-64-targets :request-bytes 25877 :stdout-bytes 0
+   :status :error :code :timeout :pre-spawn-ms 9384 :spawn-to-close-ms 5007 :spawn-to-settle-ms 6008
+   :interpretation "The real renderer exceeding its child deadline fails closed. This is not the late-success finding; that finding isolates fast child output followed by expensive parent verification."}}
+ :reproducible-probes
+ [{:id :bom-channel
+   :cwd "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+   :argv ["nbb" "-cp" "src:test" "-e"]
+   :source-join "Join source-lines with LF and pass the resulting string as the argument after -e. Set channel to :stdout and then :stderr in separate invocations. This factors the two actually executed real-BB BOM commands into one reusable probe."
+   :source-lines
+   ["(require '[oikos.infra.bb-render :as edge] '[oikos.law.generation :as g] '[oikos.generation-fixture :as f] '[\"node:child_process$default\" :as cp] '[\"node:path\" :as path])"
+    "(def channel :stdout)"
+    "(def w (edge/repository-worker (.resolve path \".\") \"/usr/local/bin/bb\" f/pins))"
+    "(def req {:protocol :oikos/render-v1 :request-id \"bom-probe\" :profile-sha (g/sha256 (g/canonical f/payload)) :payload f/payload :source-contents f/sources})"
+    "(def original-spawn (.-spawn cp))"
+    "(def seen (atom {:stdout 0 :stderr 0}))"
+    "(def stream (if (= channel :stdout) \"out\" \"err\"))"
+    "(def fixture (str \"(.write System/\" stream \" (byte-array [(unchecked-byte 239) (unchecked-byte 187) (unchecked-byte 191)])) (.flush System/\" stream \") (load-file \\\"scripts/render.clj\\\")\"))"
+    "(set! (.-spawn cp) (fn [exe argv opts] (let [a (js/Array.from argv) c (.call original-spawn cp exe (to-array [\"--config\" (aget a 1) \"--classpath\" (aget a 3) \"-e\" fixture (aget a 5)]) opts)] (doseq [[k s] [[:stdout (.-stdout c)] [:stderr (.-stderr c)]]] (.on s \"data\" (fn [b] (swap! seen update k + (.-length b))))) (set! (.-spawn cp) original-spawn) c)))"
+    "(-> (:result (edge/start! w req)) (.then (fn [r] (println (pr-str {:channel channel :bytes @seen :status (:status r) :code (get-in r [:errors 0 :code])})))) (.finally (fn [] (set! (.-spawn cp) original-spawn))))"]}
+  {:id :deadline-bb-echo
+   :cwd "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+   :argv ["nbb" "-cp" "src:test" "-e"]
+   :source-join "Join source-lines with LF and pass as the -e argument. This is the successful actual-BB echo probe, not the abandoned auxiliary-fd attempt."
+   :source-lines
+   ["(require '[oikos.infra.bb-render :as edge] '[oikos.law.generation :as g] '[oikos.generation-fixture :as f] '[\"node:child_process$default\" :as cp] '[\"node:path\" :as path])"
+    "(def names (into [\"TEST_TOKEN\"] (mapv (fn [i] (str \"ENV_\" i \"_\" (apply str (repeat 88 \"A\")))) (range 128))))"
+    "(def p (-> f/payload (assoc-in [:profiles 0 :inputs :available-env] names) (assoc :targets (mapv (fn [i] (assoc (first (:targets f/payload)) :id (str \"target-\" i) :destination (str \"/sandbox/dev/config/target-\" i \".edn\"))) (range 32)))))"
+    "(def req {:protocol :oikos/render-v1 :request-id \"validation-deadline\" :profile-sha (g/sha256 (g/canonical p)) :payload p :source-contents f/sources})"
+    "(def wire (str (g/canonical {:protocol :oikos/render-v1 :request-id (:request-id req) :profile-sha (:profile-sha req) :result (g/request-result req f/pins)}) \"\\n\"))"
+    "(def w (edge/repository-worker (.resolve path \".\") \"/usr/local/bin/bb\" f/pins))"
+    "(def original-spawn (.-spawn cp))"
+    "(def events (atom {:stdout-bytes 0 :closed false}))"
+    "(def fixture \"(let [bytes (.readNBytes System/in 1048577)] (.write System/out bytes) (.flush System/out))\")"
+    "(set! (.-spawn cp) (fn [exe argv opts] (let [a (js/Array.from argv) c (.call original-spawn cp exe (to-array [\"--config\" (aget a 1) \"--classpath\" (aget a 3) \"-e\" fixture]) opts) end (.-end (.-stdin c))] (swap! events assoc :spawn-ms (js/Date.now)) (.on (.-stdout c) \"data\" (fn [b] (swap! events update :stdout-bytes + (.-length b)))) (.on c \"close\" (fn [& _] (swap! events assoc :closed true :close-ms (js/Date.now)))) (set! (.-end (.-stdin c)) (fn [_] (.call end (.-stdin c) wire))) (set! (.-spawn cp) original-spawn) c)))"
+    "(-> (:result (edge/start! w req)) (.then (fn [r] (let [end (js/Date.now)] (println (pr-str {:status (:status r) :code (get-in r [:errors 0 :code]) :spawn-to-close-ms (- (:close-ms @events) (:spawn-ms @events)) :spawn-to-settle-ms (- end (:spawn-ms @events)) :stdout-bytes (:stdout-bytes @events) :close-ack (:closed @events)}))))) (.finally (fn [] (set! (.-spawn cp) original-spawn))))"]}]
+ :probe-harness-failures
+ [{:kind :inline-cljs-unmatched-delimiter :exit 1 :disposition "Corrected only the in-memory probe expression; the subsequent actual matrix completed. Not a product finding."}
+  {:kind :auxiliary-fd-bb-echo-attempt :exit 1 :error :ECONNRESET
+   :disposition "Abandoned the auxiliary-fd fixture after its unhandled probe-pipe error. Replaced it with the successful bounded stdin byte-echo fixture, with no source or product edit. No conclusion relies on the failed attempt."}]
+ :reflection
+ {:positive-boundaries "The restricted reader itself remained non-evaluating in both runtimes. Closed complete result validation, independent validator matching, streamed multibyte caps, tested cancellation/cleanup schedules, unavailable bash rejection and worker-pin mismatch all denied the exercised invalid cases."
+  :remaining-risk "The two findings are outer-adapter gaps despite those positive laws: decoder normalization changes byte identity, and a timer on the same blocked event loop does not enforce a wall deadline."
+  :not-claimed [:full-suite-run :lint-run :exhaustive-schedules :os-sandbox :immutable-production-worker
+                :owner-approval :s1b-effect-safety :task-acceptance :board-admission]
+  :governance "No native review queue or historical review-round count was used as a blocker. No additional reviewer was spawned. Parent coordinator retains synthesis, board and ledger authority."}}

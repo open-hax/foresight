@@ -1,0 +1,126 @@
+{:review/version 1
+ :review/kind :independent-exact-five-code-findings-skeptic
+ :review/date "2026-11-03"
+ :scope "Confirm or refute exactly the five supplied findings, not a new full review. Fresh small local counterexamples, no votes or model agreement as proof."
+ :bindings
+ {:repository "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+  :head "7896ee8709a9461ee54e2d39739c5ee8ce1a3157"
+  :candidate-review ".ημ/runs/oikos-program-20261103/reviews/s1a-code-v1.edn"
+  :spec-path "docs/specs/s1a-generation-contracts.md"
+  :spec-sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"
+  :head-verified-with "git rev-parse HEAD"
+  :tracked-child-status-clean true}
+ :summary {:supplied 5 :confirmed 5 :refuted 0 :disputed 0 :additional-findings 0}
+ :execution
+ {:method "Read actual code, frozen specification, public API documentation and existing fixtures/tests; independently execute bounded inline BB/NBB/Python subprocess probes."
+  :shared-probes {:bb-command "bb -cp src:test -e <inline metadata, resolved-evidence and malformed-context probes>"
+                  :nbb-command "nbb -cp src:test -e <same inline shared-law probes>"
+                  :bb-exit 0 :nbb-exit 0}
+  :filesystem-probe {:command "nbb -cp src:test -e <owned hardlink fixture>" :exit 0
+                     :ownership "Fresh mkdtempSync /tmp/opencode/s1a-skeptic-hardlink-*; exact owned fixture removed in finally. No installed or personal paths used."
+                     :cases [:single-link :installed-unenumerated :sibling-unenumerated]}
+  :helper-probe {:driver :python3-subprocess
+                 :argv ["/usr/local/bin/bb" "--config" "<absolute-repository>/scripts/render-bb.edn" "--classpath" "<absolute-repository>/src" "<absolute-repository>/scripts/render.clj" "{}"]
+                 :input "One synthetic EDN form plus LF then EOF; ten-second subprocess timeout."
+                 :environment "Exact synthetic HOME/XDG, fixed LANG/PATH; owned temporary cwd, removed by TemporaryDirectory. No inherited personal environment."
+                 :raw-output-retained false
+                 :printed "Exit, byte counts and marker-presence booleans only."}
+  :full-suite-rerun false
+  :limits "Bounded finding confirmation only. Original review's aggregate suite counts are not independent evidence from this skeptic. No protocol-wide review or competing protocol qualification."
+  :persistent-writes [".ημ/runs/oikos-program-20261103/reviews/s1a-code-findings-skeptic-v1.edn"]
+  :product-board-ledger-pr-commit-changes false
+  :package-install-model-service-personal-config-access false}
+ :findings
+ [{:id :s1a-code/hardlink-to-unlisted-installed-file
+   :disposition :confirmed :priority :P1 :confidence 1.0
+   :code [{:path "src/oikos/infra/generation.cljs" :lines [10 12] :reason "Identity token does not retain link count."}
+          {:path "src/oikos/infra/generation.cljs" :lines [22 45] :reason "Existing destination collected without rejecting multiple links."}
+          {:path "src/oikos/law/generation.cljc" :lines [175 182] :reason "Uniqueness only compares leaf identities in the supplied evidence set."}]
+   :frozen-contract [{:path "docs/specs/s1a-generation-contracts.md" :lines [165 181] :requirement "Reject aliasing/hardlinked existing destinations at the actual filesystem edge, without reading configuration contents."}
+                     {:path "docs/specs/s1a-generation-contracts.md" :lines [350 350] :requirement "T03 existing hardlink alias rejects."}]
+   :reproduction "Use f/under f/payload with fresh owned base. Create all profile roots and checkout. First write a single-link dev/config/profile.edn as a positive control. Then replace it with fs.linkSync from installed/config/sentinel, which is not a resource-path entry; repeat from dev/config/unlisted. Call edge/preview! base [base/checkout] p f/sources f/pins after each setup."
+   :observed [{:case :single-link :nlink 1 :status :ok}
+              {:case :installed-unenumerated :source-enumerated false :same-inode true :nlink 2 :status :ok :sentinel-unchanged true}
+              {:case :sibling-unenumerated :source-enumerated false :same-inode true :nlink 2 :status :ok :sentinel-unchanged true}]
+   :counterargument "Two requested destinations sharing an inode already reject, and S1A performs no writes."
+   :resolution "Neither fact closes this counterexample: the frozen edge rejects hardlinked existing destinations, not only aliases among enumerated destinations. This is false inert-isolation success, not observed installed mutation or S1B write-time proof."
+   :fix-scope "Reject an existing multiply linked destination in the collector using metadata; no scan or read of installed contents is necessary. Preserve the frozen closed PathEvidence shape unless separately reviewed."
+   :regression-test {:suggested-name "t03-single-destination-unenumerated-hardlink"
+                     :location "test/oikos/infra/generation_test.cljs"
+                     :arrange "A sole requested dev target hardlinked to an unenumerated installed sentinel, then an unenumerated sibling; assert nlink=2 and source not in resource-paths."
+                     :assert "Both preview! calls return a closed :error, no inert qualified success; single-link existing target remains :ok. Preserve sentinel bytes/identity and clean only the exact owned fixture."}}
+  {:id :s1a-code/noncanonical-resolved-path-bypass
+   :disposition :confirmed :priority :P2 :confidence 1.0
+   :code [{:path "src/oikos/law/generation.cljc" :lines [71 74] :reason "absolute? checks normalizability but does not require canonical spelling."}
+          {:path "src/oikos/law/generation.cljc" :lines [164 188] :reason "Original :resolved strings reach isolation-code unchanged."}]
+   :frozen-contract [{:path "docs/specs/s1a-generation-contracts.md" :lines [150 178] :requirement "Normalize component-wise and reapply every isolation restriction to resolved evidence, including absent leaves."}
+                     {:path "docs/specs/s1a-generation-contracts.md" :lines [349 350] :requirement "T02/T03 same restrictions apply to resolved paths."}]
+   :reproduction "Start with f/context f/payload. Replace only the dev config root's :resolved and its target's :resolved, using the same alias root plus /profile.edn. All leaf-id values remain nil, exercising absent leaves. Repeat with the three alias spellings below. As an independent control, normalize every :resolved before calling the same validator."
+   :observed {:runtimes [:bb :nbb]
+              :cases [{:resolved "/sandbox/elsewhere/../dev/state" :normalizes-to "/sandbox/dev/state" :status :ok :canonical-control-status :error}
+                      {:resolved "/sandbox//installed/config" :normalizes-to "/sandbox/installed/config" :status :ok :canonical-control-status :error}
+                      {:resolved "/sandbox/./checkout" :normalizes-to "/sandbox/checkout" :status :ok :canonical-control-status :error}]}
+   :counterargument "The built-in collector ordinarily returns normalized resolved strings."
+   :resolution "That limits exploitability through that collector but does not satisfy the separately exposed supplied-evidence validator. The public Context accepts these AbsPath spellings and must reject or normalize them before isolation comparisons."
+   :fix-scope "Canonicalize supplied :resolved paths before all restrictions, or fail closed on noncanonical evidence. Do not weaken any overlap/containment/forbidden-root rule."
+   :regression-test {:suggested-name "t03-resolved-noncanonical-aliases"
+                     :location "test/oikos/law/generation_test.cljc"
+                     :arrange "Table of dot, dotdot and repeated-slash aliases into dev state, installed config and forbidden checkout, updating config and contained target evidence together."
+                     :assert "BB and NBB each return closed errors for every collision; include nil leaf-id cases. Canonical collision controls also reject; distinct canonical roots with a contained absent leaf remain :ok."}}
+  {:id :s1a-code/invalid-request-echo
+   :disposition :confirmed :priority :P2 :confidence 1.0
+   :code [{:path "scripts/render.clj" :lines [15 20] :reason "Rejected request's unvalidated correlation values are nevertheless serialized into stdout."}
+          {:path "src/oikos/law/generation.cljc" :lines [251 256] :reason "Request validator rejects malformed envelope, but does not sanitize the helper's separately constructed response."}]
+   :frozen-contract [{:path "docs/specs/s1a-generation-contracts.md" :lines [290 311] :requirement "Closed request/response envelope and error fields, not arbitrary value echo."}
+                     {:path "docs/specs/s1a-generation-contracts.md" :lines [321 327] :requirement "Only sanitized codes/counts leave the adapter; test-secret markers must not appear in captured outputs; leaking helper fails qualification."}]
+   :reproduction "Direct real helper invocation from an owned synthetic cwd with pins argv '{}'. Send {:request-id marker :profile-sha marker} using an uppercase/underscore synthetic marker that is neither an ID nor SHA. Repeat with {:request-id {:untrusted marker} :profile-sha [marker]}. Capture both channels privately; inspect only booleans and lengths."
+   :observed [{:case :strings :exit 2 :stdout-contains-marker true :stderr-contains-marker false :stdout-bytes 190 :stderr-bytes 0}
+              {:case :nested :exit 2 :stdout-contains-marker true :stderr-contains-marker false :stdout-bytes 205 :stderr-bytes 0}
+              {:case :valid-correlation-rejection :exit 2 :stdout-contains-marker false :stderr-contains-marker false :stdout-bytes 199 :stderr-bytes 0 :valid-id-retained true}]
+   :counterargument "Normal start! prevalidates requests, nonzero child exit rejects, and the public parent Result may not expose stdout."
+   :resolution "No parent Result leak is asserted. The fixed helper itself is a required untrusted-stdin boundary whose captured channels must not echo rejected secret markers. That independently specified boundary fails on the actual executable."
+   :fix-scope "Validate correlation fields independently before copying them. Use a fixed sanitized invalid-envelope disposition if they are invalid; retain valid request correlation for legitimate rejections."
+   :regression-test {:suggested-name "t09-real-helper-invalid-correlation-no-echo"
+                     :location "test/oikos/infra/generation_test.cljs or its existing real-helper test seam"
+                     :arrange "Invoke the actual fixed helper with scalar and nested malformed request-id/profile-sha values containing synthetic markers, using EOF-terminated stdin and owned cwd/environment."
+                     :assert "Nonzero exit, bounded channels, neither channel contains a marker; no arbitrary nested correlation values appear in the failure frame. Valid request correlation and legitimate closed render rejection still work."}}
+  {:id :s1a-code/normalizer-retains-nonportable-metadata
+   :disposition :confirmed :priority :P2 :confidence 1.0
+   :code [{:path "src/oikos/law/generation.cljc" :lines [21 33] :reason "Existing bounded-data? guard rejects metadata/runtime values."}
+          {:path "src/oikos/law/generation.cljc" :lines [116 124] :reason "Public normalize-profile bypasses that guard and metadata survives persistent map updates."}]
+   :frozen-contract [{:path "docs/specs/s1a-generation-contracts.md" :lines [53 55] :requirement "Pure normalize-profile consumes explicit EDN and returns closed EDN."}
+                     {:path "docs/specs/s1a-generation-contracts.md" :lines [66 73] :requirement "Metadata and non-EDN values reject at every nesting level."}
+                     {:path "docs/s1a-api.md" :lines [17 18] :requirement "normalize-profile is a public closed Result ingress, not only an internal helper."}]
+   :reproduction "Let p=(first (:profiles f/payload)). Call normalize-profile on (with-meta p {:untrusted (fn [] :not-portable)}), then on (update p :inputs with-meta {:untrusted (fn [] :not-portable)}). Inspect metadata with fn?, never evaluate the stored function."
+   :observed {:runtimes [:bb :nbb] :plain-status :ok
+              :top-status :ok :top-retains-function true
+              :nested-status :ok :nested-retains-function true}
+   :counterargument "validate-payload already rejects metadata, and canonical output does not print metadata."
+   :resolution "Those guards protect other paths, not the documented direct normalizer's in-memory closed Profile result. Omission from serialization does not make a returned executable runtime value portable data."
+   :fix-scope "Apply the existing bounded/portable-data guard at the public normalization ingress, rather than stripping or silently accepting forbidden metadata."
+   :regression-test {:suggested-name "t01-normalize-profile-rejects-metadata"
+                     :location "test/oikos/law/generation_test.cljc"
+                     :arrange "Direct normalizer cases with function-bearing top-level metadata and nested Inputs metadata; extend to nested vectors/maps and other runtime values."
+                     :assert "Every forbidden input returns a closed :invalid-shape error in actual BB and NBB without evaluating metadata. Plain valid profile still normalizes identically."}}
+  {:id :s1a-code/context-validation-after-traversal
+   :disposition :confirmed :priority :P2 :confidence 1.0
+   :code [{:path "src/oikos/law/generation.cljc" :lines [170 182] :reason "lookup maps over external evidence before the vector-of?/closed Context guard."}]
+   :frozen-contract [{:path "docs/specs/s1a-generation-contracts.md" :lines [66 73] :requirement "Wrong types reject at every nesting level."}
+                     {:path "docs/specs/s1a-generation-contracts.md" :lines [104 118] :requirement "Closed Result and independently closed adapter Context with vector PathEvidence."}
+                     {:path "docs/s1a-api.md" :lines [27 44] :requirement "validate-generation returns normalized payload or fixed error, not an external-input exception."}]
+   :reproduction "Call (g/validate-generation f/payload {:forbidden-roots [\"/sandbox/checkout\"] :filesystem-evidence 42}) with try/catch only around the call; distinguish escaped exception from returned :error. Also test nil, string, map, empty vector and [42] controls."
+   :observed {:bb {:scalar-42 :escaped-exception :class "java.lang.IllegalArgumentException"}
+              :nbb {:scalar-42 :escaped-exception :class "Error"}
+              :both-runtimes-controls {:nil :filesystem-unknown :string :filesystem-unknown :map :filesystem-unknown :empty-vector :filesystem-unknown :vector-of-scalar :filesystem-unknown}}
+   :counterargument "preview! constructs its own vector, and many malformed inputs already return errors."
+   :resolution "The claim is not that all malformed values throw. The scalar-42 counterexample is sufficient to break this separately public validator's total closed rejection boundary. Normal internal construction does not repair external ingress."
+   :fix-scope "Validate exact Context/container shape before deriving lookup, leaves or any other traversal of external evidence. Return an existing fixed sanitized error code."
+   :regression-test {:suggested-name "t01-generation-context-errors-never-throw"
+                     :location "test/oikos/law/generation_test.cljc"
+                     :arrange "Table-driven missing/nil/scalar/string/map/nonvector/malformed-vector evidence and wrong Context shapes, with valid payload and explicit forbidden roots."
+                     :assert "Each invocation returns a closed fixed :error without escaping in BB or NBB; the existing supplied-evidence positive fixture still returns :ok. Assert both nonthrow and exact sanitized Result shape."}}]
+ :credits {:readiness false :prerequisite-admission false :implementation-acceptance false
+           :native-approval false :hosted-review-credit 0 :votes-as-evidence false}
+ :handoff "Five candidate defects independently confirmed at the pinned head. Parent owns any implementer authorization, fixes, exact-head regression verification, receipts and synthesis. This artifact does not authorize edits or qualify successors."
+ :reflection {:lesson "Test each public ingress directly and challenge aliases outside the enumerated destination set; main-path guards do not establish all exposed contracts."
+              :extra-ledger-or-spore-written false :owner :parent-coordinator}}

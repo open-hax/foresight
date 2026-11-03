@@ -1,0 +1,202 @@
+{:review/id :s2a-contract-code-v1
+ :review/date "2026-11-03"
+ :review/kind :independent-adversarial-code-and-contract
+ :review/scope :s2a-phase1-pure-contract-and-projection
+ :task/uuid "93a76dad-678a-4980-86fb-ba0fbb5e8203"
+ :reviewer {:provider :openai :model "gpt-6.1-sol"
+            :role :independent-reviewer-not-implementer
+            :native-provider-approval false :whole-s2a-completion-credit 0}
+ :verdict :changes_requested
+ :parent-can-freeze-this-contract-for-phase2 false
+ :phase2-owned-clio-admission-fixtures-admitted false
+ :reason "Two reproduced boundary defects: recursive metadata bypass and accepted runtime records that cannot round-trip through the actual Clio ledger reader. Fix and independently re-review the new exact source before phase 2."
+
+ :target {:repository "open-hax/oikos"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2a"
+          :base-sha "185c0480167c9e42f62d30271b1d25db3334581e"
+          :source-sha "34f9a4dacc7a32c8f5b81bce627d69a2c76082eb"
+          :tree-sha "38c6f2d9a8c50ed1fd44d8c1ecf79b346b7d13e3"
+          :source-worktree-clean-before-and-after-tests true
+          :diff {:modified ["bb.edn"]
+                 :added ["docs/contracts/desktop-safe-reference-v1.edn"
+                         "docs/contracts/desktop-safe-reference-v1.md"
+                         "scripts/test_desktop.clj"
+                         "src/oikos/law/desktop.cljc"
+                         "src/oikos/law/safe_reference.cljc"
+                         "test/oikos/desktop_fixture.cljc"
+                         "test/oikos/desktop_runner.cljc"
+                         "test/oikos/law/desktop_test.cljc"]
+                 :inherited-tests-removed-or-edited false}}
+
+ :contract {:version "oikos.desktop.safe-reference/v1"
+            :content-digest "00d0361a25244db8a0ada74f567d6986d33ba486ef64e7f2ad1caad1c97a711d"
+            :digest-algorithm :sha256-of-clio-canonical-edn
+            :canonical-contract-utf8-bytes 25944
+            :independent-digest-check "BB and NBB canonical strings serialized with prn, decoded as strings in Python, then hashed with hashlib.sha256; both equal the stated digest. CLI output framing is not part of the digest."
+            :descriptor "docs/contracts/desktop-safe-reference-v1.edn"
+            :descriptor-status :pending-independent-review
+            :actual-approval-issued false
+            :synthetic-qualified-contexts-are-data-only true
+            :source-change-requires-new-exact-source-review true}
+
+ :discovery {:instructions-read ["/home/err/AGENTS.md"
+                                "/home/err/spaces/AGENTS.md"
+                                "/home/err/spaces/foresight/AGENTS.md"
+                                "/home/err/spaces/foresight/oikos/AGENTS.md"
+                                "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2a/AGENTS.md"]
+             :intermediate-oikos-worktree-instructions :absent
+             :clio-owner-agents-md :absent
+             :clio-recursive-agents-md-search :no-files
+             :clio-owner-readme-and-source-read-before-owner-claims true
+             :board-read-command "eta-mu kanban content 93a76dad-678a-4980-86fb-ba0fbb5e8203 --config /home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+             :canonical-card-and-all-returned-rheos-comments-read true
+             :board-mutations 0
+             :permit ".ημ/runs/oikos-program-20261103/permits/generation-component-470c35e7.edn"
+             :component-sha "470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+             :all-five-permitted-source-hashes-match true
+             :new-production-component-consumption [oikos.law.digest/sha256]
+             :held-bb-protocol-not-qualified-by-inherited-tests true}
+
+ :clio-owner {:path "/home/err/spaces/foresight/clio"
+              :sha "788cdd3434615a7932b924e68520dbf7f88408c2"
+              :head-verified true :tracked-owner-worktree-clean true
+              :dependencies "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps"
+              :existing-cached-malli-version "0.16.4"
+              :actual-pure-apis-exercised [clio.domain.canonicalize/canonicalize
+                                         clio.domain.schema/materialize
+                                         clio.domain.schema/validate-event!
+                                         clio.law.ledger/append-admission
+                                         clio.shape.edn/read-one]
+              :owner-kernel-copied-or-modified false
+              :ledger-or-schema-history-created false
+              :actual-append-calls 0
+              :locking-integration-executed false
+              :exact-retry-source-anchor "test/clio/infra/ledger_test.cljs:51-103 retries the SAME event through ledger/append-event!, not another fresh-UUID runtime/append!. Read only."
+              :record-roundtrip-source-anchors ["src/clio/infra/ledger.cljs:40-46 uses pr-str on the original event"
+                                               "src/clio/infra/ledger.cljs:17-32 reads through clio.shape.edn/read-one"
+                                               "src/clio/domain/schema.cljc:309-340 preserves the original validated value"]}
+
+ :test-results [{:command "OIKOS_CLIO_SOURCE=/home/err/spaces/foresight/clio OIKOS_CLIO_DEPS=/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps bb test:desktop"
+                 :exit 0 :bb {:tests 10 :assertions 111 :failures 0 :errors 0}
+                 :nbb {:tests 10 :assertions 111 :failures 0 :errors 0}}
+                {:command "bb test" :exit 0
+                 :bb {:tests 18 :assertions 286 :failures 0 :errors 0}
+                 :nbb {:tests 30 :assertions 392 :failures 0 :errors 0}
+                 :eval {:tests 9 :assertions 39 :failures 0 :errors 0}
+                 :shared-fixture-sha256 "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"}
+                {:command "bb lint" :exit 0 :errors 0 :warnings 0}]
+ :runtimes {:bb "1.12.207" :nbb "1.3.204" :clj-kondo "2025.07.28"}
+ :test-registration {:desktop-target "bb.edn:11-12 -> scripts/test_desktop.clj -> test/oikos/desktop_runner.cljc -> oikos.law.desktop-test"
+                     :both-desktop-runtimes-actually-run true
+                     :inherited-runner-unchanged true
+                     :default-bb-test-runs-desktop false
+                     :gate-note "Run bb test:desktop explicitly as well as bb test and bb lint; the default test target retains only the inherited suites. No inherited test was removed or skipped."}
+
+ :adversarial-probes
+ {:execution :in-memory-bb-and-nbb-evaluation-no-probe-files
+  :both-runtimes-successful-exit true
+  :closure {:unknown-fields-at-all-enumerated-map-positions 38
+            :unknown-fields-denied-with-exact-constant-diagnostics 38
+            :runtime-functions-substituted-at-container-positions 48
+            :runtime-values-denied-with-exact-constant-diagnostics 48
+            :metadata-bearing-map-and-vector-positions 48
+            :metadata-incorrectly-accepted 48
+            :diagnostic {:message "Desktop boundary refused"
+                         :data {:oikos/error :unsafe-event} :cause? false}}
+  :host-object-metadata {:bb-object-retained true :nbb-js-object-retained true
+                        :nested-window-key-retained-in-projection true}
+  :duplicate-partition-metadata {:left-first-marker "MARKER-A" :right-first-marker "MARKER-B"
+                                 :ordinary-projection-equality true
+                                 :print-meta-projection-byte-equality false}
+  :record-roundtrip {:plain-event {:safe :accepted :owner-validation :accepted :owner-reader :readable}
+                     :top-record {:safe :accepted :owner-validation :accepted
+                                  :owner-reader :clio.edn/expected-one-form}
+                     :nested-window-key-record {:safe :accepted :owner-validation :accepted
+                                                :owner-reader :clio.edn/expected-one-form}
+                     :runtime-record-preserved-by-replay true}
+  :history-refusals {:cases [:missing-initial-sequence :missing-middle-event
+                            :missing-direct-stream-predecessor :missing-causal-parent
+                            :changed-event-same-id :competing-stream-slot :unknown-schema-root]
+                     :all-results :history-invalid :all-error-causes-absent true}
+  :identity {:same-epoch-replacement-current-targetable true :old-lifetime-current-targetable false
+             :reconciliation-retains-intermediate-facts-as-unknown true}
+  :probe-execution-corrections ["The first owner-reader probe had a trailing unmatched delimiter after producing BB observations; corrected and rerun cleanly in BOTH runtimes. Only the clean runs support the final result."
+                                "Raw NBB CLI stdout adds framing; independent digest verification decoded prn's string before hashing instead of treating stdout framing as canonical contract bytes."]}
+
+ :findings
+ [{:id :s2a/recursive-metadata-bypass :severity :P1 :confidence 1.0
+   :title "Reject metadata recursively before treating an event as closed and safe"
+   :location "src/oikos/law/safe_reference.cljc:112-129"
+   :related-locations ["src/oikos/law/desktop.cljc:35-63"
+                       "src/clio/shape/canonical.cljc:9-15,149-173"
+                       "src/clio/domain/canonicalize.cljc:8-23"]
+   :counterexample "(safe/validate-event! (with-meta (f/baseline) {:title \"SYNTHETIC-SECRET-MARKER\" :runtime-object (fn [] :host)})) returns the SAME metadata-bearing event. Attach the same metadata to [:event/data :windows 0 :window/key] and desktop/replay retains it on a key of :windows, :window-history and membership data. Actual Object. and #js {} payloads in metadata also survive on BB and NBB respectively."
+   :observed "All 48 enumerated map/vector metadata injections across baseline, gap, reconciliation, observation, intention, outcome and content-reference fixtures were accepted in both runtimes. Malli closed maps inspect entries, and Clio canonical-form ignores metadata; neither check denies this channel."
+   :duplicate-counterexample "Two value-equal copies of a baseline with nested window-key metadata MARKER-A versus MARKER-B are deduplicated by Clio equality. Reversing partition order changes the retained marker. Ordinary (= left right) is true, but (binding [*print-meta* true] (= (pr-str left) (pr-str right))) is false."
+   :impact "The promised no-raw-content/no-runtime-object retained-event boundary is bypassed; replay retains secret-bearing metadata and partition-order-dependent hidden payloads. Metadata-aware diagnostics/serialization can expose it. This review did not append such data or claim that default pr-str writes metadata."
+   :required-correction "Add a portable recursive preflight that REFUSES nonempty metadata at every accepted collection/key/value boundary before Malli/owner validation and before returning or retaining the original event. Keep constant input-free diagnostics and no exception cause. Do not weaken Clio or rely on metadata being omitted by one serializer."
+   :required-regression "BB AND NBB: inject secret metadata and runtime objects at event, schema, causes vector, event/data, contract, windows vector/entries, lifetime key and content/ref positions. Every case must throw exactly unsafe-event with the fixed message and nil cause. Both partition orders of metadata-tainted duplicate copies must refuse, not pass equality-only replay tests."}
+  {:id :s2a/runtime-record-roundtrip :severity :P2 :confidence 1.0
+   :title "Do not admit runtime records as portable plain event maps"
+   :location "src/oikos/law/safe_reference.cljc:116-128"
+   :related-locations ["src/clio/shape/canonical.cljc:165"
+                       "src/clio/infra/ledger.cljs:17-32,40-46"
+                       "src/clio/shape/edn.cljc:12-37"]
+   :counterexample "(defrecord SyntheticRuntimeWrapper []) (def wrapped (into (->SyntheticRuntimeWrapper) (f/baseline))) Both (safe/validate-event! wrapped) and (clio.domain.schema/validate-event! (f/revisions) wrapped) accept. (clio.shape.edn/read-one (pr-str wrapped)) throws :clio.edn/expected-one-form. Replacing only the nested :window/key map with the record reproduces the same result."
+   :observed "Reproduced with the actual OWNER pure schema validator and EDN reader on both BB and NBB. A plain baseline is accepted and round-trips. The records remain records in successful safe validation and replay; no real append was performed."
+   :impact "The boundary can hand phase-2 append an event whose record type tag is outside the closed metadata vocabulary. The actual owner writer prints the original value, while its reader refuses that representation, so accepting this value risks creating an unreadable immutable ledger record despite successful admission checks. This is a serialization/portability defect distinct from metadata."
+   :required-correction "Explicitly refuse runtime records and other non-plain collection wrappers recursively at this application boundary, with constant diagnostics. Do not copy/change the Clio kernel or silently strip runtime types into apparently approved input."
+   :required-regression "BB AND NBB: reject top-level and nested records (including lifetime/reference/schema containers) as unsafe-event. Every accepted plain fixture must round-trip through the ACTUAL Clio read-one over the writer's pr-str representation. These pure checks need no append or filesystem effect."}]
+
+ :bounded-positive-observations ["Unknown map fields and ordinary runtime values are denied by the exercised paths with constant input-free diagnostics. The metadata/record exceptions above prevent declaring the full boundary safe."
+                                 "Identifiers and hashes are explicitly sensitive/linkable rather than anonymous; the reference shape has no raw digest, location or bytes and enforces the configured image/text maximums. This is not proof of operational erasure."
+                                 "Replay uses actual Clio schema/canonicalization/admission laws, refuses the exercised persisted sequence/cause defects, tracks full epoch/XID/incarnation identities, and retains admitted coverage gaps as historically unknown."
+                                 "Trusted review fixtures are documented as data, not authenticated approval. No self/native approval or whole-S2A completion is granted."
+                                 "Compensation fixtures do not mutate observed windows or claim application reopening."]
+ :remaining-gates {:phase1 "Fix both findings, add the stated pure regressions and independently review the new exact source/artifact binding. Do not freeze this revision/digest as an approved phase-2 prerequisite."
+                   :phase2 "Only after that reviewed contract, execute owned synthetic fixtures through actual Clio ledger/schema/locking APIs, including exact-envelope retry. This review did not execute or substitute for that gate."
+                   :retention "Phase 1 intentionally does not implement a content store, real deletion scheduling/propagation or accepted-knowledge consent. The synthetic dissoc fixture is not operational erasure evidence; later consumers must enforce the declared 24h image/7d text and deletion/consent semantics."
+                   :test-gates ["bb test:desktop" "bb test" "bb lint"]}
+
+ :source-and-test-sha256
+ {"bb.edn" "abf194586630c0ddf0dfbfaa62e45260f803c422b21f134d858a8d315bfa00d9"
+  "docs/contracts/desktop-safe-reference-v1.edn" "2be50186a54121fe0920c861e320bc767a95edb77740037dc4256148a250c472"
+  "docs/contracts/desktop-safe-reference-v1.md" "a05fe0808f82a84ae143600eddff06e528a2f70780932c83072e234926018ddd"
+  "scripts/test_desktop.clj" "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"
+  "src/oikos/law/desktop.cljc" "5e436ec5c22222aa251ec7738cf697549fa54645b86d00800361e1335b9ca53a"
+  "src/oikos/law/safe_reference.cljc" "f64231392f536deae55c0622b39ce9e7865d8465416b1877df19031823a081b5"
+  "test/oikos/desktop_fixture.cljc" "36f1152e046e362449583f6172b9c3fceda2081cea3cae1266518d69be24473c"
+  "test/oikos/desktop_runner.cljc" "aba6f2d87685cba42fef4f84074f4f21f757bb3b159385fa76e37524a52d92d5"
+  "test/oikos/law/desktop_test.cljc" "dd838d808cdf0b60eb8ab45ed44e7fd62a24e8e691956f82a78902c2ceeed00b"
+  "test/oikos/test_runner.cljc" "61f0eedbc138c286df63d1ec8bbfef74560631fefe9a97ff029a767bff2c4b54"
+  "test/oikos/law/actions_test.cljc" "584d165c7788ae612c0b48b1858b681ef2595d3ccb4a267d3f44adeeb5c50b59"
+  "test/oikos/law/generation_test.cljc" "0d52a7c4d27973e400e545dcc66ebc5a0b3fa4449b4aa2eb203e6afbc603994e"
+  "test/oikos/infra/cli_test.cljs" "d25b19dc8fc53628d94ff73ee1ae7be27cbf5b76b813f2d434b9ec58c08c68f5"
+  "test/oikos/infra/generation_test.cljs" "8e78d8aadc3c83ef2647cba89cd65a3129d90a3dd99e639c59a7ba9856e83819"
+  "eval/run_test.cljs" "9c2bd006f32e5783e1cb7ae1b93b4fe54f97294d0fb50b0a1fa5e16a157fd305"}
+ :permitted-component-source-sha256
+ {"src/oikos/law/generation.cljc" "dad31103191e858f464a628edf09c996388546fcca81126f3c61fd49ed5ae2cd"
+  "src/oikos/law/frame.cljc" "566edcc427a86c144889df8c183537c0c85ab43872426bba50c57a7122ee2b78"
+  "src/oikos/law/digest.cljc" "15254fa3b7c785d83d00a3c699782aa2d8f1cb342762e92213847047e78402ab"
+  "src/oikos/infra/generation.cljs" "9578076dd170d096021e7efd95554ca65a3195543cd49799890bf2efbd53982e"
+  "test/oikos/generation_fixture.cljc" "002246e5e160b9bc6b11c8295ac60046ca5a54c4338fbe2a951e34628b63188e"}
+ :owner-source-and-test-sha256
+ {"src/clio/law/schema.cljc" "e358238f405efa6f4547ed050ecfbc8e6ddac976af71f23ae997f0f449f99e56"
+  "src/clio/law/event.cljc" "f2d355a0aa99771c36c7638e0aa44eace8df645c14848ee211185875cd521143"
+  "src/clio/shape/canonical.cljc" "91cd722cbcdc4b8ff9c6533c33ec243c57faacb5baeea30e08afaa52f0205bcc"
+  "src/clio/shape/edn.cljc" "8864bec7ad85bd6462181328a533ed38b792c219fcb16ba21405deffcfcf0a5f"
+  "src/clio/domain/schema.cljc" "fd0b8f1ee6bcef6d37aa2a4375992222aa78ab695e373a52762d405820c2e7a9"
+  "src/clio/domain/canonicalize.cljc" "6b150544d545a3871bf2f9d10ea49dcfbb1c18b9755f47181073550088c976b9"
+  "src/clio/law/ledger.cljc" "d1df872f834d0d7369a639bb1ebfdeaa403a819d3d474db345dc1757079b4510"
+  "src/clio/infra/ledger.cljs" "6246f04bf53ac43d3505ebdeba42801ef344f9d93b829d08de9d834753cf3d2f"
+  "test/clio/infra/ledger_test.cljs" "285cf852774b2a1a47e22a40b260c0c9cd9c02659be2c196f90185e91d935462"}
+
+ :effects {:product-card-ledger-or-pr-edits 0 :actual-clio-appends 0
+           :model-service-package-personal-cache-effects 0
+           :hosted-review-queue-waits 0
+           :reviewer-authored-files [".ημ/runs/oikos-program-20261103/reviews/s2a-contract-code-v1.edn"]
+           :parent-existing-dirt-left-untouched true}
+ :reflection {:p-efficiency 0.85 :p-friction 0.20 :p-skill-candidate 0.55
+              :lesson "Closed Malli maps plus canonical equality are not a recursive metadata/type boundary; test actual serialization/readback and metadata-aware duplicate behavior, not only value equality."
+              :separate-receipt-or-spore-written false
+              :disposition "Parent owns receipts and reflection persistence; the user authorized exactly this one new review artifact. No additional ledger writes."}}

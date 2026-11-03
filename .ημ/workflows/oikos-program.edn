@@ -15,7 +15,8 @@
           :autonomy :agent-owned-resources-only
           :operator-resources :explicit-approval
           :models :existing-resources-only
-          :model-download-load-restart :held
+           :model-download-load-restart :held
+           :narrow-operator-exceptions [".ημ/runs/oikos-program-20261103/decisions/ocr-attestation-restart-authorization.edn"]
           :cloud :synthetic-through-govone-verified-no-charge-only
           :spending 0
           :remote-publication :held
@@ -29,7 +30,10 @@
               :planning-admission-evidence :completed-independent-reviews-and-explicit-user-direction
               :hosted-review-queue :nonblocking-for-reviewed-implementation
               :admission-decision ".ημ/runs/oikos-program-20261103/decisions/local-review-admission.edn"
-             :new-successor-admission :verified-prerequisite-artifacts-not-worker-self-report
+              :new-successor-admission :verified-prerequisite-artifacts-not-worker-self-report
+               :artifact-scoped-permits [".ημ/runs/oikos-program-20261103/permits/generation-component-470c35e7.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s1a-accepted-62e6eebb.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s7a-offline-9b4bc07b.edn"]
              :epic-integration-agent :dispatch-after-both-children-verified
              :documentation-agent :independent-foresight-worktree
              :live-board "rheos read-task/read-board"

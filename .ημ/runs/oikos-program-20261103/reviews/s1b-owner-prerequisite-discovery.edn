@@ -1,0 +1,92 @@
+{:review/id :s1b-owner-prerequisite-discovery
+ :date "2026-11-03"
+ :task/uuid "3d14e0a5-2790-42b8-9a55-54d686925c3c"
+ :scope :read-only-owner-prerequisite-discovery
+ :context :世
+ :verdict :external-owner-artifacts-unavailable-in-inspected-sources
+ :confidence 0.95
+ :limits ["Local owner source/document discovery, not an exhaustive remote-PR or unpublished-handoff search. No remote review credit claimed."
+          "Recorded owner HEADs identify checkout context; cleanliness and byte equality with those commits were not asserted."
+          "No nested worktree traversal, repo-wide Git inventory, model/service execution, credential access, source edit, board transition, new card/PR or ledger write."
+          "This new report is the only authored artifact. Parent owns reflection/provenance and other lanes; S2A/S7A/OCR were not investigated."]
+ :board {:command "eta-mu kanban read-task 3d14e0a5-2790-42b8-9a55-54d686925c3c --config /home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+         :official-read true :all-returned-sections-read true
+         :status :incoming :dependency ["07452a65-4a6a-4704-bf81-50408927dcc8"]
+         :body "Specify outer Services handoff before binding an adapter; apply/rollback completion blocked until reviewed owner contract and explicit handoff."
+         :comment "One returned comment includes original corrections and later native PR1 findings4458124527/4458124541: require real reviewed shx safe Bash adapter, independently pinned positive validator, non-vacuous post-preview ancestor/destination/current replacement refusal at serialized write edge, actual accepted Services positive writes and rollback."
+         :initial-cli-diagnostic "The stale skill's content verb printed usage; the actual read-task verb above successfully returned the body and comment. No usage output was treated as task evidence."}
+ :prior-reviews {:directory ".ημ/runs/oikos-program-20261103/reviews"
+                 :s1b-matches []
+                 :s1a-parent-acceptance-read true
+                 :acceptance-limit "s1a-parent-acceptance.edn explicitly excludes positive Bash, write-time race safety, Services promotion and rollback; its own merge status was not-yet-executed, so it is not fresh merge proof."}
+ :s1a {:merged-source-inspected "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+       :merge-qualification "Given by parent task; this discovery read source at that exact commit, not native merge qualification."
+       :planned-worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b"
+       :planned-worktree-observed-head "ae35073719974c0df1d2dae301c2179fa4785641"
+       :worktree-action :none
+       :integration-warning "Planned S1B worktree still predates S1A; its docs/specs directory is absent. Parent must separately authorize ordinary source integration before implementation; discovery does not move it."
+       :evidence [{:path "AGENTS.md" :lines "3-19" :fact "Development scaffold, NBB/pure-law boundaries; explicit Services/shx promotion; parent owns planning/provenance."}
+                  {:commit "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732" :path "docs/specs/s1a-generation-contracts.md" :sections ["Authority and evidence" "Isolation and identity laws, 5" "Named render/validation seam and target matrix" "Requirement traceability and handoff"] :fact "Inert EDN support and truthful unavailable Bash; path freshness is not write authority; positive Bash and actual owner effect-edge proof explicitly assigned to S1B. Historical preparatory prose does not establish current implementation status."}
+                  {:commit "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732" :path "src/oikos/law/generation.cljc" :lines "195-238" :fact "plan-render, render-preview, validate-artifacts exist; render-preview rejects shell/bash-env with adapter-unavailable, and absent EDN pins with validator-unavailable."}
+                  {:commit "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732" :path "src/oikos/infra/generation.cljs" :lines "1-87" :fact "collect and preview! implement inert evidence/read/render path, explicitly not write authority."}]}
+ :services {:root "/home/err/spaces/foresight/services"
+            :observed-head "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+            :root-agents :absent
+            :evidence [{:path "README.md" :lines "7-9,19-47,68-90" :fact "Owns current DO image/host/Compose/deploy/verification contract; no generic local-generation receiver exposed."}
+                       {:path "docs/deployment-model.md" :lines "26-56,128-135" :fact "Normative one-lane model; adding a lane requires changing this document first. dev developer machine: this repo owns nothing."
+                        :implication "The S1B card's proposed Services ownership is an external requested handoff, not proof that Services currently owns desktop configuration semantics."}
+                       {:path "docs/environments/promotion.md" :lines "66-163" :fact "Real root-owned receiver has slot lock, healthy-image selection, refusal journals and recovery limits, all for OCI service environments."}
+                       {:path "scripts/receive-service-environment.py" :lines "1-14,21-32,64-78,290-337" :fact "main accepts testing/staging and knoxx/axxium only, fixed SSH receive command and OCI stdin; global flock; atomic_write uses path-based .next open/replace; Docker Compose start and failed-upgrade restore. No local preview/check/approval/anchored-no-follow contract."
+                        :restriction "Do not call, rename, generalize or advertise this DO receiver as S1B availability; its lock/rollback are precedents only, not a shared kernel or proof of race-safe desktop writes."}
+                       {:path "contracts/README.md" :lines "1-7,29-41" :fact "Existing EDN contract tree is deployed application runtime contracts, not a generic generation plan/result API."}
+                       {:path "ROADMAP.md" :lines "5,9-10,144-160,171-189" :fact "Dated roadmap slice; later README/model/actual receiver control current facts. Enforcement patterns are sibling precedent, not automatic policy for other centers."}]
+            :availability :UNAVAILABLE
+            :missing-artifacts [:owner-accepted-local-generation-scope
+                                :reviewed-callable-preview-check-apply-rollback-entry
+                                :versioned-plan-and-result-contracts
+                                :explicit-generation-approval-and-revision-binding
+                                :exclusive-owned-resource-and-dirty-target-contract
+                                :serialized-anchored-no-follow-mutation-boundary
+                                :interrupted-apply-exact-rollback-and-uncertain-recovery-contract
+                                :owner-review-source-pin-and-explicit-oikos-handoff]
+            :bounded-search "Read root directory, scripts and contracts entries; searched scripts for local-generation/generation-plan/O_NOFOLLOW/dir_fd/oikos and docs for local-generation/safe-bash/positive-validator/oikos/nofollow. No matching local seam found. Did not recurse into .worktrees or independently owned nested repositories."
+            :compatible-extension {:status :proposal-requiring-services-owner-acceptance
+                                   :first-step "Resolve the explicit dev-owns-nothing/one-lane policy in docs/deployment-model.md and README.md through owner-reviewed architecture; no assumption that the owner accepts a new lane."
+                                   :placement "If accepted: separately scoped local-generation contract documentation under docs/, versioned pure plan/result/approval laws plus outer filesystem adapter and tests in owner-chosen locations. Existing scripts/ and scripts/tests/ are concrete adapter/test placement precedents, not authority to widen the OCI receiver."
+                                   :scope "Accept bounded S1A bytes/descriptors and independent source/validator pins as data; define owned roots and selection, prior target identities/hashes, plan identity, exact approval/revision expiry/drift rules and closed outcomes. Preview/check do not write targets or run lifecycle processes. Serialize the entire revalidation-to-commit boundary, anchor parents/selection with no-follow operations, reject replaced ancestors/destinations/current and dirty targets, retain unrelated paths/services. Specify every interruption, exact previous owned-generation restoration and uncertain recovery holds."
+                                   :qualification "Actual synthetic owner fixture: admitted positive writes, explicit-approval denial/zero writes, dirty-target refusal, post-preview ancestor/destination/current replacement refusal immediately before an otherwise functional write, every partial stage and observed exact rollback; no live workstation/DO/service effects. Publish reviewed source/version, tested entry and owner handoff. No mock proves availability."}}
+ :shx {:root "/home/err/spaces/foresight/shx"
+       :observed-head "5dbac4fde8b3626316c71e15b48b9fe62a5802c2"
+       :evidence [{:path "README.md" :lines "7-40" :fact "Generic IR includes exec/pipe/capture/source/raw; envm emits for eval. Shape/law/domain/infra are the established local boundaries."}
+                  {:path "AGENTS.md" :lines "46-114,120-129" :fact "Pure shape/data-to-string and Malli laws; generic emit-program validates syntax/shape only. envm PATH rendering intentionally differs; shx.core runtime absent."
+                   :restriction "No silent envm/IR convergence or new generic shared kernel."}
+                  {:path "src/shx/law/ir.clj" :lines "13-16,42-91" :fact "Generic valid-program? and explain-program admit raw/source/exec/capture; export names are unconstrained strings. Not the safe target contract."}
+                  {:path "src/shx/shape/bash.clj" :lines "15-16,33-73" :fact "emit-program is a real pure data-to-Bash API, but generic emitter emits source/exec/capture/raw and double-quoted exports. It is nearest primitive, not an admitted safe adapter."}
+                  {:path "src/shx/shape/quote.clj" :lines "6-21" :fact "sq is a pure single-quote primitive using backslash single-quote splice; dq deliberately permits dollar expansion. Existing sq spelling differs from S1A's conditional canonical single-quote grammar, so cannot claim exact validator compatibility without owner-reviewed alignment."}
+                  {:path "src/shx/cli.clj" :lines "20-67,72-76,102-122" :fact "render reads host config/directories and can emit source/eval; check invokes env-after-eval/bash and reads current environment. validate checks generic IR only. None supplies independent non-executing positive safe-Bash validation."}
+                  {:path "src/shx/law/config.clj" :lines "9-25" :fact "envm fragments explicitly admit source/eval/merge and open maps, not the closed safe assignment subset."}
+                  {:path "docs/adr/0004-sequence-absorption-then-converge-the-fold.md" :lines "3,44-57,71-78" :fact "Absorption/Hexis shared-fold design is Proposed, not accepted implementation or permission to invent shared renderer/promoter semantics."}]
+       :availability :UNAVAILABLE
+       :missing-artifacts [:owner-reviewed-safe-bash-data-to-ir-render-adapter
+                           :closed-non-executing-positive-validator
+                           :independently-pinned-validator-identity-and-revision
+                           :qualified-call-boundary-and-explicit-oikos-handoff]
+       :bounded-search "Read src/shx namespace, law and shape directory entries and actual source files; searched src for oikos/safe-bash/positive-validator/generation. No safe adapter/validator seam found; owner HEAD is unchanged from the S1A dated shx observation. No claim about unpublished external artifacts."
+       :compatible-extension {:status :proposal-requiring-shx-owner-acceptance
+                              :placement "Add the closed restricted binding/IR contract and validation law in src/shx/law/, pure data-to-IR and Bash morphism alongside src/shx/shape/bash.clj, and independent grammar/roundtrip validator in the corresponding pure law/domain boundary chosen by owner. Tests mirror test/shx/law and test/shx/shape. Names/paths beyond existing directories are proposals, not existing APIs."
+                              :scope "Literal/ref-only exports, validated identifiers and exact escaping, references by names not host values; reject all raw/source/exec/capture/eval/command nodes, unknown keys, line-breaking literals and placeholder output. Explicit data inputs only; do not reuse native render/check or modify envm's deliberately different semantics. Owner review must reconcile the exact canonical quote spelling with S1A before binding."
+                              :validator "Separate positive non-executing parser: parse exact generated grammar, compare every requested binding/reference and canonical bytes, reject missing/extra/substituted statements; independently pin reviewed validator ID/revision, never trust producer-supplied revision or generic IR validity."
+                              :qualification "Positive literals/refs plus hostile quote/dollar/backtick/separator/Unicode/malformed-name negatives, exact-byte roundtrips and zero host discovery/eval/process effects. Respect current JVM runtime: any NBB/BB consumer requires separately qualified fixed transport or owner-accepted portable extraction, not an assumption that JVM dependencies load in BB. Run owner analyze gate and applicable mutation tests only when owner work is authorized."}}
+ :partial-s1b {:answer :possible-as-explicitly-admitted-incomplete-slice-not-currently-authorized
+               :confidence 0.9
+               :basis "Reviewed card already separates effect-free preview/check and explicitly holds apply/rollback completion on owner artifacts. S1A contains real inert EDN render/validation and unavailable Bash outcomes. These support preparation without inventing a promoter, but S1B is incoming and this discovery grants no implementation/readiness permission."
+               :candidate-scope "After explicit parent/owner scope review and lawful Rheos admission: integrate merged S1A source, specify/implement only composition of existing inert EDN preview/check and closed unavailable-owner outcome. Retain existing adapter-unavailable/validator-unavailable where applicable; do not invent an accepted owner plan/result schema. Prove unchanged synthetic target/current hashes and zero lifecycle/target writes."
+               :not-completion "No positive Bash, Services apply, rollback, write-race safety or S1B done/review-complete credit. Do not count refusal-only mocks as non-vacuous owner effect-edge proof. Missing both artifacts remains explicit."
+               :artifact-admission "Only actual owner-reviewed versioned artifact, pinned independent validator, available tested entry and explicit handoff can admit its corresponding positive scope. Authorization to implement prerequisites, a contract proposal, passed mocks or S1A merge cannot substitute."}
+ :minimal-user-decision {:question "Authorize narrowly scoped Services and shx owner-side prerequisite planning/implementation through their own review/adoption gates, or require the external owners to supply the reviewed pinned artifacts/handoff?"
+                         :option-owner-work "Permission must explicitly include Services architecture/scope expansion and actual safe local mutation/rollback boundary, plus shx safe renderer and independently pinned validator. It does not authorize live installation, deployment or second Oikos implementations. Owners can reject or revise the proposed locations/semantics."
+                         :option-external-handoff "Request exact reviewed source revision, owner-approved contract/version, callable entry, positive validator pin, actual synthetic qualification evidence and explicit handoff for each artifact; remain blocked meanwhile."
+                         :partial-work "A narrowed incomplete preview/check-only S1B tranche is a separate admission choice, not a workaround for external prerequisites. Parent should obtain scope review and authoritative readiness before coding; no card/state changes made here."}
+ :reflection {:friction :stale-skill-cli-verb-and-pre-s1a-planned-worktree
+              :learning "Read the actual official verb, distinguish owner API evidence from proposed roles and dated lore, and inspect exact merged source when the precreated consumer worktree is stale."
+              :spore-created false :separate-ledger-write false}}
