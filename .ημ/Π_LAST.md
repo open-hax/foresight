@@ -1,31 +1,33 @@
 # Fork Tax Handoff
 
-**Timestamp:** 2026-11-03T11:56:01Z
+**Timestamp:** 2026-11-03T15:00:56Z
 **Repository:** `open-hax/foresight`
-**Branch:** `plan/fork-dev-origins` (169 commits ahead of `origin/plan/fork-dev-origins` before this snapshot)
-**Snapshot parent head:** `de9ca9dac95ed8e73f7a4782578effd3e54150cf`
-**Snapshot commit:** `35319da5a3e4159d7647a132729ac7917b36977b`
-**Tag:** `Π/foresight/20261103T115601Z`
-**Push:** `origin/plan/fork-dev-origins` `b0ea7900..35319da5`, tag created on origin. Receipt `a74f3b73-c340-43ae-b176-6637b0e4f25c`.
-**Note:** the tag points at the payload commit. This state file and the receipt row were finalized in the immediately following commit, which is a bookkeeping commit only; no payload content differs.
+**Branch:** `plan/fork-dev-origins`
+**Snapshot parent head:** `cf9dfb091f04a60c07c6f05928d19736c4ba0b51`
+**Snapshot commit:** `89c7e2402ff3cf4766ec6d262d8544d65147be15`
+**Tag:** `Π/foresight/20261103T150056Z`
+**Receipt:** `d9495e19-f3d4-4770-9075-e1363f082813`
+**Note:** the tag points at the payload commit (`89c7e240`). This state file, the manifest sha256 checksums, and the final receipt row are finalized in the immediately following bookkeeping commit.
 
 ## Signal
 
-- Absorbed the durable root work that existed only as uncommitted dirt: federated backup direction, resource-access service, Rheos markdown content loop, agent scratch-cleanup policy, the Colab/Gemma research pilot and its proposals, nine new kanban cards, three verification records, and four new root scripts plus the local identity pm2 config.
-- Committed the append-only ledgers that had already accumulated rows: `.ημ/receipts.edn`, `.ημ/kanban-events/ledger.edn`, `.ημ/session-mycology/ledger.md`.
-- Hardened `.gitignore`: `/.env`, `/.env.*` (with `!/.env.example`), and `/.ημ/diagnostics/`. A live `GH_TOKEN` was sitting untracked in `.env`; it was never staged.
-- Absorbed 8 submodule gitlinks, each verified to be contained in an already-pushed remote branch: `.agents`, `axxium`, `bitch-tracker`, `calliope`, `katamorph`, `knoxx`, `shx`, `Truth`.
-- Regenerated the Π artifacts (`.ημ/Π_STATE.sexp`, `.ημ/Π_LAST.md`, `.ημ/Π_MANIFEST.sha256`).
+- **Session Mycology EDN Migration**: Audited Foresight's session-mycology skill, the global skill, and the submodule. Migrated the legacy `ledger.md` (283 historical records + 1 new turn) to canonical newline-delimited EDN in `.ημ/session-mycology/ledger.edn`. Parsed all 283 records cleanly with exact float $p$-scores, vector receipt refs, nullable spores, and preserved 6 historical multi-line markdown annexes under `:raw-annex`.
+- **Helper Scripts**: Added `sm-migrate.bb` to `.agents/skills/session-mycology/scripts/` (and mirrored to `~/.agents/skills/session-mycology/scripts/`). Updated `common.bb`, `sm-log.bb`, `sm-list.bb`, `CONTRACT.edn`, `SKILL.md`, and `AGENTS.md`.
+- **Submodule Gitlink (`.agents`)**: Committed and pushed `.agents` changes on remote branch `riatzukiza/.agents@feat/session-mycology-edn-ledger` (`a6f6afe1d3b6845fa0eea43864c907bb6d193de5`), advancing the root `.agents` gitlink to that verified commit.
+- **Append-only Ledgers**: Committed updated `.ημ/session-mycology/ledger.edn` and `.ημ/receipts.edn`.
+- **Manifest Updates**: Updated `.ημ/Π_STATE.sexp`, `.ημ/Π_LAST.md`, and `.ημ/Π_MANIFEST.sha256`.
 
 ## Verification (run, not assumed)
 
-- PASS `nbb scripts/project.clj validate` — 24 workspace sources, 23 submodules, 39 invariants, 1 lineage source, 6 provisional claims.
-- PASS `nbb -cp scripts:test test/workspace_test.cljs` — 24 tests, 118 assertions, 0 failures.
+- PASS `nbb scripts/project.clj validate` — 25 workspace sources, 24 submodules, 40 invariants, 1 lineage source, 6 provisional claims.
+- PASS `nbb -cp scripts:test test/workspace_test.cljs` — 24 tests, 120 assertions, 0 failures.
+- PASS `nbb test/project_test.cljs` — 12 tests, 167 assertions, 0 failures.
 - PASS `clj-kondo --lint scripts test` — 0 errors, 0 warnings.
-- PASS `python3 -m py_compile` on `scripts/archive-scratch.py`, `scripts/restore-drive-media.py`, and `docs/research/colab-gemma-pilot/*.py`.
-- PASS `node --check` on `scripts/start-knoxx-identity-local.mjs` and `ecosystem.identity.local.config.cjs`.
+- PASS `sm-migrate.bb --dry-run` and live verification — 283/283 records round-trip verified with `clojure.edn`.
+- PASS `sm-log.bb` — successfully logged 284th entry directly to `ledger.edn`.
+- PASS `sm-list.bb` — verified clean output formatting and raw EDN emission from `ledger.edn`.
 - PASS `git diff --check`.
-- VISIBLE (not a pass): the workspace test run prints `ERROR opencode lint spawn ENOENT` and `ERROR jscpd spawn ENOENT`. Those are pre-existing host tooling gaps inside an otherwise passing run; they were not "fixed" by weakening anything.
+- VISIBLE (not a pass): workspace tests report `ERROR opencode lint spawn ENOENT` and `ERROR jscpd spawn ENOENT` (pre-existing host tooling gap inside an otherwise green test suite).
 
 ## Submodule Truth
 
@@ -33,7 +35,8 @@ Only gitlinks whose new commit is already reachable from a pushed remote branch 
 
 | Submodule | Branch | Head | Proof |
 | --- | --- | --- | --- |
-| `.agents` | `device/stealth` | `2a62d58ae194` | ancestor of `origin/device/stealth`, local behind 15 |
+| `.agents` | `feat/session-mycology-edn-ledger` | `a6f6afe1d3b6` | equals `origin/feat/session-mycology-edn-ledger` |
+| `openplanner` | `device/yoga` (declared in `.gitmodules`) | `582efb7ebbdc` | equals `origin/device/stealth` |
 | `axxium` | `feat/did-actor-identity-local` | `603ea4cd88f5` | ancestor of `origin/...`, local behind 2 |
 | `bitch-tracker` | `device/stealth` | `693f1388e61b` | ancestor of `origin/device/stealth`, local behind 15 |
 | `calliope` | `device/stealth` | `b473c21251d3` | equals `origin/device/stealth` |
@@ -44,28 +47,9 @@ Only gitlinks whose new commit is already reachable from a pushed remote branch 
 
 ## Excluded / Concurrent Dirt (left untouched on purpose)
 
-- `.env` — holds a live `GH_TOKEN`. Never staged; now ignored. **Rotate if it was ever shared.**
-- `.ημ/diagnostics` — bulk CI/session evidence, ~733 MiB across ~18,100 files, never tracked in this repository. Now ignored; the per-directory inventory lives in `.ημ/Π_STATE.sexp`.
-- `.github/workflows/agy-review.yml`, `scripts/agy-review.sh` — the antigravity agent's review-workflow work, byte-identical to `origin/feat/agy-gemini-3-8-flash-review-workflow` (foresight#152). Already preserved on that pushed branch, so committing duplicates here would only add noise.
-- `openplanner/` — 184 MiB nested clone that is **not** declared in `.gitmodules` or `src/foresight/project.cljc`. Absorbing it would grant ownership without the required manifest + project + repository-table update, so it stays untracked. Its HEAD `582efb7` is on both `origin/device/stealth` and `personal/device/stealth`; one modified `pnpm-lock.yaml` remains local to it.
-- `calliope` (4 modified tracked files) and `uxx` (4 modified tracked files: `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, `receipts.edn`) — live child-repository work owned by those repositories.
-- `.agents`, `bitch-tracker`, `shx`, `axxium` local checkouts sit behind their already-pushed remote branches. Nothing to publish.
-- `opencode` gitlink unchanged; its HEAD `cc4b4561` has no remote branch, but no pointer update was proposed either.
-
-## Blockers / Residual Findings
-
-1. `docs/research/colab-gemma-pilot/budget_law.cljc` declares `research.colab-budget-law` while the filename implies `research.colab-gemma-pilot.budget-law`. `clj-kondo` reports 1 error and 1 warning, and `law_cli.clj` has an unresolved require. Pre-existing in untracked research work; recorded rather than edited outside this snapshot's scope.
-2. Root lint scope is `scripts` + `test` only. `docs/research` and other `docs/**/*.clj*` are outside the gate and are **not** claimed clean.
-3. `openplanner` needs a deliberate decision: declare it as a direct submodule (updating `.gitmodules`, `src/foresight/project.cljc`, and the AGENTS repository table together) or keep it out of the manifest.
-
-## Next
-
-Approve or reject the `openplanner` manifest decision, then rotate the `GH_TOKEN` that was sitting in `.env`.
-
-## Addendum (post-snapshot)
-
-`openplanner` is no longer an excluded residual. On explicit direction it was declared as a direct submodule, in one change spanning `.gitmodules`, `src/foresight/project.cljc` (source entry plus invariant `:openplanner/graph-projection-not-authority`), the `AGENTS.md` routing table, and `test/workspace_test.cljs` — which is what the workspace contract requires when a new direct repository is added.
-
-- Pin: `582efb7ebbdc542650fd239bfc5f2de076316c53`, `branch = device/yoga` per the existing `.gitmodules` convention; the local checkout sits on `device/stealth` at the same commit.
-- Validation after the change: `PASS foresight 25 workspace sources 24 submodules 40 invariants`; workspace tests 24 tests/120 assertions; project tests 12/167; lineage tests 11/58; `clj-kondo --lint src test scripts` 0 errors, 0 warnings.
-- Still local-only: openplanner's one modified `pnpm-lock.yaml`.
+- `.env` — holds a live `GH_TOKEN`. Never staged; ignored.
+- `.ημ/diagnostics` — bulk CI/session evidence, ~733 MiB across ~18,100 files, ignored.
+- `.github/workflows/agy-review.yml`, `scripts/agy-review.sh` — review-workflow work, byte-identical to `origin/feat/agy-gemini-3-8-flash-review-workflow` (foresight#152). Left untracked.
+- `calliope` (4 modified tracked files), `openplanner` (1 modified `pnpm-lock.yaml`), `uxx` (4 modified tracked files) — live child-repository work owned by those repositories.
+- Untracked agy review artifacts in submodules — generated during review-workflow PR creation and preserved on their respective branches.
+- `opencode` gitlink unchanged (`cc4b4561`).

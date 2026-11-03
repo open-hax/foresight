@@ -1,13 +1,16 @@
 # Π manifest - sha256 of staged snapshot content
-# generated: 2026-11-03T11:56:01Z  branch: plan/fork-dev-origins  parent: de9ca9dac95ed8e73f7a4782578effd3e54150cf
+# generated: 2026-11-03T15:00:56Z  branch: plan/fork-dev-origins  commit: 89c7e240  parent: cf9dfb09  tag: Π/foresight/20261103T150056Z
 # format: <sha256>  <path>
-2a62d58ae1945c99d3a7faf757d5114d71567cf2  .agents  (gitlink)
+a6f6afe1d3b6845fa0eea43864c907bb6d193de5  .agents  (gitlink)
 d05948b57ac54600303b35ca7021dca9a9f29cc2097fb6e3b3ad4afac09b92b2  .gitignore
+11dcbae710d49a45ab281c2b287bf3eda38a8e119677094f3fe22292c8ff3d4b  .gitmodules
 51250cdc0057c40452900f54247b42766d83a86f401d4ee98283863fd4b762d1  .ημ/kanban-events/ledger.edn
-3cdfd68c6acca45365b8ca75b22f2e6cfdc73a7659102493fa6cd33ad26abeed  .ημ/receipts.edn
-792b69065a23a5afb2286a5cfa879a144527497cd55161c01b5a7aa4efe9a14b  .ημ/session-mycology/ledger.md
-739086c6da6a03e900105146b6c77d64493518f34edd0a8feb3921177f5a4780  .ημ/Π_LAST.md
-90478922fdac64c04dfe375a14eb7f0676170d1131fb6760fe66812f2178b404  .ημ/Π_STATE.sexp
+2963c8de1a7bbde5c732450c82100c1d5edcb8cca5b32f76ce0abd0f7a488869  .ημ/receipts.edn
+2f3dfe4aa7ce81ecaec1611fa935d7b1061e4e3a1ec6b0b9de72b4bf40a6da17  .ημ/session-mycology/ledger.edn
+c972ccdb9a6e397f1f0444532367e9d6bff8cfa5abdef1b6a9d7ee9b6a605c5d  .ημ/session-mycology/ledger.md
+176424646ffb55ccb9b055b17a51490055d73ec69cd0ef6481394e626342632b  .ημ/Π_LAST.md
+f67e3adc2611ed177307e570d97ff50afbeb6e926a334a6aefde405d82d598e9  .ημ/Π_STATE.sexp
+a1418c2bd3d5b30a1e2b601b011db0e60a01a028f7dd9b938e61f470bea24d4b  AGENTS.md
 c7cc34a8248a615f39eeefd5ba8ac841b65e49fa  Truth  (gitlink)
 603ea4cd88f589c621234f73d3afd6e4e08788b8  axxium  (gitlink)
 693f1388e61bd268814f85d1a40ef15a4485e6a3  bitch-tracker  (gitlink)
@@ -49,7 +52,10 @@ c51d23f9f8f5573a197d735ed48891b54176a6a6f9a2e35fd564483834174f31  docs/verificat
 a1b768117ee504bd90dfea0858abf47cecb3c98d6bb7c57ed21a42fa4f09b8dd  ecosystem.identity.local.config.cjs
 0271e84ab7b7dab179d5b5360bd836604dae9dda  katamorph  (gitlink)
 40221a69f7fff675b46614d9ab318b4ef52f3786  knoxx  (gitlink)
+582efb7ebbdc542650fd239bfc5f2de076316c53  openplanner  (gitlink)
 a65495998d809711cbd18a6658fb663581094e795d05330a6da6f45ca60aa888  scripts/archive-scratch.py
 28a49fd2671669583ce7aca28b0cb97a445ea6f526f53e26b9fe0eb0b7f2d5a3  scripts/restore-drive-media.py
 84afb8aa1c0265a2ea2aa41a1247344f7b08db33f2d6369998436065000fa89f  scripts/start-knoxx-identity-local.mjs
 5dbac4fde8b3626316c71e15b48b9fe62a5802c2  shx  (gitlink)
+eaacac98f6e319a2a5526c34a5a0bc3d613285b04ccdc751896d2d9492f33060  src/foresight/project.cljc
+4d6e196dd2097189ece1204f97a9a812f714bc8ffcb099a42d27b8ecdfa44414  test/workspace_test.cljs

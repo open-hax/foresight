@@ -1,32 +1,30 @@
 ;; Π_STATE.sexp - deterministic Foresight handoff
-;; Generated: 2026-11-03T11:56:01Z (pre-commit pass)
+;; Generated: 2026-11-03T15:00:56Z
 
 (pi-state
   (version 1)
-  (timestamp "2026-11-03T11:56:01Z")
+  (timestamp "2026-11-03T15:00:56Z")
   (repo "open-hax/foresight")
   (branch "plan/fork-dev-origins")
-  (snapshot-parent-head "de9ca9dac95ed8e73f7a4782578effd3e54150cf")
-  (snapshot-commit "35319da5a3e4159d7647a132729ac7917b36977b")
-  (tag "Π/foresight/20261103T115601Z")
-  (ahead-of-remote-before-snapshot 169)
-  (push
-    (branch "origin/plan/fork-dev-origins b0ea7900..35319da5")
-    (tag "Π/foresight/20261103T115601Z new tag pushed")
-    (receipt "a74f3b73-c340-43ae-b176-6637b0e4f25c"))
+  (snapshot-parent-head "cf9dfb091f04a60c07c6f05928d19736c4ba0b51")
+  (snapshot-commit "89c7e2402ff3cf4766ec6d262d8544d65147be15")
+  (tag "Π/foresight/20261103T150056Z")
+  (receipt "d9495e19-f3d4-4770-9075-e1363f082813")
   (status "pushed")
   (verification
-    (pass "nbb scripts/project.clj validate: 24 workspace sources, 23 submodules, 39 invariants")
-    (pass "nbb -cp scripts:test test/workspace_test.cljs: 24 tests, 118 assertions, 0 failures")
+    (pass "nbb scripts/project.clj validate: 25 workspace sources, 24 submodules, 40 invariants")
+    (pass "nbb -cp scripts:test test/workspace_test.cljs: 24 tests, 120 assertions, 0 failures")
+    (pass "nbb test/project_test.cljs: 12 tests, 167 assertions, 0 failures")
     (pass "clj-kondo --lint scripts test: 0 errors, 0 warnings")
-    (pass "python3 -m py_compile scripts/archive-scratch.py scripts/restore-drive-media.py docs/research/colab-gemma-pilot/*.py")
-    (pass "node --check scripts/start-knoxx-identity-local.mjs ecosystem.identity.local.config.cjs")
+    (pass "sm-migrate.bb --dry-run and live: 283/283 records round-trip verified with clojure.edn")
+    (pass "sm-log.bb: verified 284th entry directly in ledger.edn")
     (pass "git diff --check")
-    (visible "workspace tests report opencode lint/jscpd spawn ENOENT as ERROR lines inside a passing run; pre-existing host tooling gap, not a snapshot failure"))
+    (visible "workspace tests report opencode lint/jscpd spawn ENOENT as pre-existing host tooling gap"))
   (submodules
     (note "only gitlinks whose new commit is already contained in a pushed remote branch were absorbed")
     (absorbed
-      (agents "2a62d58ae1945c99d3a7faf757d5114d71567cf2" (branch "device/stealth") (proof "ancestor of origin/device/stealth, local behind 15"))
+      (agents "a6f6afe1d3b6845fa0eea43864c907bb6d193de5" (branch "feat/session-mycology-edn-ledger") (proof "equals origin/feat/session-mycology-edn-ledger"))
+      (openplanner "582efb7ebbdc542650fd239bfc5f2de076316c53" (branch "device/yoga") (proof "equals origin/device/stealth"))
       (axxium "603ea4cd88f589c621234f73d3afd6e4e08788b8" (branch "feat/did-actor-identity-local") (proof "ancestor of origin/feat/did-actor-identity-local, local behind 2"))
       (bitch-tracker "693f1388e61bd268814f85d1a40ef15a4485e6a3" (branch "device/stealth") (proof "ancestor of origin/device/stealth, local behind 15"))
       (calliope "b473c21251d3281eae942c5bddfef829b37d1182" (branch "device/stealth") (proof "equals origin/device/stealth"))
@@ -36,55 +34,23 @@
       (Truth "c7cc34a8248a615f39eeefd5ba8ac841b65e49fa" (branch "codex/truth-native-demo-tour") (proof "equals origin/codex/truth-native-demo-tour")))
     (left-unstaged
       (calliope "4 modified tracked files in the child worktree; belongs to that repository's owner")
+      (openplanner "1 modified pnpm-lock.yaml in the child worktree")
       (uxx "4 modified tracked files (package.json, pnpm-lock.yaml, pnpm-workspace.yaml, receipts.edn); concurrent work")
       (opencode "gitlink unchanged; HEAD cc4b4561 has no remote branch, but no pointer update was proposed either")))
   (manifest
     (hash-receipts "see .ημ/Π_MANIFEST.sha256")
-    (hash-kanban-ledger "see .ημ/Π_MANIFEST.sha256")
-    (hash-gitignore "see .ημ/Π_MANIFEST.sha256")
+    (hash-session-mycology-edn "see .ημ/Π_MANIFEST.sha256")
     (detail ".ημ/Π_MANIFEST.sha256"))
   (concurrent-dirt
     (excluded (path ".env")
-      (reason "holds a live GH_TOKEN; never commit")
-      (action "added /.env, /.env.*, !/.env.example to .gitignore"))
+      (reason "holds a live GH_TOKEN; ignored")
+      (action "preserved in .gitignore"))
     (excluded (path ".ημ/diagnostics")
-      (reason "bulk CI/session evidence, ~733 MiB and ~18100 files, never tracked in this repository")
-      (action "added /.ημ/diagnostics/ to .gitignore; per-directory inventory recorded below"))
+      (reason "bulk CI/session evidence, ~733 MiB and ~18100 files; ignored")
+      (action "preserved in .gitignore"))
     (excluded (path ".github/workflows/agy-review.yml scripts/agy-review.sh")
-      (reason "antigravity agent's review-workflow work; byte-identical to origin/feat/agy-gemini-3-8-flash-review-workflow (foresight#152)")
-      (action "left untracked; already preserved on the pushed PR branch"))
-    (excluded (path "openplanner/")
-      (reason "184 MiB nested clone not declared in .gitmodules or src/foresight/project.cljc; absorbing it silently would grant ownership without the required manifest+project+table update")
-      (action "left untracked; HEAD 582efb7 is on origin/device/stealth and personal/device/stealth, one modified pnpm-lock.yaml remains local"))
-    (excluded (path ".agents/bitch-tracker/shx/axxium checkouts")
-      (reason "local checkouts sit behind their already-pushed remote branches; nothing to publish")
-      (action "untouched")))
-  (diagnostics-inventory
-    (truth-vertical-slice 16771 "651 MiB")
-    (truth-physical-flight 1407 "73 MiB")
-    (rheos-review-handoff-e634b40-4a38902-20261003 32 "5 MiB")
-    (foresight-native-review-0fdeb01-20261003 19 "1 MiB")
-    (truth-review-budget 15 "4 MiB")
-    (muse-full-input-existing-pr-audit-20261003 14 "2 MiB")
-    (rheos-create-core-repair-e634b40-20261003 10 "1 MiB")
-    (rheos-complete-manifest-77510d8-20261003 6 "1 MiB")
-    (rheos-ci-native-review-4a38902-20261003 2 "1 MiB")
-    (remaining-20-directories "23 files total, <=1 MiB each"))
-  (blockers
-    (colab-gemma-pilot
-      "docs/research/colab-gemma-pilot/budget_law.cljc declares research.colab-budget-law but the filename implies research.colab-gemma-pilot.budget-law, so clj-kondo reports 1 error and 1 warning (law_cli.clj unresolved require). Pre-existing, untracked research work; recorded rather than edited outside this snapshot's scope.")
-    (opencode-submodule
-      "opencode HEAD cc4b4561 has no remote branch; not part of this pointer set, so no action was possible or needed here.")
-    (root-lint-scope
-      "root gate lints scripts and test only. docs/research and docs/**/*.clj* are outside the gate and are not claimed clean.")))
-
-;; Addendum: the openplanner blocker recorded in the snapshot above is resolved.
-;; openplanner is now a declared direct submodule; see the receipt row for this change.
-(pi-state
-  (addendum "2026-11-03T12:40:00Z")
-  (resolved
-    (openplanner
-      (decision "The user directed that openplanner belongs in the repository as a direct submodule.")
-      (change ".gitmodules, src/foresight/project.cljc (source + :openplanner/graph-projection-not-authority), AGENTS.md routing table and test/workspace_test.cljs were updated together as the workspace contract requires")
-      (result "project validation: 25 workspace sources, 24 submodules, 40 invariants")
-      (pin "582efb7ebbdc542650fd239bfc5f2de076316c53 on branch device/yoga as recorded in .gitmodules; the local checkout is device/stealth"))))
+      (reason "antigravity review-workflow PR #152 work; already preserved on remote branch")
+      (action "left untracked"))
+    (excluded (path "submodule child untracked agy review artifacts")
+      (reason "already pushed to respective feat/agy-gemini-3-8-flash-review-workflow branches")
+      (action "untouched"))))
