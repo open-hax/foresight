@@ -21,3 +21,20 @@ website/target/
 alpha/.cpcache/
 
 scripts/.clj-kondo/.cache/
+
+# Backup staging can contain private source bytes; durable proofs live in Drive
+# and the append-only receipt ledger, not in Git binary staging artifacts.
+/.ημ/scratch-cleanup/
+/.ημ/scratch-cleanup-*.json
+/scripts/__pycache__/
+
+# Local environment files carry live credentials (currently GH_TOKEN) and must
+# never be committed. Reference them from scripts, never inline them.
+/.env
+/.env.*
+!/.env.example
+
+# Runtime diagnostics are bulk CI/session evidence (~733 MiB, ~18k files) held
+# outside Git on purpose. Durable proofs live in the append-only receipt ledger
+# and Drive; the per-directory inventory is recorded in .ημ/Π_STATE.sexp.
+/.ημ/diagnostics/

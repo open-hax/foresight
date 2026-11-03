@@ -4,7 +4,7 @@ labels: "release, review"
 dependency: "eta-mu-review-workflow-on-forks"
 parent: "eta-mu-baseline-review"
 type: "task"
-write-id: "1792441718931-0.lyo5v4xqhhf9ero1o1h"
+write-id: "1792443123331-0.3sol2w5tyoaa9fmvg7g"
 points: "3"
 title: "Merge open-hax/eta-mu#360 and publish eta-mu 2.0.1"
 priority: "P1"
@@ -36,5 +36,9 @@ eta-mu version
 
 ---
 open-hax/eta-mu#360 opened; CodeRabbit round 1 finding (schema introduced-by, P2) fixed in e4e12a09 and settled. Codex quota-unavailable. Required checks verify, Rheos tests and lint, rheos-github-sync fail only because ETA_MU_APP_ID/ETA_MU_APP_PRIVATE_KEY are unset on open-hax/eta-mu (secrets live on riatzukiza forks). Decision needed: set org secrets or run the PR on the fork.
+
+Correction: the earlier note that ETA_MU_APP_ID/ETA_MU_APP_PRIVATE_KEY are unset on open-hax/eta-mu was unverified (org secrets are not readable with the current token). #360's head is the riatzukiza fork, and GitHub withholds secrets from fork-originated pull_request runs even when org secrets exist, which fits the 'unavailable' failures. Decision: run the review on riatzukiza/eta-mu as a same-repo PR.
+
+riatzukiza/eta-mu#36 round 1: CodeRabbit P2 (root ledger shadowing; knoxx has both files) fixed and settled; round 2 requested. Codex quota-unavailable.
 
 ---

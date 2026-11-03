@@ -1,0 +1,108 @@
+;; SPDX-License-Identifier: GPL-3.0-or-later
+;; Current pilot projection. Authorization and observations are in workspace receipts.edn.
+{:research/status :pilot-completed-production-held,
+ :dataset/pilot-gold-status :analyst-source-grounded-provisional,
+ :promotion/automatic? false,
+ :budget/vendor-atomic-quota? false,
+ :execution/production-owner :existing-knoxx-sol-job-owner,
+ :research-runner/native-yoga-embedding-verified? false,
+ :dataset/cloud-upload-approved? true,
+ :dataset/pilot-count 24,
+ :current-adapter/missing
+ [:artifact-transfer
+  :resumable-checkpoints
+  :compute-unit-admission
+  :compute-unit-watchdog],
+ :dataset/proposed-count 128,
+ :budget/enforced? true,
+ :evaluation/teacher-is-gold? false,
+ :evaluation/local-targets [:stealth :yoga],
+ :dataset/pilot-split {:development 8, :validation 8, :locked-test 8},
+ :dataset/proposed-split
+ {:development 64, :validation 32, :locked-test 32},
+ :execution/production-enabled? false,
+ :models/local-e4b-digest
+ "c6eb396dbd5992bbe3f5cdb947e8bbc0ee413d7c17e2beaae69f5d569cf982eb",
+ :research-runner/source "colab-gemma-pilot/README.md",
+ :budget/cleanup-headroom 2,
+ :budget/ceiling-compute-units 30,
+ :dataset/cloud-upload-scope
+ [:selected-case-records
+  :frozen-creative-vectors
+  :hashed-lexical-tokens
+  :fixed-evaluator],
+ :budget/reservation-per-job 2,
+ :research-runner/automatic-local-replay [:stealth :yoga],
+ :candidate/variables
+ {:retrieval
+  [:task-prefix
+   :chunk-size
+   :window-size
+   :title-metadata
+   :lexical-vector-fusion
+   :audio-calibration
+   :exact-ann
+   :dimension],
+  :agent-tools
+  [:role-prompt
+   :context-selection
+   :tool-schema
+   :thinking-control
+   :output-budget
+   :abstention
+   :escalation],
+  :audio [:window-boundary :audio-first :blind-ab :evidence-order],
+  :later-training [:text-lora :contrastive-adapter]},
+ :evaluation/metrics
+ {:retrieval
+  [:recall-at-5
+   :recall-at-10
+   :ndcg-at-10
+   :ann-recall-gap
+   :wrong-source-rate
+   :hubness
+   :latency
+   :storage],
+  :agent-tools
+  [:task-completion
+   :valid-tool-action
+   :grounding
+   :abstention
+   :repetition
+   :first-usable-ms
+   :peak-memory],
+  :audio
+  [:wrong-syllable-localization
+   :transcript-error
+   :pitch-timing-error
+   :silence-hallucination
+   :human-pairwise-agreement
+   :calibration]},
+ :budget/enforcement :cpu-only-conservative-reservation-and-watchdog,
+ :research-runner/verified-job-ids
+ ["research-b4cb05578e3a" "research-f51b6a967496"],
+ :dataset/group-keys
+ [:conversation :underlying-work :derivative-family],
+ :dataset/gold-owner :reviewed-human-or-independent-verifier,
+ :models/targets ["gemma4:e4b" "google/embeddinggemma-2"],
+ :execution/owner :codex-bounded-research-adapter,
+ :current-adapter/limits
+ {:concurrent-jobs 1,
+  :execution-seconds 900,
+  :source-bytes 262144,
+  :output-bytes 10485760,
+  :poll-tail-bytes 65536},
+ :evaluation/test-visible-to-optimizer? false,
+ :budget/proposed-compute-units 30,
+ :promotion/requires
+ [:source-bound-review
+  :local-runtime-replay
+  :existing-owner-activation
+  :real-behavioral-evidence],
+ :execution/enabled? true,
+ :research/source "colab-gemma-research-loop-2026-10-25.md",
+ :research/id "colab-gemma-2026-10-25",
+ :budget/allocation
+ {:retrieval 10, :agent-tools 10, :audio 5, :rerun-reserve 5},
+ :next/action
+ :investigate-ann-empty-results-without-production-mutation}
