@@ -1,0 +1,40 @@
+{:promotion/type :explicit-selected-source-and-tests
+ :promotion/not-a-complete-branch-merge true
+ :target/base "d25d4e7a926eddddafeaaf227ce1c592581110fe"
+ :source/code "6bad69c1867a3328549c311e2cf61a88e175f24c"
+ :candidate/code "2b4c3bcc6bea3cf61a825041a355f041a2a6ed1a"
+ :source/blobs {"scripts/evidence.clj" "cddfd35d9257d74a36bd632728a53605fda1ecc3"
+                "test/evidence_cli_test.cljs" "f83bc889260886120f4f82850ed0257b842e807f"}
+ :source/identity "Both promoted Git blobs equal the frozen original GREEN blobs exactly."
+ :archive {:repository "riatzukiza/foresight"
+           :branch "evidence/receipt-git-buffer-20261103"
+           :commit "036cfd03a58314b2672632057820f3bd42214729"
+           :ledger ".ημ/receipts.edn"
+           :blob "c50e55b84cfed4516d2fb25a6827905503e08926"
+           :bytes 1289238
+           :sha256 "659f7c903e483677c6559212d562e3a6ff7124eff471c1bd240a4a0a4ebe3eef"
+           :verification "Authenticated GitHub blob content was decoded and compared byte-for-byte with the entire committed original ledger; SHA256 also matches."
+           :later-than-custody-assessment true}
+ :invalid-original-records
+ [{:line 551 :commit "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+   :sha256-without-lf "0a66f43c2b1dcc599045fefa316e1d6b69dfa39ab9b593891c332a191bbb2923"}
+  {:line 552 :commit "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+   :sha256-without-lf "ba4f66428456223b743a8a4cd6c8ed33dbdc7e99b446694f374d854fcabd3797"}
+  {:line 553 :commit "036cfd03a58314b2672632057820f3bd42214729"
+   :sha256-without-lf "b79e55eda1c055f82e2413832cc94442f85ccafd00be2ca50deb00b4a458819b"}]
+ :invalid-reason "Original :manifest and :refs were strings rather than vectors. All three original records remain unchanged and remotely recoverable; none becomes valid through this record."
+ :input-selection "No donor receipt suffix, operational card state, Rheos ledger or memory ledger was transplanted. The source task stays with its original Rheos authority. This is not an active-ledger exclusion or schema migration."
+ :target/ledger-prefix {:bytes 1289833
+                        :sha256 "a73bd90dff5d09c8312f8131a24464c8692a3b86832a99d7fab1eaa73af48a2a"
+                        :preserved true :records-removed 0 :records-rewritten 0}
+ :verification/actual-code-candidate
+ {:head "2b4c3bcc6bea3cf61a825041a355f041a2a6ed1a"
+  :receipt-history [{:base "e31b43a57765a394521d6c49aafd068f5c4d5ad5" :exit 0 :appended-receipts 9}
+                    {:base "d25d4e7a926eddddafeaaf227ce1c592581110fe" :exit 0 :appended-receipts 0}]
+  :cli-tests [59 393] :project-tests [12 171] :workspace-tests [24 122]
+  :lineage-tests [11 58] :evidence-tests [17 89]
+  :failures 0 :errors 0 :lint-errors 0 :lint-warnings 0}
+ :qualification/checkpoint :before-independent-code-review-result
+ :qualification/independent-code-review :pending-and-required
+ :native-approval-transfer false :merge-approval-credit 0
+ :later-head-obligation "After valid new receipts and qualification evidence are committed, verify the actual full base/head pair again. Earlier candidate and self-comparison results cannot replace that check."}
