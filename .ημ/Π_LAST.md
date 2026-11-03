@@ -4,6 +4,10 @@
 **Repository:** `open-hax/foresight`
 **Branch:** `plan/fork-dev-origins` (169 commits ahead of `origin/plan/fork-dev-origins` before this snapshot)
 **Snapshot parent head:** `de9ca9dac95ed8e73f7a4782578effd3e54150cf`
+**Snapshot commit:** `35319da5a3e4159d7647a132729ac7917b36977b`
+**Tag:** `Π/foresight/20261103T115601Z`
+**Push:** `origin/plan/fork-dev-origins` `b0ea7900..35319da5`, tag created on origin. Receipt `a74f3b73-c340-43ae-b176-6637b0e4f25c`.
+**Note:** the tag points at the payload commit. This state file and the receipt row were finalized in the immediately following commit, which is a bookkeeping commit only; no payload content differs.
 
 ## Signal
 

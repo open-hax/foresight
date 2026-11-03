@@ -7,8 +7,14 @@
   (repo "open-hax/foresight")
   (branch "plan/fork-dev-origins")
   (snapshot-parent-head "de9ca9dac95ed8e73f7a4782578effd3e54150cf")
+  (snapshot-commit "35319da5a3e4159d7647a132729ac7917b36977b")
+  (tag "Π/foresight/20261103T115601Z")
   (ahead-of-remote-before-snapshot 169)
-  (status "committed")
+  (push
+    (branch "origin/plan/fork-dev-origins b0ea7900..35319da5")
+    (tag "Π/foresight/20261103T115601Z new tag pushed")
+    (receipt "a74f3b73-c340-43ae-b176-6637b0e4f25c"))
+  (status "pushed")
   (verification
     (pass "nbb scripts/project.clj validate: 24 workspace sources, 23 submodules, 39 invariants")
     (pass "nbb -cp scripts:test test/workspace_test.cljs: 24 tests, 118 assertions, 0 failures")
