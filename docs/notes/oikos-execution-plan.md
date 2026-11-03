@@ -16,10 +16,12 @@ still owns admission, status and dependency transitions.
 The coordinator must read live tasks before acting; saved card snapshots are
 dated evidence, not a replacement board.
 
-The coordinator reports [planning PR #153](https://github.com/open-hax/foresight/pull/153)
-has **16 native unsettled review threads and 2 body items** at this planning
-checkpoint. This is not a fresh native review query by the documentation worker.
-Native settlement and current-head planning admission remain required. No
+At the original `b9ac3141` checkpoint,
+[planning PR #153](https://github.com/open-hax/foresight/pull/153) had sixteen
+unsettled native threads and two body items. After publishing `51d80fad`, the
+coordinator settled all sixteen threads and posted both itemized body replies;
+native readback reported zero unresolved threads. Current-head review/convergence
+and the receipt-history gate remain blocked. No
 approval, ready transition, task completion or integration completion is asserted.
 **All sixteen tasks are blocked by planning admission.** S1A alone has no proposed
 task prerequisite; that does not make S1A ready or authorize implementation.
@@ -48,9 +50,9 @@ documentation check, `consensus-fixes-v1.edn` was not found under the program ru
 no completion of those corrections is claimed. Completion must not be reported
 until that artifact exists and is read. Two persisted passes are not a completed
 qualified review round, exact-head approval or settlement of all findings.
-PR #153's original **16 native unsettled threads and 2 body items** remain open
-for coordinator push/settlement; local review classification does not resolve
-native review state.
+At this earlier checkpoint, PR #153's original sixteen threads and two body
+items were still open. Their later native settlements are recorded below;
+local review classification alone did not resolve native review state.
 
 ### S1A preparatory specification, not implementation
 
@@ -285,6 +287,15 @@ initial S1A acceptance is positive inert profile EDN plus truthful unavailable
 Bash rejection; actual positive Bash and non-vacuous write-time race/rollback
 proof stay under S1B's owner-artifact gates. Both native threads were fixed and
 resolved. This is still a specification-only PR, not readiness or working code.
+
+PR #153's sixteen original threads were subsequently settled as fixed at
+`51d80fad`; both identified body findings were answered in the
+[itemized writer reply](https://github.com/open-hax/foresight/pull/153#issuecomment-6611238670).
+The canonical status readback observed zero unresolved threads but no exact-head
+approval or completed planning round, and requested fresh collection after a
+concurrent evidence change. The actual receipt verifier still exited 2 with
+`spawnSync git ENOBUFS`; the separate repair is planned, not implemented. These
+settlements therefore do not admit implementation or complete an epic.
 
 Exact duplicate JSON review inputs and Rheos readbacks are preserved in the
 [pushed evidence manifest](https://github.com/riatzukiza/foresight/blob/e2939d28e1b7ecbeb441dfd6fbac358c4300081a/.%CE%B7%CE%BC/runs/oikos-program-20261103/readback-manifest.json):

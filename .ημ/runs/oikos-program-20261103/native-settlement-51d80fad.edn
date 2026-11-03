@@ -1,0 +1,23 @@
+{:repository "open-hax/foresight" :pull-request 153
+ :fix-head "51d80fad671692e9eeab48d88121dfe3e988a9f4"
+ :source "native-dispositions-v1.edn + native-dispositions-v2.edn, published after final source hash verification"
+ :settled-thread-ids
+ ["PRRT_kwDOT3TWPM6zMzpM" "PRRT_kwDOT3TWPM6zMzpT"
+  "PRRT_kwDOT3TWPM6zM1Id" "PRRT_kwDOT3TWPM6zM1Ij"
+  "PRRT_kwDOT3TWPM6zM1Iv" "PRRT_kwDOT3TWPM6zM1I5"
+  "PRRT_kwDOT3TWPM6zM1I8" "PRRT_kwDOT3TWPM6zM1JC"
+  "PRRT_kwDOT3TWPM6zM1JH" "PRRT_kwDOT3TWPM6zM1JM"
+  "PRRT_kwDOT3TWPM6zM1JU" "PRRT_kwDOT3TWPM6zM1Je"
+  "PRRT_kwDOT3TWPM6zM1Jn" "PRRT_kwDOT3TWPM6zM1Jv"
+  "PRRT_kwDOT3TWPM6zM1J0" "PRRT_kwDOT3TWPM6zM1KD"]
+ :actual-thread-results "Canonical pr.cljs settle returned 'settled ... as fixed' for all sixteen; replies preceded resolution."
+ :body-settlement "https://github.com/open-hax/foresight/pull/153#issuecomment-6611238670"
+ :review-id 5755016882
+ :answered-items ["cr-comment:v1:5a08a09292697bdfbfc79de8" "cr-comment:v1:efd09d07c97f26c80451d912"]
+ :status-readback {:threads 16 :unresolved 0 :exact-head-approvals 0 :completed-planning-rounds 0
+                   :concurrent-evidence-refresh "Review evidence changed while collecting conversations; re-evaluate before admission."}
+ :receipt-history {:command "nbb scripts/evidence.clj verify-receipts --base e31b43a57765a394521d6c49aafd068f5c4d5ad5 --at 51d80fad671692e9eeab48d88121dfe3e988a9f4"
+                   :exit 2 :error "Git invocation failed: spawnSync git ENOBUFS" :waived false}
+ :board-readback {:oikos-incoming 24 :completed 0}
+ :native-approval false :readiness false :implementation-completion false
+ :separate-holds ["Qualified current-head review/convergence" "Receipt transport repair" "Owner seams and real runtime/resource/client evidence"]}
