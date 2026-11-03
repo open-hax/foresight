@@ -2813,3 +2813,13 @@
   spore: none
   receipt-refs: eb4c8f42-95f7-4fb4-8e70-5500342079c4
   note: Successfully created isolated branches, pushed, and opened PRs across all 23 submodules and foresight root with zero local working-tree disturbance.
+
+- ts: 2026-11-03T12:05:00Z
+  session: /home/err/spaces/foresight
+  task: Pay fork tax on plan/fork-dev-origins in a shared, heavily dirty workspace
+  p-efficiency: 0.85
+  p-friction: 0.35
+  p-skill-candidate: 0.62
+  spore: 20261103-120500-fork-tax-shared-dirt-classification
+  receipt-refs: a74f3b73-c340-43ae-b176-6637b0e4f25c
+  note: Classified 18,297 dirt entries into owned-unpreserved, secret, bulk-evidence and someone-else's-preserved before staging. Absorbed 8 of 21 submodule markers only after proving each head via fetch plus merge-base --is-ancestor against the remote branch. Quarantined .env (live GH_TOKEN), ignored and inventoried .ημ/diagnostics, refused to silently register the undeclared openplanner clone, and hashed the agy workflow copies against their pushed PR branch instead of re-committing them.
