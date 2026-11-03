@@ -62,11 +62,14 @@
 (defn read-catalog []
   (:catalog (read-catalog-bundle)))
 
+(def max-git-output-bytes (* 16 1024 1024))
+
 (defn git-capture! [args]
   (let [result (child-process/spawnSync
                 "git"
                 (clj->js (into ["--no-replace-objects"] args))
-                #js {:cwd root :encoding "utf8" :shell false})
+                #js {:cwd root :encoding "utf8" :shell false
+                     :maxBuffer max-git-output-bytes})
         error (.-error result)
         status (.-status result)]
     (when error
@@ -83,7 +86,7 @@
   (let [result (child-process/spawnSync
                 "git"
                 (clj->js (into ["--no-replace-objects"] args))
-                #js {:cwd root :shell false})
+                #js {:cwd root :shell false :maxBuffer max-git-output-bytes})
         error (.-error result)
         status (.-status result)]
     (when error
@@ -815,10 +818,7 @@
                  ;; Semantic evidence must extend an initialized ledger. Generic
                  ;; append callers retain the explicit initialization path.
                  target (open-append-target! parent target-path
-                                             (not validate-ledger?))
-                 committed-ledger-bytes
-                 (when validate-ledger?
-                   (current-committed-receipt-bytes!))]
+                                             (not validate-ledger?))]
              (try
                {:requested-file absolute-file
                 :directory directory
@@ -829,7 +829,7 @@
                 :held-ledger-bytes
                 (if validate-ledger?
                   (validate-held-receipt-ledger!
-                   target committed-ledger-bytes)
+                   target (current-committed-receipt-bytes!))
                   (stable-held-target-bytes! target))
                 :target-open? (atom true)
                 :write-started? (atom false)

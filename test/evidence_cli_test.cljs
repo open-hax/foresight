@@ -784,6 +784,270 @@
                        :current current :historical historical
                        :base-text base-text :base base :commit! commit!)))))))
 
+(deftest large-ledgers-preserve-exact-history-and-reject-invalid-extensions
+  (doseq [terminal-newline? [true false]]
+    (with-historical-ledger-fixture terminal-newline?
+      (fn [{:keys [historical current commit! file]}]
+        (let [line (str (pr-str (assoc historical :note
+                                      (apply str (repeat 128 "é")))) "\n")
+              lines (inc (js/Math.ceil (/ (* 1100 1024)
+                                          (js/Buffer.byteLength line "utf8"))))
+              text (apply str (repeat lines line))
+              text (if terminal-newline? text (subs text 0 (dec (count text))))
+              bytes (js/Buffer.from text "utf8")
+              base (commit! text)
+              immutable (cli/read-immutable-receipt-ledger! base)]
+          (is (> (.-length bytes) (* 1024 1024)))
+          (is (.equals bytes (:ledger/bytes immutable)))
+          (is (= (cli/sha256 bytes) (get-in immutable [:ledger/identity :ledger/sha256])))
+          (is (= text (cli/git-capture! ["show" (str base ":" law/receipt-ledger-path)])))
+          (is (str/includes? (with-out-str
+                              (is (zero? (cli/verify-receipts! {:base base :at base}))))
+                             ":appended-receipts 0"))
+          (let [receipt (cli/append-evidence-receipt! passed-result)
+                held (fs/readFileSync file)]
+            (is (cli/buffer-prefix? bytes held))
+            (is (= [receipt] (cli/appended-receipt-records! bytes held))))
+          (let [valid (str text (when-not terminal-newline? "\n")
+                           (pr-str current) "\n")
+                head (commit! valid)]
+            (is (str/includes? (with-out-str
+                                (is (zero? (cli/verify-receipts! {:base base :at head}))))
+                               ":appended-receipts 1")))
+          (doseq [[invalid message]
+                  [[(str/replace-first text "é" "è") #"does not preserve the base bytes"]
+                   [(subs text 0 (count line)) #"does not preserve the base bytes"]
+                   [(str text "\n42\n") #"invalid receipt envelopes"]
+                   [(str text "\n{:broken\n") #"Invalid Receipt River EDN"]
+                   [(str text "\n" (pr-str current)) #"must end with a newline"]]]
+            (let [head (commit! invalid)]
+              (is (thrown-with-msg? js/Error message
+                                   (cli/verify-receipts! {:base base :at head}))))))))))
+
+(deftest git-capture-preserves-large-metadata-and-binary-octets
+  (with-historical-ledger-fixture true
+    (fn [{:keys [fixture commit!]}]
+      (let [bytes (js/Buffer.alloc (+ (* 1024 1024) 4096))]
+        (dotimes [i (.-length bytes)] (aset bytes i (mod i 256)))
+        (let [at (commit! bytes)
+              actual (cli/git-buffer! ["show" (str at ":" law/receipt-ledger-path)])]
+          (is (.equals bytes actual))
+          (is (= (cli/sha256 bytes) (cli/sha256 actual)))))
+      (let [message (str "large metadata\n\n" (apply str (repeat (* 600 1024) "é")) "\n")
+            message-file (path/join fixture "message.txt")]
+        (fs/writeFileSync message-file message)
+        (cli/git-capture! ["-c" "user.name=Receipt Test"
+                           "-c" "user.email=receipt-test@example.invalid"
+                           "-c" "commit.gpgsign=false" "commit" "--quiet"
+                           "--allow-empty" "--cleanup=verbatim" "-F" message-file])
+        ;; %B includes the stored terminal newline; the format adds one more.
+        (is (= (str message "\n") (cli/git-capture! ["log" "-1" "--format=%B"])))))))
+
+(defn with-git-output-fixture [run!]
+  ;; A local executable replaces Git only inside this fixture. The production
+  ;; adapter still chooses argv/no-shell, encodings, maxBuffer and error checks.
+  (with-receipt-fixture
+    (fn [{:keys [fixture] :as context}]
+      (let [original-path (.-PATH js/process.env)
+            executable (path/join fixture "git")
+            settings (path/join fixture "output.json")]
+        (fs/writeFileSync
+         executable
+         (str "#!" (.-execPath js/process) "\n"
+              "const fs=require('fs');const c=JSON.parse(fs.readFileSync('output.json'));"
+              "fs.writeFileSync('invocation.json',JSON.stringify(process.argv.slice(2)));"
+              "if(c.signal){process.kill(process.pid,'SIGTERM');}else{"
+              "fs.writeSync(1,Buffer.from(c.unicode?'é'.repeat(c.out):'a'.repeat(c.out)));"
+              "fs.writeSync(2,Buffer.alloc(c.err,98));process.exit(c.exit||0);}\n")
+         #js {:mode 493})
+        (try
+          (set! (.-PATH js/process.env) (str fixture path/delimiter original-path))
+          (with-redefs [cli/root fixture]
+            (run! (assoc context :settings settings)))
+          (finally
+            (set! (.-PATH js/process.env) original-path)))))))
+
+(deftest git-capture-enforces-finite-combined-byte-bound-and-error-status
+  (with-git-output-fixture
+    (fn [{:keys [fixture settings]}]
+      (let [bound (* 16 1024 1024)
+            configure! (fn [value]
+                         (fs/writeFileSync settings (js/JSON.stringify (clj->js value))))]
+        (doseq [capture! [cli/git-capture! cli/git-buffer!]]
+          (configure! {:out bound :err 0})
+          (let [actual (capture! ["fixture"])]
+            (is (= bound (js/Buffer.byteLength actual "utf8"))))
+          (is (= ["--no-replace-objects" "fixture"]
+                 (js->clj (js/JSON.parse
+                           (fs/readFileSync (path/join fixture "invocation.json") "utf8")))))
+          (doseq [value [{:out (inc bound) :err 0}
+                        {:out (+ bound 65536) :err 0}
+                        {:out 0 :err (+ bound 65536)}
+                        {:out (* 9 1024 1024) :err (* 9 1024 1024)}
+                        {:out (inc (/ bound 2)) :err 0 :unicode true}]]
+            (configure! value)
+            (is (thrown-with-msg? js/Error #"Git invocation failed:.*ENOBUFS"
+                                 (capture! ["fixture"]))))
+          (configure! {:out 0 :err 20 :exit 7})
+          (is (thrown-with-msg? js/Error #"failed with exit 7: b+"
+                               (capture! ["fixture"])))
+          (configure! {:signal true})
+          (is (thrown-with-msg? js/Error #"without an exit status"
+                               (capture! ["fixture"])))
+          (let [original-path (.-PATH js/process.env)]
+            (try
+              (set! (.-PATH js/process.env) (path/join fixture "missing"))
+              (is (thrown-with-msg? js/Error #"Git invocation failed:.*ENOENT"
+                                   (capture! ["fixture"])))
+              (finally (set! (.-PATH js/process.env) original-path)))))))))
+
+(deftest git-capture-shares-one-explicit-byte-limit
+  (is (= (* 16 1024 1024) cli/max-git-output-bytes))
+  (with-git-output-fixture
+    (fn [{:keys [settings]}]
+      (with-redefs [cli/max-git-output-bytes 1024]
+        (doseq [capture! [cli/git-capture! cli/git-buffer!]]
+          (fs/writeFileSync settings "{\"out\":512,\"err\":512}")
+          (is (= 512 (js/Buffer.byteLength (capture! ["fixture"]) "utf8")))
+          (doseq [value [{:out 1025 :err 0}
+                        {:out 0 :err 1025}
+                        {:out 512 :err 513}
+                        {:out 513 :err 0 :unicode true}]]
+            (fs/writeFileSync settings (js/JSON.stringify (clj->js value)))
+            (is (thrown-with-msg? js/Error #"Git invocation failed:.*ENOBUFS"
+                                 (capture! ["fixture"])))))))))
+
+(deftest capture-overflow-cannot-run-a-gate-or-append-a-receipt
+  (with-git-output-fixture
+    (fn [{:keys [settings file directory]}]
+      (fs/writeFileSync file "{:historical true}\n")
+      (fs/writeFileSync settings "{\"out\":2048,\"err\":0}")
+      (let [ran? (atom false)
+            appended? (atom false)
+            before (.-length (fs/readdirSync "/proc/self/fd"))
+            catalog {:catalog/repositories
+                     {"repo" {:repository/path "repo" :repository/gates [local-gate]}}}]
+        (with-redefs [cli/max-git-output-bytes 1024
+                      cli/receipt-file file
+                      cli/current-committed-receipt-bytes!
+                      (fn [] (cli/git-buffer! ["fixture"]))
+                      cli/require-repositories! (fn [& _] {"repo" {}})
+                      cli/run-gate! (fn [& _] (reset! ran? true) passed-result)
+                      cli/append-evidence-receipt! (fn [& _] (reset! appended? true))]
+          (is (= "" (with-out-str
+                       (is (thrown-with-msg?
+                            js/Error #"Git invocation failed:.*ENOBUFS"
+                            (cli/run-selected-gates!
+                             catalog test-catalog-identity
+                             {:only #{"repo"} :kinds #{:unit}})))))))
+        (is (false? @ran?))
+        (is (false? @appended?))
+        (is (= before (.-length (fs/readdirSync "/proc/self/fd"))))
+        (is (= "{:historical true}\n" (fs/readFileSync file "utf8")))
+        (is (not (fs/existsSync (path/join directory ".receipts.edn.append.lock"))))))))
+
+(deftest real-git-blobs-respect-production-capture-bound
+  (with-historical-ledger-fixture true
+    (fn [{:keys [commit!]}]
+      (let [bound (* 16 1024 1024)
+            bytes (js/Buffer.alloc bound 97)
+            at (commit! bytes)]
+        (doseq [capture! [cli/git-capture! cli/git-buffer!]]
+          (let [actual (capture! ["show" (str at ":" law/receipt-ledger-path)])
+                actual (if (string? actual) (js/Buffer.from actual "utf8") actual)]
+            (is (.equals bytes actual))
+            (is (= (cli/sha256 bytes) (cli/sha256 actual)))))
+        (let [over (commit! (js/Buffer.alloc (+ bound 65536) 97))]
+          (doseq [capture! [cli/git-capture! cli/git-buffer!]]
+            (is (thrown-with-msg? js/Error #"Git invocation failed:.*ENOBUFS"
+                                 (capture! ["show" (str over ":" law/receipt-ledger-path)])))))))))
+
+(defn closed-fd? [fd]
+  (try
+    (fs/fstatSync fd)
+    false
+    (catch :default error
+      (if (= "EBADF" (.-code error)) true (throw error)))))
+
+(deftest committed-capture-failure-closes-owned-target-before-reservation
+  (with-receipt-fixture
+    (fn [{:keys [file directory]}]
+      (fs/writeFileSync file "{:historical true}\n")
+      (let [original (fs/readFileSync file)
+            open-target! cli/open-append-target!
+            open-parent! cli/open-parent-directory!
+            close-error! cli/close-after-open-error!
+            targets (atom [])
+            parent (atom nil)
+            close-count (atom 0)
+            ran? (atom false)
+            appended? (atom false)
+            failure (js/Error. "injected committed capture failure")
+            catalog {:catalog/repositories
+                     {"repo" {:repository/path "repo" :repository/gates [local-gate]}}}
+            fd-count (fn [] (.-length (fs/readdirSync "/proc/self/fd")))
+            before (fd-count)]
+        (try
+          (with-redefs [cli/receipt-file file
+                        cli/open-parent-directory! (fn [directory]
+                                                     (let [p (open-parent! directory)]
+                                                       (reset! parent p) p))
+                        cli/open-append-target! (fn [p target-path create?]
+                                                  (let [t (open-target! p target-path create?)]
+                                                    (swap! targets conj (:fd t)) t))
+                        cli/current-committed-receipt-bytes! (fn [] (throw failure))
+                        cli/close-after-open-error! (fn [fd error]
+                                                      (is (= (last @targets) fd))
+                                                      (swap! close-count inc)
+                                                      (close-error! fd error))
+                        cli/require-repositories! (fn [& _] {"repo" {}})
+                        cli/run-gate! (fn [& _] (reset! ran? true) passed-result)
+                        cli/append-evidence-receipt! (fn [& _] (reset! appended? true))]
+            (dotimes [_ 8]
+              (reset! close-count 0)
+              (let [result (try
+                             (cli/run-selected-gates! catalog test-catalog-identity
+                                                      {:only #{"repo"} :kinds #{:unit}})
+                             (catch :default error error))]
+                (is (identical? failure result))
+                (is (= 1 @close-count))
+                (is (closed-fd? (last @targets)))
+                (is (closed-fd? (:fd @parent)))
+                (is (not (fs/existsSync (path/join directory ".receipts.edn.append.lock")))))))
+          (is (= before (fd-count)))
+          (is (false? @ran?))
+          (is (false? @appended?))
+          (is (.equals original (fs/readFileSync file)))
+          (finally
+            ;; On the red adapter, reclaim only this test's leaked descriptors.
+            (doseq [fd (set @targets)]
+              (when-not (closed-fd? fd) (fs/closeSync fd)))))))))
+
+(deftest target-open-failure-does-not-close-an-unowned-target
+  (with-receipt-fixture
+    (fn [{:keys [file directory]}]
+      (fs/writeFileSync file "{:historical true}\n")
+      (let [sentinel (fs/openSync file "r")
+            close-attempts (atom [])
+            parent (atom nil)
+            open-parent! cli/open-parent-directory!]
+        (try
+          (with-redefs [cli/open-parent-directory! (fn [directory]
+                                                     (let [p (open-parent! directory)]
+                                                       (reset! parent p) p))
+                        cli/open-append-target! (fn [& _] (throw (js/Error. "target open failed")))
+                        cli/close-after-open-error! (fn [fd error]
+                                                      (swap! close-attempts conj fd)
+                                                      (throw error))]
+            (is (thrown-with-msg? js/Error #"target open failed"
+                                 (cli/open-append-reservation! file true))))
+          (is (empty? @close-attempts))
+          (is (not (closed-fd? sentinel)))
+          (is (closed-fd? (:fd @parent)))
+          (is (not (fs/existsSync (path/join directory ".receipts.edn.append.lock"))))
+          (is (= "{:historical true}\n" (fs/readFileSync file "utf8")))
+          (finally (fs/closeSync sentinel)))))))
+
 (deftest receipt-verification-trusts-exact-historical-prefix-only
   (doseq [terminal-newline? [true false]]
     (with-historical-ledger-fixture terminal-newline?
