@@ -61,3 +61,11 @@ Only gitlinks whose new commit is already reachable from a pushed remote branch 
 ## Next
 
 Approve or reject the `openplanner` manifest decision, then rotate the `GH_TOKEN` that was sitting in `.env`.
+
+## Addendum (post-snapshot)
+
+`openplanner` is no longer an excluded residual. On explicit direction it was declared as a direct submodule, in one change spanning `.gitmodules`, `src/foresight/project.cljc` (source entry plus invariant `:openplanner/graph-projection-not-authority`), the `AGENTS.md` routing table, and `test/workspace_test.cljs` — which is what the workspace contract requires when a new direct repository is added.
+
+- Pin: `582efb7ebbdc542650fd239bfc5f2de076316c53`, `branch = device/yoga` per the existing `.gitmodules` convention; the local checkout sits on `device/stealth` at the same commit.
+- Validation after the change: `PASS foresight 25 workspace sources 24 submodules 40 invariants`; workspace tests 24 tests/120 assertions; project tests 12/167; lineage tests 11/58; `clj-kondo --lint src test scripts` 0 errors, 0 warnings.
+- Still local-only: openplanner's one modified `pnpm-lock.yaml`.

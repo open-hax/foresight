@@ -77,3 +77,14 @@
       "opencode HEAD cc4b4561 has no remote branch; not part of this pointer set, so no action was possible or needed here.")
     (root-lint-scope
       "root gate lints scripts and test only. docs/research and docs/**/*.clj* are outside the gate and are not claimed clean.")))
+
+;; Addendum: the openplanner blocker recorded in the snapshot above is resolved.
+;; openplanner is now a declared direct submodule; see the receipt row for this change.
+(pi-state
+  (addendum "2026-11-03T12:40:00Z")
+  (resolved
+    (openplanner
+      (decision "The user directed that openplanner belongs in the repository as a direct submodule.")
+      (change ".gitmodules, src/foresight/project.cljc (source + :openplanner/graph-projection-not-authority), AGENTS.md routing table and test/workspace_test.cljs were updated together as the workspace contract requires")
+      (result "project validation: 25 workspace sources, 24 submodules, 40 invariants")
+      (pin "582efb7ebbdc542650fd239bfc5f2de076316c53 on branch device/yoga as recorded in .gitmodules; the local checkout is device/stealth"))))

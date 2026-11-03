@@ -308,7 +308,21 @@
     :invariant/statement "Model-pricing overrides are EDN policy contracts, not one-off JSON blobs or hard-coded TypeScript tables."
     :invariant/basis [{:basis/repository "open-hax/proxx"
                        :basis/path "README.md"
-                       :basis/revision "abbbc8b1ad80738233593e17e751203db785c9e2"}]}])
+                       :basis/revision "abbbc8b1ad80738233593e17e751203db785c9e2"}]}
+   {:invariant/id :openplanner/graph-projection-not-authority
+    :invariant/scope :openplanner
+    :invariant/enforcement :declarative
+    :invariant/statement "OpenPlanner's semantic graph, layout and retrieval outputs are projections consumed by other systems; they never become the authority for Knoxx resource state, board state, or append-only ledgers."
+    :invariant/basis [{:basis/repository "open-hax/foresight"
+                       :basis/path "docs/notes/edn-contracts-mcp-angular-client-decision.md"
+                       :basis/symbol "OpenPlanner becomes merely one projection/adapter"}
+                      {:basis/repository "open-hax/foresight"
+                       :basis/path "docs/notes/mu-studio-archaeology-calliope-knoxx-epiphany.md"
+                       :basis/symbol "studio-related pieces that surfaced there were primarily presentation/publication components"}
+                      {:basis/repository "open-hax/openplanner"
+                       :basis/path "README.md"
+                       :basis/revision "582efb7ebbdc542650fd239bfc5f2de076316c53"
+                       :basis/symbol "canonical graph monorepo"}]}])
 
 (def sources
   [{:source/id :agents
@@ -552,6 +566,16 @@
      :source/role :identity-auth-kernel
      :source/actionable? true
      :source/invariants []}
+    {:source/id :openplanner
+     :source/name "openplanner"
+     :source/path "openplanner"
+     :source/type :git-submodule
+     :source/repository "open-hax/openplanner"
+     :source/url "git@github.com:open-hax/openplanner.git"
+     :source/ownership :independent-repository
+     :source/role :semantic-graph
+     :source/actionable? true
+     :source/invariants [:openplanner/graph-projection-not-authority]}
     {:source/id :eta
     :source/name "eta"
     :source/path "eta"

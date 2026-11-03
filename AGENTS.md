@@ -54,6 +54,7 @@ candidates, and accepted lifts are not interchangeable.
 | `osmos` | open-hax/osmos | ingestion-service | Extracted JVM kms-ingestion service, configuration and consumer compatibility |
 | `receipt-river` | open-hax/receipt-river | receipt-ledger | Receipt-writing CLI and accountability records |
 | `axxium` | open-hax/axxium | identity-auth-kernel | Identity and authorization kernel; existing repository history is preserved |
+| `openplanner` | open-hax/openplanner | semantic-graph | Semantic graph stack (crawler, GraphQL, layout, similarity, storage) — a projection source, never the authority for resource state, board state, or ledgers |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
 | `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |
