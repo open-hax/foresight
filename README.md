@@ -50,6 +50,12 @@ before searching root-owned code.
 
 ## Workspace setup
 
+`oikos` is a private `open-hax/oikos` submodule. Initializing the full
+constellation requires access to it; public-only consumers should initialize an
+explicit permitted subset rather than treating an authorization failure as an
+empty or successfully installed module. Its development scaffold and epic map
+are described in [Oikos: a local-first workbench](docs/notes/oikos-local-first-workbench.md).
+
 ```sh
 git submodule update --init
 nbb scripts/workspace.clj inventory

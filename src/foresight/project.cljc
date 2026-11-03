@@ -576,6 +576,20 @@
      :source/role :semantic-graph
      :source/actionable? true
      :source/invariants [:openplanner/graph-projection-not-authority]}
+     {:source/id :oikos
+      :source/name "oikos"
+      :source/path "oikos"
+      :source/type :git-submodule
+      :source/repository "open-hax/oikos"
+      :source/url "git@github.com:open-hax/oikos.git"
+      :source/ownership :independent-repository
+      :source/role :local-first-agent-workbench
+      :source/actionable? true
+      :source/invariants [:foresight/pure-kernel-before-runtime
+                          :foresight/immutable-ledgers
+                          :foresight/derived-state-not-authority
+                          :foresight/provider-output-untrusted
+                          :foresight/unavailable-never-pass]}
     {:source/id :eta
     :source/name "eta"
     :source/path "eta"
