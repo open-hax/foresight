@@ -1,61 +1,42 @@
-# Π manifest - sha256 of staged snapshot content
-# generated: 2026-11-03T15:00:56Z  branch: plan/fork-dev-origins  commit: 89c7e240  parent: cf9dfb09  tag: Π/foresight/20261103T150056Z
-# format: <sha256>  <path>
-a6f6afe1d3b6845fa0eea43864c907bb6d193de5  .agents  (gitlink)
-d05948b57ac54600303b35ca7021dca9a9f29cc2097fb6e3b3ad4afac09b92b2  .gitignore
-11dcbae710d49a45ab281c2b287bf3eda38a8e119677094f3fe22292c8ff3d4b  .gitmodules
-51250cdc0057c40452900f54247b42766d83a86f401d4ee98283863fd4b762d1  .ημ/kanban-events/ledger.edn
-2963c8de1a7bbde5c732450c82100c1d5edcb8cca5b32f76ce0abd0f7a488869  .ημ/receipts.edn
-2f3dfe4aa7ce81ecaec1611fa935d7b1061e4e3a1ec6b0b9de72b4bf40a6da17  .ημ/session-mycology/ledger.edn
-c972ccdb9a6e397f1f0444532367e9d6bff8cfa5abdef1b6a9d7ee9b6a605c5d  .ημ/session-mycology/ledger.md
+# Π manifest - sha256 of snapshot content changed since the previous Π tag
+# generated: 2026-11-04T13:00:53Z  branch: plan/fork-dev-origins  commit: 3a0ed32b  parent: b9ac3141  tag: Π/foresight/20261104T130053Z  range: Π/foresight/20261103T150056Z..3a0ed32b
+# rule: every path changed in Π/foresight/20261103T150056Z..HEAD, excluding this manifest file, hashed at the snapshot commit
+# format: <sha256|gitlink-sha>  <path>
+c1413d7966653bb70147fad2c4d6e05169e6c9587f209c67198444273c13f0aa  .gitmodules
+292fa2070657ad3d768376e707f80b1db00d930ee08076979a7a272cc0109624  .ημ/kanban-events/ledger.edn
+cd8acc71f8a00824caaab3c914528350cd28bcfafaf8750e37d6593bf73df1f7  .ημ/receipts.edn
+f024c1d022add82386b2c321ab7af03785260afc9a50dfb726638221d91f5a6a  .ημ/session-mycology/ledger.edn
 176424646ffb55ccb9b055b17a51490055d73ec69cd0ef6481394e626342632b  .ημ/Π_LAST.md
 f67e3adc2611ed177307e570d97ff50afbeb6e926a334a6aefde405d82d598e9  .ημ/Π_STATE.sexp
-a1418c2bd3d5b30a1e2b601b011db0e60a01a028f7dd9b938e61f470bea24d4b  AGENTS.md
-c7cc34a8248a615f39eeefd5ba8ac841b65e49fa  Truth  (gitlink)
-603ea4cd88f589c621234f73d3afd6e4e08788b8  axxium  (gitlink)
-693f1388e61bd268814f85d1a40ef15a4485e6a3  bitch-tracker  (gitlink)
-b473c21251d3281eae942c5bddfef829b37d1182  calliope  (gitlink)
-0217e0ef70030bac31d5e04d02cd6485adaa0b2d592d541e1a15d9eff0325df8  docs/agile/kanban/760f7f1e-a086-4e0a-82a5-71d2a761073d.md
-9ab2e8740077a7b4396669f5a70ebd3bbd3f84c7adbc26a4144e48322c622385  docs/agile/kanban/adopt-revocable-native-body-disposition-after-qualification-c1b21f1e.md
-6864b79804696cd184713dd23123b44b5fa20ad2fd22d9ba01abd4be78932f9b  docs/agile/kanban/colab-browser-mcp-knoxx.md
-31bd28b18b16633420114f700f776ac070a8cf8245f8e4f89440f79404e9b2e5  docs/agile/kanban/collect-fresh-native-review-source-for-advisory-classification-4d51703b.md
-52ba96f5c21901d3433df8d6a63d8edb8975df5153994c05a4af38709a8e9a3a  docs/agile/kanban/deliver-qualified-knoxx-laptop-image-pairs-through-the-existing-receiver-9b62d33d.md
-8916ce73f128b8ab28f461753a8ccc4ae3c2e3007547c5d6bbc974294ce424c8  docs/agile/kanban/enroll-existing-knoxx-laptop-topology-without-replacing-state-1f6175f1.md
-a264dbdba9baf7a7b12ddb8e93d9bdc832667fbbdbf5ac80493e874f14ddaece  docs/agile/kanban/eta-mu-release-2-0-1.md
-df611c4332b9270cb6dec26f7a529ebb0a55235bc1de32327c3bd734ccf61656  docs/agile/kanban/preserve-existing-knoxx-laptop-instances-under-the-protected-receiver-58784d1f.md
-987c92636bda77739f08abddc9281bffa43c45bc96ad6571ca7fc99f23baf9d3  docs/agile/kanban/publish-a-typed-kimi-full-review-verdict.md
-9ff690c07a9289330cbbb227744af390ec21f5da0aac15a2091cbd342f592cfe  docs/agile/kanban/qualify-an-independent-native-body-intent-assessment-and-publisher-72c8ac22.md
-73cbf653274a60895507af50da3e6f63c436c956bc5d7f3791bae94e81f8d076  docs/agile/kanban/qualify-native-review-intent-for-the-shared-login-release-87296add.md
-d1534c4987845905fede9b4f294bc99e178c57b1a66dfe3c9cbadd4854473e6c  docs/agile/kanban/qualify-the-bounded-colab-gemma-retrieval-research-pilot-and-retain-production-holdback.md
-10193680add08d5bac411544b45e30ab615d15819b0c8a61d090f28c54058d42  docs/inbox/2026.10.04.02.12.12.md
-16d246d1e056c66c903480fa5e938bd8f9c565976c54765ab7f3bdda3197eac9  docs/notes/agent-scratch-cleanup.md
-ad38dbd499ff5f9964caab9ca9a74fbf408b0313886ffb0db08d8e1af6abae96  docs/notes/federated-backup-direction.md
-020f6fcd4b3a38ea11589f4fc2b4ffdd2e61c936863c3e7e42fc189b3af21a56  docs/notes/resource-access-service.md
-ac94bdf36b56d02986cd601b92f57834cdf71566deda11933c1251aad0dc3daa  docs/notes/rheos-markdown-content-loop.md
-1da0bc1f4e2b002ee157feec1e051c5d81301be4461012a6fa6603a666478dae  docs/research/colab-gemma-baseline-and-pilot-2026-10-25.md
-4d52b20e8cedaf256a44b75c7939f02b3b033339f308e728acb837ca3176ba2d  docs/research/colab-gemma-pilot-proposal.edn
-32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b  docs/research/colab-gemma-pilot/.gitignore
-a62a44ba5e37cdc111c24661bb84bb47f64e2b73492e17f72bcef70e17175ee2  docs/research/colab-gemma-pilot/README.md
-fa300cbd5841781516b709557c1c06c8e57e8d83dba7933741727f6d8fab744e  docs/research/colab-gemma-pilot/adapter_test.py
-2438fdc861e096fbc0fb7900600864e22f41f96dab6aad658e644914271acc32  docs/research/colab-gemma-pilot/budget_law.cljc
-267366b7b70a52e7cbb6b748c20f3b9cd9383498222fb082d12ae235688f4bf1  docs/research/colab-gemma-pilot/evaluate.py
-5f1574cd666f720e647a5667d743fad577c6552b768676cfd9c501ad51849cf6  docs/research/colab-gemma-pilot/evaluate_test.py
-37f145c5003f6433de21751b507db38534a2100bc50bb3ed4968cc0289095b1f  docs/research/colab-gemma-pilot/law_cli.clj
-c022b812e5da340e3ff6425627300ffa8a9de74df8032414968fd6418798feef  docs/research/colab-gemma-pilot/law_test.clj
-9bf991fc8adfcc398d3cde8bae36a55c203a97e0cae314868892ba78d7877b54  docs/research/colab-gemma-pilot/rag_probe.py
-c22117f0aa8bf25e7c5de07a69daeb9f391ce4c31adb9cbe98b278e22400441d  docs/research/colab-gemma-pilot/run_colab.py
-eb342cfca57167240adb11e1b538d35b98c4e16cd248f89cd88adbd4c49ffd47  docs/research/colab-gemma-pilot/verify_replays.py
-23766bd7897b7722fea4b1a29e61fe46391e2347bda2fe557b4b46f8f41c713e  docs/research/colab-gemma-research-loop-2026-10-25.md
-78cd29f4f74eb5772a25bc7469c2dd53b4af768d444806a7e9e57bcab142c7f6  docs/verification/cephalon-always-on-20261006.md
-c51d23f9f8f5573a197d735ed48891b54176a6a6f9a2e35fd564483834174f31  docs/verification/knoxx-local-social-restoration-20261006.md
-73f7cdd223d049b6c50eac70730b77e4cf0ff0a35c1309102bd654ff0c9492fe  docs/verification/local-identity.md
-a1b768117ee504bd90dfea0858abf47cecb3c98d6bb7c57ed21a42fa4f09b8dd  ecosystem.identity.local.config.cjs
-0271e84ab7b7dab179d5b5360bd836604dae9dda  katamorph  (gitlink)
-40221a69f7fff675b46614d9ab318b4ef52f3786  knoxx  (gitlink)
-582efb7ebbdc542650fd239bfc5f2de076316c53  openplanner  (gitlink)
-a65495998d809711cbd18a6658fb663581094e795d05330a6da6f45ca60aa888  scripts/archive-scratch.py
-28a49fd2671669583ce7aca28b0cb97a445ea6f526f53e26b9fe0eb0b7f2d5a3  scripts/restore-drive-media.py
-84afb8aa1c0265a2ea2aa41a1247344f7b08db33f2d6369998436065000fa89f  scripts/start-knoxx-identity-local.mjs
-5dbac4fde8b3626316c71e15b48b9fe62a5802c2  shx  (gitlink)
-eaacac98f6e319a2a5526c34a5a0bc3d613285b04ccdc751896d2d9492f33060  src/foresight/project.cljc
-4d6e196dd2097189ece1204f97a9a812f714bc8ffcb099a42d27b8ecdfa44414  test/workspace_test.cljs
+c965448b2f2e6082450ad652cdbd2504e4fcf88c4d0adaa04025fc2d900184be  AGENTS.md
+7903db8800f5fbd4f652f6a1b6e96782fcb641ce6b632df464567f060c166a9b  README.md
+0456e998dd9a01bdc2d19039f64e6e834f70d43acf8adc6db503c395a220c246  config/quality-gates.edn
+858cd98f772a0703181dbcaefa5489c73a52dc14985a95f94ead003bd4411491  docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md
+b3633333ec753acb1aa4034e21d41f91dfdc9f2632bd82a869f1baf136b6151d  docs/agile/kanban/oikos-admit-desktop-causal-events-through-clio-and-replay-edn-projections-bb5e8203.md
+ac990d380e27f5b4ac6a628e7f7e173a1db101470aa7de2ab210b9d3a31e7892  docs/agile/kanban/oikos-admit-sandbox-runtime-workspaces-with-leases-and-deliberate-human-joining-43e11d9a.md
+9fb42784bd8278de8bcd5745d64ef763f65e2f53684d6aab2ca580f2d1aa888f  docs/agile/kanban/oikos-bind-all-egress-paths-to-the-mojomast-govone-policy-session-37b28c9b.md
+37bded6ae70ad6a611120ef1a95ef1f33c3352a2ccda64e221e9d7f4658f310f  docs/agile/kanban/oikos-clio-desktop-journal-and-causal-edn-projections-e4415de0.md
+6abfa0b19319ea2b87a373a86e65d411164a69ca2a6199c3bc275ff4a97900fb  docs/agile/kanban/oikos-consented-labels-and-bounded-colab-training-corpus-9faa6482.md
+1d7239979de22392d41a3ad7969913181f0199e826e18d2a757c843d8cd22bd3  docs/agile/kanban/oikos-continuous-local-perception-and-event-backed-knowledge-84a8adaa.md
+ce1daffad2b61e60e648100ae27a41642d11dab4cdff21498e3b1914f40af948  docs/agile/kanban/oikos-define-isolated-generation-manifests-and-target-render-contracts-8927dcc8.md
+d14259d3e21247f524603f74a0a3c987e22783ff6a34d233b63cf4fae3003036  docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md
+35c32b4f01eeb1bdfe90c50e686309854713a2ba78bb2279d098e13ed71b2426  docs/agile/kanban/oikos-empirical-local-gemma-and-ocr-qualification-66198864.md
+92c1edd0b44e48e05e5c24f6cd406ebce2f603162f233f74fae7363fe42644e4  docs/agile/kanban/oikos-expose-scoped-knoxx-lens-policy-evidence-and-complete-gateway-history-8ec26002.md
+7fff1c62ef907731823da1362cfd2d9419a2aabf915319b4e433502cb142554b  docs/agile/kanban/oikos-freeze-synthetic-local-gemma-ocr-baseline-and-runtime-identity-probes-57ce4cbb.md
+703b583b30a67d1493e705c663e4c5f0a3354deeef62490871892c1c2aad1420  docs/agile/kanban/oikos-govone-egress-admission-and-knoxx-lens-evidence-6244a5be.md
+1eb3d38f6776c9c276c2bba45311ff27c70b0efcb2020f77bac1b5c861bb2345  docs/agile/kanban/oikos-implement-logical-memberships-and-speculative-edn-projection-branches-2549ba0d.md
+2678292e0595d16d518faf78e9e534d26c3b5da8808d0510ba05fd38093d5467  docs/agile/kanban/oikos-implement-preview-check-apply-rollback-through-services-owned-generations-86925c3c.md
+cd9951e0376f34fbdb0a18413d39a7e4118ee07e055c272dc73aaba960d397ae  docs/agile/kanban/oikos-isolated-generations-and-shx-muse-configuration-boundaries-6f7533de.md
+2909e7f846fcdc37d783eea09ce518b8bb22903be17441ed2397022beab1b7e6  docs/agile/kanban/oikos-named-collaborative-projection-spaces-with-deliberate-joining-2eb908b4.md
+20a284eab6b3b650a4f5e3bcf1ae0de66aaf88329154b02c92fe3cafa6be13a9  docs/agile/kanban/oikos-prepare-govone-approved-reproducible-colab-exports-with-spending-holdback-ffe21376.md
+fd8efd75e7253ef55ada1489cd0061d71cf5da6daafbb6080741c67fe79b8730  docs/agile/kanban/oikos-project-epistemic-knowledge-with-retention-forgetting-and-stop-controls-ca60db91.md
+7bfc0b4e03eff508fab6a5140f64fc5287a6c704631a0f4e558bd327a9fce953  docs/agile/kanban/oikos-qualify-12b-backends-and-governed-proxx-comparison-after-admission-aeb279c3.md
+645ba3d7261f8ca138e9fb22431e12b6b3216c73a55fc9967cab7a6abc874da6  docs/agile/kanban/oikos-qualify-client-adapter-matrix-without-duplicating-domain-contracts-5ec2aaf3.md
+41606b6bfa790fb362fa59e92c5079ce586fba7c17f8c17ac5d87760a42b65a6  docs/agile/kanban/oikos-reconcile-i3-subscribe-snapshot-races-and-reconnect-revisions-42935ec3.md
+8af9b35cad526164ce467e7e968188305da02a012afe979af807dbcab0e840c8  docs/agile/kanban/oikos-record-consented-corrected-labels-and-leakage-safe-corpus-partitions-0d3ebf42.md
+98cc39c575ceb2b5b4ab4a7f27f66be1960a6184a6737b4f54a4434c6e4539e9  docs/agile/kanban/oikos-shared-muse-i3-and-existing-emacs-capabilities-across-clients-e0a3251a.md
+48c8c6acfa839168f48055f63a2d1ed09d489ac2a95f954decff6fd94b1bf52d  docs/notes/oikos-local-first-workbench.md
+fed4e30272cc1186de14bcc708b3efc9736e3139  oikos  (gitlink)
+dd8fb54a1e2cbec91a0cecbd116f4d077bf39f86abc0bc783f25c3f4f325e605  src/foresight/project.cljc
+b46bd216774be3fb551b42fa19ad81b4f61cb5485329f0fc65baa28852fdef10  test/project_test.cljs
+55be01175666a606165a6f9ef103b62ef1597a546d548f7a9ab2bf61144d108e  test/workspace_test.cljs

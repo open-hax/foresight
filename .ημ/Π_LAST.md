@@ -1,55 +1,46 @@
 # Fork Tax Handoff
 
-**Timestamp:** 2026-11-03T15:00:56Z
+**Timestamp:** 2026-11-04T13:00:53Z
 **Repository:** `open-hax/foresight`
 **Branch:** `plan/fork-dev-origins`
-**Snapshot parent head:** `cf9dfb091f04a60c07c6f05928d19736c4ba0b51`
-**Snapshot commit:** `89c7e2402ff3cf4766ec6d262d8544d65147be15`
-**Tag:** `Π/foresight/20261103T150056Z`
-**Receipt:** `d9495e19-f3d4-4770-9075-e1363f082813`
-**Note:** the tag points at the payload commit (`89c7e240`). This state file, the manifest sha256 checksums, and the final receipt row are finalized in the immediately following bookkeeping commit.
+**Snapshot parent head:** `b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02`
+**Snapshot commit:** `3a0ed32b4634a97cfd596d4a1af6e5993db913cb`
+**Tag:** `Π/foresight/20261104T130053Z`
+**Previous Π tag:** `Π/foresight/20261103T150056Z`
+**Receipt:** `599daaa3-7e54-459b-b304-a24feb9deb94`
+**Note:** the tag points at the payload commit (`3a0ed32b`). This state file, the manifest checksums, the final receipt row and the push are finalized in the immediately following bookkeeping commit.
 
 ## Signal
 
-- **Session Mycology EDN Migration**: Audited Foresight's session-mycology skill, the global skill, and the submodule. Migrated the legacy `ledger.md` (283 historical records + 1 new turn) to canonical newline-delimited EDN in `.ημ/session-mycology/ledger.edn`. Parsed all 283 records cleanly with exact float $p$-scores, vector receipt refs, nullable spores, and preserved 6 historical multi-line markdown annexes under `:raw-annex`.
-- **Helper Scripts**: Added `sm-migrate.bb` to `.agents/skills/session-mycology/scripts/` (and mirrored to `~/.agents/skills/session-mycology/scripts/`). Updated `common.bb`, `sm-log.bb`, `sm-list.bb`, `CONTRACT.edn`, `SKILL.md`, and `AGENTS.md`.
-- **Submodule Gitlink (`.agents`)**: Committed and pushed `.agents` changes on remote branch `riatzukiza/.agents@feat/session-mycology-edn-ledger` (`a6f6afe1d3b6845fa0eea43864c907bb6d193de5`), advancing the root `.agents` gitlink to that verified commit.
-- **Append-only Ledgers**: Committed updated `.ημ/session-mycology/ledger.edn` and `.ημ/receipts.edn`.
-- **Manifest Updates**: Updated `.ημ/Π_STATE.sexp`, `.ημ/Π_LAST.md`, and `.ημ/Π_MANIFEST.sha256`.
+- **Oikos gitlink absorbed**: the root pointer advanced `ae350737` → `fed4e302`, which equals both `refs/heads/main` and `refs/remotes/origin/main` in the child repository, with a clean child worktree. The pin follows the reviewed merge `open-hax/oikos#3` (bounded prospective history before native ledger append).
+- **Two previously unpushed commits published**: `23424720` (Oikos local-first workbench plan, private NBB submodule registration, 24 incoming cards) and `b9ac3141` (reviewed Oikos bootstrap pin plus the retained receipt-gate blocker) had never reached `origin/plan/fork-dev-origins`. This snapshot publishes them.
+- **Ledgers**: appended the fork-tax receipt and the turn reflection to the append-only `.ημ` ledgers.
+- **Manifest rule made explicit**: the previous manifest's generation rule was undocumented, so this snapshot records its rule in the file header — every path changed in `Π/foresight/20261103T150056Z..HEAD`, excluding the manifest itself, hashed at the snapshot commit (38 entries).
 
 ## Verification (run, not assumed)
 
-- PASS `nbb scripts/project.clj validate` — 25 workspace sources, 24 submodules, 40 invariants, 1 lineage source, 6 provisional claims.
-- PASS `nbb -cp scripts:test test/workspace_test.cljs` — 24 tests, 120 assertions, 0 failures.
-- PASS `nbb test/project_test.cljs` — 12 tests, 167 assertions, 0 failures.
+- PASS `nbb scripts/project.clj validate` — 26 workspace sources, 25 submodules, 40 invariants, 1 lineage source, 6 provisional claims.
+- PASS `nbb test/project_test.cljs` — 12 tests, 171 assertions, 0 failures, 0 errors.
+- PASS `nbb -cp scripts:test test/workspace_test.cljs` — 24 tests, 122 assertions, 0 failures, 0 errors.
 - PASS `clj-kondo --lint scripts test` — 0 errors, 0 warnings.
-- PASS `sm-migrate.bb --dry-run` and live verification — 283/283 records round-trip verified with `clojure.edn`.
-- PASS `sm-log.bb` — successfully logged 284th entry directly to `ledger.edn`.
-- PASS `sm-list.bb` — verified clean output formatting and raw EDN emission from `ledger.edn`.
-- PASS `git diff --check`.
-- VISIBLE (not a pass): workspace tests report `ERROR opencode lint spawn ENOENT` and `ERROR jscpd spawn ENOENT` (pre-existing host tooling gap inside an otherwise green test suite).
+- PASS `git diff --check` — clean.
+- VISIBLE (not a pass): workspace tests log `ERROR opencode lint spawn ENOENT` and `ERROR jscpd spawn ENOENT` — pre-existing host tooling gap inside an otherwise green suite.
+- BLOCKED (pre-existing, reproduced at base): `nbb scripts/evidence.clj verify-receipts` exits 2 with `Git invocation failed: spawnSync git ENOBUFS` on candidate `b9ac3141` **and** on unchanged base `e31b43a5`. Reported, not waived, not worked around, not locally reimplemented.
 
 ## Submodule Truth
 
-Only gitlinks whose new commit is already reachable from a pushed remote branch were absorbed.
+Only the gitlink whose new commit is already contained in a pushed remote branch was absorbed. Every other child pointer is unchanged from the previous snapshot.
 
 | Submodule | Branch | Head | Proof |
 | --- | --- | --- | --- |
-| `.agents` | `feat/session-mycology-edn-ledger` | `a6f6afe1d3b6` | equals `origin/feat/session-mycology-edn-ledger` |
-| `openplanner` | `device/yoga` (declared in `.gitmodules`) | `582efb7ebbdc` | equals `origin/device/stealth` |
-| `axxium` | `feat/did-actor-identity-local` | `603ea4cd88f5` | ancestor of `origin/...`, local behind 2 |
-| `bitch-tracker` | `device/stealth` | `693f1388e61b` | ancestor of `origin/device/stealth`, local behind 15 |
-| `calliope` | `device/stealth` | `b473c21251d3` | equals `origin/device/stealth` |
-| `katamorph` | `device/stealth` | `0271e84ab7b7` | equals `origin/device/stealth` |
-| `knoxx` | `feat/axxium-identity-local` | `40221a69f7ff` | equals `origin/feat/axxium-identity-local` |
-| `shx` | `feat/supervisor-ir-card` | `5dbac4fde8b3` | ancestor of `origin/...`, local behind 26 |
-| `Truth` | `codex/truth-native-demo-tour` | `c7cc34a8248a` | equals `origin/codex/truth-native-demo-tour` |
+| `oikos` | `main` | `fed4e30272cc` | equals `refs/heads/main` and `refs/remotes/origin/main`, clean child worktree |
+
+All other gitlinks (`Truth`, `axxium`, `bitch-tracker`, `calliope`, `chat-ui`, `clio`, `epiphany`, `eta-mu`, `kanban-orchestrator`, `katamorph`, `knoxx`, `muse`, `opencode`, `openplanner`, `osmos`, `proxx`, `receipt-river`, `rheos`, `services`, `session-mycology`, `shx`, `sol`, `uxx`, `.agents`) are byte-identical to the previous snapshot.
 
 ## Excluded / Concurrent Dirt (left untouched on purpose)
 
+- `.github/workflows/agy-review.yml`, `scripts/agy-review.sh` — verified byte-identical to `origin/feat/agy-gemini-3-8-flash-review-workflow` (foresight#152). Left untracked rather than re-absorbed into this snapshot.
 - `.env` — holds a live `GH_TOKEN`. Never staged; ignored.
 - `.ημ/diagnostics` — bulk CI/session evidence, ~733 MiB across ~18,100 files, ignored.
-- `.github/workflows/agy-review.yml`, `scripts/agy-review.sh` — review-workflow work, byte-identical to `origin/feat/agy-gemini-3-8-flash-review-workflow` (foresight#152). Left untracked.
-- `calliope` (4 modified tracked files), `openplanner` (1 modified `pnpm-lock.yaml`), `uxx` (4 modified tracked files) — live child-repository work owned by those repositories.
-- Untracked agy review artifacts in submodules — generated during review-workflow PR creation and preserved on their respective branches.
-- `opencode` gitlink unchanged (`cc4b4561`).
+- `calliope` (4 modified tracked files plus untracked artifacts), `openplanner` (modified `pnpm-lock.yaml`), `uxx` (4 modified tracked files plus untracked artifacts) — live child-repository work owned by those repositories.
+- No `git reset`, `git restore`, `git clean`, checkout rewind or `git add -A` was used anywhere in this snapshot.
