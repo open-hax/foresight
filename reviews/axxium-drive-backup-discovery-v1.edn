@@ -1,0 +1,43 @@
+{:schema/version 1
+ :evidence/kind :axxium-drive-backup-discovery
+ :evidence/tier :observed
+ :status :blocked-unidentified-existing-delegation
+ :scope "Read-only source and bounded local service metadata; no OAuth exchange, login, upload, download, or secret inspection."
+ :sources [{:repository "/home/err/spaces/foresight/axxium"
+            :head "603ea4cd88f589c621234f73d3afd6e4e08788b8"
+            :files [{:path "README.md" :sha256 "a3f3c394019aee45f7df99c0061ca55c721d0e5662f56eb2c64fba6d7d06efef" :lines [59 109]}
+                    {:path "src/cljs/axxium/extern/google.cljs" :sha256 "9e01647f8f4bdbfcc9f0ab76cb265ca8743361e8b41b1693a2475db4143952f4" :lines [15 92]}
+                    {:path "src/cljs/axxium/routes/google.cljs" :sha256 "e57416db13ef0a992fe4c451ff3040a5e57b2c411c6c8ff9b1c5da6524905e53" :lines [21 94]}]}
+           {:repository "/home/err/spaces/foresight/services"
+            :head "48c9cc252341d49b7d0e3b5ed20b774ca66e55d4"
+            :path "docs/knoxx-nested-hostnames.md" :lines [3 17]
+            :sha256 "b9bd7fc0becd026ebe49f7b847f7fe4f4cfd5748b63d1dcd2cbf7f00b0dfa170"}
+           {:repository "/home/err/spaces/foresight/calliope"
+            :head "b473c21251d3281eae942c5bddfef829b37d1182"
+            :path "docs/designs/suno-listening-companion.md" :lines [142 153]
+            :sha256 "43609eb96bd5e184d9c3adc7bbb67fdc75682041737621619408ea310f729d39"}
+           {:repository "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+            :head "0f71222680e7da5abd954c92694ea47045010cc2"
+            :path "ecosystem.identity.local.config.cjs" :lines [6 37]
+            :sha256 "a1b768117ee504bd90dfea0858abf47cecb3c98d6bb7c57ed21a42fa4f09b8dd"}]
+ :findings [{:claim "This Axxium source requests exactly openid email profile for Google sign-in; it verifies an ID token and returns only subject, email and display name. The Google callback creates an Axxium session, not a Drive client or token-broker response." :basis :source}
+            {:claim "Axxium README documents identity and actor endpoints, not a Drive upload/download or delegated credential endpoint. A targeted source search found no Google Drive scope or Drive client in this checkout." :basis :bounded-source-search}
+            {:claim "Calliope's dated 2026-10-04 evidence explicitly distinguishes enabled Google identity from Drive authority and describes Drive integration as future work; it is not proof about all other local installations." :basis :historical-document}
+            {:claim "Local PM2 metadata query for names containing axxium returned no entries for the current user; this does not rule out another service manager, host, user, installation, or previously tested delegation." :basis :local-metadata}
+            {:claim "The local ecosystem configuration describes axxium-local and a Knoxx origin at 127.0.0.1:8788; it is configuration, not evidence of an active process. Services documentation reports a Stealth Axxium origin stopped as of 2026-09-13, not current liveness." :basis :configuration-and-historical-document}]
+ :archive {:directory "/tmp/opencode/oikos-ocr-preservation-15ca13df-441a-49ec-a140-b7831f2b1d76"
+           :archive "ocr-preservation.tar"
+           :manifest "manifest.json"
+           :manifest-reported-archive-sha256 "5bd90f8c1e77d29d4c84d92882f423dd1b9c467244001b0f5721fd8b618ac3db"
+           :manifest-reported-members 5
+           :digest-independently-verified false
+           :coordinator-report "reviews/ocr-drive-preservation-v2.edn"
+           :coordinator-report-observation "Not present in this worktree at discovery time; no claims are made about its content."}
+ :blockers ["No established Drive-scoped Axxium broker, client, tested invocation, authorized account/profile, destination, or current Drive scope was identified in the inspected evidence."
+            "The user reports a prior tested permission; the inspected OIDC implementation does not disprove a different installation or delegation."
+            "Prior rclone invalid_grant is coordinator-provided; no reauthentication is authorized."
+            "No upload/download command can safely be specified or executed before the exact existing route and profile are identified and reviewed."]
+ :next {:capability "Ask the coordinator/user for the exact nonsecret path or test/runbook identifying the previously tested Drive delegation and the intended private profile/destination; then inspect only that source and its nonsecret scope metadata."
+        :bounded-command "rg -n -i 'drive|scope|delegat|upload|download' -- <operator-supplied-nonsecret-source-file>"
+        :conditions "Substitute only a reviewed nonsecret source or runbook path, never an env, token, credential or account data file. Do not exchange tokens or invoke upload/download during discovery."
+        :later-verification "After separate route/profile review and upload authorization, upload only the reviewed archive and manifest privately, download those exact objects to a private location, verify archive bytes and every manifest member/hash/mode, and preserve originals until independent verification."}}

@@ -1,0 +1,20 @@
+{:permit/id :s4a-synthetic-owner-model-v1
+ :date "2026-11-04"
+ :source :recommended-path-standing-authorization
+ :inputs {:plan "reviews/s4a-authenticated-owner-seam-plan-v3.edn"
+          :plan-sha256 "a2289697e029aa8463744886b471a76fd017a4281a4f1e8efebe72089ca0d11c"
+          :review "reviews/s4a-authenticated-owner-seam-plan-fix-review-v3.edn"
+          :native-source "b1816de56ff85071f2a89a59b7343ed97e3da30e"}
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :paths ["layers/agent-sandbox/oikos-owner-authority.el" "tests/unit/oikos-owner-authority-test.el"]
+ :precondition "Read applicable instructions and verify the two proposed paths remain absent; record current HEAD, exact existing native source hash and preservation baseline before writing. If either path already exists, inspect and stop rather than overwrite."
+ :scope "Two new dormant files implementing only closed contract shapes, canonical binding transcript, pure synthetic grant/clock transition model and deterministic test doubles. Not a live issuer, consent UI, bridge, persistence adapter, dispatcher or ledger engine. No startup wiring or modification of existing files."
+ :clarifications ["Synthetic read grants are single use: consumed before simulated first disclosure; consumed remains terminal even when a later check denies."
+                  "An invalidated grant receives a closed unavailable/non-ACK revoke result, never revoked/already-revoked and never reactivation."
+                  "The model must include a simulated post-check expiry gap and an unexpired positive; adjacent fake checks do not prove a native scheduler bound."
+                  "No callback, double, in-memory record, golden transcript or passing source test can qualify real identity, consent, durability, atomicity or deadline validity through an actual effect."]
+ :gates "First produce and statically inspect the two-file source candidate. Independent exact-source review must admit any isolated batch -Q synthetic ERT run. Preserve actual RED/GREEN evidence separately if later executed; source-only work is not a test pass."
+ :held [:live-emacs :existing-user-buffers :startup-loading :native-dispatch :real-credentials
+        :axxium-source-edits :govone-source-edits :real-egress :actual-persistence
+        :native-atomicity :installed-promotion :whole-s4a :spending]
+ :cleanup "Retain files and evidence; no destructive scratch cleanup or unrelated changes."}

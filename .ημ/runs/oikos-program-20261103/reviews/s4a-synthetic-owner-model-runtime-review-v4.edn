@@ -1,0 +1,42 @@
+{:review/id :s4a-synthetic-owner-model-runtime-review-v4
+ :date "2026-11-04"
+ :kind :independent-postexecution-evidence-review
+ :authority :none
+ :verdict :bounded-synthetic-functional-qualification-only
+ :inputs {:admission {:path "permits/s4a-isolated-owner-model-ert-v2.edn" :sha256 "b04920f1301c2468e165eb04acfc05a590212782a4f22d6894cec3e423ea683b"}
+          :prior-review {:path "reviews/s4a-synthetic-owner-model-red-fix-review-v3.edn" :sha256 "d6f78fde606a0f6646d6dfa4419553c66c4f5e50f03f8227d6aa9d09c031b30c"}
+          :runtime-dir "/tmp/opencode/oikos-s4a-model-ert-v2-54546e93-4d0a-47e8-975e-89105c28e57f"
+          :evidence [{:file "result.json" :sha256 "50655041b64a169e526a9f7f3ac9ca364372d6c43f6ff3fcd2e02c0fca13ebd3"}
+                     {:file "stderr" :sha256 "e087b7caf29ea7b1487bc98c6c33b1c6ea166c2c2baa8e7f1a492ddba2982946"}
+                     {:file "stdout" :sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}]}
+ :source-pins {:root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+               :model {:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "5989ab40dc823fe9628997d5f85cd34ffb1d468677845ac9e2ee04257535fbec"}
+               :tests {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "2dfbd3293f766130bc8bacd04796cf6d66b39a25ddb868fc0a37d7649a5693e0"}
+               :native {:path "layers/agent-sandbox/oikos-native.el" :sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"}
+               :native-test {:path "tests/unit/oikos-native-test.el" :sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}
+               :binary {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+               :timeout {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}
+               :observation "Current hashes independently recomputed and match result.json, permit, and prior review. The result reports all postflight pins matched. Named native files match the previously observed baseline; no inference about other checkout files."}
+ :result {:recorded-exit 0 :expected 11 :passed 11 :failed 0 :skipped 0 :unexpected 0
+          :basis "stderr explicitly lists eleven distinct passes and summary 11 expected, 0 unexpected; zero skips follows because all eleven selected tests are individually reported passed. stdout is empty. result.json records exit 0 and postflight pins. This reviewer did not observe the process directly or independently verify its OS-level sandbox, limits or preflight."
+          :tests ["oikos-owner-model-binding-extra-negatives" "oikos-owner-model-binding-swaps"
+                  "oikos-owner-model-clock-elapsed-continuity" "oikos-owner-model-clock-faults"
+                  "oikos-owner-model-closed-inputs" "oikos-owner-model-fixture-isolation-and-positives"
+                  "oikos-owner-model-golden-transcript" "oikos-owner-model-phases-and-order"
+                  "oikos-owner-model-read-golden" "oikos-owner-model-record-totality"
+                  "oikos-owner-model-revoke-shapes"]}
+ :nonvacuity [{:case :golden :evidence "Test source:30-35,84-87 compares actual encoded read and replace transcripts to full independent hex and SHA-256; both named tests passed. Prior review independently assembled exact 285/291-byte expected fixtures, not just a constant-denial test."}
+              {:case :fixture :evidence "Test source:186-197 repeatedly constructs both variants and asserts valid invocation/resource, non-nil issued snapshot and successful final comparison; the named test passed. Binding-negative source:156-160 first asserts a positive snapshot/final, and its named test passed."}
+              {:case :clock :evidence "Test source:199-206 includes frozen-clock denial, ideal-rate and bounded-overlap positives plus discontinuity/overflow negatives; clock-faults:149-154 includes a positive. Both named tests passed. This checks a synthetic ideal-rate predicate, not an actual clock."}
+              {:case :state :evidence "Test source:126-147 checks synthetic read and write success, counts, returned-state replay denial, revoked/invalidated behavior, and expiry after modeled consumption; the named test passed. These are sequential values, not concurrent owner effects."}]
+ :dispositions {:prior-red "The previous nine-test run remains historical RED: exit 1, five passed and four failed; the new run does not rewrite it or establish the sole cause of those failures."
+                :reference "Permit v2:7-10 explicitly supersedes the candidate's truncated prior-review hash with actual full cba613653b23ad47bf0e0b1154da75c67c76d0b7922c9577862a32a4c8ded1f2. Do not edit prior records."
+                :qualification "Accept only the actual named assertions for these exact model/test and binary pins and recorded isolated execution. No automatic carryover to future source hashes or later integrations."}
+ :limits {:composition "Binding snapshot validation and sequential state model remain independent. A caller-supplied stale state can be replayed; no composed current-binding/record-derived-deadline enforcement or owner-wide serialization is established."
+          :authority "No real Axxium identity or invalidation, human resource-owner consent, GovOne release, durable storage, single-writer fencing, across-restart at-most-once, actual disclosure/mutation, native atomicity, real clock or installed/live service is qualified. No exactly-once effect claim."
+          :clock "Translated-prior overflow branch remains without a distinct focused oracle; full clock-history coverage and actual drift bounds remain unproved."
+          :evidence "No exhaustive malformed-input termination, concurrent interleavings, real identity provenance, retained operator evidence or external deployment state is established by these eleven tests. The reported postflight is not independent observation of process execution by this reviewer."}
+ :next-source-only {:admissible "Under standing authorization and existing two-file source-model ceiling, coordinator may plan and independently review a pure binding-to-transition composition and a targeted translated-prior overflow oracle. Bind exact immutable request/record snapshot and derived deadlines to synthetic consumption/final checks; test read/write replay, substitutions and revoke/expiry ordering with zero simulated effects on denial. Record exact paths and preservation baseline before editing."
+                    :bounds "No fake authentication, consent or persistence kernel; no changes to existing native files, startup, Axxium, GovOne, Sol or Oikos under this ceiling. Any real-owner adapters, new paths or effects need their own exact source review and separately recorded qualified admission, not a routine permission question. New source hashes require fresh review and independently admitted tests."}
+ :execution {:new-emacs 0 :new-ert 0 :source-edits 0 :git-writes 0 :board 0 :ledger 0 :network 0 :credentials 0 :nested-agents 0
+             :only-artifact "reviews/s4a-synthetic-owner-model-runtime-review-v4.edn"}}

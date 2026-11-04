@@ -1,0 +1,25 @@
+{:kind :neutral-probe-source-candidate
+ :status :not-executed
+ :artifacts [{:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/neutral-probes-v4.py" :sha256 "bc9ebb1f3e68b914e940bb412ad079496759f31a904d50038e23c6f3bf178391"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v4.json" :sha256 "5c038bc64df91c0c1bc4bc19acb88172fe0b62de6f419c7eaa7a81051dd074c7"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/runner-v3.py" :sha256 "e83fa750676dd1b388ac32459eda899b7a88fb46f6de7aa195b54d7e09d8d9e9"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/guard-v2.py" :sha256 "37d9b10e85a46e621ac6bfc42ddf8894f0ce3352dc57528acfbc2681ca49b39f"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v3.json" :sha256 "258030d0e11ba5a52edb2c66b012642545b15da123058a4c2664d1d9d08d5553"}
+             {:path "/usr/bin/python3.12" :sha256 "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f"}
+             {:path "/usr/lib/jvm/java-21-openjdk-amd64/bin/java" :sha256 "635baf419576ec4ad4f785014283fb93f1be1103e6d02252f7a00517f0e2a245"}]
+ :dispositions [{:finding :output-drain :status :source-repaired-pending-review :detail "Bounded selector reads both streams through EOF, not just waitid exit, before success markers are asserted."}
+                {:finding :missing-guard-coverage :status :source-added-pending-review :detail "Finite profile covers denied socket/socketpair/connect with counters, read-only file success; open write modes, truncate/rename/unlink/mkdir, writable shared mmap, inherited-fd and stdin write denials; stdout/stderr success; setsid/setpgid/unshare/setns denial. Each denial requires EPERM. Parent checks unchanged fixture bytes and exact directory contents."}
+                {:finding :independent-cleanup-cases :status :source-added-pending-review :detail "Separate positive, timeout, cap, early-closed-pipe descendant, injected exception and guard cases with distinct assertions and bounded cleanup."}]
+ :limits ["All checks are source only; no runtime guard behavior, containment, or probe outcome has been established."
+          "Cooperative inventories are not immutable snapshots and do not protect against transient modifications or hostile root."
+          "The current harness has bounded internal cleanup but does not implement the watchdog handoff below. An ordinary timeout that kills the wrapper can orphan its separate-session child; do not run using such a timeout."
+          "The neutral probe checks process-group escape syscalls, not every possible kernel isolation bypass; no cgroup claim."]
+ :external-watchdog-source-plan {:status :not-implemented-blocker
+   :ownership-protocol ["Before any child launch, establish a trusted control channel and watchdog as child subreaper; retain watchdog outside every test group."
+                        "For each launch use a handshake that registers the leader PID plus /proc starttime and process group before the harness proceeds; a launch/registration gap must block forced wrapper termination and report unconfirmed rather than orphan a group."
+                        "On deadline, freeze the single-threaded harness before comparing the registered leader identity and group. While the unreaped leader remains anchored, watchdog sends TERM then KILL to that verified group with bounded deadlines. Never signal after anchor reap or identity mismatch."
+                        "Only after the group is terminated or explicitly recorded unconfirmed may the watchdog terminate the wrapper; as subreaper it must adopt and boundedly reap remaining children and independently check group absence. Any missing registration, failed stop, mismatch, or unreapable process is a hard failure and must not be treated as cleanup."
+                        "Implement and independently review and test this protocol before running the neutral profile. No generic timeout or unconditional wrapper kill is an acceptable substitute."]}
+ :pending-commands [{:purpose :external-hash-check :command "sha256sum /tmp/opencode/oikos-typed-seq-logs-a2698786/{neutral-probes-v4.py,inventory-v4.json,runner-v3.py,guard-v2.py,inventory-v3.json} /usr/bin/python3.12"}
+                    {:purpose :neutral-profile :precondition "Same auditor approval plus implemented, independently reviewed identity-safe external watchdog; verify all hashes and isolated environment first. This is the inner fixed command, not a safe standalone invocation." :command "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 /usr/bin/python3.12 -I -B /tmp/opencode/oikos-typed-seq-logs-a2698786/neutral-probes-v4.py"}]
+ :verification "Python ast.parse passed for neutral-probes-v4.py only; no tests, runtime probes, Java or network were run."}

@@ -1,6 +1,6 @@
 # Oikos execution plan: precise prerequisites and bounded implementation admission
 
-2026-11-03. Current execution checkpoint with historical planning records;
+2026-11-04. Dated execution checkpoints with historical planning records;
 accepted development source and S1A/S2A/S3A completion, not installed promotion or epic completion.
 License: GPL-3.0-or-later.
 
@@ -34,7 +34,171 @@ all-task planning hold; it does not manufacture native approval, waive
 deterministic or safety checks, admit unverified successors, or complete a task.
 Native PR findings and settlement evidence remain a separate obligation.
 
-### Latest checkpoint: S1A accepted, merged and officially done
+### 2026-11-04 later continuation: scoped qualification and remaining holds
+
+The coordinator's fresh Rheos readback remains **24 Oikos cards: 17 incoming,
+4 in_progress, 3 done, zero epics complete**. Foresight PR #153 remains at head
+`792dfa341d380cbf413b925319654d7c2ebec413`, with **19 threads, zero unresolved,
+zero exact-head approvals and zero completed rounds**; the hosted gate remains
+**BLOCKED**. These are coordinator observations, not new queries by this author.
+
+* **Services:** The independent [consumer acceptance v1](../../.ημ/runs/oikos-program-20261103/reviews/services-oikos-development-consumer-acceptance-v1.edn)
+  now accepts the exact development source and handoff **only as an inert-EDN
+  source prerequisite** for future composition assessment. This supersedes the
+  earlier active/not-yet-accepted status below. The S1A and Services formats are
+  distinct; no adapter, actual fixture, S1B completion, installation, Bash or
+  production is accepted. The consumer independently compared 13 remote blobs;
+  the broader 19-path publication result remains coordinator-attributed.
+* **typed.clojure:** The actual [neutral runtime qualification v17](../../.ημ/runs/oikos-program-20261103/reviews/typed-neutral-runtime-qualification-v17.edn)
+  qualifies the recorded v6 finite neutral profile only. Historical v4 and v5
+  failures remain retained, not backfilled by v6. The
+  [Java diagnostic plan v2](../../.ημ/runs/oikos-program-20261103/reviews/typed-java-diagnostic-qualification-plan-v2.edn)
+  awaits independent review; it grants no execution or executable authoring.
+  No JVM, typed tests or new neutral attempt is currently authorized by it.
+* **S4A:** The fresh [synthetic model runtime review v4](../../.ημ/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-runtime-review-v4.edn)
+  records **11/11 passed, zero skipped, exit 0** for model hash prefix `5989ab40`
+  and test hash prefix `2dfbd329`. The prior nine-test RED, five passed and four
+  failed, remains unchanged. Qualification is bounded to those synthetic tests;
+  composition, real consent, native effects and durability remain held, and
+  operator Emacs remains unchanged and unloaded.
+* **GovOne:** The [source review v7](../../.ημ/runs/oikos-program-20261103/reviews/govone-internal-capacity-source-review-v7.edn)
+  identifies three test-coverage findings: connected/public signed-policy
+  overlap, the routing/behavior regression matrix, and public-boundary and
+  route-only integration checks. Their source fixes are active; no Go execution
+  is qualified. N1, request-version and cache-invalidation holds remain open.
+* **Axxium:** The [current Drive source comparison v11](../../.ημ/runs/oikos-program-20261103/reviews/axxium-current-drive-source-comparison-v11.edn)
+  compares PR head `3a319a43` against the older head: **16 files / 55,473 bytes**
+  retrieved, and nine selected pure source functions/seams unchanged. This is a
+  source-only comparison, not proof of unchanged transitive dependencies or a
+  usable grant. No credential read, provider request or backup occurred.
+* **S2B:** The [witness candidate](../../.ημ/runs/oikos-program-20261103/reviews/s2b-collector-witness-candidate-v4.edn)
+  at `ab38c63e` reports **18 tests / 151 assertions** in each shared runtime and
+  edge **6 / 81**, but the edge result used concurrently edited files and is not
+  stable-head evidence. A frozen-valid 128-window ACK is refused at **4,583
+  nodes**, exceeding 4,096: a real contract defect, not a passing boundary.
+  The coordinator reports the compact representation plan reviewed and its
+  author implementing; the [v5 plan record](../../.ημ/runs/oikos-program-20261103/reviews/s2b-witness-node-budget-plan-v5.edn)
+  itself describes a proposed design, not candidate approval. Bounds must not
+  increase; full legal worst-case fit remains unproved. The separate F6 writer
+  is active; no new result is claimed.
+
+### Historical 2026-11-04 continuation: active repairs and bounded handoff
+
+The coordinator's fresh Rheos readback reports **24 Oikos cards: 17 incoming,
+4 in_progress, 3 done; zero epics complete**. No additional child or epic is
+done. Fresh native Foresight [PR #153](https://github.com/open-hax/foresight/pull/153)
+head is `792dfa341d380cbf413b925319654d7c2ebec413`, base `e31b43a…`:
+**19 threads, zero unresolved, zero exact-head approvals and zero completed
+rounds**. The hosted gate is **BLOCKED**, not completion. These are coordinator
+observations, not fresh board or GitHub queries by this documentation worker.
+
+* **S2B:** RED `8df…`, initial `99fa…` and boundary RED `da08…` precede
+  latest `edf609c` GREEN: **11 tests / 93 assertions** in each runtime, edge
+  **4 / 33**, inherited baseline/wire/spaces suites and lint **0/0**. All
+  **63 base files and 13 pins** were independently exact. The new
+  [adversarial code review v2](../../.ημ/runs/oikos-program-20261103/reviews/s2b-offline-collector-code-review-v2.edn)
+  finds six issues: unfenced constructed pending state, strict TTL, step-cap
+  resolution, failed-subscribe charging, preallocation bounds and descriptor
+  binding. Same-author repair is active; whole P1 is **not approved**. The
+  [raw-boundary probes v2](../../.ημ/runs/oikos-program-20261103/reviews/s2b-raw-boundary-probes-v2.edn)
+  report no findings in their finite scope, but do not establish exact 64 KiB
+  or node-limit boundaries.
+* **Services:** The [v5 handoff fix review](../../.ημ/runs/oikos-program-20261103/reviews/services-development-handoff-fix-review-v5.edn)
+  settles the documentation sequencing finding; the bounded privacy judgment
+  and publication decision are recorded in the
+  [publication decision](../../.ημ/runs/oikos-program-20261103/decisions/services-source-artifact-publication-v1.edn).
+  The ordinary artifact-ref push at `d4f6ff57` actually succeeded to
+  `open-hax/services`: all **19 changed paths / 260,814 remote decoded bytes**
+  matched, as did the declared Foresight review bytes **8,259 / 4,611**
+  ([readback](../../.ημ/runs/oikos-program-20261103/reviews/services-development-artifact-readback-v2.edn),
+  [custody](../../.ημ/runs/oikos-program-20261103/reviews/services-development-publication-custody-v1.edn)).
+  The [owner development source handoff permit](../../.ημ/runs/oikos-program-20261103/permits/services-development-handoff-d4f6ff57.edn)
+  is issued; at this historical checkpoint independent consumer acceptance was
+  active, **not yet accepted**. The later scoped acceptance is recorded above.
+  This is not installation, S1B admission, Bash qualification or production.
+* **typed.clojure:** The [named-binder v2 plan](../../.ημ/runs/oikos-program-20261103/reviews/typed-named-binder-compatibility-plan-fix-review-v2.edn)
+  admits a three-file source candidate (parser, annotation and tests), not Java
+  execution. The overlapping parser defect is source-fixed
+  ([v4](../../.ημ/runs/oikos-program-20261103/reviews/typed-named-binder-parser-fix-v4.edn));
+  its test matrix remains incomplete. The unqualified
+  [guard v4](../../.ημ/runs/oikos-program-20261103/reviews/typed-execution-wrapper-source-v4.edn)
+  is source/AST only; new kernel properties and exception-cleanup fixes await
+  audit. No unit test, probe or other test has started under that guard.
+* **S4A:** The [two-file synthetic owner model](../../.ημ/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-candidate-v1.edn)
+  is partial source; its [five review findings](../../.ημ/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-source-review-v1.edn)
+  are under repair. It is not a real issuer, consent, storage or fence. Operator
+  Emacs remains unchanged and unloaded.
+* **GovOne:** The marker-free four-file INTERNAL partial
+  [v3 plan review](../../.ημ/runs/oikos-program-20261103/reviews/govone-capacity-evidence-plan-fix-review-v3.edn)
+  approves planning only. The [writer's v4 report](../../.ημ/runs/oikos-program-20261103/reviews/govone-internal-capacity-source-candidate-v4.edn)
+  returned no edits because real test composition is unwritten; that is not a
+  proven scope gap. N1 source, version and cache invalidation remain open; no Go
+  execution is admitted.
+* **Drive preservation:** The [recovered Axxium PR #19 receipt](../../.ημ/runs/oikos-program-20261103/reviews/axxium-pr19-google-receipt-recovery-v6.edn)
+  identifies real native comments `6569108948` and `6569712188` and historical
+  Google tests at `8e2941ae` and `887c485`; fresh PR head is `3a319a43`. The
+  harness/profile grant location is still missing and current grant validity
+  unknown. There has been no RPC, upload, verified backup or cleanup.
+
+OCR's restart grant remains consumed and the separate batch unconsumed. Fresh
+root checks reported by the coordinator are project validation **26/25**,
+**40 invariants**, project **12/171**, workspace **24/122**, evidence CLI
+**59/393**, and lint **0/0**. Current disk is approximately **40 GiB**; retain
+all worktrees, caches and misplaced root reviews exactly, without cleanup.
+
+### Historical coordinator checkpoint: bounded continuation
+
+At the coordinator's reported checkpoint, personal fork `riatzukiza/foresight`
+branch `plan/oikos-execution-20261103` was committed and pushed at
+`792dfa341d380cbf413b925319654d7c2ebec413`. Its 99 paths comprise 98 explicit
+paths and accepted Oikos gitlink `fed4e3`. This does **not** claim that origin or
+Foresight PR #153 was updated. Committed receipt verification from base `0f712…`
+to that checkpoint passed: **565 total, one appended**. Reported root checks were
+project **12 tests / 171 assertions**, workspace **24 / 122**, evidence CLI
+**59 / 393**, and lint **0 errors / 0 warnings**. The bounded checkpoint audit
+found no findings in its inspected scope, but its overall verdict was **blocked /
+incomplete**, not comprehensive approval. These are coordinator reports, not
+fresh test or remote-ref checks by this documentation worker.
+
+The user's [standing recommended-path authorization](../../.ημ/runs/oikos-program-20261103/decisions/recommended-path-standing-authorization.edn)
+directs continuation without routine questions; it does not waive scoped permits,
+evidence, safety boundaries or decisions requiring distinct authority.
+
+* **S2B:** The [V3 source plan review](../../.ημ/runs/oikos-program-20261103/reviews/s2b-collector-source-plan-fix-review-v3.edn)
+  and [accepted-base composition review](../../.ημ/runs/oikos-program-20261103/reviews/s2b-accepted-base-composition-v1.edn)
+  approve their respective scopes, including the exact **63-file base and 13
+  pins**; the [offline source permit](../../.ημ/runs/oikos-program-20261103/permits/s2b-offline-collector-source-v1.edn)
+  is issued. Board admission is a separate operator action, reported active; no
+  fresh Rheos state is asserted here. Planning and a permit are not completed
+  implementation or live-collector authority.
+* **GovOne:** At source `259df…`, F2–F5 are settled in the
+  [source fix review](../../.ημ/runs/oikos-program-20261103/reviews/s6a-govone-fixture-source-fix-review-v2.edn);
+  N1 capacity ambiguity remains open. The user admits
+  [owner-evidence extension planning](../../.ημ/runs/oikos-program-20261103/decisions/govone-owner-evidence-planning-authorization.edn),
+  not a claim that the needed API already exists or that runtime trials passed.
+* **typed.clojure:** Two runner cleanup issues are source-settled by the auditor.
+  Neutral-harness missing guard coverage and EOF-drain repairs remain active; no
+  guarded execution or test pass is claimed.
+* **Services:** The [V2 development handoff plan](../../.ημ/runs/oikos-program-20261103/reviews/services-dev-handoff-plan-v2.edn)
+  is under confirmation. The earlier scoped source approval is not owner release
+  or consumer handoff.
+* **shx:** The one authorized [BB diagnostic](../../.ημ/runs/oikos-program-20261103/reviews/shx-single-bb-stderr-diagnostic-v2.edn)
+  returned `protocol-error`, cleanup `true`, in **2,561 ms**. It is inconclusive
+  for historical failures: no matrix, retry or pass credit follows.
+* **Drive preservation:** The existing connection returned `invalid_grant`. The
+  parent found the Axxium PR #19 checkout at `887c485…` and its Drive file EDN
+  RPC source; current
+  [source discovery](../../.ημ/runs/oikos-program-20261103/reviews/axxium-drive-current-source-v3.edn)
+  and [live-route plan V4](../../.ημ/runs/oikos-program-20261103/reviews/axxium-drive-live-route-plan-v4.edn)
+  report a route present, but the actual instance grant is unknown. A roughly
+  **58k** lossless encoding plan is not an RPC or upload. An older negative
+  checkout observation is not universal. No remote backup or cleanup is qualified.
+
+OCR's restart grant remains consumed; the separate conditional batch remains
+unconsumed. The board counts and permissions below are dated snapshots, not live
+state or new authority.
+
+### Historical checkpoint: S1A accepted, merged and officially done
 
 The parent qualified the full S1A development candidate
 `fb9d7cd4a998459cee03d907c81b640a4ada22db`. All **seven concrete findings are
@@ -88,7 +252,7 @@ Neither publication nor S1A completion grants new consumer operational permissio
 installed immutable-worker selection, positive Bash, write-time safety, Services
 promotion/rollback, operator effects or epic integration.
 
-### Latest checkpoint: S2A done, bounded owner-source reviews
+### Historical checkpoint: S2A done, bounded owner-source reviews
 
 The parent reports official Rheos readback of **24 Oikos cards: 18 incoming,
 3 in_progress, 3 done, zero epics done**. S1A, S2A and S3A are done; S4A,
@@ -148,7 +312,8 @@ or mutation by this documentation worker.
   findings are assigned; no tests resume until review and probes qualify it.
 * **S2B:** The [V2 source plan](../../.ημ/runs/oikos-program-20261103/reviews/s2b-collector-source-plan-v2.edn)
   proposes eight additions without base changes and is with the same reviewer;
-  S2B remains incoming. It is not implementation admission.
+  S2B was incoming at that snapshot. Later planning, permit and separate board
+  admission progress are recorded above.
 
 S4A still lacks a real authenticated issuer and qualified real fences. The OCR
 conditional batch remains unconsumed and no restart is authorized. The operator
@@ -158,7 +323,7 @@ bytes, but the existing connection returned `invalid_grant`
 The operator then nominated existing local Axxium Drive permissions for investigation,
 not a new login or deployment
 ([bounded route decision](../../.ημ/runs/oikos-program-20261103/decisions/axxium-drive-route-investigation.edn)).
-No remote backup or cleanup is qualified. Offline artifacts do not resolve those holds.
+No remote backup or cleanup is qualified. Later route discovery is recorded above.
 
 ### Historical bounded checkpoint: source reviews and active holds
 
@@ -232,7 +397,7 @@ does not expand permissions. Preserve unrelated generated-config dirt.
 
 ### Historical preceding wave: S3A done, runtime gates held
 
-The last pushed checkpoint reported by the parent is
+The earlier pushed checkpoint reported by the parent was
 `0f71222680e7da5abd954c92694ea47045010cc2`, following the earlier coordinator
 checkpoint `81038b2123254783d4ec95f9338a87b8f3579834`. Reports in this historical
 subsection extend that checkpoint; later developments are recorded above.
@@ -662,8 +827,10 @@ unit pushes** were performed. Public source publication would expose private his
 conversation metadata, and a normal unit push would publish five unrelated
 unpublished ancestors. No private historical title is reproduced here. The
 [publication hold](../../.ημ/runs/oikos-program-20261103/decisions/ocr-owner-publication-held.edn)
-records the private-snapshot versus keep-local question as **unanswered**, with
-**no selected destination or consent**. Remote backup is not verified. Preserve
+recorded the private-snapshot versus keep-local question at that earlier point as
+**unanswered**, with **no selected destination or consent**. The later private
+Drive choice and unsuccessful backup attempt are recorded above. Remote backup is
+not verified. Preserve
 the local commits, release, exact rollback evidence and consumed marker: no
 deletion, force push, ancestry rewrite or assumed private-snapshot permission.
 This persistence hold changes neither the running `Restart=no` service nor its

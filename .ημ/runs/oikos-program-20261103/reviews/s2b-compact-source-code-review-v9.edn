@@ -1,0 +1,36 @@
+{:review/id :s2b-compact-source-code-review-v9
+ :verdict :approve-bounded-two-source-byte-review
+ :scope "Adversarial offline P1 inspection of the exact law and edge bytes listed below, not an exact-commit review or whole-S2B approval. No operational authority, authenticated owner proof, native i3 or real append is inferred."
+ :bindings {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b"
+            :law ["src/oikos/law/i3_collector.cljc" "bb7219137d743a1802bb0a52a60520288b8ac6d5663bfd939fbade5e6057df40"]
+            :edge ["src/oikos/infra/i3_collector.cljs" "32e9cdb604b80bfa51e503a2954ab5696171a3f0763c1b8feab44f1b0686ae95"]
+            :verification "sha256sum before and after inspection and BB probe produced those same two hashes. Test files were not read as a frozen input; no full suite was rerun. A future exact-head review must independently bind all eight additions and their tests."}
+ :findings []
+ :inspection {:reachability "derive-state starts from validated config and folds core-step through closed bounded command records; exact derived scalar/reference projection is compared to the caller projection. No caller-supplied intermediate state is an axiom. A caller-authored complete trace remains fixture simulation."
+              :arena "Canonical pack/unpack reconstructs frozen full events, checks re-packing equality, workspace first-use order, distinct workspace values and row/window caps. derive-state decodes, rejects duplicate arena values, enforces referenced index first-use order and no unused entries; admitted legacy full/packed events are interned by full equality. Snapshot, pending and ACK refer to the same decoded value."
+              :continuity "Loss clears candidate and lease, advances checked generation when possible and marks pending stale. Late exact matching synthetic proof accounts for accepted event/head without restoring stale lease; frozen replay validates gaps and reconciliation. Expiry uses strict freshness and >= deadline/staleness. Three attempts are charged when subscription is emitted."
+              :f3 "At normal step cap pending is marked stale; core-step permits only matching owner ACK or head-resolution thereafter, without new ordinary work. Derived witness retains exact pending identity and command count. Invalid or untrusted result denies rather than inferring rejection."
+              :raw-edge "Primitive string check and bounded UTF-8 scan precede owned parser. Containers are charged before descent; duplicate/unknown keys are rejected before insertion, parser uses null-prototype objects, and canonical reserialization rejects noncanonical JSON. Node/depth checks are made while building containers; scalar JSON.parse is limited to tokens after frame cap."
+              :qualification "These are bounded source observations, not proofs of complete input coverage, full runtime performance, or semantic authentication. The output layer and worst-case combinations still require the matrix below."}
+ :independent-probe {:path "/tmp/opencode/oikos-s2b-review-edf609c/compact-probe.clj"
+                     :sha256 "d4fd66061e3ec8923e9e4886c9d08d3aa607b23c24eca3407aae5bddca6e8723"
+                     :ownership "This reviewer owns and retains this small scratch probe; no automatic deletion."
+                     :command "bb -cp 'src:test:/home/err/spaces/foresight/clio/src:/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps' /tmp/opencode/oikos-s2b-review-edf609c/compact-probe.clj"
+                     :method "Construct synthetic baseline pending using frozen desktop fixture, then represent 252 individual valid identical tick-reply records and the derived step-256 loss, with no slow repeated public-call prefix. Check owned input and private derive-state, then invoke public step-domain with exact synthetic resolution."
+                     :output [":owned-argument true :derived true" ":near-cap-resolution :fixture :phase :need-gap :steps 256 :records 256"]
+                     :limits "BB only; constructed reachable witness, not a measured 256-call sequence or NBB execution. Existing Clio cache only; no external effects. The first draft of this scratch probe omitted loss-cleared cut-at and was denied; after correction derivation and resolution passed as printed."}
+ :external-evidence {:record "/tmp/opencode/oikos-s2b-reference-evidence-20261104-v1/result.json"
+                     :record-sha256 "fedf874a41fcf679be76b1a72d29dbf095110ae17f91cd4ec5562c4db22d35f5"
+                     :probe-sha256 "941022797051018911693257eb0d1a06be20e9e037da02156adb8c2b6bd939eb"
+                     :stdout-sha256 "9ef1cc068505587ab9819f8de7bedca38fb54c9635f42cb291a0146c8986e151"
+                     :stderr-sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                     :observed "Read probe source and recorded output: result reports source pre/post pins matching these two bytes, exit 0 and 51.28s; stdout reports 271 checks, maximum 2215 nodes, 30293 bytes, depth 8. Probe drives raw/pure equality for 128-window baseline-gap-reconciliation and three 128-window snapshots with retained abandoned/rejected entries."
+                     :qualification "Third-party run, not independently rerun or verified as an execution by this reviewer. Its test helper bytes are recorded in its result, but this review did not inspect currently changing helper files or independently verify their binding at execution. It does not establish all limit boundaries or worst-case full trace fit."}
+ :holds [:full-eight-addition-exact-head-review :stable-test-byte-bindings :f6-descriptor-and-invoker-binding
+         :all-63-frozen-base-blob-mode-verification :all-13-pin-verification :full-green-regression-gates
+         :bb-and-nbb-near-cap-matrix :adversarial-arena-alias-and-optional-fields-matrix
+         :exact-node-byte-depth-boundaries-and-output-roundtrip :worst-case-legal-frame-feasibility
+         :native-ordering-and-coverage :real-owner-head-authentication :actual-nested-oracle :whole-s2b]
+ :performed [:read-two-complete-source-files :read-v5-plan :read-external-probe-and-evidence :hash-bindings-before-and-after :offline-bb-probe :write-this-review-only]
+ :not-performed [:source-edit :git-write :dependency-fetch :private-adapter :native-i3 :clio-append :board :parent-ledger :pr :nested-agent]
+ :next "After concurrent work settles, parent should run the held gates and obtain a fresh review of the complete exact commit; do not extrapolate this bounded approval to F6 or whole S2B."}

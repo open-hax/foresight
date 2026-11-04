@@ -1,0 +1,30 @@
+{:permit/id :services-development-handoff-d4f6ff57
+ :kind :explicit-scoped-development-source-owner-handoff
+ :status :issued
+ :date "2026-11-04"
+ :issuer "Oikos coordinator acting under the user's authorized Services-owner prerequisite work and recommended-path standing direction; not a forged human, native Bot or production release identity."
+ :owner "open-hax/services"
+ :consumer "open-hax/oikos"
+ :artifact {:repository "open-hax/services"
+            :commit "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b"
+            :tree "d54a348e1346fec8230b09a8dd6e1c0eba6aae88"
+            :published-ref "refs/heads/artifact/oikos-local-generations-d4f6ff57"
+            :reviewed-runtime-commit "b2973ef9e3246522324dec4658fbeb093ffab147"
+            :reviewed-runtime-tree "daf053cce6b24c8d62f59e660b90b6c92a5bbae2"
+            :descriptor {:path "docs/local-generation-development-handoff-v1.edn" :sha256 "4aeba4c203db2fe3347021713390f5f0b81a251f14477dc51ad4ceeaa108ecb8"}
+            :recipe {:path "docs/local-generation-development-handoff-v1.md" :sha256 "496fbc4c668f6407c89da98de611fb63a510f1e0aa94b482d549ee1df5250091"}}
+ :basis ["reviews/services-generation-fix-review-v2.edn"
+         "reviews/services-development-handoff-fix-review-v5.edn"
+         "reviews/services-development-publication-custody-v1.edn"
+         "decisions/services-source-artifact-publication-v1.edn"
+         "reviews/services-development-artifact-readback-v2.edn"]
+ :scope "Accept and hand off only the independently qualified immutable development source, portable shapes, seven source pins, fixed trusted-fd-3 facade and inert-edn-v1 fixture contract for independent Oikos source-composition assessment. New fixture execution still requires its exact trusted policy, interpreter/source bindings and private envelope; this is not a raw command/evaluation capability."
+ :chronology "The immutable descriptor records the earlier candidate/not-issued state. This separate later explicit handoff records the transition for this exact artifact; it does not rewrite the candidate, historical source report or review. Consumer must bind both this permit and the immutable candidate descriptor, not infer release from a floating branch."
+ :consumer-gate "A fresh independent Oikos acceptance agent verifies this exact artifact, descriptor, review custody and compatibility before any consumer integration. No consumer acceptance is asserted here and no board dependency is removed."
+ :supported ["inert-edn-v1 only" "private cooperative Linux fixture scope" "explicit unknown/held outcomes"
+             "EOF-only later-ingress recovery of existing pending transaction" "same-operation failure restoration under its retained lease"]
+ :held [:bash-env :shx-owner-release :whole-s1b :installed-generation-selection :startup-loading
+        :services-or-deployment :production :hostile-same-uid-or-root-guarantees :private-capture
+        :new-model-or-network-execution :whole-chain-atomicity :exactly-once-effects]
+ :evidence-limit "Prior exact-head independent tests and separately attributed author aggregate remain their original evidence; no new native aggregate was run for this handoff. Local ignored caches are not remotely preserved by the source ref."
+ :next "Independent development-only consumer acceptance; keep S1B incoming until every applicable shx and Services prerequisite is actually qualified."}

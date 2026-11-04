@@ -1,0 +1,46 @@
+{:report/id :oikos/axxium-pr19-google-receipt-recovery-v6
+ :report/status :real-provider-receipt-recovered-local-harness-location-unresolved
+ :repository "riatzukiza/axxium"
+ :pull-request 19
+ :native-head {:sha "3a319a43d1bd8064e8cdd2729db93e3710ae7ddd" :base "fb219506cdd5a0177340efb622605bf0b1073088" :state "open" :observed-twice true}
+ :local-checkout {:path "/home/err/.local/share/codex-work/axxium-pr19-google-live" :head "887c485270904ed368890834f63064b2008a4067" :matches-native-head false}
+ :evidence [{:kind :native-owner-real-provider-report
+             :url "https://github.com/riatzukiza/axxium/pull/19#issuecomment-6569108948"
+             :id 6569108948 :author "riatzukiza" :created-at "2026-11-02T04:31:41Z"
+             :body-sha256 "1a7630192592a416b5dd7221bb2581741d7c23c83c71a32e41c4bd8926ce1d53"
+             :tested-head "8e2941ae369d1fb72e1cc59256caffa269e5e393"
+             :reported "Owner reports real Google OAuth and Drive adapter operations on a separately hosted local harness, using an existing app and the selected verified account. Exactly drive.file was granted; an offline refresh credential was sealed and stored on the host. Ten OAuth/Drive requests returned 200. Synthetic EDN create/readback, resource registration, ledger reload, duplicate refusal, other-owner refusal and UI readback were reported successful."
+             :limits "Owner-authored historical report, not independent attestation or proof that the credential is still usable. The comment does not identify the local harness or credential-store path, exact local port, Drive folder, account identifier or current running process. It reports no deployed HTTP-route/MCP qualification: public Drive routes returned 404 and the production Drive callback had redirect_uri_mismatch at that time."}
+            {:kind :native-owner-followup
+             :url "https://github.com/riatzukiza/axxium/pull/19#issuecomment-6569712188"
+             :id 6569712188 :author "riatzukiza" :created-at "2026-11-02T05:20:10Z"
+             :body-sha256 "abcc3a8188b910224e271d8bd6843fb7fa5bc106ec7e920c0331b5d81cc6436d"
+             :tested-head "887c485270904ed368890834f63064b2008a4067"
+             :reported "Owner reports current-head real Google readback and duplicate refusal after review fixes. This is an operator claim tied to the named older head, not evidence of today's live grant or current native head."}
+            {:kind :native-pr-body
+             :url "https://github.com/riatzukiza/axxium/pull/19"
+             :body-sha256 "42888cdf354205fa7471a0e7a615e0292dcef45c489c9b01b481e97852be25f5"
+             :reported "Body describes a real-Google recheck using the owner's existing sealed grant: synthetic EDN readback, duplicate refusal, reference listing and other-owner refusal, with five provider 200 responses and no new upload. It links the earlier full-create report and distinguishes production routes and callback as not deployed/registered. It does not identify the harness path or establish fresh liveness."}
+            {:kind :native-review
+             :url "https://github.com/riatzukiza/axxium/pull/19#pullrequestreview-5732183611"
+             :id 5732183611 :author "coderabbitai[bot]" :state "COMMENTED" :submitted-at "2026-11-02T04:47:02Z"
+             :commit "8e2941ae369d1fb72e1cc59256caffa269e5e393"
+             :body-sha256 "cc35672efa08b182f44aa3804898e26d218dfb84e5bd25348e7fa901deb007f3"
+             :limit "Review is not the real-provider receipt; local receipt line 18 references this review and says the prior real Google receipt exists."
+             :local-reference ".ημ/receipts.edn:18"
+             :local-line-sha256 "cf42c7aa53447c8d174b8cf411a828ee1081de428a141fff8fca4854bd73498d"}]
+ :runtime-context {:known-host "Receipt says host-local storage and separate local harness, but does not name a host. The line-18 review-work receipt says stealth; that host belongs to the review-work observation and is not proof that it hosted the earlier Google harness."
+                   :known-owner "Owner-selected verified Google account; private account identity intentionally not retrieved or recorded."
+                   :grant-lineage "Existing app, separately obtained drive.file offline grant sealed locally; later owner report says existing sealed grant was reused for 887c485 readback. Current validity and physical store location are unverified."
+                   :destination "The synthetic file was visible in the selected account's Drive UI; neither the private archive destination nor its access under this grant is established."
+                   :local-search "Bounded filename discovery under named axxium-pr19 checkout and /tmp/opencode found Drive source/docs and review artifacts, not an identified real-provider harness/rehearsal path. Credential files, cookies, env files and encrypted credential ledger records were excluded."
+                   :earlier-local-observation "Prior v5 found identity-only 127.0.0.1:8788 configuration, no listener, and no Drive store paths in that config's whitelisted fields. No evidence connects that configuration to this separate harness."}
+ :proposed-read-only-rpc {:when "Only after exact running instance, source/build, authenticated actor and preexisting linked grant have been qualified and the request is reviewed. No such request was executed here."
+                          :request "POST /api/drive/mcp with the existing owner's authenticated session and JSON body {\"tool\":\"drive_list\",\"arguments\":\"{}\"}; do not log session material or returned private resource names."
+                          :limit "drive_list reads the Axxium owner registry; source indicates it does not test token refresh or establish access to an unrelated Drive folder, and returns private resource metadata. A scope-minimized handler/output strategy must be reviewed first."}
+ :blockers ["The concrete local harness/run directory, host, port, sealed credential store path, owning actor and approved folder mapping remain unidentified in the named sources."
+            "No proof of current process, valid refresh grant, exact destination access, or an authorized upload/readback execution route; the native head advanced beyond both cited real-provider heads."
+            "The existing archive and manifest remain local; no upload or readback was performed."]
+ :next "Trace the separately hosted real-Google harness via its specific nonsecret run artifact or operator session associated with issuecomment-6569108948 and the 887c485 recheck; retrieve only startup metadata and path existence/ownership, not credential content. Do not initiate SSH until a specific host is evidenced and SSH identity instructions are loaded."
+ :boundary {:pr-status-cli-skipped "pr-flow documents possible actionability ledger writes; user expressly prohibited ledger writes. Native GitHub API GETs used keyring environment with GH_TOKEN and GITHUB_TOKEN unset."
+            :tests-executed false :oauth false :login false :drive-rpc false :credential-token-cookie-read false :service-start false :ssh false :product-edits false :board-or-ledger-writes false}}

@@ -1,0 +1,46 @@
+{:review/id :s1b-inert-edn-adapter-plan-review-v1
+ :date "2026-11-04"
+ :kind :independent-partial-source-planning-review
+ :verdict :revise-plan-before-source-admission
+ :scope "Only the proposed partial inert EDN development source slice. No whole-S1B, runtime fixture, policy, Bash, board or effect admission. Independent review is not the parent's permit."
+ :plan {:path "reviews/s1b-inert-edn-adapter-source-plan-v1.edn" :sha256 "be983fd5cfe469deea57c44db821cb4f988f0df1119c2e8a52b0bcb5e64799e4"}
+ :observed {:oikos-worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b"
+            :oikos-head "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+            :oikos-tree "8ed3ef2854d5b11522338e32e7e177dae893fc78"
+            :oikos-status "git status --short reported no entries at inspection"
+            :s1a-git-blobs {"src/oikos/law/generation.cljc" "58e2119a8402e5f72eba4301346dc5a2fb98be37"
+                             "src/oikos/law/frame.cljc" "f749c7ba6cc4853c70f53edc47d1819dcd36a8fb"
+                             "src/oikos/law/digest.cljc" "556f5f0dfb6de7fc56701b4335621870dcd574de"
+                             "test/oikos/law/generation_test.cljc" "b66551fed386448c9f714663e20ade75151cf599"
+                             "test/oikos/test_runner.cljc" "4891c826eef017858873c3fe7f0dc7618e1ce1d2"
+                             "bb.edn" "fbac3f81e98f9fb092d5de2061287ad3428f07df"
+                             "nbb.edn" "ccd9a316a289c0000478f2fb9d1591c20cb84c17"}
+            :services {:artifact-commit "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b" :artifact-tree "d54a348e1346fec8230b09a8dd6e1c0eba6aae88"
+                       :runtime-commit "b2973ef9e3246522324dec4658fbeb093ffab147" :runtime-tree "daf053cce6b24c8d62f59e660b90b6c92a5bbae2"
+                       :validator-sha256 "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+                       :wire-sha256 "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"
+                       :handoff-descriptor-sha256 "4aeba4c203db2fe3347021713390f5f0b81a251f14477dc51ad4ceeaa108ecb8"}
+            :consumer-review-sha256 "bd68d0769cb333486f1d506a4d979d90928d071afc8c174c667a87d1f194c436"}
+ :findings [{:id :manifest-binding-not-specified :severity :planning-blocker
+             :evidence "Plan lines 47-56 output only payload and descriptor, with an independently supplied binding; r01/r03 mention a digest/hash but do not define an artifact record or its independent validation. S1A generation.cljc lines 225-254 produces and checks closed artifact metadata, content SHA, UTF-8 byte count, format and validator identity/revision together against exact content. The proposed slice explicitly leaves S1A render-preview and format enum unchanged."
+             :impact "A test of a hash alone does not bind the described bytes, format, descriptor and validator/source identity into a closed consumer artifact; the plan cannot yet establish the requested analogous manifest law. Nor can the distinct Services format be represented as an accepted existing S1A target."
+             :required "Revise the plan to specify the exact closed standalone artifact/manifest data and independently checked relationships: format identity distinct from :oikos/profile-edn, exact payload SHA-256 and UTF-8 byte count, descriptor/value equality, and allowlisted validator/source binding. Give a canonical digest input or explicitly defer any generation-level digest rather than claiming S1A interoperability. Specify RED mutations for every field, altered payload/descriptor, extra keys and changed binding. Keep S1A target enum and renderer untouched; if this cannot fit the ceiling return for renewed review."
+             :boundary "Do not add destination or claim an S1A target, Services policy FormatBinding, actual source-byte attestation or a completed generation merely to imitate the S1A record."}
+            {:id :raw-byte-and-limits-contract-underspecified :severity :planning-blocker
+             :evidence "Plan lines 53-55 demand a selected UTF-8 byte bound and invalid raw UTF-8 rejection but choose no bound or portable raw-byte input representation. digest.cljc utf8 and sha256 accept strings and encode them; frame/read-one also accepts strings, not arbitrary raw octets. Escaping can make output larger than the original value."
+             :impact "The planned RED tests cannot unambiguously exercise malformed raw bytes or agreed boundary sizes across BB and NBB, and successful string round trips alone do not prove strict input decoding or raw byte/hash identity."
+             :required "Specify a closed portable representation of octets and bounded strict UTF-8 decoding/round-trip equality before parsing or hashing, with how the digest is bound to those exact octets using available pure code. Choose concrete value and total rendered-payload byte ceilings, enforce them before expensive construction, and add RED tests at both boundaries, escape expansion, overlong encodings, isolated continuation bytes, truncated sequences and surrogate encodings in both runtimes. If this requires code beyond the three named paths or a new shared kernel, stop for renewed review rather than silently expanding scope."}]
+ :assessment {:dag "A source-only artifact edge without a Bash renderer, BB supervision or Services effects is technically separable in the proposed design. This is a proposed planning decomposition, not a change to Rheos dependencies, authorization, or proof that S1B is ready. The recorded incoming board state is attributed to the plan/consumer review, not re-queried here."
+              :formats "The S1A :oikos/profile-edn projection and :profile-edn-v1 pin are not the Services {:fixture/value string} payload and services.inert-edn/v1 descriptor. No conversion from profile or bindings has been authorized and no compatibility proof exists. The intended one-string mapping is not a profile mapping."
+              :services "Read exact local artifact validator source: strict UTF-8, closed decoded JSON descriptor, restricted EDN token, decoded value comparison and wire canonical check; slash escape is excluded. A narrower canonical subset is plausible, not established compatible by this review. Wire and validator source hashes and both tree IDs were locally checked, not executed. Descriptor is an inert Clojure value until separately authorized JSON serialization."
+              :custody "Consumer review attributes remote ref and 13 independent byte comparisons; this review did not repeat remote readback or verify all publication paths. Static identity allowlisting is not actual source-byte verification or authentication. Later trusted boundary must independently bind source, interpreter and policy and compare actual validator behavior."
+              :holds "shx review v4 retains the typed dependency warning, two unexplained cleanup-unconfirmed observations and a fresh BB matrix stopped after six cases. No Bash release, positive Bash handoff, whole-S1B admission or board transition follows from this partial edge. Unknown effects and held after:null/target_writes:null remain unknown."}
+ :conditional-ceiling {:after "A revised exact plan must settle both findings, receive independent planning review and separate parent permit before any implementation. Recheck exact source, tree, relevant blobs, evidence and clean task-owned base at that time; stop on drift."
+                       :files ["src/oikos/law/services_inert_edn.cljc" "test/oikos/law/services_inert_edn_test.cljc" "test/oikos/test_runner.cljc (minimal shared registration only)"]
+                       :red "Baseline bb test and bb lint first; RED shared tests in BB and NBB for the complete closed contract, exact bytes/digests and mutation cases, malformed UTF-8 and selected bounds, unsupported input and sanitized failure. Preserve genuine failures and report runtime unavailability."
+                       :green "Pure .cljc synthetic data only; zero-warning bb lint and both runners; later independent exact-diff review and parent source qualification. No service facade, app BB helper, new dependencies, second engine, environment, raw Bash, process, network, credentials, filesystem, current selection or effects."
+                       :later "Separate exact policy-bound review and permit before comparisons against actual pinned Services validator or any private cooperative fixture; no copied validator or mock treated as compatibility proof."}
+ :verification {:read ["full source plan" "full Services consumer acceptance" "Oikos worktree AGENTS.md" "Oikos generation.cljc, frame.cljc and digest.cljc" "S1A permit" "Services handoff permit" "owner prerequisite decision" "shx review v4" "Services exact artifact validator Git object"]
+                :checked ["SHA-256 of plan, consumer acceptance, and two Services source Git objects" "Oikos status, HEAD, tree, listed Git blobs" "Services artifact and runtime tree IDs"]
+                :not-performed [:test-execution :baseline :runtime-fixture :network :remote-readback :board-read :board-write :product-edits :git-write :ledger-write :nested-agents]}
+ :next "Revise and independently re-review the exact source plan; parent decides whether to permit the resulting partial source slice."}

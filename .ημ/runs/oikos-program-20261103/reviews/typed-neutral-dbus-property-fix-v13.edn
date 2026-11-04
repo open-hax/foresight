@@ -1,0 +1,18 @@
+{:input {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v4.py"
+         :sha256 "71db1a8f4925cd2828dfe12509b2f988bd88e8cfc45e9389bdc3e69747edfb0a"}
+ :output {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v5.py"
+          :sha256 "8ed4c009e9968867a1adf1e6e84dd81372b8aeab7396520e4ab7d6e235ef1acf"}
+ :diff {:files 1 :replacements 2 :removed-lines 2 :added-lines 2
+        :control-group-replacements 1 :evidence-root-prefix-replacements 1}
+ :static-checks {:input-sha256-matches true
+                 :ast-parse-new-file true
+                 :reverse-two-replacements-reconstruct-input-bytes true
+                 :replacement-occurrences-each 1}
+ :prior-attempt {:source :parent-report
+                 :v4-attempts 1
+                 :failure "KeyError: ControlGroup before GO"
+                 :loopback-dbus-readback "Same failed owned unit: Service has ControlGroup; Unit does not."
+                 :bootstrap-pid-absent true
+                 :recorded-cgroup-absent-under-existing-parent true
+                 :guarded-cases-ran false}
+ :unrun [:candidate-execution :candidate-import :dbus :unit :probe :java :network :guarded-cases]}

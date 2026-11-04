@@ -1,0 +1,14 @@
+{:report/id :govone-capacity-pipeline-tests-fix-v8
+ :status :partial-source-only-unverified
+ :input "govone-internal-capacity-source-review-v7.edn F3"
+ :owner "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+ :file "internal/pipeline/capacity_evidence_test.go"
+ :sha256 "7dde92836ac00e9ea858adf26fb8e84d913ee1dcedf57ac5493d42ac410aab2e"
+ :oracles ["Actual EnterStage/CompleteStage admission over every canonical stage, embedded matching/empty/mismatched stages, value/pointer outputs and valid/invalid/nil provenance; mismatched embedded stage must fail and tuple is present only for explicitly named route."
+           "Mutation of source pointer after completion and returned Details and Output copies does not alter admitted result."
+           "Historical route failure without provenance has exact expected details and exact existing BuildStageAuditPayload envelope."
+           "Prior direct validation cross-product and sentinel tests retained unchanged."]
+ :blocker "Exact public facts allowlist and commitment cannot be tested using the real projection helper from this pipeline-package file: insertStageEvidenceProjection and evidenceProjectionKeys are unexported in inference/service.go, which imports pipeline, so importing inference here would create an import cycle. No duplicate projection or new public API was introduced. The parallel inference test author must add exact persisted projected-facts and commitment comparisons using the actual inference projection/admission path; public HTTP/completion coverage is also outside this file. F3 remains open pending those tests and independent review."
+ :static "gofmt -w applied; gofmt -l returned no paths; SHA-256 computed. No production files edited in this task."
+ :unrun "Tests are source only, not executed. No Go build/test/run/list/mod, runtime, dependency/cache/network operation, Git, board, ledger or nested agents. No claims about compilation, unchanged fixture/locks beyond no edits by this author, or test results."
+ :holds [:F3 :exact-diff-independent-review :offline-build-and-test-admission :N1 :request-decision-version :signed-policy-causation :warm-cache-invalidation :runtime :independent-anchor]}

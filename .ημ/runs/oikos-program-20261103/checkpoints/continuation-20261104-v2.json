@@ -1,0 +1,755 @@
+{
+  "base_commit": "792dfa341d380cbf413b925319654d7c2ebec413",
+  "created_utc": "2026-11-04T15:46:05.192362+00:00",
+  "entries": [
+    {
+      "bytes": 453697,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/kanban-events/ledger.edn",
+      "sha256": "afc5fd947ce939aebe1e910161876c9b6add91bbd334c8b2157422feb5e81e7f"
+    },
+    {
+      "bytes": 1317056,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/receipts.edn",
+      "sha256": "c89011078fabc17cd5c352102372489e8c28c06a5f5e348f4a3a3dac7857ed3a"
+    },
+    {
+      "bytes": 725,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/custody/README.md",
+      "sha256": "fe0bac1d961deb60b897cadd648d23eec2e94e9dd3521ce3be09b910b1ea6a21"
+    },
+    {
+      "bytes": 1887,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/custody/review-syntax-repair-v1.edn",
+      "sha256": "54b2a002ba0d0ce4ab0285efdad3a969519c439f88c6d190eecbe5610e26b212"
+    },
+    {
+      "bytes": 8364,
+      "mode": "0o644",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/custody/s6a-govone-fixture-source-review-v1.original.edn.txt",
+      "sha256": "99228519c5aefbab3ed7a52381d4cdb806868bf95a4596176099bdda44991db6"
+    },
+    {
+      "bytes": 1010,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/decisions/govone-owner-evidence-planning-authorization.edn",
+      "sha256": "489017168bc69c66b2f1192c62b74bc0324c713753bd5a13e5057911f592a909"
+    },
+    {
+      "bytes": 1747,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/decisions/recommended-path-standing-authorization.edn",
+      "sha256": "76f5895461e340760f7118cbcb2a13c6acbcd586169a1c840d0f777df88146de"
+    },
+    {
+      "bytes": 1908,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/decisions/services-candidate-status-sequencing-v1.edn",
+      "sha256": "a26ea14a14341f0d7bcf6aff77e2e8a0e175630d75fd5692306a4b28477c8e13"
+    },
+    {
+      "bytes": 2452,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/decisions/services-source-artifact-publication-v1.edn",
+      "sha256": "38d010dea08be2aa82d395c1af75bb9623bdc5056a50b85b021da3d213db68d1"
+    },
+    {
+      "bytes": 2447,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/permits/s4a-isolated-owner-model-ert-v1.edn",
+      "sha256": "2d74faf727909eb3c1de12ca748554e2fe81ef0f3b65509bfdbf62cb2cf3fb80"
+    },
+    {
+      "bytes": 2640,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/permits/s4a-isolated-owner-model-ert-v2.edn",
+      "sha256": "b04920f1301c2468e165eb04acfc05a590212782a4f22d6894cec3e423ea683b"
+    },
+    {
+      "bytes": 2467,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/permits/s4a-synthetic-owner-model-v1.edn",
+      "sha256": "5f46e3f8fea5939dd0f79223aa0319291d9efe30f494f815996f7f0b0273cf09"
+    },
+    {
+      "bytes": 3385,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/permits/services-development-handoff-d4f6ff57.edn",
+      "sha256": "f565b7f8b2097e70892a38b2e652155651a10d84ed038b141256e09e8694c0de"
+    },
+    {
+      "bytes": 3429,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/permits/typed-neutral-batch-v4.edn",
+      "sha256": "daa95e30e9a8ea1bcd97ce030713c6564542289713ba2188ab31adf638ed5acc"
+    },
+    {
+      "bytes": 2368,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/permits/typed-neutral-batch-v5.edn",
+      "sha256": "e9581b343e2415457b096e1613a44687f07a2f46d7a3943c58ab2b4e50fbab9d"
+    },
+    {
+      "bytes": 2194,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/permits/typed-neutral-batch-v6.edn",
+      "sha256": "b43c9dbc8ff5497ac5b7bbf991da923dfc66a1aa8e180aae7359eb61f77cf1ee"
+    },
+    {
+      "bytes": 7679,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-current-drive-source-comparison-v11.edn",
+      "sha256": "bb146c05ddf8a37569553ba8957d7f0223ecdfa419f05f1a84dcf3cc0b86ebd3"
+    },
+    {
+      "bytes": 7690,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-drive-current-source-v3.edn",
+      "sha256": "eb212e955d9c78a91f14fe028aa69ccb2b6eac7c0ca99680f01bf10d65198a85"
+    },
+    {
+      "bytes": 6109,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-drive-live-route-plan-v4.edn",
+      "sha256": "4529f8342933bf49a0ccdd044b5f7c7d1177ff6b97e0ca81e385536060fd5aa1"
+    },
+    {
+      "bytes": 4344,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-drive-path-variable-recovery-v9.edn",
+      "sha256": "9d42062c95e04fa269289ecc2b15ef9f41bad7e8526c2ba113ae9cef0a2493ab"
+    },
+    {
+      "bytes": 5491,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-drive-runtime-recovery-v5.edn",
+      "sha256": "0f1c29a2d9c4a7ca8898fdee9d1c67ddf9b3934607d4a4f9029570b85513aabd"
+    },
+    {
+      "bytes": 4975,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-drive-sealed-state-metadata-v8.edn",
+      "sha256": "6cd47d0818dc446353b3d7e12f522853f353189193672f232043ed37343bc7ee"
+    },
+    {
+      "bytes": 4731,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-google-harness-session-recovery-v7.edn",
+      "sha256": "b01bbfedef1465b9d52e98bd94e2b7332fb1e4bed698d4ce274f72b0e7badf4b"
+    },
+    {
+      "bytes": 8592,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-local-drive-state-qualification-plan-v10.edn",
+      "sha256": "7b4e036a96f7b9b30587fbea587daeccb73935330084731ac6d49b46a8576b3e"
+    },
+    {
+      "bytes": 8804,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-nbb-static-closure-inventory-v14.edn",
+      "sha256": "4b9c1f28f9f8cb7dbb2ac05e0bd7bee1a8b37cc5b1d3419e5f5939113214b896"
+    },
+    {
+      "bytes": 7143,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-pr19-google-receipt-recovery-v6.edn",
+      "sha256": "2cf4a5c4ec8f95f16841cabd48de216584e450fcbc005c05903fe2d5de2ed013"
+    },
+    {
+      "bytes": 7422,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-synthetic-qualifier-plan-review-v12.edn",
+      "sha256": "600964f6306bec54a6c1db619376570fde62a86dc5dba6f9d6964dcef8195c55"
+    },
+    {
+      "bytes": 2319,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/axxium-synthetic-qualifier-source-candidate-v13.edn",
+      "sha256": "5d9548e91baf321322a2342a19b61897161fa78033bcddece9fb72bb8babd68c"
+    },
+    {
+      "bytes": 10900,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-compatibility-scope-plan-v10.edn",
+      "sha256": "8bd6f40285b5daa83a38cfca1c700d132dbd28f7e0671c3f924accea66cac074"
+    },
+    {
+      "bytes": 8869,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-evidence-plan-fix-review-v2.edn",
+      "sha256": "18f31a36d1e92e369121f81d4a62b42d42ea97b0ca94a8a4914e4b4a07af53a1"
+    },
+    {
+      "bytes": 8574,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-evidence-plan-fix-review-v3.edn",
+      "sha256": "cd60afa51bfe0b457b7196ea8fd8147b3680c7ff72e75725ef65f158b825a8ea"
+    },
+    {
+      "bytes": 7042,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-evidence-plan-review-v1.edn",
+      "sha256": "9b3d03b20915f683e06805991d375dad865c74baf57f58ea7b07c0820b8ed4ee"
+    },
+    {
+      "bytes": 17526,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-evidence-source-plan-v2.edn",
+      "sha256": "f10139a9c0d5e62408931e24df27e5695f8dd1d4aa22986466d15c9b87091eee"
+    },
+    {
+      "bytes": 15406,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-evidence-source-plan-v3.edn",
+      "sha256": "cf1f9203d38fccf9f5302620435d4ad41b81684a0c080092e1104639e1bbabb5"
+    },
+    {
+      "bytes": 2092,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-pipeline-source-v6.edn",
+      "sha256": "e8b86ca9963074746ca33cbce522368f5a47868646e114323b262f718d922598"
+    },
+    {
+      "bytes": 2216,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-pipeline-tests-fix-v8.edn",
+      "sha256": "430bb055972e593bb93905f7081e0f8ec192a4b751afc806a22bbeda692684cd"
+    },
+    {
+      "bytes": 4287,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-capacity-request-tests-fix-v8.edn",
+      "sha256": "1de2dba089411556d9f0bb45510f180412df10a71c0b4c51428eb796ab9b0bde"
+    },
+    {
+      "bytes": 3065,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-internal-capacity-source-candidate-v4.edn",
+      "sha256": "0b770b2cabe7241f8f58da86c0e97c0a04d4cc9fd12fd86b9cac578b29f86911"
+    },
+    {
+      "bytes": 7565,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-internal-capacity-source-fix-review-v9.edn",
+      "sha256": "1f47932864f9cc3e2bce002675020ea1c78a7451920329110f34d8b70bb33779"
+    },
+    {
+      "bytes": 6621,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-internal-capacity-source-review-v7.edn",
+      "sha256": "970412947717d808054de7206f2bf1a489efd1e69448855b8b5e86373e1c56a7"
+    },
+    {
+      "bytes": 12411,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-offline-compile-plan-review-v3.edn",
+      "sha256": "724d03ce119bd707a59f7ac06dc2d6d3583542ad00ae82ac836e6c5f371d3962"
+    },
+    {
+      "bytes": 13628,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-offline-compile-qualification-plan-v2.edn",
+      "sha256": "6e7ea4787760c65025c83854aa889b8ddb721caba177c73ca8eb0ab2a95da723"
+    },
+    {
+      "bytes": 3607,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/govone-real-capacity-test-source-v5.edn",
+      "sha256": "5edf54c8844816682cf70a9749012bb90d1be3800212fa97f29c5938ce149f24"
+    },
+    {
+      "bytes": 9284,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s1b-inert-edn-adapter-plan-review-v1.edn",
+      "sha256": "2f0d436561207134e4bd08364540e16dac23c4381028da7dc4147150c905f8be"
+    },
+    {
+      "bytes": 16244,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s1b-inert-edn-adapter-source-plan-v1.edn",
+      "sha256": "be983fd5cfe469deea57c44db821cb4f988f0df1119c2e8a52b0bcb5e64799e4"
+    },
+    {
+      "bytes": 24063,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s1b-inert-edn-adapter-source-plan-v2.edn",
+      "sha256": "348ea9fd5be0b5dfa8e6283a284a34ec2ca25872a5bf621ed671f5c711bee263"
+    },
+    {
+      "bytes": 1076,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-collector-boundary-fix-v2.edn",
+      "sha256": "a4e746c615811b87d5adfbce7f688a8713e20c7c59b22cc24b2ee9672f2340cd"
+    },
+    {
+      "bytes": 1867,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-collector-code-fix-candidate-v3.edn",
+      "sha256": "f28e93a5864aa4cc465c1481a37ea9da84999f4106cd6410653d83d275f8f82a"
+    },
+    {
+      "bytes": 2679,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-collector-witness-candidate-v4.edn",
+      "sha256": "2cfb547e2f1c9d241cc56d44e3691f93f48861b7c921de000a14b0221afdf696"
+    },
+    {
+      "bytes": 6589,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-compact-source-code-review-v9.edn",
+      "sha256": "4e0e2c720e11b15eedcd8eac60d60f0fca13f55452d0264945f1b985f94e4039"
+    },
+    {
+      "bytes": 1615,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-compact-witness-candidate-v6.edn",
+      "sha256": "52fe97fcef48d66bc32331f9283d4f2520cf91efc5c1c28aafc8f892a66bfde5"
+    },
+    {
+      "bytes": 2580,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-descriptor-preflight-candidate-v3.edn",
+      "sha256": "c8de0ea28e8a5fb22520153417e0fbd10a06b213fa3d6a9195fab3ea01773901"
+    },
+    {
+      "bytes": 7421,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-fence-witness-clarification-v1.edn",
+      "sha256": "1d59869c2159a2c68486cf13a12e8d60549447ade85faf1c18a88f31062fa719"
+    },
+    {
+      "bytes": 9100,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-offline-collector-code-review-v2.edn",
+      "sha256": "4101bb92438e69c516184a8f5db2b04dd318ce9c9d5feca48b9ea1df403ddbaa"
+    },
+    {
+      "bytes": 866,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-pure-collector-implementation-v1.edn",
+      "sha256": "30ba1913ef1b3abe32e526851b9da5b35f4e40dd4db03135d69c86e49a5c64fe"
+    },
+    {
+      "bytes": 4081,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-raw-boundary-probes-v2.edn",
+      "sha256": "57b2db55d66cb1804b419506dedbb26c0dc37cd42c66d5ae5c0521f0be5d2f08"
+    },
+    {
+      "bytes": 3108,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-reference-descriptor-finalization-v9.edn",
+      "sha256": "5825fdb6ab2f88b5268dfbd78cefe9af54a0f3fe732020174679a8c55be5a55e"
+    },
+    {
+      "bytes": 11775,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s2b-witness-node-budget-plan-v5.edn",
+      "sha256": "9e2fb6636d4c5784d4d3506cee201c10f167014c100ab4b4b481a1d9d669fc13"
+    },
+    {
+      "bytes": 11484,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-authenticated-owner-seam-plan-fix-review-v3.edn",
+      "sha256": "d0f74762b4f15661f43e11adfc2aa11d8a242aa236b357f54546ead70299db59"
+    },
+    {
+      "bytes": 10676,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-authenticated-owner-seam-plan-review-v2.edn",
+      "sha256": "b9d4a41f014d9b0d4c1c3b9f177f296ad96339edcbefbb98acc3c3eaaf877a2c"
+    },
+    {
+      "bytes": 17596,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-authenticated-owner-seam-plan-v2.edn",
+      "sha256": "0c6295d4f1774d07c46cb882011b928387d59068a3a8cb78a8eacbb3263df138"
+    },
+    {
+      "bytes": 29210,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-authenticated-owner-seam-plan-v3.edn",
+      "sha256": "a2289697e029aa8463744886b471a76fd017a4281a4f1e8efebe72089ca0d11c"
+    },
+    {
+      "bytes": 8234,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-bound-model-composition-plan-review-v5.edn",
+      "sha256": "68020247b646dc45496fd3dbfe69468e7e942e1dab76163e016d5902f2633266"
+    },
+    {
+      "bytes": 12494,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-bound-model-composition-plan-v5.edn",
+      "sha256": "4136cfa387e80f084e3262be30deb9b5df031ed175e562f113271ae3e9ecb799"
+    },
+    {
+      "bytes": 1407,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-synthetic-model-source-snapshot-v5.edn",
+      "sha256": "f5cb8ef0106dd0b8599b38c646309733e135cd1362e68ef3ea0a10b6851b5d03"
+    },
+    {
+      "bytes": 3887,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-actual-red-fix-v3.edn",
+      "sha256": "4fda3aef237f4c38451ead3ddafacb43a5135e299a2a9ac12d5466ae83054cc7"
+    },
+    {
+      "bytes": 2710,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-candidate-v1.edn",
+      "sha256": "4f69784040b51d9346f5ca77a196de4a22fe823903d69b7de2220393c665965c"
+    },
+    {
+      "bytes": 3897,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-fix-candidate-v2.edn",
+      "sha256": "c3df471fd700f1799cbf92a0a748b788d8a7cbd4ce2f2e646ceda6a8dbc59f52"
+    },
+    {
+      "bytes": 8593,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-fix-review-v2.edn",
+      "sha256": "cba613653b23ad47bf0e0b1154da75c67c76d0b7922c9577862a32a4c8ded1f2"
+    },
+    {
+      "bytes": 7571,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-red-fix-review-v3.edn",
+      "sha256": "d6f78fde606a0f6646d6dfa4419553c66c4f5e50f03f8227d6aa9d09c031b30c"
+    },
+    {
+      "bytes": 7194,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-runtime-review-v4.edn",
+      "sha256": "c610452b503e824410c8150abd3211d9d2bf094e7d4c9c6542ce75eacb95d930"
+    },
+    {
+      "bytes": 10332,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s4a-synthetic-owner-model-source-review-v1.edn",
+      "sha256": "677221e2d53a3f89432078bc80e519a3e51bbd0e9c14b785b5b5f10fea468702"
+    },
+    {
+      "bytes": 8129,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s6a-govone-fixture-source-fix-review-v2.edn",
+      "sha256": "ae2f75ab2fb91f9c99fd11cf48e261903aab7954a7eb05ae2da4d6fddd7bbfd4"
+    },
+    {
+      "bytes": 8366,
+      "mode": "0o644",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s6a-govone-fixture-source-review-v1-syntax-custody.edn",
+      "sha256": "d58406f668cfd95293b6c9edb48fb0248933ac676eb049c58bfd939db4d18d87"
+    },
+    {
+      "bytes": 3276,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-dev-handoff-plan-fix-review-v2.edn",
+      "sha256": "7230d603ddb2a93c99eeeb8eaefaeaeb21f8dda92fb9370ba6ef2ddb86cbe838"
+    },
+    {
+      "bytes": 4015,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-dev-handoff-plan-review-v1.edn",
+      "sha256": "18662892167437d710edc9d6b95b0ae1e52991ac7e482fc155087f27dc6b51d2"
+    },
+    {
+      "bytes": 17787,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-dev-handoff-plan-v2.edn",
+      "sha256": "55d3f3160ba10a6a305de2fb788d2adcd473a8ad978334797540c8878120f5d3"
+    },
+    {
+      "bytes": 2578,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-development-artifact-readback-v2.edn",
+      "sha256": "1cad54f9f13c90f9a1294ac153d804bf16197a49c2fbb2ee0ce11ba4058fa49d"
+    },
+    {
+      "bytes": 4391,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-development-handoff-candidate-v3.edn",
+      "sha256": "38c9cf02f84388bd39afc32696d0aaf3f63a948e0df303bfef4bff78b4839c0c"
+    },
+    {
+      "bytes": 4283,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-development-handoff-fix-review-v5.edn",
+      "sha256": "27c078515c8ebd02baf416f9663d57fd12b0f912a9ef6d816ecce78edd826ccd"
+    },
+    {
+      "bytes": 6886,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-development-handoff-review-v4.edn",
+      "sha256": "361f9c63462e9d6800c7bdf2552ddbcece820ead76bbdb6522a26e9db3ccc648"
+    },
+    {
+      "bytes": 8706,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-development-publication-custody-v1.edn",
+      "sha256": "002fb65bdcb155e8a877a970f17cd4b6471d13ad36739b5de4ebc3d6eb19e54f"
+    },
+    {
+      "bytes": 8555,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/services-oikos-development-consumer-acceptance-v1.edn",
+      "sha256": "bd68d0769cb333486f1d506a4d979d90928d071afc8c174c667a87d1f194c436"
+    },
+    {
+      "bytes": 7062,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-java-diagnostic-plan-final-review-v4.edn",
+      "sha256": "0d14928c48add932dd59c80b6cc31c5a72ed05cc6e8f79ff4e20ecf882cf079b"
+    },
+    {
+      "bytes": 7436,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-java-diagnostic-plan-fix-review-v3.edn",
+      "sha256": "b5ddcc162a575cd1521c310795cea68daabc32a81daee9c8a154df1f2065f1cc"
+    },
+    {
+      "bytes": 9138,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-java-diagnostic-plan-review-v2.edn",
+      "sha256": "6156acff6a14d26f247b752eaf65dafc42ef8438b25060a22340208b4ee97459"
+    },
+    {
+      "bytes": 14325,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-java-diagnostic-qualification-plan-v1.edn",
+      "sha256": "5039919277751de6b6197e870e6a56f2c8c76ac54d10f802cd48db82c7775152"
+    },
+    {
+      "bytes": 13895,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-java-diagnostic-qualification-plan-v2.edn",
+      "sha256": "e10efea0e39e082f8877268c6975336bd229f60fb505f24d4f34bf02c747d57a"
+    },
+    {
+      "bytes": 4529,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-java-diagnostic-qualification-plan-v3.edn",
+      "sha256": "ecaf4a68fbcf34463b57002fcf3cbe68c0b87425844514fecc2d91e02a4cc6e0"
+    },
+    {
+      "bytes": 4596,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-java-diagnostic-source-candidate-v5.edn",
+      "sha256": "234f1516a257c6a1e926286ed31da490f08602d2fed32df8154fe2efda9baf26"
+    },
+    {
+      "bytes": 6925,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-named-binder-compatibility-plan-fix-review-v2.edn",
+      "sha256": "2e2376c988e188f182b8eb25bbb8d709706d7f4485c9d4a200be9eb38e25048f"
+    },
+    {
+      "bytes": 9697,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-named-binder-compatibility-plan-review-v1.edn",
+      "sha256": "aaa652fce54e381b9354b59240a4e4d01bbaa96094dffd3093a0becee2fc7a90"
+    },
+    {
+      "bytes": 10581,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-named-binder-compatibility-plan-v1.edn",
+      "sha256": "0cb1751f7717a01980bdb753abb024e440fe7893c7db4a10bc4f919d99cb202a"
+    },
+    {
+      "bytes": 18881,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-named-binder-compatibility-plan-v2.edn",
+      "sha256": "05cc30c7225aa5ae45ee33e7db2a4b058831b579917319c353b77ba06b7408a7"
+    },
+    {
+      "bytes": 2893,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-named-binder-parser-fix-v4.edn",
+      "sha256": "a816296b25d8866c1fc104c1b973a2fc7fb84e28ad1d82b3c3f236206498d19c"
+    },
+    {
+      "bytes": 9117,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-named-binder-source-review-v3.edn",
+      "sha256": "23b1b7f8845072de76b486e9c13ed394c355a3358d5c04374cde33e91d49bc5c"
+    },
+    {
+      "bytes": 2520,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-named-binder-tests-candidate-v3.edn",
+      "sha256": "a40e36f83217b84709d37ceaaae58b3a557d240f5ac352c22c00394e88779fb2"
+    },
+    {
+      "bytes": 2810,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-named-binder-tests-fix-v4.edn",
+      "sha256": "ffff6d5a1ea389e49724dae773d429f00e96252c5a0e94b7a66751ebf14e6436"
+    },
+    {
+      "bytes": 2029,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-attempt-v4.edn",
+      "sha256": "3300baeba2df086963963a9671dd3113c5d8e8528c7a556f261c8fe318955293"
+    },
+    {
+      "bytes": 2306,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-attempt-v5.edn",
+      "sha256": "9733913ce273f488fd7574934e8930e4639d9702a63d9e7ed3129b8b48283034"
+    },
+    {
+      "bytes": 5562,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-cgroup-observer-source-v15.edn",
+      "sha256": "a23a4992029a6259bf9fc76c1b32b5a7700f45005e48584af3ebdbecc6f81e2b"
+    },
+    {
+      "bytes": 4259,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-containment-source-fix-v8.edn",
+      "sha256": "cbe11fadb2688d4bc5cb14cac502b1d57f04518951e2be1126ad726e2387d547"
+    },
+    {
+      "bytes": 3418,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-containment-source-review-v7.edn",
+      "sha256": "60868e65f18e99fd33d9c1149d0c13e71e27d89419bd240e8ee8946003842e94"
+    },
+    {
+      "bytes": 1893,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-controller-source-review-v10.edn",
+      "sha256": "b1ab9ca5bd7e5976c1d22e1131dbf7c60b406bf62eeb22567e14280b6ce74f5a"
+    },
+    {
+      "bytes": 3232,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-controller-transport-candidate-v9.edn",
+      "sha256": "9e03c7b8fbc67828d05311a46a99dbccb5050d53f9122103d8bbab3ca39228bb"
+    },
+    {
+      "bytes": 1221,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-dbus-fix-review-v14.edn",
+      "sha256": "141acda3b6d7035bf31ace12461e7792d14c1ba94ee700f573a65cbaa9aed1cd"
+    },
+    {
+      "bytes": 1182,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-dbus-property-fix-v13.edn",
+      "sha256": "cbd33c24164e0a8e04af9d0d7bdf5da8d9182fba21170ed2ea2955c3f616ba86"
+    },
+    {
+      "bytes": 1094,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-observer-fix-review-v16.edn",
+      "sha256": "a9c87eb351b68f2f804c588d2d6959e9b0404974499e7038fd5db8f6b98ae779"
+    },
+    {
+      "bytes": 4760,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-probe-source-v5.edn",
+      "sha256": "9b67aaacbb0934fa365cb4041762431a105193724389ee38407be750205a3bd6"
+    },
+    {
+      "bytes": 6249,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-runtime-qualification-v17.edn",
+      "sha256": "d785c02cb92ab70cbb89a83f4883307ff95e2a397b78f649c00a24a7402464db"
+    },
+    {
+      "bytes": 1416,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-neutral-source-review-v12.edn",
+      "sha256": "3c541aed0b1f46f2432dcc7856107bd08af09bcd2374cac7725db0abacf9798a"
+    },
+    {
+      "bytes": 5293,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/typed-systemd-neutral-controller-source-v6.edn",
+      "sha256": "e3dc0f6cb429c022a1d6f63348cb986b3d6c9eb2a5565bda7244268497667b4c"
+    },
+    {
+      "bytes": 262254,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/session-mycology/ledger.edn",
+      "sha256": "405364835bc9f35b26867caf3684b8a7fe8eea4ae6cf8b1dc8de416c8daa6c29"
+    },
+    {
+      "bytes": 1625,
+      "mode": "0o664",
+      "path": ".\u03b7\u03bc/session-mycology/spores/20261104-scoped-source-dispatch-contracts.md",
+      "sha256": "b788fbf4474bcd10c13f11baf594cd077598595c2e2320ef614d0a2c20a7a416"
+    },
+    {
+      "bytes": 8248,
+      "mode": "0o664",
+      "path": "docs/agile/kanban/oikos-reconcile-i3-subscribe-snapshot-races-and-reconnect-revisions-42935ec3.md",
+      "sha256": "8d8f61f415c9772b8e32638b02194847f4cf8ee05d3906f302b8db6d77bd358e"
+    },
+    {
+      "bytes": 101027,
+      "mode": "0o664",
+      "path": "docs/notes/oikos-execution-plan.md",
+      "sha256": "6a7f48452df65048077d3c17985aae5e10044414935bc42eea499d93466219d3"
+    },
+    {
+      "bytes": 5148,
+      "mode": "0o664",
+      "path": "reviews/axxium-drive-backup-discovery-v1.edn",
+      "sha256": "9ce8bae06beb4fe4370be6c608938b9e9d9fb81b28057e0b3b0b4552597f4393"
+    },
+    {
+      "bytes": 12661,
+      "mode": "0o664",
+      "path": "reviews/govone-capacity-evidence-source-plan-v1.edn",
+      "sha256": "316a9a9c367f96bb9df0359f14f7c70b43803553ebc31bf2b77429bcf4643d59"
+    },
+    {
+      "bytes": 13434,
+      "mode": "0o664",
+      "path": "reviews/govone-isolated-qualification-plan-v1.edn",
+      "sha256": "8efb9c8282ef8873de3dcac6f0b9dfc0d89cc25f94f0739901f31832d4cde755"
+    },
+    {
+      "bytes": 2722,
+      "mode": "0o664",
+      "path": "reviews/typed-execution-wrapper-source-v3.edn",
+      "sha256": "223dd3af1b0126edf678a2737c31622a64b1ff9edf0e4bedb0122766c742897a"
+    },
+    {
+      "bytes": 3907,
+      "mode": "0o664",
+      "path": "reviews/typed-java-diagnostic-plan-review-v1.edn",
+      "sha256": "c101bf07f9897d973052d4889175aab29682a9cdf4eeee43f896dd088a193355"
+    },
+    {
+      "bytes": 2458,
+      "mode": "0o664",
+      "path": "reviews/typed-neutral-kernel-cleanup-source-fix-v11.edn",
+      "sha256": "8e525b88af8b9170034f8fbe790f94060805017f2f02411bea6f2b04ca958530"
+    }
+  ],
+  "excluded_exact": [
+    ".\u03b7\u03bc/runs/oikos-program-20261103/reviews/s6a-govone-fixture-source-review-v1.edn"
+  ],
+  "excluded_scopes": [
+    "new cards and board snapshots",
+    "runreviews/",
+    "s1a-native-scope/",
+    "all product worktree contents",
+    "all credentials and private input inventories",
+    "all temporary execution/dependency caches"
+  ],
+  "inventory_bounds": "New checkpoint artifacts <=1MiB each; existing legacy Receipt River is separately allowed <=16MiB for hashing and must preserve the exact committed prefix. The first inventory attempt refused its existing >1MiB size before creating a manifest; it did not alter files.",
+  "known_pointer_adjudication": ".\u03b7\u03bc/runs/oikos-program-20261103/permits/s4a-isolated-owner-model-ert-v2.edn",
+  "preservation": "No original, cache, temporary input, artifact or worktree was removed or reset. New reports after this manifest remain outside this frozen set. Manifest excludes its own hash; Git binds complete bytes.",
+  "purpose": "Preserve task-owned incomplete plans, actual bounded verification and review custody; not implementation, runtime, child, epic or hosted review approval.",
+  "raw_review_custody": ".\u03b7\u03bc/runs/oikos-program-20261103/custody/review-syntax-repair-v1.edn",
+  "schema": "oikos.continuation.checkpoint/v1"
+}

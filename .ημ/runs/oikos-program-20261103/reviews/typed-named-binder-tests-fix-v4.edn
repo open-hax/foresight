@@ -1,0 +1,17 @@
+{:status :changes-required
+ :file "/tmp/opencode/oikos-typedclojure-owner-a2698786-b653-4566-a8eb-9c19d374ada0/typed/clj.checker/test/typed_test/clj/checker/seq_annotation_test.clj"
+ :sha256 "95658fde6793bf59341e2ed97406e843099e04ee0b1a32c358f458c6d8af7cbd"
+ :source-additions ["Overlapping markers, incomplete and non-simple names, nil type, well-formed unbound type, reason checks."
+                    "Legacy symbolic scope, nested function domain capture, numeric inner and outer-offset ids with per-use warning counts."
+                    "Empty/no-object parity and explicitly typed empty seq; fixed prefix before keyword, alt/cat and optional suffixes with per-arity object ids."
+                    "Real open-Result with nonempty distinct caller and latent paths and both filter polarities, plus two-stage opening."
+                    "Real checker positional controls and wrong-neighbor error-message checks for object and filters."]
+ :concrete-blockers ["An unnamed-grammar baseline snapshot cannot be truthfully invented: baseline representations and exact warning streams have not been observed, and the user expressly prohibits execution. Added parity controls are not baseline snapshots; non-final * and <... controls remain unwritten."
+                     "The wrong-neighbor oracle currently matches a generic Type mismatch with Expected/Actual, not the particular inc argument: without an observed checker diagnostic it can accept a different type mismatch. It must not be counted as a diagnostic-specific proof."
+                     "Seq-path checker positive/negative and nested checker application examples, heterogeneous object/filter propagation, current-domain binder barrier cases and complete regex rejection controls remain missing. The two-stage open test is not an application test."
+                     "The nil and empty-vector expected types, constructed nested form shape, warning counts, error subject text, and direct representation field paths have not been executed and require qualified validation; no claim of GREEN or valid diagnostics is made."
+                     "No lint comparison was run; project-config lint remains unverified. Resource extraction has not been validated on either head."]
+ :verification {:performed "Source inspection and sha256sum only."
+                :unrun-command "Run the repository's authorized test runner targeting typed-test.clj.checker.seq-annotation-test only after wrapper qualification; its exact invocation has not been verified."
+                :prohibited "No Java, Clojure, Babashka, tests, probes, dependency resolution, cache operations, Git, board or nested agents."}
+ :next "Source review and separately qualified execution are required; resolve the concrete gaps before claiming the reviewed matrix is complete."}

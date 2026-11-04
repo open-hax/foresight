@@ -1,0 +1,22 @@
+{:permit/id :s4a-isolated-owner-model-ert-v2
+ :kind :separate-one-shot-isolated-synthetic-functional-test
+ :date "2026-11-04"
+ :source :recommended-path-standing-authorization
+ :review "reviews/s4a-synthetic-owner-model-red-fix-review-v3.edn"
+ :prior "The v1 run remains RED: 9 tests, 5 passed, 4 failed. Its permit is consumed."
+ :reference-correction {:candidate "reviews/s4a-synthetic-owner-model-actual-red-fix-v3.edn"
+                        :field :previous-review-sha256
+                        :actual-full-sha256 "cba613653b23ad47bf0e0b1154da75c67c76d0b7922c9577862a32a4c8ded1f2"
+                        :effect "Explicitly supersede the candidate's truncated prior-review reference without changing its historical bytes. This does not repair or qualify any runtime result."}
+ :binary {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+ :timeout {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}
+ :sources [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "5989ab40dc823fe9628997d5f85cd34ffb1d468677845ac9e2ee04257535fbec"}
+           {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "2dfbd3293f766130bc8bacd04796cf6d66b39a25ddb868fc0a37d7649a5693e0"}]
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :scope "One invocation of the review's fixed -Q --batch command, loading only the two exact .el files and running the eleven existing synthetic ERT definitions. No daemon, startup, native source load, byte compilation, operator buffer, credential, network or service action."
+ :bounds {:timeout-seconds 30 :kill-grace-seconds 5 :parent-seconds 40
+          :cpu-seconds 25 :address-space-bytes 1073741824 :output-file-bytes 1048576 :core-bytes 0}
+ :environment "Clear inherited environment; HOME/XDG_CONFIG_HOME/XDG_CACHE_HOME=/nonexistent, PATH=/usr/bin:/bin, LC_ALL=C. Fresh task-owned private cwd, retained bounded outputs and an exclusive persistent admission marker."
+ :pre-and-post "Verify binary, timeout, both candidate hashes and both existing native source/test hashes. Capture exact test count, pass/fail/skip count and exit; no automatic retry or substitution."
+ :interpretation "Only actually exercised synthetic assertions can qualify. Even a green result does not establish the sole cause of the former failures, composed binding/transition enforcement, real identity/consent, durable state, native atomicity or whole S4A."
+ :preservation "Retain all prior versions and failed evidence; no cleanup deletion or installed-state change."}

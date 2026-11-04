@@ -1,0 +1,14 @@
+{:report/id :s4a-synthetic-model-source-snapshot-v5
+ :kind :coordinator-owned-source-snapshot
+ :repository :spacemacs-d
+ :branch "feat/oikos-native-capability-20261103"
+ :head "ccfb7748c4dbca3bb56488c3504b5476b846ebe3"
+ :paths [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "5989ab40dc823fe9628997d5f85cd34ffb1d468677845ac9e2ee04257535fbec"}
+         {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "2dfbd3293f766130bc8bacd04796cf6d66b39a25ddb868fc0a37d7649a5693e0"}]
+ :qualification "reviews/s4a-synthetic-owner-model-runtime-review-v4.edn; eleven exercised synthetic ERT assertions only."
+ :git "Verified intended task worktree branch, no staged changes, exact two hashes and whitespace before explicitly staging and committing only these two paths. Ordinary new commit, no amendment, branch switch, reset or force push."
+ :preservation "Existing untracked .batch-home/ and native .elc artifacts remain untracked and untouched. Existing native source/test and startup files are unchanged."
+ :not-claimed [:whole-s4a :native-owner-admission :live-emacs :real-consent :authentication
+               :durability :atomic-effects :binding-transition-composition :full-make-test
+               :byte-compilation :publication :installation]
+ :next "Independently review the bounded pure composition plan before new source hashes or tests; qualify any real owner adapters separately."}

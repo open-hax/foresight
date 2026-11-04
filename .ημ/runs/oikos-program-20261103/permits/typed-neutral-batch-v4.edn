@@ -1,0 +1,29 @@
+{:permit/id :typed-neutral-batch-v4
+ :kind :one-shot-owned-neutral-qualification-admission
+ :status :admitted-not-executed-by-this-record
+ :date "2026-11-04"
+ :source :recommended-path-standing-authorization
+ :review "reviews/typed-neutral-source-review-v12.edn"
+ :controller {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v4.py"
+              :sha256 "71db1a8f4925cd2828dfe12509b2f988bd88e8cfc45e9389bdc3e69747edfb0a"}
+ :inventory {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v6.json"
+             :sha256 "73e047b2fe10bc33019e5d9cfd6bf3ae97a6ce8f031e7eee2f93da33840b026b"
+             :scope "Only the four reviewed neutral source entries, not the stale typed roots, Java or dependency graph."}
+ :host {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/host-pins-v1.json"
+        :bytes 7062 :sha256 "dfaa118d60d9892000223f9dcaf5ccd34c791a246000af01edb9c79b6ccee0fb"
+        :selected-files 26 :selected-bytes 13290597
+        :scope "Interpreter, env, installed dbus Python/native modules and selected critical native libraries including libseccomp. Cooperative selected-host-input pins, not a whole-runtime hermetic attestation."}
+ :entry "/usr/bin/python3.12 -I -B /tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v4.py 73e047b2fe10bc33019e5d9cfd6bf3ae97a6ce8f031e7eee2f93da33840b026b"
+ :environment "Fixed cleared PATH=/usr/bin:/bin and LANG=C.UTF-8; controller uses the explicit owned /run/user/1000/bus, not caller discovery. Child receives fixed private HOME/XDG/TMPDIR."
+ :profile [:positive :timeout :output :pipe-close-descendant :exception-cleanup :guard]
+ :additional-fixture "One trusted bootstrap wrapper dies after spawning one separately sessioned synthetic descendant, all inside the exact owned unit. Verify actual identity, resource controls and absence; no claim of success from source."
+ :bounds {:unit-runtime-seconds 90 :stop-timeout-seconds 5 :controller-seconds 110
+          :parent-timeout-seconds 120 :memory-bytes 268435456 :tasks 64 :cpu-percent 100
+          :controller-output-bytes 1048576 :guarded-case-output-bytes 1048576}
+ :preflight "Verify every pinned host and neutral source byte, directory ownership/modes and one-shot marker before invoking once. Actual kernel memory/pids/CPU controls and manager identity must pass before GO. Unsupported or ambiguous observations fail, with no direct execution or automatic retry."
+ :directory-metadata "Observed agent-owned neutral source root was 0775; changed only that exact directory to 0700, preserving inode/owner and all contents. Private fixture directory and /run/user/1000 already read 0700. No unrelated path changed."
+ :outcomes "Record exact invocation, GO state, case outcomes and anchored cleanup. A failed qualification or verified cleanup is not a test pass; uncertainty is never absence. Even a neutral pass does not admit Java or owner application tests."
+ :postflight "Rehash all selected host and neutral inputs, retain result and logs locally, independently assess actual observations before any subsequent execution scope."
+ :held [:java :typed-tests :go-build :govone-fixture :ocr :models :operator-services
+        :personal-capture :external-network :artifact-replacement :shx-relock :cleanup-deletion]
+ :retry "At most one invocation under this permit, guarded by an exclusive retained local attempt marker. No automatic retry, service restart or alternate transport."}

@@ -1,0 +1,13 @@
+{:source "src/oikos/law/i3_collector.cljc"
+ :sha256 "5af0c0bd6629e9ec02dbb83cd5147d1acf1e42357987184432a478f0020a5b5f"
+ :changes ["Rejection binds unchanged predecessor head; accepted proof binds proposed head."
+           "Expired and exhausted attempts do not emit new work; late exact acknowledgements retain admission facts."
+           "Freshness validates cut timing and frozen replay coverage."
+           "Loss saturates generation, marks pending stale, and derives uncertainty from frozen active-gap coverage."
+           "Wire vocabulary includes input."]
+ :verification {:bb {:tests 11 :assertions 93 :failures 0 :errors 0}
+                :nbb {:tests 11 :assertions 93 :failures 0 :errors 0}
+                :edge-nbb {:tests 4 :assertions 33 :failures 0 :errors 0}
+                :clj-kondo {:errors 0 :warnings 0}}
+ :limits ["Fixtures and owner proofs are unauthenticated synthetic data; state validation does not prove cryptographic provenance or full state-machine reachability."
+          "Inherited full suite and independent review remain with parent."]}

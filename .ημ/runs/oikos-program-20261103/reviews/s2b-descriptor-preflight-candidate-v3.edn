@@ -1,0 +1,20 @@
+{:review/id :s2b-descriptor-preflight-candidate-v3
+ :status :candidate-not-independent-review
+ :scope :s2b-f6-offline-only
+ :semantic-digest "638c2e5e10c3954e2900f610a4542cb82eab213277f63ad230c0bbd5578a35fa"
+ :permit-sha256 "d1b6273b40c7152a0b56658d655c0b8d35a0b19467bc2a6c60848c89549d0ebf"
+ :observed-sha256 {"docs/contracts/i3-collector-v1.edn" "cbecc5ed4cc767355785d72da49605c03e5db8d4e5f974ea4d79c5c4f0e302e1"
+                   "scripts/test_i3_collector.clj" "c9ef73d49249868950c1caf8dbe022b1864f9ea277c565c52d1431c4320d6c4d"
+                   "test/oikos/i3_collector_runner.cljc" "998afb99dd44f976e4f4cad56c0ae164bd6390797ed9bb8d7610f8560dde5890"}
+ :binding "Descriptor records seven source hashes, excluding itself. The semantic payload excludes source hashes and digest. The invoker authenticates the validator bytes before loading it. External parent permit and 13 frozen pins are checked from actual bytes. Metadata is synthetic and confers no authority."
+ :preflight {:bb "PASS: Collector closed descriptor preflight: OK; 7 negative oracles refused"
+             :nbb "PASS: Collector closed descriptor preflight: OK; 7 negative oracles refused"
+             :oracles [:version :unknown-field :payload-tamper :digest :source :frozen-pin :permit]
+             :method "Oracles alter persistent descriptor/hash-map copies only. Both runtimes hash current bytes and the Clio canonical EDN payload."}
+ :lint {:command "clj-kondo --cache false --lint scripts/test_i3_collector.clj test/oikos/i3_collector_runner.cljc" :errors 0 :warnings 0}
+ :suite {:command "timeout 15s bb scripts/test_i3_collector.clj" :exit 124
+         :observed "Invoker and BB/NBB preflights passed; BB law suite started, did not complete within timeout, child terminated with 143. No joint green is claimed. Earlier 120-second run also timed out. NBB law and edge suites not reached in these runs."}
+ :limitations ["Concurrent law and edge changes may invalidate the seven provisional bindings. Parent must refresh all seven descriptor source hashes after both writers settle, then rerun all preflights and gates and request exact-byte independent review."
+               "If shared runner changes, update its separately embedded hash in scripts/test_i3_collector.clj before recomputing descriptor source bindings."
+               "The shared runner loads test namespace definitions before preflight; tests are not run until both runtime preflights pass."
+               "Native ordering, actual owner admission, private adapter access, operational currentness and S2B completion remain held."]}

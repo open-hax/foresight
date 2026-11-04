@@ -1,0 +1,32 @@
+{:report/id :oikos/axxium-drive-live-route-plan-v4
+ :report/status :local-instance-and-grant-unverified
+ :scope "Read-only inspection of the exact PR checkout, named process metadata, public loopback health status, and local archive sizes; no Drive operation or credentials."
+ :source {:checkout "/home/err/.local/share/codex-work/axxium-pr19-google-live"
+          :head "887c485270904ed368890834f63064b2008a4067"
+          :prior-review "axxium-drive-current-source-v3.edn"
+          :pins [{:path "README.md" :sha256 "6caeb479ced4cc2e72bbfe9c8f1e09028dd1cdd4951d0b49f962ae7f14a1a87d"}
+                 {:path "docker-compose.yml" :sha256 "7e16bf19647d758692c0a1c276b16dc2e8ec351dacda390f1c64d1ad95b1e0dd"}
+                 {:path "scripts/verify-local-identity.mjs" :sha256 "3e1f1512fc3407bbffcc187751440db011977c5deb12de03ad7baeb3065abb8f"}
+                 {:path ".ημ/verification/axxium-personal1-native-findings-20261006/README.md" :sha256 "b5b4d5feff3d6fd3c438156bd70cd927d3b2c559493633c0c07a674f49aa77b6"}
+                 {:path "src/cljs/axxium/routes/health.cljs" :sha256 "add4908bde250e5b9fb9aa5a2382d3d9f65ebb6eedf110c73b66c6ac1d384b04"}
+                 {:path "package-lock.json" :sha256 "cd02c3c8566e5935b9f3d0f16d519a56700ee6c059f15aff2d8fe2a3ce459cfe"}]}
+ :discovery [{:evidence "README lines 89-90 and 102-115 advertise /health, default port 8787 and 127.0.0.1 base URL. docker-compose.yml lines 2-6, 28-30 names container axxium, maps 8787 and checks localhost:8787/health. These are defaults/configuration, not evidence the PR is running."}
+             {:evidence "scripts/verify-local-identity.mjs takes a loopback origin from configuration and exercises sign-in/identity, not Drive linking; the script was inspected, not run."}
+             {:evidence "The sole identified retained verification README describes an unrelated personal PR1 fixture run and explicitly says no real database, provider callback, application service or deployment was exercised. Owned run filename discovery did not identify a live Drive rehearsal artifact in the inspected checkout."}
+             {:evidence "Named Docker inspect for axxium returned 'no such object'; current user's PM2 metadata had no process named axxium-local. These checks do not cover other names, users, machines or supervisors."}
+             {:evidence "A bounded unauthenticated GET http://127.0.0.1:8787/health returned HTTP 404; error body was not read. A listener exists at that address, but its identity, build and relation to Axxium are unknown. The source health response's static 0.1.0 version would not prove a commit even on a 200."}
+             {:evidence "Compiled Drive-named artifacts exist under this checkout's dist/cljs-runtime, but their presence does not prove an active process, a revision match, or an existing linked account."}]
+ :missing-evidence ["Exact nonsecret run/rehearsal artifact or start-script location naming the previously tested local Drive instance and its port or service name."
+                    "A nonsecret mapping from that named live process or container to the deployed source/build revision, and evidence that the intended owner already linked Drive with a usable drive.file grant."
+                    "Evidence that the selected destination belongs to the intended private protection domain and is accessible to that app's grant; an rclone folder name alone is insufficient."]
+ :archive-plan {:status :design-only
+                :selection "Use exactly the retained tar and manifest named in ocr-drive-preservation-v2.edn; do not alter source files."
+                :encoding "Read each file as bytes; independently verify expected byte count and SHA-256 from the preservation report. Encode each as canonical RFC 4648 base64 without line breaks. Put both strings and their SHA-256 values and byte lengths in one versioned EDN map as :drive/value, with a unique reviewed .edn name and only a qualified private folder ID."
+                :size {:archive-bytes 40960 :archive-base64-bytes 54616 :manifest-bytes 2284 :manifest-base64-bytes 3048 :base64-total-bytes 57664
+                       :sample-edn-value-bytes 57901 :sample-json-rpc-body-bytes 58002
+                       :sample-qualification "Measured from same-size ASCII placeholder strings, two 64-character hash fields and fixed example name; optional folder ID and extra metadata excluded. Compute actual UTF-8 bytes of the complete final EDN, JSON body and multipart envelope before any execution."
+                       :rpc-bound "PR source Fastify constructor does not set bodyLimit; the installed checkout's node_modules/fastify/lib/config-validator.js gives default 1048576 bytes. Sample request is below that default, but deployed build/config and intermediary limits are unverified."
+                       :google-bound "docs/google-drive-resource.md:92 states multipart <=5 MB; sample EDN content is far below 5 MB. Verify final multipart overhead and live applicable limits; this is documentation, not a measured provider acceptance."}
+                :after-qualification "After the existing owner, grant, build, endpoint and private folder are independently qualified, and the exact envelope is reviewed, issue drive_put once through POST /api/drive/mcp and retain its returned resource ID. Call drive_get for that exact ID, parse the returned EDN, strictly decode both base64 strings, and verify decoded byte lengths and SHA-256 against the original archive and manifest and the preservation report. Inspect tar members and hashes as specified by the preservation report. No backup claim until full readback succeeds."
+                :failure "If put is ambiguous, reports exists-untracked or created-untracked, or persistence fails, stop for explicit reconciliation: do not blind retry, overwrite, delete or adopt. Keep originals and existing local snapshot."}
+ :boundary {:tests-executed false :new-consent false :login false :token-exchange false :drive-rpc false :upload false :download false :service-start-or-restart false :credential-env-cookie-or-ledger-read false :source-edits false}}

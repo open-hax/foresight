@@ -1,0 +1,28 @@
+{:id :govone-internal-capacity-source-candidate-v4
+ :status :blocked-no-candidate
+ :authority :none
+ :owner "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+ :observed-head "259df13d175bde68c841156fdbfcde38c8444fce"
+ :initial-git-status "git status --short emitted no entries"
+ :source-edits :none
+ :four-source-hashes {"internal/inference/service.go" "1a60f705877c41bf6df98127629bb3ccfb406fb744952ca6f46cfd8467f7d646"
+                      "internal/pipeline/context.go" "4a71294fffbb840fbf40dfab6f80e43340a0063b3aa94b3ca4f0e5fe9d4ffbb8"
+                      "internal/inference/capacity_evidence_test.go" :absent
+                      "internal/pipeline/capacity_evidence_test.go" :absent}
+ :test-source-completeness :none-written
+ :red :unwritten-and-unexecuted
+ :green :unwritten-and-unexecuted
+ :static-evidence {:fixture-lines 825
+                   :fixture-sha256 "dba449f2fea4dc1b94285cb6b34d655f65bfec3425c5ac7d0a2530c109ffcd36"
+                   :go-mod-sha256 "d98ac1461da72048026c141cd1375421c6934e6c3937cc5048c296c594b218dd"
+                   :go-sum-sha256 "8991f8bfbeccb3e31df27a42f4901a5a0a790e5c2937c4c55da93f5d30db9a90"
+                   :gofmt :not-run}
+ :blocker {:kind :required-real-service-test-construction-not-established
+           :observations ["The existing inference test harness injects stub classifier, policy, router and audit appender; its AppendTx delegates only to its own nontransactional Append."
+                          "The production constructor admits an injected transactional audit appender and EvidenceDB; admitStageEvidence invokes AppendTx, inserts the projection and producer, then commits."
+                          "Runtime assembles the real classifier, signed policy service, router, SQLite audit service and inference service internally; its returned Stack does not expose the inference or policy service for replacing the appender."]
+           :need "Construct and source-review a real signed-policy/classifier/router test composition with a real SQLite audit service and a transaction-delegating interceptor using the existing NewService seam, including post-commit event/projection linkage and rollback assertions. No evidence establishes that a broader source scope is necessary; no substitute mock or precommit admission claim is acceptable."
+           :decision "Stop without a partial production change: required test-first oracles and concrete composition have not been authored or verified in this turn."}
+ :holds [:N1 :real-fixture-request-decision-version :signed-policy-causation :warm-cache-invalidation :source-test-completeness :exact-diff-independent-review :dependency-ready-credit :offline-build-and-test-admission :guard-qualification :runtime :independent-anchor]
+ :execution "No Go build, test, run, list, mod, application initialization, network, probe, or dependency acquisition was performed."
+ :next "Have the coordinator assign the required source-only test composition and review before production edits; preserve the same execution holds."}

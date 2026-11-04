@@ -1,0 +1,27 @@
+{:candidate/id :s4a-synthetic-owner-model-actual-red-fix-v3
+ :authority :none
+ :verdict :source-fix-unverified-same-independent-reviewer-required
+ :actual-red {:result "/tmp/opencode/oikos-s4a-model-ert-9b006b88-6a62-4a25-ba25-a933d8d864d7/result.json"
+              :stderr "/tmp/opencode/oikos-s4a-model-ert-9b006b88-6a62-4a25-ba25-a933d8d864d7/stderr"
+              :exit 1 :tests 9 :passed 5 :failed 4
+              :failures [oikos-owner-model-binding-swaps oikos-owner-model-golden-transcript
+                         oikos-owner-model-read-golden oikos-owner-model-record-totality]
+              :postflight :all-source-binary-native-pins-matched}
+ :previous-review {:path "reviews/s4a-synthetic-owner-model-fix-review-v2.edn"
+                   :sha256 "cba613653b23ad47bf0e0b1154da75c67c76d0b7922c9577862a4c8ded1f2"}
+ :diagnosis {:source-evidence "The first alphabetically executed test binding-extra-negatives constructs a read fixture. The fixture constructor returned a backquoted alist containing literal cons cells; the read helper destructively setcdr on its op cell. Literal cells in such constructed templates may be shared by later calls, so that mutation can change later replace fixture op to read while retaining its replacement key. Closed invocation validation then denies it. The first test passed before the later four failures, consistent with this shared-fixture mechanism; exact runtime confirmation on revised source is still unrun."
+             :fix "Copy the fixture tree before the read helper mutates it; retain both exact independent golden byte strings and hashes. Add repeated alternating positive read/replace invocation, resource, issue and final assertions, and assert a positive snapshot before binding-negative cases. Make digest nil input return nil; fixture helper asserts transcript exists before digesting it."
+             :qualification "The previous batch only establishes nil outputs and failure locations, not a captured trace of the op cell; the proposed precise causal mechanism requires independent source review and a newly admitted isolated run. No encoder or golden was weakened."}
+ :clock {:change "Require overlap between the current synthetic UTC interval and the prior interval translated by monotonic elapsed time; reject overflow of translated bounds and prior uncertainty bounds. This models ideal rate, not a real oscillator or trusted time adapter."
+         :tests "Add frozen UTC after monotonic advance negative, elapsed positive, uncertainty overlap positive, discontinuity and safe-integer overflow negatives."}
+ :files [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "5989ab40dc823fe9628997d5f85cd34ffb1d468677845ac9e2ee04257535fbec"}
+         {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "2dfbd3293f766130bc8bacd04796cf6d66b39a25ddb868fc0a37d7649a5693e0"}]
+ :static {:balanced-text :pass :lexical-cookies :pass :source-test-definitions 11
+          :goldens [{:bytes 285 :sha256 "d602c5e910ea2fb67ae73845dcd57f1724ca22a144b84f3af8f7d5043fb8e69c"}
+                    {:bytes 291 :sha256 "5a7251b0f9d6159def0d755bb8fef0799ef351c86a346c07d59c5e2197d91c06"}]
+          :limits "Python text scan and hashes do not parse or execute Elisp and are not a test pass."}
+ :preservation {:native-sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"
+                :native-test-sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}
+ :holds [:binding-transition-composition :real-identity :human-consent :native-effects :real-clock :durability :cross-process-fence :whole-s4a]
+ :next "Same independent reviewer inspects exact new hashes; any fresh isolated batch requires a new explicit admission and a new expected count of 11."
+ :execution {:new-emacs-runs 0 :ert-reruns 0 :native-operations 0 :credentials 0 :git 0 :board 0 :ledger 0 :nested-agents 0}}

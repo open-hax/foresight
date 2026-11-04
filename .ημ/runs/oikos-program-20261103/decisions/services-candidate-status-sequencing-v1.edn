@@ -1,0 +1,17 @@
+{:decision/id :services-candidate-status-sequencing-v1
+ :date "2026-11-04"
+ :source :coordinator-under-recommended-path-standing-authorization
+ :authority "Recommended necessary engineering and documentation work only; no fabricated owner or native reviewer identity."
+ :inputs {:plan "reviews/services-dev-handoff-plan-v2.edn"
+          :review "reviews/services-development-handoff-review-v4.edn"
+          :finding "SDHD-P2-1"
+          :candidate "open-hax/services@d4f6ff570c7b8d2921bdf1a854c521681c96ff6b"}
+ :problem "The approved plan conditioned README/deployment-model links on owner release, while the five-file candidate labels those links as candidate-only. The text is not a false release claim, but preparing it before release did not satisfy the stated sequence."
+ :proposed-plan-amendment "Permit the exact candidate-only README.md and docs/deployment-model.md status/link preparation before release, subject to independent review of this explicit sequencing correction. Source qualification, candidate documentation, scoped owner release and Oikos consumer acceptance remain four distinct states. This does not retrospectively assert that the old sequence was followed."
+ :ceiling ["README.md" "docs/deployment-model.md"]
+ :preserved ["No change to the seven runtime source pins, frozen specification, tests or historical report."
+             "No claim of release, installation, consumer acceptance, production or S1B completion."
+             "The complete immutable owner artifact must pass privacy, source/evidence custody and retrievability checks before the separate explicit development handoff."
+             "No change to current Services installed state or operational service."]
+ :status :awaiting-independent-sequencing-and-exact-candidate-recheck
+ :next "Same candidate reviewer checks the plan amendment and exact candidate; approval does not itself issue the owner handoff."}

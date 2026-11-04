@@ -1,0 +1,44 @@
+{:review/id :s6a-govone-fixture-source-fix-review-v2
+ :review/type :same-independent-source-only-recheck
+ :verdict :changes-requested
+ :authority :none
+ :input {:repository "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+         :base "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+         :prior-reviewed-head "78824909e152bdc99e589e054387bbae41de85e6"
+         :policy-teardown-head "6d8f8b0766929161494a07c0452aa674864a5031"
+         :head "259df13d175bde68c841156fdbfcde38c8444fce"
+         :file "cmd/govone-dev/s6a_fixture_test.go"
+         :file-sha256 "dba449f2fea4dc1b94285cb6b34d655f65bfec3425c5ac7d0a2530c109ffcd36"
+         :diff "one new 825-line file against base; tracked worktree clean when checked"
+         :oracle-plan-sha256 "3fffe5eca1c9d280cabc935b7416bb50fea2c0cb963e6d5b409f4979c4e59c54"
+         :policy-teardown-report-sha256 "e239a8d7f747dc1c16d0859d52a5a0a290f61e0cfa8942253b7defa716cf426d"
+         :oracle-report-sha256 "d7baa7f125f904807a72712ceb67a0fa4620e2b0ab8365d84a9ba7b11b4dafe4"}
+ :findings
+ [{:id :N1 :priority :P1 :relates-to :F1
+   :anchor "cmd/govone-dev/s6a_fixture_test.go:630-667,711-729"
+   :problem "The signed-deny assertion accepts 503 GOV_INFER_0003/capacity_unavailable plus a failed route projection. This does not distinguish the intended no-local-candidate branch from a genuine unrelated capacity-check failure. A previous allow success, absence of active local endpoints from an earlier API list, and a separate dry-run active deny do not establish that this specific completion reached the intended no_local_endpoints branch. An endpoint-store read error during the deny completion can produce exactly the accepted envelope and failed route while a regression in completion policy evaluation would otherwise have allowed external dispatch."
+   :source-causality ["internal/inference/service.go:1065-1081 evaluates the policy then calls measuredLocalCapacity; :1672-1680 returns checker errors."
+                      "internal/router/service.go:112-131 maps an endpoint store ListModelEndpoints error to capacity.ErrUnavailable, whereas the desired no_local_endpoints result is a distinct successful checker return."
+                      "internal/inference/service.go:1085-1096 can intentionally convert that successful no_local_endpoints result to capacity.ErrUnavailable when local-only resolves with hypothetical local capacity and does not resolve without it; policy/service.go:541-553 makes this a plausible signed-deny branch."
+                      "internal/inference/service.go:1098-1117 emits the same 503 GOV_INFER_0003 reason capacity_unavailable and failed route audit for remaining capacity errors; :2216-2229,2285-2291 projects no discriminating capacity-failure cause. internal/goverror/error.go:310-313 permits only the broad reason. Thus the expected 503 is source-plausible but not uniquely attributable by the asserted evidence."]
+   :minimal-fix "Do not count this 503 alone as the signed-policy/cache negative. Implement a source-supported discriminating control/oracle within the one-file grant that demonstrates the request's deny decision separately from unrelated capacity errors, or require the 403 branch when feasible and fail/record the 503 as inconclusive. If no existing authorized seam can distinguish these paths, preserve the precise owner observability gap and seek an explicit scope decision; do not label capacity as policy denial or claim warm-cache denial from the ambiguous 503. An allow-after-deny control can add confidence but cannot by itself exclude a transient failure during the denial request."
+   :future-oracle "Under separately authorized execution, an injected/transient endpoint-list failure at the deny request must not pass as evidence that the signed deny stopped egress; the genuine no-local case must be identified by discriminating evidence or reported as inconclusive, with zero captures and no generic-success promotion."}]
+ :prior-finding-dispositions
+ [{:id :F1 :status :open-partial-correction :anchors ["s6a_fixture_test.go:491-535,630-667,688-729"]
+   :assessment "Strict bounded errors, failed-route or preflight event association, zero capture and warmed public control replace the former arbitrary-error acceptance. The same capacity ambiguity also applies to internal/MRN capacity branches: their no-egress observation is real if later executed, but a broad capacity failure alone cannot prove the intended sensitivity-caused branch. N1 specifically blocks the claimed signed-deny warm-cache causal oracle."}
+  {:id :F2 :status :settled-for-source-only :anchors ["s6a_fixture_test.go:613-628,677-700" "internal/classifier/service_test.go:20-43"]
+   :assessment "Exact decoded user message requires the full placeholder at the expected location and checks actual classified span, formatted literal and normalized digits in both frame and decoded content; successful narrowing uses the same checks. This remains observed output plus source-grounded inference, not direct intermediate-classifier evidence."}
+  {:id :F3 :status :settled-for-source-only :anchors ["s6a_fixture_test.go:316-377,456-476,491-500" "internal/controlplane/service.go:876-906,951-981"]
+   :assessment "Distinct validly signed stale candidate and a different candidate signed by an independently generated wrong key are rejected; profile identity/revision and active dry-run version/capabilities are checked after each. B reads endpoint/profile/system and sessions require exact active version. Future execution still needed."}
+  {:id :F4 :status :settled-for-source-only :anchors ["s6a_fixture_test.go:183-219,536-612,669-687" "internal/inference/service.go:1224-1270,2216-2229,2285-2295" "internal/httpserver/stage_api_evidence.go:91-103,126-165,186-205,263-271"]
+   :assessment "Exact deterministic output and response IDs, true tenant chain, event sequence/hash checks and source-linked verified route/inspect projections are asserted. Route is correctly associated by single-completion session and order, not an invented response ID. Hashes and classify/redact events do not disclose their payloads; independent anchor remains unavailable."}
+  {:id :F5 :status :settled-for-source-only-with-supervisor-hold :anchors ["s6a_fixture_test.go:123-134,160-173,419-447" "internal/runtime/runtime.go:69-76,149-171"]
+   :assessment "The deferred B owner joins admitted handlers and successfully shuts down B before final capture snapshot/preservation and hook restoration. On build/drain/shutdown failure it records incomplete capture and retains the hook; a separately qualified external supervisor must retain and terminate the process. Source does not establish that supervisor exists or has run."}]
+ :limits {:classification "Actual per-request classifier/redactor internals are not projected; known-input and final-output causation is source-grounded inference, not direct observation."
+          :negative-evidence "No accepted error code or route failure projection alone identifies the precise denied rule or proves the original classifier result."
+          :guard "Status and one socket EPERM in fixture are sanity checks only, not whole-filter/ABI/FD/descendant qualification or an unexpected-attempt detector."
+          :held [:independent-guard-qualification :exact-build-admission :exact-binary-review :fixture-test-execution :actual-govone-results :consumer-transport :real-network :LLM :OCR :independent-anchor :whole-P4]
+          :dependency "Reported private modfile/adjudicated checksums remain a future separately reviewed seam; no cache, compilation or lock mutation was performed here."}
+ :actions {:performed [:read-full-candidate :read-owner-source :read-oracle-plan-and-author-reports :inspect-git-and-hashes :write-only-this-review]
+           :not-performed [:compile :test :vet :build :runtime :socket :guard-probe :network :source-edit :commit :push :PR :board :ledger :nested-agent]}
+ :next "Resolve N1 within the one-file grant or explicitly retain the owner-observability gap; then obtain fresh exact-head independent source review with all execution holds intact."}

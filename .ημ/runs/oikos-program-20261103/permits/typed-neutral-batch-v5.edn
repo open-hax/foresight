@@ -1,0 +1,23 @@
+{:permit/id :typed-neutral-batch-v5
+ :kind :separate-one-shot-owned-neutral-qualification-admission
+ :status :admitted-not-executed-by-this-record
+ :date "2026-11-04"
+ :source :recommended-path-standing-authorization
+ :review "reviews/typed-neutral-dbus-fix-review-v14.edn"
+ :prior "reviews/typed-neutral-attempt-v4.edn; failed pre-release permit remains consumed, not reset or retried."
+ :controller {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v5.py"
+              :sha256 "8ed4c009e9968867a1adf1e6e84dd81372b8aeab7396520e4ab7d6e235ef1acf"}
+ :inventory {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v6.json"
+             :sha256 "73e047b2fe10bc33019e5d9cfd6bf3ae97a6ce8f031e7eee2f93da33840b026b"
+             :scope "Four unchanged independently reviewed neutral source pins only, not typed roots/classpath/Java."}
+ :host {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/host-pins-v1.json"
+        :sha256 "dfaa118d60d9892000223f9dcaf5ccd34c791a246000af01edb9c79b6ccee0fb"
+        :selected-files 26 :pre-and-post-verification :required}
+ :entry "/usr/bin/python3.12 -I -B /tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v5.py 73e047b2fe10bc33019e5d9cfd6bf3ae97a6ce8f031e7eee2f93da33840b026b"
+ :unchanged-profile "The exact six neutral cases and trusted separate-session descendant fixture, cleared environment and private directories from permit v4. No Java, typed test, Go, OCR, model, private capture or external network."
+ :bounds {:unit-runtime-seconds 90 :stop-timeout-seconds 5 :controller-seconds 110
+          :parent-timeout-seconds 120 :memory-bytes 268435456 :tasks 64 :cpu-percent 100
+          :controller-output-bytes 1048576 :guarded-case-output-bytes 1048576}
+ :gate "Exclusive retained v5 attempt marker, exact host/source pin revalidation, manager identity and actual kernel cgroup controls before GO. No name-stop, unknown-unit adoption, direct launch, force or automatic retry."
+ :interpretation "Even a neutral pass qualifies only these finite guard/lifecycle observations. Any Java or owner application test requires a separately reviewed fresh source inventory, profile, budgets and explicit admission. Failed or unavailable cleanup remains unconfirmed."
+ :preservation "Retain old failed unit, every old version, all attempt markers and logs; no cleanup deletion or credential access."}

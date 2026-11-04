@@ -1,0 +1,50 @@
+{:review/id :services-oikos-development-consumer-acceptance-v1
+ :kind :independent-oikos-consumer-source-prerequisite-assessment
+ :date "2026-11-04"
+ :verdict :accept-development-inert-edn-source-prerequisite-only
+ :scope "Accept the exact Services development source and externally issued scoped handoff as an inert-EDN fixture prerequisite for subsequent Oikos source-composition assessment. This is not acceptance of an integrated adapter, actual fixture, operation, installed selection, service, deployment, Bash or whole S1B."
+ :inputs
+ {:permit {:path "permits/services-development-handoff-d4f6ff57.edn" :sha256 "f565b7f8b2097e70892a38b2e652155651a10d84ed038b141256e09e8694c0de"}
+  :readback {:path "reviews/services-development-artifact-readback-v2.edn" :sha256 "1cad54f9f13c90f9a1294ac153d804bf16197a49c2fbb2ee0ce11ba4058fa49d"}
+  :plan-v2 {:path "reviews/services-dev-handoff-plan-v2.edn" :sha256 "55d3f3160ba10a6a305de2fb788d2adcd473a8ad978334797540c8878120f5d3"}
+  :runtime-review {:path "reviews/services-generation-fix-review-v2.edn" :sha256 "5f565e3e2729c3461137a6a20f7fbbdc3bc8365c56965b217eab3a4cad983025"}
+  :author-report {:path "reviews/services-recovery-ingress-fix-v3.edn" :sha256 "4a309b65c71e01eb944e80cb3cdd35fa5aa34b10a22a5c28eb96c05fd73dd7b2"}
+  :docs-review {:path "reviews/services-development-handoff-fix-review-v5.edn" :sha256 "27c078515c8ebd02baf416f9663d57fd12b0f912a9ef6d816ecce78edd826ccd"}
+  :custody-review {:path "reviews/services-development-publication-custody-v1.edn" :sha256 "002fb65bdcb155e8a877a970f17cd4b6471d13ad36739b5de4ebc3d6eb19e54f"}
+  :publication-decision {:path "decisions/services-source-artifact-publication-v1.edn" :sha256 "38d010dea08be2aa82d395c1af75bb9623bdc5056a50b85b021da3d213db68d1"}
+  :s1a-permit {:path "permits/s1a-accepted-62e6eebb.edn" :sha256 "1b775f895307ebd3fae8cc670a139dcaf91036aec9e6c208dd6e4ecc9ae3e70d"}
+  :s1b-authorization {:path "decisions/s1b-owner-prerequisites-authorization.edn" :sha256 "6e70550b7b46776624a7cb5ca3f2b73a52b49b12f9d6341b82966149dda91ac5"}
+  :shx-review {:path "reviews/shx-safe-bash-fix-review-v4.edn" :sha256 "fd30ce93ca9522170488ae34e0a97d9c174baf5da616852a69e6e395eec283b4"}
+  :shx-diagnostic {:path "reviews/shx-cleanup-root-cause-v1.edn" :sha256 "5e3c2a0c71b3b71641437308aa2ef1edd2edba79a12fa3d53a54cc43855af456"}}
+ :source
+ {:repository "open-hax/services" :artifact-commit "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b" :artifact-tree "d54a348e1346fec8230b09a8dd6e1c0eba6aae88"
+  :ref "refs/heads/artifact/oikos-local-generations-d4f6ff57"
+  :reviewed-runtime-commit "b2973ef9e3246522324dec4658fbeb093ffab147" :reviewed-runtime-tree "daf053cce6b24c8d62f59e660b90b6c92a5bbae2"
+  :pins {"scripts/local_generation_fs.py" "41e633799724639ede651f039f087a602d1df6a8ef10721f4792088cbbdc6537"
+         "scripts/local-generation.clj" "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+         "scripts/local-generation-laws.clj" "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+         "src/services/local_generation.cljc" "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"
+         "scripts/local_generation_runner.py" "64c5a79d0f0fa84b953846ab99bffc186df31d113ccaa4fa031082d9a17c2175"
+         "scripts/local_generation_edn.py" "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+         "scripts/local_generation_wire.py" "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"}
+  :frozen-spec-sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+  :test-source-sha256 "22a209935574805ab04282b46c68c0af6c8febaec02c98bba47085e37dbfc9e2"
+  :descriptor-sha256 "4aeba4c203db2fe3347021713390f5f0b81a251f14477dc51ad4ceeaa108ecb8"
+  :recipe-sha256 "496fbc4c668f6407c89da98de611fb63a510f1e0aa94b482d549ee1df5250091"
+  :baseline-check "Independently read Git objects: both trees match; the artifact differs from reviewed runtime in exactly README.md, docs/deployment-model.md, docs/local-generation-engine-notes.md and the two new descriptor/recipe files. All seven source blobs, spec and filesystem test source are byte-identical to b2973ef."}
+ :custody
+ {:independent-readback "Read-only GitHub API using configured keyring after removing invalid environment-token overrides: artifact ref resolves to exact d4f6ff. At the exact commit independently decoded complete remote bytes for the seven sources, frozen spec, filesystem test, descriptor and recipe and compared them to local Git objects; all 11 matched and hashes are above. At open-hax/foresight 792dfa341d380cbf413b925319654d7c2ebec413, independently decoded both descriptor-named review blobs: 8259 and 4611 bytes, both equal local Git objects and input hashes above. This independently verifies those 13 blobs, not all 19 publication paths; the broader 19-path result remains coordinator-attributed."
+  :authority "The descriptor and recipe honestly record candidate/not-issued when written. The later external permit explicitly binds this exact commit, tree, descriptor and recipe and issues a narrower development handoff, under the coordinator's stated user-authorized owner-prerequisite scope. The S1B user decision authorizes owner prerequisite work and later consumption; the permit is a coordinator act, not a fabricated human signature, native reviewer approval or production release. No historical record was rewritten."
+  :privacy "Publication decision explicitly accepts bounded path metadata disclosure; custody scan is not proof of absence of every secret. Remote Git does not preserve ignored fixture caches."}
+ :compatibility
+ {:s1a "Accepted Oikos 62e6eebb provides inert :oikos/profile-edn output with closed {:version 1 :profile ... :bindings ...} projection and :profile-edn-v1 validation. Services inert-edn-v1 instead validates the distinct single {:fixture/value string} map and matching services.inert-edn/v1 descriptor. They are not equivalent formats; no direct S1A-to-Services compatibility, conversion, adapter, fixture or end-to-end proof is asserted. Any future bridge needs separately authorized exact policy, source/interpreter pins, positive format and binding validation and independent review."
+  :s1b "Services owns the trusted fixed no-argument BB facade, fd-3 owner launch, policy/approval and anchored mutation boundary; Oikos must not replace it with another promoter or let renderer/request select trusted policy. The immutable source is a prerequisite only. Whole S1B remains incoming; shx owner release remains held for visible typed dependency warning, cleanup-unconfirmed observations and incomplete independently rerun BB matrix. No dependency or board state was changed."
+  :recovery "For an existing interrupted pending transaction, only trusted owner launch with empty stdin/EOF admits later-ingress capsule recovery; nonempty ingress does not. An admitted operation can separately restore its own failure while retaining its lease. The frozen spec's older startup/re-entry language is not silently treated as the exact-head ingress."
+  :outcomes "Unknown observation/effects remain unknown, including held after:null and target_writes:null; no automatic force, retry or fallback. Support is confined to a private cooperative Linux fixture, not hostile same-UID/root/mount, device-loss or whole-chain atomicity guarantees."}
+ :verification
+ {:this-review "Read permit, source plan, reviews, owner decision, descriptor and recipe, accepted S1A spec and law, and shx holds; inspected exact Git trees, five-file delta and complete source bytes; independently performed 13 remote decoded-byte comparisons and ref readback. No runtime or shape test was run in this review."
+  :previous-independent "Runtime reviewer reports 3 focused, 14 edge, 4 wire/parity and 134 environment tests, BB and NBB each 8 tests/137 assertions, six JVM commands and zero kondo warnings; those are prior reviewer results, not tests by this consumer."
+  :previous-author "Author separately reports 42 native tests and 642 actual SIGKILL occurrences; prior independent reviewer did not rerun the entire aggregate at b2973ef."
+  :not-run [:native-facade :effect-tests :new-fixture :installed-selection :services :java :new-portable-gates :deployment]}
+ :effects {:product-edits false :git-writes false :pr false :board false :ledger false :nested-agents false}
+ :next "Retain this as development source-prerequisite evidence; independently qualify the actual format/adapter and policy-bound fixture and resolve shx owner warning and cleanup gates before S1B integration or transition."}

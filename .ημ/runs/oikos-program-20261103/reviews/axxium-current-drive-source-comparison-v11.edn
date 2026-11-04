@@ -1,0 +1,38 @@
+{:report/id :oikos/axxium-current-drive-source-comparison-v11
+ :status :selected-current-source-compared-synthetic-admission-still-required
+ :repository "riatzukiza/axxium" :pull-request 19
+ :old-head "887c485270904ed368890834f63064b2008a4067"
+ :current-head "3a319a43d1bd8064e8cdd2729db93e3710ae7ddd"
+ :base "fb219506cdd5a0177340efb622605bf0b1073088"
+ :head-check "Native PR head matched before and after retrieval; comparison API reported ahead by two commits, behind zero. This is a point-in-time observation, not a permanent pin."
+ :retrieval {:method "Read-only GitHub contents and compare APIs, gh keyring authentication with GH_TOKEN and GITHUB_TOKEN unset; no pr-flow status because it can append ledger observations."
+             :file-count 16 :total-source-bytes 55473 :max-files 16 :max-source-bytes 1048576
+             :verification "Each contents response length matched GitHub size and its Git blob SHA-1 was recomputed over the exact blob header and bytes; SHA-256 was computed for exact source bytes. Local old bytes were hashed directly."
+             :cache "/tmp/opencode/axxium-pr19-source-compare-17sia7d0" :cache-mode "0700" :file-mode "0600"
+             :manifest-sha256 "0fa1c56459c19e6078609e04d6959f1190686a93b94940b0b9c8854e7f915e13"
+             :ownership "oikos Axxium source comparison; active review. Preserve cache until exact contents are verified recoverable and cleanup separately authorized; manifest has full source/API blob pins and byte counts."}
+ ;; Rows: path relative to src/cljs/axxium, diff status, old SHA-256 or nil, new SHA-256, GitHub blob SHA-1.
+ :files [["extern/token_crypto.cljs" :unchanged "c81f75c738c3c6a9cf4c9ca3ba1d79ab0a972b7ba34f7b0d23d83907eb7b10c7" "c81f75c738c3c6a9cf4c9ca3ba1d79ab0a972b7ba34f7b0d23d83907eb7b10c7" "382b7714e25e7c30ec9ea9fe424f2a7ba6151522"]
+         ["extern/ledger_file.cljs" :unchanged "ef128dcb1982dbee09f290a6c444500c21dc042e4b8b0ee626a2c0a503786f39" "ef128dcb1982dbee09f290a6c444500c21dc042e4b8b0ee626a2c0a503786f39" "50bf5b5e720741f85d2ef19b8e73adea31cf292d"]
+         ["shape/ledger_edn.cljc" :unchanged "95b087a9b430a7a6460cb9a40a7019e7a02b5094c80b3b5b5e4776a0f423909b" "95b087a9b430a7a6460cb9a40a7019e7a02b5094c80b3b5b5e4776a0f423909b" "b39dfc5ef448adaf42b57136ac1f7a2108323d6f"]
+         ["law/event.cljc" :unchanged "2575e89ad2935b795c8f4a06f41251f5975ba9b1b3683925a1a96f18fb194251" "2575e89ad2935b795c8f4a06f41251f5975ba9b1b3683925a1a96f18fb194251" "b7facac8f27a5fad3d3d65ca3303c8216a2c7b05"]
+         ["domain/state.cljc" :unchanged "801b59c5a393a0aeee6f461149571e62cd2b2ca25dd31957e53bc2956715b16f" "801b59c5a393a0aeee6f461149571e62cd2b2ca25dd31957e53bc2956715b16f" "de3fed45212bc08f8bcc848b2a731b4e066fab0f"]
+         ["domain/resource.cljc" :unchanged "35e06ab88f837bbdc835f2254eaa1bc3d71f0534b89741f4891b39fcf7222eb9" "35e06ab88f837bbdc835f2254eaa1bc3d71f0534b89741f4891b39fcf7222eb9" "7c320f4c9b1aa4d3d633e4e42abe4a552b5029fd"]
+         ["domain/drive.cljc" :unchanged "ca356cb46dc30863de9c502e6661ce8f9039dddfab3ced5bb91d55c27cb0a393" "ca356cb46dc30863de9c502e6661ce8f9039dddfab3ced5bb91d55c27cb0a393" "b677b100c7db5843cc5d916373e52ad75d67a5d6"]
+         ["law/google_drive.cljc" :unchanged "f4bce17979ac350cad5840196d45f01590c5b9bbec1fda33c4545475ae96e7b4" "f4bce17979ac350cad5840196d45f01590c5b9bbec1fda33c4545475ae96e7b4" "05ac7c96af218a7ccbed8afb3a50b717e65bccbf"]
+         ["domain/policy.cljc" :unchanged "7b27f9e377f513933b9609e5df1d4dfc7f9a0959c9abd29b1fa1573598570d72" "7b27f9e377f513933b9609e5df1d4dfc7f9a0959c9abd29b1fa1573598570d72" "686b133c50b50fa435d8e8179d80da5bbbf86662"]
+         ["extern/drive_mcp.cljs" :modified "0db0f1cc9a6e3609c1f8e15c2a73487b7d081f8029b5893241d392184c700078" "a47e82de1a5f8b0f4a7e9db5d064dceb068d5038450f1223844847d22505138c" "db78a9682cb649221bf1a85b3cb8dba50ca8c61f"]
+         ["extern/google_drive.cljs" :modified "d04ecbc23068efe61d53647384058fb1b9cd935b9a83a6340f0f17435cdc199d" "f08608d490d9d688251f12be83dd2bc4e31e9f852e803f72eb996453c46fac5c" "e480cf0855a987670f84654ce725e16bac2fe3da"]
+         ["extern/ledger_queue.cljs" :added nil "4d3aff16681501932afbdc0aeb7a7472c3984830381d76892593fd0458766cd8" "ab912c487f7299b0ebe6f44cbc675b7cb0d61402"]
+         ["routes/drive.cljs" :modified "58b9291b9bb7578381f0cab159ef675943f429b3c5e025ce80b5fba2122827af" "046834afbd6bf6062d1b7846a32e90fd2a6c4d1ae6c977ef55b470a43cc04664" "1429f75b12967859e03d0507527b608b3b96ad99"]
+         ["extern/drive_mcp_test.cljs" :modified "76a16bfff591b823447c2a6c287288b28cbdb5aa77f65d3fa1a9fdc4b0b474ae" "9381067c796257177af78504596d0f6b88192c50cc59e68c0f1b72ff0d8d6ace" "a8914d70cbc9f67405ed471d29b2edcabc8fd8db"]
+         ["extern/google_drive_test.cljs" :modified "8521fdca834e252d475f9e08b3d2dcf05e726b5c880d345eb4194f63abe5019d" "6383f3e13b3f0053306afe83091a6c57a92d7a0171719ef87b5d0cf87a234e59" "12b3ec17af7fa89fa5b06b998a6fa38162338774"]
+         ["extern/ledger_queue_test.cljs" :added nil "126551769f60a23356a2298bc116451465af6209106c12e2407f077079e7e31e" "16b3893ed805b18aeda9dded881306a5bd921fdf"]]
+ :findings [{:subject :pure-offline-seams :detail "The selected owner importer, event appendability law, fold, resource projection, Drive credential accessor, scope law and policy source are byte-identical. They are candidates for the v10 synthetic-only qualifier, not proof their transitive dependencies or runtime are unchanged or loadable under NBB. The crypto extern is byte-identical and its data-taking key-from-base64/open-sealed functions remain candidate boundaries; open-sealed returns plaintext internally and needs controlled handling."}
+            {:subject :ledger-durability :detail "Current route delegates to new ledger queue; it invalidates cached state before append so the next submission reloads after an uncertain write. The new fixture test simulates a write followed by failure and confirms reload. The queue calls the unchanged ledger-file/load-ledger, which can truncate an incomplete tail. Neither queue nor loader is admissible for the read-only qualifier."}
+            {:subject :provider-error-classification :detail "Current Google adapter retains HTTP status for non-JSON failures and optional OAuth error strings; Drive MCP maps invalid_grant during refresh to not-connected while other failures remain unavailable. Added fake-provider tests cover those distinctions. This does not establish a live grant or authorize a provider request."}
+            {:subject :tests :detail "Selected tests were read as source, not executed. Queue and provider tests use fixtures; no real filesystem fault, runtime deployment, account ownership or provider validity is established by this source comparison."}]
+ :remaining-admission ["Re-pin current head before any later action and compare/review transitive Clio/Malli and other dependency source and build pins; this selection does not prove the complete dependency closure or NBB compatibility."
+                       "Design and independently review the minimal read-only descriptor adapter and fixed output contract; synthetic fixture tests must cover symlink traversal, race/replacement, byte/event limits, malformed/partial ledger without truncation, owner/AAD binding, error redaction and no writes/network. No qualifier has been implemented or admitted."
+                       "Historical owner lineage is not established by path inventory or resource uniqueness. Real credential-file reads and any later provider action remain separate scoped gates."]
+ :boundary {:credential-key-inventory-payload-read false :qualifier-import-build-execution false :provider-rpc-oauth false :service-action false :archive-modified false :git-board-ledger-pr-writes false}}

@@ -1,0 +1,12 @@
+{:custody/id :typed-neutral-observer-fix-review-v16
+ :kind :native-worker-report-custody
+ :source-session "ses_e5941356dffeFPYdehzd0XcDxH"
+ :source-role :auditor
+ :verdict :approve-one-new-fixed-neutral-attempt-conditionally
+ :findings []
+ :controller {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v6.py"
+              :sha256 "a486ea931064a3866034c0e9f1caeb26ccb52266ec709737d8b9bcb949c66795"}
+ :reviewed "The v6 diff limits the deleted-cgroup proof to the held inode-matched descriptor and requires all available pidfd anchors to have exited."
+ :conditions "One new fixed neutral attempt under a separate permit, retaining prior host-pin/resource preconditions. Running-kernel deleted-descriptor behavior remains to be observed."
+ :limits "No execution, RPC or runtime test by reviewer. Six passing v5 case reports do not make its failed aggregate qualification a pass. Java and the wider dependency graph remain outside scope."
+ :custody "Read-only reviewer returned this verdict without a file; coordinator records it without claiming independent dynamic execution."}

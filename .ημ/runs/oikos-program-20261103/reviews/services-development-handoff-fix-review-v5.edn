@@ -1,0 +1,34 @@
+{:review/id :services-development-handoff-fix-review-v5
+ :kind :independent-sequencing-and-exact-docs-recheck
+ :verdict :approve-exact-docs-only-candidate
+ :candidate {:repository "open-hax/services"
+             :head "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b"
+             :tree "d54a348e1346fec8230b09a8dd6e1c0eba6aae88"
+             :source-head "b2973ef9e3246522324dec4658fbeb093ffab147"
+             :source-tree "daf053cce6b24c8d62f59e660b90b6c92a5bbae2"}
+ :inputs {:proposed-amendment {:path ".ημ/runs/oikos-program-20261103/decisions/services-candidate-status-sequencing-v1.edn" :sha256 "a26ea14a14341f0d7bcf6aff77e2e8a0e175630d75fd5692306a4b28477c8e13"}
+          :prior-review {:path ".ημ/runs/oikos-program-20261103/reviews/services-development-handoff-review-v4.edn" :sha256 "361f9c63462e9d6800c7bdf2552ddbcece820ead76bbdb6522a26e9db3ccc648"}
+          :source-plan {:path ".ημ/runs/oikos-program-20261103/reviews/services-dev-handoff-plan-v2.edn" :sha256 "55d3f3160ba10a6a305de2fb788d2adcd473a8ad978334797540c8878120f5d3"}}
+ :disposition {:finding "SDHD-P2-1" :status :settled
+               :basis "The explicit proposed amendment identifies the original unmet sequence, permits only the two exact candidate-only status/link preparations before release subject to this independent review, and does not assert the former sequence was followed. It preserves distinct source qualification, candidate documentation, owner release and consumer acceptance, as well as privacy, artifact custody and retrievability gates. The prior review found the actual text accurately candidate-labeled. This recheck accepts the bounded sequencing correction and the exact documentation candidate, not a release."}
+ :recheck {:head-and-tree :matched
+           :diff "Exactly the five documented files differ from b2973ef; git diff --check passed."
+           :documentation-sha256 {"README.md" "bf30f228a5a1ccab325f3d0a56a7b764274dc2c3570b59bc4d22581a0567bfb4"
+                                  "docs/deployment-model.md" "6357e97f51ae69a18506be3fbc906c147cda94b727b48f660db71805c51244a6"
+                                  "docs/local-generation-engine-notes.md" "94146d9a0d3fa489a84e2a8e4ec072a48b9eb1c3cbca1b4c5cbc9e7f437ded9e"
+                                  "docs/local-generation-development-handoff-v1.edn" "4aeba4c203db2fe3347021713390f5f0b81a251f14477dc51ad4ceeaa108ecb8"
+                                  "docs/local-generation-development-handoff-v1.md" "496fbc4c668f6407c89da98de611fb63a510f1e0aa94b482d549ee1df5250091"}
+           :source-sha256 {"edge" "41e633799724639ede651f039f087a602d1df6a8ef10721f4792088cbbdc6537"
+                           "facade" "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+                           "laws" "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+                           "pure" "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"
+                           "runner" "64c5a79d0f0fa84b953846ab99bffc186df31d113ccaa4fa031082d9a17c2175"
+                           "validator" "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+                           "wire" "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"}
+           :prior-checks "V4 records strict descriptor EDN, 21 local links, zero-warning kondo, preserved frozen spec/test/historical report and exact evidence hashes; unchanged five-file diff and hashes retain those observations. No aggregate rerun or new runtime qualification."
+           :findings []}
+ :holds ["Parent must check source-publication privacy and complete immutable artifact and evidence custody/retrievability before explicitly issuing the scoped development handoff."
+         "Oikos owner acceptance remains separate; no installation, production, Bash qualification or whole-S1B authority."
+         "Approval is for the unchanged exact docs candidate and sequencing amendment only, not an owner release or wholesale source re-review."]
+ :effects {:source-edits false :aggregate false :commit false :push false :pr false :board false :ledger false :nested-agents false}
+ :next "Parent perform privacy and full immutable artifact retrievability checks before the separate explicit scoped development handoff."}

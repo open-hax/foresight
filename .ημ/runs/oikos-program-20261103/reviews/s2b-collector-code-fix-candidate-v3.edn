@@ -1,0 +1,20 @@
+{:review/id :s2b-collector-code-fix-candidate-v3
+ :status :partial-held
+ :base "edf609c1c96da7a1109bee1e02d3f86874dda7ca"
+ :red {:commit "2d15691" :bb {:tests 14 :assertions 124 :failures 12 :errors 0} :log "/tmp/opencode/oikos-s2b-v3-partial-red.log"}
+ :candidate {:commit "60c07b4e6b7bd16a6fe84e7ce4e4306321643f84"
+             :sha256 {"src/oikos/law/i3_collector.cljc" "5fb8e24bd94a27ee152cc41931c227f28ace669ce026d31374f91d86f52bff77"
+                      "test/oikos/law/i3_collector_test.cljc" "9966ea5698e6f581f52aa9f9b0c3d96dbb0da2cab71dc1e5602969e6e9d5baac"}}
+ :implemented ["Exclusive deadline and lease expiry" "Exact terminal proof at ordinary step cap with stale pending and no new intents" "Charge subscription attempts before emitting start/retry"]
+ :verification {:collector-bb [14 124 0 0] :collector-nbb [14 124 0 0] :collector-edge-nbb [4 33 0 0]
+                :baseline-bb [18 286 0 0] :baseline-nbb [40 546 0 0] :eval [9 39 0 0]
+                :desktop-bb [16 1059 0 0] :desktop-nbb [16 1059 0 0]
+                :wire-bb [15 347 0 0] :wire-nbb [15 347 0 0]
+                :spaces-bb [11 455 0 0] :spaces-nbb [11 455 0 0] :lint [0 0]
+                :frozen-content {:files 63 :mismatches 0 :pins 13 :pin-mismatches 0}
+                :eight-path-ceiling true}
+ :holds ["F1 witness/reachability remains unimplemented; forged pending remains possible. Clarification was read; no provenance or operational-authority claim is made."
+         "F5 whole-frame JSON.parse allocation-before-bounds remains unimplemented."
+         "F6 descriptor, digest and preflight source/pin binding remain unimplemented."
+         "F3 tests cover baseline churn and exact acceptance, not the full reviewer-required gap/reconciliation, timeout and rejection matrix; no review closure claimed."
+         "No independent review or whole-S2B approval claimed."]}

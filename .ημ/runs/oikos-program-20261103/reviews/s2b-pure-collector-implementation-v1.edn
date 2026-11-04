@@ -1,0 +1,9 @@
+{:scope "src/oikos/law/i3_collector.cljc"
+ :sha256 "e5e497cef6d3cf4c862509c2a184b922872a4f75e8f48214b34f838aff197db7"
+ :verification {:bb {:tests 6 :assertions 75 :failures 0 :errors 0}
+                :nbb {:tests 6 :assertions 75 :failures 0 :errors 0}
+                :clj-kondo {:errors 0 :warnings 0}}
+ :limits ["Fixture data and fixture proof are not authentication or operational authority."
+          "State validation verifies closed outer keys and key nested constraints, not a comprehensive state-machine reachability proof; untrusted caller-owned states can be fabricated."
+          "Rejection currently binds the proposed head as in the supplied tests; unchanged-head rejection semantics require further specification and adversarial tests."
+          "Raw edge and full suite not run by this worker; parent owns integration and independent review."]}

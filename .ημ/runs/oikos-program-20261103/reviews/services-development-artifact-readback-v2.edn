@@ -1,0 +1,23 @@
+{:report/id :services-development-artifact-readback-v2
+ :kind :coordinator-actual-publication-and-decoded-byte-readback
+ :date "2026-11-04"
+ :repository "open-hax/services"
+ :head "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b"
+ :tree "d54a348e1346fec8230b09a8dd6e1c0eba6aae88"
+ :ref "refs/heads/artifact/oikos-local-generations-d4f6ff57"
+ :publication "One ordinary push to the selected previously absent artifact ref succeeded; fresh git ls-remote returned the exact head. No force, main merge, PR, service or installation action."
+ :authorization "decisions/services-source-artifact-publication-v1.edn"
+ :method "For each of the 19 paths differing from the published ancestor 3fdf9f3922271ea36e52247c3844b07f4eeb463e, authenticated GitHub contents reads at the exact commit returned base64 bytes. Decode and compare complete bytes with git show at the same local commit, then compute SHA256. Four concurrent read-only requests maximum; each file below 256 KiB. No source execution."
+ :readback {:paths 19 :bytes 260814 :all-byte-equal true
+            :seven-source-pins "All seven hashes equal the approved runtime pins recorded by the docs and publication reviews."
+            :descriptor {:path "docs/local-generation-development-handoff-v1.edn" :bytes 3721 :sha256 "4aeba4c203db2fe3347021713390f5f0b81a251f14477dc51ad4ceeaa108ecb8"}
+            :recipe {:path "docs/local-generation-development-handoff-v1.md" :bytes 6985 :sha256 "496fbc4c668f6407c89da98de611fb63a510f1e0aa94b482d549ee1df5250091"}
+            :spec {:path "docs/local-generations-v1.md" :bytes 38809 :sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"}
+            :test {:path "scripts/tests/test_local_generation_fs.py" :bytes 41209 :sha256 "22a209935574805ab04282b46c68c0af6c8febaec02c98bba47085e37dbfc9e2"}}
+ :evidence-readback {:repository "open-hax/foresight" :commit "792dfa341d380cbf413b925319654d7c2ebec413"
+                     :independent {:bytes 8259 :sha256 "5f565e3e2729c3461137a6a20f7fbbdc3bc8365c56965b217eab3a4cad983025"}
+                     :author {:bytes 4611 :sha256 "4a309b65c71e01eb944e80cb3cdd35fa5aa34b10a22a5c28eb96c05fd73dd7b2"}
+                     :all-byte-pins-matched true}
+ :not-provided [:consumer-acceptance :installation :production :bash-qualification :s1b-completion
+                :new-native-runtime-tests :native-bot-approval :full-remote-cache-backup]
+ :preservation "Untracked Services scripts/__pycache__ and all local evidence/cache fixtures remain intact. Source artifact custody does not qualify deleting untracked/ignored evidence."}

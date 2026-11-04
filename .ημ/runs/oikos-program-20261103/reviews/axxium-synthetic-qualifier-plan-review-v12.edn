@@ -1,0 +1,39 @@
+{:report/id :oikos/axxium-synthetic-qualifier-plan-review-v12
+ :status :admit-minimal-stage-1-source-only
+ :input-sha256 {:plan-v10 "7b4e036a96f7b9b30587fbea587daeccb73935330084731ac6d49b46a8576b3e"
+                :comparison-v11 "bb146c05ddf8a37569553ba8957d7f0223ecdfa419f05f1a84dcf3cc0b86ebd3"}
+ :source-pins {:old-head "887c485270904ed368890834f63064b2008a4067"
+               :selected-current-head "3a319a43d1bd8064e8cdd2729db93e3710ae7ddd"
+               :basis "v11 reports exact-byte equality for selected files; this review read the cached selected source and independently hashed the old transitive files below, not a fresh current-head comparison."
+               :selected-sha256 {"shape/ledger_edn.cljc" "95b087a9b430a7a6460cb9a40a7019e7a02b5094c80b3b5b5e4776a0f423909b"
+                                 "law/event.cljc" "2575e89ad2935b795c8f4a06f41251f5975ba9b1b3683925a1a96f18fb194251"
+                                 "domain/state.cljc" "801b59c5a393a0aeee6f461149571e62cd2b2ca25dd31957e53bc2956715b16f"
+                                 "domain/resource.cljc" "35e06ab88f837bbdc835f2254eaa1bc3d71f0534b89741f4891b39fcf7222eb9"
+                                 "domain/drive.cljc" "ca356cb46dc30863de9c502e6661ce8f9039dddfab3ced5bb91d55c27cb0a393"
+                                 "law/google_drive.cljc" "f4bce17979ac350cad5840196d45f01590c5b9bbec1fda33c4545475ae96e7b4"
+                                 "extern/token_crypto.cljs" "c81f75c738c3c6a9cf4c9ca3ba1d79ab0a972b7ba34f7b0d23d83907eb7b10c7"}
+               :old-transitive-sha256 {"clio/shape/edn.cljc" "8864bec7ad85bd6462181328a533ed38b792c219fcb16ba21405deffcfcf0a5f"
+                                       "clio/shape/canonical.cljc" "52fa893256f111cdee4d50eed3691480e45f4f07a40f0c38e80d3005f53263bf"
+                                       "axxium/law/did.cljc" "6ff72e2a22dbfd32d2b5c456a46702399af63d50d2540feefdf20b2cdc634d87"
+                                       "axxium/domain/actor.cljc" "b94925db8b08ac90dd370c3a7974552ad3f393ebb974a9f2e8b8569e5b585159"
+                                       "axxium/domain/authority.cljc" "6c9f6bbe80003097407952fe5f7dbc6a944b5d0102adf0bc34902ab5697cdc4f"
+                                       "axxium/domain/policy.cljc" "7b27f9e377f513933b9609e5df1d4dfc7f9a0959c9abd29b1fa1573598570d72"
+                                       "axxium/domain/ledger.cljc" "758c82ec26acdfc808b9d8c5464d17d0fd445f5e57ea6a2e051a0e005c3d1b40"}
+               :dependency-observation "Importer requires both Clio canonical and EDN namespaces; EDN requires edamame.core. Event and transitive owner domains require malli.core. The old shadow config declares Malli 0.16.4 and Edamame 1.6.42; these version strings are not source or artifact hashes and do not prove the NBB-resolved closure. Other transitive artifacts and NBB built-ins remain unverified."}
+ :source-ceiling {:permitted ["A task-owned NBB synthetic qualifier, a synthetic fixture test, a fixed containment launcher and a source/dependency manifest, outside owner repositories; source authoring and review only."
+                              "Use the owner importer, appendability law, state fold, resource and Drive projection/accessor, scope law and data-taking crypto primitives without duplicating a ledger, parser or policy kernel. Fixtures and test keys must be synthetic and agent-owned."]
+                  :forbidden ["Actual inventory, ledger or key payload access; provider RPC, service startup, network, runtime probing, building or dependency resolution in this review."
+                              "Old candidate.cjs, harness/server initialization, ledger-file/load-ledger or ledger queue. The loader can truncate incomplete tails."
+                              "Automatic shadow build or fallback when NBB fails; stop for a separately reviewed proposal."]}
+ :execution-gate {:status :held
+                  :requirements ["Independent exact-source and containment review of all proposed task files, pinned complete owner/transitive source and runtime dependencies, and the exact selected current-head relation before any synthetic execution. Unavailable or changed pins stop execution; do not claim current equivalence from old transitive hashes."
+                                 "NBB runs only under a neutral controlled working directory with an explicit reviewed classpath, no ambient project config or dependency resolver, no automatic downloads, controlled environment and bounded fixed-status output. Prove actual module resolution and all loaded sources are within the reviewed pinned ceiling; otherwise stop. Pin NBB and its bundled Malli/Edamame or reviewed explicit compatible artifacts including transitive sources and integrity; do not assume shadow versions control NBB."
+                                 "No network, provider credentials, real input paths, child processes or writable access beyond explicitly task-owned synthetic test files; enforce containment externally rather than trusting test code. No human consent is required for agent-owned synthetic fixtures."
+                                 "Fixtures exercise full import, incremental appendability, fold, credential selection and authenticated crypto with wrong-key/AAD and malformed input failures; output enumerated statuses only, redact exceptions, enforce resource limits. Do not treat appendability as validation of event-body semantics or historical ownership."]}
+ :future-real-read {:status :held-not-a-stage-1-blocker
+                    :guard-options ["Linux procfd option: hold a trusted anchor directory FD; reject empty, dot and dot-dot components; for each intermediate component open /proc/self/fd/<held-dirfd>/<component> with O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC, verify fstat directory and trusted ownership/mode, hold each FD, and open final component with O_RDONLY|O_NOFOLLOW|O_CLOEXEC then fstat regular file. The procfd magic-link is intentional: require verified procfs and a live held FD; never apply O_NOFOLLOW to the procfd link itself. Fail closed if procfs or required flags/metadata are unavailable."
+                                    "Alternatively use one fixed independently reviewed trusted Python helper using os.open(component, flags, dir_fd=held_fd), with the same component, ownership, type, and lifetime checks; no owner-law reimplementation. Only one reviewed implementation may be admitted for a real run."]
+                    :remaining "Before any real read separately review anchor acquisition, filesystem and mount assumptions, hard links, parent rename/replacement, descriptor and name identity checks, mutation during reads, bounded reads, and adversarial synthetic race tests. Held FDs anchor objects, not continued membership beneath the original pathname; revalidate component-to-FD identities before and after or refuse on ambiguity. No guard is approved as proven merely by this design."}
+ :claims-limits ["open-sealed returns plaintext or nil and binds the supplied owner as AAD; immediate boolean reduction is needed and JS strings cannot be reliably erased."
+                 "The policy decision-before-effect predicate is vacuous for events without decision causes. Projection and decryptability prove neither historical lineage nor provider authorization."]
+ :boundary {:source-only true :runtime-executed false :payload-read false :network false :service false :git-board-ledger-write false}}

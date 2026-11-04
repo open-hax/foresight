@@ -1,0 +1,33 @@
+{:candidate/id :s4a-synthetic-owner-model-fix-candidate-v2
+ :authority :none
+ :verdict :revised-source-only-not-qualified-independent-review-required
+ :review-input {:path "reviews/s4a-synthetic-owner-model-source-review-v1.edn"
+                :sha256 "677221e2d53a3f89432078bc80e519a3e51bbd0e9c14b785b5b5f10fea468702"}
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :files [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "1551ba6be3d99f770851d26fd25b22d2b4440dd8e866b3419d4062a32d164faf"}
+         {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "9c6413f2396b8bfbf442bd3251457bd15d9eade4b4452df6d86ee2c58c04dcee"}]
+ :dispositions
+ [{:id :closed-record-validation-and-input-totality :status :source-revised-unverified
+   :detail "Closed validators and malformed, duplicate, improper and cyclic input test source added for the eight synthetic shapes; independent runtime verification is held."}
+  {:id :binding-and-snapshot :status :source-revised-unverified
+   :detail "Issue/final model checks explicit contract pin, identity/scope/epoch/digest relationships and copied transcript plus digest and record snapshot; synthetic byte boundary checks and two independently assembled golden vectors added."}
+  {:id :read-write-single-use-and-order :status :source-revised-unverified
+   :detail "Per-grant operation, returned terminal state, order, simulated mutation and released-byte counts, revoke/restart/storage outcomes and replay test source added; no durable or native semantics asserted."}
+  {:id :clock-validity-and-history :status :source-revised-unverified
+   :detail "Synthetic point plus uncertainty specifies the UTC interval; prior monotonic/UTC checks and separate required deadline lists added. Not a real clock or comprehensive discontinuity proof."}
+  {:id :consume-and-final-gap :status :source-revised-unverified
+   :detail "Distinct pre-consume and final observations plus post-check gap; later expiry preserves consumed with zero simulated effects for read and write test cases."}]
+ :static {:python-balanced-text-and-cookies :pass
+          :replace-golden {:bytes 285 :sha256 "d602c5e910ea2fb67ae73845dcd57f1724ca22a144b84f3af8f7d5043fb8e69c"}
+          :read-golden {:bytes 291 :sha256 "5a7251b0f9d6159def0d755bb8fef0799ef351c86a346c07d59c5e2197d91c06"}
+          :note "Python text scan is not an Emacs parser, typecheck, lint or executed test; vectors assembled with Python struct/hashlib."}
+ :preservation {:native-sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"
+                :native-test-sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"
+                :claim "Both match preceding candidate and observed hashes; no claim about unrelated paths."}
+ :limits ["No Emacs, ERT, byte compiler, lint or runtime execution: source correctness, termination on every adversarial representation and tests remain unverified."
+          "Binding snapshot and state-transition model are separate pure exercises; transition does not itself enforce a binding snapshot, individual actual deadline provenance, or authenticated tickets."
+          "State input is caller-supplied synthetic data; no storage, issuer, resource owner, approval, revocation ACK, concurrency, distributed fence or real identity is implemented."
+          "Clock history only compares supplied adjacent readings; it does not establish real time continuity, scheduler bounds or check-to-effect atomicity."
+          "The matrix is bounded, not exhaustive; independent review must assess all cases and authorize any subsequent isolated synthetic batch run."]
+ :held [:isolated-batch :real-identity :human-consent :native-effects :durability :cross-process-revocation :startup :whole-s4a]
+ :execution {:emacs 0 :ert 0 :real-operations 0 :credential-probes 0 :git 0 :board 0 :ledger 0 :nested-agents 0}}

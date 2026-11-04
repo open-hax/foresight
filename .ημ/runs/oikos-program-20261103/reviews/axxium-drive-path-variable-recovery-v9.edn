@@ -1,0 +1,32 @@
+{:report/id :oikos/axxium-drive-path-variable-recovery-v9
+ :report/status :two-literal-paths-recovered-grant-unverified
+ :prior-review "axxium-drive-sealed-state-metadata-v8.edn"
+ :scope "Filename-first exact-match search of November 1 Codex session metadata, bounded shell history, and filename metadata only under specified Axxium locations. No provider or service actions."
+ :session-search {:directory "/home/err/.codex/sessions/2026/11/01"
+                  :candidates 1 :matching-files 1 :candidate-bytes 6638218
+                  :matched-filename "/home/err/.codex/sessions/2026/11/01/rollout-2026-11-01T22-05-22-01a19a6e-eb47-7dc1-a311-23a6882b8c27.jsonl"
+                  :file-sha256 "68f5f110c287f7c25478765c81f962417df796c44ab44c532b014b0f137d0bf9"
+                  :matched-needles ["AXXIUM_DRIVE_LEDGER_FILE" "AXXIUM_DRIVE_TOKEN_KEY_FILE" "axxium-pr19-live-harness" "axxium-pr19-google-live"]
+                  :passes 3 :total-session-bytes-read 19914654
+                  :bound "One matching rollout, under the five-file and 128 MiB limits; matching transcript lines and commands were not emitted. The subsequent structured pass searched exact variable keys and JSON-like key/value pairs, not just shell assignment syntax."}
+ :history {:bash-history-bytes-read 17597 :bash-history-sha256 "437a226f0e962d4f432683caf4144057a142e964eae3c88bd8d44d054423692b"
+           :zsh-history :missing :max-bytes-per-history 8388608 :literal-shell-assignments-found 0}
+ :extraction {:accepted-path-prefixes ["/home/err/" "/tmp/opencode/" "/tmp/axxium" "$HOME/" "${HOME}/"]
+              :method "Programmatically parsed JSONL records and nested strings; accepted literal allowed-prefix structured values only, with no shell evaluation. Repeated identical pairs were deduplicated."
+              :roles [{:variable "AXXIUM_DRIVE_LEDGER_FILE" :structured-pairs 9 :unique-paths 1 :rejected 0
+                       :path-sha256 "6c186a095cc58cf75dd373c9f85a06fdc461c0b9ae934381bdc7d6ea48a02376"
+                       :lstat {:type :regular :uid 1000 :mode "0600"}}
+                      {:variable "AXXIUM_DRIVE_TOKEN_KEY_FILE" :structured-pairs 9 :unique-paths 1 :rejected 0
+                       :path-sha256 "aab72cd7d2ab3a41422a6b6eb9a8d3931ad071f520461370596f590c8bd0ca93"
+                       :lstat {:type :regular :uid 1000 :mode "0600"}}]
+              :qualification "These are paths recorded in matching historical session metadata; exact current file contents, association to the reported owner, and grant validity were not verified. Repeated pairs need not represent independent runs. No file was opened."}
+ :private-inventory {:path "/tmp/opencode/axxium-pr19-path-inventory-5da7556e-aaea-4f5b-93ab-d3f1d06a7f86.json"
+                     :sha256 "ecc9cd1fbf2c9c8c62eb160bb1a057ff2aa145d601055a56c3fe092c96033c6e"
+                     :mode "0600" :uid 1000 :owner "oikos Drive preservation task"
+                     :state :active-pending-owner-qualified-runtime-review
+                     :contents "Two exact path strings, their role hashes and lstat results, and nonsecret source metadata; no credential payload. Paths intentionally not repeated in this canonical report."
+                     :cleanup "Retain while recovery is active; no deletion or cleanup authorized by this discovery."}
+ :filename-metadata {:scope ["~/.local/share/axxium*" "~/.local/state/axxium*" "~/.secrets/axxium*"] :max-depth 2
+                     :matching-entries 3 :observation "The two recovered path hashes matched two mode-0600 regular-file entries from the name-only inventory. A matching containing directory was mode 0700, uid 1000. No file contents were read."}
+ :next "Have the owner of the preservation task use the private inventory to review an explicitly bounded local state qualification that does not output credential or account data; do not run recheckCurrent, whose duplicate check may create a remote file. Offline state qualification cannot prove live Google authorization; any later provider refresh/read needs separate reviewed authorization."
+ :boundary {:credential-key-ledger-contents-read false :commands-or-transcript-lines-emitted false :shell-eval false :harness-executed false :provider-or-network false :login false :service-or-socket-action false :archive-modified false :board-or-ledger-writes false}}

@@ -1,0 +1,22 @@
+{:review/id :s2b-collector-witness-candidate-v4
+ :status :held-bound-conflict
+ :base "60c07b4e6b7bd16a6fe84e7ce4e4306321643f84"
+ :red {:commit "c755a56" :bb {:tests 16 :assertions 141 :failures 6 :errors 0} :log "/tmp/opencode/oikos-s2b-witness-red.log"}
+ :candidate {:commit "ab38c63e4428ecc2f4538ff788226e6f2a7dc118"
+             :sha256 {"src/oikos/law/i3_collector.cljc" "9f350f5df36758a4c731afe5637d288dc5d2cddd60cc4356846c4e311c57ff16"
+                      "test/oikos/law/i3_collector_test.cljc" "8e0136a494b0a688f7551ebffb32f4b602870dcaa8059bec7ce410502887a17f"}}
+ :implementation "Closed fixture witness contains original config and bounded records; replay uses private core step once per virtual command; identical adjacent tick replies compress. Exact state equality required; fresh? validates witness. Caller-authored complete traces remain unauthenticated simulations."
+ :verification {:collector-bb [18 151 0 0] :collector-nbb [18 151 0 0]
+                :standalone-edge-nbb [6 81 0 0]
+                :note "Standalone used concurrently edited edge files; edge result is not an isolated or stable-HEAD claim."
+                :baseline-bb [18 286 0 0] :baseline-nbb [40 546 0 0] :eval [9 39 0 0]
+                :desktop-bb [16 1059 0 0] :desktop-nbb [16 1059 0 0]
+                :wire-bb [15 347 0 0] :wire-nbb [15 347 0 0]
+                :spaces-bb [11 455 0 0] :spaces-nbb [11 455 0 0] :lint [0 0]}
+ :observed-conflict {:scenario "128-window frozen-valid baseline, distinct valid incarnations/xids, one workspace; snapshot and post tick reach await-owner, then matching owner ACK is denied."
+                     :observation {:frozen-event-valid true :pending-phase :await-owner :ack-status :denied :owned-argument-nodes 4583}
+                     :cause "The exact event occurs in pending state, snapshot witness command, and ACK input; traversing the full owned argument exceeds the 4096-node limit. The finite witness cannot meet the preexisting maximum-event scenario with these duplicated full closed records and unchanged node budget. No truncation or weaker node check was added."
+                     :action "Requires reviewed representation/bounds decision; do not promote candidate as full F1 closure."}
+ :holds ["Frozen replay calls are instrumented and bounded in the near-cap test; direct transition-call instrumentation and complete requested adversarial matrices remain incomplete."
+         "Large-event required schedule conflicts with 4096 owned-node budget; no whole-S2B or F1 completion claimed."
+         "Other agents concurrently edited descriptor, runner, and edge files; only the two F1 paths were staged in candidate commit."]}

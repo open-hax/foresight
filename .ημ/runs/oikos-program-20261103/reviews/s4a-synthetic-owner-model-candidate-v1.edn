@@ -1,0 +1,25 @@
+{:candidate/id :s4a-synthetic-owner-model-candidate-v1
+ :authority :none
+ :verdict :incomplete-source-only-independent-review-required
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :head "b1816de56ff85071f2a89a59b7343ed97e3da30e"
+ :inputs {:plan-sha256 "a2289697e029aa8463744886b471a76fd017a4281a4f1e8efebe72089ca0d11c"
+          :review-sha256 "d0f74762b4f15661f43e11adfc2aa11d8a242aa236b357f54546ead70299db59"}
+ :new-files [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "3a8447e1694ef7a06432da3d47586bf240f7af243a40039ac86bb9d43849148e"}
+             {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "fff4c29172cd827febe31568cc4d5d9a7a6ecf1cedf6997c45c92f916bd84e3d"}]
+ :preservation {:paths-absent-before-write true
+                :native-sha256-before-and-after "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"
+                :native-test-sha256-before-and-after "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"
+                :preexisting-untracked [".batch-home/oikos-native-test.elc" ".batch-home/oikos-native.elc" "layers/agent-sandbox/oikos-native.elc" "tests/unit/oikos-native-test.elc"]}
+ :static-gates {:python-parentheses-and-strings :pass
+                :lexical-cookies :pass
+                :golden-hex-sha256 "d602c5e910ea2fb67ae73845dcd57f1724ca22a144b84f3af8f7d5043fb8e69c"
+                :golden-bytes 285
+                :note "Text scanner is not an Emacs reader, semantic verification, lint or typecheck. Golden independently assembled with Python struct and hashlib."}
+ :unrun [:emacs :ert :byte-compile :lint :runtime :native-dispatch]
+ :known-gaps ["Partial model only: no closed approval, identity, grant, revoke-result or release record validators; no proof provenance or UTF-8 range-boundary validation against resource text."
+              "No comprehensive binding swaps, read-specific fixture, restart, monotonic regression/rollback, multiple deadlines, consume-storage-expiry, explicit fault injection or interleaving oracles."
+              "Clock gap parameter is a synthetic elapsed-time abstraction, not a scheduler bound; clock history and uncertainty correctness are not verified."
+              "Synthetic status symbols and zero counts are not native operations or proof of durable revocation; no real effects are implemented."]
+ :holds [:independent-source-review :synthetic-batch-admission :real-identity :human-consent :real-clock :durability :native-atomicity :cross-process-fence :actual-effects :startup :existing-buffers :whole-s4a]
+ :execution {:emacs-invocations 0 :product-tests 0 :live-effects 0 :nested-agents 0 :commits 0 :pushes 0 :board 0 :ledger 0}}

@@ -1,0 +1,14 @@
+{:decision/id :recommended-path-standing-authorization-20261104
+ :source :explicit-current-user-direction
+ :quote "You don't have to ask about for this stuff any more. You are allowed to do whatever is required, I have been reading what you are asking and you have been making the correct calls each time with your recomended/top choice."
+ :effect :proceed-with-recommended-required-work-without-routine-permission-prompts
+ :scope [:reviewed-owner-source-extensions :necessary-scoped-implementation
+         :independently-reviewed-bounded-qualification :existing-resource-investigation
+         :ordinary-task-git-and-documentation-actions]
+ :process "Use the recommended path and continue execution through independent review, exact prerequisite composition and deterministic gates. A new routine source/probe permission question is unnecessary; record concrete admissions and actual results instead."
+ :preserved [:user-autonomy :explicit-consent :synthetic-and-development-scope
+             :zero-spending :no-personal-capture :preserve-unrelated-work
+             :verified-recoverability-before-cleanup :truthful-failed-or-unknown-results
+             :no-forged-native-approval :independent-review-and-required-checks]
+ :limits "This is not retrospective approval of the typed cache incident, a fabricated credential/consent, permission to spend, a waiver of a failed gate, or evidence that a held model/service/runtime is qualified. Prefer the smallest reviewed required effect; do not silently discard unrelated artifacts or publish private history."
+ :questions "Ask only for genuinely missing user intent, required human authentication, or an irreducible policy choice, not routine recommended engineering work already covered here."}

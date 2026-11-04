@@ -1,0 +1,19 @@
+{:permit/id :s4a-isolated-owner-model-ert-v1
+ :kind :one-shot-isolated-synthetic-functional-test
+ :status :admitted-not-executed-by-this-record
+ :date "2026-11-04"
+ :source :recommended-path-standing-authorization
+ :review "reviews/s4a-synthetic-owner-model-fix-review-v2.edn"
+ :binary {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+ :timeout {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}
+ :sources [{:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/layers/agent-sandbox/oikos-owner-authority.el" :sha256 "1551ba6be3d99f770851d26fd25b22d2b4440dd8e866b3419d4062a32d164faf"}
+           {:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-owner-authority-test.el" :sha256 "9c6413f2396b8bfbf442bd3251457bd15d9eade4b4452df6d86ee2c58c04dcee"}]
+ :scope "Exactly nine existing ERT definitions as separate synthetic shape/encoding, binding and sequential-state exercises; no whole-model, composition or clock-continuity approval."
+ :entry "The review's fixed emacs-31.1 -Q --batch command with the two explicit .el loads and ert-run-tests-batch-and-exit, cleared environment and 30-second GNU timeout plus 5-second kill grace. No wrapper, .elc, daemon or binary substitution."
+ :environment "HOME/XDG_CONFIG_HOME/XDG_CACHE_HOME=/nonexistent, PATH=/usr/bin:/bin, LC_ALL=C; fresh private task-owned cwd and retained bounded stdout/stderr only."
+ :extra-bounds {:parent-timeout-seconds 40 :cpu-seconds 25 :address-space-bytes 1073741824 :output-file-bytes 1048576 :core-bytes 0}
+ :preservation "Verify binary and two source hashes before/after plus both existing native source/test hashes unchanged; retain scratch. No existing user buffer, private data, credential, network, service, startup or installed state is touched."
+ :failure "Missing runtime libraries, timeout, skipped/missing tests or failure remains visible and blocks qualification. No automatic fallback or silent rerun."
+ :held [:live-emacs :native-dispatch :actual-effects :axxium-authentication :human-consent
+        :govone-disclosure :durability :clock-continuity :composed-binding :whole-s4a]
+ :interpretation "A green batch proves only its exercised assertions at these source hashes; simulated counters and supplied records are not real owner authorization or native atomicity."}

@@ -1,0 +1,16 @@
+{:kind :source-review-candidate
+ :execution-authorized? false
+ :source-head "f0cb23fc09dbbef8ed5525aab20353add60fe4cf"
+ :artifacts [{:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/runner-v2.py" :sha256 "e1292982547b8c13e575db72bdb8156bee8beb553df7d7168e7d560a06e0da06"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/guard-v2.py" :sha256 "37d9b10e85a46e621ac6bfc42ddf8894f0ce3352dc57528acfbc2681ca49b39f"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v2.json" :sha256 "509a81c86a8a7d411303d98be2f4743c329d8fcb10bf9d10e8e4bdfb7145a1cb"}
+             {:path "/usr/lib/jvm/java-21-openjdk-amd64/bin/java" :sha256 "635baf419576ec4ad4f785014283fb93f1be1103e6d02252f7a00517f0e2a245"}]
+ :dispositions [{:issue :classpath-cwd-java :status :source-implemented :detail "Absolute ordered roots from query, checker-relative roots resolved explicitly; neutral private cwd; resolved Java path and hash."}
+                {:issue :process-cleanup :status :source-implemented-pending-probe :detail "New child session; guard denies setsid/setpgid/unshare/setns; TERM then KILL with bounded separate cleanup deadline and unconfirmed result; early pipe EOF does not terminate monitoring."}
+                {:issue :inventory :status :partial :detail "Inventory contains 459 regular source files across nine roots, 28 jars, query, Java, guard and runner; checked before and after. Cooperative hash checks do not detect transient mutation restored between checks and do not constitute immutable snapshot or adversarial race protection. Manifest is not self-authenticating; reviewer must pin its hash independently. JVM native dependencies and OS are not inventoried."}
+                {:issue :logs :status :source-implemented-pending-probe :detail "Restricted basename, directory ownership/mode check, dirfd-relative exclusive nofollow files in private directory."}]
+ :verification {:static "Python ast.parse succeeded for both files; no Java launches, guard probes, tests or typed edits performed."}
+ :neutral-probe-plan ["Independent auditor reviews source and verifies all artifact and inventory hashes before any execution."
+                      "Resolve inventory trust and transient source mutation gap; do not treat pre/post hashes as snapshot isolation."
+                      "Upon separate execution authorization, test neutral non-Java child for syscall denial, early pipe closure with lingering descendants, TERM/KILL deadlines, output cap, and hostile log paths; verify with independent process observations."
+                      "Only after probes and same auditor checks, separately assess actual Java invocation; do not infer containment from uninspected OS features."]}

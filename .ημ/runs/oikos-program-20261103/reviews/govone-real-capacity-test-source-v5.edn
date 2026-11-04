@@ -1,0 +1,24 @@
+{:id :govone-real-capacity-test-source-v5
+ :status :candidate-source-only-incomplete-unverified
+ :authority :none
+ :owner "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+ :pinned-head "259df13d175bde68c841156fdbfcde38c8444fce"
+ :pin-note "Head is prior supplied evidence, not freshly checked; Git was prohibited."
+ :source "internal/inference/capacity_evidence_test.go"
+ :sha256 "2ee8030c4b2a29da1e4eaa15026fbc40ad87ad27f785d0a8d86fc4569789519e"
+ :anchors {:private-sqlite "27-75" :transactional-spy "78-131" :composition "133-174" :request-and-commit-oracle "176-224" :resolver-overlap "226-249" :rollback "253-end"}
+ :composition "NewService receives real signed policy, classifier, router backed by SQLite and actual audit service through a same-transaction AppendTx spy; remaining collaborators reuse existing inference test harness stubs. The controlled wrapper overrides only ListModelEndpoints."
+ :red-oracle "The source compares a bounded in-memory JSON tuple against expected absent-endpoint and checker-error values after checking source-event and projection hashes. Production currently lacks that tuple; actual red has not been run or established."
+ :rollback "A synthetic route projection rejection checks that an AppendTx observation is absent from committed SQLite; this is source intent, not an executed result."
+ :retained-future-inputs "Explicit absolute GOVONE_CAPACITY_FIXTURE_ROOT with mode 0700 and matching euid; per-test synthetic SQLite directories are not deleted. The synthetic signing key is reproducible from an all-zero Ed25519 seed; no external credentials. No network service is configured."
+ :limitations ["Compile unverified; schema seeds and construction have not been executed and may require corrections within the admitted source file."
+ "The existing generator stub is counted, not a transport counter; it checks no generator dispatch only, not network isolation or provider approval."
+ "The test omits a separately asserted public HTTP envelope, invalid deployment/sensitivity resolver cases, workflow/session constraint and independent recovery cases, and policy-evaluation failure."
+ "The request fixture uses an existing redactor and other helper stubs; only the explicitly required classifier, signed policy, router and auditing are real."
+ "Root ownership/mode checks do not establish safe ancestor traversal, an external execution supervisor, isolation from other processes, or complete guarded-fixture ownership. Independent guard review is required before any execution."
+ "The standalone resolver overlap uses an empty Decision as a local-denying policy-equivalent observation; it does not establish a signed-rule cause or bind the request decision to the standalone resolver."
+ "The file retains filtered raw tuple values only when closed enum and schema values match, and returned event IDs and hashes; raw payload is transient."
+ "No exact fixture-request decision version, signed-policy causation, cache invalidation, N1, runtime or independent anchor is established."]
+ :performed "Source inspection, this single new owner test file, gofmt and sha256sum; no Go tests/build/list/mod/run, runtime, network, credentials, dependency acquisition, Git, board, ledger or nested agents."
+ :remaining-guards [:independent-source-review :fixture-ownership-and-symlink-review :pinned-offline-dependency-proof :no-network-execution-guard :compile-admission :red-execution-admission :N1]
+ :next "Review and complete this candidate before separately authorized offline compile or execution; do not treat it as passed red evidence."}

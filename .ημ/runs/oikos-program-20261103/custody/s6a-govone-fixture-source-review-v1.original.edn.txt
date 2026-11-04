@@ -1,0 +1,46 @@
+{:review/id :s6a-govone-fixture-source-review-v1
+ :review/type :independent-source-only-code-review
+ :verdict :changes-requested
+ :authority :none
+ :input {:repository "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+         :base "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+         :head "78824909e152bdc99e589e054387bbae41de85e6"
+         :file "cmd/govone-dev/s6a_fixture_test.go"
+         :file-sha256 "5ccc2c77acdfa8da5be23ad49c0b3144c5f0249b2813c7170d8af42554d07aac"
+         :diff "One new file, 567 lines"
+         :authorization-sha256 "4162322c7b10524b20f0aa34fc6a0d54cec1d9d93f0dcbc6af243e8d3c2f0e18"
+         :plan-v2-sha256 "d6df9e4557ebb3ca73fe46a6b44eafd5eb9b147dcd24a72df4854f1a58211997"
+         :plan-fix-review-v2-sha256 "59feed8fe215d09ef26216b5f90f9289b4e980b1717d99ea4cadf13e8e5f58f4"}
+ :findings
+ [{:id :F1 :priority :P1
+   :anchor "s6a_fixture_test.go:449-470"
+   :evidence "The internal external-request branch accepts any non-200 status with zero captures. EMAIL/MRN accept every 400-599 including 500; signed deny accepts any non-200 including a 3xx or 500. complete discards all non-200 response bodies at lines 403-411. A broken classifier, policy service, router, or other unrelated failure can therefore satisfy the claimed negative and cache-invalidation assertions. Source controlplane/service.go:939-947 shows publish/cache errors can produce failures independent of a policy decision."
+   :minimal-fix "Assert the owner-documented exact denial HTTP status and structured code/stage or real session/evidence decision for each case, including actual classified sensitivity and expected denial cause; require no captures and add a same-configuration positive control. Never count a generic server error as policy denial."
+   :future-oracle "A controlled unrelated 500, redirect, or wrong denial code must fail each respective case; genuine sensitivity and signed-deny decisions must pass only at their expected response/evidence and zero provider calls."}
+  {:id :F2 :priority :P1
+   :anchor "s6a_fixture_test.go:443-455; internal/classifier/service_test.go:40-43"
+   :evidence "Hybrid checks only absence of the entire literal '(555) 123-4567' and presence anywhere in serialized JSON of the prefix '[[PHONE_NUMBER_'. The owner classifier test identifies the PHONE_NUMBER span as '555) 123-4567', omitting the opening parenthesis. A body containing that raw sensitive span plus a placeholder elsewhere, or an incomplete placeholder prefix, passes. The narrowed success branch checks no placeholder at all."
+   :minimal-fix "Decode captured messages and require an intact canonical PHONE_NUMBER placeholder in the actual user content at the classified span, and absence of the actual sensitive span and normalized number in the final serialized bytes and decoded content; apply the same checks to successful narrowed dispatch. Bind classification/route evidence to that session."
+   :future-oracle "A capture retaining '555) 123-4567' or placing a stray placeholder elsewhere must fail; the real classifier's redacted message and correctly formed placeholder must pass."}
+  {:id :F3 :priority :P2
+   :anchor "s6a_fixture_test.go:277-299,359-386,413-448"
+   :evidence "The stale CAS resubmits the already active exact bundle, so its rejection does not demonstrate that a different valid candidate cannot replace it. The purported wrong-signature case supplies an 11-byte malformed signature rather than an Ed25519-length signature from a wrong key; neither negative reads back revision or active policy afterward. B only compares endpoint ID, URL, binding version and approval; it does not read back profile/AI and both endpoint revisions as plan v2:99,119 requires. Session check merely rejects trialVersion; successful completion checks version later, not the actual session version."
+   :minimal-fix "Submit distinct validly signed candidate bytes at stale revision and a correctly sized signature over a distinct candidate using a different fresh key at current revision. After each expected conflict/bad request GET profile and active policy identity and verify unchanged revision/version, and exercise the previously allowed policy. Read back B endpoint/profile/AI fields and assert each new session's exact expected policy version."
+   :future-oracle "Tests must fail if either rejected candidate changes active revision/version, if malformed signature handling masks acceptance of a wrong-key signature, or if B starts with altered profile, modes, endpoint revision or session policy."
+  {:id :F4 :priority :P2
+   :anchor "s6a_fixture_test.go:413-448; internal/inference/service.go:236-256; internal/httpserver/stage_api.go:250"
+   :evidence "The two successful cases assert mode/version/response ID and frame count, but never assert returned choices/content or classification/route source facts. assertEvidence only checks that chain_verified is present, not true, and that stage names exist, without checking stage outcomes or linking response identity. Thus a completion with no useful provider output, false chain verification, or nominal stages with incorrect facts can satisfy the positive control."
+   :minimal-fix "Check actual returned choice content against the deterministic provider response, true chain verification, and session/response-linked genuine evidence facts for public versus internal classification, redaction and selected route, using existing owner API shapes; do not infer source merely from mode or a stage name."
+   :future-oracle "Empty or wrong completion, chain_verified=false, mismatched session/response, or wrong classification/route evidence must fail while correct positive and hybrid outputs pass. Independent anchor remains explicitly unavailable."
+  {:id :F5 :priority :P2
+   :anchor "s6a_fixture_test.go:159-172,337-355"
+   :evidence "If B's 10-second handler join or Stack.Shutdown fails, deferred s6aClose reports failure but returns with a runtime or handler still active. The next defers snapshot captures and restore the process-global provider hook anyway, despite plan v2:117 requiring restore after B closes. An active handler can append a final frame after the snapshot; retained frames and hashes then omit actual final bytes, and a still-live runtime outlives the hook it was built under."
+   :minimal-fix "Coordinate teardown as one owner: stop admission, join all handlers and successfully shut down B before freezing/preserving final captures and restoring the hook. On bounded failure keep execution non-successful and preserve/record explicit incomplete capture and shutdown state; ensure an external supervisor retains process ownership until safe termination instead of claiming a final snapshot."
+   :future-oracle "Inject a handler held beyond the join deadline and a shutdown failure; neither may be reported as final complete capture or clean teardown, and no hook restoration may race a still-live B. A normal joined shutdown must preserve every final frame/hash."}]
+ :observations {:source-only "The A provision calls genuine owner APIs and uses fixed in-memory handler transport; A join precedes B, the binding uses returned endpoint identity, and the provider hook is installed before B Build. These are source observations, not execution evidence."
+                :guard "NoNewPrivs/Seccomp and one socket EPERM are a sanity check only. Whole-filter/ABI/FD/descendant qualification and an observable unexpected-attempt mechanism remain separately held."
+                :dependency "The reported private modfile/checksum adjudication seam is future build preparation, not authority to execute or change owner locks; this review did not verify the cache."
+                :not-claimed [:actual-govone-test-result :P3 :P4 :real-consumer-transport :real-network :LLM :OCR :independent-anchor :exact-binary-qualification]}
+ :actions {:performed [:read-source :read-applicable-owner-instructions :read-plan-and-decision :inspect-git-head-and-diff :hash-inputs :write-this-review]
+           :not-performed [:compile :go-test :go-vet :build :runtime :guard-probe :network :existing-credentials :source-edits :commit :push :PR :board :ledger :nested-agents]}
+ :next "Return findings to source owner for one-file corrections and a fresh independent review of the exact resulting head; all execution and guard gates remain held."}

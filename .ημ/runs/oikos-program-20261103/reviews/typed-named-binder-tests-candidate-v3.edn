@@ -1,0 +1,17 @@
+{:status :partial-source-candidate
+ :scope :test-source-only
+ :file "/tmp/opencode/oikos-typedclojure-owner-a2698786-b653-4566-a8eb-9c19d374ada0/typed/clj.checker/test/typed_test/clj/checker/seq_annotation_test.clj"
+ :sha256 "3ef4d7c574bcf2ccd2461692a2a0d7968ac170f1312ae590ba0c7ed6011001df"
+ :diff-summary ["Preserved both original tests and the resource warning assertion."
+                "Added checker parse representation and warning comparisons for index-one filters and object, nested shadow, function in filter type, fixed prefix, rest, dotted and type/term binder cases, and seq resource versus positional form."
+                "Added reason-token and subject assertions for duplicate, malformed, unknown, sibling visibility, outer capture, named variable and after-variable forms."
+                "Added open-Result positional comparison and second-argument object assertion, plus actual checker application positive and wrong-neighbor negative."]
+ :verification {:executed "Source inspection and sha256sum only; no test, lint, typecheck, JVM, Clojure, Babashka, dependency resolution or project scripts were run."
+                :unrun-command "Run the repository's authorized test runner for typed-test.clj.checker.seq-annotation-test only after containment and execution are separately authorized; no runner command was verified here."
+                :runtime-claims :none}
+ :limitations ["Incomplete matrix: no empty/no-object comparisons, independent legacy symbol checks, explicit inner numeric offset preservation, unbound type variable diagnostic, unnamed regex/rest/dotted baseline warning snapshots, or typed empty seq case."
+               "open-Result checks parity and the opened object id but not independently asserted filter paths, caller-path composition, nested outer-then-inner application, or both proposition polarities."
+               "Application covers object but not filter and Seq-path variants, positional controls or a diagnostic-specific wrong-neighbor oracle."
+               "Assertions are unexecuted and may need correction against actual checker behavior, warning output or diagnostic wrapping. Catching Throwable here obtains a diagnostic without guessing an exception class, but nested cause handling has not been established."
+               "No parser or annotation files were edited in this task; concurrent owner edits are not assessed."
+               "No claim is made that this partial candidate passes the reviewed plan or provides runtime parser evidence."]}

@@ -1,0 +1,17 @@
+{:report/id :oikos/axxium-synthetic-qualifier-source-candidate-v13
+ :status :blocked-before-authoring
+ :reason "The admitted instruction requires reading all actual transitive dependencies before authoring, but the actual NBB resolution closure, including bundled Malli and Edamame and Node/NBB dependencies, is unknown. Resolving or probing it is explicitly forbidden in this stage. Inventing a complete manifest or a launcher claiming to enforce the unknown closure would be unsafe."
+ :source-evidence {:plan "axxium-local-drive-state-qualification-plan-v10.edn"
+                   :comparison "axxium-current-drive-source-comparison-v11.edn"
+                   :admission "axxium-synthetic-qualifier-plan-review-v12.edn"
+                   :old-head "887c485270904ed368890834f63064b2008a4067"
+                   :selected-current-head "3a319a43d1bd8064e8cdd2729db93e3710ae7ddd"
+                   :pins "See v12 lines 8-21 and v11 lines 15-23; current transitive equivalence is not established."
+                   :read "Read the three full reports, selected old owner primitives and their named Axxium and Clio source dependencies. No independent file hash verification or current-head comparison was performed."
+                   :gap "NBB built-ins, actual Edamame/Malli classes and their transitive imports, runtime and native closure remain unreviewed; v12 explicitly says configured shadow versions do not establish NBB resolution."}
+ :artifacts {:count 0 :hashes {} :scratch-created false}
+ :static-checks {:launcher-ast :not-applicable :clj-kondo :not-applicable}
+ :unrun ["NBB candidate import or execution" "Python candidate import or execution" "dependency resolver or probe" "tests, build or network" "launcher and containment verification"]
+ :custody "No task scratch directory was created. Existing comparison cache was only listed; it was not modified or removed."
+ :next "Admit a separate bounded read-only dependency-closure discovery and source review, or provide a previously reviewed complete pinned closure and guard source; then author and independently review the four artifacts. Synthetic execution and all credential access remain held."
+ :boundary {:owner-edits false :git-writes false :board-writes false :ledger-writes false :credentials false :network false :runtime-execution false}}

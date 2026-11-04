@@ -1,0 +1,30 @@
+{:kind :systemd-neutral-controller-source-candidate
+ :status :pending-independent-review
+ :artifacts [{:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v1.py" :sha256 "50ab6a66a3107fff8e04d55a9348c5b16b89b0cb08a7d92d13748774e2972619"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v5.json" :sha256 "25ac8c95422c4f76003fa65eff4e0514a40fa6f3c9b40b9e3699423f1bfbac0c"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v4.json" :sha256 "5c038bc64df91c0c1bc4bc19acb88172fe0b62de6f419c7eaa7a81051dd074c7"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v3.json" :sha256 "258030d0e11ba5a52edb2c66b012642545b15da123058a4c2664d1d9d08d5553"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/neutral-probes-v4.py" :sha256 "bc9ebb1f3e68b914e940bb412ad079496759f31a904d50038e23c6f3bf178391"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/runner-v3.py" :sha256 "e83fa750676dd1b388ac32459eda899b7a88fb46f6de7aa195b54d7e09d8d9e9"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/guard-v2.py" :sha256 "37d9b10e85a46e621ac6bfc42ddf8894f0ce3352dc57528acfbc2681ca49b39f"}
+             {:path "/usr/bin/python3.12" :sha256 "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f"}
+             {:path "/usr/bin/systemd-run" :sha256 "de28cc5757d3789efa5f6fed5659893410469f68b42175d4531f5b34d3a09e16"}
+             {:path "/usr/bin/systemctl" :sha256 "37ec607113f55f1b385b4fa75588a43402aec0de57927500763b267713f10f63"}
+             {:path "/usr/bin/env" :sha256 "886e5fa8be716b03eeda48856e0f04493f2969fc148fb7812594ffac647fa050"}]
+ :recipe {:unit "Fresh UUID oikos-typed-neutral-<uuid>.service; check not-found before launch; no collect."
+          :launcher "/usr/bin/systemd-run --user --unit=<unit> --wait --pipe"
+          :properties ["RuntimeMaxSec=90s" "TimeoutStopSec=5s" "KillMode=control-group" "SendSIGKILL=yes" "Restart=no" "MemoryMax=256M" "TasksMax=64" "CPUQuota=100%"]
+          :unit-command "/usr/bin/env -i HOME=<private-v2> XDG_CONFIG_HOME=<private-v2> XDG_CACHE_HOME=<private-v2> TMPDIR=<private-v2> PATH=/usr/bin:/bin LANG=C.UTF-8 /usr/bin/python3.12 -I -B /tmp/opencode/oikos-typed-seq-logs-a2698786/neutral-probes-v4.py"
+          :logs "Unique mode-0700 directory beneath existing private-v2; mode-0600 exclusive nofollow stdout, stderr and selected metadata.json including start/end UTC. Harness retains fresh parent-created fixtures in private-v2."
+          :profile "One fixed neutral batch only; no Java, typed tests, arbitrary commands, external network destinations or direct fallback."}
+ :dispositions [{:item :watchdog :status :source-only :detail "User manager RuntimeMaxSec is intended to remain independent of controller lifetime. Stop escalation is delegated to manager through verified properties; no namespace-based guarantee is claimed."}
+                {:item :unit-identity :status :pending-review :detail "Random unit name, observed not-found, captured nonzero InvocationID, ControlGroup and MainPID. Stop is requested only after same-invocation check; identity loss or missing empty-group evidence reports unconfirmed. The show-to-stop check is not an atomic compare-and-stop API and requires independent scrutiny."}
+                {:item :resource-controls :status :pending-review :detail "Requested limits and stop properties are compared with readonly systemctl output; unsupported, refused, unobserved or unexpected values fail closed. Short-lived units may complete before active metadata can be observed and then fail closed."}
+                {:item :output :status :source-only :detail "Finite CLI output cap and bounded per-command and overall deadlines; no environment property dump. No action targets unrelated service names."}]
+ :assumptions ["Parent reports systemd 255, unified cgroup v2, user accounting and available controllers; this session did not independently inspect them."
+               "Processes started in a service normally inherit its cgroup across setsid; secure enforcement assumes the unit cannot move processes to another cgroup and the manager controls the hierarchy. Guard behavior and effective cgroup permissions remain unverified."
+               "RuntimeMaxSec and KillMode are requested, not yet proven effective. Cleanup checks require same InvocationID and an inactive unit with cgroup.events populated=0 or a demonstrably removed cgroup under an existing parent."
+               "The reported binary hashes are externally pinned here but controller source pins the Python/harness/inventories, not systemd binaries; verify all report hashes before launch. Pre/post file hashes are cooperative, not immutable snapshots."]
+ :verification "Only ast.parse of systemd-neutral-v1.py and SHA-256 reads performed. No systemd-run, unit start, probe, Java, typed test, or network execution."
+ :pending-inner-command "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 XDG_RUNTIME_DIR=<verified-user-runtime-dir> DBUS_SESSION_BUS_ADDRESS=<verified-user-bus> /usr/bin/python3.12 -I -B /tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v1.py"
+ :gate "Same auditor reviews exact source and hashes before admitting one neutral batch; pending command is not evidence of execution."}

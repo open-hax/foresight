@@ -1,0 +1,39 @@
+{:kind :independent-design-fix-review
+ :verdict :source-work-admitted-with-conditional-ceiling
+ :scope :source-only
+ :input {:path ".ημ/runs/oikos-program-20261103/reviews/typed-named-binder-compatibility-plan-v2.edn"
+         :sha256 "05cc30c7225aa5ae45ee33e7db2a4b058831b579917319c353b77ba06b7408a7"
+         :prior-review ".ημ/runs/oikos-program-20261103/reviews/typed-named-binder-compatibility-plan-review-v1.edn"}
+ :source {:checkout "/tmp/opencode/oikos-typedclojure-owner-a2698786-b653-4566-a8eb-9c19d374ada0"
+          :observed-head "f0cb23fc09dbbef8ed5525aab20353add60fe4cf"
+          :anchors [{:path "typed/clj.checker/src/typed/clj/checker/parse_unparse.cljc" :sha256 "1aa9dbd55101d490c953de3be3fb3b90571f62e0b19e44ec5a734afba295791a" :lines "535-607, 1416-1495, 1576-1824"}
+                    {:path "typed/clj.runtime/src/clojure/core/typed/parse_ast.cljc" :sha256 "1ea4b2db327d2871e5347f61359c2cd63e20f7d6dfa8725c0669bf098130ae9f" :lines "296-360, 965-1090"}
+                    {:path "typed/clj.checker/src/typed/cljc/checker/subst_obj.clj" :sha256 "ffe9adae2388e353a2e40a0aff207ac83d7ca69beffbef2c00fef90ad155e63a" :lines "21-69, 108-154"}
+                    {:path "typed/clj.checker/src/typed/cljc/checker/open_result.clj" :sha256 "9a64d9f15277d8502bfba7321806092b60667e317027580ce95ca0febe6334d8" :lines "41-76"}
+                    {:path "typed/clj.checker/src/typed/cljc/checker/check/funapp_one.clj" :lines "110-124"}
+                    {:path "typed/clj.checker/test/typed_test/cljc/checker/inst.clj" :sha256 "3673a18ba266a1682b58b8bf83f155fb6cf8a0b60f18fb6ba7ee3f6f74f18231" :lines "12-18, 110"}]}
+ :dispositions [{:finding :scope-policy-not-yet-defined :status :design-settled
+                 :basis "V2 defines fresh per-function frames, distinct domain/body phases, current-frame shadowing, capture rejection and unnamed-frame legacy handling. Its explicit collision policy rejects an outer-binder spelling in a nested legacy body rather than silently changing its referent. Sibling frames are not merged and binder names never enter type-variable resolution."
+                 :implementation-gate "Preserve markers through recursive parsing including nested functions in domain and filter types; a local frame must not leak to siblings. Exercise shadowing, out-of-scope names, unbound type names, independent legacy names and ambiguous collision cases with the specified reason-specific oracles."}
+                {:finding :fixed-prefix-classification-must-follow-parse-cat :status :design-settled
+                 :basis "The proposed one-pass classifier proves each preceding component is a single non-regex Type and rejects named postfix or regex components and binders after unproved width. Original no-marker parsing and post-prefix operator processing stay on the legacy path. parse-ast raw-dom is evidence only for its own fixed syntax."
+                 :implementation-gate "Respect the context-sensitive * and <... cases in parse-cat rather than normalizing them. Parse types only once and preserve warnings. Existing checker parse-All-binder and inst.clj confirm the proposed [x :..] dotted-binder spelling; they do not prove the complete proposed named form executes. If exact one-pass compatibility cannot fit the ceiling, stop."}
+                {:finding :positional-lowering-and-test-contract-incomplete :status :design-settled-pending-execution-evidence
+                 :basis "V2 resolves only at object-id and is/! subject boundaries, preserves legacy literal paths and warning behavior, and requires comparisons of representations, actual application, paths and nested results. open-Result substitutes each index across result type, propositions and object; ordinary funapp calls it. subst-obj shifts the outer integer key when entering a fixed/rest/dotted/keyword Function range and composes object and proposition paths in different orders."
+                 :implementation-gate "These reads do not establish nested or regex-arity runtime soundness. Keep unsupported captures rejected and explicit numeric syntax unchanged. Run the specified discriminating nested, filter-type and wrong-neighbor checks only through the separately qualified execution lane; stop if behavior or required repair exceeds this parser slice. Do not assert general lexical support or that runtime object shorthand is checker syntax."}
+                {:finding :red-oracle-must-distinguish-rejection-reasons :status :design-settled
+                 :basis "V2 separates baseline-failing positive features from guard cases that may already throw, specifies unique reasons and subject assertions, and requires the same test suite at baseline and candidate with explicit baseline outcomes."
+                 :implementation-gate "Before claiming guard coverage, demonstrate each oracle discriminates its named guard from an unrelated error and would catch that guard being disabled; do not equate an exception with a valid RED. No tests were executed in this review."}]
+ :admission {:source-work :admitted
+             :rationale "Standing authorization permits the reviewed source slice. No further routine approval is needed for work within these limits; admission is not implementation, test success, wrapper approval, or artifact qualification."
+             :maximum-distinct-owner-files 3
+             :files ["typed/clj.checker/src/typed/clj/checker/parse_unparse.cljc"
+                     "typed/lib.clojure/src/typed/ann/clojure.cljc"
+                     "typed/clj.checker/test/typed_test/clj/checker/seq_annotation_test.clj"]
+             :ceiling-assessment "Plausible for private parser frames, shared classifier/resolver and focused tests; not proved sufficient. Do not edit parse_ast, open_result, subst_obj or any fourth owner file under this admission. If correctness requires that, stop and obtain review of the specific expanded scope."
+             :holds ["Preserve existing integer acceptance, warnings and errors; no blanket warning suppression."
+                     "Do not replace published artifacts, publish, or change SHX locks: the recorded source/JAR discrepancy remains unresolved."
+                     "Execution, wrapper qualification and probes remain separate; this review grants no tests, Java, auxiliary bb from the checkout, dependency resolution or cache writes."]}
+ :verification {:performed "Read V2 and pinned source anchors, including parser, runtime grammar, dotted-binder examples and substitution/application code; calculated exact hashes and observed checkout HEAD with git rev-parse."
+                :not-performed "No product edits, tests, Java, bb, probes, network, dependencies, global cache writes, PR, ledger or board actions; no runtime, warning-stream or behavioral claim is established."}
+ :next "Proceed with source-only implementation within the admitted ceiling, retaining the separate execution and provenance gates."}

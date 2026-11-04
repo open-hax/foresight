@@ -1,0 +1,22 @@
+{:id :govone-capacity-request-tests-fix-v8
+ :status :source-candidate-unexecuted
+ :authority :none
+ :owner "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+ :path "internal/inference/capacity_evidence_test.go"
+ :baseline-sha256 "2ee8030c4b2a29da1e4eaa15026fbc40ad87ad27f785d0a8d86fc4569789519e"
+ :sha256 "3f8d262018ffe411e9422da9a10c6d89c1b54eab82ca28d1e9c29d759293d208"
+ :anchors {:fixture "29" :signed-policy "141" :composition "173" :real-requests "205" :resolver "273" :public-check "332" :evaluation-failure "345" :constraint-and-recovery "374" :legacy-shaped-projection "433" :rollback "464"}
+ :findings {:F1 "Source now explicitly configures public base sensitivity in both SQLite and the actual harness profile; a real classifier, scoped verified signed deny policy, actual router and same-transaction SQLite audit compose the connected request. No-local and checker-error cases assert the tuple and committed source/projection binding. Independent resolver cases evaluate compatible signed decisions for connected/public, air-gap/public, and connected restricted and regulated cases. They do not establish signed causation or actual fixture version."
+            :F2 "Source adds actual scoped-policy evaluation failure with missing scope, both no-endpoint and checker-error; session-only local constraint with externally allowed resolver observations; a one-shot controlled real SQLite store error followed by independent external recovery; invalid deployment and sensitivity with failed first resolver call. The recovery assertion establishes a completed route and generator invocation if the source works, not full successful completion: the existing stub response finalizer supplies nil to the real transactional appender."
+            :F3 "Request source compares failed-route public facts exactly to stage/status and verifies the committed facts hash and actual evidence.LoadDecisionProjections export/source binding; checks serialized fault details, completion and evidence export item for prohibited new tuple strings; adds a synthetic historical-shaped persisted record with exact facts and commitment. The actual HTTP server envelope and an authentic pre-migration database are not exercised. Actual pipeline CompleteStage route/non-route coverage is owned by the separate pipeline test writer."
+            :status "These are source changes, not verified finding closure or a passed review."}
+ :limitations ["No compilation or execution: signatures, migrations, seed constraints, response-stub behavior, exact facts, source hashes and whether each request reaches its intended branch remain unverified."
+               "Recovery uses existing stub generator dispatch count; this is not a network guard or provider approval and the final completion may fail for the documented nil transaction."
+               "The historical test synthesizes a legacy-shaped record under current schema; it does not prove migration or preservation of actual historical bytes."
+               "The public representation test uses the real evidence export item and serialized Completion and fault details, not the HTTP server's full response envelope."
+               "Fixture root final-component UID and mode checks do not validate ancestor symlinks, isolation or any independent supervisor; separately qualify guards and retained synthetic state before execution."
+               "Policy scope is published into the real service cache for this test composition; this does not prove runtime activation, cache invalidation or exact production request lineage."]
+ :untouched "No edits to production code, other test files, fixture or locks by this worker. No Git write, board, ledger, PR, nested agent, credentials, network or application initialization."
+ :verification "Only source reading, patch, gofmt and sha256sum. No Go compilation, testing, run, list, mod, dependency/cache probe or runtime."
+ :holds [:fresh-exact-diff-review :guarded-owned-fixture :offline-dependency-proof :compile-and-test-admission :N1 :signed-causation :request-version-lineage :cache-invalidation :runtime]
+ :next "Independent source-review the two test files and reported limitations, then separately qualify containment and offline execution before running anything."}

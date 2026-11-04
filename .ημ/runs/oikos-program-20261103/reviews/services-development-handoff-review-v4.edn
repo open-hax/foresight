@@ -1,0 +1,48 @@
+{:review/id :services-development-handoff-review-v4
+ :kind :independent-exact-docs-review-not-owner-release
+ :verdict :hold-pending-plan-sequencing-disposition
+ :candidate {:repository "open-hax/services"
+             :head "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b"
+             :tree "d54a348e1346fec8230b09a8dd6e1c0eba6aae88"
+             :reviewed-source-head "b2973ef9e3246522324dec4658fbeb093ffab147"
+             :reviewed-source-tree "daf053cce6b24c8d62f59e660b90b6c92a5bbae2"
+             :coordinator-candidate ".ημ/runs/oikos-program-20261103/reviews/services-development-handoff-candidate-v3.edn"}
+ :docs-sha256 {"README.md" "bf30f228a5a1ccab325f3d0a56a7b764274dc2c3570b59bc4d22581a0567bfb4"
+               "docs/deployment-model.md" "6357e97f51ae69a18506be3fbc906c147cda94b727b48f660db71805c51244a6"
+               "docs/local-generation-engine-notes.md" "94146d9a0d3fa489a84e2a8e4ec072a48b9eb1c3cbca1b4c5cbc9e7f437ded9e"
+               "docs/local-generation-development-handoff-v1.edn" "4aeba4c203db2fe3347021713390f5f0b81a251f14477dc51ad4ceeaa108ecb8"
+               "docs/local-generation-development-handoff-v1.md" "496fbc4c668f6407c89da98de611fb63a510f1e0aa94b482d549ee1df5250091"}
+ :source-pins {"edge" "41e633799724639ede651f039f087a602d1df6a8ef10721f4792088cbbdc6537"
+               "facade" "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+               "laws" "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+               "pure" "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"
+               "runner" "64c5a79d0f0fa84b953846ab99bffc186df31d113ccaa4fa031082d9a17c2175"
+               "validator" "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+               "wire" "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"}
+ :preserved {:frozen-spec "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+             :test-source "22a209935574805ab04282b46c68c0af6c8febaec02c98bba47085e37dbfc9e2"
+             :historical-report "b42f8c560ca91caabb363de582fb87fba7f5d84e81b8ca5878d2343d517ebe2c"
+             :comparison "Only the five listed files differ from b2973ef; frozen spec, test source and docs/reports/local-generation-final-verification-20261104.edn remain unchanged. Historical b39 report is not b297 evidence."}
+ :findings [{:id "SDHD-P2-1" :status :open :severity :process-gate
+             :basis "Approved plan V2 lines 36 and 45-46 and planning review V2 lines 14-16 condition README.md and docs/deployment-model.md updates on an owner release decision. Both are in this candidate while its descriptor and coordinator report say owner release has not been issued; the requester says the parent will issue a handoff after approval. Their text accurately labels the candidate and does not falsely claim release, but the plan's sequencing condition is not established by the reviewed evidence."
+             :resolution "Parent/owner should explicitly resolve whether an authorized owner decision permits these candidate-only status changes before release, or amend the sequencing through the applicable reviewed process. Do not treat the correctness of the wording as proof the conditional gate was met."}]
+ :dispositions [{:subject :descriptor :result :pass :basis "Strict single EDN map and EOF; exact top-level keys; seven id-sorted pin maps with closed id/path/sha256 string fields. Human companion explicitly closes v1 to unlisted keys. Runtime launch keys match runner's exact closed owner map. Source commit/tree is distinguished from externally identified enclosing docs commit/path/hash, avoiding self-reference."}
+                {:subject :recovery :result :pass :basis "Companion and appended engine note distinguish trusted fd-3 plus empty stdin/EOF recovery of an existing pending interrupted transaction from same-operation failure restoration under its retained lease; frozen startup wording identified as historical discrepancy."}
+                {:subject :formats-and-authority :result :pass :basis "Only inert-edn-v1 fixed fixture validator; not general EDN evaluation; bash-env unsupported without separately qualified shx. Candidate is not owner release or consumer acceptance and grants no installation, production or whole-S1B authority."}
+                {:subject :test-attribution :result :pass :basis "Independent b297 report records 3 focused, 14 edge, 4 wire/parity, 134 environment; BB and NBB each 8 tests/137 assertions and six JVM commands. Separate author report records 42 aggregate tests and 642 SIGKILL occurrences (8 checked, 248 restored, 386 held). No assertion that aggregate was independently rerun."}
+                {:subject :evidence :result :pass :basis "git show at Foresight 792dfa341d380cbf413b925319654d7c2ebec413 produced independent review hash 5f565e3e2729c3461137a6a20f7fbbdc3bc8365c56965b217eab3a4cad983025 and author report hash 4a309b65c71e01eb944e80cb3cdd35fa5aa34b10a22a5c28eb96c05fd73dd7b2. git ls-remote personal returned that exact commit for both refs/heads/plan/oikos-execution-20261103 and refs/heads/plan/oikos-workbench-20261103. Remote ref availability is not a privacy review."}]
+ :checks {:git-diff-check :passed
+          :strict-edn "Babashka from neutral /: single map, EOF, exact top-level keys, sorted typed closed pin records passed. This is not a full general-purpose schema validator."
+          :clj-kondo "descriptor: 0 errors, 0 warnings"
+          :markdown-links "21 local targets in four changed Markdown files checked, 0 missing; fragments not validated"
+          :source-and-docs-hashes :passed
+          :native-aggregate "Not rerun: code-unchanged documentation review; no new native aggregate claimed."
+          :production-tests "Not run or authorized."
+          :final-head "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b; pre-existing untracked scripts/__pycache__/ retained."}
+ :limits ["Independent review of this exact documentation only; no wholesale re-review of source qualification and no installed authority."
+          "Open plan-sequencing finding prevents unconditional approval pending explicit disposition."
+          "Owner release, source-publication privacy check, retrievability of the complete Services artifact, and Oikos owner acceptance remain separate gates."
+          "No claim that these refs establish privacy suitability, consumer integration, production qualification, or S1B completion."
+          "This reviewer is independent of the writer; this record does not assert identity with the prior independent source reviewer."]
+ :effects {:owner-source-edits false :commit false :push false :pr false :board false :ledger false :nested-agents false :service false}
+ :next "Parent resolve SDHD-P2-1 under the approved plan before treating this exact candidate as approved; preserve separate privacy and explicit handoff gates."}

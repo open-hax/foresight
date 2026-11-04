@@ -1,0 +1,19 @@
+{:review/id :services-dev-handoff-plan-fix-review-v2
+ :kind :same-independent-reviewer-planning-recheck
+ :verdict :approve-bounded-owner-docs-preparation
+ :input {:path ".ημ/runs/oikos-program-20261103/reviews/services-dev-handoff-plan-v2.edn"
+         :sha256 "55d3f3160ba10a6a305de2fb788d2adcd473a8ad978334797540c8878120f5d3"}
+ :prior-review {:path ".ημ/runs/oikos-program-20261103/reviews/services-dev-handoff-plan-review-v1.edn"
+                :sha256 "18662892167437d710edc9d6b95b0ae1e52991ac7e482fc155087f27dc6b51d2"}
+ :dispositions [{:id "SDH-P1-1" :status :settled
+                 :basis "V2 lines 33, 44 and 56 restrict later-ingress recovery of an existing pending interrupted transaction to trusted fd-3 plus EOF, while preserving restoration of the current admitted operation's own failure under the lease. Line 44 requires distinguishing the frozen spec's startup/re-entry wording from the exact-head ingress rule. Previously inspected source anchors: scripts/local_generation_runner.py:58-76 and scripts/local_generation_fs.py:774-788; frozen docs/local-generations-v1.md:329-346."}
+                {:id "SDH-P1-2" :status :settled
+                 :basis "V2 lines 28-30 correct the author report SHA-256 to 4a309b65c71e01eb944e80cb3cdd35fa5aa34b10a22a5c28eb96c05fd73dd7b2 and disclose the V1 transcription error. This turn independently rehashed that report and the independent review (5f565e3e2729c3461137a6a20f7fbbdc3bc8365c56965b217eab3a4cad983025); both match V2. Lines 59-62 separate author aggregate from independent exact-head evidence and historical b39 results."}]
+ :findings []
+ :file-ceiling {:owner-repository "open-hax/services"
+                :preparation ["docs/local-generation-development-handoff-v1.edn" "docs/local-generation-development-handoff-v1.md" "docs/local-generation-engine-notes.md"]
+                :conditional-after-owner-release-decision ["README.md" "docs/deployment-model.md"]
+                :qualification "The two new handoff files may be combined as V2 line 42 allows; engine notes receive only the specified append-only clarification. README and deployment-model status/links are conditional, not authority to announce a release prematurely. No other owner files are approved by this review."}
+ :boundary "Approval is for the plan's bounded owner documentation preparation under the existing owner-source grant, following parent admission. It is not an owner release, publication, consumer acceptance, installation, Bash qualification, promotion or S1B credit. Preserve the seven source pins, frozen spec and historical b39 report; distinguish b2973ef source/tree from any later docs commit and avoid self-referential commit identity. No code, kernel, runtime or deployment edits are included."
+ :evidence-limits "V1 source inspection and hashes are recorded in the prior review; this recheck read V2 and rehashed the two reports and prior plan/review, but did not rehash or execute owner source. Owner must verify source identity and required gates before any handoff. No tests, builds, network, PR, push, board, ledger, owner edits or nested agents in this review."
+ :next "Parent may admit the exact V2 plan for bounded owner docs preparation; retain all subsequent owner-release and Oikos-acceptance gates."}

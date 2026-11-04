@@ -1,0 +1,35 @@
+{:report/id :oikos/axxium-drive-runtime-recovery-v5
+ :report/status :configured-identity-instance-stopped-drive-profile-unidentified
+ :scope "Bounded local metadata and whitelisted local identity config; no credentials or Drive records opened, no login or Drive RPC."
+ :source {:drive-pr "/home/err/.local/share/codex-work/axxium-pr19-google-live"
+          :drive-pr-head "887c485270904ed368890834f63064b2008a4067"
+          :foresight-main "/home/err/spaces/foresight"
+          :foresight-main-head "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+          :startup-reference "ecosystem.identity.local.config.cjs in this coordinator worktree, sha256 a1b768117ee504bd90dfea0858abf47cecb3c98d6bb7c57ed21a42fa4f09b8dd"
+          :prior-review "axxium-drive-live-route-plan-v4.edn"}
+ :local-identity {:source "Coordinator ecosystem config names axxium-local, Node dist/server.js and ~/.secrets/axxium/local.env; Knoxx config points to loopback 8788."
+                  :whitelisted-config-file "~/.secrets/axxium/local.env"
+                  :whitelisted-fields {"AXXIUM_HOST" "127.0.0.1" "AXXIUM_PORT" "8788" "AXXIUM_PUBLIC_BASE_URL" "http://127.0.0.1:8788"}
+                  :drive-ledger-key-fields "Neither AXXIUM_DRIVE_LEDGER_FILE nor AXXIUM_DRIVE_TOKEN_KEY_FILE is present in this file. This is not a statement about other files, process overrides or historical state."
+                  :profile-identity "Identity-only config path identified; no Drive owner, configured Drive store or tested linked profile identified."
+                  :probe {:method "Unauthenticated GET /health on the exact configured loopback origin, 2-second timeout, no response body printed."
+                          :result :connection-refused
+                          :listener-check "ss -ltnp sport = :8788 returned no listening socket at inspection time."}
+                  :runtime-revision "No application listener or matching PM2 process, so no running application build revision could be established."}
+ :service-inventory {:user-systemd-units [{:name "promethean-axxium-stealth-tunnel.service" :active-state "active" :sub-state "running" :unit-file-state "enabled" :description "Private Axxium stealth reverse tunnel to Knoxx ingress" :fragment "/home/err/.config/systemd/user/promethean-axxium-stealth-tunnel.service"}]
+                     :systemd-note "Nine additional Axxium-named transient unit files were listed, none appeared in the loaded-unit listing. No unit was started or altered."
+                     :pm2 "Current user's metadata contains no process whose name matches axxium or identity."
+                     :docker-running [{:name "axxium-fixture-1ec6a756c4c27c621bc6a00836059d82-axxium-1" :image "c45e58aadb02" :ports "8787/tcp"}
+                                      {:name "axxium-fixture-1ec6a756c4c27c621bc6a00836059d82-verify-0123456789abcdef01234567" :image "c45e58aadb02" :ports "8787/tcp"}
+                                      {:name "axxium-fixture-1ec6a756c4c27c621bc6a00836059d82-axxium-db-1" :image "75f5a96988cd" :ports "5432/tcp"}
+                                      {:name "axxium-fixture-1ec6a756c4c27c621bc6a00836059d82-caddy" :image "612f0ff47f33" :ports "80/tcp, 443/tcp, 2019/tcp, 443/udp"}
+                                      {:name "axxium-fixture-1ec6a756c4c27c621bc6a00836059d82-pds" :image "c45e58aadb02" :ports "8787/tcp"}
+                                      {:name "axxium-stealth-database-1" :image "postgres:16-alpine" :ports "5432/tcp"}]
+                     :docker-note "Names and reported ports are metadata only; fixture names and image IDs do not establish production identity, Drive support, host port publication, grant or runtime revision. No container environment or credentials were inspected."
+                     :remote-note "The active tunnel description identifies Knoxx ingress; no remote application host/port or Drive capability has been established, and no remote host was probed."}
+ :interpretation ["The 8788 identity config exists but is not currently listening; its inspected whitelisted fields do not establish a Drive-enabled instance or a stored linked grant."
+                  "An active tunnel or database does not imply the application is running. Other supervisors, users, machines and previously used profiles remain outside this bounded inventory."
+                  "No new OAuth consent is presumed necessary if an existing usable grant can be identified; no conclusion about a human login requirement is possible without locating that instance and grant evidence."]
+ :concrete-next "Trace the existing fixture or historical Drive rehearsal through its owner-provided nonsecret run artifact, deployment metadata or source-pinned start configuration; qualify host, running revision, actor-bound existing grant and private destination before invoking any Drive RPC. For a remote host, use the existing SSH identity rules and bounded metadata only. Do not start/reconfigure the stopped 8788 app or touch unknown listeners."
+ :archive-plan "Unchanged: axxium-drive-live-route-plan-v4.edn; exact five-file private archive and manifest, EDN base64, once-only put, exact-ID readback and decoded byte/hash verification only after qualification."
+ :boundary {:new-login false :new-consent false :token-exchange false :drive-rpc false :service-start-or-restart false :service-configure false :container-env-read false :credentials-token-cookies-ledger-read false :source-edits false :board-or-ledger-writes false}}

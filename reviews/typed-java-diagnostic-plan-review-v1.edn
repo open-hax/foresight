@@ -1,0 +1,27 @@
+{:kind :independent-adversarial-plan-review
+ :verdict :changes-required
+ :review-completeness :blocked-missing-review-inputs
+ :plan {:path "reviews/typed-java-diagnostic-qualification-plan-v1.edn"
+        :sha256 nil
+        :observation "The specified plan did not exist at the canonical checkout path when inspected; its content and full SHA-256 cannot be reviewed or truthfully supplied."}
+ :missing-inputs ["Canonical diagnostic qualification plan, including its full SHA-256"
+                  "Identified actual neutral v17 qualification artifact"
+                  "Identified source-review-v3 and test-fix-v4 artifacts"
+                  "Fresh proposal inventory and exact dirty-owner-file baseline"]
+ :findings []
+ :blocker {:type :missing-evidence-not-a-confirmed-design-contradiction
+           :minimal-fix "Provide the exact canonical plan and paths to the named qualification, reviews, and inventory; independently pin their complete hashes and request review of those exact bytes."}
+ :reviewed-anchors [{:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/guard-v3.py" :sha256 "3c19da1108ea581305a67ebb129364972258473e9cc918ecd65c57160c553011" :lines "11-35"}
+                    {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/runner-v4.py" :sha256 "b247bfeab6806424a085dce2eadef6aac5c10cfee7afbf5c445cad703ad6a1d0" :lines "44-52, 104-160"}
+                    {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/neutral-bootstrap-v1.py" :sha256 "061cd1c2d342343d882654ae27bad482c988121db4d5023fa757ff174b8451c2" :lines "15-48"}
+                    {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v6.py" :sha256 "a486ea931064a3866034c0e9f1caeb26ccb52266ec709737d8b9bcb949c66795" :lines "43-58, 84-92, 125-152, 285-340, 357-398"}
+                    {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v6.json" :sha256 "73e047b2fe10bc33019e5d9cfd6bf3ae97a6ce8f031e7eee2f93da33840b026b" :scope "Neutral-era inventory; not asserted to be the fresh proposal inventory."}
+                    {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/private-v2/controller-v6-cbaceb7d-83b6-4da7-a151-85a9360bb930/result.json" :sha256 "9b1b8c38abe846f937418bf2486e4fe6f521bec98146a3a7f8280396f4d41314" :lines "3-23, 40-47, 59-68" :scope "Recorded one neutral-only pass, not identified as v17 or as Java qualification."}]
+ :observations ["The recorded neutral controller profile is 256 MiB, 64 tasks and 90 seconds, not the proposed Java profile. This does not establish a contradiction in an unavailable plan or prove the proposed profile qualified."
+                "The available runner's Java argv lacks an explicit 512 MiB heap flag and relies on cooperative pre/post inventory matching; it is not established to be the proposed future diagnostic implementation."
+                "The neutral bootstrap creates its separate-session descendant only after GO; controller v6 separately checks kernel controls before GO and anchors the descendant after its readiness message. Whether a proposed adaptation preserves the necessary ordering is unreviewable without the plan."]
+ :eligibility {:diagnostic-batch :not-admitted
+               :acceptance :not-admitted
+               :reason "Missing plan and qualification evidence prevent an independent determination. An incomplete acceptance matrix alone is not asserted to forbid a bounded diagnostic batch; diagnostic eligibility requires separately reviewed containment and input controls."}
+ :source-only-ceiling "Read and hash the supplied candidate artifacts and produce a new independent source/plan review; no Java, unit, probe, build, dependency resolution, cache writes, network, credentials, owner edits or execution authorization."
+ :verification "Read-only source and metadata inspection and sha256sum only; no JVM, unit, probe, build, dependency resolver, network, credential use, or owner edit performed."}

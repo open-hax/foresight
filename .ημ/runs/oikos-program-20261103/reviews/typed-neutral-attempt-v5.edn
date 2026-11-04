@@ -1,0 +1,26 @@
+{:report/id :typed-neutral-attempt-v5
+ :kind :actual-neutral-cases-with-failed-final-observation
+ :permit "permits/typed-neutral-batch-v5.edn"
+ :status :failed-aggregate-qualification
+ :attempts 1 :controller-exit 1 :elapsed-seconds 12.810553919000085
+ :go-sent true
+ :unit "oikos-typed-neutral-a06a8e5f-f93a-48a2-8b9a-121b85ef7fb1.service"
+ :invocation "d350b0b805d94d97baeef6ed931504e8"
+ :kernel {:memory.max "268435456" :pids.max "64" :cpu.max "100000 100000"
+          :type "domain" :parent-controllers "cpu memory pids" :parent-subtree-control "cpu memory pids"}
+ :cases [{:case :positive :reason :complete :case-cleanup :confirmed-group-absent}
+         {:case :timeout :reason :timeout :case-cleanup :confirmed-group-absent}
+         {:case :output :reason :output-cap :case-cleanup :confirmed-group-absent}
+         {:case :pipe-close-descendant :reason :complete :case-cleanup :confirmed-group-absent}
+         {:case :exception-cleanup :reason :not-started :injected-error-observed true :case-cleanup :confirmed-group-absent}
+         {:case :guard :reason :complete :case-cleanup :confirmed-group-absent}]
+ :case-interpretation "The exact source-pinned finite harness reported all six cases and its neutral-v5 passed marker. Those individual observations remain evidence; they do not override the aggregate controller failure."
+ :lifecycle {:main {:pid 1295216 :start-ticks 51869224}
+             :separate-session-descendant {:pid 1295220 :start-ticks 51869229 :pgid 1295220 :sid 1295220}
+             :anchored-cgroup-inode 7800896
+             :wrapper-died-marker-observed true}
+ :failure "Final cleanup remained unconfirmed: opening cgroup.events on the held cgroup descriptor returned FileNotFoundError after group teardown. The old st_nlink==0 deletion shortcut did not produce an accepted proof. Two observation errors were retained, not waived."
+ :postflight-pins :matched
+ :controller-stops-or-signals 0
+ :evidence "/tmp/opencode/oikos-typed-seq-logs-a2698786/private-v2/controller-v5-726ea82e-00a9-4bc9-8239-abcba8c21c0e"
+ :limits "No Java, typed test, Go, OCR, model, credential read or external network. This consumed permit is not retried; a separately reviewed inode-bound deletion-observer fix and a new bounded permit are required. No source or failed evidence is discarded."}

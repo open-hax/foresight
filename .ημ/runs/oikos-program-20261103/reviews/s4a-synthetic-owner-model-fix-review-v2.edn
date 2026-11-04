@@ -1,0 +1,43 @@
+{:review/id :s4a-synthetic-owner-model-fix-review-v2
+ :date "2026-11-04"
+ :authority :none
+ :verdict :one-isolated-synthetic-batch-eligible-after-parent-admission-only
+ :input {:candidate "reviews/s4a-synthetic-owner-model-fix-candidate-v2.edn"
+         :candidate-sha256 "c3df471fd700f1799cbf92a0a748b788d8a7cbd4ce2f2e646ceda6a8dbc59f52"
+         :prior-review-sha256 "677221e2d53a3f89432078bc80e519a3e51bbd0e9c14b785b5b5f10fea468702"
+         :permit-sha256 "5f46e3f8fea5939dd0f79223aa0319291d9efe30f494f815996f7f0b0273cf09"}
+ :sources {:root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+           :model {:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "1551ba6be3d99f770851d26fd25b22d2b4440dd8e866b3419d4062a32d164faf"}
+           :tests {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "9c6413f2396b8bfbf442bd3251457bd15d9eade4b4452df6d86ee2c58c04dcee"}
+           :native-preservation [{:path "layers/agent-sandbox/oikos-native.el" :sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"}
+                                 {:path "tests/unit/oikos-native-test.el" :sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}]
+           :limits "Both listed native files match the prior recorded hashes; no claim about other checkout content or historical HEAD."}
+ :method "Read the complete two updated Elisp files, candidate report, prior independent review and applicable standing permit from the preceding review. No Emacs, ERT, native load, source modification, credentials, Git, board or ledger action. Python independently assembled expected transcript bytes from fixed fixture fields without running Elisp."
+ :goldens [{:operation :replace :bytes 285 :sha256 "d602c5e910ea2fb67ae73845dcd57f1724ca22a144b84f3af8f7d5043fb8e69c" :embedded-equals-independent true}
+           {:operation :read :bytes 291 :sha256 "5a7251b0f9d6159def0d755bb8fef0799ef351c86a346c07d59c5e2197d91c06" :embedded-equals-independent true}]
+ :dispositions
+ [{:id :closed-record-validation-and-input-totality :status :source-revised-runtime-unverified
+   :evidence "model:20-25,82-144 and test:87-96,171-180 add closed shapes, guarded public wrappers and malformed/cyclic fixtures. No guarantee of termination for every adversarial representation or all input-size bounds follows from static reading or this bounded test."}
+  {:id :binding-and-snapshot :status :partial-separate-model-only
+   :evidence "model:155-215 copies and compares a synthetic transcript, digest and records; tests:98-122,154-169 exercise selected swaps. Identity records are caller-supplied, not authenticated; transition step never consumes the snapshot, so no composed check-and-effect claim or authority can be made. Binding and transition exercise source independently; they are not a finished seam."}
+  {:id :read-write-single-use-and-order :status :partial-sequential-model-only
+   :evidence "model:247-301 tracks a caller-supplied per-grant operation, counts and serial order; test:124-145 feeds returned consumed state into replay for both ops and tests revoke/restart. No shared owner state, simultaneous contenders, persistence, native mutations, real release, or coupling to bound records is demonstrated. A copied/stale issued state can be submitted again; this is an expected limit of this isolated pure function, not a real single-use guarantee."}
+  {:id :clock-validity-and-history :status :partial-open
+   :evidence "model:223-245 changes clock representation to a point with uncertainty, checks prior adjacent UTC lower bound and monotonic non-regression, and step requires three/four caller-supplied deadline values. Test:147-152 covers selected faults. This does not verify clock continuity or derive deadlines from identity, approval, grant and policy records."
+   :confirmed-gap "With zero uncertainty, prior (10 0 10 t), current (10 0 20 t), deadlines (30 30 30), and monotonic deadline 30, clock-p accepts a frozen UTC point despite 10 ms monotonic advance. If the synthetic clock is intended to catch discontinuities, this is a missing continuity law; no actual clock qualification follows. Before whole-model acceptance specify the allowed elapsed-clock/skew relation and add a RED oracle."
+   :minimal-fix "Add a conservative reviewed synthetic continuity rule consistent with the stated uncertainty and expected clock behavior, or narrow the stated contract to adjacent non-regression and explicitly keep clock continuity open. Never manufacture a real clock adapter."}
+  {:id :consume-and-final-gap :status :partial-synthetic-only
+   :evidence "model:280-300 separates pre/final samples, storage status and gap; tests:139-145 cover both ops after synthetic consume and later expiry. Step is a sequential abstraction: no actual check-to-effect fence, qualified scheduler or durable consume. It uses supplied deadlines rather than records, so a composed final check remains unverified."}]
+ :unsettled-before-whole-model-acceptance
+ [{:id :composition :detail "The original binding and single-use findings are not fully settled as a composed model. Before claiming a closed binding-to-transition contract, require a pure transition that consumes the exact copied binding, scope, resource facts and record-derived deadlines, then adversarially interleave swap/revoke/expiry/consume and count simulated outputs. Alternatively retain these as separately tested partial functions and make no composition claim. Do not require real credentials or persistence from the synthetic model."}
+  {:id :clock-continuity :detail "Resolve the confirmed frozen-UTC/monotonic-advance case above and relevant discontinuity bounds before claiming full clock-history correctness; current tests do not include it."}
+  {:id :bounded-test-coverage :detail "Tests are bounded source oracles, not exhaustive proof. Whole model needs distinct simultaneous-contender/serialization, complete per-record and resource swaps, failed/uncertain persistence and invalidated-revoke semantics appropriate to the final pure contract; no fake durable ACK."}]
+ :partial-batch {:status :eligible-for-one-run-subject-to-parent-recorded-admission
+  :purpose "Measure the nine current ERT test definitions only as separate synthetic encoding/shape, binding and sequential-state exercises. This review does not execute or admit an actual run; the parent must separately admit it. Any failure or timeout is evidence, not a pass."
+  :binary {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652" :observation "File and hash observed; binary was not executed and its standalone runtime/library environment is not verified. Fail visibly if unavailable; do not substitute a wrapper or binary."}
+  :command "env -i HOME=/nonexistent XDG_CONFIG_HOME=/nonexistent XDG_CACHE_HOME=/nonexistent PATH=/usr/bin:/bin LC_ALL=C /usr/bin/timeout --signal=TERM --kill-after=5s 30s /snap/emacs/4391/usr/bin/emacs-31.1 -Q --batch --load /home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/layers/agent-sandbox/oikos-owner-authority.el --load /home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-owner-authority-test.el -f ert-run-tests-batch-and-exit"
+  :conditions "Before admission verify binary and both exact source hashes immediately before execution and preserve the two native files and unrelated artifacts. Use exactly one invocation with the fixed command, 30-second timeout plus 5-second kill grace; capture full output, exit status, expected nine test definitions and skipped/failed counts. Load .el explicitly, never native or stale .elc, and do not connect any daemon, socket, network, real credential or user buffer. No compilation, installation, startup wiring or automatic fallback. Missing executable, required library, timeout or sandbox failure blocks and must be recorded, not retried silently."
+  :interpretation "A green result substantiates only the exercised assertions for those hashes in that isolated runtime. It does not qualify the whole model, authentication, real consent, governance, durability, concurrency, actual release, native atomicity or restart behavior."}
+ :real-holds [:axxium-authentication :human-consent :govone-disclosure :durable-store :native-owner-fence :live-emacs :real-egress :installed-promotion :whole-s4a]
+ :execution {:emacs 0 :ert 0 :native-effects 0 :credentials 0 :product-edits 0 :git 0 :board 0 :ledger 0 :nested-agents 0
+             :only-artifact "reviews/s4a-synthetic-owner-model-fix-review-v2.edn"}}

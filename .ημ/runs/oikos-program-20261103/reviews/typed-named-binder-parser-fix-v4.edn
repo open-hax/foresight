@@ -1,0 +1,19 @@
+{:kind :parser-source-fix
+ :status :candidate-awaiting-independent-review
+ :checkout "/tmp/opencode/oikos-typedclojure-owner-a2698786-b653-4566-a8eb-9c19d374ada0"
+ :reported-baseline-head "f0cb23fc09dbbef8ed5525aab20353add60fe4cf"
+ :input-review {:path "typed-named-binder-source-review-v3.edn"
+                :sha256 "23b1b7f8845072de76b486e9c13ed394c355a3358d5c04374cde33e91d49bc5c"
+                :finding :overlapping-binder-markers}
+ :owner-file "typed/clj.checker/src/typed/clj/checker/parse_unparse.cljc"
+ :input-sha256 "83894ae59d1d57d1242616a9190fcbc956ac1125af148386dad1c685a6e68b99"
+ :output-sha256 "dc29fd31961fcb6e5d6ec4b28932d81e2bae52ba4e424046729de59576c6c620"
+ :exact-fix-diff "--- candidate-v3\n+++ candidate-v4\n@@\n-  (doseq [i (keep-indexed #(when (= :- %2) %1) tokens)]\n-    (when (or (zero? i)\n-              (not (simple-symbol? (nth tokens (dec i))))\n-              (>= (inc i) (count tokens))\n-              (= :- (nth tokens (inc i)))\n-              (contains? named-postfixes (nth tokens (inc i))))\n-      (prs-error (str \"named-binder/malformed: \" (pr-str (nth tokens (max 0 (dec i))))) opts)))\n+  (loop [markers (seq (keep-indexed #(when (= :- %2) %1) tokens))\n+         occupied-through -1]\n+    (when-some [i (first markers)]\n+      (when (or (zero? i)\n+                (<= (dec i) occupied-through)\n+                (not (simple-symbol? (nth tokens (dec i))))\n+                (>= (inc i) (count tokens))\n+                (= :- (nth tokens (inc i)))\n+                (contains? named-postfixes (nth tokens (inc i))))\n+        (prs-error (str \"named-binder/malformed: \" (pr-str (nth tokens (max 0 (dec i))))) opts))\n+      (recur (next markers) (inc i))))"
+ :reasoning "Scan every top-level marker before the existing type-parsing loop. Each accepted marker reserves its preceding name through its following type token; a later marker cannot reuse that type token as its name. Single symbolic and nil types remain accepted by this scan. No-marker parse-cat and integer warning code are untouched. These are source-level observations, not executed behavior."
+ :static-gate {:command "clj-kondo --cache false --config '{}' --lint <absolute-owner-file>"
+               :cwd "/tmp/opencode"
+               :v3-reported "exit 3; 16 errors, 71 warnings"
+               :v4-observed "exit 3; 16 errors, 71 warnings"
+               :limits "Counts only; exact diagnostic equivalence and project-config lint not established. No baseline f0 lint run."}
+ :unrun ["all tests and typechecking" "baseline/candidate behavioral and diagnostic comparisons" "guard mutation checks" "project-config lint" "Java, Babashka, Clojure, project scripts, dependency resolution and runtime probes"]
+ :holds ["Independent source review required" "Other author owns test coverage" "No artifact replacement, publishing or SHX relock" "No runtime or RED/GREEN claim"]}

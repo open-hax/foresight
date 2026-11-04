@@ -1,0 +1,31 @@
+{:report/id :oikos/axxium-google-harness-session-recovery-v7
+ :report/status :task-harness-build-and-loopback-recovered-grant-store-unidentified
+ :prior-review "axxium-pr19-google-receipt-recovery-v6.edn"
+ :search {:scope ["/home/err/.codex/sessions/2026/11/02" "/home/err/.local/share/codex-work/axxium-pr19*"]
+          :jsonl-candidate-count 2 :jsonl-candidate-bytes 1803755
+          :jsonl-files-read 2 :jsonl-bytes-read 1803755 :matching-jsonl-files 0
+          :filename-only-needles ["6569108948" "6569712188" "axxium-pr19-google-live" "axxium-pr19-live-harness"]
+          :limit "Both candidate files were searched in full for exact byte strings, producing filename-level matches only. No transcript lines, raw tool results, commands, account identifiers or credentials were emitted. No JSONL was selected for further metadata extraction."
+          :session-evidence "No matching session metadata was found in that date directory; no conclusion about other dates or harness stores."}
+ :harness {:root "/home/err/.local/share/codex-work/axxium-pr19-live-harness"
+           :root-metadata {:type :directory :mode "0775" :uid 1000}
+           :build-file {:path "/home/err/.local/share/codex-work/axxium-pr19-live-harness/shadow-cljs.edn" :sha256 "b9fe8e5ffb714753494b73f85e699c872c0b677b911d2aa554f1710e75a7d396"
+                        :source-path "/home/err/.local/share/codex-work/axxium-pr19-google-live/src/cljs"
+                        :output-path "/home/err/.local/share/codex-work/axxium-pr19-google-live/target/pr19-live/candidate.cjs"
+                        :exports ["loginStart" "loginFinish" "driveStart" "driveFinish" "runAcceptance" "recheckCurrent"]}
+           :harness-source {:path "/home/err/.local/share/codex-work/axxium-pr19-live-harness/src/axxium/extern/pr19_live.cljs" :sha256 "aa74f8ef40f86e8cb9f7dfbfde1368f63a0453dad8eb60dda538fec87fff3c58" :bytes 9456 :mode "0664" :uid 1000
+                            :metadata "Contains acceptance and current-recheck functions and two literal localhost/loopback references to port 8788. No absolute literal credential/key/ledger file path was identified by the bounded literal-path extraction."}
+           :server-wrapper {:path "/home/err/.local/share/codex-work/axxium-pr19-google-live/target/pr19-live/server.mjs" :sha256 "ba0481ac4b3cb47e2d59a386376aca487f6591cfe05cb40a1e0d20de7b673f4e" :bytes 4662
+                            :metadata "Contains literal loopback port 8788 and startup/listener source; no wrapper was executed."
+                            :adjacent-build-artifact "candidate.cjs"}
+           :identification "The task-specific build wiring and matching acceptance/recheck export names are strong source-level linkage to the two PR reports; neither file contains a verified receipt binding its present bytes to the historical provider execution. No run report was located."}
+ :lineage {:historical-receipts ["https://github.com/riatzukiza/axxium/pull/19#issuecomment-6569108948" "https://github.com/riatzukiza/axxium/pull/19#issuecomment-6569712188"]
+           :historical-heads ["8e2941ae369d1fb72e1cc59256caffa269e5e393" "887c485270904ed368890834f63064b2008a4067"]
+           :current-local-checkout-head "887c485270904ed368890834f63064b2008a4067"
+           :last-observed-native-head "3a319a43d1bd8064e8cdd2729db93e3710ae7ddd"
+           :runtime "Prior v5 observed 127.0.0.1:8788 refusing connections. Same port in this harness and separate identity configuration is a correlation, not proof of process identity or usable current grant. No network probe was performed in this turn."
+           :credential-store "No store or key path established; no credential or key file opened. Source includes store/key-related identifiers, but source-level indicators alone are not proof of persistent contents or current authorization."}
+ :missing ["Exact historical run receipt or startup metadata binding these current harness bytes to the real-provider test and identifying storage location and actor without disclosing private account data."
+           "Current grant validity, current service identity, and the intended private Drive folder's access remain unverified."]
+ :next "Review this exact harness's nonsecret persistence and start configuration in isolation, extracting only computed storage path metadata and file existence/owner/mode if statically identifiable; do not execute or import the harness, read stores, or contact OAuth/Drive."
+ :boundary {:session-database-mutated false :raw-transcripts-emitted false :old-harness-executed false :credential-cookie-token-or-ledger-content-read false :network false :login false :drive-rpc false :service-change false :archive-modified false :board-or-ledger-writes false}}

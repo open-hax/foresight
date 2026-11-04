@@ -1,0 +1,58 @@
+{:review/id :s2b-offline-collector-code-review-v2
+ :verdict :changes-required
+ :scope "Independent exact-head review of the eight offline P1 additions only. Fixture facts and opaque head tokens are not real owner authentication, native ordering or operational authority."
+ :source {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b"
+          :base "fed4e30272cc1186de14bcc708b3efc9736e3139"
+          :head "edf609c1c96da7a1109bee1e02d3f86874dda7ca"
+          :tree "bdaa84982f4e61e482d6bea5436979d1b43523e3"
+          :status "Only pre-existing untracked .clj-kondo/.cache/ observed; preserved."
+          :eight-sha256 {"docs/contracts/i3-collector-v1.edn" "18bf7ccbf893c57f12f1f0ba40fe5c0adfbe266f6ec1fa175b16346d05c8ebc6"
+                         "scripts/test_i3_collector.clj" "813071b836d1891bf00a4cbdcba386c3df7e5e86e4283edd56f348985f0b660a"
+                         "src/oikos/infra/i3_collector.cljs" "f3640ea8e34696ba98ef12d007fcaa2b722eedde914073bfa9e3f7ddd9ca9fbe"
+                         "src/oikos/law/i3_collector.cljc" "5af0c0bd6629e9ec02dbb83cd5147d1acf1e42357987184432a478f0020a5b5f"
+                         "test/oikos/i3_collector_edge_runner.cljs" "951542742f6ab0671c0ce0b8da768201e4daa4345e02398d423fdc4b672b02bc"
+                         "test/oikos/i3_collector_runner.cljc" "ac0b4361334e18b92d29e9d818dd7edecb6e223f5d7f2a86b1904a3b8d8773c2"
+                         "test/oikos/infra/i3_collector_test.cljs" "9d86e194e1ca41966aef89f999b6e097809d2f884db03d2b199ea0ff57e2b01d"
+                         "test/oikos/law/i3_collector_test.cljc" "9168e52ac88e3bc8170cc1217fa0816ddbd402abac4d2d81f4ea0aae02104ce4"}}
+ :inputs {:permit-sha256 "d1b6273b40c7152a0b56658d655c0b8d35a0b19467bc2a6c60848c89549d0ebf"
+          :plan-v2-sha256 "0b0f6ce97fd978b03e743463cb6944ebc0efef139d0152ec640e543317962608"
+          :plan-v3-sha256 "0f8307256de2ee6a3e87a4c16ee4295166d7854a5cc828160f8c5900707482cf"
+          :plan-review-v3-sha256 "d511a4b24588a476cdb20ae77c8226b59878f52d4e8ff814e520b743f0610a2a"
+          :composition-sha256 "f75be6e4c45e26eb1ef3069e3c5e18fb5d4f5be99991477444cdf44c3ac4d172"}
+ :composition {:command "git diff --name-status fed4e30 HEAD" :result "Exactly the eight permitted paths are additions, no modifications or deletions."
+               :filesystem-check "Enumerated git ls-tree -rz fed4e30, recomputed Git blob hashes and mode from each working file: 63 checked, zero mismatches."
+               :pins "Parsed the 13 path/SHA-256 pairs in composition :frozen-pins :sha256 and hashed each current working file: 13 checked, zero mismatches."}
+ :findings
+ [{:id :s2b/forged-pending-bypasses-fences :severity :high
+   :location "src/oikos/law/i3_collector.cljc:78-118,141-164,192-204"
+   :counterexample "From begun state set :phase :await-owner, :attempt 1, and :pending to the valid baseline event with H0 predecessor, H1 head, generation 1, cut-at 0 and stale? false. No subscribe ACK, pre tick, snapshot, or post tick happened. Supply matching trusted synthetic acceptance at time 1. Probe returns :fixture, :fresh and fresh-domain? true. The raw step accepts caller-owned state, so phase/attempt and pending assertions are not evidence of the fences."
+   :impact "Fixture freshness and admitted history can be minted without the prescribed synthetic schedule, contrary to P1 even though no real authority is granted."
+   :minimal-fix "Use an independently verifiable bounded transition/fence witness or a controlled state ownership mechanism whose admission cannot be fabricated by raw inputs; validate pending provenance and phase invariants before accepting proofs. Add adversarial constructed-state tests for baseline, reconciliation and gap."}
+  {:id :s2b/expiry-inclusive :severity :high
+   :location "src/oikos/law/i3_collector.cljc:119-124,156-164,171-191"
+   :counterexample "A normal baseline cut at time 3 with acceptance at 5 creates expiry 1003. fresh-domain? at exactly 1003 returns true. At overall deadline, <= likewise admits new protocol progress, and acceptance exactly at expiration is treated as nonstale. V2 explicitly specifies expiry at now >= deadline."
+   :minimal-fix "Use exclusive expiry/deadline comparisons consistently for freshness, accepted proof and new work; retain head accounting for late accepted proof without granting a lease. Test just before, exactly at, and just after both deadlines."}
+  {:id :s2b/permanent-pending-after-step-budget :severity :high
+   :location "src/oikos/law/i3_collector.cljc:179,197-205"
+   :counterexample "With a valid baseline pending, set the otherwise valid accumulated step count to 255; a valid unrelated tick-reply reaches 256 with pending retained. A matching head-resolution then returns constant denial because the unconditional step limit blocks all commands. A pending admission cannot be resolved by any later input or restarted without losing identity."
+   :minimal-fix "Keep ordinary scheduling bounded but provide a separately bounded, identity-preserving later resolution path after exhaustion; never reopen competing admissions without proven outcome. Test actual churn, timeout and resolution at/after the cap."}
+  {:id :s2b/failed-subscriptions-not-counted :severity :medium
+   :location "src/oikos/law/i3_collector.cljc:171-178"
+   :counterexample "Four successive failed subscription ACKs each followed by retry result in :await-subscribe, attempt 0, generation 5; another subscribe intent is available despite the reviewed three-attempt cap. Only successful acknowledgements increment attempt."
+   :minimal-fix "Charge each emitted subscription attempt before its result, including failed and lost acknowledgements; cap emits at three while retaining distinct nonce accounting and pending-resolution behavior."}
+  {:id :s2b/parser-enforces-bounds-after-allocation :severity :medium
+   :location "src/oikos/infra/i3_collector.cljs:34-51,61-67"
+   :counterexample "A primitive frame containing thousands of nested arrays under the 65536-byte cap is handed to JSON.parse before canonical-json checks depth 32 or node count 4096. Thus full host parsing/allocation occurs before refusal, contrary to V2's explicit bounded tokenization-before-descent/allocation requirement. The byte cap still limits input and this is not a claim of arbitrary execution."
+   :minimal-fix "Enforce depth, node and duplicate-key limits during bounded tokenization before descent/allocation, then canonicalize the resulting owned value. Add boundary and +1 tests that verify parser ordering, not just final denial."}
+  {:id :s2b/descriptor-and-invoker-not-bound :severity :medium
+   :location "docs/contracts/i3-collector-v1.edn:1-23; scripts/test_i3_collector.clj:3-11"
+   :counterexample "The descriptor has no declared schema or assumption IDs, semantic digest or closed finite transition and intent schemas. The standalone invoker checks only Clio HEAD, src dirt and one cache file before running; it does not verify the 13 frozen pins, parent permit, descriptor digest, or descriptor/source binding. Changing descriptor or a frozen pin would not itself make this invoker refuse. This contradicts V2 file-ceiling runner and descriptor binding requirements."
+   :minimal-fix "Define the reviewed closed descriptor and canonical digest, validate it independently on BB and NBB, and make the standalone preflight verify the parent permit and pinned inputs/source binding before tests. Test changed pins and descriptor, extra fields and wrong versions as refusals."}]
+ :probes {:file "/tmp/opencode/oikos-s2b-review-edf609c/probe.clj" :owner "this review; retained, no automatic deletion"
+          :command "bb -cp 'src:test:/home/err/spaces/foresight/clio/src:/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps' /tmp/opencode/oikos-s2b-review-edf609c/probe.clj"
+          :cwd "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b"
+          :output [":expiry 1003 :at-expiry true" ":forged-pending :fixture :fresh :fresh true" ":exhausted-steps 256 :pending? true :resolution {:status :denied, :code :collector-refused, :authority :none}" ":four-failed-subscriptions :phase :await-subscribe :attempt 0 :generation 5"]
+          :qualification "For step-budget probe the 255 count is constructed rather than replaying 251 slow individual messages; one actual accepted tick-reply advances it to 256. An attempted long churn probe timed out twice and is not claimed as a passing run. No source or test files modified."}
+ :test-evidence {:parent-reported "Parent reports RED da08af9 and GREEN edf609c counts; not independently rerun as part of this review." :independent "Only the targeted offline BB probe above and static review, not the full suite or NBB probe."}
+ :limits [:no-native-i3 :no-actual-owner-append :no-private-fixture-adapter :no-network :no-new-dependencies :no-nested-agents :no-board-or-parent-ledger-mutation :no-pr :no-push :no-whole-s2b-approval]
+ :next "Repair findings within the admitted boundary, add regression tests, rerun gates, and request a fresh review bound to the repaired exact HEAD."}

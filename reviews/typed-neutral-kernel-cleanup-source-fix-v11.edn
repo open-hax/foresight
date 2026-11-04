@@ -1,0 +1,19 @@
+{:kind :source-review-candidate
+ :execution-authorized? false
+ :predecessor {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v3.py"
+               :sha256 "78673b410376b2e0b2cba1e9db4da6056e2b60ffbbb69da818aac81ebda7217a"}
+ :candidate {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v4.py"
+             :sha256 "71db1a8f4925cd2828dfe12509b2f988bd88e8cfc45e9389bdc3e69747edfb0a"}
+ :dispositions [{:finding :manager-properties-not-kernel-enforcement
+                 :status :source-repair-awaiting-review
+                 :detail "Before release, read the anchored cgroup's domain type, memory.max, pids.max and cpu.max, and its anchored parent's controller availability and subtree control; reject missing, disabled or mismatched values. Save selected observations. Manager properties remain a separate necessary check."}
+                {:finding :exception-after-release-loses-cleanup-observation
+                 :status :source-repair-awaiting-review
+                 :detail "Mark release attempted before the single bounded atomic write. On failure close barrier stdin and retain original cgroup and available pidfd anchors while observing until the original 110-second deadline. Original errors remain failures; observation and close failures are recorded. A main anchor and original empty cgroup establish bounded group cleanup, not case qualification."}]
+ :source-gates {:syntax "Python ast.parse passed for v4; v3 SHA-256 unchanged."
+                :dbus "Prior StartTransientUnit auxiliary signature retained; no new D-Bus calls."
+                :qualification "Pass requires fixed cases, completion, simultaneously live main and descendant anchors, observed cleanup, source integrity and no final observation or close errors."
+                :limits "Kernel observations and anchored cleanup are bounded observations, not an absolute absence claim or immutable source snapshot."}
+ :unrun-plan ["Parent independently pins the complete host and artifacts and obtains SAME auditor source review of this exact candidate."
+              "No execution is authorized by this document. Only after separate authorization, verify kernel support and failure paths, including ambiguous release and exception cleanup, in an appropriately controlled environment."
+              "No candidate import or execution, unit or probe, Java, tests, D-Bus RPC, or network operation was performed in this source-only repair."]}

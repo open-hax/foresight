@@ -1,0 +1,12 @@
+{:custody/id :typed-neutral-source-review-v12
+ :kind :native-worker-report-custody
+ :source-session "ses_e5941356dffeFPYdehzd0XcDxH"
+ :source-role :auditor
+ :verdict :approve-one-fixed-neutral-batch-conditionally
+ :controller {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v4.py"
+              :sha256 "71db1a8f4925cd2828dfe12509b2f988bd88e8cfc45e9389bdc3e69747edfb0a"}
+ :findings []
+ :dispositions "The two prior findings are source-addressed: v4 checks kernel cgroup limits before GO and retains cleanup anchors after an attempted release. Four earlier source findings remain addressed in the unchanged reviewed neutral files. No dynamic proof is asserted."
+ :conditions "Coordinator pins host interpreter, D-Bus binding, libseccomp and artifacts and satisfies the stated resource preconditions. Approval is for one fixed neutral batch only. Effective enforcement, escape prevention and cleanup remain actual runtime observations; unavailable or failed cleanup observation stays unconfirmed."
+ :excluded "No unit, probe, Java, typed test, build, RPC or runtime containment test was performed by the reviewer. The typed dependency graph, classpath and Java are outside this neutral-only review."
+ :custody "Read-only reviewer wrote no file. This envelope records its returned approval and limits without impersonating a native Bot, independent execution or comprehensive runtime attestation."}

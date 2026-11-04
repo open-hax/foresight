@@ -1,0 +1,10 @@
+{:decision/id :govone-owner-evidence-planning-authorization-20261104
+ :source :question-tool-explicit-user-answer
+ :question "May I plan and independently review a minimal owner-native evidence extension before requesting its exact source changes?"
+ :answer "Review evidence extension"
+ :gap "The current signed-deny fixture accepts the same 503 capacity_unavailable and failed-route projection for distinct capacity-check causes. No directly exported per-request cause discriminates them."
+ :scope [:existing-owner-evidence-seam :closed-nonsensitive-provenance-or-reason
+         :bounded-technical-plan :independent-planning-review]
+ :not-inferred [:actual-test-pass :policy-denial-from-generic-503 :new-policy-kernel
+                :private-payload-exposure :whole-P4-completion]
+ :next-authority "recommended-path-standing-authorization.edn permits the recommended necessary source implementation after its exact plan and scope are independently reviewed; effect qualification remains separately gated."}

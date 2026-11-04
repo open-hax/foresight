@@ -1,0 +1,13 @@
+{:custody/id :typed-neutral-dbus-fix-review-v14
+ :kind :native-worker-report-custody
+ :source-session "ses_e5941356dffeFPYdehzd0XcDxH"
+ :source-role :auditor
+ :verdict :approve-one-new-fixed-neutral-attempt-conditionally
+ :findings []
+ :input {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/systemd-neutral-v5.py"
+         :sha256 "8ed4c009e9968867a1adf1e6e84dd81372b8aeab7396520e4ab7d6e235ef1acf"}
+ :reviewed-delta "Verified diff changes only the evidence-directory prefix and reads ControlGroup from Service properties."
+ :conditions "One new fixed neutral attempt under a separate permit, prior containment conditions and independent pre/post host-pin verification. Reviewer did not verify the host-pin manifest and performed no execution or RPC; the wider Java/dependency graph remains out of scope."
+ :custody-note "Reviewer referred to hostpins-v1.json as not located. The coordinator's actual manifest is host-pins-v1.json, pinned in the permit and reverified before/after invocation. Do not turn the reviewer’s missing host audit into a fabricated host verification."
+ :prior-attempt "v4 failed before GO. Its later cleanup observations are not a neutral qualification pass."
+ :execution :none-by-reviewer}

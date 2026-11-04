@@ -1,0 +1,16 @@
+{:custody/id :review-syntax-repair-v1
+ :kind :coordinator-lossless-transport-repair
+ :original {:path ".ημ/runs/oikos-program-20261103/reviews/s6a-govone-fixture-source-review-v1.edn"
+            :sha256 "99228519c5aefbab3ed7a52381d4cdb806868bf95a4596176099bdda44991db6"
+            :status :malformed-edn-retained-unchanged
+            :checkpoint-inclusion false}
+ :raw-archive {:path ".ημ/runs/oikos-program-20261103/custody/s6a-govone-fixture-source-review-v1.original.edn.txt"
+               :sha256 "99228519c5aefbab3ed7a52381d4cdb806868bf95a4596176099bdda44991db6"
+               :complete-bytes-equal true}
+ :successor {:path ".ημ/runs/oikos-program-20261103/reviews/s6a-govone-fixture-source-review-v1-syntax-custody.edn"
+             :sha256 "d58406f668cfd95293b6c9edb48fb0248933ac676eb049c58bfd939db4d18d87"
+             :status :parsed-single-map}
+ :change "Exactly two inserted closing map delimiters, terminating findings F3 and F4. A byte-level comparison verified no other changes. Copies were created exclusively from the exact original; the corrections used the patch tool."
+ :validation "Neutral-directory Babashka with explicit /tmp/opencode/oikos-empty-bb.edn parsed one map and then EOF. Original and text archive bytes match the recorded hash."
+ :interpretation "The successor preserves the original independent findings as a coordinator syntax-custody repair. It is not a new independent review, approval, current-head assessment, test result or execution grant. Historical references to the malformed original remain historical; consult this custody mapping rather than pretending those references named parsed bytes."
+ :preservation "Neither original nor archive is deleted, rewritten, renamed or cleaned. The malformed original stays local and outside the valid checkpoint set; its exact complete raw bytes are preserved in the committed text archive."}

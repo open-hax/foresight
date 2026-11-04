@@ -4,11 +4,11 @@ labels: "oikos, planning, local-first, task"
 dependency: ["93a76dad-678a-4980-86fb-ba0fbb5e8203"]
 parent: "3b9279b5-aafd-431a-90a9-128ce4415de0"
 type: "task"
-write-id: "1793726617745-0.cmkavf6t5fp6bz5skq"
+write-id: "1793796219192-0.fnlfibm3xg9wjtjv2sr"
 points: "8"
 title: "Oikos: Reconcile i3 subscribe snapshot races and reconnect revisions"
 priority: "P1"
-status: "incoming"
+status: "in_progress"
 uuid: "59774be2-cc61-4708-9030-8b7b42935ec3"
 created_at: "2026-11-03T15:11:07.122Z"
 ---
@@ -71,5 +71,7 @@ Dated planning evidence: 2026-11-03. Operator requirements are reported intent, 
 Propagates native lifetime findings 4456846184/4456856398 into subscribe/snapshot/reconnect acceptance: same-epoch close/reuse creates a new incarnation; a reconnect gap cannot establish continuity merely from equal XIDs. Deny stale/uncertain targets and retain historical memberships without reassignment. Current native child prerequisites synchronized to the user-approved precise plan: 93a76dad-678a-4980-86fb-ba0fbb5e8203 (S2A). Parent relationship is preserved and is not an implicit gating edge. All checks stated here are future acceptance requirements, not executed implementation results. Earlier dependency prose in historical comments is superseded by this correction for current execution edges; historical event/comment bytes remain unchanged. Policy correction — sandbox/dev and synthetic data only; no personal capture. Default raw retention is 24h images and 7d text; propagate deletion to derived/retrieval payloads, with explicit consent for accepted knowledge. Automatic actions are agent-owned-resources-only; operator resources need explicit approval. Existing models only; 12B download/load/restart is held. Any cloud experiment is synthetic, GovOne-authorized, verified free and 0 spend only; no allocation or inherited pilot budget. Remote publication remains held. Qualified program merges are authorized only after their required gates; this is not a readiness override, implementation permission or native review approval.
 
 Consensus planning correction v1: root incoming acceptance/verification now explicitly specifies s2b/snapshot-cut, s2b/freshness-vs-history. See the corresponding named root subsections for the contract and concrete future positive/negative fixtures. Only the 12 consensus-remaining gaps in skeptics/reconciliation.edn are in scope; the 23 disputed findings receive no settlement/rejection here. All added scenarios are future acceptance requirements, not implemented or executed behavior. Existing dependency vectors, parent relationships, incoming status, historical events and prior correction text remain preserved. Synthetic sandbox/dev-only, zero-spend, existing-model and remote-publication holdbacks remain unchanged; no status advancement or execution permission.
+
+Source-phase admission only: permit .ημ/runs/oikos-program-20261103/permits/s2b-offline-collector-source-v1.edn; independently approved plan v3 .ημ/runs/oikos-program-20261103/reviews/s2b-collector-source-plan-fix-review-v3.edn and composition .ημ/runs/oikos-program-20261103/reviews/s2b-accepted-base-composition-v1.edn (sha256 f75be6e4c45e26eb1ef3069e3c5e18fb5d4f5be99991477444cdf44c3ac4d172; 63 paths, 13 frozen pins). Accepted base fed4e30272cc1186de14bcc708b3efc9736e3139 tree 429d9dde803b6d12ee07f692872a1b0dcba31ad1. Eight additions only as enumerated in permit; no base modifications or deletions. P1 is fake inert deterministic data-only scheduling, no timers, listeners, native i3, private fixture adapter, actual append or operational currentness. Preserve frozen event validation and replay. Follow meaningful red, portable law and inert edge green, exact-head independent code review, then parent component acceptance. Whole S2B, actual nested i3 oracle, native proof, real head resolution, operational currentness and E2 remain held; no task completion or native collector grant.
 
 ---

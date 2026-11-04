@@ -1,0 +1,27 @@
+{:review/id :continuation-frozen-custody-review-v2
+ :verdict :accept-bounded-checkpoint-custody
+ :scope "Custody of the frozen manifest entries only; not approval of products, owner artifacts, runtime claims, board completion, publication, or all-task source provenance. This report is outside the manifest and needs separate staging."
+ :manifest {:path ".ημ/runs/oikos-program-20261103/checkpoints/continuation-20261104-v2.json"
+            :sha256 "93df017b9fa1bb1f1dfb97bff11df007efdbfbe16c7d77653f16e84505830593"
+            :base "792dfa341d380cbf413b925319654d7c2ebec413"
+            :entries 122 :bytes 2903292
+            :verification "Two complete hash and size passes matched all entries. First pass also checked regular-file type, no final symlink, recorded mode, unique paths and size ceilings. Only the existing 1317056-byte legacy receipt ledger exceeded 1 MiB; it remained below 16 MiB. No entry changed between passes."}
+ :edn {:verification "Babashka invoked only with --config /tmp/opencode/oikos-empty-bb.edn. All 114 non-ledger EDN entries parsed as exactly one map followed by EOF. Each appended ledger tail parsed as maps: receipts 2, kanban 6, session-mycology 1. Historical ledger prefixes were byte-identical to the manifest base."
+       :repair "The included raw text archive has sha256 99228519c5aefbab3ed7a52381d4cdb806868bf95a4596176099bdda44991db6; the parsed successor has sha256 d58406f668cfd95293b6c9edb48fb0248933ac676eb049c58bfd939db4d18d87. Byte comparison found exactly two inserted closing braces and no other change. The excluded original was not reopened; this verifies archive-to-successor, not a new independent review or approval."
+       :pointer "The historical S4A candidate contains a 61-character previous-review hash. Permit s4a-isolated-owner-model-ert-v2.edn explicitly supersedes it with the full hash, which matched the referenced manifest entry. Historical bytes remain unchanged. Among 36 mechanically recognized in-run path/sha256 pairs, this was the only mismatch; this is not an exhaustive provenance audit."}
+ :board {:read "Fresh read-only eta-mu kanban content for 59774be2-cc61-4708-9030-8b7b42935ec3 using docs/agile/kanban returned in_progress, write-id 1793796219192-0.fnlfibm3xg9wjtjv2sr, and the source-phase comment. These agree with the card and final event; the six appended events are one comment and five transitions. No board mutation was performed."
+         :limit "Readback establishes the observed card state, not task completion or native collector permission."}
+ :links "All local inline Markdown links in the four manifest Markdown entries were checked for current workspace existence and for membership in the frozen set or existence at the base commit; none failed. External URLs, bare paths, reference-style links and owner-artifact content were not independently verified."
+ :privacy {:inspection "Scanned all 122 frozen files, using only appended bytes for the three legacy ledgers, for common credential assignments, private-key blocks, bearer values, Google OAuth tokens, email-shaped strings and 21-digit account identifiers. No credential, private-key, bearer, OAuth or account-identifier pattern matched. Three email-shaped matches were Git SSH transport syntax in services-development-publication-custody-v1.edn, not email addresses."
+           :limit "Pattern-based inspection is not proof of absence of every secret, account identifier, sealed grant, capture or sensitive metadata. No private input inventory, key, cache, or external ledger contents were opened. Raw archive is preserved evidence, not approval."}
+ :interpretation ["Services acceptance is only for the inert development-source prerequisite, not S1B."
+                  "Neutral v6 qualifies the finite neutral profile only, not Java or newly authored typed tests."
+                  "The earlier S4A 9-test run remains 5 pass and 4 fail; a later reported 11-test synthetic run does not backfill that historical result or complete S4A."
+                  "GovOne four-path source work is unexecuted; F2, F3 and N1 remain held as applicable."
+                  "OCR restart is consumed; its separate batch remains unconsumed."
+                  "The ccfb7748c4dbca3bb56488c3504b5476b846ebe3 model snapshot is represented as local two-file source custody, not publication or whole-task completion."
+                  "Preserving partial reports and abbreviated historical observations does not admit referenced owner artifacts or turn abbreviated identifiers into qualified source pins."]
+ :limitations ["No product source, external private artifacts, network, PR, product runtime or tests were inspected or executed."
+               "Approval covers the listed bytes at the time of the two passes, not reports written later; it is not a claim that all referenced sources are available or qualified."
+               "No exhaustive semantic privacy audit or exhaustive full-hash validation of all free-form historical source mentions was performed."]
+ :effects {:review-report-created true :other-edits false :staging false :commit false :git-write false :board-write false :ledger-write false :nested-agents false}}

@@ -1,0 +1,13 @@
+{:report/id :govone-capacity-pipeline-source-v6
+ :status :source-only-unverified
+ :owner "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+ :head "259df13d175bde68c841156fdbfcde38c8444fce"
+ :head-note "Provided pin; no fresh Git verification."
+ :inputs ["govone-capacity-evidence-source-plan-v3.edn" "govone-capacity-evidence-plan-fix-review-v3.edn"]
+ :files [{:path "internal/pipeline/context.go" :sha256 "3bd2446ba75e35035ee078d468b7070a6ae81ba987e88a72af4ab9c8b8e1fa3b"}
+         {:path "internal/pipeline/capacity_evidence_test.go" :sha256 "27e69b4b49d96624f97ecdfb71273038f163d1852044708a9adc3e338ea9646f"}]
+ :interop "Exported CapacityProvenance struct has int SchemaVersion and string Measurement, Evaluation, Resolution with specified JSON names. NewCapacityProvenance(measurement, evaluation, resolution string) *CapacityProvenance returns a fresh version-1 validated value or nil. Route-only independent sanitation in safeStageFailureOutput and auditDetails copies the value."
+ :test-source "Written before implementation; not executed or observed red. Matrix cross products, versions, unknown sentinels, nil omission, route gating, copy isolation, closed fields, and existing BuildStageAuditPayload are covered. Existing inference capacity_evidence_test.go checks the actual persisted public projection excludes capacity_provenance; no cross-package private projection API was added."
+ :static-gates "gofmt applied and gofmt -l returned no paths. sha256sum recorded. Existing inference test SHA-256 observed 2ee8030c4b2a29da1e4eaa15026fbc40ad87ad27f785d0a8d86fc4569789519e; untouched. Existing inference route projection allowlist read and contains no capacity_provenance key."
+ :unrun "No Go build, test, list, mod, run, dependency operation, network, runtime, probe, cache operation, or Git. No execution or compile claim."
+ :holds [:exact-diff-independent-review :fresh-head-verification :offline-build-and-test-admission :N1 :real-fixture-request-decision-version :signed-policy-causation :warm-cache-invalidation :runtime :independent-anchor]}

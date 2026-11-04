@@ -1,0 +1,45 @@
+{:review/id :typed-neutral-runtime-qualification-v17
+ :kind :independent-postexecution-finite-neutral-review
+ :date "2026-11-04"
+ :verdict :qualified-exact-recorded-finite-neutral-profile-only
+ :permit "permits/typed-neutral-batch-v6.edn"
+ :prior-source-audit "reviews/typed-neutral-observer-fix-review-v16.edn"
+ :evidence-root "/tmp/opencode/oikos-typed-seq-logs-a2698786/private-v2/controller-v6-cbaceb7d-83b6-4da7-a151-85a9360bb930"
+ :evidence-sha256 {:result "9b1b8c38abe846f937418bf2486e4fe6f521bec98146a3a7f8280396f4d41314"
+                   :stdout "cafb522375debf2c5ffa5b2bedb744786ac23c516834407c6702e0869bff4ed1"
+                   :stderr "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                   :admission-result "7fce0588e4c233042a5ddcb2e89b9b3eeb6673cb6b00f3ac532a317f5b493249"}
+ :pins {:controller "a486ea931064a3866034c0e9f1caeb26ccb52266ec709737d8b9bcb949c66795"
+        :inventory "73e047b2fe10bc33019e5d9cfd6bf3ae97a6ce8f031e7eee2f93da33840b026b"
+        :host-manifest "dfaa118d60d9892000223f9dcaf5ccd34c791a246000af01edb9c79b6ccee0fb"
+        :neutral-sources {"guard-v3.py" "3c19da1108ea581305a67ebb129364972258473e9cc918ecd65c57160c553011"
+                          "neutral-bootstrap-v1.py" "061cd1c2d342343d882654ae27bad482c988121db4d5023fa757ff174b8451c2"
+                          "neutral-probes-v5.py" "513a252d9bd0e29f41dae146ebbb3989b259d5277d47649adfed827d145590d8"
+                          "runner-v4.py" "b247bfeab6806424a085dce2eadef6aac5c10cfee7afbf5c445cad703ad6a1d0"}
+        :independent-check "All 26 selected host entries currently match recorded resolved path, size and SHA-256; all four owned regular neutral sources match both inventory and result. Controller, inventory and host-manifest hashes match permit. This is a current read, not an independent historical preflight observation."
+        :historical-postflight "Admission result reports one attempt, exit zero and postflight pins matched; it does not retain individual postflight hash observations."}
+ :observations {:case-rows [[:positive :complete] [:timeout :timeout] [:output :output-cap]
+                            [:pipe-close-descendant :complete] [:exception-cleanup :not-started] [:guard :complete]]
+                :case-cleanup "All six rows report confirmed-group-absent with empty detail lists; exception-cleanup reports the expected injected select error."
+                :profile-marker :neutral-v5-passed
+                :stdout-bytes 1616 :stderr-bytes 0 :output-overflow false
+                :main {:pid 1364885 :start-ticks 51943135}
+                :separate-session-descendant {:pid 1364894 :start-ticks 51943138 :pgid 1364894 :sid 1364894}
+                :identity "Barrier and descendant rows agree with controller identities and the same recorded service cgroup; controller source verifies process identities and both pidfd anchors simultaneously live."
+                :kernel {:memory-max 268435456 :pids-max 64 :cpu-max "100000 100000" :type :domain :parent-controllers "cpu memory pids" :parent-subtree-control "cpu memory pids"}
+                :cleanup {:method :original-held-deleted :inode 7807689
+                          :interpretation "Recorded deleted descriptor link exactly matches the recorded own UUID service cgroup plus deleted suffix. Pinned controller only accepts this after both available pidfd anchors report exit and held inode matches; it does not accept arbitrary ENOENT."}
+                :controller-signals 0 :elapsed-seconds 12.783737174002454 :exception nil
+                :fixture "Retained fixture directory currently contains exactly fixture and inherited; their bytes equal the two source-defined constants."
+                :fixture-sha256 {"fixture" "2b0651992ab213dafbfbf37f6d5358419c0917b9833465a89bba63b49e2fe51" "inherited" "99596a9b33580f607e29b5d82d1eb1e255c626d5408cbf112449efdff25f4dff"}}
+ :coverage "Pinned source asserts exact positive stdout/stderr, timeout, 1 MiB output cap, pipe-close descendant cleanup, injected exception cleanup, and guard denial/positive checks; guard asserts three network syscall attempts and zero successes, 23 distinct named denials with EPERM, three positive operations, and fixture integrity after each case. The profile prints each case only after its assertions; source launches isolated Python without optimization flags."
+ :counter-evidence-and-limits ["Raw per-syscall guard counts, errno results and per-case fixture snapshots are not retained in controller stdout: those assertions are supported by the pinned harness control flow and its emitted guard/completion markers, not independently observable individual measurements."
+                               "The controller completion check validates case names and completion marker, not the full case contents; this review checked the retained rows and source separately."
+                               "The cleanup method and pidfd ordering are controller-reported observations interpreted through pinned source, not a separately retained kernel trace; later verification cannot reopen the original held descriptor."
+                               "Pre/post hashes do not exclude transient changes between checks, nor attest the entire interpreter, system manager, kernel, shared libraries or host. Host manifest covers selected files only."
+                               "The inventory contains a broader future Java/dependency graph; it was explicitly unused by this neutral controller and not verified here."
+                               "V4 failed before release and v5 failed aggregate cleanup observation; neither is backfilled by v6."
+                               "No repeat, new unit, signal, reset, guard probe, Java, typing test, provider or network operation was performed by this reviewer."]
+ :holds [:java :typed-tests :go-build :govone-fixture :ocr :models :personal-capture
+         :external-network :operator-services :artifact-replacement :shx-relock :cleanup-deletion]
+ :scope "One recorded finite neutral guard and owned lifecycle profile only; not Java, typing, application capability, comprehensive isolation, wider host attestation, or proof that warnings are fixed. No authorization for further execution follows."}

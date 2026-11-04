@@ -1,0 +1,43 @@
+{:report/id :oikos/axxium-drive-current-source-v3
+ :report/kind :read-only-drive-delegation-discovery
+ :report/status :source-route-found-live-delegation-unverified
+ :supersedes-scope "Corrects the earlier discovery's scope: the older Foresight checkout is not the only local Axxium source. Its absence of Drive implementation does not describe the PR checkout."
+ :inputs {:preservation-report ".ημ/runs/oikos-program-20261103/reviews/ocr-drive-preservation-v2.edn"
+          :archive "/tmp/opencode/oikos-ocr-preservation-15ca13df-441a-49ec-a140-b7831f2b1d76/ocr-preservation.tar"
+          :manifest "/tmp/opencode/oikos-ocr-preservation-15ca13df-441a-49ec-a140-b7831f2b1d76/manifest.json"
+          :destination-reported "gdrive:AgentWorkspaceArchives"
+          :prior-rclone-result :invalid-grant}
+ :source-pins [{:path "/home/err/.local/share/codex-work/axxium-pr19-google-live" :head "887c485270904ed368890834f63064b2008a4067" :tracked-worktree-clean true
+                :files [{:path "docs/google-drive-resource.md" :sha256 "afca6f60e2927a88f8b501dbcb71a5117a7c4dcc12d6415ea72e1de5b98de352"}
+                        {:path "src/cljs/axxium/routes/drive.cljs" :sha256 "58b9291b9bb7578381f0cab159ef675943f429b3c5e025ce80b5fba2122827af"}
+                        {:path "src/cljs/axxium/extern/drive_mcp.cljs" :sha256 "0db0f1cc9a6e3609c1f8e15c2a73487b7d081f8029b5893241d392184c700078"}
+                        {:path "src/cljs/axxium/extern/google_drive.cljs" :sha256 "d04ecbc23068efe61d53647384058fb1b9cd935b9a83a6340f0f17435cdc199d"}
+                        {:path "src/cljs/axxium/law/google_drive.cljc" :sha256 "f4bce17979ac350cad5840196d45f01590c5b9bbec1fda33c4545475ae96e7b4"}
+                        {:path "src/cljs/axxium/extern/google_drive_test.cljs" :sha256 "8521fdca834e252d475f9e08b3d2dcf05e726b5c880d345eb4194f63abe5019d"}
+                        {:path "src/cljs/axxium/extern/drive_routes_test.cljs" :sha256 "bbf59cb771eb748845feac57ba9a6e9534d0a00b5a5b34e205969de78654d2d2"}
+                        {:path "src/cljs/axxium/extern/drive_mcp_test.cljs" :sha256 "76a16bfff591b823447c2a6c287288b28cbdb5aa77f65d3fa1a9fdc4b0b474ae"}
+                        {:path "src/cljs/axxium/server.cljs" :sha256 "9a566c1209fce1a09cbee36e13f9e5f756e4f755171ae1377d0df4458cf51966"}]}
+               {:path "/home/err/devel/orgs/open-hax/axxium" :head "ac6c756e332d424a380a5d0a09ca1242e3290020"}
+               {:path "/home/err/.local/share/codex-work/axxium-oidc-rehearsal-101dfa9" :head "101dfa9257e08c678b2287399aa3ce861100837e"}
+               {:path "/home/err/.local/share/codex-work/axxium-sso/relay-authority" :head "b3eb251b12c543edc643da3944f58e72f6cc1b93"}
+               {:path "/home/err/.local/share/codex-work/axxium-sso/renew-authority" :head "e3fe860489df8528805bec6b8c578b84be5dfd50"}]
+ :observations [{:claim "The PR checkout registers authenticated /api/drive/connect, /api/drive/callback and POST /api/drive/mcp; its server registers these routes. The latter is application-specific JSON carrying EDN arguments and result, not standard MCP JSON-RPC." :refs ["docs/google-drive-resource.md:52-70" "src/cljs/axxium/routes/drive.cljs:120-141" "src/cljs/axxium/server.cljs:42"]}
+                {:claim "Google login uses openid email profile. Drive linking is a separate actor-bound consent flow requesting exactly https://www.googleapis.com/auth/drive.file with offline access; callback rejects different scope sets and missing refresh token. Existing login alone does not prove a connected Drive." :refs ["src/cljs/axxium/extern/google.cljs:36-51" "src/cljs/axxium/law/google_drive.cljc:10-40" "src/cljs/axxium/routes/drive.cljs:70-115"]}
+                {:claim "The documented implementation stores a sealed per-owner refresh credential; each put/get refreshes access internally. It requires an authenticated actor, configured client, token key and ledger, and an existing connected owner. No credentials or stored account records were inspected." :refs ["docs/google-drive-resource.md:3-6,26-50" "src/cljs/axxium/extern/drive_mcp.cljs:24-29" "src/cljs/axxium/routes/drive.cljs:30-38,120-133"]}
+                {:claim "drive_put creates an application/edn object from pr-str of :drive/value, not raw tar bytes; drive_get reads EDN by registered resource ID. drive_list returns the owner's registered resources, not an arbitrary Drive folder listing. Same-name and untracked-create cases refuse or require reconciliation; no overwrite or delete is exposed." :refs ["src/cljs/axxium/extern/drive_mcp.cljs:31-77" "docs/google-drive-resource.md:72-93"]}
+                {:claim "Tests describe and use injected fake Google/network operations, including an EDN round-trip and route failure injection; no test was executed here and these fixtures do not prove live Google permission, actual deployment or account access." :refs ["src/cljs/axxium/extern/google_drive_test.cljs:36-58" "src/cljs/axxium/extern/drive_mcp_test.cljs:97-141" "src/cljs/axxium/extern/drive_routes_test.cljs:1-2,25-81"]}
+                {:claim "A tracked-source search of the four other exact supplied checkouts found no matching Google Drive scope or integration terms. This is a bounded search, not a statement about all installations or untracked files."}]
+ :documented-rpc {:method "POST /api/drive/mcp"
+                  :auth "Existing authenticated owner session; not established in this discovery."
+                  :body-example {"tool" "drive_put" "arguments" "{:drive/name \"archive.edn\" :drive/folder-id \"<reviewed-folder-id>\" :drive/value <reviewed-edn-value>}"}
+                  :get-example {"tool" "drive_get" "arguments" "{:resource/id \"google-drive:<returned-id>\"}"}
+                  :example-status :source-contract-only-not-an-authorized-invocation}
+ :blockers ["No live host, deployed revision, existing signed-in session, linked Drive owner, valid grant or accessible private destination has been established. The PR checkout name does not establish runtime deployment or a live Google test."
+            "The existing rclone folder name does not establish that a drive.file grant can access that folder or that its ACL is appropriate; do not probe unrelated contents or widen permissions."
+            "The reviewed artifact is a binary tar plus manifest; this RPC serializes EDN values. A separately reviewed lossless binary-to-EDN encoding and exact decoding/hash-verification plan is necessary; a raw tar POST would not implement this contract."
+            "The source's multipart limit and any HTTP/server limits must be checked against the encoded payload before any upload. Remote creation followed by ledger failure can leave an untracked object; stop and reconcile rather than retry blindly."
+            "Google consent, login, token exchanges, file uploads and downloads were outside this discovery's authorization."]
+ :next {:action "Coordinator: identify existing deployed instance and evidence of a previously linked owner using nonsecret configuration/deployment or test records only; review private destination access and a lossless EDN encoding/readback plan before authorizing any operation."
+        :bounded-command "git -C /home/err/.local/share/codex-work/axxium-pr19-google-live grep -n -E 'register-drive-routes|drive_put|drive_get' -- src/cljs/axxium/server.cljs src/cljs/axxium/routes/drive.cljs src/cljs/axxium/extern/drive_mcp.cljs"
+        :command-status "Read-only source inspection only; not a live service test."}
+ :boundary {:source-edits false :tests-executed false :auth-exchange false :login false :upload false :download false :service-restart false :secret-or-credential-inspection false :board-or-ledger-writes false}}

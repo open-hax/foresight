@@ -1,0 +1,15 @@
+{:review/id :s2b-compact-witness-candidate-v6
+ :status :red-only-not-implemented
+ :plan {:file "s2b-witness-node-budget-plan-v5.edn" :sha256 "9e2fb6636d4c5784d4d3506cee201c10f167014c100ab4b4b481a1d9d669fc13"}
+ :base "ab38c63e4428ecc2f4538ff788226e6f2a7dc118"
+ :red {:commit "440b69faf7120e0300985727ec38a33fec3ec0bf"
+       :oracle "128 distinct windows and 32 workspaces; snapshot reaches await-owner, exact ACK must be fixture, preserve history, and be fresh."
+       :bb {:tests 19 :assertions 155 :failures 3 :errors 0 :exit 1 :log "/tmp/opencode/oikos-s2b-compact-v6-red-bb.log"}
+       :nbb {:tests 19 :assertions 155 :failures 3 :errors 0 :exit 1 :log "/tmp/opencode/oikos-s2b-compact-v6-red-nbb.log"}}
+ :source {"src/oikos/law/i3_collector.cljc" "9f350f5df36758a4c731afe5637d288dc5d2cddd60cc4356846c4e311c57ff16"
+          "test/oikos/law/i3_collector_test.cljc" "408c42d6091805cf964fbae73a3241bec781d43e9eb5e5a3264a9f7f815753b3"}
+ :verification {:target-lint {:errors 0 :warnings 0} :source-binding-invoker "Stale/in-flight, failed preflight; direct BB/NBB test invocations used for RED."}
+ :holds ["No compact event arena, reference API, lossless row packing, source implementation or GREEN candidate was produced."
+         "Only one RED oracle was added; baseline-gap-reconciliation, abandoned retention, identity corruption, boundary sizes, and F3 matrices remain untested."
+         "No wire byte, node or depth success measurements for a compact representation exist."
+         "The F1 feature, descriptor integration, edge integration and whole S2B remain held; concurrent edits were not staged."]}

@@ -1,0 +1,17 @@
+{:decision/id :services-source-artifact-publication-v1
+ :date "2026-11-04"
+ :source :coordinator-under-recommended-path-standing-authorization
+ :candidate "open-hax/services@d4f6ff570c7b8d2921bdf1a854c521681c96ff6b"
+ :source-review "reviews/services-generation-fix-review-v2.edn"
+ :docs-review "reviews/services-development-handoff-fix-review-v5.edn"
+ :privacy-review "reviews/services-development-publication-custody-v1.edn"
+ :judgment "Accept the bounded disclosure of task-owned workstation/worktree and temporary tool-location metadata in the historical synthetic verification report. These are engineering provenance paths under /home/err/spaces/foresight and /tmp/opencode, not capture payloads, credential files, personal documents or a grant to publish private history. The bounded independent scan found no credential, actual-capture or private-payload blocker in the 25-commit range. This is a scoped coordinator publication judgment under the standing source-artifact authorization, not a new human privacy attestation or proof that every possible secret is absent."
+ :destination {:repository "open-hax/services" :visibility :public
+               :ref "refs/heads/artifact/oikos-local-generations-d4f6ff57"
+               :exact-sha "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b"
+               :observed-permission "Fresh authenticated repository metadata reports push permission; no protection bypass or repository setting change authorized."}
+ :evidence-custody "Fresh authenticated GitHub contents reads through the descriptor's named open-hax/foresight repository at 792dfa341d380cbf413b925319654d7c2ebec413 returned the complete independent review (8259 bytes, SHA256 5f565e3e2729c3461137a6a20f7fbbdc3bc8365c56965b217eab3a4cad983025) and author report (4611 bytes, SHA256 4a309b65c71e01eb944e80cb3cdd35fa5aa34b10a22a5c28eb96c05fd73dd7b2). Both matched the pinned bytes."
+ :effect "Permit one ordinary exact-source artifact-ref push, then exact remote ref and artifact byte readback. A conflicting ref or rejected push stops; no force, retry under another identity, main merge or settings change."
+ :not-granted [:owner-release :oikos-consumer-acceptance :s1b-completion :installation
+               :deployment :production :bash-qualification :private-payload-publication]
+ :preservation "Untracked scripts/__pycache__, all local caches and prior historical reports remain untouched. No cleanup follows from this publication decision."}

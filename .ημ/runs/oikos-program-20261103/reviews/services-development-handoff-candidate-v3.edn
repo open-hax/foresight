@@ -1,0 +1,45 @@
+{:report/id :services-development-handoff-candidate-v3
+ :kind :owner-docs-candidate-not-approval
+ :repository "open-hax/services"
+ :worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+ :source-head "b2973ef9e3246522324dec4658fbeb093ffab147"
+ :source-tree "daf053cce6b24c8d62f59e660b90b6c92a5bbae2"
+ :docs-head "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b"
+ :docs-tree "d54a348e1346fec8230b09a8dd6e1c0eba6aae88"
+ :files [{:path "README.md" :sha256 "bf30f228a5a1ccab325f3d0a56a7b764274dc2c3570b59bc4d22581a0567bfb4"}
+         {:path "docs/deployment-model.md" :sha256 "6357e97f51ae69a18506be3fbc906c147cda94b727b48f660db71805c51244a6"}
+         {:path "docs/local-generation-engine-notes.md" :sha256 "94146d9a0d3fa489a84e2a8e4ec072a48b9eb1c3cbca1b4c5cbc9e7f437ded9e"}
+         {:path "docs/local-generation-development-handoff-v1.edn" :sha256 "4aeba4c203db2fe3347021713390f5f0b81a251f14477dc51ad4ceeaa108ecb8"}
+         {:path "docs/local-generation-development-handoff-v1.md" :sha256 "496fbc4c668f6407c89da98de611fb63a510f1e0aa94b482d549ee1df5250091"}]
+ :seven-pin-readback {"edge" "41e633799724639ede651f039f087a602d1df6a8ef10721f4792088cbbdc6537"
+                      "facade" "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+                      "laws" "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+                      "pure" "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"
+                      "runner" "64c5a79d0f0fa84b953846ab99bffc186df31d113ccaa4fa031082d9a17c2175"
+                      "validator" "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+                      "wire" "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"}
+ :preserved {:frozen-spec-sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+             :historical-report-sha256 "b42f8c560ca91caabb363de582fb87fba7f5d84e81b8ca5878d2343d517ebe2c"
+             :test-source-sha256 "22a209935574805ab04282b46c68c0af6c8febaec02c98bba47085e37dbfc9e2"
+             :git-diff "Only five named docs files changed from source head; no code, tests, frozen spec or historical report changed."
+             :untracked "scripts/__pycache__/ preserved, unstaged."}
+ :evidence {:coordinator-commit "792dfa341d380cbf413b925319654d7c2ebec413"
+            :independent-review-sha256 "5f565e3e2729c3461137a6a20f7fbbdc3bc8365c56965b217eab3a4cad983025"
+            :author-report-sha256 "4a309b65c71e01eb944e80cb3cdd35fa5aa34b10a22a5c28eb96c05fd73dd7b2"
+            :retrieval "git show from this exact coordinator object returned both bytes and matching hashes locally; remote publication not checked."}
+ :validation {:strict-edn "PASS: neutral cwd /, Babashka strict single map and EOF, seven pins; no repository bb config loaded."
+              :lint "PASS: clj-kondo descriptor, 0 errors, 0 warnings."
+              :links "PASS: local Markdown targets in all four touched Markdown files."
+              :diff "PASS: git diff --check and staged diff --check; postcommit HEAD^..HEAD --check."
+              :existing-ci-static "PASS: deployment boundary self-test and scan, deploy source pin check, deploy chain check."
+              :typecheck "No typecheck applicable to docs-only change."
+              :native-aggregate "Not rerun by authorization; no code changed."
+              :production-promotion "Not run; not authorized."
+              :independent-prior "Exact source prior review reports 3 focused, 14 edge, 4 wire/parity, 134 environment; BB/NBB 8 tests 137 assertions each, JVM six commands."
+              :author-prior "Author reports 42 aggregate tests and 642 actual SIGKILLs; independent reviewer did not rerun full aggregate."}
+ :holds ["Same independent reviewer must review this exact docs candidate; writer does not self-approve."
+         "Source review is not explicit owner release; owner release and Oikos consumer acceptance remain separate."
+         "No Bash, installed promotion, production or whole-S1B authority."
+         "Immutable evidence object was locally retrievable; remote availability/publication not established."]
+ :effects {:commit true :push false :pr false :board false :ledger false :native-aggregate false :service false :nested-agents false}
+ :next "Same independent reviewer reviews exact docs commit and this report."}

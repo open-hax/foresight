@@ -1,0 +1,25 @@
+{:report/id :typed-neutral-attempt-v4
+ :kind :actual-one-shot-inert-barrier-failure
+ :permit "permits/typed-neutral-batch-v4.edn"
+ :status :failed-before-release
+ :attempts 1
+ :controller-exit 1
+ :controller-seconds 0.04538536898326129
+ :actual-error "KeyError('ControlGroup')"
+ :go-sent false :guarded-cases-run 0 :java-starts 0
+ :unit "oikos-typed-neutral-1dca6499-c2f3-4697-8351-53240fc48d9b.service"
+ :job "/org/freedesktop/systemd1/job/5550965"
+ :runtime "The source-pinned inert bootstrap started and emitted only its barrier identity. Manager properties matched the requested values, but the controller queried ControlGroup on Unit instead of Service and failed before kernel checks or GO. No neutral profile or separate-session fixture was released."
+ :source-and-host-postflight :all-reviewed-pins-matched
+ :initial-cleanup :unconfirmed
+ :later-read-only-observations {:recorded-bootstrap-pid 1247539 :recorded-start-ticks 51821354
+                                :recorded-process :absent
+                                :recorded-cgroup-path :absent
+                                :known-parent-cgroup :exists
+                                :unit-state :failed :exec-main-status 120
+                                :invocation-id "f466aa1f0e644caeb9807c7ab9a207cf"
+                                :service-has-ControlGroup true :unit-has-ControlGroup false
+                                :service-ControlGroup ""}
+ :limits "Later process/cgroup absence observations establish the recorded inert fixture is no longer present; they do not turn this failed qualification into a neutral pass. No name-stop, reset-failed, kill, service restart or automatic retry occurred. The failed unit and all evidence are retained."
+ :evidence "/tmp/opencode/oikos-typed-seq-logs-a2698786/private-v2/controller-v4-c06a4dbb-b05e-42fd-8177-cc882a586a58"
+ :consumption "The v4 invocation permit is consumed. Any new attempt requires a separately reviewed source fix and a new explicit bounded admission under standing authorization."}

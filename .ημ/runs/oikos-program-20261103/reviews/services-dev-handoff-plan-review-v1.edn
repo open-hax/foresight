@@ -1,0 +1,27 @@
+{:review/id :services-dev-handoff-plan-review-v1
+ :kind :independent-planning-review
+ :verdict :revise-before-docs-preparation
+ :input {:path ".ημ/runs/oikos-program-20261103/reviews/services-dev-handoff-plan-v1.edn"
+         :sha256 "ff70a245eca3b6373be9454c761c12f2ea2b4632c215f370bcef4608a91cc675"}
+ :source {:repository "open-hax/services"
+          :worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+          :head "b2973ef9e3246522324dec4658fbeb093ffab147"
+          :tree "daf053cce6b24c8d62f59e660b90b6c92a5bbae2"}
+ :findings [{:id "SDH-P1-1" :priority :p1
+             :plan-lines [38 50]
+             :issue "The unqualified claims that nonempty input never triggers compensation, and that any nonempty effectful request must not trigger compensation, contradict restoration of a failure during that very request's admitted transaction. The EOF restriction is on recovering an already-pending interrupted transaction at a later ingress, not on in-operation restoration."
+             :evidence ["scripts/local_generation_runner.py:58-76 classifies nonempty input and reserves engine.recover() for empty input"
+                        "scripts/local_generation_fs.py:774-788 calls _restore after an admitted transaction fails, returning failed-restored"
+                        "docs/local-generations-v1.md:329-330 specifies restoration after failure; lines 333-346 describe startup/re-entry recovery"]
+             :required-change "Qualify both statements as prohibiting nonempty requests from initiating compensation of an existing pending interrupted transaction; explicitly retain same-operation failure restoration under the lease. In the companion, distinguish the frozen spec's startup/re-entry language from the exact-head EOF-only recovery ingress, without claiming the frozen spec already specifies that ingress."}
+            {:id "SDH-P1-2" :priority :p1
+             :plan-lines [22 24]
+             :issue "The recorded SHA-256 for the author exact-head report is incorrect, despite the plan saying both coordinator reports were rehashed. This prevents exact evidence attribution and would carry a broken provenance pin into the descriptor."
+             :evidence ["Actual SHA-256 of .ημ/runs/oikos-program-20261103/reviews/services-recovery-ingress-fix-v3.edn: 4a309b65c71e01eb944e80cb3cdd35fa5aa34b10a22a5c28eb96c05fd73dd7b2"
+                        "The independent review digest is correctly 5f565e3e2729c3461137a6a20f7fbbdc3bc8365c56965b217eab3a4cad983025"]
+             :required-change "Replace the author report digest with the observed full digest, and ensure durable owner evidence references the correct artifact and separates author-reported aggregate results from independent exact-head results."}]
+ :checked {:source-pins "All seven working-tree hashes, frozen spec hash, test source hash, HEAD and tree match the plan and independent review; no tracked changes were reported. Existing untracked scripts/__pycache__/ was left untouched."
+           :contracts "Facade scripts/local-generation.clj:48-74 and runner scripts/local_generation_runner.py:30-76 support the stated five launch keys, sorted source pin shape, trusted fd 3, fixed worker and EOF ingress. src/services/local_generation.cljc:70-127 supports the request, preview, policy and result types quoted."
+           :holds "Plan preserves frozen spec and b39 historical report, differentiates source and future docs identity, and holds unsupported Bash, installed promotion, consumer acceptance and S1B credit. No release or publication is implied by this review."
+           :qualification "No tests, builds, network, PR, publication, board, ledger, source changes or nested agents; review based on read-only source and artifact inspection and hashes."}
+ :next "Correct both findings and request parent admission of the corrected docs-only preparation plan under the existing owner-source grant; this review does not authorize release or consumer acceptance."}

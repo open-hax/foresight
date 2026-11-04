@@ -1,0 +1,27 @@
+{:custody/id :typed-neutral-containment-source-review-v7
+ :kind :native-worker-report-custody
+ :source-session "ses_e5941356dffeFPYdehzd0XcDxH"
+ :source-role :auditor
+ :source-description "Audit neutral containment sources"
+ :verdict :changes-requested
+ :independent-worker-output-not-parent-revalidation true
+ :recording-note "The read-only reviewer did not write a file. This envelope preserves its returned findings and qualification limits without representing the coordinator as the reviewer or inventing a full inventory audit."
+ :findings [{:id :f1 :severity :high :class :security :location "guard-v2.py:26-27"
+             :text "The write guard can be bypassed by duplicating an inherited writable descriptor onto stdout or stderr. The filter only denies write and writev by descriptor number; dup2 and dup3 are not denied. The inherited-FD test at neutral-probes-v4.py:75 does not exercise that bypass."}
+            {:id :f2 :severity :high :class :correctness :location "systemd-neutral-v1.py:131-146"
+             :text "The neutral harness can execute before the controller observes its identity or verifies the requested containment properties. Popen precedes identity(meta,unit) and require_config(meta). Add a launch barrier released only after verification."}
+            {:id :f3 :severity :high :class :correctness :location "systemd-neutral-v1.py:115-117,161-166"
+             :text "Unit ownership is not established atomically at start or stop. show(unit) is separate from launch; cleanup show(unit) is separate from systemctl stop unit. Neither action binds atomically to the observed invocation."}
+            {:id :f4 :severity :medium :class :correctness :location "neutral-probes-v4.py:28-31,85-96"
+             :text "Descendant cleanup does not test a descendant which survives its wrapper and creates a new session. The forked child closes descriptors and sleeps, but never calls setsid."}]
+ :reported-hashes {"systemd-neutral-v1.py" "50ab6a66a3107fff8e04d55a9348c5b16b89b0cb08a7d92d13748774e2972619"
+                   "neutral-probes-v4.py" "bc9ebb1f3e68b914e940bb412ad079496759f31a904d50038e23c6f3bf178391"
+                   "runner-v3.py" "e83fa750676dd1b388ac32459eda899b7a88fb46f6de7aa195b54d7e09d8d9e9"
+                   "guard-v2.py" "37d9b10e85a46e621ac6bfc42ddf8894f0ce3352dc57528acfbc2681ca49b39f"
+                   "inventory-v3.json" "258030d0e11ba5a52edb2c66b012642545b15da123058a4c2664d1d9d08d5553"
+                   "inventory-v4.json" "5c038bc64df91c0c1bc4bc19acb88172fe0b62de6f419c7eaa7a81051dd074c7"
+                   "inventory-v5.json" "25ac8c95422c4f76003fa65eff4e0514a40fa6f3c9b40b9e3699423f1bfbac0c"
+                   "typed-systemd-neutral-controller-source-v6.edn" "e3dc0f6cb429c022a1d6f63348cb986b3d6c9eb2a5565bda7244268497667b4c"
+                   "typed-neutral-probe-source-v5.edn" "9b67aaacbb0934fa365cb4041762431a105193724389ee38407be750205a3bd6"}
+ :unverified "No neutral batch, service start, probe, Java, typed test, build, network access or runtime containment test. Effective cgroup permissions/escape prevention, systemd enforcement, wrapper-death cleanup and guard behavior remain unobserved. Inventory display was truncated; no full inventory-content audit is claimed."
+ :next "Repair exact confirmed boundaries in versioned successors, then return complete sources and inventories to the same independent reviewer before any execution."}
