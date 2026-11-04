@@ -1,0 +1,73 @@
+{:inventory/id :foresight/checkout-leftovers-20261104
+ :inventory/version 1
+ :inventory/kind :custody-metadata-not-content-backup
+ :license "GPL-3.0-or-later"
+ :baseline-root "39312abf4977c5f5a2072d8fe35cb377eeb217fe"
+ :authorization "User chose per-repository inventory for approval. This does not authorize child commits, directory traversal, deletion, branch switching or merging orchestrator work."
+ :method {:direct-repositories 25
+          :status "porcelain v1, ignore-submodules=all; no nested repository recursion or untracked-directory expansion. .agents used tracked-only status plus two explicitly known review leaves."
+          :worktrees "Registration metadata only; no worktree contents inspected, no liveness/ownership inferred."
+          :hashes "Selected modified regular files and known review leaves only; hashes are not backup or secret-scan proof."
+          :network :not-performed-for-child-inventory
+          :sensitive-content :not-copied-or-published
+          :source-sessions ["ses_e5949088cffe0iuEBNXY4hGS4E" "ses_e5949088affeIl8vXCd9bbRIFL" "ses_e59490889ffeuIYNsn1WwPtS5H"]
+          :primary-recheck "Primary session independently confirmed the nine modified tracked child paths below. Other metadata is attributed to the read-only inventory agents."}
+ :root {:branch "plan/fork-dev-origins"
+        :preexisting-untracked [".github/workflows/agy-review.yml" "scripts/agy-review.sh"]
+        :current-source-hashes {".github/workflows/agy-review.yml" "b2d65b1d400ca0b4832f1f9f80b16485a480f0a36bbe36fe9f164b3cc139d3f0"
+                                "scripts/agy-review.sh" "3e4dad32dd2d214be6dd9ee743760681a23883fe2ee6c209b031b03e73b8055c"}
+        :remote-proof {:remote "origin"
+                       :branch "feat/agy-gemini-3-8-flash-review-workflow"
+                       :commit "540b2afa7a7e851bd3c73660a225981bfad6cef8"
+                       :observation "Fresh ls-remote branch SHA equals the stored ref; both local file SHA256 values equal the corresponding Git blobs at that SHA."
+                       :scope :two-root-review-leaves-only}
+        :disposition :remote-matching-leaves-retained-no-cleanup-authorized
+        :ignored-content "Not inventoried: .env credentials, existing diagnostics and other ignored content remain protected. No claim that Git preserves them."}
+ :requires-custody-decision
+ [{:repo "calliope" :branch "device/stealth" :head "b473c21251d3281eae942c5bddfef829b37d1182"
+   :modified-tracked ["deps.edn" "ledgers/ingest.edn" "receipts.edn" "test/calliope/test_runner.clj"]
+   :untracked-regular-files 6 :unexpanded-directories 6 :staged []
+   :content-category "Corpus/companion source and data, not merely review-workflow leftovers."
+   :known-review-leaves :equal-to-cached-remote-blobs
+   :registered-worktrees 1
+   :disposition :private-or-unknown-retain-for-owner-approved-preservation}
+  {:repo "uxx" :branch "device/stealth" :head "97e67a7a758c080450a200e8e6e1ada614eabc6d"
+   :modified-tracked ["package.json" "pnpm-lock.yaml" "pnpm-workspace.yaml" "receipts.edn"]
+   :untracked-regular-files 2 :unexpanded-directories 3 :staged []
+   :content-category "UI workspace changes, reflection/browser directories and review leaves."
+   :known-review-leaves :equal-to-cached-remote-blobs
+   :registered-worktrees 3
+   :disposition :unknown-retain-for-owner-approved-preservation}
+  {:repo "openplanner" :branch "device/stealth" :head "582efb7ebbdc542650fd239bfc5f2de076316c53"
+   :modified-tracked ["pnpm-lock.yaml"] :untracked-regular-files 0 :unexpanded-directories 0 :staged []
+   :registered-worktrees 3
+   :disposition :unknown-retain-for-owner-approved-preservation}]
+ :other-direct-repositories
+ [{:repo ".agents" :tracked-dirty? false :untracked-inventory :incomplete-by-boundary :known-review-leaves :cached-match :worktrees 3}
+  {:repo "Truth" :tracked-dirty? false :unexpanded-content? true :extra-category :local-and-demo-evidence :known-review-leaves :cached-match :worktrees 1}
+  {:repo "axxium" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 14}
+  {:repo "bitch-tracker" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 1}
+  {:repo "chat-ui" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 1}
+  {:repo "clio" :tracked-dirty? false :unexpanded-content? true :extra-category :runtime-output :known-review-leaves :cached-match :worktrees 1}
+  {:repo "epiphany" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 1}
+  {:repo "eta-mu" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 12}
+  {:repo "kanban-orchestrator" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 1}
+  {:repo "katamorph" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 1}
+  {:repo "knoxx" :tracked-dirty? false :unexpanded-content? true :extra-category :actor-contract-file :known-review-leaves :cached-match :worktrees 7}
+  {:repo "muse" :tracked-dirty? false :unexpanded-content? true :extra-category :editor-lock :known-review-leaves :cached-match :worktrees 4}
+  {:repo "oikos" :tracked-dirty? false :leftovers :none-observed :known-review-leaves :absent :worktrees 19}
+  {:repo "opencode" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-comparison-unavailable :worktrees 1}
+  {:repo "osmos" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 1}
+  {:repo "proxx" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 47}
+  {:repo "receipt-river" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 3}
+  {:repo "rheos" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 1}
+  {:repo "services" :tracked-dirty? false :unexpanded-content? true :extra-category :python-cache :known-review-leaves :cached-match :worktrees 7}
+  {:repo "session-mycology" :tracked-dirty? false :unexpanded-content? true :extra-category :compiled-output :known-review-leaves :cached-match :worktrees 1}
+  {:repo "shx" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 2}
+  {:repo "sol" :tracked-dirty? false :unexpanded-content? true :known-review-leaves :cached-match :worktrees 1}]
+ :claims-not-made ["This is not a content backup and does not preserve the listed uncommitted bytes."
+                   "Cached remote-ref equality is not fresh remote reachability or durable retrieval proof."
+                   "Registered worktrees are protected; no current orchestrator lease/ownership was established."
+                   "Unexpanded or ignored directories are incomplete inventory, not disposable generated junk."
+                   "A child gitlink cannot preserve that child's uncommitted or untracked contents."]
+ :next "Approve repository-specific preservation/private-backup scope, starting with calliope, uxx and openplanner; then verify recoverability and a clean-enough handoff before any requested branch switch."}

@@ -1,0 +1,46 @@
+{:plan/id :foresight/causal-ledgers-and-fork-tax-20261104
+ :plan/version 2
+ :plan/status :proposed-integration-with-accepted-migration-rule
+ :plan/extends {:path ".ημ/plans/2026-11-04-causal-ledgers-fork-tax-v1.edn"
+                :sha256 "54bac7518c033ade6ae403999f87078261b6d55b6ccf3c7013dd6d8b98b5a531"
+                :semantics "Read the pinned v1 intent/integration map plus these additions. Preserve v1 as the actual first-wave reviewed input; its pre-review status field is historical, not current review status."}
+ :license "GPL-3.0-or-later"
+ :user-corrections
+ {:reversible-migrations :accepted-standing-rule
+  :clio "Clio is our event sourcing substrate for producing and interacting with events, and projections from those events."
+  :installed-ultra "User reports an old ultra-code workflow is installed. Preserve its artifacts as bounded local review evidence, not proof of the newer workflow's adoption or qualification."
+  :immediate-objective "Finish custody inventory and preserve authorized checkout-local work so the user can return to main and integrate the newer workflow. Do not expand this into an implementation or tool-upgrade project."
+  :inventory-choice "User chose per-repository inventory for approval; no child changes are authorized for sweeping into a root commit."}
+ :accepted-rule {:instruction-path "AGENTS.md#reversible-ημ-migrations"
+                 :scope "Tracked .ημ ledgers, snapshots, configuration and changes to their authority/layout/formats."
+                 :requires-before-activation ["Versioned executable forward and reverse scripts, owned with the capability being migrated."
+                                              "Pinned input/output versions, schema identities and exact preimage bytes/provenance."
+                                              "Dry-run/plan, explicit scope selection and refusal of unexpected input."
+                                              "Forward/reverse round-trip tests, idempotent retry and interruption/restart tests."
+                                              "Post-migration writes handled explicitly: lossless reconciliation or refusal, never discard."]
+                 :event-history "Reverse activation/configuration/projections or emit compensating events; never erase admitted history or change historical IDs/causes."
+                 :substrate :clio
+                 :not-a-migration "This turn adds a policy, versioned planning records and a custody inventory; it does not change any active ledger's format, source membership, writer, schema or reader."}
+ :integration-addenda
+ [{:packet :receipt-adoption
+   :addition "Before any cutover, ship and review forward/reverse scripts in the owning repository, exercise them on representative legacy/full-Clio/hybrid-failure fixtures, and prove schema/cause/identity preservation plus compatibility activation rollback."}
+  {:packet :fork-tax-events-and-projections
+   :addition "Migrate fixed-name handoff sources with forward/reverse scripts; retain old bytes as historical inputs and qualify deterministic versioned output without pretending post-tag bookkeeping was in the old tag."}
+  {:packet :resource-reference-option
+   :addition "Any later Git-to-reference move needs reversible export/import and verified authorized byte retrieval. A reference is not permission to delete the Git/local original or discard post-move events."}]
+ :review-evidence
+ {:first-wave {:workflow ".ημ/workflows/2026-11-04-causal-ledgers-fork-tax-v1.edn"
+               :journal ".ημ/runs/causal-ledgers-fork-tax-20261104-v1/journal.jsonl"
+               :result ".ημ/runs/causal-ledgers-fork-tax-20261104-v1/2026-11-04T13-18-26.995815396Z-result.edn"
+               :review-results 2 :failed-jobs 0 :raw-findings 0 :confirmed-findings 0 :skeptic-jobs 0
+               :scope "v1 plan only; not the later standing migration rule or final custody inventory."}
+  :runner {:path "~/.agents/skills/ultra-code/scripts/ultra.bb"
+           :sha256 "9a50f3c9f7f1aa7b211ebcb9b69c33f7360af85e912555e2ec0cceb5d24c8f0b"
+           :generation :old-installed-user-reported
+           :model-binding :inherited-installed-ultra-agents
+           :limitations ["No installed workflow upgrade or newer-workflow qualification."
+                         "Runner reports zero token counts; this is not verified zero usage."
+                         "Runner's skeptic stage prints one distinct review grouping even though two journaled review results exist; use the journal for job coverage."]}
+  :credit :local-planning-only
+  :second-wave :pending}
+ :next "Complete the approved leftover custody inventory, review the standing rule/addendum, and persist only owned policy/planning/evidence artifacts without switching branches or touching active worktrees."}

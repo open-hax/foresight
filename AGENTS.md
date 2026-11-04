@@ -146,6 +146,26 @@ must remain visible. Never convert an unavailable action into a pass.
 Cards live under `docs/agile/kanban`. Rheos events and receipts belong under
 `.ημ/`; no provenance ledger may be created elsewhere.
 
+### Reversible `.ημ/` migrations
+
+Changes to tracked `.ημ/` ledgers, snapshots, configuration, or their authority,
+layout and formats require versioned, executable forward **and reverse**
+migration scripts before activation. A prose rollback plan or Git reset is not
+a reverse migration. Pin the source/target versions and schema identities,
+preserve original bytes and provenance, expose a dry-run/plan, refuse unexpected
+inputs, and test forward/reverse round trips, idempotent retries and interrupted
+execution. Account explicitly for writes made after migration; reverse must
+refuse or losslessly reconcile them, never silently discard them.
+
+Clio is the event-sourcing substrate for producing/admitting events and deriving
+projections from them. Reuse its causal, identity, schema and replay laws; do not
+create a second event engine here. Future `.ημ/` migrations must use that seam.
+Historical events remain immutable: reversal restores compatible activation,
+configuration and projections, or records compensating events, rather than
+deleting facts. Assemble `receipts.edn` and versioned fork-tax documents as
+projections, not concurrent-write authorities. Existing ledgers stay under their
+current contracts until their readers, writers and gates are migrated together.
+
 ## Operational memory
 
 Before troubleshooting OpenCode's free MiMo route, read the recovered

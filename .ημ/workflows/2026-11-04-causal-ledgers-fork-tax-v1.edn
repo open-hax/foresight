@@ -1,0 +1,49 @@
+{:workflow/id :causal-ledgers-fork-tax-20261104-v1
+ :workflow/version 1
+ :meta {:name "Causal ledgers and fork-tax integration review"
+        :description "Read-only review of the clarified user intent and integration plan, not migration or code promotion."
+        :phases [{:title "Review" :detail "Two independent lenses"}
+                 {:title "Verify" :detail "Two skeptic votes per finding"}]
+        :budget {:review-jobs 2 :agent-tool-calls 12 :agent-timeout-ms 240000}
+        :execution "Invoke from /home/err/spaces/foresight. Inherit installed ultra agent models; no obsolete template model override. Omit :dir because this installed V2 CLI has no --dir flag; subprocesses inherit CWD."}
+ :run {:agent-timeout-ms 240000 :max-concurrency 2}
+ :vars
+ {:repo "/home/err/spaces/foresight"
+  :cards [{:key "causal-ledgers-fork-tax-plan-v1"
+           :path "/home/err/spaces/foresight/.ημ/plans/2026-11-04-causal-ledgers-fork-tax-v1.edn"
+           :context "Reviewed source SHA256 54bac7518c033ade6ae403999f87078261b6d55b6ccf3c7013dd6d8b98b5a531, root HEAD 39312abf4977c5f5a2072d8fe35cb377eeb217fe. Scope: planning and ownership map only. No application implementation, ledger cutover, skill adoption or storage selection is delivered. User requests order-agnostic Clio-built file partitions, assembled receipts.edn, EDN fork tax and versioned generated reports; preserve checkout-local residuals outside active orchestrator worktrees. Historical segmented lineage 8e3ddd4f and Git-buffer repair 542ec7b1/be0ec132 already exist elsewhere: do not propose duplicate implementations. Root baseline project validate 26/25/40, project 12/171, workspace 24/122 and kondo 0/0 passed. Review must distinguish existing capabilities, accepted user direction, provisional design and unverified runtime ownership."}]
+  :lenses
+  [{:key "causal-and-projection-contract"
+    :prompt "Check the plan's source/projection distinction, Clio identity/causal/stream rules, completeness, partition invariance, migration compatibility and finite versioned fork-tax rendering. Compare actual clio/src/clio/domain/canonicalize.cljc and clio/src/clio/infra/ledger.cljs. Flag a contradictory or missing required plan obligation, not the absence of deliberately deferred implementation."
+    }
+   {:key "ownership-and-preservation"
+    :prompt "Check that the plan honors existing inflight work, root/child ownership and the user's checkout-local preservation correction. Inspect cited Foresight handoff/source and historical Git objects if needed. Check optional Axxium resource references, exact durability claims, non-destructive custody and packet ownership. Do not demand a new board engine, immediate store deployment, or an unrequested broad migration."}]}
+ :schemas
+ {:findings {:type "object" :additionalProperties false
+             :properties {:findings {:type "array"
+                                     :items {:type "object" :additionalProperties false
+                                             :properties {:title {:type "string"}
+                                                          :file {:type "string"}
+                                                          :detail {:type "string"}
+                                                          :severity {:type "string" :enum ["blocker" "should-fix" "nit"]}}
+                                             :required ["title" "file" "detail" "severity"]}}
+                          :dodVerdict {:type "string"}}
+             :required ["findings" "dodVerdict"]}
+  :verdict {:type "object" :additionalProperties false
+            :properties {:refuted {:type "boolean"} :reason {:type "string"}}
+            :required ["refuted" "reason"]}}
+ :stages
+ [{:stage/id :review :stage/kind :map-agent :stage/phase "Review"
+   :stage/items {:cartesian [{:bind :card :from [:vars :cards]}
+                            {:bind :lens :from [:vars :lenses]}]}
+   :stage/agent "ultra-reviewer" :stage/schema :findings
+   :stage/label "review:{card/key}:{lens/key}"
+   :stage/prompt "READ ONLY. Read {repo}/AGENTS.md and the complete EDN integration plan {card/path}; treat it as the review packet, not an implemented kanban card. {card/context}\nLens: {lens/prompt}\nBudget: at most 12 tool calls and 240 seconds. No nested agents, writes, commits, migration, external publication or broad worktree scans. Inspect only relevant cited sources. Findings need concrete file/line evidence and a failure scenario against this planning scope. In dodVerdict name reviewed coverage and any inaccessible inputs, including when there are no findings. JSON only."}
+  {:stage/id :verify :stage/kind :vote-fan-out :stage/phase "Verify"
+   :stage/over :review :stage/finding-path [:findings]
+   :stage/agent "ultra-skeptic" :stage/schema :verdict
+   :stage/votes 2 :stage/quorum 2
+   :stage/label "verify:{finding/title|40}:vote{vote/n}"
+   :stage/prompt "READ ONLY. Independently try to REFUTE this finding against planning packet {card/path} in {repo}. {card/context}\nTITLE: {finding/title}\nFILE: {finding/file}\nCLAIM: {finding/detail}\nSEVERITY: {finding/severity}\nVote {vote/n}. Read the plan and only relevant source evidence; budget 12 tool calls and 240 seconds. A missing implementation is not a planning defect when explicitly deferred. Confirm only a real in-scope omission/contradiction; refute an issue already covered, speculative, factually wrong or outside this packet. State access/coverage limits honestly. No writes or nested agents. JSON verdict only."}
+  {:stage/id :return :stage/kind :return
+   :stage/return {:confirmed :surviving :all :flat}}]}

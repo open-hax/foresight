@@ -1,0 +1,30 @@
+{:workflow/id :causal-ledgers-fork-tax-20261104-v2
+ :workflow/version 1
+ :meta {:description "Review the accepted reversible-migration rule and v2 planning addendum; old installed runner, no upgrade or activation."
+        :budget {:review-jobs 2 :agent-tool-calls 10 :agent-timeout-ms 240000}}
+ :run {:agent-timeout-ms 240000 :max-concurrency 2}
+ :vars {:repo "/home/err/spaces/foresight"
+        :cards [{:key "migration-rule-v2"
+                 :path "/home/err/spaces/foresight/.ημ/plans/2026-11-04-causal-ledgers-fork-tax-v2.edn"
+                 :context "Immutable review inputs: v2 plan SHA256 dfcaa1e2e21a71d84a29d74e50a9d19644dd0e74ef3ec244d39cedbab884f42e; AGENTS.md SHA256 e7308a437827abe2885cf12c49e242de66db362ace3d5cb2873bce8e1a4d2190; v1 plan pinned by v2 :plan/extends remains the first-wave reviewed input. User explicitly requires executable reversible migration scripts for future changes to tracked .ημ ledgers/snapshots/configs, Clio as substrate, and says installed ultra-code is old: priority is preservation to allow returning to main, NOT a broad implementation or tool upgrade. User chose read-only per-repository leftover inventory for approval; no sweeping child dirt. Deliverables: standing AGENTS rule plus versioned plan/evidence. No layout/schema/source/reader/writer cutover has occurred."}]
+        :lenses [{:key "reversibility" :prompt "Audit AGENTS.md migration rule and v2 addendum for executable forward/reverse requirement, exact provenance, idempotency/interruption, post-migration writes, and non-erasure of immutable events. Detect a concrete contradiction or missing planning obligation, not deferred implementation."}
+                 {:key "scope-and-handoff" :prompt "Audit whether v2 preserves Clio ownership and existing ledger contracts, qualifies the old installed runner accurately, and keeps immediate work to custody/preservation rather than migration or branch switching. Read v1, its recorded first-wave journal, and only cited sources needed. Do not demand immediate scripts when no migration is activated."}]}
+ :schemas {:findings {:type "object" :additionalProperties false
+                      :properties {:findings {:type "array" :items {:type "object" :additionalProperties false
+                                                                   :properties {:title {:type "string"} :file {:type "string"} :detail {:type "string"}
+                                                                                :severity {:type "string" :enum ["blocker" "should-fix" "nit"]}}
+                                                                   :required ["title" "file" "detail" "severity"]}}
+                                   :dodVerdict {:type "string"}}
+                      :required ["findings" "dodVerdict"]}
+           :verdict {:type "object" :additionalProperties false
+                     :properties {:refuted {:type "boolean"} :reason {:type "string"}}
+                     :required ["refuted" "reason"]}}
+ :stages [{:stage/id :review :stage/kind :map-agent :stage/phase "Review"
+           :stage/items {:cartesian [{:bind :card :from [:vars :cards]} {:bind :lens :from [:vars :lenses]}]}
+           :stage/agent "ultra-reviewer" :stage/schema :findings :stage/label "review:{card/key}:{lens/key}"
+           :stage/prompt "READ ONLY planning/policy review. Read {repo}/AGENTS.md, {card/path} and the pinned v1 plan it extends. {card/context}\nLens: {lens/prompt}\nBudget 10 tool calls/240 seconds. No writes, agents, commits, external publication or broad worktree scans. Require concrete file/line evidence and an in-scope failure scenario. Report coverage/access limits in dodVerdict even with no findings. JSON only."}
+          {:stage/id :verify :stage/kind :vote-fan-out :stage/phase "Verify"
+           :stage/over :review :stage/finding-path [:findings] :stage/agent "ultra-skeptic" :stage/schema :verdict
+           :stage/votes 2 :stage/quorum 2 :stage/label "verify:{finding/title|40}:vote{vote/n}"
+           :stage/prompt "READ ONLY skeptic vote {vote/n}. Packet {card/path}, repo {repo}. {card/context}\nTITLE: {finding/title}\nFILE: {finding/file}\nCLAIM: {finding/detail}\nTry to REFUTE against actual policy/addendum and narrowly relevant source. Budget 10 tool calls/240 seconds; no edits/nested agents. Confirm only a concrete planning/policy defect; missing intentionally deferred implementation is not one. JSON verdict only."}
+          {:stage/id :return :stage/kind :return :stage/return {:confirmed :surviving :all :flat}}]}

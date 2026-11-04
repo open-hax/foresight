@@ -1,0 +1,94 @@
+{:plan/id :foresight/causal-ledgers-and-fork-tax-20261104
+ :plan/version 1
+ :plan/status :proposed-integration
+ :plan/kind :intent-and-integration-map
+ :license "GPL-3.0-or-later"
+ :authority {:user-direction :accepted
+             :implementation-design :provisional
+             :migration-activated? false
+             :storage-choice-made? false}
+ :user-intent
+ {:receipt-source "Independent immutable files built/admitted with Clio; causal IDs, not file order or filenames, connect the history."
+  :assembly "receipts.edn can be assembled from the source segments; it must not remain the concurrent write hotspot."
+  :fork-tax "Fork tax itself should be an EDN event ledger. Existing handoff documents should become generated artifacts with versioned names."
+  :storage-options "Keep Git-resident events and Git-resident resource references as options; investigate Axxium references without assuming an installed durable content service."
+  :preservation-scope "Preserve checkout-local work outside the orchestrator's active worktrees. Do not absorb, migrate, reset or rewrite that in-flight work."
+  :quotes ["As long as the causal IDs are all present and we are building them with clio, they can be split up into as many files as we want."
+           "This fork tax was to get anything we have right here that isn't a part of that persisted."
+           "we want the fork tax documents we have been using, to be generated artifacts, with versioned names."]}
+ :provisional-contract
+ {:source-of-truth "Clio-admitted immutable events, with published schema identities and complete resolvable causal references; physical partitioning is a storage concern."
+  :concurrent-writers "Allocate a unique process/run stream, preserving Clio stream/sequence laws. A branch or agent name alone is not a unique writer. No shared append file or unstated shared sequence allocator."
+  :assembly "Use Clio's existing canonicalization and validation, not a second replay/identity engine in Foresight. File enumeration order and repartitioning must not change the admitted event set or canonical projection."
+  :conflicts "Reject missing causes, cycles, inconsistent reuse of event IDs, stream/sequence collisions and unadmitted schemas through the owning Clio APIs. A partial union is incomplete, never a successful complete replay."
+  :compatibility "Do not create the .ημ/receipts/ migration marker or freeze/split any existing ledger until its actual readers, writers and gates adopt the same source-selection contract. Preserve historical bytes and provenance."
+  :snapshot-scope "Inventory explicit repository/path ownership and orchestration leases first. Report every item as selected, already recoverable with exact proof, protected active work, secret/private, or blocked/unclassified. Unclassified is not silently excluded or committed."
+  :fork-tax-events "Model intent, scope selection, verification and publication outcomes as causal events using the existing owner seams. A planned push is not observed remote durability."
+  :finite-snapshot "Pin a finite event/input selection before rendering. Publication acknowledgements may follow in separate immutable events; do not require a commit to contain its own hash or manufacture an endless bookkeeping chain."
+  :generated-artifacts "Versioned names bind snapshot ID and projection revision/digest; render from pinned event/schema/renderer inputs, include selection identity and verification outcomes, never hand-edit reports as authority. A latest alias, if offered, is only a disposable pointer."
+  :storage "Optional resource references retain immutable identity, exact content digest/size, access policy and retrieval/retention proof. Never equate a URL or authorization handle with durable recoverable bytes. No offloading or deletion in this turn."}
+ :non-goals ["Implement a new Clio engine, Rheos parser or resource-store authority in Foresight."
+             "Repair the existing receipt Git-buffer defect in parallel with its active worktrees."
+             "Mass-convert ledgers, change active skill behavior, install a service or upload private material."
+             "Claim the previous snapshot preserved uncommitted child content."
+             "Treat local ultra review as native provider approval, PR merge permission or migration activation."]
+ :discovery {:baseline-root "39312abf4977c5f5a2072d8fe35cb377eeb217fe"
+             :handoff-ledger :absent
+             :evidence-map
+             [{:tier :observed :path "clio/src/clio/domain/canonicalize.cljc:134-154"
+               :revision "788cdd3434615a7932b924e68520dbf7f88408c2"
+               :claim "Clio already unions arbitrarily partitioned ledgers, validates schemas and causal/stream laws, collapses identical event copies and emits deterministic topological replay material. Physical order is not authority; the stable tie-break is not causality."}
+              {:tier :observed :path "clio/src/clio/infra/ledger.cljs:60-106"
+               :claim "Append admission locks the named partition; canonicalize-files accepts explicit files. Directory helpers are not required for multi-file union and are not exposed by this checked-out CLI."}
+              {:tier :observed :git-object "8e3ddd4f362d7f9612556b5185b6be9af646eac8:.ημ/receipts/README.md"
+               :claim "An earlier segmented receipt implementation exists outside this checkout. It freezes the legacy file, sorts mixed receipts by timestamp/ID and serializes writers in one checkout. It is not proof that the requested all-Clio sources plus assembled receipts.edn model is active here."}
+              {:tier :observed :git-object "542ec7b12bc275661ce1a6c2dda009d621e5706f"
+               :worktree "fix/receipt-git-buffer-20261103"
+               :claim "The Git-buffer repair has a source-promotion merge and a follow-up at be0ec132b7e6f03f7590431a00584c93c1f7db58. This branch still contains the old adapter. Do not recreate the repair or infer absence from this branch's failure."}
+              {:tier :observed :paths ["scripts/evidence.clj" "src/foresight/evidence.cljc" ".github/workflows/eta-mu-review.yml" "test/evidence_cli_test.cljs"]
+               :claim "Current root adapters, identity and CI consume the legacy monolith. Their migration must bind one agreed active source selection, not merely change the receipt writer."}
+              {:tier :observed :path "docs/inbox/2026.10.04.02.12.12.md:18-20"
+               :claim "Earlier user notes already request Clio-backed fork tax and describe it as a manually invoked unstable capture, not an automatic release/deployment."}
+              {:tier :observed :path "docs/notes/federated-backup-direction.md:74-95"
+               :claim "Axxium's foundational resource/authority direction is accepted, but the operational resource-connection registry and provider-I/O boundaries remain undecided. No deployed content-store guarantee follows."}
+              {:tier :derived :paths [".ημ/Π_LAST.md" ".ημ/Π_STATE.sexp" ".ημ/Π_MANIFEST.sha256"]
+               :claim "39312abf preserved selected root changes and a gitlink, not excluded uncommitted child bytes. Mutable fixed-name handoff artifacts and post-tag bookkeeping are not the desired versioned generated projection contract."}]
+             :preservation-ownership
+             {:root-branch "plan/fork-dev-origins"
+              :registered-worktrees-observed? true
+              :orchestrator-lease-manifest :not-established
+              :protected-by-default "All registered worktrees and active child work; no directory age, branch name or absent lease establishes quiescence."
+              :root-untracked [".github/workflows/agy-review.yml" "scripts/agy-review.sh"]
+              :historically-excluded-child-dirt ["calliope" "openplanner" "uxx"]
+              :residual "Establish exact ownership and recoverability before snapshotting checkout-local residuals. Prior claims that two review files match a remote do not prove preservation of the other exclusions."}}
+ :integration-packets
+ [{:packet :clio-source-transport :owner "open-hax/clio"
+   :outcome "Reuse canonicalize-files and partition append admission; reconcile any directory/segment helper proposals before implementing new transport. No Git/workflow policy in pure Clio law."}
+  {:packet :receipt-adoption :owners ["open-hax/receipt-river" "open-hax/eta-mu" "riatzukiza/.agents"]
+   :outcome "Publish/adopt receipt Clio schemas and per-run writer contracts; qualify union-aware recovery and migrate legacy bb/runtime/pr-flow/ultra receipt writers together with consumers. Preserve disjoint legacy/envelope/full-Clio forms and causal identity mappings. No silent historical rewrite."}
+  {:packet :foresight-consumer-adoption :owner "open-hax/foresight"
+   :outcome "Reconcile the existing segmented lineage and repair promotion. Change evidence gates and immutable source manifests to validate the selected union through owning APIs, with exact base/head membership and committed-byte immutability. Do not copy timestamp-based mixed-ledger ordering into all-Clio causal replay."}
+  {:packet :fork-tax-events-and-projections :owners ["open-hax/eta-mu" "riatzukiza/.agents"]
+   :outcome "Publish event shapes and lawful lifecycle, implement explicit preservation custody plus a deterministic renderer, then change fork-tax guidance to invoke it. Foresight consumes the capability rather than hosting a parallel fork-tax engine."}
+  {:packet :resource-reference-option :owners ["open-hax/axxium" "open-hax/katamorph" "provider-adapter-owner-to-be-agreed"]
+   :outcome "Specify optional authority-bound immutable resource references separately from storage/transport. Qualify byte retrieval, cause/schema closure, retention and restore before allowing Git pointer-only snapshots."}]
+ :acceptance
+ ["Permutation and repartition properties: the same admitted event set yields the same canonical replay and projection digest regardless of file enumeration or line grouping."
+  "Concurrent same-agent/same-branch runs write distinct immutable files and streams, then union without collisions or a shared append hotspot."
+  "Clio rejects inconsistent duplicate IDs, stream-slot collisions, gaps, missing predecessors/causes, cycles and unadmitted schemas; exact duplicate event copies follow Clio idempotency rather than being confused with conflicting IDs."
+  "A source manifest identifies the complete selected input set and schemas; missing selected partitions or unresolved remote content cannot masquerade as a complete successful replay."
+  "Publish a lossless bijection/mapping for legacy admission, preserve committed source bytes, reconcile active/excluded source declarations and qualify every writer/reader before cutover. The frozen old path and generated receipts.edn must not ambiguously share authority."
+  "Pin renderer revision, schema identities and finite source/event selection. Regeneration emits byte-identical versioned artifacts; corrections and later publication observations are new events/projections, not edits to history."
+  "Fork-tax publication records bind actual commit/tag/remote readback and exact selected bytes; report protected/unknown/private/residual content without claiming it persisted. Snapshot is not approval, installation or deployment."
+  "Resource-reference mode remains optional; missing grants, digest mismatches, retention gaps and failed restore deny durable-preservation claims without deleting local content."
+  "Test the actual adopted owner APIs and root CI path, including concurrent writers and interrupted publication; passing standalone fixtures alone does not activate migration."]
+ :verification {:project-model :passed
+                :project-tests {:tests 12 :assertions 171 :failures 0 :errors 0}
+                :workspace-tests {:tests 24 :assertions 122 :failures 0 :errors 0
+                                  :visible-fixture-output ["opencode lint spawn ENOENT" "jscpd spawn ENOENT"]}
+                :kondo {:errors 0 :warnings 0}
+                :implementation-tests :not-applicable-planning-only}
+ :review {:workflow ".ημ/workflows/2026-11-04-causal-ledgers-fork-tax-v1.edn"
+          :status :not-run
+          :credit :local-plan-review-only}
+ :next "Complete the evidence/ownership map, then adversarially review this integration plan without mutating in-flight implementations."}
