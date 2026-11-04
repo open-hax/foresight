@@ -1,0 +1,18 @@
+{:review/id :s2b-native-two-file-source-review-v6
+ :kind :coordinator-preserved-independent-adversarial-review
+ :reviewer {:agent :auditor :session "ses_e586441beffeSssUmEoaHD5Uvs"}
+ :verdict :changes-requested
+ :source-references {"src/oikos/infra/i3_fixture_transport.cljs" "df12318c4a3206dcee76e024dd3d0c62d5a04c238ec20ef9feae69bd96e82ef0"
+                     "test/oikos/i3_native_oracle.cljs" "53a8b152eed12db78fbc6ec0a814fc6131dc6f4587e24a7552fe0c87953349f7"}
+ :source-identity-limit "Reviewer read source but did not independently compute hashes; these references came from the matching author reports. Parent must rehash exact candidate bytes."
+ :findings [{:id :native-json-integer-rounding :severity :medium
+             :path "test/oikos/i3_native_oracle.cljs:51-55"
+             :detail "Validation after conversion to JS Number accepts non-integral tokens which round to integers. Reject ID token 1.0000000000000001 rather than treating it as 1; preserve exact numeric token semantics before accepting integer fields."}
+            {:id :reply-json-whitespace :severity :medium
+             :path "src/oikos/infra/i3_fixture_transport.cljs:118-133"
+             :detail "Regex whitespace includes non-JSON U+00A0. Restrict to space, tab, CR and LF; retain positive controls for all four legal JSON whitespace characters."}
+            {:id :native-frame-cap :severity :medium
+             :path "src/oikos/infra/i3_fixture_transport.cljs:4,31-34,48"
+             :detail "65536 body bytes plus14 header exceeds reviewed65536 frame cap. Enforce complete frame size: accept65536 bytes, reject65537 without raising bounds."}]
+ :unverified "No imports, tests, runtime, native process or owner append. Missing socket integration, runtime permits and lifecycle enforcement remain held, not defects claimed fixed by the existing pure functions. This record admits no execution."
+ :custody "Coordinator preserves the actual returned independent verdict without impersonating a hosted review or rewriting earlier source reports."}

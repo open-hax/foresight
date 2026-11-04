@@ -1,0 +1,25 @@
+{:id :s1b-inert-edn-red-candidate-v3
+ :status :partial-red-not-ready-for-green
+ :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b"
+ :base "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+ :tree "8ed3ef2854d5b11522338e32e7e177dae893fc78"
+ :plan-sha256 "348ea9fd5be0b5dfa8e6283a284a34ec2ca25872a5bf621ed671f5c711bee263"
+ :review-sha256 "7e3286c38c277f0d4dbc87739ec8044031a824ea3afe0cc9799025adfbd584f8"
+ :permit-sha256 "a2d04f4471b0489dcbd03879d458976eb3578761902f39d9725bc27fdd353aff"
+ :files {"src/oikos/law/services_inert_edn.cljc" "9ef18fb51e5785c5022faca99f72e9416447ddd5f211ad97b903b3d40b2995b1"
+         "test/oikos/law/services_inert_edn_test.cljc" "6d2b506c26996bc412fbae5997bda5a355c3d5ae72c8a3b9290f976287d5c0d5"
+         "test/oikos/test_runner.cljc" "3e52f073a6536ee627b1895ddc17168d255cbaa4cab00ed26e0e51b8591d7ffc"}
+ :evidence-dir "/tmp/opencode/s1b-red-candidate-v3"
+ :original-runner {:path "/tmp/opencode/s1b-red-candidate-v3/original-test-runner.cljc" :sha256 "61f0eedbc138c286df63d1ec8bbfef74560631fefe9a97ff029a767bff2c4b54"}
+ :baseline {:test {:command "bb test" :exit 0 :bb {:tests 18 :assertions 286 :failures 0 :errors 0} :nbb {:tests 40 :assertions 546 :failures 0 :errors 0} :eval {:tests 9 :assertions 39 :failures 0 :errors 0}}
+            :lint {:command "bb lint" :exit 0 :errors 0 :warnings 0}}
+ :red {:bb {:command "bb -cp src:test test/oikos/test_runner.cljc" :exit 1 :tests 23 :assertions 395 :failures 9 :errors 0}
+       :nbb {:command "nbb -cp src:test test/oikos/test_runner.cljc" :exit 1 :tests 45 :assertions 655 :failures 9 :errors 0}
+       :lint {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+       :cause "Constant-denial stub causes positive render and independent validation assertions to fail; no namespace or runtime errors. Negative assertions passing against a denial stub do not demonstrate their laws."
+       :hashes "Input SHA-256 files retained before and after every command; all compared equal."}
+ :limitations ["RED suite is incomplete: canonical grammar and rehashed-content mutations, full independent artifact and binding tampering, exact reachable output-size boundaries and escape expansion positives are not yet comprehensively covered."
+               "Raw 65535/65536 tests currently only assert rejection of invalid artifacts; they do not establish inclusive boundary acceptance."
+               "No Services validator was run, no compatibility or authorization established, and synthetic expected revisions are not qualified identities."]
+ :holds [:green-implementation :whole-s1b :shx-release :services-compatibility :policy-bound-fixture :real-effects :installed-generation :board :ledger :git-write]
+ :next "Parent should inspect this partial RED and authorize completion of the missing red oracles before green."}

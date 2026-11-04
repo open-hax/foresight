@@ -1,0 +1,39 @@
+{:review/id :s1b-inert-edn-runtime-review-v7
+ :date "2026-11-04"
+ :kind :independent-retained-runtime-evidence-review
+ :verdict :admit-pure-source-artifact-only
+ :findings []
+ :decision "The exact V6 source candidate is supported by the retained passing shared unit and lint gate and is admitted by this review only as the scoped synthetic pure inert-EDN source artifact. Parent retains final integration and qualification authority. No broader S1B readiness or Services compatibility follows."
+ :source {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b"
+          :base-attributed "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+          :sha256 {"src/oikos/law/services_inert_edn.cljc" "e5b9a4b683ec08ef4e2160e842c5d1986aff595a76b70d2b0906d2207b59640a"
+                   "test/oikos/law/services_inert_edn_test.cljc" "51966d65bc4846f3898f2f17659ce31563ffe8e4d97222527d16d44b78157c9b"
+                   "test/oikos/test_runner.cljc" "3e52f073a6536ee627b1895ddc17168d255cbaa4cab00ed26e0e51b8591d7ffc"}
+          :custody "Current three file hashes, V6 review pins, result.json pins and independently hashed three retained source copies match. result.json reports source_pins_postflight_matched true; the separate actual pre/post hash lists are not retained in the named evidence directory, so their comparison is attributed to the parent and result rather than independently reproduced."
+          :base-custody "result.json reports 34 preserved base paths; parent reports all 34 files and modes verified, intended runner excepted, remaining 35 base paths otherwise unchanged and two added files. This review did not inspect Git, an enumeration or mode manifest and does not independently verify the full-base claim."}
+ :prior-review {:path "reviews/s1b-inert-edn-green-source-review-v6.edn" :sha256 "2016c34e53bcb59acfb24dce24eee0c9161f77beafccfebaca876272a250a5ab" :result :approved-for-unit-gate}
+ :evidence {:directory "/tmp/opencode/s1b-inert-green-v6-2f3f2cf6-f3f3-40fd-9ac5-0d502a5b9c05"
+            :sha256 {"result.json" "556d2e9f163ebc8de0db0a867e265e4ad01456fd7bacdda673fd68a123bb5473"
+                     "unit.stdout" "496228c81cb846fc0771c8b05e8072afa5fb2bc19b86d22c6e2c1ecba79168d4"
+                     "unit.stderr" "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                     "lint.stdout" "70dd50ba0684c8260eeb15d0f568fc312c9df20cecfac09fe792dd9318c0ed83"
+                     "lint.stderr" "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                     "src_oikos_law_services_inert_edn.cljc.txt" "e5b9a4b683ec08ef4e2160e842c5d1986aff595a76b70d2b0906d2207b59640a"
+                     "test_oikos_law_services_inert_edn_test.cljc.txt" "51966d65bc4846f3898f2f17659ce31563ffe8e4d97222527d16d44b78157c9b"
+                     "test_oikos_test_runner.cljc.txt" "3e52f073a6536ee627b1895ddc17168d255cbaa4cab00ed26e0e51b8591d7ffc"}
+            :copy-note "The requested shorthand 3sourcecopies.txt does not exist; the three individually named retained source copies above do exist and match the exact source hashes."
+            :unit {:command ["bb" "test"] :exit 0 :seconds 98.78782687196508
+                   :bb {:tests 29 :assertions 538 :failures 0 :errors 0}
+                   :nbb {:tests 51 :assertions 798 :failures 0 :errors 0}
+                   :eval {:tests 9 :assertions 39 :failures 0 :errors 0}}
+            :lint {:command ["bb" "lint"] :exit 0 :errors 0 :warnings 0 :seconds 0.36476704699452966}
+            :total-seconds 99.15306310507003
+            :interpretation "Raw stdout shows each reported suite and counts, including the strengthened namespace in both shared runs; both stderr files are empty. result.json reports the commands, exits, duration and postflight pin match. The checked bb.edn defines shared BB, NBB and eval dependencies for bb test; runtime-specific attribution follows that task definition and parent observation, not independently captured per-process argv. The printed S1A timeout is an expected regression test observation within a zero-failure suite, not a gate failure."}
+ :coverage "Read the exact current strengthened test file: positive golden and Unicode cases, closed records and 12-field binding mutations, rehashed grammar and malformed-byte cases, sanitized errors, value-byte limits and reachable descriptor 65535/65536 boundaries are included in the executed shared namespace. Passing suite evidence does not prove exhaustive input coverage or prove absence of unobserved effects."
+ :holds {:trust "Externally supplied expected binding is comparison data, not authentication, verification of source bytes by a trusted consumer, or independent authorization of fixture value."
+         :services "No actual Services validator, facade, interpreter or policy-bound fixture was exercised; compatibility, deployment and filesystem/effect or rollback guarantees remain separately gated."
+         :s1b "Whole S1B remains incoming as reported by parent; board was not read or changed in this review. Shx release, positive Bash handoff and genuine Services effect gates remain held."
+         :qualification "This review neither admits an installed release nor authorizes a board transition, policy or private operation. Source pin and base custody must remain intact for any later parent decision."}
+ :performed ["Read retained JSON, stdout and stderr" "Read exact current strengthened tests, V6 source review and bb task definition" "Hash five evidence records, three separate retained source copies and current three source paths" "Write this review"]
+ :not-performed [:test-rerun :bb :nbb :services :source-edit :dependencies :network :credentials :git :board :ledger :nested-agents :effects]
+ :next "Parent may record its source-only qualification using these exact hashes while preserving the independent shx, Services policy and genuine effect gates."}

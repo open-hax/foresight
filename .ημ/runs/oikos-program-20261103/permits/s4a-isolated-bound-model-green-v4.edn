@@ -1,0 +1,17 @@
+{:permit/id :s4a-isolated-bound-model-green-v4
+ :kind :separate-one-shot-isolated-synthetic-green-attempt
+ :date "2026-11-04" :source :recommended-path-standing-authorization
+ :review "reviews/s4a-bound-model-green-fix-review-v12.edn"
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :sources [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5"}
+           {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "2f9d17ff81802553ba88dc32e8ea662ff11d5c1552176ba09e108cb7422f36e8"}]
+ :binary {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+ :timeout {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}
+ :expected-tests 26
+ :command "The review's fixed env-cleared -Q --batch command, loading only the two named .el files and invoking ert-run-tests-batch-and-exit. No daemon, startup/native source, byte-compilation, live user buffer, service, credential or network access."
+ :bounds {:timeout-seconds 30 :kill-grace-seconds 5 :parent-seconds 40 :cpu-seconds 25
+          :address-space-bytes 1073741824 :output-file-bytes 1048576 :core-bytes 0}
+ :custody "Fresh private task-owned cwd; exclusive persistent attempt marker before launch. Retain both exact source copies, argv, binary/timeout/source/native pre/post pins, full named test outcomes, pass/fail/skip counts and exit. No retries or substitution."
+ :environment "Clear inherited environment. HOME/XDG_CONFIG_HOME/XDG_CACHE_HOME=/nonexistent, PATH=/usr/bin:/bin, LC_ALL=C."
+ :interpretation "Attempt only. Prior 21-test RED remains 13 passed/8 failed at its old hashes. A new GREEN requires actually observed passing assertions with no skips; it qualifies synthetic single-trace composition only, not real identity, consent, durable state, native atomicity, real clock, cross-call replay prevention or whole S4A."
+ :preservation "All earlier source versions, failures, native bytecode and scratch remain retained. No cleanup or installed-state change."}

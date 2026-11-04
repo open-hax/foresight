@@ -1,0 +1,24 @@
+{:permit/id :s2b-split-full-gates-v2
+ :kind :one-fixed-offline-regression-batch
+ :source :recommended-path-standing-authorization
+ :candidate "a5c4008e92e3134afd77c058851aea2d2ce33241"
+ :tree "dc1fa03a6e641a4f46ab6d8de07422e0825ef654"
+ :prior "a25a9283f4e630080496c62172bec03df89a81d9 combined collector invocation timed out after 600 seconds; preserve as failed, not GREEN. No unchanged combined rerun is admitted."
+ :independent-review {:session "ses_e589f2d3bffekEYXC0O5xZ5Dfu"
+                      :verdict :approve
+                      :text "The two-file diff preserves the descriptor's semantic digest and binds all seven current source hashes. Statically, no arguments select all three modes; invalid selectors are rejected before environment access, and each selected run retains both runtime preflights."
+                      :limit "Auditor did not run the batch or qualify runtime/native behavior; coordinator must include all three selected modes."}
+ :commands [["bb" "scripts/test_i3_collector.clj" "--only" "bb"]
+            ["bb" "scripts/test_i3_collector.clj" "--only" "nbb"]
+            ["bb" "scripts/test_i3_collector.clj" "--only" "edge"]
+            ["bb" "test"]
+            ["bb" "scripts/test_desktop_wire.clj"]
+            ["bb" "scripts/test_spaces.clj"]
+            ["bb" "lint"]]
+ :limits {:per-command-seconds 600 :aggregate-seconds 1200 :termination-grace-seconds 5
+          :output-file-bytes 1048576 :core-bytes 0}
+ :schedule "Execute exactly these fixed commands sequentially. Retain both runtime preflights for every collector mode. Include all three modes and inherited gates; no test skipping or removed assertions. Use the remaining aggregate budget to shorten, never extend, each command's timeout and grace. Stop on first failure or unconfirmed termination, with no retry."
+ :custody "Verify exact HEAD and eight source hashes before every command and after the batch. Preserve exact source copies, argv, explicit pinned Clio/cache/permit references, bounded stdout/stderr, process start identity, exits and deadline outcomes in a fresh private task-owned root. Use a trusted timeout owning its process group rather than killing only a wrapper and inferring descendant cleanup."
+ :interpretation "This is gate scheduling, not an optimization or weakening of the frozen replay laws. Limits remain the original per-command 600 seconds and aggregate 1200 seconds. A timeout or missing result remains failure; source review is not runtime proof."
+ :held [:native-i3 :real-clio-admission :operational-currentness :whole-s2b :publication :epic-completion]
+ :preservation "No old evidence, dependency, worktree, source or scratch artifact is removed. No new dependency resolution, private input, credential, live desktop, provider operation or installed promotion."}

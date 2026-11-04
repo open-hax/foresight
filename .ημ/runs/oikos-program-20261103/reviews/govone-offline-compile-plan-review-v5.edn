@@ -1,0 +1,31 @@
+{:review/id :govone-offline-compile-plan-review-v5
+ :kind :independent-plan-review-only
+ :date "2026-11-04"
+ :subject {:path ".ημ/runs/oikos-program-20261103/reviews/govone-offline-compile-qualification-plan-v4.edn"
+           :sha256 "163376b0bc6f3f3f3872e4e3d338dbc9a2d2e7f94ab5b88eeb66059ad4d53395"}
+ :authority :none
+ :verdict :bounded-source-authoring-eligible-after-separate-authorization
+ :summary "v4 addresses v3 F1-F4 sufficiently as a candidate design for separately authorized, narrowly scoped source authoring and static review. This is not a finding that its controls exist, are implementable on this host, are correctly implemented, or are qualified for execution. There are no confirmed additional design gaps that must block that source-authoring decision."
+ :prior-findings [{:id :F1 :disposition :sufficient-for-source-authoring
+                   :basis "Bounded static whole-tree inventory, conservative graph and explicit unresolved cases are specified; whole-tree pins are not treated as closure. Inventory itself remains separately permitted."}
+                  {:id :F2 :disposition :sufficient-for-source-authoring
+                   :basis "File-specific Landlock execute rules, immutable identity custody, NNP, inherited restrictions, static transition enumeration, loader/bypass analysis and architecture-specific seccomp are candidate mechanisms with explicit hard stops. Kernel support and bypass resistance remain unverified."}
+                  {:id :F3 :disposition :sufficient-for-source-authoring
+                   :basis "Two disjoint persistent quota domains bound cache and other writes without assuming nested accounting; protected evidence capacity, independent readback and failure handling are specified. Delegated quota, metadata and reserve capabilities remain unverified."}
+                  {:id :F4 :disposition :sufficient-for-source-authoring
+                   :basis "Persistent stores, partial output, crash and host-interruption handling are specified, and the cited user clarification permits ordinary compiler-managed temporary disposal. No retained artifact, cache or scratch cleanup is authorized."}]
+ :source-ceiling {:status :recommendation-only
+                  :scope "A separately authorized small source change may implement static inventory and closure reporting, snapshot/input custody and manifest verification, hard persistent-store enforcement and retention integration, and the identity-bound compiler executable allowlist, with minimal inert fixtures and necessary integration into the existing neutral controller. No new policy or ledger engine. Fix exact paths and baseline identities before edits; separately review all changed source and trusted inputs. Unresolved controls must refuse rather than be represented as supported."
+                  :not-authorized "This review itself authorizes no source changes, inventory run, snapshot, dry plan, fixture execution, capability probe, Go invocation or compile."}
+ :held-gates {:inventory "A separate permit must bind roots, source identities, platform, reviewer and v4 bounds before static traversal. Any unresolved selection, closure, unsafe link, changing input, exhaustion or error prevents compile."
+              :custody "A separately authorized writer and accounted persistent capacity are required; compare full source pre/post and snapshot manifests, end writer authority and independently prove immutable or equivalent exclusive-writer custody before releasing a reader. Partial copies remain preserved."
+              :review "Fresh independent source review must resolve v7 findings and review both v8 tests; exact profile, changed sources, fixtures, trusted executables, dependencies and host inputs require independent review and pins."
+              :dry-plan "A later separately admitted read-only dry plan must refuse absent identities, closure, custody, capacity, authority or controls; it does not establish host capability."
+              :neutral "At most one separately permitted finite inert neutral batch for the exact reviewed profile and host must demonstrate the specified execute/execveat and substitution restrictions, seccomp and descriptor hygiene, independent cgroup and lifecycle evidence, quota byte/inode/metadata and protected reserve enforcement, writer exclusion and persistent retention. Unknown or unsupported capability fails closed; no automatic retry or escalation. Passing qualifies only those exact neutral controls, not Go behavior."
+              :compile "Only after the preceding gates and a separate exact one-shot permit may the two ordered offline go test -c commands be considered, with fixed inputs, environment, argv, watchdog, resource limits and durable retention. First failure stops the second; binaries are never run. No downloads, network, credentials, shared-cache writes or application initialization are admitted by this profile."
+              :preservation "The existing 805306368-byte shared dependency-cache allocation remains unchanged and read-only. User permission for needed public dependencies is not an authorization to fetch them in this offline profile. Compiler-managed temporary cleanup is permitted under the clarification; no external cleanup of retained artifacts, scratch or cache is authorized."}
+ :evidence ["reviews/govone-offline-compile-qualification-plan-v4.edn lines 4-36"
+            "reviews/govone-offline-compile-plan-review-v3.edn lines 8-35"
+            "decisions/compiler-managed-temporary-file-preservation-clarification.edn lines 4-10"]
+ :performed "Static record reading and subject SHA-256 only; this review is the sole write. No Go, compiler, runtime, DBus, host probe, network, credentials, cache mutation, cleanup, Git, board, ledger or nested agent operation."
+ :next "Obtain separate authorization for the exact bounded source changes; preserve all execution holds."}

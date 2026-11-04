@@ -1,0 +1,19 @@
+{:permit/id :s4a-bound-model-source-v5
+ :kind :bounded-pure-source-admission-not-execution
+ :source :recommended-path-standing-authorization
+ :plan "reviews/s4a-bound-model-composition-plan-v5.edn"
+ :review "reviews/s4a-bound-model-composition-plan-review-v5.edn"
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :base "ccfb7748c4dbca3bb56488c3504b5476b846ebe3"
+ :paths ["layers/agent-sandbox/oikos-owner-authority.el" "tests/unit/oikos-owner-authority-test.el"]
+ :scope "Compose the existing binding and sequential predicates in one bounded, acyclic, pure single-grant trace. Every record, sample and storage outcome is caller-supplied synthetic data, not owner authority; no cross-call anti-replay, real consent or durability claim."
+ :binding-clarifications
+ {:phase "Track issued, consumed/pending-final and closed separately. One successful consume may admit at most one final in the supplied trace. Success, denial, restart or ticket loss closes a consumed attempt without reverting its consumed state. Failed or uncertain consume becomes invalidated/closed and unavailable with no ACK or retry."
+  :revoke "Before consume, successful modeled revocation yields revoked/closed. After consume, already-consumed leaves a still-pending final unchanged and adds no effect; final must still pass every current binding and time check. This declares the synthetic ordering only, not real owner cancellation semantics. Closed unavailable attempts never manufacture a revocation ACK."
+  :issued-at "At issue each applicable approval, grant and read-release issued-at must be <= sampled UTC earliest; sampled latest must be strictly before every applicable not-after. Approval issued-at must be <= grant issued-at. Identity and release expiry retain their independently supplied limits."
+  :lifetime "Require positive approval and grant lifetimes <=60000 milliseconds from each record's own issued-at. Effective issue-time cap is latest + min(60000, max-safe-integer-latest), never overflowing. Approval and grant expiries must not exceed that cap; derive the operative deadline as the minimum of all immutable credential/approval/grant/read-release expiries. Derive monotonic deadline once from the issue sample, rejecting arithmetic overflow."
+  :totality "Validate bounded acyclic structure before recursive copy, equal or record access. Preserve all eleven existing tests and the independent 285/291-byte vectors; add the separately reachable translated-prior overflow oracle."}
+ :source-process "Record the exact baseline and author focused tests before implementation. Any actual RED or GREEN Emacs run needs a separate hash-bound batch admission; this source permit alone authorizes no load, byte-compilation or ERT. Independently review final new hashes before any run."
+ :held [:real-identity :authenticated-human-consent :govone-disclosure :durable-store
+        :new-paths :startup :existing-native-edits :live-emacs :native-effects :whole-s4a]
+ :preservation "Unrelated .batch-home and native bytecode remain untouched. Prior 11/11 qualification stays bound to the old source hashes, not new edits."}

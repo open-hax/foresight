@@ -1,0 +1,10 @@
+{:report/id :s2b-full-gate-timeout-custody-v11
+ :candidate "a25a9283f4e630080496c62172bec03df89a81d9"
+ :evidence "/tmp/opencode/oikos-s2b-a25a928-full-gates-6ea02163-f18f-4457-946c-91335cdf8176"
+ :observed {:collector :timed-out-not-a-pass :seconds 600.0079675710294
+            :bb {:tests 22 :assertions 540 :failures 0 :errors 0}
+            :nbb :started-completion-unobserved
+            :remaining-suites :not-launched
+            :postflight-source-pins-matched true}
+ :interpretation "The exact-head source review remains source-only. The combined collector command is not GREEN. A parent subprocess timeout is not proof that every descendant exited; no cleanup claim is made from these records. Preserve the failed batch unchanged."
+ :next "Retain the same assertions and immutable source semantics. Review scheduling the fixed BB, NBB and edge components independently with the existing per-command limits and original aggregate batch deadline, so one shared parent deadline does not falsely stand in for each runtime's result. Do not raise bounds, skip tests or rerun the unchanged combined batch until green."}

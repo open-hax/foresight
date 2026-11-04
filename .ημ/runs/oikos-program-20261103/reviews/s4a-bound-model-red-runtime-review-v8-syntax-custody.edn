@@ -1,0 +1,48 @@
+{:review/id :s4a-bound-model-red-runtime-review-v8
+ :date "2026-11-04"
+ :kind :independent-postexecution-red-review
+ :authority :none
+ :verdict :intended-red-observed-green-source-authoring-eligible
+ :inputs {:permit {:path "permits/s4a-isolated-bound-model-red-v3.edn" :sha256 "f608f9abd12270ea2a44f2f2ead8afaa4c73524c76868a9880615af9693f3bc3"}
+          :source-review {:path "reviews/s4a-bound-model-red-source-review-v7.edn" :sha256 "24a41cee35159fbbc17f081020434d953eaf0d1e6aa9f7293b8e18be665c0b5e"}
+          :evidence-root "/tmp/opencode/oikos-s4a-bound-red-v3-611a2ad4-3e28-46a3-91cd-ceccf108be40"
+          :evidence [{:path "result.json" :sha256 "e0742c5a9109ec309d532a8a4d162f55cd421847e73b8a19a372b6e16565bc27"}
+                     {:path "stderr" :sha256 "cb402e941d736ba343efbc07a62b3a7763f44b13b71bcc2d0ba3328efef4b350"}
+                     {:path "stdout" :sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+                     {:path "model-source.el.txt" :sha256 "02a6fa878bee1d535631fe936cb8609bdf14dedc54dcb21f44d5069854ab3bdb"}
+                     {:path "test-source.el.txt" :sha256 "5cff63a1766e4c938d6465702c245cd720c8c896aec5aac372d96eee4c9cee57"}]}
+ :pins [{:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/layers/agent-sandbox/oikos-owner-authority.el" :sha256 "02a6fa878bee1d535631fe936cb8609bdf14dedc54dcb21f44d5069854ab3bdb"}
+        {:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-owner-authority-test.el" :sha256 "5cff63a1766e4c938d6465702c245cd720c8c896aec5aac372d96eee4c9cee57"}
+        {:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/layers/agent-sandbox/oikos-native.el" :sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"}
+        {:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-native-test.el" :sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}
+        {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+        {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}]
+ :pin-disposition "Six current hashes match result.json and the admission; model/test retained copies have the same bytes. The recorded postflight says all matched, and the two native hashes match prior baseline. This reviewer did not observe the original execution or independently establish its environment and resource enforcement."
+ :result {:exit 1 :selected 21 :passed-count 13 :failed-count 8 :skipped 0 :unexpected 8
+          :basis "stderr lists each of 21 tests individually as passed or FAILED and reports 13 expected, 8 unexpected; no tests remain for skips. result.json records the command, expected 21, exit 1 and postflight. stdout is empty."
+          :passed ["oikos-owner-model-binding-extra-negatives" "oikos-owner-model-binding-swaps"
+                   "oikos-owner-model-clock-elapsed-continuity" "oikos-owner-model-clock-faults"
+                   "oikos-owner-model-closed-inputs" "oikos-owner-model-composed-issued-at-lifetime-red"
+                   "oikos-owner-model-fixture-isolation-and-positives" "oikos-owner-model-golden-transcript"
+                   "oikos-owner-model-phases-and-order" "oikos-owner-model-read-golden"
+                   "oikos-owner-model-record-totality" "oikos-owner-model-revoke-shapes"
+                   "oikos-owner-model-translated-prior-overflow-red"]
+          :failed ["oikos-owner-model-composed-each-deadline-red" "oikos-owner-model-composed-issue-boundaries-red"
+                   "oikos-owner-model-composed-order-and-cancellation-red" "oikos-owner-model-composed-positive-and-replay-red"
+                   "oikos-owner-model-composed-post-consume-deadlines-red" "oikos-owner-model-composed-storage-unavailable-red"
+                   "oikos-owner-model-composed-swaps-red" "oikos-owner-model-composed-totality-red"]}
+ :classification
+ [{:id :expected-red :result "All eight failures report ert-test-failed, not parser/load/runtime exceptions. The retained model copy:314-317 returns only ((status . denied)); failures show denied instead of ok/unavailable, or nil missing modeled grant-state instead of invalidated/revoked/consumed. This is consistent with intended non-vacuous RED against the stub, not evidence the composition exists."
+   :detail "The eight include positive controls and richer expected denial/state assertions; not every failing assertion is itself an expected positive effect. ERT stops each test at its first failure, so later cases in each failing test did not necessarily execute."}
+  {:id :baseline :result "All eleven preserved baseline test names passed on these RED hashes; translated-prior-overflow-red also passed. Prior 11/11 remains separately scoped to its older hashes."}
+  {:id :vacuous-negative :result "composed-issued-at-lifetime-red passed but its checks ask only for denied; the constant-denial stub passes without enforcing future-issued, record ordering or lifetime. It is not affirmative evidence of these laws."
+   :required "Before GREEN acceptance add identical invalid records across all trace events, paired with valid positive cases, and assert issue-specific outcome and zero counts. Retain the existing test."}
+  {:id :totality-not-yet-tested :result "composed-totality-red failed at its initial positive control, before its later malformed/cyclic fixtures. The stub's denial cannot demonstrate bounded traversal. Before GREEN test nested cycles at issue, consume and final, including no input mutation and validation before copy/equal."}]
+ :green-source-authoring {:status :eligible-under-existing-exact-two-file-source-ceiling
+  :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+  :paths ["layers/agent-sandbox/oikos-owner-authority.el" "tests/unit/oikos-owner-authority-test.el"]
+  :requirements "Implement only pure bounded single-grant trace composition; retain all existing tests and vectors. Carry forward v7's issue-time substitution-confound, nonvacuous per-operation phase/storage/order/counts, and nested bounded-cycle requirements. Represent pending versus closed separately; derive deadlines from bound synthetic records; failed/uncertain storage cannot generate an ACK or retry. Preserve existing native files and unrelated work. No fake real issuer, ledger, auth, persistence, real owner or effect."
+  :verification "Record new exact source hashes, independently review both files and strengthen oracles before GREEN acceptance. This RED permit is consumed; no GREEN execution or further source load is admitted here. A future separately recorded exact-source bounded admission is required for any GREEN batch. No routine authorization question is needed for recommended work within standing scope."}
+ :holds [:green-test-result :whole-model-qualification :real-identity :human-resource-consent :govone-disclosure :real-clock :durability :cross-process-fence :native-atomicity :live-effects :installed-state :whole-s4a]
+ :execution {:emacs 0 :ert 0 :product-edits 0 :git 0 :board 0 :ledger 0 :network 0 :credentials 0 :nested-agents 0
+             :only-artifact "reviews/s4a-bound-model-red-runtime-review-v8.edn"}}

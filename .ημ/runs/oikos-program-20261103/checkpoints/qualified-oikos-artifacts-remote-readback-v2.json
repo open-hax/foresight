@@ -1,0 +1,126 @@
+{
+  "all_complete_bytes_equal": true,
+  "artifacts": [
+    {
+      "branch": "artifact/oikos-s1b-inert-ba4f21b7",
+      "head": "ba4f21b7f1fc2e1656de8a392aaf838d3d76fe4a",
+      "paths": [
+        "src/oikos/law/services_inert_edn.cljc",
+        "test/oikos/law/services_inert_edn_test.cljc",
+        "test/oikos/test_runner.cljc"
+      ],
+      "tree": "93a802603b95408cbe349c72aa1323d616d653c6"
+    },
+    {
+      "branch": "artifact/oikos-s2b-offline-a5c4008e",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "paths": [
+        "docs/contracts/i3-collector-v1.edn",
+        "scripts/test_i3_collector.clj",
+        "src/oikos/law/i3_collector.cljc",
+        "src/oikos/infra/i3_collector.cljs",
+        "test/oikos/law/i3_collector_test.cljc",
+        "test/oikos/infra/i3_collector_test.cljs",
+        "test/oikos/i3_collector_runner.cljc",
+        "test/oikos/i3_collector_edge_runner.cljs"
+      ],
+      "tree": "dc1fa03a6e641a4f46ab6d8de07422e0825ef654"
+    }
+  ],
+  "bytes": 90740,
+  "files": [
+    {
+      "bytes": 6443,
+      "git_blob": "fbdf0e16f6b1b6b4708ff33ff139e45927a58287",
+      "head": "ba4f21b7f1fc2e1656de8a392aaf838d3d76fe4a",
+      "mode": "100644",
+      "path": "src/oikos/law/services_inert_edn.cljc",
+      "sha256": "e5b9a4b683ec08ef4e2160e842c5d1986aff595a76b70d2b0906d2207b59640a"
+    },
+    {
+      "bytes": 12885,
+      "git_blob": "087fa7b84155dd606bb5ac14fab90124ff90fc0b",
+      "head": "ba4f21b7f1fc2e1656de8a392aaf838d3d76fe4a",
+      "mode": "100644",
+      "path": "test/oikos/law/services_inert_edn_test.cljc",
+      "sha256": "51966d65bc4846f3898f2f17659ce31563ffe8e4d97222527d16d44b78157c9b"
+    },
+    {
+      "bytes": 880,
+      "git_blob": "712bc17acdae90be57b4fcd0da77cf1e1ebe9d11",
+      "head": "ba4f21b7f1fc2e1656de8a392aaf838d3d76fe4a",
+      "mode": "100644",
+      "path": "test/oikos/test_runner.cljc",
+      "sha256": "3e52f073a6536ee627b1895ddc17168d255cbaa4cab00ed26e0e51b8591d7ffc"
+    },
+    {
+      "bytes": 7367,
+      "git_blob": "ee35eac98383b3bc73be901efcda4baf27de449b",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "mode": "100644",
+      "path": "docs/contracts/i3-collector-v1.edn",
+      "sha256": "0fd637707f9d9d7fbb8e0c100d665d8d5efffd132969f1d46b4cd269eac08d47"
+    },
+    {
+      "bytes": 2517,
+      "git_blob": "9ed2b83fccfeb875fa0f954222d61062a5dfa34b",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "mode": "100644",
+      "path": "scripts/test_i3_collector.clj",
+      "sha256": "d69993b892d0d15be56269528709bcf94f857454e9c49f817aef1046118b22c7"
+    },
+    {
+      "bytes": 21396,
+      "git_blob": "c9a1db66fa926e3286d070bc9acb77ee69bcf80e",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "mode": "100644",
+      "path": "src/oikos/law/i3_collector.cljc",
+      "sha256": "bb7219137d743a1802bb0a52a60520288b8ac6d5663bfd939fbade5e6057df40"
+    },
+    {
+      "bytes": 6033,
+      "git_blob": "3c2b988eeec59cd20b95b1e8bec9fa4fa5792063",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "mode": "100644",
+      "path": "src/oikos/infra/i3_collector.cljs",
+      "sha256": "32e9cdb604b80bfa51e503a2954ab5696171a3f0763c1b8feab44f1b0686ae95"
+    },
+    {
+      "bytes": 22899,
+      "git_blob": "56662d3797bf5b16c27a9feaff8c7f6920971365",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "mode": "100644",
+      "path": "test/oikos/law/i3_collector_test.cljc",
+      "sha256": "57766bf2263a6f7185d808434e3cf31c68aeeb30b84a2356dd8cf34eb99188bf"
+    },
+    {
+      "bytes": 4541,
+      "git_blob": "1ee404403debf569f0d4abbc873150a2b0761ba3",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "mode": "100644",
+      "path": "test/oikos/infra/i3_collector_test.cljs",
+      "sha256": "2de1cdd09080b3eefa6b04c15d5245814c4d8fd1e18ea6b18cd3b9ee6cf0f76c"
+    },
+    {
+      "bytes": 5487,
+      "git_blob": "fef69f764936a0ca367112f3577d9091a74c1600",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "mode": "100644",
+      "path": "test/oikos/i3_collector_runner.cljc",
+      "sha256": "10dc4eda9100643cb82ef07ae615b4a41dc93e840819f0c4b10400d2b00a9136"
+    },
+    {
+      "bytes": 292,
+      "git_blob": "f3c8e9e2b56cd5a89bd5a49c04c03074e102afcd",
+      "head": "a5c4008e92e3134afd77c058851aea2d2ce33241",
+      "mode": "100644",
+      "path": "test/oikos/i3_collector_edge_runner.cljs",
+      "sha256": "951542742f6ab0671c0ce0b8da768201e4daa4345e02398d423fdc4b672b02bc"
+    }
+  ],
+  "paths": 11,
+  "repository": "open-hax/oikos",
+  "repository_private": true,
+  "schema": "oikos.qualified-development-source/readback-v2",
+  "scope": "Only exact qualified S1B pure source and S2B offlineP1 source refs; no merge, install, wholechild/epic completion, raw execution caches, credentials, backup or cleanup authority."
+}

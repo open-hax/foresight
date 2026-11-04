@@ -1,0 +1,40 @@
+{:candidate/id :s4a-bound-model-red-source-v6
+ :kind :source-only-red-candidate
+ :authority :none
+ :verdict :stub-and-tests-unrun-independent-review-required
+ :permit "permits/s4a-bound-model-source-v5.edn"
+ :inputs ["reviews/s4a-bound-model-composition-plan-v5.edn" "reviews/s4a-bound-model-composition-plan-review-v5.edn"]
+ :baseline {:root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+            :head "ccfb7748c4dbca3bb56488c3504b5476b846ebe3"
+            :model-sha256 "5989ab40dc823fe9628997d5f85cd34ffb1d468677845ac9e2ee04257535fbec"
+            :tests-sha256 "2dfbd3293f766130bc8bacd04796cf6d66b39a25ddb868fc0a37d7649a5693e0"
+            :prior-result "11/11 separately qualified only for baseline hashes; it does not apply to the new source."
+            :preexisting-untracked [".batch-home/oikos-native-test.elc" ".batch-home/oikos-native.elc" "layers/agent-sandbox/oikos-native.elc" "tests/unit/oikos-native-test.elc"]}
+ :candidate-files [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "02a6fa878bee1d535631fe936cb8609bdf14dedc54dcb21f44d5069854ab3bdb"}
+                   {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "5cff63a1766e4c938d6465702c245cd720c8c896aec5aac372d96eee4c9cee57"}]
+ :source-scope "Tests were authored before adding composed-run; the only new model function is a fixed closed alist denial stub. No GREEN implementation, native effect or authority."
+ :event-contract {:representation "A transient proper acyclic list of at most 64 closed event alists, reduced in one synthetic run; no caller-provided initial model state."
+                  :issue-and-consume "Exact keys kind, invocation, identity, approval, grant, release, pin, text, clock, storage. Values for records use existing model shapes; clock=(UTC uncertainty monotonic healthy); storage is synthetic ok/failed/uncertain."
+                  :final "Same exact keys plus gap-clock, a second synthetic clock sample, not a wall-clock or numeric duration."
+                  :revoke "Exact keys kind, clock, storage; kind is revoke."
+                  :restart-and-ticket-loss "Exactly one kind key, respectively restart or ticket-loss."
+                  :outcome "For valid traces closed result alist keys status, grant-id, operation, grant-state, phase, order, mutations, bytes, outcomes; each outcome has kind, status, order. Malformed whole trace returns exactly ((status . denied)). All counts and order are synthetic. The present stub returns that fixed denial for every input."
+                  :ordering "issued -> consumed/pending -> consumed/closed on final success or denial; post-consume revoke reports already-consumed and leaves pending unchanged; restart/ticket-loss closes consumed without effect; failed or uncertain consume is invalidated/closed unavailable with no ACK/retry."
+                  :limits "Events and their contents are caller-supplied fixtures, not authenticated, durable, or owner facts. A complete old trace can be replayed across separate calls."}
+ :tests {:expected-definitions 21 :baseline-definitions 11 :new-definitions 10
+         :oracles [:positive-read-write-and-replay :revoke-pending-order :restart-and-ticket-loss
+                   :failed-uncertain-storage :binding-swaps :future-issued-and-lifetime
+                   :individual-deadline-equality :post-consume-and-gap-expiry
+                   :safe-issue-cap :malformed-cyclic-and-event-limit :translated-prior-overflow]
+         :interpretation "Positive composed assertions are intentionally incompatible with the fixed denial stub; no claim about the actual number of failures until admitted ERT runs. Existing clock-overflow oracle can pass independently of composition."
+         :limitations "Finite test matrix is not exhaustive; source review must examine exact expected statuses, phase/order and cases before batch admission. No test proves real authority or atomicity."}
+ :static {:python-parentheses-and-strings :pass
+          :goldens [{:bytes 285 :sha256 "d602c5e910ea2fb67ae73845dcd57f1724ca22a144b84f3af8f7d5043fb8e69c"}
+                    {:bytes 291 :sha256 "5a7251b0f9d6159def0d755bb8fef0799ef351c86a346c07d59c5e2197d91c06"}]
+          :note "Only lexical text scanning, test-name counting and hashing; not Elisp parsing, loading, typechecking or ERT."}
+ :preservation {:native-before-after "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"
+                :native-test-before-after "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"
+                :other "Untracked bytecode listed above was not modified; no full-tree preservation claim."}
+ :unrun [:emacs :ert :bytecompile :model-execution :native :runtime :credentials :network]
+ :holds [:source-review :separately-admitted-red-batch :green-implementation :real-identity :human-consent :govone :durability :native-atomicity :real-effects :whole-s4a]
+ :execution {:emacs 0 :ert 0 :native-effects 0 :credential-reads 0 :network 0 :git-writes 0 :board 0 :ledger 0 :nested-agents 0}}

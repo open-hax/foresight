@@ -1,0 +1,18 @@
+{:permit/id :s4a-isolated-bound-model-green-v5
+ :kind :separate-one-shot-isolated-synthetic-attempt-after-reviewed-fixture-fix
+ :date "2026-11-04" :source :recommended-path-standing-authorization
+ :review "reviews/s4a-bound-model-fixture-fix-review-v14.edn"
+ :prior "The v4 attempt is consumed and remains failed: 26 tests, 21 passed, 5 failed. New tests have a reviewed fixture-cell isolation repair and an additional positive regression oracle. No unchanged rerun or presumed GREEN is authorized."
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :sources [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5"}
+           {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "34a2369632b26b7b14ce7fc09b1d8208cf7baaeff76030dbec7590834e5144d9"}]
+ :expected-tests 27
+ :binary {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+ :timeout {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}
+ :bounds {:timeout-seconds 30 :kill-grace-seconds 5 :parent-seconds 40 :cpu-seconds 25
+          :address-space-bytes 1073741824 :output-file-bytes 1048576 :core-bytes 0}
+ :command "Exactly the fixed env-cleared -Q --batch command loading only the two named .el files and invoking ert-run-tests-batch-and-exit. No daemon, startup/native source, byte-compilation, live buffer, service, credential or network."
+ :environment "HOME/XDG_CONFIG_HOME/XDG_CACHE_HOME=/nonexistent, PATH=/usr/bin:/bin, LC_ALL=C; no inherited environment."
+ :custody "New private task-owned cwd and exclusive persistent attempt marker. Exact source copies and pre/post binary, timeout, candidate and native hashes; bounded full logs, all named outcomes, actual counts/skips and exit. No automatic retry."
+ :interpretation "Only actually exercised synthetic assertions at these hashes can qualify after independent evidence review. No real identity, consent, durable storage, native atomicity, real clock, cross-call replay prevention, installed generation or whole S4A claim."
+ :preservation "Retain every prior failed run, source version and scratch artifact unchanged; no cleanup."}

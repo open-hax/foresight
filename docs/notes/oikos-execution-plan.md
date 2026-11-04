@@ -4,6 +4,9 @@
 accepted development source and S1A/S2A/S3A completion, not installed promotion or epic completion.
 License: GPL-3.0-or-later.
 
+The latest dated continuation is appended at the end of this note; earlier
+checkpoint descriptions retain their original historical context.
+
 ## Current execution checkpoint and authority
 
 Keep the existing [program narrative and epic index](oikos-local-first-workbench.md#epic-map)
@@ -1451,3 +1454,222 @@ Blocked tests are recorded as blocked, not skipped-to-green or waived. Qualified
 local changes may be reviewed within their scope, but neither task acceptance
 nor whole-epic completion is fabricated from partial evidence. New effect
 authority requires an explicit operator decision and recorded admission.
+
+## 2026-11-04 latest continuation: source progress, qualification still held
+
+This is a dated coordinator checkpoint, not a fresh board query or a claim of
+completion. Official readback remains **24 cards: 17 incoming, 4 in_progress,
+3 done and zero epics done**. No integration agent or epic is eligible for
+completion on the evidence below.
+
+* **S2B:** The independent [complete source review v10](../../.ημ/runs/oikos-program-20261103/reviews/s2b-complete-source-review-v10.edn)
+  approves the exact eight-file source scope at
+  `a25a9283f4e630080496c62172bec03df89a81d9`, not whole P1. The
+  [source-pinned full batch](../../.ημ/runs/oikos-program-20261103/reviews/s2b-full-gate-timeout-custody-v11.edn)
+  **timed out at 600 seconds**: BB completed **22 tests / 540 assertions**
+  without failures or errors; NBB started but completion was unobserved, and
+  remaining suites were not launched. Postflight source pins matched. The
+  batch is not GREEN, nor does timeout establish descendant cleanup. The
+  [latency diagnostic v11](../../.ημ/runs/oikos-program-20261103/reviews/s2b-full-gate-latency-diagnostic-v11.edn)
+  measured eight synthetic ticks at approximately **216–239 ms** each, with
+  fixed-schema materialization dominating this fixture; it does not explain the
+  entire timeout. Gate-scheduling review is in flight, not completed.
+* **S4A:** The [RED runtime review v8 (syntax-custody successor)](../../.ημ/runs/oikos-program-20261103/reviews/s4a-bound-model-red-runtime-review-v8-syntax-custody.edn)
+  records **21 tests: 13 passed, 8 failed, none skipped, exit 1**; all 11
+  baseline tests passed. The intended stub produced positive RED. GREEN core
+  and test authoring are in flight, not runtime qualification or completion.
+* **S1B:** The [source permit](../../.ημ/runs/oikos-program-20261103/permits/s1b-inert-edn-source-v1.edn)
+  followed a clean S1A base `62e6eebbf75c3f2b28e4a550b4a01881a2f5e732`
+  and coordinator verification of all seven pins. The
+  [RED review v4](../../.ημ/runs/oikos-program-20261103/reviews/s1b-inert-edn-red-review-v4.edn)
+  records baseline BB **18 / 286**, NBB **40 / 546**, evaluation **9 / 39**;
+  RED BB **23 / 395** and NBB **45 / 655**, each with **9 failures and zero
+  errors**. It permits pure GREEN source implementation under the existing
+  permit, while identifying test gaps that must be addressed before GREEN
+  qualification. The artifact is partial, the board remains incoming, and
+  whole S1B is not admitted or complete.
+* **GovOne:** The fifth HTTP test source's factory and error/authentication
+  assertions are authored in [v13](../../.ημ/runs/oikos-program-20261103/reviews/govone-capacity-http-fixture-source-v13.edn).
+  HTTP completion, evidence and historical oracles remain held. Formatting and
+  static reading are not compilation; no candidate Go compile or test occurred.
+* **typed.clojure:** The [runner v7](../../.ημ/runs/oikos-program-20261103/reviews/typed-fixed-java-runner-source-fix-v7.edn)
+  and [bootstrap v6](../../.ημ/runs/oikos-program-20261103/reviews/typed-pre-go-bootstrap-source-v6.edn)
+  are unexecuted source fixes. Controller, watchdog and inventory remain
+  incomplete; no JVM execution or new runtime qualification follows. The
+  earlier neutral v6 qualification remains limited to its own profile.
+* **Axxium:** [Public dependency custody v17](../../.ημ/runs/oikos-program-20261103/reviews/axxium-pinned-public-dependencies-v17.edn)
+  records downloaded pinned artifacts, including the correct Edamame **1.6.42**;
+  extraction and the proposed classpath remain incomplete. Same-origin
+  checksums are not independent publisher authentication. The
+  [pure fixtures v16](../../.ημ/runs/oikos-program-20261103/reviews/axxium-pure-qualifier-source-fix-v16.edn)
+  remain unrun following the previous failed source review; a new review is
+  pending. No grant, credential, provider request or backup is established.
+
+The user's explicit **“You can install dependencies man”** authorization is
+recorded in the [public-dependency decision](../../.ημ/runs/oikos-program-20261103/decisions/public-dependency-installation-authorization.edn).
+It does not authorize spending, private capture, credentials or an OCR retry,
+nor does installation qualify tests. Normal compiler-managed temporary disposal
+is bounded by the existing [clarification](../../.ημ/runs/oikos-program-20261103/decisions/compiler-managed-temporary-file-preservation-clarification.edn);
+it is not blanket cleanup authority.
+
+The coordinator reports pushed checkpoint
+`da34dd526d89ec87c70f61f092c6dd591e578535`; its
+[remote full readback](../../.ημ/runs/oikos-program-20261103/checkpoints/continuation-da34dd52-remote-readback-v1.json)
+records **124 paths / 2,939,920 bytes**. The newer continuation checkpoint is
+uncommitted; neither that readback nor this note claims it was pushed.
+
+## 2026-11-04 subsequent checkpoint: bounded source and test progress
+
+This dated continuation supersedes conflicting **current-status** statements in
+earlier checkpoints without rewriting their historical evidence. The last
+reported official board snapshot remains **24 cards: 17 incoming, 4 in_progress,
+3 done, zero epics done**; this documentation update did not query or mutate
+Rheos. No integration agent or epic is eligible for completion on these results.
+
+* **S1B:** The [independent runtime evidence review v7](../../.ημ/runs/oikos-program-20261103/reviews/s1b-inert-edn-runtime-review-v7.edn)
+  admits the synthetic pure inert-EDN source artifact only: BB **29 tests / 538
+  assertions**, NBB **51 / 798**, evaluation **9 / 39**, all passing, and lint
+  **0 errors / 0 warnings**. The coordinator reports commit
+  `ba4f21b7f1fc2e1656de8a392aaf838d3d76fe4a`, tree
+  `93a802603b95408cbe349c72aa1323d616d653c6`, also identified in the new
+  [compatibility plan v8](../../.ημ/runs/oikos-program-20261103/reviews/s1b-services-inert-compatibility-plan-v8.edn).
+  That plan is newly written and unreviewed, not an execution permit or a
+  Services compatibility result. Whole S1B remains incoming; actual Services,
+  policy and effect gates remain separate.
+* **S4A:** The [independent fixture-fix review v14](../../.ημ/runs/oikos-program-20261103/reviews/s4a-bound-model-fixture-fix-review-v14.edn)
+  retains the failed v4 result: **26 selected, 21 passed, 5 failed, zero
+  skipped, exit 1**. It reviewed a whole-event `copy-tree` helper fix and a
+  positive fixture-isolation test, preserving the prior 26 test bodies. The
+  separately admitted [v5 attempt](../../.ημ/runs/oikos-program-20261103/permits/s4a-isolated-bound-model-green-v5.edn)
+  subsequently recorded **27 passed / 27, zero skips, exit 0**, with source,
+  binary and native pins matched in retained evidence at
+  `/tmp/opencode/oikos-s4a-bound-green-v5-27f838b5-bd14-484c-9c3d-f7661720053f/result.json`.
+  Model SHA-256 is `23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5`;
+  test SHA-256 is `34a2369632b26b7b14ce7fc09b1d8208cf7baaeff76030dbec7590834e5144d9`.
+  Independent post-run functional qualification remains pending; synthetic
+  passing results do not establish real identity, consent, durability, native
+  effects or whole-S4A completion.
+* **S2B:** Candidate `a5c4008e92e3134afd77c058851aea2d2ce33241` changes only
+  the closed `--only` gate selector and descriptor hash; the coordinator
+  reports the eight law/edge/test files, 63 base files and 13 frozen pins
+  unchanged. The [split-gates permit v2](../../.ημ/runs/oikos-program-20261103/permits/s2b-split-full-gates-v2.edn)
+  preserves the independent auditor's approval of the two-file diff, without
+  runtime qualification. Its fixed sequential BB, NBB and edge gates plus
+  baseline, wire, spaces and lint are **all required**, each at most 600 seconds
+  and 1,200 seconds aggregate, unchanged. The coordinator reports batch
+  `sh_1a77a0d44001rFgHbqV5WMaf61` started in the background; its completion is
+  not observed here. The earlier combined 600-second timeout remains failed,
+  not a pass, and the earlier review remains source-only.
+* **GovOne:** The [five-file independent source review v15](../../.ημ/runs/oikos-program-20261103/reviews/govone-five-file-source-review-v15.edn)
+  approves the candidate **source only, unexecuted**, including the authored
+  HTTP completion and evidence work. Genuine historical pre-0040 HTTP
+  preservation and N1 remain held, as do signed-cause, request-version and cache
+  invalidation questions. No candidate Go compile or test is claimed.
+* **Axxium:** [Public dependency extraction v19](../../.ημ/runs/oikos-program-20261103/reviews/axxium-pinned-public-dependencies-v19.edn)
+  records completed extraction of the pinned public source artifacts, with
+  **195 cache files / 1,769,545 bytes**. The prior failed extraction evidence
+  remains preserved; zero-data directory markers were ignored without applying
+  their metadata, not materialized as entries. Runtime resolution remains
+  unqualified. The coordinator reports a pure-fixture test fix in progress,
+  not reviewed, and a failed launcher with no execution. Google authorization
+  and backup remain held.
+* **typed.clojure:** The previously documented runner and bootstrap fixes remain
+  source-only and unrun; controller and watchdog work is incomplete. No JVM
+  execution or new runtime qualification is claimed.
+
+The coordinator's fresh native observation of Foresight PR #153 identifies head
+`da34dd526d89ec87c70f61f092c6dd591e578535`: **19 threads, zero unresolved,
+zero exact-head approvals and zero completed rounds**; the hosted gate remains
+**BLOCKED**. No fresh hosted check results were observed. Earlier `792dfa...`
+references describe historical checkpoints, not this current head.
+
+The user's [public-dependency installation authorization](../../.ημ/runs/oikos-program-20261103/decisions/public-dependency-installation-authorization.edn)
+permits necessary public dependencies without further routine permission
+questions. It does not authorize spending, private capture, credentials, OCR
+retry, automatic cleanup or treating installation as qualification.
+
+### 2026-11-04 checkpoint: qualified source artifacts and bounded continuations
+
+This checkpoint supersedes stale pending descriptions above without changing
+their historical results. Reports below are retained independent reviews or
+coordinator records, not new executions, board queries or remote checks by
+this documentation worker.
+
+* **S1B:** The [independent runtime evidence review v7](../../.ημ/runs/oikos-program-20261103/reviews/s1b-inert-edn-runtime-review-v7.edn)
+  qualifies pure inert source `ba4f21b7` only: BB **29/538**, NBB **51/798**,
+  evaluation **9/39**, lint **0/0**. Private development ref
+  `artifact/oikos-s1b-inert-ba4f21b7` retains it. The
+  [compatibility plan review v9](../../.ημ/runs/oikos-program-20261103/reviews/s1b-services-inert-compatibility-plan-review-v9.edn)
+  admits bounded harness and manifest source authoring only; independent
+  verification of the actual Services API remains active. No compatibility
+  execution, effects, release or whole-child completion follows.
+* **S2B:** The [independent offline P1 review v13](../../.ημ/runs/oikos-program-20261103/reviews/s2b-exact-offline-p1-runtime-review-v13.edn)
+  approves exact `a5c4008e` offline P1: seven recorded gates passed in
+  **780.0048 seconds**, BB and NBB collector each **22/540**, edge **6/81**,
+  and inherited gates passed. Private development ref
+  `artifact/oikos-s2b-offline-a5c4008e` retains it. The
+  [source permit v3](../../.ημ/runs/oikos-program-20261103/permits/s2b-native-fixture-source-v3.edn)
+  admits five additions, not execution, native operation or owner append. The
+  [transport candidate](../../.ημ/runs/oikos-program-20261103/reviews/s2b-native-transport-source-v5.edn)
+  is an incomplete, unreviewed source codec; the separate
+  [oracle candidate](../../.ημ/runs/oikos-program-20261103/reviews/s2b-native-oracle-source-v5.edn)
+  is also unreviewed. Neither establishes native ordering, real ownership or
+  whole-S2B completion.
+* **Artifact custody:** The [remote readback v2](../../.ημ/runs/oikos-program-20261103/checkpoints/qualified-oikos-artifacts-remote-readback-v2.json)
+  reports all **11 complete source paths / 90,740 bytes** matching across these
+  two private refs. It is source custody evidence, not a merge, installation,
+  backup of execution caches or permission to delete anything.
+* **S4A:** The [independent runtime review v15](../../.ημ/runs/oikos-program-20261103/reviews/s4a-bound-model-runtime-review-v15.edn)
+  qualifies **27/27** synthetic pure-composition tests, zero skipped, exit 0.
+  The prior **26-test run: 21 passed, 5 failed, exit 1** remains historical
+  failure evidence. The [local-only two-file snapshot v16](../../.ημ/runs/oikos-program-20261103/reviews/s4a-composed-source-snapshot-v16.edn)
+  records commit `791ab77` and tree `5bc30f7`; no native effects, startup,
+  real consent, authentication or durability is qualified.
+* **Axxium:** [Source review v22](../../.ημ/runs/oikos-program-20261103/reviews/axxium-pure-qualifier-source-final-review-v22.edn)
+  finds the synthetic candidate eligible for source continuation only; the
+  [dependency record v19](../../.ημ/runs/oikos-program-20261103/reviews/axxium-pinned-public-dependencies-v19.edn)
+  reports **195 cache files / 1,769,545 bytes**, not a qualified runtime
+  closure. A reviewed launcher and manifest are absent; no runtime, credentials,
+  grants, Google backup or deletion is qualified.
+* **GovOne:** The [five-file v15 review](../../.ημ/runs/oikos-program-20261103/reviews/govone-five-file-source-review-v15.edn)
+  approves source only, **unexecuted**. The newer
+  [compile-plan review v5](../../.ημ/runs/oikos-program-20261103/reviews/govone-offline-compile-plan-review-v5.edn)
+  finds v4 eligible for separately authorized bounded source authoring; it does
+  not qualify controls, inventory, compilation or execution.
+* **typed.clojure:** Runner and bootstrap candidates remain source-only;
+  watchdog and controller are incomplete, inventory is stale, and no JVM
+  execution is qualified.
+
+The last reported official board observation was **24 cards: 17 incoming,
+4 in progress, 3 done, zero epics done**. It is not a fresh query; no other
+child or epic completion or fresh integration is claimed. The last observed
+Foresight PR #153 head was `da34dd52`, with **19 threads, zero unresolved,
+zero exact-head approvals and zero completed rounds**; its gate was **BLOCKED**.
+This is not a fresh PR query. The user's policy answers are settled; continue
+within their existing boundaries without routine questions.
+
+### 2026-11-04 source-review continuation before checkpoint freeze
+
+The [independent Services API verification v10](../../.ημ/runs/oikos-program-20261103/reviews/s1b-services-owner-api-verification-v10.edn)
+now confirms the exact pinned Services/Oikos source objects and source-derived
+vector categories. It does not qualify literal vector bytes or execute either
+validator. The [two-file source permit v11](../../.ημ/runs/oikos-program-20261103/permits/s1b-real-validator-comparison-source-v11.edn)
+admits only a fixed comparison harness and synthetic manifest outside the owner
+repositories; compatibility and containment remain later gates.
+
+The [native two-file source review v6](../../.ημ/runs/oikos-program-20261103/reviews/s2b-native-two-file-source-review-v6.edn)
+requests three corrections: exact JSON integer handling before lossy conversion,
+JSON-only whitespace, and a 65,536-byte **complete-frame** cap. The
+[transport fix v7](../../.ημ/runs/oikos-program-20261103/reviews/s2b-native-transport-source-fix-v7.edn)
+and [oracle fix v7](../../.ημ/runs/oikos-program-20261103/reviews/s2b-native-oracle-source-fix-v7.edn)
+are authored, with inert regression specifications and zero-warning static lint.
+Their tests are unrun and independent re-review is still required. Socket and
+subscription lifecycle integration, correlated native ordering, isolated owner
+admission and whole-S2B qualification remain open. No live native resource was
+used during this source continuation.
+
+Checkpoint validation also found duplicate count/list keys in the historical
+S4A RED review. Its [custody record](../../.ημ/runs/oikos-program-20261103/custody/s4a-red-review-v8-syntax-repair-v1.edn)
+preserves the exact original text and disambiguates only the two numeric count
+keys in a parsed successor. This is a syntax repair, not a new review or changed
+test result; the malformed original remains unchanged locally.

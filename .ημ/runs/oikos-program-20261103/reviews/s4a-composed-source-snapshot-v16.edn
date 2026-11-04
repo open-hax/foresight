@@ -1,0 +1,11 @@
+{:report/id :s4a-composed-source-snapshot-v16
+ :kind :coordinator-owned-local-source-snapshot
+ :branch "feat/oikos-native-capability-20261103"
+ :head "791ab77d40bf50dbf06c96d02a7186762211d83f" :tree "5bc30f727c034d461911c6e1533ff9d335317d5d"
+ :paths {"layers/agent-sandbox/oikos-owner-authority.el" "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5"
+         "tests/unit/oikos-owner-authority-test.el" "34a2369632b26b7b14ce7fc09b1d8208cf7baaeff76030dbec7590834e5144d9"}
+ :qualification "reviews/s4a-bound-model-runtime-review-v15.edn qualifies the27 exercised synthetic pure-composition tests only."
+ :preservation "Checked expected branch and ccfb7748 parent, no staged changes, exact two hashes and whitespace; staged and committed only these two paths with an ordinary new commit. All preexisting .batch-home and native .elc files remain untracked and untouched."
+ :held [:publication :installation :startup :full-make-test :byte-compilation :real-identity
+        :human-consent :durability :native-atomicity :real-clock :real-effects :whole-s4a]
+ :interpretation "Not an owner kernel or an authenticated release. No cross-call replay guarantee and no epic completion."}

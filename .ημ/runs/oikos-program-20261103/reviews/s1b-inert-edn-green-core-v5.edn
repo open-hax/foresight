@@ -1,0 +1,15 @@
+{:review/id :s1b-inert-edn-green-core-v5
+ :kind :implementation-handoff-not-qualification
+ :source {:path "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b/src/oikos/law/services_inert_edn.cljc"
+          :sha256 "e5b9a4b683ec08ef4e2160e842c5d1986aff595a76b70d2b0906d2207b59640a"
+          :functions [render validate binding? value-bounded? strings-for decode scalar-string]}
+ :baseline {:head "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+            :tree "8ed3ef2854d5b11522338e32e7e177dae893fc78"
+            :stub-copy "/tmp/opencode/s1b-red-candidate-v3/original-stub.cljc"
+            :stub-sha256 "9ef18fb51e5785c5022faca99f72e9416447ddd5f211ad97b903b3d40b2995b1"
+            :retained-red "/tmp/opencode/s1b-red-candidate-v3"}
+ :static-check {:command "clj-kondo --lint src/oikos/law/services_inert_edn.cljc"
+                :result "0 errors, 0 warnings"}
+ :implementation "Independent received-octet decoding, exact re-encoding, canonical payload and fixed descriptor recognition, external identity equality, and independently recomputed counts and hashes. Preflight bounds precede canonical output allocation. Identity comparison is not authentication."
+ :not-performed [:test-suite :runtime-evaluation :independent-source-review :services-validator :policy-fixture :effects :git-write :board :ledger]
+ :holds "Concurrent test writer owns test paths; full BB/NBB suites and lint must run after its completion. Independent exact-source review and all Services, policy, shx, effects and whole-S1B gates remain outstanding. No green qualification is claimed."}

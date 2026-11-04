@@ -1,0 +1,22 @@
+{:report/id :oikos/axxium-pure-qualifier-source-fix-v16
+ :status :source-only-unreviewed-unexecuted
+ :binding {:review-v15-sha256 "108c93c33b3c1d1333cb1dd80b704beaf4b160f6f63a6dda46931c9baa64e1"
+           :missing-requested-source-review-v14 :provenance-gap-not-invented
+           :qualifier-sha256 "b476795e4ad4a2e77d21bff8aace0d4f34393a18eea28787ae9adf83b1477303"
+           :fixtures-sha256 "f70e594bc16564c9d11cbe3fa85c45fc3daa79966d3906f103b19c81de028c92"
+           :archive-paths ["/tmp/opencode/oikos-axxium-pure-source-ad23630d-3c7c-4ecb-ba1e-65ebbd7b7edd/qualifier-v15.txt" "/tmp/opencode/oikos-axxium-pure-source-ad23630d-3c7c-4ecb-ba1e-65ebbd7b7edd/fixtures_test-v15.txt"]
+           :archive-sha256 ["f57b8e48d9599acda800fa90d2e8dc8a5436b9761ee28d8f5344cbf962f0e9c6" "e023e24d05d0495f8e376ef96c88b6e431232b1d2ba7276b965a7c3a7b94ee80"]}
+ :constraints {:total-bytes 16384 :line-bytes 4096 :lines-and-events 32 :key-text-bytes 4096
+               :rationale "32 lines bounds owner incremental appendability quadratic prefix scans to a small fixed count; the byte caps constrain input size but do not bound parser stack, CPU or process memory. Blank lines count conservatively. External deadline and memory ceiling are mandatory."
+               :owner "Owner importer, event appendability, fold, resource API and crypto used; no alternate parser or authorization engine."
+               :status "Projection/decryption is not proof of owner, unique history, policy, lineage or Google grant; same-ID replacement and actor/body mismatch cases are explicitly projection-only."
+               :base64 "Owner key-from-base64 accepts decoded 32-byte keys; canonical base64 is not enforced."}
+ :case-ids [:input-type :key-type :empty :no-lf :blank :key-invalid :key-limit :total-over :line-over :lines-over :line-at :lines-at :total-at :malformed-complete :trailing-form :import-exception :deep-external-guard :invalid-envelope :seq-gap :unknown-cause :self-cause :duplicate-id :no-credential :owner-registration :actor-body-denial :same-id-projection-only :actor-body-projection-only :noncredential-and-credential :wrong-key :wrong-aad :empty-plaintext :malformed-ciphertext :noncanonical-base64 :decoded-length]
+ :verification {:static-command "clj-kondo --lint /tmp/opencode/oikos-axxium-pure-source-ad23630d-3c7c-4ecb-ba1e-65ebbd7b7edd/{qualifier.cljs,fixtures_test.cljs}" :exit 0 :errors 0 :warnings 0
+                :scope "Static lint only, not an import, test, build or execution."}
+ :holds ["Independent source review and complete dependency and NBB closure verification remain required."
+         "Synthetic runtime, all fixture assertions, owner-generated fixture compatibility and launcher's failure/exit behavior remain unrun; no runtime results are claimed."
+         "Deep nesting requires independently enforced process deadline and memory ceiling; catch is not a totality guarantee."
+         "Real credentials, keys, ledgers, private inventory, provider grant and backup remain entirely held."
+         "Exact-bound and over-bound input oracles do not independently demonstrate 32 actual valid events, every adjacent boundary, or process survival; add/review such cases before relying on them."]
+ :boundary {:dependency-install false :runtime-import false :nbb false :build false :network false :credentials false :owner-edit false :git-board-ledger-write false :nested-agents false}}

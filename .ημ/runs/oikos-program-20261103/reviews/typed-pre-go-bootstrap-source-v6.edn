@@ -1,0 +1,21 @@
+{:id :typed-pre-go-bootstrap-source-v6
+ :status :source-candidate-not-runtime-admitted
+ :source "/tmp/opencode/oikos-typed-seq-logs-a2698786/typed-java-diagnostic-v2/bootstrap.py"
+ :old-sha256 "8a94a095f2150954c506ffd6e460375ba2fb2373839e2f1a0403fc1ed8561757"
+ :new-sha256 "d596bc8de107cb75cf5e95ee3b8de42c868b593885c482691f7743e95a39c793"
+ :original-archive "reviews/typed-pre-go-bootstrap-source-v5-original.txt"
+ :archive-sha256 "8a94a095f2150954c506ffd6e460375ba2fb2373839e2f1a0403fc1ed8561757"
+ :runner-sha256-observed "d3b0a60ba6a09b21f1ba679ac9abdae182f75ce8c1e518dbdc3561112596c4fc"
+ :interface {:argv "nonce inventorysha, both lowercase 64-hex; no caller-supplied paths or command"
+             :ready "One bounded JSON line with nonce and both proc identities; child establishes distinct session before readiness."
+             :go "stdin: GO <nonce> <L_us> <E_us> newline, <=200 bytes, positive canonical decimal integers, 10-second read deadline; current monotonic microseconds <= L and L+185000000 <= E."
+             :exec "/usr/bin/python3.12 -I -B /tmp/opencode/oikos-typed-seq-logs-a2698786/typed-java-diagnostic-v2/runner.py inventorysha nonce L E with empty environment"
+             :sources "Externally pinned inventory digest and all four source digests are checked, without inventory self-hash; incomplete inventory fails closed."
+             :descriptors "Close inherited non-stdio descriptors; child closes all stdio and retains no protocol descriptor after readiness; local pidfds held until exec."}
+ :verification "Static Python ast.parse only passed; SHA-256 computed from files. Candidate and original were not imported or run. No runtime, test, probe, unit, D-Bus, JVM, dependency, network, or credential action."
+ :limitations ["Readiness is not authentication. Watchdog and controller must independently authenticate manager MainPID, both live pidfds, original cgroup fd and invocation identity, and sole GO, with independently validated time domain and deadlines."
+               "Polling rejects already pending trailing bytes or EOF; a byte arriving after the last poll cannot be ruled out by a stream reader. The future authenticated watchdog must enforce the single-message protocol; this source is not proof against a malicious or racing sender."
+               "Path hashing is cooperative and leaves replacement and exec timing races; no immutable snapshot or descriptor-bound execution is claimed. Source bytes executing before the check also require independent external authentication."
+               "Environment clearing before fork and child descriptor closure do not establish that inherited process memory contains no credential material; the future launcher must start with an empty credential-free environment."
+               "On any error cleanup is unconfirmed; an inert descendant may remain until the future supervisor stops the unit with KillMode=control-group. No name kill or reused-PID cleanup is attempted."
+               "Current inventory is incomplete and pins older source bytes. All four roles and regenerated inventory require independent exact-byte review and a separately issued one-shot permit before execution; manager limits, kernel controls and cleanup remain unqualified."]}

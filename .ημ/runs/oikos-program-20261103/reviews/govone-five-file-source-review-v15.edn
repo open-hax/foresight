@@ -1,0 +1,14 @@
+{:review/id :govone-five-file-source-review-v15
+ :kind :coordinator-preserved-independent-auditor-result
+ :reviewer {:agent :auditor :session "ses_e5884abccffexacIDZpwBZCR17"}
+ :base "259df13d175bde68c841156fdbfcde38c8444fce"
+ :verdict :approve-source-only-unexecuted
+ :findings []
+ :files {"internal/inference/service.go" "c276d0742abaf5a66dd68c90b4110f3658bd3ae3da3874ae655d00e7450fa0aa"
+         "internal/pipeline/context.go" "3bd2446ba75e35035ee078d468b7070a6ae81ba987e88a72af4ab9c8b8e1fa3b"
+         "internal/inference/capacity_evidence_test.go" "c26f767af145cb425f980d066e24249f8f9607b5961f043276f024b6829ade49"
+         "internal/pipeline/capacity_evidence_test.go" "7dde92836ac00e9ea858adf26fb8e84d913ee1dcedf57ac5493d42ac410aab2e"
+         "internal/httpserver/capacity_evidence_http_test.go" "a14a7c829613e485fa9347a79f8b23e70a7863a4a03b5ef4c78d523551cf26c8"}
+ :result "VERDICT: approve. FINDINGS: None confirmed in this source-only review."
+ :unverified "All Go compilation, tests, builds, runtime behavior, dependencies, network access and credentials remain unexecuted by instruction. Genuine pre-0040 HTTP preservation remains open; this is not runtime or compile admission. N1, signed cause, request decision version and cache invalidation remain held. Hashes were read separately, not as an atomic snapshot."
+ :custody "Coordinator preserves the actual returned independent result; auditor did not write this file. This is not a hosted review, signature, GitHub approval, execution permission, dependency credit or child completion."}

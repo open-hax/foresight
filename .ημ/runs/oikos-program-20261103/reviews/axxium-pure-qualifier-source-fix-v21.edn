@@ -1,0 +1,19 @@
+{:report/id :axxium-pure-qualifier-source-fix-v21
+ :kind :coordinator-source-only-review-finding-repair
+ :review {:path "reviews/axxium-pure-qualifier-source-fix-review-v20.edn" :sha256 "e7404daf8fb17174d14cb0ce6d4baad1918f527bf3622616f3fe9df37d5edb00"}
+ :corrected-prior-binding {:path "reviews/axxium-pure-qualifier-source-review-v15.edn"
+                           :sha256 "108c93c33b3c1d1333cb1dd80b704beaf4b160f6f63a6a6dda46931c9baa64e1"
+                           :effect "Supersede the mistyped v16 pointer without rewriting that historical report."}
+ :root "/tmp/opencode/oikos-axxium-pure-source-ad23630d-3c7c-4ecb-ba1e-65ebbd7b7edd"
+ :sources {"qualifier.cljs" "b476795e4ad4a2e77d21bff8aace0d4f34393a18eea28787ae9adf83b1477303"
+           "fixtures_test.cljs" "10593a062b06b2c21abd574f8cf555cdb250d6193d1a4a89b2c21406e22f3adb"}
+ :preserved-prior {:path "fixtures-v16-source.txt" :sha256 "f70e594bc16564c9d11cbe3fa85c45fc3daa79966d3906f103b19c81de028c92"}
+ :changes ["Restore fixed-ID qualifier-level two-credential, wrong-scope, wrong-key, wrong-AAD, missing/malformed sealed value, malformed resource and wrong resource-ID negatives, alongside an actual positive qualifier control; keep direct crypto tests separately."
+           "Observe actual owner importer entry and successful return separately, without replacing its parser. Add adjacent valid single-form syntax as a control; malformed and trailing forms must enter but not return, while valid syntax returns before envelope rejection."
+           "Keep all prior cases, no top-level execution, fixed diagnostics and nonzero failure exit. No qualifier algorithm or scope changed."
+           "Add a source-derived positive valid-resource? check for the noncredential fixture: inspected domain/resource.cljc defines kind as keyword with namespace resource, so local-file returns :resource/file, not unqualified :file. This corrects an ancillary v20 source observation without pretending policy admission or registration followed."]
+ :inspected-owner {:path "src/cljs/axxium/domain/resource.cljc" :sha256 "35e06ab88f837bbdc835f2254eaa1bc3d71f0534b89741f4891b39fcf7222eb9"}
+ :verification "clj-kondo --cache false on both sources:0errors0warnings. No source import, NBB/Node application, fixtures, provider, credential/key/ledger/private inventory, network or real grant access."
+ :held [:independent-source-recheck :fixed-launcher-implementation-and-review :synthetic-runtime
+        :actual-nbb-resolution :real-local-grant :google :private-backup :cleanup]
+ :limits "Projection/decryption and synthetic owner API behavior do not establish historical uniqueness, real ownership, policy authorization, lineage or a provider grant. Earlier missing v14 artifact is not invented or relied upon."}

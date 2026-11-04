@@ -1,0 +1,22 @@
+{:report/id :axxium-pinned-public-dependencies-v19
+ :kind :coordinator-public-dependency-installation
+ :authorization "decisions/public-dependency-installation-authorization.edn"
+ :cache "/tmp/opencode/axxium-pinned-public-v17-exd3da4n"
+ :manifest {:path "/tmp/opencode/axxium-pinned-public-v17-exd3da4n/extraction-v19.json"
+            :sha256 "1b1364135cfef4e986d1f062fa4b50ba4b5eacee14b3ccc647db50464ea35f5e"}
+ :status :pinned-public-source-extraction-completed-runtime-unqualified
+ :completed [{:artifact "org.clojure/test.check" :version "1.1.1"}
+             {:artifact "org.clojure/tools.reader" :version "1.5.2"}
+             {:artifact "org.clojure/core.rrb-vector" :version "0.1.2"}]
+ :prior "Malli 0.16.4, Edamame 1.6.42 and other declared pure dependency sources were already extracted. Older Edamame 1.4.27 bytes remain retained but excluded from the proposed classpath."
+ :extraction {:new-regular-files 59 :ignored-directory-markers 30
+              :cache-files 195 :cache-bytes 1769545
+              :limits {:bytes 67108864 :files 10000}
+              :rule "Directory markers with zero data are ignored completely; no untrusted Unix mode or other metadata is applied. Every actual extracted entry is a validated relative regular file. Parent directories are privately created only from validated file paths with no-follow descriptor-relative operations. Reject path traversal, absolute/control paths, duplicates, file-prefix conflicts, encryption, symlinks and special file types; bound entry size, expansion ratio and aggregate bytes."
+              :preservation "Original JARs, POMs, checksum files, v17 manifest and earlier failed extraction reports are unchanged. The new source trees are separate v19 paths; no deletion or overwrite."
+              :verification "Official retained SHA-1 sidecars matched exact JAR bytes before extraction; local SHA-256 pins and per-member byte counts/hashes are in the new manifest. Archives were rehashed after extraction. Same-origin checksums are transport consistency, not independent authenticity."}
+ :classpath "Owner src/cljs first, including the owner's own Clio shape namespaces, then the exact selected dependency roots recorded in extraction-v19.json. Do not substitute the different standalone Clio checkout."
+ :held [:actual-nbb-resolution-and-built-in-precedence :source-fix-review :contained-synthetic-execution
+        :real-ledger-and-key-access :google-authorization :private-folder-access :backup :cleanup]
+ :not-performed [:application-import :nbb :node-application :jvm :test :network-in-this-extraction
+                 :credential-read :owner-edit :git-write :board-or-ledger-write]}

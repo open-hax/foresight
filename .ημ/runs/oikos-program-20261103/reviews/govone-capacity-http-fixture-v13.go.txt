@@ -1,0 +1,240 @@
+package httpserver
+
+import (
+	"context"
+	"crypto/ed25519"
+	"crypto/rand"
+	"database/sql"
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+	"time"
+
+	"github.com/mojomast/govone/internal/audit"
+	"github.com/mojomast/govone/internal/auth"
+	"github.com/mojomast/govone/internal/classifier"
+	"github.com/mojomast/govone/internal/config"
+	"github.com/mojomast/govone/internal/goverror"
+	"github.com/mojomast/govone/internal/inference"
+	"github.com/mojomast/govone/internal/inspect"
+	"github.com/mojomast/govone/internal/policy"
+	"github.com/mojomast/govone/internal/realtime"
+	"github.com/mojomast/govone/internal/redact"
+	"github.com/mojomast/govone/internal/rehydrate"
+	"github.com/mojomast/govone/internal/response"
+	"github.com/mojomast/govone/internal/retrieval"
+	"github.com/mojomast/govone/internal/router"
+	"github.com/mojomast/govone/internal/session"
+)
+
+// capacityHTTPFixture uses the production HTTP and persistence seams; the
+// generator is deliberately synthetic, not evidence of a running model.
+type capacityHTTPFixture struct {
+	server        *Server
+	db            *sql.DB
+	repo          *auth.MemoryKeyRepository
+	sessions      *session.Service
+	responses     *response.Service
+	audits        *audit.SQLiteStore
+	operatorToken string
+	auditorToken  string
+}
+
+func newCapacityHTTPFixture(t *testing.T) capacityHTTPFixture {
+	t.Helper()
+	db := migratedHTTPServerTestDB(t)
+	insertInferenceFixtures(t, db)
+	for _, statement := range []string{
+		`UPDATE role_assignments SET role = 'operator' WHERE tenant_id = 'tenant-1' AND user_id = 'user-1'`,
+		`INSERT INTO role_assignments(role_assignment_id, tenant_id, user_id, role, granted_by, status) VALUES ('ra-auditor', 'tenant-1', 'user-auditor', 'auditor', 'user-1', 'active')`,
+		`DELETE FROM model_endpoints WHERE model_endpoint_id = 'endpoint-local-1'`,
+	} {
+		if _, err := db.Exec(statement); err != nil {
+			t.Fatalf("capacity fixture seed: %v", err)
+		}
+	}
+	key := []byte("test-hash-key-padded-to-32bytes!!")
+	issuer, err := auth.NewIssuer(key)
+	if err != nil {
+		t.Fatal(err)
+	}
+	repo := auth.NewMemoryKeyRepository()
+	issue := func(id string, role auth.Role) string {
+		t.Helper()
+		issued, record, err := issuer.Issue(auth.APIKeySpec{TenantID: "tenant-1", PrincipalID: id, Role: role})
+		if err != nil {
+			t.Fatal(err)
+		}
+		repo.SetPrincipalRole("tenant-1", id, role, true)
+		if err := repo.Save(context.Background(), record); err != nil {
+			t.Fatal(err)
+		}
+		if _, err := db.Exec(`INSERT INTO api_keys(api_key_id, tenant_id, principal_id, role, hash_digest, status, created_at, updated_at, expires_at) VALUES (?, 'tenant-1', ?, ?, zeroblob(32), 'active', '2026-04-09T00:00:00Z', '2026-04-09T00:00:00Z', '2099-01-01T00:00:00Z')`, issued.ID, id, role); err != nil {
+			t.Fatal(err)
+		}
+		return issued.Token
+	}
+	operatorToken, auditorToken := issue("user-1", auth.RoleOperator), issue("user-auditor", auth.RoleAuditor)
+	authenticator, err := auth.NewAuthenticator(repo, key)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sessionStore, err := session.NewSQLiteStore(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sessionSvc, err := session.NewService(sessionStore, 24*time.Hour, session.ExecutorConfig{MaxQueueDepth: 8, RetryAfter: time.Second})
+	if err != nil {
+		t.Fatal(err)
+	}
+	profiles, err := inference.NewSQLiteProfileStore(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	classifierSvc := classifier.NewService()
+	encrypter, err := redact.NewEncrypter([]byte("01234567890123456789012345678901"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sessionStore.SetEncrypter(encrypter)
+	redactStore, err := redact.NewSQLiteStore(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	redactSvc, err := redact.NewService(redactStore, encrypter)
+	if err != nil {
+		t.Fatal(err)
+	}
+	routerStore, err := router.NewSQLiteStore(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	routerSvc, err := router.NewService(routerStore)
+	if err != nil {
+		t.Fatal(err)
+	}
+	responseStore, err := response.NewSQLiteStore(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	responseSvc, err := response.NewService(responseStore)
+	if err != nil {
+		t.Fatal(err)
+	}
+	inspectSvc, err := inspect.NewService(redactSvc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rehydrateSvc, err := rehydrate.NewService(sessionSvc, redactSvc, responseSvc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	auditStore, err := audit.NewSQLiteStore(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, privateKey, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatal(err)
+	}
+	auditSvc, err := audit.NewService(auditStore, audit.Config{MerkleMaxEvents: 1000, MerkleMaxAge: time.Hour, AnchorPrivateKey: privateKey, AnchorKeyID: "test-key"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	sessionStore.SetAuditAppender(auditSvc)
+	if err := rehydrateSvc.SetDecisionStore(db); err != nil {
+		t.Fatal(err)
+	}
+	if err := rehydrateSvc.SetAuditAppender(auditSvc); err != nil {
+		t.Fatal(err)
+	}
+	realtimeSvc, err := realtime.NewService(db, sessionSvc, auditSvc, encrypter, realtime.Config{MaxConnectionsPerTenant: 2, IdleTimeout: time.Minute, MaxEventsPerSecond: 50, ConnectionBufferSize: 16, RoleRecheckInterval: time.Second})
+	if err != nil {
+		t.Fatal(err)
+	}
+	retriever, err := retrieval.NewStore(db)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Use the keyed variant of the allow-local helper so the durable scoped
+	// bundle can explicitly deny both external capabilities with a real signature.
+	policySvc, signingKey := newAllowLocalPolicyWithKey(t)
+	bundleBytes, signature := signPolicyBundle(t, signingKey, policy.Bundle{Version: "2026-04-09", Rules: []policy.Rule{{ID: "deny-external", Effect: policy.EffectDeny, Capabilities: []policy.Capability{policy.CapabilityHybridRedacted, policy.CapabilityExternalApproved}, Match: policy.RuleMatch{}}}})
+	initialPolicy, err := policySvc.VerifyBundle(bundleBytes, signature)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := policySvc.ConfigureStore(db); err != nil {
+		t.Fatal(err)
+	}
+	insertActivePolicyBundleHTTP(t, db, initialPolicy)
+	generator := inference.NewStubGenerator() // Synthetic output only.
+	inferenceSvc, err := inference.NewService(sessionSvc, profiles, classifierSvc, redactSvc, policySvc, routerSvc, generator, inspectSvc, responseSvc, rehydrateSvc, auditSvc, realtimeSvc, retriever, inference.Config{ClassifierMaxMessages: 64, DeploymentType: policy.DeploymentTypeConnected, LocalModelAvailable: true, LocalCapacityAvailable: true, LocalCapacityChecker: routerSvc, ExternalPathAvailable: false, ReturnVariant: rehydrate.VariantMasked, EvidenceDB: db})
+	if err != nil {
+		t.Fatal(err)
+	}
+	server := New(config.Config{HTTPAddr: ":0", Environment: "test"}, WithInferenceAPI(authenticator, inferenceSvc), WithStageAPIs(authenticator, db, sessionSvc, profiles, classifierSvc, redactSvc, inspectSvc, rehydrateSvc, responseSvc, auditStore, auditSvc, policySvc, realtimeSvc, StageAPIConfig{ClassifierMaxMessages: 64, DeploymentType: policy.DeploymentTypeConnected, LocalModelAvailable: true, LocalCapacityAvailable: true, ExternalPathAvailable: false}))
+	return capacityHTTPFixture{server: server, db: db, repo: repo, sessions: sessionSvc, responses: responseSvc, audits: auditStore, operatorToken: operatorToken, auditorToken: auditorToken}
+}
+
+func TestCapacityHTTPMissingAuthAndNoLocal(t *testing.T) {
+	h := newCapacityHTTPFixture(t)
+	const body = `{"model":"gpt-test","session_id":"session-1","messages":[{"role":"user","content":"safe request"}]}`
+	request := func(token string) *httptest.ResponseRecorder {
+		r := httptest.NewRequest(http.MethodPost, "/v1/chat/completions", strings.NewReader(body))
+		if token != "" {
+			r.Header.Set("Authorization", "Bearer "+token)
+		}
+		r.Header.Set("Idempotency-Key", "capacity-http-denial")
+		w := httptest.NewRecorder()
+		h.server.Handler.ServeHTTP(w, r)
+		return w
+	}
+	unauthorized := request("")
+	if unauthorized.Code != http.StatusUnauthorized && unauthorized.Code != http.StatusForbidden {
+		t.Fatalf("missing auth status = %d", unauthorized.Code)
+	}
+	w := request(h.operatorToken)
+	if w.Code != http.StatusServiceUnavailable {
+		t.Fatalf("authorized status = %d body=%s", w.Code, w.Body.String())
+	}
+	var envelope map[string]json.RawMessage
+	if err := json.Unmarshal(w.Body.Bytes(), &envelope); err != nil {
+		t.Fatal(err)
+	}
+	if len(envelope) != 1 || envelope["error"] == nil {
+		t.Fatalf("unexpected envelope keys: %v", envelope)
+	}
+	var detail map[string]json.RawMessage
+	if err := json.Unmarshal(envelope["error"], &detail); err != nil {
+		t.Fatal(err)
+	}
+	if len(detail) != 5 {
+		t.Fatalf("unexpected error keys: %v", detail)
+	}
+	for _, key := range []string{"code", "message", "details", "trace_id", "timestamp"} {
+		if detail[key] == nil {
+			t.Fatalf("missing error key %s", key)
+		}
+	}
+	var code, message, trace, timestamp string
+	_ = json.Unmarshal(detail["code"], &code)
+	_ = json.Unmarshal(detail["message"], &message)
+	_ = json.Unmarshal(detail["trace_id"], &trace)
+	_ = json.Unmarshal(detail["timestamp"], &timestamp)
+	if code != goverror.CodeInferenceProcessingFailed || message != "failed to process request" || trace == "" {
+		t.Fatalf("unexpected governed error: code=%s message=%s trace=%s", code, message, trace)
+	}
+	if _, err := time.Parse(time.RFC3339Nano, timestamp); err != nil {
+		t.Fatalf("invalid timestamp: %v", err)
+	}
+	var details map[string]any
+	if err := json.Unmarshal(detail["details"], &details); err != nil {
+		t.Fatal(err)
+	}
+	if len(details) != 1 || details["reason"] != "capacity_unavailable" {
+		t.Fatalf("unexpected public details: %v", details)
+	}
+}

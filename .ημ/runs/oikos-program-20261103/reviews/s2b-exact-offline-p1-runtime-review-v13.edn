@@ -1,0 +1,13 @@
+{:review/id :s2b-exact-offline-p1-runtime-review-v13
+ :kind :coordinator-preserved-independent-auditor-qualification
+ :reviewer {:agent :auditor :session "ses_e589f2d3bffekEYXC0O5xZ5Dfu"}
+ :candidate {:head "a5c4008e92e3134afd77c058851aea2d2ce33241" :tree "dc1fa03a6e641a4f46ab6d8de07422e0825ef654"}
+ :verdict :approve-exact-offline-p1
+ :findings []
+ :evidence {:root "/tmp/opencode/oikos-s2b-a5c4008-split-gates-888a4214-3dda-465d-a8de-ba6aea3048a6"
+            :result-sha256 "09fded879d160d4406a32ba52a2dd87e8d2b0f752a7d6adf0adb5e2b9ad8133c"
+            :attempt-sha256 "9c4ac01903df8b538c9c028d73660f36c5d372880ff322b764b0981d4ffdc029"
+            :commands 7 :zero-exits 7 :seconds 780.0048131690128}
+ :qualification "The independent auditor read the actual raw logs and recorded source copies. All three collector modes, both runtime preflights with seven negative oracles, and inherited gates are present. BB and NBB collector each22/540; edge6/81; inherited gates and zero-warning lint passed. All eight source copies match recorded and current bytes; all 63 accepted base paths/modes remain unchanged; the checked 13 frozen pins and descriptor semantic digest remain unchanged."
+ :not-claimed "The auditor did not rerun tests or independently witness execution timing. Recorded evidence supports the batch. Caller-authored trace reachability is not authentication. Native i3 ordering and oracle, real-owner admission, operational currentness, whole S2B and epic completion remain held."
+ :custody "Coordinator preserves the actual independently returned verdict, not a hosted provider review or fabricated signature. Prior a25a928 combined600-second attempt remains failed and retained."}

@@ -1,0 +1,30 @@
+{:review/id :s1b-inert-edn-green-source-review-v6
+ :date "2026-11-04"
+ :kind :independent-static-source-review
+ :verdict :approve-exact-source-candidate-for-bb-and-nbb-unit-gate
+ :finding-count 0
+ :findings []
+ :scope {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b"
+         :base-attributed "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+         :files {"src/oikos/law/services_inert_edn.cljc" "e5b9a4b683ec08ef4e2160e842c5d1986aff595a76b70d2b0906d2207b59640a"
+                 "test/oikos/law/services_inert_edn_test.cljc" "51966d65bc4846f3898f2f17659ce31563ffe8e4d97222527d16d44b78157c9b"
+                 "test/oikos/test_runner.cljc" "3e52f073a6536ee627b1895ddc17168d255cbaa4cab00ed26e0e51b8591d7ffc"}
+         :base-caveat "HEAD, tree, whole-worktree status and every frozen path were not checked; Git was not invoked. Six named S1A dependency/config files were hashed and match the retained RED baseline manifest. The runner hash matches the RED review. Parent must check the complete frozen accepted base and exact paths before execution."
+         :frozen-sha256 {"src/oikos/law/generation.cljc" "dad31103191e858f464a628edf09c996388546fcca81126f3c61fd49ed5ae2cd"
+                         "src/oikos/law/frame.cljc" "566edcc427a86c144889df8c183537c0c85ab43872426bba50c57a7122ee2b78"
+                         "src/oikos/law/digest.cljc" "15254fa3b7c785d83d00a3c699782aa2d8f1cb342762e92213847047e78402ab"
+                         "test/oikos/law/generation_test.cljc" "0d52a7c4d27973e400e545dcc66ebc5a0b3fa4449b4aa2eb203e6afbc603994e"
+                         "bb.edn" "ab2aaf2a9931e8d8fcd221f0650a48859763b92f3cd6acaadd62a4b61f6b46af"
+                         "nbb.edn" "3430bf7e08cae31e04ce305655919e650de1f73b4919273ba76f8eaa08b9ecf9"}}
+ :reviewed ["s1b-inert-edn-adapter-source-plan-v2.edn" "s1b-inert-edn-red-review-v4.edn" "s1b-inert-edn-green-core-v5.edn" "s1b-inert-edn-test-strengthening-v5.edn" "three exact candidate files" "oikos/law/frame.cljc" "oikos/law/digest.cljc" "oikos/law/generation.cljc canonical and error functions"]
+ :analysis {:bounds "value-bounded? counts UTF-16 units incrementally, rejects lone surrogates and NUL, counts valid Unicode UTF-8 and canonical escape expansion, and checks <=32768 raw value bytes and <=65536 descriptor bytes before output allocation. Payload shares escaping and is 25 bytes shorter. Both raw vectors are checked as persistent vectors of integer octets and independently capped at 65536 before traversal/decoding."
+            :utf8 "decode checks lead ranges, continuation counts, overlong encodings, surrogate scalars and maximum scalar, then requires exact digest/utf8 re-encoding. Its decoded input, not producer flags, supplies the subsequent checks. NUL and BOM cannot survive the value/grammar checks."
+            :validation "validate requires closed artifact and binding records, fixed source constants and two lower-case digest-shaped revisions equal to the separately supplied expected record. It independently decodes both received vectors, parses the bounded payload through the existing restricted reader, checks closed payload shape and bounded value, and recognizes both exact canonical texts/bytes before independently checking counts and digests. Descriptor recognition by exact reconstruction prevents extra/duplicate keys, alternate grammar and value mismatch. Its source binding is comparison data, not authentication or trusted value intent."
+            :errors-and-effects "Entry points return a closed fixed invalid-artifact error for caught invalid data. Inspected candidate introduces no I/O, process, network, policy or Services facade; it imports existing pure law namespaces. This is not a proof about every transitive runtime or an execution trace."
+            :tests "Strengthened shared tests include exact golden vectors and hashes, rehashed payload/descriptor grammar and value mutations, both directions of realistic per-field binding changes, coherent external revision examples, rehashed malformed raw octets, Unicode and invalid host surrogates, sanitized error equality, value byte boundaries and independently constructed 65535/65536 descriptor cases. The tests and handoff are unrun; denial assertions alone cannot prove execution order, no-effects, or complete parser behavior."
+            :boundary "For escaped length E, payload=20+E and descriptor=45+E. A valid artifact under both ceilings has payload <=65511. Tests construct the reachable nearest payload and descriptor inclusive boundaries instead of demanding an impossible 65536-byte valid payload."
+            :runtime "No confirmed BB/NBB compatibility source bug found in this static inspection. This is eligibility for the permitted gate, not a prediction that either runtime passes: large apply/str and canonical/reader paths, Unicode parity, exact digests, execution time and zero-warning lint remain to be measured."
+            :qualification "The parent must verify exact source and frozen base immediately before and after the full permitted tests and lint, retain command inputs, outputs, exits and hashes, and independently decide qualification. This review does not establish owner Services validator compatibility, policy binding, authenticated source, external intent, effects, installation or whole-S1B readiness."}
+ :performed ["Read candidate core, tests, runner, V2 plan, V4 RED review and V5 reports" "Inspect existing frame, UTF-8/digest and canonical/error implementations" "Compute SHA-256 of three candidate files and six named frozen files" "Write this review"]
+ :not-performed [:source-edit :bb :nbb :unit-execution :runtime-probe :dependencies :network :credentials :git :board :ledger :nested-agents :services-facade :services-validator :effects]
+ :next "Parent may run the existing permitted full pure unit and lint gates against these exact hashes on both runtimes after rechecking the frozen base. Record actual results and investigate any failure rather than inferring GREEN from this review; retain all separate owner and effect holds."}

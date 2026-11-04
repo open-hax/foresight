@@ -1,0 +1,25 @@
+{:permit/id :s1b-inert-edn-source-v1
+ :kind :bounded-development-pure-source-and-unit-tests
+ :source :recommended-path-standing-authorization
+ :date "2026-11-04"
+ :plan {:path "reviews/s1b-inert-edn-adapter-source-plan-v2.edn" :sha256 "348ea9fd5be0b5dfa8e6283a284a34ec2ca25872a5bf621ed671f5c711bee263"}
+ :review {:path "reviews/s1b-inert-edn-adapter-plan-fix-review-v2.edn" :sha256 "7e3286c38c277f0d4dbc87739ec8044031a824ea3afe0cc9799025adfbd584f8"}
+ :root "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b"
+ :base "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+ :tree "8ed3ef2854d5b11522338e32e7e177dae893fc78"
+ :branch "feat/oikos-s1b"
+ :preflight "Coordinator independently observed clean task worktree, exact HEAD/tree/branch and all seven S1A blobs named by the plan. Recheck before each source phase; stop on unexpected changes without reset or branch switch."
+ :prerequisites [{:path "reviews/services-oikos-development-consumer-acceptance-v1.edn" :sha256 "bd68d0769cb333486f1d506a4d979d90928d071afc8c174c667a87d1f194c436"}
+                 {:path "permits/services-development-handoff-d4f6ff57.edn" :sha256 "f565b7f8b2097e70892a38b2e652155651a10d84ed038b141256e09e8694c0de"}
+                 {:path "permits/s1a-accepted-62e6eebb.edn" :sha256 "1b775f895307ebd3fae8cc670a139dcaf91036aec9e6c208dd6e4ecc9ae3e70d"}]
+ :paths ["src/oikos/law/services_inert_edn.cljc"
+         "test/oikos/law/services_inert_edn_test.cljc"
+         "test/oikos/test_runner.cljc"]
+ :scope "Only the reviewed closed standalone synthetic inert-EDN artifact, portable bounded octets, independent validation and shared pure BB/NBB unit tests. No S1A target or generation-law change. Expected source bindings are separately supplied fixture data, not authentication or authority."
+ :red "Run and retain existing bb test and bb lint baselines. Author focused shared tests before implementation, using a fixed-denial stub where necessary to obtain meaningful positive assertion failures in both runtimes, rather than treating a missing namespace as functional RED. Preserve exact source hashes, argv, stdout/stderr and exits."
+ :green "Only after actual shared RED is recorded may the admitted pure implementation be authored. Independent exact-source review and all shared regression/lint gates remain required for qualification. No skipped or removed tests, dependency installation, automatic retries or warning suppression."
+ :execution-bound "Unit tests only: at most 120 seconds per fixed command, bounded retained output. No Services facade/validator execution, policy-bound fixture, filesystem-effect fixture, shx/Bash renderer, deployment, installed promotion, private input, credential, network or provider operation. No new dependency resolution."
+ :board "Artifact-scoped source admission only; S1B remains incoming with its existing Rheos dependency unchanged. This is not whole-S1B readiness, a status transition, Services compatibility, consumer admission or effect qualification."
+ :holds [:whole-s1b :positive-bash :shx-warning-and-cleanup :services-format-compatibility
+         :policy-bound-end-to-end-fixture :installed-generation :muse-operations :real-effects]
+ :preservation "Retain old/new test outcomes and source. Do not remove unrelated worktrees, caches, scratch or retained artifacts. Git staging, commit and publication are not delegated by this permit."}

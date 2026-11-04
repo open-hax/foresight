@@ -1,0 +1,31 @@
+{:candidate/id :s4a-bound-model-green-core-v9
+ :kind :source-only-core-candidate
+ :authority :none
+ :verdict :unverified-independent-review-required
+ :input {:red-runtime-review "reviews/s4a-bound-model-red-runtime-review-v8.edn"
+         :actual-red {:tests 21 :passed 13 :failed 8 :exit 1}
+         :red-model-sha256 "02a6fa878bee1d535631fe936cb8609bdf14dedc54dcb21f44d5069854ab3bdb"
+         :red-tests-sha256 "5cff63a1766e4c938d6465702c245cd720c8c896aec5aac372d96eee4c9cee57"}
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :owned-source {:path "layers/agent-sandbox/oikos-owner-authority.el"
+                :sha256 "5ef315f4176d67b415a283635574fc15be36232a363c83f60e32c77abcff073d"}
+ :red-source-archive {:path "/tmp/opencode/oikos-s4a-green-core-MzCLF6ue/private.txt"
+                      :sha256 "02a6fa878bee1d535631fe936cb8609bdf14dedc54dcb21f44d5069854ab3bdb"
+                      :note "Private task-owned copy of exact pre-edit source; retained, not a Git artifact."}
+ :parallel-test-work {:path "tests/unit/oikos-owner-authority-test.el"
+                      :observed-at-finish-sha256 "a4e175bb791575b8b3ab14d7c55d0a344be8d3d6c2274f4719e1c39bc2deba01"
+                      :note "Changed concurrently by the separately assigned test author; this task did not edit or certify it. Re-pin after that author finishes before review or execution."}
+ :implementation ["Bounded iterative path-cycle check with depth, node and string limits runs before record access/copy/equality; closed event shapes and at most 64 events."
+                  "Existing transcript, binding and synthetic clock predicates support copied snapshots, record-derived deadlines, issued-at/lifetime rules, capped issue time and monotonic-deadline arithmetic."
+                  "Pure single-trace reducer distinguishes issued, consumed/pending-final and closed; records synthetic order/counts, invalidation, storage-unavailable, revoke, restart and ticket-loss outcomes."
+                  "Post-consume revoke yields already-consumed without closing pending final; final checks the supplied binding, fresh clock and gap sample before simulated counts."]
+ :static {:text-parentheses-and-strings :balanced
+          :limits "Text-only scanner and SHA-256; not Emacs reader, function execution, lint, typecheck or test."}
+ :preservation {:native-sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"
+                :limits "Only named native source was rehashed after edit; no whole-tree preservation claim."}
+ :limits ["No tests, Emacs, loading, byte compilation or model execution performed on this source; GREEN is a candidate label, not a result."
+          "All records, clocks, storage outcomes, orders and counts are synthetic; no identity, consent, durable storage, native operation or real policy is implemented."
+          "A pure supplied trace cannot prevent replay of an old entire trace across calls or establish concurrency, real clock behavior, process fencing or atomicity."
+          "Independent reviewer must assess both exact final files, nested-cycle/issue-time oracles and all semantic edge cases before a separately admitted bounded GREEN batch."]
+ :holds [:exact-source-review :test-author-final-pin :separately-admitted-green-batch :real-identity :human-consent :govone :durability :native-atomicity :real-effects :whole-s4a]
+ :execution {:emacs 0 :ert 0 :model-execution 0 :native-effects 0 :credential-reads 0 :network 0 :git-writes 0 :board 0 :ledger 0 :nested-agents 0}}

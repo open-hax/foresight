@@ -1,0 +1,33 @@
+{:review/id :s4a-bound-model-green-fix-review-v12
+ :date "2026-11-04"
+ :kind :independent-exact-source-fix-review
+ :authority :none
+ :verdict :one-isolated-26-test-green-attempt-eligible-after-parent-admission
+ :inputs [{:path "reviews/s4a-bound-model-green-source-fix-v11.edn" :sha256 "e1653f52ab2b844b34cfbbb7307115b8bd36d57848cff01fe8a233c30da285a8"}
+          {:path "reviews/s4a-bound-model-green-source-review-v10.edn" :sha256 "8667deab7e9eaf08742e4f51cf0403bec195dbc17a343d257f0fba22286879da"}]
+ :sources {:root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+           :model {:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5"}
+           :tests {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "2f9d17ff81802553ba88dc32e8ea662ff11d5c1552176ba09e108cb7422f36e8"}
+           :previous-model {:path "/tmp/opencode/oikos-s4a-v11-PoDYvwo8/model-prior.txt" :sha256 "5ef315f4176d67b415a283635574fc15be36232a363c83f60e32c77abcff073d"}
+           :previous-tests {:path "/tmp/opencode/oikos-s4a-v11-PoDYvwo8/tests-prior.txt" :sha256 "a4e175bb791575b8b3ab14d7c55d0a344be8d3d6c2274f4719e1c39bc2deba01"}
+           :native [{:path "layers/agent-sandbox/oikos-native.el" :sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"}
+                    {:path "tests/unit/oikos-native-test.el" :sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}]
+           :preservation "Read the changed reducer and new tests and compared complete files against hash-verified previous copies. Prior 24 test definitions remain textually unchanged; two tests are appended. Both named native files still match prior baseline. No claim about unrelated files."}
+ :dispositions
+ [{:id :f1-issue-only-result-contract :status :source-addressed-unrun :detail "model:416,460-462 returns top-level ok for a valid issue while preserving per-event issued. tests:539-550 asserts read/write issue state, phase, order, count and invalid-clock denial. Source reasoning only; no GREEN claim."}
+  {:id :f2-unvalidated-consumed-revoke-clock :status :source-addressed-unrun :detail "model:420-432 checks clock before consumed/revoked variants; a bad clock closes pending without ACK, accepted consumed/revoked clocks update the baseline, and valid already-consumed leaves pending intact. tests:552-591 covers nil, regressing and forward cases for both operations. The unavailable branch precedes clock checks and keeps unavailable sticky even for a malformed revoke sample, never acknowledging it; the existing storage tests cover unavailable with a valid sample, but a distinct invalid-clock-after-unavailable test remains a worthwhile future oracle. No real clock or owner guarantee."}]
+ :findings []
+ :static {:ert-definitions 26
+          :goldens [{:operation :replace :bytes 285 :sha256 "d602c5e910ea2fb67ae73845dcd57f1724ca22a144b84f3af8f7d5043fb8e69c" :matches-independent-assembly true}
+                    {:operation :read :bytes 291 :sha256 "5a7251b0f9d6159def0d755bb8fef0799ef351c86a346c07d59c5e2197d91c06" :matches-independent-assembly true}]
+          :limits "Python byte assembly/count and textual source inspection only; neither parses nor runs Elisp. The prior actual 21-test RED remains 13 passed/8 failed; none of its results is changed by this review."}
+ :batch {:status :eligible-only-after-parent-recorded-separate-admission
+         :expected-definitions 26
+         :binary {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+         :timeout {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}
+         :command "env -i HOME=/nonexistent XDG_CONFIG_HOME=/nonexistent XDG_CACHE_HOME=/nonexistent PATH=/usr/bin:/bin LC_ALL=C /usr/bin/timeout --signal=TERM --kill-after=5s 30s /snap/emacs/4391/usr/bin/emacs-31.1 -Q --batch --load /home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/layers/agent-sandbox/oikos-owner-authority.el --load /home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-owner-authority-test.el -f ert-run-tests-batch-and-exit"
+         :conditions "Verify actual model/test/native/binary/timeout hashes before and after one invocation, record exact source copies and a separate parent admission. Use fresh private task-owned cwd, 30s timeout plus 5s kill grace, 40s parent guard, 25 CPU seconds, 1073741824-byte address space, 1048576 bytes per output file and zero core bytes. Capture full stdout/stderr, exit, all 26 named outcomes, skips and postflight; no silent retry, substitute binary, daemon, service, native load, user buffer, credentials, network, byte-compilation or installed-state change. Failure, timeout, missing tests or skips remain visible."
+         :interpretation "No test was run in this review; 26 passing tests must not be claimed without actual evidence. A later GREEN qualifies only the exercised synthetic assertions at the exact pins."}
+ :holds [:real-identity :human-resource-consent :govone-disclosure :durable-storage :native-atomicity :real-clock :cross-call-replay-prevention :live-effects :whole-s4a]
+ :execution {:emacs 0 :ert 0 :source-edits 0 :load 0 :runtime 0 :git 0 :board 0 :ledger 0 :network 0 :credentials 0 :nested-agents 0
+             :only-artifact "reviews/s4a-bound-model-green-fix-review-v12.edn"}}

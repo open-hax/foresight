@@ -1,0 +1,12 @@
+{:decision/id :public-dependency-installation-authorization
+ :date "2026-11-04"
+ :source :explicit-current-user-message
+ :user-message "You can install dependencies man"
+ :effect "Install public dependencies needed for the active Oikos program without further routine permission questions. Prefer pinned, task-owned installations and retain dependency bytes, provenance and checksums. Prior no-install restrictions do not by themselves block this necessary dependency work."
+ :implementation "The Axxium lane was admitted to a new private cache capped at 64 MiB and 10000 entries for the required pinned pure dependency closure. Existing GovOne and typed caches and their owner manifests are not overwritten or silently enlarged."
+ :unchanged ["No provider/cloud compute spending, private input or credential access."
+             "No installed Oikos generation promotion, service deployment or operator desktop capture."
+             "No repeat of consumed OCR starts or other one-shot runs."
+             "No automatic scratch, retained artifact or cache deletion."
+             "Downloading dependencies does not qualify their runtime behavior, the source closure, application tests, model execution or a task's completion."]
+ :custody "This records the new authorization without rewriting historical permits or pretending earlier downloads or runs occurred under it."}

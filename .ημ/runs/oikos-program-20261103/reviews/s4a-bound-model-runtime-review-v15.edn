@@ -1,0 +1,51 @@
+{:review/id :s4a-bound-model-runtime-review-v15
+ :date "2026-11-04"
+ :kind :independent-postexecution-review
+ :authority :none
+ :verdict :bounded-pure-composition-assertions-qualified
+ :inputs {:permit {:path "permits/s4a-isolated-bound-model-green-v5.edn" :sha256 "e375cd790d2fda4d4defd9cc6a3880ccbf765cf627a2150fa2589ff8467d7989"}
+          :prior-review {:path "reviews/s4a-bound-model-fixture-fix-review-v14.edn" :sha256 "f50f174842b1ea23a403098a2b03886798a6b8126e950b824f4e3be393ec9b60"}
+          :evidence-root "/tmp/opencode/oikos-s4a-bound-green-v5-27f838b5-bd14-484c-9c3d-f7661720053f"
+          :evidence [{:path "result.json" :sha256 "5c05e7d24f45ddcd5b77289c74f4b3d3725f5ccf82c4f43db7678a7c6a983a5d"}
+                     {:path "stderr" :sha256 "6e219f03ce22b5c1f0cd2c9ee2c04ccbeae96a9d9b452d48929b04d98b2fc697"}
+                     {:path "stdout" :sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+                     {:path "model-source.el.txt" :sha256 "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5"}
+                     {:path "test-source.el.txt" :sha256 "34a2369632b26b7b14ce7fc09b1d8208cf7baaeff76030dbec7590834e5144d9"}]}
+ :pins [{:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/layers/agent-sandbox/oikos-owner-authority.el" :sha256 "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5"}
+        {:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-owner-authority-test.el" :sha256 "34a2369632b26b7b14ce7fc09b1d8208cf7baaeff76030dbec7590834e5144d9"}
+        {:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/layers/agent-sandbox/oikos-native.el" :sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"}
+        {:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-native-test.el" :sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}
+        {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+        {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}]
+ :pin-disposition "Current six hashes match permit, result pins and prior review; retained model/test copies match current hashes. result.json reports all postflight pins matched. The two named native files match prior baseline; other worktree contents are not assessed. The reviewer did not directly observe process execution, preflight or OS resource enforcement."
+ :result {:expected 27 :selected 27 :passed 27 :failed 0 :skipped 0 :unexpected 0 :exit 0
+          :basis "stderr lists all 27 distinct tests as passed and summary 27 expected/0 unexpected; zero skips follows from 27 named passes. result.json reports exit 0 and postflight; stdout is empty."
+          :tests ["oikos-owner-model-binding-extra-negatives" "oikos-owner-model-binding-swaps"
+                  "oikos-owner-model-clock-elapsed-continuity" "oikos-owner-model-clock-faults"
+                  "oikos-owner-model-closed-inputs" "oikos-owner-model-composed-each-deadline-red"
+                  "oikos-owner-model-composed-fixture-cell-isolation" "oikos-owner-model-composed-identical-invalid-issue-records"
+                  "oikos-owner-model-composed-issue-boundaries-red" "oikos-owner-model-composed-issue-only-contract"
+                  "oikos-owner-model-composed-issued-at-lifetime-red" "oikos-owner-model-composed-nested-cycle-phase-bounds"
+                  "oikos-owner-model-composed-order-and-cancellation-red" "oikos-owner-model-composed-positive-and-replay-red"
+                  "oikos-owner-model-composed-post-consume-deadlines-red" "oikos-owner-model-composed-revoke-clock-order"
+                  "oikos-owner-model-composed-storage-and-closed-outcomes" "oikos-owner-model-composed-storage-unavailable-red"
+                  "oikos-owner-model-composed-swaps-red" "oikos-owner-model-composed-totality-red"
+                  "oikos-owner-model-fixture-isolation-and-positives" "oikos-owner-model-golden-transcript"
+                  "oikos-owner-model-phases-and-order" "oikos-owner-model-read-golden"
+                  "oikos-owner-model-record-totality" "oikos-owner-model-revoke-shapes"
+                  "oikos-owner-model-translated-prior-overflow-red"]}
+ :assertion-scope [{:case :positive-composition :evidence "Retained test-source:266-281 asserts read/write success, exact synthetic grant/order/outcomes, bounded counts and same-trace replay denial. The named test passed; replay of a whole trace across independent calls is not prevented."}
+                   {:case :fixture-isolation :evidence "test-source:211-224,240-257 copies event cons cells, mutates one phase and asserts intact other phases and positive separate traces for both operations. The named test passed; this supports the fixture-sharing diagnosis but does not establish it was the sole cause of all v4 failures."}
+                   {:case :boundaries :evidence "Named passing tests exercise selected record-derived deadlines and issue-time boundaries, equal-invalid records across phases, order/cancellation, closed storage cases, nested cycles, bounded trace, swaps, clock ordering and two golden transcripts. Inputs and outcomes are synthetic, and the matrix is finite, not proof of every input or interleaving."}]
+ :history {:prior-v4 "The earlier separately admitted 26-test run remains FAILED: 21 passed, 5 failed, exit 1; its evidence and permit are unchanged. A later pass does not rewrite it or prove a unique root cause."
+           :prior-red "The earlier 21-test intended RED remains 13 passed, 8 failed, exit 1."}
+ :qualification {:scope "Accept only exercised bounded pure single-grant composition assertions at these exact source/binary pins. No automatic carryover to later source hashes."
+                 :commit "Parent may later perform a local commit scoped explicitly to the two dormant model/test files, subject to its own repository and preservation checks; this review neither stages nor commits and does not authorize unrelated changes or publication."}
+ :next-real-owner-adapter-prerequisites {:identity "Independently identify and review exact Axxium credential-specific verification, lifecycle/invalidation paths, trusted host/channel binding and all bypass/failure/recovery semantics; synthetic identity records are not proofs."
+  :consent "Select the actual Emacs resource owner's authenticated human approval, exact resource object custody and independently revocable request-bound consent; no client, Sol role, fixture or callback confers it."
+  :ordering-and-storage "Prove native owner exclusion and indivisible final check with actual mutation/first trusted release, qualified shared ordering for relevant identity and policy changes, and an existing owner-approved fenced crash-consistent store with anti-rollback/recovery where durability is claimed. Callback success and in-memory state do not suffice."
+  :disclosure-and-time "Independently qualify actual destination-bound GovOne release integration and an appropriate real clock/expiry-to-effect boundary; synthetic ideal-rate samples or policy labels are not such proof."
+  :gates "Name and review exact owner/source paths and preserved state; separately record bounded admissions for source work, isolated verification and any later effects, with real human approval as applicable. Keep existing user buffers, installed/live Emacs and i3 outside this result."}
+ :holds [:real-identity :human-resource-consent :govone-disclosure :real-clock :durable-storage :cross-call-replay-prevention :native-atomicity :actual-effects :installed-state :whole-s4a]
+ :execution {:emacs 0 :ert 0 :source-edits 0 :git 0 :board 0 :ledger 0 :network 0 :credentials 0 :nested-agents 0
+             :only-artifact "reviews/s4a-bound-model-runtime-review-v15.edn"}}

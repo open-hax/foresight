@@ -1,0 +1,23 @@
+{:permit/id :s2b-native-fixture-source-v3
+ :kind :bounded-private-development-fixture-source-only
+ :source :recommended-path-standing-authorization
+ :date "2026-11-04"
+ :root "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b"
+ :base "a5c4008e92e3134afd77c058851aea2d2ce33241"
+ :prerequisite "reviews/s2b-exact-offline-p1-runtime-review-v13.edn qualifies exact offline P1 only. Its source ref is published separately; no native or owner authority transfers."
+ :plan {:path "reviews/s2b-nested-i3-qualification-plan-v3.edn" :sha256 "94441efe8156468582b60d435fc75bf672fcd5258bae0fdfc5658e82c011b0eb"}
+ :review {:path "reviews/s2b-nested-i3-plan-final-review-v4.edn" :sha256 "b7f192bac64d704a7f269d2229bb627b603cdfe0b88f9d7acdc2e8011ace54b6"}
+ :preflight "Coordinator observed exact P1 HEAD, no tracked diff, absence of all five proposed additions, and independently compared the four existing owner fixture/wire/desktop/safe-reference SHA-256 values named by the review. Preserve all existing accepted paths, modes, P1 source and existing gates."
+ :add-only ["src/oikos/infra/i3_fixture_transport.cljs"
+            "test/oikos/i3_native_fixture.cljs"
+            "test/oikos/i3_native_oracle.cljs"
+            "scripts/test_i3_native_fixture.clj"
+            "docs/contracts/i3-native-fixture-v1.edn"]
+ :bootstrap-boundary "The user-requested S2B program includes a separately governed, synthetic agent-owned native fixture beyond the original bootstrap. This permit admits only inert source definitions and explicit opt-in fixture tooling, not live workstation i3/Emacs effects, installed tools, public APIs, persistence or service startup. Do not register native tests in the ordinary bootstrap test entry point or add eager process/socket/owner calls. The bootstrap prohibition remains operative for actual effects until a later exact execution permit."
+ :owner-boundary "Reuse the existing S2A fixture API as a separate private fixture caller. No P1 caller trust flag or fixture lease becomes real admission. read-head! and replay! are not atomic together; capture proposed immutable event/expected head and require independently evidenced exclusive ownership and stable actual owner history before any future qualification. No new ledger or authority implementation."
+ :source-verification "Static syntax/lint only in this source phase. Data-only unit tests may be authored, but execution awaits exact-source review and separately scoped unit admission. No native process, window producer, socket connection, current desktop environment, Clio fixture creation/append, package installation or raw history access follows."
+ :held [:native-execution :private-owner-append :actual-xmessage-or-xvfb-launch :operator-resources
+        :real-i3-currentness :same-uid-isolation-proof :operation-completion-proof
+        :same-state-exclusion-proof :native-xid-reuse :installed-generation :whole-s2b]
+ :runtime "The proposed120-second/512MiB/24PID and other native limits are not yet qualified. A later explicit execution permit must bind actual control feasibility, source/library/interpreter pins, fixed owned stimuli, private owner exception and preservation evidence; no automatic attempt or resource escalation."
+ :preservation "All old P1 source and failed/passing evidence remain retained. No edits to the63 accepted base paths or original eight P1 additions; no cleanup, staging, commit, push, board or provenance-ledger write is delegated to source workers."}

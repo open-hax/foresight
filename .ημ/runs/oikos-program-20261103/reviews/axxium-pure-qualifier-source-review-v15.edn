@@ -1,0 +1,37 @@
+{:report/id :oikos/axxium-pure-qualifier-source-review-v15
+ :verdict :source-review-failed-revision-required
+ :scope :independent-source-only
+ :inputs {:qualifier {:path "/tmp/opencode/oikos-axxium-pure-source-ad23630d-3c7c-4ecb-ba1e-65ebbd7b7edd/qualifier.cljs" :sha256 "f57b8e48d9599acda800fa90d2e8dc8a5436b9761ee28d8f5344cbf962f0e9c6"}
+          :fixtures {:path "/tmp/opencode/oikos-axxium-pure-source-ad23630d-3c7c-4ecb-ba1e-65ebbd7b7edd/fixtures_test.cljs" :sha256 "e023e24d05d0495f8e376ef96c88b6e431232b1d2ba7276b965a7c3a7b94ee80"}
+          :admission "axxium-synthetic-qualifier-plan-review-v12.edn"
+          :comparison "axxium-current-drive-source-comparison-v11.edn"
+          :closure "axxium-nbb-static-closure-inventory-v14.edn"
+          :requested-pure-qualifier-source-v14 :not-found-in-run-tree}
+ :source-observations ["Independently hashed the two candidate files and the eight inspected old owner files; selected seven owner hashes match v12/v11, and did.cljc matches v12 old-transitive hash. Current-head equivalence relies on v11 for its selected files; current transitive equivalence was not independently established."
+                       "The synthetic envelopes have the owner EventContract keys, UUID-shaped IDs, positive stream sequences, valid-shaped did:web actors and inst literals; their resource bodies have the owner resource shape. Appendability checks the envelope and ordering, not resource body validity or historical policy authorization."
+                       "The qualifier rejects empty or non-newline-terminated input before import; invokes owner importer, incremental appendability, fold, resource validation, owner accessor, exact scope and owner-bound authenticated decryption. Blank newline-terminated input is rejected after import as no events. A final newline is a framing condition, not proof that the final EDN is valid."
+                       "The selected owner token-crypto namespace imports node:fs and node:crypto at namespace load; fs read is defined but not called by the qualifier. The fixture namespace has a top-level println which calls run-fixtures and seal, including randomBytes, upon namespace load. No conclusion about actual NBB module resolution or loadability follows from source alone."]
+ :findings [{:id :fixture-process-status :severity :high
+             :where "fixtures_test.cljs:20-22,48-52"
+             :detail "Every failed assertion or caught exception prints :fail but the script does not set a nonzero exit status. A launcher that gates only on process exit can admit a failing or unloadable fixture; namespace load itself also executes the suite and prints, contrary to treating it as an inert import."
+             :action "Use an explicitly invoked fixed entry point with no top-level test execution; make the reviewed launcher enforce an exact single :pass output and successful exit, or set a nonzero exit on failure. Test the launcher's failure behavior before relying on it."}
+            {:id :malformed-and-boundary-coverage :severity :high
+             :where "fixtures_test.cljs:29-47; qualifier.cljs:15-25"
+             :detail "The suite checks only one incomplete tail, duplicates, scope, key and ciphertext mutations. It does not exercise newline-terminated malformed EDN, trailing forms, blank-only input, invalid envelopes or causes/sequence gaps, input type and byte/line/event limits, oversized individual lines, or adversarial nesting. No tests establish rejection and bounded handling of these inputs."
+             :action "Add individually identified synthetic assertions for malformed complete lines and trailing forms, importer exceptions, invalid event envelopes/causes/sequence, empty/blank input and each boundary just below/above limits, plus deep/nested hostile input under an externally enforced time and memory limit; verify the importer is not called for each pre-import refusal."}
+            {:id :bounded-totality :severity :high
+             :where "qualifier.cljs:17-29; axxium/law/event.cljc:37-49; clio/shape/edn.cljc:24-37"
+             :detail "Byte and line limits do not establish a practical total time or memory bound: each appendable? scans the growing prefix to build IDs and count stream events, yielding quadratic work up to 10000 lines, and the owner parser receives arbitrarily deep forms within 65536 bytes. A catch does not bound CPU, stack exhaustion or process termination."
+             :action "Choose and justify conservative fixed byte, line and event caps against the owner algorithms and parser; add an independently enforced process deadline and memory ceiling in the separately reviewed containment launcher. Do not replace owner parsing or appendability with a parallel engine."}
+            {:id :selection-and-policy-evidence :severity :medium
+             :where "qualifier.cljs:32-47; fixtures_test.cljs:25-27,36-46; axxium/domain/resource.cljc:57-67,74-85"
+             :detail "Selection checks only the final projection; repeated registration of the same credential ID overwrites prior values, so one remaining candidate does not prove a unique historical credential, actor ownership, policy decision, lineage, or Google grant. e2 and the wrong-AAD fixture deliberately use an event actor different from its body owner: valid envelope does not make it a lawful registration through resource/register. The wrong-AAD test is useful crypto evidence only, not a valid policy-flow fixture."
+             :action "Add a positive owner-generated decision/effect fixture using the actual owner API where feasible, plus same-ID replacement and actor/body mismatch cases, and explicitly label projection/decryption results as non-authoritative about historical uniqueness, policy, lineage or provider grant. Keep policy validation out of scope unless separately admitted."}
+            {:id :test-diagnostics-and-crypto-coverage :severity :medium
+             :where "fixtures_test.cljs:28-49; axxium/extern/token_crypto.cljs:15-20,33-43"
+             :detail "A single aggregate boolean and catch-all :fail conceal which case failed, including setup or dependency errors; the test does not explicitly isolate wrong AAD from altered owner/registration semantics, or cover no credential, valid noncredential alongside credential, empty authenticated plaintext, malformed input and noncanonical base64. Owner key-from-base64 relies on Node's permissive decoder and only checks decoded length; it does not establish canonical encoding."
+             :action "Use fixed enumerated case IDs without payloads or exception details, independently exercise owner open-sealed with wrong AAD, and test the missing cases. Document that key acceptance is the owner's decoded-length contract, not canonical-base64 validation; never report decryption alone as a real credential grant."}]
+ :gates {:synthetic-execution :held
+         :reason "Runtime NBB/Clio/Edamame compatibility, full pinned loaded closure and independently reviewed external containment remain unresolved; source review is not execution admission. Locate and review the specifically requested pure-qualifier-source-v14 or correct its reference before relying on its conditions."
+         :real-credential-local-grant-google-backup :entirely-held}
+ :boundary {:runtime-import-execution false :build-dependency-resolution false :network false :credential-key-ledger-private-inventory-payload-read false :owner-edit false :git-board-ledger-write false :nested-agents false}}

@@ -1,0 +1,11 @@
+{:custody/id :s4a-red-review-v8-syntax-repair-v1
+ :kind :coordinator-lossless-key-disambiguation
+ :original {:path "reviews/s4a-bound-model-red-runtime-review-v8.edn"
+            :sha256 "15dddac96e448975c8881e1bcf129a51163ebaf56b6d98105ee865c333520de8"
+            :status :duplicate-map-keys-retained-unchanged :checkpoint-inclusion false}
+ :raw-archive {:path "custody/s4a-red-review-v8.original.edn.txt"
+               :sha256 "15dddac96e448975c8881e1bcf129a51163ebaf56b6d98105ee865c333520de8"}
+ :successor "reviews/s4a-bound-model-red-runtime-review-v8-syntax-custody.edn"
+ :change "Rename only the numeric :passed13 and :failed8 keys to :passed-count and :failed-count. The original later :passed and :failed vectors retain their names and exact contents. No counts, vectors, verdict, pins, evidence references or other bytes change."
+ :interpretation "Coordinator transport/syntax repair, not a new independent review or any execution/admission. Original and raw text remain preserved. Historical references are resolved by this custody mapping rather than pretending the original was strict valid EDN."
+ :checkpoint "The valid successor and exact raw text may be frozen; exclude the malformed .edn original just as the already-preserved malformed GovOne review is excluded. No deletion or rewrite of historical originals."}

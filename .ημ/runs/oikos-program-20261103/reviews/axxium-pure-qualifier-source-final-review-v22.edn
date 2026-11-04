@@ -1,0 +1,30 @@
+{:report/id :oikos/axxium-pure-qualifier-source-final-review-v22
+ :verdict :eligible-synthetic-source-candidate
+ :scope :independent-source-only
+ :candidate-pins {:qualifier {:path "/tmp/opencode/oikos-axxium-pure-source-ad23630d-3c7c-4ecb-ba1e-65ebbd7b7edd/qualifier.cljs" :sha256 "b476795e4ad4a2e77d21bff8aace0d4f34393a18eea28787ae9adf83b1477303"}
+                  :fixtures {:path "/tmp/opencode/oikos-axxium-pure-source-ad23630d-3c7c-4ecb-ba1e-65ebbd7b7edd/fixtures_test.cljs" :sha256 "10593a062b06b2c21abd574f8cf555cdb250d6193d1a4a89b2c21406e22f3adb"}}
+ :bindings {:source-fix "reviews/axxium-pure-qualifier-source-fix-v21.edn"
+            :v20-sha256 "e7404daf8fb17174d14cb0ce6d4baad1918f527bf3622616f3fe9df37d5edb00"
+            :v15-sha256 "108c93c33b3c1d1333cb1dd80b704beaf4b160f6f63a6a6dda46931c9baa64e1"
+            :preserved-v16-fixtures-sha256 "f70e594bc16564c9d11cbe3fa85c45fc3daa79966d3906f103b19c81de028c92"
+            :missing-v14 "Not invented or relied upon."}
+ :correction {:supersedes "v20 schema-and-source-checks statement claiming resource/local-file returns an unqualified :file kind and fails ResourceContract"
+              :owner-source "src/cljs/axxium/domain/resource.cljc"
+              :sha256 "35e06ab88f837bbdc835f2254eaa1bc3d71f0534b89741f4891b39fcf7222eb9"
+              :reason "That observation was incorrect: kind constructs (keyword \"resource\" (name k)), and local-file calls (kind :file), yielding :resource/file. Its supplied synthetic owner, nonempty id, store, location and metadata are consistent with the inspected ResourceContract. The new :qualified-noncredential case asserts owner validation. This source conclusion does not establish runtime execution or policy admission. Preserve v20 as historical evidence; use this correction."}
+ :v20-disposition [{:id :lost-end-to-end-negative-coverage :status :source-addressed
+                    :detail "The revised fixed-ID cases include a positive qualifier control and two credentials, wrong scope, wrong key, owner/AAD mismatch, malformed and absent sealed values, invalid owner and incorrect resource ID through the qualifier. Direct crypto checks remain separate. Source inspection finds the selected fields and expected branches consistent with owner resource, projection and crypto APIs; results remain unrun."}
+                   {:id :prior-review-digest-mismatch :status :addressed
+                    :detail "V21 binds the independently hashed actual v15 digest, preserves v16 and binds the observed v20 digest. Preserved v16 fixture source also matches its stated hash."}
+                   {:id :negative-oracle-ambiguity :status :source-addressed-with-runtime-gate
+                    :detail "parsed-outcome? wraps and calls the original importer, observes entry and successful return, and adds an adjacent valid-form control. Malformed and trailing-form cases require entry without return; caught case exceptions become :fail. Successful end-to-end cases are retained. Namespace resolution, actual parser behavior and the deep-vector expected outcome remain untested."}]
+ :confirmed-source-findings []
+ :source-limits ["Fixture namespace defines an explicit main but does not invoke it at top level. Per-case checks and setup exceptions report fixed statuses and set a nonzero exit on failure; the launcher must verify every expected ID exactly once, exact permitted status output and process exit."
+                 "The candidate uses owner parsing, appendability, fold, resource and crypto APIs; caps are 16384 input bytes, 4096 line bytes, 32 split lines and 4096 key-text bytes. At-boundary tests use an importer stub and do not prove an actual 32-event round trip. Byte and event caps do not prove parser stack, CPU or memory safety."
+                 "Projection-decryptable establishes neither historical uniqueness, ownership, authorization, lineage nor a Google grant. Fixture actor/body mismatch and same-ID replacement are projection-only; successful crypto checks do not authorize real access."
+                 "Owner's own Clio source is the intended classpath source per v19; the public dependency manifest is not proof of actual NBB namespace precedence, Edamame/Malli compatibility or a complete runtime closure."]
+ :execution-gates {:status :held
+                   :requirements ["A fixed launcher and external containment guard do not yet exist as reviewed runnable artifacts. Implement and independently review them before any synthetic execution, including explicit main invocation, exact output/exit enforcement, deadline, memory limit and handling of setup/load failure."
+                                  "Pin and verify actual NBB, owner-first namespace precedence, public dependency/runtime closure, controlled working directory and environment, and no automatic resolution or downloads. Enforce no network, ambient secrets, private input access or unapproved writes."
+                                  "Run only synthetic fixtures after the separate gate is satisfied; report actual case results and failures without payloads. Real credentials, local grant, Google and backup access are not prerequisites and remain entirely held."]}
+ :boundary {:runtime-import-execution false :test-probe-build false :nbb-go-jvm false :network false :secret-ledger-key-private-inventory-read false :owner-edit false :git-board-ledger-write false :nested-agents false}}

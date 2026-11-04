@@ -1,0 +1,59 @@
+"""Source candidate; no runtime admission. Inert fixture precedes GO."""
+import json
+import os
+import re
+import sys
+import time
+
+
+def identity(pid):
+    with open('/proc/%d/stat' % pid, encoding='ascii') as f:
+        text = f.read()
+    fields = text[text.rfind(')') + 2:].split()
+    with open('/proc/%d/cgroup' % pid, encoding='ascii') as f:
+        cgroup = f.read().strip()
+    return {'pid': pid, 'pgid': int(fields[2]), 'sid': int(fields[3]),
+            'start_ticks': int(fields[19]), 'cgroup': cgroup}
+
+
+def prepare_descendant():
+    read_fd, write_fd = os.pipe()
+    child = os.fork()
+    if child == 0:
+        os.close(read_fd)
+        os.setsid()
+        payload = json.dumps(identity(os.getpid()), sort_keys=True).encode() + b'\n'
+        os.write(write_fd, payload)
+        os.close(write_fd)
+        while True:
+            time.sleep(30)
+    os.close(write_fd)
+    raw = b''
+    while not raw.endswith(b'\n') and len(raw) < 4096:
+        part = os.read(read_fd, 4096 - len(raw))
+        if not part:
+            break
+        raw += part
+    os.close(read_fd)
+    descendant = json.loads(raw)
+    main = identity(os.getpid())
+    if descendant['pid'] != child or descendant['sid'] != child or descendant['pgid'] != child or descendant['cgroup'] != main['cgroup']:
+        raise RuntimeError('descendant identity mismatch')
+    return main, descendant
+
+
+def main():
+    if len(sys.argv) != 2 or not re.fullmatch('[0-9a-f]{64}', sys.argv[1]):
+        raise SystemExit('invalid nonce')
+    main_id, descendant = prepare_descendant()
+    print(json.dumps({'phase': 'ready', 'nonce': sys.argv[1], 'main': main_id,
+                      'descendant': descendant}, sort_keys=True), flush=True)
+    if sys.stdin.buffer.readline(80) != ('GO ' + sys.argv[1] + '\n').encode():
+        raise SystemExit('GO absent or malformed')
+    # Deliberately incomplete: no runner exec until the launch-time gate and
+    # fixed authenticated descriptor protocol have been independently reviewed.
+    raise SystemExit('candidate incomplete: runner release not implemented')
+
+
+if __name__ == '__main__':
+    main()

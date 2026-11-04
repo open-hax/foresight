@@ -1,0 +1,15 @@
+{:report/id :s2b-native-oracle-source-fix-v7
+ :status :source-only-unreviewed
+ :source "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b/test/oikos/i3_native_oracle.cljs"
+ :old-sha256 "53a8b152eed12db78fbc6ec0a814fc6131dc6f4587e24a7552fe0c87953349f7"
+ :archive "custody/s2b-native-oracle-oldsourceprivate.txt"
+ :archive-sha256 "53a8b152eed12db78fbc6ec0a814fc6131dc6f4587e24a7552fe0c87953349f7"
+ :new-sha256 "ef73ee33ba2c2bc2f0605347b908ae811b8d5138cd2180df3211b849c7fb4ed3"
+ :finding :native-json-integer-rounding
+ :numeric-domain "Before Number conversion, classify every valid JSON numeric token for mathematical decimal integrality using significand, fractional digit count, trailing zero count and a signed exponent clamped to 100000 after stripping leading zeros. Since the complete input is at most 65536 bytes, this clamp preserves the integrality decision. After conversion reject nonfinite values, reject any Number integer unless the original token is mathematically integral and its Number is safe, and reject mathematically integral tokens that converted to non-integers. Fractional tokens that remain finite non-integers remain accepted even if rounded; this is not exact decimal preservation for unused fractional fields. Nonzero underflow to signed zero and fractional rounding to any integer are rejected. Exact zero, including -0 and zero with arbitrarily large exponent, is permitted; existing field laws reject zero for XIDs. Nonzero overflow is rejected. Integer-valued decimal/exponent spellings are permitted when safe. Existing field-specific sign and range checks remain unchanged. Numeric restrictions apply globally, including ignored fields; relative to the previous scan this deliberately narrows only nonintegral tokens whose Number rounds or underflows to an integer. Thus ordinary finite fractional native fields such as percent remain accepted; no integer-only fixture grammar is introduced."
+ :limits {:utf8-bytes 65536 :json-values 4096 :json-nesting 32}
+ :regressions "Inert functions in the same file supply scanner-level cases for fractional rounding, unsafe integer, underflow, overflow, legal decimal exponent integer with ordinary native fields, and negative zero. They are not invoked at top level and were not executed."
+ :verification {:static-command "clj-kondo --cache false --config-dir /dev/null --lint /home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b/test/oikos/i3_native_oracle.cljs" :result "0 errors, 0 warnings" :runtime :not-run :tests :not-run :independent-review :pending}
+ :holds [:native-execution :private-owner-append :socket-integration :same-uid-isolation-proof :operation-completion-proof :same-state-exclusion-proof :native-xid-reuse :installed-generation :whole-s2b]
+ :nonclaims "No transport, collector, parser replacement, native resource, ownership, currentness or same-cut qualification. Other findings in review v6 remain outside this one-file intervention."
+ :not-performed [:imports :nbb :runtime :native :tree-fetch :socket :owner :git :board :ledger :network :credentials :nested-agents]}

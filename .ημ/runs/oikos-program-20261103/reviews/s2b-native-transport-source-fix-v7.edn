@@ -1,0 +1,16 @@
+{:report/id :s2b-native-transport-source-fix-v7
+ :kind :source-only-author-report
+ :source "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b/src/oikos/infra/i3_fixture_transport.cljs"
+ :old-sha256 "df12318c4a3206dcee76e024dd3d0c62d5a04c238ec20ef9feae69bd96e82ef0"
+ :archive "custody/s2b-native-transport-oldsourceprivate.txt"
+ :archive-sha256 "df12318c4a3206dcee76e024dd3d0c62d5a04c238ec20ef9feae69bd96e82ef0"
+ :new-sha256 "1d47fead70e89b3d9028b439fb7f7188d6fd61ac5d83412f0a1c07b9c4857bfb"
+ :archive-verification "Copied before editing; cmp confirmed identical bytes."
+ :matrix [{:case :json-sp-tab-cr-lf :expected :accept :status :inert-data-unrun}
+          {:case :json-nbsp :expected :reject :status :inert-data-unrun}
+          {:case :frame-65536-body-65522-fragmented-header-and-body :expected :accept :status :inert-data-unrun}
+          {:case :frame-65537-body-65523-fragmented-header-and-body :expected :reject :status :inert-data-unrun}]
+ :changes "Both reply recognizers use only JSON whitespace. Frame cap is 65536 including the 14-byte header; chunk and backlog limits derive from that cap. Closed keys and ASCII nonce rules remain. Regression cases are inert data."
+ :verification {:command "clj-kondo --lint /home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b/src/oikos/infra/i3_fixture_transport.cljs" :exit 0 :errors 0 :warnings 0}
+ :unrun [:imports :unit-tests :nbb :native :ipc :owner :network]
+ :scope "Source-only; no independent review, execution admission, socket implementation, or runtime permit claimed."}

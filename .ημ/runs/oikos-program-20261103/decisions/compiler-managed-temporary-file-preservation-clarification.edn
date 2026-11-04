@@ -1,0 +1,12 @@
+{:decision/id :compiler-managed-temporary-file-preservation-clarification
+ :date "2026-11-04"
+ :source :explicit-current-user-answer-via-question-tool
+ :question "One preservation-policy question remains before any Go compilation: may the compiler normally discard its own temporary files if we retain the exact inputs, binaries, logs and verification evidence? This would not authorize deleting your scratch directories or retained artifacts."
+ :answer "Allow compiler temp cleanup"
+ :effect "Ordinary compiler-managed temporary-file disposal is allowed within a separately qualified bounded build. Retain exact inputs, final binaries, logs and verification evidence. This clarifies that normal compiler-internal temporary lifecycle is not itself a demand to archive every intermediate before the compiler removes it."
+ :preserved ["No compilation or test is admitted by this clarification."
+             "No scratch-directory, worktree, retained cache, unique final output or retained evidence deletion is authorized."
+             "Final outputs and evidence must survive sandbox teardown and remain subject to the existing verified-backup-before-cleanup rule."
+             "No relaxation of zero-spend, private inputs, credentials, networking, kernel/resource enforcement, offline closure, source review or exact binary qualification."
+             "All earlier failed attempts and their evidence remain historical facts, not erased or backfilled."]
+ :next "Revise the compile preservation algorithm for normal intermediate disposal while guaranteeing durable retention of final artifacts; independently review source and controls before any separate compile permit."}

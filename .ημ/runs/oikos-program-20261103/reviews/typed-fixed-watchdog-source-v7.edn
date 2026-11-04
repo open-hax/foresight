@@ -1,0 +1,17 @@
+{:report/id :typed-fixed-watchdog-source-v7
+ :status :incomplete-no-go
+ :watchdog {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/typed-java-diagnostic-v2/watchdog.py"
+            :sha256 "3b6a2f54fbd7ede0ea32078601ff91089df5e67c92bd78d1e9cccaedf22418ae"
+            :description "Existing 22-line explicitly incomplete candidate remains unchanged. It is not the requested implementation and cannot issue GO."
+            :archive "/tmp/opencode/oikos-typed-seq-logs-a2698786/typed-java-diagnostic-v2/watchdog-pre-v7.txt"
+            :archive-sha256 "3b6a2f54fbd7ede0ea32078601ff91089df5e67c92bd78d1e9cccaedf22418ae"}
+ :other-observed-sha256 {:controller "46049afd0447cc9f6559831a1c5a9b577c4371ff007fc1afd98dc07223d1befd"
+                         :bootstrap "d596bc8de107cb75cf5e95ee3b8de42c868b593885c482691f7743e95a39c793"
+                         :runner "d3b0a60ba6a09b21f1ba679ac9abdae182f75ce8c1e518dbdc3561112596c4fc"
+                         :inventory "27a8e49f81d021cc0bb43edc0ec5b41d416f29470f6646b4eb564235a6aef14b"}
+ :unresolved ["Watchdog manager ownership, bounded connection and StartTransientUnit, manager and kernel checks, descriptor retention and transfer, controller supervision, GO authorization, evidence capture, deadlines and cleanup observation are not implemented."
+              "The existing controller explicitly reports itself incomplete; no agreed READY/RELEASE keys or FD ordering have been implemented or independently reviewed. Do not infer a protocol from this report."
+              "The current inventory and host inputs have not been audited for complete effective inputs, source pins, host libraries, owner state or graph closure in this work. A detached permit was neither created nor checked."
+              "The larger profile and Java remain unqualified; exact source review, independent qualification and a separate one-shot admission remain required."]
+ :performed "Read the cited plans, prior neutral implementation and current role source; copied existing watchdog bytes to non-executable text and computed file digests. No authored executable was run, no runtime or probe performed, and no other role or inventory changed."
+ :next "Complete the fixed watchdog implementation and specify its actual wire format before independent source review; retain all execution holds."}

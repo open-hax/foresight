@@ -1,0 +1,57 @@
+{:review/id :s1b-inert-edn-red-review-v4
+ :date "2026-11-04"
+ :kind :independent-source-and-retained-red-review
+ :verdict :actual-positive-red-established-green-implementation-may-proceed-conditionally
+ :decision "The existing positive RED is genuine and no actual source defect blocking RED was found. Pure GREEN implementation may proceed under the existing source permit, but the suite is incomplete: strengthen the tests below before any GREEN qualification. This verdict supersedes the candidate's proposed green hold only as to implementation, not qualification, and does not issue an additional permit. Parent owns the decision and exact-source audit."
+ :scope {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b"
+         :base-reported "62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+         :tree-reported "8ed3ef2854d5b11522338e32e7e177dae893fc78"
+         :base-note "Base and tree attributed to candidate and permit, not independently inspected here. Status observed exactly the three authorized paths; status does not establish HEAD or absence of ignored files."
+         :files {"src/oikos/law/services_inert_edn.cljc" "9ef18fb51e5785c5022faca99f72e9416447ddd5f211ad97b903b3d40b2995b1"
+                 "test/oikos/law/services_inert_edn_test.cljc" "6d2b506c26996bc412fbae5997bda5a355c3d5ae72c8a3b9290f976287d5c0d5"
+                 "test/oikos/test_runner.cljc" "3e52f073a6536ee627b1895ddc17168d255cbaa4cab00ed26e0e51b8591d7ffc"}}
+ :inputs {:candidate ["reviews/s1b-inert-edn-red-candidate-v3.edn" "cd1058b95983796d2673e6767dde4f0b85fe52b46d6a49ce1b7dcd029e93e1a6"]
+          :plan ["reviews/s1b-inert-edn-adapter-source-plan-v2.edn" "348ea9fd5be0b5dfa8e6283a284a34ec2ca25872a5bf621ed671f5c711bee263"]
+          :plan-review ["reviews/s1b-inert-edn-adapter-plan-fix-review-v2.edn" "7e3286c38c277f0d4dbc87739ec8044031a824ea3afe0cc9799025adfbd584f8"]
+          :permit ["permits/s1b-inert-edn-source-v1.edn" "a2d04f4471b0489dcbd03879d458976eb3578761902f39d9725bc27fdd353aff"]}
+ :retained-evidence {:directory "/tmp/opencode/s1b-red-candidate-v3"
+                     :sha256 {"baseline-test.stdout" "51c8ed4ff33217b78c3daf6cd9d36bf854940f233ca18c52daa74b3071f6200c"
+                              "baseline-lint.stdout" "eadaadb6d1910784eb6c88c781a6c0abd517a6f6de86decaba0202e95781f09b"
+                              "red-bb.stdout" "f1a59d2bc3f83bf765facc81111f05b6c3c4f56d1ce207ea77dacbc768625cd7"
+                              "red-nbb.stdout" "c2e46fd967173f463bdd98c1d275ea2665f927d0afe155e1b596e4fc42e251ed"
+                              "red-lint.stdout" "eca0052838b17ad3fbb0ae0b214cc19ad0f099d0b834d634e8b5b403f155aa06"
+                              "red-bb.argv" "7046d42c524af0cf037a63f2ded7360c11dd4b1cf0eecd9ba96eb63181bc0edb"
+                              "red-nbb.argv" "b46a07f218ec178b5cfc91129a1535447e6f7b18bfb82cd7562e4f236ce059b5"
+                              "red-lint.argv" "2a29ba9b41c3427fb8cc95359db12d7ff4ea0897d0c7bdb3da4fc351363b3b41"
+                              "baseline-input-before.sha256" "e80633ce3065ac3ec8bd072126583400ef7bd9bcde8aa27006b1cd541d7e3b8f"
+                              "red-bb-before.sha256" "8e1ebd39dc201ccf5a1f7878ff6bf8c619ac2903e9ce08d8433caed7c32b9401"
+                              "original-test-runner.cljc" "61f0eedbc138c286df63d1ec8bbfef74560631fefe9a97ff029a767bff2c4b54"
+                              "zero-exit-file" "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+                              "one-exit-file" "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+                              "empty-stderr" "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+                     :checks "All baseline before/after manifest files share the listed baseline manifest hash; all three RED before/after manifests share the listed RED manifest hash. Baseline and RED stderr files are empty; baseline test/lint and RED lint exit 0; RED BB/NBB exit 1. The baseline argv is attributed to candidate; no baseline argv file is retained. Manifest comparisons establish only the files listed, not whole-worktree immutability."
+                     :baseline {:bb [18 286 0 0] :nbb [40 546 0 0] :eval [9 39 0 0] :lint "0 errors, 0 warnings"}
+                     :red {:bb [23 395 9 0] :nbb [45 655 9 0] :lint "0 errors, 0 warnings"}
+                     :tuple "tests assertions failures errors"
+                     :interpretation "Both raw logs identify nine failing positive assertions: two boundary render checks, five Unicode success/byte/digest assertions, and independent golden render and validate. The exact source returns fixed :not-implemented errors from both entry points. Failures are not missing namespace or execution errors. Most negative tests pass vacuously on this stub; they prove nothing about later implementation. Existing tests in RED ran as shown, but only the separate retained baseline includes eval."}
+ :required-test-strengthening [{:id :canonical-grammar-with-consistent-metadata
+   :finding "Tests have no grammar cases and invalid byte mutations retain stale counts/hashes, so metadata-only rejection can hide an accepting parser."
+   :fix "Start from independently accepted fixture; mutate each payload or descriptor separately, update byte count and digest for the changed bytes, and require denial for duplicate/extra/missing keys, wrong schema/type, tags, metadata, reader-eval, second form, BOM, wrong LF, slash escape, noncanonical escapes/whitespace and trailing junk. Include a canonical but different descriptor value, correctly rehashed, and the reciprocal payload mutation. Ensure each malformed case reaches the intended grammar/equality law without relying on stale metadata."}
+  {:id :independent-binding-and-record-matrix
+   :finding "Each artifact binding field is removed and substituted with a generic string, but realistic same-shaped pins, expected-record substitutions, expected extras, schema/format substitutions and coherent changes of both sides are not covered."
+   :fix "For all 12 fields test correctly typed alternate values independently in artifact and expected records, missing/extra/wrong-type keys on both, malformed and uppercase revision hashes, and constants versus externally provisioned revision values. Test separately changed closed top-level fields/counts/digests. If both sides share a different well-formed external revision the pure API may accept it: do not assert it authenticates the caller; static fixed constants must still reject substitutions. Assert nil/unavailable expected binding denies render and validate without fallback."}
+  {:id :strict-utf8-and-octet-isolation
+   :finding "Invalid vectors are tested only with stale metadata, so a count/hash check could mask a lax decoder; raw vector ceiling checks use invalid repeated ASCII unrelated to a valid artifact."
+   :fix "For both fields cover unsigned vector domain and strict malformed UTF-8 classes, including overlong, truncated, continuation, surrogate and above-U+10FFFF. Give each malformed UTF-8 vector matching count and independently computed raw-octet digest where feasible, so it cannot be dismissed as stale metadata; do not obtain the hash through a replacement decoder. Check accepted Unicode/non-BMP bytes, re-encoding and independently fixed SHA-256 goldens; assert sanitized failures and invalid host surrogates/NUL without input echo. Separate over-bound vector tests from grammar checks."
+   }
+  {:id :reachable-inclusive-boundaries
+   :finding "32767/32768 input positives exist, but all raw 65535/65536 vectors are invalid and no escaped boundary artifact is accepted."
+   :proof "For any canonical shared value with escaped-byte length E, payload length is 20+E and descriptor length 45+E; thus descriptor is always 25 bytes larger. With both ceilings 65536, valid payload is at most 65511; payload 65535/65536 cannot occur in a valid artifact. This follows from the fixed byte goldens (26 and 51 for six-byte lambda) and shared escaping, not from a runtime probe."
+   :fix "Exercise valid rendered and independently validated descriptor lengths 65535 and 65536 using 10915 U+0001 characters (6 escaped bytes each), respectively plus zero or one ASCII character; assert exact counts, raw octets/digests and paired payload lengths 65510 and 65511. Add 65537 descriptor via two ASCII characters and require render denial; separately require rejection for over-limit raw vectors. Check value lengths 32767/32768 accepted and 32769 rejected, including multibyte byte-count examples and escaped expansion; do not demand impossible valid 65536 payload. Use independent expected construction and count/digest oracles."}
+  {:id :boundary-nonvacuity-and-closed-errors
+   :finding "The stub makes every denial look valid; positive acceptance and sanitized-error invariants must accompany negatives."
+   :fix "For each mutation family first validate the unchanged independent golden and appropriate valid non-ASCII/escape-expanded fixture; assert fixed-code closed errors do not contain synthetic input. Run the complete augmented shared suite under BB and NBB, preserve all pre-existing tests and zero-warning lint, and obtain an independent source audit of purity, bounded preflight allocation, raw decode/re-encode before hashing and both runtime paths."}]
+ :limits "Matching two rehashed and coherently substituted values demonstrates only mutual consistency; this interface has no independently supplied value intent. Binding equality is not source authentication. No Services facade, owner validator, effects or compatibility were exercised."
+ :performed ["Read candidate, approved plan, plan review and permit" "Read all three exact source files and retained run output, argv, exits and manifests" "Calculated source and evidence SHA-256s" "Observed short worktree status" "Wrote this review only"]
+ :not-performed [:runtime :test-rerun :probe :source-edit :dependency-resolution :credentials :network :board :ledger :git-write :nested-agents :services-validator :effects]
+ :next "Parent may direct pure implementation within the three authorized paths while requiring the five listed coverage fixes before qualification. Retain the original RED; then run all strengthened source cases on both runtimes plus existing full baselines and zero-warning lint under the permit, capture exact updated hashes and results, and obtain parent-led independent exact-source audit before any GREEN qualification. Preserve all separate Services, policy, shx, effects, board and whole-S1B holds."}

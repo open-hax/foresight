@@ -1,0 +1,26 @@
+{:candidate/id :s4a-bound-model-green-source-fix-v11
+ :kind :source-only-finding-fix
+ :authority :none
+ :verdict :unverified-same-independent-reviewer-required
+ :review {:path "reviews/s4a-bound-model-green-source-review-v10.edn" :sha256 "8667deab7e9eaf08742e4f51cf0403bec195dbc17a343d257f0fba22286879da"}
+ :root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :files [{:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5"}
+         {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "2f9d17ff81802553ba88dc32e8ea662ff11d5c1552176ba09e108cb7422f36e8"}]
+ :prior-source-archives [{:path "/tmp/opencode/oikos-s4a-v11-PoDYvwo8/model-prior.txt" :sha256 "5ef315f4176d67b415a283635574fc15be36232a363c83f60e32c77abcff073d"}
+                         {:path "/tmp/opencode/oikos-s4a-v11-PoDYvwo8/tests-prior.txt" :sha256 "a4e175bb791575b8b3ab14d7c55d0a344be8d3d6c2274f4719e1c39bc2deba01"}]
+ :dispositions [{:id :f1-issue-only-result-contract :status :source-revised-unrun
+                 :detail "Accepted issue-only trace returns top-level ok while retaining per-event issued, issued state/phase, order one and zero counts. Added read/write positive and invalid-clock issue oracles."}
+                {:id :f2-unvalidated-consumed-revoke-clock :status :source-revised-unrun
+                 :detail "Validate revoke clock before consumed/revoked cases; invalid clock denies and closes pending, without a successful revoke result. Valid consumed/revoked revoke updates last-clock; already-consumed keeps pending, already-revoked stays closed. Failed/uncertain storage closes and stays unavailable. Added read/write nil-clock, later-revoke/earlier-final, forward positive and duplicate-revoked invalid/regressing-clock oracles."}]
+ :fixtures "Existing consume/revoke/final positive uses revoke 12 then final 13 and gap 14, already forward; no existing fixture alteration was needed. Added positive explicitly uses the same forward chronology."
+ :static {:expected-ert-definitions 26 :previous-definitions 24 :new-definitions 2
+          :balanced-text :pass
+          :goldens [{:bytes 285 :sha256 "d602c5e910ea2fb67ae73845dcd57f1724ca22a144b84f3af8f7d5043fb8e69c"}
+                    {:bytes 291 :sha256 "5a7251b0f9d6159def0d755bb8fef0799ef351c86a346c07d59c5e2197d91c06"}]
+          :note "Python lexical balance, counting and hashing only; not an Emacs parser, execution or test pass."}
+ :preservation {:native-sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"
+                :native-test-sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}
+ :limits ["No Emacs, ERT, byte compilation or model execution on these hashes. No GREEN result is claimed."
+          "Clock, revoke, state and counts are synthetic only; no real owner, identity, consent, persistence, atomicity, cross-process ordering or effect is qualified."]
+ :holds [:same-reviewer-exact-source-review :separately-admitted-green-batch :real-identity :human-consent :govone :durability :native-effects :whole-s4a]
+ :execution {:emacs 0 :ert 0 :bytecompile 0 :runtime 0 :git 0 :board 0 :ledger 0 :network 0 :credentials 0 :nested-agents 0}}

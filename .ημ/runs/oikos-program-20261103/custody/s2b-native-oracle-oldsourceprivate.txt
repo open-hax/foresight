@@ -1,0 +1,134 @@
+(ns oikos.i3-native-oracle
+  "Inert, independent synthetic GET_TREE fixture oracle; no ownership or cut proof.")
+
+(def ^:private failure "INVALID_NATIVE_FIXTURE")
+(defn- deny! [] (throw (js/Error. failure)))
+(defn- ensure! [x] (when-not x (deny!)))
+(defn- uint? [x max-value]
+  (and (number? x) (js/Number.isSafeInteger x) (<= 0 x max-value)))
+(defn- canonical-uuid? [x]
+  (and (string? x)
+       (boolean (re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" x))))
+(defn- closed! [m ks]
+  (ensure! (and (map? m) (= (set (keys m)) ks))))
+
+(defn- table! [fixture]
+  (closed! fixture #{:epoch :workspaces :windows})
+  (ensure! (canonical-uuid? (:epoch fixture)))
+  (let [spaces (:workspaces fixture) windows (:windows fixture)]
+    (ensure! (and (vector? spaces) (<= 1 (count spaces) 4)
+                  (vector? windows) (<= 1 (count windows) 8)))
+    (doseq [w spaces]
+      (closed! w #{:id :uuid})
+      (ensure! (and (uint? (:id w) js/Number.MAX_SAFE_INTEGER) (canonical-uuid? (:uuid w)))))
+    (doseq [w windows]
+      (closed! w #{:xid :incarnation :workspace})
+      (ensure! (and (uint? (:xid w) 4294967295) (pos? (:xid w))
+                    (canonical-uuid? (:incarnation w)) (canonical-uuid? (:workspace w)))))
+    (let [unique? (fn [xs] (= (count xs) (count (set xs))))
+          ids (set (map :uuid spaces))]
+      (ensure! (and (unique? (map :id spaces)) (unique? (map :uuid spaces))
+                    (unique? (map :xid windows)) (unique? (map :incarnation windows))
+                    (every? #(contains? ids (:workspace %)) windows)))
+      {:epoch (:epoch fixture)
+       :spaces (into {} (map (juxt :id :uuid) spaces))
+       :windows (into {} (map (juxt :xid identity) windows))})))
+
+(defn- bounded-json! [text]
+  ;; Scan before parsing: count every JSON value, bound nesting, and reject duplicate
+  ;; decoded object keys. JSON.parse then validates the complete JSON grammar.
+  (ensure! (and (string? text) (<= (js/Buffer.byteLength text "utf8") 65536)))
+  (let [tokens (vec (re-seq #"\"(?:\\.|[^\"\\])*\"|[{}\[\],:]|[^\s{}\[\],:]+" text))]
+    (loop [i 0 stack [] values 0]
+      (when (< i (count tokens))
+        (let [t (nth tokens i) next-t (get tokens (inc i))
+              key? (and (.startsWith t "\"") (= next-t ":"))
+              open? (contains? #{"{" "["} t)
+              close? (contains? #{"}" "]"} t)
+              value? (and (not key?) (not (contains? #{"}" "]" "," ":"} t)))
+              n (+ values (if value? 1 0))]
+          (ensure! (<= n 4096))
+          (when (re-matches #"-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?" t)
+            (let [number (js/Number t)]
+              (ensure! (and (js/Number.isFinite number)
+                            (or (not (js/Number.isInteger number))
+                                (js/Number.isSafeInteger number))))))
+          (cond
+            key? (let [k (js/JSON.parse t) top (peek stack)]
+                   (ensure! (and top (= (:kind top) :object) (not (contains? (:keys top) k))))
+                   (recur (inc i) (conj (pop stack) (update top :keys conj k)) n))
+            open? (let [s (conj stack {:kind (if (= t "{") :object :array) :keys #{}})]
+                    (ensure! (<= (count s) 32))
+                    (recur (inc i) s n))
+            close? (do (ensure! (and (seq stack)
+                                     (= (:kind (peek stack)) (if (= t "}") :object :array))))
+                       (recur (inc i) (pop stack) n))
+            :else (recur (inc i) stack n)))))
+    (js/JSON.parse text)))
+
+(defn- prop [obj k] (aget obj k))
+(defn- json-object? [v] (and (some? v) (= "object" (js/typeof v)) (not (array? v))))
+(defn- rect! [node]
+  (let [r (prop node "rect")]
+    (ensure! (json-object? r))
+    (let [x (prop r "x") y (prop r "y") w (prop r "width") h (prop r "height")]
+      (ensure! (and (number? x) (js/Number.isSafeInteger x)
+                    (number? y) (js/Number.isSafeInteger y)
+                    (uint? w js/Number.MAX_SAFE_INTEGER) (uint? h js/Number.MAX_SAFE_INTEGER)))
+      [x y w h])))
+
+(defn- traverse! [root table]
+  (loop [pending [[root nil nil false 1]] seen-ids #{} seen-xids #{} seen-spaces #{}
+         members [] structure []]
+    (if (empty? pending)
+      (do (ensure! (and (= seen-xids (set (keys (:windows table))))
+                        (= seen-spaces (set (keys (:spaces table))))))
+          {:subset (vec (sort members)) :structure (vec (sort-by :xid structure))})
+      (let [[node workspace parent floating depth] (peek pending)
+            _ (ensure! (and (json-object? node) (<= depth 32) (< (count seen-ids) 512)))
+            id (prop node "id") type (prop node "type") xid (prop node "window")
+            nodes (prop node "nodes") floats (prop node "floating_nodes")]
+        (ensure! (and (uint? id js/Number.MAX_SAFE_INTEGER) (not (contains? seen-ids id))
+                      (contains? #{"root" "output" "workspace" "con" "floating_con" "dockarea"} type)
+                      (= (= depth 1) (= type "root"))
+                      (.call (.-hasOwnProperty js/Object.prototype) node "window")
+                      (array? nodes) (array? floats)))
+        (let [ws? (= type "workspace")
+              ws (if ws? (get (:spaces table) id) workspace)
+              _ (when ws? (ensure! (and (nil? workspace) ws (not (contains? seen-spaces id)))))
+              _ (when (and (= type "floating_con") (not floating)) (deny!))
+              window? (some? xid)
+              row (when window? (get (:windows table) xid))]
+          (when window?
+            (ensure! (and (= type "con") (uint? xid 4294967295) (pos? xid)
+                          row ws (= ws (:workspace row)) (not (contains? seen-xids xid)))))
+          (let [children (concat (map #(vector % ws id floating (inc depth)) (array-seq nodes))
+                                 (map #(vector % ws id true (inc depth)) (array-seq floats)))
+                _ (when (seq (array-seq floats)) (ensure! (some? ws)))
+                member (when window? [(:epoch table) xid (:incarnation row) ws])
+                detail (when window? {:xid xid :parent parent :floating floating :rect (rect! node)})]
+            (recur (into (pop pending) children) (conj seen-ids id)
+                   (if window? (conj seen-xids xid) seen-xids)
+                   (if ws? (conj seen-spaces id) seen-spaces)
+                   (cond-> members member (conj member))
+                   (cond-> structure detail (conj detail)))))))))
+
+(defn parse-fixture-tree
+  "Parse primitive JSON and explicit fixture identity data. Returns only sanitized
+  membership and structural observations; input table is not ownership evidence."
+  [json fixture]
+  (try (traverse! (bounded-json! json) (table! fixture))
+       (catch :default _ (deny!))))
+
+(defn same-owned-subset?
+  "Compare only the explicit fixture membership rows; no full-tree or cut claim."
+  [oracle-result expected]
+  (try
+    (closed! oracle-result #{:subset :structure})
+    (ensure! (and (vector? expected) (<= (count expected) 8)
+                  (every? (fn [r] (and (vector? r) (= 4 (count r))
+                                        (canonical-uuid? (nth r 0)) (uint? (nth r 1) 4294967295)
+                                        (pos? (nth r 1)) (canonical-uuid? (nth r 2)) (canonical-uuid? (nth r 3)))) expected)
+                  (= (count expected) (count (set expected)))))
+    (= (:subset oracle-result) (vec (sort expected)))
+    (catch :default _ (deny!))))

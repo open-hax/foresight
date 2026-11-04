@@ -1,0 +1,12 @@
+{:report/id :s2b-native-oracle-source-v5
+ :status :source-only-unreviewed
+ :file "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b/test/oikos/i3_native_oracle.cljs"
+ :sha256 "53a8b152eed12db78fbc6ec0a814fc6131dc6f4587e24a7552fe0c87953349f7"
+ :api {:parse-fixture-tree "[primitive-json {:epoch UUID :workspaces [{:id native-id :uuid UUID}] :windows [{:xid XID :incarnation UUID :workspace UUID}]}] -> {:subset sorted-vector :structure sorted-vector}"
+       :same-owned-subset? "[oracle-result explicit-vector-of-membership-rows] -> boolean; rejects malformed expected rows"}
+ :behavior "Independent bounded JSON scan and native traversal; rejects duplicate decoded keys, duplicate IDs, mismatched or unlisted identities, missing declared workspaces/windows, unsupported node types and unsafe integers. Structural output contains only XID, native parent ID, floating flag and rectangle. All failures use constant INVALID_NATIVE_FIXTURE. Identity table is data, not ownership evidence. Exclusion, ordering and same-cut must be proven independently by the harness."
+ :limits {:utf8-bytes 65536 :json-values 4096 :json-nesting 32 :native-containers 512 :native-depth 32 :windows 8 :workspaces 4 :xid-max 4294967295}
+ :constraints "JSON nesting limit applies independently of native container depth and may reject deeper otherwise valid trees. Exact workspace native IDs are explicitly supplied; every listed workspace must appear."
+ :verification {:static "clj-kondo --lint test/oikos/i3_native_oracle.cljs: 0 errors, 0 warnings" :runtime :not-run :tests :not-run :native :not-run :independent-review :pending}
+ :nonclaims [:ownership :authorization :currentness :same-cut :source-ordering :full-tree-equality :native-qualification :whole-s2b]
+ :not-performed [:nbb :module-import :tree-fetch :ipc :desktop-access :process-execution-of-fixture :git :board :ledger :network :credentials :nested-agent]}

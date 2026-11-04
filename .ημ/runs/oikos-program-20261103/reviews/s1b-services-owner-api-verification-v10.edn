@@ -1,0 +1,31 @@
+{:review/id :s1b-services-owner-api-verification-v10
+ :kind :independent-exact-object-source-review
+ :verdict :source-claims-confirmed-subject-to-literal-manifest-review
+ :scope "Read-only source comparison, not execution or runtime admission. No finding asserts a tested result. V8 describes categories, not a literal vector manifest, so individual concrete byte pairs and their digests cannot yet be qualified."
+ :inputs {:v8-sha256 "9aaaa070efcc230da236778fd1300e6d4fa6888bfd26491e71445731c96e0eb2"
+          :v9-sha256 "eaf6816e48f856f3a1899da031b71442d510dd6e0ac0d60b41e309a82c72219e"
+          :handoff "permits/services-development-handoff-d4f6ff57.edn"
+          :acceptance "reviews/services-oikos-development-consumer-acceptance-v1.edn"}
+ :pins {:services {:worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+                   :commit "d4f6ff570c7b8d2921bdf1a854c521681c96ff6b" :tree "d54a348e1346fec8230b09a8dd6e1c0eba6aae88"
+                   :sha256 {"scripts/local_generation_edn.py" "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+                            "scripts/local_generation_wire.py" "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"
+                            "scripts/local_generation_fs.py" "41e633799724639ede651f039f087a602d1df6a8ef10721f4792088cbbdc6537"}}
+        :oikos {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b"
+                :commit "ba4f21b7f1fc2e1656de8a392aaf838d3d76fe4a" :tree "93a802603b95408cbe349c72aa1323d616d653c6"
+                :sha256 {"src/oikos/law/services_inert_edn.cljc" "e5b9a4b683ec08ef4e2160e842c5d1986aff595a76b70d2b0906d2207b59640a"
+                         "test/oikos/law/services_inert_edn_test.cljc" "51966d65bc4846f3898f2f17659ce31563ffe8e4d97222527d16d44b78157c9b"}}}
+ :findings []
+ :confirmed-source-claims
+ [{:subject :services-api-and-imports
+   :evidence "local_generation_edn.py imports json and re; it first attempts relative local_generation_wire, catching ImportError to import the sibling as a top-level module. wire imports base64, hashlib, json and re, all standard-library modules. validate(descriptor, payload) returns booleans on the specified well-typed byte cases; wire.decode requires descriptor bytes and validates strict JSON, duplicates, canonical values and UTF-8. Runtime standard-library and native dependency closure was not inspected or verified. The relative-to-absolute import fallback is in owner source, not an additional harness substitute."}
+  {:subject :owner-call-site
+   :evidence "local_generation_fs.py _manifest lines 332-365 validates shape, owner, path restrictions, artifact counts, strict base64, per-file and total size, both hashes, unique format binding, renderer/validator identities, supported entry and format, and the current validator file digest before edn.validate(descriptor, raw). Direct validate is strictly narrower than this policy-bound path and makes no filesystem or policy claim."}
+  {:subject :oikos-api-and-positive-expectations
+   :evidence "Exact Oikos core render(value, expected-identity) returns {:status :ok :value artifact} for admissible input and validate(artifact, expected-identity) checks closed shape, binding, strict UTF-8, counts and hashes, parsed payload and canonical payload/descriptor equality. Source inspection of generation.cljc canonical quoting and Services regex/JSON confirms the listed admissible strings are in the shared grammar, including escaped controls and Unicode. For 10915 U+0001 plus a, escaped value length is 65491, descriptor overhead is 45, total 65536; its raw UTF-8 length is 10916. Limits and expected verdicts are source-derived, not runtime demonstrations."}
+  {:subject :negative-expectations
+   :evidence "With the other side the canonical lambda golden, reader forms, extra/duplicate payload keys, nonstring value, escaped slash, trailing junk, duplicate/extra descriptor keys, wrong descriptor schema/type, unequal values, NUL and invalid UTF-8 are rejected by both sources for the stated reasons. Without the final payload newline, with extra payload space, with descriptor leading whitespace, or with descriptor lambda's ASCII l encoded as JSON \\u006c, Services accepts the represented matching value while Oikos rejects noncanonical bytes. These are source-derived expectations for the described examples, not validation of unspecified concrete manifest bytes. Exact spelling, hashes, both sides of every pair and boundary behavior remain review gates."}]
+ :holds [:literal-manifest-and-harness-review :complete-runtime-and-import-closure :bounded-offline-execution-permit :actual-cross-implementation-results :policy-bound-filesystem-fixture :whole-s1b]
+ :performed [:read-applicable-instructions :read-v8-v9-permit-acceptance :locate-owner-worktrees-via-retained-reports :read-exact-git-objects :hash-git-object-bytes :write-this-review]
+ :not-performed [:python :nbb :tests :imports :project-execution :probes :installation :network :credentials :source-edit :board :ledger :git-write :nested-agents]
+ :next "Review the actual fixed harness and literal manifest against these pinned sources and independently qualify the contained runtime before seeking a separate execution permit."}

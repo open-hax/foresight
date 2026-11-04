@@ -1,0 +1,18 @@
+{:kind :source-only-candidate
+ :qualification :not-qualified
+ :base "a25a9283f4e630080496c62172bec03df89a81d9"
+ :source-hashes {"scripts/test_i3_collector.clj" "d69993b892d0d15be56269528709bcf94f857454e9c49f817aef1046118b22c7"
+                 "docs/contracts/i3-collector-v1.edn" "0fd637707f9d9d7fbb8e0c100d665d8d5efffd132969f1d46b4cd269eac08d47"}
+ :unchanged-payload-digest "9c5862b399e064172180095aea9e8bff1f638858338f9a99363e1cb6b6948101"
+ :commands [["bb" "scripts/test_i3_collector.clj" "--only" "bb"]
+            ["bb" "scripts/test_i3_collector.clj" "--only" "nbb"]
+            ["bb" "scripts/test_i3_collector.clj" "--only" "edge"]]
+ :default-command ["bb" "scripts/test_i3_collector.clj"]
+ :negative-oracles [:version :extra :payload :digest :source :pin :permit]
+ :preflight "Every selected mode retains the existing in-process and both runtime preflight checks before its fixed runner. Preflight execution for this candidate remains blocked: pinned dependency cache and permit paths were not available in this session's environment."
+ :checks {:lint "clj-kondo --cache false --lint src scripts test eval bb.edn nbb.edn: 0 errors, 0 warnings"
+          :invalid-selectors "wat, --only, --only nope, --only bb extra, --bad bb each produced typed invalid-collector-selector before environment checks; no test child invoked"
+          :full-suites "Not run; parent owns guarded execution."
+          :original "Original aggregate command timed out at 600 seconds; this candidate does not backfill that result. Original invoker remains in Git object a25a9283f4e630080496c62172bec03df89a81d9."
+          :deadlines "Parent retains the original 1200-second aggregate deadline and maximum 600 seconds per command; scheduling is not a deadline increase."}
+ :next "Parent independently reviews the exact diff, supplies existing pinned dependencies and permit, verifies preflight, and executes the separately authorized guarded batch before any qualification."}

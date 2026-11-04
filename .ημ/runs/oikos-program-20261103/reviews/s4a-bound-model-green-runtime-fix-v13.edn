@@ -1,0 +1,20 @@
+{:candidate/id :s4a-bound-model-green-runtime-fix-v13
+ :kind :source-only-repair-after-actual-failed-attempt
+ :authority :none
+ :actual {:permit "permits/s4a-isolated-bound-model-green-v4.edn"
+          :evidence "/tmp/opencode/oikos-s4a-bound-green-v4-c32bc4e0-a462-4335-aec8-f2d7cdd75555"
+          :result-sha256 "16354ca4f7ab761bcb7a305e01a468ee2450f7c4eb47ecc11163069e05cc77d0"
+          :stderr-sha256 "cd6502db65936ebdf598e3e60b5407ea1bb26c56e1bfdfa108525c9310b6e636"
+          :tests 26 :passed 21 :failed 5 :skipped 0 :exit 1
+          :postflight :all-source-binary-native-pins-matched}
+ :diagnosis "The composed test event helper copied variable records but appended a backquoted alist containing a reusable literal (storage . ok) cell. Destructive storage-negative tests can mutate that shared cell, changing other phases and later fixture calls. The retained output shows later otherwise-positive fixtures returning unavailable and invalidated. This is source-grounded diagnosis, not proof that it explains every failure."
+ :change "Wrap the complete constructed event in copy-tree, including its storage and clock cells. Add a positive fixture-isolation oracle for both operations, mutate only a consume fixture, and verify both other phases and separately created traces retain clocks, storage and successful positive behavior. No model logic or old assertions were removed or weakened."
+ :sources {:root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+           :model {:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5" :changed false}
+           :tests {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "34a2369632b26b7b14ce7fc09b1d8208cf7baaeff76030dbec7590834e5144d9" :definitions 27}}
+ :retained-prior {:path "/tmp/opencode/oikos-s4a-bound-green-v4-c32bc4e0-a462-4335-aec8-f2d7cdd75555/test-source.el.txt"
+                  :sha256 "2f9d17ff81802553ba88dc32e8ea662ff11d5c1552176ba09e108cb7422f36e8"}
+ :preserved-native {"layers/agent-sandbox/oikos-native.el" "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"
+                    "tests/unit/oikos-native-test.el" "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}
+ :verification "Source read, patch, exact hashes and definition count only. No Emacs, ERT, source load or byte-compilation on these new hashes. The failed v4 attempt remains consumed."
+ :next "Same independent reviewer inspects actual failure and exact repair before any separately admitted 27-test attempt. Whole S4A, real identity, consent, durable state and effects remain held."}

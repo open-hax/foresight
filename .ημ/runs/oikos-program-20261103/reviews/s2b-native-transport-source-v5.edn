@@ -1,0 +1,13 @@
+{:report/id :s2b-native-transport-source-v5
+ :status :incomplete-source-candidate
+ :path "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b/src/oikos/infra/i3_fixture_transport.cljs"
+ :sha256 "df12318c4a3206dcee76e024dd3d0c62d5a04c238ec20ef9feae69bd96e82ef0"
+ :interface [decoder feed finish take-frame request-frame channel begin-request receive success-reply? tick-event]
+ :implemented "Inert bounded incremental frame decoder, fatal UTF-8, fixed request encoder, bounded queued frames and nonces, single-pending channel state, sequence/generation checks, restricted success and tick recognition. Tree and event bodies are untrusted strings; no fence or authority is asserted."
+ :remaining ["No fixture socket connection, path validation, explicit execution-permit/context validation, event loop or writing transport is implemented. The channel is an effect-free state machine, not a usable native transport."
+             "Subscription success and initial tick are not enforced in channel state; tick correlation and duplicates are not enforced. The restrictive tick parser may reject legitimate JSON encodings."
+             "No timeout, socket closure/error integration, total captured-output bound, explicit dropped-byte accounting, or automatic invalidation on faults is implemented. Failure is thrown and caller must discard state."
+             "No unit or runtime execution was authorized or performed; source requires independent adversarial review, fixes, and later separately permitted tests. Same-UID isolation and native ordering remain unproven."]
+ :verification {:command "clj-kondo --lint src/oikos/infra/i3_fixture_transport.cljs --config '{:hooks {:analyze-call {} :macroexpand {}}}' --cache false" :exit 0 :output "errors: 0, warnings: 0" :scope :static-only}
+ :authority :none :native-effects :held
+ :not-performed [:module-import :unit-tests :native-execution :socket :process :ipc :git :board :ledger :nested-agent]}

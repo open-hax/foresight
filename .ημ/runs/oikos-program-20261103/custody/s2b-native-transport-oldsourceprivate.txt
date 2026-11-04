@@ -1,0 +1,133 @@
+(ns oikos.infra.i3-fixture-transport
+  "Inert fixture framing and serialized channel state. Not an authority.")
+
+(def ^:private max-body 65536)
+(def ^:private max-queue 256)
+(def ^:private header-size 14)
+(def ^:private event-types #{2147483648 2147483649 2147483650 2147483651
+                             2147483652 2147483653 2147483654 2147483655})
+(def ^:private magic "i3-ipc")
+
+(defn- fail! [] (throw (js/Error. "I3_FIXTURE_INVALID")))
+
+(defn decoder
+  "A fresh, generation-bound bounded incremental decoder. No I/O."
+  [generation]
+  (when-not (and (string? generation) (re-matches #"[a-zA-Z0-9-]{1,64}" generation))
+    (fail!))
+  {:generation generation :sequence 0 :bytes (js/Uint8Array. 0) :queue []})
+
+(defn- u32 [bytes offset]
+  (.getUint32 (js/DataView. (.-buffer bytes) (.-byteOffset bytes) (.-byteLength bytes)) offset true))
+
+(defn- decode-body [bytes]
+  (try
+    (.decode (js/TextDecoder. "utf-8" #js {:fatal true}) bytes)
+    (catch :default _ (fail!))))
+
+(defn feed
+  "Consume at most one frame-sized chunk. Retains at most 256 complete frames."
+  [state chunk]
+  (when-not (and (instance? js/Uint8Array chunk)
+                 (<= (.-byteLength chunk) (+ header-size max-body))
+                 (<= (+ (.-byteLength (:bytes state)) (.-byteLength chunk))
+                     (* 2 (+ header-size max-body))))
+    (fail!))
+  (let [old (:bytes state)
+        bytes (js/Uint8Array. (+ (.-byteLength old) (.-byteLength chunk)))]
+    (.set bytes old 0)
+    (.set bytes chunk (.-byteLength old))
+    (loop [offset 0 sequence (:sequence state) queue (:queue state)]
+      (let [remaining (- (.-byteLength bytes) offset)]
+        (if (< remaining header-size)
+          (assoc state :bytes (.slice bytes offset) :sequence sequence :queue queue)
+          (let [frame (.subarray bytes offset)
+                size (u32 frame 6)
+                type (u32 frame 10)]
+            (when-not (and (= magic (apply str (map #(js/String.fromCharCode (aget frame %)) (range 6))))
+                           (<= size max-body)
+                           (or (#{2 4 10} type) (event-types type)))
+              (fail!))
+            (if (< remaining (+ header-size size))
+              (assoc state :bytes (.slice bytes offset) :sequence sequence :queue queue)
+              (do
+                (when (>= (count queue) max-queue) (fail!))
+                (recur (+ offset header-size size) (inc sequence)
+                       (conj queue {:generation (:generation state) :sequence (inc sequence)
+                                    :type type
+                                    :body (decode-body (.subarray frame header-size (+ header-size size)))}))))))))))
+
+(defn finish [state]
+  (when-not (zero? (.-byteLength (:bytes state))) (fail!))
+  state)
+
+(defn take-frame [state]
+  (when-let [frame (first (:queue state))]
+    [frame (assoc state :queue (subvec (:queue state) 1))]))
+
+(defn request-frame
+  "Encode only the three fixed fixture requests; nonce is bounded ASCII."
+  [kind nonce]
+  (let [[type payload] (case kind
+                         :subscribe [2 "[\"workspace\",\"window\",\"tick\"]"]
+                         :tree [4 ""]
+                         :tick (do (when-not (and (string? nonce)
+                                                  (re-matches #"[A-Za-z0-9-]{1,64}" nonce)) (fail!))
+                                   [10 nonce])
+                         (fail!))
+        body (.encode (js/TextEncoder.) payload)
+        out (js/Uint8Array. (+ header-size (.-byteLength body)))
+        view (js/DataView. (.-buffer out))]
+    (doseq [i (range 6)] (aset out i (.charCodeAt magic i)))
+    (.setUint32 view 6 (.-byteLength body) true)
+    (.setUint32 view 10 type true)
+    (.set out body header-size)
+    out))
+
+(defn channel
+  "Construct a serialized channel; writes and effects remain external and held."
+  [generation]
+  {:decoder (decoder generation) :pending nil :seen-nonces #{} :last-sequence 0 :status :open
+   :authority :none :native-effects :held})
+
+(defn begin-request [channel kind nonce]
+  (when (or (not= :open (:status channel)) (:pending channel)
+            (and (= kind :tick) (or (>= (count (:seen-nonces channel)) max-queue)
+                                    (contains? (:seen-nonces channel) nonce)))) (fail!))
+  (let [bytes (request-frame kind nonce)]
+    [(cond-> (assoc channel :pending {:kind kind :nonce nonce})
+       (= kind :tick) (update :seen-nonces conj nonce)) bytes]))
+
+(defn receive
+  "Classify an ordered frame. Tree bodies are untrusted strings, never parsed here.
+  Tick bodies remain untrusted: marker matching requires a separate bounded parser."
+  [channel frame]
+  (when-not (and (= :open (:status channel))
+                 (= (get-in channel [:decoder :generation]) (:generation frame))
+                 (= (inc (:last-sequence channel)) (:sequence frame))) (fail!))
+  (let [type (:type frame) pending (:pending channel)
+        channel (assoc channel :last-sequence (:sequence frame))
+        expected ({:subscribe 2 :tree 4 :tick 10} (:kind pending))]
+    (cond
+      (event-types type) [channel {:kind :event :frame frame :fence false}]
+      (and pending (= type expected))
+      [(assoc channel :pending nil) {:kind :reply :request (:kind pending)
+                                    :body (:body frame) :fence false}]
+      :else (fail!))))
+
+(defn success-reply?
+  "Recognize only a closed, single-field success response."
+  [body]
+  (boolean (and (string? body)
+                (re-matches #"\s*\{\s*\"success\"\s*:\s*true\s*\}\s*" body))))
+
+(defn tick-event
+  "Recognize a closed tick object with an ASCII payload, in either field order.
+  A match is not a fence; qualification belongs to a separate harness."
+  [body]
+  (when-not (and (string? body) (<= (count body) 256)) (fail!))
+  (let [a (re-matches #"\s*\{\s*\"first\"\s*:\s*(true|false)\s*,\s*\"payload\"\s*:\s*\"([A-Za-z0-9-]{0,64})\"\s*\}\s*" body)
+        b (re-matches #"\s*\{\s*\"payload\"\s*:\s*\"([A-Za-z0-9-]{0,64})\"\s*,\s*\"first\"\s*:\s*(true|false)\s*\}\s*" body)]
+    (cond a {:first (= "true" (nth a 1)) :payload (nth a 2) :fence false}
+          b {:first (= "true" (nth b 2)) :payload (nth b 1) :fence false}
+          :else (fail!))))

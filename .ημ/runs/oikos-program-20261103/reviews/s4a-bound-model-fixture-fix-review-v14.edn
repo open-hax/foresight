@@ -1,0 +1,32 @@
+{:review/id :s4a-bound-model-fixture-fix-review-v14
+ :date "2026-11-04"
+ :kind :independent-postfailure-source-review
+ :authority :none
+ :verdict :one-isolated-27-test-attempt-eligible-after-separate-parent-admission
+ :input {:candidate {:path "reviews/s4a-bound-model-green-runtime-fix-v13.edn" :sha256 "d4e8d1afbdd322295fde91ca04d58d1360103d87586ce5a4ec0db1c3d3d7a9e9"}
+         :failed-evidence-root "/tmp/opencode/oikos-s4a-bound-green-v4-c32bc4e0-a462-4335-aec8-f2d7cdd75555"
+         :failed-result-sha256 "16354ca4f7ab761bcb7a305e01a468ee2450f7c4eb47ecc11163069e05cc77d0"
+         :failed-stderr-sha256 "cd6502db65936ebdf598e3e60b5407ea1bb26c56e1bfdfa108525c9310b6e636"
+         :prior-tests-sha256 "2f9d17ff81802553ba88dc32e8ea662ff11d5c1552176ba09e108cb7422f36e8"}
+ :sources {:root "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+           :model {:path "layers/agent-sandbox/oikos-owner-authority.el" :sha256 "23053f722a01426bedcd4522a5f5feefc6332e90987246424b83a24c394451a5"}
+           :tests {:path "tests/unit/oikos-owner-authority-test.el" :sha256 "34a2369632b26b7b14ce7fc09b1d8208cf7baaeff76030dbec7590834e5144d9"}
+           :native [{:path "layers/agent-sandbox/oikos-native.el" :sha256 "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"}
+                    {:path "tests/unit/oikos-native-test.el" :sha256 "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}]
+           :preservation "Actual complete diff against hash-verified retained 26-test source shows only a copy-tree wrapper around the whole event fixture plus one new test; existing 26 test bodies and golden text are unchanged. Model and named native hashes match failed-run pins. No broader checkout claim."}
+ :failed-run {:selected 26 :passed 21 :failed 5 :skipped 0 :exit 1
+              :failures ["oikos-owner-model-composed-post-consume-deadlines-red" "oikos-owner-model-composed-revoke-clock-order" "oikos-owner-model-composed-storage-and-closed-outcomes" "oikos-owner-model-composed-swaps-red" "oikos-owner-model-composed-totality-red"]
+              :classification "stderr reports five ERT assertion failures, including unavailable/invalidated where a later fixture expected denied, consumed or ok. result.json reports all six postflight pins matched. This v4 result remains failed and its permit consumed."}
+ :assessment {:diagnosis "The prior helper constructed a backquoted literal (storage . ok) and tests mutate storage cells. Shared literal cells plausibly contaminate other phases or later fixtures; retained error values are consistent with that. The output does not independently trace cell identity, and this hypothesis is not proof that it explains every failure."
+              :repair "Current helper wraps the complete constructed event in copy-tree; this copies nested cons cells including the storage entry and clock lists. A new fixture-cell-isolation test mutates a consume event and asserts other phase cells and separate read/write traces retain storage/clock and positive modeled behavior. Exact runtime behavior remains unverified."
+              :goldens "Independently assembled embedded replace/read expected vectors still match respectively 285 bytes/d602c5e910ea2fb67ae73845dcd57f1724ca22a144b84f3af8f7d5043fb8e69c and 291 bytes/5a7251b0f9d6159def0d755bb8fef0799ef351c86a346c07d59c5e2197d91c06. Static text count is 27 ERT definitions; no current test result is inferred."}
+ :findings []
+ :batch {:status :eligible-only-after-separate-parent-recorded-admission :expected 27
+         :binary {:path "/snap/emacs/4391/usr/bin/emacs-31.1" :sha256 "62667b84b8b7b6259fca0db92019123bd2eb93542ae94a11d44a77b577348652"}
+         :timeout {:path "/usr/bin/timeout" :sha256 "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52"}
+         :command "env -i HOME=/nonexistent XDG_CONFIG_HOME=/nonexistent XDG_CACHE_HOME=/nonexistent PATH=/usr/bin:/bin LC_ALL=C /usr/bin/timeout --signal=TERM --kill-after=5s 30s /snap/emacs/4391/usr/bin/emacs-31.1 -Q --batch --load /home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/layers/agent-sandbox/oikos-owner-authority.el --load /home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-owner-authority-test.el -f ert-run-tests-batch-and-exit"
+         :bounds "One separately admitted invocation only; exact binary, timeout, new model/test and named native pins checked before and after, with retained source copies and full output. Fresh private task-owned cwd; 30s timeout, 5s kill grace, 40s parent guard, 25 CPU seconds, 1073741824-byte address space, 1048576-byte limit per output file, zero core bytes. Capture 27 individual outcomes, exit, skips and postflight; missing tests, failures or timeout are not passes. No automatic retry, fallback, daemon, native load, user buffer, credential, network, compilation or installed-state change."
+         :interpretation "No current 27-test result exists in this review. Any new failures must be independently classified; a green batch would establish only its exact synthetic assertions, not actual owner authentication, consent, durable storage, real clock or native atomicity."}
+ :holds [:actual-green-result :real-identity :human-consent :govone-disclosure :durability :native-atomicity :real-effects :whole-s4a]
+ :execution {:emacs 0 :ert 0 :source-edits 0 :load 0 :git 0 :board 0 :ledger 0 :network 0 :credentials 0 :nested-agents 0
+             :only-artifact "reviews/s4a-bound-model-fixture-fix-review-v14.edn"}}

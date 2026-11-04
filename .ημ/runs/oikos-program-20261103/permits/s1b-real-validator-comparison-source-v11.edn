@@ -1,0 +1,15 @@
+{:permit/id :s1b-real-validator-comparison-source-v11
+ :kind :two-file-fixed-synthetic-source-authoring-only
+ :source :recommended-path-standing-authorization
+ :basis ["reviews/s1b-services-inert-compatibility-plan-v8.edn"
+         "reviews/s1b-services-inert-compatibility-plan-review-v9.edn"
+         "reviews/s1b-services-owner-api-verification-v10.edn"]
+ :add-only ["/tmp/opencode/oikos-s1b-services-compare-v11/harness.cljs"
+            "/tmp/opencode/oikos-s1b-services-compare-v11/manifest.edn"]
+ :scope "Fixed NBB comparison harness and complete literal synthetic vector manifest. Use actual Oikos production/validation and actual pinned Services Python validation; never copy either implementation. Include separate per-implementation expectations and source-bound external comparison identity. No owner repository edits."
+ :custody "Create the task root privately and refuse pre-existing executable paths. Preserve source hashes, raw-vector digests, exact owner identities and fixed Python program in the source report. Manifest is data, never caller code. Static data construction, hashes, syntax and zero-warning no-hook lint are permitted; no imported candidate functions or executable is run."
+ :limits "Future comparison remains capped at10seconds,256MiB including descendants,4096 final output bytes, with bounded indexed IPC and fixed input counts/sizes. No authority to run or relax these limits follows. Unknown complete runtime closure, immutable input custody or supervisor feasibility blocks execution, not source authoring."
+ :held [:validator-invocation :application-import :runtime :self-test-execution
+        :network :credential :services-fs-effects :shx :bash :installed-generation :whole-s1b]
+ :report ".ημ/runs/oikos-program-20261103/reviews/s1b-real-validator-comparison-source-v11.edn"
+ :review "Independent exact-source and literal-vector review follows authoring. A separate contained-runtime permit and actual genuine comparison are required for any compatibility claim. No new board, ledger or authority engine. No cleanup, publication or Git writes are delegated."}

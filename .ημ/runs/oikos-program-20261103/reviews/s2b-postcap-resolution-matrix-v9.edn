@@ -1,0 +1,15 @@
+{:scope :focused-test-only
+ :test-file "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b/test/oikos/law/i3_collector_test.cljc"
+ :test-sha256 "57766bf2263a6f7185d808434e3cf31c68aeeb30b84a2356dd8cf34eb99188bf"
+ :law-sha256 "bb7219137d743a1802bb0a52a60520288b8ac6d5663bfd939fbade5e6057df40"
+ :focused-var oikos.law.i3-collector-test/post-cap-pending-resolution-matrix
+ :classpath "src:test:/home/err/spaces/foresight/clio/src:/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps"
+ :results {:bb {:exit 0 :tests 1 :assertions 366 :failures 0 :errors 0}
+           :nbb {:exit 0 :tests 1 :assertions 366 :failures 0 :errors 0}
+           :lint {:command "clj-kondo --cache false --lint test/oikos/law/i3_collector_test.cljc" :exit 0 :errors 0 :warnings 0}}
+ :matrix {:pending [:baseline :gap :reconciliation] :precap [:nonstale :ack-timeout-stale]
+          :exact-accept-times [4999 5000 5001] :exact-rejection true
+          :negative [:wrong-head :wrong-generation :untrusted :timeout :retry]
+          :checks [:phase :generation :stale :identity :history :head :lease :intents :257-command-limit :no-retry :no-second-resolution :desktop-gap-links]}
+ :fixture-validity "Compact caller-authored repeat record and expected cap state are validated by the public step-domain on every positive exact-resolution call; all eighteen accepted calls and six rejected calls succeeded. Synthetic reachability is not authentication, external proof, or retained cross-call state."
+ :limits "Only the new focused test and target-file lint were run; no full suite, native adapter, actual IPC, external owner authentication, or deployment was exercised. Existing slow prefix tests remain intact. The test file had pre-existing changes before this task; hash covers the entire final file."}

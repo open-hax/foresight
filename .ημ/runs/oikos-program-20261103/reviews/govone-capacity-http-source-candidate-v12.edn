@@ -1,0 +1,18 @@
+{:candidate/id :govone-capacity-http-source-candidate-v12
+ :status :incomplete-source-only
+ :owner "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+ :head "259df13d175bde68c841156fdbfcde38c8444fce"
+ :candidate-hashes {"internal/inference/capacity_evidence_test.go" "c26f767af145cb425f980d066e24249f8f9607b5961f043276f024b6829ade49"
+                    "internal/httpserver/capacity_evidence_http_test.go" nil}
+ :five-file-status {"internal/inference/service.go" {:state :modified :sha256 "c276d0742abaf5a66dd68c90b4110f3658bd3ae3da3874ae655d00e7450fa0aa"}
+                    "internal/pipeline/context.go" {:state :modified :sha256 "3bd2446ba75e35035ee078d468b7070a6ae81ba987e88a72af4ab9c8b8e1fa3b"}
+                    "internal/inference/capacity_evidence_test.go" {:state :untracked :sha256 "c26f767af145cb425f980d066e24249f8f9607b5961f043276f024b6829ade49"}
+                    "internal/pipeline/capacity_evidence_test.go" {:state :untracked :sha256 "7dde92836ac00e9ea858adf26fb8e84d913ee1dcedf57ac5493d42ac410aab2e"}
+                    "internal/httpserver/capacity_evidence_http_test.go" {:state :absent :sha256 nil}}
+ :snapshot "Baseline, four original hashes, fixture and lockfile hashes match the v10/v9 records; fixture and locks also match HEAD. These observations are not atomic."
+ :oracles {:resolver "Unexecuted source matrix exercises real signed-policy evaluation and resolver over valid deployment and sensitivity values, allow/deny and external availability; includes unavailable-external local-only assertion. Invalid input tests remain. It does not dynamically test the unreachable failed-first production branch or arbitrary evaluators."
+           :http "Not authored: failure and success HTTP envelopes, authorization, distinct auditor and persisted event/projection/commitment binding all remain open. No second candidate hash exists."
+           :historical "Genuine pre-0040 HTTP preservation oracle remains open; no historical rows were fabricated."}
+ :holds [:source-completion :independent-exact-diff-review :compilation :tests :historical-compatibility :N1 :offline-closure :build-containment :exact-binary :runtime :independent-anchor :signed-policy-cause :request-decision-version :warm-cache-invalidation]
+ :execution "Static gofmt only; no Go command, app initialization, network, credential access, Git write, board or ledger mutation. Compilation and behavior are unverified."
+ :next "Finish the bounded HTTP source oracles and independently review both exact files before any separately authorized execution."}

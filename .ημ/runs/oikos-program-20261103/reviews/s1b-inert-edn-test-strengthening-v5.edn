@@ -1,0 +1,19 @@
+{:review/id :s1b-inert-edn-test-strengthening-v5
+ :date "2026-11-04"
+ :status :source-only-unrun
+ :test-file "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1b/test/oikos/law/services_inert_edn_test.cljc"
+ :test-sha256 "51966d65bc4846f3898f2f17659ce31563ffe8e4d97222527d16d44b78157c9b"
+ :prior-snapshot {:path "/tmp/opencode/s1b-test-strengthening-v5/prior-test.cljc.txt"
+                  :sha256 "6d2b506c26996bc412fbae5997bda5a355c3d5ae72c8a3b9290f976287d5c0d5"}
+ :concurrent-core-observation {:sha256 "e5b9a4b683ec08ef4e2160e842c5d1986aff595a76b70d2b0906d2207b59640a" :note "Concurrent source; not a settled or reviewed core identity."}
+ :added-matrix [:independent-canonical-grammar-rehashed :two-way-value-mismatch
+                :closed-record-and-binding-realistic-alternates :coherent-constant-and-external-revision
+                :fixed-raw-malformed-utf8-sha256 :independent-unicode-escaped-goldens
+                :descriptor-65535-65536-accepted-65537-refused :multibyte-value-byte-limits
+                :raw-vector-overrun :fixed-sanitized-errors]
+ :boundary-proof "Shared escaped length E yields payload 20+E and descriptor 45+E; descriptor ceiling 65536 restricts payload to 65511. 65536 valid payload is unreachable."
+ :verification {:static-lint "clj-kondo --lint test/oikos/law/services_inert_edn_test.cljc: 0 errors, 0 warnings"
+                :runtime-tests :not-run
+                :reason "Explicit instruction to wait for concurrent source writer and parent exact-source audit."}
+ :limitations "Assertions remain unexecuted; existing stub rejected negatives vacuously. No claim of law qualification or GREEN. Existing assertions preserved. External revision equality does not authenticate a caller; Services compatibility is not established."
+ :next "Parent reviews exact settled core and test hashes before running both runtimes and full qualification gates."}

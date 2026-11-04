@@ -1,0 +1,21 @@
+{:review/id :s4a-bound-model-green-tests-v9
+ :date "2026-11-04"
+ :kind :test-source-author-report
+ :authority :none
+ :verdict :source-authored-independent-review-required
+ :test-source {:path "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103/tests/unit/oikos-owner-authority-test.el"
+               :sha256 "a4e175bb791575b8b3ab14d7c55d0a344be8d3d6c2274f4719e1c39bc2deba01"
+               :ert-definitions 24 :previous-definitions 21 :added-definitions 3
+               :prior-private-archive "/tmp/opencode/oikos-s4a-test-red-bO5HSQ2o/REDtests.txt"
+               :prior-sha256 "5cff63a1766e4c938d6465702c245cd720c8c896aec5aac372d96eee4c9cee57"
+               :preservation "Static byte comparison after removing new section and restoring original trailer matches archived RED source; all 21 definitions and goldens remain unchanged."}
+ :oracles [{:id :issue-records :scope "Read and write positives, issue-only zero effects and exact issue outcome; identical future-issued approval/grant and read release, excessive approval/grant lifetime, and approval-after-grant across every event; assert denied first issue and zero effects."}
+           {:id :deadlines-and-cap :scope "Preserved existing per-record issue/consume/final strict-deadline matrix, gap expiry, both operations and safe issue-cap positive. Existing per-event identical deadline mutations eliminate substitution as sole cause."}
+           {:id :storage-and-order :scope "For each operation, failed and uncertain consume and final followed by final/revoke/duplicate final, with ordered outcome kinds/order and absence of success or ACK; preserved pending consume/revoke/final and restart/ticket-loss cases; exact duplicate-final outcomes and effect counts."}
+           {:id :nested-bounds :scope "For each operation and each issue/consume/final phase, a cycle in invocation replacement or destination and identity channel binding; deny, retain cyclic pointer identity, and positive valid trace; 64-event result and 65-event rejection."}]
+ :static-checks {:balanced-parentheses "Simple text scanner reports final depth zero, minimum zero, no open string; not an Elisp reader." :old-text-preserved true :definition-count 24}
+ :limitations ["No runtime was invoked; these are requested source-level oracles, not observed GREEN behavior or proof of termination. Batch timeout remains essential for cyclic inputs."
+               "Independent review must adjudicate the issue-only top-level status, failed-final terminal status and per-event outcome vocabulary against the model contract; assertions have not been executed."
+               "Cycle checks assert identity of the injected cells, not a comprehensive deep immutability snapshot. The trace-length cases do not independently prove traversal precedes every recursive operation."]
+ :holds [:independent-exact-source-audit :separate-green-admission :green-test-result :real-identity :human-consent :durable-storage :native-atomicity :live-effects :whole-s4a]
+ :execution {:emacs 0 :ert 0 :source-load 0 :bytecompile 0 :candidate-function-execution 0 :git 0 :board 0 :ledger 0 :network 0 :credentials 0 :nested-agents 0}}
