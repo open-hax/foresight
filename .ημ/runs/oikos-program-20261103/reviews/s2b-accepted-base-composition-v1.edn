@@ -1,0 +1,48 @@
+{:review/id :s2b-accepted-base-composition-v1
+ :verdict :approve-exact-prerequisite-composition-only
+ :scope "Independent local prerequisite composition review before S2B source admission; not a source permit, feature review, implementation approval, runtime authorization, or task completion."
+ :inputs {:plan-v2 ["s2b-collector-source-plan-v2.edn" "0b0f6ce97fd978b03e743463cb6944ebc0efef139d0152ec640e543317962608"]
+          :plan-v3 ["s2b-collector-source-plan-v3.edn" "0f8307256de2ee6a3e87a4c16ee4295166d7854a5cc828160f8c5900707482cf"]
+          :same-reviewer-v3 ["s2b-collector-source-plan-fix-review-v3.edn" "d511a4b24588a476cdb20ae77c8226b59878f52d4e8ff814e520b743f0610a2a"]
+          :contract-permit ["../permits/s2a-contract-c399b60e.edn" "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"]
+          :wire-permit ["../permits/s2a-wire-97e41a6b.edn" "53432d2f6988488b82c2f5f0339543576337625e7a4079b0488c60a16b2d2957"]
+          :contract-review-sha256 "e329a2fa6b171795a56c1800ac12893d5b1dccd1312f3cf0c7b01d9e0232542e"
+          :wire-review-sha256 "46c9cffc0afd5976b7b4c751d2a46828c3c836bc4b2ad207d4c6568508526003"}
+ :composition {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b"
+               :head "fed4e30272cc1186de14bcc708b3efc9736e3139"
+               :tree "429d9dde803b6d12ee07f692872a1b0dcba31ad1"
+               :comparison "git ls-tree -rz against git ls-files -s -z and individually calculated Git blob SHA-1 and executable/symlink modes from the working filesystem."
+               :tree-paths 63 :index-paths 63 :path-sets-equal true :index-modes-and-blobs-exact true :working-file-mode-or-blob-mismatches []
+               :status-before-and-after "git status --porcelain=v1 --untracked-files=all --ignored produced no entries; head and tree unchanged."
+               :no-s2b-additions "All paths are in the accepted tree; no collector source or extra paths observed. Accepted base contains S2A private fixture adapter and its integration tests: presence is not invocation or a new adapter grant."
+               :previous-scaffold "ae35073719974c0df1d2dae301c2179fa4785641; the accepted commit intentionally adds S1A/S2A/S3A prerequisites relative to scaffold. This diff is not uncommitted dirt or S2B source."
+               :descriptor-sha256 "7ad9541df188201860e212b91d3744a62cd9aa05ae4a8d80c25425b4f0886916"}
+ :frozen-pins {:method "Read nine paths and hashes from contract permit and four from wire permit, independently sha256sum each working file; every value below matches."
+               :count 13 :matched 13
+               :sha256 {"README.md" "85a93c408bb7c9167c297929915422023d377e0fd992a8c6134a1dc4a530f5fa"
+                        "bb.edn" "8f76a349e997923ae8130f81969a9d239522828e60f6645ae9de14ec0ada0af8"
+                        "scripts/test_desktop.clj" "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"
+                        "scripts/test_desktop_wire.clj" "73863662bae3d0f75a55cabcedbe172abfb65de3599c79d5adcc9aa8d0f21289"
+                        "src/oikos/infra/desktop_wire.cljc" "a1e6a3d4de9c003a58c7e27680eb250b7ec9ef04f12ef44fd3bc1daf8b5e55e2"
+                        "src/oikos/law/desktop.cljc" "edea4e32bd0279ccfc2f81a4cfbe24c9e1348f06606f9d597530d28f894680d7"
+                        "src/oikos/law/safe_reference.cljc" "baee008c0a3b2dc4a6ddd7bc8f4a63fed317d0d4514f961d819ad484019cdf60"
+                        "test/oikos/desktop_fixture.cljc" "77122676722cba3af9d62c42fcb725daf4236e6364ec50f7378a5907d4df4c57"
+                        "test/oikos/desktop_runner.cljc" "a3b84c0bf587a7ce051d1d1ea9257d75832337d963bec8e609a4da9654b00072"
+                        "test/oikos/desktop_wire_runner.cljc" "3c016bbef3533a28c3574aad7cefe1853486cfe5c3ffd13f0de444fffc022898"
+                        "test/oikos/infra/desktop_wire_test.cljc" "1693781e94f33dfcd62b76f284d279bee71ccc74f76fe5e07cf00e5222d8356d"
+                        "test/oikos/law/desktop_test.cljc" "be969cb41358194a630b35cadc0db13243be400cc2cffbe250703c2e0bc4b088"
+                        "test/oikos/law/plain_event_test.cljc" "5e4044f67c0792adad48ccd6c0544afc064afb8eb51eb853af306efd8996903f"}}
+ :environment {:clio-source "/home/err/spaces/foresight/clio" :clio-head "788cdd3434615a7932b924e68520dbf7f88408c2" :clio-src-status "clean"
+               :clio-deps "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps"
+               :permit "../permits/s2a-contract-c399b60e.edn" :review "../reviews/s2a-contract-fix-review-v2.edn"
+               :note "Absolute coordinator paths supplied as OIKOS_S2A_PERMIT and OIKOS_S2A_REVIEW. Existing cache used; no install or fetch. Each command timeout 600 seconds."}
+ :tests [{:command "bb test" :exit 0 :results [{:suite :bb :tests 18 :assertions 286} {:suite :nbb :tests 40 :assertions 546} {:suite :eval :tests 9 :assertions 39} {:suite :desktop-bb :tests 16 :assertions 1059} {:suite :desktop-nbb :tests 16 :assertions 1059}] :failures 0 :errors 0
+          :additional-output "S1A shared fixture SHA-256 f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209; authorized synthetic deadline regression returned :error/:timeout; native full-cap synthetic IPC import 6356992 bytes."}
+         {:command "bb scripts/test_desktop_wire.clj" :exit 0 :bb [15 347] :nbb [15 347] :failures 0 :errors 0}
+         {:command "bb scripts/test_spaces.clj" :exit 0 :bb [11 455] :nbb [11 455] :failures 0 :errors 0}
+         {:command "bb lint" :exit 0 :output "linting took 767ms, errors: 0, warnings: 0"}]
+ :limits {:import "No source import or product edit performed by this reviewer: parent had already fast-forwarded the branch. No private fixture adapter entry point or actual desktop integration append test was invoked. Accepted baseline tests include authorized offline synthetic subprocess and native IPC checks; these are not native i3 activity."
+          :not-performed [:collector :actual-desktop-integration-append :private-fixture-adapter :socket :native-i3 :model :dependency-fetch :board :ledger :commit :pr :nested-agent]
+          :no-credit [:source-permit :implementation-review :live-currentness :actual-owner-append :native-i3-ordering :nested-oracle :complete-s2b]
+          :qualification "The evidence verifies the local accepted commit/tree and file identity and the specified offline suites; it does not independently verify the remote merge, all Clio dependency bytes, universal absence of effects in unexecuted code, or any future collector implementation."}
+ :next "Parent may consider issuing the separately scoped source-only permit subject to the reviewed V2/V3 plan and eight-addition ceiling; all held boundaries remain held."}

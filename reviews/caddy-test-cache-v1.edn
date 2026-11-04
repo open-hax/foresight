@@ -1,0 +1,95 @@
+{:schema/version 1
+ :evidence/kind :isolated-caddy-test-dependency
+ :evidence/tier :observed
+ :status :verified
+ :observed-at "2026-11-03T21:15:19.598718+00:00"
+ :task {:owner "Services"
+        :external-reference-prefix "3f5d0052"
+        :reference-note "Coordinator supplied only the external task prefix."
+        :purpose "Prepare the already-authorized workflow-pinned test dependency only."
+        :coordinator "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+        :owner-worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"}
+ :workflow {:path "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103/.github/workflows/code-quality.yml"
+            :lines [55 72]
+            :sha256 "773b6c03bcb199aef8568b51a12a707c78855ebd939b685550b3b531051c1ecb"
+            :url-and-checksum-verified-before-fetch true}
+ :archive {:url "https://github.com/caddyserver/caddy/releases/download/v2.8.4/caddy_2.8.4_linux_amd64.tar.gz"
+           :path "/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773/caddy_2.8.4_linux_amd64.tar.gz"
+           :sha256 "a7e8306c54138cf88e371c5ec0caf7baf142ecc1d60a30897dfb67d65d3748c8"
+           :bytes 14595001
+           :expected-sha256-matched true
+           :on-disk-sha256-rechecked true
+           :checksum-verified-before-extraction-and-execution true}
+ :download {:implementation :python-standard-library-urllib
+            :max-bytes 104857600
+            :timeout-seconds 120
+            :socket-timeout-seconds 20
+            :elapsed-seconds 1.453
+            :http-status 200
+            :content-length-matched true
+            :retries 0
+            :alternate-url-or-version-attempted false
+            :http-error-body-fallback false
+            :tls-verification true
+            :https-only true
+            :proxy-use false
+            :credentials-forwarded false
+            :redirect-limit 3
+            :allowed-hosts ["github.com"
+                            "release-assets.githubusercontent.com"
+                            "objects.githubusercontent.com"
+                            "github-releases.githubusercontent.com"]
+            :redirect-hosts ["release-assets.githubusercontent.com"]
+            :final-host "release-assets.githubusercontent.com"}
+ :extraction {:inspected-members [{:name "LICENSE" :type :regular :bytes 11358}
+                                  {:name "README.md" :type :regular :bytes 11971}
+                                  {:name "caddy" :type :regular :bytes 40681624}]
+              :extracted-members ["caddy"]
+              :max-members 128
+              :max-total-declared-member-bytes 104857600
+              :regular-member-only true
+              :path-traversal-and-link-members-rejected true
+              :output-open-flags [:O_CREAT :O_EXCL :O_NOFOLLOW]
+              :private-directory-mode "0700"
+              :binary-mode "0700"}
+ :binary {:path "/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773/caddy"
+          :environment-variable "CADDY_TEST_BINARY"
+          :sha256 "d3491373b2d78e4eaa3f498b42852d399d404b0df3f274bbee66d62c12084be0"
+          :bytes 40681624
+          :tar-length-matched true
+          :on-disk-sha256-rechecked true
+          :regular-file-single-link-current-user-owned true
+          :format :ELF64
+          :endianness :little
+          :machine :x86_64
+          :version "v2.8.4 h1:q3pe0wpBj1OcHFZ3n/1nl4V4bxBrYoSoab7rL9BMYNk="
+          :expected-version-matched true}
+ :execution {:arguments ["version"]
+             :exit-code 0
+             :stderr ""
+             :timeout-seconds 10
+             :sanitized-environment true
+             :system-install false
+             :service-or-daemon-start false
+             :listener-start false
+             :active-config-validation false
+             :services-tests-run false
+             :docker-used false}
+ :cache {:path "/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773"
+         :owner "Services dependency-download subagent"
+         :active true
+         :ownership-manifest "/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773/ownership-manifest.json"
+         :verification-result "/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773/verification-result.json"
+         :free-bytes-before 47749775360
+         :free-bytes-after 47693586432
+         :retention {:exact-remote-backup-verified false
+                     :automatic-removal-authorized false
+                     :remove-before-verified-exact-content-backup false
+                     :cleanup-blocker "Active dependency cache; no verified exact-content remote backup."
+                     :policy "Retain archive, binary and cache metadata until their exact contents are verified recoverable from pushed Git or verified Google Drive backup. Active cache remains protected."
+                     :policy-source "docs/notes/agent-scratch-cleanup.md"}}
+ :scope {:services-source-and-tests-modified false
+         :board-or-receipt-mutations false
+         :git-commit-or-push false
+         :binary-or-private-environment-written-to-git false
+         :coordinator-report "reviews/caddy-test-cache-v1.edn"}}

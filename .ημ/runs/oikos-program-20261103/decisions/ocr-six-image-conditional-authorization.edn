@@ -1,0 +1,19 @@
+{:decision/id :ocr-six-image-conditional-authorization-20261103
+ :decision/source :question-tool-explicit-user-answer
+ :question "The restarted OCR worker's startup inputs match the reviewed pins. Once the runner, governance/resource checks, durable receipts and hard limits are independently qualified, may I run one local six-image synthetic OCR batch?"
+ :selected-label "Authorize bounded batch"
+ :selected-description "At most six sequential requests, five seconds each and 30 seconds total, with a 256 MiB client ceiling. Existing loopback worker only; no retries, restarts, downloads, private inputs or cloud."
+ :scope {:batches 1 :maximum-ocr-posts 6 :concurrency 1
+         :per-request-seconds 5 :total-seconds 30 :client-memory-bytes 268435456
+         :input :six-frozen-synthetic-pngs
+         :runtime :existing-loopback-ocr-worker
+         :endpoint "http://127.0.0.1:8099"}
+ :preconditions [:independently-reviewed-runner :qualified-hard-process-boundary
+                 :fresh-trusted-resource-admission :separate-authority-context-bindings
+                 :reviewed-durable-raw-evidence-store :response-identity-binding
+                 :reviewed-no-second-hop-assessment :explicit-parent-execution-admission]
+ :not-authorized [:retries :additional-batches :restarts :model-downloads
+                  :new-model-loads :private-inputs :personal-capture :cloud :spending]
+ :authority-limit "This records human operator-resource consent, not a GovOne signed-policy verdict, resource reservation, code approval or executable parent permit. Content hashes establish consistency, not issuer identity."
+ :grant-consumption :not-consumed
+ :execution :held-until-all-preconditions-qualified}

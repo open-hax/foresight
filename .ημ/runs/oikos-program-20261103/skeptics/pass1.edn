@@ -1,0 +1,262 @@
+{:pass 1
+ :scope :independent-read-only-planning-skeptic
+ :persistence/source :completed-conversation-pass1
+ :persistence/note "Exact classification and anchor strings from the completed pass1 response; persistence is not a new review. Addressed means corrected planning contract, not verified implementation."
+ :votes
+ [[:s1a/config-isolation :confirmed-remaining
+   {:initial "F:s1a#Acceptance criteria omits configuration namespaces."
+    :current "C:s1a:36-41 still omits them; O:README.md:55-59 explicitly requires disjoint installed/dev config roots."}]
+
+  [:s1a/effect-boundary :refuted
+   {:initial "F:s1a#Scope requires pure generation/render contracts, not execution of shx check."
+    :current "C:s1a:28,37,59; X:src/shx/cli.clj:58-95 confirms check is effectful, but no S1A contract adopts that route. Guard details belong to adapter qualification."}]
+
+  [:s1a/target-matrix :refuted
+   {:initial "F:s1a#Scope already makes target-specific render contracts the deliverable."
+    :current "C:s1a:28,37,41 requires explicit unsupported-target failure. X:src/shx/cli.clj:106-114 does not establish a generic renderer, but the card claims none; completed validators are not required during planning."}]
+
+  [:s1b/owner-handoff :confirmed-addressed
+   {:initial "F:s1b#Scope assumes a Services generation handoff without identifying its availability."
+    :current "C:s1b:28,38,42 explicitly blocks qualification on an owner-reviewed versioned seam. V:docs/deployment-model.md:26-56,128-135 confirms the existing DO lane is not that seam."}]
+
+  [:s1b/shx-check-effects :confirmed-addressed
+   {:initial "F:s1b#Verification only compares filesystem hashes, insufficient to exclude subprocess effects."
+    :current "C:s1b:36,42 now requires zero lifecycle/process mutation and secret-free plans. X:src/shx/cli.clj:52-64,89-94 demonstrates why native check cannot satisfy that contract unchanged."}]
+
+  [:s1b/bound-approval :refuted
+   {:initial "Caller-supplied inert proposal context does not establish that S1B accepts caller-forged deployment approval."
+    :current "C:s1b:28,36,38,42 requires the reviewed owner contract, approval/revision binding, dirty-target holds and owner-bound evidence before qualification. O:README.md:40-43 explicitly disclaims scaffold authorization."}]
+
+  [:s2a/incarnation :confirmed-addressed
+   {:initial "F:s2a#Acceptance criteria incorrectly specifies server-epoch plus runtime ID as sufficient identity."
+    :current "C:s2a:36,41,59 requires an incarnation/creation revision and same-epoch close/reuse denial."}]
+
+  [:s2a/exact-retry :confirmed-addressed
+   {:initial "F:s2a#Verification leaves duplicate delivery ambiguous."
+    :current "C:s2a:41,59 explicitly retries the exact event through ledger admission. L:src/clio/infra/runtime.cljs:25-32 creates fresh events; L:src/clio/infra/ledger.cljs:60-95 distinguishes exact retry and conflicting reuse."}]
+
+  [:s2a/coverage-gap :confirmed-remaining
+   {:initial "F:s2a#Acceptance criteria lacks an explicit observational coverage-gap projection transition."
+    :current "C:s2a:36-41 still does not distinguish collector coverage gaps from missing persisted history. L:src/clio/domain/canonicalize.cljc:29-69 correctly rejects missing parents/stream slots; observation uncertainty must not weaken those laws."}]
+
+  [:s2a/concurrent-observations :refuted
+   {:initial "Deterministic replay alone is not a declaration that tie order establishes causality."
+    :current "L:src/clio/domain/canonicalize.cljc:134-154 preserves graph incomparability explicitly. C:s2a:28,36-37 adopts causal streams; no last-replayed-wins desktop rule is specified."}]
+
+  [:s2b/snapshot-cut :confirmed-remaining
+   {:initial "F:s2b#Scope says subscribe-before-snapshot without an acknowledged/fenced cut contract."
+    :current "C:s2b:28,36,41 still leaves delayed subscription acknowledgement and buffered-event completion unspecified. IPC:1235-1247,2196-2205,2253-2266 distinguishes acknowledgement, SEND_TICK reply and receipt on the event stream. Require a causal fence or equivalent proof, not necessarily one prescribed implementation."}]
+
+  [:s2b/incarnation-generation :confirmed-addressed
+   {:initial "F:s2b#Acceptance criteria only covers disconnect/epoch invalidation."
+    :current "C:s2b:37,41,59 adds same-epoch incarnations and fail-closed reconnect continuity. Collector callback-generation guards remain implementation tests of that contract, not a separate requirement to implement them now."}]
+
+  [:s2b/freshness-vs-history :confirmed-remaining
+   {:initial "F:s2b#Acceptance criteria conflates reconciled snapshot currentness with observation coverage."
+    :current "C:s2b:36-41 does not explicitly expose independent freshness/completeness or silent structural-coverage uncertainty. O:docs/architecture/workbench.md:104-116 requires both; resnapshot cannot reconstruct missed intermediate history."}]
+
+  [:s3a/incarnation :confirmed-addressed
+   {:initial "F:s3a#Scope inherits the insufficient epoch/runtime-ID identity."
+    :current "C:s3a:37,42,57 binds complete lifetimes and tests same-epoch reuse isolation."}]
+
+  [:s3a/branch-version :confirmed-addressed
+   {:initial "F:s3a#Acceptance criteria names only observed-revision conflicts."
+    :current "C:s3a:37-42 adds branch ID, base revision, proposed revision and explicit conflict state. Detailed concurrent-edit/CAS tests should implement this contract, not be demanded as present implementation."}]
+
+  [:s3a/no-mutation-conflict :confirmed-addressed
+   {:initial "F:s3a#Verification names a zero-effect adapter spy without logical-state assertions."
+    :current "C:s3a:38,42 explicitly preserves branch, membership, admitted history and desktop on conflict; silent rebase is forbidden."}]
+
+  [:s3a/observed-vs-proposed :refuted
+   {:initial "F:s3a#Scope specifies speculative projection branches, not replacement observations."
+    :current "C:e3:20-26 explicitly separates logical membership from physical placement; O:docs/architecture/workbench.md:79-89 separates observation, proposal and application. Additional display fixtures are useful, but the claimed authority confusion is not contracted."}]
+
+  [:s3b/physical-ownership :confirmed-addressed
+   {:initial "F:s3b#Acceptance criteria says admitted ownership without identifying the targeted lifetime/resource."
+    :current "C:s3b:36,41,61 now names that lifetime/resource; W:15-16 limits autonomy to agent-owned resources. O:docs/architecture/workbench.md:92-97 expressly denies authority from logical membership."}]
+
+  [:s3b/check-at-effect :refuted
+   {:initial "An inert preview checker is not evidence that future executors may rely on preview-time checks alone."
+    :current "C:s3b:36 requires matching revision and unexpired lease for movement; O:README.md:40-43 and O:docs/architecture/workbench.md:87-90 require trusted effect-boundary revalidation. Interleaving cases are implementation verification of an existing requirement."}]
+
+  [:s3b/observed-noninterference :refuted
+   {:initial "F:s3b#Acceptance criteria already protects visible workspaces and output focus."
+    :current "C:s3b:36,41 requires nested-i3 protected-focus/external-move tests; O:docs/architecture/workbench.md:92-96 explicitly requires postconditions and recognizes creation/global-effect hazards. No implementation-level success is being claimed."}]
+
+  [:s3b/consent-and-return :confirmed-remaining
+   {:initial "F:s3b#Acceptance criteria requires human join acceptance but leaves its consumption/supersession unspecified."
+    :current "C:s3b:37,41 still does not say that intervening human navigation supersedes an earlier return-focus grant. Fresh target validity alone does not make an old attention-changing consent current."}]
+
+  [:s3b/s4a-prerequisite :confirmed-addressed
+   {:initial "F:s3b#frontmatter.dependency omits S4A."
+    :current "C:s3b:4,56-61 explicitly includes S4A beside S3A/S2B. The frozen/proposed mismatch is not a remaining current-card defect."}]
+
+  [:s4a/trusted-context :refuted
+   {:initial "The scaffold explicitly accepts unauthenticated context only for effects-disabled validation."
+    :current "C:s4a:32,36 requires shared authorization; O:README.md:40-43 requires trusted executor context. O:src/oikos/law/actions.cljc:45-70 never grants execution. No adopted request-to-authority bypass is demonstrated."}]
+
+  [:s4a/editor-revision :confirmed-remaining
+   {:initial "F:s4a#Acceptance criteria names revision-bound preview but does not identify editor resource lifetime."
+    :current "C:s4a:36,41 still lacks an explicit existing-server/buffer-incarnation binding across replacement or reconnect. S2A's window lifetime does not by itself establish Emacs buffer identity; retain that identity requirement before adapter qualification."}]
+
+  [:s4a/unsafe-aliases :refuted
+   {:initial "Existing unrelated gptel tools are unsafe as unrestricted Oikos capabilities, but adoption is not specified."
+    :current "C:s4a:32,36-41 already rejects arbitrary evaluation and requires scoped bounded reads. E:gptel-tools.el:135-175,201-209 proves legacy hazards, not an Oikos alias bypass; blanket name bans are not necessary if safe handlers use those names."}]
+
+  [:s4a/positive-ipc :refuted
+   {:initial "F:s4a defines future adapters; scaffold inertness is not a planning regression."
+    :current "C:e4:34-40 and C:s4b:36-41 already require positive read/preview/action evidence and actual client integration or blockers. Repeating every positive scenario in S4A is not an independent program gap."}]
+
+  [:s5a/redelivery :confirmed-addressed
+   {:initial "F:s5a#Acceptance criteria names frame hash/revision without immutable observation identity."
+    :current "C:s5a:37-43,76 explicitly separates capture event ID, byte hash, lifetime, derived-event ID and versioned projection key; identical-byte recapture remains distinct."}]
+
+  [:s5a/evidence-through-index :confirmed-addressed
+   {:initial "F:s5a#Acceptance criteria could confuse equal supplier/model text and lacks versioned projection identity."
+    :current "C:s5a:28,36-43 and C:e5:34 require supplier/model provenance through ingestion/retrieval. I:devops/src/i3/desktop/score.clj:197-212 remains an adapter hazard to test, not evidence the corrected contract permits provenance loss."}]
+
+  [:s5a/stop-barrier :confirmed-remaining
+   {:initial "F:s5a#Acceptance criteria names stop/exclusion and bounded control latency, not publication revocation."
+    :current "C:s5a:39,70-72 freezes timing/resource bounds but still does not explicitly fence deferred replies and index publication after stop/exclusion. I:devops/src/i3/desktop/index.clj:147-185 shows queued results can persist later."}]
+
+  [:s5a/index-isolation :confirmed-remaining
+   {:initial "F:s5a#Scope reuses the installed desktop index without an explicit development namespace binding."
+    :current "C:s5a:28,43,57-59 does not close that binding. I:devops/src/i3/desktop/index.clj:27,123-144 hardcodes project desktop; I:devops/src/i3/desktop/state.clj:10-30 defaults to the installed cache. S1A filesystem isolation alone does not isolate graph labels/retrieval."}]
+
+  [:s5a/supplier-accounting :confirmed-remaining
+   {:initial "F:s5a#resource-profile comment bounds client execution but does not resolve supplier work after timeout."
+    :current "C:s5a:70-72 retains that gap. I:devops/ocr/server.py:183-209 decodes before the lock and uses ThreadingHTTPServer; I:devops/src/i3/desktop/ocr.clj:52-60 only times out the client. Preserve reservations until supplier completion/termination is known, or deny admission."}]
+
+  [:s5b/expiry :confirmed-addressed
+   {:initial "F:s5b#Acceptance criteria and Verification leave retention duration unspecified."
+    :current "W:10-14 and D:4-8 now supply 24h images, 7d text, per-item expiry/explicit indefinite retention and no renewal from claim acceptance. C:s5b:41 already requires replay/expiry tests; fake-clock mechanics are future implementation."}]
+
+  [:s5b/safe-ledger :confirmed-remaining
+   {:initial "F:s5b#Acceptance criteria preserves immutable history without specifying safe admitted metadata."
+    :current "C:s5b:37,45,58 still needs the irreversible-admission rule carried into S2A/S5A schemas: secret-bearing titles, paths and payloads must not enter immutable facts. O:docs/architecture/workbench.md:72-75 identifies this requirement; L:src/clio/infra/ledger.cljs:69-95 validates the supplied schema, not product privacy."}]
+
+  [:s5b/copy-deletion :insufficient-evidence
+   {:initial "The report asserts a backup/restore copy problem without identifying an adopted backup/export store or restore path."
+    :current "C:s5b:37,41,58 and O:docs/architecture/workbench.md:72-75 require lineage deletion including derived exports. Owned backups must obey it if introduced; no evidence establishes the alleged current unmanaged-copy topology."}]
+
+  [:s5b/acceptance-scope :refuted
+   {:initial "F:s5b#Acceptance criteria already requires explicit provenance-preserving acceptance; it does not authorize model-agreement promotion."
+    :current "C:s5b:36,41; O:docs/architecture/workbench.md:64-67,172-175 excludes predictions-as-gold. D:4-6 separately denies implied retention renewal/training/export permission. Exact grant serialization is a future contract implementation, not an observed contrary rule."}]
+
+  [:s5b/late-result :confirmed-addressed
+   {:initial "F:s5b#Verification lacks the concrete expiry/nonrenewal policy needed to judge replay and controls."
+    :current "W:10-14; D:4-8 require continuing raw expiry and no implicit renewal; C:s5b:37,41 requires tombstones/deletion propagation and pause/resume/stop replay. This settles the planning invariant, not late-result implementation correctness."}]
+
+  [:s6a/release-matrix :confirmed-remaining
+   {:initial "F:s6a#Scope proposes text/image/label/tool governance through existing gateway sessions."
+    :current "C:s6a:28,36-41,53 does not establish which non-image payload/sink pairs have release authority. G:docs/api/openapi.yaml:2666-2708,3541-3555 exposes string chat and api_response/stage_api channels, not arbitrary artifact/MCP/upload grants. Keep unsupported releases explicitly blocked; session/redaction success is insufficient."}]
+
+  [:s6a/second-hop :refuted
+   {:initial "Permitting authenticated local transport is not permission for downstream cloud forwarding."
+    :current "C:s6a:41,65 requires zero unauthorized external/third-party egress, not merely zero external first hops. O:README.md:76-78 explicitly requires separate runtime-ownership/egress qualification. A local proxy attempting cloud is a valuable test of the existing contract, not an allowed exception."}]
+
+  [:s6a/positive-modes :refuted
+   {:initial "The planning card does not claim denials alone have qualified hybrid_redacted/external_approved."
+    :current "C:s6a:28,36-41 defines future integration across modes with owner APIs; C:e6:34-40 requires gateway contract fixtures. Positive transformation fixtures belong in that qualification, but their unimplemented state is not a planning defect."}]
+
+  [:s6b/lens-scope :insufficient-evidence
+   {:initial "Supplementary Knoxx source has raw-context tools and nil-context assembly, but no adopted Oikos caller/endpoint seam is identified."
+    :current "K:backend/src/cljs/knoxx/backend/infra/lens/tools.cljs:111-135,166-179 demonstrates the hazard, not anonymous external access. C:s6b:32,36,60 already requires scoped evidence-only behavior and blocks missing compatibility. A source/caller adoption pin is needed before asserting an actual bypass."}]
+
+  [:s6b/independent-audit :refuted
+   {:initial "The card does not promise an independent-audit badge from event count or a Merkle-root field."
+    :current "G:internal/auth/evidence.go:9-23 owns producer separation; G:internal/httpserver/stage_api_evidence.go:50-102,142-179 distinguishes chain status and unavailable/unchecked independent targets. C:s6b:28,36,41 requires scoped evidence and untrusted-response validation; preserve those distinctions without inventing a second authorization engine."}]
+
+  [:s6b/history-custody :refuted
+   {:initial "F:s6b#Acceptance criteria already requires bounded complete history; Verification explicitly tests incomplete histories."
+    :current "C:s6b:37,41 retains a testable contract. K:backend/src/cljs/knoxx/backend/infra/agent/history.cljs:40-72 demonstrates pruning to avoid, and G:docs/api/openapi.yaml:2702-2708 supplies effective-limit hazards; neither mandates that Oikos adopt pruning or trim history."}]
+
+  [:s6b/tool-history :confirmed-addressed
+   {:initial "F:s6b#Scope leaves native tool-message API compatibility unresolved."
+    :current "C:s6b:60 explicitly makes missing gateway/API compatibility a blocker. G:docs/api/openapi.yaml:2666-2680 and G:internal/inference/service.go:2340-2346 reject native tool roles. Addressed by blocking unsupported qualification, not by claiming a faithful tool adapter exists."}]
+
+  [:s6b/rehydration-deletion :confirmed-remaining
+   {:initial "F:s6b#Acceptance criteria does not distinguish current delivery authority, key erasure and payload-copy deletion."
+    :current "C:s6b:36-41 remains generic. G:docs/api/openapi.yaml:590-607,648-653 allows HTTP200 denied delivery and terminal-safe evidence. K:backend/src/cljs/knoxx/backend/infra/lens/v3_tools.cljs:223-243 treats response content/termination acknowledgements too coarsely to qualify delivery or complete erasure unchanged."}]
+
+  [:s7b/synthetic-only :confirmed-addressed
+   {:initial "F:s7b#Acceptance criteria permits sanitized fixtures, potentially including personal-source material."
+    :current "C:s7b:68 and W:9,19-20 supersede that wording with synthetic-only, GovOne-authorized, verified-free zero-spend constraints. Sanitization cannot broaden authority."}]
+
+  [:s7b/precise-deps :confirmed-addressed
+   {:initial "F:s7b#frontmatter.dependency and Dependencies wait for whole E6."
+    :current "C:s7b:4,56-57,68 names S7A plus S6A. No remaining frozen/current dependency mismatch."}]
+
+  [:s8a/consent-admission :confirmed-remaining
+   {:initial "F:s8a#Scope records consent; Acceptance criteria chiefly specifies revocation."
+    :current "C:s8a:28,36-41 still lacks an explicit valid source/item/purpose consent precondition before retaining corpus payloads. D:4-6 distinguishes item retention from claim acceptance/training/export; carry that distinction into admission rather than recording a consent field alone."}]
+
+  [:s8a/identity-lineage :refuted
+   {:initial "The frozen card does not identify source hash as label identity; it explicitly requires actual-identity dedupe and append-only corrections."
+    :current "C:s8a:36-41 preserves source observation IDs and transitive correction lineage; O:docs/architecture/workbench.md:172-175 retains actor/model/prediction/correction provenance. The exact label schema is a deliverable, not evidence that distinct corrections are contracted to collide."}]
+
+  [:s8a/partition-freeze :confirmed-addressed
+   {:initial "F:s8a#Acceptance criteria broadly groups temporal/app/source families without explicit transitive correction rules."
+    :current "C:s8a:37,41,62 requires versioned families, frozen grouping policy, transitive correction inheritance, conflicting-lineage rejection and cross-split near-duplicate audit failure. Invalidating rather than silently moving contaminated data satisfies the planning requirement; detailed manifest mechanics remain future work."}]
+
+  [:s8a/precise-deps :confirmed-addressed
+   {:initial "F:s8a#frontmatter.dependency waits for whole E2/E5/E6/E7."
+    :current "C:s8a:4,55-58,62 names S2A/S5A/S6A/S7A and explicitly excludes optional S7B. C:e8:57 confirms parent summaries are not implicit child gates."}]
+
+  [:s8b/artifact-admission :confirmed-remaining
+   {:initial "F:s8b#Acceptance criteria requires GovOne inspection plus human approval without binding exact artifact and recipient."
+    :current "C:s8b:28,36,42 still does not bind final bytes/destination or state the unsupported VLM/upload release blocker. G:docs/api/openapi.yaml:2666-2708,3541-3555 does not supply that arbitrary-artifact authority."}]
+
+  [:s8b/zero-spend-resources :confirmed-addressed
+   {:initial "F:s8b#Verification omits explicit historical-budget and resource-proof denial cases."
+    :current "C:s8b:37,42,61 now requires fresh budget/resource/teardown evidence and denies historical budget, missing resource proof and uncertain teardown. W:19-20 adds verified-free zero spending; stale/mismatched proofs cannot satisfy freshness."}]
+
+  [:s8b/versioned-export :refuted
+   {:initial "F:e8#Acceptance criteria already requires coordinate/template/model/license version pins."
+    :current "C:e8:35 and C:s8b:28,42 retain versioned reproducibility and hash checks. A fully implemented manifest schema is not required during planning; source/split lineage also comes from C:s8a:37,41."}]]
+ :new-human-policy-questions []
+ :anchor-key
+ {:current "C:key:line resolves through :card-root and :cards below."
+  :frozen "F:key#section resolves to .ημ/runs/oikos-program-20261103/cards/<uuid>.json using the key's UUID from .ημ/workflows/oikos-program.edn; headings refer to its body section."
+  :workflow "W = .ημ/workflows/oikos-program.edn"
+  :retention-decision "D = .ημ/runs/oikos-program-20261103/decisions/accepted-retention.edn"
+  :card-root "docs/agile/kanban/"
+  :cards
+  {:s1a "oikos-define-isolated-generation-manifests-and-target-render-contracts-8927dcc8.md"
+   :s1b "oikos-implement-preview-check-apply-rollback-through-services-owned-generations-86925c3c.md"
+   :s2a "oikos-admit-desktop-causal-events-through-clio-and-replay-edn-projections-bb5e8203.md"
+   :s2b "oikos-reconcile-i3-subscribe-snapshot-races-and-reconnect-revisions-42935ec3.md"
+   :s3a "oikos-implement-logical-memberships-and-speculative-edn-projection-branches-2549ba0d.md"
+   :s3b "oikos-admit-sandbox-runtime-workspaces-with-leases-and-deliberate-human-joining-43e11d9a.md"
+   :s4a "oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+   :s4b "oikos-qualify-client-adapter-matrix-without-duplicating-domain-contracts-5ec2aaf3.md"
+   :s5a "oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+   :s5b "oikos-project-epistemic-knowledge-with-retention-forgetting-and-stop-controls-ca60db91.md"
+   :s6a "oikos-bind-all-egress-paths-to-the-mojomast-govone-policy-session-37b28c9b.md"
+   :s6b "oikos-expose-scoped-knoxx-lens-policy-evidence-and-complete-gateway-history-8ec26002.md"
+   :s7b "oikos-qualify-12b-backends-and-governed-proxx-comparison-after-admission-aeb279c3.md"
+   :s8a "oikos-record-consented-corrected-labels-and-leakage-safe-corpus-partitions-0d3ebf42.md"
+   :s8b "oikos-prepare-govone-approved-reproducible-colab-exports-with-spending-holdback-ffe21376.md"
+   :e3 "oikos-named-collaborative-projection-spaces-with-deliberate-joining-2eb908b4.md"
+   :e4 "oikos-shared-muse-i3-and-existing-emacs-capabilities-across-clients-e0a3251a.md"
+   :e5 "oikos-continuous-local-perception-and-event-backed-knowledge-84a8adaa.md"
+   :e6 "oikos-govone-egress-admission-and-knoxx-lens-evidence-6244a5be.md"
+   :e8 "oikos-consented-labels-and-bounded-colab-training-corpus-9faa6482.md"}
+  :owner-roots
+  {"O" "/home/err/spaces/foresight/oikos/"
+   "L" "/home/err/spaces/foresight/clio/"
+   "X" "/home/err/spaces/foresight/shx/"
+   "V" "/home/err/spaces/foresight/services/"
+   "G" "/home/err/devel/orgs/mojomast/govone/"
+   "K" "/home/err/spaces/knoxx/"
+   "I" "/home/err/.config/i3/"
+   "E" "/home/err/.spacemacs.d/"
+   "IPC" "/usr/share/doc/i3-wm/ipc.html"}}
+ :prior-pass-evidence
+ {:report-records-read 16 :frozen-cards-read 24 :current-cards-read 24
+  :candidate-count 53
+  :oikos-files-match-pinned-source "ae35073719974c0df1d2dae301c2179fa4785641"}
+ :tests-executed false
+ :live-rheos-readback false
+ :native-provider-approval false
+ :policy-change false}

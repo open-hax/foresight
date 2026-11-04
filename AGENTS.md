@@ -55,6 +55,7 @@ candidates, and accepted lifts are not interchangeable.
 | `receipt-river` | open-hax/receipt-river | receipt-ledger | Receipt-writing CLI and accountability records |
 | `axxium` | open-hax/axxium | identity-auth-kernel | Identity and authorization kernel; existing repository history is preserved |
 | `openplanner` | open-hax/openplanner | semantic-graph | Semantic graph stack (crawler, GraphQL, layout, similarity, storage) — a projection source, never the authority for resource state, board state, or ledgers |
+| `oikos` | open-hax/oikos | local-first-agent-workbench | Private desktop/Emacs workbench: NBB adapters, Clio projection plans, governed local perception and shared agent views; development scaffold, not installed |
 | `.agents` | riatzukiza/.agents | skill-catalog | Canonical agent skill catalog (nested Git-owned consolidation input, not actionable here) |
 | `eta` | (root-owned) | clojure-harness | Transduction harness code (consolidation input, not a submodule, not the domain model) |
 | `alpha` | (root-owned native component) | structural-integrity | Artifact/reaction laws — is a thing well-formed before it is used |

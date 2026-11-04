@@ -1,0 +1,73 @@
+{:review/id :s2a-wire-code-v1
+ :date "2026-11-03"
+ :kind :independent-adversarial-exact-code-local-harness-review
+ :reviewer {:role :boundary-designer-not-candidate-implementer
+            :native-provider-approval false :approval-credit 0}
+ :verdict :changes-requested
+ :target {:source "7bd796cff3cf7f3365f1221e789bdb9e37bedaaf"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2a"
+          :decoder "src/oikos/infra/desktop_wire.cljc"
+          :decoder-sha256 "794eaa3ad0aab5494b2f7249db3e65f8a290d560b35bfa854793d80342b3f5b3"
+          :head-and-decoder-hash-directly-observed true
+          :decoder-and-test-worktree-diff-from-candidate-empty true}
+ :scope "Actual source/API/tests and handoff reviewed before running pure tests. Literal bounded ASCII #:namespace maps are authorized and NOT themselves a finding. Neither rejecting arbitrary owner EDN nor requiring a canonical printer is proposed. No production edit, integration execution, persistence, fixture, schema/history write, board/ledger/PR/commit/service/model operation performed. Only this new report created."
+ :findings
+ [{:id :s2a-wire/namespaced-key-alias-collapse
+   :severity :P1 :confidence 1.0
+   :location "src/oikos/infra/desktop_wire.cljc: lexical-ranges! # dispatch branch; decode-string owner read before inspect-tree!"
+   :claim "Accepted namespaced maps can contain two lexical keys which resolve to the SAME owner key. Owner silently collapses the collision; the closed fresh tree and frozen law cannot detect the erased conflicting input. The candidate therefore does not meet the requested duplicate-key refusal profile."
+   :reproduction {:runtimes [:bb :nbb]
+                  :minimal "(wire/decode-string \"#:a{:x 1 :a/x 2}\") => #:a{:x 2}"
+                  :equal-values "#:a{:x 1 :a/x 1} also accepted"
+                  :reverse-order "#:a{:a/x 2 :x 1} => #:a{:x 1}"
+                  :actual-event "Let base=(f/baseline), text=(clojure.string/replace (pr-str base) \":seq 1\" \":seq 999\"), ambiguous=(str (subs text 0 (dec (count text))) \" :event/seq 1}\"). (= base (wire/decode-event ambiguous)) returns true on both BB and NBB. Actual candidate default #:event output retained; no printer binding."
+                  :owner-calls 1}
+   :impact "Conflicting event sequence assertions disappear before qualification, so a wire event with :seq 999 and :event/seq 1 is accepted as the ordinary sequence-1 baseline with identical canonical identity. This is a concrete ambiguity/refusal failure, not a claim that a valid frozen event or approval was forged."
+   :required "Add failing regressions for equal/unequal aliases in both orders and nested namespaces, including namespace-unqualification :_/x. Prevent ambiguous keys before the owner irreversibly collapses them. A carefully narrowed lexical map-key profile or reviewed additive owner duplicate-expansion refusal may solve it; do not copy an EDN/admission kernel or weaken frozen law. If owner source changes, new owner pin/digest/downstream review is required. Preserve actual default owner writer roundtrip."
+   :existing-test-gap "only-explicit-bounded-namespaced-map-dispatch-is-admitted tests legal nesting and forbidden dispatch but not namespace-expanded key collisions."}
+  {:id :s2a-wire/raw-partition-container-metadata-laundering
+   :severity :P2 :confidence 1.0
+   :location "src/oikos/infra/desktop_wire.cljc: replay-history captured-ledgers guard"
+   :claim "replay-history accepts a metadata-tainted raw in-memory partition vector, then mapv silently drops that metadata before frozen replay. This is not reader-generated location metadata and bypasses the strict raw-input boundary for the newly introduced container."
+   :reproduction {:runtimes [:bb :nbb]
+                  :expression "(let [v (with-meta [(pr-str (f/baseline))] {:secret \"SYNTHETIC-SECRET\"})] [(safe/plain-data? v) (:coverage (wire/replay-history (f/context) (f/revisions) v))])"
+                  :actual [false :current]
+                  :expected :constant-wire-invalid-refusal}
+   :impact "A non-plain caller-owned runtime wrapper reaches decode/canonicalization and is laundered into plain partitions; the frozen law itself remains correct. This violates the stated preservation of raw caller metadata rejection, even though no metadata is serialized into the resulting event."
+   :required "Before mapping or invoking owner functions require the captured-ledger container itself to satisfy the unchanged frozen plain-data representation guard (and existing vector/string/count limits). Add metadata variants including {}, location-only keys, secret and host/function metadata; assert constant refusal before owner parse/canonicalization. Do not strip container metadata."
+   :existing-test-gap "Raw event metadata coverage is strong, but no metadata-bearing captured-ledgers vector is tested."}]
+ :verification
+ {:pure-invoker {:command "bb scripts/test_desktop_wire.clj with handoff-pinned existing owner/dependency cache and actual coordinator permit/review paths"
+                 :bb {:tests 11 :assertions 287 :failures 0 :errors 0}
+                 :nbb {:tests 11 :assertions 287 :failures 0 :errors 0}}
+  :baseline {:command "bb test"
+             :inherited-bb [18 286] :inherited-nbb [30 392] :offline-eval [9 39]
+             :desktop-bb [16 1059] :desktop-nbb [16 1059]
+             :failures 0 :errors 0}
+  :lint {:command "bb lint" :errors 0 :warnings 0}
+  :independent-probes "Inline pure bb/nbb -e invocations; actual owner APIs and candidate functions only, no new test files. Both finding reproductions returned the same outcomes in both runtimes."
+  :boundary-probes {:namespace64 :accepted :namespace65 :refused-before-owner
+                   :depth32-empty-vectors :accepted :depth33 :refused-before-owner
+                   :nodes8192 :accepted :nodes8193 :refused-after-owner
+                   :ordinary-identical-duplicate-keys :refused-by-owner
+                   :multiform :refused-by-owner
+                   :escaped-unicode-quote-in-string :accepted-as-data
+                   :namespace-unqualification "#:a{:_/x 1 :x 2} correctly decodes two distinct keys :x and :a/x; duplicate :_/x spellings refuse. This does not repair qualified/unqualified alias collisions."
+                   :diagnostic {:message "Desktop wire refused" :data {:oikos/error :wire-invalid} :cause? false}}
+  :preparse-qualification-limit "Contrary to the strongest requested before-owner-parse wording, ordinary duplicate keys, multiform and node-count overflow invoke owner once before refusing. They DO fail closed. Those cases are not separately elevated as security findings: owner owns actual EDN exact-one-form semantics, and node inspection is explicitly postparse. The alias collision is distinct because it actually succeeds. Do not describe all malformed inputs as rejected before parse."
+  :frozen {:permit "s2a-contract-c399b60e.edn"
+           :source "c399b60e1676c47778445c1098eb541ab38743cb"
+           :file-count 9 :all-nine-working-file-sha256-match-parent-permit true
+           :contract-digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+           :owner "788cdd3434615a7932b924e68520dbf7f88408c2"
+           :owner-pin-and-source-clean-check :passed-by-pure-invoker
+           :actual-parent-authentication-test :passed
+           :evidence-id "b4542a1a-d95a-5fb5-a73d-3ba80bdd4692"}}
+ :positive-assessment "Capture copies mutable bytes synchronously and hashes the same immutable snapshot; UTF-8 roundtrip and constant cause-free exceptions are defensible. The real owner reader is reused exactly once per gated form; complete location inspection precedes fresh construction; no parsed-object sanitizer is exposed. Existing tests genuinely cover all six event types, boolean content reference, unchanged raw tainted-event guards, canonical identity, actual parent evidence and causal coverage. No generic kernel replacement identified. These successes do not override the two demonstrated gaps."
+ :worktree-preservation {:untouched-uncommitted-files ["scripts/test_desktop_integration.clj" "src/oikos/infra/desktop_fixture.cljs"]
+                        :candidate-hash-unchanged-after-tests true
+                        :integration-target-not-run true}
+ :qualification "NOT approved for synthetic fixture continuation on this exact head. This review grants no persistence/schema/locking qualification, no source promotion, no native-provider approval and no task-completion credit. Fix and obtain independent exact-successor review before parent authorizes actual writes."
+ :reflection {:lesson "Allowing literal namespaced maps requires testing expanded-key alias collisions against the actual owner, not just generic duplicate-key tests. New wire-container APIs must preserve raw representation guards too."
+              :spore-created false}
+ :next "Return both reproducible findings to the implementer; keep all integration persistence held pending reviewed successor."}

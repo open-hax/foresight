@@ -1,0 +1,26 @@
+{:review/id :typed-execution-wrapper-fix-v2
+ :status :blocked-no-wrapper-produced
+ :scope :source-only-no-execution
+ :sources [{:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/runner.py"
+            :sha256 "01cdcbc0af6f9890a877e5fd09dfab5ac459a4782fe2e94e487bca5c0f284d70"}
+           {:path "/tmp/opencode/oikos-typed-deps-bf60f0e2-1e1f-428e-a6e0-28415755d56c/guard.py"
+            :sha256 "ab3abcd3455c0ae1ae15d9b7a4efee361eb37da1b1ca89a6711e5a878f48025b"}
+           {:path "/usr/lib/jvm/java-21-openjdk-amd64/bin/java"
+            :sha256 "635baf419576ec4ad4f785014283fb93f1be1103e6d02252f7a00517f0e2a245"}]
+ :dispositions [{:finding :relative-classpath-inherited-cwd-unpinned-java :status :unresolved}
+                {:finding :unbounded-cleanup-and-descendants :status :blocked
+                 :reason "The unchanged seccomp guard does not deny setsid or setpgid; a descendant may leave the owned process group. PID-start-time-checked killpg cannot safely cover an escaped session. A process group alone is not a containment boundary."}
+                {:finding :missing-input-inventory :status :unresolved}
+                {:finding :unrestricted-log-basename :status :unresolved}]
+ :guard-observation "Static inspection only: guard.py's explicit syscall deny list does not include setsid or setpgid. No claim is made that escape was exercised. Guard changes require separate authorization/review; it was not modified."
+ :probe-plan {:status :not-run-requires-independent-review-and-authorization
+              :preconditions ["Review a corrected containment design and the exact wrapper and immutable input inventory; approve a separate neutral fixture profile, not arbitrary argv or Clojure eval."
+                              "Use isolated private owned directories and disposable fixture inputs, with no global-cache edits; preserve incident evidence."
+                              "Record fixed fixture executable and file hashes, expected exit codes, per-probe deadlines, output caps and independent post-run process checks before launch."]
+              :sequence [{:case :prelaunch-refusals :recipe "One at a time substitute a bad executable hash, guard hash, artifact hash, source head, allowed-file digest, symlink, dirty path, and unsafe or existing log name; each must refuse before child creation."}
+                         {:case :output-cap :recipe "Fixed benign fixture emits beyond the configured combined cap; require bounded capture and bounded cleanup with explicit cap outcome."}
+                         {:case :timeout-descendants :recipe "Fixed benign fixture forks a pipe-holding child and a child that closes its pipes; include an attempted setsid escape. Require deadline-bounded return and independently verify every fixture process is gone without signalling unrelated processes."}
+                         {:case :guard-denial :recipe "Fixed benign fixture attempts network socket creation and filesystem mutation of a private sentinel; require denial and independently verify the sentinel remains unchanged."}
+                         {:case :positive-exit :recipe "Fixed benign fixture emits known stdout and stderr and exits zero; require exact bounded captures, exact status, and no surviving descendants."}]}
+ :limitations ["No runner-v2.py or inventory was created; no syntax, runtime, test, lint, or typecheck verification was performed."
+               "This review is a blocker report, not an independent approval, guard certification, or authorization to resume typed execution."]}

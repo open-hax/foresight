@@ -1,0 +1,89 @@
+{:review/type :read-only-deadline-design-recommendation
+ :review/date "2026-11-03"
+ :review/head "7896ee8709a9461ee54e2d39739c5ee8ce1a3157"
+ :review/checkout "/home/err/spaces/foresight/oikos/.worktrees/review/oikos-s1a-protocol-7896ee8"
+ :review/status :recommendation-not-implemented
+ :scope {:source-edits false :board-edits false :commits false
+         :only-output ".ημ/runs/oikos-program-20261103/reviews/s1a-validation-deadline-design.edn"}
+ :evidence
+ {:read ["AGENTS.md"
+         "src/oikos/infra/bb_render.cljs"
+         "src/oikos/law/generation.cljc"
+         "src/oikos/law/frame.cljc"
+         "src/oikos/law/digest.cljc"
+         "scripts/render.clj"
+         "docs/specs/s1a-generation-contracts.md:280-357"
+         "docs/s1a-api.md:75-104"
+         "parent/.ημ/runs/oikos-program-20261103/reviews/s1a-protocol-probes-v1.edn"]
+  :direct-code-observation
+  ["bb_render.cljs:124 invokes synchronous accept-response in close; lines 125-126 finish success, and finish!:69 clears the timer. There is no elapsed-time guard."
+   "generation.cljc:266 first regenerates the whole request result, reads the response, then :278 calls validate-artifacts. That function independently projects/canonicalizes, hashes, counts UTF-8 and parses every artifact."
+   "frame/read-one is recursive synchronous parsing with character-level loops and atoms; digest/utf8 and SHA block reductions are also synchronous. Yielding only between artifacts cannot bound their individual cost."
+   "The spec requires independent validation, not merely checking renderer-declared hashes, and fixes both byte/structure limits and 64-target support."]
+  :reported-reproduction
+  {:source :s1a-protocol-probes-v1
+   :not-rerun-here true
+   :stdout-bytes 440243 :targets 32 :spawn-to-settle-ms 12265
+   :close-to-settle-ms 12252 :observed-status :ok}
+  :local-probes
+  [{:command "bb --config scripts/render-bb.edn -e '(require (quote [cheshire.core :as json])) (println (json/generate-string {:status :ok :value {:artifacts [] :contents [\"λ\\n\"]}}))'"
+    :exit 0 :observation "Built-in cheshire.core JSON serialization is available without installing a package; emitted the expected small JSON object. This does not verify the proposed adapter."}
+   {:command "Inline BB -cp src:test probe constructed the recorded 32-target payload, rendered its response, then timed accept-response. No files were written."
+    :timeout-ms 20000 :observation "Tool timed out without output; preparation and acceptance were not separately instrumented. This is NOT evidence that BB validation is fast or that its acceptance phase alone exceeds 20 seconds. No successful timing is claimed."}]}
+ :hypothesis
+ {:confidence :strong-code-supported
+  :statement "The parent event loop cannot process its deadline or cancellation while synchronous acceptance runs. An isolated trusted validator lets that event loop enforce termination even when the same pure implementation is slow."
+  :not-claimed "No fix, complete test gate, runtime benchmark victory, production artifact approval or real-time OS scheduling guarantee is demonstrated here."}
+ :recommendation
+ {:choice :fixed-trusted-cancellable-validator-process
+  :smallest-defensible-path
+  "Keep the pure acceptance laws unchanged. Add one fixed BB validation entrypoint and extend the existing NBB process supervisor to own both renderer and validator under ONE absolute deadline. Existing BB argv/config/group-management facilities make this less invasive than introducing a resumable parser/serializer/hash engine. BB is a capability choice, not a proven speed optimization: the supervisor must timeout slow validation. An explicitly pinned NBB process is an alternative if qualification measurements favor it, not an automatic fallback."
+  :important-output-boundary
+  "Do not return accepted artifacts as EDN and call frame/read-one on the parent again: that reintroduces the blocking parser. Have the trusted validator emit a narrowly specified JSON transport record of its already-validated Result. Native JSON.parse plus explicit bounded shallow reconstruction of at most 64 descriptors and 64 content strings avoids re-running the character-level EDN parser, canonicalizer or portable SHA on the event loop. JSON is private IPC, not a new public semantic authority or renderer protocol. Benchmark this final conversion at its full cap; check monotonic time immediately before and after it."
+  :file-boundaries
+  [{:file "scripts/validate-render.clj (new fixed file)"
+    :job "Read bounded request and raw renderer-output bytes, decode UTF-8 strictly preserving BOM identity, parse request with frame/read-one, call generation/accept-response using separately supplied trusted pins, and emit only a closed JSON Result. No eval/load-file/request-selected code or files."
+    :framing "Use two bounded decimal byte lengths in fixed trusted argv (request <=262144, renderer-output <=1048576) followed by exactly those two byte blocks on stdin and EOF; parse/check lengths before allocation. Pins are a separate bounded restricted-EDN argv value from trusted context, not read from renderer bytes. Parent invokes only after renderer exit 0, empty stderr BY BYTE COUNT, EOF/close and group reconciliation; otherwise use existing closed errors without validating success. Preserve the renderer frame's LF requirement and original bytes. Never use unbounded slurp, line splitting of arbitrary renderer EDN, or canonicalization of a huge envelope on the parent."
+    :output "Built-in cheshire.core can emit JSON. Encode keyword-valued semantic fields explicitly (e.g. status, error code, format, validator-id), with a fixed reverse mapping in NBB; do not accidentally lose namespace in :oikos/profile-edn. Carry strings literally. Errors contain fixed codes/coordinates only. Unexpected validator exit, stderr, schema, overflow or truncation fails closed. Bound this private output independently with a documented conservative expansion allowance for JSON escaping; do not change the frozen renderer stdout cap."
+    :trust "This entrypoint and its law files/config/executable are independently owner-approved immutable validator context. It must not be selected by a renderer response or inherit a mutable/untrusted renderer's helper path as authority."}
+   {:file "src/oikos/infra/bb_render.cljs"
+    :job "Replace synchronous close-handler acceptance with launching the fixed validator; retain the bounded raw request wire and renderer byte buffers until then. Factor the current child/group/pipe cleanup into per-process records, not a second independent public adapter."
+    :state "Keep one terminal CAS and one monotonic deadline for the operation; track renderer and validator process records independently. All spawned owned groups participate in cleanup, with a single parallel grace/kill/cleanup budget, not 1000 ms per sequential process. Validation startup consumes the remaining original 5000 ms; never reset the clock after renderer close."
+    :clock "Capture a monotonic timestamp at the actual renderer spawn boundary. Before launching validator, before consuming its result, and immediately before publishing artifacts: terminal must still be nil AND now < deadline. Otherwise timeout owns the decision. A delivered success event before an overdue timer callback is not permission to succeed. Retain the timer through validation."
+    :cleanup "Cancel/timeout marks terminal before signals. Close each owned stdin, TERM each still-owned live group, KILL after 250 ms, and reconcile close/reaping/group absence by the common further 750 ms. Any unconfirmed group remains an explicit cleanup hold blocking admission. Never resurrect or signal a reconciled PID from a late callback. Clear raw buffers on settlement."
+    :parent-work "Do not run accept-response, frame/read-one, canonical on the response, portable UTF-8 traversal, or portable hashing on the main loop after spawn. Native bounded Buffer copies/decode/JSON.parse and bounded shallow descriptor reconstruction remain; measure them. Return only data from the trusted validation process after its own close and cleanup proof."
+    :pins "Extend the closed trusted descriptor/pin inventory deliberately for the extra fixed helper or use a separate closed validator descriptor. Snapshotting files in a writable candidate remains test convenience, NOT production TOCTOU protection. Keep NBB the light outer runtime and retain the allowlisted synthetic environment."}
+   {:file "src/oikos/law/generation.cljc"
+    :job "No acceptance-law rewrite required for this deadline repair. Keep full independent request/result validation in the validator process. Avoid coupling portable law to process clocks or cancellation."
+    :separate-pre-spawn-concern "start!:98-99 already canonicalizes and fully renders synchronously before actual spawn (reported about 5 seconds in the probe). Moving only acceptance restores the specified spawn-relative terminal budget, not start!-entry responsiveness. Do not claim the latter. If also fixing preflight, extract non-rendering request/capability admission checks and move expensive full request-result work into the cancellable trusted execution boundary; retain unavailable/mixed-capability denial before renderer spawn. Do not silently delete independent source/request checks."}]
+  :why-not-cooperative-now
+  ["A Promise, queueMicrotask, setTimeout wrapping accept-response, or a yield between targets still blocks during parsing one near-1MiB response and hashing/canonicalizing a 64KiB artifact. Deadline checks without yields detect lateness but cannot deliver a terminal result during that blocking interval."
+   "A real cooperative solution needs resumable frame parsing (including string scanning and UTF-8 checks), serializer, UTF-8 encoder and SHA blocks plus per-target validation, with bounded slices and event-loop yields across ALL paths. That is a multi-law/runtime change, not a small close-handler patch. An instruction/work budget alone needs a demonstrated hardware/time bound; element count does not bound long-string CPU time."
+   "Do not put deadline side effects into portable laws merely to interrupt reductions; a thrown budget error cannot return control before its next checkpoint, and a same-loop cancellation callback still cannot run until a yield."
+   "Off-thread execution retains current acceptance semantics and provides a forcible kill boundary. It does not require trusting the producer or claiming all valid near-cap workloads complete in five seconds. Valid but slow workloads may timeout under the unchanged wall budget; changing supported sizes or claiming positive large-case qualification requires separate evidence."]}
+ :verification-for-implementer
+ [{:test :recorded-fast-echo
+   :require "Reuse the exact 32-target 440243-byte below-cap valid response and a real fixed fast byte-echo renderer. No validator mocking. Measure actual renderer spawn, renderer close, validation start/close, terminal settlement and all group reconciliation. Never :ok at/after 5000 ms; terminal by the 6000 ms budget with documented timer scheduling tolerance, or cleanup-unconfirmed plus ownership hold. A timeout is not positive large-case success proof."}
+  {:test :positive-independent-validation
+   :require "Real renderer plus real pinned validator returns the unchanged multi-target EDN result; BB/NBB law fixtures remain identical. Record actual runtime costs instead of assuming BB faster. Retain all malformed/foreign-pin/content/destination/count/order/BOM/UTF-8/nonzero/stderr negatives; private JSON transport does not replace renderer EDN checks."}
+  {:test :blocked-validator
+   :require "Pinned synthetic validator deliberately computes or sleeps beyond deadline after renderer close. Parent heartbeat and cancel callback still execute; result times out/cancels within budget with no artifacts, validator group killed/reaped, no hold on confirmed cleanup. Test TERM resistance and descendants holding pipes as well."}
+  {:test :deadline-races
+   :require "Deterministic clock/barriers at validator startup, final output, validator close, native decode/conversion, and final CAS. An overdue clock defeats success even if timer callback has not run. Cancellation wins once if delivered first. Late callbacks never launch a validator, publish artifacts, overwrite terminal error, or kill a reused PID."}
+  {:test :trusted-ipc-and-cap-cost
+   :require "Malformed/truncated/extra-key private JSON, wrong keyword mapping, excessive stderr/stdout, invalid UTF-8 and unexpected validator exit fail closed; raw secret-marker strings never reach public errors. Measure the worst expansion-bounded JSON decode plus shallow conversion on the main loop. Do not parse returned EDN content on that loop."
+   :remaining-limit "Node is not hard real-time; arbitrary parent CPU starvation cannot be guaranteed away. The demonstrated self-inflicted 12-second synchronous section must be removed, and residual bounded native work measured, not advertised as an absolute scheduler proof."}
+  {:test :qualification-gates
+   :require "Run bb test and bb lint with real outputs after implementation. Re-run the original failing schedule. No completion claim based on this design note alone."}]
+ :pitfalls
+ ["Do not start a fresh 5-second validator timeout."
+  "Do not trust renderer self-validation or its requested validator revision."
+  "Do not make worker_threads an assumed drop-in NBB runtime: it needs a qualified fixed boot path and termination semantics; child_process is already present and fits existing process-group cleanup."
+  "Do not introduce a generic shell, -e execution surface or a selectable validator command. Fixed scripts only in production."
+  "Do not clear operation timers merely because renderer close arrived."
+  "Do not accumulate per-process cleanup budgets or leave validator ownership outside cleanup-holds."
+  "Do not silently lower 64 targets, 64KiB/artifact, 1MiB stdout, or alter unsupported-bash behavior."
+  "Do not claim moving validation alone fixes expensive synchronous work before spawn."
+  "Do not confuse successful built-in JSON availability probe with a verified implementation."]
+ :reflection {:lesson "A wire cap bounds memory, not the running time of an interpreted parser or portable digest. Keep deadline enforcement outside the expensive computation's execution thread and avoid reintroducing the same computation while importing its result."
+              :new-spore false :reason "Parent owns reflection/ledger synthesis; this recommendation creates only its explicitly authorized review artifact."}}

@@ -1,0 +1,122 @@
+{:review/id :s4a-dispatcher-plan-review-v1
+ :review/date "2026-11-03"
+ :review/kind :independent-adversarial-planning-only
+ :task :s4a
+ :uuid "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :source-sha "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+ :verdict :changes_requested
+ :authority :none
+ :reviewer {:role :independent-reviewer-not-plan-author
+            :provider :openai :model "gpt-6.1-sol"
+            :native-provider-approval false}
+ :reviewed-inputs
+ {:plan {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s4a-dispatcher-plan-v1.edn"
+         :lines-read [1 215]
+         :sha256 "7a489544001376cf5a272fe7bebe74c0e58d5892c4db6c8b8c43b7206d483ecf"
+         :actual-bytes-hashed true}
+  :permit {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/permits/s4a-contract-8ae64df4.edn"
+           :sha256 "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+           :actual-bytes-hashed true}
+  :task-path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+  :official-config "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+  :official-json-config "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.json"
+  :task-read-scope "Read the actual coordinator card, both absolute configuration files, and the existing official read-task snapshot cards-after-native-corrections/29caa8e3-289a-416c-9850-8ef9cc769e88.json. The snapshot is historical (incoming), not current-state evidence; the current card contains the editor-revision addition and pure-only admission. No live board call, parser, validation or transition is claimed."
+  :workflow "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/workflow-input-v1.edn"
+  :owner-worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+  :owner-head-observed "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+  :contract-documentation-sha256 "250caf9e82315ccfef91d55297f31ddf7049370a5a94437fd1e35a9cbb63cf70"
+  :independent-contract-review "reviews/s4a-contract-code-v1.edn"
+  :pure-contract-audit-repeated false
+  :instruction-scope "Coordinator and Oikos AGENTS; applicable home/spaces/Foresight instructions; source-owner AGENTS for Spacemacs, i3, systemd/user and GovOne. Source-only inspection does not activate their live reload/restart validation procedures."}
+ :findings
+ [{:id :s4a-plan-01
+   :severity :P2
+   :title "Separate offline source admission from endpoint/effect admission; the staged gates currently invert source review and effect permission"
+   :evidence
+   [{:path "reviews/s4a-dispatcher-plan-v1.edn" :lines [169 175]
+     :detail "Stage owner-artifact-and-isolated-target-admission exits only after an existing endpoint is nominated and the parent permits shim source/loading and exact synthetic effects. The following red-green-implementation-case instead requires independent exact-head source review before ANY runtime effect permit. As an ordered progression these exits conflict, and unnecessarily gate even inert codec/law/source work on a live endpoint and effect authorization."}
+    {:path "docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md" :lines [36 47]
+     :detail "The card separates contract negative tests from isolated existing-server verification. Final native binding and once-only success are required; a live target is not needed to write and independently review inert outer-protocol code."}
+    {:path "permits/s4a-contract-8ae64df4.edn" :lines [95 107]
+     :detail "The current permit is planning-only and explicitly withholds implementation and dispatcher installation. A later distinct source-only authorization can preserve those effect holds without first issuing a load/effect permit."}]
+   :impact "An operator with no nominated isolated server would unnecessarily block safe offline progress, or the coordinator would have to authorize loading an unreviewed future shim to exit the preceding stage. This is a planning-gate defect, not a missing-runtime-implementation finding."
+   :minimal-correction "Replace that combined stage with parallel narrow owner-interface/artifact discovery and a separately authorized OFFLINE source case. Write/review outer framing, laws, negative tests and unloaded adapter/shim source before requesting a live load/effect permit. Require endpoint nomination plus actual owner authority artifacts only for the applicable real qualification path. Missing authority remains an explicit denial, never a positive fake."
+   :required-test "Demonstrate the source-only phase can run its inert codec/precondition/denial fixtures with no server, no approval issuer and zero transport/effect invocations; it must produce no runtime-success credit. Before any handler load, verify a separate permit references the independently reviewed exact handler/client hashes, nominated endpoint and synthetic fixture bounds. Nomination alone and plan approval must not authorize loading."
+   :user-visible-question-remains :isolated-endpoint-and-narrow-future-effect-nomination-only}]
+ :safety-review
+ {:closed-transport
+  {:assessment :adequate-planning-boundary
+   :plan-lines [126 137]
+   :detail "The client cannot choose Lisp, IPC, socket, executable or handler. A constant audited internal emacsclient wrapper carrying inert encoded data is not a published arbitrary --eval operation. Exact framing and the new closed result schema remain implementation deliverables, not existing runtime evidence."
+   :manpage-observed "/usr/share/man/man1/emacsclient.emacs.1.gz:63-69"
+   :manpage-sha256 "5e0368f59f51e98197c6f9241d8bea897f7e32c6c1537a0484c248ee04437c05"
+   :daemon-hazard "The actual installed manual says empty alternate-editor starts emacs --daemon. The plan correctly rejects empty flag/environment values, requires a pinned selected client/socket and reviewed failing alternative, and requires missing-server refusal with zero new Emacs processes. The manual does not qualify the snap client version."}
+  :native-editor
+  {:assessment :adequate-planning-boundary
+   :plan-lines [138 145]
+   :detail "Object-identity registry, epoch/incarnation invalidation, actual monotone native revision, strict external UTF-8 byte mapping, owned-target-only access and no operator enumeration are explicit. Internal Emacs byte positions are correctly not presumed external UTF-8 offsets. Final auth/request/scope/consent/revision checking is inside the native mutator; reentrant hooks and unproved rollback are not excused by a single event loop. Reads have a corresponding native bounded-snapshot/output gate."}
+  :authority
+  {:assessment :adequate-owner-gap-and-hold-not-a-new-local-kernel
+   :actual-source ["/home/err/devel/orgs/mojomast/govone/internal/auth/middleware.go:24-53"
+                   "/home/err/devel/orgs/mojomast/govone/internal/auth/api_keys.go:58-110"
+                   "/home/err/devel/orgs/mojomast/govone/internal/policy/service.go:37-43,93-113,306-317"
+                   "/home/err/devel/orgs/mojomast/govone/docs/api/openapi.yaml"]
+   :source-head-observed "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+   :detail "Actual source authenticates bearer principals/current role state and scoped release decisions. The inspected OpenAPI has no emacs/i3/approval/consent match. None of this issues an editor approval. The plan correctly holds positive execution for an owner-defined authenticated binding/consent protocol and rejects UID/loopback/profile-match authority. Do not invent an endpoint or import Knoxx credentials."}
+  :one-use
+  {:assessment :conservative-valid-at-most-once-design
+   :plan-lines [153 157]
+   :detail "Burn/terminal invalidation before possible mutation, serialized claims, replay refusal and epoch invalidation can conservatively sacrifice an attempt. Crash or lost reply is indeterminate, not proof of refusal or exactly-once delivery; no automatic retry or equivalent grant is allowed. An operational consumption registry is not a second governance/event authority."}
+  :i3
+  {:assessment :hold-is-required
+   :actual-source "/home/err/.config/i3/devops/src/i3/desktop/i3.clj:83-90"
+   :source-head-observed "415987dbf5c21e779826a232018e7940fb1be66c"
+   :detail "The helper looks up an XID from a tree then separately sends con_id focus; no native lifetime/cut compare-and-act is supplied. The plan correctly denies focus pending a concrete owner fence. Double reads, postconditions and NBB/BB locks do not qualify it. The source sandbox starts Xvfb/i3, not Emacs, and does not nominate an existing isolated editor endpoint."}}
+ :revocation-correctness
+ {:finding :no-confirmed-universal-distributed-atomicity-demand
+  :interpretation "Lines 145 and 154 request an owner-defined execution/output fence and correctly reject check-then-remote-call races. They need not mean instantaneous revocation everywhere or retracting already emitted bytes; do not introduce either as a new S4A gate."
+  :required-owner-decision "Before any positive runtime qualification, the actual authority and dispatcher owners must explicitly define the finite admission/commit and read-release boundaries, expiry clock semantics, and ordering of revocation versus consumption. Revoke acknowledged before commit denies; a concurrent revoke/commit must have one owner-defined ordering. Final native identity/revision/request/scope/consent validation and one-use claim remain mandatory. A completed mutation is not undone by a later revoke, nor can already delivered bytes be recalled."
+  :bounded-practical-case "Qualify one nominated endpoint, one dispatcher epoch, a bounded owner-approved operation grant and serialized native execution/release fence. Use expiry and owner-fence invalidation with fail-closed disconnect/outage handling. If remote revocation propagation or an in-flight grant has a nonzero validity window, its exact semantics need explicit owner/parent admission, not an adapter's silent cached-allow or an assumption that TTL equals immediate revocation. No such window is authorized by this review."
+  :limits "No universal distributed transaction is required merely to implement offline source. If the actual owner protocol cannot meet the admitted boundary, keep real positives held. This is an owner engineering/admission decision, not a request that the user rediscover APIs or relax the card."}
+ :required-tests
+ [{:case :closed-wire-and-transport :phase :offline-then-permitted-integration
+   :expect "Reject raw eval/IPC/function/endpoint selectors, unknown/duplicate fields, bad Unicode, inexact integers and oversized framed/decoded payloads. Literal quotes, backslashes, newlines and Lisp-looking replacement text remain inert. Missing pinned socket plus absent/empty/hostile inherited alternate-editor settings cannot reach a default/other server or spawn a daemon; source-only tests prove only transport construction/denial, real client failure needs its later permit."}
+  {:case :object-epoch-revision-and-utf8 :phase :permitted-existing-isolated-endpoint
+   :expect "On fixture-owned buffers only, kill/recreate under the same name, copy buffer-local IDs, reconnect/reload registry, intervene with edit/undo/revert and exercise native revision policy. Every stale request refuses before mutation. Test non-BMP/combining text, half-open byte boundaries, raw-byte rejection, narrowing, range/replacement/result ceilings and indirect/shared-text denial. Never enumerate other buffers or export full buffer text."}
+  {:case :final-authority-and-reentrancy :phase :permitted-existing-isolated-endpoint
+   :expect "Forge actor/ref, rely solely on same UID/loopback, alter every exact argument, revoke/expire scopes/allowlists/consent, and change target revision after outer validation but before native commit. Real dispatcher denies at its final native fence with zero mutation/disclosure. Reentrancy and unsupported hooks cannot bypass or recursively reuse the claim; instrument actual mutator entries and exact synthetic before/after bytes."}
+  {:case :one-use-and-uncertain-outcomes :phase :permitted-existing-isolated-endpoint
+   :expect "Actual authenticated unchanged approval produces the exact replacement once; concurrent/replayed uses cannot mutate again. Crash before/after claim or mutation, epoch loss and lost reply cause terminal invalidation or indeterminate result, with no automatic retry/reissue. Do not require zero mutation for an indeterminate after-commit reply-loss case; require at most one actual application and truthful outcome classification."}
+  {:case :bounded-governed-read :phase :permitted-existing-isolated-endpoint
+   :expect "Missing/expired/revoked read scope, wrong exact allowlist, owner outage or failed output admission releases no content. Native object/revision/range validation and content copy share one boundary. Test revocation ordered before versus after the explicitly admitted release boundary; do not claim retraction of delivered bytes."}
+  {:case :i3-unqualified-fence :phase :offline-until-owner-artifact-and-sandbox-permit
+   :expect "With current lookup-then-focus helper or missing coverage/fence, focus stays unavailable with zero command calls. Later actual owner-fenced sandbox fixtures must cover XID reuse, stale cut, reconnect, wrong scope and one-use execution; a double collection is not a positive."}]
+ :prerequisite-artifacts
+ {:already-provided "Exact frozen S4A pure contract 8ae64df4 and S2A c399b60e contracts/permits; no re-audit or modification is requested. Existing Clio source remains the canonical law owner; no actual append is required for offline work."
+  :offline-next "After parent settles finding s4a-plan-01 and separately grants source-only implementation: new outer codec/closed schemas and laws, fake-transport zero-effect denial tests, then minimal unloaded NBB adapter and native shim source under explicit owner-source authorization. Independently review exact new source before ANY live permit. Simulated registry/consent tests establish contracts only."
+  :emacs-owner "Spacemacs/private-layer owner must separately authorize and review the minimal registry/epoch/revision/native-handler integration at its existing source seam. No startup config edit, shim load, buffer creation or service restart is implied by Oikos source authorization."
+  :authority-owners "GovOne plus the actual authenticated host/resource/consent owners must supply the narrow actor/session/scope/ownership/admission mapping and consent/expiry/revocation/one-use fence artifact. Existing GovOne release capabilities do not supply editor approval. Any necessary upstream owner code is a separately authorized source change, not a new Oikos policy kernel."
+  :target-owner "User nomination plus scoped permission for the ALREADY EXISTING supervised isolated editor endpoint; reviewed client/handler hashes, generations, synthetic actors/resources, limits and exact handle-only teardown. No existence is inferred from agent-core, emacs.service or a historical proposal."
+  :i3-owner "Concrete current S2B observation/coverage artifact and qualified native lifetime/cut actuation fence, plus a later owner sandbox permit. No need to wait for whole S2B/S2A epics to write offline S4A source."
+  :non-prerequisites "S2A phase-2 decoder remains separately HELD; this review does not clear it. Whole S6A and S4B/client-matrix completion are not S4A prerequisites. Narrow actual disclosure admission is required on any applicable real output path; remote egress integration/publication remains separate."}
+ :minimal-corrective-plan
+ ["Split source-only authorization, owner artifact acquisition and live effect permission into separate gates; remove the lines 173/175 source-review/effect-permit inversion. Do not change frozen contracts."
+  "Authorize and implement only the concrete offline outer-protocol/law/negative-test and unloaded-source phase; use failing owner seams until real artifacts exist. Independently review the exact source."
+  "In parallel request narrow owner-source/protocol work, and ask only the endpoint/effect nomination question below. Lack of a nominated server holds runtime tests, not separately authorized inert source work."
+  "Issue a later exact-hash endpoint/fixture effect permit only after source review, actual owner admission and nomination. Keep i3 focus held absent its native fence; claim neither whole S4A nor S6A/product completion."]
+ :user-questions
+ [{:needed :before-live-effect-permit-only
+   :question "Which already-existing supervised isolated Emacs test server/socket do you nominate, and, after exact-head source review, may the reviewed fixed native handler be loaded there to create, bounded-read/replace and kill only newly allocated agent-owned synthetic buffers? If none exists, continue separately authorized offline source work only; no second daemon or operator-server substitution."
+   :not-questions "Do not ask the user to repeat settled synthetic-only/agent-owned/no-second-daemon rules, identify source paths recoverable here, invent a GovOne endpoint, or resolve a whole S6A dependency. Owner protocol/admission decisions belong to the engineering owners and coordinator."}]
+ :policy-blockers
+ {:runtime-effects :held :functional-implementation-permission :not-granted-by-this-review
+  :private-or-existing-operator-buffer-access :denied
+  :second-daemon-restart-model-package-service-work :denied
+  :raw-tool-publication :denied :remote-publication-and-installed-promotion :held
+  :runtime-qualification false :whole-s4a-accepted false :whole-s2a-accepted false
+  :whole-s6a-accepted false :epic-completion-credit 0}
+ :review-execution
+ {:actual-work "Read-only files, targeted source/manpage inspection, SHA256 hashing and Git HEAD reads; only this NEW absolute-path coordinator review artifact was written. Product tests, Emacs/client/i3 calls and owner APIs were not executed."
+  :source-edits 0 :board-calls 0 :ledger-writes 0 :runtime-effect-calls 0
+  :commits 0 :pull-request-calls 0 :pushes 0 :delegations 0
+  :reflection "Keep source progress distinct from effect qualification. The plan's safety holds are appropriate; the actionable defect is its conflated stage ordering, not the absence of runtime implementation. Parent retains all provenance/board persistence ownership."}}

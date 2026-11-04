@@ -1,0 +1,21 @@
+{:permit/id :s6a-offline-p1-759ebdab
+ :authority :parent-accepted-independently-reviewed-inert-component
+ :source "759ebdab0cced0f60b34b257cfb441a0a129638d"
+ :tree "68d6ae86761ffa1d022f669720927c7bb3c05799"
+ :published-ref "artifact/oikos-egress-offline-759ebdab"
+ :remote-ref-readback :exact-source
+ :review "../reviews/s6a-offline-egress-fix-review-v2.edn"
+ :descriptor "docs/contracts/govone-egress-v1.edn"
+ :descriptor-sha256 "1b456754ecd50545a5611bb4ae17cc436724519786103b40feb126ffaf0c0c3b"
+ :scope [:offline-p1 :one-synthetic-user-message :literal-text-profile
+         :closed-source-lineage-fixtures :primitive-canonical-json-edge
+         :injected-outcome-classification]
+ :actual-tests {:bb [6 263] :nbb [6 263] :edge [7 286]
+                :capability-each [11 99] :spaces-each [11 455]
+                :desktop-each [16 1059] :full-baseline :passed
+                :lint-errors 0 :lint-warnings 0}
+ :prepared-authority :none :whole-task-complete false
+ :held [:real-transport :trusted-byte-resolver :real-policy-admission
+        :actual-local-session :actual-external-transformations
+        :second-hop-containment :existing-eval-mediation :production]
+ :qualification "Source and published artifact scope only. Caller-provided digest/UUID/lineage is synthetic fixture data, not authentication. Benign object/array/fence-leading text is conservatively refused; no universal encoding detector or OS sandbox claim."}

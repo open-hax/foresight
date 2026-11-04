@@ -1,0 +1,35 @@
+{:review/id :terra-model-routing-qualification-20261103
+ :kind :parent-verification-plus-attributed-independent-audit
+ :user-direction "just stop using those cause we don't have most those models. update them to use gpt 6.1 terra"
+ :model "openai/gpt-6.1-terra"
+ :catalog-status :active
+ :routes {:custom-agents 19 :builtin-overrides [:general :explore :title]
+          :default "openai/gpt-6.1-terra" :all-22-explicit-routes-verified true}
+ :source-owners {:home-commit "0cc5141fb38c27ee6ceb1fbd10021f73bcd6b2a9"
+                 :home-paths [".ημ/config/opencode/root.edn"
+                              ".ημ/config/opencode/settings/agent-models.edn"]
+                 :config-commit "19f586e104e07cf5c0dfc004e4eaee2d2ba43724"
+                 :config-paths :nineteen-agents-plus-AGENTS-README-STYLE
+                 :branches :device-stealth :amend false :force-push false}
+ :semantic-verification {:report "/tmp/opencode/terra-semantic-validation-20261103.json"
+                          :private-before "/tmp/opencode/terra-config-before-5457b42c-a2cf-4658-9906-f4aa6692031e"
+                          :only-deltas [:default-model :agents-general-model
+                                        :agents-explore-model :agents-title-model]
+                          :provider-and-other-settings-equal true
+                          :generated-before-sha256 "e39d15477547eb015a89c267eee743d636ce841bb60165ada77e44ded505e34f"
+                          :generated-after-sha256 "0e3e7ec63da9840e4c7e5a65119c73fd583600b744c3dec65485b65ba6f444ab"}
+ :live-smokes {:report "/tmp/opencode/terra-agent-smoke-20261103-RL7BILCv/report.json"
+               :sha256 "9a9cf5f18632cfee38dff4c3806b98bc319c4e0c6720bd0208b9f23ef7886285"
+               :agents 19 :passed 19 :failed 0 :tool-activity 0
+               :server-side-assistant-model-verified true
+               :new-cli-invocations 18
+               :triage "Parent directly observed CLI exit 0; independent worker verified server metadata of ses_e5c4e7abdffegiNqMtJOFX1LaP."
+               :full-role-behavior-qualified false}
+ :independent-audit {:agent :auditor :session "ses_e5c4687d5ffeXm617X1FJNYkOc"
+                     :verdict :approve :findings []
+                     :limitation "The 15 previously untracked agents' pre-migration bodies were not available for independent historical comparison after description cleanup. Current hashes, live selection and semantic config delta were independently checked. Full role behavior is not established by smoke tests."}
+ :preservation "Canonical model source committed in its home owner; 19 existing agent definitions and routing documentation committed in configuration owner. The 15 definitions were previously untracked, not newly invented in this task. Pre-existing generated opencode.jsonc dirt, plugin builds, CLI/TUI settings, backups and unrelated files were not staged. No credentials copied or printed; raw before config stays private."
+ :publication {:local-commits true :remote-push :not-attempted
+               :remote-recovery-claim false}
+ :continuity "No active Oikos worker or service restarted. Existing current primary model is not represented as changed. Re-dispatch after the explicit user model decision is not an automatic fallback; the prior Kimi failure remains recorded. Scout permission rejection was not a model failure."
+ :native-review-credit 0}

@@ -1,0 +1,128 @@
+{:review/version 1
+ :review/kind :independent-adversarial-code-review
+ :reviewer {:harness :opencode :model "openai/gpt-6.1-sol"}
+ :observed-at "2026-11-03T12:28:09-06:00"
+ :repository "/home/err/spaces/foresight/.worktrees/fix/receipt-git-buffer-20261103"
+ :coordinator "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+ :scope ["scripts/evidence.clj" "test/evidence_cli_test.cljs"]
+ :base-commit "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+ :head-at-review-start "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+ :head-observed-after-tests "036cfd03a58314b2672632057820f3bd42214729"
+ :concurrent-change "Another actor committed during review. Source/test bytes were identical before and after; this verdict binds the hashes, not an unobserved future head. This reviewer made no commits."
+ :inputs
+ [{:path "scripts/evidence.clj"
+   :sha256-before "66ac1767beed108bb86625a5d35cc9b80836c5176fccd9d50b295cc093bff7b5"
+   :sha256-after "66ac1767beed108bb86625a5d35cc9b80836c5176fccd9d50b295cc093bff7b5"}
+  {:path "test/evidence_cli_test.cljs"
+   :sha256-before "873b3d46761d8788e3d981bf549fb973cfdbdecc8377ae6cc6e80f8a033e474d"
+   :sha256-after "873b3d46761d8788e3d981bf549fb973cfdbdecc8377ae6cc6e80f8a033e474d"}
+  {:path "AGENTS.md" :sha256 "c965448b2f2e6082450ad652cdbd2504e4fcf88c4d0adaa04025fc2d900184be"}
+  {:path "docs/agile/AGENTS.md" :sha256 "a58b72f8532c860898def8a902a56ed467879a76303880cea94eb3fa81fe644f"}
+  {:path "docs/specs/receipt-git-buffer.md" :sha256 "d7bd3e9b6a55adaa00597689a427961032866916b3ab3c600baa77a7c5e2bedc"}]
+ :verdict :approve
+ :verdict-scope :bounded-git-transport-and-pre-reservation-target-ownership
+ :confidence 0.97
+ :findings []
+ :required-regressions []
+ :whole-candidate-qualification :blocked-by-separate-immutable-history-schema-failure
+ :native-approval-credit false
+ :readiness-credit false
+ :merge-authorization false
+ :source-review
+ [{:anchors ["scripts/evidence.clj:65-103"]
+   :assessment "One named finite 16777216-byte maxBuffer is passed by both text and binary wrappers. UTF-8 text versus raw Buffer return behavior, --no-replace-objects, argv invocation, shell:false and error-before-status-before-output handling are preserved. No retry, dynamic/unlimited allocation policy, truncation or alternate verifier was introduced."}
+  {:anchors ["scripts/evidence.clj:804-844" "scripts/evidence.clj:588-592"]
+   :assessment "Committed capture now runs inside the existing target-owned try. Capture/validation failures close the acquired target through the existing close-after-open-error! seam before outer lock release and parent close. A failed target open never transfers ownership to this scope. Successful reservation ownership transfer and cleanup-error behavior are preserved."}
+  {:anchors ["scripts/evidence.clj:846-861" "scripts/evidence.clj:873-924"]
+   :assessment "Successful close and write-started/unverified-write lock quarantine are unchanged; independently exercised below. No target descriptor is returned on capture failure."}
+  {:anchors ["scripts/evidence.clj:118-160" "scripts/evidence.clj:1017-1062" "src/foresight/evidence.cljc:222-240"]
+   :assessment "Immutable full-commit checks, exact regular-blob mode/path, raw byte hashing, strict immutable UTF-8, exact historical prefix, suffix newline/envelope/evidence validation and schema authority are unchanged. Self-history success does not validate historically trusted envelopes as new suffix records."}]
+ :test-review
+ {:diff {:source-added-lines 7 :source-removed-lines 7 :test-added-lines 264 :test-removed-lines 0}
+  :existing-tests-deleted-or-weakened false
+  :anchors ["test/evidence_cli_test.cljs:787-844"
+            "test/evidence_cli_test.cljs:846-963"
+            "test/evidence_cli_test.cljs:972-1049"]
+  :assessment "New tests use real Git for large historical ledgers, exact bytes/hash, Unicode metadata and exact/over-production-bound blobs. The fake Git executable is confined to a temporary fixture and restored PATH; it still exercises real spawnSync capture limits, combined stdout/stderr, status/error handling and no-replace argv. Failure injection isolates resource ownership without replacing the owned target open/close with a passing mock. Nested captured test output does not suppress cljs.test failure counters; the baseline replay fails visibly."
+  :coverage [:large-legacy-prefix-with-and-without-newline :valid-current-suffix
+             :large-secure-append :prefix-rewrite :truncation :malformed-suffix
+             :invalid-envelope :missing-suffix-newline :binary-nul-and-non-utf8
+             :large-multibyte-commit-message :production-exact-and-over-bound
+             :stdout-overflow :stderr-overflow :combined-stream-overflow
+             :multibyte-byte-count :nonzero-exit :missing-status :spawn-enoent
+             :no-pass-write-or-gate-after-overflow :target-close-on-capture-throw
+             :eight-repeated-failures-no-fd-growth :no-unowned-target-close]}
+ :tests
+ [{:command "env TMPDIR=/tmp/opencode nbb -cp src:scripts:test test/evidence_cli_test.cljs"
+   :exit 0 :tests 59 :assertions 393 :failures 0 :errors 0}
+  {:command "env TMPDIR=/tmp/opencode nbb -cp src:scripts:test test/project_test.cljs"
+   :exit 0 :tests 12 :assertions 171 :failures 0 :errors 0}
+  {:command "env TMPDIR=/tmp/opencode nbb -cp src:scripts:test test/workspace_test.cljs"
+   :exit 0 :tests 24 :assertions 122 :failures 0 :errors 0
+   :note "Expected ENOENT/unsupported fixture logs are not real submodule lint evidence."}
+  {:command "env TMPDIR=/tmp/opencode nbb -cp src:scripts:test test/lineage_test.cljs"
+   :exit 0 :tests 11 :assertions 58 :failures 0 :errors 0}
+  {:command "env TMPDIR=/tmp/opencode nbb -cp src:scripts:test test/evidence_test.cljs"
+   :exit 0 :tests 17 :assertions 89 :failures 0 :errors 0}
+  {:command "clj-kondo --lint scripts test --cache false" :exit 0 :errors 0 :warnings 0}
+  {:command "nbb -cp src:scripts scripts/project.clj validate" :exit 0
+   :result "PASS foresight 26 workspace sources 25 submodules 40 invariants 1 lineage sources 6 provisional claims"}
+  {:command "nbb -cp src:scripts scripts/evidence.clj validate" :exit 0 :result "PASS quality gate catalog"}
+  {:command "git --no-optional-locks diff --check" :exit 0}
+  {:command "git --no-optional-locks diff 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b 036cfd03a58314b2672632057820f3bd42214729 --check" :exit 0}]
+ :independent-red-replay
+ {:command "python3 /tmp/opencode/receipt-repair-code-review-v1-red.py"
+  :harness-exit 0 :baseline-test-process-exit 1
+  :baseline-source-commit "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+  :baseline-source-sha256 "745ba5dd58f5a2c991e5b65933a6f3134f5ab64e5eecbd5731c13e9f3d8f1f69"
+  :harness-sha256 "7563a95ec9c7c7f42c245e5fb4a06fab19480bec060978be67632d92ad9ae438"
+  :harness-adjustments ["Temporary copy routes root to the actual checkout for unchanged catalog tests."
+                        "Declare the inert named 16 MiB constant so current new tests compile; original wrappers still omit maxBuffer, and original reservation body is unchanged."
+                        "Load temporary baseline namespace before actual scripts on classpath; run the current actual 59-test CLI suite. No product files modified."]
+  :tests 59 :assertions 330 :failures 27 :errors 4
+  :observed ["Four uncaught ENOBUFS errors on real large/exact-bound reads."
+             "Reduced-bound overflow assertions fail when the cap is not connected to spawnSync."
+             "Eight injected committed-capture failures leave targets open; fd count increases from 22 to 30 before test-owned cleanup."]
+  :historical-red-claim "The implementer's earlier 57/312, 17 failures/4 errors run was a different test revision and is not asserted independently reproduced verbatim. This replay independently reproduces the same transport and eight-fd-leak defects with the current 59-test file."}
+ :independent-adversarial-probes
+ {:command "env TMPDIR=/tmp/opencode nbb -cp src:scripts /tmp/opencode/receipt-repair-code-review-v1-probes.cljs"
+  :sha256 "72d58113230f8e188c7f8790784fbe1be115efc8a63045dd5d4b7a8333bedeeb"
+  :exit 0 :checks 52
+  :cases ["Capture failure, held-ledger validation failure and generic held-read failure: original exception, all real owned descriptors closed, owned-close seam invoked once, expected lock removal and unchanged bytes."
+          "Successful reservation retains live target/parent/lock until ownership cleanup, then all descriptors close."
+          "Lock-release cleanup failure propagates rather than being converted to success; original target-close helper still preserves the original error if close itself fails."
+          "Post-write failure retains quarantine lock while closing real descriptors and preserving expected written bytes."
+          "Real Git invalid UTF-8, executable and symlink ledger blobs reject. A real Git replace ref cannot substitute trusted commit contents. Hardlinked working targets reject without changing ledger bytes."]
+  :limitations ["CommonJS fs.closeSync mutation cannot instrument NBB's retained native import snapshot; it was not counted as syscall-level tracing. The supported owned-close seam plus real fstat/EBADF checks were used instead."
+                "Reviewer-only scratch harness had one delimiter error and one unsupported tracing assertion before correction; these were harness failures, not product findings. Final 52-check run passed."]}
+ :history-verification
+ [{:command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base e31b43a57765a394521d6c49aafd068f5c4d5ad5 --at e31b43a57765a394521d6c49aafd068f5c4d5ad5"
+   :exit 0 :total-receipts 547 :appended-receipts 0
+   :ledger-sha256 "b55139d1d957c8e9e0ca6c8d44c9eda9cfbd8593304094481f7e36dbdc1d3b0e"}
+  {:command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b --at 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+   :exit 0 :total-receipts 552 :appended-receipts 0
+   :ledger-sha256 "36c6d31692d065e77f3328c3857a416fb4edab7b85d2204573060e6752171026"}
+  {:command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base e31b43a57765a394521d6c49aafd068f5c4d5ad5 --at 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+   :exit 2 :appended-receipts 5 :invalid-envelope-count 2 :reason :string-manifest-and-refs}
+  {:command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base e31b43a57765a394521d6c49aafd068f5c4d5ad5 --at 036cfd03a58314b2672632057820f3bd42214729"
+   :exit 2 :total-receipts 555 :appended-receipts 8 :invalid-envelope-count 3
+   :ledger-sha256 "659f7c903e483677c6559212d562e3a6ff7124eff471c1bd240a4a0a4ebe3eef"
+   :reason :string-manifest-and-refs}]
+ :external-blockers
+ [{:severity :P1 :kind :immutable-history-schema-failure
+   :introduced-by-reviewed-source-test-patch false
+   :anchors ["src/foresight/evidence.cljc:222-230" "scripts/evidence.clj:1043-1052"]
+   :records [{:ts "2026-11-03T17:18:18.735728982Z" :origin "receipt-git-buffer-planning"}
+             {:ts "2026-11-03T17:50:41.645476897Z" :origin "receipt-git-buffer-planning"}
+             {:ts "2026-11-03T18:13:35.053877743Z" :origin "receipt-git-buffer-implementation"}]
+   :actual-field-types {:manifest :string :refs :string}
+   :required-field-types {:manifest :vector :refs :vector}
+   :assessment "Two malformed planning receipts already block trusted-base-to-4dee history; the separately committed implementation receipt adds a third blocker at 036cfd03. The transport now exposes the schema failure correctly. Source/test approval does not qualify this commit's receipt history."
+   :required-handling "Keep the history gate blocked pending a separately authorized lawful integration/provenance decision. Do not weaken receipt schema, rewrite/delete historical records, silently change the trusted base, or treat a HEAD-to-itself pass as a waiver."}]
+ :resource-assessment "The finite cap is a combined stdout+stderr capture budget in Node 24, not total RSS. Both 16 MiB production and reduced-bound cases execute actual spawnSync. Decoding/copies, retained ledger Buffers, parsed EDN and working-file reads remain additional costs; no whole-process memory-limit claim is made."
+ :effect-boundary {:product-writes false :card-writes false :ledger-writes false
+                   :commits false :pushes false :native-pr-requests false
+                   :model-or-service-calls false
+                   :only-persistent-output ".ημ/runs/oikos-program-20261103/receipt-repair-code-review-v1.edn"
+                   :temporary-work "/tmp/opencode only; fixtures clean up in finally; reviewer-owned harness files removed after review"}
+ :reflection "Local hash binding preserved review validity across the concurrent commit. Distinguish passing transport/ownership tests from failed immutable receipt-history qualification. No other reflection/provenance files were written under the explicit single-artifact scope."}

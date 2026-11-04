@@ -1,0 +1,34 @@
+{:report/id :services-recovery-ingress-fix-v3
+ :kind :implementation-handoff-not-approval
+ :initial-reviewed-head "1839a961bb1295caefbf6c6fa45df7d60239b690"
+ :original-red "574a883c653e54c4b7af10ea9bfed9709f96b900"
+ :first-candidate "2dbeb06d2308d593ea14446e9b1e6639383f7d73"
+ :forged-apply-red "0c6f4be8c20b0ed3f10e566c8197d2a93dd45ef7"
+ :recovery-green "b9bc4724b3f1e4fb755dc287d04b256e6a20dec8"
+ :observation-red "6a61dae8d0e9654b7f941d1e59622d5276e0e685"
+ :observation-green "78e2cbb6482ddf2ff140ad8ac46ce974af5b7892"
+ :tested-head "b2973ef9e3246522324dec4658fbeb093ffab147"
+ :last-commit "Committed strace syscall assertions and approved-pending/post-recovery positive control; no engine source changed from observation-green."
+ :changed-files ["scripts/local_generation_runner.py" "scripts/local_generation_fs.py" "scripts/tests/test_local_generation_fs.py"]
+ :spec-sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+ :source-pins {:edge "41e633799724639ede651f039f087a602d1df6a8ef10721f4792088cbbdc6537"
+               :facade "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+               :runner "64c5a79d0f0fa84b953846ab99bffc186df31d113ccaa4fa031082d9a17c2175"
+               :wire "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"
+               :validator "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+               :laws "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+               :pure "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"}
+ :contract "Only EOF with trusted owner fd invokes recovery; closed nonempty requests are checked under the operation lock and pending records prevent admission without recovery. A separate owner-policy-only invocation compensates using the durable capsule. Preview observations distinguish known denial from held unknown."
+ :red-evidence "On 2dbeb06 forged actor with otherwise shape-valid apply triggered failed-restored and 10 writes. The original preview and stale selection tests also both failed before their fixes. An injected observation failure returned denied rather than held on b9bc472 before its fix."
+ :focused {:tests 3 :seconds 12.309 :result :passed
+           :syscall-assertions "Committed real /usr/bin/strace -f -yy observations, owned-root path filter; no skip if missing. Preview, check, duplicate, malformed, null, forged apply and otherwise-approved apply each assert zero target mutation and unchanged complete fixture snapshot; EOF asserts actual positive compensation, followed by read checks and fresh successful apply."
+           :fixture-root "/tmp/opencode/services-ingress-v3-focus"
+           :scope "Synthetic private fixture, fixed facade and owned SIGKILL worker only."}
+ :historical-aggregate {:head "2dbeb06d2308d593ea14446e9b1e6639383f7d73" :tests 41 :seconds 975.817 :result :passed :sigkill {:occurrences 642 :checked 8 :failed-restored 248 :held 386}}
+ :previous-aggregate {:head "78e2cbb6482ddf2ff140ad8ac46ce974af5b7892" :tests 42 :seconds 971.776 :result :passed :sigkill {:occurrences 642 :checked 8 :failed-restored 248 :held 386}}
+ :native-aggregate {:head "b2973ef9e3246522324dec4658fbeb093ffab147" :state :passed :shell-id "sh_1a4735bd4001Ig5ZjcxOimfwpx" :fixture-root "/tmp/opencode/services-ingress-v3-aggregate" :result "42 tests in 960.903s; OK" :sigkill {:occurrences 642 :checked 8 :failed-restored 248 :held 386}}
+ :environment {:state :passed :shell-id "sh_1a473720400111alK7F9zvugNc" :fixture-root "/tmp/opencode/services-ingress-v3-env" :result "134 tests in 100.588s; OK"}
+ :portable {:bb "8 tests 137 assertions; 0 failures 0 errors" :nbb "8 tests 137 assertions; 0 failures 0 errors" :clj-kondo "0 errors 0 warnings" :diff-check :passed}
+ :jvm {:head "b2973ef9e3246522324dec4658fbeb093ffab147" :evidence "/tmp/opencode/services-ingress-v3-jvm/results.json" :version "1.12.5.1664" :network "socket operations denied by inherited seccomp; Python and JVM denial demonstrated" :checks "370 resources parse; inventory 19; 8 tests 137 assertions; all exit 0 and empty stderr" :downloads false}
+ :preservation "Unittest TemporaryDirectory cleanup and finalizers detached for aggregate and focused fixtures; all artifacts retained. Historical reports and source hashes remain historical, not rewritten. Existing untracked scripts/__pycache__/ left untouched. No push, PR, board, parent ledger, service, Docker, operator resource, model or installed-runtime effects."
+ :holds ["Independent review and explicit owner release remain required; no S1B credit or production promotion."]}

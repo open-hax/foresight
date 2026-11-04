@@ -1,0 +1,11 @@
+{:decision/id :govone-missing-checksum-batch-authorization-20261103
+ :source :question-tool-explicit-user-answer
+ :question "The authenticated checksum proof succeeded. The next graph-declared pin lacking a lock checksum is golang.org/x/term@v0.45.0. May I apply the same signed-database verification to the remaining exact public pins declared by this unchanged dependency graph, avoiding one question per pin?"
+ :answer "Allow bounded checksum batch (Recommended)"
+ :max-missing-pins 16
+ :allocation :existing-govone-805306368-bytes-including-earlier-acquisition-and-proofs
+ :scope [:exact-public-graph-declared-pins :authenticated-go-checksum-database-proofs
+         :isolated-checksum-adjudications :source-acquisition-after-proof]
+ :not-authorized [:new-version-selection :private-module :owner-lockfile-edit
+                  :global-cache-edit :build :test :application :runtime]
+ :requirement "Each coordinate/version must be selected by unchanged owner metadata and independently verified parent module metadata. Retain signed tree and record inclusion evidence with actual pinned verifier. Stop on pin count/cap exhaustion, unsupported range or changed selection; do not inherit broad network or execution permission."}

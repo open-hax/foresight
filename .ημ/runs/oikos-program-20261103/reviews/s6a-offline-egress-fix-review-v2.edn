@@ -1,0 +1,41 @@
+{:review/id :s6a-offline-egress-fix-review-v2
+ :kind :same-independent-reviewer-exact-head-fix-review
+ :reviewer :not-implementation-author
+ :verdict :approved-offline-p1-only
+ :authority :none :native-approval false :whole-task-approval false
+ :target {:head "759ebdab0cced0f60b34b257cfb441a0a129638d"
+          :tree "68d6ae86761ffa1d022f669720927c7bb3c05799"
+          :prior "34bab7327089a168935308270fbb4af6fd07ba52"
+          :composed-base "b505266cfed232638862606bcde802136197c3b3"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s6a"
+          :status-before-review :clean
+          :composition "Base-to-head diff has exactly eight additions, no modifications or deletions of the 57 base files. Prior-to-head diff changes only descriptor, pure law and two test files. Raw host edge and eval/run.cljs unchanged."}
+ :eight-file-sha256
+ {"docs/contracts/govone-egress-v1.edn" "1b456754ecd50545a5611bb4ae17cc436724519786103b40feb126ffaf0c0c3b"
+  "scripts/test_egress.clj" "fbfbb74873c2151d76372405b7e558c706ed672c2e59e120d216e9f9dd90de84"
+  "src/oikos/infra/govone.cljs" "2df8647d3e9af2adb109d02ed916302f92054f307ff08717c7a6304bf881a743"
+  "src/oikos/law/egress.cljc" "eb8e23db6b1d674efb0cf39f33197b074415a8b1d156b0a0d05d7ac0fff26cb2"
+  "test/oikos/egress_runner.cljc" "e693f398912568566c2c016d3d408cae951ecca65b11c44d16747d895381b258"
+  "test/oikos/govone_offline_runner.cljs" "00f4b11cf69f169be74c2f153fca0c948256971b9a8f1405f03a30c148694d6d"
+  "test/oikos/infra/govone_test.cljs" "cd67c8977fd09d072058cbdd9fee9bd601ebab55c268fb397f6d09ccaaf87b39"
+  "test/oikos/law/egress_test.cljc" "c70168d9a0945048d842773128a05a569e94c24fcbebfcb98cb59e4d53419687"}
+ :prior-finding {:id :s6a-egress-01 :severity :P2 :disposition :settled
+                 :evidence "The adopted narrower literal profile refuses leading object, array, backtick or data: after whitespace/BOM, including the original image/tool envelopes. Tests cover seven forms across all four supported synthetic kinds in both shared and raw-edge suites. This also rejects benign structured-looking text, explicitly documented and adopted by parent; ordinary prose with braces remains accepted. No claim of detection of arbitrary embedded encodings."
+                 :red "Descriptor reports repair RED at 6b00dbc158ce94331ef200b8ce42440cbb909031, BB 6 tests/263 assertions/28 failures/0 errors. Git object exists; reviewer did not independently rerun historical RED or claim NBB/edge RED."}
+ :independent-probes {:runtime :nbb
+                      :nine-domain-and-edge-pairs "Both returned :denied for each: original image and tool literals, whitespace/BOM nested object, escaped-key object, array, BOM data URI, fenced JSON, benign object and benign array."
+                      :controls "Ordinary prose containing braces prepared with authority none; derived-label, OCR-transcript and tool-text-projection synthetic controls each prepared with authority none. Injected possibly-sent timeout returned unknown."
+                      :limits "Synthetic caller provenance is not authentication. This does not establish network isolation, a real policy decision, or universal encoded-content detection."}
+ :actual-verification {:timeout-ms-each 600000
+                       :environment "Pinned existing Clio source/cache and absolute S2A permit; no installs."
+                       :commands [{:command "bb scripts/test_egress.clj" :exit 0 :bb [6 263] :nbb [6 263] :nbb-edge [7 286] :failures 0 :errors 0}
+                                  {:command "bb scripts/test_capability.clj" :exit 0 :bb [11 99] :nbb [11 99] :failures 0 :errors 0}
+                                  {:command "bb scripts/test_desktop.clj" :exit 0 :bb [16 1059] :nbb [16 1059] :failures 0 :errors 0}
+                                  {:command "bb scripts/test_spaces.clj" :exit 0 :bb [11 455] :nbb [11 455] :failures 0 :errors 0}
+                                  {:command "bb test" :exit 0 :bb [18 286] :nbb [40 546] :eval-offline [9 39] :desktop-bb [16 1059] :desktop-nbb [16 1059] :failures 0 :errors 0}
+                                  {:command "bb lint" :exit 0 :errors 0 :warnings 0}]
+                       :effect-limits "Existing invoker instruments selected process/network/write surfaces before import and selected filesystem reads during test matrix. It does not prove a universal OS sandbox or second-hop containment. Test-runner and existing offline fixture subprocesses were run; no GovOne or model process."}
+ :findings []
+ :held [:P2-owned-transport-and-second-hop :P3-real-signed-local-only :P4-real-hybrid-and-external-transformations :trusted-payload-read-authority :existing-eval-mediation :whole-s6a :production]
+ :next "Parent may consider the exact-head offline P1 component for its own acceptance; keep all later qualification gates held."
+ :effects "Only this review file written; no product edits, board or ledger mutations, dependency downloads, sockets, GovOne/model/runtime services, commits, PRs or pushes."}

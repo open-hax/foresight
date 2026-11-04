@@ -1,0 +1,172 @@
+{:review/id :s2a-contract-fix-review-v2
+ :review/date "2026-11-03"
+ :review/kind :independent-exact-head-code-and-contract-fix-review
+ :review/scope :two-original-s2a-boundary-findings
+ :task/uuid "93a76dad-678a-4980-86fb-ba0fbb5e8203"
+ :reviewer {:provider :openai :model "gpt-6.1-sol"
+            :role :original-independent-reviewer-not-implementer
+            :native-provider-approval false :whole-s2a-completion-credit 0}
+ :verdict :approved
+ :remaining-findings []
+ :parent-can-freeze-this-contract-for-phase2 true
+ :phase2-owned-synthetic-clio-fixture-prerequisite-qualified true
+ :approval-scope "Approve only the exact source/version/digest below as the independently reviewed initial boundary contract. Parent may authenticate and freeze this review binding, then proceed with the already scoped OWNED SYNTHETIC Clio append/persistence/schema/locking fixtures. This review performs none of those effects and does not qualify their future results."
+ :not-authorized [:live-collectors :personal-capture :operational-content-store
+                  :operational-retention-or-erasure-claims :model-or-service-effects
+                  :publication :whole-s2a-completion :native-provider-approval]
+
+ :target {:repository "open-hax/oikos"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2a"
+          :source-sha "c399b60e1676c47778445c1098eb541ab38743cb"
+          :tree-sha "10357860ac91b440a5ec4e38295b9aaa56ad0d01"
+          :previous-reviewed-source "34f9a4dacc7a32c8f5b81bce627d69a2c76082eb"
+          :red-source "ea6d7124dc26b9d801fb78c22f5bac38791a9dd5"
+          :head-and-clean-worktree-verified-before-and-after true}
+ :previous-review {:path ".ημ/runs/oikos-program-20261103/reviews/s2a-contract-code-v1.edn"
+                   :sha256 "4629d9e8b0add11e3821de0a35cecbfea866f8a6c76779c19d27cfd709beef3f"
+                   :verdict :changes_requested
+                   :historical-bytes-not-edited true
+                   :old-source-and-contract-remain-unapproved true}
+ :contract {:version "oikos.desktop.safe-reference/v1"
+            :content-digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+            :source-sha "c399b60e1676c47778445c1098eb541ab38743cb"
+            :owner-sha "788cdd3434615a7932b924e68520dbf7f88408c2"
+            :digest-algorithm :sha256-of-clio-canonical-edn
+            :canonical-contract-utf8-bytes 26212
+            :descriptor "docs/contracts/desktop-safe-reference-v1.edn"
+            :descriptor-sha256 "7ad9541df188201860e212b91d3744a62cd9aa05ae4a8d80c25425b4f0886916"
+            :documentation-sha256 "11223017981d5e3f17b43036b180246d3c4519768e98e7071d1899d70802b25d"
+            :both-runtimes-recomputed-digest-and-all-nine-source-bindings true
+            :independent-python-hashlib-confirmation true
+            :bound-source-bytes-equal-git-show-of-exact-source-sha true
+            :version-disposition "Same initial version, still unfrozen before this independent review; not a replacement of previously approved immutable admissions."
+            :parent-handoff "Pin this exact source SHA, version, content digest, descriptor/source hashes and independently authenticated review evidence. No approval is inferred from synthetic test context maps. Descriptor remains immutable candidate-authored data; this external review supplies the actual independent verdict."
+            :source-or-content-change-invalidates-this-approval true}
+
+ :per-id
+ [{:id :s2a/recursive-metadata-bypass :original-severity :P1 :disposition :settled :confidence 1.0
+   :fix-locations ["src/oikos/law/safe_reference.cljc:12-27,128-158"
+                   "src/oikos/law/desktop.cljc:132"]
+   :evidence "plain-data? traverses map keys, values and plain vectors and refuses ANY metadata, including empty metadata. require-plain-data! runs before Malli/canonical encoding, and replay guards the entire partition value before review validation or owner canonicalization. Inputs are refused, not stripped or coerced."
+   :original-counterexamples "Top-level with-meta baseline and nested lifetime-key metadata carrying a secret marker, real host object or function now throw the exact constant unsafe-event diagnostic with no cause in both BB and NBB. Both orders of value-equal tainted duplicate partitions refuse."
+   :regression-results {:collection-sites 48 :metadata-variants-per-site 4
+                        :metadata-cases 192 :safe-and-replay-both-refuse true
+                        :variants [:secret-marker :real-host-object :function :empty-metadata]
+                        :outer-and-inner-partition-metadata-refused true
+                        :metadata-bearing-map-key-refused true
+                        :schema-and-canonicalization-call-spy []}
+   :diagnostic {:message "Desktop boundary refused" :data {:oikos/error :unsafe-event} :cause? false}}
+  {:id :s2a/runtime-record-roundtrip :original-severity :P2 :disposition :settled :confidence 1.0
+   :fix-locations ["src/oikos/law/safe_reference.cljc:12-27,128-158"
+                   "test/oikos/law/plain_event_test.cljc:48-58,82-110"]
+   :evidence "The application boundary restricts collection representation to actual plain persistent array/hash maps and vectors; records are explicitly denied. Sorted maps, subvector views and host containers are refused rather than converted. Actual Clio event-schema/validation/reader APIs remain reused and unchanged."
+   :original-counterexamples "OriginalRuntimeWrapper around the entire event or nested lifetime map now refuses at the application boundary. Every one of the 38 enumerated record-wrapped map positions refuses in safe validation AND replay on BB and NBB."
+   :regression-results {:record-sites 38 :safe-and-replay-both-refuse true
+                        :other-wrapper-cases [:sorted-map :subvector]
+                        :runtime-value-cases 144 :plain-owner-validation-and-reader-roundtrips 7
+                        :actual-owner-reader-still-refuses-record-tags-at-all-sites true}
+   :roundtrip-seam "Actual clio.domain.schema/validate-event! plus actual clio.shape.edn/read-one applied to pr-str, matching the owner's ledger writer representation. No append or persistence was used."}]
+
+ :actual-verification
+ {:environment {"OIKOS_CLIO_SOURCE" "/home/err/spaces/foresight/clio"
+                "OIKOS_CLIO_DEPS" "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps"}
+  :working-directory "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2a"
+  :commands [{:command "bb test:desktop" :exit 0
+              :bb {:tests 16 :assertions 1059 :failures 0 :errors 0}
+              :nbb {:tests 16 :assertions 1059 :failures 0 :errors 0}}
+             {:command "bb test" :exit 0
+              :inherited-bb {:tests 18 :assertions 286 :failures 0 :errors 0}
+              :inherited-nbb {:tests 30 :assertions 392 :failures 0 :errors 0}
+              :eval {:tests 9 :assertions 39 :failures 0 :errors 0}
+              :included-desktop-bb {:tests 16 :assertions 1059 :failures 0 :errors 0}
+              :included-desktop-nbb {:tests 16 :assertions 1059 :failures 0 :errors 0}}
+             {:command "bb lint" :exit 0 :errors 0 :warnings 0}]
+  :default-test-registration "bb.edn:13 includes test:desktop. desktop_runner requires and runs both desktop-test and plain-event-test. Actual default-command output confirms BOTH desktop runtimes execute; inherited tests remain registered and unchanged."
+  :independent-targeted-probes
+  {:runtimes [:bb :nbb] :clean-final-probe-exits [0 0]
+   :collection-sites 48 :metadata-cases 192 :record-cases 38
+   :unknown-field-cases 38 :host-object-function-and-host-container-cases 144
+   :other-wrapper-cases 2
+   :safe-validation-constant-input-free-nil-cause-refusals 414
+   :replay-constant-input-free-nil-cause-refusals 414
+   :tainted-duplicate-orders-both-refused true
+   :outer-and-inner-partition-metadata-refused true
+   :metadata-bearing-map-key-refused-before-schema true
+   :calls-to-malli-or-canonical-form-or-owner-canonicalize-before-refusal []
+   :actual-owner-plain-event-roundtrips 7
+   :actual-owner-record-reader-refusals 38}
+  :historical-red-reproduction
+  {:source "ea6d7124dc26b9d801fb78c22f5bac38791a9dd5"
+   :method "Load exact git-show source/test forms in isolated memory, preserving registered namespaces and actual report counter behavior. For NBB, explicitly select the cljs reader feature before eval. No checkout or source file write."
+   :bb {:tests 15 :assertions 818 :passes 593 :expected-failures 225 :errors 0}
+   :nbb {:tests 15 :assertions 818 :passes 593 :expected-failures 225 :errors 0
+         :process-exit 1 :exit-disposition :expected-from-red-test-failures}
+   :not-a-green-head-regression true}
+  :digest-and-source-checks
+  {:bb {:descriptor-source-bindings 9 :exact-source-comparator true
+        :old-source-or-digest-refused true :missing-review-refused true}
+   :nbb {:descriptor-source-bindings 9 :exact-source-comparator true
+         :old-source-or-digest-refused true :missing-review-refused true}
+   :synthetic-review-maps-are-only-data true
+   :method "Recompute all nine descriptor file hashes with the portable helper separately in BB and NBB. Independently verify hashlib SHA-256 and compare every file's raw bytes to git show c399b60:path. Decode emitted canonical contract strings before independent UTF-8 hashing."
+   :both-runtime-canonical-sha256 "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"}}
+
+ :unchanged-semantics
+ {:contract-without-three-new-value-policy-keys-sha256 "00d0361a25244db8a0ada74f567d6986d33ba486ef64e7f2ad1caad1c97a711d"
+  :previous-contract-byte-identity-confirmed-both-runtimes true
+  :only-new-contract-policy-keys [:values/representation :values/metadata :values/runtime-wrappers]
+  :projection-diff "Exactly one added partition preflight call; no causal, gap, identity, targetability or compensation transition changes."
+  :catalog-and-retention-policy-unchanged true
+  :regressions-rerun [:persisted-sequence-and-cause-refusal :duplicate-and-partition-invariance
+                     :coverage-gap-and-fresh-cut-reconciliation :historical-missing-observations-unknown
+                     :epoch-xid-incarnation-close-reuse :stale-target-refusal :compensation-not-reopening
+                     :opaque-reference-and-linkable-classification :24h-image-and-7d-text-maximums]
+  :operational-erasure-still-unimplemented-and-not-claimed true}
+
+ :clio-and-prerequisite-custody
+ {:owner-path "/home/err/spaces/foresight/clio"
+  :owner-head "788cdd3434615a7932b924e68520dbf7f88408c2"
+  :owner-head-pinned-and-tracked-worktree-clean true
+  :owner-source-and-test-hashes-unchanged-from-v1 9
+  :generation-component-source-hashes-unchanged-from-permit 5
+  :component "470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+  :actual-owner-apis-not-copied true
+  :owner-source-anchors ["src/clio/law/schema.cljc:25-39 event-schema builder"
+                        "src/clio/domain/schema.cljc:309-340 owner event validation"
+                        "src/clio/domain/canonicalize.cljc owner causal canonicalization"
+                        "src/clio/law/ledger.cljc append-admission"
+                        "src/clio/infra/ledger.cljs:17-32,40-46 reader and original-value pr-str writer"
+                        "src/clio/shape/edn.cljc:12-37 actual strict reader"]
+  :canonical-card-and-all-rheos-comments-reread-with-absolute-parent-config true
+  :instructions-unchanged true
+  :held-bb-transport-apis-still-held true
+  :owned-synthetic-actual-ledger-schema-locking-tests-remain-phase2-work true}
+
+ :descriptor-source-and-test-sha256
+ {"bb.edn" "8f76a349e997923ae8130f81969a9d239522828e60f6645ae9de14ec0ada0af8"
+  "README.md" "85a93c408bb7c9167c297929915422023d377e0fd992a8c6134a1dc4a530f5fa"
+  "src/oikos/law/safe_reference.cljc" "baee008c0a3b2dc4a6ddd7bc8f4a63fed317d0d4514f961d819ad484019cdf60"
+  "src/oikos/law/desktop.cljc" "edea4e32bd0279ccfc2f81a4cfbe24c9e1348f06606f9d597530d28f894680d7"
+  "scripts/test_desktop.clj" "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"
+  "test/oikos/desktop_fixture.cljc" "77122676722cba3af9d62c42fcb725daf4236e6364ec50f7378a5907d4df4c57"
+  "test/oikos/desktop_runner.cljc" "a3b84c0bf587a7ce051d1d1ea9257d75832337d963bec8e609a4da9654b00072"
+  "test/oikos/law/desktop_test.cljc" "be969cb41358194a630b35cadc0db13243be400cc2cffbe250703c2e0bc4b088"
+  "test/oikos/law/plain_event_test.cljc" "5e4044f67c0792adad48ccd6c0544afc064afb8eb51eb853af306efd8996903f"}
+ :inherited-test-sha256
+ {"test/oikos/test_runner.cljc" "61f0eedbc138c286df63d1ec8bbfef74560631fefe9a97ff029a767bff2c4b54"
+  "test/oikos/law/actions_test.cljc" "584d165c7788ae612c0b48b1858b681ef2595d3ccb4a267d3f44adeeb5c50b59"
+  "test/oikos/law/generation_test.cljc" "0d52a7c4d27973e400e545dcc66ebc5a0b3fa4449b4aa2eb203e6afbc603994e"
+  "test/oikos/infra/cli_test.cljs" "d25b19dc8fc53628d94ff73ee1ae7be27cbf5b76b813f2d434b9ec58c08c68f5"
+  "test/oikos/infra/generation_test.cljs" "8e78d8aadc3c83ef2647cba89cd65a3129d90a3dd99e639c59a7ba9856e83819"
+  "eval/run_test.cljs" "9c2bd006f32e5783e1cb7ae1b93b4fe54f97294d0fb50b0a1fa5e16a157fd305"}
+
+ :effects {:actual-append-calls 0 :ledger-or-schema-history-writes 0
+           :product-card-pr-commit-or-push-edits 0
+           :model-service-operational-runtime-or-personal-cache-effects 0
+           :native-workflow-or-hosted-queue-waits 0
+           :reviewer-authored-files [".ημ/runs/oikos-program-20261103/reviews/s2a-contract-fix-review-v2.edn"]
+           :existing-parent-dirt-and-prior-review-untouched true}
+ :reflection {:p-efficiency 0.65 :p-friction 0.40 :p-skill-candidate 0.55
+              :note "Green review and original counterexamples were decisive. Historical RED rerun added avoidable harness work: correct reader features and forwarding the original report are necessary to preserve conditional semantics and assertion counters. Earlier harness failures are not product regressions; final RED summaries reproduce 225 failures/0 errors in both runtimes."
+              :separate-receipt-or-spore-written false
+              :disposition :parent-owned-persistence-only-this-new-review-artifact}}

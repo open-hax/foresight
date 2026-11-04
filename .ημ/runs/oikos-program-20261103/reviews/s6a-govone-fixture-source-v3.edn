@@ -1,0 +1,22 @@
+{:report/id :s6a-govone-fixture-source-v3
+ :kind :source-only-candidate-not-executed
+ :owner "mojomast/govone"
+ :worktree "/home/err/devel/orgs/mojomast/govone/.worktrees/feat/oikos-s6a-fixture-20261103"
+ :base "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+ :candidate "78824909e152bdc99e589e054387bbae41de85e6"
+ :only-new-path "cmd/govone-dev/s6a_fixture_test.go"
+ :sha256 "5ccc2c77acdfa8da5be23ad49c0b3144c5f0249b2813c7170d8af42554d07aac"
+ :lines 567 :format-check :gofmt-d-exit-0
+ :authors "Parent supplied in-process transport, local lifecycle and two-runtime provider-mode candidate; source worker added role-denial/key-expiry assertions."
+ :previous-shortfalls "Earlier workers returned without the mode implementation. Their incomplete records remain historical; no source success is inferred from them."
+ :provided-source [:genuine-in-process-handler :preserved-private-state
+                   :normal-API-provisioning :local-key-lifecycle
+                   :two-runtime-binding-identity-order :captured-provider-byte-assertions
+                   :mode-appropriate-positive-and-denial-assertions]
+ :tests-executed 0 :builds-executed 0 :runtime-instances-started 0 :guard-probes 0
+ :not-established [:compilation :test-pass :kernel-guard-qualification :actual-signed-session
+                   :actual-transformations :Oikos-transport :P3 :P4 :whole-S6A]
+ :review :independent-source-review-running
+ :execution "Held for source review, exact guard and command admission, build/fixture budgets and immutable cache/selected graph qualification. No environment flag or single socket sanity check replaces the external guard proof."
+ :lockfiles "Owner go.mod/go.sum unchanged. Any future build needing the two authenticated extra checksums must use an explicitly bound private metadata snapshot, not silently edit owner manifests."
+ :publication :local-source-commit-only}

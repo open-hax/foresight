@@ -1,0 +1,33 @@
+{:report/id :govone-pinned-dependency-cache-v1
+ :status :partial-stopped
+ :authorization ".ημ/runs/oikos-program-20261103/decisions/pinned-public-dependency-cache-authorization.edn"
+ :owner {:path "/home/err/devel/orgs/mojomast/govone"
+         :head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+         :go-mod-sha256 "d98ac1461da72048026c141cd1375421c6934e6c3937cc5048c296c594b218dd"
+         :go-sum-sha256 "8991f8bfbeccb3e31df27a42f4901a5a0a790e5c2937c4c55da93f5d30db9a90"}
+ :tool {:path "/tmp/opencode/oikos-test-tools/go-1.27.1-ad3b4bab-a5d9-4328-8f90-e7b13f65cade/go/bin/go"
+        :binary-sha256 "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624"
+        :executed false :accounting "Existing qualified tool outside this allocation."}
+ :allocation-bytes 805306368
+ :free-space-before-bytes 44780486656
+ :scratch {:path "/tmp/opencode/oikos-govone-deps-66a5b10a-0ac0-46f3-bf88-26763dd3d829"
+           :mode "0700" :retained true :owner :govone-pinned-dependency-cache
+           :regular-file-logical-bytes 9390
+           :manifest "manifest.json"
+           :manifest-sha256 "0e659543146e4e33b111ad4c1e52134c3b2f82cfae011a2a2934270b06230542"
+           :retention "Keep; no verified remote backup or deletion authorization."}
+ :downloads [{:coordinate "github.com/google/uuid@v1.6.0"
+              :kind :go-mod :direct-requirement true
+              :url "https://proxy.golang.org/github.com/google/uuid/@v/v1.6.0.mod"
+              :attempts 1 :bytes 30
+              :sha256 "73da47b6338b00a082fd451aa35a3273d3adc09b8e9bba98dab01091e402af6e"
+              :original-sum-and-calculated-h1 "h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo="
+              :result :matched :redirects :denied}]
+ :network "Explicit HTTPS proxy.golang.org only; Python proxy handling disabled; one request with 20-second socket timeout and 1 MiB plus one byte response ceiling. No redirects, Git, sumdb or Go network access. The h1 uses Go dirhash Hash1 with filename go.mod, not SHA256 equivalence. No downloaded code executed."
+ :selected-modules :unresolved
+ :source-zips []
+ :offline-commands {:go-list-m-json-all :not-run :go-mod-verify :not-run}
+ :blocker "The single bounded metadata request is not an aggregate filesystem quota or a reviewed broker for all future metadata, Go-generated files, ZIPs, extraction and logs. The remaining selected graph, info files, source ZIPs and test closure are not known or verified. Stop before running Go or fetching more until such enforcement and ZIP safety validation are available. No cap exhaustion is claimed."
+ :missing "Complete selected graph, authenticated selected module metadata and source ZIPs, offline graph query and module verification. Historical go.mod-only entries must not be treated as automatic source requirements."
+ :effects "No application, build, test, listener, model, owner edit, global cache edit, board operation, ledger entry, PR or Git mutation. No dependency code executed."
+ :next "Coordinator: supply or establish an aggregate-enforcing acquisition/extraction broker, then resume from retained evidence under the existing authorization."}

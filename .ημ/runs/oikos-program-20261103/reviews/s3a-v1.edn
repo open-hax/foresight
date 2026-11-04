@@ -1,0 +1,19 @@
+{:task :s3a :uuid "b2f52c1f-bd1b-431e-a417-95c72549ba0d"
+ :source-sha "ae35073719974c0df1d2dae301c2179fa4785641"
+ :session-id "ses_e5dbab4f4ffe3LvaGOqLlQZFgX" :scope :planning-only
+ :verdict :changes_requested
+ :findings
+ [{:id :s3a/incarnation :severity :P1 :title "Memberships must bind window lifetime"
+   :evidence "Frozen S3A inherits S2A epoch+runtime-ID identity with no close/reuse behavior."
+   :required-test "A joins X/Y then closes; B reuses same epoch/runtime ID and inherits no membership. Repeat epoch replacement; stale A remains historical/unresolved or refused."}
+  {:id :s3a/branch-version :severity :P2 :title "Observed revision alone cannot version speculative branches"
+   :evidence "Frozen S3A and inert action law validate observation revision, not stable branch ID/base/expected branch version."
+   :required-test "Independent branches from R remain independent. Two edits at branchA/v0 produce one successor and one no-mutation conflict; missing/wrong branch/version rejects."}
+  {:id :s3a/no-mutation-conflict :severity :P1 :title "Stale conflict must preserve logical state too"
+   :evidence "Existing zero-effect adapter spy does not test memberships, branch version/content or pinned base."
+   :required-test "Stale create/edit/compare returns explicit conflict and unchanged authoritative state/base/branch revisions/memberships, zero adapter calls, no implicit rebase or cumulative retry mutation."}
+  {:id :s3a/observed-vs-proposed :severity :P2 :title "Logical views cannot overwrite observed placement"
+   :evidence "No physical movement alone does not constrain projected workspace/focus provenance."
+   :required-test "One observed physical window at P appears in A/B; proposed Q remains clearly proposed, physical count/identity/P unchanged until admitted actual observation."}]
+ :prerequisite-artifacts ["S2A admitted event/projection, observed revision and lifetime identities with stale/reuse fixtures" "Official Rheos E2→S2A dependency reconciliation"]
+ :policy-blockers [] :user-questions [] :tests-executed false :native-provider-approval false}

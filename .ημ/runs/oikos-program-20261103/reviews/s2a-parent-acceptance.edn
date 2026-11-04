@@ -1,0 +1,24 @@
+{:acceptance/id :s2a-parent-acceptance-fadf3478
+ :task "93a76dad-678a-4980-86fb-ba0fbb5e8203"
+ :candidate "fadf3478e97060d2ec58dceee39b93c6aaabbf25"
+ :tree "181886ef7b72d2e750ca86946dedd6e95179f3a2"
+ :reviewed-integration "5d132c1ccfb3ec96b28f37bff4d32ff64ee03d22"
+ :accepted-base "008b0611198d13eb503bb57d5ef69d8dec1c268c"
+ :independent-reviews ["s2a-contract-fix-review-v2.edn" "s2a-wire-fix-review-v2.edn"
+                       "s2a-clio-integration-code-v1.edn" "s2a-main-integration-v2.edn"]
+ :decision :accepted-for-ordinary-exact-head-development-source-pr
+ :card-scope "Initial closed portable metadata/content-reference law, distinct causal desktop event/replay/coverage shapes, immutable reviewed handoff, and actual Clio synthetic admission/persistence/replay. Live collectors are explicitly a non-goal of S2A; S2B remains separate."
+ :independent-exact-head {:integration [10 169] :wire-bb [15 347] :wire-nbb [15 347]
+                          :spaces-bb [11 455] :spaces-nbb [11 455]
+                          :bb [18 286] :nbb [40 546] :eval [9 39]
+                          :desktop-bb [16 1059] :desktop-nbb [16 1059]
+                          :lint-errors 0 :lint-warnings 0 :failures 0 :errors 0
+                          :owner-append-calls 20 :new-fixture-trees 11 :real-workers 7}
+ :composition {:all-files 63 :mode-or-blob-mismatches 0 :frozen-contract-pins 9
+               :frozen-wire-pins 4 :accepted-main-byte-identical true}
+ :native-gate :fresh-review-corpus-and-required-checks-before-merge
+ :not-qualified [:operational-journal :live-collector :operational-erasure
+                 :foreign-writer-universal-transaction :runtime-read-authority
+                 :installed-promotion :epic-completion]
+ :merge-status :not-yet-executed-at-record-creation
+ :native-approval-credit 0 :epic-completion-credit 0}

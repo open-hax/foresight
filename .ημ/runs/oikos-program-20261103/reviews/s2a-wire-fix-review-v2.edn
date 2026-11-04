@@ -1,0 +1,88 @@
+{:review/id :s2a-wire-fix-review-v2
+ :date "2026-11-03"
+ :kind :independent-exact-successor-code-and-regression-review
+ :reviewer {:role :original-boundary-reviewer-not-implementer
+            :native-provider-approval false :whole-s2a-completion-credit 0}
+ :verdict :approved
+ :remaining-findings []
+ :introduced-regressions-observed []
+ :target {:source "97e41a6b733f01e1b409f0f68f1efaf9122f5177"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2a"
+          :decoder "src/oikos/infra/desktop_wire.cljc"
+          :decoder-sha256 "a1e6a3d4de9c003a58c7e27680eb250b7ec9ef04f12ef44fd3bc1daf8b5e55e2"
+          :test-sha256 "1693781e94f33dfcd62b76f284d279bee71ccc74f76fe5e07cf00e5222d8356d"
+          :invoker-sha256 "73863662bae3d0f75a55cabcedbe172abfb65de3599c79d5adcc9aa8d0f21289"
+          :runner-sha256 "3c016bbef3533a28c3574aad7cefe1853486cfe5c3ffd13f0de444fffc022898"
+          :head-and-hashes-directly-observed true
+          :decoder-and-tests-worktree-diff-from-head-empty true
+          :previous-reviewed-source "7bd796cff3cf7f3365f1221e789bdb9e37bedaaf"
+          :fix-red-source "ae792d54649b5b73d8634e4a5b89e6367aee6390"
+          :red-result-provenance :implementer-handoff-reports-26-failures-zero-errors-per-runtime-not-rerun-historical-head}
+ :scope "Re-review original two actual findings and introduced compatibility regressions in the exact decoder successor. Read actual source/test/handoff diff against prior reviewed head, actual handoff profile/pins and pure test invocation. Original failing witnesses were independently reproduced on prior review and rerun now; no integration draft is included in this approval."
+ :per-id
+ [{:id :s2a-wire/namespaced-key-alias-collapse
+   :original-severity :P1 :disposition :settled :confidence 1.0
+   :fix "Explicit #:namespace map direct keys are limited to unqualified literal ASCII keyword tokens. occupy-slot! tracks only direct key/value form slots, including nested collection and string starts. It neither expands namespaces nor implements duplicate-key or owner parsing semantics. Qualified aliases, :_/ unqualification, auto keywords, string/symbol/collection keys refuse before owner expansion; ordinary map key behavior is unchanged."
+   :independent-reproduction {:runtimes [:bb :nbb]
+                              :original-owner-still-collapses true
+                              :original-actual-event-witness "Construct default (pr-str (f/baseline)), replace :seq 1 with :seq 999 and add :event/seq 1 before final }. Actual owner read-one still equals baseline. Successor decode-event refuses."
+                              :other-cases ["#:a{:x 1 :a/x 2}" "#:a{:x 1 :a/x 1}"
+                                            "#:a{:a/x 2 :x 1}" "#:a{:a/x 1 :x 1}"
+                                            "#:outer{:inner #:a{:x 1 :a/x 2}}"
+                                            "#:a{:_/x 1 :x 2}"]
+                              :candidate-outcome :refused
+                              :owner-reader-calls 0 :owner-canonicalizer-calls 0
+                              :message "Desktop wire refused" :data {:oikos/error :wire-invalid} :cause? false}
+   :committed-regressions "expanded-key-aliases-are-denied-before-owner-collapses-them includes both orders, equal/unequal values, nested aliases, :_/ forms and four actual event variants with zero owner-call counters."
+   :compatibility "Independent actual default BB/NBB printer outputs for mixed namespaced/unqualified/string keys remain ordinary maps and decode value-equal/canonical-identical. Legal namespaced maps with unqualified _, a?, x-y keys and nested qualified VALUES still pass. No global printer binding or owner pin change."}
+  {:id :s2a-wire/raw-partition-container-metadata-laundering
+   :original-severity :P2 :disposition :settled :confidence 1.0
+   :fix "replay-history calls unchanged safe/require-plain-data! on raw context and captured-ledgers BEFORE mapv, owner reading or canonicalization; retains vector/count check and requires strings. No metadata stripping occurs."
+   :independent-reproduction {:runtimes [:bb :nbb]
+                              :expression "(let [v (with-meta [(pr-str (f/baseline))] {:secret \"SYNTHETIC-SECRET\"})] [(safe/plain-data? v) (observe #(wire/replay-history (f/context) (f/revisions) v))])"
+                              :raw-plain? false :candidate-outcome :refused
+                              :owner-reader-calls 0 :owner-canonicalizer-calls 0
+                              :message "Desktop wire refused" :data {:oikos/error :wire-invalid} :cause? false}
+   :committed-regressions "raw-partition-and-context-containers-refuse-before-owner covers empty, location-only, secret, actual host-object and function metadata on partition vectors and replay context; subvector/list/record/host-array/non-string containers and record context also refuse with zero reader/canonicalizer calls. Positive lawful replay remains tested."}]
+ :actual-verification
+ {:pure-invoker {:command "bb scripts/test_desktop_wire.clj with pinned existing owner/cache and actual coordinator permit/review files"
+                 :bb {:tests 15 :assertions 347 :failures 0 :errors 0}
+                 :nbb {:tests 15 :assertions 347 :failures 0 :errors 0}}
+  :baseline {:command "bb test"
+             :inherited-bb [18 286] :inherited-nbb [30 392] :offline-eval [9 39]
+             :desktop-bb [16 1059] :desktop-nbb [16 1059]
+             :failures 0 :errors 0}
+  :lint {:command "bb lint" :errors 0 :warnings 0}
+  :independent-probes "Inline pure BB/NBB expressions, no files created: original aliases and actual event sequence witness, original metadata-tainted partition witness, actual default printer outputs and canonical identity. Owner reader/canonicalizer instrumented with call counters, delegating to actual APIs if reached."
+  :actual-default-printer-positive-examples
+  ["{:a/x 1, :b/y 2}" "{:a/x 1, :x 2}" "{:a/x 1, \"name\" 2}"
+   "{:a/x 1, :_/x 2}" "#:a{:_ 1, :a? 2, :x-y 3}"
+   "#:outer{:a #:b{:value :c/value, :test? true}}"]
+  :positive-examples-both-runtimes-value-equal-and-canonical-identical true
+  :ordinary-map-distinct-key-witness "{:x 1 :a/x 2} remains {:x 1, :a/x 2} in both runtimes."
+  :existing-positive-suite "All six event types plus boolean content reference, schema/catalog/contract, actual parent permit authentication, reader-generated location checking, strict byte capture and UTF-8, canonical identity, raw tainted-input law and coverage/lifetime replay remain passing."
+  :documented-owner-only-refusals "Ordinary duplicate spellings, multiform and inspected-node overflow are deliberately checked by owner/postparse logic, each refusing after one owner reader call. Test/handoff accurately document this; no stronger preparse claim or additional finding."
+  :frozen {:source "c399b60e1676c47778445c1098eb541ab38743cb"
+           :file-count 9 :all-nine-current-working-file-sha256-match-parent-permit true
+           :contract-digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+           :owner "788cdd3434615a7932b924e68520dbf7f88408c2"
+           :owner-head-observed true :owner-source-clean-check :passed-by-pure-invoker
+           :actual-review-evidence-id "b4542a1a-d95a-5fb5-a73d-3ba80bdd4692"
+           :actual-parent-authentication :passed-by-both-runtime-tests}}
+ :assessment "The two demonstrated defects are fixed without changing frozen law, copying an EDN/kernel implementation, modifying Clio owner, binding a global printer, or sanitizing arbitrary raw metadata-bearing objects. The small lexical slot profile narrows only explicit namespaced-map keys; namespace expansion, exact-one-form reading, ordinary duplicate detection, canonicalization and admission remain owner authority. No introduced regression observed within this review's actual tested contract."
+ :qualification {:exact-private-decoder-qualified true
+                 :parent-may-authorize-owned-synthetic-fixture-continuation true
+                 :automatic-write-authority false
+                 :condition "Parent must separately authorize continuation and review/qualify the actual integration adapter. This exact decoder approval is not approval of either uncommitted integration draft. Any decoder/profile/source change requires fresh exact-source review."
+                 :actual-persistence-proof false :actual-schema-history-proof false
+                 :actual-locking-proof false :operational-installation false
+                 :live-collectors false :operational-content-store false
+                 :whole-s2a-complete false :native-provider-approval false}
+ :effects {:append-calls 0 :schema-history-writes 0 :fixture-creation 0
+           :integration-target-run false :production-edits false :board-ledger-writes false
+           :commit-push-pr false :model-service-operations false
+           :only-new-file :this-report
+           :untouched-existing-drafts ["scripts/test_desktop_integration.clj" "src/oikos/infra/desktop_fixture.cljs"]}
+ :reflection {:lesson "Verify namespace narrowing against actual default owner printers, and preserve raw outer-container representation guards before transformations; the successor does both."
+              :spore-created false}
+ :next "Parent may explicitly permit scoped owned-synthetic integration continuation using this exact qualified decoder; require separate integration/persistence/locking evidence before claiming those outcomes."}

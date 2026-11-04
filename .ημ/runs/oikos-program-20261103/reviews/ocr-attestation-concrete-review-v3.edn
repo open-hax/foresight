@@ -1,0 +1,89 @@
+{:report/id :oikos/ocr-attestation-concrete-review-v3
+ :report/at "2026-11-03T20:17:15Z"
+ :report/kind :bounded-read-only-concrete-activation-preflight-review
+ :report/verdict :approve
+ :report/confidence 0.99
+ :report/findings []
+ :report/outcome "Concrete prepared release and effective unit are qualified for the ONE parent-owned controlled restart already authorized by the user. No further code audit or prior hardware trial is required. This worker has not consumed that restart."
+ :inputs {:prepared-record ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-concrete-preflight.edn"
+          :code-approval ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-fix-review-v2.edn"
+          :unit-owner-instructions-read "/home/err/.config/systemd/user/AGENTS.md"}
+ :release-binding
+ {:commit "6626d680f079c3330fee1df1f3565475d7ef1a55"
+  :path "/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55"
+  :independently-verified true
+  :directory {:uid 0 :mode "0555"}
+  :contents-exactly ["launch.py" "server.py"]
+  :files [{:name "server.py" :uid 0 :mode "0444"
+           :sha256 "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"
+           :bytes-equal-reviewed-committed-blob true}
+          {:name "launch.py" :uid 0 :mode "0444"
+           :sha256 "63a956d06f8538267f26e8847dfa2e37f296aca7c5a063650665f5ce67b375d6"
+           :bytes-equal-reviewed-committed-blob true}]
+  :ancestor-verification "Independently opened opt, desktop-ocr, releases and the release directory component-by-component using O_DIRECTORY|O_NOFOLLOW and directory FDs; every component is root-owned with mode & 022 == 0. Ancestors are 0755; release is 0555. Each source file is a regular root-owned 0444 file opened with O_NOFOLLOW."
+  :atomic-install-provenance "Parent reports fresh atomic renameat2 NOREPLACE installation; this read-only reviewer independently verified the resulting pinned state, not the historical syscall."
+  :original-dirty-owner-source-sha256 "f0dc43fb911e749bbfd41025160bb0171f4b6c775f32fb907a1ece1dc824bf9c"
+  :original-dirty-owner-source-unchanged-independently-verified true}
+ :unit-binding
+ {:unit "ocr-npu.service"
+  :original-fragment "/home/err/.config/systemd/user/ocr-npu.service"
+  :original-fragment-bytes 657
+  :original-fragment-sha256 "1c7a0cdf0a9eed0a17039704fccdbad763d1f5f50da938017417f9432698f384"
+  :original-fragment-unchanged-independently-verified true
+  :owned-dropin "/home/err/.config/systemd/user/ocr-npu.service.d/90-oikos-input-identity.conf"
+  :owned-dropin-bytes 136
+  :owned-dropin-sha256 "9a0236217a54f59a1444d9029dc0a0efc3fac530d8f7b5ba382014c51765567c"
+  :dropin-regular-file-owned-by-current-user true
+  :dropin-exact-content "[Service]\nRestart=no\nExecStart=\nExecStart=/usr/bin/python3 /opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55/launch.py\n"
+  :dropin-bytes-and-hash-independently-verified true
+  :selected-effective-properties-independently-requeried
+  {:ActiveState "active" :SubState "running" :MainPID 1371874 :NRestarts 0
+   :Restart "no" :Type "simple" :NeedDaemonReload "no"
+   :DropInPaths ["/home/err/.config/systemd/user/ocr-npu.service.d/90-oikos-input-identity.conf"]
+   :FragmentPath "/home/err/.config/systemd/user/ocr-npu.service"
+   :ExecStart {:executable "/usr/bin/python3" :interpreter-flags []
+               :script "/opt/desktop-ocr/releases/6626d680f079c3330fee1df1f3565475d7ef1a55/launch.py"}
+   :OnFailure "" :OnSuccess "" :RestartForceExitStatus ""
+   :WatchdogUSec "0" :TriggeredBy "" :Triggers ""}
+  :old-process-still-running true
+  :retry-suppression-already-effective true
+  :inherited-properties "Parent byte-compared Environment, EnvironmentFiles, WorkingDirectory, User, Group, Type, OnFailure, OnSuccess, RestartForceExitStatus and WatchdogUSec unchanged. Reviewer verified original fragment hash, exact minimal drop-in, exact effective drop-in set and selected nonsecret effective properties without querying or publishing environment values."
+  :unit-verification {:parent-reported-command "systemd-analyze --user verify ocr-npu.service"
+                      :parent-reported-exit 0 :diagnostic-bytes-independently-hashed 230
+                      :diagnostic-sha256 "e8e21a1af65eeefa334a3fa6cf1de9deb329328e7d785634e4a5899f98c90313"
+                      :parent-reported-ocr-findings []
+                      :existing-unrelated-warnings "ytwall assignment outside section; barrier StartLimitIntervalSec in wrong section. Not hidden or changed; no global warning-free claim."
+                      :rerun-by-reviewer false}}
+ :rollback-evidence
+ {:private-directory "/home/err/.local/state/oikos-dev/ocr-attestation-20261103/preflight-e1f3ffa2-3372-479c-9dd0-230626d54447"
+  :directory-mode-independently-verified "0700"
+  :all-files-regular-current-user-owned-mode "0600"
+  :independently-hashed-files
+  [{:name "manifest.json" :bytes 956 :sha256 "e891803009cf1507de3e4d7d74b1fb26b85de7c1f873091a75befaa3af2541ae"}
+   {:name "prepared.json" :bytes 845 :sha256 "1007a02139bcae8d8fcb833676f6c7012431c286ef2c1177426ccd8ad16b6083"}
+   {:name "prior-execstart.txt" :bytes 214 :sha256 "6e41014f3cfd64996992e9f6d6d2a24255fb1478db1f3cb53de08f4d77858a75"}
+   {:name "prior-unit.bin" :bytes 657 :sha256 "1c7a0cdf0a9eed0a17039704fccdbad763d1f5f50da938017417f9432698f384"}
+   {:name "proposed-dropin.conf" :bytes 136 :sha256 "9a0236217a54f59a1444d9029dc0a0efc3fac530d8f7b5ba382014c51765567c"}
+   {:name "unit-verify.log" :bytes 230 :sha256 "e8e21a1af65eeefa334a3fa6cf1de9deb329328e7d785634e4a5899f98c90313"}]
+  :raw-unit-and-environment-values-published false
+  :rollback-boundary "Restore only owned override metadata and daemon-reload as appropriate. Never restore Restart=always onto a failed worker as an implicit retry. Reactivating the old command or any second startup requires renewed user authorization; retain backup and release evidence."}
+ :remaining-action
+ {:owner :parent
+  :action :consume-single-authorized-controlled-restart
+  :qualified-at-observed-state true
+  :limits "ONE restart only. Existing assets only; inherited initializer compile/warm only within that restart. No extra startup trials, standalone native imports/loads/warmups, POST, personal inputs, OCR batch or downloads. Afterwards bounded loopback GET /health and /identity only, compare pinned source/assets and PID/start ticks; stop on failure/mismatch without retry. If the prepared binding/state drifts before action, do not start against an unreviewed replacement."
+  :resources-and-assets "Parent reports five existing asset hashes unchanged, approximately 45 GiB free disk and MemAvailable 14232145920 bytes. Snapshot, not reservation; not independently rehashed/requeried in this bounded concrete gate."
+  :native-startup-success-guaranteed false
+  :prior-hardware-trial-required false
+  :hardware-or-ocr-quality-credit false
+  :activation-already-performed false}
+ :execution-boundary
+ {:persistent-write-only ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-concrete-review-v3.edn"
+  :service-queries "One selected-property systemctl --user show for ocr-npu.service only."
+  :service-starts 0 :service-restarts 0 :daemon-reloads 0 :unit-edits 0 :source-edits 0
+  :native-imports 0 :model-loads 0 :warm-executions 0 :inference-requests 0 :ocr-posts 0
+  :credential-files-read 0 :environment-values-queried 0 :personal-inputs 0
+  :board-edits 0 :ledger-edits 0 :commits 0 :pushes 0 :downloads 0 :installs 0}
+ :reflection {:receipt-owner :parent :session-mycology-owner :parent
+              :separate-ledger-or-spore-write false :spore nil
+              :lesson "The final gate binds approved source bytes to the effective command and retry policy while the old PID remains active; it does not consume the authorized native startup as a test."}}

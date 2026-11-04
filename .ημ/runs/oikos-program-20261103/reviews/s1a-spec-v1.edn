@@ -1,0 +1,19 @@
+{:task :s1a :uuid "07452a65-4a6a-4704-bf81-50408927dcc8"
+ :session-id "ses_e5d9fa9fbffewcX0s64krmWdY8"
+ :scope :preparatory-specification-only
+ :source-sha "ae35073719974c0df1d2dae301c2179fa4785641"
+ :spec-sha256 "84994e4e3f51effc58f37c45bdc052e4751517587412d4e093d7bce5e795eaaa"
+ :verdict :changes_requested
+ :findings
+ [{:id :s1a-spec/resolved-restrictions :severity :P2
+   :evidence "Spec154-171 resolved rule names cross-profile aliases but not all same-profile containment/disjointness/forbidden-root rules."
+   :required-test "Reapply all restrictions after resolution or reject relevant links; T02/T03 cover config→state/config→forbidden root/nonexistent leaves/distinct resolved positive."}
+  {:id :s1a-spec/artifact-bijection :severity :P2
+   :evidence "Spec98-103,125-130,248-264 per-artifact checks permit empty or partial successful artifact lists."
+   :required-test "T06/T09 require exact requested-target/descriptor/content bijection, matching format/destination/validator revision; reject empty/partial/extra/substituted exit0 responses."}
+  {:id :s1a-spec/canonical-bytes :severity :P2
+   :evidence "Spec183-195 omits exact separators/whitespace/hash termination."
+   :required-test "T05 defines exact nested/empty-container canonical goldens, comma/whitespace equivalents and identical BB/NBB bytes/hashes."}]
+ :original-planning-gaps "Explicit config destinations, non-evaluating boundary and supported/deferred target matrix have substantive proposed coverage."
+ :user-questions [] :tests-executed false :native-provider-approval false
+ :implementation-or-readiness-credit 0}

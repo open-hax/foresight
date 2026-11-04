@@ -1,0 +1,225 @@
+{:schema :native-review-outcomes/v2
+ :date "2026-11-03"
+ :collection-started-at "2026-11-03T18:01:26Z"
+ :current-utc-observed "2026-11-03T18:03:29Z"
+ :scope :bounded-read-only-recovery-with-one-new-report
+ :transport "Native GitHub REST/GraphQL through env -u GH_TOKEN -u GITHUB_TOKEN gh; offline canonical pure-law invocation."
+ :write-boundary {:only-new-file ".ημ/runs/oikos-program-20261103/native-review-outcomes-v2.edn"
+                  :github-mutations false :model-invocations false
+                  :trigger-cancel-rerun false :product-effects false
+                  :global-tool-changes false :credential-values-inspected false
+                  :separate-ledger-writes false}
+ :inputs-read ["AGENTS.md and supplied ancestor guidance"
+               "/home/err/.agents/skills/pr-flow/SKILL.md"
+               "/home/err/.agents/skills/pr-review-settlement/SKILL.md"
+               "docs/notes/opencode-free-mimo-routing.md"
+               ".ημ/runs/oikos-program-20261103/native-review-route-diagnosis.edn"
+               "/home/err/.agents/skills/pr-flow/scripts/pr_flow/law.cljc"]
+ :credit {:approval false :coverage false :completed-round false
+          :quota-exclusion false :settlement false
+          :canonical-full-gate-observed false :approval-convergence-claimed false}
+
+ :foresight52
+ {:repository "riatzukiza/foresight" :pr 52
+  :url "https://github.com/riatzukiza/foresight/pull/52"
+  :source-head "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+  :base-head "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+  :native-state {:open true :draft false :auto-merge nil :merged false
+                 :mergeable "CONFLICTING" :merge-state "DIRTY"
+                 :merge-commit nil :potential-merge-commit nil}
+  :sha-separation
+  {:source-candidate-is-not-merge-sha true
+   :current-merge-sha :unavailable-because-native-potential-merge-is-null
+   :old-run-nested-pull-request-head "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+   :warning "The old run's nested pull_requests record now displays the current PR head. Its own head_sha, attempt, jobs and digest-verified executed checkout remain 7a0d842. Never bind that old execution to current 4deeab6 from the mutable nested PR record."
+   :old-event-synthetic-merge-sha :not-observed
+   :old-actually-executed-sha "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+   :old-head-approval-transfer false}
+
+  :old-execution
+  {:run-id 41683556765 :attempt 1
+   :url "https://github.com/riatzukiza/foresight/actions/runs/41683556765"
+   :source-head "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+   :event "pull_request" :status :in-progress :conclusion nil
+   :created-at "2026-11-03T17:22:05Z"
+   :native-updated-at "2026-11-03T17:23:09Z"
+   :caller-path ".github/workflows/eta-mu-review.yml"
+   :reusable-workflow-source "open-hax/eta-mu/.github/workflows/opencode-code-review.yml@b5b28237c45323cdc1914317260192163d957735"
+   :check-suite-id 112956234241
+   :jobs [{:id 126083218308 :attempt 1
+           :name "Evidence-first review (eta-mu) / Produce deterministic review evidence"
+           :status :completed :conclusion :success
+           :completed-at "2026-11-03T17:22:33Z"}
+          {:id 126083219047 :attempt 1
+           :name "Evidence-first review (eta-mu) / Compile Muse tools and stage skills"
+           :status :completed :conclusion :success
+           :completed-at "2026-11-03T17:23:05Z"}
+          {:id 126083789323 :attempt 1
+           :name "Evidence-first review (eta-mu) / Review pull request with OpenCode MiMo"
+           :status :in-progress :conclusion nil
+           :started-at "2026-11-03T17:23:08Z"
+           :active-step {:number 12 :name "Run bounded evidence-first OpenCode review"
+                         :started-at "2026-11-03T17:23:29Z"}
+           :app-credential-nonempty-guard :success
+           :final-validation :pending :app-token-creation :pending
+           :native-review-publication :pending}]
+   :first-failure {:status :not-observed :reason :nonterminal
+                   :failure-logs-fetched false :provider-diagnosis :not-established}
+   :readback-policy "Single bounded status collection, plus attempt/source metadata; no wait/poll loop, failure logs, trigger, cancellation or rerun."
+   :deterministic-checkout-proof
+   {:artifact-id 13253357059 :name "review-evidence-52-41683556765-1"
+    :zip-bytes 16311
+    :native-and-actual-sha256 "82660be16343b446e55210222c37ff71d94c2b39b6d19e447bb38e2d8d9abda4"
+    :digest-match true :downloaded-once-in-memory true :extracted-to-disk false
+    :read-members ["checkout.json" "summary.json"]
+    :event-head-sha "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+    :expected-executed-completion-sha "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+    :exact-head true :base-sha "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+    :log-members-not-read true}
+   :context-artifact-metadata-only
+   {:id 13254721090 :name "review-context-41683556765-1"
+    :native-digest "sha256:8dd6a986f63271179094cf4add05a5154d0dc3933209115af9ce311fa78fe898"
+    :downloaded false}}
+
+  :current-head-execution
+  {:head-filtered-actions-run-count 0
+   :branch-filtered-actions-run-count 1
+   :branch-run-is-only-the-old-7a0d842-run true
+   :current-head-actions-attempts [] :current-head-actions-jobs []
+   :current-head-checks
+   [{:id 126103105227 :name "CodeRabbit" :status :in-progress :conclusion nil
+     :started-at "2026-11-03T17:57:49Z" :check-suite-id 112970486888
+     :actions-workflow-run nil}]
+   :check-pagination-complete true
+   :absence-cause "Native PR is CONFLICTING/DIRTY and no potential merge commit exists. No current-head Actions execution was returned; this collection does not prove a sole causal explanation for its absence."
+   :missing-route-or-absent-run-is-quota false}
+
+  :native-publications-and-review-bodies
+  {:reviews-pagination-complete true
+   :issue-comments-pagination-complete true
+   :reviews
+   [{:id 5756752951 :actor "coderabbitai[bot]" :state "COMMENTED"
+     :head "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+     :submitted-at "2026-11-03T17:29:39Z"
+     :body "Generated publication/status markers and an autofix checkbox only; no additional review-body finding."
+     :inline-finding 4458230282 :current-head-approval false}
+    {:id 5757101453 :actor "riatzukiza" :state "COMMENTED"
+     :head "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+     :submitted-at "2026-11-03T17:56:55Z" :body ""}
+    {:id 5757113903 :actor "coderabbitai[bot]" :state "COMMENTED"
+     :head "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+     :submitted-at "2026-11-03T17:57:55Z" :body ""
+     :scope "Native acceptance reply in the existing planning thread, not a full-PR approval."}]
+   :new-codex-native-receipt
+   {:id 6611549292 :actor "chatgpt-codex-connector[bot]" :actor-id 199175422
+    :url "https://github.com/riatzukiza/foresight/pull/52#issuecomment-6611549292"
+    :created-at "2026-11-03T17:58:39Z" :updated-at "2026-11-03T17:58:39Z"
+    :native-envelope "<!-- codex-review-receipt:v1 -->"
+    :native-verdict "Codex Review: Didn't find any major issues. You're on a roll."
+    :native-reviewed-commit-marker "4deeab6dd4"
+    :github-resolved-full-sha "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+    :publication-is-observed true :canonical-gate-admission-not-run true}
+   :codex-summary {:id 6610791110 :updated-at "2026-11-03T17:58:41Z"
+                   :head "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+                   :status "completed" :has-any-findings false :has-unresolved-findings false}
+   :old-codex-receipt {:id 6610820718 :head-marker "7a0d842eba"
+                       :current-head-credit false}
+   :current-coderabbit-full-review
+   {:request-id 6611520526 :request-created-at "2026-11-03T17:57:15Z"
+    :acknowledgement-id 6611522530 :acknowledgement "Full review triggered."
+    :acknowledgement-created-at "2026-11-03T17:57:21Z"
+    :summary-id 6610781464 :summary-updated-at "2026-11-03T17:57:48Z"
+    :summary-current-processing-head "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+    :summary-final-coverage-still-old-head "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+    :full-current-head-completion-not-observed true}
+   :mimo-native-review-records-returned []
+   :actual-new-findings "None observed in the complete returned REST review bodies or PR issue comments. The known target-descriptor cleanup planning finding remains the only finding in the returned thread; do not reinterpret its runtime disclaimer as a new finding. Current CodeRabbit full review is still pending, so absence now does not predict its result."}}
+
+ :disputed-planning-settlement
+ {:thread-id "PRRT_kwDOU4VJMM6zQFST"
+  :root-comment-id 4458230282 :path "docs/specs/receipt-git-buffer.md" :line 115
+  :complete-exact-thread-read true :comments-returned 3 :has-next-page false
+  :native-resolved true :native-outdated false :resolved-by "coderabbitai[bot]"
+  :native-comments
+  [{:id 4458230282 :actor "coderabbitai" :actor-type "Bot"
+    :created-at "2026-11-03T17:29:38Z" :updated-at "2026-11-03T17:57:54Z"
+    :body-sha256 "81c352c35b3b7cd88f748e0b3b6278908c5f8f1193657b025d8109ae4bbf3038"
+    :original-review-id 5756752951
+    :original-commit "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+    :title "Include target-descriptor cleanup in the overflow plan."
+    :finding "Target opens before committed capture; an exception before reservation return can leak the owned target descriptor. Add cleanup and capture-failure regression requirements."
+    :edited-native-root-acknowledgement "Confirmed as addressed by @riatzukiza"}
+   {:id 4458517203 :actor "riatzukiza" :actor-type "User"
+    :created-at "2026-11-03T17:56:55Z" :updated-at "2026-11-03T17:56:55Z"
+    :body-sha256 "34ecc0b32a98956a4332a6e48806e7c3d76395960bef2056cc8a70380aa3c7a8"
+    :opening "Fixed in 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b:"
+    :meaning "Corrects the planning omission, independent cleanup regression requirements and combined stdout/stderr accounting; explicitly does not claim runtime repair or readiness."
+    :native-writer-permission "admin"}
+   {:id 4458527410 :actor "coderabbitai" :actor-type "Bot"
+    :created-at "2026-11-03T17:57:55Z" :updated-at "2026-11-03T17:57:55Z"
+    :url "https://github.com/riatzukiza/foresight/pull/52#discussion_r4458527410"
+    :body-sha256 "dddca046316f588393cc5ff3fbd9c7ce2fc97f8c4a432e9afac702e333ea1a54"
+    :native-review-id 5757113903
+    :native-commit "4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b"
+    :live-prose ["`@riatzukiza` Verified the planning delta in `4deeab6`."
+                 "The specification now requires target-owned cleanup and independent failure-injection tests for exactly-once closure, stable descriptor counts, and no unowned closure. It also preserves ledger state, parent/lock cleanup, and quarantine behavior."
+                 "This addresses the requested addition to the overflow plan. It does not fix the runtime leak, authorize implementation, advance readiness, or waive the receipt-history gate."
+                 "Review thread resolved."]}]
+  :canonical-source
+  {:path "/home/err/.agents/skills/pr-flow/scripts/pr_flow/law.cljc"
+   :sha256 "7795e60e770a4d608c4a68a4f19faf35469ceb2a7eff2e43f13148fd914a0417"
+   :confirmation-lines [87 89] :confirmed-predicate-lines [131 137]
+   :classify-thread-lines [523 579] :merge-gate-reason-lines [1798 1799]}
+  :canonical-pure-reproduction
+  {:runtime "nbb 1.3.204 / Node 24.14.1"
+   :input "All three complete native bodies normalized from the exact GraphQL thread; actual writer permission observed. No native context or approval was fabricated."
+   :command-kind "nbb -cp ~/.agents/skills/pr-flow/scripts -e; require pr-flow.law; invoke classify-thread and reviewer-prose only"
+   :exit 0
+   :observed {:severity :p2 :resolution :fixed :settled? false :contested? true}
+   :exact-negative-match "does not fix"
+   :cause "confirmed? recognizes 'Review thread resolved.' but its unscoped negative regex does(?: not|n't) (?:hold|address|fix|resolve) vetoes confirmation because the Bot correctly says the planning addition does not fix the runtime leak. classify-thread marks any later nonblank non-confirming reply contested. merge-gate renders that as disputed settlement(s), independently of GitHub resolution."
+   :semantic-assessment :upstream-scope-sensitive-classifier-limitation-not-actual-pushback
+   :not-the-cause "The plain Analysis chain HTML wrapper survives reviewer-prose, but its fenced script is stripped. The observed decisive negative match is the live runtime disclaimer, not the analysis script."
+   :actual-reviewer-pushback-observed false}
+  :legitimate-writer-clarification
+  {:sufficient-for-this-thread-under-current-pure-law true
+   :performed false :new-native-id nil :hypothetical-only true
+   :why "A later substantive authorized User reply becomes the last settlement. It can truthfully acknowledge the actual native opener acceptance and define the already-corrected planning scope without asserting a runtime fix. No later reply exists in this hypothetical, so contested? becomes false. This is not independent rejection or Bot impersonation."
+   :proposed-body "Fixed in 4deeab6dd4b8af87b6c8f9e97eb8a0a2a8f1c58b: The planning omission is corrected by the target-owned cleanup and regression requirements. Native opener acceptance is https://github.com/riatzukiza/foresight/pull/52#discussion_r4458527410. This acknowledges the accepted planning-only change; runtime repair, readiness and gate qualification remain unexecuted."
+   :offline-hypothetical-result {:resolution :fixed :settled? true :contested? false}
+   :boundary "This pure test grants no actual settlement, approval, coverage, round, readiness or merge credit. Coordinator must independently authorize any publication, use real writer identity, collect native readback, and reassess fresh complete context. Do not change global classification rules or relabel the Bot's existing words."
+   :if-no-clarification "Retain the existing canonical blocker and record the upstream classifier limitation with native body/hash and this causal test; do not describe it as actual reviewer disagreement."}}
+
+ :oikos-coderabbit-cooldown
+ {:repository "open-hax/oikos" :pr 1 :comment-id 6610686355
+  :url "https://github.com/open-hax/oikos/pull/1#issuecomment-6610686355"
+  :actor "coderabbitai[bot]" :actor-id 136622811 :actor-type "Bot"
+  :native-created-at "2026-11-03T17:17:55Z"
+  :native-updated-at "2026-11-03T17:30:54Z"
+  :current-native-body-read-in-full true
+  :body-excerpts ["Review limit reached"
+                  "Next included review available in 47 minutes."
+                  "This review used your included allowance. Your plan provides up to 1 included review per hour; 0 remain after this review."]
+  :raw-body-not-republished "Full native body was inspected; avoid reproducing opaque access-scope links."
+  :current-utc "2026-11-03T18:03:29Z"
+  :relative-cooldown-anchor :native-updated-at
+  :derived-not-before "2026-11-03T18:17:54Z"
+  :cooldown-status :pending
+  :request-made false :usage-based-reviews-enabled false
+  :caveat "This is a native quota message, unlike unavailable source routes. The derived relative deadline is not proof of future successful admission; this task makes no new request."}
+
+ :concrete-next-actions
+ [{:owner :coordinator :action "Optionally publish the substantive planning-only writer clarification above in the existing resolved thread, then collect its real native readback and fresh canonical status. Preserve the runtime-not-repaired disclaimer and the actual Bot acceptance. No global tool change is needed for the demonstrated narrow clarification."}
+  {:owner :coordinator :action "At the next bounded checkpoint, collect the old 7a0d842 MiMo attempt's terminal outcome. Only after terminality fetch failure logs if needed and identify the earliest actual typed failure. Keep every source/attempt/publication binding and grant no transfer to 4deeab6."}
+  {:owner :coordinator :action "Address the observed F52 source/base conflict through authorized source work before expecting a current merge candidate; reassess current-head checks/runs without treating route absence as quota or inventing a review dispatcher."}
+  {:owner :coordinator :action "Do not request Oikos CodeRabbit while the observed cooldown is pending. Reassess the native updated message and exact-head pending-request state no earlier than the derived 18:17:54Z boundary; no automatic retry is authorized by this report."}]
+ :limits ["No full canonical status/gate CLI was invoked: it may append receipts outside the one-file write boundary. The exact disputed thread classification was observed through canonical pure law, not fabricated full-gate success."
+          "Old run was nonterminal at collection; no first failure, timeout, provider error, accepted invocation or MiMo publication is asserted."
+          "Review and run snapshots are bounded observations, not a poll loop or guarantee that later native state remains unchanged."
+          "No source route, workflow absence, failed job or missing identity was converted into quota unavailability."
+          "No product code, board state, trusted source, native Bot text, credentials, account or provider settings were changed."]
+ :reflection {:p-efficiency 0.85 :p-friction 0.25 :p-skill-candidate 0.55
+              :lesson "Separate accepted planning scope from an explicit runtime non-repair disclaimer; identify the exact canonical regex match before interpreting disputed-settlement status as human/Bot disagreement. Preserve run head_sha over mutable nested PR head metadata."
+              :local-test-friction "Initial NBB -e invocation incorrectly passed JSON as a positional argument and failed ENAMETOOLONG before classification. Embedding the JSON literal in the in-memory expression produced the successful pure-law reproduction; no source file was edited."
+              :spore-created false :separate-ledger-written false
+              :reason "User explicitly restricted writes to this one new outcome artifact."}}

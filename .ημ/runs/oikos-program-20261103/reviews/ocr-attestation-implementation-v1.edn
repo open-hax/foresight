@@ -1,0 +1,120 @@
+{:report/id :oikos/ocr-attestation-implementation-v1
+ :report/at "2026-11-03T19:44:54Z"
+ :report/status :implemented-offline-awaiting-independent-review
+ :report/authority "User selected exactly: Authorize attestation restart. This worker implements/tests/handoffs only; parent owns independent review and the sole controlled restart."
+ :report/task :s7a-attestation-prerequisite
+ :owner-source
+ {:repository "/home/err/.config/i3"
+  :branch-preserved "device/stealth"
+  :head-preserved "415987dbf5c21e779826a232018e7940fb1be66c"
+  :dirty-paths-preserved ["config" "devops/ocr/server.py"]
+  :working-server-sha256-before-and-after "f0dc43fb911e749bbfd41025160bb0171f4b6c775f32fb907a1ece1dc824bf9c"
+  :instructions-read ["/home/err/.config/i3/AGENTS.md"
+                      "docs/notes/agent-scratch-cleanup.md"
+                      ".ημ/runs/oikos-program-20261103/reviews/s7a-runtime-inventory-v1.edn"]
+  :nested-instructions "devops/AGENTS.md absent; scoped find devops -name AGENTS.md returned no entries"
+  :original-source-or-unit-edits 0
+  :original-staging 0}
+ :implementation
+ {:worktree "/home/err/.config/i3/.worktrees/feat/oikos-ocr-attestation-20261103"
+  :branch "feat/oikos-ocr-attestation-20261103"
+  :baseline-commit "c40c59754d4ce70877841dc35a428c4c0be6a66a"
+  :baseline-purpose "Explicitly authorized exact working server.py import, only that file; original working source untouched. Commit message records original source SHA256."
+  :commit "10b283d8cc6eb6b674c22a251e953bc21e57ddfd"
+  :committed-files
+  [{:path "devops/ocr/server.py" :sha256 "eabd5c1b1d2f8952b5b526cb1c941a6e83400f8731da41c8db52c5c775d3bd58"}
+   {:path "devops/ocr/launch.py" :sha256 "63a956d06f8538267f26e8847dfa2e37f296aca7c5a063650665f5ce67b375d6"}
+   {:path "devops/ocr/test_attestation.py" :sha256 "d6325c44dc6db4853e18a50f9e90ef5fd0f18927aa2e05553b446a10e16bb4ea"}
+   {:path "devops/ocr/ATTESTATION.md" :sha256 "42527ecd3430939472c62d0e10778d1a4b9629bd5e3fee4934173ac88081172d"}]
+  :worktree-clean true
+  :pushed false :pull-request false :merged false
+  :behavior
+  ["Add exact /identity route; only TCP loopback peers receive startup record, no query/parameter surface or forwarded-header trust."
+   "Health remains supplier metadata; POST and OCR algorithm method ASTs unchanged. Listener remains inherited, not a second server."
+   "Trusted launcher reads sibling server bytes once, hashes the same byte object compiled/executed. Launcher itself/interpreter/dependencies form explicit trust base."
+   "Direct server launch refuses model initialization without launcher source binding; activation requires reviewed ExecStart replacement."
+   "XML and BIN buffers are each read once, hashed, then the exact same objects passed by keyword to Core.read_model; native reader receives no model path."
+   "Charset is read once, hashed and decoded from that same buffer, preserving universal newline behavior."
+   "JSON startup record frozen after successful inherited warm; GET does not reopen source/assets."
+   "Record includes source/asset hashes and sizes, OpenVINO module version, compile target NPU, PID, process-start clock ticks/frequency, separately named launcher UTC time, load-completed UTC time and ready UTC time."
+   "No model paths, argv, environment/config values, charset contents, user input or compiled artifact hashes in identity record. Compiled artifact identity explicitly not-attested."]}
+ :offline-api-evidence
+ {:version "2025.4.1"
+  :version-method :importlib-metadata-distribution-not-package-import
+  :file "/home/err/.local/lib/python3.12/site-packages/openvino/_ov_api.py"
+  :lines [550 567]
+  :observation "Core.read_model accepts model bytes and weights bytes; bytes branch at 562-563 forwards model/weights to super().read_model, not a path reread."
+  :native-import-for-verification false
+  :hardware-qualification false}
+ :verification
+ {:baseline-before-edits
+  [{:command "bb test (owner devops)" :exit 0 :tests 70 :assertions 207 :failures 0 :errors 0
+    :warning "Existing malformed alias fixture emits WARN indexing without aliases; no new warning introduced."}
+   {:command "bb lint (owner devops)" :exit 0 :findings 1 :errors 0
+    :warning "Existing missing ~/.local/bin/caffeine-toggle.sh binding target."}
+   {:command "clj-kondo --lint src test (owner devops)" :exit 2 :errors 0 :warnings 6 :info 1}
+   {:command "Python AST parse of existing server bytes" :result :pass}]
+  :red {:command "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s devops/ocr -p 'test_*.py'"
+        :exit 1 :tests 5 :failures 2 :errors 3
+        :reason "Missing buffer helpers/launcher/identity route and absent fail-closed direct initialization guard."}
+  :green
+  [{:command "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s devops/ocr -p 'test_*.py' -v"
+    :exit 0 :tests 6 :failures 0 :errors 0
+    :last-output "Ran 6 tests in 0.046s; OK"
+    :coverage ["Same object identity for model XML/BIN and matching hashes"
+               "Single charset buffer, UTF-8 and universal newlines"
+               "Direct launch rejected before Core or warm"
+               "Loopback-only identity, no arbitrary query surface, unchanged remote health"
+               "Launcher mutation-after-read proves compile uses original hashed bytes"
+               "Fully fake initialization checks shapes/target, frozen startup record, GET without disk reads and disclosure exclusion"]}
+   {:command "bb test (task worktree devops)" :exit 0 :tests 70 :assertions 207 :failures 0 :errors 0
+    :warning "Same existing malformed-alias fixture WARN as baseline."}
+   {:command "bb lint (task worktree devops)" :exit 0 :findings 1 :errors 0 :baseline-warning-unchanged true}
+   {:command "clj-kondo --lint src test (task worktree devops)" :exit 2 :errors 0 :warnings 6 :info 1 :baseline-findings-unchanged true}
+   {:command "Python in-memory compile of all devops/ocr/*.py" :result :pass}
+   {:command "AST compare against imported baseline commit" :result :pass
+    :identical-methods ["_warm" "_letterbox" "_detect" "_recognise" "run" "do_POST" "_send"]}
+   {:command "git diff --check" :exit 0}]
+  :lint-clean false
+  :lint-blocker "Existing bb lint warning and six clj-kondo warnings remain; do not claim warning-free gate. No project Python lint/typecheck target was defined; ruff was unavailable and nothing was installed."
+  :test-native-modules "cv2, numpy, openvino are replaced in sys.modules before server execution. _warm is replaced with a mock. No actual model initialization, server listen or inference occurs."
+  :i3-static-parse-not-run "No i3 config/binding changes or reload requested; no i3 controls were used."}
+ :activation-plan
+ {:status :proposal-only-parent-review-required
+  :full-procedure "devops/ocr/ATTESTATION.md at implementation commit"
+  :critical-discovery
+  {:method "Read-only systemctl --user show selected nonsecret properties"
+   :unit "ocr-npu.service" :type "simple" :restart-policy "always"
+   :nrestarts 0 :drop-in-paths-empty true
+   :implication "ExecStart-only change cannot enforce the user's one-start boundary: a failed initializer would automatically retry. Reviewed Restart=no during the activation window is necessary; otherwise do not activate."}
+  :steps
+  ["Independent adversarial review of exact committed implementation, tests and launch/drop-in plan; parent settles findings before any activation."
+   "Parent rechecks free RAM/disk, contention, exact current service ExecStart/interpreter/flags and private rollback bytes; no full argv/environment disclosure."
+   "Parent exports only committed server.py and launch.py into new /opt/desktop-ocr/releases/10b283d8cc6eb6b674c22a251e953bc21e57ddfd using staging/atomic rename, verifies committed hashes, root-owns files 0444 and directory 0555. No overwrite of existing release; stop without existing admin authority."
+   "Use existing five asset paths only, no model copying/downloading/search. Preserve original dirty owner source."
+   "Parent-only reviewed owned user-unit drop-in resets ExecStart to same absolute Python executable and flags with pinned release launch.py, sets Restart=no to prohibit retries, and changes no environment/port/host/user settings. Validate effective unit without startup; hold if exact interpreter/flags differ or safety policy is unapproved."
+   "Parent alone daemon-reloads and performs the one controlled restart. Inherited compile/warm occurs only then, never a startup trial. No automatic retry."
+   "Parent reads bounded loopback /health and /identity only, compares expected source/assets and PID/start ticks. No POST, warm request, personal input or OCR batch. On failure stop; no second restart."]
+  :rollback "Remove/restore only owned drop-in, recover exact prior ExecStart and restart policy using preserved unit bytes, daemon-reload only. If failed, do not re-enable Restart=always as implicit retry. Reactivating old service requires a second restart and renewed user authorization. Preserve release/worktree evidence."
+  :source-binding-limit "Root-owned pinned launcher is trust base; route attests server compile/exec buffer, not every imported dependency or compiled native artifact."
+  :asset-set-limit "Each reported hash identifies the exact buffer used, not transactional consistency of all five assets if concurrently edited."
+  :process-time-limit "Kernel process-start ticks are reported directly; launcher UTC entry time is separately labelled, not fabricated exact kernel process-start UTC."
+  :no-permission-for [:extra-restarts :startup-trials :ocr-batches :model-downloads :personal-inputs :hosted-review-queues]}
+ :limits
+ {:service-restarts 0 :service-edits 0 :live-config-edits 0 :native-imports 0
+  :native-model-loads 0 :warm-executions 0 :inference-requests 0 :ocr-posts 0
+  :listeners-started 0 :downloads 0 :installs 0 :personal-data-reads 0
+  :i3-controls 0 :pushes 0 :hosted-queue-waits 0
+  :parent-writes [".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-implementation-v1.edn"]
+  :independent-review-complete false :activation-complete false
+  :resource-admitted false :quality-approved false :s7a-complete false}
+ :reflection
+ {:receipt-owner :parent :review-owner :parent
+  :delegation-blocker "Read-only parallel scout dispatch failed before execution: Subagent depth limit reached (1). No substitute agent/model was attempted; parent must perform independent review."
+  :free-space-before-and-after "46 GiB available; proposed 50 GiB warning boundary noted, below pause threshold not reached; only small source/test worktree created."
+  :scratch-owner :s7a-attestation-prerequisite
+  :scratch-status :retained-for-independent-review
+  :cleanup-blocker "Task commits are not pushed/verified remotely, so worktree/release evidence must not be deleted. No large scratch allocation or deletion performed."
+  :p-efficiency 0.9 :p-friction 0.2 :p-skill-candidate 0.5
+  :lesson "Buffer identity needs execution binding, not post-hoc disk hashes. A one-restart authorization also requires checking inherited systemd retry policy before activation."
+  :spore nil}}

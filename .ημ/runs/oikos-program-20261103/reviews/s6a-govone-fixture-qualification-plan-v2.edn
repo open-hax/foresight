@@ -1,0 +1,204 @@
+{:plan/id :s6a-govone-fixture-qualification-plan-v2
+ :plan/date "2026-11-03"
+ :kind :source-grounded-revision-after-independent-review
+ :context {:symbol :己 :confidence 0.97 :tier :observed-source-and-proposed-fixture-composition}
+ :status :awaiting-same-independent-reviewer-recheck
+ :authority :none
+ :task/uuid "c703893f-aea4-41c2-9eab-c3bd37b28c9b"
+ :inputs {:v1 "reviews/s6a-govone-fixture-qualification-plan-v1.edn"
+          :v1-sha256 "cae4b4863841c50cc7d207dc8848b5e6e2e5844a1bcc52588220f54395af69c7"
+          :review "reviews/s6a-govone-fixture-plan-review-v1.edn"
+          :review-sha256 "382ae97af2f26f10d7f551bebc2b9a7b64f0a8b4686e08d43d1d943965c05d6a"
+          :review-verdict :revise-before-source-or-execution-staging-approval
+          :dependency-decision ".ημ/runs/oikos-program-20261103/decisions/pinned-public-dependency-cache-authorization.edn"
+          :dependency-decision-sha256 "5e3fb9c0320d51de57b69e6eb256e253fbac051055ccfabad916c0c5d7eb3923"}
+ :immutability "V1 and review preserved unchanged. V2 replaces their future fixture/command proposals only as described; no retroactive qualification or alteration of historical observations. Corrected consumer P1 is not reopened."
+ :owner {:path "/home/err/devel/orgs/mojomast/govone"
+         :head-observed "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+         :instructions "Owner AGENTS.md re-read; inherited ancestry remains applicable. spec.md/owner code control behavior; no production source, credentials, runtime state or new kernel authored here."
+         :source-only true}
+ :this-turn {:performed [:read-owner-source :read-review-and-decision :read-existing-guard-source-and-retained-proof
+                         :read-only-git-head :hash-input-artifacts :write-this-new-report]
+             :not-performed [:module-query :acquisition :build :go-test :application-execution :guard-probe
+                             :listener :http :socket :credential-inspection :source-grant
+                             :product-edits :board :receipt :commit :push :nested-agent]
+             :new-scratch-created false}
+ :finding-responses
+ [{:id :F1 :disposition :source-composition-corrected-awaiting-review
+   :change "Do not preselect endpoint UUID or load its binding before API creation. Use two sequential runtime.Build instances over one fresh private DB: normal authenticated create-with-approved=true in A returns identity; stop and join A; persist a new protected registry bound to that returned identity; load validated config and Build B. Both use in-process genuine handlers, no listeners."
+   :source-capability "internal/runtime/public_provisioning_test.go:234-295 already composes API-generated endpoint/binding identity, proves registry edit does not hot reload, closes A, rebuilds B and uses the preserved application key. This is source evidence of the seam, not a run of that auto-deleting/listener test. Detailed bootstrap/config/revision sequence below."
+   :runtime-status :held}
+  {:id :F2 :disposition :preservation-corrected-awaiting-review
+   :change "Withdraw existing selected Go test commands. New test-only fixture uses newState/os.MkdirTemp under a fresh approved private outside-Git parent, not t.TempDir. No RemoveAll, automatic tree cleanup or key publication. Retain full private state on pass/fail; publish separately sanitized observations only. Close runtime resources without deleting retained files."
+   :exception-requested false :runtime-status :held}
+  {:id :F3 :disposition :socket-free-design-and-guard-gate-awaiting-review
+   :change "Choose actual runtime.Build + http.Handler.ServeHTTP + httptest.NewRecorder, not NewServer/startTrial/Serve/net.Listen. All gateway requests traverse the real auth/route/service middleware in process. Provider network is replaced only by its existing capture RoundTripper. Require independently qualified inherited deny-ALL-network guard for compilation/test descendants before any build/test/runtime launch. No selective loopback enforcement is presumed."
+   :runtime-status :held :guard-currently-qualified-for-this-command false}
+  {:id :F4 :disposition :existing-authorization-recorded-no-reask
+   :change "User already authorized exact pinned PUBLIC closures, total 1 GiB: GovOne 768 MiB and typed.clojure 256 MiB. Two parent acquisition workers are running per current user update; do not duplicate them. Their completion and offline checksum/graph verification are not yet established by this revision. Permission is not closure or application execution."
+   :acquisition-performed-here false :execution-status :held}]
+ :semantic-acceptance
+ {:status :independent-review-accepts-corrected-owner-contract
+  :source "Review semantic-disposition:8-11; classifier/service.go:233-305,329-340; policy/service.go:534-546,556-581."
+  :required ["Actual internal PERSON_NAME or PHONE_NUMBER is detected and transformed into canonical placeholder(s) in hybrid_redacted; inspect exact serialized provider body and actual route/session policy result."
+             "Separate actually PUBLIC synthetic text completes as external_approved through genuine classifier/redactor/policy/router; no claim that absent entities were redacted."
+             "Internal/restricted/regulated inputs narrow or deny according to actual owner semantics, never become PUBLIC through injected sensitivity, policy booleans or router output."]
+  :not-required "No invented placeholder-bearing PUBLIC input or both-mode raw-marker transformation. No fresh owner-contract change or classification downgrade."
+  :current-execution-proof false}
+ :socket-free-owner-composition
+ {:new-source-path "/home/err/devel/orgs/mojomast/govone/cmd/govone-dev/s6a_fixture_test.go"
+  :package "main, one future test-only file; no production edits"
+  :source-grant :not-requested-now-not-granted
+  :later-source-decision "Only after this plan passes the same independent reviewer may parent seek the exact one-file source grant. Engineering choice of socket-free composition is not an additional user authorization question."
+  :reused-functions ["newState / trialConfig / writePrivate / trialHandler / trial.provision / trial.request (cmd/govone-dev/main.go)"
+                     "runtime.Build / Stack.Shutdown (internal/runtime/runtime.go)"
+                     "config.LoadFromLookup / config.LoadModelEndpointBindingsFile"
+                     "inference.SetExternalLLMHTTPClientForTest (restore closure)"]
+  :not-called ["startTrial" "main/run" "loopbackClient" "http.Server.Serve" "ListenAndServe"
+               "net.Listen" "httptest.NewServer" "httptest.NewUnstartedServer"
+               "http.DefaultClient" "t.TempDir" "os.RemoveAll"]
+  :handler-source "runtime.Build:452-481 constructs actual httpserver.New without calling Serve. httpserver/server.go:38-40,195-205,277-282,374-378,412-421 exposes embedded http.Server.Handler with authentication/permissions/rate-limit/security/request-id middleware; composition.go:45-80 wires actual owner services."
+  :gateway-transport-helper "One fixed-origin, bounded, non-network RoundTripper in the new test file converts each trial.request request into httptest.NewRequest/WithContext with copied headers/body, passes it to trialHandler(stack.Server.Handler).ServeHTTP(httptest.NewRecorder(), request), and returns recorder.Result(). This runs the real HTTP handler, not a canned API response. It must not inject auth.Principal, permission decisions, successful statuses or database rows. The label http://govone-fixture.invalid is an inert URL key, never DNS/trusted endpoint evidence."
+  :helper-controls "Reject mismatched origin/path/method, bound input/output, close bodies, no redirect following, propagate request cancellation and explicit host headers. Each request carries the actual generated bearer and unique idempotency key. Only actual handler response determines status/body. No caller code can replace handler or choose a target URL."
+  :provision-reuse "Construct trial{state, stack, origin, client} with the fixed in-memory client and call existing provision(ctx, signer). Do not call startTrial, which binds a real socket first. Existing provision uses only trial.request and private file writes; its full normal-API sequence can therefore traverse the actual in-process handler unchanged."
+  :auth-and-services "runtime.go:218-239,259-277,282-290,337-347,390-432 constructs real auth repositories/authenticator, session/profile stores, local classifier, SQLite redactor, router, signed policy/evidence and generator. No fakeGovernanceAllow, sequenceClassifier/sequenceRedactor, direct SQL authority injection or copied policy/Clio/Rheos kernel."
+  :proof-limit "This is authentic in-process owner API and kernel qualification when executed, not TCP/HTTP-server transport or Oikos client transport qualification. Oikos P2/P3 real transport stays separate and held."}
+ :F1-two-runtime-lifecycle
+ {:identity-policy "A is a fresh synthetic development bootstrap; B is a non-production standard-profile runtime with dev mode OFF over A's exact DB/keys. This is a reviewed test composition, not restart/recovery support for the fresh-only public govone-dev CLI."
+  :source-support ["runtime/public_provisioning_test.go:100-117,234-295: exact API endpoint ID, protected binding, no hot reload, close/rebuild and preserved operator token."
+                   "runtime/runtime.go:65-171: ordered bounded/resumable shutdown joins workers before DB close."
+                   "runtime/runtime.go:174-223,707-740,776-807: same DB opens/applies migrations; dev fixture seed and temporary bootstrap credential issuance only when DevMode=true."
+                   "runtime/runtime_integration_test.go:1298-1340: persisted key authenticates after Build again; :1343-1385 scoped signed policy loads after restart (source only; these tests are held)."
+                   "runtime/model_endpoint_binding.go:5-7: external availability derives from loaded registry.HasBindings, not an invented cfg boolean."
+                   "runtime/runtime.go:518-520 and config/config.go:367-400: disabled audit anchor permitted and registry loaded by explicit config lookup; public_provisioning_test.go:100-115 demonstrates non-dev load with disabled anchoring."]
+  :steps
+  [{:n 1 :runtime :none
+    :action "newState() creates preserved fresh 0700 state outside Git; trialConfig(state) generates signer/verifier, independent HMAC/encryption keys and base private runtime.json, signer file and DB. Keep those original files unchanged. New test reads ONLY its newly created private runtime values to construct an explicit lookup map, never os.Getenv/installed configuration. Persist separate private effective-A/B config observations without publishing secrets."
+    :config "A lookup overrides runtime_profile=standard, ENV=development, DEV_MODE=true, audit_anchor_enabled=false; no binding initially, no OpenAI/provider env, no remote classifier, no transcription. Use config.LoadFromLookup so values are validated; do not mutate a struct to bypass config validation."
+    :source "cmd/govone-dev/main.go:190-286; config/config.go:118 onward,367-400,542-577"}
+   {:n 2 :runtime :A
+    :action "Build A and attach in-memory genuine handler client; perform existing provision(ctx, signer) once. Owner dev bootstrap seeds fresh tenant-1/user-1/ai-1/policy-1/local stub via owner code, then normal APIs issue fresh 24h admin/operator/auditor credentials, revoke temporary bootstrap keys, activate signed local-masked-only bundle and establish genuine local_only session/completion/evidence. No fixture INSERT/UPDATE/Keys.Save or test-owned principal insertion."
+    :expected "Activation on fresh profile: expected_revision=0, returned policy_revision=1, fallback_active=false, exact policy/profile IDs. AI modes are explicitly local_only after provision. If those observations differ, stop rather than assume later revision. Retain generated client.env privately but do not source it into a shell."
+    :source "runtime.go:776-807; main.go:359-459"}
+   {:n 3 :runtime :A
+    :action "Create external endpoint through authenticated POST using the newly issued tenant_admin key. Do this while A is alive; creating through its handler AFTER shutdown is not valid. A standard profile permits external endpoint registration even with no startup binding; no external payload/completion is attempted. Create itself requires approved=true; there is no separate guessed approve API."
+    :request {:method :post :path "/api/v1/admin/tenants/tenant-1/model-endpoints"
+              :body {:name "S6A preserved provider capture" :type "external" :provider "s6a-fixture"
+                     :model_id "s6a-synthetic-capture-v1" :url "https://93.184.216.34/v1"
+                     :approved true :capabilities ["chat"] :execution_mode "external_approved" :status "active"}}
+    :response "201 ModelEndpoint{id,tenant_id,url,approved,endpoint_revision,dispatch_binding_version,...}; id generated by schema.NewID, endpoint_revision=1, dispatch_binding_version=1. Validate returned actual identity and GET readback; never preassign it. Public numeric literal avoids DNS; it is NEVER contacted."
+    :source "httpserver/admin_api.go:767-784; controlplane/service.go:1903-1961"}
+   {:n 4 :runtime :A
+    :action "After local positive, configure real profile/AI modes and freshly signed policy. GET profile first; PATCH base_sensitivity=public/local_preferred=false with no status=active override; queue_waiting_limit stays25. PATCH AI with all three modes, exact profile and active status. Sign exact bundle bytes with the fresh trial signer and activate through normal API at observed current policy_revision (normally1), asserting next revision2/exact bundle version/fallback_active=false."
+    :profile-patch {:base_sensitivity "public" :local_preferred false :queue_waiting_limit 25}
+    :ai-patch {:allowed_execution_modes ["local_only" "hybrid_redacted" "external_approved"]
+               :default_policy_profile_id "policy-1" :status "active"}
+    :bundle {:version "s6a-actual-modes-v1" :local_preferred false
+             :rules [{:id "allow-governed-external" :effect "allow" :capabilities ["hybrid_redacted" "external_approved"] :match {}}
+                     {:id "deny-unmasked" :effect "deny" :capabilities ["unmasked_release"] :match {}}]}
+    :activation-body "{bundle:<exact object>,signature:<base64 Ed25519 over exact bytes>,policy_profile_id:'policy-1',bundle_id:<fresh logical ID>,expected_revision:<GET current integer>}; unique Idempotency-Key. GET/readbacks must match. Profile DTO Version is not signed bundle version/PolicyRevision; do not confuse them."
+    :source "httpserver/admin_api.go:633-660,670-736; controlplane/service.go:1823-1895,876-949"}
+   {:n 5 :runtime :A
+    :action "List actual active local model endpoints and PATCH EACH status=archived with its actual endpoint_revision as expected_revision. Includes both owner-seeded local-primary and transcription-cleanup; do not disable only the named primary and leave another eligible stub. GET/list with include_archived=true must show no active local candidate; retain actual returned revisions. No direct row edit or DELETE filesystem."
+    :patch {:status "archived" :expected_revision :integer-from-exact-endpoint-readback}
+    :binding-distinction "Endpoint CAS increments endpoint_revision; dispatch_binding_version is a distinct field and remains the binding authority. Use returned dispatch_binding_version, not guessed endpoint revision. The external endpoint need not be patched after create; if it is, re-read both values."
+    :source "controlplane/service.go:1972-2010,2013-2098; httpserver/admin_api.go:788-815"}
+   {:n 6 :runtime :A-to-none
+    :action "Stop admitting in-process requests; wait for every synchronous handler invocation/producer worker to finish, close idle connections on only the test's custom client, then Stack.Shutdown under finite context and require nil. No HTTP listener ever existed, and Server.Shutdown alone would not track direct ServeHTTP calls, so explicit helper in-flight accounting/join precedes shutdown. Do not proceed while shutdown is incomplete. Retain DB/WAL/state."
+    :source "runtime.go:69-171; no newState/trialConfig invocation for B"}
+   {:n 7 :runtime :none
+    :action "Only now create fresh 0700 binding subdirectory, distinct fresh fixture-only 0600 bearer token and 0600 version1 registry using exclusive no-symlink writes. Bind returned API identity, exact canonical origin and returned dispatch_binding_version. Existing registry is absent, so no overwrite/hot-reload assumption."
+    :registry {:version 1 :bindings [{:tenant_id "tenant-1" :endpoint_id :actual-api-returned-uuid
+                                     :origin "https://93.184.216.34" :binding_revision :actual-returned-dispatch-binding-version
+                                     :bearer_token_file :absolute-new-private-token-path}]}
+    :source "config/model_endpoint_bindings.go:46-56,59-141,148-174; public_provisioning_test.go:234-267"}
+   {:n 8 :runtime :B
+    :action "Build B from config.LoadFromLookup over the SAME saved fresh DB/HMAC/encryption/verify-key/bootstrap-signature values, standard/development profile, DEV_MODE=false, anchor=false and newly created MODEL_ENDPOINT_BINDINGS_FILE. Loader validates protected registry before Build. No extra bootstrap/provision call, no signer/key regeneration, no default environment."
+    :hooks "Install existing SetExternalLLMHTTPClientForTest with a bounded in-memory provider capture client BEFORE B Build (constructor reads the hook); restore after B closes. Hook captures exact serialized request bytes and returns only deterministic provider JSON, never policy/auth/classifier/redactor/router decisions. No DNS: numeric endpoint. Do not add t.Parallel."
+    :no-stub "DevMode=false skips fresh demo seed/bootstrap credentials and supplies NO stubFallback (runtime.go:390-394). Archived local rows persist instead of being reseeded. Require B.BootstrapToken/OperatorToken/AuditorToken empty and authenticate only A's normally API-issued keys via real middleware. Even a failed external capture must not fall back to stub."
+    :readbacks "With preserved issued admin/operator keys: GET endpoint/profile/AI, compare generated UUID, both revisions, approval/URL/model, mode list and public base. Retired A bootstrap keys remain unauthorized. Fresh session must return actual signed s6a-actual-modes-v1; cache loads exact persisted signed row under same verifier, not global bootstrap version. External availability derives from validated nonempty registry."
+    :source "endpoint_generator.go:102-132; runtime.go:174-223,337-347,390-394,707-740; policy/service.go:779-821"}
+   {:n 9 :runtime :B
+    :action "Run corrected genuine public external positive and internal hybrid placeholder test on distinct fresh actual sessions/idempotency identities. Restricted EMAIL and regulated MRN must deny with no local endpoint and zero additional provider captures. When requesting external_approved for internal content, actual completion must narrow to hybrid or deny; never insist on public mode. Check exact provider body bytes before decoding as well as decoded schema/mode/evidence linkage."
+    :cache-lifecycle "Activate a new signed deny-external bundle through normal API using current revision; verify returned next revision and warm-cache decision change/zero provider call. Do not edit SQLite and assume per-request reload. Test wrong signing bytes/stale revision reject and preserve last legitimate policy; key expire/revoke use real admin operations. All success/denial results remain future assertions."
+    :source "policy/service.go:779-821; controlplane/service.go:876-949; httpserver/admin_api.go:584-609; independently accepted semantics in review."}]
+  :failure-rule "If B config validation, persisted credential/role authentication, protected binding, scoped policy readback, shutdown or no-local candidate check fails, STOP and report the precise owner seam; no test-owned DB repair, synthetic allow, dynamic binding reload, extra runtime or production edit. Source evidence makes the sequence a candidate, not an executed supported configuration claim."}
+ :F2-preservation-lifecycle
+ {:root "Fresh os.MkdirTemp/newState root under separately approved private outside-Git parent; assert 0700, regular non-symlink 0600 files, exclusive writes and current owner. No t.TempDir anywhere in new fixture helpers."
+  :retain [:database-and-wal-if-present :runtime-json :signing-key :generated-api-credentials :binding-token
+           :binding-registry :private-effective-configs :captured-synthetic-provider-bytes :private-run-log]
+  :no-automatic-removal "No fixture/test/helper RemoveAll/Remove/unlink tree, defer temporary-directory deletion, t.Cleanup deleting files, cached-key publication or routine remote key backup. t.Cleanup may ONLY close/join owned runtime/client resources and restore the existing hook; root/state persist on pass, panic, failure and timeout. Build work uses -work and retained explicit output paths rather than deleting temporary build evidence."
+  :evidence-lanes "Private full state/log retains secrets; separately generated sanitized observations contain only fixed outcomes, counts and exact source/config-without-secrets/evidence commitments. Linkable IDs/digests remain private scoped evidence unless separately approved. Do not publish client.env, signer/token hashes or key fingerprints as a substitute for key secrecy."
+  :domain-vs-file "Expected GovOne session expiry/revocation/DEK lifecycle is a test of owner domain behavior within the newly owned DB, not permission to remove fixture files or signers. Fixture preservation and exact raw state before/after remain inspectable. No operator DB or existing secrets are touched."
+  :later-cleanup "Retain all private artifacts until applicable preservation and secret-handling policy permits a verified recovery/backup and exact cleanup. No blanket disposal exception is needed or requested now. Parent records root ownership and retained-byte accounting."
+  :withdrawn-existing-tests ["TestFreshTrialPublicAPIs" "TestPrivateFreshStateAndKeys"
+                             "TestPOSTIdempotencyKeysWithoutRetries" "TestLoopbackRequestsDoNotRedirectRetryOrLeak"
+                             "TestPublicProvisioningJourney" "TestRuntimeAPIKeysSurviveRestart"
+                             "TestRuntimeReloadsActiveScopedPolicyAfterRestart"]
+  :why-withdrawn "Existing tests use t.TempDir and/or create listeners; source may inform new fixture, but their commands remain HELD. Do not weaken/rewrite them merely to claim compatibility."}
+ :F3-deny-all-guard
+ {:selection "Inherited Linux libseccomp no-new-privileges deny-ALL-network process-tree guard; zero sockets needed by this owner fixture. It cannot qualify Oikos loopback transport; no selective sockaddr/port capability assumed."
+  :existing-primitive {:library "/lib/x86_64-linux-gnu/libseccomp.so.2"
+                       :read-source "/tmp/opencode/services-code-review-ICdrZS/run.py:29-63"
+                       :source-sha256 "c4df082a45c97656090d99da8ec0ee43b83885dad83d756210e0f3c51bd4dd06"
+                       :observed-api "ctypes seccomp_init(ALLOW), syscall name resolution, seccomp_rule_add(ERRNO|EPERM), seccomp_load; negative resolution/rule/load aborts before exec."
+                       :retained-other-task-proof "/tmp/opencode/services-code-review-ICdrZS/independent-jvm-proof.stdout reports JVM Seccomp=2 NoNewPrivs=1 and network initialization EPERM; services-generation-code-v1.edn:38-45 records AF_INET/INET6/UNIX denial."
+                       :epistemic-limit "Read existing code/proof only. No execution of that Services runner, no claim its entire workflow is reusable/approved here, no fresh GovOne descendant guard qualification."}
+  :required-filter "Deny socket/socketpair/connect/bind/listen/accept/accept4/sendto/sendmsg/sendmmsg/recvfrom/recvmsg/recvmmsg/shutdown/getpeername/getsockname/setsockopt/getsockopt across all supported address families; qualify native/compat architecture behavior and fail closed on unsupported ABI. Also block io_uring_setup/enter/register and pidfd_getfd so asynchronous socket operations or descriptor import cannot bypass socket entry denial. Close inherited descriptors except verified non-socket stdio pipes/regular logs before exec; no inherited external socket can survive as write/read/sendfile access. Deny ptrace/process_vm_writev delegation if the guard scope includes unmanaged-process injection; reviewed fixture may not execute arbitrary helpers/daemon IPC. Exact guard source/filter digest must be reviewed."
+  :before-exec "Load filter in a fresh single-threaded supervisor before spawning exact Go compiler/test command, explicit NoNewPrivs=1 and Seccomp=2 checks; child/exec inherit non-relaxable filter. Clean env, no proxy/credential config; exact output/cache/state allowlist and process-group deadline. No bwrap fallback, tracer-selective port permission or allow-local trust."
+  :qualification-required "Independent reviewer must verify exact guard and run separately authorized neutral probes BEFORE any Go build/test/runtime effects: positive file/pipe/exec control; EPERM for IPv4/IPv6/UNIX/NETLINK and unowned loopback socket paths, UDP DNS, binds/listens, direct and redirected/proxy attempts, subprocess/exec descendant cases, forbidden inherited-socket handling, and io_uring/FD-import bypass refusal. Bind proof to command/source/filter hashes and parent/child statuses. Qualifying probes are not executed by this revision. If probe permission/implementation/evidence is missing, remain HELD rather than infer isolation."
+  :application-assertions "The newly authorized test will recheck process status before runtime.Build, use no actual socket/listener, count in-memory capture calls, and independently account for all runtime instances/loops. Provider capture alone is not the network guard. An attempted unexpected socket under the qualified kernel guard must cause fixture failure, not be ignored as safe success."
+  :engineering-permission "Selecting this socket-free primitive requires no additional user design choice. Exact guard implementation/review and probe/build/test admission are separate parent-owned gates, not automatic authority supplied by engineering selection."
+  :status :unqualified-for-new-go-command
+  :all-build-test-runtime-effects :held}
+ :F4-dependency-accounting
+ {:authorization :already-granted-by-user
+  :decision-id :pinned-public-dependency-cache-authorization-20261103
+  :total-max-bytes 1073741824
+  :allocations {:govone 805306368 :typed-clojure 268435456}
+  :scope [:existing-exact-public-pins :declared-test-closure :isolated-cache
+          :publisher-or-existing-lock-checksum-verification :offline-metadata-verification]
+  :manifest-pins {:go-mod-sha256 "d98ac1461da72048026c141cd1375421c6934e6c3937cc5048c296c594b218dd"
+                  :go-sum-sha256 "8991f8bfbeccb3e31df27a42f4901a5a0a790e5c2937c4c55da93f5d30db9a90"}
+  :coordination "Parent's two acquisition workers are running per user steering. This worker neither dispatches nor duplicates acquisition, polls workers, accesses new partial caches, nor reasks permission. Parent consumes their immutable completion inventories."
+  :required-completion "Archive+extracted+metadata+tooling+log accounting inside exact per-owner and combined ceilings; selected public graph/test closure with exact version/checksum provenance; no manifest update/upgrade/global cache edit. Absent expected checksum, undeclared/private coordinate, changed selection or approaching cap means STOP, not implicit further fetch."
+  :not-established [:worker-complete :selected-graph-closure :source-cache-integrity :offline-module-verify
+                    :build-or-test-availability :additional-network :application-admission]
+  :carry-forward "V1 metadata-only failure remains historical. Qualified Go1.27.1 tool is available per prior checked report, but neither tool nor acquisition permission proves dependency closure. Parent must arrange offline list/verify after worker artifacts qualify; this revision runs neither."
+  :dependency-question-needed false}
+ :command-register
+ {:environment "Future exact cached Go1.27.1 path from govone-go1271-test-cache-v1.edn; env -i with subprocess-local HOME/XDG/GOCACHE/GOPATH/TMPDIR/GOTMPDIR under approved preserved root, immutable qualified isolated GOMODCACHE, GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local GOENV=off GOWORK=off GOTELEMETRY=off GOVCS=*:off GOFLAGS=-mod=readonly. No operational provider/GovOne/proxy variables. Bind finite future build/state budgets before effects; cache authorization does not silently grant them."
+  :entries [{:id :offline-closure :status :held-to-parent-worker-qualification
+             :commands ["EXACT-GO list -m -json -mod=readonly all" "EXACT-GO mod verify"]
+             :note "No query executed here; parent coordinates after acquisition artifacts qualify, no implicit network."}
+            {:id :build-new-test :status :held
+             :command "QUALIFIED-DENY-ALL-GUARD -- EXACT-GO test -mod=readonly -work -c -o $RUN/bin/s6a-fixture.test ./cmd/govone-dev"
+             :gates [:plan-recheck :exact-one-file-source-grant :source-review :qualified-offline-closure
+                     :independent-guard-qualification :bounded-parent-build-permit]
+             :note "Compile only; -work preserves Go build work. Review package/dependency init and new fixture filesystem behavior first; no TestMain/init found in current cmd/govone-dev source, not a whole dependency-init proof."}
+            {:id :new-local-fixture :status :held
+             :command "QUALIFIED-DENY-ALL-GUARD -- $RUN/bin/s6a-fixture.test -test.run '^TestS6AActualLocalSessionLifecycle$' -test.count=1 -test.parallel=1 -test.timeout=120s"
+             :gates [:reviewed-exact-binary :guard-bound-to-binary :preserved-fresh-private-state :parent-test-permit]}
+            {:id :new-two-runtime-mode-fixture :status :held
+             :command "QUALIFIED-DENY-ALL-GUARD -- $RUN/bin/s6a-fixture.test -test.run '^TestS6AActualGovernedProviderBytes$' -test.count=1 -test.parallel=1 -test.timeout=120s"
+             :gates [:reviewed-exact-binary :guard-bound-to-binary :F1-readback-preconditions :preserved-fresh-private-state :parent-test-permit]}
+            {:id :old-auto-deleting-tests :status :held-not-selected
+             :command "V1 go test selected existing tests / broad go test ./..."
+             :reason "t.TempDir/listeners violate this selected fixture boundary; new exact run filters never run them."}
+            {:id :foreground-trial-and-client :status :held-separate-real-transport-scope
+             :commands ["EXACT-GO run ./cmd/govone-dev --synthetic-stub" "node examples/http/generic.mjs"]
+             :reason "Requires real sockets; not needed for chosen authentic in-process owner proof. No new permission implied; Oikos real HTTP P3 stays held."}]
+  :no-executable-wrapper-claim "QUALIFIED-DENY-ALL-GUARD names a required qualified supervisor artifact, not an existing guessed CLI. Its existing implementation primitive is identified above; exact admission command/hash must be filled and independently verified before executing anything."
+  :executed-entries []}
+ :gates-and-open-items
+ {:source-planning "F1 has concrete source-supported two-runtime composition; F2 preservation design retains keys/state; F3 removes socket need and names existing deny-all primitive with explicit missing qualification; F4 uses existing permission. These are author-proposed corrections, not independently settled findings."
+  :source-authorization "One future test-only file remains a user decision AFTER same-reviewer plan approval, not asked now. No other product file/production edit or owner kernel is authorized."
+  :no-current-runtime-claim "No guard/fixture/build/test result, selected cache closure, signed session result, provider bytes, Oikos transport, independent audit anchoring or whole S6A completion is established."
+  :failure-holds [:unexpected-bootstrap-or-revision :endpoint-or-binding-readback-mismatch
+                  :incomplete-A-shutdown :B-key-or-policy-reload-failure :eligible-local-endpoint-remains
+                  :missing-cache-proof :unqualified-guard :unsafe-autodeletion :unreviewed-source-or-binary]
+  :minimal-next "Parent sends V2 to the SAME independent reviewer to verify F1-F4 corrections; retain all current effect holds and wait for separately owned acquisition evidence."
+  :questions-asked-this-turn []}
+ :reflection "The existing public provisioning source supplies the missing identity-before-binding sequence. A genuine handler call need not be a socket call: one test-only transport seam can preserve actual authentication and policy while an inherited deny-all guard blocks every real network route. Preserving newly generated state avoids any disposal-policy exception. Parent owns subsequent ledger recording."
+ :written-only "This new V2 coordinator report; no new scratch, product source, board, receipts, commits or other artifacts."
+ :authorization-granted :none}

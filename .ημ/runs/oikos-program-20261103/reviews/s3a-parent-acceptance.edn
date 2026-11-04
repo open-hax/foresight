@@ -1,0 +1,24 @@
+{:acceptance/id :s3a-parent-acceptance-27adbfec
+ :task "b2f52c1f-bd1b-431e-a417-95c72549ba0d"
+ :candidate "27adbfec5fd60302f93b1adf842dfd3f443644ab"
+ :tree "06d714dd42ec2b12cd51bdc37e1b4b0fe67d9f3b"
+ :scope :pure-logical-memberships-and-named-speculative-branches
+ :reviews [{:path "s3a-code-v1.edn"
+            :source "8642b46e70ec9dee9851b643dd53de32fb2acbf5"
+            :verdict :approved :findings []}
+           {:path "s3a-integration-v2.edn"
+            :source "27adbfec5fd60302f93b1adf842dfd3f443644ab"
+            :verdict :approved :findings []}]
+ :composition {:s3a-reviewed-files-unchanged 7 :s2a-frozen-files-unchanged 9
+               :accepted-s1a-byte-identical true
+               :s2a-whole-task-complete false}
+ :independent-exact-head-tests {:spaces-bb [11 455] :spaces-nbb [11 455]
+                                :bb [18 286] :nbb [40 546] :eval [9 39]
+                                :desktop-bb [16 1059] :desktop-nbb [16 1059]
+                                :failures 0 :errors 0 :lint-errors 0 :lint-warnings 0}
+ :decision :accepted-for-ordinary-exact-head-development-source-pr
+ :authority "The user's qualified-program-merge authorization and explicit local-review admission apply. Actual native findings, required checks and branch protection remain separate fresh gates before merge."
+ :native-approval-credit 0 :epic-completion-credit 0
+ :not-qualified [:persistent-atomic-replacement :live-currentness :s2a-completion
+                 :s3b-movement :live-editor-or-window-effects :installed-promotion]
+ :merge-status :not-yet-executed-at-record-creation}

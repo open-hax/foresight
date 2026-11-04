@@ -1,0 +1,150 @@
+{:inventory/id :oikos/s7a-runtime-inventory-v1
+ :inventory/task "0db50b53-6c7a-489a-bff9-048d57ce4cbb"
+ :inventory/started-at "2026-11-03T19:33:25Z"
+ :inventory/evidence-through "2026-11-03T19:36:01Z"
+ :inventory/scope :read-only-identity-discovery-not-resource-admission
+ :inventory/authority :parent-explicit-read-only-follow-up
+ :inventory/implementation-head "3b2e89dfe84a85f355c1e7abca70b4e580eea2c9"
+ :inventory/epistemic-tier :observed-metadata-plus-labelled-source-derivation
+ :inventory/measurement-admitted false
+ :inventory/quality-complete false
+ :sources
+ [{:repository :i3-device-configuration
+   :repository-head "415987dbf5c21e779826a232018e7940fb1be66c"
+   :file "devops/ocr/server.py"
+   :working-file-sha256 "f0dc43fb911e749bbfd41025160bb0171f4b6c775f32fb907a1ece1dc824bf9c"
+   :head-blob-sha256 "310f2663f3e4d284b703d62a487441079b8516f45e551d2d786029cb15e25c27"
+   :working-file-matches-head false
+   :working-file-bytes 8117
+   :working-file-modified-at "2026-11-02T01:17:28.703Z"
+   :loaded-source-attested false
+   :derived-stack {:runtime :python :library :openvino
+                   :model-family :chinese-pp-ocr-v4
+                   :detector "ch_PP-OCRv4_det_infer.xml"
+                   :recognizer "ch_PP-OCRv4_rec_infer.xml"
+                   :charset "ppocr_keys_v1.txt"
+                   :configured-device "NPU"
+                   :detector-input-nchw [1 3 960 960]
+                   :recognizer-input-nchw [1 3 48 320]
+                   :mmproj :not-applicable-to-this-ocr-pipeline
+                   :llm-token-context :not-applicable-to-this-ocr-pipeline
+                   :source-initializer-compiles-and-warms true
+                   :initializer-not-invoked-by-inventory true}}
+  {:repository :i3-device-configuration
+   :repository-head "415987dbf5c21e779826a232018e7940fb1be66c"
+   :file "devops/src/i3/desktop/ocr.clj"
+   :working-file-sha256 "8037dfd662a979a1c139f99136962f29458ac0201b042e16317338a3edcce25f"
+   :head-blob-sha256 "8037dfd662a979a1c139f99136962f29458ac0201b042e16317338a3edcce25f"
+   :working-file-matches-head true
+   :declared-endpoint "http://127.0.0.1:8099"
+   :declared-identity-route "/health"}]
+ :http-observations
+ [{:observed-at "2026-11-03T19:34:08.508Z"
+   :endpoint "http://127.0.0.1:8082" :route "/v1/models" :method :get
+   :status :unavailable :error-class "ConnectionRefusedError" :errno 111
+   :runtime-identity :unknown :model-identity :unknown
+   :measurement :blocked}
+  {:observed-at "2026-11-03T19:34:08.522Z"
+   :endpoint "http://127.0.0.1:8099" :route "/health" :method :get
+   :status :ok :http-status 200 :body-bytes 64
+   :body-sha256 "cb84461c09f95a5a93160385b75ac81f6bcde68a1f6fa3d3e84a07f28b3edb23"
+   :supplier-metadata {:ok true :device "NPU" :det "960x960" :rec "48x320"}
+   :supplier-claim-not-loaded-model-attestation true
+   :measurement :blocked}]
+ :service-observations
+ {:unit "ocr-npu.service" :manager :user-systemd
+  :load-state :loaded :active-state :active :sub-state :running
+  :main-pid 1371874
+  :exec-main-start-timestamp-as-reported "Sun 2026-11-01 19:17:31 CST"
+  :exec-main-start-monotonic-microseconds 299097360724
+  :pid-executable "/usr/bin/python3.12"
+  :pid-start-clock-ticks 29909733 :clock-ticks-per-second 100
+  :unit-executable-basename "python3"
+  :unit-executable-exists true
+  :unit-executable-resolves-to-observed-python true
+  :unit-execstart-matches-declared-source-path true
+  :execstart-observation-method :single-unit-read-filtered-to-path-and-boolean-only
+  :unfiltered-argv-retained false
+  :socket {:transport :tcp :bind "0.0.0.0" :port 8099 :pid 1371874 :process-name "python3"}
+  :expected-8082-listener :not-observed
+  :port-45265 :historical-reported-disappeared-not-probed
+  :limits ["A unit/source-path match and interpreter PID do not attest the Python code object loaded in that process."
+           "The working server source differs from its repository HEAD; do not cite that HEAD as its byte identity."
+           "Neither health metadata nor disk hashes attest the compiled models currently resident in the worker."
+           "The OCR listener is wildcard-bound; this observation grants no remote disclosure or publication permission."]}
+ :disk-model-assets
+ {:root-role :source-declared-desktop-ocr-model-directory
+  :root-source-expression "MODEL_DIR=expanduser(~/.local/share/desktop-ocr/models)"
+  :identity-tier :disk-assets-not-loaded-runtime-attestation
+  :hash-method :sha256-streamed-1048576-byte-chunks
+  :max-asset-bytes 536870912
+  :asset-selection "Two source-literal OpenVINO IR XMLs, their same-stem IR BIN weight companions, and source-literal charset; no directory recursion or model search. BIN paths derive from the conventional OpenVINO IR pairing, not a literal BIN declaration in server.py."
+  :assets
+  [{:name "ch_PP-OCRv4_det_infer.xml" :bytes 334779 :stable-stat-before-after true
+    :observed-at "2026-11-03T19:34:08.523Z"
+    :sha256 "91f25ea6ad4f0bcdebdb01223d4df82c24a487fc1e4091e6efce5eb89bb18d2b"}
+   {:name "ch_PP-OCRv4_det_infer.bin" :bytes 2342968 :stable-stat-before-after true
+    :observed-at "2026-11-03T19:34:08.524Z"
+    :sha256 "601509fdcbbeaba46f9a866aa63972884cde387129dc57bcddf3db54b267d772"}
+   {:name "ch_PP-OCRv4_rec_infer.xml" :bytes 372305 :stable-stat-before-after true
+    :observed-at "2026-11-03T19:34:08.527Z"
+    :sha256 "78bfad6c4546e26e73da75b0418f5da0e095ea59f590e85b9621fcedfa950dd1"}
+   {:name "ch_PP-OCRv4_rec_infer.bin" :bytes 5375508 :stable-stat-before-after true
+    :observed-at "2026-11-03T19:34:08.528Z"
+    :sha256 "a11f17b26fe6e69b67db9ec0f3c2160796c6710e5089e750b8da9d1df6cfd4fe"}
+   {:name "ppocr_keys_v1.txt" :bytes 26250 :stable-stat-before-after true
+    :observed-at "2026-11-03T19:34:08.534Z"
+    :sha256 "a1c84d9bdb9ab29043c58896224d32941783eb821629618416dcb08f12886492"}]
+  :onnx-assets :not-declared-in-inspected-source-not-searched
+  :gguf-assets :no-declared-path-not-searched-or-hashed
+  :asset-content-decoded-or-emitted false}
+ :hardware-observations
+ {:architecture "x86_64" :logical-cpus 22
+  :cpu-model "Intel(R) Core(TM) Ultra 9 185H"
+  :kernel "7.0.0-38-generic"
+  :accel0 {:pci-vendor "0x8086" :pci-device "0x7d1d" :driver "intel_vpu"
+           :module-version-as-reported "1.0.0 7.0.0-38-generic"}
+  :drm-card0 {:pci-vendor "0x10de" :pci-device "0x2820" :driver "nvidia"}
+  :drm-card1 {:pci-vendor "0x8086" :pci-device "0x7d55" :driver "i915"}
+  :meminfo-snapshot {:total-kib 32510872 :available-kib 10138892
+                     :observation-window "2026-11-03T19:33:25Z/2026-11-03T19:34:08Z"
+                     :resource-reservation false}
+  :vram-capacity :not-inventoried :free-vram :not-inventoried
+  :llm-npu-support :not-established
+  :hardware-device-presence-not-model-support-attestation true}
+ :limits
+ {:wall-time-budget-seconds 300 :http-targets 2 :requests-per-target 1
+  :http-timeout-seconds 2 :http-body-limit-bytes 65536
+  :http-redirects false :proxy-use false :inference-requests 0 :ocr-submissions 0
+  :source-or-test-or-artifact-edits 0 :service-or-config-changes 0
+  :model-loads-or-downloads 0 :package-imports-for-probing 0
+  :process-environment-or-memory-reads 0 :personal-corpus-or-cache-reads 0
+  :screenshots-or-buffers-read 0 :cloud-calls 0 :spending 0
+  :full-home-recursive-search false :parent-ledger-or-board-writes false}
+ :remaining-unknowns
+ [:loaded-ocr-detector-and-recognizer-hash-attestation
+  :loaded-python-source-revision-attestation
+  :loaded-openvino-runtime-version
+  :ocr-asset-precision-and-quantization
+  :owner-approved-agent-resource-and-measurement-budget
+  :fresh-independent-resource-admission
+  :scoped-parent-execution-permit
+  :stable-existing-e4b-runtime-endpoint
+  :e4b-model-mmproj-hashes-quantization-context-and-hardware]
+ :proposed-minimal-next-permit
+ {:status :proposal-only-not-granted
+  :first-owner-decision
+  "Provide/authorize read-only loaded-runtime attestation for existing OCR PID 1371874: exact detector+recognizer XML/BIN hashes, loaded source identity and OpenVINO version. Confirm whether the listed working-source and on-disk hashes actually identify this running worker; no restart, load or service change is requested. Without this, retain disk-only identity and measurement hold."
+  :separate-later-owner-decision
+  "Only after attestation and independent resource admission, authorize one OCR-only synthetic batch: the six frozen 480x160 PNGs, sequential concurrency 1, no warmup/load/restart, no retries, at most six POST /ocr calls to existing loopback 8099, 5s per-request and 30s whole-batch deadline, client memory ceiling 256MiB, preserve raw synthetic supplier boxes and separately labelled wall/supplier timings in owned storage. A bounded response/memory policy must be enforced by a separately reviewed runner; this proposal is not implementation permission or an assertion that the inherited runner meets these limits."
+  :resource-preconditions
+  ["Owner must explicitly approve use of the running OCR service/NPU; it is not established as agent-owned."
+   "Recheck available RAM and worker contention immediately before admission; the inventory snapshot reserves nothing."
+   "Do not request an E4B measurement budget yet: 8082 is refused and no alternative runtime/model identity is established."
+   "No cold-start, cancellation, peak-memory or LLM-support qualification may be inferred from a warm OCR batch."]
+  :unchanged-holds [:no-inference-before-permit :no-personal-capture :no-cloud
+                    :zero-spend :no-installed-publication :govone-disclosure
+                    :s1a-transport-held :quality-completion-held]}
+ :reflection
+ {:lesson "Read-only source, PID/socket metadata and bounded disk hashing substantially narrow identity questions without probing inference. Keep working-tree source drift, repository revision, disk model identity and loaded-model attestation as four distinct facts."
+  :parent-owns-ledger-and-review-synthesis true}}

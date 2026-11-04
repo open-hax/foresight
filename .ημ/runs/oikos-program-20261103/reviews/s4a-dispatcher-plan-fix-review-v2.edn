@@ -1,0 +1,111 @@
+{:review/id :s4a-dispatcher-plan-fix-review-v2
+ :review/date "2026-11-03"
+ :review/kind :same-independent-reviewer-narrow-planning-fix-confirmation
+ :task :s4a
+ :uuid "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :verdict :approve
+ :approved-scope :offline-source-case-only
+ :authority :none
+ :reviewer {:role :independent-reviewer-not-plan-author
+            :provider :openai :model "gpt-6.1-sol"
+            :native-provider-approval false}
+ :input-bindings
+ {:plan {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s4a-dispatcher-plan-v2.edn"
+         :sha256 "3abb7aeafb41f66c62f26b76294f09e831dc70ac307af7602a59a4cb38689c2a"
+         :actual-full-file-read true :lines [1 173] :actual-bytes-hashed true}
+  :new-user-decision
+  {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/decisions/s4a-native-owner-source-and-target-nomination.edn"
+   :sha256 "2bf3c1915d87f510bc054fe7bf66176305e4afd9f3b22438de9fa6f5da600d32"
+   :actual-full-file-read true :lines [1 22] :actual-bytes-hashed true
+   :provenance :recorded-explicit-user-answers-also-confirmed-by-current-user-message}
+  :original-finding
+  {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s4a-dispatcher-plan-review-v1.edn"
+   :sha256 "f14f59ade3a35ae65dbb68d35f087915ae70c59df991b28873014fa3dd5741d2"
+   :id :s4a-plan-01 :severity :P2 :actual-full-file-read-and-hashed true}
+  :preserved-plan-v1
+  {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s4a-dispatcher-plan-v1.edn"
+   :sha256 "7a489544001376cf5a272fe7bebe74c0e58d5892c4db6c8b8c43b7206d483ecf"
+   :actual-hash-unchanged true}
+  :frozen-s4a-permit
+  {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/permits/s4a-contract-8ae64df4.edn"
+   :sha256 "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+   :actual-hash-unchanged true}
+  :frozen-s2a-permit
+  {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/permits/s2a-contract-c399b60e.edn"
+   :sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+   :actual-hash-unchanged true}
+  :frozen-source "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+  :frozen-contract-digest "2a82066221bfe57cb326f0fecce12082505ddfdbcdd53ab986451f69d67e884b"
+  :pure-code-audit-repeated false}
+ :findings []
+ :settlement
+ {:id :s4a-plan-01 :prior-severity :P2 :status :resolved
+  :remaining-ordering-defect false
+  :evidence
+  [{:path "reviews/s4a-dispatcher-plan-v2.edn" :lines [55 73]
+    :result "Owner-interface discovery is explicitly parallel and not a prerequisite for offline implementation or its exact-head review. Stage b expressly needs no nominated/running server, issuer, actual owner artifact, native-owner source grant, socket or effect permit. Stage c can close the inert Oikos source phase without a native shim or target."}
+   {:path "reviews/s4a-dispatcher-plan-v2.edn" :lines [74 91]
+    :result "Real readiness requires independently reviewed native source and actual authority; the exact-hash live permit requires both offline exact-source review and readiness. Only the following stage may load a handler. The earlier effect-permit/source-review inversion is removed."}
+   {:path "reviews/s4a-dispatcher-plan-v2.edn" :lines [92 106]
+    :result "The eight Oikos new-file zones, unchanged frozen files/config, inert imports and zero real transport/effects are explicit. No synthetic context can enable runtime success."}
+   {:path "reviews/s4a-dispatcher-plan-v2.edn" :lines [128 158]
+    :result "The offline test matrix includes zero-effect/no-live-prerequisite and freeze/source-review exits. The later owner-defined commit/release fence is finite and explicitly not an offline prerequisite or universal distributed real-time transaction."}]
+  :qualification "This settles only the planning-order finding. It does not assert that source tests were run, native identity/authentication exists, the operator endpoint is qualified, or any dispatcher is accepted."}
+ :current-decision-crossreference
+ {:purpose "Associate the exact immutable v2 hash above with the newer explicit source/target decision. This adjacent review does not silently edit or rehash v2."
+  :native-owner-source
+  {:decision-lines [3 6]
+   :status :explicit-user-source-only-grant-recorded
+   :scope "Unloaded native Emacs shim source, offline source tests and independent exact-source review in an isolated Spacemacs-owner worktree only. This is distinct from the Oikos eight-file grant and does not authorize editing the live Spacemacs checkout/startup or loading a handler."
+   :ordering "The newly granted native-owner source work may proceed separately/in parallel; neither it nor owner-interface discovery requires server nomination, actual live authority availability or an effect permit."}
+  :future-target
+  {:decision-lines [7 20]
+   :status :existing-operator-emacs-service-nominated-for-future-consideration-only
+   :target "emacs.service"
+   :isolation-asserted false :socket-qualified false :effect-permission false
+   :metadata "The parent reports active/running PID 2840 and an empty /run/user/1000/emacs snapshot. This reviewer made no service/client/socket calls. Those observations neither locate a usable endpoint nor prove host-wide socket absence, isolation or capability authority."
+   :historical-text "V2 lines 78, 83, 88 and 163 retain the earlier proposed isolated-endpoint/no-operator-substitution language because v2 predates the answer. For FUTURE target consideration only, read it with the subsequent explicit nomination; no default/fallback operator substitution is thereby allowed. The old target assumption is not a remaining offline-ordering defect."
+   :future-permit "Before any live load or synthetic-buffer effect on the shared operator server, require independent exact consumer/native source qualification, actual owner authority/fence artifacts, a verified pinned existing endpoint/generation and a separate exact-source effect permit expressly addressing shared-server noninterference. Permit only newly allocated agent-owned synthetic handles and bounded operations/teardown; never enumerate/read/mutate preexisting operator buffers, select operator frames, change live startup, restart or start a daemon."
+   :no-retroactive-qualification "Nomination does not satisfy the previous isolated-server fixture assumption or establish runtime acceptance. Any shared-server test case must explicitly review that difference and its noninterference limits before an effect permit, without blocking offline source."}
+  :parent-action "Keep v2 and decisions immutable. Carry this exact plan-plus-decision binding into the distinct source admission; no additional target question or plan rewrite is needed to unblock that offline phase."}
+ :precise-unblocked-source-phase
+ {:oikos
+  {:status :planning-approved-for-distinct-parent-source-only-admission
+   :root "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+   :files ["src/oikos/law/dispatch.cljc"
+           "src/oikos/shape/dispatch.cljc"
+           "src/oikos/extern/dispatch_codec.cljs"
+           "src/oikos/infra/dispatch.cljs"
+           "test/oikos/law/dispatch_test.cljc"
+           "test/oikos/shape/dispatch_test.cljc"
+           "test/oikos/infra/dispatch_test.cljs"
+           "test/oikos/dispatch_runner.cljc"]
+   :work "After the distinct parent Oikos source-only grant, confirm paths absent, RED/GREEN the bounded in-memory outer framing/codec/closed schemas/laws and negative tests, then implement only unloaded, effect-unavailable NBB consumer source. Use existing approved local runtime/dependency artifacts; no installs or source/config expansion. Preserve frozen S4A/S2A source, descriptors, permits and runners. Submit exact new source/test hashes and offline results for independent review before any live permit."
+   :does-not-need [:nominated-isolated-server :verified-runtime-socket :approval-issuer
+                   :actual-owner-admission-artifacts :native-shim-availability
+                   :native-owner-source-grant :effect-permit :whole-s6a-completion]
+   :zero-effect-contract "Imports and every fixture invocation have zero real process/socket/HTTP/IPC/client/Emacs/i3/GovOne transport calls, native loads, buffer effects, live configuration writes or persistence. All dispatch attempts refuse unavailable, including otherwise matching fake context. Valid codec and pure-precondition fixtures are inert data positives with :authority :none, not runtime authorized/applied/read-released outcomes."}
+  :spacemacs-owner
+  {:status :separately-user-authorized-source-only-by-bound-decision
+   :placement :isolated-spacemacs-owner-worktree-not-live-checkout
+   :work "Implement/review unloaded native shim source and the expressly allowed offline source tests under the owner's applicable instructions. Record its own exact source/test identity. This does not extend the Oikos file list, authorize live handler loading or qualify native identity, revision, consent or mutation behavior."
+   :no-reviewer-execution "This re-review creates no owner worktree, edits no source and runs no native shim test/load."}
+  :parallel-owner-discovery "Read-only existing-owner interface/source discovery can continue independently of target nomination. Actual authority artifacts remain necessary for later real positives; missing APIs stay visible owner gaps, never invented local kernel behavior."
+  :source-grant-boundary "Reviewer approval is not the parent's Oikos implementation permit. The explicit new user decision separately grants only the described native-owner source work and future target consideration; neither grant permits live effects."}
+ :remaining-holds
+ {:native-runtime "No emacsclient/eval/socket discovery, handler load, buffer read/create/mutation/enumeration, service/config/start/restart or second daemon is permitted by this review or nomination."
+  :real-authority "Actual authenticated actor/session/scope/resource/consent and expiry/revocation/one-use artifacts plus their admitted native execution/read-release fence remain future prerequisites for real positives. UID/loopback and fake approval maps remain insufficient."
+  :revocation "V2 lines 150-158 leave actual owners to define finite admission/commit/read-release and clock/concurrent-revocation ordering. Final native binding checks remain mandatory; no instantaneous universal revocation, silent cached allow, automatic retry or retraction of delivered bytes is claimed."
+  :i3 "Focus remains unavailable until an actual native lifetime/cut fence and separate sandbox permit exist. Lookup-then-focus, double reads and local locks remain insufficient."
+  :s2a "Separate decoder/reader/append hold is unchanged, not a whole-epic offline gate and not resolved here."
+  :publication "No whole S6A/client-matrix completion gate is invented; actual egress qualification, remote/public tools and installed promotion remain separate holds."
+  :runtime-qualification false :whole-s4a-accepted false :whole-s2a-accepted false
+  :epic-completion-credit 0 :native-approval-credit 0}
+ :user-questions []
+ :review-execution
+ {:only-new-output "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s4a-dispatcher-plan-fix-review-v2.edn"
+  :scope "Narrow textual planning-order confirmation, decision reconciliation, read-only hash binding and EDN data validation only; no repeat pure-contract/code audit."
+  :source-edits 0 :board-calls 0 :ledger-writes 0 :native-shim-loads-or-tests 0
+  :service-client-socket-buffer-calls 0 :product-test-execution 0
+  :commits 0 :pull-request-calls 0 :pushes 0 :delegations 0
+  :reflection "The corrected source/effect ordering is sufficient. Apply the newer explicit owner-source/target nomination without converting nomination into effect permission or using the historical isolated-target proposal to prolong offline planning."}}

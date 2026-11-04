@@ -1,0 +1,13 @@
+{:report/id :s6a-govone-fixture-source-v2
+ :status :incomplete-not-qualified
+ :base "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+ :file "cmd/govone-dev/s6a_fixture_test.go"
+ :file-sha256 "876deef10ff67ffeee869df7cfc514c144f720072aaf241764e3a715af7f1443"
+ :authored "Added operator and auditor admin-denial assertions and actual auditor key expiry assertions to the existing parent-authored lifecycle test."
+ :missing "TestS6AActualGovernedProviderBytes and its two-runtime provider-capture lifecycle have not been implemented. No assertion of impossibility is made."
+ :format :not-checked
+ :tests-executed 0 :builds-executed 0 :runtime-executed 0
+ :guard-probes 0 :network-operations 0 :commits 0
+ :scope "Only the previously untracked authorized test file was modified; this coordinator report is separate. No production files were modified. Execution remains held pending independent source review, guard qualification, dependency closure and separate authorization."
+ :review "Parent-authored helper code and new assertions are unexecuted and independently unreviewed."
+ :next "Complete the missing provider-bytes test and perform static formatting before review; do not commit this incomplete fixture."}

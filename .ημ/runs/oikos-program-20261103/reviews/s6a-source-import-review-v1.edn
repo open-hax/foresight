@@ -1,0 +1,54 @@
+{:review/id :s6a-source-import-review-v1
+ :kind :independent-source-composition-review
+ :reviewer :not-import-author
+ :verdict :approved-exact-composed-source-base
+ :authority :none
+ :findings []
+ :target {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s6a"
+          :head "b505266cfed232638862606bcde802136197c3b3"
+          :tree "281864ee32b7fb042e00950c9900676da5858299"
+          :base "008b0611198d13eb503bb57d5ef69d8dec1c268c"
+          :import-source "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+          :status-before-and-after :clean-including-untracked}
+ :inputs {:parent-permit-sha256 "692af03d063c58b5653fb4174e9c9a1a68ad612203f7e5c054d5ed3f378d5896"
+          :s2a-permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+          :s4a-permit-sha256 "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+          :p1-fix-review-sha256 "8e50024ee8518646d6431aa7a111858c393731221ca437197a9eacf8537ec749"
+          :clio "788cdd3434615a7932b924e68520dbf7f88408c2"
+          :clio-cache "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps"}
+ :composition {:method "Compared complete recursive Git tree maps of path to mode/type/blob, base plus exactly six explicitly enumerated source entries, against HEAD. Independently hashed each of the 15 checked working files with SHA256 and git hash-object."
+               :base-count 51 :source-count 46 :head-count 57
+               :all-57-equal true :missing [] :extra [] :different []
+               :all-51-base-paths-unchanged true :whole-s4a-tree-imported false
+               :new-dispatcher-wire-fixture-adapters-absent true
+               :all-listed-mode "100644" :all-listed-type :blob
+               :six-imports
+               {"docs/contracts/named-capability-v1.edn" {:blob "94adb3fe2c3d25784eec940e3018d9ba0b50067c" :sha256 "93ffe4e70dae3155cb2479e2a74de33ff4ad705c8dcb16e1bde794f13c126c99"}
+                "docs/contracts/named-capability-v1.md" {:blob "1a573fe66570848f810963522c047c247acc7ed8" :sha256 "250caf9e82315ccfef91d55297f31ddf7049370a5a94437fd1e35a9cbb63cf70"}
+                "scripts/test_capability.clj" {:blob "15f1f9a23acaf41f862715cff40cf4b3a9a0932a" :sha256 "e263fd144f2cda08ee76321d9bb3031ebb32bf008180a327c9c876ca7f447335"}
+                "src/oikos/law/capability.cljc" {:blob "40e911e64823a607047668f836784417405513a3" :sha256 "fc47104a528ea4ef9b35bdb05cf533e70ddf09d0df445877e9dd1e04b77328e2"}
+                "test/oikos/capability_runner.cljc" {:blob "7f69fa69f9d4d10e345d933aa001c860bb975ff1" :sha256 "bbad5664f0fb6deee720dd2a7b22750202c25dea721ccbbef2b162e5350aef24"}
+                "test/oikos/law/capability_test.cljc" {:blob "bc698a5f5a47c53f165aa1474f2243d1b9e4d909" :sha256 "08622bc52ccf3efeda768bfb201639b62dd16c418bca5134f9abb1a9352e6fd4"}}
+               :frozen-nine
+               {"bb.edn" {:blob "483db99ac41547ae91f12333488c6c4b4992bf93" :sha256 "8f76a349e997923ae8130f81969a9d239522828e60f6645ae9de14ec0ada0af8"}
+                "README.md" {:blob "f8d97f49a6616f171740a75d2e2acb7cb6b8a585" :sha256 "85a93c408bb7c9167c297929915422023d377e0fd992a8c6134a1dc4a530f5fa"}
+                "src/oikos/law/safe_reference.cljc" {:blob "5a44c363e7d587b36e76fe7200f3fd93e9156384" :sha256 "baee008c0a3b2dc4a6ddd7bc8f4a63fed317d0d4514f961d819ad484019cdf60"}
+                "src/oikos/law/desktop.cljc" {:blob "db89d046bac26eafe81a6308fdba49777c203d61" :sha256 "edea4e32bd0279ccfc2f81a4cfbe24c9e1348f06606f9d597530d28f894680d7"}
+                "scripts/test_desktop.clj" {:blob "7f64a9b793fd0c9b2061ffd4b9e22208acc68d27" :sha256 "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"}
+                "test/oikos/desktop_fixture.cljc" {:blob "c9e3bbeff77d2265db1375d7f7f94c1c7c3de4a1" :sha256 "77122676722cba3af9d62c42fcb725daf4236e6364ec50f7378a5907d4df4c57"}
+                "test/oikos/desktop_runner.cljc" {:blob "0da07afedd6989412d48271806081e682d8cfc7e" :sha256 "a3b84c0bf587a7ce051d1d1ea9257d75832337d963bec8e609a4da9654b00072"}
+                "test/oikos/law/desktop_test.cljc" {:blob "87d5b7cf5189f46395250c1d2be54b09f4c2e0a6" :sha256 "be969cb41358194a630b35cadc0db13243be400cc2cffbe250703c2e0bc4b088"}
+                "test/oikos/law/plain_event_test.cljc" {:blob "b280afcaeb31a84892d1430120b7dd8dce0f352e" :sha256 "5e4044f67c0792adad48ccd6c0544afc064afb8eb51eb853af306efd8996903f"}}
+               :pins "All nine frozen entries equal c399 by mode/type/blob and match both producer permits' SHA256 pins; all six imports equal 8ae by mode/type/blob and match its six descriptor/document/source/test SHA256 pins. Working-file Git hashes match HEAD."}
+ :verification {:timeout-ms-each 600000
+                :environment "OIKOS_CLIO_SOURCE=/home/err/spaces/foresight/clio; OIKOS_CLIO_DEPS as above; OIKOS_S2A_PERMIT=absolute coordinator permits/s2a-contract-c399b60e.edn. Existing cache only."
+                :invokers-read ["bb.edn" "scripts/test_capability.clj" "scripts/test_desktop.clj" "scripts/test_spaces.clj"]
+                :actual [{:command "bb scripts/test_capability.clj" :exit 0 :bb [11 99] :nbb [11 99] :failures 0 :errors 0}
+                         {:command "bb scripts/test_desktop.clj" :exit 0 :bb [16 1059] :nbb [16 1059] :failures 0 :errors 0}
+                         {:command "bb scripts/test_spaces.clj" :exit 0 :bb [11 455] :nbb [11 455] :failures 0 :errors 0}
+                         {:command "bb test" :exit 0 :bb [18 286] :nbb [40 546] :eval-offline [9 39] :desktop-bb [16 1059] :desktop-nbb [16 1059] :failures 0 :errors 0}
+                         {:command "bb lint" :exit 0 :errors 0 :warnings 0}]
+                :baseline-attribution "Parent preimport counts were reported separately; the above counts are this reviewer's own postimport execution. bb test invokes eval/run_test.cljs, not effectful eval/run.cljs. Capability and spaces are explicitly invoked separately."}
+ :limits "Only source composition and listed existing offline gates are qualified, not fresh semantic review of frozen laws, host sandbox safety, GovOne admission, egress, or S6A functional implementation. Before frozen contracts see untrusted host values, P1 outer boundary must safely refuse hostile data prior to traversal. No production or native approval claimed."
+ :next "Parent may issue the explicit P1 code green-light against this exact head under the existing bounded permit; later source changes require their own independent exact-head review."
+ :effects "No product edits, board writes, ledger writes, GovOne/runtime/model calls, sockets, dependency downloads, PRs, commits or pushes by reviewer. Requested test runner subprocesses and their offline test fixtures executed."}

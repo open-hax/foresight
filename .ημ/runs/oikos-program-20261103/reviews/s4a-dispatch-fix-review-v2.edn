@@ -1,0 +1,51 @@
+{:review/id :s4a-dispatch-fix-review-v2
+ :review/kind :same-independent-reviewer-exact-source-fix-review
+ :reviewer {:provider :openai :model "gpt-6.1-terra" :native-provider-approval false}
+ :task "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :verdict :approve-offline-source-only :authority :none
+ :source {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+          :tested-head "5bd54bb120a6f53bf2cd576eb631667636fe2642"
+          :tested-tree "3305e406eb23f4ca929c9c554f051fc1ee92dd68"
+          :previous-head "c42d33365a3c4707a51f429a3c9b0f324b017341"
+          :frozen-base "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+          :worktree-clean true
+          :diff "Previous head to tested head modifies six permitted new source/test files. Frozen base to tested head adds only the nine authorized files; no existing files changed."}
+ :bindings {:prior-review {:path "s4a-dispatch-code-v1.edn" :sha256 "bf2b82b504c58fde051f8d04efcc923aa80643df570974b5cb6ab7b920b81b7b"}
+            :offline-permit "d63abff7f5b52f6bc622d9e01557bbef4d1ffa5f6f6eb9edbaa4aa14f890fa62"
+            :plan "3abb7aeafb41f66c62f26b76294f09e831dc70ac307af7602a59a4cb38689c2a"
+            :plan-fix-review "09804b8d03d6cda5d561379ced7359f49a3be1a04fda2c75222aa0e2eb70eac3"
+            :s4a-frozen-permit "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+            :s2a-frozen-permit "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+            :frozen-bundle "Thirteen frozen files and descriptors unchanged by base-to-head diff; exact frozen permit hashes rechecked."}
+ :new-file-sha256
+ {"scripts/test_dispatch.clj" "72646af0e8b10081cea815dfe0e0b25b66d9e114834b90702d1249c8ef834cd0"
+  "src/oikos/extern/dispatch_codec.cljs" "156aa0b111a345d97d1b9b4038f4c5d3c72dd97636fc5d162e6d4d0ae4e9b62f"
+  "src/oikos/infra/dispatch.cljs" "1a6e9614e7c79bb17b433890c744aa041fc919b77fad7c63529ecf7a6e6ff488"
+  "src/oikos/law/dispatch.cljc" "ce64b0bb008e36dfe262a97e801504db82b757ba1cd9b19b8564c7a0699b01f4"
+  "src/oikos/shape/dispatch.cljc" "10d4de073bdf215b591e13211a10a1d4097a6db99f1bef4365a4967e4fb638d2"
+  "test/oikos/dispatch_runner.cljc" "a55641cca79be1550999b23671791f87a4682fb2e93ad77e06380802724ac5cb"
+  "test/oikos/infra/dispatch_test.cljs" "ecb0c0f25d67abf437c04d1eb7e5e6a36aa1c07844bc8ce6ed41984f058b2a15"
+  "test/oikos/law/dispatch_test.cljc" "05a75d409dff18e8ee12c5aa2a2bc7730925b94992458ebb9f4ee2c17de01953"
+  "test/oikos/shape/dispatch_test.cljc" "91c75891ac6b190c510d0183d4624110badd88a3730ea2ca3f1c3f53b00f1710"}
+ :settlement [{:id :s4a-dispatch-code-01 :prior-severity :P2 :status :resolved
+               :independent-witness "Original map backing-array getter: codec/bounded-data? false and codec/encode denied, each with zero getter calls. Original vector backing-array getter: codec/frame denied with zero getter calls. Tests used the actual observed C and Kb backing slots, not portable API assumptions."
+               :additional-independent-proxy "Constructed a boxed true Proxy directly and passed its value to actual extern encode, bounded-data? and from-wire; denied/false, zero get and getPrototypeOf trap calls. The raw Proxy was not returned from an SCI helper."
+               :review "All raw predicates, framing, mapping and encoding wrappers perform descriptor admission before the portable domain operation. Decode captures a private copy of an actual allowed byte view before unframing and parses only scanner-approved text. Unsafe old ambiguous names are removed. Portable *-domain functions explicitly require already-admitted values and are not claimed hostile-host guards. Import-time captured intrinsics are a stated trust boundary, not a universal JS sandbox. Consumer attempt remains constant unavailable."}]
+ :new-findings []
+ :actual-verification
+ {:environment {:clio-source "/home/err/spaces/foresight/clio" :required-clio-head "788cdd3434615a7932b924e68520dbf7f88408c2" :existing-cache "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps" :new-packages false}
+  :commands {"bb scripts/test_dispatch.clj" {:exit 0 :bb [11 136] :nbb [28 621] :failures 0 :errors 0}
+             "bb test" {:exit 0 :bb [18 286] :nbb [30 392] :eval [9 39] :desktop-bb [16 1059] :desktop-nbb [16 1059] :failures 0 :errors 0}
+             "bb scripts/test_capability.clj" {:exit 0 :bb [11 99] :nbb [11 99] :failures 0 :errors 0}
+             "bb lint" {:exit 0 :errors 0 :warnings 0}}
+  :instrumented-offline-fixtures {:preimport-and-final-process-network-write-calls 0 :fixture-filesystem-read-calls 0
+                                  :limitation "These are tested instrumented methods, not proof against all conceivable effects or compromised realm intrinsics. Loader reads before product import remain available."}
+  :controls "Dispatch suite exercises independent 550-byte golden, 65536-byte framing, valid hash maps, nested backing storage, proxy/prototype/cycle, metadata, record and method traps, fake-owner unavailable results, snapshot and malformed input cases."
+  :red "Author reports 471224f red; this reviewer did not independently run that historical commit."
+  :skips "No test assertions intentionally skipped."}
+ :scope-limit {:live-effect-permission false :native-owner-authentication false :target-qualification false
+               :final-wire-or-runtime-qualification false :whole-s4a-accepted false :native-approval-credit 0
+               :note "This verdict concerns only the inert offline source and tests at the exact SHA. Existing owner and target work is separate."}
+ :effects {:product-edits 0 :board-card-ledger-pr-commit-push-edits 0 :emacs-i3-govone-service-model-calls 0 :dependencies-installed 0
+           :only-written-file "s4a-dispatch-fix-review-v2.edn"}
+ :reflection "Review the concrete hostile host entry points while preserving the portable-domain precondition; counterexamples must be installed before measurement without SCI itself triggering the witness."}

@@ -1,0 +1,231 @@
+{:review/version 2
+ :review/kind :independent-scoped-code-fix-and-artifact-verification
+ :review/date "2026-11-03"
+ :task :s7a
+ :uuid "0db50b53-6c7a-489a-bff9-048d57ce4cbb"
+ :verdict :approve
+ :qualification :combined-offline-artifact-prerequisite
+ :original-findings-settled 4
+ :remaining-original-findings []
+ :introduced-regression-findings []
+ :scope
+ {:only-original-four-ids-and-actual-introduced-regressions true
+  :previous-review ".ημ/runs/oikos-program-20261103/reviews/s7a-code-v1.edn"
+  :repository "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a"
+  :initial-and-final-product-worktree-status :clean
+  :examined "Original 3b2e89d -> RED cf5e310 -> GREEN 9b4bc07 diffs, actual changed code/tests, saved RED logs and preflight, current v2 source bindings, preserved v1 objects, all six PNG byte identities, and independent negative/positive offline probes."
+  :network-requests-performed false
+  :inference-performed false
+  :model-or-service-operations-performed false
+  :separate-ocr-owner-attestation-review :not-duplicated
+  :separately-authorized-ocr-identity-patch-and-one-restart :outside-this-offline-review
+  :native-provider-approval false
+  :board-or-pr-admission false
+  :hosted-queue-wait-required false
+  :new-broad-preferences-or-prerequisites-added false}
+ :bindings
+ {:original-head "3b2e89dfe84a85f355c1e7abca70b4e580eea2c9"
+  :red-head "cf5e3101e8c2bf60453b65d0e6a4838d4ab08dae"
+  :reviewed-head "9b4bc07be6a64dc7b69bdd7716a841162ba3168b"
+  :lineage "GREEN parent is RED; RED parent is the original reviewed head."
+  :artifact-path "eval/s7a/artifact-v2.edn"
+  :artifact-id :oikos/s7a-corpus-and-metrics-v2
+  :artifact-file-sha256 "0085e3d5123e6e219d541aab81c2a4f15a7dc3a876d4cf8db6f44aca2397da24"
+  :artifact-canonical-seal "46e72b669b03edfb8f7a4d1cd04567da112bb650e421cb51794811a3aa28c584"
+  :canonical-seal-recomputed-and-matched true
+  :artifact-bound-files 32
+  :all-32-file-hashes-recomputed-and-matched true
+  :historical-artifact-path "eval/s7a/artifact.edn"
+  :historical-artifact-file-sha256 "ace68183e9ec6a9c313b4dab15711e58a3b6df95e1ba169a3296df05a228f6c4"
+  :historical-artifact-bytes-equal-original-git-object true
+  :historical-manifest-sha256 "7e6251e09530237f0d0ef4a9e44858cc3d985d86f7a3034818075c0a97f161b0"
+  :historical-manifest-bytes-equal-original-git-object true
+  :supersedes-file-sha256-matches-preserved-v1 true
+  :current-source-and-evidence-sha256
+  {"src/oikos/law/evaluation.cljc" "1071d104aa485adaf84ff298ed589c1f394a69a022cdc72dc2c2000d0f13187f"
+   "test/oikos/law/evaluation_test.cljc" "7a0c47902b9b881841f47a7e8930a9cf817c9d8dc165ce71a11f4d015526b31f"
+   "test/oikos/test_runner.cljc" "f9d4555b5f5fa1cf629464bbea9479e4175c59798318cf20ef9eab0c2c85d624"
+   "scripts/s7a.cljs" "53944466e5973f197c3d8c955a3cea394c1b58d60685ecc5c832cbd6a3658aa2"
+   "eval/s7a_test.cljs" "b7d47a7c40caa38c8e173be0eaef5e8123369e226df269aeacdcb1d5fa0584a0"
+   "bb.edn" "80c4cbc8e20fc22839b1c12d130f0a8bfd12071e689ea808cefbc7d332c3e791"
+   "eval/s7a/corpus.edn" "481c0359e37018640d33542b2bfd73f52d7251a3e4de9bdc0fa8e9d0a7cdff22"
+   "eval/s7a/manifest-v2.edn" "aa22a9cb305acd713026445f5952d49edf749ab2a2b7f04301bc7a5f16c43d5e"
+   "eval/s7a/synthetic-responses.edn" "dcbbf0635e9ca2eaa444776dbac806321598b15a4d3ccea8e579df09c62dd8cd"
+   "eval/s7a/preflight.edn" "7ce43920381d00fa4975ef0b1bad52f308e1ea940aebf3bc013049ff81496547"
+   "eval/cases.edn" "320fc1934c6c8c6b492905c63a987001d98007238300bf41aef93e943d0efffa"
+   "eval/run.cljs" "db37457469a98454a29affa5bd6486aafd14d443a9d0f09d4a445ae573754a0e"
+   "eval/s7a/README.md" "df5302f27cfc013ff0407e5f31fce4d199471a77b55f1c51b34cac00c052e661"
+   "eval/s7a/rejected-v1/artifact.edn" "28320ad58bea7a2bfd10fa4ad9cbc9042cd1e7bf3058c7a03e537c0de23db851"
+   "eval/s7a/rejected-v1/manifest.edn" "9367d5853125db91ac4ed81bc4244fe96645bcd13fb83f3e478928450efaecc4"
+   "eval/s7a/regressions-red-v2.txt" "2582cb018c1171e0e3bccfc6b937c6796aba7f12a08b0970d98d2071a473bef1"
+   "eval/s7a/shared-nbb-red-v2.txt" "f9d207799013533bf42884675eab2847ef4897e7c334019b1e8f449978030220"
+   "eval/s7a/inventory-red-v2.txt" "2f3a3f483864cfc22707d853c6ae2eb95c67d3837cabe90a503caccbec38c1a0"}}
+ :red-evidence
+ {:source :saved-committed-logs-read-and-hash-verified
+  :red-execution-independently-rerun-in-this-review false
+  :saved-log-bytes-unchanged-between-red-and-green true
+  :recorded-results [{:runtime :bb :tests 25 :assertions 348 :failures 9 :errors 0}
+                     {:runtime :nbb :tests 37 :assertions 454 :failures 9 :errors 0}
+                     {:runtime :nbb-s7a-artifact :tests 6 :assertions 153 :failures 35 :errors 0}]
+  :artifact-failure-breakdown {:source-binding-drift 2 :text-corpus-contract 6 :inventory-audit-seal-write-counterexamples 27}
+  :interpretation "The RED artifact suite correctly exposes source-binding drift as well as the corpus/inventory failures. GREEN preserves the old seal as history and introduces a separately sealed v2, rather than rewriting the old object or disabling the binding checks. RED test additions precede production fixes; the GREEN diff retains their obligations and adds schema-label, complete-membership and single-snapshot coverage. No tests were removed or skipped."}
+ :actual-candidate-gates
+ [{:command "bb test" :exit 0
+   :suites [{:runtime :bb :tests 26 :assertions 357 :failures 0 :errors 0}
+            {:runtime :nbb :tests 38 :assertions 463 :failures 0 :errors 0}
+            {:runtime :nbb-eval :tests 9 :assertions 39 :failures 0 :errors 0}
+            {:runtime :nbb-s7a-artifact :tests 7 :assertions 181 :failures 0 :errors 0}]}
+  {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+  {:command "git diff --check cf5e310..9b4bc07be6a64dc7b69bdd7716a841162ba3168b" :exit 0}
+  {:command "nbb -cp src:. scripts/s7a.cljs audit" :exit 0
+   :result {:status :ok :semantic-qualification false
+            :manifest-sha256 "aa22a9cb305acd713026445f5952d49edf749ab2a2b7f04301bc7a5f16c43d5e"}}
+  {:command "nbb -cp src:. scripts/s7a.cljs reproduce" :exit 0
+   :result {:status :ok :reproduced-images 6 :output :memory-only}}]
+ :independent-probes
+ {:method "New in-memory -e deftest forms only; no product/test/corpus files changed. BB and NBB ran the same three independent text/timing/resource probe groups. A separate NBB group exercised inventory rejection and positive sealing with all writes intercepted."
+  :bb {:tests 3 :assertions 59 :failures 0 :errors 0 :exit 0}
+  :nbb-shared {:tests 3 :assertions 59 :failures 0 :errors 0 :exit 0}
+  :nbb-inventory {:tests 3 :assertions 95 :failures 0 :errors 0 :exit 0}
+  :probe-harness-note "One initial in-memory inventory test expression had an EOF delimiter error before tests ran; corrected only the inline expression, then ran the successful 3/95 suite reported here. This was not a candidate parse failure."
+  :filesystem-safety "Manifest counterexamples were with-redefs of parsed data. Negative cases intercepted hash/stat boundaries and writes; positive seal captured its intended write in memory. No foreign fixture path was read, no artifact was overwritten, and no scratch file was created."}
+ :per-id
+ [{:id :s7a-code/text-label-scorer-contract-mismatch
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "eval/s7a/corpus.edn" :lines [14 54]
+         :mechanism "Each of the six :text labels is now the supported {:answer <string>} map. The scorer remains schema/semantics-separate; no implicit scalar-label coercion was introduced."}
+   :candidate-regression {:path "eval/s7a_test.cljs" :lines [73 86]
+                          :name review-all-corpus-text-labels-use-supported-scorer}
+   :independent-probe
+   {:runtimes [:bb :nbb]
+    :manual-answers {:amber-text "17" :birch-text "28" :cedar-text "36"
+                     :delta-text "45" :elm-text "59" :fir-text "64"}
+    :checks-per-case 4
+    :results "All six labels equal independently supplied schema-shaped answers. All six correct responses produce schema=true, semantic=true; all six wrong strings produce schema=true, semantic=false; all six numeric responses produce schema=false, semantic=false."
+    :assertions-per-runtime 24 :failures 0}
+   :qualification "Settles the actual frozen corpus-to-scorer mismatch, including the two held-out text cases. The obsolete literal scalar-label call is not claimed to become a supported API: the chosen fix corrects the labels themselves."}
+  {:id :s7a-code/timing-phase-lost-before-summary
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/law/evaluation.cljc" :lines [119 145]
+         :mechanism "trial-metrics retains :phase in its output, so timing-summary consumes it directly without caller reinjection or fabricated phase inference."}
+   :candidate-regression {:path "test/oikos/law/evaluation_test.cljc" :lines [86 96]
+                          :name review-timing-producer-consumer-composition}
+   :independent-probe
+   {:runtimes [:bb :nbb]
+    :original-cold-trial {:phase :cold :request-ms 100 :first-token-ms 120 :last-token-ms 220 :generated-tokens 3}
+    :cold-result {:ttft-ms {:p50 20 :p95 20} :decode-tokens-per-second {:p50 20 :p95 20}}
+    :warm-trial {:phase :warm :request-ms 100 :first-token-ms 110 :last-token-ms 210 :generated-tokens 4}
+    :warm-result {:ttft-ms {:p50 10 :p95 10} :decode-tokens-per-second {:p50 30 :p95 30}}
+    :two-trials-per-phase-nearest-rank
+    {:cold {:ttft-ms {:p50 10 :p95 20} :decode-tokens-per-second {:p50 10 :p95 20}}
+     :warm {:ttft-ms {:p50 5 :p95 10} :decode-tokens-per-second {:p50 10 :p95 30}}}
+    :additional-controls "Verified phase preservation, nil one-token decode percentiles, empty summaries, and zero-token cancellation retaining warm phase/nil TTFT/quiescence=true."
+    :assertions-per-runtime 10 :failures 0}
+   :qualification "Settles the producer -> summary composition defect. These are synthetic arithmetic oracles, not actual latency, throughput, cancellation, or cold/warm-state observations."}
+  {:id :s7a-code/incoherent-memory-evidence-accepted
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/law/evaluation.cljc" :lines [157 190]
+         :mechanism "Resource comparisons require valid pinned identity; available RAM/VRAM must not exceed its totals, and requirements cannot exceed available capacity. CPU accelerator 'none' cannot claim positive pinned VRAM. Every result remains execution-authorized? false."}
+   :candidate-regression {:path "test/oikos/law/evaluation_test.cljc" :lines [98 118]
+                          :name review-pinned-memory-capacity-coherence}
+   :independent-probe
+   {:runtimes [:bb :nbb]
+    :original-counterexamples
+    [{:pinned-total-vram-bytes 0 :required-vram-bytes 2048 :available-vram-bytes 4096 :status :blocked}
+     {:pinned-total-ram-bytes 8192 :required-ram-bytes 16384 :available-ram-bytes 32768 :status :blocked}]
+    :other-negatives "Free RAM=8193 > total8192; positive free VRAM with zero total; required RAM8193 or VRAM1 with coherent smaller availability; missing resources; stale telemetry; denied admission; unknown available VRAM. All ten resource counterexamples blocked, with execution-authorized? false."
+    :identity-contradiction "Accelerator none plus pinned VRAM1024 blocked even with the permit hash recomputed to that contradictory identity."
+    :positive-controls "Coherent CPU-only zero-VRAM request remains an inert candidate. A separately pinned synthetic GPU with total/free VRAM4096 and requirement2048 also remains an inert candidate. Neither grants execution."
+    :assertions-per-runtime 25 :failures 0}
+   :qualification "Settles the originally observed inert preflight false-candidate defects; it supplies no real resource/ownership attestation, GovOne admission, or execution permit."}
+  {:id :s7a-code/audit-does-not-require-complete-image-inventory
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:pure-path "src/oikos/law/evaluation.cljc" :pure-lines [65 95]
+         :adapter-path "scripts/s7a.cljs" :adapter-lines [93 162]
+         :mechanism "A pure exact-cover predicate validates unique corpus/manifest image IDs, unique files, exact owned lexical fixture paths, row shape, source blocks and coordinate/baseline provenance. Audit validates membership before listed-path access, then requires real non-symlink regular files, physical owned paths and PNG hashes. Seal uses the same already validated manifest snapshot rather than rereading it."}
+   :candidate-regressions [{:path "test/oikos/law/evaluation_test.cljc" :lines [120 135]
+                           :name review-pure-image-inventory-contract}
+                          {:path "eval/s7a_test.cljs" :lines [88 126]
+                           :names [review-image-inventory-mutations-reject-before-sealing
+                                   review-seal-uses-the-validated-manifest-snapshot]}]
+   :independent-probe
+   {:runtime :nbb
+    :invalid-manifests 17
+    :cases [:missing-images :nil-images :empty-images :omitted-held-out-amber
+            :extra-duplicate-row :same-cardinality-duplicate-id :duplicate-file
+            :unexpected-id :relative-escape :absolute-escape :noncanonical-path
+            :forged-text :forged-bbox :forged-baseline :forged-origin
+            :forged-tightness :extra-row-field]
+    :result "Each of 17 cases rejects through both audit! and freeze-artifact! before any file-sha call, listed-path ownership/stat call, or write; all counters stay zero."
+    :positive-seal "Captured the valid seal write in memory: returned data equals the committed artifact-v2.edn, the target is exactly artifact-v2.edn, all six current PNG bindings are present, and manifest is read once even when an injected second read would return an empty inventory."
+    :ownership-control "Injected ownership rejection propagates through both audit and seal before image hash reads or writes. Actual current fixture ownership checks also ran in successful audit/reproduce/positive-seal paths."
+    :assertions 95 :failures 0}
+   :qualification "Settles incomplete/duplicate inventory admission and its seal propagation. No claim of a general concurrent-filesystem write boundary, transport qualification or operational publication is added."}]
+ :preserved-corpus-and-png-evidence
+ {:context :observed :confidence 1.0
+  :cases 18 :groups 6
+  :changed-corpus-data "Only six scalar text expected values became {:answer ...}; image cases/blocks, text inputs, action cases, group identities and split seed remain unchanged."
+  :manifest-image-rows-byte-data-equal-v1 true
+  :split-data-equal-v1-and-recomputed true
+  :split {:seed "s7a-v1" :held-out-groups ["amber" "fir"]
+          :development [:birch-image :birch-plan :birch-text :cedar-image :cedar-plan :cedar-text
+                        :delta-image :delta-plan :delta-text :elm-image :elm-plan :elm-text]
+          :held-out [:amber-image :amber-plan :amber-text :fir-image :fir-plan :fir-text]}
+  :all-six-png-bytes-equal-original-commit true
+  :all-six-pngs-independently-reproduced-in-memory true
+  :png-sha256 {:amber-image "fa6b5398c64fc3c106e9d3f16e2306ec2ec679465f2a0316a078e8ebdba84e9a"
+               :birch-image "eabe4fa5bd1b60427cb9207627a39bc54bac10fdca03167c7035e94213ab0a5c"
+               :cedar-image "671ab225928e93204fd1cfd7d196f9582f5ee087439c93bb223a126ce12f31aa"
+               :delta-image "c30b638b04df11535d940e22bd7bb6de5fb92920c218f789b7830e6ed7ca002e"
+               :elm-image "3606c2b7af205053a44d1c6a1385afc315572462fc71369136036917cfbe08fb"
+               :fir-image "0ec3f9a6f1776002b898dd706fd7cb85b9a9171e440da80b92ddca4dfcabe6a7"}
+  :visual-ground-truth "V1's independently inspected synthetic pixels/labels are preserved by exact Git-object byte comparison and equal image-row data, not by rereading any personal image or cache. Declared layout regions remain explicitly not glyph-tight localization or model-output accuracy."}
+ :generation-prerequisite
+ {:permit ".ημ/runs/oikos-program-20261103/permits/generation-component-470c35e7.edn"
+  :revision "470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+  :all-five-permitted-source-hashes-recomputed-and-matched true
+  :shared-fixture-sha256-observed-in-both-candidate-runtimes "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"
+  :bb-transport-held true :bb-tests-diagnostic-only true
+  :operational-transport-reuse-required false :protocol-credit 0}
+ :saved-runtime-evidence
+ {:preflight-bytes-equal-original-commit true
+  :evidence-source "Unchanged saved eval/s7a/preflight.edn only; no fresh endpoint request in this review."
+  :e4b {:observed-at "2026-11-03T19:17:35.543Z" :port 8082 :transport-status :unavailable
+        :identity-status :unknown :measurement-status :blocked}
+  :ocr {:observed-at "2026-11-03T19:17:35.566Z" :port 8099 :http-status 200
+        :supplier-report {:ok true :device "NPU"}
+        :identity-status :unknown :measurement-status :blocked
+        :body-bytes 64 :body-sha256 "cb84461c09f95a5a93160385b75ac81f6bcde68a1f6fa3d3e84a07f28b3edb23"}
+  :historical-45265 :reported-disappeared-not-probed
+  :measurement-credit 0
+  :separate-new-ocr-identity-or-owner-attestation-not-reviewed-here true
+  :no-current-service-state-inferred true}
+ :handoff
+ {:s5a-combined-offline-artifact-prerequisite-qualified true
+  :qualified-artifact {:path "eval/s7a/artifact-v2.edn"
+                       :source-revision "9b4bc07be6a64dc7b69bdd7716a841162ba3168b"
+                       :file-sha256 "0085e3d5123e6e219d541aab81c2a4f15a7dc3a876d4cf8db6f44aca2397da24"
+                       :canonical-seal "46e72b669b03edfb8f7a4d1cd04567da112bb650e421cb51794811a3aa28c584"
+                       :review ".ημ/runs/oikos-program-20261103/reviews/s7a-code-fix-review-v2.edn"}
+  :provided [:offline-synthetic-corpus :frozen-group-split :metric-oracles :identity-only-preflight]
+  :prerequisite-assessment "The four original P2 findings are independently settled at this exact head and replacement seal. Parent may bind this review as manual external-code verification of the combined offline prerequisite for S5A. It is not native Rheos artifact validation, a board transition or execution permission."
+  :no-new-blocker "Actual endpoint availability, model quality, separate OCR identity/ownership work and held S1A BB transport are not additional prerequisites for consuming this offline artifact. Actual supplier dispatch/measurement still needs its own reviewed identity, independent resource/GovOne admission and scoped execution permission."
+  :whole-s7a-complete false
+  :quality-qualification false :speed-qualification false :measurement-credit 0
+  :execution-authorized false :native-provider-approval false
+  :board-transition-authorized false :merge-or-publication-permission false
+  :unchanged-boundaries [:synthetic-only :sandbox-dev-only :agent-owned-resources
+                         :zero-spending :no-personal-capture :existing-models-only
+                         :govone-admission :raw-images-24h :raw-text-7d
+                         :derived-deletion-propagates :accepted-knowledge-explicit-consent
+                         :no-installed-or-remote-client-publication]}
+ :reflection
+ {:lesson "The replacement exercises actual corpus labels through their scorer, metric producer outputs through phase aggregation, resource telemetry against pinned totals, and exact inventory through both audit and seal. These close the observed gaps without converting synthetic tests or HTTP health into runtime qualification."
+  :p-efficiency 0.9 :p-friction 0.15 :p-skill-candidate 0.4
+  :spore-created false :separate-ledger-writes :not-authorized-by-review-only-scope}
+ :write-accounting
+ {:persistent-write "Only this NEW parent .ημ/runs/oikos-program-20261103/reviews/s7a-code-fix-review-v2.edn"
+  :product-code-or-artifact-edits false :card-or-ledger-edits false
+  :pr-edits false :commits false :pushes false
+  :network-endpoint-model-or-service-operations false :package-installs false
+  :personal-images-or-source-caches-read false :reviewer-scratch-files-created 0}}

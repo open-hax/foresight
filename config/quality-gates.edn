@@ -254,6 +254,14 @@
      :gate/source "axxium/.github/workflows/ci.yml"
      :gate/reason "Owning CI runs the deployment-boundary self-test and check as a multi-step gate."}]}
 
+  "oikos"
+  {:repository/path "oikos"
+   :repository/gates
+   [{:gate/id :oikos/unit :gate/kind :unit :gate/execution :local
+     :gate/command ["bb" "test"] :gate/source "oikos/bb.edn"}
+    {:gate/id :oikos/static :gate/kind :static :gate/execution :local
+     :gate/command ["bb" "lint"] :gate/source "oikos/bb.edn"}]}
+
   "services"
   {:repository/path "services"
    :repository/gates

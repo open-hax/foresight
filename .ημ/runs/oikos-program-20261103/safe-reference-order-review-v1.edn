@@ -1,0 +1,162 @@
+{:review/version 1
+ :review/type :independent-adversarial-scoped-planning-review
+ :review/at "2026-11-03T18:11:13Z"
+ :review/workspace "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+ :review/base "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+ :review/head "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+ :review/input :base-plus-current-uncommitted-correction
+ :review/scope [4458493223 4458522612 4458522624]
+ :review/verdict :changes_requested
+ :review/summary "The safe-reference producer-cycle correction and README setup correction satisfy the three native findings at authored planning scope. One P3 documentation synchronization defect remains: the execution note omits the newly explicit S2A prerequisite from its S5A table row and DAG. No new design preference or program-wide review is introduced."
+ :review/authority "Harness-local scoped assessment only. No native settlement, provider approval, coverage, review-round, admission, implementation or completion credit."
+
+ :native-source-observations
+ [{:id 4458493223 :review-id 5757072229
+   :login "chatgpt-codex-connector[bot]"
+   :commit "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+   :url "https://github.com/open-hax/foresight/pull/153#discussion_r4458493223"
+   :assessment :corrected-in-current-cards
+   :reason "S2A now owns initial contract definition, independent review and exact version/digest/source/review handoff before its own admission; its unchanged 5-point estimate explicitly includes that work and excludes S5B knowledge/retention implementation."}
+  {:id 4458522612 :review-id 5757107960 :login "coderabbitai[bot]"
+   :commit "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+   :url "https://github.com/open-hax/foresight/pull/153#discussion_r4458522612"
+   :assessment :corrected-in-cards-workflow-and-official-rheos
+   :remaining-local-finding :safe-reference-order/documentation-edge
+   :reason "S5A directly requires S2A/S2B/S7A and consumes the exact reviewed S2A artifact. S5B follows S5A and can only compatibly extend a separately reviewed prospective version. The execution-note representation still needs the same explicit edge."}
+  {:id 4458522624 :review-id 5757107960 :login "coderabbitai[bot]"
+   :commit "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+   :url "https://github.com/open-hax/foresight/pull/153#discussion_r4458522624"
+   :assessment :corrected
+   :reason "README lines 60-66 exactly label private/full initialization, show an explicit eta-mu/uxx subset, and retain inventory afterward. Read-only Git manifest lookup confirms both selected paths and excludes oikos; no submodule initialization was run."}]
+
+ :findings
+ [{:id :safe-reference-order/documentation-edge
+   :severity :P3
+   :native-finding-ids [4458493223 4458522612]
+   :title "Synchronize the execution note's S5A prerequisites with the corrected producer edge"
+   :path "docs/notes/oikos-execution-plan.md"
+   :sha256 "99d2ac30172d4a0bf79abe043ec673c87230d8d28dce013e6b9b2a84b2f62205"
+   :line-anchors [169 [201 203]]
+   :evidence "The task dictionary still lists S5A prerequisites as S2B, S7A, and the Mermaid DAG has S2B/S7A -> S5A but no explicit S2A -> S5A. In contrast, .ημ/workflows/oikos-program.edn:46, the S5A card:4,81 and fresh official read-task all include S2A explicitly. The note presents these as the precise child-artifact execution plan, not a dated earlier graph."
+   :impact "A reader or dispatch preparation based on the note receives an incomplete direct artifact-prerequisite list and can omit explicit custody of the reviewed S2A safe-reference handoff. Existing transitive S2A -> S2B -> S5A order remains safe, and the corrected official card still denies missing evidence; this is documentation drift, not a surviving producer cycle."
+   :required-correction "Add S2A to the current S5A table prerequisites and S2A --> S5A to the current diagram; identify its exact reviewed safe-reference handoff without changing any operational gate."
+   :required-verification "Read-only comparison of the corrected table/diagram to workflow :s5a :requires and official Rheos read-task dependency must include S2A, S2B and S7A, retaining S5A -> S5B and all existing governance edges."
+   :user-question nil}]
+
+ :verified-contracts
+ {:s2a {:anchors [[45 52]] :points "5"
+        :checks [:defines-initial-closed-portable-contract
+                 :independently-reviews-before-first-admission
+                 :freezes-exact-version-content-digest-source-revision-review-evidence
+                 :denies-missing-mismatched-or-unreviewed-evidence
+                 :explicit-estimate-includes-fixtures-review-handoff
+                 :no-s5b-output-required]}
+  :s5a {:anchors [[53 57] [79 83]]
+        :checks [:exact-reviewed-s2a-artifact-consumer
+                 :explicit-s2a-prerequisite-in-official-readback
+                 :preserves-s2b-and-s7a
+                 :positive-handoff-fixture-without-s5b]}
+  :s5b {:anchors [[39 44] [60 62]]
+        :checks [:after-s5a :same-baseline-custody
+                 :compatible-closed-independently-reviewed-prospective-version-only
+                 :rejects-incompatible-or-unknown-fields
+                 :preserves-historical-ledger-bytes-and-baseline-replay
+                 :no-retroactive-qualification]}
+  :e2 {:anchors [35 63] :consistent-with :s2a}
+  :e5 {:anchors [37 72] :consistent-with [:s2a :s5a :s5b]}
+  :privacy-and-governance
+  {:preserved [:raw-image-and-ocr-exclusion :sensitive-title-path-label-exclusion
+               :rejection-payload-exclusion :hash-and-id-sensitivity-classification
+               :closed-allowlist :deletable-content-references :clio-authority
+               :raw-images-24h :raw-text-7d :derived-deletion-propagation
+               :accepted-memory-expiry-or-explicit-indefinite-consent
+               :acceptance-does-not-renew-raw-retention
+               :synthetic-sandbox-dev-only :agent-owned-resources-only
+               :govone-no-charge-admission :zero-spend
+               :existing-model-only :download-load-restart-held :publication-held]
+   :workflow-policy-unchanged-from-base true
+   :governed-dependency-vectors-unchanged true}}
+
+ :official-rheos
+ {:command "eta-mu kanban read-task <uuid> --config /home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+  :collection :fresh-cli-invocation-not-saved-json-or-fix-self-report
+  :all-16-child-dependency-vectors-match-workflow true
+  :affected-readbacks
+  [{:task :s2a :uuid "93a76dad-678a-4980-86fb-ba0fbb5e8203"
+    :dependency ["07452a65-4a6a-4704-bf81-50408927dcc8"] :status "incoming" :points "5"
+    :write-id "1793728990212-0.1fb8im7lhozncny5epw"
+    :stdout-sha256 "52a5565b61a56ec839d97cfb16944ec97896c0777179f66478c073247a0366c3"}
+   {:task :s5a :uuid "0e124c65-694e-44f1-9959-ee83e81ca22b"
+    :dependency ["93a76dad-678a-4980-86fb-ba0fbb5e8203" "59774be2-cc61-4708-9030-8b7b42935ec3" "0db50b53-6c7a-489a-bff9-048d57ce4cbb"]
+    :status "incoming" :points "8" :write-id "1793728990680-0.k11hnrxiv8pqxzxn0l"
+    :stdout-sha256 "0aa318bf6a63cfabd09a1736e76b5b7a98189cc09d3b2a16d4b3a09a2f3fbaf4"}
+   {:task :s5b :uuid "7d0235f1-ab69-4095-b404-bcc1ca60db91"
+    :dependency ["0e124c65-694e-44f1-9959-ee83e81ca22b"] :status "incoming" :points "5"
+    :write-id "1793728991124-0.9lkybx7u9wx7p9vwkm"
+    :stdout-sha256 "8d6fbdee5111b3a271499c751f3f41ca44c7893beb81e4b22250b72c2bcc4117"}
+   {:task :e2 :uuid "3b9279b5-aafd-431a-90a9-128ce4415de0" :status "incoming"
+    :dependency ["722906b7-77d7-4414-a976-23996f7533de"]
+    :write-id "1793728991623-0.zz9ysskz5qnmlw2k4mo"
+    :stdout-sha256 "e0a2887cce276b24d1fe98e5263ccf30cc97044f7f79473c40c12900a04654de"}
+   {:task :e5 :uuid "92b529b9-256d-4654-8aa6-5f1884a8adaa" :status "incoming"
+    :dependency ["3b9279b5-aafd-431a-90a9-128ce4415de0" "0db50b53-6c7a-489a-bff9-048d57ce4cbb"]
+    :write-id "1793728992044-0.acg51bm3nb9k55sovtl"
+    :stdout-sha256 "7a14ecdbb19e496c304d81c1856dc2e8da57f379b8edbcb59e023001368ec8aa"}]
+  :scope-note "S1A concurrently became in_progress with a separate user-direction comment and six additional official events. That unrelated admission is outside this review. No stale 24-incoming claim is made; all five affected cards were observed incoming."}
+
+ :derived-workflow-check
+ {:authority :comparison-only-not-board-validation
+  :nodes 16 :edges 27 :acyclic true
+  :only-edge-delta [:s2a :s5a]
+  :topological-order [:s1a :s1b :s2a :s7a :s2b :s3a :s4a :s3b :s5a :s6a :s4b :s5b :s6b :s7b :s8a :s8b]
+  :no-s5b-predecessor-of-s2a-or-s5a true
+  :note "Inline EDN/JSON parsing compared the declared graph with official read-task results; no alternate Rheos parser, validator or command surface was created."}
+
+ :history-check
+ {:base-ledger-prefix-bytes 380034
+  :base-ledger-prefix-sha256 "4c2a70c5ded21736fcef51e1179013e1376499adb0bc495a67543a693b66bc3c"
+  :exact-prefix-preserved true
+  :correction-events {:frontmatter 1 :comments 5 :line-anchors [366 371]}
+  :correction-dependency-event "kanban-0e124c65-694e-44f1-9959-ee83e81ca22b-1793728963736"
+  :historical-comment-rewrites-in-scoped-diff false
+  :note "Scoped card diffs retain historical comments and append superseding corrections. Six later unrelated events were observed after the correction suffix; their authority was not reviewed."}
+
+ :read-only-manifest-check
+ {:command "git config -f .gitmodules --get-regexp '^submodule\\.(eta-mu|uxx|oikos)\\.(path|url)$'"
+  :readme-anchors [[53 67]]
+  :manifest-anchors [[17 20] [41 44] [98 101]]
+  :subset ["eta-mu" "uxx"] :excluded-private-path "oikos"
+  :paths-are-direct-manifest-entries true
+  :no-init-clone-install-or-private-child-read true
+  :limit "Manifest membership was verified, not public-user SSH authentication or successful installation."}
+
+ :file-sha256
+ {".ημ/runs/oikos-program-20261103/safe-reference-order-fix-v1.edn" "4ca7b31e7f056ef1a6358102339774e2d946fddc58aa5f4c6618f249ecd077e5"
+  ".ημ/workflows/oikos-program.edn" "29df6cdf7028a4f3a3a1457bf7633b6b3f24eac52efd8d2794ddcf8fd5550077"
+  "README.md" "30e249031efeb32c41df1f4683734dd27275c6e9d0653690bdef0b3829bd56fb"
+  ".gitmodules" "c1413d7966653bb70147fad2c4d6e05169e6c9587f209c67198444273c13f0aa"
+  "openhax.kanban.edn" "d0c04722963d540448c6b60c8e0d6d14e7129cf747a2b057f0ed63612b262d86"
+  "docs/agile/kanban/oikos-admit-desktop-causal-events-through-clio-and-replay-edn-projections-bb5e8203.md" "8e1f0aae3a6a7332cf6605b96c73bcd81e2667ce1d8132755721150d5fdf4959"
+  "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md" "b7c6c7b666780497553b4ba2df799e4929dd7ff88a2a9373e957c62301ecf8bd"
+  "docs/agile/kanban/oikos-project-epistemic-knowledge-with-retention-forgetting-and-stop-controls-ca60db91.md" "b1ca21788272066d188079cf7746f14b8255f57d1cb58cbaaf52f2cb95b2fc62"
+  "docs/agile/kanban/oikos-clio-desktop-journal-and-causal-edn-projections-e4415de0.md" "dd2a1735934cef60494c7c2e710771a7504387754832d7f94e642afa9e3da0e0"
+  "docs/agile/kanban/oikos-continuous-local-perception-and-event-backed-knowledge-84a8adaa.md" "f9972aab5f6e07959a0d0c684086e220031137e0ed037494245faeff87ce466e"
+  "docs/notes/oikos-execution-plan.md" "99d2ac30172d4a0bf79abe043ec673c87230d8d28dce013e6b9b2a84b2f62205"
+  ".ημ/kanban-events/ledger.edn" "4fe1e2518f1a24e9a4e19d121ec220253677bb27f9c23fa5957ecb4b5dfc2ce2"}
+
+ :verification
+ {:edn-parse [:workflow :fix-artifact :kanban-config]
+  :scoped-git-diff-check :pass
+  :native-get "The inherited token returned HTTP 401. Explicit token-stripped gh GETs using the documented keyring route returned all three native comment records; no GitHub writes occurred."
+  :initial-check-limit "An initial all-incoming assertion failed on concurrently admitted S1A. It was not converted to a pass: a fresh official S1A readback established the unrelated in_progress state, and the scoped checks and dependency-only comparison were then performed."
+  :concurrent-workflow-refresh {:initial-sha256 "f3e3d740744099d3db53e23eb1fefe0b1213ac6520623e600104d396ed590d80"
+                                :current-sha256 "29df6cdf7028a4f3a3a1457bf7633b6b3f24eac52efd8d2794ddcf8fd5550077"
+                                :scope "Final hash recheck detected three concurrently added execution admission-evidence fields. Re-read the full workflow and diff: proposed-task-edges, policy, privacy/retention and governed dependencies are unchanged from the reviewed correction; S5A moved from line 43 to 46. The separate admission decision was not qualified by this scoped review."}
+  :no-service-model-test-suite-or-design-operation true}
+ :reflection
+ {:p-efficiency 0.85 :p-friction 0.25 :p-skill-candidate 0.3
+  :lesson "Producer order and exact artifact custody must be checked in both official dependency readbacks and consumer acceptance; an acyclic graph alone cannot disprove an implicit future-artifact dependency. Keep current documentation representations synchronized without rewriting historical comments."
+  :spore nil
+  :write-boundary "Only this new review artifact was authored. No receipt/mycology ledger write was attempted because the user expressly limited writes to this path."}
+ :user-questions []
+ :credit {:native-approval 0 :native-settlement 0 :admission 0 :coverage 0 :review-rounds 0 :implementation 0}}

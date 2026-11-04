@@ -1,0 +1,19 @@
+{
+ :status "qualified"
+ :authorization "User question: selected Allow isolated toolchain; exact official Go 1.27.1 only"
+ :official-metadata-url "https://go.dev/dl/?mode=json&include=all"
+ :metadata-provenance "Coordinator inspected official metadata; supplied exact selected record"
+ :archive-url "https://go.dev/dl/go1.27.1.linux-amd64.tar.gz"
+ :expected-archive-sha256 "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+ :expected-archive-bytes 70553950
+ :observed-archive-sha256 "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+ :cache-path "/tmp/opencode/oikos-test-tools/go-1.27.1-ad3b4bab-a5d9-4328-8f90-e7b13f65cade"
+ :version "go version go1.27.1 linux/amd64"
+ :extracted-manifest-path "/tmp/opencode/oikos-test-tools/go-1.27.1-ad3b4bab-a5d9-4328-8f90-e7b13f65cade/extracted-files-manifest.json"
+ :extracted-manifest-sha256 "9c8f5d4af9663ac39625a3d452a32f8d53bf908b4dce77436d834df128290604"
+ :extracted-regular-file-count 15639
+ :extracted-regular-file-bytes 243910739
+ :retention "Owned isolated task cache; preserve all files until exact remote backup verified; no cleanup authorized"
+ :scope "Tool availability only; no module cache, policy proof, or owner API admission established"
+ :error nil
+}

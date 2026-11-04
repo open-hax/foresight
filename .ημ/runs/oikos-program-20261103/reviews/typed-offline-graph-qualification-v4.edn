@@ -1,0 +1,24 @@
+{:review/id :typed-offline-graph-qualification-v4
+ :prior-review "typed-pinned-dependency-cache-v3.edn"
+ :status :focused-metadata-resolved
+ :scope "Metadata resolution of typed/clj.checker/deps.edn with its own :test alias; not the root :test alias, not a test/build/application execution, and not GovOne guard qualification."
+ :checkout-head "42ef524fb5482a2e2429f3732a6ad88d80529690"
+ :owner "/tmp/opencode/oikos-typedclojure-owner-a2698786-b653-4566-a8eb-9c19d374ada0"
+ :cache "/tmp/opencode/oikos-typed-deps-bf60f0e2-1e1f-428e-a6e0-28415755d56c"
+ :allocation-bytes 268435456
+ :observed-cache-du-bytes 11105136
+ :method "Read bundled clojure/tools/deps.clj create-basis implementation and API, then run it directly with :root nil :user nil :project :standard :aliases [:test], explicit private :mvn/local-repo and file-only central/clojars URLs. No CLI classpath cache writer. JVM -XX:-UsePerfData, clean explicit environment and private HOME/XDG/tmp."
+ :tool-jar "/tmp/opencode/oikos-test-tools/clojure-cli-1.12.5.1664-bc3e31cd-0a7d-464f-9cc0-a482c6a3f72a/private/libexec/clojure-tools-1.12.5.1664.jar"
+ :tool-jar-sha256 "0b5aad604095963d3032a43a4eff55800b4b6b366a8d78795db07510c67a56d1"
+ :query-file "query.clj"
+ :query-sha256 "f052fa3785aeac06e8de67747556a2278acced907470b53e86b771959dc0a956"
+ :guard-file "guard.py"
+ :guard-sha256 "ab3abcd3455c0ae1ae15d9b7a4efee361eb37da1b1ca89a6711e5a878f48025b"
+ :guard "Native x86_64 inherited libseccomp: network syscalls denied, writable/creating opens and filesystem mutation syscalls denied, writable shared mmap denied, shared read-only maps supported, io_uring denied, writes restricted to stdout/stderr pipes; no inherited writable files, no core dumps. Filter rule and load failures exit before exec. Parent captures combined output with 1 MiB threshold and timeout. No independent adversarial certification of this guard."
+ :result {:exit 0 :capture-status :complete :stdout-bytes 14540 :stderr-bytes 0 :library-count 33 :classpath-root-count 37
+          :stdout "query.stdout" :stdout-sha256 "4f34923ef35dbd8d825f58be43c7c67036768d4219458cc949e48a240448e067" :stderr "query.stderr"
+          :selected-graph "Complete tools.deps :libs map and ordered :classpath-roots are in retained query.stdout; relative paths resolve against owner/typed/clj.checker."
+          :selected-clojure "1.12.5" :selected-test-check "1.1.3"}
+ :attempt-history "Initial guard setup exited 121 before exec due to unsupported duplicate argument comparisons. After correction, overly broad shared mmap denial caused JVM SIGSEGV before query (trace.log); readonly shared mappings were admitted while writable shared remains denied. Two subsequent actual queries exited 0 with identical output, including final guard."
+ :limitations "Existing v3 checksum/authenticity qualifications remain; no new independent authenticity proof. Success demonstrates this focused metadata query under this guard, not that tests execute, graph applies to another alias, or that no other future syscall could mutate state. Retained trace and attempts are private cache artifacts. No upstream files or global cache modified by query."
+}

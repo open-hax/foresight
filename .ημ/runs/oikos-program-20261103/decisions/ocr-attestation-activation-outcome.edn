@@ -1,0 +1,26 @@
+{:decision/id :ocr-attestation-activation-outcome-20261103
+ :kind :recorded-parent-action-plus-independent-verification
+ :authorization "ocr-attestation-restart-authorization.edn"
+ :source "6626d680f079c3330fee1df1f3565475d7ef1a55"
+ :code-review "../reviews/ocr-attestation-fix-review-v2.edn"
+ :concrete-unit-review "../reviews/ocr-attestation-concrete-review-v3.edn"
+ :runtime-review "../reviews/ocr-attestation-runtime-v1.edn"
+ :result :ready-and-input-identity-verified
+ :restart-attempts 1 :additional-starts 0 :authorization-consumed true
+ :process {:pid 3187253 :start-clock-ticks 45402858}
+ :runtime {:device "NPU" :openvino-version "2025.4.1-20426-82bbf0292c5-releases/2025/4"}
+ :identity-response {:bytes 1167
+                     :sha256 "c35e58936c5f2cdfb3f1293678bff85d9cc3446a1f32e8c795c15d9caa33d985"}
+ :source-sha256 "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"
+ :five-asset-input-hashes-and-lengths-match true
+ :retained {:restart "no" :nrestarts 0 :original-dirty-i3-source :unchanged
+            :original-unit-fragment :unchanged :exact-private-backup :preserved}
+ :private-backup "/home/err/.local/state/oikos-dev/ocr-attestation-20261103/preflight-e1f3ffa2-3372-479c-9dd0-230626d54447"
+ :startup-observation {:wall-seconds 2.438079410989303
+                       :connection-refused-get-observations 11
+                       :cold-start-benchmark false}
+ :ocr-posts 0 :downloads 0 :personal-inputs 0
+ :not-qualified [:compiled-artifact-identity :all-dependency-cryptographic-identity
+                 :physical-device-tracing :model-quality :runtime-performance
+                 :batch-resource-admission :oikos-installed-promotion]
+ :no-rerun "The exclusive private restart-intent marker has consumed the sole restart. Do not rerun the one-shot restart script or start a rollback worker without renewed authorization."}

@@ -1,0 +1,17 @@
+{:report/id :s6a-govone-fixture-policy-teardown-v5
+ :status :source-candidate-awaiting-independent-review
+ :base "78824909e152bdc99e589e054387bbae41de85e6"
+ :head "6d8f8b0766929161494a07c0452aa674864a5031"
+ :file "cmd/govone-dev/s6a_fixture_test.go"
+ :file-sha256 "fedf190717c57672b86c4703bf6c3d588ee398af4310700d0ca6774061c71ff9"
+ :F3 {:changes ["Different signed stale-revision candidate and distinct candidate signed by fresh wrong Ed25519 key"
+                "After each rejection read profile identity/revision and dry-run active bundle version and policy capability decisions"
+                "Compare B profile, AI modes, endpoint revision and dispatch binding version; exact active session policy version"]
+      :source ["internal/controlplane/service.go:132-175,315-344,876-906,951-981" "internal/httpserver/admin_api_test.go:230-239" "internal/policy/service.go:103-115"]}
+ :F5 {:changes ["Single deferred B teardown closes transport admission, joins handlers and successfully shuts down stack before snapshot, private frame/hash preservation and hook restoration"
+                "Build, join or shutdown failure records incomplete capture and retains hook for external supervisor containment; preservation failure records incomplete capture"]
+      :source ["cmd/govone-dev/s6a_fixture_test.go:s6aHandlerTransport.stop,s6aClose" "internal/runtime/runtime.go:39-100" "internal/inference/endpoint_generator.go:102-112"]}
+ :held [:F1 :F2 :F4]
+ :static-checks {:gofmt-d :clean :git-diff-check :clean :commit :one-file-only}
+ :execution-counts {:tests 0 :builds 0 :vet 0 :fixture-runtime 0 :sockets 0 :guard-probes 0 :downloads 0}
+ :limitations "No execution or behavioral verification authorized; same reviewer must assess exact candidate."}

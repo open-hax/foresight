@@ -1,0 +1,460 @@
+{:artifact/type :oikos/native-planning-dispositions
+ :artifact/version 1
+ :epistemic/tier :derived
+ :observed-at "2026-11-03T17:18:04Z"
+ :assessor {:role :independent-read-only-subagent
+            :harness :opencode
+            :model "openai/gpt-6.1-sol"
+            :native-github-reviewer false}
+ :scope {:repository "open-hax/foresight"
+         :pull-request 153
+         :root "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+         :native-thread-selection "/tmp/opencode/oikos-native-threads-20261103.txt"
+         :thread-count 16
+         :review-body-item-count 2
+         :cards-read 24
+         :excluded "The 53 local candidate findings are not the native settlement inventory assessed here."
+         :local-head "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+         :observed-pr-head "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+         :observed-pr-base "e31b43a57765a394521d6c49aafd068f5c4d5ad5"
+         :observed-pr-base-ref "plan/fork-dev-origins"
+         :assessed-revision :dirty-working-tree
+         :revision-warning "The corrective card/note/event bytes were uncommitted at inspection. They are not corrections present on the observed published PR head. File SHA256 bindings below identify the assessed local revision."
+         :allowed-write "Only this newly created derived-verification artifact. No source, board, ledger, GitHub, service, model invocation, or personal-data operation."
+         :instructions-read ["/home/err/AGENTS.md"
+                             "/home/err/spaces/AGENTS.md"
+                             "/home/err/spaces/foresight/AGENTS.md"
+                             "AGENTS.md"
+                             "docs/agile/AGENTS.md"
+                             "/home/err/.agents/skills/pr-flow/SKILL.md"
+                             "/home/err/.agents/skills/pr-review-settlement/SKILL.md"]}
+ :native-collection
+ {:authentication "env -u GH_TOKEN -u GITHUB_TOKEN gh; credentials neither printed nor persisted"
+  :rest-comments "gh api --paginate repos/open-hax/foresight/pulls/153/comments?per_page=100"
+  :rest-reviews "gh api --paginate repos/open-hax/foresight/pulls/153/reviews?per_page=100"
+  :graphql "gh api graphql --paginate; PR head/base plus reviewThreads(first:100,after:$endCursor), comments(first:100) with pageInfo and exact bodies"
+  :thread-pages-exhausted true
+  :all-nested-comment-pages-exhausted true
+  :native-threads 16
+  :native-comments 16
+  :native-reviews 2
+  :observed-thread-state "All 16 threads unresolved, not outdated, and containing only their root comment at collection."
+  :reviews [{:review/id 5755004149
+             :commit "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+             :state "COMMENTED"
+             :submitted-at "2026-11-03T15:35:19Z"
+             :body-sha256 "c0eea794becd1170a562254a48ab14daed0e7d14922fe14532975ebc17658775"}
+            {:review/id 5755016882
+             :commit "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+             :state "COMMENTED"
+             :submitted-at "2026-11-03T15:36:15Z"
+             :body-sha256 "384b7c73fc683cd4148cbb413786891bcbbdf20f8095400eeab1e91a66599e3b"
+             :item-ids ["cr-comment:v1:5a08a09292697bdfbfc79de8"
+                        "cr-comment:v1:efd09d07c97f26c80451d912"]}]}
+ :file-bindings
+ {:s5a {:path "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+        :sha256 "88eb7fd7af478adc32be11e7e08e5ec9a2c5e2f071ca27b2a2f75143c563a387"}
+  :s2a {:path "docs/agile/kanban/oikos-admit-desktop-causal-events-through-clio-and-replay-edn-projections-bb5e8203.md"
+        :sha256 "7a75b0c932bd357b3404e21854b8a4d4d861d48261965e42cae42a92397fa093"}
+  :s3b {:path "docs/agile/kanban/oikos-admit-sandbox-runtime-workspaces-with-leases-and-deliberate-human-joining-43e11d9a.md"
+        :sha256 "7da14cc53283d5afd0fb1387ed04d2aeb5e54454fe7f13ed3beec7d9725ecb5b"}
+  :s6a {:path "docs/agile/kanban/oikos-bind-all-egress-paths-to-the-mojomast-govone-policy-session-37b28c9b.md"
+        :sha256 "af2ccade1920ca174d03678e29e2833f0cbb0956c50dc5f9d406d397ca45a62f"}
+  :e2 {:path "docs/agile/kanban/oikos-clio-desktop-journal-and-causal-edn-projections-e4415de0.md"
+       :sha256 "e230be3e5960a60b491854858298cb74c5ae3df4f8f7254256e8c61eba1fde99"}
+  :e8 {:path "docs/agile/kanban/oikos-consented-labels-and-bounded-colab-training-corpus-9faa6482.md"
+       :sha256 "7acc5773895bcdfe2762169f83ff4f3f87426bf5265ec124e80a894c0a0b6bc6"}
+  :e5 {:path "docs/agile/kanban/oikos-continuous-local-perception-and-event-backed-knowledge-84a8adaa.md"
+       :sha256 "d2bc6fcd0076d37a7652f143cf114469f68c1192eafb4a51d02a751ee7edc0bd"}
+  :s1a {:path "docs/agile/kanban/oikos-define-isolated-generation-manifests-and-target-render-contracts-8927dcc8.md"
+        :sha256 "c7ecefef5a9ee613f403a8b7e99ff815c8087167e13f8de603fcfc6af51ec122"}
+  :s4a {:path "docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+        :sha256 "289925631b901a75281093fe3e428ee13a1e3cb32e95fa6b5eda272c2db38249"}
+  :e7 {:path "docs/agile/kanban/oikos-empirical-local-gemma-and-ocr-qualification-66198864.md"
+       :sha256 "5a0dfa71d243f72f95eca7cb6c99d6699649ceca7cb46c1a01f64a827c9dda28"}
+  :s6b {:path "docs/agile/kanban/oikos-expose-scoped-knoxx-lens-policy-evidence-and-complete-gateway-history-8ec26002.md"
+        :sha256 "a1557350cbf8eeb80d232c03da27e5e36f792c6ddf6c25ff5e89383cb12fd6ec"}
+  :s7a {:path "docs/agile/kanban/oikos-freeze-synthetic-local-gemma-ocr-baseline-and-runtime-identity-probes-57ce4cbb.md"
+        :sha256 "b8c8ebae894423176070dbfbaf6cca9755bc126532f98f167dc7a8d0dcb45d85"}
+  :e6 {:path "docs/agile/kanban/oikos-govone-egress-admission-and-knoxx-lens-evidence-6244a5be.md"
+       :sha256 "37ea233c3053ce9c212e9bbd2085fe3037219817587334fc5a20bac7c9fcaa5a"}
+  :s3a {:path "docs/agile/kanban/oikos-implement-logical-memberships-and-speculative-edn-projection-branches-2549ba0d.md"
+        :sha256 "deda919aa62be2eda213ed1adfad990f053875aa47409411b4488800629c1eb2"}
+  :s1b {:path "docs/agile/kanban/oikos-implement-preview-check-apply-rollback-through-services-owned-generations-86925c3c.md"
+        :sha256 "cd10cd5f1739ee53e6be2405096d670a606ab54d1074813385c0f19951c57fb1"}
+  :e1 {:path "docs/agile/kanban/oikos-isolated-generations-and-shx-muse-configuration-boundaries-6f7533de.md"
+       :sha256 "e7d6b929f7f2ea6516d9bbc8f5a0ce9f03e1ef0543ca800c2cd3aa571652221c"}
+  :e3 {:path "docs/agile/kanban/oikos-named-collaborative-projection-spaces-with-deliberate-joining-2eb908b4.md"
+       :sha256 "8d108491138f0b9f4c216301024e9f04aef32e5efaf5cca9fa0c8227e8e51d50"}
+  :s8b {:path "docs/agile/kanban/oikos-prepare-govone-approved-reproducible-colab-exports-with-spending-holdback-ffe21376.md"
+        :sha256 "eea4e99fe72b93249243078f2ba7f5a5e488e5512139697843a4014526141f8e"}
+  :s5b {:path "docs/agile/kanban/oikos-project-epistemic-knowledge-with-retention-forgetting-and-stop-controls-ca60db91.md"
+        :sha256 "c9a1c996c5342a21ac3add9a431865d85be79ca91c42b1a58ef1c2cf3570c0cb"}
+  :s7b {:path "docs/agile/kanban/oikos-qualify-12b-backends-and-governed-proxx-comparison-after-admission-aeb279c3.md"
+        :sha256 "7bcf72aebaa4a5638c02ba9bef7ca3214684a475a7974c8dd1224118922115da"}
+  :s4b {:path "docs/agile/kanban/oikos-qualify-client-adapter-matrix-without-duplicating-domain-contracts-5ec2aaf3.md"
+        :sha256 "0891ab93e003e83e3aa8482210b1db1c219123b23537f4c3a863cbcd03a42ada"}
+  :s2b {:path "docs/agile/kanban/oikos-reconcile-i3-subscribe-snapshot-races-and-reconnect-revisions-42935ec3.md"
+        :sha256 "4a5c7b19c0c42ee239693bcc98ce00650595eaf2d90e725728154f4e5c6a6c80"}
+  :s8a {:path "docs/agile/kanban/oikos-record-consented-corrected-labels-and-leakage-safe-corpus-partitions-0d3ebf42.md"
+        :sha256 "4c07d3e942a54cecf91114609213b5e1dfa2485247a05285ddf77a6c3652a03a"}
+  :e4 {:path "docs/agile/kanban/oikos-shared-muse-i3-and-existing-emacs-capabilities-across-clients-e0a3251a.md"
+       :sha256 "ebb52c1277bdfd3b4176704dce81764ce76cb2c4b9684bb57cf9a82a4917e33d"}
+  :note {:path "docs/notes/oikos-local-first-workbench.md"
+         :sha256 "f15ffd991f469dbc78e6966fc46c3297fe3a06296f2f393bcbda33657aad92dc"}}
+ :historical-event-custody
+ {:path ".ημ/kanban-events/ledger.edn"
+  :original-head "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+  :original-bytes 301675
+  :original-lines 304
+  :original-sha256 "292fa2070657ad3d768376e707f80b1db00d930ee08076979a7a272cc0109624"
+  :current-bytes 357678
+  :current-lines 346
+  :current-sha256 "43232f1a34c8e3f37e236f1a39053e4bbb2da8dfe192fd634401facdd0fa337d"
+  :original-is-exact-byte-prefix true
+  :method "Compared git show HEAD:.ημ/kanban-events/ledger.edn byte-for-byte with the equal-length prefix of the working file. Read-only inspection, not Rheos board validation."
+  :interpretation "Lines 275 and 300 record historical creation/correction facts. Their earlier wording is not a reason to alter history. Later appended correction events plus the current canonical card requirements address the native findings; historical bytes remain intact."
+  :correction-events
+  [{:line 330 :event/id "kanban-3b9279b5-aafd-431a-90a9-128ce4415de0-1793724127356" :purpose :e2-lifetime}
+   {:line 340 :event/id "kanban-93a76dad-678a-4980-86fb-ba0fbb5e8203-1793724131196" :purpose :s2a-lifetime}
+   {:line 335 :event/id "kanban-59774be2-cc61-4708-9030-8b7b42935ec3-1793724129250" :purpose :s2b-reconnect}
+   {:line 343 :event/id "kanban-e616187d-ba13-42b1-addd-aa4d6244a5be-1793724132340" :purpose :e6-local-only}
+   {:line 342 :event/id "kanban-c703893f-aea4-41c2-9eab-c3bd37b28c9b-1793724131968" :purpose :s6a-local-only-and-dependencies}
+   {:line 346 :event/id "kanban-0e124c65-694e-44f1-9959-ee83e81ca22b-1793724210379" :purpose :s5a-observation-key-clarification}]}
+ :private-link-check
+ {:gitlink "ae35073719974c0df1d2dae301c2179fa4785641"
+  :method "git ls-tree HEAD oikos; token-stripped gh api contents requests at that exact ref; returned path/type/blob SHA/html_url inspected. Private document bodies were not needed for this URL-routing check."
+  :links [{:note-line 52
+           :url "https://github.com/open-hax/oikos/blob/ae35073719974c0df1d2dae301c2179fa4785641/docs/architecture/workbench.md"
+           :api-result :file
+           :blob-sha "8e89fbc6248b20b89ecce89d1f810ba4e8b34f14"}
+          {:note-line 53
+           :url "https://github.com/open-hax/oikos/blob/ae35073719974c0df1d2dae301c2179fa4785641/docs/research/perception-smoke-2026-11-03.md"
+           :api-result :file
+           :blob-sha "1aca60a5eb8366ebc5cb4e1724f69e09e8aea416"}]
+  :limitation "Authenticated repository access is still required; no anonymous-access or full child-implementation review is claimed."}
+ :settlement-boundary
+ {:kind :recommended-fixed-planning-contracts
+  :published-settlements 0
+  :native-resolutions 0
+  :fixed-sha-placeholder "<fix-commit-sha>"
+  :preconditions "Main owns commit, push, fresh native/head refresh and actual settlement. Substitute the real commit containing the inspected corrections, verify the final pushed bytes, reply before resolving, and use a writer identity distinct from the finding opener."
+  :meaning-of-fixed "Only the identified defect in the planning requirements is corrected. Future implementation tests, owner handoffs and live evidence below remain obligations, not executed results."
+  :no-credit [:native-approval :full-review-approval :review-round :required-ci
+              :board-readiness :implementation-completion :deployment :runtime-availability]}
+ :threads
+ [{:thread/id "PRRT_kwDOT3TWPM6zMzpM"
+   :root-comment/id 4456846184
+   :review/id 5755004149
+   :native/path "docs/agile/kanban/oikos-clio-desktop-journal-and-causal-edn-projections-e4415de0.md"
+   :native/line 26
+   :native/severity :p2
+   :native/body-sha256 "e7c906dc8b9d39a871139ef3aff1d7c33a653fd1742d4fd67efe73fdd2708e2e"
+   :finding "Epoch plus XID conflates distinct same-epoch window lifetimes, corrupting persistent membership/history and fresh-revision action targeting."
+   :disposition :planning-contract-corrected
+   :confidence 0.98
+   :current-fix "E2 requires epoch, XID and open/incarnation identity (creation revision), denies uncertain reconnect continuity and explicitly covers replay/membership/old-target isolation. S2A, S2B and S3A propagate the lifetime requirement."
+   :evidence [{:file :e2 :lines [26 40 58]}
+              {:file :s2a :lines [36 41 59]}
+              {:file :s2b :lines [37 41 59]}
+              {:file :s3a :lines [37 42]}]
+   :still-needed ["Implement and run same-epoch close/reuse CLJC replay and membership fixtures."
+                  "Prove old-lifetime targeting is denied even with a fresh observed revision, and uncertain reconnect fails closed."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: corrected the E2 lifetime contract to epoch + XID + open/incarnation identity and propagated it to S2A/S2B/S3A. E2 Scope/Verification and child acceptance now require same-epoch close/reuse replay, membership isolation, old-target denial even at a fresh revision, and fail-closed uncertain reconnect. Verified the planning text and appended correction event; these are required future tests, not executed runtime evidence."}
+  {:thread/id "PRRT_kwDOT3TWPM6zMzpT"
+   :root-comment/id 4456846195
+   :review/id 5755004149
+   :native/path "docs/agile/kanban/oikos-record-consented-corrected-labels-and-leakage-safe-corpus-partitions-0d3ebf42.md"
+   :native/line 10
+   :native/severity :p2
+   :native/body-sha256 "d6037930301e5e815d18517a54b37481f431dd1468019c8d23ac8a3684216bf4"
+   :finding "Whole-E7 prerequisites make optional blocked 12B/proxx comparison prevent local corpus work on S8A and E8."
+   :disposition :planning-contract-corrected
+   :confidence 0.98
+   :current-fix "S8A consumes S2A/S5A/S6A/S7A artifacts, not whole E7; E8 replaces E7 with S7A in frontmatter and Dependencies. S7B remains optional to corpus work, with S6A retained before governed comparison/export and explicit separation of parent organization from child execution gates."
+   :evidence [{:file :s8a :lines [4 55 56 57 58 62]}
+              {:file :e8 :lines [4 57 61]}
+              {:file :s7b :lines [4 57 68]}
+              {:file :s8b :lines [4 36 57]}]
+   :still-needed ["Main may obtain current Rheos graph/readback evidence; this verification does not validate board state."
+                  "Later demonstrate local corpus work is independent of unavailable optional comparisons while remote comparison/export denies missing GovOne admission."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: removed whole E7 from both S8A and E8 prerequisites. S8A names S2A/S5A/S6A/S7A and E8 names the S7A baseline rather than optional S7B completion. Current frontmatter and Dependencies agree; governed comparison and export retain S6A admission. Verified current card/diff text and appended dependency/correction events; no implementation or readiness result is claimed."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Id"
+   :root-comment/id 4456856398
+   :review/id 5755016882
+   :native/path ".ημ/kanban-events/ledger.edn"
+   :native/line 275
+   :native/severity :p1
+   :native/severity-note "Preserve Major classification despite the P2 wording in the title."
+   :native/body-sha256 "69ba5842e4b1fef19179efe7f8af5c0f703882f61119aed182bc8533dbc64955"
+   :finding "Historical E2 creation text uses epoch plus XID; require a window lifetime, same-epoch close/reuse checks and invalidation after uncertain reconnect."
+   :disposition :planning-contract-corrected-by-append
+   :confidence 0.99
+   :current-fix "Current E2/S2A/S2B requirements distinguish lifetimes. Ledger lines 330, 335 and 340 append their corrections; the original 304-line ledger, including creation line 275, remains an exact byte prefix. No historical rewrite is necessary or recommended."
+   :evidence [{:file :e2 :lines [26 40 58]}
+              {:file :s2a :lines [36 41 59]}
+              {:file :s2b :lines [37 41 59]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [275 330 335 340]}]
+   :still-needed ["Same-epoch close/reuse and uncertain-reconnect implementation fixtures, including membership/action targeting."
+                  "Main must retain the exact historical prefix when committing and publishing these appended corrections."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: preserved the historical E2 creation event at ledger line 275 and appended correction kanban-3b9279b5-aafd-431a-90a9-128ce4415de0-1793724127356, with child corrections. Current E2/S2A/S2B require epoch + XID + incarnation, same-epoch close/reuse fixtures and fail-closed uncertain reconnect. Byte-prefix comparison confirms history was not rewritten. The planning requirement is corrected; implementation tests remain future obligations."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Ij"
+   :root-comment/id 4456856407
+   :review/id 5755016882
+   :native/path ".ημ/kanban-events/ledger.edn"
+   :native/line 300
+   :native/severity :p1
+   :native/severity-note "Preserve Major classification despite the P2 wording in the title."
+   :native/body-sha256 "f18623f3bd71bd522772270cea6a7f02322c4c3dfc3edda1adfb6c05b0218868"
+   :finding "The earlier dependency correction leaves E6's zero-network local_only criterion contradictory to admitted local-service traffic."
+   :disposition :planning-contract-corrected-by-append
+   :confidence 0.98
+   :current-fix "E6 root AC/Verification now permit explicitly authenticated allowlisted local-service/loopback traffic, deny unauthorized external/cloud/third-party and untrusted local/private-IP routes, and retain GovOne scopes. Parent correction event at line 343 complements the preserved historical event at line 300. No loopback-only restriction excludes an authorized local service on another host."
+   :evidence [{:file :e6 :lines [36 40 62]}
+              {:file :s6a :lines [41 65 67 69]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [300 342 343]}]
+   :still-needed ["Instrumented permit case for an authenticated allowlisted local service, including an authorized non-loopback local-service destination."
+                  "Deny external destinations, untrusted private IPs, missing/expired/revoked scope, outage and direct retry without transport effects."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: appended parent correction kanban-e616187d-ba13-42b1-addd-aa4d6244a5be-1793724132340 without altering the historical line-300 event. E6 AC/Verification now match S6A: authenticated allowlisted local-service/loopback transports may be permitted, while unauthorized external/cloud/third-party and untrusted local/private-IP traffic are denied. Verified current text and preserved ledger prefix; the permit/deny scenarios remain future tests, not live network evidence."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Iv"
+   :root-comment/id 4456856420
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+   :native/line 36
+   :native/severity :p2
+   :native/body-sha256 "c3a23c0c1cc422d91356f92682a9023b90f1f84e1a89b9617649cac9b436ebfb"
+   :finding "Supplier text and model facts need distinct provenance, not necessarily unequal text values."
+   :disposition :planning-contract-corrected
+   :confidence 0.99
+   :current-fix "S5A uses the requested separately-attributed-even-when-values-match wording and explicitly plans an equal-text/distinct-provenance fixture."
+   :evidence [{:file :s5a :lines [36 43 74]}]
+   :still-needed ["Run the synthetic equal-text fixture and assert separate supplier/model provenance survives index projection and retrieval."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: S5A AC now says supplier text and model-derived facts remain separately attributed even when their values match. Verification explicitly requires an equal-text/distinct-provenance synthetic frame case. Verified the wording and test requirement; the fixture is not claimed executed."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1I5"
+   :root-comment/id 4456856431
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+   :native/line 41
+   :native/severity :p2
+   :native/body-sha256 "a2fd5c4fb2e7f573dab6610bb8ad6c51b6873362fb2e3c26f73b20892f16dc78"
+   :finding "No duplicate index is untestable without a canonical projection key and repeated-frame/delivery behavior."
+   :disposition :planning-contract-corrected
+   :confidence 0.97
+   :current-fix "S5A proposes an Oikos portable-law key: originating admitted Clio capture observation/event ID + supplier/model identity and version + render/transform version. Same-key exact redelivery adds no duplicate, conflicting event-ID reuse rejects, identical-byte recapture is a new observation, and changed model/render version is separately attributed. window:<class>:<wid> is only a mutable retrieval alias. The later clarification disclaims existing-adapter implementation."
+   :evidence [{:file :s5a :lines [37 38 43 76]}
+              {:file :s2a :lines [41 59]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [325 346]}]
+   :still-needed ["Implement/test exact-event idempotence, conflicting reuse rejection, identical-content recapture, distinct supplier identities with equal version strings, model/render changes and alias updates without history overwrite."
+                  "Verify the existing desktop-index adapter conforms to this proposed product law; this assessment does not assert that it already does."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: replaced the undefined no-duplicate promise with an explicit Oikos planning contract: source capture observation/event ID + supplier/model identity/version + render/transform version. Exact-key redelivery is idempotent, conflicting event reuse rejects, identical-byte recapture is a new observation and changed versions remain separately attributed. S5A AC/Verification and appended clarification define the cases; retrieval aliases are not observation identity. Verified contract text only, not existing-adapter compliance or executed tests."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1I8"
+   :root-comment/id 4456856439
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-admit-sandbox-runtime-workspaces-with-leases-and-deliberate-human-joining-43e11d9a.md"
+   :native/line 36
+   :native/severity :p2
+   :native/body-sha256 "5f49afa0623b2647beacc911e22271738f08257a37b0c84823d33ace54775709"
+   :finding "Movement preconditions need explicit ownership admission, matching revision and an unexpired lease."
+   :disposition :planning-contract-corrected
+   :confidence 0.99
+   :current-fix "S3B now requires explicit targeted-lifetime/resource ownership admission, matching observed revision and unexpired scoped lease, with explicit deny conditions and zero denied IPC mutation fixtures."
+   :evidence [{:file :s3b :lines [36 41 61]}]
+   :still-needed ["Sandbox assertions for missing/denied ownership, stale revision and expired lease, with no denied movement or protected-focus change."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: S3B movement now requires explicit ownership admission for the targeted lifetime/resource, a matching observed revision and an unexpired scoped lease. Missing/denied ownership, mismatched revision and expiry explicitly deny mutation; Verification requires zero denied IPC effects. Verified the corrected planning requirement, not an executed sandbox run."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1JC"
+   :root-comment/id 4456856448
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-consented-labels-and-bounded-colab-training-corpus-9faa6482.md"
+   :native/line 40
+   :native/severity :p2
+   :native/body-sha256 "0d464a0577784dfc2887756ed5c2c6bcc5d5738d078a56c705b3c41fb8c74d0b"
+   :finding "Parent and child verification omit rejection of a reused pilot budget and missing resource-bound proof."
+   :disposition :planning-contract-corrected
+   :confidence 0.99
+   :current-fix "Both E8 and S8B Verification explicitly deny reused historical pilot budget and missing resource-bound proof, retaining missing fresh budget, consent/policy/approval and uncertain-teardown denials and zero-allocation holdback."
+   :evidence [{:file :e8 :lines [36 40 61]}
+              {:file :s8b :lines [37 42 61]}]
+   :still-needed ["Run synthetic dry-run denial fixtures for reused pilot budget and missing resource proof alongside the existing gate failures; prove zero allocation."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: E8 and S8B now explicitly require dry-run denial for reused historical pilot budgets and missing resource-bound proof, alongside absent fresh budget/consent/policy/approval and uncertain teardown. Historical pilot authority does not transfer and zero allocation remains required. Verified both planning verification lists; no export, allocation or gate execution is claimed."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1JH"
+   :root-comment/id 4456856458
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-empirical-local-gemma-and-ocr-qualification-66198864.md"
+   :native/line 35
+   :native/severity :p2
+   :native/body-sha256 "38874dbd31ae734223ad0c4e2e100bfb4c41f20a188b1e09eb05833cb1e626e8"
+   :finding "E7 incorrectly calls the disappeared transient port45265 runner active."
+   :disposition :planning-contract-corrected
+   :confidence 0.99
+   :current-fix "E7 root AC says previously observed host ollama-owned transient llama-server, then reported disappeared; absent8082 is retained and neither endpoint is active without fresh identity/resource probes. S7A carries the same distinction."
+   :evidence [{:file :e7 :lines [35 59 66]}
+              {:file :s7a :lines [36 42 68]}
+              {:file :note :lines [96 97 98 99 100]}]
+   :still-needed ["A separately authorized fresh endpoint/model/mmproj/hash/context/resource probe before any active-target or measurement claim; none performed here."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: E7 AC now records absent8082 and the previously observed, subsequently disappeared port45265 host ollama-owned transient llama-server. Neither is an active qualification target without fresh identity/resource probes; S7A mirrors that requirement. Verified current wording and preserved dated reports; no fresh runtime availability or model-quality result is claimed."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1JM"
+   :root-comment/id 4456856471
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-govone-egress-admission-and-knoxx-lens-evidence-6244a5be.md"
+   :native/line 36
+   :native/severity :p2
+   :native/body-sha256 "41549adef187353d7589358d066bddcde32e710336474db3e1f18ad90013eee0"
+   :finding "E6 zero-network local_only AC contradicts S6A's authorized local-service/loopback transport."
+   :disposition :planning-contract-corrected
+   :confidence 0.99
+   :current-fix "E6 root AC and Verification now share S6A's definition: explicitly authenticated allowlisted local-service transport may pass, unauthorized external/cloud/third-party and untrusted local/private-IP routes deny; no direct retry."
+   :evidence [{:file :e6 :lines [36 40 62]}
+              {:file :s6a :lines [41 65 67 69]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [342 343]}]
+   :still-needed ["The synthetic permit/deny network harness across text/image/derived/tool paths, revoked scope, outage and attempted bypass."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: replaced E6's unqualified zero-network criterion with the S6A local_only contract: only explicitly authenticated allowlisted local-service/loopback transport may pass; unauthorized external/cloud/third-party and unauthenticated/unallowlisted local/private-IP routes deny without direct retry. E6 Verification now names those distinct cases. Verified parent/child planning consistency; runtime enforcement remains to be tested."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1JU"
+   :root-comment/id 4456856486
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-implement-logical-memberships-and-speculative-edn-projection-branches-2549ba0d.md"
+   :native/line 37
+   :native/severity :p2
+   :native/body-sha256 "a2c3092615f83c4b37e8f7f0375c6ca3ac7d4112b80cd708762e1584eb1a730a"
+   :finding "Stale branch revisions lack an EDN conflict shape, branch identity and no-mutation guarantee."
+   :disposition :planning-contract-corrected
+   :confidence 0.98
+   :current-fix "S3A portable product contract names branch ID, base/proposed revisions and observed revision, an explicit :conflict/:stale-revision EDN result, and unchanged branch/membership/history/desktop state. Reconciliation requires a fresh proposal, not silent rebase."
+   :evidence [{:file :s3a :lines [37 38 42 60]}]
+   :still-needed ["Implement the portable branch result schema and exact-shape stale-revision fixture with before/after snapshots and zero-effect adapter spies."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: S3A AC now defines :branch/id, base/proposed revisions and an EDN :conflict/:stale-revision result carrying the observed revision. A conflict cannot mutate branch, membership, admitted history or desktop; reconciliation needs a fresh proposal. Verification requires exact result shape and unchanged snapshots. This verifies the new planning contract, not an implemented branch operation."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Je"
+   :root-comment/id 4456856497
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-implement-preview-check-apply-rollback-through-services-owned-generations-86925c3c.md"
+   :native/line 41
+   :native/severity :p2
+   :native/body-sha256 "53f9121b39e293fd68e2db1be94919465e38d414f795333ac32ebd3fa41ca97a"
+   :finding "Generation Verification omits explicit effect-free preview/check, unapproved apply denial, dirty-target holds and preservation of unrelated Services paths."
+   :disposition :planning-contract-corrected
+   :confidence 0.99
+   :current-fix "S1B Verification explicitly requires unchanged hashes/zero lifecycle or process mutation for preview/check, zero writes for unapproved apply, preserved dirty bytes, unchanged unrelated Services paths/services, secret-free plans and exact rollback at every interrupted stage after the actual owner seam exists."
+   :evidence [{:file :s1b :lines [36 37 38 42 61]}]
+   :still-needed ["Actual reviewed Services generation seam, followed by isolated filesystem/process fixtures proving every enumerated denial, preservation and interrupted-stage rollback condition."
+                  "Mocks cannot establish availability of the missing owner API."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: S1B Verification now explicitly asserts effect-free preview/check, denied unapproved apply with zero writes, dirty-target holds and unchanged unrelated Services paths/services, preserving hash, secret-free-plan and every-interrupted-stage exact rollback checks. The owner-seam prerequisite remains explicit. Verified the planning checklist only; no adapter or rollback run is claimed."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Jn"
+   :root-comment/id 4456856511
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-isolated-generations-and-shx-muse-configuration-boundaries-6f7533de.md"
+   :native/line 26
+   :native/severity :p2
+   :native/body-sha256 "1aa19192cb4724b2925667c9a4e8b56059a374b80a6b3cb6dd77104d7628f15d"
+   :finding "Naming Services/shx ownership alone does not bind a canonical generation handoff or prevent an Oikos-owned second supervisor."
+   :disposition :planning-contract-corrected-external-handoff-still-blocked
+   :confidence 0.95
+   :current-fix "E1 adds a concrete S1B acceptance gate: no apply/rollback qualification without the actual reviewed Services-owned local-generation entry point/version/owner handoff. S1B Scope enumerates versioned plan/result shapes, approval/revision binding, ownership and interrupted apply/rollback semantics. It explicitly records the seam as unestablished, distinguishes the documented DO production lane and shx/envm rendering from promotion, and forbids a second supervisor."
+   :evidence [{:file :e1 :lines [26 37 41 59]}
+              {:file :s1b :lines [28 38 42 61]}
+              {:path ".ημ/kanban-events/ledger.edn" :lines [332 336]}]
+   :interpretation "The planning defect is corrected by an explicit, concrete owner-handoff gate rather than inventing an existing API. This is not evidence that the requested seam has already been supplied."
+   :still-needed ["Services owner must supply/review the real canonical entry point and versioned generation contract, with approval/revision, ownership, interrupted apply and rollback semantics."
+                  "Later integration must prove actual delegation through that seam and absence of a second supervisor. No independent Services source/runtime audit was performed in this bounded review."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: E1/S1B now make an actual reviewed Services-owned local-generation entry point, versioned contract and explicit owner handoff a blocking acceptance condition. S1B enumerates plan/result, approval/revision, ownership, interrupted apply and rollback obligations and forbids a second Oikos supervisor. The plan no longer assumes the DO lane or shx/envm rendering supplies generation promotion. Verified the planning gate; the generic owner seam remains unestablished and apply/rollback completion remains blocked, not implemented."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1Jv"
+   :root-comment/id 4456856521
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-qualify-client-adapter-matrix-without-duplicating-domain-contracts-5ec2aaf3.md"
+   :native/line 4
+   :native/severity :p2
+   :native/body-sha256 "0ccbeec817f666ddd88d2a9c864c59e9729e0f2cc00d29d3408e02c4ac6e52ba"
+   :finding "S4B Dependencies omits S6A while S6A/E6 human-readable dependencies retain obsolete whole E4 entries."
+   :disposition :planning-contract-corrected
+   :confidence 0.98
+   :current-fix "S4B frontmatter/Dependencies both list S4A+S6A. E6 both list E2+S4A. S6A both list the more precise S2A+S4A artifact prerequisites; its appended correction explicitly supersedes older E2/whole-E4 prose for child execution. E4 parent organization is not a completion gate."
+   :evidence [{:file :s4b :lines [4 56 57 60 62]}
+              {:file :s6a :lines [4 57 58 69]}
+              {:file :e6 :lines [4 56 57 60 62]}
+              {:file :e4 :lines [59 61]}]
+   :historical-note "S6A's older appended E2+S4A prose is preserved, not rewritten. The later precise S2A+S4A correction and current frontmatter/Dependencies control child execution."
+   :still-needed ["Main can obtain current native Rheos prerequisite readback; no alternate board validator is introduced here."
+                  "Later per-client pre-admission denial and post-admission scoped qualification, with unavailable transport/auth remaining blockers."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: synchronized current Dependencies prose with frontmatter: S4B is S4A+S6A, E6 is E2+S4A, and S6A uses the precise S2A+S4A producer artifacts rather than whole E4. A later appended correction supersedes historical S6A dependency prose without rewriting it. Real remote tool-result qualification retains S6A admission; parent hierarchy adds no hidden completion edge. Verified current card/diff consistency only, not board readiness or completed client qualification."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1J0"
+   :root-comment/id 4456856532
+   :review/id 5755016882
+   :native/path "docs/agile/kanban/oikos-record-consented-corrected-labels-and-leakage-safe-corpus-partitions-0d3ebf42.md"
+   :native/line 37
+   :native/severity :p2
+   :native/body-sha256 "28067a796bafe20095f6f5009679cdf2716b361bdd3f3fe48b2e8f16f8199fec"
+   :finding "Unspecified temporal/app/source family grouping can separate corrections, rejected actions or OCR boxes from their source split."
+   :disposition :planning-contract-corrected
+   :confidence 0.98
+   :current-fix "S8A defines a versioned source-family key from source/session identity, app identity and a frozen temporal policy. Source IDs/family keys follow transitive corrections, rejected actions and OCR boxes; actual-identity/lineage/family members stay in one split. Missing/conflicting lineage rejects; similarity flags leakage but establishes no identity or merges."
+   :evidence [{:file :s8a :lines [36 37 41 62]}]
+   :still-needed ["Implement source/correction-of-correction/rejected-action/OCR-box same-family/split synthetic fixtures and missing/conflicting lineage rejection."
+                  "Audit cross-split near-duplicates without similarity-based identity or family merging; verify coordinate/source lineage through export preparation."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: S8A now defines a versioned source/session+app+frozen-time family key and retains source observation/family lineage through transitive corrections, rejected actions and OCR boxes. Actual-identity, correction-lineage and family members stay in one split; missing/conflicting lineage rejects. Verification explicitly includes source plus correction-of-correction and derivative rows in one split. Verified planning text; the synthetic split/leakage tests remain to be implemented and run."}
+  {:thread/id "PRRT_kwDOT3TWPM6zM1KD"
+   :root-comment/id 4456856559
+   :review/id 5755016882
+   :native/path "docs/notes/oikos-local-first-workbench.md"
+   :native/line 53
+   :native/severity :p2
+   :native/body-sha256 "f2a1b34db19037ff2ecfc378468e33b831075b2dc2cb28a605f8335f5b0e3b96"
+   :finding "Relative links into the Oikos submodule resolve as nonexistent Foresight files on GitHub."
+   :disposition :planning-document-corrected
+   :confidence 0.99
+   :current-fix "Both references are direct open-hax/oikos blob URLs pinned to ae35073719974c0df1d2dae301c2179fa4785641, matching the parent gitlink. Note explicitly states private access is required and GitHub does not traverse ordinary relative file links through a gitlink. Both exact-ref contents reads returned file metadata."
+   :evidence [{:file :note :lines [51 52 53 54 55]}
+              {:artifact-section :private-link-check}]
+   :still-needed ["Main must preserve the exact-ref URLs in the pushed corrective commit; consumers still need private repository access. No runtime test is needed to establish URL routing."]
+   :recommended-settlement "Fixed in <fix-commit-sha>: replaced both submodule-relative references with direct open-hax/oikos blob URLs pinned to ae35073719974c0df1d2dae301c2179fa4785641, matching the parent gitlink. Token-stripped authenticated GitHub contents reads at that exact ref returned both files and their expected URLs. The note retains the private-access requirement; no anonymous access is claimed."}]
+ :review-body-items
+ [{:review/id 5755016882
+   :item/id "cr-comment:v1:5a08a09292697bdfbfc79de8"
+   :native/path "docs/agile/kanban/oikos-named-collaborative-projection-spaces-with-deliberate-joining-2eb908b4.md"
+   :native/line 40
+   :native/label "Nitpick / Trivial"
+   :finding "E3 Verification omits denied admission, stale revisions and accepted human join scenarios and expected observations."
+   :disposition :planning-contract-corrected
+   :confidence 0.99
+   :current-fix "E3 Verification requires explicit denials/conflicts and zero movement for denied ownership/stale revision, an observed join/membership result for accepted human join, and zero movement for declined join. S3B mirrors these checks."
+   :evidence [{:file :e3 :lines [35 36 40 58]}
+              {:file :s3b :lines [36 37 41]}]
+   :still-needed ["Future CLJC and nested-i3 scenarios must actually demonstrate each denial and accepted-join observation without a live desktop target."]
+   :recommended-settlement "review-id:5755016882\n- Fixed cr-comment:v1:5a08a09292697bdfbfc79de8 in <fix-commit-sha>: E3 Verification now explicitly requires denied ownership/stale revision to produce denials/conflicts with zero movement and accepted human join to produce an observed join/membership result; declined join remains effect-free. S3B mirrors the scenarios. Verified planning requirements only; no executed sandbox evidence or readiness claim."}
+  {:review/id 5755016882
+   :item/id "cr-comment:v1:efd09d07c97f26c80451d912"
+   :native/path "docs/agile/kanban/oikos-adapt-existing-desktop-index-to-bounded-local-ocr-and-e4b-perception-e81ca22b.md"
+   :native/line 28
+   :native/label "Nitpick / Trivial; Coding guidelines"
+   :finding "Perception runtime adapter plans precede portable CLJC provenance, supplier/fact attribution, resource admission and index-projection contracts."
+   :disposition :planning-contract-corrected
+   :confidence 0.97
+   :current-fix "S5A Scope now explicitly orders portable .cljc shapes/pure provenance, supplier attribution, resource admission and projection laws before NPU OCR/E4B outer adapters. AC defines provenance/observation/projection identity and distinct attribution. The retained frozen-resource-profile correction rejects missing/unfrozen/incomplete profiles and requires explicit memory/CPU/queue/deadline/stop bounds with overload/reconnect tests. Runtime-specific fields are not domain authority."
+   :evidence [{:file :s5a :lines [28 36 37 38 39 43 70 72 74 76]}
+              {:file :e5 :lines [67]}]
+   :still-needed ["Implement the portable schemas and pure provenance/attribution/admission/projection laws before effectful adapters."
+                  "Run frozen synthetic and resource-profile negative/overload/reconnect fixtures; retain actual profile identity and measurements only after separately admitted execution. No numeric resource thresholds or runtime qualification are invented here."]
+   :recommended-settlement "review-id:5755016882\n- Fixed cr-comment:v1:efd09d07c97f26c80451d912 in <fix-commit-sha>: S5A now requires portable .cljc shapes and pure provenance, supplier attribution, resource-admission and index-projection laws before binding NPU OCR/E4B adapters. AC/Verification specify provenance and projection identities, equal-text attribution and frozen-profile admission/overload/reconnect requirements; runtime-specific fields cannot become domain authority. Verified the planning order and contract/test obligations, not implemented laws or executed runtime tests."}]
+ :result
+ {:planning-findings-assessed 18
+  :planning-findings-corrected 18
+  :still-unfixed-native-planning-findings []
+  :important-remaining-obligations ["All corrections still require the main session's commit/push and final-byte/native-context refresh before publication of settlement."
+                                  "The Services local-generation owner seam is explicitly unestablished and blocks later S1B apply/rollback completion; correcting this planning requirement does not supply the seam."
+                                  "All listed future implementation/sandbox/resource/transport/corpus tests remain future evidence; this assessment ran none of them."
+                                  "All 16 native threads remained unresolved at collection. These recommended bodies are not actual GitHub settlements."
+                                  "No review approval, review-loop convergence, board readiness, implementation completion, model availability or deployment verdict is issued."]
+  :rejection-recommendations []
+  :history-rewrite-recommendations []}
+ :artifact-integrity
+ {:edn-read :passed
+  :selected-native-thread-id-set :exact-match-16
+  :unique-native-thread-ids 16
+  :body-item-id-set :exact-match-2
+  :bound-card-and-note-hashes-checked 25
+  :source-hash-drift []
+  :ledger-hash :matched
+  :final-native-refresh "Observed PR head unchanged; all 16 root IDs/edit times unchanged, one comment each, all unresolved; outer and nested pagination exhausted."
+  :scope "These are derived-artifact integrity/readback checks, not an implementation test suite, Rheos board validation or review approval."}
+ :reflection
+ {:friction :bounded
+  :lesson "Bind each native root/body-item to its actual request and the current canonical requirements. An immutable creation event is historical evidence, not mutable current specification; verify appended corrections and preserve the old byte prefix."
+  :spore-created false
+  :ledger-writes "None: main owns receipt/reflection ledgers, commits, push and settlement; this subagent's only output is the permitted new derived-verification artifact."}}

@@ -1,0 +1,25 @@
+{:incident/id :typed-cwd-dependency-resolution-v1
+ :status :contained-lane-paused-pending-reviewed-wrapper
+ :worker "ses_e5be4d9e6ffeENBfWl2oOAr0M2"
+ :source-report "../reviews/typed-seq-annotation-fix-v2.edn"
+ :independent-auditor "ses_e5b8cad59ffemRvCslRNTfFXAX"
+ :trigger "An unguarded bb -e EDN report validation was launched from the typed.clojure checkout. Its project bb.edn caused implicit dependency resolution."
+ :reported-coordinates ["selmer/selmer:1.12.62" "metosin/malli:0.20.1"
+                        "hickory/hickory:0.7.1" "org/jsoup/jsoup:1.9.2"
+                        "org/clojure/test.check:1.1.3" "viebel/codox-klipse-theme:0.0.1"
+                        "borkdude/edamame:1.5.37"]
+ :violation [:no-network-outside-isolated-acquisition :no-global-cache-write]
+ :evidence {:reported-output :dependency-downloads-from-Maven-Central-and-Clojars
+            :raw-command-output-retained false :exact-command-subsequently-reported true
+            :command-start-end :unknown
+            :auditor-observation "Metadata exists in corresponding seven Maven coordinate/version directories, with mtime window 2026-11-03 20:44:53.972–20:44:54.834 -0600. No pre-command baseline exists; those times do not establish which files were created or modified by this command."
+            :extent :not-fully-attributable
+            :guarded-red-and-attempt-log-hashes :matched-by-auditor
+            :selected-classpath-list-hash :matched-not-all-referenced-artifacts-rehashed}
+ :containment "Typed execution/acquisition paused, evidence and RED commit retained, no global files removed or reset. Unrelated isolated GovOne acquisition did not use these global paths and remains separately bounded."
+ :source-result {:red "f0cb23fc09dbbef8ed5525aab20353add60fe4cf"
+                 :green nil :annotation-restored-to-base true
+                 :shx-source-or-lock-changed false}
+ :qualification "The lack of GREEN is an unfinished correction, not by itself a second network incident. No replacement, warning-free result, cache provenance or shx release credit is inferred."
+ :next-decision "../decisions/typed-guarded-continuation-and-parser-source-authorization.edn"
+ :privacy "No model/service execution, personal-data capture or secret disclosure was established by this audit; this is not proof that every effect has been excluded."}

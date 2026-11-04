@@ -1,0 +1,31 @@
+{:decision/id :oikos-local-review-admission-20261103
+ :decision/source :explicit-current-user-direction
+ :decision/quote "yea you're using an old .agents/skills/pr-flow any way. And the ultra code, you already did reviews. None of my review agent workflows can keep up with how fast you work. Just go."
+ :decision/effect :proceed-with-reviewed-implementation-without-hosted-queue-wait
+ :planning-evidence {:per-child-independent-reviews 16
+                     :candidate-custody "skeptics/reconciliation.edn"
+                     :confirmed-corrections "skeptics/consensus-fix-verification.edn"
+                     :disputed-adjudication "skeptics/disputed-adjudication.edn"
+                     :clarification-verification "skeptics/adjudicated-fix-verification.edn"
+                     :s1a-spec "95dfbdb26f65fac8b17bcb11cd192ba47d8efe3c"}
+ :execution {:board-authority :rheos
+             :admit-only-when-prerequisite-artifacts-verified true
+             :s1a-official-state :in_progress
+             :s1a-admission-path [:incoming :accepted :breakdown :ready :todo :in_progress]
+             :s1a-implementation-session "ses_e5da4fe7affeO00KhPEM2Tu3KC"
+             :receipt-repair-implementation-session "ses_e5d978dc2ffez0jn0N4IvKqPji"
+             :post-implementation-independent-review :required
+             :fresh-epic-integration-after-both-children :required}
+ :safety-unchanged [:synthetic-only :sandbox-dev-only :agent-owned-resources
+                    :operator-effects-require-approval :no-personal-capture
+                    :existing-model-resources-only :no-load-or-restart
+                    :govone-disclosure-admission :zero-spending
+                    :remote-client-publication-held :installed-promotion-held]
+ :not-granted [:fabricated-native-approval :suppressed-test-failure
+               :unverified-successor-dispatch :self-approval :force-push
+               :secret-change :workflow-fork-guard-removal]
+ :review-route-planning {:separately-authorized true :not-a-current-implementation-blocker true
+                         :new-infrastructure-started false
+                         :scout-dispatch "ses_e5d669c68ffeWqKH0iTnEfLgbn"
+                         :scout-result :model-unavailable :evidence-credit 0}
+ :completion-credit 0}

@@ -1,0 +1,48 @@
+{:report/id :govone-pinned-dependency-cache-v3
+ :status :partial-stopped-additional-missing-checksum
+ :authorization ".ημ/runs/oikos-program-20261103/decisions/govone-go-cmp-checksum-proof-authorization.edn"
+ :prior-report ".ημ/runs/oikos-program-20261103/reviews/govone-pinned-dependency-cache-v2.edn"
+ :proof {:coordinate "github.com/google/go-cmp@v0.6.0"
+         :lookup "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0"
+         :lookup-sha256 "38edf27f7d613b6e472a9d40881b1882e11844f841eec05fe2799c830edb9d47"
+         :pinned-key "sum.golang.org+033de0ae+Ac4zctda0e5eza+HJyk9SxEdh+s3Ux18htTTAD8OuAn8"
+         :key-source "Qualified Go 1.27.1 src/cmd/go/internal/modfetch/key.go"
+         :verifier {:signature "/usr/bin/openssl pkeyutl -verify -pubin -keyform DER -rawin"
+                    :openssl-version "OpenSSL 3.0.13 30 Jan 2024"
+                    :openssl-sha256 "b4f547c0f16272d1cc7f870330a6f2c243710c335e7a99c734ff7a0c6fdb2503"
+                    :signature-result "Signature Verified Successfully"
+                    :inclusion "Independent Python RFC6962 record inclusion calculation using seven bounded checksum database tiles; calculated root matches signed tree. This is not an invocation of Go's sumdb client."
+                    :script "sumdb_proof.py"
+                    :script-sha256 "6a515b4dac0f661bba9ad332f3e9e2d70e8003740cbb2e78989c749284ef016c"
+                    :limitation "Started from an empty checkpoint; no prior independently witnessed tree consistency or cross-log gossip claim."}
+         :record-id 19966894 :signed-tree-size 70756716
+         :signed-tree-root "cYfRHo/dOoMZHABfMnXXzugh4xaIpgmu1zgoPh4hfak="
+         :source-h1 "h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI="
+         :go-mod-h1 "h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY="
+         :proof-artifacts "sumdb-proof/" :result-sha256 "f58d246c712495b26111137bad788f3bad535b76e34be195e30c25e6c1f77797"
+         :verified-sums-sha256 "6ba1f1ec5cac9d186a7701f560308f919d1d8ddccb49cbf2aaf6281a48268c74"
+         :go-mod {:download-bytes 41 :sha256 "e7c7669d4a1dd589ba3e024ba27f43f293db611fe075ce20d7b884370d63febd" :h1-matched true}
+         :source-zip :not-downloaded :source-h1-applied-to-archive false}
+ :broker {:path "budget_broker_v3.py" :sha256 "085dbfb866045d2cfdc0ee61451f445db1fc4e6a180e83e98af8f3734b09185b"
+          :inventory "broker-inventory-v3.json" :inventory-sha256 "b591df434fef2cf1d384b43d6d5da6b77233d19e82f081fd1927537fc9fa5dc9"
+          :verified-mod-count 46 :new-mod-bytes 41
+          :snapshot "main-proof-snapshot/go.sum" :snapshot-sha256 "a29e4e858d461d7fb61ff4a6132105a3a8206c68770d7fea6fa4e7127f6d8597"
+          :snapshot-scope "Private scratch copy of original go.sum plus exactly the two verified go-cmp sumdb lines; owner file not changed."
+          :accounting "Cooperating single-writer rounded logical accounting plus 16 MiB reserve, not an OS-enforced quota. Proof fetches are bounded to 16 KiB per HTTPS response and 30-second socket timeout; no total request wall-clock bound is asserted."}
+ :offline {:command "go list -e -mod=readonly -m -json all" :exit 0
+           :result "Diagnostic only: module lookup errors remain. Graph is not qualified."
+           :environment "GOTOOLCHAIN=local GOWORK=off GOENV=off GOVCS=*:off GOPROXY=off GOSUMDB=off GOTELEMETRY=off, x86_64 socket-denying seccomp and output file size limit."
+           :strict-list :not-rerun :go-mod-verify :not-run :selected-graph :provisional}
+ :blocker {:coordinate "golang.org/x/term@v0.45.0"
+           :evidence ["graph4.stdout" "main/go.sum" "modcache/cache/download/golang.org/x/net/@v/v0.57.0.mod" "modcache/cache/download/golang.org/x/crypto/@v/v0.55.0.mod"]
+           :reason "Provisional diagnostic graph names this additional coordinate; original go.sum contains neither its module nor source checksum. Authorization expressly excludes additional missing-pin adjudication. Stopped before lookup or source download for it. Further missing pins may exist."}
+ :scratch {:path "/tmp/opencode/oikos-govone-deps-66a5b10a-0ac0-46f3-bf88-26763dd3d829"
+           :logical-regular-bytes 213642 :rounded-accounted-bytes 1060864 :reserve-bytes 16777216
+           :accounted-plus-reserve 17838080 :allocation-bytes 805306368 :retained true
+           :observation "Accounting observed before writing this external review."}
+ :owner {:head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4" :manifest-status :clean
+         :go-mod-sha256 "d98ac1461da72048026c141cd1375421c6934e6c3937cc5048c296c594b218dd"
+         :go-sum-sha256 "8991f8bfbeccb3e31df27a42f4901a5a0a790e5c2937c4c55da93f5d30db9a90"}
+ :verification "python3 -B -c compile(...) for each Python script exited 0; proof execution exited 0; broker executed and recorded diagnostic stop. No application build, test or runtime authorized or run."
+ :effects "No owner edits, lock changes, global cache writes, application, service, listener, board, ledger, PR, commit or push."
+ :next "Coordinator: adjudicate the additional missing checksum before extending trust; do not infer authorization from the go-cmp decision."}

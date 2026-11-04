@@ -1,0 +1,173 @@
+{:plan/id :oikos-s4a-dispatcher-plan-v2
+ :plan/date "2026-11-03"
+ :plan/kind :narrow-planning-correction-only
+ :plan/status :pending-same-independent-reviewer-confirmation
+ :authority :none
+ :task/uuid "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :implementation-permission-now false :effect-permission-now false
+ :runtime-qualification false :whole-s4a-accepted false :whole-s2a-accepted false
+ :fresh-epic-integration false :native-approval-credit 0 :epic-completion-credit 0
+ :derivation
+ {:v1 {:path "s4a-dispatcher-plan-v1.edn"
+       :sha256 "7a489544001376cf5a272fe7bebe74c0e58d5892c4db6c8b8c43b7206d483ecf"
+       :actual-full-file-read-and-hashed true :preserved-immutable true}
+  :independent-review {:path "s4a-dispatcher-plan-review-v1.edn"
+                       :sha256 "f14f59ade3a35ae65dbb68d35f087915ae70c59df991b28873014fa3dd5741d2"
+                       :actual-full-file-read-and-hashed true
+                       :verdict :changes_requested :finding :s4a-plan-01 :severity :P2
+                       :native-provider-approval false}
+  :correction "Replace v1's combined owner/endpoint/effect gate before source implementation with independent offline Oikos source admission and parallel narrow owner discovery. Exact Oikos source review can close the offline phase without any endpoint or approval issuer; all real effects still wait for exact reviewed consumer AND native-handler source, actual owner authority, nomination and a later exact-hash effect permit."
+  :settlement-status :proposed-fix-awaiting-independent-confirmation
+  :no-other-defect-invented true}
+ :immutable-inputs
+ {:source "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+  :tree "3c20d6294cd2c18bdfa49b862feb3bdfefa8911b"
+  :version "oikos.capability/v1"
+  :digest "2a82066221bfe57cb326f0fecce12082505ddfdbcdd53ab986451f69d67e884b"
+  :permit "../permits/s4a-contract-8ae64df4.edn"
+  :permit-sha256 "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+  :s2a-permit "../permits/s2a-contract-c399b60e.edn"
+  :s2a-permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+  :source-test-hash-maps :the-two-existing-maps-in-frozen-s4a-permit
+  :all-thirteen-source-test-hashes-verified-at-planning-entry true
+  :protected "S2A nine and S4A four source/test files, both descriptors/documentation, original v1, independent reviews and permits stay byte-unchanged. Extension semantics live only in new outer namespaces; frozen check-preconditions/preview and their :authority :none are not changed."
+  :remote-ref :prior-publication-not-requeried-or-pushed-this-turn}
+ :unchanged-v1-semantics
+ {:reference "Use v1's source-observations and next-design as pinned historical source evidence/design, not fresh liveness or approval. This v2 replaces its staged-future-case, sharpens the new outer protocol, and clarifies finite owner-fence semantics below. v1's historical effects-this-turn is not this turn's activity."
+  :retain [:actual-native-buffer-object-registry-not-name-or-client-uuid
+           :server-epoch-incarnation-and-native-monotone-revision
+           :strict-external-utf8-byte-boundaries-not-emacs-internal-byte-offsets
+           :final-native-request-scope-consent-revision-check-and-mutate
+           :reentrancy-and-unsupported-hook-denial :indirect-shared-text-denial
+           :bounded-native-read-and-governed-release :at-most-once-not-exactly-once
+           :no-automatic-retry-after-indeterminate :native-i3-fence-or-focus-unavailable
+           :nbb-first-explicit-native-protocol :existing-owner-infrastructure
+           :installed-dev-separation :no-policy-kernel-copy :no-raw-tool-publication]
+  :daemon-hazard "Preserve v1's actual-manpage caution: --alternate-editor= with an empty value can start emacs --daemon. No selected client is qualified by that manual. Future transport must reject absent/empty/hostile inherited settings, pin the existing endpoint/client, use a reviewed nonempty failing alternate-editor, and later demonstrate missing-socket refusal without spawning any Emacs process."
+  :authority "GovOne release capabilities/profile match, Linux UID, loopback, a harness name or a synthetic approval map do not authenticate an Oikos actor/resource grant or editor consent. No GovOne editor-approval endpoint/profile is invented. Missing actual owner admission holds all real positives, not offline codec/denial work."
+  :non-prerequisites "No whole S2A, S2B, S6A, S4B or epic completion is added as an offline prerequisite; the separate S2A reader/append blocker is not cleared."}
+ :parent-reported-metadata
+ {:provenance :current-coordinator-message-not-reobserved-by-this-worker
+  :emacs-service {:active true :pid 2840 :restart "on-failure"}
+  :path "/run/user/1000/emacs" :reported-contents :empty
+  :meaning "Metadata only: no isolated test socket is nominated or proved by this report. An empty directory snapshot is not host-wide socket absence; an active operator service is not authorization to connect, load a shim, enumerate buffers or use it as the test target."
+  :additional-runtime-metadata-or-client-calls 0}
+ :corrected-stage-order
+ [{:stage :p0-plan-confirmation :authority-now :planning-only
+   :exit "Parent returns this new v2 and its actual hash to the SAME independent reviewer for narrow s4a-plan-01 confirmation. Neither this artifact nor confirmation itself authorizes implementation or effects; parent then makes one explicit source-only admission decision."}
+  {:stage :a-owner-interface-discovery :relation :parallel-with-b-and-c
+   :authority "Separate coordinator/owner read-only source-and-interface discovery; no owner writes or calls."
+   :work "Identify actual actor/session/scope/resource/consent/fence interfaces and source grants needed at existing GovOne/Knoxx/Spacemacs/i3 seams. Discovery may identify gaps; actual authority artifacts may arrive later. Parent owns the narrow owner-source and target questions."
+   :not-a-gate-for [:b-offline-oikos-source :c-offline-exact-source-review]
+   :no-automatic-grants [:native-owner-source :endpoint-use :handler-load :live-test]}
+  {:stage :b-offline-oikos-source :authority-now :held-pending-distinct-parent-source-only-grant
+   :needs [:confirmed-corrected-plan :explicit-oikos-offline-source-only-grant :frozen-contract-pins]
+   :does-not-need [:nominated-server :running-server :approval-issuer :actual-owner-admission-artifact
+                   :native-owner-source-grant :effect-permit :runtime-socket]
+   :work "RED then GREEN only the new outer codec/laws/negative tests and unloaded NBB consumer source in the zones below. No live transport implementation is activated or invoked, and absent owner seams always refuse. An unavailable editor owner does not block these separately authorized Oikos files."
+   :exit "Offline matrix passes with zero actual transport/effect invocations and no runtime-success credit. Record exact new source/test hashes for independent source review; do not wait for endpoint nomination."
+   :native-owner-separation "Writing an Emacs Lisp shim in the Spacemacs/private-layer owner, or changing its config/startup, needs a separate explicit owner-source grant and owner source review. That grant is NOT required to finish Oikos-only offline codec/denial source; no .el source or owner files are included in this source case."}
+  {:stage :c-offline-exact-source-review :authority-now :future-parent-review-dispatch
+   :needs [:b-offline-oikos-source-exact-head-and-tests]
+   :does-not-need [:server-nomination :approval-issuer :effect-permit :native-shim-availability]
+   :exit "Independent exact-head review qualifies or rejects ONLY the new inert Oikos source, closed bounds and zero-effect tests. Parent may close this concrete source phase while native owner work/target nomination remain held. Source approval is not handler-load or runtime permission. Native handler source, when separately authorized and available, gets its own exact-hash review before any real effect permit."}
+  {:stage :d-real-authority-and-target-readiness :authority-now :held
+   :needs [:actual-owner-approved-actor-session-scope-resource-admission-and-consent-artifacts
+           :finite-owner-commit-and-read-release-fence-contract
+           :separately-source-authorized-and-independently-reviewed-native-handler
+           :nominated-already-existing-supervised-isolated-endpoint]
+   :exit "Collect actual owner artifacts and user/target-owner nomination, exact client/handler/consumer/generation hashes and bounded synthetic fixture scope. Native owner source review can proceed in parallel under its own grant. No source/grant/nomination substitutes for any other, and readiness alone performs no effects. Missing components hold this real path only."}
+  {:stage :e-exact-hash-live-effect-permit :authority-now :held
+   :needs [:c-offline-exact-source-review :d-real-authority-and-target-readiness]
+   :required-permit "Parent explicitly binds reviewed Oikos consumer/codec and native handler/client hashes, review hashes, actual owner-artifact identities/fence semantics, endpoint identity and dispatcher epoch/generation, test actors, allowed named operations, exact newly created synthetic handles, byte/count/time bounds and handle-only teardown. Pin and recheck source/endpoint identity before loading. Plan approval or nomination alone never authorizes load."
+   :excludes [:operator-server-substitution :private-or-preexisting-operator-buffer-access
+              :new-daemon :service-restart :packages-or-models :generation-selection
+              :public-or-remote-tool-exposure]}
+  {:stage :f-real-native-fixtures :authority-now :held
+   :needs [:e-exact-hash-live-effect-permit]
+   :work "Only then load the exact reviewed handler on the nominated isolated existing server and exercise newly allocated agent-owned synthetic buffers. Use actual owner-authenticated test grants; compare native mutation entries and exact synthetic before/after bytes. No buffer enumeration, files, frame selection or personal content."
+   :required "Retain v1/review native identity, same-name replacement, intervening edit/undo/revert, epoch/reconnect, range/Unicode, alias/read-only/hooks, scope/allowlist/consent and once-only fixtures. Refused-before-commit cases yield zero mutation/disclosure. Lost reply after possible commit is indeterminate, not a claimed zero mutation; require at most one application and no automatic retry."
+   :i3 "Focus remains unavailable with zero command calls until actual qualified native lifetime/cut fencing and a distinct synthetic sandbox permit exist. Lookup-then-focus, double reads or an NBB/BB mutex do not qualify it."
+   :exit "Independent exact-source plus actual runtime-evidence review is required for any scoped runtime acceptance. It is not whole S4A/S2A, client-matrix, remote egress, installed promotion or epic completion."}]
+ :offline-source-case
+ {:root "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+  :allowed-new-source-zones
+  [{:path "src/oikos/law/dispatch.cljc" :role :new-closed-outer-shapes-bounds-and-denial-laws}
+   {:path "src/oikos/shape/dispatch.cljc" :role :pure-bounded-framing-and-closed-field-enum-mapping}
+   {:path "src/oikos/extern/dispatch_codec.cljs" :role :in-memory-utf8-json-edge-only}
+   {:path "src/oikos/infra/dispatch.cljs" :role :unloaded-consumer-always-denies-without-qualified-owner-runtime}
+   {:path "test/oikos/law/dispatch_test.cljc" :role :pure-contract-tests}
+   {:path "test/oikos/shape/dispatch_test.cljc" :role :pure-framing-boundary-tests}
+   {:path "test/oikos/infra/dispatch_test.cljs" :role :codec-and-zero-effect-consumer-tests}
+   {:path "test/oikos/dispatch_runner.cljc" :role :explicit-offline-test-entrypoint}]
+  :zone-rule "Only new files in this explicit list after the separate parent grant; confirm paths absent before writing. New shape/extern directories are Oikos adapter organization, not new services. Any additional path or dependency/config change needs scope review, not an automatic extension. Existing runners/config, frozen files and all native owner trees remain unchanged."
+  :allowed-execution-after-grant "In-memory pure tests and the explicit new runner through existing local NBB/BB and already approved cached Clio/Malli dependencies; no package installation or build publication. A test-runner process is not permission for capability transport subprocesses. No implementation/test suite is executed in this planning correction."
+  :effect-boundary "No filesystem/socket/HTTP/process/IPC transport, server discovery, client invocation, module-load registration, native shim load, Emacs/i3/GovOne call, event persistence or generation/config write in the new consumer/codec. Input import must be inert. Effect interfaces are unavailable by construction; test spies/traps must never be invoked, even for otherwise matching synthetic context."
+  :proof-limit "Valid encode/decode and pure precondition fixtures are permitted inert positives only. They provide :authority :none; they cannot produce or qualify actual authorized/applied/read-released outcomes. Fake owner/approval maps never enable transport or supply runtime-success credit."}
+ :new-outer-protocol-fixed-case
+ {:status :proposal-for-the-distinct-offline-source-grant-not-implemented
+  :version "oikos.dispatch/v1"
+  :framing {:prefix :four-byte-unsigned-big-endian-body-length
+            :body-min-bytes 2 :body-max-bytes 65536 :frame-max-bytes 65540
+            :messages-per-input 1
+            :rule "Exact-length UTF-8 JSON object; reject truncation, trailing bytes/second messages, BOM, invalid UTF-8 and unknown framing. These are in-memory frame tests, not claims about a live stream."}
+  :decode-bounds {:max-depth 12 :max-value-nodes 4096 :max-decoded-string-utf8-bytes 8192
+                  :max-container-members 128 :max-object-key-utf8-bytes 64
+                  :max-integer 9007199254740991}
+  :decode-law "Reject duplicate keys at every nesting depth BEFORE any parser can collapse them; bounded structural scanning/decoding, not regex duplicate guessing or JSON.parse alone. Reject non-scalar Unicode/unpaired surrogate escapes, nulls where disallowed, fractions/exponents, negative/negative-zero/inexact numbers and noncanonical numeric spellings. Map only fixed schema field/operation literals; never intern arbitrary client strings as keywords or use tagged/Lisp readers."
+  :closed-request-fields ["protocol-version" "request-id" "contract-version" "contract-digest"
+                          "named-request" "approval-reference"]
+  :request-law "All six keys required, no extras. Protocol/version/digest equal frozen pins. request-id is canonical lowercase UUID; named-request maps only the existing frozen closed request fields and four operation enums and must pass the unchanged frozen request schema. approval-reference is null for reads and a canonical lowercase UUID reference for mutations, never an authority-bearing approval payload. No client endpoint, executable, wrapper/function, raw eval/IPC, scope, resource facts or approval-context map."
+  :frozen-semantic-bounds {:range-bytes 4096 :replacement-utf8-bytes 4096 :resulting-buffer-utf8-bytes 1048576}
+  :bound-rule "Framing/JSON escaping never changes the frozen decoded byte bounds; escaped controls/quotes/backslashes/newlines and Lisp-looking literal text are data. A codec cannot prove actual native text boundaries or current buffer length. Preserve canonical text without normalization/newline conversion."
+  :offline-results {:invalid-input {:status :denied :code :dispatch-input-refused :authority :none}
+                    :runtime-attempt {:status :denied :code :dispatcher-unavailable :authority :none}
+                    :valid-codec :inert-decoded-or-encoded-value-with-authority-none-only}
+  :diagnostics "Constant input-free refusals; no raw exception/cause, rejected payload, replacement text, linkable resource/approval IDs or frame content in logs. New outer result laws do not change cap/satisfied or relabel it authorized/applied. Runtime applied/read/indeterminate response schemas remain part of separately reviewed real consumer/handler protocol, not evidence from offline tests."
+  :native-transport "Retain the reviewed v1 candidate fixed internal wrapper/explicit argv boundary, never a public arbitrary eval/IPC surface. Offline construction/denial tests use synthetic pins only and cannot invoke any client, fallback/default server or OS transport. A real selected client/native transport is separately owner-qualified and effect-permitted later."}
+ :offline-red-green-matrix
+ [{:id :o1-frame-bounds
+   :red "Fail for missing/truncated/oversized length, extra bytes/second message and invalid UTF-8/BOM."
+   :green "Accept a valid exactly framed synthetic closed request; test accepted 65536-byte body versus 65537-byte refusal subject to decoded budgets. Zero transport/effects."}
+  {:id :o2-closed-bounded-json
+   :red "Fail unknown/duplicate keys including nested duplicates, unknown operation/field strings, unpaired surrogates, inexact/exponent/negative numeric forms and each depth/node/string/container/key ceiling +1."
+   :green "Accept exact allowed boundary values where the frozen schema permits them; fixed dictionary mapping and independent expected data prove roundtrip, not echo-to-self validation."}
+  {:id :o3-exact-frozen-request
+   :red "Fail wrong contract/protocol pins, invalid UUID, read with approval ref, mutation without ref, extra scope/resources/approval payload, endpoint/function/eval/IPC selectors and any frozen-schema violation."
+   :green "All four structurally valid named requests encode/decode as inert data only. Explicitly assert cap/check-preconditions still returns :authority :none for pure matching fixtures, never execution approval."}
+  {:id :o4-unicode-and-literal-inertness
+   :red "Fail invalid Unicode, range/replacement overflow and malformed escape sequences."
+   :green "ASCII, non-BMP and combining text plus quotes/backslashes/newlines and Lisp/IPC-looking replacement strings roundtrip unchanged within 4096 decoded UTF-8 bytes. No native byte-boundary or actual buffer-size claim."}
+  {:id :o5-source-with-no-live-prerequisites
+   :red "Any module import, codec/consumer call or otherwise valid fake owner/approval context that invokes a transport/effect spy fails. No nominated endpoint, approval issuer or effect permit is supplied."
+   :green "Pure codec succeeds in memory; every dispatch attempt returns the constant unavailable denial. Actual subprocess/socket/HTTP/Emacs/i3/GovOne transport counters remain zero; no authorized/applied/read content outcome is emitted."}
+  {:id :o6-refusal-and-i3-hold
+   :red "Fail exception/input leakage, fallback to default/other server, empty/hostile alternate-editor inheritance, fake-positive authority or focus without native fence."
+   :green "Bounded input-free denial, zero calls and unchanged synthetic sentinels. Offline argv/guard construction is inert; missing-server zero-spawn behavior is explicitly deferred to permitted real-client testing."}
+  {:id :o7-freeze-and-source-review-exit
+   :red "Fail any frozen S2A nine/S4A four or permit/descriptor change, effectful import, owner-file write or runtime-success claim from a fixture."
+   :green "Existing pure suites remain intact; new runner tests pass, lint has zero errors/warnings, and all new Oikos source/test hashes plus zero-effect evidence are ready for exact independent source review without a live endpoint."}]
+ :finite-runtime-owner-fence
+ {:status :owner-defined-and-parent-admitted-before-real-positives-only
+  :scope "One nominated endpoint and dispatcher epoch, bounded operation grant, serialized native execution/read release; not a universal distributed real-time transaction or an offline-source gate."
+  :owner-defines [:admission-boundary :commit-boundary :read-release-boundary
+                  :expiry-clock-semantics :revocation-consumption-order
+                  :disconnect-outage-and-inflight-grant-semantics]
+  :ordering "Revocation acknowledged before commit denies mutation; revocation acknowledged before read release denies disclosure. Concurrent revoke/commit or revoke/release has one explicit owner-defined ordering. A later revoke does not undo a completed mutation or retract bytes already delivered."
+  :limits "No silent cached allow, no claim that TTL proves instantaneous revocation. Any nonzero propagation/in-flight validity window requires explicit finite owner semantics and parent admission; none is authorized here. Final native identity/revision/request/scope/consent check and one-use claim remain mandatory."
+  :runtime-tests "At the later permitted endpoint, exercise acknowledged-before, concurrent-owner-ordered and after-commit/release revocation, expiry/outage/disconnect, replay/concurrent use and crash/reply-loss. Distinguish refusal-before-commit (zero mutation/disclosure) from indeterminate after possible commit (at most one, no retry). Missing real authority/fence keeps positives HELD."}
+ :parent-owned-questions
+ {:needed-only-before [:native-owner-source-work :real-authority-admission :live-endpoint-effect-permit]
+  :offline-blocked-by-unanswered-questions false
+  :native-owner "Parent separately obtains the source grant for actual Spacemacs/private-layer native shim changes, not inferred from an Oikos offline grant."
+  :endpoint "Parent separately asks which already-existing supervised isolated endpoint may receive the exact reviewed handler and only newly created agent-owned synthetic buffer fixtures. No second daemon or operator-server substitution."
+  :no-user-repo-rediscovery true :no-questions-asked-by-this-worker true}
+ :this-correction-effects
+ {:only-authored-file "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s4a-dispatcher-plan-v2.edn"
+  :implementation-or-product-source-writes 0 :owner-config-or-generation-writes 0
+  :board-workflow-receipt-note-writes 0 :prior-plan-review-or-permit-writes 0
+  :service-client-emacs-i3-daemon-model-govone-calls 0 :private-buffer-reads 0
+  :commits-prs-pushes 0 :delegations 0 :product-test-execution 0}
+ :reflection {:note "Correct only the gate inversion: close one independently reviewed inert source phase while real authority/target questions proceed separately. Keep effects behind exact consumer/native-source qualification; do not require live authority to write denial code."
+              :p-efficiency 0.90 :p-friction 0.10 :p-skill-candidate 0.30
+              :spore nil :persistence-owner :parent :separate-ledger-write false}}

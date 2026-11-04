@@ -1,0 +1,27 @@
+{:acceptance/id :s2a-parent-acceptance-fed4e302
+ :supersedes-for-current-source "s2a-parent-acceptance.edn"
+ :task "93a76dad-678a-4980-86fb-ba0fbb5e8203"
+ :candidate "86bdc2f894163b05e44c83cce8f5dcf56e1b02c1"
+ :merge "fed4e30272cc1186de14bcc708b3efc9736e3139"
+ :tree "429d9dde803b6d12ee07f692872a1b0dcba31ad1"
+ :base "008b0611198d13eb503bb57d5ef69d8dec1c268c"
+ :pr "https://github.com/open-hax/oikos/pull/3" :merged-at "2026-11-04T02:43:25Z"
+ :independent-review "s2a-prospective-wire-fix-review-v3.edn"
+ :native {:original-review 5761610494 :root-comment 4462253023
+          :thread "PRRT_kwDOVhh8dc6zZb-R" :settled-and-resolved true
+          :passing-issue-comment 6620317546 :passing-head :exact-candidate
+          :qualification-comment 6621108768 :formal-approved-review-fabricated false}
+ :checks {:current-coderabbit :success :branch-protection :none-observed
+          :generic-cli-cohort-gate :not-passed
+          :user-stale-hosted-cohort-exception "../decisions/local-review-admission.edn"}
+ :actual-tests {:integration [17 329] :wire-each [15 347] :spaces-each [11 455]
+                :bb [18 286] :nbb [40 546] :eval [9 39] :desktop-each [16 1059]
+                :lint-errors 0 :lint-warnings 0 :frozen-pins 13
+                :growth-refusals 5 :refused-owner-append-calls 0}
+ :readback "Primary Oikos main fast-forwarded to merge; merge tree equals exact reviewed candidate. Only accepted source is eligible for coordinator gitlink promotion."
+ :board {:authority :rheos :state :done
+         :path [:in_progress :testing :review :document :done]
+         :observed-program-counts {:incoming 18 :in_progress 3 :done 3 :epics-done 0}}
+ :scope :private-development-laws-and-owned-synthetic-Clio-fixtures
+ :not-qualified [:live-collector :operational-journal :operational-erasure
+                 :universal-foreign-writer-transaction :installed-promotion :epic-completion]}

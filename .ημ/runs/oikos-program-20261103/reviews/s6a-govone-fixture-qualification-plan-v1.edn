@@ -1,0 +1,196 @@
+{:plan/id :s6a-govone-fixture-qualification-plan-v1
+ :plan/date "2026-11-03"
+ :plan/kind :read-only-owner-fixture-qualification-plan
+ :context {:symbol :己 :confidence 0.98 :tier :observed-source-with-proposed-execution}
+ :authority :none
+ :task/uuid "c703893f-aea4-41c2-9eab-c3bd37b28c9b"
+ :scope "Real GovOne fixture planning only; corrected consumer P1 is not reopened. Independent adversarial planning review precedes any application/test/runtime/listener execution."
+ :inputs {:consumer-corrections "reviews/s6a-p1-corrections-v2.edn"
+          :consumer-confirmation "reviews/s6a-p1-fix-review-v2.edn"
+          :prior-source-map "reviews/s6a-prerequisite-and-api-plan-v1.edn"
+          :tool-qualification "reviews/govone-go1271-test-cache-v1.edn"
+          :operator-update "S6A is now officially progressing under source-composition scope per user; no board operation performed here. Parent owns composition and P1."}
+ :owner {:path "/home/err/devel/orgs/mojomast/govone"
+         :head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+         :tracked-status :clean
+         :status-command "git status --porcelain --untracked-files=no"
+         :instructions "Owner AGENTS.md re-read; spec.md remains behavior authority, README source-only status, no credentials/state in repository. Applicable ancestry instructions retained from prior discovery."
+         :files-sha256 {"go.mod" "d98ac1461da72048026c141cd1375421c6934e6c3937cc5048c296c594b218dd"
+                        "go.sum" "8991f8bfbeccb3e31df27a42f4901a5a0a790e5c2937c4c55da93f5d30db9a90"
+                        "cmd/govone-dev/main.go" "d5f9f88cacdeabbdd0f5f7c3145e46dee6559a7bfcafe78496f6ea28ea48a5a0"
+                        "cmd/govone-dev/main_test.go" "3d8b26a229578a7a742b536f494897ea69a361620e02e7278e7ab32dfedf8d58"
+                        "internal/inference/service_rag_test.go" "f151ee88c087fc80e5d07ec422f1b0fa91d4b9d40a76a8558dd61fd0ce448389"
+                        "internal/classifier/service.go" "3d4631c1baed7e93eccdb28f30496e9a3adebba1bfc8aadfce11a2f010d15cd4"}}
+ :toolchain
+ {:binary "/tmp/opencode/oikos-test-tools/go-1.27.1-ad3b4bab-a5d9-4328-8f90-e7b13f65cade/go/bin/go"
+  :observed-version "go version go1.27.1 linux/amd64"
+  :binary-sha256 "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624"
+  :manifest "/tmp/opencode/oikos-test-tools/go-1.27.1-ad3b4bab-a5d9-4328-8f90-e7b13f65cade/extracted-files-manifest.json"
+  :manifest-sha256 "9c8f5d4af9663ac39625a3d452a32f8d53bf908b4dce77436d834df128290604"
+  :manifest-binding "Manifest SHA256 and go/bin/go entry SHA256 independently recomputed and matched before execution; not a fresh rehash of all 15639 extracted files."
+  :archive "/tmp/opencode/oikos-test-tools/go-1.27.1-ad3b4bab-a5d9-4328-8f90-e7b13f65cade/go1.27.1.linux-amd64.tar.gz"
+  :archive-actual-rehashed-sha256 "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+  :upstream-provenance "Qualified coordinator report records https://go.dev/dl/go1.27.1.linux-amd64.tar.gz and official metadata; no fresh network call here."
+  :go-mod "module github.com/mojomast/govone; go 1.25.0; toolchain go1.27.1"
+  :old-blocker :resolved-for-tool-availability-only
+  :not-granted [:module-downloads :builds :tests :runtime :installed-service-access]}
+ :offline-module-discovery
+ {:scratch "/tmp/opencode/s6a-govone-modules-wl6haccs"
+  :owner-task :s6a-govone-fixture-plan
+  :retained true :cleanup "Preserve until exact recoverable remote backup is verified; no deletion authorized. Parent owns subsequent lifecycle."
+  :bytes-after-discovery 52809 :ceiling-bytes 67108864
+  :free-space-before-kib 44395552
+  :files "Only own new scratch query outputs/manifests, isolated HOME/GOCACHE/XDG/tmp, exact go.mod/go.sum metadata copies and small cached public module metadata copies; no product/application code copied or executed."
+  :initial-wrapper-results [{:wrapper "bwrap --unshare-net --ro-bind / / ..." :exit 1
+                            :error "loopback: Failed RTM_NEWADDR: Operation not permitted"
+                            :child-go-executed false}
+                           {:wrapper "bwrap read-only root without network namespace, strace socket-denial child" :exit 1
+                            :error "setting up uid map: Permission denied" :child-go-executed false}]
+  :successful-query-boundary "Mount sandbox unavailable, explicitly recorded. Instead query metadata-only own scratch module and own GOMODCACHE seeded by read-only copies of existing public cache metadata. No application source is present. strace -f injects EPERM for socket/socketpair/connect/bind/listen/sendto/sendmsg/sendmmsg in all descendants. Clean environment prevents global Go configuration/cache/credential lookup; no namespace isolation is claimed."
+  :strace-flags "-f -qq -e trace=%network -e inject=socket:error=EPERM -e inject=socketpair:error=EPERM -e inject=connect:error=EPERM -e inject=bind:error=EPERM -e inject=listen:error=EPERM -e inject=sendto:error=EPERM -e inject=sendmsg:error=EPERM -e inject=sendmmsg:error=EPERM"
+  :cwd "/tmp/opencode/s6a-govone-modules-wl6haccs/metadata-only-main"
+  :existing-cache-read "/home/err/go/pkg/mod"
+  :isolated-module-cache "/tmp/opencode/s6a-govone-modules-wl6haccs/metadata-only-modcache"
+  :environment {:GOPROXY "off" :GOSUMDB "off" :GOTOOLCHAIN "local" :GOWORK "off" :GOENV "off"
+                :GOFLAGS "-mod=readonly" :GOVCS "*:off" :GOTELEMETRY "off"
+                :GOPRIVATE "" :GONOPROXY "" :GONOSUMDB ""
+                :HOME "own scratch/home" :GOPATH "own scratch/home/go" :GOCACHE "own scratch/cache"
+                :XDG_CACHE_HOME "own scratch/xdg" :XDG_CONFIG_HOME "own scratch/xdg" :TMPDIR "own scratch/tmp"
+                :GOMODCACHE "own scratch/metadata-only-modcache" :PATH "exact Go bin:/usr/bin:/bin"}
+  :limits "45-second query deadline, per-file RLIMIT_FSIZE 8 MiB; checked actual aggregate <64 MiB. This is not an enforced filesystem-wide quota; no compilation was attempted."
+  :queries [{:argv ["EXACT-GO" "version"] :exit 0 :stdout "go version go1.27.1 linux/amd64"}
+            {:argv ["EXACT-GO" "list" "-m" "-json" "-mod=readonly" "all"]
+             :exit 1 :stdout-bytes 0
+             :error "module lookup disabled by GOPROXY=off; final named missing coordinate github.com/davecgh/go-spew@v1.1.1"
+             :action :stopped-no-build-no-fetch}]
+  :network-trace {:path "/tmp/opencode/s6a-govone-modules-wl6haccs/isolated-metadata-network.trace"
+                  :bytes 0 :meaning "No application network syscall observed in these two traced Go metadata queries; wrapper-setup failures were outside this trace and ran no Go child."}
+  :manifest "/tmp/opencode/s6a-govone-modules-wl6haccs/module-availability-manifest.json"
+  :manifest-sha256 "6c6102fa49af59566ef30ce3635357c6cbd31e5b4cc46b15df08bf14089f1047"
+  :earlier-manifests [{:path "manifest.json" :sha256 "be2d3df3304fd5f6697b17c00c96665cb8d08dd90e375398364279f705b83614"}
+                      {:path "syscall-query-manifest.json" :sha256 "4a6e394fef672aabd9dfceb2495098613164e982392b8b9d935eee99465194d2"}]
+  :cache-availability "Enumerated exact path/version pairs from owner go.sum, including historical go.mod-only entries. github.com/google/uuid@v1.6.0 and gopkg.in/yaml.v3@v3.0.1 each had extracted source, zip, mod, info and ziphash in the inspected cache; six small mod/info/ziphash files were copied into scratch. All remaining inspected pairs lacked metadata and extracted source/zip. Missing list below is a static cache inventory, not a successful selected module-graph resolution."
+  :missing-metadata-and-no-extracted-tree-or-zip
+  ["github.com/davecgh/go-spew@v1.1.1" "github.com/dustin/go-humanize@v1.0.1"
+   "github.com/go-ini/ini@v1.67.0" "github.com/google/pprof@v0.0.0-20250317173921-a4b03ec1a45e"
+   "github.com/klauspost/compress@v1.18.2" "github.com/klauspost/cpuid/v2@v2.0.1"
+   "github.com/klauspost/cpuid/v2@v2.2.11" "github.com/klauspost/crc32@v1.3.0"
+   "github.com/mattn/go-isatty@v0.0.20" "github.com/minio/crc64nvme@v1.1.1"
+   "github.com/minio/md5-simd@v1.1.2" "github.com/minio/minio-go/v7@v7.0.98"
+   "github.com/ncruces/go-strftime@v0.1.9" "github.com/philhofer/fwd@v1.2.0"
+   "github.com/pmezard/go-difflib@v1.0.0" "github.com/remyoudompheng/bigfft@v0.0.0-20230129092748-24d4a6f8daec"
+   "github.com/rs/xid@v1.6.0" "github.com/stretchr/testify@v1.9.0" "github.com/tinylib/msgp@v1.6.1"
+   "go.yaml.in/yaml/v3@v3.0.4" "golang.org/x/crypto@v0.55.0"
+   "golang.org/x/exp@v0.0.0-20250620022241-b7579e27df2b" "golang.org/x/mod@v0.38.0"
+   "golang.org/x/net@v0.57.0" "golang.org/x/sync@v0.22.0" "golang.org/x/sys@v0.47.0"
+   "golang.org/x/sys@v0.6.0" "golang.org/x/text@v0.41.0" "golang.org/x/tools@v0.48.0"
+   "gopkg.in/check.v1@v0.0.0-20161208181325-20d25e280405"
+   "modernc.org/cc/v4@v4.26.2" "modernc.org/ccgo/v4@v4.28.0" "modernc.org/fileutil@v1.3.8"
+   "modernc.org/gc/v2@v2.6.5" "modernc.org/goabi0@v0.2.0" "modernc.org/libc@v1.66.3"
+   "modernc.org/mathutil@v1.7.1" "modernc.org/memory@v1.11.0" "modernc.org/opt@v0.1.4"
+   "modernc.org/sortutil@v1.2.1" "modernc.org/sqlite@v1.39.0" "modernc.org/strutil@v1.2.1"
+   "modernc.org/token@v1.1.0"]
+  :closure-limit "The two old go.mod-only coordinates are not automatically runtime requirements. Other listed pairs include test/tool transitive sums. All selected/test closure cannot be proven until graph metadata is available; no claim every sum pair must be fetched. No package graph, source checksum verification, test compilation or build completeness established."
+  :checksum-provenance "Exact checked go.mod/go.sum hashes bind pins and h1 sums. Manifest records copied public metadata SHA256 and availability per coordinate; go.sum is expected checksum data, not proof missing cache bytes exist. Future approved acquisition must compare actual module zip/mod hashes against these exact sums and retain immutable inventory; any missing expected sum/changed selection stops for review. No automatic go.sum update, -mod=mod or version substitution."
+  :global-writes "No owner/global Go cache/config/environment writes; query env is subprocess-local. Both mount attempts stopped before child. Subsequent Go queries use scratch metadata/source root and private cache only. No existing credentials were read."}
+ :existing-local-only-fixture
+ {:entry "cmd/govone-dev/main.go:50-73,108-156; README.md:52-92"
+  :command "EXACT-GO run -mod=readonly ./cmd/govone-dev --synthetic-stub"
+  :identity "Actual runtime.Build; literal 127.0.0.1:0; full gateway handler behind strict trialHandler. Fresh database/state outside checkout, explicit development/air_gapped, deterministic local://stub model; no model/remote classifier/download required."
+  :auth-policy "main.go:245-286 generates independent fresh Ed25519 signer/verifier, HMAC and encryption keys. :359-415 provisions through actual authenticated control-plane API, revokes bootstrap credentials, activates signed local-masked-only policy and creates stable operator/auditor principals with 24h keys. :424-459 performs actual scoped session, buffered completion and separately authenticated evidence read. No mocked auth/policy allow."
+  :custody "newState creates fresh private outside-checkout directory; writePrivate creates exclusive 0600 files, directories 0700. runtime.json, policy-signing.key, client.env and db stay fixture-private. Use only generated operator handle in consumer; administrative/signer/auditor handles remain fixture-owned. Never installed/personal GovOne credentials, shell environment sourcing or public token output."
+  :published-client "examples/http/generic.mjs:110-233 can consume fixture-generated operator settings through a private process environment. It creates its own local_only/full session and one buffered synthetic text completion, rejects redirect and automatically retries nothing; successful stdout carries no content. Existing generic.test.mjs mocks are protocol tests only."
+  :existing-tests [{:name "TestFreshTrialPublicAPIs" :path "cmd/govone-dev/main_test.go:25-235"
+                    :coverage "Real trial, poisoned ambient proxy/provider/credentials, fresh session/response/stage linkage, 401 retired credentials, 403 producer evidence, separately authorized auditor, external-mode request narrowed to local_only, deny-unmasked, exact private modes and bounded listener shutdown."}
+                   {:name "TestPrivateFreshStateAndKeys" :path "cmd/govone-dev/main_test.go:327-370"
+                    :coverage "Fresh distinct keys, actual Ed25519 bootstrap signature verification, exclusive state and symlink-write denial."}
+                   {:name "TestPOSTIdempotencyKeysWithoutRetries" :path "cmd/govone-dev/main_test.go:501-538"}
+                   {:name "TestLoopbackRequestsDoNotRedirectRetryOrLeak" :path "cmd/govone-dev/main_test.go:539 onward"}]
+  :limits "Tests/trial not run here. Existing trial bootstrap completion is harmless synthetic text, not complete S6A all-path proof. It forbids hybrid_redacted/external_approved/unmasked_release, disables independent anchoring, and cannot establish full external-mode transformations. Its actual chain_verified/anchor-status must be retained honestly, not upgraded to independently anchored proof."
+  :lifecycle-source "Real key/role authentication auth/api_keys.go:215-277; terminal/expiry session/service.go:636-681; queued owner/profile/role checks inference/service.go:392-400,512-572,626-681. Warm policy cache remains last-known-good until publication/invalidation; policy/scoped_revision_test.go:53-97 is authoritative."
+  :additional-existing-tests "internal/runtime/session_authorization_test.go:63-140 and inference/post_wait_authorization_test.go; policy/TestScopedPolicyRevisionSnapshot; session/TestServiceLoadDistinguishesNotFoundAndExpired. These are owner package tests, not externally importable SDK functions. Their original t.TempDir cleanup and network footprints require explicit fixture execution scope; do not run broad ./... casually."}
+ :external-mode-source-triage
+ {:bounded-conclusion "No complete authentic signed-policy/auth/classifier/redactor/router both-mode final-provider-byte positive was established in inspected owner tests. Existing partial tests must not be counted as that proof."
+  :closest-capture {:test "TestExternalRAGProviderCaptureUsesRedactedAuthorizedSlots"
+                    :path "internal/inference/service_rag_test.go:475-554"
+                    :real "Actual EndpointGenerator serializes a request into captured RoundTripper with owner endpoint/credential re-admission; both mode enum cases assert placeholder presence and raw marker absence."
+                    :not-real "newInferenceHarness uses h.policy.decision, h.router.result, sequenceClassifier and sequenceRedactor; lines 508-533 explicitly fabricate mode approval and redacted content. Test cannot prove authentic signed policy or actual classification/redaction. It inspects decoded messages, not an independently retained hash of exact serialized bytes."
+                    :negative "TestExternalRAGMalformedOrFieldRedactionContextStopsBeforeProvider:556 onward likewise useful orchestration fixture, not authority proof."}
+  :other-partials [{:path "internal/runtime/runtime_integration_test.go:35-185"
+                    :real "Actual runtime/auth/signed active policy/local classifier/redactor/router/stub and canonical placeholders; mode asserted local_only."}
+                   {:path "internal/runtime/runtime_integration_test.go:574-591,1413-1452,1533-1551"
+                    :limits "Owner helper seeds a genuinely signed active policy row but uses a fixed test seed and bootstrap credentials. Do not export/import this unexported helper or misstate it as fresh normal-API policy provisioning. Prefer cmd trial's fresh-key control-plane mechanism for new fixture."}
+                   {:path "internal/runtime/runtime_integration_test.go:955-997"
+                    :real "Actual air-gapped completion rejects external endpoint, provider capture count zero; not a positive external-mode test."}
+                   {:path "internal/inference/service_test.go:135-166"
+                    :limits "Hybrid positive mocks classifier/policy/router and generator; not real owner authority proof."}]
+  :important-semantic-correction
+  {:anchors ["internal/classifier/service.go:233-305,329-340" "internal/policy/service.go:541-546,556-581"
+             "internal/router/service.go:301-304"]
+   :fact "Actual detectors classify PERSON_NAME/PHONE_NUMBER/POSTAL_CODE as internal; EMAIL/secrets/address as restricted and MRN regulated. Actual classifier raises request sensitivity to maximum detected sensitivity. Policy allows external_approved only at public sensitivity, internal becomes hybrid_redacted when authorized, restricted/regulated stay local or deny."
+   :consequence "Do not force an EMAIL raw-marker payload through external_approved by mocking sensitivity/public or overriding the router. With actual owner semantics it must not do that. Fresh detected-entity redaction plus external_approved is not a valid assumed positive for this standard classifier."
+   :honest-acceptance "Qualify hybrid with actual internal PERSON_NAME or PHONE_NUMBER detection and placeholder transformation at exact serialized provider boundary; qualify external_approved with truly public synthetic content after real classify/redact/route, and prove detected internal/restricted payload narrows/denies rather than preserving external_approved. If a canonical placeholder-bearing external-approved request is desired, it needs real owner-generated/token-bound provenance and explicit test proof, not a caller-invented placeholder. No such path is claimed established here."
+   :review-needed "Parent independent reviewer should reconcile the prior 'both modes transform raw markers' expectation with this actual owner contract. This is not permission to lower classifications or change the policy kernel. If that incompatible expectation remains mandatory, stop as an owner-contract planning gap; no source fixture may fabricate success."}}
+ :minimal-new-owner-fixture-candidate
+ {:permission :not-granted
+  :single-new-path "/home/err/devel/orgs/mojomast/govone/cmd/govone-dev/s6a_fixture_test.go"
+  :package "main (test-only), same owner package as existing fresh-key trial helpers"
+  :why-here "Reuse trialConfig/newState/trial.request/loopbackClient/trialHandler and normal provisioning. Fresh trial custody is better than copying internal/runtime helpers with fixed test keys. No production route, policy evaluator, SDK, generic issuer or Oikos/kernel copy. Existing main.go/main_test.go remain unchanged."
+  :tests ["TestS6AActualLocalSessionLifecycle"
+          "TestS6AActualGovernedProviderBytes"]
+  :local-test "Start actual existing startTrial in fixture-owned private state; one synthetic user text through actual operator session/completion; then real private admin API key expiry/revoke and current role revocation, wrong owner/tenant, short TTL and outage. Verify later requests reject and provider has no additional generation. Do not invent /sessions/revoke; use actual documented key/profile/lifecycle mechanisms. Unsupported image/tool/unknown envelopes must fail before provider; consumer-side pretransport denials remain separate."
+  :mode-test-construction ["Create fresh newState/trialConfig and independent signing material; test-only actual config enables connected external path, not air_gapped. Write fresh protected credential binding for an exact synthetic approved HTTPS public-IP-literal endpoint and model to private fixture root before runtime.Build. IP literal avoids DNS entirely; no connection may be made to it. No real provider token: use fresh fixture-only random secret."
+                           "Install existing inference.SetExternalLLMHTTPClientForTest with an in-memory RoundTripper BEFORE runtime.Build and restore in cleanup. Capture exact req.Body bytes (bounded), method/path/model/stream and token equality privately; return small deterministic valid buffered model JSON. Capture is the ONLY replaced provider network boundary: never mock auth, policy, classifier, redactor, router, audit or their decision outputs. Test runs serially, not t.Parallel."
+                           "Build actual runtime using the fresh private config and literal 127.0.0.1:0 listener. Reuse real provisioning for fresh principals, then activate a freshly signed fixture policy through normal policy-bundles/activate API, patch AI allowed modes, and register the exact approved endpoint/binding with the real control plane. Disable the local stub endpoint through actual endpoint control plane so local preference cannot hide external-mode behavior. Record actual expected revisions, do not write guessed authority rows."
+                           "Use separate fresh sessions/idempotency keys for public external_approved, internal-name/phone hybrid_redacted, and restricted/regulated denial/local cases. Assert actual mode/policy version, full stage audit and captured exact serialized provider bytes; check actual canonical placeholders and absence of raw INTERNAL markers in hybrid. External public positive must not claim redaction of a nonexistent entity; restriction changes must narrow/deny."
+                           "Add authentic signed-policy deny activation after warm cache, key/role expiry/revoke, session expiry and malformed/redirect/timeout provider capture variants. A provider capture may return deterministic output, but cannot return a policy decision or canned redacted input. Every denial must show zero new provider capture; no consumer direct retry and no uncontrolled owner retry to real network."
+                           "Capture safe source/config-without-secrets/session/policy/response/decision IDs and exact-byte digests privately. Raw synthetic bytes may be kept only in private fixture evidence; report fixed assertions/counts/digests, never tokens or signing keys. Retain actual unavailable independent-anchor status. Close/join only owned listener/request goroutines/process group and restore test hooks on every path."]
+  :owner-api-details-gate "Before writing the test, verify exact endpoint create/update/approval/binding and AI/policy request DTOs against pinned OpenAPI/controlplane source. Existing endpoint admission is real, not a generic consent verifier. If one new test file cannot compose these existing APIs/hooks without production edits, stop and request the exact extra scope; do not grow a harness/kernel silently."
+  :claim-scope "This proposed owner test can qualify owner boundary semantics with no real downstream network. It does not itself qualify Oikos transport, source provenance, installed clients or S6A all paths. Oikos-to-GovOne positive is a separate actual client call, not an import of this Go package."}
+ :future-execution-plan
+ {:status :held-pending-review-dependency-custody-and-effect-permit
+  :preflight ["Independent review this plan, especially corrected external-mode semantics and no-network enforcement. Parent may then grant only exact fixture effects; no operational services."
+              "Resolve missing module metadata/source from an already owned verified cache if available; otherwise obtain explicit authorization for exact public dependency acquisition into isolated cache with exact pins/h1/SHA256 provenance and bounded size. Current Go cache approval authorizes none of this."
+              "With complete approved cache, rerun metadata query offline, then go mod verify in isolated copied owner worktree/source context; bind selected module manifest and checksums. Keep GOPROXY/GOSUMDB off, toolchain local, GOENV/GOWORK/telemetry off, env clean; fail on missing graph or changed go.mod/go.sum."
+              "Review network/process/filesystem footprint and test cleanup before compiling or executing. Failed bwrap here is not an acceptable runtime-isolation proof. Require a separately verified guard that permits only exact task-owned loopback sockets and denies all other connects/binds/DNS/proxy, or keep runtime held. Do not merely drop syscall denial to make tests work."
+              "Keep build/test cache budgets distinct from this <=64 MiB metadata scratch. No compilation footprint is measured; parent must bind a finite permitted build/temp budget and stop at cap, never silently expand or install. Owner/source/new test worktree remains disjoint from installed resources."]
+  :command-environment "EXACT-GO is the full verified binary above. Each command uses env -i PATH=<exact-Go-bin>:/usr/bin:/bin HOME=$RUN/home XDG_CONFIG_HOME=$RUN/xdg XDG_CACHE_HOME=$RUN/xdg TMPDIR=$RUN/tmp GOCACHE=$RUN/buildcache GOMODCACHE=$APPROVED_IMMUTABLE_MODULE_CACHE GOPATH=$RUN/gopath GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local GOENV=off GOWORK=off GOTELEMETRY=off GOVCS=*:off GOFLAGS=-mod=readonly; no inherited provider/proxy/GovOne secrets. RUN is newly owned mode0700 outside Git; never source client.env into agent shell."
+  :commands-in-order ["EXACT-GO mod verify  # offline, isolated writes only; after dependencies separately qualified"
+                      "EXACT-GO test -mod=readonly ./cmd/govone-dev -run '^(TestFreshTrialPublicAPIs|TestPrivateFreshStateAndKeys|TestPOSTIdempotencyKeysWithoutRetries|TestLoopbackRequestsDoNotRedirectRetryOrLeak)$' -count=1 -timeout=120s -parallel=1"
+                      "EXACT-GO run -mod=readonly ./cmd/govone-dev --synthetic-stub  # only after explicit ephemeral-loopback execution permit; owned process group, 90s wall budget, INT then bounded drain/kill"
+                      "node examples/http/generic.mjs  # optional existing public client, only exact generated operator values via private supervisor env; not shell-source; separate 30s caller budget"
+                      "EXACT-GO test -mod=readonly ./cmd/govone-dev -run '^TestS6AActualLocalSessionLifecycle$' -count=1 -timeout=120s -parallel=1  # new source must first be authorized/reviewed"
+                      "EXACT-GO test -mod=readonly ./cmd/govone-dev -run '^TestS6AActualGovernedProviderBytes$' -count=1 -timeout=120s -parallel=1  # same separate source and runtime permit"]
+  :public-client-limit "Existing generic.mjs exercises the owner API with real trial policy/auth but is not the Oikos client. Oikos P1 has no transport by design; actual Oikos-to-GovOne call requires separately reviewed P2/P3 transport code/permit. Do not broaden current P1. Node tool availability/version not checked here."
+  :capture "Supervisor writes stdout/stderr to private files with byte caps; publishes only fixed safe status/count/hash outcomes after redaction review. Existing test failure messages may print fixture bodies/paths, so treat raw Go test logs as private, never paste all output."
+  :shutdown "Graceful signal/stack shutdown closes only exact created listener and joins owned tasks; no pkill/systemd/PM2/Docker/model changes. Existing test t.TempDir cleanup and CLI preserved private trial state are different: explicit later permit must account for exact ephemeral secret/state disposal versus retained evidence, never delete existing caches/scratch or another task's state. Uncertain shutdown blocks qualification."
+  :success "Separate observed passes for owner signed local_only/auth, deny/revoke/expiry/cache, genuine mode-appropriate provider bytes and consumer transport. Source or fixture assertions alone are never an executed policy-session result."}
+ :effect-allowlist-candidate
+ {:current-discovery [:read-pinned-source :hash-qualified-tool :run-tool-version-and-module-metadata-query-only
+                      :create-own-sub64MiB-query-scratch-and-retained-manifests :write-this-report]
+  :future-parent-permit-only [:compile-exact-pinned-owner-with-approved-offline-deps
+                              :one-task-owned-ephemeral-gateway-listener-on-127.0.0.1-random-port
+                              :task-owned-loopback-test-listeners-as-explicitly-enumerated
+                              :actual-authenticated-http-only-to-those-owned-ports
+                              :fresh-private-synthetic-db-keys-and-policy
+                              :in-memory-provider-roundtripper-no-sockets
+                              :bounded-owned-process-group-shutdown-and-private-evidence]
+  :never-inherited [:existing-installed-personal-govone :existing-server-credentials :public-or-lan-listen
+                    :dns-or-cloud-provider-network :model-load-download-restart :services-systemd-pm2-docker
+                    :operator-resources :new-kernel-or-issuer-api :automatic-dependency-fetch
+                    :board-receipts-commits-pr-push]
+  :real-runtime-executed-this-turn false :tests-executed-this-turn false}
+ :residual-decisions
+ {:source-question {:needed-for-new-test true
+                    :question "Authorize exactly one new owner test file cmd/govone-dev/s6a_fixture_test.go at the pinned GovOne source, with existing kernel untouched, after independent source-plan review?"
+                    :not-needed-for "Existing local-only command/tests; only their separate execution permit and dependencies are needed."}
+  :dependency-question {:needed true
+                        :question "May the exact missing selected public GovOne module/test dependency pins be acquired into a separate bounded isolated cache with go.sum verification, or should an existing verified cache be supplied?"
+                        :current-action "No acquisition; graph/source incompleteness is a blocker. First obtain graph metadata under explicit pin/checksum rules; unknown additional graph coordinates require review, not ambient download."}
+  :not-new-user-questions ["Whether whole S2A/S4A/E4 is complete: not relevant to this fixture plan."
+                           "Permission to reuse installed credentials/models: never requested or inferred."
+                           "Parent-owned ephemeral fixture execution: parent can issue a precise permit after independent review; not granted by this report."]
+  :parent-review-correction "Reconcile external_approved/public versus fresh-entity-redaction expectation against actual owner policy before approving the new test. No fake sensitivity lowering, canned allow or copying kernel is an acceptable resolution."}
+ :reflection "Tool availability was resolved, dependency availability was not. Failed isolation wrappers were recorded rather than treated as proof. Metadata-only private cache made the allowed query possible without global writes or network. Existing two-mode capture is mocked authority; new genuine test must preserve actual classification/mode semantics. Parent owns receipt/mycology recording."
+ :written-only "This new coordinator report plus explicitly allowed owned query scratch/manifests; no product/board/ledger changes."
+ :authorization-granted :none}

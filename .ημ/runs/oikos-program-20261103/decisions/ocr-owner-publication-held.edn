@@ -1,0 +1,14 @@
+{:decision/id :ocr-owner-publication-held-20261103
+ :kind :publication-safety-hold-not-an-operator-selection
+ :source-evidence "../reviews/ocr-owner-persistence-v1.edn"
+ :owned-unit-commit "470a96888c21f9a467f8d06f7802e88f3021302b"
+ :owned-source-commit "6626d680f079c3330fee1df1f3565475d7ef1a55"
+ :source-blocker :public-origin-would-expose-private-title-in-reachable-ancestry
+ :unit-blocker :normal-push-would-publish-five-unrelated-unpublished-ancestors
+ :question "How should I preserve the exact reviewed OCR files and active unit override remotely without publishing unrelated history?"
+ :offered [:private-snapshot-only-artifact-branch :keep-local-evidence]
+ :question-result :unanswered :selection nil
+ :authorized-new-publication-destination false
+ :action :retain-local-evidence-and-continue-unrelated-work
+ :remote-backup-verified false :cleanup-authorized false
+ :constraints "Do not expose the private title, publish unrelated commits, force push or rewrite ancestry. The unanswered question is not consent to the recommended private snapshot. Preserve local commits, the active reviewed release, exact private rollback evidence and the consumed restart marker. No restart or source alteration is needed to resolve publication."}

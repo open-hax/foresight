@@ -1,0 +1,11 @@
+{:decision/id :govone-go-cmp-checksum-proof-authorization-20261103
+ :source :question-tool-explicit-user-answer
+ :question "GovOne’s dependency graph names the exact public pin github.com/google/go-cmp@v0.6.0, but its existing go.sum has no checksum for it. May I verify that pin through Go’s public checksum database and record the proof in the isolated cache?"
+ :answer "Allow checksum proof (Recommended)"
+ :coordinate "github.com/google/go-cmp@v0.6.0"
+ :scope [:authenticated-public-go-checksum-proof :isolated-pin-adjudication
+         :exact-graph-selected-pin-acquisition-after-proof]
+ :allocation :existing-govone-805306368-bytes-including-prior-cache
+ :not-authorized [:version-change :owner-lockfile-change :other-missing-pin-adjudication
+                  :global-cache-edit :application :build :test :runtime]
+ :requirement "Verify the checksum database response with its actual pinned public verifier, rather than treating an unsigned lookup body as proof. Retain provenance and matched mod/source checksums. Stop on any additional unpinned coordinate."}

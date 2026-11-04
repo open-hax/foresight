@@ -1,0 +1,91 @@
+{:review/version 1
+ :review/kind :bounded-independent-integration-qualification
+ :reviewer {:harness :opencode :model "openai/gpt-6.1-sol"}
+ :repository "/home/err/spaces/foresight/.worktrees/integrate/receipt-git-buffer-20261103"
+ :base "d25d4e7a926eddddafeaaf227ce1c592581110fe"
+ :source-only-commit "2b4c3bcc6bea3cf61a825041a355f041a2a6ed1a"
+ :reviewed-head "88b2b184ac1f8a73350e087e3f8e5eb796c2dbf2"
+ :verdict :approve
+ :confidence 0.98
+ :findings []
+ :required-regressions []
+ :scope "Exact reviewed source promotion, target-prefix preservation, new receipt admission and custody metadata only; not a repeated full code audit or merge authorization."
+ :source-identity
+ [{:path "scripts/evidence.clj"
+   :sha256 "66ac1767beed108bb86625a5d35cc9b80836c5176fccd9d50b295cc093bff7b5"
+   :git-blob "cddfd35d9257d74a36bd632728a53605fda1ecc3"}
+  {:path "test/evidence_cli_test.cljs"
+   :sha256 "873b3d46761d8788e3d981bf549fb973cfdbdecc8377ae6cc6e80f8a033e474d"
+   :git-blob "f83bc889260886120f4f82850ed0257b842e807f"}]
+ :identity-verification "Read full committed file bytes at 2b4c3bcc, 88b2b184, 036cfd03 and 6bad69c1867a3328549c311e2cf61a88e175f24c. Every SHA256 equals the independently reviewed frozen source/test hash. Working candidate files also match."
+ :lineage
+ {:exact-linear-parents-verified true
+  :chain ["d25d4e7a926eddddafeaaf227ce1c592581110fe"
+          "2b4c3bcc6bea3cf61a825041a355f041a2a6ed1a"
+          "88b2b184ac1f8a73350e087e3f8e5eb796c2dbf2"]
+  :source-commit-paths ["scripts/evidence.clj" "test/evidence_cli_test.cljs"]
+  :complete-base-to-head-paths ["scripts/evidence.clj" "test/evidence_cli_test.cljs"
+                               ".ημ/receipts.edn"
+                               ".ημ/runs/oikos-program-20261103/receipt-repair-source-promotion.edn"]
+  :operational-card-rheos-or-memory-ledger-transplant false
+  :complete-donor-branch-merge false}
+ :target-ledger
+ {:base-bytes 1289833
+  :base-sha256 "a73bd90dff5d09c8312f8131a24464c8692a3b86832a99d7fab1eaa73af48a2a"
+  :exact-base-prefix-verified true
+  :head-bytes 1291487
+  :head-sha256 "c7331571ad307df6f24486233c6e2e094e79bcb8c587be63389e752d79e077fd"
+  :head-records 557
+  :appended-records 1
+  :new-record-envelope-valid true
+  :new-record-origin "receipt-git-buffer-selective-source-promotion"
+  :new-record-ts "2026-11-03T18:29:25.443Z"
+  :new-record-manifest-type :vector
+  :new-record-refs-type :vector
+  :historical-target-records-rewritten-or-removed 0}
+ :independently-executed-checks
+ [{:command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base d25d4e7a926eddddafeaaf227ce1c592581110fe --at 88b2b184ac1f8a73350e087e3f8e5eb796c2dbf2"
+   :exit 0 :total-receipts 557 :appended-receipts 1 :appended-evidence-receipts 0}
+  {:command "nbb -cp src:scripts scripts/evidence.clj verify-receipts --base e31b43a57765a394521d6c49aafd068f5c4d5ad5 --at 88b2b184ac1f8a73350e087e3f8e5eb796c2dbf2"
+   :exit 0 :total-receipts 557 :appended-receipts 10 :appended-evidence-receipts 0}
+  {:interface :canonical-read-only-api
+   :functions ["evidence/read-immutable-receipt-ledger!" "evidence/buffer-prefix?"
+               "evidence/appended-receipt-records!" "foresight.evidence/receipt-envelope?"]
+   :result :exact-target-prefix-plus-one-law-valid-record}
+  {:command "git --no-optional-locks diff d25d4e7a926eddddafeaaf227ce1c592581110fe 88b2b184ac1f8a73350e087e3f8e5eb796c2dbf2 --check" :exit 0}
+  {:command "git --no-optional-locks status --porcelain=v1 --untracked-files=no --ignore-submodules=all"
+   :exit 0 :tracked-worktree-clean true}]
+ :archive-custody
+ {:repository "riatzukiza/foresight"
+  :branch "evidence/receipt-git-buffer-20261103"
+  :commit "036cfd03a58314b2672632057820f3bd42214729"
+  :blob "c50e55b84cfed4516d2fb25a6827905503e08926"
+  :bytes 1289238
+  :sha256 "659f7c903e483677c6559212d562e3a6ff7124eff471c1bd240a4a0a4ebe3eef"
+  :authenticated-remote-ref-verified true
+  :fully-decoded-remote-blob-byte-equals-local-archive true
+  :invalid-original-lines-and-sha256-without-lf
+  {551 "0a66f43c2b1dcc599045fefa316e1d6b69dfa39ab9b593891c332a191bbb2923"
+   552 "ba4f66428456223b743a8a4cd6c8ed33dbdc7e99b446694f374d854fcabd3797"
+   553 "b79e55eda1c055f82e2413832cc94442f85ccafd00be2ca50deb00b4a458819b"}
+  :authentication-observation "Inherited-token gh read returned HTTP401. Explicit token-stripped keyring-authenticated read-only gh API calls then verified both the archive ref and complete decoded blob; no token/config files were changed."
+  :read-only-commands ["env -u GH_TOKEN -u GITHUB_TOKEN gh api repos/riatzukiza/foresight/git/blobs/c50e55b84cfed4516d2fb25a6827905503e08926"
+                       "env -u GH_TOKEN -u GITHUB_TOKEN gh api repos/riatzukiza/foresight/git/ref/heads/evidence/receipt-git-buffer-20261103"]}
+ :promotion-metadata-assessment
+ {:path ".ημ/runs/oikos-program-20261103/receipt-repair-source-promotion.edn"
+  :anchors ["receipt-repair-source-promotion.edn:1-17"
+            "receipt-repair-source-promotion.edn:18-29"
+            "receipt-repair-source-promotion.edn:30-40"]
+  :verdict :truthful-with-explicit-historical-checkpoint
+  :reason "Metadata accurately calls this a two-file source promotion, not a complete branch merge, retains remote custody of all malformed donor bytes, preserves the complete target prefix and disclaims native approval transfer. Pending independent review is explicitly a pre-review historical checkpoint, not a claim about this later assessment. The newly appended receipt is shape-valid and documents custody without a schema waiver."
+  :full-suite-rerun-this-turn false
+  :suite-claims "The metadata's 59/393 and other full-suite counts are earlier candidate execution claims, not new runs by this bounded integration review. Identical source/tests were fully tested in receipt-repair-code-review-v1.edn; actual new full base/head history checks were independently executed here."}
+ :old-blocker-disposition "The three malformed receipts remain malformed and preserved on the donor archive. They are not an active-suffix blocker on this separate d25d4e7-based lineage: no target records were removed and canonical actual-base/head checks pass. Do not carry the old 036cfd03 history failure forward as a failure of 88b2b184."
+ :qualification-limits {:native-approval-transfer false :native-pr-metadata-independently-read false
+                        :readiness-or-native-approval-credit false :merge-authorization false
+                        :future-head-or-base-drift-requires-fresh-qualification true
+                        :normal-exact-head-authorization-and-protection-remain true}
+ :effects {:only-new-persistent-file ".ημ/runs/oikos-program-20261103/receipt-repair-integration-review-v1.edn"
+           :product-or-card-or-ledger-writes false :commits false :pushes false
+           :pr-requests-or-mutations false :merge false :service-or-model-calls false}
+ :reflection "Kept the follow-up bounded: exact blob reuse, clean target lineage and immutable evidence custody are separate checks. A legitimate source promotion does not inherit a donor's malformed active suffix or native review identity."}

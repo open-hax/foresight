@@ -1,0 +1,53 @@
+{:permit/id :oikos-s2a-initial-contract-c399b60e
+ :authority :parent-authenticated-independent-local-code-review
+ :source {:repository "open-hax/oikos"
+          :sha "c399b60e1676c47778445c1098eb541ab38743cb"
+          :tree "10357860ac91b440a5ec4e38295b9aaa56ad0d01"
+          :published-ref "artifact/oikos-safe-reference-c399b60e"
+          :descriptor "docs/contracts/desktop-safe-reference-v1.edn"
+          :descriptor-sha256 "7ad9541df188201860e212b91d3744a62cd9aa05ae4a8d80c25425b4f0886916"}
+ :contract {:version "oikos.desktop.safe-reference/v1"
+            :digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+            :digest-algorithm :sha256-of-clio-canonical-edn
+            :clio-owner "788cdd3434615a7932b924e68520dbf7f88408c2"}
+ :review {:path "../reviews/s2a-contract-fix-review-v2.edn"
+          :sha256 "e329a2fa6b171795a56c1800ac12893d5b1dccd1312f3cf0c7b01d9e0232542e"
+          :evidence-id "b4542a1a-d95a-5fb5-a73d-3ba80bdd4692"
+          :evidence-id-method :uuidv5-of-qualified-review-content-sha256
+          :actual-independent-verdict :approved
+          :original-findings-settled [:s2a/recursive-metadata-bypass :s2a/runtime-record-roundtrip]
+          :native-provider-approval false}
+ :trusted-review-context
+ {:artifact {:contract/version "oikos.desktop.safe-reference/v1"
+             :contract/digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+             :source/sha "c399b60e1676c47778445c1098eb541ab38743cb"}
+  :verdict :approved :independent? true
+  :evidence/id "b4542a1a-d95a-5fb5-a73d-3ba80bdd4692"
+  :evidence/digest "e329a2fa6b171795a56c1800ac12893d5b1dccd1312f3cf0c7b01d9e0232542e"}
+ :parent-actual-verification {:source "c399b60e1676c47778445c1098eb541ab38743cb"
+                              :desktop-bb [16 1059] :desktop-nbb [16 1059]
+                              :inherited-bb [18 286] :inherited-nbb [30 392] :eval [9 39]
+                              :failures 0 :errors 0 :lint-errors 0 :lint-warnings 0}
+ :frozen-source-and-test-sha256
+ {"bb.edn" "8f76a349e997923ae8130f81969a9d239522828e60f6645ae9de14ec0ada0af8"
+  "README.md" "85a93c408bb7c9167c297929915422023d377e0fd992a8c6134a1dc4a530f5fa"
+  "src/oikos/law/safe_reference.cljc" "baee008c0a3b2dc4a6ddd7bc8f4a63fed317d0d4514f961d819ad484019cdf60"
+  "src/oikos/law/desktop.cljc" "edea4e32bd0279ccfc2f81a4cfbe24c9e1348f06606f9d597530d28f894680d7"
+  "scripts/test_desktop.clj" "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"
+  "test/oikos/desktop_fixture.cljc" "77122676722cba3af9d62c42fcb725daf4236e6364ec50f7378a5907d4df4c57"
+  "test/oikos/desktop_runner.cljc" "a3b84c0bf587a7ce051d1d1ea9257d75832337d963bec8e609a4da9654b00072"
+  "test/oikos/law/desktop_test.cljc" "be969cb41358194a630b35cadc0db13243be400cc2cffbe250703c2e0bc4b088"
+  "test/oikos/law/plain_event_test.cljc" "5e4044f67c0792adad48ccd6c0544afc064afb8eb51eb853af306efd8996903f"}
+ :provided [:closed-plain-safe-reference-contract :lifetime-and-revision-identity
+            :pure-causal-desktop-replay :coverage-gap-and-compensation-laws]
+ :allowed-next-scopes
+ {:s2a [:owned-synthetic-actual-clio-schema-and-ledger-fixtures
+        :exact-envelope-retry :locked-append-and-persisted-replay-tests]
+  :s3a [:pure-logical-membership-and-named-branch-laws]
+  :s4a [:pure-scoped-named-capability-and-revision-bound-preview-contracts]}
+ :constraints "The review-context predicate compares trusted data; it does not authenticate a review. This parent record binds the actual independent report and published immutable source. New phase-2 code must not alter the frozen contract bundle before actual append; any contract/source change requires fresh independent review. New adapters require their own exact-head code review before task acceptance."
+ :not-authorized [:live-collectors :personal-capture :operational-content-store
+                  :retention-or-erasure-success-claims :arbitrary-i3-or-emacs-eval
+                  :live-editor-or-window-effects :model-execution :publication]
+ :producer-whole-task-complete false :new-board-admission-by-this-file false
+ :native-approval-credit 0 :epic-completion-credit 0}

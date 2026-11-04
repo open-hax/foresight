@@ -1,0 +1,127 @@
+{:report/id :oikos/ocr-attestation-code-review-v1
+ :report/at "2026-11-03T19:55:05Z"
+ :report/kind :independent-adversarial-code-and-activation-plan-review
+ :report/status :changes-required
+ :report/verdict :request-changes
+ :report/confidence 1.0
+ :reviewed
+ {:repository "/home/err/.config/i3"
+  :worktree "/home/err/.config/i3/.worktrees/feat/oikos-ocr-attestation-20261103"
+  :branch "feat/oikos-ocr-attestation-20261103"
+  :commit "10b283d8cc6eb6b674c22a251e953bc21e57ddfd"
+  :baseline "c40c59754d4ce70877841dc35a428c4c0be6a66a"
+  :head-and-working-bytes-match-reviewed-commit true
+  :commit-parent-is-baseline true
+  :only-changed-files ["devops/ocr/server.py" "devops/ocr/launch.py"
+                       "devops/ocr/test_attestation.py" "devops/ocr/ATTESTATION.md"]
+  :file-identities
+  [{:path "devops/ocr/server.py" :bytes 10440 :sha256 "eabd5c1b1d2f8952b5b526cb1c941a6e83400f8731da41c8db52c5c775d3bd58"}
+   {:path "devops/ocr/launch.py" :bytes 1284 :sha256 "63a956d06f8538267f26e8847dfa2e37f296aca7c5a063650665f5ce67b375d6"}
+   {:path "devops/ocr/test_attestation.py" :bytes 6631 :sha256 "d6325c44dc6db4853e18a50f9e90ef5fd0f18927aa2e05553b446a10e16bb4ea"}
+   {:path "devops/ocr/ATTESTATION.md" :bytes 6245 :sha256 "42527ecd3430939472c62d0e10778d1a4b9629bd5e3fee4934173ac88081172d"}]
+  :parent-report ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-implementation-v1.edn"
+  :instructions "Applicable home, spaces, Foresight and i3 instructions reviewed; target worktree AGENTS.md read; no additional devops/ocr or report-directory AGENTS.md found."
+  :worktree-clean-at-end true}
+ :findings
+ [{:finding/id :ocr-attestation/invalid-startup-binding-accepted
+   :priority :P2
+   :confidence 1.0
+   :status :open
+   :blocking-controlled-activation true
+   :title "Validate startup binding shape and bounds before Core; None-only checking is not fail-closed"
+   :locations [{:path "devops/ocr/server.py" :lines [109 112]}
+               {:path "devops/ocr/server.py" :lines [131 141]}
+               {:path "devops/ocr/test_attestation.py" :lines [52 55]}]
+   :proof
+   ["The guard rejects only None. Twelve synthetic malformed values across _SOURCE_IDENTITY and _LAUNCH_IDENTITY, including {}, False, empty strings, invalid digest/length fields and wrong binding labels, reached an explicitly fake Core sentinel instead of being rejected before native work."
+    "Separate fully fake initializations completed and published source={} (844-byte record), source=False (879 bytes), and source={sha256: not-a-hash, bytes: -1, binding: wrong} with zero/boolean process clock fields (964 bytes). _warm was a mock throughout."
+    "An extra synthetic 65536-character source field was copied into a 66538-byte startup record. Extra synthetic source/path-like and launch/environment-like keys were published verbatim: source is serialized wholesale and process uses dict(_LAUNCH_IDENTITY, pid=...). No real paths, environment values or private data were used in these witnesses."
+    "The existing successful-initialization test deliberately supplies source-hash rather than a SHA256 and omits the source binding marker and most process fields, so the six green tests do not establish the requested invalid-binding/schema contract."]
+   :impact "Malformed or accidentally corrupted preseeded startup globals can trigger model initialization/warm before failing, or produce an apparently ready but invalid/unbounded identity record. This is a trusted-startup boundary defect, not an HTTP injection exploit: the fixed launcher currently generates valid records and exposes no request-controlled source selection."
+   :required-change "Before ov.Core(), reject malformed source/process binding records using a small closed schema: exact permitted keys; 64 lowercase hexadecimal SHA256; positive non-boolean bounded source byte count; exact sha256-of-compile-exec-buffer marker; positive non-boolean bounded start ticks and clock frequency; bounded valid UTC launch timestamp. Serialize only the permitted fields. Keep the pinned launcher as the execution trust base; shape validation is not proof against a forged but validly shaped record."
+   :required-regressions
+   ["Valid launcher-generated bindings still complete fully fake initialization with the existing model shapes, target and one mocked warm."
+    "For every missing/malformed/extra-key/oversized source or process binding, assert rejection before fake Core, asset reads, compile, warm, or listener creation. Include {}, False, wrong marker, short/nonhex digest, negative/bool counts, absent/zero/bool ticks or frequency, invalid/oversized timestamps and extra path/env-like fields."
+    "Assert the resulting identity has exactly the documented source/process fields, valid bounded field values and a bounded serialized size; retain the existing frozen-record/no-reread and no-private-content tests."]}]
+ :verified-strengths
+ [{:subject :source-execution-binding
+   :evidence "launch.py:14-27 hashes the same immutable bytes object supplied to compile/exec. The existing mutation-after-read regression passes. A separate corrected main-path probe verified one read of fixed sibling server.py, matching source digest/length/marker, process-start fields and rejection of extra launcher arguments before any source read. execute_source is an internal helper, not a request route."
+   :limit "Launcher, interpreter and dependencies remain the trust base; source identity is not launcher/dependency/native-compiled-artifact attestation."}
+  {:subject :asset-buffer-binding
+   :evidence "server.py:75-88 reads each XML/BIN once, hashes those exact bytes and passes the identical objects by model/weights keyword to the reader; charset hashing and universal-newline decoding use its single buffer. Existing identity-object tests pass. A backing-store mutation probe retained original reader bytes and hashes with exactly one read per model file."
+   :limit "Exact supplied buffers are identified, not transactional coherence across five concurrently edited asset files."}
+  {:subject :installed-python-api
+   :evidence "Read /home/err/.local/lib/python3.12/site-packages/openvino/_ov_api.py:550-567 as text and inspected its AST. The bytes branch forwards model and supplied weights to super().read_model without reopening a model path in this Python wrapper. importlib.metadata reports distribution 2025.4.1 without importing openvino."
+   :limit "No native reader, model load, NPU compatibility or inference was exercised."}
+  {:subject :frozen-record-and-route
+   :evidence "Record JSON is created after the inherited warm succeeds; the GET handler reads that string, not disk. Existing freeze/no-reread tests pass. Eight additional route/header probes passed: remote peers spoofing forwarding headers remain forbidden; local peers are governed by the TCP address; /identity?, /identity/, encoded identity names, /health?anything=1, /health/ and unknown routes do not become health/identity successes."
+   :limit "TCP-loopback provenance is intentional, not per-user authentication or remote cryptographic attestation."}
+  {:subject :inference-behavior-preservation
+   :evidence "Independent baseline/current AST comparison found _warm, _letterbox, _detect, _recognise, run, do_POST, _send, main, _is_cjk and _junk unchanged. Full commit diff contains only the four reviewed files. No suppressed inference, OCR algorithm rewrite, second listener or changed service host/port default was found."}
+  {:subject :failure-propagation
+   :evidence "Synthetic reader failure propagates without retry or warm; invalid UTF-8 charset decoding fails; launcher syntax failure does not execute the source. There is no added CPU/device fallback or swallowed initializer exception."}
+  {:subject :identity-semantics
+   :evidence "Input hashes/sizes, module runtime version, requested NPU compile target, PID, kernel start ticks and labelled launch/load/ready times are separated from compiled_artifact_identity=not-attested. Legitimate launcher-generated identity construction does not add paths, argv, environment, charset contents or user requests. Finding P2 covers malformed preseeded metadata rather than a normal-route disclosure."}]
+ :verification
+ {:actual-python-test-run
+  {:command "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s devops/ocr -p 'test_*.py' -v"
+   :exit 0 :tests 6 :failures 0 :errors 0 :duration-seconds 0.041}
+  :guarded-adversarial-run
+  {:method "Inline stdlib unittest runner, existing load_server helper, fake modules/readers/models, mocked _warm, and a meta_path guard rejecting real cv2/numpy/openvino imports. No persistent probe script was written."
+   :tests 15 :passed 14 :errors 1 :exit 1
+   :harness-only-error "The first launcher-main probe incorrectly expected server globals in runpy's returned launcher globals. launch.py intentionally execs a separate server namespace; KeyError fixture_ran was a reviewer harness error, not a product failure."
+   :correction "Reran that probe using a synthetic builtins callback to capture the separate executed namespace. It passed fixed-sibling, one-read, digest/length/marker, kernel clock-field and argument-rejection assertions; exit 0. All nine additional probe behaviors were consequently exercised successfully, including witnesses of the P2 defect."
+   :native-import-attempts 0 :native-modules-left-loaded 0
+   :invalid-binding-witnesses-reaching-fake-core 12
+   :extra-route-header-cases 8}
+  :additional-malformed-record-witnesses
+  {:exit 0 :cases 4
+   :result "Four synthetic invalid/oversized records completed fake initialization and were serialized, confirming the open P2 finding rather than proving rejection."
+   :maximum-observed-identity-bytes 66538}
+  :other-independent-checks ["Reviewed working-file SHA256s and bytes equal exact committed blobs."
+                             "Exact parent/baseline and full four-file change set verified."
+                             "Ten baseline/current function ASTs equal."
+                             "git diff --check baseline commit -- devops/ocr: exit 0."
+                             "Final product worktree status clean."]
+  :inherited-not-rerun
+  {:source :implementation-report
+   :bb-tests {:tests 70 :assertions 207 :reported-exit 0}
+   :bb-lint {:reported-findings 1 :reported-exit 0 :warning "Existing missing caffeine-toggle binding target."}
+   :clj-kondo {:reported-warnings 6 :reported-info 1 :reported-exit 2}
+   :warning-baseline "Reported unchanged, not independently rerun here. No clean lint gate or warning-free acceptance is claimed."}}
+ :controlled-activation
+ {:status :blocked
+  :qualified false
+  :blocking-findings [:ocr-attestation/invalid-startup-binding-accepted]
+  :exact-reviewed-head-activation-approved false
+  :user-grant-understood "Reviewed identity-reporting change and one parent-owned controlled restart of existing ocr-npu.service with existing assets only. No startup trial, standalone native import/load/warm, OCR batch, personal input or download."
+  :plan-assessment "The basic launcher/snapshot/drop-in/one-restart/metadata-only rollback design is appropriate, but no live activation is qualified by this review while P2 remains open and the concrete preflight/drop-in is unverified."
+  :restart-policy "The implementation report records Restart=always. The proposed effective Restart=no is necessary to prevent an automatic second startup during the controlled window; an ExecStart-only override is not approved. This review did not query or mutate any unit/service."
+  :required-parent-preflight-after-fix
+  ["Settle P2, rerun offline regressions and independently review the replacement exact commit; do not silently substitute new bytes under release 10b283d8cc6eb6b674c22a251e953bc21e57ddfd."
+   "Recheck sufficient RAM/disk and contention; pin expected existing five asset identities without downloading, copying models or invoking native code. Validate that no startup/restart already consumed the user's single-start authorization."
+   "Privately preserve exact prior unit/drop-in bytes and selected nonsecret process/restart metadata. Review the concrete composed ExecStart with the same absolute interpreter and flags, environment, working directory, host/port and user; stop on drift instead of guessing."
+   "Use existing administrative authority only. Export only committed server.py and launch.py to a fresh version-named staging directory, verify their hashes, make root-owned files 0444 and directory 0555, and atomically install without replacing any existing release. Verify parent directories and resolved path components are trusted and non-writable by the service user, including ACL/symlink effects, so the root-owned child cannot be renamed/replaced through a writable ancestor."
+   "Independently validate the exact owned drop-in, its precedence and effective settings without starting: ExecStart reset plus the pinned launcher and effective Restart=no, with no other inherited trigger/force-restart setting defeating the one-start boundary. Daemon-reload is configuration reload, not permission for a test startup."
+   "Parent alone performs the single restart after all gates; inherited compile/warm belongs only to that restart. Use bounded loopback GET /health and /identity, no POST, and compare source/asset identities and PID/start ticks against pinned expectations and selected systemd/proc metadata. On mismatch/failure stop, do not retry."
+   "Retain Restart=no through the controlled window and failed-worker handling. Restore/remove only owned override metadata with exact rollback bytes and daemon-reload as appropriate; never re-enable Restart=always on a failed worker as an implicit retry. Reactivating the old command is a second startup requiring renewed user authorization. Preserve immutable release/worktree evidence."]
+  :release-path-metadata-observed "Read-only namei: / and /opt are root:root 0755; /opt/desktop-ocr does not exist. No release was created. Full future release ancestor permissions therefore still require parent preflight."
+  :native-approval false :hardware-credit false :ocr-quality-credit false
+  :resource-admission false :s7a-complete false :activation-performed false}
+ :execution-boundary
+ {:persistent-write-only ".ημ/runs/oikos-program-20261103/reviews/ocr-attestation-code-review-v1.edn"
+  :product-edits 0 :card-edits 0 :ledger-edits 0 :pr-interactions 0
+  :commits 0 :pushes 0 :installs 0 :downloads 0
+  :unit-service-queries 0 :unit-service-edits 0 :service-starts 0 :service-restarts 0
+  :native-imports 0 :native-model-loads 0 :native-compiles 0
+  :actual-warm-executions 0 :inference-requests 0 :ocr-posts 0
+  :listeners-started 0 :personal-input-reads 0 :i3-controls 0
+  :temporary-test-fixtures "Existing unittest launcher mutation test used its self-cleaning synthetic temporary directory; guarded rerun used TMPDIR=/tmp/opencode. Additional probes used in-memory/synthetic fixtures only. No persistent scratch directory was created."}
+ :reflection
+ {:receipt-owner :parent :session-mycology-owner :parent
+  :separate-ledger-or-spore-write false
+  :reason "Explicit worker scope permits only this new report; receipt/reflection material is handed to parent here, not written to product or board ledgers."
+  :p-efficiency 0.85 :p-friction 0.2 :p-skill-candidate 0.5 :spore nil
+  :lesson "Positive provenance tests must be paired with invalid-metadata rejection before costly native startup. Root-owned release files also require trusted parent paths; one authorized restart requires effective retry suppression and rollback without another startup."
+  :review-harness-lesson "A runpy caller cannot inspect a separate exec namespace through launcher globals; use an explicit synthetic observation callback."
+  :handoff "Parent should settle the single P2 finding and obtain a review of the replacement exact head before considering the one controlled activation. No hardware or quality qualification follows from these offline probes."}}

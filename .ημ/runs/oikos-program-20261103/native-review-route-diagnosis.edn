@@ -1,0 +1,119 @@
+{:schema :native-review-route-diagnosis/v1
+ :date "2026-11-03"
+ :scope :read-only-bounded-diagnosis
+ :credit {:approval false :coverage false :completed-round false :quota-exclusion false}
+ :transport "GitHub REST and gh pr checks; env -u GH_TOKEN -u GITHUB_TOKEN gh; no credential values inspected"
+ :inputs-read ["/home/err/AGENTS.md"
+               "/home/err/.agents/skills/pr-flow/SKILL.md"
+               "/home/err/.agents/skills/pr-flow/flow.edn"
+               "/home/err/spaces/foresight/AGENTS.md"
+               "/home/err/spaces/foresight/docs/notes/opencode-free-mimo-routing.md"
+               "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/AGENTS.md"]
+ :workflow-source
+ {:caller-path ".github/workflows/eta-mu-review.yml"
+  :path-correction "The requested .github/eta-mu-review.yml does not exist at f3; the native run and contents API identify .github/workflows/eta-mu-review.yml."
+  :caller-at "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+  :upstream-repository "open-hax/eta-mu"
+  :upstream-path ".github/workflows/opencode-code-review.yml"
+  :upstream-sha "b5b28237c45323cdc1914317260192163d957735"
+  :source-url "https://github.com/open-hax/eta-mu/blob/b5b28237c45323cdc1914317260192163d957735/.github/workflows/opencode-code-review.yml"
+  :caller-events [:pull_request/opened :pull_request/synchronize :pull_request/reopened :pull_request/ready_for_review]
+  :upstream-events [:pull_request :workflow_call]
+  :workflow-dispatch false
+  :issue-comment-invitation false
+  :eligibility "github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository"
+  :review-prerequisites [:deterministic-evidence-success :compiled-context-success :eligible-same-repository-ready-pr]
+  :caller-permissions {:contents :read :pull-requests :read}
+  :publicly-named-secrets ["ETA_MU_APP_ID" "ETA_MU_APP_PRIVATE_KEY" "DISCORD_REVIEW_WEBHOOK_URL"]
+  :publication {:required-secrets ["ETA_MU_APP_ID" "ETA_MU_APP_PRIVATE_KEY"]
+                :app-requirement "Target-repository installation/grant; minted installation token requests metadata:read and pull-requests:write."
+                :optional-secret "DISCORD_REVIEW_WEBHOOK_URL"
+                :secret-values-inspected false}
+  :inference {:route :anonymous-opencode-free-mimo
+              :caller-cli "1.18.31"
+              :actual-pinned-default "opencode/mimo-v2.6-flash-free"
+              :catalog-discovery-in-this-pin false
+              :warning "This old immutable source actually supplies a fixed model default and 45-minute review job. Routing memory's newer dynamic selector/120-minute source is not adopted by this pin. Do not silently alter the pin/model or infer current provider health."
+              :openrouter-key-required false}}
+ :foresight153
+ {:repository "open-hax/foresight" :pr 153
+  :head "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+  :head-repository "riatzukiza/foresight" :base-ref "plan/fork-dev-origins"
+  :draft false :fork-event true
+  :run-id 41687525079 :attempt 1 :check-suite-id 112967208762
+  :run-url "https://github.com/open-hax/foresight/actions/runs/41687525079"
+  :jobs [{:id 126097160171 :name "Produce deterministic review evidence" :conclusion :skipped}
+         {:id 126097101711 :name "Compile Muse tools and stage skills" :conclusion :skipped}
+         {:id 126097102709 :name "Review pull request with OpenCode MiMo" :conclusion :skipped}
+         {:id 126097099769 :name "OpenCode evidence review gate" :conclusion :success}]
+  :gate-log {:time "2026-11-03T17:46:56.4703430Z"
+             :eligible-review-event false
+             :message "OpenCode evidence review gate is not applicable to draft or fork pull requests."}
+  :diagnosis "The source's same-repository security predicate is false. The two review-facing skipped checks (compile and MiMo), and the deterministic producer, never execute. This is not a runner-approval wait or a tested credential/provider failure."
+  :retry "Rerunning this run cannot change fork identity or make the predicate true. No workflow_dispatch/mention surface exists in this caller or callee. Do not enable fork secrets or remove the predicate as a retry."
+  :provider-health :unmeasured
+  :credentials-for-this-repository :unknown}
+ :foresight52
+ {:repository "riatzukiza/foresight" :pr 52
+  :head "7a0d842ebac7d7603852581d80cf2087c1ab1dc3"
+  :head-repository "riatzukiza/foresight" :draft false
+  :run-id 41683556765 :attempt 1
+  :run-url "https://github.com/riatzukiza/foresight/actions/runs/41683556765"
+  :observed-status :in-progress
+  :jobs [{:id 126083218308 :name "Produce deterministic review evidence" :conclusion :success}
+         {:id 126083219047 :name "Compile Muse tools and stage skills" :conclusion :success}
+         {:id 126083789323 :name "Review pull request with OpenCode MiMo" :status :in-progress
+          :active-step "Run bounded evidence-first OpenCode review"
+          :credential-guard :success :native-publication :pending}]
+  :diagnosis "An existing native MiMo execution route is already admitted and running. Credential nonemptiness guard passed; this does not yet prove successful App token mint/publication or accepted review."
+  :retry "Do not dispatch or rerun while active. Ordinary failed reviewer-job rerun is an existing route described in routing memory, distinct from fresh-run-only actionability; first collect this attempt's terminal outcome and exact source."
+  :provider-health :unmeasured-by-this-diagnosis
+  :approval :not-asserted}
+ :oikos1
+ {:repository "open-hax/oikos" :visibility :private :pr 1
+  :head "95dfbdb26f65fac8b17bcb11cd192ba47d8efe3c"
+  :head-repository "open-hax/oikos" :draft false
+  :hosted-workflows-api-total 0
+  :diagnosis "No installed hosted MiMo/Kimi workflow is exposed by actions/workflows. There is no existing job to retry and no demonstrated full-review dispatcher. This is missing execution infrastructure, not measured provider unavailability."
+  :credentials :unknown}
+ :kimi
+ {:intended-invitation-target true
+  :global-native-kimi-identities #{}
+  :foresight-current-head-kimi-workflow false
+  :oikos-hosted-kimi-workflow false
+  :existing-separately-scoped-policy-profile
+  {:repository "open-hax/proxx" :workflow-id 285819940
+   :path ".github/workflows/opencode-code-review.yml"
+   :name "OpenCode Kimi PR Review"
+   :principal "opencode-agent[bot]"
+   :principal-id 219766164
+   :scope-warning "Proxx-only digest/runtime/publication admission; not reusable enrollment for Foresight or Oikos."}
+  :current-proxx-source-observation
+  {:default-branch-head "88471efd7f8cd27f64fc733a1c31369f00a6d432"
+   :workflow-blob "b8899b4ee898956896657b4a109bc90d34dc3c4d"
+   :path ".github/workflows/opencode-code-review.yml"
+   :events [:pull_request]
+   :same-repository-ready-pr-only true
+   :action "anomalyco/opencode/github@385cb694419f98103af0e8fc6187ddcbcbb6eecb"
+   :model "kimi-for-coding/k2p5"
+   :use-github-token true
+   :public-secret-name "KIMI_FOR_CODING_API_KEY"
+   :permissions {:id-token :write :contents :read :pull-requests :write :issues :write}
+   :qualification "This current source is not asserted to match the separate admitted Proxx profile digests. Its GitHub-token publisher cannot be assumed to authenticate a native Kimi reviewer. It is not a dispatcher for another repository's PR."}
+  :official-app-alternative "Routing memory describes official OpenCode OIDC-to-App installation-token transport (target App installation plus id-token:write), distinct from use_github_token:true. No such installed target workflow or admission was established here. Do not install the App or exchange credentials as diagnosis."
+  :diagnosis "No native Kimi invitation/execution surface is installed on the inspected Foresight heads or Oikos; empty global Kimi identity is an independent admission gap. A mention, local model run or copied transcript cannot fill it."}
+ :operator-boundary
+ {:observed-gh-repository-permissions {:open-hax/foresight {:admin true :push true}
+                                      :open-hax/oikos {:admin true :push true}}
+  :sole-user-admin-action-established false
+  :why "No missing secret/App grant was observed at the skipped fork run, and the personal run passed its credential guard. The authenticated gh principal already reports admin permission on both org repositories. Missing safe target workflows/admission require separately scoped reviewed source work, not an arbitrary user choice or a demonstrated user-only settings toggle. This read-only assignment does not authorize that work."
+  :conditional-exact-admin-action "Only if a future eligible same-repository run actually fails the named App guard: grant that target repository access to the existing ETA_MU_APP_ID and ETA_MU_APP_PRIVATE_KEY organization Actions secrets, and ensure the eta-mu App installation includes the target with pull requests write. Secret presence alone does not prove the installation grant. This is conditional, not the present diagnosed blocker."
+  :not-a-fix ["Approve fork run" "Expose organization secrets to fork code" "Request an OpenRouter key" "Change account/provider restrictions" "Drop MiMo from cohort" "Alias github-actions as Kimi"]}
+ :smallest-legitimate-next-action "Coordinator should observe the already-running riatzukiza/foresight run41683556765/job126083789323 through terminal outcome, without a new invitation or rerun. Keep org Foresight fork-route, Oikos hosted-route and Kimi admission gaps explicit; no owner decision is needed to perform that readback."
+ :limits ["No native status CLI invoked: skill warns status may append local receipts. Supplied cohort/round status retained, not recomputed."
+          "No App installations, secret-store reads, token/environment-value reads, model inference, service/benchmark load, GitHub mutations or review publication."
+          "Repository permission metadata is not operational authorization for changes."
+          "Successful skip gate is not review completion; running MiMo is not accepted invocation; absent routes/failed/skipped jobs are not quota exclusions."]
+ :reflection {:friction "Task started in home rather than coordinator worktree; exact coordinator path recovered read-only."
+              :reusable-lesson "Bind caller/callee immutable source and native fork eligibility before diagnosing provider or credential health."
+              :spore-created false :separate-ledger-written false}}

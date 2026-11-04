@@ -1,0 +1,19 @@
+{:decision/id :ocr-attestation-restart-authorization-20261103
+ :decision/source :question-tool-explicit-user-answer
+ :question "The existing OCR worker is running, but its source file changed after startup, so disk hashes cannot identify its loaded code/models. How should I resolve this without disturbing your desktop unexpectedly?"
+ :selected-label "Authorize attestation restart"
+ :selected-description "Allow a reviewed identity-reporting change and one controlled restart of ocr-npu.service using existing assets only. No downloads, personal inputs, or OCR batch execution."
+ :scope {:owner-repository "/home/err/.config/i3"
+         :unit "ocr-npu.service"
+         :reviewed-identity-reporting-change true
+         :controlled-restarts 1 :assets :existing-only
+         :pre-activation-independent-code-review :required
+         :preserve-unrelated-source-and-config-dirt true}
+ :implementation-session "ses_e5d11a8aaffe4uhprEBhF0AQvt"
+ :implementation-stage :offline-preparation-and-tests
+ :restart-at-record-creation :not-executed
+ :not-authorized [:ocr-batch-execution :personal-inputs :downloads
+                  :e4b-or-other-model-loads :unrelated-service-changes
+                  :cloud-calls :spending :installed-oikos-promotion]
+ :not-established [:loaded-runtime-identity :resource-admission :quality-or-speed-qualification]
+ :later-obligation "After review, preserve exact pre-change source/unit evidence, perform at most the authorized single controlled activation, then verify fresh PID/start identity and loaded-byte attestation. An unsuccessful activation is not permission for repeated restarts or inference."}

@@ -1,0 +1,40 @@
+{:report/id :services-preview-fix-candidate-v2
+ :kind :implementation-handoff-not-approval
+ :base "1839a961bb1295caefbf6c6fa45df7d60239b690"
+ :red "574a883"
+ :intermediate "2dbeb06d2308d593ea14446e9b1e6639383f7d73"
+ :forged-request-red "0c6f4be"
+ :recovery-only-intermediate "b9bc4724b3f1e4fb755dc287d04b256e6a20dec8"
+ :observation-red "6a61dae8d0e9654b7f941d1e59622d5276e0e685"
+ :candidate "78e2cbb6482ddf2ff140ad8ac46ce974af5b7892"
+ :changes ["scripts/local_generation_runner.py" "scripts/local_generation_fs.py" "scripts/tests/test_local_generation_fs.py"]
+ :frozen-spec-sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+ :source-pins {:edge "41e633799724639ede651f039f087a602d1df6a8ef10721f4792088cbbdc6537"
+               :facade "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+               :runner "64c5a79d0f0fa84b953846ab99bffc186df31d113ccaa4fa031082d9a17c2175"
+               :wire "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"
+               :validator "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+               :laws "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+               :pure "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"}
+ :historical-seals "Prior reports pin earlier source bytes and are unchanged; these are the new candidate pins."
+ :strategy "Decode and closed-shape-classify before Engine admission. EOF alone directly recovers. All nonempty requests check records under their operation lease and hold on pending capsules; effectful admission cannot occur until owner-only recovery has completed. Denied preview retains completed observed selection; held after remains unknown."
+ :red-evidence "Two new tests failed on old source: pending preview compensated with 10 writes; stale preview falsely reported null before."
+ :focused {:tests 17 :failures 0 :seconds 38.793
+           :observation-red "Injected observation failure returned denied before fix; now held with unknown before/after and zero writes."
+           :forged-red "Forged approver request triggered 10 compensation writes on intermediate head; test failed before fix."
+           :independent-trace "/tmp/opencode/services-preview-observe-strace/witness.py"
+           :trace-result "Actual facade fresh-process durable-intent SIGKILL: preview, check, duplicate-key, malformed, null and forged apply each 0 traced target mutations; owner EOF recovery 10; post-recovery preview and check 0. Tree snapshots and result assertions passed."
+           :trace-method "strace -f -yy target path native mutating syscall filter; fixture and full traces retained; independent witness outside product test suite. Initial witness run failed import before correction and is not claimed as success."
+           :limit "Native counter witness is an external verification wrapper, not embedded as an assertion in the committed test."
+           :stale-preview "Real apply a, stale b denial before=after=a with unchanged snapshot."}
+ :portable {:bb "8 tests 137 assertions 0 failures 0 errors" :nbb "8 tests 137 assertions 0 failures 0 errors" :clj-kondo "0 errors 0 warnings"}
+ :jvm {:evidence "/tmp/opencode/services-preview-observe-jvm/results.json"
+       :launcher-version "1.12.5.1664" :network "inherited seccomp deny with Python and JVM proofs"
+       :results "contracts 370; inventory 19; portable 8 tests 137 assertions; all exit 0 with empty stderr"}
+ :previous-native-aggregate {:head "2dbeb06d2308d593ea14446e9b1e6639383f7d73" :result "41 tests in 975.817s OK; 642 SIGKILL: checked 8, restored 248, held 386" :fixture-root "/tmp/opencode/services-preview-fix-aggregate"}
+ :recovery-only-aggregate {:head "b9bc4724b3f1e4fb755dc287d04b256e6a20dec8" :result "41 tests in 1014.299s OK; 642 SIGKILL: checked 8, restored 248, held 386" :fixture-root "/tmp/opencode/services-preview-final-aggregate"}
+ :native-aggregate {:state :passed :shell-id "sh_1a4551205001oBVLF5vgcGjOZt" :fixture-root "/tmp/opencode/services-preview-observe-aggregate" :result "42 tests in 971.776s; OK" :sigkill {:occurrences 642 :checked 8 :failed-restored 248 :held 386}}
+ :environment-suite {:state :passed :shell-id "sh_1a455279b001T47vxjwLQRCT35" :fixture-root "/tmp/opencode/services-preview-observe-env" :result "134 tests in 96.885s; OK" :previous-head "134 tests in 102.484s; OK"}
+ :preservation "TemporaryDirectory finalizers detached and cleanup disabled for both aggregate runs; fixtures retained. Existing caches and historical reports untouched. No parent ledger writes."
+ :holds ["External strace counter is not committed as a test assertion."
+         "Independent review and owner release required; no S1B acceptance or production promotion claimed."]}

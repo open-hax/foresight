@@ -1,0 +1,16 @@
+{:report/id :s6a-govone-fixture-source-fix-v4
+ :status :blocked-owner-api-gap
+ :input {:head "78824909e152bdc99e589e054387bbae41de85e6"
+         :file "cmd/govone-dev/s6a_fixture_test.go"
+         :file-sha256 "5ccc2c77acdfa8da5be23ad49c0b3144c5f0249b2813c7170d8af42554d07aac"}
+ :corrections {:F1 :not-implemented :F2 :not-implemented :F3 :not-implemented :F4 :blocked :F5 :not-implemented}
+ :blocker {:requirement "F1/F2/F4 require actual session-linked classification/redaction facts from genuine evidence, without invented fields or production changes."
+           :evidence ["internal/inference/service.go:2216-2229 admits decision projections only for retrieve, route and inspect, not classify or redact"
+                      "internal/httpserver/stage_api_evidence.go:263-271 exposes only payload_hash, sequence_no and optional response_id for audit event details"
+                      "internal/audit/service.go:29-42 audit.Event stores payload hash but no payload"
+                      "internal/pipeline/context.go:329-340 computes classification/redaction details but they are not retained by the above evidence projection"]
+           :consequence "A fixture cannot assert the demanded genuine per-request classified sensitivity and redaction facts from the exported evidence using existing owner shapes. Separate stage calls would classify independently, not establish the completion's actual pipeline facts."
+           :requested-decision "Owner must authorize an evidence API change or approve a narrower oracle before implementation resumes."}
+ :static-checks [:read-applicable-owner-instructions :read-review :read-complete-fixture :inspect-owner-evidence-and-audit-source :inspect-head]
+ :execution-counts {:tests 0 :builds 0 :vet 0 :runtime 0 :sockets 0 :guard-probes 0 :downloads 0 :gofmt 0 :commits 0}
+ :source-edits 0}

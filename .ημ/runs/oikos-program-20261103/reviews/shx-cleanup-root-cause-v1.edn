@@ -1,0 +1,43 @@
+{:review/id :shx-cleanup-root-cause-v1
+ :verdict :unresolved-release-blocker
+ :head "6d9bc02fb428ae54db63f1beb0b992da8aab11bc"
+ :scope "Read-only inspection of retained evidence and source; this review file is the only requested output. No workloads, signals, deadline changes or matrix reruns."
+ :observed
+ {:fresh {:source "reviews/shx-safe-bash-fix-review-v4.edn"
+          :profile "shx worktree target/supervision-fixtures/profiles-1700751"
+          :case :bb-stderr :completed-cases 6 :exit 1
+          :result {:code :cleanup-unconfirmed :cleanup false :elapsed-ms 3485 :worker-pid 1708414 :worker-start "47725676"}
+          :expected :protocol-error
+          :trace "bb-stderr.jsonl records wrapper PID 1708592 start 47725805, validator PID 1708599 start 47725807, real-done at wrapper-relative 1199.150851ms exit 0 stdout 95 stderr 0. These are not the worker PID or the supervisor clock."
+          :fixture "test/shx/fixtures/safe-bash-fault.mjs:44-49 injects synthetic stderr after real-done; trace does not itself record delivery or cleanup."
+          :control-stderr :not-retained :predicate-state :not-retained}
+  :earlier {:source "reviews/shx-safe-bash-code-v1.edn and v5 packet"
+            :case :bb-exit :result {:code :cleanup-unconfirmed :cleanup false :elapsed-ms 3806 :worker-pid 714109 :worker-start "46985653"}
+            :trace "target/supervision-fixtures/profiles-708426/bb-exit.jsonl records wrapper 714195 start 46985784 and validator 714202 start 46985787, real-done exit 0 stdout 95 stderr 0 at wrapper-relative 1493.532965ms."
+            :control-stderr :not-retained :later-controlled-passes :not-proof-of-original-cause}
+  :proc-now "At inspection /proc/1708414, /proc/1708592, /proc/1708599 and /proc/714109 were absent. Later absence cannot establish state or group absence at the decision time. No foreign environment or command line was read."
+  :cgroup "No task-specific cgroup record was identified in the retained review or profile root. With the known PIDs absent, their original cgroup membership and its state at failure cannot be reconstructed here. No cgroup isolation is assumed."
+  :nbb "Review v4 reports 24/24 NBB cases; it does not establish BB cleanup."
+  :source-path "src/shx/infra/safe_bash_supervisor.clj:69-93,128-220"
+  :mechanism "BB accepts cleanup only after child not alive AND all three I/O futures and close futures realized AND group absence probe succeeds AND root not blocked. In the failure loop these checks short-circuit. The group probe launches a separate pinned kill -0 process with a 50ms wait; only exit 1 with stderr containing 'No such process' counts as absence. Timeout, other error, identity mismatch, live process or unfinished pipe all prevent confirmation. Missing initial numeric start quarantines immediately and destroys only the Process handle."
+  :timing "On an observed decision, cleanup budget ends at abort-age >=990ms OR original spawn elapsed >=5990ms; TERM control occurs before grace-at and KILL begins after 250ms from grace-at. Individual control calls may block 50ms plus another 50ms on forced termination. Result elapsed alone does not expose abort-at, the predicate or control results. 3485ms and 3806ms exclude the absolute 5990ms branch as the final observed trigger, not exhaustion of the relative 990ms budget or an earlier identity quarantine."
+  :identity "Both reported worker starts are numeric; this argues against the explicit missing-start branch for those reported worker identities. It does not establish same? at later probes, process-group membership, PID reuse, or absence of a process-group setup race. nil current identity is considered same?; a mismatched live start blocks safe confirmation."
+  :qualification "The exact cause is not demonstrated. No evidence here proves either an actual surviving owned group at cutoff or a false cleanup failure; the failure remains fail-closed and the BB matrix remains incomplete."
+  }
+ :hypotheses
+ [{:id :live-group :status :possible :needed "At cutoff, independently capture identity-bound group members and states plus probe result; distinguish worker, wrapper, validator and descendants."}
+  {:id :pid-start-or-setsid-race :status :possible-not-demonstrated :needed "Monotonic identity snapshots and PGID/SID for exact launched identities, plus probe and signal outcomes; never signal a reused identity."}
+  {:id :zombie-or-reaping :status :possible-not-demonstrated :needed "At failure record exact owned process stat state, PPID, PGID, SID, start time, direct Process isAlive and pipe future completion; distinguish zombies from live descendants without assuming either is safe."}
+  {:id :deadline-or-control-observation :status :possible-not-demonstrated :needed "Record abort-at, each control duration/exit/stderr, age, elapsed, reaped, each realized future and each absence predicate; 50ms subprocess timeouts and 990ms relative cutoff are candidates, not an established cause."}]
+ :smallest-red-witness
+ {:authorization :parent-must-admit-separately
+  :plan "One isolated BB stderr case against exact sealed v14 with existing real validator, fixed original clocks and deadlines. Instrument observation only, preserving launch argv and return values: timestamp decisions, abort, TERM/KILL/probe call start/end and exact exit/stderr, same? current/start, direct-child isAlive, each future realization, elapsed and final predicate. Capture only identity-verified task-owned /proc stat/cgroup metadata at relevant points. Retain bounded logs on any outcome."
+  :red "A repeat of cleanup-unconfirmed with a complete predicate/control timeline is a diagnostic RED, not a passing test. A single normal protocol-error is inconclusive; do not repeat until green. If natural failure does not recur, separately authorize a deterministic focused test of the observed failing predicate before any production fix; injected outcomes alone cannot establish the original cause."
+  :safety "No invented identity, foreign process enumeration or signals, test-induced deadline extension, fabricated clean state, relock, service/model operation or suppressed warnings. Existing supervised fixture execution and any cleanup require explicit parent authorization."
+  :distinguish "Require exact start-bound snapshots; for a gone leader avoid inferring no group members solely from /proc/<leader> absence. Independent group evidence must come from task-owned launch tracking or an explicitly authorized isolated observer, not broad foreign process inspection."}
+ :verification-budget
+ {:diagnostic "One controlled stderr case only, external watchdog >= 10s, retaining original 5000ms spawn deadline and <=1000ms cleanup allowance; watchdog is not an internal deadline modification. Stop on first result and report it. Capture monotonic timestamps without external heavy workload."
+  :after-demonstrated-fix "Owner separately authorizes minimal deterministic red-before/green-after witness including quarantine for genuinely uncertain cleanup, no false clean with live descendants, identity reuse safety, TERM/KILL and pipes. Then one full fresh BB 24-case matrix and independent NBB parity/control under unchanged limits; preserve all failed attempts. Run strict gate with typed warning visible and resolve its separate qualification hold. A watchdog must allow 24 cases' individual worst-case budgets plus startup and evidence collection, rather than changing per-case timeouts."
+  :limits "Instrumentation may perturb scheduling; report observer overhead and use bounded event capture. No current proposal proves historical cause retrospectively."}
+ :next "Parent decide whether to authorize the single instrumented diagnostic probe."
+}

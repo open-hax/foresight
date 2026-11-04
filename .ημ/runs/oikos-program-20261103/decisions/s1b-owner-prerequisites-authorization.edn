@@ -1,0 +1,22 @@
+{:decision/id :s1b-owner-prerequisites-authorization-20261103
+ :decision/source :question-tool-explicit-user-answer
+ :question "S1A is done, but S1B still lacks two real upstream artifacts: Services' local-generation apply/rollback boundary and shx's safe Bash renderer/validator. Should I build those prerequisites in their owning repositories?"
+ :selected-label "Build owner prerequisites"
+ :selected-description "Create isolated Services/shx worktrees, implement and independently review the missing artifacts there, then consume them in Oikos. Sandbox fixtures only; no installed promotion."
+ :scope {:services [:owner-reviewed-local-generation-architecture
+                    :versioned-plan-result-and-approval-contracts
+                    :serialized-anchored-no-follow-owned-mutation
+                    :interrupted-apply-and-exact-rollback]
+         :shx [:closed-safe-bash-renderer :independent-non-evaluating-positive-validator
+               :reviewed-validator-pin :qualified-consumer-handoff]
+         :planning-review :before-functional-implementation
+         :code-review :before-consumer-admission
+         :location :owning-repositories-in-isolated-worktrees}
+ :planning-sessions {:services "ses_e5d08a801ffeJjHeilQaO2edn4"
+                     :shx "ses_e5d0859bfffeiy84pnKnEOuQch"}
+ :s1b-state :incoming-awaiting-verified-owner-artifacts
+ :not-authorized [:installed-promotion :live-workstation-configuration-writes
+                  :do-deployment :oikos-owned-replacement-promoter
+                  :oikos-owned-second-bash-evaluator :unrelated-repository-dirt-changes]
+ :actual-owner-artifacts-available-at-decision false
+ :completion-credit 0}

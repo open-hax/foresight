@@ -1,0 +1,11 @@
+{:decision/id :ocr-drive-preservation-authorization-20261104
+ :source :question-tool-explicit-user-answer
+ :question "How should I back up the exact reviewed OCR files and active unit override without exposing private or unrelated Git history? This would not restart or alter OCR."
+ :answer "Google Drive archive"
+ :scope [:five-exact-reviewed-files :private-checksummed-archive
+         :existing-authorized-drive-backup :full-remote-byte-readback]
+ :destination "Existing private AgentWorkspaceArchives, if its connection is available"
+ :source-evidence "../reviews/ocr-owner-persistence-v1.edn"
+ :not-authorized [:new-login :public-git-publication :unrelated-history
+                  :source-or-unit-edit :reload :start :restart :ocr-batch :cleanup]
+ :qualification "A selected destination is not a completed backup. Preserve local files and commits regardless of transfer outcome. Only exact remote bytes and member hashes establish recoverability."}

@@ -1,0 +1,49 @@
+{:review/id :s6a-offline-egress-code-v1
+ :kind :independent-exact-head-offline-code-review
+ :reviewer :not-implementation-author
+ :verdict :changes-requested
+ :authority :none :native-approval false
+ :target {:head "34bab7327089a168935308270fbb4af6fd07ba52"
+          :tree "6a85a3d6f4389230d327c148eeb41c3b396e5fc4"
+          :base "b505266cfed232638862606bcde802136197c3b3"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s6a"
+          :clean-before-and-after true
+          :composition "git diff --raw base..HEAD lists precisely eight additions, no modification/deletion; 57 base tree paths, 65 at head. eval/run.cljs unchanged."
+          :reported-red "Descriptor reports 09c07e0a7f20f0769fcba9277f4ee1a7985da7d0 with BB/NBB 5 tests 234 assertions 51 failures each and edge 4 tests 51 assertions 7 failures. Git object exists; red tests were not independently rerun."}
+ :eight-file-sha256
+ {"docs/contracts/govone-egress-v1.edn" "a95907bb39d70c527208866e0b3eae8cd986bb703c2fa9cb57eb1660d6c28713"
+  "scripts/test_egress.clj" "fbfbb74873c2151d76372405b7e558c706ed672c2e59e120d216e9f9dd90de84"
+  "src/oikos/infra/govone.cljs" "2df8647d3e9af2adb109d02ed916302f92054f307ff08717c7a6304bf881a743"
+  "src/oikos/law/egress.cljc" "d1eabec1800838a8d18c9e9594a6aad0853a61e96d5f49a7b1a9aef3fae31896"
+  "test/oikos/egress_runner.cljc" "e693f398912568566c2c016d3d408cae951ecca65b11c44d16747d895381b258"
+  "test/oikos/govone_offline_runner.cljs" "00f4b11cf69f169be74c2f153fca0c948256971b9a8f1405f03a30c148694d6d"
+  "test/oikos/infra/govone_test.cljs" "01f4615d0fdedc521ae1ec27223d34ad046f2181f604d276ce32a480b461a1c5"
+  "test/oikos/law/egress_test.cljc" "320e6103945e88241457f794a7f3e352ee92c5eb4f064e3c7b648c51f336e735"}
+ :inputs "Read applicable Oikos AGENTS.md, all eight added files, both producer permits and pins, corrected P1 plan, source permit and prior independent composition review. No fresh approval of producer contracts is asserted."
+ :findings
+ [{:id :s6a-egress-01 :severity :P2
+   :title "Opaque serialized image/tool envelopes are prepared as ordinary text despite explicit P1 denial"
+   :anchors ["reviews/s6a-p1-corrections-v2.edn:14-17" "src/oikos/law/egress.cljc:70-85" "src/oikos/infra/govone.cljs:13-15,83-95"]
+   :reproduction "In NBB require oikos.infra.govone as g, oikos.infra.govone-test as w, oikos.law.egress-test as f, and oikos.law.digest as d. Let t be {\"type\":\"image_url\",\"image_url\":{\"url\":\"https://example.invalid/a.png\"}}; set (assoc (f/request) :payload/text t :payload/text-sha256 (d/sha256 t)); (g/prepare (w/wire request)) returns :prepared. Separately t={\"tool_calls\":[{\"id\":\"demo\"}]} also returns :prepared. Both use synthetic existing valid source/reference/revision and exact digest."
+   :impact "The agreed correction explicitly denies opaque serialized tool/image envelopes, but the current only text-side check rejects a leading data: prefix and accepts these known envelopes. Prepared remains authority none and no network or image dereference occurred; this is a bounded offline contract violation, not actual egress or proof of a universal content classifier."
+   :required "Add bounded denial of the explicitly recognizable serialized image/tool envelope forms, including nested variants within the selected supported representation; regression tests at shared-domain and raw canonical edge must include the above synthetic literals and assert constant denial before effects. Preserve ordinary plain-text positive control, no arbitrary URL fetch or policy engine, and explicitly do not claim detection of all possible encodings. If denying such literal serialized shapes is considered incompatible with legitimate text, parent must explicitly revise the P1 contract rather than silently claiming the existing denial."}]
+ :independent-probes {:runtime :nbb :clio "788cdd3434615a7932b924e68520dbf7f88408c2"
+                      :observed {:valid-synthetic :prepared :image-envelope :prepared :tool-envelope :prepared
+                                 :image-data-uri :denied :wrong-digest :denied :wrong-revision :denied
+                                 :unknown-field :denied :alternate-escape :denied :duplicate-json-key :denied
+                                 :metadata-host :denied :poisoned-host :denied :poison-getter-hits 0
+                                 :proxy-host :denied :proxy-trap-hits 0
+                                 :literal-timeout {:status :unknown :code :egress-outcome-unknown :authority :none}}
+                      :notes "Positive fixture serialized by the test serializer; literal malformed/outcome strings independent of production encoder. No thrown exceptions observed in these probes. Host poison test covers root raw API, not untrusted calls to owned-domain functions. No claim of complete host runtime sandbox."}
+ :actual-gates {:timeout-ms-each 600000
+                :environment "Existing Clio source/cache and absolute S2A permit per request."
+                :commands [{:command "bb scripts/test_egress.clj" :exit 0 :bb [5 234] :nbb [5 234] :nbb-edge [6 257] :failures 0 :errors 0}
+                           {:command "bb scripts/test_capability.clj" :exit 0 :bb [11 99] :nbb [11 99] :failures 0 :errors 0}
+                           {:command "bb scripts/test_desktop.clj" :exit 0 :bb [16 1059] :nbb [16 1059] :failures 0 :errors 0}
+                           {:command "bb scripts/test_spaces.clj" :exit 0 :bb [11 455] :nbb [11 455] :failures 0 :errors 0}
+                           {:command "bb test" :exit 0 :bb [18 286] :nbb [40 546] :eval-offline [9 39] :desktop-bb [16 1059] :desktop-nbb [16 1059] :failures 0 :errors 0}
+                           {:command "bb lint" :exit 0 :errors 0 :warnings 0}]
+                :effect-scope "Runner traps selected process/network/write surfaces before import and selected filesystem reads during the test matrix. This is in-process instrumentation, not a universal OS sandbox or proof of downstream isolation. Inherited bb test executes its existing offline test subprocess fixtures; eval/run.cljs itself was not run."}
+ :limits "P1 only; no transport, authenticated policy, actual source read, private authority or runtime all-path qualification. P2/P3/P4 and eval research mediation remain held. No missing real GovOne behavior is classified as a defect in this review."
+ :next "Fix the known serialized-envelope denial and independently review the resulting exact head; retain all held phase gates."
+ :effects "Wrote only this review. No product edits, dependency downloads, app/service/GovOne/model process, socket, private inputs, board or ledger writes, commits, PRs or pushes. Requested offline test runner subprocesses and existing fixture processes ran."}

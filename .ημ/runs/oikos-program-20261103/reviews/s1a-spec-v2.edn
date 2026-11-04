@@ -1,0 +1,11 @@
+{:task :s1a :uuid "07452a65-4a6a-4704-bf81-50408927dcc8"
+ :session-id "ses_e5d9fa9fbffewcX0s64krmWdY8"
+ :scope :preparatory-specification-only :verdict :approve
+ :spec-sha256 "8bed8627de1f3c4f79ff70f5156f8bbd854e0566e684fe9b1d7fc8fb54c125f0"
+ :settled [:s1a-spec/resolved-restrictions :s1a-spec/artifact-bijection :s1a-spec/canonical-bytes]
+ :evidence ["165-181 reapply all normalized restrictions after resolution including nonexistent leaves; T02/T03 negative and positive cases."
+            "280-292 exact target/descriptor/content bijection and independent validator pins; T06/T09 omission/substitution cases."
+            "199-225 exact canonical separators/termination and correct empty/nested golden hex; T05 cross-runtime bytes/hashes."]
+ :coordinator-hash-verified true
+ :tests-executed false :native-provider-approval false
+ :implementation-or-readiness-credit 0}

@@ -1,0 +1,128 @@
+{:verification/version 1
+ :scope :twelve-consensus-planning-contracts-only
+ :verdict :approved-scoped-contracts
+ :authority "Independent verification of the 12 specified planning contracts only. Fixed means the current card body contains adequate acceptance and concrete future verification requirements, not that any implementation, runtime, board readiness or native approval has passed. The 23 disputed findings are not adjudicated here."
+ :inputs
+ {:reconciliation
+  {:path ".ημ/runs/oikos-program-20261103/skeptics/reconciliation.edn"
+   :sha256 "29aff037129ac44323939a37193e0d2a2f3affd99a5b038e326296a7dbb2b361"}
+  :fix-map
+  {:path ".ημ/runs/oikos-program-20261103/consensus-fixes-v1.edn"
+   :sha256 "dfca4a876a49539a995e802305489517f1e94266138dc1c771792071e6776d79"}
+  :workflow
+  {:path ".ημ/workflows/oikos-program.edn"
+   :sha256 "370afd5a73a3f2ef30676f62b06e99d01b09e6fa722173f8a5aa611e8024cc9e"}}
+ :anchor-format "Each :card key resolves to its exact repository-relative Markdown path through the input fix-map's :cards map. Inclusive line ranges refer to current body-level acceptance/future-verification text, not appended comment assertions."
+ :counts {:consensus-ids 12 :results 12 :fixed 12 :remains 0 :affected-cards-read 13 :disputed-findings-adjudicated 0}
+ :results
+ [{:id :s1a/config-isolation :verdict :fixed
+   :anchors {:acceptance {:card :s1a :lines [39 41]}
+             :future-verification {:card :s1a :lines [43 43]}
+             :propagation [{:card :e1 :lines [34 34]}]}
+   :reason "Configuration roots and every rendered destination are explicit, disjoint owned bindings. Normalized/resolved aliases, symlink aliases, ancestor overlap and missing bindings deny before target I/O. Synthetic BB/NBB positive and negative fixtures retain installed sentinels and zero denied target access."}
+
+  {:id :s2a/coverage-gap :verdict :fixed
+   :anchors {:acceptance {:card :s2a :lines [39 41]}
+             :future-verification {:card :s2a :lines [43 43]}}
+   :reason "Admitted coverage-gap and reconciled-baseline transitions separate observation currentness from persisted-history validity. Freshness is limited to the justified cut; missing intermediates stay unknown. Shuffled/duplicate replay is tested while missing persisted sequence entries/causal parents and rejected reconciliation still fail."}
+
+  {:id :s2b/snapshot-cut :verdict :fixed
+   :anchors {:acceptance {:card :s2b :lines [39 41]}
+             :future-verification {:card :s2b :lines [43 43]}}
+   :reason "Successful subscription acknowledgement and a justified event-stream fence are mandatory. Command replies, initial/unmatched ticks and callback order cannot qualify a cut; late earlier events invalidate it. Scheduled fake IPC fixtures preserve uncertainty for unsupported ordering, rejection, missing nonce, timeout and continual change without asserting an atomic i3 API exists."}
+
+  {:id :s2b/freshness-vs-history :verdict :fixed
+   :anchors {:acceptance {:card :s2b :lines [45 47]}
+             :future-verification {:card :s2b :lines [49 49]}}
+   :reason "Independent freshness-at-cut and historical-completeness fields expose open-connection queue/coverage loss. Refresh does not recover missing intermediates. Actual nested synthetic i3 hierarchy/floating/move/resize tests require an independent normalized GET_TREE oracle, retained schedule/identities/cut proof, and rejection of stale/rejected/offline live-current claims."}
+
+  {:id :s3b/consent-and-return :verdict :fixed
+   :anchors {:acceptance {:card :s3b :lines [39 41]}
+             :future-verification {:card :s3b :lines [43 43]}}
+   :reason "Join consent binds the displayed lifetime, consequences, observed revision and scoped lease, is consumed for the intended action, and cannot replay after cancellation or binding changes. Human navigation supersedes old return focus. Decline/cancel, repeated/changed proposals and missing/reused return targets have zero-effect or explicit-failure fixtures without stale compensation."}
+
+  {:id :s4a/editor-revision :verdict :fixed
+   :anchors {:acceptance {:card :s4a :lines [39 41]}
+             :future-verification {:card :s4a :lines [43 43]}}
+   :reason "Approval binds actor, operation/arguments, server epoch, actual buffer incarnation and modification revision. The fixed trusted dispatcher revalidates inside its mutation boundary. Isolated existing-server fixtures cover same-name replacement, edits, reconnect/epoch changes and changed arguments with zero denied mutation, plus one exact unchanged approved positive operation."}
+
+  {:id :s5a/stop-barrier :verdict :fixed
+   :anchors {:acceptance {:card :s5a :lines [41 43]}
+             :future-verification {:card :s5a :lines [45 45]}}
+   :reason "A permission generation gates capture, supplier dispatch and publication separately; exclusions precede capture. Stop/revocation invalidates outstanding work and acknowledges only after the no-new-publication barrier holds within the frozen bound. Deferred successful replies and reconnect are tested against forbidden capture/dispatch/writes/diagnostics and revoked-generation resurrection; missing generation/bound denies execution."}
+
+  {:id :s5a/index-isolation :verdict :fixed
+   :anchors {:acceptance {:card :s5a :lines [47 49]}
+             :future-verification {:card :s5a :lines [51 51]}}
+   :reason "Explicit agent-owned development cache, index project and label/read/write/delete bindings replace installed defaults. Missing/unresolved/colliding bindings deny before reads or other store I/O. Separate installed/dev sentinels and read spies cover capture, projection, labels, retention, retrieval, deletion and cleanup, including normalized/resolved aliases and overlapping roots."}
+
+  {:id :s5b/safe-ledger :verdict :fixed
+   :anchors {:acceptance {:card :s5b :lines [39 42]}
+             :future-verification {:card :s5b :lines [44 44]}
+             :propagation [{:card :s2a :lines [45 47]}
+                           {:card :s5a :lines [53 55]}
+                           {:card :e2 :lines [35 35]}
+                           {:card :e5 :lines [37 37]}]}
+   :reason "A versioned closed reviewed safe-metadata/deletable-reference boundary is required before Clio admission, including rejection diagnostics and sensitivity/linkability classification for IDs/hashes. Secret-marker negatives and valid safe causal replay after content erasure are explicit. The same boundary propagates upstream into S2A/S5A and E2/E5. Per-item expiry or explicitly consented indefinite memory does not renew raw 24h/7d retention."}
+
+  {:id :s6b/rehydration-deletion :verdict :fixed
+   :anchors {:acceptance {:card :s6b :lines [39 42]}
+             :future-verification {:card :s6b :lines [44 44]}}
+   :reason "Fresh exact session/response/channel delivery authorization is separate from HTTP success, masked audit evidence, the six owning unmask gates, terminal-safe provenance and actual copy erasure. Missing owner compatibility blocks. Tests require explicit HTTP200-denied handling, expiry/key/policy revocation and replay denial, actual scoped fixture-copy deletion/readback, and failed/uncertain erasure when a copy remains or only DEK loss/acknowledgement is supplied."}
+
+  {:id :s8a/consent-admission :verdict :fixed
+   :anchors {:acceptance {:card :s8a :lines [39 41]}
+             :future-verification {:card :s8a :lines [43 43]}}
+   :reason "Valid explicit source/item/purpose consent precedes retention and use. Missing/wrong/expired/revoked consent denies admission/use; predictions and accepted actions grant no human-gold, retention, training or cloud-export rights. Tests include a scoped positive local grant and revocation withdrawing corrections/projections/prepared payload availability while retaining only safe provenance."}
+
+  {:id :s8b/artifact-admission :verdict :fixed
+   :anchors {:acceptance {:card :s8b :lines [40 42]}
+             :future-verification {:card :s8b :lines [44 44]}}
+   :reason "Both explicit human cloud consent and authoritative GovOne release bind final verified artifact bytes/digest, purpose and recipient/sink at the release boundary. Session/redaction/string inspection and local labels do not grant arbitrary upload authority; unsupported shapes/sinks stay held pending a reviewed owner contract. Dry-run positive qualification and zero-transport changed-byte/destination/unsupported/wrong-purpose/expired/revoked negatives are explicit, with no live upload/allocation permission."}]
+ :unresolved []
+ :dependency-check
+ {:verdict :preserved
+  :method "Direct inspection of the 13 current card dependency frontmatter/prose against the approved workflow child edges and the prior corrected-card reads in this conversation. No live board query, transition, status inference or independent Rheos semantics implementation."
+  :child-prerequisites
+  {:s1a [] :s2a [:s1a] :s2b [:s2a] :s3b [:s3a :s2b :s4a]
+   :s4a [:s1a :s2a] :s5a [:s2b :s7a] :s5b [:s5a] :s6b [:s6a]
+   :s8a [:s2a :s5a :s6a :s7a] :s8b [:s8a :s6a]}
+  :epic-summary-prerequisites {:e1 [] :e2 [:e1] :e5 [:e2 :s7a]}
+  :weakened false
+  :new-implicit-parent-gates false
+  :anchors {:current-frontmatter "Line 4 in each of the 13 affected cards."
+            :workflow ".ημ/workflows/oikos-program.edn:34-58"}}
+ :claim-boundaries
+ {:verdict :preserved
+  :basis "Added body scenarios are explicitly future verification requirements. Existing personal-capture, sandbox/dev, model/resource, spending and publication holds remain. Historical reported NPU/runtime observations are not promoted into fresh runtime proof. Worker-reported workspace tests/lint in the fix map were not rerun or used as product implementation evidence."
+  :implementation-verified false :runtime-verified false :project-tests-run false
+  :live-calls false :native-provider-approval false :readiness-claim false
+  :status-advancement false :disputed-findings-adjudicated 0 :new-topics-audited false}
+ :ledger-check
+ {:path ".ημ/kanban-events/ledger.edn"
+  :method :read-only-byte-prefix-and-bounded-edn-record-inspection
+  :base "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
+  :base-prefix {:bytes 301675 :records 304
+                :sha256 "292fa2070657ad3d768376e707f80b1db00d930ee08076979a7a272cc0109624"
+                :exact-prefix-preserved true}
+  :pre-consensus-prefix {:bytes 357678
+                        :sha256 "43232f1a34c8e3f37e236f1a39053e4bbb2da8dfe192fd634401facdd0fa337d"
+                        :matches-fix-map true :exact-prefix-preserved true}
+  :verified-cut {:bytes 373178 :records 359 :appended-records-since-base 55
+                 :sha256 "d503cadc9e272c4a712faee3dc17cac5c64b6ae8aa34a3e760b07fdaa4a81d01"}
+  :consensus-comment-records {:byte-range [357678 373178] :count 13
+                              :event-types {"kanban.comment" 13}
+                              :payload-source-values {"cli" 13}
+                              :payload-type-values {"comment" 13}
+                              :task-set-matches-affected-cards true
+                              :unique-task-ids 13 :unique-event-ids 13}
+  :concurrent-tail "Later records appeared while verification was running. The current file was checked to extend the exact verified 55-record cut. The 13 consensus records were selected by their recorded byte checkpoint, not a moving last-N tail. Subsequent records and their topics are outside this review."
+  :engine-replay-performed false :live-board-query false :native-approval-inferred false}
+ :scope-validation
+ {:fix-ids-equal-consensus-ids true :unique-result-ids 12
+  :missing-consensus-ids [] :extra-result-ids [] :disputed-ids-in-results []
+  :affected-cards 13 :new-human-policy-questions []}
+ :write-scope
+ {:only-created ".ημ/runs/oikos-program-20261103/skeptics/consensus-fix-verification.edn"
+  :cards-written false :ledger-written false :workflow-written false
+  :source-written false :github-called false :reviewers-rerun false}}

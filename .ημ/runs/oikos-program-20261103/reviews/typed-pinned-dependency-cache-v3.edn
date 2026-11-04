@@ -1,0 +1,138 @@
+{:review/id :typed-pinned-dependency-cache-v3
+ :prior-review "typed-pinned-dependency-cache-v2.edn"
+ :checkout-head "42ef524fb5482a2e2429f3732a6ad88d80529690"
+ :cache-root "/tmp/opencode/oikos-typed-deps-bf60f0e2-1e1f-428e-a6e0-28415755d56c"
+ :allocation-bytes 268435456
+ :reserved-bytes 4194304
+ :file-bytes 11038674
+ :status :incomplete-unqualified
+ :offline-query :not-run
+ :selected-classpath :not-resolved
+ :acquisition "Downloaded or publisher-checksum-verified copied exact checker, analyzer, and known transitive artifacts. 60 retained artifacts matched retained SHA-256 or SHA-1 publisher checksum sidecars. No global cache writes. Existing local Maven checksum sidecars were used for ow2 and slf4j parents; public authenticity of local sidecars not independently established."
+ :declared-and-mediated "Checker directly declares clojure 1.12.5 and test.check 1.1.3; transitive POMs request lower versions. Mediation is expected but not verified by tools.deps. Root test alias additionally contains dependencies beyond the focused checker alias and has not been resolved."
+ :graph "Observed edges: clj-java-decompiler 0.3.0 -> procyon-compilertools 0.5.34 -> procyon-core 0.5.34; beholder 1.0.3 -> directory-watcher 0.17.3 -> jna 5.12.1 and slf4j-api 1.7.36; clojure 1.12.5 -> spec.alpha 0.5.238 and core.specs.alpha 0.4.74. Parent POM inventory had no missing explicit parent at scan time; inherited dependency management and tools.deps graph remain unverified."
+ :observed-sandbox-errors "unshare --user --map-root-user --mount --net true exited 1 with uid_map operation not permitted. bwrap --ro-bind / / --unshare-net -- /bin/true exited 1 with loopback RTM_NEWADDR operation not permitted."
+ :stop-reason "The network namespace sandbox attempts failed. A strace socket-deny mechanism exists but I did not implement an aggregate-enforcing broker for all opaque resolver writes; therefore the authorized metadata query was not launched and closure is unverified. These errors do not prove socket-denied qualification impossible; further work is required."
+ :security "Unsigned publisher SHA-1 is not a signature. Where publisher SHA-256 exists it was matched. Calculated SHA-256 inventory does not independently authenticate content. No test or application was run."
+ :retained-files [
+  {:path "repository/babashka/fs/0.5.33/fs-0.5.33.jar" :bytes 28590 :sha256 "17cd0b899789b58772809833d9af6d43449f130761c7981e68edc3a8b62f5ae3"}
+  {:path "repository/babashka/fs/0.5.33/fs-0.5.33.jar.sha1" :bytes 40 :sha256 "bfc3d0bd8b06e8490f8b40c053a7775c3413575a937e522acc356e9737b0cf08"}
+  {:path "repository/babashka/fs/0.5.33/fs-0.5.33.pom" :bytes 2607 :sha256 "6ea79cc9a10014841b08eea659116dd0558c6009071f5e106acfd568ed94ac97"}
+  {:path "repository/babashka/fs/0.5.33/fs-0.5.33.pom.sha1" :bytes 40 :sha256 "3286f13aaccc192b66958c6974c7470c5334db60445fe0cdd541ee87a4ebb427"}
+  {:path "repository/babashka/process/0.6.25/process-0.6.25.jar" :bytes 23259 :sha256 "5d64c9ea45202c3dff50919efbe2dfd3efc96bd48f5624b9d2fdf7bf724e7f8b"}
+  {:path "repository/babashka/process/0.6.25/process-0.6.25.jar.sha1" :bytes 40 :sha256 "6ad86d949ea52b93acb1127db9942cae66bfb6c5e5ceddb635d087f2463a2c3b"}
+  {:path "repository/babashka/process/0.6.25/process-0.6.25.pom" :bytes 2603 :sha256 "e1b491fd9d20e2b5d5c2fdaee9ef6b9282fc7759d5e5bf62348b3f536a3c97c6"}
+  {:path "repository/babashka/process/0.6.25/process-0.6.25.pom.sha1" :bytes 40 :sha256 "305f561bac637f8a7e4e388b1f1278d6a22c8923de57c05b8412560468b98a54"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.jar" :bytes 23664 :sha256 "f17dc6d8f9673df9187fcaad2d1852b5520ce13b86a4c1b49657389ddff18e50"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.jar.sha1" :bytes 40 :sha256 "a4661a5e6f83d2c5fbabf41e1626667f868a92b25c7dcf55e0b055e275b3a894"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom" :bytes 2758 :sha256 "10d0b32716b028c6023cd7950c494c8ce3ea23474863d4a83c0e3b09c7c29c65"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom.sha1" :bytes 40 :sha256 "1fe206f4d4accb0d8593e03a16579213005a801d2f12255b7767befebfcb7451"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.jar" :bytes 24085 :sha256 "3d547adf2d403a06e559e3ee1703dc78b10df9d2b9d5b2cb8af362a304942c18"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.jar.sha1" :bytes 40 :sha256 "73db2d2156d5376d07c7ed92731b38fb2f68315c880336ab6a69eaed3e14daa7"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom" :bytes 2581 :sha256 "d1dddac3b5f21738eb7ad2f444597b761b532148187ce590b06fb9e8b1e7aa0c"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom.sha1" :bytes 40 :sha256 "82922f12eb25b89a7c1185b5b865a8fdf816b9f848a494e1a85159ae8ade594d"}
+  {:path "repository/com/clojure-goes-fast/clj-async-profiler/1.7.0/clj-async-profiler-1.7.0.jar" :bytes 1093208 :sha256 "48b3a0bc68ed4cff171098fb11ff744770e9fbb3a3d15e07998c08b2721e1467"}
+  {:path "repository/com/clojure-goes-fast/clj-async-profiler/1.7.0/clj-async-profiler-1.7.0.jar.sha1" :bytes 40 :sha256 "df8626d0586d901975128906cf941aee52feec633442aa3d63809844e2509762"}
+  {:path "repository/com/clojure-goes-fast/clj-async-profiler/1.7.0/clj-async-profiler-1.7.0.pom" :bytes 1246 :sha256 "16364d91e2d1dc5ec9bae091f4b4a823c06871980adb44cded32925dee6378bf"}
+  {:path "repository/com/clojure-goes-fast/clj-async-profiler/1.7.0/clj-async-profiler-1.7.0.pom.sha1" :bytes 40 :sha256 "13122c6e587b9e32d527739f28fedefe36439072bc1d2d7e686fdfd96903e8ac"}
+  {:path "repository/com/clojure-goes-fast/clj-java-decompiler/0.3.0/clj-java-decompiler-0.3.0.jar" :bytes 3936 :sha256 "57acb1dc4cd80a26a7406db69cc63d753000c472b150c468d5badc7eebab77c6"}
+  {:path "repository/com/clojure-goes-fast/clj-java-decompiler/0.3.0/clj-java-decompiler-0.3.0.jar.sha1" :bytes 40 :sha256 "ee2bac26dc98709a7255285567f97fbd21bf5c0f9d467352271442ec3c32282c"}
+  {:path "repository/com/clojure-goes-fast/clj-java-decompiler/0.3.0/clj-java-decompiler-0.3.0.pom" :bytes 1375 :sha256 "d6fefc3281d4d0cf90c39c5374fbf3f6ad0458e9dd599a573ecf73fb1468d4e3"}
+  {:path "repository/com/clojure-goes-fast/clj-java-decompiler/0.3.0/clj-java-decompiler-0.3.0.pom.sha1" :bytes 40 :sha256 "57c8f147bbd326a899bf2c472271bff61989037a60ecf8cd1385fc46786623af"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar" :bytes 34020 :sha256 "e35dc55d4c301dbd443b3adec50c25f18842b842a086b0568c472700fe940eab"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar.sha1" :bytes 40 :sha256 "4a9a0289c25cf9a1e22b53c912689f9a585e3151605cb18b223e97c2598bf564"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom" :bytes 3302 :sha256 "bfee9cd881d92c0ce049388dc36dba7f4b3f158dba00a57e99b9d443259a8877"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom.sha1" :bytes 40 :sha256 "85422eb3eefa41142ba59d08228b7a9f745494409b2879abba36057385bdd8d1"}
+  {:path "repository/com/nextjournal/beholder/1.0.3/beholder-1.0.3.jar" :bytes 3599 :sha256 "2811741fce7b07bb029be10f601ab07b7577e9087daa5c01917d7e81de3d1a94"}
+  {:path "repository/com/nextjournal/beholder/1.0.3/beholder-1.0.3.jar.sha1" :bytes 40 :sha256 "4052bdb136f6cd5f7c90a168f067f1bc054beb218ea4a403f84050defb4f0924"}
+  {:path "repository/com/nextjournal/beholder/1.0.3/beholder-1.0.3.pom" :bytes 1517 :sha256 "94651105bfcf58c981d56f7ae016bdc42a6857cda99d0e9ac59aae9393c1b696"}
+  {:path "repository/com/nextjournal/beholder/1.0.3/beholder-1.0.3.pom.sha1" :bytes 40 :sha256 "094cabd08521413f9e6b1d1e8585fc54e6b4df3f675811a5327ad81113881dc2"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.jar" :bytes 99332 :sha256 "a1d3258809d2f327376c9168a5677f6347eb999079cce99e014c926ab1d15e48"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.jar.sha1" :bytes 40 :sha256 "b70c38497f25d2e5c07fbb03b35c546e65dbcb840bc8c6620835d2932963d1c9"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom" :bytes 4263 :sha256 "c0819c1edc146952049d04f9cdbf32d0d839ec823c7337a4fc6f7d868958e476"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom.sha1" :bytes 40 :sha256 "0306d24fbadede45a8493ff40ffb535b9deb0401ecd1d51a95f766c88fc7d6fb"}
+  {:path "repository/io/github/frenchy64/fully-satisfies/1.12.0/fully-satisfies-1.12.0.jar" :bytes 82761 :sha256 "df6c836ce4f3f83b951c2b8fbb3286bb6c1c3ce051720df5cf677e95fb1764b8"}
+  {:path "repository/io/github/frenchy64/fully-satisfies/1.12.0/fully-satisfies-1.12.0.jar.sha1" :bytes 40 :sha256 "b3fec51fbabca3fca022e023b89be86d446bd012ae7b1c33164c551b47341e4d"}
+  {:path "repository/io/github/frenchy64/fully-satisfies/1.12.0/fully-satisfies-1.12.0.pom" :bytes 4855 :sha256 "58f80e05e1add41f14b8e85222861a8d581ae1cb93a43d631f7e7fd0f8c44761"}
+  {:path "repository/io/github/frenchy64/fully-satisfies/1.12.0/fully-satisfies-1.12.0.pom.sha1" :bytes 40 :sha256 "404af0d6891b368e51b26a766723231892fb20bda413d09a77e2e383eb835ce1"}
+  {:path "repository/io/methvin/directory-watcher/0.17.3/directory-watcher-0.17.3.jar" :bytes 54650 :sha256 "0523dd38a393a63b75e4320ff523034a0ac3cea697f6151a7ac8a893c322531e"}
+  {:path "repository/io/methvin/directory-watcher/0.17.3/directory-watcher-0.17.3.jar.sha1" :bytes 40 :sha256 "59b09746b015cc869543676a316d0cacf92841d1c833cb96614d6643daf19dec"}
+  {:path "repository/io/methvin/directory-watcher/0.17.3/directory-watcher-0.17.3.pom" :bytes 3172 :sha256 "63f0b8cd1d4da349b60df93891d1e00c5d3fd2c9bd33d8e5beed075a28cd8854"}
+  {:path "repository/io/methvin/directory-watcher/0.17.3/directory-watcher-0.17.3.pom.sha1" :bytes 40 :sha256 "374b1acef679e9b6375a5df798a6b3db44d19cbb69b565ecf8c05336b00ca83d"}
+  {:path "repository/joda-time/joda-time/2.10/joda-time-2.10.jar" :bytes 640835 :sha256 "c4d50dae4d58c3031475d64ae5eafade50f1861ca1553252aa7fd176d56e4eec"}
+  {:path "repository/joda-time/joda-time/2.10/joda-time-2.10.jar.sha1" :bytes 40 :sha256 "bb6484ee784739df63d87e44282d1f67b20d1b09e0f5567d1875239c01ae6334"}
+  {:path "repository/joda-time/joda-time/2.10/joda-time-2.10.pom" :bytes 37633 :sha256 "3ea2bef98b1d0a3a67647e7590db8a002bdd787832f9f8a44a6a46ea46de76b4"}
+  {:path "repository/joda-time/joda-time/2.10/joda-time-2.10.pom.sha1" :bytes 40 :sha256 "346b4d7273ba2b1112cdc3e676d25497cd4d528e802632a697fff3af00b832b0"}
+  {:path "repository/net/java/dev/jna/jna/5.12.1/jna-5.12.1.jar" :bytes 1866196 :sha256 "91a814ac4f40d60dee91d842e1a8ad874c62197984403d0e3c30d39e55cf53b3"}
+  {:path "repository/net/java/dev/jna/jna/5.12.1/jna-5.12.1.jar.sha1" :bytes 40 :sha256 "18f04c76e1a7a4b813873c04686d320537444be6196265dc718a2e5bd7bbef42"}
+  {:path "repository/net/java/dev/jna/jna/5.12.1/jna-5.12.1.pom" :bytes 2030 :sha256 "65ff25849bad859554b50317792f5689adb4529ae4031e9a5246319cb2b85356"}
+  {:path "repository/net/java/dev/jna/jna/5.12.1/jna-5.12.1.pom.sha1" :bytes 40 :sha256 "d6010b87671f98270d22217c9220f6c047ee99164ade15ec5e989e5310a3c317"}
+  {:path "repository/org/bitbucket/mstrobel/procyon-compilertools/0.5.34/procyon-compilertools-0.5.34.jar" :bytes 1526581 :sha256 "0437a2822a10e7b2f1c8a013f741cefae3b10f8f5b2ac3d7eeaece1008c59db1"}
+  {:path "repository/org/bitbucket/mstrobel/procyon-compilertools/0.5.34/procyon-compilertools-0.5.34.jar.sha1" :bytes 40 :sha256 "ad0105d3f3f5a5062ed964b94917782af178af0b64dac995314ba5b1e99dc95a"}
+  {:path "repository/org/bitbucket/mstrobel/procyon-compilertools/0.5.34/procyon-compilertools-0.5.34.pom" :bytes 2111 :sha256 "abc4360e95a342d31e11003b29f5d6615759287d9237ba9102d89d99ba373743"}
+  {:path "repository/org/bitbucket/mstrobel/procyon-compilertools/0.5.34/procyon-compilertools-0.5.34.pom.sha1" :bytes 40 :sha256 "67ab05026672d4759db45c9e3ec037a9d3bb8b8dc212d9afb97832c235431d75"}
+  {:path "repository/org/bitbucket/mstrobel/procyon-core/0.5.34/procyon-core-0.5.34.jar" :bytes 190638 :sha256 "a02001288ac8db42d0ceee87403d6377b4a63fb4ec2eafc53a352832ba2b732d"}
+  {:path "repository/org/bitbucket/mstrobel/procyon-core/0.5.34/procyon-core-0.5.34.jar.sha1" :bytes 40 :sha256 "5ceda9be1a4f26f339e4d44a224e0a051dfe5cfbf0267f992e784111f2737505"}
+  {:path "repository/org/bitbucket/mstrobel/procyon-core/0.5.34/procyon-core-0.5.34.pom" :bytes 1714 :sha256 "8916ac34119e5a00753c918159ae59ec141eaf1f72e2d82ffdff369a5b0294e7"}
+  {:path "repository/org/bitbucket/mstrobel/procyon-core/0.5.34/procyon-core-0.5.34.pom.sha1" :bytes 40 :sha256 "6065c7be5b6000916d91cd04a2e9fc55413296c98360f6fa4e1702ee2bffb13b"}
+  {:path "repository/org/clojure/clojure/1.12.5/clojure-1.12.5.jar" :bytes 4228300 :sha256 "dfdee131460216a84fef22e537bb0d0579965f8f70338d748323dff26f8e5a8b"}
+  {:path "repository/org/clojure/clojure/1.12.5/clojure-1.12.5.jar.sha256" :bytes 64 :sha256 "96f922091f9309597c3f7ece23e1427744b7c14c0f23c1412ef85aba439937e2"}
+  {:path "repository/org/clojure/clojure/1.12.5/clojure-1.12.5.pom" :bytes 10100 :sha256 "278c51d977c1968493d8d4cb0c5c60e2cb2550d60485c3813cf161e56af68858"}
+  {:path "repository/org/clojure/clojure/1.12.5/clojure-1.12.5.pom.sha256" :bytes 64 :sha256 "5f58a3e30ad47332336441fa30c813b85c4bd6951f9a73c0344d614105d531d7"}
+  {:path "repository/org/clojure/core.cache/1.2.263/core.cache-1.2.263.jar" :bytes 10810 :sha256 "81a2af67c497076cf9c601ba41f9ccb9c7de87a18087d39f579942ca005f9161"}
+  {:path "repository/org/clojure/core.cache/1.2.263/core.cache-1.2.263.jar.sha256" :bytes 64 :sha256 "bdcaf3be95a9791e79fc0a74318e286806ace4a439b3044bb24fb1865d8b480e"}
+  {:path "repository/org/clojure/core.cache/1.2.263/core.cache-1.2.263.pom" :bytes 1464 :sha256 "88b9b57bb6e6546ca1110aa877e788a81290dc1fc3d622938bba4d4fdba26e90"}
+  {:path "repository/org/clojure/core.cache/1.2.263/core.cache-1.2.263.pom.sha256" :bytes 64 :sha256 "9a6c6e19cbc335fbb3776bfb7d303b0cad4cae2e68300d712b4671f9584bf03e"}
+  {:path "repository/org/clojure/core.memoize/1.2.281/core.memoize-1.2.281.jar" :bytes 8076 :sha256 "b21e0ca657d2cb6d158ef94d9564e2783c839e1907782cc34d174720d3a6360d"}
+  {:path "repository/org/clojure/core.memoize/1.2.281/core.memoize-1.2.281.jar.sha256" :bytes 64 :sha256 "d177058bbd9dc50aa141312dd8cf9bc2f27c87997225cfb15ee64e8808b2779a"}
+  {:path "repository/org/clojure/core.memoize/1.2.281/core.memoize-1.2.281.pom" :bytes 1703 :sha256 "1a9b74e12077ad12b213dc5236a9994853ad282def9f3a33835fee435762a070"}
+  {:path "repository/org/clojure/core.memoize/1.2.281/core.memoize-1.2.281.pom.sha256" :bytes 64 :sha256 "ae08f3bce84af0b72732be2ae90759a34cd8f24b854f9357226878503e962443"}
+  {:path "repository/org/clojure/core.specs.alpha/0.4.74/core.specs.alpha-0.4.74.jar" :bytes 4306 :sha256 "eb73ac08cf49ba840c88ba67beef11336ca554333d9408808d78946e0feb9ddb"}
+  {:path "repository/org/clojure/core.specs.alpha/0.4.74/core.specs.alpha-0.4.74.jar.sha1" :bytes 40 :sha256 "abf1ce5833a4e07ef39d244fff7b3c86bd7f26b474b15f539b04e1b07ebd1acf"}
+  {:path "repository/org/clojure/core.specs.alpha/0.4.74/core.specs.alpha-0.4.74.pom" :bytes 2639 :sha256 "33410eb8aa73d52d957b3dc6e0a65f3998ac0623cbd813d90c33e6e689c42429"}
+  {:path "repository/org/clojure/core.specs.alpha/0.4.74/core.specs.alpha-0.4.74.pom.sha1" :bytes 40 :sha256 "73bc1f73a6fbc9008562102daecabdf26aafa6cea2966a99d4d9f341370c0e71"}
+  {:path "repository/org/clojure/data.priority-map/1.2.1/data.priority-map-1.2.1.jar" :bytes 8182 :sha256 "963f1f9c06026c27db355d9e6b8125e0d0522877a7d70ae979ba08d08e82e7c3"}
+  {:path "repository/org/clojure/data.priority-map/1.2.1/data.priority-map-1.2.1.jar.sha256" :bytes 64 :sha256 "9d4bd8538b19d3b81570ddfb1460037650d43e15aec5f13349a3ed2146355530"}
+  {:path "repository/org/clojure/data.priority-map/1.2.1/data.priority-map-1.2.1.pom" :bytes 1012 :sha256 "b5d50be57035d62b2c22119c6266aa8a5b1c9762e6b24efa003e59fde1ab1118"}
+  {:path "repository/org/clojure/data.priority-map/1.2.1/data.priority-map-1.2.1.pom.sha256" :bytes 64 :sha256 "c1c3a33f4c5ac604349be34e82065283059ca9585df3ada4221aa7d76c4112be"}
+  {:path "repository/org/clojure/java.classpath/1.1.1/java.classpath-1.1.1.jar" :bytes 3110 :sha256 "518bd2b6b8c2bef986e23d739c66dfde59b230f50885ca5aee5ed8b8a7e4b388"}
+  {:path "repository/org/clojure/java.classpath/1.1.1/java.classpath-1.1.1.jar.sha256" :bytes 64 :sha256 "53eef757fdedd60453e404ffcc7995e5fdf665fdd3312ca3827a7f5a9e1bafc1"}
+  {:path "repository/org/clojure/java.classpath/1.1.1/java.classpath-1.1.1.pom" :bytes 931 :sha256 "935511e0ca36e1b1d10827673cd234bb75e6c5ceb4266669aaf5e2c9a591d421"}
+  {:path "repository/org/clojure/java.classpath/1.1.1/java.classpath-1.1.1.pom.sha256" :bytes 64 :sha256 "28a9f09f529550ea0eade972a84e04440b566c3978d5eb846d537aa648165485"}
+  {:path "repository/org/clojure/math.combinatorics/0.3.2/math.combinatorics-0.3.2.jar" :bytes 11871 :sha256 "06cc5b1312ef9d056aca8aaa014d4ad71d30da88163dcc3a18dc84736d22b0b0"}
+  {:path "repository/org/clojure/math.combinatorics/0.3.2/math.combinatorics-0.3.2.jar.sha256" :bytes 64 :sha256 "a15b92c198507d606add4e54f3eb72439eaf2ee1557b1f3df98d6e51c542291f"}
+  {:path "repository/org/clojure/math.combinatorics/0.3.2/math.combinatorics-0.3.2.pom" :bytes 1079 :sha256 "c2fb8f3cb315614ad61c02961552d83257cf686a7593835d29ee0f119fc2b5af"}
+  {:path "repository/org/clojure/math.combinatorics/0.3.2/math.combinatorics-0.3.2.pom.sha256" :bytes 64 :sha256 "768531519d00dedd83850d6df4168525973c840d2888d88b4008f9ef89febff8"}
+  {:path "repository/org/clojure/pom.contrib/1.2.0/pom.contrib-1.2.0.pom" :bytes 7149 :sha256 "0916d7a41558b9500a427c886fa29827ace5259206be3ad33e64e296fc1a6111"}
+  {:path "repository/org/clojure/pom.contrib/1.2.0/pom.contrib-1.2.0.pom.sha1" :bytes 40 :sha256 "a01b010026102cb6f565c74743a6902f66c2cbb8a8a93896186725f1b3e766e2"}
+  {:path "repository/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom" :bytes 7201 :sha256 "0993676876081f491ba5af82fa6b5a037a3bee3a125a02d6d5e27aa29f356787"}
+  {:path "repository/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom.sha256" :bytes 64 :sha256 "d646f7b5691ff7a5aba2979a2032964e2839a2c891466d8c000544ced8b18022"}
+  {:path "repository/org/clojure/spec.alpha/0.5.238/spec.alpha-0.5.238.jar" :bytes 636643 :sha256 "94cd99b6ea639641f37af4860a643b6ed399ee5a8be5d717cff0b663c8d75077"}
+  {:path "repository/org/clojure/spec.alpha/0.5.238/spec.alpha-0.5.238.jar.sha1" :bytes 40 :sha256 "3335dd92cdac1ab02bb73a23e5889aa59c6d1834d44d3d50e62c723280f29d58"}
+  {:path "repository/org/clojure/spec.alpha/0.5.238/spec.alpha-0.5.238.pom" :bytes 3511 :sha256 "3cba7e0dcc085c4ce92dddffea226124ffac178be79bd0379b5b2e30a969cbea"}
+  {:path "repository/org/clojure/spec.alpha/0.5.238/spec.alpha-0.5.238.pom.sha1" :bytes 40 :sha256 "f3c25697d4bbaf8590461fedb88b909d7b86a1a7f93bdc4d0bf0c5b1d65806a7"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.jar" :bytes 40187 :sha256 "8b0637b13982734742fb3f4d129f0a9d9e3d752b1aec0c6f65ced4555f72b649"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.jar.sha256" :bytes 64 :sha256 "f853ece6284fa459ee22d547571ede9f70d6414c150b023d8e1585436ec0fbdd"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.pom" :bytes 1630 :sha256 "a4f21feb2386fbfcd42a52200d14c0f78bbef6899f748ccefcb0a4499e0fdec5"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.pom.sha256" :bytes 64 :sha256 "0a577ed7eaa261172fbca268c79ee71ca348dff280f7b0afdaf451ddde8760b6"}
+  {:path "repository/org/clojure/tools.namespace/1.5.1/tools.namespace-1.5.1.jar" :bytes 20365 :sha256 "6e89dc0cf983e670ea75a2d77d4325599be1d4c30cf0a8275272cdac195cc401"}
+  {:path "repository/org/clojure/tools.namespace/1.5.1/tools.namespace-1.5.1.jar.sha256" :bytes 64 :sha256 "8195d14a2f6f74403f3d88ed87f2b68f1321e1d16f90618c94572c3d643b9dda"}
+  {:path "repository/org/clojure/tools.namespace/1.5.1/tools.namespace-1.5.1.pom" :bytes 1488 :sha256 "ac4d5d17976dabcadc68d8383d087c5ec2808ce2a5bbac5138a207352e2430f2"}
+  {:path "repository/org/clojure/tools.namespace/1.5.1/tools.namespace-1.5.1.pom.sha256" :bytes 64 :sha256 "635b5b03ba8de759ad479a48d1725e410e3a327ed2d8cbe8b193dd35eb15003a"}
+  {:path "repository/org/clojure/tools.reader/1.6.0/tools.reader-1.6.0.jar" :bytes 52614 :sha256 "036dc155f3b62548df3da934791aa9d8ec36572a9c664ce2cc7f6551856436be"}
+  {:path "repository/org/clojure/tools.reader/1.6.0/tools.reader-1.6.0.jar.sha256" :bytes 64 :sha256 "39b6650d4ecc062755f649f89243b11eae7c755579eefc0788da41e6373541d2"}
+  {:path "repository/org/clojure/tools.reader/1.6.0/tools.reader-1.6.0.pom" :bytes 4544 :sha256 "986465cbf9790213c68a0ba03af36cfb76c6963283fc6537d57002de99477877"}
+  {:path "repository/org/clojure/tools.reader/1.6.0/tools.reader-1.6.0.pom.sha256" :bytes 64 :sha256 "8efbd2663e721b7398ea139819c7252caf2b9856864b2a24342ec11600a170df"}
+  {:path "repository/org/ow2/asm/asm/9.8/asm-9.8.jar" :bytes 126113 :sha256 "876eab6a83daecad5ca67eb9fcabb063c97b5aeb8cf1fca7a989ecde17522051"}
+  {:path "repository/org/ow2/asm/asm/9.8/asm-9.8.jar.sha256" :bytes 64 :sha256 "04a730f3244f79e422ed3705f03cad82f80ae1f779506fdc9a8ef13041268a1d"}
+  {:path "repository/org/ow2/asm/asm/9.8/asm-9.8.pom" :bytes 2370 :sha256 "c1367c3bb383d7619e7f797e38df7513885f2eef04ae7b5908f68222657b5baa"}
+  {:path "repository/org/ow2/asm/asm/9.8/asm-9.8.pom.sha256" :bytes 64 :sha256 "4c69f3f364277fa9ed2efe20ecb5709ac277113b44851752e07cc3ce0eba47af"}
+  {:path "repository/org/ow2/ow2/1.5.1/ow2-1.5.1.pom" :bytes 11290 :sha256 "321ddbb7ee6fe4f53dea6b4cd6db74154d6bfa42391c1f763b361b9f485acf05"}
+  {:path "repository/org/ow2/ow2/1.5.1/ow2-1.5.1.pom.sha1" :bytes 40 :sha256 "c92a324681142a707330f48583e6434a58209fac4db998b0e01a7cd5cb4478e2"}
+  {:path "repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar" :bytes 41125 :sha256 "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"}
+  {:path "repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar.sha1" :bytes 40 :sha256 "accd97159a37f3e15a6f96409648ab739a834e683c4967518e4dd41ea39434da"}
+  {:path "repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom" :bytes 2743 :sha256 "fb046a9c229437928bb11c2d27c8b5d773eb8a25e60cbd253d985210dedc2684"}
+  {:path "repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom.sha1" :bytes 40 :sha256 "8be628f267e3a642fd545bec617ea99c391fe3d6600f2c8783faa5b75e0815f1"}
+  {:path "repository/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom" :bytes 14093 :sha256 "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812"}
+  {:path "repository/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom.sha1" :bytes 40 :sha256 "bcd9e1574545b9771dfaf587af9b76184e43b54c4c299744e3978ee3d385fd4a"}
+ ]}

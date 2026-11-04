@@ -1,0 +1,82 @@
+{:review/id :services-generation-plan-fix-review-v2
+ :date "2026-11-03"
+ :kind :independent-local-planning-finding-recheck
+ :reviewer :architect
+ :prior-review ".ημ/runs/oikos-program-20261103/reviews/services-generation-plan-review-v1.edn"
+ :verdict :approve
+ :scope :four-existing-planning-corrections-only
+ :candidate {:repository "open-hax/services"
+             :worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+             :head "f8d63271bd3d14cc6ce5ec33466c6e8a747d5d10"
+             :previous-head "ebe5a49f00cfc3fb1501955d8707e6076cf7dc81"
+             :canonical-base "3fdf9f3922271ea36e52247c3844b07f4eeb463e"
+             :spec "docs/local-generations-v1.md"
+             :spec-sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+             :head-and-hash-verified true
+             :working-tree-clean true
+             :delta "Only docs/local-generations-v1.md changed since the prior reviewed head; 162 insertions, 27 deletions."}
+ :settlements
+ [{:finding "LG-P1-1" :status :settled-at-planning-level
+   :anchors ["docs/local-generations-v1.md:69-73" "docs/local-generations-v1.md:84-132" "docs/local-generations-v1.md:396-403"]
+   :context :世 :confidence 1.0
+   :basis "NS64 signed canonical decimal strings preserve native nanoseconds including negative/pre-epoch values; U64 strings preserve full device/inode range. Ordinary int limit is now type-specific. Explicit bounds, rejection of noncanonical forms, no Number/double conversions and S-string hash encoding remove the real-stat range contradiction."
+   :implementation-tests-required ["BB/Python roundtrip/hash of 1793735800379596064 and adjacent nanoseconds"
+                                   "Signed NS64 and full U64 bounds, pre-epoch/zero and invalid forms"
+                                   "Actual unchanged real-stat observation admitted; adjacent timestamps distinguish drift"]}
+  {:finding "LG-P1-2" :status :settled-at-planning-level
+   :anchors ["docs/local-generations-v1.md:92-97" "docs/local-generations-v1.md:201-209" "docs/local-generations-v1.md:243-250" "docs/local-generations-v1.md:323-329" "docs/local-generations-v1.md:404-429"]
+   :context :世 :confidence 1.0
+   :basis "Apply binds absent NewDestination; rollback binds present RetainedDestination and complete TreeProof with exact retained manifest. Rollback skips creation/building, verifies retained target at write edges, and never rewrites/deletes either retained tree. Failed rollback from B toward A restores B; cleanup authority is explicitly limited to transaction-created entries and apply-only new candidates."
+   :implementation-tests-required ["Actual apply A, apply B, approved rollback selecting retained A at its original name"
+                                   "Retained rollback target byte/metadata/inode drift refuses paired with successful rollback"
+                                   "All rollback selection/durability faults restore B and preserve both A/B trees"
+                                   "Pre-existing apply destination still denies"]}
+  {:finding "LG-P1-3" :status :settled-at-planning-level
+   :anchors ["docs/local-generations-v1.md:90-94" "docs/local-generations-v1.md:126-132" "docs/local-generations-v1.md:274-302" "docs/local-generations-v1.md:304-310" "docs/local-generations-v1.md:333-363" "docs/local-generations-v1.md:426-431"]
+   :context :世 :confidence 0.99
+   :basis "Bounded immutable RecoveryCapsule now stores exact Plan, approval, trusted Policy/source bindings, exact old current bytes/accepted metadata, old TreeProof and rollback-target proof. Journal binds capsule hash and Identity; setup, no-follow custody, fsync order and retained lifetime are explicit. Fresh-process re-entry requires no original caller request, verifies the fixed launcher's trusted policy/source and capsule bindings, uses pre-crash proof rather than adopting fresh observations, and holds on absent/torn/replaced/unknown state. Historical expiry cannot block compensation or authorize new work."
+   :implementation-tests-required ["SIGKILL after durable intent/current rename followed by real fresh-process compensation with no original request"
+                                   "Old payload mtime/xattrs drift after kill holds using durable prior proof"
+                                   "Absent/torn/replaced capsule holds before normal effects"
+                                   "Capsule persistence/fsync failures leave old selection and generation trees untouched"
+                                   "Enforce capsule 32 MiB and tree/xattr bounds before generation/selection effects"]}
+  {:finding "LG-P2-4" :status :settled-at-planning-level
+   :anchors ["docs/local-generations-v1.md:453-465" "docs/local-generations-v1.md:480-490"]
+   :context :世 :confidence 1.0
+   :basis "Plan explicitly distinguishes RED/GREEN development admission from FINAL GREEN qualification. Exact-final-candidate full owner environment suite with both previously unavailable Caddy classes executed and zero failures/errors is mandatory before owner acceptance/handoff. Actual counts must be recorded; focused/static/BB-parser checks are not substitutes. Required JVM/static gates remain blocking when unavailable; no download/install authority or gate waiver is inferred."
+   :implementation-tests-required ["Full exact-candidate environment suite passes including EnvironmentCaddyTest and ManagedAxxiumCaddyTest"
+                                   "Required JVM workflow/static checks execute successfully or qualification remains held"
+                                   "Final evidence distinguishes focused suites, full baseline and static checks"]}]
+ :admission {:planning-admits-red-green true
+             :meaning "Independent planning acceptance of exact f8d63271bd3d14cc6ce5ec33466c6e8a747d5d10 permits parent to admit RED tests and GREEN implementation of this bounded sandbox prerequisite under existing user authorization. Parent owns operational/card admission."
+             :final-green-qualification :held-until-required-gates-pass
+             :actual-api-available false
+             :implementation-qualified false
+             :consumer-handoff-authorized false
+             :s1b-completion-credit false
+             :installed-promotion-authorized false
+             :do-deployment-authorized false
+             :native-provider-approval-credit false
+             :needed-user-decision :none-for-this-scope
+             :prerequisite-card "3f5d0052-dda2-4089-971d-8603e385bd77"
+             :card-treatment "External Services prerequisite, not an additional Oikos program card; no status change made here."
+             :unchanged-limits "Envelope-only generation selection, opaque independently validated descriptors/payloads, trusted owner approval channel, cooperative private-parent race assumptions, explicit hostile same-UID/root/mount limits and logical bytes/accepted metadata restoration remain as accepted in v1. No generic OS promoter or installed-file handoff is granted."}
+ :verification {:performed ["Read exact previous-to-current spec diff for the four corrections"
+                            "git rev-parse HEAD matches requested SHA"
+                            "sha256sum docs/local-generations-v1.md matches requested SHA256"
+                            "git status --short returned empty"
+                            "git diff --check previous-head current-head exited zero"
+                            "Read numbered recovery and qualification clauses for cross-check"]
+                :reported-not-rerun {:focused-tests "29 passed"
+                                     :static-and-edn "Static checks and 370 EDN resources reported passing"
+                                     :kondo "0 errors, 0 warnings reported"
+                                     :full-baseline "123 tests still FAILED with 2 missing-Caddy setup errors; not waived"}
+                :runtime-effects-tested false
+                :qualification-note "This approves a corrected plan, not runtime correctness. Each listed matrix remains an actual future RED/GREEN/code-review gate; missing implementation is not a planning finding."}
+ :reflection {:lesson "All four corrections now make the prior positive-write/rollback/re-entry requirements expressible without weakening baseline gates. Preserve the distinction between implementation admission and final consumer qualification."
+              :spore-created false
+              :receipt-delegation "Parent owns receipt/reflection publication; only this new requested review artifact is authored."}
+ :effects {:sole-authored-path ".ημ/runs/oikos-program-20261103/reviews/services-generation-plan-fix-review-v2.edn"
+           :source-docs-card-ledger-pr-writes false
+           :commits false :pushes false :runtime-effects false
+           :services-docker-credential-model-install-calls false}}

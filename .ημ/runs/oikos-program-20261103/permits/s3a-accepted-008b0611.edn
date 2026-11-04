@@ -1,0 +1,36 @@
+{:artifact/id :oikos-s3a-accepted-008b0611
+ :repository "open-hax/oikos"
+ :reviewed-pure-source "8642b46e70ec9dee9851b643dd53de32fb2acbf5"
+ :reviewed-integration-source "27adbfec5fd60302f93b1adf842dfd3f443644ab"
+ :merged "008b0611198d13eb503bb57d5ef69d8dec1c268c"
+ :tree "06d714dd42ec2b12cd51bdc37e1b4b0fe67d9f3b"
+ :merge-parents ["62e6eebbf75c3f2b28e4a550b4a01881a2f5e732"
+                 "27adbfec5fd60302f93b1adf842dfd3f443644ab"]
+ :pr "https://github.com/open-hax/oikos/pull/2"
+ :merged-at "2026-11-03T22:27:45Z"
+ :published-ref "artifact/oikos-s3a-008b0611"
+ :parent-observations {:merge-tree-equals-reviewed-integration true
+                       :primary-oikos-main-clean-fast-forwarded true
+                       :published-ref-normal-push true
+                       :spaces-bb [11 455] :spaces-nbb [11 455]
+                       :lint-errors 0 :lint-warnings 0}
+ :independent-reviews ["../reviews/s3a-code-v1.edn"
+                       "../reviews/s3a-integration-v2.edn"]
+ :parent-acceptance "../reviews/s3a-parent-acceptance.edn"
+ :native-premerge {:head "27adbfec5fd60302f93b1adf842dfd3f443644ab"
+                   :threads 0 :unresolved-findings 0
+                   :complete-thread-review-comment-and-check-pages-read true
+                   :codex-exact-head-passing-issue-comment 6615777023
+                   :codex-summary-comment 6615747480
+                   :coderabbit-check :success
+                   :coderabbit-summary-is-full-approving-review false
+                   :mimo-and-kimi-workflow-routes :not-installed
+                   :automatic-merge nil :admin-bypass false
+                   :cli-soft-cohort-loop :not-satisfied
+                   :local-review-override "The user explicitly admitted completed independent local reviews instead of waiting for hosted cohorts. Ordinary exact-head server-side merge succeeded; no synthetic native APPROVED state or branch-protection bypass."}
+ :provides [:pure-logical-window-memberships :immutable-branch-bases
+            :explicit-observation-and-predecessor-conflicts :pure-named-branch-comparison]
+ :not-provided [:persistent-atomic-store :live-currentness :s2a-whole-completion
+                :s3b-movement-admission :live-desktop-effects :installed-promotion]
+ :board-completion :parent-to-record-through-rheos
+ :epic-completion-credit 0}

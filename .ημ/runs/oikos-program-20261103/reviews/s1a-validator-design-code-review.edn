@@ -1,0 +1,78 @@
+{:review/type :independent-validator-boundary-code-review
+ :review/date "2026-11-03"
+ :review/head "fb9d7cd4a998459cee03d907c81b640a4ada22db"
+ :review/base "78ccd602"
+ :review/checkout "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+ :review/verdict :approve
+ :review/meaning "Approve the introduced validator trust/ownership/deadline boundary in the reviewed scope; not board admission, production promotion, whole-program approval or an implementation claim by this reviewer."
+ :review/independence "Reviewer supplied the preceding read-only design recommendation and did not implement this change. This review inspected the actual implementation and ran its NBB test runner independently."
+ :scope
+ {:included [:independent-validator-pinning :private-input-framing :private-json-import
+             :absolute-deadline :terminal-publication :owned-process-cleanup
+             :late-callbacks :closed-errors :buffer-retention]
+  :excluded [:s1b :installed-worker-promotion :hard-real-time-os-guarantees
+             :exhaustive-scheduler-enumeration :prior-five-finding-re-audit]
+  :other-reviewer "Original late-success and BOM protocol reproduction remains separately assigned; the existing regression tests for these were also executed here as part of the actual NBB suite."
+  :writes "Only this new parent review artifact; no source, board, ledger, commit, service or model changes."}
+ :evidence
+ {:head-command "git rev-parse HEAD"
+  :head-output "fb9d7cd4a998459cee03d907c81b640a4ada22db"
+  :read ["AGENTS.md"
+         "src/oikos/infra/bb_render.cljs (actual full diff from 78ccd602)"
+         "scripts/validate-render.clj (full)"
+         "src/oikos/infra/validation_ipc.cljs (full)"
+         "test/oikos/fixtures/bb_validator.clj (full diff)"
+         "test/oikos/infra/generation_test.cljs (full diff from 78ccd602)"
+         "docs/s1a-api.md (full diff from 78ccd602)"
+         "bb.edn"
+         "Prior frozen generation/frame/digest laws and T09/T10 read in preceding design turn"]
+  :executed
+  [{:command "nbb -cp src:test test/oikos/test_runner.cljc"
+    :cwd "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s1a"
+    :exit 0 :tests 40 :assertions 546 :failures 0 :errors 0
+    :observed-lines
+    ["S1A shared fixture SHA-256: f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"
+     "S1A deadline regression: {:spawn-to-settle-ms 5996.0295750000005, :status :error, :code :timeout}"
+     "S1A private IPC native full-cap import: {:bytes 6356992, :milliseconds 8.759018999997352}"
+     "Ran 40 tests containing 546 assertions."
+     "0 failures, 0 errors."]
+    :qualification "Includes actual real renderer plus validator positive multi-target validation, malformed private IPC/process negatives, validator heartbeat/cancellation/TERM-resistance/descendant fixtures, pin mismatch, length/UTF-8 negatives, and deterministic deadline checkpoints. These are existing candidate tests actually rerun, not newly authored independent fixtures."}]
+  :not-rerun [:bb-suite :eval-suite :lint]
+  :reported-other-gates "Reported BB/eval/lint green counts are not promoted to independent observations by this review."}
+ :findings []
+ :reviewed-invariants
+ [{:area :trust
+   :assessment "The closed trusted descriptor separately names :helper and :validator, requires different path strings and independently checks the validator helper hash in the seven-file inventory. Request input cannot select it. The validator receives the original request bytes and trusted pins, not producer-selected revisions; it calls full accept-response independently. Shared immutable laws are acceptable trusted context, not producer self-attestation."
+   :limit "The two paths need not be separately installed releases. Writable-checkout hash snapshots remain convenience, as explicitly documented; immutable owner-controlled production artifacts are an assumption, not installed by this patch."}
+  {:area :bounded-input
+   :assessment "Validator decimal lengths are syntax/range checked before bounded reads, exactly both byte blocks and EOF are required, strict UTF-8 roundtrip preserves BOM identity, and request/pins use the restricted non-evaluating reader. Nonzero renderer exit or nonempty raw stderr never reaches successful validation. No request-selected load/eval path was introduced."}
+  {:area :bounded-import
+   :assessment "Private JSON has its own streamed expansion cap and strict native UTF-8 decoding. Closed shallow maps, bounded arrays, fixed enum mappings and tagged coordinates reconstruct the Result. No EDN parse, portable hash, portable UTF-8 traversal or canonicalization of output occurs on the parent loop after renderer spawn. Full semantic artifact checks belong to the pinned validator, so the shallow importer is intentionally not a substitute artifact validator."
+   :limit "Native JSON.parse is not a duplicate-key/structural-budget EDN reader, nor is this public producer ingress. Its safety premise is the separately pinned fixed validator output. Its measured full-byte-cap import is not an arbitrary JSON-shape hard-real-time proof."}
+  {:area :deadline
+   :assessment "One performance.now deadline is assigned immediately before the renderer spawn call; timer delay is computed from remaining time. Validator does not receive another deadline. active! guards launch, close handling, copying/import and post-import completion. complete! independently checks the clock immediately before terminal CAS. An overdue callback cannot publish artifacts merely because the timer callback has not fired."
+   :limit "Synchronous pre-spawn request admission still performs full rendering and is explicitly outside the spawn-relative budget. This review does not reinterpret the patch as fixing start!-entry responsiveness."}
+  {:area :terminal-ownership
+   :assessment "All spawned children are recorded separately. Cleanup first wins the terminal CAS, which suppresses validator launches and late success. Success is accepted only after the validator close event and reconciliation; the renderer was reconciled before the validator launch. Post-settlement cancellation cannot win terminal CAS or signal children."}
+  {:area :cleanup
+   :assessment "All unresolved records receive stdin destruction and TERM together, then KILL together after the shared grace, then one shared cleanup timer. Reconciliation requires child close and absent owned group; reconciled records are remembered, avoiding later signalling of their old PID. Remaining unconfirmed groups enter cleanup-holds and their read pipes are destroyed; new helper admission denies while holds remain."
+   :limit "No deliberately unkillable live process or actual PID-reuse experiment was created here. Ordinary process-group cleanup relies on the documented OS/process ownership model, not a claimed kernel sandbox or pidfd guarantee."}
+  {:area :closed-errors-and-retention
+   :assessment "Validator exceptions are sanitized, raw stderr must be empty for normal acceptance, importer exceptions become fixed protocol-error, and arbitrary private error enums/coordinates reject. Settlement clears tracked raw output/error arrays and retained request bytes; stdin is ended normally or destroyed on cleanup. No raw diagnostic/secret marker is intentionally returned or persisted by these paths. Test fixtures exercise marker-bearing malformed messages and byte-channel negatives."}]
+ :counterexample-search
+ {:result "No concrete P0-P3 counterexample established in the requested introduced-boundary scope."
+  :checked-races ["deadline before validator launch"
+                  "deadline on validator close before timer delivery"
+                  "deadline after native import and at final CAS"
+                  "cancellation while validator is active"
+                  "late callbacks after terminal settlement"
+                  "renderer reconciled before validator cleanup"
+                  "single cleanup budget across recorded groups"]
+  :non-findings ["Not demanding production immutable-worker installation: this is explicitly not this candidate's role."
+                 "Not rejecting shallow trusted JSON because it omits independent semantic artifact checks: those checks now execute in the fixed trusted validator."
+                 "Not treating valid large-case timeout as a reduced format/size capability: frozen caps remain unchanged and slow workloads must fail closed under the same wall budget."
+                 "Not treating existing pre-spawn synchronous work as a newly introduced spawn-relative deadline violation."
+                 "No style, speculative broader S1B feature, hosted workflow wait or unexecuted claimed-green gate is used as a blocker."]}
+ :next "Parent combines this scoped approval with the separate protocol review and its own exact-head acceptance evidence."
+ :reflection {:lesson "The implementation avoided the main import-boundary trap: it did not move expensive EDN validation out of process only to parse the same accepted artifact EDN on the parent again. Trust placement, terminal CAS and cleanup ownership are explicit in the actual code."
+              :spore-created false :parent-owns-ledger true}}

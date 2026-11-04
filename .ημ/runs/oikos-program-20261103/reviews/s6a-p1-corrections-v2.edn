@@ -1,0 +1,46 @@
+{:plan/id :s6a-p1-corrections-v2
+ :authority :none
+ :status :pending-same-independent-reviewer-confirmation
+ :base {:path "s6a-prerequisite-and-api-plan-v1.edn"
+        :sha256 "df20d2c4fa9f32f8d3eb3a0b8982cf0fe614e2f3bd05f862277e6a8ba8d93e02"}
+ :review {:path "s6a-prerequisite-and-api-plan-review-v1.edn"
+          :sha256 "d93b0b9e5135820d3faa0d2fc376797297bc212d1239087eed29c00713311908"}
+ :replacement-rule "These P1 replacements adopt the independent review's bounded corrections. Other V1 API facts, unsupported-mode matrix and P2/P3/P4 qualification holds remain. This document is not code/import/board/runtime authorization."
+ :findings
+ [{:id :s6a-plan-01
+   :resolution "Use accepted main 008b0611198d13eb503bb57d5ef69d8dec1c268c as the clean source base. Import only the six exact additions below from qualified pure capability source 8ae64df4c7ad170c5de9206f4d3f712d44c60b43, without overwriting any accepted file or merging its whole tree. Independently verify that composition and all nine S2A pins before implementing P1. Invoke every new/imported suite explicitly; bb test is inherited baseline, not new-suite coverage."}
+  {:id :s6a-plan-02
+   :resolution "P1 is wholly offline. Table-driven inert payload/outcome pairs prove preparation, refusal and outcome classification only. Each impossible pair has a reasoned not-applicable classification; it is not a skipped actual transport assertion. No injected case proves an actual send, revocation, DNS, redirect, proxy or downstream isolation. Working fake HTTP and isolated downstream controls remain P2; authentic signed-policy and transformation proofs remain P3/P4."}
+  {:id :s6a-plan-03
+   :resolution "Accept only explicitly enumerated bounded plain representations at a demonstrably safe host boundary; refuse metadata, records, JS objects, accessors, proxies and poisoned persistent backing storage before traversal/coercion. Instrument actual zero-accessor controls. If a representation cannot be inspected safely, deny it; do not claim universal reflection/proxy safety. Known structured image/data-URI/attachment/binary variants deny, but no arbitrary-string test can detect every encoding. P1's synthetic text is inert prepared data with authority none, not authenticated content provenance. Real source/byte/read-scope authority remains held."}
+  {:id :s6a-plan-04
+   :resolution "Restrict P1 to EXACTLY ONE explicitly synthetic user text message with a closed source-event, content-reference, revision and optional named derivation binding. Empty or multiple messages, non-user role, caller completeness flags, implicit history recovery/trimming/summarization and opaque serialized tool/image envelopes deny. Multi-message preparation requires a separately reviewed ordered-history/completeness contract before expansion. This narrower source test phase does not silently narrow whole-task acceptance."}]
+ :source-composition
+ {:base "008b0611198d13eb503bb57d5ef69d8dec1c268c"
+  :pure-capability-source "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+  :exact-six-new-files ["docs/contracts/named-capability-v1.edn"
+                       "docs/contracts/named-capability-v1.md"
+                       "scripts/test_capability.clj"
+                       "src/oikos/law/capability.cljc"
+                       "test/oikos/capability_runner.cljc"
+                       "test/oikos/law/capability_test.cljc"]
+  :no-other-imports true
+  :required "Clean target, pinned source blob SHA256/mode equality, no overwritten accepted paths, nine frozen S2A files unchanged. Source-import review occurs before P1 RED/GREEN. No S4A dispatcher/native source or S2A fixture adapter imported."}
+ :new-p1-file-ceiling
+ ["src/oikos/law/egress.cljc" "src/oikos/infra/govone.cljs"
+  "test/oikos/law/egress_test.cljc" "test/oikos/infra/govone_test.cljs"
+  "docs/contracts/govone-egress-v1.edn" "test/oikos/egress_runner.cljc"
+  "test/oikos/govone_offline_runner.cljs" "scripts/test_egress.clj"]
+ :infrastructure-boundary "infra/govone.cljs is inert preparation/serialization/outcome classification only: no transport implementation, credentials, session creation, resolver, DNS, network, subprocess or policy issuer. It cannot return allow/effect authority; prepared results carry authority none. Extern pure introspection may be required for a sound host guard: if the eight-file ceiling cannot accommodate the correct boundary, report the exact additional-file need before editing rather than violate layering or invent an unsafe guard."
+ :verification
+ {:explicit-suites ["bb scripts/test_egress.clj" "bb scripts/test_capability.clj"
+                    "bb scripts/test_desktop.clj" "bb test" "bb lint"]
+  :runtime "Use pinned existing Clio source/cache and exact parent permit context from the base plan. RED must be an assertion/implementation failure, not missing dependencies. GREEN runs shared laws in BB and NBB plus NBB offline adapter tests; actual counts, zero failures/errors/new warnings. Frozen bb.edn/default runners unchanged."
+  :effects "Inventory/trap reachable effect seams before adapter import. Zero socket/process/network/resolver/credential/session calls. Unsupported input denies before any such seam. Raw exception/input/ID/content never leaks in public outcomes. Injected after-send error class is unknown only, not proof an actual send happened."
+  :review :independent-exact-head-before-component-acceptance}
+ :current-operator-decision "The user separately allowed an isolated checksum-verified Go1.27.1 cache. This is not permission to start GovOne, download other dependencies or count real owner proofs as complete."
+ :remaining-held [:P2-real-transport-mechanics :P3-authentic-local-only-trial
+                  :P4-genuine-hybrid-and-external-transformations
+                  :real-payload-resolver-and-current-authority
+                  :existing-eval-route-mediation :whole-s6a-completion]
+ :questions-needed-now []}

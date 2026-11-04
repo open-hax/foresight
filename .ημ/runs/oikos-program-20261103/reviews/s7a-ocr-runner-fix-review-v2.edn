@@ -1,0 +1,220 @@
+{:review/id :s7a-ocr-runner-fix-review-v2
+ :review/kind :independent-original-three-fix-and-introduced-regression-review
+ :review/date "2026-11-03"
+ :review/context :observed :review/confidence 1.0
+ :task/uuid "0db50b53-6c7a-489a-bff9-048d57ce4cbb"
+ :verdict :approve
+ :qualification :offline-simulator-only
+ :original-findings-settled 3
+ :remaining-original-findings []
+ :introduced-regression-findings []
+ :new-findings []
+ :scope
+ {:repository "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a"
+  :original-head "a7a6113b32d9eb96621cb3cffebbe61d8e52b827"
+  :red-head "4fbfbf44af91e1660184e9add116ad1390d6a247"
+  :reviewed-head "7cd9320f2c9991f8e36e15e59478b80789ae3b25"
+  :head-independently-verified true
+  :lineage "GREEN's parent is RED; RED's parent is the original reviewed head. RED production runner bytes equal the original runner bytes."
+  :original-review ".ημ/runs/oikos-program-20261103/reviews/s7a-ocr-runner-code-v1.edn"
+  :original-review-file-sha256 "5930d32c260d937a9c8c3fcb17182c2fd495ea21e56dc1cc727549f2b6d2e694"
+  :only-original-three-and-actual-introduced-regressions true
+  :examined "Original-to-GREEN and RED-to-GREEN diffs, actual changed runner/law/tests/sealer/docs, saved RED log, all three artifact generations and their source bindings, exact original witnesses and independent boundary controls."
+  :instructions-rechecked "Oikos worktree AGENTS.md; no additional nested AGENTS.md found. Inherited Foresight and home boundaries remain in force."
+  :official-parent-configs-read
+  ["/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+   "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.json"]
+  :task-artifact-read "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/docs/agile/kanban/oikos-freeze-synthetic-local-gemma-ocr-baseline-and-runtime-identity-probes-57ce4cbb.md"
+  :board-read-source :markdown-artifact-not-engine-validation
+  :native-provider-approval false :board-transition-or-pr-admission false
+  :initial-and-final-product-worktree-status :clean}
+ :artifact-verification
+ {:method "Independent actual-byte SHA256, canonical seal recomputation, every current source binding, and read-only Git blob comparisons for historical bindings and preservation. No sealer or reproduction writer was invoked."
+  :current-runner-v2
+  {:path "eval/ocr-runner/artifact-v2.edn"
+   :file-sha256 "2c291f6f4598b00da1197a8ae3b560042c56bbba9f971ca6d4efa9befbdd948b"
+   :requested-file-sha256-matched true
+   :canonical-seal "65ed39dc14864d00ccaa8e62858da24845ca04a75fb3f0b506516178f21f8281"
+   :canonical-seal-matched true :bound-files 14 :binding-mismatches []
+   :live-execution :blocked :parent-execution-admission :held
+   :qualification :in-process-simulator-only}
+  :historical-runner-v1
+  {:path "eval/ocr-runner/artifact-v1.edn"
+   :file-sha256 "77326298c5757d46f27a1c3150d19d904173211fce019d641a1327578e0d2f2e"
+   :canonical-seal "4a6a753ac0814040f34c53d0d6cb1d0cb7705dbc1f4bb3bbbff62b05186b3dfc"
+   :canonical-seal-matched true :seal-file-equal-original-git-blob true
+   :historical-source-head "a7a6113b32d9eb96621cb3cffebbe61d8e52b827"
+   :historical-bound-files 12 :historical-binding-mismatches []
+   :interpretation "All twelve bindings match their exact historical Git blobs. Modified fixed sources are not falsely claimed to satisfy the old current-source seal. Old artifact bytes were not rewritten."
+   :new-supersedes-file-sha256-matches true}
+  :approved-corpus-v2
+  {:path "eval/s7a/artifact-v2.edn"
+   :file-sha256 "0085e3d5123e6e219d541aab81c2a4f15a7dc3a876d4cf8db6f44aca2397da24"
+   :canonical-seal "46e72b669b03edfb8f7a4d1cd04567da112bb650e421cb51794811a3aa28c584"
+   :canonical-seal-matched true :bound-files 32 :binding-mismatches []
+   :preservation-head "9b4bc07be6a64dc7b69bdd7716a841162ba3168b"
+   :bound-file-drift-versus-approved-head []
+   :previous-independent-offline-qualification-preserved true}
+  :current-bound-source-sha256
+  {"src/oikos/law/ocr_batch.cljc" "69ba6b6c0abdd578f7d5816318ec63d341ba18d63b6e3a076aea112dc921233f"
+   "src/oikos/infra/ocr_batch.cljs" "7a0160fcb062089f3bc8ab3fab6e1837a279051d41875b29b90e2f324035f4a0"
+   "scripts/ocr_batch.cljs" "1ebf0bc27f50ecc7039659d3bcd233cb46305eb94b749008d35fd48bef738d68"
+   "eval/ocr_batch_law_test.cljc" "ff6c484fe71b9506546070161dd2b8b25c18f7a1c54e84aa2cbd640d666bdda7"
+   "test/oikos/ocr_batch_fixture.cljs" "bc5517709d45837b9f5bf78eb8405806535ac40f648f8fe8a2de22756b160b2e"
+   "test/oikos/infra/ocr_batch_test.cljs" "c7d2b35065f6b33fd363f227c553065dd1b90cab62a9f204d1de8d800063717f"
+   "test/oikos/infra/ocr_batch_artifact_test.cljs" "31ab78eb70a9b42016d8c9a38ec8a5eecb2a734b377ff9edce9db2867a7d9be1"
+   "eval/ocr-runner/bb.edn" "dff5b79a58747ce146304d11eba3005f55762a0bb94789e7a6f90ddef876bb9a"
+   "eval/ocr-runner/README.md" "b993f3ea4fbc4663219367551365a7cefc25778af963dde19711b7b7d41e9e7d"
+   "eval/ocr-runner/red-v1.txt" "f7748727e523249d43d5b04710b4f4bf606b884859c38c85bd2f00741236b7b7"
+   "eval/ocr-runner/seal.cljs" "2f5c2685e888ced18b9b86af8874a3f73bcd9d80da49c4423b475271396cfab4"
+   "eval/s7a/artifact-v2.edn" "0085e3d5123e6e219d541aab81c2a4f15a7dc3a876d4cf8db6f44aca2397da24"
+   "eval/ocr-runner/artifact-v1.edn" "77326298c5757d46f27a1c3150d19d904173211fce019d641a1327578e0d2f2e"
+   "eval/ocr-runner/review-red-v2.txt" "0868470173ee4bd3b6cc0b50dc3f0c715ba2109c154c9f040555c5d2ddb9204b"}}
+ :preserved-corpus
+ {:cases 18 :corpus-sha256 "481c0359e37018640d33542b2bfd73f52d7251a3e4de9bdc0fa8e9d0a7cdff22"
+  :manifest-sha256 "aa22a9cb305acd713026445f5952d49edf749ab2a2b7f04301bc7a5f16c43d5e"
+  :ordered-png-sha256
+  [{:id :amber-image :sha256 "fa6b5398c64fc3c106e9d3f16e2306ec2ec679465f2a0316a078e8ebdba84e9a"}
+   {:id :birch-image :sha256 "eabe4fa5bd1b60427cb9207627a39bc54bac10fdca03167c7035e94213ab0a5c"}
+   {:id :cedar-image :sha256 "671ab225928e93204fd1cfd7d196f9582f5ee087439c93bb223a126ce12f31aa"}
+   {:id :delta-image :sha256 "c30b638b04df11535d940e22bd7bb6de5fb92920c218f789b7830e6ed7ca002e"}
+   {:id :elm-image :sha256 "3606c2b7af205053a44d1c6a1385afc315572462fc71369136036917cfbe08fb"}
+   {:id :fir-image :sha256 "0ec3f9a6f1776002b898dd706fd7cb85b9a9171e440da80b92ddca4dfcabe6a7"}]
+  :split {:seed "s7a-v1" :held-out-groups ["amber" "fir"]
+          :development [:birch-image :birch-plan :birch-text :cedar-image :cedar-plan :cedar-text
+                        :delta-image :delta-plan :delta-text :elm-image :elm-plan :elm-text]
+          :held-out [:amber-image :amber-plan :amber-text :fir-image :fir-plan :fir-text]}
+  :png-label-coordinate-and-split-drift false
+  :no-new-rendering-label-generation-or-target-word-search true}
+ :red-evidence
+ {:path "eval/ocr-runner/review-red-v2.txt"
+  :sha256 "0868470173ee4bd3b6cc0b50dc3f0c715ba2109c154c9f040555c5d2ddb9204b"
+  :saved-log-bytes-equal-red-commit true
+  :saved-results {:tests 15 :assertions 225 :failures 27 :errors 0}
+  :provenance :read-and-hash-verified-committed-red-log
+  :independent-successful-red-runtime-replay false
+  :interpretation "The saved failures reproduce exactly the three original deadline, mutable-PNG and arbitrary-status findings. RED added the tests while retaining original production runner bytes. GREEN retains the tests and adds coverage; no assertion or test was deleted/skipped to pass."}
+ :actual-green-checks
+ [{:command "bb test:bb" :exit 0 :tests 26 :assertions 357 :failures 0 :errors 0}
+  {:command "bb test:nbb" :exit 0 :tests 38 :assertions 463 :failures 0 :errors 0
+   :inherited-s1a-bb-tests :diagnostic-only :held-bb-protocol-credit 0}
+  {:command "bb test:eval" :exit 0 :tests 9 :assertions 39 :failures 0 :errors 0}
+  {:command "bb test:s7a" :exit 0 :tests 7 :assertions 181 :failures 0 :errors 0}
+  {:command "bb -f eval/ocr-runner/bb.edn test" :exit 0
+   :suites [{:runtime :bb-laws :tests 2 :assertions 14 :failures 0 :errors 0}
+            {:runtime :nbb-laws :tests 2 :assertions 14 :failures 0 :errors 0}
+            {:runtime :nbb-in-process-runner :tests 16 :assertions 233 :failures 0 :errors 0}
+            {:runtime :nbb-current-and-historical-artifacts :tests 2 :assertions 44 :failures 0 :errors 0}]}
+  {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+  {:command "git diff --check a7a6113b32d9eb96621cb3cffebbe61d8e52b827..7cd9320f2c9991f8e36e15e59478b80789ae3b25" :exit 0}
+  {:command "nbb -cp src scripts/ocr_batch.cljs status" :exit 2 :expected-exit 2
+   :status :blocked :execution-authorized? false}]
+ :independent-proofs
+ {:method "New inline NBB/Promesa program with an independently written in-process fake and explicit fail-fast counted assertions. No imports of the candidate test namespace, no sockets and no persistent probe source files."
+  :exit 0 :assertions 544 :failures 0 :errors 0
+  :groups [{:name :headers-chunks-settlement-clock-boundaries :cases 30 :assertions 288
+            :coverage "Health, identity and first OCR stage crossed with pre-header, pre-chunk and settlement clocks at 4999, 5000 and 5001ms; plus three health-stage 30000ms total-deadline cases. Checks on-time completion, exact expiry, no further POSTs, incomplete receipts, stage-deadline/wall values, raw arrival scope and repeated late-callback byte/hash invariance. Every result remains non-authorizing with measurement credit zero."}
+           {:name :private-six-png-snapshot :cases 4 :assertions 112
+            :coverage "Overwrite ALL SIX caller PNG buffers immediately after invocation, during health, during identity and during OCR. Verify originals really changed; all six dispatched image hashes still equal their approved pins and receipt PNG hashes, every case ID and body hash matches, exactly six POSTs/eight receipts, and execution remains unauthorized."}
+           {:name :closed-exception-failure-decoder :cases 24 :assertions 144
+            :coverage "All ten allowed failure keywords, ten forbidden values including success, strings, unknown keywords and collection/boolean/nil values, and four wrapped-cause cases. Verify exact owned failure status, no marker in the report, no requests/results and no execution authorization."}]
+  :reviewer-harness-caveats "Two optional in-memory historical source replay attempts stopped before tests because core load-string did not supply CLJC reader features or NBB JS import loading. Earlier deeply nested probe forms had delimiter errors; a generic stdin lint also lacked a Promesa let binding model. These were reviewer harness issues, not candidate failures. The separately executed final 544-check program passed; the committed RED runtime counts are reported only as saved evidence, not as a successful independent replay. Candidate lint itself passed 0/0."}
+ :per-id
+ [{:id :s7a-ocr-runner/per-request-clock-deadline-not-enforced-at-settlement
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/infra/ocr_batch.cljs" :lines [88 143]
+         :mechanism "Pins a stage deadline bounded by remaining total time and test scale. Header, chunk and final settlement paths recheck monotonic expiry; finish selects expiry before a successful candidate status can clear its timer. Existing single-settlement/late-callback guard remains."
+         :not-a-hard-process-watchdog true}
+   :original-witness {:health-start-ms 0 :health-end-ms 5001 :batch-deadline-ms 30000
+                      :expected-and-observed :timeout :subsequent-posts 0}
+   :candidate-regressions [review-per-stage-clock-deadline-survives-delayed-timer-service
+                           review-real-clock-shortened-stage-cannot-clear-expired-timer]
+   :independent-proof {:cases 30 :assertions 288 :failures 0
+                       :on-time-4999ms :synthetic-complete
+                       :at-or-after-5000ms :timeout :at-30000ms :deadline
+                       :late-callbacks-change-receipt-bytes-or-hashes false}
+   :real-clock-counterexample "The candidate suite reran the original 15ms busy callback with the shortened 5ms stage timer: now :timeout and zero POSTs, not synthetic-complete."
+   :remaining-original-issue false}
+  {:id :s7a-ocr-runner/mutable-png-after-validation-breaks-pin-to-sent-bytes
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/infra/ocr_batch.cljs" :snapshot-lines [151 162]
+         :before-handoff-lines [178 206] :dispatch-lines [220 227]
+         :mechanism "Copies bounded six-image Buffer contents synchronously before the first Promise handoff. Validation and dispatch use the same owned copy. Dispatch recomputes PNG SHA256 against its pin and records that actual hash. Caller buffers are never reused for later encoding."}
+   :original-witness {:mutation :zero-caller-png-at-identity-completion
+                      :caller-bytes-really-change true
+                      :expected-and-dispatched-amber-sha256 "fa6b5398c64fc3c106e9d3f16e2306ec2ec679465f2a0316a078e8ebdba84e9a"
+                      :dispatch-and-receipt-png-sha256-equal true}
+   :candidate-regressions [review-caller-png-mutation-cannot-break-dispatch-pin
+                           review-owned-snapshot-precedes-first-promise-handoff]
+   :independent-proof {:mutation-times [:immediate-after-invocation :health :identity :ocr]
+                       :all-six-original-buffers-mutated-per-case true
+                       :cases 4 :assertions 112 :failures 0
+                       :every-sent-png-pin-case-id-and-body-hash-matches true}
+   :remaining-original-issue false}
+  {:id :s7a-ocr-runner/arbitrary-exception-status-forges-result-and-leaks-label
+   :previous-priority :P2 :status :settled :context :observed :confidence 1.0
+   :fix {:path "src/oikos/infra/ocr_batch.cljs" :lines [163 172]
+         :mechanism "A bounded cause walk accepts only the explicit ten-member failure keyword set. Success labels, strings and unknown values default to invalid-response unless a wrapped genuine allowed failure is present. Raw exception text is not promoted into report status."}
+   :original-witnesses [{:injected-status :synthetic-complete :observed-status :invalid-response :requests 0}
+                        {:injected-status "SYNTHETIC_PRIVATE_MARKER" :observed-status :invalid-response
+                         :marker-in-public-report false :requests 0}]
+   :allowed-failure-enum #{:blocked :deadline :timeout :request-overflow :response-overflow
+                           :http-error :transport-error :store-error :invalid-response :invalid-json}
+   :candidate-regressions [review-exception-status-is-a-closed-failure-decoder
+                           review-store-failure-stays-closed-without-status-or-message-leak]
+   :independent-proof {:cases 24 :assertions 144 :failures 0
+                       :forbidden-values-cannot-forge-success true
+                       :wrapped-genuine-failures-preserved true :marker-leak false}
+   :remaining-original-issue false}]
+ :introduced-regression-assessment
+ {:actual-findings []
+  :evidence "Inherited, simulator and artifact-history suites all pass at the exact head; the independent boundary matrix preserves on-time completion, total deadline precedence, ordered six-image attribution and closed failure behavior. No tests were removed or skipped."
+  :scope-limit "No claim of exhaustive correctness or live/runtime qualification. Existing unimplemented live boundaries are named below, not reintroduced as defects in this simulator stage."
+  :production-imports "New runner still imports local laws plus fs/path/crypto, not an HTTP client or native/model framework. The only CLI remains status/BLOCKED."
+  :authority-surface "The portable live-status changes are gap-label updates, not an executable permission path or a newly invented policy/verifier kernel."}
+ :conditional-human-consent
+ {:path ".ημ/runs/oikos-program-20261103/decisions/ocr-six-image-conditional-authorization.edn"
+  :file-sha256 "0f49bf32fd269c5b34faa9d97b7711f496a3c017c065798a70e3af74469c726b"
+  :source :read-parent-decision-record
+  :scope "One future batch, at most six sequential frozen synthetic OCR requests, 5s per request/30s total, 256 MiB client ceiling; no retries, further restarts, new model loads, private inputs, downloads or cloud."
+  :recorded-consumption :not-consumed :recorded-execution :held-until-all-preconditions-qualified
+  :is-execution-permit false :is-resource-reservation false :is-govone-verdict false
+  :restart-context "User reports the sole prior controlled identity restart already consumed and Restart=no retained. This reviewer performed no service/process/endpoint query, no second restart and no native import to re-prove that parent-owned work."
+  :current-runtime-or-quality-inferred false}
+ :remaining-live-capability-gates
+ {:status :blocked :new-simulator-defects false
+  :separate-parent-work
+  [:qualified-full-process-256-mib-boundary
+   :qualified-30s-whole-process-watchdog
+   :trusted-owner-consent-resource-evidence-and-parent-admission-bindings
+   :fresh-actual-resource-admission
+   :reviewed-durable-owned-raw-receipt-store
+   :reviewed-actual-http-driver
+   :qualified-response-identity-binding
+   :reviewed-bounded-no-second-hop-assessment
+   :explicit-parent-execution-admission]
+  :cooperative-clock-or-memory-store-is-hard-boundary-proof false
+  :synthetic-consistency-hashes-authenticate-issuers false
+  :generic-govone-ocr-verifier-invented false
+  :live-cli-verified-blocked-exit 2
+  :this-review-authorizes-actual-batch false}
+ :handoff
+ {:provided "Exact-head independent approval of the three offline runner fixes and preserved artifact provenance only. Parent may continue its separate actual execution-boundary qualification."
+  :whole-s7a-done false :runtime-or-model-quality-approved false
+  :speed-cancellation-peak-memory-qualified false :measurement-credit 0
+  :native-admission-or-board-transition false :pr-or-merge-permission false
+  :next-action "Continue the separately scoped parent execution-boundary qualification without treating conditional human consent or this simulator approval as an executable permit."}
+ :reflection
+ {:lesson "Source ownership must precede asynchronous handoff, deadline checks must cover header/chunk/settlement races, and errors must decode through a closed failure vocabulary. A repaired simulator can be approved independently of still-held operational adapters."
+  :p-efficiency 0.7 :p-friction 0.35 :p-skill-candidate 0.4
+  :receipt-owner :parent :session-mycology-owner :parent
+  :separate-ledger-or-spore-write false}
+ :write-accounting
+ {:persistent-write-only "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-ocr-runner-fix-review-v2.edn"
+  :product-code-test-or-artifact-edits false :card-or-ledger-edits false
+  :pr-edits false :commits false :pushes false :package-installs false
+  :network-sockets-endpoint-get-or-post false
+  :service-process-control-or-model-operations false
+  :ocr-native-imports false :personal-data-operations false
+  :reviewer-authored-scratch-files 0
+  :inherited-tests "Their own temporary synthetic filesystem fixtures and BB helper subprocesses only; no OCR service/model/native work."}}

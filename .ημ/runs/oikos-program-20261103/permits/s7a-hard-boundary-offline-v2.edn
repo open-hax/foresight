@@ -1,0 +1,38 @@
+{:permit/id :s7a-hard-boundary-offline-v2
+ :authority :parent-admission-of-independently-reviewed-offline-source-stage
+ :task "0db50b53-6c7a-489a-bff9-048d57ce4cbb"
+ :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s7a"
+ :base "7cd9320f2c9991f8e36e15e59478b80789ae3b25"
+ :plan {:path "../reviews/s7a-hard-runner-plan-v2.edn"
+        :sha256 "43023b980531c3896d5469299b6b1fb8be080e5e490391fad647e3e7bafa7033"}
+ :review {:path "../reviews/s7a-hard-runner-plan-fix-review-v2.edn"
+          :sha256 "0b04f8bb992c2d66ec5e5cfcfdfa0379a216d79eea2500dd4faab7c92600a549"
+          :verdict :approve-exact-offline-stage-2-planning}
+ :allowed [:portable-shapes-and-golden-vectors :bounded-framed-protocol
+           :selected-unit-property-data :deterministic-placement-and-cleanup-traces
+           :fixed-http-parser-on-in-process-bytes :durable-unknown-and-counted-intent-decisions
+           :expiry-classification-and-registration-required-denials
+           :inert-python-edge-and-cross-runtime-vector-tests]
+ :new-path-ceiling ["src/oikos/law/ocr_boundary.cljc"
+                    "test/oikos/law/ocr_boundary_test.cljc"
+                    "test/oikos/ocr_boundary_runner.cljc"
+                    "scripts/test_ocr_boundary.clj"
+                    "python/oikos_ocr_boundary.py"
+                    "python/test_oikos_ocr_boundary.py"
+                    "eval/ocr-boundary/vectors.edn"
+                    "eval/ocr-boundary/vectors.json"
+                    "eval/ocr-boundary/artifact-v1.edn"
+                    "eval/ocr-boundary/README.md"]
+ :python-scope "Pure stdlib byte parsing/state/property-data helpers only. No socket, subprocess, fork, service manager, ctypes/FFI, cgroup or operational store implementation/import effect. Test via existing python3 -I -S -B. Portable law is authoritative; shared exact vectors establish adapter parity, not copied governance."
+ :fixture-scope "Owned fresh bounded artificial test storage under /tmp/opencode may hold non-sensitive fabricated byte-roundtrip fixtures only, <=4MiB total per run. No live operational raw-run materialization, source PNG copies, expiry registration or automatic deletion. Preserve generated evidence until verified recovery."
+ :frozen "Do not change any existing source, default runner, fixture, corpus seal or runner-v1/v2 artifact. Use explicit new invoker. Additive artifact binds new files and actual tests; it cannot declare resource, owner or execution qualification."
+ :required [:baseline-before-edit :meaningful-red-before-green :BB-NBB-parity
+            :python-shared-vector-parity :zero-new-lint-and-test-warnings
+            :independent-exact-head-review]
+ :real-admission :always-held
+ :not-authorized [:real-libsystemd-binding-or-call :transient-unit :cgroup-write
+                  :process-control-qualification :HTTP-or-socket :OCR-GET-or-POST
+                  :native-model-import :service-or-firewall-or-BPF-change
+                  :raw-run-store :expiry-executor-or-timer :download-or-load-or-restart]
+ :consumed-ocr-restart :must-not-repeat
+ :conditional-batch-grant-consumed false :whole-s7a-complete false}

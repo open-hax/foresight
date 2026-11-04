@@ -1,0 +1,196 @@
+{:review/id :s4a-contract-code-v1
+ :review/date "2026-11-03"
+ :review/kind :independent-adversarial-exact-head-code-and-contract-review
+ :review/scope :s4a-phase-1-pure-named-capability-preconditions-only
+ :task/uuid "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :reviewer {:provider :openai :model "gpt-6.1-sol"
+            :role :independent-reviewer-not-implementer
+            :native-provider-approval false :whole-s4a-completion-credit 0}
+ :verdict :approved
+ :findings []
+ :required-regressions-for-this-pure-head []
+ :parent-can-freeze-contract-before-runtime-integration true
+ :approval-scope "Only the exact immutable source/version/digest and pure precondition contract below. Parent may authenticate and pin this independent review before freezing that contract. This is not whole S4A acceptance, native approval, an authenticated actor/consent decision, or permission to install or execute a runtime dispatcher. All live integration remains HELD pending separate parent review and permit."
+
+ :target {:repository "open-hax/oikos"
+          :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+          :source-sha "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+          :tree-sha "3c20d6294cd2c18bdfa49b862feb3bdfefa8911b"
+          :diff-base "c399b60e1676c47778445c1098eb541ab38743cb"
+          :head-and-clean-worktree-verified-before-and-after true
+          :diff-exactly-six-new-files true
+          :changed-existing-files []}
+ :canonical-task-read
+ {:command "eta-mu kanban content 29caa8e3-289a-416c-9850-8ef9cc769e88 --config /home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+  :full-body-and-all-comments-read true
+  :config "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+  :source-path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+  :admission "Current task comment explicitly admits only pure typed named scoped capability and revision-bound preview contracts. UUID prerequisites remain S1A and S2A; neither parent epics nor future S6A product integration are invented completion gates."
+  :board-mutations 0}
+ :instructions-read
+ ["/home/err/AGENTS.md"
+  "/home/err/spaces/AGENTS.md"
+  "/home/err/spaces/foresight/AGENTS.md"
+  "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/AGENTS.md"
+  "/home/err/spaces/foresight/oikos/AGENTS.md"
+  "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a/AGENTS.md"]
+
+ :contract
+ {:version "oikos.capability/v1"
+  :content-digest "2a82066221bfe57cb326f0fecce12082505ddfdbcdd53ab986451f69d67e884b"
+  :source-sha "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+  :digest-algorithm :sha256-of-clio-canonical-edn
+  :canonical-contract-utf8-bytes 29412
+  :descriptor "docs/contracts/named-capability-v1.edn"
+  :descriptor-sha256 "93ffe4e70dae3155cb2479e2a74de33ff4ad705c8dcb16e1bde794f13c126c99"
+  :documentation "docs/contracts/named-capability-v1.md"
+  :documentation-sha256 "250caf9e82315ccfef91d55297f31ddf7049370a5a94437fd1e35a9cbb63cf70"
+  :both-runtimes-recomputed-digest-and-all-source-bindings true
+  :independent-python-hashlib-confirmation true
+  :all-six-added-files-byte-equal-git-show-of-exact-head true
+  :source-or-content-change-invalidates-this-review true
+  :parent-handoff "Pin exact head, contract version/digest, descriptor/source hashes and independently authenticated review artifact. Candidate-authored :review/status remains immutable data; this external review supplies the independent verdict, not synthetic approval-context maps."
+  :exports-reviewed [:closed-request-resource-scope-approval-result-shapes
+                     :contract-identity :preview :check-preconditions]
+  :operations [:emacs/read-range :emacs/replace-range :i3/window-read :i3/focus-window]}
+
+ :boundary-analysis
+ {:locations ["src/oikos/law/capability.cljc:14-83"
+              "src/oikos/law/capability.cljc:89-143"
+              "src/oikos/law/capability.cljc:144-168"
+              "docs/contracts/named-capability-v1.md:29-59,108-134"]
+  :named-operations "Closed operation-specific arguments have no generic evaluator, command, path, file opener, dispatcher selector or raw i3 IPC surface. Replacement text is literal inert data. Unknown names/fields, string operation names and path-shaped buffer keys refuse."
+  :scopes "Current scope context is compared as DATA: exact actor, operation-specific enum scope and exact buffer/window allowlist entry. Unknown or duplicate scopes and duplicate context identities refuse. It neither authenticates that data nor grants execution."
+  :editor-lifetime "Request and approval bind actual server-owned buffer incarnation UUID plus server epoch and modification revision, never name. The pure resource context must match. Same-name replacement can only be tested as a changed incarnation here; actual object identity verification remains a dispatcher obligation."
+  :window-lifetime "Full frozen S2A window identity, observation revision and current/fresh-at-cut coverage are checked using desktop/targetable?, not a copied causal reducer. Reconciled-window positives and obsolete-lifetime negatives use actual frozen S2A replay and pinned Clio validation."
+  :exact-approval-binding "Mutation context must have the closed approval shape and bind the complete exact request plus current contract version/digest. Independent probes updated every request field together with otherwise-valid current resource/scope data: fresh matching synthetic approval succeeds, old approval denies. Approval identity is not authenticated, expired, revoked or consumed by this pure layer; none is claimed."
+  :bounds "Zero-based half-open UTF-8 byte ranges are ordered, within supplied current byte length and at most 4096 bytes. Literal replacement is measured as UTF-8 bytes; resulting buffer cannot exceed 1048576 bytes. Surrogates, oversize strings/collections, nonplain values, records and recursive metadata are refused before schema inspection of the tainted value."
+  :unicode-limit "Content-free byte-length snapshots cannot prove that a byte offset is a character boundary. Both contract and documentation explicitly retain actual-text boundary validation for the future fixed dispatcher. This is not waived or claimed as completed."
+  :diagnostics "Public rejection is exactly {:status :denied :code :capability-precondition-refused}; successful checks are exactly {:status :preconditions-satisfied :authority :none}. Rejected data, exception/cause information and sensitive context are not echoed. Preview is explicitly inert and may contain sensitive replacement text/identifiers."
+  :authority "No actor-auth, GovOne policy, consent verification, runtime identity attestation, atomic mutation or single-use approval is supplied. No execution or content-return API exists. Client-provided scope/approval maps are never represented as an execution grant."
+  :owner-discovery "The documentation explicitly distinguishes Muse exposure/compilation and unrestricted compatibility bridges from an installed safe named dispatcher. It does not claim that a safe dispatcher or live server exists. This review inspected actual added code and these scoped claims, not the entirety of the external owner worktrees or their runtime state."
+  :no-policy-kernel-copy "The actual 168-line capability implementation contains closed shapes, bounded data checks, exact comparisons and the reused S2A targetability predicate, not a copied GovOne/Muse policy kernel."
+  :runtime-fixtures-not-mocked "Tests claim synthetic data comparisons only. No mock is offered as evidence of actual server behavior, real buffer replacement, single-use dispatch, authorization or mutation atomicity."}
+
+ :actual-verification
+ {:working-directory "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+  :environment {"OIKOS_CLIO_SOURCE" "/home/err/spaces/foresight/clio"
+                "OIKOS_CLIO_DEPS" "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps"}
+  :commands
+  [{:command "bb scripts/test_capability.clj" :exit 0
+    :invoker-is-the-actual-new-documented-script true
+    :bb {:tests 11 :assertions 99 :failures 0 :errors 0}
+    :nbb {:tests 11 :assertions 99 :failures 0 :errors 0}}
+   {:command "bb test" :exit 0
+    :inherited-bb {:tests 18 :assertions 286 :failures 0 :errors 0}
+    :inherited-nbb {:tests 30 :assertions 392 :failures 0 :errors 0}
+    :eval {:tests 9 :assertions 39 :failures 0 :errors 0}
+    :desktop-bb {:tests 16 :assertions 1059 :failures 0 :errors 0}
+    :desktop-nbb {:tests 16 :assertions 1059 :failures 0 :errors 0}}
+   {:command "bb lint" :exit 0 :errors 0 :warnings 0}]
+  :new-test-registration "New fixtures run through the explicitly documented new invoker. Existing bb.edn, default runners and inherited tests are unchanged; this review ran both the new invoker and actual default bb test."
+  :independent-probes
+  {:runtimes [:bb :nbb] :final-process-exits [0 0]
+   :assertions-per-runtime 652
+   :method "In-memory -e probes over actual cap/check-preconditions and cap/preview with the real capability-test and desktop-fixture values, actual Malli, frozen S2A and pinned Clio on the documented classpath. Enumerate map/vector paths in [request resources scope approval-context] for both valid mutations. No probe files, product edits, actual append, live buffers or IPC."
+   :initial-positive-checks 2
+   :metadata-collection-sites 46
+   :metadata-variants [:empty :synthetic-secret :real-host-object :function]
+   :metadata-check-denials 184 :metadata-preview-denials 140
+   :record-wrapped-map-denials 36
+   :tainted-nested-value-denials 180
+   :metadata-bearing-map-key-denials 36
+   :subvector-view-denials 10
+   :updated-bindings-with-new-matching-approval-positive 12
+   :same-updated-bindings-with-original-approval-denied 12
+   :binding-variants [:actor :start-byte :end-byte :literal-text :modification-revision
+                      :buffer-incarnation :emacs-server-epoch :named-operation
+                      :observed-revision :window-xid :window-incarnation :i3-server-epoch]
+   :isolated-read-range-checks 2
+   :read-range-probe "Raise current buffer byte length to 10000: [0,4096) succeeds; [0,4097) denies. The 4097 case is within current buffer length and so isolates the range limit."
+   :four-byte-unicode-checks 2
+   :unicode-probe "Matching synthetic approval with 1024 copies of U+1F600 (4096 UTF-8 bytes) succeeds; 1025 copies (4100 bytes, fewer than 4096 UTF-16 code units) denies."
+   :resulting-buffer-size-checks 4
+   :buffer-size-probe "On a 1048576-byte buffer, replacing [0,4) with 4 ASCII bytes succeeds and 5 denies; an empty replacement at [1048576,1048576) succeeds and inserting one byte denies."
+   :empty-unknown-duplicate-or-unlisted-scope-denials 16
+   :closed-name-path-and-eval-check-denials 7
+   :closed-name-path-and-eval-preview-denials 7
+   :tainted-root-refused-before-malli true
+   :malli-calls-in-tainted-root-probe 0
+   :constant-exact-results-asserted true
+   :diagnostic-cause-or-input-retention-observed false}
+  :hash-verification
+  {:frozen-s2a-bindings 9 :new-bindings 4
+   :both-bb-and-nbb-recomputed-all-thirteen true
+   :python-hashlib-independently-recomputed-all-thirteen true
+   :frozen-files-byte-equal-git-show-c399 true
+   :new-files-byte-equal-git-show-reviewed-head true
+   :both-runtime-contract-canonical-strings-independently-utf8-hashed true
+   :observed-digest "2a82066221bfe57cb326f0fecce12082505ddfdbcdd53ab986451f69d67e884b"
+   :frozen-s2a-version "oikos.desktop.safe-reference/v1"
+   :frozen-s2a-digest-recomputed-in-both-runtimes "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"}}
+
+ :descriptor-source-and-test-sha256
+ {"src/oikos/law/capability.cljc" "fc47104a528ea4ef9b35bdb05cf533e70ddf09d0df445877e9dd1e04b77328e2"
+  "test/oikos/law/capability_test.cljc" "08622bc52ccf3efeda768bfb201639b62dd16c418bca5134f9abb1a9352e6fd4"
+  "scripts/test_capability.clj" "e263fd144f2cda08ee76321d9bb3031ebb32bf008180a327c9c876ca7f447335"
+  "test/oikos/capability_runner.cljc" "bbad5664f0fb6deee720dd2a7b22750202c25dea721ccbbef2b162e5350aef24"}
+ :frozen-s2a-source-and-test-sha256
+ {"bb.edn" "8f76a349e997923ae8130f81969a9d239522828e60f6645ae9de14ec0ada0af8"
+  "README.md" "85a93c408bb7c9167c297929915422023d377e0fd992a8c6134a1dc4a530f5fa"
+  "src/oikos/law/safe_reference.cljc" "baee008c0a3b2dc4a6ddd7bc8f4a63fed317d0d4514f961d819ad484019cdf60"
+  "src/oikos/law/desktop.cljc" "edea4e32bd0279ccfc2f81a4cfbe24c9e1348f06606f9d597530d28f894680d7"
+  "scripts/test_desktop.clj" "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"
+  "test/oikos/desktop_fixture.cljc" "77122676722cba3af9d62c42fcb725daf4236e6364ec50f7378a5907d4df4c57"
+  "test/oikos/desktop_runner.cljc" "a3b84c0bf587a7ce051d1d1ea9257d75832337d963bec8e609a4da9654b00072"
+  "test/oikos/law/desktop_test.cljc" "be969cb41358194a630b35cadc0db13243be400cc2cffbe250703c2e0bc4b088"
+  "test/oikos/law/plain_event_test.cljc" "5e4044f67c0792adad48ccd6c0544afc064afb8eb51eb853af306efd8996903f"}
+
+ :prerequisite-custody
+ {:s2a-source "c399b60e1676c47778445c1098eb541ab38743cb"
+  :s2a-independent-review ".ημ/runs/oikos-program-20261103/reviews/s2a-contract-fix-review-v2.edn"
+  :s2a-descriptor-sha256 "7ad9541df188201860e212b91d3744a62cd9aa05ae4a8d80c25425b4f0886916"
+  :s2a-documentation-sha256 "11223017981d5e3f17b43036b180246d3c4519768e98e7071d1899d70802b25d"
+  :clio-owner-path "/home/err/spaces/foresight/clio"
+  :clio-owner-head "788cdd3434615a7932b924e68520dbf7f88408c2"
+  :clio-src-tracked-and-untracked-status-empty true
+  :existing-clio-cache-used-without-installation true
+  :s2a-input-guard-byte-unchanged true
+  :s2a-phase2 "The reported actual-reader LOCATION-metadata blocker remains HELD, not resolved or retested here. No metadata stripping/coercion or guard weakening was introduced. No actual Clio append, persistence or schema-history effects were performed or qualified."
+  :inherited-bb-transport-operational-status :held
+  :owner-runtime-availability :not-proven-and-not-required-for-pure-freeze}
+
+ :runtime-handoff-still-held
+ {:separate-parent-review-and-permit-required true
+  :must-obtain-from-trusted-owners [:authenticated-actor :current-scopes :current-resource-facts
+                                   :govone-admission :authenticated-explicit-approval]
+  :must-not-merge-client-allowlists-as-authority true
+  :fixed-dispatcher-obligations
+  [:resolve-actual-server-owned-buffer-object-or-full-window-lifetime
+   :remeasure-byte-length-and-revision :validate-real-utf8-character-boundaries
+   :revalidate-all-exact-bindings-immediately-before-mutation-inside-dispatcher
+   :serialized-atomic-check-and-mutate :expire-and-revoke-approval
+   :consume-approval-once-and-deny-replay :recheck-read-scope-allowlist-and-output-bounds
+   :deny-missing-owner :no-client-eval-or-raw-ipc :no-second-daemon]
+  :future-existing-server-fixtures
+  [:same-name-buffer-replacement :intervening-edit :server-epoch-change-or-reconnect
+   :changed-actor-or-operation-or-any-argument :wrong-scope-or-allowlist
+   :reused-window-xid-or-incarnation :stale-observed-cut :expired-revoked-or-replayed-approval
+   :unchanged-exact-approval-succeeds-once]
+  :required-negative-runtime-outcome :zero-mutation
+  :runtime-fixtures-executed false
+  :runtime-qualification false :whole-s4a-accepted false
+  :s6a-product-dependency-invented false}
+
+ :effects
+ {:product-or-card-writes 0 :receipt-or-mycology-ledger-writes 0
+  :clio-append-or-persistence-calls 0 :pr-commit-push-or-tag-effects 0
+  :emacs-i3-daemon-model-service-or-personal-data-calls 0
+  :muse-publish-or-build-calls 0 :hosted-queue-waits 0
+  :reviewer-authored-files [".ημ/runs/oikos-program-20261103/reviews/s4a-contract-code-v1.edn"]
+  :prior-reviews-and-unrelated-parent-work-untouched true}
+ :reflection
+ {:p-efficiency 0.85 :p-friction 0.15 :p-skill-candidate 0.20
+  :spore nil :separate-receipt-or-spore-written false
+  :note "Actual default/new invokers and isolated otherwise-valid stale-binding probes agreed. One initial NBB hashing probe had an unquoted require vector; corrected in memory and rerun successfully, with no product change or failure finding. Preserve the distinction between pure freeze and trusted runtime admission."
+  :disposition :parent-owned-persistence-only-this-new-review-artifact}}

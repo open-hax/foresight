@@ -1,0 +1,15 @@
+{:decision/id :typed-guarded-continuation-and-parser-source-authorization-20261104
+ :source :question-tool-explicit-user-answers
+ :incident-question "The audit cannot attribute every global-cache write because no pre-command snapshot exists. Should I leave those files untouched and continue only through an independently reviewed, cache-isolated execution wrapper?"
+ :incident-answer "Guarded continuation (Recommended)"
+ :source-question "The pinned checker parser does not support the named-parameter syntax needed by the proposed annotation fix. May I extend source-only work to typed/clj.checker/src/typed/clj/checker/parse_unparse.cljc and focused tests?"
+ :source-answer "Allow reviewed source extension (Recommended)"
+ :scope [:preserve-shared-caches :bounded-read-only-investigation
+         :independently-reviewed-cache-isolated-validation-wrapper
+         :existing-checker-parser-source-and-focused-tests]
+ :source-path "typed/clj.checker/src/typed/clj/checker/parse_unparse.cljc"
+ :required [:independent-design-and-code-review :reviewed-execution-wrapper-before-resumption
+            :explicit-empty-tool-config-or-nonproject-cwd-for-artifact-validation]
+ :not-authorized [:shared-cache-cleanup :global-writes :unguarded-dependency-resolution
+                  :warning-suppression :shx-lock-change :automatic-artifact-replacement]
+ :continuation-status "Source correction execution remains paused until the wrapper and next scope are independently reviewed. The user permits guarded continuation, not retrospective approval of the incident."}

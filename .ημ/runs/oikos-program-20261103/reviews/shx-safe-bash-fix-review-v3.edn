@@ -1,0 +1,58 @@
+{:review/id :shx-safe-bash-fix-review-v3
+ :reviewer :same-independent-source-reviewer
+ :verdict :changes-required
+ :review-scope :functional-source-only
+ :head "d320db778611099b48110e3cfcd69753ce7ecc27"
+ :tree "7296f059e66f9eed9d870054c328664729b29910"
+ :worktree "/home/err/spaces/foresight/shx/.worktrees/feat/oikos-safe-bash-20261103"
+ :git-status :clean-before-and-after
+ :spec-sha256 "2dbeda258a384caa089e64ec578f57abfa85e123581559a603e55615c2abdcdc"
+ :previous-finding {:id :bb-success-publication-after-deadline
+                    :old-head "8a226b2f43cf3c82cfadbd5ceb76c7b8639b2935"
+                    :old-observation {:baseline-ms 2477 :probe-delay-ms 3500 :late-ok-ms 5853}
+                    :same-probe-new-head {:baseline {:status :ok :elapsed-ms 2352 :pid 1105611 :start "47316590"}
+                                          :injection {:owned-worker-pid 1105885 :start "47316827" :signal "-0" :sleep-ms 3500}
+                                          :result {:status :error :code :timeout :elapsed-ms 5943 :cleanup true :response-absent true}}
+                    :disposition "The original controlled probe-delay witness is repaired. The repair did not cover the subsequent BB finalizer window described below."}
+ :findings [{:id :bb-finalizer-after-publication-check
+             :severity :p1
+             :contract "Frozen spec B11, lines 178-187: one original spawn-relative 5000 ms deadline; cancellation and timeout must prevent success publication. Bounded cleanup after the deadline is not authorization for a late success."
+             :location "src/shx/infra/safe_bash_supervisor.clj:208-218 and 237-240"
+             :cause "The final clock/cancellation check at lines 210-214 selects the success map before the try/finally executes remove-watch at line 218; run! then executes another finally resetting :busy. Neither finalizer is followed by a deadline/cancellation check before run! returns the result. A preemption or delayed watch-removal operation in this window can cross the deadline or observe cancellation while the caller has not received the success. The proof elapsed was captured before that window."
+             :deadline-witness {:working-control {:status :ok :elapsed-ms 2383 :pid 1108252 :start "47318663"}
+                                :injection "with-redefs-fn wraps clojure.core/remove-watch and sleeps 3500 ms exactly once only when its reference is the test-owned cancellation atom; after sleeping it calls the original function unchanged. No clock, process argv, pin, worker output, success response or control result is changed."
+                                :result {:status :ok :reported-elapsed-ms 2388 :external-wall-ms 5896 :pid 1108546 :start "47318902" :cleanup true :injected-calls 1}
+                                :interpretation "The pause models a scheduling stall in the finalizer and is not a claim that normal remove-watch takes 3.5 seconds. External wall includes bounded preflight, but the 2388 ms spawn-relative success proof plus the subsequent 3500 ms pause independently demonstrates that actual return occurs after the original deadline. This is a late success return, not an allowed post-deadline timeout or cleanup return."}
+             :cancellation-witness {:working-control {:status :ok :elapsed-ms 2325 :pid 1122535 :start "47331082"}
+                                    :injection "The same exact-reference remove-watch wrapper resets the test-owned cancellation atom to true immediately before invoking the original remove-watch."
+                                    :result {:status :ok :elapsed-ms 2435 :pid 1122748 :start "47331316" :cancelled-before-return true :injected-calls 1}}
+             :reproduction "Use bb -cp target/safe-bash-candidate-v13/supervision/src:test, require shx.infra.safe-bash-supervisor, shx.transport-fixture and clojure.edn; prepare the first baseline row in target/supervision-fixtures/profiles-926274/profiles.edn, verify a real positive, then call run! with a fresh cancel atom under with-redefs-fn on #'clojure.core/remove-watch. When (identical? ref cancel), sleep 3500 ms or (reset! cancel true), then call the captured original remove-watch. Time the outer run! with System/nanoTime and inspect status, response and supervision. All invoked commands, output and PID/start identities were observed in the review session."
+             :fix-direction "Make the final publication/return decision after all potentially blocking finalizers and cancellation-listener cleanup; preserve the same original spawn-relative deadline, terminal cancellation precedence and ownership cleanup. Add real sealed-source regression barriers specifically inside BB watch removal and final lease cleanup, with positive controls and no success artifact on deadline/cancellation. Define precisely the synchronous publication linearization point; do not impose impossible hard real-time scheduling guarantees after a completed publication."
+             :qualification "This is a controlled injected scheduling/cancellation witness, not an independently observed spontaneous production occurrence. All recorded worker PIDs were later absent from /proc; no foreign process was signalled."}]
+ :publication-regressions {:bb {:command "bb -cp target/safe-bash-candidate-v13/supervision/src:test test/shx/publication_bb.clj target/supervision-fixtures/profiles-926274/profiles.edn /dev/null"
+                                :exit 0 :working-controls 2 :negative-trials 3 :barriers [:probe :before-cas :after-cas] :timeout-ms [5410 5403 5402] :cleanup true :owned-groups-reaped true}
+                           :nbb {:command "nbb -cp target/safe-bash-candidate-v13/supervision/src:test test/shx/publication_nbb.cljs target/supervision-fixtures/profiles-926274/profiles.edn /dev/null"
+                                 :exit 0 :working-controls 2 :control-ms [2328 2358] :negative-trials 3 :barriers [:response :probe :listener-cleanup] :timeout-ms [5402 5401 5401] :cleanup true :owned-groups-reaped true}
+                           :gap "BB tests pause the probe and success CAS but do not pause the subsequent remove-watch finally. NBB's separate listener cleanup test does not exercise BB's finalizer."}
+ :bundle {:root "target/safe-bash-candidate-v13"
+          :pins {:validator "ff6226df864f9c3bed7d18c22eabe4034dda538b7e1cb03b14fadc08a3c8961e"
+                 :renderer "0f9a48b48a1b51e065612d814418b18ef8dd4370a7543bba776c21e8a9727413"
+                 :dependency "77f5b2ba8b337f72f4a5ca6f992222a9e06042c9535e6d1b829528f88c77d994"
+                 :supervision "0e0dbc135f3aeaf1615b95a22a22beba9794ecbe786e8a033cbcb62c07999b68"
+                 :java "5b211c35168b3ada0275b0109188c42f011838e53ef5b63eee748b8e492d3642"
+                 :platform "8bbd191e16d43afbfca8a83a09d4738b1ef9dd65f0a939696fe8f6822836321f"
+                 :bb-source "5ce540fb813b90355412c36b69808cbe29d860c459c345de597a227bc602414e"
+                 :native-source "52769c7a5bf0547a3f6fcfb15ba9c04db64ba518b3d838459304ceb9f560e74d"}
+          :audit {:command "python3 test/shx/fixtures/audit-safe-bash-bundle.py target/safe-bash-candidate-v13" :exit 0 :manifest-rows 496 :unique-files 192 :source-readbacks 20 :host-abi-files 8 :archived-supervision-pin-matches true}
+          :assumptions "Explicit immutable-owner custody and pinned host ABI; not a hostile-owner OS sandbox or accepted consumer configuration."}
+ :strict {:command "NPM_CONFIG_OFFLINE=true bin/analyze --strict" :exit 0 :checks 7 :tests 48 :assertions 880 :failures 0
+          :warning "DEPRECATED SYNTAX (NO_SOURCE_PATH): DEPRECATED: Using integer 0 for object id. Use named variables instead."
+          :zero-warning-qualified false}
+ :additional-evidence {:v4-owner-claims "24 BB and 24 NBB production cases, 21+21 real transports, 13/652 portable each and syscall/effect evidence remain implementer-reported for v13; this reviewer did not rerun those entire suites in this turn. Prior independent v11 suites and original source assessment remain in completion-v2."
+                       :unchanged-pure-sources "git diff shows no changes in src/shx/domain, src/shx/law, src/shx/shape or deps.edn since 8a226b2; prior four-survivor equivalence assessment remains applicable to those bytes. The v4 claimed 97 killed, 4 survivors and 51 unindexed were not rerun independently or relabeled."
+                       :original-cleanup "Original BB cleanup-unconfirmed at 3806 ms remains fail-closed with unknown cause; two later bounded controlled probes passed. Neither this fix nor this review claims its cause was identified or repaired."
+                       :timing "Success is not permitted to publish after the deadline; error/cleanup outcomes may return later within the stated cleanup semantics. This review does not claim generic OS hard-real-time behavior."}
+ :holds {:functional-source-approval false :zero-warning-release false :consumer-handoff false
+         :warning-dependency "org.typedclojure/typed.lib.clojure 1.4.0 seq annotation remains uncorrected; no substitution, fetch, cache patch or suppression performed."}
+ :scope {:source-edits false :commits false :push false :pr false :board false :parent-ledgers false :generated-bash-execution false :foreign-kills false :service-or-model false :download false}
+ :next "Repair and test BB's finalizer/publication and cancellation boundary, then return to the same reviewer. Separately obtain an independently qualified warning-free dependency and owner release before any S1B consumption."}

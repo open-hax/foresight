@@ -1,0 +1,15 @@
+{:artifact/type :oikos/readback-custody
+ :repository "riatzukiza/foresight"
+ :branch "evidence/oikos-planning-readbacks-20261103"
+ :commit "e2939d28e1b7ecbeb441dfd6fbac358c4300081a"
+ :manifest ".ημ/runs/oikos-program-20261103/readback-manifest.json"
+ :manifest-sha256 "3d03b33fbf8109531d1d3d6d45afd40834eaf28cdb4c3ef31727d779cbc90b6a"
+ :json-readbacks 55
+ :raw-bytes 275056
+ :directories ["cards" "cards-after-native-corrections" "s1a-native-scope" "adjudicated-clarifications"]
+ :remote-verification "Authenticated GitHub recursive tree was complete; all 55 remote Git blob IDs match exact local source bytes, and every source SHA256 matches the pushed manifest."
+ :scope "Frozen review inputs and dated official Rheos responses, not board authority or task completion."
+ :review-scope "Generated duplicate JSON readbacks are preserved separately to keep the canonical planning PR bounded within included review file limits. Typed review/disposition records and canonical card changes remain on the planning PR."
+ :local-mirrors :active-untracked-retained
+ :deleted 0
+ :approval-credit 0}

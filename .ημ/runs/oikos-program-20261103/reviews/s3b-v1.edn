@@ -1,0 +1,23 @@
+{:task :s3b :uuid "912b707f-2275-45c9-b4a9-aac143e11d9a"
+ :source-sha "ae35073719974c0df1d2dae301c2179fa4785641"
+ :session-id "ses_e5dbab4f4ffdRRmdpMW68WhSfS" :scope :planning-only
+ :verdict :changes_requested
+ :findings
+ [{:id :s3b/physical-ownership :severity :P1 :title "Hidden-space membership does not grant physical ownership"
+   :evidence "Card says admitted ownership but does not distinguish workspace vs physical-window owner; caller context remains unauthenticated."
+   :required-test "Operator window externally moved into agent space remains protected. Names/logical membership/caller assertions grant no authority; only exact separately approved action/resource may proceed."}
+  {:id :s3b/check-at-effect :severity :P1 :title "Strict revision and lease checks at every effect"
+   :evidence "Preview checks do not establish currentness when dispatching IPC or later batch steps."
+   :required-test "Interleave revision/disconnect/epoch/reassignment/expiry; deny mismatch, superseded lease or now>=expiry before IPC; later expiry stops later steps and records actual partial effects."}
+  {:id :s3b/observed-noninterference :severity :P1 :title "Noninterference is an observed postcondition"
+   :evidence "Protected-focus fixtures omit creation focus rules, output topology and global effects."
+   :required-test "Synthetic nested-i3 creation/focus/multi-output/global-command cases compare resulting protected tree/focus; accepted join is exact exception; distinguish external interference, partial failure and no unsafe autorepair."}
+  {:id :s3b/consent-and-return :severity :P2 :title "Revision-bound join consent and non-coercive return"
+   :evidence "Human acceptance/return lacks freshness, consumption and supersession constraints."
+   :required-test "Decline/cancel zero effect; acceptance exact displayed scope, not replayable after revision/lease changes; human navigation supersedes old return focus; reused/missing targets fail without stale compensation."}
+  {:id :s3b/s4a-prerequisite :severity :P2 :title "Native S4A dependency must gate execution"
+   :evidence "Frozen card lacks S4A while proposed execution graph requires shared named-action artifact."
+   :required-test "Official Rheos dependency/readiness names S4A; sandbox consumes reviewed capability contract and rejects raw IPC bypass."}]
+ :prerequisite-artifacts ["S3A logical identity/branches" "S2B reconciled currentness/epoch fixtures" "S4A named trusted sandbox action boundary"]
+ :policy-blockers ["Planning admission held; synthetic nested-i3 evidence can otherwise qualify this slice."]
+ :user-questions [] :tests-executed false :native-provider-approval false}

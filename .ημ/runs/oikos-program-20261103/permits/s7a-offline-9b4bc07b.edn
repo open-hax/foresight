@@ -1,0 +1,31 @@
+{:permit/id :oikos-s7a-offline-9b4bc07b
+ :authority :parent-verified-specific-artifact-prerequisite
+ :producer {:task :s7a :uuid "0db50b53-6c7a-489a-bff9-048d57ce4cbb"
+            :whole-task-complete false}
+ :artifact {:repository "open-hax/oikos"
+            :source "9b4bc07be6a64dc7b69bdd7716a841162ba3168b"
+            :tree "ace0b4a52750c299747c19e670f4ba3806629bf7"
+            :published-ref "artifact/oikos-s7a-offline-9b4bc07b"
+            :path "eval/s7a/artifact-v2.edn"
+            :file-sha256 "0085e3d5123e6e219d541aab81c2a4f15a7dc3a876d4cf8db6f44aca2397da24"
+            :canonical-seal "46e72b669b03edfb8f7a4d1cd04567da112bb650e421cb51794811a3aa28c584"
+            :bound-files 32 :cases 18 :images 6
+            :provided [:frozen-grouped-synthetic-corpus :declared-layout-region-labels
+                       :independent-metric-oracles :composable-phase-metrics
+                       :coherent-inert-resource-preflight :exact-image-inventory-audit]}
+ :review {:report "../reviews/s7a-code-fix-review-v2.edn"
+          :original-findings-settled 4 :introduced-findings []
+          :independent-probes {:bb-assertions 59 :nbb-assertions 59 :inventory-assertions 95}}
+ :parent-actual-verification {:source "9b4bc07be6a64dc7b69bdd7716a841162ba3168b"
+                              :bb [26 357] :nbb [38 463] :eval [9 39]
+                              :artifact-tests [7 181]
+                              :failures 0 :errors 0 :lint-errors 0 :lint-warnings 0
+                              :artifact-file-sha256-matches true}
+ :consumer-scope {:s5a [:offline-corpus-identity :fixture-labels :metric-oracles]
+                  :other-s5a-prerequisites-required [:s2a :s2b]
+                  :new-task-admission-granted false}
+ :not-provided [:loaded-model-identity :ocr-or-e4b-quality :runtime-speed
+                :cold-start :actual-cancellation :peak-memory :resource-reservation
+                :execution-authorization :governance-admission :full-s7a-completion]
+ :retained-history "V1 artifact and manifest remain unchanged. All six PNG byte identities and grouped split remain unchanged; v2 corrects text-label shape and binds repaired code/test evidence."
+ :native-approval-credit 0 :epic-completion-credit 0}

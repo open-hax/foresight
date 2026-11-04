@@ -1,0 +1,37 @@
+{:review/id :s6a-govone-fixture-plan-fix-review-v2
+ :review/type :same-independent-adversarial-planning-recheck
+ :input {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s6a-govone-fixture-qualification-plan-v2.edn"
+         :sha256 "d6df9e4557ebb3ca73fe46a6b44eafd5eb9b147dcd24a72df4854f1a58211997"
+         :prior-review "reviews/s6a-govone-fixture-plan-review-v1.edn"}
+ :owner {:path "/home/err/devel/orgs/mojomast/govone" :observed-head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"}
+ :verdict :approve-source-planning-only
+ :authorization :none
+ :stage-admission "Parent may now ask the user for the exact single new test file source grant. After that grant, source authoring and review may proceed within its exact limits. This approval is not a grant to write the file, compile, test, launch a runtime, acquire dependencies, probe a guard, bind sockets or access existing credentials. Stop if implementation needs production edits, a second kernel, fake authority or scope outside that grant."
+ :prior-findings
+ [{:id :F1 :disposition :settled-for-source-planning
+   :anchors ["v2:66-125" "internal/runtime/public_provisioning_test.go:100-117,234-295" "internal/controlplane/service.go:1823-1895,1903-1961,2013-2098" "internal/httpserver/admin_api.go:767-802" "internal/config/model_endpoint_bindings.go:46-56,84-102,144-151" "internal/runtime/runtime.go:65-171,199-205,390-394,707-740,776-797" "internal/router/service.go:455-479,525-536,559-564" "cmd/govone-dev/main.go:245-286,359-464"]
+   :assessment "The UUID cycle is resolved in the proposed order: A's authenticated endpoint create returns the generated UUID and binding revision; A is joined and shut down; the protected registry binds returned tenant/UUID/canonical HTTPS origin/revision; B loads that registry against the same private DB and fresh keys with dev mode off. Existing source separately demonstrates close/rebuild with a returned endpoint identity and persistent operator key, though its example is local endpoint, not this exact connected external fixture. Real PATCH DTO/CAS and router eligibility support the proposed endpoint mode in both external modes; signed profile activation and normal provision source are genuine. In-process ServeHTTP carries real handler and middleware, not network transport proof."
+   :remaining-gate "This composition is source-supported but not run. Preserve A-issued admin/operator/auditor role separation, signed policy revision/readbacks and actual B authentication; count and join direct handler requests before shutdown, install provider hook before B construction, restore after B shutdown serially. Fail closed on any unsupported config, re-admission, startup, cache, mode, provenance or key-continuity behavior; do not manufacture success or claim the CLI supports restart."
+   :status :no-open-planning-contradiction}
+  {:id :F2 :disposition :settled-for-source-planning
+   :anchors ["v2:126-138,169-190" "cmd/govone-dev/main.go:190-217,245-286,289-298" "/home/err/spaces/foresight/docs/notes/agent-scratch-cleanup.md:5-8,40-45,113-117"]
+   :assessment "V2 holds the old auto-cleaning tests and plans newly owned, 0700 private state retained outside Git on all outcomes instead of t.TempDir cleanup; close resources separately and do not publish credentials. This addresses the identified fixture cleanup contradiction without a disposal exception."
+   :remaining-gate "Review actual authored file, command and dependency/build temporary-file behavior before any effects; -work alone is not proof all tools and dependencies preserve every created artifact. Account for retained private state and bounded space, including failure paths. No automatic removal or unapproved remote key backup."
+   :status :no-open-planning-contradiction}
+  {:id :F3 :disposition :settled-as-staged-plan-execution-blocker-remains
+   :anchors ["v2:53-65,139-153,174-191" "internal/inference/endpoint_generator.go:102-132" "internal/runtime/runtime.go:87-104"]
+   :assessment "The in-process handler removes the proposed gateway listener without replacing auth or policy; the provider hook is a separate transport seam and not an isolation boundary. V2 explicitly requires a separately reviewed, fail-closed inherited deny-all guard and independently authorized qualification before build/test/runtime and does not claim the historical wrapper proof qualifies it. This is adequate staging, not a verified guard."
+   :remaining-gate "Parent must review the exact filter and process/FD/ABI scope, independently qualify it with authorized neutral probes and bind proof to actual commands; require a credible observable mechanism for the fixture's stated fail-on-unexpected-network-attempt assertion, since an EPERM-only seccomp rule by itself does not report every denied attempt to the test. Any absent proof keeps all build/test/runtime effects held. This owner fixture does not qualify Oikos network transport."
+   :status :execution-held}
+  {:id :F4 :disposition :settled-as-permission-accounting-not-closure
+   :anchors ["v2:154-168,169-177" "go.mod" "go.sum"]
+   :assessment "V2 records the already-authorized exact PUBLIC closure acquisition, 1 GiB total with 768 MiB GovOne and 256 MiB typed allocations, without asking again or asserting completion. No acquisition was checked or performed by this reviewer."
+   :remaining-gate "Parent must independently establish selected graph and checksum/size inventory, unchanged pins and isolated offline closure before separate build/test authorization. No upgrades, lock changes, private coordinates, global-cache edits, or cap expansion are implied."
+   :status :closure-unverified}]
+ :new-findings []
+ :semantic-disposition {:status :unchanged
+   :anchors ["internal/classifier/service.go:233-305,329-335" "internal/policy/service.go:534-546,556-581" "internal/router/service.go:301-304"]
+   :assessment "Genuine internal-entity hybrid placeholder transformation plus separate genuine PUBLIC external positive and internal/restricted narrow-or-deny tests satisfy the corrected fixture intent. EMAIL remains restricted. No invented public placeholder provenance, lowered sensitivity, canned allow or both-mode raw-marker transformation is required. These are acceptance conditions, not observed test results."}
+ :user-source-question "Do you authorize exactly one new test-only file, /home/err/devel/orgs/mojomast/govone/cmd/govone-dev/s6a_fixture_test.go, against pinned GovOne commit 6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4, with no production-source changes, second policy kernel, or mocked auth/classifier/redactor/router decisions? This grant is source-only; build, test, runtime, sockets, credentials and guard probes remain separately held."
+ :scope-and-evidence "Only plan and pinned owner source/metadata inspected. No source edits, dependencies, tests, builds, network, sockets, credentials, board, ledger, PR, commits, pushes or nested agents. No proof of executed signed session, provider bytes, P4, independent anchor, consumer integration or whole-path coverage."
+ :written-only "This new review artifact."}

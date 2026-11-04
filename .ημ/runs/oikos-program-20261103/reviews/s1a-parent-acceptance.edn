@@ -1,0 +1,46 @@
+{:acceptance/id :oikos-s1a-parent-acceptance-20261103
+ :task/uuid "07452a65-4a6a-4704-bf81-50408927dcc8"
+ :repository "open-hax/oikos"
+ :candidate "fb9d7cd4a998459cee03d907c81b640a4ada22db"
+ :specification {:path "docs/specs/s1a-generation-contracts.md"
+                 :sha256 "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"}
+ :scope :development-inert-generation-contracts-and-bounded-bb-boundary
+ :reviews {:five-input-and-isolation-findings {:settled-at "470c35e7d5bfdfbfd1a93bec3a1f63357015df69"
+                                              :report "s1a-code-five-fix-review-v2.edn"
+                                              :provided-five-source-file-hashes-unchanged-at-candidate true}
+           :protocol-findings {:settled-at "fb9d7cd4a998459cee03d907c81b640a4ada22db"
+                               :report "s1a-protocol-fix-review-v2.edn"
+                               :introduced-findings []}
+           :validator-supervision {:reviewed-at "fb9d7cd4a998459cee03d907c81b640a4ada22db"
+                                   :report "s1a-validator-design-code-review.edn"
+                                   :verdict :approve :introduced-findings []}}
+ :parent-tests {:bb [18 286] :nbb [40 546] :evaluation [9 39]
+                :failures 0 :errors 0 :lint-errors 0 :lint-warnings 0
+                :deadline-regression {:status :timeout :milliseconds 5990.515443999997 :artifacts-published false}
+                :native-import {:bytes 6356992 :milliseconds 7.937761999994109}
+                :shared-fixture-sha256 "f7eb14070acf82fab6d5295620e4c7b90f0c11b6d569d8b9a9984edfacdcb209"}
+ :parent-roundtrip {:mode :explicit-owner-reviewed-development-pins
+                    :validator-id :profile-edn-v1
+                    :validator-revision "dad31103191e858f464a628edf09c996388546fcca81126f3c61fd49ed5ae2cd"
+                    :request-id "parent-reviewed-dev-artifact"
+                    :status :ok :artifacts 1 :cleanup-holds #{}
+                    :diagnostic-correction "The first logging attempt incorrectly invoked the cleanup-holds atom; the rerun dereferenced it without clearing holds or changing product source. No success was inferred from the failed logging attempt."
+                    :installed-worker-authority false}
+ :native-readback {:head "fb9d7cd4a998459cee03d907c81b640a4ada22db"
+                   :base "ae35073719974c0df1d2dae301c2179fa4785641"
+                   :review-threads 2 :unresolved-threads 0
+                   :all-thread-and-review-pages-read true
+                   :new-body-findings []
+                   :checks [{:name "CodeRabbit" :conclusion :neutral :provider-review-only true}]
+                   :branch-protection-rule nil
+                   :rules-api {:http-status 403 :reason :private-repository-plan-feature-unavailable
+                               :claim-of-empty-ruleset false}}
+ :decision :accepted-for-ordinary-exact-head-development-source-merge
+ :authority "The user authorized qualified program merges and explicitly replaced waiting for hosted review cohorts with completed independent local reviews. All seven concrete code findings are settled and the parent reran the deterministic tests. This does not fabricate native approval or bypass actual server-side branch protection."
+ :native-approval-credit 0
+ :not-qualified [:installed-selection :immutable-production-worker-installation
+                 :positive-bash :write-time-race-safety :services-promotion :rollback
+                 :start-entry-responsiveness :hard-real-time-os-guarantee
+                 :whole-epic-or-whole-program-completion]
+ :held-actions [:personal-capture :remote-client-publication :spending]
+ :merge-status :not-yet-executed-at-this-record}

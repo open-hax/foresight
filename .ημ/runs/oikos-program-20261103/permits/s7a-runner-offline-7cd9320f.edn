@@ -1,0 +1,20 @@
+{:artifact/id :s7a-runner-offline-7cd9320f
+ :source "7cd9320f2c9991f8e36e15e59478b80789ae3b25"
+ :published-ref "artifact/oikos-ocr-runner-7cd9320f"
+ :publication {:normal-push true :remote-ref-readback-matches true}
+ :artifact {:path "eval/ocr-runner/artifact-v2.edn"
+            :file-sha256 "2c291f6f4598b00da1197a8ae3b560042c56bbba9f971ca6d4efa9befbdd948b"}
+ :review {:path "../reviews/s7a-ocr-runner-fix-review-v2.edn"
+          :sha256 "734eafa49a5d35eacce146b832ad91c22dae7350977e22014ade062d24ff2669"
+          :verdict :approve-offline :original-findings-settled 3
+          :additional-passing-checks 544}
+ :qualified [:cooperative-deadline-simulator :private-dispatch-png-snapshot
+             :closed-failure-statuses :offline-metric-and-raw-evidence-laws]
+ :live-cli {:status :blocked :exit 2}
+ :not-qualified [:hard-process-memory-and-time-boundaries :durable-store
+                 :real-http-driver :fresh-resource-admission :response-instance-binding
+                 :no-second-hop-proof :runtime-quality :whole-s7a-completion]
+ :conditional-human-decision "../decisions/ocr-six-image-conditional-authorization.edn"
+ :conditional-batch-grant-consumed false :execution-authorized false
+ :next-scope :independently-review-hard-runner-plan-before-implementation
+ :native-approval-credit 0 :epic-completion-credit 0}

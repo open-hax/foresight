@@ -1,0 +1,282 @@
+{:report/id :s6a-prerequisite-and-api-plan-v1
+ :report/date "2026-11-03"
+ :report/kind :pre-implementation-source-grounded-spec-candidate
+ :report/context {:symbol :己 :confidence 0.97 :tier :observed-source-and-derived-plan}
+ :task/uuid "c703893f-aea4-41c2-9eab-c3bd37b28c9b"
+ :authority :none
+ :scope {:only-write "This new report at the absolute coordinator path."
+         :not-performed [:board-writes :product-edits :source-imports :merges :commits :pushes
+                         :receipt-writes :credential-reads :services :listeners :http
+                         :models :installs :dependency-downloads :tests :builds]
+         :performed [:source-reads :exact-git-source-reads :read-only-git-identity
+                     :permit-and-review-hashing :official-rheos-content-read
+                     :offline-go-toolchain-version-queries]
+         :test-status :not-executed
+         :parent-owns [:admission :independent-review :implementation-permit :reflection-ledgers]}
+ :repositories
+ {:coordinator {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103"
+                :head "81038b2123254783d4ec95f9338a87b8f3579834"}
+  :consumer {:path "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s6a"
+             :head "ae35073719974c0df1d2dae301c2179fa4785641"
+             :worktree-status :clean
+             :status-command "git status --porcelain --untracked-files=normal"
+             :state "Original scaffold, not a merged S2A/S4A consumer; read only."
+             :current-law "src/oikos/law/actions.cljc:1-70: proposal comparisons; authorization always false."}
+  :govone {:path "/home/err/devel/orgs/mojomast/govone"
+           :head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+           :tracked-status :clean :untracked-inventory :not-performed
+           :status-command "git status --porcelain --untracked-files=no"
+           :status "Source-only unstable v0.1 backend-developer preview candidate, not a deployment assertion."}}
+ :instructions-read
+ ["Applicable home/spaces/Foresight/coordinator AGENTS.md supplied in context and coordinator read directly."
+  "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/docs/agile/AGENTS.md supplied during discovery."
+  "/home/err/spaces/foresight/oikos/AGENTS.md"
+  "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s6a/AGENTS.md"
+  "/home/err/devel/AGENTS.md"
+  "/home/err/devel/orgs/mojomast/govone/AGENTS.md"
+  "No intervening devel/orgs or mojomast AGENTS.md found; owner recursive AGENTS glob found only root; report .ημ subtree AGENTS glob found none."
+  "Loaded spec-driven-dev; no board mutation or implementation phase is authorized here."]
+ :official-task
+ {:command "eta-mu kanban content c703893f-aea4-41c2-9eab-c3bd37b28c9b --config /home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+  :exit 0 :body-and-all-returned-comments-read true :status :incoming
+  :config {:tasks-dir "./docs/agile/kanban" :fsm :promethean}
+  :card "docs/agile/kanban/oikos-bind-all-egress-paths-to-the-mojomast-govone-policy-session-37b28c9b.md"
+  :acceptance "All egress paths require scoped GovOne sessions; expiry/revocation/outage/direct retry fail closed. Images are supported-and-redacted or denied. local_only is zero unauthorized third-party egress, not zero authorized local network requests."
+  :current-dependencies ["93a76dad-678a-4980-86fb-ba0fbb5e8203" "29caa8e3-289a-416c-9850-8ef9cc769e88"]
+  :supersession "Latest native correction explicitly replaces historical E2/whole-E4 comments with precise S2A immutable payload provenance plus S4A shared named scoped capability contract. No whole client-matrix prerequisite."
+  :policy "Synthetic/dev only; zero spend; no personal capture; image/text defaults 24h/7d with derived/retrieval deletion propagation and separate accepted-knowledge consent. No current readiness or implementation grant."
+  :planning-findings "reviews/remaining-v1.edn:91-102: payload/sink matrix, second-hop isolation, and genuine GovOne positive external-mode transformation proof remain relevant; denials alone do not qualify those positive modes."}
+ :component-prerequisites
+ {:s2a {:source "c399b60e1676c47778445c1098eb541ab38743cb"
+        :version "oikos.desktop.safe-reference/v1"
+        :digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+        :permit "permits/s2a-contract-c399b60e.edn"
+        :permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+        :actual-review "reviews/s2a-contract-fix-review-v2.edn"
+        :actual-review-sha256 "e329a2fa6b171795a56c1800ac12893d5b1dccd1312f3cf0c7b01d9e0232542e"
+        :review-verdict :approved
+        :source-inspected "git show exact SHA:src/oikos/law/safe_reference.cljc"
+        :usable-now [:closed-plain-event-and-content-reference-shapes :immutable-event-identity-validation
+                     :contract-identity :causal-identity-contract :lifetime-and-retention-vocabulary]
+        :limits "Opaque random content UUID, not bytes or content digest. qualified? compares trusted review DATA and does not authenticate its issuer. No working content resolver, persistence receipt, actual Clio ledger fixture, retention/erasure service or authenticated payload-read authority is supplied."
+        :clio-owner "788cdd3434615a7932b924e68520dbf7f88408c2"
+        :whole-task-complete false}
+  :s4a {:source "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+        :version "oikos.capability/v1"
+        :digest "2a82066221bfe57cb326f0fecce12082505ddfdbcdd53ab986451f69d67e884b"
+        :permit "permits/s4a-contract-8ae64df4.edn"
+        :permit-sha256 "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+        :actual-review "reviews/s4a-contract-code-v1.edn"
+        :actual-review-sha256 "eac7064d40f40392b1672a6e5ea4ff6199b3caf0c5d1faa605c7142c4c2e3030"
+        :review-verdict :approved
+        :source-inspected "git show exact SHA:src/oikos/law/capability.cljc"
+        :usable-now [:closed-named-request-resource-scope-shapes :exact-revision-bound-inert-preview
+                     :pure-precondition-result :shared-safe-reference-reuse]
+        :positive {:status :preconditions-satisfied :authority :none}
+        :operations [:emacs/read-range :emacs/replace-range :i3/window-read :i3/focus-window]
+        :limits "No authenticated actor, consent issuer, runtime dispatcher, current buffer/window attestation, approval expiry/revocation/single-use, content-return or GovOne admission. Frozen private artifact is not an effect permit."
+        :whole-task-complete false}
+  :verification "Both permits and actual review bytes read and SHA256 recomputed this session; source read from exact Git objects, not active producer edits. Producer test execution is reported by their independent reviews, not rerun here."
+  :answer "A source/API plan and, after new explicit admission, pure synthetic consumer implementation can consume these exact components now. Neither S2A whole completion nor S4A native-auth/runtime completion nor S3A/whole-E4 completion is a prerequisite for pure shape/denial work. Existing permits do not themselves authorize S6A code changes or imports."
+  :runtime-not-waived "Actual immutable payload origin/readback, trusted actor/scope context and real gateway authentication must exist at the effect boundary before private-capable runtime qualification. A caller-made safe reference, approval map or hash is not that evidence. S2A's unfinished actual ledger fixture blocks claiming that integration, not writing pure consumer laws."
+  :s3a "User reports qualified merged 008b0611 and official done; no new S3A gate is imposed and no fresh S3A execution verification is claimed here."}
+ :authority-model
+ {:govone "Tenant bearer authentication, signed disclosure/routing policy, active session, pipeline redaction/inspection/delivery and gateway-owned endpoint admission."
+  :local-capabilities "Oikos named actor/resource operations, revision-bound preconditions and separately authenticated operator consent; frozen positive has authority none."
+  :non-equivalence "GovOne capabilities hybrid_redacted/external_approved/unmasked_release and release channels api_response/stage_api are not emacs/read, i3/write or editor approval APIs. No generic OCR/resource/parent-permit verifier is introduced."
+  :owner-boundary "README.md:48-50; internal/policy/service.go:37-116; prior reviews/govone-ocr-admission-discovery.edn is OCR-bounded background, not this complete egress map."}
+ :actual-govone-api
+ {:session {:method :post :path "/api/v1/sessions"
+            :auth "Authorization: Bearer <operator credential>; tenant/principal derive from authenticated server context, not supplied IDs."
+            :request {:ai_system_id :string :policy_profile_id :optional-string :ttl_seconds :optional-integer
+                      :execution_constraint ["local_only" "hybrid_redacted" "external_approved"]
+                      :workflow_profile "full" :metadata :optional-closed-safe-map}
+            :response {:session_id :string :execution_mode :canonical-mode :policy_version :string
+                       :workflow_profile :string :active_stages :string-vector :ttl_seconds :integer
+                       :expires_at :rfc3339 :created_at :rfc3339 :metadata :safe-map}
+            :status 201
+            :notes "Constraint may narrow, never grant. Candidate first positive requires local_only/full and all required stage names. Session creation is content-free and is not a reusable permission for arbitrary sinks. No Oikos content/provenance is smuggled into metadata."
+            :metadata "Only workflow_context, request_source, client_request_id; bounded string/bool values. workflow_context=governed_chat; source api/bff/batch/cli; request ID is UUIDv7. Prefer omit."
+            :anchors ["internal/httpserver/stage_api_sessions.go:24-61,130-157,203-307"
+                      "internal/schema/models.go:108-144"]}
+  :completion {:method :post :path "/v1/chat/completions" :status 200
+               :request {:session_id :string :stream false :messages [{:role ["system" "user" "assistant"] :content :string}]
+                         :max_tokens :optional-positive-integer-at-most-4096 :model :optional-opaque-alias}
+               :limits "Owner API: 1..256 messages, aggregate content <=512 KiB; classifier commonly caps effective count at 64 including server prompt. Candidate chooses tighter 32 messages/64 KiB aggregate/256 max_tokens and total JSON <=1 MiB."
+               :response-required [:id :response_id :object-chat-completion :created :model :choices
+                                   :execution_mode :policy_version :usage]
+               :assertions "Bounded strict UTF-8/JSON; nonempty opaque IDs; object=chat.completion; integer created; canonical known mode; policy version nonempty; assistant string choice content; finish_reason stop/length; bounded nonnegative usage. Reject mode broader than local constraint, malformed/unknown delivery shape, and unexpected pipeline artifacts. Model output is untrusted content, never an instruction or local capability."
+               :anchors ["docs/api/openapi.yaml:2666-2751"
+                         "internal/inference/service.go:191-215,242-287"
+                         "examples/http/generic.mjs:200-233"]}
+  :session-detail {:method :get :path "/api/v1/sessions/{session_id}"
+                   :purpose "Authenticated lifecycle/context projection; not an atomic check-then-upload authority. Completion must enforce current admission again."
+                   :anchor "internal/httpserver/stage_api_sessions.go:45-61,398-428"}
+  :evidence {:method :get :path "/api/v1/evidence/{session_id}"
+             :purpose "Separate auditor authority. Do not hand producer admin/auditor keys to the Oikos application client or use evidence as an execution token. S6B owns complete Lens integration."
+             :anchor "README.md:136-168; cmd/govone-dev/main.go:399-459"}
+  :unsupported "No image content-parts, image_url/base64 PNG attachment, OCR execution, role=tool, tool_calls, function dispatch, arbitrary upload/export permission or editor-approval exchange in this completion contract. Separate transcription/admin document APIs are not substitutes."
+  :data-usage "Session stores declared scope/mode/TTL/metadata; it is not a training-consent, zero-cost, retention-extension or arbitrary data-usage grant. Completion usage is token accounting, sometimes estimated (endpoint_generator.go:287-289), not independent tokenizer/cost/privacy proof. No generic data_usage approval field was found in inspected OpenAPI/source."}
+ :payload-and-sink-matrix
+ [{:payload :plain-text :sink :govone-buffered-text :initial :supported-after-real-session
+   :requirements "Exact immutable source/byte binding, trusted read scope, valid text, bounded complete intended history, active GovOne session; same fixed gateway only."}
+  {:payload :derived-label-text :sink :govone-buffered-text :initial :conditionally-same-text-contract
+   :requirements "Labels remain sensitive/linkable; retain parent source IDs/derivation/version/retention/deletion context locally, reclassify all serialized label text through GovOne. No stripping provenance or treating labels as anonymous. No independent label endpoint."}
+  {:payload :ocr-transcript-text :sink :govone-buffered-text :initial :conditionally-same-text-contract
+   :requirements "Only an already available, lawfully produced immutable transcript with source lineage. This authorizes no OCR execution or image upload; missing trusted extraction/source binding denies."}
+  {:payload :image-bytes-or-image-url :sink :any :initial :deny-before-network
+   :requirements "Includes screenshot/crop/thumbnail/base64/data URL, mixed text+image, image in metadata/tool nesting, and encoded binary masquerading as text. Text redaction never approves original pixels. No local image route is silently enabled."}
+  {:payload :tool-request-or-result-envelope :sink :any-tool-api :initial :deny-before-network
+   :requirements "Unknown tool modalities, role=tool, tool_calls, attachments, executable operations and arbitrary JSON deny. Frozen S4A schemas may be checked as inert data only; successful preconditions are not execution authority."}
+  {:payload :explicit-tool-result-text :sink :govone-buffered-text :initial :conditional-text-projection-only
+   :requirements "Only a reviewed named textual projection with immutable original/derivation/source and trusted local read authority may be sent as ordinary inert user text, never by blindly stringifying tool JSON or replaying tool instructions. No current dispatcher/content return is supplied, so real tool positive remains held; synthetic projection can test protocol."}
+  {:payload :retrieval-embedding-index-or-export :sink :external-store-or-exporter :initial :deny-before-network
+   :requirements "Chat approval is not upload, embedding, index, Colab, filesystem-publication or external tool permission. Any separately supported text excerpt uses the exact text path with lineage; the separate sink remains denied."}
+  {:payload :audit-diagnostics-metrics :sink :remote-or-lens :initial :deny-or-content-free-local-only
+   :requirements "Do not retain prompts, paths, titles, content, bearer, raw errors or linkable IDs/hashes in public diagnostics. Authorized safe evidence is separate, not a backchannel."
+   :note "S6B Lens integration is not claimed."}
+  {:payload :unknown-or-mixed :sink :any :initial :deny-before-network}]
+ :consumer-spec-candidate
+ {:files [{:path "src/oikos/law/egress.cljc"
+           :role "Closed Oikos request/provenance/result shapes, bounded preparation/denial rules and exact contract-binding comparisons. NOT GovOne policy evaluation or an authorization issuer."}
+          {:path "src/oikos/infra/govone.cljs"
+           :role "NBB edge: configured fixed gateway client, credential handle, strict serializer/parser, one-shot requests, cancellation and safe outcomes. No provider SDK, endpoint selector, arbitrary fetch URL or raw policy/credential access."}
+          {:path "test/oikos/law/egress_test.cljc"
+           :role "Identical BB/NBB pure payload, provenance, scope and unsupported-mode cases."}
+          {:path "test/oikos/infra/govone_test.cljs"
+           :role "Consumer protocol/adversarial tests with all network surfaces denied/instrumented; mocks are protocol evidence only."}
+          {:path "docs/contracts/govone-egress-v1.edn"
+           :role "Pin exact owner/source/API contract, provided producer components and supported/denied matrix; review separately before freezing."}]
+  :proposed-input-fields [:request/id :payload/kind :payload/source-event :payload/content-ref
+                          :payload/derivation :payload/text :capability/request :session/handle]
+  :input-boundary "Closed discriminated variants, bounded plain values only. source-event uses frozen safe-reference validation, not a copied Clio validator/reducer. derived kinds refer to existing text content refs and explicit source lineage, never invent new frozen S2A event kinds. Runtime handles/credentials are opaque outer-adapter state, not caller-authenticated maps."
+  :trusted-context "Outer adapter must independently bind actor, tenant/principal/application, exact source event/reference/revision and exact immutable bytes; live retention/deletion/read scope; exact gateway origin/service identity/auth; current GovOne session and requested constraint. Caller cannot nominate credentials, resolver, endpoint, policy version or approval."
+  :pure-positive {:status :prepared :authority :none}
+  :safe-denial {:status :denied :code :egress-precondition-refused}
+  :safe-transport-outcome "Fixed local class plus bounded owner HTTP status/catalog code/validated trace ID/retry-after where present; no body/URL/credential/input/exception echo. No exported mutable grant/token."
+  :ordering ["Validate closed input and all nested payload variants before any resolver, filesystem read, DNS, session POST or network. Unsupported variants deny immediately."
+             "For supported text, resolve immutable bytes through an independently trusted scoped read boundary; verify actual source-event/content-reference/derivation and current retention/deletion state. A UUID/hash supplied by caller cannot authenticate this step."
+             "S4A named read preconditions are additional typed checks where relevant; no scope/preview positive mints a GovOne session or human consent. If real authority is unavailable, stop."
+             "Create/reuse only an authenticated, context-bound, unexpired real GovOne session; session request carries no payload. Local expiry checks narrow and do not replace server admission."
+             "Serialize exactly the complete intended bounded string-message history once and send once to the fixed GovOne completion route. No alternate provider, direct OCR, image URL dereference, telemetry or background exporter."
+             "Validate buffered response inside same total deadline; reject malformed/oversized/non-JSON/non-UTF8 or unexpected mode; treat output as inert untrusted text."
+             "Retain only authorized reconciliation identifiers in private scoped state. Unknown outcome stays unknown; never infer rollback or retry elsewhere."]
+  :existing-bypass-inventory
+  {:anchor "Existing consumer eval/run.cljs:28-30,63-72,139,157,187-201"
+   :paths ["Direct /v1/chat/completions text/image research traffic"
+           "Direct /ocr base64 image traffic" "GET /v1/models" "Environment-selected loopback bases"]
+   :risk "Existing eval uses loopback-only checks, not authenticated allowlisting or second-hop isolation. It is a synthetic research runner, not an S6A-qualified path."
+   :required-treatment "Do not leave it as an ambient product bypass while claiming all-path qualification. Initial S6A admission can leave execution held; later integration must route supported text through this boundary and reject/disable unsupported image/OCR/private-capable direct calls. Read-only model probes also require their distinct resource permit. Do not run this runner to establish S6A baseline."}}
+ :lifecycle-and-failure-semantics
+ {:auth "auth/api_keys.go:215-277 reads key repository, constant-time HMAC comparison, revoked/expired/active identity and current role. Not a client-made principal."
+  :expiry "session/service.go:636-681 loads SQLite status and current time; active expires_at boundary becomes expired via terminal transition; terminated/expired sessions never resurrect. Audit/DEK reconciliation failures return errors, not active content. Client must deny expired/missing session; server completion returns 410 for inactive/unknown."
+  :queued-work "inference/service.go:392-400,512-572,626-681 reloads session/profile and rechecks current principal role after waiting. Tests in runtime/session_authorization_test.go and inference/post_wait_authorization_test.go cover owner binding and queued revocation. Do not promise instantaneous cancellation of already-disclosed bytes or that every in-flight API-key revocation is rechecked at every stage."
+  :revocation "Test new requests after revoking the real development API key/role; test current profile lifecycle denial and session termination/expiry separately. Use owner-provided fixture/control-plane mechanism, not an invented POST session/revoke. Oikos-local scope revocation additionally denies locally and must come from a trusted issuer; frozen S4A does not supply that issuer."
+  :policy-cache "policy/service.go:779-821 returns warm scoped cache without rereading SQLite. Cold reload verifies stored exact signed bytes/hash/version. scoped_revision_test.go:53-97 expressly proves last-known-good warm behavior until invalidated. controlplane/service.go:876-949 verifies/promotes/publishes authorized activation; publish failure invalidates. Do not simulate production revocation by editing SQLite and assume per-request reload; qualify normal control-plane publication and warm-cache behavior separately."
+  :session-replay "stage_api_sessions.go:158-180 may replay settled equivalent session creation before new policy validation. Returned session ID still needs current expiry/context checks and completion-side authority; never treat cached 201 as current permission."
+  :owner-errors {:envelope "{error:{code,message,details,trace_id,timestamp}}; details allowlisted; validated trace shared with X-Request-ID/X-Trace-ID."
+                 :relevant [{:http 400 :codes ["GOV_GATEWAY_0001" "GOV_STAGE_0001" "GOV_STAGE_0002" "GOV_INFER_0001" "GOV_INFER_0004"]}
+                            {:http 401 :codes ["GOV_AUTH_0001"]}
+                            {:http 403 :codes ["GOV_AUTH_0002" "GOV_STAGE_0006" "GOV_STAGE_0008"]}
+                            {:http 404 :codes ["GOV_GATEWAY_0004" "GOV_STAGE_0005"]}
+                            {:http 405 :codes ["GOV_GATEWAY_0002"]}
+                            {:http 409 :codes ["GOV_INFER_0005"]}
+                            {:http 410 :codes ["GOV_STAGE_0003" "GOV_INFER_0002"]}
+                            {:http 413 :codes ["GOV_GATEWAY_0006"]}
+                            {:http 422 :codes ["GOV_INSPECT_0001" "GOV_RAG_0003"]}
+                            {:http 429 :codes ["GOV_INFER_0006" "GOV_RATE_0001"]}
+                            {:http 500 :codes ["GOV_GATEWAY_0005" "GOV_STAGE_0007" "GOV_INFER_0003"]}
+                            {:http 503 :codes ["GOV_AUDIT_0001" "GOV_CLASSIFY_0002" "GOV_RT_0007" "GOV_RAG_0002" "GOV_INFER_0003"]}
+                            {:http 504 :codes ["GOV_INFER_0007"]}]
+                 :variants "Inspection may be 403/422; RAG invalid input 400/403; INFER_0003 capacity-specific 503. Registry, not this table, owns exact variants."
+                 :rule "All non-success statuses, all unexpected 2xx/3xx, unknown codes/status mismatches, malformed envelope and dependency outages deny or report unknown-outcome; none is allow. Parse bounded retry_after_seconds/Retry-After only as advice; never auto retry. Do not mint GOV_* client codes as if owner emitted them."
+                 :anchors ["internal/goverror/error.go:15-228" "docs/api/errors.md:7-37"]}
+  :transport-policy "One fixed exact configured gateway origin, explicit authenticated allowlist, paths/methods fixed. Reject URL credentials/path/query/fragment ambiguity and all redirect codes without retransmitting body/Authorization. First qualification uses literal 127.0.0.1 and exact owner-issued ephemeral port, not localhost/DNS. No ambient proxy, fetch dispatcher, HTTP_PROXY/HTTPS_PROXY/ALL_PROXY or NO_PROXY trust; disable/instrument them. Production HTTPS must preserve certificate hostname/SNI and validate/pin allowed resolved destinations at connect time, including mixed answers/rebinding; URL string validation alone is insufficient. No caller URLs, image fetch, CONNECT or WebSocket."
+  :second-hop "Authenticated allowlisted loopback/private service is necessary but not enough: trusted runtime identity and proven no forwarding/external sockets are required before private-capable disclosure. Exercise a malicious local forwarding service and observe downstream attempts under deny-network isolation, not just first-hop call counts. Exact IP privacy alone grants nothing."
+  :owner-transport-facts "GovOne endpoint_generator.go:220-238 re-admits exact endpoint plus credential binding every network attempt; :302-312 disables proxy and applies ModelEndpointDialContext. config/model_endpoint_url.go:23-98 rechecks resolved addresses at actual dial, rejects metadata destinations and separates local/external IP classes. These controls are not proof that an authenticated local service cannot forward onward."
+  :retry-distinction "Oikos must make zero automatic retries and has no direct-provider route. GovOne itself has bounded internal external-model retries (http_retry.go:15-22,70-123: max 3 for transport/408/429/5xx) and separate marked busy classifier retries (spec.md:94). Those remain owner-governed attempts, not consumer fallback; do not falsely claim the owner never retries. External endpoint attempts re-admit authority each time; selected local stub is explicit, not fallback after a failed network provider."
+  :outcome "Timeout/disconnect after send is unknown, not proof no processing occurred. Retain same logical idempotency identity and reconcile through allowed owner surfaces before any separately authorized deliberate attempt. No new session/key generated merely to evade denial; no fallback on 401/403/410/429/5xx or bad JSON."}
+ :real-owner-fixture-path
+ {:available-source-mechanism "README.md:52-92 documents go run ./cmd/govone-dev --synthetic-stub. This is an ACTUAL GovOne runtime with local://stub deterministic generator, not fake governance allow. It is the smallest existing public-client entry for local_only positive plumbing without cloud/model."
+  :implementation "cmd/govone-dev/main.go:108-156 builds runtime.Build and literal 127.0.0.1:0 listener; :245-286 generates fresh Ed25519 policy signer/verifier, HMAC and encryption keys in private trial custody, air_gapped/development/dev_mode, anchoring explicitly disabled; :359-459 provisions via normal authenticated control-plane APIs, retires bootstrap keys, activates exact signed local-masked-only policy, creates operator/auditor and a real session/completion/evidence read."
+  :custody "Fresh outside-checkout MkdirTemp directory, private mode-0600 exclusive files; policy-signing.key/runtime.json/db/client.env remain private and never enter this report/Git/log. Signing/admin/auditor material stays with fixture owner; Oikos receives only opaque application credential handle and exact gateway origin/AI/profile. Do not source client.env casually into shared shell or read existing owner credentials."
+  :trial-test-entry "GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local /approved/go1.27.1/bin/go test ./cmd/govone-dev -run '^(TestFreshTrialPublicAPIs|TestPrivateFreshStateAndKeys|TestPOSTIdempotencyKeysWithoutRetries|TestLoopbackRequestsDoNotRedirectRetryOrLeak)$' -count=1"
+  :source-test-anchors "cmd/govone-dev/main_test.go:25-110 poisons ambient endpoints/proxies/credentials and checks zero calls, real fresh identity/linkage/stages; later TestPrivateFreshStateAndKeys, TestPOSTIdempotencyKeysWithoutRetries and TestLoopbackRequestsDoNotRedirectRetryOrLeak inspect custody/retry/redirect invariants. Source read, not executed."
+  :toolchain-observation {:command "GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local go version"
+                         :exit 0 :actual "go1.22.2 linux/amd64"
+                         :go-mod "go 1.25.0; toolchain go1.27.1"
+                         :cache-inspected "/home/err/go/pkg/mod/golang.org contains cached go1.26.0, not go1.27.1"
+                         :exact-query "GOPROXY=off GOSUMDB=off GOTOOLCHAIN=go1.27.1 go version"
+                         :exact-query-exit 1
+                         :exact-query-result "Go printed downloading go1.27.1 then toolchain not available; GOPROXY=off prevented retrieval. No toolchain downloaded or installed."
+                         :conclusion "Pinned-toolchain fixture execution currently unavailable through inspected Go/cache route. Do not silently substitute 1.22/1.26 or enable downloads. Other owner-provided prebuilt exact binaries/toolchains were not established. Full module-cache sufficiency is unverified."}
+  :fixture-limits "Trial proves local_only actual signed-policy/auth/stub plumbing if executed successfully; it deliberately DENIES hybrid_redacted/external_approved/unmasked_release and disables independent anchoring. It does not qualify images/tools/cloud, physical resource attestation, real-model quality, full S6A external-mode positives or tamper-evident independent custody."
+  :owner-test-seams "runtime/runtime_integration_test.go:35-185,1413-1452 has actual runtime.Build, SQLite, auth and stub governed flow with placeholder checks; policy/scoped_revision_test.go tests real signature/cache behavior. Go internal packages and unexported helpers are NOT externally importable Oikos APIs. Do not copy them into Oikos."
+  :external-mode-qualification-gap "Prior planning finding requires both hybrid_redacted and external_approved genuine policy/transform/serialized-provider-byte positives. Existing public trial intentionally cannot supply those. A separate reviewed owner-approved synthetic harness/test entry with real signed scope, real classifier/redactor/router and captured in-memory no-network provider transport is needed, or identify an already suitable owner test. SetExternalLLMHTTPClientForTest is an internal test seam, not a public Oikos SDK or authorization grant. No owner extension is authorized by this report."
+  :not-run "No trial, Go tests, gateway process, service/model, socket or HTTP was started. No mock is counted as actual policy admission."}
+ :phased-acceptance-candidate
+ [{:phase :p0-discovery-and-spec :status :this-report-only
+   :exit "Parent verifies exact card/component/API bindings and obtains independent review. No board readiness or implementation claim."
+   :can-start-before-producer-whole-complete true}
+  {:phase :p1-pure-source-and-denial-protocol :status :requires-new-admission-and-code-permit
+   :scope "Consume exact S2A/S4A frozen artifacts after controlled source integration; portable closed laws plus offline NBB client preparation/error tests, no real transports. Missing runtime issuer/resolver remains explicit deny."
+   :exit "BB/NBB parity, zero-warning lint, every payload/outcome cross-product denies unsupported cases before any network-capable seam. Pure/mocked positive=prepared/protocol-only authority none; independent exact-head review."
+   :does-not-require [:whole-s2a-completion :whole-s4a-completion :whole-e4 :client-matrix :live-govone :ocr-batch]}
+  {:phase :p2-consumer-transport-negative-and-owned-positive :status :separate-code-reviewed-network-permit-required
+   :scope "Otherwise-working task-owned fake HTTP only, explicit fixed local origin/credential and synthetic bytes, outbound network denied everywhere else. No production/private/model endpoints."
+   :exit "Positive local transport succeeds in control and denial variants cannot transport; redirects/DNS/proxy/second-hop/unknown outcome cannot bypass. This qualifies mechanics only, NOT policy approval. Separate owner boundary remains unqualified."
+   :network-currently-authorized false}
+  {:phase :p3-actual-govone-local-only-positive :status :held-until-owner-fixture-and-scope-permit
+   :scope "Owner-controlled exact pinned toolchain/source/runtime synthetic-stub fixture; actual bearer-authenticated signed policy session from normal API and Oikos bounded text request, no cloud/model. Exercise true auth/expiry/revocation/outage outcomes and collect safe session/policy/response linkage."
+   :exit "Real signed-policy local_only supported path plus closed unsupported image/tool/export denials can qualify this bounded initial S6A slice without any cloud request. Not full external-mode acceptance."
+   :provenance "Pure synthetic fixture must explicitly bind its generated immutable source bytes/event/reference and derivation; private/live path additionally requires qualified S2A actual readback/persistence and trusted actor/read authority. Never relabel synthetic hand-authored provenance as production Clio proof."}
+  {:phase :p4-all-declared-mode-and-runtime-qualification :status :held
+   :scope "Resolve owner-authorized no-network hybrid_redacted/external_approved harness and actual producer/read/scope boundaries; no change to GovOne kernel. Unsupported image/tool/export remains denied unless independently supported owner contract is later explicitly authorized."
+   :exit "Actual signed GovOne transformations in both supported external-capable modes with captured final serialized placeholder bytes, session/policy/evidence linkage, expiry/revocation/cache tests, zero downstream network; all Oikos private-capable call sites mediated or disabled. No fake allow, no source assertions as live proof."
+   :claim-limit "No cloud spend, production, installed client matrix, image OCR processing, or S4A editor effects are implied."}]
+ :verification-plan
+ {:baseline-now "Commands are a plan, not executed baseline. Review tests before execution; no effectful eval/run.cljs."
+  :consumer-in-own-worktree ["bb test" "bb lint"]
+  :after-approved-component-integration
+  ["OIKOS_CLIO_SOURCE=/home/err/spaces/foresight/clio OIKOS_CLIO_DEPS=/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps bb scripts/test_desktop.clj"
+   "OIKOS_CLIO_SOURCE=/home/err/spaces/foresight/clio OIKOS_CLIO_DEPS=/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps bb scripts/test_capability.clj"
+   "Proposed new bb/nbb egress runner: inspect/add only after admission, no package installation; run identical law tests in both runtimes and offline NBB transport tests."
+   "bb test" "bb lint"]
+  :owner-later "Do not execute during discovery. With exact approved toolchain/module cache and separate socket/fixture permission, run narrow real owner tests above, then governed public synthetic trial/client boundary with private fresh state. Broader owner gates go mod verify/make fmt-check/go vet/GOVONE_DEV_MODE=true go test/go build require their own bounded execution review."
+  :deny-network-instrumentation
+  {:payloads [:plain-text :derived-label :ocr-transcript :image :image-url :mixed-content
+              :tool-request :tool-result :tool-text-projection :retrieval :embedding :export
+              :evidence :diagnostic :unknown]
+   :outcomes [:no-session :forged-session :cross-actor :cross-tenant :wrong-ai-profile
+              :missing-or-mutated-provenance :stale-revision :expired-content :deleted-source
+              :expired-session :revoked-key :revoked-role :revoked-local-scope :inactive-profile
+              :gateway-down :dns-failure :timeout-before-send :timeout-after-send :abort-during-body
+              :redirect-301-302-303-307-308 :proxy-poison :dns-rebinding :local-forwarding
+              :policy-deny :classifier-failure :redaction-failure :inspection-failure :audit-failure
+              :queue-full :rate-limit :unknown-status-code :bad-json :oversize :invalid-utf8
+              :malformed-success :inconsistent-mode :direct-provider-retry]
+   :surfaces "Instrument/deny global fetch, node:http/https/net/tls/dgram, DNS resolution, any undici/custom dispatcher, subprocess/spawn/curl, WebSocket, background exporter/telemetry, and gateway/provider second-hop transports. Enumerate imports/call sites so dependency-injected fetch is not the only observed path. Pure test stage opens no sockets. Later exact-local fake HTTP positive is a control, not implicit policy authorization."
+   :assertions "For EVERY payload/outcome pair, assert zero unauthorized dispatch and zero direct-provider attempt, no secret/content in returned errors/log/evidence; unsupported kind denies before resolver/session POST. Authenticated allowlisted local control works; unauthenticated/unallowlisted loopback/private-IP deny; authorized local forwarder cannot reach outside. Real session rejection may reach only the exact gateway, with zero generation/downstream disclosure. Timeout-after-send must not falsely claim zero prior processing."
+   :positive-mode-proof "Use actual owner policy/classifier/redactor/router, never canned allow/placeholder result; capture final serialized outbound bytes in a no-network owner seam. Check canonical placeholders and absence of synthetic marker in BOTH hybrid_redacted and external_approved, plus safe buffered response/session/policy evidence. Those positives are not established by generic.mjs mocks or local trial deny-only policy."
+   :negative-control "When using task-owned fake HTTP later, demonstrate the same endpoint is reachable with a permitted control; DNS/network universally broken is not successful deny gating."}}
+ :genuine-gaps-and-minimal-next-case
+ {:blocks-pure-spec []
+  :blocks-pure-implementation-now ["Task remains incoming; no S6A implementation/import permit. Parent must admit a precise phase and exact frozen component consumption after independent review."]
+  :blocks-real-private-capable-consumer ["Trusted immutable payload resolver/readback/persistence provenance; S2A actual ledger fixture not yet proven, opaque UUID alone insufficient."
+                                        "Authenticated current actor/read scopes and consent issuer where applicable; S4A pure authority-none contract is insufficient, but whole client matrix is unnecessary."
+                                        "Reviewed exact real GovOne service/auth/config and no-second-hop isolation; fixed IP is not proof."
+                                        "Explicit execution scope, operator-resource consent if using operator-owned resources, fresh private trial custody and cleanup ownership."]
+  :blocks-owner-local-positive ["Exact Go1.27.1 toolchain unavailable through inspected offline route; no download/install authorized. Module-cache sufficiency not established."
+                               "Separate explicit socket/runtime/fixture execution permit; no existing process assumed. Actual policy-session/auth behavior not yet exercised by Oikos."]
+  :blocks-full-mode-credit ["Actual owner-authorized no-network positive harness for hybrid_redacted/external_approved, with signed policy and final serialized-byte capture, not supplied by local-only trial."
+                           "All private-capable existing/future Oikos paths mediated or explicitly disabled and instrumented; existing research direct routes are not production qualification."
+                           "Review scope must distinguish closed unsupported modality denial from implemented multimodal redaction."]
+  :not-blockers ["Whole E2/E4/E6, S4B matrix or S3A requalification"
+                 "GovOne image/OCR/tool extension: deny is explicitly acceptable initially, no owner rewrite needed to implement that denial"
+                 "Cloud access, model load/download, paid/free provider experiment: unnecessary for bounded source and actual local signed-policy stub qualification"]
+  :smallest-next-admission "Parent independently review this candidate, then if accepted admit ONLY phase P1 pure egress contract/denial-protocol work against the two pinned producer artifacts. Keep network/source imports governed by that new exact permit; no operational policy authority is supplied by this report. Plan P3 separately using the existing govone-dev synthetic trial once exact offline toolchain and explicit fixture permission exist."
+  :completion-answer "YES: full closure of unsupported image/tool/export paths plus an ACTUAL signed/authenticated GovOne local_only text-session positive can qualify a bounded initial S6A component with no remote cloud. NO: source/client assertions, fake allow responses or local-only trial alone cannot close the previously identified hybrid/external positive-mode finding or establish full runtime/whole-task completion. Parent owns final scope/admission decision."}
+ :reflection {:friction "Broad prior OCR discovery must not become a generic authority-verifier assumption. Real existing signed-policy trial avoids inventing a GovOne bootstrap/kernel, but deliberately local-only trial is not all-mode proof."
+              :lesson "Separate component shape availability, consumer source admission, authentic local positive policy fixture and full all-path/mode qualification."
+              :spore-created false :ledger-writes 0}
+ :authorization-granted-by-this-report :none}

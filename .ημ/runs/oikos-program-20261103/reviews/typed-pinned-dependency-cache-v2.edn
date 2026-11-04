@@ -1,0 +1,55 @@
+{:review/id :typed-pinned-dependency-cache-v2
+ :prior-review "typed-pinned-dependency-cache-v1.edn"
+ :checkout-head "42ef524fb5482a2e2429f3732a6ad88d80529690"
+ :cache-root "/tmp/opencode/oikos-typed-deps-bf60f0e2-1e1f-428e-a6e0-28415755d56c"
+ :allocation-bytes 268435456
+ :file-bytes 2053285
+ :reserve-bytes 4194304
+ :status :incomplete-unqualified
+ :selected-classpath :not-resolved
+ :offline-graph-query :not-run
+ :verified-graph-edges ["test.chuck 0.2.12 -> test.check 1.1.0, clj-time 0.15.2, cljs-time 0.5.2, instaparse 1.4.10" "clj-time 0.15.2 -> joda-time 2.10" "joda-time 2.10: joda-convert 1.2 optional, junit 3.8.2 test; no parent" "clj-java-decompiler 0.3.0 -> procyon-compilertools 0.5.34" "checker :test directly selects test.check 1.1.3 over transitive 1.1.0; offline mediation not verified"]
+ :precise-missing ["checker direct org.clojure/clojure 1.12.5, core.cache 1.2.263, math.combinatorics 0.3.2, tools.namespace 1.5.1, tools.reader 1.6.0, com.nextjournal/beholder 1.0.3, babashka/process 0.6.25, io.github.frenchy64/fully-satisfies 1.12.0: not in isolated cache" "local clj.analyzer direct org.clojure/core.memoize 1.2.281 and org.ow2.asm/asm 9.8: not in isolated cache" "clj-java-decompiler transitive org.bitbucket.mstrobel/procyon-compilertools 0.5.34: not in isolated cache" "remaining effective parents and selected transitive closure not established; offline socket-denied graph verification not performed"]
+ :security-limit "Clojars and older joda-time publisher checksum sidecars are unsigned SHA-1; SHA-256 in this inventory is independently calculated, not publisher authentication. Central joda-time POM SHA-256 sidecar returned HTTP 404; SHA-1 sidecar was verified instead. No claim of signature verification."
+ :acquisition "Individual exact official URLs, no proxy, checksum first, one request per URL, 120 second timeout, stream bounded before writing; 4 MiB held back from artifact budget. No global cache writes. No tests or applications invoked. Aggregate cap not reached."
+ :stop-reason "Closure acquisition and socket-denied qualification remain incomplete; exact missing coordinates above are observed, not an authorization boundary or proven unavailable. This is not a completed cache."
+ :retained-files [
+  {:path "repository/babashka/fs/0.5.33/fs-0.5.33.jar" :bytes 28590 :sha256 "17cd0b899789b58772809833d9af6d43449f130761c7981e68edc3a8b62f5ae3"}
+  {:path "repository/babashka/fs/0.5.33/fs-0.5.33.jar.sha1" :bytes 40 :sha256 "bfc3d0bd8b06e8490f8b40c053a7775c3413575a937e522acc356e9737b0cf08"}
+  {:path "repository/babashka/fs/0.5.33/fs-0.5.33.pom" :bytes 2607 :sha256 "6ea79cc9a10014841b08eea659116dd0558c6009071f5e106acfd568ed94ac97"}
+  {:path "repository/babashka/fs/0.5.33/fs-0.5.33.pom.sha1" :bytes 40 :sha256 "3286f13aaccc192b66958c6974c7470c5334db60445fe0cdd541ee87a4ebb427"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.jar" :bytes 23664 :sha256 "f17dc6d8f9673df9187fcaad2d1852b5520ce13b86a4c1b49657389ddff18e50"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.jar.sha1" :bytes 40 :sha256 "a4661a5e6f83d2c5fbabf41e1626667f868a92b25c7dcf55e0b055e275b3a894"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom" :bytes 2758 :sha256 "10d0b32716b028c6023cd7950c494c8ce3ea23474863d4a83c0e3b09c7c29c65"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom.sha1" :bytes 40 :sha256 "1fe206f4d4accb0d8593e03a16579213005a801d2f12255b7767befebfcb7451"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.jar" :bytes 24085 :sha256 "3d547adf2d403a06e559e3ee1703dc78b10df9d2b9d5b2cb8af362a304942c18"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.jar.sha1" :bytes 40 :sha256 "73db2d2156d5376d07c7ed92731b38fb2f68315c880336ab6a69eaed3e14daa7"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom" :bytes 2581 :sha256 "d1dddac3b5f21738eb7ad2f444597b761b532148187ce590b06fb9e8b1e7aa0c"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom.sha1" :bytes 40 :sha256 "82922f12eb25b89a7c1185b5b865a8fdf816b9f848a494e1a85159ae8ade594d"}
+  {:path "repository/com/clojure-goes-fast/clj-async-profiler/1.7.0/clj-async-profiler-1.7.0.jar" :bytes 1093208 :sha256 "48b3a0bc68ed4cff171098fb11ff744770e9fbb3a3d15e07998c08b2721e1467"}
+  {:path "repository/com/clojure-goes-fast/clj-async-profiler/1.7.0/clj-async-profiler-1.7.0.jar.sha1" :bytes 40 :sha256 "df8626d0586d901975128906cf941aee52feec633442aa3d63809844e2509762"}
+  {:path "repository/com/clojure-goes-fast/clj-async-profiler/1.7.0/clj-async-profiler-1.7.0.pom" :bytes 1246 :sha256 "16364d91e2d1dc5ec9bae091f4b4a823c06871980adb44cded32925dee6378bf"}
+  {:path "repository/com/clojure-goes-fast/clj-async-profiler/1.7.0/clj-async-profiler-1.7.0.pom.sha1" :bytes 40 :sha256 "13122c6e587b9e32d527739f28fedefe36439072bc1d2d7e686fdfd96903e8ac"}
+  {:path "repository/com/clojure-goes-fast/clj-java-decompiler/0.3.0/clj-java-decompiler-0.3.0.jar" :bytes 3936 :sha256 "57acb1dc4cd80a26a7406db69cc63d753000c472b150c468d5badc7eebab77c6"}
+  {:path "repository/com/clojure-goes-fast/clj-java-decompiler/0.3.0/clj-java-decompiler-0.3.0.jar.sha1" :bytes 40 :sha256 "ee2bac26dc98709a7255285567f97fbd21bf5c0f9d467352271442ec3c32282c"}
+  {:path "repository/com/clojure-goes-fast/clj-java-decompiler/0.3.0/clj-java-decompiler-0.3.0.pom" :bytes 1375 :sha256 "d6fefc3281d4d0cf90c39c5374fbf3f6ad0458e9dd599a573ecf73fb1468d4e3"}
+  {:path "repository/com/clojure-goes-fast/clj-java-decompiler/0.3.0/clj-java-decompiler-0.3.0.pom.sha1" :bytes 40 :sha256 "57c8f147bbd326a899bf2c472271bff61989037a60ecf8cd1385fc46786623af"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar" :bytes 34020 :sha256 "e35dc55d4c301dbd443b3adec50c25f18842b842a086b0568c472700fe940eab"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar.sha1" :bytes 40 :sha256 "4a9a0289c25cf9a1e22b53c912689f9a585e3151605cb18b223e97c2598bf564"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom" :bytes 3302 :sha256 "bfee9cd881d92c0ce049388dc36dba7f4b3f158dba00a57e99b9d443259a8877"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom.sha1" :bytes 40 :sha256 "85422eb3eefa41142ba59d08228b7a9f745494409b2879abba36057385bdd8d1"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.jar" :bytes 99332 :sha256 "a1d3258809d2f327376c9168a5677f6347eb999079cce99e014c926ab1d15e48"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.jar.sha1" :bytes 40 :sha256 "b70c38497f25d2e5c07fbb03b35c546e65dbcb840bc8c6620835d2932963d1c9"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom" :bytes 4263 :sha256 "c0819c1edc146952049d04f9cdbf32d0d839ec823c7337a4fc6f7d868958e476"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom.sha1" :bytes 40 :sha256 "0306d24fbadede45a8493ff40ffb535b9deb0401ecd1d51a95f766c88fc7d6fb"}
+  {:path "repository/joda-time/joda-time/2.10/joda-time-2.10.jar" :bytes 640835 :sha256 "c4d50dae4d58c3031475d64ae5eafade50f1861ca1553252aa7fd176d56e4eec"}
+  {:path "repository/joda-time/joda-time/2.10/joda-time-2.10.jar.sha1" :bytes 40 :sha256 "bb6484ee784739df63d87e44282d1f67b20d1b09e0f5567d1875239c01ae6334"}
+  {:path "repository/joda-time/joda-time/2.10/joda-time-2.10.pom" :bytes 37633 :sha256 "3ea2bef98b1d0a3a67647e7590db8a002bdd787832f9f8a44a6a46ea46de76b4"}
+  {:path "repository/joda-time/joda-time/2.10/joda-time-2.10.pom.sha1" :bytes 40 :sha256 "346b4d7273ba2b1112cdc3e676d25497cd4d528e802632a697fff3af00b832b0"}
+  {:path "repository/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom" :bytes 7201 :sha256 "0993676876081f491ba5af82fa6b5a037a3bee3a125a02d6d5e27aa29f356787"}
+  {:path "repository/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom.sha256" :bytes 64 :sha256 "d646f7b5691ff7a5aba2979a2032964e2839a2c891466d8c000544ced8b18022"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.jar" :bytes 40187 :sha256 "8b0637b13982734742fb3f4d129f0a9d9e3d752b1aec0c6f65ced4555f72b649"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.jar.sha256" :bytes 64 :sha256 "f853ece6284fa459ee22d547571ede9f70d6414c150b023d8e1585436ec0fbdd"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.pom" :bytes 1630 :sha256 "a4f21feb2386fbfcd42a52200d14c0f78bbef6899f748ccefcb0a4499e0fdec5"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.pom.sha256" :bytes 64 :sha256 "0a577ed7eaa261172fbca268c79ee71ca348dff280f7b0afdaf451ddde8760b6"}
+ ]}

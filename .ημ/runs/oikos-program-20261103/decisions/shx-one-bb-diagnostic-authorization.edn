@@ -1,0 +1,13 @@
+{:decision/id :shx-one-bb-diagnostic-authorization-20261104
+ :source :question-tool-explicit-user-answer
+ :question "May I run one instrumented, agent-owned BB stderr diagnostic, with no matrix retries or release credit?"
+ :answer "Allow one diagnostic"
+ :source/head "6d9bc02fb428ae54db63f1beb0b992da8aab11bc"
+ :plan "../reviews/shx-cleanup-root-cause-v1.edn"
+ :scope [:one-stderr-case :observation-only :owned-identity-bound-processes
+         :retained-bounded-predicate-and-control-timeline]
+ :limits {:internal-spawn-deadline-ms 5000 :cleanup-allowance-ms 1000
+          :external-watchdog-ms 15000 :matrix-retries 0}
+ :not-authorized [:deadline-relaxation :production-change :warning-suppression
+                  :dependency-relock :operator-resources :model :service :release-credit]
+ :qualification "A normal protocol-error result would be inconclusive about historical cleanup uncertainty, not grounds to retry until passing or mark the incomplete BB matrix complete."}

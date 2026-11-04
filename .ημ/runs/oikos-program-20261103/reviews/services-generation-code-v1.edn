@@ -1,0 +1,57 @@
+{:review/id :services-generation-code-v1
+ :kind :independent-code-security-os-review
+ :verdict :request-changes
+ :scope :private-cooperative-linux-fixture-source-only
+ :candidate {:head "1839a961bb1295caefbf6c6fa45df7d60239b690"
+             :tree "e78a2cd73ec6d6b7af4d55b1cb487a4fced3f582"
+             :implementation-parent "b39d8058ad886879304bd9866e537fdcbd418edf"
+             :parent-tree "dfa21e23d382097871551b2778ebfa03310ded7f"
+             :subsequent-diff-only "docs/reports/local-generation-final-verification-20261104.edn"
+             :spec-sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+             :existing-untracked ["scripts/__pycache__/"]}
+ :source-pins-verified {"edge" "e65ac405697110fd4acfd2febc83446e287982dc3e33325dc1d071687596efc4"
+                        "facade" "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+                        "runner" "8c68a77b303b5b019a4e40713934fa5664c7ce71e5a905b6a98c1926e886bce9"
+                        "wire" "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"
+                        "validator" "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+                        "laws" "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+                        "pure" "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"}
+ :findings
+ [{:id "SGC-P1-1" :severity :p1
+   :title "A preview request performs crash compensation before request decoding"
+   :locations ["scripts/local_generation_runner.py:58-71" "scripts/local_generation_fs.py:1206-1224" "docs/local-generations-v1.md:217-228" "docs/local-generations-v1.md:333-350"]
+   :observed "In a new private owner fixture an approved apply worker was SIGKILLed at durable-intent. A separate real BB facade invocation carrying a valid preview request returned exit 4, action apply, status failed-restored and target_writes 10. The retained journal was changed to restored. Thus a preview triggered actual compensation writes rather than zero target/state writes; decoding and closed shape checking of nonempty request bytes also happens after those writes."
+   :fixture "/tmp/opencode/oikos-review-preview-_lr5imzv"
+   :causal-path "runner reads nonempty request bytes, then calls engine.recover unconditionally before wire.decode and before distinguishing preview/check from a mutating request; successful compensation returns immediately rather than processing that request."
+   :contract-tension "The frozen plan also requires startup recovery before admission. Reconcile this explicitly without granting writes to preview/check or malformed request input: for example a distinct recovery-only invocation before retrying the read; do not silently weaken either contract."
+   :required-regression "Real fixed facade, fresh process, valid incomplete capsule, both preview and check plus duplicate-key/malformed input: independently record native mutations and assert zero request-triggered writes; separately run owner-policy-only recovery and prove actual compensation, then retry the read and verify its normal result. Preserve no-original-plan recovery and fresh-process positive controls."}
+  {:id "SGC-P2-2" :severity :p2
+   :title "Denied preview reports absence after actually observing an existing selection"
+   :locations ["scripts/local_generation_fs.py:485-509" "docs/local-generations-v1.md:386-388"]
+   :observed "New private fixture first successfully applied generation a. Preview for b with deliberately wrong expected_generation returned denied/current-drift, target_writes 0, before null and after null, although current actually selected a. The denial occurs after _observe obtained that selection."
+   :fixture "/tmp/opencode/oikos-review-result-simuhb4c"
+   :impact "A consumer receives false apparent absence for a known prewrite state rather than before=after=observed selection; this is distinguishable from a held result whose null after means unknown."
+   :required-regression "Pair actual apply-a positive with stale expected-generation preview; independently assert unchanged snapshot and exact observed a in both before and after. Preserve uncertainty rather than inventing a selection if observation itself fails."}]
+ :actual-verification
+ {:environment {:tests 134 :failures 0 :errors 0 :seconds 98.049 :caddy-sha256 "d3491373b2d78e4eaa3f498b42852d399d404b0df3f274bbee66d62c12084be0"}
+  :portable {:bb "8 tests, 137 assertions, 0 failures, 0 errors" :nbb "8 tests, 137 assertions, 0 failures, 0 errors" :clj-kondo "0 errors, 0 warnings"}
+  :jvm {:cli "/tmp/opencode/oikos-test-tools/clojure-cli-1.12.5.1664-bc3e31cd-0a7d-464f-9cc0-a482c6a3f72a/private/bin/clojure"
+        :launcher-sha256 "48d008bbc38fbb6ba55f7c913ff914163707cdd4e0366b05ff436c62289b583f"
+        :new-isolated-evidence "/tmp/opencode/services-code-review-ICdrZS"
+        :network "Inherited libseccomp EPERM denied AF_INET, AF_INET6 and AF_UNIX; corrected JVM probe confirmed Seccomp=2, NoNewPrivs=1, root IOException Operation not permitted."
+        :checks ["-M scripts/check-edn-contracts.clj: exit 0, 370 resources, empty stderr"
+                 "-M digitalocean/services/knoxx/document-anchor-inventory.cljc: exit 0, 19 entries, empty stderr"
+                 "-M test/services/local_generation_test.cljc: exit 0, 8 tests/137 assertions, empty stderr"]
+        :warning "The reused runner's first auxiliary JVM probe failed because slurp on procfs calls FileInputStream.available; its failed output is retained. Corrected NIO probe executed separately and passed. Required gates themselves passed unchanged. No download or guessed offline flag."}
+  :native-aggregate {:state :passed-preservation-adjusted
+                     :shell-id "sh_1a41db21b001fphurvM8UblpJl"
+                     :fixture-root "/tmp/opencode/services-review-native-c1Y6yP"
+                     :method "Same unittest aggregate with TemporaryDirectory.cleanup detached and a new TMPDIR to retain test fixture trees."
+                     :actual-output "Ran 39 tests in 1017.842s; OK. Native SIGKILL occurrence matrix: 642, checked 8, failed-restored 248, held 386."
+                     :prior-attempt "First aggregate was stopped after eight tests upon identifying test-owned TemporaryDirectory cleanup conflicting with the explicit preserve-all-scratch instruction; no result claimed. Environment suite already ran with its own normal test cleanup before that conflict was identified."}
+  :independent-positive-controls "Actual apply a in the second retained fixture; real durable-intent owned-worker SIGKILL and actual recovery in the first."
+  :not-run "Unrelated full production/Docker/nginx workflows, deployment, services, operator files, model or provider calls. No release or consumer acceptance."
+  :implementation-report-claims "The implementation report's 39 native tests and 642 kills are now independently reproduced by the preservation-adjusted aggregate above."
+  :race-matrix-warning "Final ancestor/lock/destination regression at test_local_generation_fs.py:375-406 exercises before transaction-mkdir only; it is not by itself proof for every final write-edge barrier required by the frozen matrix. No claim of a demonstrated additional defect without a positive paired reproduction."}
+ :retention "Preserve both named new fixture trees, isolated JVM evidence, active aggregate fixture root and existing untracked caches. No deletion, commit, push, board, ledger, model or installed service effects authorized."
+ :handoff "Request same-author fix and exact new-head independent recheck. No source approval, release authority, native provider review, installed promotion or S1B credit is conferred."}

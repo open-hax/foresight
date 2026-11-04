@@ -1,0 +1,34 @@
+{:permit/id :s2b-offline-collector-source-v1
+ :authority :parent-source-only-admission-after-independent-plan-and-composition-review
+ :task "59774be2-cc61-4708-9030-8b7b42935ec3"
+ :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b"
+ :accepted-base "fed4e30272cc1186de14bcc708b3efc9736e3139"
+ :accepted-tree "429d9dde803b6d12ee07f692872a1b0dcba31ad1"
+ :planning [{:path "../reviews/s2b-collector-source-plan-v2.edn"
+             :sha256 "0b0f6ce97fd978b03e743463cb6944ebc0efef139d0152ec640e543317962608"}
+            {:path "../reviews/s2b-collector-source-plan-v3.edn"
+             :sha256 "0f8307256de2ee6a3e87a4c16ee4295166d7854a5cc828160f8c5900707482cf"}]
+ :independent-plan-review {:path "../reviews/s2b-collector-source-plan-fix-review-v3.edn"
+                           :sha256 "d511a4b24588a476cdb20ae77c8226b59878f52d4e8ff814e520b743f0610a2a"}
+ :independent-composition {:path "../reviews/s2b-accepted-base-composition-v1.edn"
+                          :sha256 "f75be6e4c45e26eb1ef3069e3c5e18fb5d4f5be99991477444cdf44c3ac4d172"
+                          :base-paths 63 :frozen-pins 13 :all-match true}
+ :order [:lawful-rheos-source-phase-admission :meaningful-red :portable-law-and-inert-edge-green
+         :exact-head-independent-code-review :parent-component-acceptance]
+ :only-add ["docs/contracts/i3-collector-v1.edn"
+            "src/oikos/law/i3_collector.cljc" "src/oikos/infra/i3_collector.cljs"
+            "test/oikos/law/i3_collector_test.cljc" "test/oikos/infra/i3_collector_test.cljs"
+            "test/oikos/i3_collector_runner.cljc" "test/oikos/i3_collector_edge_runner.cljs"
+            "scripts/test_i3_collector.clj"]
+ :modify [] :delete []
+ :bounds {:frame-utf8-bytes 65536 :depth 32 :nodes 4096 :tree-nodes 512
+          :windows 128 :workspaces 32 :queue 256 :attempts 3
+          :overall-ms 5000 :fixture-lease-ms 1000 :max-safe-integer 9007199254740991}
+ :required "P1 is deterministic, data-only synthetic scheduling. Separate proven fake admission, delayed ACK delivery and fixture lease; account for a stale accepted head without restoring freshness, insert lawful gaps and require head resolution for unknown outcomes. Reuse frozen event validation and replay. Preserve all 63 base paths/modes and thirteen pins. Raw host values refuse before traversal; the primitive bounded JSON edge creates owned data. All prepared intents and fixture freshness carry no operational authority."
+ :verification ["bb scripts/test_i3_collector.clj" "bb test"
+                "bb scripts/test_desktop_wire.clj" "bb scripts/test_spaces.clj" "bb lint"]
+ :not-authorized [:native-i3 :real-connector :timers-or-listeners :real-owner-append
+                  :private-fixture-adapter-entry :callbacks-as-capabilities :personal-data
+                  :model-or-service :installed-promotion :new-dependencies]
+ :completion-held [:actual-nested-i3-oracle :native-ordering-and-coverage-proof
+                   :authenticated-real-head-resolution :operational-currentness :whole-s2b :epic-e2]}

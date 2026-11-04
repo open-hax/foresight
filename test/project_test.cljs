@@ -13,7 +13,7 @@
   (let [agents (fs/readFileSync "AGENTS.md" "utf8")
         catalog (edn/read-string (fs/readFileSync "config/quality-gates.edn" "utf8"))]
     (doseq [path ["kanban-orchestrator" "clio" "chat-ui" "rheos"
-                 "session-mycology" "sol" "osmos" "receipt-river" "axxium"]]
+                 "session-mycology" "sol" "osmos" "receipt-river" "axxium" "oikos"]]
       (is (str/includes? agents (str "| `" path "` | open-hax/" path " |")) path)
       (is (seq (get-in catalog [:catalog/repositories path :repository/gates])) path))))
 

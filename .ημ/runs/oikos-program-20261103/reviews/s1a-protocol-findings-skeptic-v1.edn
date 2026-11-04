@@ -1,0 +1,99 @@
+{:review/version 1
+ :review/kind :independent-exact-two-protocol-findings-skeptic
+ :review/date "2026-11-03"
+ :scope "Exactly the two supplied new protocol candidates. Not a full audit, exhaustive scheduling exercise, or re-review of the earlier five code findings."
+ :bindings
+ {:repository "/home/err/spaces/foresight/oikos/.worktrees/review/oikos-s1a-protocol-7896ee8"
+  :cwd "/home/err/spaces/foresight/oikos/.worktrees/review/oikos-s1a-protocol-7896ee8"
+  :head "7896ee8709a9461ee54e2d39739c5ee8ce1a3157"
+  :head-observation "git rev-parse HEAD"
+  :worktree-status-clean true
+  :candidate-report ".ημ/runs/oikos-program-20261103/reviews/s1a-protocol-probes-v1.edn"
+  :sha256 {"src/oikos/infra/bb_render.cljs" "6d2b36287dbab1ba88666e7edca5a19c351c2e05e31afb7f4c1e1463f91c2a40"
+           "src/oikos/law/frame.cljc" "566edcc427a86c144889df8c183537c0c85ab43872426bba50c57a7122ee2b78"
+           "docs/specs/s1a-generation-contracts.md" "d518057a08e5ebd81c8a72ce482bf7ea58cfcd59de1cae30a6e874d5a3b1977f"}}
+ :summary {:supplied 2 :confirmed 2 :refuted 0 :disputed 0 :additional-findings 0}
+ :execution
+ {:method "Fresh execution of saved :reproducible-probes source-lines, joined with LF and passed in memory to nbb -cp src:test -e. Override the stale saved cwd with the frozen review worktree above."
+  :driver "bb with clojure.edn, clojure.string and babashka.process reads the parent report and invokes NBB; no generated source files."
+  :instrumentation "Replace probe Date.now calls with performance.now for monotonic elapsed measurements; add request/wire byte counts, cleanup-hold snapshots and BOM prefix-byte/close observers. Actual product source and validation functions are unchanged."
+  :real-process-boundary "Spawn observers call the original child_process.spawn with the actual pinned /usr/local/bin/bb. Only test-owned trusted argv and, for the echo case, child stdin bytes are substituted. No fake ChildProcess, validator, parser, hash function or accept-response result is used."
+  :fixtures "Only synthetic in-memory requests, response bytes and fixed BB -e fixture source. Frozen repository files/executable are read-only. Child cwd and relative load-file are pinned to the frozen worktree; child environment comes from the adapter's explicit synthetic fixture inputs."
+  :probe-process-exits {:deadline-bb-echo 0 :stdout-bom 0 :stderr-bom 0 :direct-bom-controls 0}
+  :outer-probe-stderr-empty true
+  :new-source-or-scratch-files false
+  :mutable-feature-worktree-read false
+  :services-models-personal-reads-package-installs false
+  :board-ledger-pr-commit-native-queue-changes false
+  :persistent-writes [".ημ/runs/oikos-program-20261103/reviews/s1a-protocol-findings-skeptic-v1.edn"]
+  :full-suite-or-lint-rerun false}
+ :findings
+ [{:id :s1a-protocol/deadline-excludes-blocking-parent-validation
+   :disposition :confirmed :priority :P1 :confidence 1.0
+   :code [{:file "src/oikos/infra/bb_render.cljs" :lines [65 71] :reason "Same-event-loop timer is cleared when finish! publishes the result."}
+          {:file "src/oikos/infra/bb_render.cljs" :lines [112 126] :reason "The close handler synchronously validates acceptance and commits completion without comparing elapsed time to a deadline."}
+          {:file "src/oikos/law/generation.cljc" :lines [265 279] :reason "Acceptance synchronously revalidates the request, parses the frame and validates every artifact."}]
+   :frozen-contract [{:file "docs/specs/s1a-generation-contracts.md" :lines [313 319] :requirement "5000 ms wall deadline measured from spawn; validate every artifact before acceptance."}
+                     {:file "docs/specs/s1a-generation-contracts.md" :lines [329 335] :requirement "No late callback publishes artifacts; deadline yields a terminal Result by 6000 ms including cleanup."}]
+   :reproduction
+   {:saved-probe :deadline-bb-echo
+    :saved-source-lines [153 163]
+    :payload "f/payload with TEST_TOKEN plus 128 synthetic ENV_<i>_<88 A characters> available-env names; 32 dev config targets named target-0 through target-31."
+    :request-id "validation-deadline"
+    :payload-sha "ad97f7cde1c24e5be2fd0770472131b288ec013073410ebb036017b631878d9e"
+    :child "Actual BB reads at most 1048577 stdin bytes and immediately writes/flushes those exact bytes to stdout. Feed the precomputed valid response through the test-owned stdin substitution."
+    :acceptance "Unmodified adapter request checks, streamed caps, close handling and full g/accept-response execute against the valid response."
+    :measurement "performance.now timestamps immediately after original spawn returns, in the independently registered close observer, and at Promise settlement. Pre-spawn request/render computation is excluded. Stamping after spawn return conservatively undercounts elapsed time."}
+   :observed
+   {:request-utf8-bytes 19930 :request-cap 262144
+    :response-utf8-bytes 440243 :stdout-observed-bytes 440243 :stdout-cap 1048576
+    :targets 32 :target-cap 64
+    :spawn-to-close-ms 11.992944999999963
+    :spawn-to-settle-ms 11630.367805999998
+    :close-to-settle-ms 11618.374861
+    :status :ok :code nil :close-ack true :cleanup-holds []}
+   :counterargument "A slow real renderer may correctly time out; perhaps the observed delay is pre-spawn preparation or an unrelated S1B effect-edge obligation."
+   :resolution "The fresh measurement excludes all preparation and starts at actual spawn. The real BB child closes after about 12 ms, yet unmodified parent verification returns :ok after about 11.63 s. The 5 s acceptance deadline and 6 s terminal bound are S1A's own frozen process contract, independently of S1B or writes. One observed late :ok is sufficient; no exhaustive schedule claim is needed."
+   :repair-direction "Do not rely solely on a timer on the validation event loop. Keep parent verification interruptible/off-thread or prove/enforce a bounded work budget, and recheck a monotonic deadline before publishing success. A final elapsed-time check alone prevents late :ok but does not restore the six-second terminal bound."
+   :regression-direction
+   {:test "Real fast BB below-cap 32-target echo using this exact fixture; measure from actual spawn, not start! entry."
+    :assert "No :ok after 5000 ms; terminal Result by 6000 ms including verification and cleanup; no accepted artifacts after timeout. Retain close/cleanup observations."
+    :deterministic-addition "Exercise deadline expiry while parent acceptance is pending and before success publication, with an independently progressing clock/interruptible verifier. Never treat a child-sleep timeout test or post-hoc late error as proof of the full terminal bound."
+    :limit "This skeptic ran one fresh real-BB schedule, not exhaustive timing/cancellation enumeration. Absolute durations are host-dependent, while the measured breach and causal blocking path are direct observations."}}
+  {:id :s1a-protocol/textdecoder-erases-bom-bytes
+   :disposition :confirmed :priority :P2 :confidence 1.0
+   :code [{:file "src/oikos/infra/bb_render.cljs" :lines [87 94] :reason "Byte counts are collected, but default TextDecoder consumes a leading UTF-8 BOM."}
+          {:file "src/oikos/infra/bb_render.cljs" :lines [117 126] :reason "Only decoder-normalized strings reach accept-response; nonzero stderr byte count is not checked on success."}
+          {:file "src/oikos/law/frame.cljc" :lines [18 18] :reason "BOM is not permitted intertoken whitespace."}
+          {:file "src/oikos/law/generation.cljc" :lines [265 277] :reason "Direct validator rejects BOM-prefixed frame and nonempty stderr when the BOM character is preserved."}]
+   :frozen-contract [{:file "docs/specs/s1a-generation-contracts.md" :lines [290 296] :requirement "Exactly one specified UTF-8 EDN frame followed by EOF."}
+                     {:file "docs/specs/s1a-generation-contracts.md" :lines [317 324] :requirement "No prefix banners/trailing non-whitespace; success stderr must be empty."}]
+   :reproduction
+   {:saved-probe :bom-channel :saved-source-lines [138 147]
+    :channels [:stdout :stderr]
+    :child "Actual BB -e writes/flushes byte-array [239 187 191] to the selected System/out or System/err, then load-file scripts/render.clj from the frozen cwd. The unchanged real helper produces the valid response."
+    :observations "First raw bytes and total stream lengths are recorded before decoder normalization. Elapsed time is monotonic spawn-to-settlement."}
+   :observed
+   [{:channel :stdout :prefix [239 187 191] :stdout-bytes 1120 :stderr-bytes 0
+     :spawn-to-settle-ms 197.05927399999996 :status :ok :code nil :close-ack true :cleanup-holds []}
+    {:channel :stderr :stderr-prefix [239 187 191] :stdout-prefix [123 58 112]
+     :stdout-bytes 1117 :stderr-bytes 3
+     :spawn-to-settle-ms 192.01101999999992 :status :ok :code nil :close-ack true :cleanup-holds []}]
+   :independent-direct-controls
+   {:normal-reader-status :ok :normal-accept-status :ok
+    :bom-prefix [239 187 191] :bom-reader-status :error :bom-accept-code :protocol-error
+    :stderr-bom-bytes 3 :stderr-bom-accept-code :protocol-error
+    :default-decoder-erases-stdout-prefix true :default-decoder-erases-entire-stderr true}
+   :counterargument "A BOM can be valid UTF-8 and decoded artifact/content validation still succeeds."
+   :resolution "UTF-8 validity is not sufficient for this exact framing contract. The direct restricted reader rejects the original prefix, and the explicit empty-success-stderr rule is violated by three observed bytes. Decoder normalization hides both before unchanged validation. No execution or disclosure is asserted."
+   :repair-direction "Preserve BOM during decoding, for example TextDecoder ignoreBOM:true, so the restricted reader sees and rejects it. Independently require streamed stderr byte count zero for success instead of relying on normalized decoded text."
+   :regression-direction
+   {:test "Actual real-helper success with EF BB BF prepended only to stdout; independent real-helper success with exactly EF BB BF on stderr."
+    :assert "Both return :protocol-error without artifacts. Assert actual raw prefix/three stderr bytes, direct-reader/transport rejection parity, and normal no-BOM success."
+    :limit "The two concrete channels were exercised independently; no exhaustive chunking or broader Unicode normalization audit is claimed."}}]
+ :credits {:readiness false :task-completion false :prerequisite-admission false
+           :implementation-acceptance false :native-approval false :hosted-review-credit 0
+           :model-agreement-as-proof false}
+ :handoff "Both new protocol candidates independently confirmed at frozen 7896ee8. Parent owns authorization of these two fixes, their exact-head regression verification and any synthesis; this report grants no approval or completion."
+ :reflection {:lesson "A same-event-loop timer cannot bound blocking verification, and decoding must not erase bytes used by protocol admission invariants."
+              :ledger-or-spore-written false :owner :parent-coordinator}}

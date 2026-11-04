@@ -1,0 +1,35 @@
+{:correction/version 1
+ :scope :incoming-planning-only
+ :source/head "f3b039c07cd03e11ccdbfbdb36349d814ab02225"
+ :sources {:pr :F153 :codex 4458493223 :coderabbit 4458522612}
+ :authority "Authored future acceptance and official Rheos dependency/comment operations only; not implementation, native settlement, approval, board validation or readiness."
+ :config "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/openhax.kanban.edn"
+ :ownership {:s2a {:points 5 :estimate-changed false
+                   :includes [:initial-closed-versioned-contract :synthetic-boundary-fixtures
+                              :independent-review :exact-artifact-handoff :clio-admission-and-replay]
+                   :excludes [:knowledge-retention-implementation :general-privacy-engine]}
+             :s5a "Consumes exact independently reviewed S2A version/digest/source/review evidence before admission; no S5B artifact."
+             :s5b "After S5A, consumes/reviews same baseline; only separately reviewed compatible prospective extensions, no historical rewrite or retroactive qualification."}
+ :artifact-anchors {:s2a "s2a-safe-reference-contract-and-handoff"
+                    :s5a "s5a-safe-reference-consumer-gate"
+                    :s5b "s5b-safe-ledger"
+                    :epics [:e2/acceptance-criteria :e5/acceptance-criteria]}
+ :edge-change {:consumer :s5a :added-prerequisite :s2a
+               :before [:s2b :s7a] :after [:s2a :s2b :s7a]
+               :official-command "eta-mu kanban frontmatter 0e124c65-694e-44f1-9959-ee83e81ca22b --set dependency=93a76dad-678a-4980-86fb-ba0fbb5e8203,59774be2-cc61-4708-9030-8b7b42935ec3,0db50b53-6c7a-489a-bff9-048d57ce4cbb --config <absolute coordinator config>"}
+ :verification {:baseline-and-after {:project-tests {:tests 12 :assertions 171 :failures 0 :errors 0}
+                                     :workspace-tests {:tests 24 :assertions 122 :failures 0 :errors 0
+                                                       :note "Intentional error-path fixtures print spawn ENOENT/FAIL/SKIP; suite exits 0."}
+                                     :lint {:command "clj-kondo --lint scripts test" :errors 0 :warnings 0}}
+                :official-read-task {:count 24 :incoming 24 :child-vectors-matching-workflow 16}
+                :graph-analysis {:authority :derived-not-board-validation
+                                 :children 16 :edges-before 26 :edges-after 27 :acyclic true
+                                 :new-edges 1 :s5b-future-predecessor false}
+                :ledger {:historical-prefix-bytes 380034
+                         :historical-prefix-sha256 "4c2a70c5ded21736fcef51e1179013e1376499adb0bc495a67543a693b66bc3c"
+                         :exact-prefix-preserved true :official-events-appended 6
+                         :events {:dependency 1 :comments 5}}
+                :diff-check :pass}
+ :holdbacks [:no-status-transition :no-implementation :no-commit :no-push :no-github-write
+             :no-service-or-model-operation :synthetic-dev-only :zero-spend :publication-held]
+ :reflection "The explicit DAG was acyclic but artifact ownership implied a future dependency. Move initial contract ownership and exact consumer review gates together; verify official dependency readbacks without treating custom graph analysis as board validation. No policy question remains."}

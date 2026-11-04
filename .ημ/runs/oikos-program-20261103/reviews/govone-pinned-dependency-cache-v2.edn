@@ -1,0 +1,40 @@
+{:report/id :govone-pinned-dependency-cache-v2
+ :status :partial-stopped-missing-original-checksums
+ :authorization ".ημ/runs/oikos-program-20261103/decisions/pinned-public-dependency-cache-authorization.edn"
+ :owner {:path "/home/err/devel/orgs/mojomast/govone"
+         :head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+         :go-mod-sha256 "d98ac1461da72048026c141cd1375421c6934e6c3937cc5048c296c594b218dd"
+         :go-sum-sha256 "8991f8bfbeccb3e31df27a42f4901a5a0a790e5c2937c4c55da93f5d30db9a90"
+         :manifest-git-status :clean}
+ :scratch {:path "/tmp/opencode/oikos-govone-deps-66a5b10a-0ac0-46f3-bf88-26763dd3d829"
+           :retained true :logical-regular-bytes 122404 :files 59 :directories 122
+           :rounded-accounted-bytes 839680 :reserved-bytes 16777216
+           :accounted-plus-reserve 17616896 :allocation-bytes 805306368
+           :accounting-observed-before-report true
+           :retention "Preserve all files, including partial results; no backup/deletion authority."}
+ :broker {:path "budget_broker.py" :sha256 "18deb9a860fffc6fe473c7fa3cbeef2f91ac8b260c886c71324da1df11e5537f"
+          :status :implemented-and-used :execution "python3 -B budget_broker.py"
+          :accounting "Walk cache and round regular files and directories to 4096 bytes before writes, with 16 MiB headroom for Go-generated metadata. Single cooperating writer; not an OS quota. Broker source and logs reside inside allocation."
+          :network "HTTPS proxy.golang.org with ambient proxies disabled; redirects denied for metadata. ZIP redirect logic restricts HTTPS storage.googleapis.com signed .zip object; that path was not exercised."
+          :limits "Metadata response at most 128 KiB each and aggregate under 2 MiB for new metadata; socket timeout 30 seconds. Go output RLIMIT_FSIZE 1 MiB per stream; 120 seconds per Go invocation."
+          :qualification "ZIP and extraction implementation was not exercised or independently reviewed. No claim of complete safe source acquisition. A socket timeout is not a guaranteed whole-request 120-second wall-clock deadline."}
+ :metadata {:verified-go-mod-files 45 :new-requests 44 :new-response-bytes 8746
+            :prior-verified-requests 1 :matched-h1 true
+            :inventory "/tmp/opencode/oikos-govone-deps-66a5b10a-0ac0-46f3-bf88-26763dd3d829/broker-inventory.json"
+            :inventory-sha256 "418b4511e4cf88e8f27c5d9145b2cbc27d7618bc364d391a61dadc4ff72adc58"
+            :rerun-inventory "broker-inventory-v2.json"
+            :rerun-inventory-sha256 "7a41ebc1a3ca69535a70d65cbe6bad39f583c7cb3d2343d7ec2a3ffa73d58abc"}
+ :offline {:tool "/tmp/opencode/oikos-test-tools/go-1.27.1-ad3b4bab-a5d9-4328-8f90-e7b13f65cade/go/bin/go"
+           :tool-sha256 "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624"
+           :environment "GOTOOLCHAIN=local GOWORK=off GOENV=off GOVCS=*:off GOPROXY=off GOSUMDB=off GOTELEMETRY=off; x86_64 seccomp denies socket-related syscalls, inherited by Go."
+           :strict-list {:command "go list -mod=readonly -m -json all" :exit 1 :result "module lookup disabled by GOPROXY=off; selected .info files absent"}
+           :diagnostic-list {:command "go list -e -mod=readonly -m -json all" :exit 0 :result "provisional diagnostic graph, containing module lookup errors; not a qualified closure"}
+           :verify :not-run :source-zips 0 :source-extractions 0}
+ :blocker {:coordinate "github.com/google/go-cmp@v0.6.0"
+           :reason "Diagnostic selected graph names this module, but the immutable original go.sum contains neither its go.mod nor source h1. Required policy is stop, not acquire an unverified checksum or change a pin. Since graph has missing lookup errors, selection remains provisional."
+           :evidence ["graph2.stdout" "main/go.sum" "modcache/cache/download/golang.org/x/tools/@v/v0.48.0.mod" "modcache/cache/download/golang.org/x/exp/@v/v0.0.0-20250620022241-b7579e27df2b.mod"]}
+ :verification {:syntax "python3 -m py_compile budget_broker.py (exit 0); updated version: python3 -B -c compile(...) (exit 0)"
+                :execution "Two bounded broker invocations completed with recorded diagnostic stops; no build or tests were authorized or run."
+                :owner-manifests "Owner and scratch go.mod/go.sum hashes match before and after; owner manifest paths git-clean."}
+ :effects "No product code, lockfile, global cache, application, tests, build, model, service, board, ledger, PR, commit or push."
+ :next "Escalate the missing original checksum and incomplete diagnostic graph; do not extend trust or change manifests under this authorization."}

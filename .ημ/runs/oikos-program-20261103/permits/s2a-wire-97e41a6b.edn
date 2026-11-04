@@ -1,0 +1,31 @@
+{:permit/id :s2a-private-wire-97e41a6b
+ :authority :parent-authenticated-independent-code-review-and-scoped-fixture-continuation
+ :source "97e41a6b733f01e1b409f0f68f1efaf9122f5177"
+ :decoder {:path "src/oikos/infra/desktop_wire.cljc"
+           :sha256 "a1e6a3d4de9c003a58c7e27680eb250b7ec9ef04f12ef44fd3bc1daf8b5e55e2"}
+ :review {:path "../reviews/s2a-wire-fix-review-v2.edn"
+          :sha256 "46c9cffc0afd5976b7b4c751d2a46828c3c836bc4b2ad207d4c6568508526003"
+          :verdict :approved :remaining-findings []
+          :original-findings-settled [:s2a-wire/namespaced-key-alias-collapse
+                                      :s2a-wire/raw-partition-container-metadata-laundering]}
+ :reviewed-files
+ {"src/oikos/infra/desktop_wire.cljc" "a1e6a3d4de9c003a58c7e27680eb250b7ec9ef04f12ef44fd3bc1daf8b5e55e2"
+  "test/oikos/infra/desktop_wire_test.cljc" "1693781e94f33dfcd62b76f284d279bee71ccc74f76fe5e07cf00e5222d8356d"
+  "scripts/test_desktop_wire.clj" "73863662bae3d0f75a55cabcedbe172abfb65de3599c79d5adcc9aa8d0f21289"
+  "test/oikos/desktop_wire_runner.cljc" "3c016bbef3533a28c3574aad7cefe1853486cfe5c3ffd13f0de444fffc022898"}
+ :independent-tests {:bb [15 347] :nbb [15 347]
+                     :existing-tests :passed :lint-errors 0 :lint-warnings 0}
+ :frozen-contract-permit "s2a-contract-c399b60e.edn"
+ :frozen-contract-permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+ :clio-owner "788cdd3434615a7932b924e68520dbf7f88408c2"
+ :allowed-next [:implement-new-integration-adapter
+                :owned-synthetic-schema-history-and-ledger-fixture-writes
+                :actual-owner-locked-append-and-fresh-process-replay-tests
+                :exact-envelope-retry-and-causal-rejection-tests]
+ :constraints "Preserve the nine frozen files and four reviewed wire files. Actual integration adapters are not approved by the decoder review: implement/test them only in newly allocated owned synthetic fixture directories, then obtain independent exact-head integration review before source acceptance or any consumer claim. New decoder/profile changes invalidate this permit and require replacement review. Reuse Clio schema/admission/ledger/locking; no alternate event kernel or metadata sanitization. Retain generated evidence until the workspace's verified-recovery rule permits cleanup."
+ :not-authorized [:live-collector :operational-store :personal-capture
+                  :operational-retention-or-erasure-success :service-or-model-effects
+                  :installed-promotion :remote-tool-publication]
+ :actual-persistence-qualified false :actual-schema-history-qualified false
+ :actual-locking-qualified false :whole-s2a-complete false
+ :native-approval-credit 0 :epic-completion-credit 0}
