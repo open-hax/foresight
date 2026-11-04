@@ -1,0 +1,9 @@
+{:decision/id :axxium-drive-route-investigation-20261104
+ :source :question-tool-explicit-user-answer
+ :question "The existing Drive connection rejected the OCR backup with invalid_grant. How should I proceed?"
+ :answer "Local axxium was tested with drive permissions, maybe use that?"
+ :scope [:inspect-existing-local-axxium-drive-integration :reuse-existing-authorized-permission]
+ :purpose :previously-authorized-five-file-private-ocr-backup
+ :not-authorized [:new-login :new-account :new-destination :oauth-app-change
+                  :secret-dump :service-deploy :restart :public-publication :cleanup]
+ :qualification "The user's remembered test is a discovery lead, not proof that a current usable credential or upload capability exists. Inspect the existing broker route before any transfer; retain the failed rclone outcome and local archive."}

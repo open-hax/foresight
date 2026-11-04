@@ -1,0 +1,15 @@
+{:decision/id :govone-pinned-go-test-cache-authorization-20261103
+ :decision/source :question-tool-explicit-user-answer
+ :question "GovOne’s real synthetic-policy tests require Go 1.27.1, which is not cached. May I download the exact official Linux archive (about 71 MB), verify its published SHA-256, and extract it into an isolated test cache?"
+ :answer "Allow isolated toolchain (Recommended)"
+ :scope [:one-official-go-1.27.1-linux-amd64-archive :checksum-before-extraction
+         :isolated-agent-owned-test-cache :verified-go-version-only]
+ :official-metadata "https://go.dev/dl/?mode=json&include=all"
+ :archive {:url "https://go.dev/dl/go1.27.1.linux-amd64.tar.gz"
+           :bytes 70553950
+           :sha256 "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"}
+ :bounds {:archive-max-bytes 83886080 :extracted-max-bytes 536870912
+          :total-new-cache-max-bytes 805306368 :retries 0 :download-timeout-seconds 120}
+ :not-authorized [:system-installation :PATH-change :other-dependency-download
+                  :automatic-toolchain-substitution :model-download :service-startup]
+ :qualification-limit "Tool preparation does not qualify module-cache completeness, actual GovOne signed-policy behavior, a listener/runtime permit, or S6A task completion."}

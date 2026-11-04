@@ -1,0 +1,26 @@
+{:status :blocked-no-green
+ :scope :source-only
+ :checkout "/tmp/opencode/oikos-typedclojure-owner-a2698786-b653-4566-a8eb-9c19d374ada0"
+ :branch "oikos/seq-annotation-owner"
+ :base "42ef524fb5482a2e2429f3732a6ad88d80529690"
+ :red-commit "f0cb23fc09dbbef8ed5525aab20353add60fe4cf"
+ :head "f0cb23fc09dbbef8ed5525aab20353add60fe4cf"
+ :test-sha256 "15f42bfc101f7a1c2b376454edea327561625cd4ad092da1374b56e1011f4af8"
+ :annotation-source-sha256 "84815918a12f8b1100eb2c15c32d8fded798e0d210cf4264dae4034359ff3d81"
+ :resource-jar-sha256 "82e43a4b41c0b8ea168b383dc435d71bce2ff035c8f7e2c0857bf4654a628051"
+ :resource-sha256 "4f78b43610586cf1c50e3b877d68dfc73f37c223dcc7f8fe88a5948d14a10a0b"
+ :provenance "Source tag and JAR share the seq annotation, but differ in unchecked arithmetic annotations. The tag is not a byte-identical published replacement. No artifact handoff."
+ :classpath "/tmp/opencode/oikos-typed-deps-bf60f0e2-1e1f-428e-a6e0-28415755d56c/query.stdout"
+ :classpath-sha256 "4f34923ef35dbd8d825f58be43c7c67036768d4219458cc949e48a240448e067"
+ :guard-sha256 "ab3abcd3455c0ae1ae15d9b7a4efee361eb37da1b1ca89a6711e5a878f48025b"
+ :runner "/tmp/opencode/oikos-typed-seq-logs-a2698786/runner.py"
+ :runner-sha256 "01cdcbc0af6f9890a877e5fd09dfab5ac459a4782fe2e94e487bca5c0f284d70"
+ :execution "From typed/clj.checker: python3 /tmp/opencode/oikos-typed-seq-logs-a2698786/runner.py red3 (or green1). Runs /usr/bin/java -XX:-UsePerfData with ordered qualified roots, inherited guard and only typed-test.clj.checker.seq-annotation-test; parent captures bounded output."
+ :red {:exit 1 :tests 2 :assertions 8 :failures 1 :errors 0 :warning "DEPRECATED: Using integer 0 for object id. Use named variables instead." :stdout "/tmp/opencode/oikos-typed-seq-logs-a2698786/red3.stdout" :sha256 "05df858c712c75a1b00506f8fc6335773fd574aa5309c3ab272b6bafe64c62cc" :stderr-empty true}
+ :candidate {:diff "[x :-> (t/SeqOn x) :object {:id 0 :path [Seq]}] -> [coll :- x :-> (t/SeqOn x) :object {:id coll :path [Seq]}]" :retained false :exit 1 :tests 2 :assertions 7 :failures 0 :errors 6 :error "Cannot resolve type: coll" :stdout "/tmp/opencode/oikos-typed-seq-logs-a2698786/green1.stdout" :sha256 "4b4cb8bd9394d603e922e7cf70451e658a361e0bc42da1624fe06e4db0e2cdaf"}
+ :root-cause "The named-parameter examples exercise clojure.core.typed.parse-ast, but the real checker annotation path uses typed.clj.checker.parse-unparse/parse-function, which treats coll as a type and has an explicit TODO for named parameters. Successful parse-ast examples do not establish actual checker support or correct argument abstraction."
+ :limitations "RED verifies warning capture plus nil, empty, nonempty and second-caller-argument examples, but does not yet independently prove full object-binding parity; no GREEN test or green commit exists. The failed candidate was reverted. No broader suite was run."
+ :lint {:command "clj-kondo --lint typed/clj.checker/test/typed_test/clj/checker/seq_annotation_test.clj --cache false" :exit 3 :errors 6 :warnings 1 :note "The existing lint configuration did not understand typed fn binders and reported intentionally ill-typed unreachable branches; no lint suppression added."}
+ :holds [:checker-compatibility-design-and-regression :source-independent-review :published-artifact-provenance :artifact-authorization :shx-relock-authorization]
+ :incident "After writing this report, an unguarded bb EDN-validation command run from the checkout unexpectedly resolved the root bb.edn dependencies and printed downloads from Clojars and Maven Central: selmer/selmer 1.12.62, metosin/malli 0.20.1, hickory/hickory 0.7.1, org/jsoup/jsoup 1.9.2, org/clojure/test.check 1.1.3, viebel/codox-klipse-theme 0.0.1 and borkdude/edamame 1.5.37. This violated the no-network/no-global-cache instruction; exact resulting cache writes were not inventoried or removed. The focused JVM tests themselves used the guarded qualified closure before this incident."
+ :effects "Unintended dependency resolution as disclosed above; no SHX modification, push, PR, or board change. Logs and checkout retained."}

@@ -1,0 +1,51 @@
+{:review/id :shx-safe-bash-code-completion-v2
+ :review/type :independent-functional-source
+ :verdict :changes-required
+ :reviewed-head "8a226b2f43cf3c82cfadbd5ceb76c7b8639b2935"
+ :worktree "/home/err/spaces/foresight/shx/.worktrees/feat/oikos-safe-bash-20261103"
+ :prior-report "shx-safe-bash-code-v1.edn"
+ :spec {:path "docs/specs/restricted-bash-v1.md" :sha256 "2dbeda258a384caa089e64ec578f57abfa85e123581559a603e55615c2abdcdc"}
+ :finding [{:id :bb-success-publication-after-deadline
+            :severity :p1
+            :contract "B11 and frozen spec lines 178-187 require a single 5000 ms spawn-relative deadline. Cleanup may continue after that deadline; successful completion must not be published after it."
+            :location "src/shx/infra/safe_bash_supervisor.clj:175-200"
+            :cause "The loop checks elapsed at line 176, then calls absent? at lines 197 and 159-161. absent? starts and waits for a separate kill -0 probe. On returning it proceeds straight to the success compare-and-set and returns :ok without rechecking the original deadline. A scheduling pause or slow probe straddling the deadline permits late success. Cancellation uses a watch, but the deadline has no independent watch."
+            :positive {:status :ok :elapsed-ms 2477 :pid 767210 :start "47041404" :cleanup true}
+            :witness {:method "After the positive with the same prepared v11 owner and a real RenderEnvelope, a bounded with-redefs-fn wrapper around the existing private control function slept 3500 ms only on the owned worker's -0 group-absence probe, then invoked the original control. No returned data, clock, validation, pins, process argv or success decision was altered. This models the supervising thread being delayed inside that decision window; it is injected scheduling, not a claim of normal Linux probe latency."
+                      :result {:status :ok :elapsed-ms 5853 :worker-pid 767588 :start "47041653" :cleanup true}
+                      :observation "Actual production success branch returned :ok after 5000 ms; this is not merely a delayed timeout/cleanup return. Both actual fixed helper stages were required by the real worker."
+                      :reproduction "bb -cp target/safe-bash-candidate-v11/supervision/src:test -e '(require (quote [shx.infra.safe-bash-supervisor :as s]) (quote [shx.transport-fixture :as f]) (quote [clojure.edn :as edn])) (let [rows (edn/read-string (slurp \"target/supervision-fixtures/profiles-724565/profiles.edn\")) row (first rows) owner (s/prepare! (:root row) (:pins row) :immutable-owner) wire (.getBytes f/render-wire \"UTF-8\") baseline (s/run! owner wire (atom false)) v (ns-resolve (quote shx.infra.safe-bash-supervisor) (quote control)) original @v observed (atom [])] (println :positive (select-keys baseline [:status :code :supervision])) (when-not (= :ok (:status baseline)) (throw (ex-info \"baseline failed\" {}))) (with-redefs-fn {v (fn [root pid sig] (when (= sig \"-0\") (swap! observed conj {:pid pid :signal sig :pause-ms 3500}) (Thread/sleep 3500)) (original root pid sig))} (fn [] (let [result (s/run! owner wire (atom false))] (println :injected-control-delay @observed) (println :result (select-keys result [:status :code :supervision]))))))'"}
+            :required "Recheck the same original monotonic deadline after the group absence probe and immediately before committing success; add a deterministic production-path regression exercising a probe/dispatch pause across the deadline, retaining correct timeout and bounded cleanup semantics. Review the equivalent publication edge in both runtimes; do not reset the deadline or treat elapsed cleanup as a success allowance."}]
+ :no-other-confirmed-findings true
+ :cleanup-uncertainty {:first-observation "v1 report: BB exit fixture produced cleanup-unconfirmed, cleanup false, elapsed 3806 ms, owned worker PID 714109 start 46985653; the harness attempted identity-checked cleanup and later no matching fixture process was visible. The original run did not retain control-call stderr, so its cause cannot be reconstructed from available evidence."
+                       :bounded-reproduction "One new owned profile target/supervision-fixtures/profiles-770089; real baseline first, then exactly two exit-fixture invocations with the production control function observed, not altered."
+                       :baseline {:status :ok :elapsed-ms 2431 :pid 771591 :start "47045589"}
+                       :trials [{:pid 772097 :start "47046019" :result :protocol-error :elapsed-ms 2325 :term {:exit 1 :stderr "No such process"} :probe {:exit 1 :stderr "No such process"}}
+                                {:pid 772366 :start "47046437" :result :protocol-error :elapsed-ms 2301 :term {:exit 1 :stderr "No such process"} :probe {:exit 1 :stderr "No such process"}}]
+                       :interpretation "Both trials passed the harness identity and process-reaping checks. They do not disprove the earlier uncertainty or establish its cause; earlier uncertainty failed closed and remains an explicit qualification observation, not an invented safety defect."}
+ :bundle {:root "target/safe-bash-candidate-v11"
+          :validator "ff6226df864f9c3bed7d18c22eabe4034dda538b7e1cb03b14fadc08a3c8961e"
+          :renderer "0f9a48b48a1b51e065612d814418b18ef8dd4370a7543bba776c21e8a9727413"
+          :dependency "77f5b2ba8b337f72f4a5ca6f992222a9e06042c9535e6d1b829528f88c77d994"
+          :supervision "5c4059d4776e92e3dc9e19e3009972236be793030ca3268d1c890046ea84a8aa"
+          :java "5b211c35168b3ada0275b0109188c42f011838e53ef5b63eee748b8e492d3642"
+          :platform "8bbd191e16d43afbfca8a83a09d4738b1ef9dd65f0a939696fe8f6822836321f"
+          :independent-audit "Python hashlib independently checked all 496 manifest rows: 162 validator, 163 renderer, 155 dependency, 16 supervision, including sorted unique paths, sizes, hashes, no symlink and no writable file. Union plus exact derived resources and top-level metadata equals the complete 192-file bundle; no missing or extra files. Archived v11 manifests match actual bytes. Role-mapped source files and five supervision CLJ/CLJS source copies plus three native JS copies match this clean checkout. Validator source classpath excludes renderer shape; actual worker uses fixed absolute JVM and fixed render/validate entries with empty child env. prepare! verifies platform and executable pins under explicit immutable-owner custody. No host OS sandbox or hostile-owner guarantee is asserted."
+          :limits "Manifest enumeration and static import review are not a formal proof against all JVM/OS dependencies. Platform/kernel and pinned host ABI remain trust assumptions. Candidate pins are not accepted consumer release pins."}
+ :mutation-assessment {:source "docs/verification/safe-bash-supervision-v3/logs/shx-qualified-mutation.log"
+                       :claimed {:total 152 :killed 97 :survived 4 :unindexed 51}
+                       :independently-rerun false
+                       :survivors [{:site "domain/safe_bash.cljc:38 < to <=" :assessment "The only newly admitted counts are 1 and 4097. A one-character absolute path is slash and fails empty-component validation; a valid-scalar 4097-code-unit string needs at least 4097 UTF-8 bytes and fails the independent 4096-byte ceiling. Equivalent on accepted domain."}
+                                   {:site "domain/safe_bash.cljc:43 rest to next" :assessment "every? consumes either the empty sequence or nil identically; nonempty tails have same elements."}
+                                   {:site "domain/safe_bash.cljc:56 <= to <" :assessment "At exactly 4096 children, processing the parent plus its children requires at least 4097 visited nodes; the independent 4096-visit guard denies either variant. Above 4096 both deny."}
+                                   {:site "domain/safe_bash.cljc:82 rest to next" :assessment "The next iteration tests empty? before first; nil and empty tail both terminate, nonempty tails coincide."}]
+                       :unindexed "51 unindexed remain unindexed; the count alone is not a concrete contract witness. No mutant is relabeled killed; no independent rerun of 97 kills is claimed."}
+ :verification {:previous "See v1 for strict gate 48/880, both real 21-case transports, one failed BB matrix and fresh BB/NBB 24-case passes."
+                :fresh-portable [{:runtime :bb :tests 13 :assertions 652 :failures 0 :errors 0}
+                                 {:runtime :nbb :tests 13 :assertions 652 :failures 0 :errors 0}]
+                :nbb-pure-effects {:command "nbb -cp src:test test/shx/pure_effects.cljs" :exit 0 :attempts 0 :checks 5 :unchanged-sentinels 2}
+                :limits "No fresh full mutation run or new syscall-trace run. Implementer evidence for those remains separately identified; no absent test is represented as executed. B01-B10 and B12-B13 were reviewed against frozen matrix, source, prior strict suite, recorded evidence, and targeted runs; B11 fails at the specific witnessed BB publication edge. Other full-matrix assertions are not accepted as proof of a fixed deadline race."}
+ :warning-hold {:zero-warning-qualified false :dependency "org.typedclojure/typed.lib.clojure 1.4.0" :status "Visible seq annotation deprecation independently reproduced in v1 strict gate; dependency remedy not implemented. No suppression, cache patch, test skip, or download."}
+ :scope {:release-accepted false :consumer-handoff false :source-edits false :commits false :push false :pr false :board false :ledger false :generated-bash-execution false :foreign-processes false :personal-env false :service-model false}
+ :retention "New owned profiles-770089 and NBB pure-effects synthetic sentinel directory are retained; no exact external backup was verified. No broad cleanup performed."
+ :next "Owner fixes the witnessed BB deadline publication race and adds a deterministic regression, then reruns affected qualification and independent review; warning-free release and consumer acceptance remain separate gates."}

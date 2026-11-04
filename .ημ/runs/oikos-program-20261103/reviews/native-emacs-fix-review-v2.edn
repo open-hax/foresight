@@ -1,0 +1,29 @@
+{:review/id :native-emacs-fix-review-v2
+ :verdict :approve-offline-source-mechanics-only
+ :repository "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :head "b1816de56ff85071f2a89a59b7343ed97e3da30e"
+ :hashes {"layers/agent-sandbox/oikos-native.el" "8ff060ac4515264d0454277c6b822cc608482e82b6b0d9588efd027a2495be4d"
+          "tests/unit/oikos-native-test.el" "4a8bf0f3aa3ead7454ac3343c779372e5aed1fafa0ebf2f91a9929f7678072a9"}
+ :prior-p1 {:status :settled-for-reviewed-source-mechanics
+            :prior-review "native-emacs-code-confirmation-v1.edn"
+            :analysis "The request and mutable strings are independently copied; fences receive fresh copies; validation and exact original/bound equality are checked after the final callback; mutation uses the owned bound replacement. Existing result size and modification protection checks are repeated after callback."
+            :original-witness "The final exclusivity fixture changed only original request :replacement from Z to 4097 ASCII X bytes after the commit fence. Fence approved Z; result was capability-refused; before and after bytes were exactly abc (3 bytes), unlike the old applied 4099-byte result."
+            :control "Fence approved Z for byte range [1,2); abc became aZc, applied, 3 bytes."
+            :other-probes ["In-place aset on original replacement: denied; abc unchanged."
+                           "Original request start metadata mutation: denied; abc unchanged."
+                           "Fence retains its provided copy; final exclusivity fixture mutates retained replacement Z to X: applied approved owned Z, abc -> aZc. The callback was not given the authoritative copy."
+                           "1 MiB all-a synthetic buffer, approved one-byte replacement, post-fence swap to ZZ: denied; exact buffer equality preserved, 1048576 bytes."
+                           "Read release approved byte range [1,2); final callback changes original end to 3: denied without releasing text; abc unchanged."]
+            :fixture-scope "Callbacks only mutated request or retained fence data, never buffer contents; each case used a fresh synthetic buffer."}
+ :new-findings []
+ :verification {:binary "/snap/bin/emacs" :version "GNU Emacs 31.1 development d7cebc989e06, build 2026-09-22"
+                :environment "Isolated HOME and XDG directories under /tmp/opencode/oikos-fix-review-PM7R5Y; -Q --batch; no daemon, socket, emacsclient, operator buffers or personal config."
+                :commands [{:command "/snap/bin/emacs -Q --batch -l tests/unit/oikos-native-test.el -f ert-run-tests-batch-and-exit" :exit 0 :passed 31 :total 31 :warnings 0}
+                           {:command "/snap/bin/emacs -Q --batch -l tests/run-tests.el" :exit 0 :passed 19 :total 19 :warnings 3 :warning-detail "Pre-existing missing lexical-binding cookies: tests/unit/err-core-funcs-test.el, tests/integration/err-core-layer-test.el, tests/smoke/init-smoke-test.el."}
+                           {:command "/snap/bin/emacs -Q --batch --eval '(setq byte-compile-dest-file-function (lambda (f) (expand-file-name (concat (file-name-nondirectory f) \"c\") \"/tmp/opencode/oikos-fix-review-PM7R5Y/out\")))' -f batch-byte-compile layers/agent-sandbox/oikos-native.el tests/unit/oikos-native-test.el" :exit 0 :warnings 0 :output "isolated out directory; no existing .elc overwritten"}
+                           {:command "/snap/bin/emacs -Q --batch -l /tmp/opencode/oikos-fix-review-PM7R5Y/probe.el" :exit 0 :result "All seven independent witness assertions passed."}]
+                :probe-path "/tmp/opencode/oikos-fix-review-PM7R5Y/probe.el" :probe-sha256 "17c64ed50d55bdd15929f017ecc3dadb7a90f63bf3430bc1467da8f4cafb2162"}
+ :holds {:public-dispatcher :always-unavailable :owner-fixtures :not-authentication-or-real-shared-text-fence
+         :claim-replay :in-memory-not-cross-restart-durability :partial-failure :indeterminate-no-atomic-rollback
+         :actual-wire-integration false :real-owner-qualified false :live-permit false :full-s4a-complete false}
+ :preservation {:preexisting-untracked ".batch-home/ and both pre-existing .elc files untouched" :new-test-artifacts :preserved :source-edits false :board-ledger-pr-commit-push false}}

@@ -1,0 +1,45 @@
+{:review/id :s7a-hard-boundary-fix-review-v2
+ :review/kind :same-independent-reviewer-exact-head-offline-fix-review
+ :verdict :approve-exact-offline-stage-2-only
+ :head "124f7fda1094a6eb903fe60a04b6c1521dc6ca0d"
+ :tree "a506c55cbbf5db8f70e2dca50c0219466ca6f096"
+ :base "7cd9320f2c9991f8e36e15e59478b80789ae3b25"
+ :previous-head "beaefc099ef4cf14aac50069ddaf9baa399229f9"
+ :previous-review {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-hard-boundary-code-v1.edn" :sha256 "7e9eb453953c00a7896150e5ed1768ae7e76716df05cab3257da963a51598c0c"}
+ :authority {:offline-code-approved true :real-admission :deny :allocator-authorized false :endpoint-authorized false :raw-store-authorized false :batch-authorized false :whole-s7a-complete false}
+ :independence {:same-original-reviewer true :author false :nested-agents 0}
+ :scope "Review the three original P2 fixes and introduced regressions in inert portable law, Python stdlib framing and synthetic data only. Parent explicitly authorized the three additive v2 paths; no other pre-base path changed."
+ :source-sha256 {"src/oikos/law/ocr_boundary.cljc" "2255532211d3eaf3356427b562812ffb8bab2a9452d0b28904deaed33e36dfc9"
+                 "test/oikos/law/ocr_boundary_test.cljc" "2c810edf0ad45931e34c8e14c90a97be7f6fbc509393620bdd9767d752fabc08"
+                 "test/oikos/ocr_boundary_runner.cljc" "133cc95fac261bdcd1980005899d681b1f5ea59a113a402ee7af5c74f3648509"
+                 "scripts/test_ocr_boundary.clj" "f71253bfec74e686f4a1384da8015be44c217e5201df1f573b684bacd70060d9"
+                 "python/oikos_ocr_boundary.py" "958343a258ca348e303a85db89b93d831a224af14f9b7583a3c5cadae42338a3"
+                 "python/test_oikos_ocr_boundary.py" "07ae459050fa11f66f5200af4d7385865fabfff72e6f6a7fc40d00eb74240aa1"
+                 "eval/ocr-boundary/README.md" "39bb476e8cae7f9c2912ea1af93a5138b2674abda46003500788c4661f8dbc9d"
+                 "eval/ocr-boundary/vectors.edn" "608cca0165b92055282fd06ba2229a7e84aa7f5a3f1b77ddc455e348261385e6"
+                 "eval/ocr-boundary/vectors.json" "7d4899001bfa2afd8fe364d74d19aea6ae1c80c82efcfc16712916a699275e2b"
+                 "eval/ocr-boundary/artifact-v1.edn" "9f9c052564b3b16158e39b32c022238c2b4f6de0fada9477e02afc63b63cb1e8"
+                 "eval/ocr-boundary/vectors-v2.edn" "c0002182acb3b06c5fc93ad78ba4f471494428430a7f60e0921b6c380bddea51"
+                 "eval/ocr-boundary/vectors-v2.json" "fe4d703c469cad43b8856834cac3345ca8cab5340e813514d8b0fe64993226c8"
+                 "eval/ocr-boundary/artifact-v2.edn" "9ce08637d49f8dbcd4eac2af86b0e0ba8d4014c6e651dce4968acbb6f4931cce"}
+ :original-findings
+ [{:id :resource-timestamp-is-not-resource-observation :status :settled
+   :evidence "Closed synthetic resource fixture binds run/context/profile/ordinal/body, qualifying decision, source, observation time and typed RAM/pids/swap values. Direct BB probe: timestamp-only, unknown, deny, malformed, future, stale and wrong-run each returned resource-denied, intents=1, sent=0 and remained identical on subsequent SEND. Positive fixture returned prepared, intents=1, sent=1, authority=none; real-admission on that fixture returned deny. BB/NBB exact vectors and field-removal tests cover further missing and malformed cases. This fixture is not a resource issuer or real evidence."}
+  {:id :malformed-tag-escapes-python-frame-state :status :settled
+   :evidence "Direct isolated Python frame_feed probes over all 64 split positions each for literal array and object tags returned sticky invalid-frame without exception or evaluate_case mediation. The portable BB/NBB direct split tests and shared literal vectors also pass. Python validates tag type before dict lookup and rejects non-byte chunks without coercion."}
+  {:id :numeric-bound-checked-after-lossy-rounding :status :settled
+   :evidence "Exact lexical decimal magnitude and mathematical integrality are checked before native conversion. Direct isolated Python probes reject both signs of 9007199254740991.4 and corresponding exponent literals; exact positive/negative bounds, 90071992547409910e-1 and 1.25 are accepted. BB/NBB direct negative tests and shared literal vectors pass; nonintegral numbers rounded to an integer or zero are refused. The documented bounded token/exponent refusal profile is not claimed to be a general-purpose arbitrary-precision JSON API."}]
+ :new-findings []
+ :checks {:new-invoker {:command "bb scripts/test_ocr_boundary.clj" :exit 0 :bb {:tests 10 :assertions 1112 :vectors 152} :nbb {:tests 10 :assertions 1112 :vectors 152} :python {:tests 6 :checks 550 :shared-vectors 101} :warnings 0}
+          :artifact {:v2-file-sha256 "9ce08637d49f8dbcd4eac2af86b0e0ba8d4014c6e651dce4968acbb6f4931cce" :v2-source-bindings 12 :prior-seals 5 :prior-bindings 94 :inherited 85 :historical-stage1 9 :result :verified
+                     :method "Invoker reads each actual prior artifact, checks canonical seal and bindings against current or exact historical Git blobs as appropriate; compares preserved v1 seal and both vectors to beaefc0; verifies v2 bindings and exact test counts."}
+          :root-tests {:command "bb test" :exit 0 :suites [[26 357] [38 463] [9 39] [7 181]]}
+          :inherited-runner {:command "bb -f eval/ocr-runner/bb.edn test" :exit 0 :suites [[2 14] [2 14] [16 233] [2 44]]}
+          :lint {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+          :live-cli {:command "nbb -cp src scripts/ocr_batch.cljs status" :exit 2 :status :blocked :execution-authorized false}
+          :git "Initial worktree clean; exact base diff shows thirteen added paths and no pre-base modifications. RED commit b50a64ce1a52f988263321bf58ceb0561ca2d545 exists and introduces repair tests; RED counts are author-reported in README, not independently rerun here."
+          :parity "BB and NBB compare parsed v2 EDN and JSON and all 152 literal expected cases; Python exercises its 101 explicitly shared cases. Direct probes independently exercise original failure mechanisms."}
+ :limitations "Approval is solely for this exact inert source stage. No claim of qualified kernel controls, parent FFI, allocator, current OCR egress/resource evidence, expiry executor, operational storage, endpoint or batch admission."
+ :effects {:product-edits 0 :board-edits 0 :ledger-edits 0 :pr-operations 0 :commits 0 :pushes 0 :native-imports 0 :service-actions 0 :ocr-requests 0 :operational-raw-writes 0}
+ :reflection {:owner :parent :separate-ledger false}
+ :next "Parent may consume this offline-only exact-head review while keeping all real execution and owner qualification gates held."}

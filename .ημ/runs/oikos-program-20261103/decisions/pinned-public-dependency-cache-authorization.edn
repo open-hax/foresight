@@ -1,0 +1,12 @@
+{:decision/id :pinned-public-dependency-cache-authorization-20261103
+ :source :question-tool-explicit-user-answer
+ :question "The GovOne and typed.clojure tests need uncached public dependencies at their existing pinned versions. May I acquire those declared dependency closures into isolated, checksum-verified caches, capped at 1 GiB total?"
+ :answer "Allow pinned caches (Recommended)"
+ :total-max-bytes 1073741824
+ :allocations {:govone 805306368 :typed-clojure 268435456}
+ :scope [:existing-exact-public-pins :declared-test-closure :isolated-cache
+         :publisher-or-existing-lock-checksum-verification :offline-metadata-verification]
+ :required "Keep owner manifests unchanged. Retain coordinate, source, checksum and size inventory. Account for archives, extracted trees, metadata, tooling and logs within each allocation. Stop before exhaustion, absent expected checksums, private modules or any undeclared coordinate/version."
+ :not-authorized [:version-upgrade :lock-change :global-cache-edit :installation
+                  :model :service :application-or-test-launch :runtime-listener]
+ :qualification "Acquisition permission is not a complete-cache claim or execution permit. Reverify exact closure offline before separately admitting builds/tests."}

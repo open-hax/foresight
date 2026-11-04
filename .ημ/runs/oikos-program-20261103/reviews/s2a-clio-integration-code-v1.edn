@@ -1,0 +1,103 @@
+{:review/id :s2a-clio-integration-code-v1
+ :reviewer :independent-not-implementation-author
+ :verdict :approve-private-s2a-integration-scope :findings []
+ :target {:head "5d132c1ccfb3ec96b28f37bff4d32ff64ee03d22" :base "97e41a6b733f01e1b409f0f68f1efaf9122f5177" :clean-at-review true :clio-owner "788cdd3434615a7932b924e68520dbf7f88408c2" :handoff-sha256 "bd563ece77b58d4860f8cc2d9587cfac4af2384d0efdbac92163ba0a1290ed91"}
+ :contract-permit-INCLUDES-nine-frozen-file-pins {:permit/id :oikos-s2a-initial-contract-c399b60e
+ :authority :parent-authenticated-independent-local-code-review
+ :source {:repository "open-hax/oikos"
+          :sha "c399b60e1676c47778445c1098eb541ab38743cb"
+          :tree "10357860ac91b440a5ec4e38295b9aaa56ad0d01"
+          :published-ref "artifact/oikos-safe-reference-c399b60e"
+          :descriptor "docs/contracts/desktop-safe-reference-v1.edn"
+          :descriptor-sha256 "7ad9541df188201860e212b91d3744a62cd9aa05ae4a8d80c25425b4f0886916"}
+ :contract {:version "oikos.desktop.safe-reference/v1"
+            :digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+            :digest-algorithm :sha256-of-clio-canonical-edn
+            :clio-owner "788cdd3434615a7932b924e68520dbf7f88408c2"}
+ :review {:path "../reviews/s2a-contract-fix-review-v2.edn"
+          :sha256 "e329a2fa6b171795a56c1800ac12893d5b1dccd1312f3cf0c7b01d9e0232542e"
+          :evidence-id "b4542a1a-d95a-5fb5-a73d-3ba80bdd4692"
+          :evidence-id-method :uuidv5-of-qualified-review-content-sha256
+          :actual-independent-verdict :approved
+          :original-findings-settled [:s2a/recursive-metadata-bypass :s2a/runtime-record-roundtrip]
+          :native-provider-approval false}
+ :trusted-review-context
+ {:artifact {:contract/version "oikos.desktop.safe-reference/v1"
+             :contract/digest "3cf52cca7310d1bf628f555fc6ffc86d416f55ebe527a7007f0d25eaa28eaa49"
+             :source/sha "c399b60e1676c47778445c1098eb541ab38743cb"}
+  :verdict :approved :independent? true
+  :evidence/id "b4542a1a-d95a-5fb5-a73d-3ba80bdd4692"
+  :evidence/digest "e329a2fa6b171795a56c1800ac12893d5b1dccd1312f3cf0c7b01d9e0232542e"}
+ :parent-actual-verification {:source "c399b60e1676c47778445c1098eb541ab38743cb"
+                              :desktop-bb [16 1059] :desktop-nbb [16 1059]
+                              :inherited-bb [18 286] :inherited-nbb [30 392] :eval [9 39]
+                              :failures 0 :errors 0 :lint-errors 0 :lint-warnings 0}
+ :frozen-source-and-test-sha256
+ {"bb.edn" "8f76a349e997923ae8130f81969a9d239522828e60f6645ae9de14ec0ada0af8"
+  "README.md" "85a93c408bb7c9167c297929915422023d377e0fd992a8c6134a1dc4a530f5fa"
+  "src/oikos/law/safe_reference.cljc" "baee008c0a3b2dc4a6ddd7bc8f4a63fed317d0d4514f961d819ad484019cdf60"
+  "src/oikos/law/desktop.cljc" "edea4e32bd0279ccfc2f81a4cfbe24c9e1348f06606f9d597530d28f894680d7"
+  "scripts/test_desktop.clj" "2097d7bc2c5c63b05ea976bec0f77d7d91c6e03472a571e2bad942298e28813f"
+  "test/oikos/desktop_fixture.cljc" "77122676722cba3af9d62c42fcb725daf4236e6364ec50f7378a5907d4df4c57"
+  "test/oikos/desktop_runner.cljc" "a3b84c0bf587a7ce051d1d1ea9257d75832337d963bec8e609a4da9654b00072"
+  "test/oikos/law/desktop_test.cljc" "be969cb41358194a630b35cadc0db13243be400cc2cffbe250703c2e0bc4b088"
+  "test/oikos/law/plain_event_test.cljc" "5e4044f67c0792adad48ccd6c0544afc064afb8eb51eb853af306efd8996903f"}
+ :provided [:closed-plain-safe-reference-contract :lifetime-and-revision-identity
+            :pure-causal-desktop-replay :coverage-gap-and-compensation-laws]
+ :allowed-next-scopes
+ {:s2a [:owned-synthetic-actual-clio-schema-and-ledger-fixtures
+        :exact-envelope-retry :locked-append-and-persisted-replay-tests]
+  :s3a [:pure-logical-membership-and-named-branch-laws]
+  :s4a [:pure-scoped-named-capability-and-revision-bound-preview-contracts]}
+ :constraints "The review-context predicate compares trusted data; it does not authenticate a review. This parent record binds the actual independent report and published immutable source. New phase-2 code must not alter the frozen contract bundle before actual append; any contract/source change requires fresh independent review. New adapters require their own exact-head code review before task acceptance."
+ :not-authorized [:live-collectors :personal-capture :operational-content-store
+                  :retention-or-erasure-success-claims :arbitrary-i3-or-emacs-eval
+                  :live-editor-or-window-effects :model-execution :publication]
+ :producer-whole-task-complete false :new-board-admission-by-this-file false
+ :native-approval-credit 0 :epic-completion-credit 0}
+
+ :wire-permit-INCLUDES-four-wire-file-pins {:permit/id :s2a-private-wire-97e41a6b
+ :authority :parent-authenticated-independent-code-review-and-scoped-fixture-continuation
+ :source "97e41a6b733f01e1b409f0f68f1efaf9122f5177"
+ :decoder {:path "src/oikos/infra/desktop_wire.cljc"
+           :sha256 "a1e6a3d4de9c003a58c7e27680eb250b7ec9ef04f12ef44fd3bc1daf8b5e55e2"}
+ :review {:path "../reviews/s2a-wire-fix-review-v2.edn"
+          :sha256 "46c9cffc0afd5976b7b4c751d2a46828c3c836bc4b2ad207d4c6568508526003"
+          :verdict :approved :remaining-findings []
+          :original-findings-settled [:s2a-wire/namespaced-key-alias-collapse
+                                      :s2a-wire/raw-partition-container-metadata-laundering]}
+ :reviewed-files
+ {"src/oikos/infra/desktop_wire.cljc" "a1e6a3d4de9c003a58c7e27680eb250b7ec9ef04f12ef44fd3bc1daf8b5e55e2"
+  "test/oikos/infra/desktop_wire_test.cljc" "1693781e94f33dfcd62b76f284d279bee71ccc74f76fe5e07cf00e5222d8356d"
+  "scripts/test_desktop_wire.clj" "73863662bae3d0f75a55cabcedbe172abfb65de3599c79d5adcc9aa8d0f21289"
+  "test/oikos/desktop_wire_runner.cljc" "3c016bbef3533a28c3574aad7cefe1853486cfe5c3ffd13f0de444fffc022898"}
+ :independent-tests {:bb [15 347] :nbb [15 347]
+                     :existing-tests :passed :lint-errors 0 :lint-warnings 0}
+ :frozen-contract-permit "s2a-contract-c399b60e.edn"
+ :frozen-contract-permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+ :clio-owner "788cdd3434615a7932b924e68520dbf7f88408c2"
+ :allowed-next [:implement-new-integration-adapter
+                :owned-synthetic-schema-history-and-ledger-fixture-writes
+                :actual-owner-locked-append-and-fresh-process-replay-tests
+                :exact-envelope-retry-and-causal-rejection-tests]
+ :constraints "Preserve the nine frozen files and four reviewed wire files. Actual integration adapters are not approved by the decoder review: implement/test them only in newly allocated owned synthetic fixture directories, then obtain independent exact-head integration review before source acceptance or any consumer claim. New decoder/profile changes invalidate this permit and require replacement review. Reuse Clio schema/admission/ledger/locking; no alternate event kernel or metadata sanitization. Retain generated evidence until the workspace's verified-recovery rule permits cleanup."
+ :not-authorized [:live-collector :operational-store :personal-capture
+                  :operational-retention-or-erasure-success :service-or-model-effects
+                  :installed-promotion :remote-tool-publication]
+ :actual-persistence-qualified false :actual-schema-history-qualified false
+ :actual-locking-qualified false :whole-s2a-complete false
+ :native-approval-credit 0 :epic-completion-credit 0}
+
+ :evidence {:original-manifest "/tmp/opencode/oikos-s2a-evidence-d4aee641-8cf4-4793-8b8b-5f5c240c3519/results.edn"
+ :independent-manifest "/tmp/opencode/oikos-s2a-evidence-19822821-fcde-48c4-8619-60c7145d7016/results.edn"
+ :independent-manifest-copy {:tests {:test 10, :pass 169, :fail 0, :error 0, :type :end-run-tests}, :source/sha "5d132c1ccfb3ec96b28f37bff4d32ff64ee03d22", :source/files-sha256 {"src/oikos/infra/desktop_fixture.cljs" "f423b7a0f7b469a3e44d1568de6ec89c6e63fa9cf0fc254c304d7343d051c34a", "scripts/test_desktop_integration.clj" "5e8f3ab07464095fb87dce97d0d7c29e9249aa92998a7bd09b3b7a4d860bc3dd", "test/oikos/infra/desktop_fixture_test.cljs" "c2c4ed0895a62dde78fc56af95f572157135293773f594bb338ce723b7c12429", "test/oikos/desktop_integration_runner.cljs" "fee879b6796350e2374535066351307395d94159c818fcd8de6163cf362d0389", "test/oikos/desktop_integration_worker.cljs" "2bd4fa469c9950dfb1b7be06efd88f66fa29bedf665705c131bdbea35acfab9e", ".clj-kondo/config.edn" "113dec5fe89be2e97db8c6d53132eebed5b66520857135554aafd350b0882e09"}, :classification :sensitive-linkable, :source/dirty? false, :preservation :retain-until-verified-exact-remote-backup, :qualification :pending-independent-integration-review, :fixture/roots ["/tmp/opencode/oikos-s2a-fixture-14f4a09a-3509-43d4-9579-c3fbe683811d" "/tmp/opencode/oikos-s2a-fixture-6622ad4b-049e-4732-bcd5-b91ee669fbe5" "/tmp/opencode/oikos-s2a-fixture-0f2d2447-33c3-4574-9d41-6dbde37dcb0b" "/tmp/opencode/oikos-s2a-fixture-aa3634e9-8f36-4438-83ed-937ecd2dae76" "/tmp/opencode/oikos-s2a-fixture-52e62226-94e5-4c0b-9296-35e97bcc0580" "/tmp/opencode/oikos-s2a-fixture-fc4cad0a-227b-4f1a-bd55-650c1fe850fc" "/tmp/opencode/oikos-s2a-fixture-5c3c1d18-892a-42aa-9fa2-ca353d60f352" "/tmp/opencode/oikos-s2a-fixture-f1fb7f2d-1a25-4f48-9f3a-668ce156689a" "/tmp/opencode/oikos-s2a-fixture-05350631-d05e-4618-a71c-195a81ff2e9f" "/tmp/opencode/oikos-s2a-fixture-bf697e43-fc1b-4ea4-b485-3e730fab8a49" "/tmp/opencode/oikos-s2a-fixture-51809abe-1b75-47f3-bcf6-82582b9b1559"], :owner/append-calls {:parent 16, :workers 4, :total 20}, :fixture/states [{:root "/tmp/opencode/oikos-s2a-fixture-14f4a09a-3509-43d4-9579-c3fbe683811d", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 1} {:root "/tmp/opencode/oikos-s2a-fixture-6622ad4b-049e-4732-bcd5-b91ee669fbe5", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 1} {:root "/tmp/opencode/oikos-s2a-fixture-0f2d2447-33c3-4574-9d41-6dbde37dcb0b", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 3} {:root "/tmp/opencode/oikos-s2a-fixture-aa3634e9-8f36-4438-83ed-937ecd2dae76", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 2} {:root "/tmp/opencode/oikos-s2a-fixture-52e62226-94e5-4c0b-9296-35e97bcc0580", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 1} {:root "/tmp/opencode/oikos-s2a-fixture-fc4cad0a-227b-4f1a-bd55-650c1fe850fc", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 1} {:root "/tmp/opencode/oikos-s2a-fixture-5c3c1d18-892a-42aa-9fa2-ca353d60f352", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 1} {:root "/tmp/opencode/oikos-s2a-fixture-f1fb7f2d-1a25-4f48-9f3a-668ce156689a", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 7} {:root "/tmp/opencode/oikos-s2a-fixture-05350631-d05e-4618-a71c-195a81ff2e9f", :schema/files ["0000000000000000000000000000000000000000000000000000000000000000.edn" "d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 0} {:root "/tmp/opencode/oikos-s2a-fixture-bf697e43-fc1b-4ea4-b485-3e730fab8a49", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 2} {:root "/tmp/opencode/oikos-s2a-fixture-51809abe-1b75-47f3-bcf6-82582b9b1559", :schema/files ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281.edn"], :ledger/lines 2}], :workers [{:append/result :already-present, :owner/append-calls 1, :process/pid 99758, :classification :sensitive-linkable} {:append/result :appended, :owner/append-calls 1, :process/pid 99763, :classification :sensitive-linkable} {:projection/canonical "[:map [[[:keyword \"canonical\" \"event-ids\"] [:sequential [[:string \"00000000-0000-4000-8000-000000000001\"]]]] [[:keyword \"observation\" \"event\"] [:string \"00000000-0000-4000-8000-000000000001\"]] [[:keyword \"observed\" \"revision\"] [:number :safe-integer \"1\"]] [[:keyword \"server\" \"epoch\"] [:string \"00000000-0000-4000-8000-000000000100\"]] [[:keyword nil \"active-gap\"] [:nil]] [[:keyword nil \"coverage\"] [:keyword nil \"current\"]] [[:keyword nil \"historical-gaps\"] [:sequential []]] [[:keyword nil \"intentions\"] [:map []]] [[:keyword nil \"memberships\"] [:map [[[:string \"00000000-0000-4000-8000-000000000300\"] [:set [[:map [[[:keyword \"server\" \"epoch\"] [:string \"00000000-0000-4000-8000-000000000100\"]] [[:keyword \"window\" \"incarnation\"] [:string \"00000000-0000-4000-8000-000000000101\"]] [[:keyword \"window\" \"xid\"] [:number :safe-integer \"42\"]]]]]]]]]] [[:keyword nil \"observations\"] [:map [[[:string \"00000000-0000-4000-8000-000000000001\"] [:map [[[:keyword \"observed\" \"revision\"] [:number :safe-integer \"1\"]]]]]]]] [[:keyword nil \"outcomes\"] [:map []]] [[:keyword nil \"retired\"] [:set []]] [[:keyword nil \"window-history\"] [:map [[[:map [[[:keyword \"server\" \"epoch\"] [:string \"00000000-0000-4000-8000-000000000100\"]] [[:keyword \"window\" \"incarnation\"] [:string \"00000000-0000-4000-8000-000000000101\"]] [[:keyword \"window\" \"xid\"] [:number :safe-integer \"42\"]]]] [:sequential [[:map [[[:keyword \"event\" \"id\"] [:string \"00000000-0000-4000-8000-000000000001\"]] [[:keyword \"observed\" \"revision\"] [:number :safe-integer \"1\"]] [[:keyword \"workspace\" \"id\"] [:string \"00000000-0000-4000-8000-000000000300\"]] [[:keyword nil \"state\"] [:keyword nil \"open\"]]]]]]]]]] [[:keyword nil \"windows\"] [:map [[[:map [[[:keyword \"server\" \"epoch\"] [:string \"00000000-0000-4000-8000-000000000100\"]] [[:keyword \"window\" \"incarnation\"] [:string \"00000000-0000-4000-8000-000000000101\"]] [[:keyword \"window\" \"xid\"] [:number :safe-integer \"42\"]]]] [:string \"00000000-0000-4000-8000-000000000300\"]]]]]]]", :schema/roots ["d6e2b0dda7e6aeb60fe1f34ea1c4d77092460894e4b874fe62e0398b243d5281"], :owner/append-calls 0, :process/pid 100219, :classification :sensitive-linkable} {:lock/result :held, :owner/append-calls 0, :process/pid 100445, :classification :sensitive-linkable} {:append/result :appended, :owner/append-calls 1, :process/pid 100919, :classification :sensitive-linkable} {:worker/result :refused, :oikos/error :admission-refused, :owner/append-calls 0, :process/pid 100924} {:append/result :appended, :owner/append-calls 1, :process/pid 102815, :classification :sensitive-linkable}]}
+
+ :integration [10 169 0 0] :wire-bb [15 347 0 0] :wire-nbb [15 347 0 0]
+ :baseline-bb [18 286 0 0] :baseline-nbb [30 392 0 0] :eval [9 39 0 0] :desktop-bb [16 1059 0 0] :desktop-nbb [16 1059 0 0] :lint [0 0]
+ :initial-baseline-attempt "bb test without explicit OIKOS_CLIO_SOURCE and OIKOS_CLIO_DEPS failed at desktop precondition after inherited suites passed; rerun with documented environment passed all suites."}
+ :analysis ["Authenticated actual permit/review byte snapshots, frozen source pins and wire review before fixture creation; reauthenticated before owner append. Actual owner schema history, canonicalization, admission and inode locks are reused. Positive append precedes negative checks. Tests cover same-envelope idempotence, fresh-process reload, slot conflict, stale head and incomplete history refusals."
+ "Reviewed source capture is not a universal atomic transaction against arbitrary same-UID mutation; cooperating synthetic adapter writers share the native coordination inode, while foreign writers and races between last hash and native owner lock are explicitly outside the stated guarantee."
+ "Owner exceptions are wrapped into fixed cause-free diagnostics by the adapter. External process test workers and retained fixture results are synthetic and linkable; no operational privacy, erasure, crash consistency, or production readiness claim follows."]
+ :limits {:native-approval false :s2a-task-complete false :epic-complete false :production-authorization false :foreign-writer-transaction-guarantee false :owner-dependency-cache-independently-reviewed false}
+ :effects {:independent-fixture-roots 11 :owner-append-calls 20 :cleanup false :product-edits false :board-ledger-edits false :commit-push-pr false}
+ :next "Parent may compose with separately accepted slices and review the resulting actual integration head; retain both manifests and fixture trees."}

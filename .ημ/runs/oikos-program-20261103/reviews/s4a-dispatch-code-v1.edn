@@ -1,0 +1,53 @@
+{:review/id :s4a-dispatch-code-v1
+ :review/kind :independent-adversarial-exact-source-review
+ :reviewer {:provider :openai :model "gpt-6.1-terra" :native-provider-approval false}
+ :task "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :scope :offline-codec-laws-negative-tests-unloaded-consumer-only
+ :verdict :changes-requested :authority :none
+ :source {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+          :base "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+          :tested-head "c42d33365a3c4707a51f429a3c9b0f324b017341"
+          :tested-tree "cac482100be77315fe87c676d379cb1bd13d83bd"
+          :clean-at-review true :diff "exactly nine newly added files; no modified existing files"}
+ :inputs {:config {:path "openhax.kanban.edn" :sha256 "d0c04722963d540448c6b60c8e0d6d14e7129cf747a2b057f0ed63612b262d86"}
+          :task-path "docs/agile/kanban/oikos-define-scoped-named-i3-and-existing-emacs-capability-operations-cc769e88.md"
+          :offline-permit "d63abff7f5b52f6bc622d9e01557bbef4d1ffa5f6f6eb9edbaa4aa14f890fa62"
+          :plan "3abb7aeafb41f66c62f26b76294f09e831dc70ac307af7602a59a4cb38689c2a"
+          :plan-fix-review "09804b8d03d6cda5d561379ced7359f49a3be1a04fda2c75222aa0e2eb70eac3"
+          :s4a-permit "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+          :s2a-permit "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+          :frozen-files "All thirteen protected files and descriptors unchanged by exact base-to-head diff; the three descriptor/document hashes match the permits. Frozen permits' actual hashes match their cited pins."}
+ :new-file-sha256
+ {"scripts/test_dispatch.clj" "72646af0e8b10081cea815dfe0e0b25b66d9e114834b90702d1249c8ef834cd0"
+  "src/oikos/extern/dispatch_codec.cljs" "8dc90e67f5f4777af51a8b8fc5058d0478a2bd199ab5c66bdfb6d4778463a7d7"
+  "src/oikos/infra/dispatch.cljs" "1a6e9614e7c79bb17b433890c744aa041fc919b77fad7c63529ecf7a6e6ff488"
+  "src/oikos/law/dispatch.cljc" "2cb410bc3f13edc0ac55c7641becc2fc23cc166eda576de85c7e987c9bb28997"
+  "src/oikos/shape/dispatch.cljc" "e2d282b93d403ae798cb18f204b6da6b370d5eadfe62a1fe7fe0e1f346695612"
+  "test/oikos/dispatch_runner.cljc" "a55641cca79be1550999b23671791f87a4682fb2e93ad77e06380802724ac5cb"
+  "test/oikos/infra/dispatch_test.cljs" "16abcbfad060827e9b427c12c82be13303b6188cf022c476494d0296e1d22692"
+  "test/oikos/law/dispatch_test.cljc" "f62ed7d8a89b9062dcbb65e96d1c0dde3a9bea7b2655c4b3790be99bd1d5f984"
+  "test/oikos/shape/dispatch_test.cljc" "31696c1a51085d589030018acadeb341a9f7462bf02d0a355caae097bc7cc881"}
+ :findings
+ [{:id :s4a-dispatch-code-01 :severity :P2
+   :title "Persistent collection backing-store accessors execute before refusal"
+   :locations ["src/oikos/extern/dispatch_codec.cljs:17-43" "src/oikos/law/dispatch.cljc:30-56" "src/oikos/shape/dispatch.cljc:9-15"]
+   :proof "In the pinned NBB runtime, construct x=(f/envelope (first f/requests)), a=(aget x \"C\"), v=(aget a 1), and hits=(atom 0). Define property 1 of a using Object.defineProperty with a getter that increments hits and returns v. (law/bounded-data? x) returned true with hits=1. After reset, (codec/encode x) returned :encoded with hits=5. Thus own-descriptor checks on the outer persistent map do not inspect the backing JS array before Clojure iteration invokes its accessor. Similarly for v=[123 125], a=(aget v \"Kb\"); define getter 0 incrementing hits and returning 123; (shape/frame v) returned :framed with hits=2. The backing property names are observed on the pinned NBB, not a portable API. No transport was invoked in these probes: getters only incremented an in-memory atom."
+   :impact "A forged persistent collection can run caller code inside supposedly inert validation/encoding/framing, including any effect available to that caller, while being accepted. This contradicts the no-caller-accessor and plain-data/no-effects boundaries; constant refusal catches exceptions only after the accessor has already run. It is not a claim of runtime authorization or an actual network effect."
+   :required-regression "Before traversal or coercion, refuse forged backing arrays, accessor/proxy-backed nested storage, method/prototype tampering and metadata/records for all relevant public plain-data/framing/encoding inputs without invoking the getter/proxy. Include root and nested map/vector cases and verify zero counter plus constant refusal; preserve valid immutable values and both runtime suites. Avoid changing frozen files or broadening authorized scope."}]
+ :verification
+ {:environment {:clio-source "/home/err/spaces/foresight/clio" :clio-sha "788cdd3434615a7932b924e68520dbf7f88408c2" :cache "/home/err/spaces/foresight/clio/.nbb/.cache/f7939af80857224fb08cdaa8d38dfc0301b87013/nbb-deps" :packages-installed false}
+  :actual-commands {"bb scripts/test_dispatch.clj" {:exit 0 :bb [11 136] :nbb [21 275] :failures 0 :errors 0}
+                    "bb test" {:exit 0 :bb [18 286] :nbb [30 392] :eval [9 39] :desktop-bb [16 1059] :desktop-nbb [16 1059] :failures 0 :errors 0}
+                    "bb scripts/test_capability.clj" {:exit 0 :bb [11 99] :nbb [11 99] :failures 0 :errors 0}
+                    "bb lint" {:exit 0 :errors 0 :warnings 0}}
+  :candidate-traps {:preimport-and-final-process-network-write 0 :fixture-filesystem-reads 0
+                    :limitation "Only instrumented methods and fixtures are covered; loader filesystem reads remain available before import. The independent accessor probes show these tests do not cover forged backing stores."}
+  :independent-golden "Hand-assembled JSON string, not encoder output: 550 UTF-8 bytes with explicit prefix [0 0 2 38], decoded to :emacs/read-range, expected actor UUID, end-byte 4 and :authority :none."
+  :independent-boundaries "scan-json refused escaped duplicate x, -0, unsafe 9007199254740992 and lone surrogate; accepted a surrogate pair and integer zero. frame accepted 65536 bytes and refused 65537. Accessor proofs above were run independently in NBB."
+  :red-claim "Candidate-reported historical red commit was not independently rerun or verified."
+  :skips "No assertions intentionally skipped; the actual suite's own output is as recorded above."}
+ :limitations {:no-live-authority-or-runtime-credit true :whole-s4a-complete false
+               :native-owner-and-target-review :parent-owned-separate-work
+               :no-process-socket-emacs-i3-govone-service-or-model-effect-tests true
+               :no-product-card-ledger-pr-commit-push-or-config-writes true}
+ :reflection "Passing zero-effect fixtures do not establish the inert-data boundary when the host runtime permits mutable internal persistent-collection storage. Require negative tests that poison storage without invoking the poison during test setup."}

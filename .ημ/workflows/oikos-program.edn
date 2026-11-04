@@ -1,8 +1,10 @@
 {:workflow/id :oikos-program-20261103
- :workflow/version 1
+ :workflow/version 2
  :workflow/authority "Execution/review plan only. Rheos owns card admission/status/dependencies; this is not a second board implementation."
  :source/foresight "b9ac3141a9799a06abb2bd0d2c8320e8b8b9ec02"
  :source/oikos "ae35073719974c0df1d2dae301c2179fa4785641"
+ :accepted/development-source {:oikos "fed4e30272cc1186de14bcc708b3efc9736e3139"
+                               :scope "S1A/S2A/S3A accepted development source, not installed promotion or epic completion"}
  :source/cards ".ημ/runs/oikos-program-20261103/cards"
  :policy {:qualified-program-merges :authorized
           :deployment :sandbox-and-dev-only
@@ -20,7 +22,18 @@
                                         ".ημ/runs/oikos-program-20261103/decisions/ocr-attestation-activation-outcome.edn"
                                         ".ημ/runs/oikos-program-20261103/decisions/ocr-recovery-restart-no.edn"
                                         ".ημ/runs/oikos-program-20261103/decisions/ocr-six-image-conditional-authorization.edn"
-                                        ".ημ/runs/oikos-program-20261103/decisions/caddy-isolated-test-cache-authorization.edn"]
+                                        ".ημ/runs/oikos-program-20261103/decisions/caddy-isolated-test-cache-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/govone-pinned-go-test-cache-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/services-pinned-clojure-cli-cache-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/pinned-public-dependency-cache-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/govone-go-cmp-checksum-proof-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/govone-missing-checksum-batch-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/govone-one-file-test-source-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/typed-guarded-continuation-and-parser-source-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/ocr-drive-preservation-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/axxium-drive-route-investigation.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/shx-one-bb-diagnostic-authorization.edn"
+                                        ".ημ/runs/oikos-program-20261103/decisions/s4a-native-owner-source-and-target-nomination.edn"]
           :cloud :synthetic-through-govone-verified-no-charge-only
           :spending 0
           :remote-publication :held
@@ -42,7 +55,13 @@
                                         ".ημ/runs/oikos-program-20261103/permits/s2a-wire-97e41a6b.edn"
                                         ".ημ/runs/oikos-program-20261103/permits/s3a-accepted-008b0611.edn"
                                         ".ημ/runs/oikos-program-20261103/permits/s4a-contract-8ae64df4.edn"
-                                        ".ημ/runs/oikos-program-20261103/permits/s7a-runner-offline-7cd9320f.edn"]
+                                        ".ημ/runs/oikos-program-20261103/permits/s7a-runner-offline-7cd9320f.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s4a-offline-source-v2.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s6a-p1-source-v2.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s7a-hard-boundary-offline-v2.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s2a-accepted-fed4e302.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s6a-offline-p1-759ebdab.edn"
+                                        ".ημ/runs/oikos-program-20261103/permits/s7a-boundary-offline-124f7fda.edn"]
              :epic-integration-agent :dispatch-after-both-children-verified
              :documentation-agent :independent-foresight-worktree
              :live-board "rheos read-task/read-board"
@@ -83,6 +102,7 @@
                 :code-per-task :required-after-implementation
                 :skeptic-confirmation :required-before-treating-findings-as-confirmed
                 :native-pr-settlement :required-separately}
+ :planning-review-snapshot-limit "The following initial planning dispatch records the original incoming state. It is not a current board read or continuing implementation hold: consult Rheos and the later exact component permits/reviews before each successor admission. Workflow edges and routing metadata never override those gates."
  :planning-review-instructions
  "Independent adversarial planning review for exactly the requested task key. Read this workflow, the task's own Oikos worktree AGENTS/source/tests at the pinned source, and the frozen official Rheos read-task JSON named by task UUID. You are read-only: no files, services, model calls, board state, credentials, publication or commits. Hunt real acceptance/dependency/authority defects, not missing implementation masquerading as a regression. All cards are incoming and implementation is held for planning admission. Preserve synthetic/dev-only/no-spend/no-publication policy. Each task has its own worktree; use task path .worktrees/feat/oikos-<key>. Related source owners may be read with their AGENTS but must not be edited. Proposed child edges are a derived execution plan pending native Rheos updates, not board authority. Distinguish confirmed source evidence from an inference or unverified API. Report at most five actionable findings with severity P0-P3, title, exact path/symbol evidence, required acceptance test, and whether a user-visible question remains. Also name prerequisite artifacts and whether policy restrictions leave real completion evidence blocked. Return task key, UUID, reviewed source SHA, verdict approve|changes_requested, findings, user_questions. No self-approval or native-provider-approval claims."
  :review-result-protocol

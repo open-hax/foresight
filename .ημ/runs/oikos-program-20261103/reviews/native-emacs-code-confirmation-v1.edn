@@ -1,0 +1,33 @@
+{:review/id :native-emacs-code-confirmation-v1
+ :supersedes-test-blocker "native-emacs-code-v1.edn"
+ :verdict :changes-requested
+ :repository "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :head "cc2192fb5e02961da0ab942073d41847087af09a"
+ :source-hashes {"layers/agent-sandbox/oikos-native.el" "0d0222e263a25007d72ea5718e4f9a494d1664d7e2c4bd73773bbd9ba08e440d"
+                 "tests/unit/oikos-native-test.el" "74b8b62de18fa13a5c56f74f4a4bdca1b4d221ffb86a4fbc6aedc918d5558cfc"}
+ :binary {:path "/snap/bin/emacs" :symlink-target "/usr/lib/snapd/snapd" :version "GNU Emacs 31.1, development d7cebc989e06 on master, build 2026-09-22"
+          :prior-error "Earlier review incorrectly treated /snap/bin/emacs31.1 as the required executable; /snap/bin/emacs is the authorized executable."}
+ :environment {:home "/tmp/opencode/oikos-confirm-TzgAI3/home" :xdg-config "/tmp/opencode/oikos-confirm-TzgAI3/config" :xdg-cache "/tmp/opencode/oikos-confirm-TzgAI3/cache" :xdg-data "/tmp/opencode/oikos-confirm-TzgAI3/data"
+               :process "fresh -Q --batch; synthetic with-temp-buffer only for the adversarial probe; no daemon, socket, client, operator buffers, or personal config"}
+ :commands [{:command "readlink -f /snap/bin/emacs && /snap/bin/emacs --version" :exit 0}
+            {:command "git rev-parse HEAD && sha256sum layers/agent-sandbox/oikos-native.el tests/unit/oikos-native-test.el && git status --short --untracked-files=normal" :exit 0 :result "Exact head and both hashes match; existing .batch-home/ and two .elc files preserved."}
+            {:command "/snap/bin/emacs -Q --batch -l tests/unit/oikos-native-test.el -f ert-run-tests-batch-and-exit" :exit 0 :result "24/24 passed; no warnings."}
+            {:command "/snap/bin/emacs -Q --batch -l tests/run-tests.el" :exit 0 :result "19/19 passed; three existing missing lexical-binding cookie warnings in tests/unit/err-core-funcs-test.el, tests/integration/err-core-layer-test.el, tests/smoke/init-smoke-test.el."}
+            {:command "/snap/bin/emacs -Q --batch --eval '(setq byte-compile-dest-file-function (lambda (f) (expand-file-name (concat (file-name-nondirectory f) \"c\") \"/tmp/opencode/oikos-confirm-TzgAI3/out\")))' -f batch-byte-compile layers/agent-sandbox/oikos-native.el tests/unit/oikos-native-test.el" :exit 0 :result "Changed source and test compiled without warnings to isolated out directory, not over pre-existing .elc files."}
+            {:command "/snap/bin/emacs -Q --batch -l /tmp/opencode/oikos-confirm-TzgAI3/probe.el" :exit 0 :result "Both adversarial test assertions passed; see witness."}]
+ :findings [{:severity :p1 :status :confirmed-dynamic
+             :title "Final exclusivity callback changes replacement after request equality and limit checks"
+             :locations ["layers/agent-sandbox/oikos-native.el:273-283" "layers/agent-sandbox/oikos-native.el:81-89"]
+             :mechanism "After :commit fence records bound and returns, request equals bound. The final validate calls the exclusive-p callback; the callback changes only original request's :replacement using plist-put, with no buffer modification. Final validation succeeds because native facts are unchanged; insertion reads the altered original request after that validation, not the replacement recorded by the fence."
+             :control {:initial-utf8 "abc" :range-byte-offsets [1 2] :fence-approved-replacement "Z" :approved-replacement-bytes 1 :expected "aZc" :result [:status :applied] :actual "aZc" :actual-bytes 3}
+             :witness {:initial-utf8 "abc" :before-bytes 3 :fence-approved-replacement "Z" :approved-replacement-bytes 1 :range-byte-offsets [1 2] :approved-result "aZc" :approved-result-bytes 3
+                       :callback-stage "first exclusive-p invocation after :commit fence returns, within final validation following request/bound equality"
+                       :callback-action "plist-put original request :replacement to 4097 ASCII X characters; no buffer edit"
+                       :buffer-observed-by-callback "abc" :request-replacement-bytes-after 4097
+                       :expected-cap "replacement <=4096 bytes; 4097-byte replacement must not apply"
+                       :result [:status :applied] :actual-after "a + 4097 ASCII X characters + c" :actual-after-bytes 4099 :actual-prefix "aXXXX" :actual-suffix "XXXXc"}
+             :qualification "This tests an adversarial trusted-interface fixture and specifically demonstrates data substitution by mutating the request, not direct buffer mutation by the callback. It does not establish actual authorization or a live exploit in a qualified owner."
+             :minimal-regression "Retain a working positive control and assert that a final-validation exclusivity callback mutating only the original request cannot cause an unapproved replacement or exceed either byte limit; assert captured approved data and exact before/after bytes. Include mutable replacement strings as well as plist replacement."}]
+ :probe {:path "/tmp/opencode/oikos-confirm-TzgAI3/probe.el" :sha256 "41ebf55ef8c5a5d67ddd8194c3ad99ba5164c2dadcbb8b4ef29583e94b7b4801" :preserved true}
+ :boundary {:public-dispatcher :unavailable :real-owner-qualified false :actual-wire-integration false :full-s4a-complete false :live-effect-permit false}
+ :preservation {:reviewed-files-edited false :existing-untracked-artifacts :untouched :new-test-artifacts :preserved :commits false :push false :board-changes false}}

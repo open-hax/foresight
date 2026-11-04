@@ -1,0 +1,51 @@
+{:review/id :s7a-hard-boundary-code-v1
+ :review/kind :independent-exact-head-offline-code-review
+ :verdict :changes-requested
+ :scope :inert-stage-2-only
+ :head "beaefc099ef4cf14aac50069ddaf9baa399229f9"
+ :tree "28092ef0ff909d0aef912e58be5a8e81ce640994"
+ :base "7cd9320f2c9991f8e36e15e59478b80789ae3b25"
+ :authority {:real-admission :deny :offline-code-approved false :production-authorized false :batch-authorized false}
+ :independence {:different-author true :nested-agents 0}
+ :permit "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/permits/s7a-hard-boundary-offline-v2.edn"
+ :plan-sha256 "43023b980531c3896d5469299b6b1fb8be080e5e490391fad647e3e7bafa7033"
+ :plan-review-sha256 "0b04f8bb992c2d66ec5e5cfcfdfa0379a216d79eea2500dd4faab7c92600a549"
+ :files {"src/oikos/law/ocr_boundary.cljc" "bf90dac4cab26771021b412baf7b9ea9f5451f0029ef2fc827e0b551e4bac625"
+         "test/oikos/law/ocr_boundary_test.cljc" "504cc5c35b4e96677d120029bee61c6e4ffc9c2e1f2311f2061ac84c48c84097"
+         "test/oikos/ocr_boundary_runner.cljc" "133cc95fac261bdcd1980005899d681b1f5ea59a113a402ee7af5c74f3648509"
+         "scripts/test_ocr_boundary.clj" "af7d7431b35af32889944b74cd604781e9ac6886966da8ea0f127e54fc6677be"
+         "python/oikos_ocr_boundary.py" "92301a18d5840df2f808dc11a1017dc983f040b15a21b71a09c86c110d6590b1"
+         "python/test_oikos_ocr_boundary.py" "36470f3a64ea64f9676b84ed490d89319bcc9f2e88dc78082b284a27dbf3ec1e"
+         "eval/ocr-boundary/vectors.edn" "608cca0165b92055282fd06ba2229a7e84aa7f5a3f1b77ddc455e348261385e6"
+         "eval/ocr-boundary/vectors.json" "7d4899001bfa2afd8fe364d74d19aea6ae1c80c82efcfc16712916a699275e2b"
+         "eval/ocr-boundary/artifact-v1.edn" "9f9c052564b3b16158e39b32c022238c2b4f6de0fada9477e02afc63b63cb1e8"
+         "eval/ocr-boundary/README.md" "b2cdc12a5dc3214a0cdefe3cac9738e3446e7a64d2c9576cd55c77f9b985fceb"}
+ :findings
+ [{:id :resource-timestamp-is-not-resource-observation :priority :P2
+   :location "src/oikos/law/ocr_boundary.cljc:284-290; eval/ocr-boundary/vectors.edn:1156-1185"
+   :witness "After the normal prepare, begin, intent and durable intent-ack, the shipped scenario send event contains only resource_ms=10, now_ms=13, bracket=same, ordinal=1 and matching body_sha256. transaction-step returns status=prepared, waiting=settle, sent=1, authority=none. There is no resource decision, observation contents or validity field anywhere in this event or preceding transaction state, so a fresh timestamp alone passes even when no qualifying observation has been supplied. The vector called wrong-resource only supplies a future timestamp."
+   :impact "The inert decision claims a resource-gated SEND without distinguishing a fresh failed/unknown observation from a qualifying one. This is not an authorization bypass of the always-denied real boundary, but it is a false positive in the requested offline decision model."
+   :required-regression "Model the bounded trusted-domain resource observation/decision and explicitly require a qualifying fresh result, with unknown, denied, malformed, future and stale cases stopping after counted intent, plus a genuinely qualifying positive case. Keep real admission unconditionally DENY."}
+  {:id :malformed-tag-escapes-python-frame-state :priority :P2
+   :location "python/oikos_ocr_boundary.py:111-113,152-159,258-285"
+   :witness "An otherwise well-framed UTF-8 object with tag=[] (or tag={}), seq=0 and a valid run causes direct frame_feed to raise TypeError: unhashable type: 'list' at SCHEMA.get. BB's frame-feed returns invalid-frame for the same bytes. evaluate_case catches that exception only at the outer harness and produces held instead of the required terminal invalid-frame."
+   :impact "Untrusted ordinary JSON can escape the Python incremental parser's closed terminal status contract and breaks cross-runtime framing parity."
+   :required-regression "Add shared literal byte vectors for array/object tags and direct incremental frame_feed checks across splits; both implementations must return sticky invalid-frame, never throw or report generic held, while retaining valid-tag positives."}
+  {:id :numeric-bound-checked-after-lossy-rounding :priority :P2
+   :location "src/oikos/law/ocr_boundary.cljc:93-100; python/oikos_ocr_boundary.py:56-60"
+   :witness "strict-json/strict_json on literal UTF-8 {\"x\":9007199254740991.4} returns x=9007199254740991 in BB, NBB and Python. The decimal is strictly above the documented 9007199254740991 magnitude cap, but binary float conversion rounds it down before the check. Negative counterpart has the same problem."
+   :impact "Out-of-bound input is admitted as a different in-range integer, undermining strict bounded JSON and any later integer-shaped validation."
+   :required-regression "Validate exact numeric token magnitude and integer semantics before lossy conversion, portably across runtimes, with literal positive/negative just-over-bound cases, accepted exact-bound values and representative exponent/decimal cases; shared vectors must reject rather than round into range."}]
+ :checks {:new-invoker {:command "bb scripts/test_ocr_boundary.clj" :exit 0 :bb [6 746 101] :nbb [6 746 101] :python [3 199 66] :frozen-seals 4 :frozen-bindings 85 :additive-seal :verified}
+          :root-tests {:command "bb test" :exit 0 :suites [[26 357] [38 463] [9 39] [7 181]]}
+          :inherited-runner {:command "bb -f eval/ocr-runner/bb.edn test" :exit 0 :suites [[2 14] [2 14] [16 233] [2 44]]}
+          :lint {:command "bb lint" :exit 0 :errors 0 :warnings 0}
+          :live-cli {:command "nbb -cp src scripts/ocr_batch.cljs status" :exit 2 :status :blocked}
+          :tree-diff "git diff --name-status 7cd9320f HEAD shows exactly the ten permitted added paths, no changed existing tracked path; initial worktree status clean."
+          :golden-parity "The new invoker ran the actual BB/NBB literal EDN/JSON parity comparisons and Python's 66 shared expected-result cases; additional literal malformed/numeric probes above expose missing cases."
+          :artifact "The invoker verified nine source/doc/vector bindings, canonical self-excluded additive seal, four inherited seals and 85 inherited bindings."
+          :probe-policy "Only in-memory fabricated bytes and test-runner subprocesses; no source PNG copy, raw operational store, socket, FFI, service or process-control adapter."
+          :limitations "Inherited suites and their seal checks passed; this review does not claim a live kernel, allocator, expiry owner, current OCR resource state or full S7A qualification."}
+ :effects {:product-edits 0 :board-edits 0 :ledger-edits 0 :commits 0 :pushes 0 :native-imports 0 :service-actions 0 :ocr-requests 0 :operational-raw-writes 0}
+ :reflection {:owner :parent :separate-ledger false}
+ :next "Repair the three offline findings, add exact regressions and obtain independent review of the new exact head; preserve the unconditional live hold."}

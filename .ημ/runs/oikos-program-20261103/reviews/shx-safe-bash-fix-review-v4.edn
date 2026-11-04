@@ -1,0 +1,67 @@
+{:review/id :shx-safe-bash-fix-review-v4
+ :reviewer :same-independent-source-reviewer
+ :verdict :approve-functional-source-only
+ :qualification "Functional source review only, with explicit unresolved intermittent BB cleanup-uncertainty observation and incomplete independently rerun BB matrix. This is not zero-warning qualification, owner release qualification, S1B admission or consumer handoff."
+ :head "6d9bc02fb428ae54db63f1beb0b992da8aab11bc"
+ :tree "8473e01efc5a1389c1414c2af87dd859f9807d35"
+ :worktree "/home/err/spaces/foresight/shx/.worktrees/feat/oikos-safe-bash-20261103"
+ :spec-sha256 "2dbeda258a384caa089e64ec578f57abfa85e123581559a603e55615c2abdcdc"
+ :prior-review "shx-safe-bash-fix-review-v3.edn"
+ :finding-dispositions [{:id :bb-success-publication-after-deadline
+                         :old "v11 owned absence probe delayed 3500 ms: late :ok at 5853 ms."
+                         :new-control {:status :ok :elapsed-ms 2306 :pid 1678726 :start "47700569"}
+                         :new-probe {:delay-ms 3500 :status :error :code :timeout :elapsed-ms 5940 :cleanup true :response-absent true :pid 1678903 :start "47700800"}
+                         :disposition :reproduced-fixed-on-sealed-v14}
+                        {:id :bb-finalizer-after-publication-check
+                         :old "v13 exact cancel-atom watch removal delayed 3500 ms: late :ok at wall 5896 ms; setting cancellation during removal also returned :ok."
+                         :new-watch-delay {:control {:status :ok :elapsed-ms 2437 :pid 1675045 :start "47697165"}
+                                           :barrier-calls 1 :sleep-ms 3500 :wall-ms 5854
+                                           :result {:status :error :code :timeout :elapsed-ms 5846 :cleanup true :response-absent true :pid 1675384 :start "47697410"}}
+                         :new-watch-cancel {:control {:status :ok :elapsed-ms 2383 :pid 1677267 :start "47699016"}
+                                            :barrier-calls 1 :atom-true true
+                                            :result {:status :error :code :cancelled :elapsed-ms 2262 :cleanup true :response-absent true :pid 1677499 :start "47699255"}}
+                         :disposition :reproduced-fixed-on-sealed-v14}]
+ :findings []
+ :settlement-review {:bb "run-admitted! captures the original monotonic clock immediately before launch; its watch-removal finally and run!'s busy-release finally both finish before publish-candidate. The latter constructs proof and all outcomes, reads the current cancellation atom and original clock, and selects a prebuilt result with no required finalizer, callback or conversion afterwards."
+                     :nbb "Native candidate carries its original clock/signal in a private identity WeakMap. Native cleanup, CLJS conversion, wrapper running-lease finally and outcome construction precede the single-use value-only publish. Its signal and original clock determine selection; subsequent promise value propagation is not a new requirement for preemption-free scheduling. Native finish has a reentrancy guard."
+                     :boundary "Logical settlement is the final state/clock selection, not a universal hard-real-time guarantee against preemption after that commit. Error and cleanup returns after 5000 ms are not late-success waivers."
+                     :limitations "This is evidence-based source review under explicit immutable-owner and host-ABI assumptions, not proof of OS isolation or hostile owner protection."}
+ :independent-tests {:bb-publication {:command "bb -cp target/safe-bash-candidate-v14/supervision/src:test test/shx/publication_bb.clj target/supervision-fixtures/profiles-1288859/profiles.edn /dev/null"
+                                      :exit 0 :positive-controls 2 :negative-barriers 7 :timeouts-ms [5416 5402 5403 5400 5400] :cancelled-ms [2374 3094] :all-no-response true :cleanup true :owned-groups-reaped true}
+                     :nbb-publication {:command "nbb -cp target/safe-bash-candidate-v14/supervision/src:test test/shx/publication_nbb.cljs target/supervision-fixtures/profiles-1288859/profiles.edn /dev/null"
+                                       :exit 0 :positive-controls 2 :control-ms [2801 2282] :negative-barriers 8 :timeouts-ms [5403 5403 5401 5406 5401] :cancelled-ms [2919 2536 2433] :all-no-response true :cleanup true :owned-groups-reaped true :fresh-prepare true}
+                     :strict {:command "NPM_CONFIG_OFFLINE=true bin/analyze --strict" :exit 0 :checks 7 :tests 48 :assertions 880 :failures 0 :typed-deprecation :visible}
+                     :transport {:bb {:cases 21 :exit 0} :nbb {:cases 21 :exit 0} :entries :actual-fixed-pinned-jvm}
+                     :portable {:bb {:tests 13 :assertions 652 :failures 0 :errors 0} :nbb {:tests 13 :assertions 652 :failures 0 :errors 0}}
+                     :effects {:command "nbb -cp src:test test/shx/pure_effects.cljs" :exit 0 :checks 5 :attempts 0 :unchanged-sentinels 2}
+                     :nbb-production-matrix {:profile "target/supervision-fixtures/profiles-1700751/profiles.edn" :exit 0 :cases 24 :assertions 360}
+                     :bb-production-matrix {:profile "target/supervision-fixtures/profiles-1700751/profiles.edn" :exit 1 :completed-cases 6 :failed-case :stderr
+                                            :actual {:status :error :code :cleanup-unconfirmed :cleanup false :elapsed-ms 3485 :pid 1708414 :start "47725676"}
+                                            :expected :protocol-error
+                                            :positive-before-fault true
+                                            :trace "target/supervision-fixtures/profiles-1700751/bb-stderr.jsonl"
+                                            :trace-observation "Actual validate entry PID 1708599/start 47725807 exited 0 with 95 stdout bytes and empty stderr before the fixture injected the stderr fault."
+                                            :after "No matching fixture process or worker PID appeared in subsequent ps. Exact original control error was not captured; cause unknown. Test did not complete remaining cases and was not rerun."
+                                            :meaning "A fail-closed uncertainty, not a pass or a proven false-clean result. This fresh matrix is not independently qualified as 24 passing cases."}}
+ :bundle {:root "target/safe-bash-candidate-v14"
+          :validator "ff6226df864f9c3bed7d18c22eabe4034dda538b7e1cb03b14fadc08a3c8961e"
+          :renderer "0f9a48b48a1b51e065612d814418b18ef8dd4370a7543bba776c21e8a9727413"
+          :dependency "77f5b2ba8b337f72f4a5ca6f992222a9e06042c9535e6d1b829528f88c77d994"
+          :supervision "099dc2cc37f074b332664ee7192f5a0a1dfc95937af5aa7c622b3133beef027e"
+          :java "5b211c35168b3ada0275b0109188c42f011838e53ef5b63eee748b8e492d3642"
+          :platform "8bbd191e16d43afbfca8a83a09d4738b1ef9dd65f0a939696fe8f6822836321f"
+          :bb-source "1952ecdde71dddd566ed4f90da46d79a62d7b2c1093c27433fb2ac1c15498e14"
+          :nbb-source "976fc258bc3d9f86abbbe5e05cd767910d121b11acabf0f3e00e7bf8ecc05040"
+          :native-source "e2124c0a4e7efafa5609ddd21f083ae843807038f1a6ca1210c1eb8dd2066778"
+          :audit {:command "python3 test/shx/fixtures/audit-safe-bash-bundle.py target/safe-bash-candidate-v14" :exit 0 :manifest-rows 496 :unique-files 192 :source-readbacks 20 :host-abi-files 8}}
+ :mutation {:independent-rerun false :v5-implementer-claims {:sites 152 :killed 97 :survivors 4 :unindexed 51 :auxiliary-trial-timeouts 3}
+            :assessment "No changes to pure domain/law/shape or deps.edn since prior independent v2 survivor assessment; four equivalence analyses remain applicable to those bytes. Counts are author-reported, unindexed remain unindexed, no survivor relabeled killed."}
+ :retained-uncertainty {:historical "BB exit case PID 714109/start 46985653 returned cleanup-unconfirmed at 3806 ms; original control stderr unavailable and cause unknown. Two controlled later trials passed, without proving cause."
+                        :fresh "Separate v14 BB stderr case PID 1708414/start 47725676 returned cleanup-unconfirmed at 3485 ms. No cause established, no false-clean witnessed. Both observations remain visible and must inform owner qualification."}
+ :warning-hold {:dependency "org.typedclojure/typed.lib.clojure 1.4.0 seq integer-object-ID annotation"
+                :actual "DEPRECATED SYNTAX (NO_SOURCE_PATH): DEPRECATED: Using integer 0 for object id. Use named variables instead."
+                :zero-warning-release-qualified false :dependency-remedy :not-installed-or-reviewed-here}
+ :author-evidence "v5 author reports BB and NBB full 24-case matrices, raw transports, traces and mutation as passing except visible warning and recorded auxiliary trial timeouts. Those author results are not replaced by this review's fresh partial BB run; they remain separately attributed."
+ :scope {:source-edits false :commit false :push false :pr false :board false :parent-ledger false :new-dependencies false :cache-patch false :downloads false :generated-bash-execution false :foreign-signals false :services-or-models false}
+ :retention "Reviewer-created target/supervision-fixtures/profiles-1700751 and synthetic NBB effects sentinels retained; exact external backups not verified. No rerun-until-pass or cleanup."
+ :next "Owner resolves the zero-warning dependency and independently qualifies a release, accounting for both intermittent cleanup-uncertainty observations and the incomplete fresh BB matrix, before seeking S1B or consumer acceptance."}

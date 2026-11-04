@@ -1,0 +1,115 @@
+{:review/id :oikos/s7a-hard-runner-plan-fix-review-v2
+ :review/kind :same-independent-reviewer-four-finding-planning-confirmation
+ :review/date "2026-11-03"
+ :review/context {:symbol :己 :tier :observed-documents-and-manuals-plus-design-judgment}
+ :review/independence {:plan-author false :same-v1-reviewer true :nested-agents-spawned 0}
+ :subject {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-hard-runner-plan-v2.edn"
+           :sha256 "43023b980531c3896d5469299b6b1fb8be080e5e490391fad647e3e7bafa7033"
+           :bytes 47678 :lines-read [1 238] :hash-independently-matched true}
+ :prior-review {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-hard-runner-plan-review-v1.edn"
+                :sha256 "817a40e3b49511c2edaffcea6f65c946a4d3ccc4b290c8441c82975fcd0d03da"
+                :bytes 21046 :lines-read [1 149] :hash-independently-matched true}
+ :immutable-base {:path "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-hard-runner-plan-v1.edn"
+                  :sha256 "95a45f037ab5c2d60ed2bd23e6121825314a2b892e945dfc5782822165eeb431"
+                  :hash-still-matches-v1-review true :edited false}
+ :verdict :approve-exact-offline-stage-2-planning
+ :original-findings-settled 4
+ :remaining-original-findings []
+ :new-introduced-planning-findings []
+ :parent-may-admit-offline-deny-protocol-red-green true
+ :actual-code-approval false
+ :effectful-allocator-watchdog-admission false
+ :raw-store-live-admission false
+ :actual-batch-admission false
+ :summary "All four original P2 planning findings are settled for the exact V2 offline source/test stage. The plan now selects one bounded allocator/start-timeout contract and explicitly denies unsupported real admission. Missing native parent binding, actual allocator qualification, current-worker egress proof and expiry custody are future effect/admission gates, not blockers to these offline DENY/protocol tests."
+
+ :scope
+ {:anchors "V2 line ranges refer to the exact subject above; V1-review line ranges refer to the exact prior-review file above. Installed-manual line ranges refer to decompressed source text."
+  :composition "Read all V2 replacements and all prior-review findings/dispositions; retain inherited V1 laws only as specified by V2:10-18. No full simulator, product or unrelated owner re-audit."
+  :runtime-facts "No fresh OCR/runtime/resource fact is asserted. Prior runtime input-identity qualification and the consumed one-restart/Restart=no decisions remain historical grounding, not renewed admission."
+  :no-goalpost-move "Normal Linux kill-dispatch limitations, honest unknown/crash evidence, prospective local instance bracketing, the three-role aggregate memory model and authority separation stay settled. No new universal D-state, server-cancellation, embedded nonce, hostile-same-UID, generic GovOne OCR or S6A requirement is imposed."
+  :instructions "Applicable inherited coordinator/home/Foresight boundaries remain; parent owns ledger/reflection. Only this new absolute-path review file is written."}
+
+ :per-id
+ [{:id :s7a-hard-plan/exact-owned-allocator-contract-unselected
+   :previous-priority :P2 :status :settled-for-offline-planning :context :己 :confidence 0.99
+   :anchors {:original-review [51 60] :v2 [[47 94] [107 122] [208 215]]}
+   :verification "V2 selects USER Manager.StartTransientUnit only, exact one-shot unit naming/job mode/property types, no auxiliary units, fixed interpreter/args, anonymous parent pipes, real delegated-dir-FD validation, empty root/three leaves, placement/readback, inherited AS lowering and enumerated owned cleanup. No systemd-run/helper/scope/manual ancestor fallback or existing i3/OCR unit mutation is granted."
+   :capability-disposition "V2:70-73 explicitly identifies the trusted parent's IN-PROCESS libsystemd adapter and anonymous-FD transfer as not yet integrated/qualified. It does not disguise a spawned busctl/launcher as free infrastructure. That integration must precede actual allocation, not pure property/protocol/state-trace source tests."
+   :remaining-original-issue false}
+  {:id :s7a-hard-plan/bootstrap-deadline-has-no-independent-dispatch-owner
+   :previous-priority :P2 :status :settled-for-offline-planning :context :己 :confidence 0.98
+   :anchors {:original-review [62 71] :v2 [[34 37] [53 68] [96 118]]}
+   :verification "Existing manager owns finite TimeoutStartUSec=29900000 on a single Type=oneshot ExecStart, with TimeoutStartFailureMode=kill, FinalKillSignal=9 and KillMode=control-group. The service stays starting until main exit; READY cannot introduce a second runtime period. A/E anchors, immutable earlier application deadline and no readiness reset are explicit. The first-instruction/import/gate stall witness names a separate future real-manager test without parent kill assistance."
+   :manual-disposition "Installed manuals support the chosen oneshot/start-timeout/immediate-final-signal semantics. RuntimeMaxSec is correctly NOT credited for oneshot. Actual pre-exec timer coverage/FD transfer/kill behavior is not inferred from documentation and must pass V2 stage 3. A proposed qualification witness suffices for this source-only planning stage."
+   :remaining-original-issue false}
+  {:id :s7a-hard-plan/second-hop-assessment-needs-real-dependency-disposition
+   :previous-priority :P2 :status :settled-for-offline-planning :context :己 :confidence 0.99
+   :anchors {:original-review [73 86] :v2 [[124 158] [208 219]]}
+   :verification "V2 incorporates actual optional OpenVINO import/telemetry/GA4/thread/subprocess source edges, labels installed disk source separately from loaded singleton state, and does not infer observed traffic or image forwarding. Fixed POST no-application-forwarding is not relabeled total egress denial. Bounded reported current-unit metadata does not establish an effective filter."
+   :capability-disposition "The deployment owner must provide existing-current-worker evidence or a separately reviewed no-restart hardening capability. The exact-cgroup egress-hook candidate is a future owner prerequisite, NOT a granted BPF/unit/firewall operation or a claim of present privileges. Real endpoint access remains held. No live proof is needed to write the offline denial/parser source."
+   :remaining-original-issue false}
+  {:id :s7a-hard-plan/expiry-executor-and-registration-unbound
+   :previous-priority :P2 :status :settled-for-offline-planning :context :己 :confidence 0.99
+   :anchors {:original-review [88 98] :v2 [[160 187] [208 219]]}
+   :verification "The anonymous assumed executor is replaced by bounded owner discovery and an explicit missing custody/registration capability. An inactive generic tmpfiles timer/cache cleanup is not called a qualified executor. Real admission denies before any raw copy without durable owner custody; offline registration/classification/ack-loss vectors and a DENY-only real interface are explicitly allowed."
+   :capability-disposition "No owner API is invented or delegated to the user to design, and no timer/daemon is silently installed. Actual owner integration remains future work. Image/base64/partials and OCR/text derivations retain separate expiry classes; versioned six PNG source fixtures are expressly excluded from deletion and backup cannot extend raw-run expiry."
+   :remaining-original-issue false}]
+
+ :independent-manual-checks
+ {:context :己 :confidence 1.0
+  :method "Read/decompress/hash local installed manuals using isolated Python stdlib only. No bus connection, manager method, native-library import or service query. This establishes documented semantics/schema, NOT accepted live properties or functioning cgroup controls."
+  :sources
+  [{:path "/usr/share/man/man5/systemd.service.5.gz"
+    :sha256 "e1474882c411afe27115522a72c45bffd9432905b2017cfbcc50086edbf21223"
+    :anchors [[283 305] [797 821] [915 957]]
+    :result "Oneshot without RemainAfterExit stays activating until main exits. Default start timeout is disabled for oneshot, so explicit finite timeout matters. FailureMode=kill sends FinalKillSignal without a further timeout. RuntimeMaxSec has no effect on oneshot."}
+   {:path "/usr/share/man/man5/systemd.kill.5.gz"
+    :sha256 "562c8f01d74061f9b31d5447c6434a031a482e413be319c518e5c497f8f6d43e"
+    :anchors [[49 66] [164 201]]
+    :result "Control-group kill scope, SendSIGKILL and FinalKillSignal are documented; the proposed signal9 final action is consistent. No universal instantaneous termination follows."}
+   {:path "/usr/share/man/man5/systemd.resource-control.5.gz"
+    :sha256 "d21771c04ab20d50afb6e6a72448af0b9d63b0029ba5af1cd8ddc4b189c32370"
+    :anchors [[438 489] [562 579] [1454 1501]]
+    :result "MemoryMax/StartupMemoryMax and swap variants map to kernel controls; TasksMax controls pids.max. Delegation defines manager-owned root/ancestors versus private descendants. Delegate=true may enable all supported controllers, so V2:73's already-enabled-ancestor/no-ancestor-edit condition remains an actual qualification requirement, not an automatic grant."}
+   {:path "/usr/share/doc/systemd/TRANSIENT-SETTINGS.md.gz"
+    :sha256 "6117fa012c3d77f890b316a2ffa4fd4e1a73f188ae5ed1a2f55b3af8b79833cb"
+    :anchors [[233 276] [288 338]]
+    :result "Documents transient resource, delegation, kill and service timeout/type settings. Does not independently demonstrate runtime-only FD-property acceptance."}
+   {:path "/usr/share/man/man5/org.freedesktop.systemd1.5.gz"
+    :sha256 "d4c0ecd5b65388d1ad4fb1e2e929dc853a6b9d127c921776dfa4a7d5f28a8ad3"
+    :anchors [[137 141] [2262 2270] [2321 2327] [2475 2481]]
+    :result "Documents StartTransientUnit(ssa(sv)a(sa(sv))->o), microsecond timeout/failure-mode properties, monotonic main-start timestamp and startup memory/swap properties. Runtime-only StandardInputFileDescriptor/StandardOutputFileDescriptor acceptance and actual anonymous-FD behavior remain V2's explicit integration/fixture gate; no acceptance is claimed from name strings or this manual."}]}
+
+ :offline-admission-scope
+ {:exact-source :v2-replacement-stage-gates-stage-2-lines-208-211
+  :approved-for-parent-admission ["Portable shared shapes/golden parity vectors and bounded framing."
+                                  "Selected unit-property data and deterministic placement/cleanup traces against fake manager/kernel interfaces."
+                                  "Strict fixed HTTP byte-stream parser against in-process bytes; no socket."
+                                  "Durable unknown/intent and registration-required/expiry/ack-loss denial decisions."
+                                  "Additive artifact and owned artificial byte-roundtrip fixtures only where separately parent-scoped; preserve original artifacts and blocked live CLI."]
+  :not-admitted ["Real libsystemd connection/calls, transient units, cgroup/process-control qualification or native FFI execution."
+                 "OCR GET/POST, native/model imports, inference, restart/load/download or cloud."
+                 "Real operational raw-run materialization/registration, automatic expiry executor or BPF/service hardening."
+                 "Treating positive fake evidence or this planning approval as trusted resource/owner/parent execution admission."]
+  :non-inversion "No functioning allocator, installed parent binding, owner expiry API or server egress hardening is a precondition to this OFFLINE source stage. Their absence must be encoded as a real DENY and kept visible. Implementation still needs independent exact-head review, tests, portable-law parity and zero-warning lint before later effect qualification."
+  :remaining-future-gates ["Trusted in-process parent binding, exact method/property/FD acceptance and parent-reviewed owned allocator/watchdog effects."
+                           "Actual first-bootstrap-stall, membership/cap/leaf isolation/pids/cleanup witnesses."
+                           "Current-worker no-third-party evidence or separately authorized owner no-restart hardening."
+                           "Actual expiry executor/custody acknowledgement before real raw copies."
+                           "Exact-head code approval and fresh in-envelope runtime/resource/listener checks plus distinct one-shot parent execution admission."]
+  :questions-required-now []
+  :unchanged "One conditionally consented <=6 sequential fixed 480x160 PNG batch, 5s transaction/30s counted-client/256MiB aggregate ceiling only after ALL later gates. Restart=no; one OCR restart already consumed; no retries, resume, new batches, model loads/downloads, private inputs, cloud or spending. No permission question is repeated."}
+
+ :checks-and-accounting
+ {:source-checks "Independently matched V2, prior-review and immutable V1 SHA256/line counts. Pure EDN check found the four response IDs exactly equal to the four original finding IDs and verified the selected oneshot/29900000us values."
+  :report-validation "One EDN record; final parse and four-unique-settled-ID/no-remaining/no-new-finding assertions. No product suite or effectful fixture was run."
+  :only-persistent-write "/home/err/spaces/foresight/.worktrees/plan/oikos-execution-20261103/.ημ/runs/oikos-program-20261103/reviews/s7a-hard-runner-plan-fix-review-v2.edn"
+  :product-edits 0 :v1-or-v2-edits 0 :board-edits 0 :ledger-edits 0 :pr-operations 0 :commits 0
+  :bus-connections 0 :manager-methods 0 :cgroup-writes 0 :unit-creation 0 :service-actions 0
+  :http-requests 0 :ocr-get-post 0 :native-imports 0 :model-operations 0 :downloads 0
+  :process-environment-memory-or-personal-data-reads 0
+  :reflection {:receipt-owner :parent :session-mycology-owner :parent :separate-ledger-or-spore-write false
+               :p-efficiency 0.95 :p-friction 0.10 :p-skill-candidate 0.45 :spore nil
+               :lesson "Confirm the promised planning fixes at their intended phase: a concrete prearmed oneshot contract and explicit DENY interfaces can unblock offline source while unavailable owner/allocator capabilities remain truthful future admission gates."}}
+ :next-action "Parent may admit ONLY V2 stage 2 offline DENY/protocol RED-GREEN under its exact source/test scope."}

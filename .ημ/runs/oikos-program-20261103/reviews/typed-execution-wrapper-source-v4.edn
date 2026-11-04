@@ -1,0 +1,22 @@
+{:kind :source-review-candidate
+ :authorization :source-only
+ :source-head "f0cb23fc09dbbef8ed5525aab20353add60fe4cf"
+ :artifacts [{:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/runner-v3.py" :sha256 "e83fa750676dd1b388ac32459eda899b7a88fb46f6de7aa195b54d7e09d8d9e9"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/guard-v2.py" :sha256 "37d9b10e85a46e621ac6bfc42ddf8894f0ce3352dc57528acfbc2681ca49b39f"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/inventory-v3.json" :sha256 "258030d0e11ba5a52edb2c66b012642545b15da123058a4c2664d1d9d08d5553"}
+             {:path "/tmp/opencode/oikos-typed-seq-logs-a2698786/neutral-probes-v3.py" :sha256 "32ba1b113427ee44b4b87451beead4de001aa08c386bfaeaab42c46ba6a7e69b"}
+             {:path "/usr/lib/jvm/java-21-openjdk-amd64/bin/java" :sha256 "635baf419576ec4ad4f785014283fb93f1be1103e6d02252f7a00517f0e2a245"}]
+ :dispositions [{:finding :leader-reaped-before-signal :status :source-repaired-pending-review
+                 :evidence "waitid WNOWAIT observes exit; leader remains unreaped until after final group KILL. Before each signal /proc group and starttime must match the captured leader anchor; no signals follow reap."}
+                {:finding :postlaunch-exception-skips-cleanup :status :source-repaired-pending-review
+                 :evidence "A postlaunch try/finally invokes bounded cleanup on ordinary and BaseException paths; original exception and independent cleanup result are reported. Failure to capture anchor refuses signals and reports unconfirmed."}
+                {:finding :fixed-command-and-outputs :status :retained-pending-review
+                 :evidence "Absolute classpath, neutral private cwd, isolated explicit environment, pinned resolved Java and fixed expression; restrictive basename and dirfd-relative exclusive nofollow logs."}
+                {:finding :inventory :status :cooperative-only
+                 :evidence "External coordinator pins manifest and Java hashes. Source roots, jars, query, wrapper, guard and Java checked pre/post; transient changes restored between checks remain undetectable."}]
+ :limitations ["No immutable snapshot or hostile-root protection; manifest trust depends on external hash verification before launch."
+               "The /proc anchor and process-group semantics, guard installation, and group-escape denial have not been dynamically verified; no cgroup containment claim."
+               "An unavailable anchor or cleanup/reaping deadline leads to unconfirmed failure, not a claim of successful cleanup. Group observation after reaping is conservative and never triggers another signal."
+               "Neutral harness probes the cleanup primitive and guard, not the complete fixed Java runner; external watchdog and independent observations required."]
+ :verification {:static "ast.parse passed for runner-v3.py, guard-v2.py and neutral-probes-v3.py; no probe, test or Java execution."}
+ :next "Same auditor must review these exact hashes and all source before separately authorized neutral probes."}

@@ -1,0 +1,36 @@
+{:report/id :oikos/ocr-drive-preservation-v2
+ :report/kind :authorized-exact-file-private-archive
+ :report/status :blocked-expired-drive-authorization
+ :prior-evidence ["ocr-owner-persistence-v1.edn" "../decisions/ocr-owner-publication-held.edn"]
+ :decision "User subsequently selected Google Drive archive of the exact reviewed files and active override; no Git history publication."
+ :local-snapshot
+ {:directory "/tmp/opencode/oikos-ocr-preservation-15ca13df-441a-49ec-a140-b7831f2b1d76"
+  :ownership :this-task :state :retained-pending-verified-remote-backup
+  :archive "ocr-preservation.tar" :bytes 40960
+  :sha256 "5bd90f8c1e77d29d4c84d92882f423dd1b9c467244001b0f5721fd8b618ac3db"
+  :manifest "manifest.json" :manifest-bytes 2284
+  :manifest-sha256 "82e37a71e89c9975a7db946a658cfd72ed74f782044e493c73d39005d777f90a"
+  :directory-mode "0700" :archive-and-manifest-created-with-umask "0077"
+  :selection [{:member "ocr/server.py" :mode "0664" :sha256 "aa92d14b781cc86ea01f90c009d38e29803ef1f37e19a331652a7a49ef8870d5"}
+              {:member "ocr/launch.py" :mode "0664" :sha256 "63a956d06f8538267f26e8847dfa2e37f296aca7c5a063650665f5ce67b375d6"}
+              {:member "ocr/test_attestation.py" :mode "0664" :sha256 "7a6a01bab930cd1b1aa80c8f5cc1b680dd4b856f0d83172da583901262b9430a"}
+              {:member "ocr/ATTESTATION.md" :mode "0664" :sha256 "f8c59945462bba4ac8cd4e1eb876a506bdf7b1fdf38ef63d4bcb08379ed352d6"}
+              {:member "unit/90-oikos-input-identity.conf" :mode "0644" :sha256 "9a0236217a54f59a1444d9029dc0a0efc3fac530d8f7b5ba382014c51765567c"}]
+  :source-paths-and-restoration-directions :in-manifest
+  :checks "Each source was opened without following the final symlink, verified regular and identical to its path, hashed against reviewed evidence before and after snapshot, and checked for matching device, inode, mode, size, mtime and ctime; pre/post bytes also matched. Local tar contains exactly the five named regular members, verified for hashes and modes."
+  :limit "Local snapshot is not a remotely verified backup."}
+ :remote
+ {:destination "gdrive:AgentWorkspaceArchives" :existing-remote-discovered true
+  :probe "rclone lsf, directories only, one retry" :probe-exit 1
+  :error "couldn't fetch token: invalid_grant: maybe token expired"
+  :connector-resource-discovery :no-resources-or-templates
+  :upload-attempted false :remote-readback false :remote-backup-verified false
+  :reauthentication false :new-destination false :public-upload false}
+ :boundary
+ {:source-edits 0 :unit-edits 0 :service-queries 0 :service-starts 0
+  :restarts 0 :daemon-reloads 0 :ocr-or-inference-requests 0
+  :git-publication 0 :local-deletions 0 :board-or-parent-ledger-edits 0
+  :private-rollback-keys-read false :models-read false
+  :restart-consumed-marker-untouched true
+  :cleanup-authorized false}
+ :handoff "Restore the existing Drive authorization through an authorized operator, then upload the retained uniquely scoped archive and manifest to the existing private folder; download both in full, verify hashes and sizes and all five safe member hashes before claiming backup. Retain local files until independently authorized cleanup."}

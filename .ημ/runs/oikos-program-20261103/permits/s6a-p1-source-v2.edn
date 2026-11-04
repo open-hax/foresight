@@ -1,0 +1,45 @@
+{:permit/id :s6a-p1-source-v2
+ :authority :parent-component-scoped-source-admission-after-independent-planning-review
+ :task "c703893f-aea4-41c2-9eab-c3bd37b28c9b"
+ :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s6a"
+ :corrected-plan {:path "../reviews/s6a-p1-corrections-v2.edn"
+                  :sha256 "2cd190543b6ec4d8e9ce5e9b5ad104b1768472f27470589de9ec0b972de29e54"}
+ :review {:path "../reviews/s6a-p1-fix-review-v2.edn"
+          :sha256 "8e50024ee8518646d6431aa7a111858c393731221ca437197a9eacf8537ec749"
+          :verdict :approved-corrected-p1-source-phase-only}
+ :prerequisites {:s2a "s2a-contract-c399b60e.edn"
+                  :s2a-permit-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+                  :s4a "s4a-contract-8ae64df4.edn"
+                  :s4a-permit-sha256 "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+                  :whole-producer-completion-required-for-this-pure-phase false}
+ :ordering [:lawful-rheos-phase-admission :exact-source-composition
+             :independent-composition-review :explicit-parent-green-light
+             :meaningful-red-before-green :independent-exact-head-code-review]
+ :source-composition {:base "008b0611198d13eb503bb57d5ef69d8dec1c268c"
+                       :import-source "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+                       :exact-six-additions ["docs/contracts/named-capability-v1.edn"
+                                             "docs/contracts/named-capability-v1.md"
+                                             "scripts/test_capability.clj"
+                                             "src/oikos/law/capability.cljc"
+                                             "test/oikos/capability_runner.cljc"
+                                             "test/oikos/law/capability_test.cljc"]
+                       :no-existing-file-overwrite true :nine-s2a-files-unchanged true
+                       :whole-s4a-tree-merge false :review-required-before-P1 true}
+ :new-p1-path-ceiling ["src/oikos/law/egress.cljc" "src/oikos/infra/govone.cljs"
+                       "test/oikos/law/egress_test.cljc" "test/oikos/infra/govone_test.cljs"
+                       "docs/contracts/govone-egress-v1.edn" "test/oikos/egress_runner.cljc"
+                       "test/oikos/govone_offline_runner.cljs" "scripts/test_egress.clj"]
+ :scope "Exactly one synthetic user text message; closed source/ref/revision/derivation preparation, representation guards, serialization and fixed safe denial/unknown classifications only. Prepared is authority none. Unsupported modalities and extra messages deny; no universal encoded-string detector or authenticated provenance claim. Unsafe host values must be refused before iteration/coercion; any additional extern file requires a named parent grant before creation."
+ :verification {:explicit ["bb scripts/test_egress.clj" "bb scripts/test_capability.clj"
+                           "bb scripts/test_desktop.clj" "bb test" "bb lint"]
+                 :dependencies :existing-pinned-Clio-source-and-cache-only
+                 :zero-effects "The adapter and its exercised import/call paths never resolve content, read credentials, create sessions, open sockets, call providers or spawn processes. Explicit BB/NBB test-runner processes are allowed verification, not adapter effects."
+                 :required [:BB-NBB-law-parity :NBB-offline-adapter-tests :zero-new-warnings
+                            :root-and-nested-inert-input-adversaries :actual-baseline-counts]}
+ :not-authorized [:transport-implementation :session-POST :credential-or-content-resolution
+                  :real-GovOne-runtime-or-listener :dependency-download :provider-or-model-call
+                  :existing-eval-path-edits :producer-contract-change :installed-promotion]
+ :held [:P2-transport-and-second-hop :P3-authentic-local-only-policy-trial
+        :P4-real-hybrid-and-external-transformations :actual-private-read-authority
+        :multi-message-history :whole-s6a-completion]
+ :board-authority :rheos-only :native-approval-credit 0 :epic-completion-credit 0}

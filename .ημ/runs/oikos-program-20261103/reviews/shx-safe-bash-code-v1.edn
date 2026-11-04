@@ -1,0 +1,34 @@
+{:review/id :shx-safe-bash-code-v1
+ :review/type :independent-functional-source
+ :verdict :hold-incomplete-independent-review
+ :reviewed-head "8a226b2f43cf3c82cfadbd5ceb76c7b8639b2935"
+ :worktree "/home/err/spaces/foresight/shx/.worktrees/feat/oikos-safe-bash-20261103"
+ :spec-sha256 "2dbeda258a384caa089e64ec578f57abfa85e123581559a603e55615c2abdcdc"
+ :pins {:validator "ff6226df864f9c3bed7d18c22eabe4034dda538b7e1cb03b14fadc08a3c8961e"
+        :renderer "0f9a48b48a1b51e065612d814418b18ef8dd4370a7543bba776c21e8a9727413"
+        :dependency "77f5b2ba8b337f72f4a5ca6f992222a9e06042c9535e6d1b829528f88c77d994"
+        :supervision "5c4059d4776e92e3dc9e19e3009972236be793030ca3268d1c890046ea84a8aa"
+        :java "5b211c35168b3ada0275b0109188c42f011838e53ef5b63eee748b8e492d3642"
+        :fixture "7f7fa43309ee099853abf0a0311e08df5c1dc13411d93fd4626c9dcde249953e"}
+ :pin-observation "SHA-256 values above independently computed on the candidate files and frozen spec; full manifest membership was checked by the passing production prepare and transport harnesses, not independently audited entry by entry by this reviewer."
+ :source-reviewed ["AGENTS.md" "docs/specs/restricted-bash-v1.md" "docs/verification/safe-bash-supervision-v3.md" "docs/verification/safe-bash-supervision-v3.edn" "docs/verification/safe-bash-transport-v2.edn" "src/shx/infra/safe_bash_supervisor.clj" "src/shx/infra/safe_bash_supervisor.cljs" "src/shx/infra/safe_bash_native/supervisor.cjs" "src/shx/infra/safe_bash_native/worker.cjs" "src/shx/infra/safe_bash_native/wire.cjs" "src/shx/infra/safe_bash_owner.clj" "src/shx/infra/safe_bash_frame.clj" "src/shx/infra/safe_bash.clj" "src/shx/infra/safe_bash_render.clj" "src/shx/infra/safe_bash_validation.clj" "src/shx/domain/safe_bash.cljc" "src/shx/domain/bash_validation.cljc" "src/shx/law/safe_bash.cljc" "src/shx/shape/safe_bash.cljc"]
+ :tests [{:command "NPM_CONFIG_OFFLINE=true bin/analyze --strict" :exit 0 :checks 7 :tests 48 :assertions 880 :failures 0 :warning :typed-clojure-deprecation}
+         {:command "bb -cp src:test test/shx/infra/safe_bash_bb_fixture.clj target/safe-bash-candidate-v11" :exit 0 :cases 21}
+         {:command "nbb -cp src:test test/shx/infra/safe_bash_nbb_fixture.cljs target/safe-bash-candidate-v11" :exit 0 :cases 21}
+         {:runtime :bb :profile "target/supervision-fixtures/profiles-708426/profiles.edn" :exit 1 :completed 9 :failed-case "exit" :observed {:code :cleanup-unconfirmed :cleanup false :elapsed-ms 3806 :worker-pid 714109 :worker-start "46985653"} :note "Real validator completed successfully before synthetic nonzero exit. Failure was fail-closed and the fixture finally block attempted identity-guarded cleanup. Later process listing showed no matching worker or fixture process. Cause not established."}
+         {:runtime :bb :profile "target/supervision-fixtures/profiles-724565/profiles.edn" :exit 0 :cases 24 :assertions 316 :max-wall-ms 5016 :results "target/supervision-fixtures/profiles-724565/reviewer-bb.edn"}
+         {:runtime :nbb :profile "target/supervision-fixtures/profiles-708426/profiles.edn" :exit 0 :cases 24 :assertions 360 :max-wall-ms 5012 :results "target/supervision-fixtures/profiles-708426/reviewer-nbb.edn"}]
+ :fixture-evidence {:builder "node test/shx/fixtures/build-supervision-faults.mjs target/safe-bash-candidate-v11"
+                    :new-owned-roots ["target/supervision-fixtures/profiles-708426" "target/supervision-fixtures/profiles-724565"]
+                    :identity "Harness records /proc PID/start for its own spawned process groups; cleanup-denied operator cleanup checks identity before signaling."
+                    :retention "Both new profiles, traces and result files retained; exact external backup not verified. No generated Bash executed."}
+ :findings []
+ :unresolved-observations [{:id :bb-adverse-intermittent-cleanup :severity :unclassified :contract-failure-established false :witness "First fresh BB matrix, exit fixture, returned cleanup-unconfirmed; second fully fresh matrix passed. No false-clean result observed. Investigate/reproduce before relying on repeatability; do not relabel a safely uncertain cleanup as a proven safety defect."}
+                           {:id :bb-success-deadline-review :severity :unclassified :contract-failure-established false :witness "In safe_bash_supervisor.clj:175-200 the elapsed deadline is checked at loop entry, before the potentially blocking absent? control subprocess and success CAS. This reviewer did not construct a bounded owned-process witness showing publication after deadline; scrutinize the cross-deadline control window before source approval."}]
+ :warning-hold {:reproduced true :text "DEPRECATED SYNTAX (NO_SOURCE_PATH): DEPRECATED: Using integer 0 for object id. Use named variables instead." :zero-warning-qualified false :dependency-remedy :not-implemented}
+ :evidence-limits ["No claim of B01-B13 independent approval: this review did not independently execute portable, effect, mutation or per-dependency perturbation suites, nor fully audit source bundle closure and all tests. Their implementer records remain claims, not fresh reviewer observations."
+                   "The 97 killed, 4 survivors and 51 unindexed mutations are implementer-reported; no survivor is labeled killed and no unindexed site alone is treated as a concrete finding."
+                   "5016/5012 ms samples include normal dispatch and cleanup; they are not a blanket waiver of the original 5000 ms decision deadline."
+                   "Pinned host libraries and immutable-owner custody are assumptions; no OS sandbox, airgap, installed capability, accepted consumer handoff, or Oikos replacement kernel is asserted."]
+ :scope {:source-edits false :commits false :push false :pr false :board false :ledger false :download false :services false :personal-env false :generated-bash-execution false}
+ :next "Complete an independent deadline-window and full B01-B13/closure review, then resolve the separate zero-warning dependency hold and requalify before any authorized owner PR or consumer handoff."}

@@ -1,0 +1,31 @@
+{:checkpoint/id :oikos-owner-source-custody-v1
+ :trusted-prefix "0f71222680e7da5abd954c92694ea47045010cc2"
+ :accepted-oikos "fed4e30272cc1186de14bcc708b3efc9736e3139"
+ :accepted-oikos-tree "429d9dde803b6d12ee07f692872a1b0dcba31ad1"
+ :gitlink-change :accepted-source-only
+ :stage-scope "Explicit newly created canonical review/decision/permit/incident/checkpoint records; current workflow, two Rheos-owned card changes and ledger, execution note, append-only receipts/reflection and incubating CWD spore. No directory-wide git add or nested dirt sweep."
+ :preserved-unstaged ["cards/" "cards-after-native-corrections/"
+                      "adjudicated-clarifications/" "s1a-native-scope/"
+                      "runreviews/s6a-govone-fixture-source-v1.edn"]
+ :mirror-custody {:record "../readback-custody.edn"
+                  :remote-commit "e2939d28e1b7ecbeb441dfd6fbac358c4300081a"
+                  :local-manifest-absent true
+                  :manifest-git-object-present true
+                  :manifest-path ".ημ/runs/oikos-program-20261103/readback-manifest.json"
+                  :qualification "The local mirror lacks a manifest file, but the exact named manifest exists in the recorded Git tree. This checkpoint does not repeat the old remote readback or claim a new backup of every mirror. Leave the mirrors intact."
+                  :misplaced-worker-report "runreviews/ contains an incomplete attempt; canonical source candidate and review are distinct later records, not a rewrite."}
+ :receipt-helper-limit "rr-append.bb serializes manifest/refs as scalars. Do not use it here: new coordinator receipts are checked by the existing vector-shaped receipt-envelope law before direct append; historical bytes remain unchanged."
+ :malformed-review {:original "../reviews/s6a-govone-fixture-source-review-v1.edn"
+                    :original-sha256 "99228519c5aefbab3ed7a52381d4cdb806868bf95a4596176099bdda44991db6"
+                    :original-staged false :original-untouched true
+                    :exact-byte-custody "govone-review-raw-custody-v1.edn"
+                    :valid-syntax-successor "../reviews/s6a-govone-fixture-source-review-v1-syntax-fixed.edn"
+                    :qualification "Two missing map delimiters made the raw original unparsable. Its frozen hash references in historical reports identify bytes now recoverable through the custody envelope's original/text, not a law-valid machine input. No source finding, target or approval scope was changed; no permissive parser was substituted."}
+ :services-review {:path "../reviews/services-generation-fix-review-v2.edn"
+                   :observed-sha256 "5f565e3e2729c3461137a6a20f7fbbdc3bc8365c56965b217eab3a4cad983025"
+                   :earlier-reported-sha256-invalid true
+                   :qualification "Corrects the digest supplied in a worker response, not the immutable review bytes or source approval scope."}
+ :baseline {:project [12 171] :workspace [24 122]
+            :project-model :passed :lint-errors 0 :lint-warnings 0
+            :workspace-output "Fixture tests deliberately exercise missing bun/jscpd and uninitialized repository outcomes; test assertions pass, not real child lint/build executions."}
+ :holds "No epic completion, installed promotion, personal capture, new model/service start, OCR batch, global-cache cleanup or warning-free shx release is inferred. Active owner source lanes remain subject to their independent reviews."}

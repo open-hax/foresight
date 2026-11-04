@@ -1,0 +1,31 @@
+{:review/id :s6a-p1-fix-review-v2
+ :review/kind :same-independent-reviewer-narrow-planning-confirmation
+ :verdict :approved-corrected-p1-source-phase-only
+ :authority :none
+ :inputs {:corrections "s6a-p1-corrections-v2.edn"
+          :corrections-sha256 "2cd190543b6ec4d8e9ce5e9b5ad104b1768472f27470589de9ec0b972de29e54"
+          :original-review-sha256 "d93b0b9e5135820d3faa0d2fc376797297bc212d1239087eed29c00713311908"
+          :original-candidate-sha256 "df20d2c4fa9f32f8d3eb3a0b8982cf0fe614e2f3bd05f862277e6a8ba8d93e02"
+          :accepted-base "008b0611198d13eb503bb57d5ef69d8dec1c268c"
+          :pure-s4a "8ae64df4c7ad170c5de9206f4d3f712d44c60b43"
+          :observed-s6a-head "ae35073719974c0df1d2dae301c2179fa4785641"}
+ :finding-dispositions
+ [{:id :s6a-plan-01 :status :settled
+   :reason "Exact 008b base, six-file 8ae import, S2A pins, independent import review before implementation, eight named new files and explicit separate test invocations are now specified. The currently observed S6A head is not 008b; verify the actual composed base and preserve unrelated work."}
+  {:id :s6a-plan-02 :status :settled
+   :reason "Offline applicability matrix distinguishes inert classification and not-applicable pairs from actual transport, DNS, revocation and isolation proof; the latter remain in later permitted phases."}
+  {:id :s6a-plan-03 :status :settled
+   :reason "Known structured modalities deny, arbitrary encoded strings are not claimed detectable, unsafe host representations must be refused without traversal, and real provenance remains held. Feasibility of the eventual nested host guard is a code-review and test obligation, not an established fact or a reason to block the whole phase."}
+  {:id :s6a-plan-04 :status :settled
+   :reason "Exactly one synthetic user message with closed event/ref/revision and optional named derivation replaces the undefined history claim; additional messages and caller completeness claims deny until a separate history contract."}]
+ :host-boundary {:assessment "A portable pure predicate plus a Node outer guard is a permissible design to attempt, not a proven sound guard for every nested host object. No source implementation exists yet to inspect. Require actual safe-boundary evidence, zero-accessor adversarial tests and refusal of uninspectable representations; do not assert universal proxy introspection."
+                 :additional-file "The eight-file ceiling remains in force. If implementation demonstrates a separate pure Node interop extern is required, request parent authorization for src/oikos/extern/govone_guard.cljs before creating it; this is a conditional recommendation, not an existing grant or a finding that the file is necessary. No Node I/O belongs in the CLJC pure layer."}
+ :admission {:recommendation "Parent may proceed with Rheos admission and issue the exact corrected P1 permit. Independently review the six-file source composition before any P1 implementation; this approval does not perform either action or authorize imports by itself."
+             :scope "Offline inert preparation, strict closed synthetic shapes, fixed safe denial and outcome classification only, prepared authority none. No resolver, credentials, session POST, transport implementation, policy issuer or effect grant. Pure producer shape consumption does not require whole producer completion."
+             :gates "The corrected eight-file ceiling and explicit egress/capability/desktop/baseline/lint commands apply, including real RED then GREEN and independently reviewed exact head. Zero subprocess effects refers to the adapter and exercised code, not the explicitly authorized BB/NBB test-runner processes required to execute the suites."
+             :retained-holds [:p2-owned-http-and-second-hop :p3-authenticated-signed-local-only :p4-genuine-hybrid-and-external-transformations :real-provenance-and-read-authority :eval-all-path-integration :whole-task-acceptance]}
+ :operator-update "User now authorizes isolated checksum-verified Go 1.27.1 download/cache; this does not authorize an owner runtime, service, other dependency downloads or any effect proof. It does not block the pure phase. No download was performed here."
+ :remaining-findings []
+ :user-decision-needed :none
+ :verification "Read the full 46-line correction and independently computed hashes of the correction, original review and original candidate. Confirmed local Git object identities and observed S6A HEAD. Narrow confirmation only; no source or runtime re-review claimed."
+ :effects {:written-only "This new review file" :source-imports 0 :product-edits 0 :board-writes 0 :ledger-writes 0 :network 0 :runtime-starts 0 :commits 0 :pushes 0}}

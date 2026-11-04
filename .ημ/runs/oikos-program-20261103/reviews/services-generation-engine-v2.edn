@@ -1,0 +1,192 @@
+{:report/id :services-generation-engine-v2
+ :kind :implementation-candidate-for-independent-code-and-os-review
+ :observed-at "2026-11-03T23:28:20Z"
+ :context :世 :confidence 1.0
+ :status :locally-tested-review-candidate
+ :independent-review false
+ :final-green false
+ :implementation-qualified false
+ :owner-to-oikos-acceptance false
+ :consumer-handoff-authorized false
+ :s1b-completion-credit false
+ :source {:repository "open-hax/services"
+          :worktree "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+          :branch "feat/oikos-local-generations-20261103"
+          :initial-head "a7e56794f8872be558d423f10c1979033bd08e36"
+          :head "b39d8058ad886879304bd9866e537fdcbd418edf"
+          :tested-head "b39d8058ad886879304bd9866e537fdcbd418edf"
+          :tracked-clean true
+          :untracked-preserved ["scripts/__pycache__/"]
+          :ordinary-commits true :amend false :push false :pr false
+          :changed-paths ["README.md" "docs/local-generation-engine-notes.md"
+                          "scripts/local-generation.clj" "scripts/local-generation-laws.clj"
+                          "scripts/local_generation_fs.py" "scripts/local_generation_wire.py"
+                          "scripts/local_generation_edn.py" "scripts/local_generation_runner.py"
+                          "scripts/tests/test_local_generation_boundary.py"
+                          "scripts/tests/test_local_generation_engine_edges.py"
+                          "scripts/tests/test_local_generation_fs.py"
+                          "src/services/local_generation.cljc" "test/services/local_generation_test.cljc"]}
+ :planning {:accepted-head "f8d63271bd3d14cc6ce5ec33466c6e8a747d5d10"
+            :spec "docs/local-generations-v1.md"
+            :spec-sha256 "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"
+            :frozen-spec-unchanged true
+            :review ".ημ/runs/oikos-program-20261103/reviews/services-generation-plan-fix-review-v2.edn"
+            :review-and-prior-implementation-report-read-in-full true
+            :card "3f5d0052-dda2-4089-971d-8603e385bd77"
+            :operational-admission :parent-supplied-existing-in-progress
+            :board-or-parent-ledger-writes false}
+ :entry {:scope :experimental-synthetic-private-envelope-only
+         :qualified-entry false
+         :facade-argv ["bb" "scripts/local-generation.clj"]
+         :cwd "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103"
+         :argv-policy "No facade argv accepted. Owner launch JSON arrives through inherited fd 3; untrusted original request bytes arrive on stdin."
+         :owner-launch-schema "services.local-launch/v1"
+         :owner-launch-exact-keys ["schema" "policy" "revision" "sources" "python_sha256"]
+         :source-ids ["edge" "facade" "laws" "pure" "runner" "validator" "wire"]
+         :worker-argv ["/usr/bin/python3" "-I" "-B"
+                       "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103/scripts/local_generation_runner.py"]
+         :worker-framing "8 ASCII decimal owner-byte length digits, original owner bytes, then original request bytes through EOF. The strict native decoder still sees duplicate keys."
+         :recovery-entry "Empty request stdin means recovery-only. Otherwise startup recovery precedes request admission. Recovery children in the crash fixtures receive only trusted policy, no original request/Plan/approval."
+         :law-argv ["/usr/local/bin/bb" "-cp"
+                    "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103/src"
+                    "/home/err/spaces/foresight/services/.worktrees/feat/oikos-local-generations-20261103/scripts/local-generation-laws.clj"]
+         :fixed-law-operations ["schemas" "approval" "current"]
+         :effect-authority "No automatic approval synthesis. Closed native validation, independently recomputed hashes, exact separately supplied owner approval, stable exclusive lock, anchored observations and durable capsule/journal precede generation/selection mutation."
+         :format-support [{:format "edn" :entry "inert-edn-v1" :actual-positive true
+                           :descriptor "services.inert-edn/v1: closed schema/value object"
+                           :payload "One inert EDN map with :fixture/value and a string; no EDN evaluation or general reader API."
+                           :general-edn-availability-claimed false}
+                          {:format "bash-env" :status :unavailable :code :unsupported
+                           :shx-entry-invented false :validator-availability-mocked false}]}
+ :pins {:edge-sha256 "e65ac405697110fd4acfd2febc83446e287982dc3e33325dc1d071687596efc4"
+        :facade-sha256 "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+        :runner-sha256 "8c68a77b303b5b019a4e40713934fa5664c7ce71e5a905b6a98c1926e886bce9"
+        :wire-sha256 "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"
+        :validator-sha256 "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+        :laws-sha256 "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+        :pure-sha256 "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"
+        :python-sha256 "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f"
+        :bb-sha256 "83fd506a848f11dd0839fb36604c180e4436e5faf0814a2f643537ed22f6835a"
+        :actual-source-facade-fixture {:services-revision "b39d8058ad886879304bd9866e537fdcbd418edf"
+                                       :policy-sha256 "73a9cce1bb7265b46d4519d9deb1728b072564952f0eeea5ca26e06dad60a1a2"
+                                       :source-graph-named-value-sha256 "698aa5aa4cde69dd945b4814bf3b19ca4d223382ec42f33ad26453628c8419bd"
+                                       :fixture-only true :reusable-production-policy false
+                                       :note "Policy binds the fresh synthetic root/anchor. This is test evidence, not an issued owner policy or accepted release."}}
+ :capsule {:schema "services.local-recovery/v1" :maximum-wire-bytes 33554432
+           :custody "Immutable exclusive no-follow file, mode 0600, owner/single-link and anchored directory checks; fsync file, transaction directory and transactions parent before initial journal. Journal binds capsule named-value hash and exact native Identity/raw-byte SHA."
+           :bindings "Exact admitted Plan, approval, trusted policy/source, original current bytes/accepted metadata, old TreeProof and rollback-target proof. No fresh observations are substituted for recovery authority."
+           :lifetime "Capsule/journal/consumed nonce retained; no GC/clear/force API."
+           :apply "Requires absent destination. Cleanup authority is only proved transaction-created entries/candidate."
+           :rollback "Pins an existing retained target and exact manifest/proof, never rebuilds/rewrites/deletes A or B; compensation returns to the originally selected B."
+           :selection "Regular current file, never symlink. Rename postconditions derive from the owned source identity and full metadata, not a newly observed destination."
+           :uncertainty "Missing/torn/replaced/wrong-pin capsule, ambiguous operation/custody, retained proof drift or failed compensation holds. First cause is preserved separately from recovery failures. Held after:null is unknown, not claimed absence. Re-entry with unresolved native effects reports target_writes:null, never a guessed zero."
+           :private-os-limits "Advisory flock serializes cooperating writers only. Private parent ownership and cooperative lease are preconditions. No atomic whole-chain compare/rename guarantee, hostile same-UID/root/mount guarantee, device-loss recovery guarantee or arbitrary desktop-root qualification."}
+ :verification
+ {:new-suite {:command "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest scripts.tests.test_local_generation_boundary scripts.tests.test_local_generation_fs scripts.tests.test_local_generation_law scripts.tests.test_local_generation_engine_edges"
+              :head "b39d8058ad886879304bd9866e537fdcbd418edf"
+              :tests 39 :seconds 1036.359 :failures 0 :errors 0 :result :passed
+              :sigkill {:occurrences 642 :restored 248 :held 386 :checked 8
+                        :actual-owned-child-sigkill true :fresh-recovery-processes true
+                        :original-request-supplied-to-recovery false
+                        :occurrences-not-distinct-labels true
+                        :apply-and-rollback true
+                        :checked-semantics "No new transaction yet, or a complete durable committed journal with exact nonce and selected candidate. No incomplete record becomes implicit success."
+                        :per-case-checks "Original selected generation on restored results, unchanged retained A/B bytes/accepted metadata and unrelated sibling. Checked committed outcomes explicitly require the committed record; held outcomes require unknown write count."
+                        :coverage-limit "These are every normal positive-transaction occurrence. They are not a claim of exhaustive hostile actors or every interrupted compensation permutation."}
+              :additional-actual-cases ["Independent syscall recorder: preview/check zero calls and exact successful apply count"
+                                        "Real short pwrite completion"
+                                        "Actual A -> B -> retained rollback A"
+                                        "Interrupted rollback restores B and preserves both trees"
+                                        "First-selection SIGKILL restores absence; subsequent fresh apply works"
+                                        "Fresh-process retained mtime/xattr drift holds from durable proof"
+                                        "Missing/torn/identical-byte replacement capsule holds"
+                                        "Every discovered before/after partial-effect fault, including journal/fsync/selection checkpoints"
+                                        "Separate compensation failure preserves first cause, persists hold and does not automatically repeat"
+                                        "Historical approval expiry does not block its own compensation"
+                                        "Final ancestor/lock/destination/current replacement paired with real successful writes"
+                                        "Concurrent cooperating processes: one serial winner and zero-write stale loser"
+                                        "Post-rename foreign current/journal inode is not adopted or overwritten"
+                                        "Post-rename xattrs are not accepted as new metadata"
+                                        "Pre-preview retained/current metadata and inode drift refuse without writes"
+                                        "Unknown generation/transaction replacement and restored-intent foreign adoption refuse"
+                                        "Full 16-component artifact path with bounded 17/19-component derived paths"
+                                        "Distinct complete 64-character nonces do not alias transaction names"
+                                        "Clock rollback, replay observed-state reporting, distinct limit diagnostics"
+                                        "No socket/shell/general subprocess during real apply; fixed inert law transport allowlisted"]}
+  :facade-actual-source {:head "b39d8058ad886879304bd9866e537fdcbd418edf"
+                         :actions [:applied :applied :rolled-back]
+                         :preview-check-and-eof-recovery-zero-write true
+                         :retained-a-and-b-snapshots-unchanged true
+                         :duplicate-wire-denied true :sanitized-error-marker-not-leaked true
+                         :fixture-only true}
+  :bounded-transport {:input-bytes-each 16777216 :input-deadline-ms-each 10000
+                      :worker-deadline-ms 30000 :stdout-bytes 16777216 :stderr-bytes 4096
+                      :law-deadline-ms 10000
+                      :actual-stalled-input-seconds 10.1 :actual-exit 5
+                      :actual-status :held :actual-target-writes nil
+                      :independent-target-snapshot-unchanged true
+                      :note "A transport timeout cannot prove the worker effect outcome. It never returns a fabricated zero or fallback success."}
+  :pure [{:runtime :bb :version "1.12.207" :tests 8 :assertions 137 :failures 0 :errors 0}
+         {:runtime :nbb :version "1.3.204" :tests 8 :assertions 137 :failures 0 :errors 0}
+         {:runtime :offline-bundled-jvm :tests 8 :assertions 137 :failures 0 :errors 0
+          :exact-required-workflow-cli-proof false}]
+  :environment {:command "CADDY_TEST_BINARY=/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773/caddy PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/tests -p 'test_environment*.py'"
+                :head "b39d8058ad886879304bd9866e537fdcbd418edf"
+                :tests 134 :seconds 100.317 :failures 0 :errors 0 :result :passed
+                :both-previously-unavailable-caddy-classes-executed true
+                :prior-missing-caddy-baseline {:tests 123 :errors 2 :result :failed}
+                :historical-123-not-misreported-as-final-count true}
+  :additional-focused {:tests 31 :failures 0 :errors 0
+                        :modules ["test_legacy_deployment_key_match" "test_environment_policy" "test_environment_workflow"]}
+  :static-passed ["clj-kondo on pure source/tests/fixed BB scripts/EDN checker: 0 errors, 0 warnings"
+                  "Deployment boundary self-test and scan"
+                  "Singular immutable deploy source pins"
+                  "Deploy-chain failure propagation"
+                  "All 370 EDN resources via actual offline bundled JVM parser"
+                  "Document anchor inventory via actual offline bundled JVM parser"
+                  "Exact workflow YAML parse: 37 files"
+                  "Python AST: all 92 scripts Python files"
+                  "bash -n on DO libraries/scripts/service scripts"
+                  "Environment contract checker"
+                  "Disabled-profile contract self-test and scan"
+                  "git diff --check and tracked tree unchanged from tested head"]
+  :not-established ["Required workflow CLI 1.12.5.1664 invocation of both clojure -M parser/inventory gates"
+                    "Entire code-quality workflow including Docker-dependent website publication gates"
+                    "Independent actual implementation/code/security/OS review and owner acceptance"]}
+ :qualification-holds {:required-cli "1.12.5.1664"
+                       :observed-cli "1.12.2.1565"
+                       :observation-command "clojure -Sdescribe"
+                       :substitution-claimed false :automatic-install false
+                       :offline-parser-is-not-a-waiver true
+                       :independent-review-required true
+                       :all-required-workflow-gates-still-required true}
+ :caddy {:authorization ".ημ/runs/oikos-program-20261103/decisions/caddy-isolated-test-cache-authorization.edn"
+         :canonical-evidence ".ημ/runs/oikos-program-20261103/reviews/caddy-test-cache-v1.edn"
+         :original-worker-evidence "reviews/caddy-test-cache-v1.edn"
+         :authorization-and-both-complete-reports-read true
+         :initial-canonical-path-missing-then-recovered-by-parent true
+         :archive-sha256 "a7e8306c54138cf88e371c5ec0caf7baf142ecc1d60a30897dfb67d65d3748c8"
+         :binary-sha256 "d3491373b2d78e4eaa3f498b42852d399d404b0df3f274bbee66d62c12084be0"
+         :actual-hashes-rechecked true :actual-version "v2.8.4" :format :elf64-x86-64
+         :actual-owner 1000 :actual-mode "0700" :single-link-regular true
+         :only-version-and-fixture-adapt-execution true
+         :system-install false :daemon-or-listener-start false :cache-deletion false}
+ :reflection {:efficiency 0.55 :friction 0.65 :skill-candidate 0.65
+              :spore-created false
+              :lesson "Use actual ordinal kill/fault fixtures early, distinguish operational ancestor metadata from immutable tree facts, and test below adapter hooks between a successful syscall and readback. Derive custody from already-owned identities and durable terminal facts; a fresh observation is not authority."
+              :ledger-and-spore-publication-delegated-to-parent true}
+ :artifacts {:active-worktree-retained true :free-before "45 GiB" :free-after "43 GiB"
+             :large-scratch-allocation false
+             :generated-cache-files [{:path "scripts/__pycache__/local_generation_fs.cpython-312.pyc" :bytes 85338}
+                                     {:path "scripts/__pycache__/local_generation_edn.cpython-312.pyc" :bytes 1859}
+                                     {:path "scripts/__pycache__/local_generation_wire.cpython-312.pyc" :bytes 6231}]
+             :cache-origin "Early isolated Python prototype ignored environment bytecode suppression; fixed argv now uses -B and an absent root-owned cache prefix."
+             :cache-staged false :cache-deleted false
+             :cleanup-blocker "No verified pushed/Drive backup and no push/backup authority; preserve active worktree, small generated caches and the separately owned active Caddy cache."}
+ :effects {:installed false :deployment false :docker false :services-or-listeners false
+           :private-inputs-or-credentials false :model-calls false :nested-agents false
+           :owned-native-workers-and-sigkill-tests true
+           :downloads-by-this-implementer false :authorized-existing-caddy-cache-used true
+           :foreign-source-config-writes false :board-writes false :parent-ledger-writes false
+           :sole-parent-write ".ημ/runs/oikos-program-20261103/reviews/services-generation-engine-v2.edn"}
+ :next "Parent dispatches fresh independent actual code/security/OS review of exact b39d8058ad886879304bd9866e537fdcbd418edf and resolves the required tool/workflow holds. This report is evidence for review, not owner release/consumer acceptance."}

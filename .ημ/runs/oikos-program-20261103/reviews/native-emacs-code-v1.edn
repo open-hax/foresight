@@ -1,0 +1,38 @@
+{:review/id :native-emacs-code-v1
+ :review/kind :independent-adversarial-source-review
+ :verdict :changes-requested
+ :repository "/home/err/.spacemacs.d/.worktrees/feat/oikos-native-capability-20261103"
+ :head "cc2192fb5e02961da0ab942073d41847087af09a"
+ :sources [{:path "layers/agent-sandbox/oikos-native.el" :sha256 "0d0222e263a25007d72ea5718e4f9a494d1664d7e2c4bd73773bbd9ba08e440d"}
+           {:path "tests/unit/oikos-native-test.el" :sha256 "74b8b62de18fa13a5c56f74f4a4bdca1b4d221ffb86a4fbc6aedc918d5558cfc"}]
+ :authority {:scope :unloaded-source-and-isolated-batch-only
+             :permit "../permits/s4a-offline-source-v2.edn"
+             :decision "../decisions/s4a-native-owner-source-and-target-nomination.edn"
+             :real-owner-qualified false :live-effect-authorized false
+             :whole-s4a-complete false :fixture-positive-is-authority-proof false}
+ :findings [{:severity :p1
+             :confidence :static-source-analysis-not-dynamically-reproduced
+             :title "Final exclusivity callback can change the request after its last equality check"
+             :locations ["layers/agent-sandbox/oikos-native.el:273-283" "layers/agent-sandbox/oikos-native.el:81-89" "layers/agent-sandbox/oikos-native.el:103-105"]
+             :mechanism "After the commit fence returns, request is compared to bound at line 275. The subsequent final validate invokes registry exclusive-p through snapshot/facts/eligible-p. That callback can retain a reference to the original request and mutate its replacement after equality was checked, while returning t and leaving native facts unchanged. The code then inserts the replacement from the mutable original request, not the bound copy. The inserted content can therefore differ from what the commit fence saw and can evade the previously checked 4096-byte replacement and 1 MiB result limits. A corresponding callback mutation of request after the read release comparison means the release-bound request can differ from the request returned for, although the precomputed text itself stays the original range. This is a callback TOCTOU in the private mechanism, not a claim that fixture callbacks establish authority."
+             :suggested-verification "Add an isolated fresh-buffer test whose commit fence records bound and whose exclusivity callback changes the original replacement only on the final validation; verify a normal control, recorded fence input, returned status, and before/after UTF-8 bytes. Confirm denial or insertion of only immutable validated data. Also test callback mutation at read release and oversized replacement."
+             :remediation "Ensure every callback completes before the final immutable-request comparison and limit check, and perform the operation using the independently owned, validated immutable data; do not allow the fence to mutate the authoritative copy. Recheck relevant native facts and modification protections after callbacks."}]
+ :other-observations ["The public dispatcher unconditionally returns dispatcher-unavailable in the reviewed source."
+                      "Registry epoch/incarnation are generated via kernel UUID, registry keys use eq, and facts copy identity strings. These are source observations, not runtime qualification."
+                      "Claim burns are memory-only, and post-start errors intentionally return indeterminate without rollback; neither durable replay protection nor atomic rollback is asserted here."
+                      "The trusted exclusivity interface is not evidence that a real owner or shared-text alias fence exists; its absence is an explicit hold, not a finding against this source-only scope."
+                      "No additional finding is asserted on raw bytes, concurrent behavior or hook edge cases without a working authorized runtime probe."]
+ :commands [{:command "git status --short --untracked-files=normal && git rev-parse HEAD && sha256sum layers/agent-sandbox/oikos-native.el tests/unit/oikos-native-test.el" :result "HEAD and hashes match; pre-existing .batch-home/ and two .elc files were untracked and preserved."}
+            {:command "git show --stat --oneline HEAD" :result "Commit reports changes to the two reviewed files."}
+            {:command "d=$(mktemp -d /tmp/opencode/oikos-review-XXXXXX); mkdir -p isolated HOME/XDG and out under d; /snap/bin/emacs31.1 -Q --batch -l tests/unit/oikos-native-test.el -f ert-run-tests-batch-and-exit" :result "Executable absent, shell exit 127; 24 ERT tests not run."}
+            {:command "/snap/bin/emacs31.1 -Q --batch -l tests/unit/err-core-funcs-test.el -f ert-run-tests-batch-and-exit" :result "Executable absent, shell exit 127; existing owner tests not run."}
+            {:command "/snap/bin/emacs31.1 -Q --batch --eval '(setq byte-compile-dest-file-function ...)' -f batch-byte-compile layers/agent-sandbox/oikos-native.el tests/unit/oikos-native-test.el" :result "Executable absent, shell exit 127; changed-file compilation and warnings not verified."}
+            {:command "command -v emacs; ls -l /snap/bin /usr/bin/emacs*" :result "/snap/bin/emacs exists but the specifically authorized /snap/bin/emacs31.1 does not; no alternative executable was run."}]
+ :probe-status {:adversarial-runtime-probe :not-run-executable-unavailable
+                :working-controls :not-run :byte-before-after-witness :not-run
+                :tests-24-of-24 :not-verified :tests-19-of-19 :not-verified
+                :changed-file-compile :not-verified}
+ :preservation {:preexisting-untracked-artifacts :untouched
+                :agent-test-directory "/tmp/opencode/oikos-review-58WZNk"
+                :cleanup :not-performed-without-verified-backup
+                :production-source-edits false :live-emacs-access false}}

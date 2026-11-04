@@ -1,0 +1,33 @@
+{:review/id :s2b-collector-source-plan-fix-review-v3
+ :reviewer :same-independent-reviewer-as-s2b-collector-source-plan-review-v1
+ :verdict :approve-planning-for-separate-source-only-admission
+ :input {:path ".ημ/runs/oikos-program-20261103/reviews/s2b-collector-source-plan-v3.edn"
+         :sha256 "0f8307256de2ee6a3e87a4c16ee4295166d7854a5cc828160f8c5900707482cf"
+         :lines 62
+         :inherited-plan "s2b-collector-source-plan-v2.edn"
+         :prior-review "s2b-collector-source-plan-fix-review-v2.edn"
+         :base "fed4e30272cc1186de14bcc708b3efc9736e3139"}
+ :scope "Recheck the remaining accepted-but-stale-admission finding and whether V3 introduces contradictions against the settled boundaries; planning only."
+ :dispositions
+ [{:id :s2b/frozen-runner-conflict :status :settled-unchanged
+   :evidence "V3 lines 8-12 preserves eight named additions, zero modifications and V2 standalone invoker; base pins and modes remain a future composition gate."}
+  {:id :s2b/unbound-resource-and-source-contract :status :settled-for-planning-unchanged
+   :evidence "V3 lines 10-11 preserves V2 fixed bounds and closed descriptor. Actual descriptor bytes, digest, tests and exact source require future independent review and binding."}
+  {:id :s2b/injected-capabilities-and-host-values :status :settled-for-planning-unchanged
+   :evidence "V3 lines 11 and 13-21 retain the primitive edge, inert schedules, bounded resolution and no executable callbacks. Synthetic owner facts and proofs are fixture inputs, not calls or real owner authority."}
+  {:id :s2b/gap-history-and-prebaseline-state :status :settled-for-planning
+   :remaining-finding :s2b/accepted-but-stale-admission
+   :evidence "V3 lines 13-29 separates admission, response and lease; proven stale accepted baseline/reconciliation advances exact head and creates an old-revision gap; proven gap becomes the sole active gap; unresolved identity/head blocks competing events. Lines 40-58 specify accepted-before-loss, lost ACK/resolution, stale gap and stale reconciliation schedules with replay and lease assertions. This matches the frozen replay constraints inspected in the preceding review."
+   :qualification "Fixture proof and opaque synthetic head tokens are not real authenticated owner-head evidence. A later real adapter needs its own reviewed protocol and permission."}
+  {:id :s2b/oracle-shape-and-evidence :status :settled-for-planning-unchanged
+   :evidence "V3 lines 11-12 and 60 retain V2 subset-only comparison and separately held actual nested oracle; no full geometry/hierarchy proof or live currentness is claimed."}]
+ :introduced-contradictions {:result :none-found-in-reviewed-scope
+                             :limits "This is plan review, not verification of the future implementation, owner ordering, descriptor digest, source pins, tests, or runtime behavior."}
+ :admission {:this-review-grants-source-permission false
+             :next-gate "Parent separately reviews exact clean composition of accepted base into existing task worktree, verifies all 63 base blobs/modes, 13 pins and nonconflicting state, then may issue a specific bounded source-only permit before RED or board transition."
+             :permitted-if-separately-authorized "Only the eight named additions, no base modifications; pure collector, bounded primitive NBB edge, fixture-only deterministic fake schedules, descriptor, tests and dedicated invoker. Verify and independently review actual descriptor identity and exact source before consumption; no private fixture calls or actual append."
+             :still-held [:real-connector :native-i3-effects :actual-nested-i3-oracle :real-owner-append :private-fixture-adapter :live-currentness :govone-authority :task-completion]
+             :future-tests "RED and green, owner-law replay, adversarial boundary schedules, fixed bounds, all pins and independent exact-head code review remain future gates. Native ordering and completeness require independent owner-backed qualification."
+             :no-credit [:implementation :test-execution :native-approval :merge-verification :board-transition :actual-oracle]}
+ :performed [:read-v3 :read-prior-review :hash-v3 :write-this-review-only]
+ :not-performed [:source-import :tests :board-edit :ledger-write :native-i3 :download :commit :pr :nested-agent]}

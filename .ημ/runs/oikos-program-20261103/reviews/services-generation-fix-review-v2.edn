@@ -1,0 +1,69 @@
+{:review/id :services-generation-fix-review-v2
+ :kind :independent-exact-head-code-security-os-recheck
+ :reviewer :same-independent-services-reviewer
+ :verdict :approve-source-scope
+ :approval-scope "Experimental private/cooperative Linux generation-envelope source at exact candidate below, including settlement of the prior two findings and forged-effectful-request ingress. Not owner release, native-provider approval, installed promotion, consumer acceptance or S1B completion."
+ :candidate {:head "b2973ef9e3246522324dec4658fbeb093ffab147"
+             :tree "daf053cce6b24c8d62f59e660b90b6c92a5bbae2"
+             :parent "78e2cbb6482ddf2ff140ad8ac46ce974af5b7892"
+             :prior-independent-review-head "1839a961bb1295caefbf6c6fa45df7d60239b690"
+             :prior-review "reviews/services-generation-code-v1.edn"
+             :delta "Only scripts/local_generation_runner.py, scripts/local_generation_fs.py and scripts/tests/test_local_generation_fs.py changed from prior review head."
+             :status "No tracked modifications; pre-existing untracked scripts/__pycache__/ left untouched."
+             :test-source-sha256 "22a209935574805ab04282b46c68c0af6c8febaec02c98bba47085e37dbfc9e2"}
+ :source-pins {"edge" "41e633799724639ede651f039f087a602d1df6a8ef10721f4792088cbbdc6537"
+               "facade" "70c8c10e0b099f530c0a7ddb075881c50f27fc763ff234715f0534de3daadc58"
+               "runner" "64c5a79d0f0fa84b953846ab99bffc186df31d113ccaa4fa031082d9a17c2175"
+               "wire" "5572912fd4bec1e738d205818bb991899704ea8a7dd77b6a24ebd120ed8f55f6"
+               "validator" "0c6396e4db4e55b41fe374f5c7e30a6cde4733e06c689e52d229e23e6a513201"
+               "laws" "6291c708dcc53ba6315a494e183b8da0eb5febef73173c6a6703dd656c536e32"
+               "pure" "90f04b38684645eba9a55ff0c141279d42a68eee7cc72a566dd53ee1dc404547"
+               "frozen-spec" "500be9073f22ae74e880e50a55627802274911a136059f92dcf53ac023bcf112"}
+ :dispositions
+ [{:id "SGC-P1-1" :status :settled
+   :basis "Runner strictly decodes and shape-classifies nonempty input before opening the engine; it never invokes recovery for such input. Preview/execute inspect records under the applicable shared/exclusive cooperative operation lease and pending records hold without compensation. Empty stdin on the trusted owner fd-3 invocation separately invokes capsule-only recovery. Classification is not approval or admission."
+   :independent-recheck "Committed real-facade strace case passed: a prior approved operation is actually SIGKILLed after durable intent, then preview, check, duplicate-key, malformed, null, forged-approver apply and otherwise-approved apply cause zero observed target mutation syscalls and leave the complete snapshot unchanged; valid nonempty requests hold. Separate EOF invocation actually compensates with positive observed target writes; later preview/check and a fresh approved apply succeed. Same pinned fixture owner policy is used throughout."}
+  {:id "SGC-P2-2" :status :settled
+   :basis "After known successful observation, stale-generation preview denial returns the actual selection in both before and after with zero target writes. Failure while obtaining observation holds with unknown before/after instead of claiming absent selection."
+   :independent-recheck "Both committed stale-selection and failed-observation tests passed after real apply-a positive; unchanged snapshot asserted. The latter uses injected observation failure and is not claimed to be an independently generated kernel fault."}
+  {:id "forged-effectful-recovery" :status :settled
+   :basis "Neither forged shape-valid apply nor otherwise-approved nonempty apply can trigger recovery: both go through record inspection under the operation lease. Committed independent rerun confirms held/zero writes for each before the separate EOF recovery positive."}]
+ :findings []
+ :independent-exact-head-tests
+ {:focused {:tests 3 :failures 0 :errors 0 :seconds 12.274
+            :trace "/usr/bin/strace 6.8, -f -yy, target-root path filter, actual positive compensation and syscall evidence"
+            :fixture-root "/tmp/opencode/services-fix-review-jafYvm"
+            :preservation "TemporaryDirectory cleanup/finalizers detached; no assertions skipped."}
+  :environment {:tests 134 :failures 0 :errors 0 :seconds 94.129
+                :caddy "/tmp/opencode/oikos-test-tools/caddy-2.8.4-12fac7e8-ed63-49cc-b3b3-773bf3841773/caddy"
+                :caddy-sha256 "d3491373b2d78e4eaa3f498b42852d399d404b0df3f274bbee66d62c12084be0"
+                :fixture-root "/tmp/opencode/services-fix-review-jafYvm"}
+  :native-edge {:tests 14 :failures 0 :errors 0 :seconds 33.937
+                :fixture-root "/tmp/opencode/services-fix-edge-0Z8T4p"
+                :preservation "TemporaryDirectory cleanup/finalizers detached."}
+  :wire-and-parity {:tests 4 :failures 0 :errors 0 :seconds 0.159}
+  :portable {:bb "8 tests, 137 assertions, 0 failures, 0 errors"
+             :nbb "8 tests, 137 assertions, 0 failures, 0 errors"
+             :kondo "0 errors, 0 warnings"}
+  :jvm {:launcher "/tmp/opencode/oikos-test-tools/clojure-cli-1.12.5.1664-bc3e31cd-0a7d-464f-9cc0-a482c6a3f72a/private/bin/clojure"
+        :version "1.12.5.1664" :launcher-sha256 "48d008bbc38fbb6ba55f7c913ff914163707cdd4e0366b05ff436c62289b583f"
+        :evidence "/tmp/opencode/services-fix-jvm-4RVy1G/results.json"
+        :evidence-sha256 "607725586d91c4113be38435e02d896a21c9c9baa8408a8087182d55abed10a1"
+        :results "All six commands exit 0 with empty stderr. Required checks: 370 EDN resources; 19 document inventory entries; 8 tests/137 assertions."
+        :network "Inherited seccomp denied AF_INET, AF_INET6 and AF_UNIX socket creation with EPERM; JVM probe independently confirmed Seccomp=2/NoNewPrivs=1 and root IOException Operation not permitted."
+        :cache "Fresh isolated HOME/XDG/classpath/Maven copies, copied read-only from existing task-owned /tmp/opencode/services-ingress-v3-jvm/maven, not personal cache. No download or changed dependency semantics."}
+  :static ["deployment boundary self-test and scan passed" "deploy source pin and chain checks passed"
+           "92 Python ASTs parsed" "36 selected DigitalOcean/workflow YAML files parsed" "bash -n existing DO shell scripts passed" "git diff --check passed"]}
+ :aggregate-evidence
+ {:exact-head-author-report "reviews/services-recovery-ingress-fix-v3.edn"
+  :author-reported-native "42 tests in 960.903s OK; 642 SIGKILL occurrences: checked 8, restored 248, held 386."
+  :author-reported-environment "134 tests in 100.588s OK."
+  :independent-full-aggregate "Not rerun at this new head; previous independent 39/642 run belongs to head 1839a961 and is historical. The 3 targeted, 14 edge, 4 wire/parity and 134 environment results above are independently executed on b2973ef."
+  :source-freeze "HEAD and seven source pins checked, then HEAD checked again after independent executions; author report says no active source writer."}
+ :limits ["Trust boundary is an owner-controlled fd-3 launch and owner-reserved EOF recovery. Callers that can forge this trusted launch/channel are outside the stated authority model."
+          "Linux private cooperative writer lease, no universal protection from hostile same-UID/root/mount actors, arbitrary kernel failure or device loss."
+          "Existing test at test_local_generation_fs.py:375-406 demonstrates final-guard refusal at transaction-mkdir, not independent evidence for every possible write-edge replacement. The existing native kill matrix and individual race fixtures should not be generalized beyond their actual assertions."
+          "Inert EDN fixture only. Bash remains unsupported until a separate qualified shx handoff; no invented adapter or generalized installation authority."
+          "Entire production/Docker/nginx workflow not run; no installed selection, service, model, operator or production action."
+          "This source review does not amend frozen spec or imply any owner-to-Oikos handoff, release, native review or S1B credit."]
+ :retention "All newly generated named fixture and JVM evidence roots retained; no backup or cleanup asserted. No product edit, commit, PR, push, board state, parent ledger, model call or nested subagent."}

@@ -1,0 +1,12 @@
+{:permit/id :s2a-accepted-fed4e302
+ :authority :parent-accepted-reviewed-and-merged-development-source
+ :source "fed4e30272cc1186de14bcc708b3efc9736e3139"
+ :reviewed-candidate "86bdc2f894163b05e44c83cce8f5dcf56e1b02c1"
+ :tree "429d9dde803b6d12ee07f692872a1b0dcba31ad1"
+ :acceptance "../reviews/s2a-parent-acceptance-v2.edn"
+ :scope [:pure-desktop-laws :bounded-wire-decoder :owned-synthetic-clio-fixture
+         :prospective-history-preflight :exact-envelope-retry :persisted-fixture-replay]
+ :frozen-pins 13 :board-state :done
+ :successor-requirement "Verify exact source composition and the applicable component scope before admission; this permit is not a runtime effect grant."
+ :not-granted [:live-collector :operator-desktop-capture :operational-journal
+               :operational-erasure :universal-foreign-writer-transaction :epic-completion]}

@@ -1,0 +1,54 @@
+{:report/id :govone-pinned-dependency-cache-v4
+ :status :selected-module-cache-offline-verified
+ :authorization ".ημ/runs/oikos-program-20261103/decisions/govone-missing-checksum-batch-authorization.edn"
+ :prior-reports ["govone-pinned-dependency-cache-v1.edn" "govone-pinned-dependency-cache-v2.edn" "govone-pinned-dependency-cache-v3.edn"]
+ :scope "Exact selected Go module graph and source caches; no application or test execution. This is not a claim that package-level test closure has been exercised."
+ :batch {:new-proofs 1 :limit 16 :separately-authorized-earlier-proofs 1
+         :new-coordinate "golang.org/x/term@v0.45.0"
+         :selected-by "Unchanged diagnostic graph4; independently checksum-verified golang.org/x/net@v0.57.0 and golang.org/x/crypto@v0.55.0 module metadata both declare this exact coordinate."
+         :lookup "https://sum.golang.org/lookup/golang.org/x/term@v0.45.0"
+         :lookup-sha256 "f8ff3549ee92272722e00e6116f0d0fc97c84546bbc075d77c9fd1e9881e2b0e"
+         :key "sum.golang.org+033de0ae+Ac4zctda0e5eza+HJyk9SxEdh+s3Ux18htTTAD8OuAn8"
+         :key-source "Qualified Go 1.27.1 src/cmd/go/internal/modfetch/key.go"
+         :signature-verifier "/usr/bin/openssl pkeyutl Ed25519; SHA256 b4f547c0f16272d1cc7f870330a6f2c243710c335e7a99c734ff7a0c6fdb2503; exit 0"
+         :inclusion "Independent Python RFC6962 calculation over seven bounded SumDB tiles matched the signed root; not an invocation of Go's SumDB client. No prior checkpoint consistency or gossip verification claimed."
+         :record-id 57012826 :tree-size 70751776 :tree-root "2RkDWVW+VdU1WMBrFHUVxTqeHK47UUjCNni+VRBEqTE="
+         :source-h1 "h1:NwWyBmoJCbfTHpxrWoZ9C6/VxOf7ic219I8xZZFdrf0="
+         :mod-h1 "h1:9aqxs0blBcrm/n0L9QW0aRVD+ktan8ssZromtqJC43w="
+         :proof-dir "sumdb-proof-term-v0450/" :result-sha256 "16cc868459489ee3594b93fd5c3413bcfa58842b3ef1baf8e4b244d4779add86"
+         :verifier-script-sha256 "680237a4ec4a9d2ab6607a0ea0fa60f04ba2222af9746a444fd5fbd52870ea23"
+         :mod-and-source-verified true}
+ :closure {:selected-count 45 :verified-mod-and-zip-count 45 :remaining-selected []
+           :checksum-provenance {:original-go-sum 43 :sumdb-separately-authorized-go-cmp 1 :sumdb-batch-term 1}
+           :prior-diagnostic-graph-identical-to-recomputed-selection true
+           :strict-offline-graph-identical-to-selection true
+           :inventory "closure-proof-manifest-v4.json"
+           :inventory-sha256 "72962d3358cabb4b562bd4591d0eebb3682842fefbe96dfc321c4542a39cdd22"
+           :details "Manifest lists each exact coordinate, checksum provenance, source h1, archive SHA256, and archive and extracted byte sizes. Broker inventory contains all selected .mod h1 and SHA256."
+           :broker-inventory "broker-inventory-v4.json"
+           :broker-inventory-sha256 "734da1591b7ad1f3549eec2890293b9a854c729787b1e613b7d7d8ddb6f5ac32"
+           :private-snapshot "main-batch-snapshot/go.sum"
+           :snapshot-sha256 "240b91284e222cdb78f5a7a5ceb39ada86057087ba55c0df8ded16b594f791e1"
+           :snapshot-provenance "Original immutable go.sum plus only the separately authenticated go-cmp and batch-authenticated term entries; not the owner lockfile."}
+ :acquisition {:broker "budget_broker_v4.py" :broker-sha256 "a51f571f0c4fba8f4b854cb8d8931cd2662eb1976616e661bf44985011c9d3b5"
+               :zip-bytes 123798640 :extracted-file-bytes 466178564 :extracted-file-count 11992
+               :checks "Before extraction, each selected ZIP's member count, paths, types, duplicate names, uncompressed size and remaining capacity were checked; each ZIP content h1 matched its original or authenticated expected hash before extraction. Go mod verify subsequently passed."
+               :network "Explicit proxy.golang.org metadata and ZIP requests; ZIP redirects restricted to HTTPS storage.googleapis.com .zip objects. No ambient proxy or Go network. SumDB only for the authorized missing exact coordinate."
+               :limits "Cooperating single writer, rounded logical accounting and per-write reservations with 16 MiB Go metadata headroom, not an OS quota; socket timeout 30 seconds is not a whole-request deadline. No source or test code executed."}
+ :offline {:go "/tmp/opencode/oikos-test-tools/go-1.27.1-ad3b4bab-a5d9-4328-8f90-e7b13f65cade/go/bin/go"
+           :go-sha256 "30969f97169d7f43fe6a085873d75613adc21e30818a8c61d95bd27275df4624"
+           :environment "GOTOOLCHAIN=local GOWORK=off GOENV=off GOVCS=*:off GOPROXY=off GOSUMDB=off GOTELEMETRY=off, inherited x86_64 seccomp socket denial, output file-size cap."
+           :commands [{:command "go list -e -mod=readonly -m -json all" :exit 0 :artifact "graph6.stdout"}
+                      {:command "go list -mod=readonly -m -json all" :exit 0 :artifact "graph7.stdout" :sha256 "faf3efbce06230061ba6ac4d6d1b7be9de95e84118df8cfccb093a6f29d90de1"}
+                      {:command "go mod verify" :exit 0 :stdout "all modules verified" :artifact "verify-v4.stdout"}]}
+ :scratch {:path "/tmp/opencode/oikos-govone-deps-66a5b10a-0ac0-46f3-bf88-26763dd3d829"
+           :logical-regular-bytes 590367143 :rounded-accounted-bytes 630280192 :reserve-bytes 16777216
+           :accounted-plus-reserve 647057408 :allocation-bytes 805306368 :remaining-after-reserve 158248960
+           :regular-files 12235 :directories 1629 :retained true
+           :accounting-observed-before-review true}
+ :owner {:head "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4" :manifest-git-status :clean
+         :go-mod-sha256 "d98ac1461da72048026c141cd1375421c6934e6c3937cc5048c296c594b218dd"
+         :go-sum-sha256 "8991f8bfbeccb3e31df27a42f4901a5a0a790e5c2937c4c55da93f5d30db9a90"}
+ :verification "python3 syntax compilation of verifier and broker exited 0; verifier execution exited 0; broker completed; offline go list and go mod verify exited 0. No application build, test or runtime was run."
+ :effects "No owner files, global cache, lockfiles, board, ledger, application, service, listener, model, PR, commit or push changed."
+ :next "Coordinator: use this cache evidence for separately authorized next qualification; do not infer test or runtime authorization."}

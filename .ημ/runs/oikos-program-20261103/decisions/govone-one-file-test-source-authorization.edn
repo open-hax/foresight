@@ -1,0 +1,12 @@
+{:decision/id :govone-one-file-test-source-authorization-20261103
+ :source :question-tool-explicit-user-answer
+ :question "The revised GovOne fixture plan passed independent source-planning review. May I add exactly one test-only file, cmd/govone-dev/s6a_fixture_test.go, to compose its existing authentication, signed policy, classification and redaction APIs?"
+ :answer "Allow test-only source (Recommended)"
+ :owner "mojomast/govone" :base "6507dccdcfe991bf516b2f01578e2fbf6a9e6ac4"
+ :only-new-path "cmd/govone-dev/s6a_fixture_test.go"
+ :plan "../reviews/s6a-govone-fixture-qualification-plan-v2.edn"
+ :review "../reviews/s6a-govone-fixture-plan-fix-review-v2.edn"
+ :scope [:isolated-owner-worktree :one-new-test-source :source-formatting-and-review]
+ :not-authorized [:production-source-change :replacement-policy-kernel :build
+                  :test-execution :runtime :network :existing-credentials]
+ :qualification "Unexecuted fixture source is not a signed-policy, mode, provider-byte or Oikos end-to-end result. Execution remains held for exact closure, process-tree guard and separate bounded admission."}

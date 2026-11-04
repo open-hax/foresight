@@ -1,0 +1,15 @@
+{:permit/id :s7a-boundary-offline-124f7fda
+ :authority :parent-accepted-independently-reviewed-inert-component
+ :source "124f7fda1094a6eb903fe60a04b6c1521dc6ca0d"
+ :published-ref "artifact/oikos-ocr-boundary-124f7fda"
+ :artifact "eval/ocr-boundary/artifact-v2.edn"
+ :artifact-sha256 "9ce08637d49f8dbcd4eac2af86b0e0ba8d4014c6e651dce4968acbb6f4931cce"
+ :review "../reviews/s7a-hard-boundary-fix-review-v2.edn"
+ :scope [:inert-protocol :portable-decisions :cross-runtime-vectors :denial-only-real-admission]
+ :actual-tests {:bb [10 1112] :nbb [10 1112] :python-tests 6 :python-checks 550
+                :vectors 152 :shared-vectors 101 :lint-errors 0 :lint-warnings 0}
+ :historical-bindings {:inherited 85 :stage-v1 9 :preserved true}
+ :real-admission :deny :prepared-authority :none :live-cli-exit 2
+ :not-granted [:allocator :cgroup :FFI :OCR-endpoint :model :service :raw-store
+               :expiry-executor :batch-execution :task-completion]
+ :ocr-restart-consumed true :conditional-batch-consumed false}

@@ -1,0 +1,35 @@
+{:review/id :s2b-collector-source-plan-fix-review-v2
+ :reviewer :same-independent-reviewer-as-s2b-collector-source-plan-review-v1
+ :verdict :changes-required-before-source-admission
+ :input {:path ".ημ/runs/oikos-program-20261103/reviews/s2b-collector-source-plan-v2.edn"
+         :sha256 "0b0f6ce97fd978b03e743463cb6944ebc0efef139d0152ec640e543317962608"
+         :lines 87
+         :prior-review "s2b-collector-source-plan-review-v1.edn"
+         :base "fed4e30272cc1186de14bcc708b3efc9736e3139"}
+ :evidence {:owner-schemas "Read git show fed4e30272cc1186de14bcc708b3efc9736e3139:src/oikos/law/safe_reference.cljc and src/oikos/law/desktop.cljc."
+            :worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s2b"
+            :worktree-status "Observed clean feat/oikos-s2b; no source import."
+            :s2a-completion "Parent reports S2A done and merged; this review did not independently query remote or board. Neither assertion is required to settle the five source-plan findings."}
+ :findings
+ [{:id :s2b/frozen-runner-conflict :disposition :settled
+   :evidence "V2 lines 25 and 28-38 require eight additions, zero base modifications and a standalone invoker, keeping bb.edn and frozen runners intact. Actual runner and base pins remain subject to later exact-source review."}
+  {:id :s2b/unbound-resource-and-source-contract :disposition :settled-for-planning
+   :evidence "V2 lines 39-50 specify descriptor path, canonical digest and source-review binding, fixed numeric bounds, checked deadlines, parsing and constant refusal outcomes. The descriptor and its actual digest do not yet exist; bind and independently review actual bytes and semantics with source before consumption, not as a pre-existing artifact."}
+  {:id :s2b/injected-capabilities-and-host-values :disposition :settled-for-planning
+   :evidence "V2 lines 49-54 and 74-75 specify bounded primitive-only raw input, no traversal of hostile host wrappers, inert transition data and manually scheduled fake responses without executable callback injection. Test-only invoker subprocess effects are explicitly distinguished. The parser implementation and its boundary tests remain unverified."}
+  {:id :s2b/gap-history-and-prebaseline-state :disposition :partially-settled
+   :evidence "V2 lines 59-68 correctly separates pre-baseline uncertainty, post-baseline old-revision gap, directly causal reconciliation, old window-history and current memberships. Lines 61, 63 and 66 do not distinguish a rejected admission from an accepted event whose acknowledgement arrives after loss, generation change, timeout or intervening stream event."
+   :remaining :s2b/accepted-but-stale-admission
+   :severity :p1
+   :why "Stale for lease publication does not mean unadmitted. A baseline or reconciled baseline may have been accepted before its delayed acknowledgement: frozen replay then has :current or :fresh-at-cut, so treating it as never admitted or attempting another initial baseline is invalid and can erase the need for a subsequent gap. Likewise a gap may be accepted while its acknowledgement is stale; blindly retrying or inventing acceptance is unsafe. The fake P1 schedule must model this even though it performs no real append."
+   :required-fix "Specify distinct actual-admission fact, acknowledgement delivery and local lease validity. Never mint freshness from late or ambiguous acknowledgement. If a matching synthetic owner result proves an event was admitted, account for that exact admitted head/revision even when stale and revoke/keep revoked the lease; after a stale accepted baseline or reconciliation represent subsequent loss by the lawful old-revision gap before any reconciliation. A proven accepted gap becomes the active gap without duplicate admission. If admission/head is unknown or cannot be authenticated, remain uncertain and require later trusted owner-head resolution; do not retry as a new event or issue a conflicting baseline. Add explicit deterministic schedules for accepted-before-loss but ACK-after-loss, lost ACK followed by confirmed head, and stale gap ACK, including exact identity/head handling and frozen replay assertions. This is offline fake behavior only, not permission to call a real owner."}
+  {:id :s2b/oracle-shape-and-evidence :disposition :settled-for-planning
+   :evidence "V2 lines 69-71 and 80 limit comparison to independently mapped lifetime/workspace subset; hierarchy and geometry are stimuli, not projection-equality claims. Actual nested oracle is separately held and required for completion."}]
+ :protocol "V2 preserves two distinct matched non-first tick fences on the same subscribed stream, subscription acknowledgement, explicit fake assumptions, lease expiration, bounded retries and no owner-proof claim from a quiet interval. Actual i3 ordering and structural coverage qualification remains separate."
+ :source-admission {:now :not-admitted
+                    :next "Author corrects the stale-admission state distinction and tests; same reviewer rechecks it. Parent then separately verifies clean exact-base composition, all 63 base blobs and modes, 13 pinned hashes, source and ceiling, and grants an S2B-specific source-only permit before RED."
+                    :bounded-scope "Only eight proposed additions and zero base modifications; pure law, primitive bounded NBB edge, descriptor, deterministic fake schedules, tests and dedicated invoker. No live connector, callback-injected capabilities, real owner append or private fixture access. Descriptor digest and exact source are separately independently reviewed before consumption."
+                    :held [:actual-nested-i3-oracle :native-i3-effects :real-connector :actual-append :private-adapter-use :live-currentness :govone-authority :task-completion]
+                    :no-credit "This review is not a native approval, merge verification, board transition or assertion that any implementation or tests exist."}
+ :performed [:read-v2 :read-prior-review :read-accepted-owner-schemas :inspect-worktree-status :hash-v2 :write-this-review-only]
+ :not-performed [:source-import :tests :board-edit :ledger-write :native-i3 :download :commit :pr :nested-agent]}

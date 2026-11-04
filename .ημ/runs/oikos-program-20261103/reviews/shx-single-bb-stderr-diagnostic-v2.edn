@@ -1,0 +1,35 @@
+{:review/id :shx-single-bb-stderr-diagnostic-v2
+ :verdict :inconclusive-original-failure-unresolved
+ :authorization "One BB stderr diagnostic only; no matrix, retries, product change, operator cleanup or production effects."
+ :head "6d9bc02fb428ae54db63f1beb0b992da8aab11bc"
+ :execution {:cases 1 :retry 0 :runtime :bb :profile "target/supervision-fixtures/profiles-1700751/profiles.edn"
+             :fixture "bb-stderr" :existing-sealed-bundle "target/supervision-fixtures/profiles-1700751/bb-stderr"
+             :external-watchdog "timeout 15s" :exit 0 :original-internal-budgets-unchanged true
+             :command "timeout 15s bb -cp /tmp/opencode/shx-stderr-diagnostic-v2:target/safe-bash-candidate-v14/supervision/src:test /tmp/opencode/shx-stderr-diagnostic-v2/driver.clj"
+             :result {:status :error :code :protocol-error :cleanup true :elapsed-ms 2561 :worker-pid 2562953 :worker-start "48587100"}
+             :wall-ns 2570688074 :interpretation "This single diagnostic returned the expected protocol-error with reported cleanup; it did not reproduce cleanup-unconfirmed and cannot identify the original failure. Stop; do not retry."
+             :original-observations "The fresh review-v4 BB stderr cleanup-unconfirmed and earlier BB exit cleanup-unconfirmed remain unresolved release holds."
+             :validator-trace "The appended fixture trace records wrapper 2563081/start 48587233, validator 2563088/start 48587235, exit 0 stdout 95 stderr 0 before the synthetic stderr fault. Trace clocks are wrapper-relative, not supervisor-relative."}
+ :observed-timeline {:worker-start-elapsed-ms 12 :abort-at-ms 2536 :abort-decision :protocol-error
+                     :term {:exit 1 :stderr "No such process" :duration-ms 13.374439}
+                     :cleanup-check {:age-ms 14 :elapsed-ms 2550 :child-reaped true :stdin-realized true :stdout-realized true :stderr-realized true :closers-realized [true] :blocked false :released false :current-worker-identity nil :owned-stat nil}
+                     :probe {:signal "-0" :exit 1 :stderr "No such process" :duration-ms 10.939040}
+                     :kill "Not called; cleanup returned after first check."
+                     :post-return "/proc/2562953 absent at later inspection; this is not independent proof of group absence at the earlier deadline."
+                     :meaning "The real group probe reported absence and the supervisor returned cleanup true for this one run. No assertion is made about either historical failure."}
+ :instrumentation {:method "A private scratch copy of the sealed BB supervisor namespace was placed first on the diagnostic classpath. Its observation-only additions append monotonic events in an in-memory atom; the worker, manifests, sealed bundle and product source were not modified. The test still calls real prepare! and run! once."
+                   :scratch "/tmp/opencode/shx-stderr-diagnostic-v2"
+                   :shadow-sha256 "9fb06234f14cbf1dfe97ea840e4684c213ab9e0ddb8f1a7c106185c9e2654750"
+                   :driver-sha256 "8babf9ab6ec06d2f1f76d775a16f29a38e535da662c3f6b4dc2e310f761d4ac8"
+                   :sealed-and-production-source-sha256 "1952ecdde71dddd566ed4f90da46d79a62d7b2c1093c27433fb2ac1c15498e14"
+                   :events "worker start, abort, control start/end with unaltered result, and each cleanup-loop predicate component. At cleanup checks only, identity-matched worker stat and cgroup metadata were attempted."
+                   :limitations "No PGID/SID/cgroup was captured: worker identity was already absent at the sole cleanup check. Wrapper/validator stat were not sampled and no group-wide scan was made. Instrumentation does not trace every same? invocation, process creation or absence-probe boolean separately. Control results and cleanup-check inputs are retained."
+                   :observer-overhead "No uninstrumented paired run was authorized or performed, so overhead cannot be quantified. Additional monotonic reads, atom updates, realization checks and attempted /proc reads can perturb timing; 2.571s wall includes the instrumentation and is not a performance baseline. Source durations are event deltas, not overhead measurements."}
+ :retained {:raw-result-and-events "/tmp/opencode/shx-stderr-diagnostic-v2/result.edn"
+            :stdout "/tmp/opencode/shx-stderr-diagnostic-v2/stdout.log" :stderr "/tmp/opencode/shx-stderr-diagnostic-v2/stderr.log"
+            :fixture-trace "shx worktree target/supervision-fixtures/profiles-1700751/bb-stderr.jsonl; the authorized case appended four records to the retained existing trace."
+            :scratch-cleanup "Retained; no deletion or backup claim."}
+ :scope {:matrix false :rerun false :source-fix false :commit false :push false :pr false :board false :ledger false
+         :manual-signals false :service-or-model false :downloads false :relock false :warning-suppression false}
+ :next "Owner retains both historical uncertainty holds and decides separately whether to authorize a deterministic diagnostic or other follow-up."
+}

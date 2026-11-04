@@ -1,0 +1,57 @@
+{:review/id :typed-pinned-dependency-cache-v1
+ :authorization ".ημ/runs/oikos-program-20261103/decisions/pinned-public-dependency-cache-authorization.edn"
+ :checkout "/tmp/opencode/oikos-typedclojure-owner-a2698786-b653-4566-a8eb-9c19d374ada0"
+ :checkout-head "42ef524fb5482a2e2429f3732a6ad88d80529690"
+ :cache-root "/tmp/opencode/oikos-typed-deps-bf60f0e2-1e1f-428e-a6e0-28415755d56c"
+ :cache-permissions "0700"
+ :allocation-bytes 268435456
+ :retained-bytes 96334
+ :declared-roots [{:coordinate "org.clojure/test.check" :version "1.1.3" :source "typed/clj.checker/deps.edn :test; root deps.edn :test"}
+                  {:coordinate "com.gfredericks/test.chuck" :version "0.2.12" :source "typed/clj.checker/deps.edn :test; root deps.edn :test"}]
+ :closure-graph {:status :partial-not-resolved
+  :edges [{:from "test.check:1.1.3" :to "org.clojure/pom.contrib:1.4.0" :kind :parent-pom}
+          {:from "pom.contrib:1.4.0 inherited by test.check:1.1.3" :to "org.clojure/clojure:1.11.4" :kind :property-derived :note "Child defines clojure.version; effective graph and mediation not verified."}
+          {:from "test.chuck:0.2.12" :to "org.clojure/test.check:1.1.0" :kind :compile :note "Version conflict with declared 1.1.3; mediation not established."}
+          {:from "test.chuck:0.2.12" :to "clj-time/clj-time:0.15.2" :kind :compile}
+          {:from "test.chuck:0.2.12" :to "com.andrewmcveigh/cljs-time:0.5.2" :kind :compile}
+          {:from "test.chuck:0.2.12" :to "instaparse/instaparse:1.4.10" :kind :compile}
+          {:from "clj-time:0.15.2" :to "joda-time/joda-time:2.10" :kind :compile}
+          {:from "instaparse:1.4.10" :to "org.clojure/clojure:1.10.0" :kind :compile}]
+  :excluded-from-listed-edges "POM test/provided scopes are not represented as runtime closure; effective dependency resolution remains unverified. Module's other declared roots and transitive local modules have not been inventoried here."}
+ :publisher-artifacts [
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom" :url "https://repo.clojars.org/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom" :checksum-url "https://repo.clojars.org/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom.sha1" :algorithm :sha1 :expected "8b1289b531f353cc100677a78c711a065f287625" :actual "8b1289b531f353cc100677a78c711a065f287625" :sha256 "10d0b32716b028c6023cd7950c494c8ce3ea23474863d4a83c0e3b09c7c29c65" :size 2758 :verified true}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom" :url "https://repo.clojars.org/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom" :checksum-url "https://repo.clojars.org/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom.sha1" :algorithm :sha1 :expected "21a75819b0540486c66a48bd9119201c368221ba" :actual "21a75819b0540486c66a48bd9119201c368221ba" :sha256 "d1dddac3b5f21738eb7ad2f444597b761b532148187ce590b06fb9e8b1e7aa0c" :size 2581 :verified true}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar" :url "https://repo.clojars.org/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar" :checksum-url "https://repo.clojars.org/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar.sha1" :algorithm :sha1 :expected "0bc19982dfd34d834fc93ec3e48c8b09a8167dc7" :actual "0bc19982dfd34d834fc93ec3e48c8b09a8167dc7" :sha256 "e35dc55d4c301dbd443b3adec50c25f18842b842a086b0568c472700fe940eab" :size 34020 :verified true}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom" :url "https://repo.clojars.org/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom" :checksum-url "https://repo.clojars.org/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom.sha1" :algorithm :sha1 :expected "87950974a23ab9013c5865ec02c6b8bb601f9d13" :actual "87950974a23ab9013c5865ec02c6b8bb601f9d13" :sha256 "bfee9cd881d92c0ce049388dc36dba7f4b3f158dba00a57e99b9d443259a8877" :size 3302 :verified true}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom" :url "https://repo.clojars.org/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom" :checksum-url "https://repo.clojars.org/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom.sha1" :algorithm :sha1 :expected "91164e61fef571cb4816fb574c78c55e34d2c660" :actual "91164e61fef571cb4816fb574c78c55e34d2c660" :sha256 "c0819c1edc146952049d04f9cdbf32d0d839ec823c7337a4fc6f7d868958e476" :size 4263 :verified true}
+  {:path "repository/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom" :url "https://repo.maven.apache.org/maven2/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom" :checksum-url "https://repo.maven.apache.org/maven2/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom.sha256" :algorithm :sha256 :expected "0993676876081f491ba5af82fa6b5a037a3bee3a125a02d6d5e27aa29f356787" :actual "0993676876081f491ba5af82fa6b5a037a3bee3a125a02d6d5e27aa29f356787" :sha256 "0993676876081f491ba5af82fa6b5a037a3bee3a125a02d6d5e27aa29f356787" :size 7201 :verified true}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.jar" :url "https://repo.maven.apache.org/maven2/org/clojure/test.check/1.1.3/test.check-1.1.3.jar" :checksum-url "https://repo.maven.apache.org/maven2/org/clojure/test.check/1.1.3/test.check-1.1.3.jar.sha256" :algorithm :sha256 :expected "8b0637b13982734742fb3f4d129f0a9d9e3d752b1aec0c6f65ced4555f72b649" :actual "8b0637b13982734742fb3f4d129f0a9d9e3d752b1aec0c6f65ced4555f72b649" :sha256 "8b0637b13982734742fb3f4d129f0a9d9e3d752b1aec0c6f65ced4555f72b649" :size 40187 :verified true}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.pom" :url "https://repo.maven.apache.org/maven2/org/clojure/test.check/1.1.3/test.check-1.1.3.pom" :checksum-url "https://repo.maven.apache.org/maven2/org/clojure/test.check/1.1.3/test.check-1.1.3.pom.sha256" :algorithm :sha256 :expected "a4f21feb2386fbfcd42a52200d14c0f78bbef6899f748ccefcb0a4499e0fdec5" :actual "a4f21feb2386fbfcd42a52200d14c0f78bbef6899f748ccefcb0a4499e0fdec5" :sha256 "a4f21feb2386fbfcd42a52200d14c0f78bbef6899f748ccefcb0a4499e0fdec5" :size 1630 :verified true}
+ ]
+ :retained-manifest-format "UTF-8 lines sorted by relative path: sha256, two spaces, decimal size, two spaces, relative path, newline"
+ :retained-manifest-sha256 "e4bc961da750640fb8e39892e0b3d41bfc01706b6b694dfff969bc90e5b72bce"
+ :retained-files [
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom" :bytes 2758 :sha256 "10d0b32716b028c6023cd7950c494c8ce3ea23474863d4a83c0e3b09c7c29c65"}
+  {:path "repository/clj-time/clj-time/0.15.2/clj-time-0.15.2.pom.sha1" :bytes 40 :sha256 "1fe206f4d4accb0d8593e03a16579213005a801d2f12255b7767befebfcb7451"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom" :bytes 2581 :sha256 "d1dddac3b5f21738eb7ad2f444597b761b532148187ce590b06fb9e8b1e7aa0c"}
+  {:path "repository/com/andrewmcveigh/cljs-time/0.5.2/cljs-time-0.5.2.pom.sha1" :bytes 40 :sha256 "82922f12eb25b89a7c1185b5b865a8fdf816b9f848a494e1a85159ae8ade594d"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar" :bytes 34020 :sha256 "e35dc55d4c301dbd443b3adec50c25f18842b842a086b0568c472700fe940eab"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.jar.sha1" :bytes 40 :sha256 "4a9a0289c25cf9a1e22b53c912689f9a585e3151605cb18b223e97c2598bf564"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom" :bytes 3302 :sha256 "bfee9cd881d92c0ce049388dc36dba7f4b3f158dba00a57e99b9d443259a8877"}
+  {:path "repository/com/gfredericks/test.chuck/0.2.12/test.chuck-0.2.12.pom.sha1" :bytes 40 :sha256 "85422eb3eefa41142ba59d08228b7a9f745494409b2879abba36057385bdd8d1"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom" :bytes 4263 :sha256 "c0819c1edc146952049d04f9cdbf32d0d839ec823c7337a4fc6f7d868958e476"}
+  {:path "repository/instaparse/instaparse/1.4.10/instaparse-1.4.10.pom.sha1" :bytes 40 :sha256 "0306d24fbadede45a8493ff40ffb535b9deb0401ecd1d51a95f766c88fc7d6fb"}
+  {:path "repository/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom" :bytes 7201 :sha256 "0993676876081f491ba5af82fa6b5a037a3bee3a125a02d6d5e27aa29f356787"}
+  {:path "repository/org/clojure/pom.contrib/1.4.0/pom.contrib-1.4.0.pom.sha256" :bytes 64 :sha256 "d646f7b5691ff7a5aba2979a2032964e2839a2c891466d8c000544ced8b18022"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.jar" :bytes 40187 :sha256 "8b0637b13982734742fb3f4d129f0a9d9e3d752b1aec0c6f65ced4555f72b649"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.jar.sha256" :bytes 64 :sha256 "f853ece6284fa459ee22d547571ede9f70d6414c150b023d8e1585436ec0fbdd"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.pom" :bytes 1630 :sha256 "a4f21feb2386fbfcd42a52200d14c0f78bbef6899f748ccefcb0a4499e0fdec5"}
+  {:path "repository/org/clojure/test.check/1.1.3/test.check-1.1.3.pom.sha256" :bytes 64 :sha256 "0a577ed7eaa261172fbca268c79ee71ca348dff280f7b0afdaf451ddde8760b6"}
+ ]
+ :missing ["Full module and root alias closure not inventoried or acquired" "clj-time, cljs-time and instaparse jars" "joda-time 2.10 POM and jar and its dependency/parent metadata" "Other effective POM parents, dependencies and mediation" "Offline socket-denied classpath qualification"]
+ :offline-qualification :not-performed
+ :security-limit "Clojars artifacts have publisher SHA-1 only after SHA-256 and SHA-512 checksum URLs returned 404; unsigned publisher checksums are not signatures. Independently calculated SHA-256 is inventory, not publisher authentication."
+ :upstream-provenance "Previously reported tag source versus published jar resource mismatch remains unresolved; this cache does not establish replacement equivalence."
+ :execution "No tests, application code, plugins, builds, or offline classpath resolver executed. No global cache or upstream checkout modified."
+ :stop-reason "Partial acquisition stopped before full effective closure was established; retain cache for coordinator review."
+}

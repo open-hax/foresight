@@ -1,0 +1,17 @@
+{:decision/id :services-pinned-clojure-cli-cache-authorization-20261103
+ :decision/source :question-tool-explicit-user-answer
+ :question "Services’ required checks also pin Clojure CLI 1.12.5.1664; only an older CLI is installed. May I prepare the official checksum-verified 13 MB release in an isolated test cache?"
+ :answer "Allow isolated CLI (Recommended)"
+ :workflow "services/.github/workflows/code-quality.yml:17-20"
+ :official-release "https://github.com/clojure/brew-install/releases/tag/1.12.5.1664"
+ :release-id 360605508 :asset-id 491740594
+ :archive {:url "https://github.com/clojure/brew-install/releases/download/1.12.5.1664/clojure-tools-1.12.5.1664.tar.gz"
+           :bytes 12323589
+           :sha256 "77dd6868948074adcc93e83a796f8e8f15a1a92bcb1b9002d715fd2210e476f3"}
+ :scope [:isolated-agent-owned-cache :checksum-before-use
+         :fixed-cache-only-launcher-prefix-materialization :describe-version-only]
+ :bounds {:archive-max-bytes 16777216 :extracted-max-bytes 67108864
+          :cache-max-bytes 134217728 :retries 0 :download-timeout-seconds 120}
+ :not-authorized [:system-installation :PATH-change :service-startup
+                  :dependency-download :version-substitution]
+ :qualification-limit "The cached CLI alone does not qualify the required JVM checks or Services engine. Those must execute under the exact pinned tooling and separately bounded fixture authority."}

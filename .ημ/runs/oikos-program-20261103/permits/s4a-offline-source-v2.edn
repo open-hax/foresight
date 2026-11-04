@@ -1,0 +1,40 @@
+{:permit/id :s4a-offline-source-v2
+ :authority :parent-source-only-admission-after-independent-planning-review
+ :task "29caa8e3-289a-416c-9850-8ef9cc769e88"
+ :plan {:path "../reviews/s4a-dispatcher-plan-v2.edn"
+        :sha256 "3abb7aeafb41f66c62f26b76294f09e831dc70ac307af7602a59a4cb38689c2a"}
+ :review {:path "../reviews/s4a-dispatcher-plan-fix-review-v2.edn"
+          :sha256 "09804b8d03d6cda5d561379ced7359f49a3be1a04fda2c75222aa0e2eb70eac3"
+          :verdict :approve-offline-source-only}
+ :user-decision {:path "../decisions/s4a-native-owner-source-and-target-nomination.edn"
+                 :sha256 "2bf3c1915d87f510bc054fe7bf66176305e4afd9f3b22438de9fa6f5da600d32"}
+ :frozen-inputs {:s4a-permit "s4a-contract-8ae64df4.edn"
+                 :s4a-sha256 "c6dc4e99932b492f518ae7e2853ed84b081f64d5f3f44d1162027215f4b77d53"
+                 :s2a-permit "s2a-contract-c399b60e.edn"
+                 :s2a-sha256 "4783ce94b130ca169356359395386aedbe652f73e84be51f9f55862f2d2c2d39"
+                 :protected-source-files 13 :must-remain-byte-unchanged true}
+ :oikos {:worktree "/home/err/spaces/foresight/oikos/.worktrees/feat/oikos-s4a"
+          :allowed :the-eight-new-source-and-test-paths-in-reviewed-plan
+          :additional-test-invoker "scripts/test_dispatch.clj"
+          :invoker-scope "Add only the explicit dual-runtime test entry; do not change frozen bb.edn or default runners. The new invoker is independently reviewed with the new source."
+          :effect-contract :all-dispatch-attempts-unavailable-no-transport
+          :valid-codec-results :inert-data-with-authority-none}
+ :native-owner {:root "/home/err/.spacemacs.d"
+                 :placement :isolated-companion-worktree-only
+                 :allowed [:unloaded-native-shim-source :source-documentation
+                           :syntax-and-byte-compilation :isolated-offline-source-tests]
+                 :verification "A fresh -Q --batch verification process may use only its own newly allocated synthetic test values/buffers under standing agent-owned test authority. It must not start a daemon, connect an existing server, read operator buffers/configuration or qualify real authority. Unloaded source and batch mechanism tests are not live-runtime acceptance."
+                 :unchanged [:live-checkout :startup-config :core :init-el :installed-packages]}
+ :future-target {:nomination :existing-operator-emacs-service
+                 :isolation-claim false :socket-qualified false :effect-permission false
+                 :required :separate-exact-source-authority-and-shared-server-noninterference-permit}
+ :required-before-acceptance [:meaningful-red-before-green :actual-offline-tests
+                              :zero-new-lint-or-byte-compile-warnings
+                              :independent-exact-source-review]
+ :not-authorized [:existing-server-client-or-eval-call :live-handler-load
+                  :operator-buffer-read-create-mutate-or-enumerate :service-restart
+                  :second-daemon :i3-focus-or-raw-ipc :govone-live-call
+                  :new-approval-issuer-or-policy-kernel :installed-promotion
+                  :remote-or-public-tool-publication]
+ :real-authority-positive-tests :held
+ :whole-s4a-complete false :runtime-qualified false :native-approval-credit 0}
