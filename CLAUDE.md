@@ -1,15 +1,18 @@
-# Claude — Foresight
+# CLAUDE.md — Foresight
 
-Read and obey [`AGENTS.md`](AGENTS.md) before changing this workspace. It is the
-canonical architectural instruction file for Foresight; do not restate or fork
-its policy here.
+@AGENTS.md
 
-In particular, the **Divine mandate: purify before you port** is binding:
-portable data, shapes, laws, validation, ledger semantics, graph logic, and pure
-functions default to `.cljc`; runtime-specific code stays at the outer edge.
-Prefer the lightest adequate runtime (NBB → Babashka → JVM Clojure, with compiled
-CLJS only when the target requires it) without allowing runtime choice to split
-the semantic model.
+<!--
+AGENTS.md is the single source of truth for every agent harness; Codex and
+OpenCode read it natively. Claude Code imports it here so it loads even when a
+session cannot read AGENTS.md directly. Do not restate or fork its policy in
+this file. Anything below this comment must be true only for Claude Code.
+-->
 
-When consolidating predecessor code, extract the lawful/pure kernel first and
-leave incidental runtime coupling behind.
+## Claude Code
+
+- The **Divine mandate: purify before you port** in AGENTS.md is binding.
+- Subdirectory `CLAUDE.md` files (for example `eta/CLAUDE.md`) follow the same
+  pattern: an `@AGENTS.md` import plus Claude-only notes. Put shared rules in
+  the `AGENTS.md`. If `/init` appends a second copy of the policy, replace the
+  copy with the import.
