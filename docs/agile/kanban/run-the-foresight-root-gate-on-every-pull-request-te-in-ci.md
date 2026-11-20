@@ -38,3 +38,12 @@ gh api repos/open-hax/foresight/branches/main/protection --jq '.required_status_
 
 - No path filters on a required check: a required check that never runs blocks every merge.
 - Do not initialise consolidation inputs (`.agents`, `eta`, `clobber`) in CI just to inventory them.
+
+## November 20 candidate correction
+
+The outcome and checklist above record the original October proposal, not the
+current implementation. PR #158 now proposes independent named checks rather
+than a single `root-gate` or evidence-review wrapper. See the
+[CI migration note](../../notes/promethean-review-and-promotion.md#foresight-ci-migration-candidate-november-20-2026).
+The legacy required context remains a separate protection-migration dependency;
+this card does not claim that migration or change its board state.

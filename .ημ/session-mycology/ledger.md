@@ -511,6 +511,30 @@
   spore: none
   receipt-refs: foresight-pr127-current-main-integration
   note: A cached pull base can lag the actual branch tip. Fetch the live ref and inspect mergeability even after review convergence passes; preserve full main ledger prefixes and exact branch-only bytes, then obtain fresh successor evidence. Use a pinned canonical main skill snapshot when the global checkout contains unrelated work.
+- ts: 2026-10-23T02:03:17.599120011Z
+  session: /home/err/spaces/foresight/.worktrees/harness-actors-plan
+  task: Recover merged planning status and connect harness tools to Knoxx actors
+  p-efficiency: 0.8
+  p-friction: 0.35
+  p-skill-candidate: 0.2
+  spore: none
+  receipt-refs: open-hax/foresight#141
+  note: Inspect GitHub state before resuming old review loops; approval and merged status differ from convergence evidence. No spore warranted.
+
+- ts: 2026-10-25T05:53:19Z
+  session: harness-actors-plan
+  task: Resolve actual qualification gaps while upstream repair is reviewed
+  p-efficiency: 0.7
+  p-friction: 0.8
+  p-skill-candidate: 0.4
+  spore: none
+  receipt-refs: 2026-10-25T05:53:19Z
+  note: Keep actual tool manifests and active-contract evidence distinct from fixtures; revise overloaded dependent stories through Rheos without narrowing scope or moving readiness early.
+
+## MiMo consumer retirement 2026-11-17
+- Scoped pin-only migration to merged eta-mu#388. Gate/auth bytes preserved.
+- Friction: source inventory can drift; compare fresh default, not cached caller content.
+- Local actionlint and exact-delta checks passed; hosted verification pending. No spore promoted.
 - ts: 2026-10-17T05:25:20.279205783Z
   session: /home/err/.local/share/openhax-codex/20261010/review-state/ACTUAL-existing-PR35-three-P1-repair-v1/source
   task: Repair PR35 detached process custody, parent interruption and Unicode record identity
@@ -610,3 +634,13 @@
   spore: none
   receipt-refs: cd68361b501359465642af6b87d7b48095c614b3cfc0b6af5b3805db823e0621
   note: Verified current9d native CodeRabbit5558192907 Minor4302997749: an adopted child can become a zombie after main-loop reaping but before first cleanup. Add exactly three fixture lines to reap exited adopted children with WNOHANG before classifying remaining children. The new real supervisor/reaper deterministic control intercepts every process/kernel effect, gives exactly three causal RED assertions, and preserves genuinely live late-child refusal/signalling/cleanup. Full owning107tests653assertions3FAIL0ERROR became0FAIL0ERROR, registeredlint0errors0warnings, all nativecaptures closed/normal. Test-only cb5dd249 and source91fb0726 remain separate. Preserve current9d genuinely accepted full47 MiMo APPROVED5558163234 as dated evidence only: successor needs fresh gates/review. Keep old receipts and all SM prefix, no spore, approval transfer, merge or deployment claim.
+
+- ts: 2026-11-20T15:07:22Z
+  session: sync/main-150
+  task: Reconcile the Foresight fork and upstream main histories
+  p-efficiency: 0.81
+  p-friction: 0.45
+  p-skill-candidate: 0.50
+  spore: none
+  receipt-refs: sync-main-150 verification segment
+  note: Save an immutable merge preview and test continuity against each parent before adapting an older repair. Preserve the frozen ledger and move only byte-identical whole rows; validate with the existing gate, not a second event model.

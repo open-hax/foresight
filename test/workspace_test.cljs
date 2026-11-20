@@ -1,5 +1,6 @@
 (ns workspace-test
   (:require [cljs.test :as test :refer [deftest is]]
+            [clojure.string :as str]
             [workspace :as workspace]
             ["fs" :as fs]
             ["os" :as os]
@@ -76,12 +77,20 @@
     (is (empty? (:manifests (by-path "clobber"))))
     (is (nil? (:manager (by-path ".agents"))))))
 
-(deftest review-workflow-never-initializes-inventory-only-sources
+(deftest root-ci-preserves-independent-checks-without-review-wrapper
   (let [workflow (fs/readFileSync
-                  (path/join workspace/root ".github/workflows/eta-mu-review.yml")
+                  (path/join workspace/root ".github/workflows/root-ci.yml")
                   "utf8")]
     (is (nil? (re-find #"[.]agents" workflow)))
-    (is (re-find #"run_gate workspace_laws" workflow))))
+    (is (nil? (re-find #"secrets:|run_gate|opencode-code-review|needs:" workflow)))
+    (is (not (fs/existsSync (path/join workspace/root ".github/workflows/eta-mu-review.yml"))))
+    (is (= 2 (count (re-seq #"fail-fast: false" workflow))))
+    (doseq [suite ["workspace" "project" "lineage" "evidence" "evidence_cli"]]
+      (is (str/includes? workflow (str "- suite: " suite "\n"))))
+    (doseq [check ["Validate /" "Lint / Clojure" "Test / migration pack"
+                   "verify-receipts --base" "git diff --check"
+                   "clj-kondo --lint scripts test src --fail-level warning"]]
+      (is (str/includes? workflow check)))))
 
 (deftest selects-explicit-repositories
   (let [repos [{:path "one" :actionable true}
