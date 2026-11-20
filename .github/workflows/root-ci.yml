@@ -97,6 +97,7 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
           persist-credentials: false
       - name: Install migration test dependencies
         run: |
@@ -106,6 +107,10 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: "1"
         run: '"$RUNNER_TEMP/migration-venv/bin/python" -m unittest discover -s docs/migrations/eta-mu-breakdown/checks -p check_pack.py'
+      - name: Test pinned receipt reconciliation
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -m unittest discover -s test -p 'receipt_reconcile_sync_main_150_v1_test.py'
 
   receipts:
     name: Validate / receipt history

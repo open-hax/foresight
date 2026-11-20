@@ -89,6 +89,90 @@
     (is (false? (evidence/receipt-envelope? (dissoc receipt :origin))))
     (is (false? (evidence/receipt-envelope? 42)))))
 
+(deftest receipt-timestamps-must-identify-a-real-instant
+  (doseq [ts ["2026-08-29T17:22:40Z"
+              "2026-08-13T12:17:48.462035867Z"
+              "2026-01-01T00:00:00+02:00"
+              "2024-02-29T23:59:59.5-23:59"
+              "2000-02-29T00:00:00Z"
+              "0050-01-01T00:00:00Z"
+              ;; RFC 3339 permits lowercase t/z time markers.
+              "2026-10-13t16:45:00z"
+              "2026-10-13t16:45:00.5z"
+              "2026-01-01t00:00:00+02:00"]]
+    (is (evidence/canonical-receipt-ts? ts) ts))
+  (let [receipt (receipt-for (recorded-result :repo/unit :passed revision-a))]
+    (is (evidence/receipt-envelope?
+         (assoc receipt :ts "2026-10-13t16:45:00z"))
+        "lowercase RFC 3339 markers remain a valid envelope timestamp"))
+  (doseq [ts ["2026-02-30T12:00:00Z" "2025-02-29T00:00:00Z"
+              "1900-02-29T00:00:00Z" "2026-04-31T00:00:00Z"
+              "2026-13-01T00:00:00Z" "2026-00-01T00:00:00Z"
+              "2026-01-00T00:00:00Z" "2026-01-01T24:00:00Z"
+              "2026-01-01T00:60:00Z" "2026-01-01T00:00:60Z"
+              "2026-01-01T00:00:00+99:99" "2026-01-01T00:00:00+24:00"
+              "2026-01-01T00:00:00+01:60" "2026-01-01T00:00:00-00:00"
+              "2026-01-01T00:00:00"
+              "2026-01-01 00:00:00Z" "yesterday" "" nil 42]]
+    (is (not (evidence/canonical-receipt-ts? ts)) (pr-str ts)))
+  (let [receipt (receipt-for (recorded-result :repo/unit :passed revision-a))]
+    (is (false? (evidence/receipt-envelope?
+                 (assoc receipt :ts "2026-02-30T12:00:00Z"))))
+    (is (false? (evidence/receipt-envelope?
+                 (assoc receipt :ts "2026-01-01T00:00:00+99:99"))))))
+
+(defn merged-order [records]
+  (evidence/merge-ledger-records
+   (comp str :n)
+   (map (fn [record] {:segment/path (str (:n record))
+                      :segment/records [record]})
+        records)))
+
+(deftest merged-ledger-sorts-by-instant-not-timestamp-text
+  (let [whole {:n 1 :ts "2026-01-01T00:00:00Z"}
+        tenth {:n 2 :ts "2026-01-01T00:00:00.1Z"}
+        hundredth {:n 3 :ts "2026-01-01T00:00:00.05Z"}
+        offset {:n 4 :ts "2026-01-01T00:00:00+02:00"}
+        utc {:n 5 :ts "2025-12-31T23:00:00Z"}
+        same-instant {:n 6 :ts "2025-12-31T23:00:00.000+00:00"}
+        expected [offset utc same-instant whole hundredth tenth]]
+    (is (= expected (merged-order [whole tenth hundredth offset utc same-instant])))
+    (is (= expected (merged-order (reverse expected))))))
+
+(deftest receipt-timestamps-accept-actual-leap-seconds
+  ;; RFC 3339 permits second 60 only at an inserted leap second: 23:59:60 UTC
+  ;; at the end of a day IERS announced, in any UTC offset.
+  (doseq [ts ["2016-12-31T23:59:60Z" "1972-06-30T23:59:60.5Z"
+              "2016-12-31T17:59:60-06:00" "2017-01-01T00:59:60+01:00"
+              "2012-06-30T23:59:60.000+00:00"]]
+    (is (evidence/canonical-receipt-ts? ts) ts))
+  (doseq [ts ["2015-12-31T23:59:60Z" "2016-06-30T23:59:60Z"
+              "2016-12-31T23:58:60Z" "2016-12-31T23:59:60+01:00"
+              "1971-12-31T23:59:60Z" "2016-12-31T23:59:61Z"]]
+    (is (not (evidence/canonical-receipt-ts? ts)) ts))
+  (let [before {:n 1 :ts "2016-12-31T23:59:59.9Z"}
+        leap {:n 2 :ts "2016-12-31T23:59:60Z"}
+        leap-local {:n 3 :ts "2016-12-31T17:59:60.000-06:00"}
+        late-leap {:n 4 :ts "2016-12-31T23:59:60.5Z"}
+        after {:n 5 :ts "2017-01-01T00:00:00Z"}
+        expected [before leap leap-local late-leap after]]
+    (is (= (evidence/receipt-ts-sort-key (:ts leap))
+           (evidence/receipt-ts-sort-key (:ts leap-local)))
+        "the same leap-second instant in another offset sorts equal")
+    (is (= expected (merged-order (reverse expected))))
+    (is (= expected (merged-order [after late-leap leap-local before leap])))))
+
+(deftest merged-ledger-keeps-historical-timestamps-total
+  ;; Historical records predate the canonical-instant rule; merging must not
+  ;; reject them, and their order must not depend on segment order.
+  (let [legacy {:n 1 :ts "yesterday"}
+        untimed {:n 2}
+        current {:n 3 :ts "2026-01-01T00:00:00Z"}
+        merged (merged-order [current legacy untimed])]
+    (is (= #{legacy untimed current} (set merged)))
+    (is (= current (last merged)))
+    (is (= merged (merged-order [untimed current legacy])))))
+
 (deftest validates-gate-catalogs
   (is (evidence/valid-catalog? valid-catalog))
   (is (= :gate/command
@@ -386,6 +470,18 @@
                  valid-catalog test-catalog-identity revision-a
                  #{:repo/unit} [not-applicable]
                  (immutable-ledger [not-applicable]))))))
+
+(deftest receipt-text-keeps-unicode-scalar-values
+  (doseq [text ["" "plain" "é" "é" "😀" "�" "\u0000\n\r\t"
+                (str "left" (js/String.fromCharCode 0xD800 0xDC00) "right")
+                (js/String.fromCharCode 0xDBFF 0xDFFF)]]
+    (is (evidence/unicode-scalar-text? text)))
+  (doseq [units [[0xD800] [0xDBFF] [0xDC00] [0xDFFF]
+                [0xD800 0x41] [0x41 0xDC00]
+                [0xD800 0xD800 0xDC00] [0xD800 0xDC00 0xDC00]]]
+    (is (not (evidence/unicode-scalar-text?
+              (apply str (map #(js/String.fromCharCode %) units))))))
+  (is (false? (evidence/unicode-scalar-text? nil))))
 
 (defmethod test/report [::test/default :end-run-tests] [summary]
   (set! (.-exitCode js/process) (if (test/successful? summary) 0 1)))
