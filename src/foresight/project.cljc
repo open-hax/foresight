@@ -627,8 +627,12 @@
   (into {}
         (comp (filter #(= :independent-repository (:source/ownership %)))
               (map (fn [{:source/keys [path url]}]
-                     [path (second (re-matches #"^(?:git@github.com:|https://github.com/)([^/]+/[^/]+?)(?:[.]git)?$"
-                                               url))])))
+                     (if-let [[_ upstream] (and (string? url)
+                                                 (re-matches #"^(?:git@github.com:|https://github.com/)([A-Za-z0-9-]+/[A-Za-z0-9_.-]+?)(?:[.]git)?$"
+                                                             url))]
+                       [path upstream]
+                       (throw (ex-info (str "Invalid GitHub upstream for " path)
+                                       {:path path}))))))
         (submodule-sources)))
 
 (defn consolidation-inputs []

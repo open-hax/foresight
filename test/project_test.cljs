@@ -155,6 +155,17 @@
     (is (= "open-hax/opencode" (get required "opencode")))
     (is (= "octave-commons/shx" (get required "shx")))))
 
+(deftest malformed-declared-upstream-fails-closed
+  (doseq [url [nil "file:///checkout/shx" "https://github.com/open-hax/shx?bad=1"
+               "https://github.com/open-hax/shx#main"]]
+    (with-redefs [project/submodule-sources
+                  (constantly [{:source/ownership :independent-repository
+                                :source/path "shx"
+                                :source/url url}])]
+      (is (thrown-with-msg? js/Error #"Invalid GitHub upstream for shx"
+                            (project/dev-origin-required-upstreams))
+          (pr-str url)))))
+
 (def kanban-org-base
   "open-hax/foresight base fcfc2d17f28640203066ddfe0a22f87db7372a32: its
   .ημ/kanban-events/ledger.edn blob, which fork history must keep as a prefix."
