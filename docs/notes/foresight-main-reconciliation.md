@@ -1,10 +1,11 @@
 # Foresight main reconciliation
 
-This is the integration of upstream `d5921c30` and personal-fork `a8dff342`
-for [PR #150](https://github.com/open-hax/foresight/pull/150). The independent
-upstream `root-ci.yml` remains in place; the retired review wrapper is not
-restored. The OpenPlanner pin includes the already-published removal of its
-unavailable machine-local nested submodule.
+This is the ledger prerequisite for reconciling upstream `d5921c30` and
+personal-fork `a8dff342`. The independent upstream `root-ci.yml` remains in
+place; the retired review wrapper is not restored. The remaining project
+changes, including the OpenPlanner pin that removes its unavailable
+machine-local nested submodule, are reviewed separately in
+[PR #150](https://github.com/open-hax/foresight/pull/150).
 
 The Kanban and Session Mycology files keep upstream's bytes as a prefix and
 append the personal side's bytes after the shared ancestor. They do not change
