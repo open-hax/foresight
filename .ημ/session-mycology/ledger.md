@@ -644,3 +644,13 @@
   spore: none
   receipt-refs: sync-main-150 verification segment
   note: Save an immutable merge preview and test continuity against each parent before adapting an older repair. Preserve the frozen ledger and move only byte-identical whole rows; validate with the existing gate, not a second event model.
+
+- ts: 2026-11-20T22:37:22.887447+00:00
+  session: sync/main-150
+  task: Split the main reconciliation below the review file limit
+  p-efficiency: 0.88
+  p-friction: 0.26
+  p-skill-candidate: 0.43
+  spore: none
+  receipt-refs: sync-main-150-split receipt segment
+  note: Check the actual file cap before publication. Keep the whole migration and its historical inputs in one review, then prove the follow-up preserves the full tested tree.
