@@ -99,7 +99,7 @@
               ;; RFC 3339 permits lowercase t/z time markers.
               "2026-10-13t16:45:00z"
               "2026-10-13t16:45:00.5z"
-              "2026-01-01t00:00:00+02:00"]]
+              "2026-01-01t00:00:00+02:00" "2026-01-01T00:00:00-00:00"]]
     (is (evidence/canonical-receipt-ts? ts) ts))
   (let [receipt (receipt-for (recorded-result :repo/unit :passed revision-a))]
     (is (evidence/receipt-envelope?
@@ -111,7 +111,7 @@
               "2026-01-00T00:00:00Z" "2026-01-01T24:00:00Z"
               "2026-01-01T00:60:00Z" "2026-01-01T00:00:60Z"
               "2026-01-01T00:00:00+99:99" "2026-01-01T00:00:00+24:00"
-              "2026-01-01T00:00:00+01:60" "2026-01-01T00:00:00-00:00"
+              "2026-01-01T00:00:00+01:60"
               "2026-01-01T00:00:00"
               "2026-01-01 00:00:00Z" "yesterday" "" nil 42]]
     (is (not (evidence/canonical-receipt-ts? ts)) (pr-str ts)))
@@ -127,6 +127,10 @@
    (map (fn [record] {:segment/path (str (:n record))
                       :segment/records [record]})
         records)))
+
+(deftest unknown-local-offset-orders-as-utc
+  (is (= (evidence/receipt-ts-instant "2026-01-01T00:00:00Z")
+         (evidence/receipt-ts-instant "2026-01-01T00:00:00-00:00"))))
 
 (deftest merged-ledger-sorts-by-instant-not-timestamp-text
   (let [whole {:n 1 :ts "2026-01-01T00:00:00Z"}

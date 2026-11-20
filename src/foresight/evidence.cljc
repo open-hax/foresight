@@ -274,8 +274,9 @@
 
 (defn receipt-ts-instant
   "Parses an RFC 3339 timestamp into `[utc-epoch-seconds leap fraction-digits]`,
-  or nil unless it names a real calendar date, clock time, and known UTC
-  offset. Rejects `-00:00` (RFC 3339 unknown-offset). Second 60 is accepted
+   or nil unless it names a real calendar date, clock time, and UTC instant.
+   `-00:00` means UTC is known but the local offset is not, and orders as UTC.
+   Second 60 is accepted
   only at an actual inserted leap second (23:59:60 UTC, in any offset); it
   reads as the preceding second with `leap` 1, so it orders after 23:59:59
   and before the next day. Fraction digits drop trailing zeros, so equal
@@ -293,12 +294,7 @@
         (when (and (<= 1 month 12)
                    (<= 1 day (days-in-month year month))
                    (< hour 24) (< minute 60) (<= second 60)
-                   (< offset-hour 24) (< offset-minute 60)
-                   ;; RFC 3339: -00:00 means the local offset is unknown, so the
-                   ;; timestamp does not name a known UTC instant.
-                   (not (and (= "-" sign)
-                             (zero? offset-hour)
-                             (zero? offset-minute))))
+                    (< offset-hour 24) (< offset-minute 60))
           (let [offset-seconds (* (if (= "-" sign) -1 1)
                                   (+ (* 3600 offset-hour) (* 60 offset-minute)))
                 leap (if (= 60 second) 1 0)

@@ -33,7 +33,7 @@ def digest(data):
 
 
 def git(*args):
-    return subprocess.check_output(["git", "-C", str(REPO), *args])
+    return subprocess.check_output(["git", "--no-replace-objects", "-C", str(REPO), *args])
 
 
 def load_inputs():
