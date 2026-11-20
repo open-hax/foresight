@@ -9,9 +9,11 @@ deadline and must reject a missing result. No test counters are interpreted here
 """
 
 import argparse
+import base64
 import ctypes
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import selectors
@@ -29,10 +31,10 @@ POLL_SECONDS = 0.01
 def process_identity(pid):
     """Read kernel identity and parentage without inspecting command/env data."""
     try:
-        fields = Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()
+        fields = Path(f"/proc/{pid}/stat").read_bytes().rsplit(b")", 1)[1].split()
         return {
             "start": int(fields[19]), "parent": int(fields[1]),
-            "group": int(fields[2]), "state": fields[0],
+            "group": int(fields[2]), "state": fields[0].decode("ascii"),
         }
     except (FileNotFoundError, ProcessLookupError):
         return None
@@ -244,6 +246,7 @@ def result_record(termination, output=b"", exit_code=None, timed_out=False,
         "termination": termination, "output": output.decode("utf-8", errors="replace"),
         "capture-truncated?": truncated, "cleanup-complete?": cleanup_complete,
         "output-sha256": hashlib.sha256(output).hexdigest(),
+        "output-base64": base64.b64encode(output).decode("ascii"),
         "captured-output-bytes": len(output), "max-output-bytes": limit,
         "diagnostic": diagnostic[:1000],
     }
@@ -262,6 +265,11 @@ def supervise(command, timeout_ms, max_output_bytes=DEFAULT_MAX_OUTPUT_BYTES,
     try:
         if not command or min(timeout_ms, max_output_bytes, cleanup_ms) <= 0:
             raise ValueError("Command and positive timeout/output/cleanup limits required")
+        timeout_seconds = timeout_ms / 1000
+        cleanup_seconds = cleanup_ms / 1000
+        if not all(math.isfinite(value) for value in
+                   (timeout_seconds, cleanup_seconds, time.monotonic() + cleanup_seconds)):
+            raise ValueError("Timeout and cleanup durations must be finite")
         enable_subreaper()
         for sig in (signal.SIGINT, signal.SIGTERM):
             handlers[sig] = signal.signal(sig, lambda received, _frame: cancelled.append(received))
@@ -271,9 +279,10 @@ def supervise(command, timeout_ms, max_output_bytes=DEFAULT_MAX_OUTPUT_BYTES,
         process = subprocess.Popen(command, stdin=subprocess.DEVNULL,
                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                    start_new_session=True)
+        cleanup_complete = False
         owned = OwnedChildren(process.pid)
         capture = Capture(process.stdout, max_output_bytes)
-        deadline = time.monotonic() + timeout_ms / 1000
+        deadline = time.monotonic() + timeout_seconds
         exit_observed_at = None
         while True:
             owned.discover()
@@ -286,6 +295,10 @@ def supervise(command, timeout_ms, max_output_bytes=DEFAULT_MAX_OUTPUT_BYTES,
                 break
             if capture.truncated:
                 termination = "output-limit"
+                break
+            if now >= deadline and exit_observed_at is None:
+                termination = "timeout"
+                timed_out = True
                 break
             if observed_exit:
                 if observed_exit.si_code != os.CLD_EXITED:
@@ -303,18 +316,13 @@ def supervise(command, timeout_ms, max_output_bytes=DEFAULT_MAX_OUTPUT_BYTES,
                     termination = "cleanup-error"
                     diagnostic = "Output pipe stayed open after leader exit"
                     break
-            elif now >= deadline:
-                termination = "timeout"
-                timed_out = True
-                break
     except Exception as error:
         termination = "cleanup-error" if process else "setup-error"
         diagnostic = f"{type(error).__name__}: {error}"
     finally:
         if process:
-            cleanup_complete = False
-            cleanup_deadline = time.monotonic() + cleanup_ms / 1000
             try:
+                cleanup_deadline = time.monotonic() + cleanup_seconds
                 # Popen established a private session, and its leader is still
                 # unreaped. Group cleanup cannot hit a reused/shared group id.
                 # Adoption then brings even setsid/double-fork escapes directly
@@ -364,20 +372,28 @@ def supervise(command, timeout_ms, max_output_bytes=DEFAULT_MAX_OUTPUT_BYTES,
                 termination = "cleanup-error"
                 diagnostic = f"{diagnostic}; cleanup {type(error).__name__}: {error}".lstrip("; ")
             finally:
-                if capture:
-                    capture.close()
-                elif process.stdout:
-                    process.stdout.close()
-                if owned:
-                    owned.close()
+                try:
+                    if capture:
+                        capture.close()
+                    elif process.stdout:
+                        process.stdout.close()
+                    if owned:
+                        owned.close()
+                except Exception as error:
+                    cleanup_complete = False
+                    termination = "cleanup-error"
+                    diagnostic = f"{diagnostic}; cleanup {type(error).__name__}: {error}".lstrip("; ")
         for sig, handler in handlers.items():
             signal.signal(sig, handler)
+        if cancelled:
+            termination = "cancelled"
     output = bytes(capture.data) if capture else b""
     try:
         output.decode("utf-8")
     except UnicodeDecodeError:
-        termination = "cleanup-error"
-        diagnostic = "Captured output is not losslessly representable as UTF-8 text"
+        if not (capture and capture.truncated):
+            termination = "cleanup-error"
+            diagnostic = "Captured output is not losslessly representable as UTF-8 text"
     return result_record(termination, output, process.returncode if process else None,
                          timed_out, capture.truncated if capture else bool(process),
                          cleanup_complete, max_output_bytes, diagnostic)

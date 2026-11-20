@@ -122,8 +122,9 @@ records require an RFC 3339 `:ts` naming a real instant; records with such an
 instant order by UTC time, then canonical record identity (SHA-256). Retained
 historical records keep their original `:ts`: values naming no real instant
 sort first by their canonical printed timestamp, then record identity.
-Parallel branches add disjoint files instead of editing the same lines, and a
-diverged fork and org merge without conflicts.
+Parallel branches normally add disjoint files instead of editing the same
+lines. Divergent legacy histories can be reconciled by the whole-line migration
+described below.
 The runner writes each complete result as a new segment. Schema-v2 receipts
 retain the actual host and `nbb`/Node adapter identity. Older receipts remain
 immutable historical records and cannot attest a current promotion;
@@ -132,9 +133,9 @@ relative to the reviewed base.
 
 The adapter currently requires Linux `/proc/self/fd` semantics. Gate execution also requires
 Python 3.9+ with Linux subreaper, pidfd and waitid support. A fresh gate adapter
-retains every child identity, including descendants that create another session,
-and binds its lifetime to the calling receipt process. Gate stdout/stderr remain
-inherited; incomplete or interrupted custody quarantines the receipt reservation.
+reserves a private process group, reaps adopted descendants, and binds its
+lifetime to the calling receipt process. Gate stdout/stderr remain inherited;
+incomplete or interrupted custody quarantines the receipt reservation.
 The existing five-second child-cleanup bound does not impose a gate runtime cap.
 The append adapter holds a
 no-follow parent directory descriptor, rejects symbolic, multiply linked or
@@ -174,20 +175,13 @@ from pathname swaps, partial writes, and cooperating races; it does not exclude
 an unrelated writer that ignores the lock.
 
 For immutable review, the adapter disables Git replacement objects, requires
-regular non-executable blobs, hashes
-their raw bytes, decodes strict UTF-8, and proves the reviewed ledger extends
-the trusted base ledger as an event ledger: every base segment file is still
-present byte-for-byte, every base record is still present somewhere in the
-merged ledger, the legacy file only ever loses whole lines (no new record, no
-rewrite or reordering), and no record appears twice. Records may move out of the legacy file into segments; that is how a
-fork and its org reconcile histories that split inside the legacy file. The
-current receipt-envelope and evidence-result laws apply only to the new
-records. Historical records remain evidence even when their envelopes predate
-the current schema. Secure append applies the same boundary against the
-committed `HEAD` ledger: it validates the whole working ledger before running a
-gate, then writes the receipt into a newly created (`O_EXCL`) segment. Rewrites,
-deletions, legacy appends, and
-malformed new records still fail closed. Summary totals describe the entire
+regular non-executable blobs, hashes their raw bytes, and decodes strict UTF-8.
+Verification preserves existing segments byte-for-byte and allows a legacy row
+to move only as an exact whole line into its own segment. It rejects lost or
+duplicate records, rewritten legacy rows, and additions to the frozen file.
+Secure append validates the whole working ledger against committed `HEAD`
+before running a gate, then writes the receipt into a newly created (`O_EXCL`)
+segment. Summary totals describe the entire
 ledger; appended counts describe the records subject to current validation.
 The portable consistency law then requires exact receipt/result equality.
 Editing a failed result or prior receipt into a shape-valid pass therefore

@@ -111,6 +111,10 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: "1"
         run: python3 -m unittest discover -s test -p 'receipt_reconcile_sync_main_150_v1_test.py'
+      - name: Test process supervisor fixture
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 test/fixtures/test_owned_process_supervisor.py
 
   receipts:
     name: Validate / receipt history

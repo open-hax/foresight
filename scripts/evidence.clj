@@ -24,9 +24,15 @@
 (def receipt-file
   (path/join root ".ημ" "receipts.edn"))
 
+(declare edn-lexemes edn-skip-form)
+
 (defn read-single-edn! [contents label]
   (try
-    (let [forms (reader/read-string (str "[" contents "\n]"))]
+    (let [lexemes (edn-lexemes contents)
+          _ (when (or (empty? lexemes)
+                      (not= (count lexemes) (edn-skip-form lexemes 0)))
+              (throw (js/Error. (str label " must contain exactly one EDN form"))))
+          forms (reader/read-string (str "[" contents "\n]"))]
       (when-not (= 1 (count forms))
         (throw (js/Error. (str label " must contain exactly one EDN form"))))
       (first forms))
@@ -235,7 +241,11 @@
       (if (>= i n)
         out
         (let [[kind value] (nth lexemes i)]
-          (if (and (= :token kind) (= "#inst" value))
+          (cond
+            (and (= :token kind) (= "#_" value))
+            (recur (edn-skip-form lexemes (inc i)) out)
+
+            (and (= :token kind) (= "#inst" value))
             (let [after-discards
                   (loop [k (inc i)]
                     (let [[nk nv] (get lexemes k)]
@@ -248,7 +258,7 @@
               (if (= :string nk)
                 (recur (inc after-discards) (conj out nv))
                 (recur (inc i) out)))
-            (recur (inc i) out)))))))
+            :else (recur (inc i) out)))))))
 
 (defn decimal-value
   "Exact decimal value of a plain decimal literal as [negative? digits
@@ -1939,7 +1949,8 @@
   (try
     (let [expected (and written-segment-bytes @written-segment-bytes)
           bytes (when expected
-                  (read-working-regular-file! target-path "Receipt River segment"))
+                  (read-working-regular-file! target-path "Receipt River segment"
+                                              (.-length expected)))
           stats (when expected
                   (lstat-if-present! target-path "Receipt River segment"))]
       (boolean (and expected
@@ -2209,7 +2220,16 @@
                        (not @directory-replaced?)
                        (not (parent-identity-intact? parent)))
               (reset! directory-replaced? true)
-              (establish-ledger-quarantine! ancestor)
+              (try
+                (establish-ledger-quarantine! ancestor)
+                (catch :default error
+                  ;; The marker may already exist even when establishing it
+                  ;; reports replacement. Keep the writer lock too, and close
+                  ;; all remaining descriptors before propagating the error.
+                  (doseq [fd (keep :fd [writer-lock parent ancestor])]
+                    (try (fs/closeSync fd)
+                         (catch :default _close-error nil)))
+                  (throw error)))
               (reset! retain-writer-lock? true)
               (reset! late-replacement-error
                       (js/Error.

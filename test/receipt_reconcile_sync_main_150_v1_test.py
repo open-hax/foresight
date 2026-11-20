@@ -34,6 +34,13 @@ class ReconciliationTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 mod.load_inputs()
 
+    def test_pinned_reads_disable_git_replacement(self):
+        with patch.object(mod.subprocess, "check_output", return_value=b"blob") as run:
+            self.assertEqual(mod.git("cat-file", "blob", "example"), b"blob")
+            run.assert_called_once_with(
+                ["git", "--no-replace-objects", "-C", str(mod.REPO), "cat-file", "blob", "example"]
+            )
+
     def test_plan_retries_reverse_and_post_write_refusal(self):
         with tempfile.TemporaryDirectory() as tmp:
             forward = Path(tmp) / "forward"

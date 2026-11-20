@@ -738,12 +738,16 @@
                 cli/git-capture! (fn [_] reviewed-root-revision)
                 cli/read-immutable-receipt-ledger! empty-committed-ledger
                 cli/read-immutable-receipt-segment-entries! (fn [_] [])]
-    (try
-      (cli/close-append-reservation!
-       (cli/open-append-reservation!
-        (path/join segments "2026-10-13T000002000Z-next.edn") true))
-      false
-      (catch :default _error true))))
+    (let [opened (try
+                   (cli/open-append-reservation!
+                    (path/join segments "2026-10-13T000002000Z-next.edn") true)
+                   (catch :default error
+                     (if (re-find #"quarantines the Receipt River ledger|quarantine marker quarantines the ledger|another writer holds an active Receipt River reservation" (.-message error))
+                       ::refused
+                       (throw error))))]
+      (if (= ::refused opened)
+        true
+        (do (cli/close-append-reservation! opened) false)))))
 
 (deftest selected-gates-reestablish-quarantine-when-both-locks-vanish
   ;; Gate code unlinks the per-segment lock and the writer lock, then adds a
@@ -875,6 +879,36 @@
               "the replacement directory is quarantined"))
         (is (next-writer-refused? segments file)
             "the forged segment cannot be accepted as an ordinary extension")))))
+
+(deftest late-ledger-quarantine-error-closes-reservation-descriptors
+  (with-receipt-fixture
+    (fn [{:keys [fixture directory segments file]}]
+      (let [segment (path/join segments "2026-10-13T000000000Z-test.edn")
+            moved (path/join fixture ".ημ.moved")
+            original-open cli/open-append-reservation!
+            original-release cli/release-append-lock!
+            held (atom nil)
+            moved? (atom false)]
+        (fs/writeFileSync file "" "utf8")
+        (with-redefs [cli/open-append-reservation!
+                      (fn [& args]
+                        (let [reservation (apply original-open args)]
+                          (reset! held reservation)
+                          reservation))
+                      cli/release-append-lock!
+                      (fn [parent lock]
+                        (original-release parent lock)
+                        (when (compare-and-set! moved? false true)
+                          (fs/renameSync directory moved)
+                          (fs/mkdirSync directory)
+                          (fs/mkdirSync segments)))]
+          (is (thrown-with-msg? js/Error #"ledger directory was replaced"
+                                (run-semantic-gate-with! file segment (fn [])))))
+        (is (fs/existsSync (path/join directory cli/receipt-quarantine-marker-name)))
+        (is (some? @held))
+        (doseq [fd (map #(get-in @held [% :fd]) [:writer-lock :parent :ancestor])]
+          (is (number? fd))
+          (is (thrown? js/Error (fs/fstatSync fd)) "held descriptor was closed"))))))
 
 (deftest selected-gates-quarantine-a-segment-added-after-the-receipt-write
   ;; Gate-spawned work can wait for the reserved segment to become nonempty
@@ -1601,7 +1635,10 @@
        (cli/read-receipt-records! "{:a 1} {:b 2}\n")))
   (is (thrown-with-msg?
        js/Error #"exactly one EDN form"
-       (cli/read-receipt-records! "{:a 1} trailing\n"))))
+       (cli/read-receipt-records! "{:a 1} trailing\n")))
+  (is (thrown-with-msg?
+       js/Error #"exactly one EDN form"
+       (cli/read-receipt-records! "{:a 1} ] ignored\n"))))
 
 (deftest receipt-numbers-must-round-trip-exactly
   ;; cljs.reader turns every EDN number into a JS double before record IDs
@@ -1678,6 +1715,13 @@
            (try (cli/require-exact-receipt-tags! text) :accepted
                 (catch :default _ :rejected)))
         "the exactness guard accepts the surviving millisecond instant")))
+
+(deftest receipt-outer-discard-skips-instants
+  (doseq [text ["{:ignored #_ #inst \"2026-01-01T00:00:00.0001Z\" nil}\n"
+                "{:ignored #_ [#inst \"2026-01-01T00:00:00.0001Z\"] nil}\n"]]
+    (is (empty? (cli/edn-inst-strings text)))
+    (is (= :accepted (try (cli/require-exact-receipt-tags! text) :accepted
+                          (catch :default _ :rejected))))))
 
 (deftest receipt-adjacent-discard-checks-the-active-instant
   ;; The actual NBB reader accepts #_x without a delimiter and truncates a
@@ -1802,6 +1846,21 @@
                js/Error (re-pattern (str "exceeds " cli/max-receipt-line-bytes
                                          " bytes"))
                (cli/read-working-receipt-segments! nil))))))))
+
+(deftest post-close-segment-check-bounds-the-read
+  (with-receipt-fixture
+    (fn [{:keys [segments]}]
+      (let [segment (path/join segments "2026-10-14T000000000Z-test.edn")
+            expected (js/Buffer.from "receipt\n")]
+        (fs/writeFileSync segment expected)
+        (let [reservation {:target {:stats (fs/lstatSync segment)}
+                           :target-path segment
+                           :written-segment-bytes (atom expected)}]
+          (is (true? (cli/reserved-segment-intact? reservation)))
+          (let [fd (fs/openSync segment "r+")]
+            (try (fs/ftruncateSync fd (* 3 1024 1024 1024))
+                 (finally (fs/closeSync fd))))
+          (is (false? (cli/reserved-segment-intact? reservation))))))))
 
 (deftest gate-descendants-are-killed-before-the-gate-result-returns
   ;; A gate can leave a detached child waiting for the locks to disappear.
@@ -3126,7 +3185,14 @@
   "const fs=require('fs'),os=require('os'),path=require('path'),cp=require('child_process');\nconst mode=process.argv[1],root=process.argv[2],nbb=process.argv[3];\nconst dir=fs.mkdtempSync(path.join(os.tmpdir(),'foresight-custody-'));\nconst leafFile=path.join(dir,'leaf.json'),gateFile=path.join(dir,'gate.json'),releaseFile=path.join(dir,'release');\nconst identity=p=>{try{const s=fs.readFileSync('/proc/'+p+'/stat','utf8'),f=s.slice(s.lastIndexOf(')')+1).trim().split(/\\s+/);return {pid:p,start:f[19],parent:Number(f[1])};}catch(e){if(e.code==='ENOENT'||e.code==='ESRCH')return null;throw e;}};\nconst same=x=>{const y=x&&identity(x.pid);return !!(y&&y.start===x.start);};\nconst children=x=>{\n if(!same(x))return null;\n const pids=new Set();\n for(const tid of fs.readdirSync('/proc/'+x.pid+'/task')){\n  try{for(const p of fs.readFileSync('/proc/'+x.pid+'/task/'+tid+'/children','utf8').trim().split(/\\s+/))if(p)pids.add(Number(p));}\n  catch(e){if(e.code!=='ENOENT'&&e.code!=='ESRCH')throw e;}\n }\n if(!same(x))return null;\n return [...pids].map(identity).filter(y=>y&&y.parent===x.pid);\n};\nconst intermediateSnapshot=(caller,gate,leaf)=>{\n if(!same(caller)||!same(gate)||!same(leaf))return null;\n const key=x=>x.pid+':'+x.start,seen=new Set([key(caller)]),queue=[caller],found=[];\n while(queue.length){\n  const next=children(queue.shift());if(!next)return null;\n  for(const x of next){if(seen.has(key(x)))continue;seen.add(key(x));queue.push(x);if(key(x)!==key(gate)&&key(x)!==key(leaf))found.push(x);}\n  if(seen.size>32)throw Error('owned fixture process bound exceeded');\n }\n return same(caller)&&same(gate)&&same(leaf)&&seen.has(key(gate))&&seen.has(key(leaf))?found:null;\n};\nconst read=p=>{try{return JSON.parse(fs.readFileSync(p,'utf8'));}catch(e){return null;}};\nconst wait=async(f,ms)=>{const end=Date.now()+ms;do{if(f())return true;await new Promise(r=>setTimeout(r,10));}while(Date.now()<end);return !!f();};\nconst leaf='const fs=require(\"fs\");const s=fs.readFileSync(\"/proc/self/stat\",\"utf8\");fs.writeFileSync('+JSON.stringify(leafFile)+',JSON.stringify({pid:process.pid,start:s.slice(s.lastIndexOf(\")\")+1).trim().split(/\\\\s+/)[19]}));setInterval(()=>{},1000);';\nconst gate='const fs=require(\"fs\"),cp=require(\"child_process\");const s=fs.readFileSync(\"/proc/self/stat\",\"utf8\");fs.writeFileSync('+JSON.stringify(gateFile)+',JSON.stringify({pid:process.pid,start:s.slice(s.lastIndexOf(\")\")+1).trim().split(/\\\\s+/)[19]}));const c=cp.spawn(process.execPath,[\"-e\",'+JSON.stringify(leaf)+'],{detached:true,stdio:\"ignore\"});c.unref();const end=Date.now()+10000;while(!fs.existsSync('+JSON.stringify(leafFile)+')){if(Date.now()>end)throw Error(\"owned leaf readiness timeout\");Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,10);}while(!fs.existsSync('+JSON.stringify(releaseFile)+')){if(Date.now()>end)throw Error(\"owned snapshot release timeout\");Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,10);}'+(mode==='escape'?'process.exit(0);':'setInterval(()=>{},1000);');\nconst expr=\"(require '[evidence :as e]) (e/spawn-result \"+JSON.stringify(dir)+' ['+JSON.stringify(process.execPath)+' \"-e\" '+JSON.stringify(gate)+']) nil';\nlet parent,parentID,leafID,gateID,intermediateIDs=[],closed=false,parentCode=null,parentSignal=null;\nconst out={ready:false,parentExited:false,signalDelivered:false,forcedParent:false,gateAbsent:false,leafAbsent:false,intermediatesCaptured:false,intermediatesAbsent:false};\n(async()=>{try{\n parent=cp.spawn(process.execPath,[nbb,'-cp',path.join(root,'scripts')+':'+path.join(root,'src'),'-e',expr],{cwd:root,stdio:['ignore','pipe','pipe']});\n parentID=identity(parent.pid);\n parent.stdout.on('data',b=>process.stderr.write(b));parent.stderr.on('data',b=>process.stderr.write(b));\n parent.on('error',e=>{out.bootstrapError=String(e);closed=true;});\n parent.on('exit',(code,signal)=>{closed=true;parentCode=code;parentSignal=signal;});\n out.ready=await wait(()=>{\n  leafID=read(leafFile);gateID=read(gateFile);if(!leafID||!gateID)return false;\n  const captured=intermediateSnapshot(parentID,gateID,leafID);if(captured===null)return false;\n  intermediateIDs=captured;out.intermediatesCaptured=true;return true;\n },15000);\n if(out.ready){fs.writeFileSync(releaseFile,'release\\n',{flag:'wx'});if(mode!=='escape')out.signalDelivered=parent.kill(mode);}\n out.parentExited=await wait(()=>closed,10000);\n out.gateAbsent=!!gateID&&await wait(()=>!same(gateID),4000);\n out.leafAbsent=!!leafID&&await wait(()=>!same(leafID),4000);\n out.intermediatesAbsent=out.intermediatesCaptured&&await wait(()=>intermediateIDs.every(x=>!same(x)),6000);\n out.intermediates=intermediateIDs.map(({pid,start})=>({pid,start}));\n out.parentCode=parentCode;out.parentSignal=parentSignal;\n }finally{\n  // Baseline assertions retain the pre-cleanup observations. Stop only these\n  // newly created, start-bound fixtures so a causal RED leaves no live child.\n  if(parent&&!closed){out.forcedParent=true;parent.kill('SIGKILL');if(!await wait(()=>closed,3000))throw Error('owned caller cleanup deadline');}\n  for(const x of [...intermediateIDs,gateID,leafID])if(same(x)){try{process.kill(x.pid,'SIGKILL');}catch(e){if(e.code!=='ESRCH')throw e;}}\n  if(!await wait(()=>!same(gateID)&&!same(leafID)&&intermediateIDs.every(x=>!same(x)),3000))throw Error('owned fixture cleanup deadline');\n  out.fixtureCleanup=true;\n  fs.rmSync(dir,{recursive:true,force:true});\n }\n console.log(JSON.stringify(out));\n})().catch(e=>{console.error(e);process.exitCode=2;});")
 
 (defn gate-custody-observation [mode]
-  (owned-controller-observation gate-custody-controller
+  (owned-controller-observation
+   (-> gate-custody-controller
+       (str/replace
+        "const expr="
+        (str "const immediateFile=path.join(dir,'immediate.json');\n"
+             "const check='(()=>{const fs=require(\"fs\");const same=x=>{try{const s=fs.readFileSync(\"/proc/\"+x.pid+\"/stat\",\"utf8\");return s.slice(s.lastIndexOf(\")\")+1).trim().split(/\\\\s+/)[19]===x.start;}catch(e){if(e.code===\"ENOENT\"||e.code===\"ESRCH\")return false;throw e;}};const gate=JSON.parse(fs.readFileSync('+JSON.stringify(gateFile)+',\"utf8\")),leaf=JSON.parse(fs.readFileSync('+JSON.stringify(leafFile)+',\"utf8\"));fs.writeFileSync('+JSON.stringify(immediateFile)+',JSON.stringify({gateAbsent:!same(gate),leafAbsent:!same(leaf)}));})()';\nconst expr="))
+       (str/replace "+']) nil';" "+']) (js/eval '+JSON.stringify(check)+') nil';")
+       (str/replace "out.parentCode=parentCode;" "out.immediate=read(immediateFile);\n out.parentCode=parentCode;"))
                                 [mode cli/root (aget (.-argv js/process) 1)]))
 
 (deftest gate-redetached-descendant-is-gone-before-result-returns
@@ -3138,6 +3204,8 @@
     (is (true? (:fixtureCleanup seen)))
     (is (true? (:intermediatesCaptured seen)))
     (is (true? (:intermediatesAbsent seen)) "captured intermediate helpers are reaped")
+    (is (= {:gateAbsent true :leafAbsent true} (:immediate seen))
+        "both start-bound processes are absent immediately on return")
     (is (true? (:gateAbsent seen)))
     (is (true? (:leafAbsent seen)) "setsid-equivalent Node detached child is gone")))
 
@@ -3185,7 +3253,7 @@
      "gate = importlib.util.module_from_spec(spec)"
      "spec.loader.exec_module(gate)"
      "state = {'lateChildInjected': False, 'lateChildPending': False,"
-     "         'lateChildReaped': False, 'afterReapProbes': 0, 'closed': False}"
+     "         'lateChildReaped': False, 'afterReapProbes': 0}"
      "class Process:"
      "    pid = 771"
      "    returncode = None"
@@ -3193,23 +3261,17 @@
      "        self.returncode = 0"
      "        return 0"
      "process = Process()"
-     "class Owned:"
-     "    leader_retained = True"
-     "    def __init__(self, pid):"
-     "        assert pid == process.pid"
-     "    def discover(self): pass"
-     "    def reap_nonleader(self): pass"
-     "    def kill_owned(self): pass"
-     "    def live_descendants(self): return False"
-     "    def close(self): state['closed'] = True"
-     "def children(_pid):"
-     "    if process.returncode is not None and not state['lateChildInjected']:"
-     "        state['lateChildInjected'] = state['lateChildPending'] = True"
-     "    return {772} if state['lateChildPending'] else set()"
      "def reap(_leader, _terminate):"
      "    if state['lateChildPending']:"
      "        state['lateChildPending'] = False"
      "        state['lateChildReaped'] = True"
+     "def waitpid(pid, flags):"
+     "    assert pid == -1 and flags == os.WNOHANG"
+     "    if not state['lateChildInjected']:"
+     "        state['lateChildInjected'] = state['lateChildPending'] = True"
+     "        return (0, 0)"
+     "    if state['lateChildPending']: return (0, 0)"
+     "    raise ChildProcessError('controlled ECHILD')"
      "def leader_exit(pid):"
      "    assert pid == process.pid"
      "    if process.returncode is not None:"
@@ -3219,11 +3281,13 @@
      "# No process, signal, pidfd, parent-death or kill effect is allowed by this"
      "# deterministic race control: it executes the actual cleanup state machine."
      "with patch.multiple(gate, enable_subreaper=lambda: None,"
-     "                    arm_parent_death=lambda _parent: None, OwnedChildren=Owned,"
-     "                    direct_children=children, reap_adopted_children=reap,"
+     "                    arm_parent_death=lambda _parent: None,"
+     "                    reap_adopted_children=reap,"
      "                    leader_exit=leader_exit), \\"
      "     patch.object(gate.subprocess, 'Popen', return_value=process) as spawn, \\"
      "     patch.object(gate.os, 'getppid', return_value=42), \\"
+     "     patch.object(gate.os, 'killpg', return_value=None), \\"
+     "     patch.object(gate.os, 'waitpid', side_effect=waitpid), \\"
      "     patch.object(gate.signal, 'signal', return_value=gate.signal.SIG_DFL), \\"
      "     patch.object(gate.time, 'sleep', return_value=None):"
      "    outcome = gate.supervise_gate(['controlled-no-spawn'], 42)"
@@ -3243,7 +3307,6 @@
     (let [seen (js->clj (js/JSON.parse (.-stdout result)) :keywordize-keys true)]
       (is (true? (:lateChildInjected seen)))
       (is (true? (:lateChildReaped seen)))
-      (is (true? (:closed seen)))
       (is (= 0 (get-in seen [:outcome :status])))
       (is (true? (get-in seen [:outcome :cleanupComplete])))
       (is (nil? (get-in seen [:outcome :error])))

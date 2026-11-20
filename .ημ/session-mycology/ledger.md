@@ -654,3 +654,13 @@
   spore: none
   receipt-refs: sync-main-150-split receipt segment
   note: Check the actual file cap before publication. Keep the whole migration and its historical inputs in one review, then prove the follow-up preserves the full tested tree.
+
+- ts: 2026-11-20T23:20:29.072917+00:00
+  session: sync/main-150-receipts
+  task: Repair the ledger prerequisite after hosted review
+  p-efficiency: 0.8
+  p-friction: 0.44
+  p-skill-candidate: 0.5
+  spore: none
+  receipt-refs: sync-main-159-review-repair
+  note: When a defensive adapter rewrite removes an internal seam, include the deterministic qualification tests that mocked that seam in the combined-tree review. Isolated green results do not establish integrated compatibility.
