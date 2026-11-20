@@ -1,0 +1,143 @@
+name: Foresight CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+# Independent jobs deliberately have no needs chain or aggregate review status.
+jobs:
+  tests:
+    name: Test / ${{ matrix.suite }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - suite: workspace
+            classpath: scripts:test
+          - suite: project
+            classpath: src:scripts:test
+          - suite: lineage
+            classpath: src:test
+          - suite: evidence
+            classpath: src:test
+          - suite: evidence_cli
+            classpath: src:scripts:test
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
+      - name: Run tests
+        env:
+          SUITE: ${{ matrix.suite }}
+          CLASSPATH: ${{ matrix.classpath }}
+        run: npx --yes nbb@1.4.207 -cp "$CLASSPATH" "test/${SUITE}_test.cljs"
+
+  contracts:
+    name: Validate / ${{ matrix.contract }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - contract: project
+            script: project
+          - contract: catalog
+            script: evidence
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
+      - name: Validate contract
+        env:
+          SCRIPT: ${{ matrix.script }}
+        run: npx --yes nbb@1.4.207 -cp src:scripts "scripts/${SCRIPT}.clj" validate
+
+  lint:
+    name: Lint / Clojure
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Install pinned clj-kondo
+        shell: bash
+        run: |
+          set -euo pipefail
+          version=2026.08.04
+          archive="clj-kondo-${version}-linux-amd64.zip"
+          curl --fail --location --retry 3 -o "$RUNNER_TEMP/$archive" \
+            "https://github.com/clj-kondo/clj-kondo/releases/download/v$version/$archive"
+          echo "dd3bb3ec91bcb838e9bbefc9ba9968b69a8fe2a625fa67e8b0485605604e61d1  $RUNNER_TEMP/$archive" | sha256sum --check --strict
+          unzip -q "$RUNNER_TEMP/$archive" -d "$RUNNER_TEMP/clj-kondo"
+          echo "$RUNNER_TEMP/clj-kondo" >> "$GITHUB_PATH"
+      - name: Lint scripts, tests and source (warnings fail)
+        run: clj-kondo --lint scripts test src --fail-level warning
+
+  migration:
+    name: Test / migration pack
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Install migration test dependencies
+        run: |
+          python3 -m venv "$RUNNER_TEMP/migration-venv"
+          "$RUNNER_TEMP/migration-venv/bin/python" -m pip install jsonschema==4.26.0 networkx==3.6.1
+      - name: Test migration pack
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: '"$RUNNER_TEMP/migration-venv/bin/python" -m unittest discover -s docs/migrations/eta-mu-breakdown/checks -p check_pack.py'
+
+  receipts:
+    name: Validate / receipt history
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
+      - name: receipt history
+        run: npx --yes nbb@1.4.207 -cp src:scripts scripts/evidence.clj verify-receipts --base "$PR_BASE_SHA" --at "$PR_HEAD_SHA"
+
+  diff:
+    name: Validate / diff hygiene
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: diff hygiene
+        run: git diff --check "${PR_BASE_SHA}...HEAD"

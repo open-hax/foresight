@@ -12,7 +12,7 @@ use cases and ownership; they do not make every implementation interchangeable.
 ## Current decisions
 
 The October 3 request changes reviewer admission: invite **all available agents**,
-with CodeRabbit, Codex, MiMo and Kimi as intended targets, but require **one eligible approving review on the exact current
+with CodeRabbit, Codex and Kimi as intended targets, but require **one eligible approving review on the exact current
 head**. A formal GitHub `APPROVED` review or an explicit completed passing /
 “no issues” verdict can satisfy this rule. Verify the eligible reviewer identity
 and the current commit coverage from the actual provider record; a generic green
@@ -27,7 +27,7 @@ The global skill pack remains `riatzukiza/.agents` PR #8: `pr-muse-connect`,
 `pr-sprint-planning`, `pr-red-green`, `pr-review-settlement`,
 `pr-review-to-merge`, and `pr-flow`. The graph belongs in that repository; this
 root records constellation policy and integration requirements. The user's
-latest available-agent and cap correction retains all four invitation targets;
+latest direction retires MiMo from the invitation targets;
 unavailability does not remove an agent from that roster. Canonical
 `~/.agents/skills/pr-flow` owns availability evidence, current-head available-cohort
 convergence and mandatory reviewer overrides. This root imposes no local hard
@@ -46,6 +46,21 @@ acceptance, estimates and dependencies before Rheos moves the stories to ready.
 Then run red laws/tests, implement pure domain logic and outward adapters, and
 settle every implementation finding with a cited fix, deferral or rejection.
 P0/P1 requires verified correction. Merge the qualified head with a merge commit.
+
+## Foresight CI migration (candidate, November 20, 2026)
+
+PR #158 replaces the special eta-mu evidence-review caller with independent
+named test, lint and validation jobs in `root-ci.yml`. These jobs execute no
+review model and forward no secrets. The existing path-scoped Chat work runtime
+workflow remains the real archive build; there is no general root build.
+
+The observed `main` protection still requires
+`Evidence-first review (eta-mu) / OpenCode evidence review gate` and
+`CodeRabbit`. This candidate does not change that protection or claim the new
+jobs are required. A separately authorized, verified status-context migration
+must reconcile the required checks before merge; do not restore a dummy wrapper
+or treat a missing legacy check as passing. Independent eligible current-head
+review and findings settlement remain required.
 
 ## Development, staging, promotion
 
