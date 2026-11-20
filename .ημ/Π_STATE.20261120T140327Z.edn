@@ -1,0 +1,33 @@
+{:snapshot/id "20261120T140327Z"
+ :root/base "bc491659a4ae62784826e64a22619e0dda16b6b6"
+ :recovery/branch "fork-tax/20261120T140327Z-migration-cleanup"
+ :recovery/tag "Π/foresight/20261120T140327Z"
+ :archive {:files 102 :patches 2 :excluded 416 :ciphertext-sha256 "852fb2b6c933ef5618603864a9c2f74e73fe7a881b5242b7ffb52b29ddfb26f6" :restore-check :temporary-recipient-verified :storage :local-only}
+ :submodules [
+  {:path ".agents" :origin "git@github.com:riatzukiza/.agents.git" :commit "923a03198d02b6891c388366d93645b3638cfd85" :tag-object "d7b61658205c23f8fcac9b21f5515609dd905258"}
+  {:path "Truth" :origin "git@github.com:octave-commons/Truth.git" :commit "c7cc34a8248a615f39eeefd5ba8ac841b65e49fa" :tag-object "d59ab3e992134535fbc7c3db7f02355cc2d5ae2d"}
+  {:path "axxium" :origin "git@github.com:open-hax/axxium.git" :commit "603ea4cd88f589c621234f73d3afd6e4e08788b8" :tag-object "51c0834379857c5ea3ec164e20dd874f79d4c80d"}
+  {:path "bitch-tracker" :origin "git@github.com:octave-commons/bitch-tracker.git" :commit "693f1388e61bd268814f85d1a40ef15a4485e6a3" :tag-object "082279846bafc6a728658318ef835d09d1f75423"}
+  {:path "calliope" :origin "git@github.com:octave-commons/calliope.git" :commit "b6851ff076753d901aff44abdc85c8bec6b5c865" :tag-object "6a1b16c61c156e06f6c951d43d1bdb98cc7d6f8d"}
+  {:path "chat-ui" :origin "git@github.com:open-hax/chat-ui.git" :commit "86385532b4f8606946555d0ada8e3fb22f35b4c3" :tag-object "359c78539464a53558ea081cef78b2f3560c90e1"}
+  {:path "clio" :origin "git@github.com:open-hax/clio.git" :commit "788cdd3434615a7932b924e68520dbf7f88408c2" :tag-object "5d9ba8e6b5de140370ed2736421cb66b9efc8357"}
+  {:path "epiphany" :origin "git@github.com:octave-commons/epiphany.git" :commit "ca3fd843b30ef8fd9ca2881aeb9758e58dac6b66" :tag-object "74521e5a8b5dbb2825e3f2575bfff6c1e4de3f61"}
+  {:path "eta-mu" :origin "git@github.com:open-hax/eta-mu.git" :commit "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90" :tag-object "0662679ab65b84372eb528b1fe23a9b13d617e25"}
+  {:path "kanban-orchestrator" :origin "git@github.com:open-hax/kanban-orchestrator.git" :commit "8e16609dd191bdd2e9a3c0320ce4238b5cd83467" :tag-object "7ddaba55b994e7631e07a03b851ef950ce544e68"}
+  {:path "katamorph" :origin "git@github.com:open-hax/katamorph.git" :commit "0271e84ab7b7dab179d5b5360bd836604dae9dda" :tag-object "85b7b32b124571ed9f16df2fbb8d804a1a1a4519"}
+  {:path "knoxx" :origin "git@github.com:open-hax/knoxx.git" :commit "40221a69f7fff675b46614d9ab318b4ef52f3786" :tag-object "e97a7f7e72b2b0fe5a5a3db6d191ea61b50acda6"}
+  {:path "muse" :origin "git@github.com:octave-commons/muse.git" :commit "b4bdb0a7d019bb33c71aba1bd8daec5933e7ebde" :tag-object "141fdd18ec384982249c1e8c97817c4e40eb69ef"}
+  {:path "oikos" :origin "git@github.com:open-hax/oikos.git" :commit "fed4e30272cc1186de14bcc708b3efc9736e3139" :tag-object "ee7abf80cea5301278670031599ee8e3d1be8c37"}
+  {:path "opencode" :origin "git@github.com:open-hax/opencode.git" :commit "cc4b45612974f735ddec46009ede07729511fba4" :tag-object "2a7bc1b32a3a3066ece3e01b768d3cc4635e8d37"}
+  {:path "openplanner" :origin "git@github.com:open-hax/openplanner.git" :commit "b3a06ce311fb9ac53c4fc51bd408693618a1c3f6" :tag-object "8753ef21a097b9a1563d2da620d2bccb0f0e8e76"}
+  {:path "openplanner/packages/vexx" :origin "git@github.com:open-hax/vexx.git" :commit "296905f37fa8ca24bfa08faaad555879a5033d68" :tag-object "486e6e1909378d5e407c575518b88e797a82913d"}
+  {:path "osmos" :origin "git@github.com:open-hax/osmos.git" :commit "0c33018e27f861536822086afcdab666a60add44" :tag-object "835c2d1f14a3da5d457f2faa09125c124ad58bf2"}
+  {:path "proxx" :origin "git@github.com:open-hax/proxx.git" :commit "abbbc8b1ad80738233593e17e751203db785c9e2" :tag-object "c140fd433f8fbb7c9d3d3b09ac4a2349f17ff0c4"}
+  {:path "receipt-river" :origin "git@github.com:open-hax/receipt-river.git" :commit "7c7c62343fea0241ac545e37f14e57ab344bfa30" :tag-object "a105258ea10d7dd733bbce4ffa51b6de6e317024"}
+  {:path "rheos" :origin "git@github.com:open-hax/rheos.git" :commit "11811264a308d406cb612aefa1dad40818675e5e" :tag-object "0e68bca877635c12e4ac2bb49e04d5f4c40ef7dc"}
+  {:path "services" :origin "git@github.com:open-hax/services.git" :commit "1f5200131ffa140186f1e4c21dd494f09ed0c576" :tag-object "e82c5f3748c0515b245e7a9083d7ef79adffadb1"}
+  {:path "session-mycology" :origin "git@github.com:open-hax/session-mycology.git" :commit "30339f9aa3df83ef8c335d4544307272abfbb131" :tag-object "7e67c1e38f9f70cb0d56360f533865de07f6f9ea"}
+  {:path "shx" :origin "git@github.com:octave-commons/shx.git" :commit "5dbac4fde8b3626316c71e15b48b9fe62a5802c2" :tag-object "6d92245c96a29b4687066d7989ed0b748cc2938b"}
+  {:path "sol" :origin "git@github.com:open-hax/sol.git" :commit "1276955c86ff46936cd1ce7d81fbc790f7068e1e" :tag-object "ac2b855781f24d71d5c02fda8f0124f9c512d79f"}
+  {:path "uxx" :origin "git@github.com:open-hax/uxx.git" :commit "9ce274a63da207c36fe704dfc602fb64d0e59e40" :tag-object "a70fffe34acaec1a7fa9c259e6861d21cd830473"}
+ ]}
