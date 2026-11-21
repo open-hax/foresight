@@ -1,10 +1,17 @@
-# Claude — Eta
+# CLAUDE.md — Eta
 
-Read and obey [`../AGENTS.md`](../AGENTS.md) and [`AGENTS.md`](AGENTS.md) before
-changing Eta.
+@AGENTS.md
 
-Do not expand this file into a second architecture policy. The important rule is
-simple: **purify before you port**. Extract portable `.cljc` shapes, laws and pure
-functions first; keep JVM/Node/UI/provider effects at the boundary; choose NBB,
-Babashka, JVM Clojure, or compiled CLJS only because the capability requires it,
-not because predecessor code happened to use it.
+<!--
+eta/AGENTS.md (imported above) and the root AGENTS.md hold Eta's rules for
+every agent harness. Do not expand this file into a second architecture policy;
+anything added here must be true only for Claude Code.
+-->
+
+## Claude Code
+
+- A session started inside `eta/` reaches the root policy through the root
+  `CLAUDE.md`'s `@AGENTS.md` import, which resolves outside `eta/`. Claude Code
+  treats that as an external import and asks once to approve it. Approve it, or
+  start the session from the repository root. Declining disables the import for
+  this project and the dialog does not return.
