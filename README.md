@@ -114,11 +114,12 @@ the clean current `HEAD`, loads both the catalog and Receipt River from that
 same Git object, and requires every result revision to equal the corresponding
 gitlink in its tree. It rechecks the root boundary after all reads.
 
-The runner appends each complete result to `.ημ/receipts.edn`. Schema-v2
-receipts retain the actual host and `nbb`/Node adapter identity. Older
-receipts remain immutable historical records and cannot attest a current
-promotion; `verify-receipts` applies the current envelope law only to the
-suffix appended after the reviewed base.
+The runner writes each complete result as an immutable segment under
+`.ημ/receipts/`. The legacy `.ημ/receipts.edn` is frozen. Schema-v2 receipts
+retain the actual host and `nbb`/Node adapter identity. Older receipts remain
+immutable historical records and cannot attest a current promotion.
+`verify-receipts` applies the current envelope law only to records that are
+new relative to the reviewed base.
 
 The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
 no-follow parent directory descriptor, rejects symbolic or multiply linked
@@ -131,15 +132,12 @@ from pathname swaps, partial writes, and cooperating races; it does not exclude
 an unrelated writer that ignores the lock.
 
 For immutable review, the adapter disables Git replacement objects, requires
-regular non-executable blobs, hashes
-their raw bytes, decodes strict UTF-8, and proves the reviewed ledger preserves
-the trusted base ledger byte-for-byte before accepting whole appended lines.
-The current receipt-envelope and evidence-result laws apply only to that
-appended suffix. The exact trusted prefix remains historical evidence even
-when its envelopes predate the current schema. Secure append applies the same
-boundary against the committed `HEAD` ledger: it validates the uncommitted
-suffix before running a gate or writing its receipt. Rewrites, truncation, and
-malformed new records still fail closed. Summary totals describe the entire
+regular non-executable blobs, hashes their raw bytes, and decodes strict UTF-8.
+Verification preserves existing segments byte-for-byte and allows a legacy row
+to move only as an exact whole line into its own segment. It rejects lost or
+duplicate records, rewritten legacy rows, and additions to the frozen file.
+Secure append validates the whole working ledger against committed `HEAD`
+before running a gate or creating a receipt. Summary totals describe the entire
 ledger; appended counts describe the records subject to current validation.
 The portable consistency law then requires exact receipt/result equality.
 Editing a failed result or prior receipt into a shape-valid pass therefore
