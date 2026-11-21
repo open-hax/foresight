@@ -44,6 +44,12 @@
     (is (:valid? result))
     (is (empty? (:errors result)))))
 
+(deftest openplanner-is-routed-as-a-semantic-graph
+  (is (= :semantic-graph
+         (:source/role (first (filter #(= :openplanner (:source/id %)) project/sources)))))
+  (is (str/includes? (fs/readFileSync "AGENTS.md" "utf8")
+                     "| `openplanner` | open-hax/openplanner | semantic-graph |")))
+
 (deftest dev-origin-map-law
   (let [modules [{:path "shx" :url "git@github.com:octave-commons/shx.git"}
                  {:path "opencode" :url "git@github.com:open-hax/opencode.git"}]
@@ -157,14 +163,23 @@
 
 (deftest malformed-declared-upstream-fails-closed
   (doseq [url [nil "file:///checkout/shx" "https://github.com/open-hax/shx?bad=1"
-               "https://github.com/open-hax/shx#main"]]
+               "https://github.com/open-hax/shx#main"
+               "https://github-com/open-hax/shx.git"
+               "git@github-com:open-hax/shx.git"]]
     (with-redefs [project/submodule-sources
                   (constantly [{:source/ownership :independent-repository
                                 :source/path "shx"
                                 :source/url url}])]
-      (is (thrown-with-msg? js/Error #"Invalid GitHub upstream for shx"
-                            (project/dev-origin-required-upstreams))
-          (pr-str url)))))
+       (is (thrown-with-msg? js/Error #"Invalid GitHub upstream for shx"
+                             (project/dev-origin-required-upstreams))
+           (pr-str url)))))
+
+(deftest github-repository-url-admission
+  (doseq [url ["https://github.com/open-hax/shx" "git@github.com:open-hax/shx.git"]]
+    (is (= "open-hax/shx" (dev-origins/github-repo url))))
+  (doseq [url [nil 42 "https://github-com/open-hax/shx.git"
+               "git@github-com:open-hax/shx.git" "https://github.com/open-hax/shx?x=1"]]
+    (is (nil? (dev-origins/github-repo url)))))
 
 (def kanban-org-base
   "open-hax/foresight base fcfc2d17f28640203066ddfe0a22f87db7372a32: its

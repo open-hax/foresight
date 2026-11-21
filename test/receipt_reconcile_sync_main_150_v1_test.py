@@ -96,6 +96,86 @@ class ReconciliationTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("snapshot must not be inside .ημ", result.stderr)
 
+    def test_directory_barriers_surround_rename(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "output"
+            events = []
+            sync = mod.sync_directory
+            cdll = mod.ctypes.CDLL
+
+            def record_sync(path):
+                events.append(("sync", path))
+                sync(path)
+
+            class Libc:
+                def renameat2(self, *args):
+                    events.append(("rename", Path(mod.os.fsdecode(args[1]))))
+                    return cdll(None, use_errno=True).renameat2(*args)
+
+            with patch.object(mod, "sync_directory", side_effect=record_sync), \
+                    patch.object(mod.ctypes, "CDLL", return_value=Libc()):
+                self.assertEqual(mod.publish(out, self.forward), "published")
+                stage = events[0][1].parent
+                self.assertEqual(events, [("sync", stage / "receipts"), ("sync", stage),
+                                          ("rename", stage), ("sync", out.parent)])
+                events.clear()
+                self.assertEqual(mod.publish(out, self.forward), "already complete")
+                self.assertEqual(events, [("sync", out.parent)])
+
+    def test_barrier_failures_and_final_barrier_retry(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "output"
+            sync = mod.sync_directory
+            for failing in ("receipts", "stage"):
+                def fail_before_rename(path):
+                    if (failing == "receipts" and path.name == "receipts") or (
+                            failing == "stage" and path.name.startswith(".receipt-sync-v1-")):
+                        raise OSError("barrier failed")
+                    sync(path)
+
+                with patch.object(mod, "sync_directory", side_effect=fail_before_rename):
+                    with self.assertRaisesRegex(OSError, "barrier failed"):
+                        mod.publish(out, self.forward)
+                self.assertFalse(out.exists())
+
+            def fail_parent(path):
+                if path == out.parent:
+                    raise OSError("parent barrier failed")
+                sync(path)
+
+            with patch.object(mod, "sync_directory", side_effect=fail_parent):
+                with self.assertRaisesRegex(OSError, "parent barrier failed"):
+                    mod.publish(out, self.forward)
+                mod.check_snapshot(out, self.forward)
+                with self.assertRaisesRegex(OSError, "parent barrier failed"):
+                    mod.publish(out, self.forward)
+            with patch.object(mod, "sync_directory", wraps=sync) as barrier:
+                self.assertEqual(mod.publish(out, self.forward), "already complete")
+                barrier.assert_called_once_with(out.parent)
+
+    def test_concurrent_matching_output_requires_parent_barrier(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "output"
+            sync = mod.sync_directory
+
+            class Libc:
+                def renameat2(self, _oldfd, source, _newfd, _destination, _flags):
+                    mod.shutil.copytree(mod.os.fsdecode(source), out)
+                    mod.ctypes.set_errno(mod.errno.EEXIST)
+                    return -1
+
+            def fail_parent(path):
+                if path == out.parent:
+                    raise OSError("parent barrier failed")
+                sync(path)
+
+            with patch.object(mod.ctypes, "CDLL", return_value=Libc()), \
+                    patch.object(mod, "sync_directory", side_effect=fail_parent):
+                with self.assertRaisesRegex(OSError, "parent barrier failed"):
+                    mod.publish(out, self.forward)
+            mod.check_snapshot(out, self.forward)
+            self.assertEqual(mod.publish(out, self.forward), "already complete")
+
 
 if __name__ == "__main__":
     unittest.main()

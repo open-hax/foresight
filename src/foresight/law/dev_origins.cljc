@@ -3,9 +3,12 @@
   "Pure fork-map law; GitHub network facts are supplied by the caller."
   (:require [clojure.string :as str]))
 
-(defn- github-repo [url]
-  (second (re-matches #"(?:git@github.com:|https://github.com/)([^/]+/[^/]+)"
-                      (str/replace (or url "") #"[.]git$" ""))))
+(defn github-repo
+  "Extract owner/repo from a GitHub SSH or HTTPS URL, or return nil."
+  [url]
+  (when (string? url)
+    (second (re-matches #"(?:git@github[.]com:|https://github[.]com/)([A-Za-z0-9-]+/[A-Za-z0-9_.-]+)"
+                        (str/replace url #"[.]git$" "")))))
 
 (defn- duplicates [values]
   (->> values frequencies (keep (fn [[value n]] (when (> n 1) value))) (sort-by str)))
@@ -52,7 +55,9 @@
                          declared (get required-upstreams path)
                          fork (:dev/origin row)
                          root (:network/root row)]
-                     (concat
+                      (concat
+                       ;; No declared upstream means this path qualified through
+                       ;; its live org URL, not through the manifest map.
                       (when (or (and (some? declared) (not= upstream declared))
                                 (and (contains? module-repos path)
                                      (not (contains? #{upstream fork} (get module-repos path)))))

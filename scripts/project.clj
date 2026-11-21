@@ -42,17 +42,18 @@
 (defn validate! []
   (let [origin-rows
         (edn/read-string (fs/readFileSync (path/join root "config/dev-origins.edn") "utf8"))
+        modules (current-gitmodules)
         project-result
         ;; A module may point at its row's dev origin; dev-origins/validate
         ;; checks that row, so the project gate accepts the same URL.
-        (law/validate-project project-model/project (current-gitmodules)
+        (law/validate-project project-model/project modules
                               (into {} (map (juxt :source/path :dev/origin)) origin-rows))
         lineage-result
         (lineage-law/validate-inventory lineage/sources)
         origins-result
         (dev-origins/validate
          origin-rows
-         (current-gitmodules)
+         modules
          (edn/read-string (fs/readFileSync (path/join root "config/dev-origin-network-roots.edn") "utf8"))
          (project-model/dev-origin-required-upstreams))
         valid? (and (:valid? project-result)

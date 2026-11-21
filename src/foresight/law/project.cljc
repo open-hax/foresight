@@ -2,7 +2,8 @@
 (ns foresight.law.project
   "Pure validation laws for the Foresight project declaration. Runtime checkout
    facts are supplied by adapters; this namespace performs no I/O."
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [foresight.law.dev-origins :as dev-origins]))
 
 (def executable-checks
   #{:source-ids-unique
@@ -135,10 +136,7 @@
 (defn- dev-origin-url?
   "True when `url` is a GitHub SSH/HTTPS URL for `repo` (owner/repo)."
   [repo url]
-  (and (string? repo)
-       (string? url)
-       (= repo (second (re-matches #"^(?:git@github.com:|https://github.com/)([^/]+/[^/]+?)(?:[.]git)?$"
-                                   url)))))
+  (and (string? repo) (= repo (dev-origins/github-repo url))))
 
 (defn submodule-drift-errors
   "`dev-origin-repos` (path -> personal dev-origin owner/repo, from the

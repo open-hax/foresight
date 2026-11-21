@@ -2,7 +2,8 @@
 (ns foresight.project
   "Portable declaration of the Foresight source constellation and the laws its
    current repositories already claim. This namespace contains data only plus
-   pure indexing helpers; checkout inspection and execution stay in adapters.")
+   pure indexing helpers; checkout inspection and execution stay in adapters."
+  (:require [foresight.law.dev-origins :as dev-origins]))
 
 (def invariants
   [{:invariant/id :foresight/source-ids-unique
@@ -559,7 +560,7 @@
      :source/repository "open-hax/openplanner"
      :source/url "git@github.com:open-hax/openplanner.git"
      :source/ownership :independent-repository
-     :source/role :session-archive-data-lake
+     :source/role :semantic-graph
      :source/actionable? true
      :source/invariants []}
     {:source/id :eta
@@ -627,9 +628,7 @@
   (into {}
         (comp (filter #(= :independent-repository (:source/ownership %)))
               (map (fn [{:source/keys [path url]}]
-                     (if-let [[_ upstream] (and (string? url)
-                                                 (re-matches #"^(?:git@github.com:|https://github.com/)([A-Za-z0-9-]+/[A-Za-z0-9_.-]+?)(?:[.]git)?$"
-                                                             url))]
+                     (if-let [upstream (dev-origins/github-repo url)]
                        [path upstream]
                        (throw (ex-info (str "Invalid GitHub upstream for " path)
                                        {:path path}))))))
