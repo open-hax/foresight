@@ -119,10 +119,19 @@ def safe_output(output):
         raise ValueError("output parent must already exist")
 
 
+def sync_directory(path):
+    fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
 def publish(output, expected):
     safe_output(output)
     if output.exists() or output.is_symlink():
         check_snapshot(output, expected)
+        sync_directory(output.parent)
         return "already complete"
     stage = Path(tempfile.mkdtemp(prefix=".receipt-sync-v1-", dir=output.parent))
     try:
@@ -134,6 +143,8 @@ def publish(output, expected):
                 stream.flush()
                 os.fsync(stream.fileno())
         check_snapshot(stage, expected)
+        sync_directory(stage / "receipts")
+        sync_directory(stage)
         # Atomic no-replace publication; a concurrent creator is never overwritten.
         libc = ctypes.CDLL(None, use_errno=True)
         result = libc.renameat2(-100, os.fsencode(stage), -100, os.fsencode(output), 1)
@@ -141,8 +152,10 @@ def publish(output, expected):
             error = ctypes.get_errno()
             if error == errno.EEXIST:
                 check_snapshot(output, expected)
+                sync_directory(output.parent)
                 return "already complete"
             raise OSError(error, os.strerror(error))
+        sync_directory(output.parent)
         return "published"
     finally:
         if stage.exists():

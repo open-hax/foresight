@@ -2,7 +2,8 @@
 (ns foresight.project
   "Portable declaration of the Foresight source constellation and the laws its
    current repositories already claim. This namespace contains data only plus
-   pure indexing helpers; checkout inspection and execution stay in adapters.")
+   pure indexing helpers; checkout inspection and execution stay in adapters."
+  (:require [foresight.law.dev-origins :as dev-origins]))
 
 (def invariants
   [{:invariant/id :foresight/source-ids-unique
@@ -552,6 +553,16 @@
      :source/role :identity-auth-kernel
      :source/actionable? true
      :source/invariants []}
+    {:source/id :openplanner
+     :source/name "openplanner"
+     :source/path "openplanner"
+     :source/type :git-submodule
+     :source/repository "open-hax/openplanner"
+     :source/url "git@github.com:open-hax/openplanner.git"
+     :source/ownership :independent-repository
+     :source/role :semantic-graph
+     :source/actionable? true
+     :source/invariants []}
     {:source/id :eta
     :source/name "eta"
     :source/path "eta"
@@ -607,6 +618,21 @@
 
 (defn submodule-sources []
   (filterv #(= :git-submodule (:source/type %)) sources))
+
+(defn dev-origin-required-upstreams
+  "Submodule path -> declared org upstream (owner/repo) for every path that
+  needs a dev-origin row: every independently owned repository. Nested
+  canonical inputs such as .agents are excluded. Derived from the manifest
+  model, not from dev-origin rows or current URLs."
+  []
+  (into {}
+        (comp (filter #(= :independent-repository (:source/ownership %)))
+              (map (fn [{:source/keys [path url]}]
+                     (if-let [upstream (dev-origins/github-repo url)]
+                       [path upstream]
+                       (throw (ex-info (str "Invalid GitHub upstream for " path)
+                                       {:path path}))))))
+        (submodule-sources)))
 
 (defn consolidation-inputs []
   (filterv :source/consolidation? sources))

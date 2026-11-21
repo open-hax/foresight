@@ -2,7 +2,8 @@
 (ns foresight.law.project
   "Pure validation laws for the Foresight project declaration. Runtime checkout
    facts are supplied by adapters; this namespace performs no I/O."
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [foresight.law.dev-origins :as dev-origins]))
 
 (def executable-checks
   #{:source-ids-unique
@@ -132,8 +133,18 @@
 (defn- submodule-index [submodules]
   (into {} (map (juxt :path identity)) submodules))
 
+(defn- dev-origin-url?
+  "True when `url` is a GitHub SSH/HTTPS URL for `repo` (owner/repo)."
+  [repo url]
+  (and (string? repo) (= repo (dev-origins/github-repo url))))
+
 (defn submodule-drift-errors
-  [{:project/keys [sources]} actual-submodules]
+  "`dev-origin-repos` (path -> personal dev-origin owner/repo, from the
+  dev-origin rows) names the one extra URL each path may point at; any other
+  URL that differs from the declaration is drift."
+  ([project actual-submodules]
+   (submodule-drift-errors project actual-submodules {}))
+  ([{:project/keys [sources]} actual-submodules dev-origin-repos]
   (let [expected (->> sources
                       (filter #(= :git-submodule (:source/type %)))
                       (map (fn [source]
@@ -171,7 +182,8 @@
          (let [expected-source (get expected-by-path path)
                actual-source (get actual-by-path path)]
            (when (and actual-source
-                      (not= (:url expected-source) (:url actual-source)))
+                      (not= (:url expected-source) (:url actual-source))
+                      (not (dev-origin-url? (get dev-origin-repos path) (:url actual-source))))
              (law-error :foresight/gitmodule-url-matches
                         [:gitmodules path :url]
                         "Submodule URL differs from the project declaration"
@@ -189,14 +201,16 @@
                         "Submodule name differs from the project declaration"
                         (:name expected-source)
                         (:name actual-source)))))
-       (sort expected-paths))))))
+       (sort expected-paths)))))))
 
 (defn project-errors
   ([project]
    (structural-errors project))
   ([project actual-submodules]
+   (project-errors project actual-submodules {}))
+  ([project actual-submodules dev-origin-repos]
    (into (structural-errors project)
-         (submodule-drift-errors project actual-submodules))))
+         (submodule-drift-errors project actual-submodules dev-origin-repos))))
 
 (defn validate-project
   ([project]
@@ -205,7 +219,9 @@
       :project/id (:project/id project)
       :errors errors}))
   ([project actual-submodules]
-   (let [errors (project-errors project actual-submodules)]
+   (validate-project project actual-submodules {}))
+  ([project actual-submodules dev-origin-repos]
+   (let [errors (project-errors project actual-submodules dev-origin-repos)]
      {:valid? (empty? errors)
       :project/id (:project/id project)
       :errors errors})))

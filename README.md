@@ -114,20 +114,63 @@ the clean current `HEAD`, loads both the catalog and Receipt River from that
 same Git object, and requires every result revision to equal the corresponding
 gitlink in its tree. It rechecks the root boundary after all reads.
 
-The runner writes each complete result as an immutable segment under
-`.ημ/receipts/`. The legacy `.ημ/receipts.edn` is frozen. Schema-v2 receipts
+The Receipt River ledger is segmented. `.ημ/receipts.edn` is the legacy,
+frozen first segment; every new receipt is its own immutable file under
+`.ημ/receipts/` (`<UTC timestamp>-<random id>.edn`, exactly one
+newline-terminated record). The ledger is the merge of all segments. New
+records require an RFC 3339 `:ts` naming a real instant; records with such an
+instant order by UTC time, then canonical record identity (SHA-256). Retained
+historical records keep their original `:ts`: values naming no real instant
+sort first by their canonical printed timestamp, then record identity.
+Parallel branches normally add disjoint files instead of editing the same
+lines. Divergent legacy histories can be reconciled by the whole-line migration
+described below.
+The runner writes each complete result as a new segment. Schema-v2 receipts
 retain the actual host and `nbb`/Node adapter identity. Older receipts remain
-immutable historical records and cannot attest a current promotion.
-`verify-receipts` applies the current envelope law only to records that are
-new relative to the reviewed base.
+immutable historical records and cannot attest a current promotion;
+`verify-receipts` applies the current envelope law only to records that are new
+relative to the reviewed base.
 
-The adapter currently requires Linux `/proc/self/fd` semantics. It holds a
-no-follow parent directory descriptor, rejects symbolic or multiply linked
-ledger files, and serializes cooperating writers with an exclusive sibling
-lock. A complete line is bounded to 1 MiB, written through the held descriptor,
+The adapter currently requires Linux `/proc/self/fd` semantics. Gate execution also requires
+Python 3.9+ with Linux subreaper, pidfd and waitid support. A fresh gate adapter
+reserves a private process group, reaps adopted descendants, and binds its
+lifetime to the calling receipt process. Gate stdout/stderr remain inherited;
+incomplete or interrupted custody quarantines the receipt reservation.
+The existing five-second child-cleanup bound does not impose a gate runtime cap.
+The append adapter holds a
+no-follow parent directory descriptor, rejects symbolic, multiply linked or
+executable ledger files (Git would record an executable file as a `100755`
+blob, which immutable review rejects), and serializes semantic writers in one checkout on
+`.ημ/receipts/.receipt-river.writer.lock` for the whole reserve, gate and
+write sequence. A concurrent writer fails closed instead of waiting. A writer
+lock left by a crashed process may be a quarantine marker for ledger
+uncertainty, so an operator must verify and adjudicate the ledger before
+removing it by hand; only a lock whose setup fails before any gate runs is
+removed automatically. Each writer reserves
+its own new segment with `O_EXCL` and a sibling lock for that segment; a
+reservation that ends before writing removes its empty segment. A retained
+lock (see below) quarantines the whole ledger. The rest of the working ledger
+is revalidated against `HEAD` immediately before the receipt is written, and
+compared with the pre-gate snapshot again after it is written or when a
+gate aborts before writing. The writer lock is verified around the write. The
+reserved segment's path and bytes are revalidated after its descriptor is
+closed and again before each lock is released. The whole-ledger comparison
+finishes while the writer lock is still held; after release only the run's
+own reserved segment is rechecked, so a later writer's new segment is not
+mistaken for tampering. A mismatch there writes the durable
+`.ημ/.receipt-river.quarantine` marker, which a later writer that already owns
+the writer-lock path cannot remove on its release. A
+complete line is bounded to 1 MiB, written through the held descriptor,
 size-checked, and followed by file and directory `fsync`. Pre-write rejection
-releases the lock; uncertainty after writing starts retains the lock as a
-quarantine marker for manual adjudication. This protects the adapter boundary
+releases the lock, unless the working ledger changed while the gate ran; that
+change, a change after the write, and any uncertainty after writing starts
+retain the lock as a quarantine marker for manual adjudication. A retained lock is verified by
+path identity first; if gate code unlinked or replaced it, a fresh marker is
+created exclusively at the same path. If the segment directory itself was
+renamed or replaced while the gate ran, every lock is reachable only through
+the renamed directory, so the adapter also creates
+`.ημ/.receipt-river.quarantine` through a held `.ημ` descriptor; its presence
+closes the working ledger until it is adjudicated. This protects the adapter boundary
 from pathname swaps, partial writes, and cooperating races; it does not exclude
 an unrelated writer that ignores the lock.
 
@@ -137,7 +180,8 @@ Verification preserves existing segments byte-for-byte and allows a legacy row
 to move only as an exact whole line into its own segment. It rejects lost or
 duplicate records, rewritten legacy rows, and additions to the frozen file.
 Secure append validates the whole working ledger against committed `HEAD`
-before running a gate or creating a receipt. Summary totals describe the entire
+before running a gate, then writes the receipt into a newly created (`O_EXCL`)
+segment. Summary totals describe the entire
 ledger; appended counts describe the records subject to current validation.
 The portable consistency law then requires exact receipt/result equality.
 Editing a failed result or prior receipt into a shape-valid pass therefore
